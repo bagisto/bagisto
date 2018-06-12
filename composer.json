@@ -51,7 +51,7 @@
         ]
     },
     "config": {
-        "preferred-install": "dev",
+        "preferred-install": "stable",
         "sort-packages": true,
         "optimize-autoloader": true
     },
