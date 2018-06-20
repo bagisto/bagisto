@@ -1,0 +1,22 @@
+{
+    "name": "webkul/laravel-user",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jitendra Singh",
+            "email": "jitendra@webkul.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\User\\Providers\\UserServiceProvider"
+            ],
+            "aliases": {
+                "Bouncer": "Webkul\\User\\Facades\\Bouncer"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
