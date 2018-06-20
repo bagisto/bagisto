@@ -30,7 +30,6 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Modules\\": "Modules/",
             "Webkul\\User\\": "packages/Webkul/User/src",
             "Webkul\\Admin\\": "packages/Webkul/Admin/src"
         }
