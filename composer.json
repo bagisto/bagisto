@@ -21,7 +21,8 @@
     },
     "replace": {
         "webkul/laravel-user": "self.version",
-        "webkul/laravel-admin": "self.version"
+        "webkul/laravel-admin": "self.version",
+        "webkul/laravel-ui": "self.version"
     },
     "autoload": {
         "classmap": [
@@ -29,9 +30,7 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/",
-            "Webkul\\User\\": "packages/Webkul/User/src",
-            "Webkul\\Admin\\": "packages/Webkul/Admin/src"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {

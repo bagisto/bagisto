@@ -18,7 +18,7 @@ class AdminServiceProvider extends ServiceProvider
         include __DIR__ . '/../Http/routes.php';
 
         $this->publishes([
-            __DIR__ . '/../Resources/assets' => public_path('vendor/admin'),
+            __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/admin/assets'),
         ], 'public');
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');

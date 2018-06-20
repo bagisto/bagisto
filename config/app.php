@@ -158,12 +158,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-
-        
-        Webkul\User\Providers\UserServiceProvider::class,
-        Webkul\Admin\Providers\AdminServiceProvider::class
-
+        App\Providers\RouteServiceProvider::class
     ],
 
     /*

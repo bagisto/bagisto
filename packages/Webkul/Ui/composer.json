@@ -1,5 +1,5 @@
 {
-    "name": "webkul/laravel-admin",
+    "name": "webkul/laravel-ui",
     "license": "MIT",
     "authors": [
         {
@@ -7,19 +7,16 @@
             "email": "jitendra@webkul.com"
         }
     ],
-    "require": {
-        "webkul/laravel-admin": "dev-master",
-        "webkul/laravel-ui": "dev-master"
-    },
+    "require": {},
     "autoload": {
         "psr-4": {
-            "Webkul\\Admin\\": "src/"
+            "Webkul\\Ui\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Admin\\AdminServiceProvider"
+                "Webkul\\Ui\\UiServiceProvider"
             ],
             "aliases": {}
         }

@@ -7,6 +7,12 @@
             "email": "jitendra@webkul.com"
         }
     ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Webkul\\User\\": "src/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
@@ -17,6 +23,5 @@
             }
         }
     },
-    "minimum-stability": "dev",
-    "require": {}
+    "minimum-stability": "dev"
 }
