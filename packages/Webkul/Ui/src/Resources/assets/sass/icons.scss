@@ -1,0 +1,63 @@
+// Left Side Menu Icon
+%menu-properties {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
+    display: inline-block;
+    background-size: cover;
+}
+.icon {
+    display: inline-block;
+    background-size: cover;
+}
+.icon-dashboard {
+    @extend %menu-properties;
+    background-image: url('../images/Icon-Dashboard.svg');
+}
+.icon-configuration {
+    @extend %menu-properties;
+    background-image: url('../images/Icon-Configure.svg');
+}
+.icon-settings {
+    @extend %menu-properties;
+    background-image: url('../images/Icon-Settings.svg');
+}
+
+.active {
+    .icon-dashboard {
+        background-image: url('../images/Icon-Dashboard-Active.svg');
+    }
+
+    .icon-settings {
+        background-image: url('../images/Icon-Settings-Active.svg');
+    }
+
+    .icon-configuration {
+        @extend %menu-properties;
+        background-image: url('../images/Icon-Configure-Active.svg');
+    }
+}
+
+.angle-right-icon {
+    background-image: url('../images/Angle-Right.svg');
+    width: 17px;
+    height: 17px;
+}
+
+.angle-left-icon {
+    background-image: url('../images/Angle-Right.svg');
+    width: 17px;
+    height: 17px;
+}
+
+.arrow-down-icon {
+    background-image: url('../images/Arrow-Down-Light.svg');
+    width: 14px;
+    height: 8px;
+}
+
+.arrow-down-icon-active {
+    background-image: url('../images/Arrow-Down.svg');
+    width: 14px;
+    height: 8px;
+}

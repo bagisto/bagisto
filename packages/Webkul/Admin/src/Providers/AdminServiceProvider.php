@@ -4,7 +4,8 @@ namespace Webkul\Admin\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Menu;
+use Illuminate\Support\Facades\Blade;
+use Webkul\Ui\Menu;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,11 @@ class AdminServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'admin');
 
         $this->createAdminMenu();
+
+        $this->composeView();
+
+        Blade::directive('continue', function() { return "<?php continue; ?>"; });
+
     }
 
     /**
@@ -42,7 +48,46 @@ class AdminServiceProvider extends ServiceProvider
         });
 
         Event::listen('admin.menu.build', function($menu) {
-            $menu->add('dashboard', 'Dashboard', 'url', 0, '');
+            $menu->add('dashboard', 'Dashboard', route('admin.dashboard.index'), 1, 'icon-dashboard');
+
+            $menu->add('configuration', 'Configure', route('admin.users.index'), 6, 'icon-configuration');
+
+            $menu->add('settings', 'Settings', '', 6, 'icon-settings');
+
+            $menu->add('settings.users', 'Users', route('admin.users.index'), 1, '');
+
+            $menu->add('settings.roles', 'Roles', route('admin.permissions.index'), 2, '');
+        });
+    }
+
+    /**
+     * Bind the the data to the views
+     *
+     * @return void
+     */
+    protected function composeView()
+    {
+        view()->composer('admin::layouts.nav-left', function($view) {
+            $menu = current(Event::fire('admin.menu.create'));
+            $view->with('menu', $menu);
+        });
+
+        view()->composer('admin::layouts.nav-aside', function($view) {
+            $menu = current(Event::fire('admin.menu.create'));
+
+            foreach ($menu->items as $item) {
+                $currentKey = current(explode('.', $menu->currentKey));
+                if($item['key'] != $currentKey)
+                    continue;
+
+                $menu = [
+                    'items' => $menu->sortItems($item['children']),
+                    'current' => $menu->current,
+                    'currentKey' => $menu->currentKey
+                ];
+
+                $view->with('menu', $menu);
+            }
         });
     }
 

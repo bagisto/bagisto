@@ -30,7 +30,10 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Webkul\\User\\": "packages/Webkul/User/src",
+            "Webkul\\Admin\\": "packages/Webkul/Admin/src",
+            "Webkul\\Ui\\": "packages/Webkul/Ui/src"
         }
     },
     "autoload-dev": {
