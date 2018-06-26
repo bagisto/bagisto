@@ -50,13 +50,16 @@ class AdminServiceProvider extends ServiceProvider
         Event::listen('admin.menu.build', function($menu) {
             $menu->add('dashboard', 'Dashboard', route('admin.dashboard.index'), 1, 'icon-dashboard');
 
-            $menu->add('configuration', 'Configure', route('admin.users.index'), 6, 'icon-configuration');
+            $menu->add('configuration', 'Configure', route('admin.account.edit'), 6, 'icon-configuration');
+
+            $menu->add('configuration.account', 'My Account', route('admin.account.edit'), 1, '');
 
             $menu->add('settings', 'Settings', '', 6, 'icon-settings');
 
             $menu->add('settings.users', 'Users', route('admin.users.index'), 1, '');
 
             $menu->add('settings.roles', 'Roles', route('admin.permissions.index'), 2, '');
+
         });
     }
 
@@ -73,21 +76,21 @@ class AdminServiceProvider extends ServiceProvider
         });
 
         view()->composer('admin::layouts.nav-aside', function($view) {
-            $menu = current(Event::fire('admin.menu.create'));
-
-            foreach ($menu->items as $item) {
-                $currentKey = current(explode('.', $menu->currentKey));
+            $parentMenu = current(Event::fire('admin.menu.create'));
+            $menu = [];
+            foreach ($parentMenu->items as $item) {
+                $currentKey = current(explode('.', $parentMenu->currentKey));
                 if($item['key'] != $currentKey)
                     continue;
 
                 $menu = [
-                    'items' => $menu->sortItems($item['children']),
-                    'current' => $menu->current,
-                    'currentKey' => $menu->currentKey
+                    'items' => $parentMenu->sortItems($item['children']),
+                    'current' => $parentMenu->current,
+                    'currentKey' => $parentMenu->currentKey
                 ];
-
-                $view->with('menu', $menu);
             }
+
+            $view->with('menu', $menu);
         });
     }
 

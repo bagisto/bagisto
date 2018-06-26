@@ -2,6 +2,37 @@
 @import "icons";
 @import "variables";
 @import "mixins";
+@import "animations";
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+*:focus {
+    outline: none;
+}
+
+a:link,
+a:hover,
+a:visited,
+a:focus,
+a:active {
+  text-decoration: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+h1 {
+    font-size: 28px;
+    color: #3A3A3A;
+    margin-top: 0;
+}
 
 .btn {
     @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.20), 0 0 8px 0 rgba(0, 0, 0, 0.10));
@@ -262,7 +293,7 @@
         margin-bottom: 25px;
         font-size: 15px;
         color: #333333;
-        width: 550px;
+        width: 750px;
         max-width: 100%;
 
         label {
@@ -303,13 +334,59 @@
 
         .control-error {
             display: block;
-            font-style: italic;
             color: #FF5656;
             margin-top: 5px;
         }
 
         &.has-error .control {
             border-color: $danger-color;
+        }
+    }
+}
+
+.alert-wrapper {
+    width: 300px;
+    top: 10px;
+    right: 10px;
+    position: fixed;
+    z-index: 3;
+
+    .alert {
+        width: 300px;
+        padding: 15px;
+        border-radius: 3px;
+        display: inline-block;
+        box-shadow: 0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1), 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+        position: relative;
+        animation: jelly 0.5s ease-in-out;
+        transform-origin: center top;
+        z-index: 500;
+        margin-bottom: 10px;
+
+        &.alert-error {
+            background: $danger-color;
+        }
+
+        &.alert-success {
+            background: $success-color;
+        }
+
+        &.alert-warning {
+            background: $warning-color;
+        }
+
+        .icon {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+        }
+
+        p {
+            color: #FFFFFF;
+            margin: 0px;
+            padding: 0px;
+            font-size: 15px;
         }
     }
 }

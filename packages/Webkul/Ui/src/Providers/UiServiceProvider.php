@@ -22,8 +22,8 @@ class UiServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'ui');
 
-        Paginator::defaultView('ui::pagination');
-        Paginator::defaultSimpleView('ui::pagination');
+        Paginator::defaultView('ui::partials.pagination');
+        Paginator::defaultSimpleView('ui::partials.pagination');
 
     }
 

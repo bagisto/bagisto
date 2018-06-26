@@ -77,4 +77,24 @@ class Menu {
 
 		return $items;
 	}
+
+	/**
+	 * Method to find the active links
+	 *
+	 * @param  array $item Item that needs to be checked if active
+	 * @return string
+	 */
+	public function getActive($item)
+	{
+		$url = trim($item['url'], '/');
+
+		if ($this->current === $url)
+		{
+			return 'active current';
+		}
+
+		if (strpos($this->currentKey, $item['key']) === 0) {
+			return 'active';
+		}
+	}
 }

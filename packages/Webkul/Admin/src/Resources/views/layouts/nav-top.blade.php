@@ -29,7 +29,7 @@
                         <label>Account</label>
                         <ul>
                             <li>
-                                <a href="">My Account</a>
+                                <a href="{{ route('admin.account.edit') }}">My Account</a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.session.destroy') }}">Logout</a>

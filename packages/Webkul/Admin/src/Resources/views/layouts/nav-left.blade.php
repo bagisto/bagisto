@@ -1,11 +1,11 @@
 <div class="navbar-left">
     <ul class="menubar">
-        @foreach($menu->items as $menu)
-            <li class="menu-item {{ $menu['active'] ? 'active' : '' }}">
-                <a href="{{ $menu['url'] }}">
-                    <span class="icon {{ $menu['icon-class'] }}">
+        @foreach($menu->items as $menuItem)
+            <li class="menu-item {{ $menu->getActive($menuItem) }}">
+                <a href="{{ $menuItem['url'] }}">
+                    <span class="icon {{ $menuItem['icon-class'] }}">
                     </span>
-                    {{ $menu['name'] }}
+                    {{ $menuItem['name'] }}
                 </a>
             </li>
         @endforeach

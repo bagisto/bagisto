@@ -22,6 +22,11 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::users.index'
             ])->name('admin.users.index');
 
+            Route::get('/account', 'Webkul\User\Http\Controllers\AccountController@edit')->defaults('_config', [
+                'view' => 'admin::account.edit'
+            ])->name('admin.account.edit');
+        
+            Route::put('/account', 'Webkul\User\Http\Controllers\AccountController@update')->name('admin.account.update');
 
             Route::get('/permissions', 'Webkul\User\Http\Controllers\PermissionController@index')->defaults('_config', [
                 'view' => 'admin::permissions.index'
