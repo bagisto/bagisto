@@ -21,7 +21,7 @@
                             Administrator
                         </span>
                     </div>
-                    <i class="icon arrow-down-icon-active"></i>
+                    <i class="icon arrow-down-icon active"></i>
                 </div>
 
                 <div class="dropdown-list bottom-right">

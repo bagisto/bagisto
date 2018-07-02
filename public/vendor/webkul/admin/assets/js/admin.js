@@ -95,7 +95,7 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);
-module.exports = __webpack_require__(8);
+module.exports = __webpack_require__(9);
 
 
 /***/ }),
@@ -104,24 +104,49 @@ module.exports = __webpack_require__(8);
 
 window.jQuery = window.$ = $ = __webpack_require__(3);
 window.Vue = __webpack_require__(4);
-window.VeeValidate = __webpack_require__(13);
+window.VeeValidate = __webpack_require__(8);
 
 Vue.use(VeeValidate);
 
 $(document).ready(function () {
-    var form = new Vue({
-        el: 'form',
+    var app = new Vue({
+        el: '#app',
 
         mounted: function mounted() {
             this.addServerErrors();
+            this.addFlashMessages();
         },
 
         methods: {
+            onSubmit: function onSubmit(e) {
+                this.$validator.validateAll().then(function (result) {
+                    if (result) {
+                        e.target.submit();
+                    }
+                });
+            },
+
             addServerErrors: function addServerErrors() {
-                // this.errors.add('email', "Hello")
-                // for (var key in serverErrors) {
-                //     this.errors.add(key, serverErrors[key][0])
-                // }
+                var scope = null;
+                for (var key in serverErrors) {
+                    var field = this.$validator.fields.find({ name: key, scope: scope });
+                    if (field) {
+                        this.$validator.errors.add({
+                            id: field.id,
+                            field: key,
+                            msg: serverErrors[key][0],
+                            scope: scope
+                        });
+                    }
+                }
+            },
+
+            addFlashMessages: function addFlashMessages() {
+                var flashes = this.$refs.flashes;
+
+                flashMessages.forEach(function (flash) {
+                    flashes.addFlash(flash);
+                }, this);
             }
         }
     });
@@ -21919,16 +21944,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21944,7 +21959,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ErrorComponent", function() { return ErrorComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "version", function() { return version; });
 /**
-  * vee-validate v2.1.0-beta.3
+  * vee-validate v2.1.0-beta.5
   * (c) 2018 Abdelrahman Awad
   * @license MIT
   */
@@ -22964,6 +22979,7 @@ ErrorBag.prototype._normalizeError = function _normalizeError (error) {
   }
 
   error.scope = !isNullOrUndefined(error.scope) ? error.scope : null;
+  error.vmId = !isNullOrUndefined(error.vmId) ? error.vmId : (this.vmId || null);
 
   return [error];
 };
@@ -24242,7 +24258,7 @@ Validator.prototype._validate = function _validate (field, value, ref) {
   var isExitEarly = false;
   // use of '.some()' is to break iteration in middle by returning true
   Object.keys(field.rules).filter(function (rule) {
-    if (!initial) { return true; }
+    if (!initial || !RULES[rule]) { return true; }
 
     return RULES[rule].options.immediate;
   }).some(function (rule) {
@@ -25059,12 +25075,12 @@ prototypeAccessors$5.flags.get = function () {
     var this$1 = this;
 
   return this._base.fields.items.filter(function (f) { return f.vmId === this$1.id; }).reduce(function (acc, field) {
-      var obj;
-
     if (field.scope) {
-      acc[("$" + (field.scope))] = ( obj = {}, obj[field.name] = field.flags, obj );
+      if (!acc[("$" + (field.scope))]) {
+        acc[("$" + (field.scope))] = {};
+      }
 
-      return acc;
+      acc[("$" + (field.scope))][field.name] = field.flags;
     }
 
     acc[field.name] = field.flags;
@@ -25225,6 +25241,12 @@ var mixin = {
       return;
     }
 
+    // There is a validator but it isn't injected, mark as reactive.
+    if (!requested && this.$validator) {
+      var Vue = this.$options._base; // the vue constructor.
+      Vue.util.defineReactive(this.$validator, 'errors', this.$validator.errors);
+    }
+
     if (! this.$options.computed) {
       this.$options.computed = {};
     }
@@ -25233,13 +25255,13 @@ var mixin = {
       return this.$validator.errors;
     };
     this.$options.computed[options.fieldsBagName || 'fields'] = function fieldBagGetter () {
-      var this$1 = this;
-
-      return this.$validator.fields.items.filter(function (f) { return f.vmId === this$1._uid; }).reduce(function (acc, field) {
-        var obj;
-
+      return this.$validator.fields.items.reduce(function (acc, field) {
         if (field.scope) {
-          acc[("$" + (field.scope))] = ( obj = {}, obj[field.name] = field.flags, obj );
+          if (!acc[("$" + (field.scope))]) {
+            acc[("$" + (field.scope))] = {};
+          }
+
+          acc[("$" + (field.scope))][field.name] = field.flags;
 
           return acc;
         }
@@ -25251,7 +25273,7 @@ var mixin = {
     };
   },
   beforeDestroy: function beforeDestroy () {
-    if (this._uid === this.$validator.id) {
+    if (this.$validator && this._uid === this.$validator.id) {
       this.$validator.errors.clear(); // remove errors generated by this component.
     }
   }
@@ -29604,7 +29626,7 @@ var ErrorComponent = {
   }
 };
 
-var version = '2.1.0-beta.3';
+var version = '2.1.0-beta.5';
 
 var rulesPlugin = function (ref) {
   var Validator$$1 = ref.Validator;
@@ -29635,6 +29657,12 @@ var index_esm = {
 /* harmony default export */ __webpack_exports__["default"] = (index_esm);
 
 
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

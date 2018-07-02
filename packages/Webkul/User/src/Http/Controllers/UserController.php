@@ -5,6 +5,9 @@ namespace Webkul\User\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Webkul\User\Models\Admin;
+use Webkul\User\Models\Role;
+use Webkul\User\Http\Requests\UserForm;
 
 /**
  * Admin user controller
@@ -40,29 +43,24 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        $roles = Role::all();
+
+        return view($this->_config['view'], compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Webkul\User\Http\Requests\UserForm  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserForm $request)
     {
-        //
-    }
+        Admin::create(request()->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        session()->flash('success', 'User created successfully.');
+
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
@@ -73,19 +71,28 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = Admin::findOrFail($id);
+        $roles = Role::all();
+
+        return view($this->_config['view'], compact('user', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Webkul\User\Http\Requests\UserForm  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserForm $request, $id)
     {
-        //
+        $user = Admin::findOrFail($id);
+
+        $user->update(request(['name', 'email', 'password']));
+
+        session()->flash('success', 'User updated successfully.');
+
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**

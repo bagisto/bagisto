@@ -4,6 +4,8 @@
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   font-weight: 500;
+  position: static;
+  min-height: 100%;
 }
 
 .navbar-top {
@@ -13,6 +15,10 @@
   -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(162, 162, 162, 0.2);
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 5;
 }
 
 .navbar-top .navbar-top-left {
@@ -97,23 +103,27 @@
 
 .content-container {
   padding-left: 90px;
-  width: 100%;
-  display: inline-block;
   position: absolute;
   margin-top: 60px;
   top: 0px;
+  right: 0;
+  left: 0;
   bottom: 0px;
   z-index: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .content-container .aside-nav {
   width: 280px;
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: 60px;
   bottom: 0;
   border-right: 1px solid rgba(162, 162, 162, 0.2);
   background: #F8F9FA;
   padding-top: 10px;
+  overflow-y: auto;
+  z-index: 4;
 }
 
 .content-container .aside-nav a {
@@ -132,9 +142,17 @@
   float: right;
 }
 
+.content-container .content-wrapper {
+  padding: 25px 25px 25px 305px;
+  overflow-y: auto;
+}
+
 .content-container .content {
+  padding: 25px 0;
+}
+
+.content-container .content.full-page {
   padding: 25px;
-  padding-left: 305px;
 }
 
 .content-container .content .page-header {

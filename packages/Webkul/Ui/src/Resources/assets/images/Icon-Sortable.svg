@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Sortable</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Sortable" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Icon-Sort-Down" transform="translate(5.000000, 6.000000)" stroke="#979797" stroke-width="2">
+            <path d="M0,1 L14,1" id="Path-3"></path>
+            <path d="M0,6 L14,6" id="Path-3-Copy"></path>
+            <path d="M0,11 L14,11" id="Path-3-Copy-2"></path>
+        </g>
+    </g>
+</svg>
