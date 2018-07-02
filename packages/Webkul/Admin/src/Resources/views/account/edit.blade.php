@@ -1,10 +1,8 @@
-@extends('admin::layouts.master')
+@extends('admin::layouts.content')
 
 @section('content')
-    @include ('admin::layouts.nav-aside')
-
     <div class="content">
-        <form method="POST" action="">
+        <form method="POST" action="" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
@@ -23,29 +21,40 @@
                 
                 <div class="form-container">
                     @csrf()
+
                     <input name="_method" type="hidden" value="PUT">
 
-                    <div class="control-group" :class="[errors.first('name') ? 'has-error' : '']">
-                        <label for="">{{ __('Name') }}</label>
-                        <input type="text" v-validate="'required'" class="control" name="name" value="{{ $user->name }}"/>
-                        <span class="control-error" v-if="errors.first('name')">@{{ errors.first('name') }}</span>
-                    </div>
+                    <accordian :title="'{{ __('General') }}'" :active="true">
+                        <div class="accordian-content">
+                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
+                                <label for="name">{{ __('Name') }}</label>
+                                <input type="text" v-validate="'required'" class="control" id="email" name="name" value="{{ $user->name }}"/>
+                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+                            </div>
 
-                    <div class="control-group" :class="[errors.first('email') ? 'has-error' : '']">
-                        <label for="">{{ __('Email') }}</label>
-                        <input type="text" v-validate="'required|email'" class="control" name="email" value="{{ $user->email }}"/>
-                        <span class="control-error" v-if="errors.first('email')">@{{ errors.first('email') }}</span>
-                    </div>
+                            <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
+                                <label for="email">{{ __('Email') }}</label>
+                                <input type="text" v-validate="'required|email'" class="control" id="email" name="email" value="{{ $user->email }}"/>
+                                <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
+                            </div>
+                        </div>
+                    </accordian>
 
-                    <div class="control-group">
-                        <label for="">{{ __('Password') }}</label>
-                        <input type="text" class="control" name="password"/>
-                    </div>
+                    <accordian :title="'{{ __('Password') }}'" :active="true">
+                        <div class="accordian-content">
+                            <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
+                                <label for="password">{{ __('Password') }}</label>
+                                <input type="password" v-validate="'min:6|max:18'" class="control" id="password" name="password"/>
+                                <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
+                            </div>
 
-                    <div class="control-group">
-                        <label for="">{{ __('Confirm Password') }}</label>
-                        <input type="text" class="control" name="confirm_password"/>
-                    </div>
+                            <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
+                                <label for="password_confirmation">{{ __('Confirm Password') }}</label>
+                                <input type="password" v-validate="'min:6|max:18|confirmed:password'" class="control" id="password_confirmation" name="password_confirmation"/>
+                                <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
+                            </div>
+                        </div>
+                    </accordian>
                 </div>
             </div>
         </form>

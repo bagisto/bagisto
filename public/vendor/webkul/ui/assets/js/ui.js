@@ -64,99 +64,7 @@
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(2);
-__webpack_require__(11);
-module.exports = __webpack_require__(13);
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-$(document).ready(function () {
-    function addFlash(flash) {
-        flashMessages.push(flash);
-    }
-
-    Vue.component('flash-wrapper', __webpack_require__(18));
-    Vue.component('flash', __webpack_require__(7));
-
-    var app = new Vue({
-        el: '#app',
-
-        mounted: function mounted() {
-            this.addFlashMessages();
-        },
-
-        methods: {
-            addFlashMessages: function addFlashMessages() {
-                var flashes = this.$refs.flashes;
-
-                flashMessages.forEach(function (flash) {
-                    flashes.addFlash(flash);
-                }, this);
-            }
-        }
-    });
-});
-
-/***/ }),
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(8)
-/* script */
-var __vue_script__ = __webpack_require__(9)
-/* template */
-var __vue_template__ = __webpack_require__(10)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "src/Resources/assets/js/components/flash.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-feee1d58", Component.options)
-  } else {
-    hotAPI.reload("data-v-feee1d58", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 8 */
+/* 0 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -265,7 +173,202 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 9 */
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(2);
+__webpack_require__(17);
+module.exports = __webpack_require__(19);
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Vue.component('flash-wrapper', __webpack_require__(3));
+Vue.component('flash', __webpack_require__(6));
+Vue.component('accordian', __webpack_require__(9));
+Vue.component('tree-view', __webpack_require__(12));
+Vue.component('tree-checkbox', __webpack_require__(14));
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(4)
+/* template */
+var __vue_template__ = __webpack_require__(5)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/components/flash-wrapper.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-34b58a1a", Component.options)
+  } else {
+    hotAPI.reload("data-v-34b58a1a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            uid: 1,
+
+            flashes: []
+        };
+    },
+
+    methods: {
+        addFlash: function addFlash(flash) {
+            flash.uid = this.uid++;
+            this.flashes.push(flash);
+        },
+
+        removeFlash: function removeFlash(flash) {
+            var index = this.flashes.indexOf(flash);
+
+            this.flashes.splice(index, 1);
+        }
+    }
+});
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "transition-group",
+    {
+      staticClass: "alert-wrapper",
+      attrs: { tag: "div", name: "flash-wrapper" }
+    },
+    _vm._l(_vm.flashes, function(flash, index) {
+      return _c("flash", {
+        key: flash.uid,
+        attrs: { flash: flash },
+        on: {
+          onRemoveFlash: function($event) {
+            _vm.removeFlash($event)
+          }
+        }
+      })
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-34b58a1a", module.exports)
+  }
+}
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(7)
+/* template */
+var __vue_template__ = __webpack_require__(8)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/components/flash.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-feee1d58", Component.options)
+  } else {
+    hotAPI.reload("data-v-feee1d58", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -296,7 +399,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -323,10 +426,518 @@ if (false) {
 }
 
 /***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(10)
+/* template */
+var __vue_template__ = __webpack_require__(11)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/components/accordian.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d9e5880c", Component.options)
+  } else {
+    hotAPI.reload("data-v-d9e5880c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        title: String,
+        active: Boolean
+    },
+
+    data: function data() {
+        return {
+            isActive: false
+        };
+    },
+
+    mounted: function mounted() {
+        this.isActive = this.active;
+    },
+
+    methods: {
+        toggleAccordion: function toggleAccordion() {
+            this.isActive = !this.isActive;
+        }
+    },
+
+    computed: {
+        iconClass: function iconClass() {
+            return {
+                'accordian-down-icon': !this.isActive,
+                'accordian-up-icon': this.isActive
+            };
+        }
+    }
+});
+
+/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-window.jQuery = window.$ = $ = __webpack_require__(12);
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "accordian", class: { active: _vm.isActive } },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "accordian-header",
+          on: {
+            click: function($event) {
+              _vm.toggleAccordion()
+            }
+          }
+        },
+        [
+          _vm._v("\n        " + _vm._s(_vm.title) + "\n        "),
+          _c("i", { staticClass: "icon", class: _vm.iconClass })
+        ]
+      ),
+      _vm._v(" "),
+      _vm._t("default")
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d9e5880c", module.exports)
+  }
+}
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(13)
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/components/tree-view/tree-view.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2c07aa7d", Component.options)
+  } else {
+    hotAPI.reload("data-v-2c07aa7d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'tree-view',
+
+    inheritAttrs: false,
+
+    props: {
+        items: {
+            type: Object,
+            required: false,
+            default: function _default() {
+                return {
+                    "name": "Root",
+                    "value": "1",
+                    "children": [{
+                        "name": "First Child",
+                        "value": "2"
+                    }, {
+                        "name": "Second Child",
+                        "value": "3",
+                        "children": [{
+                            "name": "GrandChild 1",
+                            "value": "4"
+                        }, {
+                            "name": "GrandChild 2",
+                            "value": "5"
+                        }, {
+                            "name": "GrandChild 3",
+                            "value": "6"
+                        }]
+                    }]
+                };
+            }
+        },
+
+        value: {
+            type: Array,
+            required: false,
+            default: function _default() {
+                return [];
+            }
+        }
+    },
+
+    computed: {
+        allChildren: function allChildren() {
+            var leafs = [];
+            var searchTree = function searchTree(items) {
+                if (!!items['children'] && items['children'].length > 0) {
+                    items['children'].forEach(function (child) {
+                        return searchTree(child);
+                    });
+                } else {
+                    leafs.push(items);
+                }
+            };
+
+            searchTree(this.items);
+
+            return leafs;
+        },
+        hasChildren: function hasChildren() {
+            return !!this.items['children'] && this.items['children'].length > 0;
+        },
+        hasSelection: function hasSelection() {
+            return !!this.value && this.value.length > 0;
+        },
+        isAllChildrenSelected: function isAllChildrenSelected() {
+            var _this = this;
+
+            return this.hasChildren && this.hasSelection && this.allChildren.every(function (leaf) {
+                return _this.value.some(function (sel) {
+                    return sel === leaf;
+                });
+            });
+        },
+        isSomeChildrenSelected: function isSomeChildrenSelected() {
+            var _this2 = this;
+
+            return this.hasSelection && this.allChildren.some(function (leaf) {
+                return _this2.value.some(function (sel) {
+                    return sel === leaf;
+                });
+            });
+        }
+    },
+
+    methods: {
+        generateRoot: function generateRoot() {
+            var _this3 = this;
+
+            return this.$createElement('tree-checkbox', {
+                props: {
+                    label: this.items['name'],
+                    inputValue: this.hasChildren ? this.isAllChildrenSelected : this.value,
+                    value: this.hasChildren ? this.isAllChildrenSelected : this.items
+                },
+                on: {
+                    change: function change(selection) {
+                        if (_this3.hasChildren) {
+                            if (_this3.isAllChildrenSelected) {
+                                _this3.allChildren.forEach(function (leaf) {
+                                    var index = _this3.value.indexOf(leaf);
+                                    _this3.value.splice(index, 1);
+                                });
+                            } else {
+                                _this3.allChildren.forEach(function (leaf) {
+                                    var index = _this3.value.indexOf(leaf);
+                                    if (index === -1) {
+                                        _this3.value.push(leaf);
+                                    }
+                                });
+                            }
+
+                            _this3.$emit('input', _this3.value);
+                        } else {
+                            _this3.$emit('input', selection);
+                        }
+                    }
+                }
+            });
+        },
+        generateChild: function generateChild(child) {
+            var _this4 = this;
+
+            return this.$createElement('tree-view', {
+                class: 'tree-item',
+                on: {
+                    input: function input(selection) {
+                        _this4.$emit('input', selection);
+                    }
+                },
+                props: {
+                    items: child,
+                    value: this.value
+                }
+            });
+        },
+        generateChildren: function generateChildren() {
+            var _this5 = this;
+
+            var childElements = [];
+            if (this.items['children']) {
+                this.items['children'].forEach(function (child) {
+                    childElements.push(_this5.generateChild(child));
+                });
+            }
+
+            return childElements;
+        }
+    },
+
+    render: function render(createElement) {
+        return createElement('div', {}, [this.generateRoot()].concat(_toConsumableArray(this.generateChildren())));
+    }
+});
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(15)
+/* template */
+var __vue_template__ = __webpack_require__(16)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/components/tree-view/tree-checkbox.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0c27ec9b", Component.options)
+  } else {
+    hotAPI.reload("data-v-0c27ec9b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'tree-checkbox',
+
+    props: ['label', 'inputValue', 'value'],
+
+    methods: {
+        inputChanged: function inputChanged(e) {
+            this.$emit('change', this.inputValue);
+        },
+        valueComparator: function valueComparator(a, b) {
+            var _this = this;
+
+            if (a === b) return true;
+
+            if (a !== Object(a) || b !== Object(b)) {
+                return false;
+            }
+
+            var props = Object.keys(a);
+
+            if (props.length !== Object.keys(b).length) {
+                return false;
+            }
+
+            return props.every(function (p) {
+                return _this.valueComparator(a[p], b[p]);
+            });
+        }
+    },
+
+    computed: {
+        isMultiple: function isMultiple() {
+            return Array.isArray(this.inputValue);
+        },
+        isActive: function isActive() {
+            var _this2 = this;
+
+            var value = this.value;
+            var input = this.inputValue;
+
+            if (this.isMultiple) {
+                if (!Array.isArray(input)) return false;
+
+                return input.some(function (item) {
+                    return _this2.valueComparator(item, value);
+                });
+            }
+
+            var isChecked = value ? this.valueComparator(value, input) : Boolean(input);
+
+            return isChecked;
+        }
+    }
+});
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("span", { staticClass: "checkbox" }, [
+    _c("input", {
+      attrs: { type: "checkbox", name: "permissions[]", id: _vm.inputValue },
+      domProps: { value: _vm.inputValue.value, checked: _vm.isActive },
+      on: {
+        change: function($event) {
+          _vm.inputChanged($event)
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("label", {
+      staticClass: "checkbox-view",
+      attrs: { for: _vm.inputValue }
+    }),
+    _vm._v(
+      "\n    " +
+        _vm._s(_vm.inputValue) +
+        " ======== " +
+        _vm._s(_vm.value) +
+        "\n"
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0c27ec9b", module.exports)
+  }
+}
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+window.jQuery = window.$ = $ = __webpack_require__(18);
 
 $(function () {
     $(document).click(function (e) {
@@ -391,7 +1002,7 @@ $(function () {
 });
 
 /***/ }),
-/* 12 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10762,143 +11373,10 @@ return jQuery;
 
 
 /***/ }),
-/* 13 */
+/* 19 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(8)
-/* script */
-var __vue_script__ = __webpack_require__(19)
-/* template */
-var __vue_template__ = __webpack_require__(20)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "src/Resources/assets/js/components/flash-wrapper.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-34b58a1a", Component.options)
-  } else {
-    hotAPI.reload("data-v-34b58a1a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            uid: 1,
-
-            flashes: []
-        };
-    },
-
-    methods: {
-        addFlash: function addFlash(flash) {
-            flash.uid = this.uid++;
-            this.flashes.push(flash);
-        },
-
-        removeFlash: function removeFlash(flash) {
-            var index = this.flashes.indexOf(flash);
-
-            this.flashes.splice(index, 1);
-        }
-    }
-});
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "transition-group",
-    {
-      staticClass: "alert-wrapper",
-      attrs: { tag: "div", name: "flash-wrapper" }
-    },
-    _vm._l(_vm.flashes, function(flash, index) {
-      return _c("flash", {
-        key: flash.uid,
-        attrs: { flash: flash },
-        on: {
-          onRemoveFlash: function($event) {
-            _vm.removeFlash($event)
-          }
-        }
-      })
-    })
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-34b58a1a", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

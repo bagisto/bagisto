@@ -48,13 +48,11 @@ class Menu {
 			'url'		 => $url,
 			'sort'		 => $sort,
 			'icon-class' => $iconClass,
-			'active' 	 => false,
 			'children'	 => []
         ];
 
-		if ($url == $this->current) {
+		if (strpos($this->current, $url) !== false) {
 			$this->currentKey = $key;
-			$item['active'] = true;
 		}
 
 		$children = str_replace('.', '.children.', $key);
@@ -88,12 +86,7 @@ class Menu {
 	{
 		$url = trim($item['url'], '/');
 
-		if ($this->current === $url)
-		{
-			return 'active current';
-		}
-
-		if (strpos($this->currentKey, $item['key']) === 0) {
+		if ((strpos($this->current, $url) !== false) || (strpos($this->currentKey, $item['key']) === 0)) {
 			return 'active';
 		}
 	}

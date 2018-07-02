@@ -18,8 +18,8 @@ class CreateAdminsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
-            $table->boolean('status');
+            $table->string('password')->nullable();
+            $table->boolean('status')->default(0);
             $table->integer('role_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();
