@@ -10,15 +10,15 @@
     display: inline-block;
     background-size: cover;
 }
-.icon-dashboard {
+.dashboard-icon {
     @extend %menu-properties;
     background-image: url('../images/Icon-Dashboard.svg');
 }
-.icon-configuration {
+.configuration-icon {
     @extend %menu-properties;
     background-image: url('../images/Icon-Configure.svg');
 }
-.icon-settings {
+.settings-icon {
     @extend %menu-properties;
     background-image: url('../images/Icon-Settings.svg');
 }
@@ -39,6 +39,12 @@
     background-image: url('../images/Arrow-Down-Light.svg');
     width: 14px;
     height: 8px;
+}
+
+.arrow-right-icon {
+    background-image: url('../images/Arrow-Right.svg');
+    width: 18px;
+    height: 18px;
 }
 
 .white-cross-sm-icon {
@@ -94,6 +100,12 @@
     height: 18px;
 }
 
+.primary-back-icon {
+    background-image: url('../images/Icon-Back-Primary.svg');
+    width: 24px;
+    height: 24px;
+}
+
 .active {
     .icon-dashboard {
         background-image: url('../images/Icon-Dashboard-Active.svg');
@@ -114,15 +126,15 @@
         height: 8px;
     }
 
-    &.icon-dashboard {
+    &.dashboard-icon {
         background-image: url('../images/Icon-Dashboard-Active.svg');
     }
 
-    &.icon-settings {
+    &.settings-icon {
         background-image: url('../images/Icon-Settings-Active.svg');
     }
 
-    &.icon-configuration {
+    &.configuration-icon {
         @extend %menu-properties;
         background-image: url('../images/Icon-Configure-Active.svg');
     }

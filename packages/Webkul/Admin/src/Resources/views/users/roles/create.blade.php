@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="content">
+
         <form method="POST" action="{{ route('admin.roles.store') }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
@@ -45,12 +46,27 @@
                             </div>
 
                             <div class="control-group">
-                                <tree-view/>
-                            </div>                            
+                                <tree-view value-field="route" id-field="key" value-field="route" items='@json($acl->items)'></tree-view>
+                            </div>
                         </div>
                     </accordian>
                 </div>
             </div>
         </form>
     </div>
+@stop
+
+@section('javascript')
+    <script>
+        $(document).ready(function () {
+            $('#permission_type').on('change', function(e) {
+                if($(e.target).val() == 'custom') {
+                    $('.tree-container').removeClass('hide')
+                } else {
+                    $('.tree-container').addClass('hide')
+                }
+                
+            })
+        });
+    </script>
 @stop

@@ -5,6 +5,8 @@ namespace Webkul\User\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webkul\User\Models\Role;
+use Webkul\User\Notifications\AdminResetPassword;
+
 
 class Admin extends Authenticatable
 {
@@ -34,6 +36,17 @@ class Admin extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+    * Send the password reset notification.
+    *
+    * @param  string  $token
+    * @return void
+    */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new AdminResetPassword($token));
     }
 
     /**

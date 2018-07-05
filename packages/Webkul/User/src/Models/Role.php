@@ -7,6 +7,16 @@ use Webkul\User\Models\Admin;
 
 class Role extends Model
 {
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'description', 'permission_type', 'permissions',
+    ];
+
     protected $casts = [
         'permissions' => 'array'
     ];

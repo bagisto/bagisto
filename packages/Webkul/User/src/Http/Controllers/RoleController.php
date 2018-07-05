@@ -4,7 +4,6 @@ namespace Webkul\User\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Webkul\User\Models\Role;
 
 /**
@@ -15,8 +14,18 @@ use Webkul\User\Models\Role;
  */
 class RoleController extends Controller
 {
+    /**
+     * Contains route related configuration
+     *
+     * @var array
+     */
     protected $_config;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->_config = request('_config');
@@ -50,6 +59,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate(request(), [
+            'name' => 'required',
+            'permission_type' => 'required',
+        ]);
+
+
         Role::create(request()->all());
 
         session()->flash('success', 'Role created successfully.');

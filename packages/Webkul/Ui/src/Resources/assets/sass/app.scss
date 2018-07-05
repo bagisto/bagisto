@@ -21,6 +21,7 @@ a:visited,
 a:focus,
 a:active {
   text-decoration: none;
+  color: $brand-color;
 }
 
 ul {
@@ -38,6 +39,10 @@ h1 {
 h2 {
     font-size: 18px;
     color: #3A3A3A;
+}
+
+.hide {
+    display: none !important;
 }
 
 .btn {
@@ -65,10 +70,12 @@ h2 {
     }
     &.btn-xl {
         padding: 12px 24px;
+        font-size: 16px;
     }
 
     &.btn-primary {
         background: $brand-color;
+        color: #ffffff;
     }
 
     &[disabled="disabled"],
@@ -244,10 +251,9 @@ h2 {
     }
 
     .checkbox-view {
-        background-image: url('../images/controls.svg');
-        background-position: 0px 0px;
-        height: 20px;
-        width: 20px;
+        background-image: url('../images/Checkbox.svg');
+        height: 24px;
+        width: 24px;
         margin: 0;
         display: inline-block !important;
         vertical-align: middle;
@@ -255,7 +261,7 @@ h2 {
     }
 
     input:checked + .checkbox-view {
-        background-position: 0px -21px;
+        background-image: url('../images/Checkbox-Checked.svg');
     }
 
     input:disabled + .checkbox-view {
@@ -298,68 +304,66 @@ h2 {
     }
 }
 
-.form-container {
-    .control-group {
+.control-group {
+    display: block;
+    margin-bottom: 25px;
+    font-size: 15px;
+    color: #333333;
+    width: 750px;
+    max-width: 100%;
+
+    label {
         display: block;
-        margin-bottom: 25px;
+        color: #3A3A3A;
+    }
+
+    textarea.control {
+        height: 100px;
+    }
+
+    .control {
+        background: #fff;
+        border: 2px solid $control-border-color;
+        border-radius: 3px;
+        width: 70%;
+        height: 36px;
+        display: inline-block;
+        vertical-align: middle;
+        transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0px 10px;
         font-size: 15px;
-        color: #333333;
-        width: 750px;
-        max-width: 100%;
+        margin-top: 10px;
+        margin-bottom: 5px;
 
-        label {
-            display: block;
-            color: #3A3A3A;
+        &:focus {
+            border-color: $brand-color;
         }
 
-        textarea.control {
-            height: 100px;
+        &[disabled="disabled"] {
+            border-color: #D3D3D3;
+            background-color: #D3D3D3;
+            cursor: not-allowed;
         }
+    }
 
-        .control {
-            background: #fff;
-            border: 2px solid $control-border-color;
-            border-radius: 3px;
-            width: 70%;
-            height: 36px;
-            display: inline-block;
-            vertical-align: middle;
-            transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 0px 10px;
-            font-size: 15px;
-            margin-top: 10px;
-            margin-bottom: 5px;
+    .control-info {
+        display: block;
+        font-style: italic;
+        color: #6F6F6F;
+    }
 
-            &:focus {
-                border-color: $brand-color;
-            }
+    .control-error {
+        display: none;
+        color: #FF5656;
+        margin-top: 5px;
+    }
 
-            &[disabled="disabled"] {
-                border-color: #D3D3D3;
-                background-color: #D3D3D3;
-                cursor: not-allowed;
-            }
-        }
+    &.has-error .control {
+        border-color: $danger-color;
+    }
 
-        .control-info {
-            display: block;
-            font-style: italic;
-            color: #6F6F6F;
-        }
-
-        .control-error {
-            display: none;
-            color: #FF5656;
-            margin-top: 5px;
-        }
-
-        &.has-error .control {
-            border-color: $danger-color;
-        }
-
-        &.has-error .control-error {
-            display: block;
-        }
+    &.has-error .control-error {
+        display: block;
     }
 }
 
@@ -369,6 +373,7 @@ h2 {
     right: 10px;
     position: fixed;
     z-index: 6;
+    text-align: left;
 
     .alert {
         width: 300px;
@@ -458,13 +463,55 @@ h2 {
     }
 }
 
-.tree-item {
-    padding-left: 30px;
-    display: inline-block;
-    width: 100%;
+.tree-container {
+    
+    .tree-item {
+        padding-left: 30px;
+        display: inline-block;
+        margin-top: 10px;
+        width: 100%;
 
-    .checkbox {
-        margin: 0;
-        margin-bottom: 5px;
+        > .tree-item {
+            display: none;
+        }
+
+        &.active > .tree-item {
+            display: inline-block;
+        }
+
+        .checkbox {
+            margin: 0;
+            display: inline-block;
+        }
+
+        .expand-icon {
+            display: inline-block;
+            margin-right: 10px;
+            cursor: pointer;
+            background-image: url('../images/Expand-Light.svg');
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+        }
+
+        &.active {
+            > .expand-icon {
+                background-image: url('../images/Expand-Light-On.svg');
+            }
+        }
+    }
+    
+    > .tree-item {
+        padding-left: 0;
+    }
+}
+
+.panel {
+    box-shadow: 0 2px 25px 0 rgba(0,0,0,0.15);
+    border-radius: 5px;
+    background: #fff;
+
+    .panel-content {
+        padding: 20px;
     }
 }

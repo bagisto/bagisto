@@ -5,6 +5,7 @@ require('laravel-mix-merge-manifest');
 var publicPath = '../../../public/vendor/webkul/admin/assets';
 
 mix.setPublicPath(publicPath).mergeManifest();
+mix.disableNotifications();
 
 mix.js(__dirname + '/src/Resources/assets/js/app.js', 'js/admin.js')
     .copyDirectory( __dirname + '/src/Resources/assets/images', publicPath + '/images')

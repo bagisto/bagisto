@@ -5,7 +5,7 @@ namespace Webkul\Admin\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Blade;
-use Webkul\Ui\Menu;
+use Webkul\Admin\Providers\EventServiceProvider;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -26,42 +26,11 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'admin');
 
-        $this->createAdminMenu();
-
         $this->composeView();
 
         Blade::directive('continue', function() { return "<?php continue; ?>"; });
 
-    }
-
-    /**
-     * This method fires an event for menu creation, any package can add their menu item by listening to the admin.menu.build event
-     *
-     * @return void
-     */
-    public function createAdminMenu()
-    {
-        Event::listen('admin.menu.create', function() {
-            return Menu::create(function($menu) {
-                Event::fire('admin.menu.build', $menu);
-            });
-        });
-
-        Event::listen('admin.menu.build', function($menu) {
-            $menu->add('dashboard', 'Dashboard', route('admin.dashboard.index'), 1, 'icon-dashboard');
-
-            $menu->add('configuration', 'Configure', route('admin.account.edit'), 6, 'icon-configuration');
-
-            $menu->add('configuration.account', 'My Account', route('admin.account.edit'), 1, '');
-
-            $menu->add('settings', 'Settings', route('admin.users.index'), 6, 'icon-settings');
-
-            $menu->add('settings.users', 'Users', route('admin.users.index'), 1, '');
-
-            $menu->add('settings.users.users', 'Users', route('admin.users.index'), 1, '');
-
-            $menu->add('settings.users.roles', 'Roles', route('admin.roles.index'), 1, '');
-        });
+        $this->app->register(EventServiceProvider::class);
     }
 
     /**

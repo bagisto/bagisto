@@ -13,7 +13,7 @@
             var this_this = this;
             setTimeout(function() {
                 this_this.$emit('onRemoveFlash', this_this.flash)
-            }, 1000)
+            }, 5000)
         },
 
         methods: {

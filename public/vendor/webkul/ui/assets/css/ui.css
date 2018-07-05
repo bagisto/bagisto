@@ -1,4 +1,4 @@
-.icon-dashboard, .icon-configuration, .icon-settings, .active .icon-configuration, .active.icon-configuration {
+.dashboard-icon, .configuration-icon, .settings-icon, .active .icon-configuration, .active.configuration-icon {
   width: 48px;
   height: 48px;
   margin-bottom: 10px;
@@ -11,15 +11,15 @@
   background-size: cover;
 }
 
-.icon-dashboard {
+.dashboard-icon {
   background-image: url("../images/Icon-Dashboard.svg");
 }
 
-.icon-configuration {
+.configuration-icon {
   background-image: url("../images/Icon-Configure.svg");
 }
 
-.icon-settings {
+.settings-icon {
   background-image: url("../images/Icon-Settings.svg");
 }
 
@@ -39,6 +39,12 @@
   background-image: url("../images/Arrow-Down-Light.svg");
   width: 14px;
   height: 8px;
+}
+
+.arrow-right-icon {
+  background-image: url("../images/Arrow-Right.svg");
+  width: 18px;
+  height: 18px;
 }
 
 .white-cross-sm-icon {
@@ -95,6 +101,12 @@
   height: 18px;
 }
 
+.primary-back-icon {
+  background-image: url("../images/Icon-Back-Primary.svg");
+  width: 24px;
+  height: 24px;
+}
+
 .active .icon-dashboard {
   background-image: url("../images/Icon-Dashboard-Active.svg");
 }
@@ -113,15 +125,15 @@
   height: 8px;
 }
 
-.active.icon-dashboard {
+.active.dashboard-icon {
   background-image: url("../images/Icon-Dashboard-Active.svg");
 }
 
-.active.icon-settings {
+.active.settings-icon {
   background-image: url("../images/Icon-Settings-Active.svg");
 }
 
-.active.icon-configuration {
+.active.configuration-icon {
   background-image: url("../images/Icon-Configure-Active.svg");
 }
 
@@ -221,6 +233,7 @@ a:visited,
 a:focus,
 a:active {
   text-decoration: none;
+  color: #0041FF;
 }
 
 ul {
@@ -238,6 +251,10 @@ h1 {
 h2 {
   font-size: 18px;
   color: #3A3A3A;
+}
+
+.hide {
+  display: none !important;
 }
 
 .btn {
@@ -271,10 +288,12 @@ h2 {
 
 .btn.btn-xl {
   padding: 12px 24px;
+  font-size: 16px;
 }
 
 .btn.btn-primary {
   background: #0041FF;
+  color: #ffffff;
 }
 
 .btn[disabled="disabled"], .btn[disabled="disabled"]:hover, .btn[disabled="disabled"]:active {
@@ -453,10 +472,9 @@ h2 {
 }
 
 .checkbox .checkbox-view {
-  background-image: url("../images/controls.svg");
-  background-position: 0px 0px;
-  height: 20px;
-  width: 20px;
+  background-image: url("../images/Checkbox.svg");
+  height: 24px;
+  width: 24px;
   margin: 0;
   display: inline-block !important;
   vertical-align: middle;
@@ -464,7 +482,7 @@ h2 {
 }
 
 .checkbox input:checked + .checkbox-view {
-  background-position: 0px -21px;
+  background-image: url("../images/Checkbox-Checked.svg");
 }
 
 .checkbox input:disabled + .checkbox-view {
@@ -506,7 +524,7 @@ h2 {
   cursor: not-allowed;
 }
 
-.form-container .control-group {
+.control-group {
   display: block;
   margin-bottom: 25px;
   font-size: 15px;
@@ -515,16 +533,16 @@ h2 {
   max-width: 100%;
 }
 
-.form-container .control-group label {
+.control-group label {
   display: block;
   color: #3A3A3A;
 }
 
-.form-container .control-group textarea.control {
+.control-group textarea.control {
   height: 100px;
 }
 
-.form-container .control-group .control {
+.control-group .control {
   background: #fff;
   border: 2px solid #C7C7C7;
   border-radius: 3px;
@@ -540,33 +558,33 @@ h2 {
   margin-bottom: 5px;
 }
 
-.form-container .control-group .control:focus {
+.control-group .control:focus {
   border-color: #0041FF;
 }
 
-.form-container .control-group .control[disabled="disabled"] {
+.control-group .control[disabled="disabled"] {
   border-color: #D3D3D3;
   background-color: #D3D3D3;
   cursor: not-allowed;
 }
 
-.form-container .control-group .control-info {
+.control-group .control-info {
   display: block;
   font-style: italic;
   color: #6F6F6F;
 }
 
-.form-container .control-group .control-error {
+.control-group .control-error {
   display: none;
   color: #FF5656;
   margin-top: 5px;
 }
 
-.form-container .control-group.has-error .control {
+.control-group.has-error .control {
   border-color: #FC6868;
 }
 
-.form-container .control-group.has-error .control-error {
+.control-group.has-error .control-error {
   display: block;
 }
 
@@ -576,6 +594,7 @@ h2 {
   right: 10px;
   position: fixed;
   z-index: 6;
+  text-align: left;
 }
 
 .alert-wrapper .alert {
@@ -664,13 +683,51 @@ h2 {
   display: inline-block;
 }
 
-.tree-item {
+.tree-container .tree-item {
   padding-left: 30px;
   display: inline-block;
+  margin-top: 10px;
   width: 100%;
 }
 
-.tree-item .checkbox {
+.tree-container .tree-item > .tree-item {
+  display: none;
+}
+
+.tree-container .tree-item.active > .tree-item {
+  display: inline-block;
+}
+
+.tree-container .tree-item .checkbox {
   margin: 0;
-  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.tree-container .tree-item .expand-icon {
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+  background-image: url("../images/Expand-Light.svg");
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+
+.tree-container .tree-item.active > .expand-icon {
+  background-image: url("../images/Expand-Light-On.svg");
+}
+
+.tree-container > .tree-item {
+  padding-left: 0;
+}
+
+.panel {
+  -webkit-box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  background: #fff;
+}
+
+.panel .panel-content {
+  padding: 20px;
 }
