@@ -49,6 +49,18 @@
             a:active {
                 text-decoration: none;
             }
+            .icon {
+                margin: 0 !important;
+                vertical-align: middle;
+            }
+            span.icon-wrapper {
+                display: inline-block;
+                vertical-align: middle;
+                border: 1px solid #d3d3d3;
+                border-radius: 4px;
+                padding: 5px;
+                margin-right: 10px;
+            }
         </style>
     </head>
     
@@ -293,6 +305,79 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+
+            <label class="styleguide-label">Icons</label>
+            <div class="styleguide-wrapper">
+                <span class="icon-wrapper">
+                    <i class="icon icon-dashboard"></i>
+                </span>
+                <span class="icon-wrapper">
+                    <i class="icon icon-dashboard active"></i>
+                </span>
+                <span class="icon-wrapper">
+                    <i class="icon icon-configuration"></i>
+                </span>
+                <span class="icon-wrapper">
+                    <i class="icon icon-configuration active"></i>
+                </span>
+                <span class="icon-wrapper">
+                    <i class="icon icon-settings"></i>
+                </span>
+                <span class="icon-wrapper">
+                    <i class="icon icon-settings active"></i>
+                </span>
+                <span class="icon-wrapper">
+                    <i class="icon angle-right-icon"></i>
+                </span>
+                <span class="icon-wrapper">
+                    <i class="icon angle-left-icon"></i>
+                </span>
+
+                <span class="icon-wrapper">
+                    <i class="icon arrow-down-icon"></i>
+                </span>
+
+                <span class="icon-wrapper">
+                    <i class="icon arrow-down-icon active"></i>
+                </span>
+
+                <span class="icon-wrapper">
+                    <i class="icon white-cross-sm-icon"></i>
+                </span>
+
+                <span class="icon-wrapper">
+                    <i class="icon accordian-up-icon"></i>
+                </span>
+
+                <span class="icon-wrapper">
+                    <i class="icon accordian-down-icon"></i>
+                </span>
+
+                <span class="icon-wrapper">
+                    <i class="icon trash-icon"></i>
+                </span>
+
+                <span class="icon-wrapper">
+                    <i class="icon pencil-lg-icon"></i>
+                </span>
+
+                <span class="icon-wrapper">
+                    <i class="icon remove-icon"></i>
+                </span>
+
+                <span class="icon-wrapper">
+                    <i class="icon search-icon"></i>
+                </span>
+
+                <span class="icon-wrapper">
+                    <i class="icon sortable-icon"></i>
+                </span>
+
+                <span class="icon-wrapper">
+                    <i class="icon sort-down-icon"></i>
+                </span>
             </div>
         </div>
     </body>

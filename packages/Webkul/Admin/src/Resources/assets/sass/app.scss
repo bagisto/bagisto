@@ -11,6 +11,8 @@ body {
     font-family: $font-family;
     font-size: $font-size-base;
     font-weight: 500;
+    position: static;
+    min-height: 100%;
 }
 
 .navbar-top  {
@@ -19,6 +21,10 @@ body {
     font-size: 0;
     @include box-shadow(0 3px 6px 0 rgba(0,0,0,0.05));
     border-bottom: 1px solid $border-color;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 5;
 
     .navbar-top-left {
         width: 50%;
@@ -107,22 +113,26 @@ body {
 
 .content-container {
     padding-left: 90px;
-    width: 100%;
-    display: inline-block;
     position: absolute;
     margin-top: 60px;
     top: 0px;
+    right: 0;
+    left: 0;
     bottom: 0px;
     z-index: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
     
     .aside-nav {
         width: 280px;
-        position: absolute;
-        top: 0;
+        position: fixed;
+        top: 60px;
         bottom: 0;
         border-right: 1px solid $border-color;
         background: #F8F9FA;
         padding-top: 10px;
+        overflow-y: auto;
+        z-index: 4;
 
         a {
             padding: 15px;
@@ -143,10 +153,18 @@ body {
         }
     }
 
-    .content {
-        padding: 25px;
-        padding-left: 305px;
+    .content-wrapper {
+        padding: 25px 25px 25px 305px;
+        overflow-y: auto;
+    }
 
+    .content {
+        padding: 25px 0;
+
+        &.full-page {
+            padding: 25px;
+        }
+        
         .page-header {
             display: block;
 

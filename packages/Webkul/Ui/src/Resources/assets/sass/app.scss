@@ -8,6 +8,7 @@
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-weight: 500;
 }
 
 *:focus {
@@ -34,6 +35,11 @@ h1 {
     margin-top: 0;
 }
 
+h2 {
+    font-size: 18px;
+    color: #3A3A3A;
+}
+
 .btn {
     @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.20), 0 0 8px 0 rgba(0, 0, 0, 0.10));
     border-radius: 3px;
@@ -41,6 +47,7 @@ h1 {
     color: #fff;
     cursor: pointer;
     transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font: inherit;
 
     &:hover, &:active, &:focus {
         opacity: 0.75;
@@ -48,16 +55,16 @@ h1 {
     }
 
     &.btn-sm {
-        padding: 6px 10px;
+        padding: 6px 12px;
     }
     &.btn-md {
-        padding: 8px 12px;
+        padding: 8px 16px;
     }
     &.btn-lg {
-        padding: 10px 14px;
+        padding: 10px 20px;
     }
     &.btn-xl {
-        padding: 12px 16px;
+        padding: 12px 24px;
     }
 
     &.btn-primary {
@@ -79,7 +86,7 @@ h1 {
 }
 .dropdown-list {
     width: 200px;
-    box-shadow: 0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1), 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+    @include box-shadow(0 2px 4px 0 rgba(0,0,0,0.16), 0 0 9px 0 rgba(0,0,0,0.16));
     border-radius: 3px;
     background-color: #FFFFFF;
     position: absolute;
@@ -221,6 +228,7 @@ h1 {
         }
     }
 }
+
 .checkbox {
     position: relative;
     display: block;
@@ -243,6 +251,7 @@ h1 {
         margin: 0;
         display: inline-block !important;
         vertical-align: middle;
+        margin-right: 5px;
     }
 
     input:checked + .checkbox-view {
@@ -254,6 +263,7 @@ h1 {
         cursor: not-allowed;
     }
 }
+
 .radio {
     position: relative;
     display: block;
@@ -275,6 +285,7 @@ h1 {
         margin: 0;
         display: inline-block !important;
         vertical-align: middle;
+        margin-right: 5px;
     }
 
     input:checked + .radio-view {
@@ -299,6 +310,10 @@ h1 {
         label {
             display: block;
             color: #3A3A3A;
+        }
+
+        textarea.control {
+            height: 100px;
         }
 
         .control {
@@ -333,13 +348,17 @@ h1 {
         }
 
         .control-error {
-            display: block;
+            display: none;
             color: #FF5656;
             margin-top: 5px;
         }
 
         &.has-error .control {
             border-color: $danger-color;
+        }
+
+        &.has-error .control-error {
+            display: block;
         }
     }
 }
@@ -349,7 +368,7 @@ h1 {
     top: 10px;
     right: 10px;
     position: fixed;
-    z-index: 3;
+    z-index: 6;
 
     .alert {
         width: 300px;
@@ -388,5 +407,64 @@ h1 {
             padding: 0px;
             font-size: 15px;
         }
+    }
+}
+
+.tabs {
+
+    ul {
+        border-bottom: solid 1px $border-color;
+
+        li {
+            display: inline-block;
+
+            a {
+                padding: 15px 20px;
+                cursor: pointer;
+                margin: 0px 2px;
+                text-align: center;
+                color: #000311;
+                display: block;
+            }
+
+            &.active a {
+                border-bottom: 3px solid $brand-color;
+            }
+        }
+    }
+}
+
+.accordian {
+    .accordian-header {
+        font-size: 18px;
+        color: #3A3A3A;
+        border-bottom: solid 1px $border-color;
+        padding: 20px 15px;
+        cursor: pointer;
+
+        .icon {
+            float: right;
+        }
+    }
+
+    .accordian-content {
+        padding: 20px 15px;
+        display: none;
+        transition: 0.3s ease all;
+    }
+
+    &.active .accordian-content {
+        display: inline-block;
+    }
+}
+
+.tree-item {
+    padding-left: 30px;
+    display: inline-block;
+    width: 100%;
+
+    .checkbox {
+        margin: 0;
+        margin-bottom: 5px;
     }
 }

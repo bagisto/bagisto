@@ -54,12 +54,13 @@ class AdminServiceProvider extends ServiceProvider
 
             $menu->add('configuration.account', 'My Account', route('admin.account.edit'), 1, '');
 
-            $menu->add('settings', 'Settings', '', 6, 'icon-settings');
+            $menu->add('settings', 'Settings', route('admin.users.index'), 6, 'icon-settings');
 
             $menu->add('settings.users', 'Users', route('admin.users.index'), 1, '');
 
-            $menu->add('settings.roles', 'Roles', route('admin.permissions.index'), 2, '');
+            $menu->add('settings.users.users', 'Users', route('admin.users.index'), 1, '');
 
+            $menu->add('settings.users.roles', 'Roles', route('admin.roles.index'), 1, '');
         });
     }
 
@@ -70,27 +71,28 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function composeView()
     {
-        view()->composer('admin::layouts.nav-left', function($view) {
+        view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function($view) {
             $menu = current(Event::fire('admin.menu.create'));
-            $view->with('menu', $menu);
-        });
 
-        view()->composer('admin::layouts.nav-aside', function($view) {
-            $parentMenu = current(Event::fire('admin.menu.create'));
-            $menu = [];
-            foreach ($parentMenu->items as $item) {
-                $currentKey = current(explode('.', $parentMenu->currentKey));
-                if($item['key'] != $currentKey)
-                    continue;
+            $keys = explode('.', $menu->currentKey);
+            $subMenus = $tabs = [];
+            if(count($keys) > 1) {
+                $subMenus = [
+                        'items' => $menu->sortItems(array_get($menu->items, current($keys) . '.children')),
+                        'current' => $menu->current,
+                        'currentKey' => $menu->currentKey
+                    ];
 
-                $menu = [
-                    'items' => $parentMenu->sortItems($item['children']),
-                    'current' => $parentMenu->current,
-                    'currentKey' => $parentMenu->currentKey
-                ];
+                if(count($keys) > 2) {
+                    $tabs = [
+                            'items' => $menu->sortItems(array_get($menu->items, implode('.children.', array_slice($keys, 0, 2)) . '.children')),
+                            'current' => $menu->current,
+                            'currentKey' => $menu->currentKey
+                        ];
+                }
             }
-
-            $view->with('menu', $menu);
+            
+            $view->with('menu', $menu)->with('subMenus', $subMenus)->with('tabs', $tabs);
         });
     }
 

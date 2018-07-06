@@ -36,13 +36,16 @@ class AccountController extends Controller
      */
     public function update()
     {
+        $user = auth()->guard('admin')->user();
+
         $this->validate(request(), [
             'name' => 'required',
-            'email' => 'email',
-            // 'password' => 'required|confirmed'
+            'email' => 'email|unique:admins,email,' . $user->id,
+            'password' => 'nullable|confirmed'
         ]);
         
-        $user::update(request('name', 'email', 'password'));
+
+        $user->update(request(['name', 'email', 'password']));
 
         session()->flash('success', 'Account changes saved successfully.');
 
