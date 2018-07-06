@@ -18,6 +18,8 @@ Route::group(['middleware' => ['web']], function () {
             
             Route::get('/dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->name('admin.dashboard.index');
 
+            Route::get('/datagrid', 'Webkul\Admin\Http\Controllers\DataGridController@index')->name('admin.datagrid.index');
+            
             Route::get('/users', 'Webkul\User\Http\Controllers\UserController@index')->defaults('_config', [
                 'view' => 'admin::users.index'
             ])->name('admin.users.index');
