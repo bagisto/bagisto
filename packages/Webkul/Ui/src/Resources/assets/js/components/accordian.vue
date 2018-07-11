@@ -1,5 +1,5 @@
 <template>
-    <div class="accordian" :class="{ 'active': isActive }">
+    <div class="accordian" :class="[isActive ? 'active' : '', className]" :id="id">
         <div class="accordian-header" @click="toggleAccordion()">
             {{ title }}
             <i class="icon" :class="iconClass"></i>
@@ -11,6 +11,8 @@
     export default {
         props: {
             title: String,
+            id: String,
+            className: String,
             active: Boolean
         },
 

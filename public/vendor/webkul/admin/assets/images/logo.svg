@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="147px" height="60px" viewBox="0 0 147 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Logo+Text</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Sign-In" transform="translate(-726.000000, -100.000000)">
+            <g id="Paper" transform="translate(618.000000, 100.000000)">
+                <g id="Logo+Text-LG" transform="translate(108.000000, 0.000000)">
+                    <g id="Logo+Text">
+                        <g id="Logo">
+                            <rect id="Rectangle" fill="#0041FF" x="0" y="16" width="44" height="44"></rect>
+                            <rect id="Rectangle" fill="#000311" x="0" y="54" width="44" height="6"></rect>
+                            <path d="M36,15.2214765 L36,25.557047 C36,26.9062527 34.9580948,28 33.6728395,28 C32.3875843,28 31.345679,26.9062527 31.345679,25.557047 L31.345679,15.2214765 C31.345679,9.51329856 26.9376184,4.88590604 21.5,4.88590604 C16.0623816,4.88590604 11.654321,9.51329856 11.654321,15.2214765 L11.654321,25.557047 C11.654321,26.9062527 10.6124157,28 9.32716049,28 C8.04190524,28 7,26.9062527 7,25.557047 L7,15.2214765 C7,6.81488716 13.4918711,0 21.5,0 C29.5081289,0 36,6.81488716 36,15.2214765 Z" id="Combined-Shape" fill="#000311"></path>
+                        </g>
+                        <text id="bagisto" font-family="Montserrat-SemiBold, Montserrat" font-size="24" font-weight="500" letter-spacing="-0.3839998" fill="#0041FF">
+                            <tspan x="59" y="45">bagisto</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

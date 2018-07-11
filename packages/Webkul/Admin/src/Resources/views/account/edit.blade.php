@@ -28,7 +28,7 @@
                         <div class="accordian-content">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name">{{ __('Name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="email" name="name" value="{{ $user->name }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ $user->name }}"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
@@ -44,13 +44,13 @@
                         <div class="accordian-content">
                             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                                 <label for="password">{{ __('Password') }}</label>
-                                <input type="password" v-validate="'min:6|max:18'" class="control" id="password" name="password"/>
+                                <input type="password" v-validate="'min:6'" class="control" id="password" name="password"/>
                                 <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
                                 <label for="password_confirmation">{{ __('Confirm Password') }}</label>
-                                <input type="password" v-validate="'min:6|max:18|confirmed:password'" class="control" id="password_confirmation" name="password_confirmation"/>
+                                <input type="password" v-validate="'min:6|confirmed:password'" class="control" id="password_confirmation" name="password_confirmation"/>
                                 <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
                             </div>
                         </div>

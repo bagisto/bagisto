@@ -36,16 +36,18 @@ class Menu {
 	 *
 	 * @param string  $key   Dot seperated heirarchy
 	 * @param string  $name  Text for the anchor
-	 * @param string  $url   URL for the anchor
+	 * @param string  $route Route for the menu
 	 * @param integer $sort  Sorting index for the items
 	 * @param string  $iconClass Icon Class name
 	 */
-	public function add($key, $name, $url, $sort = 0, $iconClass = null)
+	public function add($key, $name, $route, $sort = 0, $iconClass = null)
 	{
+		$url = route($route);
 		$item = [
 			'key'		 => $key,
 			'name'		 => $name,
 			'url'		 => $url,
+			'route'		 => $route,
 			'sort'		 => $sort,
 			'icon-class' => $iconClass,
 			'children'	 => []
@@ -65,6 +67,9 @@ class Menu {
 	 * @return void
 	 */
 	public function sortItems($items) {
+		if(!$items) {
+			return;
+		}
 		usort($items, function($a, $b) {
 			if ($a['sort'] == $b['sort']) {
 				return 0;

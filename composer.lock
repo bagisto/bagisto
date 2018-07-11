@@ -4,8 +4,107 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d86c298bb279ec35bcbbd1dfb204831",
+    "content-hash": "1cfe5a0cb070df958cccb486627d42f2",
     "packages": [
+        {
+            "name": "commerceguys/intl",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/commerceguys/intl.git",
+                "reference": "22156e447530d6ebd387bfee51ef1ae2c70a5ff0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/commerceguys/intl/zipball/22156e447530d6ebd387bfee51ef1ae2c70a5ff0",
+                "reference": "22156e447530d6ebd387bfee51ef1ae2c70a5ff0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "1.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CommerceGuys\\Intl\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bojan Zivanovic"
+                }
+            ],
+            "description": "Internationalization library powered by CLDR data.",
+            "time": "2018-06-21T14:03:04+00:00"
+        },
+        {
+            "name": "dimsav/laravel-translatable",
+            "version": "v9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dimsav/laravel-translatable.git",
+                "reference": "a174b327342e882df7df9d971cf36ae678c16088"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dimsav/laravel-translatable/zipball/a174b327342e882df7df9d971cf36ae678c16088",
+                "reference": "a174b327342e882df7df9d971cf36ae678c16088",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.6.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.6.*",
+                "phpunit/phpunit": "~7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dimsav\\Translatable\\TranslatableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dimsav\\Translatable\\": "src/Translatable/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dimitrios Savvopoulos",
+                    "email": "ds@dimsav.com",
+                    "homepage": "http://dimsav.com"
+                }
+            ],
+            "description": "A Laravel package for multilingual models",
+            "keywords": [
+                "database",
+                "language",
+                "laravel",
+                "translation"
+            ],
+            "time": "2018-02-10T14:10:41+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
@@ -452,6 +551,71 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "jenssegers/date",
+            "version": "v3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/date.git",
+                "reference": "3f5f94f28bd5108fab011869434209101d4189ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/date/zipball/3f5f94f28bd5108fab011869434209101d4189ae",
+                "reference": "3f5f94f28bd5108fab011869434209101d4189ae",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^1.0",
+                "php": ">=5.6",
+                "symfony/translation": "^2.7|^3.0|^4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.0|^6.0|^7.0",
+                "satooshi/php-coveralls": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Jenssegers\\Date\\DateServiceProvider"
+                    ],
+                    "aliases": {
+                        "Date": "Jenssegers\\Date\\Date"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jenssegers\\Date\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "https://jenssegers.com"
+                }
+            ],
+            "description": "A date library to help you work with dates in different languages",
+            "homepage": "https://github.com/jenssegers/date",
+            "keywords": [
+                "carbon",
+                "date",
+                "datetime",
+                "i18n",
+                "laravel",
+                "time",
+                "translation"
+            ],
+            "time": "2018-05-16T11:53:55+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1041,6 +1205,69 @@
             "time": "2018-06-08T15:26:40+00:00"
         },
         {
+            "name": "propaganistas/laravel-intl",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Propaganistas/Laravel-Intl.git",
+                "reference": "645a34430ae92d287e97a06815d613be1f3002b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Propaganistas/Laravel-Intl/zipball/645a34430ae92d287e97a06815d613be1f3002b5",
+                "reference": "645a34430ae92d287e97a06815d613be1f3002b5",
+                "shasum": ""
+            },
+            "require": {
+                "commerceguys/intl": "^1.0.1",
+                "illuminate/support": ">=5.1,<5.7",
+                "jenssegers/date": "^3.2.3",
+                "php": ">=7.0",
+                "punic/punic": "^3.1",
+                "umpirsky/country-list": "^2.0",
+                "umpirsky/locale-list": "^1.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": ">=3.1",
+                "phpunit/phpunit": "^5.0|^6.0|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Propaganistas\\LaravelIntl\\IntlServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Propaganistas\\LaravelIntl\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Propaganistas",
+                    "email": "Propaganistas@users.noreply.github.com"
+                }
+            ],
+            "description": "Easy to use internationalization functions for Laravel",
+            "keywords": [
+                "i18n",
+                "internationalization",
+                "intl",
+                "l10n",
+                "laravel"
+            ],
+            "time": "2018-07-03T07:55:17+00:00"
+        },
+        {
             "name": "psr/container",
             "version": "1.0.0",
             "source": {
@@ -1255,6 +1482,75 @@
                 "shell"
             ],
             "time": "2018-06-10T17:57:20+00:00"
+        },
+        {
+            "name": "punic/punic",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/punic/punic.git",
+                "reference": "bd49ff54ea6ee8a902a567905664ecc7840037d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/punic/punic/zipball/bd49ff54ea6ee8a902a567905664ecc7840037d6",
+                "reference": "bd49ff54ea6ee8a902a567905664ecc7840037d6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "replace": {
+                "punic/calendar": "*",
+                "punic/common": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "2.2.*",
+                "phpunit/phpunit": "^4"
+            },
+            "bin": [
+                "bin/punic-data"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Punic\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michele Locati",
+                    "email": "mlocati@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Remo Laubacher",
+                    "email": "remo.laubacher@gmail.com",
+                    "role": "Collaborator, motivator and perfectionist supporter"
+                }
+            ],
+            "description": "PHP-Unicode CLDR",
+            "homepage": "https://github.com/punic/punic",
+            "keywords": [
+                "calendar",
+                "cldr",
+                "date",
+                "date-time",
+                "i18n",
+                "internationalization",
+                "l10n",
+                "localization",
+                "php",
+                "time",
+                "translate",
+                "translations",
+                "unicode"
+            ],
+            "time": "2018-02-09T15:54:34+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -2307,6 +2603,83 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2017-11-27T11:13:29+00:00"
+        },
+        {
+            "name": "umpirsky/country-list",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/umpirsky/country-list.git",
+                "reference": "ddabf3a8ef2956fc0fbd22da9bec642ab6cfdede"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/umpirsky/country-list/zipball/ddabf3a8ef2956fc0fbd22da9bec642ab6cfdede",
+                "reference": "ddabf3a8ef2956fc0fbd22da9bec642ab6cfdede",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "slowprog/composer-copy-file": "^0.2",
+                "symfony/locale": "^2.7|^3.0",
+                "umpirsky/list-generator": "^1.2"
+            },
+            "type": "library",
+            "extra": {
+                "copy-file": {
+                    "vendor/umpirsky/list-generator/Dockerfile": "./",
+                    "vendor/umpirsky/list-generator/docker-compose.yml": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Saša Stamenković",
+                    "email": "umpirsky@gmail.com"
+                }
+            ],
+            "description": "List of all countries with names and ISO 3166-1 codes in all languages and data formats.",
+            "time": "2018-02-27T18:55:19+00:00"
+        },
+        {
+            "name": "umpirsky/locale-list",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/umpirsky/locale-list.git",
+                "reference": "8141f749e16e568a5a9f7e813c50f72efa794c2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/umpirsky/locale-list/zipball/8141f749e16e568a5a9f7e813c50f72efa794c2e",
+                "reference": "8141f749e16e568a5a9f7e813c50f72efa794c2e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "symfony/locale": "^2.7|^3.0",
+                "umpirsky/list-generator": "^1.1"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Saša Stamenković",
+                    "email": "umpirsky@gmail.com"
+                }
+            ],
+            "description": "List of all locales with names and codes in all languages and all data formats.",
+            "time": "2018-06-01T17:50:07+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

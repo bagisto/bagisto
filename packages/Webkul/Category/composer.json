@@ -1,0 +1,25 @@
+{
+    "name": "webkul/laravel-category",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jitendra Singh",
+            "email": "jitendra@webkul.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Webkul\\Attribute\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\Attribute\\Providers\\AttributeServiceProvider"
+            ],
+            "aliases": { }
+        }
+    },
+    "minimum-stability": "dev"
+}

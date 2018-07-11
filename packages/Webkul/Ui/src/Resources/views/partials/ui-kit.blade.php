@@ -344,6 +344,10 @@
                 </span>
 
                 <span class="icon-wrapper">
+                    <i class="icon arrow-right-icon"></i>
+                </span>
+
+                <span class="icon-wrapper">
                     <i class="icon white-cross-sm-icon"></i>
                 </span>
 

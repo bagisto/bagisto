@@ -177,8 +177,8 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);
-__webpack_require__(17);
-module.exports = __webpack_require__(19);
+__webpack_require__(19);
+module.exports = __webpack_require__(21);
 
 
 /***/ }),
@@ -189,7 +189,8 @@ Vue.component('flash-wrapper', __webpack_require__(3));
 Vue.component('flash', __webpack_require__(6));
 Vue.component('accordian', __webpack_require__(9));
 Vue.component('tree-view', __webpack_require__(12));
-Vue.component('tree-checkbox', __webpack_require__(14));
+Vue.component('tree-item', __webpack_require__(14));
+Vue.component('tree-checkbox', __webpack_require__(16));
 
 /***/ }),
 /* 3 */
@@ -388,7 +389,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var this_this = this;
         setTimeout(function () {
             this_this.$emit('onRemoveFlash', this_this.flash);
-        }, 1000);
+        }, 5000);
     },
 
     methods: {
@@ -491,6 +492,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         title: String,
+        id: String,
+        className: String,
         active: Boolean
     },
 
@@ -530,7 +533,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "accordian", class: { active: _vm.isActive } },
+    {
+      staticClass: "accordian",
+      class: [_vm.isActive ? "active" : "", _vm.className],
+      attrs: { id: _vm.id }
+    },
     [
       _c(
         "div",
@@ -616,7 +623,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'tree-view',
@@ -624,36 +631,40 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     inheritAttrs: false,
 
     props: {
+        idField: {
+            type: String,
+            required: false,
+            default: 'id'
+        },
+
+        captionField: {
+            type: String,
+            required: false,
+            default: 'name'
+        },
+
+        childrenField: {
+            type: String,
+            required: false,
+            default: 'children'
+        },
+
+        valueField: {
+            type: String,
+            required: false,
+            default: 'value'
+        },
+
         items: {
-            type: Object,
+            type: [Array, String, Object],
             required: false,
             default: function _default() {
-                return {
-                    "name": "Root",
-                    "value": "1",
-                    "children": [{
-                        "name": "First Child",
-                        "value": "2"
-                    }, {
-                        "name": "Second Child",
-                        "value": "3",
-                        "children": [{
-                            "name": "GrandChild 1",
-                            "value": "4"
-                        }, {
-                            "name": "GrandChild 2",
-                            "value": "5"
-                        }, {
-                            "name": "GrandChild 3",
-                            "value": "6"
-                        }]
-                    }]
-                };
+                return [];
             }
         },
 
         value: {
-            type: Array,
+            type: [Array, String, Object],
             required: false,
             default: function _default() {
                 return [];
@@ -661,116 +672,58 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         }
     },
 
+    data: function data() {
+        return {
+            finalValues: []
+        };
+    },
+
     computed: {
-        allChildren: function allChildren() {
-            var leafs = [];
-            var searchTree = function searchTree(items) {
-                if (!!items['children'] && items['children'].length > 0) {
-                    items['children'].forEach(function (child) {
-                        return searchTree(child);
-                    });
-                } else {
-                    leafs.push(items);
-                }
-            };
+        savedValues: function savedValues() {
+            if (!this.value) return [];
 
-            searchTree(this.items);
-
-            return leafs;
-        },
-        hasChildren: function hasChildren() {
-            return !!this.items['children'] && this.items['children'].length > 0;
-        },
-        hasSelection: function hasSelection() {
-            return !!this.value && this.value.length > 0;
-        },
-        isAllChildrenSelected: function isAllChildrenSelected() {
-            var _this = this;
-
-            return this.hasChildren && this.hasSelection && this.allChildren.every(function (leaf) {
-                return _this.value.some(function (sel) {
-                    return sel === leaf;
-                });
-            });
-        },
-        isSomeChildrenSelected: function isSomeChildrenSelected() {
-            var _this2 = this;
-
-            return this.hasSelection && this.allChildren.some(function (leaf) {
-                return _this2.value.some(function (sel) {
-                    return sel === leaf;
-                });
-            });
+            return typeof this.value == 'string' ? JSON.parse(this.value) : this.value;
         }
     },
 
     methods: {
-        generateRoot: function generateRoot() {
-            var _this3 = this;
-
-            return this.$createElement('tree-checkbox', {
-                props: {
-                    label: this.items['name'],
-                    inputValue: this.hasChildren ? this.isAllChildrenSelected : this.value,
-                    value: this.hasChildren ? this.isAllChildrenSelected : this.items
-                },
-                on: {
-                    change: function change(selection) {
-                        if (_this3.hasChildren) {
-                            if (_this3.isAllChildrenSelected) {
-                                _this3.allChildren.forEach(function (leaf) {
-                                    var index = _this3.value.indexOf(leaf);
-                                    _this3.value.splice(index, 1);
-                                });
-                            } else {
-                                _this3.allChildren.forEach(function (leaf) {
-                                    var index = _this3.value.indexOf(leaf);
-                                    if (index === -1) {
-                                        _this3.value.push(leaf);
-                                    }
-                                });
-                            }
-
-                            _this3.$emit('input', _this3.value);
-                        } else {
-                            _this3.$emit('input', selection);
-                        }
-                    }
-                }
-            });
-        },
-        generateChild: function generateChild(child) {
-            var _this4 = this;
-
-            return this.$createElement('tree-view', {
-                class: 'tree-item',
-                on: {
-                    input: function input(selection) {
-                        _this4.$emit('input', selection);
-                    }
-                },
-                props: {
-                    items: child,
-                    value: this.value
-                }
-            });
-        },
         generateChildren: function generateChildren() {
-            var _this5 = this;
-
             var childElements = [];
-            if (this.items['children']) {
-                this.items['children'].forEach(function (child) {
-                    childElements.push(_this5.generateChild(child));
-                });
+
+            var items = typeof this.items == 'string' ? JSON.parse(this.items) : this.items;
+
+            for (var key in items) {
+                childElements.push(this.generateTreeItem(items[key]));
             }
 
             return childElements;
+        },
+        generateTreeItem: function generateTreeItem(item) {
+            var _this = this;
+
+            return this.$createElement('tree-item', {
+                props: {
+                    items: item,
+                    value: this.finalValues,
+                    savedValues: this.savedValues,
+                    captionField: this.captionField,
+                    childrenField: this.childrenField,
+                    valueField: this.valueField,
+                    idField: this.idField
+                },
+                on: {
+                    input: function input(selection) {
+                        _this.finalValues = selection;
+                    }
+                }
+            });
         }
     },
 
     render: function render(createElement) {
-        return createElement('div', {}, [this.generateRoot()].concat(_toConsumableArray(this.generateChildren())));
+        return createElement('div', {
+            class: ['tree-container']
+        }, [this.generateChildren()]);
     }
 });
 
@@ -783,7 +736,274 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(15)
 /* template */
-var __vue_template__ = __webpack_require__(16)
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/components/tree-view/tree-item.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2af003eb", Component.options)
+  } else {
+    hotAPI.reload("data-v-2af003eb", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'tree-view',
+
+    inheritAttrs: false,
+
+    props: {
+        idField: String,
+
+        captionField: String,
+
+        childrenField: String,
+
+        valueField: String,
+
+        items: {
+            type: [Array, String, Object],
+            required: false,
+            default: null
+        },
+
+        value: {
+            type: Array,
+            required: false,
+            default: null
+        },
+
+        savedValues: {
+            type: Array,
+            required: false,
+            default: null
+        }
+    },
+
+    created: function created() {
+        var index = this.savedValues.indexOf(this.items[this.valueField]);
+        if (index !== -1) {
+            this.value.push(this.items);
+        }
+    },
+
+
+    computed: {
+        caption: function caption() {
+            return this.items[this.captionField];
+        },
+        allChildren: function allChildren() {
+            var _this = this;
+
+            var leafs = [];
+            var searchTree = function searchTree(items) {
+                if (!!items[_this.childrenField] && _this.getLength(items[_this.childrenField]) > 0) {
+                    if (_typeof(items[_this.childrenField]) == 'object') {
+                        for (var key in items[_this.childrenField]) {
+                            searchTree(items[_this.childrenField][key]);
+                        }
+                    } else {
+                        items[_this.childrenField].forEach(function (child) {
+                            return searchTree(child);
+                        });
+                    }
+                } else {
+                    leafs.push(items);
+                }
+            };
+
+            searchTree(this.items);
+
+            return leafs;
+        },
+        hasChildren: function hasChildren() {
+            return !!this.items[this.childrenField] && this.getLength(this.items[this.childrenField]) > 0;
+        },
+        hasSelection: function hasSelection() {
+            return !!this.value && this.value.length > 0;
+        },
+        isAllChildrenSelected: function isAllChildrenSelected() {
+            var _this2 = this;
+
+            return this.hasChildren && this.hasSelection && this.allChildren.every(function (leaf) {
+                return _this2.value.some(function (sel) {
+                    return sel[_this2.idField] === leaf[_this2.idField];
+                });
+            });
+        },
+        isSomeChildrenSelected: function isSomeChildrenSelected() {
+            var _this3 = this;
+
+            return this.hasChildren && this.hasSelection && this.allChildren.some(function (leaf) {
+                return _this3.value.some(function (sel) {
+                    return sel[_this3.idField] === leaf[_this3.idField];
+                });
+            });
+        }
+    },
+
+    methods: {
+        getLength: function getLength(items) {
+            if ((typeof items === 'undefined' ? 'undefined' : _typeof(items)) == 'object') {
+                var length = 0;
+
+                for (var item in items) {
+                    length++;
+                }
+
+                return length;
+            }
+
+            return items.length;
+        },
+        generateRoot: function generateRoot() {
+            var _this4 = this;
+
+            return this.$createElement('tree-checkbox', {
+                props: {
+                    id: this.items[this.idField],
+                    label: this.caption,
+                    modelValue: this.items[this.valueField],
+                    inputValue: this.hasChildren ? this.isSomeChildrenSelected : this.value,
+                    value: this.hasChildren ? this.isAllChildrenSelected : this.items
+                },
+                on: {
+                    change: function change(selection) {
+                        if (_this4.hasChildren) {
+                            if (_this4.isAllChildrenSelected) {
+                                _this4.allChildren.forEach(function (leaf) {
+                                    var index = _this4.value.indexOf(leaf);
+                                    _this4.value.splice(index, 1);
+                                });
+                            } else {
+                                _this4.allChildren.forEach(function (leaf) {
+                                    var exists = false;
+                                    _this4.value.forEach(function (item) {
+                                        if (item['key'] == leaf['key']) {
+                                            exists = true;
+                                        }
+                                    });
+
+                                    if (!exists) {
+                                        _this4.value.push(leaf);
+                                    }
+                                });
+                            }
+
+                            _this4.$emit('input', _this4.value);
+                        } else {
+                            _this4.$emit('input', selection);
+                        }
+                    }
+                }
+            });
+        },
+        generateChild: function generateChild(child) {
+            var _this5 = this;
+
+            return this.$createElement('tree-item', {
+                on: {
+                    input: function input(selection) {
+                        _this5.$emit('input', selection);
+                    }
+                },
+                props: {
+                    items: child,
+                    value: this.value,
+                    savedValues: this.savedValues,
+                    captionField: this.captionField,
+                    childrenField: this.childrenField,
+                    valueField: this.valueField,
+                    idField: this.idField
+                }
+            });
+        },
+        generateChildren: function generateChildren() {
+            var _this6 = this;
+
+            var childElements = [];
+            if (this.items[this.childrenField]) {
+                if (_typeof(this.items[this.childrenField]) == 'object') {
+                    for (var key in this.items[this.childrenField]) {
+                        childElements.push(this.generateChild(this.items[this.childrenField][key]));
+                    }
+                } else {
+                    this.items[this.childrenField].forEach(function (child) {
+                        childElements.push(_this6.generateChild(child));
+                    });
+                }
+            }
+
+            return childElements;
+        },
+        generateIcon: function generateIcon() {
+            var _this7 = this;
+
+            return this.$createElement('i', {
+                class: ['expand-icon'],
+                on: {
+                    click: function click(selection) {
+                        _this7.$el.classList.toggle("active");
+                    }
+                }
+            });
+        }
+    },
+
+    render: function render(createElement) {
+        return createElement('div', {
+            class: ['tree-item', 'active', this.hasChildren ? 'has-children' : '']
+        }, [this.generateIcon(), this.generateRoot()].concat(_toConsumableArray(this.generateChildren())));
+    }
+});
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(17)
+/* template */
+var __vue_template__ = __webpack_require__(18)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -822,7 +1042,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -839,14 +1059,76 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'tree-checkbox',
 
-    props: ['label', 'inputValue', 'value'],
+    props: ['id', 'label', 'modelValue', 'inputValue', 'value'],
+
+    computed: {
+        isMultiple: function isMultiple() {
+            return Array.isArray(this.internalValue);
+        },
+        isActive: function isActive() {
+            var _this = this;
+
+            var value = this.value;
+            var input = this.internalValue;
+
+            if (this.isMultiple) {
+                return input.some(function (item) {
+                    return _this.valueComparator(item, value);
+                });
+            }
+
+            return value ? this.valueComparator(value, input) : Boolean(input);
+        },
+
+
+        internalValue: {
+            get: function get() {
+                return this.lazyValue;
+            },
+            set: function set(val) {
+                this.lazyValue = val;
+                this.$emit('input', val);
+            }
+        }
+    },
+
+    data: function data(vm) {
+        return {
+            lazyValue: vm.inputValue
+        };
+    },
+
+    watch: {
+        inputValue: function inputValue(val) {
+            this.internalValue = val;
+        }
+    },
 
     methods: {
-        inputChanged: function inputChanged(e) {
-            this.$emit('change', this.inputValue);
+        inputChanged: function inputChanged() {
+            var _this2 = this;
+
+            var value = this.value;
+            var input = this.internalValue;
+
+            if (this.isMultiple) {
+                var length = input.length;
+
+                input = input.filter(function (item) {
+                    return !_this2.valueComparator(item, value);
+                });
+
+                if (input.length === length) {
+                    input.push(value);
+                }
+            } else {
+                input = !input;
+            }
+
+            this.$emit('change', input);
         },
         valueComparator: function valueComparator(a, b) {
-            var _this = this;
+            var _this3 = this;
 
             if (a === b) return true;
 
@@ -861,38 +1143,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             return props.every(function (p) {
-                return _this.valueComparator(a[p], b[p]);
+                return _this3.valueComparator(a[p], b[p]);
             });
-        }
-    },
-
-    computed: {
-        isMultiple: function isMultiple() {
-            return Array.isArray(this.inputValue);
-        },
-        isActive: function isActive() {
-            var _this2 = this;
-
-            var value = this.value;
-            var input = this.inputValue;
-
-            if (this.isMultiple) {
-                if (!Array.isArray(input)) return false;
-
-                return input.some(function (item) {
-                    return _this2.valueComparator(item, value);
-                });
-            }
-
-            var isChecked = value ? this.valueComparator(value, input) : Boolean(input);
-
-            return isChecked;
         }
     }
 });
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -901,26 +1159,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("span", { staticClass: "checkbox" }, [
     _c("input", {
-      attrs: { type: "checkbox", name: "permissions[]", id: _vm.inputValue },
-      domProps: { value: _vm.inputValue.value, checked: _vm.isActive },
+      attrs: { type: "checkbox", id: _vm.id, name: "permissions[]" },
+      domProps: { value: _vm.modelValue, checked: _vm.isActive },
       on: {
         change: function($event) {
-          _vm.inputChanged($event)
+          _vm.inputChanged()
         }
       }
     }),
     _vm._v(" "),
-    _c("label", {
-      staticClass: "checkbox-view",
-      attrs: { for: _vm.inputValue }
-    }),
-    _vm._v(
-      "\n    " +
-        _vm._s(_vm.inputValue) +
-        " ======== " +
-        _vm._s(_vm.value) +
-        "\n"
-    )
+    _c("label", { staticClass: "checkbox-view", attrs: { for: _vm.id } }),
+    _vm._v(" "),
+    _c("span", { attrs: { for: _vm.id } }, [_vm._v(_vm._s(_vm.label))])
   ])
 }
 var staticRenderFns = []
@@ -934,10 +1184,10 @@ if (false) {
 }
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-window.jQuery = window.$ = $ = __webpack_require__(18);
+window.jQuery = window.$ = $ = __webpack_require__(20);
 
 $(function () {
     $(document).click(function (e) {
@@ -1002,7 +1252,7 @@ $(function () {
 });
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11373,7 +11623,7 @@ return jQuery;
 
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
