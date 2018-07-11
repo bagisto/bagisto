@@ -57,7 +57,9 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('admin.catalog.attributes.store');
             });
 
-
+            // Datagrid Routes
+            Route::get('/datagrid', 'Webkul\Admin\Http\Controllers\DataGridController@index')->name('admin.datagrid.index');
+            
             // User Routes
             Route::get('/users', 'Webkul\User\Http\Controllers\UserController@index')->defaults('_config', [
                 'view' => 'admin::users.users.index'
