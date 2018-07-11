@@ -33,46 +33,28 @@
             items: {
                 type: [Array, String, Object],
                 required: false,
-                default: () => ([{
-                        "name": "Dashboard",
-                        "value": "1",
-                    }, {
-                        "name": "Root",
-                        "value": "2",
-                        "children": [{
-                                "name": "First Child",
-                                "value": "3",
-                            }, {
-                                "name": "Second Child",
-                                "value": "4",
-                                "children": [{
-                                    "name": "GrandChild 1",
-                                    "value": "5",
-                                }, {
-                                    "name": "GrandChild 2",
-                                    "value": "6",
-                                }, {
-                                    "name":"GrandChild 3",
-                                    "value": "7",
-                                }]
-                            }]
-                    }])
+                default: () => ([])
             },
 
             value: {
-                type: Array,
+                type: [Array, String, Object],
                 required: false,
                 default: () => ([])
             }
         },
 
-        created() {
-            this.finalValues = this.value;
-        },
-
         data: () => ({
             finalValues: [] 
         }),
+        
+        computed: {
+            savedValues () {
+                if(!this.value)
+                    return [];
+
+                return (typeof this.value == 'string') ? JSON.parse(this.value) : this.value;
+            }
+        },
 
 
         methods: {
@@ -93,6 +75,7 @@
                         props: {
                             items: item,
                             value: this.finalValues,
+                            savedValues: this.savedValues,
                             captionField: this.captionField,
                             childrenField: this.childrenField,
                             valueField: this.valueField,

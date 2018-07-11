@@ -10,11 +10,11 @@ use Webkul\Ui\Menu;
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * Register services.
+     * Bootstrap services.
      *
      * @return void
      */
-    public function register()
+    public function boot()
     {
         $this->createAdminMenu();
 
@@ -39,6 +39,10 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('admin.menu.build', function($menu) {
             $menu->add('dashboard', 'Dashboard', 'admin.dashboard.index', 1, 'dashboard-icon');
 
+            $menu->add('catalog', 'Catalog', 'admin.catalog.attributes.index', 3, 'catalog-icon');
+
+            $menu->add('catalog.attributes', 'Attributes', 'admin.catalog.attributes.index', 3);
+
             $menu->add('configuration', 'Configure', 'admin.account.edit', 6, 'configuration-icon');
 
             $menu->add('configuration.account', 'My Account', 'admin.account.edit', 1);
@@ -50,6 +54,8 @@ class EventServiceProvider extends ServiceProvider
             $menu->add('settings.users.users', 'Users', 'admin.users.index', 1, '');
 
             $menu->add('settings.users.roles', 'Roles', 'admin.roles.index', 2, '');
+
+            $menu->add('settings.locales', 'Locales', 'admin.locales.index', 2, '');
         });
     }
 
@@ -67,13 +73,11 @@ class EventServiceProvider extends ServiceProvider
 
             $acl->add('settings', 'Settings', 'admin.users.index', 6);
 
-            $acl->add('settings.users', 'Users', 'admin.users.index');
+            $acl->add('settings.users', 'Users', 'admin.users.index', 1);
 
-            $acl->add('settings.users.users', 'Users', 'admin.users.index');
+            $acl->add('settings.users.users', 'Users', 'admin.users.index', 1);
 
-            $acl->add('settings.users.roles', 'Roles', 'admin.roles.index');
-
-            $acl->add('settings.users.roles1', 'Roles 1', 'admin.roles.index');
+            $acl->add('settings.users.roles', 'Roles', 'admin.roles.index', 2);
         });
     }
 

@@ -14,6 +14,10 @@
     @extend %menu-properties;
     background-image: url('../images/Icon-Dashboard.svg');
 }
+.catalog-icon {
+    @extend %menu-properties;
+    background-image: url('../images/Icon-Catalog.svg');
+}
 .configuration-icon {
     @extend %menu-properties;
     background-image: url('../images/Icon-Configure.svg');
@@ -107,16 +111,19 @@
 }
 
 .active {
-    .icon-dashboard {
+    .dashboard-icon {
         background-image: url('../images/Icon-Dashboard-Active.svg');
     }
 
-    .icon-settings {
+    .catalog-icon {
+        background-image: url('../images/Icon-Catalog-Active.svg');
+    }
+
+    .settings-icon {
         background-image: url('../images/Icon-Settings-Active.svg');
     }
 
-    .icon-configuration {
-        @extend %menu-properties;
+    .configuration-icon {
         background-image: url('../images/Icon-Configure-Active.svg');
     }
 

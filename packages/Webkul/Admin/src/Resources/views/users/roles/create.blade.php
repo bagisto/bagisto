@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="control-group">
-                                <tree-view value-field="route" id-field="key" value-field="route" items='@json($acl->items)'></tree-view>
+                                <tree-view value-field="key" id-field="key" items='@json($acl->items)'></tree-view>
                             </div>
                         </div>
                     </accordian>

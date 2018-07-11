@@ -492,6 +492,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         title: String,
+        id: String,
+        className: String,
         active: Boolean
     },
 
@@ -531,7 +533,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "accordian", class: { active: _vm.isActive } },
+    {
+      staticClass: "accordian",
+      class: [_vm.isActive ? "active" : "", _vm.className],
+      attrs: { id: _vm.id }
+    },
     [
       _c(
         "div",
@@ -653,35 +659,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             type: [Array, String, Object],
             required: false,
             default: function _default() {
-                return [{
-                    "name": "Dashboard",
-                    "value": "1"
-                }, {
-                    "name": "Root",
-                    "value": "2",
-                    "children": [{
-                        "name": "First Child",
-                        "value": "3"
-                    }, {
-                        "name": "Second Child",
-                        "value": "4",
-                        "children": [{
-                            "name": "GrandChild 1",
-                            "value": "5"
-                        }, {
-                            "name": "GrandChild 2",
-                            "value": "6"
-                        }, {
-                            "name": "GrandChild 3",
-                            "value": "7"
-                        }]
-                    }]
-                }];
+                return [];
             }
         },
 
         value: {
-            type: Array,
+            type: [Array, String, Object],
             required: false,
             default: function _default() {
                 return [];
@@ -689,15 +672,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
 
-    created: function created() {
-        this.finalValues = this.value;
-    },
-
-
     data: function data() {
         return {
             finalValues: []
         };
+    },
+
+    computed: {
+        savedValues: function savedValues() {
+            if (!this.value) return [];
+
+            return typeof this.value == 'string' ? JSON.parse(this.value) : this.value;
+        }
     },
 
     methods: {
@@ -719,6 +705,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 props: {
                     items: item,
                     value: this.finalValues,
+                    savedValues: this.savedValues,
                     captionField: this.captionField,
                     childrenField: this.childrenField,
                     valueField: this.valueField,
@@ -821,8 +808,22 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             type: Array,
             required: false,
             default: null
+        },
+
+        savedValues: {
+            type: Array,
+            required: false,
+            default: null
         }
     },
+
+    created: function created() {
+        var index = this.savedValues.indexOf(this.items[this.valueField]);
+        if (index !== -1) {
+            this.value.push(this.items);
+        }
+    },
+
 
     computed: {
         caption: function caption() {
@@ -946,6 +947,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 props: {
                     items: child,
                     value: this.value,
+                    savedValues: this.savedValues,
                     captionField: this.captionField,
                     childrenField: this.childrenField,
                     valueField: this.valueField,

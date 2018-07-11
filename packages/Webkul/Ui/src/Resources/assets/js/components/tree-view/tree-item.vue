@@ -24,6 +24,19 @@
                 type: Array,
                 required: false,
                 default: null
+            },
+
+            savedValues: {
+                type: Array,
+                required: false,
+                default: null
+            }
+        },
+
+        created () {
+            let index = this.savedValues.indexOf(this.items[this.valueField])
+            if(index !== -1) {
+                this.value.push(this.items);
             }
         },
 
@@ -136,6 +149,7 @@
                     props: {
                         items: child,
                         value: this.value,
+                        savedValues: this.savedValues,
                         captionField: this.captionField,
                         childrenField: this.childrenField,
                         valueField: this.valueField,

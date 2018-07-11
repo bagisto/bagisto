@@ -9,7 +9,8 @@
     ],
     "require": {
         "webkul/laravel-user": "dev-master",
-        "webkul/laravel-ui": "dev-master"
+        "webkul/laravel-ui": "dev-master",
+        "webkul/laravel-core": "dev-master"
     },
     "autoload": {
         "psr-4": {

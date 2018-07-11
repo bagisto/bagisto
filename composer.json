@@ -6,10 +6,12 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
+        "dimsav/laravel-translatable": "^9.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
-        "nwidart/laravel-modules": "^3.2"
+        "nwidart/laravel-modules": "^3.2",
+        "propaganistas/laravel-intl": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
@@ -22,7 +24,9 @@
     "replace": {
         "webkul/laravel-user": "self.version",
         "webkul/laravel-admin": "self.version",
-        "webkul/laravel-ui": "self.version"
+        "webkul/laravel-ui": "self.version",
+        "webkul/laravel-core": "self.version",
+        "webkul/laravel-attribute": "self.version"
     },
     "autoload": {
         "classmap": [
@@ -33,7 +37,9 @@
             "App\\": "app/",
             "Webkul\\User\\": "packages/Webkul/User/src",
             "Webkul\\Admin\\": "packages/Webkul/Admin/src",
-            "Webkul\\Ui\\": "packages/Webkul/Ui/src"
+            "Webkul\\Ui\\": "packages/Webkul/Ui/src",
+            "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
+            "Webkul\\Core\\": "packages/Webkul/Core/src"
         }
     },
     "autoload-dev": {

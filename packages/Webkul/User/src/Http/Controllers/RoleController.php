@@ -64,7 +64,6 @@ class RoleController extends Controller
             'permission_type' => 'required',
         ]);
 
-
         Role::create(request()->all());
 
         session()->flash('success', 'Role created successfully.');
@@ -94,9 +93,14 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate(request(), [
+            'name' => 'required',
+            'permission_type' => 'required',
+        ]);
+        
         $role = Role::findOrFail($id);
 
-        $role->update(request(['name', 'description', 'permissions']));
+        $role->update(request()->all());
 
         session()->flash('success', 'Role updated successfully.');
 

@@ -36,8 +36,27 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/logout', 'Webkul\User\Http\Controllers\SessionController@destroy')->defaults('_config', [
                 'redirect' => 'admin.session.create'
             ])->name('admin.session.destroy');
-            
+
+
+            // Dashboard Route
             Route::get('/dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->name('admin.dashboard.index');
+
+
+            // Catalog Routes
+            Route::prefix('catalog')->group(function () {
+                Route::get('/attributes', 'Webkul\Attribute\Http\Controllers\AttributeController@index')->defaults('_config', [
+                    'view' => 'admin::catalog.attributes.index'
+                ])->name('admin.catalog.attributes.index');
+
+                Route::get('/attributes/create', 'Webkul\Attribute\Http\Controllers\AttributeController@create')->defaults('_config', [
+                    'view' => 'admin::catalog.attributes.create'
+                ])->name('admin.catalog.attributes.create');
+
+                Route::post('/attributes/create', 'Webkul\Attribute\Http\Controllers\AttributeController@store')->defaults('_config', [
+                    'redirect' => 'admin.catalog.attributes.index'
+                ])->name('admin.catalog.attributes.store');
+            });
+
 
             // User Routes
             Route::get('/users', 'Webkul\User\Http\Controllers\UserController@index')->defaults('_config', [
@@ -60,6 +79,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.users.index'
             ])->name('admin.users.update');
 
+
             // User Role Routes
             Route::get('/roles', 'Webkul\User\Http\Controllers\RoleController@index')->defaults('_config', [
                 'view' => 'admin::users.roles.index'
@@ -80,6 +100,20 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('/roles/edit/{id}', 'Webkul\User\Http\Controllers\RoleController@update')->defaults('_config', [
                 'redirect' => 'admin.roles.index'
             ])->name('admin.roles.update');
+
+
+            // Locale Routes
+            Route::get('/locales', 'Webkul\Core\Http\Controllers\LocaleController@index')->defaults('_config', [
+                'view' => 'admin::locales.index'
+            ])->name('admin.locales.index');
+            
+            Route::get('/locales/create', 'Webkul\Core\Http\Controllers\LocaleController@create')->defaults('_config', [
+                'view' => 'admin::locales.create'
+            ])->name('admin.locales.create');
+
+            Route::post('/locales/create', 'Webkul\Core\Http\Controllers\LocaleController@store')->defaults('_config', [
+                'redirect' => 'admin.locales.index'
+            ])->name('admin.locales.store');
 
 
             // Admin Profile route

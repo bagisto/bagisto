@@ -18,11 +18,11 @@ class AdminServiceProvider extends ServiceProvider
     {
         include __DIR__ . '/../Http/routes.php';
 
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'admin');
+
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/admin/assets'),
         ], 'public');
-
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'admin');
 
@@ -60,7 +60,7 @@ class AdminServiceProvider extends ServiceProvider
                         ];
                 }
             }
-            
+
             $view->with('menu', $menu)->with('subMenus', $subMenus)->with('tabs', $tabs);
         });
     }

@@ -22,7 +22,7 @@ class UserServiceProvider extends ServiceProvider
     {
         $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->createACL();
     }
@@ -49,6 +49,10 @@ class UserServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerBouncer();
+
+        Event::listen('admin.acl.build', function($acl) {
+            $acl->add('settings.users.roles1', 'Roles1', 'admin.roles.index1', 3);
+        });
     }
     
     /**

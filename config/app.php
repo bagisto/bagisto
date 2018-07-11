@@ -151,6 +151,9 @@ return [
          * Package Service Providers...
          */
 
+        Dimsav\Translatable\TranslatableServiceProvider::class,
+        Propaganistas\LaravelIntl\IntlServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -163,7 +166,9 @@ return [
         
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
-        Webkul\Ui\Providers\UiServiceProvider::class
+        Webkul\Ui\Providers\UiServiceProvider::class,
+        Webkul\Attribute\Providers\AttributeServiceProvider::class,
+        Webkul\Core\Providers\CoreServiceProvider::class
     ],
 
     /*

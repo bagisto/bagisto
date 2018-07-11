@@ -67,6 +67,9 @@ class Menu {
 	 * @return void
 	 */
 	public function sortItems($items) {
+		if(!$items) {
+			return;
+		}
 		usort($items, function($a, $b) {
 			if ($a['sort'] == $b['sort']) {
 				return 0;
