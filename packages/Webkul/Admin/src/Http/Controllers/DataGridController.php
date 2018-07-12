@@ -98,6 +98,13 @@ class DataGridController extends Controller
                     'filterable' => true,
                 ],
                 [
+                    'name' => 'r.id',
+                    'type' => 'string',
+                    'label' => 'Role Table ID',
+                    'sortable' => true,
+                    'filterable' => true,
+                ],
+                [
                     'name' => 'r.name',
                     'type' => 'string',
                     'label' => 'Role Name',
