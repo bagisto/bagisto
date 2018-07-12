@@ -4,7 +4,7 @@ namespace Webkul\Ui\DataGrid\Helpers;
 use Illuminate\Http\Request;
 
 class Column extends AbstractFillable
-{   
+{
     const SORT = 'sort';
     const ORDER_DESC = 'DESC';
     const ORDER_ASC = 'ASC';
@@ -12,7 +12,8 @@ class Column extends AbstractFillable
     private $request = null;
     private $readableName = false;
     private $value = false;
-    private $sortHtml = '<a href="%s">%s</a>';
+    // private $sortHtml = '<a href="%s">%s</a>';
+    private $sortHtml = '<span href="%s">%s</span>';
 
     // protected $name;
     // protected $type;
@@ -25,8 +26,8 @@ class Column extends AbstractFillable
 
 
     /**
-     * Without Array it will treat it like string 
-     * 
+     * Without Array it will treat it like string
+     *
      * [
      *      'name',
      *      'Name',
@@ -45,7 +46,8 @@ class Column extends AbstractFillable
      *       },
      * ]
      */
-    protected function setFillable(){
+    protected function setFillable()
+    {
         $this->fillable = [
             'name',
             'type',
@@ -69,56 +71,79 @@ class Column extends AbstractFillable
         ];
     }
 
-    public function __construct($args, $request = null){
+    public function __construct($args, $request = null)
+    {
         parent::__construct($args);
         $this->request = $request ?: Request::capture();
     }
 
-    private function correct($tillDot = true){
+    public function correctFilterSorting()
+    {
+        $return = $this->name;
         $as = explode('as', $this->name);
-        if(count($as) > 1) return trim(end($as));
+        if (count($as) > 1) {
+            $return = trim(current($as));
+        }
 
-        if(!$tillDot) return $this->name;
-
-        $dot = explode('.', $this->name);
-        if($dot) return trim(end($dot));
+        return $return;
     }
 
-    private function wrap($obj){
-        if($this->wrapper && is_callable($this->wrapper)){
+    public function correct($tillDot = true)
+    {
+        $as = explode('as', $this->name);
+        if (count($as) > 1) {
+            return trim(end($as));
+        }
+
+        if (!$tillDot) {
+            return $this->name;
+        }
+
+        $dot = explode('.', $this->name);
+        if ($dot) {
+            return trim(end($dot));
+        }
+    }
+
+    private function wrap($obj)
+    {
+        if ($this->wrapper && is_callable($this->wrapper)) {
             $this->value = call_user_func($this->wrapper, $this->value, $obj);
         }
     }
 
-    private function sortingUrl(){
+    private function sortingUrl()
+    {
         $query = ['sort' => $this->correct(false)];
 
-        if(($sort = $this->request->offsetGet('sort')) && $sort == $this->correct(false)){
-            if(!$order = $this->request->offsetGet('order')){
+        if (($sort = $this->request->offsetGet('sort')) && $sort == $this->correct(false)) {
+            if (!$order = $this->request->offsetGet('order')) {
                 $query['order'] = self::ORDER_DESC;
-            }else{
+            } else {
                 $query['order'] = ($order == self::ORDER_DESC ? self::ORDER_ASC : self::ORDER_DESC);
             }
-        }else{
+        } else {
             $query['order'] = self::ORDER_DESC;
         }
-        
+
         return '?'.http_build_query(array_merge($this->request->query->all(), $query));
     }
 
     /**
-     * need to process xss check on properties like label shouln't include <script>alert('Kaboom!')</script> 
+     * need to process css check on properties like label shouln't include <script>alert('Kaboom!')</script>
      */
-    public function sorting(){        
-        if($this->sortable){
+    public function sorting()
+    {
+        if ($this->sortable) {
             return vsprintf($this->sortHtml, [$this->sortingUrl(), $this->label]);
-        }else{
+        } else {
             return $this->label;
         }
     }
 
-    public function render($obj){
-        if(property_exists($obj, ( $this->readableName = $this->correct()) ) ){
+    public function render($obj)
+    {
+        if (property_exists($obj, ($this->readableName = $this->correct()))) {
             $this->value = $obj->{$this->readableName};
             $this->wrap($obj);
         }

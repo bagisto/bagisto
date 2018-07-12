@@ -20,8 +20,8 @@ a:hover,
 a:visited,
 a:focus,
 a:active {
-  text-decoration: none;
-  color: $brand-color;
+    text-decoration: none;
+    color: $brand-color;
 }
 
 ul {
@@ -32,13 +32,13 @@ ul {
 
 h1 {
     font-size: 28px;
-    color: #3A3A3A;
+    color: #3a3a3a;
     margin-top: 0;
 }
 
 h2 {
     font-size: 18px;
-    color: #3A3A3A;
+    color: #3a3a3a;
 }
 
 .hide {
@@ -46,7 +46,10 @@ h2 {
 }
 
 .btn {
-    @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.20), 0 0 8px 0 rgba(0, 0, 0, 0.10));
+    @include box-shadow(
+        0 1px 4px 0 rgba(0, 0, 0, 0.2),
+        0 0 8px 0 rgba(0, 0, 0, 0.1)
+    );
     border-radius: 3px;
     border: none;
     color: #fff;
@@ -54,7 +57,9 @@ h2 {
     transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     font: inherit;
 
-    &:hover, &:active, &:focus {
+    &:hover,
+    &:active,
+    &:focus {
         opacity: 0.75;
         border: none;
     }
@@ -82,20 +87,22 @@ h2 {
     &[disabled="disabled"]:hover,
     &[disabled="disabled"]:active {
         cursor: not-allowed;
-        background: #B1B1AE;
+        background: #b1b1ae;
         box-shadow: none;
         opacity: 1;
     }
-
 }
 .dropdown-open {
     position: relative;
 }
 .dropdown-list {
     width: 200px;
-    @include box-shadow(0 2px 4px 0 rgba(0,0,0,0.16), 0 0 9px 0 rgba(0,0,0,0.16));
+    @include box-shadow(
+        0 2px 4px 0 rgba(0, 0, 0, 0.16),
+        0 0 9px 0 rgba(0, 0, 0, 0.16)
+    );
     border-radius: 3px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     position: absolute;
     display: none;
     z-index: 10;
@@ -127,16 +134,16 @@ h2 {
             font-size: 15px;
             display: inline-block;
             text-transform: uppercase;
-            color: #9E9E9E;
+            color: #9e9e9e;
             font-weight: 700;
             padding-bottom: 5px;
         }
-        
+
         ul {
             margin: 0px;
             list-style-type: none;
             padding: 0px;
-            
+
             li {
                 padding: 5px 0px;
 
@@ -145,7 +152,10 @@ h2 {
                     cursor: pointer;
                 }
 
-                a:link, a:active, a:visited, a:focus {
+                a:link,
+                a:active,
+                a:visited,
+                a:focus {
                     color: #333333;
                     display: block;
                 }
@@ -169,14 +179,14 @@ h2 {
         thead th {
             font-weight: 700;
             padding: 12px 10px;
-            background: #F8F9FA;
-            color: #3A3A3A;
+            background: #f8f9fa;
+            color: #3a3a3a;
         }
 
         tbody td {
             padding: 12px 10px;
-            border-bottom: solid 1px #D3D3D3;
-            color: #3A3A3A;
+            border-bottom: solid 1px #d3d3d3;
+            color: #3a3a3a;
         }
     }
 }
@@ -184,16 +194,18 @@ h2 {
 .dropdown-btn {
     min-width: 150px;
     text-align: left;
-    background: #FFFFFF;
+    background: #ffffff;
     border: 2px solid $control-border-color;
     border-radius: 3px;
     font-size: 14px;
-    color: #8E8E8E;
+    color: #8e8e8e;
     padding: 8px 35px 8px 10px;
     cursor: pointer;
     position: relative;
-    
-    &:hover, &:active, &:focus {
+
+    &:hover,
+    &:active,
+    &:focus {
         opacity: 0.75;
         border: 2px solid $control-border-color;
     }
@@ -208,25 +220,26 @@ h2 {
 
 .pagination {
     .page-item {
-        background: #FFFFFF;
+        background: #ffffff;
         border: 2px solid $control-border-color;
         border-radius: 3px;
         padding: 7px 14px;
         margin-right: 5px;
         font-size: 16px;
         display: inline-block;
-        color: #8E8E8E;
+        color: #8e8e8e;
         vertical-align: middle;
         text-decoration: none;
 
-        &.previous, &.next {
+        &.previous,
+        &.next {
             padding: 6px 9px;
         }
 
         &.active {
-            background: #0041FF;
+            background: #0041ff;
             color: #fff;
-            border-color: #0041FF;
+            border-color: #0041ff;
         }
 
         .icon {
@@ -251,7 +264,7 @@ h2 {
     }
 
     .checkbox-view {
-        background-image: url('../images/Checkbox.svg');
+        background-image: url("../images/Checkbox.svg");
         height: 24px;
         width: 24px;
         margin: 0;
@@ -261,7 +274,7 @@ h2 {
     }
 
     input:checked + .checkbox-view {
-        background-image: url('../images/Checkbox-Checked.svg');
+        background-image: url("../images/Checkbox-Checked.svg");
     }
 
     input:disabled + .checkbox-view {
@@ -274,7 +287,7 @@ h2 {
     position: relative;
     display: block;
     margin: 10px 5px 5px 0px;
-    
+
     input {
         left: 0;
         opacity: 0;
@@ -284,7 +297,7 @@ h2 {
     }
 
     .radio-view {
-        background-image: url('../images/controls.svg');
+        background-image: url("../images/controls.svg");
         background-position: -21px 0px;
         height: 20px;
         width: 20px;
@@ -314,7 +327,7 @@ h2 {
 
     label {
         display: block;
-        color: #3A3A3A;
+        color: #3a3a3a;
     }
 
     textarea.control {
@@ -341,8 +354,8 @@ h2 {
         }
 
         &[disabled="disabled"] {
-            border-color: #D3D3D3;
-            background-color: #D3D3D3;
+            border-color: #d3d3d3;
+            background-color: #d3d3d3;
             cursor: not-allowed;
         }
     }
@@ -350,12 +363,12 @@ h2 {
     .control-info {
         display: block;
         font-style: italic;
-        color: #6F6F6F;
+        color: #6f6f6f;
     }
 
     .control-error {
         display: none;
-        color: #FF5656;
+        color: #ff5656;
         margin-top: 5px;
     }
 
@@ -381,7 +394,8 @@ h2 {
         padding: 15px;
         border-radius: 3px;
         display: inline-block;
-        box-shadow: 0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1), 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+        box-shadow: 0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1),
+            0px 2px 6px 0px rgba(0, 0, 0, 0.12);
         position: relative;
         animation: jelly 0.5s ease-in-out;
         transform-origin: center top;
@@ -408,7 +422,7 @@ h2 {
         }
 
         p {
-            color: #FFFFFF;
+            color: #ffffff;
             margin: 0px;
             padding: 0px;
             font-size: 15px;
@@ -417,7 +431,6 @@ h2 {
 }
 
 .tabs {
-
     ul {
         border-bottom: solid 1px $border-color;
 
@@ -443,7 +456,7 @@ h2 {
 .accordian {
     .accordian-header {
         font-size: 18px;
-        color: #3A3A3A;
+        color: #3a3a3a;
         border-bottom: solid 1px $border-color;
         padding: 20px 15px;
         cursor: pointer;
@@ -465,7 +478,6 @@ h2 {
 }
 
 .tree-container {
-    
     .tree-item {
         padding-left: 30px;
         display: inline-block;
@@ -489,7 +501,7 @@ h2 {
             display: inline-block;
             margin-right: 10px;
             cursor: pointer;
-            background-image: url('../images/Expand-Light.svg');
+            background-image: url("../images/Expand-Light.svg");
             width: 18px;
             height: 18px;
             vertical-align: middle;
@@ -497,18 +509,18 @@ h2 {
 
         &.active {
             > .expand-icon {
-                background-image: url('../images/Expand-Light-On.svg');
+                background-image: url("../images/Expand-Light-On.svg");
             }
         }
     }
-    
+
     > .tree-item {
         padding-left: 0;
     }
 }
 
 .panel {
-    box-shadow: 0 2px 25px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     background: #fff;
 
@@ -516,3 +528,108 @@ h2 {
         padding: 20px;
     }
 }
+
+/*   DataGrid   */
+
+.grid-container {
+    margin-top: 30px;
+
+    .filter-wrapper {
+        display: block;
+        box-sizing: border-box;
+
+        .filter-row-one,
+        .filter-row-two {
+            display: flex;
+            flex-direction: row;
+            // flex-wrap: wrap;
+        }
+        .filter-row-one {
+            height: 40px;
+            align-items: center;
+            justify-content: space-between;
+
+            .search-filter {
+                .control {
+                    font-family: "montserrat", sans-serif;
+                    padding-left: 5px;
+                    width: 380px;
+                    height: 36px;
+                    border: 2px solid $control-border-color;
+                    border-radius: 3px;
+                    font-size: 14px;
+                }
+            }
+
+            .dropdown-filters {
+                display: inline-flex;
+
+                .column-filter {
+                    margin-right: 5px;
+
+                    .control {
+                        font-family: "montserrat", sans-serif;
+                        padding-left: 5px;
+                        height: 36px;
+                        width: 150px;
+                        border: 2px solid $control-border-color;
+                        border-radius: 3px;
+                        background-color: white;
+                        color: #8e8e8e;
+                        font-size: 14px;
+                    }
+                }
+
+                .more-filters {
+                    margin-right: 5px;
+
+                    .control {
+                        font-family: "montserrat", sans-serif;
+                        padding-left: 5px;
+                        height: 36px;
+                        width: 150px;
+                        border: 2px solid $control-border-color;
+                        border-radius: 3px;
+                        background-color: white;
+                        color: #8e8e8e;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        .filter-row-two {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            margin-bottom: 15px;
+
+            .filter-one {
+                margin-right: 10px;
+
+                .filter-name {
+                    margin-right: 5px;
+                }
+
+                .filter-value {
+                    display: inline-flex;
+                    background: #e7e7e7;
+                    height: 36px;
+                    padding-left: 5px;
+                    padding-right: 10px;
+                    padding-top: 8px;
+                    padding-bottom: 5px;
+                    color: #000311;
+                    vertical-align: middle;
+
+                    .cross-icon {
+                        height: 18px !important;
+                        width: 18px !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*   DataGrid css ends in here   */

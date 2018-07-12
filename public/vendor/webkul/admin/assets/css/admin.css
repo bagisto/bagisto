@@ -10,7 +10,7 @@
 
 .navbar-top {
   height: 60px;
-  background: #FFFFFF;
+  background: #ffffff;
   font-size: 0;
   -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
@@ -65,7 +65,7 @@
 
 .navbar-top .navbar-top-right .profile-info .role {
   font-size: 14px;
-  color: #8E8E8E;
+  color: #8e8e8e;
   display: block;
   text-align: left;
 }
@@ -94,11 +94,11 @@
 }
 
 .navbar-left ul.menubar li.menu-item a {
-  color: #A2A2A2;
+  color: #a2a2a2;
 }
 
 .navbar-left ul.menubar li.menu-item.active a {
-  color: #0041FF;
+  color: #0041ff;
 }
 
 .content-container {
@@ -120,7 +120,7 @@
   top: 60px;
   bottom: 0;
   border-right: 1px solid rgba(162, 162, 162, 0.2);
-  background: #F8F9FA;
+  background: #f8f9fa;
   padding-top: 10px;
   overflow-y: auto;
   z-index: 4;

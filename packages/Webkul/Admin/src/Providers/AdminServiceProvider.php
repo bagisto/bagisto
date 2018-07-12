@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Blade;
 use Webkul\Admin\Providers\EventServiceProvider;
+use Webkul\Admin\Providers\ComposerServiceProvider;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -28,9 +29,12 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->composeView();
 
-        Blade::directive('continue', function() { return "<?php continue; ?>"; });
+        Blade::directive('continue', function () {
+            return "<?php continue; ?>";
+        });
 
         $this->app->register(EventServiceProvider::class);
+        $this->app->register(ComposerServiceProvider::class);
     }
 
     /**
@@ -40,19 +44,19 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function composeView()
     {
-        view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function($view) {
+        view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $menu = current(Event::fire('admin.menu.create'));
 
             $keys = explode('.', $menu->currentKey);
             $subMenus = $tabs = [];
-            if(count($keys) > 1) {
+            if (count($keys) > 1) {
                 $subMenus = [
                         'items' => $menu->sortItems(array_get($menu->items, current($keys) . '.children')),
                         'current' => $menu->current,
                         'currentKey' => $menu->currentKey
                     ];
 
-                if(count($keys) > 2) {
+                if (count($keys) > 2) {
                     $tabs = [
                             'items' => $menu->sortItems(array_get($menu->items, implode('.children.', array_slice($keys, 0, 2)) . '.children')),
                             'current' => $menu->current,
@@ -73,7 +77,8 @@ class AdminServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../Config/auth.php', 'auth'
+            __DIR__ . '/../Config/auth.php',
+            'auth'
         );
     }
 

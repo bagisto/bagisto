@@ -1,7 +1,10 @@
 {
     "name": "jitendra-webkul/bagisto",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -39,6 +42,7 @@
             "Webkul\\Admin\\": "packages/Webkul/Admin/src",
             "Webkul\\Ui\\": "packages/Webkul/Ui/src",
             "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
+            "Webkul\\Shop\\": "packages/Webkul/Shop/src",
             "Webkul\\Core\\": "packages/Webkul/Core/src"
         }
     },
@@ -49,8 +53,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {
