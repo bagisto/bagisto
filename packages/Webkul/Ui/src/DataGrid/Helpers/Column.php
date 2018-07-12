@@ -12,8 +12,8 @@ class Column extends AbstractFillable
     private $request = null;
     private $readableName = false;
     private $value = false;
-    // private $sortHtml = '<a href="%s">%s</a>';
-    private $sortHtml = '<span href="%s">%s</span>';
+    private $sortHtml = '<a href="%s">%s</a>';
+    // private $sortHtml = '<span href="%s">%s</span>';
 
     // protected $name;
     // protected $type;

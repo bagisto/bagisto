@@ -318,11 +318,11 @@ class DataGrid
         //No kind of aliasing at all
         foreach ($this->columns as $column) {
             if ($column->filterable) { //condition is required managing params from users i.e url or request
-                if ($columnFromRequest = $this->request->offsetGet($column->correctFilterSorting())) {
+                if ($columnFromRequest = $this->request->offsetGet($column->correct())) {
                     if ($filter = $columnFromRequest['filter']) {
                         if ($condition = $columnFromRequest['condition']) {
                             $this->query->where(
-                                $column->correctFilterSorting(),
+                                $column->correct(),
                                 $condition,
                                 $filter
                             );

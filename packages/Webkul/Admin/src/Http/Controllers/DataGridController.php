@@ -71,11 +71,11 @@ class DataGridController extends Controller
         //Make case without any aliasing or joins
         DataGrid::make([
             'name' => 'admins',
-            // 'select' => 'a.id',
             'table' => 'admins as a',
+            'select' => 'a.id',
             'join' => [
                 [
-                    'join' => 'leftjoin',
+                    'join' => 'rightjoin',
                     'table' => 'roles as r',
                     'primaryKey' => 'a.role_id',
                     'condition' => '=',
@@ -97,17 +97,17 @@ class DataGridController extends Controller
                     'sortable' => true,
                     'filterable' => true,
                 ],
-                [
-                    'name' => 'r.id',
-                    'type' => 'string',
-                    'label' => 'Role Table ID',
-                    'sortable' => true,
-                    'filterable' => true,
-                ],
+                // [
+                //     'name' => 'r.name',
+                //     'type' => 'string',
+                //     'label' => 'Role Table ID',
+                //     'sortable' => true,
+                //     'filterable' => true,
+                // ],
                 [
                     'name' => 'r.name',
                     'type' => 'string',
-                    'label' => 'Role Name',
+                    'label' => 'Admin Name',
                     'sortable' => true,
                     'filterable' => false,
                     // will create on run time query
