@@ -88,6 +88,15 @@ class Column extends AbstractFillable
         return $return;
     }
 
+    public function correctDotOnly()
+    {
+        $col_name = explode('.', $this->name);
+        if (isset($col_name)) {
+            $col_name = trim($col_name[1]);
+            return $col_name;
+        }
+    }
+
     public function correct($tillDot = true)
     {
         $as = explode('as', $this->name);

@@ -87,10 +87,10 @@ class DataGrid
     public function make($args)
     {
         // list($name, $select, $table, $join, $columns) = array_values($args);
-        $name = $select = $table = false;
-        $join = $columns = $css = [];
+        $name = $select = $filterable = $table = false;
+        $join = $columns = $css = $verbs = [];
         extract($args);
-        return $this->build($name, $select, $table, $join, $columns, $css);
+        return $this->build($name, $select, $filterable, $table, $join, $columns, $css, $verbs);
     }
 
     //starts buikding the queries on the basis of selects, joins and filter with
@@ -99,20 +99,24 @@ class DataGrid
     public function build(
         $name = null,
         $select = false,
+        array $filterable = [],
         $table = null,
         array $join = [],
         array $columns = null,
         array $css = [],
+        array $verbs = [],
         Pagination $pagination = null
     ) {
         $this->request = Request::capture();
 
         $this->setName($name);
         $this->setSelect($select);
+        $this->setFilterable($filterable);
         $this->setTable($table);
         $this->setJoin($join);
         $this->addColumns($columns, true);
         $this->setCss($css);
+        $this->setVerbs($verbs);
         // $this->addPagination($pagination);
         return $this;
     }
@@ -142,6 +146,17 @@ class DataGrid
     }
 
     /**
+     * Set Filterable
+     * @return $this
+     */
+
+    public function setFilterable(array $filterable)
+    {
+        $this->filterable = $filterable ?: [];
+        return $this;
+    }
+
+    /**
      * Add Columns.
      *
      * @return $this
@@ -165,11 +180,27 @@ class DataGrid
         return $this;
     }
 
+    /**
+     * Adds the custom css rules
+     * @retun $this
+     */
+
     private function setCss($css = [])
     {
         $this->css = new Css($css);
         return $this->css;
     }
+
+    /**
+     * setFilterableColumns
+     * @return $this
+     */
+
+    // public function setFilterableColumns($filterable_columns = [])
+    // {
+    //     $this->join = $filterable_columns ?: [];
+    //     return $this;
+    // }
 
     /**
      * Add Columns.
@@ -244,6 +275,17 @@ class DataGrid
     }
 
     /**
+     * Adds expressional verbs to be used
+     * @return $this
+     */
+
+    public function setVerbs(array $verbs)
+    {
+        $this->verbs = $verbs ?: [];
+        return $this;
+    }
+
+    /**
      * Add Pagination.
      *
      * @return $this
@@ -314,24 +356,57 @@ class DataGrid
     private function getQueryWithFilters()
     {
         //solve aliasing for table when as is used with table name
+        //refer https://recursiveiterator.wordpress.com/2015/02/28/laravel-query-builder-dynamic-queries/
+        //refer https://m.dotdev.co/writing-advanced-eloquent-search-query-filters-de8b6c2598db
+
+        //New API Structure change
 
         //No kind of aliasing at all
-        foreach ($this->columns as $column) {
-            if ($column->filterable) { //condition is required managing params from users i.e url or request
-                if ($columnFromRequest = $this->request->offsetGet($column->correct())) {
-                    if ($filter = $columnFromRequest['filter']) {
-                        if ($condition = $columnFromRequest['condition']) {
-                            $this->query->where(
-                                $column->correct(),
-                                $condition,
-                                $filter
-                            );
-                        }
+        $filterable_columns = [];
+        foreach ($this->filterable as $on_column) {
+            array_push($filterable_columns, $on_column['column']);
+        }
+        $queried_columns = [];
+        $qr = $_SERVER['QUERY_STRING'];
+        $parsed;
+        parse_str($qr, $parsed);
+        foreach ($parsed as $key=>$value) {
+            array_push($queried_columns, $key);
+        }
+        foreach ($filterable_columns as $fkey=>$fvalue) {
+            //determines whether column is both filterable and query string is present for it.
+            foreach ($queried_columns as $key=>$value) {
+                if ($fvalue==$value) {
+                    $conditions =$parsed[$value];
+                    foreach ($conditions as $condition => $filter) {
+                        $this->query->where(
+                            $value,
+                            $this->verbs[$condition],
+                            $filter
+                        );
                     }
                 }
             }
-        }
 
+            // if ($column->filterable) { //condition is required managing params from users i.e url or request
+            //     $qr = $_SERVER['QUERY_STRING'];
+            //     $col_name = $column->name;
+            //     $col_name = str_replace(".", "_", $col_name);
+            //     // dd($qr);
+            //     dump($col_name);
+            //     if ($columnFromfilterableRequest = $this->request->offsetGet($col_name)) {
+            //         if ($filter = $columnFromRequest['filter']) {
+            //             if ($condition = $columnFromRequest['condition']) {
+            //                 $this->query->where(
+            //                     $column->correctDotOnly(),
+            //                     $condition,
+            //                     $filter
+            //                 );
+            //             }
+            //         }
+            //     }
+            // }
+        }
         //follow a case where table is aliased and joins are not present
     }
 
@@ -349,7 +424,10 @@ class DataGrid
 
         //explode if alias is available
         $exploded = explode('as', $this->table);
-        if (isset($exploded)) {
+        // dd($exploded);
+        if ($exploded[0]==$this->table) {
+            $table_alias = false;
+        } else { // (isset($exploded))
             $table_alias = true;
             $table_name = trim($exploded[0]);
             $table_alias = trim($exploded[1]);
@@ -404,13 +482,24 @@ class DataGrid
         }
 
         //Check for column filter bags and resolve aliasing
-        foreach ($this->columns as $column) {
-            //run this if there are columns with filter bag
-            $this->getQueryWithColumnFilters();
-        }
+        //run this if there are columns with filter bag
+        $this->getQueryWithColumnFilters();
 
         //Run this if there are filters or sort params or range params in the urls
-        $this->getQueryWithFilters();
+        $qr = $_SERVER['QUERY_STRING'];
+        $parsed;
+        //parse_url($qr, PHP_URL_QUERY)
+        parse_str($qr, $parsed);
+        if (!empty($parsed)) {
+            dump('parsed url is not empty');
+            // $filterable_columns = [];
+            // foreach ($this->filterable as $on_column) {
+            //     array_push($filterable_columns, $on_column['column']);
+            // }
+            $this->getQueryWithFilters();
+        } else {
+            dd('parsed url is empty');
+        }
 
         // dump($this->query);
         $this->results = $this->query->get();

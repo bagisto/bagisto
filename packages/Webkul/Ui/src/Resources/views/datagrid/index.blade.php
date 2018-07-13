@@ -61,6 +61,7 @@
         <table class="{{ $css->table }}">
             <thead class="{{-- $css->thead --}}">
                 <tr>
+                    <th class="{{-- $css->thead_td --}}">Mass Action</th>
                     @foreach ($columns as $column)
                     <th class="{{-- $css->thead_td --}}">{!! $column->sorting() !!}</th>
                     @endforeach
@@ -70,6 +71,7 @@
 
                 @foreach ($results as $result)
                 <tr>
+                    <td class="{{-- $css->tbody_td --}}"><input type="checkbox" /></td>
                     @foreach ($columns as $column)
                     <td class="{{-- $css->tbody_td --}}">{!! $column->render($result) !!}</td>
                     @endforeach
@@ -77,8 +79,9 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="{{ $css->pagination }}" style="margin-top:15px;">
-            {{-- <div class="pagination">
+        {{-- @include('ui::partials.pagination') --}}
+        {{-- <div class="{{ $css->pagination }}" style="margin-top:15px;">
+            <div class="pagination">
                 <a class="page-item previous">
                     <i class="icon angle-right-icon"></i>
                 </a>
@@ -90,8 +93,8 @@
                 <a href="#status/6/page/2" class="page-item next">
                     <i class="icon angle-left-icon"></i>
                 </a>
-            </div> --}}
-        </div>
+            </div>
+        </div> --}}
     </div>
 
 </div>
