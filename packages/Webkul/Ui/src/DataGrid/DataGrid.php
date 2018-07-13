@@ -373,9 +373,11 @@ class DataGrid
         foreach ($parsed as $key=>$value) {
             array_push($queried_columns, $key);
         }
+        $queried_columns = str_replace('_', '.', $queried_columns);
         foreach ($filterable_columns as $fkey=>$fvalue) {
             //determines whether column is both filterable and query string is present for it.
             foreach ($queried_columns as $key=>$value) {
+                dump($fvalue, $value);
                 if ($fvalue==$value) {
                     $conditions =$parsed[$value];
                     foreach ($conditions as $condition => $filter) {
@@ -387,26 +389,8 @@ class DataGrid
                     }
                 }
             }
-
-            // if ($column->filterable) { //condition is required managing params from users i.e url or request
-            //     $qr = $_SERVER['QUERY_STRING'];
-            //     $col_name = $column->name;
-            //     $col_name = str_replace(".", "_", $col_name);
-            //     // dd($qr);
-            //     dump($col_name);
-            //     if ($columnFromfilterableRequest = $this->request->offsetGet($col_name)) {
-            //         if ($filter = $columnFromRequest['filter']) {
-            //             if ($condition = $columnFromRequest['condition']) {
-            //                 $this->query->where(
-            //                     $column->correctDotOnly(),
-            //                     $condition,
-            //                     $filter
-            //                 );
-            //             }
-            //         }
-            //     }
-            // }
         }
+
         //follow a case where table is aliased and joins are not present
     }
 
@@ -488,20 +472,15 @@ class DataGrid
         //Run this if there are filters or sort params or range params in the urls
         $qr = $_SERVER['QUERY_STRING'];
         $parsed;
-        //parse_url($qr, PHP_URL_QUERY)
         parse_str($qr, $parsed);
         if (!empty($parsed)) {
-            dump('parsed url is not empty');
-            // $filterable_columns = [];
-            // foreach ($this->filterable as $on_column) {
-            //     array_push($filterable_columns, $on_column['column']);
-            // }
+            // dump('parsed url is not empty');
             $this->getQueryWithFilters();
         } else {
-            dd('parsed url is empty');
+            $this->results = $this->query->get();
+            return $this->results;
         }
 
-        // dump($this->query);
         $this->results = $this->query->get();
         return $this->results;
     }

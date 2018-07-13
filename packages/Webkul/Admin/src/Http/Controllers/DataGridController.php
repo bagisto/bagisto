@@ -95,7 +95,7 @@ class DataGridController extends Controller
             'gt' => '>',
             'lte' => '<=',
             'gte' => '>=',
-            'neq' => 'not =',
+            'neq' => '!=',
             'inc_range' => '>x AND <y', //cummutative
             'exc_range' => '>=x AND <=y',
             'not_inc_range' => 'not >x AND <y',
@@ -103,18 +103,18 @@ class DataGridController extends Controller
         ];
 
         DataGrid::make([
-            'name' => 'posts',
-            'table' => 'authors',
+            'name' => 'authors',
+            'table' => 'authors as a',
             'select' => 'id',
             'filterable' => [
                 [
-                    'column' => 'id',
+                    'column' => 'a.id',
                     'type' => 'integer'
                 ], [
-                    'column' => 'email',
+                    'column' => 'a.email',
                     'type' => 'string'
                 ], [
-                    'column' => 'first_name',
+                    'column' => 'a.first_name',
                     'type' => 'string'
                 ]
             ],
@@ -129,13 +129,13 @@ class DataGridController extends Controller
             ],
             'columns' => [
                 [
-                    'name' => 'id',
+                    'name' => 'a.id',
                     'type' => 'string',
                     'label' => 'Admin ID',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'email',
+                    'name' => 'a.email',
                     'type' => 'string',
                     'label' => 'Admin E-Mail',
                     'sortable' => true,
@@ -148,7 +148,7 @@ class DataGridController extends Controller
                 //     'filterable' => true,
                 // ],
                 [
-                    'name' => 'first_name',
+                    'name' => 'a.first_name',
                     'type' => 'string',
                     'label' => 'Admin Name',
                     'sortable' => true,
