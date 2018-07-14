@@ -89,23 +89,52 @@ class DataGridController extends Controller
             ]
         */
 
-        $verbs = [
-            'eq' => '=',
-            'lt' => '<',
-            'gt' => '>',
-            'lte' => '<=',
-            'gte' => '>=',
-            'neq' => '!=',
-            'inc_range' => '>x AND <y', //cummutative
-            'exc_range' => '>=x AND <=y',
-            'not_inc_range' => 'not >x AND <y',
-            'not_exc_range' => 'not >=x AND <=y',
+        $select_verbs = [
+            0 => "aggregate",
+            1 => "columns",
+            2 => "from",
+            3 => "joins",
+            4 => "wheres",
+            5 => "groups",
+            6 => "havings",
+            7 => "orders",
+            8 => "limit",
+            9 => "offset",
+            10 => "lock"
         ];
-
+        $bindings = [
+            "select" => [],
+            "from" => [],
+            "join" => [],
+            "where" => [],
+            "having" => [],
+            "order" => [],
+            "union" => [],
+        ];
+        $operators = [
+            'eq' => "=",
+            'lt' => "<",
+            'gt' => ">",
+            'lte' => "<=",
+            'gte' => ">=",
+            'neqs' => "<>",
+            'neqn' => "!=",
+            'ceq' => "<=>",
+            'like' => "like",
+            'likebin' => "like binary",
+            'ntlike' => "not like",
+            'ilike' => "ilike",
+            'regex' => "regexp",
+            'notregex' => "not regexp",
+            'simto' => "similar to",
+            'nsimto' => "not similar to",
+            'nilike' => "not ilike",
+        ];
         DataGrid::make([
             'name' => 'authors',
             'table' => 'authors as a',
-            'select' => 'id',
+            'select' => 'a.id',
+            'aliased' => true , //boolean to validate aliasing on the basis of this.
             'filterable' => [
                 [
                     'column' => 'a.id',
@@ -133,12 +162,14 @@ class DataGridController extends Controller
                     'type' => 'string',
                     'label' => 'Admin ID',
                     'sortable' => true,
+                    'filterable' => true
                 ],
                 [
                     'name' => 'a.email',
                     'type' => 'string',
                     'label' => 'Admin E-Mail',
                     'sortable' => true,
+                    'filterable' => true
                 ],
                 // [
                 //     'name' => 'r.name',
@@ -152,6 +183,7 @@ class DataGridController extends Controller
                     'type' => 'string',
                     'label' => 'Admin Name',
                     'sortable' => true,
+                    'filterable' => true,
                     // will create on run time query
                     // 'filter' => [
                     //     'function' => 'where', // orwhere
@@ -168,19 +200,38 @@ class DataGridController extends Controller
                 ],
 
             ],
-            'verbs' => [
-                'eq' => '=',
-                'lt' => '<',
-                'gt' => '>',
-                'lte' => '<=',
-                'gte' => '>=',
-                'neq' => 'not =',
-                'contains' => 'like',
-                'inc_range' => '>x AND <y',
-                'exc_range' => '>=x AND <=y',
-                'not_inc_range' => 'not >x AND <y',
-                'not_exc_range' => 'not >=x AND <=y',
-            ]
+            'select_verbs' => [
+                0 => "aggregate",
+                1 => "columns",
+                2 => "from",
+                3 => "joins",
+                4 => "wheres",
+                5 => "groups",
+                6 => "havings",
+                7 => "orders",
+                8 => "limit",
+                9 => "offset",
+                10 => "lock"
+            ],
+            'operators' => [
+                'eq' => "=",
+                'lt' => "<",
+                'gt' => ">",
+                'lte' => "<=",
+                'gte' => ">=",
+                'neqs' => "<>",
+                'neqn' => "!=",
+                'ceq' => "<=>",
+                'like' => "like",
+                'likebin' => "like binary",
+                'ntlike' => "not like",
+                'ilike' => "ilike",
+                'regex' => "regexp",
+                'notregex' => "not regexp",
+                'simto' => "similar to",
+                'nsimto' => "not similar to",
+                'nilike' => "not ilike",
+            ],
             // 'css' => []
 
         ]);

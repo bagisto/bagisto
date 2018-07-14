@@ -87,10 +87,10 @@ class DataGrid
     public function make($args)
     {
         // list($name, $select, $table, $join, $columns) = array_values($args);
-        $name = $select = $filterable = $table = false;
-        $join = $columns = $css = $verbs = [];
+        $name = $select = $filterable = $aliased = $table = false;
+        $join = $columns = $css = $operators = [];
         extract($args);
-        return $this->build($name, $select, $filterable, $table, $join, $columns, $css, $verbs);
+        return $this->build($name, $select, $filterable, $aliased, $table, $join, $columns, $css, $operators);
     }
 
     //starts buikding the queries on the basis of selects, joins and filter with
@@ -100,11 +100,12 @@ class DataGrid
         $name = null,
         $select = false,
         array $filterable = [],
+        bool $aliased = false,
         $table = null,
         array $join = [],
         array $columns = null,
         array $css = [],
-        array $verbs = [],
+        array $operators = [],
         Pagination $pagination = null
     ) {
         $this->request = Request::capture();
@@ -112,11 +113,12 @@ class DataGrid
         $this->setName($name);
         $this->setSelect($select);
         $this->setFilterable($filterable);
+        $this->setAlias($aliased);
         $this->setTable($table);
         $this->setJoin($join);
         $this->addColumns($columns, true);
         $this->setCss($css);
-        $this->setVerbs($verbs);
+        $this->setOperators($operators);
         // $this->addPagination($pagination);
         return $this;
     }
@@ -157,7 +159,21 @@ class DataGrid
     }
 
     /**
-     * Add Columns.
+     * Set alias parameter
+     * to know whether
+     * aliasing is true or not.
+     *
+     * @return $this.
+     */
+
+    public function setAlias(bool $aliased)
+    {
+        $this->aliased = $aliased ? : false;
+    }
+
+    /**
+     * Set table name in front
+     * of query scope.
      *
      * @return $this
      */
@@ -169,7 +185,8 @@ class DataGrid
     }
 
     /**
-     * Add Columns.
+     * Set join bag if
+     * present.
      *
      * @return $this
      */
@@ -279,9 +296,9 @@ class DataGrid
      * @return $this
      */
 
-    public function setVerbs(array $verbs)
+    public function setOperators(array $operators)
     {
-        $this->verbs = $verbs ?: [];
+        $this->operators = $operators ?: [];
         return $this;
     }
 
@@ -355,134 +372,178 @@ class DataGrid
 
     private function getQueryWithFilters()
     {
-        //solve aliasing for table when as is used with table name
-        //refer https://recursiveiterator.wordpress.com/2015/02/28/laravel-query-builder-dynamic-queries/
-        //refer https://m.dotdev.co/writing-advanced-eloquent-search-query-filters-de8b6c2598db
+        // the only use case remaining is making and testing the full validation and testing of t\
+        // aliased case with alias used in column names also.
+        if ($this->aliased) {
+            //n of joins can lead to n number of aliases for columns and neglect the as for columns
+            $qr = $_SERVER['QUERY_STRING'];
+            $parsed;
+            parse_str($qr, $parsed);
+            foreach ($parsed as $k=>$v) {
+                // dump($k, $v);
+                parse_str($v, $parsed[$k]);
+            }
 
-        //New API Structure change
-
-        //No kind of aliasing at all
-        $filterable_columns = [];
-        foreach ($this->filterable as $on_column) {
-            array_push($filterable_columns, $on_column['column']);
-        }
-        $queried_columns = [];
-        $qr = $_SERVER['QUERY_STRING'];
-        $parsed;
-        parse_str($qr, $parsed);
-        foreach ($parsed as $key=>$value) {
-            array_push($queried_columns, $key);
-        }
-        $queried_columns = str_replace('_', '.', $queried_columns);
-        foreach ($filterable_columns as $fkey=>$fvalue) {
-            //determines whether column is both filterable and query string is present for it.
-            foreach ($queried_columns as $key=>$value) {
-                dump($fvalue, $value);
-                if ($fvalue==$value) {
-                    $conditions =$parsed[$value];
-                    foreach ($conditions as $condition => $filter) {
+            foreach ($parsed as $key => $value) {
+                foreach ($value as $column => $filter) {
+                    // dd($column);
+                    if (array_keys($filter)[0]=="like") {
                         $this->query->where(
-                            $value,
-                            $this->verbs[$condition],
-                            $filter
+                            str_replace('_', '.', $column),
+                            $this->operators[array_keys($filter)[0]],
+                            '%'.array_values($filter)[0].'%'
                         );
+                    } else {
+                        $this->query->where(
+                        str_replace('_', '.', $column),
+                        $this->operators[array_keys($filter)[0]],
+                        array_values($filter)[0]
+                    );
+                    }
+                }
+            }
+        } else {
+            $qr = $_SERVER['QUERY_STRING'];
+            $parsed;
+            parse_str($qr, $parsed);
+            foreach ($parsed as $k=>$v) {
+                parse_str($v, $parsed[$k]);
+            }
+            foreach ($parsed as $key => $value) {
+                foreach ($value as $column => $filter) {
+                    if (array_keys($filter)[0]=="like") {
+                        $this->query->where(
+                            $column,
+                            $this->operators[array_keys($filter)[0]],
+                            '%'.array_values($filter)[0].'%'
+                        );
+                    } else {
+                        $this->query->where(
+                        $column,
+                        $this->operators[array_keys($filter)[0]],
+                        array_values($filter)[0]
+                    );
                     }
                 }
             }
         }
-
-        //follow a case where table is aliased and joins are not present
     }
 
     private function getDbQueryResults()
     {
-        //flags
-        $table_alias = false;
-        $join_table_alias = false;
-        $allowed_joins = false;
-        $other_joins = false;
-        $join_good = false;
-
-        //prepare query object
-        $this->query = DB::table($this->table);
-
-        //explode if alias is available
-        $exploded = explode('as', $this->table);
-        // dd($exploded);
-        if ($exploded[0]==$this->table) {
-            $table_alias = false;
-        } else { // (isset($exploded))
-            $table_alias = true;
-            $table_name = trim($exploded[0]);
-            $table_alias = trim($exploded[1]);
-        }
-
-        //Run this if there are any selects priorly.
-        if (!empty($this->select)) {
-            $this->getSelect();
-        }
-
-        //Run this if there are joins
-        if (!empty($this->join)) {
-            foreach ($this->join as $join) {
-                $name = strtolower($join['join']);
-                if ($name=='leftjoin' || $name=='left join' || $name=='rightjoin' || $name=='right join') {
-
-                    //check if the aliasing on the primary table and primaryKey in join is also the same
-                    $primary_key_alias = trim(explode('.', $join['primaryKey'])[0]);
-
-                    //got allowed joins i.e left or right
-                    if ($primary_key_alias == $table_alias) {
-                        $join_table_alias = explode('as', $join['table']);
-
-                        if (isset($join_table_alias)) {
-                            $alias1 = trim($join_table_alias[1]);
-                            //check if the secondary table match column is not having '.' and has proper alias
-                            $secondary_join_column = $join['secondaryKey'];
-
-                            if (isset($secondary_join_column)) {
-                                $exploded_secondary = explode('.', $secondary_join_column);
-                                $alias2 = trim($exploded_secondary[0]);
-
-                                if ($alias1 == $alias2) {
-                                    $this->getQueryWithJoin();
-                                } else {
-                                    dd('Aliases of Join table and the secondary key columns do not match');
-                                }
-                            } else {
-                                dd('improper aliasing of the join columns');
-                            }
-                        } else {
-                            dd('join table alias or secondary table alias is not found');
-                        }
-                    } else {
-                        dump($primary_key_alias, $table_alias);
-                        dd('primary key and primary table aliases do not match');
-                    }
-                } else {
-                    $other_joins = true;
-                }
-            }
-        }
-
-        //Check for column filter bags and resolve aliasing
-        //run this if there are columns with filter bag
-        $this->getQueryWithColumnFilters();
-
-        //Run this if there are filters or sort params or range params in the urls
         $qr = $_SERVER['QUERY_STRING'];
         $parsed;
         parse_str($qr, $parsed);
-        if (!empty($parsed)) {
-            // dump('parsed url is not empty');
-            $this->getQueryWithFilters();
+        if ($this->aliased==true) {
+            //flags
+            $table_alias = false;
+            $join_table_alias = false;
+            $allowed_joins = false;
+            $other_joins = false;
+            $join_good = false;
+
+            //prepare query object
+            $this->query = DB::table($this->table);
+
+            //explode if alias is available
+            if (strpos('.', $this->table)) {
+                throw new \Exception("dot/s cannot be used in table names in mysql");
+            } else {
+                $exploded = explode('as', $this->table);
+            }
+
+            //check whether exploded string still has same table name
+            if ($exploded[0]==$this->table) {
+                $table_alias = false;
+            } else { // (isset($exploded))
+                $table_alias = true;
+                $table_name = trim($exploded[0]);
+                $table_alias = trim($exploded[1]);
+            }
+            //Run this if there are any selects priorly.
+            if (!empty($this->select)) {
+                $this->getSelect();
+            }
+
+            //Run this if there are joins
+            if (!empty($this->join)) {
+                foreach ($this->join as $join) {
+                    $name = strtolower($join['join']);
+                    if ($name=='leftjoin' || $name=='left join' || $name=='rightjoin' || $name=='right join') {
+
+                    //check if the aliasing on the primary table and primaryKey in join is also the same
+                        $primary_key_alias = trim(explode('.', $join['primaryKey'])[0]);
+
+                        //got allowed joins i.e left or right
+                        if ($primary_key_alias == $table_alias) {
+                            $join_table_alias = explode('as', $join['table']);
+
+                            if (isset($join_table_alias)) {
+                                $alias1 = trim($join_table_alias[1]);
+                                //check if the secondary table match column is not having '.' and has proper alias
+                                $secondary_join_column = $join['secondaryKey'];
+
+                                if (isset($secondary_join_column)) {
+                                    $exploded_secondary = explode('.', $secondary_join_column);
+                                    $alias2 = trim($exploded_secondary[0]);
+
+                                    if ($alias1 == $alias2) {
+                                        $this->getQueryWithJoin();
+                                    } else {
+                                        throw new \Exception('Aliases of Join table and the secondary key columns do not match');
+                                    }
+                                } else {
+                                    throw new \Exception('Improper aliasing on secondary/join columns for join');
+                                }
+                            } else {
+                                throw new \Exception('join / secondary table alias is not found for join');
+                            }
+                        } else {
+                            throw new \Exception('primary key and primary table aliases do not match for join');
+                        }
+                    } else {
+                        $other_joins = true;
+                        throw new \Exception('Please check if there is some fault in your aliasing and do not use as in column names');
+                    }
+                }
+            }
+
+            //Check for column filter bags and resolve aliasing
+            //run this if there are columns with filter bag
+            $this->getQueryWithColumnFilters();
+
+            //Run this if there are filters or sort params or range params in the urls
+            $qr = $_SERVER['QUERY_STRING'];
+            $parsed;
+            parse_str($qr, $parsed);
+            if (!empty($parsed)) {
+                // dump('parsed url is not empty');
+                $this->getQueryWithFilters();
+            } else {
+                $this->results = $this->query->get();
+                return $this->results;
+            }
+            $this->results = $this->query->get();
+            return $this->results;
         } else {
+            $this->query = DB::table($this->table);
+            if (!empty($this->select)) {
+                $this->getSelect();
+            }
+            $this->getQueryWithColumnFilters();
+            $qr = $_SERVER['QUERY_STRING'];
+            $parsed;
+            parse_str($qr, $parsed);
+            if (!empty($parsed)) {
+                // dump('parsed url is not empty');
+                $this->getQueryWithFilters();
+            } else {
+                $this->results = $this->query->get();
+                return $this->results;
+            }
             $this->results = $this->query->get();
             return $this->results;
         }
-
-        $this->results = $this->query->get();
-        return $this->results;
     }
 
     /**
