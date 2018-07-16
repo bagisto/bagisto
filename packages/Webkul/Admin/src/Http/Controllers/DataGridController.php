@@ -148,13 +148,13 @@ class DataGridController extends Controller
                 ]
             ],
             'join' => [
-                // [
-                //     'join' => 'rightjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'a.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'posts as p',
+                    'primaryKey' => 'a.id',
+                    'condition' => '=',
+                    'secondaryKey' => 'p.author_id',
+                ]
             ],
             'columns' => [
                 [
@@ -171,13 +171,13 @@ class DataGridController extends Controller
                     'sortable' => true,
                     'filterable' => true
                 ],
-                // [
-                //     'name' => 'r.name',
-                //     'type' => 'string',
-                //     'label' => 'Role Table ID',
-                //     'sortable' => true,
-                //     'filterable' => true,
-                // ],
+                [
+                    'name' => 'p.content',
+                    'type' => 'string',
+                    'label' => 'Content',
+                    'sortable' => true,
+                    'filterable' => false,
+                ],
                 [
                     'name' => 'a.first_name',
                     'type' => 'string',

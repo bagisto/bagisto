@@ -37,67 +37,109 @@ class UserComposer
     public function compose(View $view)
     {
         $datagrid = DataGrid::make([
-            'name' => 'admin',
-            // 'select' => 'id',
-            'table' => 'admins as a',
+            'name' => 'Users',
+            'table' => 'admins as u',
+            'select' => 'u.id',
+            'aliased' => true , //boolean to validate aliasing on the basis of this.
+            'filterable' => [
+                [
+                    'column' => 'u.id',
+                    'type' => 'integer'
+                ], [
+                    'column' => 'u.email',
+                    'type' => 'string'
+                ], [
+                    'column' => 'u.name',
+                    'type' => 'string'
+                ]
+            ],
             'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'a.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'roles as r',
+                    'primaryKey' => 'u.role_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'r.id',
+                ]
             ],
             'columns' => [
                 [
-                    'name' => 'a.id',
+                    'name' => 'u.id',
                     'type' => 'string',
                     'label' => 'Admin ID',
                     'sortable' => true,
-                    'filterable' => false,
                 ],
                 [
-                    'name' => 'a.name',
+                    'name' => 'u.name',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Admin Name',
                     'sortable' => true,
-                    'filterable' => false,
-                    // will create on run time query
-                    // 'filter' => [
-                    //     'function' => 'where', // orwhere
-                    //     'condition' => ['name', '=', 'Admin'] // multiarray
-                    // ],
-                    'attributes' => [
-                        'class' => 'class-a class-b',
-                        'data-attr' => 'whatever you want',
-                        'onclick' => "window.alert('alert from datagrid column')"
-                     ],
-                    // 'wrapper' => function ($value, $object) {
-                    //     return '<a href="'.$value.'">' . $object->name . '</a>';
-                    // },
                 ],
                 [
-                    'name' => 'a.role_id',
+                    'name' => 'u.email',
                     'type' => 'string',
-                    'label' => 'Admin Role ID',
+                    'label' => 'Admin E-Mail',
                     'sortable' => true,
-                    'filterable' => false,
                 ],
                 [
-                    'name' => 'a.email',
+                    'name' => 'r.name',
                     'type' => 'string',
-                    'label' => 'Admin Email',
+                    'label' => 'Content',
                     'sortable' => true,
-                    'filterable' => false,
                 ],
-                [
-                    'name' => 'a.status',
-                    'type' => 'string',
-                    'label' => 'Admin Status',
-                    'sortable' => true,
-                    'filterable' => false,
-                ],
+                // [
+                //     'name' => 'a.first_name',
+                //     'type' => 'string',
+                //     'label' => 'Admin Name',
+                //     'sortable' => true,
+                //     'filterable' => true,
+                //     // will create on run time query
+                //     // 'filter' => [
+                //     //     'function' => 'where', // orwhere
+                //     //     'condition' => ['name', '=', 'Admin'] // multiarray
+                //     // ],
+                //     'attributes' => [
+                //         'class' => 'class-a class-b',
+                //         'data-attr' => 'whatever you want',
+                //         'onclick' => "window.alert('alert from datagrid column')"
+                //      ],
+                //     'wrapper' => function ($value, $object) {
+                //         return '<a href="'.$value.'">' . $object->first_name . '</a>';
+                //     },
+                // ],
+
+            ],
+            'select_verbs' => [
+                0 => "aggregate",
+                1 => "columns",
+                2 => "from",
+                3 => "joins",
+                4 => "wheres",
+                5 => "groups",
+                6 => "havings",
+                7 => "orders",
+                8 => "limit",
+                9 => "offset",
+                10 => "lock"
+            ],
+            'operators' => [
+                'eq' => "=",
+                'lt' => "<",
+                'gt' => ">",
+                'lte' => "<=",
+                'gte' => ">=",
+                'neqs' => "<>",
+                'neqn' => "!=",
+                'ceq' => "<=>",
+                'like' => "like",
+                'likebin' => "like binary",
+                'ntlike' => "not like",
+                'ilike' => "ilike",
+                'regex' => "regexp",
+                'notregex' => "not regexp",
+                'simto' => "similar to",
+                'nsimto' => "not similar to",
+                'nilike' => "not ilike",
             ],
             // 'css' => []
 

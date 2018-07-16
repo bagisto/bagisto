@@ -1,6 +1,6 @@
 <div class="grid-container{{-- $css->datagrid --}}">
     <div class="{{ $css->filter }} filter-wrapper">
-        {{-- <div class="filter-row-one">
+        <div class="filter-row-one">
             <div class="search-filter">
                 <input type="search" class="control" placeholder="Search Users" />
             </div>
@@ -55,7 +55,7 @@
                     <span class="icon cross-icon"></span>
                 </span>
             </span>
-        </div> --}}
+        </div>
     </div>
     <div class="table">
         <table class="{{ $css->table }}">
@@ -80,21 +80,6 @@
             </tbody>
         </table>
         {{-- @include('ui::partials.pagination') --}}
-        {{-- <div class="{{ $css->pagination }}" style="margin-top:15px;">
-            <div class="pagination">
-                <a class="page-item previous">
-                    <i class="icon angle-right-icon"></i>
-                </a>
-                <a class="page-item">1</a>
-                <a class="page-item" href="#status/6/page/2">2</a>
-                <a class="page-item active" href="#status/6/page/3">3</a>
-                <a class="page-item" href="#status/6/page/4">4</a>
-                <a class="page-item" href="#status/6/page/5">5</a>
-                <a href="#status/6/page/2" class="page-item next">
-                    <i class="icon angle-left-icon"></i>
-                </a>
-            </div>
-        </div> --}}
     </div>
 
 </div>

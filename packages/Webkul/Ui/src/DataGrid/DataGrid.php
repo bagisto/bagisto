@@ -87,8 +87,8 @@ class DataGrid
     public function make($args)
     {
         // list($name, $select, $table, $join, $columns) = array_values($args);
-        $name = $select = $filterable = $aliased = $table = false;
-        $join = $columns = $css = $operators = [];
+        $name = $select = $aliased = $table = false;
+        $join = $columns = $filterable = $css = $operators = [];
         extract($args);
         return $this->build($name, $select, $filterable, $aliased, $table, $join, $columns, $css, $operators);
     }
@@ -372,7 +372,7 @@ class DataGrid
 
     private function getQueryWithFilters()
     {
-        // the only use case remaining is making and testing the full validation and testing of t\
+        // the only use case remaining is making and testing the full validation and testing of
         // aliased case with alias used in column names also.
         if ($this->aliased) {
             //n of joins can lead to n number of aliases for columns and neglect the as for columns
