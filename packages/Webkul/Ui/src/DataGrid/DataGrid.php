@@ -558,6 +558,7 @@ class DataGrid
             'css' => $this->css,
             'results' => $this->results,
             'columns' => $this->columns,
+            'operators' => $this->operators,
         ]);
     }
 }

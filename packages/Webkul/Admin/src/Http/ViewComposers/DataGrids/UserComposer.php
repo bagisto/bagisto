@@ -54,13 +54,13 @@ class UserComposer
                 ]
             ],
             'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'roles as r',
-                    'primaryKey' => 'u.role_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'r.id',
-                ]
+                // [
+                //     'join' => 'leftjoin',
+                //     'table' => 'roles as r',
+                //     'primaryKey' => 'u.role_id',
+                //     'condition' => '=',
+                //     'secondaryKey' => 'r.id',
+                // ]
             ],
             'columns' => [
                 [
@@ -81,12 +81,12 @@ class UserComposer
                     'label' => 'Admin E-Mail',
                     'sortable' => true,
                 ],
-                [
-                    'name' => 'r.name',
-                    'type' => 'string',
-                    'label' => 'Content',
-                    'sortable' => true,
-                ],
+                // [
+                //     'name' => 'r.id',
+                //     'type' => 'string',
+                //     'label' => 'Content',
+                //     'sortable' => true,
+                // ],
                 // [
                 //     'name' => 'a.first_name',
                 //     'type' => 'string',
@@ -129,17 +129,17 @@ class UserComposer
                 'lte' => "<=",
                 'gte' => ">=",
                 'neqs' => "<>",
-                'neqn' => "!=",
-                'ceq' => "<=>",
+                // 'neqn' => "!=",
+                // 'ceq' => "<=>",
                 'like' => "like",
-                'likebin' => "like binary",
-                'ntlike' => "not like",
-                'ilike' => "ilike",
-                'regex' => "regexp",
-                'notregex' => "not regexp",
-                'simto' => "similar to",
-                'nsimto' => "not similar to",
-                'nilike' => "not ilike",
+                // 'likebin' => "like binary",
+                // 'ntlike' => "not like",
+                // 'ilike' => "ilike",
+                // 'regex' => "regexp",
+                // 'notregex' => "not regexp",
+                // 'simto' => "similar to",
+                // 'nsimto' => "not similar to",
+                // 'nilike' => "not ilike",
             ],
             // 'css' => []
 
