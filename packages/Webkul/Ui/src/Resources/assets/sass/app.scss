@@ -47,7 +47,7 @@ h2 {
 
 .btn {
     @include box-shadow(0 1px 4px 0 rgba(0, 0, 0, 0.20), 0 0 8px 0 rgba(0, 0, 0, 0.10));
-    border-radius: 3px;
+    @include border-radius(3px);
     border: none;
     color: #fff;
     cursor: pointer;
@@ -93,8 +93,9 @@ h2 {
 }
 .dropdown-list {
     width: 200px;
+    margin-bottom: 20px;
     @include box-shadow(0 2px 4px 0 rgba(0,0,0,0.16), 0 0 9px 0 rgba(0,0,0,0.16));
-    border-radius: 3px;
+    @include border-radius(3px);
     background-color: #FFFFFF;
     position: absolute;
     display: none;
@@ -116,6 +117,28 @@ h2 {
     &.top-right {
         bottom: 42px;
         right: 0px;
+    }
+
+    .search-box {
+        padding: 20px;
+        border-bottom: 1px solid $border-color;
+
+        .control {
+            background: #fff;
+            border: 2px solid $control-border-color;
+            @include border-radius(3px);
+            width: 100%;
+            height: 36px;
+            display: inline-block;
+            vertical-align: middle;
+            transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0px 10px;
+            font-size: 15px;
+
+            &:focus {
+                border-color: $brand-color;
+            }
+        }
     }
 
     .dropdown-container {
@@ -140,10 +163,9 @@ h2 {
             li {
                 padding: 5px 0px;
 
-                &:hover {
-                    color: $brand-color;
-                    cursor: pointer;
-                }
+                // &:hover {
+                //     color: $brand-color;
+                // }
 
                 a:link, a:active, a:visited, a:focus {
                     color: #333333;
@@ -152,7 +174,16 @@ h2 {
                 a:hover {
                     color: $brand-color;
                 }
+
+                .checkbox {
+                    margin: 0;
+                }
             }
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 10px;
         }
     }
 }
@@ -177,6 +208,25 @@ h2 {
             padding: 12px 10px;
             border-bottom: solid 1px #D3D3D3;
             color: #3A3A3A;
+            vertical-align: top;
+
+            &.actions {
+                text-align: right;
+                
+                .icon {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .control-group {
+        width: 100%;
+        margin-bottom: 0;
+
+        .control {
+            width: 100%;
+            margin: 0;    
         }
     }
 }
@@ -186,7 +236,7 @@ h2 {
     text-align: left;
     background: #FFFFFF;
     border: 2px solid $control-border-color;
-    border-radius: 3px;
+    @include border-radius(3px);
     font-size: 14px;
     color: #8E8E8E;
     padding: 8px 35px 8px 10px;
@@ -210,7 +260,7 @@ h2 {
     .page-item {
         background: #FFFFFF;
         border: 2px solid $control-border-color;
-        border-radius: 3px;
+        @include border-radius(3px);
         padding: 7px 14px;
         margin-right: 5px;
         font-size: 16px;
@@ -325,7 +375,7 @@ h2 {
     .control {
         background: #fff;
         border: 2px solid $control-border-color;
-        border-radius: 3px;
+        @include border-radius(3px);
         width: 70%;
         height: 36px;
         display: inline-block;
@@ -379,9 +429,9 @@ h2 {
     .alert {
         width: 300px;
         padding: 15px;
-        border-radius: 3px;
+        @include border-radius(3px);
         display: inline-block;
-        box-shadow: 0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1), 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+        @include box-shadow(0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1), 0px 2px 6px 0px rgba(0, 0, 0, 0.12));
         position: relative;
         animation: jelly 0.5s ease-in-out;
         transform-origin: center top;
@@ -448,19 +498,40 @@ h2 {
         padding: 20px 15px;
         cursor: pointer;
 
+        .expand-icon {
+            background-image: url('../images/Expand-Light.svg');
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 20px;
+            display: inline-block;
+        }
+
         .icon {
             float: right;
+
+            &.left {
+                float: left;
+            }
         }
     }
 
     .accordian-content {
+        width: 100%;
         padding: 20px 15px;
         display: none;
         transition: 0.3s ease all;
     }
 
-    &.active .accordian-content {
+    &.active > .accordian-content {
         display: inline-block;
+    }
+
+    &.active > .accordian-header .expand-icon {
+        background-image: url('../images/Expand-Light-On.svg');
     }
 }
 
@@ -508,11 +579,71 @@ h2 {
 }
 
 .panel {
-    box-shadow: 0 2px 25px 0 rgba(0,0,0,0.15);
-    border-radius: 5px;
+    @include box-shadow(0 2px 25px 0 rgba(0,0,0,0.15));
+    @include border-radius(5px);
     background: #fff;
 
     .panel-content {
         padding: 20px;
+    }
+}
+
+.modal-open {
+    overflow: hidden;
+}
+
+.modal-overlay {
+    display: none;
+    overflow-y: auto;
+    z-index: 10;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    position: fixed;
+    background: #000;
+    opacity: 0.75;
+}
+.modal-open .modal-overlay {
+    display: block;
+}
+
+.modal-container {
+    animation: fade-in-white 0.3s ease-in-out;
+    z-index: 11;
+    margin-left: -350px;
+    width: 600px;
+    max-width: 80%;
+    background: #FFFFFF;
+    position: fixed;
+    left: 50%;
+    top: 100px;
+    margin-bottom: 100px;
+    @include box-shadow(0px 15px 25px 0px rgba(0, 0, 0, 0.03), 0px 20px 45px 5px rgba(0, 0, 0, 0.2));
+    animation: jelly 0.5s ease-in-out;
+    @include border-radius(5px);
+
+    .modal-header {
+        padding: 20px;
+
+        h3 {
+            display: inline-block;
+            font-size: 20px;
+            color: #3A3A3A;
+            margin: 0;
+        }
+
+        .icon {
+            float: right;
+            cursor: pointer;
+        }
+    }
+
+    .modal-body {
+        padding: 20px;
+
+        .control-group .control {
+            width: 100%;
+        }
     }
 }

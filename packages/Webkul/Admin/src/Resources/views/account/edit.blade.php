@@ -25,7 +25,7 @@
                     <input name="_method" type="hidden" value="PUT">
 
                     <accordian :title="'{{ __('General') }}'" :active="true">
-                        <div class="accordian-content">
+                        <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name">{{ __('Name') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ $user->name }}"/>
@@ -41,7 +41,7 @@
                     </accordian>
 
                     <accordian :title="'{{ __('Password') }}'" :active="true">
-                        <div class="accordian-content">
+                        <div slot="body">
                             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                                 <label for="password">{{ __('Password') }}</label>
                                 <input type="password" v-validate="'min:6'" class="control" id="password" name="password"/>

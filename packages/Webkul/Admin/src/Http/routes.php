@@ -44,6 +44,8 @@ Route::group(['middleware' => ['web']], function () {
 
             // Catalog Routes
             Route::prefix('catalog')->group(function () {
+
+                // Catalog Attribute Routes
                 Route::get('/attributes', 'Webkul\Attribute\Http\Controllers\AttributeController@index')->defaults('_config', [
                     'view' => 'admin::catalog.attributes.index'
                 ])->name('admin.catalog.attributes.index');
@@ -55,6 +57,35 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('/attributes/create', 'Webkul\Attribute\Http\Controllers\AttributeController@store')->defaults('_config', [
                     'redirect' => 'admin.catalog.attributes.index'
                 ])->name('admin.catalog.attributes.store');
+
+                Route::get('/attributes/edit/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@edit')->defaults('_config', [
+                    'view' => 'admin::catalog.attributes.edit'
+                ])->name('admin.catalog.attributes.edit');
+
+                Route::put('/attributes/edit/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@update')->defaults('_config', [
+                    'redirect' => 'admin.catalog.attributes.index'
+                ])->name('admin.catalog.attributes.update');
+
+                // Catalog Family Routes
+                Route::get('/families', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@index')->defaults('_config', [
+                    'view' => 'admin::catalog.families.index'
+                ])->name('admin.catalog.families.index');
+
+                Route::get('/families/create', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@create')->defaults('_config', [
+                    'view' => 'admin::catalog.families.create'
+                ])->name('admin.catalog.families.create');
+
+                Route::post('/families/create', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@store')->defaults('_config', [
+                    'redirect' => 'admin.catalog.families.index'
+                ])->name('admin.catalog.families.store');
+
+                Route::get('/families/edit/{id}', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@edit')->defaults('_config', [
+                    'view' => 'admin::catalog.families.edit'
+                ])->name('admin.catalog.families.edit');
+
+                Route::put('/families/edit/{id}', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@update')->defaults('_config', [
+                    'redirect' => 'admin.catalog.families.index'
+                ])->name('admin.catalog.families.update');
             });
 
             // Datagrid Routes

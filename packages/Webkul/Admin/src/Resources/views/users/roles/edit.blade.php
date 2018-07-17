@@ -23,7 +23,7 @@
                     <input name="_method" type="hidden" value="PUT">
 
                     <accordian :title="'{{ __('General') }}'" :active="true">
-                        <div class="accordian-content">
+                        <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name">{{ __('Name') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="email" name="name" value="{{ $role->name }}"/>
@@ -38,7 +38,7 @@
                     </accordian>
 
                     <accordian :title="'{{ __('Access Control') }}'" :active="true">
-                        <div class="accordian-content">
+                        <div slot="body">
                             <div class="control-group">
                                 <label for="permission_type">{{ __('Permissions') }}</label>
                                 <select class="control" name="permission_type" id="permission_type">

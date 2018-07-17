@@ -17,9 +17,17 @@ class CreateAttributeGroupsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
-            $table->integer('sort_order');
+            $table->integer('position');
             $table->integer('attribute_family_id')->unsigned();
             $table->unique(['attribute_family_id', 'name']);
+        });
+
+        Schema::create('attribute_group_mappings', function (Blueprint $table) {
+            $table->integer('attribute_id')->unsigned();
+            $table->integer('attribute_group_id')->unsigned();
+            $table->primary(['attribute_id', 'attribute_group_id']);
+            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
+            $table->foreign('attribute_group_id')->references('id')->on('attribute_groups')->onDelete('cascade');
         });
     }
 
@@ -31,5 +39,7 @@ class CreateAttributeGroupsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('attribute_groups');
+
+        Schema::dropIfExists('attribute_group_mappings');
     }
 }

@@ -43,6 +43,8 @@ class EventServiceProvider extends ServiceProvider
 
             $menu->add('catalog.attributes', 'Attributes', 'admin.catalog.attributes.index', 3);
 
+            $menu->add('catalog.families', 'Families', 'admin.catalog.families.index', 4);
+
             $menu->add('configuration', 'Configure', 'admin.account.edit', 6, 'configuration-icon');
 
             $menu->add('configuration.account', 'My Account', 'admin.account.edit', 1);

@@ -5,16 +5,26 @@ window.VeeValidate = require('vee-validate');
 Vue.use(VeeValidate);
 
 $(document).ready(function () {
-    const app = new Vue({
+    Vue.config.ignoredElements = [
+        'option-wrapper',
+        'group-form',
+        'group-list'
+    ];
+
+    var app = new Vue({
         el: '#app',
 
-        mounted: function() {
+        data: {
+            modalIds: {}
+        },
+
+        mounted () {
             this.addServerErrors()
             this.addFlashMessages()
         },
 
         methods: {
-            onSubmit: function(e) {
+            onSubmit (e) {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
                         e.target.submit()
@@ -22,7 +32,7 @@ $(document).ready(function () {
                 });
             },
 
-            addServerErrors: function() {
+            addServerErrors () {
                 var scope = null;
                 for (var key in serverErrors) {
                     const field = this.$validator.fields.find({ name: key, scope: scope });
@@ -37,12 +47,16 @@ $(document).ready(function () {
                 }
             },
 
-            addFlashMessages: function() {
+            addFlashMessages () {
                 const flashes = this.$refs.flashes
 
                 flashMessages.forEach(function(flash) {
                     flashes.addFlash(flash)
                 }, this);
+            },
+
+            showModal (id) {
+                this.$set(this.modalIds, id, true);
             }
         }
     });
