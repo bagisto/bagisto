@@ -109,7 +109,6 @@
   right: 0;
   left: 0;
   bottom: 0px;
-  z-index: 1;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -144,7 +143,6 @@
 
 .content-container .content-wrapper {
   padding: 25px 25px 25px 305px;
-  overflow-y: auto;
 }
 
 .content-container .content {

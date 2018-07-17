@@ -1,5 +1,3 @@
-window.jQuery = window.$ = $ = require('jquery');
-
 $(function() {
     $(document).click(function(e) {
         var target = e.target;
@@ -28,6 +26,31 @@ $(function() {
             autoDropupDropdown();
         }
     }
+
+    $('.dropdown-list .search-box .control').on('input', function() {
+        var currentElement = $(this);
+        currentElement.parents(".dropdown-list").find('li').each(function() {
+            var text = $(this).text().trim().toLowerCase();
+            var value = $(this).attr('data-id');
+            if(value) {
+                var isTextContained = text.search(currentElement.val().toLowerCase());
+                var isValueContained = value.search(currentElement.val());
+                if(isTextContained < 0 && isValueContained < 0) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                    flag = 1;
+                }
+            } else {
+                var isTextContained = text.search(currentElement.val().toLowerCase());
+                if(isTextContained < 0) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            }
+        });
+    });
 
     function autoDropupDropdown() {
         dropdown = $(".dropdown-open");

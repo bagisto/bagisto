@@ -109,13 +109,20 @@ window.VeeValidate = __webpack_require__(8);
 Vue.use(VeeValidate);
 
 $(document).ready(function () {
+    Vue.config.ignoredElements = ['option-wrapper', 'group-form', 'group-list'];
+
     var app = new Vue({
         el: '#app',
+
+        data: {
+            modalIds: {}
+        },
 
         mounted: function mounted() {
             this.addServerErrors();
             this.addFlashMessages();
         },
+
 
         methods: {
             onSubmit: function onSubmit(e) {
@@ -125,7 +132,6 @@ $(document).ready(function () {
                     }
                 });
             },
-
             addServerErrors: function addServerErrors() {
                 var scope = null;
                 for (var key in serverErrors) {
@@ -140,13 +146,15 @@ $(document).ready(function () {
                     }
                 }
             },
-
             addFlashMessages: function addFlashMessages() {
                 var flashes = this.$refs.flashes;
 
                 flashMessages.forEach(function (flash) {
                     flashes.addFlash(flash);
                 }, this);
+            },
+            showModal: function showModal(id) {
+                this.$set(this.modalIds, id, true);
             }
         }
     });

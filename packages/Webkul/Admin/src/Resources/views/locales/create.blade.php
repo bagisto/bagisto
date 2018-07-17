@@ -21,7 +21,7 @@
                     @csrf()
 
                     <accordian :title="'{{ __('General') }}'" :active="true">
-                        <div class="accordian-content">
+                        <div slot="body">
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code">{{ __('Code') }}</label>
                                 <input v-validate="'required'" class="control" id="code" name="code"/>

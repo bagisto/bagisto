@@ -28,8 +28,6 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->composeView();
 
-        Blade::directive('continue', function() { return "<?php continue; ?>"; });
-
         $this->app->register(EventServiceProvider::class);
     }
 

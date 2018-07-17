@@ -110,6 +110,12 @@
     height: 24px;
 }
 
+.expand-icon {
+    background-image: url('../images/Expand-Light.svg');
+    width: 18px;
+    height: 18px;
+}
+
 .active {
     .dashboard-icon {
         background-image: url('../images/Icon-Dashboard-Active.svg');
@@ -133,6 +139,10 @@
         height: 8px;
     }
 
+    .expand-icon {
+        background-image: url('../images/Expand-Light-On.svg');
+    }
+
     &.dashboard-icon {
         background-image: url('../images/Icon-Dashboard-Active.svg');
     }
@@ -150,5 +160,9 @@
         background-image: url('../images/Arrow-Down.svg');
         width: 14px;
         height: 8px;
+    }
+
+    &.expand-icon {
+        background-image: url('../images/Expand-Light-On.svg');
     }
 }

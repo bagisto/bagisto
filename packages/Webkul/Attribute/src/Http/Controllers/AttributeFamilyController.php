@@ -4,16 +4,17 @@ namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 
 
 /**
- * Catalog attribute controller
+ * Catalog family controller
  *
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class AttributeController extends Controller
+class AttributeFamilyController extends Controller
 {
     /**
      * Contains route related configuration
@@ -23,21 +24,21 @@ class AttributeController extends Controller
     protected $_config;
     
     /**
-     * AttributeRepository object
+     * AttributeFamilyRepository object
      *
      * @var array
      */
-    protected $attribute;
+    protected $attributeFamily;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository  $attribute
+     * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
      * @return void
      */
-    public function __construct(Attribute $attribute)
+    public function __construct(AttributeFamily $attributeFamily)
     {
-        $this->attribute = $attribute;
+        $this->attributeFamily = $attributeFamily;
 
         $this->_config = request('_config');
     }
@@ -55,11 +56,14 @@ class AttributeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  Webkul\Attribute\Repositories\AttributeRepository  $attribute
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Attribute $attribute)
     {
-        return view($this->_config['view']);
+        $attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
+
+        return view($this->_config['view'], compact('attributes'));
     }
 
     /**
@@ -70,14 +74,13 @@ class AttributeController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Slug],
-            'admin_name' => 'required',
-            'type' => 'required'
+            'code' => ['required', 'unique:families,code', new \Webkul\Core\Contracts\Validations\Slug],
+            'name' => 'required'
         ]);
 
-        $this->attribute->create(request()->all());
+        $this->attributeFamily->create(request()->all());
 
-        session()->flash('success', 'Attribute created successfully.');
+        session()->flash('success', 'Family created successfully.');
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -85,14 +88,17 @@ class AttributeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  Webkul\Attribute\Repositories\AttributeRepository  $attribute
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Attribute $attribute, $id)
     {
-        $attribute = $this->attribute->findOrFail($id);
+        $attributeFamily = $this->attributeFamily->findOrFail($id);
 
-        return view($this->_config['view'], compact('attribute'));
+        $attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
+
+        return view($this->_config['view'], compact('attributes', 'family'));
     }
 
     /**
@@ -105,14 +111,13 @@ class AttributeController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attributes,code,' . $id, new \Webkul\Core\Contracts\Validations\Slug],
-            'admin_name' => 'required',
-            'type' => 'required'
+            'code' => ['required', 'unique:families,code,' . $id, new \Webkul\Core\Contracts\Validations\Slug],
+            'name' => 'required'
         ]);
         
-        $this->attribute->update(request()->all(), $id);
+        $this->attributeFamily->update(request()->all(), $id);
 
-        session()->flash('success', 'Attribute updated successfully.');
+        session()->flash('success', 'Family updated successfully.');
 
         return redirect()->route($this->_config['redirect']);
     }

@@ -16,16 +16,16 @@ class CreateAttributesTable extends Migration
         Schema::create('attributes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code')->unique();
-            $table->string('name');
+            $table->string('admin_name');
             $table->string('type');
             $table->string('validation')->nullable();
             $table->integer('position')->nullable();
-            $table->boolean('is_required');
-            $table->boolean('is_unique');
-            $table->boolean('value_per_locale');
-            $table->boolean('value_per_channel');
-            $table->boolean('is_filterable');
-            $table->boolean('is_configurable');
+            $table->boolean('is_required')->default(1);
+            $table->boolean('is_unique')->default(0);
+            $table->boolean('value_per_locale')->default(0);
+            $table->boolean('value_per_channel')->default(0);
+            $table->boolean('is_filterable')->default(0);
+            $table->boolean('is_configurable')->default(0);
             $table->boolean('is_user_defined')->default(1);
             $table->timestamps();
         });

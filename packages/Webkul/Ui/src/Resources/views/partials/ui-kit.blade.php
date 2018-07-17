@@ -311,22 +311,22 @@
             <label class="styleguide-label">Icons</label>
             <div class="styleguide-wrapper">
                 <span class="icon-wrapper">
-                    <i class="icon icon-dashboard"></i>
+                    <i class="icon dashboard-icon"></i>
                 </span>
                 <span class="icon-wrapper">
-                    <i class="icon icon-dashboard active"></i>
+                    <i class="icon dashboard-icon active"></i>
                 </span>
                 <span class="icon-wrapper">
-                    <i class="icon icon-configuration"></i>
+                    <i class="icon configuration-icon"></i>
                 </span>
                 <span class="icon-wrapper">
-                    <i class="icon icon-configuration active"></i>
+                    <i class="icon configuration-icon active"></i>
                 </span>
                 <span class="icon-wrapper">
-                    <i class="icon icon-settings"></i>
+                    <i class="icon settings-icon"></i>
                 </span>
                 <span class="icon-wrapper">
-                    <i class="icon icon-settings active"></i>
+                    <i class="icon settings-icon active"></i>
                 </span>
                 <span class="icon-wrapper">
                     <i class="icon angle-right-icon"></i>

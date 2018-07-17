@@ -1,17 +1,17 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.catalog.attributes.add-title') }}
+    {{ __('admin::app.catalog.attributes.edit-title') }}
 @stop
 
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.catalog.attributes.store') }}">
+        <form method="POST" action="{{ route('admin.catalog.attributes.update', $attribute->id) }}">
 
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('admin::app.catalog.attributes.add-title') }}</h1>
+                    <h1>{{ __('admin::app.catalog.attributes.edit-title') }}</h1>
                 </div>
 
                 <div class="page-action">
@@ -24,25 +24,43 @@
             <div class="page-content">
                 <div class="form-container">
                     @csrf()
+                    <input name="_method" type="hidden" value="PUT">
 
                     <accordian :title="'{{ __('admin::app.catalog.attributes.general') }}'" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code">{{ __('admin::app.catalog.attributes.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}"/>
+                                <input type="hidden" name="code" value="{{ old('code') ?: $attribute->code }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') ?: $attribute->code }}" disabled="disabled"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
                             <div class="control-group">
+                                <?php $selectedOption = old('type') ?: $attribute->type ?>
                                 <label for="type">{{ __('admin::app.catalog.attributes.type') }}</label>
-                                <select class="control" id="type" name="type">
-                                    <option value="text">{{ __('admin::app.catalog.attributes.text') }}</option>
-                                    <option value="textarea">{{ __('admin::app.catalog.attributes.textarea') }}</option>
-                                    <option value="select">{{ __('admin::app.catalog.attributes.select') }}</option>
-                                    <option value="multiselect">{{ __('admin::app.catalog.attributes.multiselect') }}</option>
-                                    <option value="checkbox">{{ __('admin::app.catalog.attributes.checkbox') }}</option>
-                                    <option value="datetime">{{ __('admin::app.catalog.attributes.datetime') }}</option>
-                                    <option value="date">{{ __('admin::app.catalog.attributes.date') }}</option>
+                                <input type="hidden" name="type" value="{{ old('type') ?: $attribute->type }}"/>
+                                <select class="control" id="type" name="type" disabled="disabled">
+                                    <option value="text" {{ $selectedOption == 'text' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.text') }}
+                                    </option>
+                                    <option value="textarea" {{ $selectedOption == 'textarea' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.textarea') }}
+                                    </option>
+                                    <option value="select" {{ $selectedOption == 'select' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.select') }}
+                                    </option>
+                                    <option value="multiselect" {{ $selectedOption == 'multiselect' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.multiselect') }}
+                                    </option>
+                                    <option value="checkbox" {{ $selectedOption == 'checkbox' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.checkbox') }}
+                                    </option>
+                                    <option value="datetime" {{ $selectedOption == 'datetime' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.datetime') }}
+                                    </option>
+                                    <option value="date" {{ $selectedOption == 'date' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.date') }}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -53,7 +71,7 @@
 
                             <div class="control-group" :class="[errors.has('admin_name') ? 'has-error' : '']">
                                 <label for="admin_name">{{ __('admin::app.catalog.attributes.admin') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="admin_name" name="admin_name" value="{{ old('admin_name') }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="admin_name" name="admin_name" value="{{ old('admin_name') ?: $attribute->admin_name }}"/>
                                 <span class="control-error" v-if="errors.has('admin_name')">@{{ errors.first('admin_name') }}</span>
                             </div>
 
@@ -61,7 +79,7 @@
 
                                 <div class="control-group">
                                     <label for="locale-{{ $locale->code }}">{{ $locale->name . ' (' . $locale->code . ')' }}</label>
-                                    <input type="text" class="control" id="locale-{{ $locale->code }}" name="<?php echo $locale->code; ?>[name]" value="{{ old($locale->code)['name'] }}"/>
+                                    <input type="text" class="control" id="locale-{{ $locale->code }}" name="<?php echo $locale->code; ?>[name]" value="{{ old($locale->code)['name'] ?: $attribute->translate($locale->code)->name }}"/>
                                 </div>
 
                             @endforeach
@@ -69,7 +87,7 @@
                         </div>
                     </accordian>
 
-                    <div class="hide">
+                    <div class="<?php in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hide' ?>">
                         <accordian :title="'{{ __('admin::app.catalog.attributes.options') }}'" :active="true" :id="'options'">
                             <div slot="body">
                             
@@ -85,27 +103,36 @@
                             <div class="control-group">
                                 <label for="is_required">{{ __('admin::app.catalog.attributes.is_required') }}</label>
                                 <select class="control" id="is_required" name="is_required">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
-                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1" {{ $attribute->is_required ? 'selected' : '' }}>{{ __('admin::app.catalog.attributes.yes') }}</option>
+                                    <option value="0" {{ $attribute->is_required ? '' : 'selected' }}>{{ __('admin::app.catalog.attributes.no') }}</option>
                                 </select>
                             </div>
 
                             <div class="control-group">
                                 <label for="is_unique">{{ __('admin::app.catalog.attributes.is_unique') }}</label>
                                 <select class="control" id="is_unique" name="is_unique">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
-                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1" {{ $attribute->is_unique ? 'selected' : '' }}>{{ __('admin::app.catalog.attributes.yes') }}</option>
+                                    <option value="0" {{ $attribute->is_unique ? '' : 'selected' }}>{{ __('admin::app.catalog.attributes.no') }}</option>
                                 </select>
                             </div>
 
                             <div class="control-group">
+                                <?php $selectedValidation = old('input_validation') ?: $attribute->input_validation ?>
                                 <label for="validation">{{ __('admin::app.catalog.attributes.input_validation') }}</label>
                                 <select class="control" id="validation" name="validation">
                                     <option value=""></option>
-                                    <option value="number">{{ __('admin::app.catalog.attributes.number') }}</option>
-                                    <option value="decimal">{{ __('admin::app.catalog.attributes.decimal') }}</option>
-                                    <option value="email">{{ __('admin::app.catalog.attributes.email') }}</option>
-                                    <option value="url">{{ __('admin::app.catalog.attributes.url') }}</option>
+                                    <option value="number" {{ $selectedValidation == 'number' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.number') }}
+                                    </option>
+                                    <option value="decimal" {{ $selectedValidation == 'decimal' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.decimal') }}
+                                    </option>
+                                    <option value="email" {{ $selectedValidation == 'email' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.email') }}
+                                    </option>
+                                    <option value="url" {{ $selectedValidation == 'url' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.url') }}
+                                    </option>
                                 </select>
                             </div>
 
@@ -118,40 +145,60 @@
                             <div class="control-group">
                                 <label for="status">{{ __('admin::app.catalog.attributes.status') }}</label>
                                 <select class="control" id="status" name="status">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
-                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1" {{ $attribute->status ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.yes') }}
+                                    </option>
+                                    <option value="0" {{ $attribute->status ? '' : 'selected' }}>
+                                        {{ __('admin::app.catalog.attributes.no') }}
+                                    </option>
                                 </select>
                             </div>
                         
                             <div class="control-group">
                                 <label for="value_per_locale">{{ __('admin::app.catalog.attributes.value_per_locale') }}</label>
                                 <select class="control" id="value_per_locale" name="value_per_locale">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
-                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1" {{ $attribute->value_per_locale ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.yes') }}
+                                    </option>
+                                    <option value="0" {{ $attribute->value_per_locale ? '' : 'selected' }}>
+                                        {{ __('admin::app.catalog.attributes.no') }}
+                                    </option>
                                 </select>
                             </div>
                         
                             <div class="control-group">
                                 <label for="value_per_channel">{{ __('admin::app.catalog.attributes.value_per_channel') }}</label>
                                 <select class="control" id="value_per_channel" name="value_per_channel">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
-                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1" {{ $attribute->value_per_channel ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.yes') }}
+                                    </option>
+                                    <option value="0" {{ $attribute->value_per_channel ? '' : 'selected' }}>
+                                        {{ __('admin::app.catalog.attributes.no') }}
+                                    </option>
                                 </select>
                             </div>
                         
                             <div class="control-group">
                                 <label for="is_filterable">{{ __('admin::app.catalog.attributes.is_filterable') }}</label>
                                 <select class="control" id="is_filterable" name="is_filterable">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
-                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1" {{ $attribute->is_filterable ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.yes') }}
+                                    </option>
+                                    <option value="0" {{ $attribute->is_filterable ? '' : 'selected' }}>
+                                        {{ __('admin::app.catalog.attributes.no') }}
+                                    </option>
                                 </select>
                             </div>
                         
                             <div class="control-group">
                                 <label for="is_configurable">{{ __('admin::app.catalog.attributes.is_configurable') }}</label>
                                 <select class="control" id="is_configurable" name="is_configurable">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
-                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1" {{ $attribute->is_configurable ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.yes') }}
+                                    </option>
+                                    <option value="0" {{ $attribute->is_configurable ? '' : 'selected' }}>
+                                        {{ __('admin::app.catalog.attributes.no') }}
+                                    </option>
                                 </select>
                             </div>
 
@@ -196,7 +243,7 @@
 
                             <td>
                                 <div class="control-group" :class="[errors.has(sortOrderName(row)) ? 'has-error' : '']">
-                                    <input type="text" v-validate="'required'" :name="sortOrderName(row)" class="control"/>
+                                    <input type="text" v-validate="'required'" v-model="row['sort_order']" :name="sortOrderName(row)" class="control"/>
                                     <span class="control-error" v-if="errors.has(sortOrderName(row))">@{{ errors.first(sortOrderName(row)) }}</span>
                                 </div>
                             </td>
@@ -229,6 +276,19 @@
 
                 template: '#options-template', 
 
+                created () {
+                    @foreach($attribute->options as $option)
+                        this.optionRowCount++;
+                        var row = {'id': '{{ $option->id }}', 'sort_order': '{{ $option->sort_order }}'};
+
+                        @foreach(Webkul\Core\Models\Locale::all() as $locale)
+                            row['{{ $locale->code }}'] = '{{ $option->translate($locale->code)->label }}';
+                        @endforeach
+
+                        this.optionRows.push(row);
+                    @endforeach
+                },
+
                 data: () => ({
                     optionRowCount: 0,
                     optionRows: []
@@ -240,7 +300,7 @@
                         var row = {'id': 'option_' + rowCount};
 
                         @foreach(Webkul\Core\Models\Locale::all() as $locale)
-                        row['{{ $locale->code }}'] = '';
+                            row['{{ $locale->code }}'] = '';
                         @endforeach
 
                         this.optionRows.push(row);
