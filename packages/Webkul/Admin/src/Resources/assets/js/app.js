@@ -1,23 +1,30 @@
-window.jQuery = window.$ = $ = require('jquery');
-window.Vue = require('vue');
-window.VeeValidate = require('vee-validate');
+window.jQuery = window.$ = $ = require("jquery");
+window.Vue = require("vue");
+window.VeeValidate = require("vee-validate");
 
 Vue.use(VeeValidate);
 
-$(document).ready(function () {
+//register single file components here
+// import VueFlatpickr from "vue-flatpickr";
+// import "vue-flatpickr/theme/dark.css";
+// Vue.use(VueFlatpickr);
+
+Vue.component("datetime", require("./components/datetime"));
+
+$(document).ready(function() {
     const app = new Vue({
-        el: '#app',
+        el: "#app",
 
         mounted: function() {
-            this.addServerErrors()
-            this.addFlashMessages()
+            this.addServerErrors();
+            this.addFlashMessages();
         },
 
         methods: {
             onSubmit: function(e) {
-                this.$validator.validateAll().then((result) => {
+                this.$validator.validateAll().then(result => {
                     if (result) {
-                        e.target.submit()
+                        e.target.submit();
                     }
                 });
             },
@@ -25,23 +32,26 @@ $(document).ready(function () {
             addServerErrors: function() {
                 var scope = null;
                 for (var key in serverErrors) {
-                    const field = this.$validator.fields.find({ name: key, scope: scope });
+                    const field = this.$validator.fields.find({
+                        name: key,
+                        scope: scope
+                    });
                     if (field) {
                         this.$validator.errors.add({
                             id: field.id,
                             field: key,
                             msg: serverErrors[key][0],
-                            scope: scope,
+                            scope: scope
                         });
                     }
                 }
             },
 
             addFlashMessages: function() {
-                const flashes = this.$refs.flashes
+                const flashes = this.$refs.flashes;
 
                 flashMessages.forEach(function(flash) {
-                    flashes.addFlash(flash)
+                    flashes.addFlash(flash);
                 }, this);
             }
         }

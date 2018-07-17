@@ -147,6 +147,16 @@ class DataGridController extends Controller
                     'type' => 'string'
                 ]
             ],
+            'searchables' =>[
+                [
+                    'name' => 'a.id',
+                    'label' => 'ID'
+                ],
+                [
+                    'name' => 'a.name',
+                    'label' => 'Name'
+                ]
+            ],
             'join' => [
                 [
                     'join' => 'leftjoin',

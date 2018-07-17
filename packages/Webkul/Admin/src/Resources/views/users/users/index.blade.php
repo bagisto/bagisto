@@ -19,7 +19,9 @@
         </div>
 
         <div class="page-content">
+
             {!! $datagrid->render() !!}
+            {{-- <datetime></datetime> --}}
         </div>
     </div>
 

@@ -185,12 +185,13 @@ module.exports = __webpack_require__(21);
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('flash-wrapper', __webpack_require__(3));
-Vue.component('flash', __webpack_require__(6));
-Vue.component('accordian', __webpack_require__(9));
-Vue.component('tree-view', __webpack_require__(12));
-Vue.component('tree-item', __webpack_require__(14));
-Vue.component('tree-checkbox', __webpack_require__(16));
+Vue.component("flash-wrapper", __webpack_require__(3));
+Vue.component("flash", __webpack_require__(6));
+Vue.component("accordian", __webpack_require__(9));
+Vue.component("tree-view", __webpack_require__(12));
+Vue.component("tree-item", __webpack_require__(14));
+Vue.component("tree-checkbox", __webpack_require__(16));
+// Vue.component("datetime", require("./components/datetime"));
 
 /***/ }),
 /* 3 */

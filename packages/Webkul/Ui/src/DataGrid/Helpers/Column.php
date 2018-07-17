@@ -143,6 +143,7 @@ class Column extends AbstractFillable
      */
     public function sorting()
     {
+        return $this->label;
         if ($this->sortable) {
             return vsprintf($this->sortHtml, [$this->sortingUrl(), $this->label]);
         } else {

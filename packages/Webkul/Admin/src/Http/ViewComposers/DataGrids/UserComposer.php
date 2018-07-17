@@ -43,24 +43,23 @@ class UserComposer
             'aliased' => true , //boolean to validate aliasing on the basis of this.
             'filterable' => [
                 [
-                    'column' => 'u.id',
-                    'type' => 'integer'
-                ], [
                     'column' => 'u.email',
-                    'type' => 'string'
+                    'type' => 'string',
+                    'label' => 'Admin E-Mail'
                 ], [
                     'column' => 'u.name',
-                    'type' => 'string'
+                    'type' => 'string',
+                    'label' => 'Admin Name'
                 ]
             ],
             'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'roles as r',
+                    'primaryKey' => 'u.role_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'r.id',
+                ]
             ],
             'columns' => [
                 [
@@ -81,12 +80,12 @@ class UserComposer
                     'label' => 'Admin E-Mail',
                     'sortable' => true,
                 ],
-                // [
-                //     'name' => 'r.id',
-                //     'type' => 'string',
-                //     'label' => 'Content',
-                //     'sortable' => true,
-                // ],
+                [
+                    'name' => 'r.name as rolename',
+                    'type' => 'string',
+                    'label' => 'Role Name',
+                    'sortable' => true,
+                ],
                 // [
                 //     'name' => 'a.first_name',
                 //     'type' => 'string',
@@ -129,7 +128,7 @@ class UserComposer
                 'lte' => "<=",
                 'gte' => ">=",
                 'neqs' => "<>",
-                // 'neqn' => "!=",
+                'neqn' => "!=",
                 // 'ceq' => "<=>",
                 'like' => "like",
                 // 'likebin' => "like binary",
