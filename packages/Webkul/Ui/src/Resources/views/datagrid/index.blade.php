@@ -119,25 +119,6 @@
                     Available
                     <span class="icon cross-icon"></span>
                 </span>
-
-            </span>
-            <span class="filter-one">
-                <span class="filter-name">
-                    Stock
-                </span>
-                <span class="filter-value">
-                    Available
-                    <span class="icon cross-icon"></span>
-                </span>
-            </span>
-            <span class="filter-one">
-                <span class="filter-name">
-                    Stock
-                </span>
-                <span class="filter-value">
-                    Available
-                    <span class="icon cross-icon"></span>
-                </span>
             </span>
         </div>
     </div>
@@ -147,7 +128,12 @@
                 <tr>
                     <th class="{{-- $css->thead_td --}}">Mass Action</th>
                     @foreach ($columns as $column)
-                    <th class="$css->thead_td grid_head">{!! $column->sorting() !!}</th>
+                    {{-- {{ dd($column->sortable) }} --}}
+                    @if($column->sortable == "true")
+                    <th class="$css->thead_td grid_head" data-column-name ={{ $column->name }} data-column-sort="asc">{!! $column->sorting() !!}<span class="icon sort-down-icon"></span></th>
+                    @else
+                        <th class="$css->thead_td grid_head">{!! $column->sorting() !!}</th>
+                    @endif
                     @endforeach
                 </tr>
             </thead>
@@ -173,12 +159,14 @@
     </div>
     @section('javascript')
         <script type="text/javascript">
+        // var allFilters = [];
+        var allFilters1 = [];
         var filter_value;
         var filter_column;
         var filter_condition;
         var filter_range;
         var filt = '';
-        var count_filters = 0;
+        var count_filters = parseInt(0);
         var url;
         var array_start = '[';
         var array_end = ']';
@@ -187,8 +175,30 @@
         var myURL = document.location;
         let params;
         $(document).ready(function(){
+
+            params = (new URL(document.location)).search;
+
+            if(params.length>0){
+                // makeFilterTags(params);
+                console.log(params.slice(1,params.length));
+                if(allFilters1.length == 0){
+                    //call reverse url function
+                    arrayFromUrl(params.slice(1,params.length));
+                }
+            }
             $('.search-btn').click(function(){
                 filter_value = $(".search-field").val();
+            });
+            $('.grid_head').on('click', function(){
+
+                var column = $(this).data('column-name');
+                var currentSort = $(this).data('column-sort');
+
+                if(currentSort == "asc"){
+                    formURL(column,'sort','desc',params);
+                }else{
+                    formURL(column,'sort','asc',params);
+                }
             });
             $('select.filter-column-select').change(function() {
                 typeValue = $('select.filter-column-select').find(':selected').data('type');
@@ -243,27 +253,23 @@
 
                 }
                 $('.apply-filter').on('click',function(){
+
                     params = (new URL(document.location)).search;
                     if(typeValue == 'number'){
                         var conditionUsed = $('.filter-condition-dropdown-number').find(':selected').val();
                         var response = $('.response-number').val();
-                        console.log(selectedColumn,conditionUsed,response);
                         formURL(selectedColumn,conditionUsed,response,params);
-
                     }
                     if(typeValue == 'string'){
                         var conditionUsed = $('.filter-condition-dropdown-string').find(':selected').val();
                         var response = $('.response-string').val();
-                        console.log(selectedColumn,conditionUsed,response);
                         formURL(selectedColumn,conditionUsed,response,params);
 
                     }
                     if(typeValue == 'datetime'){
                         var conditionUsed = $('.filter-condition-dropdown-datetime').find(':selected').val();
                         var response = $('.response-datetime').val();
-                        console.log(selectedColumn,conditionUsed,response);
                         formURL(selectedColumn,conditionUsed,response,params);
-
                     }
                     if(typeValue == 'boolean'){
                         console.log('boolean');
@@ -272,55 +278,174 @@
             });
         });
 
-        function formURL(column, condition, response,urlparams){
-            // console.log("url params=",urlparams.trim());
-            // console.log(params.indexOf("?"));
-            var pos = params.lastIndexOf("&");
-            var pos1 = params.lastIndexOf("?");
-            if(pos == -1 && pos1!=-1){
-                count_filters = parseInt(params.slice(1,2).trim());
-                console.log('use count for ?',parseInt(count_filters));
-            }
-            else if(pos == -1 && pos1 == -1){
-                count_filters = parseInt(0);
-                console.log('no search params found');
-            }
-            else if(pos!= -1 && pos1!= -1){
-                count_filters = parseInt(params.slice(pos+1,pos+2).trim());
-                console.log('both & and ? present so using index=',count_filters);
-            }
-            else{
-                count_filters = parseInt(params.slice(pos+1,pos+2).trim());
-                console.log(count_filters);
-            }
-            if(count_filters==0 && pos == -1 && pos1!=-1)
-            {
-                filt = filt + '&' + parseInt(count_filters+1) + '=' + selectedColumn + array_start + condition + array_end + '=' + response;
-                console.log(filt);
-                // count_filters++;
-                document.location = myURL + filt;
-            }
-            else if(count_filters==0 && pos==-1 && pos1==-1)
-            {
-                filt = '?' + parseInt(count_filters+1) + '=' + selectedColumn + array_start + condition + array_end + '=' + response;
-                console.log(filt);
-                // count_filters++;
-                document.location = myURL + filt;
-            }
-            else if(count_filters>0 && pos!=-1 && pos1!=-1){
-                filt = filt + '&' + parseInt(count_filters+1) + '=' + selectedColumn + array_start + condition + array_end + '=' + response;
-                console.log(filt);
-                document.location = myURL + filt;
-            }
-            else{
-                filt = '?' + parseInt(count_filters) + '=' + selectedColumn + array_start + condition + array_end + '=' + response;
-                console.log(filt);
-                // count_filters++;
-                document.location = myURL + filt;
-            }
-            // console.log(filt);
+        //function to parse the allfilters array for creating the filter tags
+        //and parse the saved filters and resume the state of the grid
 
+        function makeFilterTags(taggedFilters) {
+            console.log("from make tags",taggedFilters);
+        }
 
+        //this function is only to barrayFromUrle used when there is search param and the allFilter is empty in order to repopulate
+        // and make the filter or sort tags again
+        function arrayFromUrl(x){
+            console.log(allFilters1);
+            console.log(x);
+            t = x.slice(1,x.length);
+            splitted = [];
+            moreSplitted = [];
+            splitted = t.split('&');
+            for(i=0;i<splitted.length;i++){
+                moreSplitted.push(splitted[i].split('='));
+            }
+            for(i=0;i<moreSplitted.length;i++){
+                temp = moreSplitted[i];
+                // console.log(moreSplitted[i][2]); //use this for response
+                var pos1 = temp[1].indexOf("[");
+                var pos2 = temp[1].indexOf("]");
+                column_name = temp[1].slice(0,pos1);
+                condition_name = temp[1].slice(pos1+1,pos2);
+                // console.log(column_name.trim(),"and",condition_name.trim()); // we got the column name and condition
+                // console.log('column =', column_name.trim());
+                // console.log('condition =', condition_name.trim());
+                // console.log('filter value =', moreSplitted[i][2]);
+                var tmp = {};
+                tmp[column_name.trim()] ={
+                    [condition_name.trim()]:moreSplitted[i][2]
+                };
+                allFilters1.push(tmp);
+            }
+            console.log('Array from URL = ',allFilters1);
+            makeTagsTestPrior();
+        }
+
+        function makeTagsTestPrior() {
+            var filterRepeat = 0;
+            //make sure the filter or sort param is not duplicate before pushing it into the all filters array
+            if(allFilters1.length!=0)
+            for(var i = 0;i<allFilters1.length;i++){
+                // console.log(allFilters1[i]);
+                for(j in allFilters1[i]){
+                    // console.log(allFilters1[i][j],j);
+                    for(k in allFilters1[i][j])
+                    {
+                        // console.log('column = ',j);
+                        // console.log('condition = ',k);
+                        // console.log('value = ',allFilters1[i][j][k]);
+                        var filter_card = '<span class="filter-one"><span class="filter-name">'+ j +'</span><span class="filter-value">'+allFilters1[i][j][k] +'<span class="icon cross-icon"></span></span></span>';
+                        $('.filter-row-two').append(filter_card);
+                    }
+                }
+            }
+        }
+
+        function makeTagsTest(column, condition, response, urlparams) {
+
+            var tmp = {};
+            tmp[column] ={
+                [condition]:response
+            };
+            var filterRepeat = 0;
+            //make sure the filter or sort param is not duplicate before pushing it into the all filters array
+            if(allFilters1.length!=0)
+            for(var i = 0;i<allFilters1.length;i++){
+                for(j in allFilters1[i]){
+                    for(k in allFilters1[i][j])
+                    {
+                        if(column == j && condition == k && response == allFilters1[i][j][k]){
+                            filterRepeat = 1;
+                        }
+                    }
+                }
+            }
+            if(filterRepeat == 0)
+            {
+                allFilters1.push(tmp);
+                // console.log(allFilters1);
+                var filter_card = '<span class="filter-one"><span class="filter-name">'+ column +'</span><span class="filter-value">'+response +'<span class="icon cross-icon"></span></span></span>';
+                $('.filter-row-two').append(filter_card);
+                makeURL(allFilters1);
+                count_filters++;
+            }
+            else
+                alert("This filter is already applied");
+        }
+
+        //prepare URL from the all filters array
+        function makeURL(x) {
+            var y,k,z,c,d;
+
+            var filt_url = '';
+
+            for(y in x){
+                k = x[y];
+                for(z in k){
+                    c = k[z];
+                    for(d in c){
+                        console.log(y);     //first element of per which will make the url filter or sort
+                        console.log(z);     //name of the column which is needed to be filtered or sorted
+                        console.log(d);     //any condition or just sort
+                        console.log(c[d]);  //filter value or response
+
+                    }
+                }
+                if(y==0)
+                    filt_url = filt_url + '?' + y + '=' + z + '[' + d + ']' + '=' + c[d];
+                else
+                    filt_url = filt_url + '&' + y + '=' + z + '[' + d + ']' + '=' + c[d];
+            }
+            console.log(filt_url);
+            console.log(count_filters);
+            // return false;
+            document.location = filt_url;
+        }
+
+        //obselete
+        function formURL(column, condition, response, urlparams) {
+            makeTagsTest(column, condition, response, urlparams);
+            // var pos = params.lastIndexOf("&");
+            // var pos1 = params.lastIndexOf("?");
+
+            // //detect the url state
+            // if(pos == -1 && pos1!=-1){
+            //     count_filters = parseInt(params.slice(1,2).trim());
+            //     console.log('use count for ?',parseInt(count_filters));
+            // }
+            // else if(pos == -1 && pos1 == -1){
+            //     count_filters = parseInt(0);
+            //     console.log('no search params found');
+            // }
+            // else if(pos!= -1 && pos1!= -1){
+            //     count_filters = parseInt(params.slice(pos+1,pos+2).trim());
+            //     console.log('both & and ? present so using index=',count_filters);
+            // }
+            // else{
+            //     count_filters = parseInt(params.slice(pos+1,pos+2).trim());
+            //     console.log(count_filters);
+            // }
+
+            // //act on url state
+            // if(count_filters==0 && pos == -1 && pos1!=-1)
+            // {
+            //     filt = filt + '&' + parseInt(count_filters+1) + '=' + column + array_start + condition + array_end + '=' + response;
+            //     makeTagsTest(column, condition, response, urlparams,parseInt(count_filters));
+            //     // document.location = myURL + filt;
+            // }
+            // else if(count_filters==0 && pos==-1 && pos1==-1)
+            // {
+            //     filt = '?' + parseInt(count_filters+1) + '=' + column + array_start + condition + array_end + '=' + response;
+            //     makeTagsTest(column, condition, response, urlparams,parseInt(count_filters));
+            //     // document.location = myURL + filt;
+            // }
+            // else if(count_filters>0 && pos!=-1 && pos1!=-1){
+            //     filt = filt + '&' + parseInt(count_filters+1) + '=' + column + array_start + condition + array_end + '=' + response;
+            //     makeTagsTest(column, condition, response, urlparams,parseInt(count_filters));
+            //     // document.location = myURL + filt;
+            // }
+            // else{
+            //     filt = '?' + parseInt(count_filters) + '=' + column + array_start + condition + array_end + '=' + response;
+            //     makeTagsTest(column, condition, response, urlparams,parseInt(count_filters));
+            //     // document.location = myURL + filt;
+            // }
         }
         </script>
     @endsection

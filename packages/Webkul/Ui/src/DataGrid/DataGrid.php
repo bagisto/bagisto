@@ -393,6 +393,11 @@ class DataGrid
                             $this->operators[array_keys($filter)[0]],
                             '%'.array_values($filter)[0].'%'
                         );
+                    } elseif (array_keys($filter)[0]=="sort") {
+                        $this->query->orderBy(
+                            str_replace('_', '.', $column), //replace the logic of making the column name and consider the case for _
+                            array_values($filter)[0]
+                        );
                     } else {
                         $this->query->where(
                         str_replace('_', '.', $column),
