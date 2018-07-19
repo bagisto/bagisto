@@ -138,33 +138,38 @@ class DataGridController extends Controller
             'filterable' => [
                 [
                     'column' => 'a.id',
-                    'type' => 'integer'
+                    'type' => 'integer',
+                    'label' => 'Admin ID'
                 ], [
                     'column' => 'a.email',
-                    'type' => 'string'
+                    'type' => 'string',
+                    'label' => 'Admin E-Mail',
                 ], [
                     'column' => 'a.first_name',
-                    'type' => 'string'
+                    'type' => 'string',
+                    'label' => 'Admin Name',
                 ]
             ],
             'searchables' =>[
                 [
                     'name' => 'a.id',
-                    'label' => 'ID'
+                    'label' => 'ID',
+                    'label' => 'Admin ID',
                 ],
                 [
                     'name' => 'a.name',
-                    'label' => 'Name'
+                    'label' => 'Name',
+                    'label' => 'Admin Name',
                 ]
             ],
             'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'posts as p',
-                    'primaryKey' => 'a.id',
-                    'condition' => '=',
-                    'secondaryKey' => 'p.author_id',
-                ]
+                // [
+                //     'join' => 'leftjoin',
+                //     'table' => 'posts as p',
+                //     'primaryKey' => 'a.id',
+                //     'condition' => '=',
+                //     'secondaryKey' => 'p.author_id',
+                // ]
             ],
             'columns' => [
                 [
@@ -181,13 +186,13 @@ class DataGridController extends Controller
                     'sortable' => true,
                     'filterable' => true
                 ],
-                [
-                    'name' => 'p.content',
-                    'type' => 'string',
-                    'label' => 'Content',
-                    'sortable' => true,
-                    'filterable' => false,
-                ],
+                // [
+                //     'name' => 'p.content as pp',
+                //     'type' => 'string',
+                //     'label' => 'Content',
+                //     'sortable' => true,
+                //     'filterable' => false,
+                // ],
                 [
                     'name' => 'a.first_name',
                     'type' => 'string',
