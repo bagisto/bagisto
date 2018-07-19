@@ -50,6 +50,21 @@ class UserComposer
                     'column' => 'u.name',
                     'type' => 'string',
                     'label' => 'Admin Name'
+                ], [
+                    'column' => 'u.id',
+                    'type' => 'number',
+                    'label' => 'Admin ID'
+                ]
+            ],
+            'searchable' => [
+                [
+                    'column' => 'u.email',
+                    'type' => 'string',
+                    'label' => 'Admin E-Mail'
+                ], [
+                    'column' => 'u.name',
+                    'type' => 'string',
+                    'label' => 'Admin Name'
                 ]
             ],
             'join' => [

@@ -109,9 +109,7 @@
             </div>
         </div>
         <div class="filter-row-two">
-            {{-- {{ $columns }}<br/>
-            {{ json_encode($operators) }} --}}
-            <span class="filter-one">
+            {{-- <span class="filter-one">
                 <span class="filter-name">
                     Stock
                 </span>
@@ -119,7 +117,7 @@
                     Available
                     <span class="icon cross-icon"></span>
                 </span>
-            </span>
+            </span> --}}
         </div>
     </div>
     <div class="table">
@@ -160,7 +158,7 @@
     @section('javascript')
         <script type="text/javascript">
             var allFilters1 = [];
-            var filter_value;
+            var search_value;
             var filter_column;
             var filter_condition;
             var filter_range;
@@ -184,7 +182,11 @@
                     }
                 }
                 $('.search-btn').click(function(){
-                    filter_value = $(".search-field").val();
+                    search_value = $(".search-field").val();
+
+                    formURL('search','all',search_value,params);  //format for search
+
+                    alert(search_value);
                 });
                 $('.grid_head').on('click', function(){
 
@@ -192,8 +194,10 @@
                     var currentSort = $(this).data('column-sort');
 
                     if(currentSort == "asc"){
+                        $(this).data('column-name','desc');
                         formURL(column,'sort','desc',params);
                     }else{
+                        $(this).data('column-name','asc');
                         formURL(column,'sort','asc',params);
                     }
                 });
@@ -292,7 +296,6 @@
                         allFilters1.splice(id,1);
                         makeURL(allFilters1);
                     }
-                    console.log(allFilters1);
                 });
             });
 

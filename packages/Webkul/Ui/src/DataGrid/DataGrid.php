@@ -88,9 +88,9 @@ class DataGrid
     {
         // list($name, $select, $table, $join, $columns) = array_values($args);
         $name = $select = $aliased = $table = false;
-        $join = $columns = $filterable = $css = $operators = [];
+        $join = $columns = $filterable = $searchable = $css = $operators = [];
         extract($args);
-        return $this->build($name, $select, $filterable, $aliased, $table, $join, $columns, $css, $operators);
+        return $this->build($name, $select, $filterable, $searchable, $aliased, $table, $join, $columns, $css, $operators);
     }
 
     //starts buikding the queries on the basis of selects, joins and filter with
@@ -100,6 +100,7 @@ class DataGrid
         $name = null,
         $select = false,
         array $filterable = [],
+        array $searchable = [],
         bool $aliased = false,
         $table = null,
         array $join = [],
@@ -109,10 +110,10 @@ class DataGrid
         Pagination $pagination = null
     ) {
         $this->request = Request::capture();
-
         $this->setName($name);
         $this->setSelect($select);
         $this->setFilterable($filterable);
+        $this->setSearchable($filterable);
         $this->setAlias($aliased);
         $this->setTable($table);
         $this->setJoin($join);
@@ -157,6 +158,16 @@ class DataGrid
         $this->filterable = $filterable ?: [];
         return $this;
     }
+
+    /**
+     * Set Searchable columns
+     * @return $this
+     */
+
+     public function setSearchable($searchable) {
+        $this->searchable = $searchable ?: [];
+        return $this;
+     }
 
     /**
      * Set alias parameter
@@ -384,7 +395,7 @@ class DataGrid
             foreach ($parsed as $k=>$v) {
                 parse_str($v, $parsed[$k]);
             }
-
+            // dump($parsed);
             foreach ($parsed as $key => $value) {
                 foreach ($value as $column => $filter) {
                     if (array_keys($filter)[0]=="like") {
@@ -398,7 +409,21 @@ class DataGrid
                             str_replace('_', '.', $column), //replace the logic of making the column name and consider the case for _
                             array_values($filter)[0]
                         );
-                    } else {
+                    }
+                    else if($column == "search") {
+                        foreach($this->searchable as $search)
+                        {
+                            // dump($search['column'],array_values($filter)[0]);
+                            $this->query->orWhere(
+                                $search['column'],
+                                $this->operators['like'],
+                                '%'.array_values($filter)[0].'%'
+                            );
+                            // $this->results = $this->query->get();
+                            // dd($this->results);
+                        }
+                    }
+                    else {
                         $this->query->where(
                         str_replace('_', '.', $column),
                         $this->operators[array_keys($filter)[0]],
