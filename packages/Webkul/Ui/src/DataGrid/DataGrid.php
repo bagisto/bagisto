@@ -3,11 +3,13 @@ namespace Webkul\Ui\DataGrid;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Validate;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\Helpers\Column;
 use Webkul\Ui\DataGrid\Helpers\Pagination;
 use Webkul\Ui\DataGrid\Helpers\Css;
+use Webkul\Ui\DataGrid\Helpers\MassAction;
 
 class DataGrid
 {
@@ -63,6 +65,11 @@ class DataGrid
      */
     protected $css;
 
+    /**
+     * URL parse $parsed
+     * @var parse
+     */
+    protected $parsed;
     /*
     public function __construct(
         $name = null ,
@@ -122,6 +129,21 @@ class DataGrid
         $this->setOperators($operators);
         // $this->addPagination($pagination);
         return $this;
+    }
+
+    /**
+     * Make Mass Action
+     *
+     */
+    public function makeMassAction($attributes)
+    {
+        $result = new MassAction();
+
+        if ($result->validateSchemaMassAction($attributes)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -270,7 +292,8 @@ class DataGrid
 
     /**
      * Add ColumnMultiple.
-     *
+     * Currently is not
+     * of any use.
      * @return $this
      */
 
@@ -332,6 +355,34 @@ class DataGrid
         return $this;
     }
 
+    /**
+     * Parse the URL
+     * and get it ready
+     * to be used.
+     */
+
+    private function parse()
+    {
+        //parse the url here
+        if (isset($_SERVER['QUERY_STRING'])) {
+            $qr = $_SERVER['QUERY_STRING'];
+            parse_str($qr, $parsed);
+
+            foreach ($parsed as $k=>$v) {
+                parse_str($v, $parsed[$k]);
+            }
+            return $parsed;
+        } else {
+            return $parsed = [];
+        }
+    }
+
+    /**
+     * Used for selecting
+     * the columns got in
+     * make from controller.
+     * @return $this
+     */
     private function getSelect()
     {
         $select = [];
@@ -346,6 +397,7 @@ class DataGrid
 
     /**
      * ->join('contacts', 'users.id', '=', 'contacts.user_id')
+     * @return $this->query
      */
 
     private function getQueryWithJoin()
@@ -382,20 +434,19 @@ class DataGrid
         }
     }
 
+    /**
+     * Used to get the filter
+     * params from the Url
+     * and processed manually
+     */
+
     private function getQueryWithFilters()
     {
         // the only use case remaining is making and testing the full validation and testing of
         // aliased case with alias used in column names also.
         if ($this->aliased) {
             //n of joins can lead to n number of aliases for columns and neglect the as for columns
-            if (isset($_SERVER['QUERY_STRING'])) {
-                $qr = $_SERVER['QUERY_STRING'];
-                $parsed;
-                parse_str($qr, $parsed);
-            }
-            foreach ($parsed as $k=>$v) {
-                parse_str($v, $parsed[$k]);
-            }
+            $parsed = $this->parse();
             // dump($parsed);
             foreach ($parsed as $key => $value) {
                 foreach ($value as $column => $filter) {
@@ -411,13 +462,11 @@ class DataGrid
                             array_values($filter)[0]
                         );
                     } elseif ($column == "search") {
-                        $this->query->where(function ($query) use ($filter){
+                        $this->query->where(function ($query) use ($filter) {
                             foreach ($this->searchable as $search) {
                                 $query->orWhere($search['column'], 'like', '%'.array_values($filter)[0].'%');
                             }
-
                         });
-
                     } else {
                         $this->query->where(
                         str_replace('_', '.', $column),
@@ -428,15 +477,7 @@ class DataGrid
                 }
             }
         } else {
-            if (isset($_SERVER['QUERY_STRING'])) {
-                $qr = $_SERVER['QUERY_STRING'];
-                $parsed;
-                parse_str($qr, $parsed);
-            }
-
-            foreach ($parsed as $k=>$v) {
-                parse_str($v, $parsed[$k]);
-            }
+            $parsed = $this->parse();
             foreach ($parsed as $key => $value) {
                 foreach ($value as $column => $filter) {
                     if (array_keys($filter)[0]=="like") {
@@ -445,6 +486,12 @@ class DataGrid
                             $this->operators[array_keys($filter)[0]],
                             '%'.array_values($filter)[0].'%'
                         );
+                    } elseif ($column == "search") {
+                        $this->query->where(function ($query) use ($filter) {
+                            foreach ($this->searchable as $search) {
+                                $query->orWhere($search['column'], 'like', '%'.array_values($filter)[0].'%');
+                            }
+                        });
                     } else {
                         $this->query->where(
                         $column,
@@ -459,11 +506,12 @@ class DataGrid
 
     private function getDbQueryResults()
     {
-        if (isset($_SERVER['QUERY_STRING'])) {
-            $qr = $_SERVER['QUERY_STRING'];
-            $parsed;
-            parse_str($qr, $parsed);
-        }
+        // if (isset($_SERVER['QUERY_STRING'])) {
+        //     $qr = $_SERVER['QUERY_STRING'];
+        //     $parsed;
+        //     parse_str($qr, $parsed);
+        // }
+        $parsed = $this->parse();
 
 
         if ($this->aliased==true) {
@@ -561,11 +609,13 @@ class DataGrid
             $this->getQueryWithColumnFilters();
 
             //Run this if there are filters or sort params or range params in the urls
-            if (isset($_SERVER['QUERY_STRING'])) {
-                $qr = $_SERVER['QUERY_STRING'];
-                $parsed;
-                parse_str($qr, $parsed);
-            }
+            // if (isset($_SERVER['QUERY_STRING'])) {
+            //     $qr = $_SERVER['QUERY_STRING'];
+            //     $parsed;
+            //     parse_str($qr, $parsed);
+            // }
+            $parsed = $this->parse();
+
             if (!empty($parsed)) {
                 $this->getQueryWithFilters();
             } else {
@@ -580,11 +630,12 @@ class DataGrid
                 $this->getSelect();
             }
             $this->getQueryWithColumnFilters();
-            if (isset($_SERVER['QUERY_STRING'])) {
-                $qr = $_SERVER['QUERY_STRING'];
-                $parsed;
-                parse_str($qr, $parsed);
-            }
+            // if (isset($_SERVER['QUERY_STRING'])) {
+            //     $qr = $_SERVER['QUERY_STRING'];
+            //     $parsed;
+            //     parse_str($qr, $parsed);
+            // }
+            $parsed = $this->parse();
             if (!empty($parsed)) {
                 $this->getQueryWithFilters();
             } else {
@@ -594,6 +645,19 @@ class DataGrid
             $this->results = $this->query->get();
             return $this->results;
         }
+    }
+
+    /**
+     * Render mass
+     * action instance
+     * @return view
+     */
+
+    private function renderMassAction(array $attributes)
+    {
+
+        //probably render some view when mass action is needed
+        //the rendered view will have the needed javascript also.
     }
 
     /**
