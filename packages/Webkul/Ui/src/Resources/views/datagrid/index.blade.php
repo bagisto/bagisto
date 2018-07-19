@@ -253,6 +253,7 @@
                         $('.filter-response-number').css('display','inherit');
 
                     }
+
                     $('.apply-filter').on('click',function(){
 
                         params = (new URL(document.location)).search;
@@ -278,10 +279,11 @@
                     });
 
                 });
+
                 $('.remove-filter').on('click', function(){
-                    console.log('removing');
+                    // console.log('removing');
                     var id = $(this).parents('.filter-one').attr('id');
-                    console.log(allFilters1.length);
+                    // console.log(allFilters1.length);
 
                     if(allFilters1.length ==  1){
                         allFilters1.pop();
@@ -324,7 +326,7 @@
                     };
                     allFilters1.push(tmp);
                 }
-                console.log('Array from URL = ',allFilters1);
+                // console.log('Array from URL = ',allFilters1);
                 makeTagsTestPrior();
             }
 
@@ -332,9 +334,9 @@
                 var filterRepeat = 0;
                 //make sure the filter or sort param is not duplicate before pushing it into the all filters array
                 if(allFilters1.length!=0)
-                for(var i = 0;i<allFilters1.length;i++){
+                for(var i = 0;i<allFilters1.length;i++) {
                     // console.log(allFilters1[i]);
-                    for(j in allFilters1[i]){
+                    for(j in allFilters1[i]) {
                         // console.log(allFilters1[i][j],j);
                         for(k in allFilters1[i][j])
                         {
@@ -351,9 +353,10 @@
             function makeTagsTest(column, condition, response, urlparams) {
 
                 var tmp = {};
-                tmp[column] ={
+                tmp[column] = {
                     [condition]:response
                 };
+
                 var filterRepeat = 0;
                 //make sure the filter or sort param is not duplicate before pushing it into the all filters array
                 if(allFilters1.length!=0)
@@ -367,8 +370,8 @@
                         }
                     }
                 }
-                if(filterRepeat == 0)
-                {
+
+                if(filterRepeat == 0) {
                     allFilters1.push(tmp);
                     // console.log(allFilters1);
                     var filter_card = '<span class="filter-one"><span class="filter-name">'+ column +'</span><span class="filter-value">'+ response +'<span class="icon cross-icon"></span></span></span>';
@@ -386,25 +389,26 @@
 
                 var filt_url = '';
 
-                for(y in x){
+                for(y in x) {
                     k = x[y];
-                    for(z in k){
+                    for(z in k) {
                         c = k[z];
                         for(d in c){
-                            console.log(y);     //first element of per which will make the url filter or sort
-                            console.log(z);     //name of the column which is needed to be filtered or sorted
-                            console.log(d);     //any condition or just sort
-                            console.log(c[d]);  //filter value or response
+                            // console.log(y);     //first element of per which will make the url filter or sort
+                            // console.log(z);     //name of the column which is needed to be filtered or sorted
+                            // console.log(d);     //any condition or just sort
+                            // console.log(c[d]);  //filter value or response
 
                         }
                     }
-                    if(y==0)
+
+                    if(y == 0)
                         filt_url = filt_url + '?' + y + '=' + z + '[' + d + ']' + '=' + c[d];
                     else
                         filt_url = filt_url + '&' + y + '=' + z + '[' + d + ']' + '=' + c[d];
                 }
-                console.log(filt_url);
-                console.log(count_filters);
+                // console.log(filt_url);
+                // console.log(count_filters);
                 // return false;
                 document.location = filt_url;
             }

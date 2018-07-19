@@ -164,10 +164,11 @@ class DataGrid
      * @return $this
      */
 
-     public function setSearchable($searchable) {
+    public function setSearchable($searchable)
+    {
         $this->searchable = $searchable ?: [];
         return $this;
-     }
+    }
 
     /**
      * Set alias parameter
@@ -409,21 +410,15 @@ class DataGrid
                             str_replace('_', '.', $column), //replace the logic of making the column name and consider the case for _
                             array_values($filter)[0]
                         );
-                    }
-                    else if($column == "search") {
-                        foreach($this->searchable as $search)
-                        {
-                            // dump($search['column'],array_values($filter)[0]);
-                            $this->query->orWhere(
-                                $search['column'],
-                                $this->operators['like'],
-                                '%'.array_values($filter)[0].'%'
-                            );
-                            // $this->results = $this->query->get();
-                            // dd($this->results);
-                        }
-                    }
-                    else {
+                    } elseif ($column == "search") {
+                        $this->query->where(function ($query) use ($filter){
+                            foreach ($this->searchable as $search) {
+                                $query->orWhere($search['column'], 'like', '%'.array_values($filter)[0].'%');
+                            }
+
+                        });
+
+                    } else {
                         $this->query->where(
                         str_replace('_', '.', $column),
                         $this->operators[array_keys($filter)[0]],
