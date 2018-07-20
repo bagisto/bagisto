@@ -22,114 +22,47 @@ class DataGridController extends Controller
      */
     public function index()
     {
-        // DataGrid::make([
-        //     'name' => 'admin',
-        //     'select' => 'a.id',
-        //     'table' => 'admins as a',
-        //     'join' => [
-        //         [
-        //             'join' => 'leftjoin',
-        //             'table' => 'roles as r',
-        //             'primaryKey' => 'a.role_id',
-        //             'condition' => '=',
-        //             'secondaryKey' => 'r.id',
-        //         ]
-        //     ],
-        //     'columns' => [
-        //         [
-        //             'name' => 'a.id',
-        //             'type' => 'string',
-        //             'label' => 'Id',
-        //             'sortable' => true,
-        //             'filterable' => false,
-        //         ],
-        //         [
-        //             'name' => 'a.name',
-        //             'type' => 'string',
-        //             'label' => 'Name',
-        //             'sortable' => true,
-        //             'filterable' => true,
-        //             // will create on run time query
-        //             'filter' => [
-        //                 'function' => 'where', // andwhere
-        //                 'condition' => ['a.name', '=', 'Admin'] // multiarray
-        //             ],
-        //             'attributes' => [
-        //                 'class' => 'class-a class-b',
-        //                 'data-attr' => 'whatever you want',
-        //                 'onclick' => "window.alert('alert from datagrid column')"
-        //              ],
-        //             'wrapper' => function ($value, $object) {
-        //                 return '<a href="'.$value.'">' . $object->name . '</a>';
-        //             },
-        //         ]
-        //     ],
-        //     // 'css' => []
-
-        // ]);
-
-        //Make case without any aliasing or joins
-        /*
-            operations list <,>,<=,>=,!=,=,like, IN.
-
-            contains will get resolved by like after where and ranges can be resolved
-            by using IN or where in (1,2,3)
-
-            verbs => [
-                'eq' => '=',
-                'lt' => '<',
-                'gt' => '>',
-                'lte' => '<=',
-                'gte' => '>=',
-                'neq' => '!=',
-                'inc_range' => '>x AND <y',
-                'exc_range' => '>=x AND <=y',
-                'not_inc_range' => '!>x AND <y',
-                'not_exc_range' => '!>=x AND <=y',
-            ]
-        */
-
-        $select_verbs = [
-            0 => "aggregate",
-            1 => "columns",
-            2 => "from",
-            3 => "joins",
-            4 => "wheres",
-            5 => "groups",
-            6 => "havings",
-            7 => "orders",
-            8 => "limit",
-            9 => "offset",
-            10 => "lock"
-        ];
-        $bindings = [
-            "select" => [],
-            "from" => [],
-            "join" => [],
-            "where" => [],
-            "having" => [],
-            "order" => [],
-            "union" => [],
-        ];
-        $operators = [
-            'eq' => "=",
-            'lt' => "<",
-            'gt' => ">",
-            'lte' => "<=",
-            'gte' => ">=",
-            'neqs' => "<>",
-            'neqn' => "!=",
-            'ceq' => "<=>",
-            'like' => "like",
-            'likebin' => "like binary",
-            'ntlike' => "not like",
-            'ilike' => "ilike",
-            'regex' => "regexp",
-            'notregex' => "not regexp",
-            'simto' => "similar to",
-            'nsimto' => "not similar to",
-            'nilike' => "not ilike",
-        ];
+        // $select_verbs = [
+        //     0 => "aggregate",
+        //     1 => "columns",
+        //     2 => "from",
+        //     3 => "joins",
+        //     4 => "wheres",
+        //     5 => "groups",
+        //     6 => "havings",
+        //     7 => "orders",
+        //     8 => "limit",
+        //     9 => "offset",
+        //     10 => "lock"
+        // ];
+        // $bindings = [
+        //     "select" => [],
+        //     "from" => [],
+        //     "join" => [],
+        //     "where" => [],
+        //     "having" => [],
+        //     "order" => [],
+        //     "union" => [],
+        // ];
+        // $operators = [
+        //     'eq' => "=",
+        //     'lt' => "<",
+        //     'gt' => ">",
+        //     'lte' => "<=",
+        //     'gte' => ">=",
+        //     'neqs' => "<>",
+        //     'neqn' => "!=",
+        //     'ceq' => "<=>",
+        //     'like' => "like",
+        //     'likebin' => "like binary",
+        //     'ntlike' => "not like",
+        //     'ilike' => "ilike",
+        //     'regex' => "regexp",
+        //     'notregex' => "not regexp",
+        //     'simto' => "similar to",
+        //     'nsimto' => "not similar to",
+        //     'nilike' => "not ilike",
+        // ];
         DataGrid::make([
             'name' => 'authors',
             'table' => 'authors as a',
@@ -215,44 +148,75 @@ class DataGridController extends Controller
                 ],
 
             ],
-            'select_verbs' => [
-                0 => "aggregate",
-                1 => "columns",
-                2 => "from",
-                3 => "joins",
-                4 => "wheres",
-                5 => "groups",
-                6 => "havings",
-                7 => "orders",
-                8 => "limit",
-                9 => "offset",
-                10 => "lock"
-            ],
+
             'operators' => [
                 'eq' => "=",
                 'lt' => "<",
                 'gt' => ">",
                 'lte' => "<=",
                 'gte' => ">=",
-                'neqs' => "<>",
                 'neqn' => "!=",
                 'ceq' => "<=>",
                 'like' => "like",
-                'likebin' => "like binary",
-                'ntlike' => "not like",
-                'ilike' => "ilike",
-                'regex' => "regexp",
-                'notregex' => "not regexp",
-                'simto' => "similar to",
-                'nsimto' => "not similar to",
-                'nilike' => "not ilike",
+            ],
+            'mass_operations' =>[
+                [
+                    'route' => route('admin.datagrid.delete'),
+                    'method' => 'DELETE',
+                    'label' => 'Delete',
+                    'type' => 'button',
+
+                ]
             ],
             // 'css' => []
 
         ]);
-
         $result = DataGrid::render();
-
         return $result;
+        // $prepareMassAction = DataGrid::massAction();
+        // if ($prepareMassAction) {
+        //     $result = DataGrid::render();
+        //     return $result;
+        // } else {
+        //     throw new \Exception('Mass Actions Attributes Have Some Unknown Problems');
+        // }
+    }
+
+    //for performing mass actions
+    public function massAction()
+    {
+        $make = [
+            'operations' =>[
+                // [
+                //     'route' => 'datagrid/update',
+                //     'method' => 'post',
+                //     'label' => 'Update',
+                //     'type' => 'select',
+                //     'name' => 'status',
+                //     'values' => [
+                //         [
+                //             'label' => 'Enable',
+                //             'value' => 1
+                //         ], [
+                //             'label' => 'Disable',
+                //             'value' => 0
+                //         ]
+                //     ],
+                // ],
+                [
+                    'route' => route('admin.datagrid.delete'),
+                    'method' => 'DELETE',
+                    'label' => 'Delete',
+                    'type' => 'button'
+                ]
+            ]
+        ];
+        $result = DataGrid::makeMassAction($make);
+        // return $result;
+    }
+
+    public function massDelete(Request $r)
+    {
+        return $r;
     }
 }

@@ -745,59 +745,16 @@ h2 {
         }
     }
     .table {
-        .mass-action {
-            display: none;
+        .xyz {
+            display: flex;
+            flex-direction: row;
+            // visibility: hidden;
             padding-left: 10px;
+            justify-content: flex-start;
+            align-items: center;
 
-            .mass-action-block {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                align-items: center;
-                justify-content: flex-start;
-
-                .mass-action-remove {
-                    margin-right: 15px;
-                    margin-top: 8px;
-                }
-                .mass-action-dropdown {
-                    height: 36px;
-                    padding-top: 4px;
-                    padding-bottom: 4px;
-                    min-width: 160px;
-                    max-width: 250px;
-
-                    .dropdown-toggle {
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                        justify-content: center;
-                        font-family: "montserrat", sans-serif;
-                        padding-left: 5px;
-                        height: 36px;
-                        width: 150px;
-                        border: 2px solid $control-border-color;
-                        background-color: white;
-                        color: #8e8e8e;
-                        font-size: 14px;
-
-                        .dropdown-header {
-                            width: 100%;
-                            display: flex;
-                            flex-direction: row;
-                            align-items: center;
-                            justify-content: space-between;
-
-                            .arrow-down-icon {
-                                margin-right: 5px;
-                            }
-                        }
-                    }
-
-                    .dropdown-list {
-                        margin-top: 10px;
-                    }
-                }
+            .selected-items {
+                margin-right: 15px;
             }
         }
     }

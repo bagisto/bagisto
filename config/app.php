@@ -170,13 +170,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-
+        //Webkul packages
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
         Webkul\Ui\Providers\UiServiceProvider::class,
         Webkul\Attribute\Providers\AttributeServiceProvider::class,
         Webkul\Core\Providers\CoreServiceProvider::class,
-        Webkul\Shop\Providers\ShopServiceProvider::class
+        Webkul\Shop\Providers\ShopServiceProvider::class,
+        Webkul\Customer\Providers\CustomerServiceProvider::class,
     ],
 
     /*

@@ -154,7 +154,33 @@
                 //Enable Mass Action Subsequency
                 var id=[]; //for getting the id of the selected fields
                 var y = parseInt(0);
-                $("input[type=checkbox]").change(function() {
+
+                // master checkbox for selecting all entries
+                $("input[id=mastercheckbox]").change(function() {
+                    if($("input[id=mastercheckbox]").prop('checked') == true){
+                        $('.indexers').each(function(){
+                            this.checked = true;
+                            if(this.checked){
+                                y = parseInt($(this).attr('id')); id.push(y);
+                            }
+                        });
+                        $('.mass-action').css('display','');
+                        $('.table-grid-header').css('display','none');
+                        $('.selected-items').html(id.toString());
+                        $('#indexes').val(id);
+                        console.log(id);
+                    }
+                    else if($("input[id=mastercheckbox]").prop('checked') == false){
+                        $('.indexers').each(function(){ this.checked = false; });
+                        id = [];
+                        $('.mass-action').css('display','none');
+                        $('.table-grid-header').css('display','');
+                        $('#indexes').val('');
+                        console.log(id);
+                    }
+                });
+
+                $("input[class=indexers]").change(function() {
                     if(this.checked){
                         y = parseInt($(this).attr('id'));
                         id.push(y);
@@ -166,11 +192,14 @@
                         id.splice(index,1);
                     }
                     if(id.length>0){
-                        $('.mass-action').css('display','inherit');
+                        $('.mass-action').css('display','');
                         $('.table-grid-header').css('display','none');
+                        $('.selected-items').html(id.toString());
+                        $('#indexes').val(id);
                     }else if(id.length == 0){
                         $('.mass-action').css('display','none');
-                        $('.table-grid-header').css('display','table-header-group');
+                        $('.table-grid-header').css('display','');
+                        $('#indexes').val('');
                     }
                 });
 
@@ -178,16 +207,34 @@
                 $('.mass-action-remove').on('click', function(){
                     $("input[type=checkbox]").prop('checked',false);
                     id = [];
-                    $('.mass-action').css('display','none'); $('.table-grid-header').css('display','table-header-group');
+                    $('#indexes').val('');
+                    $('.mass-action').css('display','none');
+                    $('.table-grid-header').css('display','');
                 });
-                // $('.mass-delete').on('click',function(){
-                //     if(id.length>0){
-                //         url = 'datagrid/delete';
-                //         $.ajax({ type: "POST", url: url, data: id, success: function(result){
-                //             console.log(result);
-                //         } });
-                //     }
+
+                // $('.b-res').css('visibility','hidden');
+                // $('.t-res').css('visibility','hidden');
+                // $('.ma-action').css('visibility','hidden');
+                // var ma_selected_col;
+                // var ma_selected_type;
+                // var ma_selected_action;
+                // $('select.ma-col').change(function() {
+                //     ma_selected_col = $('select.ma-col').find(':selected').val();
+                //     ma_selected_type = $('select.ma-col').find(':selected').data('type');
+                //     $('.ma-action').css('visibility','visible');
+                //     console.log(ma_selected_col,ma_selected_type);
                 // });
+                // $('.ma-action').change(function(){
+                //     ma_selected_action = $('select.ma-action').find(':selected').val();
+                // });
+                // if(ma_selected_action == "update") {
+                //     if(ma_selected_type="boolean") {
+                //         $('.b-res').css('visibility','visible');
+                //     }
+                // } else if(ma_selected_action == "delete"){
+                //     $('.b-res').css('visibility','visible');
+                // }
+
             });
             //this function is only to barrayFromUrle used when there is search param and the allFilter is empty in order to repopulate
             // and make the filter or sort tags again

@@ -29,7 +29,8 @@
         "webkul/laravel-admin": "self.version",
         "webkul/laravel-ui": "self.version",
         "webkul/laravel-core": "self.version",
-        "webkul/laravel-attribute": "self.version"
+        "webkul/laravel-attribute": "self.version",
+        "webkul/laravel-customer": "self.version"
     },
     "autoload": {
         "classmap": [
@@ -43,7 +44,8 @@
             "Webkul\\Ui\\": "packages/Webkul/Ui/src",
             "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
             "Webkul\\Shop\\": "packages/Webkul/Shop/src",
-            "Webkul\\Core\\": "packages/Webkul/Core/src"
+            "Webkul\\Core\\": "packages/Webkul/Core/src",
+            "Webkul\\Customer\\": "packages/Webkul/Customer/src"
         }
     },
     "autoload-dev": {

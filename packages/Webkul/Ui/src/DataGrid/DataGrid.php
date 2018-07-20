@@ -25,11 +25,19 @@ class DataGrid
      * @var string
      */
     protected $select;
+
+    /**
+    * Table
+    * @var Boolean for aliasing
+    */
+    protected $aliased;
+
     /**
      * Table
      *
      * @var String Classs name $table
      */
+
     protected $table;
     /**
      * Join
@@ -52,6 +60,29 @@ class DataGrid
      * @var Collection
      */
     protected $columns;
+
+    /**
+     * array of columns
+     * to be filtered
+     * @var Array
+     */
+    protected $filterable;
+
+    /**
+     * array of columns
+     * to be searched
+     *
+     * @var Array
+     */
+    protected $searchable;
+
+    /**
+     * mass operations
+     *
+     * @var Array
+     */
+    protected $massoperations;
+
     /**
      * Pagination $pagination
      *
@@ -95,9 +126,10 @@ class DataGrid
     {
         // list($name, $select, $table, $join, $columns) = array_values($args);
         $name = $select = $aliased = $table = false;
-        $join = $columns = $filterable = $searchable = $css = $operators = [];
+        $join = $columns = $filterable = $searchable =
+        $massoperations = $css = $operators = [];
         extract($args);
-        return $this->build($name, $select, $filterable, $searchable, $aliased, $table, $join, $columns, $css, $operators);
+        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $table, $join, $columns, $css, $operators);
     }
 
     //starts buikding the queries on the basis of selects, joins and filter with
@@ -108,6 +140,7 @@ class DataGrid
         $select = false,
         array $filterable = [],
         array $searchable = [],
+        array $massoperations = [],
         bool $aliased = false,
         $table = null,
         array $join = [],
@@ -121,6 +154,7 @@ class DataGrid
         $this->setSelect($select);
         $this->setFilterable($filterable);
         $this->setSearchable($filterable);
+        $this->setMassOperations($massoperations);
         $this->setAlias($aliased);
         $this->setTable($table);
         $this->setJoin($join);
@@ -129,21 +163,6 @@ class DataGrid
         $this->setOperators($operators);
         // $this->addPagination($pagination);
         return $this;
-    }
-
-    /**
-     * Make Mass Action
-     *
-     */
-    public function makeMassAction($attributes)
-    {
-        $result = new MassAction();
-
-        if ($result->validateSchemaMassAction($attributes)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
@@ -189,6 +208,17 @@ class DataGrid
     public function setSearchable($searchable)
     {
         $this->searchable = $searchable ?: [];
+        return $this;
+    }
+
+    /**
+     * Set mass operations
+     * @return $this
+     */
+
+    public function setMassOperations($massops)
+    {
+        $this->massoperations = $massops ?: [];
         return $this;
     }
 
@@ -653,12 +683,12 @@ class DataGrid
      * @return view
      */
 
-    private function renderMassAction(array $attributes)
-    {
+    // private function renderMassAction(array $attributes)
+    // {
 
-        //probably render some view when mass action is needed
-        //the rendered view will have the needed javascript also.
-    }
+    //     //probably render some view when mass action is needed
+    //     //the rendered view will have the needed javascript also.
+    // }
 
     /**
      * @return view
@@ -667,13 +697,13 @@ class DataGrid
     public function render()
     {
         $this->getDbQueryResults();
-        // dump($this->columns);
         return view('ui::datagrid.index', [
             'css' => $this->css,
             'results' => $this->results,
             'columns' => $this->columns,
             'filterable' =>$this->filterable,
             'operators' => $this->operators,
+            'massoperations' => $this->massoperations,
         ]);
     }
 }

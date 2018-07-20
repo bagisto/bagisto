@@ -117,6 +117,12 @@
   height: 24px;
 }
 
+.checkbox-dash-icon {
+  background-image: url("../images/Checkbox-Dash.svg");
+  width: 24px;
+  height: 24px;
+}
+
 .active .dashboard-icon {
   background-image: url("../images/Icon-Dashboard-Active.svg");
 }
@@ -836,16 +842,96 @@ h2 {
   margin-right: 5px;
 }
 
-.grid-container .filter-wrapper .filter-row-one .dropdown-filters .more-filters .control {
+.grid-container .filter-wrapper .filter-row-one .dropdown-filters .more-filters .dropdown-toggle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-family: "montserrat", sans-serif;
   padding-left: 5px;
   height: 36px;
   width: 150px;
   border: 2px solid #C7C7C7;
-  border-radius: 3px;
   background-color: white;
   color: #8e8e8e;
   font-size: 14px;
+}
+
+.grid-container .filter-wrapper .filter-row-one .dropdown-filters .more-filters .dropdown-toggle .dropdown-header {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.grid-container .filter-wrapper .filter-row-one .dropdown-filters .more-filters .dropdown-toggle .dropdown-header .arrow-down-icon {
+  margin-right: 5px;
+}
+
+.grid-container .filter-wrapper .filter-row-one .dropdown-filters .more-filters .dropdown-list .dropdown-container ul li.filter-column-dropdown .filter-column-select {
+  background: #fff;
+  border: 2px solid #c7c7c7;
+  border-radius: 3px;
+  height: 36px;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0px 5px;
+  font-family: "montserrat", sans-serif;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.grid-container .filter-wrapper .filter-row-one .dropdown-filters .more-filters .dropdown-list .dropdown-container ul li select {
+  background: #fff;
+  border: 2px solid #c7c7c7;
+  border-radius: 3px;
+  height: 36px;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0px 5px;
+  font-family: "montserrat", sans-serif;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.grid-container .filter-wrapper .filter-row-one .dropdown-filters .more-filters .dropdown-list .dropdown-container ul li input {
+  background: #fff;
+  border: 2px solid #c7c7c7;
+  border-radius: 3px;
+  height: 36px;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0px 5px;
+  font-family: "montserrat", sans-serif;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .grid-container .filter-wrapper .filter-row-one .dropdown-filters .more-filters .dropdown-list .dropdown-container ul .filter-condition-dropdown-string {
@@ -886,8 +972,8 @@ h2 {
           flex-direction: row;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 
 .grid-container .filter-wrapper .filter-row-two .filter-one {
@@ -915,6 +1001,27 @@ h2 {
 .grid-container .filter-wrapper .filter-row-two .filter-one .filter-value .cross-icon {
   height: 18px !important;
   width: 18px !important;
+}
+
+.grid-container .table .xyz {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding-left: 10px;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.grid-container .table .xyz .selected-items {
+  margin-right: 15px;
 }
 
 /*   DataGrid css ends in here   */

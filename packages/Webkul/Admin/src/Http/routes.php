@@ -1,7 +1,6 @@
 <?php
 
 Route::group(['middleware' => ['web']], function () {
-    
     Route::prefix('admin')->group(function () {
         // Login Routes
         Route::get('/login', 'Webkul\User\Http\Controllers\SessionController@create')->defaults('_config', [
@@ -58,8 +57,11 @@ Route::group(['middleware' => ['web']], function () {
             });
 
             // Datagrid Routes
-            Route::get('/datagrid', 'Webkul\Admin\Http\Controllers\DataGridController@index')->name('admin.datagrid.index');
-            
+            //for datagrid and its loading, filtering, sorting and queries
+            Route::get('datagrid', 'Webkul\Admin\Http\Controllers\DataGridController@index')->name('admin.datagrid.index');
+
+            Route::any('datagrid/massaction/delete', 'Webkul\Admin\Http\Controllers\DataGridController@massDelete')->name('admin.datagrid.delete');
+
             // User Routes
             Route::get('/users', 'Webkul\User\Http\Controllers\UserController@index')->defaults('_config', [
                 'view' => 'admin::users.users.index'
@@ -86,7 +88,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/roles', 'Webkul\User\Http\Controllers\RoleController@index')->defaults('_config', [
                 'view' => 'admin::users.roles.index'
             ])->name('admin.roles.index');
-            
+
             Route::get('/roles/create', 'Webkul\User\Http\Controllers\RoleController@create')->defaults('_config', [
                 'view' => 'admin::users.roles.create'
             ])->name('admin.roles.create');
@@ -108,7 +110,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/locales', 'Webkul\Core\Http\Controllers\LocaleController@index')->defaults('_config', [
                 'view' => 'admin::locales.index'
             ])->name('admin.locales.index');
-            
+
             Route::get('/locales/create', 'Webkul\Core\Http\Controllers\LocaleController@create')->defaults('_config', [
                 'view' => 'admin::locales.create'
             ])->name('admin.locales.create');
@@ -122,7 +124,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/account', 'Webkul\User\Http\Controllers\AccountController@edit')->defaults('_config', [
                 'view' => 'admin::account.edit'
             ])->name('admin.account.edit');
-        
+
             Route::put('/account', 'Webkul\User\Http\Controllers\AccountController@update')->name('admin.account.update');
         });
     });

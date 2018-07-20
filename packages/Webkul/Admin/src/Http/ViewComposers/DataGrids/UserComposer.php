@@ -50,10 +50,6 @@ class UserComposer
                     'column' => 'u.name',
                     'type' => 'string',
                     'label' => 'Admin Name'
-                ], [
-                    'column' => 'u.id',
-                    'type' => 'number',
-                    'label' => 'Admin ID'
                 ]
             ],
             'searchable' => [
@@ -66,6 +62,25 @@ class UserComposer
                     'type' => 'string',
                     'label' => 'Admin Name'
                 ]
+            ],
+            'massoperations' =>[
+                [
+                    'route' => route('admin.datagrid.delete'),
+                    'method' => 'DELETE',
+                    'label' => 'Delete',
+                    'type' => 'button',
+                ],
+                // [
+                //     'route' => route('admin.datagrid.index'),
+                //     'method' => 'POST',
+                //     'label' => 'View Grid',
+                //     'type' => 'select',
+                //     'options' =>[
+                //         1 => 'Edit',
+                //         2 => 'Set',
+                //         3 => 'Change Status'
+                //     ]
+                // ],
             ],
             'join' => [
                 [
@@ -123,19 +138,6 @@ class UserComposer
                 // ],
 
             ],
-            'select_verbs' => [
-                0 => "aggregate",
-                1 => "columns",
-                2 => "from",
-                3 => "joins",
-                4 => "wheres",
-                5 => "groups",
-                6 => "havings",
-                7 => "orders",
-                8 => "limit",
-                9 => "offset",
-                10 => "lock"
-            ],
             'operators' => [
                 'eq' => "=",
                 'lt' => "<",
@@ -144,16 +146,7 @@ class UserComposer
                 'gte' => ">=",
                 'neqs' => "<>",
                 'neqn' => "!=",
-                // 'ceq' => "<=>",
                 'like' => "like",
-                // 'likebin' => "like binary",
-                // 'ntlike' => "not like",
-                // 'ilike' => "ilike",
-                // 'regex' => "regexp",
-                // 'notregex' => "not regexp",
-                // 'simto' => "similar to",
-                // 'nsimto' => "not similar to",
-                // 'nilike' => "not ilike",
             ],
             // 'css' => []
 

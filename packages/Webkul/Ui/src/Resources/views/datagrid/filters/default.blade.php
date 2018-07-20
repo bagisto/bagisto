@@ -9,13 +9,6 @@
         </div>
         <div class="dropdown-filters">
             <div class="column-filter">
-                {{--
-                <div class="dropdown-toggle">
-                    <div style="display: inline-block; vertical-align: middle;">
-                        <span class="name">Columns</span>
-                    </div>
-                    <i class="icon arrow-down-icon active"></i>
-                </div> --}}
                 <div class="dropdown-list bottom-right" style="display: none;">
                     <div class="dropdown-container">
                         <ul>
