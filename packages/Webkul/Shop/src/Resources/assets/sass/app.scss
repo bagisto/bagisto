@@ -1,9 +1,13 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
 @import "mixins";
 @import "variables";
 
 body {
     margin: 0;
     padding: 0;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .header {
@@ -18,7 +22,6 @@ body {
         width: 100%;
         margin-left: auto;
         margin-right: auto;
-        // border: 1px solid indigo;
         align-items: center;
         justify-content: space-between;
 
@@ -49,15 +52,9 @@ body {
                         border-right: none;
                         border-top-right-radius: 0px;
                         border-bottom-right-radius: 0px;
-                    }
-
-                    input.search-field::-moz-placeholder {
-                        font-family: "montserrat", sans-serif;
-                        padding-left: 10px;
-                    }
-                    input.search-field::-webkit-input-placeholder {
-                        font-family: "montserrat", sans-serif;
-                        padding-left: 10px;
+                        padding-left: 12px;
+                        font-family: "Montserrat", sans-serif;
+                        font-size: 14px;
                     }
 
                     .q-c {
@@ -92,17 +89,18 @@ body {
                 li.account-dropdown {
                     display: flex;
                     flex-direction: row;
-                    margin-right: 10px;
+                    margin-right: 14px;
 
-                    .icon-account {
+                    .account-icon {
                         margin: 0;
-                        padding-right: 5px;
+                        padding-right: 8px;
                         height: 24px;
                         width: 24px;
                     }
                     .account {
                         padding-top: 3px;
                         padding-right: 5px;
+                        margin-left: 8px;
                     }
                     .icon.arrow-down-icon {
                         margin-top: 10px;
@@ -116,13 +114,13 @@ body {
                 li.product-dropdown {
                     display: flex;
                     flex-direction: row;
-                    margin-left: 10px;
+                    margin-left: 14px;
 
-                    .icon-cart {
+                    .cart-icon {
                         margin: 0;
                         height: 24px;
                         width: 24px;
-                        margin-right: 9px;
+                        margin-right: 8px;
                     }
                     .cart {
                         padding-top: 3px;
@@ -397,6 +395,7 @@ body {
 
                         .btn-primary {
                             background-color: $subscribe-btn-color;
+                            margin-top: 8px;
                             border-radius: 0px;
                             text-align: center;
                         }
@@ -1173,14 +1172,3 @@ body {
         }
     }
 }
-
-// @media all and (max-width: 960px) {
-
-// }
-
-// @media all and (max-width: 768px) {
-
-// }
-
-// @media all and (max-width: 480px) {
-// }

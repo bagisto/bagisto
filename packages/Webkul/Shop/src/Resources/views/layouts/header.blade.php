@@ -23,7 +23,7 @@
             </ul>
             <ul class="account-dropdown-container">
                 <li class="account-dropdown">
-                    <span class="icon icon-account"></span>
+                    <span class="icon account-icon"></span>
                     <span class="account">Account</span>
                     <span class="icon arrow-down-icon"></span>
                 </li>
@@ -31,7 +31,7 @@
 
             <ul class="product-dropdown-container">
                 <li class="product-dropdown">
-                    <span class="icon icon-cart"></span>
+                    <span class="icon cart-icon"></span>
                     <span class="cart"><span class="cart-count">5</span>Products</span>
                     <span class="icon arrow-down-icon"></span>
                 </li>

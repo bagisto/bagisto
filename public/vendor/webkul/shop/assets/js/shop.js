@@ -154,7 +154,6 @@ $(document).ready(function () {
         mounted: function mounted() {
             this.addServerErrors();
             this.addFlashMessages();
-            this.responsiveHeader();
         },
 
         methods: {

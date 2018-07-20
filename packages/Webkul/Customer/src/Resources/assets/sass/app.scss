@@ -1,0 +1,66 @@
+@import "mixins";
+@import "variables";
+
+.content {
+    padding-top: 15%;
+    padding-bottom: 15%;
+
+    .sign-up-text {
+        margin-bottom: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-size: 18px;
+        color: $sign-up-text-color;
+        letter-spacing: -0.29px;
+        text-align: center;
+    }
+    .login-form {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        background: $background-color;
+        border: 1px solid $border-color;
+        flex-direction: column;
+        max-width: 530px;
+        min-width: 380px;
+        min-height: 345px;
+        padding-left: 25px;
+        padding-right: 25px;
+
+        .login-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: $login-text;
+            letter-spacing: -0.23px;
+            margin-top: 5%;
+            margin-bottom: 3%;
+        }
+
+        .control-group {
+            margin-bottom: 15px !important;
+            .control {
+                width: 100% !important;
+            }
+        }
+
+        .forgot-password-link {
+            font-size: 17px;
+            color: $forgot-password-color;
+            letter-spacing: -0.11px;
+            margin-bottom: 5%;
+        }
+        .signup-confirm {
+            letter-spacing: -0.11px;
+            margin-bottom: 5%;
+        }
+
+        .btn-primary {
+            width: 100%;
+            text-transform: uppercase;
+            border-radius: 0px;
+            height: 45px;
+            margin-bottom: 4%;
+        }
+    }
+}

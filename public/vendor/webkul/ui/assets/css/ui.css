@@ -123,6 +123,18 @@
   height: 24px;
 }
 
+.account-icon {
+  background-image: url("../images/icon-account.svg");
+  width: 24px;
+  height: 24px;
+}
+
+.cart-icon {
+  background-image: url("../images/icon-cart.svg");
+  width: 24px;
+  height: 24px;
+}
+
 .active .dashboard-icon {
   background-image: url("../images/Icon-Dashboard-Active.svg");
 }

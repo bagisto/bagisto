@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers;
+namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -9,10 +9,10 @@ use Illuminate\Routing\Controller;
 /**
  * Dashboard controller
  *
- * @author    Jitendra Singh <jitendra@webkul.com>
+ * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class DashboardController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,6 +27,16 @@ class DashboardController extends Controller
     }
     public function index()
     {
-        return view('admin::dashboard.index');
+        return view('customer::login.index');
+    }
+
+    public function login()
+    {
+        return view($this->_config['view']);
+    }
+
+    public function signup()
+    {
+        return view($this->_config['view']);
     }
 }

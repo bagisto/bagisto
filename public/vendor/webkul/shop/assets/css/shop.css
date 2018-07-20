@@ -1,6 +1,9 @@
-body {
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,500);body {
   margin: 0;
   padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .header {
@@ -70,16 +73,9 @@ body {
   border-right: none;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-}
-
-.header .header-top div.left-content ul.search-container li.search-group input.search-field::-moz-placeholder {
-  font-family: "montserrat", sans-serif;
-  padding-left: 10px;
-}
-
-.header .header-top div.left-content ul.search-container li.search-group input.search-field::-webkit-input-placeholder {
-  font-family: "montserrat", sans-serif;
-  padding-left: 10px;
+  padding-left: 12px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
 }
 
 .header .header-top div.left-content ul.search-container li.search-group .q-c {
@@ -128,12 +124,12 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin-right: 10px;
+  margin-right: 14px;
 }
 
-.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .icon-account {
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .account-icon {
   margin: 0;
-  padding-right: 5px;
+  padding-right: 8px;
   height: 24px;
   width: 24px;
 }
@@ -141,6 +137,7 @@ body {
 .header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .account {
   padding-top: 3px;
   padding-right: 5px;
+  margin-left: 8px;
 }
 
 .header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .icon.arrow-down-icon {
@@ -159,14 +156,14 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin-left: 10px;
+  margin-left: 14px;
 }
 
-.header .header-top div.right-content ul.product-dropdown-container li.product-dropdown .icon-cart {
+.header .header-top div.right-content ul.product-dropdown-container li.product-dropdown .cart-icon {
   margin: 0;
   height: 24px;
   width: 24px;
-  margin-right: 9px;
+  margin-right: 8px;
 }
 
 .header .header-top div.right-content ul.product-dropdown-container li.product-dropdown .cart {
@@ -488,6 +485,7 @@ body {
 
 .footer .footer-content .footer-list-container .list-container .form-container .control-group .btn-primary {
   background-color: black;
+  margin-top: 8px;
   border-radius: 0px;
   text-align: center;
 }

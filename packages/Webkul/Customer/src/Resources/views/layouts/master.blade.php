@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
-
 <head>
     <title>@yield('page_title')</title>
     <meta charset="utf-8">
@@ -9,14 +8,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('vendor/webkul/shop/assets/css/shop.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/webkul/customer/assets/css/customer.css') }}">
     @yield('head')
     @yield('css')
-
 </head>
 
 <body>
     <div id="app">
-    @include('shop::layouts.header') @yield('slider')
+    @include('shop::layouts.header')
         <div class="main-container-wrapper">
             <div class="content-container">
                 @yield('content-wrapper')

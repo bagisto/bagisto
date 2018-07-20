@@ -5,7 +5,7 @@ namespace Webkul\User\Notifications;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Auth\Notifications\ResetPassword;
 
-class AdminResetPassword extends ResetPassword
+class CustomerResetPassword extends ResetPassword
 {
 
     /**
@@ -22,7 +22,7 @@ class AdminResetPassword extends ResetPassword
 
         return (new MailMessage)
             ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', route('admin.reset-password.create', $this->token))
+            ->action('Reset Password', route('customer.reset-password.create', $this->token))
             ->line('If you did not request a password reset, no further action is required.');
     }
 }
