@@ -4,6 +4,8 @@ namespace Webkul\Customer\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Routing\Router;
+
 use Illuminate\Support\Facades\Blade;
 use Webkul\Admin\Providers\EventServiceProvider;
 
@@ -11,7 +13,7 @@ use Webkul\Admin\Providers\EventServiceProvider;
 
 class CustomerServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(Router $router)
     {
         include __DIR__ . '/../Http/routes.php';
 
