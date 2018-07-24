@@ -1001,21 +1001,22 @@ h2 {
   display: -ms-inline-flexbox;
   display: inline-flex;
   background: #e7e7e7;
-  height: 36px;
   padding-left: 5px;
-  padding-right: 10px;
-  padding-top: 8px;
-  padding-bottom: 5px;
   color: #000311;
   vertical-align: middle;
 }
 
+.grid-container .filter-wrapper .filter-row-two .filter-one .filter-value .f-value {
+  margin: auto;
+}
+
 .grid-container .filter-wrapper .filter-row-two .filter-one .filter-value .cross-icon {
+  margin: 5px;
   height: 18px !important;
   width: 18px !important;
 }
 
-.grid-container .table .xyz {
+.grid-container .table thead .xyz {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1023,7 +1024,6 @@ h2 {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  padding-left: 10px;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
@@ -1032,7 +1032,12 @@ h2 {
           align-items: center;
 }
 
-.grid-container .table .xyz .selected-items {
+.grid-container .table thead .xyz .massaction-remove {
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.grid-container .table thead .xyz .selected-items {
   margin-right: 15px;
 }
 

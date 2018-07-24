@@ -4,7 +4,10 @@
             <tr class="mass-action" style="display: none;">
                 <th colspan="{{ count($columns)+1 }}">
                     <div class="xyz">
-                        <div class="selected-items"></div>
+                        <span class="massaction-remove">
+                            <span class="icon checkbox-dash-icon"></span>
+                        </span>
+                        {{-- <div class="selected-items"></div> --}}
                         @foreach($massoperations as $massoperation) {{--
                         <h3>{{ $massoperation['label'] }}</h3> --}} @if($massoperation['type'] == "button")
                         <form @if(strtoupper($massoperation[ 'method'])=="GET" || strtoupper($massoperation[ 'method'])=="POST" ) method="{{ strtoupper($massoperation['method']) }}"
@@ -40,10 +43,10 @@
                 </th>
                 @foreach ($columns as $column)
                     @if($column->sortable == "true")
-                    <th class="" data-column-name={{ $column->name }} data-column-sort="asc"> {!! $column->sorting() !!}<span class="icon sort-down-icon"></span>
+                    <th class="labelled-col grid_head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}" data-column-sort="asc"> {!! $column->sorting() !!}     <span class="icon sort-down-icon"></span>
                     </th>
                     @else
-                    <th class="">{!! $column->sorting() !!}</th>
+                    <th class="labelled-col grid_head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
                     @endif
                 @endforeach
             </tr>

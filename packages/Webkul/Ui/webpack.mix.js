@@ -14,7 +14,7 @@ mix.js(
     ],
     "js/ui.js"
 )
-    .copy(__dirname + "/src/Resources/assets/images", publicPath + "/images")
+    // .copy(__dirname + "/src/Resources/assets/images", publicPath + "/images")
     .sass(__dirname + "/src/Resources/assets/sass/app.scss", "css/ui.css")
     .options({
         processCssUrls: false

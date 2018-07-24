@@ -51,7 +51,7 @@ return [
             'table' => 'admin_password_resets',
             'expire' => 60,
         ],
-        'admins' => [
+        'customers' => [
             'provider' => 'customers',
             'table' => 'customers_password_resets',
             'expire' => 60,

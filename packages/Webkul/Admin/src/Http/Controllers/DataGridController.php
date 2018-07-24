@@ -158,6 +158,7 @@ class DataGridController extends Controller
                 'neqn' => "!=",
                 'ceq' => "<=>",
                 'like' => "like",
+                'nlike' => "not like",
             ],
             'mass_operations' =>[
                 [

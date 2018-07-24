@@ -74,13 +74,13 @@ class AdminServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../Config/auth.php',
-            'auth'
-        );
-    }
+    // public function register()
+    // {
+    //     $this->mergeConfigFrom(
+    //         __DIR__ . '/../Config/auth.php',
+    //         'auth'
+    //     );
+    // }
 
     /**
      * Merge the given configuration with the existing configuration.

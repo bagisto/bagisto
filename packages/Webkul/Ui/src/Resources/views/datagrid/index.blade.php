@@ -28,24 +28,25 @@
                 params = (new URL(document.location)).search;
 
                 if(params.length>0){
-                    if(allFilters1.length == 0){
+                    if(allFilters1.length == 0) {
                         //call reverse url function
                         arrayFromUrl(params.slice(1,params.length));
                     }
                 }
-                $('.search-btn').click(function(){
+                $('.search-btn').click(function() {
                     search_value = $(".search-field").val();
 
                     formURL('search','all',search_value,params);  //format for search
 
                     alert(search_value);
                 });
-                $('.grid_head').on('click', function(){
+                $('.grid_head').on('click', function() {
 
                     var column = $(this).data('column-name');
                     var currentSort = $(this).data('column-sort');
-
-                    if(currentSort == "asc"){
+                    console.log(column, currentSort);
+                    // return false;
+                    if(currentSort == "asc") {
                         $(this).data('column-name','desc');
                         formURL(column,'sort','desc',params);
                     }else{
@@ -166,51 +167,65 @@
                         });
                         $('.mass-action').css('display','');
                         $('.table-grid-header').css('display','none');
-                        $('.selected-items').html(id.toString());
+                        // $('.selected-items').html(id.toString());
                         $('#indexes').val(id);
-                        console.log(id);
                     }
-                    else if($("input[id=mastercheckbox]").prop('checked') == false){
+                    else if($("input[id=mastercheckbox]").prop('checked') == false) {
                         $('.indexers').each(function(){ this.checked = false; });
                         id = [];
                         $('.mass-action').css('display','none');
                         $('.table-grid-header').css('display','');
                         $('#indexes').val('');
-                        console.log(id);
                     }
+                });
+
+                $('.massaction-remove').on('click', function(){
+                    id = [];
+                    $('.mass-action').css('display','none');
+                    if($('#mastercheckbox').prop('checked')) {
+                        $('#mastercheckbox').prop('checked',false);
+                    }
+                    $("input[class=indexers]").each(function(){
+                        if($(this).prop('checked')){
+                            $(this).prop('checked',false);
+                        }
+                    });
+                    $('.table-grid-header').css('display','');
                 });
 
                 $("input[class=indexers]").change(function() {
                     if(this.checked){
                         y = parseInt($(this).attr('id'));
                         id.push(y);
-                        console.log(id);
                     }
                     else {
                         y = parseInt($(this).attr('id'));
                         var index = id.indexOf(y);
                         id.splice(index,1);
                     }
-                    if(id.length>0){
+                    if(id.length>0) {
                         $('.mass-action').css('display','');
                         $('.table-grid-header').css('display','none');
-                        $('.selected-items').html(id.toString());
+                        // $('.selected-items').html(id.toString());
                         $('#indexes').val(id);
-                    }else if(id.length == 0){
+                    }else if(id.length == 0) {
                         $('.mass-action').css('display','none');
                         $('.table-grid-header').css('display','');
                         $('#indexes').val('');
+                        if($('#mastercheckbox').prop('checked')) {
+                            $('#mastercheckbox').prop('checked',false);
+                        }
                     }
                 });
 
                 //remove the mass action by clicking on the icon
-                $('.mass-action-remove').on('click', function(){
-                    $("input[type=checkbox]").prop('checked',false);
-                    id = [];
-                    $('#indexes').val('');
-                    $('.mass-action').css('display','none');
-                    $('.table-grid-header').css('display','');
-                });
+                // $('.mass-action-remove').on('click', function() {
+                //     $("input[type=checkbox]").prop('checked',false);
+                //     id = [];
+                //     $('#indexes').val('');
+                //     $('.mass-action').css('display','none');
+                //     $('.table-grid-header').css('display','');
+                // });
 
                 // $('.b-res').css('visibility','hidden');
                 // $('.t-res').css('visibility','hidden');
@@ -264,7 +279,7 @@
                 // console.log('Array from URL = ',allFilters1);
                 makeTagsTestPrior();
             }
-
+            var label;
             function makeTagsTestPrior() {
                 var filterRepeat = 0;
                 //make sure the filter or sort param is not duplicate before pushing it into the all filters array
@@ -275,10 +290,16 @@
                         // console.log(allFilters1[i][j],j);
                         for(k in allFilters1[i][j])
                         {
-                            // console.log('column = ',j);
+                            console.log('column = ',j);
+                            if($("th[data-column-name='" + j +"']")) {
+                                label = $("th[data-column-name='" + j +"']").data('column-label');
+                                console.log(label);
+                            }
+
+                            // console.log('label = ',label);
                             // console.log('condition = ',k);
                             // console.log('value = ',allFilters1[i][j][k]);
-                            var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ j +'</span><span class="filter-value">'+allFilters1[i][j][k] +'<span class="icon cross-icon remove-filter"></span></span></span>';
+                            var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ label +'</span><span class="filter-value"><span class="f-value">'+allFilters1[i][j][k] +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
                             $('.filter-row-two').append(filter_card);
                         }
                     }
@@ -309,7 +330,7 @@
                 if(filterRepeat == 0) {
                     allFilters1.push(tmp);
                     // console.log(allFilters1);
-                    var filter_card = '<span class="filter-one"><span class="filter-name">'+ column +'</span><span class="filter-value">'+ response +'<span class="icon cross-icon"></span></span></span>';
+                    var filter_card = '<span class="filter-one"><span class="filter-name">'+ column +'</span><span class="filter-value"><span class="f-value">'+ response +'</span><span class="icon cross-icon"></span></span></span>';
                     $('.filter-row-two').append(filter_card);
                     makeURL(allFilters1);
                     count_filters++;
