@@ -5,5 +5,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomersGroups extends Model
 {
-    protected $table = 'customers_group';
+    protected $table = 'customer_groups';
 }

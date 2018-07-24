@@ -64,3 +64,44 @@
         }
     }
 }
+
+.dashboard-content {
+    width: 100%;
+    margin-top: 5.5%;
+    margin-bottom: 5.5%;
+
+    .dashboard-side-menu {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        border: 1px solid #e8e8e8;
+        border-right: none;
+        background: #ffffff;
+        width: 25%;
+        text-transform: capitalize;
+
+        li {
+            font-size: 16px;
+            width: 95%;
+            height: 50px;
+            margin-left: 15px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            border: 1px solid $border-color;
+            border-left: none;
+            border-bottom: none;
+            text-align: center;
+        }
+        li:first-child {
+            border-top: none;
+            border-left: none;
+            border-bottom: none;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+    }
+}

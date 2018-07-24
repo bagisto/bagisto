@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\User\Http\Middleware;
+namespace Webkul\Customer\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +18,7 @@ class RedirectIfNotCustomer
     public function handle($request, Closure $next, $guard = 'customer')
     {
         if (! Auth::guard($guard)->check()) {
-            return redirect()->route('admin.login');
+            return redirect()->route('customer.session.index');
         }
 
         return $next($request);

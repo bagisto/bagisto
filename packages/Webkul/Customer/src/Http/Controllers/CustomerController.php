@@ -7,7 +7,10 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 /**
- * Dashboard controller
+ * Customer controlller for the customer
+ * basically for the tasks of customers
+ * which will be done after customer
+ * authenticastion.
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -25,17 +28,14 @@ class CustomerController extends Controller
     {
         $this->_config = request('_config');
     }
-    public function index()
-    {
-        return view('customer::login.index');
-    }
 
-    public function login()
-    {
-        return view($this->_config['view']);
-    }
-
-    public function signup()
+    /**
+     * For taking the customer
+     * to the dashboard after
+     * authentication
+     * @return view
+     */
+    public function dashboard()
     {
         return view($this->_config['view']);
     }

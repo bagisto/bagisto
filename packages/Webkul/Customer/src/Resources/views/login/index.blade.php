@@ -2,9 +2,10 @@
 @section('content-wrapper')
     <div class="content">
         <div class="sign-up-text">
-            Don't have account - <a href="{{ route('customer.register') }}">Sign Up</a>
+            Don't have account - <a href="{{ route('customer.register.index') }}">Sign Up</a>
         </div>
-        <form>
+        <form method="POST" action="{{ route('customer.session.create') }}">
+            {{ csrf_field() }}
             <div class="login-form">
                 <div class="login-text">Sign In</div>
                 <div class="control-group">
@@ -12,8 +13,8 @@
                     <input type="text" class="control" name="email">
                 </div>
                 <div class="control-group">
-                    <label for="email">Password</label>
-                    <input type="password" class="control" name="email">
+                    <label for="password">Password</label>
+                    <input type="password" class="control" name="password">
                 </div>
                 <div class="forgot-password-link">
                     <a href="">Forgot Password?</a>

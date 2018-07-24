@@ -5,8 +5,8 @@ namespace Webkul\Customer\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Routing\Router;
-
 use Illuminate\Support\Facades\Blade;
+use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 use Webkul\Admin\Providers\EventServiceProvider;
 
 // use Webkul\Admin\Providers\ComposerServiceProvider;
@@ -23,7 +23,7 @@ class CustomerServiceProvider extends ServiceProvider
 
         $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'customer');
     }
