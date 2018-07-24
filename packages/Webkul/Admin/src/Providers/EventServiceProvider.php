@@ -39,7 +39,9 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('admin.menu.build', function($menu) {
             $menu->add('dashboard', 'Dashboard', 'admin.dashboard.index', 1, 'dashboard-icon');
 
-            $menu->add('catalog', 'Catalog', 'admin.catalog.attributes.index', 3, 'catalog-icon');
+            $menu->add('catalog', 'Catalog', 'admin.catalog.categories.index', 3, 'catalog-icon');
+
+            $menu->add('catalog.categories', 'Categories', 'admin.catalog.categories.index', 2);
 
             $menu->add('catalog.attributes', 'Attributes', 'admin.catalog.attributes.index', 3);
 
@@ -49,15 +51,25 @@ class EventServiceProvider extends ServiceProvider
 
             $menu->add('configuration.account', 'My Account', 'admin.account.edit', 1);
 
-            $menu->add('settings', 'Settings', 'admin.users.index', 6, 'settings-icon');
+            $menu->add('settings', 'Settings', 'admin.countries.index', 6, 'settings-icon');
 
-            $menu->add('settings.users', 'Users', 'admin.users.index', 1, '');
+            $menu->add('settings.countries', 'Countries', 'admin.countries.index', 1, '');
+
+            $menu->add('settings.locales', 'Locales', 'admin.locales.index', 2, '');
+
+            $menu->add('settings.currencies', 'Currencies', 'admin.currencies.index', 3, '');
+
+            $menu->add('settings.exchange_rates', 'Exchange Rates', 'admin.exchange_rates.index', 4, '');
+
+            $menu->add('settings.inventory_sources', 'Inventory Sources', 'admin.inventory_sources.index', 5, '');
+
+            $menu->add('settings.channels', 'Channels', 'admin.channels.index', 5, '');
+
+            $menu->add('settings.users', 'Users', 'admin.users.index', 7, '');
 
             $menu->add('settings.users.users', 'Users', 'admin.users.index', 1, '');
 
             $menu->add('settings.users.roles', 'Roles', 'admin.roles.index', 2, '');
-
-            $menu->add('settings.locales', 'Locales', 'admin.locales.index', 2, '');
         });
     }
 

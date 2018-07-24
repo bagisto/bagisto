@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryNameTranslationTable extends Migration
+class CreateCurrenciesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateCategoryNameTranslationTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_name_translation', function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code');
+            $table->string('symbol');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateCategoryNameTranslationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_name_translation');
+        Schema::dropIfExists('currencies');
     }
 }

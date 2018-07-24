@@ -1,0 +1,27 @@
+{
+    "name": "webkul/laravel-channel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jitendra Singh",
+            "email": "jitendra@webkul.com"
+        }
+    ],
+    "require": {
+        "baum/baum": "~1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webkul\\Channel\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\Channel\\Providers\\ChannelServiceProvider"
+            ],
+            "aliases": { }
+        }
+    },
+    "minimum-stability": "dev"
+}

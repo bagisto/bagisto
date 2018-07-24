@@ -154,15 +154,35 @@
 }
 
 .content-container .content .page-header {
-  display: block;
+  display: inline-block;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .content-container .content .page-header .page-title {
   float: left;
 }
 
+.content-container .content .page-header .page-title h1 {
+  margin-bottom: 0;
+  vertical-align: middle;
+  display: inline-block;
+}
+
 .content-container .content .page-header .page-action {
   float: right;
+}
+
+.content-container .content .page-header .control-group {
+  width: 180px;
+  display: inline-block;
+  margin-bottom: 0;
+  margin-left: 20px;
+}
+
+.content-container .content .page-header .control {
+  width: 100%;
+  margin: 0;
 }
 
 .content-container .content .page-content {

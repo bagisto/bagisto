@@ -13,5 +13,10 @@ class LocalesTableSeeder extends Seeder
         $locale->code = 'en';
         $locale->name = 'English';
         $locale->save();
+
+        $locale = new Locale();
+        $locale->code = 'fr';
+        $locale->name = 'French';
+        $locale->save();
     }
 }

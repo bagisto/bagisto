@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="type">{{ __('admin::app.catalog.attributes.type') }}</label>
+                                <label for="type" class="required">{{ __('admin::app.catalog.attributes.type') }}</label>
                                 <select class="control" id="type" name="type">
                                     <option value="text">{{ __('admin::app.catalog.attributes.text') }}</option>
                                     <option value="textarea">{{ __('admin::app.catalog.attributes.textarea') }}</option>
@@ -52,7 +52,7 @@
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('admin_name') ? 'has-error' : '']">
-                                <label for="admin_name">{{ __('admin::app.catalog.attributes.admin') }}</label>
+                                <label for="admin_name" class="required">{{ __('admin::app.catalog.attributes.admin') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="admin_name" name="admin_name" value="{{ old('admin_name') }}"/>
                                 <span class="control-error" v-if="errors.has('admin_name')">@{{ errors.first('admin_name') }}</span>
                             </div>
@@ -196,7 +196,7 @@
 
                             <td>
                                 <div class="control-group" :class="[errors.has(sortOrderName(row)) ? 'has-error' : '']">
-                                    <input type="text" v-validate="'required'" :name="sortOrderName(row)" class="control"/>
+                                    <input type="text" v-validate="'required|numeric'" :name="sortOrderName(row)" class="control"/>
                                     <span class="control-error" v-if="errors.has(sortOrderName(row))">@{{ errors.first(sortOrderName(row)) }}</span>
                                 </div>
                             </td>

@@ -165,14 +165,34 @@ body {
         }
         
         .page-header {
-            display: block;
+            display: inline-block;
+            margin-bottom: 20px;
+            width: 100%;
 
             .page-title {
                 float: left;
+
+                h1 {
+                    margin-bottom: 0;
+                    vertical-align: middle;
+                    display: inline-block;
+                }
             }
 
             .page-action {
                 float: right;
+            }
+
+            .control-group {
+                width: 180px;
+                display: inline-block;
+                margin-bottom: 0;
+                margin-left: 20px;
+            }
+
+            .control {
+                width: 100%;
+                margin: 0;
             }
         }
 

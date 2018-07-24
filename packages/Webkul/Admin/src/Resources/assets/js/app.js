@@ -35,11 +35,16 @@ $(document).ready(function () {
             addServerErrors () {
                 var scope = null;
                 for (var key in serverErrors) {
-                    const field = this.$validator.fields.find({ name: key, scope: scope });
+                    var inputName = key;
+                    if(key.indexOf('.') !== -1) {
+                        inputName = key.replace(".", "[") + ']';
+                    }
+
+                    const field = this.$validator.fields.find({ name: inputName, scope: scope });
                     if (field) {
                         this.$validator.errors.add({
                             id: field.id,
-                            field: key,
+                            field: inputName,
                             msg: serverErrors[key][0],
                             scope: scope,
                         });
