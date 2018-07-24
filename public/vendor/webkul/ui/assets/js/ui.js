@@ -177,8 +177,8 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);
-__webpack_require__(22);
-module.exports = __webpack_require__(24);
+__webpack_require__(25);
+module.exports = __webpack_require__(26);
 
 
 /***/ }),
@@ -191,7 +191,8 @@ Vue.component('accordian', __webpack_require__(9));
 Vue.component('tree-view', __webpack_require__(12));
 Vue.component('tree-item', __webpack_require__(14));
 Vue.component('tree-checkbox', __webpack_require__(16));
-Vue.component('modal', __webpack_require__(19));
+Vue.component('tree-radio', __webpack_require__(19));
+Vue.component('modal', __webpack_require__(22));
 
 /***/ }),
 /* 3 */
@@ -640,10 +641,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     inheritAttrs: false,
 
     props: {
+        inputType: {
+            type: String,
+            required: false,
+            default: 'checkbox'
+        },
+
+        nameField: {
+            type: String,
+            required: false,
+            default: 'permissions'
+        },
+
         idField: {
             type: String,
             required: false,
             default: 'id'
+        },
+
+        valueField: {
+            type: String,
+            required: false,
+            default: 'value'
         },
 
         captionField: {
@@ -656,12 +675,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             type: String,
             required: false,
             default: 'children'
-        },
-
-        valueField: {
-            type: String,
-            required: false,
-            default: 'value'
         },
 
         items: {
@@ -691,6 +704,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         savedValues: function savedValues() {
             if (!this.value) return [];
 
+            if (this.inputType == 'radio') return [this.value];
+
             return typeof this.value == 'string' ? JSON.parse(this.value) : this.value;
         }
     },
@@ -715,6 +730,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     items: item,
                     value: this.finalValues,
                     savedValues: this.savedValues,
+                    nameField: this.nameField,
+                    inputType: this.inputType,
                     captionField: this.captionField,
                     childrenField: this.childrenField,
                     valueField: this.valueField,
@@ -799,6 +816,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     inheritAttrs: false,
 
     props: {
+        inputType: String,
+
+        nameField: String,
+
         idField: String,
 
         captionField: String,
@@ -905,44 +926,57 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         generateRoot: function generateRoot() {
             var _this4 = this;
 
-            return this.$createElement('tree-checkbox', {
-                props: {
-                    id: this.items[this.idField],
-                    label: this.caption,
-                    modelValue: this.items[this.valueField],
-                    inputValue: this.hasChildren ? this.isSomeChildrenSelected : this.value,
-                    value: this.hasChildren ? this.isAllChildrenSelected : this.items
-                },
-                on: {
-                    change: function change(selection) {
-                        if (_this4.hasChildren) {
-                            if (_this4.isAllChildrenSelected) {
-                                _this4.allChildren.forEach(function (leaf) {
-                                    var index = _this4.value.indexOf(leaf);
-                                    _this4.value.splice(index, 1);
-                                });
-                            } else {
-                                _this4.allChildren.forEach(function (leaf) {
-                                    var exists = false;
-                                    _this4.value.forEach(function (item) {
-                                        if (item['key'] == leaf['key']) {
-                                            exists = true;
+            if (this.inputType == 'checkbox') {
+                return this.$createElement('tree-checkbox', {
+                    props: {
+                        id: this.items[this.idField],
+                        label: this.caption,
+                        nameField: this.nameField,
+                        modelValue: this.items[this.valueField],
+                        inputValue: this.hasChildren ? this.isSomeChildrenSelected : this.value,
+                        value: this.hasChildren ? this.isAllChildrenSelected : this.items
+                    },
+                    on: {
+                        change: function change(selection) {
+                            if (_this4.hasChildren) {
+                                if (_this4.isAllChildrenSelected) {
+                                    _this4.allChildren.forEach(function (leaf) {
+                                        var index = _this4.value.indexOf(leaf);
+                                        _this4.value.splice(index, 1);
+                                    });
+                                } else {
+                                    _this4.allChildren.forEach(function (leaf) {
+                                        var exists = false;
+                                        _this4.value.forEach(function (item) {
+                                            if (item['key'] == leaf['key']) {
+                                                exists = true;
+                                            }
+                                        });
+
+                                        if (!exists) {
+                                            _this4.value.push(leaf);
                                         }
                                     });
+                                }
 
-                                    if (!exists) {
-                                        _this4.value.push(leaf);
-                                    }
-                                });
+                                _this4.$emit('input', _this4.value);
+                            } else {
+                                _this4.$emit('input', selection);
                             }
-
-                            _this4.$emit('input', _this4.value);
-                        } else {
-                            _this4.$emit('input', selection);
                         }
                     }
-                }
-            });
+                });
+            } else if (this.inputType == 'radio') {
+                return this.$createElement('tree-radio', {
+                    props: {
+                        id: this.items[this.idField],
+                        label: this.caption,
+                        nameField: this.nameField,
+                        modelValue: this.items[this.valueField],
+                        value: this.savedValues
+                    }
+                });
+            }
         },
         generateChild: function generateChild(child) {
             var _this5 = this;
@@ -957,6 +991,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                     items: child,
                     value: this.value,
                     savedValues: this.savedValues,
+                    nameField: this.nameField,
+                    inputType: this.inputType,
                     captionField: this.captionField,
                     childrenField: this.childrenField,
                     valueField: this.valueField,
@@ -993,13 +1029,18 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                     }
                 }
             });
+        },
+        generateFolderIcon: function generateFolderIcon() {
+            return this.$createElement('i', {
+                class: ['icon', 'folder-icon']
+            });
         }
     },
 
     render: function render(createElement) {
         return createElement('div', {
             class: ['tree-item', 'active', this.hasChildren ? 'has-children' : '']
-        }, [this.generateIcon(), this.generateRoot()].concat(_toConsumableArray(this.generateChildren())));
+        }, [this.generateIcon(), this.generateFolderIcon(), this.generateRoot()].concat(_toConsumableArray(this.generateChildren())));
     }
 });
 
@@ -1068,7 +1109,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'tree-checkbox',
 
-    props: ['id', 'label', 'modelValue', 'inputValue', 'value'],
+    props: ['id', 'label', 'nameField', 'modelValue', 'inputValue', 'value'],
 
     computed: {
         isMultiple: function isMultiple() {
@@ -1168,7 +1209,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("span", { staticClass: "checkbox" }, [
     _c("input", {
-      attrs: { type: "checkbox", id: _vm.id, name: "permissions[]" },
+      attrs: { type: "checkbox", id: _vm.id, name: [_vm.nameField, "[]"] },
       domProps: { value: _vm.modelValue, checked: _vm.isActive },
       on: {
         change: function($event) {
@@ -1218,6 +1259,113 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "src/Resources/assets/js/components/tree-view/tree-radio.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7b7bb153", Component.options)
+  } else {
+    hotAPI.reload("data-v-7b7bb153", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'tree-radio',
+
+    props: ['id', 'label', 'nameField', 'modelValue', 'value'],
+
+    computed: {
+        isActive: function isActive() {
+            if (this.value.length) {
+                return this.value[0] == this.modelValue ? true : false;
+            }
+
+            return false;
+        }
+    }
+});
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("span", { staticClass: "radio" }, [
+    _c("input", {
+      attrs: { type: "radio", id: _vm.id, name: _vm.nameField },
+      domProps: { value: _vm.modelValue, checked: _vm.isActive }
+    }),
+    _vm._v(" "),
+    _c("label", { staticClass: "radio-view", attrs: { for: _vm.id } }),
+    _vm._v(" "),
+    _c("span", { attrs: { for: _vm.id } }, [_vm._v(_vm._s(_vm.label))])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7b7bb153", module.exports)
+  }
+}
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(23)
+/* template */
+var __vue_template__ = __webpack_require__(24)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "src/Resources/assets/js/components/modal.vue"
 
 /* hot reload */
@@ -1240,7 +1388,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 20 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1295,7 +1443,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 21 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1340,7 +1488,7 @@ if (false) {
 }
 
 /***/ }),
-/* 22 */
+/* 25 */
 /***/ (function(module, exports) {
 
 $(function () {
@@ -1431,8 +1579,7 @@ $(function () {
 });
 
 /***/ }),
-/* 23 */,
-/* 24 */
+/* 26 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

@@ -395,6 +395,10 @@ h2 {
             background-color: #D3D3D3;
             cursor: not-allowed;
         }
+
+        &[multiple] {
+            height: 100px;
+        }
     }
 
     .control-info {
@@ -556,6 +560,11 @@ h2 {
             display: inline-block;
         }
 
+        .radio {
+            margin: 0;
+            display: inline-block;
+        }
+
         .expand-icon {
             display: inline-block;
             margin-right: 10px;
@@ -564,6 +573,11 @@ h2 {
             width: 18px;
             height: 18px;
             vertical-align: middle;
+        }
+
+        .folder-icon {
+            vertical-align: middle;
+            margin-right: 10px;
         }
 
         &.active {

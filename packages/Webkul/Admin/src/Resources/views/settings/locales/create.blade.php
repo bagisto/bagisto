@@ -1,17 +1,21 @@
 @extends('admin::layouts.content')
 
+@section('page_title')
+    {{ __('admin::app.settings.locales.add-locale-title') }}
+@stop
+
 @section('content')
     <div class="content">
 
         <form method="POST" action="{{ route('admin.locales.store') }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('Add Locale') }}</h1>
+                    <h1>{{ __('admin::app.settings.locales.add-title') }}</h1>
                 </div>
 
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('Save Locale') }}
+                        {{ __('admin::app.settings.locales.save-btn-title') }}
                     </button>
                 </div>
             </div>
@@ -20,16 +24,16 @@
                 <div class="form-container">
                     @csrf()
 
-                    <accordian :title="'{{ __('General') }}'" :active="true">
+                    <accordian :title="'{{ __('admin::app.settings.locales.general') }}'" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code">{{ __('Code') }}</label>
+                                <label for="code">{{ __('admin::app.settings.locales.code') }}</label>
                                 <input v-validate="'required'" class="control" id="code" name="code"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name">{{ __('Name') }}</label>
+                                <label for="name">{{ __('admin::app.settings.locales.name') }}</label>
                                 <input v-validate="'required'" class="control" id="name" name="name"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>

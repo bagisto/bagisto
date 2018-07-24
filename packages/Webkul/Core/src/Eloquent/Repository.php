@@ -48,9 +48,9 @@ abstract class Repository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function all($columns = ['*'])
+    public function all($columns = ['*'], $with = [])
     {
-        return $this->resetScope()->model->get($columns);
+        return $this->resetScope()->model->with($with)->get($columns);
     }
  
     /**
@@ -94,12 +94,12 @@ abstract class Repository implements RepositoryInterface {
 
     /**
      * @param $id
-     * @param array $columns
+     * @param array $columns->with($with)
      * @return mixed
      */
-    public function find($id, $columns = ['*'])
+    public function find($id, $columns = ['*'], $with = [])
     {
-        return $this->resetScope()->model->find($id, $columns);
+        return $this->resetScope()->model->with($with)->find($id, $columns);
     }
 
     /**
@@ -107,9 +107,9 @@ abstract class Repository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function findOrFail($id, $columns = ['*'])
+    public function findOrFail($id, $columns = ['*'], $with = [])
     {
-        return $this->resetScope()->model->findOrFail($id, $columns);
+        return $this->resetScope()->model->with($with)->findOrFail($id, $columns);
     }
 
     /**
@@ -118,9 +118,9 @@ abstract class Repository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function findBy($attribute, $value, $columns = ['*'])
+    public function findBy($attribute, $value, $columns = ['*'], $with = [])
     {
-        return $this->resetScope()->model->where($attribute, '=', $value)->first($columns);
+        return $this->resetScope()->model->with($with)->where($attribute, '=', $value)->first($columns);
     }
 
     /**

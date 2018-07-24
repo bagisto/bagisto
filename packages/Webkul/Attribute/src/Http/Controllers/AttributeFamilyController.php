@@ -74,7 +74,7 @@ class AttributeFamilyController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:families,code', new \Webkul\Core\Contracts\Validations\Slug],
+            'code' => ['required', 'unique:attribute_families,code', new \Webkul\Core\Contracts\Validations\Slug],
             'name' => 'required'
         ]);
 
@@ -94,11 +94,11 @@ class AttributeFamilyController extends Controller
      */
     public function edit(Attribute $attribute, $id)
     {
-        $attributeFamily = $this->attributeFamily->findOrFail($id);
+        $attributeFamily = $this->attributeFamily->findOrFail($id, ['*'], ['attribute_groups.attributes']);
 
         $attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
 
-        return view($this->_config['view'], compact('attributes', 'family'));
+        return view($this->_config['view'], compact('attributeFamily', 'attributes'));
     }
 
     /**
@@ -111,10 +111,11 @@ class AttributeFamilyController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:families,code,' . $id, new \Webkul\Core\Contracts\Validations\Slug],
+            'code' => ['required', 'unique:attribute_families,code,' . $id, new \Webkul\Core\Contracts\Validations\Slug],
             'name' => 'required'
         ]);
         
+
         $this->attributeFamily->update(request()->all(), $id);
 
         session()->flash('success', 'Family updated successfully.');

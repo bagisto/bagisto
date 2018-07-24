@@ -2,15 +2,13 @@
 
 namespace Webkul\Attribute\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Webkul\Core\Eloquent\TranslatableModel;
 use Dimsav\Translatable\Translatable;
 use Webkul\Attribute\Models\Attribute;
 
-class AttributeOption extends Model
+class AttributeOption extends TranslatableModel
 {
     public $timestamps = false;
-    
-    use Translatable;
     
     public $translatedAttributes = ['label'];
 

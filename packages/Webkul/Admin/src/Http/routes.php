@@ -32,7 +32,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
         // Admin Routes
-        Route::group(['middleware' => ['admin']], function () {
+        Route::group(['middleware' => ['admin', 'locale']], function () {
             Route::get('/logout', 'Webkul\User\Http\Controllers\SessionController@destroy')->defaults('_config', [
                 'redirect' => 'admin.session.create'
             ])->name('admin.session.destroy');
@@ -44,6 +44,28 @@ Route::group(['middleware' => ['web']], function () {
 
             // Catalog Routes
             Route::prefix('catalog')->group(function () {
+
+                // Catalog Category Routes
+                Route::get('/categories', 'Webkul\Category\Http\Controllers\CategoryController@index')->defaults('_config', [
+                    'view' => 'admin::catalog.categories.index'
+                ])->name('admin.catalog.categories.index');
+
+                Route::get('/categories/create', 'Webkul\Category\Http\Controllers\CategoryController@create')->defaults('_config', [
+                    'view' => 'admin::catalog.categories.create'
+                ])->name('admin.catalog.categories.create');
+
+                Route::post('/categories/create', 'Webkul\Category\Http\Controllers\CategoryController@store')->defaults('_config', [
+                    'redirect' => 'admin.catalog.categories.index'
+                ])->name('admin.catalog.categories.store');
+
+                Route::get('/categories/edit/{id}', 'Webkul\Category\Http\Controllers\CategoryController@edit')->defaults('_config', [
+                    'view' => 'admin::catalog.categories.edit'
+                ])->name('admin.catalog.categories.edit');
+
+                Route::put('/categories/edit/{id}', 'Webkul\Category\Http\Controllers\CategoryController@update')->defaults('_config', [
+                    'redirect' => 'admin.catalog.categories.index'
+                ])->name('admin.catalog.categories.update');
+
 
                 // Catalog Attribute Routes
                 Route::get('/attributes', 'Webkul\Attribute\Http\Controllers\AttributeController@index')->defaults('_config', [
@@ -65,6 +87,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::put('/attributes/edit/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@update')->defaults('_config', [
                     'redirect' => 'admin.catalog.attributes.index'
                 ])->name('admin.catalog.attributes.update');
+                
 
                 // Catalog Family Routes
                 Route::get('/families', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@index')->defaults('_config', [
@@ -87,6 +110,7 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.families.index'
                 ])->name('admin.catalog.families.update');
             });
+
 
             // Datagrid Routes
             Route::get('/datagrid', 'Webkul\Admin\Http\Controllers\DataGridController@index')->name('admin.datagrid.index');
@@ -137,16 +161,111 @@ Route::group(['middleware' => ['web']], function () {
 
             // Locale Routes
             Route::get('/locales', 'Webkul\Core\Http\Controllers\LocaleController@index')->defaults('_config', [
-                'view' => 'admin::locales.index'
+                'view' => 'admin::settings.locales.index'
             ])->name('admin.locales.index');
             
             Route::get('/locales/create', 'Webkul\Core\Http\Controllers\LocaleController@create')->defaults('_config', [
-                'view' => 'admin::locales.create'
+                'view' => 'admin::settings.locales.create'
             ])->name('admin.locales.create');
 
             Route::post('/locales/create', 'Webkul\Core\Http\Controllers\LocaleController@store')->defaults('_config', [
                 'redirect' => 'admin.locales.index'
             ])->name('admin.locales.store');
+
+
+            // Country Routes
+            Route::get('/countries', 'Webkul\Core\Http\Controllers\CountryController@index')->defaults('_config', [
+                'view' => 'admin::settings.countries.index'
+            ])->name('admin.countries.index');
+            
+            Route::get('/countries/create', 'Webkul\Core\Http\Controllers\CountryController@create')->defaults('_config', [
+                'view' => 'admin::settings.countries.create'
+            ])->name('admin.countries.create');
+
+            Route::post('/countries/create', 'Webkul\Core\Http\Controllers\CountryController@store')->defaults('_config', [
+                'redirect' => 'admin.countries.index'
+            ])->name('admin.countries.store');
+
+
+            // Country Routes
+            Route::get('/currencies', 'Webkul\Core\Http\Controllers\CurrencyController@index')->defaults('_config', [
+                'view' => 'admin::settings.currencies.index'
+            ])->name('admin.currencies.index');
+            
+            Route::get('/currencies/create', 'Webkul\Core\Http\Controllers\CurrencyController@create')->defaults('_config', [
+                'view' => 'admin::settings.currencies.create'
+            ])->name('admin.currencies.create');
+
+            Route::post('/currencies/create', 'Webkul\Core\Http\Controllers\CurrencyController@store')->defaults('_config', [
+                'redirect' => 'admin.currencies.index'
+            ])->name('admin.currencies.store');
+
+
+            // Country Routes
+            Route::get('/exchange_rates', 'Webkul\Core\Http\Controllers\ExchangeRateController@index')->defaults('_config', [
+                'view' => 'admin::settings.exchange_rates.index'
+            ])->name('admin.exchange_rates.index');
+            
+            Route::get('/exchange_rates/create', 'Webkul\Core\Http\Controllers\ExchangeRateController@create')->defaults('_config', [
+                'view' => 'admin::settings.exchange_rates.create'
+            ])->name('admin.exchange_rates.create');
+
+            Route::post('/exchange_rates/create', 'Webkul\Core\Http\Controllers\ExchangeRateController@store')->defaults('_config', [
+                'redirect' => 'admin.exchange_rates.index'
+            ])->name('admin.exchange_rates.store');
+
+            Route::get('/exchange_rates/edit/{id}', 'Webkul\Core\Http\Controllers\ExchangeRateController@edit')->defaults('_config', [
+                'view' => 'admin::settings.exchange_rates.edit'
+            ])->name('admin.exchange_rates.edit');
+
+            Route::put('/exchange_rates/edit/{id}', 'Webkul\Core\Http\Controllers\ExchangeRateController@update')->defaults('_config', [
+                'redirect' => 'admin.exchange_rates.index'
+            ])->name('admin.exchange_rates.update');
+
+
+            // Inventory Source Routes
+            Route::get('/inventory_sources', 'Webkul\Inventory\Http\Controllers\InventorySourceController@index')->defaults('_config', [
+                'view' => 'admin::settings.inventory_sources.index'
+            ])->name('admin.inventory_sources.index');
+            
+            Route::get('/inventory_sources/create', 'Webkul\Inventory\Http\Controllers\InventorySourceController@create')->defaults('_config', [
+                'view' => 'admin::settings.inventory_sources.create'
+            ])->name('admin.inventory_sources.create');
+
+            Route::post('/inventory_sources/create', 'Webkul\Inventory\Http\Controllers\InventorySourceController@store')->defaults('_config', [
+                'redirect' => 'admin.inventory_sources.index'
+            ])->name('admin.inventory_sources.store');
+
+            Route::get('/inventory_sources/edit/{id}', 'Webkul\Inventory\Http\Controllers\InventorySourceController@edit')->defaults('_config', [
+                'view' => 'admin::settings.inventory_sources.edit'
+            ])->name('admin.inventory_sources.edit');
+
+            Route::put('/inventory_sources/edit/{id}', 'Webkul\Inventory\Http\Controllers\InventorySourceController@update')->defaults('_config', [
+                'redirect' => 'admin.inventory_sources.index'
+            ])->name('admin.inventory_sources.update');
+
+
+            // Channel Routes
+            Route::get('/channels', 'Webkul\Channel\Http\Controllers\ChannelController@index')->defaults('_config', [
+                'view' => 'admin::settings.channels.index'
+            ])->name('admin.channels.index');
+            
+            Route::get('/channels/create', 'Webkul\Channel\Http\Controllers\ChannelController@create')->defaults('_config', [
+                'view' => 'admin::settings.channels.create'
+            ])->name('admin.channels.create');
+
+            Route::post('/channels/create', 'Webkul\Channel\Http\Controllers\ChannelController@store')->defaults('_config', [
+                'redirect' => 'admin.channels.index'
+            ])->name('admin.channels.store');
+
+            Route::get('/channels/edit/{id}', 'Webkul\Channel\Http\Controllers\ChannelController@edit')->defaults('_config', [
+                'view' => 'admin::settings.channels.edit'
+            ])->name('admin.channels.edit');
+
+            Route::put('/channels/edit/{id}', 'Webkul\Channel\Http\Controllers\ChannelController@update')->defaults('_config', [
+                'redirect' => 'admin.channels.index'
+            ])->name('admin.channels.update');
+
 
 
             // Admin Profile route

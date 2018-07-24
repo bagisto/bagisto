@@ -29,7 +29,7 @@
                     <accordian :title="'{{ __('admin::app.catalog.attributes.general') }}'" :active="true">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code">{{ __('admin::app.catalog.attributes.code') }}</label>
+                                <label for="code" class="required">{{ __('admin::app.catalog.attributes.code') }}</label>
                                 <input type="hidden" name="code" value="{{ old('code') ?: $attribute->code }}"/>
                                 <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') ?: $attribute->code }}" disabled="disabled"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
@@ -70,7 +70,7 @@
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('admin_name') ? 'has-error' : '']">
-                                <label for="admin_name">{{ __('admin::app.catalog.attributes.admin') }}</label>
+                                <label for="admin_name" class="required">{{ __('admin::app.catalog.attributes.admin') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="admin_name" name="admin_name" value="{{ old('admin_name') ?: $attribute->admin_name }}"/>
                                 <span class="control-error" v-if="errors.has('admin_name')">@{{ errors.first('admin_name') }}</span>
                             </div>
@@ -79,7 +79,7 @@
 
                                 <div class="control-group">
                                     <label for="locale-{{ $locale->code }}">{{ $locale->name . ' (' . $locale->code . ')' }}</label>
-                                    <input type="text" class="control" id="locale-{{ $locale->code }}" name="<?php echo $locale->code; ?>[name]" value="{{ old($locale->code)['name'] ?: $attribute->translate($locale->code)->name }}"/>
+                                    <input type="text" class="control" id="locale-{{ $locale->code }}" name="<?php echo $locale->code; ?>[name]" value="{{ old($locale->code)['name'] ?: $attribute->translate($locale->code)['name'] }}"/>
                                 </div>
 
                             @endforeach
@@ -243,7 +243,7 @@
 
                             <td>
                                 <div class="control-group" :class="[errors.has(sortOrderName(row)) ? 'has-error' : '']">
-                                    <input type="text" v-validate="'required'" v-model="row['sort_order']" :name="sortOrderName(row)" class="control"/>
+                                    <input type="text" v-validate="'required|numeric'" v-model="row['sort_order']" :name="sortOrderName(row)" class="control"/>
                                     <span class="control-error" v-if="errors.has(sortOrderName(row))">@{{ errors.first(sortOrderName(row)) }}</span>
                                 </div>
                             </td>
@@ -282,7 +282,7 @@
                         var row = {'id': '{{ $option->id }}', 'sort_order': '{{ $option->sort_order }}'};
 
                         @foreach(Webkul\Core\Models\Locale::all() as $locale)
-                            row['{{ $locale->code }}'] = '{{ $option->translate($locale->code)->label }}';
+                            row['{{ $locale->code }}'] = "{{ $option->translate($locale->code)['label'] }}";
                         @endforeach
 
                         this.optionRows.push(row);

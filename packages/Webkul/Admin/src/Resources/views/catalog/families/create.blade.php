@@ -29,13 +29,13 @@
                         <div slot="body">
                         
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code">{{ __('admin::app.catalog.families.code') }}</label>
+                                <label for="code" class="required">{{ __('admin::app.catalog.families.code') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
                         
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name">{{ __('admin::app.catalog.families.name') }}</label>
+                                <label for="name" class="required">{{ __('admin::app.catalog.families.name') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') }}"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
@@ -78,14 +78,14 @@
                     @csrf()
 
                     <div class="control-group" :class="[errors.has('add-group-form.groupName') ? 'has-error' : '']">
-                        <label for="groupName">{{ __('admin::app.catalog.families.name') }}</label>
+                        <label for="groupName" class="required">{{ __('admin::app.catalog.families.name') }}</label>
                         <input type="text" v-validate="'required'" v-model="group.groupName" class="control" id="groupName" name="groupName"/>
                         <span class="control-error" v-if="errors.has('add-group-form.groupName')">@{{ errors.first('add-group-form.groupName') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('add-group-form.position') ? 'has-error' : '']">
                         <label for="position">{{ __('admin::app.catalog.families.position') }}</label>
-                        <input type="text" v-validate="'required'" v-model="group.position" class="control" id="position" name="position"/>
+                        <input type="text" v-validate="'required|numeric'" v-model="group.position" class="control" id="position" name="position"/>
                         <span class="control-error" v-if="errors.has('add-group-form.position')">@{{ errors.first('add-group-form.position') }}</span>
                     </div>
 
@@ -101,7 +101,7 @@
 
     <script type="text/x-template" id="group-list-template">
         <div>
-            <group-item v-for='(group, index) in groups' :group="group" :attributes="attributes" :key="index" @onRemoveGroup="removeGroup($event)" @onAttributeAdd="addAttributes(index, $event)" @onAttributeRemove="removeAttribute(index, $event)"></group-item>
+            <group-item v-for='(group, index) in groups' :group="group" :attributes="attributes" :key="index" :index="index" @onRemoveGroup="removeGroup($event)" @onAttributeAdd="addAttributes(index, $event)" @onAttributeRemove="removeAttribute(index, $event)"></group-item>
         </div>
     </script>
 
@@ -114,6 +114,9 @@
             </div>
 
             <div slot="body">
+                <input type="hidden" :name="groupInputName" :value="group.groupName"/>
+                <input type="hidden":name="groupInputPosition" :value="group.position"/>
+
                 <div class="table" v-if="group.attributes.length" style="margin-bottom: 20px;">
                     <table>
                         <thead>
@@ -127,8 +130,11 @@
 
                         <tbody>
                             <tr v-for='(attribute, index) in group.attributes'>
-                                <td>@{{ attribute.code }}</td>
-                                <td>@{{ attribute.name }}</td>
+                                <td>
+                                    <input type="hidden" :name="groupAttributeInput" :value="attribute.id"/>
+                                    @{{ attribute.code }}
+                                </td>
+                                <td>@{{ attribute.admin_name }}</td>
                                 <td>@{{ attribute.type }}</td>
                                 <td class="actions">
                                     <i class="icon trash-icon" @click="removeAttribute(attribute)"></i>
@@ -188,13 +194,32 @@
                     addGroup (formScope) {
                         this.$validator.validateAll(formScope).then((result) => {
                             if (result) {
-                                groups.push(this.group);
+                                var this_this = this;
 
-                                groups = this.sortGroups();
-                                
-                                this.group = {'groupName': '', 'position': '', 'attributes': []};
+                                var filteredGroups = groups.filter(function(group) {
+                                    return this_this.group.groupName.trim() === group.groupName.trim()
+                                })
 
-                                this.$parent.closeModal();
+                                if(filteredGroups.length) {
+                                    const field = this.$validator.fields.find({ name: 'groupName', scope: 'add-group-form' });
+
+                                    if (field) {
+                                        this.$validator.errors.add({
+                                            id: field.id,
+                                            field: 'groupName',
+                                            msg: "{{ __('admin::app.catalog.families.group-exist-error') }}",
+                                            scope: 'add-group-form',
+                                        });
+                                    }
+                                } else {
+                                    groups.push(this.group);
+
+                                    groups = this.sortGroups();
+                                    
+                                    this.group = {'groupName': '', 'position': '', 'attributes': []};
+
+                                    this.$parent.closeModal();
+                                }
                             }
                         });
                     },
@@ -218,34 +243,65 @@
 
                 methods: {
                     removeGroup (group) {
+                        group.attributes.forEach(function(attribute) {
+                            this.attributes.push(attribute);
+                        })
+
+                        this.attributes = this.sortAttributes();
+
                         let index = groups.indexOf(group)
 
                         groups.splice(index, 1)
                     },
 
                     addAttributes (groupIndex, attributeIds) {
-                        var this_this = this;
                         attributeIds.forEach(function(attributeId) {
-                            var attribute = this_this.attributes.filter(attribute => attribute.id == attributeId)
+                            var attribute = this.attributes.filter(attribute => attribute.id == attributeId)
+                            
+                            this.groups[groupIndex].attributes.push(attribute[0]);
 
-                            this_this.groups[groupIndex].attributes.push(attribute[0]);
+                            let index = this.attributes.indexOf(attribute[0])
 
-                            let index = this_this.attributes.indexOf(attribute)
-
-                            this_this.attributes.splice(index, 1)
+                            this.attributes.splice(index, 1)
                         })
                     },
 
                     removeAttribute (groupIndex, attribute) {
-                        
+                        let index = this.groups[groupIndex].attributes.indexOf(attribute)
+
+                        this.groups[groupIndex].attributes.splice(index, 1)
+
+                        this.attributes.push(attribute);
+
+                        this.attributes = this.sortAttributes();
+                    },
+
+                    sortAttributes () {
+                        return this.attributes.sort(function(a, b) {
+                            return a.id - b.id;
+                        });
                     }
                 }
             })
 
             Vue.component('group-item', {
-                props: ['group', 'attributes'],
+                props: ['index', 'group', 'attributes'],
 
                 template: "#group-item-template",
+
+                computed: {
+                    groupInputName () {
+                        return "attribute_groups[group_" + this.index + "][name]";
+                    },
+
+                    groupInputPosition () {
+                        return "attribute_groups[group_" + this.index + "][position]";
+                    },
+
+                    groupAttributeInput () {
+                        return "attribute_groups[group_" + this.index + "][attributes][]";
+                    }
+                },
 
                 methods: {
                     removeGroup () {
@@ -257,6 +313,7 @@
 
                         $(e.target).prev().find('li input').each(function() {
                             var attributeId = $(this).val();
+                            
                             if($(this).is(':checked')) {
                                 attributeIds.push(attributeId);
 
@@ -270,7 +327,7 @@
                     },
 
                     removeAttribute (attribute) {
-                        this.$emit('onAttributeRemove', attributeIds)
+                        this.$emit('onAttributeRemove', attribute)
                     }
                 }
             });

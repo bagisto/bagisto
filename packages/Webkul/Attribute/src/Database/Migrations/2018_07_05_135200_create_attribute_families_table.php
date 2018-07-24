@@ -15,6 +15,7 @@ class CreateAttributeFamiliesTable extends Migration
     {
         Schema::create('attribute_families', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code');
             $table->string('name');
             $table->boolean('status')->default(0);
         });

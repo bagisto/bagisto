@@ -7,16 +7,18 @@
             "email": "jitendra@webkul.com"
         }
     ],
-    "require": {},
+    "require": {
+        "baum/baum": "~1.1"
+    },
     "autoload": {
         "psr-4": {
-            "Webkul\\Attribute\\": "src/"
+            "Webkul\\Category\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Attribute\\Providers\\AttributeServiceProvider"
+                "Webkul\\Category\\Providers\\CategoryServiceProvider"
             ],
             "aliases": { }
         }

@@ -117,6 +117,12 @@
   height: 18px;
 }
 
+.folder-icon {
+  background-image: url("../images/Folder-Icon.svg");
+  width: 24px;
+  height: 24px;
+}
+
 .active .dashboard-icon {
   background-image: url("../images/Icon-Dashboard-Active.svg");
 }
@@ -638,6 +644,10 @@ h2 {
   cursor: not-allowed;
 }
 
+.control-group .control[multiple] {
+  height: 100px;
+}
+
 .control-group .control-info {
   display: block;
   font-style: italic;
@@ -794,6 +804,11 @@ h2 {
   display: inline-block;
 }
 
+.tree-container .tree-item .radio {
+  margin: 0;
+  display: inline-block;
+}
+
 .tree-container .tree-item .expand-icon {
   display: inline-block;
   margin-right: 10px;
@@ -802,6 +817,11 @@ h2 {
   width: 18px;
   height: 18px;
   vertical-align: middle;
+}
+
+.tree-container .tree-item .folder-icon {
+  vertical-align: middle;
+  margin-right: 10px;
 }
 
 .tree-container .tree-item.active > .expand-icon {

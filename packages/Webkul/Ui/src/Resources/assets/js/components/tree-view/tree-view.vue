@@ -6,10 +6,28 @@
         inheritAttrs: false,
 
         props: {
+            inputType: {
+                type: String,
+                required: false,
+                default: 'checkbox'
+            },
+
+            nameField: {
+                type: String,
+                required: false,
+                default: 'permissions'
+            },
+
             idField: {
                 type: String,
                 required: false,
                 default: 'id'
+            },
+
+            valueField: {
+                type: String,
+                required: false,
+                default: 'value'
             },
 
             captionField: {
@@ -22,12 +40,6 @@
                 type: String,
                 required: false,
                 default: 'children'
-            },
-
-            valueField: {
-                type: String,
-                required: false,
-                default: 'value'
             },
 
             items: {
@@ -51,6 +63,9 @@
             savedValues () {
                 if(!this.value)
                     return [];
+                
+                if(this.inputType == 'radio')
+                    return [this.value];
 
                 return (typeof this.value == 'string') ? JSON.parse(this.value) : this.value;
             }
@@ -76,6 +91,8 @@
                             items: item,
                             value: this.finalValues,
                             savedValues: this.savedValues,
+                            nameField: this.nameField,
+                            inputType: this.inputType,
                             captionField: this.captionField,
                             childrenField: this.childrenField,
                             valueField: this.valueField,

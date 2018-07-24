@@ -52,7 +52,19 @@ class AttributeFamilyRepository extends Repository
     {
         $family = $this->model->create($data);
 
-        return $attribute;
+        if(isset($data['attribute_groups'])) {
+            foreach ($data['attribute_groups'] as $group) {
+                $attributeGroup = $family->attribute_groups()->create($group);
+
+                if(isset($group['attributes'])) {
+                    foreach ($group['attributes'] as $attributeId) {
+                        $attributeGroup->attributes()->attach($attributeId);
+                    }
+                }
+            }
+        }
+
+        return $family;
     }
 
     /**
@@ -66,6 +78,45 @@ class AttributeFamilyRepository extends Repository
         $family = $this->findOrFail($id);
 
         $family->update($data);
+
+        $previousAttributeGroupIds = $family->attribute_groups()->pluck('id');
+        
+        if(isset($data['attribute_groups'])) {
+            foreach ($data['attribute_groups'] as $attributeGroupId => $attributeGroupInputs) {
+                if (str_contains($attributeGroupId, 'group_')) {
+                    $attributeGroup = $family->attribute_groups()->create($attributeGroupInputs);
+
+                    if(isset($attributeGroupInputs['attributes'])) {
+                        foreach ($attributeGroupInputs['attributes'] as $attributeId) {
+                            $attributeGroup->attributes()->attach($attributeId);
+                        }
+                    }
+                } else {
+                    if(($index = $previousAttributeGroupIds->search($attributeGroupId)) >= 0) {
+                        $previousAttributeGroupIds->forget($index);
+                    }
+
+                    $attributeGroup = $this->attributeGroup->findOrFail($attributeGroupId);
+                    $attributeGroup->update($attributeGroupInputs);
+
+                    $attributeIds = $attributeGroup->attributes()->pluck('id');
+
+                    foreach ($attributeGroupInputs['attributes'] as $attributeId) {
+                        if(($index = $attributeIds->search($attributeId)) >= 0) {
+                            $attributeIds->forget($index);
+                        }
+                    }
+
+                    foreach ($attributeIds as $attributeId) {
+                        $attributeGroup->deattach($attributeId);
+                    }
+                }
+            }
+        }
+
+        foreach ($previousAttributeGroupIds as $attributeGroupId) {
+            $this->attributeGroup->delete($attributeGroupId);
+        }
 
         return $family;
     }
