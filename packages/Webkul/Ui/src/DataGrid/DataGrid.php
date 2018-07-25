@@ -391,19 +391,30 @@ class DataGrid
      * to be used.
      */
 
+    // private function parse()
+    // {
+    //     //parse the url here
+    //     if (isset($_SERVER['QUERY_STRING'])) {
+    //         $qr = $_SERVER['QUERY_STRING'];
+    //         parse_str($qr, $parsed);
+    //         foreach ($parsed as $k=>$v) {
+    //             parse_str($v, $parsed[$k]);
+    //         }
+    //         return $parsed;
+    //     } else {
+    //         return $parsed = [];
+    //     }
+    // }
+
     private function parse()
     {
-        //parse the url here
-        if (isset($_SERVER['QUERY_STRING'])) {
-            $qr = $_SERVER['QUERY_STRING'];
-            parse_str($qr, $parsed);
-
-            foreach ($parsed as $k=>$v) {
-                parse_str($v, $parsed[$k]);
-            }
+        $parsed = [];
+        $unparsed = $_SERVER['QUERY_STRING'];
+        if (isset($unparsed)) {
+            parse_str($unparsed, $parsed);
             return $parsed;
         } else {
-            return $parsed = [];
+            return $parsed;
         }
     }
 
@@ -470,77 +481,138 @@ class DataGrid
      * and processed manually
      */
 
+    // private function getQueryWithFilters()
+    // {
+    //     // the only use case remaining is making and testing the full validation and testing of
+    //     // aliased case with alias used in column names also.
+    //     if ($this->aliased) {
+    //         //n of joins can lead to n number of aliases for columns and neglect the as for columns
+    //         $parsed = $this->parse();
+    //         // dump($parsed);
+    //         foreach ($parsed as $key => $value) {
+    //             foreach ($value as $column => $filter) {
+    //                 if (array_keys($filter)[0]=="like") {
+    //                     $this->query->where(
+    //                         str_replace('_', '.', $column), //replace the logic of making the column name and consider the case for _ in column name already
+    //                         $this->operators[array_keys($filter)[0]],
+    //                         '%'.array_values($filter)[0].'%'
+    //                     );
+    //                 } elseif (array_keys($filter)[0]=="sort") {
+    //                     $this->query->orderBy(
+    //                         str_replace('_', '.', $column), //replace the logic of making the column name and consider the case for _
+    //                         array_values($filter)[0]
+    //                     );
+    //                 } elseif ($column == "search") {
+    //                     $this->query->where(function ($query) use ($filter) {
+    //                         foreach ($this->searchable as $search) {
+    //                             $query->orWhere($search['column'], 'like', '%'.array_values($filter)[0].'%');
+    //                         }
+    //                     });
+    //                 } else {
+    //                     $this->query->where(
+    //                     str_replace('_', '.', $column),
+    //                     $this->operators[array_keys($filter)[0]],
+    //                     array_values($filter)[0]
+    //                 );
+    //                 }
+    //             }
+    //         }
+    //     } else {
+    //         $parsed = $this->parse();
+    //         foreach ($parsed as $key => $value) {
+    //             foreach ($value as $column => $filter) {
+    //                 if (array_keys($filter)[0]=="like") {
+    //                     $this->query->where(
+    //                         $column,
+    //                         $this->operators[array_keys($filter)[0]],
+    //                         '%'.array_values($filter)[0].'%'
+    //                     );
+    //                 } elseif ($column == "search") {
+    //                     $this->query->where(function ($query) use ($filter) {
+    //                         foreach ($this->searchable as $search) {
+    //                             $query->orWhere($search['column'], 'like', '%'.array_values($filter)[0].'%');
+    //                         }
+    //                     });
+    //                 } else {
+    //                     $this->query->where(
+    //                     $column,
+    //                     $this->operators[array_keys($filter)[0]],
+    //                     array_values($filter)[0]
+    //                 );
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
     private function getQueryWithFilters()
     {
-        // the only use case remaining is making and testing the full validation and testing of
-        // aliased case with alias used in column names also.
+        $parsed = $this->parse();
+        // dd($parsed);
         if ($this->aliased) {
-            //n of joins can lead to n number of aliases for columns and neglect the as for columns
-            $parsed = $this->parse();
-            // dump($parsed);
-            foreach ($parsed as $key => $value) {
-                foreach ($value as $column => $filter) {
-                    if (array_keys($filter)[0]=="like") {
-                        $this->query->where(
-                            str_replace('_', '.', $column), //replace the logic of making the column name and consider the case for _ in column name already
-                            $this->operators[array_keys($filter)[0]],
-                            '%'.array_values($filter)[0].'%'
-                        );
-                    } elseif (array_keys($filter)[0]=="sort") {
-                        $this->query->orderBy(
-                            str_replace('_', '.', $column), //replace the logic of making the column name and consider the case for _
-                            array_values($filter)[0]
-                        );
-                    } elseif ($column == "search") {
-                        $this->query->where(function ($query) use ($filter) {
-                            foreach ($this->searchable as $search) {
-                                $query->orWhere($search['column'], 'like', '%'.array_values($filter)[0].'%');
-                            }
-                        });
+            foreach ($parsed as $key=>$value) {
+                if ($key=="sort") {
+
+                    //resolve the case with the column helper class
+                    if (strpos($key, ' as ') !== false) {
+                        dd('This column cannot be sorted');
                     } else {
-                        $this->query->where(
-                        str_replace('_', '.', $column),
-                        $this->operators[array_keys($filter)[0]],
-                        array_values($filter)[0]
-                    );
+                        $column_name = str_replace('_', '.', $key);
+                    }
+
+                    //case that don't need any resolving
+                    $count_keys = count(array_keys($value));
+                    if ($count_keys==1) {
+                        $this->query->orderBy(
+                            str_replace('_', '.', array_keys($value)[0]),
+                            array_values($value)[0]
+                        );
+                    } else {
+                        dump('Sort on two columns cannot exist in backend');
+                    }
+                } elseif ($key=="search") {
+                    if (strpos($key, ' as ') !== false) {
+                        dd('This column cannot be searched');
+                    } else {
+                        $column_name = str_replace('_', '.', $key);
+                    }
+                    $this->query->where(function ($query) use ($parsed) {
+                        foreach ($this->searchable as $search) {
+                            $query->orWhere($search['column'], 'like', '%'.$parsed['search']['all'].'%');
+                        }
+                    });
+                } else {
+                    if (strpos($key, ' as ') !== false) {
+                        dd('This column cannot be filtered');
+                    } else {
+                        $column_name = str_replace('_', '.', $key);
+                    }
+
+                    if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
+                        foreach ($value as $condition => $filter_value) {
+                            $this->query->where(
+                                $column_name,
+                                $this->operators[$condition],
+                                '%'.$filter_value.'%'
+                            );
+                        }
+                    } else {
+                        foreach ($value as $condition => $filter_value) {
+                            $this->query->where(
+                                $column_name,
+                                $this->operators[$condition],
+                                $filter_value
+                            );
+                        }
                     }
                 }
             }
         } else {
-            $parsed = $this->parse();
-            foreach ($parsed as $key => $value) {
-                foreach ($value as $column => $filter) {
-                    if (array_keys($filter)[0]=="like") {
-                        $this->query->where(
-                            $column,
-                            $this->operators[array_keys($filter)[0]],
-                            '%'.array_values($filter)[0].'%'
-                        );
-                    } elseif ($column == "search") {
-                        $this->query->where(function ($query) use ($filter) {
-                            foreach ($this->searchable as $search) {
-                                $query->orWhere($search['column'], 'like', '%'.array_values($filter)[0].'%');
-                            }
-                        });
-                    } else {
-                        $this->query->where(
-                        $column,
-                        $this->operators[array_keys($filter)[0]],
-                        array_values($filter)[0]
-                    );
-                    }
-                }
-            }
+            dd('left to be run plainly');
         }
     }
 
     private function getDbQueryResults()
     {
-        // if (isset($_SERVER['QUERY_STRING'])) {
-        //     $qr = $_SERVER['QUERY_STRING'];
-        //     $parsed;
-        //     parse_str($qr, $parsed);
-        // }
         $parsed = $this->parse();
 
 
@@ -659,12 +731,9 @@ class DataGrid
             if (!empty($this->select)) {
                 $this->getSelect();
             }
+
             $this->getQueryWithColumnFilters();
-            // if (isset($_SERVER['QUERY_STRING'])) {
-            //     $qr = $_SERVER['QUERY_STRING'];
-            //     $parsed;
-            //     parse_str($qr, $parsed);
-            // }
+
             $parsed = $this->parse();
             if (!empty($parsed)) {
                 $this->getQueryWithFilters();

@@ -26,7 +26,6 @@
             $(document).ready(function(){
 
                 params = (new URL(document.location)).search;
-
                 if(params.length>0){
                     if(allFilters1.length == 0) {
                         //call reverse url function
@@ -35,25 +34,19 @@
                 }
                 $('.search-btn').click(function() {
                     search_value = $(".search-field").val();
-
                     formURL('search','all',search_value,params);  //format for search
-
-                    alert(search_value);
                 });
-                $('.grid_head').on('click', function() {
 
+                //controls for header when sorting is done
+                $('.grid_head').on('click', function() {
                     var column = $(this).data('column-name');
                     var currentSort = $(this).data('column-sort');
-                    console.log(column, currentSort);
-                    // return false;
-                    if(currentSort == "asc") {
-                        $(this).data('column-name','desc');
-                        formURL(column,'sort','desc',params);
-                    }else{
-                        $(this).data('column-name','asc');
-                        formURL(column,'sort','asc',params);
-                    }
+                    if(currentSort == "asc")
+                        formURL("sort",column,"desc",params);
+                    else if(currentSort == "desc")
+                        formURL("sort",column,"asc",params);
                 });
+
                 $('select.filter-column-select').change(function() {
                     typeValue = $('select.filter-column-select').find(':selected').data('type');
                     selectedColumn = $('select.filter-column-select').find(':selected').val();
@@ -131,12 +124,10 @@
                     });
 
                 });
+
                 //remove the filter and from clicking on cross icon on tag
                 $('.remove-filter').on('click', function(){
-                    // console.log('removing');
                     var id = $(this).parents('.filter-one').attr('id');
-                    // console.log(allFilters1.length);
-
                     if(allFilters1.length ==  1){
                         allFilters1.pop();
                         var uri = window.location.href.toString();
@@ -218,203 +209,206 @@
                     }
                 });
 
-                //remove the mass action by clicking on the icon
-                // $('.mass-action-remove').on('click', function() {
-                //     $("input[type=checkbox]").prop('checked',false);
-                //     id = [];
-                //     $('#indexes').val('');
-                //     $('.mass-action').css('display','none');
-                //     $('.table-grid-header').css('display','');
-                // });
-
-                // $('.b-res').css('visibility','hidden');
-                // $('.t-res').css('visibility','hidden');
-                // $('.ma-action').css('visibility','hidden');
-                // var ma_selected_col;
-                // var ma_selected_type;
-                // var ma_selected_action;
-                // $('select.ma-col').change(function() {
-                //     ma_selected_col = $('select.ma-col').find(':selected').val();
-                //     ma_selected_type = $('select.ma-col').find(':selected').data('type');
-                //     $('.ma-action').css('visibility','visible');
-                //     console.log(ma_selected_col,ma_selected_type);
-                // });
-                // $('.ma-action').change(function(){
-                //     ma_selected_action = $('select.ma-action').find(':selected').val();
-                // });
-                // if(ma_selected_action == "update") {
-                //     if(ma_selected_type="boolean") {
-                //         $('.b-res').css('visibility','visible');
-                //     }
-                // } else if(ma_selected_action == "delete"){
-                //     $('.b-res').css('visibility','visible');
-                // }
-
             });
-            //this function is only to barrayFromUrle used when there is search param and the allFilter is empty in order to repopulate
-            // and make the filter or sort tags again
-            function arrayFromUrl(x){
-                // console.log(allFilters1);
-                // console.log(x);
-                t = x.slice(1,x.length);
+
+            //make the url from the array and redirect
+            function makeURL() {
+                if(allFilters1.length>0)
+                {
+                    for(i=0;i<allFilters1.length;i++) {
+                        console.log(allFilters1[i]);
+                        if(i==0){
+                            url = '?' + allFilters1[i].column + '[' + allFilters1[i].cond + ']' + '=' + allFilters1[i].val;
+                        }
+                        else
+                            url = url + '&' + allFilters1[i].column + '[' + allFilters1[i].cond + ']' + '=' + allFilters1[i].val;
+                    }
+                    document.location = url;
+                } else {
+                    var uri = window.location.href.toString();
+                    var clean_uri = uri.substring(0, uri.indexOf("?"));
+                    document.location = clean_uri;
+                }
+            }
+
+            //make the filter array from url after being redirected
+            function arrayFromUrl(x) {
+                var obj={};
+                t = x.slice(0,x.length);
                 splitted = [];
                 moreSplitted = [];
                 splitted = t.split('&');
-                for(i=0;i<splitted.length;i++){
+                for(i=0;i<splitted.length;i++) {
                     moreSplitted.push(splitted[i].split('='));
                 }
-                for(i=0;i<moreSplitted.length;i++){
-                    temp = moreSplitted[i];
-                    // console.log(moreSplitted[i][2]); //use this for response
-                    var pos1 = temp[1].indexOf("[");
-                    var pos2 = temp[1].indexOf("]");
-                    column_name = temp[1].slice(0,pos1);
-                    condition_name = temp[1].slice(pos1+1,pos2);
-                    var tmp = {};
-                    tmp[column_name.trim()] ={
-                        [condition_name.trim()]:moreSplitted[i][2]
-                    };
-                    allFilters1.push(tmp);
+                for(i=0;i<moreSplitted.length;i++) {
+                    col = moreSplitted[i][0].replace(']','').split('[')[0];
+                    cond = moreSplitted[i][0].replace(']','').split('[')[1]
+                    val = moreSplitted[i][1];
+                    obj.column = col;
+                    obj.cond = cond;
+                    obj.val = val;
+                    allFilters1.push(obj);
+                    obj = {};
                 }
-                // console.log('Array from URL = ',allFilters1);
                 makeTagsTestPrior();
             }
-            var label;
+
+            var label; //use the label to prevent the display of column name on the body
             function makeTagsTestPrior() {
                 var filterRepeat = 0;
-                //make sure the filter or sort param is not duplicate before pushing it into the all filters array
                 if(allFilters1.length!=0)
                 for(var i = 0;i<allFilters1.length;i++) {
-                    // console.log(allFilters1[i]);
-                    for(j in allFilters1[i]) {
-                        // console.log(allFilters1[i][j],j);
-                        for(k in allFilters1[i][j])
-                        {
-                            console.log('column = ',j);
-                            if($("th[data-column-name='" + j +"']")) {
-                                label = $("th[data-column-name='" + j +"']").data('column-label');
-                                console.log(label);
-                            }
-
-                            // console.log('label = ',label);
-                            // console.log('condition = ',k);
-                            // console.log('value = ',allFilters1[i][j][k]);
-                            var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ label +'</span><span class="filter-value"><span class="f-value">'+allFilters1[i][j][k] +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
-                            $('.filter-row-two').append(filter_card);
-                        }
-                    }
-                }
-            }
-
-            function makeTagsTest(column, condition, response, urlparams) {
-
-                var tmp = {};
-                tmp[column] = {
-                    [condition]:response
-                };
-
-                var filterRepeat = 0;
-                //make sure the filter or sort param is not duplicate before pushing it into the all filters array
-                if(allFilters1.length!=0)
-                for(var i = 0;i<allFilters1.length;i++){
-                    for(j in allFilters1[i]){
-                        for(k in allFilters1[i][j])
-                        {
-                            if(column == j && condition == k && response == allFilters1[i][j][k]){
-                                filterRepeat = 1;
-                            }
-                        }
-                    }
-                }
-
-                if(filterRepeat == 0) {
-                    allFilters1.push(tmp);
-                    // console.log(allFilters1);
-                    var filter_card = '<span class="filter-one"><span class="filter-name">'+ column +'</span><span class="filter-value"><span class="f-value">'+ response +'</span><span class="icon cross-icon"></span></span></span>';
+                    var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ allFilters1[i].column +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
                     $('.filter-row-two').append(filter_card);
-                    makeURL(allFilters1);
-                    count_filters++;
                 }
-                else
-                    alert("This filter is already applied");
             }
 
-            //prepare URL from the all filters array
-            function makeURL(x) {
-                var y,k,z,c,d;
+            //obselete or can be used for mediation control if necessary
+            function formURL(column, condition, response, urlparams) {
+                /*validate the conditions here and do the replacements and
+                push here in the all filters array*/
+                var obj1 = {};
+                /*
+                    1. do check for repeated filter and just return false
+                    2. do check for repeated sorting and toggle rempve it.
+                    3. do check for search and replace the search value with
+                    the new one
+                */
 
-                var filt_url = '';
+                if(allFilters1.length>0) {
+                    //case for repeated filter
 
-                for(y in x) {
-                    k = x[y];
-                    for(z in k) {
-                        c = k[z];
-                        for(d in c){
-                            // console.log(y);     //first element of per which will make the url filter or sort
-                            // console.log(z);     //name of the column which is needed to be filtered or sorted
-                            // console.log(d);     //any condition or just sort
-                            // console.log(c[d]);  //filter value or response
-
+                    if(column != "sort" && column != "search") {
+                        filter_repeated = 0;
+                        for(j=0;j<allFilters1.length;j++) {
+                            if(allFilters1[j].column==column && allFilters1[j].cond==condition && allFilters1[j].val==response)
+                            {
+                                filter_repeated = 1;
+                                alert('Filter is repeated');
+                                return false;
+                            }
+                        }
+                        if(filter_repeated == 0) {
+                            obj1.column = column;
+                            obj1.cond = condition;
+                            obj1.val = response;
+                            allFilters1.push(obj1);
+                            obj1 = {};
+                            makeURL();
                         }
                     }
+                    if(column == "sort") {
+                        alert('sort found');
+                        sort_exists = 0;
+                        for(j=0;j<allFilters1.length;j++) {
+                            console.log(allFilters1[j].column);
+                            if(allFilters1[j].column == "sort") {
 
-                    if(y == 0)
-                        filt_url = filt_url + '?' + y + '=' + z + '[' + d + ']' + '=' + c[d];
-                    else
-                        filt_url = filt_url + '&' + y + '=' + z + '[' + d + ']' + '=' + c[d];
+                                allFilters1[j].column = column;
+                                allFilters1[j].cond = condition;
+                                allFilters1[j].val = response;
+                                makeURL();
+
+                            }
+                        }
+                    }
+                    if(column == "search") {
+                        console.log(allFilters1);
+                        search_found = 0;
+                        for(j=0;j<allFilters1.length;j++) {
+                            if(allFilters1[j].column == "search") {
+                                allFilters1[j].column = column;
+                                allFilters1[j].cond = condition;
+                                allFilters1[j].val = response;
+                                makeURL();
+                            }
+                        }
+                        for(j=0;j<allFilters1.length;j++) {
+                            if(allFilters1[j].column == "search") {
+                                search_found = 1;
+                            }
+                        }
+                        if(search_found == 0) {
+                            obj1.column = column;
+                            obj1.cond = condition;
+                            obj1.val = response;
+                            allFilters1.push(obj1);
+                            obj1 = {};
+                            makeURL();
+                        }
+                    }
+                } else {
+                    obj1.column = column;
+                    obj1.cond = condition;
+                    obj1.val = response;
+                    allFilters1.push(obj1);
+                    obj1 = {};
+                    makeURL();
                 }
-                // console.log(filt_url);
-                // console.log(count_filters);
-                // return false;
-                document.location = filt_url;
-            }
+                // if(allFilters1.length>0) {
+                //     for(i=0;i<allFilters1.length;i++) {
 
-            //obselete
-            function formURL(column, condition, response, urlparams) {
-                makeTagsTest(column, condition, response, urlparams);
-                // var pos = params.lastIndexOf("&");
-                // var pos1 = params.lastIndexOf("?");
+                //         if(allFilters1[i].column!="sort" && allFilters1[i].column==column && allFilters1[i].cond==condition && allFilters1[i].val==response) {
 
-                // //detect the url state
-                // if(pos == -1 && pos1!=-1){
-                //     count_filters = parseInt(params.slice(1,2).trim());
-                //     console.log('use count for ?',parseInt(count_filters));
-                // }
-                // else if(pos == -1 && pos1 == -1){
-                //     count_filters = parseInt(0);
-                //     console.log('no search params found');
-                // }
-                // else if(pos!= -1 && pos1!= -1){
-                //     count_filters = parseInt(params.slice(pos+1,pos+2).trim());
-                //     console.log('both & and ? present so using index=',count_filters);
-                // }
-                // else{
-                //     count_filters = parseInt(params.slice(pos+1,pos+2).trim());
-                //     console.log(count_filters);
-                // }
+                //             return false;
 
-                // //act on url state
-                // if(count_filters==0 && pos == -1 && pos1!=-1)
-                // {
-                //     filt = filt + '&' + parseInt(count_filters+1) + '=' + column + array_start + condition + array_end + '=' + response;
-                //     makeTagsTest(column, condition, response, urlparams,parseInt(count_filters));
-                //     // document.location = myURL + filt;
+                //         }
+                //         else if(column == "sort") {
+
+                //             sort_repeated = 0;
+                //             for(j=0;j<allFilters1.length;j++){
+                //                 if(allFilters1[j].column == column && allFilters1[j].cond == condition && allFilters1[j].val == response) {
+
+                //                     sort_repeated = 1;
+
+                //                 }
+
+                //             }
+                //             if(sort_repeated==1) {
+
+                //                 console.log('sort repeated executing');
+                //                 from = parseInt(allFilters1.length);
+                //                 to = parseInt(allFilters1.length) + 1;
+                //                 allFilters1 = allFilters1.splice(from,to);
+                //                 sort_repeated = 0;
+                //                 console.log("xxxxxxxxxxxxxx");
+                //                 makeURL();
+
+                //             } else if(sort_repeated==0){
+
+                //                 //this is the buggy case
+                //                 allFilters1[i].column = column;
+                //                 allFilters1[i].cond = condition;
+                //                 allFilters1[i].val = response;
+                //                 console.log("yyyyyyyyyyyyyy");
+                //                 makeURL();
+                //             }
+
+                //         } else {
+
+                //             obj1.column=column;
+                //             obj1.cond=condition;
+                //             obj1.val=response;
+                //             allFilters1.push(obj1);
+                //             console.log("zzzzzzzzzzzz");
+                //             makeURL();
+                //             obj1={ };
+
+                //         }
+
+                //     }
                 // }
-                // else if(count_filters==0 && pos==-1 && pos1==-1)
-                // {
-                //     filt = '?' + parseInt(count_filters+1) + '=' + column + array_start + condition + array_end + '=' + response;
-                //     makeTagsTest(column, condition, response, urlparams,parseInt(count_filters));
-                //     // document.location = myURL + filt;
-                // }
-                // else if(count_filters>0 && pos!=-1 && pos1!=-1){
-                //     filt = filt + '&' + parseInt(count_filters+1) + '=' + column + array_start + condition + array_end + '=' + response;
-                //     makeTagsTest(column, condition, response, urlparams,parseInt(count_filters));
-                //     // document.location = myURL + filt;
-                // }
-                // else{
-                //     filt = '?' + parseInt(count_filters) + '=' + column + array_start + condition + array_end + '=' + response;
-                //     makeTagsTest(column, condition, response, urlparams,parseInt(count_filters));
-                //     // document.location = myURL + filt;
+                // else {
+
+                //     obj1.column=column;
+                //     obj1.cond=condition;
+                //     obj1.val=response;
+                //     allFilters1.push(obj1);
+                //     console.log("1111111111111");
+                //     obj1={ };
+                //     makeURL();
+
                 // }
             }
         </script>

@@ -67,6 +67,9 @@
 
 .dashboard-content {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid red;
     margin-top: 5.5%;
     margin-bottom: 5.5%;
 
@@ -80,6 +83,8 @@
         background: #ffffff;
         width: 25%;
         text-transform: capitalize;
+        font-size: 16px;
+        color: #5e5e5e;
 
         li {
             font-size: 16px;
@@ -103,5 +108,22 @@
         li:last-child {
             border-bottom: none;
         }
+    }
+
+    .profile {
+        margin-left: 5.5%;
+
+        .section-heading {
+            height: 50px;
+            font-size: 28px;
+            color: #242424;
+            text-transform: capitalize;
+            text-align: left;
+        }
+    }
+
+    .profile-content {
+        font-size: 16px;
+        color: #5e5e5e;
     }
 }

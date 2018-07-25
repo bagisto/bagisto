@@ -900,6 +900,7 @@ h2 {
 }
 
 .grid-container .filter-wrapper .filter-row-one .dropdown-filters .more-filters .dropdown-list .dropdown-container ul li.filter-column-dropdown .filter-column-select {
+  width: 100%;
   background: #fff;
   border: 2px solid #c7c7c7;
   border-radius: 3px;
@@ -1014,6 +1015,7 @@ h2 {
   margin: 5px;
   height: 18px !important;
   width: 18px !important;
+  cursor: pointer;
 }
 
 .grid-container .table thead .xyz {

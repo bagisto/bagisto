@@ -43,7 +43,7 @@
                 </th>
                 @foreach ($columns as $column)
                     @if($column->sortable == "true")
-                    <th class="labelled-col grid_head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}" data-column-sort="asc"> {!! $column->sorting() !!}     <span class="icon sort-down-icon"></span>
+                    <th class="labelled-col grid_head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}" data-column-sort="asc"> {!! $column->sorting() !!}<span class="icon sort-down-icon"></span>
                     </th>
                     @else
                     <th class="labelled-col grid_head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>

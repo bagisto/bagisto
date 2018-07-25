@@ -72,6 +72,14 @@
 
 .dashboard-content {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border: 1px solid red;
   margin-top: 5.5%;
   margin-bottom: 5.5%;
 }
@@ -94,6 +102,8 @@
   background: #ffffff;
   width: 25%;
   text-transform: capitalize;
+  font-size: 16px;
+  color: #5e5e5e;
 }
 
 .dashboard-content .dashboard-side-menu li {
@@ -128,4 +138,21 @@
 
 .dashboard-content .dashboard-side-menu li:last-child {
   border-bottom: none;
+}
+
+.dashboard-content .profile {
+  margin-left: 5.5%;
+}
+
+.dashboard-content .profile .section-heading {
+  height: 50px;
+  font-size: 28px;
+  color: #242424;
+  text-transform: capitalize;
+  text-align: left;
+}
+
+.dashboard-content .profile-content {
+  font-size: 16px;
+  color: #5e5e5e;
 }

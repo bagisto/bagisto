@@ -37,10 +37,10 @@ class UserComposer
     public function compose(View $view)
     {
         $datagrid = DataGrid::make([
-            'name' => 'Users',
+            'name' => 'Admins',
             'table' => 'admins as u',
             'select' => 'u.id',
-            'aliased' => true , //boolean to validate aliasing on the basis of this.
+            'aliased' => true, //boolean to validate aliasing on the basis of this.
             'filterable' => [
                 [
                     'column' => 'u.email',
@@ -50,6 +50,10 @@ class UserComposer
                     'column' => 'u.name',
                     'type' => 'string',
                     'label' => 'Admin Name'
+                ], [
+                    'column' => 'u.id',
+                    'type' => 'number',
+                    'label' => 'Admin ID'
                 ]
             ],
             'searchable' => [
@@ -83,13 +87,13 @@ class UserComposer
                 // ],
             ],
             'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'roles as r',
-                    'primaryKey' => 'u.role_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'r.id',
-                ]
+                // [
+                //     'join' => 'leftjoin',
+                //     'table' => 'roles as r',
+                //     'primaryKey' => 'u.role_id',
+                //     'condition' => '=',
+                //     'secondaryKey' => 'r.id',
+                // ]
             ],
             'columns' => [
                 [
@@ -110,12 +114,12 @@ class UserComposer
                     'label' => 'Admin E-Mail',
                     'sortable' => true,
                 ],
-                [
-                    'name' => 'r.name as rolename',
-                    'type' => 'string',
-                    'label' => 'Role Name',
-                    'sortable' => true,
-                ],
+                // [
+                //     'name' => 'r.name as rolename',
+                //     'type' => 'string',
+                //     'label' => 'Role Name',
+                //     'sortable' => true,
+                // ],
                 // [
                 //     'name' => 'a.first_name',
                 //     'type' => 'string',
@@ -147,6 +151,7 @@ class UserComposer
                 'neqs' => "<>",
                 'neqn' => "!=",
                 'like' => "like",
+                'nlike' => "not like",
             ],
             // 'css' => []
 
