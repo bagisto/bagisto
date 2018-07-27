@@ -22,20 +22,23 @@ class AttributeFamilyTableSeeder extends Seeder
                     "position" => 1,
                     "attributes" => [
                         [
-                            'code' => 'name',
+                            'code' => 'sku',
                             'position' => 1
                         ], [
-                            'code' => 'url_key',
+                            'code' => 'name',
                             'position' => 2
                         ], [
-                            'code' => 'new_from',
+                            'code' => 'url_key',
                             'position' => 3
                         ], [
-                            'code' => 'new_to',
+                            'code' => 'new_from',
                             'position' => 4
                         ], [
-                            'code' => 'status',
+                            'code' => 'new_to',
                             'position' => 5
+                        ], [
+                            'code' => 'status',
+                            'position' => 6
                         ]
                     ]
                 ], [
