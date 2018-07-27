@@ -15,13 +15,14 @@ class CreateCustomerAddressesTable extends Migration
     {
         Schema::create('customer_addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('street');
+            $table->integer('customer_id')->unsigned();
+            $table->foreign('customer_id')->references('id')->on('customers');
             $table->string('address1');
-            $table->string('address2');
+            $table->string('address2')->nullable();
             $table->string('country');
             $table->string('state');
             $table->string('city');
-            $table->integer('pincode');
+            $table->integer('postcode');
             $table->timestamps();
         });
     }
