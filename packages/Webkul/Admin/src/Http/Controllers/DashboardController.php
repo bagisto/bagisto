@@ -19,6 +19,12 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $_config;
+
+    public function __construct()
+    {
+        $this->_config = request('_config');
+    }
     public function index()
     {
         return view('admin::dashboard.index');

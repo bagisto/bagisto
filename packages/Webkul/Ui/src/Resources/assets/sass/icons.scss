@@ -12,163 +12,187 @@
 }
 .dashboard-icon {
     @extend %menu-properties;
-    background-image: url('../images/Icon-Dashboard.svg');
+    background-image: url("../images/Icon-Dashboard.svg");
 }
 .catalog-icon {
     @extend %menu-properties;
-    background-image: url('../images/Icon-Catalog.svg');
+    background-image: url("../images/Icon-Catalog.svg");
 }
 .configuration-icon {
     @extend %menu-properties;
-    background-image: url('../images/Icon-Configure.svg');
+    background-image: url("../images/Icon-Configure.svg");
 }
 .settings-icon {
     @extend %menu-properties;
-    background-image: url('../images/Icon-Settings.svg');
+    background-image: url("../images/Icon-Settings.svg");
 }
 
 .angle-right-icon {
-    background-image: url('../images/Angle-Right.svg');
+    background-image: url("../images/Angle-Right.svg");
     width: 17px;
     height: 17px;
 }
 
 .angle-left-icon {
-    background-image: url('../images/Angle-Right.svg');
+    background-image: url("../images/Angle-Right.svg");
     width: 17px;
     height: 17px;
 }
 
 .arrow-down-icon {
-    background-image: url('../images/Arrow-Down-Light.svg');
+    background-image: url("../images/Arrow-Down-Light.svg");
     width: 14px;
     height: 8px;
 }
 
 .arrow-right-icon {
-    background-image: url('../images/Arrow-Right.svg');
+    background-image: url("../images/Arrow-Right.svg");
     width: 18px;
     height: 18px;
 }
 
 .white-cross-sm-icon {
-    background-image: url('../images/Icon-Sm-Cross-White.svg');
+    background-image: url("../images/Icon-Sm-Cross-White.svg");
     width: 18px;
     height: 18px;
 }
 
 .accordian-up-icon {
-    background-image: url('../images/Accordion-Arrow-Up.svg');
+    background-image: url("../images/Accordion-Arrow-Up.svg");
     width: 24px;
     height: 24px;
 }
 .accordian-down-icon {
-    background-image: url('../images/Accordion-Arrow-Down.svg');
+    background-image: url("../images/Accordion-Arrow-Down.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.cross-icon {
+    background-image: url("../images/Icon-Crossed.svg");
     width: 24px;
     height: 24px;
 }
 
 .trash-icon {
-    background-image: url('../images/Icon-Trash.svg');
+    background-image: url("../images/Icon-Trash.svg");
     width: 24px;
     height: 24px;
 }
 
 .remove-icon {
-    background-image: url('../images/Icon-remove.svg');
+    background-image: url("../images/Icon-remove.svg");
     width: 24px;
     height: 24px;
 }
 
 .pencil-lg-icon {
-    background-image: url('../images/Icon-Pencil-Large.svg');
+    background-image: url("../images/Icon-Pencil-Large.svg");
     width: 24px;
     height: 24px;
 }
 
 .search-icon {
-    background-image: url('../images/icon-search.svg');
+    background-image: url("../images/icon-search.svg");
     width: 24px;
     height: 24px;
 }
 
 .sortable-icon {
-    background-image: url('../images/Icon-Sortable.svg');
+    background-image: url("../images/Icon-Sortable.svg");
     width: 24px;
     height: 24px;
 }
 
 .sort-down-icon {
-    background-image: url('../images/Icon-Sort-Down.svg');
+    background-image: url("../images/Icon-Sort-Down.svg");
     width: 18px;
     height: 18px;
 }
 
 .primary-back-icon {
-    background-image: url('../images/Icon-Back-Primary.svg');
+    background-image: url("../images/Icon-Back-Primary.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.checkbox-dash-icon {
+    background-image: url("../images/Checkbox-Dash.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.account-icon {
+    background-image: url("../images/icon-account.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.cart-icon {
+    background-image: url("../images/icon-cart.svg");
     width: 24px;
     height: 24px;
 }
 
 .expand-icon {
-    background-image: url('../images/Expand-Light.svg');
+    background-image: url("../images/Expand-Light.svg");
     width: 18px;
     height: 18px;
 }
 
 .folder-icon {
-    background-image: url('../images/Folder-Icon.svg');
+    background-image: url("../images/Folder-Icon.svg");
     width: 24px;
     height: 24px;
 }
 
 .active {
     .dashboard-icon {
-        background-image: url('../images/Icon-Dashboard-Active.svg');
+        background-image: url("../images/Icon-Dashboard-Active.svg");
     }
 
     .catalog-icon {
-        background-image: url('../images/Icon-Catalog-Active.svg');
+        background-image: url("../images/Icon-Catalog-Active.svg");
     }
 
     .settings-icon {
-        background-image: url('../images/Icon-Settings-Active.svg');
+        background-image: url("../images/Icon-Settings-Active.svg");
     }
 
     .configuration-icon {
-        background-image: url('../images/Icon-Configure-Active.svg');
+        background-image: url("../images/Icon-Configure-Active.svg");
     }
 
     .arrow-down-icon {
-        background-image: url('../images/Arrow-Down.svg');
+        background-image: url("../images/Arrow-Down.svg");
         width: 14px;
         height: 8px;
     }
 
     .expand-icon {
-        background-image: url('../images/Expand-Light-On.svg');
+        background-image: url("../images/Expand-Light-On.svg");
     }
 
     &.dashboard-icon {
-        background-image: url('../images/Icon-Dashboard-Active.svg');
+        background-image: url("../images/Icon-Dashboard-Active.svg");
     }
 
     &.settings-icon {
-        background-image: url('../images/Icon-Settings-Active.svg');
+        background-image: url("../images/Icon-Settings-Active.svg");
     }
 
     &.configuration-icon {
         @extend %menu-properties;
-        background-image: url('../images/Icon-Configure-Active.svg');
+        background-image: url("../images/Icon-Configure-Active.svg");
     }
 
     &.arrow-down-icon {
-        background-image: url('../images/Arrow-Down.svg');
+        background-image: url("../images/Arrow-Down.svg");
         width: 14px;
         height: 8px;
     }
 
     &.expand-icon {
-        background-image: url('../images/Expand-Light-On.svg');
+        background-image: url("../images/Expand-Light-On.svg");
     }
 }

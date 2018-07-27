@@ -118,6 +118,13 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+    /*
+        Code Editor
+
+    */
+
+    'editor' =>'vscode',
+
 
     'providers' => [
 
@@ -163,13 +170,15 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        
+        //Webkul packages
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
         Webkul\Ui\Providers\UiServiceProvider::class,
         Webkul\Category\Providers\CategoryServiceProvider::class,
         Webkul\Attribute\Providers\AttributeServiceProvider::class,
         Webkul\Core\Providers\CoreServiceProvider::class,
+        Webkul\Shop\Providers\ShopServiceProvider::class,
+        Webkul\Customer\Providers\CustomerServiceProvider::class,
         Webkul\Channel\Providers\ChannelServiceProvider::class,
         Webkul\Inventory\Providers\InventoryServiceProvider::class,
         Webkul\Product\Providers\ProductServiceProvider::class
@@ -221,7 +230,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
         'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class
     ],
 

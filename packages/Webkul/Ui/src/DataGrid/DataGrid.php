@@ -1,26 +1,24 @@
 <?php
-
 namespace Webkul\Ui\DataGrid;
 
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Collection;
+use Illuminate\Support\Validate;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
-
 use Webkul\Ui\DataGrid\Helpers\Column;
 use Webkul\Ui\DataGrid\Helpers\Pagination;
 use Webkul\Ui\DataGrid\Helpers\Css;
+use Webkul\Ui\DataGrid\Helpers\MassAction;
 
 class DataGrid
-{   
+{
     /**
      * Name of DataGrid
      *
      * @var string
      */
     protected $name;
-
     /**
      * select from table(s)
      *
@@ -29,17 +27,23 @@ class DataGrid
     protected $select;
 
     /**
+    * Table
+    * @var Boolean for aliasing
+    */
+    protected $aliased;
+
+    /**
      * Table
      *
      * @var String Classs name $table
      */
-    protected $table;
 
+    protected $table;
     /**
      * Join
      *
      * @var Array name $join
-     * 
+     *
      * [
      *      'join' => 'left',
      *      'table' => 'posts',
@@ -50,7 +54,6 @@ class DataGrid
      * ]
      */
     protected $join;
-
     /**
      * Collection Object of Column $columns
      *
@@ -59,19 +62,45 @@ class DataGrid
     protected $columns;
 
     /**
+     * array of columns
+     * to be filtered
+     * @var Array
+     */
+    protected $filterable;
+
+    /**
+     * array of columns
+     * to be searched
+     *
+     * @var Array
+     */
+    protected $searchable;
+
+    /**
+     * mass operations
+     *
+     * @var Array
+     */
+    protected $massoperations;
+
+    /**
      * Pagination $pagination
      *
      * @var Pagination
      */
     protected $pagination;
-
     /**
      * Css $css
      *
      * @var Css
      */
     protected $css;
-    
+
+    /**
+     * URL parse $parsed
+     * @var parse
+     */
+    protected $parsed;
     /*
     public function __construct(
         $name = null ,
@@ -87,38 +116,52 @@ class DataGrid
             $columns,
             $pagination
         );
-
         return $this;
+
+        Separates the bags in the array of make attributes
     }
     */
-    public function make($args){
+
+    public function make($args)
+    {
         // list($name, $select, $table, $join, $columns) = array_values($args);
-        $name = $select = $table = false;
-        $join = $columns = $css = [];
+        $name = $select = $aliased = $table = false;
+        $join = $columns = $filterable = $searchable =
+        $massoperations = $css = $operators = [];
         extract($args);
-        return $this->build($name, $select, $table, $join, $columns, $css);
+        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $table, $join, $columns, $css, $operators);
     }
+
+    //starts buikding the queries on the basis of selects, joins and filter with
+    //attributes for class names and styles.
 
     public function build(
         $name = null,
-        $select = false, 
+        $select = false,
+        array $filterable = [],
+        array $searchable = [],
+        array $massoperations = [],
+        bool $aliased = false,
         $table = null,
         array $join = [],
         array $columns = null,
         array $css = [],
+        array $operators = [],
         Pagination $pagination = null
-    ){
+    ) {
         $this->request = Request::capture();
-        
         $this->setName($name);
         $this->setSelect($select);
+        $this->setFilterable($filterable);
+        $this->setSearchable($filterable);
+        $this->setMassOperations($massoperations);
+        $this->setAlias($aliased);
         $this->setTable($table);
         $this->setJoin($join);
-
         $this->addColumns($columns, true);
         $this->setCss($css);
+        $this->setOperators($operators);
         // $this->addPagination($pagination);
-
         return $this;
     }
 
@@ -127,6 +170,7 @@ class DataGrid
      *
      * @return $this
      */
+
     public function setName(string $name)
     {
         $this->name = $name ?: 'Default' . time();
@@ -138,6 +182,7 @@ class DataGrid
      *
      * @return $this
      */
+
     public function setSelect($select)
     {
         $this->select = $select ?: false;
@@ -145,10 +190,58 @@ class DataGrid
     }
 
     /**
-     * Add Columns.
+     * Set Filterable
+     * @return $this
+     */
+
+    public function setFilterable(array $filterable)
+    {
+        $this->filterable = $filterable ?: [];
+        return $this;
+    }
+
+    /**
+     * Set Searchable columns
+     * @return $this
+     */
+
+    public function setSearchable($searchable)
+    {
+        $this->searchable = $searchable ?: [];
+        return $this;
+    }
+
+    /**
+     * Set mass operations
+     * @return $this
+     */
+
+    public function setMassOperations($massops)
+    {
+        $this->massoperations = $massops ?: [];
+        return $this;
+    }
+
+    /**
+     * Set alias parameter
+     * to know whether
+     * aliasing is true or not.
+     *
+     * @return $this.
+     */
+
+    public function setAlias(bool $aliased)
+    {
+        $this->aliased = $aliased ? : false;
+    }
+
+    /**
+     * Set table name in front
+     * of query scope.
      *
      * @return $this
      */
+
     public function setTable(string $table)
     {
         $this->table = $table ?: false;
@@ -156,15 +249,22 @@ class DataGrid
     }
 
     /**
-     * Add Columns.
+     * Set join bag if
+     * present.
      *
      * @return $this
      */
+
     public function setJoin(array $join)
     {
         $this->join = $join ?: [];
         return $this;
     }
+
+    /**
+     * Adds the custom css rules
+     * @retun $this
+     */
 
     private function setCss($css = [])
     {
@@ -173,16 +273,29 @@ class DataGrid
     }
 
     /**
+     * setFilterableColumns
+     * @return $this
+     */
+
+    // public function setFilterableColumns($filterable_columns = [])
+    // {
+    //     $this->join = $filterable_columns ?: [];
+    //     return $this;
+    // }
+
+    /**
      * Add Columns.
      *
      * @return $this
      */
+
     public function addColumns($columns = [], $reCreate = false)
     {
-        if($reCreate) $this->columns = new Collection();
-
-        if($columns){
-            foreach($columns as $column){
+        if ($reCreate) {
+            $this->columns = new Collection();
+        }
+        if ($columns) {
+            foreach ($columns as $column) {
                 $this->addColumn($column);
             }
         }
@@ -194,49 +307,63 @@ class DataGrid
      *
      * @return $this
      */
+
     public function addColumn($column = [])
     {
-        if($column instanceof Column){
+        if ($column instanceof Column) {
             $this->columns->push($column);
-        }elseif(gettype($column) == 'array' && $column){
+        } elseif (gettype($column) == 'array' && $column) {
             $this->columns->push(new Column($column, $this->request));
-        }else{
+        } else {
             throw new \Exception("DataGrid: Add Column argument is not valid!");
         }
-
         return $this;
     }
 
     /**
      * Add ColumnMultiple.
-     *
+     * Currently is not
+     * of any use.
      * @return $this
      */
+
     private function addColumnMultiple($column = [], $multiple = false)
     {
-        if($column instanceof Column){
-            if($multiple){
-                if($this->columns->offsetExists($column->getName()))
+        if ($column instanceof Column) {
+            if ($multiple) {
+                if ($this->columns->offsetExists($column->getName())) {
                     $this->columns->offsetSet($column->getName(). time(), $column);
-                else
+                } else {
                     $this->columns->offsetSet($column->getName(), $column);
-            }else{
+                }
+            } else {
                 $this->columns->offsetSet($column->getName(), $column);
             }
-        }elseif(gettype($column) == 'array' && $column){
+        } elseif (gettype($column) == 'array' && $column) {
             $columnObj = new Column($column);
-            if($multiple){
-                if($this->columns->offsetExists($columnObj->getName()))
+            if ($multiple) {
+                if ($this->columns->offsetExists($columnObj->getName())) {
                     $this->columns->offsetSet($columnObj->getName(). time(), $columnObj);
-                else
+                } else {
                     $this->columns->offsetSet($columnObj->getName(), $columnObj);
-            }else{
+                }
+            } else {
                 $this->columns->offsetSet($columnObj->getName(), $columnObj);
             }
-        }else{
+        } else {
             throw new \Exception("DataGrid: Add Column argument is not valid!");
         }
+        return $this;
+    }
 
+    /**
+     * Adds expressional verbs to be used
+     * @return $this
+     */
+
+    public function setOperators(array $operators)
+    {
+        $this->operators = $operators ?: [];
         return $this;
     }
 
@@ -245,125 +372,406 @@ class DataGrid
      *
      * @return $this
      */
+
     public function addPagination($pagination = [])
     {
-        if($pagination instanceof Pagination){
+        if ($pagination instanceof Pagination) {
             $this->pagination = $pagination;
-        }elseif(gettype($pagination) == 'array' && $pagination){
+        } elseif (gettype($pagination) == 'array' && $pagination) {
             $this->pagination = new Pagination($pagination);
-        }else{
+        } else {
             throw new \Exception("DataGrid: Pagination argument is not valid!");
         }
-
         return $this;
     }
 
+    /**
+     * Parse the URL
+     * and get it ready
+     * to be used.
+     */
+
+    // private function parse()
+    // {
+    //     //parse the url here
+    //     if (isset($_SERVER['QUERY_STRING'])) {
+    //         $qr = $_SERVER['QUERY_STRING'];
+    //         parse_str($qr, $parsed);
+    //         foreach ($parsed as $k=>$v) {
+    //             parse_str($v, $parsed[$k]);
+    //         }
+    //         return $parsed;
+    //     } else {
+    //         return $parsed = [];
+    //     }
+    // }
+
+    private function parse()
+    {
+        $parsed = [];
+        $unparsed = $_SERVER['QUERY_STRING'];
+        if (isset($unparsed)) {
+            parse_str($unparsed, $parsed);
+            return $parsed;
+        } else {
+            return $parsed;
+        }
+    }
+
+    /**
+     * Used for selecting
+     * the columns got in
+     * make from controller.
+     * @return $this
+     */
     private function getSelect()
     {
         $select = [];
-        foreach($this->columns as $column){
+        foreach ($this->columns as $column) {
             $select[] = $column->name;
         }
-
         $this->query->select(...$select);
-        if($this->select) $this->query->addselect($this->select);
+        if ($this->select) {
+            $this->query->addselect($this->select);
+        }
     }
 
     /**
      * ->join('contacts', 'users.id', '=', 'contacts.user_id')
+     * @return $this->query
      */
+
     private function getQueryWithJoin()
     {
-        foreach($this->join as $join){
-            $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondryKey']);
+        foreach ($this->join as $join) {
+            $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondaryKey']);
         }
     }
 
     private function getQueryWithColumnFilters()
     {
-        foreach($this->columns as $column){
-            if($column->filter){
-                if (count($column->filter['condition']) == count($column->filter['condition'], COUNT_RECURSIVE)){
-                    $this->query->{$column->filter['function']}(current($column->filter['condition']));
-                }else{
-                    if(count($column->filter['condition']) == 3)
+        foreach ($this->columns as $column) {
+            if ($column->filter) { // if the filter bag in array exists then these will be applied.
+                if (count($column->filter['condition']) == count($column->filter['condition'], COUNT_RECURSIVE)) {
+                    $this->query->{$column->filter['function']}(...$column->filter['condition']);
+                } else {
+                    if (count($column->filter['condition']) == 3) {
                         $this->query->{$column->filter['function']}(
                             extract(
                                 array_combine(
-                                    // ['key', 'condition', 'value'], 
+                                    // ['key', 'condition', 'value'],
                                     array_fill( //will work with all kind of where conditions
-                                        0, 
-                                        ( count( $column->filter['condition']) - 1 ),
+                                        0,
+                                        (count($column->filter['condition']) - 1),
                                         'array_fill_nikhil'.time()
                                     ),
                                     $column->filter['condition']
                                 )
                             )
                         );
-                }
-            }
-        }
-    }
-
-    private function getQueryWithFilters(){
-        foreach($this->columns as $column){
-            dd($this->request);
-            if($column->filterable){
-                if ($filter = $this->request->offsetGet($column->correct(false))){
-                    if($condition = $this->request->offsetGet($column->correct(false).'.condition')){
-                        $this->query->andwhere(
-                            $this->correct(false),
-                            $condition,
-                            $filter
-                        );
                     }
                 }
             }
         }
+    }
 
-        $query = ['sort' => $this->correct(false)];
+    /**
+     * Used to get the filter
+     * params from the Url
+     * and processed manually
+     */
 
-        if(($sort = $this->request->offsetGet('sort')) && $sort == $this->correct(false)){
-            if(!$order = $this->request->offsetGet('order')){
-                $query['order'] = self::ORDER_DESC;
-            }else{
-                $query['order'] = ($order == self::ORDER_DESC ? self::ORDER_ASC : self::ORDER_DESC);
+    // private function getQueryWithFilters()
+    // {
+    //     // the only use case remaining is making and testing the full validation and testing of
+    //     // aliased case with alias used in column names also.
+    //     if ($this->aliased) {
+    //         //n of joins can lead to n number of aliases for columns and neglect the as for columns
+    //         $parsed = $this->parse();
+    //         // dump($parsed);
+    //         foreach ($parsed as $key => $value) {
+    //             foreach ($value as $column => $filter) {
+    //                 if (array_keys($filter)[0]=="like") {
+    //                     $this->query->where(
+    //                         str_replace('_', '.', $column), //replace the logic of making the column name and consider the case for _ in column name already
+    //                         $this->operators[array_keys($filter)[0]],
+    //                         '%'.array_values($filter)[0].'%'
+    //                     );
+    //                 } elseif (array_keys($filter)[0]=="sort") {
+    //                     $this->query->orderBy(
+    //                         str_replace('_', '.', $column), //replace the logic of making the column name and consider the case for _
+    //                         array_values($filter)[0]
+    //                     );
+    //                 } elseif ($column == "search") {
+    //                     $this->query->where(function ($query) use ($filter) {
+    //                         foreach ($this->searchable as $search) {
+    //                             $query->orWhere($search['column'], 'like', '%'.array_values($filter)[0].'%');
+    //                         }
+    //                     });
+    //                 } else {
+    //                     $this->query->where(
+    //                     str_replace('_', '.', $column),
+    //                     $this->operators[array_keys($filter)[0]],
+    //                     array_values($filter)[0]
+    //                 );
+    //                 }
+    //             }
+    //         }
+    //     } else {
+    //         $parsed = $this->parse();
+    //         foreach ($parsed as $key => $value) {
+    //             foreach ($value as $column => $filter) {
+    //                 if (array_keys($filter)[0]=="like") {
+    //                     $this->query->where(
+    //                         $column,
+    //                         $this->operators[array_keys($filter)[0]],
+    //                         '%'.array_values($filter)[0].'%'
+    //                     );
+    //                 } elseif ($column == "search") {
+    //                     $this->query->where(function ($query) use ($filter) {
+    //                         foreach ($this->searchable as $search) {
+    //                             $query->orWhere($search['column'], 'like', '%'.array_values($filter)[0].'%');
+    //                         }
+    //                     });
+    //                 } else {
+    //                     $this->query->where(
+    //                     $column,
+    //                     $this->operators[array_keys($filter)[0]],
+    //                     array_values($filter)[0]
+    //                 );
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    private function getQueryWithFilters()
+    {
+        $parsed = $this->parse();
+
+        if ($this->aliased) {
+            foreach ($parsed as $key=>$value) {
+                if ($key=="sort") {
+
+                    //resolve the case with the column helper class
+                    if (strpos($key, ' as ') !== false) {
+                        dd('This column cannot be sorted');
+                    } else {
+                        $column_name = str_replace('_', '.', $key);
+                    }
+
+                    //case that don't need any resolving
+                    $count_keys = count(array_keys($value));
+                    if ($count_keys==1) {
+                        $this->query->orderBy(
+                            str_replace('_', '.', array_keys($value)[0]),
+                            array_values($value)[0]
+                        );
+                    } else {
+                        dump('Sort on two columns cannot exist in backend');
+                    }
+                } elseif ($key=="search") {
+                    if (strpos($key, ' as ') !== false) {
+                        dd('This column cannot be searched');
+                    } else {
+                        $column_name = str_replace('_', '.', $key);
+                    }
+                    $this->query->where(function ($query) use ($parsed) {
+                        foreach ($this->searchable as $search) {
+                            $query->orWhere($search['column'], 'like', '%'.$parsed['search']['all'].'%');
+                        }
+                    });
+                } else {
+                    if (strpos($key, ' as ') !== false) {
+                        dd('This column cannot be filtered');
+                    } else {
+                        $column_name = str_replace('_', '.', $key);
+                    }
+
+                    if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
+                        foreach ($value as $condition => $filter_value) {
+                            $this->query->where(
+                                $column_name,
+                                $this->operators[$condition],
+                                '%'.$filter_value.'%'
+                            );
+                        }
+                    } else {
+                        foreach ($value as $condition => $filter_value) {
+                            $this->query->where(
+                                $column_name,
+                                $this->operators[$condition],
+                                $filter_value
+                            );
+                        }
+                    }
+                }
             }
-        }else{
-            $query['order'] = self::ORDER_DESC;
+        } else {
+            dd('left to be run plainly');
         }
-        
-        return '?'.http_build_query(array_merge($this->request->query->all(), $query));
     }
 
     private function getDbQueryResults()
     {
-        $this->query = DB::table($this->table);
+        $parsed = $this->parse();
 
-        $this->getSelect();
-        $this->getQueryWithJoin();
-        $this->getQueryWithColumnFilters();
-        $this->getQueryWithFilters();
+        if ($this->aliased==true) {
+            //flags
+            $table_alias = false;
+            $join_table_alias = false;
+            $allowed_joins = false;
+            $other_joins = false;
+            $join_good = false;
 
-        dd($this->query);
+            //prepare query object
+            $this->query = DB::table($this->table);
 
-        $this->results = $this->query->get();
-        return $this->results;
+            //explode if alias is available
+            if (strpos('.', $this->table)) {
+                throw new \Exception("dot/s cannot be used in table names in mysql");
+            } else {
+                $exploded = explode('as', $this->table);
+            }
+
+            //check whether exploded string still has same table name
+            if ($exploded[0]==$this->table) {
+                $table_alias = false;
+            } else { // (isset($exploded))
+                $table_alias = true;
+                $table_name = trim($exploded[0]);
+                $table_alias = trim($exploded[1]);
+            }
+            //Run this if there are any selects priorly.
+            if (!empty($this->select)) {
+                $this->getSelect();
+            }
+
+            //Run this if there are joins
+            if (!empty($this->join)) {
+                foreach ($this->join as $join) {
+                    $name = strtolower($join['join']);
+                    //Allow joins i.e left or right
+                    if ($name=='leftjoin' || $name=='left join' || $name=='rightjoin' || $name=='right join') {
+
+                        //check if the aliasing on the primary table and primaryKey in join is also the same
+                        $primary_key_alias = trim(explode('.', $join['primaryKey'])[0]);
+
+                        if ($primary_key_alias == $table_alias) {
+                            $join_table_alias = explode('as', $join['table']);
+
+                            if (isset($join_table_alias)) {
+                                $alias1 = trim($join_table_alias[1]); //important!!!!!
+
+                                //check if the secondary table match column is not having '.' and has proper alias
+                                $secondary_join_column = $join['secondaryKey'];
+                                if (isset($secondary_join_column)) {
+                                    $exploded_secondary = explode('.', $secondary_join_column);
+                                    $alias2 = trim($exploded_secondary[0]);
+                                    if ($alias1 == $alias2) {
+
+                                        //check whether secondary table columns are properly aliased
+                                        $alias_proper_secondary = true;
+                                        foreach ($this->columns as $column) {
+                                            if ($x = explode('.', $column->name)[0]) {
+                                                if (isset($x) && $x == $alias1) {
+                                                    //check if this secondary column is using independent column alias
+                                                    if (!strpos($column->name, 'as')) {
+                                                        $alias_proper_secondary = false;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if ($alias_proper_secondary) {
+                                            $this->getQueryWithJoin();
+                                        } else {
+                                            throw new \Exception('Due to a bug in laravel, you can\'t use secondary table columns without aliasing');
+                                        }
+                                    } else {
+                                        throw new \Exception('Aliases of Join table and the secondary key columns do not match');
+                                    }
+                                } else {
+                                    throw new \Exception('Improper aliasing on secondary/join column for join');
+                                }
+                            } else {
+                                throw new \Exception('Join/Secondary table alias is not found for join');
+                            }
+                        } else {
+                            throw new \Exception('Primary key and primary table aliases do not match for join');
+                        }
+                    } else {
+                        $other_joins = true;
+                        throw new \Exception('Please check if there is some fault in your aliasing and do not use as in column names or you might have been using a join that is not allowed i.e cross, inner, etc use left and right join only');
+                    }
+                }
+            }
+
+            //Check for column filter bags and resolve aliasing
+            //run this if there are columns with filter bag
+            $this->getQueryWithColumnFilters();
+
+            //Run this if there are filters or sort params or range params in the urls
+            // if (isset($_SERVER['QUERY_STRING'])) {
+            //     $qr = $_SERVER['QUERY_STRING'];
+            //     $parsed;
+            //     parse_str($qr, $parsed);
+            // }
+            $parsed = $this->parse();
+
+            if (!empty($parsed)) {
+                $this->getQueryWithFilters();
+            } else {
+                $this->results = $this->query->get();
+                return $this->results;
+            }
+            $this->results = $this->query->get();
+            return $this->results;
+        } else {
+            $this->query = DB::table($this->table);
+            if (!empty($this->select)) {
+                $this->getSelect();
+            }
+
+            $this->getQueryWithColumnFilters();
+
+            $parsed = $this->parse();
+            if (!empty($parsed)) {
+                $this->getQueryWithFilters();
+            } else {
+                $this->results = $this->query->get();
+                return $this->results;
+            }
+            $this->results = $this->query->get();
+            return $this->results;
+        }
     }
+
+    /**
+     * Render mass
+     * action instance
+     * @return view
+     */
+
+    // private function renderMassAction(array $attributes)
+    // {
+
+    //     //probably render some view when mass action is needed
+    //     //the rendered view will have the needed javascript also.
+    // }
 
     /**
      * @return view
      */
+
     public function render()
-    {   
+    {
         $this->getDbQueryResults();
-
-        dump($this->columns);
-
         return view('ui::datagrid.index', [
             'css' => $this->css,
             'results' => $this->results,
             'columns' => $this->columns,
+            'filterable' =>$this->filterable,
+            'operators' => $this->operators,
+            'massoperations' => $this->massoperations,
         ]);
     }
 }

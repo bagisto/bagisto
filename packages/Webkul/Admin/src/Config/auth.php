@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -10,6 +11,11 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
+        ],
+
+        'customer' =>[
+            'driver' => 'session',
+            'provider' => 'customers'
         ],
 
         'admin' => [
@@ -27,7 +33,12 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => Webkul\User\Models\User::class,
-        ], 
+        ],
+
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => Webkul\Customer\Models\Customer::class,
+        ],
 
         'admins' => [
             'driver' => 'eloquent',
@@ -39,6 +50,11 @@ return [
         'admins' => [
             'provider' => 'admins',
             'table' => 'admin_password_resets',
+            'expire' => 60,
+        ],
+        'customers' => [
+            'provider' => 'customers',
+            'table' => 'customers_password_resets',
             'expire' => 60,
         ],
     ],

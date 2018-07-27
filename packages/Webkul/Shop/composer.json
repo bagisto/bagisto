@@ -1,0 +1,25 @@
+{
+    "name": "webkul/laravel-shop",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Prashant",
+            "email": "prashant@webkul.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Webkul\\Shop\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\Shop\\Providers\\ShopServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}

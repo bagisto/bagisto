@@ -15,11 +15,11 @@ body {
     min-height: 100%;
 }
 
-.navbar-top  {
+.navbar-top {
     height: 60px;
-    background: #FFFFFF;
+    background: #ffffff;
     font-size: 0;
-    @include box-shadow(0 3px 6px 0 rgba(0,0,0,0.05));
+    @include box-shadow(0 3px 6px 0 rgba(0, 0, 0, 0.05));
     border-bottom: 1px solid $border-color;
     position: fixed;
     left: 0;
@@ -44,7 +44,7 @@ body {
         display: inline-block;
         vertical-align: middle;
 
-        .profile-info  {
+        .profile-info {
             display: inline-block;
             vertical-align: middle;
             text-align: left;
@@ -59,7 +59,7 @@ body {
             .dropdown-list {
                 top: 63px;
             }
-            
+
             .name {
                 color: #000311;
                 display: block;
@@ -67,7 +67,7 @@ body {
             }
             .role {
                 font-size: 14px;
-                color: #8E8E8E;
+                color: #8e8e8e;
                 display: block;
                 text-align: left;
             }
@@ -76,7 +76,7 @@ body {
                 margin-left: 10px;
             }
         }
-    }    
+    }
 }
 
 .navbar-left {
@@ -90,7 +90,6 @@ body {
     z-index: 2;
 
     ul.menubar {
-
         li.menu-item {
             height: 90px;
             padding: 10px 5px;
@@ -99,12 +98,12 @@ body {
             text-transform: uppercase;
 
             a {
-                color: #A2A2A2;
+                color: #a2a2a2;
             }
 
             &.active {
                 a {
-                    color: #0041FF;
+                    color: #0041ff;
                 }
             }
         }
@@ -121,14 +120,14 @@ body {
     bottom: 0px;
     overflow-x: hidden;
     overflow-y: auto;
-    
+
     .aside-nav {
         width: 280px;
         position: fixed;
         top: 60px;
         bottom: 0;
         border-right: 1px solid $border-color;
-        background: #F8F9FA;
+        background: #f8f9fa;
         padding-top: 10px;
         overflow-y: auto;
         z-index: 4;
@@ -163,7 +162,7 @@ body {
         &.full-page {
             padding: 25px;
         }
-        
+
         .page-header {
             display: inline-block;
             margin-bottom: 20px;
@@ -202,3 +201,40 @@ body {
         }
     }
 }
+
+//style for dummy datagrid
+// .page-content {
+//     .table-container {
+//         .search-filter-wrapper {
+//             display: inline-block;
+//             box-sizing: border-box;
+
+//             width: 100%;
+//             padding-top: 7px;
+//             padding-bottom: 7px;
+
+//             .search-products {
+//                 width: 300px;
+//                 border: 2px solid $border-color;
+//                 border-radius: 3px;
+//                 height: 30px;
+//                 padding-left: 5px;
+//             }
+
+//             .icon-wrapper {
+//                 margin: 0px;
+//                 display: inline-block;
+//                 vertical-align: middle;
+//                 border: 1px solid #c7c7c7;
+//                 border-radius: 4px;
+//                 padding-left: 5px;
+//                 padding-right: 5px;
+
+//                 .search-icon {
+//                     height: 24px;
+//                     width: 24px;
+//                 }
+//             }
+//         }
+//     }
+// }
