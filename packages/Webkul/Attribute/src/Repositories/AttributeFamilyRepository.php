@@ -3,6 +3,7 @@
 namespace Webkul\Attribute\Repositories;
  
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeGroupRepository;
 use Illuminate\Container\Container as App;
 
@@ -15,6 +16,13 @@ use Illuminate\Container\Container as App;
 class AttributeFamilyRepository extends Repository
 {
     /**
+     * AttributeRepository object
+     *
+     * @var array
+     */
+    protected $attribute;
+
+    /**
      * AttributeGroupRepository object
      *
      * @var array
@@ -24,11 +32,14 @@ class AttributeFamilyRepository extends Repository
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeGroupRepository  $attributeGroup
+     * @param  Webkul\Attribute\Repositories\AttributeRepository      $attribute
+     * @param  Webkul\Attribute\Repositories\AttributeGroupRepository $attributeGroup
      * @return void
      */
-    public function __construct(AttributeGroupRepository $attributeGroup, App $app)
+    public function __construct(AttributeRepository $attribute, AttributeGroupRepository $attributeGroup, App $app)
     {
+        $this->attribute = $attribute;
+
         $this->attributeGroup = $attributeGroup;
 
         parent::__construct($app);
@@ -50,16 +61,21 @@ class AttributeFamilyRepository extends Repository
      */
     public function create(array $data)
     {
+        $attributeGroups = isset($data['attribute_groups']) ? $data['attribute_groups'] : [];
+        unset($data['attribute_groups']);
         $family = $this->model->create($data);
 
-        if(isset($data['attribute_groups'])) {
-            foreach ($data['attribute_groups'] as $group) {
-                $attributeGroup = $family->attribute_groups()->create($group);
+        foreach ($attributeGroups as $group) {
+            $attributes = isset($group['attributes']) ? $group['attributes'] : [];
+            unset($group['attributes']);
+            $attributeGroup = $family->attribute_groups()->create($group);
 
-                if(isset($group['attributes'])) {
-                    foreach ($group['attributes'] as $attributeId) {
-                        $attributeGroup->attributes()->attach($attributeId);
-                    }
+            foreach ($attributes as $attribute) {
+                if(isset($attribute['id'])) {
+                    $attributeGroup->attributes()->attach($attribute['id']);
+                } else {
+                    $attributeModel = $this->attribute->findBy('code', $attribute['code']);
+                    $attributeGroup->attributes()->save($attributeModel, ['position' => $attribute['position']]);
                 }
             }
         }
@@ -87,28 +103,32 @@ class AttributeFamilyRepository extends Repository
                     $attributeGroup = $family->attribute_groups()->create($attributeGroupInputs);
 
                     if(isset($attributeGroupInputs['attributes'])) {
-                        foreach ($attributeGroupInputs['attributes'] as $attributeId) {
-                            $attributeGroup->attributes()->attach($attributeId);
+                        foreach ($attributeGroupInputs['attributes'] as $attribute) {
+                            $attributeGroup->attributes()->attach($attribute['id']);
                         }
                     }
                 } else {
-                    if(($index = $previousAttributeGroupIds->search($attributeGroupId)) >= 0) {
+                    if(is_numeric($index = $previousAttributeGroupIds->search($attributeGroupId))) {
                         $previousAttributeGroupIds->forget($index);
                     }
 
                     $attributeGroup = $this->attributeGroup->findOrFail($attributeGroupId);
                     $attributeGroup->update($attributeGroupInputs);
+                    
+                    $attributeIds = $attributeGroup->attributes()->get()->pluck('id');
 
-                    $attributeIds = $attributeGroup->attributes()->pluck('id');
-
-                    foreach ($attributeGroupInputs['attributes'] as $attributeId) {
-                        if(($index = $attributeIds->search($attributeId)) >= 0) {
-                            $attributeIds->forget($index);
+                    if(isset($attributeGroupInputs['attributes'])) {
+                        foreach ($attributeGroupInputs['attributes'] as $attribute) {
+                            if(is_numeric($index = $attributeIds->search($attribute['id']))) {
+                                $attributeIds->forget($index);
+                            } else {
+                                $attributeGroup->attributes()->attach($attribute['id']);
+                            }
                         }
                     }
 
-                    foreach ($attributeIds as $attributeId) {
-                        $attributeGroup->deattach($attributeId);
+                    if($attributeIds->count()) {
+                        $attributeGroup->detach($attributeIds);
                     }
                 }
             }

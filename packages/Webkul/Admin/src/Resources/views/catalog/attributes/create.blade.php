@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.catalog.attributes.store') }}">
+        <form method="POST" action="{{ route('admin.catalog.attributes.store') }}" @submit.prevent="onSubmit">
 
             <div class="page-header">
                 <div class="page-title">
@@ -38,6 +38,8 @@
                                 <select class="control" id="type" name="type">
                                     <option value="text">{{ __('admin::app.catalog.attributes.text') }}</option>
                                     <option value="textarea">{{ __('admin::app.catalog.attributes.textarea') }}</option>
+                                    <option value="price">{{ __('admin::app.catalog.attributes.price') }}</option>
+                                    <option value="boolean">{{ __('admin::app.catalog.attributes.boolean') }}</option>
                                     <option value="select">{{ __('admin::app.catalog.attributes.select') }}</option>
                                     <option value="multiselect">{{ __('admin::app.catalog.attributes.multiselect') }}</option>
                                     <option value="checkbox">{{ __('admin::app.catalog.attributes.checkbox') }}</option>
@@ -85,16 +87,16 @@
                             <div class="control-group">
                                 <label for="is_required">{{ __('admin::app.catalog.attributes.is_required') }}</label>
                                 <select class="control" id="is_required" name="is_required">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                     <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
                             </div>
 
                             <div class="control-group">
                                 <label for="is_unique">{{ __('admin::app.catalog.attributes.is_unique') }}</label>
                                 <select class="control" id="is_unique" name="is_unique">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                     <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
                             </div>
 
@@ -126,32 +128,32 @@
                             <div class="control-group">
                                 <label for="value_per_locale">{{ __('admin::app.catalog.attributes.value_per_locale') }}</label>
                                 <select class="control" id="value_per_locale" name="value_per_locale">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                     <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
                             </div>
                         
                             <div class="control-group">
                                 <label for="value_per_channel">{{ __('admin::app.catalog.attributes.value_per_channel') }}</label>
                                 <select class="control" id="value_per_channel" name="value_per_channel">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                     <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
                             </div>
                         
                             <div class="control-group">
                                 <label for="is_filterable">{{ __('admin::app.catalog.attributes.is_filterable') }}</label>
                                 <select class="control" id="is_filterable" name="is_filterable">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                     <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
                             </div>
                         
                             <div class="control-group">
                                 <label for="is_configurable">{{ __('admin::app.catalog.attributes.is_configurable') }}</label>
                                 <select class="control" id="is_configurable" name="is_configurable">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                     <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
                             </div>
 

@@ -39,7 +39,9 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('admin.menu.build', function($menu) {
             $menu->add('dashboard', 'Dashboard', 'admin.dashboard.index', 1, 'dashboard-icon');
 
-            $menu->add('catalog', 'Catalog', 'admin.catalog.categories.index', 3, 'catalog-icon');
+            $menu->add('catalog', 'Catalog', 'admin.catalog.products.index', 3, 'catalog-icon');
+
+            $menu->add('catalog.products', 'Products', 'admin.catalog.products.index', 1);
 
             $menu->add('catalog.categories', 'Categories', 'admin.catalog.categories.index', 2);
 

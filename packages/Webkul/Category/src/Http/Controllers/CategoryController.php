@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 
-
 /**
  * Catalog category controller
  *
@@ -59,7 +58,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = $this->category->getCategoryTree();
+        $categories = $this->category->getCategoryTree(null, ['id']);
 
         return view($this->_config['view'], compact('categories'));
     }
@@ -107,7 +106,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $locale = request()->get('channel_locale') ?: channel()->getDefaultChannelLocale()->id;
+        $locale = request()->get('channel_locale') ?: channel()->getDefaultChannelLocaleCode();
         $this->validate(request(), [
             $locale . '.slug' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
                 if (!$this->category->isSlugUnique($id, $value)) {

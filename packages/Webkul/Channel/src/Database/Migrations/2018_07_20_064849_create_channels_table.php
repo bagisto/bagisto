@@ -25,6 +25,14 @@ class CreateChannelsTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('channel_locales', function (Blueprint $table) {
+            $table->integer('channel_id')->unsigned();
+            $table->integer('locale_id')->unsigned();
+            $table->primary(['channel_id', 'locale_id']);
+            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
+            $table->foreign('locale_id')->references('id')->on('locales')->onDelete('cascade');
+        });
+
         Schema::create('channel_currencies', function (Blueprint $table) {
             $table->integer('channel_id')->unsigned();
             $table->integer('currency_id')->unsigned();

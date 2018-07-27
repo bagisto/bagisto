@@ -45,6 +45,15 @@ Route::group(['middleware' => ['web']], function () {
             // Catalog Routes
             Route::prefix('catalog')->group(function () {
 
+                // Catalog Product Routes
+                Route::get('/products', 'Webkul\Product\Http\Controllers\ProductController@index')->defaults('_config', [
+                    'view' => 'admin::catalog.products.index'
+                ])->name('admin.catalog.products.index');
+
+                Route::get('/products/create', 'Webkul\Product\Http\Controllers\ProductController@create')->defaults('_config', [
+                    'view' => 'admin::catalog.products.create'
+                ])->name('admin.catalog.products.create');
+
                 // Catalog Category Routes
                 Route::get('/categories', 'Webkul\Category\Http\Controllers\CategoryController@index')->defaults('_config', [
                     'view' => 'admin::catalog.categories.index'

@@ -14,10 +14,10 @@ class Category extends TranslatableModel
     protected $fillable = ['position', 'status', 'parent_id'];
 
     /**
-     * @return string
+     * @return boolean
      */
-    public function getLocaleKey()
+    protected function isChannelBased()
     {
-        return 'locale_id';
+        return true;
     }
 }

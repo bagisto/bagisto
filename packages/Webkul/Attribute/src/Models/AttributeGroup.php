@@ -9,13 +9,15 @@ class AttributeGroup extends Model
 {
     public $timestamps = false;
     
-    protected $fillable = ['name', 'position'];
+    protected $fillable = ['name', 'position', 'is_user_defined'];
 
     /**
      * Get the attributes that owns the attribute group.
      */
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'attribute_group_mappings');
+        return $this->belongsToMany(Attribute::class, 'attribute_group_mappings')
+            ->withPivot('position')
+            ->orderBy('pivot_position', 'asc');
     }
 }

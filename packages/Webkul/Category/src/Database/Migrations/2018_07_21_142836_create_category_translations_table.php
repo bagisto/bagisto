@@ -22,11 +22,9 @@ class CreateCategoryTranslationsTable extends Migration
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
             $table->integer('category_id')->unsigned();
-            $table->integer('locale_id')->unsigned();
-            $table->unique(['category_id', 'locale_id']);
-            $table->unique(['category_id', 'slug', 'locale_id']);
+            $table->string('locale');
+            $table->unique(['category_id', 'slug', 'locale']);
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('locale_id')->references('id')->on('channel_locales')->onDelete('cascade');
         });
     }
 

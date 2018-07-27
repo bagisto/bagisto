@@ -63,6 +63,13 @@ return [
         ]
     ],
     'catalog' => [
+        'products' => [
+            'products' => 'products',
+            'add-product-btn-title' => 'Add Product',
+            'add-title' => 'Add Product',
+            'edit-title' => 'Edit Product',
+            'save-btn-title' => 'Save Product',
+        ],
         'attributes' => [
             'add-title' => 'Add Attribute',
             'edit-title' => 'Edit Attribute',
@@ -72,6 +79,8 @@ return [
             'type' => 'Attribute Type',
             'text' => 'Text',
             'textarea' => 'Textarea',
+            'price' => 'Price',
+            'boolean' => 'Boolean',
             'select' => 'Select',
             'multiselect' => 'Multiselect',
             'checkbox' => 'Checkbox',
@@ -114,7 +123,7 @@ return [
             'position' => 'Position',
             'attribute-code' => 'Code',
             'type' => 'Type',
-            'add-attribute-title' => 'Add Attribute',
+            'add-attribute-title' => 'Add Attributes',
             'search' => 'Search',
             'group-exist-error' => 'Group with same name already exists.'
         ],

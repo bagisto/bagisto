@@ -3,7 +3,6 @@
 namespace Webkul\Channel\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Channel\Models\ChannelLocale;
 use Webkul\Core\Models\Locale;
 use Webkul\Core\Models\Currency;
 
@@ -14,9 +13,9 @@ class Channel extends Model
     /**
      * Get the channel locales.
      */
-    public function channel_locales()
+    public function locales()
     {
-        return $this->hasMany(ChannelLocale::class);
+        return $this->belongsToMany(Locale::class, 'channel_locales');
     }
 
     /**

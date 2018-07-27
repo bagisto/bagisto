@@ -25,6 +25,6 @@ class AttributeFamily extends Model
      */
     public function attribute_groups()
     {
-        return $this->hasMany(AttributeGroup::class);
+        return $this->hasMany(AttributeGroup::class)->orderBy('position');
     }
 }

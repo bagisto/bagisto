@@ -61,9 +61,11 @@ class AttributeFamilyController extends Controller
      */
     public function create(Attribute $attribute)
     {
+        $attributeFamily = $this->attributeFamily->findBy('code', 'default', ['*'], ['attribute_groups.attributes']);
+        
         $attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
 
-        return view($this->_config['view'], compact('attributes'));
+        return view($this->_config['view'], compact('attributes', 'attributeFamily'));
     }
 
     /**

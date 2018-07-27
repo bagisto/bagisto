@@ -1,19 +1,18 @@
 <?php
 
-namespace Webkul\Channel\Http\Controllers;
+namespace Webkul\Product\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Channel\Repositories\ChannelRepository as Channel;
-
+use Webkul\Product\Repositories\ProductRepository as Product;
 
 /**
- * Channel controller
+ * Product controller
  *
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class ChannelController extends Controller
+class ProductController extends Controller
 {
     /**
      * Contains route related configuration
@@ -23,21 +22,21 @@ class ChannelController extends Controller
     protected $_config;
     
     /**
-     * ChannelRepository object
+     * ProductRepository object
      *
      * @var array
      */
-    protected $channel;
+    protected $product;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Channel\Repositories\ChannelRepository  $channel
+     * @param  Webkul\Product\Repositories\ProductRepository  $product
      * @return void
      */
-    public function __construct(Channel $channel)
+    public function __construct(Product $product)
     {
-        $this->channel = $channel;
+        $this->product = $product;
 
         $this->_config = request('_config');
     }
@@ -70,18 +69,12 @@ class ChannelController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:channels,code', new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required',
-            'locales' => 'required|array|min:1',
-            'default_locale' => 'required',
-            'currencies' => 'required|array|min:1',
-            'base_currency' => 'required'
+            'name' => 'required'
         ]);
 
+        $this->product->create(request()->all());
 
-        $this->channel->create(request()->all());
-
-        session()->flash('success', 'Channel created successfully.');
+        session()->flash('success', 'Product created successfully.');
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -94,9 +87,9 @@ class ChannelController extends Controller
      */
     public function edit($id)
     {
-        $channel = $this->channel->findOrFail($id, ['*'], ['locales', 'currencies']);
+        $product = $this->product->findOrFail($id);
 
-        return view($this->_config['view'], compact('channel'));
+        return view($this->_config['view'], compact('product'));
     }
 
     /**
@@ -109,17 +102,12 @@ class ChannelController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required',
-            'locales' => 'required|array|min:1',
-            'default_locale' => 'required',
-            'currencies' => 'required|array|min:1',
-            'base_currency' => 'required'
         ]);
 
-        $this->channel->update(request()->all(), $id);
+        $this->product->update(request()->all(), $id);
 
-        session()->flash('success', 'Channel updated successfully.');
+        session()->flash('success', 'Product updated successfully.');
 
         return redirect()->route($this->_config['redirect']);
     }
