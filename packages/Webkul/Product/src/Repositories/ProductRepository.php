@@ -1,16 +1,16 @@
 <?php 
 
-namespace Webkul\Channel\Repositories;
+namespace Webkul\Product\Repositories;
  
 use Webkul\Core\Eloquent\Repository;
 
 /**
- * Channel Locale Reposotory
+ * Product Reposotory
  *
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class ChannelLocaleRepository extends Repository
+class ProductRepository extends Repository
 {
     /**
      * Specify Model class name
@@ -19,6 +19,6 @@ class ChannelLocaleRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Channel\Models\ChannelLocale';
+        return 'Webkul\Product\Models\Product';
     }
 }

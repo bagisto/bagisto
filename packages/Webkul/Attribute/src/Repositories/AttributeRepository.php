@@ -50,10 +50,12 @@ class AttributeRepository extends Repository
      */
     public function create(array $data)
     {
+        $options = isset($data['options']) ? $data['options'] : [];
+        unset($data['options']);
         $attribute = $this->model->create($data);
 
-        if(in_array($attribute->code, ['select', 'multiselect', 'checkbox']) && isset($data['options'])) {
-            foreach ($data['options'] as $key => $option) {
+        if(in_array($attribute->type, ['select', 'multiselect', 'checkbox']) && count($options)) {
+            foreach ($options as $option) {
                 $attribute->options()->create($option);
             }
         }
@@ -81,7 +83,7 @@ class AttributeRepository extends Repository
                     if (str_contains($optionId, 'option_')) {
                         $attribute->options()->create($optionInputs);
                     } else {
-                        if(($index = $previousOptionIds->search($optionId)) >= 0) {
+                        if(is_numeric($index = $previousOptionIds->search($optionId))) {
                             $previousOptionIds->forget($index);
                         }
 

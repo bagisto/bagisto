@@ -7,7 +7,7 @@
 @section('content')
     <div class="content">
         
-        <form method="POST" action="{{ route('admin.catalog.categories.store') }}">
+        <form method="POST" action="{{ route('admin.catalog.categories.store') }}" @submit.prevent="onSubmit">
 
             <div class="page-header">
                 <div class="page-title">
@@ -69,6 +69,7 @@
                         </div>
                     </accordian>
 
+                    @if($categories->count())
                     <accordian :title="'{{ __('admin::app.catalog.categories.parent-category') }}'" :active="true">
                         <div slot="body">
 
@@ -76,6 +77,7 @@
 
                         </div>
                     </accordian>
+                    @endif
 
                     <accordian :title="'{{ __('admin::app.catalog.categories.seo') }}'" :active="true">
                         <div slot="body">

@@ -4,7 +4,6 @@ namespace Webkul\Category\Repositories;
  
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Category\Models\Category;
-use Webkul\Channel\Repositories\ChannelLocaleRepository;
 use Illuminate\Container\Container as App;
 use Webkul\Category\Models\CategoryTranslation;
 
@@ -16,24 +15,13 @@ use Webkul\Category\Models\CategoryTranslation;
  */
 class CategoryRepository extends Repository
 {
- 
-    /**
-     * ChannelLocaleRepository object
-     *
-     * @var array
-     */
-    protected $locale;
-
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\ChannelLocaleRepository  $locale
      * @return void
      */
-    public function __construct(ChannelLocaleRepository $locale, App $app)
+    public function __construct(App $app)
     {
-        $this->locale = $locale;
-
         parent::__construct($app);
     }
 
@@ -56,10 +44,14 @@ class CategoryRepository extends Repository
         if(isset($data['locale']) && $data['locale'] == 'all') {
             $model = app()->make($this->model());
             
-            foreach($this->locale->all() as $locale) {
-                foreach ($model->translatedAttributes as $attribute) {
-                    if(isset($data[$attribute])) {
-                        $data[$locale->id][$attribute] = $data[$attribute];
+            $channels = channel()->getChannelWithLocales();
+
+            foreach($channels as $channel) {
+                foreach($channel->locales as $locale) {
+                    foreach ($model->translatedAttributes as $attribute) {
+                        if(isset($data[$attribute])) {
+                            $data[$channel->code . '.' . $locale->code][$attribute] = $data[$attribute];
+                        }
                     }
                 }
             }

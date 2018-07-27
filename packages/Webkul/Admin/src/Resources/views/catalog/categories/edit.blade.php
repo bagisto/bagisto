@@ -6,9 +6,9 @@
 
 @section('content')
     <div class="content">
-        <?php $locale = request()->get('channel_locale') ?: channel()->getDefaultChannelLocale()->id; ?>
+        <?php $locale = request()->get('channel_locale') ?: channel()->getDefaultChannelLocaleCode(); ?>
         
-        <form method="POST" action="">
+        <form method="POST" action="" @submit.prevent="onSubmit">
 
             <div class="page-header">
                 <div class="page-title">
@@ -16,13 +16,13 @@
 
                     <div class="control-group">
                         <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
-                            @foreach(Webkul\Channel\Models\Channel::all() as $channel)
+                            @foreach(channel()->getChannelWithLocales() as $channel)
                             
                                 <optgroup label="{{ $channel->name }}">
 
-                                    @foreach($channel->channel_locales as $channelLocale)
-                                        <option value="{{ route('admin.catalog.categories.update', $category->id) . '?channel_locale=' . $channelLocale->id }}" {{ $channelLocale->id == $locale ? 'selected' : '' }}>
-                                            {{ $channelLocale->locale->name }}
+                                    @foreach($channel->locales as $channelLocale)
+                                        <option value="{{ route('admin.catalog.categories.update', $category->id) . '?channel_locale=' . $channel->code . '-' . $channelLocale->code }}" {{ ($channel->code . '-' . $channelLocale->code) == $locale ? 'selected' : '' }}>
+                                            {{ $channelLocale->name }}
                                         </option>
                                     @endforeach
                                 
@@ -88,6 +88,7 @@
                         </div>
                     </accordian>
 
+                    @if($categories->count())
                     <accordian :title="'{{ __('admin::app.catalog.categories.parent-category') }}'" :active="true">
                         <div slot="body">
 
@@ -95,6 +96,7 @@
 
                         </div>
                     </accordian>
+                    @endif
 
                     <accordian :title="'{{ __('admin::app.catalog.categories.seo') }}'" :active="true">
                         <div slot="body">

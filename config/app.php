@@ -171,7 +171,8 @@ return [
         Webkul\Attribute\Providers\AttributeServiceProvider::class,
         Webkul\Core\Providers\CoreServiceProvider::class,
         Webkul\Channel\Providers\ChannelServiceProvider::class,
-        Webkul\Inventory\Providers\InventoryServiceProvider::class
+        Webkul\Inventory\Providers\InventoryServiceProvider::class,
+        Webkul\Product\Providers\ProductServiceProvider::class
     ],
 
     /*

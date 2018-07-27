@@ -5,7 +5,6 @@ namespace Webkul\Core\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Dimsav\Translatable\Translatable;
 use Webkul\Core\Models\Locale;
-use Webkul\Channel\Models\ChannelLocale;
 
 class TranslatableModel extends Model
 {
@@ -18,12 +17,12 @@ class TranslatableModel extends Model
      */
     protected function isKeyALocale($key)
     {
-        if(is_numeric($key)) {
-            if(ChannelLocale::find($key))
+        $chunks = explode('-', $key);
+        if(count($chunks) > 1) {
+            if(Locale::where('code', '=', end($chunks))->first())
                 return true;
-        } else {
-            if(Locale::where('code', '=', $key)->first())
-                return true;
+        } elseif(Locale::where('code', '=', $key)->first()) {
+            return true;
         }
         
         return false;
@@ -34,6 +33,31 @@ class TranslatableModel extends Model
      */
     protected function locale()
     {
-        return channel()->getDefaultChannelLocale()->id;
+        if($this->isChannelBased()) {
+            return channel()->getDefaultChannelLocaleCode();
+        } else {
+            if ($this->defaultLocale) {
+                return $this->defaultLocale;
+            }
+
+            return config('translatable.locale')
+                ?: app()->make('translator')->getLocale();
+        }
+    }
+
+    /**
+     * @return boolean
+     */
+    protected function isChannelBased()
+    {
+        return false;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getLocaleSeparator()
+    {
+        return config('translatable.locale_separator', '%');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Webkul\Attribute\Providers;
+namespace Webkul\Product\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
 
-class AttributeServiceProvider extends ServiceProvider
+class ProductServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.

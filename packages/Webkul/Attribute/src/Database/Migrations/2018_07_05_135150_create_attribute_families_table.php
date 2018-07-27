@@ -18,10 +18,7 @@ class CreateAttributeFamiliesTable extends Migration
             $table->string('code');
             $table->string('name');
             $table->boolean('status')->default(0);
-        });
-
-        Schema::table('attribute_groups', function($table) {
-            $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onDelete('cascade');
+            $table->boolean('is_user_defined')->default(1);
         });
     }
 
