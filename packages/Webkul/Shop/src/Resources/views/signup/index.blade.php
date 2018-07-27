@@ -1,4 +1,4 @@
-@extends('customer::layouts.master')
+@extends('shop::layouts.master')
 @section('content-wrapper')
 <div class="content">
     <div class="sign-up-text">
