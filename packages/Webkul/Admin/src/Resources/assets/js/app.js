@@ -23,23 +23,51 @@ $(document).ready(function() {
         methods: {
             onSubmit: function(e) {
                 this.$validator.validateAll().then(result => {
+$(document).ready(function () {
+    Vue.config.ignoredElements = [
+        'option-wrapper',
+        'group-form',
+        'group-list'
+    ];
+
+    var app = new Vue({
+        el: '#app',
+
+        data: {
+            modalIds: {}
+        },
+
+        mounted () {
+            this.addServerErrors()
+            this.addFlashMessages()
+        },
+
+        methods: {
+            onSubmit (e) {
+                this.$validator.validateAll().then((result) => {
                     if (result) {
                         e.target.submit();
                     }
                 });
             },
 
-            addServerErrors: function() {
+            addServerErrors () {
                 var scope = null;
                 for (var key in serverErrors) {
                     const field = this.$validator.fields.find({
                         name: key,
                         scope: scope
                     });
+                    var inputName = key;
+                    if(key.indexOf('.') !== -1) {
+                        inputName = key.replace(".", "[") + ']';
+                    }
+
+                    const field = this.$validator.fields.find({ name: inputName, scope: scope });
                     if (field) {
                         this.$validator.errors.add({
                             id: field.id,
-                            field: key,
+                            field: inputName,
                             msg: serverErrors[key][0],
                             scope: scope
                         });
@@ -53,6 +81,10 @@ $(document).ready(function() {
                 flashMessages.forEach(function(flash) {
                     flashes.addFlash(flash);
                 }, this);
+            },
+
+            showModal (id) {
+                this.$set(this.modalIds, id, true);
             }
         }
     });

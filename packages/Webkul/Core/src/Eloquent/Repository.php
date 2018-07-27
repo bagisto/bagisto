@@ -30,7 +30,8 @@ abstract class Repository implements RepositoryInterface {
      * @param App $app
      * @throws \Webkul\Core\Exceptions\RepositoryException
      */
-    public function __construct(App $app) {
+    public function __construct(App $app)
+    {
         $this->app = $app;
 
         $this->makeModel();
@@ -47,25 +48,28 @@ abstract class Repository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function all($columns = ['*']) {
-        return $this->model->get($columns);
+    public function all($columns = ['*'], $with = [])
+    {
+        return $this->resetScope()->model->with($with)->get($columns);
     }
-
+ 
     /**
      * @param int $perPage
      * @param array $columns
      * @return mixed
      */
-    public function paginate($perPage = 1, $columns = ['*']) {
-        return $this->model->paginate($perPage, $columns);
+    public function paginate($perPage = 1, $columns = ['*'])
+    {
+        return $this->resetScope()->model->paginate($perPage, $columns);
     }
 
     /**
      * @param array $data
      * @return mixed
      */
-    public function create(array $data) {
-        return $this->model->create($data);
+    public function create(array $data)
+    {
+        return $this->resetScope()->model->create($data);
     }
 
     /**
@@ -74,16 +78,28 @@ abstract class Repository implements RepositoryInterface {
      * @param string $attribute
      * @return mixed
      */
-    public function update(array $data, $id, $attribute="id") {
-        return $this->model->where($attribute, '=', $id)->update($data);
+    public function update(array $data, $id, $attribute = "id")
+    {
+        return $this->resetScope()->model->where($attribute, '=', $id)->first()->update($data);
     }
 
     /**
      * @param $id
      * @return mixed
      */
-    public function delete($id) {
-        return $this->model->destroy($id);
+    public function delete($id)
+    {
+        return $this->resetScope()->find($id)->delete();
+    }
+
+    /**
+     * @param $id
+     * @param array $columns->with($with)
+     * @return mixed
+     */
+    public function find($id, $columns = ['*'], $with = [])
+    {
+        return $this->resetScope()->model->with($with)->find($id, $columns);
     }
 
     /**
@@ -91,8 +107,9 @@ abstract class Repository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function find($id, $columns = ['*']) {
-        return $this->model->find($id, $columns);
+    public function findOrFail($id, $columns = ['*'], $with = [])
+    {
+        return $this->resetScope()->model->with($with)->findOrFail($id, $columns);
     }
 
     /**
@@ -101,20 +118,31 @@ abstract class Repository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function findBy($attribute, $value, $columns = ['*']) {
-        return $this->model->where($attribute, '=', $value)->first($columns);
+    public function findBy($attribute, $value, $columns = ['*'], $with = [])
+    {
+        return $this->resetScope()->model->with($with)->where($attribute, '=', $value)->first($columns);
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Builder
      * @throws RepositoryException
      */
-    public function makeModel() {
+    public function makeModel()
+    {
         $model = $this->app->make($this->model());
 
         if (!$model instanceof Model)
             throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
 
         return $this->model = $model->newQuery();
+    }
+    
+    /**
+     * @return $this
+     */
+    public function resetScope() {
+        $this->makeModel();
+
+        return $this;
     }
 }

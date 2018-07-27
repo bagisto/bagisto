@@ -54,5 +54,6 @@
 
         @yield('javascript')
 
+        <div class="modal-overlay"></div>
     </body>
 </html>

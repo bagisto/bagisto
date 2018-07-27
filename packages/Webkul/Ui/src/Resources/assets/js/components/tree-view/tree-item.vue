@@ -6,6 +6,10 @@
         inheritAttrs: false,
 
         props: {
+            inputType: String,
+
+            nameField: String,
+
             idField: String,
 
             captionField: String,
@@ -99,44 +103,57 @@
             },
 
             generateRoot () {
-                return this.$createElement('tree-checkbox', {
-                    props: {
-                        id: this.items[this.idField],
-                        label: this.caption,
-                        modelValue: this.items[this.valueField],
-                        inputValue: this.hasChildren ? this.isSomeChildrenSelected : this.value,
-                        value: this.hasChildren ? this.isAllChildrenSelected : this.items
-                    },
-                    on: {
-                        change: selection => {
-                            if(this.hasChildren) {
-                                if(this.isAllChildrenSelected) {
-                                    this.allChildren.forEach(leaf => {
-                                        let index = this.value.indexOf(leaf)
-                                        this.value.splice(index, 1)
-                                    })
-                                } else {
-                                    this.allChildren.forEach(leaf => {
-                                        let exists = false;
-                                        this.value.forEach(item => {
-                                            if(item['key'] == leaf['key']) {
-                                                exists = true;
+                if(this.inputType == 'checkbox') {
+                    return this.$createElement('tree-checkbox', {
+                        props: {
+                            id: this.items[this.idField],
+                            label: this.caption,
+                            nameField: this.nameField,
+                            modelValue: this.items[this.valueField],
+                            inputValue: this.hasChildren ? this.isSomeChildrenSelected : this.value,
+                            value: this.hasChildren ? this.isAllChildrenSelected : this.items
+                        },
+                        on: {
+                            change: selection => {
+                                if(this.hasChildren) {
+                                    if(this.isAllChildrenSelected) {
+                                        this.allChildren.forEach(leaf => {
+                                            let index = this.value.indexOf(leaf)
+                                            this.value.splice(index, 1)
+                                        })
+                                    } else {
+                                        this.allChildren.forEach(leaf => {
+                                            let exists = false;
+                                            this.value.forEach(item => {
+                                                if(item['key'] == leaf['key']) {
+                                                    exists = true;
+                                                }
+                                            })
+
+                                            if(!exists) {
+                                                this.value.push(leaf);
                                             }
                                         })
+                                    }
 
-                                        if(!exists) {
-                                            this.value.push(leaf);
-                                        }
-                                    })
+                                    this.$emit('input', this.value)
+                                } else {
+                                    this.$emit('input', selection);
                                 }
-
-                                this.$emit('input', this.value)
-                            } else {
-                                this.$emit('input', selection);
                             }
                         }
-                    }
-                })
+                    })
+                } else if(this.inputType == 'radio') {
+                    return this.$createElement('tree-radio', {
+                        props: {
+                            id: this.items[this.idField],
+                            label: this.caption,
+                            nameField: this.nameField,
+                            modelValue: this.items[this.valueField],
+                            value: this.savedValues
+                        }
+                    })
+                }
             },
 
             generateChild (child) {
@@ -150,10 +167,12 @@
                         items: child,
                         value: this.value,
                         savedValues: this.savedValues,
+                        nameField: this.nameField,
+                        inputType: this.inputType,
                         captionField: this.captionField,
                         childrenField: this.childrenField,
                         valueField: this.valueField,
-                        idField: this.idField,
+                        idField: this.idField
                     }
                 })
             },
@@ -184,6 +203,12 @@
                         }
                     }
                 })
+            },
+
+            generateFolderIcon () {
+                return this.$createElement('i', {
+                    class: ['icon', 'folder-icon']
+                })
             }
         },
 
@@ -195,7 +220,7 @@
                         this.hasChildren ? 'has-children' : ''
                     ]
                 }, [
-                    this.generateIcon(), this.generateRoot(), ... this.generateChildren()
+                    this.generateIcon(), this.generateFolderIcon(), this.generateRoot(), ... this.generateChildren()
                 ]
             )
         }

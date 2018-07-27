@@ -1,10 +1,16 @@
 <template>
     <div class="accordian" :class="[isActive ? 'active' : '', className]" :id="id">
         <div class="accordian-header" @click="toggleAccordion()">
-            {{ title }}
-            <i class="icon" :class="iconClass"></i>
+            <slot name="header">
+                {{ title }}
+                <i class="icon" :class="iconClass"></i>
+            </slot>
         </div>
-        <slot></slot>
+        
+        <div class="accordian-content">
+            <slot name="body">
+            </slot>
+        </div>
     </div>
 </template>
 <script>

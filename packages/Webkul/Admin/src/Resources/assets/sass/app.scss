@@ -118,7 +118,6 @@ body {
     right: 0;
     left: 0;
     bottom: 0px;
-    z-index: 1;
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -154,7 +153,7 @@ body {
 
     .content-wrapper {
         padding: 25px 25px 25px 305px;
-        overflow-y: auto;
+        // overflow-y: auto;
     }
 
     .content {
@@ -165,14 +164,34 @@ body {
         }
 
         .page-header {
-            display: block;
+            display: inline-block;
+            margin-bottom: 20px;
+            width: 100%;
 
             .page-title {
                 float: left;
+
+                h1 {
+                    margin-bottom: 0;
+                    vertical-align: middle;
+                    display: inline-block;
+                }
             }
 
             .page-action {
                 float: right;
+            }
+
+            .control-group {
+                width: 180px;
+                display: inline-block;
+                margin-bottom: 0;
+                margin-left: 20px;
+            }
+
+            .control {
+                width: 100%;
+                margin: 0;
             }
         }
 

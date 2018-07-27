@@ -1,16 +1,21 @@
 @extends('admin::layouts.content')
 
+@section('page_title')
+    {{ __('admin::app.users.users.edit-user-title') }}
+@stop
+
+
 @section('content')
     <div class="content">
         <form method="POST" action="{{ route('admin.users.update', $user->id) }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('Edit User') }}</h1>
+                    <h1>{{ __('admin::app.users.users.edit-user-title') }}</h1>
                 </div>
 
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('Save User') }}
+                        {{ __('admin::app.users.users.save-btn-title') }}
                     </button>
                 </div>
             </div>
@@ -20,42 +25,42 @@
                     @csrf()
                     <input name="_method" type="hidden" value="PUT">
 
-                    <accordian :title="'{{ __('General') }}'" :active="true">
-                        <div class="accordian-content">
+                    <accordian :title="'{{ __('admin::app.users.users.general') }}'" :active="true">
+                        <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name">{{ __('Name') }}</label>
+                                <label for="name" class="required">{{ __('admin::app.users.users.name') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="email" name="name" value="{{ $user->name }}"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                                <label for="email">{{ __('Email') }}</label>
+                                <label for="email">{{ __('admin::app.users.users.email') }}</label>
                                 <input type="text" v-validate="'required|email'" class="control" id="email" name="email" value="{{ $user->email }}"/>
                                 <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
                             </div>
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('Password') }}'" :active="true">
-                        <div class="accordian-content">
+                    <accordian :title="'{{ __('admin::app.users.users.password') }}'" :active="true">
+                        <div slot="body">
                             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
-                                <label for="password">{{ __('Password') }}</label>
+                                <label for="password">{{ __('admin::app.users.users.password') }}</label>
                                 <input type="password" v-validate="'min:6|max:18'" class="control" id="password" name="password"/>
                                 <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
-                                <label for="password_confirmation">{{ __('Confirm Password') }}</label>
+                                <label for="password_confirmation">{{ __('admin::app.users.users.confirm-password') }}</label>
                                 <input type="password" v-validate="'min:6|max:18|confirmed:password'" class="control" id="password_confirmation" name="password_confirmation"/>
                                 <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
                             </div>
                         </div>
                     </accordian>
 
-                    <accordian :title="'{{ __('Status and Role') }}'" :active="true">
-                        <div class="accordian-content">
+                    <accordian :title="'{{ __('admin::app.users.users.status-and-role') }}'" :active="true">
+                        <div slot="body">
                             <div class="control-group" :class="[errors.has('role_id') ? 'has-error' : '']">
-                                <label for="role">{{ __('Role') }}</label>
+                                <label for="role" class="required">{{ __('admin::app.users.users.role') }}</label>
                                 <select v-validate="'required'" class="control" name="role_id">
                                     @foreach($roles as $role)
                                         <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
@@ -65,11 +70,11 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="status">{{ __('Status') }}</label>
+                                <label for="status">{{ __('admin::app.users.users.status') }}</label>
                                 <span class="checkbox">
                                     <input type="checkbox" id="status" name="status" value="{{ $user->status }}" {{ $user->status ? 'checked' : '' }}>
                                     <label class="checkbox-view" for="status"></label>
-                                    {{ __('Account is Active') }}
+                                    {{ __('admin::app.users.users.account-is-active') }}
                                 </span>
                             </div>
                         </div>

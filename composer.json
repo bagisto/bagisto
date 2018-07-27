@@ -11,6 +11,7 @@
         "php": "^7.1.3",
         "dimsav/laravel-translatable": "^9.0",
         "fideloper/proxy": "^4.0",
+        "kalnoy/nestedset": "^4.3",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^3.2",
@@ -30,7 +31,10 @@
         "webkul/laravel-ui": "self.version",
         "webkul/laravel-core": "self.version",
         "webkul/laravel-attribute": "self.version",
-        "webkul/laravel-customer": "self.version"
+        "webkul/laravel-customer": "self.version",
+        "webkul/laravel-category": "self.version",
+        "webkul/laravel-channel": "self.version",
+        "webkul/laravel-product": "self.version"
     },
     "autoload": {
         "classmap": [
@@ -42,10 +46,14 @@
             "Webkul\\User\\": "packages/Webkul/User/src",
             "Webkul\\Admin\\": "packages/Webkul/Admin/src",
             "Webkul\\Ui\\": "packages/Webkul/Ui/src",
+            "Webkul\\Category\\": "packages/Webkul/Category/src",
             "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
             "Webkul\\Shop\\": "packages/Webkul/Shop/src",
             "Webkul\\Core\\": "packages/Webkul/Core/src",
-            "Webkul\\Customer\\": "packages/Webkul/Customer/src"
+            "Webkul\\Customer\\": "packages/Webkul/Customer/src",
+            "Webkul\\Channel\\": "packages/Webkul/Channel/src",
+            "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
+            "Webkul\\Product\\": "packages/Webkul/Product/src"
         }
     },
     "autoload-dev": {

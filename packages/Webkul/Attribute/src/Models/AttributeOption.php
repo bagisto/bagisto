@@ -2,12 +2,23 @@
 
 namespace Webkul\Attribute\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Webkul\Core\Eloquent\TranslatableModel;
 use Dimsav\Translatable\Translatable;
+use Webkul\Attribute\Models\Attribute;
 
-class AttributeOption extends Model
+class AttributeOption extends TranslatableModel
 {
-    use Translatable;
+    public $timestamps = false;
     
     public $translatedAttributes = ['label'];
+
+    protected $fillable = ['sort_order'];
+
+    /**
+     * Get the attribute that owns the attribute option.
+     */
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
 }

@@ -10,7 +10,7 @@
                         {{-- <div class="selected-items"></div> --}}
                         @foreach($massoperations as $massoperation) {{--
                         <h3>{{ $massoperation['label'] }}</h3> --}} @if($massoperation['type'] == "button")
-                        <form @if(strtoupper($massoperation[ 'method'])=="GET" || strtoupper($massoperation[ 'method'])=="POST" ) method="{{ strtoupper($massoperation['method']) }}"
+                        <form onsubmit="return confirm('Are You Sure?');" @if(strtoupper($massoperation[ 'method'])=="GET" || strtoupper($massoperation[ 'method'])=="POST" ) method="{{ strtoupper($massoperation['method']) }}"
                             @else method="POST" @endif action="{{ $massoperation['route'] }}">
                             {{ csrf_field() }} @if(strtoupper($massoperation['method'])!= "GET" && strtoupper($massoperation['method'])!= "POST") @method($massoperation['method'])
                             @endif
@@ -43,7 +43,7 @@
                 </th>
                 @foreach ($columns as $column)
                     @if($column->sortable == "true")
-                    <th class="labelled-col grid_head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}" data-column-sort="asc"> {!! $column->sorting() !!}<span class="icon sort-down-icon"></span>
+                    <th class="labelled-col grid_head sort-head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}" data-column-sort="asc">{!! $column->sorting() !!}<span class="icon sort-down-icon"></span>
                     </th>
                     @else
                     <th class="labelled-col grid_head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>

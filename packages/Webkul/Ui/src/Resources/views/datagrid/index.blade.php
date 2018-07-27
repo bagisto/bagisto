@@ -49,6 +49,7 @@
 
                 $('select.filter-column-select').change(function() {
                     typeValue = $('select.filter-column-select').find(':selected').data('type');
+                    col_label = $('select.filter-column-select').find(':selected').data('label');
                     selectedColumn = $('select.filter-column-select').find(':selected').val();
                     if(typeValue == 'string') {
                         //default behaviour for strings
@@ -105,24 +106,23 @@
                         if(typeValue == 'number'){
                             var conditionUsed = $('.filter-condition-dropdown-number').find(':selected').val();
                             var response = $('.response-number').val();
-                            formURL(selectedColumn,conditionUsed,response,params);
+                            formURL(selectedColumn,conditionUsed,response,params,col_label);
                         }
                         if(typeValue == 'string'){
                             var conditionUsed = $('.filter-condition-dropdown-string').find(':selected').val();
                             var response = $('.response-string').val();
-                            formURL(selectedColumn,conditionUsed,response,params);
+                            formURL(selectedColumn,conditionUsed,response,params,col_label);
 
                         }
                         if(typeValue == 'datetime'){
                             var conditionUsed = $('.filter-condition-dropdown-datetime').find(':selected').val();
                             var response = $('.response-datetime').val();
-                            formURL(selectedColumn,conditionUsed,response,params);
+                            formURL(selectedColumn,conditionUsed,response,params,col_label);
                         }
-                        if(typeValue == 'boolean'){
+                        if(typeValue == 'boolean'){ //use select dropdown with two values true and false
                             console.log('boolean');
                         }
                     });
-
                 });
 
                 //remove the filter and from clicking on cross icon on tag
@@ -259,22 +259,17 @@
                 var filterRepeat = 0;
                 if(allFilters1.length!=0)
                 for(var i = 0;i<allFilters1.length;i++) {
-                    var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ allFilters1[i].column +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+                    col_label_tag = $('li[data-name="'+allFilters1[i].column+'"]').text();
+                    var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
                     $('.filter-row-two').append(filter_card);
                 }
             }
 
             //obselete or can be used for mediation control if necessary
-            function formURL(column, condition, response, urlparams) {
+            function formURL(column, condition, response, urlparams,clabel) {
                 /*validate the conditions here and do the replacements and
                 push here in the all filters array*/
                 var obj1 = {};
-                /*
-                    1. do check for repeated filter and just return false
-                    2. do check for repeated sorting and toggle rempve it.
-                    3. do check for search and replace the search value with
-                    the new one
-                */
 
                 if(allFilters1.length>0) {
                     //case for repeated filter
@@ -285,7 +280,6 @@
                             if(allFilters1[j].column==column && allFilters1[j].cond==condition && allFilters1[j].val==response)
                             {
                                 filter_repeated = 1;
-                                alert('Filter is repeated');
                                 return false;
                             }
                         }
@@ -293,34 +287,54 @@
                             obj1.column = column;
                             obj1.cond = condition;
                             obj1.val = response;
+                            obj1.label = clabel;
                             allFilters1.push(obj1);
                             obj1 = {};
                             makeURL();
                         }
                     }
                     if(column == "sort") {
-                        alert('sort found');
                         sort_exists = 0;
                         for(j=0;j<allFilters1.length;j++) {
-                            console.log(allFilters1[j].column);
                             if(allFilters1[j].column == "sort") {
 
-                                allFilters1[j].column = column;
-                                allFilters1[j].cond = condition;
-                                allFilters1[j].val = response;
-                                makeURL();
+                                if(allFilters1[j].column==column && allFilters1[j].cond==condition && allFilters1[j].val==response){
+                                    if(response=="asc"){
+                                        allFilters1[j].column = column;
+                                        allFilters1[j].cond = condition;
+                                        allFilters1[j].val = "desc";
+                                        allFilters1[j].label = clabel;
+                                        makeURL();
+                                    }
+                                    else {
+                                        allFilters1[j].column = column;
+                                        allFilters1[j].cond = condition;
+                                        allFilters1[j].val = "asc";
+                                        allFilters1[j].label = clabel;
+                                        makeURL();
+                                    }
+
+                                }
+                                else {
+                                    allFilters1[j].column = column;
+                                    allFilters1[j].cond = condition;
+                                    allFilters1[j].val = response;
+                                    allFilters1[j].label = clabel;
+                                    makeURL();
+                                }
+
 
                             }
                         }
                     }
                     if(column == "search") {
-                        console.log(allFilters1);
                         search_found = 0;
                         for(j=0;j<allFilters1.length;j++) {
                             if(allFilters1[j].column == "search") {
                                 allFilters1[j].column = column;
                                 allFilters1[j].cond = condition;
                                 allFilters1[j].val = response;
+                                allFilters1[j].label = clabel;
                                 makeURL();
                             }
                         }
@@ -333,6 +347,7 @@
                             obj1.column = column;
                             obj1.cond = condition;
                             obj1.val = response;
+                            obj1.label = clabel;
                             allFilters1.push(obj1);
                             obj1 = {};
                             makeURL();
@@ -342,74 +357,11 @@
                     obj1.column = column;
                     obj1.cond = condition;
                     obj1.val = response;
+                    obj1.label = clabel;
                     allFilters1.push(obj1);
                     obj1 = {};
                     makeURL();
                 }
-                // if(allFilters1.length>0) {
-                //     for(i=0;i<allFilters1.length;i++) {
-
-                //         if(allFilters1[i].column!="sort" && allFilters1[i].column==column && allFilters1[i].cond==condition && allFilters1[i].val==response) {
-
-                //             return false;
-
-                //         }
-                //         else if(column == "sort") {
-
-                //             sort_repeated = 0;
-                //             for(j=0;j<allFilters1.length;j++){
-                //                 if(allFilters1[j].column == column && allFilters1[j].cond == condition && allFilters1[j].val == response) {
-
-                //                     sort_repeated = 1;
-
-                //                 }
-
-                //             }
-                //             if(sort_repeated==1) {
-
-                //                 console.log('sort repeated executing');
-                //                 from = parseInt(allFilters1.length);
-                //                 to = parseInt(allFilters1.length) + 1;
-                //                 allFilters1 = allFilters1.splice(from,to);
-                //                 sort_repeated = 0;
-                //                 console.log("xxxxxxxxxxxxxx");
-                //                 makeURL();
-
-                //             } else if(sort_repeated==0){
-
-                //                 //this is the buggy case
-                //                 allFilters1[i].column = column;
-                //                 allFilters1[i].cond = condition;
-                //                 allFilters1[i].val = response;
-                //                 console.log("yyyyyyyyyyyyyy");
-                //                 makeURL();
-                //             }
-
-                //         } else {
-
-                //             obj1.column=column;
-                //             obj1.cond=condition;
-                //             obj1.val=response;
-                //             allFilters1.push(obj1);
-                //             console.log("zzzzzzzzzzzz");
-                //             makeURL();
-                //             obj1={ };
-
-                //         }
-
-                //     }
-                // }
-                // else {
-
-                //     obj1.column=column;
-                //     obj1.cond=condition;
-                //     obj1.val=response;
-                //     allFilters1.push(obj1);
-                //     console.log("1111111111111");
-                //     obj1={ };
-                //     makeURL();
-
-                // }
             }
         </script>
     @endsection

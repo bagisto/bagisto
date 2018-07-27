@@ -1,6 +1,6 @@
 <template>
     <span class="checkbox">
-        <input type="checkbox" :id="id" name="permissions[]" :value="modelValue" @change="inputChanged()" :checked="isActive">
+        <input type="checkbox" :id="id" :name="[nameField, '[]']" :value="modelValue" @change="inputChanged()" :checked="isActive">
         <label class="checkbox-view" :for="id"></label>
         <span class="" :for="id">{{ label }}</span>
     </span>
@@ -10,7 +10,7 @@
     export default {
         name: 'tree-checkbox',
 
-        props: ['id', 'label', 'modelValue', 'inputValue', 'value'],
+        props: ['id', 'label', 'nameField', 'modelValue', 'inputValue', 'value'],
 
         computed: {
             isMultiple () {
@@ -32,6 +32,7 @@
                 get () {
                     return this.lazyValue
                 },
+
                 set (val) {
                     this.lazyValue = val
                     this.$emit('input', val)

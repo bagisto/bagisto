@@ -4,7 +4,9 @@ namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Attribute\Models\Attribute;
+use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
+
+
 /**
  * Catalog attribute controller
  *
@@ -19,14 +21,24 @@ class AttributeController extends Controller
      * @var array
      */
     protected $_config;
+    
+    /**
+     * AttributeRepository object
+     *
+     * @var array
+     */
+    protected $attribute;
 
     /**
      * Create a new controller instance.
      *
+     * @param  Webkul\Attribute\Repositories\AttributeRepository  $attribute
      * @return void
      */
-    public function __construct()
+    public function __construct(Attribute $attribute)
     {
+        $this->attribute = $attribute;
+
         $this->_config = request('_config');
     }
 
@@ -47,7 +59,7 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view'], compact('roleItems'));
+        return view($this->_config['view']);
     }
 
     /**
@@ -59,11 +71,11 @@ class AttributeController extends Controller
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Slug],
-            'name' => 'required',
+            'admin_name' => 'required',
             'type' => 'required'
         ]);
 
-        Attribute::create(request()->all());
+        $this->attribute->create(request()->all());
 
         session()->flash('success', 'Attribute created successfully.');
 
@@ -78,9 +90,9 @@ class AttributeController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::findOrFail($id);
+        $attribute = $this->attribute->findOrFail($id);
 
-        return view($this->_config['view'], compact('role'));
+        return view($this->_config['view'], compact('attribute'));
     }
 
     /**
@@ -93,15 +105,14 @@ class AttributeController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'name' => 'required',
-            'permission_type' => 'required',
+            'code' => ['required', 'unique:attributes,code,' . $id, new \Webkul\Core\Contracts\Validations\Slug],
+            'admin_name' => 'required',
+            'type' => 'required'
         ]);
         
-        $role = Role::findOrFail($id);
+        $this->attribute->update(request()->all(), $id);
 
-        $role->update(request()->all());
-
-        session()->flash('success', 'Role updated successfully.');
+        session()->flash('success', 'Attribute updated successfully.');
 
         return redirect()->route($this->_config['redirect']);
     }

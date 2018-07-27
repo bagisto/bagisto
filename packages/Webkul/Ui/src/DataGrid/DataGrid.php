@@ -547,7 +547,7 @@ class DataGrid
     private function getQueryWithFilters()
     {
         $parsed = $this->parse();
-        // dd($parsed);
+
         if ($this->aliased) {
             foreach ($parsed as $key=>$value) {
                 if ($key=="sort") {
@@ -614,7 +614,6 @@ class DataGrid
     private function getDbQueryResults()
     {
         $parsed = $this->parse();
-
 
         if ($this->aliased==true) {
             //flags

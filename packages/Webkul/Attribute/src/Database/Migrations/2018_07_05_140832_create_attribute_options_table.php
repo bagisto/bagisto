@@ -15,10 +15,8 @@ class CreateAttributeOptionsTable extends Migration
     {
         Schema::create('attribute_options', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
-            $table->integer('sort_order');
+            $table->integer('sort_order')->nullable();
             $table->integer('attribute_id')->unsigned();
-            $table->unique(['attribute_id', 'code']);
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
         });
     }

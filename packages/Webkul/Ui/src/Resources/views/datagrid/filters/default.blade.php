@@ -28,7 +28,6 @@
                         <span class="name">Filter</span> {{-- <span class="role">Filter</span> --}}
                         <i class="icon arrow-down-icon active"></i>
                     </div>
-
                 </div>
                 <div class="dropdown-list bottom-right" style="display: none;">
                     <div class="dropdown-container">
@@ -37,7 +36,7 @@
                                 <select class="filter-column-select">
                                     <option selected disabled>Select Column</option>
                                     @foreach($filterable as $fcol)
-                                    <option value="{{ $fcol['column'] }}" data-type="{{ $fcol['type'] }}">{{ $fcol['label'] }}</option>
+                                    <option value="{{ $fcol['column'] }}" data-type="{{ $fcol['type'] }}" data-label="{{ $fcol['label'] }}">{{ $fcol['label'] }}</option>
                                     @endforeach
                                 </select>
                             </li>

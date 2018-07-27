@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     'guards' => [
         'web' => [
             'driver' => 'session',

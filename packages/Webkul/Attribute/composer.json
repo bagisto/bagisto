@@ -8,7 +8,8 @@
         }
     ],
     "require": {
-        "nwidart/laravel-modules": "^3.2"
+        "nwidart/laravel-modules": "^3.2",
+        "webkul/laravel-core": "dev-master"
     },
     "autoload": {
         "psr-4": {

@@ -26,7 +26,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['middleware' => ['customer']], function () {
 
             //route for logout which will be under the auth guard of the customer by default
-            Route::get('/logout', 'Webkul\Customer\Http\Controllers\SessionController@logout')->defaults('_config', [
+            Route::get('/logout', 'Webkul\Customer\Http\Controllers\SessionController@destroy')->defaults('_config', [
                 'redirect' => 'customer.session.index'
             ])->name('customer.session.destroy');
 
