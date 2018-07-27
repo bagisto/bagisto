@@ -16,7 +16,8 @@
 
 <body>
     <div id="app">
-    @include('shop::layouts.header') @yield('slider')
+    @include('shop::layouts.header')
+        @yield('slider')
         <div class="main-container-wrapper">
             <div class="content-container">
                 @yield('content-wrapper')

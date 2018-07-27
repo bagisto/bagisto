@@ -5,6 +5,7 @@ namespace Webkul\Customer\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Webkul\Customer\Models\Customer;
 
 /**
  * Customer controlller for the customer
@@ -35,8 +36,23 @@ class CustomerController extends Controller
      * authentication
      * @return view
      */
+    private function getCustomer($id)
+    {
+        $customer = collect(Customer::find($id));
+        return $customer;
+    }
+
     public function dashboard()
     {
-        return view($this->_config['view']);
+        $id = auth()->guard('customer')->user()->id;
+        $customer = $this->getCustomer($id);
+        return view($this->_config['view'])->with('customer', $customer);
+    }
+
+    public function editProfile()
+    {
+        $id = auth()->guard('customer')->user()->id;
+        $customer = $this->getCustomer($id);
+        return view($this->_config['view'])->with('customer', $customer);
     }
 }

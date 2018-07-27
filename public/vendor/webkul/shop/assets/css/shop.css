@@ -668,6 +668,45 @@
 
 .dashboard-content .profile-content table tbody tr td {
   width: 250px;
+  text-transform: capitalize;
+}
+
+.edit-form-content {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.edit-form-content .edit-text {
+  margin-bottom: 2%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 24px;
+  text-align: center;
+}
+
+.edit-form-content .edit-form {
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: #ffffff;
+  border: 1px solid #ffe8e8e8;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 530px;
+  min-width: 380px;
+  min-height: 345px;
+  padding: 25px;
+}
+
+.edit-form-content .edit-form .control-group input,
+.edit-form-content .edit-form .control-group select {
+  font-family: "monserrat", sans-serif;
+  width: 100%;
 }
 
 @media all and (max-width: 480px) {

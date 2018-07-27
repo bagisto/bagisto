@@ -19,27 +19,27 @@
                 <tbody>
                     <tr>
                         <td>First Name</td>
-                        <td>Prashant</td>
+                        <td>{{ $customer['first_name'] }}</td>
                     </tr>
                     <tr>
                         <td>Last Name</td>
-                        <td>Singh</td>
+                        <td>{{ $customer['last_name'] }}</td>
                     </tr>
                     <tr>
                         <td>Gender Name</td>
-                        <td>Male</td>
+                        <td>{{ $customer['gender'] }}</td>
                     </tr>
                     <tr>
                         <td>Date of Birth</td>
-                        <td>1/1/1993</td>
+                        <td>{{ $customer['date_of_birth'] }}</td>
                     </tr>
                     <tr>
                         <td>Email Address</td>
-                        <td>Prashant@webkul.com</td>
+                        <td>{{ $customer['email'] }}</td>
                     </tr>
                     <tr>
                         <td>Mobile</td>
-                        <td>+91-9988887744</td>
+                        <td>{{ $customer['phone'] }}</td>
                     </tr>
                 </tbody>
             </table>
