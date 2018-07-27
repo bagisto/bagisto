@@ -5,7 +5,7 @@ Route::group(['middleware' => ['web']], function () {
 
         // Login Routes
         Route::get('/login', 'Webkul\Customer\Http\Controllers\SessionController@show')->defaults('_config', [
-            'view' => 'customer::login.index',
+            'view' => 'shop::login.index',
         ])->name('customer.session.index');
 
         Route::post('/login', 'Webkul\Customer\Http\Controllers\SessionController@create')->defaults('_config', [
@@ -15,7 +15,7 @@ Route::group(['middleware' => ['web']], function () {
 
         // Registration Routes
         Route::get('/register', 'Webkul\Customer\Http\Controllers\RegistrationController@show')->defaults('_config', [
-            'view' => 'customer::signup.index' //hint path
+            'view' => 'shop::signup.index' //hint path
         ])->name('customer.register.index');
 
         Route::post('/register', 'Webkul\Customer\Http\Controllers\RegistrationController@create')->defaults('_config', [
@@ -32,7 +32,7 @@ Route::group(['middleware' => ['web']], function () {
 
             //customer dashboard
             Route::get('/dashboard', 'Webkul\Customer\Http\Controllers\CustomerController@dashboard')->defaults('_config', [
-                'view' => 'customer::dashboard.index'
+                'view' => 'shop::dashboard.index'
             ])->name('customer.dashboard.index');
         });
     });

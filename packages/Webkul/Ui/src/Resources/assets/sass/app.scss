@@ -168,8 +168,6 @@ h2 {
             padding: 0px;
 
             li {
-                padding: 5px 0px;
-
                 // &:hover {
                 //     color: $brand-color;
                 // }
@@ -616,8 +614,6 @@ h2 {
     }
 }
 
-/*   DataGrid   */
-
 .grid-container {
     margin-top: 30px;
 
@@ -655,6 +651,7 @@ h2 {
                     width: 36px;
                     border: 2px solid $control-border-color;
                     border-left: none;
+                    border-radius: 2px;
 
                     .search-icon {
                         margin-left: 4px;
@@ -697,6 +694,7 @@ h2 {
                         height: 36px;
                         width: 150px;
                         border: 2px solid $control-border-color;
+                        border-radius: 2px;
                         background-color: white;
                         color: #8e8e8e;
                         font-size: 14px;
@@ -843,12 +841,25 @@ h2 {
                 align-items: center;
 
                 .massaction-remove {
-                    margin-top: 5px;
+                    margin-top: 10px;
                     margin-right: 10px;
+                }
+
+                form {
+                    margin-top: 8px;
                 }
 
                 .selected-items {
                     margin-right: 15px;
+                }
+            }
+            tr {
+                th.sort-head {
+                    .sort-down-icon {
+                        margin-left: 8px;
+                        vertical-align: middle;
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -856,6 +867,7 @@ h2 {
 }
 
 /*   DataGrid css ends in here   */
+
 .modal-open {
     overflow: hidden;
 }

@@ -1,4 +1,4 @@
-@extends('customer::layouts.master')
+@extends('shop::layouts.master')
 @section('content-wrapper')
 <div class="dashboard-content">
     <ul class="dashboard-side-menu">
@@ -9,8 +9,10 @@
         <li>Wishlist</li>
     </ul>
     <div class="profile">
-        <div class="section-heading">
-            Profile
+        <div class="section-head">
+            <span class="profile-heading">Profile</span>
+            <span class="profile-edit">Edit</span>
+            <div class="horizontal-rule"></div>
         </div>
         <div class="profile-content">
             <table>

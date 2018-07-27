@@ -79,7 +79,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  border: 1px solid red;
   margin-top: 5.5%;
   margin-bottom: 5.5%;
 }
@@ -94,13 +93,13 @@
           flex-direction: column;
   -ms-flex-line-pack: center;
       align-content: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   border: 1px solid #e8e8e8;
-  border-right: none;
   background: #ffffff;
   width: 25%;
+  height: 100%;
   text-transform: capitalize;
   font-size: 16px;
   color: #5e5e5e;
@@ -108,7 +107,7 @@
 
 .dashboard-content .dashboard-side-menu li {
   font-size: 16px;
-  width: 95%;
+  width: 100%;
   height: 50px;
   margin-left: 15px;
   display: -webkit-box;
@@ -124,16 +123,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 1px solid #ffe8e8e8;
-  border-left: none;
-  border-bottom: none;
+  border-bottom: 1px solid #ffe8e8e8;
   text-align: center;
 }
 
 .dashboard-content .dashboard-side-menu li:first-child {
   border-top: none;
-  border-left: none;
-  border-bottom: none;
 }
 
 .dashboard-content .dashboard-side-menu li:last-child {
@@ -142,17 +137,43 @@
 
 .dashboard-content .profile {
   margin-left: 5.5%;
+  margin-top: 1%;
+  width: 100%;
 }
 
-.dashboard-content .profile .section-heading {
-  height: 50px;
+.dashboard-content .profile .section-head .profile-heading {
   font-size: 28px;
   color: #242424;
   text-transform: capitalize;
   text-align: left;
 }
 
+.dashboard-content .profile .section-head .profile-edit {
+  font-size: 17px;
+  margin-top: 1%;
+  color: #0031f0;
+  letter-spacing: -0.11px;
+  float: right;
+}
+
+.dashboard-content .profile .section-head .horizontal-rule {
+  margin-top: 1.1%;
+  width: 100%;
+  height: 1px;
+  vertical-align: middle;
+  background: #e8e8e8;
+}
+
 .dashboard-content .profile-content {
   font-size: 16px;
   color: #5e5e5e;
+  margin-top: 1.4%;
+}
+
+.dashboard-content .profile-content table tbody tr {
+  height: 45px;
+}
+
+.dashboard-content .profile-content table tbody tr td {
+  width: 250px;
 }
