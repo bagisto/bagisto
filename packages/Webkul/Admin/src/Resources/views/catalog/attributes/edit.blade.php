@@ -93,7 +93,7 @@
                         </div>
                     </accordian>
 
-                    <div class="<?php in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hide' ?>">
+                    <div class="{{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hide' }}">
                         <accordian :title="'{{ __('admin::app.catalog.attributes.options') }}'" :active="true" :id="'options'">
                             <div slot="body">
                             
@@ -116,7 +116,7 @@
 
                             <div class="control-group">
                                 <label for="is_unique">{{ __('admin::app.catalog.attributes.is_unique') }}</label>
-                                <select class="control" id="is_unique" name="is_unique">
+                                <select class="control" id="is_unique" name="is_unique" disabled>
                                     <option value="0" {{ $attribute->is_unique ? '' : 'selected' }}>
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
@@ -124,6 +124,7 @@
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
                                 </select>
+                                <input type="hidden" name="is_unique" value="{{ $attribute->is_unique }}"/>
                             </div>
 
                             <div class="control-group">
@@ -166,7 +167,7 @@
                         
                             <div class="control-group">
                                 <label for="value_per_locale">{{ __('admin::app.catalog.attributes.value_per_locale') }}</label>
-                                <select class="control" id="value_per_locale" name="value_per_locale">
+                                <select class="control" id="value_per_locale" name="value_per_locale" disabled>
                                     <option value="0" {{ $attribute->value_per_locale ? '' : 'selected' }}>
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
@@ -174,11 +175,12 @@
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
                                 </select>
+                                <input type="hidden" name="value_per_locale" value="{{ $attribute->value_per_locale }}"/>
                             </div>
                         
                             <div class="control-group">
                                 <label for="value_per_channel">{{ __('admin::app.catalog.attributes.value_per_channel') }}</label>
-                                <select class="control" id="value_per_channel" name="value_per_channel">
+                                <select class="control" id="value_per_channel" name="value_per_channel" disabled>
                                     <option value="0" {{ $attribute->value_per_channel ? '' : 'selected' }}>
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
@@ -186,6 +188,7 @@
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
                                 </select>
+                                <input type="hidden" name="value_per_channel" value="{{ $attribute->value_per_channel }}"/>
                             </div>
                         
                             <div class="control-group">
