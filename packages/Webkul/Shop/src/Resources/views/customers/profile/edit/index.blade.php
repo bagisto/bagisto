@@ -1,4 +1,4 @@
-@extends('shop::layouts.master')
+@extends('shop::store.layouts.master')
 @section('content-wrapper')
     <div class="account-content">
         @include('shop::customers.profile.partials.sidemenu')

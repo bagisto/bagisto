@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>arrow-right-light</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="arrow-right-light" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="arrow" transform="translate(12.000000, 14.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M23.249,11.786 L15.433,19.6 C15.0757568,19.9908753 14.5327035,20.1539647 14.0192179,20.0245859 C13.5057324,19.8952072 13.1047928,19.4942676 12.9754141,18.9807821 C12.8460353,18.4672965 13.0091247,17.9242432 13.4,17.567 L18.965,12 L1.5,12 C0.6715729,12 6.32202717e-08,11.3284271 6.32202717e-08,10.5 C6.32202717e-08,9.6715729 0.6715729,9.00000003 1.5,9 L18.965,9 L13.4,3.433 C13.0091247,3.07575678 12.8460353,2.53270346 12.9754141,2.01921793 C13.1047928,1.5057324 13.5057324,1.10479285 14.0192179,0.975414078 C14.5327035,0.846035307 15.0757568,1.00912465 15.433,1.4 L23.249,9.215 C23.9381714,9.93951416 24.0376587,10.793396 23.249,11.786 Z"></path>
+        </g>
+    </g>
+</svg>

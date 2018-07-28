@@ -3,7 +3,9 @@
         <div class="left-content">
             <ul class="logo-container">
                 <li>
-                    <img class="logo" src="vendor/webkul/shop/assets/images/logo.svg" />
+                    <a href="">
+                        <img class="logo" src="vendor/webkul/shop/assets/images/logo.svg" />
+                    </a>
                 </li>
             </ul>
             <ul class="search-container">

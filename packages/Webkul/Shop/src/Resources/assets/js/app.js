@@ -1,8 +1,8 @@
 window.jQuery = window.$ = $ = require("jquery");
 window.Vue = require("vue");
-// window.VeeValidate = require('vee-validate');
+window.VeeValidate = require("vee-validate");
 
-// Vue.use(VeeValidate);
+Vue.use(VeeValidate);
 
 //pure JS for resizing of browser purposes only
 
@@ -29,6 +29,7 @@ $(window).resize(function() {
 });
 
 $(document).ready(function() {
+    Vue.component("image-slider", require("./components/imageSlider.vue"));
     /* Responsiveness script goes here */
     var w = $(document).width();
     var window = {};

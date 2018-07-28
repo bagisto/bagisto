@@ -141,6 +141,18 @@
   height: 18px;
 }
 
+.dark-left-icon {
+  background-image: url("../images/arrow-left-dark.svg");
+  width: 18px;
+  height: 18px;
+}
+
+.light-right-icon {
+  background-image: url("../images/arrow-right-light.svg");
+  width: 18px;
+  height: 18px;
+}
+
 .folder-icon {
   background-image: url("../images/Folder-Icon.svg");
   width: 24px;

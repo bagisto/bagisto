@@ -208,6 +208,30 @@ body {
                 width: 100%;
                 object-fit: fill;
             }
+            .slider-control {
+                display: inline-block;
+                vertical-align: middle;
+                position: absolute;
+                right: 10%;
+                margin-top: -60px;
+                margin-right: 10px;
+
+                .dark-left-icon {
+                    background-color: white;
+                    height: 48px;
+                    width: 48px;
+                    max-height: 100%;
+                    max-width: 100%;
+                }
+
+                .light-right-icon {
+                    background-color: black;
+                    height: 48px;
+                    width: 48px;
+                    max-height: 100%;
+                    max-width: 100%;
+                }
+            }
         }
     }
 }
@@ -329,7 +353,7 @@ body {
 }
 
 .footer {
-    background-color: $background-color;
+    background-color: $fbackground-color;
     padding-left: 10%;
     padding-right: 10%;
 
@@ -1296,7 +1320,7 @@ body {
         }
     }
     .footer {
-        background-color: $background-color;
+        background-color: $fbackground-color;
         padding-left: 4%;
         padding-right: 4%;
 
