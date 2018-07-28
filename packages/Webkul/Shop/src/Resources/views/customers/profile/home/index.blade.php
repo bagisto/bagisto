@@ -1,17 +1,11 @@
 @extends('shop::layouts.master')
 @section('content-wrapper')
-<div class="dashboard-content">
-    <ul class="dashboard-side-menu">
-        <li>Profile</li>
-        <li>Orders</li>
-        <li>Address</li>
-        <li>Reviews</li>
-        <li>Wishlist</li>
-    </ul>
+<div class="account-content">
+    @include('shop::customers.profile.partials.sidemenu')
     <div class="profile">
         <div class="section-head">
             <span class="profile-heading">Profile</span>
-            <span class="profile-edit">Edit</span>
+            <span class="profile-edit"><a href="{{ route('customer.profile.edit') }}">Edit</a></span>
             <div class="horizontal-rule"></div>
         </div>
         <div class="profile-content">

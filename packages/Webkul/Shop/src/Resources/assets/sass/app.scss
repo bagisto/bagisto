@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
+
 @import "mixins";
 @import "variables";
 
@@ -473,15 +474,15 @@ body {
 }
 
 //customer pages styles goes here
-//dashboard
-.dashboard-content {
+//account layout
+.account-content {
     width: 100%;
     display: flex;
     flex-direction: row;
     margin-top: 5.5%;
     margin-bottom: 5.5%;
 
-    .dashboard-side-menu {
+    .account-side-menu {
         display: flex;
         flex-direction: column;
         align-content: center;
@@ -511,6 +512,9 @@ body {
         }
         li:last-child {
             border-bottom: none;
+        }
+        li.active {
+            color: #0031f0;
         }
     }
 
@@ -563,45 +567,43 @@ body {
             }
         }
     }
-}
-//dashboard ends here
+    //edit form
+    .edit-form-content {
+        margin-left: 5.5%;
+        margin-top: 1%;
+        width: 100%;
 
-//edit form
-.edit-form-content {
-    margin-top: 5%;
-    margin-bottom: 5%;
+        .edit-text {
+            margin-bottom: 2%;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 24px;
+        }
 
-    .edit-text {
-        margin-bottom: 2%;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-        font-size: 24px;
-        text-align: center;
-    }
+        .edit-form {
+            // margin-left: auto;
+            // margin-right: auto;
+            display: flex;
+            background: $background-color;
+            border: 1px solid $border-color;
+            flex-direction: column;
+            // max-width: 530px;
+            // min-width: 380px;
+            min-height: 345px;
+            padding: 25px;
 
-    .edit-form {
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        background: $background-color;
-        border: 1px solid $border-color;
-        flex-direction: column;
-        max-width: 530px;
-        min-width: 380px;
-        min-height: 345px;
-        padding: 25px;
-
-        .control-group {
-            input,
-            select {
-                font-family: "monserrat", sans-serif;
-                width: 100%;
+            .control-group {
+                input,
+                select {
+                    font-family: "Montserrat", sans-serif;
+                    width: 100%;
+                }
             }
         }
     }
+    //edit form ends
 }
-//edit form ends
+//account ends here
 
 //customers page css ends here
 

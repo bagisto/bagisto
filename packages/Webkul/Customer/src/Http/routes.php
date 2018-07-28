@@ -9,7 +9,7 @@ Route::group(['middleware' => ['web']], function () {
         ])->name('customer.session.index');
 
         Route::post('login', 'Webkul\Customer\Http\Controllers\SessionController@create')->defaults('_config', [
-            'redirect' => 'customer.dashboard.index'
+            'redirect' => 'customer.account.profile'
         ])->name('customer.session.create');
 
 
@@ -19,7 +19,7 @@ Route::group(['middleware' => ['web']], function () {
         ])->name('customer.register.index');
 
         Route::post('register', 'Webkul\Customer\Http\Controllers\RegistrationController@create')->defaults('_config', [
-            'redirect' => 'customer.dashboard.index',
+            'redirect' => 'customer.account.profile',
         ])->name('customer.register.create');
 
         // Auth Routes
@@ -30,15 +30,17 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'customer.session.index'
             ])->name('customer.session.destroy');
 
-            //customer dashboard
-            Route::get('dashboard', 'Webkul\Customer\Http\Controllers\CustomerController@dashboard')->defaults('_config', [
-                'view' => 'shop::customers.dashboard.index'
-            ])->name('customer.dashboard.index');
+            //customer account
+            Route::prefix('account')->group(function () {
+                Route::get('profile', 'Webkul\Customer\Http\Controllers\CustomerController@profile')->defaults('_config', [
+                'view' => 'shop::customers.profile.home.index'
+                ])->name('customer.account.profile');
 
-            //profile edit
-            Route::get('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@editProfile')->defaults('_config', [
-                'view' => 'shop::customers.profile.edit'
-            ])->name('customer.profile.edit');
+                //profile edit
+                Route::get('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@editProfile')->defaults('_config', [
+                    'view' => 'shop::customers.profile.edit.index'
+                ])->name('customer.profile.edit');
+            });
         });
     });
 });

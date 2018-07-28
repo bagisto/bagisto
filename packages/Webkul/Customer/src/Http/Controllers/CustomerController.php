@@ -42,7 +42,7 @@ class CustomerController extends Controller
         return $customer;
     }
 
-    public function dashboard()
+    public function profile()
     {
         $id = auth()->guard('customer')->user()->id;
         $customer = $this->getCustomer($id);

@@ -562,7 +562,7 @@
   margin-bottom: 4%;
 }
 
-.dashboard-content {
+.account-content {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -575,7 +575,7 @@
   margin-bottom: 5.5%;
 }
 
-.dashboard-content .dashboard-side-menu {
+.account-content .account-side-menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -597,7 +597,7 @@
   color: #5e5e5e;
 }
 
-.dashboard-content .dashboard-side-menu li {
+.account-content .account-side-menu li {
   font-size: 16px;
   width: 95%;
   height: 50px;
@@ -619,28 +619,32 @@
   text-align: center;
 }
 
-.dashboard-content .dashboard-side-menu li:first-child {
+.account-content .account-side-menu li:first-child {
   border-top: none;
 }
 
-.dashboard-content .dashboard-side-menu li:last-child {
+.account-content .account-side-menu li:last-child {
   border-bottom: none;
 }
 
-.dashboard-content .profile {
+.account-content .account-side-menu li.active {
+  color: #0031f0;
+}
+
+.account-content .profile {
   margin-left: 5.5%;
   margin-top: 1%;
   width: 100%;
 }
 
-.dashboard-content .profile .section-head .profile-heading {
+.account-content .profile .section-head .profile-heading {
   font-size: 28px;
   color: #242424;
   text-transform: capitalize;
   text-align: left;
 }
 
-.dashboard-content .profile .section-head .profile-edit {
+.account-content .profile .section-head .profile-edit {
   font-size: 17px;
   margin-top: 1%;
   color: #0031f0;
@@ -648,7 +652,7 @@
   float: right;
 }
 
-.dashboard-content .profile .section-head .horizontal-rule {
+.account-content .profile .section-head .horizontal-rule {
   margin-top: 1.1%;
   width: 100%;
   height: 1px;
@@ -656,38 +660,35 @@
   background: #e8e8e8;
 }
 
-.dashboard-content .profile-content {
+.account-content .profile-content {
   font-size: 16px;
   color: #5e5e5e;
   margin-top: 1.4%;
 }
 
-.dashboard-content .profile-content table tbody tr {
+.account-content .profile-content table tbody tr {
   height: 45px;
 }
 
-.dashboard-content .profile-content table tbody tr td {
+.account-content .profile-content table tbody tr td {
   width: 250px;
   text-transform: capitalize;
 }
 
-.edit-form-content {
-  margin-top: 5%;
-  margin-bottom: 5%;
+.account-content .edit-form-content {
+  margin-left: 5.5%;
+  margin-top: 1%;
+  width: 100%;
 }
 
-.edit-form-content .edit-text {
+.account-content .edit-form-content .edit-text {
   margin-bottom: 2%;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
   font-size: 24px;
-  text-align: center;
 }
 
-.edit-form-content .edit-form {
-  margin-left: auto;
-  margin-right: auto;
+.account-content .edit-form-content .edit-form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -697,15 +698,13 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  max-width: 530px;
-  min-width: 380px;
   min-height: 345px;
   padding: 25px;
 }
 
-.edit-form-content .edit-form .control-group input,
-.edit-form-content .edit-form .control-group select {
-  font-family: "monserrat", sans-serif;
+.account-content .edit-form-content .edit-form .control-group input,
+.account-content .edit-form-content .edit-form .control-group select {
+  font-family: "Montserrat", sans-serif;
   width: 100%;
 }
 
