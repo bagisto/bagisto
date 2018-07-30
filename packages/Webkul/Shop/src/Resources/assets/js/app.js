@@ -30,6 +30,7 @@ $(window).resize(function() {
 
 $(document).ready(function() {
     Vue.component("image-slider", require("./components/imageSlider.vue"));
+    // Vue.component("nav-view", require("./components/navVue.vue"));
     /* Responsiveness script goes here */
     var w = $(document).width();
     var window = {};

@@ -95,7 +95,7 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);
-module.exports = __webpack_require__(9);
+module.exports = __webpack_require__(13);
 
 
 /***/ }),
@@ -133,7 +133,8 @@ $(window).resize(function () {
 });
 
 $(document).ready(function () {
-    Vue.component("image-slider", __webpack_require__(14));
+    Vue.component("image-slider", __webpack_require__(9));
+    // Vue.component("nav-view", require("./components/navVue.vue"));
     /* Responsiveness script goes here */
     var w = $(document).width();
     var window = {};
@@ -28970,24 +28971,14 @@ var index_esm = {
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(19)
+var normalizeComponent = __webpack_require__(10)
 /* script */
-var __vue_script__ = __webpack_require__(20)
+var __vue_script__ = __webpack_require__(11)
 /* template */
-var __vue_template__ = __webpack_require__(21)
+var __vue_template__ = __webpack_require__(12)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -29026,11 +29017,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */
+/* 10 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -29139,7 +29126,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 20 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29185,7 +29172,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 21 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -29224,6 +29211,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-0b7d2080", module.exports)
   }
 }
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

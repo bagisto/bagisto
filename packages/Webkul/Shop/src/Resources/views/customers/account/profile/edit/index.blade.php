@@ -1,7 +1,7 @@
 @extends('shop::store.layouts.master')
 @section('content-wrapper')
     <div class="account-content">
-        @include('shop::customers.profile.partials.sidemenu')
+        @include('shop::customers.account.partials.sidemenu')
         <div class="edit-form-content">
             <div class="edit-text">Edit Profile</div>
             <form method="post" action="{{ route('customer.register.create') }}">

@@ -27,10 +27,6 @@ class CustomerServiceProvider extends ServiceProvider
 
         $this->composeView();
 
-        Blade::directive('continue', function () {
-            return "<?php continue; ?>";
-        });
-
         $this->app->register(EventServiceProvider::class);
     }
 
@@ -46,7 +42,7 @@ class CustomerServiceProvider extends ServiceProvider
 
     protected function composeView()
     {
-        view()->composer(['shop::customers.profile.partials.sidemenu'], function ($view) {
+        view()->composer(['shop::customers.account.partials.sidemenu'], function ($view) {
             $menu = current(Event::fire('customer.menu.create'));
 
             $view->with('menu', $menu);

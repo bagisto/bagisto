@@ -2,6 +2,9 @@
     <div class="header-top">
         <div class="left-content">
             <ul class="logo-container">
+                {{-- @for($i=0;$i<sizeof($categories);$i++)
+                    {{ $categories[$i] }}
+                @endfor --}}
                 <li>
                     <a href="">
                         <img class="logo" src="vendor/webkul/shop/assets/images/logo.svg" />
@@ -55,16 +58,6 @@
         </div>
     </div>
     <div class="header-bottom">
-        <ul class="menu-bar">
-            <li>Men</li>
-            <li>Women</li>
-            <li>Kids</li>
-            <li>Accessories</li>
-            <li>Home & Living</li>
-            <li>
-                <img class="icon" src="vendor/webkul/shop/assets/images/offer-zone.svg" style="margin-right:5px;" />Offer
-                Zone
-            </li>
-        </ul>
+        @include('shop::store.header.nav-menu.navmenu')
     </div>
 </div>

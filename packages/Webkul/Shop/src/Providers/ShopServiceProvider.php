@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
+use Webkul\Shop\Providers\ComposerServiceProvider;
 
 // use Webkul\Shop\Providers\EventServiceProvider;
 
@@ -32,7 +33,7 @@ class ShopServiceProvider extends ServiceProvider
             return "<?php continue; ?>";
         });
 
-        // $this->app->register(EventServiceProvider::class);
+        $this->app->register(ComposerServiceProvider::class);
     }
 
     /**

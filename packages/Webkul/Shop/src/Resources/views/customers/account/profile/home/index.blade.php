@@ -1,7 +1,7 @@
 @extends('shop::store.layouts.master')
 @section('content-wrapper')
 <div class="account-content">
-    @include('shop::customers.profile.partials.sidemenu')
+    @include('shop::customers.account.partials.sidemenu')
     <div class="profile">
         <div class="section-head">
             <span class="profile-heading">Profile</span>

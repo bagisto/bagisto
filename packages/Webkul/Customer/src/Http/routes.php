@@ -20,7 +20,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::post('register', 'Webkul\Customer\Http\Controllers\RegistrationController@create')->defaults('_config', [
             'redirect' => 'customer.account.profile',
-        ])->name('customer.register.create');
+        ])->name('customer.register.create');   //redirect attribute will get changed immediately to account.index when account's index page will be made
 
         // Auth Routes
         Route::group(['middleware' => ['customer']], function () {
@@ -33,12 +33,12 @@ Route::group(['middleware' => ['web']], function () {
             //customer account
             Route::prefix('account')->group(function () {
                 Route::get('profile', 'Webkul\Customer\Http\Controllers\CustomerController@profile')->defaults('_config', [
-                'view' => 'shop::customers.profile.home.index'
+                'view' => 'shop::customers.account.profile.home.index'
                 ])->name('customer.account.profile');
 
                 //profile edit
                 Route::get('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@editProfile')->defaults('_config', [
-                    'view' => 'shop::customers.profile.edit.index'
+                    'view' => 'shop::customers.account.profile.edit.index'
                 ])->name('customer.profile.edit');
             });
         });
