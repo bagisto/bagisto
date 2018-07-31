@@ -4,7 +4,7 @@ namespace Webkul\User\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\User\Models\Role;
+use Webkul\User\Repositories\RoleRepository as Role;
 
 /**
  * Admin user role controller
@@ -20,14 +20,24 @@ class RoleController extends Controller
      * @var array
      */
     protected $_config;
+    
+    /**
+     * RoleRepository object
+     *
+     * @var array
+     */
+    protected $role;
 
     /**
      * Create a new controller instance.
      *
+     * @param  Webkul\User\Repositories\RoleRepository $role
      * @return void
      */
-    public function __construct()
+    public function __construct(Role $role)
     {
+        $this->role = $role;
+
         $this->_config = request('_config');
     }
 
@@ -64,7 +74,7 @@ class RoleController extends Controller
             'permission_type' => 'required',
         ]);
 
-        Role::create(request()->all());
+        $this->role->create(request()->all());
 
         session()->flash('success', 'Role created successfully.');
 
@@ -79,7 +89,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::findOrFail($id);
+        $role = $this->role->findOrFail($id);
 
         return view($this->_config['view'], compact('role'));
     }
@@ -98,9 +108,7 @@ class RoleController extends Controller
             'permission_type' => 'required',
         ]);
         
-        $role = Role::findOrFail($id);
-
-        $role->update(request()->all());
+        $this->role->update(request()->all(), $id);
 
         session()->flash('success', 'Role updated successfully.');
 

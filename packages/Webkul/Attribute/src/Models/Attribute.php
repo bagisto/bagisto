@@ -4,6 +4,7 @@ namespace Webkul\Attribute\Models;
 
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Attribute\Models\AttributeOption;
+use Webkul\Attribute\Models\AttributeGroup;
 
 class Attribute extends TranslatableModel
 {

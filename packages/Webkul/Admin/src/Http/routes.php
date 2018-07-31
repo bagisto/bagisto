@@ -53,6 +53,15 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::catalog.products.create'
                 ])->name('admin.catalog.products.create');
 
+                Route::post('/products/create', 'Webkul\Product\Http\Controllers\ProductController@store')->defaults('_config', [
+                    'redirect' => 'admin.catalog.products.edit'
+                ])->name('admin.catalog.products.store');
+
+                Route::get('/products/edit/{id}', 'Webkul\Product\Http\Controllers\ProductController@edit')->defaults('_config', [
+                    'view' => 'admin::catalog.products.edit'
+                ])->name('admin.catalog.products.edit');
+
+
                 // Catalog Category Routes
                 Route::get('/categories', 'Webkul\Category\Http\Controllers\CategoryController@index')->defaults('_config', [
                     'view' => 'admin::catalog.categories.index'

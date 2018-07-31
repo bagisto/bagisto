@@ -30,13 +30,9 @@ class ChannelRepository extends Repository
     {
         $channel = $this->model->create($data);
 
-        foreach ($data['locales'] as $locale) {
-            $channel->locales()->attach($locale);
-        }
+        $channel->locales()->sync($data['locales']);
 
-        foreach ($data['currencies'] as $currency) {
-            $channel->currencies()->attach($currency);
-        }
+        $channel->currencies()->sync($data['currencies']);
 
         return $channel;
     }
@@ -53,32 +49,9 @@ class ChannelRepository extends Repository
 
         $channel->update($data);
 
-        $previousLocaleIds = $channel->locales()->pluck('id');
+        $channel->locales()->sync($data['locales']);
 
-        foreach ($data['locales'] as $locale) {
-            if(is_numeric($index = $previousLocaleIds->search($locale))) {
-                $previousLocaleIds->forget($index);
-            } else {
-                $channel->locales()->attach($locale);
-            }
-        }
-
-        if($previousLocaleIds->count()) {
-            $channel->locales()->detach($previousLocaleIds);
-        }
-
-        $previousCurrencyIds = $channel->currencies()->pluck('id');
-        foreach ($data['currencies'] as $currency) {
-            if(is_numeric($index = $previousCurrencyIds->search($currency))) {
-                $previousCurrencyIds->forget($index);
-            } else {
-                $channel->currencies()->attach($currency);
-            }
-        }
-
-        if($previousCurrencyIds->count()) {
-            $channel->currencies()->detach($previousCurrencyIds);
-        }
+        $channel->currencies()->sync($data['currencies']);
 
         return $channel;
     }
