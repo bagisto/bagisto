@@ -6,6 +6,10 @@ Vue.use(VeeValidate);
 
 //pure JS for resizing of browser purposes only
 
+Vue.component("category-nav", require("./components/category-nav.vue"));
+Vue.component("category-item", require("./components/category-item.vue"));
+Vue.component("image-slider", require("./components/imageSlider.vue"));
+
 $(window).resize(function() {
     var w = $(document).width();
     var window = {};
@@ -29,8 +33,6 @@ $(window).resize(function() {
 });
 
 $(document).ready(function() {
-    Vue.component("image-slider", require("./components/imageSlider.vue"));
-    // Vue.component("nav-view", require("./components/navVue.vue"));
     /* Responsiveness script goes here */
     var w = $(document).width();
     var window = {};

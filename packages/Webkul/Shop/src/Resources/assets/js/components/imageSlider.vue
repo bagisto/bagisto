@@ -17,9 +17,6 @@ export default {
     return {
       images: [
         "vendor/webkul/shop/assets/images/banner.png",
-        "vendor/webkul/shop/assets/images/1.png",
-        "vendor/webkul/shop/assets/images/2.png",
-        "vendor/webkul/shop/assets/images/3.png"
       ],
       currentIndex: 0
     };

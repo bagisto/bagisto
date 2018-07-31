@@ -35,7 +35,6 @@ class CategoryComposer
         foreach ($categories as $category) {
             array_push($collected_cat, collect($category));
         }
-        dd(count($collected_cat[0]['children']));
         $view->with('categories', $collected_cat);
     }
 }
