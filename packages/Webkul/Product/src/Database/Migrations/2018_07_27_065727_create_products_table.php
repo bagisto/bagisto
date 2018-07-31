@@ -17,12 +17,21 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('sku')->unique();
             $table->string('type');
-            $table->integer('parent_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->integer('parent_id')->unsigned()->nullable();
+            $table->integer('attribute_family_id')->unsigned()->nullable();
+            $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onDelete('cascade');
         });
 
         Schema::table('products', function (Blueprint $table) {
             $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
+        });
+
+        Schema::create('product_inventories', function (Blueprint $table) {
+            $table->integer('product_id')->unsigned();
+            $table->integer('inventory_source_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('inventory_source_id')->references('id')->on('inventory_sources')->onDelete('cascade');
         });
 
         Schema::create('product_categories', function (Blueprint $table) {
@@ -37,6 +46,13 @@ class CreateProductsTable extends Migration
             $table->integer('child_id')->unsigned();
             $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('child_id')->references('id')->on('products')->onDelete('cascade');
+        });
+
+        Schema::create('product_super_attributes', function (Blueprint $table) {
+            $table->integer('product_id')->unsigned();
+            $table->integer('attribute_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
         });
 
         Schema::create('product_up_sells', function (Blueprint $table) {

@@ -29,10 +29,6 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->composeView();
 
-        Blade::directive('continue', function () {
-            return "<?php continue; ?>";
-        });
-
         $this->app->register(EventServiceProvider::class);
         $this->app->register(ComposerServiceProvider::class);
     }
@@ -74,13 +70,13 @@ class AdminServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    // public function register()
-    // {
-    //     $this->mergeConfigFrom(
-    //         __DIR__ . '/../Config/auth.php',
-    //         'auth'
-    //     );
-    // }
+    public function register()
+    {
+        // $this->mergeConfigFrom(
+        //     __DIR__ . '/../Config/auth.php',
+        //     'auth'
+        // );
+    }
 
     /**
      * Merge the given configuration with the existing configuration.

@@ -4,25 +4,6 @@ window.VeeValidate = require("vee-validate");
 
 Vue.use(VeeValidate);
 
-//register single file components here
-// import VueFlatpickr from "vue-flatpickr";
-// import "vue-flatpickr/theme/dark.css";
-// Vue.use(VueFlatpickr);
-
-Vue.component("datetime", require("./components/datetime"));
-
-$(document).ready(function() {
-    const app = new Vue({
-        el: "#app",
-
-        mounted: function() {
-            this.addServerErrors();
-            this.addFlashMessages();
-        },
-
-        methods: {
-            onSubmit: function(e) {
-                this.$validator.validateAll().then(result => {
 $(document).ready(function () {
     Vue.config.ignoredElements = [
         'option-wrapper',
@@ -54,10 +35,6 @@ $(document).ready(function () {
             addServerErrors () {
                 var scope = null;
                 for (var key in serverErrors) {
-                    const field = this.$validator.fields.find({
-                        name: key,
-                        scope: scope
-                    });
                     var inputName = key;
                     if(key.indexOf('.') !== -1) {
                         inputName = key.replace(".", "[") + ']';

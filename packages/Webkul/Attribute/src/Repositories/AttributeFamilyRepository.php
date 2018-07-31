@@ -128,7 +128,7 @@ class AttributeFamilyRepository extends Repository
                     }
 
                     if($attributeIds->count()) {
-                        $attributeGroup->detach($attributeIds);
+                        $attributeGroup->attributes()->detach($attributeIds);
                     }
                 }
             }

@@ -31,7 +31,7 @@ class CurrencyController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\CurrencyRepository  $currency
+     * @param  Webkul\Core\Repositories\CurrencyRepository $currency
      * @return void
      */
     public function __construct(Currency $currency)
