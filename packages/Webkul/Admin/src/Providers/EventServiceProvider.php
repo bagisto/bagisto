@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
 use Webkul\Ui\Menu;
+use Webkul\Admin\ProductFormAccordian;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,8 @@ class EventServiceProvider extends ServiceProvider
         $this->buildACL();
 
         $this->registerACL();
+
+        $this->createProductFormAccordian();
     }
 
     /**
@@ -109,5 +112,23 @@ class EventServiceProvider extends ServiceProvider
         });
 
         View::share('acl', app('acl'));
+    }
+
+    /**
+     * This method fires an event for accordian creation, any package can add their accordian item by listening to the admin.catalog.products.accordian.build event
+     *
+     * @return void
+     */
+    public function createProductFormAccordian()
+    {
+        Event::listen('admin.catalog.products.accordian.create', function() {
+            return ProductFormAccordian::create(function($accordian) {
+                Event::fire('admin.catalog.products.accordian.build', $accordian);
+            });
+        });
+
+        Event::listen('admin.catalog.products.accordian.build', function($accordian) {
+            $accordian->add('categories', 'Categories', 'admin::catalog.products.accordians.categories', 1);
+        });
     }
 }

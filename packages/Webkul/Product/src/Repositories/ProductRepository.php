@@ -30,8 +30,10 @@ class ProductRepository extends Repository
     {
         $product = $this->model->create($data);
 
-        foreach ($data['super_attributes'] as $attributeId => $attribute) {
-            $product->super_attributes()->attach($attributeId);
+        if(isset($data['super_attributes'])) {
+            foreach ($data['super_attributes'] as $attributeId => $attribute) {
+                $product->super_attributes()->attach($attributeId);
+            }
         }
 
         return $product;

@@ -40,6 +40,12 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function composeView()
     {
+        view()->composer(['admin::catalog.products.create', 'admin::catalog.products.edit'], function ($view) {
+            $accordians = current(Event::fire('admin.catalog.products.accordian.create'));
+
+            $view->with('form_accordians', $accordians);
+        });
+
         view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $menu = current(Event::fire('admin.menu.create'));
 

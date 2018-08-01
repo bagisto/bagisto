@@ -85,15 +85,20 @@ class ProductController extends Controller
      */
     public function store()
     {
-        if(!request()->get('family') && request()->input('type') == 'configurable') {
-            return redirect(url()->current() . '?family=' . request()->input('attribute_family_id'));
+        if(!request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
+            return redirect(url()->current() . '?family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
+        }
+
+        if(request()->input('type') == 'configurable' && (!request()->has('super_attributes') || !count(request()->get('super_attributes')))) {
+            session()->flash('error', 'Please select atleast one configurable attribute.');
+
+            return back();
         }
 
         $this->validate(request(), [
             'type' => 'required',
             'attribute_family_id' => 'required',
-            'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug],
-            'super_attributes' => 'required|array|min:1'
+            'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
         ]);
 
         $product = $this->product->create(request()->all());
@@ -112,6 +117,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->product->findOrFail($id);
+
+        dd($product);
 
         return view($this->_config['view'], compact('product'));
     }
