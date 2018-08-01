@@ -29476,7 +29476,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.menu-bar {\n    text-transform: capitalize;\n    color: #242424;\n}\n.menu-bar li {\n    min-width:50px;\n    height:48px;\n}\n.menu-bar li a{\n    display:block;\n}\n.menu-bar li inner-dropdown.ul li{\n    display:block;\n    height:48px;\n}\n.menu-bar li inner-dropdown.ul li a{\n    display:block;\n    height:48px;\n}\n.inner-dropdown {\n    display:none;\n}\n.root:hover > .inner-dropdown{\n    display:block;\n}\n.root:hover > .inner-dropdown > .inner-dropdown{\n    display:block;\n    margin-left:148px;\n}\n", ""]);
+exports.push([module.i, "\nul.nav {\n        display: block;\n        text-align: center;\n        font-size:16px;\n}\n.nav ul {\n        margin: 0;\n        padding:0;\n        list-style: none;\n}\n.nav a {\n        display:block;\n        color: black;\n        text-decoration: none;\n        padding: 0.8em 1.8em;\n        text-transform: uppercase;\n        letter-spacing: 2px;\n        position: relative;\n}\n.nav{\n        vertical-align: top;\n        display: inline-block;\n        -webkit-box-shadow:\n            1px -1px -1px 1px #000,\n            -1px 1px -1px 1px #fff,\n            0 0 6px 3px #fff;\n                box-shadow:\n            1px -1px -1px 1px #000,\n            -1px 1px -1px 1px #fff,\n            0 0 6px 3px #fff;\n        border-radius:6px;\n}\n.nav li {\n        position: relative;\n}\n.nav > li {\n        float: left;\n        margin-right: 1px;\n}\n.nav > li > a {\n        margin-bottom: 1px;\n}\n.nav > li:last-child {\n        border-radius: 0 0 4px 0;\n        margin-right: 0;\n}\n.nav > li:last-child > a {\n        border-radius: 0 4px 0 0;\n}\n.nav li li a {\n        margin-top: 1px;\n}\n.nav li a:first-child:nth-last-child(2):before {\n        content: \"\";\n        position: absolute;\n        height: 0;\n        width: 0;\n        border: 5px solid transparent;\n        top: 50% ;\n        right:5px;\n}\n\n    /* submenu positioning*/\n.nav ul {\n        position: absolute;\n        white-space: nowrap;\n        border: 1px solid #B1B1B1;\n        background-color:white;\n        z-index: 1;\n        left: -99999em;\n}\n.nav > li:hover > ul {\n        left: auto;\n        min-width: 100%;\n}\n.nav > li li:hover > ul {\n        left: 100%;\n        margin-left: 1px;\n        top: -1px;\n}\n.nav > li:hover > a:first-child:nth-last-child(2):before {\n        /* border: 5px solid transparent;\n        border-bottom-color: orange; */\n        margin-top:-5px\n}\n.nav li li > a:first-child:nth-last-child(2):before {\n        /* border-left-color: #aaa; */\n        margin-top: -5px\n}\n.nav li li:hover > a:first-child:nth-last-child(2):before {\n        right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -29570,7 +29570,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "ul",
-    { staticClass: "menu-bar" },
+    { staticClass: "nav" },
     [
       _vm._l(_vm.items, function(item, index) {
         return _c("category-item", {
@@ -29613,10 +29613,6 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(19)
-}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(21)
@@ -29625,7 +29621,7 @@ var __vue_template__ = __webpack_require__(22)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -29660,46 +29656,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(20);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("cccb72f4", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d899aa34\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./category-item.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d899aa34\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./category-item.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.inner-dropdown {\n    position:absolute;\n    background:white;\n    border: 1px solid red;\n    color:black;\n    margin-top:35px;\n    padding:5px;\n    width:148px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 19 */,
+/* 20 */,
 /* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -29719,9 +29677,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
+
 
 // define the item component
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         item: Object,
@@ -29754,19 +29713,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("li", { staticClass: "root" }, [
+  return _c("li", [
     _c("a", { attrs: { href: "" } }, [_vm._v(_vm._s(_vm.item.name))]),
     _vm._v(" "),
     _vm.haveChildren
       ? _c(
           "ul",
-          { staticClass: "inner-dropdown" },
           _vm._l(_vm.item.children, function(child, index) {
-            return _c("category-item", {
-              key: index,
-              staticClass: "inner-item",
-              attrs: { item: child }
-            })
+            return _c("category-item", { key: index, attrs: { item: child } })
           })
         )
       : _vm._e()

@@ -1,10 +1,9 @@
 <template>
-    <li class="root">
+    <li>
         <a href="">{{ item.name }}</a>
-        <!-- replace the below inner-child class with dropdown that -->
-        <ul class="inner-dropdown" v-if="haveChildren">
+        <!-- replace the below inner-child class with dropdown -->
+        <ul v-if="haveChildren">
             <category-item
-                class="inner-item"
                 v-for="(child, index) in item.children"
                 :key="index"
                 :item="child">
@@ -14,7 +13,9 @@
 </template>
 
 <script>
+
 // define the item component
+
 export default {
 	props: {
 		item:  Object,
@@ -38,14 +39,3 @@ export default {
     }
 }
 </script>
-<style>
-    .inner-dropdown {
-        position:absolute;
-        background:white;
-        border: 1px solid red;
-        color:black;
-        margin-top:35px;
-        padding:5px;
-        width:148px;
-    }
-</style>
