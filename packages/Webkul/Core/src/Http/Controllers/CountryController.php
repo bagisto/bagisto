@@ -4,7 +4,7 @@ namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Core\Models\Country;
+use Webkul\Core\Repositories\CountryRepository as Country;
 
 /**
  * Country controller
@@ -20,14 +20,24 @@ class CountryController extends Controller
      * @var array
      */
     protected $_config;
+    
+    /**
+     * CountryRepository object
+     *
+     * @var array
+     */
+    protected $country;
 
     /**
      * Create a new controller instance.
      *
+     * @param  Webkul\Core\Repositories\CountryRepository $country
      * @return void
      */
-    public function __construct()
+    public function __construct(Country $country)
     {
+        $this->country = $country;
+
         $this->_config = request('_config');
     }
 
@@ -64,7 +74,7 @@ class CountryController extends Controller
             'name' => 'required'
         ]);
 
-        Country::create(request(['code','name']));
+        $this->country->create(request()->all());
 
         session()->flash('success', 'Country created successfully.');
 

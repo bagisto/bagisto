@@ -4,8 +4,8 @@ namespace Webkul\User\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\User\Models\Admin;
-use Webkul\User\Models\Role;
+use Webkul\User\Repositories\AdminRepository as Admin;
+use Webkul\User\Repositories\RoleRepository as Role;
 use Webkul\User\Http\Requests\UserForm;
 
 /**
@@ -22,14 +22,34 @@ class UserController extends Controller
      * @var array
      */
     protected $_config;
+    
+    /**
+     * AdminRepository object
+     *
+     * @var array
+     */
+    protected $admin;
+    
+    /**
+     * RoleRepository object
+     *
+     * @var array
+     */
+    protected $role;
 
     /**
      * Create a new controller instance.
      *
+     * @param  Webkul\User\Repositories\AdminRepository $admin
+     * @param  Webkul\User\Repositories\RoleRepository $role
      * @return void
      */
-    public function __construct()
+    public function __construct(Admin $admin, Role $role)
     {
+        $this->admin = $admin;
+
+        $this->role = $role;
+
         $this->_config = request('_config');
 
         $this->middleware('guest', ['except' => 'destroy']);
@@ -52,7 +72,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = $this->role->all();
 
         return view($this->_config['view'], compact('roles'));
     }
@@ -65,7 +85,7 @@ class UserController extends Controller
      */
     public function store(UserForm $request)
     {
-        Admin::create(request()->all());
+        $this->admin->create(request()->all());
 
         session()->flash('success', 'User created successfully.');
 
@@ -80,8 +100,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = Admin::findOrFail($id);
-        $roles = Role::all();
+        $user = $this->admin->findOrFail($id);
+
+        $roles = $this->role->all();
 
         return view($this->_config['view'], compact('user', 'roles'));
     }
@@ -95,9 +116,7 @@ class UserController extends Controller
      */
     public function update(UserForm $request, $id)
     {
-        $user = Admin::findOrFail($id);
-
-        $user->update(request(['name', 'email', 'password']));
+        $this->admin->update(request()->all(), $id);
 
         session()->flash('success', 'User updated successfully.');
 

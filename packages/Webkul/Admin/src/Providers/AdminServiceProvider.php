@@ -29,10 +29,6 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->composeView();
 
-        Blade::directive('continue', function () {
-            return "<?php continue; ?>";
-        });
-
         $this->app->register(EventServiceProvider::class);
         $this->app->register(ComposerServiceProvider::class);
     }
@@ -44,6 +40,12 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function composeView()
     {
+        view()->composer(['admin::catalog.products.create', 'admin::catalog.products.edit'], function ($view) {
+            $accordians = current(Event::fire('admin.catalog.products.accordian.create'));
+
+            $view->with('form_accordians', $accordians);
+        });
+
         view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $menu = current(Event::fire('admin.menu.create'));
 
@@ -74,13 +76,13 @@ class AdminServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    // public function register()
-    // {
-    //     $this->mergeConfigFrom(
-    //         __DIR__ . '/../Config/auth.php',
-    //         'auth'
-    //     );
-    // }
+    public function register()
+    {
+        // $this->mergeConfigFrom(
+        //     __DIR__ . '/../Config/auth.php',
+        //     'auth'
+        // );
+    }
 
     /**
      * Merge the given configuration with the existing configuration.

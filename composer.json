@@ -34,7 +34,8 @@
         "webkul/laravel-customer": "self.version",
         "webkul/laravel-category": "self.version",
         "webkul/laravel-channel": "self.version",
-        "webkul/laravel-product": "self.version"
+        "webkul/laravel-product": "self.version",
+        "webkul/laravel-shop": "self.version"
     },
     "autoload": {
         "classmap": [

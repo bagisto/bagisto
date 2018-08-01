@@ -4,8 +4,12 @@ window.VeeValidate = require("vee-validate");
 
 Vue.use(VeeValidate);
 
-$(document).ready(function() {
-    Vue.config.ignoredElements = ["option-wrapper", "group-form", "group-list"];
+$(document).ready(function () {
+    Vue.config.ignoredElements = [
+        'option-wrapper',
+        'group-form',
+        'group-list'
+    ];
 
     var app = new Vue({
         el: "#app",

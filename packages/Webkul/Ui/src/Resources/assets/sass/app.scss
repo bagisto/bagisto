@@ -223,6 +223,7 @@ h2 {
 
                 .icon {
                     cursor: pointer;
+                    vertical-align: middle;
                 }
             }
         }
@@ -928,5 +929,30 @@ h2 {
         .control-group .control {
             width: 100%;
         }
+    }
+}
+
+
+.label {
+    background: #E7E7E7;
+    border-radius: 2px;
+    padding: 8px;
+    color: #000311;
+    display: inline-block;
+
+    &.label-sm {
+        padding: 5px;
+    }
+
+    &.label-md {
+        padding: 8px;
+    }
+
+    &.label-lg {
+        padding: 11px;
+    }
+
+    &.label-xl {
+        padding: 14px;
     }
 }

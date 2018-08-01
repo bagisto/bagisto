@@ -4,7 +4,7 @@ namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Core\Models\Locale;
+use Webkul\Core\Repositories\LocaleRepository as Locale;
 
 /**
  * Locale controller
@@ -20,14 +20,24 @@ class LocaleController extends Controller
      * @var array
      */
     protected $_config;
+    
+    /**
+     * LocaleRepository object
+     *
+     * @var array
+     */
+    protected $locale;
 
     /**
      * Create a new controller instance.
      *
+     * @param  Webkul\Core\Repositories\LocaleRepository $locale
      * @return void
      */
-    public function __construct()
+    public function __construct(Locale $locale)
     {
+        $this->locale = $locale;
+
         $this->_config = request('_config');
     }
 
@@ -64,7 +74,7 @@ class LocaleController extends Controller
             'name' => 'required'
         ]);
 
-        Locale::create(request(['code','name']));
+        $this->locale->create(request()->all());
 
         session()->flash('success', 'Locale created successfully.');
 

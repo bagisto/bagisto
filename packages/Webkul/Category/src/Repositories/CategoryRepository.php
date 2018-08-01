@@ -44,14 +44,10 @@ class CategoryRepository extends Repository
         if(isset($data['locale']) && $data['locale'] == 'all') {
             $model = app()->make($this->model());
             
-            $channels = channel()->getChannelWithLocales();
-
-            foreach($channels as $channel) {
-                foreach($channel->locales as $locale) {
-                    foreach ($model->translatedAttributes as $attribute) {
-                        if(isset($data[$attribute])) {
-                            $data[$channel->code . '.' . $locale->code][$attribute] = $data[$attribute];
-                        }
+            foreach(core()->allLocales() as $locale) {
+                foreach ($model->translatedAttributes as $attribute) {
+                    if(isset($data[$attribute])) {
+                        $data[$locale->code][$attribute] = $data[$attribute];
                     }
                 }
             }

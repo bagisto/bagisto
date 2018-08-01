@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="content">
-        <?php $locale = request()->get('channel_locale') ?: channel()->getDefaultChannelLocaleCode(); ?>
+        <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
         
         <form method="POST" action="" @submit.prevent="onSubmit">
 
@@ -16,17 +16,11 @@
 
                     <div class="control-group">
                         <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
-                            @foreach(channel()->getChannelWithLocales() as $channel)
-                            
-                                <optgroup label="{{ $channel->name }}">
+                            @foreach(core()->allLocales() as $localeModel)
 
-                                    @foreach($channel->locales as $channelLocale)
-                                        <option value="{{ route('admin.catalog.categories.update', $category->id) . '?channel_locale=' . $channel->code . '-' . $channelLocale->code }}" {{ ($channel->code . '-' . $channelLocale->code) == $locale ? 'selected' : '' }}>
-                                            {{ $channelLocale->name }}
-                                        </option>
-                                    @endforeach
-                                
-                                </optgroup>
+                                <option value="{{ route('admin.catalog.categories.update', $category->id) . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
+                                    {{ $localeModel->name }}
+                                </option>
 
                             @endforeach
                         </select>

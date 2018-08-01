@@ -269,6 +269,14 @@
             </div>
         </div>
 
+        <label class="styleguide-label">Labels</label>
+        <div class="styleguide-wrapper">
+            <span class="label label-sm">Label Small</span>
+            <span class="label label-md">Label Medium</span>
+            <span class="label label-lg">Label Large</span>
+            <span class="label label-xl">Label Extra Large</span>
+        </div>
+
         <label class="styleguide-label">Table</label>
         <div class="styleguide-wrapper">
             <div class="table">

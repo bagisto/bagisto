@@ -5,6 +5,7 @@ namespace Webkul\Product\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Product\Repositories\ProductRepository as Product;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 
 /**
  * Product controller
@@ -22,6 +23,13 @@ class ProductController extends Controller
     protected $_config;
     
     /**
+     * AttributeFamilyRepository object
+     *
+     * @var array
+     */
+    protected $attributeFamily;
+    
+    /**
      * ProductRepository object
      *
      * @var array
@@ -31,11 +39,14 @@ class ProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Product\Repositories\ProductRepository  $product
+     * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
+     * @param  Webkul\Product\Repositories\ProductRepository            $product
      * @return void
      */
-    public function __construct(Product $product)
+    public function __construct(AttributeFamily $attributeFamily, Product $product)
     {
+        $this->attributeFamily = $attributeFamily;
+
         $this->product = $product;
 
         $this->_config = request('_config');
@@ -58,7 +69,13 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        $families = $this->attributeFamily->all();
+
+        if($familyId = request()->get('family')) {
+            $configurableFamily = $this->attributeFamily->findOrFail($familyId);
+        }
+
+        return view($this->_config['view'], compact('families', 'configurableFamily'));
     }
 
     /**
@@ -68,15 +85,27 @@ class ProductController extends Controller
      */
     public function store()
     {
+        if(!request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
+            return redirect(url()->current() . '?family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
+        }
+
+        if(request()->input('type') == 'configurable' && (!request()->has('super_attributes') || !count(request()->get('super_attributes')))) {
+            session()->flash('error', 'Please select atleast one configurable attribute.');
+
+            return back();
+        }
+
         $this->validate(request(), [
-            'name' => 'required'
+            'type' => 'required',
+            'attribute_family_id' => 'required',
+            'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
         ]);
 
-        $this->product->create(request()->all());
+        $product = $this->product->create(request()->all());
 
         session()->flash('success', 'Product created successfully.');
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route($this->_config['redirect'], ['id' => $product->id]);
     }
 
     /**
@@ -88,6 +117,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->product->findOrFail($id);
+
+        dd($product);
 
         return view($this->_config['view'], compact('product'));
     }
