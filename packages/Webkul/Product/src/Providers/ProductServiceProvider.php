@@ -4,6 +4,8 @@ namespace Webkul\Product\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
+use Webkul\Product\Models\Product;
+use Webkul\Product\Observers\ProductObserver;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -15,6 +17,8 @@ class ProductServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        Product::observe(ProductObserver::class);
     }
 
     /**

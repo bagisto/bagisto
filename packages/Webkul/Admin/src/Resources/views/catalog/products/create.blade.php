@@ -35,6 +35,7 @@
                 @csrf()
 
                 <?php $familyId = app('request')->input('family') ?>
+                <?php $sku = app('request')->input('sku') ?>
 
                 <accordian :title="'{{ __('admin::app.catalog.products.general') }}'" :active="true">
                     <div slot="body">
@@ -57,7 +58,7 @@
                             <select class="control" v-validate="'required'" id="attribute_family_id" name="attribute_family_id" {{ $familyId ? 'disabled' : '' }}>
                                 <option value=""></option>
                                 @foreach($families as $family)
-                                    <option value="{{ $family->id }}" {{ $familyId == $family->id ? 'selected' : '' }}>{{ $family->name }}</option>
+                                    <option value="{{ $family->id }}" {{ ($familyId == $family->id || old('attribute_family_id') == $family->id) ? 'selected' : '' }}>{{ $family->name }}</option>
                                     @endforeach
                             </select>
 
@@ -67,13 +68,11 @@
                             <span class="control-error" v-if="errors.has('attribute_family_id')">@{{ errors.first('attribute_family_id') }}</span>
                         </div>
 
-                        @if($familyId)
-                            <div class="control-group" :class="[errors.has('sku') ? 'has-error' : '']">
-                                <label for="sku">{{ __('admin::app.catalog.products.sku') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="sku" name="sku" value="{{ old('sku') }}"/>
-                                <span class="control-error" v-if="errors.has('sku')">@{{ errors.first('sku') }}</span>
-                            </div>
-                        @endif
+                        <div class="control-group" :class="[errors.has('sku') ? 'has-error' : '']">
+                            <label for="sku">{{ __('admin::app.catalog.products.sku') }}</label>
+                            <input type="text" v-validate="'required'" class="control" id="sku" name="sku" value="{{ $sku ?: old('sku') }}"/>
+                            <span class="control-error" v-if="errors.has('sku')">@{{ errors.first('sku') }}</span>
+                        </div>
                     
                     </div>
                 </accordian>
@@ -130,8 +129,14 @@
 
 @section('javascript')
     <script>
-        (function() {
+        $(document).ready(function () {
+            $('.label .cross-icon').on('click', function(e) {
+                $(e.target).parent().remove();
+            })
 
-        })();
+            $('.actions .trash-icon').on('click', function(e) {
+                $(e.target).parents('tr').remove();
+            })
+        });
     </script>
 @stop

@@ -6,10 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Category\Models\Category;
 use Webkul\Inventory\Models\InventorySource;
+use Webkul\Attribute\Models\AttributeFamily;
 
 class Product extends Model
 {
     protected $fillable = ['type', 'attribute_family_id', 'sku'];
+
+    protected $with = ['super_attributes'];
+
+    /**
+     * Get the product attribute family that owns the product.
+     */
+    public function attribute_family()
+    {
+        return $this->belongsTo(AttributeFamily::class);
+    }
 
     /**
      * The categories that belong to the product.
@@ -57,5 +68,13 @@ class Product extends Model
     public function cross_sells()
     {
         return $this->belongsToMany(self::class, 'product_cross_sells');
+    }
+
+    public function  __get($name) {
+        // if(array_key_exists($name, $this->data)) {
+        //     return $this->data[$name];
+        // }
+
+        return null;
     }
 }
