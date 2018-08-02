@@ -18,8 +18,7 @@
 			return {
 				fpOptions: {
 					utc: false,
-					defaultDate: now,
-					enableTime: true
+					enableTime: false
 				}
 			};
 		}

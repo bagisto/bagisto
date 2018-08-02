@@ -2,6 +2,8 @@
 
 namespace Webkul\Product\Repositories;
  
+use Illuminate\Container\Container as App;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 
 /**
@@ -11,7 +13,41 @@ use Webkul\Core\Eloquent\Repository;
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ProductAttributeValueRepository extends Repository
-{
+{    
+    /**
+     * AttributeRepository object
+     *
+     * @var array
+     */
+    protected $attribute;
+
+    /**
+     * @var array
+     */
+    protected $attributeTypeFields = [
+        'text' => 'text_value',
+        'textarea' => 'text_value',
+        'price' => 'float_value',
+        'boolean' => 'boolean_value',
+        'select' => 'integer_value',
+        'multiselect' => 'text_value',
+        'datetime' => 'datetime_time',
+        'date' => 'date_value',
+    ];
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  Webkul\Attribute\Repositories\AttributeRepository $attribute
+     * @return void
+     */
+    public function __construct(AttributeRepository $attribute, App $app)
+    {
+        $this->attribute = $attribute;
+
+        parent::__construct($app);
+    }
+
     /**
      * Specify Model class name
      *
@@ -28,12 +64,10 @@ class ProductAttributeValueRepository extends Repository
      */
     public function create(array $data)
     {
-        $product = $this->model->create($data);
+        $attribute = $this->attribute->find($data['attribute_id']);
 
-        foreach ($data['super_attributes'] as $attributeId => $attribute) {
-            $product->super_attributes()->attach($attributeId);
-        }
+        $data[$this->attributeTypeFields[$attribute->type]] = $data['value'];
 
-        return $product;
+        return $this->model->create($data);
     }
 }
