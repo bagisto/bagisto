@@ -213,10 +213,9 @@ h2 {
         }
 
         tbody td {
-            padding: 12px 10px;
+            padding: 10px;
             border-bottom: solid 1px #d3d3d3;
             color: #3a3a3a;
-            vertical-align: top;
 
             &.actions {
                 text-align: right;
@@ -616,8 +615,6 @@ h2 {
 }
 
 .grid-container {
-    margin-top: 30px;
-
     .filter-wrapper {
         display: block;
         box-sizing: border-box;
@@ -932,9 +929,8 @@ h2 {
     }
 }
 
-
 .label {
-    background: #E7E7E7;
+    background: #e7e7e7;
     border-radius: 2px;
     padding: 8px;
     color: #000311;

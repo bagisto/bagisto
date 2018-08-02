@@ -10,6 +10,7 @@ use Webkul\Ui\DataGrid\Helpers\Column;
 use Webkul\Ui\DataGrid\Helpers\Pagination;
 use Webkul\Ui\DataGrid\Helpers\Css;
 use Webkul\Ui\DataGrid\Helpers\MassAction;
+use URL;
 
 class DataGrid
 {
@@ -386,39 +387,6 @@ class DataGrid
     }
 
     /**
-     * Parse the URL
-     * and get it ready
-     * to be used.
-     */
-
-    // private function parse()
-    // {
-    //     //parse the url here
-    //     if (isset($_SERVER['QUERY_STRING'])) {
-    //         $qr = $_SERVER['QUERY_STRING'];
-    //         parse_str($qr, $parsed);
-    //         foreach ($parsed as $k=>$v) {
-    //             parse_str($v, $parsed[$k]);
-    //         }
-    //         return $parsed;
-    //     } else {
-    //         return $parsed = [];
-    //     }
-    // }
-
-    private function parse()
-    {
-        $parsed = [];
-        $unparsed = $_SERVER['QUERY_STRING'];
-        if (isset($unparsed)) {
-            parse_str($unparsed, $parsed);
-            return $parsed;
-        } else {
-            return $parsed;
-        }
-    }
-
-    /**
      * Used for selecting
      * the columns got in
      * make from controller.
@@ -433,6 +401,25 @@ class DataGrid
         $this->query->select(...$select);
         if ($this->select) {
             $this->query->addselect($this->select);
+        }
+    }
+
+    /**
+     * Parse the URL
+     * and get it ready
+     * to be used.
+     */
+
+    private function parse()
+    {
+        $parsed = [];
+        $unparsed = url()->full();
+        if (count(explode('?', $unparsed))>1) {
+            $to_be_parsed = explode('?', $unparsed)[1];
+            parse_str($to_be_parsed, $parsed);
+            return $parsed;
+        } else {
+            return $parsed;
         }
     }
 
@@ -452,6 +439,7 @@ class DataGrid
     {
         foreach ($this->columns as $column) {
             if ($column->filter) { // if the filter bag in array exists then these will be applied.
+                dd($column);
                 if (count($column->filter['condition']) == count($column->filter['condition'], COUNT_RECURSIVE)) {
                     $this->query->{$column->filter['function']}(...$column->filter['condition']);
                 } else {
@@ -651,14 +639,13 @@ class DataGrid
                 foreach ($this->join as $join) {
                     $name = strtolower($join['join']);
                     //Allow joins i.e left or right
-                    if ($name=='leftjoin' || $name=='left join' || $name=='rightjoin' || $name=='right join') {
+                    if ($name=='leftjoin' || $name=='rightjoin') {
 
                         //check if the aliasing on the primary table and primaryKey in join is also the same
                         $primary_key_alias = trim(explode('.', $join['primaryKey'])[0]);
 
                         if ($primary_key_alias == $table_alias) {
                             $join_table_alias = explode('as', $join['table']);
-
                             if (isset($join_table_alias)) {
                                 $alias1 = trim($join_table_alias[1]); //important!!!!!
 

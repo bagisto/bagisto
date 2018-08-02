@@ -75,3 +75,45 @@
     @include('shop::store.header.nav-menu.navmenu')
     </div>
 </div>
+@section('javascript')
+<script>
+    $(window).resize(function() {
+        var w = $(document).width();
+        var window = {};
+        window.width = $(document).width();
+        window.height = $(document).height();
+        if (window.width < 785) {
+            $(".header").css("margin-bottom", "0");
+            $(".header-top").css("margin-bottom", "0");
+            $("ul.search-container").css("display", "none");
+            $(".header-bottom").css("display", "none");
+            $("div.right-content").css("display", "none");
+            $(".right-responsive").css("display", "inherit");
+        } else if (window.width > 785) {
+            $(".header").css("margin-bottom", "21px");
+            $(".header-top").css("margin-bottom", "16px");
+            $("ul.search-container").css("display", "inherit");
+            $(".header-bottom").css("display", "block");
+            $("div.right-content").css("display", "inherit");
+            $(".right-responsive").css("display", "none");
+        }
+    });
+
+    $(document).ready(function (){
+        /* Responsiveness script goes here */
+        var w = $(document).width();
+        var window = {};
+        window.width = $(document).width();
+        window.height = $(document).height();
+        if (window.width < 785) {
+            $(".header").css("margin-bottom", "0");
+            $(".header-top").css("margin-bottom", "0");
+            $("ul.search-container").css("display", "none");
+            $(".header-bottom").css("display", "none");
+            $("div.right-content").css("display", "none");
+            $(".right-responsive").css("display", "inherit");
+        }
+        /* Responsiveness script ends here */
+    });
+</script>
+@endsection

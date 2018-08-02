@@ -10,54 +10,18 @@ Vue.component("category-nav", require("./components/category-nav.vue"));
 Vue.component("category-item", require("./components/category-item.vue"));
 Vue.component("image-slider", require("./components/imageSlider.vue"));
 
-$(window).resize(function() {
-    var w = $(document).width();
-    var window = {};
-    window.width = $(document).width();
-    window.height = $(document).height();
-    if (window.width < 785) {
-        $(".header").css("margin-bottom", "0");
-        $(".header-top").css("margin-bottom", "0");
-        $("ul.search-container").css("display", "none");
-        $(".header-bottom").css("display", "none");
-        $("div.right-content").css("display", "none");
-        $(".right-responsive").css("display", "inherit");
-    } else if (window.width > 785) {
-        $(".header").css("margin-bottom", "21px");
-        $(".header-top").css("margin-bottom", "16px");
-        $("ul.search-container").css("display", "inherit");
-        $(".header-bottom").css("display", "block");
-        $("div.right-content").css("display", "inherit");
-        $(".right-responsive").css("display", "none");
-    }
-});
-
-$(document).ready(function() {
-    /* Responsiveness script goes here */
-    var w = $(document).width();
-    var window = {};
-    window.width = $(document).width();
-    window.height = $(document).height();
-    if (window.width < 785) {
-        $(".header").css("margin-bottom", "0");
-        $(".header-top").css("margin-bottom", "0");
-        $("ul.search-container").css("display", "none");
-        $(".header-bottom").css("display", "none");
-        $("div.right-content").css("display", "none");
-        $(".right-responsive").css("display", "inherit");
-    }
-    /* Responsiveness script ends here */
+$(document).ready(function () {
 
     const app = new Vue({
         el: "#app",
 
-        mounted: function() {
+        mounted: function () {
             this.addServerErrors();
             this.addFlashMessages();
         },
 
         methods: {
-            onSubmit: function(e) {
+            onSubmit: function (e) {
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         e.target.submit();
@@ -65,7 +29,7 @@ $(document).ready(function() {
                 });
             },
 
-            addServerErrors: function() {
+            addServerErrors: function () {
                 var scope = null;
                 for (var key in serverErrors) {
                     const field = this.$validator.fields.find({
@@ -83,14 +47,14 @@ $(document).ready(function() {
                 }
             },
 
-            addFlashMessages: function() {
+            addFlashMessages: function () {
                 const flashes = this.$refs.flashes;
 
-                flashMessages.forEach(function(flash) {
+                flashMessages.forEach(function (flash) {
                     flashes.addFlash(flash);
                 }, this);
             },
-            responsiveHeader: function() {}
+            responsiveHeader: function () { }
         }
     });
 });

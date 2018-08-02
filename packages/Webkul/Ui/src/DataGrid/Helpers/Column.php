@@ -13,17 +13,6 @@ class Column extends AbstractFillable
     private $readableName = false;
     private $value = false;
     private $sortHtml = '<a href="%s">%s</a>';
-    // private $sortHtml = '<span href="%s">%s</span>';
-
-    // protected $name;
-    // protected $type;
-    // protected $label;
-    // protected $filterable;
-    // protected $sortable;
-    // protected $attributes;
-    // protected $wrapper;
-    // protected $callback;
-
 
     /**
      * Without Array it will treat it like string
@@ -53,6 +42,7 @@ class Column extends AbstractFillable
             'type',
             'label',
             'sortable',
+            'searchable',
             'filterable',
             'filter' => [
                 'allowed' => 'array',
