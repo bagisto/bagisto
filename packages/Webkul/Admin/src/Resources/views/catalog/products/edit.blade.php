@@ -26,9 +26,24 @@
 
                                 @foreach($attributeGroup->attributes as $attribute)
 
-                                    @if(view()->exists($typeView = 'admin::catalog.products.attribute-types.' . $attribute->type))
+                                    @if(!$product->super_attributes->contains($attribute))
+                                    
+                                        <?php 
+                                            $validations = [];
+                                            if($attribute->is_required) {
+                                                array_push($validations, 'required');
+                                            }
 
-                                        @include ($typeView)
+                                            array_push($validations, $attribute->validation);
+
+                                            $validations = implode('|', array_filter($validations));
+                                        ?> 
+
+                                        @if(view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
+
+                                            @include ($typeView)
+
+                                        @endif
 
                                     @endif
                                     

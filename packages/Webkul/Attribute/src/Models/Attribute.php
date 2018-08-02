@@ -12,6 +12,8 @@ class Attribute extends TranslatableModel
 
     protected $fillable = ['code', 'admin_name', 'type', 'position', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel', 'is_filterable', 'is_configurable'];
 
+    protected $with = ['options'];
+
     /**
      * Get the options.
      */

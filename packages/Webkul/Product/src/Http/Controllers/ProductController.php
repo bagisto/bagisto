@@ -118,8 +118,6 @@ class ProductController extends Controller
     {
         $product = $this->product->findOrFail($id);
 
-        dd($product);
-
         return view($this->_config['view'], compact('product'));
     }
 
