@@ -100,7 +100,7 @@
                                                 <td>
                                                     @foreach($attribute->options as $option)
                                                         <span class="label">
-                                                            <input type="hidden" name="super_attributes[{{$attribute->id}}][options][]" value="{{ $option->id }}"/>
+                                                            <input type="hidden" name="super_attributes[{{$attribute->code}}][]" value="{{ $option->id }}"/>
                                                             {{ $option->label }}
 
                                                             <i class="icon cross-icon"></i>

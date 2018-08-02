@@ -38,6 +38,7 @@
                     </div>
                     <div class="dropdown-list bottom-right" style="display: none;">
                         <div class="dropdown-container">
+                            <label>Account</label>
                             <ul>
                                 <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
                                 <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
@@ -56,7 +57,7 @@
             </ul>
             <ul class="ham-dropdown-container">
                 <li class="ham-dropdown">
-
+                    {{-- use this section for the dropdown of the hamburger menu --}}
                 </li>
             </ul>
         </div>
@@ -71,6 +72,6 @@
         </div>
     </div>
     <div class="header-bottom">
-        @include('shop::store.header.nav-menu.navmenu')
+    @include('shop::store.header.nav-menu.navmenu')
     </div>
 </div>

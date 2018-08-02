@@ -57,9 +57,6 @@
                                     <option value="multiselect" {{ $selectedOption == 'multiselect' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.multiselect') }}
                                     </option>
-                                    <option value="checkbox" {{ $selectedOption == 'checkbox' ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.checkbox') }}
-                                    </option>
                                     <option value="datetime" {{ $selectedOption == 'datetime' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.datetime') }}
                                     </option>
@@ -231,6 +228,8 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
+                            
                             @foreach(Webkul\Core\Models\Locale::all() as $locale)
 
                                 <th>{{ $locale->name . ' (' . $locale->code . ')' }}</th>
@@ -245,6 +244,13 @@
                         
                     <tbody>
                         <tr v-for="row in optionRows">
+                            <td>
+                                <div class="control-group" :class="[errors.has(adminName(row)) ? 'has-error' : '']">
+                                    <input type="text" v-validate="'required'" v-model="row['admin_name']" :name="adminName(row)" class="control"/>
+                                    <span class="control-error" v-if="errors.has(adminName(row))">@{{ errors.first(adminName(row)) }}</span>
+                                </div>
+                            </td>
+
                             @foreach(Webkul\Core\Models\Locale::all() as $locale)
                                 <td>
                                     <div class="control-group" :class="[errors.has(localeInputName(row, '{{ $locale->code }}')) ? 'has-error' : '']">
@@ -292,7 +298,7 @@
                 created () {
                     @foreach($attribute->options as $option)
                         this.optionRowCount++;
-                        var row = {'id': '{{ $option->id }}', 'sort_order': '{{ $option->sort_order }}'};
+                        var row = {'id': '{{ $option->id }}', 'admin_name': '{{ $option->admin_name }}', 'sort_order': '{{ $option->sort_order }}'};
 
                         @foreach(Webkul\Core\Models\Locale::all() as $locale)
                             row['{{ $locale->code }}'] = "{{ $option->translate($locale->code)['label'] }}";
@@ -322,6 +328,10 @@
                     removeRow (row) {
                         var index = this.optionRows.indexOf(row)
                         Vue.delete(this.optionRows, index);
+                    },
+
+                    adminName (row) {
+                        return 'options[' + row.id + '][admin_name]';
                     },
 
                     localeInputName (row, locale) {

@@ -270,98 +270,104 @@
                 /*validate the conditions here and do the replacements and
                 push here in the all filters array*/
                 var obj1 = {};
+                if(column == "" || condition == "" || response == ""){
+                    alert("Please mention all the fields for column, condition and match params for proper functioning");
+                    return false;
+                }
+                else {
+                    if(allFilters1.length>0) {
+                        //case for repeated filter
 
-                if(allFilters1.length>0) {
-                    //case for repeated filter
-
-                    if(column != "sort" && column != "search") {
-                        filter_repeated = 0;
-                        for(j=0;j<allFilters1.length;j++) {
-                            if(allFilters1[j].column==column && allFilters1[j].cond==condition && allFilters1[j].val==response)
-                            {
-                                filter_repeated = 1;
-                                return false;
+                        if(column != "sort" && column != "search") {
+                            filter_repeated = 0;
+                            for(j=0;j<allFilters1.length;j++) {
+                                if(allFilters1[j].column==column && allFilters1[j].cond==condition && allFilters1[j].val==response)
+                                {
+                                    filter_repeated = 1;
+                                    return false;
+                                }
+                            }
+                            if(filter_repeated == 0) {
+                                obj1.column = column;
+                                obj1.cond = condition;
+                                obj1.val = response;
+                                obj1.label = clabel;
+                                allFilters1.push(obj1);
+                                obj1 = {};
+                                makeURL();
                             }
                         }
-                        if(filter_repeated == 0) {
-                            obj1.column = column;
-                            obj1.cond = condition;
-                            obj1.val = response;
-                            obj1.label = clabel;
-                            allFilters1.push(obj1);
-                            obj1 = {};
-                            makeURL();
-                        }
-                    }
-                    if(column == "sort") {
-                        sort_exists = 0;
-                        for(j=0;j<allFilters1.length;j++) {
-                            if(allFilters1[j].column == "sort") {
+                        if(column == "sort") {
+                            sort_exists = 0;
+                            for(j=0;j<allFilters1.length;j++) {
+                                if(allFilters1[j].column == "sort") {
 
-                                if(allFilters1[j].column==column && allFilters1[j].cond==condition && allFilters1[j].val==response){
-                                    if(response=="asc"){
-                                        allFilters1[j].column = column;
-                                        allFilters1[j].cond = condition;
-                                        allFilters1[j].val = "desc";
-                                        allFilters1[j].label = clabel;
-                                        makeURL();
+                                    if(allFilters1[j].column==column && allFilters1[j].cond==condition && allFilters1[j].val==response){
+                                        if(response=="asc"){
+                                            allFilters1[j].column = column;
+                                            allFilters1[j].cond = condition;
+                                            allFilters1[j].val = "desc";
+                                            allFilters1[j].label = clabel;
+                                            makeURL();
+                                        }
+                                        else {
+                                            allFilters1[j].column = column;
+                                            allFilters1[j].cond = condition;
+                                            allFilters1[j].val = "asc";
+                                            allFilters1[j].label = clabel;
+                                            makeURL();
+                                        }
+
                                     }
                                     else {
                                         allFilters1[j].column = column;
                                         allFilters1[j].cond = condition;
-                                        allFilters1[j].val = "asc";
+                                        allFilters1[j].val = response;
                                         allFilters1[j].label = clabel;
                                         makeURL();
                                     }
 
+
                                 }
-                                else {
+                            }
+                        }
+                        if(column == "search") {
+                            search_found = 0;
+                            for(j=0;j<allFilters1.length;j++) {
+                                if(allFilters1[j].column == "search") {
                                     allFilters1[j].column = column;
                                     allFilters1[j].cond = condition;
                                     allFilters1[j].val = response;
                                     allFilters1[j].label = clabel;
                                     makeURL();
                                 }
-
-
                             }
-                        }
-                    }
-                    if(column == "search") {
-                        search_found = 0;
-                        for(j=0;j<allFilters1.length;j++) {
-                            if(allFilters1[j].column == "search") {
-                                allFilters1[j].column = column;
-                                allFilters1[j].cond = condition;
-                                allFilters1[j].val = response;
-                                allFilters1[j].label = clabel;
+                            for(j=0;j<allFilters1.length;j++) {
+                                if(allFilters1[j].column == "search") {
+                                    search_found = 1;
+                                }
+                            }
+                            if(search_found == 0) {
+                                obj1.column = column;
+                                obj1.cond = condition;
+                                obj1.val = response;
+                                obj1.label = clabel;
+                                allFilters1.push(obj1);
+                                obj1 = {};
                                 makeURL();
                             }
                         }
-                        for(j=0;j<allFilters1.length;j++) {
-                            if(allFilters1[j].column == "search") {
-                                search_found = 1;
-                            }
-                        }
-                        if(search_found == 0) {
-                            obj1.column = column;
-                            obj1.cond = condition;
-                            obj1.val = response;
-                            obj1.label = clabel;
-                            allFilters1.push(obj1);
-                            obj1 = {};
-                            makeURL();
-                        }
+                    } else {
+                        obj1.column = column;
+                        obj1.cond = condition;
+                        obj1.val = response;
+                        obj1.label = clabel;
+                        allFilters1.push(obj1);
+                        obj1 = {};
+                        makeURL();
                     }
-                } else {
-                    obj1.column = column;
-                    obj1.cond = condition;
-                    obj1.val = response;
-                    obj1.label = clabel;
-                    allFilters1.push(obj1);
-                    obj1 = {};
-                    makeURL();
                 }
+
             }
         </script>
     @endsection

@@ -77,7 +77,9 @@ return [
             'sku' => 'SKU',
             'configurable-attributes' => 'Configurable Attributes',
             'attribute-header' => 'Attribute(s)',
-            'attribute-option-header' => 'Attribute Option(s)'
+            'attribute-option-header' => 'Attribute Option(s)',
+            'no' => 'No',
+            'yes' => 'Yes'
         ],
         'attributes' => [
             'add-title' => 'Add Attribute',
@@ -92,7 +94,6 @@ return [
             'boolean' => 'Boolean',
             'select' => 'Select',
             'multiselect' => 'Multiselect',
-            'checkbox' => 'Checkbox',
             'datetime' => 'Datetime',
             'date' => 'Date',
             'label' => 'Label',
@@ -116,7 +117,8 @@ return [
             'value_per_channel' => 'Value Per Channel',
             'value_per_channel' => 'Value Per Channel',
             'is_filterable' => 'Use in Layered Navigation',
-            'is_configurable' => 'Use To Create Configurable Product'
+            'is_configurable' => 'Use To Create Configurable Product',
+            'admin_name' => 'Admin Name'
         ],
         'families' => [
             'families' => 'Families',

@@ -42,7 +42,6 @@
                                     <option value="boolean">{{ __('admin::app.catalog.attributes.boolean') }}</option>
                                     <option value="select">{{ __('admin::app.catalog.attributes.select') }}</option>
                                     <option value="multiselect">{{ __('admin::app.catalog.attributes.multiselect') }}</option>
-                                    <option value="checkbox">{{ __('admin::app.catalog.attributes.checkbox') }}</option>
                                     <option value="datetime">{{ __('admin::app.catalog.attributes.datetime') }}</option>
                                     <option value="date">{{ __('admin::app.catalog.attributes.date') }}</option>
                                 </select>
@@ -104,8 +103,7 @@
                                 <label for="validation">{{ __('admin::app.catalog.attributes.input_validation') }}</label>
                                 <select class="control" id="validation" name="validation">
                                     <option value=""></option>
-                                    <option value="number">{{ __('admin::app.catalog.attributes.number') }}</option>
-                                    <option value="decimal">{{ __('admin::app.catalog.attributes.decimal') }}</option>
+                                    <option value="numeric">{{ __('admin::app.catalog.attributes.number') }}</option>
                                     <option value="email">{{ __('admin::app.catalog.attributes.email') }}</option>
                                     <option value="url">{{ __('admin::app.catalog.attributes.url') }}</option>
                                 </select>
@@ -173,6 +171,8 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
+
                             @foreach(Webkul\Core\Models\Locale::all() as $locale)
 
                                 <th>{{ $locale->name . ' (' . $locale->code . ')' }}</th>
@@ -187,6 +187,13 @@
                         
                     <tbody>
                         <tr v-for="row in optionRows">
+                            <td>
+                                <div class="control-group" :class="[errors.has(adminName(row)) ? 'has-error' : '']">
+                                    <input type="text" v-validate="'required'" v-model="row['admin_name']" :name="adminName(row)" class="control"/>
+                                    <span class="control-error" v-if="errors.has(adminName(row))">@{{ errors.first(adminName(row)) }}</span>
+                                </div>
+                            </td>
+
                             @foreach(Webkul\Core\Models\Locale::all() as $locale)
                                 <td>
                                     <div class="control-group" :class="[errors.has(localeInputName(row, '{{ $locale->code }}')) ? 'has-error' : '']">
@@ -251,6 +258,10 @@
                     removeRow (row) {
                         var index = this.optionRows.indexOf(row)
                         Vue.delete(this.optionRows, index);
+                    },
+
+                    adminName (row) {
+                        return 'options[' + row.id + '][admin_name]';
                     },
 
                     localeInputName (row, locale) {
