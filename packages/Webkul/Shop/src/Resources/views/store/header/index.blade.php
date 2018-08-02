@@ -64,8 +64,8 @@
         <div class="right-responsive">
             <ul class="right-wrapper">
                 <li class="search-box"><span class="icon search-icon"></span></li>
-                <li class="account-box"><span class="icon icon-account"></span></li>
-                <li class="cart-box"><span class="icon icon-cart"></span></li>
+                <li class="account-box"><span class="icon account-icon"></span></li>
+                <li class="cart-box"><span class="icon cart-icon"></span></li>
                 <li class="menu-box"><span class="icon sortable-icon"></span></li>
             </ul>
 
