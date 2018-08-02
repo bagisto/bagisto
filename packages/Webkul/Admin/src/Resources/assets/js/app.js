@@ -6,7 +6,7 @@ Vue.use(VeeValidate);
 
 Vue.component("datetime", require("./components/datetime"));
 Vue.component("date", require("./components/date"));
-require('vue-flatpickr/theme/airbnb.css');
+require('flatpickr/dist/flatpickr.css');
 
 $(document).ready(function () {
     Vue.config.ignoredElements = [

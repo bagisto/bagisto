@@ -1,26 +1,34 @@
 <template>
-    <Flatpickr class="control" :options="fpOptions"/>
+	<span>
+		<slot>
+			<input type="text" :name="name" class="control" :value="value" data-input>
+		</slot>
+	</span>
 </template>
 
 <script>
-	import VueFlatpickr from "vue-flatpickr";
-
-	Vue.use(VueFlatpickr);
+	import Flatpickr from 'flatpickr';
 
 	export default {
 		props: {
-			default: String
+			name: String,
+			value: String,
 		},
 
-		data() {
-			const now = new Date(this.default);
-			
+		data () {
 			return {
-				fpOptions: {
-					utc: false,
-					enableTime: false
-				}
-			};
+				datepicker: null              
+			}
+		},
+
+		mounted () {
+			var element = this.$el.getElementsByTagName('input')[0];
+			this.datepicker = new Flatpickr(
+				element, {
+					allowInput: true,
+					altFormat: 'Y-m-d H:i:s',
+					dateFormat: 'Y-m-d H:i:s'
+				});
 		}
 	};
 </script>
