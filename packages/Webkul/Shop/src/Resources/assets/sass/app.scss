@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
+
+@import "icons";
 @import "mixins";
 @import "variables";
 
@@ -11,7 +13,6 @@ body {
 }
 
 .header {
-    // border: 1px solid black;
     margin-top: 16px;
     margin-bottom: 21px;
 
@@ -92,17 +93,19 @@ body {
                     margin-right: 14px;
 
                     .account-icon {
-                        margin: 0;
-                        padding-right: 8px;
+                        cursor:  pointer;
+                        margin-right: 8px;
                         height: 24px;
                         width: 24px;
                     }
                     .account {
+                        cursor:  pointer;
                         padding-top: 3px;
                         padding-right: 5px;
                         margin-left: 8px;
                     }
                     .icon.arrow-down-icon {
+                        cursor:  pointer;
                         margin-top: 10px;
                     }
                 }
@@ -167,29 +170,130 @@ body {
         font-size: 16px;
         display: block;
 
-        .menu-bar {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
+        // .menu-bar {
+        //     display: flex;
+        //     flex-direction: row;
+        //     justify-content: flex-start;
+        //     align-items: center;
+        //     height: 48px;
+        //     width: 80%;
+        //     margin-left: auto;
+        //     margin-right: auto;
+
+        //     li {
+        //         display: flex;
+        //         flex-direction: row;
+        //         align-items: center;
+        //         justify-content: center;
+        //         // background-color: blue;
+        //         height: 100%;
+        //         margin: 2.5%;
+        //     }
+        //     li:last-child {
+        //         margin-left: auto;
+        //         color: $offer-color;
+        //     }
+        // }
+        ul.nav {
+            display: block;
+            font-size:16px;
             height: 48px;
             width: 80%;
             margin-left: auto;
             margin-right: auto;
+        }
 
-            li {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                // background-color: blue;
-                height: 100%;
-                margin: 2.5%;
-            }
-            li:last-child {
-                margin-left: auto;
-                color: $offer-color;
-            }
+        .nav ul {
+            margin: 0;
+            padding:0;
+            border: 1px solid #B1B1B1;
+            box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.40);
+        }
+
+        .nav a {
+            display:block;
+            color: #242424;
+            text-decoration: none;
+            padding: 0.8em 0.3em 0.8em 0.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .nav{
+            vertical-align: top;
+            display: inline-block;
+        }
+
+        .nav li {
+            position: relative;
+            height:45px;
+        }
+
+        .nav > li {
+            float: left;
+            margin-right: 1px;
+        }
+
+        .nav > li > a {
+            margin-bottom: 1px;
+        }
+
+        .nav > li:last-child {
+            border-radius: 0 0 4px 0;
+            margin-right: 0;
+        }
+
+        .nav > li:last-child > a {
+            border-radius: 0 4px 0 0;
+        }
+
+        .nav li li a {
+            margin-top: 1px;
+        }
+
+        .nav li a:first-child:nth-last-child(2):before {
+            content: "";
+            position: absolute;
+            height: 0;
+            width: 0;
+            border: 5px solid transparent;
+            top: 50% ;
+            right:5px;
+        }
+
+        /* submenu positioning*/
+
+        .nav ul {
+            position: absolute;
+            white-space: nowrap;
+            border: 1px solid #B1B1B1;
+            background-color:white;
+            z-index: 1;
+            left: -99999em;
+        }
+
+        .nav > li:hover > ul {
+            left: auto;
+            min-width: 100%;
+        }
+
+        .nav > li li:hover > ul {
+            left: 100%;
+            margin-left: 1px;
+            top: -1px;
+        }
+
+        .nav > li:hover > a:first-child:nth-last-child(2):before {
+            margin-top:-5px
+        }
+
+        .nav li li > a:first-child:nth-last-child(2):before {
+            margin-top: -5px
+        }
+
+        .nav li li:hover > a:first-child:nth-last-child(2):before {
+            right: 10px;
         }
     }
 }
@@ -206,6 +310,30 @@ body {
             li img {
                 width: 100%;
                 object-fit: fill;
+            }
+            .slider-control {
+                display: inline-block;
+                vertical-align: middle;
+                position: absolute;
+                right: 10%;
+                margin-top: -60px;
+                margin-right: 10px;
+
+                .dark-left-icon {
+                    background-color: white;
+                    height: 48px;
+                    width: 48px;
+                    max-height: 100%;
+                    max-width: 100%;
+                }
+
+                .light-right-icon {
+                    background-color: black;
+                    height: 48px;
+                    width: 48px;
+                    max-height: 100%;
+                    max-width: 100%;
+                }
             }
         }
     }
@@ -328,7 +456,7 @@ body {
 }
 
 .footer {
-    background-color: $background-color;
+    background-color: $fbackground-color;
     padding-left: 10%;
     padding-right: 10%;
 
@@ -405,6 +533,206 @@ body {
         }
     }
 }
+
+//customers page css goes here
+
+.content {
+    padding-top: 15%;
+    padding-bottom: 15%;
+
+    .sign-up-text {
+        margin-bottom: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-size: 18px;
+        color: $sign-up-text-color;
+        letter-spacing: -0.29px;
+        text-align: center;
+    }
+    .login-form {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        background: $background-color;
+        border: 1px solid $border-color;
+        flex-direction: column;
+        max-width: 530px;
+        min-width: 380px;
+        min-height: 345px;
+        padding-left: 25px;
+        padding-right: 25px;
+
+        .login-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: $login-text;
+            letter-spacing: -0.23px;
+            margin-top: 5%;
+            margin-bottom: 3%;
+        }
+
+        .control-group {
+            margin-bottom: 15px !important;
+            .control {
+                width: 100% !important;
+            }
+        }
+
+        .forgot-password-link {
+            font-size: 17px;
+            color: $forgot-password-color;
+            letter-spacing: -0.11px;
+            margin-bottom: 5%;
+        }
+        .signup-confirm {
+            letter-spacing: -0.11px;
+            margin-bottom: 5%;
+        }
+
+        .btn-primary {
+            width: 100%;
+            text-transform: uppercase;
+            border-radius: 0px;
+            height: 45px;
+            margin-bottom: 4%;
+        }
+    }
+}
+
+//customer pages styles goes here
+//account layout
+.account-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5.5%;
+    margin-bottom: 5.5%;
+
+    .account-side-menu {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: flex-start;
+        border: 1px solid #e8e8e8;
+        background: #ffffff;
+        width: 25%;
+        height: 100%;
+        text-transform: capitalize;
+        font-size: 16px;
+        color: #5e5e5e;
+
+        li {
+            font-size: 16px;
+            width: 95%;
+            height: 50px;
+            margin-left: 5%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            border-bottom: 1px solid $border-color;
+            text-align: center;
+        }
+        li:first-child {
+            border-top: none;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        li.active {
+            color: #0031f0;
+        }
+    }
+
+    .profile {
+        margin-left: 5.5%;
+        margin-top: 1%;
+        width: 100%;
+
+        .section-head {
+            .profile-heading {
+                font-size: 28px;
+                color: #242424;
+                text-transform: capitalize;
+                text-align: left;
+            }
+
+            .profile-edit {
+                font-size: 17px;
+                margin-top: 1%;
+                color: #0031f0;
+                letter-spacing: -0.11px;
+                float: right;
+            }
+
+            .horizontal-rule {
+                margin-top: 1.1%;
+                width: 100%;
+                height: 1px;
+                vertical-align: middle;
+                background: #e8e8e8;
+            }
+        }
+    }
+
+    .profile-content {
+        font-size: 16px;
+        color: $profile-content-color;
+        margin-top: 1.4%;
+
+        table {
+            tbody {
+                tr {
+                    height: 45px;
+
+                    td {
+                        width: 250px;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+        }
+    }
+    //edit form
+    .edit-form-content {
+        margin-left: 5.5%;
+        margin-top: 1%;
+        width: 100%;
+
+        .edit-text {
+            margin-bottom: 2%;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 24px;
+        }
+
+        .edit-form {
+            // margin-left: auto;
+            // margin-right: auto;
+            display: flex;
+            background: $background-color;
+            border: 1px solid $border-color;
+            flex-direction: column;
+            // max-width: 530px;
+            // min-width: 380px;
+            min-height: 345px;
+            padding: 25px;
+
+            .control-group {
+                input,
+                select {
+                    font-family: "Montserrat", sans-serif;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    //edit form ends
+}
+//account ends here
+
+//customers page css ends here
 
 @media all and (max-width: 480px) {
     .header {
@@ -1095,7 +1423,7 @@ body {
         }
     }
     .footer {
-        background-color: $background-color;
+        background-color: $fbackground-color;
         padding-left: 4%;
         padding-right: 4%;
 

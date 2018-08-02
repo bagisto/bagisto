@@ -108,7 +108,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::put('/attributes/edit/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@update')->defaults('_config', [
                     'redirect' => 'admin.catalog.attributes.index'
                 ])->name('admin.catalog.attributes.update');
-                
+
 
                 // Catalog Family Routes
                 Route::get('/families', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@index')->defaults('_config', [
@@ -134,6 +134,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
             // Datagrid Routes
+
             //for datagrid and its loading, filtering, sorting and queries
             Route::get('datagrid', 'Webkul\Admin\Http\Controllers\DataGridController@index')->name('admin.datagrid.index');
 
@@ -201,7 +202,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/countries', 'Webkul\Core\Http\Controllers\CountryController@index')->defaults('_config', [
                 'view' => 'admin::settings.countries.index'
             ])->name('admin.countries.index');
-            
+
             Route::get('/countries/create', 'Webkul\Core\Http\Controllers\CountryController@create')->defaults('_config', [
                 'view' => 'admin::settings.countries.create'
             ])->name('admin.countries.create');
@@ -215,7 +216,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/currencies', 'Webkul\Core\Http\Controllers\CurrencyController@index')->defaults('_config', [
                 'view' => 'admin::settings.currencies.index'
             ])->name('admin.currencies.index');
-            
+
             Route::get('/currencies/create', 'Webkul\Core\Http\Controllers\CurrencyController@create')->defaults('_config', [
                 'view' => 'admin::settings.currencies.create'
             ])->name('admin.currencies.create');
@@ -229,7 +230,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/exchange_rates', 'Webkul\Core\Http\Controllers\ExchangeRateController@index')->defaults('_config', [
                 'view' => 'admin::settings.exchange_rates.index'
             ])->name('admin.exchange_rates.index');
-            
+
             Route::get('/exchange_rates/create', 'Webkul\Core\Http\Controllers\ExchangeRateController@create')->defaults('_config', [
                 'view' => 'admin::settings.exchange_rates.create'
             ])->name('admin.exchange_rates.create');
@@ -251,7 +252,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/inventory_sources', 'Webkul\Inventory\Http\Controllers\InventorySourceController@index')->defaults('_config', [
                 'view' => 'admin::settings.inventory_sources.index'
             ])->name('admin.inventory_sources.index');
-            
+
             Route::get('/inventory_sources/create', 'Webkul\Inventory\Http\Controllers\InventorySourceController@create')->defaults('_config', [
                 'view' => 'admin::settings.inventory_sources.create'
             ])->name('admin.inventory_sources.create');
@@ -273,7 +274,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/channels', 'Webkul\Channel\Http\Controllers\ChannelController@index')->defaults('_config', [
                 'view' => 'admin::settings.channels.index'
             ])->name('admin.channels.index');
-            
+
             Route::get('/channels/create', 'Webkul\Channel\Http\Controllers\ChannelController@create')->defaults('_config', [
                 'view' => 'admin::settings.channels.create'
             ])->name('admin.channels.create');

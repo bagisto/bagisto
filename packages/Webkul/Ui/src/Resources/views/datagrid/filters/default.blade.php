@@ -43,7 +43,7 @@
                             {{-- suitable for string columns --}}
                             <li class="filter-condition-dropdown-string">
                                 <select class="control filter-condition-select-string">
-                                    <option selected disabled>Select Condition</option>
+                                    <option selected disabled value="">Select Condition</option>
                                     <option value="like">Contains</option>
                                     <option value="nlike">Does not contains</option>
                                     <option value="eq">Is equal to</option>
@@ -53,7 +53,7 @@
                             {{-- suitable for numeric columns --}}
                             <li class="filter-condition-dropdown-number">
                                 <select class="control filter-condition-select-number">
-                                    <option selected disabled>Select Condition</option>
+                                    <option selected disabled value="">Select Condition</option>
                                     <option value="eq">Is equal to</option>
                                     <option value="neqs">Is not equal to</option>
                                     <option value="gt">Greater than</option>
@@ -65,7 +65,7 @@
                             {{-- suitable for date/time columns --}}
                             <li class="filter-condition-dropdown-datetime">
                                 <select class="control filter-condition-select-datetime">
-                                    <option selected disabled>Select Condition</option>
+                                    <option selected disabled value="">Select Condition</option>
                                     <option value="eq">Is equal to</option>
                                     <option value="neqs">Is not equal to</option>
                                     <option value="gt">Greater than</option>
@@ -77,19 +77,21 @@
                             </li>
                             {{-- Response fields based on the type of columns to be filtered --}}
                             <li class="filter-response-string">
-                                <input type="text" class="control response-string" placeholder="Value here" />
+                                <input type="text" class="control response-string" placeholder="String Value here" value=""/>
                             </li>
                             <li class="filter-response-boolean">
                                 <select class="control select-boolean">
+                                    <option selected disabled value="null">Select Condition</option>
                                     <option value="true">Is True</option>
                                     <option value="false">Is False</option>
                                 </select>
                             </li>
                             <li class="filter-response-datetime">
+                                {{-- use flatpickr here --}}
                                 <input type="datetime-local" class="control response-datetime" placeholder="Value here" />
                             </li>
                             <li class="filter-response-number">
-                                <input type="text" class="control response-number" placeholder="Value here" />
+                                <input type="text" class="control response-number" placeholder="Numeric Value here" value=""/>
                             </li>
                             <li>
                                 <button class="btn btn-sm btn-primary apply-filter">Apply</button>

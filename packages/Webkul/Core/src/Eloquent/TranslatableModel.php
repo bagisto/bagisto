@@ -24,7 +24,7 @@ class TranslatableModel extends Model
         } elseif(Locale::where('code', '=', $key)->first()) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -51,13 +51,5 @@ class TranslatableModel extends Model
     protected function isChannelBased()
     {
         return false;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getLocaleSeparator()
-    {
-        return config('translatable.locale_separator', '%');
     }
 }

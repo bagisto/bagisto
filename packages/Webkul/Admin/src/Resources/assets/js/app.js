@@ -16,35 +16,38 @@ $(document).ready(function () {
     ];
 
     var app = new Vue({
-        el: '#app',
+        el: "#app",
 
         data: {
             modalIds: {}
         },
 
-        mounted () {
-            this.addServerErrors()
-            this.addFlashMessages()
+        mounted() {
+            this.addServerErrors();
+            this.addFlashMessages();
         },
 
         methods: {
-            onSubmit (e) {
-                this.$validator.validateAll().then((result) => {
+            onSubmit(e) {
+                this.$validator.validateAll().then(result => {
                     if (result) {
                         e.target.submit();
                     }
                 });
             },
 
-            addServerErrors () {
+            addServerErrors() {
                 var scope = null;
                 for (var key in serverErrors) {
                     var inputName = key;
-                    if(key.indexOf('.') !== -1) {
-                        inputName = key.replace(".", "[") + ']';
+                    if (key.indexOf(".") !== -1) {
+                        inputName = key.replace(".", "[") + "]";
                     }
 
-                    const field = this.$validator.fields.find({ name: inputName, scope: scope });
+                    const field = this.$validator.fields.find({
+                        name: inputName,
+                        scope: scope
+                    });
                     if (field) {
                         this.$validator.errors.add({
                             id: field.id,
@@ -56,7 +59,7 @@ $(document).ready(function () {
                 }
             },
 
-            addFlashMessages: function() {
+            addFlashMessages() {
                 const flashes = this.$refs.flashes;
 
                 flashMessages.forEach(function(flash) {
@@ -64,7 +67,7 @@ $(document).ready(function () {
                 }, this);
             },
 
-            showModal (id) {
+            showModal(id) {
                 this.$set(this.modalIds, id, true);
             }
         }

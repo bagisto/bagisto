@@ -16,5 +16,9 @@
         "laravel-mix-merge-manifest": "^0.1.1",
         "jquery": "^3.2",
         "vue": "^2.1.10"
+    },
+    "dependencies": {
+        "vee-validate": "2.0.0-rc.26",
+        "vue-flatpickr": "^2.3.0"
     }
 }

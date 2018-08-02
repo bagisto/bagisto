@@ -1,10 +1,14 @@
 window.jQuery = window.$ = $ = require("jquery");
 window.Vue = require("vue");
-// window.VeeValidate = require('vee-validate');
+window.VeeValidate = require("vee-validate");
 
-// Vue.use(VeeValidate);
+Vue.use(VeeValidate);
 
 //pure JS for resizing of browser purposes only
+
+Vue.component("category-nav", require("./components/category-nav.vue"));
+Vue.component("category-item", require("./components/category-item.vue"));
+Vue.component("image-slider", require("./components/imageSlider.vue"));
 
 $(window).resize(function() {
     var w = $(document).width();
