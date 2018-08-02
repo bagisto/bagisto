@@ -3,7 +3,9 @@
         {{ $attribute->admin_name }}
     </label>
 
-    <input type="text" v-validate="'{{$validations}}'" class="control" id="{{ $attribute->code }}" name="{{ $attribute->code }}" value="{{ $product[$attribute->code]}}"/>
+    <date>
+        <input type="text" name="{{ $attribute->code }}" class="control" v-validate="'required'" value="{{ $product[$attribute->code]}}" data-input>
+    </date>
 
     <span class="control-error" v-if="errors.has('{{ $attribute->code }}')">@{{ errors.first('{!! $attribute->code !!}') }}</span>
 </div>
