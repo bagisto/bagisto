@@ -33,13 +33,13 @@ class EventServiceProvider extends ServiceProvider
      */
     public function createAdminMenu()
     {
-        Event::listen('admin.menu.create', function() {
-            return Menu::create(function($menu) {
+        Event::listen('admin.menu.create', function () {
+            return Menu::create(function ($menu) {
                 Event::fire('admin.menu.build', $menu);
             });
         });
 
-        Event::listen('admin.menu.build', function($menu) {
+        Event::listen('admin.menu.build', function ($menu) {
             $menu->add('dashboard', 'Dashboard', 'admin.dashboard.index', 1, 'dashboard-icon');
 
             $menu->add('catalog', 'Catalog', 'admin.catalog.products.index', 3, 'catalog-icon');
@@ -75,6 +75,8 @@ class EventServiceProvider extends ServiceProvider
             $menu->add('settings.users.users', 'Users', 'admin.users.index', 1, '');
 
             $menu->add('settings.users.roles', 'Roles', 'admin.roles.index', 2, '');
+
+            $menu->add('settings.sliders', 'Create Sliders', 'admin.sliders.index', 8, '');
         });
     }
 
@@ -85,7 +87,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function buildACL()
     {
-        Event::listen('admin.acl.build', function($acl) {
+        Event::listen('admin.acl.build', function ($acl) {
             $acl->add('dashboard', 'Dashboard', 'admin.dashboard.index', 1);
 
             $acl->add('configuration', 'Configure', 'admin.account.edit', 5);
@@ -107,7 +109,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function registerACL()
     {
-        $this->app->singleton('acl', function() {
+        $this->app->singleton('acl', function () {
             return current(Event::fire('admin.acl.create'));
         });
 
@@ -121,13 +123,13 @@ class EventServiceProvider extends ServiceProvider
      */
     public function createProductFormAccordian()
     {
-        Event::listen('admin.catalog.products.accordian.create', function() {
-            return ProductFormAccordian::create(function($accordian) {
+        Event::listen('admin.catalog.products.accordian.create', function () {
+            return ProductFormAccordian::create(function ($accordian) {
                 Event::fire('admin.catalog.products.accordian.build', $accordian);
             });
         });
 
-        Event::listen('admin.catalog.products.accordian.build', function($accordian) {
+        Event::listen('admin.catalog.products.accordian.build', function ($accordian) {
             $accordian->add('categories', 'Categories', 'admin::catalog.products.accordians.categories', 1);
         });
     }

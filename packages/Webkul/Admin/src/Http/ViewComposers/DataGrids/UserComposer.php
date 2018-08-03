@@ -44,6 +44,11 @@ class UserComposer
                     'column' => 'u.id',
                     'type' => 'number',
                     'label' => 'Admin ID'
+                ],
+                [
+                    'column' => 'r.id',
+                    'type' => 'number',
+                    'label' => 'Role ID'
                 ]
             ],
             'searchable' => [
@@ -77,13 +82,13 @@ class UserComposer
                 // ],
             ],
             'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'roles as r',
+                    'primaryKey' => 'u.role_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'r.id',
+                ]
             ],
             'columns' => [
                 [
@@ -104,12 +109,18 @@ class UserComposer
                     'label' => 'Admin E-Mail',
                     'sortable' => true,
                 ],
-                // [
-                //     'name' => 'r.name as rolename',
-                //     'type' => 'string',
-                //     'label' => 'Role Name',
-                //     'sortable' => true,
-                // ],
+                [
+                    'name' => 'r.name',
+                    'type' => 'string',
+                    'label' => 'Role Name',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'r.id as ds',
+                    'type' => 'string',
+                    'label' => 'Role ID',
+                    'sortable' => true,
+                ],
                 // [
                 //     'name' => 'a.first_name',
                 //     'type' => 'string',

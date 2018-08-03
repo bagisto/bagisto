@@ -170,6 +170,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //Laravel Intervention
+        Intervention\Image\ImageServiceProvider::class,
+
         //Webkul packages
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
@@ -232,7 +235,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class
+        'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];

@@ -299,6 +299,15 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.account.edit');
 
             Route::put('/account', 'Webkul\User\Http\Controllers\AccountController@update')->name('admin.account.update');
+
+            // Admin Store Front Settings Route
+            Route::get('/slider/create','Webkul\Shop\Http\Controllers\SliderController@index')->defaults('_config',[
+                'view' => 'admin::sliders.create'
+            ])->name('admin.sliders.index');
+
+            Route::post('/slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
+                'redirect' => 'admin::sliders.create'
+            ])->name('admin.sliders.create');
         });
     });
 });

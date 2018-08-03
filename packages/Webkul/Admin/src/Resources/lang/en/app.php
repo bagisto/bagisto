@@ -235,6 +235,16 @@ return [
             'default-locale' => 'Default Locale',
             'currencies' => 'Currencies',
             'base-currency' => 'Base Currency'
-        ]
+        ],
+
+        'sliders' => [
+            'title' => 'Title',
+            'add-title' => 'Create Slider',
+            'save-btn-title' => 'Save Slider',
+            'general' => 'General',
+            'image' => 'Image',
+            'content' => 'Content',
+            'channels' => 'Channel'
+        ],
     ]
 ];

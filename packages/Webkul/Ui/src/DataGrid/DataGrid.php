@@ -668,11 +668,13 @@ class DataGrid
                                                 }
                                             }
                                         }
-                                        if ($alias_proper_secondary) {
-                                            $this->getQueryWithJoin();
-                                        } else {
-                                            throw new \Exception('Due to a bug in laravel, you can\'t use secondary table columns without aliasing');
-                                        }
+                                        $this->getQueryWithJoin();
+
+                                        // if ($alias_proper_secondary) {
+                                        //     $this->getQueryWithJoin();
+                                        // } else {
+                                        //     throw new \Exception('Due to a bug in laravel, you can\'t use secondary table columns without aliasing');
+                                        // }
                                     } else {
                                         throw new \Exception('Aliases of Join table and the secondary key columns do not match');
                                     }

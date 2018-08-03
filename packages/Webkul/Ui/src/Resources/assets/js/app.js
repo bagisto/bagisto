@@ -6,3 +6,4 @@ Vue.component("tree-item", require("./components/tree-view/tree-item"));
 Vue.component("tree-checkbox", require("./components/tree-view/tree-checkbox"));
 Vue.component("tree-radio", require("./components/tree-view/tree-radio"));
 Vue.component("modal", require("./components/modal"));
+Vue.component("image-upload", require("./components/image/image-upload-single"));
