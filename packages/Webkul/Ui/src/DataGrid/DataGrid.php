@@ -274,23 +274,15 @@ class DataGrid
     }
 
     /**
-     * Parse the URL
-     * and get it ready
-     * to be used.
+     * setFilterableColumns
+     * @return $this
      */
 
-    private function parse()
-    {
-        $parsed = [];
-        $unparsed = url()->full();
-        if (count(explode('?', $unparsed))>1) {
-            $to_be_parsed = explode('?', $unparsed)[1];
-            parse_str($to_be_parsed, $parsed);
-            return $parsed;
-        } else {
-            return $parsed;
-        }
-    }
+    // public function setFilterableColumns($filterable_columns = [])
+    // {
+    //     $this->join = $filterable_columns ?: [];
+    //     return $this;
+    // }
 
     /**
      * Add Columns.
@@ -307,35 +299,6 @@ class DataGrid
             foreach ($columns as $column) {
                 $this->addColumn($column);
             }
-        }
-        return $this;
-    }
-
-    /**
-     * Adds expressional verbs to be used
-     * @return $this
-     */
-
-    public function setOperators(array $operators)
-    {
-        $this->operators = $operators ?: [];
-        return $this;
-    }
-
-    /**
-     * Add Pagination.
-     *
-     * @return $this
-     */
-
-    public function addPagination($pagination = [])
-    {
-        if ($pagination instanceof Pagination) {
-            $this->pagination = $pagination;
-        } elseif (gettype($pagination) == 'array' && $pagination) {
-            $this->pagination = new Pagination($pagination);
-        } else {
-            throw new \Exception("DataGrid: Pagination argument is not valid!");
         }
         return $this;
     }
@@ -394,6 +357,34 @@ class DataGrid
         return $this;
     }
 
+    /**
+     * Adds expressional verbs to be used
+     * @return $this
+     */
+
+    public function setOperators(array $operators)
+    {
+        $this->operators = $operators ?: [];
+        return $this;
+    }
+
+    /**
+     * Add Pagination.
+     *
+     * @return $this
+     */
+
+    public function addPagination($pagination = [])
+    {
+        if ($pagination instanceof Pagination) {
+            $this->pagination = $pagination;
+        } elseif (gettype($pagination) == 'array' && $pagination) {
+            $this->pagination = new Pagination($pagination);
+        } else {
+            throw new \Exception("DataGrid: Pagination argument is not valid!");
+        }
+        return $this;
+    }
 
     /**
      * Used for selecting
@@ -411,6 +402,25 @@ class DataGrid
         $this->query->select(...$select);
         if ($this->select) {
             $this->query->addselect($this->select);
+        }
+    }
+
+    /**
+     * Parse the URL
+     * and get it ready
+     * to be used.
+     */
+
+    private function parse()
+    {
+        $parsed = [];
+        $unparsed = url()->full();
+        if (count(explode('?', $unparsed))>1) {
+            $to_be_parsed = explode('?', $unparsed)[1];
+            parse_str($to_be_parsed, $parsed);
+            return $parsed;
+        } else {
+            return $parsed;
         }
     }
 
@@ -465,16 +475,12 @@ class DataGrid
     {
         $parsed = $this->parse();
 
-        if ($this->aliased) {
+        if ($this->aliased) {  //aliasing is expected in this case or it will be changed to presence of join bag
             foreach ($parsed as $key=>$value) {
                 if ($key=="sort") {
-
                     //resolve the case with the column helper class
-                    if (strpos($key, ' as ') !== false) {
-                        dd('This column cannot be sorted');
-                    } else {
-                        $column_name = str_replace('_', '.', $key);
-                    }
+                    if(substr_count($key,'_') >= 1)
+                        $column_name = str_replace_first('_', '.', $key);
 
                     //case that don't need any resolving
                     $count_keys = count(array_keys($value));
@@ -484,25 +490,19 @@ class DataGrid
                             array_values($value)[0]
                         );
                     } else {
-                        dump('Sort on two columns cannot exist in backend');
+                        throw new \Exception('Multiple Sort keys Found, Please Resolve the URL Manually.');
                     }
                 } elseif ($key=="search") {
-                    if (strpos($key, ' as ') !== false) {
-                        dd('This column cannot be searched');
-                    } else {
-                        $column_name = str_replace('_', '.', $key);
-                    }
+
+                    $count_keys = count(array_keys($value));
+                    if($count_keys==1)
                     $this->query->where(function ($query) use ($parsed) {
                         foreach ($this->searchable as $search) {
                             $query->orWhere($search['column'], 'like', '%'.$parsed['search']['all'].'%');
                         }
                     });
                 } else {
-                    if (strpos($key, ' as ') !== false) {
-                        dd('This column cannot be filtered');
-                    } else {
-                        $column_name = str_replace('_', '.', $key);
-                    }
+                    $column_name = str_replace_first('_', '.', $key);
 
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
@@ -524,7 +524,56 @@ class DataGrid
                 }
             }
         } else {
-            dd('left to be run plainly');
+            //this is the case for the non aliasing.
+            foreach ($parsed as $key=>$value) {
+
+                if ($key=="sort") {
+
+                    //case that don't need any resolving
+                    $count_keys = count(array_keys($value));
+                    if ($count_keys==1) {
+
+                        $this->query->orderBy(
+                            array_keys($value)[0],
+                            array_values($value)[0]
+                        );
+
+                    } else {
+                        throw new \Exception('Multiple Sort keys Found, Please Resolve the URL Manually.');
+                    }
+                } elseif ($key=="search") {
+
+                    $count_keys = count(array_keys($value));
+                    if($count_keys==1)
+                    $this->query->where(function ($query) use ($parsed) {
+                        foreach ($this->searchable as $search) {
+                            $query->orWhere($search['column'], 'like', '%'.$parsed['search']['all'].'%');
+                        }
+                    });
+
+                } else {
+                    $column_name = array_keys($value)[0];
+
+                    if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
+                        foreach ($value as $condition => $filter_value) {
+                            $this->query->where(
+                                $column_name,
+                                $this->operators[$condition],
+                                '%'.$filter_value.'%'
+                            );
+                        }
+                    } else {
+                        foreach ($value as $condition => $filter_value) {
+                            $this->query->where(
+                                $column_name,
+                                $this->operators[$condition],
+                                $filter_value
+                            );
+                        }
+                    }
+                }
+            }
+
         }
     }
 
@@ -613,14 +662,12 @@ class DataGrid
             if (!empty($parsed)) {
 
                 $this->getQueryWithFilters();
-            } else {
 
-                $this->results = $this->query->get();
-                return $this->results;
             }
 
             $this->results = $this->query->get();
             return $this->results;
+
         } else {
 
             $this->query = DB::table($this->table);
