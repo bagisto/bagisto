@@ -552,7 +552,8 @@ class DataGrid
                     });
 
                 } else {
-                    $column_name = array_keys($value)[0];
+
+                    $column_name = $key;
 
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
@@ -655,16 +656,10 @@ class DataGrid
             }
 
             //Check for column filter bags and resolve aliasing
-
-            //run this if there are columns with filter bag
             $this->getQueryWithColumnFilters();
-
             if (!empty($parsed)) {
-
                 $this->getQueryWithFilters();
-
             }
-
             $this->results = $this->query->get();
             return $this->results;
 
@@ -672,19 +667,10 @@ class DataGrid
 
             $this->query = DB::table($this->table);
 
-            if (!empty($this->select)) {
-                $this->getSelect();
-            }
-
+            $this->getSelect();
             $this->getQueryWithColumnFilters();
-
-            $parsed = $this->parse();
             if (!empty($parsed)) {
                 $this->getQueryWithFilters();
-            } else {
-
-                $this->results = $this->query->get();
-                return $this->results;
             }
             $this->results = $this->query->get();
             return $this->results;
