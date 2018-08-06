@@ -28,7 +28,7 @@
 
         mounted: function() {
 
-            this.sample = "http://www.etaletaculture.fr/wp-content/uploads/2012/10/lorem-ipsum.jpg";
+            this.sample = "";
             var element = this.$el.getElementsByTagName("input")[0];
             var this_this = this;
             element.onchange = function() {

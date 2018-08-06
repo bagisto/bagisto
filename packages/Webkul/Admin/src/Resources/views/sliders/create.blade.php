@@ -49,6 +49,7 @@
                                     <input type="file" class="control" id="add_image" name="image" value="" v-validate="'image|required'" placeholder="Upload from Outer"/>
 
                                     <span class="control-error" v-if="errors.has('image')">@{{ errors.first('image') }}</span>
+                                    {{-- The image field validation is not working, resolve it. --}}
 
                                 </image-upload>
                             </div>

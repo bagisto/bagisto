@@ -8,14 +8,17 @@
             </div>
         </div>
         <div class="dropdown-filters">
-            <div class="column-filter">
-                <div class="dropdown-list bottom-right" style="display: none;">
+            <div class="column-filter" style="display: none;">
+                <div class="dropdown-list bottom-right">
                     <div class="dropdown-container">
                         <ul>
                             @foreach($columns as $column)
                             <li data-name="{{ $column->name }}">
                                 {{ $column->label }}
-                                <span class="checkbox"><input type="checkbox" id="{{ $column->id }}" name="checkbox1[]"> <label for="checkbox1" class="checkbox-view"></label></span>
+                                <span class="checkbox">
+                                    <input type="checkbox" id="{{ $column->id }}" name="checkbox1[]">
+                                    <label for="checkbox1" class="checkbox-view"></label>
+                                </span>
                             </li>
                             @endforeach
                         </ul>

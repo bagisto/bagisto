@@ -30,13 +30,11 @@ class UserComposer
             'name' => 'Admins',
             'table' => 'admins as u',
             'select' => 'u.id',
-            'aliased' => true, //boolean to validate aliasing on the basis of this.
+            'aliased' => true, //use this with false as default and true in case of joins
+
+            //don't use aliasing in case of filters
             'filterable' => [
                 [
-                    'column' => 'u.email',
-                    'type' => 'string',
-                    'label' => 'Admin E-Mail'
-                ], [
                     'column' => 'u.name',
                     'type' => 'string',
                     'label' => 'Admin Name'
@@ -51,6 +49,7 @@ class UserComposer
                     'label' => 'Role ID'
                 ]
             ],
+            //don't use aliasing in case of searchables
             'searchable' => [
                 [
                     'column' => 'u.email',
@@ -90,6 +89,8 @@ class UserComposer
                     'secondaryKey' => 'r.id',
                 ]
             ],
+
+            //use aliasing on secodary columns if join is performed
             'columns' => [
                 [
                     'name' => 'u.id',
@@ -110,13 +111,13 @@ class UserComposer
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'r.name',
+                    'name' => 'r.name as Role Name',
                     'type' => 'string',
                     'label' => 'Role Name',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'r.id as ds',
+                    'name' => 'r.id as Role ID',
                     'type' => 'string',
                     'label' => 'Role ID',
                     'sortable' => true,

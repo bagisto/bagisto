@@ -195,16 +195,21 @@
                         id.splice(index,1);
                     }
                     if(id.length>0) {
+
                         $('.mass-action').css('display','');
                         $('.table-grid-header').css('display','none');
-                        // $('.selected-items').html(id.toString());
                         $('#indexes').val(id);
+
                     }else if(id.length == 0) {
+
                         $('.mass-action').css('display','none');
                         $('.table-grid-header').css('display','');
                         $('#indexes').val('');
+
                         if($('#mastercheckbox').prop('checked')) {
+
                             $('#mastercheckbox').prop('checked',false);
+
                         }
                     }
                 });
@@ -216,7 +221,6 @@
                 if(allFilters1.length>0)
                 {
                     for(i=0;i<allFilters1.length;i++) {
-                        console.log(allFilters1[i]);
                         if(i==0){
                             url = '?' + allFilters1[i].column + '[' + allFilters1[i].cond + ']' + '=' + allFilters1[i].val;
                         }
@@ -254,14 +258,32 @@
                 makeTagsTestPrior();
             }
 
-            var label; //use the label to prevent the display of column name on the body
+            //use the label to prevent the display of column name on the body
             function makeTagsTestPrior() {
                 var filterRepeat = 0;
+                console.log(allFilters1);
                 if(allFilters1.length!=0)
                 for(var i = 0;i<allFilters1.length;i++) {
-                    col_label_tag = $('li[data-name="'+allFilters1[i].column+'"]').text();
-                    var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
-                    $('.filter-row-two').append(filter_card);
+                    if(allFilters1[i].column == "sort") {
+
+                        col_label_tag = $('li[data-name="'+allFilters1[i].cond+'"]').text();
+                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+                        $('.filter-row-two').append(filter_card);
+
+                    } else if(allFilters1[i].column == "search") {
+
+                        col_label_tag = "Search";
+                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+                        $('.filter-row-two').append(filter_card);
+
+                    } else {
+
+                        col_label_tag = $('li[data-name="'+allFilters1[i].column+'"]').text();
+                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+                        $('.filter-row-two').append(filter_card);
+
+                    }
+
                 }
             }
 
@@ -270,7 +292,7 @@
                 /*validate the conditions here and do the replacements and
                 push here in the all filters array*/
                 var obj1 = {};
-                if(column == "" || condition == "" || response == ""){
+                if(column == "" || condition == "" || response == "") {
                     alert("Please mention all the fields for column, condition and match params for proper functioning");
                     return false;
                 }
@@ -303,7 +325,7 @@
                                 if(allFilters1[j].column == "sort") {
 
                                     if(allFilters1[j].column==column && allFilters1[j].cond==condition && allFilters1[j].val==response){
-                                        if(response=="asc"){
+                                        if(response=="asc") {
                                             allFilters1[j].column = column;
                                             allFilters1[j].cond = condition;
                                             allFilters1[j].val = "desc";
@@ -367,7 +389,6 @@
                         makeURL();
                     }
                 }
-
             }
         </script>
     @endsection

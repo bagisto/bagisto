@@ -90,7 +90,15 @@
                     </span>
                 </th>
                 @foreach ($columns as $column) @if($column->sortable == "true")
-                <th class="labelled-col grid_head sort-head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}"
+                <th class="labelled-col grid_head sort-head"
+                @if(strpos($column->name, ' as '))
+                    <?php $exploded_name = explode(' as ',$column->name); ?>
+                    data-column-name="{{ $exploded_name[0] }}"
+                @else
+                    data-column-name="{{ $column->name }}"
+                @endif
+
+                data-column-label="{{ $column->label }}"
                     data-column-sort="asc">{!! $column->sorting() !!}<span class="icon sort-down-icon"></span>
                 </th>
                 @else
