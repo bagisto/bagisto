@@ -32,7 +32,7 @@ class UserComposer
             'table' => 'admins',
             'select' => 'id',
             'aliased' => false, //use this with false as default and true in case of joins
-
+            'perpage' => 2,
             //don't use aliasing in case of filters
             'filterable' => [
                 [

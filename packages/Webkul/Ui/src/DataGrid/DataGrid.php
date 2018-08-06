@@ -34,6 +34,13 @@ class DataGrid
     protected $aliased;
 
     /**
+     * Pagination variable
+     * @var String
+     */
+
+    protected $perpage;
+
+    /**
      * Table
      *
      * @var String Classs name $table
@@ -130,7 +137,7 @@ class DataGrid
         $join = $columns = $filterable = $searchable =
         $massoperations = $css = $operators = [];
         extract($args);
-        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $table, $join, $columns, $css, $operators);
+        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $perpage, $table, $join, $columns, $css, $operators);
     }
 
     //starts buikding the queries on the basis of selects, joins and filter with
@@ -143,6 +150,7 @@ class DataGrid
         array $searchable = [],
         array $massoperations = [],
         bool $aliased = false,
+        $perpage = 0,
         $table = null,
         array $join = [],
         array $columns = null,
@@ -157,6 +165,7 @@ class DataGrid
         $this->setSearchable($filterable);
         $this->setMassOperations($massoperations);
         $this->setAlias($aliased);
+        $this->setPerPage($perpage);
         $this->setTable($table);
         $this->setJoin($join);
         $this->addColumns($columns, true);
@@ -234,6 +243,21 @@ class DataGrid
     public function setAlias(bool $aliased)
     {
         $this->aliased = $aliased ? : false;
+        return $this;
+    }
+
+    /**
+     * Set the default
+     * pagination for
+     * data grid.
+     *
+     * @return $this
+     */
+
+    public function setPerPage($perpage)
+    {
+        $this->perpage = $perpage ? : 5;
+        return $this;
     }
 
     /**
@@ -418,6 +442,7 @@ class DataGrid
         if (count(explode('?', $unparsed))>1) {
             $to_be_parsed = explode('?', $unparsed)[1];
             parse_str($to_be_parsed, $parsed);
+            unset($parsed['page']);
             return $parsed;
         } else {
             return $parsed;
@@ -550,6 +575,8 @@ class DataGrid
                             $query->orWhere($search['column'], 'like', '%'.$parsed['search']['all'].'%');
                         }
                     });
+                    else
+                        throw new \Exception('Multiple Search keys Found, Please Resolve the URL Manually.');
 
                 } else {
 
@@ -673,6 +700,7 @@ class DataGrid
                 $this->getQueryWithFilters();
             }
             $this->results = $this->query->get();
+            $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
             return $this->results;
         }
     }

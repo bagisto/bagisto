@@ -122,4 +122,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="pagination">
+        {{-- <a class="page-item previous"><i class="icon angle-left-icon"></i></a>
+        <a href="#status/6/page/2" class="page-item next"><i class="icon angle-right-icon"></i></a> --}}
+        {{ $results->links() }}
+    </div>
 </div>
