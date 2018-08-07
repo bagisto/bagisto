@@ -15,10 +15,6 @@
                             @foreach($columns as $column)
                             <li data-name="{{ $column->name }}">
                                 {{ $column->label }}
-                                <span class="checkbox">
-                                    <input type="checkbox" id="{{ $column->id }}" name="checkbox1[]">
-                                    <label for="checkbox1" class="checkbox-view"></label>
-                                </span>
                             </li>
                             @endforeach
                         </ul>

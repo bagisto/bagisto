@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\Helpers\Column;
 use Webkul\Ui\DataGrid\Helpers\Pagination;
 use Webkul\Ui\DataGrid\Helpers\Css;
+use Webkul\Ui\DataGrid\Helpers\MassAction;
 use URL;
 
-class DataGrid
+class DataGridX
 {
     /**
      * Name of DataGrid
@@ -104,13 +105,6 @@ class DataGrid
     protected $css;
 
     /**
-     * Actions $action
-     * @var action
-     */
-
-    protected $actions;
-
-    /**
      * URL parse $parsed
      * @var parse
      */
@@ -141,9 +135,9 @@ class DataGrid
         // list($name, $select, $table, $join, $columns) = array_values($args);
         $name = $select = $aliased = $table = false;
         $join = $columns = $filterable = $searchable =
-        $massoperations = $css = $operators = $actions = [];
+        $massoperations = $css = $operators = [];
         extract($args);
-        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $perpage, $table, $join, $columns, $css, $operators,$actions);
+        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $perpage, $table, $join, $columns, $css, $operators);
     }
 
     //starts buikding the queries on the basis of selects, joins and filter with
@@ -162,7 +156,6 @@ class DataGrid
         array $columns = null,
         array $css = [],
         array $operators = [],
-        array $actions = [],
         Pagination $pagination = null
     ) {
         $this->request = Request::capture();
@@ -178,7 +171,6 @@ class DataGrid
         $this->addColumns($columns, true);
         $this->setCss($css);
         $this->setOperators($operators);
-        $this->setActions($actions);
         // $this->addPagination($pagination);
         return $this;
     }
@@ -317,17 +309,6 @@ class DataGrid
     // }
 
     /**
-     * Section actions bag
-     * here.
-     * @return $this
-     */
-
-    public function setActions($actions = []) {
-        $this->actions = $actions ?: [];
-        return $this;
-    }
-
-    /**
      * Add Columns.
      *
      * @return $this
@@ -440,16 +421,12 @@ class DataGrid
     {
         $select = [];
         foreach ($this->columns as $column) {
-            $select[] = $column->name.' as '.$column->alias;
+            $select[] = $column->name;
         }
-
         $this->query->select(...$select);
-
         if ($this->select) {
             $this->query->addselect($this->select);
         }
-
-        // dd($this->query);
     }
 
     /**
@@ -745,7 +722,6 @@ class DataGrid
             'filterable' =>$this->filterable,
             'operators' => $this->operators,
             'massoperations' => $this->massoperations,
-            'actions' => $this->actions,
         ]);
     }
 }

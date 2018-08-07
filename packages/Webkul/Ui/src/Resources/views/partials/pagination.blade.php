@@ -6,7 +6,7 @@
                 <i class="icon angle-left-icon"></i>
             </a>
         @else
-            <a data-page="{{ $paginator->previousPageUrl() }}" href="{{ urldecode($paginator->nextPageUrl()) }}" id="previous" class="page-item previous">
+            <a data-page="{{ urldecode($paginator->previousPageUrl()) }}" href="{{ urldecode($paginator->previousPageUrl()) }}" id="previous" class="page-item previous">
                 <i class="icon angle-left-icon"></i>
             </a>
         @endif
@@ -28,7 +28,7 @@
                             {{ $page }}
                         </a>
                     @else
-                        <a class="page-item" href="{{ $url }}">
+                        <a class="page-item as" href="{{ urldecode($url) }}">
                             {{ $page }}
                         </a>
                     @endif
@@ -38,7 +38,7 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <a href="{{ urldecode($paginator->nextPageUrl()) }}" data-page="{{ $paginator->nextPageUrl() }}" id="next" class="page-item next">
+            <a href="{{ urldecode($paginator->nextPageUrl()) }}" data-page="{{ urldecode($paginator->nextPageUrl()) }}" id="next" class="page-item next">
                 <i class="icon angle-right-icon"></i>
             </a>
         @else

@@ -27,6 +27,7 @@ class DataGridController extends Controller
             'table' => 'admins as u',
             'select' => 'u.id',
             'aliased' => true , //boolean to validate aliasing on the basis of this.
+            'perpage' => 2,
             'filterable' => [
                 [
                     'column' => 'u.id',

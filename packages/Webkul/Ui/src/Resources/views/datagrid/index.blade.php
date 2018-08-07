@@ -9,6 +9,7 @@
     {{-- Section for datagrid javascript --}}
     @section('javascript')
         <script type="text/javascript">
+            var columns = @json($columns); //referential
             var allFilters1 = [];
             var search_value;
             var filter_column;
@@ -243,6 +244,7 @@
                 moreSplitted = [];
                 splitted = t.split('&');
                 for(i=0;i<splitted.length;i++) {
+
                     moreSplitted.push(splitted[i].split('='));
                 }
                 for(i=0;i<moreSplitted.length;i++) {
@@ -252,16 +254,16 @@
                     obj.column = col;
                     obj.cond = cond;
                     obj.val = val;
-                    allFilters1.push(obj);
+                    if(col!=undefined && cond!=undefined && val!=undefined)
+                        allFilters1.push(obj);
                     obj = {};
                 }
-                makeTagsTestPrior();
+                makeTags();
             }
 
             //use the label to prevent the display of column name on the body
-            function makeTagsTestPrior() {
+            function makeTags() {
                 var filterRepeat = 0;
-                console.log(allFilters1);
                 if(allFilters1.length!=0)
                 for(var i = 0;i<allFilters1.length;i++) {
                     if(allFilters1[i].column == "sort") {
@@ -277,8 +279,7 @@
                         $('.filter-row-two').append(filter_card);
 
                     } else {
-
-                        col_label_tag = $('li[data-name="'+allFilters1[i].column+'"]').text();
+                        col_label_tag = $('li[data-name="'+allFilters1[i].column+'"]').text().trim();
                         var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
                         $('.filter-row-two').append(filter_card);
 
@@ -287,7 +288,7 @@
                 }
             }
 
-            //obselete or can be used for mediation control if necessary
+            //This is being used for validation of url params and making array of filters
             function formURL(column, condition, response, urlparams,clabel) {
                 /*validate the conditions here and do the replacements and
                 push here in the all filters array*/

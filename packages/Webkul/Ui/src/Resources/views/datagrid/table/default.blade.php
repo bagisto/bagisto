@@ -104,6 +104,11 @@
                 @else
                 <th class="labelled-col grid_head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
                 @endif @endforeach
+                @foreach($actions as $action)
+                <th>
+                    {{ $action['type'] }}
+                </th>
+                @endforeach
             </tr>
         </thead>
         <tbody class="{{ $css->tbody }}">
@@ -118,13 +123,18 @@
                 @foreach ($columns as $column)
                 <td class="">{!! $column->render($result) !!}</td>
                 @endforeach
+                @foreach($actions as $action)
+                <td class="action">
+                    <span class="action-{{ $action['type'] }}" id="{{ $result->id }}">
+                        <i class="{{ $action['icon'] }}"></i>
+                    </span>
+                </td>
+                @endforeach
             </tr>
             @endforeach
         </tbody>
     </table>
     <div class="pagination">
-        {{-- <a class="page-item previous"><i class="icon angle-left-icon"></i></a>
-        <a href="#status/6/page/2" class="page-item next"><i class="icon angle-right-icon"></i></a> --}}
         {{ $results->links() }}
     </div>
 </div>
