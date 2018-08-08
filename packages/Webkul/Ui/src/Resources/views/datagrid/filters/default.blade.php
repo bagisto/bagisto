@@ -13,7 +13,7 @@
                     <div class="dropdown-container">
                         <ul>
                             @foreach($columns as $column)
-                            <li data-name="{{ $column->name }}">
+                            <li data-name="{{ $column->alias }}">
                                 {{ $column->label }}
                             </li>
                             @endforeach
@@ -35,7 +35,7 @@
                                 <select class="filter-column-select">
                                     <option selected disabled>Select Column</option>
                                     @foreach($filterable as $fcol)
-                                    <option value="{{ $fcol['column'] }}" data-type="{{ $fcol['type'] }}" data-label="{{ $fcol['label'] }}">{{ $fcol['label'] }}</option>
+                                    <option value="{{ $fcol['alias'] }}" data-type="{{ $fcol['type'] }}" data-label="{{ $fcol['label'] }}">{{ $fcol['label'] }}</option>
                                     @endforeach
                                 </select>
                             </li>
@@ -113,4 +113,3 @@
         </span> --}}
     </div>
 </div>
-

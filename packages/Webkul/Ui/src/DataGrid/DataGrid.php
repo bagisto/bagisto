@@ -453,6 +453,22 @@ class DataGrid
     }
 
     /**
+     * To find the alias
+     * of the column and
+     * by taking the column
+     * name.
+     * @return string
+     */
+
+    public function findAlias($column_alias) {
+        foreach($this->columns as $column) {
+            if($column->alias == $column_alias) {
+                return $column->name;
+            }
+        }
+    }
+
+    /**
      * Parse the URL
      * and get it ready
      * to be used.
@@ -528,7 +544,7 @@ class DataGrid
                 if ($key=="sort") {
                     //resolve the case with the column helper class
                     if(substr_count($key,'_') >= 1)
-                        $column_name = str_replace_first('_', '.', $key);
+                        $column_name = $this->findAlias($key);
 
                     //case that don't need any resolving
                     $count_keys = count(array_keys($value));
@@ -550,8 +566,7 @@ class DataGrid
                         }
                     });
                 } else {
-                    $column_name = str_replace_first('_', '.', $key);
-
+                    $column_name = $this->findAlias($key);
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
                             $this->query->where(
@@ -602,9 +617,7 @@ class DataGrid
                         throw new \Exception('Multiple Search keys Found, Please Resolve the URL Manually.');
 
                 } else {
-
                     $column_name = $key;
-
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
                             $this->query->where(
@@ -707,13 +720,15 @@ class DataGrid
 
             //Check for column filter bags and resolve aliasing
             $this->getQueryWithColumnFilters();
+
             if (!empty($parsed)) {
                 $this->getQueryWithFilters();
             }
-            // $this->results = $this->query->get();
-            // return $this->results;
+
             $this->results = $this->query->get();
+
             $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
+
             return $this->results;
 
         } else {
@@ -721,12 +736,17 @@ class DataGrid
             $this->query = DB::table($this->table);
 
             $this->getSelect();
+
             $this->getQueryWithColumnFilters();
+
             if (!empty($parsed)) {
                 $this->getQueryWithFilters();
             }
+
             $this->results = $this->query->get();
+
             $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
+
             return $this->results;
         }
     }

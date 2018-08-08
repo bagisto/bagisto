@@ -832,7 +832,7 @@ h2 {
     }
     .table {
         thead {
-            .xyz {
+            .mass-action-wrapper {
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
@@ -852,10 +852,12 @@ h2 {
                 }
             }
             tr {
-                th.sort-head {
+                th.grid_head {
+                    cursor:pointer;
+
                     .sort-down-icon {
-                        margin-left: 8px;
-                        margin-top: -5px;
+                        margin-left: 5px;
+                        margin-top: -3px;
                         vertical-align: middle;
                         cursor: pointer;
                     }

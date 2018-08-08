@@ -391,6 +391,13 @@
                     }
                 }
             }
+            function confirm_click(x){
+                if (confirm(x)) {
+
+                } else {
+                    return false;
+                }
+            }
         </script>
     @endsection
 

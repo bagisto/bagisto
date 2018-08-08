@@ -4,11 +4,11 @@
 
         <thead>
 
-            <tr class="mass-action" style="display: none;">
+            <tr class="mass-action" style="display: none; height:63px;">
 
                 <th colspan="{{ count($columns)+1 }}">
 
-                    <div class="xyz">
+                    <div class="mass-action-wrapper">
 
                         <span class="massaction-remove">
                             <span class="icon checkbox-dash-icon"></span>
@@ -90,19 +90,19 @@
                     </span>
                 </th>
                 @foreach ($columns as $column) @if($column->sortable == "true")
-                <th class="labelled-col grid_head sort-head"
-                @if(strpos($column->name, ' as '))
+                <th class="grid_head"
+                @if(strpos($column->alias, ' as '))
                     <?php $exploded_name = explode(' as ',$column->name); ?>
                     data-column-name="{{ $exploded_name[0] }}"
                 @else
-                    data-column-name="{{ $column->name }}"
+                    data-column-name="{{ $column->alias }}"
                 @endif
 
                 data-column-label="{{ $column->label }}"
                     data-column-sort="asc">{!! $column->sorting() !!}<span class="icon sort-down-icon"></span>
                 </th>
                 @else
-                <th class="labelled-col grid_head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
+                <th class="labelled-col grid_head" data-column-name="{{ $column->alias }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
                 @endif @endforeach
                 @foreach($actions as $action)
                 <th>
@@ -125,9 +125,9 @@
                 @endforeach
                 @foreach($actions as $action)
                 <td class="action">
-                    <span class="action-{{ $action['type'] }}" id="{{ $result->id }}">
+                    <a @if($action['type']=="Edit") href="{{ url()->current().'/edit/'.$result->id }}" @elseif($action['type']=="Delete") href="{{ url()->current().'/delete/'.$result->id }}" @endif  class="Action-{{ $action['type'] }}" id="{{ $result->id }}" onclick="return confirm_click('{{ $action['confirm_text'] }}');">
                         <i class="{{ $action['icon'] }}"></i>
-                    </span>
+                    </a>
                 </td>
                 @endforeach
             </tr>
