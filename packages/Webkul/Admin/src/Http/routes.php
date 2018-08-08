@@ -212,7 +212,7 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.countries.store');
 
 
-            // Country Routes
+            // Currency Routes
             Route::get('/currencies', 'Webkul\Core\Http\Controllers\CurrencyController@index')->defaults('_config', [
                 'view' => 'admin::settings.currencies.index'
             ])->name('admin.currencies.index');
@@ -226,7 +226,7 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.currencies.store');
 
 
-            // Country Routes
+            // Exchange Rates Routes
             Route::get('/exchange_rates', 'Webkul\Core\Http\Controllers\ExchangeRateController@index')->defaults('_config', [
                 'view' => 'admin::settings.exchange_rates.index'
             ])->name('admin.exchange_rates.index');

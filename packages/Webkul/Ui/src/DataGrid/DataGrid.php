@@ -617,7 +617,8 @@ class DataGrid
                         throw new \Exception('Multiple Search keys Found, Please Resolve the URL Manually.');
 
                 } else {
-                    $column_name = $key;
+                    // $column_name = $key;
+                    $column_name = $this->findAlias($key);
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
                             $this->query->where(

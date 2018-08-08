@@ -12,7 +12,7 @@ use Webkul\Ui\DataGrid\Helpers\Css;
 use Webkul\Ui\DataGrid\Helpers\MassAction;
 use URL;
 
-class DataGridX
+class ProductGrid
 {
     /**
      * Name of DataGrid

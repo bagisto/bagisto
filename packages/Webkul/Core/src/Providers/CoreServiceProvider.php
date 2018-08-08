@@ -45,7 +45,7 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->registerCoreFacade();
     }
-    
+
     /**
      * Register Bouncer as a singleton.
      *

@@ -102,13 +102,11 @@
                     data-column-sort="asc">{!! $column->sorting() !!}<span class="icon sort-down-icon"></span>
                 </th>
                 @else
-                <th class="labelled-col grid_head" data-column-name="{{ $column->alias }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
+                <th class="grid_head" data-column-name="{{ $column->alias }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
                 @endif @endforeach
-                @foreach($actions as $action)
                 <th>
-                    {{ $action['type'] }}
+                    Actions
                 </th>
-                @endforeach
             </tr>
         </thead>
         <tbody class="{{ $css->tbody }}">
@@ -123,13 +121,15 @@
                 @foreach ($columns as $column)
                 <td class="">{!! $column->render($result) !!}</td>
                 @endforeach
-                @foreach($actions as $action)
+
                 <td class="action">
-                    <a @if($action['type']=="Edit") href="{{ url()->current().'/edit/'.$result->id }}" @elseif($action['type']=="Delete") href="{{ url()->current().'/delete/'.$result->id }}" @endif  class="Action-{{ $action['type'] }}" id="{{ $result->id }}" onclick="return confirm_click('{{ $action['confirm_text'] }}');">
-                        <i class="{{ $action['icon'] }}"></i>
-                    </a>
+                    @foreach($actions as $action)
+                        <a @if($action['type']=="Edit") href="{{ url()->current().'/edit/'.$result->id }}" @elseif($action['type']=="Delete") href="{{ url()->current().'/delete/'.$result->id }}" @endif  class="Action-{{ $action['type'] }}" id="{{ $result->id }}" onclick="return confirm_click('{{ $action['confirm_text'] }}');">
+                            <i class="{{ $action['icon'] }}"></i>
+                        </a>
+                    @endforeach
                 </td>
-                @endforeach
+
             </tr>
             @endforeach
         </tbody>

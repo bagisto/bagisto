@@ -16,14 +16,31 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Using class based composers...
+
+        //for the users in the countries dashboard
+        View::composer('admin::settings.countries.index', 'Webkul\Admin\Http\ViewComposers\DataGrids\CountryComposer');
+
+        //for the users in the admin dashboard
         View::composer('admin::users.users.index', 'Webkul\Admin\Http\ViewComposers\DataGrids\UserComposer');
 
-        // Using Closure based composers...
+        //for the users in the admin dashboard
+        View::composer('admin::users.roles.index', 'Webkul\Admin\Http\ViewComposers\DataGrids\RolesComposer');
 
-        // View::composer('admin::users.index', function ($view) {
-        //     //
-        // });
+        //for the locales in admin dashboard
+        View::composer('admin::settings.locales.index', 'Webkul\Admin\Http\ViewComposers\DataGrids\LocalesComposer');
+
+        //for the currencies in admin dashboard
+        View::composer('admin::settings.currencies.index', 'Webkul\Admin\Http\ViewComposers\DataGrids\CurrenciesComposer');
+
+        //for the Exchange Rates in admin dashboard
+        View::composer('admin::settings.exchange_rates.index', 'Webkul\Admin\Http\ViewComposers\DataGrids\ExchangeRatesComposer');
+
+        //for inventory sources in admin dashboard
+        View::composer('admin::settings.inventory_sources.index', 'Webkul\Admin\Http\ViewComposers\DataGrids\InventorySourcesComposer');
+
+        //for channels in admin dashboard
+        View::composer('admin::settings.channels.index', 'Webkul\Admin\Http\ViewComposers\DataGrids\ChannelsComposer');
+
     }
 
     /**

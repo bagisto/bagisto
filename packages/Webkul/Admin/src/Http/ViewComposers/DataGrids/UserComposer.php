@@ -55,15 +55,15 @@ class UserComposer
             ],
             'actions' => [
                 [
-                    'type' => 'Delete',
-                    'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
-                    'icon' => 'icon trash-icon',
-                ], [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
                     'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon pencil-lg-icon',
+                ], [
+                    'type' => 'Delete',
+                    'route' => route('admin.datagrid.delete'),
+                    'confirm_text' => 'Do you really want to do this?',
+                    'icon' => 'icon trash-icon',
                 ],
             ],
             'join' => [
@@ -92,7 +92,7 @@ class UserComposer
                     'name' => 'u.name',
                     'alias' => 'Name',
                     'type' => 'string',
-                    'label' => 'Admin Name',
+                    'label' => 'Name',
                     'sortable' => true,
                     'wrapper' => function ($value, $object) {
                                     return '<a class="color-red">' . $object->Name . '</a>';
@@ -102,7 +102,7 @@ class UserComposer
                     'name' => 'u.email',
                     'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'Admin E-Mail',
+                    'label' => 'E-Mail',
                     'sortable' => true,
                 ],
                 [
@@ -147,7 +147,7 @@ class UserComposer
                     'column' => 'u.name',
                     'alias' => 'Name',
                     'type' => 'string',
-                    'label' => 'Admin Name'
+                    'label' => 'Name'
                 ], [
                     'column' => 'u.id',
                     'alias' => 'ID',
@@ -165,11 +165,11 @@ class UserComposer
                 [
                     'column' => 'u.email',
                     'type' => 'string',
-                    'label' => 'Admin E-Mail'
+                    'label' => 'E-Mail'
                 ], [
                     'column' => 'u.name',
                     'type' => 'string',
-                    'label' => 'Admin Name'
+                    'label' => 'Name'
                 ]
             ],
             'operators' => [
