@@ -31,14 +31,14 @@
                                 <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('channel') ? 'has-error' : '']">
-                                <label for="channel">{{ __('admin::app.settings.sliders.channels') }}</label>
-                                <select class="control" id="channel" name="channel" value="" v-validate="'required'">
+                            <div class="control-group" :class="[errors.has('channel_id') ? 'has-error' : '']">
+                                <label for="channel_id">{{ __('admin::app.settings.sliders.channels') }}</label>
+                                <select class="control" id="channel_id" name="channel_id" value="" v-validate="'required'">
                                     @foreach($channels[0] as $channel)
                                         <option value="{{ $channel->id }}">{{ __($channel->name) }}</option>
                                     @endforeach
                                 </select>
-                                <span class="control-error" v-if="errors.has('channel')">@{{ errors.first('channel') }}</span>
+                                <span class="control-error" v-if="errors.has('channel_id')">@{{ errors.first('channel_id') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('image') ? 'has-error' : '']">

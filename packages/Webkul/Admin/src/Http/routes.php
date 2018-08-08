@@ -301,13 +301,18 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('/account', 'Webkul\User\Http\Controllers\AccountController@update')->name('admin.account.update');
 
             // Admin Store Front Settings Route
-            Route::get('/slider/create','Webkul\Shop\Http\Controllers\SliderController@index')->defaults('_config',[
-                'view' => 'admin::sliders.create'
+            Route::get('/slider','Webkul\Shop\Http\Controllers\SliderController@index')->defaults('_config',[
+                'view' => 'admin::settings.sliders.index'
             ])->name('admin.sliders.index');
 
-            Route::post('/slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
-                'redirect' => 'admin::sliders.create'
+            // Admin Store Front Settings Route
+            Route::get('/slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
+                'view' => 'admin::settings.sliders.create'
             ])->name('admin.sliders.create');
+
+            Route::post('/slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
+                'redirect' => 'admin::sliders.index'
+            ])->name('admin.sliders.store');
         });
     });
 });

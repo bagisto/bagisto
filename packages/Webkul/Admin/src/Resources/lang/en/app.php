@@ -243,7 +243,7 @@ return [
         ],
 
         'sliders' => [
-            'title' => 'Title',
+            'title' => 'Sliders',
             'add-title' => 'Create Slider',
             'save-btn-title' => 'Save Slider',
             'general' => 'General',

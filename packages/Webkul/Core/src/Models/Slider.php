@@ -11,7 +11,10 @@ class Slider extends Model
      *
      * @var array
      */
+
+    protected $table = 'sliders';
+
     protected $fillable = [
-        'tile', 'path','content','channel_id'
+        'title', 'path','content','channel_id'
     ];
 }

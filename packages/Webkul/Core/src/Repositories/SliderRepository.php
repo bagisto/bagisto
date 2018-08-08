@@ -21,4 +21,22 @@ class SliderRepository extends Repository
     {
         return 'Webkul\Core\Models\Slider';
     }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function create(array $data)
+    {
+        $image = request()->file('image');
+
+        $image_name = trim($data['title']).'.'.$image->getClientOriginalExtension();
+
+        $destinationPath = public_path('/vendor/webkul/shop/assets/images/slider');
+        $path = $image->move($destinationPath, $image_name);
+        $path= $path->getrealPath();
+        $data['path'] = $path;
+        $this->model->create($data);
+    }
+
 }

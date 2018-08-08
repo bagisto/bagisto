@@ -18,32 +18,44 @@ use Webkul\Core\Repositories\SliderRepository as Slider;
 class SliderController extends controller
 {
     protected $_config;
+    protected $slider;
+    protected $channels;
 
-    public function __construct()
+    public function __construct(Slider $slider)
     {
+        $this->slider = $slider;
         $this->_config = request('_config');
 
     }
 
-    public function index(){
+    /**
+     * Loads the index
+     * for the sliders
+     * settings.
+     */
+
+    public function index() {
+        return view($this->_config['view']);
+    }
+    /**
+     * Loads the form
+     * for creating
+     * slider.
+     */
+
+    public function create() {
         $call = new Channel();
         $channels = $call->getChannelWithLocales();
         return view($this->_config['view'])->with('channels',[$channels]);
     }
 
-    public function create(Request $request) {
-        $this->validate($request,[
-            'title' => 'string|required|max:100',
-            'image' => 'required|image|mimes:png,jpg',
-            // |dimensions:ratio=12/5
-            'content' => 'string'
-        ]);
-
-        $image = $request->file('image');
-        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-        $destinationPath = public_path('/images');
-        $image->move($destinationPath, $input['imagename']);
-
-
+    /**
+     * Creates the new
+     * sider item
+     */
+    public function store() {
+        // dd($request->title,$full_path->getrealPath(),$request->content,$request->channel);
+        $this->slider->create(request()->all());
+        return redirect()->back();
     }
 }

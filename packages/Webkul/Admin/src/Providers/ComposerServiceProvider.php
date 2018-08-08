@@ -41,6 +41,9 @@ class ComposerServiceProvider extends ServiceProvider
         //for channels in admin dashboard
         View::composer('admin::settings.channels.index', 'Webkul\Admin\Http\ViewComposers\DataGrids\ChannelsComposer');
 
+        //for sliders in admin dashboard
+        View::composer('admin::settings.sliders.index', 'Webkul\Admin\Http\ViewComposers\DataGrids\SliderComposer');
+
     }
 
     /**
