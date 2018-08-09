@@ -161,8 +161,6 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
-        dd(request()->all());
-        
         $this->product->update(request()->all(), $id);
 
         session()->flash('success', 'Product updated successfully.');

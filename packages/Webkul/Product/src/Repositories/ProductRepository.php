@@ -8,6 +8,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Models\ProductAttributeValue;
 
 /**
@@ -47,12 +48,20 @@ class ProductRepository extends Repository
     protected $productInventory;
 
     /**
+     * ProductImageRepository object
+     *
+     * @var array
+     */
+    protected $productImage;
+
+    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeRepository           $attribute
      * @param  Webkul\Attribute\Repositories\AttributeOptionRepository     $attributeOption
      * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValue
      * @param  Webkul\Product\Repositories\ProductInventoryRepository      $productInventory
+     * @param  Webkul\Product\Repositories\ProductImageRepository          $productImage
      * @return void
      */
     public function __construct(
@@ -60,6 +69,7 @@ class ProductRepository extends Repository
         AttributeOptionRepository $attributeOption,
         ProductAttributeValueRepository $attributeValue,
         ProductInventoryRepository $productInventory,
+        ProductImageRepository $productImage,
         App $app)
     {
         $this->attribute = $attribute;
@@ -69,6 +79,8 @@ class ProductRepository extends Repository
         $this->attributeValue = $attributeValue;
 
         $this->productInventory = $productInventory;
+
+        $this->productImage = $productImage;
 
         parent::__construct($app);
     }
@@ -183,6 +195,8 @@ class ProductRepository extends Repository
         }
 
         $this->productInventory->saveInventories($data, $product);
+        
+        $this->productImage->uploadImages($data, $product);
 
         return $product;
     }

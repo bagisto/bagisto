@@ -18,4 +18,8 @@ class Channel
 
         return $channel->code;
     }
+
+    public function getChannelModel() {
+        return ChannelModel::first();
+    }
 }

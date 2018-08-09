@@ -131,13 +131,13 @@
                                 </select>
                             </div>
                         
-                            <!--<div class="control-group">
+                            <div class="control-group">
                                 <label for="value_per_channel">{{ __('admin::app.catalog.attributes.value_per_channel') }}</label>
                                 <select class="control" id="value_per_channel" name="value_per_channel">
                                     <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
                                     <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
-                            </div>-->
+                            </div>
                         
                             <div class="control-group">
                                 <label for="is_filterable">{{ __('admin::app.catalog.attributes.is_filterable') }}</label>
