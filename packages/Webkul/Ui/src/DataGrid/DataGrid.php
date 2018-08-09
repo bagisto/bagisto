@@ -729,7 +729,6 @@ class DataGrid
             $this->results = $this->query->get();
 
             $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
-
             return $this->results;
 
         } else {

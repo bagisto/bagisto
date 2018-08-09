@@ -28,10 +28,10 @@ class SliderComposer
 
         $datagrid = DataGrid::make([
             'name' => 'Sliders',
-            'table' => 'sliders',
-            'select' => 'id',
+            'table' => 'sliders as s',
+            'select' => 's.id',
             'perpage' => 5,
-            'aliased' => false, //use this with false as default and true in case of joins
+            'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
                 [
@@ -57,13 +57,13 @@ class SliderComposer
             ],
 
             'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'channels as c',
+                    'primaryKey' => 's.channel_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'c.id',
+                ]
             ],
 
             //use aliasing on secodary columns if join is performed
@@ -71,17 +71,30 @@ class SliderComposer
             'columns' => [
 
                 [
-                    'name' => 'id',
+                    'name' => 's.id',
                     'alias' => 'slider_id',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'title',
+                    'name' => 's.title',
                     'alias' => 'slider_title',
                     'type' => 'string',
                     'label' => 'title',
+                ],
+                [
+                    'name' => 's.channel_id',
+                    'alias' => 'channel_id',
+                    'type' => 'string',
+                    'label' => 'Channel ID',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'c.name',
+                    'alias' => 'channel_name',
+                    'type' => 'string',
+                    'label' => 'Channel Name',
                     'sortable' => true,
                 ],
             ],
