@@ -17,13 +17,13 @@
 
             <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
                 <label for="first_name">{{ __('shop::app.customer.signup-form.firstname') }}</label>
-                <input type="text" class="control" name="first_name" v-validate="'required|alpha_spaces'">
+                <input type="text" class="control" name="first_name" v-validate="'required'">
                 <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
                 <label for="last_name">{{ __('shop::app.customer.signup-form.lastname') }}</label>
-                <input type="text" class="control" name="last_name" v-validate="'required|alpha_spaces'">
+                <input type="text" class="control" name="last_name" v-validate="'required'">
                 <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
             </div>
 
@@ -35,13 +35,13 @@
 
             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                 <label for="password">{{ __('shop::app.customer.signup-form.password') }}</label>
-                <input type="password" class="control" name="password" v-validate="'required|min:8|max:100'" ref="password">
+                <input type="password" class="control" name="password" v-validate="'required|min:8'" ref="password">
                 <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('confirm_password') ? 'has-error' : '']">
                 <label for="confirm_password">{{ __('shop::app.customer.signup-form.confirm_pass') }}</label>
-                <input type="password" class="control" name="confirm_password" v-validate="'required|min:8|max:100|confirm:$password'">
+                <input type="password" class="control" name="confirm_password" v-validate="'required|min:8|confirm:$password'">
                 <span class="control-error" v-if="errors.has('confirm_password')">@{{ errors.first('confirm_password') }}</span>
             </div>
 
