@@ -22,6 +22,8 @@
             active: Boolean
         },
 
+        inject: ['$validator'],
+
         data: function() {
             return {
                 isActive: false,

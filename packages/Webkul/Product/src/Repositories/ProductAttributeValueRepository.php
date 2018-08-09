@@ -5,6 +5,7 @@ namespace Webkul\Product\Repositories;
 use Illuminate\Container\Container as App;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Models\ProductAttributeValue;
 
 /**
  * Product Attribute Value Reposotory
@@ -20,20 +21,6 @@ class ProductAttributeValueRepository extends Repository
      * @var array
      */
     protected $attribute;
-
-    /**
-     * @var array
-     */
-    protected $attributeTypeFields = [
-        'text' => 'text_value',
-        'textarea' => 'text_value',
-        'price' => 'float_value',
-        'boolean' => 'boolean_value',
-        'select' => 'integer_value',
-        'multiselect' => 'text_value',
-        'datetime' => 'datetime_time',
-        'date' => 'date_value',
-    ];
 
     /**
      * Create a new controller instance.
@@ -64,10 +51,31 @@ class ProductAttributeValueRepository extends Repository
      */
     public function create(array $data)
     {
-        $attribute = $this->attribute->find($data['attribute_id']);
+        if(isset($data['attribute_id'])) {
+            $attribute = $this->attribute->find($data['attribute_id']);
+        } else {
+            $attribute = $this->attribute->findBy('code', $data['attribute_code']);
+        }
 
-        $data[$this->attributeTypeFields[$attribute->type]] = $data['value'];
+        if(!$attribute)
+            return;
+
+        $data[ProductAttributeValue::$attributeTypeFields[$attribute->type]] = $data['value'];
 
         return $this->model->create($data);
+    }
+
+    /**
+     * @param string $column
+     * @param int    $attributeId
+     * @param int    $productId
+     * @param string $value
+     * @return boolean
+     */
+    public function isValueUnique($productId, $attributeId, $column, $value)
+    {
+        $result = $this->resetScope()->model->where($column, $value)->where('attribute_id', '!=', $attributeId)->where('product_id', '!=', $productId)->get();
+
+        return $result->count() ? false : true;
     }
 }

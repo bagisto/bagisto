@@ -71,7 +71,7 @@ class CategoryController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'slug' => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
+            'slug' => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required'
         ]);
 

@@ -66,7 +66,7 @@ return [
     ],
     'catalog' => [
         'products' => [
-            'products' => 'products',
+            'products' => 'Products',
             'add-product-btn-title' => 'Add Product',
             'add-title' => 'Add Product',
             'edit-title' => 'Edit Product',
@@ -81,7 +81,20 @@ return [
             'attribute-header' => 'Attribute(s)',
             'attribute-option-header' => 'Attribute Option(s)',
             'no' => 'No',
-            'yes' => 'Yes'
+            'yes' => 'Yes',
+            'disabled' => 'Disabled',
+            'enabled' => 'Enabled',
+            'add-variant-btn-title' => 'Add Variant',
+            'name' => 'Name',
+            'qty' => 'Qty',
+            'price' => 'Price',
+            'weight' => 'Weight',
+            'status' => 'Status',
+            'enabled' => 'Enabled',
+            'disabled' => 'Disabled',
+            'add-variant-title' => 'Add Variant',
+            'variant-already-exist-message' => 'Variant with same attribute options already exists.',
+            'add-image-btn-title' => 'Add Image'
         ],
         'attributes' => [
             'add-title' => 'Add Attribute',

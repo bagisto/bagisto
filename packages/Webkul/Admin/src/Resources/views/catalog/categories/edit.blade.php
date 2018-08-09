@@ -16,7 +16,7 @@
 
                     <div class="control-group">
                         <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
-                            @foreach(core()->allLocales() as $localeModel)
+                            @foreach(core()->getAllLocales() as $localeModel)
 
                                 <option value="{{ route('admin.catalog.categories.update', $category->id) . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                     {{ $localeModel->name }}

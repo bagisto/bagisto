@@ -30,7 +30,7 @@
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.inventory_sources.code') }}</label>
-                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') ?: $inventorySource->code }}"/>
+                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') ?: $inventorySource->code }}" v-code/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 

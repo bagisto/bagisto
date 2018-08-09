@@ -37,8 +37,11 @@ class AttributeFamilyTableSeeder extends Seeder
                             'code' => 'new_to',
                             'position' => 5
                         ], [
-                            'code' => 'status',
+                            'code' => 'visible_individually',
                             'position' => 6
+                        ], [
+                            'code' => 'status',
+                            'position' => 7
                         ]
                     ]
                 ], [

@@ -39,10 +39,16 @@ $(document).ready(function () {
             addServerErrors() {
                 var scope = null;
                 for (var key in serverErrors) {
-                    var inputName = key;
-                    if (key.indexOf(".") !== -1) {
-                        inputName = key.replace(".", "[") + "]";
-                    }
+                    var inputNames = [];
+                    key.split('.').forEach(function(chunk, index) {
+                        if(index) {
+                            inputNames.push('[' + chunk + ']')
+                        } else {
+                            inputNames.push(chunk)
+                        }
+                    })
+
+                    var inputName = inputNames.join('');
 
                     const field = this.$validator.fields.find({
                         name: inputName,

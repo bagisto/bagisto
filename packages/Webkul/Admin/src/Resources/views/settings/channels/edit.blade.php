@@ -30,7 +30,7 @@
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.channels.code') }}</label>
-                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') ?: $channel->code }}"/>
+                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') ?: $channel->code }}" v-code/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
@@ -56,7 +56,7 @@
                                 <label for="locales" class="required">{{ __('admin::app.settings.channels.locales') }}</label>
                                 <?php $selectedOptionIds = old('locales') ?: $channel->locales->pluck('id')->toArray() ?>
                                 <select v-validate="'required'" class="control" id="locales" name="locales[]" multiple>
-                                    @foreach(core()->allLocales() as $locale)
+                                    @foreach(core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->id }}" {{ in_array($locale->id, $selectedOptionIds) ? 'selected' : '' }}>
                                             {{ $locale->name }}
                                         </option>
@@ -69,7 +69,7 @@
                                 <label for="default_locale" class="required">{{ __('admin::app.settings.channels.default-locale') }}</label>
                                 <?php $selectedOption = old('default_locale') ?: $channel->default_locale ?>
                                 <select v-validate="'required'" class="control" id="default_locale" name="default_locale">
-                                    @foreach(core()->allLocales() as $locale)
+                                    @foreach(core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->id }}" {{ $selectedOption == $locale->id ? 'selected' : '' }}>
                                             {{ $locale->name }}
                                         </option>

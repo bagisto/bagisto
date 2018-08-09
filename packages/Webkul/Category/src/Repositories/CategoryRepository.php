@@ -44,7 +44,7 @@ class CategoryRepository extends Repository
         if(isset($data['locale']) && $data['locale'] == 'all') {
             $model = app()->make($this->model());
             
-            foreach(core()->allLocales() as $locale) {
+            foreach(core()->getAllLocales() as $locale) {
                 foreach ($model->translatedAttributes as $attribute) {
                     if(isset($data[$attribute])) {
                         $data[$locale->code][$attribute] = $data[$attribute];

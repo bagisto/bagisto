@@ -66,16 +66,16 @@ class AttributeFamilyRepository extends Repository
         $family = $this->model->create($data);
 
         foreach ($attributeGroups as $group) {
-            $attributes = isset($group['attributes']) ? $group['attributes'] : [];
-            unset($group['attributes']);
+            $custom_attributes = isset($group['custom_attributes']) ? $group['custom_attributes'] : [];
+            unset($group['custom_attributes']);
             $attributeGroup = $family->attribute_groups()->create($group);
 
-            foreach ($attributes as $attribute) {
+            foreach ($custom_attributes as $attribute) {
                 if(isset($attribute['id'])) {
-                    $attributeGroup->attributes()->attach($attribute['id']);
+                    $attributeGroup->custom_attributes()->attach($attribute['id']);
                 } else {
                     $attributeModel = $this->attribute->findBy('code', $attribute['code']);
-                    $attributeGroup->attributes()->save($attributeModel, ['position' => $attribute['position']]);
+                    $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $attribute['position']]);
                 }
             }
         }
@@ -102,9 +102,9 @@ class AttributeFamilyRepository extends Repository
                 if (str_contains($attributeGroupId, 'group_')) {
                     $attributeGroup = $family->attribute_groups()->create($attributeGroupInputs);
 
-                    if(isset($attributeGroupInputs['attributes'])) {
-                        foreach ($attributeGroupInputs['attributes'] as $attribute) {
-                            $attributeGroup->attributes()->attach($attribute['id']);
+                    if(isset($attributeGroupInputs['custom_attributes'])) {
+                        foreach ($attributeGroupInputs['custom_attributes'] as $attribute) {
+                            $attributeGroup->custom_attributes()->attach($attribute['id']);
                         }
                     }
                 } else {
@@ -115,20 +115,20 @@ class AttributeFamilyRepository extends Repository
                     $attributeGroup = $this->attributeGroup->findOrFail($attributeGroupId);
                     $attributeGroup->update($attributeGroupInputs);
                     
-                    $attributeIds = $attributeGroup->attributes()->get()->pluck('id');
+                    $attributeIds = $attributeGroup->custom_attributes()->get()->pluck('id');
 
-                    if(isset($attributeGroupInputs['attributes'])) {
-                        foreach ($attributeGroupInputs['attributes'] as $attribute) {
+                    if(isset($attributeGroupInputs['custom_attributes'])) {
+                        foreach ($attributeGroupInputs['custom_attributes'] as $attribute) {
                             if(is_numeric($index = $attributeIds->search($attribute['id']))) {
                                 $attributeIds->forget($index);
                             } else {
-                                $attributeGroup->attributes()->attach($attribute['id']);
+                                $attributeGroup->custom_attributes()->attach($attribute['id']);
                             }
                         }
                     }
 
                     if($attributeIds->count()) {
-                        $attributeGroup->attributes()->detach($attributeIds);
+                        $attributeGroup->custom_attributes()->detach($attributeIds);
                     }
                 }
             }
