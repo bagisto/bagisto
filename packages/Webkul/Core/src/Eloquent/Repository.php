@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Webkul\Core\Eloquent;
 
@@ -52,7 +52,7 @@ abstract class Repository implements RepositoryInterface {
     {
         return $this->resetScope()->model->with($with)->get($columns);
     }
- 
+
     /**
      * @param int $perPage
      * @param array $columns
@@ -158,7 +158,7 @@ abstract class Repository implements RepositoryInterface {
 
         return $this->model = $model->newQuery();
     }
-    
+
     /**
      * @return $this
      */

@@ -28,13 +28,13 @@ class SliderRepository extends Repository
      */
     public function create(array $data)
     {
-        $image = request()->file('image');
+        $image = request()->hasFile('image');
 
-        $image_name = trim($data['title']).'.'.$image->getClientOriginalExtension();
+        $image_name = uniqid(20).'.'.$image->getClientOriginalExtension();
 
         $destinationPath = public_path('/vendor/webkul/shop/assets/images/slider');
         $path = $image->move($destinationPath, $image_name);
-        $path= $path->getrealPath();
+        $path= 'vendor/webkul/shop/assets/images/slider/'.$image_name;
         $data['path'] = $path;
         $this->model->create($data);
     }

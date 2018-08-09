@@ -45,7 +45,7 @@ class SliderController extends controller
 
     public function create() {
         $call = new Channel();
-        $channels = $call->getChannelWithLocales();
+        $channels = $call->getAllChannels();
         return view($this->_config['view'])->with('channels',[$channels]);
     }
 
@@ -54,8 +54,8 @@ class SliderController extends controller
      * sider item
      */
     public function store() {
-        // dd($request->title,$full_path->getrealPath(),$request->content,$request->channel);
         $this->slider->create(request()->all());
+        session()->flash('success', 'Slider created successfully.');
         return redirect()->back();
     }
 }
