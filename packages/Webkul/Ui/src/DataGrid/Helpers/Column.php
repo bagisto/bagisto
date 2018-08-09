@@ -150,12 +150,6 @@ class Column extends AbstractFillable
     public function render($obj)
     {
 
-        // if (property_exists($obj, ($this->readableName = $this->correct()))) {
-        //     $this->value = $obj->{$this->readableName};
-        //     dump($this->value);
-        //     $this->wrap($obj);
-        // }
-        // return $obj->{$this->alias};
         if (property_exists($obj, ($this->aliasing = $this->alias))) {
             $this->value = $obj->{$this->aliasing};
             $this->wrap($obj);

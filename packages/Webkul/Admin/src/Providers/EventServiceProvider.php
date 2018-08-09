@@ -123,27 +123,14 @@ class EventServiceProvider extends ServiceProvider
      */
     public function createProductFormAccordian()
     {
-        Event::listen('admin.catalog.products.accordian.create', function () {
-            return ProductFormAccordian::create(function ($accordian) {
-                Event::fire('admin.catalog.products.accordian.build', $accordian);
-            });
-        });
-
-<<<<<<< HEAD
-        Event::listen('admin.catalog.products.accordian.build', function ($accordian) {
-            $accordian->add('categories', 'Categories', 'admin::catalog.products.accordians.categories', 1);
-=======
         Event::listen('admin.catalog.products.accordian.build', function($accordian) {
-            $accordian->add('images', 'Inventories', 'admin::catalog.products.accordians.inventories', 1);
+            $accordian->add('inventories', 'Inventories', 'admin::catalog.products.accordians.inventories', 1);
 
             $accordian->add('images', 'Images', 'admin::catalog.products.accordians.images', 2);
 
             $accordian->add('categories', 'Categories', 'admin::catalog.products.accordians.categories', 3);
 
             $accordian->add('variations', 'Variations', 'admin::catalog.products.accordians.variations', 4);
-
-            // $accordian->add('product-links', 'Linked Products', 'admin::catalog.products.accordians.product-links', 4);
->>>>>>> 4703b72eaa739072f971fb12c4009cad50a01588
         });
     }
 }

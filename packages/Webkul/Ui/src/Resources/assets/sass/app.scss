@@ -224,12 +224,8 @@ h2 {
         tbody td {
             padding: 10px;
             border-bottom: solid 1px #d3d3d3;
-<<<<<<< HEAD
-            color: #3a3a3a;
-=======
             color: $font-color;
             vertical-align: top;
->>>>>>> 4703b72eaa739072f971fb12c4009cad50a01588
 
             &.actions {
                 text-align: right;
@@ -240,7 +236,7 @@ h2 {
                 }
             }
         }
-        
+
         tbody tr:last-child td {
             border-bottom: none;
         }

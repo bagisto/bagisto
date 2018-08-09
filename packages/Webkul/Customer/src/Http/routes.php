@@ -5,7 +5,7 @@ Route::group(['middleware' => ['web']], function () {
 
         // Login Routes
         Route::get('login', 'Webkul\Customer\Http\Controllers\SessionController@show')->defaults('_config', [
-            'view' => 'shop::customers.login.index',
+            'view' => 'shop::customers.session.index',
         ])->name('customer.session.index');
 
         Route::post('login', 'Webkul\Customer\Http\Controllers\SessionController@create')->defaults('_config', [
