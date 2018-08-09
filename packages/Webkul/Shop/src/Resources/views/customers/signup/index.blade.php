@@ -1,4 +1,5 @@
 @extends('shop::store.layouts.master')
+
 @section('content-wrapper')
 
 <div class="content">
@@ -57,6 +58,5 @@
 
         </div>
     </form>
-
 </div>
 @endsection

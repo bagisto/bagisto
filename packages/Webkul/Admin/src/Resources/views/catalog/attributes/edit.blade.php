@@ -174,7 +174,7 @@
                                 <input type="hidden" name="value_per_locale" value="{{ $attribute->value_per_locale }}"/>
                             </div>
                         
-                            <!--<div class="control-group">
+                            <div class="control-group">
                                 <label for="value_per_channel">{{ __('admin::app.catalog.attributes.value_per_channel') }}</label>
                                 <select class="control" id="value_per_channel" name="value_per_channel" disabled>
                                     <option value="0" {{ $attribute->value_per_channel ? '' : 'selected' }}>
@@ -185,7 +185,7 @@
                                     </option>
                                 </select>
                                 <input type="hidden" name="value_per_channel" value="{{ $attribute->value_per_channel }}"/>
-                            </div>-->
+                            </div>
                         
                             <div class="control-group">
                                 <label for="is_filterable">{{ __('admin::app.catalog.attributes.is_filterable') }}</label>
