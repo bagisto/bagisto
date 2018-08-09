@@ -27,13 +27,6 @@ class CreateProductsTable extends Migration
             $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
         });
 
-        Schema::create('product_inventories', function (Blueprint $table) {
-            $table->integer('product_id')->unsigned();
-            $table->integer('inventory_source_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('inventory_source_id')->references('id')->on('inventory_sources')->onDelete('cascade');
-        });
-
         Schema::create('product_categories', function (Blueprint $table) {
             $table->integer('product_id')->unsigned();
             $table->integer('category_id')->unsigned();

@@ -124,6 +124,28 @@ abstract class Repository implements RepositoryInterface {
     }
 
     /**
+     * @param $conditions
+     * @param array $columns
+     * @return mixed
+     */
+    public function findWhere($conditions, $columns = ['*'], $with = [])
+    {
+        $model = $this->resetScope()->model;
+
+        foreach ($conditions as $column => $value) {
+            if(is_array($value)) {
+                list($column, $condition, $val) = $value;
+                $this->model = $this->model->where($column, $condition, $val);
+            } else {
+                $model->where($column, $value);
+            }
+
+        }
+
+        return $model->with($with)->get($columns);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Builder
      * @throws RepositoryException
      */

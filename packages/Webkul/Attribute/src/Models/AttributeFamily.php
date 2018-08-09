@@ -14,7 +14,7 @@ class AttributeFamily extends Model
     /**
      * Get all of the attributes for the attribute groups.
      */
-    public function attributes()
+    public function custom_attributes()
     {
         return Attribute::join('attribute_group_mappings', 'attributes.id', '=', 'attribute_group_mappings.attribute_id')
             ->join('attribute_groups', 'attribute_group_mappings.attribute_group_id', '=', 'attribute_groups.id')
@@ -26,9 +26,9 @@ class AttributeFamily extends Model
     /**
      * Get all of the attributes for the attribute groups.
      */
-    public function getAttributesAttribute()
+    public function getCustomAttributesAttribute()
     {
-        return $this->attributes()->get();
+        return $this->custom_attributes()->get();
     }
 
     /**
@@ -44,6 +44,6 @@ class AttributeFamily extends Model
      */
     public function getConfigurableAttributesAttribute()
     {
-        return $this->attributes()->where('attributes.is_configurable', 1)->where('attributes.type', 'select')->get();
+        return $this->custom_attributes()->where('attributes.is_configurable', 1)->where('attributes.type', 'select')->get();
     }
 }

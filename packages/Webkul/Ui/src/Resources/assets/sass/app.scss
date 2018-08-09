@@ -32,13 +32,13 @@ ul {
 
 h1 {
     font-size: 28px;
-    color: #3a3a3a;
+    color: $font-color;
     margin-top: 0;
 }
 
 h2 {
     font-size: 18px;
-    color: #3a3a3a;
+    color: $font-color;
 }
 
 .hide {
@@ -168,6 +168,7 @@ h2 {
             padding: 0px;
 
             li {
+                padding: 5px 0px;
                 // &:hover {
                 //     color: $brand-color;
                 // }
@@ -185,6 +186,14 @@ h2 {
 
                 .checkbox {
                     margin: 0;
+                }
+
+                .control-group label {
+                    color: $font-color;
+                    font-size: 15px;
+                    font-weight: 500;
+                    text-transform: capitalize;
+                    width: 100%;
                 }
             }
         }
@@ -209,13 +218,13 @@ h2 {
             font-weight: 700;
             padding: 12px 10px;
             background: #f8f9fa;
-            color: #3a3a3a;
+            color: $font-color;
         }
 
         tbody td {
             padding: 12px 10px;
             border-bottom: solid 1px #d3d3d3;
-            color: #3a3a3a;
+            color: $font-color;
             vertical-align: top;
 
             &.actions {
@@ -226,6 +235,10 @@ h2 {
                     vertical-align: middle;
                 }
             }
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
         }
     }
 
@@ -247,7 +260,6 @@ h2 {
     border: 2px solid $control-border-color;
     @include border-radius(3px);
     font-size: 14px;
-    color: #8e8e8e;
     padding: 8px 35px 8px 10px;
     cursor: pointer;
     position: relative;
@@ -376,7 +388,14 @@ h2 {
 
     label {
         display: block;
-        color: #3a3a3a;
+        color: $font-color;
+
+        &.required::after {
+            content: "*";
+            color: $danger-color;
+            font-weight: 700;
+            display: inline-block;
+        }
     }
 
     textarea.control {
@@ -511,7 +530,7 @@ h2 {
 .accordian {
     .accordian-header {
         font-size: 18px;
-        color: #3a3a3a;
+        color: $font-color;
         border-bottom: solid 1px $border-color;
         padding: 20px 15px;
         cursor: pointer;
@@ -913,7 +932,7 @@ h2 {
         h3 {
             display: inline-block;
             font-size: 20px;
-            color: #3a3a3a;
+            color: $font-color;
             margin: 0;
         }
 

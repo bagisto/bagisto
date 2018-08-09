@@ -1,16 +1,12 @@
-<div class="control-group" :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']">
-    <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
-        {{ $attribute->admin_name }}
-    </label>
+<select v-validate="'{{$validations}}'" class="control" id="{{ $attribute->code }}" name="{{ $attribute->code }}" {{ $disabled ? 'disabled' : '' }}>
 
-    <select v-validate="'{{$validations}}'" class="control" id="{{ $attribute->code }}" name="{{ $attribute->code }}">
-        <option value="0" {{ !$product[$attribute->code] ? 'selected' : ''}}>
-            {{ __('admin::app.catalog.products.no') }}
-        </option>
-        <option value="1" {{ $product[$attribute->code] ? 'selected' : ''}}>
-            {{ __('admin::app.catalog.products.yes') }}
-        </option>
-    </select>
+    <?php $selectedOption = old($attribute->code) ?: $product[$attribute->code] ?>
 
-    <span class="control-error" v-if="errors.has('{{ $attribute->code }}')">@{{ errors.first('{!! $attribute->code !!}') }}</span>
-</div>
+    <option value="0" {{ $selectedOption ? '' : 'selected'}}>
+        {{ $attribute->code == 'status' ? __('admin::app.catalog.products.disabled') : __('admin::app.catalog.products.no') }}
+    </option>
+    <option value="1" {{ $selectedOption ? 'selected' : ''}}>
+        {{ $attribute->code == 'status' ? __('admin::app.catalog.products.enabled') : __('admin::app.catalog.products.yes') }}
+    </option>
+    
+</select>

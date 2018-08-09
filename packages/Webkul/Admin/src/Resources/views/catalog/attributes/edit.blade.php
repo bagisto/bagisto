@@ -4,7 +4,6 @@
     {{ __('admin::app.catalog.attributes.edit-title') }}
 @stop
 
-
 @section('content')
     <div class="content">
         <form method="POST" action="{{ route('admin.catalog.attributes.update', $attribute->id) }}" @submit.prevent="onSubmit">
@@ -30,7 +29,7 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.catalog.attributes.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ $attribute->code }}" disabled="disabled"/>
+                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ $attribute->code }}" disabled="disabled" v-code/>
                                 <input type="hidden" name="code" value="{{ $attribute->code }}"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
@@ -175,7 +174,7 @@
                                 <input type="hidden" name="value_per_locale" value="{{ $attribute->value_per_locale }}"/>
                             </div>
                         
-                            <div class="control-group">
+                            <!--<div class="control-group">
                                 <label for="value_per_channel">{{ __('admin::app.catalog.attributes.value_per_channel') }}</label>
                                 <select class="control" id="value_per_channel" name="value_per_channel" disabled>
                                     <option value="0" {{ $attribute->value_per_channel ? '' : 'selected' }}>
@@ -186,7 +185,7 @@
                                     </option>
                                 </select>
                                 <input type="hidden" name="value_per_channel" value="{{ $attribute->value_per_channel }}"/>
-                            </div>
+                            </div>-->
                         
                             <div class="control-group">
                                 <label for="is_filterable">{{ __('admin::app.catalog.attributes.is_filterable') }}</label>

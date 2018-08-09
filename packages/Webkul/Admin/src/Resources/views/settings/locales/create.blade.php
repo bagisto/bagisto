@@ -28,7 +28,7 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code">{{ __('admin::app.settings.locales.code') }}</label>
-                                <input v-validate="'required'" class="control" id="code" name="code"/>
+                                <input v-validate="'required'" class="control" id="code" name="code" v-code/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 

@@ -61,11 +61,11 @@ class AttributeFamilyController extends Controller
      */
     public function create(Attribute $attribute)
     {
-        $attributeFamily = $this->attributeFamily->findBy('code', 'default', ['*'], ['attribute_groups.attributes']);
+        $attributeFamily = $this->attributeFamily->findBy('code', 'default', ['*'], ['attribute_groups.custom_attributes']);
         
-        $attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
+        $custom_attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
 
-        return view($this->_config['view'], compact('attributes', 'attributeFamily'));
+        return view($this->_config['view'], compact('custom_attributes', 'attributeFamily'));
     }
 
     /**
@@ -76,7 +76,7 @@ class AttributeFamilyController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attribute_families,code', new \Webkul\Core\Contracts\Validations\Slug],
+            'code' => ['required', 'unique:attribute_families,code', new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required'
         ]);
 
@@ -96,11 +96,11 @@ class AttributeFamilyController extends Controller
      */
     public function edit(Attribute $attribute, $id)
     {
-        $attributeFamily = $this->attributeFamily->findOrFail($id, ['*'], ['attribute_groups.attributes']);
+        $attributeFamily = $this->attributeFamily->findOrFail($id, ['*'], ['attribute_groups.custom_attributes']);
 
-        $attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
+        $custom_attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
 
-        return view($this->_config['view'], compact('attributeFamily', 'attributes'));
+        return view($this->_config['view'], compact('attributeFamily', 'custom_attributes'));
     }
 
     /**
@@ -113,7 +113,7 @@ class AttributeFamilyController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attribute_families,code,' . $id, new \Webkul\Core\Contracts\Validations\Slug],
+            'code' => ['required', 'unique:attribute_families,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required'
         ]);
         

@@ -30,6 +30,12 @@
                 default: null
             },
 
+            behavior: {
+                type: String,
+                required: false,
+                default: 'reactive'
+            },
+
             savedValues: {
                 type: Array,
                 required: false,
@@ -104,45 +110,58 @@
 
             generateRoot () {
                 if(this.inputType == 'checkbox') {
-                    return this.$createElement('tree-checkbox', {
-                        props: {
-                            id: this.items[this.idField],
-                            label: this.caption,
-                            nameField: this.nameField,
-                            modelValue: this.items[this.valueField],
-                            inputValue: this.hasChildren ? this.isSomeChildrenSelected : this.value,
-                            value: this.hasChildren ? this.isAllChildrenSelected : this.items
-                        },
-                        on: {
-                            change: selection => {
-                                if(this.hasChildren) {
-                                    if(this.isAllChildrenSelected) {
-                                        this.allChildren.forEach(leaf => {
-                                            let index = this.value.indexOf(leaf)
-                                            this.value.splice(index, 1)
-                                        })
-                                    } else {
-                                        this.allChildren.forEach(leaf => {
-                                            let exists = false;
-                                            this.value.forEach(item => {
-                                                if(item['key'] == leaf['key']) {
-                                                    exists = true;
+                    if(this.behavior == 'reactive') {
+                        return this.$createElement('tree-checkbox', {
+                            props: {
+                                id: this.items[this.idField],
+                                label: this.caption,
+                                nameField: this.nameField,
+                                modelValue: this.items[this.valueField],
+                                inputValue: this.hasChildren ? this.isSomeChildrenSelected : this.value,
+                                value: this.hasChildren ? this.isAllChildrenSelected : this.items
+                            },
+                            on: {
+                                change: selection => {
+                                    if(this.hasChildren) {
+                                        if(this.isAllChildrenSelected) {
+                                            this.allChildren.forEach(leaf => {
+                                                let index = this.value.indexOf(leaf)
+                                                this.value.splice(index, 1)
+                                            })
+                                        } else {
+                                            this.allChildren.forEach(leaf => {
+                                                let exists = false;
+                                                this.value.forEach(item => {
+                                                    if(item['key'] == leaf['key']) {
+                                                        exists = true;
+                                                    }
+                                                })
+
+                                                if(!exists) {
+                                                    this.value.push(leaf);
                                                 }
                                             })
+                                        }
 
-                                            if(!exists) {
-                                                this.value.push(leaf);
-                                            }
-                                        })
+                                        this.$emit('input', this.value)
+                                    } else {
+                                        this.$emit('input', selection);
                                     }
-
-                                    this.$emit('input', this.value)
-                                } else {
-                                    this.$emit('input', selection);
                                 }
                             }
-                        }
-                    })
+                        })
+                    } else {
+                        return this.$createElement('tree-checkbox', {
+                            props: {
+                                id: this.items[this.idField],
+                                label: this.caption,
+                                nameField: this.nameField,
+                                modelValue: this.items[this.valueField],
+                                inputValue: this.value,
+                                value: this.items
+                            }
+                        })
+                    }
                 } else if(this.inputType == 'radio') {
                     return this.$createElement('tree-radio', {
                         props: {
@@ -172,7 +191,8 @@
                         captionField: this.captionField,
                         childrenField: this.childrenField,
                         valueField: this.valueField,
-                        idField: this.idField
+                        idField: this.idField,
+                        behavior: this.behavior
                     }
                 })
             },

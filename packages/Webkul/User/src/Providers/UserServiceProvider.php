@@ -49,10 +49,6 @@ class UserServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerBouncer();
-
-        Event::listen('admin.acl.build', function ($acl) {
-            $acl->add('settings.users.roles1', 'Roles1', 'admin.roles.index1', 3);
-        });
     }
 
     /**
