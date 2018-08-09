@@ -6,3 +6,7 @@ Vue.component("tree-item", require("./components/tree-view/tree-item"));
 Vue.component("tree-checkbox", require("./components/tree-view/tree-checkbox"));
 Vue.component("tree-radio", require("./components/tree-view/tree-radio"));
 Vue.component("modal", require("./components/modal"));
+Vue.component("image-wrapper", require("./components/image/image-wrapper"));
+Vue.component("image-item", require("./components/image/image-item"));
+Vue.directive("slugify", require("./directives/slugify"));
+Vue.directive("code", require("./directives/code"));

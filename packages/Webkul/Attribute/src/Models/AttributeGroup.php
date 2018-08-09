@@ -14,7 +14,7 @@ class AttributeGroup extends Model
     /**
      * Get the attributes that owns the attribute group.
      */
-    public function attributes()
+    public function custom_attributes()
     {
         return $this->belongsToMany(Attribute::class, 'attribute_group_mappings')
             ->withPivot('position')

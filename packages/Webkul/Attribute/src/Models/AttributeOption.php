@@ -12,7 +12,7 @@ class AttributeOption extends TranslatableModel
     
     public $translatedAttributes = ['label'];
 
-    protected $fillable = ['sort_order'];
+    protected $fillable = ['admin_name', 'sort_order'];
 
     /**
      * Get the attribute that owns the attribute option.

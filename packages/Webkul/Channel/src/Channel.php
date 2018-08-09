@@ -6,22 +6,16 @@ use Webkul\Channel\Models\Channel as ChannelModel;
 
 class Channel
 {
-    public function getDefaultChannelLocaleCode() {
+    public function getAllChannels() {
+        return ChannelModel::all();
+    }
+
+    public function getChannel() {
         $channel = ChannelModel::first();
 
-        if(!$channel || !$channel->locales()->count())
+        if(!$channel)
             return;
 
-        return $channel->code . '-' . $channel->locales()->first()->code;
-    }
-
-    public function getDefaultChannelLocale() {
-        $channel = ChannelModel::first();
-
-        return $channel->locales()->first();
-    }
-
-    public function getChannelWithLocales() {
-        return ChannelModel::with('locales')->get();
+        return $channel->code;
     }
 }

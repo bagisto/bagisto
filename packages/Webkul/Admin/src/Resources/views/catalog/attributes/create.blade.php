@@ -29,7 +29,7 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code">{{ __('admin::app.catalog.attributes.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}" v-code/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
@@ -131,13 +131,13 @@
                                 </select>
                             </div>
                         
-                            <div class="control-group">
+                            <!--<div class="control-group">
                                 <label for="value_per_channel">{{ __('admin::app.catalog.attributes.value_per_channel') }}</label>
                                 <select class="control" id="value_per_channel" name="value_per_channel">
                                     <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
                                     <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
-                            </div>
+                            </div>-->
                         
                             <div class="control-group">
                                 <label for="is_filterable">{{ __('admin::app.catalog.attributes.is_filterable') }}</label>

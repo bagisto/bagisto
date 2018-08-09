@@ -28,8 +28,8 @@ class CreateInventorySourcesTable extends Migration
             $table->string('street')->nullable();
             $table->string('postcode');
             $table->integer('priority')->default(0);
-            $table->decimal('latitude', 10, 5);
-            $table->decimal('longitude', 10, 5);
+            $table->decimal('latitude', 10, 5)->nullable();
+            $table->decimal('longitude', 10, 5)->nullable();
             $table->boolean('status')->default(0);
             $table->timestamps();
         });

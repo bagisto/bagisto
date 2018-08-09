@@ -16,6 +16,7 @@ class CreateProductAttributeValuesTable extends Migration
         Schema::create('product_attribute_values', function (Blueprint $table) {
             $table->increments('id');
             $table->string('locale')->nullable();
+            $table->string('channel')->nullable();
             $table->text('text_value')->nullable();
             $table->boolean('boolean_value')->nullable();
             $table->integer('integer_value')->nullable();
@@ -25,11 +26,9 @@ class CreateProductAttributeValuesTable extends Migration
             $table->json('json_value')->nullable();
             $table->integer('product_id')->unsigned();
             $table->integer('attribute_id')->unsigned();
-            $table->integer('channel_id')->nullable()->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
-            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
-            $table->unique(['channel_id', 'locale', 'attribute_id', 'product_id'], 'chanel_locale_attribute_value_index_unique');
+            $table->unique(['channel', 'locale', 'attribute_id', 'product_id'], 'chanel_locale_attribute_value_index_unique');
         });
     }
 

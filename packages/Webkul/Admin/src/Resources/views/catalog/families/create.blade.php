@@ -30,7 +30,7 @@
                         
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.catalog.families.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}" v-code/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
                         
@@ -101,7 +101,7 @@
 
     <script type="text/x-template" id="group-list-template">
         <div>
-            <group-item v-for='(group, index) in groups' :group="group" :attributes="attributes" :key="index" :index="index" @onRemoveGroup="removeGroup($event)" @onAttributeAdd="addAttributes(index, $event)" @onAttributeRemove="removeAttribute(index, $event)"></group-item>
+            <group-item v-for='(group, index) in groups' :group="group" :custom_attributes="custom_attributes" :key="index" :index="index" @onRemoveGroup="removeGroup($event)" @onAttributeAdd="addAttributes(index, $event)" @onAttributeRemove="removeAttribute(index, $event)"></group-item>
         </div>
     </script>
 
@@ -118,7 +118,7 @@
                 <input type="hidden" :name="[groupInputName + '[position]']" :value="group.position"/>
                 <input type="hidden" :name="[groupInputName + '[is_user_defined]']" :value="group.is_user_defined"/>
 
-                <div class="table" v-if="group.attributes.length" style="margin-bottom: 20px;">
+                <div class="table" v-if="group.custom_attributes.length" style="margin-bottom: 20px;">
                     <table>
                         <thead>
                             <tr>
@@ -130,9 +130,9 @@
                         </thead>
 
                         <tbody>
-                            <tr v-for='(attribute, index) in group.attributes'>
+                            <tr v-for='(attribute, index) in group.custom_attributes'>
                                 <td>
-                                    <input type="hidden" :name="[groupInputName + '[attributes][][id]']" :value="attribute.id"/>
+                                    <input type="hidden" :name="[groupInputName + '[custom_attributes][][id]']" :value="attribute.id"/>
                                     @{{ attribute.code }}
                                 </td>
                                 <td>@{{ attribute.admin_name }}</td>
@@ -156,7 +156,7 @@
 
                     <div class="dropdown-container">
                         <ul>
-                            <li v-for='(attribute, index) in attributes' :data-id="attribute.id">
+                            <li v-for='(attribute, index) in custom_attributes' :data-id="attribute.id">
                                 <span class="checkbox">
                                     <input type="checkbox" :id="attribute.id" :value="attribute.id"/>
                                     <label class="checkbox-view" :for="attribute.id"></label>
@@ -176,7 +176,7 @@
     
     <script>
         var groups = @json($attributeFamily ? $attributeFamily->attribute_groups : []);
-        var attributes = @json($attributes);
+        var custom_attributes = @json($custom_attributes);
 
         Vue.component('group-form', {
 
@@ -185,7 +185,7 @@
                     'groupName': '',
                     'position': '',
                     'is_user_defined': 1,
-                    'attributes': []
+                    'custom_attributes': []
                 }
             }),
 
@@ -217,7 +217,7 @@
 
                                 groups = this.sortGroups();
                                 
-                                this.group = {'groupName': '', 'position': '', 'is_user_defined': 1, 'attributes': []};
+                                this.group = {'groupName': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
 
                                 this.$parent.closeModal();
                             }
@@ -239,18 +239,18 @@
 
             data: () => ({
                 groups: groups,
-                attributes: attributes
+                custom_attributes: custom_attributes
             }),
 
             created () {
                 this.groups.forEach(function(group) {
-                    group.attributes.forEach(function(attribute) {
-                        var attribute = this.attributes.filter(attributeTemp => attributeTemp.id == attribute.id)
+                    group.custom_attributes.forEach(function(attribute) {
+                        var attribute = this.custom_attributes.filter(attributeTemp => attributeTemp.id == attribute.id)
 
                         if(attribute.length) {
-                            let index = this.attributes.indexOf(attribute[0])
+                            let index = this.custom_attributes.indexOf(attribute[0])
 
-                            this.attributes.splice(index, 1)
+                            this.custom_attributes.splice(index, 1)
                         }
 
                     });
@@ -259,11 +259,11 @@
 
             methods: {
                 removeGroup (group) {
-                    group.attributes.forEach(function(attribute) {
-                        this.attributes.push(attribute);
+                    group.custom_attributes.forEach(function(attribute) {
+                        this.custom_attributes.push(attribute);
                     })
 
-                    this.attributes = this.sortAttributes();
+                    this.custom_attributes = this.sortAttributes();
 
                     let index = groups.indexOf(group)
 
@@ -272,28 +272,28 @@
 
                 addAttributes (groupIndex, attributeIds) {
                     attributeIds.forEach(function(attributeId) {
-                        var attribute = this.attributes.filter(attribute => attribute.id == attributeId)
+                        var attribute = this.custom_attributes.filter(attribute => attribute.id == attributeId)
                         
-                        this.groups[groupIndex].attributes.push(attribute[0]);
+                        this.groups[groupIndex].custom_attributes.push(attribute[0]);
 
-                        let index = this.attributes.indexOf(attribute[0])
+                        let index = this.custom_attributes.indexOf(attribute[0])
 
-                        this.attributes.splice(index, 1)
+                        this.custom_attributes.splice(index, 1)
                     })
                 },
 
                 removeAttribute (groupIndex, attribute) {
-                    let index = this.groups[groupIndex].attributes.indexOf(attribute)
+                    let index = this.groups[groupIndex].custom_attributes.indexOf(attribute)
 
-                    this.groups[groupIndex].attributes.splice(index, 1)
+                    this.groups[groupIndex].custom_attributes.splice(index, 1)
 
-                    this.attributes.push(attribute);
+                    this.custom_attributes.push(attribute);
 
-                    this.attributes = this.sortAttributes();
+                    this.custom_attributes = this.sortAttributes();
                 },
 
                 sortAttributes () {
-                    return this.attributes.sort(function(a, b) {
+                    return this.custom_attributes.sort(function(a, b) {
                         return a.id - b.id;
                     });
                 }
@@ -301,7 +301,7 @@
         })
 
         Vue.component('group-item', {
-            props: ['index', 'group', 'attributes'],
+            props: ['index', 'group', 'custom_attributes'],
 
             template: "#group-item-template",
 

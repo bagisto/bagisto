@@ -1,6 +1,6 @@
 <template>
     <span class="checkbox">
-        <input type="checkbox" :id="id" :name="[nameField, '[]']" :value="modelValue" @change="inputChanged()" :checked="isActive">
+        <input type="checkbox" :id="id" :name="[nameField + '[]']" :value="modelValue" @change="inputChanged()" :checked="isActive">
         <label class="checkbox-view" :for="id"></label>
         <span class="" :for="id">{{ label }}</span>
     </span>

@@ -48,6 +48,12 @@
                 default: () => ([])
             },
 
+            behavior: {
+                type: String,
+                required: false,
+                default: 'reactive'
+            },
+
             value: {
                 type: [Array, String, Object],
                 required: false,
@@ -96,7 +102,8 @@
                             captionField: this.captionField,
                             childrenField: this.childrenField,
                             valueField: this.valueField,
-                            idField: this.idField
+                            idField: this.idField,
+                            behavior: this.behavior
                         },
                         on: {
                             input: selection => {

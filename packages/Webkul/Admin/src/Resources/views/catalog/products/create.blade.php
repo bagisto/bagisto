@@ -1,5 +1,9 @@
 @extends('admin::layouts.content')
 
+@section('page_title')
+    {{ __('admin::app.catalog.products.add-title') }}
+@stop
+
 @section('css')
     <style>
         .table td .label {

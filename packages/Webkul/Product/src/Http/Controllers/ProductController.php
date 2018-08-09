@@ -4,8 +4,11 @@ namespace Webkul\Product\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
+use Webkul\Category\Repositories\CategoryRepository as Category;
+use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
 
 /**
  * Product controller
@@ -30,6 +33,20 @@ class ProductController extends Controller
     protected $attributeFamily;
     
     /**
+     * CategoryRepository object
+     *
+     * @var array
+     */
+    protected $category;
+    
+    /**
+     * InventorySourceRepository object
+     *
+     * @var array
+     */
+    protected $inventorySource;
+    
+    /**
      * ProductRepository object
      *
      * @var array
@@ -40,12 +57,22 @@ class ProductController extends Controller
      * Create a new controller instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
+     * @param  Webkul\Category\Repositories\CategoryRepository          $category
+     * @param  Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySource
      * @param  Webkul\Product\Repositories\ProductRepository            $product
      * @return void
      */
-    public function __construct(AttributeFamily $attributeFamily, Product $product)
+    public function __construct(
+        AttributeFamily $attributeFamily,
+        Category $category,
+        InventorySource $inventorySource,
+        Product $product)
     {
         $this->attributeFamily = $attributeFamily;
+
+        $this->category = $category;
+
+        $this->inventorySource = $inventorySource;
 
         $this->product = $product;
 
@@ -98,7 +125,7 @@ class ProductController extends Controller
         $this->validate(request(), [
             'type' => 'required',
             'attribute_family_id' => 'required',
-            'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
+            'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Code]
         ]);
 
         $product = $this->product->create(request()->all());
@@ -118,22 +145,24 @@ class ProductController extends Controller
     {
         $product = $this->product->findOrFail($id);
 
-        return view($this->_config['view'], compact('product'));
+        $categories = $this->category->getCategoryTree();
+
+        $inventorySources = $this->inventorySource->all();
+
+        return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Webkul\Product\Http\Requests\ProductForm $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductForm $request, $id)
     {
-        $this->validate(request(), [
-            'name' => 'required',
-        ]);
-
+        dd(request()->all());
+        
         $this->product->update(request()->all(), $id);
 
         session()->flash('success', 'Product updated successfully.');

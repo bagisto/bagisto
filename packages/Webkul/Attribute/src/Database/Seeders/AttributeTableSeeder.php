@@ -84,13 +84,27 @@ class AttributeTableSeeder extends Seeder
             'is_configurable' => 0,
             'is_user_defined' => 0
         ], [
+            'code' => 'visible_individually',
+            'admin_name' => 'Visible Individually',
+            'en' => [
+                'name' => 'Visible Individually'
+            ],
+            'type' => 'boolean',
+            'position' => 6,
+            'is_required' => 1,
+            'value_per_locale' => 0,
+            'value_per_channel' => 0,
+            'is_filterable' => 0,
+            'is_configurable' => 0,
+            'is_user_defined' => 0
+        ], [
             'code' => 'status',
             'admin_name' => 'Status',
             'en' => [
                 'name' => 'Status'
             ],
             'type' => 'boolean',
-            'position' => 6,
+            'position' => 7,
             'is_required' => 1,
             'value_per_locale' => 0,
             'value_per_channel' => 0,
@@ -104,7 +118,7 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Short Description'
             ],
             'type' => 'textarea',
-            'position' => 7,
+            'position' => 8,
             'is_required' => 1,
             'value_per_locale' => 1,
             'value_per_channel' => 1,
@@ -118,7 +132,7 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Description'
             ],
             'type' => 'textarea',
-            'position' => 8,
+            'position' => 9,
             'is_required' => 1,
             'value_per_locale' => 1,
             'value_per_channel' => 1,
@@ -132,10 +146,10 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Price'
             ],
             'type' => 'price',
-            'position' => 9,
+            'position' => 10,
             'is_required' => 1,
             'value_per_locale' => 0,
-            'value_per_channel' => 0,
+            'value_per_channel' => 1,
             'is_filterable' => 1,
             'is_configurable' => 0,
             'is_user_defined' => 0
@@ -146,10 +160,10 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Cost'
             ],
             'type' => 'price',
-            'position' => 10,
+            'position' => 11,
             'is_required' => 0,
             'value_per_locale' => 0,
-            'value_per_channel' => 0,
+            'value_per_channel' => 1,
             'is_filterable' => 0,
             'is_configurable' => 0,
             'is_user_defined' => 1
@@ -160,10 +174,10 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Special Price'
             ],
             'type' => 'price',
-            'position' => 11,
+            'position' => 12,
             'is_required' => 0,
             'value_per_locale' => 0,
-            'value_per_channel' => 0,
+            'value_per_channel' => 1,
             'is_filterable' => 0,
             'is_configurable' => 0,
             'is_user_defined' => 0
@@ -174,10 +188,10 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Special Price From'
             ],
             'type' => 'datetime',
-            'position' => 12,
+            'position' => 13,
             'is_required' => 0,
             'value_per_locale' => 0,
-            'value_per_channel' => 0,
+            'value_per_channel' => 1,
             'is_filterable' => 0,
             'is_configurable' => 0,
             'is_user_defined' => 0
@@ -188,10 +202,10 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Special Price To'
             ],
             'type' => 'datetime',
-            'position' => 13,
+            'position' => 14,
             'is_required' => 0,
             'value_per_locale' => 0,
-            'value_per_channel' => 0,
+            'value_per_channel' => 1,
             'is_filterable' => 0,
             'is_configurable' => 0,
             'is_user_defined' => 0
@@ -202,7 +216,7 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Meta Description'
             ],
             'type' => 'textarea',
-            'position' => 14,
+            'position' => 15,
             'is_required' => 0,
             'value_per_locale' => 1,
             'value_per_channel' => 1,
@@ -216,7 +230,7 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Meta Keywords'
             ],
             'type' => 'textarea',
-            'position' => 15,
+            'position' => 16,
             'is_required' => 0,
             'value_per_locale' => 1,
             'value_per_channel' => 1,
@@ -230,7 +244,7 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Meta Description'
             ],
             'type' => 'textarea',
-            'position' => 16,
+            'position' => 17,
             'is_required' => 0,
             'value_per_locale' => 1,
             'value_per_channel' => 1,
@@ -245,7 +259,7 @@ class AttributeTableSeeder extends Seeder
             ],
             'type' => 'text',
             'validation' => 'number',
-            'position' => 17,
+            'position' => 18,
             'is_required' => 0,
             'value_per_locale' => 0,
             'value_per_channel' => 0,
@@ -260,7 +274,7 @@ class AttributeTableSeeder extends Seeder
             ],
             'type' => 'text',
             'validation' => 'number',
-            'position' => 18,
+            'position' => 19,
             'is_required' => 0,
             'value_per_locale' => 0,
             'value_per_channel' => 0,
@@ -275,7 +289,7 @@ class AttributeTableSeeder extends Seeder
             ],
             'type' => 'text',
             'validation' => 'number',
-            'position' => 19,
+            'position' => 20,
             'is_required' => 0,
             'value_per_locale' => 0,
             'value_per_channel' => 0,
@@ -290,7 +304,7 @@ class AttributeTableSeeder extends Seeder
             ],
             'type' => 'text',
             'validation' => 'number',
-            'position' => 20,
+            'position' => 21,
             'is_required' => 1,
             'value_per_locale' => 0,
             'value_per_channel' => 0,
@@ -304,7 +318,7 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Color'
             ],
             'type' => 'select',
-            'position' => 21,
+            'position' => 22,
             'is_required' => 0,
             'value_per_locale' => 0,
             'value_per_channel' => 0,
@@ -346,7 +360,7 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Size'
             ],
             'type' => 'select',
-            'position' => 22,
+            'position' => 23,
             'is_required' => 0,
             'value_per_locale' => 0,
             'value_per_channel' => 0,

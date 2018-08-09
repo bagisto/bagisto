@@ -29,7 +29,7 @@
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.channels.code') }}</label>
-                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}"/>
+                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}" v-code/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
@@ -54,7 +54,7 @@
                             <div class="control-group" :class="[errors.has('locales[]') ? 'has-error' : '']">
                                 <label for="locales" class="required">{{ __('admin::app.settings.channels.locales') }}</label>
                                 <select v-validate="'required'" class="control" id="locales" name="locales[]" multiple>
-                                    @foreach(core()->allLocales() as $locale)
+                                    @foreach(core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->id }}" {{ old('locales') && in_array($locale->id, old('locales')) ? 'selected' : '' }}>
                                             {{ $locale->name }}
                                         </option>
@@ -66,7 +66,7 @@
                             <div class="control-group" :class="[errors.has('default_locale') ? 'has-error' : '']">
                                 <label for="default_locale" class="required">{{ __('admin::app.settings.channels.default-locale') }}</label>
                                 <select v-validate="'required'" class="control" id="default_locale" name="default_locale">
-                                    @foreach(core()->allLocales() as $locale)
+                                    @foreach(core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->id }}" {{ old('default_locale') == $locale->id ? 'selected' : '' }}>
                                             {{ $locale->name }}
                                         </option>

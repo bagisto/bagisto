@@ -128,7 +128,15 @@ class EventServiceProvider extends ServiceProvider
         });
 
         Event::listen('admin.catalog.products.accordian.build', function($accordian) {
-            $accordian->add('categories', 'Categories', 'admin::catalog.products.accordians.categories', 1);
+            $accordian->add('images', 'Inventories', 'admin::catalog.products.accordians.inventories', 1);
+
+            $accordian->add('images', 'Images', 'admin::catalog.products.accordians.images', 2);
+
+            $accordian->add('categories', 'Categories', 'admin::catalog.products.accordians.categories', 3);
+
+            $accordian->add('variations', 'Variations', 'admin::catalog.products.accordians.variations', 4);
+
+            // $accordian->add('product-links', 'Linked Products', 'admin::catalog.products.accordians.product-links', 4);
         });
     }
 }

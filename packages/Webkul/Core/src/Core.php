@@ -7,7 +7,7 @@ use Webkul\Core\Models\Currency as CurrencyModel;
 
 class Core
 {
-    public function allLocales() {
+    public function getAllLocales() {
         return LocaleModel::all();
     }
 

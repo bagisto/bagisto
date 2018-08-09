@@ -13,11 +13,26 @@ class ProductAttributeValue extends Model
 
     protected $with = ['attribute'];
 
+    /**
+     * @var array
+     */
+    public static $attributeTypeFields = [
+        'text' => 'text_value',
+        'textarea' => 'text_value',
+        'price' => 'float_value',
+        'boolean' => 'boolean_value',
+        'select' => 'integer_value',
+        'multiselect' => 'text_value',
+        'datetime' => 'datetime_time',
+        'date' => 'date_value',
+    ];
+
     protected $fillable = [
             'product_id',
             'attribute_id',
             'channel_id',
             'locale',
+            'channel',
             'text_value',
             'boolean_value',
             'integer_value',
