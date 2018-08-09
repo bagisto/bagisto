@@ -9,7 +9,7 @@
         <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
         <?php $channel = request()->get('channel') ?: channel()->getChannel(); ?>
 
-        <form method="POST" action="" @submit.prevent="onSubmit">
+        <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
             <div class="page-header">
 
@@ -133,6 +133,7 @@
 
 @section('javascript')
     <script>
+
         $(document).ready(function () {
             $('#channel-switcher, #locale-switcher').on('change', function (e) {
                 $('#channel-switcher').val()
