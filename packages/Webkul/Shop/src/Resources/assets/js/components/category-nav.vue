@@ -8,7 +8,8 @@
             :item="item">
         </category-item>
         <li>
-            <img class="icon" src="vendor/webkul/shop/assets/images/offer-zone.svg" style="margin-right:5px;" />Offer Zone
+            <img src="vendor/webkul/shop/assets/images/offer-zone.svg"/>
+            <span>Offer Zone</span>
         </li>
 
     </ul>

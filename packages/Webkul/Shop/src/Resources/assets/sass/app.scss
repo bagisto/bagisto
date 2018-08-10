@@ -194,6 +194,7 @@ body {
         //         color: $offer-color;
         //     }
         // }
+
         ul.nav {
             display: block;
             font-size:16px;
@@ -240,8 +241,13 @@ body {
         }
 
         .nav > li:last-child {
+            display:flex; align-items:center;
             border-radius: 0 0 4px 0;
-            margin-right: 0;
+            float:right;
+
+            img {
+                margin-right:6px;
+            }
         }
 
         .nav > li:last-child > a {
@@ -309,6 +315,7 @@ body {
         ul.slider-images {
             li img {
                 width: 100%;
+                height: 500px;
                 object-fit: fill;
             }
             .slider-control {
@@ -456,7 +463,7 @@ body {
 }
 
 .footer {
-    background-color: $fbackground-color;
+    background-color: $background-color;
     padding-left: 10%;
     padding-right: 10%;
 
@@ -1423,7 +1430,7 @@ body {
         }
     }
     .footer {
-        background-color: $fbackground-color;
+        background-color: $background-color;
         padding-left: 4%;
         padding-right: 4%;
 

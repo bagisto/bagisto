@@ -212,7 +212,7 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.countries.store');
 
 
-            // Country Routes
+            // Currency Routes
             Route::get('/currencies', 'Webkul\Core\Http\Controllers\CurrencyController@index')->defaults('_config', [
                 'view' => 'admin::settings.currencies.index'
             ])->name('admin.currencies.index');
@@ -226,7 +226,7 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.currencies.store');
 
 
-            // Country Routes
+            // Exchange Rates Routes
             Route::get('/exchange_rates', 'Webkul\Core\Http\Controllers\ExchangeRateController@index')->defaults('_config', [
                 'view' => 'admin::settings.exchange_rates.index'
             ])->name('admin.exchange_rates.index');
@@ -299,6 +299,20 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.account.edit');
 
             Route::put('/account', 'Webkul\User\Http\Controllers\AccountController@update')->name('admin.account.update');
+
+            // Admin Store Front Settings Route
+            Route::get('/slider','Webkul\Shop\Http\Controllers\SliderController@index')->defaults('_config',[
+                'view' => 'admin::settings.sliders.index'
+            ])->name('admin.sliders.index');
+
+            // Admin Store Front Settings Route
+            Route::get('/slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
+                'view' => 'admin::settings.sliders.create'
+            ])->name('admin.sliders.create');
+
+            Route::post('/slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
+                'redirect' => 'admin::sliders.index'
+            ])->name('admin.sliders.store');
         });
     });
 });

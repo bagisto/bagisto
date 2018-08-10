@@ -4,11 +4,11 @@
 
         <thead>
 
-            <tr class="mass-action" style="display: none;">
+            <tr class="mass-action" style="display: none; height:63px;">
 
                 <th colspan="{{ count($columns)+1 }}">
 
-                    <div class="xyz">
+                    <div class="mass-action-wrapper">
 
                         <span class="massaction-remove">
                             <span class="icon checkbox-dash-icon"></span>
@@ -90,12 +90,23 @@
                     </span>
                 </th>
                 @foreach ($columns as $column) @if($column->sortable == "true")
-                <th class="labelled-col grid_head sort-head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}"
+                <th class="grid_head"
+                @if(strpos($column->alias, ' as '))
+                    <?php $exploded_name = explode(' as ',$column->name); ?>
+                    data-column-name="{{ $exploded_name[0] }}"
+                @else
+                    data-column-name="{{ $column->alias }}"
+                @endif
+
+                data-column-label="{{ $column->label }}"
                     data-column-sort="asc">{!! $column->sorting() !!}<span class="icon sort-down-icon"></span>
                 </th>
                 @else
-                <th class="labelled-col grid_head" data-column-name="{{ $column->name }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
+                <th class="grid_head" data-column-name="{{ $column->alias }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
                 @endif @endforeach
+                <th>
+                    Actions
+                </th>
             </tr>
         </thead>
         <tbody class="{{ $css->tbody }}">
@@ -110,8 +121,20 @@
                 @foreach ($columns as $column)
                 <td class="">{!! $column->render($result) !!}</td>
                 @endforeach
+
+                <td class="action">
+                    @foreach($actions as $action)
+                        <a @if($action['type']=="Edit") href="{{ url()->current().'/edit/'.$result->id }}" @elseif($action['type']=="Delete") href="{{ url()->current().'/delete/'.$result->id }}" @endif  class="Action-{{ $action['type'] }}" id="{{ $result->id }}" onclick="return confirm_click('{{ $action['confirm_text'] }}');">
+                            <i class="{{ $action['icon'] }}"></i>
+                        </a>
+                    @endforeach
+                </td>
+
             </tr>
             @endforeach
         </tbody>
     </table>
+    <div class="pagination">
+        {{ $results->links() }}
+    </div>
 </div>

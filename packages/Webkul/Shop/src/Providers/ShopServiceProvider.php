@@ -21,6 +21,8 @@ class ShopServiceProvider extends ServiceProvider
     {
         include __DIR__ . '/../Http/routes.php';
 
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'shop');
+
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/shop/assets'),
         ], 'public');

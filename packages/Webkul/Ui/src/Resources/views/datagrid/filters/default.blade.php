@@ -8,14 +8,13 @@
             </div>
         </div>
         <div class="dropdown-filters">
-            <div class="column-filter">
-                <div class="dropdown-list bottom-right" style="display: none;">
+            <div class="column-filter" style="display: none;">
+                <div class="dropdown-list bottom-right">
                     <div class="dropdown-container">
                         <ul>
                             @foreach($columns as $column)
-                            <li data-name="{{ $column->name }}">
+                            <li data-name="{{ $column->alias }}">
                                 {{ $column->label }}
-                                <span class="checkbox"><input type="checkbox" id="{{ $column->id }}" name="checkbox1[]"> <label for="checkbox1" class="checkbox-view"></label></span>
                             </li>
                             @endforeach
                         </ul>
@@ -36,7 +35,7 @@
                                 <select class="filter-column-select">
                                     <option selected disabled>Select Column</option>
                                     @foreach($filterable as $fcol)
-                                    <option value="{{ $fcol['column'] }}" data-type="{{ $fcol['type'] }}" data-label="{{ $fcol['label'] }}">{{ $fcol['label'] }}</option>
+                                    <option value="{{ $fcol['alias'] }}" data-type="{{ $fcol['type'] }}" data-label="{{ $fcol['label'] }}">{{ $fcol['label'] }}</option>
                                     @endforeach
                                 </select>
                             </li>
@@ -114,4 +113,3 @@
         </span> --}}
     </div>
 </div>
-

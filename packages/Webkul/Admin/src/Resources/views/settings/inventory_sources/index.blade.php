@@ -8,7 +8,7 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                
+                <h1>{{ __('admin::app.settings.inventory_sources.title') }}</h1>
             </div>
 
             <div class="page-action">
@@ -19,7 +19,7 @@
         </div>
 
         <div class="page-content">
-
+            {!! $datagrid->render() !!}
         </div>
     </div>
 @stop

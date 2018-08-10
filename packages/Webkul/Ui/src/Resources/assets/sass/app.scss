@@ -222,7 +222,7 @@ h2 {
         }
 
         tbody td {
-            padding: 12px 10px;
+            padding: 10px;
             border-bottom: solid 1px #d3d3d3;
             color: $font-color;
             vertical-align: top;
@@ -236,7 +236,7 @@ h2 {
                 }
             }
         }
-        
+
         tbody tr:last-child td {
             border-bottom: none;
         }
@@ -635,8 +635,6 @@ h2 {
 }
 
 .grid-container {
-    margin-top: 30px;
-
     .filter-wrapper {
         display: block;
         box-sizing: border-box;
@@ -685,21 +683,21 @@ h2 {
             .dropdown-filters {
                 display: inline-flex;
 
-                .column-filter {
-                    margin-right: 5px;
+                // .column-filter {
+                //     margin-right: 5px;
 
-                    .control {
-                        font-family: "montserrat", sans-serif;
-                        padding-left: 5px;
-                        height: 36px;
-                        width: 150px;
-                        border: 2px solid $control-border-color;
-                        border-radius: 3px;
-                        background-color: white;
-                        color: #8e8e8e;
-                        font-size: 14px;
-                    }
-                }
+                //     .control {
+                //         font-family: "montserrat", sans-serif;
+                //         padding-left: 5px;
+                //         height: 36px;
+                //         width: 150px;
+                //         border: 2px solid $control-border-color;
+                //         border-radius: 3px;
+                //         background-color: white;
+                //         color: #8e8e8e;
+                //         font-size: 14px;
+                //     }
+                // }
 
                 .more-filters {
                     margin-right: 5px;
@@ -854,7 +852,7 @@ h2 {
     }
     .table {
         thead {
-            .xyz {
+            .mass-action-wrapper {
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
@@ -874,14 +872,20 @@ h2 {
                 }
             }
             tr {
-                th.sort-head {
+                th.grid_head {
+                    cursor:pointer;
+
                     .sort-down-icon {
-                        margin-left: 8px;
+                        margin-left: 5px;
+                        margin-top: -3px;
                         vertical-align: middle;
                         cursor: pointer;
                     }
                 }
             }
+        }
+        .pagination {
+            margin-top:20px;
         }
     }
 }
@@ -950,7 +954,6 @@ h2 {
         }
     }
 }
-
 
 .label {
     background: #E7E7E7;

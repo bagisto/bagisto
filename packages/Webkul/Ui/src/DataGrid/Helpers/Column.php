@@ -11,19 +11,9 @@ class Column extends AbstractFillable
 
     private $request = null;
     private $readableName = false;
+    private $aliasing = false;
     private $value = false;
     private $sortHtml = '<a href="%s">%s</a>';
-    // private $sortHtml = '<span href="%s">%s</span>';
-
-    // protected $name;
-    // protected $type;
-    // protected $label;
-    // protected $filterable;
-    // protected $sortable;
-    // protected $attributes;
-    // protected $wrapper;
-    // protected $callback;
-
 
     /**
      * Without Array it will treat it like string
@@ -53,7 +43,14 @@ class Column extends AbstractFillable
             'type',
             'label',
             'sortable',
+            'searchable',
             'filterable',
+            'massoperations' => [
+                'allowed' => 'array'
+            ],
+            'actions' => [
+                'allowed' => 'array'
+            ],
             'filter' => [
                 'allowed' => 'array',
             ],
@@ -120,7 +117,6 @@ class Column extends AbstractFillable
             $this->value = call_user_func($this->wrapper, $this->value, $obj);
         }
     }
-
     private function sortingUrl()
     {
         $query = ['sort' => $this->correct(false)];
@@ -153,10 +149,12 @@ class Column extends AbstractFillable
 
     public function render($obj)
     {
-        if (property_exists($obj, ($this->readableName = $this->correct()))) {
-            $this->value = $obj->{$this->readableName};
+
+        if (property_exists($obj, ($this->aliasing = $this->alias))) {
+            $this->value = $obj->{$this->aliasing};
             $this->wrap($obj);
         }
         return $this->value;
+
     }
 }

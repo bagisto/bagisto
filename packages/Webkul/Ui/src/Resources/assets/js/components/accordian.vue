@@ -6,7 +6,7 @@
                 <i class="icon" :class="iconClass"></i>
             </slot>
         </div>
-        
+
         <div class="accordian-content">
             <slot name="body">
             </slot>
@@ -26,7 +26,8 @@
 
         data: function() {
             return {
-                isActive: false
+                isActive: false,
+                imageData: '',
             }
         },
 

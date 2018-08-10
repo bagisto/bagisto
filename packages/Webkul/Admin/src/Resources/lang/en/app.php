@@ -28,6 +28,7 @@ return [
             'submit-btn-title' => 'Reset Password'
         ],
         'roles' => [
+            'title' => 'Roles',
             'add-role-title' => 'Add Role',
             'edit-role-title' => 'Edit Role',
             'save-btn-title' => 'Save Role',
@@ -175,6 +176,7 @@ return [
     ],
     'settings' => [
         'locales' => [
+            'title' => 'Locales',
             'add-locale-title' => 'Add Locale',
             'edit-locale-title' => 'Edit Locale',
             'add-title' => 'Add Locale',
@@ -184,6 +186,7 @@ return [
             'name' => 'Name'
         ],
         'countries' => [
+            'title' => 'Countries',
             'add-title' => 'Add Counrty',
             'save-btn-title' => 'Save Counrty',
             'general' => 'General',
@@ -191,6 +194,7 @@ return [
             'name' => 'Name'
         ],
         'currencies' => [
+            'title' => 'Currencies',
             'add-title' => 'Add Currency',
             'edit-title' => 'Edit Currency',
             'save-btn-title' => 'Save Currency',
@@ -249,6 +253,16 @@ return [
             'default-locale' => 'Default Locale',
             'currencies' => 'Currencies',
             'base-currency' => 'Base Currency'
-        ]
+        ],
+
+        'sliders' => [
+            'title' => 'Sliders',
+            'add-title' => 'Create Slider',
+            'save-btn-title' => 'Save Slider',
+            'general' => 'General',
+            'image' => 'Image',
+            'content' => 'Content',
+            'channels' => 'Channel'
+        ],
     ]
 ];

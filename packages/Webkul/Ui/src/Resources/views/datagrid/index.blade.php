@@ -9,6 +9,7 @@
     {{-- Section for datagrid javascript --}}
     @section('javascript')
         <script type="text/javascript">
+            var columns = @json($columns); //referential
             var allFilters1 = [];
             var search_value;
             var filter_column;
@@ -195,16 +196,21 @@
                         id.splice(index,1);
                     }
                     if(id.length>0) {
+
                         $('.mass-action').css('display','');
                         $('.table-grid-header').css('display','none');
-                        // $('.selected-items').html(id.toString());
                         $('#indexes').val(id);
+
                     }else if(id.length == 0) {
+
                         $('.mass-action').css('display','none');
                         $('.table-grid-header').css('display','');
                         $('#indexes').val('');
+
                         if($('#mastercheckbox').prop('checked')) {
+
                             $('#mastercheckbox').prop('checked',false);
+
                         }
                     }
                 });
@@ -216,7 +222,6 @@
                 if(allFilters1.length>0)
                 {
                     for(i=0;i<allFilters1.length;i++) {
-                        console.log(allFilters1[i]);
                         if(i==0){
                             url = '?' + allFilters1[i].column + '[' + allFilters1[i].cond + ']' + '=' + allFilters1[i].val;
                         }
@@ -239,6 +244,7 @@
                 moreSplitted = [];
                 splitted = t.split('&');
                 for(i=0;i<splitted.length;i++) {
+
                     moreSplitted.push(splitted[i].split('='));
                 }
                 for(i=0;i<moreSplitted.length;i++) {
@@ -248,29 +254,46 @@
                     obj.column = col;
                     obj.cond = cond;
                     obj.val = val;
-                    allFilters1.push(obj);
+                    if(col!=undefined && cond!=undefined && val!=undefined)
+                        allFilters1.push(obj);
                     obj = {};
                 }
-                makeTagsTestPrior();
+                makeTags();
             }
 
-            var label; //use the label to prevent the display of column name on the body
-            function makeTagsTestPrior() {
+            //use the label to prevent the display of column name on the body
+            function makeTags() {
                 var filterRepeat = 0;
                 if(allFilters1.length!=0)
                 for(var i = 0;i<allFilters1.length;i++) {
-                    col_label_tag = $('li[data-name="'+allFilters1[i].column+'"]').text();
-                    var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
-                    $('.filter-row-two').append(filter_card);
+                    if(allFilters1[i].column == "sort") {
+
+                        col_label_tag = $('li[data-name="'+allFilters1[i].cond+'"]').text();
+                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+                        $('.filter-row-two').append(filter_card);
+
+                    } else if(allFilters1[i].column == "search") {
+
+                        col_label_tag = "Search";
+                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+                        $('.filter-row-two').append(filter_card);
+
+                    } else {
+                        col_label_tag = $('li[data-name="'+allFilters1[i].column+'"]').text().trim();
+                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+                        $('.filter-row-two').append(filter_card);
+
+                    }
+
                 }
             }
 
-            //obselete or can be used for mediation control if necessary
+            //This is being used for validation of url params and making array of filters
             function formURL(column, condition, response, urlparams,clabel) {
                 /*validate the conditions here and do the replacements and
                 push here in the all filters array*/
                 var obj1 = {};
-                if(column == "" || condition == "" || response == ""){
+                if(column == "" || condition == "" || response == "") {
                     alert("Please mention all the fields for column, condition and match params for proper functioning");
                     return false;
                 }
@@ -303,7 +326,7 @@
                                 if(allFilters1[j].column == "sort") {
 
                                     if(allFilters1[j].column==column && allFilters1[j].cond==condition && allFilters1[j].val==response){
-                                        if(response=="asc"){
+                                        if(response=="asc") {
                                             allFilters1[j].column = column;
                                             allFilters1[j].cond = condition;
                                             allFilters1[j].val = "desc";
@@ -367,7 +390,13 @@
                         makeURL();
                     }
                 }
+            }
+            function confirm_click(x){
+                if (confirm(x)) {
 
+                } else {
+                    return false;
+                }
             }
         </script>
     @endsection

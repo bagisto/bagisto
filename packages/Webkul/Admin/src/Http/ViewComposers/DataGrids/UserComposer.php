@@ -26,37 +26,14 @@ class UserComposer
      */
     public function compose(View $view)
     {
+
         $datagrid = DataGrid::make([
             'name' => 'Admins',
             'table' => 'admins as u',
             'select' => 'u.id',
-            'aliased' => true, //boolean to validate aliasing on the basis of this.
-            'filterable' => [
-                [
-                    'column' => 'u.email',
-                    'type' => 'string',
-                    'label' => 'Admin E-Mail'
-                ], [
-                    'column' => 'u.name',
-                    'type' => 'string',
-                    'label' => 'Admin Name'
-                ], [
-                    'column' => 'u.id',
-                    'type' => 'number',
-                    'label' => 'Admin ID'
-                ]
-            ],
-            'searchable' => [
-                [
-                    'column' => 'u.email',
-                    'type' => 'string',
-                    'label' => 'Admin E-Mail'
-                ], [
-                    'column' => 'u.name',
-                    'type' => 'string',
-                    'label' => 'Admin Name'
-                ]
-            ],
+            'perpage' => 5,
+            'aliased' => true, //use this with false as default and true in case of joins
+
             'massoperations' =>[
                 [
                     'route' => route('admin.datagrid.delete'),
@@ -76,40 +53,72 @@ class UserComposer
                 //     ]
                 // ],
             ],
-            'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
+            'actions' => [
+                [
+                    'type' => 'Edit',
+                    'route' => route('admin.datagrid.delete'),
+                    'confirm_text' => 'Do you really want to do this?',
+                    'icon' => 'icon pencil-lg-icon',
+                ], [
+                    'type' => 'Delete',
+                    'route' => route('admin.datagrid.delete'),
+                    'confirm_text' => 'Do you really want to do this?',
+                    'icon' => 'icon trash-icon',
+                ],
             ],
+            'join' => [
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'roles as r',
+                    'primaryKey' => 'u.role_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'r.id',
+                ]
+            ],
+
+            //use aliasing on secodary columns if join is performed
             'columns' => [
                 [
                     'name' => 'u.id',
+                    'alias' => 'ID',
                     'type' => 'string',
                     'label' => 'Admin ID',
                     'sortable' => true,
+                    'wrapper' => function ($value, $object) {
+                                    return '<a class="color-red">' . $object->ID . '</a>';
+                                },
                 ],
                 [
                     'name' => 'u.name',
+                    'alias' => 'Name',
                     'type' => 'string',
-                    'label' => 'Admin Name',
+                    'label' => 'Name',
                     'sortable' => true,
+                    'wrapper' => function ($value, $object) {
+                                    return '<a class="color-red">' . $object->Name . '</a>';
+                                },
                 ],
                 [
                     'name' => 'u.email',
+                    'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'Admin E-Mail',
+                    'label' => 'E-Mail',
                     'sortable' => true,
                 ],
-                // [
-                //     'name' => 'r.name as rolename',
-                //     'type' => 'string',
-                //     'label' => 'Role Name',
-                //     'sortable' => true,
-                // ],
+                [
+                    'name' => 'r.name',
+                    'alias' => 'xa',
+                    'type' => 'string',
+                    'label' => 'Role Name',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'r.id',
+                    'alias' => 'xc',
+                    'type' => 'string',
+                    'label' => 'Role ID',
+                    'sortable' => true,
+                ],
                 // [
                 //     'name' => 'a.first_name',
                 //     'type' => 'string',
@@ -131,6 +140,37 @@ class UserComposer
                 //     },
                 // ],
 
+            ],
+            //don't use aliasing in case of filters
+            'filterable' => [
+                [
+                    'column' => 'u.name',
+                    'alias' => 'Name',
+                    'type' => 'string',
+                    'label' => 'Name'
+                ], [
+                    'column' => 'u.id',
+                    'alias' => 'ID',
+                    'type' => 'number',
+                    'label' => 'Admin ID'
+                ], [
+                    'column' => 'r.id',
+                    'alias' => 'Role_ID',
+                    'type' => 'number',
+                    'label' => 'Role ID'
+                ]
+            ],
+            //don't use aliasing in case of searchables
+            'searchable' => [
+                [
+                    'column' => 'u.email',
+                    'type' => 'string',
+                    'label' => 'E-Mail'
+                ], [
+                    'column' => 'u.name',
+                    'type' => 'string',
+                    'label' => 'Name'
+                ]
             ],
             'operators' => [
                 'eq' => "=",
