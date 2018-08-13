@@ -6,8 +6,8 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::store.home.index'
     ])->name('store.home');
 
-    Route::get('/category', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
-        'view' => 'shop::store.category.index'
+    Route::get('/product', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
+        'view' => 'shop::store.product.index'
     ]);
 
 });

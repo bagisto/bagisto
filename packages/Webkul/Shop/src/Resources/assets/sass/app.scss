@@ -738,6 +738,240 @@ section.slider-block {
 
 //customers page css ends here
 
+// product pages css starts here
+
+section.product-detail {
+    font-size: 16px;
+
+    div.category-breadcrumbs {
+        display: inline;
+    }
+
+    div.layouter {
+        display:flex;
+        flex-flow: row;
+        margin-top: 2%;
+
+        div.product-image-group {
+            display:flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            margin-right: 2.5%;
+
+            .side-group {
+                display: flex;
+                flex-direction: column;
+                margin-right: 4px;
+            }
+
+            .product-hero-image {
+                display: block;
+                position: relative;
+
+                .wishlist {
+                    position: absolute;
+                    top: 10px;
+                    right: 12px;
+                }
+
+                .share {
+                    position: absolute;
+                    top: 10px;
+                    right: 45px;
+                }
+            }
+        }
+
+        .details {
+
+            .product-heading {
+                font-size: 24px;
+                color: $product-font-color;
+                margin-bottom: 14px;
+            }
+
+            .rating {
+                color: $product-font-color;
+                margin-bottom: 14px;
+            }
+
+            .price {
+                margin-bottom: 14px;
+
+                .main-price {
+                    font-size: 24px;
+                    color: $product-price-color;
+                }
+            }
+
+            .stock-status {
+                margin-bottom: 14px;
+            }
+
+            .description {
+                margin-bottom: 14px;
+            }
+
+            hr{
+                border-top: 1px solid $horizontal-rule-color;
+                margin-bottom: 17px;
+            }
+
+            .attributes {
+                display: block;
+                width: 100%;
+
+                .attribute {
+                    height: 39px;
+                    margin-bottom: 20px;
+
+                    .title {
+                        float: left;
+                        height: 100%;
+                        min-width: 130px;
+                        padding-top: 9px;
+                    }
+
+                    .values {
+                        display: inline-flex;
+
+                        .colors {
+                            margin-right:5px;
+                        }
+                        .colors:last-child {
+                            margin-right: 0;
+                        }
+
+                        .red {
+                            height: 37px;
+                            width: 37px;
+                            background: red;
+                            border: 1px solid $border-color;
+                            border-radius:  2px;
+                        }
+
+                        .blue {
+                            height: 37px;
+                            width: 37px;
+                            background: blue;
+                            border: 1px solid $border-color;
+                            border-radius:  2px;
+                        }
+
+                        .green {
+                            height: 37px;
+                            width: 37px;
+                            background: green;
+                            border: 1px solid $border-color;
+                            border-radius:  2px;
+                        }
+
+                        .size {
+                            margin-right:5px;
+                            line-height: 38px;
+                            height: 37px;
+                            width: 60px;
+                            border: 1px solid $border-color;
+                            border-radius:  2px;
+                            text-align: center;
+                            vertical-align: middle;
+                        }
+                        .size:last-child {
+                            margin-right: 0;
+                        }
+
+                        .quantity {
+                            .values {
+                                .control {
+                                    height: 37px !important;
+                                    width: 30px !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .full-description {
+                font-size: 16px;
+            }
+
+            .full-specification{
+
+            }
+
+            .rating-reviews {
+                margin-top: 30px;
+
+                .title{
+                    margin-bottom: 15px;
+                }
+
+                .overall {
+
+                    .number{
+                        font-size: 34px;
+                    }
+
+                    button {
+                        float: right;
+                        border-radius: 0px !important;
+                    }
+
+                    margin-bottom: 5px;
+                }
+
+                .reviews {
+                    margin-top: 34px;
+                    margin-bottom: 80px;
+
+                    .review {
+                        margin-bottom: 25px;
+
+                        .stars {
+                            margin-bottom: 15px;
+                        }
+                        .message {
+                            margin-bottom: 10px;
+                        }
+                    }
+                    .view-all {
+                        margin-top:15px;
+                        color: $logo-color;
+                        margin-bottom:15px;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .related-products-wrapper {
+        margin-bottom: 80px;
+
+        .title{
+            margin-bottom: 22px;
+            text-align: center;
+        }
+
+        .horizontal-rule {
+            height: 1px;
+            background: $horizontal-rule-color;
+            width: 148px;
+            margin-bottom: 24px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        .related-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 10px;
+        }
+
+    }
+}
+
 @media all and (max-width: 480px) {
     .header {
         // border: 1px solid black;
