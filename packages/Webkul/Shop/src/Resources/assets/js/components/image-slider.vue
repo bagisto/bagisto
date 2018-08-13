@@ -3,12 +3,10 @@
     <div class="slider-content" v-if="images.length>0">
 
         <ul class="slider-images">
-
             <li v-for="(image,index) in images" :key="index" v-bind:class="{'show': index==currentIndex}">
                 <img class="slider-item" :src="image" />
                 <!-- <div class="show-content"></div> -->
             </li>
-
         </ul>
 
         <div class="slider-control" v-if="images_loaded">
@@ -42,7 +40,7 @@ export default {
         };
     },
 
-    mounted(){
+    mounted() {
         this.getProps();
     },
 
@@ -121,4 +119,5 @@ export default {
         opacity: 0;
 
     }
+
 </style>
