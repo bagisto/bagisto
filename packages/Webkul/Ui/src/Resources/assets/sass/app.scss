@@ -867,13 +867,17 @@ h2 {
                     }
                 }
 
-                td.action {
-                    a:first-child {
-                        margin-right:8px;
-                    }
+            }
+        }
+
+        tbody {
+            td.action {
+                a:first-child {
+                    margin-right: 10px;
                 }
             }
         }
+
         .pagination {
             margin-top:20px;
         }

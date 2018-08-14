@@ -460,7 +460,7 @@ section.slider-block {
 }
 
 .footer {
-    background-color: $background-color;
+    background-color: $footer-back;
     padding-left: 10%;
     padding-right: 10%;
 
@@ -740,8 +740,9 @@ section.slider-block {
 
 // product pages css starts here
 
-section.product-detail {
+section.product-detail, section.product-review {
     font-size: 16px;
+    color: $product-font-color;
 
     div.category-breadcrumbs {
         display: inline;
@@ -750,7 +751,129 @@ section.product-detail {
     div.layouter {
         display:flex;
         flex-flow: row;
-        margin-top: 2%;
+        margin-top: 21px;
+
+        .mixed-group {
+
+            .single-image {
+                padding: 2px;
+
+                img {
+                    height: 280px;
+                    width: 280px;
+                }
+            }
+
+            .details {
+
+                .product-name {
+                    margin-top: 20px;
+                    font-size: 24px;
+                    margin-bottom: 20px;
+                }
+
+                .price {
+                    margin-bottom: 14px;
+
+                    .main-price {
+                        font-size: 24px;
+                        color: $product-price-color;
+                    }
+
+                    .real-price {
+                        color: $real-price;
+                        text-decoration-line: line-through;
+                    }
+                }
+            }
+        }
+
+        .rating-reviews {
+            margin-top: 30px;
+
+            .title-inline {
+                display: inline-block;
+                vertical-align:  middle;
+                margin-bottom: 20px;
+                width: 100%;
+
+                button {
+                    float: right;
+                    border-radius: 0px !important;
+                }
+            }
+
+            .overall {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                height: 150px;
+
+                .left-side {
+                    margin-bottom: 20px;
+
+                    .number{
+                        font-size: 34px;
+                    }
+                }
+
+                .right-side {
+                    display: block;
+
+                    .rater {
+                        display: inline-flex;
+                        align-items: center;
+
+                        .star {
+                            width: 50px;
+                            height: 20px;
+                            padding: 1px;
+                            margin-right: 8px;
+                        }
+
+                        .line-bar {
+                            height: 4px;
+                            width: 158px;
+                            margin-right: 12px;
+                            background: $bar-color;
+
+                            .line-value {
+                                height: 4px;
+                                width: 100px;
+                                background-color: $dark-blue-shade;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            .reviews {
+                margin-top: 34px;
+                margin-bottom: 90px;
+
+                .review {
+                    margin-bottom: 25px;
+
+                    .title {
+                        margin-bottom: 5px;
+                    }
+
+                    .stars {
+                        margin-bottom: 15px;
+                    }
+                    .message {
+                        margin-bottom: 10px;
+                    }
+                }
+                .view-all {
+                    margin-top:15px;
+                    color: $logo-color;
+                    margin-bottom:15px;
+                }
+            }
+        }
 
         div.product-image-group {
             display:flex;
@@ -946,31 +1069,286 @@ section.product-detail {
 
     }
 
-    .related-products-wrapper {
-        margin-bottom: 80px;
+    // .related-products-wrapper {
+    //     margin-bottom: 80px;
 
-        .title{
-            margin-bottom: 22px;
-            text-align: center;
-        }
+    //     .title{
+    //         margin-bottom: 22px;
+    //         text-align: center;
+    //     }
 
-        .horizontal-rule {
-            height: 1px;
-            background: $horizontal-rule-color;
-            width: 148px;
-            margin-bottom: 24px;
-            margin-left:auto;
-            margin-right:auto;
-        }
+    //     .horizontal-rule {
+    //         height: 1px;
+    //         background: $horizontal-rule-color;
+    //         width: 148px;
+    //         margin-bottom: 24px;
+    //         margin-left:auto;
+    //         margin-right:auto;
+    //     }
 
-        .related-products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            grid-gap: 10px;
-        }
+    //     .related-products {
+    //         display: grid;
+    //         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    //         grid-gap: 10px;
+    //     }
 
-    }
+    // }
 }
+
+/* cart pages and elements css begins here */
+
+section.cart {
+    color: $product-font-color;
+    font-size: 16px;
+    margin-bottom: 80px;
+
+    .title {
+        font-size: 24px;
+    }
+
+    .cart-content {
+        margin-top: 21px;
+        padding: 1px;
+        display: flex;
+        flex-direction: row;
+
+        .left-side {
+            width: 68.6%;
+            margin-right: 2.4%;
+
+            .item {
+                padding: 1.1%;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: row;
+
+                .item-image {
+                    height: 160px;
+                    width: 160px;
+                }
+
+                .item-details {
+                    display: flex;
+                    flex-direction: column;
+
+                    .item-title {
+                        font-size: 18px;
+                        margin-bottom: 10px;
+                    }
+
+                    .price {
+                        margin-bottom: 10px;
+
+                        .main-price {
+                            font-size: 18px;
+                            margin-right: 4px;
+                        }
+
+                        .real-price {
+                            margin-right: 4px;
+                            text-decoration-line: line-through;
+                        }
+
+                        .discount {
+                            color: $product-price-color;
+                        }
+                    }
+
+                    .summary {
+                        margin-bottom: 17px;
+                    }
+
+                    .misc {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: flex-start;
+
+                        div.qty-text {
+                            color: $gray-shade;
+                            margin-right: 10px;
+                        }
+
+                        div.box {
+                            height: 38px;
+                            width: 60px;
+                            text-align: center;
+                            line-height: 38px;
+                            border: 1px solid $border-color;
+                            border-radius: 3px;
+                            margin-right: 30px;
+                        }
+
+                        .remove {
+                            color: $dark-blue-shade;
+                            margin-right: 30px;
+                        }
+
+                        .towishlist {
+                            color : $dark-blue-shade;
+                        }
+
+                    }
+                }
+            }
+
+            .misc-controls {
+                float: right;
+
+                span {
+                    margin-right: 15px;
+                }
+
+                button {
+                    border-radius: 0px;
+                }
+            }
+        }
+
+        .right-side {
+            width: 29%;
+            display: block;
+
+            .price-section {
+                width: 100%;
+                padding: 10px 10px 18px 18px;
+                margin-bottom: 20px;
+
+                .title {
+                    font-size: 16px;
+                    font-weight: bold;
+                    padding-bottom: 8px;
+                    margin-bottom: 10px;
+                }
+
+                .all-item-details {
+                    margin-bottom: 17px;
+
+                    .item-details {
+                        margin-bottom: 10px;
+
+                        .name {
+                        }
+
+                        .price {
+                            float: right;
+                        }
+                    }
+                }
+                .horizontal-rule {
+                    width: 100%;
+                    height: 1px;
+                    vertical-align: middle;
+                    background: #e8e8e8;
+                }
+
+                .total-details {
+                    margin-top: 10px;
+
+                    .amount {
+                        float: right;
+                    }
+                }
+            }
+
+            .coupon-section {
+                padding: 10px 10px 18px 18px;
+
+                .title {
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+
+                .control-group {
+                    margin-bottom: 12px !important;
+
+                    input.coupon-input::-moz-placeholder {
+                        font-family: "montserrat", sans-serif;
+                        font-size: 16px;
+                        color: $product-font-color;
+                    }
+
+                    input.coupon-input::-webkit-input-placeholder {
+                        font-family: "montserrat", sans-serif;
+                        font-size: 16px;
+                        color: $product-font-color;
+                    }
+
+                }
+
+                button {
+                    margin-bottom: 10px;
+                    background-color: $color-black;
+                    border-radius: 0px;
+                }
+
+                .coupon-details {
+
+                    .coupon {
+                        margin-bottom: 8px;
+
+                        .discount {
+                            float: right;
+                        }
+                    }
+                }
+
+                .horizontal-rule {
+                    width: 100%;
+                    height: 1px;
+                    vertical-align: middle;
+                    background: #e8e8e8;
+                    margin-bottom: 9px;
+                }
+
+                .after-coupon-amount {
+
+                    .name {
+                        font-weight: bold;
+                    }
+
+                    .amount {
+                        float: right;
+                        font-weight: bold;
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
+}
+
+.related-products-wrapper {
+    margin-bottom: 80px;
+
+    .title{
+        margin-bottom: 22px;
+        font-size: 18px;
+        color: $product-font-color;
+        text-align: center;
+    }
+
+    .horizontal-rule {
+        height: 1px;
+        background: $horizontal-rule-color;
+        width: 148px;
+        margin-bottom: 24px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .related-products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-gap: 10px;
+    }
+
+}
+
+/* cart pages and elements css ends here */
 
 @media all and (max-width: 480px) {
     .header {

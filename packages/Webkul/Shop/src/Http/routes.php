@@ -10,6 +10,14 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::store.product.index'
     ]);
 
+    Route::get('/product-review', function() {
+        return view('shop::store.product.review.index');
+    });
+
+    Route::get('/cart', function() {
+        return view('shop::store.product.cart.index');
+    });
+
 });
 
 
