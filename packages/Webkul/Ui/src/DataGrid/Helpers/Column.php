@@ -3,6 +3,16 @@ namespace Webkul\Ui\DataGrid\Helpers;
 
 use Illuminate\Http\Request;
 
+/**
+ * Column controller
+ *
+ * @author    Nikhil Malik <nikhil@webkul.com> @ysmnikhil
+ * &
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ *
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+
 class Column extends AbstractFillable
 {
     const SORT = 'sort';

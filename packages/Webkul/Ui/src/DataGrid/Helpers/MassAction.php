@@ -3,6 +3,12 @@ namespace Webkul\Ui\DataGrid\Helpers;
 
 use Illuminate\Http\Request;
 
+/**
+ * MassAction
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+
 class MassAction
 {
     public function validateSchemaMassAction($attributes)

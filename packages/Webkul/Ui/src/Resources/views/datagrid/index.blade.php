@@ -10,12 +10,11 @@
     @section('javascript')
         <script type="text/javascript">
             var columns = @json($columns); //referential
-            var allFilters1 = [];
+            var allFilters = [];
             var search_value;
             var filter_column;
             var filter_condition;
             var filter_range;
-            var filt = '';
             var count_filters = parseInt(0);
             var url;
             var array_start = '[';
@@ -24,11 +23,11 @@
             var selectedColumn = '';
             var myURL = document.location;
             let params;
-            $(document).ready(function(){
+            $(document).ready(function() {
 
                 params = (new URL(document.location)).search;
-                if(params.length>0){
-                    if(allFilters1.length == 0) {
+                if(params.length>0) {
+                    if(allFilters.length == 0) {
                         //call reverse url function
                         arrayFromUrl(params.slice(1,params.length));
                     }
@@ -40,8 +39,11 @@
 
                 //controls for header when sorting is done
                 $('.grid_head').on('click', function() {
+
                     var column = $(this).data('column-name');
+
                     var currentSort = $(this).data('column-sort');
+
                     if(currentSort == "asc")
                         formURL("sort",column,"desc",params);
                     else if(currentSort == "desc")
@@ -88,7 +90,7 @@
                         $('.filter-condition-dropdown-datetime').css('display','inherit');
                         $('.filter-response-datetime').css('display','inherit');
                     }
-                    else if(typeValue == 'number'){
+                    else if(typeValue == 'number') {
                         //hide unwanted
                         $('.filter-condition-dropdown-string').css('display','none');
                         $('.filter-condition-dropdown-datetime').css('display','none');
@@ -102,35 +104,42 @@
 
                     }
 
-                    $('.apply-filter').on('click',function(){
+                    $('.apply-filter').on('click',function() {
+
                         params = (new URL(document.location)).search;
-                        if(typeValue == 'number'){
+
+                        if(typeValue == 'number') {
+
                             var conditionUsed = $('.filter-condition-dropdown-number').find(':selected').val();
                             var response = $('.response-number').val();
                             formURL(selectedColumn,conditionUsed,response,params,col_label);
                         }
-                        if(typeValue == 'string'){
+                        if(typeValue == 'string') {
+
                             var conditionUsed = $('.filter-condition-dropdown-string').find(':selected').val();
                             var response = $('.response-string').val();
                             formURL(selectedColumn,conditionUsed,response,params,col_label);
 
                         }
-                        if(typeValue == 'datetime'){
+                        if(typeValue == 'datetime') {
+
                             var conditionUsed = $('.filter-condition-dropdown-datetime').find(':selected').val();
                             var response = $('.response-datetime').val();
                             formURL(selectedColumn,conditionUsed,response,params,col_label);
                         }
-                        if(typeValue == 'boolean'){ //use select dropdown with two values true and false
+                        if(typeValue == 'boolean') { //use select dropdown with two values true and false
+
                             console.log('boolean');
                         }
                     });
                 });
 
                 //remove the filter and from clicking on cross icon on tag
-                $('.remove-filter').on('click', function(){
+                $('.remove-filter').on('click', function() {
+
                     var id = $(this).parents('.filter-one').attr('id');
-                    if(allFilters1.length ==  1){
-                        allFilters1.pop();
+                    if(allFilters.length ==  1) {
+                        allFilters.pop();
                         var uri = window.location.href.toString();
                         if (uri.indexOf("?") > 0) {
                             var clean_uri = uri.substring(0, uri.indexOf("?"));
@@ -138,9 +147,9 @@
                             document.location = clean_uri;
                         }
                     }
-                    else{
-                        allFilters1.splice(id,1);
-                        makeURL(allFilters1);
+                    else {
+                        allFilters.splice(id,1);
+                        makeURL(allFilters);
                     }
                 });
 
@@ -150,43 +159,57 @@
 
                 // master checkbox for selecting all entries
                 $("input[id=mastercheckbox]").change(function() {
-                    if($("input[id=mastercheckbox]").prop('checked') == true){
-                        $('.indexers').each(function(){
+                    if($("input[id=mastercheckbox]").prop('checked') == true) {
+                        $('.indexers').each(function() {
                             this.checked = true;
                             if(this.checked){
                                 y = parseInt($(this).attr('id')); id.push(y);
                             }
                         });
+
                         $('.mass-action').css('display','');
+
                         $('.table-grid-header').css('display','none');
                         // $('.selected-items').html(id.toString());
+
                         $('#indexes').val(id);
                     }
                     else if($("input[id=mastercheckbox]").prop('checked') == false) {
+
                         $('.indexers').each(function(){ this.checked = false; });
+
                         id = [];
+
                         $('.mass-action').css('display','none');
+
                         $('.table-grid-header').css('display','');
+
                         $('#indexes').val('');
                     }
                 });
 
-                $('.massaction-remove').on('click', function(){
+                $('.massaction-remove').on('click', function() {
+
                     id = [];
+
                     $('.mass-action').css('display','none');
+
                     if($('#mastercheckbox').prop('checked')) {
                         $('#mastercheckbox').prop('checked',false);
                     }
-                    $("input[class=indexers]").each(function(){
-                        if($(this).prop('checked')){
+
+                    $("input[class=indexers]").each(function() {
+                        if($(this).prop('checked')) {
                             $(this).prop('checked',false);
                         }
                     });
+
                     $('.table-grid-header').css('display','');
                 });
 
                 $("input[class=indexers]").change(function() {
-                    if(this.checked){
+
+                    if(this.checked) {
                         y = parseInt($(this).attr('id'));
                         id.push(y);
                     }
@@ -195,6 +218,7 @@
                         var index = id.indexOf(y);
                         id.splice(index,1);
                     }
+
                     if(id.length>0) {
 
                         $('.mass-action').css('display','');
@@ -204,7 +228,9 @@
                     }else if(id.length == 0) {
 
                         $('.mass-action').css('display','none');
+
                         $('.table-grid-header').css('display','');
+
                         $('#indexes').val('');
 
                         if($('#mastercheckbox').prop('checked')) {
@@ -218,69 +244,118 @@
             });
 
             //make the url from the array and redirect
-            function makeURL() {
-                if(allFilters1.length>0)
+            function makeURL(repetition = false) {
+
+                if(allFilters.length>0 && repetition == false)
                 {
-                    for(i=0;i<allFilters1.length;i++) {
+                    alert('this is here 1');
+
+                    for(i=0;i<allFilters.length;i++) {
                         if(i==0){
-                            url = '?' + allFilters1[i].column + '[' + allFilters1[i].cond + ']' + '=' + allFilters1[i].val;
+                            url = '?' + allFilters[i].column + '[' + allFilters[i].cond + ']' + '=' + allFilters[i].val;
                         }
                         else
-                            url = url + '&' + allFilters1[i].column + '[' + allFilters1[i].cond + ']' + '=' + allFilters1[i].val;
+                            url = url + '&' + allFilters[i].column + '[' + allFilters[i].cond + ']' + '=' + allFilters[i].val;
                     }
                     document.location = url;
+
+                } else if(allFilters.length>0 && repetition == true) {
+
+                    alert('this is here 2');
+
+                    //this is the case when the filter is being repeated on a single column with different condition and value
+                    for(i=0;i<allFilters.length;i++) {
+
+                        if(i==0){
+                            url = '?' + allFilters[i].column + '[' + allFilters[i].cond + ']' + '=' + allFilters[i].val;
+                        }
+                        else
+                            url = url + '&' + allFilters[i].column + '[' + allFilters[i].cond + ']' + '=' + allFilters[i].val;
+                    }
+
+                    document.location = url;
+
                 } else {
+
+                    alert('this is here 3');
+
                     var uri = window.location.href.toString();
+
                     var clean_uri = uri.substring(0, uri.indexOf("?"));
+
                     document.location = clean_uri;
+
                 }
             }
 
             //make the filter array from url after being redirected
-            function arrayFromUrl(x) {
+            function arrayFromUrl(urlstring) {
+
                 var obj={};
-                t = x.slice(0,x.length);
+
+                t = urlstring.slice(0,urlstring.length);
+
                 splitted = [];
+
                 moreSplitted = [];
+
                 splitted = t.split('&');
+
                 for(i=0;i<splitted.length;i++) {
 
                     moreSplitted.push(splitted[i].split('='));
+
                 }
                 for(i=0;i<moreSplitted.length;i++) {
+
                     col = moreSplitted[i][0].replace(']','').split('[')[0];
+
                     cond = moreSplitted[i][0].replace(']','').split('[')[1]
+
                     val = moreSplitted[i][1];
+
                     obj.column = col;
+
                     obj.cond = cond;
+
                     obj.val = val;
+
                     if(col!=undefined && cond!=undefined && val!=undefined)
-                        allFilters1.push(obj);
+                        allFilters.push(obj);
+
                     obj = {};
+
                 }
                 makeTags();
             }
 
             //use the label to prevent the display of column name on the body
             function makeTags() {
-                var filterRepeat = 0;
-                if(allFilters1.length!=0)
-                for(var i = 0;i<allFilters1.length;i++) {
-                    if(allFilters1[i].column == "sort") {
 
-                        col_label_tag = $('li[data-name="'+allFilters1[i].cond+'"]').text();
-                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+                var filterRepeat = 0;
+
+                if(allFilters.length!=0)
+                for(var i = 0;i<allFilters.length;i++) {
+
+                    if(allFilters[i].column == "sort") {
+
+                        col_label_tag = $('li[data-name="'+allFilters[i].cond+'"]').text();
+
+                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
                         $('.filter-row-two').append(filter_card);
 
-                    } else if(allFilters1[i].column == "search") {
+                    } else if(allFilters[i].column == "search") {
 
                         col_label_tag = "Search";
-                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+
+                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
                         $('.filter-row-two').append(filter_card);
 
                     } else {
-                        col_label_tag = $('li[data-name="'+allFilters1[i].column+'"]').text().trim();
-                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters1[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+
+                        col_label_tag = $('li[data-name="'+allFilters[i].column+'"]').text().trim();
+
+                        var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
                         $('.filter-row-two').append(filter_card);
 
                     }
@@ -290,64 +365,88 @@
 
             //This is being used for validation of url params and making array of filters
             function formURL(column, condition, response, urlparams,clabel) {
-                /*validate the conditions here and do the replacements and
-                push here in the all filters array*/
+
+                /* validate the conditions here and do the replacements and
+                push here in the all filters array */
                 var obj1 = {};
+
                 if(column == "" || condition == "" || response == "") {
-                    alert("Please mention all the fields for column, condition and match params for proper functioning");
+
+                    alert("Some of the required field is null, please check column, condition and value properly.");
                     return false;
                 }
                 else {
-                    if(allFilters1.length>0) {
+                    if(allFilters.length>0) {
                         //case for repeated filter
 
                         if(column != "sort" && column != "search") {
+
                             filter_repeated = 0;
-                            for(j=0;j<allFilters1.length;j++) {
-                                if(allFilters1[j].column==column && allFilters1[j].cond==condition && allFilters1[j].val==response)
+
+                            for(j=0;j<allFilters.length;j++) {
+
+                                if(allFilters[j].column == column && allFilters[j].cond == condition && allFilters[j].val == response)
                                 {
                                     filter_repeated = 1;
                                     return false;
+                                } else if(allFilters[j].column == column) {
+
+                                    filter_repeated = 1;
+                                    allFilters[j].cond = condition;
+                                    allFilters[j].val = response;
+                                    makeURL(true);
+
                                 }
                             }
                             if(filter_repeated == 0) {
+
                                 obj1.column = column;
                                 obj1.cond = condition;
                                 obj1.val = response;
                                 obj1.label = clabel;
-                                allFilters1.push(obj1);
+                                allFilters.push(obj1);
                                 obj1 = {};
                                 makeURL();
                             }
                         }
                         if(column == "sort") {
-                            sort_exists = 0;
-                            for(j=0;j<allFilters1.length;j++) {
-                                if(allFilters1[j].column == "sort") {
 
-                                    if(allFilters1[j].column==column && allFilters1[j].cond==condition && allFilters1[j].val==response){
+                            sort_exists = 0;
+
+                            for(j=0;j<allFilters.length;j++) {
+
+                                if(allFilters[j].column == "sort") {
+
+                                    if(allFilters[j].column==column && allFilters[j].cond==condition && allFilters[j].val==response) {
+
                                         if(response=="asc") {
-                                            allFilters1[j].column = column;
-                                            allFilters1[j].cond = condition;
-                                            allFilters1[j].val = "desc";
-                                            allFilters1[j].label = clabel;
+
+                                            allFilters[j].column = column;
+                                            allFilters[j].cond = condition;
+                                            allFilters[j].val = "desc";
+                                            allFilters[j].label = clabel;
                                             makeURL();
+
                                         }
                                         else {
-                                            allFilters1[j].column = column;
-                                            allFilters1[j].cond = condition;
-                                            allFilters1[j].val = "asc";
-                                            allFilters1[j].label = clabel;
+
+                                            allFilters[j].column = column;
+                                            allFilters[j].cond = condition;
+                                            allFilters[j].val = "asc";
+                                            allFilters[j].label = clabel;
                                             makeURL();
+
                                         }
 
                                     }
                                     else {
-                                        allFilters1[j].column = column;
-                                        allFilters1[j].cond = condition;
-                                        allFilters1[j].val = response;
-                                        allFilters1[j].label = clabel;
+
+                                        allFilters[j].column = column;
+                                        allFilters[j].cond = condition;
+                                        allFilters[j].val = response;
+                                        allFilters[j].label = clabel;
                                         makeURL();
+
                                     }
 
 
@@ -355,39 +454,46 @@
                             }
                         }
                         if(column == "search") {
+
                             search_found = 0;
-                            for(j=0;j<allFilters1.length;j++) {
-                                if(allFilters1[j].column == "search") {
-                                    allFilters1[j].column = column;
-                                    allFilters1[j].cond = condition;
-                                    allFilters1[j].val = response;
-                                    allFilters1[j].label = clabel;
+
+                            for(j=0;j<allFilters.length;j++) {
+
+                                if(allFilters[j].column == "search") {
+                                    allFilters[j].column = column;
+                                    allFilters[j].cond = condition;
+                                    allFilters[j].val = response;
+                                    allFilters[j].label = clabel;
                                     makeURL();
                                 }
                             }
-                            for(j=0;j<allFilters1.length;j++) {
-                                if(allFilters1[j].column == "search") {
+
+                            for(j=0;j<allFilters.length;j++) {
+                                if(allFilters[j].column == "search") {
                                     search_found = 1;
                                 }
                             }
+
                             if(search_found == 0) {
                                 obj1.column = column;
                                 obj1.cond = condition;
                                 obj1.val = response;
                                 obj1.label = clabel;
-                                allFilters1.push(obj1);
+                                allFilters.push(obj1);
                                 obj1 = {};
                                 makeURL();
                             }
                         }
                     } else {
+
                         obj1.column = column;
                         obj1.cond = condition;
                         obj1.val = response;
                         obj1.label = clabel;
-                        allFilters1.push(obj1);
+                        allFilters.push(obj1);
                         obj1 = {};
                         makeURL();
+
                     }
                 }
             }
