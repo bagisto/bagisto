@@ -1,4 +1,4 @@
-@extends('shop::store.layouts.master')
+@extends('shop::layouts.master')
 @section('content-wrapper')
     <section class="product-detail">
         <div class="category-breadcrumbs">

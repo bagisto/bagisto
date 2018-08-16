@@ -7,7 +7,7 @@ Route::group(['middleware' => ['web']], function () {
     ])->name('store.home');
 
     Route::get('/product', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
-        'view' => 'shop::store.product.index'
+        'view' => 'shop::store.product.details.index'
     ]);
 
     Route::get('/product-review', function() {
@@ -15,7 +15,7 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Route::get('/cart', function() {
-        return view('shop::store.product.cart.index');
+        return view('shop::store.product.view.cart.index');
     });
 
 });

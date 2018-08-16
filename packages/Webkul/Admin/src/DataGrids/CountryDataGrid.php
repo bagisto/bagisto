@@ -1,13 +1,19 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
 
-class ChannelsComposer
+/**
+ * Countries DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+
+class CountryDataGrid
 {
     /**
      * The Data Grid implementation.
@@ -16,21 +22,14 @@ class ChannelsComposer
      * for countries
      */
 
-
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createCountryDataGrid()
     {
 
-        $datagrid = DataGrid::make([
-            'name' => 'Channels',
-            'table' => 'channels',
+            return DataGrid::make([
+            'name' => 'Countries',
+            'table' => 'countries',
             'select' => 'id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
@@ -46,12 +45,12 @@ class ChannelsComposer
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to delete this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -72,23 +71,30 @@ class ChannelsComposer
 
                 [
                     'name' => 'id',
-                    'alias' => 'channel_id',
+                    'alias' => 'country_id',
                     'type' => 'number',
-                    'label' => 'Channel ID',
+                    'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'channel_code',
+                    'alias' => 'country_code',
                     'type' => 'string',
-                    'label' => 'Channel Code',
+                    'label' => 'Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'channel_name',
+                    'alias' => 'country_name',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Name',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'status',
+                    'alias' => 'country_status',
+                    'type' => 'number',
+                    'label' => 'Code',
                     'sortable' => true,
                 ],
 
@@ -99,21 +105,27 @@ class ChannelsComposer
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'channel_id',
+                    'alias' => 'country_id',
                     'type' => 'number',
-                    'label' => 'Channel ID',
+                    'label' => 'ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'channel_code',
+                    'alias' => 'country_code',
                     'type' => 'string',
-                    'label' => 'Channel Code',
+                    'label' => 'Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'channel_name',
+                    'alias' => 'country_name',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Name',
+                ],
+                [
+                    'column' => 'status',
+                    'alias' => 'country_status',
+                    'type' => 'number',
+                    'label' => 'Code',
                 ],
             ],
 
@@ -123,12 +135,12 @@ class ChannelsComposer
                 [
                     'column' => 'name',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Name',
                 ],
                 [
                     'column' => 'code',
                     'type' => 'string',
-                    'label' => 'Channel Code',
+                    'label' => 'Code',
                 ],
             ],
 
@@ -148,7 +160,12 @@ class ChannelsComposer
 
         ]);
 
-        $view->with('datagrid', $datagrid);
-        // $view->with('count', $this->users->count());
+    }
+
+    public function render()
+    {
+
+        return $this->createCountryDataGrid()->render();
+
     }
 }

@@ -792,8 +792,9 @@ section.product-detail, section.product-review {
             margin-top: 30px;
 
             .title-inline {
-                display: inline-block;
-                vertical-align:  middle;
+                display: inline-flex;
+                align-items: center;
+                justify-content: space-between;
                 margin-bottom: 20px;
                 width: 100%;
 

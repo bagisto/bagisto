@@ -1,34 +1,33 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
+/**
+ * User Roles DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 
-class CurrenciesComposer
+class RolesDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var CountryComposer
-     * for countries
+     * @var RolesDataGrid
+     * for Roles
      */
 
 
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createRolesDataGrid()
     {
 
-        $datagrid = DataGrid::make([
-            'name' => 'Currencies',
-            'table' => 'currencies',
+            return DataGrid::make([
+            'name' => 'Roles',
+            'table' => 'roles',
             'select' => 'id',
             'perpage' => 5,
             'aliased' => false, //use this with false as default and true in case of joins
@@ -72,23 +71,23 @@ class CurrenciesComposer
 
                 [
                     'name' => 'id',
-                    'alias' => 'currency_id',
+                    'alias' => 'r_id',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'code',
-                    'alias' => 'currency_code',
+                    'name' => 'name',
+                    'alias' => 'r_name',
                     'type' => 'string',
-                    'label' => 'Code',
+                    'label' => 'Name',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'name',
-                    'alias' => 'currency_name',
+                    'name' => 'permission_type',
+                    'alias' => 'r_permission_type',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Permission Type',
                     'sortable' => true,
                 ],
 
@@ -99,21 +98,21 @@ class CurrenciesComposer
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'currency_id',
+                    'alias' => 'r_id',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
-                    'column' => 'code',
-                    'alias' => 'currency_code',
-                    'type' => 'string',
-                    'label' => 'Code',
-                ],
-                [
                     'column' => 'name',
-                    'alias' => 'currency_name',
+                    'alias' => 'r_name',
                     'type' => 'string',
                     'label' => 'Name',
+                ],
+                [
+                    'column' => 'permission_type',
+                    'alias' => 'r_permission_type',
+                    'type' => 'string',
+                    'label' => 'Permission Type',
                 ],
             ],
 
@@ -126,9 +125,9 @@ class CurrenciesComposer
                     'label' => 'Name',
                 ],
                 [
-                    'column' => 'code',
+                    'column' => 'permission_type',
                     'type' => 'string',
-                    'label' => 'Code',
+                    'label' => 'Permission Type',
                 ],
             ],
 
@@ -148,7 +147,10 @@ class CurrenciesComposer
 
         ]);
 
-        $view->with('datagrid', $datagrid);
-        // $view->with('count', $this->users->count());
+    }
+
+    public function render()
+    {
+        return $this->createRolesDataGrid()->render();
     }
 }

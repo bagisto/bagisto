@@ -16,14 +16,14 @@
 
 <body>
     <div id="app">
-    @include('shop::store.header.index')
+    @include('shop::layouts.header.index')
         @yield('slider')
         <div class="main-container-wrapper">
             <div class="content-container">
                 @yield('content-wrapper')
             </div>
         </div>
-    @include('shop::store.footer.index')
+    @include('shop::layouts.footer.index')
     </div>
 
     <script type="text/javascript">

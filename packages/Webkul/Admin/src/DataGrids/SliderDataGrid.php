@@ -1,32 +1,30 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
+/**
+ * Sliders DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 
-class SliderComposer
+class SliderDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var CountryComposer
-     * for countries
+     * @var SliderDataGrid
+     * for Sliders
      */
 
-
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createSliderDataGrid()
     {
 
-        $datagrid = DataGrid::make([
+            return DataGrid::make([
             'name' => 'Sliders',
             'table' => 'sliders as s',
             'select' => 's.id',
@@ -153,7 +151,10 @@ class SliderComposer
 
         ]);
 
-        $view->with('datagrid', $datagrid);
-        // $view->with('count', $this->users->count());
+    }
+
+    public function render()
+    {
+        return $this->createSliderDataGrid()->render();
     }
 }

@@ -1,33 +1,30 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
+/**
+ * Users DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 
-class UserComposer
+class UserDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var UserComposer
-     * for admin
+     * @var UserDataGrid
+     * for admin users
      */
-    protected $users;
 
-
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createUserDataGrid()
     {
 
-        $datagrid = DataGrid::make([
+        return DataGrid::make([
             'name' => 'Admins',
             'table' => 'admins as u',
             'select' => 'u.id',
@@ -59,7 +56,8 @@ class UserComposer
                     'route' => route('admin.datagrid.delete'),
                     'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon pencil-lg-icon',
-                ], [
+                ],
+                [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
                     'confirm_text' => 'Do you really want to do this?',
@@ -148,12 +146,14 @@ class UserComposer
                     'alias' => 'Name',
                     'type' => 'string',
                     'label' => 'Name'
-                ], [
+                ],
+                [
                     'column' => 'u.id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'Admin ID'
-                ], [
+                ],
+                [
                     'column' => 'r.id',
                     'alias' => 'Role_ID',
                     'type' => 'number',
@@ -166,7 +166,8 @@ class UserComposer
                     'column' => 'u.email',
                     'type' => 'string',
                     'label' => 'E-Mail'
-                ], [
+                ],
+                [
                     'column' => 'u.name',
                     'type' => 'string',
                     'label' => 'Name'
@@ -187,7 +188,11 @@ class UserComposer
 
         ]);
 
-        $view->with('datagrid', $datagrid);
-        // $view->with('count', $this->users->count());
+    }
+
+    public function render() {
+
+        return $this->createUserDataGrid()->render();
+
     }
 }

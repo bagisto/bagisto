@@ -1,4 +1,4 @@
-@extends('shop::store.layouts.master')
+@extends('shop::layouts.master')
 @section('slider')
     @include('shop::store.slider.slider')
 @endsection

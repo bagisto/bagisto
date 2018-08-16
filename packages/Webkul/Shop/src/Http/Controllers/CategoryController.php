@@ -7,11 +7,12 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 /**
- * Admin user session controller
+ * Products Category controller
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
+
 class CategoryController extends controller
 {
 

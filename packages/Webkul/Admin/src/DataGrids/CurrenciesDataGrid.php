@@ -1,34 +1,32 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
+/**
+ * Currencies DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 
-class InventorySourcesComposer
+class CurrenciesDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var CountryComposer
+     * @var CurrenciesDataGrid
      * for countries
      */
 
-
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createCurrencyDataGrid()
     {
 
-        $datagrid = DataGrid::make([
-            'name' => 'Inventory Sources',
-            'table' => 'inventory_sources',
+            return DataGrid::make([
+            'name' => 'Currencies',
+            'table' => 'currencies',
             'select' => 'id',
             'perpage' => 5,
             'aliased' => false, //use this with false as default and true in case of joins
@@ -72,37 +70,23 @@ class InventorySourcesComposer
 
                 [
                     'name' => 'id',
-                    'alias' => 'inventory_id',
+                    'alias' => 'currency_id',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'inventory_code',
+                    'alias' => 'currency_code',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'inventory_name',
+                    'alias' => 'currency_name',
                     'type' => 'string',
                     'label' => 'Name',
-                    'sortable' => true,
-                ],
-                [
-                    'name' => 'priority',
-                    'alias' => 'inventory_priority',
-                    'type' => 'string',
-                    'label' => 'Priority',
-                    'sortable' => true,
-                ],
-                [
-                    'name' => 'status',
-                    'alias' => 'inventory_status',
-                    'type' => 'string',
-                    'label' => 'Status',
                     'sortable' => true,
                 ],
 
@@ -113,19 +97,19 @@ class InventorySourcesComposer
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'inventory_id',
+                    'alias' => 'currency_id',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'inventory_code',
+                    'alias' => 'currency_code',
                     'type' => 'string',
                     'label' => 'Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'inventory_name',
+                    'alias' => 'currency_name',
                     'type' => 'string',
                     'label' => 'Name',
                 ],
@@ -162,6 +146,10 @@ class InventorySourcesComposer
 
         ]);
 
-        $view->with('datagrid', $datagrid);
+    }
+
+    public function render()
+    {
+        return $this->createCurrencyDataGrid()->render();
     }
 }

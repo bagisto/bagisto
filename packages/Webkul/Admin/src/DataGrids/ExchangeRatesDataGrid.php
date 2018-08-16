@@ -1,34 +1,33 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
+/**
+ * Exchange Rates DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 
-class LocalesComposer
+class ExchangeRatesDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var CountryComposer
-     * for countries
+     * @var ExchangeRatesDataGrid
+     * for Exchange Rates
      */
 
 
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createExchangeRatesDataGrid()
     {
 
-        $datagrid = DataGrid::make([
-            'name' => 'Locales',
-            'table' => 'locales',
+            return DataGrid::make([
+            'name' => 'Exchange Rates',
+            'table' => 'currency_exchange_rates',
             'select' => 'id',
             'perpage' => 5,
             'aliased' => false, //use this with false as default and true in case of joins
@@ -72,24 +71,30 @@ class LocalesComposer
 
                 [
                     'name' => 'id',
-                    'alias' => 'locale_id',
+                    'alias' => 'exch_id',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Rate ID',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'code',
-                    'alias' => 'locale_code',
+                    'name' => 'source_currency',
+                    'alias' => 'exch_source_currency',
                     'type' => 'string',
-                    'label' => 'Code',
+                    'label' => 'Source Currency',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'name',
-                    'alias' => 'locale_name',
+                    'name' => 'target_currency',
+                    'alias' => 'exch_target_currency',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Target Currency',
                     'sortable' => true,
+                ],
+                [
+                    'name' => 'ratio',
+                    'alias' => 'exch_ratio',
+                    'type' => 'string',
+                    'label' => 'Exchange Ratio',
                 ],
 
             ],
@@ -99,21 +104,23 @@ class LocalesComposer
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'locale_id',
+                    'alias' => 'exch_id',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Rate ID',
                 ],
                 [
-                    'column' => 'code',
-                    'alias' => 'locale_code',
+                    'column' => 'source_currency',
+                    'alias' => 'exch_source_currency',
                     'type' => 'string',
-                    'label' => 'Code',
+                    'label' => 'Source Currency',
+                    'sortable' => true,
                 ],
                 [
-                    'column' => 'name',
-                    'alias' => 'locale_name',
+                    'column' => 'target_currency',
+                    'alias' => 'exch_target_currency',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Target Currency',
+                    'sortable' => true,
                 ],
             ],
 
@@ -121,14 +128,14 @@ class LocalesComposer
 
             'searchable' => [
                 [
-                    'column' => 'name',
+                    'column' => 'source_currency',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Source Currency',
                 ],
                 [
-                    'column' => 'code',
+                    'column' => 'target_currency',
                     'type' => 'string',
-                    'label' => 'Code',
+                    'label' => 'Target Currency',
                 ],
             ],
 
@@ -148,7 +155,10 @@ class LocalesComposer
 
         ]);
 
-        $view->with('datagrid', $datagrid);
-        // $view->with('count', $this->users->count());
+    }
+
+    public function render()
+    {
+        return $this->createExchangeRatesDataGrid()->render();
     }
 }

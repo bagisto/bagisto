@@ -12,6 +12,15 @@ use Webkul\Ui\DataGrid\Helpers\Css;
 use Webkul\Ui\DataGrid\Helpers\MassAction;
 use URL;
 
+
+/**
+ * Products DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+
+
 class ProductGrid
 {
     /**

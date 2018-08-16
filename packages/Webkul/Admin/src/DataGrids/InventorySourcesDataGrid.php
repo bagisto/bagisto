@@ -1,36 +1,33 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
+/**
+ * Inventory Sources DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 
-class CountryComposer
+class InventorySourcesDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var CountryComposer
-     * for countries
+     * @var InventorySourcesDataGrid
+     * for Inventory Sources
      */
 
-
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createInventorySourcesDataGrid()
     {
-
-        $datagrid = DataGrid::make([
-            'name' => 'Countries',
-            'table' => 'countries',
+        return DataGrid::make([
+            'name' => 'Inventory Sources',
+            'table' => 'inventory_sources',
             'select' => 'id',
-            'perpage' => 10,
+            'perpage' => 5,
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
@@ -46,12 +43,12 @@ class CountryComposer
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -72,30 +69,37 @@ class CountryComposer
 
                 [
                     'name' => 'id',
-                    'alias' => 'country_id',
+                    'alias' => 'inventory_id',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'country_code',
+                    'alias' => 'inventory_code',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'country_name',
+                    'alias' => 'inventory_name',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
                 ],
                 [
+                    'name' => 'priority',
+                    'alias' => 'inventory_priority',
+                    'type' => 'string',
+                    'label' => 'Priority',
+                    'sortable' => true,
+                ],
+                [
                     'name' => 'status',
-                    'alias' => 'country_status',
-                    'type' => 'number',
-                    'label' => 'Code',
+                    'alias' => 'inventory_status',
+                    'type' => 'string',
+                    'label' => 'Status',
                     'sortable' => true,
                 ],
 
@@ -106,27 +110,21 @@ class CountryComposer
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'country_id',
+                    'alias' => 'inventory_id',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'country_code',
+                    'alias' => 'inventory_code',
                     'type' => 'string',
                     'label' => 'Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'country_name',
+                    'alias' => 'inventory_name',
                     'type' => 'string',
                     'label' => 'Name',
-                ],
-                [
-                    'column' => 'status',
-                    'alias' => 'country_status',
-                    'type' => 'number',
-                    'label' => 'Code',
                 ],
             ],
 
@@ -160,8 +158,10 @@ class CountryComposer
             // 'css' => []
 
         ]);
+    }
 
-        $view->with('datagrid', $datagrid);
-        // $view->with('count', $this->users->count());
+    public function render()
+    {
+        return $this->createInventorySourcesDataGrid()->render();
     }
 }

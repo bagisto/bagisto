@@ -15,7 +15,8 @@
         </div>
 
         <div class="page-content">
-            {!! $datagrid->render() !!}
+            @inject('roles','Webkul\Admin\DataGrids\RolesDataGrid')
+            {!! $roles->render() !!}
         </div>
     </div>
 @stop

@@ -19,7 +19,8 @@
         </div>
 
         <div class="page-content">
-            {!! $datagrid->render() !!}
+            @inject('exchange_rates','Webkul\Admin\DataGrids\ExchangeRatesDataGrid')
+            {!! $exchange_rates->render() !!}
         </div>
     </div>
 @stop

@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Blade;
 use Webkul\Admin\Providers\EventServiceProvider;
-use Webkul\Admin\Providers\ComposerServiceProvider;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -30,7 +29,6 @@ class AdminServiceProvider extends ServiceProvider
         $this->composeView();
 
         $this->app->register(EventServiceProvider::class);
-        $this->app->register(ComposerServiceProvider::class);
     }
 
     /**
