@@ -20,7 +20,7 @@ class AttributeFamilyTableSeeder extends Seeder
                     "name" => "General",
                     "is_user_defined" => 0,
                     "position" => 1,
-                    "attributes" => [
+                    "custom_attributes" => [
                         [
                             'code' => 'sku',
                             'position' => 1
@@ -48,7 +48,7 @@ class AttributeFamilyTableSeeder extends Seeder
                     "name" => "Description",
                     "is_user_defined" => 0,
                     "position" => 2,
-                    "attributes" => [
+                    "custom_attributes" => [
                         [
                             'code' => 'short_description',
                             'position' => 1
@@ -61,7 +61,7 @@ class AttributeFamilyTableSeeder extends Seeder
                     "name" => "Meta Description",
                     "is_user_defined" => 0,
                     "position" => 3,
-                    "attributes" =>  [
+                    "custom_attributes" =>  [
                         [
                             'code' => 'meta_title',
                             'position' => 1
@@ -77,7 +77,7 @@ class AttributeFamilyTableSeeder extends Seeder
                     "name" => "Price",
                     "is_user_defined" => 0,
                     "position" => 4,
-                    "attributes" => [
+                    "custom_attributes" => [
                         [
                             'code' => 'price',
                             'position' => 1
@@ -99,7 +99,7 @@ class AttributeFamilyTableSeeder extends Seeder
                     "name" => "Shipping",
                     "is_user_defined" => 0,
                     "position" => 5,
-                    "attributes" => [
+                    "custom_attributes" => [
                         [
                             'code' => 'width',
                             'position' => 1
@@ -136,7 +136,7 @@ class AttributeFamilyTableSeeder extends Seeder
     {
         $this->attributeFamily = $attributeFamily;
     }
-    
+
     public function run()
     {
         foreach($this->rawData as $row) {

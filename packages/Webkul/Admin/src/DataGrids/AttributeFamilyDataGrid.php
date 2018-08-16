@@ -7,13 +7,13 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
 
 
 /**
- * Channels DataGrid
+ * Countries DataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class ChannelsDataGrid
+class AttributeFamilyDataGrid
 {
     /**
      * The Data Grid implementation.
@@ -22,14 +22,14 @@ class ChannelsDataGrid
      * for countries
      */
 
-    public function createChannelsDataGrid()
+    public function createAttributeFamilyDataGrid()
     {
 
             return DataGrid::make([
-            'name' => 'Channels',
-            'table' => 'channels',
+            'name' => 'Attribute Family',
+            'table' => 'attribute_families',
             'select' => 'id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
@@ -45,12 +45,12 @@ class ChannelsDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to delete this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -71,48 +71,45 @@ class ChannelsDataGrid
 
                 [
                     'name' => 'id',
-                    'alias' => 'channel_id',
+                    'alias' => 'attribute_family_id',
                     'type' => 'number',
-                    'label' => 'Channel ID',
+                    'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'channel_code',
+                    'alias' => 'attribute_family_code',
                     'type' => 'string',
-                    'label' => 'Channel Code',
+                    'label' => 'Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'channel_name',
+                    'alias' => 'attribute_family_name',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Code',
                     'sortable' => true,
                 ],
-
             ],
-
-            //don't use aliasing in case of filters
 
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'channel_id',
+                    'alias' => 'attribute_family_id',
                     'type' => 'number',
-                    'label' => 'Channel ID',
+                    'label' => 'ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'channel_code',
+                    'alias' => 'attribute_family_code',
                     'type' => 'string',
-                    'label' => 'Channel Code',
+                    'label' => 'Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'channel_name',
+                    'alias' => 'attribute_family_name',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Name',
                 ],
             ],
 
@@ -122,12 +119,12 @@ class ChannelsDataGrid
                 [
                     'column' => 'name',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Name',
                 ],
                 [
                     'column' => 'code',
                     'type' => 'string',
-                    'label' => 'Channel Code',
+                    'label' => 'Code',
                 ],
             ],
 
@@ -151,6 +148,8 @@ class ChannelsDataGrid
 
     public function render()
     {
-        return $this->createChannelsDataGrid()->render();
+
+        return $this->createAttributeFamilyDataGrid()->render();
+
     }
 }

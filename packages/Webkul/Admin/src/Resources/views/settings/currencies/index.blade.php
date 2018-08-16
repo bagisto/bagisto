@@ -15,7 +15,7 @@
         </div>
 
         <div class="page-content">
-            @inject('currencies','Webkul\Admin\DataGrids\CurrenciesDataGrid')
+            @inject('currencies','Webkul\Admin\DataGrids\CurrencyDataGrid')
             {!! $currencies->render() !!}
         </div>
     </div>

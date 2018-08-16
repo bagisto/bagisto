@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Attribute\Repositories;
- 
+
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeGroupRepository;
@@ -96,7 +96,7 @@ class AttributeFamilyRepository extends Repository
         $family->update($data);
 
         $previousAttributeGroupIds = $family->attribute_groups()->pluck('id');
-        
+
         if(isset($data['attribute_groups'])) {
             foreach ($data['attribute_groups'] as $attributeGroupId => $attributeGroupInputs) {
                 if (str_contains($attributeGroupId, 'group_')) {
@@ -114,7 +114,7 @@ class AttributeFamilyRepository extends Repository
 
                     $attributeGroup = $this->attributeGroup->findOrFail($attributeGroupId);
                     $attributeGroup->update($attributeGroupInputs);
-                    
+
                     $attributeIds = $attributeGroup->custom_attributes()->get()->pluck('id');
 
                     if(isset($attributeGroupInputs['custom_attributes'])) {

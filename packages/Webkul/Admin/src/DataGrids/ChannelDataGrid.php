@@ -5,28 +5,29 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
+
 /**
- * Currencies DataGrid
+ * Channels DataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class CurrenciesDataGrid
+class ChannelDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var CurrenciesDataGrid
+     * @var CountryComposer
      * for countries
      */
 
-    public function createCurrencyDataGrid()
+    public function createChannelsDataGrid()
     {
 
             return DataGrid::make([
-            'name' => 'Currencies',
-            'table' => 'currencies',
+            'name' => 'Channels',
+            'table' => 'channels',
             'select' => 'id',
             'perpage' => 5,
             'aliased' => false, //use this with false as default and true in case of joins
@@ -70,23 +71,23 @@ class CurrenciesDataGrid
 
                 [
                     'name' => 'id',
-                    'alias' => 'currency_id',
+                    'alias' => 'channel_id',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Channel ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'currency_code',
+                    'alias' => 'channel_code',
                     'type' => 'string',
-                    'label' => 'Code',
+                    'label' => 'Channel Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'currency_name',
+                    'alias' => 'channel_name',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Channel Name',
                     'sortable' => true,
                 ],
 
@@ -97,21 +98,21 @@ class CurrenciesDataGrid
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'currency_id',
+                    'alias' => 'channel_id',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Channel ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'currency_code',
+                    'alias' => 'channel_code',
                     'type' => 'string',
-                    'label' => 'Code',
+                    'label' => 'Channel Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'currency_name',
+                    'alias' => 'channel_name',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Channel Name',
                 ],
             ],
 
@@ -121,12 +122,12 @@ class CurrenciesDataGrid
                 [
                     'column' => 'name',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Channel Name',
                 ],
                 [
                     'column' => 'code',
                     'type' => 'string',
-                    'label' => 'Code',
+                    'label' => 'Channel Code',
                 ],
             ],
 
@@ -150,6 +151,6 @@ class CurrenciesDataGrid
 
     public function render()
     {
-        return $this->createCurrencyDataGrid()->render();
+        return $this->createChannelsDataGrid()->render();
     }
 }
