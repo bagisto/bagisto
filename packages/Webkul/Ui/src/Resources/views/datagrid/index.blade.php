@@ -149,7 +149,7 @@
                     }
                     else {
                         allFilters.splice(id,1);
-                        makeURL(allFilters);
+                        makeURL();
                     }
                 });
 
@@ -248,7 +248,6 @@
 
                 if(allFilters.length>0 && repetition == false)
                 {
-                    alert('this is here 1');
 
                     for(i=0;i<allFilters.length;i++) {
                         if(i==0){
@@ -260,8 +259,6 @@
                     document.location = url;
 
                 } else if(allFilters.length>0 && repetition == true) {
-
-                    alert('this is here 2');
 
                     //this is the case when the filter is being repeated on a single column with different condition and value
                     for(i=0;i<allFilters.length;i++) {
@@ -276,8 +273,6 @@
                     document.location = url;
 
                 } else {
-
-                    alert('this is here 3');
 
                     var uri = window.location.href.toString();
 
