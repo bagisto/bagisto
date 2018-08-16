@@ -71,28 +71,28 @@ class CountryDataGrid
 
                 [
                     'name' => 'id',
-                    'alias' => 'country_id',
+                    'alias' => 'countryId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'country_code',
+                    'alias' => 'countryCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'country_name',
+                    'alias' => 'countryName',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'status',
-                    'alias' => 'country_status',
+                    'alias' => 'countryStatus',
                     'type' => 'number',
                     'label' => 'Code',
                     'sortable' => true,
@@ -105,25 +105,25 @@ class CountryDataGrid
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'country_id',
+                    'alias' => 'countryId',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'country_code',
+                    'alias' => 'countryCode',
                     'type' => 'string',
                     'label' => 'Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'country_name',
+                    'alias' => 'countryName',
                     'type' => 'string',
                     'label' => 'Name',
                 ],
                 [
                     'column' => 'status',
-                    'alias' => 'country_status',
+                    'alias' => 'countryStatus',
                     'type' => 'number',
                     'label' => 'Code',
                 ],

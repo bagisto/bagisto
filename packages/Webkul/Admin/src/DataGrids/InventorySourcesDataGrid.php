@@ -69,35 +69,35 @@ class InventorySourcesDataGrid
 
                 [
                     'name' => 'id',
-                    'alias' => 'inventory_id',
+                    'alias' => 'inventoryID',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'inventory_code',
+                    'alias' => 'inventoryCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'inventory_name',
+                    'alias' => 'inventoryName',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'priority',
-                    'alias' => 'inventory_priority',
+                    'alias' => 'inventoryPriority',
                     'type' => 'string',
                     'label' => 'Priority',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'status',
-                    'alias' => 'inventory_status',
+                    'alias' => 'inventoryStatus',
                     'type' => 'string',
                     'label' => 'Status',
                     'sortable' => true,
@@ -110,19 +110,19 @@ class InventorySourcesDataGrid
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'inventory_id',
+                    'alias' => 'inventoryId',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'inventory_code',
+                    'alias' => 'inventoryCode',
                     'type' => 'string',
                     'label' => 'Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'inventory_name',
+                    'alias' => 'inventoryName',
                     'type' => 'string',
                     'label' => 'Name',
                 ],

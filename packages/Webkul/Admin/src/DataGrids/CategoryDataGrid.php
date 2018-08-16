@@ -5,30 +5,31 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
+
 /**
- * Sliders DataGrid
+ * Category DataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class SliderDataGrid
+class CategoryDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var SliderDataGrid
-     * for Sliders
+     * @var AttributeDataGrid
+     * for countries
      */
 
-    public function createSliderDataGrid()
+    public function createCategoryDataGrid()
     {
 
             return DataGrid::make([
-            'name' => 'Sliders',
-            'table' => 'sliders as s',
-            'select' => 's.id',
-            'perpage' => 5,
+            'name' => 'Categories',
+            'table' => 'categories as cat',
+            'select' => 'cat.id',
+            'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
@@ -44,12 +45,12 @@ class SliderDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to delete this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -57,64 +58,73 @@ class SliderDataGrid
             'join' => [
                 [
                     'join' => 'leftjoin',
-                    'table' => 'channels as c',
-                    'primaryKey' => 's.channel_id',
+                    'table' => 'category_translations as ct',
+                    'primaryKey' => 'cat.id',
                     'condition' => '=',
-                    'secondaryKey' => 'c.id',
-                ]
+                    'secondaryKey' => 'ct.category_id',
+                ], [
+                    'join' => 'leftjoin',
+                    'table' => 'category_translations as cta',
+                    'primaryKey' => 'cat.parent_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'cta.category_id',
+                ],
+
             ],
 
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
-
                 [
-                    'name' => 's.id',
-                    'alias' => 'sliderId',
+                    'name' => 'cat.id',
+                    'alias' => 'catID',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Category ID',
+                    'sortable' => true,
+                ], [
+                    'name' => 'ct.name',
+                    'alias' => 'catName',
+                    'type' => 'string',
+                    'label' => 'Category Name',
+                    'sortable' => false,
+                ], [
+                    'name' => 'cat.position',
+                    'alias' => 'catPosition',
+                    'type' => 'string',
+                    'label' => 'Category Position',
+                    'sortable' => false,
+                ], [
+                    'name' => 'cta.name',
+                    'alias' => 'parentName',
+                    'type' => 'string',
+                    'label' => 'Parent Name',
+                    'sortable' => true,
+                ], [
+                    'name' => 'cat.status',
+                    'alias' => 'catStatus',
+                    'type' => 'string',
+                    'label' => 'Visible in Menu',
                     'sortable' => true,
                 ],
-                [
-                    'name' => 's.title',
-                    'alias' => 'sliderTitle',
-                    'type' => 'string',
-                    'label' => 'title',
-                ],
-                [
-                    'name' => 's.channel_id',
-                    'alias' => 'channelId',
-                    'type' => 'string',
-                    'label' => 'Channel ID',
-                    'sortable' => true,
-                ],
-                [
-                    'name' => 'c.name',
-                    'alias' => 'channelName',
-                    'type' => 'string',
-                    'label' => 'Channel Name',
-                    'sortable' => true,
-                ],
-            ],
 
-            //don't use aliasing in case of filters
+            ],
 
             'filterable' => [
                 // [
                 //     'column' => 'id',
-                //     'alias' => 'locale_id',
+                //     'alias' => 'attribute_family_id',
                 //     'type' => 'number',
                 //     'label' => 'ID',
                 // ],
                 // [
                 //     'column' => 'code',
-                //     'alias' => 'locale_code',
+                //     'alias' => 'attribute_family_code',
                 //     'type' => 'string',
                 //     'label' => 'Code',
                 // ],
                 // [
                 //     'column' => 'name',
-                //     'alias' => 'locale_name',
+                //     'alias' => 'attribute_family_name',
                 //     'type' => 'string',
                 //     'label' => 'Name',
                 // ],
@@ -155,6 +165,8 @@ class SliderDataGrid
 
     public function render()
     {
-        return $this->createSliderDataGrid()->render();
+
+        return $this->createCategoryDataGrid()->render();
+
     }
 }

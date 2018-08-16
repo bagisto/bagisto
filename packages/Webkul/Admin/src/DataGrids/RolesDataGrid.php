@@ -71,21 +71,21 @@ class RolesDataGrid
 
                 [
                     'name' => 'id',
-                    'alias' => 'r_id',
+                    'alias' => 'roleId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'r_name',
+                    'alias' => 'roleName',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'permission_type',
-                    'alias' => 'r_permission_type',
+                    'alias' => 'rolePermissionType',
                     'type' => 'string',
                     'label' => 'Permission Type',
                     'sortable' => true,
@@ -98,19 +98,19 @@ class RolesDataGrid
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'r_id',
+                    'alias' => 'roleId',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'r_name',
+                    'alias' => 'roleName',
                     'type' => 'string',
                     'label' => 'Name',
                 ],
                 [
                     'column' => 'permission_type',
-                    'alias' => 'r_permission_type',
+                    'alias' => 'rolePermissionType',
                     'type' => 'string',
                     'label' => 'Permission Type',
                 ],

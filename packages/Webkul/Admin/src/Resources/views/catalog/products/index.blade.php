@@ -15,7 +15,8 @@
         </div>
 
         <div class="page-content">
-        
+            @inject('product','Webkul\Admin\DataGrids\ProductDataGrid')
+            {!! $product->render() !!}
         </div>
     </div>
 @stop

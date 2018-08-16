@@ -71,28 +71,28 @@ class ExchangeRatesDataGrid
 
                 [
                     'name' => 'id',
-                    'alias' => 'exch_id',
+                    'alias' => 'exchID',
                     'type' => 'number',
                     'label' => 'Rate ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'source_currency',
-                    'alias' => 'exch_source_currency',
+                    'alias' => 'exchSourceCurrency',
                     'type' => 'string',
                     'label' => 'Source Currency',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'target_currency',
-                    'alias' => 'exch_target_currency',
+                    'alias' => 'exchTargetCurrency',
                     'type' => 'string',
                     'label' => 'Target Currency',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'ratio',
-                    'alias' => 'exch_ratio',
+                    'alias' => 'exchRatio',
                     'type' => 'string',
                     'label' => 'Exchange Ratio',
                 ],
@@ -104,20 +104,20 @@ class ExchangeRatesDataGrid
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'exch_id',
+                    'alias' => 'exchId',
                     'type' => 'number',
                     'label' => 'Rate ID',
                 ],
                 [
                     'column' => 'source_currency',
-                    'alias' => 'exch_source_currency',
+                    'alias' => 'exchSourceCurrency',
                     'type' => 'string',
                     'label' => 'Source Currency',
                     'sortable' => true,
                 ],
                 [
                     'column' => 'target_currency',
-                    'alias' => 'exch_target_currency',
+                    'alias' => 'exchTargetCurrency',
                     'type' => 'string',
                     'label' => 'Target Currency',
                     'sortable' => true,

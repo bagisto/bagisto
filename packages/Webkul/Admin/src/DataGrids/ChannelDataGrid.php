@@ -98,19 +98,19 @@ class ChannelDataGrid
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'channel_id',
+                    'alias' => 'channelId',
                     'type' => 'number',
                     'label' => 'Channel ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'channel_code',
+                    'alias' => 'channelCode',
                     'type' => 'string',
                     'label' => 'Channel Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'channel_name',
+                    'alias' => 'channelName',
                     'type' => 'string',
                     'label' => 'Channel Name',
                 ],

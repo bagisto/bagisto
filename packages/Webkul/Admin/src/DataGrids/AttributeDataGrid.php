@@ -5,30 +5,31 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
+
 /**
- * Locales DataGrid
+ * Attributes DataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class LocalesDataGrid
+class AttributeDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var CountryDataGrid
+     * @var AttributeDataGrid
      * for countries
      */
 
-    public function createCountryDataGrid()
+    public function createAttributeDataGrid()
     {
 
             return DataGrid::make([
-            'name' => 'Locales',
-            'table' => 'locales',
+            'name' => 'Attributes',
+            'table' => 'attributes',
             'select' => 'id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
@@ -44,12 +45,12 @@ class LocalesDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to delete this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -70,64 +71,97 @@ class LocalesDataGrid
 
                 [
                     'name' => 'id',
-                    'alias' => 'localeId',
+                    'alias' => 'attributeId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'localeCode',
+                    'alias' => 'attributeCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'name',
-                    'alias' => 'localeName',
+                    'name' => 'admin_name',
+                    'alias' => 'attributeAdminName',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'AdminName',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'type',
+                    'alias' => 'attributeType',
+                    'type' => 'string',
+                    'label' => 'Type',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'is_required',
+                    'alias' => 'attributeIsRequired',
+                    'type' => 'string',
+                    'label' => 'Required',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'is_unique',
+                    'alias' => 'attributeIsUnique',
+                    'type' => 'string',
+                    'label' => 'Unique',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'value_per_locale',
+                    'alias' => 'attributeValuePerLocale',
+                    'type' => 'string',
+                    'label' => 'ValuePerLocale',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'value_per_channel',
+                    'alias' => 'attributeValuePerChannel',
+                    'type' => 'string',
+                    'label' => 'ValuePerChannel',
                     'sortable' => true,
                 ],
 
             ],
 
-            //don't use aliasing in case of filters
-
             'filterable' => [
-                [
-                    'column' => 'id',
-                    'alias' => 'localeId',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ],
-                [
-                    'column' => 'code',
-                    'alias' => 'localeCode',
-                    'type' => 'string',
-                    'label' => 'Code',
-                ],
-                [
-                    'column' => 'name',
-                    'alias' => 'localeName',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ],
+                // [
+                //     'column' => 'id',
+                //     'alias' => 'attribute_family_id',
+                //     'type' => 'number',
+                //     'label' => 'ID',
+                // ],
+                // [
+                //     'column' => 'code',
+                //     'alias' => 'attribute_family_code',
+                //     'type' => 'string',
+                //     'label' => 'Code',
+                // ],
+                // [
+                //     'column' => 'name',
+                //     'alias' => 'attribute_family_name',
+                //     'type' => 'string',
+                //     'label' => 'Name',
+                // ],
             ],
 
             //don't use aliasing in case of searchables
 
             'searchable' => [
-                [
-                    'column' => 'name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ],
-                [
-                    'column' => 'code',
-                    'type' => 'string',
-                    'label' => 'Code',
-                ],
+                // [
+                //     'column' => 'name',
+                //     'type' => 'string',
+                //     'label' => 'Name',
+                // ],
+                // [
+                //     'column' => 'code',
+                //     'type' => 'string',
+                //     'label' => 'Code',
+                // ],
             ],
 
             //list of viable operators that will be used
@@ -150,6 +184,8 @@ class LocalesDataGrid
 
     public function render()
     {
-        return $this->createCountryDataGrid()->render();
+
+        return $this->createAttributeDataGrid()->render();
+
     }
 }

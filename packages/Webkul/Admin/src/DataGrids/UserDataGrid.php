@@ -155,7 +155,7 @@ class UserDataGrid
                 ],
                 [
                     'column' => 'r.id',
-                    'alias' => 'Role_ID',
+                    'alias' => 'xc',
                     'type' => 'number',
                     'label' => 'Role ID'
                 ]

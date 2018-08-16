@@ -724,7 +724,7 @@ class DataGrid
             //Run this if there are joins
             if (!empty($this->join)) {
 
-                foreach ($this->join as $join) {
+                foreach ($this->join as $index => $join) {
 
                     $name = strtolower($join['join']);
 
@@ -750,7 +750,8 @@ class DataGrid
                                     $alias2 = trim($exploded_secondary[0]);
 
                                     if ($alias1 == $alias2) {
-                                        $this->getQueryWithJoin();
+                                        if($index==count($this->join)-1)
+                                            $this->getQueryWithJoin();
                                         $alias_proper_secondary = true;
                                     } else {
                                         throw new \Exception('Aliases of Join table and the secondary key columns do not match');

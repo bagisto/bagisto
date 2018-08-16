@@ -15,7 +15,8 @@
         </div>
 
         <div class="page-content">
-
+            @inject('attributes','Webkul\Admin\DataGrids\AttributeDataGrid')
+            {!! $attributes->render() !!}
         </div>
     </div>
 @stop

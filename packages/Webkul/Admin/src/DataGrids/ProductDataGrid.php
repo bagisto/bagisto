@@ -7,30 +7,30 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
 
 
 /**
- * Attributes Family DataGrid
+ * Product DataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class AttributeFamilyDataGrid
+class ProductDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var CountryComposer
+     * @var AttributProductDataGrideDataGrid
      * for countries
      */
 
-    public function createAttributeFamilyDataGrid()
+    public function createProductDataGrid()
     {
 
             return DataGrid::make([
-            'name' => 'Attribute Family',
-            'table' => 'attribute_families',
-            'select' => 'id',
+            'name' => 'Products',
+            'table' => 'products as pr',
+            'select' => 'pr.id',
             'perpage' => 10,
-            'aliased' => false, //use this with false as default and true in case of joins
+            'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
                 [
@@ -58,74 +58,48 @@ class AttributeFamilyDataGrid
             'join' => [
                 // [
                 //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
+                //     'table' => 'category_translations as ct',
+                //     'primaryKey' => 'cat.id',
                 //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
+                //     'secondaryKey' => 'ct.category_id',
+                // ], [
+                //     'join' => 'leftjoin',
+                //     'table' => 'category_translations as cta',
+                //     'primaryKey' => 'cat.parent_id',
+                //     'condition' => '=',
+                //     'secondaryKey' => 'cta.category_id',
+                // ],
+
             ],
 
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
-
+                //name, alias, type, label, sortable
                 [
-                    'name' => 'id',
-                    'alias' => 'attributeFamilyId',
+                    'name' => 'pr.id',
+                    'alias' => 'productID',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Product ID',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'code',
-                    'alias' => 'attributeFamilyCode',
-                    'type' => 'string',
-                    'label' => 'Code',
-                    'sortable' => true,
-                ],
-                [
-                    'name' => 'name',
-                    'alias' => 'attributeFamilyName',
-                    'type' => 'string',
-                    'label' => 'Code',
+                    'name' => 'pr.sku',
+                    'alias' => 'productCode',
+                    'type' => 'number',
+                    'label' => 'Product Code',
                     'sortable' => true,
                 ],
             ],
 
             'filterable' => [
-                [
-                    'column' => 'id',
-                    'alias' => 'attributeFamilyId',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ],
-                [
-                    'column' => 'code',
-                    'alias' => 'attributeFamilyCode',
-                    'type' => 'string',
-                    'label' => 'Code',
-                ],
-                [
-                    'column' => 'name',
-                    'alias' => 'attributeFamilyName',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ],
+
             ],
 
             //don't use aliasing in case of searchables
 
             'searchable' => [
-                [
-                    'column' => 'name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ],
-                [
-                    'column' => 'code',
-                    'type' => 'string',
-                    'label' => 'Code',
-                ],
+                //column, type and label
             ],
 
             //list of viable operators that will be used
@@ -149,7 +123,7 @@ class AttributeFamilyDataGrid
     public function render()
     {
 
-        return $this->createAttributeFamilyDataGrid()->render();
+        return $this->createProductDataGrid()->render();
 
     }
 }

@@ -70,21 +70,21 @@ class CurrencyDataGrid
 
                 [
                     'name' => 'id',
-                    'alias' => 'currency_id',
+                    'alias' => 'currencyId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'currency_code',
+                    'alias' => 'currencyCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'currency_name',
+                    'alias' => 'currencyName',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
@@ -97,19 +97,19 @@ class CurrencyDataGrid
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'currency_id',
+                    'alias' => 'currencyId',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'currency_code',
+                    'alias' => 'currencyCode',
                     'type' => 'string',
                     'label' => 'Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'currency_name',
+                    'alias' => 'currencyName',
                     'type' => 'string',
                     'label' => 'Name',
                 ],
