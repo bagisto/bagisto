@@ -17,9 +17,8 @@ class ProductDataGrid
 {
     /**
      * The Data Grid implementation.
-     *
-     * @var AttributProductDataGrideDataGrid
-     * for countries
+     * @var ProductDataGrid
+     * for Products
      */
 
     public function createProductDataGrid()
