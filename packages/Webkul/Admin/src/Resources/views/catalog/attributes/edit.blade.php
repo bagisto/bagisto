@@ -220,7 +220,7 @@
     </div>
 @stop
 
-@section('javascript')
+@push('scripts')
     <script type="text/x-template" id="options-template">
         <div>
             <div class="table">
@@ -352,4 +352,4 @@
             })
         });
     </script>
-@stop
+@endpush

@@ -23,7 +23,7 @@ class AttributeTableSeeder extends Seeder
             'is_required' => 1,
             'value_per_locale' => 0,
             'value_per_channel' => 0,
-            'is_filterable' => 1,
+            'is_filterable' => 0,
             'is_configurable' => 0,
             'is_user_defined' => 0
         ], [
@@ -37,7 +37,7 @@ class AttributeTableSeeder extends Seeder
             'is_required' => 1,
             'value_per_locale' => 1,
             'value_per_channel' => 1,
-            'is_filterable' => 1,
+            'is_filterable' => 0,
             'is_configurable' => 0,
             'is_user_defined' => 0
         ], [
@@ -258,7 +258,7 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Width'
             ],
             'type' => 'text',
-            'validation' => 'number',
+            'validation' => 'numeric',
             'position' => 18,
             'is_required' => 0,
             'value_per_locale' => 0,
@@ -273,7 +273,7 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Height'
             ],
             'type' => 'text',
-            'validation' => 'number',
+            'validation' => 'numeric',
             'position' => 19,
             'is_required' => 0,
             'value_per_locale' => 0,
@@ -288,7 +288,7 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Depth'
             ],
             'type' => 'text',
-            'validation' => 'number',
+            'validation' => 'numeric',
             'position' => 20,
             'is_required' => 0,
             'value_per_locale' => 0,
@@ -303,7 +303,7 @@ class AttributeTableSeeder extends Seeder
                 'name' => 'Weight'
             ],
             'type' => 'text',
-            'validation' => 'number',
+            'validation' => 'numeric',
             'position' => 21,
             'is_required' => 1,
             'value_per_locale' => 0,

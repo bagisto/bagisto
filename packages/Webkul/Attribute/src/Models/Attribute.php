@@ -21,4 +21,23 @@ class Attribute extends TranslatableModel
     {
         return $this->hasMany(AttributeOption::class);
     }
+
+    /**
+     * Get the options.
+     */
+    public function filter_attributes()
+    {
+
+    }
+
+    /**
+     * Scope a query to only include popular users.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFilterableAttributes($query)
+    {
+        return $query->where('is_filterable', 1)->orderBy('position');
+    }
 }

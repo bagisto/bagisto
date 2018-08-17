@@ -125,7 +125,7 @@ class ProductController extends Controller
         $this->validate(request(), [
             'type' => 'required',
             'attribute_family_id' => 'required',
-            'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Code]
+            'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
         ]);
 
         $product = $this->product->create(request()->all());

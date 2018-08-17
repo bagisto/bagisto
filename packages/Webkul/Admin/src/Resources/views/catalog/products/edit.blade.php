@@ -53,7 +53,7 @@
 
                 <input name="_method" type="hidden" value="PUT">
 
-                @foreach($product->attribute_family->attribute_groups as $attributeGroup)
+                @foreach ($product->attribute_family->attribute_groups as $attributeGroup)
                     @if(count($attributeGroup->custom_attributes))
                         <accordian :title="'{{ __($attributeGroup->name) }}'" :active="true">
                             <div slot="body">
@@ -119,11 +119,15 @@
                     @endif
                 @endforeach
 
-                @foreach($form_accordians->items as $accordian)
-
-                    @include ($accordian['view'])
+                @if ($form_accordians)
                 
-                @endforeach
+                    @foreach ($form_accordians->items as $accordian)
+
+                        @include ($accordian['view'])
+                    
+                    @endforeach
+
+                @endif
 
             </div>
 
@@ -131,7 +135,7 @@
     </div>
 @stop
 
-@section('javascript')
+@push('scripts')
     <script>
 
         $(document).ready(function () {
@@ -143,4 +147,4 @@
             })
         });
     </script>
-@stop
+@endpush
