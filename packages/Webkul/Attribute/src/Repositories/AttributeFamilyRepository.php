@@ -70,13 +70,14 @@ class AttributeFamilyRepository extends Repository
             unset($group['custom_attributes']);
             $attributeGroup = $family->attribute_groups()->create($group);
 
-            foreach ($custom_attributes as $attribute) {
+            foreach ($custom_attributes as $key => $attribute) {
                 if(isset($attribute['id'])) {
-                    $attributeGroup->custom_attributes()->attach($attribute['id']);
+                    $attributeModel = $this->attribute->find($attribute['id']);
                 } else {
                     $attributeModel = $this->attribute->findBy('code', $attribute['code']);
-                    $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $attribute['position']]);
                 }
+                
+                $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
             }
         }
 
@@ -103,8 +104,9 @@ class AttributeFamilyRepository extends Repository
                     $attributeGroup = $family->attribute_groups()->create($attributeGroupInputs);
 
                     if(isset($attributeGroupInputs['custom_attributes'])) {
-                        foreach ($attributeGroupInputs['custom_attributes'] as $attribute) {
-                            $attributeGroup->custom_attributes()->attach($attribute['id']);
+                        foreach ($attributeGroupInputs['custom_attributes'] as $key => $attribute) {
+                            $attributeModel = $this->attribute->find($attribute['id']);
+                            $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
                         }
                     }
                 } else {
@@ -118,11 +120,12 @@ class AttributeFamilyRepository extends Repository
                     $attributeIds = $attributeGroup->custom_attributes()->get()->pluck('id');
 
                     if(isset($attributeGroupInputs['custom_attributes'])) {
-                        foreach ($attributeGroupInputs['custom_attributes'] as $attribute) {
+                        foreach ($attributeGroupInputs['custom_attributes'] as $key => $attribute) {
                             if(is_numeric($index = $attributeIds->search($attribute['id']))) {
                                 $attributeIds->forget($index);
                             } else {
-                                $attributeGroup->custom_attributes()->attach($attribute['id']);
+                                $attributeModel = $this->attribute->find($attribute['id']);
+                                $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
                             }
                         }
                     }

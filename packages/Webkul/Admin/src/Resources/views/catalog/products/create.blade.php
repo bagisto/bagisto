@@ -131,7 +131,7 @@
     </div>
 @stop
 
-@section('javascript')
+@push('scripts')
     <script>
         $(document).ready(function () {
             $('.label .cross-icon').on('click', function(e) {
@@ -143,4 +143,4 @@
             })
         });
     </script>
-@stop
+@endpush

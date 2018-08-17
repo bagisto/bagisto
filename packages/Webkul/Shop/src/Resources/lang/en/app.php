@@ -31,4 +31,8 @@ return [
             'button_title' => 'Sign In'
         ]
     ],
+
+    'products' => [
+        'layered-nav-title' => 'Shop By'
+    ]
 ];

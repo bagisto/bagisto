@@ -112,7 +112,3 @@
         </form>
     </div>
 @stop
-
-@section('javascript')
-
-@stop

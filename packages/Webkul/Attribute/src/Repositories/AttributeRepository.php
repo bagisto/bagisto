@@ -50,6 +50,8 @@ class AttributeRepository extends Repository
      */
     public function create(array $data)
     {
+        $data = $this->validateUserInput($data);
+
         $options = isset($data['options']) ? $data['options'] : [];
         unset($data['options']);
         $attribute = $this->model->create($data);
@@ -71,6 +73,8 @@ class AttributeRepository extends Repository
      */
     public function update(array $data, $id, $attribute = "id")
     {
+        $data = $this->validateUserInput($data);
+
         $attribute = $this->findOrFail($id);
 
         $attribute->update($data);
@@ -98,5 +102,30 @@ class AttributeRepository extends Repository
         }
 
         return $attribute;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function validateUserInput($data)
+    {
+        if($data['is_configurable']) {
+            $data['value_per_channel'] = $data['value_per_locale'] = 0;
+        }
+
+        if(!in_array($data['type'], ['select', 'multiselect', 'price'])) {
+            $data['is_filterable'] = 0;
+        }
+
+        return $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFilterAttributes()
+    {
+        return $this->model->filterableAttributes()->get();
     }
 }

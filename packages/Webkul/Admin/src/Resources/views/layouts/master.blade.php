@@ -52,7 +52,7 @@
         <script type="text/javascript" src="{{ asset('vendor/webkul/admin/assets/js/admin.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
 
-        @yield('javascript')
+        @stack('scripts')
 
         <div class="modal-overlay"></div>
     </body>

@@ -8,8 +8,6 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Webkul\Shop\Providers\ComposerServiceProvider;
 
-// use Webkul\Shop\Providers\EventServiceProvider;
-
 class ShopServiceProvider extends ServiceProvider
 {
     /**
@@ -24,16 +22,10 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'shop');
 
         $this->publishes([
-            __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/shop/assets'),
+            __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
         ], 'public');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shop');
-
-        // $this->composeView();
-
-        Blade::directive('continue', function () {
-            return "<?php continue; ?>";
-        });
 
         $this->app->register(ComposerServiceProvider::class);
     }

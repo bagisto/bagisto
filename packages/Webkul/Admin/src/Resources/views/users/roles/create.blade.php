@@ -60,7 +60,7 @@
     </div>
 @stop
 
-@section('javascript')
+@push('scripts')
     <script>
         $(document).ready(function () {
             $('#permission_type').on('change', function(e) {
@@ -73,4 +73,4 @@
             })
         });
     </script>
-@stop
+@endpush

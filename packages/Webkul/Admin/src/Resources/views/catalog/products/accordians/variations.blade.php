@@ -37,7 +37,7 @@
     </div>
 </modal>
 
-@section('javascript')
+@push('scripts')
     @parent
 
     <script type="text/x-template" id="variant-form-template">
@@ -343,5 +343,5 @@
 
         });
     </script>
-@stop
+@endpush
 @endif
