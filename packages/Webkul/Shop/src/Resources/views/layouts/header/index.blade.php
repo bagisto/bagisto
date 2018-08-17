@@ -106,11 +106,12 @@
     </div>
 
     <div class="header-bottom">
-        @include('shop::layouts.header.nav-menu.navmenu')
+    @include('shop::layouts.header.nav-menu.navmenu')
     </div>
 
 </div>
-@section('javascript')
+
+@push('scripts')
 <script>
     $(window).resize(function() {
         var w = $(document).width();
@@ -151,4 +152,4 @@
         /* Responsiveness script ends here */
     });
 </script>
-@endsection
+@endpush

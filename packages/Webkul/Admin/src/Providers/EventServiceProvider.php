@@ -123,7 +123,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function createProductFormAccordian()
     {
-
         Event::listen('admin.catalog.products.accordian.create', function() {
             return ProductFormAccordian::create(function($accordian) {
                 Event::fire('admin.catalog.products.accordian.build', $accordian);

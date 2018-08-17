@@ -69,7 +69,7 @@
     </modal>
 @stop
 
-@section('javascript')
+@push('scripts')
 
     <script type="text/x-template" id="group-form-template">
         <form method="POST" action="{{ route('admin.catalog.families.store') }}" data-vv-scope="add-group-form" @submit.prevent="addGroup('add-group-form')">
@@ -342,4 +342,4 @@
             }
         });
     </script>
-@stop 
+@endpush 

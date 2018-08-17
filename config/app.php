@@ -186,7 +186,8 @@ return [
         Webkul\Inventory\Providers\InventoryServiceProvider::class,
         Webkul\Product\Providers\ProductServiceProvider::class,
         Webkul\Shop\Providers\ShopServiceProvider::class,
-        Webkul\Customer\Providers\CustomerServiceProvider::class
+        Webkul\Customer\Providers\CustomerServiceProvider::class,
+        Webkul\Theme\Providers\ThemeServiceProvider::class
     ],
 
     /*

@@ -7,7 +7,7 @@
     @include('ui::datagrid.table.default')
 
     {{-- Section for datagrid javascript --}}
-    @section('javascript')
+    @push('scripts')
         <script type="text/javascript">
             var columns = @json($columns); //referential
             var allFilters = [];
@@ -500,6 +500,6 @@
                 }
             }
         </script>
-    @endsection
+    @endpush
 
 </div>

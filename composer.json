@@ -36,7 +36,8 @@
         "webkul/laravel-category": "self.version",
         "webkul/laravel-channel": "self.version",
         "webkul/laravel-product": "self.version",
-        "webkul/laravel-shop": "self.version"
+        "webkul/laravel-shop": "self.version",
+        "webkul/laravel-theme": "self.version"
     },
     "autoload": {
         "classmap": [
@@ -55,7 +56,8 @@
             "Webkul\\Customer\\": "packages/Webkul/Customer/src",
             "Webkul\\Channel\\": "packages/Webkul/Channel/src",
             "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
-            "Webkul\\Product\\": "packages/Webkul/Product/src"
+            "Webkul\\Product\\": "packages/Webkul/Product/src",
+            "Webkul\\Theme\\": "packages/Webkul/Theme/src"
         }
     },
     "autoload-dev": {
