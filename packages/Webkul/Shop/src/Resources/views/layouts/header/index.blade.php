@@ -72,7 +72,7 @@
         </div>
     </div>
     <div class="header-bottom">
-    @include('shop::store.header.nav-menu.navmenu')
+    @include('shop::layouts.header.nav-menu.navmenu')
     </div>
 </div>
 
