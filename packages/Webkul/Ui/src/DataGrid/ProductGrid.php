@@ -9,38 +9,49 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\Helpers\Column;
 use Webkul\Ui\DataGrid\Helpers\Pagination;
 use Webkul\Ui\DataGrid\Helpers\Css;
-use Webkul\Ui\DataGrid\Helpers\MassAction;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use URL;
 
-
 /**
- * Products DataGrid
+ * DataGrid controller
  *
+ * @author    Nikhil Malik <nikhil@webkul.com> @ysmnikhil
+ * &
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ *
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
 
 class ProductGrid
 {
+
     /**
      * Name of DataGrid
      *
      * @var string
      */
+
     protected $name;
+
+
     /**
      * select from table(s)
      *
      * @var string
      */
+
     protected $select;
+
 
     /**
     * Table
     * @var Boolean for aliasing
     */
+
     protected $aliased;
+
 
     /**
      * Pagination variable
@@ -49,6 +60,7 @@ class ProductGrid
 
     protected $perpage;
 
+
     /**
      * Table
      *
@@ -56,6 +68,8 @@ class ProductGrid
      */
 
     protected $table;
+
+
     /**
      * Join
      *
@@ -70,88 +84,110 @@ class ProductGrid
      *      'callback' => 'not supported yet'
      * ]
      */
-    protected $join;
-    /**
+
+     protected $join;
+
+
+     /**
      * Collection Object of Column $columns
      *
      * @var Collection
      */
-    protected $columns;
 
-    /**
+     protected $columns;
+
+
+     /**
      * array of columns
      * to be filtered
      * @var Array
      */
-    protected $filterable;
 
-    /**
+     protected $filterable;
+
+
+     /**
      * array of columns
      * to be searched
      *
      * @var Array
      */
-    protected $searchable;
 
-    /**
+     protected $searchable;
+
+
+     /**
      * mass operations
      *
      * @var Array
      */
-    protected $massoperations;
 
-    /**
+     protected $massoperations;
+
+
+     /**
      * Pagination $pagination
      *
      * @var Pagination
      */
-    protected $pagination;
+
+
+     protected $pagination;
+
+
     /**
      * Css $css
      *
      * @var Css
      */
-    protected $css;
+
+     protected $css;
+
+
+     /**
+     * Actions $action
+     * @var action
+     */
+
+    protected $actions;
+
 
     /**
      * URL parse $parsed
      * @var parse
      */
-    protected $parsed;
-    /*
-    public function __construct(
-        $name = null ,
-        $table = null ,
-        array $join = [],
-        Collection $columns = null,
-        Pagination $pagination = null
-    ){
-        $this->make(
-            $name,
-            $table,
-            $join,
-            $columns,
-            $pagination
-        );
-        return $this;
 
-        Separates the bags in the array of make attributes
-    }
-    */
+     protected $parsed;
 
+    //Prepares the input parameters passed as the configuration for datagrid.
     public function make($args)
     {
         // list($name, $select, $table, $join, $columns) = array_values($args);
         $name = $select = $aliased = $table = false;
         $join = $columns = $filterable = $searchable =
-        $massoperations = $css = $operators = [];
+        $massoperations = $css = $operators = $actions = [];
         extract($args);
-        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $perpage, $table, $join, $columns, $css, $operators);
+        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $perpage, $table, $join, $columns, $css, $operators,$actions);
     }
 
-    //starts buikding the queries on the basis of selects, joins and filter with
-    //attributes for class names and styles.
+    //contructor for getting the current locale and channel
 
+    private $locale;
+    private $channel;
+    private $attributes;
+    private $allAttributes;
+    private $product_attribute_values;
+
+    public function __construct(AttributeRepository $attributes, ProductAttributeValueRepository $product_attribute_values) {
+
+        $this->channel = request()->get('channel') ?: channel()->getChannel();
+        $this->locale = request()->get('locale') ?: app()->getLocale();
+        $this->attributes = $attributes;
+        $this->product_attribute_values = $product_attribute_values;
+
+    }
+
+    //This assigns the private and public properties of the datagrid classes from make functions
     public function build(
         $name = null,
         $select = false,
@@ -165,6 +201,7 @@ class ProductGrid
         array $columns = null,
         array $css = [],
         array $operators = [],
+        array $actions = [],
         Pagination $pagination = null
     ) {
         $this->request = Request::capture();
@@ -180,6 +217,7 @@ class ProductGrid
         $this->addColumns($columns, true);
         $this->setCss($css);
         $this->setOperators($operators);
+        $this->setActions($actions);
         // $this->addPagination($pagination);
         return $this;
     }
@@ -318,6 +356,17 @@ class ProductGrid
     // }
 
     /**
+     * Section actions bag
+     * here.
+     * @return $this
+     */
+
+    public function setActions($actions = []) {
+        $this->actions = $actions ?: [];
+        return $this;
+    }
+
+    /**
      * Add Columns.
      *
      * @return $this
@@ -430,11 +479,46 @@ class ProductGrid
     {
         $select = [];
         foreach ($this->columns as $column) {
-            $select[] = $column->name;
+            $select[] = $column->name.' as '.$column->alias;
         }
+
         $this->query->select(...$select);
+
         if ($this->select) {
             $this->query->addselect($this->select);
+        }
+
+    }
+
+    /**
+     * This function will
+     * map and resolve the
+     * product attributes
+     * and thier values
+     * per channel and per
+     * locale.
+     *
+     * @return Array
+     */
+
+    private function resolveOrMapAttributes () {
+        return $this->query->get();
+    }
+
+
+    /**
+     * To find the alias
+     * of the column and
+     * by taking the column
+     * name.
+     * @return string
+     */
+
+    public function findAlias($column_alias) {
+        foreach($this->columns as $column) {
+            if($column->alias == $column_alias) {
+                return $column->name;
+            }
         }
     }
 
@@ -442,6 +526,8 @@ class ProductGrid
      * Parse the URL
      * and get it ready
      * to be used.
+     *
+     * @return String
      */
 
     private function parse()
@@ -468,7 +554,18 @@ class ProductGrid
         foreach ($this->join as $join) {
             $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondaryKey']);
         }
+        $this->query->get();
+
     }
+
+    /**
+     * Use this function
+     * when taking filters
+     * on columns while
+     * fetching columns
+     *
+     * @return array
+     */
 
     private function getQueryWithColumnFilters()
     {
@@ -514,7 +611,7 @@ class ProductGrid
                 if ($key=="sort") {
                     //resolve the case with the column helper class
                     if(substr_count($key,'_') >= 1)
-                        $column_name = str_replace_first('_', '.', $key);
+                        $column_name = $this->findAlias($key);
 
                     //case that don't need any resolving
                     $count_keys = count(array_keys($value));
@@ -536,8 +633,7 @@ class ProductGrid
                         }
                     });
                 } else {
-                    $column_name = str_replace_first('_', '.', $key);
-
+                    $column_name = $this->findAlias($key);
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
                             $this->query->where(
@@ -588,9 +684,8 @@ class ProductGrid
                         throw new \Exception('Multiple Search keys Found, Please Resolve the URL Manually.');
 
                 } else {
-
-                    $column_name = $key;
-
+                    // $column_name = $key;
+                    $column_name = $this->findAlias($key);
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
                             $this->query->where(
@@ -619,6 +714,7 @@ class ProductGrid
         $parsed = $this->parse();
 
         if ($this->aliased==true) {
+
             //flags
             $table_alias = false;
             $join_table_alias = false;
@@ -631,7 +727,7 @@ class ProductGrid
 
             //explode if alias is available
             if (strpos('.', $this->table)) {
-                throw new \Exception("dot/s cannot be used in table names in mysql");
+                throw new \Exception("Dot(s) cannot be used in table names in Database.");
             } else {
                 $exploded = explode('as', $this->table);
             }
@@ -644,6 +740,7 @@ class ProductGrid
                 $table_name = trim($exploded[0]);
                 $table_alias = trim($exploded[1]);
             }
+
             //Run this if there are any selects priorly.
             if (!empty($this->select)) {
                 $this->getSelect();
@@ -651,8 +748,11 @@ class ProductGrid
 
             //Run this if there are joins
             if (!empty($this->join)) {
-                foreach ($this->join as $join) {
+
+                foreach ($this->join as $index => $join) {
+
                     $name = strtolower($join['join']);
+
                     //Allow joins i.e left or right
                     if ($name=='leftjoin' || $name=='rightjoin') {
 
@@ -660,46 +760,57 @@ class ProductGrid
                         $primary_key_alias = trim(explode('.', $join['primaryKey'])[0]);
 
                         if ($primary_key_alias == $table_alias) {
+
                             $join_table_alias = explode('as', $join['table']);
+
                             if (isset($join_table_alias)) {
+
                                 $alias1 = trim($join_table_alias[1]); //important!!!!!
 
                                 //check if the secondary table match column is not having '.' and has proper alias
                                 $secondary_join_column = $join['secondaryKey'];
                                 if (isset($secondary_join_column)) {
+
                                     $exploded_secondary = explode('.', $secondary_join_column);
                                     $alias2 = trim($exploded_secondary[0]);
+
                                     if ($alias1 == $alias2) {
-                                        $this->getQueryWithJoin();
+                                        if($index==count($this->join)-1)
+                                            $this->getQueryWithJoin();
                                         $alias_proper_secondary = true;
                                     } else {
-                                        throw new \Exception('Aliases of Join table and the secondary key columns do not match');
+                                        throw new \Exception('Aliases of Join table and the secondary key columns do not match.');
+
                                     }
                                 } else {
-                                    throw new \Exception('Improper aliasing on secondary/join column for join');
+                                    throw new \Exception('Improper aliasing on secondary/join column for join.');
                                 }
+
                             } else {
-                                throw new \Exception('Join/Secondary table alias is not found for join');
+                                throw new \Exception('Join/Secondary table alias is not found for join.');
                             }
                         } else {
-                            throw new \Exception('Primary key and primary table aliases do not match for join');
+                            throw new \Exception('Primary key and primary table aliases do not match for join.');
                         }
                     } else {
                         $other_joins = true;
-                        throw new \Exception('Please check if there is some fault in your aliasing and do not use as in column names or you might have been using a join that is not allowed i.e cross, inner, etc use left and right join only');
+                        throw new \Exception('Please check if there is some fault in your aliasing and do not use as in column names or you might have been using a join that is not allowed i.e cross, inner, etc use left and right join only.');
                     }
                 }
             }
 
             //Check for column filter bags and resolve aliasing
             $this->getQueryWithColumnFilters();
+
             if (!empty($parsed)) {
                 $this->getQueryWithFilters();
             }
+
             // $this->results = $this->query->get();
-            // return $this->results;
-            $this->results = $this->query->get();
-            $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
+
+            // $this->results = $this->query->distinct()->paginate($this->perpage)->appends(request()->except('page'));
+            $this->results = $this->query->paginate($this->perpage)->appends(request()->input());
+
             return $this->results;
 
         } else {
@@ -707,23 +818,36 @@ class ProductGrid
             $this->query = DB::table($this->table);
 
             $this->getSelect();
+
             $this->getQueryWithColumnFilters();
+
             if (!empty($parsed)) {
                 $this->getQueryWithFilters();
             }
-            $this->results = $this->query->get();
-            $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
+
+            // $this->results = $this->query->get();
+
+            $this->results = $this->query->distinct()->paginate($this->perpage)->appends(request()->except('page'));
+
             return $this->results;
         }
     }
 
     /**
+     * Main Render Function,
+     * it renders views responsible
+     * for loading datagrid.
+     *
      * @return view
      */
 
     public function render()
     {
+
+        $this->allAttributes = $this->getAttributes();
+        // dump($this->channel, $this->locale);
         $this->getDbQueryResults();
+
         return view('ui::datagrid.index', [
             'css' => $this->css,
             'results' => $this->results,
@@ -731,6 +855,18 @@ class ProductGrid
             'filterable' =>$this->filterable,
             'operators' => $this->operators,
             'massoperations' => $this->massoperations,
+            'actions' => $this->actions,
         ]);
+    }
+
+    /**
+     * Getting all attributes from the repository instance
+     * type hinted in the contructor of product grid.
+     *
+     * @return $this
+     */
+    public function getAttributes() {
+        // dd($this->attributes->all());
+        return $this->attributes->all();
     }
 }

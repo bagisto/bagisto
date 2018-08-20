@@ -3,8 +3,9 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
-
+use Webkul\Ui\DataGrid\Facades\ProductGrid;
+use Webkul\Channel\Repositories\ChannelRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 /**
  * Product DataGrid
@@ -24,20 +25,20 @@ class ProductDataGrid
     public function createProductDataGrid()
     {
 
-            return DataGrid::make([
+        return ProductGrid::make([
             'name' => 'Products',
-            'table' => 'products as pr',
-            'select' => 'pr.id',
+            'table' => 'products as prods',
+            'select' => 'prods.id',
             'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [
@@ -55,19 +56,38 @@ class ProductDataGrid
             ],
 
             'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'category_translations as ct',
-                //     'primaryKey' => 'cat.id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'ct.category_id',
-                // ], [
-                //     'join' => 'leftjoin',
-                //     'table' => 'category_translations as cta',
-                //     'primaryKey' => 'cat.parent_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'cta.category_id',
-                // ],
+
+                //for getting name of attrib family.
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'attribute_families as attfam',
+                    'primaryKey' => 'prods.attribute_family_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'attfam.id',
+                ],
+
+                //for getting the attribute values.
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'product_attribute_values as pav',
+                    'primaryKey' => 'prods.id',
+                    'condition' => '=',
+                    'secondaryKey' => 'pav.product_id',
+                    'where' => [
+                        'column1' => 'prods.id',
+                        'condition' => '=',
+                        'column2' => 'pav.product_id'
+                    ]
+                ],
+
+                //for getting the inventory quantity of a product
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'product_inventories as pi',
+                    'primaryKey' => 'prods.id',
+                    'condition' => '=',
+                    'secondaryKey' => 'pi.product_id',
+                ],
 
             ],
 
@@ -76,20 +96,53 @@ class ProductDataGrid
             'columns' => [
                 //name, alias, type, label, sortable
                 [
-                    'name' => 'pr.id',
+                    'name' => 'prods.id',
                     'alias' => 'productID',
                     'type' => 'number',
-                    'label' => 'Product ID',
+                    'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'pr.sku',
+                    'name' => 'prods.sku',
                     'alias' => 'productCode',
-                    'type' => 'number',
-                    'label' => 'Product Code',
+                    'type' => 'string',
+                    'label' => 'SKU',
                     'sortable' => true,
                 ],
+                [
+                    'name' => 'attfam.name',
+                    'alias' => 'attributeFamily',
+                    'type' => 'string',
+                    'label' => 'Attribute Family',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'pi.qty',
+                    'alias' => 'ProductQuantity',
+                    'type' => 'string',
+                    'label' => 'Product Quatity',
+                    'sortable' => false,
+                ],
+                [
+                    'name' => 'pav.product_id',
+                    'alias' => 'ProductID',
+                    'type' => 'string',
+                    'label' => 'Product ID',
+                    'sortable' => false,
+
+                ],
             ],
+
+            //use this bag for fetching attributes as columns in product datagrid.
+            // 'attributes' => [
+            //     [
+            //         'name' => 'pi.qty',
+            //         'alias' => 'ProductQuantity',
+            //         'type' => 'string',
+            //         'label' => 'Product Quatity',
+            //         'sortable' => false,
+            //     ]
+            // ],
 
             'filterable' => [
 
@@ -121,8 +174,9 @@ class ProductDataGrid
 
     public function render()
     {
-
         return $this->createProductDataGrid()->render();
+        // return $this->getProducts();
 
     }
+
 }

@@ -9,7 +9,7 @@ use Webkul\Attribute\Models\Attribute;
 class AttributeOption extends TranslatableModel
 {
     public $timestamps = false;
-    
+
     public $translatedAttributes = ['label'];
 
     protected $fillable = ['admin_name', 'sort_order'];
@@ -19,6 +19,6 @@ class AttributeOption extends TranslatableModel
      */
     public function attribute()
     {
-        return $this->belongsTo(Attribute::class);
+        return $this->model()->getCustomAttributesAttribute();
     }
 }
