@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Webkul\Core\Repositories\SliderRepository as Sliders;
-use Webkul\Channel\Channel as Channel;
 /**
  * Admin user session controller
  *
@@ -19,16 +18,15 @@ class HomeController extends controller
     protected $sliders;
     protected $current_channel;
 
-    public function __construct(Sliders $s,Channel $c)
+    public function __construct(Sliders $s)
     {
         $this->_config = request('_config');
         $this->sliders = $s;
-        $this->current_channel = $c;
 
     }
     public function index() {
 
-        $current_channel = $this->current_channel->getCurrentChannel();
+        $current_channel = core()->getCurrentChannel();
 
         $all_sliders = $this->sliders->findWhere(['channel_id'=>$current_channel['id']]);
 

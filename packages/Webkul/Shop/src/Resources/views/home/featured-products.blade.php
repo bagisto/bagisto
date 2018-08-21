@@ -1,13 +1,13 @@
 <section class="featured-products">
     <div class="featured-heading">
-        New Products<br/>
+        Featured Products<br/>
         <span class="featured-seperator" style="color:lightgrey;">_____</span>
     </div>
 
-    <div class="featured-grid">
+    <div class="featured-grid product-grid max-4-col">
         <div class="product-card">
             <div class="product-image">
-                <img src="vendor/webkul/shop/assets/images/new.png" />
+                <img src="vendor/webkul/shop/assets/images/grid.png" />
             </div>
             <div class="product-name">
                 <span>Red Black Tees</span>
@@ -21,13 +21,13 @@
                 </span>
             </div>
             <div class="cart-fav-seg">
-                <button class="btn btn-lg btn-primary addtocart">Add to Cart</button>
+                <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
                 <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
             </div>
         </div>
         <div class="product-card">
             <div class="product-image">
-                <img src="vendor/webkul/shop/assets/images/new.png" />
+                <img src="vendor/webkul/shop/assets/images/gogs.png" />
             </div>
             <div class="product-name">
                 <span>Red Black Tees</span>
@@ -41,13 +41,13 @@
                     </span>
             </div>
             <div class="cart-fav-seg">
-                <button class="btn btn-lg btn-primary addtocart">Add to Cart</button>
+                <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
                 <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
             </div>
         </div>
         <div class="product-card">
             <div class="product-image">
-                <img src="vendor/webkul/shop/assets/images/new.png" />
+                <img src="vendor/webkul/shop/assets/images/grid.png" />
             </div>
             <div class="product-name">
                 <span>Red Black Tees</span>
@@ -61,13 +61,13 @@
                     </span>
             </div>
             <div class="cart-fav-seg">
-                <button class="btn btn-lg btn-primary addtocart">Add to Cart</button>
+                <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
                 <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
             </div>
         </div>
         <div class="product-card">
             <div class="product-image">
-                <img src="vendor/webkul/shop/assets/images/new.png" />
+                <img src="vendor/webkul/shop/assets/images/gogs.png" />
             </div>
             <div class="product-name">
                 <span>Red Black Tees</span>
@@ -81,7 +81,7 @@
                     </span>
             </div>
             <div class="cart-fav-seg">
-                <button class="btn btn-lg btn-primary addtocart">Add to Cart</button>
+                <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
                 <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
             </div>
         </div>

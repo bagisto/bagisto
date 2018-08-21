@@ -7,7 +7,7 @@
 @section('content')
     <div class="content">
         <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
-        <?php $channel = request()->get('channel') ?: channel()->getChannel(); ?>
+        <?php $channel = request()->get('channel') ?: core()->getCurrentChannelCode(); ?>
 
         <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
@@ -18,7 +18,7 @@
 
                     <div class="control-group">
                         <select class="control" id="channel-switcher" name="channel">
-                            @foreach(channel()->getAllChannels() as $channelModel)
+                            @foreach(core()->getAllChannels() as $channelModel)
                                 
                                 <option value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
                                     {{ $channelModel->name }}

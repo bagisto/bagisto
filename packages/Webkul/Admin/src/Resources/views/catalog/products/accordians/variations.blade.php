@@ -1,4 +1,5 @@
 @if ($product->type == 'configurable')
+
 @section('css')
     @parent
     <style>

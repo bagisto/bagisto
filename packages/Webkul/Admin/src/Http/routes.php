@@ -271,23 +271,23 @@ Route::group(['middleware' => ['web']], function () {
 
 
             // Channel Routes
-            Route::get('/channels', 'Webkul\Channel\Http\Controllers\ChannelController@index')->defaults('_config', [
+            Route::get('/channels', 'Webkul\Core\Http\Controllers\ChannelController@index')->defaults('_config', [
                 'view' => 'admin::settings.channels.index'
             ])->name('admin.channels.index');
 
-            Route::get('/channels/create', 'Webkul\Channel\Http\Controllers\ChannelController@create')->defaults('_config', [
+            Route::get('/channels/create', 'Webkul\Core\Http\Controllers\ChannelController@create')->defaults('_config', [
                 'view' => 'admin::settings.channels.create'
             ])->name('admin.channels.create');
 
-            Route::post('/channels/create', 'Webkul\Channel\Http\Controllers\ChannelController@store')->defaults('_config', [
+            Route::post('/channels/create', 'Webkul\Core\Http\Controllers\ChannelController@store')->defaults('_config', [
                 'redirect' => 'admin.channels.index'
             ])->name('admin.channels.store');
 
-            Route::get('/channels/edit/{id}', 'Webkul\Channel\Http\Controllers\ChannelController@edit')->defaults('_config', [
+            Route::get('/channels/edit/{id}', 'Webkul\Core\Http\Controllers\ChannelController@edit')->defaults('_config', [
                 'view' => 'admin::settings.channels.edit'
             ])->name('admin.channels.edit');
 
-            Route::put('/channels/edit/{id}', 'Webkul\Channel\Http\Controllers\ChannelController@update')->defaults('_config', [
+            Route::put('/channels/edit/{id}', 'Webkul\Core\Http\Controllers\ChannelController@update')->defaults('_config', [
                 'redirect' => 'admin.channels.index'
             ])->name('admin.channels.update');
 

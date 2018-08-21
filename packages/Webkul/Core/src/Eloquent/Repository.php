@@ -167,4 +167,12 @@ abstract class Repository implements RepositoryInterface {
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getModel()
+    {
+        return $this->model;
+    }
 }

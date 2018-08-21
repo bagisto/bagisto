@@ -33,6 +33,8 @@ return [
     ],
 
     'products' => [
-        'layered-nav-title' => 'Shop By'
+        'layered-nav-title' => 'Shop By',
+        'price-label' => 'As low as',
+        'remove-filter-link-title' => 'Clear All'
     ]
 ];
