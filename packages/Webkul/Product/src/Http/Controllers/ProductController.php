@@ -24,28 +24,28 @@ class ProductController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * AttributeFamilyRepository object
      *
      * @var array
      */
     protected $attributeFamily;
-    
+
     /**
      * CategoryRepository object
      *
      * @var array
      */
     protected $category;
-    
+
     /**
      * InventorySourceRepository object
      *
      * @var array
      */
     protected $inventorySource;
-    
+
     /**
      * ProductRepository object
      *

@@ -58,7 +58,7 @@ body {
                         font-size: 14px;
                     }
 
-                    .q-c {
+                    .search-icon-wrapper {
                         box-sizing: border-box;
                         height: 38px;
                         width: 38px;
@@ -113,10 +113,10 @@ body {
                 }
             }
 
-            ul.product-dropdown-container {
+            ul.cart-dropdown {
                 float: right;
 
-                li.product-dropdown {
+                li.cart-summary {
                     display: flex;
                     flex-direction: row;
                     margin-left: 14px;
@@ -284,44 +284,65 @@ body {
     }
 }
 
-.slider-block {
+section.slider-block {
     display: block;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
     margin-bottom: 5%;
 
-    .slider-content {
+    div.slider-content {
+        width: 80%;
+        height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+
+
         ul.slider-images {
-            li img {
-                width: 100%;
-                height: 500px;
-                object-fit: fill;
+
+            li{
+                //both rules are equivalent to display none
+                position: absolute;
+                visibility: hidden;
             }
 
-            .slider-control {
-                display: inline-block;
-                vertical-align: middle;
-                position: absolute;
-                right: 10%;
-                margin-top: -60px;
-                margin-right: 10px;
+            li.show {
+                display:block;
+                visibility: visible;
+                width: 80%;
+                animation-name: example;
+                animation-duration: 4s;
+            }
 
-                .dark-left-icon {
-                    background-color: white;
-                    height: 48px;
-                    width: 48px;
-                    max-height: 100%;
-                    max-width: 100%;
-                }
+            @keyframes example {
+                0%   {opacity: 0.1;}
+                100% {opacity: 1;}
+            }
 
-                .light-right-icon {
-                    background-color: black;
-                    height: 48px;
-                    width: 48px;
-                    max-height: 100%;
-                    max-width: 100%;
-                }
+            li img {
+                height: 500px;
+                width:100%;
+            }
+        }
+        div.slider-control {
+            display: block;
+            position: absolute;
+            user-select: none;
+            bottom: 2%;
+            right: 11%;
+
+
+            .dark-left-icon {
+                background-color: $background-color;
+                height: 48px;
+                width: 48px;
+                max-height: 100%;
+                max-width: 100%;
+            }
+
+            .light-right-icon {
+                background-color: $color-black;
+                height: 48px;
+                width: 48px;
+                max-height: 100%;
+                max-width: 100%;
             }
         }
     }
@@ -384,7 +405,7 @@ body {
 
                         .checkbox {
                             margin: 0;
-                            
+
                             .checkbox-view {
                                 height: 16px;
                                 width: 16px;
@@ -452,7 +473,7 @@ body {
                 margin-bottom: 14px;
                 width: 100%;
             }
-            
+
             .product-price {
                 font-size: 16px;
                 margin-bottom: 14px;
@@ -572,7 +593,7 @@ body {
 }
 
 .footer {
-    background-color: $background-color;
+    background-color: $footer-back;
     padding-left: 10%;
     padding-right: 10%;
 
@@ -733,7 +754,7 @@ body {
         align-content: center;
         justify-content: flex-start;
         border: 1px solid #e8e8e8;
-        background: #ffffff;
+        background: $background-color;
         width: 25%;
         height: 100%;
         text-transform: capitalize;
@@ -762,7 +783,7 @@ body {
         }
 
         li.active {
-            color: #0031f0;
+            color: $forgot-password-color;
         }
     }
 
@@ -815,7 +836,7 @@ body {
             }
         }
     }
-    
+
     //edit form
     .edit-form-content {
         margin-left: 5.5%;

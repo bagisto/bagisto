@@ -136,7 +136,7 @@ class AttributeFamilyTableSeeder extends Seeder
     {
         $this->attributeFamily = $attributeFamily;
     }
-    
+
     public function run()
     {
         foreach($this->rawData as $row) {

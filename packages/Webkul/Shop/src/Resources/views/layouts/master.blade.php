@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
 
     @yield('head')
-    
+
     @yield('css')
 
 </head>
@@ -34,7 +34,7 @@
             </div>
 
         </div>
-        
+
         @include('shop::layouts.footer')
 
     </div>
@@ -57,7 +57,7 @@
 
     <script type="text/javascript" src="{{ bagisto_asset('js/shop.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
-    
+
     @stack('scripts')
 
 </body>

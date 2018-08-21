@@ -4,7 +4,7 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                {{ __('admin::app.catalog.products.products') }}
+                <h1>{{ __('admin::app.catalog.products.products') }}</h1>
             </div>
 
             <div class="page-action">
@@ -15,7 +15,8 @@
         </div>
 
         <div class="page-content">
-        
+            @inject('product','Webkul\Admin\DataGrids\ProductDataGrid')
+            {!! $product->render() !!}
         </div>
     </div>
 @stop

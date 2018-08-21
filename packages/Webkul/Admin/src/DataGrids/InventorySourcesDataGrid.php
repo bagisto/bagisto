@@ -1,34 +1,31 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
+/**
+ * Inventory Sources DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 
-class LocalesComposer
+class InventorySourcesDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var CountryComposer
-     * for countries
+     * @var InventorySourcesDataGrid
+     * for Inventory Sources
      */
 
-
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createInventorySourcesDataGrid()
     {
-
-        $datagrid = DataGrid::make([
-            'name' => 'Locales',
-            'table' => 'locales',
+        return DataGrid::make([
+            'name' => 'Inventory Sources',
+            'table' => 'inventory_sources',
             'select' => 'id',
             'perpage' => 5,
             'aliased' => false, //use this with false as default and true in case of joins
@@ -72,23 +69,37 @@ class LocalesComposer
 
                 [
                     'name' => 'id',
-                    'alias' => 'locale_id',
+                    'alias' => 'inventoryID',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'locale_code',
+                    'alias' => 'inventoryCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'locale_name',
+                    'alias' => 'inventoryName',
                     'type' => 'string',
                     'label' => 'Name',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'priority',
+                    'alias' => 'inventoryPriority',
+                    'type' => 'string',
+                    'label' => 'Priority',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'status',
+                    'alias' => 'inventoryStatus',
+                    'type' => 'string',
+                    'label' => 'Status',
                     'sortable' => true,
                 ],
 
@@ -99,19 +110,19 @@ class LocalesComposer
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'locale_id',
+                    'alias' => 'inventoryId',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'locale_code',
+                    'alias' => 'inventoryCode',
                     'type' => 'string',
                     'label' => 'Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'locale_name',
+                    'alias' => 'inventoryName',
                     'type' => 'string',
                     'label' => 'Name',
                 ],
@@ -147,8 +158,10 @@ class LocalesComposer
             // 'css' => []
 
         ]);
+    }
 
-        $view->with('datagrid', $datagrid);
-        // $view->with('count', $this->users->count());
+    public function render()
+    {
+        return $this->createInventorySourcesDataGrid()->render();
     }
 }

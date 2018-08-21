@@ -15,7 +15,8 @@
         </div>
 
         <div class="page-content">
-            {!! $datagrid->render() !!}
+            @inject('sliders','Webkul\Admin\DataGrids\SliderDataGrid')
+            {!! $sliders->render() !!}
         </div>
     </div>
 @stop

@@ -1,13 +1,19 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
 
-class CurrenciesComposer
+/**
+ * Countries DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+
+class CountryDataGrid
 {
     /**
      * The Data Grid implementation.
@@ -16,21 +22,14 @@ class CurrenciesComposer
      * for countries
      */
 
-
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createCountryDataGrid()
     {
 
-        $datagrid = DataGrid::make([
-            'name' => 'Currencies',
-            'table' => 'currencies',
+            return DataGrid::make([
+            'name' => 'Countries',
+            'table' => 'countries',
             'select' => 'id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
@@ -46,12 +45,12 @@ class CurrenciesComposer
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to delete this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -72,23 +71,30 @@ class CurrenciesComposer
 
                 [
                     'name' => 'id',
-                    'alias' => 'currency_id',
+                    'alias' => 'countryId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'currency_code',
+                    'alias' => 'countryCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'currency_name',
+                    'alias' => 'countryName',
                     'type' => 'string',
                     'label' => 'Name',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'status',
+                    'alias' => 'countryStatus',
+                    'type' => 'number',
+                    'label' => 'Code',
                     'sortable' => true,
                 ],
 
@@ -99,21 +105,27 @@ class CurrenciesComposer
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'currency_id',
+                    'alias' => 'countryId',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'currency_code',
+                    'alias' => 'countryCode',
                     'type' => 'string',
                     'label' => 'Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'currency_name',
+                    'alias' => 'countryName',
                     'type' => 'string',
                     'label' => 'Name',
+                ],
+                [
+                    'column' => 'status',
+                    'alias' => 'countryStatus',
+                    'type' => 'number',
+                    'label' => 'Code',
                 ],
             ],
 
@@ -148,7 +160,12 @@ class CurrenciesComposer
 
         ]);
 
-        $view->with('datagrid', $datagrid);
-        // $view->with('count', $this->users->count());
+    }
+
+    public function render()
+    {
+
+        return $this->createCountryDataGrid()->render();
+
     }
 }

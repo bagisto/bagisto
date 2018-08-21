@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Webkul\Core\Repositories\SliderRepository as Sliders;
+use Webkul\Channel\Channel as Channel;
+
 /**
- * Admin user session controller
+ * Home page controller
  *
- * @author    Jitendra Singh <jitendra@webkul.com>
+ * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class HomeController extends controller
+
+ class HomeController extends controller
 {
     protected $_config;
     protected $sliders;

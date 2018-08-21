@@ -22,14 +22,14 @@ class CategoryController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * CategoryRepository object
      *
      * @var array
      */
     protected $category;
-    
+
     /**
      * ProductRepository object
      *

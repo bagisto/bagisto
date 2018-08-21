@@ -224,7 +224,7 @@ h2 {
             padding: 10px;
             border-bottom: solid 1px #d3d3d3;
             color: $font-color;
-            vertical-align: top;
+            vertical-align: middle;
 
             &.actions {
                 text-align: right;
@@ -682,22 +682,6 @@ h2 {
             .dropdown-filters {
                 display: inline-flex;
 
-                // .column-filter {
-                //     margin-right: 5px;
-
-                //     .control {
-                //         font-family: "montserrat", sans-serif;
-                //         padding-left: 5px;
-                //         height: 36px;
-                //         width: 150px;
-                //         border: 2px solid $control-border-color;
-                //         border-radius: 3px;
-                //         background-color: white;
-                //         color: #8e8e8e;
-                //         font-size: 14px;
-                //     }
-                // }
-
                 .more-filters {
                     margin-right: 5px;
 
@@ -713,7 +697,7 @@ h2 {
                         border: 2px solid $control-border-color;
                         border-radius: 2px;
                         background-color: white;
-                        color: #8e8e8e;
+                        color: $filter-toggle-color;
                         font-size: 14px;
 
                         .dropdown-header {
@@ -734,8 +718,8 @@ h2 {
                                 li.filter-column-dropdown {
                                     .filter-column-select {
                                         width: 100%;
-                                        background: #fff;
-                                        border: 2px solid #c7c7c7;
+                                        background: $color-white;
+                                        border: 2px solid $control-border-color;
                                         border-radius: 3px;
                                         height: 36px;
                                         display: inline-block;
@@ -752,8 +736,8 @@ h2 {
                                 }
                                 li {
                                     select {
-                                        background: #fff;
-                                        border: 2px solid #c7c7c7;
+                                        background: $color-white;
+                                        border: 2px solid $control-border-color;
                                         border-radius: 3px;
                                         height: 36px;
                                         max-width: 100%;
@@ -832,7 +816,7 @@ h2 {
                     display: inline-flex;
                     background: #e7e7e7;
                     padding-left: 5px;
-                    color: #000311;
+                    color: $color-black-shade;
                     vertical-align: middle;
 
                     .f-value {
@@ -881,8 +865,18 @@ h2 {
                         cursor: pointer;
                     }
                 }
+
             }
         }
+
+        tbody {
+            td.action {
+                a:first-child {
+                    margin-right: 10px;
+                }
+            }
+        }
+
         .pagination {
             margin-top:20px;
         }

@@ -1,32 +1,31 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
+/**
+ * Exchange Rates DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 
-class ExchangeRatesComposer
+class ExchangeRatesDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var CountryComposer
-     * for countries
+     * @var ExchangeRatesDataGrid
+     * for Exchange Rates
      */
 
 
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createExchangeRatesDataGrid()
     {
 
-        $datagrid = DataGrid::make([
+            return DataGrid::make([
             'name' => 'Exchange Rates',
             'table' => 'currency_exchange_rates',
             'select' => 'id',
@@ -72,28 +71,28 @@ class ExchangeRatesComposer
 
                 [
                     'name' => 'id',
-                    'alias' => 'exch_id',
+                    'alias' => 'exchID',
                     'type' => 'number',
                     'label' => 'Rate ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'source_currency',
-                    'alias' => 'exch_source_currency',
+                    'alias' => 'exchSourceCurrency',
                     'type' => 'string',
                     'label' => 'Source Currency',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'target_currency',
-                    'alias' => 'exch_target_currency',
+                    'alias' => 'exchTargetCurrency',
                     'type' => 'string',
                     'label' => 'Target Currency',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'ratio',
-                    'alias' => 'exch_ratio',
+                    'alias' => 'exchRatio',
                     'type' => 'string',
                     'label' => 'Exchange Ratio',
                 ],
@@ -105,20 +104,20 @@ class ExchangeRatesComposer
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'exch_id',
+                    'alias' => 'exchId',
                     'type' => 'number',
                     'label' => 'Rate ID',
                 ],
                 [
                     'column' => 'source_currency',
-                    'alias' => 'exch_source_currency',
+                    'alias' => 'exchSourceCurrency',
                     'type' => 'string',
                     'label' => 'Source Currency',
                     'sortable' => true,
                 ],
                 [
                     'column' => 'target_currency',
-                    'alias' => 'exch_target_currency',
+                    'alias' => 'exchTargetCurrency',
                     'type' => 'string',
                     'label' => 'Target Currency',
                     'sortable' => true,
@@ -156,7 +155,10 @@ class ExchangeRatesComposer
 
         ]);
 
-        $view->with('datagrid', $datagrid);
-        // $view->with('count', $this->users->count());
+    }
+
+    public function render()
+    {
+        return $this->createExchangeRatesDataGrid()->render();
     }
 }

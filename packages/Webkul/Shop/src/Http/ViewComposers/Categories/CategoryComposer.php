@@ -7,6 +7,14 @@ use Illuminate\Support\Collection;
 
 use Webkul\Category\Repositories\CategoryRepository as Category;
 
+
+/**
+ * Category List Composer on Navigation Menu
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com>
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+
 class CategoryComposer
 {
     /**

@@ -1,13 +1,19 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
 
-class ChannelsComposer
+/**
+ * Attributes Family DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+
+class AttributeFamilyDataGrid
 {
     /**
      * The Data Grid implementation.
@@ -16,21 +22,14 @@ class ChannelsComposer
      * for countries
      */
 
-
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createAttributeFamilyDataGrid()
     {
 
-        $datagrid = DataGrid::make([
-            'name' => 'Channels',
-            'table' => 'channels',
+            return DataGrid::make([
+            'name' => 'Attribute Family',
+            'table' => 'attribute_families',
             'select' => 'id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
@@ -46,12 +45,12 @@ class ChannelsComposer
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to delete this record?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -72,48 +71,45 @@ class ChannelsComposer
 
                 [
                     'name' => 'id',
-                    'alias' => 'channel_id',
+                    'alias' => 'attributeFamilyId',
                     'type' => 'number',
-                    'label' => 'Channel ID',
+                    'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'channel_code',
+                    'alias' => 'attributeFamilyCode',
                     'type' => 'string',
-                    'label' => 'Channel Code',
+                    'label' => 'Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'channel_name',
+                    'alias' => 'attributeFamilyName',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Code',
                     'sortable' => true,
                 ],
-
             ],
-
-            //don't use aliasing in case of filters
 
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'channel_id',
+                    'alias' => 'attributeFamilyId',
                     'type' => 'number',
-                    'label' => 'Channel ID',
+                    'label' => 'ID',
                 ],
                 [
                     'column' => 'code',
-                    'alias' => 'channel_code',
+                    'alias' => 'attributeFamilyCode',
                     'type' => 'string',
-                    'label' => 'Channel Code',
+                    'label' => 'Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'channel_name',
+                    'alias' => 'attributeFamilyName',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Name',
                 ],
             ],
 
@@ -123,12 +119,12 @@ class ChannelsComposer
                 [
                     'column' => 'name',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Name',
                 ],
                 [
                     'column' => 'code',
                     'type' => 'string',
-                    'label' => 'Channel Code',
+                    'label' => 'Code',
                 ],
             ],
 
@@ -148,7 +144,12 @@ class ChannelsComposer
 
         ]);
 
-        $view->with('datagrid', $datagrid);
-        // $view->with('count', $this->users->count());
+    }
+
+    public function render()
+    {
+
+        return $this->createAttributeFamilyDataGrid()->render();
+
     }
 }

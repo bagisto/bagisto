@@ -1,13 +1,19 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
 
-class RolesComposer
+/**
+ * Channels DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+
+class ChannelDataGrid
 {
     /**
      * The Data Grid implementation.
@@ -16,19 +22,12 @@ class RolesComposer
      * for countries
      */
 
-
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createChannelsDataGrid()
     {
 
-        $datagrid = DataGrid::make([
-            'name' => 'Roles',
-            'table' => 'roles',
+            return DataGrid::make([
+            'name' => 'Channels',
+            'table' => 'channels',
             'select' => 'id',
             'perpage' => 5,
             'aliased' => false, //use this with false as default and true in case of joins
@@ -72,23 +71,23 @@ class RolesComposer
 
                 [
                     'name' => 'id',
-                    'alias' => 'r_id',
+                    'alias' => 'channel_id',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Channel ID',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'code',
+                    'alias' => 'channel_code',
+                    'type' => 'string',
+                    'label' => 'Channel Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'r_name',
+                    'alias' => 'channel_name',
                     'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
-                ],
-                [
-                    'name' => 'permission_type',
-                    'alias' => 'r_permission_type',
-                    'type' => 'string',
-                    'label' => 'Permission Type',
+                    'label' => 'Channel Name',
                     'sortable' => true,
                 ],
 
@@ -99,21 +98,21 @@ class RolesComposer
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'r_id',
+                    'alias' => 'channelId',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Channel ID',
+                ],
+                [
+                    'column' => 'code',
+                    'alias' => 'channelCode',
+                    'type' => 'string',
+                    'label' => 'Channel Code',
                 ],
                 [
                     'column' => 'name',
-                    'alias' => 'r_name',
+                    'alias' => 'channelName',
                     'type' => 'string',
-                    'label' => 'Name',
-                ],
-                [
-                    'column' => 'permission_type',
-                    'alias' => 'r_permission_type',
-                    'type' => 'string',
-                    'label' => 'Permission Type',
+                    'label' => 'Channel Name',
                 ],
             ],
 
@@ -123,12 +122,12 @@ class RolesComposer
                 [
                     'column' => 'name',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Channel Name',
                 ],
                 [
-                    'column' => 'permission_type',
+                    'column' => 'code',
                     'type' => 'string',
-                    'label' => 'Permission Type',
+                    'label' => 'Channel Code',
                 ],
             ],
 
@@ -148,7 +147,10 @@ class RolesComposer
 
         ]);
 
-        $view->with('datagrid', $datagrid);
-        // $view->with('count', $this->users->count());
+    }
+
+    public function render()
+    {
+        return $this->createChannelsDataGrid()->render();
     }
 }

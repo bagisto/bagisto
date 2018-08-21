@@ -1,0 +1,9 @@
+@extends('shop::layouts.master')
+@section('slider')
+    @include('shop::store.slider.slider')
+@endsection
+@section('content-wrapper')
+    @include('shop::store.grids.featured.featuredproductgrid')
+    @include('shop::store.grids.newproduct.newproductgrid')
+    @include('shop::store.grids.newsupdate.newsupdategrid')
+@endsection

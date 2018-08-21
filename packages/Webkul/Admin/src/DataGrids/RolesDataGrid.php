@@ -1,34 +1,33 @@
 <?php
 
-namespace Webkul\Admin\Http\ViewComposers\DataGrids;
+namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-// use App\Repositories\UserRepository;
+/**
+ * User Roles DataGrid
+ *
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 
-class InventorySourcesComposer
+class RolesDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var CountryComposer
-     * for countries
+     * @var RolesDataGrid
+     * for Roles
      */
 
 
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
-    public function compose(View $view)
+    public function createRolesDataGrid()
     {
 
-        $datagrid = DataGrid::make([
-            'name' => 'Inventory Sources',
-            'table' => 'inventory_sources',
+            return DataGrid::make([
+            'name' => 'Roles',
+            'table' => 'roles',
             'select' => 'id',
             'perpage' => 5,
             'aliased' => false, //use this with false as default and true in case of joins
@@ -72,37 +71,23 @@ class InventorySourcesComposer
 
                 [
                     'name' => 'id',
-                    'alias' => 'inventory_id',
+                    'alias' => 'roleId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'code',
-                    'alias' => 'inventory_code',
-                    'type' => 'string',
-                    'label' => 'Code',
-                    'sortable' => true,
-                ],
-                [
                     'name' => 'name',
-                    'alias' => 'inventory_name',
+                    'alias' => 'roleName',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'priority',
-                    'alias' => 'inventory_priority',
+                    'name' => 'permission_type',
+                    'alias' => 'rolePermissionType',
                     'type' => 'string',
-                    'label' => 'Priority',
-                    'sortable' => true,
-                ],
-                [
-                    'name' => 'status',
-                    'alias' => 'inventory_status',
-                    'type' => 'string',
-                    'label' => 'Status',
+                    'label' => 'Permission Type',
                     'sortable' => true,
                 ],
 
@@ -113,21 +98,21 @@ class InventorySourcesComposer
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'inventory_id',
+                    'alias' => 'roleId',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
-                    'column' => 'code',
-                    'alias' => 'inventory_code',
-                    'type' => 'string',
-                    'label' => 'Code',
-                ],
-                [
                     'column' => 'name',
-                    'alias' => 'inventory_name',
+                    'alias' => 'roleName',
                     'type' => 'string',
                     'label' => 'Name',
+                ],
+                [
+                    'column' => 'permission_type',
+                    'alias' => 'rolePermissionType',
+                    'type' => 'string',
+                    'label' => 'Permission Type',
                 ],
             ],
 
@@ -140,9 +125,9 @@ class InventorySourcesComposer
                     'label' => 'Name',
                 ],
                 [
-                    'column' => 'code',
+                    'column' => 'permission_type',
                     'type' => 'string',
-                    'label' => 'Code',
+                    'label' => 'Permission Type',
                 ],
             ],
 
@@ -162,6 +147,10 @@ class InventorySourcesComposer
 
         ]);
 
-        $view->with('datagrid', $datagrid);
+    }
+
+    public function render()
+    {
+        return $this->createRolesDataGrid()->render();
     }
 }

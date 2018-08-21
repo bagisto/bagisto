@@ -15,7 +15,8 @@
         </div>
 
         <div class="page-content">
-            {!! $datagrid->render() !!}
+            @inject('countries','Webkul\Admin\DataGrids\CountryDataGrid')
+            {!! $countries->render() !!}
         </div>
     </div>
 @stop
