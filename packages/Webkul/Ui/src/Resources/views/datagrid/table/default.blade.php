@@ -132,9 +132,11 @@
                     <td class="">{!! $column->render($result) !!}</td>
                 @endforeach
 
+                @if(isset($attribute_columns))
                 @foreach ($attribute_columns as $atc)
                     <td>{{ $result->{$atc} }}</td>
                 @endforeach
+                @endif
 
                 <td class="action">
                     @foreach($actions as $action)

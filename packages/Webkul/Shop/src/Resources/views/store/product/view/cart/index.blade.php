@@ -10,7 +10,7 @@
             <div class="left-side">
 
                 <div class="item">
-                    <img class="item-image" src="{{ asset('vendor/webkul/shop/assets/images/jeans_big.jpg') }}" />
+                    <img class="item-image" src="{{ bagisto_asset('images/jeans_big.jpg') }}" />
 
                     <div class="item-details">
 
@@ -44,7 +44,7 @@
 
                 </div>
                 <div class="item">
-                    <img class="item-image" src="{{ asset('vendor/webkul/shop/assets/images/jeans_big.jpg') }}" />
+                    <img class="item-image" src="{{ bagisto_asset('images/jeans_big.jpg') }}" />
 
                     <div class="item-details">
 
@@ -164,7 +164,7 @@
 
             <div class="product-card">
                 <div class="product-image">
-                    <img src="vendor/webkul/shop/assets/images/grid.png" />
+                    <img src="{{ bagisto_asset('images/grid.png') }}" />
                 </div>
                 <div class="product-name">
                     <span>Red Black Tees</span>
@@ -174,17 +174,17 @@
                 </div>
                 <div class="product-ratings">
                     <span>
-                        <img src="vendor/webkul/shop/assets/images/5star.svg" />
+                        <img src="{{ bagisto_asset('images/5star.svg') }}" />
                     </span>
                 </div>
                 <div class="cart-fav-seg">
                     <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
-                    <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
+                    <span><img src="{{ bagisto_asset('images/wishadd.svg') }}" /></span>
                 </div>
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="vendor/webkul/shop/assets/images/grid.png" />
+                    <img src="{{ bagisto_asset('images/grid.png') }}" />
                 </div>
                 <div class="product-name">
                     <span>Red Black Tees</span>
@@ -194,17 +194,17 @@
                 </div>
                 <div class="product-ratings">
                     <span>
-                        <img src="vendor/webkul/shop/assets/images/5star.svg" />
+                        <img src="{{ bagisto_asset('images/5star.svg') }}" />
                     </span>
                 </div>
                 <div class="cart-fav-seg">
                     <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
-                    <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
+                    <span><img src="{{ bagisto_asset('images/wishadd.svg') }}" /></span>
                 </div>
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="vendor/webkul/shop/assets/images/grid.png" />
+                    <img src="{{ bagisto_asset('images/grid.png') }}" />
                 </div>
                 <div class="product-name">
                     <span>Red Black Tees</span>
@@ -214,17 +214,17 @@
                 </div>
                 <div class="product-ratings">
                     <span>
-                        <img src="vendor/webkul/shop/assets/images/5star.svg" />
+                        <img src="{{ bagisto_asset('images/5star.svg') }}" />
                     </span>
                 </div>
                 <div class="cart-fav-seg">
                     <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
-                    <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
+                    <span><img src="{{ bagisto_asset('images/wishadd.svg') }}" /></span>
                 </div>
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="vendor/webkul/shop/assets/images/grid.png" />
+                    <img src="{{ bagisto_asset('images/grid.png') }}" />
                 </div>
                 <div class="product-name">
                     <span>Red Black Tees</span>
@@ -234,12 +234,12 @@
                 </div>
                 <div class="product-ratings">
                     <span>
-                        <img src="vendor/webkul/shop/assets/images/5star.svg" />
+                        <img src="{{ bagisto_asset('images/5star.svg') }}" />
                     </span>
                 </div>
                 <div class="cart-fav-seg">
                     <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
-                    <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
+                    <span><img src="{{ bagisto_asset('images/wishadd.svg') }}" /></span>
                 </div>
             </div>
         </div>

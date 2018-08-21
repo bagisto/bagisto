@@ -6,7 +6,7 @@
 
             <ul class="logo-container">
                 <li>
-                    <a href="{{ route('store.home') }}">
+                    <a href="">
                         <img class="logo" src="vendor/webkul/shop/assets/images/logo.svg" />
                     </a>
                 </li>
