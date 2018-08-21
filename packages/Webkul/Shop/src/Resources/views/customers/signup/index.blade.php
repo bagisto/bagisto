@@ -36,13 +36,13 @@
 
             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                 <label for="password">{{ __('shop::app.customer.signup-form.password') }}</label>
-                <input type="password" class="control" name="password" v-validate="'required|min:8'" ref="password">
+                <input type="password" class="control" name="password" v-validate="'required|min:6'" ref="password">
                 <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('confirm_password') ? 'has-error' : '']">
                 <label for="confirm_password">{{ __('shop::app.customer.signup-form.confirm_pass') }}</label>
-                <input type="password" class="control" name="confirm_password" v-validate="'required|min:8|confirm:$password'">
+                <input type="password" class="control" name="password_confirmation"  v-validate="'required|min:6|confirmed:password'">
                 <span class="control-error" v-if="errors.has('confirm_password')">@{{ errors.first('confirm_password') }}</span>
             </div>
 
