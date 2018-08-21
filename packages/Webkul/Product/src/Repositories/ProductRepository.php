@@ -232,7 +232,7 @@ class ProductRepository extends Repository
 
             if($attribute->value_per_channel) {
                 if($attribute->value_per_locale) {
-                    foreach(channel()->getAllChannels() as $channel) {
+                    foreach(core()->getAllChannels() as $channel) {
                         foreach(core()->getAllLocales() as $locale) {
                             $this->attributeValue->create([
                                     'product_id' => $variant->id,
@@ -244,7 +244,7 @@ class ProductRepository extends Repository
                         }
                     }
                 } else {
-                    foreach(channel()->getAllChannels() as $channel) {
+                    foreach(core()->getAllChannels() as $channel) {
                         $this->attributeValue->create([
                                 'product_id' => $variant->id,
                                 'attribute_id' => $attribute->id,

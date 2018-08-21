@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Channel\Models;
+namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Models\Locale;
@@ -34,6 +34,8 @@ class Channel extends Model
         return $this->belongsToMany(Currency::class, 'channel_currencies');
     }
 
+
+    protected $with = ['base_currency'];
     /**
      * Get the base currency
      */

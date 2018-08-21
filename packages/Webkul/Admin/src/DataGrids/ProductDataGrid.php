@@ -55,6 +55,10 @@ class ProductDataGrid
                 ],
             ],
 
+            'attributeColumns' => [
+                'name', 'price'
+            ],
+
             'join' => [
 
                 //for getting name of attrib family.
@@ -73,11 +77,7 @@ class ProductDataGrid
                     'primaryKey' => 'prods.id',
                     'condition' => '=',
                     'secondaryKey' => 'pav.product_id',
-                    'where' => [
-                        'column1' => 'prods.id',
-                        'condition' => '=',
-                        'column2' => 'pav.product_id'
-                    ]
+                    'withAttributes' => true
                 ],
 
                 //for getting the inventory quantity of a product
@@ -111,9 +111,9 @@ class ProductDataGrid
                 ],
                 [
                     'name' => 'attfam.name',
-                    'alias' => 'attributeFamily',
+                    'alias' => 'FamilyName',
                     'type' => 'string',
-                    'label' => 'Attribute Family',
+                    'label' => 'Family Name',
                     'sortable' => true,
                 ],
                 [
@@ -123,35 +123,68 @@ class ProductDataGrid
                     'label' => 'Product Quatity',
                     'sortable' => false,
                 ],
-                [
-                    'name' => 'pav.product_id',
-                    'alias' => 'ProductID',
-                    'type' => 'string',
-                    'label' => 'Product ID',
-                    'sortable' => false,
+                // [
+                //     'name' => 'pav.attribute_id',
+                //     'alias' => 'AttributeID',
+                //     'type' => 'string',
+                //     'label' => 'Attribute ID',
+                //     'sortable' => false,
 
-                ],
+                // ],
             ],
 
-            //use this bag for fetching attributes as columns in product datagrid.
-            // 'attributes' => [
-            //     [
-            //         'name' => 'pi.qty',
-            //         'alias' => 'ProductQuantity',
-            //         'type' => 'string',
-            //         'label' => 'Product Quatity',
-            //         'sortable' => false,
-            //     ]
-            // ],
-
             'filterable' => [
-
+                //column, type, and label
+                [
+                    'name' => 'prods.id',
+                    'alias' => 'productID',
+                    'type' => 'number',
+                    'label' => 'ID',
+                ],
+                [
+                    'name' => 'prods.sku',
+                    'alias' => 'productCode',
+                    'type' => 'string',
+                    'label' => 'SKU',
+                ],
+                [
+                    'name' => 'attfam.name',
+                    'alias' => 'FamilyName',
+                    'type' => 'string',
+                    'label' => 'Family Name',
+                ],
+                [
+                    'name' => 'pi.qty',
+                    'alias' => 'ProductQuantity',
+                    'type' => 'string',
+                    'label' => 'Product Quatity',
+                ],
             ],
 
             //don't use aliasing in case of searchables
 
             'searchable' => [
                 //column, type and label
+                [
+                    'column' => 'prods.id',
+                    'type' => 'number',
+                    'label' => 'ID',
+                ],
+                [
+                    'column' => 'prods.sku',
+                    'type' => 'string',
+                    'label' => 'SKU',
+                ],
+                [
+                    'column' => 'attfam.name',
+                    'type' => 'string',
+                    'label' => 'Family Name',
+                ],
+                [
+                    'column' => 'pi.qty',
+                    'type' => 'string',
+                    'label' => 'Product Quatity',
+                ],
             ],
 
             //list of viable operators that will be used

@@ -82,7 +82,7 @@
                                 <label for="currencies" class="required">{{ __('admin::app.settings.channels.currencies') }}</label>
                                 <?php $selectedOptionIds = old('currencies') ?: $channel->currencies->pluck('id')->toArray() ?>
                                 <select v-validate="'required'" class="control" id="currencies" name="currencies[]" multiple>
-                                    @foreach(core()->allCurrencies() as $currency)
+                                    @foreach(core()->geAllCurrencies() as $currency)
                                         <option value="{{ $currency->id }}" {{ in_array($currency->id, $selectedOptionIds) ? 'selected' : '' }}>
                                             {{ $currency->name }}
                                         </option>
@@ -95,7 +95,7 @@
                                 <label for="base_currency" class="required">{{ __('admin::app.settings.channels.base-currency') }}</label>
                                 <?php $selectedOption = old('base_currency') ?: $channel->base_currency ?>
                                 <select v-validate="'required'" class="control" id="base_currency" name="base_currency">
-                                    @foreach(core()->allCurrencies() as $currency)
+                                    @foreach(core()->geAllCurrencies() as $currency)
                                         <option value="{{ $currency->id }}" {{ $selectedOption == $currency->id ? 'selected' : '' }}>
                                             {{ $currency->name }}
                                         </option>

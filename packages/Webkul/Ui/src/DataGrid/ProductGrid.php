@@ -11,6 +11,7 @@ use Webkul\Ui\DataGrid\Helpers\Pagination;
 use Webkul\Ui\DataGrid\Helpers\Css;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Models\ProductAttributeValue;
 use URL;
 
 /**
@@ -151,6 +152,15 @@ class ProductGrid
 
     protected $actions;
 
+    /**
+     * Attribute Columns
+     * for columns which
+     * are attributes.
+     *
+     * @var $attributeColumns
+     */
+
+    protected $attributeColumns;
 
     /**
      * URL parse $parsed
@@ -165,9 +175,9 @@ class ProductGrid
         // list($name, $select, $table, $join, $columns) = array_values($args);
         $name = $select = $aliased = $table = false;
         $join = $columns = $filterable = $searchable =
-        $massoperations = $css = $operators = $actions = [];
+        $massoperations = $attributeColumns = $css = $operators = $actions = [];
         extract($args);
-        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $perpage, $table, $join, $columns, $css, $operators,$actions);
+        return $this->build($name, $select, $filterable, $searchable, $massoperations, $attributeColumns , $aliased, $perpage, $table, $join, $columns, $css, $operators,$actions);
     }
 
     //contructor for getting the current locale and channel
@@ -176,14 +186,12 @@ class ProductGrid
     private $channel;
     private $attributes;
     private $allAttributes;
-    private $product_attribute_values;
 
-    public function __construct(AttributeRepository $attributes, ProductAttributeValueRepository $product_attribute_values) {
+    public function __construct(AttributeRepository $attributes) {
 
         $this->channel = request()->get('channel') ?: channel()->getChannel();
         $this->locale = request()->get('locale') ?: app()->getLocale();
         $this->attributes = $attributes;
-        $this->product_attribute_values = $product_attribute_values;
 
     }
 
@@ -194,6 +202,7 @@ class ProductGrid
         array $filterable = [],
         array $searchable = [],
         array $massoperations = [],
+        array $attributeColumns = [],
         bool $aliased = false,
         $perpage = 0,
         $table = null,
@@ -210,6 +219,7 @@ class ProductGrid
         $this->setFilterable($filterable);
         $this->setSearchable($filterable);
         $this->setMassOperations($massoperations);
+        $this->setAttributeColumns($attributeColumns);
         $this->setAlias($aliased);
         $this->setPerPage($perpage);
         $this->setTable($table);
@@ -342,6 +352,18 @@ class ProductGrid
     {
         $this->css = new Css($css);
         return $this->css;
+    }
+
+    /**
+     * To set the attributes
+     * bag on product datagrid.
+     *
+     * @return $this
+     */
+
+    private function setAttributeColumns($attributes = []) {
+        $this->attributeColumns = $attributes;
+        return $this->attributeColumns;
     }
 
     /**
@@ -544,6 +566,50 @@ class ProductGrid
         }
     }
 
+    public function getProducts() {
+        $qb = DB::table('products')->addSelect('products.*');
+
+        $channel = core()->getCurrentChannelCode();
+        $locale = app()->getLocale();
+
+        foreach (['name', 'description', 'short_description', 'price'] as $code) {
+        $attribute = $this->attributes->findBy('code', $code);
+
+        $productValueAlias = 'pav_' . $attribute->code;
+
+        $qb->leftJoin('product_attribute_values as ' . $productValueAlias, function($leftJoin) use($channel, $locale, $attribute, $productValueAlias) {
+
+        $leftJoin->on('products.id', $productValueAlias . '.product_id');
+
+        if($attribute->value_per_channel) {
+        if($attribute->value_per_locale) {
+        $leftJoin->where($productValueAlias . '.channel', $channel)
+        ->where($productValueAlias . '.locale', $locale);
+        } else {
+        $leftJoin->where($productValueAlias . '.channel', $channel);
+        }
+        } else {
+        if($attribute->value_per_locale) {
+        $leftJoin->where($productValueAlias . '.locale', $locale);
+        }
+        }
+
+        $leftJoin->where($productValueAlias . '.attribute_id', $attribute->id);
+        });
+
+
+        $qb->addSelect($productValueAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $code);
+
+
+        if($code == 'name') {
+        $filterAlias = 'filter_' . $attribute->code;
+
+        $qb->leftJoin('product_attribute_values as ' . $filterAlias, 'products.id', '=', $filterAlias . '.product_id');
+        $qb->where($filterAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type], 'Product Name');
+        }
+        }
+    }
+
     /**
      * ->join('contacts', 'users.id', '=', 'contacts.user_id')
      * @return $this->query
@@ -551,9 +617,48 @@ class ProductGrid
 
     private function getQueryWithJoin()
     {
+
         foreach ($this->join as $join) {
-            $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondaryKey']);
+
+            if(array_key_exists('withAttributes',$join)) {
+
+                $qb = $this->query;
+
+                $channel = $this->channel;
+                $locale = $this->locale;
+
+                foreach ($this->attributeColumns as $code) {
+                    $attribute = $this->attributes->findBy('code', $code);
+
+                    $productValueAlias = 'pav_' . $attribute->code;
+
+                    $qb->leftJoin('product_attribute_values as ' . $productValueAlias, function ($leftJoin) use ($channel, $locale, $attribute, $productValueAlias) {
+                        $leftJoin->on('prods.id', $productValueAlias . '.product_id');
+
+                        if ($attribute->value_per_channel) {
+                            if ($attribute->value_per_locale) {
+                                $leftJoin->where($productValueAlias . '.channel', $channel)->where($productValueAlias . '.locale', $locale);
+                            } else {
+                                $leftJoin->where($productValueAlias . '.channel', $channel);
+                            }
+                        } else {
+                            if ($attribute->value_per_locale) {
+                                $leftJoin->where($productValueAlias . '.locale', $locale);
+                            }
+                        }
+
+                        $leftJoin->where($productValueAlias . '.attribute_id', $attribute->id);
+                    });
+
+                    $qb->addSelect($productValueAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $code);
+                }
+
+            }
+            else
+                $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondaryKey']);
+
         }
+
         $this->query->get();
 
     }
@@ -806,11 +911,7 @@ class ProductGrid
                 $this->getQueryWithFilters();
             }
 
-            // $this->results = $this->query->get();
-
-            // $this->results = $this->query->distinct()->paginate($this->perpage)->appends(request()->except('page'));
             $this->results = $this->query->paginate($this->perpage)->appends(request()->input());
-
             return $this->results;
 
         } else {
@@ -825,10 +926,7 @@ class ProductGrid
                 $this->getQueryWithFilters();
             }
 
-            // $this->results = $this->query->get();
-
-            $this->results = $this->query->distinct()->paginate($this->perpage)->appends(request()->except('page'));
-
+            $this->results = $this->query->distinct()->paginate($this->perpage)->appends(request()->input());
             return $this->results;
         }
     }
@@ -845,13 +943,13 @@ class ProductGrid
     {
 
         $this->allAttributes = $this->getAttributes();
-        // dump($this->channel, $this->locale);
         $this->getDbQueryResults();
-
+        // dd($this->results);
         return view('ui::datagrid.index', [
             'css' => $this->css,
             'results' => $this->results,
             'columns' => $this->columns,
+            'attribute_columns' => $this->attributeColumns,
             'filterable' =>$this->filterable,
             'operators' => $this->operators,
             'massoperations' => $this->massoperations,

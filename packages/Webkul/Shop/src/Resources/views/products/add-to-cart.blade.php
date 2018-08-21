@@ -1,0 +1,1 @@
+<button class="btn btn-md btn-primary addtocart">Add to Cart</button>

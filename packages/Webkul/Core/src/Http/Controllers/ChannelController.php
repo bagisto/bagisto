@@ -1,10 +1,10 @@
 <?php
 
-namespace Webkul\Channel\Http\Controllers;
+namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Channel\Repositories\ChannelRepository as Channel;
+use Webkul\Core\Repositories\ChannelRepository as Channel;
 
 
 /**
@@ -32,7 +32,7 @@ class ChannelController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Channel\Repositories\ChannelRepository  $channel
+     * @param  Webkul\Core\Repositories\ChannelRepository  $channel
      * @return void
      */
     public function __construct(Channel $channel)
