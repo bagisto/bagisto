@@ -189,7 +189,7 @@ class ProductGrid
 
     public function __construct(AttributeRepository $attributes) {
 
-        $this->channel = request()->get('channel') ?: channel()->getChannel();
+        $this->channel = request()->get('channel') ?: core()->getCurrentChannelCode();
         $this->locale = request()->get('locale') ?: app()->getLocale();
         $this->attributes = $attributes;
 

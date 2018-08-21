@@ -28,13 +28,15 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.users.roles.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="email" name="name"/>
+                                <input type="text" v-validate="'required'" class="control" id="email" name="name" value="{{ old('name') }}"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
                             <div class="control-group">
                                 <label for="description">{{ __('admin::app.users.roles.description') }}</label>
-                                <textarea class="control" id="description" name="description"></textarea>
+                                <textarea class="control" id="description" name="description">
+                                    {{ old('description') }}
+                                </textarea>
                             </div>
                         </div>
                     </accordian>

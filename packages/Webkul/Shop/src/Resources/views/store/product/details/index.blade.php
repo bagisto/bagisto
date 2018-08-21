@@ -11,16 +11,16 @@
             <div class="product-image-group">
 
                 <div class="side-group">
-                    <img src="{{ asset('vendor/webkul/shop/assets/images/jeans.jpg') }}" />
-                    <img src="{{ asset('vendor/webkul/shop/assets/images/jeans.jpg') }}" />
-                    <img src="{{ asset('vendor/webkul/shop/assets/images/jeans.jpg') }}" />
-                    <img src="{{ asset('vendor/webkul/shop/assets/images/jeans.jpg') }}" />
+                    <img src="{{ bagisto_asset('images/jeans.jpg') }}" />
+                    <img src="{{ bagisto_asset('images/jeans.jpg') }}" />
+                    <img src="{{ bagisto_asset('images/jeans.jpg') }}" />
+                    <img src="{{ bagisto_asset('images/jeans.jpg') }}" />
                 </div>
 
                 <div class="product-hero-image">
-                    <img src="{{ asset('vendor/webkul/shop/assets/images/jeans_big.jpg') }}" />
-                    <img class="wishlist" src="{{ asset('vendor/webkul/shop/assets/images/wish.svg') }}" />
-                    <img class="share" src="{{ asset('vendor/webkul/shop/assets/images/icon-share.svg') }}" />
+                    <img src="{{ bagisto_asset('images/jeans_big.jpg') }}" />
+                    <img class="wishlist" src="{{ bagisto_asset('images/wish.svg') }}" />
+                    <img class="share" src="{{ bagisto_asset('images/icon-share.svg') }}" />
                 </div>
 
             </div>
@@ -31,7 +31,7 @@
                     <span>Rainbow creation Embroidered</span>
                 </div>
                 <div class="rating">
-                    <img src="{{ asset('vendor/webkul/shop/assets/images/5star.svg') }}" />
+                    <img src="{{ bagisto_asset('images/5star.svg') }}" />
                     75 Ratings & 11 Reviews
                 </div>
                 <div class="price">
@@ -113,7 +113,7 @@
                             4.3
                         </span>
                         <span class="stars">
-                            <img src="{{ asset('vendor/webkul/shop/assets/images/5star.svg') }}" />
+                            <img src="{{ bagisto_asset('images/5star.svg') }}" />
                         </span>
 
                         <button class="btn btn-md btn-primary">Write Review</button>
@@ -128,7 +128,7 @@
                                 Awesome
                             </div>
                             <div class="stars">
-                                <img src="{{ asset('vendor/webkul/shop/assets/images/5star.svg') }}" />
+                                <img src="{{ bagisto_asset('images/5star.svg') }}" />
                             </div>
                             <div class="message">
                                 NFC provides 100% independence, device compatibility and freedom of movement Ear-cup-mounted sensors for easy-access, touch-sensitive control 30mm drivers
@@ -147,7 +147,7 @@
                                 Awesome
                             </div>
                             <div class="stars">
-                                <img src="{{ asset('vendor/webkul/shop/assets/images/5star.svg') }}" />
+                                <img src="{{ bagisto_asset('images/5star.svg') }}" />
                             </div>
                             <div class="message">
                                 NFC provides 100% independence, device compatibility and freedom of movement Ear-cup-mounted sensors for easy-access, touch-sensitive control 30mm drivers
@@ -166,7 +166,7 @@
                                 Awesome
                             </div>
                             <div class="stars">
-                                <img src="{{ asset('vendor/webkul/shop/assets/images/5star.svg') }}" />
+                                <img src="{{ bagisto_asset('images/5star.svg') }}" />
                             </div>
                             <div class="message">
                                 NFC provides 100% independence, device compatibility and freedom of movement Ear-cup-mounted sensors for easy-access, touch-sensitive control 30mm drivers
@@ -189,96 +189,96 @@
 
         <div class="related-products-wrapper">
 
-            <div class="title">
-                We found other products you might like!
+        <div class="title">
+            We found other products you might like!
+        </div>
+
+        <div class="horizontal-rule"></div>
+
+        <div class="related-products">
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ bagisto_asset('images/grid.png') }}" />
+                </div>
+                <div class="product-name">
+                    <span>Red Black Tees</span>
+                </div>
+                <div class="product-price">
+                    <span>$65.00</span>
+                </div>
+                <div class="product-ratings">
+                    <span>
+                        <img src="{{ bagisto_asset('images/5star.svg') }}" />
+                    </span>
+                </div>
+                <div class="cart-fav-seg">
+                    <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
+                    <span><img src="{{ bagisto_asset('images/wishadd.svg') }}" /></span>
+                </div>
             </div>
-
-            <div class="horizontal-rule"></div>
-
-            <div class="related-products">
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="vendor/webkul/shop/assets/images/grid.png" />
-                    </div>
-                    <div class="product-name">
-                        <span>Red Black Tees</span>
-                    </div>
-                    <div class="product-price">
-                        <span>$65.00</span>
-                    </div>
-                    <div class="product-ratings">
-                        <span>
-                            <img src="vendor/webkul/shop/assets/images/5star.svg" />
-                        </span>
-                    </div>
-                    <div class="cart-fav-seg">
-                        <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
-                        <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
-                    </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ bagisto_asset('images/grid.png') }}" />
                 </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="vendor/webkul/shop/assets/images/grid.png" />
-                    </div>
-                    <div class="product-name">
-                        <span>Red Black Tees</span>
-                    </div>
-                    <div class="product-price">
-                        <span>$65.00</span>
-                    </div>
-                    <div class="product-ratings">
-                        <span>
-                            <img src="vendor/webkul/shop/assets/images/5star.svg" />
-                        </span>
-                    </div>
-                    <div class="cart-fav-seg">
-                        <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
-                        <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
-                    </div>
+                <div class="product-name">
+                    <span>Red Black Tees</span>
                 </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="vendor/webkul/shop/assets/images/grid.png" />
-                    </div>
-                    <div class="product-name">
-                        <span>Red Black Tees</span>
-                    </div>
-                    <div class="product-price">
-                        <span>$65.00</span>
-                    </div>
-                    <div class="product-ratings">
-                        <span>
-                            <img src="vendor/webkul/shop/assets/images/5star.svg" />
-                        </span>
-                    </div>
-                    <div class="cart-fav-seg">
-                        <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
-                        <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
-                    </div>
+                <div class="product-price">
+                    <span>$65.00</span>
                 </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="vendor/webkul/shop/assets/images/grid.png" />
-                    </div>
-                    <div class="product-name">
-                        <span>Red Black Tees</span>
-                    </div>
-                    <div class="product-price">
-                        <span>$65.00</span>
-                    </div>
-                    <div class="product-ratings">
-                        <span>
-                            <img src="vendor/webkul/shop/assets/images/5star.svg" />
-                        </span>
-                    </div>
-                    <div class="cart-fav-seg">
-                        <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
-                        <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
-                    </div>
+                <div class="product-ratings">
+                    <span>
+                        <img src="{{ bagisto_asset('images/5star.svg') }}" />
+                    </span>
+                </div>
+                <div class="cart-fav-seg">
+                    <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
+                    <span><img src="{{ bagisto_asset('images/wishadd.svg') }}" /></span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ bagisto_asset('images/grid.png') }}" />
+                </div>
+                <div class="product-name">
+                    <span>Red Black Tees</span>
+                </div>
+                <div class="product-price">
+                    <span>$65.00</span>
+                </div>
+                <div class="product-ratings">
+                    <span>
+                        <img src="{{ bagisto_asset('images/5star.svg') }}" />
+                    </span>
+                </div>
+                <div class="cart-fav-seg">
+                    <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
+                    <span><img src="{{ bagisto_asset('images/wishadd.svg') }}" /></span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ bagisto_asset('images/grid.png') }}" />
+                </div>
+                <div class="product-name">
+                    <span>Red Black Tees</span>
+                </div>
+                <div class="product-price">
+                    <span>$65.00</span>
+                </div>
+                <div class="product-ratings">
+                    <span>
+                        <img src="{{ bagisto_asset('images/5star.svg') }}" />
+                    </span>
+                </div>
+                <div class="cart-fav-seg">
+                    <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
+                    <span><img src="{{ bagisto_asset('images/wishadd.svg') }}" /></span>
                 </div>
             </div>
         </div>
+    </div>
 
 
     </section>
