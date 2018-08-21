@@ -182,7 +182,6 @@ return [
         Webkul\Core\Providers\CoreServiceProvider::class,
         Webkul\Shop\Providers\ShopServiceProvider::class,
         Webkul\Customer\Providers\CustomerServiceProvider::class,
-        Webkul\Channel\Providers\ChannelServiceProvider::class,
         Webkul\Inventory\Providers\InventoryServiceProvider::class,
         Webkul\Product\Providers\ProductServiceProvider::class,
         Webkul\Shop\Providers\ShopServiceProvider::class,

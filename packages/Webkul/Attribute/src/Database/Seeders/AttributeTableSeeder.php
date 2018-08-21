@@ -187,7 +187,7 @@ class AttributeTableSeeder extends Seeder
             'en' => [
                 'name' => 'Special Price From'
             ],
-            'type' => 'datetime',
+            'type' => 'date',
             'position' => 13,
             'is_required' => 0,
             'value_per_locale' => 0,
@@ -201,7 +201,7 @@ class AttributeTableSeeder extends Seeder
             'en' => [
                 'name' => 'Special Price To'
             ],
-            'type' => 'datetime',
+            'type' => 'date',
             'position' => 14,
             'is_required' => 0,
             'value_per_locale' => 0,

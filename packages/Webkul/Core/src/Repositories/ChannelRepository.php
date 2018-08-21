@@ -1,6 +1,6 @@
 <?php 
 
-namespace Webkul\Channel\Repositories;
+namespace Webkul\Core\Repositories;
  
 use Webkul\Core\Eloquent\Repository;
 
@@ -19,7 +19,7 @@ class ChannelRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Channel\Models\Channel';
+        return 'Webkul\Core\Models\Channel';
     }
 
     /**
