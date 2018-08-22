@@ -1,9 +1,9 @@
 <div class="product-price">
 
-    @inject ('priceHelper', 'Webkul\Shop\Product\Price')
+    @inject ('priceHelper', 'Webkul\Product\Product\Price')
 
     @if ($product->type == 'configurable')
-
+    
         <span class="price-label">{{ __('shop::app.products.price-label') }}</span>
 
         <span>{{ core()->currency($priceHelper->getMinimalPrice($product)) }}</span>    

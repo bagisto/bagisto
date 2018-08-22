@@ -1,6 +1,6 @@
 <div class="product-ratings">
 
-    @inject ('reviewHelper', 'Webkul\Shop\Product\Review')
+    @inject ('reviewHelper', 'Webkul\Product\Product\Review')
 
     @for ($i = 1; $i <= $reviewHelper->getAverageRating($product); $i++)
 

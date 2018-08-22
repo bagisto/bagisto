@@ -141,7 +141,7 @@ class ProductRepository extends Repository
         $product = $this->findOrFail($id);
 
         if($product->parent_id && $this->checkVariantOptionAvailabiliy($data, $product)) {
-            $data['parent_id'] = null;
+            $data['parent_id'] = NULL;
         }
 
         $product->update($data);
