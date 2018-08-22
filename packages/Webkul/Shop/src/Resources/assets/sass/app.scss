@@ -214,6 +214,7 @@ body {
         .nav > li {
             float: left;
             margin-right: 1px;
+
         }
 
         .nav > li > a {
@@ -267,7 +268,7 @@ body {
         .nav > li li:hover > ul {
             left: 100%;
             margin-left: 1px;
-            top: -1px;
+            top: -2px;
         }
 
         .nav > li:hover > a:first-child:nth-last-child(2):before {
@@ -281,6 +282,7 @@ body {
         .nav li li:hover > a:first-child:nth-last-child(2):before {
             right: 10px;
         }
+
     }
 }
 
