@@ -18,25 +18,25 @@
 
             <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
                 <label for="first_name">{{ __('shop::app.customer.signup-form.firstname') }}</label>
-                <input type="text" class="control" name="first_name" v-validate="'required'">
+                <input type="text" class="control" name="first_name" v-validate="'required'" value="{{ old('first_name') }}">
                 <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
                 <label for="last_name">{{ __('shop::app.customer.signup-form.lastname') }}</label>
-                <input type="text" class="control" name="last_name" v-validate="'required'">
+                <input type="text" class="control" name="last_name" v-validate="'required'" value="{{ old('last_name') }}">
                 <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
                 <label for="email">{{ __('shop::app.customer.signup-form.email') }}</label>
-                <input type="email" class="control" name="email" v-validate="'required|email'">
+                <input type="email" class="control" name="email" v-validate="'required|email'" value="{{ old('email') }}">
                 <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                 <label for="password">{{ __('shop::app.customer.signup-form.password') }}</label>
-                <input type="password" class="control" name="password" v-validate="'required|min:6'" ref="password">
+                <input type="password" class="control" name="password" v-validate="'required|min:6'" ref="password" value="{{ old('password') }}">
                 <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
             </div>
 
