@@ -13,7 +13,7 @@ class CustomerServiceProvider extends ServiceProvider
 {
     public function boot(Router $router)
     {
-        include __DIR__ . '/../Http/routes.php';
+        // include __DIR__ . '/../Http/routes.php';
 
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/customer/assets'),

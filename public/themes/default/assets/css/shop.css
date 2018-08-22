@@ -332,7 +332,7 @@ body {
 .header .header-bottom .nav > li li:hover > ul {
   left: 100%;
   margin-left: 1px;
-  top: -1px;
+  top: -2px;
 }
 
 .header .header-bottom .nav > li:hover > a:first-child:nth-last-child(2):before {

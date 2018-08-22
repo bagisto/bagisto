@@ -29115,6 +29115,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 // define the item component
@@ -29160,7 +29161,7 @@ var render = function() {
       _vm._l(_vm.items, function(item, index) {
         return _c("category-item", {
           key: index,
-          attrs: { url: _vm.url, item: item }
+          attrs: { url: _vm.url, item: item, parent: index }
         })
       }),
       _vm._v(" "),
@@ -29293,7 +29294,7 @@ var render = function() {
   return _c("li", [
     _c("a", { attrs: { href: "" } }, [
       _vm._v(_vm._s(this.item["translations"][0].name) + " "),
-      _vm.haveChildren
+      _vm.haveChildren && _vm.item.parent_id != null
         ? _c("i", { staticClass: "icon dropdown-right-icon" })
         : _vm._e()
     ]),
