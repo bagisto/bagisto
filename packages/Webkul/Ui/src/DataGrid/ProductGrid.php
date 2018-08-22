@@ -573,7 +573,7 @@ class ProductGrid
         $locale = app()->getLocale();
 
         foreach (['name', 'description', 'short_description', 'price'] as $code) {
-        $attribute = $this->attributes->findBy('code', $code);
+        $attribute = $this->attributes->findOneByField('code', $code);
 
         $productValueAlias = 'pav_' . $attribute->code;
 
@@ -628,7 +628,7 @@ class ProductGrid
                 $locale = $this->locale;
 
                 foreach ($this->attributeColumns as $code) {
-                    $attribute = $this->attributes->findBy('code', $code);
+                    $attribute = $this->attributes->findOneByField('code', $code);
 
                     $productValueAlias = 'pav_' . $attribute->code;
 

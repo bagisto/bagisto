@@ -5,7 +5,6 @@ namespace Webkul\Product\Product;
 use Illuminate\Support\Facades\DB;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-use Webkul\Product\Models\ProductAttributeValue;
 
 class Collection extends AbstractProduct
 {
@@ -28,7 +27,7 @@ class Collection extends AbstractProduct
      *
      * @var array
      */
-    protected $attributesToSelect = [
+    protected $attributeToSelect = [
             'name',
             'description',
             'short_description',
@@ -58,42 +57,33 @@ class Collection extends AbstractProduct
      */
     public function addAttributesToSelect($attributes)
     {
-        $this->attributesToSelect = $attributes;
+        $this->attributeToSelect = array_unique(
+                array_merge($this->attributeToSelect, $attributes)
+            );
+
+        return $this;
     }
 
     /**
      * @param integer $categoryId
      * @return Collection
      */
-    public function getProductCollection($categoryId = null, $attributeToSelect = '*')
+    public function getCollection($categoryId = null)
     {
         $qb = $this->product->getModel()
                 ->select('products.*')
                 ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
                 ->where('product_categories.category_id', $categoryId);
 
-        foreach ($this->attributesToSelect as $code) {
-            $attribute = $this->attribute->findBy('code', $code);
-            
-            $productValueAlias = 'pav_' . $attribute->code;
-
-            $qb->leftJoin('product_attribute_values as ' . $productValueAlias, function($leftJoin) use($attribute, $productValueAlias) {
-
-                $leftJoin->on('products.id', $productValueAlias . '.product_id');
-
-                $leftJoin = $this->applyChannelLocaleFilter($attribute, $leftJoin, $productValueAlias)->where($productValueAlias . '.attribute_id', $attribute->id);
-            });
-
-            $qb->addSelect($productValueAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $code);
-        }
+        $this->addSelectAttributes($qb);
         
-        foreach (request()->input() as $code => $value) {
-            $filterAlias = 'filter_' . $code;
+        // foreach (request()->input() as $code => $value) {
+        //     $filterAlias = 'filter_' . $code;
                 
-            $qb->leftJoin('product_attribute_values as ' . $filterAlias, 'products.id', '=', $filterAlias . '.product_id');
+        //     $qb->leftJoin('product_attribute_values as ' . $filterAlias, 'products.id', '=', $filterAlias . '.product_id');
 
-            $qb->where($filterAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type], $value);
-        }
+        //     $qb->where($filterAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type], $value);
+        // }
 
         // if(0) {
         //     $qb->orderBy('id', 'desc');

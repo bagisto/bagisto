@@ -56,7 +56,7 @@ class Price extends AbstractProduct
         static $attribute;
 
         if(!$attribute)
-            $attribute = $this->attribute->findBy('code', 'price');
+            $attribute = $this->attribute->findOneByField('code', 'price');
 
         $qb = ProductAttributeValue::join('products', 'product_attribute_values.product_id', '=', 'products.id')
             ->join('attributes', 'product_attribute_values.attribute_id', '=', 'attributes.id')
@@ -64,7 +64,7 @@ class Price extends AbstractProduct
             ->where('attributes.code', 'price')
             ->addSelect('product_attribute_values.*');
 
-        $qb = $this->applyChannelLocaleFilter($attribute, $qb);
+        $this->applyChannelLocaleFilter($attribute, $qb);
 
         return $qb->min('product_attribute_values.' . ProductAttributeValue::$attributeTypeFields['price']);
     }

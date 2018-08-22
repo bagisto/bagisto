@@ -89,7 +89,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = $this->role->findOrFail($id);
+        $role = $this->role->find($id);
 
         return view($this->_config['view'], compact('role'));
     }

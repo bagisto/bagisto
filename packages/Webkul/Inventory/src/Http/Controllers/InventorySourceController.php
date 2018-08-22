@@ -87,7 +87,7 @@ class InventorySourceController extends Controller
      */
     public function edit($id)
     {
-        $inventorySource = $this->inventorySource->findOrFail($id);
+        $inventorySource = $this->inventorySource->find($id);
 
         return view($this->_config['view'], compact('inventorySource'));
     }
