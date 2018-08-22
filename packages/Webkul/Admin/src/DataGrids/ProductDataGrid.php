@@ -156,7 +156,7 @@ class ProductDataGrid
                 [
                     'name' => 'pi.qty',
                     'alias' => 'ProductQuantity',
-                    'type' => 'string',
+                    'type' => 'number',
                     'label' => 'Product Quatity',
                 ],
             ],

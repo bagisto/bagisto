@@ -633,7 +633,10 @@ h2 {
     }
 }
 
+/*  Data grid css starts here  */
 .grid-container {
+    user-select: none;
+
     .filter-wrapper {
         display: block;
         box-sizing: border-box;
@@ -642,7 +645,6 @@ h2 {
         .filter-row-two {
             display: flex;
             flex-direction: row;
-            // flex-wrap: wrap;
         }
         .filter-row-one {
             height: 40px;
@@ -696,7 +698,7 @@ h2 {
                         width: 150px;
                         border: 2px solid $control-border-color;
                         border-radius: 2px;
-                        background-color: white;
+                        background-color: $color-white;
                         color: $filter-toggle-color;
                         font-size: 14px;
 
@@ -866,6 +868,9 @@ h2 {
                     }
                 }
 
+                th {
+                    text-transform: capitalize;
+                }
             }
         }
 

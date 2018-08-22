@@ -108,8 +108,12 @@
                 @endforeach
                 @if(isset($attribute_columns))
                     @foreach($attribute_columns as $key => $value)
-                        <th>
-                            {{ $value }}
+                        <th class="grid_head"
+                            data-column-name="{{ $attributeAliases[$key] }}"
+                            data-column-label="{{ $attributeAliases[$key] }}"
+                            data-column-sort="asc"
+                        >
+                            {{ $value }}<span class="icon sort-down-icon"></span>
                         </th>
                     @endforeach
                 @endif

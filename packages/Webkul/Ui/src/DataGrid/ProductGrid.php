@@ -169,6 +169,17 @@ class ProductGrid
 
      protected $parsed;
 
+    /**
+     * To store the
+     * attribute columns aliases
+     * for search, filter and
+     * sort.
+     *
+     * @var attributeAliases
+     */
+
+    private $attributeAliases = [];
+
     //Prepares the input parameters passed as the configuration for datagrid.
     public function make($args)
     {
@@ -555,59 +566,48 @@ class ProductGrid
     private function parse()
     {
         $parsed = [];
+
         $unparsed = url()->full();
+
         if (count(explode('?', $unparsed))>1) {
+
             $to_be_parsed = explode('?', $unparsed)[1];
+
             parse_str($to_be_parsed, $parsed);
+
             unset($parsed['page']);
+
             return $parsed;
         } else {
+
             return $parsed;
+
         }
     }
 
-    public function getProducts() {
-        $qb = DB::table('products')->addSelect('products.*');
+    /**
+     * Getting all attributes from the repository instance
+     * type hinted in the contructor of product grid.
+     *
+     * @return $this
+     */
+    public function getAttributes() {
 
-        $channel = core()->getCurrentChannelCode();
-        $locale = app()->getLocale();
+        return $this->attributes->all();
+    }
 
-        foreach (['name', 'description', 'short_description', 'price'] as $code) {
-        $attribute = $this->attributes->findBy('code', $code);
+    public function filterProductByAttributes($attributes) {
 
-        $productValueAlias = 'pav_' . $attribute->code;
+        foreach($attributes as $key => $value) {
 
-        $qb->leftJoin('product_attribute_values as ' . $productValueAlias, function($leftJoin) use($channel, $locale, $attribute, $productValueAlias) {
+            $filterAlias = 'filter_' . $attribute->code;
 
-        $leftJoin->on('products.id', $productValueAlias . '.product_id');
+            $qb->leftJoin('product_attribute_values as ' . $filterAlias, 'products.id', '=', $filterAlias . '.product_id');
 
-        if($attribute->value_per_channel) {
-        if($attribute->value_per_locale) {
-        $leftJoin->where($productValueAlias . '.channel', $channel)
-        ->where($productValueAlias . '.locale', $locale);
-        } else {
-        $leftJoin->where($productValueAlias . '.channel', $channel);
-        }
-        } else {
-        if($attribute->value_per_locale) {
-        $leftJoin->where($productValueAlias . '.locale', $locale);
-        }
+            $qb->where($filterAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type], 'Product Name');
+
         }
 
-        $leftJoin->where($productValueAlias . '.attribute_id', $attribute->id);
-        });
-
-
-        $qb->addSelect($productValueAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $code);
-
-
-        if($code == 'name') {
-        $filterAlias = 'filter_' . $attribute->code;
-
-        $qb->leftJoin('product_attribute_values as ' . $filterAlias, 'products.id', '=', $filterAlias . '.product_id');
-        $qb->where($filterAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type], 'Product Name');
-        }
-        }
     }
 
     /**
@@ -623,14 +623,15 @@ class ProductGrid
             if(array_key_exists('withAttributes',$join)) {
 
                 $qb = $this->query;
-
                 $channel = $this->channel;
                 $locale = $this->locale;
 
                 foreach ($this->attributeColumns as $code) {
                     $attribute = $this->attributes->findBy('code', $code);
 
-                    $productValueAlias = 'pav_' . $attribute->code;
+                    $productValueAlias = 'pavxxx' . $attribute->code;
+
+                    array_push($this->attributeAliases, $productValueAlias);
 
                     $qb->leftJoin('product_attribute_values as ' . $productValueAlias, function ($leftJoin) use ($channel, $locale, $attribute, $productValueAlias) {
                         $leftJoin->on('prods.id', $productValueAlias . '.product_id');
@@ -950,21 +951,11 @@ class ProductGrid
             'results' => $this->results,
             'columns' => $this->columns,
             'attribute_columns' => $this->attributeColumns,
+            'attributeAliases' => $this->attributeAliases,
             'filterable' =>$this->filterable,
             'operators' => $this->operators,
             'massoperations' => $this->massoperations,
             'actions' => $this->actions,
         ]);
-    }
-
-    /**
-     * Getting all attributes from the repository instance
-     * type hinted in the contructor of product grid.
-     *
-     * @return $this
-     */
-    public function getAttributes() {
-        // dd($this->attributes->all());
-        return $this->attributes->all();
     }
 }
