@@ -8,7 +8,7 @@
 
         <div class="product-grid max-3-col">
 
-            @inject ('productHelper', 'Webkul\Shop\Product\Collection')
+            @inject ('productHelper', 'Webkul\Product\Product\Collection')
             
             <?php $products = $productHelper->getProductCollection($category->id); ?>
             

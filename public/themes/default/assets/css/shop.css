@@ -514,6 +514,11 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   margin-right: 10%;
 }
 
+.main-container-wrapper .content-container {
+  display: inline-block;
+  width: 100%;
+}
+
 .main-container-wrapper .product-grid {
   display: grid;
   grid-gap: 30px;

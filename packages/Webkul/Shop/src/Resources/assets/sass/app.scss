@@ -441,6 +441,11 @@ section.slider-block {
     margin-left: 10%;
     margin-right: 10%;
 
+    .content-container {
+        display: inline-block;
+        width: 100%;
+    }
+
     .product-grid {
         display: grid;
         grid-gap: 30px;
