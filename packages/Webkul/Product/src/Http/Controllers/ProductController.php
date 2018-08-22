@@ -99,7 +99,7 @@ class ProductController extends Controller
         $families = $this->attributeFamily->all();
 
         if($familyId = request()->get('family')) {
-            $configurableFamily = $this->attributeFamily->findOrFail($familyId);
+            $configurableFamily = $this->attributeFamily->find($familyId);
         }
 
         return view($this->_config['view'], compact('families', 'configurableFamily'));
@@ -143,7 +143,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->product->findOrFail($id, ['*'], ['variants']);
+        $product = $this->product->with(['variants'])->find($id);
 
         $categories = $this->category->getCategoryTree();
 

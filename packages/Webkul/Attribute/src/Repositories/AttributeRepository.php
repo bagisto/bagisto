@@ -75,7 +75,7 @@ class AttributeRepository extends Repository
     {
         $data = $this->validateUserInput($data);
 
-        $attribute = $this->findOrFail($id);
+        $attribute = $this->find($id);
 
         $attribute->update($data);
 

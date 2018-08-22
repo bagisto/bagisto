@@ -100,7 +100,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->admin->findOrFail($id);
+        $user = $this->admin->find($id);
 
         $roles = $this->role->all();
 

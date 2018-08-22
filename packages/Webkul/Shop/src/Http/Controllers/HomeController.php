@@ -31,7 +31,7 @@ use Webkul\Channel\Channel as Channel;
 
         $current_channel = core()->getCurrentChannel();
 
-        $all_sliders = $this->sliders->findWhere(['channel_id'=>$current_channel['id']]);
+        $all_sliders = $this->sliders->findOneWhere(['channel_id'=>$current_channel['id']]);
 
         return view($this->_config['view'])->with('data',$all_sliders);
     }

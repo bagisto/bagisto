@@ -627,7 +627,7 @@ class ProductGrid
                 $locale = $this->locale;
 
                 foreach ($this->attributeColumns as $code) {
-                    $attribute = $this->attributes->findBy('code', $code);
+                    $attribute = $this->attributes->findOneByField('code', $code);
 
                     $productValueAlias = 'pavxxx' . $attribute->code;
 

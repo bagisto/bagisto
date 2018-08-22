@@ -92,7 +92,7 @@ class CategoryController extends Controller
     {
         $categories = $this->category->getCategoryTree($id);
 
-        $category = $this->category->findOrFail($id);
+        $category = $this->category->find($id);
 
         return view($this->_config['view'], compact('category', 'categories'));
     }

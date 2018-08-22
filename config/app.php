@@ -172,6 +172,7 @@ return [
 
         //Laravel Intervention
         Intervention\Image\ImageServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
         //Webkul packages
         Webkul\User\Providers\UserServiceProvider::class,
