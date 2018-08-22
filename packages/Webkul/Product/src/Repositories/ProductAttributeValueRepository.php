@@ -54,7 +54,7 @@ class ProductAttributeValueRepository extends Repository
         if(isset($data['attribute_id'])) {
             $attribute = $this->attribute->find($data['attribute_id']);
         } else {
-            $attribute = $this->attribute->findBy('code', $data['attribute_code']);
+            $attribute = $this->attribute->findOneByField('code', $data['attribute_code']);
         }
 
         if(!$attribute)

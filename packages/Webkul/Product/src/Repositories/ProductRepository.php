@@ -103,7 +103,7 @@ class ProductRepository extends Repository
     {
         $product = $this->model->create($data);
 
-        $nameAttribute = $this->attribute->findBy('code', 'status');
+        $nameAttribute = $this->attribute->findOneByField('code', 'status');
         $this->attributeValue->create([
                 'product_id' => $product->id,
                 'attribute_id' => $nameAttribute->id,
@@ -115,7 +115,7 @@ class ProductRepository extends Repository
             $super_attributes = [];
 
             foreach ($data['super_attributes'] as $attributeCode => $attributeOptions) {
-                $attribute = $this->attribute->findBy('code', $attributeCode);
+                $attribute = $this->attribute->findOneByField('code', $attributeCode);
 
                 $super_attributes[$attribute->id] = $attributeOptions;
 
@@ -138,7 +138,7 @@ class ProductRepository extends Repository
      */
     public function update(array $data, $id, $attribute = "id")
     {
-        $product = $this->findOrFail($id);
+        $product = $this->find($id);
 
         if($product->parent_id && $this->checkVariantOptionAvailabiliy($data, $product)) {
             $data['parent_id'] = NULL;
@@ -155,12 +155,12 @@ class ProductRepository extends Repository
             if(!isset($data[$attribute->code]) || !$data[$attribute->code])
                 continue;
 
-            $attributeValue = $this->attributeValue->findWhere([
+            $attributeValue = $this->attributeValue->findOneWhere([
                     'product_id' => $product->id,
                     'attribute_id' => $attribute->id,
                     'channel' => $attribute->value_per_channel ? $data['channel'] : null,
                     'locale' => $attribute->value_per_locale ? $data['locale'] : null
-                ])->first();
+                ]);
 
             if(!$attributeValue) {
                 $this->attributeValue->create([
@@ -228,7 +228,7 @@ class ProductRepository extends Repository
             ]);
 
         foreach (['sku', 'name', 'price', 'weight', 'status'] as $attributeCode) {
-            $attribute = $this->attribute->findBy('code', $attributeCode);
+            $attribute = $this->attribute->findOneByField('code', $attributeCode);
 
             if($attribute->value_per_channel) {
                 if($attribute->value_per_locale) {
@@ -293,19 +293,19 @@ class ProductRepository extends Repository
      */
     public function updateVariant(array $data, $id)
     {
-        $variant = $this->findOrFail($id);
+        $variant = $this->find($id);
 
         $variant->update(['sku' => $data['sku']]);
 
         foreach (['sku', 'name', 'price', 'weight', 'status'] as $attributeCode) {
-            $attribute = $this->attribute->findBy('code', $attributeCode);
+            $attribute = $this->attribute->findOneByField('code', $attributeCode);
 
-            $attributeValue = $this->attributeValue->findWhere([
+            $attributeValue = $this->attributeValue->findOneWhere([
                     'product_id' => $id,
                     'attribute_id' => $attribute->id,
                     'channel' => $attribute->value_per_channel ? $data['channel'] : null,
                     'locale' => $attribute->value_per_locale ? $data['locale'] : null
-                ])->first();
+                ]);
             
             if(!$attributeValue) {
                 $this->attributeValue->create([

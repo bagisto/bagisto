@@ -45,7 +45,7 @@ class ChannelRepository extends Repository
      */
     public function update(array $data, $id, $attribute = "id")
     {
-        $channel = $this->findOrFail($id);
+        $channel = $this->find($id);
 
         $channel->update($data);
 

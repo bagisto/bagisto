@@ -31,7 +31,7 @@ class Locale
     public function handle($request, Closure $next)
     {
         if($locale = $request->get('locale')) {
-            if($this->locale->findBy('code', $locale)) {
+            if($this->locale->findOneByField('code', $locale)) {
                 // app()->setLocale($locale);
             }
         }

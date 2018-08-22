@@ -37,10 +37,10 @@ class ProductInventoryRepository extends Repository
                 if(is_null($qty))
                     continue;
                     
-                $productInventory = $this->findWhere([
+                $productInventory = $this->findOneWhere([
                         'product_id' => $product->id,
                         'inventory_source_id' => $inventorySourceId,
-                    ])->first();
+                    ]);
 
                 if($productInventory) {
                     if(is_numeric($index = $inventorySourceIds->search($inventorySourceId))) {

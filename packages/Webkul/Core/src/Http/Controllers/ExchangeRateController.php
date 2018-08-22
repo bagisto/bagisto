@@ -110,7 +110,7 @@ class ExchangeRateController extends Controller
     {
         $currencies = $this->currency->all();
 
-        $exchangeRate = $this->exchangeRate->findOrFail($id);
+        $exchangeRate = $this->exchangeRate->find($id);
 
         return view($this->_config['view'], compact('currencies', 'exchangeRate'));
     }

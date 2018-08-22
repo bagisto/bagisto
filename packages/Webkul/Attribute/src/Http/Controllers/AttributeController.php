@@ -90,7 +90,7 @@ class AttributeController extends Controller
      */
     public function edit($id)
     {
-        $attribute = $this->attribute->findOrFail($id);
+        $attribute = $this->attribute->find($id);
 
         return view($this->_config['view'], compact('attribute'));
     }

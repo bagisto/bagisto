@@ -10,7 +10,7 @@
 
             @inject ('productHelper', 'Webkul\Product\Product\Collection')
             
-            <?php $products = $productHelper->getProductCollection($category->id); ?>
+            <?php $products = $productHelper->getCollection($category->id); ?>
             
             @foreach ($products as $product)
 

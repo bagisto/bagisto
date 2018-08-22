@@ -16,6 +16,7 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^3.2",
+        "prettus/l5-repository": "^2.6",
         "propaganistas/laravel-intl": "^2.0"
     },
     "require-dev": {

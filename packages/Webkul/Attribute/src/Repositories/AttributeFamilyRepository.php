@@ -74,7 +74,7 @@ class AttributeFamilyRepository extends Repository
                 if(isset($attribute['id'])) {
                     $attributeModel = $this->attribute->find($attribute['id']);
                 } else {
-                    $attributeModel = $this->attribute->findBy('code', $attribute['code']);
+                    $attributeModel = $this->attribute->findOneByField('code', $attribute['code']);
                 }
                 
                 $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
@@ -92,7 +92,7 @@ class AttributeFamilyRepository extends Repository
      */
     public function update(array $data, $id, $attribute = "id")
     {
-        $family = $this->findOrFail($id);
+        $family = $this->find($id);
 
         $family->update($data);
 
@@ -114,7 +114,7 @@ class AttributeFamilyRepository extends Repository
                         $previousAttributeGroupIds->forget($index);
                     }
 
-                    $attributeGroup = $this->attributeGroup->findOrFail($attributeGroupId);
+                    $attributeGroup = $this->attributeGroup->find($attributeGroupId);
                     $attributeGroup->update($attributeGroupInputs);
 
                     $attributeIds = $attributeGroup->custom_attributes()->get()->pluck('id');

@@ -94,7 +94,7 @@ class ChannelController extends Controller
      */
     public function edit($id)
     {
-        $channel = $this->channel->findOrFail($id, ['*'], ['locales', 'currencies']);
+        $channel = $this->channel->with(['locales', 'currencies'])->find($id);
 
         return view($this->_config['view'], compact('channel'));
     }
