@@ -16,7 +16,7 @@ class Product extends Model
 {
     protected $fillable = ['type', 'attribute_family_id', 'sku', 'parent_id'];
 
-    protected $with = ['attribute_family', 'attribute_values', 'inventories'];
+    protected $with = ['attribute_family', 'inventories'];
 
     /**
      * Get the product attribute family that owns the product.
@@ -131,14 +131,6 @@ class Product extends Model
     {
         return $this->attribute_family->custom_attributes->pluck('code')->contains($attribute);
     }
-    
-    /**
-     * @return bool
-     */
-    public function getFinalPrice()
-    {
-        return 0.00;
-    }
 
     /**
      * Get an attribute from the model.
@@ -148,11 +140,10 @@ class Product extends Model
      */
     public function getAttribute($key)
     {
-
-        if (!method_exists(self::class, $key) && !isset($this->attributes[$key])) {
-            $this->attributes[$key] = '';
-
+        if (!method_exists(self::class, $key) && !in_array($key, ['parent_id', 'attribute_family_id']) && !isset($this->attributes[$key])) {
             if ($this->isCustomAttribute($key)) {
+                $this->attributes[$key] = '';
+
                 $attributeModel = $this->attribute_family->custom_attributes()->where('attributes.code', $key)->first();
 
                 if($attributeModel) {
@@ -176,9 +167,10 @@ class Product extends Model
 
                     $this->attributes[$key] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attributeModel->type]];
                 }
+
+                return $this->getAttributeValue($key);
             }
 
-            return $this->getAttributeValue($key);
         }
 
         return parent::getAttribute($key);
