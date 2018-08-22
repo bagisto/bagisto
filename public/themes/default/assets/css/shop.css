@@ -14,9 +14,12 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 14px;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
 }
 
 .header {
@@ -973,12 +976,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
           flex-direction: column;
   min-height: 345px;
   padding: 25px;
-}
-
-.account-content .edit-form-content .edit-form .control-group input,
-.account-content .edit-form-content .edit-form .control-group select {
-  font-family: "Montserrat", sans-serif;
-  width: 100%;
 }
 
 section.product-detail, section.product-review {

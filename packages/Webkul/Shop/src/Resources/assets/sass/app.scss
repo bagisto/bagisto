@@ -7,9 +7,12 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 14px;
+}
+
+* {
+    font-family: "Montserrat", sans-serif;
 }
 
 .header {
@@ -864,14 +867,6 @@ section.slider-block {
             flex-direction: column;
             min-height: 345px;
             padding: 25px;
-
-            .control-group {
-                input,
-                select {
-                    font-family: "Montserrat", sans-serif;
-                    width: 100%;
-                }
-            }
         }
     }
     //edit form ends
