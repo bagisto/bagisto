@@ -4,8 +4,6 @@ window.VeeValidate = require("vee-validate");
 
 Vue.use(VeeValidate);
 
-//pure JS for resizing of browser purposes only
-
 Vue.component("category-nav", require("./components/category-nav.vue"));
 Vue.component("category-item", require("./components/category-item.vue"));
 Vue.component("image-slider", require("./components/image-slider.vue"));

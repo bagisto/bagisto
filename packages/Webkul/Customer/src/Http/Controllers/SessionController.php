@@ -25,6 +25,7 @@ class SessionController extends Controller
     public function __construct()
     {
         $this->_config = request('_config');
+        $this->middleware('auth:customer')->except(['show','create']);
     }
 
     public function show()
@@ -39,11 +40,9 @@ class SessionController extends Controller
             'password' => 'required'
         ]);
 
-        // $remember = request('remember');
         if (!auth()->guard('customer')->attempt(request(['email', 'password']))) {
-            dd('cannot be authorized');
-            session()->flash('error', 'Please check your credentials and try again.');
 
+            session()->flash('error', 'Please check your credentials and try again.');
             return back();
         }
 

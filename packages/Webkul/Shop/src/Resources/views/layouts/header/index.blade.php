@@ -7,7 +7,7 @@
             <ul class="logo-container">
                 <li>
                     <a href="">
-                        <img class="logo" src="vendor/webkul/shop/assets/images/logo.svg" />
+                        <img class="logo" src="{{ asset('vendor/webkul/shop/assets/images/logo.svg') }}" />
                     </a>
                 </li>
             </ul>
@@ -48,20 +48,42 @@
 
                     </div>
 
-                    <div class="dropdown-list bottom-right" style="display: none;">
+                    @guest
+                        <div class="dropdown-list bottom-right" style="display: none;">
 
-                        <div class="dropdown-container">
+                            <div class="dropdown-container">
 
-                            <label>Account</label>
+                                <label>Account</label>
 
-                            <ul>
-                                <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
-                                <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
-                            </ul>
+                                <ul>
+                                    <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
+                                    <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
+                                </ul>
+
+                            </div>
 
                         </div>
+                    @endguest
+                    @auth('customer')
+                        <div class="dropdown-list bottom-right" style="display: none;">
 
-                    </div>
+                            <div class="dropdown-container">
+
+                                <label>Account</label>
+
+                                <ul>
+                                    <li><a href="{{ route('customer.account.index') }}">Account</a></li>
+                                    <li><a href="{{ route('customer.profile.index') }}">Profile</a></li>
+                                    <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('customer.cart') }}">Cart</a></li>
+                                    <li><a href="{{ route('customer.orders.index') }}">Orders</a></li>
+                                    <li><a href="{{ route('customer.session.destroy') }}">Logout</a></li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+                    @endauth
 
                 </li>
 
@@ -119,35 +141,43 @@
         window.width = $(document).width();
         window.height = $(document).height();
         if (window.width < 785) {
+
             $(".header").css("margin-bottom", "0");
             $(".header-top").css("margin-bottom", "0");
             $("ul.search-container").css("display", "none");
             $(".header-bottom").css("display", "none");
             $("div.right-content").css("display", "none");
             $(".right-responsive").css("display", "inherit");
+
         } else if (window.width > 785) {
+
             $(".header").css("margin-bottom", "21px");
             $(".header-top").css("margin-bottom", "16px");
             $("ul.search-container").css("display", "inherit");
             $(".header-bottom").css("display", "block");
             $("div.right-content").css("display", "inherit");
             $(".right-responsive").css("display", "none");
+
         }
     });
 
     $(document).ready(function (){
+
         /* Responsiveness script goes here */
         var w = $(document).width();
         var window = {};
         window.width = $(document).width();
         window.height = $(document).height();
+
         if (window.width < 785) {
+
             $(".header").css("margin-bottom", "0");
             $(".header-top").css("margin-bottom", "0");
             $("ul.search-container").css("display", "none");
             $(".header-bottom").css("display", "none");
             $("div.right-content").css("display", "none");
             $(".right-responsive").css("display", "inherit");
+
         }
         /* Responsiveness script ends here */
     });

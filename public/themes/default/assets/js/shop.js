@@ -217,8 +217,6 @@ window.VeeValidate = __webpack_require__(9);
 
 Vue.use(VeeValidate);
 
-//pure JS for resizing of browser purposes only
-
 Vue.component("category-nav", __webpack_require__(10));
 Vue.component("category-item", __webpack_require__(13));
 Vue.component("image-slider", __webpack_require__(16));
@@ -29177,7 +29175,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", [
       _c("img", {
-        attrs: { src: "vendor/webkul/shop/assets/images/offer-zone.svg" }
+        attrs: {
+          src:
+            "http://localhost/bagisto/public/vendor/webkul/shop/assets/images/offer-zone.svg"
+        }
       }),
       _vm._v(" "),
       _c("span", [_vm._v("Offer Zone")])

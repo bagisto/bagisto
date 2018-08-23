@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 
 /**
- * Dashboard controller
+ * Registration controller
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -21,10 +21,13 @@ class RegistrationController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $_config;
+    protected $customer;
 
-    public function __construct()
+
+    public function __construct(CustomerRepository $customer)
     {
         $this->_config = request('_config');
+        $this->customer = $customer;
     }
 
     /**
@@ -43,7 +46,7 @@ class RegistrationController extends Controller
      */
     public function create(Request $request)
     {
-        // return $request->except('_token'); //don't let csrf token to be openly printed
+
         $request->validate([
 
             'first_name' => 'string|required',
@@ -53,13 +56,9 @@ class RegistrationController extends Controller
 
         ]);
 
-        $customer = new \Webkul\Customer\Models\Customer();
-        $customer->first_name = $request->first_name;
-        $customer->last_name = $request->last_name;
-        $customer->email = $request->email;
-        $customer->password = bcrypt($request->password);
+        $registrationData = $request->except('_token');
 
-        if ($customer->save()) {
+        if ($this->customer->create($registrationData)) {
 
             session()->flash('success', 'Account created successfully.');
             return redirect()->route($this->_config['redirect']);

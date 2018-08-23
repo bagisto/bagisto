@@ -11,7 +11,7 @@ use Webkul\Core\Eloquent\Repository;
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class CustomerRepository extends Repository
+class CustomerAddressRepository extends Repository
 {
     /**
      * Specify Model class name
@@ -21,7 +21,7 @@ class CustomerRepository extends Repository
 
     function model()
     {
-        return 'Webkul\Customer\Models\Customer';
+        return 'Webkul\Customer\Models\CustomersAddress';
     }
 
     /**
@@ -31,9 +31,9 @@ class CustomerRepository extends Repository
 
     public function create(array $data)
     {
-        $customer = $this->model->create($data);
+        $address = $this->model->create($data);
 
-        return $customer;
+        return $address;
     }
 
     /**
@@ -45,10 +45,10 @@ class CustomerRepository extends Repository
 
     public function update(array $data, $id, $attribute = "id")
     {
-        $customer = $this->find($id);
+        $address = $this->find($id);
 
-        $customer->update($data);
+        $address->update($data);
 
-        return $customer;
+        return $address;
     }
 }

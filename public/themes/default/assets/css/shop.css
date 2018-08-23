@@ -952,12 +952,13 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 }
 
 .account-content .edit-form-content {
+  padding: 0px 25px;
   margin-left: 5.5%;
   margin-top: 1%;
   width: 100%;
 }
 
-.account-content .edit-form-content .edit-text {
+.account-content .edit-form-content .title {
   margin-bottom: 2%;
   margin-left: auto;
   margin-right: auto;
@@ -969,13 +970,37 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   display: -ms-flexbox;
   display: flex;
   background: #ffffff;
-  border: 1px solid #c7c7c7;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   min-height: 345px;
-  padding: 25px;
+}
+
+.account-content .address-form-content {
+  padding: 0px 25px;
+  margin-left: 5.5%;
+  margin-top: 1%;
+  width: 100%;
+}
+
+.account-content .address-form-content .title {
+  margin-bottom: 2%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 24px;
+}
+
+.account-content .address-form-content .address-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: #ffffff;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 345px;
 }
 
 section.product-detail, section.product-review {
