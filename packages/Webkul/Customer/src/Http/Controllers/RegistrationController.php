@@ -61,11 +61,13 @@ class RegistrationController extends Controller
         if ($this->customer->create($registrationData)) {
 
             session()->flash('success', 'Account created successfully.');
+
             return redirect()->route($this->_config['redirect']);
 
         } else {
 
             session()->flash('error', 'Cannot Create Your Account.');
+
             return redirect()->back();
 
         }

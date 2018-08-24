@@ -33,8 +33,11 @@ class AddressController extends Controller
     {
 
         $this->middleware('auth:customer');
+
         $this->_config = request('_config');
+
         $this->customer = $customer;
+
         $this->address = $address;
 
     }
@@ -45,6 +48,7 @@ class AddressController extends Controller
      * @return Array
      */
     private function getCustomer($id) {
+
         $customer = collect($this->customer->findOneWhere(['id'=>$id]));
 
         return $customer;
@@ -57,9 +61,11 @@ class AddressController extends Controller
      * @return Array
      */
     private function getAddress($id) {
-        $address = collect($this->address->findOneWhere(['id'=>$id]));
+
+        $address = collect($this->address->findOneWhere(['customer_id'=>$id]));
 
         return $address;
+
     }
 
 
@@ -75,10 +81,7 @@ class AddressController extends Controller
 
         $address = $this->getAddress($id);
 
-        if(count($address)==0)
-            return view($this->_config['view'])->with('address', 'You don\'t have any addresses saved yet, create new.');
-        else
-            return view($this->_config['view'])->with('address', $address);
+        return view($this->_config['view'])->with('address', $address);
     }
 
     /**
@@ -101,19 +104,44 @@ class AddressController extends Controller
 
         $id = auth()->guard('customer')->user()->id;
 
+        $data = collect(request()->input())->except('_token')->toArray();
+
         $this->validate(request(), [
 
             'address1' => 'string|required',
-            'address1' => 'string|required',
+            'address2' => 'string|required',
             'country' => 'string|required',
             'state' => 'string|required',
             'city' => 'string|required',
-            'pincode' => 'numeric|required',
+            'postcode' => 'numeric|required',
 
         ]);
 
-        $data = collect(request()->input())->except('_token')->toArray();
-        dd($data);
+        $cust_id['customer_id'] = $id;
+
+        $data = array_merge($cust_id, $data);
+
+        $address = $this->getAddress($id);
+
+
+        if(count($address) == 0 || $address->isEmpty()) {
+            if($this->address->create($data)) {
+                session()->flash('success', 'Address have been successfully added.');
+
+                return redirect()->route($this->_config['redirect']);
+
+            } else {
+                session()->flash('error', 'Address cannot be added.');
+
+                return redirect()->back();
+            }
+        } else {
+            session()->flash('error', 'Cannot create a new address due to previously existing address');
+
+            return redirect()-route('customer.address.edit');
+        }
+
+
 
     }
 
@@ -124,9 +152,43 @@ class AddressController extends Controller
      *
      * @return View
      */
+    public function showEdit() {
+
+        $id = auth()->guard('customer')->user()->id;
+
+        $address = $this->getAddress($id);
+
+        return view($this->_config['view'])->with('address', $address);
+
+    }
+
     public function edit() {
 
-        return view($this->_config['view']);
+        $id = auth()->guard('customer')->user()->id;
 
+        $this->validate(request(), [
+
+            'address1' => 'string|required',
+            'address2' => 'string|required',
+            'country' => 'string|required',
+            'state' => 'string|required',
+            'city' => 'string|required',
+            'postcode' => 'numeric|required',
+
+        ]);
+
+        $data = collect(request()->input())->except('_token')->toArray();
+
+        $address = $this->getAddress($id);
+
+        if($this->address->update($data, $id)) {
+            Session()->flash('success','Address Updated Successfully.');
+
+            return redirect()->route('customer.address.index');
+        } else {
+            Session()->flash('success','Address Cannot be Updated.');
+
+            return redirect()->route('customer.address.edit');
+        }
     }
 }

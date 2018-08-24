@@ -30,13 +30,13 @@
                     </div>
 
                     <div class="control-group" :class="[errors.has('state') ? 'has-error' : '']">
-                        <label for="state">state</label>
+                        <label for="state">State</label>
                         <input type="text" class="control" name="state" v-validate="'required'">
                         <span class="control-error" v-if="errors.has('state')">@{{ errors.first('state') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('city') ? 'has-error' : '']">
-                        <label for="city">city</label>
+                        <label for="city">City</label>
                         <input type="text" class="control" name="city" v-validate="'required'">
                         <span class="control-error" v-if="errors.has('city')">@{{ errors.first('city') }}</span>
                     </div>

@@ -42,7 +42,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'customer.session.index'
             ])->name('customer.session.destroy');
 
-            Route::view('/cart', 'shop::store.product.view.cart.index')->name('customer.cart');
+            Route::view('/cart', 'shop::store.product.cart.cart.index')->name('customer.cart');
 
             Route::view('/product', 'shop::store.product.details.home.index')->name('customer.product');
 
@@ -83,11 +83,12 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('customer.address.create');
 
                 Route::post('address/create', 'Webkul\Customer\Http\Controllers\AddressController@create')->defaults('_config', [
-                    'view' => 'shop::customers.account.address.address'
+                    'view' => 'shop::customers.account.address.address',
+                    'redirect' => 'customer.address.index'
                 ])->name('customer.address.create');
 
-                Route::get('address/edit', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [
-                    'view' => 'shop::customers.account.address.address'
+                Route::get('address/edit', 'Webkul\Customer\Http\Controllers\AddressController@showEdit')->defaults('_config', [
+                    'view' => 'shop::customers.account.address.edit'
                 ])->name('customer.address.edit');
 
                 Route::post('address/edit', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [

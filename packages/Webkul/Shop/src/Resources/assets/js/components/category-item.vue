@@ -1,6 +1,6 @@
 <template>
     <li>
-        <a href="">{{ this.item['translations'][0].name }}&emsp;<i class="icon dropdown-right-icon"
+        <a :href="this.item['translations'][0].slug">{{ this.item['translations'][0].name }}&emsp;<i class="icon dropdown-right-icon"
         v-if="haveChildren && item.parent_id != null"></i></a>
         <ul v-if="haveChildren">
             <category-item
@@ -29,6 +29,7 @@ export default {
 
     computed: {
         haveChildren() {
+            console.log(this.item);
             return this.item.children.length ? true : false;
         }
     }

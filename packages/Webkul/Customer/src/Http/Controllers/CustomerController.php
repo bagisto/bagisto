@@ -104,9 +104,11 @@ class CustomerController extends Controller
             $data = collect(request()->input())->except(['_token','password','password_confirmation','oldpassword'])->toArray();
             if($this->customer->update($data, $id)) {
                 Session()->flash('success','Profile Updated Successfully');
+
                 return redirect()->back();
             } else {
                 Session()->flash('success','Profile Updated Successfully');
+
                 return redirect()->back();
             }
 
@@ -118,9 +120,11 @@ class CustomerController extends Controller
 
             if($this->customer->update($data, $id)) {
                 Session()->flash('success','Profile Updated Successfully');
+
                 return redirect()->back();
             } else {
                 Session()->flash('success','Profile Updated Successfully');
+
                 return redirect()->back();
             }
         }

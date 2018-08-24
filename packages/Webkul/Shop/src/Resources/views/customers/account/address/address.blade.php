@@ -15,8 +15,7 @@
         </div>
 
         <div class="profile-content">
-
-            @if(gettype($address) == "string")
+            @if($address->isEmpty())
                 <div>You don't have any saved addresses here, please create a new one by clicking the link below.</div>
                 <br/>
                 <a href="{{ route('customer.address.create') }}">Create Address</a>
@@ -39,17 +38,17 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>One</td>
+                            <td>{{ $address['address1'] }}</td>
 
-                            <td>One</td>
+                            <td>{{ $address['address2'] }}</td>
 
-                            <td>One</td>
+                            <td>{{ $address['country'] }}</td>
 
-                            <td>One</td>
+                            <td>{{ $address['state'] }}</td>
 
-                            <td>One</td>
+                            <td>{{ $address['city'] }}</td>
 
-                            <td>One</td>
+                            <td>{{ $address['postcode'] }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -45,7 +45,7 @@ class CustomerAddressRepository extends Repository
 
     public function update(array $data, $id, $attribute = "id")
     {
-        $address = $this->find($id);
+        $address = $this->findOneByField('customer_id', $id);
 
         $address->update($data);
 
