@@ -4,7 +4,7 @@
             <ul class="logo-container">
                 <li>
                     <a href="">
-                        <img class="logo" src="vendor/webkul/shop/assets/images/logo.svg" />
+                        <img class="logo" src="{{asset('themes/default/assets/images/Logo.svg')}}" />
                     </a>
                 </li>
             </ul>
@@ -63,58 +63,129 @@
         </div>
         <div class="right-responsive">
             <ul class="right-wrapper">
-                <li class="search-box"><span class="icon search-icon"></span></li>
+                <li class="search-box"><span class="icon search-icon" id="search"></span></li>
                 <li class="account-box"><span class="icon account-icon"></span></li>
                 <li class="cart-box"><span class="icon cart-icon"></span></li>
-                <li class="menu-box"><span class="icon sortable-icon"></span></li>
+                <li class="menu-box" ><span class="icon sortable-icon" id="sortable"></span></li>
             </ul>
-
         </div>
     </div>
+
+    
+    
+    <div class="search-suggestion">
+        <div class="search-content">
+            <span class="icon search-icon"></span>
+            <span> Sarees India  </span>
+            <span class="icon search-icon right"></span>
+        </div>
+
+        <div class="suggestion">
+            <span> designer sarees   </span>
+        </div>
+        <div class="suggestion">
+            <span> India patter sarees  </span>
+        </div>
+        <div class="suggestion">
+            <span> Border Sarees  </span>
+        </div>
+    </div>
+
+    
+
     <div class="header-bottom">
     @include('shop::layouts.header.nav-menu.navmenu')
     </div>
 </div>
 
-@push('scripts')
-<script>
-    $(window).resize(function() {
-        var w = $(document).width();
-        var window = {};
-        window.width = $(document).width();
-        window.height = $(document).height();
-        if (window.width < 785) {
-            $(".header").css("margin-bottom", "0");
-            $(".header-top").css("margin-bottom", "0");
-            $("ul.search-container").css("display", "none");
-            $(".header-bottom").css("display", "none");
-            $("div.right-content").css("display", "none");
-            $(".right-responsive").css("display", "inherit");
-        } else if (window.width > 785) {
-            $(".header").css("margin-bottom", "21px");
-            $(".header-top").css("margin-bottom", "16px");
-            $("ul.search-container").css("display", "inherit");
-            $(".header-bottom").css("display", "block");
-            $("div.right-content").css("display", "inherit");
-            $(".right-responsive").css("display", "none");
-        }
-    });
+@push('scripts')  
 
-    $(document).ready(function (){
-        /* Responsiveness script goes here */
-        var w = $(document).width();
-        var window = {};
-        window.width = $(document).width();
-        window.height = $(document).height();
-        if (window.width < 785) {
-            $(".header").css("margin-bottom", "0");
-            $(".header-top").css("margin-bottom", "0");
-            $("ul.search-container").css("display", "none");
-            $(".header-bottom").css("display", "none");
-            $("div.right-content").css("display", "none");
-            $(".right-responsive").css("display", "inherit");
+    <script>
+
+        window.onload = function() {
+            
+            var sort = document.getElementById("sortable");
+            var search = document.getElementById("search");
+
+            sort.addEventListener("click", myFunction);
+            search.addEventListener("click", myFunction);
+
+            // function for changing icon for responsive header
+
+            function myFunction(){
+               
+                let className = document.getElementById(this.id).className;
+
+                let slider  = document.getElementsByClassName("slider-block");
+                let feature = document.getElementsByClassName("featured-products");
+                let newUpdate = document.getElementsByClassName("news-update");
+
+                for (let i=0 ; i < slider.length ; i++){
+                    slider[i].style.display="none";
+                }
+
+                for (let i=0 ; i < feature.length ; i++){
+                    feature[i].style.display="none";
+                }
+
+                for (let i=0 ; i < newUpdate.length ; i++){
+                    newUpdate[i].style.display="none";
+                }
+
+                if( className == 'icon search-icon') {
+
+                    search.classList.remove('icon', 'search-icon');
+                    search.classList.add('icon', 'cross-icon');
+
+                    sort.classList.remove('icon', 'cross-icon');
+                    sort.classList.remove('icon', 'sortable-icon');
+                    sort.classList.add('icon', 'sortable-icon');
+                    document.getElementsByClassName("header-bottom")[0].style.display="none";
+                    document.getElementsByClassName("search-suggestion")[0].style.display="block";
+
+                }else if ( className == 'icon sortable-icon'){
+                
+                    sort.classList.remove('icon', 'sortable-icon');
+                    sort.classList.add('icon', 'cross-icon');
+
+                    search.classList.remove('icon', 'cross-icon');
+                    search.classList.remove('icon', 'search-icon');
+                    search.classList.add('icon', 'search-icon');
+
+                    document.getElementsByClassName("header-bottom")[0].style.display="block";
+                    document.getElementsByClassName("search-suggestion")[0].style.display="none";
+
+                } else {
+
+                    sort.classList.remove('icon', 'cross-icon');
+                    search.classList.remove('icon', 'cross-icon');
+                    sort.classList.remove('icon', 'sortable-icon');
+                    search.classList.remove('icon', 'search-icon');
+                    sort.classList.add('icon', 'sortable-icon');
+                    search.classList.add('icon', 'search-icon');
+                    document.getElementsByClassName("header-bottom")[0].style.display="none";
+                    document.getElementsByClassName("search-suggestion")[0].style.display="none";
+
+                    let slider  = document.getElementsByClassName("slider-block");
+                    let feature = document.getElementsByClassName("featured-products");
+                    let newUpdate = document.getElementsByClassName("news-update");
+
+                    for (let i=0 ; i < slider.length ; i++){this.id
+                        slider[i].style.display="block";
+                    }
+
+                    for (let i=0 ; i < feature.length ; i++){
+                        feature[i].style.display="block";
+                    }
+
+                    for (let i=0 ; i < newUpdate.length ; i++){
+                        newUpdate[i].style.display="block";
+                    }
+                }
+            }
         }
-        /* Responsiveness script ends here */
-    });
-</script>
+
+    </script>
+
+
 @endpush

@@ -1,7 +1,7 @@
 @extends('shop::layouts.master')
 
 @section('slider')
-    @include('shop::layouts.slider')
+    @include('shop::home.slider')
 @endsection
 
 @section('content-wrapper')
