@@ -16,4 +16,8 @@ class Customer extends Authenticatable
 
     protected $table = 'customers';
     protected $hidden = ['password','remember_token'];
+
+    public function getNameAttribute() {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
 }

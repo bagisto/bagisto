@@ -10,7 +10,7 @@ class Attribute extends TranslatableModel
 {
     public $translatedAttributes = ['name'];
 
-    protected $fillable = ['code', 'admin_name', 'type', 'position', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel', 'is_filterable', 'is_configurable'];
+    protected $fillable = ['code', 'admin_name', 'type', 'position', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel', 'is_filterable', 'is_configurable', 'is_visible_on_front'];
 
     protected $with = ['options'];
 
@@ -20,14 +20,6 @@ class Attribute extends TranslatableModel
     public function options()
     {
         return $this->hasMany(AttributeOption::class);
-    }
-
-    /**
-     * Get the options.
-     */
-    public function filter_attributes()
-    {
-
     }
 
     /**

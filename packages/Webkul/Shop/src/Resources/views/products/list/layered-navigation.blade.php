@@ -1,7 +1,9 @@
 @inject ('attributeRepository', 'Webkul\Attribute\Repositories\AttributeRepository')
 
 <div class="layered-filter-wrapper">
+
     <layered-navigation></layered-navigation>
+    
 </div>
 
 @push('scripts')
@@ -129,8 +131,8 @@
 
                 sliderConfig: {
                     value: [
-                        100,
-                        250
+                        0,
+                        0
                     ],
                     max: 500,
                     processStyle: {
@@ -171,7 +173,7 @@
 
                 clearFilters () {
                     if(this.attribute.type == 'price') {
-                        this.sliderConfig.value = [100, 250];
+                        this.sliderConfig.value = [0, 0];
                     }
 
                     this.appliedFilters = [];

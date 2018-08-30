@@ -10,6 +10,11 @@ use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Contracts\Criteria\SortCriteria;
+use Webkul\Product\Contracts\Criteria\AttributeToSelectCriteria;
+use Webkul\Product\Contracts\Criteria\FilterByAttributesCriteria;
+use Webkul\Product\Contracts\Criteria\FilterByCategoryCriteria;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Product Repository
@@ -177,6 +182,8 @@ class ProductRepository extends Repository
             }
         }
 
+        $previousVariantIds = $product->variants->pluck('id');
+
         if(isset($data['variants'])) {
             foreach ($data['variants'] as $variantId => $variantData) {
                 if (str_contains($variantId, 'variant_')) {
@@ -187,11 +194,20 @@ class ProductRepository extends Repository
 
                     $this->createVariant($product, $permutation, $variantData);
                 } else {
+                    if(is_numeric($index = $previousVariantIds->search($variantId))) {
+                        $previousVariantIds->forget($index);
+                    }
+
                     $variantData['channel'] = $data['channel'];
                     $variantData['locale'] = $data['locale'];
+
                     $this->updateVariant($variantData, $variantId);
                 }
             }
+        }
+
+        foreach ($previousVariantIds as $variantId) {
+            $this->delete($variantId);
         }
 
         $this->productInventory->saveInventories($data, $product);
@@ -357,5 +373,54 @@ class ProductRepository extends Repository
         }
 
         return false;
+    }
+
+    /**
+     * @param integer $categoryId
+     * @return Collection
+     */
+    public function findAllByCategory($categoryId = null)
+    {
+        $this->pushCriteria(app(SortCriteria::class));
+        $this->pushCriteria(app(FilterByAttributesCriteria::class));
+        $this->pushCriteria(new FilterByCategoryCriteria($categoryId));
+        $this->pushCriteria(app(AttributeToSelectCriteria::class)->addAttribueToSelect([
+                'name',
+                'description',
+                'short_description',
+                'price',
+                'special_price',
+                'special_price_from',
+                'special_price_to'
+            ]));
+
+        $params = request()->input();
+        
+        return $this->scopeQuery(function($query){
+                return $query->distinct()->addSelect('products.*');
+            })->paginate(isset($params['limit']) ? $params['limit'] : 9, ['products.id']);
+    }
+
+    /**
+     * Retrive product from slug
+     *
+     * @param string $slug
+     * @return mixed
+     */
+    public function findBySlugOrFail($slug)
+    {
+        $attribute = $this->attribute->findOneByField('code', 'url_key');
+
+        $attributeValue = $this->attributeValue->findOneWhere([
+            'attribute_id' => $attribute->id,
+            ProductAttributeValue::$attributeTypeFields[$attribute->type] => $slug
+        ]);
+
+        if($attributeValue && $attributeValue->product)
+            return $attributeValue->product;
+
+        throw (new ModelNotFoundException)->setModel(
+            get_class($this->model), $slug
+        );
     }
 }

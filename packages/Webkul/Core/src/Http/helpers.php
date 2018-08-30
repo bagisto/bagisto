@@ -13,7 +13,7 @@
         {
             $results = [];
 
-            while (list($key, $values) = each($input)) {
+            foreach ($input as $key => $values) {
                 if (empty($values)) {
                     continue;
                 }
@@ -41,7 +41,7 @@
                     $results = array_merge($results, $append);
                 }
             }
-
+            
             return $results;
         }
     }
