@@ -53,9 +53,13 @@ class AccountController extends Controller
             'email' => 'email|unique:admins,email,' . $user->id,
             'password' => 'nullable|confirmed'
         ]);
-        
 
-        $user->update(request(['name', 'email', 'password']));
+        $data = request()->all();
+
+        if(!$data['password'])
+            unset($data['password']);
+
+        $user->update($data);
 
         session()->flash('success', 'Account changes saved successfully.');
 
