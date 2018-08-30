@@ -105,6 +105,7 @@
     </div>
 
     
+    {{-- Triggered on responsive mode only --}}
     
     <div class="search-suggestion">
         <div class="search-content">

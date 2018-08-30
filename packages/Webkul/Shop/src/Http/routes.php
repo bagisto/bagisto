@@ -10,6 +10,7 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.index'
     ]);
     
+    /* dummy routes */
     Route::view('/customer/order','shop::customers.account.orders.index');
 
     Route::view('/customer/checkout','shop::customers.checkout.index');
@@ -21,7 +22,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::view('/customer/payment_method','shop::customers.checkout.payment-method');
 
     Route::view('/customer/payment_complete','shop::customers.checkout.complete');
-
+    /* dummy routes ends here */
 
     Route::view('/cart', 'shop::store.product.view.cart.index');
 

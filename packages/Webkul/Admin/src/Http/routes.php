@@ -36,6 +36,8 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.session.create'
             ])->name('admin.session.destroy');
 
+            //orders page
+                
 
             // Dashboard Route
             Route::get('/dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->name('admin.dashboard.index');
