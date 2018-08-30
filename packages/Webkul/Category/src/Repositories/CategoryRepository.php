@@ -6,6 +6,7 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Category\Models\Category;
 use Illuminate\Container\Container as App;
 use Webkul\Category\Models\CategoryTranslation;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Category Reposotory
@@ -59,9 +60,11 @@ class CategoryRepository extends Repository
     /**
      * Specify category tree
      *
+     * @param integer $id
      * @return mixed
      */
-    public function getCategoryTree($id = null) {
+    public function getCategoryTree($id = null)
+    {
         return $id
             ? Category::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
             : Category::orderBy('position', 'ASC')->get()->toTree();
@@ -70,9 +73,30 @@ class CategoryRepository extends Repository
     /**
      * Checks slug is unique or not based on locale
      *
+     * @param integer $id
+     * @param string  $slug
      * @return boolean
      */
-    public function isSlugUnique($id, $slug) {
+    public function isSlugUnique($id, $slug)
+    {
         return CategoryTranslation::where('category_id', '!=', $id)->where('slug', '=', $slug)->first() ? false : true;
+    }
+
+    /**
+     * Retrive category from slug
+     *
+     * @param string $slug
+     * @return mixed
+     */
+    public function findBySlugOrFail($slug)
+    {
+        $category = $this->model->whereTranslation('slug', $slug)->first();
+
+        if($category)
+            return $category;
+
+        throw (new ModelNotFoundException)->setModel(
+            get_class($this->model), $slug
+        );
     }
 }

@@ -5,11 +5,10 @@ namespace Webkul\Shop\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Webkul\Channel\Channel;
 use Webkul\Core\Repositories\SliderRepository as Slider;
 
 /**
- * Slider controller
+ * Slider controller for managing the slider controls.
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -44,8 +43,8 @@ class SliderController extends controller
      */
 
     public function create() {
-        $call = new Channel();
-        $channels = $call->getAllChannels();
+        $channels = core()->getAllChannels();
+
         return view($this->_config['view'])->with('channels',[$channels]);
     }
 

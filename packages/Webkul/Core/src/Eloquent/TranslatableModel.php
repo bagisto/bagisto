@@ -34,7 +34,7 @@ class TranslatableModel extends Model
     protected function locale()
     {
         if($this->isChannelBased()) {
-            return channel()->getDefaultChannelLocaleCode();
+            return core()->getDefaultChannelLocaleCode();
         } else {
             if ($this->defaultLocale) {
                 return $this->defaultLocale;

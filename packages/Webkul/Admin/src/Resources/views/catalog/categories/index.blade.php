@@ -15,7 +15,8 @@
         </div>
 
         <div class="page-content">
-
+            @inject('categories','Webkul\Admin\DataGrids\CategoryDataGrid')
+            {!! $categories->render() !!}
         </div>
     </div>
 @stop

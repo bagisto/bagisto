@@ -1,5 +1,4 @@
 @extends('shop::layouts.master')
-
 @section('content-wrapper')
 
     <div class="content">

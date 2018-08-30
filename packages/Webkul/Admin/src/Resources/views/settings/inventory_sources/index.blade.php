@@ -19,7 +19,8 @@
         </div>
 
         <div class="page-content">
-            {!! $datagrid->render() !!}
+            @inject('inventory_sources','Webkul\Admin\DataGrids\InventorySourcesDataGrid')
+            {!! $inventory_sources->render() !!}
         </div>
     </div>
 @stop

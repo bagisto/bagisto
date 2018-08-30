@@ -128,7 +128,7 @@ class EventServiceProvider extends ServiceProvider
                 Event::fire('admin.catalog.products.accordian.build', $accordian);
             });
         });
-        
+
         Event::listen('admin.catalog.products.accordian.build', function($accordian) {
             $accordian->add('inventories', 'Inventories', 'admin::catalog.products.accordians.inventories', 1);
 

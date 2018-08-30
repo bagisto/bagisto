@@ -89,21 +89,30 @@
                         <label class="checkbox-view" for="checkbox"></label>
                     </span>
                 </th>
-                @foreach ($columns as $column) @if($column->sortable == "true")
-                <th class="grid_head"
-                @if(strpos($column->alias, ' as '))
-                    <?php $exploded_name = explode(' as ',$column->name); ?>
-                    data-column-name="{{ $exploded_name[0] }}"
-                @else
-                    data-column-name="{{ $column->alias }}"
-                @endif
+                @foreach ($columns as $column)
+                    @if($column->sortable == "true")
+                        <th class="grid_head"
+                            @if(strpos($column->alias, ' as '))
+                                <?php $exploded_name = explode(' as ',$column->name); ?>
+                                data-column-name="{{ $exploded_name[0] }}"
+                            @else
+                                data-column-name="{{ $column->alias }}"
+                            @endif
 
-                data-column-label="{{ $column->label }}"
-                    data-column-sort="asc">{!! $column->sorting() !!}<span class="icon sort-down-icon"></span>
-                </th>
-                @else
-                <th class="grid_head" data-column-name="{{ $column->alias }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
-                @endif @endforeach
+                            data-column-label="{{ $column->label }}"
+                                data-column-sort="asc">{!! $column->sorting() !!}<span class="icon sort-down-icon"></span>
+                        </th>
+                        @else
+                            <th class="grid_head" data-column-name="{{ $column->alias }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
+                    @endif
+                @endforeach
+                @if(isset($attribute_columns))
+                    @foreach($attribute_columns as $key => $value)
+                        <th>
+                            {{ $value }}
+                        </th>
+                    @endforeach
+                @endif
                 <th>
                     Actions
                 </th>
@@ -112,6 +121,7 @@
         <tbody class="{{ $css->tbody }}">
             @foreach ($results as $result)
             <tr>
+
                 <td class="">
                     <span class="checkbox">
                         <input type="checkbox" class="indexers" id="{{ $result->id }}" name="checkbox[]">
@@ -119,12 +129,18 @@
                     </span>
                 </td>
                 @foreach ($columns as $column)
-                <td class="">{!! $column->render($result) !!}</td>
+                    <td class="">{!! $column->render($result) !!}</td>
                 @endforeach
+
+                @if(isset($attribute_columns))
+                @foreach ($attribute_columns as $atc)
+                    <td>{{ $result->{$atc} }}</td>
+                @endforeach
+                @endif
 
                 <td class="action">
                     @foreach($actions as $action)
-                        <a @if($action['type']=="Edit") href="{{ url()->current().'/edit/'.$result->id }}" @elseif($action['type']=="Delete") href="{{ url()->current().'/delete/'.$result->id }}" @endif  class="Action-{{ $action['type'] }}" id="{{ $result->id }}" onclick="return confirm_click('{{ $action['confirm_text'] }}');">
+                        <a @if($action['type'] == "Edit") href="{{ url()->current().'/edit/'.$result->id }}" @elseif($action['type']=="Delete") href="{{ url()->current().'/delete/'.$result->id }}" @endif  class="Action-{{ $action['type'] }}" id="{{ $result->id }}" onclick="return confirm_click('{{ $action['confirm_text'] }}');">
                             <i class="{{ $action['icon'] }}"></i>
                         </a>
                     @endforeach

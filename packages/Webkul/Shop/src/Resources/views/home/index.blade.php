@@ -5,7 +5,9 @@
 @endsection
 
 @section('content-wrapper')
-    @include('shop::grids.featured.featuredproductgrid')
-    @include('shop::grids.newproduct.newproductgrid')
-    @include('shop::grids.newsupdate.newsupdategrid')
+    @include('shop::home.featured-products')
+
+    @include('shop::home.new-products')
+    
+    @include('shop::home.news-updates')
 @endsection

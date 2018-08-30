@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
 
     @yield('head')
-    
+
     @yield('css')
 
 </head>
@@ -34,30 +34,31 @@
             </div>
 
         </div>
-        
+
         @include('shop::layouts.footer')
 
     </div>
 
     <script type="text/javascript">
         window.flashMessages = [];
-            @if($success = session('success'))
-                window.flashMessages = [{'type': 'alert-success', 'message': "{{ $success }}" }];
-            @elseif($warning = session('warning'))
-                window.flashMessages = [{'type': 'alert-warning', 'message': "{{ $warning }}" }];
-            @elseif($error = session('error'))
-                window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }];
-            @endif
+        
+        @if($success = session('success'))
+            window.flashMessages = [{'type': 'alert-success', 'message': "{{ $success }}" }];
+        @elseif($warning = session('warning'))
+            window.flashMessages = [{'type': 'alert-warning', 'message': "{{ $warning }}" }];
+        @elseif($error = session('error'))
+            window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }];
+        @endif
 
-            window.serverErrors = [];
-            @if (count($errors))
-                window.serverErrors = @json($errors->getMessages());
-            @endif
+        window.serverErrors = [];
+        @if (count($errors))
+            window.serverErrors = @json($errors->getMessages());
+        @endif
     </script>
 
     <script type="text/javascript" src="{{ bagisto_asset('js/shop.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
-    
+
     @stack('scripts')
 
 </body>

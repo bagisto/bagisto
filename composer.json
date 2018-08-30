@@ -16,6 +16,7 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^3.2",
+        "prettus/l5-repository": "^2.6",
         "propaganistas/laravel-intl": "^2.0"
     },
     "require-dev": {
@@ -34,7 +35,6 @@
         "webkul/laravel-attribute": "self.version",
         "webkul/laravel-customer": "self.version",
         "webkul/laravel-category": "self.version",
-        "webkul/laravel-channel": "self.version",
         "webkul/laravel-product": "self.version",
         "webkul/laravel-shop": "self.version",
         "webkul/laravel-theme": "self.version"
@@ -54,7 +54,6 @@
             "Webkul\\Shop\\": "packages/Webkul/Shop/src",
             "Webkul\\Core\\": "packages/Webkul/Core/src",
             "Webkul\\Customer\\": "packages/Webkul/Customer/src",
-            "Webkul\\Channel\\": "packages/Webkul/Channel/src",
             "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
             "Webkul\\Product\\": "packages/Webkul/Product/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src"

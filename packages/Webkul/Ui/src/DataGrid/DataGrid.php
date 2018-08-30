@@ -11,26 +11,45 @@ use Webkul\Ui\DataGrid\Helpers\Pagination;
 use Webkul\Ui\DataGrid\Helpers\Css;
 use URL;
 
+/**
+ * DataGrid controller
+ *
+ * @author    Nikhil Malik <nikhil@webkul.com> @ysmnikhil
+ * &
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ *
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+
+
 class DataGrid
 {
+
     /**
      * Name of DataGrid
      *
      * @var string
      */
+
     protected $name;
+
+
     /**
      * select from table(s)
      *
      * @var string
      */
+
     protected $select;
+
 
     /**
     * Table
     * @var Boolean for aliasing
     */
+
     protected $aliased;
+
 
     /**
      * Pagination variable
@@ -39,6 +58,7 @@ class DataGrid
 
     protected $perpage;
 
+
     /**
      * Table
      *
@@ -46,6 +66,8 @@ class DataGrid
      */
 
     protected $table;
+
+
     /**
      * Join
      *
@@ -60,62 +82,83 @@ class DataGrid
      *      'callback' => 'not supported yet'
      * ]
      */
-    protected $join;
-    /**
+
+     protected $join;
+
+
+     /**
      * Collection Object of Column $columns
      *
      * @var Collection
      */
-    protected $columns;
 
-    /**
+     protected $columns;
+
+
+     /**
      * array of columns
      * to be filtered
      * @var Array
      */
-    protected $filterable;
 
-    /**
+     protected $filterable;
+
+
+     /**
      * array of columns
      * to be searched
      *
      * @var Array
      */
-    protected $searchable;
 
-    /**
+     protected $searchable;
+
+
+     /**
      * mass operations
      *
      * @var Array
      */
-    protected $massoperations;
 
-    /**
+     protected $massoperations;
+
+
+     /**
      * Pagination $pagination
      *
      * @var Pagination
      */
-    protected $pagination;
+
+
+     protected $pagination;
+
+
     /**
      * Css $css
      *
      * @var Css
      */
-    protected $css;
 
-    /**
+     protected $css;
+
+
+     /**
      * Actions $action
      * @var action
      */
 
     protected $actions;
 
+
     /**
      * URL parse $parsed
      * @var parse
      */
-    protected $parsed;
-    /*
+
+     protected $parsed;
+
+
+     /*
     public function __construct(
         $name = null ,
         $table = null ,
@@ -136,6 +179,7 @@ class DataGrid
     }
     */
 
+    //Prepares the input parameters passed as the configuration for datagrid.
     public function make($args)
     {
         // list($name, $select, $table, $join, $columns) = array_values($args);
@@ -146,9 +190,7 @@ class DataGrid
         return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $perpage, $table, $join, $columns, $css, $operators,$actions);
     }
 
-    //starts buikding the queries on the basis of selects, joins and filter with
-    //attributes for class names and styles.
-
+    //This assigns the private and public properties of the datagrid classes from make functions
     public function build(
         $name = null,
         $select = false,
@@ -647,6 +689,7 @@ class DataGrid
         $parsed = $this->parse();
 
         if ($this->aliased==true) {
+
             //flags
             $table_alias = false;
             $join_table_alias = false;
@@ -672,6 +715,7 @@ class DataGrid
                 $table_name = trim($exploded[0]);
                 $table_alias = trim($exploded[1]);
             }
+
             //Run this if there are any selects priorly.
             if (!empty($this->select)) {
                 $this->getSelect();
@@ -679,8 +723,11 @@ class DataGrid
 
             //Run this if there are joins
             if (!empty($this->join)) {
-                foreach ($this->join as $join) {
+
+                foreach ($this->join as $index => $join) {
+
                     $name = strtolower($join['join']);
+
                     //Allow joins i.e left or right
                     if ($name=='leftjoin' || $name=='rightjoin') {
 
@@ -688,24 +735,32 @@ class DataGrid
                         $primary_key_alias = trim(explode('.', $join['primaryKey'])[0]);
 
                         if ($primary_key_alias == $table_alias) {
+
                             $join_table_alias = explode('as', $join['table']);
+
                             if (isset($join_table_alias)) {
+
                                 $alias1 = trim($join_table_alias[1]); //important!!!!!
 
                                 //check if the secondary table match column is not having '.' and has proper alias
                                 $secondary_join_column = $join['secondaryKey'];
                                 if (isset($secondary_join_column)) {
+
                                     $exploded_secondary = explode('.', $secondary_join_column);
                                     $alias2 = trim($exploded_secondary[0]);
+
                                     if ($alias1 == $alias2) {
-                                        $this->getQueryWithJoin();
+                                        if($index==count($this->join)-1)
+                                            $this->getQueryWithJoin();
                                         $alias_proper_secondary = true;
                                     } else {
                                         throw new \Exception('Aliases of Join table and the secondary key columns do not match');
+
                                     }
                                 } else {
                                     throw new \Exception('Improper aliasing on secondary/join column for join');
                                 }
+
                             } else {
                                 throw new \Exception('Join/Secondary table alias is not found for join');
                             }
@@ -729,6 +784,7 @@ class DataGrid
             $this->results = $this->query->get();
 
             $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
+
             return $this->results;
 
         } else {
@@ -752,12 +808,17 @@ class DataGrid
     }
 
     /**
+     * Main Render Function,
+     * it renders views responsible
+     * for loading datagrid.
+     *
      * @return view
      */
 
     public function render()
     {
         $this->getDbQueryResults();
+
         return view('ui::datagrid.index', [
             'css' => $this->css,
             'results' => $this->results,

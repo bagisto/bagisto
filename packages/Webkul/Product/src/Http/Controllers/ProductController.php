@@ -24,28 +24,28 @@ class ProductController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * AttributeFamilyRepository object
      *
      * @var array
      */
     protected $attributeFamily;
-    
+
     /**
      * CategoryRepository object
      *
      * @var array
      */
     protected $category;
-    
+
     /**
      * InventorySourceRepository object
      *
      * @var array
      */
     protected $inventorySource;
-    
+
     /**
      * ProductRepository object
      *
@@ -99,7 +99,7 @@ class ProductController extends Controller
         $families = $this->attributeFamily->all();
 
         if($familyId = request()->get('family')) {
-            $configurableFamily = $this->attributeFamily->findOrFail($familyId);
+            $configurableFamily = $this->attributeFamily->find($familyId);
         }
 
         return view($this->_config['view'], compact('families', 'configurableFamily'));
@@ -143,7 +143,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->product->findOrFail($id);
+        $product = $this->product->with(['variants'])->find($id);
 
         $categories = $this->category->getCategoryTree();
 

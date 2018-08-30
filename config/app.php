@@ -172,6 +172,7 @@ return [
 
         //Laravel Intervention
         Intervention\Image\ImageServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
         //Webkul packages
         Webkul\User\Providers\UserServiceProvider::class,
@@ -182,7 +183,6 @@ return [
         Webkul\Core\Providers\CoreServiceProvider::class,
         Webkul\Shop\Providers\ShopServiceProvider::class,
         Webkul\Customer\Providers\CustomerServiceProvider::class,
-        Webkul\Channel\Providers\ChannelServiceProvider::class,
         Webkul\Inventory\Providers\InventoryServiceProvider::class,
         Webkul\Product\Providers\ProductServiceProvider::class,
         Webkul\Shop\Providers\ShopServiceProvider::class,
@@ -237,6 +237,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
+        'ProductGrid' => Webkul\Ui\DataGrid\Facades\ProductGrid::class,
         'Image' => Intervention\Image\Facades\Image::class
     ],
 

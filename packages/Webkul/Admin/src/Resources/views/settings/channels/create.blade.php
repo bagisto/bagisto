@@ -78,7 +78,7 @@
                             <div class="control-group" :class="[errors.has('currencies[]') ? 'has-error' : '']">
                                 <label for="currencies" class="required">{{ __('admin::app.settings.channels.currencies') }}</label>
                                 <select v-validate="'required'" class="control" id="currencies" name="currencies[]" multiple>
-                                    @foreach(core()->allCurrencies() as $currency)
+                                    @foreach(core()->getAllCurrencies() as $currency)
                                         <option value="{{ $currency->id }}" {{ old('currencies') && in_array($currency->id, old('currencies')) ? 'selected' : '' }}>
                                             {{ $currency->name }}
                                         </option>
@@ -90,7 +90,7 @@
                             <div class="control-group" :class="[errors.has('base_currency') ? 'has-error' : '']">
                                 <label for="base_currency" class="required">{{ __('admin::app.settings.channels.base-currency') }}</label>
                                 <select v-validate="'required'" class="control" id="base_currency" name="base_currency">
-                                    @foreach(core()->allCurrencies() as $currency)
+                                    @foreach(core()->getAllCurrencies() as $currency)
                                         <option value="{{ $currency->id }}" {{ old('base_currency') == $currency->id ? 'selected' : '' }}>
                                             {{ $currency->name }}
                                         </option>

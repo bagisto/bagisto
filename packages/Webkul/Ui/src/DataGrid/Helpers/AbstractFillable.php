@@ -2,8 +2,14 @@
 
 namespace Webkul\Ui\DataGrid\Helpers;
 
+/**
+ * AbstractFillable
+ * @author    Nikhil Malik <nikhil@webkul.com> @ysmnikhil
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+
 abstract class AbstractFillable
-{   
+{
     const NO_RESULT = null;
 
     protected $fillable = [];
@@ -43,7 +49,7 @@ abstract class AbstractFillable
     private function fieldValidate($key, $value, $allowed = ['string', 'integer', 'float', "boolean"], $merge = false)
     {
         $error = false;
-        if( in_array($key, $this->fillable) || 
+        if( in_array($key, $this->fillable) ||
             array_filter(
                 array_keys($this->fillable) , function($value){
                     return gettype($value) === "string";
@@ -54,7 +60,7 @@ abstract class AbstractFillable
                 // if($merge){
                 //     if(!$this->{$key}) $this->{$key} = [];
                 //     $this->{$key}[] = $value;
-                // }else 
+                // }else
                 // $this->{$key} = $value;
             }else{
                 dump(gettype($value));

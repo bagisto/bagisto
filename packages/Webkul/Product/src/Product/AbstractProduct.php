@@ -1,0 +1,64 @@
+<?php
+
+namespace Webkul\Product\Product;
+
+use Webkul\Product\Models\ProductAttributeValue;
+
+abstract class AbstractProduct
+{
+    /**
+     * Add Channle and Locale filter
+     *
+     * @param Attribute $attribute
+     * @param QB $qb
+     * @param sting $alias
+     * @return QB
+     */
+    public function applyChannelLocaleFilter($attribute, $qb, $alias = 'product_attribute_values')
+    {
+        $channel = core()->getCurrentChannelCode();
+
+        $locale = app()->getLocale();
+
+        if($attribute->value_per_channel) {
+            if($attribute->value_per_locale) {
+                $qb->where($alias . '.channel', $channel)
+                    ->where($alias . '.locale', $locale);
+            } else {
+                $qb->where($alias . '.channel', $channel);
+            }
+        } else {
+            if($attribute->value_per_locale) {
+                $qb->where($alias . '.locale', $locale);
+            }
+        }
+
+        return $qb;
+    }
+
+    /**
+     * Adds attributes to select
+     *
+     * @param QB $qb
+     * @return QB
+     */
+    public function addSelectAttributes($qb)
+    {
+        foreach ($this->attributeToSelect as $code) {
+            $attribute = $this->attribute->findOneByField('code', $code);
+            
+            $productValueAlias = 'pav_' . $attribute->code;
+
+            $qb->leftJoin('product_attribute_values as ' . $productValueAlias, function($leftJoin) use($attribute, $productValueAlias) {
+
+                $leftJoin->on('products.id', $productValueAlias . '.product_id');
+
+                $leftJoin = $this->applyChannelLocaleFilter($attribute, $leftJoin, $productValueAlias)->where($productValueAlias . '.attribute_id', $attribute->id);
+            });
+
+            $qb->addSelect($productValueAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $code);
+        }
+
+        return $qb;
+    }
+}

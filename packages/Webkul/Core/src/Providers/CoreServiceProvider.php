@@ -43,7 +43,7 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerCoreFacade();
+        $this->registerFacades();
     }
 
     /**
@@ -51,7 +51,7 @@ class CoreServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerCoreFacade()
+    protected function registerFacades()
     {
         $loader = AliasLoader::getInstance();
         $loader->alias('core', CoreFacade::class);

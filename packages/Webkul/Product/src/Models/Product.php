@@ -10,12 +10,13 @@ use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductInventory;
 use Webkul\Product\Models\ProductImage;
 use Webkul\Inventory\Models\InventorySource;
+use Webkul\Product\Models\ProductReview;
 
 class Product extends Model
 {
     protected $fillable = ['type', 'attribute_family_id', 'sku', 'parent_id'];
 
-    protected $with = ['attribute_family', 'attribute_values', 'variants', 'inventories'];
+    protected $with = ['attribute_family', 'inventories'];
 
     /**
      * Get the product attribute family that owns the product.
@@ -39,6 +40,14 @@ class Product extends Model
     public function variants()
     {
         return $this->hasMany(self::class, 'parent_id');
+    }
+
+    /**
+     * Get the product reviews that owns the product.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class);
     }
 
     /**
@@ -131,41 +140,37 @@ class Product extends Model
      */
     public function getAttribute($key)
     {
-        if (!method_exists(self::class, $key) && !isset($this->attributes[$key])) {
+        if (!method_exists(self::class, $key) && !in_array($key, ['parent_id', 'attribute_family_id']) && !isset($this->attributes[$key])) {
             if ($this->isCustomAttribute($key)) {
+                $this->attributes[$key] = '';
+
                 $attributeModel = $this->attribute_family->custom_attributes()->where('attributes.code', $key)->first();
 
                 if($attributeModel) {
+                    $channel = request()->get('channel') ?: core()->getCurrentChannelCode();
+
+                    $locale = request()->get('locale') ?: app()->getLocale();
+
                     if($attributeModel->value_per_channel) {
-                        $channel = request()->get('channel') ?: channel()->getChannel();
                         if($attributeModel->value_per_locale) {
-                            $locale = request()->get('locale') ?: app()->getLocale();
                             $attributeValue = $this->attribute_values()->where('channel', $channel)->where('locale', $locale)->where('attribute_id', $attributeModel->id)->first();
                         } else {
                             $attributeValue = $this->attribute_values()->where('channel', $channel)->where('attribute_id', $attributeModel->id)->first();
                         }
                     } else {
                         if($attributeModel->value_per_locale) {
-                            $locale = request()->get('locale') ?: app()->getLocale();
                             $attributeValue = $this->attribute_values()->where('locale', $locale)->where('attribute_id', $attributeModel->id)->first();
                         } else {
                             $attributeValue = $this->attribute_values()->where('attribute_id', $attributeModel->id)->first();
                         }
                     }
 
-                    if ($this->hasGetMutator($key)) {
-                        $this->attributes[$key] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attributeModel->type]];
-
-                        return $this->getAttributeValue($key);
-                    }
-
-                    return $attributeValue[ProductAttributeValue::$attributeTypeFields[$attributeModel->type]];
+                    $this->attributes[$key] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attributeModel->type]];
                 }
 
                 return $this->getAttributeValue($key);
             }
 
-            return $this->getAttributeValue($key);
         }
 
         return parent::getAttribute($key);
@@ -180,31 +185,30 @@ class Product extends Model
 
         $hiddenAttributes = $this->getHidden();
 
+        $channel = request()->get('channel') ?: core()->getCurrentChannelCode();
+
+        $locale = request()->get('locale') ?: app()->getLocale();
+
         foreach ($this->attribute_family->custom_attributes as $attribute) {
             if (in_array($attribute->code, $hiddenAttributes)) {
                 continue;
             }
 
             if($attribute->value_per_channel) {
-                $channel = request()->get('channel') ?: channel()->getChannel();
                 if($attribute->value_per_locale) {
-                    $locale = request()->get('locale') ?: app()->getLocale();
                     $attributeValue = $this->attribute_values()->where('channel', $channel)->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
                 } else {
                     $attributeValue = $this->attribute_values()->where('channel', $channel)->where('attribute_id', $attribute->id)->first();
                 }
             } else {
                 if($attribute->value_per_locale) {
-                    $locale = request()->get('locale') ?: app()->getLocale();
                     $attributeValue = $this->attribute_values()->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
                 } else {
                     $attributeValue = $this->attribute_values()->where('attribute_id', $attribute->id)->first();
                 }
             }
 
-            if (!is_null($value = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]])) {
-                $attributes[$attribute->code] = $value;
-            }
+            $attributes[$attribute->code] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]];
         }
 
         return $attributes;

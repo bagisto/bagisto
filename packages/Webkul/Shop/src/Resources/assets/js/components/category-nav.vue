@@ -5,7 +5,8 @@
             v-for="(item, index) in items"
             :key="index"
             :url="url"
-            :item="item">
+            :item="item"
+            :parent="index">
         </category-item>
         <li>
             <img src="vendor/webkul/shop/assets/images/offer-zone.svg"/>

@@ -15,7 +15,9 @@
         </div>
 
         <div class="page-content">
-            {!! $datagrid->render() !!}
+
+            @inject('locales','Webkul\Admin\DataGrids\LocalesDataGrid')
+            {!! $locales->render() !!}
         </div>
     </div>
 @stop

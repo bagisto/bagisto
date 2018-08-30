@@ -15,7 +15,8 @@
         </div>
 
         <div class="page-content">
-            {!! $datagrid->render() !!}
+            @inject('channels','Webkul\Admin\DataGrids\ChannelDataGrid')
+            {!! $channels->render() !!}
         </div>
     </div>
 @stop

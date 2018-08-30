@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Attribute\Repositories;
- 
+
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeGroupRepository;
@@ -74,7 +74,7 @@ class AttributeFamilyRepository extends Repository
                 if(isset($attribute['id'])) {
                     $attributeModel = $this->attribute->find($attribute['id']);
                 } else {
-                    $attributeModel = $this->attribute->findBy('code', $attribute['code']);
+                    $attributeModel = $this->attribute->findOneByField('code', $attribute['code']);
                 }
                 
                 $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
@@ -92,12 +92,12 @@ class AttributeFamilyRepository extends Repository
      */
     public function update(array $data, $id, $attribute = "id")
     {
-        $family = $this->findOrFail($id);
+        $family = $this->find($id);
 
         $family->update($data);
 
         $previousAttributeGroupIds = $family->attribute_groups()->pluck('id');
-        
+
         if(isset($data['attribute_groups'])) {
             foreach ($data['attribute_groups'] as $attributeGroupId => $attributeGroupInputs) {
                 if (str_contains($attributeGroupId, 'group_')) {
@@ -114,9 +114,9 @@ class AttributeFamilyRepository extends Repository
                         $previousAttributeGroupIds->forget($index);
                     }
 
-                    $attributeGroup = $this->attributeGroup->findOrFail($attributeGroupId);
+                    $attributeGroup = $this->attributeGroup->find($attributeGroupId);
                     $attributeGroup->update($attributeGroupInputs);
-                    
+
                     $attributeIds = $attributeGroup->custom_attributes()->get()->pluck('id');
 
                     if(isset($attributeGroupInputs['custom_attributes'])) {
