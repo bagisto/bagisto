@@ -30,9 +30,11 @@ class CustomerController extends Controller
 
     public function __construct(CustomerRepository $customer)
     {
+        $this->middleware('customer');
+
         $this->_config = request('_config');
+
         $this->customer = $customer;
-        $this->middleware('auth:customer');
     }
 
     /**

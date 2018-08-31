@@ -21,33 +21,34 @@
                 <a href="{{ route('customer.address.create') }}">Create Address</a>
             @else
                 <table>
-                    <thead>
-                        <tr>
-                            <td>Address 1</td>
-
-                            <td>Address 2</td>
-
-                            <td>Country</td>
-
-                            <td>State</td>
-
-                            <td>City</td>
-
-                            <td>Postcode</td>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
+                            <td>Address 1</td>
                             <td>{{ $address['address1'] }}</td>
+                        </tr>
 
+                        <tr>
+                            <td>Address 2</td>
                             <td>{{ $address['address2'] }}</td>
+                        </tr>
 
+                        <tr>
+                            <td>Country</td>
                             <td>{{ $address['country'] }}</td>
+                        </tr>
 
+                        <tr>
+                            <td>State</td>
                             <td>{{ $address['state'] }}</td>
+                        </tr>
 
+                        <tr>
+                            <td>City</td>
                             <td>{{ $address['city'] }}</td>
+                        </tr>
 
+                        <tr>
+                            <td>Postcode</td>
                             <td>{{ $address['postcode'] }}</td>
                         </tr>
                     </tbody>

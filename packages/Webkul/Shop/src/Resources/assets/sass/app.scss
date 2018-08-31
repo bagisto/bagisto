@@ -447,13 +447,12 @@ section.slider-block {
     margin-right: 10%;
 
     .content-container {
-        display: inline-block;
         width: 100%;
     }
 
     .product-grid {
         display: grid;
-        grid-gap: 30px;
+        grid-gap: 15px;
 
         &.max-2-col {
             grid-template-columns: repeat(2, minmax(250px, 1fr));

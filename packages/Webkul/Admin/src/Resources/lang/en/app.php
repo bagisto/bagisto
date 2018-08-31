@@ -174,6 +174,38 @@ return [
             'meta_keywords' => 'Meta Keywords',
         ]
     ],
+
+    'configuration' => [
+        'tax' => [
+            'title' => 'Taxes',
+            'add-title' => 'Add Tax Rule'
+        ],
+        'taxrule' => [
+            'title' => 'Add Tax Rule',
+            'create' => 'Create Tax Rule',
+            'general' => 'Tax Rule',
+            'name' => 'Name',
+            'code' => 'Code',
+            'description' => 'Description',
+            'select-taxrates' => 'Select Tax Rates'
+        ],
+        'taxrate' => [
+            'title' => 'Add Tax Rate',
+            'general' => 'Tax Rate',
+            'identifier' => 'Identifier',
+            'is_zip' => 'Enable Zip Range',
+            'zip_from' => 'Zip From',
+            'zip_to' => 'Zip To',
+            'state' => 'State',
+            'country' => 'Country',
+            'tax_rate' => 'Rate',
+            'edit' => [
+                'title' => 'Edit Tax Rate',
+                'edit-button-title' => 'Edit Rate'
+            ]
+        ],
+    ],
+
     'settings' => [
         'locales' => [
             'title' => 'Locales',

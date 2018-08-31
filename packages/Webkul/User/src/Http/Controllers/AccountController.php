@@ -24,6 +24,8 @@ class AccountController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('admin');
+
         $this->_config = request('_config');
     }
 
@@ -53,7 +55,7 @@ class AccountController extends Controller
             'email' => 'email|unique:admins,email,' . $user->id,
             'password' => 'nullable|confirmed'
         ]);
-        
+
 
         $user->update(request(['name', 'email', 'password']));
 

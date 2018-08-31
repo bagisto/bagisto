@@ -22,14 +22,14 @@ class UserController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * AdminRepository object
      *
      * @var array
      */
     protected $admin;
-    
+
     /**
      * RoleRepository object
      *
@@ -46,6 +46,8 @@ class UserController extends Controller
      */
     public function __construct(Admin $admin, Role $role)
     {
+        $this->middleware('admin');
+
         $this->admin = $admin;
 
         $this->role = $role;

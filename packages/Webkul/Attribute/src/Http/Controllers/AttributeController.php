@@ -21,7 +21,7 @@ class AttributeController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * AttributeRepository object
      *
@@ -37,6 +37,8 @@ class AttributeController extends Controller
      */
     public function __construct(Attribute $attribute)
     {
+        $this->middleware('admin');
+
         $this->attribute = $attribute;
 
         $this->_config = request('_config');
@@ -109,7 +111,7 @@ class AttributeController extends Controller
             'admin_name' => 'required',
             'type' => 'required'
         ]);
-        
+
         $this->attribute->update(request()->all(), $id);
 
         session()->flash('success', 'Attribute updated successfully.');

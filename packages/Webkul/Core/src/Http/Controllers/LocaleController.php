@@ -20,7 +20,7 @@ class LocaleController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * LocaleRepository object
      *
@@ -36,6 +36,8 @@ class LocaleController extends Controller
      */
     public function __construct(Locale $locale)
     {
+        $this->middleware('admin');
+
         $this->locale = $locale;
 
         $this->_config = request('_config');

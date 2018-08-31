@@ -617,51 +617,55 @@ class ProductGrid
 
     private function getQueryWithJoin()
     {
-
         foreach ($this->join as $join) {
+            // if(array_key_exists('withAttributes',$join)) {
+            //     $qb = $this->query;
 
-            if(array_key_exists('withAttributes',$join)) {
+            //     $channel = $this->channel;
 
-                $qb = $this->query;
-                $channel = $this->channel;
-                $locale = $this->locale;
+            //     $locale = $this->locale;
 
-                foreach ($this->attributeColumns as $code) {
-                    $attribute = $this->attributes->findOneByField('code', $code);
+            //     foreach ($this->attributeColumns as $code) {
 
-                    $productValueAlias = 'pavxxx' . $attribute->code;
+            //         $attribute = $this->attributes->findOneByField('code', $code);
 
-                    array_push($this->attributeAliases, $productValueAlias);
+            //         $productValueAlias = 'pav' . $attribute->code;
 
-                    $qb->leftJoin('product_attribute_values as ' . $productValueAlias, function ($leftJoin) use ($channel, $locale, $attribute, $productValueAlias) {
-                        $leftJoin->on('prods.id', $productValueAlias . '.product_id');
+            //         array_push($this->attributeAliases, $productValueAlias);
 
-                        if ($attribute->value_per_channel) {
-                            if ($attribute->value_per_locale) {
-                                $leftJoin->where($productValueAlias . '.channel', $channel)->where($productValueAlias . '.locale', $locale);
-                            } else {
-                                $leftJoin->where($productValueAlias . '.channel', $channel);
-                            }
-                        } else {
-                            if ($attribute->value_per_locale) {
-                                $leftJoin->where($productValueAlias . '.locale', $locale);
-                            }
-                        }
+            //         $qb->leftJoin('product_attribute_values as ' . $productValueAlias, function ($leftJoin) use ($channel, $locale, $attribute, $productValueAlias) {
 
-                        $leftJoin->where($productValueAlias . '.attribute_id', $attribute->id);
-                    });
+            //             $leftJoin->on('prods.id', $productValueAlias . '.product_id');
 
-                    $qb->addSelect($productValueAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $code);
-                }
+            //             if ($attribute->value_per_channel) {
 
-            }
-            else
+            //                 if ($attribute->value_per_locale) {
+
+            //                     $leftJoin->where($productValueAlias . '.channel', $channel)->where($productValueAlias . '.locale', $locale);
+
+            //                 } else {
+            //                     $leftJoin->where($productValueAlias . '.channel', $channel);
+            //                 }
+            //             } else {
+
+            //                 if ($attribute->value_per_locale) {
+
+            //                     $leftJoin->where($productValueAlias . '.locale', $locale);
+            //                 }
+            //             }
+
+            //             $leftJoin->where($productValueAlias . '.attribute_id', $attribute->id);
+            //         });
+
+            //         $qb->addSelect($productValueAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $code);
+            //     }
+            // }
+            // else
                 $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondaryKey']);
-
         }
 
+        // dd($this->query->toSql());
         $this->query->get();
-
     }
 
     /**

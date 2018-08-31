@@ -20,7 +20,7 @@ class CurrencyController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * CurrencyRepository object
      *
@@ -36,6 +36,8 @@ class CurrencyController extends Controller
      */
     public function __construct(Currency $currency)
     {
+        $this->middleware('admin');
+
         $this->currency = $currency;
 
         $this->_config = request('_config');
@@ -81,7 +83,7 @@ class CurrencyController extends Controller
 
         return redirect()->route($this->_config['redirect']);
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *

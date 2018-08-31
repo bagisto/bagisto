@@ -20,7 +20,7 @@ class RoleController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * RoleRepository object
      *
@@ -36,6 +36,8 @@ class RoleController extends Controller
      */
     public function __construct(Role $role)
     {
+        $this->middleware('admin');
+
         $this->role = $role;
 
         $this->_config = request('_config');
@@ -107,7 +109,7 @@ class RoleController extends Controller
             'name' => 'required',
             'permission_type' => 'required',
         ]);
-        
+
         $this->role->update(request()->all(), $id);
 
         session()->flash('success', 'Role updated successfully.');

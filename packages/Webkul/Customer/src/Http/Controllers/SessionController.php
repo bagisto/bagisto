@@ -24,13 +24,20 @@ class SessionController extends Controller
 
     public function __construct()
     {
+
+        $this->middleware('customer')->except(['show','create']);
+
         $this->_config = request('_config');
-        $this->middleware('auth:customer')->except(['show','create']);
+
     }
 
     public function show()
     {
-        return view($this->_config['view']);
+        if(auth()->guard('customer')->check()) {
+            return redirect()->route('customer.account.index');
+        } else {
+            return view($this->_config['view']);
+        }
     }
 
     public function create(Request $request)
@@ -46,7 +53,7 @@ class SessionController extends Controller
             return back();
         }
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->intended(route($this->_config['redirect']));
     }
 
     public function destroy($id)

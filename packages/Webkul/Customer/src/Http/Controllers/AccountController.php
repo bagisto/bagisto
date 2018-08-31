@@ -31,12 +31,13 @@ class AccountController extends Controller
 
     public function __construct(CustomerRepository $customer, CustomerAddressRepository $address)
     {
+        $this->middleware('customer');
 
-        $this->middleware('auth:customer');
         $this->_config = request('_config');
-        $this->customer = $customer;
-        $this->address = $address;
 
+        $this->customer = $customer;
+
+        $this->address = $address;
     }
 
     public function index() {

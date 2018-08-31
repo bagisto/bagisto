@@ -518,13 +518,12 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 }
 
 .main-container-wrapper .content-container {
-  display: inline-block;
   width: 100%;
 }
 
 .main-container-wrapper .product-grid {
   display: grid;
-  grid-gap: 30px;
+  grid-gap: 15px;
 }
 
 .main-container-wrapper .product-grid.max-2-col {

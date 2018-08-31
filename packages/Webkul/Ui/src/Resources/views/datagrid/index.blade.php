@@ -9,30 +9,49 @@
     {{-- Section for datagrid javascript --}}
     @push('scripts')
         <script type="text/javascript">
+
             var columns = @json($columns); //referential
+
             var allFilters = [];
+
             var search_value;
+
             var filter_column;
+
             var filter_condition;
+
             var filter_range;
+
             var count_filters = parseInt(0);
+
             var url;
+
             var array_start = '[';
+
             var array_end = ']';
+
             var typeValue;
+
             var selectedColumn = '';
+
             var myURL = document.location;
+
             let params;
+
             $(document).ready(function() {
 
                 params = (new URL(document.location)).search;
+
                 if(params.length>0) {
+
                     if(allFilters.length == 0) {
                         //call reverse url function
                         arrayFromUrl(params.slice(1,params.length));
                     }
                 }
+
                 $('.search-btn').click(function() {
+
                     search_value = $(".search-field").val();
                     formURL('search','all',search_value,params);  //format for search
                 });
@@ -46,33 +65,47 @@
 
                     if(currentSort == "asc")
                         formURL("sort",column,"desc",params);
+
                     else if(currentSort == "desc")
                         formURL("sort",column,"asc",params);
                 });
 
                 $('select.filter-column-select').change(function() {
                     typeValue = $('select.filter-column-select').find(':selected').data('type');
+
                     col_label = $('select.filter-column-select').find(':selected').data('label');
+
                     selectedColumn = $('select.filter-column-select').find(':selected').val();
+
                     if(typeValue == 'string') {
                         //default behaviour for strings
                         $('.filter-condition-dropdown-number').css('display','none');
+
                         $('.filter-condition-dropdown-datetime').css('display','none');
+
                         $('.filter-response-number').css('display','none');
+
                         $('.filter-response-datetime').css('display','none');
+
                         $('.filter-response-boolean').css('display','none');
 
                         //show the two wanted
                         $('.filter-condition-dropdown-string').css('display','inherit');
+
                         $('.filter-response-string').css('display','inherit');
                     }
                     else if(typeValue == 'boolean') {
                         //hide unwanted
                         $('.filter-condition-dropdown-string').css('display','none');
+
                         $('.filter-condition-dropdown-number').css('display','none');
+
                         $('.filter-condition-dropdown-datetime').css('display','none');
+
                         $('.filter-response-string').css('display','none');
+
                         $('.filter-response-number').css('display','none');
+
                         $('.filter-response-datetime').css('display','none');
 
                         //only true or false for that column is needed as input
@@ -81,25 +114,35 @@
                     else if(typeValue == 'datetime') {
                         //hide unwanted
                         $('.filter-condition-dropdown-string').css('display','none');
+
                         $('.filter-condition-dropdown-number').css('display','none');
+
                         $('.filter-response-string').css('display','none');
+
                         $('.filter-response-number').css('display','none');
+
                         $('.filter-response-boolean').css('display','none');
 
                         //show what is wanted
                         $('.filter-condition-dropdown-datetime').css('display','inherit');
+
                         $('.filter-response-datetime').css('display','inherit');
                     }
                     else if(typeValue == 'number') {
                         //hide unwanted
                         $('.filter-condition-dropdown-string').css('display','none');
+
                         $('.filter-condition-dropdown-datetime').css('display','none');
+
                         $('.filter-response-string').css('display','none');
+
                         $('.filter-response-datetime').css('display','none');
+
                         $('.filter-response-boolean').css('display','none');
 
                         //show what is wanted
                         $('.filter-condition-dropdown-number').css('display','inherit');
+
                         $('.filter-response-number').css('display','inherit');
 
                     }
@@ -111,20 +154,26 @@
                         if(typeValue == 'number') {
 
                             var conditionUsed = $('.filter-condition-dropdown-number').find(':selected').val();
+
                             var response = $('.response-number').val();
+
                             formURL(selectedColumn,conditionUsed,response,params,col_label);
                         }
                         if(typeValue == 'string') {
 
                             var conditionUsed = $('.filter-condition-dropdown-string').find(':selected').val();
+
                             var response = $('.response-string').val();
+
                             formURL(selectedColumn,conditionUsed,response,params,col_label);
 
                         }
                         if(typeValue == 'datetime') {
 
                             var conditionUsed = $('.filter-condition-dropdown-datetime').find(':selected').val();
+
                             var response = $('.response-datetime').val();
+
                             formURL(selectedColumn,conditionUsed,response,params,col_label);
                         }
                         if(typeValue == 'boolean') { //use select dropdown with two values true and false
@@ -222,7 +271,9 @@
                     if(id.length>0) {
 
                         $('.mass-action').css('display','');
+
                         $('.table-grid-header').css('display','none');
+
                         $('#indexes').val(id);
 
                     }else if(id.length == 0) {
@@ -363,11 +414,15 @@
 
                 /* validate the conditions here and do the replacements and
                 push here in the all filters array */
+
                 var obj1 = {};
+
+                console.log(allFilters.length);
 
                 if(column == "" || condition == "" || response == "") {
 
                     alert("Some of the required field is null, please check column, condition and value properly.");
+
                     return false;
                 }
                 else {
@@ -378,29 +433,38 @@
 
                             filter_repeated = 0;
 
-                            for(j=0;j<allFilters.length;j++) {
+                            for(j=0; j<allFilters.length; j++) {
 
                                 if(allFilters[j].column == column && allFilters[j].cond == condition && allFilters[j].val == response)
                                 {
                                     filter_repeated = 1;
+
                                     return false;
                                 } else if(allFilters[j].column == column) {
 
                                     filter_repeated = 1;
-                                    allFilters[j].cond = condition;
-                                    allFilters[j].val = response;
-                                    makeURL(true);
 
+                                    allFilters[j].cond = condition;
+
+                                    allFilters[j].val = response;
+
+                                    makeURL(true);
                                 }
                             }
                             if(filter_repeated == 0) {
 
                                 obj1.column = column;
+
                                 obj1.cond = condition;
+
                                 obj1.val = response;
+
                                 obj1.label = clabel;
+
                                 allFilters.push(obj1);
+
                                 obj1 = {};
+
                                 makeURL();
                             }
                         }
@@ -417,18 +481,26 @@
                                         if(response=="asc") {
 
                                             allFilters[j].column = column;
+
                                             allFilters[j].cond = condition;
+
                                             allFilters[j].val = "desc";
+
                                             allFilters[j].label = clabel;
+
                                             makeURL();
 
                                         }
                                         else {
 
                                             allFilters[j].column = column;
+
                                             allFilters[j].cond = condition;
+
                                             allFilters[j].val = "asc";
+
                                             allFilters[j].label = clabel;
+
                                             makeURL();
 
                                         }
@@ -437,9 +509,13 @@
                                     else {
 
                                         allFilters[j].column = column;
+
                                         allFilters[j].cond = condition;
+
                                         allFilters[j].val = response;
+
                                         allFilters[j].label = clabel;
+
                                         makeURL();
 
                                     }
@@ -455,6 +531,7 @@
                             for(j=0;j<allFilters.length;j++) {
 
                                 if(allFilters[j].column == "search") {
+
                                     allFilters[j].column = column;
                                     allFilters[j].cond = condition;
                                     allFilters[j].val = response;
@@ -482,18 +559,24 @@
                     } else {
 
                         obj1.column = column;
+
                         obj1.cond = condition;
+
                         obj1.val = response;
+
                         obj1.label = clabel;
+
                         allFilters.push(obj1);
+
                         obj1 = {};
+
                         makeURL();
 
                     }
                 }
             }
-            function confirm_click(x){
-                if (confirm(x)) {
+            function confirm_click(message){
+                if (confirm(message)) {
 
                 } else {
                     return false;

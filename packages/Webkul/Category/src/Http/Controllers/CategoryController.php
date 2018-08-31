@@ -20,7 +20,7 @@ class CategoryController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * CategoryRepository object
      *
@@ -36,6 +36,8 @@ class CategoryController extends Controller
      */
     public function __construct(Category $category)
     {
+        $this->middleware('admin');
+
         $this->category = $category;
 
         $this->_config = request('_config');

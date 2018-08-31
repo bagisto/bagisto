@@ -9,7 +9,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::post('/login', 'Webkul\User\Http\Controllers\SessionController@store')->defaults('_config', [
             'redirect' => 'admin.dashboard.index'
-        ])->name('admin.forget-password.store');
+        ])->name('admin.session.store');
 
 
         // Forget Password Routes
@@ -139,6 +139,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('datagrid', 'Webkul\Admin\Http\Controllers\DataGridController@index')->name('admin.datagrid.index');
 
             Route::any('datagrid/massaction/delete', 'Webkul\Admin\Http\Controllers\DataGridController@massDelete')->name('admin.datagrid.delete');
+
+            Route::any('datagrid/massaction/edit','Webkul\Admin\Http\Controllers\DataGridController@massUpdate')->name('admin.datagrid.edit');
 
             // User Routes
             Route::get('/users', 'Webkul\User\Http\Controllers\UserController@index')->defaults('_config', [
@@ -313,6 +315,51 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
                 'redirect' => 'admin::sliders.index'
             ])->name('admin.sliders.store');
+
+            //tax routes
+            Route::prefix('tax')->group(function () {
+                Route::get('tax', 'Webkul\Core\Http\Controllers\TaxController@index')->defaults('_config', [
+                    'view' => 'admin::tax.tax'
+                ])->name('admin.tax.index');
+
+                // tax rule
+                Route::get('taxrule', 'Webkul\Core\Http\Controllers\TaxRuleController@show')->defaults('_config', [
+                    'view' => 'admin::tax.taxrule.taxrule'
+                ])->name('admin.taxrule.show');
+
+                Route::post('taxrule', 'Webkul\Core\Http\Controllers\TaxRuleController@create')->defaults('_config', [
+                    'redirect' => 'admin.tax.index'
+                ])->name('admin.taxrule.create');
+
+                Route::get('/taxrule/edit/{id}', 'Webkul\Core\Http\Controllers\TaxRuleController@create')->defaults('_config', [
+                    'redirect' => 'admin.tax.index'
+                ])->name('admin.taxrule.edit');
+
+                Route::put('/taxrule/edit/{id}', 'Webkul\Core\Http\Controllers\TaxRuleController@create')->defaults('_config', [
+                    'redirect' => 'admin.tax.index'
+                ])->name('admin.taxrule.update');
+
+                //tax rule ends
+
+                //tax rate
+
+                Route::get('taxrate', 'Webkul\Core\Http\Controllers\TaxRateController@show')->defaults('_config', [
+                    'view' => 'admin::tax.taxrate.taxrate'
+                ])->name('admin.taxrate.show');
+
+                Route::post('taxrate', 'Webkul\Core\Http\Controllers\TaxRateController@create')->defaults('_config', [
+                    'redirect' => 'admin.tax.index'
+                ])->name('admin.taxrate.create');
+
+                Route::get('taxrate/edit/{id}', 'Webkul\Core\Http\Controllers\TaxRateController@edit')->defaults('_config', [
+                    'view' => 'admin::tax.taxrate.edit.edit'
+                ])->name('admin.taxrate.store');
+
+                Route::put('taxrate/update/{id}', 'Webkul\Core\Http\Controllers\TaxRateController@update')->defaults('_config', [
+                    'redirect' => 'admin.tax.index'
+                ])->name('admin.taxrate.update');
+            });
+            //tax rate ends
         });
     });
 });

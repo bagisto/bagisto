@@ -6,7 +6,6 @@ use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\ProductGrid;
 use Webkul\Channel\Repositories\ChannelRepository;
 use Webkul\Product\Repositories\ProductRepository;
-
 /**
  * Product DataGrid
  *
@@ -24,7 +23,6 @@ class ProductDataGrid
 
     public function createProductDataGrid()
     {
-
         return ProductGrid::make([
             'name' => 'Products',
             'table' => 'products as prods',
@@ -68,6 +66,7 @@ class ProductDataGrid
                     'primaryKey' => 'prods.attribute_family_id',
                     'condition' => '=',
                     'secondaryKey' => 'attfam.id',
+                    'withAttributes' => false
                 ],
 
                 //for getting the attribute values.
@@ -77,16 +76,17 @@ class ProductDataGrid
                     'primaryKey' => 'prods.id',
                     'condition' => '=',
                     'secondaryKey' => 'pav.product_id',
-                    'withAttributes' => true
+                    'withAttributes' => true //use this boolean to select records as columns
                 ],
 
-                //for getting the inventory quantity of a product
+                // for getting the inventory quantity of a product
                 [
                     'join' => 'leftjoin',
                     'table' => 'product_inventories as pi',
                     'primaryKey' => 'prods.id',
                     'condition' => '=',
                     'secondaryKey' => 'pi.product_id',
+                    'withAttributes' => false
                 ],
 
             ],
@@ -123,14 +123,14 @@ class ProductDataGrid
                     'label' => 'Product Quatity',
                     'sortable' => false,
                 ],
-                // [
-                //     'name' => 'pav.attribute_id',
-                //     'alias' => 'AttributeID',
-                //     'type' => 'string',
-                //     'label' => 'Attribute ID',
-                //     'sortable' => false,
+                [
+                    'name' => 'pav.attribute_id',
+                    'alias' => 'AttributeID',
+                    'type' => 'string',
+                    'label' => 'Attribute ID',
+                    'sortable' => false,
 
-                // ],
+                ],
             ],
 
             'filterable' => [

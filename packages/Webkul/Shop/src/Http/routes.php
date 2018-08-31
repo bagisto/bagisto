@@ -51,8 +51,8 @@ Route::group(['middleware' => ['web']], function () {
             //customer account
             Route::prefix('account')->group(function () {
 
-                Route::get('account/index', 'Webkul\Customer\Http\Controllers\AccountController@index')->defaults('_config', [
-                'view' => 'shop::customers.account.index'
+                Route::get('index', 'Webkul\Customer\Http\Controllers\AccountController@index')->defaults('_config', [
+                    'view' => 'shop::customers.account.index'
                 ])->name('customer.account.index');
 
 
@@ -69,6 +69,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@edit')->defaults('_config', [
                     'view' => 'shop::customers.account.profile.edit'
                 ])->name('customer.profile.edit');
+
                 /*  Profile Routes Ends Here  */
 
 

@@ -77,6 +77,12 @@ class EventServiceProvider extends ServiceProvider
             $menu->add('settings.users.roles', 'Roles', 'admin.roles.index', 2, '');
 
             $menu->add('settings.sliders', 'Create Sliders', 'admin.sliders.index', 8, '');
+
+            $menu->add('settings.tax', 'Taxes', 'admin.tax.index', 9, '');
+
+            $menu->add('settings.tax.taxrule', 'Add Tax Rules', 'admin.tax.index', 1, '');
+
+            $menu->add('settings.tax.taxrate', 'Add Tax Rates', 'admin.taxrate.show', 2, '');
         });
     }
 

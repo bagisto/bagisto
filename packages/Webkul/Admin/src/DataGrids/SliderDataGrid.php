@@ -100,24 +100,24 @@ class SliderDataGrid
             //don't use aliasing in case of filters
 
             'filterable' => [
-                // [
-                //     'column' => 'id',
-                //     'alias' => 'locale_id',
-                //     'type' => 'number',
-                //     'label' => 'ID',
-                // ],
-                // [
-                //     'column' => 'code',
-                //     'alias' => 'locale_code',
-                //     'type' => 'string',
-                //     'label' => 'Code',
-                // ],
-                // [
-                //     'column' => 'name',
-                //     'alias' => 'locale_name',
-                //     'type' => 'string',
-                //     'label' => 'Name',
-                // ],
+                [
+                    'column' => 'id',
+                    'alias' => 'locale_id',
+                    'type' => 'number',
+                    'label' => 'ID',
+                ],
+                [
+                    'column' => 'code',
+                    'alias' => 'locale_code',
+                    'type' => 'string',
+                    'label' => 'Code',
+                ],
+                [
+                    'column' => 'name',
+                    'alias' => 'locale_name',
+                    'type' => 'string',
+                    'label' => 'Name',
+                ],
             ],
 
             //don't use aliasing in case of searchables

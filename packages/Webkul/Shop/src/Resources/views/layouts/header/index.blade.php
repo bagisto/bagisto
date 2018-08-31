@@ -6,7 +6,7 @@
 
             <ul class="logo-container">
                 <li>
-                    <a href="">
+                    <a href="{{ route('store.home') }}">
                         <img class="logo" src="{{ asset('vendor/webkul/shop/assets/images/logo.svg') }}" />
                     </a>
                 </li>
@@ -74,6 +74,7 @@
                                 <ul>
                                     <li><a href="{{ route('customer.account.index') }}">Account</a></li>
                                     <li><a href="{{ route('customer.profile.index') }}">Profile</a></li>
+                                    <li><a href="{{ route('customer.address.index') }}">Address</a></li>
                                     <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
                                     <li><a href="{{ route('customer.cart') }}">Cart</a></li>
                                     <li><a href="{{ route('customer.orders.index') }}">Orders</a></li>
