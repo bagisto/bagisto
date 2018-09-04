@@ -41,7 +41,7 @@ return [
             'all' => 'All'
         ],
         'users' => [
-            'title' => 'Users',
+            'title' => 'User',
             'add-user-title' => 'Add User',
             'edit-user-title' => 'Edit User',
             'save-btn-title' => 'Save User',
@@ -184,6 +184,7 @@ return [
             'title' => 'Add Tax Rule',
             'create' => 'Create Tax Rule',
             'general' => 'Tax Rule',
+            'select-channel' => 'Select Channel',
             'name' => 'Name',
             'code' => 'Code',
             'description' => 'Description',

@@ -25,6 +25,22 @@
                     <accordian :title="'{{ __('admin::app.configuration.taxrule.general') }}'" :active="true">
                         <div slot="body">
 
+                            <div class="control-group" :class="[errors.has('channel') ? 'has-error' : '']">
+                                <label for="channel" class="required">{{ __('admin::app.configuration.taxrule.select-channel') }}</label>
+
+                                <select class="control" name="channel_id">
+                                    @foreach(core()->getAllChannels() as $channelModel)
+
+                                        <option value="{{ $channelModel->id }}">
+                                            {{ $channelModel->name }}
+                                        </option>
+
+                                    @endforeach
+                                </select>
+
+                                <span class="control-error" v-if="errors.has('channel')">@{{ errors.first('channel') }}</span>
+                            </div>
+
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.configuration.taxrule.code') }}</label>
 
@@ -49,7 +65,6 @@
                                 <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                             </div>
 
-
                             <div class="control-group" :class="[errors.has('taxrates') ? 'has-error' : '']">
                                 <label for="taxrates" class="required">{{ __('admin::app.configuration.taxrule.select-taxrates') }}</label>
 
@@ -59,12 +74,8 @@
                                     @endforeach
                                 </select>
 
-
                                 <span class="control-error" v-if="errors.has('taxrates')">@{{ errors.first('taxrates') }}</span>
                             </div>
-
-
-
                         </div>
                     </accordian>
 

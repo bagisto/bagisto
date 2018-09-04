@@ -4,7 +4,7 @@ namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Core\Repositories\TaxRateRepository as TaxRate;
+use Webkul\Core\Repositories\TaxRatesRepository as TaxRate;
 
 
 /**
@@ -32,7 +32,7 @@ class TaxRateController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\TaxRateRepository  $taxRate
+     * @param  Webkul\Core\Repositories\TaxRatesRepository  $taxRate
      * @return void
      */
     public function __construct(TaxRate $taxRate)
@@ -45,7 +45,20 @@ class TaxRateController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing
+     * resource for the
+     * available tax rates.
+     *
+     * @return mixed
+     */
+
+    public function index() {
+        return view($this->_config['view']);
+    }
+
+    /**
+     * Display a create
+     * form for tax rate
      *
      * @return view
      */

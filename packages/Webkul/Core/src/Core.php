@@ -5,6 +5,8 @@ namespace Webkul\Core;
 use Webkul\Core\Models\Channel as ChannelModel;
 use Webkul\Core\Models\Locale as LocaleModel;
 use Webkul\Core\Models\Currency as CurrencyModel;
+use Webkul\Core\Models\TaxCategory as TaxCategory;
+use Webkul\Core\Models\TaxRate as TaxRate;
 
 class Core
 {
@@ -100,7 +102,7 @@ class Core
         $channel = $this->getCurrentChannel();
 
         $currencyCode = $channel->base_currency->code;
-        
+
         return currency($price, $currencyCode);
     }
 
@@ -171,4 +173,20 @@ class Core
     }
 
     // $timezonelist = \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);
+
+    /**
+     * Find all the tax
+     * rates associated
+     * with a tax category.
+     *
+     * @return Array
+     */
+
+    public function withRates($id) {
+        return TaxCategory::findOrFail($id)->tax_rates;
+    }
+
+    public function getAllTaxRates() {
+        return TaxRate::all();
+    }
 }

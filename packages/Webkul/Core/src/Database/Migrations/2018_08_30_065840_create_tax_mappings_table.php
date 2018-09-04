@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTaxMapTable extends Migration
+class CreateTaxMappingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreateTaxMapTable extends Migration
      */
     public function up()
     {
-        Schema::create('tax_map', function (Blueprint $table) {
+        Schema::create('tax_categories_tax_rates', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('tax_rule_id')->unsigned();
+            $table->integer('tax_category_id')->unsigned();
 
-            $table->foreign('tax_rule_id')->references('id')->on('tax_rules')->onDelete('cascade');
+            $table->foreign('tax_category_id')->references('id')->on('tax_categories')->onDelete('cascade');
 
             $table->integer('tax_rate_id')->unsigned();
 
             $table->foreign('tax_rate_id')->references('id')->on('tax_rates')->onDelete('cascade');
 
-            $table->unique(['tax_rule_id', 'tax_rate_id'], 'tax_map_index_unique');
+            $table->unique(['tax_category_id', 'tax_rate_id'], 'tax_map_index_unique');
 
             $table->timestamps();
         });

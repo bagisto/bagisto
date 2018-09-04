@@ -6,27 +6,27 @@ use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
 /**
- * Tax Rules DataGrid
+ * Tax Rates DataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class TaxRuleDataGrid
+class TaxRateDataGrid
 {
     /**
      * The Tax Rule Data
      * Grid implementation.
      *
-     * @var TaxRuleDataGrid
+     * @var TaxRateDataGrid
      */
-    public function createTaxRuleDataGrid()
+    public function createTaxRateDataGrid()
     {
 
         return DataGrid::make([
 
-            'name' => 'Tax Rule',
-            'table' => 'tax_categories as tr',
+            'name' => 'Tax Rates',
+            'table' => 'tax_rates as tr',
             'select' => 'tr.id',
             'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
@@ -84,56 +84,95 @@ class TaxRuleDataGrid
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'tr.name',
-                    'alias' => 'Name',
+                    'name' => 'tr.identifier',
+                    'alias' => 'identifier',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Identifier',
                     'sortable' => true,
                     // 'wrapper' => function ($value, $object) {
                     //     return '<a class="color-red">' . $object->Name . '</a>';
                     // },
                 ],
                 [
-                    'name' => 'tr.code',
-                    'alias' => 'code',
+                    'name' => 'tr.state',
+                    'alias' => 'state',
                     'type' => 'string',
-                    'label' => 'Code',
+                    'label' => 'State',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'tr.country',
+                    'alias' => 'country',
+                    'type' => 'string',
+                    'label' => 'Country',
+                    'sortable' => true,
+                ],
+
+                [
+                    'name' => 'tr.tax_rate',
+                    'alias' => 'tax_rate',
+                    'type' => 'number',
+                    'label' => 'Tax Rate',
                     'sortable' => true,
                 ],
             ],
             //don't use aliasing in case of filters
             'filterable' => [
                 [
-                    'column' => 'tr.name',
-                    'alias' => 'Name',
-                    'type' => 'number',
-                    'label' => 'Name'
-                ],
-                [
-                    'column' => 'tr.id',
+                    'name' => 'tr.id',
                     'alias' => 'ID',
                     'type' => 'number',
-                    'label' => 'ID'
+                    'label' => 'ID',
                 ],
                 [
-                    'column' => 'tr.code',
-                    'alias' => 'code',
+                    'name' => 'tr.identifier',
+                    'alias' => 'identifier',
                     'type' => 'string',
-                    'label' => 'Code'
-                ]
+                    'label' => 'Identifier',
+                ],
+                [
+                    'name' => 'tr.state',
+                    'alias' => 'state',
+                    'type' => 'string',
+                    'label' => 'State',
+                ],
+                [
+                    'name' => 'tr.country',
+                    'alias' => 'country',
+                    'type' => 'string',
+                    'label' => 'Country',
+                ],
+
+                [
+                    'name' => 'tr.tax_rate',
+                    'alias' => 'tax_rate',
+                    'type' => 'number',
+                    'label' => 'Tax Rate',
+                ],
             ],
             //don't use aliasing in case of searchables
             'searchable' => [
                 [
-                    'column' => 'tr.code',
+                    'column' => 'tr.identifier',
                     'type' => 'string',
-                    'label' => 'Code'
+                    'label' => 'Identifier',
                 ],
                 [
-                    'column' => 'tr.name',
+                    'column' => 'tr.state',
                     'type' => 'string',
-                    'label' => 'Name'
-                ]
+                    'label' => 'State',
+                ],
+                [
+                    'column' => 'tr.country',
+                    'type' => 'string',
+                    'label' => 'Country',
+                ],
+
+                [
+                    'column' => 'tr.tax_rate',
+                    'type' => 'number',
+                    'label' => 'Tax Rate',
+                ],
             ],
             'operators' => [
                 'eq' => "=",
@@ -154,7 +193,7 @@ class TaxRuleDataGrid
 
     public function render() {
 
-        return $this->createTaxRuleDataGrid()->render();
+        return $this->createTaxRateDataGrid()->render();
 
     }
 }

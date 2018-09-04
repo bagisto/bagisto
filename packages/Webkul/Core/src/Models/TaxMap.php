@@ -3,6 +3,8 @@
 namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Core\Models\TaxCategory;
+use Webkul\Core\Models\TaxRate;
 
 class TaxMap extends Model
 {
@@ -12,9 +14,10 @@ class TaxMap extends Model
      * @var array
      */
 
-    protected $table = 'tax_map';
+    protected $table = 'tax_categories_tax_rates';
 
     protected $fillable = [
-        'channel_id', 'tax_rule', 'tax_rate'
+       'tax_category_id', 'tax_rate_id'
     ];
+
 }

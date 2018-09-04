@@ -10,7 +10,7 @@ use Webkul\Core\Eloquent\Repository;
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class TaxRuleRepository extends Repository
+class TaxCategoriesRepository extends Repository
 {
     /**
      * Specify Model class name
@@ -19,7 +19,7 @@ class TaxRuleRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Core\Models\TaxRule';
+        return 'Webkul\Core\Models\TaxCategory';
     }
 
     /**

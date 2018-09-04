@@ -15,8 +15,8 @@
         </div>
 
         <div class="page-content">
-            <h2>Tax Rules DataGrid Will be here.</h2>
-            <span>Render the tax rules datagrid here.</span>
+            @inject('taxrule','Webkul\Admin\DataGrids\TaxRuleDataGrid')
+            {!! $taxrule->render() !!}
         </div>
     </div>
 @stop

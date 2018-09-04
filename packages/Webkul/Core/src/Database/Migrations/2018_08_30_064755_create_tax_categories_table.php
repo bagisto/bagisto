@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTaxRulesTable extends Migration
+class CreateTaxCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTaxRulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tax_rules', function (Blueprint $table) {
+        Schema::create('tax_categories', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('channel_id')->unsigned();

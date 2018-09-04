@@ -46,7 +46,7 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::view('/product', 'shop::store.product.details.home.index')->name('customer.product');
 
-            Route::view('/product/review', 'shop::store.product.review.index')->name('customer.product.review');
+            Route::view('/product/{slug}/review', 'shop::store.product.review.index')->name('customer.product.review');
 
             //customer account
             Route::prefix('account')->group(function () {
