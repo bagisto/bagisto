@@ -186,6 +186,12 @@ class Core
         return TaxCategory::findOrFail($id)->tax_rates;
     }
 
+    /**
+     * To fetch all
+     * tax rates.
+     *
+     * @return Collection
+     */
     public function getAllTaxRates() {
         return TaxRate::all();
     }

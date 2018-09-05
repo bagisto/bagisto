@@ -6,16 +6,15 @@
 
 @section('content')
     <div class="content">
-        {{-- {{ dd($data[0][0]) }} --}}
         <form method="POST" action="{{ route('admin.taxrule.update', $data[0][0]['id']) }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('admin::app.configuration.taxrate.edit.title') }}</h1>
+                    <h1>{{ __('admin::app.configuration.taxrule.edit.title') }}</h1>
                 </div>
 
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.configuration.taxrate.edit.edit-button-title') }}
+                        {{ __('admin::app.configuration.taxrule.edit.edit-button-title') }}
                     </button>
                 </div>
             </div>

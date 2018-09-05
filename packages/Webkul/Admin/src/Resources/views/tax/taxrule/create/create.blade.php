@@ -70,7 +70,7 @@
 
                                 <select multiple="multiple" v-validate="'required'" class="control" id="taxrates" name="taxrates[]" value="{{ old('taxrates') }}">
                                     @foreach($taxRates as $taxRate)
-                                        <option value="{{$taxRate['id']}}">{{$taxRate['identifier']}}</option>
+                                        <option value="{{ $taxRate['id'] }}">{{ $taxRate['identifier'] }}</option>
                                     @endforeach
                                 </select>
 

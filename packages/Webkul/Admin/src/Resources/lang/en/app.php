@@ -188,7 +188,11 @@ return [
             'name' => 'Name',
             'code' => 'Code',
             'description' => 'Description',
-            'select-taxrates' => 'Select Tax Rates'
+            'select-taxrates' => 'Select Tax Rates',
+            'edit' => [
+                'title' => 'Edit Tax Rule',
+                'edit-button-title' => 'Edit Rule'
+            ]
         ],
         'taxrate' => [
             'title' => 'Add Tax Rate',

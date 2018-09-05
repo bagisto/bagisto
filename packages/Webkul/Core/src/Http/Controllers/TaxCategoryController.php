@@ -90,19 +90,7 @@ class TaxCategoryController extends Controller
         if($currentTaxRule = $this->taxRule->create(request()->input())) {
             $allTaxRules = $data['taxrates'];
 
-            foreach ($allTaxRules as $index => $taxRuleId) {
-                $taxMap['tax_category_id'] = $currentTaxRule->id;
-
-                $taxMap['tax_rate_id'] = $taxRuleId;
-
-                if ($this->taxMap->create($taxMap)) {
-                    continue;
-                } else {
-                    return redirect()->action('TaxCategoryController@performRollback',[
-                        'taxRuleId' => $taxRuleId
-                    ]);
-                }
-            }
+            $this->taxRule->onlyAttach($currentTaxRule->id, $allTaxRules);
 
             session()->flash('success', 'New Tax Rule Created');
 
@@ -160,24 +148,16 @@ class TaxCategoryController extends Controller
         $data['description'] = request()->input('description');
 
         if($this->taxRate->update($data, $id)) {
-            if($this->taxRate->sync(request()->input('taxrates'))) {
-                session()->flash('success', 'Tax Category is successfully edited.');
-                return redirect()->route($this->_config['redirect']);
-            } else {
-                session()->flash('error', 'Tax Rates cannot be synced.');
-                return redirect()->back();
-            }
+            $this->taxRule->syncAndDetach($id, request()->input('taxrates'));
+
+            session()->flash('success', 'Tax Category is successfully edited.');
+
+            return redirect()->route($this->_config['redirect']);
         } else {
             session()->flash('error', 'Tax Category Cannot be Updated Successfully.');
+
             return redirect()->back();
         }
-
-        // $taxRuleData = $this->taxRule->findOneByField('id', $id);
-
-        // $taxMapData = $this->taxMap->findByField('tax_rule_id', $id);
-
-
-
     }
 
     /**

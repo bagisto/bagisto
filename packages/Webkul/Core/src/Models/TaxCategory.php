@@ -22,6 +22,6 @@ class TaxCategory extends Model
 
     //for joining the two way pivot table
     public function tax_rates() {
-        return $this->belongsToMany(TaxRate::class, 'tax_categories_tax_rates', 'tax_category_id');
+        return $this->belongsToMany(TaxRate::class, 'tax_categories_tax_rates', 'tax_category_id')->withPivot('id');
     }
 }
