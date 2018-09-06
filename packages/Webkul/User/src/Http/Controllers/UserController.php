@@ -118,7 +118,12 @@ class UserController extends Controller
      */
     public function update(UserForm $request, $id)
     {
-        $this->admin->update(request()->all(), $id);
+        $data = request()->all();
+
+        if(!$data['password'])
+            unset($data['password']);
+
+        $this->admin->update($data, $id);
 
         session()->flash('success', 'User updated successfully.');
 

@@ -27,6 +27,7 @@ class CreateAttributesTable extends Migration
             $table->boolean('is_filterable')->default(0);
             $table->boolean('is_configurable')->default(0);
             $table->boolean('is_user_defined')->default(1);
+            $table->boolean('is_visible_on_front')->default(0);
             $table->timestamps();
         });
     }
