@@ -161,22 +161,6 @@ class TaxCategoryController extends Controller
     }
 
     /**
-     * To perform the rollback
-     * if in anycase the taxMap
-     * records creates any problem.
-     *
-     * @return mixed
-     */
-    public function performRollback($taxRuleId) {
-
-        if($this->taxRule->delete($taxRuleId)) {
-            session()->flash('error', 'Cannot Create Tax Rule');
-
-            return redirect()->route('admin.taxrule.index');
-        }
-    }
-
-    /**
      * Destroy a tax rule
      *
      * @return mixed

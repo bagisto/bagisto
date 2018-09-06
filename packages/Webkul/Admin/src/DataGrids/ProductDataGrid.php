@@ -66,7 +66,6 @@ class ProductDataGrid
                     'primaryKey' => 'prods.attribute_family_id',
                     'condition' => '=',
                     'secondaryKey' => 'attfam.id',
-                    'withAttributes' => false
                 ],
 
                 //for getting the attribute values.
@@ -76,7 +75,12 @@ class ProductDataGrid
                     'primaryKey' => 'prods.id',
                     'condition' => '=',
                     'secondaryKey' => 'pav.product_id',
-                    'withAttributes' => true //use this boolean to select records as columns
+                    'withAttributes' => [
+                        'condition' => [
+                            'attribute_id' => 2,
+                            'select' => 'name',
+                        ]
+                    ]
                 ],
 
                 // for getting the inventory quantity of a product
@@ -86,7 +90,6 @@ class ProductDataGrid
                     'primaryKey' => 'prods.id',
                     'condition' => '=',
                     'secondaryKey' => 'pi.product_id',
-                    'withAttributes' => false
                 ],
 
             ],
@@ -120,16 +123,8 @@ class ProductDataGrid
                     'name' => 'pi.qty',
                     'alias' => 'ProductQuantity',
                     'type' => 'string',
-                    'label' => 'Product Quatity',
+                    'label' => 'Product Quantity',
                     'sortable' => false,
-                ],
-                [
-                    'name' => 'pav.attribute_id',
-                    'alias' => 'AttributeID',
-                    'type' => 'string',
-                    'label' => 'Attribute ID',
-                    'sortable' => false,
-
                 ],
             ],
 

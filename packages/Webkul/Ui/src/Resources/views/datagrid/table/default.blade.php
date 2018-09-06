@@ -106,6 +106,7 @@
                             <th class="grid_head" data-column-name="{{ $column->alias }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
                     @endif
                 @endforeach
+                <td>Name</td>
                 {{-- @if(isset($attribute_columns))
                     @foreach($attribute_columns as $key => $value)
                         <th class="grid_head"
@@ -140,6 +141,7 @@
                     <td>{{ $result->{$atc} }}</td>
                 @endforeach
                 @endif --}}
+                <td></td>
 
                 <td class="action">
                     @foreach($actions as $action)

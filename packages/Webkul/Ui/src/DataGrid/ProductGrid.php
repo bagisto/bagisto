@@ -661,6 +661,10 @@ class ProductGrid
             //     }
             // }
             // else
+            if(array_key_exists('withAttributes', $join)) {
+                $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondaryKey'])->where('attribute_id','=',2)->addSelect('name as product_name');
+            }
+            else
                 $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondaryKey']);
         }
 
@@ -949,7 +953,7 @@ class ProductGrid
 
         $this->allAttributes = $this->getAttributes();
         $this->getDbQueryResults();
-        // dd($this->results);
+        dd($this->results);
         return view('ui::datagrid.index', [
             'css' => $this->css,
             'results' => $this->results,
