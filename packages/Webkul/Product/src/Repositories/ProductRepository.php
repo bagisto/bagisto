@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Product\Repositories;
- 
+
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -211,7 +211,7 @@ class ProductRepository extends Repository
         }
 
         $this->productInventory->saveInventories($data, $product);
-        
+
         $this->productImage->uploadImages($data, $product);
 
         return $product;
@@ -322,7 +322,7 @@ class ProductRepository extends Repository
                     'channel' => $attribute->value_per_channel ? $data['channel'] : null,
                     'locale' => $attribute->value_per_locale ? $data['locale'] : null
                 ]);
-            
+
             if(!$attributeValue) {
                 $this->attributeValue->create([
                         'product_id' => $id,

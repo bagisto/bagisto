@@ -42,7 +42,7 @@ class InventorySourcesDataGrid
             'actions' => [
                 [
                     'type' => 'Edit',
-                    'route' => route('admin.datagrid.delete'),
+                    'route' => route('admin.datagrid.edit'),
                     'confirm_text' => 'Do you really edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
@@ -110,7 +110,7 @@ class InventorySourcesDataGrid
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'inventoryId',
+                    'alias' => 'inventoryID',
                     'type' => 'number',
                     'label' => 'ID',
                 ],

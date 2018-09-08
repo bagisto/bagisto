@@ -71,21 +71,21 @@ class ChannelDataGrid
 
                 [
                     'name' => 'id',
-                    'alias' => 'channel_id',
+                    'alias' => 'channelID',
                     'type' => 'number',
                     'label' => 'Channel ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'code',
-                    'alias' => 'channel_code',
+                    'alias' => 'channelCode',
                     'type' => 'string',
                     'label' => 'Channel Code',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'name',
-                    'alias' => 'channel_name',
+                    'alias' => 'channelName',
                     'type' => 'string',
                     'label' => 'Channel Name',
                     'sortable' => true,
@@ -98,7 +98,7 @@ class ChannelDataGrid
             'filterable' => [
                 [
                     'column' => 'id',
-                    'alias' => 'channelId',
+                    'alias' => 'channelID',
                     'type' => 'number',
                     'label' => 'Channel ID',
                 ],

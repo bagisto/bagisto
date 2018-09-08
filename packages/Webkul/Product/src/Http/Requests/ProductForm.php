@@ -85,10 +85,10 @@ class ProductForm extends FormRequest
         foreach ($attributes as $attribute) {
             if($attribute->code == 'sku')
                 continue;
-            
+
             if($product->type == 'configurable' && in_array($attribute->code, ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight']))
                 continue;
-            
+
             $validations = [];
             if($attribute->is_required) {
                 array_push($validations, 'required');

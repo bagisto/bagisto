@@ -21,14 +21,14 @@ class ExchangeRateController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * ExchangeRateRepository object
      *
      * @var array
      */
     protected $exchangeRate;
-    
+
     /**
      * CurrencyRepository object
      *
@@ -45,6 +45,8 @@ class ExchangeRateController extends Controller
      */
     public function __construct(ExchangeRate $exchangeRate, Currency $currency)
     {
+        $this->middleware('admin');
+
         $this->exchangeRate = $exchangeRate;
 
         $this->currency = $currency;
@@ -129,7 +131,7 @@ class ExchangeRateController extends Controller
             'target_currency' => 'required',
             'ratio' => 'required|numeric'
         ]);
-        
+
         $this->exchangeRate->update(request()->all(), $id);
 
         session()->flash('success', 'Exchange rate updated successfully.');

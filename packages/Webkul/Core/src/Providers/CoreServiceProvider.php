@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\AliasLoader;
 use Webkul\Core\Http\Middleware\Locale;
+use Webkul\User\Http\Middleware\RedirectIfNotAdmin;
+use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 use Webkul\Core\Core;
 use Webkul\Core\Facades\CoreFacade;
 
@@ -26,6 +28,10 @@ class CoreServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
 
         $router->aliasMiddleware('locale', Locale::class);
+
+        $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
+
+        $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
         $this->publishes([
             __DIR__ . '/../../publishable/lang' => public_path('vendor/webkul/core/lang'),

@@ -121,7 +121,7 @@ class Product extends Model
     {
         return $this->belongsToMany(self::class, 'product_cross_sells');
     }
-    
+
     /**
      * @param string $key
      *

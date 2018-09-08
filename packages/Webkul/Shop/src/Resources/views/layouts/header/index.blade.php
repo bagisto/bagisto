@@ -6,8 +6,8 @@
 
             <ul class="logo-container">
                 <li>
-                    <a href="">
-                        <img class="logo" src="{{asset('themes/default/assets/images/Logo.svg')}}" />
+                    <a href="{{ route('store.home') }}">
+                        <img class="logo" src="{{ asset('vendor/webkul/shop/assets/images/logo.svg') }}" />
                     </a>
                 </li>
             </ul>
@@ -48,20 +48,43 @@
 
                     </div>
 
-                    <div class="dropdown-list bottom-right" style="display: none;">
+                    @guest
+                        <div class="dropdown-list bottom-right" style="display: none;">
 
-                        <div class="dropdown-container">
+                            <div class="dropdown-container">
 
-                            <label>Account</label>
+                                <label>Account</label>
 
-                            <ul>
-                                <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
-                                <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
-                            </ul>
+                                <ul>
+                                    <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
+                                    <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
+                                </ul>
+
+                            </div>
 
                         </div>
+                    @endguest
+                    @auth('customer')
+                        <div class="dropdown-list bottom-right" style="display: none;">
 
-                    </div>
+                            <div class="dropdown-container">
+
+                                <label>Account</label>
+
+                                <ul>
+                                    <li><a href="{{ route('customer.account.index') }}">Account</a></li>
+                                    <li><a href="{{ route('customer.profile.index') }}">Profile</a></li>
+                                    <li><a href="{{ route('customer.address.index') }}">Address</a></li>
+                                    <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('customer.cart') }}">Cart</a></li>
+                                    <li><a href="{{ route('customer.orders.index') }}">Orders</a></li>
+                                    <li><a href="{{ route('customer.session.destroy') }}">Logout</a></li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+                    @endauth
 
                 </li>
 
@@ -104,9 +127,9 @@
         </div>
     </div>
 
-    
+
     {{-- Triggered on responsive mode only --}}
-    
+
     <div class="search-suggestion">
         <div class="search-content">
             <span class="icon search-icon"></span>
@@ -131,12 +154,12 @@
 
 </div>
 
-@push('scripts')  
+@push('scripts')
 
     <script>
 
         window.onload = function() {
-            
+
             var sort = document.getElementById("sortable");
             var search = document.getElementById("search");
 
@@ -146,7 +169,7 @@
             // function for changing icon for responsive header
 
             function myFunction(){
-               
+
                 let className = document.getElementById(this.id).className;
 
                 let slider  = document.getElementsByClassName("slider-block");
@@ -177,7 +200,7 @@
                     document.getElementsByClassName("search-suggestion")[0].style.display="block";
 
                 }else if ( className == 'icon sortable-icon'){
-                
+
                     sort.classList.remove('icon', 'sortable-icon');
                     sort.classList.add('icon', 'cross-icon');
 

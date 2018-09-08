@@ -22,7 +22,7 @@ class AttributeFamilyController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * AttributeFamilyRepository object
      *
@@ -38,6 +38,8 @@ class AttributeFamilyController extends Controller
      */
     public function __construct(AttributeFamily $attributeFamily)
     {
+        $this->middleware('admin');
+
         $this->attributeFamily = $attributeFamily;
 
         $this->_config = request('_config');
@@ -62,7 +64,7 @@ class AttributeFamilyController extends Controller
     public function create(Attribute $attribute)
     {
         $attributeFamily = $this->attributeFamily->with(['attribute_groups.custom_attributes'])->findOneByField('code', 'default');
-        
+
         $custom_attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
 
         return view($this->_config['view'], compact('custom_attributes', 'attributeFamily'));
@@ -116,7 +118,7 @@ class AttributeFamilyController extends Controller
             'code' => ['required', 'unique:attribute_families,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required'
         ]);
-        
+
 
         $this->attributeFamily->update(request()->all(), $id);
 

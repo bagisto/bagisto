@@ -1,5 +1,5 @@
 <section class="slider-block">
-    <image-slider :slides='@json($data)'> </image-slider>
+    <image-slider :slides='@json($sliderData)'> </image-slider>
 </section>
 
 

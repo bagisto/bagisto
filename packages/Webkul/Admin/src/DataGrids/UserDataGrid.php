@@ -25,6 +25,7 @@ class UserDataGrid
     {
 
         return DataGrid::make([
+
             'name' => 'Admins',
             'table' => 'admins as u',
             'select' => 'u.id',
@@ -38,23 +39,23 @@ class UserDataGrid
                     'label' => 'Delete',
                     'type' => 'button',
                 ],
-                // [
-                //     'route' => route('admin.datagrid.index'),
-                //     'method' => 'POST',
-                //     'label' => 'View Grid',
-                //     'type' => 'select',
-                //     'options' =>[
-                //         1 => 'Edit',
-                //         2 => 'Set',
-                //         3 => 'Change Status'
-                //     ]
-                // ],
+                [
+                    'route' => route('admin.datagrid.index'),
+                    'method' => 'POST',
+                    'label' => 'View Grid',
+                    'type' => 'select',
+                    'options' =>[
+                        1 => 'Edit',
+                        2 => 'Set',
+                        3 => 'Change Status'
+                    ]
+                ],
             ],
             'actions' => [
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really wanis?',
                     'icon' => 'icon pencil-lg-icon',
                 ],
                 [
@@ -83,8 +84,8 @@ class UserDataGrid
                     'label' => 'Admin ID',
                     'sortable' => true,
                     'wrapper' => function ($value, $object) {
-                                    return '<a class="color-red">' . $object->ID . '</a>';
-                                },
+                        return '<a class="color-red">' . $object->ID . '</a>';
+                    },
                 ],
                 [
                     'name' => 'u.name',
@@ -93,8 +94,8 @@ class UserDataGrid
                     'label' => 'Name',
                     'sortable' => true,
                     'wrapper' => function ($value, $object) {
-                                    return '<a class="color-red">' . $object->Name . '</a>';
-                                },
+                        return '<a class="color-red">' . $object->Name . '</a>';
+                    },
                 ],
                 [
                     'name' => 'u.email',
@@ -117,27 +118,6 @@ class UserDataGrid
                     'label' => 'Role ID',
                     'sortable' => true,
                 ],
-                // [
-                //     'name' => 'a.first_name',
-                //     'type' => 'string',
-                //     'label' => 'Admin Name',
-                //     'sortable' => true,
-                //     'filterable' => true,
-                //     // will create on run time query
-                //     // 'filter' => [
-                //     //     'function' => 'where', // orwhere
-                //     //     'condition' => ['name', '=', 'Admin'] // multiarray
-                //     // ],
-                //     'attributes' => [
-                //         'class' => 'class-a class-b',
-                //         'data-attr' => 'whatever you want',
-                //         'onclick' => "window.alert('alert from datagrid column')"
-                //      ],
-                //     'wrapper' => function ($value, $object) {
-                //         return '<a href="'.$value.'">' . $object->first_name . '</a>';
-                //     },
-                // ],
-
             ],
             //don't use aliasing in case of filters
             'filterable' => [

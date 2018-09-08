@@ -6,8 +6,6 @@
 
 @section('content')
 
-    @inject ('datagrid', 'Webkul\Admin\Datagrids\User')
-
     <div class="content">
         <div class="page-header">
             <div class="page-title">

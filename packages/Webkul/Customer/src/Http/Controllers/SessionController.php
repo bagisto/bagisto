@@ -24,12 +24,20 @@ class SessionController extends Controller
 
     public function __construct()
     {
+
+        $this->middleware('customer')->except(['show','create']);
+
         $this->_config = request('_config');
+
     }
 
     public function show()
     {
-        return view($this->_config['view']);
+        if(auth()->guard('customer')->check()) {
+            return redirect()->route('customer.account.index');
+        } else {
+            return view($this->_config['view']);
+        }
     }
 
     public function create(Request $request)
@@ -39,15 +47,13 @@ class SessionController extends Controller
             'password' => 'required'
         ]);
 
-        // $remember = request('remember');
         if (!auth()->guard('customer')->attempt(request(['email', 'password']))) {
-            dd('cannot be authorized');
-            session()->flash('error', 'Please check your credentials and try again.');
 
+            session()->flash('error', 'Please check your credentials and try again.');
             return back();
         }
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->intended(route($this->_config['redirect']));
     }
 
     public function destroy($id)

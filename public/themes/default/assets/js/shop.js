@@ -217,8 +217,6 @@ window.VeeValidate = __webpack_require__(9);
 
 Vue.use(VeeValidate);
 
-//pure JS for resizing of browser purposes only
-
 Vue.component("category-nav", __webpack_require__(10));
 Vue.component("category-item", __webpack_require__(13));
 Vue.component("image-slider", __webpack_require__(16));
@@ -10650,7 +10648,7 @@ return jQuery;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.17
+ * Vue.js v2.5.16
  * (c) 2014-2018 Evan You
  * Released under the MIT License.
  */
@@ -15739,7 +15737,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.17';
+Vue.version = '2.5.16';
 
 /*  */
 
@@ -29177,7 +29175,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", [
       _c("img", {
-        attrs: { src: "vendor/webkul/shop/assets/images/offer-zone.svg" }
+        attrs: {
+          src:
+            "http://localhost/bagisto/public/vendor/webkul/shop/assets/images/offer-zone.svg"
+        }
       }),
       _vm._v(" "),
       _c("span", [_vm._v("Offer Zone")])
@@ -29278,6 +29279,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         haveChildren: function haveChildren() {
+            console.log(this.item);
             return this.item.children.length ? true : false;
         }
     }
@@ -29292,7 +29294,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("li", [
-    _c("a", { attrs: { href: "" } }, [
+    _c("a", { attrs: { href: this.item["translations"][0].slug } }, [
       _vm._v(_vm._s(this.item["translations"][0].name) + " "),
       _vm.haveChildren && _vm.item.parent_id != null
         ? _c("i", { staticClass: "icon dropdown-right-icon" })

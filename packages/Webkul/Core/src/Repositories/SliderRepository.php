@@ -28,7 +28,7 @@ class SliderRepository extends Repository
      */
     public function create(array $data)
     {
-        $image = request()->hasFile('image');
+        $image = request()->file('image');
 
         $image_name = uniqid(20).'.'.$image->getClientOriginalExtension();
 

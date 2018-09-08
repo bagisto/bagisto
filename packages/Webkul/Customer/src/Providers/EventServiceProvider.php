@@ -34,8 +34,17 @@ class EventServiceProvider extends ServiceProvider
         });
 
         Event::listen('customer.menu.build', function ($menu) {
-            $menu->add('customer.account.profile', 'Profile');
-            $menu->add('customer.account.profile', 'Wishlist');
+
+            $menu->add('customer.profile.index', 'Profile');
+
+            $menu->add('customer.orders.index', 'Orders');
+
+            $menu->add('customer.address.index', 'Address');
+
+            $menu->add('customer.reviews.index', 'Reviews');
+
+            $menu->add('customer.wishlist.index', 'Wishlist');
+
         });
     }
 }

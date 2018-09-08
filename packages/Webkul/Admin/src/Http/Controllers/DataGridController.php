@@ -15,6 +15,7 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  */
 class DataGridController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *

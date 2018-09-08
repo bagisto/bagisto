@@ -24,6 +24,8 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->_config = request('_config');
+
+        $this->middleware('admin');
     }
     public function index()
     {

@@ -14,7 +14,7 @@
 
                 <h1>{{ __('admin::app.users.sessions.title') }}</h1>
 
-                <form method="POST" action="login" @submit.prevent="onSubmit">
+                <form method="POST" action="{{ route('admin.session.store') }}" @submit.prevent="onSubmit">
                     @csrf
 
                     <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
@@ -40,14 +40,14 @@
                             {{ __('admin::app.users.sessions.remember-me') }}
                         </span>
                     </div>
-                    
+
                     <div class="button-group">
                         <button class="btn btn-xl btn-primary">{{ __('admin::app.users.sessions.submit-btn-title') }}</button>
                     </div>
                 </form>
 
             </div>
-        
+
         </div>
 
     </div>
