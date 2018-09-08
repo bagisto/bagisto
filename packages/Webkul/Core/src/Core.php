@@ -2,6 +2,7 @@
 
 namespace Webkul\Core;
 
+use Carbon\Carbon;
 use Webkul\Core\Models\Channel as ChannelModel;
 use Webkul\Core\Models\Locale as LocaleModel;
 use Webkul\Core\Models\Currency as CurrencyModel;
@@ -14,7 +15,12 @@ class Core
     *  @return Collection
     */
     public function getAllChannels() {
-        return ChannelModel::all();
+        static $channels;
+
+        if($channels)
+            return $channels;
+
+        return $channels = ChannelModel::all();
     }
 
     /**
@@ -23,7 +29,12 @@ class Core
     *  @return mixed
     */
     public function getCurrentChannel() {
-        return ChannelModel::first();
+        static $channel;
+
+        if($channel)
+            return $channel;
+
+        return $channel = ChannelModel::first();
     }
 
     /**
@@ -32,7 +43,12 @@ class Core
     *  @return string
     */
     public function getCurrentChannelCode() {
-        return ($channel = $this->getCurrentChannel()) ? $channel->code : '';
+        static $channelCode;
+
+        if($channelCode)
+            return $channelCode;
+
+        return ($channel = $this->getCurrentChannel()) ? $channelCode = $channel->code : '';
     }
 
     /**
@@ -41,7 +57,12 @@ class Core
     *  @return Collection
     */
     public function getAllLocales() {
-        return LocaleModel::all();
+        static $locales;
+
+        if($locales)
+            return $locales;
+
+        return $locales = LocaleModel::all();
     }
 
     /**
@@ -51,7 +72,12 @@ class Core
     */
     public function getAllCurrencies()
     {
-        return CurrencyModel::all();
+        static $currencies;
+
+        if($currencies)
+            return $currencies;
+
+        return $currencies = CurrencyModel::all();
     }
 
     /**
@@ -61,9 +87,12 @@ class Core
     */
     public function getCurrentCurrency()
     {
-        $currency = CurrencyModel::first();
+        static $currency;
 
-        return $currency;
+        if($currency)
+            return $currency;
+
+        return $currency = CurrencyModel::first();
     }
 
     /**
@@ -73,7 +102,12 @@ class Core
     */
     public function getCurrentCurrencyCode()
     {
-        return ($currency = $this->getCurrentCurrency()) ? $currency->code : '';
+        static $currencyCode;
+
+        if($currencyCode)
+            return $currencyCode;
+
+        return ($currency = $this->getCurrentCurrency()) ? $currencyCode = $currency->code : '';
     }
 
     /**
@@ -83,7 +117,12 @@ class Core
     */
     public function getCurrentCurrencySymbol()
     {
-        return $this->getCurrentCurrency()->symbol;
+        static $currencySymbol;
+
+        if($currencySymbol)
+            return $currencySymbol;
+
+        return $currencySymbol = $this->getCurrentCurrency()->symbol;
     }
 
     /**
@@ -99,7 +138,9 @@ class Core
 
         $channel = $this->getCurrentChannel();
 
-        $currencyCode = $channel->base_currency->code;
+        $currencyCode = $channel->base_currency;
+
+        // $currencyCode = $channel->base_currency->code;
         
         return currency($price, $currencyCode);
     }
@@ -171,4 +212,25 @@ class Core
     }
 
     // $timezonelist = \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);
+
+
+    /**
+     * Format date using current channel.
+     *
+     * @param   date|null $date
+     * @param   string    $format
+     * @return  string
+     */
+    public function formatDate($date = null, $format = 'd-m-Y H:i:s')
+    {
+        $channel = $this->getCurrentChannel();
+
+        if (is_null($date)) {
+            $date = Carbon::now();
+        }
+
+        $date->setTimezone($channel->timezone);
+
+        return $date->format($format);
+    }
 }

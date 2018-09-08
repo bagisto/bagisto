@@ -2,24 +2,40 @@
 
 @section('content-wrapper')
     
-    @include ('shop::products.layered-navigation')
+    @include ('shop::products.list.layered-navigation')
 
     <div class="main" style="display: inline-block">
 
-        <div class="product-grid max-3-col">
+        @inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
 
-            @inject ('productHelper', 'Webkul\Product\Product\Collection')
-            
-            <?php $products = $productHelper->getCollection($category->id); ?>
-            
-            @foreach ($products as $product)
+        <?php $products = $productRepository->findAllByCategory($category->id); ?>
 
-                @include ('shop::products.card', ['product' => $product])
+        @include ('shop::products.list.toolbar')
 
-            @endforeach
+        @inject ('toolbarHelper', 'Webkul\Product\Product\Toolbar')
 
-        </div>
+        @if ($toolbarHelper->getCurrentMode() == 'grid')
+            <div class="product-grid max-3-col">
+                
+                @foreach ($products as $product)
 
+                    @include ('shop::products.list.card', ['product' => $product])
+
+                @endforeach
+
+            </div>
+        @else
+            <div class="product-list">
+                
+                @foreach ($products as $product)
+
+                    @include ('shop::products.list.card', ['product' => $product])
+
+                @endforeach
+
+            </div>
+        @endif
+        
         <div class="bottom-toolbar">
 
             {{ $products->appends(request()->input())->links() }}
@@ -29,7 +45,3 @@
     </div>
 
 @stop
-
-@push('scripts')
-
-@endpush

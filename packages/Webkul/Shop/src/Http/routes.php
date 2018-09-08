@@ -9,7 +9,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/categories/{slug}', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
         'view' => 'shop::products.index'
     ]);
-    
+
     /* dummy routes */
     Route::view('/customer/order','shop::customers.account.orders.index');
 
@@ -24,9 +24,33 @@ Route::group(['middleware' => ['web']], function () {
     Route::view('/customer/payment_complete','shop::customers.checkout.complete');
     /* dummy routes ends here */
 
+
+    Route::get('/products/{slug}', 'Webkul\Shop\Http\Controllers\ProductController@index')->defaults('_config', [
+        'view' => 'shop::products.view'
+    ])->name('shop.products.index');
+
+
+    // Product Review routes
+    Route::get('/reviews/{slug}/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@show')->defaults('_config', [
+        'view' => 'shop::products.reviews.index'
+    ])->name('shop.reviews.index');
+
+    Route::get('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@create')->defaults('_config', [
+        'view' => 'shop::products.reviews.create'
+    ])->name('shop.reviews.create');
+
+    Route::post('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
+        'redirect' => 'shop.reviews.index'
+    ])->name('shop.reviews.store');
+
+    // Route::post('/reviews/create/{slug}', 'Webkul\Core\Http\Controllers\ReviewController@store')->defaults('_config', [
+    //     'redirect' => 'admin.reviews.index'
+    // ])->name('admin.reviews.store');
+
+
     Route::view('/cart', 'shop::store.product.view.cart.index');
 
-    Route::view('/products/{slug}', 'shop::store.product.details.index');
+    // Route::view('/products/{slug}', 'shop::products.view');
 
     //customer routes starts here
     Route::prefix('customer')->group(function () {

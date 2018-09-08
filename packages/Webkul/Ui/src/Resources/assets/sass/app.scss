@@ -1271,5 +1271,312 @@ h2 {
         margin-left: 31px;
     } 
     
-
     // admin dashboard css ends here
+
+
+    // customer order information for admin css start here
+
+    .order-information {
+
+        .order-info {
+
+            span{
+                font-size: 18px;
+                color: #8E8E8E;
+                letter-spacing: -0.29px;
+            }
+
+            .edit {
+                float :right;
+                font-size: 16px;
+                color: #0041FF;
+                letter-spacing: -0.29px;
+                text-align: right;
+            }
+        }
+
+        .horizotal-rule {
+            width:100%;
+            border:1px solid #A2A2A2;
+            opacity: 0.2;
+            margin-top: 16px;
+        }
+
+        .order-account{
+            display:flex;
+            flex-direction: row;
+            margin-top: 20px;
+            
+            .left-content {
+                width: 200px;
+
+                span {
+                    font-size: 16px;
+                    color: #3A3A3A;
+                    letter-spacing: -0.26px;
+                }
+            }
+
+            .right-content {
+
+                span {
+                    font-size: 16px;
+                    color: #3A3A3A;
+                    letter-spacing: -0.26px;
+                }
+            }
+        }
+    }
+
+    .account-information {
+        margin-top: 30px;
+
+        .account-info {
+
+            span{
+                font-size: 18px;
+                color: #8E8E8E;
+                letter-spacing: -0.29px;
+            }
+
+            .edit {
+                float :right;
+                font-size: 16px;
+                color: #0041FF;
+                letter-spacing: -0.29px;
+                text-align: right;
+            }
+        }
+
+        .horizotal-rule {
+            width:100%;
+            border:1px solid #A2A2A2;
+            opacity: 0.2;
+            margin-top: 16px;
+        }
+
+        .order-account{
+            display:flex;
+            flex-direction: row;
+            margin-top: 20px;
+            
+            .left-content {
+                width: 200px;
+
+                span {
+                    font-size: 16px;
+                    color: #3A3A3A;
+                    letter-spacing: -0.26px;
+                }
+
+            }
+
+            .right-content {
+
+                span {
+                    font-size: 16px;
+                    color: #3A3A3A;
+                    letter-spacing: -0.26px;
+                }
+
+                .name {
+                    color: #0041FF;
+                }
+            }
+        }
+    }
+
+    .address-information {
+        
+        .address-name {
+
+            span{
+                font-size: 18px;
+                color: #8E8E8E;
+                letter-spacing: -0.29px;
+            }
+
+            .edit {
+                float :right;
+                font-size: 16px;
+                color: #0041FF;
+                letter-spacing: -0.29px;
+                text-align: right;
+            }
+        }
+
+        .horizotal-rule {
+            width:100%;
+            border:1px solid #A2A2A2;
+            opacity: 0.2;
+            margin-top: 16px;
+        }
+
+        .address-detail{
+            margin-top: 10px;
+
+            span {
+                font-size: 16px;
+                color: #3A3A3A;
+                letter-spacing: -0.26px;
+                display: block;
+            }
+        }
+    }
+
+    .address-information:last-child {
+        margin-top: 15px;
+    }
+
+    .payment-information {
+
+        .title {
+
+            span{
+                font-size: 18px;
+                color: #8E8E8E;
+                letter-spacing: -0.29px;
+            }
+        }
+
+        .horizotal-rule {
+            width:100%;
+            border:1px solid #A2A2A2;
+            opacity: 0.2;
+            margin-top: 16px;
+        }
+
+        .payment-info{
+            display:flex;
+            flex-direction: row;
+            margin-top: 20px;
+            
+            .left-content {
+                width: 200px;
+
+                span {
+                    font-size: 16px;
+                    color: #3A3A3A;
+                    letter-spacing: -0.26px;
+                }
+            }
+
+            .right-content {
+
+                span {
+                    font-size: 16px;
+                    color: #3A3A3A;
+                    letter-spacing: -0.26px;
+                }
+            }
+        }
+    }
+
+    .payment-information:last-child {
+        margin-top: 25px;
+    }
+
+    .total {
+        margin-top: 2%;
+        height: 130px;
+
+        .calculate {
+            margin-right: 8%;
+            float: right;
+
+            .sub-total {
+            
+                span {
+                    font-size: 14px;  font-size: 14px;
+                    color: #3A3A3A;
+                    color: #3A3A3A;
+                }
+
+                .left {
+                    margin-left: 109px;
+                }
+
+                .middle {
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+            }
+
+            .ship-handle {
+                margin-top: 5px;
+
+                span {
+                    font-size: 14px;
+                    color: #3A3A3A;
+                }
+    
+                .left {
+                    margin-left: 24px;
+                }
+    
+                .middle {
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+            }
+
+            .discount {
+                margin-top: 5px;
+
+                span {
+                    font-size: 14px;  font-size: 14px;
+                    color: #3A3A3A;
+                }
+
+                .left {
+                    margin-left: 98px;
+                }
+
+                .middle {
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+            }
+
+            .grand-total {
+                margin-top: 5px;
+
+                span {
+                    font-size: 14px;  font-size: 14px;
+                    color: #3A3A3A;
+                    font-weight: bold;
+                }
+
+                .left {
+                    margin-left: 87px;
+                }
+
+                .middle {
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+            }
+
+            .due {
+                margin-top: 5px;
+
+                span {
+                    font-size: 14px;  font-size: 14px;
+                    color: #3A3A3A;
+                    font-weight: bold;
+                }
+
+                .left {
+                    margin-left: 101px;
+                }
+
+                .middle {
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+    
+    // customer order information for admin css end here

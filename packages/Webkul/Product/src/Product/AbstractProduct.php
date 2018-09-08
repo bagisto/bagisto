@@ -35,30 +35,4 @@ abstract class AbstractProduct
 
         return $qb;
     }
-
-    /**
-     * Adds attributes to select
-     *
-     * @param QB $qb
-     * @return QB
-     */
-    public function addSelectAttributes($qb)
-    {
-        foreach ($this->attributeToSelect as $code) {
-            $attribute = $this->attribute->findOneByField('code', $code);
-            
-            $productValueAlias = 'pav_' . $attribute->code;
-
-            $qb->leftJoin('product_attribute_values as ' . $productValueAlias, function($leftJoin) use($attribute, $productValueAlias) {
-
-                $leftJoin->on('products.id', $productValueAlias . '.product_id');
-
-                $leftJoin = $this->applyChannelLocaleFilter($attribute, $leftJoin, $productValueAlias)->where($productValueAlias . '.attribute_id', $attribute->id);
-            });
-
-            $qb->addSelect($productValueAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $code);
-        }
-
-        return $qb;
-    }
 }

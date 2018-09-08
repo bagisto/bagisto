@@ -154,6 +154,14 @@
                                     <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
                             </div>
+                        
+                            <div class="control-group">
+                                <label for="is_visible_on_front">{{ __('admin::app.catalog.attributes.is_visible_on_front') }}</label>
+                                <select class="control" id="is_visible_on_front" name="is_visible_on_front">
+                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
+                                </select>
+                            </div>
 
                         </div>
                     </accordian>

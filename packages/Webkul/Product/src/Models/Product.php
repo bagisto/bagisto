@@ -111,7 +111,7 @@ class Product extends Model
      */
     public function up_sells()
     {
-        return $this->belongsToMany(self::class, 'product_up_sells');
+        return $this->belongsToMany(self::class, 'product_up_sells', 'parent_id', 'child_id');
     }
 
     /**
@@ -139,9 +139,9 @@ class Product extends Model
      * @return mixed
      */
     public function getAttribute($key)
-    {
+    {   
         if (!method_exists(self::class, $key) && !in_array($key, ['parent_id', 'attribute_family_id']) && !isset($this->attributes[$key])) {
-            if ($this->isCustomAttribute($key)) {
+            if (isset($this->id) && $this->isCustomAttribute($key)) {
                 $this->attributes[$key] = '';
 
                 $attributeModel = $this->attribute_family->custom_attributes()->where('attributes.code', $key)->first();
@@ -185,32 +185,46 @@ class Product extends Model
 
         $hiddenAttributes = $this->getHidden();
 
-        $channel = request()->get('channel') ?: core()->getCurrentChannelCode();
+        if(isset($this->id)) {
+            $channel = request()->get('channel') ?: core()->getCurrentChannelCode();
 
-        $locale = request()->get('locale') ?: app()->getLocale();
+            $locale = request()->get('locale') ?: app()->getLocale();
 
-        foreach ($this->attribute_family->custom_attributes as $attribute) {
-            if (in_array($attribute->code, $hiddenAttributes)) {
-                continue;
-            }
-
-            if($attribute->value_per_channel) {
-                if($attribute->value_per_locale) {
-                    $attributeValue = $this->attribute_values()->where('channel', $channel)->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
-                } else {
-                    $attributeValue = $this->attribute_values()->where('channel', $channel)->where('attribute_id', $attribute->id)->first();
+            foreach ($this->attribute_family->custom_attributes as $attribute) {
+                if (in_array($attribute->code, $hiddenAttributes)) {
+                    continue;
                 }
-            } else {
-                if($attribute->value_per_locale) {
-                    $attributeValue = $this->attribute_values()->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
-                } else {
-                    $attributeValue = $this->attribute_values()->where('attribute_id', $attribute->id)->first();
-                }
-            }
 
-            $attributes[$attribute->code] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]];
+                if($attribute->value_per_channel) {
+                    if($attribute->value_per_locale) {
+                        $attributeValue = $this->attribute_values()->where('channel', $channel)->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
+                    } else {
+                        $attributeValue = $this->attribute_values()->where('channel', $channel)->where('attribute_id', $attribute->id)->first();
+                    }
+                } else {
+                    if($attribute->value_per_locale) {
+                        $attributeValue = $this->attribute_values()->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
+                    } else {
+                        $attributeValue = $this->attribute_values()->where('attribute_id', $attribute->id)->first();
+                    }
+                }
+
+                $attributes[$attribute->code] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]];
+            }
         }
 
         return $attributes;
     }
+
+    /**
+     * Overrides the default Eloquent query builder
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function newEloquentBuilder($query)
+    {
+        return new \Webkul\Product\Database\Eloquent\Builder($query);
+    }
+    
 }

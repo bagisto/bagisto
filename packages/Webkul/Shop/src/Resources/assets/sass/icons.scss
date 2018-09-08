@@ -2,10 +2,23 @@
     display: inline-block;
     background-size: cover;
 }
+
 .dropdown-right-icon{
     background-image:URL('../images/icon-dropdown-left.svg');
     width: 8px;
     height: 8px;
     margin-left:auto;
     margin-bottom: 2px;
+}
+
+.grid-view-icon {
+    background-image:URL('../images/icon-grid-view.svg');
+    width: 24px;
+    height: 24px;
+}
+
+.list-view-icon {
+    background-image:URL('../images/icon-list-view.svg');
+    width: 24px;
+    height: 24px;
 }
