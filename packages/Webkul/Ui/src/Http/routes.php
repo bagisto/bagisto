@@ -1,6 +1,6 @@
 <?php
 
-Route::view('/ui-kit', 'ui::ui-kit');
+Route::view('/ui-kit', 'ui::partials.ui-kit');
 
 // Route::get('/users', function () {
 //     $users = \Webkul\User\Models\Admin::paginate(1);

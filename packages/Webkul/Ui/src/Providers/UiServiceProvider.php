@@ -24,7 +24,6 @@ class UiServiceProvider extends ServiceProvider
 
         Paginator::defaultView('ui::partials.pagination');
         Paginator::defaultSimpleView('ui::partials.pagination');
-
     }
 
     /**
@@ -34,5 +33,8 @@ class UiServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind('datagrid', 'Webkul\Ui\DataGrid\DataGrid');
+        //specifically for mananging products
+        $this->app->bind('productgrid', 'Webkul\Ui\DataGrid\ProductGrid');
     }
 }

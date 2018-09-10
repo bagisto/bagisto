@@ -10,38 +10,36 @@
         <link rel="stylesheet" href="{{ asset('vendor/webkul/admin/assets/css/admin.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
 
+        @yield('head')
+
         @yield('css')
         
-        @yield('head')
     </head>
     
     <body>
         <div id="app">
 
             <flash-wrapper ref='flashes'></flash-wrapper>
-
-        </div>
         
-        @include ('admin::layouts.nav-top')
+            @include ('admin::layouts.nav-top')
 
-        @include ('admin::layouts.nav-left')
+            @include ('admin::layouts.nav-left')
 
-        <div class="content-container">
+            <div class="content-container">
 
-            @yield('content')
+                @yield('content-wrapper')
+
+            </div>
 
         </div>
-
-        <script type="text/javascript" src="{{ asset('vendor/webkul/admin/assets/js/admin.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
 
         <script type="text/javascript">
-            window.flashMessages= [];
+            window.flashMessages = [];
             @if($success = session('success'))
                 window.flashMessages = [{'type': 'alert-success', 'message': "{{ $success }}" }];
-            @elseif($warning = session('warning')))
+            @elseif($warning = session('warning'))
                 window.flashMessages = [{'type': 'alert-warning', 'message': "{{ $warning }}" }];
-            @elseif($error = session('error')))
+            @elseif($error = session('error'))
                 window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }];
             @endif
 
@@ -51,7 +49,11 @@
             @endif
         </script>
 
-        @yield('javascript')
+        <script type="text/javascript" src="{{ asset('vendor/webkul/admin/assets/js/admin.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
 
+        @stack('scripts')
+
+        <div class="modal-overlay"></div>
     </body>
 </html>

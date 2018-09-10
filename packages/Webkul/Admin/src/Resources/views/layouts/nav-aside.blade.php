@@ -1,12 +1,12 @@
-@if(count($menu))
+@if(count($subMenus))
     <div class="aside-nav">
         <ul>
-            @foreach($menu['items'] as $menu)
-                <li class="{{ $menu['active'] ? 'active' : '' }}">
-                    <a href="{{ $menu['url'] }}">
-                        {{ $menu['name'] }}
+            @foreach($subMenus['items'] as $menuItem)
+                <li class="{{ $menu->getActive($menuItem) }}">
+                    <a href="{{ $menuItem['url'] }}">
+                        {{ $menuItem['name'] }}
 
-                        @if ($menu['active'])
+                        @if ($menu->getActive($menuItem))
                             <i class="angle-right-icon"></i>
                         @endif
                     </a>

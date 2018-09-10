@@ -4,7 +4,6 @@ namespace Webkul\User\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 
 /**
  * Admin user session controller
@@ -12,10 +11,20 @@ use Illuminate\Routing\Controller;
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class SeesionController extends Controller
+class SessionController extends Controller
 {
+    /**
+     * Contains route related configuration
+     *
+     * @var array
+     */
     protected $_config;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->_config = request('_config');
@@ -40,13 +49,19 @@ class SeesionController extends Controller
      */
     public function store()
     {
-        if(! auth()->guard('admin')->attempt(request(['email', 'password']))) {
-            return back()->withErrors([
-                'message' => 'Please check your credentials and try again.'
-            ]);
+        $this->validate(request(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $remember = request('remember');
+        if (! auth()->guard('admin')->attempt(request(['email', 'password']), $remember)) {
+            session()->flash('error', 'Please check your credentials and try again.');
+
+            return back();
         }
 
-        return redirect($this->_config['redirect']);
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
@@ -59,6 +74,6 @@ class SeesionController extends Controller
     {
         auth()->guard('admin')->logout();
 
-        return redirect($this->_config['redirect']);
+        return redirect()->route($this->_config['redirect']);
     }
 }

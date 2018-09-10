@@ -18,6 +18,7 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
-    "vee-validate": "^2.1.0-beta.3"
+    "vee-validate": "2.0.0-rc.26",
+    "flatpickr": "^4.4.6"
   }
 }
