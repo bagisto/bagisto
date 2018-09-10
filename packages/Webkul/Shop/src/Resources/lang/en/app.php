@@ -49,6 +49,9 @@ return [
         'specification' => 'Specification',
         'total-reviews' => ':total Reviews',
         'by' => 'By :name',
-        'up-sell-title' => 'We found other products you might like!'
+        'up-sell-title' => 'We found other products you might like!',
+        'reviews-title' => 'Ratings & Reviews',
+        'write-review-btn' => 'Write Review',
+        'choose-option' => 'Choose an option'
     ]
 ];
