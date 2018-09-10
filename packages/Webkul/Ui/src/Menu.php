@@ -36,25 +36,25 @@ class Menu {
 	 *
 	 * @param string  $key   Dot seperated heirarchy
 	 * @param string  $name  Text for the anchor
-	 * @param string  $url   URL for the anchor
+	 * @param string  $route Route for the menu
 	 * @param integer $sort  Sorting index for the items
 	 * @param string  $iconClass Icon Class name
 	 */
-	public function add($key, $name, $url, $sort = 0, $iconClass = null)
+	public function add($key, $name, $route, $sort = 0, $iconClass = null)
 	{
+		$url = route($route);
 		$item = [
 			'key'		 => $key,
 			'name'		 => $name,
 			'url'		 => $url,
+			'route'		 => $route,
 			'sort'		 => $sort,
 			'icon-class' => $iconClass,
-			'active' 	 => false,
 			'children'	 => []
         ];
 
-		if ($url == $this->current) {
+		if (strpos($this->current, $url) !== false) {
 			$this->currentKey = $key;
-			$item['active'] = true;
 		}
 
 		$children = str_replace('.', '.children.', $key);
@@ -67,6 +67,9 @@ class Menu {
 	 * @return void
 	 */
 	public function sortItems($items) {
+		if(!$items) {
+			return;
+		}
 		usort($items, function($a, $b) {
 			if ($a['sort'] == $b['sort']) {
 				return 0;
@@ -88,12 +91,7 @@ class Menu {
 	{
 		$url = trim($item['url'], '/');
 
-		if ($this->current === $url)
-		{
-			return 'active current';
-		}
-
-		if (strpos($this->currentKey, $item['key']) === 0) {
+		if ((strpos($this->current, $url) !== false) || (strpos($this->currentKey, $item['key']) === 0)) {
 			return 'active';
 		}
 	}

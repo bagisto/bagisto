@@ -1,10 +1,3 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/js/admin.js": "/js/admin.js",
-    "/css/admin.css": "/css/admin.css",
-    "/public/vendor/admin/js/admin.js": "/public/vendor/admin/js/admin.js",
-    "/public/vendor/admin/css/admin.css": "/public/vendor/admin/css/admin.css",
-    "/vendor/admin/js/admin.js": "/vendor/admin/js/admin.js",
-    "/vendor/admin/css/admin.css": "/vendor/admin/css/admin.css"
+    "/js/app.js": "/js/app.js"
 }

@@ -12,7 +12,7 @@ class RolesTableSeeder extends Seeder
         $Role = new Role();
         $Role->name = 'Administrator';
         $Role->description = 'Administrator role';
-        $Role->status = true;
+        $Role->permission_type = 'all';
         $Role->permissions = [];
         $Role->save();
     }

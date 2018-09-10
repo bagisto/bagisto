@@ -10,8 +10,18 @@ namespace Webkul\User\Http\Controllers;
  */
 class AccountController extends Controller
 {
+    /**
+     * Contains route related configuration
+     *
+     * @var array
+     */
     protected $_config;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->_config = request('_config');
@@ -36,13 +46,20 @@ class AccountController extends Controller
      */
     public function update()
     {
+        $user = auth()->guard('admin')->user();
+
         $this->validate(request(), [
             'name' => 'required',
-            'email' => 'email',
-            // 'password' => 'required|confirmed'
+            'email' => 'email|unique:admins,email,' . $user->id,
+            'password' => 'nullable|confirmed'
         ]);
-        
-        $user::update(request('name', 'email', 'password'));
+
+        $data = request()->all();
+
+        if(!$data['password'])
+            unset($data['password']);
+
+        $user->update($data);
 
         session()->flash('success', 'Account changes saved successfully.');
 

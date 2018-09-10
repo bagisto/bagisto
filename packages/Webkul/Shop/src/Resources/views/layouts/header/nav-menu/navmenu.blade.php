@@ -1,0 +1,1 @@
+<category-nav categories='@json($categories)' url="{{url()->to('/')}}"></category-nav>

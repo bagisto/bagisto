@@ -1,0 +1,1 @@
+<textarea v-validate="'{{$validations}}'" class="control" id="{{ $attribute->code }}" name="{{ $attribute->code }}" {{ $disabled ? 'disabled' : '' }}>{{ old($attribute->code) ?: $product[$attribute->code]}}</textarea>

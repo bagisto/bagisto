@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>checkbox/selected copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="checkbox/selected-copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-4" fill="#FF6472" x="0" y="0" width="16" height="16"></rect>
+        <polygon id="↘" fill="#FFFFFF" transform="translate(7.957703, 8.601837) rotate(-270.000000) translate(-7.957703, -8.601837) " points="11.5595398 10.1021423 7.70584106 13.5595398 6.31204224 11.8957825 8.58901978 9.87234497 4.35586548 5.13290405 5.86581421 3.64413452"></polygon>
+    </g>
+</svg>

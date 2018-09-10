@@ -10,14 +10,23 @@ class AdminsTableSeeder extends Seeder
 {
     public function run()
     {
-        $role = Role::first();
+        // $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+        // $charactersLength = strlen($characters);
+        // $randomString = '';
+        // for ($i = 0; $i < $length; $i++) {
+        //     $randomString .= $characters[rand(0, $charactersLength - 1)];
+        // }
 
-        $admin = new Admin();
-        $admin->name = 'Admin';
-        $admin->email = 'admin@example.com';
-        $admin->password = bcrypt('admin123');
-        $admin->status = true;
-        $admin->role_id = $role->id;
-        $admin->save();
+        $i=0;
+        for ($i=0;$i<10;$i++) {
+            $role = Role::first();
+            $admin = new Admin();
+            $admin->name = str_random(8);
+            $admin->email = str_random(10).'@example.com';
+            $admin->password = bcrypt('admin123');
+            $admin->status = 1;
+            $admin->role_id = $role->id;
+            $admin->save();
+        }
     }
 }

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Bagisto'),
 
     /*
     |--------------------------------------------------------------------------
@@ -118,6 +118,13 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+    /*
+        Code Editor
+
+    */
+
+    'editor' =>'vscode',
+
 
     'providers' => [
 
@@ -151,6 +158,9 @@ return [
          * Package Service Providers...
          */
 
+        Dimsav\Translatable\TranslatableServiceProvider::class,
+        Propaganistas\LaravelIntl\IntlServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -160,10 +170,24 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        
+        //Laravel Intervention
+        Intervention\Image\ImageServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+
+        //Webkul packages
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
-        Webkul\Ui\Providers\UiServiceProvider::class
+        Webkul\Ui\Providers\UiServiceProvider::class,
+        Webkul\Category\Providers\CategoryServiceProvider::class,
+        Webkul\Attribute\Providers\AttributeServiceProvider::class,
+        Webkul\Core\Providers\CoreServiceProvider::class,
+        Webkul\Shop\Providers\ShopServiceProvider::class,
+        Webkul\Customer\Providers\CustomerServiceProvider::class,
+        Webkul\Inventory\Providers\InventoryServiceProvider::class,
+        Webkul\Product\Providers\ProductServiceProvider::class,
+        Webkul\Shop\Providers\ShopServiceProvider::class,
+        Webkul\Customer\Providers\CustomerServiceProvider::class,
+        Webkul\Theme\Providers\ThemeServiceProvider::class
     ],
 
     /*
@@ -211,7 +235,10 @@ return [
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
-        'View' => Illuminate\Support\Facades\View::class
+        'View' => Illuminate\Support\Facades\View::class,
+        'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
+        'ProductGrid' => Webkul\Ui\DataGrid\Facades\ProductGrid::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];
