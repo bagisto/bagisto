@@ -1,6 +1,5 @@
 <section class="featured-products">
     <div class="featured-heading">
-        {{ $session_id = session()->getId() }}<br/>
         New Products<br/>
         <span class="featured-seperator" style="color:lightgrey;">_____</span>
     </div>

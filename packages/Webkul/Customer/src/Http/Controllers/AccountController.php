@@ -17,6 +17,7 @@ use Auth;
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
+
 class AccountController extends Controller
 {
     /**

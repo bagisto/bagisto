@@ -51,4 +51,9 @@ class CartRepository extends Repository
 
         return $cart;
     }
+
+    public function getProducts($id) {
+
+        return $this->model->find($id)->with_products;
+    }
 }

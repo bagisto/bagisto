@@ -41,7 +41,7 @@
 
     <script type="text/javascript">
         window.flashMessages = [];
-        
+
         @if($success = session('success'))
             window.flashMessages = [{'type': 'alert-success', 'message': "{{ $success }}" }];
         @elseif($warning = session('warning'))

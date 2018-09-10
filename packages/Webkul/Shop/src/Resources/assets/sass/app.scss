@@ -998,9 +998,6 @@ section.slider-block {
 }
 //account ends here
 
-
-
-
 //customers page css ends here
 
 // product pages css starts here
@@ -1018,150 +1015,152 @@ section.product-detail, section.product-review {
         flex-flow: row;
         margin-top: 21px;
 
-        .mixed-group {
+        // .rating-reviews {
+        //     margin-top: 30px;
 
-            .single-image {
-                padding: 2px;
+        //     .title-inline {
+        //         display: inline-flex;
+        //         align-items: center;
+        //         justify-content: space-between;
+        //         margin-bottom: 20px;
+        //         width: 100%;
 
-                img {
-                    height: 280px;
-                    width: 280px;
-                }
-            }
+        //         button {
+        //             float: right;
+        //             border-radius: 0px !important;
+        //         }
+        //     }
 
-            .details {
+        //     .overall {
+        //         display: flex;
+        //         flex-direction: row;
+        //         align-items: center;
+        //         justify-content: space-between;
+        //         height: 150px;
 
-                .product-name {
-                    margin-top: 20px;
-                    font-size: 24px;
-                    margin-bottom: 20px;
-                }
+        //         .left-side {
+        //             margin-bottom: 20px;
 
-                .product-price {
-                    margin-bottom: 14px;
-                }
-            }
-        }
+        //             .number{
+        //                 font-size: 34px;
+        //             }
+        //         }
 
-        .rating-reviews {
-            margin-top: 30px;
+        //         .right-side {
+        //             display: block;
 
-            .title-inline {
-                display: inline-flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-bottom: 20px;
-                width: 100%;
+        //             .rater {
+        //                 display: inline-flex;
+        //                 align-items: center;
 
-                button {
-                    float: right;
-                    border-radius: 0px !important;
-                }
-            }
+        //                 .star {
+        //                     width: 50px;
+        //                     height: 20px;
+        //                     padding: 1px;
+        //                     margin-right: 8px;
+        //                 }
 
-            .overall {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-                height: 150px;
+        //                 .line-bar {
+        //                     height: 4px;
+        //                     width: 158px;
+        //                     margin-right: 12px;
+        //                     background: $bar-color;
 
-                .left-side {
-                    margin-bottom: 20px;
+        //                     .line-value {
+        //                         height: 4px;
+        //                         width: 100px;
+        //                         background-color: $dark-blue-shade;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
 
-                    .number{
-                        font-size: 34px;
-                    }
-                }
+        //     .reviews {
+        //         margin-top: 34px;
+        //         margin-bottom: 90px;
 
-                .right-side {
-                    display: block;
+        //         .review {
+        //             margin-bottom: 25px;
 
-                    .rater {
-                        display: inline-flex;
-                        align-items: center;
+        //             .title {
+        //                 margin-bottom: 5px;
+        //             }
 
-                        .star {
-                            width: 50px;
-                            height: 20px;
-                            padding: 1px;
-                            margin-right: 8px;
-                        }
+        //             .stars {
+        //                 margin-bottom: 15px;
+        //             }
+        //             .message {
+        //                 margin-bottom: 10px;
+        //             }
+        //         }
+        //         .view-all {
+        //             margin-top:15px;
+        //             color: $logo-color;
+        //             margin-bottom:15px;
+        //         }
+        //     }
+        // }
 
-                        .line-bar {
-                            height: 4px;
-                            width: 158px;
-                            margin-right: 12px;
-                            background: $bar-color;
-
-                            .line-value {
-                                height: 4px;
-                                width: 100px;
-                                background-color: $dark-blue-shade;
-                            }
-                        }
-                    }
-                }
-
-            }
-
-            .reviews {
-                margin-top: 34px;
-                margin-bottom: 90px;
-
-                .review {
-                    margin-bottom: 25px;
-
-                    .title {
-                        margin-bottom: 5px;
-                    }
-
-                    .stars {
-                        margin-bottom: 15px;
-                    }
-                    .message {
-                        margin-bottom: 10px;
-                    }
-                }
-                .view-all {
-                    margin-top:15px;
-                    color: $logo-color;
-                    margin-bottom:15px;
-                }
-            }
-        }
-
-        div.product-image-group {
-            display:flex;
-            flex-direction: row;
-            justify-content: flex-start;
+        .product-gallery-group {
             margin-right: 2.5%;
+            position: inherit;
 
-            .side-group {
-                display: flex;
-                flex-direction: column;
-                margin-right: 4px;
-            }
+            div.product-image-group {
+                display:flex;
+                flex-direction: row;
+                justify-content: flex-start;
 
-            .product-hero-image {
-                display: block;
-                position: relative;
-
-                .wishlist {
-                    position: absolute;
-                    top: 10px;
-                    right: 12px;
+                .side-group {
+                    display: flex;
+                    flex-direction: column;
+                    margin-right: 4px;
                 }
 
-                .share {
-                    position: absolute;
-                    top: 10px;
-                    right: 45px;
+                .product-hero-image {
+                    display: block;
+                    position: relative;
+
+                    .wishlist {
+                        position: absolute;
+                        top: 10px;
+                        right: 12px;
+                    }
+
+                    .share {
+                        position: absolute;
+                        top: 10px;
+                        right: 45px;
+                    }
                 }
             }
+            .product-button-group {
+                display: inline-flex;
+                justify-content: space-between;
+                width: 100%;
+                // padding: 0.6%;
+
+                form{
+                    width: 100%;
+                    height: 45px;
+                    .add-to-cart {
+                        width: 100%;
+                        border-radius: 0px;
+                        background-color: $color-black;
+                    }
+                    .buy-now {
+                        width: 100%;
+                        border-radius: 0px;
+
+                    }
+                }
+
+            }
+
         }
 
-        .details {
+        .product-details {
+            width: 100%;
 
             .product-heading {
                 font-size: 24px;

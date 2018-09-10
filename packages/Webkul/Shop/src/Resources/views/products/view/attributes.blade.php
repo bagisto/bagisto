@@ -17,7 +17,7 @@
                 </tr>
 
             @endforeach
-            
+
         </table>
     </div>
 </accordian>

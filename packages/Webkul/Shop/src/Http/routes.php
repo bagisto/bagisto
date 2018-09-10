@@ -14,6 +14,14 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.view'
     ])->name('shop.products.index');
 
+    // //Routes for product cart
+    // Route::post('products/cart/test', 'Webkul\Cart\Http\Controllers\CartController@test')->name('cart.test');
+
+    Route::post('products/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.add');
+
+    Route::post('product/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.remove');
+    //Routes for product cart ends
+
 
     // Product Review routes
     Route::get('/reviews/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@index')->defaults('_config', [
@@ -28,10 +36,6 @@ Route::group(['middleware' => ['web']], function () {
         'redirect' => 'admin.reviews.index'
     ])->name('admin.reviews.store');
 
-
-    // Route::view('/products/{slug}', 'shop::store.product.details.index');
-    Route::view('/cart', 'shop::store.product.view.cart.index');
-
     //customer routes starts here
     Route::prefix('customer')->group(function () {
 
@@ -43,7 +47,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('login', 'Webkul\Customer\Http\Controllers\SessionController@create')->defaults('_config', [
             'redirect' => 'customer.account.index'
         ])->name('customer.session.create');
-
 
         // Registration Routes
         Route::get('register', 'Webkul\Customer\Http\Controllers\RegistrationController@show')->defaults('_config', [
@@ -113,7 +116,7 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('customer.address.edit');
 
                 Route::post('address/edit', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [
-                    'view' => 'shop::customers.account.address.address'
+                    'redirect' => 'customer.address.index'
                 ])->name('customer.address.edit');
 
                 /*    Routes for Addresses ends here   */

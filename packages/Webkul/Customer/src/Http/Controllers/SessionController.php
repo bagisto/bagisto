@@ -53,7 +53,14 @@ class SessionController extends Controller
             return back();
         }
 
-        return redirect()->intended(route($this->_config['redirect']));
+        $cookieProducts = unserialize(Cookie::get('session_c'));
+
+        if(isset($cookieProducts)){
+            return redirect()->action('Cart\Http\Controllers\CartController@add', [$cookieProducts]);
+        } else {
+            return redirect()->intended(route($this->_config['redirect']));
+        }
+
     }
 
     public function destroy($id)

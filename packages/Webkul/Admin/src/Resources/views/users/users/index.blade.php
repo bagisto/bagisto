@@ -2,6 +2,7 @@
 
 @section('page_title')
 
+@endsection
 @stop
 
 @section('content')

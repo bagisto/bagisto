@@ -1,14 +1,15 @@
 {
     "name": "webkul/laravel-cart",
-    "description": "Cart Package for customer.",
     "license": "MIT",
     "authors": [
         {
-            "name": "prashant-webkul",
-            "email": "prashant.singh852@webkul.com"
+            "name": "Prashant",
+            "email": "prashant@webkul.com"
         }
     ],
-    "require": {},
+    "require": {
+        "webkul/laravel-core": "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "Webkul\\Cart\\": "src/"

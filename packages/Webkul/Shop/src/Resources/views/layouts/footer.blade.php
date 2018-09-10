@@ -4,11 +4,9 @@
             <div class="list-container">
                 <span class="list-heading">Categories</span>
                 <ul class="list-group">
-                    <li>MEN</li>
-                    <li>Women</li>
-                    <li>Kids</li>
-                    <li>Accessories</li>
-                    <li>Home & Living</li>
+                    @foreach($categories as $key => $category)
+                    <li>{{ $category['name'] }}</li>
+                    @endforeach
                 </ul>
             </div>
             <div class="list-container">
