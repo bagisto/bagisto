@@ -191,6 +191,7 @@ return [
         Webkul\Customer\Providers\CustomerServiceProvider::class,
         Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\Cart\Providers\CartServiceProvider::class,
+        Webkul\Shipping\Providers\ShippingServiceProvider::class,
     ],
 
     /*

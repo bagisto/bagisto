@@ -78,12 +78,12 @@ class Review extends AbstractProduct
         return $percentage;
     }
 
-     /**
-     * Returns the  of the product
-     *
+    /**
+    * Returns the product accroding to paginate
+    *
     * @param Product $product
-     * @return integer
-     */
+    * @return integer
+    */
 
     public function loadMore($product)
     {

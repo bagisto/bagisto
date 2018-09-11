@@ -53,6 +53,14 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.review.index'
             ])->name('admin.customer.review.index');
 
+            Route::get('customer/create', 'Webkul\Core\Http\Controllers\CustomerController@create')->defaults('_config',[
+                'view' => 'admin::customers.create'
+            ])->name('admin.customer.create');
+
+            Route::post('customer/create', 'Webkul\Core\Http\Controllers\CustomerController@store')->defaults('_config',[
+                'redirect' => 'admin.customer.index'
+            ])->name('admin.customer.store');
+
             Route::get('customer/reviews/edit/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@edit')->defaults('_config',[
                 'view' => 'admin::customers.review.edit'
             ])->name('admin.customer.review.edit');

@@ -63,11 +63,14 @@
 
                             <div class="control-group">
                                 <label for="name" >{{ __('admin::app.customers.customers.customer_group') }}</label>
+                                <?php $selectedOption = $customer->customerGroup->id ?>
                                 <select  class="control" name="customer_group_id">
-                                    <option value="1"> 1 </option>
-                                    <option value="2"> 2 </option>
-                                    <option value="3"> 3 </option>
-                                    <option value="4"> 4 </option>
+                                    @foreach($customerGroup as $group)
+                                    <option value="{{ $group->id }}" {{ $selectedOption == $group->id ? 'selected' : '' }}>
+                                        {{ $group->group_name}}
+                                    </option>
+                                    @endforeach
+
                                 </select>
                             </div>
 

@@ -5,7 +5,8 @@ namespace Webkul\Core\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Repositories\CustomerRepository as Customer;
+use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
 
 /**
  * Customer controlller for the customer
@@ -17,15 +18,40 @@ use Webkul\Customer\Models\Customer;
 class CustomerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Contains route related configuration
      *
-     * @return \Illuminate\Http\Response
+     * @var array
      */
     protected $_config;
 
-    public function __construct()
+    /**
+     * CustomerRepository object
+     *
+     * @var array
+     */
+    protected $customer;
+
+     /**
+     * CustomerGroupRepository object
+     *
+     * @var array
+     */
+    protected $customerGroup;
+
+     /**
+     * Create a new controller instance.
+     *
+     * @param Webkul\Customer\Repositories\CustomerRepository as customer;
+     * @param Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
+     * @return void
+     */
+    public function __construct(Customer $customer , CustomerGroup $customerGroup )
     {
         $this->_config = request('_config');
+
+        $this->customer = $customer;
+
+        $this->customerGroup = $customerGroup;
     }
 
     /**
@@ -38,6 +64,47 @@ class CustomerController extends Controller
         return view($this->_config['view']);
     }
 
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $customerGroup = $this->customerGroup->all();
+
+        return view($this->_config['view'],compact('customerGroup'));
+    }
+
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+
+            'first_name' => 'string|required',
+            'last_name' => 'string|required',
+            'email' => 'email|required',
+
+        ]);
+
+        $data=$request->all();
+
+        $password = bcrypt(rand(100000,10000000));
+
+        $data['password']=$password;
+
+        $this->customer->create($data);
+
+        session()->flash('success', 'Customer created successfully.');
+
+        return redirect()->route($this->_config['redirect']);
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -46,11 +113,11 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $customer = Customer::find($id);
+        $customer = $this->customer->findOneWhere(['id'=>$id]);
 
-        dd($customer->customerGroup->group_name);
+        $customerGroup = $this->customerGroup->all();
 
-        return view($this->_config['view'],compact('customer'));
+        return view($this->_config['view'],compact('customer','customerGroup'));
     }
 
      /**
@@ -62,9 +129,8 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $customer = Customer::find($id);
 
-        $customer->update(request()->all(), [$id]);
+        $this->customer->update(request()->all(),$id);
 
         session()->flash('success', 'Customer updated successfully.');
 
