@@ -82,6 +82,10 @@ class ConfigurableOption extends AbstractProduct
         $config = [
             'attributes' => $this->getAttributesData($product, $options),
             'index' => isset($options['index']) ? $options['index'] : [],
+            'regular_price' => [
+                'formated_price' => core()->currency($this->price->getMinimalPrice($product)),
+                'price' => $this->price->getMinimalPrice($product)
+            ],
             'variant_prices' => $this->getVariantPrices($product),
             'variant_images' => $this->getVariantImages($product),
             'chooseText' => trans('shop::app.products.choose-option')
@@ -201,8 +205,14 @@ class ConfigurableOption extends AbstractProduct
 
         foreach ($this->getAllowProducts($product) as $variant) {
             $prices[$variant->id] = [
-                'regular_price' => $variant->price,
-                'final_price' => $this->price->getMinimalPrice($variant),
+                'regular_price' => [
+                    'formated_price' => core()->currency($variant->price),
+                    'price' => $variant->price
+                ],
+                'final_price' => [
+                    'formated_price' => core()->currency($this->price->getMinimalPrice($variant)),
+                    'price' => $this->price->getMinimalPrice($variant)
+                ]
             ];
         }
 

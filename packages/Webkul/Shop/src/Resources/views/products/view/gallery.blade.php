@@ -12,5 +12,16 @@
         <img class="wishlist" src="{{ bagisto_asset('images/wish.svg') }}" />
         <img class="share" src="{{ bagisto_asset('images/icon-share.svg') }}" />
     </div>
-
 </div>
+
+@push('scripts')
+
+    <script>
+        
+        Vue.component('product-gallery', {
+            props: ['images']
+        });
+
+    </script>
+
+@endpush

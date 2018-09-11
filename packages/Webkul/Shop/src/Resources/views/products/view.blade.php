@@ -15,8 +15,6 @@
                 @csrf()
 
                 <input type="hidden" name="product">
-                
-                <input type="hidden" name="selected_configurable_option">
 
                 @include ('shop::products.view.gallery')
 
