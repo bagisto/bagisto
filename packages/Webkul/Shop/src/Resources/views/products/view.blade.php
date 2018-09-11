@@ -10,53 +10,56 @@
 
         <div class="layouter">
 
-            @include ('shop::products.view.gallery')
+            <form action="" style="display: inherit;">
 
-            <div class="details">
+                @csrf()
 
-                <div class="product-heading">
-                    <span>{{ $product->name }}</span>
-                </div>
+                <input type="hidden" name="product">
+                
+                <input type="hidden" name="selected_configurable_option">
 
-                <div class="rating">
-                    <img src="{{ bagisto_asset('images/5star.svg') }}" />
-                    75 Ratings & 11 Reviews
-                </div>
+                @include ('shop::products.view.gallery')
 
-                @include ('shop::products.price', ['product' => $product])
+                <div class="details">
 
-                @include ('shop::products.view.stock')
+                    <div class="product-heading">
+                        <span>{{ $product->name }}</span>
+                    </div>
 
-                <br/>
+                    @include ('shop::products.review', ['product' => $product])
 
-                <div class="description">
-                    {{ $product->short_description }}
-                </div>
+                    @include ('shop::products.price', ['product' => $product])
 
-                @if ($product->type == 'configurable')
+                    @include ('shop::products.view.stock')
+
+
+                    <div class="description">
+                        {{ $product->short_description }}
+                    </div>
 
                     @include ('shop::products.view.configurable-options')
-                
-                @endif
 
-                <accordian :title="{{ __('shop::app.products.description') }}" :active="true">
-                    <div slot="header">
-                        {{ __('shop::app.products.description') }}
-                        <i class="icon expand-icon right"></i>
-                    </div>
-
-                    <div slot="body">
-                        <div class="full-description">
-                            {{ $product->description }}
+                    <accordian :title="'{{ __('shop::app.products.description') }}'" :active="true">
+                        <div slot="header">
+                            {{ __('shop::app.products.description') }}
+                            <i class="icon expand-icon right"></i>
                         </div>
-                    </div>
-                </accordian>
 
-                @include ('shop::products.view.attributes')
+                        <div slot="body">
+                            <div class="full-description">
+                                {{ $product->description }}
+                            </div>
+                        </div>
+                    </accordian>
 
-                @include ('shop::products.view.reviews')
+                    @include ('shop::products.view.attributes')
 
-            </div>
+                    @include ('shop::products.view.reviews')
+
+                </div>
+                
+            </form>
+
         </div>
 
         @include ('shop::products.view.up-sells')

@@ -2,8 +2,8 @@
 
 @if ($total = $reviewHelper->getTotalReviews($product))
 <div class="rating-reviews">
-    <div class="title">
-        Ratings & Reviews
+    <div class="rating-header">
+        {{ __('shop::app.products.reviews-title') }}
     </div>
 
     <div class="overall">
@@ -14,7 +14,7 @@
             </span>
 
             <span class="stars">
-                @for ($i = 1; $i <= $reviewHelper->getAverageRating($product); $i++)
+                @for ($i = 1; $i <= round($reviewHelper->getAverageRating($product)); $i++)
 
                     <span class="icon star-icon"></span>
                 
@@ -27,13 +27,15 @@
 
         </div>
 
-        <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">Write Review</a>
+        <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
+            {{ __('shop::app.products.write-review-btn') }}
+        </a>
 
     </div>
 
     <div class="reviews">
 
-        @foreach ($product->reviews()->paginate(5) as $review)
+        @foreach ($reviewHelper->getReviews($product)->paginate(5) as $review)
             <div class="review">
                 <div class="title">
                     {{ $review->title }}
@@ -65,7 +67,6 @@
 
         <a href="{{ route('shop.reviews.index', $product->url_key) }}" class="view-all">View All</a>
 
-        <hr/>
     </div>
 </div>
 @endif

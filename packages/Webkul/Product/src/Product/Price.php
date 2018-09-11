@@ -78,7 +78,7 @@ class Price extends AbstractProduct
     public function getSpecialPrice($product)
     {
         if($this->haveSpecialPrice($product)) {
-                return $product->special_price;
+            return $product->special_price;
         } else {
             return $product->price;
         }
