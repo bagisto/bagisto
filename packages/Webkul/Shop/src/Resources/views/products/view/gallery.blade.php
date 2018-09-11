@@ -12,7 +12,6 @@
         <img class="wishlist" src="{{ bagisto_asset('images/wish.svg') }}" />
         <img class="share" src="{{ bagisto_asset('images/icon-share.svg') }}" />
     </div>
-
 </div>
 
 @push('scripts')

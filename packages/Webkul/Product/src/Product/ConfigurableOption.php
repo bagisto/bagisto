@@ -212,7 +212,7 @@ class ConfigurableOption extends AbstractProduct
                 'final_price' => [
                     'formated_price' => core()->currency($this->price->getMinimalPrice($variant)),
                     'price' => $this->price->getMinimalPrice($variant)
-                ],
+                ]
             ];
         }
 
