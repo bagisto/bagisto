@@ -4,8 +4,10 @@ namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Http\Listeners\CustomerEventsHandler;
+use Illuminate\Support\Facades\Event;
+use Cookie;
 
 /**
  * Session controller for the user customer
@@ -28,6 +30,10 @@ class SessionController extends Controller
         $this->middleware('customer')->except(['show','create']);
 
         $this->_config = request('_config');
+
+        $subscriber = new CustomerEventsHandler;
+
+        Event::subscribe($subscriber);
 
     }
 
@@ -53,14 +59,12 @@ class SessionController extends Controller
             return back();
         }
 
-        $cookieProducts = unserialize(Cookie::get('session_c'));
-
-        if(isset($cookieProducts)){
-            return redirect()->action('Cart\Http\Controllers\CartController@add', [$cookieProducts]);
+        //Event passed to prepare cart after login
+        if(Cookie::has('session_c')) {
+            Event::fire('customer.after.login', $request->input('email'));
         } else {
             return redirect()->intended(route($this->_config['redirect']));
         }
-
     }
 
     public function destroy($id)

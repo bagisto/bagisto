@@ -16,6 +16,8 @@ class CartServiceProvider extends ServiceProvider
         $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
 
         $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
+
+        $this->register(EventServiceProvider::class);
     }
 
     /**
@@ -26,5 +28,6 @@ class CartServiceProvider extends ServiceProvider
     public function register()
     {
         // $this->app->bind('datagrid', 'Webkul\Ui\DataGrid\DataGrid');
+        $this->app->bind('Cart', 'Webkul\Cart\Cart');
     }
 }

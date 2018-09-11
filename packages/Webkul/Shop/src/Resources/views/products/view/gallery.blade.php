@@ -17,7 +17,7 @@
     </div>
 
     <div class="product-button-group">
-        <form method="POST" action="{{ route('cart.add', $product->id) }}">
+        <form method="POST" @auth('customer') action="{{ route('cart.customer.add', $product->id) }}" @endauth @guest action="{{ route('cart.guest.add', $product->id) }}" @endguest>
             {{ csrf_field() }}
 
             <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -31,5 +31,6 @@
             <input type="hidden" name="qty" value="1">
             <button type="submit" class="btn btn-lg btn-primary buy-now">Buy Now</button>
         </form> --}}
+        {{-- {{ dd(unserialize(Cookie::get('session_c'))) }} --}}
     </div>
 </div>

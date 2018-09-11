@@ -2,13 +2,14 @@
 
 namespace Webkul\Customer\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
 use Webkul\Customer\Menu;
 
 class EventServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap services.
      *
@@ -27,6 +28,7 @@ class EventServiceProvider extends ServiceProvider
 
     public function createCustomerAccountSideMenu()
     {
+
         Event::listen('customer.menu.create', function () {
             return Menu::create(function ($menu) {
                 Event::fire('customer.menu.build', $menu);
