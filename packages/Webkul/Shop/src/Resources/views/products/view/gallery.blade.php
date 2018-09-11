@@ -14,3 +14,15 @@
     </div>
 
 </div>
+
+@push('scripts')
+
+    <script>
+        
+        Vue.component('product-gallery', {
+            props: ['images']
+        });
+
+    </script>
+
+@endpush
