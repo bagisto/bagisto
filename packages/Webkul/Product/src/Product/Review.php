@@ -10,9 +10,20 @@ class Review extends AbstractProduct
     * @param Product $product
      * @return float
      */
+    public function getReviews($product)
+    {
+        return $product->reviews()->where('status', 'approved');
+    }
+
+    /**
+     * Returns the product's avg rating
+     *
+    * @param Product $product
+     * @return float
+     */
     public function getAverageRating($product)
     {
-        return round($product->reviews->average('rating'));
+        return number_format(round($product->reviews()->where('status', 'approved')->average('rating'), 2), 1);
     }
 
     /**
@@ -23,7 +34,7 @@ class Review extends AbstractProduct
      */
     public function getTotalReviews($product)
     {
-        return $product->reviews()->count();
+        return $product->reviews()->where('status', 'approved')->count();
     }
 
     /**

@@ -22,11 +22,7 @@
         
         @include ('shop::products.price', ['product' => $product])
 
-        @if ($product->reviews->count())
-
-            @include ('shop::products.review', ['product' => $product])
-
-        @endif
+        @include ('shop::products.review', ['product' => $product])
 
         @include ('shop::products.add-to', ['product' => $product])
     

@@ -1,6 +1,6 @@
 @inject ('productViewHelper', 'Webkul\Product\Product\View')
 
-<accordian :title="{{ __('shop::app.products.specification') }}" :active="false">
+<accordian :title="'{{ __('shop::app.products.specification') }}'" :active="false">
     <div slot="header">
         {{ __('shop::app.products.specification') }}
         <i class="icon expand-icon right"></i>

@@ -9,129 +9,57 @@
         </div>
         <div class="layouter">
 
-            @include ('shop::products.view.gallery')
+            <form method="POST" @auth('customer') action="{{ route('cart.customer.add', $product->id) }}" @endauth @guest action="{{ route('cart.guest.add', $product->id) }}" @endguest>
+                @csrf()
 
-            <div class="product-details" id="dealit">
+                <input type="hidden" name="product">
 
-                <div class="product-heading">
-                    <span>{{ $product->name }}</span>
-                </div>
+                @include ('shop::products.view.gallery')
 
-                <div class="rating">
-                    <img src="{{ bagisto_asset('images/5star.svg') }}" />
-                    75 Ratings & 11 Reviews
-                </div>
+                <div class="details">
 
-                @include ('shop::products.price', ['product' => $product])
+                    <div class="product-heading">
+                        <span>{{ $product->name }}</span>
+                    </div>
 
-                @include ('shop::products.view.stock')
+                    @include ('shop::products.review', ['product' => $product])
 
-                <br/>
+                    @include ('shop::products.price', ['product' => $product])
 
-                <div class="description">
-                    {{ $product->short_description }}
-                </div>
+                    @include ('shop::products.view.stock')
 
-                @if ($product->type == 'configurable')
+
+                    <div class="description">
+                        {{ $product->short_description }}
+                    </div>
 
                     @include ('shop::products.view.configurable-options')
 
-                @endif
-
-                <accordian :title="{{ __('shop::app.products.description') }}" :active="true">
-                    <div slot="header">
-                        {{ __('shop::app.products.description') }}
-                        <i class="icon expand-icon right"></i>
-                    </div>
-
-                    <div slot="body">
-                        <div class="full-description">
-                            {{ $product->description }}
+                    <accordian :title="'{{ __('shop::app.products.description') }}'" :active="true">
+                        <div slot="header">
+                            {{ __('shop::app.products.description') }}
+                            <i class="icon expand-icon right"></i>
                         </div>
-                    </div>
-                </accordian>
 
-                @include ('shop::products.view.attributes')
+                        <div slot="body">
+                            <div class="full-description">
+                                {{ $product->description }}
+                            </div>
+                        </div>
+                    </accordian>
 
-                @include ('shop::products.view.reviews')
+                    @include ('shop::products.view.attributes')
 
-            </div>
+                    @include ('shop::products.view.reviews')
+
+                </div>
+
+            </form>
+
         </div>
 
         @include ('shop::products.view.up-sells')
 
     </section>
 
-    @push('scripts')
-        <script type="text/javascript">
-            var topBoundOfProductGallery = 0;
-            function getTopBound() {
-                var rect = document.getElementById("getbound").getBoundingClientRect();
-                topBoundOfProductGallery = rect.top;
-                console.log('From Top = ', rect.top);
-            }
-
-            window.onload = getTopBound;
-
-            // window.onscroll = function() {
-            //     myFunction()
-            // };
-
-            // $(document).ready(function () {
-            //     $(document).scroll(function (event) {
-            //         var scroll = $(document).scrollTop();
-            //         if(scroll > 182) {
-            //             $('#dealit').css('width', '50%');
-
-            //             $('#dealit').css('margin-left', '59.7%');
-
-            //             $('#getbound').css('position', 'fixed');
-
-            //             $('#getbound').css('top', '0');
-            //         } else if(scroll < 182) {
-            //             $('#dealit').css('width', '100%');
-
-            //             $('#dealit').css('margin-left', '');
-
-            //             $('#getbound').css('position', '');
-
-            //             $('#getbound').css('top', '');
-
-            //         }
-
-            //     });
-            // });
-
-            // function myFunction() {
-
-            //     if(document.body.scrollTop > 182 || document.documentElement.scrollTop > 182) {
-
-            //         // document.getElementById('dealit').style.style = 'none';
-
-            //         document.getElementById('dealit').classList.remove("product-details");
-
-            //         document.getElementById('dealit').width = '50%';
-
-            //         document.getElementById('dealit').marginLeft = '60%';
-
-            //         document.getElementById('getbound').style.position = 'fixed';
-
-            //         document.getElementById('getbound').style.top = '0';
-
-            //     }
-            //     else if(document.body.scrollTop < 182 || document.documentElement.scrollTop < 182) {
-
-            //         document.getElementById('dealit').classList.add("product-details");
-
-            //         document.getElementById('dealit').width = '100%';
-
-            //         document.getElementById('dealit').marginLeft = '0';
-
-            //         document.getElementById('getbound').style.position = '';
-
-            //         document.getElementById('getbound').style.top = '';
-            //     }
-            // }
-        </script>
-    @endpush
 @endsection

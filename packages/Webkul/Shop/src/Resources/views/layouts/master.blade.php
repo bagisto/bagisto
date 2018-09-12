@@ -21,11 +21,11 @@
 
     <div id="app">
 
-        @include('shop::layouts.header.index')
-
-        @yield('slider')
-
         <div class="main-container-wrapper">
+
+            @include('shop::layouts.header.index')
+
+            @yield('slider')
 
             <div class="content-container">
 

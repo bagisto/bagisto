@@ -96,6 +96,12 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('admin.acl.build', function ($acl) {
             $acl->add('dashboard', 'Dashboard', 'admin.dashboard.index', 1);
 
+            $acl->add('catalog', 'Catalog', 'admin.catalog.index', 2);
+
+            $acl->add('catalog.products', 'Products', 'admin.catalog.products.index', 1);
+
+            $acl->add('catalog.categories', 'Categories', 'admin.catalog.categories.index', 1);
+            
             $acl->add('configuration', 'Configure', 'admin.account.edit', 5);
 
             $acl->add('settings', 'Settings', 'admin.users.index', 6);
