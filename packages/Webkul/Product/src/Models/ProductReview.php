@@ -7,7 +7,7 @@ use Webkul\Customer\Models\Customer;
 
 class ProductReview extends Model
 {
-    protected $fillable = [];
+    protected $fillable = ['comment','title','rating','status','product_id','customer_id'];
 
     /**
      * Get the product attribute family that owns the product.

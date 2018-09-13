@@ -8,7 +8,14 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/categories/{slug}', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
         'view' => 'shop::products.index'
-    ])->name('shop.categories.index');
+    ]);
+
+    Route::get('/checkout', 'Webkul\Cart\Http\Controllers\CheckoutController@index')->defaults('_config', [
+        'view' => 'shop::customers.checkout.index'
+    ])->name('shop.checkout');
+
+    /* dummy routes ends here */
+
 
     Route::get('/products/{slug}', 'Webkul\Shop\Http\Controllers\ProductController@index')->defaults('_config', [
         'view' => 'shop::products.view'
@@ -30,17 +37,29 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // Product Review routes
-    Route::get('/reviews/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@index')->defaults('_config', [
+    Route::get('/reviews/{slug}/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@show')->defaults('_config', [
         'view' => 'shop::products.reviews.index'
     ])->name('shop.reviews.index');
 
-    Route::get('/reviews/create/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@create')->defaults('_config', [
+    Route::get('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@create')->defaults('_config', [
         'view' => 'shop::products.reviews.create'
     ])->name('shop.reviews.create');
+
+    Route::post('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
+        'redirect' => 'shop.reviews.index'
+    ])->name('shop.reviews.store');
 
     Route::post('/reviews/create/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
         'redirect' => 'admin.reviews.index'
     ])->name('admin.reviews.store');
+
+    // Route::post('/reviews/create/{slug}', 'Webkul\Core\Http\Controllers\ReviewController@store')->defaults('_config', [
+    //     'redirect' => 'admin.reviews.index'
+    // ])->name('admin.reviews.store');
+
+
+    // Route::view('/products/{slug}', 'shop::store.product.details.index');
+    Route::view('/cart', 'shop::store.product.view.cart.index');
 
     //customer routes starts here
     Route::prefix('customer')->group(function () {

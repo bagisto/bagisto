@@ -52,6 +52,18 @@ class EventServiceProvider extends ServiceProvider
 
             $menu->add('catalog.families', 'Families', 'admin.catalog.families.index', 4);
 
+            $menu->add('customers', 'Customers', 'admin.customer.index', 5, 'customer-icon');
+
+            $menu->add('customers.customers', 'Customers', 'admin.customer.index', 1, '');
+
+            $menu->add('customers.orders', 'Orders', 'admin.customer.orders.index', 2, '');
+
+            $menu->add('customers.reviews', 'Review', 'admin.customer.review.index', 3, '');
+
+            // $menu->add('customers.blocked_customer', 'Blocked Customers', 'admin.account.edit', 2, '');
+
+            // $menu->add('customers.allowed_customer', 'Allowed Customers', 'admin.account.edit', 4, '');
+
             $menu->add('configuration', 'Configure', 'admin.account.edit', 6, 'configuration-icon');
 
             $menu->add('configuration.account', 'My Account', 'admin.account.edit', 1);

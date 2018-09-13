@@ -249,3 +249,53 @@ body {
 //         }
 //     }
 // }
+
+
+
+// admin dashboard css
+
+.dashboard-content {
+
+    .dashboard-stats {
+        display: flex;
+       
+    }
+
+    .graph-category {
+        display: flex;
+        margin-top: 25px;
+    }
+
+    .sale-stock {
+        display: flex;
+        margin-top: 25px;
+    }
+
+}
+
+// admin dashboard css ends here
+
+
+// customer oder css for admin start here
+
+.order-place-detail {
+
+    .order-account-information {
+        margin-left: 10px;
+    }
+
+    .address {
+        margin-left: 10px;
+    }
+
+    .payment-shipping{
+        margin-left: 10px;
+    }
+
+    .order-products{
+        margin-left: 10px;
+    }
+}
+
+
+// customer oder css for admin end here

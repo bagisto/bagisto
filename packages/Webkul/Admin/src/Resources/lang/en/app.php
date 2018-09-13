@@ -302,5 +302,24 @@ return [
             'content' => 'Content',
             'channels' => 'Channel'
         ],
+    ],
+    'customers' => [
+        'customers' => [
+            'title' => 'Customers',
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'gender' => 'Gender',
+            'email' => 'Email',
+            'date_of_birth' => 'Date of Birth',
+            'phone' => 'Phone',
+            'customer_group' => 'Customer Group'
+        ],
+        'reviews' => [
+            'title' => 'Title',
+            'name' => 'Reviews',
+            'rating' => 'Rating',
+            'status' => 'Status',
+            'comment' => 'Comment'
+        ]
     ]
 ];

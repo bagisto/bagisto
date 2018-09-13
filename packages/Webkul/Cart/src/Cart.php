@@ -47,32 +47,42 @@ class Cart {
 
         $minutes = 10;
 
-        // if(Session::get('current_session_id'))
+        if(Cookie::get('current_session_id')) {
 
-        if(Cookie::has('session_c')) {
-            $products = unserialize(Cookie::get('session_c'));
+            $cart_session_id = Cookie::get('cart_session_id');
+
+            $cart = $this->cart->getOneByField('session_id'. $cart_session_id);
+
+            $cartId = $cart->id ?? $cart['id'] ;
+
+            $products = $this->getProducts($id);
 
             foreach($products as $key => $value) {
                 if($value == $id) {
-                    dump($products);
-
                     dd('product already in the cart');
 
                     return redirect()->back();
                 }
             }
-            array_push($products, $id);
 
-            Cookie::queue('session_c', serialize($products));
-
+            if($this->cartProduct->create($id)) {
+                session()->flash('Success', 'Product Added To Cart');
+                return redirect()->back();
+            }
             return redirect()->back();
 
         } else {
-            array_push($products, $id);
+            Cookie::queue('cart_session_id', session()->id(), $minutes);
 
-            Cookie::queue('session_c', serialize($products), $minutes);
+            $data['session_id'] = Cookie::get('cart_session_id');
 
-            return redirect()->back();
+            $data['channel_id'] = core()->getCurrentChannel()->id;
+
+            if($this->cart->create($data)) {
+                if($this->cartProduct->create($product)) {
+                    session()->flash('Success', 'Product Added To Cart');
+                }
+            }
         }
     }
 
@@ -277,7 +287,13 @@ class Cart {
      */
     public function handleMerge() {
 
-        $productsInCookie = unserialize(Cookie::get('session_c'));
+        // $productsInCookie = unserialize(Cookie::get('session_c'));
+
+        $cart_session_id = Cookie::get('cart_session_id');
+
+        $cart = $this->cart->findOneByField('session_id');
+
+        $cartId = $cart->id ?? $cart['id'];
 
         $data['customer_id'] = auth()->guard('customer')->user()->id;
 
@@ -341,7 +357,5 @@ class Cart {
 
             return redirect()->back();
         }
-
-
     }
 }

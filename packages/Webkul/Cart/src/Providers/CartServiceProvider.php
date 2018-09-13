@@ -19,7 +19,7 @@ class CartServiceProvider extends ServiceProvider
 
         $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
 
-        $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
+        // $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
         $this->register(EventServiceProvider::class);
     }

@@ -105,18 +105,13 @@
                             <th class="grid_head" data-column-name="{{ $column->alias }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
                     @endif
                 @endforeach
-                <td>Name</td>
-                {{-- @if(isset($attribute_columns))
+                @if(isset($attribute_columns))
                     @foreach($attribute_columns as $key => $value)
-                        <th class="grid_head"
-                            data-column-name="{{ $attributeAliases[$key] }}"
-                            data-column-label="{{ $attributeAliases[$key] }}"
-                            data-column-sort="asc"
-                        >
-                            {{ $value }}<span class="icon sort-down-icon"></span>
+                        <th>
+                            {{ $value }}
                         </th>
                     @endforeach
-                @endif --}}
+                @endif
                 <th>
                     Actions
                 </th>
@@ -135,12 +130,12 @@
                 @foreach ($columns as $column)
                     <td class="">{!! $column->render($result) !!}</td>
                 @endforeach
-                {{-- @if(isset($attribute_columns))
+
+                @if(isset($attribute_columns))
                 @foreach ($attribute_columns as $atc)
                     <td>{{ $result->{$atc} }}</td>
                 @endforeach
-                @endif --}}
-                <td></td>
+                @endif
 
                 <td class="action">
                     @foreach($actions as $action)

@@ -56,14 +56,11 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  string $slug
      * @return \Illuminate\Http\Response
-     */
-    public function index($slug)
+    */
+    public function index()
     {
-        $product = $this->product->findBySlugOrFail($slug);
-
-        return view($this->_config['view'], compact('product'));
+        return view($this->_config['view']);
     }
 
     /**
@@ -85,15 +82,68 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , $id)
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'comment' => 'required',
+            'rating'  => 'required',
+            'title'   => 'required',
         ]);
 
-        $this->productReview->create(request()->all());
+        $data=$request->all();
+
+        $customer_id = auth()->guard('customer')->user()->id;
+
+        $data['status']=0;
+        $data['product_id']=$id;
+        $data['customer_id']=$customer_id;
+
+        $this->productReview->create($data);
 
         session()->flash('success', 'Review submitted successfully.');
+
+        return redirect()->route($this->_config['redirect']);
+    }
+
+     /**
+     * Display reviews accroding to product.
+     *
+     * @param  string $slug
+     * @return \Illuminate\Http\Response
+    */
+    public function show($slug)
+    {
+        $product = $this->product->findBySlugOrFail($slug);
+
+        return view($this->_config['view'],compact('product'));
+    }
+
+     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $review = $this->productReview->find($id);
+
+        return view($this->_config['view'],compact('review'));
+    }
+
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+
+        $this->productReview->update(request()->all(), $id);
+
+        session()->flash('success', 'Review updated successfully.');
 
         return redirect()->route($this->_config['redirect']);
     }

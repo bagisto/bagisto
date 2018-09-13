@@ -1,6 +1,12 @@
 @extends('admin::layouts.content')
 
+@section('page_title')
+
+@stop
+
 @section('content')
+
+
     <div class="content">
         <div class="page-header">
             <div class="page-title">

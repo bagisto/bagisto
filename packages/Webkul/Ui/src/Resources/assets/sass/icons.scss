@@ -18,6 +18,10 @@
     @extend %menu-properties;
     background-image: url("../images/Icon-Catalog.svg");
 }
+.customer-icon {
+    @extend %menu-properties;
+    background-image: url("../images/Icon-Customers.svg");
+}
 .configuration-icon {
     @extend %menu-properties;
     background-image: url("../images/Icon-Configure.svg");

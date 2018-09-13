@@ -36,10 +36,52 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.session.create'
             ])->name('admin.session.destroy');
 
-
             // Dashboard Route
-            Route::get('/dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->name('admin.dashboard.index');
+            Route::get('dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->name('admin.dashboard.index');
 
+            //Customers Management Routes
+
+            Route::get('customer', 'Webkul\Core\Http\Controllers\CustomerController@index')->defaults('_config', [
+                'view' => 'admin::customers.index'
+            ])->name('admin.customer.index');
+
+            Route::get('customer/orders', 'Webkul\Core\Http\Controllers\CustomerController@index')->defaults('_config',[
+                'view' => 'admin::customers.orders.index'
+            ])->name('admin.customer.orders.index');
+
+            Route::get('customer/reviews', 'Webkul\Shop\Http\Controllers\ReviewController@index')->defaults('_config',[
+                'view' => 'admin::customers.review.index'
+            ])->name('admin.customer.review.index');
+
+            Route::get('customer/create', 'Webkul\Core\Http\Controllers\CustomerController@create')->defaults('_config',[
+                'view' => 'admin::customers.create'
+            ])->name('admin.customer.create');
+
+            Route::post('customer/create', 'Webkul\Core\Http\Controllers\CustomerController@store')->defaults('_config',[
+                'redirect' => 'admin.customer.index'
+            ])->name('admin.customer.store');
+
+            Route::get('customer/reviews/edit/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@edit')->defaults('_config',[
+                'view' => 'admin::customers.review.edit'
+            ])->name('admin.customer.review.edit');
+
+            Route::put('customer/reviews/edit/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@update')->defaults('_config', [
+                'redirect' => 'admin.customer.review.index'
+            ])->name('admin.customer.review.update');
+
+            Route::get('customer/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@edit')->defaults('_config',[
+                'view' => 'admin::customers.edit'
+            ])->name('admin.customer.edit');
+
+            Route::put('customer/reviews/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@update')->defaults('_config', [
+                'redirect' => 'admin.customer.index'
+            ])->name('admin.customer.update');
+
+            // dummy number i.e-1 is used for creating view only
+
+            Route::get('customer/orders/1', 'Webkul\User\Http\Controllers\UserController@index')->defaults('_config', [
+                'view' => 'admin::customers.orders.order'
+            ])->name('admin.customer.orders.order');
 
             // Catalog Routes
             Route::prefix('catalog')->group(function () {
