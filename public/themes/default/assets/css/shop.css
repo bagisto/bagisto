@@ -570,6 +570,11 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
           justify-content: center;
 }
 
+.main-container-wrapper .product-card .product-image {
+  background: #F2F2F2;
+  margin-bottom: 10px;
+}
+
 .main-container-wrapper .product-card .product-image img {
   -ms-flex-item-align: center;
       align-self: center;
@@ -1105,31 +1110,20 @@ section.product-detail div.category-breadcrumbs {
 }
 
 section.product-detail div.layouter {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row;
-          flex-flow: row;
-  margin-top: 21px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: inline-block;
+  width: 100%;
 }
 
 section.product-detail div.layouter div.product-image-group {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  margin-right: 2.5%;
+  width: 43%;
+  float: left;
+  min-height: 1px;
+  position: relative;
 }
 
-section.product-detail div.layouter div.product-image-group .side-group {
+section.product-detail div.layouter div.product-image-group .thumb-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1138,11 +1132,65 @@ section.product-detail div.layouter div.product-image-group .side-group {
       -ms-flex-direction: column;
           flex-direction: column;
   margin-right: 4px;
+  height: 480px;
+  overflow: hidden;
+  position: relative;
+  float: left;
+}
+
+section.product-detail div.layouter div.product-image-group .thumb-list .thumb-frame {
+  border: 2px solid transparent;
+  background: #F2F2F2;
+  width: 120px;
+  height: 120px;
+}
+
+section.product-detail div.layouter div.product-image-group .thumb-list .thumb-frame.active {
+  border-color: #979797;
+}
+
+section.product-detail div.layouter div.product-image-group .thumb-list .thumb-frame img {
+  width: 100%;
+  height: 100%;
+}
+
+section.product-detail div.layouter div.product-image-group .thumb-list .gallery-control {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+section.product-detail div.layouter div.product-image-group .thumb-list .gallery-control .overlay {
+  opacity: 0.3;
+  background: #000000;
+  width: 100%;
+  height: 18px;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+}
+
+section.product-detail div.layouter div.product-image-group .thumb-list .gallery-control .icon {
+  z-index: 2;
+}
+
+section.product-detail div.layouter div.product-image-group .thumb-list .gallery-control.top {
+  top: 0;
+}
+
+section.product-detail div.layouter div.product-image-group .thumb-list .gallery-control.bottom {
+  bottom: 0;
 }
 
 section.product-detail div.layouter div.product-image-group .product-hero-image {
   display: block;
   position: relative;
+  background: #F2F2F2;
+  width: 480px;
+  max-height: 480px;
+  float: left;
 }
 
 section.product-detail div.layouter div.product-image-group .product-hero-image .wishlist {
@@ -1155,6 +1203,11 @@ section.product-detail div.layouter div.product-image-group .product-hero-image 
   position: absolute;
   top: 10px;
   right: 45px;
+}
+
+section.product-detail div.layouter .details {
+  width: 57%;
+  float: left;
 }
 
 section.product-detail div.layouter .details .product-price {

@@ -2,7 +2,6 @@
 
     @inject ('configurableOptionHelper', 'Webkul\Product\Product\ConfigurableOption')
 
-
     <product-options></product-options>
 
     @push('scripts')
@@ -10,39 +9,56 @@
         <script type="text/x-template" id="product-options-template">
             <div class="attributes">
 
+                <input type="hidden" name="selected_configurable_option" :value="selectedProductId">
+
                 <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
                     <label class="reqiured">@{{ attribute.label }}</label>
 
-                    <select v-validate="'required'" class="control" :name="['super_attribute[' + attribute.id + ']']" :disabled="attribute.disabled" @change="configure(attribute, $event.target.value)">
+                    <select v-validate="'required'" class="control" :name="['super_attribute[' + attribute.id + ']']" :disabled="attribute.disabled" @change="configure(attribute, $event.target.value)" :id="['attribute_' + attribute.id]">
 
-                        <option  v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
+                        <option v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
                         
                     </select>
 
-                    <span class="control-error" v-if="errors.has('super_attribute[' + attribute.id + ']')">@{{ errors.first('super_attribute[' + attribute.id + ']') }}</span>
+                    <span class="control-error" v-if="errors.has('super_attribute[' + attribute.id + ']')">
+                        @{{ errors.first('super_attribute[' + attribute.id + ']') }}
+                    </span>
                 </div>
 
             </div>
         </script>
 
+        <?php $config = $configurableOptionHelper->getConfigurationConfig($product) ?>
+
         <script>
+            
             Vue.component('product-options', {
 
                 template: '#product-options-template',
 
                 data: () => ({
-                    config: @json($configurableOptionHelper->getConfigurationConfig($product)),
-                    childAttributes: []
+                    config: @json($config),
+                    
+                    childAttributes: [],
+
+                    selectedProductId: '',
+
+                    simpleProduct: null,
+
+                    galleryImages: []
                 }),
 
                 created () {
+                    this.galleryImages = galleryImages.slice(0)
+
+                    var config = @json($config);
+
                     var childAttributes = this.childAttributes,
-                        attributes = this.config.attributes,
+                        attributes = config.attributes.slice(),
                         index = attributes.length,
                         attribute;
 
                     while (index--) {
-                        // attribute = Object.assign({}, attributes[index]);
                         attribute = attributes[index];
 
                         attribute.options = [];
@@ -65,31 +81,67 @@
 
                 methods: {
                     configure (attribute, value) {
-                        // this.simpleProduct = this._getSimpleProductId(attribute);
+                        this.simpleProduct = this.getSelectedProductId(attribute, value);
 
                         if (value) {
+                            attribute.selectedIndex = this.getSelectedIndex(attribute, value);
+
                             if (attribute.nextAttribute) {
                                 attribute.nextAttribute.disabled = false;
+
                                 this.fillSelect(attribute.nextAttribute);
                                 this.resetChildren(attribute.nextAttribute);
                             } else {
-                                //Set product id hidden value
+                                this.selectedProductId = attribute.options[attribute.selectedIndex].allowedProducts[0];
                             }
                         } else {
+                            attribute.selectedIndex = 0;
+
                             this.resetChildren(attribute);
+
+                            this.clearSelect(attribute.nextAttribute)
                         }
 
-                        // this.reloadPrice();
-                        // this.changeProductImage();
+                        this.reloadPrice();
+                        this.changeProductImages();
+                    },
+
+                    getSelectedIndex (attribute, value) {
+                        var selectedIndex = 0;
+
+                        attribute.options.forEach(function(option, index) {
+                            if(option.id == value) {
+                                selectedIndex = index;
+                            }
+                        })
+
+                        return selectedIndex;
+                    },
+
+                    getSelectedProductId (attribute, value) {
+                        var options = attribute.options,
+                            matchedOptions;
+
+                        matchedOptions = options.filter(function (option) {
+                            return option.id == value;
+                        });
+
+                        if(matchedOptions[0] != undefined && matchedOptions[0].allowedProducts != undefined) {
+                            return matchedOptions[0].allowedProducts[0];
+                        }
+
+                        return undefined;
                     },
 
                     fillSelect (attribute) {
                         var options = this.getAttributeOptions(attribute.id),
                             prevOption,
                             index = 1,
-                            products,
+                            allowedProducts,
                             i,
                             j;
+
+                        this.clearSelect(attribute)
 
                         attribute.options = [];
                         attribute.options[0] = {'id': '', 'label': this.config.chooseText, 'products': []};
@@ -98,25 +150,23 @@
                             prevOption = attribute.prevAttribute.options[attribute.prevAttribute.selectedIndex];
                         }
 
-                        // console.log(attribute)
-
                         if (options) {
                             for (i = 0; i < options.length; i++) {
-                                products = [];
+                                allowedProducts = [];
 
                                 if (prevOption) {
                                     for (j = 0; j < options[i].products.length; j++) {
-                                        if (prevOption.products &&
-                                            prevOption.products.indexOf(options[i].products[j]) > -1) {
-                                            products.push(options[i].products[j]);
+                                        if (prevOption.products && prevOption.products.indexOf(options[i].products[j]) > -1) {
+                                            allowedProducts.push(options[i].products[j]);
                                         }
                                     }
                                 } else {
-                                    products = options[i].products.slice(0);
+                                    allowedProducts = options[i].products.slice(0);
                                 }
 
-                                if (products.length > 0) {
-                                    options[i].products = products;
+                                if (allowedProducts.length > 0) {
+                                    options[i].allowedProducts = allowedProducts;
+
                                     attribute.options[index] = options[i];
 
                                     index++;
@@ -133,12 +183,22 @@
                             });
                         }
                     },
+
+                    clearSelect: function (attribute) {
+                        if(!attribute)
+                            return;
+
+                        var element = document.getElementById("attribute_" + attribute.id);
+
+                        if(element) {
+                            element.selectedIndex = "0";
+                        }
+                    },
                     
                     getAttributeOptions (attributeId) {
                         var this_this = this,
                             options;
 
-                        
                         this.config.attributes.forEach(function(attribute, index) {
                             if (attribute.id == attributeId) {
                                 options = attribute.options;
@@ -149,11 +209,40 @@
                     },
 
                     reloadPrice () {
+                        var selectedOptionCount = 0;
 
+                        this.childAttributes.forEach(function(attribute) {
+                            if(attribute.selectedIndex) {
+                                selectedOptionCount++;
+                            }
+                        });
+
+                        var priceLabelElement = document.querySelector('.price-label');
+                        var priceElement = document.querySelector('.final-price');
+
+                        if(this.childAttributes.length == selectedOptionCount) {
+                            priceLabelElement.style.display = 'none';
+
+                            priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
+                        } else {
+                            priceLabelElement.style.display = 'inline-block';
+
+                            priceElement.innerHTML = this.config.regular_price.formated_price;
+                        }
                     },
 
-                    changeProductImage () {
+                    changeProductImages () {
+                        galleryImages.splice(0, galleryImages.length)
 
+                        this.galleryImages.forEach(function(image) {
+                            galleryImages.push(image)
+                        });
+
+                        if(this.simpleProduct) {
+                            this.config.variant_images[this.simpleProduct].forEach(function(image) {
+                                galleryImages.unshift(image)
+                            });
+                        }
                     },
                 }
 

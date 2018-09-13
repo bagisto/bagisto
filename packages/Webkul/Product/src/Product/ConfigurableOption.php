@@ -3,7 +3,7 @@
 namespace Webkul\Product\Product;
 
 use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
-use Webkul\Product\Product\Gallery;
+use Webkul\Product\Product\ProductImage;
 use Webkul\Product\Product\Price;
 
 class ConfigurableOption extends AbstractProduct
@@ -16,11 +16,11 @@ class ConfigurableOption extends AbstractProduct
     protected $attributeOption;
 
     /**
-     * Gallery object
+     * ProductImage object
      *
      * @var array
      */
-    protected $gallery;
+    protected $productImage;
 
     /**
      * Price object
@@ -33,19 +33,19 @@ class ConfigurableOption extends AbstractProduct
      * Create a new controller instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeOptionRepository $attributeOption
-     * @param  Webkul\Product\Product\Gallery                          $gallery
+     * @param  Webkul\Product\Product\ProductImage                     $productImage
      * @param  Webkul\Product\Product\Price                            $price
      * @return void
      */
     public function __construct(
         AttributeOption $attributeOption,
-        Gallery $gallery,
+        ProductImage $productImage,
         Price $price
     )
     {
         $this->attributeOption = $attributeOption;
 
-        $this->gallery = $gallery;
+        $this->productImage = $productImage;
 
         $this->price = $price;
     }
@@ -82,6 +82,10 @@ class ConfigurableOption extends AbstractProduct
         $config = [
             'attributes' => $this->getAttributesData($product, $options),
             'index' => isset($options['index']) ? $options['index'] : [],
+            'regular_price' => [
+                'formated_price' => core()->currency($this->price->getMinimalPrice($product)),
+                'price' => $this->price->getMinimalPrice($product)
+            ],
             'variant_prices' => $this->getVariantPrices($product),
             'variant_images' => $this->getVariantImages($product),
             'chooseText' => trans('shop::app.products.choose-option')
@@ -201,8 +205,14 @@ class ConfigurableOption extends AbstractProduct
 
         foreach ($this->getAllowProducts($product) as $variant) {
             $prices[$variant->id] = [
-                'regular_price' => $variant->price,
-                'final_price' => $this->price->getMinimalPrice($variant),
+                'regular_price' => [
+                    'formated_price' => core()->currency($variant->price),
+                    'price' => $variant->price
+                ],
+                'final_price' => [
+                    'formated_price' => core()->currency($this->price->getMinimalPrice($variant)),
+                    'price' => $this->price->getMinimalPrice($variant)
+                ]
             ];
         }
 
@@ -220,7 +230,7 @@ class ConfigurableOption extends AbstractProduct
         $images = [];
 
         foreach ($this->getAllowProducts($product) as $variant) {
-            $images[$variant->id] = $this->gallery->getImages($variant);
+            $images[$variant->id] = $this->productImage->getGalleryImages($variant);
         }
 
         return $images;

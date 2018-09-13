@@ -6,7 +6,7 @@
     
         <span class="price-label">{{ __('shop::app.products.price-label') }}</span>
 
-        <span>{{ core()->currency($priceHelper->getMinimalPrice($product)) }}</span>    
+        <span class="final-price">{{ core()->currency($priceHelper->getMinimalPrice($product)) }}</span>    
 
     @else
 
