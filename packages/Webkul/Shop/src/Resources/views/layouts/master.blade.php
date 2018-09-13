@@ -21,11 +21,11 @@
 
     <div id="app">
 
-        @include('shop::layouts.header.index')
-
-        @yield('slider')
-
         <div class="main-container-wrapper">
+
+            @include('shop::layouts.header.index')
+
+            @yield('slider')
 
             <div class="content-container">
 
@@ -41,7 +41,7 @@
 
     <script type="text/javascript">
         window.flashMessages = [];
-        
+
         @if($success = session('success'))
             window.flashMessages = [{'type': 'alert-success', 'message': "{{ $success }}" }];
         @elseif($warning = session('warning'))

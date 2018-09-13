@@ -9,7 +9,6 @@
     @include ('shop::products.add-to')
 
 </div>
-
 @push('scripts')
 
     <script type="text/x-template" id="product-gallery-template">
@@ -94,7 +93,7 @@
                         this.thumbs = [moveThumb[0], ...this.thumbs];
                     } else {
                         const moveThumb = this.thumbs.splice(0, 1);
-                        
+
                         this.thumbs = [...this.thumbs, moveThumb[0]];
                     }
                 },

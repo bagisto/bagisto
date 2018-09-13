@@ -8,6 +8,6 @@
     @include('shop::home.featured-products')
 
     @include('shop::home.new-products')
-    
+
     @include('shop::home.news-updates')
 @endsection

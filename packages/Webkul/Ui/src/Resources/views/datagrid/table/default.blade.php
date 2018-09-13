@@ -21,7 +21,6 @@
                             <form onsubmit="return confirm('Are You Sure?');"
                                 @if(strtoupper($massoperation[ 'method'])=="GET" || strtoupper($massoperation['method'])=="POST" )
                                     method="{{ strtoupper($massoperation['method']) }}"
-
                                 @else
                                     method="POST"
                                 @endif

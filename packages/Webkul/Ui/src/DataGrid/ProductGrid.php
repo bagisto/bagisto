@@ -953,7 +953,7 @@ class ProductGrid
 
         $this->allAttributes = $this->getAttributes();
         $this->getDbQueryResults();
-        dd($this->results);
+        // dd($this->results);
         return view('ui::datagrid.index', [
             'css' => $this->css,
             'results' => $this->results,

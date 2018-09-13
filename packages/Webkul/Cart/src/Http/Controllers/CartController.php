@@ -4,9 +4,16 @@ namespace Webkul\Cart\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+
+//Cart repositories
 use Webkul\Cart\Repositories\CartRepository;
-use Webkul\Cart\Repositories\CartItemsRepository;
-use Session;
+use Webkul\Cart\Repositories\CartProductRepository;
+
+//Customer repositories
+use Webkul\Customer\Repositories\CustomerRepository;
+
+use Cart;
+use Cookie;
 
 /**
  * Cart controller for the customer
@@ -29,17 +36,44 @@ class CartController extends Controller
 
     protected $cart;
 
+    protected $cartProduct;
 
-    public function __construct(CartRepository $cart)
-    {
-        $this->middleware(['customer', 'guest']);
+    protected $customer;
 
-        $this->_config = request('_config');
+    public function __construct(CartRepository $cart, CartProductRepository $cartProduct, CustomerRepository $customer) {
+
+        $this->middleware('customer')->except(['add', 'remove']);
+
+        $this->customer = $customer;
 
         $this->cart = $cart;
+
+        $this->cartProduct = $cartProduct;
     }
 
-    public function add() {
-        return "Adding Items to Cart";
+    /**
+     * Function for guests
+     * user to add the product
+     * in the cart.
+     *
+     * @return Mixed
+     */
+
+    public function add($id) {
+
+        if(auth()->guard('customer')->check()) {
+            Cart::add($id);
+        } else {
+            Cart::guestUnitAdd($id);
+        }
+    }
+
+    public function remove($id) {
+
+        if(auth()->guard('customer')->check()) {
+            Cart::remove($id);
+        } else {
+            Cart::guestUnitRemove($id);
+        }
     }
 }

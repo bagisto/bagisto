@@ -21,6 +21,20 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.view'
     ])->name('shop.products.index');
 
+    // //Routes for product cart
+
+    Route::post('products/guest/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.add');
+
+    Route::post('product/guest/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.remove');
+
+    // Route::post('product/customer/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.customer.add');
+
+    // Route::post('product/customer/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.customer.remove');
+
+    Route::get('product/customer/cart/merge', 'Webkul\Cart\Http\Controllers\CartController@handleMerge')->name('cart.merge');
+
+    //Routes for product cart ends
+
 
     // Product Review routes
     Route::get('/reviews/{slug}/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@show')->defaults('_config', [
@@ -58,7 +72,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('login', 'Webkul\Customer\Http\Controllers\SessionController@create')->defaults('_config', [
             'redirect' => 'customer.account.index'
         ])->name('customer.session.create');
-
 
         // Registration Routes
         Route::get('register', 'Webkul\Customer\Http\Controllers\RegistrationController@show')->defaults('_config', [
@@ -128,7 +141,7 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('customer.address.edit');
 
                 Route::post('address/edit', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [
-                    'view' => 'shop::customers.account.address.address'
+                    'redirect' => 'customer.address.index'
                 ])->name('customer.address.edit');
 
                 /*    Routes for Addresses ends here   */

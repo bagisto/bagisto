@@ -7,11 +7,9 @@
             <span class="breadcrumb">Home</span> > <span class="breadcrumb">Men</span> > <span class="breadcrumb">Slit Open Jeans</span>
 
         </div>
-
         <div class="layouter">
-
-            <form action="">
-
+            {{-- {{ dd(session()->getId()) }} --}}
+            <form method="POST" action="{{ route('cart.add', $product->id) }}">
                 @csrf()
 
                 <input type="hidden" name="product">
@@ -55,7 +53,7 @@
                     @include ('shop::products.view.reviews')
 
                 </div>
-                
+
             </form>
 
         </div>
@@ -63,4 +61,5 @@
         @include ('shop::products.view.up-sells')
 
     </section>
+
 @endsection

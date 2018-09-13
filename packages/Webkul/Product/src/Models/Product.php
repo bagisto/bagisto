@@ -18,6 +18,8 @@ class Product extends Model
 
     protected $with = ['attribute_family', 'inventories'];
 
+    // protected $table = 'products';
+
     /**
      * Get the product attribute family that owns the product.
      */

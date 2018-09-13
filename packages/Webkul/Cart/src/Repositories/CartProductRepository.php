@@ -11,7 +11,7 @@ use Webkul\Core\Eloquent\Repository;
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class CartItemsRepository extends Repository
+class CartProductRepository extends Repository
 {
     /**
      * Specify Model class name
@@ -21,7 +21,7 @@ class CartItemsRepository extends Repository
 
     function model()
     {
-        return 'Webkul\Cart\Models\CartItems';
+        return 'Webkul\Cart\Models\CartProduct';
     }
 
     /**

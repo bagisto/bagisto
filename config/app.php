@@ -180,7 +180,7 @@ return [
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
         Webkul\Ui\Providers\UiServiceProvider::class,
-        Webkul\Category\Providers\CategoryServiceProvider::class,
+        // Webkul\Category\Providers\CategoryServiceProvider::class,
         Webkul\Attribute\Providers\AttributeServiceProvider::class,
         Webkul\Core\Providers\CoreServiceProvider::class,
         Webkul\Shop\Providers\ShopServiceProvider::class,
@@ -243,6 +243,7 @@ return [
         'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
         'ProductGrid' => Webkul\Ui\DataGrid\Facades\ProductGrid::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Cart' => Webkul\Cart\Facades\Cart::class,
         'Core' => Webkul\Core\Facades\Core::class
     ],
 

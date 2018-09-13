@@ -1,7 +1,7 @@
 @extends('shop::layouts.master')
 
 @section('content-wrapper')
-    
+
     @include ('shop::products.list.layered-navigation')
 
     <div class="main" style="display: inline-block">
@@ -16,7 +16,7 @@
 
         @if ($toolbarHelper->getCurrentMode() == 'grid')
             <div class="product-grid max-3-col">
-                
+
                 @foreach ($products as $product)
 
                     @include ('shop::products.list.card', ['product' => $product])
@@ -26,7 +26,7 @@
             </div>
         @else
             <div class="product-list">
-                
+
                 @foreach ($products as $product)
 
                     @include ('shop::products.list.card', ['product' => $product])
@@ -35,13 +35,13 @@
 
             </div>
         @endif
-        
+
         <div class="bottom-toolbar">
 
             {{ $products->appends(request()->input())->links() }}
 
         </div>
-        
+
     </div>
 
 @stop

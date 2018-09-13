@@ -1,10 +1,9 @@
 {
     "name": "webkul/laravel-cart",
-    "description": "Cart Package for customer.",
     "license": "MIT",
     "authors": [
         {
-            "name": "prashant-webkul",
+            "name": "Prashant Singh",
             "email": "prashant.singh852@webkul.com"
         }
     ],
@@ -17,9 +16,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Cart\\Providers\\CartServiceProvider"
-            ],
-            "aliases": {}
+                "Webkul\\Cart\\CartServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev"

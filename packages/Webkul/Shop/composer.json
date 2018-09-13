@@ -1,10 +1,11 @@
 {
     "name": "webkul/laravel-shop",
     "license": "MIT",
+    "description" : "Shop package for store front and customers",
     "authors": [
         {
-            "name": "Prashant",
-            "email": "prashant@webkul.com"
+            "name": "Prashant Singh",
+            "email": "prashant.singh852@webkul.com"
         }
     ],
     "require": {},
