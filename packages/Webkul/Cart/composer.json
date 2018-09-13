@@ -3,13 +3,11 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Prashant",
-            "email": "prashant@webkul.com"
+            "name": "Prashant Singh",
+            "email": "prashant.singh852@webkul.com"
         }
     ],
-    "require": {
-        "webkul/laravel-core": "dev-master"
-    },
+    "require": {},
     "autoload": {
         "psr-4": {
             "Webkul\\Cart\\": "src/"
@@ -18,9 +16,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Cart\\Providers\\CartServiceProvider"
-            ],
-            "aliases": {}
+                "Webkul\\Cart\\CartServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev"

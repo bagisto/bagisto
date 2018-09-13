@@ -4,11 +4,13 @@ namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
+
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Http\Listeners\CustomerEventsHandler;
-use Illuminate\Support\Facades\Event;
-use Cookie;
 
+use Cookie;
+use Cart;
 /**
  * Session controller for the user customer
  *
@@ -60,11 +62,10 @@ class SessionController extends Controller
         }
 
         //Event passed to prepare cart after login
-        if(Cookie::has('session_c')) {
-            Event::fire('customer.after.login', $request->input('email'));
-        } else {
-            return redirect()->intended(route($this->_config['redirect']));
-        }
+
+        Event::fire('customer.after.login', $request->input('email'));
+
+        return redirect()->intended(route($this->_config['redirect']));
     }
 
     public function destroy($id)

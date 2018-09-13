@@ -10,7 +10,7 @@ use Webkul\Core\Http\Middleware\Locale;
 use Webkul\User\Http\Middleware\RedirectIfNotAdmin;
 use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 use Webkul\Core\Core;
-use Webkul\Core\Facades\CoreFacade;
+use Webkul\Core\Facades\Core as CoreFacade;
 
 class CoreServiceProvider extends ServiceProvider
 {

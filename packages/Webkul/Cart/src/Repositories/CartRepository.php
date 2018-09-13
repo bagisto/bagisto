@@ -56,4 +56,34 @@ class CartRepository extends Repository
 
         return $this->model->find($id)->with_products;
     }
+
+    /**
+     * Method to attach
+     * associations
+     *
+     * @return mixed
+    */
+    // public function onlyAttach($id, $taxRates) {
+
+    //     foreach($taxRates as $key => $value) {
+
+    //         $this->model->findOrFail($id)->tax_rates()->attach($id, ['tax_category_id' => $id, 'tax_rate_id' => $value]);
+    //     }
+    // }
+
+
+    /**
+     * Method to detach
+     * and attach the
+     * associations
+     *
+     * @return mixed
+    */
+    // public function syncAndDetach($id, $taxRates) {
+    //     $this->model->findOrFail($id)->tax_rates()->detach();
+
+    //     foreach($taxRates as $key => $value) {
+    //         $this->model->findOrFail($id)->tax_rates()->attach($id, ['tax_category_id' => $id, 'tax_rate_id' => $value]);
+    //     }
+    // }
 }

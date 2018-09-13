@@ -2,7 +2,6 @@
 
 namespace Webkul\Cart\Facades;
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Facade;
 
 class Cart extends Facade

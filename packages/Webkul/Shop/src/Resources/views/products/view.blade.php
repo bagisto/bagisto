@@ -8,8 +8,8 @@
 
         </div>
         <div class="layouter">
-
-            <form method="POST" @auth('customer') action="{{ route('cart.customer.add', $product->id) }}" @endauth @guest action="{{ route('cart.guest.add', $product->id) }}" @endguest>
+            {{ dd(session()->getId()) }}
+            <form method="POST" action="{{ route('cart.add', $product->id) }}">
                 @csrf()
 
                 <input type="hidden" name="product">

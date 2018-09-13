@@ -16,13 +16,13 @@ Route::group(['middleware' => ['web']], function () {
 
     // //Routes for product cart
 
-    Route::post('products/guest/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@guestUnitAdd')->name('cart.guest.add');
+    Route::post('products/guest/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.add');
 
-    Route::post('product/guest/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@guestUnitRemove')->name('cart.guest.remove');
+    Route::post('product/guest/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.remove');
 
-    Route::post('product/customer/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.customer.add');
+    // Route::post('product/customer/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.customer.add');
 
-    Route::post('product/customer/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.customer.remove');
+    // Route::post('product/customer/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.customer.remove');
 
     Route::get('product/customer/cart/merge', 'Webkul\Cart\Http\Controllers\CartController@handleMerge')->name('cart.merge');
 

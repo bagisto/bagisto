@@ -21,11 +21,13 @@
         <input type="hidden" name="qty" value="1">
 
         <input type="submit" class="btn btn-lg add-to-cart" value="Add to Cart">
+
         {{-- <form>
             <input type="hidden" name="product_id" value="">
             <input type="hidden" name="qty" value="1">
             <button type="submit" class="btn btn-lg btn-primary buy-now">Buy Now</button>
         </form> --}}
+
         {{-- {{ dd(unserialize(Cookie::get('session_c'))) }} --}}
     </div>
 </div>

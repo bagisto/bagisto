@@ -3,12 +3,16 @@
 namespace Webkul\Cart\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Router;
-use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
+use Illuminate\Foundation\AliasLoader;
 use Webkul\User\Http\Middleware\RedirectIfNotAdmin;
+use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
+use Webkul\Cart\Facades\Cart;
 
 class CartServiceProvider extends ServiceProvider
 {
+
     public function boot(Router $router)
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
@@ -27,7 +31,24 @@ class CartServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this->app->bind('datagrid', 'Webkul\Ui\DataGrid\DataGrid');
-        $this->app->bind('Cart', 'Webkul\Cart\Cart');
+        $this->registerFacades();
+    }
+
+    /**
+     * Register Bouncer as a singleton.
+     *
+     * @return void
+     */
+    protected function registerFacades()
+    {
+        $loader = AliasLoader::getInstance();
+
+        $loader->alias('cart', Cart::class);
+
+        $this->app->singleton('cart', function () {
+            return new cart();
+        });
+
+        $this->app->bind('cart', 'Webkul\Cart\Cart');
     }
 }

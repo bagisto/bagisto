@@ -141,7 +141,6 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  max-width: 80%;
   width: 100%;
   margin-left: auto;
   margin-right: auto;

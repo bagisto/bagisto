@@ -27,12 +27,7 @@ class CustomerEventsHandler {
          * check emptiness and then
          * do the appropriate actions.
          */
-        Cart::getCart(1);
-        // return redirect()->route('cart.merge');
-        // if(Cookie::has('session_c')) {
-
-        // }
-
+        Cart::handleMerge();
     }
 
     /**
