@@ -19,7 +19,7 @@
                     <div class="control-group">
                         <select class="control" id="channel-switcher" name="channel">
                             @foreach(core()->getAllChannels() as $channelModel)
-                                
+
                                 <option value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
                                     {{ $channelModel->name }}
                                 </option>
@@ -31,7 +31,7 @@
                     <div class="control-group">
                         <select class="control" id="locale-switcher" name="locale">
                             @foreach(core()->getAllLocales() as $localeModel)
-                                
+
                                 <option value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                     {{ $localeModel->name }}
                                 </option>
@@ -61,8 +61,8 @@
                                 @foreach($attributeGroup->custom_attributes as $attribute)
 
                                     @if(!$product->super_attributes->contains($attribute))
-                                    
-                                        <?php 
+
+                                        <?php
                                             $validations = [];
                                             $disabled = false;
                                             if($product->type == 'configurable' && in_array($attribute->code, ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'])) {
@@ -79,7 +79,7 @@
                                             }
 
                                             $validations = implode('|', array_filter($validations));
-                                        ?> 
+                                        ?>
 
                                         @if(view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
 
@@ -97,7 +97,7 @@
                                                             array_push($channel_locale, $locale);
                                                         }
                                                     ?>
-                                                    
+
                                                     @if(count($channel_locale))
                                                         <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
                                                     @endif
@@ -111,7 +111,7 @@
                                         @endif
 
                                     @endif
-                                    
+
                                 @endforeach
 
                             </div>
@@ -120,11 +120,11 @@
                 @endforeach
 
                 @if ($form_accordians)
-                
+
                     @foreach ($form_accordians->items as $accordian)
 
                         @include ($accordian['view'])
-                    
+
                     @endforeach
 
                 @endif

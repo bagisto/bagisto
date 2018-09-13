@@ -172,6 +172,8 @@ return [
 
         //Laravel Intervention
         Intervention\Image\ImageServiceProvider::class,
+
+        //Repository
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
         //Webkul packages
@@ -187,7 +189,9 @@ return [
         Webkul\Product\Providers\ProductServiceProvider::class,
         Webkul\Shop\Providers\ShopServiceProvider::class,
         Webkul\Customer\Providers\CustomerServiceProvider::class,
-        Webkul\Theme\Providers\ThemeServiceProvider::class
+        Webkul\Theme\Providers\ThemeServiceProvider::class,
+        Webkul\Cart\Providers\CartServiceProvider::class,
+        Webkul\Shipping\Providers\ShippingServiceProvider::class,
     ],
 
     /*

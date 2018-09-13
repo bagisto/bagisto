@@ -4,11 +4,18 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
         'view' => 'shop::home.index'
-    ]);
+    ])->name('store.home');
 
     Route::get('/categories/{slug}', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
         'view' => 'shop::products.index'
-    ])->name('shop.categories.index');
+    ]);
+
+    Route::get('/checkout', 'Webkul\Cart\Http\Controllers\CheckoutController@index')->defaults('_config', [
+        'view' => 'shop::customers.checkout.index'
+    ])->name('shop.checkout');
+
+    /* dummy routes ends here */
+
 
     Route::get('/products/{slug}', 'Webkul\Shop\Http\Controllers\ProductController@index')->defaults('_config', [
         'view' => 'shop::products.view'
@@ -16,22 +23,29 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // Product Review routes
-    Route::get('/reviews/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@index')->defaults('_config', [
+    Route::get('/reviews/{slug}/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@show')->defaults('_config', [
         'view' => 'shop::products.reviews.index'
     ])->name('shop.reviews.index');
 
-    Route::get('/reviews/create/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@create')->defaults('_config', [
+    Route::get('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@create')->defaults('_config', [
         'view' => 'shop::products.reviews.create'
     ])->name('shop.reviews.create');
+
+    Route::post('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
+        'redirect' => 'shop.reviews.index'
+    ])->name('shop.reviews.store');
 
     Route::post('/reviews/create/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
         'redirect' => 'admin.reviews.index'
     ])->name('admin.reviews.store');
 
+    // Route::post('/reviews/create/{slug}', 'Webkul\Core\Http\Controllers\ReviewController@store')->defaults('_config', [
+    //     'redirect' => 'admin.reviews.index'
+    // ])->name('admin.reviews.store');
 
+
+    // Route::view('/products/{slug}', 'shop::store.product.details.index');
     Route::view('/cart', 'shop::store.product.view.cart.index');
-
-    // Route::view('/products/{slug}', 'shop::products.view');
 
     //customer routes starts here
     Route::prefix('customer')->group(function () {
@@ -42,7 +56,7 @@ Route::group(['middleware' => ['web']], function () {
         ])->name('customer.session.index');
 
         Route::post('login', 'Webkul\Customer\Http\Controllers\SessionController@create')->defaults('_config', [
-            'redirect' => 'customer.account.profile'
+            'redirect' => 'customer.account.index'
         ])->name('customer.session.create');
 
 
@@ -52,7 +66,7 @@ Route::group(['middleware' => ['web']], function () {
         ])->name('customer.register.index');
 
         Route::post('register', 'Webkul\Customer\Http\Controllers\RegistrationController@create')->defaults('_config', [
-            'redirect' => 'customer.account.profile',
+            'redirect' => 'customer.account.index',
         ])->name('customer.register.create');   //redirect attribute will get changed immediately to account.index when account's index page will be made
 
         // Auth Routes
@@ -63,16 +77,77 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'customer.session.index'
             ])->name('customer.session.destroy');
 
+            Route::view('/cart', 'shop::store.product.cart.cart.index')->name('customer.cart');
+
+            Route::view('/product', 'shop::store.product.details.home.index')->name('customer.product');
+
+            Route::view('/product/review', 'shop::store.product.review.index')->name('customer.product.review');
+
             //customer account
             Route::prefix('account')->group(function () {
-                Route::get('profile', 'Webkul\Customer\Http\Controllers\CustomerController@profile')->defaults('_config', [
+
+                Route::get('index', 'Webkul\Customer\Http\Controllers\AccountController@index')->defaults('_config', [
+                    'view' => 'shop::customers.account.index'
+                ])->name('customer.account.index');
+
+
+                /*   Profile Routes Starts Here    */
+                Route::get('profile', 'Webkul\Customer\Http\Controllers\CustomerController@index')->defaults('_config', [
                 'view' => 'shop::customers.account.profile.index'
-                ])->name('customer.account.profile');
+                ])->name('customer.profile.index');
 
                 //profile edit
-                Route::get('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@editProfile')->defaults('_config', [
+                Route::get('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@editIndex')->defaults('_config', [
                     'view' => 'shop::customers.account.profile.edit'
                 ])->name('customer.profile.edit');
+
+                Route::post('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@edit')->defaults('_config', [
+                    'view' => 'shop::customers.account.profile.edit'
+                ])->name('customer.profile.edit');
+
+                /*  Profile Routes Ends Here  */
+
+
+                /*    Routes for Addresses   */
+
+                Route::get('address/index', 'Webkul\Customer\Http\Controllers\AddressController@index')->defaults('_config', [
+                    'view' => 'shop::customers.account.address.address'
+                ])->name('customer.address.index');
+
+                Route::get('address/create', 'Webkul\Customer\Http\Controllers\AddressController@show')->defaults('_config', [
+                    'view' => 'shop::customers.account.address.create'
+                ])->name('customer.address.create');
+
+                Route::post('address/create', 'Webkul\Customer\Http\Controllers\AddressController@create')->defaults('_config', [
+                    'view' => 'shop::customers.account.address.address',
+                    'redirect' => 'customer.address.index'
+                ])->name('customer.address.create');
+
+                Route::get('address/edit', 'Webkul\Customer\Http\Controllers\AddressController@showEdit')->defaults('_config', [
+                    'view' => 'shop::customers.account.address.edit'
+                ])->name('customer.address.edit');
+
+                Route::post('address/edit', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [
+                    'view' => 'shop::customers.account.address.address'
+                ])->name('customer.address.edit');
+
+                /*    Routes for Addresses ends here   */
+
+                /* Wishlist route */
+                Route::get('wishlist', 'Webkul\Customer\Http\Controllers\WishlistController@wishlist')->defaults('_config', [
+                    'view' => 'shop::customers.account.wishlist.wishlist'
+                ])->name('customer.wishlist.index');
+
+                /* Orders route */
+                Route::get('orders', 'Webkul\Customer\Http\Controllers\OrdersController@orders')->defaults('_config', [
+                    'view' => 'shop::customers.account.orders.orders'
+                ])->name('customer.orders.index');
+
+                /* Reviews route */
+                Route::get('reviews', 'Webkul\Customer\Http\Controllers\CustomerController@reviews')->defaults('_config', [
+                    'view' => 'shop::customers.account.reviews.reviews'
+                ])->name('customer.reviews.index');
+
             });
         });
     });

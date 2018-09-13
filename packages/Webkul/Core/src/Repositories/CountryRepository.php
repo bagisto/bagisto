@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Core\Repositories;
- 
+
 use Webkul\Core\Eloquent\Repository;
 
 /**

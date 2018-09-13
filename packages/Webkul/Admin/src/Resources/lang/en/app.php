@@ -41,7 +41,7 @@ return [
             'all' => 'All'
         ],
         'users' => [
-            'title' => 'Users',
+            'title' => 'User',
             'add-user-title' => 'Add User',
             'edit-user-title' => 'Edit User',
             'save-btn-title' => 'Save User',
@@ -175,6 +175,43 @@ return [
             'meta_keywords' => 'Meta Keywords',
         ]
     ],
+
+    'configuration' => [
+        'tax' => [
+            'title' => 'Taxes',
+            'add-title' => 'Add Tax Rule'
+        ],
+        'taxrule' => [
+            'title' => 'Add Tax Rule',
+            'create' => 'Create Tax Rule',
+            'general' => 'Tax Rule',
+            'select-channel' => 'Select Channel',
+            'name' => 'Name',
+            'code' => 'Code',
+            'description' => 'Description',
+            'select-taxrates' => 'Select Tax Rates',
+            'edit' => [
+                'title' => 'Edit Tax Rule',
+                'edit-button-title' => 'Edit Rule'
+            ]
+        ],
+        'taxrate' => [
+            'title' => 'Add Tax Rate',
+            'general' => 'Tax Rate',
+            'identifier' => 'Identifier',
+            'is_zip' => 'Enable Zip Range',
+            'zip_from' => 'Zip From',
+            'zip_to' => 'Zip To',
+            'state' => 'State',
+            'country' => 'Country',
+            'tax_rate' => 'Rate',
+            'edit' => [
+                'title' => 'Edit Tax Rate',
+                'edit-button-title' => 'Edit Rate'
+            ]
+        ],
+    ],
+
     'settings' => [
         'locales' => [
             'title' => 'Locales',
@@ -265,5 +302,24 @@ return [
             'content' => 'Content',
             'channels' => 'Channel'
         ],
+    ],
+    'customers' => [
+        'customers' => [
+            'title' => 'Customers',
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'gender' => 'Gender',
+            'email' => 'Email',
+            'date_of_birth' => 'Date of Birth',
+            'phone' => 'Phone',
+            'customer_group' => 'Customer Group'
+        ],
+        'reviews' => [
+            'title' => 'Title',
+            'name' => 'Reviews',
+            'rating' => 'Rating',
+            'status' => 'Status',
+            'comment' => 'Comment'
+        ]
     ]
 ];

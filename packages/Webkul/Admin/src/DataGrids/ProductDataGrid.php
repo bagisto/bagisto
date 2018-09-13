@@ -6,7 +6,6 @@ use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\ProductGrid;
 use Webkul\Channel\Repositories\ChannelRepository;
 use Webkul\Product\Repositories\ProductRepository;
-
 /**
  * Product DataGrid
  *
@@ -24,7 +23,6 @@ class ProductDataGrid
 
     public function createProductDataGrid()
     {
-
         return ProductGrid::make([
             'name' => 'Products',
             'table' => 'products as prods',
@@ -77,10 +75,15 @@ class ProductDataGrid
                     'primaryKey' => 'prods.id',
                     'condition' => '=',
                     'secondaryKey' => 'pav.product_id',
-                    'withAttributes' => true
+                    'withAttributes' => [
+                        'condition' => [
+                            'attribute_id' => 2,
+                            'select' => 'name',
+                        ]
+                    ]
                 ],
 
-                //for getting the inventory quantity of a product
+                // for getting the inventory quantity of a product
                 [
                     'join' => 'leftjoin',
                     'table' => 'product_inventories as pi',
@@ -120,17 +123,9 @@ class ProductDataGrid
                     'name' => 'pi.qty',
                     'alias' => 'ProductQuantity',
                     'type' => 'string',
-                    'label' => 'Product Quatity',
+                    'label' => 'Product Quantity',
                     'sortable' => false,
                 ],
-                // [
-                //     'name' => 'pav.attribute_id',
-                //     'alias' => 'AttributeID',
-                //     'type' => 'string',
-                //     'label' => 'Attribute ID',
-                //     'sortable' => false,
-
-                // ],
             ],
 
             'filterable' => [
@@ -156,7 +151,7 @@ class ProductDataGrid
                 [
                     'name' => 'pi.qty',
                     'alias' => 'ProductQuantity',
-                    'type' => 'string',
+                    'type' => 'number',
                     'label' => 'Product Quatity',
                 ],
             ],

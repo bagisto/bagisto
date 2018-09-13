@@ -20,7 +20,7 @@ class CountryController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * CountryRepository object
      *
@@ -36,6 +36,8 @@ class CountryController extends Controller
      */
     public function __construct(Country $country)
     {
+        $this->middleware('admin');
+
         $this->country = $country;
 
         $this->_config = request('_config');

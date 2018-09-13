@@ -4,6 +4,7 @@ namespace Webkul\User\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Auth;
 
 /**
  * Admin user session controller
@@ -27,6 +28,8 @@ class SessionController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('admin')->except(['create','store']);
+
         $this->_config = request('_config');
 
         $this->middleware('guest', ['except' => 'destroy']);
@@ -39,7 +42,12 @@ class SessionController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        if (auth()->guard('admin')->check()) {
+            return redirect()->route('admin.dashboard.index');
+        } else {
+            return view($this->_config['view']);
+        }
+
     }
 
     /**
@@ -61,7 +69,7 @@ class SessionController extends Controller
             return back();
         }
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->intended(route($this->_config['redirect']));
     }
 
     /**

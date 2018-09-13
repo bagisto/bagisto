@@ -47,7 +47,7 @@
                                             {{ $currency->name }}
                                         </option>
                                     @endforeach
-                                </select> 
+                                </select>
                                 <span class="control-error" v-if="errors.has('target_currency')">@{{ errors.first('target_currency') }}</span>
                             </div>
 

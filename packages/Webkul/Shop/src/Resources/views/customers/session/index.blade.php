@@ -18,13 +18,13 @@
 
                 <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
                     <label for="email">{{ __('shop::app.customer.login-form.email') }}</label>
-                    <input type="text" class="control" name="email" v-validate="'required|email'">
+                    <input type="text" class="control" name="email" v-validate="'required|email'" value="{{ old('email') }}">
                     <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
                 </div>
 
                 <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                     <label for="password">{{ __('shop::app.customer.login-form.password') }}</label>
-                    <input type="password" class="control" name="password" v-validate="'required|min:8|max:100'">
+                    <input type="password" class="control" name="password" v-validate="'required|min:6'" value="{{ old('password') }}">
                     <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                 </div>
 

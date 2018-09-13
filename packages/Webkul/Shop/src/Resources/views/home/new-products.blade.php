@@ -1,5 +1,6 @@
 <section class="featured-products">
     <div class="featured-heading">
+        {{ $session_id = session()->getId() }}<br/>
         New Products<br/>
         <span class="featured-seperator" style="color:lightgrey;">_____</span>
     </div>
@@ -67,7 +68,7 @@
                 <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
             </div>
         </div>
-        
+
         <div class="product-card">
             <div class="product-image">
                 <img src="vendor/webkul/shop/assets/images/new.png" />

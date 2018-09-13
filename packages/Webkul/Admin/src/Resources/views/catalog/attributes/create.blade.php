@@ -73,9 +73,9 @@
                     <div class="hide">
                         <accordian :title="'{{ __('admin::app.catalog.attributes.options') }}'" :active="true" :id="'options'">
                             <div slot="body">
-                            
+
                                 <option-wrapper></option-wrapper>
-                                
+
                             </div>
                         </accordian>
                     </div>
@@ -122,7 +122,7 @@
                                     <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
                                 </select>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="value_per_locale">{{ __('admin::app.catalog.attributes.value_per_locale') }}</label>
                                 <select class="control" id="value_per_locale" name="value_per_locale">
@@ -130,7 +130,7 @@
                                     <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="value_per_channel">{{ __('admin::app.catalog.attributes.value_per_channel') }}</label>
                                 <select class="control" id="value_per_channel" name="value_per_channel">
@@ -138,7 +138,7 @@
                                     <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="is_filterable">{{ __('admin::app.catalog.attributes.is_filterable') }}</label>
                                 <select class="control" id="is_filterable" name="is_filterable">
@@ -146,7 +146,7 @@
                                     <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="is_configurable">{{ __('admin::app.catalog.attributes.is_configurable') }}</label>
                                 <select class="control" id="is_configurable" name="is_configurable">
@@ -154,7 +154,7 @@
                                     <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
                                 </select>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="is_visible_on_front">{{ __('admin::app.catalog.attributes.is_visible_on_front') }}</label>
                                 <select class="control" id="is_visible_on_front" name="is_visible_on_front">
@@ -184,7 +184,7 @@
                             @foreach(Webkul\Core\Models\Locale::all() as $locale)
 
                                 <th>{{ $locale->name . ' (' . $locale->code . ')' }}</th>
-                            
+
                             @endforeach
 
                             <th>{{ __('admin::app.catalog.attributes.position') }}</th>
@@ -192,7 +192,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                        
+
                     <tbody>
                         <tr v-for="row in optionRows">
                             <td>
@@ -244,7 +244,7 @@
 
             var optionWrapper = Vue.component('option-wrapper', {
 
-                template: '#options-template', 
+                template: '#options-template',
 
                 data: () => ({
                     optionRowCount: 0,

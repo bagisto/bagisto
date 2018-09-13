@@ -21,7 +21,7 @@ class ChannelController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * ChannelRepository object
      *
@@ -37,6 +37,8 @@ class ChannelController extends Controller
      */
     public function __construct(Channel $channel)
     {
+        $this->middleware('admin');
+
         $this->channel = $channel;
 
         $this->_config = request('_config');
