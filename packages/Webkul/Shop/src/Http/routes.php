@@ -24,7 +24,7 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.reviews.create'
     ])->name('shop.reviews.create');
 
-    Route::post('/reviews/create/{slug}', 'Webkul\Core\Http\Controllers\ReviewController@store')->defaults('_config', [
+    Route::post('/reviews/create/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
         'redirect' => 'admin.reviews.index'
     ])->name('admin.reviews.store');
 

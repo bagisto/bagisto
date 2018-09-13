@@ -13,12 +13,6 @@ class CustomerServiceProvider extends ServiceProvider
 {
     public function boot(Router $router)
     {
-        // include __DIR__ . '/../Http/routes.php';
-
-        $this->publishes([
-            __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/customer/assets'),
-        ], 'public');
-
         $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');

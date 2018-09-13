@@ -27,9 +27,9 @@ class CoreServiceProvider extends ServiceProvider
 
         $router->aliasMiddleware('locale', Locale::class);
 
-        $this->publishes([
-            __DIR__ . '/../../publishable/lang' => public_path('vendor/webkul/core/lang'),
-        ], 'public');
+        // $this->publishes([
+        //     __DIR__ . '/../../publishable/lang' => public_path('vendor/webkul/core/lang'),
+        // ], 'public');
 
         Validator::extend('slug', 'Webkul\Core\Contracts\Validations\Slug@passes');
 

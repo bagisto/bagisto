@@ -10,7 +10,7 @@
 
         <div class="layouter">
 
-            <form action="" style="display: inherit;">
+            <form action="">
 
                 @csrf()
 
