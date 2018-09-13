@@ -16,7 +16,7 @@
 
                     <select v-validate="'required'" class="control" :name="['super_attribute[' + attribute.id + ']']" :disabled="attribute.disabled" @change="configure(attribute, $event.target.value)" :id="['attribute_' + attribute.id]">
 
-                        <option  v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
+                        <option v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
                         
                     </select>
 
@@ -43,10 +43,14 @@
 
                     selectedProductId: '',
 
-                    simpleProduct: null
+                    simpleProduct: null,
+
+                    galleryImages: []
                 }),
 
                 created () {
+                    this.galleryImages = galleryImages.slice(0)
+
                     var config = @json($config);
 
                     var childAttributes = this.childAttributes,
@@ -228,7 +232,17 @@
                     },
 
                     changeProductImages () {
-                        console.log(this.config.variant_images[this.simpleProduct])
+                        galleryImages.splice(0, galleryImages.length)
+
+                        this.galleryImages.forEach(function(image) {
+                            galleryImages.push(image)
+                        });
+
+                        if(this.simpleProduct) {
+                            this.config.variant_images[this.simpleProduct].forEach(function(image) {
+                                galleryImages.unshift(image)
+                            });
+                        }
                     },
                 }
 

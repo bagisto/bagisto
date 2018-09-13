@@ -1,7 +1,12 @@
 <div class="product-card">
+
+    @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
+
+    <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
+
     <div class="product-image">
         <a href="{{ route('shop.products.index', $product->url_key) }}" title="{{ $product->name }}">
-            <img src="{{ bagisto_asset('images/gogs.png') }}" />
+            <img src="{{ $productBaseImage['medium_image_url'] }}" />
         </a>
     </div>
 
