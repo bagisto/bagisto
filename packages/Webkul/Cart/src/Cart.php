@@ -51,9 +51,9 @@ class Cart {
 
             $cart_session_id = Cookie::get('cart_session_id');
 
-            $cart = $this->cart->getOneByField('session_id'. $cart_session_id);
+            $cart = $this->cart->getOneByField('session_id', $cart_session_id);
 
-            $cartId = $cart->id ?? $cart['id'] ;
+            $cartId = $cart->id ?? $cart['id'];
 
             $products = $this->getProducts($id);
 
@@ -67,6 +67,7 @@ class Cart {
 
             if($this->cartProduct->create($id)) {
                 session()->flash('Success', 'Product Added To Cart');
+
                 return redirect()->back();
             }
             return redirect()->back();
@@ -287,13 +288,13 @@ class Cart {
      */
     public function handleMerge() {
 
-        // $productsInCookie = unserialize(Cookie::get('session_c'));
-
         $cart_session_id = Cookie::get('cart_session_id');
 
-        $cart = $this->cart->findOneByField('session_id');
+        $cart = $this->cart->findOneByField('session_id', $cart_session_id);
 
         $cartId = $cart->id ?? $cart['id'];
+
+        $currentCartProducts = $this->cart->getProducts($cartId);
 
         $data['customer_id'] = auth()->guard('customer')->user()->id;
 
@@ -311,39 +312,43 @@ class Cart {
 
                 foreach($customerCartProducts as $previousCartProduct) {
 
-                    foreach($productsInCookie as $key => $productInCookie) {
+                    foreach($currentCartProducts as $key => $currentCartProduct) {
 
-                        if($previousCartProduct->id == $productInCookie) {
+                        if($previousCartProduct->id == $currentCartProduct) {
 
-                            unset($productsInCookie[$key]);
+                            unset($currentCartProducts[$key]);
                         }
                     }
                 }
             }
 
-            /*if the above block executes it will remove duplicates
-            else product in cookies will be stored in the database.*/
+            /*
+                if the above block executes it will remove duplicates
+                else product in cookies will be stored in the database.
+            */
+            $this->cart->findOneByField('session_id', $cart_session_id)->update($data['customer_id']);
 
-            foreach($productsInCookie as $key => $cookieProduct) {
+            foreach($currentCartProducts as $key => $currentCartProduct) {
 
-                $product['product_id'] = $cookieProduct;
+                $product['product_id'] = $currentCartProduct;
 
-                $product['quantity'] = 1;
+                $product['quantity'] = 1; //initialize the qty from the params passed from post
 
                 $product['cart_id'] = $customerCartId;
 
                 $this->cartProduct->create($product);
             }
 
-            //forget that cookie here.
-            Cookie::queue(Cookie::forget('session_c'));
+            //forget the cart cookie that holds the cart session id
+            Cookie::queue(Cookie::forget('cart_session_id'));
+            return redirect()->back();
         } else {
 
             if($cart = $this->cart->create($data)) {
 
-                foreach($productsInCookie as $productInCookie) {
+                foreach($currentCartProducts as $currentCartProduct) {
 
-                    $product['product_id'] = $cookieProduct;
+                    $product['product_id'] = $currentCartProduct;
 
                     $product['quantity'] = 1;
 
