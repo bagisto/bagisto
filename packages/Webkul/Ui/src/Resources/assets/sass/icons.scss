@@ -168,6 +168,18 @@
     height: 24px;
 }
 
+.arrow-down-white-icon {
+    background-image: url("../images/down-arrow-white.svg");
+    width: 17px;
+    height: 13px;
+}
+
+.arrow-up-white-icon {
+    background-image: url("../images/up-arrow-white.svg");
+    width: 17px;
+    height: 13px;
+}
+
 .active {
     .dashboard-icon {
         background-image: url("../images/Icon-Dashboard-Active.svg");

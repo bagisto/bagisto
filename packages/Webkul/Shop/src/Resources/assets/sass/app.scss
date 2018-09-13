@@ -800,10 +800,18 @@ section.slider-block {
 
     .product-card {
 
-        .product-image img {
-            align-self: center;
-            width: 100%;
-            margin-bottom: 14px;
+        .product-image {
+            background: #F2F2F2;
+            margin-bottom: 10px;
+            // width: 380px;
+            // max-width: 100%;
+            // text-align: center;
+
+            img {
+                align-self: center;
+                width: 100%;
+                margin-bottom: 14px;
+            }
         }
 
         .product-name {
@@ -1336,9 +1344,10 @@ section.product-detail {
     }
 
     div.layouter {
-        display:flex;
-        flex-flow: row;
-        margin-top: 21px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: inline-block;
+        width: 100%;
 
         .mixed-group {
 
@@ -1453,20 +1462,74 @@ section.product-detail {
         }
 
         div.product-image-group {
-            display:flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            margin-right: 2.5%;
+            width: 43%;
+            float: left;
+            min-height: 1px;
+            position: relative;
 
-            .side-group {
+            .thumb-list {
                 display: flex;
                 flex-direction: column;
                 margin-right: 4px;
+                height: 480px;
+                overflow: hidden;
+                position: relative;
+                float: left;
+
+                .thumb-frame {
+                    border: 2px solid transparent;
+                    background: #F2F2F2;
+                    width: 120px;
+                    height: 120px;
+
+                    &.active {
+                        border-color: #979797;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .gallery-control {
+                    width: 100%;
+                    position: absolute;
+                    text-align: center;
+                    cursor: pointer;
+                    z-index: 1;
+
+                    .overlay {
+                        opacity: 0.3;
+                        background: #000000;
+                        width: 100%;
+                        height: 18px;
+                        position: absolute;
+                        left: 0;
+                        z-index: -1;
+                    }
+
+                    .icon {
+                        z-index: 2;
+                    }
+
+                    &.top {
+                        top: 0;
+                    }
+
+                    &.bottom {
+                        bottom: 0;
+                    }
+                }
             }
 
             .product-hero-image {
                 display: block;
                 position: relative;
+                background: #F2F2F2;
+                width: 480px;
+                max-height: 480px;
+                float: left;
 
                 .wishlist {
                     position: absolute;
@@ -1483,6 +1546,9 @@ section.product-detail {
         }
 
         .details {
+            width: 57%;
+            float: left;
+
             .product-price {
                 margin-bottom: 14px;
             }

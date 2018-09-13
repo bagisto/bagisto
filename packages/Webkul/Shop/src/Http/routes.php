@@ -14,23 +14,6 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::customers.checkout.index'
     ])->name('shop.checkout');
 
-
-    /* dummy routes */
-    Route::view('/customer/order','shop::customers.account.orders.index');
-
-    // Route::view('/customer/checkout','shop::customers.checkout.index');
-
-    Route::view('/customer/signin','shop::customers.checkout.signin');
-
-    Route::view('/customer/ship_method','shop::customers.checkout.ship-method');
-
-    Route::view('/customer/payment_method','shop::customers.checkout.payment-method');
-
-    Route::view('/customer/payment_complete','shop::customers.checkout.complete');
-
-    Route::view('/test','shop::index');
-
-
     /* dummy routes ends here */
 
 
@@ -51,6 +34,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
         'redirect' => 'shop.reviews.index'
     ])->name('shop.reviews.store');
+
+    Route::post('/reviews/create/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
+        'redirect' => 'admin.reviews.index'
+    ])->name('admin.reviews.store');
 
     // Route::post('/reviews/create/{slug}', 'Webkul\Core\Http\Controllers\ReviewController@store')->defaults('_config', [
     //     'redirect' => 'admin.reviews.index'

@@ -242,7 +242,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
         'ProductGrid' => Webkul\Ui\DataGrid\Facades\ProductGrid::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Core' => Webkul\Core\Facades\Core::class
     ],
 
 ];
