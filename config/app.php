@@ -243,6 +243,7 @@ return [
         'ProductGrid' => Webkul\Ui\DataGrid\Facades\ProductGrid::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Cart' => Webkul\Cart\Facades\Cart::class,
+        'Core' => Webkul\Core\Facades\Core::class
     ],
 
 ];
