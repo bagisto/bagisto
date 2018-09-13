@@ -1,9 +1,4 @@
 
-@extends('shop::layouts.master')
-
-@section('content-wrapper')
-
-@include('shop::customers.checkout.common')
 
 <div class="ship-method">
     <div class="ship-info">
@@ -14,7 +9,8 @@
 
     <div class="ship-price">
         <div class="price-checkbox">
-            <img src="{{asset('themes/default/assets/images/selected.svg')}}" />
+            {{--  <img src="{{asset('themes/default/assets/images/selected.svg')}}" />  --}}
+            <input type="radio" name="gender" value="male" checked>
             <span> $ 25.00 </span>
         </div>
         <div class="price-checkbox-text">
@@ -45,7 +41,7 @@
         </div>
     </div>
 
-    
+
     <div class="horizontal-rule">
     </div>
 
@@ -54,4 +50,3 @@
     </div>
 </div>
 
-@endsection

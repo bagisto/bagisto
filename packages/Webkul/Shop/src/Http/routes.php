@@ -10,10 +10,15 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.index'
     ]);
 
+    Route::get('/checkout', 'Webkul\Cart\Http\Controllers\CheckoutController@index')->defaults('_config', [
+        'view' => 'shop::customers.checkout.index'
+    ])->name('shop.checkout');
+
+
     /* dummy routes */
     Route::view('/customer/order','shop::customers.account.orders.index');
 
-    Route::view('/customer/checkout','shop::customers.checkout.index');
+    // Route::view('/customer/checkout','shop::customers.checkout.index');
 
     Route::view('/customer/signin','shop::customers.checkout.signin');
 
@@ -22,6 +27,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::view('/customer/payment_method','shop::customers.checkout.payment-method');
 
     Route::view('/customer/payment_complete','shop::customers.checkout.complete');
+
+    Route::view('/test','shop::index');
+
+
     /* dummy routes ends here */
 
 

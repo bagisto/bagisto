@@ -878,6 +878,15 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   margin-bottom: 14px;
 }
 
+.main-container-wrapper .product-card .product-ratings .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.main-container-wrapper .product-card .product-ratings .total-reviews {
+  display: none;
+}
+
 .main-container-wrapper .product-card .cart-fav-seg {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -1390,16 +1399,16 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   min-height: 345px;
 }
 
-section.product-detail, section.product-review {
+section.product-detail {
   font-size: 16px;
   color: #242424;
 }
 
-section.product-detail div.category-breadcrumbs, section.product-review div.category-breadcrumbs {
+section.product-detail div.category-breadcrumbs {
   display: inline;
 }
 
-section.product-detail div.layouter, section.product-review div.layouter {
+section.product-detail div.layouter {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1410,32 +1419,32 @@ section.product-detail div.layouter, section.product-review div.layouter {
   margin-top: 21px;
 }
 
-section.product-detail div.layouter .mixed-group .single-image, section.product-review div.layouter .mixed-group .single-image {
+section.product-detail div.layouter .mixed-group .single-image {
   padding: 2px;
 }
 
-section.product-detail div.layouter .mixed-group .single-image img, section.product-review div.layouter .mixed-group .single-image img {
+section.product-detail div.layouter .mixed-group .single-image img {
   height: 280px;
   width: 280px;
 }
 
-section.product-detail div.layouter .mixed-group .details .product-name, section.product-review div.layouter .mixed-group .details .product-name {
+section.product-detail div.layouter .mixed-group .details .product-name {
   margin-top: 20px;
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-section.product-detail div.layouter .mixed-group .details .product-price, section.product-review div.layouter .mixed-group .details .product-price {
+section.product-detail div.layouter .mixed-group .details .product-price {
   margin-bottom: 14px;
 }
 
-section.product-detail div.layouter .rating-reviews, section.product-review div.layouter .rating-reviews {
+section.product-detail div.layouter .rating-reviews {
   margin-top: 0px;
   width: 50%;
   margin-left: 20px;
 }
 
-section.product-detail div.layouter .rating-reviews .title-inline, section.product-review div.layouter .rating-reviews .title-inline {
+section.product-detail div.layouter .rating-reviews .title-inline {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -1449,12 +1458,12 @@ section.product-detail div.layouter .rating-reviews .title-inline, section.produ
   width: 100%;
 }
 
-section.product-detail div.layouter .rating-reviews .title-inline button, section.product-review div.layouter .rating-reviews .title-inline button {
+section.product-detail div.layouter .rating-reviews .title-inline button {
   float: right;
   border-radius: 0px !important;
 }
 
-section.product-detail div.layouter .rating-reviews .overall, section.product-review div.layouter .rating-reviews .overall {
+section.product-detail div.layouter .rating-reviews .overall {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1471,19 +1480,19 @@ section.product-detail div.layouter .rating-reviews .overall, section.product-re
   height: 150px;
 }
 
-section.product-detail div.layouter .rating-reviews .overall .left-side, section.product-review div.layouter .rating-reviews .overall .left-side {
+section.product-detail div.layouter .rating-reviews .overall .left-side {
   margin-bottom: 20px;
 }
 
-section.product-detail div.layouter .rating-reviews .overall .left-side .number, section.product-review div.layouter .rating-reviews .overall .left-side .number {
+section.product-detail div.layouter .rating-reviews .overall .left-side .number {
   font-size: 34px;
 }
 
-section.product-detail div.layouter .rating-reviews .overall .right-side, section.product-review div.layouter .rating-reviews .overall .right-side {
+section.product-detail div.layouter .rating-reviews .overall .right-side {
   display: block;
 }
 
-section.product-detail div.layouter .rating-reviews .overall .right-side .rater, section.product-review div.layouter .rating-reviews .overall .right-side .rater {
+section.product-detail div.layouter .rating-reviews .overall .right-side .rater {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -1492,52 +1501,52 @@ section.product-detail div.layouter .rating-reviews .overall .right-side .rater,
           align-items: center;
 }
 
-section.product-detail div.layouter .rating-reviews .overall .right-side .rater .star, section.product-review div.layouter .rating-reviews .overall .right-side .rater .star {
+section.product-detail div.layouter .rating-reviews .overall .right-side .rater .star {
   width: 50px;
   height: 20px;
   padding: 1px;
   margin-right: 8px;
 }
 
-section.product-detail div.layouter .rating-reviews .overall .right-side .rater .line-bar, section.product-review div.layouter .rating-reviews .overall .right-side .rater .line-bar {
+section.product-detail div.layouter .rating-reviews .overall .right-side .rater .line-bar {
   height: 4px;
   width: 158px;
   margin-right: 12px;
   background: #D8D8D8;
 }
 
-section.product-detail div.layouter .rating-reviews .overall .right-side .rater .line-bar .line-value, section.product-review div.layouter .rating-reviews .overall .right-side .rater .line-bar .line-value {
+section.product-detail div.layouter .rating-reviews .overall .right-side .rater .line-bar .line-value {
   background-color: #0031F0;
 }
 
-section.product-detail div.layouter .rating-reviews .reviews, section.product-review div.layouter .rating-reviews .reviews {
+section.product-detail div.layouter .rating-reviews .reviews {
   margin-top: 34px;
   margin-bottom: 90px;
 }
 
-section.product-detail div.layouter .rating-reviews .reviews .review, section.product-review div.layouter .rating-reviews .reviews .review {
+section.product-detail div.layouter .rating-reviews .reviews .review {
   margin-bottom: 25px;
 }
 
-section.product-detail div.layouter .rating-reviews .reviews .review .title, section.product-review div.layouter .rating-reviews .reviews .review .title {
+section.product-detail div.layouter .rating-reviews .reviews .review .title {
   margin-bottom: 5px;
 }
 
-section.product-detail div.layouter .rating-reviews .reviews .review .stars, section.product-review div.layouter .rating-reviews .reviews .review .stars {
+section.product-detail div.layouter .rating-reviews .reviews .review .stars {
   margin-bottom: 15px;
 }
 
-section.product-detail div.layouter .rating-reviews .reviews .review .message, section.product-review div.layouter .rating-reviews .reviews .review .message {
+section.product-detail div.layouter .rating-reviews .reviews .review .message {
   margin-bottom: 10px;
 }
 
-section.product-detail div.layouter .rating-reviews .reviews .view-all, section.product-review div.layouter .rating-reviews .reviews .view-all {
+section.product-detail div.layouter .rating-reviews .reviews .view-all {
   margin-top: 15px;
   color: #0031f0;
   margin-bottom: 15px;
 }
 
-section.product-detail div.layouter div.product-image-group, section.product-review div.layouter div.product-image-group {
+section.product-detail div.layouter div.product-image-group {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1551,7 +1560,7 @@ section.product-detail div.layouter div.product-image-group, section.product-rev
   margin-right: 2.5%;
 }
 
-section.product-detail div.layouter div.product-image-group .side-group, section.product-review div.layouter div.product-image-group .side-group {
+section.product-detail div.layouter div.product-image-group .side-group {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1562,195 +1571,152 @@ section.product-detail div.layouter div.product-image-group .side-group, section
   margin-right: 4px;
 }
 
-section.product-detail div.layouter div.product-image-group .product-hero-image, section.product-review div.layouter div.product-image-group .product-hero-image {
+section.product-detail div.layouter div.product-image-group .product-hero-image {
   display: block;
   position: relative;
 }
 
-section.product-detail div.layouter div.product-image-group .product-hero-image .wishlist, section.product-review div.layouter div.product-image-group .product-hero-image .wishlist {
+section.product-detail div.layouter div.product-image-group .product-hero-image .wishlist {
   position: absolute;
   top: 10px;
   right: 12px;
 }
 
-section.product-detail div.layouter div.product-image-group .product-hero-image .share, section.product-review div.layouter div.product-image-group .product-hero-image .share {
+section.product-detail div.layouter div.product-image-group .product-hero-image .share {
   position: absolute;
   top: 10px;
   right: 45px;
 }
 
-section.product-detail div.layouter .details .product-heading, section.product-review div.layouter .details .product-heading {
+section.product-detail div.layouter .details .product-price {
+  margin-bottom: 14px;
+}
+
+section.product-detail div.layouter .details .product-ratings {
+  margin-bottom: 20px;
+}
+
+section.product-detail div.layouter .details .product-ratings .icon {
+  width: 16px;
+  height: 16px;
+}
+
+section.product-detail div.layouter .details .product-ratings .total-reviews {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+section.product-detail div.layouter .details .product-heading {
   font-size: 24px;
   color: #242424;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
 }
 
-section.product-detail div.layouter .details .rating, section.product-review div.layouter .details .rating {
-  color: #242424;
-  margin-bottom: 14px;
-}
-
-section.product-detail div.layouter .details .product-price, section.product-review div.layouter .details .product-price {
-  margin-bottom: 14px;
+section.product-detail div.layouter .details .product-price {
+  margin-bottom: 15px;
   font-size: 24px;
 }
 
-section.product-detail div.layouter .details .product-price .special-price, section.product-review div.layouter .details .product-price .special-price {
+section.product-detail div.layouter .details .product-price .special-price {
   font-size: 24px;
 }
 
-section.product-detail div.layouter .details .stock-status, section.product-review div.layouter .details .stock-status {
-  margin-bottom: 14px;
+section.product-detail div.layouter .details .stock-status {
+  margin-bottom: 15px;
 }
 
-section.product-detail div.layouter .details .description, section.product-review div.layouter .details .description {
-  margin-bottom: 14px;
+section.product-detail div.layouter .details .description {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: solid 1px rgba(162, 162, 162, 0.2);
 }
 
-section.product-detail div.layouter .details .full-specifications td, section.product-review div.layouter .details .full-specifications td {
+section.product-detail div.layouter .details .full-specifications td {
   padding: 10px 0;
   color: #5E5E5E;
 }
 
-section.product-detail div.layouter .details .full-specifications td:first-child, section.product-review div.layouter .details .full-specifications td:first-child {
+section.product-detail div.layouter .details .full-specifications td:first-child {
   padding-right: 40px;
 }
 
-section.product-detail div.layouter .details .accordian .accordian-header, section.product-review div.layouter .details .accordian .accordian-header {
+section.product-detail div.layouter .details .accordian .accordian-header {
   font-size: 16px;
   padding-left: 0;
   font-weight: 600;
 }
 
-section.product-detail div.layouter .details .attributes, section.product-review div.layouter .details .attributes {
+section.product-detail div.layouter .details .attributes {
   display: block;
   width: 100%;
+  border-bottom: solid 1px rgba(162, 162, 162, 0.2);
 }
 
-section.product-detail div.layouter .details .attributes .attribute, section.product-review div.layouter .details .attributes .attribute {
-  height: 39px;
-  margin-bottom: 20px;
-}
-
-section.product-detail div.layouter .details .attributes .attribute .title, section.product-review div.layouter .details .attributes .attribute .title {
-  float: left;
-  height: 100%;
-  min-width: 130px;
-  padding-top: 9px;
-}
-
-section.product-detail div.layouter .details .attributes .attribute .values, section.product-review div.layouter .details .attributes .attribute .values {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-}
-
-section.product-detail div.layouter .details .attributes .attribute .values .colors, section.product-review div.layouter .details .attributes .attribute .values .colors {
-  margin-right: 5px;
-}
-
-section.product-detail div.layouter .details .attributes .attribute .values .colors:last-child, section.product-review div.layouter .details .attributes .attribute .values .colors:last-child {
-  margin-right: 0;
-}
-
-section.product-detail div.layouter .details .attributes .attribute .values .red, section.product-review div.layouter .details .attributes .attribute .values .red {
-  height: 37px;
-  width: 37px;
-  background: red;
-  border: 1px solid #c7c7c7;
-  border-radius: 2px;
-}
-
-section.product-detail div.layouter .details .attributes .attribute .values .blue, section.product-review div.layouter .details .attributes .attribute .values .blue {
-  height: 37px;
-  width: 37px;
-  background: blue;
-  border: 1px solid #c7c7c7;
-  border-radius: 2px;
-}
-
-section.product-detail div.layouter .details .attributes .attribute .values .green, section.product-review div.layouter .details .attributes .attribute .values .green {
-  height: 37px;
-  width: 37px;
-  background: green;
-  border: 1px solid #c7c7c7;
-  border-radius: 2px;
-}
-
-section.product-detail div.layouter .details .attributes .attribute .values .size, section.product-review div.layouter .details .attributes .attribute .values .size {
-  margin-right: 5px;
-  line-height: 38px;
-  height: 37px;
-  width: 60px;
-  border: 1px solid #c7c7c7;
-  border-radius: 2px;
-  text-align: center;
-  vertical-align: middle;
-}
-
-section.product-detail div.layouter .details .attributes .attribute .values .size:last-child, section.product-review div.layouter .details .attributes .attribute .values .size:last-child {
-  margin-right: 0;
-}
-
-section.product-detail div.layouter .details .attributes .attribute .values .quantity .values .control, section.product-review div.layouter .details .attributes .attribute .values .quantity .values .control {
-  height: 37px !important;
-  width: 30px !important;
-}
-
-section.product-detail div.layouter .details .full-description, section.product-review div.layouter .details .full-description {
+section.product-detail div.layouter .details .full-description {
   font-size: 16px;
 }
 
-section.product-detail div.layouter .details .rating-reviews, section.product-review div.layouter .details .rating-reviews {
-  margin-top: 30px;
-}
-
-section.product-detail div.layouter .details .rating-reviews .title, section.product-review div.layouter .details .rating-reviews .title {
-  margin-bottom: 15px;
+.rating-reviews .rating-header {
   font-weight: 600;
+  padding: 20px 0;
 }
 
-section.product-detail div.layouter .details .rating-reviews .overall, section.product-review div.layouter .details .rating-reviews .overall {
-  margin-bottom: 5px;
+.rating-reviews .stars .icon {
+  width: 16px;
+  height: 16px;
 }
 
-section.product-detail div.layouter .details .rating-reviews .overall .review-info .number, section.product-review div.layouter .details .rating-reviews .overall .review-info .number {
+.rating-reviews .overall {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.rating-reviews .overall .review-info .number {
   font-size: 34px;
 }
 
-section.product-detail div.layouter .details .rating-reviews .overall button, section.product-review div.layouter .details .rating-reviews .overall button {
-  float: right;
-  border-radius: 0px !important;
+.rating-reviews .overall .review-info .total-reviews {
+  margin-top: 10px;
 }
 
-section.product-detail div.layouter .details .rating-reviews .reviews, section.product-review div.layouter .details .rating-reviews .reviews {
-  margin-top: 34px;
-  margin-bottom: 80px;
+.rating-reviews .reviews {
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
-section.product-detail div.layouter .details .rating-reviews .reviews .review, section.product-review div.layouter .details .rating-reviews .reviews .review {
+.rating-reviews .reviews .review {
   margin-bottom: 25px;
 }
 
-section.product-detail div.layouter .details .rating-reviews .reviews .review .stars, section.product-review div.layouter .details .rating-reviews .reviews .review .stars {
+.rating-reviews .reviews .review .title {
+  margin-bottom: 5px;
+}
+
+.rating-reviews .reviews .review .stars {
   margin-bottom: 15px;
   display: inline-block;
 }
 
-section.product-detail div.layouter .details .rating-reviews .reviews .review .stars .icon, section.product-review div.layouter .details .rating-reviews .reviews .review .stars .icon {
-  width: 18px;
-  height: 18px;
-}
-
-section.product-detail div.layouter .details .rating-reviews .reviews .review .message, section.product-review div.layouter .details .rating-reviews .reviews .review .message {
+.rating-reviews .reviews .review .message {
   margin-bottom: 10px;
 }
 
-section.product-detail div.layouter .details .rating-reviews .reviews .review .reviewer-details, section.product-review div.layouter .details .rating-reviews .reviews .review .reviewer-details {
+.rating-reviews .reviews .review .reviewer-details {
   color: #5E5E5E;
 }
 
-section.product-detail div.layouter .details .rating-reviews .reviews .view-all, section.product-review div.layouter .details .rating-reviews .reviews .view-all {
+.rating-reviews .reviews .view-all {
   margin-top: 15px;
   color: #0031f0;
   margin-bottom: 15px;
@@ -2911,14 +2877,6 @@ section.cart .cart-content .right-side .coupon-section .after-coupon-amount .amo
 
 .order-info .sign-in {
   float: right;
-  background: #0031F0;
-  font-size: 14px;
-  color: #FFFFFF;
-  letter-spacing: -0.26px;
-  text-align: center;
-  height: 38px;
-  width: 103px;
-  border: none;
 }
 
 .order-info .control-group {
@@ -2957,17 +2915,6 @@ section.cart .cart-content .right-side .coupon-section .after-coupon-amount .amo
 
 .order-info .countinue-button {
   margin-top: 3%;
-}
-
-.order-info .countinue-button button {
-  background: #0031F0;
-  font-size: 14px;
-  color: #FFFFFF;
-  letter-spacing: -0.26px;
-  text-align: center;
-  height: 38px;
-  width: 137px;
-  border: none;
 }
 
 @media all and (max-width: 480px) {

@@ -3,7 +3,7 @@
 
 @section('content-wrapper')
 
-@include('shop::customers.checkout.common')
+@include('shop::customers.checkout.common.common')
 
 <div class="payment-method">
     <div class="payment-info">
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-   
+
     <div class="horizontal-rule">
     </div>
 

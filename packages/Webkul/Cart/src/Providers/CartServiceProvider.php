@@ -11,7 +11,7 @@ class CartServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
 
-        $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
+        // $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
     }

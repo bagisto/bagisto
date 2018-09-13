@@ -3,15 +3,13 @@
 namespace Webkul\Shipping\Contracts;
 
 /**
- * Interface ShippingInterface
+ * Abstract class Shipping
  * @author Rahul Shukla <rahulshukla.symfony517@webkul.com>
  */
-
-interface ShippingInterface
+abstract class AbstractShipping
 {
 
-    public function calculate();
-
+    abstract public function calculate();
 
 }
 

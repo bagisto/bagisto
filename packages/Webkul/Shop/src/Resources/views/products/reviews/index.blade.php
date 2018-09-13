@@ -1,6 +1,7 @@
 @inject ('reviewHelper', 'Webkul\Product\Product\Review')
 @inject ('priceHelper', 'Webkul\Product\Product\Price')
 
+
 @extends('shop::layouts.master')
 @section('content-wrapper')
     <section class="product-review">

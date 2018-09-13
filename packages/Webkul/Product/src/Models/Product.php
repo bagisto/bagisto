@@ -133,6 +133,22 @@ class Product extends Model
     }
 
     /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function isSaleable()
+    {
+        if($this->status) {
+            if($this->inventories->sum('qty')) {
+                return true;
+            }
+        }
+    
+        return false;
+    }
+
+    /**
      * Get an attribute from the model.
      *
      * @param  string  $key
