@@ -66,6 +66,8 @@ class CartController extends Controller
         } else {
             Cart::guestUnitAdd($id);
         }
+
+        return redirect()->back();
     }
 
     public function remove($id) {
@@ -75,5 +77,7 @@ class CartController extends Controller
         } else {
             Cart::guestUnitRemove($id);
         }
+
+        return redirect()->back();
     }
 }

@@ -8,6 +8,8 @@ body {
     margin: 0;
     padding: 0;
     font-weight: 500;
+    max-width: 100%;
+    width: auto;
     color: $font-color;
     font-size: $font-size-base;
 }
@@ -23,8 +25,8 @@ body {
     .header-top {
         margin-bottom: 16px;
         display: flex;
-        max-width: 80%;
-        width: 100%;
+        max-width: 100%;
+        width: auto;
         margin-left: auto;
         margin-right: auto;
         align-items: center;
@@ -187,7 +189,8 @@ body {
             display: block;
             font-size:16px;
             height: 48px;
-            width: 80%;
+            max-width: 100%;
+            width: auto;
             margin-left: auto;
             margin-right: auto;
         }
@@ -610,10 +613,11 @@ body {
 
 section.slider-block {
     display: block;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 5%;
 
     div.slider-content {
-        width: 80%;
         height: 500px;
         margin-left: auto;
         margin-right: auto;
@@ -763,17 +767,14 @@ section.slider-block {
 
 
 .main-container-wrapper {
-    margin-left: 10%;
-    margin-right: 10%;
+    max-width: 80%;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
 
     .content-container {
         display: inline-block;
         width: 100%;
-    }
-
-    .main {
-        display: inline-block;
-        width: 75%
     }
 
     .product-grid {
@@ -781,36 +782,27 @@ section.slider-block {
         grid-gap: 30px;
 
         &.max-2-col {
-            grid-template-columns: repeat(2, minmax(250px, 1fr));
+            grid-template-columns: repeat(2, minmax(auto, 1fr));
         }
 
         &.max-3-col {
-            grid-template-columns: repeat(3, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, minmax(auto, 1fr));
         }
 
         &.max-4-col {
-            grid-template-columns: repeat(4, minmax(250px, 1fr));
-        }
-
-        .product-card {
-            display: flex;
-            flex-flow: column;
-            justify-content: center;
+            grid-template-columns: repeat(4, minmax(auto, 1fr));
         }
     }
 
     .product-card {
 
         .product-image {
-            background: #F2F2F2;
             margin-bottom: 10px;
-            // width: 380px;
-            // max-width: 100%;
-            // text-align: center;
 
             img {
                 align-self: center;
-                width: 100%;
+                max-width: 100%;
+                width: auto;
                 margin-bottom: 14px;
             }
         }

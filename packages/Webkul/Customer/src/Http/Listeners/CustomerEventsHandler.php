@@ -27,7 +27,7 @@ class CustomerEventsHandler {
          * check emptiness and then
          * do the appropriate actions.
          */
-        Cart::handleMerge();
+        Cart::mergeCart();
     }
 
     /**

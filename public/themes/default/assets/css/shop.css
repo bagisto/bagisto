@@ -27,6 +27,8 @@ body {
   margin: 0;
   padding: 0;
   font-weight: 500;
+  max-width: 100%;
+  width: auto;
   color: #242424;
   font-size: 16px;
 }
@@ -45,8 +47,8 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  max-width: 80%;
-  width: 100%;
+  max-width: 100%;
+  width: auto;
   margin-left: auto;
   margin-right: auto;
   -webkit-box-align: center;
@@ -260,7 +262,8 @@ body {
   display: block;
   font-size: 16px;
   height: 48px;
-  width: 80%;
+  max-width: 100%;
+  width: auto;
   margin-left: auto;
   margin-right: auto;
 }
@@ -645,11 +648,12 @@ body {
 
 section.slider-block {
   display: block;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 5%;
 }
 
 section.slider-block div.slider-content {
-  width: 80%;
   height: 500px;
   margin-left: auto;
   margin-right: auto;
@@ -806,18 +810,15 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 }
 
 .main-container-wrapper {
-  margin-left: 10%;
-  margin-right: 10%;
+  max-width: 80%;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .main-container-wrapper .content-container {
   display: inline-block;
   width: 100%;
-}
-
-.main-container-wrapper .main {
-  display: inline-block;
-  width: 75%;
 }
 
 .main-container-wrapper .product-grid {
@@ -826,39 +827,26 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 }
 
 .main-container-wrapper .product-grid.max-2-col {
-  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  grid-template-columns: repeat(2, minmax(auto, 1fr));
 }
 
 .main-container-wrapper .product-grid.max-3-col {
-  grid-template-columns: repeat(3, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, minmax(auto, 1fr));
 }
 
 .main-container-wrapper .product-grid.max-4-col {
-  grid-template-columns: repeat(4, minmax(250px, 1fr));
-}
-
-.main-container-wrapper .product-grid .product-card {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  grid-template-columns: repeat(4, minmax(auto, 1fr));
 }
 
 .main-container-wrapper .product-card .product-image {
-  background: #F2F2F2;
   margin-bottom: 10px;
 }
 
 .main-container-wrapper .product-card .product-image img {
   -ms-flex-item-align: center;
       align-self: center;
-  width: 100%;
+  max-width: 100%;
+  width: auto;
   margin-bottom: 14px;
 }
 

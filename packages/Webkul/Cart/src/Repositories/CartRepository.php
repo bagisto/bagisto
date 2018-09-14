@@ -61,29 +61,18 @@ class CartRepository extends Repository
      * Method to attach
      * associations
      *
-     * @return mixed
+     * @return Eloquent
     */
-    // public function onlyAttach($id, $taxRates) {
+    public function attach($cart_id, $product_id, $quantity) {
 
-    //     foreach($taxRates as $key => $value) {
+        $this->model->findOrFail($cart_id)->with_products()->attach($cart_id, ['product_id' => $product_id, 'cart_id' => $cart_id, 'quantity' => $quantity]);
 
-    //         $this->model->findOrFail($id)->tax_rates()->attach($id, ['tax_category_id' => $id, 'tax_rate_id' => $value]);
-    //     }
-    // }
-
+    }
 
     /**
      * Method to detach
-     * and attach the
      * associations
      *
-     * @return mixed
-    */
-    // public function syncAndDetach($id, $taxRates) {
-    //     $this->model->findOrFail($id)->tax_rates()->detach();
-
-    //     foreach($taxRates as $key => $value) {
-    //         $this->model->findOrFail($id)->tax_rates()->attach($id, ['tax_category_id' => $id, 'tax_rate_id' => $value]);
-    //     }
-    // }
+     * @return Eloquent
+     */
 }

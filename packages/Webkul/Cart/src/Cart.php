@@ -47,43 +47,152 @@ class Cart {
 
         $minutes = 10;
 
-        if(Cookie::get('current_session_id')) {
+        if(Cookie::has('cart_session_id')) {
 
             $cart_session_id = Cookie::get('cart_session_id');
 
-            $cart = $this->cart->getOneByField('session_id', $cart_session_id);
+            $current_cart = $this->cart->findOneByField('session_id', $cart_session_id);
 
-            $cartId = $cart->id ?? $cart['id'];
+            // dd('Cookie = ',$cart_session_id, 'Session = ', session()->get('cart_session_id'), 'DB = ', $current_cart->session_id);
 
-            $products = $this->getProducts($id);
+            if(isset($current_cart)) {
+                $current_cart_id = $current_cart['id'] ?? $current_cart->id;
 
-            foreach($products as $key => $value) {
-                if($value == $id) {
-                    dd('product already in the cart');
-
-                    return redirect()->back();
-                }
+                $current_cart_session_id = $current_cart['session_id'] ?? $current_cart->session_id;
+            } else {
+                $this->repairCart($cart_session_id, $id);
             }
 
-            if($this->cartProduct->create($id)) {
-                session()->flash('Success', 'Product Added To Cart');
+
+            if((session()->get('cart_session_id') == Cookie::get('cart_session_id')) && ($current_cart_session_id == session()->get('cart_session_id'))) {
+                $current_cart_products = array();
+
+                $current_cart_products = $this->cart->getProducts($current_cart_id);
+
+                foreach($current_cart_products as $key => $value) {
+
+                    $product_id = $value['id'] ?? $value->id;
+
+                    if($product_id == $id) {
+                        session()->flash('error', 'Item Already In Cart');
+
+                        dump('Item Already In Cart');
+
+                        return redirect()->back();
+                    }
+                }
+
+                $cart_data = $this->cart->attach($current_cart_id, $id, 1);
+
+                $cart_products = $this->cart->getProducts($current_cart_id);
+
+                session()->put('cart_data', [$current_cart, $cart_products]);
+
+                session()->flash('Success', 'Item Added In Cart');
+
+                dump($cart_products);
+
+                return redirect()->back();
+
+            } else {
+                // throw new \Exception('Error, Many or Few Session discrepancies found.');
+
+                $this->repairCart($cart_session_id, $id);
+            }
+        } else {
+            $this->createNewCart($id);
+        }
+    }
+
+    /*helpers*/
+    public function makeCartSession($to_process) {
+        session()->put('cart_session_id', $to_process);
+
+        return session()->get('cart_session_id');
+    }
+
+    /**
+     * Create New Cart
+     * Cart, Cookie &
+     * Session.
+     *
+     * @return mixed
+     */
+
+    public function createNewCart($id) {
+        $minutes = 120;
+
+        $fresh_cart_session_id = session()->getId();
+
+        Cookie::queue('cart_session_id', $fresh_cart_session_id, $minutes);
+
+        $cart_session_id = $this->makeCartSession($fresh_cart_session_id);
+
+        $data['session_id'] = $fresh_cart_session_id;
+
+        $data['channel_id'] = core()->getCurrentChannel()->id;
+
+        if($cart = $this->cart->create($data)) {
+
+            $new_cart_id = $cart->id ?? $cart['id'];
+
+            $cart_product['product_id'] = $id;
+
+            $cart_product['quantity'] = 1;
+
+            $cart_product['cart_id'] = $new_cart_id;
+
+            if($cart_product = $this->cart->attach($new_cart_id, $cart_product['product_id'], $cart_product['quantity'])) {
+
+                session()->put('cart_data', [$cart, $cart_product]);
+
+                session()->flash('success', 'Product Added To Cart');
 
                 return redirect()->back();
             }
-            return redirect()->back();
+        }
+        session()->flash('error', 'Some Error Occured');
 
-        } else {
-            Cookie::queue('cart_session_id', session()->id(), $minutes);
+        return redirect()->back();
+    }
 
-            $data['session_id'] = Cookie::get('cart_session_id');
+    /**
+     * Reset Session and
+     * Cookie values
+     * and sync database
+     * if present.
+     *
+     * @return mixed
+     */
+
+    public function repairCart($cart_session_id, $product_id) {
+
+        if($cart_session_id == session()->get('cart_session_id')) {
+            $data['session_id'] = $cart_session_id;
 
             $data['channel_id'] = core()->getCurrentChannel()->id;
 
-            if($this->cart->create($data)) {
-                if($this->cartProduct->create($product)) {
-                    session()->flash('Success', 'Product Added To Cart');
-                }
-            }
+            $cart = $this->cart->create($data);
+
+            $cart_id = $cart['id'] ?? $cart->id;
+
+            $this->cart->attach($cart_id, $product_id, 1);
+
+            session()->flash('success', 'Product Added In Cart');
+
+            return redirect()->back();
+
+        } else {
+
+            Cookie::queue(Cookie::forget('cart_session_id'));
+
+            session()->forget('cart_session_id');
+
+            session()->regenerate();
+
+            session()->flash('error', 'Please Try Adding Product Again.');
+
+            return redirect()->back();
         }
     }
 
@@ -165,108 +274,6 @@ class Cart {
 
             return redirect()->back();
         }
-        // }
-
-        //     //case when cookie has products and customer also have data in cart tables
-        //     if(isset($customerCart)  && isset($cartCookie)) {
-        //         //for unsetting the cookie for the cart uncomment after all done
-        //         // Cookie::queue(Cookie::forget('session_c'));
-
-        //         //check if there is any repetition in the products
-        //         $customerCartId = $customerCart->id ?? $customerCart['id'];
-
-        //         //to check if the customer is also having some products saved in the pivot
-        //         //for the products.
-        //         $customerCartProducts = $this->cart->getProducts($customerCartId);
-
-        //         //if there are products already in cart of that customer
-        //         if(isset($customerCartProducts)) {
-
-        //             foreach($customerCartProducts as $previousCartProduct) {
-
-        //                 dump($customerCartProducts);
-
-        //                 foreach($cookieProducts as $key => $cookieProduct) {
-
-        //                     if($previousCartProduct->id == $cookieProduct) {
-
-        //                         unset($cookieProducts[$key]);
-        //                     }
-        //                 }
-        //             }
-        //         }
-
-        //         /*if the above block executes it will remove duplicates
-        //         else product in cookies will be stored in the database.*/
-
-        //         foreach($cookieProducts as $key => $cookieProduct) {
-
-        //             $product['product_id'] = $cookieProduct;
-
-        //             $product['quantity'] = 1;
-
-        //             $product['cart_id'] = $customerCartId;
-
-        //             $this->cartProduct->create($product);
-        //         }
-
-        //         dump('Products in the cart synced.');
-
-        //         return redirect()->back();
-
-        //     } else if(isset($customerCart)  && !isset($cartCookie)) {
-        //         //case when there is no data in guest's cart
-
-        //         $customerCartId = $customerCart->id ?? $customerCart['id'];
-
-        //         $customerCartProducts = $this->cart->getProducts($customerCartId);
-
-        //         foreach($customerCartProducts as $previousCartProduct) {
-
-        //             if($previousCartProduct->id == $id) {
-
-        //                 dd('product already in the cart::AUTH');
-
-        //                 return redirect()->back();
-        //             }
-        //         }
-        //         $product['product_id'] = $id;
-
-        //         $product['quantity'] = 1;
-
-        //         $product['cart_id'] = $customerCartId;
-
-        //         $this->cartProduct->create($product);
-
-        //         dump('new item added in the cart');
-
-        //         return redirect()->back();
-
-        //     } else if(!isset($customerCart)  && isset($cartCookie)) {
-
-        //         $products = unserialize(Cookie::get('session_c'));
-
-        //         if ($cart = $this->cart->create($data)) {
-
-        //             foreach($products as $product) {
-
-        //                $product['product_id'] = $id;
-
-        //                $product['quantity'] = 1;
-
-        //                $product['cart_id'] = $cart;
-
-        //                $this->cartProduct->create($product);
-        //             }
-        //             return redirect()->back();
-
-        //         } else {
-        //             session()->flash('error', 'Cannot Add Your Items To Cart');
-
-        //             return redirect()->back();
-        //         }
-        //     }
-        // }
     }
 
     /**
@@ -286,79 +293,104 @@ class Cart {
      * with the existing data of cart
      * in the cart tables;
      */
-    public function handleMerge() {
+    public function mergeCart() {
 
-        $cart_session_id = Cookie::get('cart_session_id');
+        if(Cookie::has('cart_session_id')) {
 
-        $cart = $this->cart->findOneByField('session_id', $cart_session_id);
+            $cart_session_id = Cookie::get('cart_session_id');
 
-        $cartId = $cart->id ?? $cart['id'];
+            $current_cart = $this->cart->findOneByField('session_id', $cart_session_id);
 
-        $currentCartProducts = $this->cart->getProducts($cartId);
+            //it is impossible to not have an entry in cart table and cart_products.
+            //will later handle the exceoption.
+            $current_cart_id = $current_cart['id'] ?? $current_cart->id;
 
-        $data['customer_id'] = auth()->guard('customer')->user()->id;
+            $current_cart_session_id = $current_cart['session_id'] ?? $current_cart->session_id;
 
-        $data['channel_id'] = core()->getCurrentChannel()->id;
+            $current_cart_products = $this->cart->getProducts($current_cart_id);
 
-        $customerCart = $this->cart->findOneByField('customer_id', $data['customer_id']);
+            $customer_id = auth()->guard('customer')->user()->id; //working
 
-        if(isset($customerCart)) {
+            if($cart_session_id == $current_cart_session_id) {
+                $current_cart_products = array();
 
-            $customerCartId = $customerCart->id ?? $customerCart['id'];
+                $customer_cart = $this->cart->findByField(['customer_id'=> $customer_id]);
 
-            $customerCartProducts = $this->cart->getProducts($customerCartId);
+                //check previous saved cart of customer.
+                if(!$customer_cart->isEmpty()) {
 
-            if(isset($customerCartProducts)) {
+                    $customer_cart_id = $customer_cart->id;
 
-                foreach($customerCartProducts as $previousCartProduct) {
+                    $customer_cart_products = $this->cart->getProducts($customer_cart_id);
 
-                    foreach($currentCartProducts as $key => $currentCartProduct) {
+                    foreach($current_cart_products as $key => $value) {
 
-                        if($previousCartProduct->id == $currentCartProduct) {
+                        $product_id = $value['id'] ?? $value->id;
 
-                            unset($currentCartProducts[$key]);
+                        foreach($current_cart_products as $key => $current_cart_product) {
+
+                            $current_product_id = $current_cart_product['id'] ?? $current_cart_product->id;
+
+                            if($current_product_id == $product_id) {
+
+                                unset($current_cart_products[$key]);
+                            }
                         }
                     }
+
+
+                    foreach($current_cart_products as $current_cart_product) {
+
+                        $current_cart_product_id = $current_cart_product['id'] ?? $current_cart_product->id;
+
+                        $this->cart->attach($current_cart_id, $current_cart_product_id, 1);
+                    }
+
+                    $this->cart->update(['customer_id' => $customer_id], $current_cart_id);
+
+                    $customer_cart = $this->cart->findOneByField('customer_id', $customer_id);
+
+                    $customer_cart_id = $customer_cart->id;
+
+                    if($this->cart->getProducts($customer_cart_id) && isset($current_cart_products)) {
+                        foreach($current_cart_products as $key => $value) {
+
+                            array_push($cart_products, $current_cart_product);
+                        }
+                    }
+
+                    session()->put('cart_data', [$customer_cart, $cart_products]);
+
+                    session()->flash('Success', 'Item Added In Cart');
+
+                    dump($cart_products);
+
+                    return redirect()->back();
+                } else {
+
+                    $session_id = session()->getId();
+
+                    $customer_id = auth()->guard('customer')->user()->id;
+
+                    $updated_cart = $this->cart->update(['customer_id' => $customer_id, 'session_id' => $session_id], $current_cart_id);
+
+                    $updated_cart_products = $this->cart->getProducts($updated_cart->id);
+
+                    Cookie::queue('cart_session_id', $session_id, 120);
+
+                    session()->put('cart_session_id', $session_id);
+
+                    session('cart_data', [$updated_cart, $updated_cart_products]);
+
+                    return redirect()->back();
                 }
+            } else {
+                throw new \Exception('Error, Session discrepancies found.');
+
+                $this->repairCart($cart_session_id, $id);
             }
-
-            /*
-                if the above block executes it will remove duplicates
-                else product in cookies will be stored in the database.
-            */
-            $this->cart->findOneByField('session_id', $cart_session_id)->update($data['customer_id']);
-
-            foreach($currentCartProducts as $key => $currentCartProduct) {
-
-                $product['product_id'] = $currentCartProduct;
-
-                $product['quantity'] = 1; //initialize the qty from the params passed from post
-
-                $product['cart_id'] = $customerCartId;
-
-                $this->cartProduct->create($product);
-            }
-
-            //forget the cart cookie that holds the cart session id
-            Cookie::queue(Cookie::forget('cart_session_id'));
-            return redirect()->back();
         } else {
-
-            if($cart = $this->cart->create($data)) {
-
-                foreach($currentCartProducts as $currentCartProduct) {
-
-                    $product['product_id'] = $currentCartProduct;
-
-                    $product['quantity'] = 1;
-
-                    $product['cart_id'] = $cart->id;
-
-                    $this->cartProduct->create($product);
-                }
-            }
-            //forget the Cookie
-            Cookie::queue(Cookie::forget('session_c'));
+            throw new \Exception('Nothing found');
 
             return redirect()->back();
         }
