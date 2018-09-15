@@ -22,7 +22,7 @@
                         <span>{{ $product->name }}</span>
                     </div>
 
-                    @include ('shop::products.review', ['product' => $product])
+                    {{-- @include ('shop::products.review', ['product' => $product]) --}}
 
                     @include ('shop::products.price', ['product' => $product])
 

@@ -37,7 +37,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // Product Review routes
-    Route::get('/reviews/{slug}/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@show')->defaults('_config', [
+    Route::get('/reviews/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@show')->defaults('_config', [
         'view' => 'shop::products.reviews.index'
     ])->name('shop.reviews.index');
 
