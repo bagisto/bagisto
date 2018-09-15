@@ -1501,6 +1501,12 @@ section.product-detail div.layouter form div.product-image-group .cart-fav-seg {
   float: right;
 }
 
+section.product-detail div.layouter form div.product-image-group .cart-fav-seg .wishlist {
+  position: absolute;
+  margin-top: -500px;
+  margin-right: -100px;
+}
+
 section.product-detail div.layouter form .details {
   width: 50%;
 }

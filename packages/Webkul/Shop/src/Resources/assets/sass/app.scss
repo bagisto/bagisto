@@ -1412,6 +1412,12 @@ section.product-detail {
                 .cart-fav-seg {
                     display: block;
                     float: right;
+
+                    .wishlist {
+                        position: absolute;
+                        margin-top: -500px;
+                        margin-right: -100px;
+                    }
                 }
             }
 
