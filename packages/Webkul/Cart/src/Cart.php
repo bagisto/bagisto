@@ -292,7 +292,8 @@ class Cart {
      * and sync the cookies products
      * with the existing data of cart
      * in the cart tables;
-     */
+    */
+
     public function mergeCart() {
 
         if(Cookie::has('cart_session_id')) {

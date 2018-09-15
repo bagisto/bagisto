@@ -30,6 +30,10 @@ class CustomerEventsHandler {
         Cart::mergeCart();
     }
 
+    //use this when there is very uttermost need to use it.
+    public function onCustomerLogout($event) {
+    }
+
     /**
      * Register the listeners for the subscriber.
      *
@@ -39,5 +43,7 @@ class CustomerEventsHandler {
     public function subscribe($events)
     {
         $events->listen('customer.after.login', 'Webkul\Customer\Http\Listeners\CustomerEventsHandler@onCustomerLogin');
+
+        $events->listen('customer.after.logout', 'Webkul\Customer\Http\Listeners\CustomerEventsHandler@onCustomerLogout');
     }
 }

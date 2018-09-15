@@ -71,6 +71,9 @@ class SessionController extends Controller
     public function destroy($id)
     {
         auth()->guard('customer')->logout();
+
+        Event::fire('customer.after.logout', 1);
+
         return redirect()->route($this->_config['redirect']);
     }
 }
