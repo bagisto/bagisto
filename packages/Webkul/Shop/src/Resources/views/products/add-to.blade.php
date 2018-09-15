@@ -2,8 +2,6 @@
 
     @include ('shop::products.add-to-cart', ['product' => $product])
 
-    @include ('shop::products.buy-now')
-
-    {{-- <span><img src="{{ bagisto_asset('images/wishlist.svg') }}" /></span> --}}
+    <span><img src="{{ bagisto_asset('images/wishlist.svg') }}" /></span>
 
 </div>
