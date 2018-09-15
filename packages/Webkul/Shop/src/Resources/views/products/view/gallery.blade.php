@@ -32,6 +32,10 @@
 
                 <img :src="currentLargeImageUrl" />
 
+                <div class="icon whishlist-icon"> </div>
+
+                @include ('shop::products.sharelinks')
+
             </div>
 
         </div>
