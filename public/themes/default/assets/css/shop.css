@@ -23,6 +23,18 @@
   height: 24px;
 }
 
+.sort-icon {
+  background-image: URL("../images/icon-sort.svg");
+  width: 24px;
+  height: 24px;
+}
+
+.filter-icon {
+  background-image: URL("../images/icon-filter.svg");
+  width: 24px;
+  height: 24px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -947,6 +959,10 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   line-height: 45px;
 }
 
+.main-container-wrapper .top-toolbar .page-info span:last-child {
+  display: none;
+}
+
 .main-container-wrapper .top-toolbar .pager {
   float: right;
 }
@@ -977,6 +993,10 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 
 .main-container-wrapper .top-toolbar .pager .view-mode a.grid-view, .main-container-wrapper .top-toolbar .pager .view-mode span.grid-view {
   margin-right: 10px;
+}
+
+.main-container-wrapper .top-toolbar .pager .view-mode .sort-filter {
+  display: none;
 }
 
 .main-container-wrapper .top-toolbar .pager .sorter {
@@ -1067,6 +1087,136 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 
 .main-container-wrapper section.news-update .news-update-grid .block2 .sub-block2 img {
   width: 100%;
+}
+
+@media all and (max-width: 480px) {
+  .main-container-wrapper .layered-filter-wrapper {
+    display: none;
+  }
+  .main-container-wrapper .main {
+    width: 92%;
+    margin-left: 4%;
+  }
+  .main-container-wrapper .product-grid.max-2-col {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .main-container-wrapper .product-grid.max-3-col {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .main-container-wrapper .product-grid.max-4-col {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .main-container-wrapper .product-card .product-name {
+    font-size: 12px;
+  }
+  .main-container-wrapper .product-card .product-description {
+    font-size: 12px;
+  }
+  .main-container-wrapper .product-card .product-ratings .total-reviews {
+    display: none;
+  }
+  .main-container-wrapper .product-card .cart-fav-seg .addtocart {
+    white-space: nowrap;
+    font-size: 12px;
+  }
+  .main-container-wrapper .top-toolbar {
+    border-bottom: 1px solid #E8E8E8;
+    margin-bottom: 10px;
+  }
+  .main-container-wrapper .top-toolbar .page-info span:first-child {
+    display: none;
+  }
+  .main-container-wrapper .top-toolbar .page-info span:last-child {
+    display: inline;
+    font-size: 18px;
+  }
+  .main-container-wrapper .top-toolbar .pager .view-mode {
+    margin-right: 0px;
+  }
+  .main-container-wrapper .top-toolbar .pager .view-mode a, .main-container-wrapper .top-toolbar .pager .view-mode span {
+    display: none;
+  }
+  .main-container-wrapper .top-toolbar .pager .view-mode a.grid-view, .main-container-wrapper .top-toolbar .pager .view-mode span.grid-view {
+    display: none;
+  }
+  .main-container-wrapper .top-toolbar .pager .view-mode .sort-filter {
+    margin-top: 15px;
+    display: inline-block;
+  }
+  .main-container-wrapper .top-toolbar .pager .sorter {
+    display: none;
+  }
+  .main-container-wrapper .top-toolbar .pager .limiter {
+    display: none;
+  }
+  .main-container-wrapper .bottom-toolbar {
+    margin-bottom: 80px;
+  }
+}
+
+@media all and (min-width: 481px) and (max-width: 920px) {
+  .main-container-wrapper .layered-filter-wrapper {
+    display: none;
+  }
+  .main-container-wrapper .main {
+    width: 92%;
+    margin-left: 4%;
+  }
+  .main-container-wrapper .product-grid.max-2-col {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .main-container-wrapper .product-grid.max-3-col {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .main-container-wrapper .product-grid.max-4-col {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .main-container-wrapper .product-card .product-name {
+    font-size: 12px;
+  }
+  .main-container-wrapper .product-card .product-description {
+    font-size: 12px;
+  }
+  .main-container-wrapper .product-card .product-ratings .total-reviews {
+    display: none;
+  }
+  .main-container-wrapper .product-card .cart-fav-seg .addtocart {
+    white-space: nowrap;
+    font-size: 12px;
+  }
+  .main-container-wrapper .top-toolbar {
+    border-bottom: 1px solid #E8E8E8;
+    margin-bottom: 10px;
+  }
+  .main-container-wrapper .top-toolbar .page-info span:first-child {
+    display: none;
+  }
+  .main-container-wrapper .top-toolbar .page-info span:last-child {
+    display: inline;
+    font-size: 18px;
+  }
+  .main-container-wrapper .top-toolbar .pager .view-mode {
+    margin-right: 0px;
+  }
+  .main-container-wrapper .top-toolbar .pager .view-mode a, .main-container-wrapper .top-toolbar .pager .view-mode span {
+    display: none;
+  }
+  .main-container-wrapper .top-toolbar .pager .view-mode a.grid-view, .main-container-wrapper .top-toolbar .pager .view-mode span.grid-view {
+    display: none;
+  }
+  .main-container-wrapper .top-toolbar .pager .view-mode .sort-filter {
+    margin-top: 15px;
+    display: inline-block;
+  }
+  .main-container-wrapper .top-toolbar .pager .sorter {
+    display: none;
+  }
+  .main-container-wrapper .top-toolbar .pager .limiter {
+    display: none;
+  }
+  .main-container-wrapper .bottom-toolbar {
+    margin-bottom: 80px;
+  }
 }
 
 .product-price {
@@ -1683,6 +1833,259 @@ section.product-detail div.layouter .details .attributes {
 
 section.product-detail div.layouter .details .full-description {
   font-size: 16px;
+}
+
+@media all and (max-width: 480px) {
+  section.product-detail {
+    font-size: 16px;
+    color: #242424;
+  }
+  section.product-detail div.category-breadcrumbs {
+    display: inline;
+  }
+  section.product-detail div.layouter {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 100%;
+  }
+  section.product-detail div.layouter .mixed-group .single-image {
+    padding: 2px;
+  }
+  section.product-detail div.layouter .mixed-group .single-image img {
+    height: 280px;
+    width: 280px;
+  }
+  section.product-detail div.layouter .mixed-group .details .product-name {
+    margin-top: 20px;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  section.product-detail div.layouter .mixed-group .details .product-price {
+    margin-bottom: 14px;
+  }
+  section.product-detail div.layouter .rating-reviews {
+    margin-top: 0px;
+    width: 50%;
+    margin-left: 20px;
+  }
+  section.product-detail div.layouter .rating-reviews .title-inline {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  section.product-detail div.layouter .rating-reviews .title-inline button {
+    float: right;
+    border-radius: 0px !important;
+  }
+  section.product-detail div.layouter .rating-reviews .overall {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    height: 150px;
+  }
+  section.product-detail div.layouter .rating-reviews .overall .left-side {
+    margin-bottom: 20px;
+  }
+  section.product-detail div.layouter .rating-reviews .overall .left-side .number {
+    font-size: 34px;
+  }
+  section.product-detail div.layouter .rating-reviews .overall .right-side {
+    display: block;
+  }
+  section.product-detail div.layouter .rating-reviews .overall .right-side .rater {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  section.product-detail div.layouter .rating-reviews .overall .right-side .rater .star {
+    width: 50px;
+    height: 20px;
+    padding: 1px;
+    margin-right: 8px;
+  }
+  section.product-detail div.layouter .rating-reviews .overall .right-side .rater .line-bar {
+    height: 4px;
+    width: 158px;
+    margin-right: 12px;
+    background: #D8D8D8;
+  }
+  section.product-detail div.layouter .rating-reviews .overall .right-side .rater .line-bar .line-value {
+    background-color: #0031F0;
+  }
+  section.product-detail div.layouter .rating-reviews .reviews {
+    margin-top: 34px;
+    margin-bottom: 90px;
+  }
+  section.product-detail div.layouter .rating-reviews .reviews .review {
+    margin-bottom: 25px;
+  }
+  section.product-detail div.layouter .rating-reviews .reviews .review .title {
+    margin-bottom: 5px;
+  }
+  section.product-detail div.layouter .rating-reviews .reviews .review .stars {
+    margin-bottom: 15px;
+  }
+  section.product-detail div.layouter .rating-reviews .reviews .review .message {
+    margin-bottom: 10px;
+  }
+  section.product-detail div.layouter .rating-reviews .reviews .view-all {
+    margin-top: 15px;
+    color: #0031f0;
+    margin-bottom: 15px;
+  }
+  section.product-detail div.layouter div.product-image-group {
+    width: 43%;
+    float: left;
+    min-height: 1px;
+    position: relative;
+  }
+  section.product-detail div.layouter div.product-image-group .thumb-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-right: 4px;
+    height: 480px;
+    overflow: hidden;
+    position: relative;
+    float: left;
+  }
+  section.product-detail div.layouter div.product-image-group .thumb-list .thumb-frame {
+    border: 2px solid transparent;
+    background: #F2F2F2;
+    width: 120px;
+    height: 120px;
+  }
+  section.product-detail div.layouter div.product-image-group .thumb-list .thumb-frame.active {
+    border-color: #979797;
+  }
+  section.product-detail div.layouter div.product-image-group .thumb-list .thumb-frame img {
+    width: 100%;
+    height: 100%;
+  }
+  section.product-detail div.layouter div.product-image-group .thumb-list .gallery-control {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1;
+  }
+  section.product-detail div.layouter div.product-image-group .thumb-list .gallery-control .overlay {
+    opacity: 0.3;
+    background: #000000;
+    width: 100%;
+    height: 18px;
+    position: absolute;
+    left: 0;
+    z-index: -1;
+  }
+  section.product-detail div.layouter div.product-image-group .thumb-list .gallery-control .icon {
+    z-index: 2;
+  }
+  section.product-detail div.layouter div.product-image-group .thumb-list .gallery-control.top {
+    top: 0;
+  }
+  section.product-detail div.layouter div.product-image-group .thumb-list .gallery-control.bottom {
+    bottom: 0;
+  }
+  section.product-detail div.layouter div.product-image-group .product-hero-image {
+    position: absolute;
+    /* background: #F2F2F2; */
+    width: 380px;
+  }
+  section.product-detail div.layouter div.product-image-group .product-hero-image .wishlist {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+  }
+  section.product-detail div.layouter div.product-image-group .product-hero-image .share {
+    position: absolute;
+    top: 10px;
+    right: 45px;
+  }
+  section.product-detail div.layouter .details {
+    width: 57%;
+    float: left;
+  }
+  section.product-detail div.layouter .details .product-price {
+    margin-bottom: 14px;
+  }
+  section.product-detail div.layouter .details .product-ratings {
+    margin-bottom: 20px;
+  }
+  section.product-detail div.layouter .details .product-ratings .icon {
+    width: 16px;
+    height: 16px;
+  }
+  section.product-detail div.layouter .details .product-ratings .total-reviews {
+    display: inline-block;
+    margin-left: 15px;
+  }
+  section.product-detail div.layouter .details .product-heading {
+    font-size: 24px;
+    color: #242424;
+    margin-bottom: 15px;
+  }
+  section.product-detail div.layouter .details .product-price {
+    margin-bottom: 15px;
+    font-size: 24px;
+  }
+  section.product-detail div.layouter .details .product-price .special-price {
+    font-size: 24px;
+  }
+  section.product-detail div.layouter .details .stock-status {
+    margin-bottom: 15px;
+  }
+  section.product-detail div.layouter .details .description {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: solid 1px rgba(162, 162, 162, 0.2);
+  }
+  section.product-detail div.layouter .details .full-specifications td {
+    padding: 10px 0;
+    color: #5E5E5E;
+  }
+  section.product-detail div.layouter .details .full-specifications td:first-child {
+    padding-right: 40px;
+  }
+  section.product-detail div.layouter .details .accordian .accordian-header {
+    font-size: 16px;
+    padding-left: 0;
+    font-weight: 600;
+  }
+  section.product-detail div.layouter .details .attributes {
+    display: block;
+    width: 100%;
+    border-bottom: solid 1px rgba(162, 162, 162, 0.2);
+  }
+  section.product-detail div.layouter .details .full-description {
+    font-size: 16px;
+  }
 }
 
 .rating-reviews .rating-header {
