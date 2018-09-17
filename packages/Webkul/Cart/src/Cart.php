@@ -45,7 +45,7 @@ class Cart {
 
         $products = array();
 
-        $minutes = 10;
+        $minutes = 150;
 
         if(Cookie::has('cart_session_id')) {
 
@@ -95,21 +95,16 @@ class Cart {
                 return redirect()->back();
 
             } else {
-                // throw new \Exception('Error, Many or Few Session discrepancies found.');
-
+                //repair the cart
                 $this->repairCart($cart_session_id, $id);
             }
         } else {
+            //create a new cart instance.
             $this->createNewCart($id);
         }
     }
 
     /*helpers*/
-    public function makeCartSession($to_process) {
-        session()->put('cart_session_id', $to_process);
-
-        return session()->get('cart_session_id');
-    }
 
     /**
      * Create New Cart
@@ -155,6 +150,17 @@ class Cart {
 
         return redirect()->back();
     }
+
+    /**
+     * This makes session
+     * cart.
+     */
+    public function makeCartSession($cart_session_id) {
+        session()->put('cart_session_id', $cart_session_id);
+
+        return session()->get('cart_session_id');
+    }
+
 
     /**
      * Reset Session and
@@ -296,6 +302,7 @@ class Cart {
 
     public function mergeCart() {
 
+        //considering cookie as a source of truth.
         if(Cookie::has('cart_session_id')) {
             /*
                 Check for previous cart of customer and
@@ -314,7 +321,7 @@ class Cart {
             $cart_session_id = Cookie::get('cart_session_id');
 
             //pull the record from cart table for above session id.
-            $guest_cart = $this->cart->findOneByField($cart_session_id);
+            $guest_cart = $this->cart->findOneByField('session_id', $cart_session_id);
 
             if(!isset($guest_cart)) {
                 dd('Some One Deleted Cart or it wasn\'t there from the start');
@@ -322,121 +329,54 @@ class Cart {
                 return redirect()->back();
             }
 
+            $guest_cart_products = $this->cart->getProducts($guest_cart->id);
+
             //check if the current logged in customer is also
             //having any previously saved cart instances.
             $customer_cart = $this->cart->findOneByField('customer_id', $customer_id);
 
+            if(isset($customer_cart)) {
+                $customer_cart_products = $this->cart->getProducts($customer_cart->id);
 
+                foreach($guest_cart_products as $key => $guest_cart_product) {
+
+                    foreach($customer_cart_products as $customer_cart_product) {
+
+                        if($guest_cart_product->id == $customer_cart_product->id) {
+
+                            $quantity = $guest_cart_product->toArray()['pivot']['quantity'] + 1;
+
+                            $pivot = $guest_cart_product->toArray()['pivot'];
+
+                            $saveQuantity = $this->cart->updateRelatedForMerge($pivot, 'quantity', $quantity);
+
+                            unset($guest_cart_products[$key]);
+                        }
+                    }
+                }
+
+                //insert the new products here.
+                foreach ($guest_cart_products as $key => $guest_cart_product) {
+                    $product = $guest_cart_product->toArray();
+
+                    $this->cart->updateRelatedForMerge($product['pivot'], 'cart_id', $customer_cart->id);
+                }
+
+                //detach with guest cart records
+                $this->cart->detachAndDeleteParent($guest_cart->id);
+
+                Cookie::queue(Cookie::forget('cart_session_id'));
+
+                return redirect()->back();
+            } else {
+                //this will just update the customer id column in the cart table
+                $this->cart->update(['customer_id' => $customer_id], $guest_cart->id);
+
+                Cookie::queue(Cookie::forget('cart_session_id'));
+
+                return redirect()->back();
+            }
         }
-
-        // if(Cookie::has('cart_session_id')) {
-
-        //     /*
-        //         Check for previous cart of customer and
-        //         pull products from that cart instance
-        //         and then check for unique products
-        //         and delete the record with session id
-        //         and increase the quantity of the products
-        //         that are added again before deleting the
-        //         guest cart record.
-        //     */
-
-        //     $cart_session_id = Cookie::get('cart_session_id');
-
-        //     $current_cart = $this->cart->findOneByField('session_id', $cart_session_id);
-
-        //     //it is impossible to not have an entry in cart table and cart_products.
-        //     //will later handle the exceoption.
-        //     $current_cart_id = $current_cart['id'] ?? $current_cart->id;
-
-        //     $current_cart_session_id = $current_cart['session_id'] ?? $current_cart->session_id;
-
-        //     $current_cart_products = $this->cart->getProducts($current_cart_id);
-
-        //     $customer_id = auth()->guard('customer')->user()->id; //working
-
-        //     if($cart_session_id == $current_cart_session_id) {
-        //         $current_cart_products = array();
-
-        //         $customer_cart = $this->cart->findByField(['customer_id'=> $customer_id]);
-
-        //         //check previous saved cart of customer.
-        //         if(!$customer_cart->isEmpty()) {
-
-        //             $customer_cart_id = $customer_cart->id;
-
-        //             $customer_cart_products = $this->cart->getProducts($customer_cart_id);
-
-        //             foreach($current_cart_products as $key => $value) {
-
-        //                 $product_id = $value['id'] ?? $value->id;
-
-        //                 foreach($current_cart_products as $key => $current_cart_product) {
-
-        //                     $current_product_id = $current_cart_product['id'] ?? $current_cart_product->id;
-
-        //                     if($current_product_id == $product_id) {
-
-        //                         unset($current_cart_products[$key]);
-        //                     }
-        //                 }
-        //             }
-
-
-        //             foreach($current_cart_products as $current_cart_product) {
-
-        //                 $current_cart_product_id = $current_cart_product['id'] ?? $current_cart_product->id;
-
-        //                 $this->cart->attach($current_cart_id, $current_cart_product_id, 1);
-        //             }
-
-        //             $this->cart->update(['customer_id' => $customer_id], $current_cart_id);
-
-        //             $customer_cart = $this->cart->findOneByField('customer_id', $customer_id);
-
-        //             $customer_cart_id = $customer_cart->id;
-
-        //             if($this->cart->getProducts($customer_cart_id) && isset($current_cart_products)) {
-        //                 foreach($current_cart_products as $key => $value) {
-
-        //                     array_push($cart_products, $current_cart_product);
-        //                 }
-        //             }
-
-        //             session()->put('cart_data', [$customer_cart, $cart_products]);
-
-        //             session()->flash('Success', 'Item Added In Cart');
-
-        //             dump($cart_products);
-
-        //             return redirect()->back();
-        //         } else {
-
-        //             $session_id = session()->getId();
-
-        //             $customer_id = auth()->guard('customer')->user()->id;
-
-        //             $updated_cart = $this->cart->update(['customer_id' => $customer_id, 'session_id' => $session_id], $current_cart_id);
-
-        //             $updated_cart_products = $this->cart->getProducts($updated_cart->id);
-
-        //             Cookie::queue('cart_session_id', $session_id, 120);
-
-        //             session()->put('cart_session_id', $session_id);
-
-        //             session('cart_data', [$updated_cart, $updated_cart_products]);
-
-        //             return redirect()->back();
-        //         }
-        //     } else {
-        //         throw new \Exception('Error, Session discrepancies found.');
-
-        //         $this->repairCart($cart_session_id, $id);
-        //     }
-        // } else {
-        //     throw new \Exception('Nothing found');
-
-        //     return redirect()->back();
-        // }
+        return redirect()->back();
     }
 }

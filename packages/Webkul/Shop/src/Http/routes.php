@@ -2,6 +2,8 @@
 
 Route::group(['middleware' => ['web']], function () {
 
+    Route::get('/test', 'Webkul\Cart\Http\Controllers\CartController@test');
+
     Route::get('/', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
         'view' => 'shop::home.index'
     ])->name('store.home');
