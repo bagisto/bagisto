@@ -25,6 +25,8 @@
                     </span>
                 </div>
 
+                @include ('shop::products.product-add')
+
             </div>
         </script>
 

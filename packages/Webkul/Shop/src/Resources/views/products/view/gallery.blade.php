@@ -5,7 +5,7 @@
 <div class="product-image-group">
 
     <product-gallery></product-gallery>
-    @include ('shop::products.add-to')
+    @include ('shop::products.product-add')
 </div>
 @push('scripts')
 
