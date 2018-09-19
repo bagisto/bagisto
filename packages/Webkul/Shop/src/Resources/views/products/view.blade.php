@@ -1,5 +1,10 @@
 @extends('shop::layouts.master')
 
+@section('page_title')
+    {{ $product->name }}
+@stop
+
+
 @section('content-wrapper')
     <section class="product-detail">
         <div class="category-breadcrumbs">
@@ -8,7 +13,6 @@
 
         </div>
         <div class="layouter">
-            {{-- {{ dd(session()->getId()) }} --}}
             <form method="POST" action="{{ route('cart.add', $product->id) }}">
                 @csrf()
 

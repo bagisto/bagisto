@@ -42,7 +42,7 @@ class CartController extends Controller
 
     public function __construct(CartRepository $cart, CartProductRepository $cartProduct, CustomerRepository $customer) {
 
-        $this->middleware('customer')->except(['add', 'remove']);
+        $this->middleware('customer')->except(['add', 'remove', 'test']);
 
         $this->customer = $customer;
 
@@ -80,4 +80,21 @@ class CartController extends Controller
 
         return redirect()->back();
     }
+
+    // public function test() {
+    //     $cookie = Cookie::get('cart_session_id');
+
+    //     $cart = $this->cart->findOneByField('session_id', $cookie);
+
+    //     $cart_products = $this->cart->getProducts($cart->id);
+
+    //     foreach($cart_products as $cart_product) {
+    //         $quantity = $cart_product->toArray()['pivot']['quantity'] + 1;
+
+    //         $pivot = $cart_product->toArray()['pivot'];
+
+    //         $saveQuantity = $this->cart->saveRelated($pivot, 'quantity', $quantity+1);
+    //     }
+    //     dd('done');
+    // }
 }

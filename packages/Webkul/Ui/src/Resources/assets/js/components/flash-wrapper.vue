@@ -5,7 +5,7 @@
         class='alert-wrapper'
     >
         <flash
-            v-for='(flash, index) in flashes'
+            v-for='(flash) in flashes'
             :key='flash.uid'
             :flash="flash"
             @onRemoveFlash="removeFlash($event)"

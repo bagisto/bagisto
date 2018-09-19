@@ -1,7 +1,5 @@
 <div class="header" id="header">
-
     <div class="header-top">
-
         <div class="left-content">
 
             <ul class="logo-container">
@@ -57,6 +55,7 @@
 
                                 <ul>
                                     <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
+
                                     <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
                                 </ul>
 
@@ -66,18 +65,20 @@
                     @endguest
                     @auth('customer')
                         <div class="dropdown-list bottom-right" style="display: none;">
-
                             <div class="dropdown-container">
-
                                 <label>Account</label>
-
                                 <ul>
                                     <li><a href="{{ route('customer.account.index') }}">Account</a></li>
+
                                     <li><a href="{{ route('customer.profile.index') }}">Profile</a></li>
+
                                     <li><a href="{{ route('customer.address.index') }}">Address</a></li>
+
                                     <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
-                                    <li><a href="{{ route('customer.cart') }}">Cart</a></li>
+
+                                    {{-- <li><a href="{{ route('customer.cart') }}">Cart</a></li> --}}
                                     <li><a href="{{ route('customer.orders.index') }}">Orders</a></li>
+
                                     <li><a href="{{ route('customer.session.destroy') }}">Logout</a></li>
                                 </ul>
 
@@ -90,21 +91,7 @@
 
             </ul>
 
-            <ul class="cart-dropdown">
-
-                <li class="cart-summary">
-
-                    <span class="icon cart-icon"></span>
-
-                    <span class="cart"><span class="cart-count">5</span>Products</span>
-
-                    <span class="icon arrow-down-icon"></span>
-
-                </li>
-
-
-
-            </ul>
+            <cart-dropdown @if(isset($cart)) :items='@json($cart)' @endif></cart-dropdown>
 
             {{-- Meant for responsive views only --}}
             <ul class="ham-dropdown-container">
@@ -138,13 +125,13 @@
         </div>
 
         <div class="suggestion">
-            <span> designer sarees   </span>
+            <span>Designer sarees</span>
         </div>
         <div class="suggestion">
-            <span> India patter sarees  </span>
+            <span>India patter sarees</span>
         </div>
         <div class="suggestion">
-            <span> Border Sarees  </span>
+            <span>Border Sarees</span>
         </div>
     </div>
 
@@ -155,93 +142,7 @@
 </div>
 
 @push('scripts')
-
     <script>
 
-        window.onload = function() {
-
-            var sort = document.getElementById("sortable");
-            var search = document.getElementById("search");
-
-            sort.addEventListener("click", myFunction);
-            search.addEventListener("click", myFunction);
-
-            // function for changing icon for responsive header
-
-            function myFunction(){
-
-                let className = document.getElementById(this.id).className;
-
-                let slider  = document.getElementsByClassName("slider-block");
-                let feature = document.getElementsByClassName("featured-products");
-                let newUpdate = document.getElementsByClassName("news-update");
-
-                for (let i=0 ; i < slider.length ; i++){
-                    slider[i].style.display="none";
-                }
-
-                for (let i=0 ; i < feature.length ; i++){
-                    feature[i].style.display="none";
-                }
-
-                for (let i=0 ; i < newUpdate.length ; i++){
-                    newUpdate[i].style.display="none";
-                }
-
-                if( className == 'icon search-icon') {
-
-                    search.classList.remove('icon', 'search-icon');
-                    search.classList.add('icon', 'cross-icon');
-
-                    sort.classList.remove('icon', 'cross-icon');
-                    sort.classList.remove('icon', 'sortable-icon');
-                    sort.classList.add('icon', 'sortable-icon');
-                    document.getElementsByClassName("header-bottom")[0].style.display="none";
-                    document.getElementsByClassName("search-suggestion")[0].style.display="block";
-
-                }else if ( className == 'icon sortable-icon'){
-
-                    sort.classList.remove('icon', 'sortable-icon');
-                    sort.classList.add('icon', 'cross-icon');
-
-                    search.classList.remove('icon', 'cross-icon');
-                    search.classList.remove('icon', 'search-icon');
-                    search.classList.add('icon', 'search-icon');
-
-                    document.getElementsByClassName("header-bottom")[0].style.display="block";
-                    document.getElementsByClassName("search-suggestion")[0].style.display="none";
-
-                } else {
-
-                    sort.classList.remove('icon', 'cross-icon');
-                    search.classList.remove('icon', 'cross-icon');
-                    sort.classList.remove('icon', 'sortable-icon');
-                    search.classList.remove('icon', 'search-icon');
-                    sort.classList.add('icon', 'sortable-icon');
-                    search.classList.add('icon', 'search-icon');
-                    document.getElementsByClassName("header-bottom")[0].style.display="none";
-                    document.getElementsByClassName("search-suggestion")[0].style.display="none";
-
-                    let slider  = document.getElementsByClassName("slider-block");
-                    let feature = document.getElementsByClassName("featured-products");
-                    let newUpdate = document.getElementsByClassName("news-update");
-
-                    for (let i=0 ; i < slider.length ; i++){this.id
-                        slider[i].style.display="block";
-                    }
-
-                    for (let i=0 ; i < feature.length ; i++){
-                        feature[i].style.display="block";
-                    }
-
-                    for (let i=0 ; i < newUpdate.length ; i++){
-                        newUpdate[i].style.display="block";
-                    }
-                }
-            }
-        }
-
     </script>
-
-
 @endpush

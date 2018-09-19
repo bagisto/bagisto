@@ -4,7 +4,6 @@
     {{ __('admin::app.catalog.attributes.add-title') }}
 @stop
 
-
 @section('content')
     <div class="content">
         <form method="POST" action="{{ route('admin.catalog.attributes.store') }}" @submit.prevent="onSubmit">

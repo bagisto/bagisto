@@ -1,8 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-
-@endsection
+    {{ __('admin::app.users.users.title') }}
 @stop
 
 @section('content')

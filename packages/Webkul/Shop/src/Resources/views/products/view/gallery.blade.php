@@ -65,7 +65,6 @@
             },
 
             created () {
-                console.log(this.images[0])
                 this.changeImage(this.images[0])
 
                 this.prepareThumbs()

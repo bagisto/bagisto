@@ -9,6 +9,7 @@ use Illuminate\Foundation\AliasLoader;
 use Webkul\User\Http\Middleware\RedirectIfNotAdmin;
 use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 use Webkul\Cart\Facades\Cart;
+use Webkul\Cart\Providers\ComposerServiceProvider;
 
 class CartServiceProvider extends ServiceProvider
 {
@@ -19,9 +20,9 @@ class CartServiceProvider extends ServiceProvider
 
         $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
 
-        // $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
+        $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
-        $this->register(EventServiceProvider::class);
+        $this->app->register(ComposerServiceProvider::class);
     }
 
     /**
@@ -41,14 +42,14 @@ class CartServiceProvider extends ServiceProvider
      */
     protected function registerFacades()
     {
-        $loader = AliasLoader::getInstance();
 
-        $loader->alias('cart', Cart::class);
+        //to make the cart facade and bind the
+        //alias to the class needed to be called.
+        $loader = AliasLoader::getInstance();
+        $loader->alias('cart', CartFacade::class);
 
         $this->app->singleton('cart', function () {
-            return new cart();
+            return new Cart();
         });
-
-        $this->app->bind('cart', 'Webkul\Cart\Cart');
     }
 }
