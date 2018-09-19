@@ -6,6 +6,7 @@ return [
             'account_exists' => 'Already have an account',
             'title' => 'Sign In'
         ],
+
         'signup-form' => [
             'title' => 'Sign Up',
             'firstname' => 'First Name',
@@ -19,10 +20,12 @@ return [
             'conditions' => 'Conditions',
             'using' => 'by using this website'
         ],
+
         'login-text' => [
             'no_account' => 'Don\'t have account',
             'title' => 'Sign In',
         ],
+
         'login-form' => [
             'title' => 'Sign Up',
             'email' => 'E-Mail',
@@ -53,5 +56,35 @@ return [
         'reviews-title' => 'Ratings & Reviews',
         'write-review-btn' => 'Write Review',
         'choose-option' => 'Choose an option'
+    ],
+
+    'checkout' => [
+        'cart' => [
+
+        ],
+
+        'onepage' => [
+            'title' => 'Checkout',
+            'information' => 'Information',
+            'shipping' => 'Shipping',
+            'payment' => 'Payment',
+            'complete' => 'Complete',
+            'billing-address' => 'Billing Address',
+            'sign-in' => 'Sign In',
+            'first-name' => 'First Name',
+            'last-name' => 'Last Name',
+            'email' => 'Email',
+            'address1' => 'Address',
+            'address2' => 'Address 2',
+            'city' => 'City',
+            'state' => 'State',
+            'postcode' => 'Zip/Postcode',
+            'phone' => 'Telephone',
+            'country' => 'Country',
+            'order-summary' => 'Order Summary',
+            'shipping-address' => 'Shipping Address',
+            'use_for_shipping' => 'Ship to this address',
+            'continue' => 'Continue'
+        ]
     ]
 ];

@@ -10,23 +10,26 @@ use Auth;
  * Chekout controller for the customer
  * and guest for placing order
  *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
+ * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CheckoutController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * Contains route related configuration
      *
-     * @return \Illuminate\Http\Response
+     * @var array
      */
     protected $_config;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
-        // $this->middleware(['customer', 'guest']);
-
         $this->_config = request('_config');
     }
 
@@ -37,9 +40,7 @@ class CheckoutController extends Controller
     */
     public function index()
     {
-        $customer_id = auth()->guard('customer')->user();
-
-        return view($this->_config['view'],compact('customer_id'));
+        return view($this->_config['view']);
     }
 
 }

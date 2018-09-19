@@ -1,5 +1,10 @@
 @extends('shop::layouts.master')
 
+@section('page_title')
+    {{ $product->name }}
+@stop
+
+
 @section('content-wrapper')
     <section class="product-detail">
         <div class="category-breadcrumbs">
