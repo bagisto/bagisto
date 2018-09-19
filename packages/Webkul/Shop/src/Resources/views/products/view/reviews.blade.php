@@ -17,7 +17,7 @@
                 @for ($i = 1; $i <= round($reviewHelper->getAverageRating($product)); $i++)
 
                     <span class="icon star-icon"></span>
-                
+
                 @endfor
             </span>
 
@@ -45,7 +45,7 @@
                     @for ($i = 1; $i <= $review->rating; $i++)
 
                         <span class="icon star-icon"></span>
-                    
+
                     @endfor
                 </span>
 
@@ -55,7 +55,7 @@
 
                 <div class="reviewer-details">
                     <span class="by">
-                        {{ __('shop::app.products.by', ['name' => $review->customer->name]) }}, 
+                        {{ __('shop::app.products.by', ['name' => $review->customer->name]) }},
                     </span>
 
                     <span class="when">

@@ -3,11 +3,15 @@
 <div class="top-toolbar">
 
     <div class="page-info">
-        {{ __('shop::app.products.pager-info', ['showing' => $products->firstItem() . '-' . $products->lastItem(), 'total' => $products->total()]) }}
+        <span>
+            {{ __('shop::app.products.pager-info', ['showing' => $products->firstItem() . '-' . $products->lastItem(), 'total' => $products->total()]) }}
+        </span>
+
+        <span>Men</span>
     </div>
 
     <div class="pager">
-        
+
         <div class="view-mode">
             @if ($toolbarHelper->isModeActive('grid'))
                 <span class="grid-view">
@@ -28,6 +32,15 @@
                     <i class="icon list-view-icon"></i>
                 </a>
             @endif
+
+            <div class="sort-filter">
+
+                <i class="icon sort-icon"></i>
+
+                <i class="icon filter-icon"></i>
+
+            </div>
+
         </div>
 
         <div class="sorter">
@@ -61,7 +74,7 @@
 
             </select>
         </div>
-        
+
     </div>
 
 </div>

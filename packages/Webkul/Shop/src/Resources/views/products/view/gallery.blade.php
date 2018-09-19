@@ -5,7 +5,7 @@
 <div class="product-image-group">
 
     <product-gallery></product-gallery>
-    @include ('shop::products.add-to')
+    @include ('shop::products.product-add')
 </div>
 @push('scripts')
 
@@ -31,6 +31,10 @@
             <div class="product-hero-image" id="product-hero-image">
 
                 <img :src="currentLargeImageUrl" />
+
+                <div class="icon whishlist-icon"> </div>
+
+                @include ('shop::products.sharelinks')
 
             </div>
 
