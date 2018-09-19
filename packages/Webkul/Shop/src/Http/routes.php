@@ -11,7 +11,7 @@ Route::group(['middleware' => ['web']], function () {
     ]);
 
     Route::get('/checkout', 'Webkul\Cart\Http\Controllers\CheckoutController@index')->defaults('_config', [
-        'view' => 'shop::customers.checkout.index'
+        'view' => 'shop::checkout.onepage'
     ])->name('shop.checkout');
 
     /* dummy routes ends here */
@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
     //Routes for product cart ends
 
     // Product Review routes
-    Route::get('/reviews/{slug}/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@show')->defaults('_config', [
+    Route::get('/reviews/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@show')->defaults('_config', [
         'view' => 'shop::products.reviews.index'
     ])->name('shop.reviews.index');
 

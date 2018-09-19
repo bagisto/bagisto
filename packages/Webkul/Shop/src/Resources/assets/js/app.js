@@ -1,8 +1,10 @@
 window.jQuery = window.$ = $ = require("jquery");
 window.Vue = require("vue");
 window.VeeValidate = require("vee-validate");
+window.axios = require("axios");
 
 Vue.use(VeeValidate);
+Vue.prototype.$http = axios
 
 Vue.component("category-nav", require("./components/category-nav.vue"));
 Vue.component("category-item", require("./components/category-item.vue"));

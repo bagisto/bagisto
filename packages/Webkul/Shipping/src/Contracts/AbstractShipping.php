@@ -12,6 +12,4 @@ abstract class AbstractShipping
     abstract public function calculate();
 
 }
-
-
 ?>

@@ -2,7 +2,20 @@
 
     @inject ('configurableOptionHelper', 'Webkul\Product\Product\ConfigurableOption')
 
-    <product-options></product-options>
+    <product-options>
+        <!--<div class="attribute control-group has-error">
+            <label class="reqiured">Color</label>
+            <select name="super_attribute[104]" id="attribute_104" class="control" data-vv-id="1" aria-required="true" aria-invalid="true">
+                <option value="">Choose an option</option>
+            </select>
+        </div>
+
+        <div class="attribute control-group">
+            <label class="reqiured">Size</label>
+            <select name="super_attribute[105]" disabled="disabled" id="attribute_105" class="control" data-vv-id="2" aria-required="true" aria-invalid="false">
+            </select>
+        </div>-->
+    </product-options>
 
     @push('scripts')
 

@@ -46,13 +46,10 @@ class CartServiceProvider extends ServiceProvider
         //to make the cart facade and bind the
         //alias to the class needed to be called.
         $loader = AliasLoader::getInstance();
-
-        $loader->alias('cart', Cart::class);
+        $loader->alias('cart', CartFacade::class);
 
         $this->app->singleton('cart', function () {
-            return new cart();
+            return new Cart();
         });
-
-        $this->app->bind('cart', 'Webkul\Cart\Cart');
     }
 }

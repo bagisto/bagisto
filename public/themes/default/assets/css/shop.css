@@ -2610,21 +2610,17 @@ section.cart .cart-content .right-side .coupon-section .after-coupon-amount .amo
       -ms-flex-direction: row;
           flex-direction: row;
   width: 100%;
-  margin-top: 3%;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.checkout-process .left-side {
-  width: 67%;
-  margin-right: 8%;
-  height: 100px;
+.checkout-process .col-main {
+  width: 65%;
+  padding-right: 40px;
 }
 
-.checkout-process .left-side .checkout-menu {
+.checkout-process .col-main ul.checkout-steps {
   width: 100%;
-}
-
-.checkout-process .left-side .checkout-menu ul.checkout-detail {
-  height: 60px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -2632,20 +2628,18 @@ section.cart .cart-content .right-side .coupon-section .after-coupon-amount .amo
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
-  padding: 5px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #E8E8E8;
 }
 
-.checkout-process .left-side .checkout-menu ul.checkout-detail li {
+.checkout-process .col-main ul.checkout-steps li {
   height: 48px;
-}
-
-.checkout-process .left-side .checkout-menu ul.checkout-detail li .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.checkout-process .left-side .checkout-menu ul.checkout-detail li .wrapper .decorator {
+.checkout-process .col-main ul.checkout-steps li .decorator {
   height: 48px;
   width: 48px;
   border: 1px solid black;
@@ -2656,66 +2650,80 @@ section.cart .cart-content .right-side .coupon-section .after-coupon-amount .amo
   border: 1px solid #E8E8E8;
 }
 
-.checkout-process .left-side .checkout-menu ul.checkout-detail li .wrapper .decorator img {
+.checkout-process .col-main ul.checkout-steps li .decorator img {
   margin: auto;
 }
 
-.checkout-process .left-side .checkout-menu ul.checkout-detail li .wrapper .decorator.active {
-  border: 1px solid blue;
-}
-
-.checkout-process .left-side .checkout-menu ul.checkout-detail li .wrapper span {
+.checkout-process .col-main ul.checkout-steps li span {
   margin-left: 7px;
   margin-top: auto;
   margin-bottom: auto;
   font-size: 16px;
 }
 
-.checkout-process .left-side .checkout-menu .horizontal-rule {
-  margin-top: 1%;
+.checkout-process .col-main ul.checkout-steps li.active {
+  color: #2650EF;
+}
+
+.checkout-process .col-main ul.checkout-steps li.active .decorator {
+  border: 1px solid #2650EF;
+}
+
+.checkout-process .col-main .step-content {
+  padding-top: 20px;
+}
+
+.checkout-process .col-main .step-content .form-header {
   width: 100%;
-  height: 1px;
-  vertical-align: middle;
-  background: #e8e8e8;
+  display: inline-block;
 }
 
-.checkout-process .right-side {
-  height: 300px;
-  width: 300px;
+.checkout-process .col-main .step-content .form-header h1 {
+  float: left;
 }
 
-.checkout-process .right-side .purchase-detail {
-  margin-top: 22px;
-  margin-left: 18px;
+.checkout-process .col-main .step-content .form-header .btn {
+  float: right;
 }
 
-.checkout-process .right-side .purchase-detail .price span {
+.checkout-process .col-main .step-content .form-container {
+  border-bottom: 1px solid #E8E8E8;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.checkout-process .col-right {
+  width: 35%;
+  padding-left: 40px;
+}
+
+.checkout-process .col-right .order-summary .price span {
   margin-left: 3px;
   font-size: 16px;
   color: #242424;
   font-weight: bold;
 }
 
-.checkout-process .right-side .purchase-detail .item-detail {
+.checkout-process .col-right .order-summary .item-detail {
   margin-top: 12px;
 }
 
-.checkout-process .right-side .purchase-detail .item-detail span {
+.checkout-process .col-right .order-summary .item-detail span {
   margin-left: 3px;
 }
 
-.checkout-process .right-side .purchase-detail .item-detail span label {
+.checkout-process .col-right .order-summary .item-detail span label {
   font-size: 16px;
   color: #242424;
 }
 
-.checkout-process .right-side .purchase-detail .item-detail span .right {
+.checkout-process .col-right .order-summary .item-detail span .right {
   float: right;
   font-size: 16px;
   color: #242424;
 }
 
-.checkout-process .right-side .purchase-detail .horizontal-rule {
+.checkout-process .col-right .order-summary .horizontal-rule {
   margin-top: 6%;
   width: 100%;
   height: 1px;
@@ -2723,81 +2731,25 @@ section.cart .cart-content .right-side .coupon-section .after-coupon-amount .amo
   background: #e8e8e8;
 }
 
-.checkout-process .right-side .purchase-detail .payble-amount {
+.checkout-process .col-right .order-summary .payble-amount {
   margin-top: 12px;
 }
 
-.checkout-process .right-side .purchase-detail .payble-amount span {
+.checkout-process .col-right .order-summary .payble-amount span {
   margin-left: 3px;
   font-weight: bold;
 }
 
-.checkout-process .right-side .purchase-detail .payble-amount span label {
+.checkout-process .col-right .order-summary .payble-amount span label {
   font-size: 16px;
   color: #242424;
   font-weight: bold;
 }
 
-.checkout-process .right-side .purchase-detail .payble-amount span .right {
+.checkout-process .col-right .order-summary .payble-amount span .right {
   float: right;
   font-size: 16px;
   color: #242424;
-}
-
-.order-info {
-  width: 67%;
-  margin-right: 6%;
-  height: 1350px;
-  margin-top: -190px;
-}
-
-.order-info .order-guest .order-text {
-  font-size: 24px;
-  color: #242424;
-  letter-spacing: -0.58px;
-  font-weight: bold;
-}
-
-.order-info .sign-in {
-  float: right;
-}
-
-.order-info .control-group {
-  margin-top: 30px;
-}
-
-.order-info .control-group label {
-  font-size: 14px;
-}
-
-.order-info .control-group .control {
-  width: 600px;
-}
-
-.order-info .control-group span {
-  color: red;
-}
-
-.order-info .different-billing-addr {
-  margin-top: 5%;
-}
-
-.order-info .different-billing-addr span {
-  font-size: 16px;
-  color: #242424;
-  letter-spacing: -0.38px;
-}
-
-.order-info .horizontal-rule {
-  margin-top: 6%;
-  width: 100%;
-  height: 1px;
-  vertical-align: middle;
-  background: #e8e8e8;
-}
-
-.order-info .countinue-button {
-  margin-top: 3%;
 }
 
 @media all and (max-width: 480px) {
@@ -2924,77 +2876,6 @@ section.cart .cart-content .right-side .coupon-section .after-coupon-amount .amo
   .order-info .countinue-button {
     margin-top: 5%;
   }
-}
-
-.signin-form {
-  width: 67%;
-  margin-right: 6%;
-  height: 520px;
-  margin-top: -190px;
-}
-
-.signin-form .signin-guest .signin-text {
-  font-size: 24px;
-  color: #242424;
-  letter-spacing: -0.58px;
-  font-weight: bold;
-}
-
-.signin-form .order-button {
-  float: right;
-  background: #0031F0;
-  font-size: 14px;
-  color: #FFFFFF;
-  letter-spacing: -0.26px;
-  text-align: center;
-  height: 38px;
-  width: 153px;
-  border: none;
-}
-
-.signin-form .control-group {
-  margin-top: 30px;
-}
-
-.signin-form .control-group label {
-  font-size: 14px;
-}
-
-.signin-form .control-group .control {
-  width: 600px;
-}
-
-.signin-form .control-group span {
-  color: red;
-}
-
-.signin-form .forgot-pass span {
-  font-size: 16px;
-  color: #0031F0;
-  letter-spacing: -0.38px;
-}
-
-.signin-form .horizontal-rule {
-  margin-top: 6%;
-  width: 100%;
-  height: 1px;
-  vertical-align: middle;
-  background: #e8e8e8;
-}
-
-.signin-form .countinue-button {
-  margin-top: 3%;
-}
-
-.signin-form .countinue-button button {
-  background: #0031F0;
-  font-size: 14px;
-  color: #FFFFFF;
-  letter-spacing: -0.26px;
-  text-align: center;
-  height: 38px;
-  width: 137px;
-  border: none;
 }
 
 .ship-method {

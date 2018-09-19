@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Shipping\Carrier;
+namespace Webkul\Shipping\Carriers;
 
 use Webkul\Shipping\Contracts\AbstractShipping;
 use Config;
@@ -11,13 +11,8 @@ use Config;
  */
 class FlatRate extends AbstractShipping
 {
-
     public function calculate()
     {
-        $all = Config::get('carrier');
-        return $all;
+        return [];
     }
-
-
-
 }

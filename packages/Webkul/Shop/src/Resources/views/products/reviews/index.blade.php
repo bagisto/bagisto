@@ -133,7 +133,6 @@
         for(var key in percentage){
             width= percentage[key] * 1.58;
             let id =key + 'star';
-            console.log(id);
             document.getElementById(key).style.width = width + "px";
             document.getElementById(key).style.height = 4 + "px";
             document.getElementById(id).innerHTML = i + '\xa0\xa0' + "star";
