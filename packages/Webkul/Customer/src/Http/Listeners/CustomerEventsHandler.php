@@ -27,7 +27,11 @@ class CustomerEventsHandler {
          * check emptiness and then
          * do the appropriate actions.
          */
-        Cart::handleMerge();
+        Cart::mergeCart();
+    }
+
+    //use this when there is very uttermost need to use it.
+    public function onCustomerLogout($event) {
     }
 
     /**
@@ -39,5 +43,7 @@ class CustomerEventsHandler {
     public function subscribe($events)
     {
         $events->listen('customer.after.login', 'Webkul\Customer\Http\Listeners\CustomerEventsHandler@onCustomerLogin');
+
+        $events->listen('customer.after.logout', 'Webkul\Customer\Http\Listeners\CustomerEventsHandler@onCustomerLogout');
     }
 }

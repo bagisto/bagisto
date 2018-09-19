@@ -105,13 +105,13 @@
                             <th class="grid_head" data-column-name="{{ $column->alias }}" data-column-label="{{ $column->label }}">{!! $column->sorting() !!}</th>
                     @endif
                 @endforeach
-                @if(isset($attribute_columns))
+                {{-- @if(isset($attribute_columns))
                     @foreach($attribute_columns as $key => $value)
                         <th>
                             {{ $value }}
                         </th>
                     @endforeach
-                @endif
+                @endif --}}
                 <th>
                     Actions
                 </th>
@@ -131,11 +131,11 @@
                     <td class="">{!! $column->render($result) !!}</td>
                 @endforeach
 
-                @if(isset($attribute_columns))
+                {{-- @if(isset($attribute_columns))
                 @foreach ($attribute_columns as $atc)
                     <td>{{ $result->{$atc} }}</td>
                 @endforeach
-                @endif
+                @endif --}}
 
                 <td class="action">
                     @foreach($actions as $action)

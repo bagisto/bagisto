@@ -8,8 +8,8 @@ use Illuminate\Routing\Router;
 use Illuminate\Foundation\AliasLoader;
 use Webkul\User\Http\Middleware\RedirectIfNotAdmin;
 use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
-use Webkul\Cart\Cart;
-use Webkul\Cart\Facades\Cart as CartFacade;
+use Webkul\Cart\Facades\Cart;
+use Webkul\Cart\Providers\ComposerServiceProvider;
 
 class CartServiceProvider extends ServiceProvider
 {
@@ -18,7 +18,11 @@ class CartServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
-        $this->register(EventServiceProvider::class);
+        $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
+
+        $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
+
+        $this->app->register(ComposerServiceProvider::class);
     }
 
     /**
@@ -38,6 +42,9 @@ class CartServiceProvider extends ServiceProvider
      */
     protected function registerFacades()
     {
+
+        //to make the cart facade and bind the
+        //alias to the class needed to be called.
         $loader = AliasLoader::getInstance();
         $loader->alias('cart', CartFacade::class);
 
