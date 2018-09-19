@@ -29,7 +29,6 @@ export default {
 
     computed: {
         haveChildren() {
-            console.log(this.item);
             return this.item.children.length ? true : false;
         }
     }

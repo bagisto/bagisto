@@ -8,7 +8,8 @@ use Illuminate\Routing\Router;
 use Illuminate\Foundation\AliasLoader;
 use Webkul\User\Http\Middleware\RedirectIfNotAdmin;
 use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
-use Webkul\Cart\Facades\Cart;
+use Webkul\Cart\Cart;
+use Webkul\Cart\Facades\Cart as CartFacade;
 
 class CartServiceProvider extends ServiceProvider
 {
@@ -16,10 +17,6 @@ class CartServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-
-        $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
-
-        // $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
         $this->register(EventServiceProvider::class);
     }
@@ -42,13 +39,10 @@ class CartServiceProvider extends ServiceProvider
     protected function registerFacades()
     {
         $loader = AliasLoader::getInstance();
-
-        $loader->alias('cart', Cart::class);
+        $loader->alias('cart', CartFacade::class);
 
         $this->app->singleton('cart', function () {
-            return new cart();
+            return new Cart();
         });
-
-        $this->app->bind('cart', 'Webkul\Cart\Cart');
     }
 }

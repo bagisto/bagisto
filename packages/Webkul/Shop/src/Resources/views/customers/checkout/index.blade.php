@@ -45,15 +45,12 @@
                 }else{
                     this.isGuest=true;
                     this.disabled=1;
-
-                    console.log(this.disabled);
                 }
             } ,
 
             methods: {
                 count () {
                     this.isShipMethod=true;
-                    console.log(this.isShipMethod)
                 }
             }
 

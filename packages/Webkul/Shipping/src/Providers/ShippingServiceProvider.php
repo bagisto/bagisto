@@ -15,14 +15,6 @@ class ShippingServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-
-        // $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
-
-        // $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
-
-        // include __DIR__ . '/../Http/routes.php';
-
-        // $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shipping');
     }
 
     /**
