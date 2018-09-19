@@ -3,8 +3,16 @@
     background-size: cover;
 }
 
-.dropdown-right-icon{
+.dropdown-right-icon {
     background-image:URL('../images/icon-dropdown-left.svg');
+    width: 8px;
+    height: 8px;
+    margin-left:auto;
+    margin-bottom: 2px;
+}
+
+.icon-menu-close {
+    background-image:URL('../images/icon-menu-close.svg');
     width: 8px;
     height: 8px;
     margin-left:auto;

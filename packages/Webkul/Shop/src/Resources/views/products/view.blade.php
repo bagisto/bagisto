@@ -8,7 +8,6 @@
 
         </div>
         <div class="layouter">
-            {{-- {{ dd(session()->getId()) }} --}}
             <form method="POST" action="{{ route('cart.add', $product->id) }}">
                 @csrf()
 

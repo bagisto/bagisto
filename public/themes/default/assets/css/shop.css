@@ -11,6 +11,14 @@
   margin-bottom: 2px;
 }
 
+.icon-menu-close {
+  background-image: URL("../images/icon-menu-close.svg");
+  width: 8px;
+  height: 8px;
+  margin-left: auto;
+  margin-bottom: 2px;
+}
+
 .grid-view-icon {
   background-image: URL("../images/icon-grid-view.svg");
   width: 24px;
@@ -40,6 +48,10 @@ body {
 .header {
   margin-top: 16px;
   margin-bottom: 21px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .header .header-top {
@@ -380,7 +392,6 @@ body {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    max-width: 92%;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -533,7 +544,6 @@ body {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    max-width: 92%;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -1055,6 +1065,22 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 
 .main-container-wrapper section.news-update .news-update-grid .block2 .sub-block2 img {
   width: 100%;
+}
+
+@media all and (max-width: 480px) {
+  .main-container-wrapper {
+    width: 100% !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media all and (min-width: 481px) and (max-width: 920px) {
+  .main-container-wrapper {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .product-price {

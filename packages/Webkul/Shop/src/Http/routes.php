@@ -2,8 +2,6 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/test', 'Webkul\Cart\Http\Controllers\CartController@test');
-
     Route::get('/', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
         'view' => 'shop::home.index'
     ])->name('store.home');
@@ -29,14 +27,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::post('product/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.remove');
 
-    // Route::post('product/customer/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.customer.add');
-
-    // Route::post('product/customer/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.customer.remove');
-
-    Route::get('product/customer/cart/merge', 'Webkul\Cart\Http\Controllers\CartController@handleMerge')->name('cart.merge');
-
     //Routes for product cart ends
-
 
     // Product Review routes
     Route::get('/reviews/{slug}/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@show')->defaults('_config', [
@@ -55,13 +46,6 @@ Route::group(['middleware' => ['web']], function () {
         'redirect' => 'admin.reviews.index'
     ])->name('admin.reviews.store');
 
-    // Route::post('/reviews/create/{slug}', 'Webkul\Core\Http\Controllers\ReviewController@store')->defaults('_config', [
-    //     'redirect' => 'admin.reviews.index'
-    // ])->name('admin.reviews.store');
-
-
-    // Route::view('/products/{slug}', 'shop::store.product.details.index');
-    Route::view('/cart', 'shop::store.product.view.cart.index');
 
     //customer routes starts here
     Route::prefix('customer')->group(function () {
@@ -91,12 +75,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('logout', 'Webkul\Customer\Http\Controllers\SessionController@destroy')->defaults('_config', [
                 'redirect' => 'customer.session.index'
             ])->name('customer.session.destroy');
-
-            Route::view('/cart', 'shop::store.product.cart.cart.index')->name('customer.cart');
-
-            Route::view('/product', 'shop::store.product.details.home.index')->name('customer.product');
-
-            Route::view('/product/review', 'shop::store.product.review.index')->name('customer.product.review');
 
             //customer account
             Route::prefix('account')->group(function () {

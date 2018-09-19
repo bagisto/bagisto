@@ -221,6 +221,7 @@ Vue.component("category-nav", __webpack_require__(10));
 Vue.component("category-item", __webpack_require__(13));
 Vue.component("image-slider", __webpack_require__(16));
 Vue.component("vue-slider", __webpack_require__(24));
+Vue.component("cart-dropdown", __webpack_require__(29));
 
 $(document).ready(function () {
 
@@ -263,6 +264,7 @@ $(document).ready(function () {
                 var flashes = this.$refs.flashes;
 
                 flashMessages.forEach(function (flash) {
+                    console.log(flash);
                     flashes.addFlash(flash);
                 }, this);
             },
@@ -29279,7 +29281,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         haveChildren: function haveChildren() {
-            console.log(this.item);
             return this.item.children.length ? true : false;
         }
     }
@@ -29919,6 +29920,268 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(32)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(30)
+/* template */
+var __vue_template__ = __webpack_require__(31)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/components/cart-dropdown.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0f947e82", Component.options)
+  } else {
+    hotAPI.reload("data-v-0f947e82", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+// define the item component
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        items: Array
+    },
+
+    data: function data() {
+        return {
+            toggle: true,
+            totalitems: 0,
+            cart_items: []
+        };
+    },
+
+
+    computed: {
+        makeDropdown: function makeDropdown() {}
+    },
+
+    mounted: function mounted() {
+        if (this.items != undefined) this.initializeDropdown();
+    },
+
+    methods: {
+        dropOrHide: function dropOrHide() {
+            if (this.toggle == false) {
+                this.toggle = true;
+            } else {
+                this.toggle = false;
+            }
+        },
+
+        initializeDropdown: function initializeDropdown() {
+            this.totalitems = this.items.length;
+        }
+    }
+});
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("ul", { staticClass: "cart-dropdown", on: { click: _vm.dropOrHide } }, [
+      _c("li", { staticClass: "cart-summary" }, [
+        _c("span", { staticClass: "icon cart-icon" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "cart" }, [
+          _vm.totalitems > 0
+            ? _c("span", { staticClass: "cart-count" }, [
+                _vm._v(_vm._s(_vm.totalitems))
+              ])
+            : _vm._e(),
+          _vm._v("Products")
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "icon arrow-down-icon" })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "dropdown-cart", class: { show: _vm.toggle } }, [
+      _c("div", { staticClass: "dropdown-header" }, [
+        _c("p", { staticClass: "heading" }, [_vm._v("Cart Subtotal - $80")]),
+        _vm._v(" "),
+        _c("i", {
+          staticClass: "icon icon-menu-close",
+          on: { click: _vm.dropOrHide }
+        })
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1)
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "dropdown-content" }, [
+      _c("div", { staticClass: "item" }, [
+        _c("div", { staticClass: "item-image" }, [_c("img")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "item-details" }, [
+          _c("div", { staticClass: "item-name" }, [_vm._v("Some Item Name")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "item-price" }, [_vm._v("$ Some Price")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "item-qty" }, [_vm._v("Some Quantity")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "dropdown-footer" }, [
+      _c("a", { attrs: { href: "/" } }, [_vm._v("View Shopping Cart")]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-primary btn-lg" }, [
+        _vm._v("CHECKOUT")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0f947e82", module.exports)
+  }
+}
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(33);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(20)("69b33cbc", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0f947e82\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./cart-dropdown.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0f947e82\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./cart-dropdown.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(19)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.show {\n    display: none;\n}\n.dropdown-cart {\n    position: absolute;\n    background: #FFFFFF;\n    border: 1px solid #E8E8E8;\n    -webkit-box-shadow: 1px 3px 6px 0 rgba(0,0,0,0.40);\n            box-shadow: 1px 3px 6px 0 rgba(0,0,0,0.40);\n    padding: 20px;\n    border-radius: 1px;\n    right: 10%;\n    top: 75px;\n    width: 387px;\n    z-index: 5;\n}\n.dropdown-cart > .dropdown-header {\n    width: 100%;\n}\n.dropdown-cart > .dropdown-header p{\n    display: inline;\n    line-height: 25px;\n}\n.dropdown-cart > .dropdown-header i{\n    cursor: pointer;\n    float: right;\n    height: 22px;\n    width: 22px;\n}\n.dropdown-content {\n    padding-top: 10px;\n    padding-bottom: 10px;\n}\n.dropdown-content .item{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    border-bottom: 1px solid #E8E8E8;\n}\n.dropdown-content .item img{\n    height: 75px;\n    width: 75px;\n    margin-right: 8px;\n}\n.item-details .item-name {\n    font-size: 16px;\n    font-weight: bold;\n    margin-bottom: 10px;\n}\n.item-details .item-price {\n    margin-bottom: 10px;\n}\n.item-details .item-qty {\n    margin-bottom: 10px;\n}\n.dropdown-footer {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.dropdown-footer button {\n    border-radius: 0px;\n}\n\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
