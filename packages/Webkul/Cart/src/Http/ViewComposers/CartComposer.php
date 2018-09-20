@@ -7,6 +7,9 @@ use Illuminate\Support\Collection;
 
 use Webkul\Cart\Repositories\CartRepository;
 
+use Webkul\Cart\Repositories\CartItemRepository;
+
+
 use Cookie;
 use Cart;
 /**
@@ -32,27 +35,42 @@ class CartComposer
      * @param  View  $view
      * @return void
      */
-    public function __construct(CartRepository $cart) {
+    public function __construct(CartRepository $cart, CartItemRepository $cartItem) {
         $this->cart = $cart;
+
+        $this->cartItem = $cartItem;
     }
 
     public function compose(View $view) {
         if(auth()->guard('customer')->check()) {
             $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
 
-            $cart_products = $this->cart->getProducts($cart['id']);
+            if(isset($cart)) {
+                $cart_items = $this->cart->items($cart['id']);
 
-            // dd($cart_products);
+                $cart_products = array();
 
-            $view->with('cart', $cart_products);
+                foreach($cart_items as $cart_item) {
+                    array_push($cart_products, $this->cartItem->getProduct($cart_item->id));
+                }
 
+                $view->with('cart', $cart_products);
+            }
         } else {
             if(Cookie::has('cart_session_id')) {
                 $cart = $this->cart->findOneByField('session_id', Cookie::get('cart_session_id'));
 
-                $cart_products = $this->cart->getProducts($cart['id']);
+                if(isset($cart)) {
+                    $cart_items = $this->cart->items($cart['id']);
 
-                $view->with('cart', $cart_products);
+                    $cart_products = array();
+
+                    foreach($cart_items as $cart_item) {
+                        array_push($cart_products, $this->cartItem->getProduct($cart_item->id));
+                    }
+
+                    $view->with('cart', $cart_products);
+                }
             }
         }
     }

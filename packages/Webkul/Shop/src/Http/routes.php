@@ -14,6 +14,8 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::checkout.onepage'
     ])->name('shop.checkout');
 
+    Route::get('test', 'Webkul\Cart\Http\Controllers\CartController@test');
+
     Route::post('/checkout/save-address', 'Webkul\Cart\Http\Controllers\CheckoutController@saveAddress')->name('shop.checkout.save-address');
 
     Route::post('/checkout/save-shipping', 'Webkul\Cart\Http\Controllers\CheckoutController@saveShipping')->name('shop.checkout.save-shipping');

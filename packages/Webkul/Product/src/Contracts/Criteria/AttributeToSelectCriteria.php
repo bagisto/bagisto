@@ -59,13 +59,13 @@ class AttributeToSelectCriteria extends AbstractProduct implements CriteriaInter
     public function apply($model, RepositoryInterface $repository)
     {
         $model = $model->select('products.*');
-        
+
         foreach ($this->attributeToSelect as $code) {
             $attribute = $this->attribute->findOneByField('code', $code);
 
             if(!$attribute)
                 continue;
-            
+
             $productValueAlias = 'pav_' . $attribute->code;
 
             $model = $model->leftJoin('product_attribute_values as ' . $productValueAlias, function($qb) use($attribute, $productValueAlias) {
