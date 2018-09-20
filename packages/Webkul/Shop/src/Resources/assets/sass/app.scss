@@ -758,7 +758,7 @@ section.slider-block {
                 }
 
                 .filter-attributes-title .icon {
-                    background-image: url('../images//arrow-up.svg') !important;
+                    background-image: url('../images/arrow-up.svg') !important;
                 }
             }
         }
@@ -1515,162 +1515,73 @@ section.product-detail {
                     font-size: 16px;
                 }
             }
-
-            // .rating-reviews {
-            //     margin-top: 0px;
-            //     width: 50%;
-            //     margin-left: 20px;
-
-            //     .title-inline {
-            //         display: inline-flex;
-            //         align-items: center;
-            //         justify-content: space-between;
-            //         margin-bottom: 20px;
-            //         width: 100%;
-
-            //         button {
-            //             float: right;
-            //             border-radius: 0px !important;
-            //         }
-            //     }
-
-            //     .overall {
-            //         display: flex;
-            //         flex-direction: row;
-            //         align-items: center;
-            //         justify-content: space-between;
-            //         height: 150px;
-
-            //         .left-side {
-            //             margin-bottom: 20px;
-
-            //             .number{
-            //                 font-size: 34px;
-            //             }
-            //         }
-
-            //         .right-side {
-            //             display: block;
-
-            //             .rater {
-            //                 display: inline-flex;
-            //                 align-items: center;
-
-            //                 .star {
-            //                     width: 50px;
-            //                     height: 20px;
-            //                     padding: 1px;
-            //                     margin-right: 8px;
-            //                 }
-
-            //                 .line-bar {
-            //                     height: 4px;
-            //                     width: 158px;
-            //                     margin-right: 12px;
-            //                     background: $bar-color;
-
-            //                     .line-value {
-            //                         background-color: $dark-blue-shade;
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     }
-
-            //     .reviews {
-            //         margin-top: 34px;
-            //         margin-bottom: 90px;
-
-            //         .review {
-            //             margin-bottom: 25px;
-
-            //             .title {
-            //                 margin-bottom: 5px;
-            //             }
-
-            //             .stars {
-            //                 margin-bottom: 15px;
-            //             }
-            //             .message {
-            //                 margin-bottom: 10px;
-            //             }
-            //         }
-            //         .view-all {
-            //             margin-top:15px;
-            //             color: $logo-color;
-            //             margin-bottom:15px;
-            //         }
-            //     }
-            // }
-
-
         }
     }
 }
 
-// .rating-reviews {
+.rating-reviews {
 
-//     .rating-header {
-//         font-weight: 600;
-//         padding: 20px 0;
-//     }
+    .rating-header {
+        font-weight: 600;
+        padding: 20px 0;
+    }
 
-//     .stars {
-//         .icon {
-//             width: 16px;
-//             height: 16px;
-//         }
-//     }
+    .stars {
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
 
-//     .overall {
-//         display: flex;
-//         flex-direction: row;
-//         align-items: center;
-//         justify-content: space-between;
+    .overall {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
 
-//         .review-info {
-//             .number {
-//                 font-size: 34px;
-//             }
+        .review-info {
+            .number {
+                font-size: 34px;
+            }
 
-//             .total-reviews {
-//                 margin-top: 10px;
-//             }
-//         }
-//     }
+            .total-reviews {
+                margin-top: 10px;
+            }
+        }
+    }
 
-//     .reviews {
-//         margin-top: 40px;
-//         margin-bottom: 40px;
+    .reviews {
+        margin-top: 40px;
+        margin-bottom: 40px;
 
-//         .review {
-//             margin-bottom: 25px;
+        .review {
+            margin-bottom: 25px;
 
-//             .title {
-//                 margin-bottom: 5px;
-//             }
+            .title {
+                margin-bottom: 5px;
+            }
 
-//             .stars {
-//                 margin-bottom: 15px;
-//                 display: inline-block;
-//             }
+            .stars {
+                margin-bottom: 15px;
+                display: inline-block;
+            }
 
-//             .message {
-//                 margin-bottom: 10px;
-//             }
+            .message {
+                margin-bottom: 10px;
+            }
 
-//             .reviewer-details {
-//                 color: #5E5E5E;
-//             }
-//         }
+            .reviewer-details {
+                color: #5E5E5E;
+            }
+        }
 
-//         .view-all {
-//             margin-top:15px;
-//             color: $logo-color;
-//             margin-bottom:15px;
-//         }
-//     }
-// }
+        .view-all {
+            margin-top:15px;
+            color: $logo-color;
+            margin-bottom:15px;
+        }
+    }
+}
 
 /* cart pages and elements css begins here */
 section.cart {
@@ -2202,572 +2113,8 @@ section.cart {
 
 // oder page css end here
 
-// responsive order page css start here
-
-@media all and (max-width: 480px) {
-
-    .order {
-        margin-left: 0%;
-
-        .order-section-head {
-            display: none;
-        }
-
-        .order-section-head-small {
-            display: block;
-            margin-top: -15px;
-
-            span {
-                display:inline-block;
-                width:33.3%;
-            }
-
-            .icon {
-                float: left;
-
-                img {
-                    margin-top: 11px;
-                }
-            }
-
-            .order-number {
-                text-align: center;
-                font-size: 16px;
-                color: #242424;
-                letter-spacing: -0.38px;
-                text-align: center;
-                margin-top: 13px;
-                margin-bottom: 13px;
-            }
-
-            .cancel {
-                float: right;
-                text-align: right;
-                font-size: 17px;
-                color: #0031F0;
-                letter-spacing: -0.11px;
-                margin-top: 13px;
-                margin-bottom: 13px;
-            }
-
-            .horizon-rule {
-                border: .5px solid #E8E8E8;
-                width: 150%;
-                margin-left: -10%;
-                margin-right: -10%;
-            }
-        }
-
-        .payment-place {
-            font-size: 16px;
-            color: $profile-content-color;
-            margin-top: 4%;
-
-            .placed-on {
-                display: flex;
-                flex-direction: column;
-
-                .place-text {
-                    width:100%;
-
-                    span {
-                        font-size: 14px;
-                    }
-
-                    .processing {
-                        display: block;
-                        float: right;
-                        background: #2ED04C;
-                        height: 25px;
-                        border-radius: 100px;
-                        font-size: 14px;
-                        color: #FFFFFF;
-                        letter-spacing: -0.12px;
-                        width: 110px;
-                        text-align: center;
-                        padding-top: 3.5px;
-                        padding-left: 5px;
-                        margin-top: 3px;
-                    }
-                }
-
-                .place-date{
-                    margin-top: -5px;
-                }
-            }
-
-            .payment-status {
-                display: flex;
-                flex-direction: column;
-
-                .payment-text {
-
-                    span {
-                        font-size: 14px;
-                    }
-                }
-
-                .status {
-                    margin-top: 2px;
-                }
-            }
-
-            .horizontal-rule {
-                margin-top: 1.1%;
-                width: 100%;
-                height: 1px;
-                vertical-align: middle;
-                background: #e8e8e8;
-            }
-        }
-
-        .order-details{
-           display: none;
-        }
-
-        .total {
-            margin-top: 5%;
-            height: 130px;
-
-            .calculate {
-                width: 100%;
-                float: left;
-
-                .sub-total {
-
-                    .left {
-                        margin-left: 0px;
-                        width:100px;
-                    }
-
-                    .middle {
-                        display: none;
-                    }
-
-                    .right {
-                        float:right;
-                        width:25%;
-                    }
-                }
-
-                .ship-handle {
-
-                    .left {
-                        margin-left: 0px;
-                    }
-
-                    .middle {
-                       display: none;
-                    }
-
-                    .right {
-                        float:right;
-                        width:25%;
-                    }
-                }
-
-                .discount {
-
-                    .left {
-                        margin-left: 0px;
-                    }
-
-                    .middle {
-                        display: none;
-                    }
-
-                    .right {
-                        float:right;
-                        width:25%;
-                    }
-                }
-
-                .grand-total {
-
-                    .left {
-                        margin-left: 0px;
-                    }
-
-                    .middle {
-                        display: none;
-                    }
-
-                    .right {
-                        float:right;
-                        width:25%;
-                    }
-                }
-
-                .due {
-
-                    .left {
-                        margin-left: 0px;
-                    }
-
-                    .middle {
-                        display: none;
-                    }
-
-                    .right {
-                        float:right;
-                        width:25%;
-                    }
-                }
-            }
-        }
-
-        .horizontal-rule {
-            display: none;
-        }
-
-        .table {
-            display:none;
-        }
-
-        .product-config {
-            border: 1px solid #E8E8E8;
-            height: 19%;
-            width:100%;
-            margin-top: 10px;
-            display: block;
-
-            .product-attribute {
-                display: flex;
-                flex-direction: row;
-
-                .product-property {
-                    width: 30%;
-                    margin-top: 10px;
-                    margin-left: 5px;
-
-                    span {
-                        font-size: 14px;
-                        color: #5E5E5E;
-                        letter-spacing: -0.11px;
-                    }
-                }
-
-                .property-name {
-                    margin-top: 10px;
-                    width:50%;
-
-                    span {
-                        font-size: 16px;
-                        color: #5E5E5E;
-                        letter-spacing: -0.11px;
-                    }
-                }
-            }
-
-        }
-
-        .order-information {
-            flex-direction: column;
-
-            .order-address-method {
-                width : 250px;
-            }
-
-            .order-address-method:nth-child(3) {
-                margin-top: 10px;
-            }
-
-            .order-address-method:nth-child(2) {
-                margin-top: 10px;
-            }
-
-            .order-address-method:nth-child(4) {
-                margin-top: 10px;
-            }
-
-        }
-    }
-}
-
-@media all and (min-width: 481px) and (max-width: 920px) {
-
-    .order {
-        margin-left: 0%;
-
-        .order-section-head {
-            display: none;
-        }
-
-        .order-section-head-small {
-            display: block;
-            margin-top: -15px;
-
-            span {
-                display:inline-block;
-                width:33.3%;
-            }
-
-            .icon {
-                float: left;
-
-                img {
-                    margin-top: 11px;
-                }
-            }
-
-            .order-number {
-                text-align: center;
-                font-size: 16px;
-                color: #242424;
-                letter-spacing: -0.38px;
-                text-align: center;
-                margin-top: 13px;
-                margin-bottom: 13px;
-            }
-
-            .cancel {
-                float: right;
-                text-align: right;
-                font-size: 17px;
-                color: #0031F0;
-                letter-spacing: -0.11px;
-                margin-top: 13px;
-                margin-bottom: 13px;
-            }
-
-            .horizon-rule {
-                border: .5px solid #E8E8E8;
-                width: 150%;
-                margin-left: -10%;
-                margin-right: -10%;
-            }
-        }
-
-        .payment-place {
-            font-size: 16px;
-            color: $profile-content-color;
-            margin-top: 4%;
-
-            .placed-on {
-                display: flex;
-                flex-direction: column;
-
-                .place-text {
-                    width:100%;
-
-                    span {
-                        font-size: 14px;
-                    }
-
-                    .processing {
-                        display: block;
-                        float: right;
-                        background: #2ED04C;
-                        height: 25px;
-                        border-radius: 100px;
-                        font-size: 14px;
-                        color: #FFFFFF;
-                        letter-spacing: -0.12px;
-                        width: 110px;
-                        text-align: center;
-                        padding-top: 3.5px;
-                        padding-left: 5px;
-                        margin-top: 3px;
-                    }
-                }
-
-                .place-date{
-                    margin-top: -5px;
-                }
-            }
-
-            .payment-status {
-                display: flex;
-                flex-direction: column;
-
-                .payment-text {
-
-                    span {
-                        font-size: 14px;
-                    }
-                }
-
-                .status {
-                    margin-top: 2px;
-                }
-            }
-
-            .horizontal-rule {
-                margin-top: 1.1%;
-                width: 100%;
-                height: 1px;
-                vertical-align: middle;
-                background: #e8e8e8;
-            }
-        }
-
-        .order-details{
-           display: none;
-        }
-
-        .total {
-            margin-top: 5%;
-            height: 130px;
-
-            .calculate {
-                width: 100%;
-                float: left;
-
-                .sub-total {
-
-                    .left {
-                        margin-left: 0px;
-                        width:100px;
-                    }
-
-                    .middle {
-                        display: none;
-                    }
-
-                    .right {
-                        float:right;
-                        width:25%;
-                    }
-                }
-
-                .ship-handle {
-
-                    .left {
-                        margin-left: 0px;
-                    }
-
-                    .middle {
-                       display: none;
-                    }
-
-                    .right {
-                        float:right;
-                        width:25%;
-                    }
-                }
-
-                .discount {
-
-                    .left {
-                        margin-left: 0px;
-                    }
-
-                    .middle {
-                        display: none;
-                    }
-
-                    .right {
-                        float:right;
-                        width:25%;
-                    }
-                }
-
-                .grand-total {
-
-                    .left {
-                        margin-left: 0px;
-                    }
-
-                    .middle {
-                        display: none;
-                    }
-
-                    .right {
-                        float:right;
-                        width:25%;
-                    }
-                }
-
-                .due {
-
-                    .left {
-                        margin-left: 0px;
-                    }
-
-                    .middle {
-                        display: none;
-                    }
-
-                    .right {
-                        float:right;
-                        width:25%;
-                    }
-                }
-            }
-        }
-
-        .horizontal-rule {
-            display: none;
-        }
-
-        .table {
-            display:none;
-        }
-
-        .product-config {
-            border: 1px solid #E8E8E8;
-            height: 19%;
-            width:100%;
-            margin-top: 10px;
-            display: block;
-
-            .product-attribute {
-                display: flex;
-                flex-direction: row;
-
-                .product-property {
-                    width: 30%;
-                    margin-top: 10px;
-                    margin-left: 5px;
-
-                    span {
-                        font-size: 14px;
-                        color: #5E5E5E;
-                        letter-spacing: -0.11px;
-                    }
-                }
-
-                .property-name {
-                    margin-top: 10px;
-                    width:50%;
-
-                    span {
-                        font-size: 16px;
-                        color: #5E5E5E;
-                        letter-spacing: -0.11px;
-                    }
-                }
-            }
-
-        }
-
-        .order-information {
-            flex-direction: column;
-
-            .order-address-method {
-                width : 250px;
-            }
-
-            .order-address-method:nth-child(3) {
-                margin-top: 10px;
-            }
-
-            .order-address-method:nth-child(2) {
-                margin-top: 10px;
-            }
-
-            .order-address-method:nth-child(4) {
-                margin-top: 10px;
-            }
-
-        }
-    }
-
-}
-// responsive order css end here
-
 // checkout starts here
-.checkout-process{
+.checkout-process {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -2784,7 +2131,7 @@ section.cart {
             justify-content: space-between;
             width: 100%;
             padding-bottom: 15px;
-            border-bottom: 1px solid #E8E8E8;;
+            border-bottom: 1px solid #E8E8E8;
 
             li {
                 height: 48px;
@@ -2797,9 +2144,31 @@ section.cart {
                     border-radius: 50%;
                     display: inline-flex;
                     border: 1px solid #E8E8E8;
+                    background-repeat: no-repeat;
+                    background-position: center;
                     
-                    img {
-                        margin: auto;
+                    &.address-info {
+                        background-image: url('../images/address.svg');
+                    }
+                    
+                    &.shipping {
+                        background-image: url('../images/shipping.svg');
+                    }
+                    
+                    &.payment {
+                        background-image: url('../images/payment.svg');
+                    }
+                    
+                    &.review {
+                        background-image: url('../images/finish.svg');
+                    }
+                }
+
+                &.completed {
+                    cursor: pointer;
+
+                    .decorator {
+                        background-image: url('../images/complete.svg');
                     }
                 }
 
@@ -2841,6 +2210,12 @@ section.cart {
                 padding-top: 20px;
                 padding-bottom: 20px;
             }
+
+            .shipping-methods {
+                h4 {
+                    margin: 0;
+                }
+            }
         }
     }
 
@@ -2879,14 +2254,6 @@ section.cart {
                 }
             }
 
-            .horizontal-rule {
-                margin-top: 6%;
-                width: 100%;
-                height: 1px;
-                vertical-align: middle;
-                background: #e8e8e8;
-            }
-
             .payble-amount {
                 margin-top: 12px;
 
@@ -2901,7 +2268,6 @@ section.cart {
                     }
 
                     .right {
-
                         float:right;
                         font-size: 16px;
                         color: #242424;
@@ -2911,340 +2277,7 @@ section.cart {
         }
     }
 }
-
 // checkout ends here
-
-// responsive checkout start here
-
-@media all and (max-width: 480px) {
-    .checkout-process{
-        width: 100%;
-        margin-top: 3%;
-
-        .left-side {
-            width: 100%;
-            margin-right: 0%;
-            height: 60px;
-
-            .checkout-menu {
-                width: 100%;
-
-                ul.checkout-detail {
-                    height: 60px;
-                    width: 100%;
-                    padding: 5px;
-
-                    li {
-                        height: 48px;
-
-                        .wrapper {
-                            display: flex;
-
-                            span {
-                               display: none;
-                            }
-                        }
-                    }
-
-                    .line {
-                        margin-top: 23px;
-                        width: 100%;
-                        margin-left: 5px;
-                        margin-right: 5px;
-                        border: 1px solid #E7E7E7;
-                        height: 1px;
-                    }
-                }
-
-                .horizontal-rule {
-                   display: none;
-                }
-            }
-        }
-
-        .right-side {
-            display: none;
-        }
-    }
-
-    .order-info{
-        width: 100%;
-        margin-right: 0%;
-        margin-top: 10px;
-        height:50px;
-
-        .control-group {
-
-            .control{
-                width:100%;
-            }
-        }
-
-        .different-billing-addr {
-            margin-top: 5%;
-        }
-
-        .horizontal-rule {
-            margin-top: 10%;
-        }
-
-        .countinue-button {
-            margin-top: 8%;
-        }
-    }
-}
-
-@media all and (min-width: 481px) and (max-width: 920px) {
-
-    .checkout-process{
-        width: 100%;
-        margin-top:3%;
-
-        .left-side {
-            width: 100%;
-            margin-right: 0%;
-            height: 60px;
-
-            .checkout-menu {
-                width: 100%;
-
-                ul.checkout-detail {
-                    height: 60px;
-                    width: 100%;
-                    padding: 5px;
-
-                    li {
-                        height: 48px;
-
-                        .wrapper {
-                            display:flex;
-
-                            span {
-                               display: none;
-                            }
-
-                        }
-                    }
-
-                    .line {
-                        margin-top: 23px;
-                        width: 100%;
-                        margin-left: 10px;
-                        margin-right: 10px;
-                        border: 1px solid #E7E7E7;
-                        height: 1px;
-                    }
-                }
-
-                .horizontal-rule {
-                   display: none;
-                }
-            }
-        }
-
-        .right-side {
-            display:none;
-        }
-    }
-
-    .order-info{
-        width: 100%;
-        margin-right: 0%;
-        margin-top: 10px;
-        height:50px;
-
-        .control-group {
-
-            .control{
-                width:100%;
-            }
-        }
-
-        .different-billing-addr {
-            margin-top: 3%;
-        }
-
-        .horizontal-rule {
-            margin-top: 10%;
-        }
-
-        .countinue-button {
-            margin-top: 5%;
-        }
-    }
-}
-// responsive checkout end here
-
-
-
-//shipment start here
-.ship-method {
-    width: 67%;
-    margin-right: 6%;
-    height: 600px;
-    margin-top: -190px;
-
-    .ship-info {
-
-        .ship-text{
-            font-size: 24px;
-            color: #242424;
-            letter-spacing: -0.58px;
-            font-weight: bold;
-        }
-    }
-
-    .ship-price {
-        margin-top: 31px;
-
-        .price-checkbox {
-            display:flex;
-
-            span {
-                margin-left: 8px;
-                font-size: 16px;
-                color: #242424;
-                line-height: 22px;
-                font-weight: bold;
-            }
-
-        }
-
-        .price-checkbox-text {
-            margin-left: 25px;
-            width:580px;
-            height:44px;
-            margin-top: 4px;
-
-            b {
-               font-size: 16px;
-            }
-
-            span {
-                font-size: 16px;
-                color: #242424;
-                line-height: 22px;
-            }
-        }
-
-
-    }
-
-    .horizontal-rule {
-        margin-top: 7%;
-        width: 100%;
-        height: 1px;
-        vertical-align: middle;
-        background: #e8e8e8;
-    }
-
-    .countinue-button {
-        margin-top: 3%;
-
-        button {
-            background: #0031F0;
-            font-size: 14px;
-            color: #FFFFFF;
-            letter-spacing: -0.26px;
-            text-align: center;
-            height: 38px;
-            width: 137px;
-            border: none;
-        }
-    }
-}
-//shipment end here
-
-// payment method start here
-.payment-method {
-    width: 67%;
-    margin-right: 6%;
-    height: 600px;
-    margin-top: -190px;
-
-    .payment-info {
-
-        .payment-text{
-            font-size: 24px;
-            color: #242424;
-            letter-spacing: -0.58px;
-            font-weight: bold;
-        }
-    }
-
-    .payment-price {
-        margin-top: 31px;
-
-        .payment-checkbox {
-            display:flex;
-
-            span {
-                margin-left: 8px;
-                font-size: 16px;
-                color: #242424;
-                line-height: 22px;
-                font-weight: bold;
-            }
-
-        }
-
-        .payment-checkbox-text {
-            margin-left: 25px;
-            width:580px;
-            height:44px;
-            margin-top: 4px;
-
-            b {
-               font-size: 16px;
-            }
-
-            span {
-                font-size: 16px;
-                color: #242424;
-                line-height: 22px;
-            }
-        }
-
-
-    }
-
-    .horizontal-rule {
-        margin-top: 7%;
-        width: 100%;
-        height: 1px;
-        vertical-align: middle;
-        background: #e8e8e8;
-    }
-
-    .countinue-button {
-        margin-top: 3%;
-
-        button {
-            background: #0031F0;
-            font-size: 14px; .horizontal-rule {
-                margin-top: 7%;
-                width: 100%;
-                height: 1px;
-                vertical-align: middle;
-                background: #e8e8e8;
-            }
-            color: #FFFFFF;
-            letter-spacing: -0.26px; .horizontal-rule {
-                margin-top: 7%;
-                width: 100%;
-                height: 1px;
-                vertical-align: middle;
-                background: #e8e8e8;
-            }
-            text-align: center;
-            height: 38px;
-            width: 137px;
-            border: none;
-        }
-    }
-}
-// payment method end here
-
 
 // complete page start here
 .complete-page{
