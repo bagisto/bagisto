@@ -73,7 +73,7 @@ abstract class AbstractShipping
             $channelId = core()->getCurrentChannel()->id;
         }
 
-        $shippingConfig = Config::get('carriers' . $this->getCode());
+        $shippingConfig = Config::get('carriers.' . $this->getCode());
 
         return $shippingConfig[$field];
     }

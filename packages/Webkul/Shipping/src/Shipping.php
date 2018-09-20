@@ -17,9 +17,9 @@ class Shipping
         foreach(Config::get('carriers') as $shippingMethod) {
             $object = new $shippingMethod['class'];
 
-            // if($object->isAvailable()) {
+            if($object->isAvailable()) {
                 $rates[] = $object->calculate();
-            // }
+            }
         }
 
         return $rates;
