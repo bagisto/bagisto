@@ -14,9 +14,9 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Cookie;
 
 /**
- * Cart facade for all
+ * Facade for all
  * the methods to be
- * implemented for Cart.
+ * implemented in Cart.
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -79,7 +79,6 @@ class Cart {
 
                 //checking new product coming in the cart is new or previously added item.
                 foreach($current_cart_products as $key => $value) {
-
                     $product_id = $value;
 
                     if($product_id == $id) {
@@ -100,7 +99,7 @@ class Cart {
                 }
 
                 //cart data being attached to the instace.
-                $cart_data = $this->cart->attach($current_cart_id, $id, $data['quantity']);
+                $cart_data = $this->cart->attach($current_cart_id, $id, $data['quantity'], $data['price']);
 
                 //getting the products after being attached to cart instance.
                 $cart_products = $this->cart->items($current_cart_id);
@@ -155,9 +154,9 @@ class Cart {
 
             $cart_product['cart_id'] = $new_cart_id;
 
-            $cart_product['price'] = $new_cart_id;
+            $cart_product['price'] = $data['price'];
 
-            if($cart_product = $this->cart->attach($new_cart_id, $cart_product['product_id'], $cart_product['quantity'])) {
+            if($cart_product = $this->cart->attach($new_cart_id, $cart_product['product_id'], $cart_product['quantity'], $cart_product['price'])) {
 
                 session()->put('cart_data', [$cart, $cart_product]);
 
@@ -306,7 +305,7 @@ class Cart {
                 }
                 //add the product in the cart
 
-                $this->cart->attach($customer_cart_id, $id, $itemdata['quantity']);
+                $this->cart->attach($customer_cart_id, $id, $itemdata['quantity'], $itemdata['price']);
 
                 session()->flash('success', 'Item Added To Cart Successfully');
 
@@ -332,7 +331,7 @@ class Cart {
             if($new_cart = $this->cart->create($data)) {
                 $new_cart_id = $new_cart->id ?? $new_cart['id'];
 
-                $this->cart->attach($new_cart_id, $id, $itemdata['quantity']);
+                $this->cart->attach($new_cart_id, $id, $itemdata['quantity'], $itemdata['price']);
 
                 session()->flash('success', 'Item Added To Cart Successfully');
 

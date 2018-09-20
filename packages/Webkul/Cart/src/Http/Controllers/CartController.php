@@ -9,6 +9,9 @@ use Illuminate\Http\Response;
 use Webkul\Cart\Repositories\CartRepository;
 use Webkul\Cart\Repositories\CartItemRepository;
 
+//Product Repository
+use Webkul\Product\Repositories\ProductRepository;
+
 //Customer repositories
 use Webkul\Customer\Repositories\CustomerRepository;
 
@@ -40,7 +43,9 @@ class CartController extends Controller
 
     protected $customer;
 
-    public function __construct(CartRepository $cart, CartItemRepository $cartItem, CustomerRepository $customer) {
+    protected $product;
+
+    public function __construct(CartRepository $cart, CartItemRepository $cartItem, CustomerRepository $customer, ProductRepository $product) {
 
         $this->middleware('customer')->except(['add', 'remove', 'test']);
 
@@ -49,6 +54,8 @@ class CartController extends Controller
         $this->cart = $cart;
 
         $this->cartItem = $cartItem;
+
+        $this->product = $product;
     }
 
     /**
@@ -61,6 +68,21 @@ class CartController extends Controller
 
     public function add($id) {
         $data = request()->input();
+        // dd($data);
+        if(!isset($data['is_configurable']) || !isset($data['product']) ||!isset($data['quantity'])) {
+            session()->flash('error', 'Cannot Product Due to User\'s miscreancy in system\'s integrity');
+
+            return redirect()->back();
+        }
+
+        if($data['is_configurable'] == "false") {
+            $data['price'] = $this->product->findOneByField('id', $data['product'])->price;
+        } else {
+            $id = $data['selected_configurable_option'];
+
+            $data['price'] = $this->product->findOneByField('id', $data['selected_configurable_option'])->price;
+        }
+
         if(auth()->guard('customer')->check()) {
             Cart::add($id, $data);
         } else {
