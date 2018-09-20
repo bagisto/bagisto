@@ -98,8 +98,15 @@ class Cart {
                     }
                 }
 
+                //related record
+                $related['product_id'] = $id;
+
+                $related['quantity'] = $data['quantity'];
+
+                $related['price'] = $data['price'];
+
                 //cart data being attached to the instace.
-                $cart_data = $this->cart->attach($current_cart_id, $id, $data['quantity'], $data['price']);
+                $cart_data = $this->cart->createItem($current_cart_id, $related);
 
                 //getting the products after being attached to cart instance.
                 $cart_products = $this->cart->items($current_cart_id);
@@ -156,7 +163,14 @@ class Cart {
 
             $cart_product['price'] = $data['price'];
 
-            if($cart_product = $this->cart->attach($new_cart_id, $cart_product['product_id'], $cart_product['quantity'], $cart_product['price'])) {
+            //related item
+            $related['product_id'] = $cart_product['product_id'];
+
+            $related['quantity'] = $cart_product['quantity'];
+
+            $related['price'] = $cart_product['price'];
+
+            if($cart_product = $this->cart->createItem($new_cart_id, $related)) {
 
                 session()->put('cart_data', [$cart, $cart_product]);
 
@@ -303,9 +317,16 @@ class Cart {
                         return redirect()->back();
                     }
                 }
-                //add the product in the cart
 
-                $this->cart->attach($customer_cart_id, $id, $itemdata['quantity'], $itemdata['price']);
+                //related item
+                $related['product_id'] = $id;
+
+                $related['quantity'] = $itemdata['quantity'];
+
+                $related['price'] = $itemdata['price'];
+
+                //add the product in the cart
+                $this->cart->createItem($customer_cart_id, $related);
 
                 session()->flash('success', 'Item Added To Cart Successfully');
 
@@ -331,7 +352,14 @@ class Cart {
             if($new_cart = $this->cart->create($data)) {
                 $new_cart_id = $new_cart->id ?? $new_cart['id'];
 
-                $this->cart->attach($new_cart_id, $id, $itemdata['quantity'], $itemdata['price']);
+                //related item
+                $related['product_id'] = $id;
+
+                $related['quantity'] = $itemdata['quantity'];
+
+                $related['price'] = $itemdata['price'];
+
+                $this->cart->createItem($new_cart_id, $related);
 
                 session()->flash('success', 'Item Added To Cart Successfully');
 

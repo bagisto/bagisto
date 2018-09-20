@@ -31177,20 +31177,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("li", [
-    _c(
-      "a",
-      {
-        attrs: {
-          href: "bagisto/public/categories/" + this.item["translations"][0].slug
-        }
-      },
-      [
-        _vm._v(_vm._s(this.item["translations"][0].name) + " "),
-        _vm.haveChildren && _vm.item.parent_id != null
-          ? _c("i", { staticClass: "icon dropdown-right-icon" })
-          : _vm._e()
-      ]
-    ),
+    _c("a", { attrs: { href: this.item["translations"][0].slug } }, [
+      _vm._v(_vm._s(this.item["translations"][0].name) + " "),
+      _vm.haveChildren && _vm.item.parent_id != null
+        ? _c("i", { staticClass: "icon dropdown-right-icon" })
+        : _vm._e()
+    ]),
     _vm._v(" "),
     _vm.haveChildren
       ? _c(

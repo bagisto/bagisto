@@ -111,18 +111,9 @@ class CartController extends Controller
      * @return Array
      */
     public function test() {
-        $cartItems = $this->cart->items(75);
-
-        $products = array();
-        foreach($cartItems as $cartItem) {
-            $cartItemId = $cartItem->id;
-
-            $this->cart->updateItem(75, $cartItemId, 'quantity', $cartItem->quantity+1);
-
-            array_push($products, ['product_id' => $this->cartItem->getProduct($cartItemId), 'quantity' => $cartItem->quantity]);
-        }
-
-        dd($products);
-        return response()->json($products, 200);
+        $data['product_id'] = 60;
+        $data['quantity'] = 7;
+        $data['price'] = 1600.00;
+        dd($this->cart->createItem(80, $data));
     }
 }
