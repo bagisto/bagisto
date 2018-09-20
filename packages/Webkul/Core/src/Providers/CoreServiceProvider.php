@@ -33,6 +33,7 @@ class CoreServiceProvider extends ServiceProvider
         Validator::extend('slug', 'Webkul\Core\Contracts\Validations\Slug@passes');
         Validator::extend('code', 'Webkul\Core\Contracts\Validations\Code@passes');
     }
+    
     /**
      * Register services.
      *
