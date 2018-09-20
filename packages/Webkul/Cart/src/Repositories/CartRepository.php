@@ -77,11 +77,24 @@ class CartRepository extends Repository
      *
      * @return Mixed
      */
-    public function updateRelatedForMerge($pivot, $column, $value) {
-        $cart_product = $this->model->findOrFail($pivot['cart_id']);
+    public function updateRelatedForMerge($cart_id, $product_id, $column, $value) {
+        $cart_product = $this->model->findOrFail($cart_id);
 
-        return $cart_product->with_products()->updateExistingPivot($pivot['product_id'], array($column => $value));
+        return $cart_product->with_products()->updateExistingPivot($product_id, array($column => $value));
     }
+
+    /**
+     * Update the quantity of
+     * previously added item
+     * in the cart.
+     *
+     * @return Mixed
+     */
+
+    // public function updateRelatedInItems($cartId, $cartItemId, $column, $value) {
+
+    //     return $this->updateItem($cartId)->syncWithoutDetaching($cartItemId, [$column => $value]);
+    // }
 
     /**
      * Method to detach
@@ -92,12 +105,13 @@ class CartRepository extends Repository
      *
      * @return Mixed
      */
-    public function detachAndDeleteParent($cart_id) {
+    public function deleteParent($cart_id) {
         $cart = $this->model->find($cart_id);
 
-        //apply strict check for verifying guest ownership on this record.
-        $cart->with_products()->detach();
-
         return $this->model->destroy($cart_id);
+    }
+
+    public function items($cartId) {
+        return $this->model->find($cartId)->items;
     }
 }

@@ -23,7 +23,7 @@ class ProductAttributeValue extends Model
         'boolean' => 'boolean_value',
         'select' => 'integer_value',
         'multiselect' => 'text_value',
-        'datetime' => 'datetime_time',
+        'datetime' => 'datetime_value',
         'date' => 'date_value',
     ];
 

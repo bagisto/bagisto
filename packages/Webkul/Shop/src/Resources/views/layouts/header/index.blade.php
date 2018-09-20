@@ -91,7 +91,19 @@
 
             </ul>
 
-            <cart-dropdown @if(isset($cart)) :items='@json($cart)' @endif></cart-dropdown>
+            @if(isset($cart))
+                <cart-dropdown :items='@json($cart)'></cart-dropdown>
+            @else
+                <ul class="cart-dropdown">
+                    <li class="cart-summary">
+                        <span class="icon cart-icon"></span>
+
+                        <span class="cart"><span class="cart-count">0</span>Products</span>
+
+                        <span class="icon arrow-down-icon"></span>
+                    </li>
+                </ul>
+            @endif
 
             {{-- Meant for responsive views only --}}
             <ul class="ham-dropdown-container">

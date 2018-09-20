@@ -16,6 +16,10 @@ class Cart extends Model
 
     public function with_products() {
 
-        return $this->belongsToMany(Product::class, 'cart_products')->withPivot('id', 'product_id','quantity', 'cart_id');
+        return $this->belongsToMany(Product::class, 'cart_items')->withPivot('id', 'product_id','quantity', 'cart_id');
+    }
+
+    public function items() {
+        return $this->hasMany('Webkul\Cart\Models\CartItem');
     }
 }

@@ -14,8 +14,7 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::checkout.onepage'
     ])->name('shop.checkout');
 
-    /* dummy routes ends here */
-
+    Route::get('test', 'Webkul\Cart\Http\Controllers\CartController@test');
 
     Route::get('/products/{slug}', 'Webkul\Shop\Http\Controllers\ProductController@index')->defaults('_config', [
         'view' => 'shop::products.view'

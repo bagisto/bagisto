@@ -75,6 +75,8 @@ export default {
 
         initializeDropdown: function() {
             this.totalitems = this.items.length;
+            this.cart_items = this.items;
+            console.log("The cart items here are = ",cart_items);
         }
     }
 }
