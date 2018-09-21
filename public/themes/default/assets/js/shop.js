@@ -31659,10 +31659,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         initializeDropdown: function initializeDropdown() {
             this.totalitems = this.items.length;
             this.cart_items = this.items;
-<<<<<<< HEAD
-=======
-            console.log("The cart items here are = ", this.cart_items);
->>>>>>> 4c89e334f5b115301c5fbd345b50cb61b3c7d089
         }
     }
 });

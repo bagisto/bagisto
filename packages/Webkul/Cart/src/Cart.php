@@ -27,26 +27,24 @@ use Cookie;
 
 class Cart {
 
-    protected $cart;
+    protected $cart;    //item repository instance
 
-    protected $cartItem;
+    protected $cartItem;    //cart item repository instance
 
-    protected $customer;
+    protected $customer;    //customer repository instance
 
-    //Cookie expiry limit in minutes
-    protected $minutes;
+    protected $product;     //product repository instance
 
-    protected $product;
-
-    public function __construct(CartRepository $cart, CartItemRepository $cartItem, CustomerRepository $customer, $minutes = 150, ProductRepository $product) {
+    public function __construct(CartRepository $cart,
+    CartItemRepository $cartItem,
+    CustomerRepository $customer,
+    ProductRepository $product) {
 
         $this->customer = $customer;
 
         $this->cart = $cart;
 
         $this->cartItem = $cartItem;
-
-        $this->minutes = $minutes;
 
         $this->product = $product;
     }
@@ -58,22 +56,20 @@ class Cart {
      *
      * @return mixed
     */
-
     public function createNewCart($id, $data) {
-
         $cartData['channel_id'] = core()->getCurrentChannel()->id;
 
         if(auth()->guard('customer')->check()) {
             $data['customer_id'] = auth()->guard('customer')->user()->id;
 
-            $cartData['customer_full_name'] = auth()->guard('customer')->first_name .' '. auth()->guard('customer')->last_name;
+            $cartData['customer_full_name'] = auth()->guard('customer')->user()->first_name .' '. auth()->guard('customer')->user()->last_name;
         }
 
         if($cart = $this->cart->create($cartData)) {
-
+            $data['cart_id'] = $cart->id;
             $data['product_id'] = $id;
 
-            if($result = $cart->items()->create($data)) {
+            if($result = $this->cartItem->create($data)) {
                 session()->put('cart', $cart);
 
                 session()->flash('success', 'Item Added To Cart Successfully');
@@ -94,13 +90,16 @@ class Cart {
 
     public function add($id, $data) {
 
+        // session()->forget('cart');
+
+        // return redirect()->back();
+
         if(session()->has('cart')) {
             $cart = session()->get('cart');
 
-            $cartItems = $cart->items;
+            $cartItems = $cart->items()->get();
 
             if(isset($cartItems)) {
-
                 foreach($cartItems as $cartItem) {
                     if($cartItem->product_id == $id) {
                         $prevQty = $cartItem->quantity;
@@ -151,7 +150,6 @@ class Cart {
      * with the existing data of cart
      * in the cart tables;
     */
-
     public function mergeCart() {
         if(session()->has('cart')) {
             $cart = session()->get('cart');
@@ -168,7 +166,7 @@ class Cart {
 
                         foreach($cartItems as $key => $cartItem) {
 
-                            if($cartItem->product_id == $customerCartItem->id) {
+                            if($cartItem->product_id == $customerCartItem->product_id) {
 
                                 $customerItemQuantity = $customerCartItem->quantity;
 
@@ -176,9 +174,9 @@ class Cart {
 
                                 $customerCartItem->update(['cart_id' => $customerCart->id, 'quantity' => $cartItemQuantity + $customerItemQuantity]);
 
-                                $cartItem->destroy();
+                                $this->cartItem->delete($cartItem->id);
 
-                                unset($cartItems[$key]);
+                                $cartItems->forget($key);
                             }
                         }
                     }
