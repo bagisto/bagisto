@@ -31621,7 +31621,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 // define the item component
@@ -31660,7 +31659,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         initializeDropdown: function initializeDropdown() {
             this.totalitems = this.items.length;
             this.cart_items = this.items;
-            console.log("The cart items here are = ", cart_items);
         }
     }
 });

@@ -4,6 +4,7 @@ namespace Webkul\Shipping\Carriers;
 
 use Config;
 use Webkul\Cart\Models\CartShipping;
+use Webkul\Shipping\Facades\Shipping;
 
 /**
  * Class Rate.
@@ -20,31 +21,18 @@ class FlatRate extends AbstractShipping
 
     public function calculate()
     {
-        return [
-            'carrier_code' => 'flatrate',
-            'carrier_title' => 'Flat Rate',
-            'carrier_description' => '',
-            'rates' => [
-                [
-                    'method' => 'flatrate_flatrate',
-                    'method_title' => 'Flat Rate',
-                    'price' => 10,
-                    'price_formated' => core()->currency(10),
-                ]
-            ]
-        ];
-        
+        if(!$this->isAvailable())
+            return false;
+
         $object = new CartShipping;
 
-        $object->carrier = 'flatrate_flatrate';
-        $object->carrier_title = $this->getConfigData('description');
-        $object->method = 'flatrate';
+        $object->carrier = 'flatrate';
+        $object->carrier_title = $this->getConfigData('title');
+        $object->method = 'flatrate_flatrate';
         $object->method_title = $this->getConfigData('title');
         $object->method_description = $this->getConfigData('description');
         $object->price = 10;
 
-        return [
-                'flatrate' => [$object]
-            ];
+        return $object;
     }
 }

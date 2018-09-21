@@ -36,6 +36,7 @@
         "webkul/laravel-attribute": "self.version",
         "webkul/laravel-cart": "self.version",
         "webkul/laravel-customer": "self.version",
+        "webkul/laravel-inventory": "self.version",
         "webkul/laravel-category": "self.version",
         "webkul/laravel-product": "self.version",
         "webkul/laravel-shop": "self.version",

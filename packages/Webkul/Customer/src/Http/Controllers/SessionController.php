@@ -72,7 +72,7 @@ class SessionController extends Controller
     {
         auth()->guard('customer')->logout();
 
-        Event::fire('customer.after.logout', 1);
+        Event::fire('customer.after.logout', $id);
 
         return redirect()->route($this->_config['redirect']);
     }
