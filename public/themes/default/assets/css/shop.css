@@ -850,6 +850,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 
 .main-container-wrapper .product-card .product-image {
   margin-bottom: 10px;
+  background: #F2F2F2;
 }
 
 .main-container-wrapper .product-card .product-image img {
@@ -2326,6 +2327,14 @@ section.cart .cart-content .right-side .coupon-section .after-coupon-amount .amo
 
 .checkout-process .col-main .step-content .shipping-methods h4 {
   margin: 0;
+}
+
+.checkout-process .col-main .step-content .payment-methods .radio {
+  font-weight: 600;
+}
+
+.checkout-process .col-main .step-content .payment-methods .control-info {
+  margin-left: 28px;
 }
 
 .checkout-process .col-right {

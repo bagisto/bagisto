@@ -3,7 +3,7 @@
 return [
     'flatrate' => [
         'code' => 'flatrate',
-        'title' => 'Flatrate',
+        'title' => 'Flat Rate',
         'description' => 'This is a flat rate',
         'active' => true,
         'default_rate' => '10',

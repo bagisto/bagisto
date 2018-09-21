@@ -6,19 +6,26 @@
 
         <div class="shipping-methods">
 
-            <div class="control-group" v-for='(shipping_method, index) in shipping_methods' :class="[errors.has('shipping-form.shipping_method') ? 'has-error' : '']">
-                <h4 for="">@{{ shipping_method.carrier_title }}</h4>
+            <div class="control-group" :class="[errors.has('shipping-form.shipping_method') ? 'has-error' : '']">
 
-                <span class="radio"  v-for='(rate, index) in shipping_method.rates'>
-                    <input v-validate="'required'" type="radio" :id="rate.method" name="shipping_method" :value="rate.method">
-                    <label class="radio-view" :for="rate.method"></label>
-                    @{{ rate.method_title }}
-                    <b>@{{ rate.price_formated }}</b>
-                </span>
+                @foreach ($shippingRateGroups as $rateGroup)
+                    <h4 for="">{{ $rateGroup['carrier_title'] }}</h4>
+
+                    @foreach ($rateGroup['rates'] as $rate)
+                        <span class="radio" >
+                            <input v-validate="'required'" type="radio" id="{{ $rate->method }}" name="shipping_method" value="{{ $rate->method }}" v-model="selected_shipping_method">
+                            <label class="radio-view" for="{{ $rate->method }}"></label>
+                            {{ $rate->method_title }}
+                            <b>{{ $rate->price }}</b>
+                        </span>
+                    @endforeach
+                        
+                @endforeach
 
                 <span class="control-error" v-if="errors.has('shipping-form.shipping_method')">
                     @{{ errors.first('shipping-form.shipping_method') }}
                 </span>
+
             </div>
 
         </div>
