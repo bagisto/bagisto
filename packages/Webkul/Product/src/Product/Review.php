@@ -56,7 +56,7 @@ class Review extends AbstractProduct
      */
     public function getTotalRating($product)
     {
-        return $product->reviews()->where('status',1)->sum('rating');
+        return $product->reviews()->where('status','approved')->sum('rating');
     }
 
      /**
@@ -101,7 +101,7 @@ class Review extends AbstractProduct
         $link = $_SERVER['PHP_SELF'];
         $link_array = explode('/',$link);
         $last=end($link_array);
-        $itemPerPage = $last*5;
+        $itemPerPage = 1*5;
         return $product->reviews()->where('status',1)->paginate($itemPerPage);
     }
 }

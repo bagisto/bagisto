@@ -5,6 +5,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
+use Webkul\Shipping\Facades\Shipping;
 
 /**
  * Chekout controller for the customer
@@ -15,7 +16,6 @@ use Auth;
  */
 class CheckoutController extends Controller
 {
-
     /**
      * Contains route related configuration
      *
@@ -43,4 +43,34 @@ class CheckoutController extends Controller
         return view($this->_config['view']);
     }
 
+    /**
+     * Saves customer address.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function saveAddress()
+    {
+
+        return response()->json([
+                'shipping' => Shipping::collectRates()
+            ]);
+    }
+
+    /**
+     * Saves shipping method.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function saveShipping()
+    {
+    }
+
+    /**
+     * Saves payment method.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function saveAPayment()
+    {
+    }
 }

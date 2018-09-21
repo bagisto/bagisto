@@ -1,5 +1,4 @@
 @inject ('reviewHelper', 'Webkul\Product\Product\Review')
-
 @if ($total = $reviewHelper->getTotalReviews($product))
 <div class="rating-reviews">
     <div class="rating-header">
@@ -27,15 +26,17 @@
 
         </div>
 
+        @if(!is_null($customer))
         <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
             {{ __('shop::app.products.write-review-btn') }}
         </a>
+        @endif
 
     </div>
 
     <div class="reviews">
 
-        @foreach ($reviewHelper->getReviews($product)->paginate(5) as $review)
+        @foreach ($reviewHelper->getReviews($product)->paginate(10) as $review)
             <div class="review">
                 <div class="title">
                     {{ $review->title }}

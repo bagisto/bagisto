@@ -1,15 +1,14 @@
 <?php
 
-namespace Webkul\Shipping\Providers;
+namespace Webkul\Payment\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
-use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
-use Webkul\Shipping\Shipping;
-use Webkul\Shipping\Facades\Shipping as ShippingFacade;
+use Webkul\Payment\Payment;
+use Webkul\Payment\Facades\Payment as PaymentFacade;
 
-class ShippingServiceProvider extends ServiceProvider
+class PaymentServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
@@ -38,10 +37,10 @@ class ShippingServiceProvider extends ServiceProvider
     protected function registerFacades()
     {
         $loader = AliasLoader::getInstance();
-        $loader->alias('shipping', ShippingFacade::class);
+        $loader->alias('payment', PaymentFacade::class);
 
-        $this->app->singleton('shipping', function () {
-            return new Shipping();
+        $this->app->singleton('payment', function () {
+            return new Payment();
         });
     }
 }

@@ -84,7 +84,8 @@ return [
             'order-summary' => 'Order Summary',
             'shipping-address' => 'Shipping Address',
             'use_for_shipping' => 'Ship to this address',
-            'continue' => 'Continue'
+            'continue' => 'Continue',
+            'shipping-method' => 'Shipping Method'
         ]
     ]
 ];

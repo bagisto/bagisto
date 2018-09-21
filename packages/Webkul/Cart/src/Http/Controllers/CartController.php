@@ -7,7 +7,10 @@ use Illuminate\Http\Response;
 
 //Cart repositories
 use Webkul\Cart\Repositories\CartRepository;
-use Webkul\Cart\Repositories\CartProductRepository;
+use Webkul\Cart\Repositories\CartItemRepository;
+
+//Product Repository
+use Webkul\Product\Repositories\ProductRepository;
 
 //Customer repositories
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -36,11 +39,13 @@ class CartController extends Controller
 
     protected $cart;
 
-    protected $cartProduct;
+    protected $cartItem;
 
     protected $customer;
 
-    public function __construct(CartRepository $cart, CartProductRepository $cartProduct, CustomerRepository $customer) {
+    protected $product;
+
+    public function __construct(CartRepository $cart, CartItemRepository $cartItem, CustomerRepository $customer, ProductRepository $product) {
 
         $this->middleware('customer')->except(['add', 'remove', 'test']);
 
@@ -48,7 +53,9 @@ class CartController extends Controller
 
         $this->cart = $cart;
 
-        $this->cartProduct = $cartProduct;
+        $this->cartItem = $cartItem;
+
+        $this->product = $product;
     }
 
     /**
@@ -60,11 +67,26 @@ class CartController extends Controller
      */
 
     public function add($id) {
+        $data = request()->input();
+        // dd($data);
+        if(!isset($data['is_configurable']) || !isset($data['product']) ||!isset($data['quantity'])) {
+            session()->flash('error', 'Cannot Product Due to User\'s miscreancy in system\'s integrity');
+
+            return redirect()->back();
+        }
+
+        if($data['is_configurable'] == "false") {
+            $data['price'] = $this->product->findOneByField('id', $data['product'])->price;
+        } else {
+            $id = $data['selected_configurable_option'];
+
+            $data['price'] = $this->product->findOneByField('id', $data['selected_configurable_option'])->price;
+        }
 
         if(auth()->guard('customer')->check()) {
-            Cart::add($id);
+            Cart::add($id, $data);
         } else {
-            Cart::guestUnitAdd($id);
+            Cart::guestUnitAdd($id, $data);
         }
 
         return redirect()->back();
@@ -81,20 +103,26 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    // public function test() {
-    //     $cookie = Cookie::get('cart_session_id');
+    /**
+     * This is a test for
+     * relationship existence
+     * from cart item to product
+     *
+     * @return Array
+     */
+    public function test() {
+        $cartItems = $this->cart->items(75);
 
-    //     $cart = $this->cart->findOneByField('session_id', $cookie);
+        $products = array();
+        foreach($cartItems as $cartItem) {
+            $cartItemId = $cartItem->id;
 
-    //     $cart_products = $this->cart->getProducts($cart->id);
+            $this->cart->updateItem(75, $cartItemId, 'quantity', $cartItem->quantity+1);
 
-    //     foreach($cart_products as $cart_product) {
-    //         $quantity = $cart_product->toArray()['pivot']['quantity'] + 1;
+            array_push($products, ['product_id' => $this->cartItem->getProduct($cartItemId), 'quantity' => $cartItem->quantity]);
+        }
 
-    //         $pivot = $cart_product->toArray()['pivot'];
-
-    //         $saveQuantity = $this->cart->saveRelated($pivot, 'quantity', $quantity+1);
-    //     }
-    //     dd('done');
-    // }
+        dd($products);
+        return response()->json($products, 200);
+    }
 }

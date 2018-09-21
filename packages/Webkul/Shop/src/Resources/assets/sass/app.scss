@@ -1070,7 +1070,6 @@ section.slider-block {
                 .addtocart {
                     white-space: nowrap;
                     font-size: 12px;
-                    border-radius: 0px;
                 }
             }
         }
@@ -1174,7 +1173,6 @@ section.slider-block {
                 .addtocart {
                     white-space: nowrap;
                     font-size: 12px;
-                    border-radius: 0px;
                 }
             }
         }
@@ -1651,13 +1649,11 @@ section.product-detail {
                     .addtocart {
                         width: 293px;
                         background: black;
-                        border-radius: 0px;
                     }
 
                     .buynow {
                         width: 293px;
                         float:right;
-                        border-radius: 0px;
                     }
                 }
             }
@@ -1995,12 +1991,10 @@ section.product-detail {
                             .addtocart {
                                 width: 49%;
                                 background: #000000;
-                                border-radius: 0px;
                             }
 
                             .buynow {
                                 width: 49%;
-                                border-radius: 0px;
                             }
                         }
                     }
@@ -4221,5 +4215,58 @@ section.review {
     }
 }
 
+// review page end here
 
-// review page start here
+
+// customer section css start here
+
+.cusomer-section {
+    margin-left: 50px;
+    width:100%;
+
+    .customer-section-info {
+        display: flex;
+        flex-direction: row;
+        border-top: 1px solid #E8E8E8;
+
+        .pro-img {
+            margin-top: 10px;
+            margin-bottom: 5px;
+
+            img {
+               height: 125px;
+               width: 100px;
+            }
+        }
+
+        .pro-discription {
+            margin-left: 20px;
+            width: 100%;
+
+            .title {
+                font-size: 16px;
+                color: #0031F0;
+                margin-top: 15px;
+            }
+
+            .rating {
+                margin-top: 10px;
+
+                .icon {
+                    height: 16px;
+                    width: 16px;
+                }
+            }
+
+            .discription {
+                margin-top: 15px;
+            }
+        }
+    }
+
+    .customer-section-info:last-child {
+        border-bottom: 1px solid #e8e8e8;
+    }
+}
+
+// customer section css end here

@@ -8,15 +8,13 @@
 @section('content-wrapper')
     <section class="product-detail">
         <div class="category-breadcrumbs">
-
             <span class="breadcrumb">Home</span> > <span class="breadcrumb">Men</span> > <span class="breadcrumb">Slit Open Jeans</span>
-
         </div>
         <div class="layouter">
             <form method="POST" action="{{ route('cart.add', $product->id) }}">
                 @csrf()
 
-                <input type="hidden" name="product">
+                <input type="hidden" name="product" value="{{ $product->id }}">
 
                 @include ('shop::products.view.gallery')
 
@@ -36,6 +34,17 @@
                     <div class="description">
                         {{ $product->short_description }}
                     </div>
+
+                    <div class="quantity control-group">
+                    <label class="reqiured">Quantity</label>
+                        <input name="quantity" class="control" value="1" v-validate="'numeric'" required style="width: 60px;">
+                    </div>
+
+                    @if ($product->type == 'configurable')
+                        <input type="hidden" value="true" name="is_configurable">
+                    @else
+                        <input type="hidden" value="false" name="is_configurable">
+                    @endif
 
                     @include ('shop::products.view.configurable-options')
 

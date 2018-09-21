@@ -157,7 +157,7 @@ class Product extends Model
      * @return mixed
      */
     public function getAttribute($key)
-    {   
+    {
         if (!method_exists(self::class, $key) && !in_array($key, ['parent_id', 'attribute_family_id']) && !isset($this->attributes[$key])) {
             if (isset($this->id) && $this->isCustomAttribute($key)) {
                 $this->attributes[$key] = '';
