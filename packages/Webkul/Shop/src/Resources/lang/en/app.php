@@ -85,7 +85,8 @@ return [
             'shipping-address' => 'Shipping Address',
             'use_for_shipping' => 'Ship to this address',
             'continue' => 'Continue',
-            'shipping-method' => 'Shipping Method'
+            'shipping-method' => 'Shipping Method',
+            'payment-information' => 'Payment Information'
         ]
     ]
 ];
