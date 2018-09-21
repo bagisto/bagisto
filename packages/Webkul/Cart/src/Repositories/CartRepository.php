@@ -67,8 +67,15 @@ class CartRepository extends Repository
         return $this->model->findOrFail($cart_id)->with_products()->attach($cart_id, ['product_id' => $product_id, 'cart_id' => $cart_id, 'quantity' => $quantity, 'price' => $price]);
     }
 
+    /**
+     * Create Cart Item
+     * Through Cart.
+     *
+     * @return Collection
+     */
     public function createItem($cartId, $data) {
         $cart = $this->model->findOrFail($cartId);
+
         return $cart->items()->create($data);
     }
 
