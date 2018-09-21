@@ -54,8 +54,8 @@
                 </div>
 
                 <div class="step-content shipping" v-show="currentStep == 2">
-                    
-                    @include('shop::checkout.onepage.shipping')
+
+                    <shipping-section v-if="currentStep == 2"></shipping-section>
 
                     <div class="button-group">
 
@@ -69,7 +69,15 @@
 
                 <div class="step-content payment" v-show="currentStep == 3">
 
-                    @include('shop::checkout.onepage.payment')
+                    <payment-section v-if="currentStep == 3"></payment-section>
+
+                    <div class="button-group">
+
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('payment-form')">
+                            {{ __('shop::app.checkout.onepage.continue') }}
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -87,6 +95,10 @@
     </script>
 
     <script>
+
+        var shippingHtml = '';
+        var paymentHtml = '';
+
         Vue.component('checkout', {
 
             template: '#checkout-template',
@@ -97,10 +109,6 @@
                 currentStep: 1,
 
                 completedStep: 0,
-
-                shipping_methods: [],
-
-                payment_methods: [],
 
                 address: {
                     billing: {
@@ -114,12 +122,8 @@
 
                 selected_payment: {
                     method: ''
-                }
+                },
             }),
-
-            created () {
-
-            },
 
             methods: {
                 navigateToStep (step) {
@@ -136,6 +140,8 @@
                                 this.saveAddress()
                             } else if(scope == 'shipping-form') {
                                 this.saveShipping()
+                            } else if(scope == 'payment-form') {
+                                this.savePayment()
                             }
                         }
                     });
@@ -143,11 +149,10 @@
 
                 saveAddress () {
                     var this_this = this;
-
                     this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
                         .then(function(response) {
-                            if(response.data.shipping) {
-                                this_this.shipping_methods = response.data.shipping
+                            if(response.data.jump_to_section == 'shipping') {
+                                shippingHtml = Vue.compile(response.data.html)
                                 this_this.completedStep = 1;
                                 this_this.currentStep = 2;
                             }
@@ -155,20 +160,87 @@
                 },
 
                 saveShipping () {
-                    // this.$http.get('https://api.coindesk.com/v1/bpi/currentprice.json')
-                    //     .then(function(response) {
-                            this.completedStep = 2;
-                            this.currentStep = 3;
-                        // })
+                    var this_this = this;
+                    this.$http.post("{{ route('shop.checkout.save-shipping') }}", {'shipping_method': this.selected_shipping_method})
+                        .then(function(response) {
+                            if(response.data.jump_to_section == 'payment') {
+                                shippingHtml = Vue.compile(response.data.html)
+                                this_this.completedStep = 2;
+                                this_this.currentStep = 3;
+                            }
+                        })
                 },
 
                 savePayment () {
-                    // this.$http.get('https://api.coindesk.com/v1/bpi/currentprice.json')
-                    //     .then(function(response) {
-                            this.completedStep = 1;
-                            this.currentStep = 2;
-                        // })
+                    var this_this = this;
+                    this.$http.post("{{ route('shop.checkout.save-payment') }}", {'shipping_method': this.selected_shipping_method})
+                        .then(function(response) {
+                            if(response.data.jump_to_section == 'payment') {
+                                shippingHtml = Vue.compile(response.data.html)
+                                this_this.completedStep = 3;
+                                this_this.currentStep = 4;
+                            }
+                        })
                 }
+            }
+        })
+
+        var shippingTemplateRenderFns = [];
+        Vue.component('shipping-section', {
+
+            inject: ['$validator'],
+
+            data: () => ({
+                templateRender: null,
+
+                selected_shipping_method: '',
+            }),
+
+            staticRenderFns: shippingTemplateRenderFns,
+
+            mounted() {
+                this.templateRender = shippingHtml.render;
+                for (var i in shippingHtml.staticRenderFns) {
+                    shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
+                }
+            },
+
+            render(h) {
+                return h('div', [
+                    (this.templateRender ?
+                        this.templateRender() :
+                        '')
+                    ]);
+            }
+        })
+
+        var paymentTemplateRenderFns = [];
+        Vue.component('payment-section', {
+
+            inject: ['$validator'],
+
+            data: () => ({
+                templateRender: null,
+
+                selected_payment_method: '',
+            }),
+
+            staticRenderFns: paymentTemplateRenderFns,
+
+            mounted() {
+                this.templateRender = shippingHtml.render;
+
+                for (var i in shippingHtml.staticRenderFns) {
+                    paymentTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
+                }
+            },
+
+            render(h) {
+                return h('div', [
+                    (this.templateRender ?
+                        this.templateRender() :
+                        '')
+                    ]);
             }
         })
     </script>

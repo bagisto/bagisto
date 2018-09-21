@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
 use Webkul\Shipping\Facades\Shipping;
+use Webkul\Payment\Facades\Payment;
+use Webkul\Cart\Facades\Cart;
 
 /**
  * Chekout controller for the customer
@@ -51,9 +53,7 @@ class CheckoutController extends Controller
     public function saveAddress()
     {
 
-        return response()->json([
-                'shipping' => Shipping::collectRates()
-            ]);
+        return response()->json(Shipping::collectRates());
     }
 
     /**
@@ -63,6 +63,7 @@ class CheckoutController extends Controller
     */
     public function saveShipping()
     {
+        return response()->json(Payment::getSupportedPaymentMethods());
     }
 
     /**

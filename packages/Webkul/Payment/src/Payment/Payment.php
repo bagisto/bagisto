@@ -27,7 +27,7 @@ abstract class Payment
             // throw exception
         }
 
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -41,13 +41,13 @@ abstract class Payment
     }
 
     /**
-     * Returns payment method decription
+     * Returns payment method description
      *
      * @return array
      */
-    public function getDecription()
+    public function getDescription()
     {
-        return $this->getConfigData('decription');
+        return $this->getConfigData('description');
     }
 
     /**
@@ -61,10 +61,10 @@ abstract class Payment
     public function getConfigData($field, $channelId = null)
     {
         if (null === $channelId) {
-            $channelId = core()->getCurrentChannel()->getId();
+            $channelId = core()->getCurrentChannel()->id;
         }
 
-        $paymentConfig = Config::get('paymentmethods' . $this->getCode());
+        $paymentConfig = Config::get('paymentmethods.' . $this->getCode());
 
         return $paymentConfig[$field];
     }

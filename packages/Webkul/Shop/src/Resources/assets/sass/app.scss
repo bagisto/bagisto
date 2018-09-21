@@ -798,6 +798,7 @@ section.slider-block {
 
         .product-image {
             margin-bottom: 10px;
+            background: #F2F2F2;
 
             img {
                 align-self: center;
@@ -2214,6 +2215,16 @@ section.cart {
             .shipping-methods {
                 h4 {
                     margin: 0;
+                }
+            }
+
+            .payment-methods {
+                .radio {
+                    font-weight: 600;
+                }
+
+                .control-info {
+                    margin-left: 28px;
                 }
             }
         }
