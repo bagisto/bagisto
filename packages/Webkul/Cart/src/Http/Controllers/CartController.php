@@ -68,7 +68,7 @@ class CartController extends Controller
 
     public function add($id) {
         $data = request()->input();
-        // dd($data);
+
         if(!isset($data['is_configurable']) || !isset($data['product']) ||!isset($data['quantity'])) {
             session()->flash('error', 'Cannot Product Due to User\'s miscreancy in system\'s integrity');
 
@@ -83,11 +83,7 @@ class CartController extends Controller
             $data['price'] = $this->product->findOneByField('id', $data['selected_configurable_option'])->price;
         }
 
-        if(auth()->guard('customer')->check()) {
-            Cart::add($id, $data);
-        } else {
-            Cart::guestUnitAdd($id, $data);
-        }
+        Cart::add($id, $data);
 
         return redirect()->back();
     }
@@ -111,18 +107,28 @@ class CartController extends Controller
      * @return Array
      */
     public function test() {
-        $cartItems = $this->cart->items(75);
+        $cart = $this->cart->findOneByField('id', 110);
 
-        $products = array();
-        foreach($cartItems as $cartItem) {
-            $cartItemId = $cartItem->id;
+        $items = $cart->items;
 
-            $this->cart->updateItem(75, $cartItemId, 'quantity', $cartItem->quantity+1);
+        $allProdQty = array();
 
-            array_push($products, ['product_id' => $this->cartItem->getProduct($cartItemId), 'quantity' => $cartItem->quantity]);
+        $allProdQty1 = array();
+
+        $totalQty = 0;
+
+        foreach($items as $item) {
+            $inventories = $item->product->inventories;
+
+            foreach($inventories as $inventory) {
+                $totalQty = $totalQty + $inventory->qty;
+            }
+
+            array_push($allProdQty1, $totalQty);
+
+            $allProdQty[$item->product->id] = $totalQty;
         }
 
-        dd($products);
-        return response()->json($products, 200);
+        dd($allProdQty, $allProdQty1);
     }
 }

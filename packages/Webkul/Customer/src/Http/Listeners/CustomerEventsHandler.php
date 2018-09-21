@@ -32,6 +32,7 @@ class CustomerEventsHandler {
 
     //use this when there is very uttermost need to use it.
     public function onCustomerLogout($event) {
+        Cart::destroyCart();
     }
 
     /**
