@@ -1132,6 +1132,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   .main-container-wrapper .product-card .cart-fav-seg .addtocart {
     white-space: nowrap;
     font-size: 12px;
+    border-radius: 0px;
   }
   .main-container-wrapper .top-toolbar {
     border-bottom: 1px solid #E8E8E8;
@@ -1197,6 +1198,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   .main-container-wrapper .product-card .cart-fav-seg .addtocart {
     white-space: nowrap;
     font-size: 12px;
+    border-radius: 0px;
   }
   .main-container-wrapper .top-toolbar {
     border-bottom: 1px solid #E8E8E8;
@@ -1692,11 +1694,13 @@ section.product-detail div.layouter form div.product-image-group .cart-fav-seg {
 section.product-detail div.layouter form div.product-image-group .cart-fav-seg .addtocart {
   width: 293px;
   background: black;
+  border-radius: 0px;
 }
 
 section.product-detail div.layouter form div.product-image-group .cart-fav-seg .buynow {
   width: 293px;
   float: right;
+  border-radius: 0px;
 }
 
 section.product-detail div.layouter form .details {
@@ -1905,9 +1909,11 @@ section.product-detail div.layouter form .details .full-description {
   section.product-detail div.layouter form .details .attributes .cart-fav-seg .addtocart {
     width: 49%;
     background: #000000;
+    border-radius: 0px;
   }
   section.product-detail div.layouter form .details .attributes .cart-fav-seg .buynow {
     width: 49%;
+    border-radius: 0px;
   }
 }
 

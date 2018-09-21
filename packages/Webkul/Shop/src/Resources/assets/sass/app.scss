@@ -1070,6 +1070,7 @@ section.slider-block {
                 .addtocart {
                     white-space: nowrap;
                     font-size: 12px;
+                    border-radius: 0px;
                 }
             }
         }
@@ -1173,6 +1174,7 @@ section.slider-block {
                 .addtocart {
                     white-space: nowrap;
                     font-size: 12px;
+                    border-radius: 0px;
                 }
             }
         }
@@ -1649,11 +1651,13 @@ section.product-detail {
                     .addtocart {
                         width: 293px;
                         background: black;
+                        border-radius: 0px;
                     }
 
                     .buynow {
                         width: 293px;
                         float:right;
+                        border-radius: 0px;
                     }
                 }
             }
@@ -1991,10 +1995,12 @@ section.product-detail {
                             .addtocart {
                                 width: 49%;
                                 background: #000000;
+                                border-radius: 0px;
                             }
 
                             .buynow {
                                 width: 49%;
+                                border-radius: 0px;
                             }
                         }
                     }
