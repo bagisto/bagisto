@@ -4,14 +4,11 @@ namespace Webkul\Cart;
 
 use Carbon\Carbon;
 
-//Cart repositories
 use Webkul\Cart\Repositories\CartRepository;
 use Webkul\Cart\Repositories\CartItemRepository;
 
-//Customer repositories
 use Webkul\Customer\Repositories\CustomerRepository;
 
-//Product Repository
 use Webkul\Product\Repositories\ProductRepository;
 
 use Cookie;
@@ -24,12 +21,11 @@ use Cookie;
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class Cart {
 
-    protected $cart;    //item repository instance
+    protected $cart;    //cart repository instance
 
-    protected $cartItem;    //cart item repository instance
+    protected $cartItem;    //cart_item repository instance
 
     protected $customer;    //customer repository instance
 
@@ -50,17 +46,20 @@ class Cart {
     }
 
     /**
-     * Create New Cart
-     * Cart, Cookie &
-     * Session.
+     * Create new cart
+     * instance with the
+     * current item added.
      *
-     * @return mixed
-    */
+     * @param @id
+     * @param $data
+     *
+     * @return Mixed
+     */
     public function createNewCart($id, $data) {
         $cartData['channel_id'] = core()->getCurrentChannel()->id;
 
         if(auth()->guard('customer')->check()) {
-            $data['customer_id'] = auth()->guard('customer')->user()->id;
+            $cartData['customer_id'] = auth()->guard('customer')->user()->id;
 
             $cartData['customer_full_name'] = auth()->guard('customer')->user()->first_name .' '. auth()->guard('customer')->user()->last_name;
         }
@@ -82,18 +81,18 @@ class Cart {
         return redirect()->back();
     }
 
-    /*
-    handle the after login event for the customers
-    when their are pruoducts in the session or cookie
-    of the logged in user.
-    */
-
+    /**
+     * Add Items in a
+     * cart with some
+     * cart and item
+     * details.
+     *
+     * @param @id
+     * @param $data
+     *
+     * @return Mixed
+     */
     public function add($id, $data) {
-
-        // session()->forget('cart');
-
-        // return redirect()->back();
-
         if(session()->has('cart')) {
             $cart = session()->get('cart');
 
@@ -145,11 +144,13 @@ class Cart {
     }
 
     /**
-     * Function to handle merge
-     * and sync the cookies products
-     * with the existing data of cart
-     * in the cart tables;
-    */
+     * This function handles
+     * when guest has some of
+     * cart products and then
+     * logs in.
+     *
+     * @return Redirect
+     */
     public function mergeCart() {
         if(session()->has('cart')) {
             $cart = session()->get('cart');
@@ -197,21 +198,6 @@ class Cart {
                 return redirect()->back();
             }
         } else {
-            return redirect()->back();
-        }
-    }
-
-    /**
-     * Destroys the session
-     * maintained for cart
-     * on customer logout.
-     *
-     * @return Mixed
-     */
-    public function destroyCart() {
-        if(session()->has('cart')) {
-            session()->forget('cart');
-
             return redirect()->back();
         }
     }

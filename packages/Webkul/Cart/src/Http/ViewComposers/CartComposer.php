@@ -9,8 +9,6 @@ use Webkul\Cart\Repositories\CartRepository;
 
 use Webkul\Cart\Repositories\CartItemRepository;
 
-
-use Cookie;
 use Cart;
 /**
  * cart List Composer on Navigation Menu
@@ -57,11 +55,11 @@ class CartComposer
                 $view->with('cart', $cart_products);
             }
         } else {
-            if(Cookie::has('cart_session_id')) {
-                $cart = $this->cart->findOneByField('session_id', Cookie::get('cart_session_id'));
+            if(session()->has('cart')) {
+                $cart = session()->get('cart');
 
                 if(isset($cart)) {
-                    $cart_items = $this->cart->items($cart['id']);
+                    $cartItems = $this->cart->items($cart['id']);
 
                     $cart_products = array();
 

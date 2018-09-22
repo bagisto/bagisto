@@ -100,13 +100,14 @@ class CartController extends Controller
     }
 
     /**
-     * This is a test for
-     * relationship existence
-     * from cart item to product
+     * This method will return
+     * the quantities from
+     * inventory sources whose
+     * status are not false.
      *
      * @return Array
      */
-    public function test() {
+    public function canAddOrUpdate() {
         $cart = $this->cart->findOneByField('id', 144);
 
         $items = $cart->items;
@@ -147,6 +148,9 @@ class CartController extends Controller
                 dump($inventory->status);
             }
         }
+    }
+
+    public function test() {
 
     }
 }
