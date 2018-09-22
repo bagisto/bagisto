@@ -73,9 +73,9 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.edit'
             ])->name('admin.customer.edit');
 
-            // Route::put('customer/reviews/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@update')->defaults('_config', [
-            //     'redirect' => 'admin.customer.index'
-            // ])->name('admin.customer.update');
+            Route::put('customer/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@update')->defaults('_config', [
+                'redirect' => 'admin.customer.index'
+            ])->name('admin.customer.update');
 
             // dummy number i.e-1 is used for creating view only
 
