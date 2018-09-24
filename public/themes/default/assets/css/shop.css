@@ -664,6 +664,7 @@ section.slider-block {
 }
 
 section.slider-block div.slider-content {
+  position: relative;
   height: 500px;
   margin-left: auto;
   margin-right: auto;
@@ -677,7 +678,7 @@ section.slider-block div.slider-content ul.slider-images li {
 section.slider-block div.slider-content ul.slider-images li.show {
   display: block;
   visibility: visible;
-  width: 80%;
+  width: 100%;
   -webkit-animation-name: example;
           animation-name: example;
   -webkit-animation-duration: 4s;
@@ -715,7 +716,7 @@ section.slider-block div.slider-content div.slider-control {
       -ms-user-select: none;
           user-select: none;
   bottom: 2%;
-  right: 11%;
+  right: 2%;
 }
 
 section.slider-block div.slider-content div.slider-control .dark-left-icon {

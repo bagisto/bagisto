@@ -7,9 +7,11 @@
 
         <div class="cart-content">
 
+            {{-- {{ dd($products) }} --}}
+
             <div class="left-side">
 
-                <div class="item">
+                {{-- <div class="item">
                     <img class="item-image" src="{{ bagisto_asset('images/jeans_big.jpg') }}" />
 
                     <div class="item-details">
@@ -42,41 +44,45 @@
                         </div>
                     </div>
 
-                </div>
-                <div class="item">
-                    <img class="item-image" src="{{ bagisto_asset('images/jeans_big.jpg') }}" />
-
-                    <div class="item-details">
-
-                        <div class="item-title">
-                            Rainbow Creation Embroided
+                </div> --}}
+                @foreach($products as $product)
+                    <div class="item">
+                        <div style="margin-right: 15px;">
+                            <img class="item-image" src="{{ bagisto_asset("$product[2]") }}" />
                         </div>
 
-                        <div class="price">
-                            <span class="main-price">
-                                $24.00
-                            </span>
-                            <span class="real-price">
-                                $25.00
-                            </span>
-                            <span class="discount">
-                                10% Off
-                            </span>
+                        <div class="item-details">
+
+                            <div class="item-title">
+                                {{$product[0]}}
+                            </div>
+
+                            <div class="price">
+                                <span class="main-price">
+                                    {{$product[1]}}
+                                </span>
+                                <span class="real-price">
+                                    $25.00
+                                </span>
+                                <span class="discount">
+                                    10% Off
+                                </span>
+                            </div>
+
+                            <div class="summary" >
+                                Color : Gray, Size : S, Sleeve type : Puffed Sleeves, Occasion : Birthday,  Marriage Anniversary
+                            </div>
+
+                            <div class="misc">
+                                <div class="qty-text">Quantity</div>
+                                <div class="box">{{ $product[3] }}</div>
+                                <span class="remove">Remove</span>
+                                <span class="towishlist">Move to Wishlist</span>
+                            </div>
                         </div>
 
-                        <div class="summary">
-                            Color : Gray, Size : S, Sleeve type : Puffed Sleeves, Occasion : Birthday,  Marriage Anniversary
-                        </div>
-
-                        <div class="misc">
-                            <div class="qty-text">Quantity</div>
-                            <div class="box">1</div>
-                            <span class="remove">Remove</span>
-                            <span class="towishlist">Move to Wishlist</span>
-                        </div>
                     </div>
-
-                </div>
+                @endforeach
 
                 <div class="misc-controls">
                     <span>Continue Shopping</span>
@@ -90,22 +96,12 @@
                         Price Detail
                     </div>
                     <div class="all-item-details">
-
-                        <div class="item-details">
-                            <span class="name">Item 1</span>
-                            <span class="price">$25.00</span>
-                        </div>
-
-                        <div class="item-details">
-                            <span class="name">Item 2</span>
-                            <span class="price">$25.00</span>
-                        </div>
-
-                        <div class="item-details">
-                            <span class="name">Item 3</span>
-                            <span class="price">$25.00</span>
-                        </div>
-
+                        @foreach($products as $product)
+                            <div class="item-details">
+                                <span class="name">{{ $product[0] }}</span>
+                                <span class="price">$ {{ $product[1] }}</span>
+                            </div>
+                        @endforeach
                     </div>
 
                     <div class="horizontal-rule"></div>

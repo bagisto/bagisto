@@ -5,15 +5,15 @@ namespace Webkul\Cart\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-//Cart repositories
 use Webkul\Cart\Repositories\CartRepository;
 use Webkul\Cart\Repositories\CartItemRepository;
 
-//Product Repository
 use Webkul\Product\Repositories\ProductRepository;
 
-//Customer repositories
 use Webkul\Customer\Repositories\CustomerRepository;
+
+use Webkul\Product\Product\ProductImage;
+use Webkul\Product\Product\View as ProductView;
 
 use Cart;
 use Cookie;
@@ -45,7 +45,9 @@ class CartController extends Controller
 
     protected $product;
 
-    public function __construct(CartRepository $cart, CartItemRepository $cartItem, CustomerRepository $customer, ProductRepository $product) {
+    protected $productView;
+
+    public function __construct(CartRepository $cart, CartItemRepository $cartItem, CustomerRepository $customer, ProductRepository $product, ProductImage $productImage, ProductView $productView) {
 
         $this->middleware('customer')->except(['add', 'remove', 'test']);
 
@@ -56,6 +58,12 @@ class CartController extends Controller
         $this->cartItem = $cartItem;
 
         $this->product = $product;
+
+        $this->productImage = $productImage;
+
+        $this->productView = $productView;
+
+        $this->_config = request('_config');
     }
 
     /**
@@ -97,6 +105,67 @@ class CartController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    /**
+     * Method to populate
+     * the cart page which
+     * will be populated
+     * before the checkout
+     * process.
+     *
+     * @return Mixed
+     */
+    public function beforeCheckout() {
+        if(auth()->guard('customer')->check()) {
+            $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
+
+            if(isset($cart)) {
+                $cart = $this->cart->findOneByField('id', 144);
+
+                $cartItems = $this->cart->items($cart['id']);
+
+                $products = array();
+
+                foreach($cartItems as $cartItem) {
+                    $image = $this->productImage->getGalleryImages($cartItem->product);
+
+                    if(isset($image[0]['small_image_url'])) {
+                        $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, $image[0]['small_image_url'], $cartItem->quantity];
+                    }
+                    else {
+                        $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, 'null', $cartItem->quantity];
+                    }
+
+                }
+            }
+        } else {
+            if(session()->has('cart')) {
+                $cart = session()->get('cart');
+
+                if(isset($cart)) {
+                    $cart = $this->cart->findOneByField('id', 144);
+
+                    $cartItems = $this->cart->items($cart['id']);
+
+                    $products = array();
+
+                    foreach($cartItems as $cartItem) {
+                        $image = $this->productImage->getGalleryImages($cartItem->product);
+
+                        if(isset($image[0]['small_image_url'])) {
+                            $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, $image[0]['small_image_url'], $cartItem->quantity];
+                        }
+                        else {
+                            $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, 'null', $cartItem->quantity];
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return view($this->_config['view'])->with('products', $products);
     }
 
     /**
@@ -151,6 +220,26 @@ class CartController extends Controller
     }
 
     public function test() {
+        $cart = $this->cart->findOneByField('id', 144);
 
+        $cartItems = $this->cart->items($cart['id']);
+
+        $products = array();
+
+        foreach($cartItems as $cartItem) {
+            $image = $this->productImage->getGalleryImages($cartItem->product);
+
+            dump($cartItem->product);
+
+            if(isset($image[0]['small_image_url'])) {
+                $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, $image[0]['small_image_url'], $cartItem->quantity];
+            }
+            else {
+                $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, 'null', $cartItem->quantity];
+            }
+
+        }
+
+        dd($products);
     }
 }
