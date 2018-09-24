@@ -31,7 +31,10 @@ class RegistrationController extends Controller
     }
 
     /**
-     * For showing the registration form
+     * Opens up the
+     * user's sign up
+     * form.
+     *
      * @return view
      */
     public function show()
@@ -40,9 +43,11 @@ class RegistrationController extends Controller
     }
 
     /**
-     * For collecting the registration
-     * data from the registraion form
-     * @return view
+     * Method to store
+     * user's sign up
+     * form data to DB
+     *
+     * @return Mixed
      */
     public function create(Request $request)
     {
@@ -52,13 +57,17 @@ class RegistrationController extends Controller
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'email' => 'email|required',
-            'password' => 'confirmed|min:6|required'
-
+            'password' => 'confirmed|min:6|required',
+            'agreement' => 'confirmed'
         ]);
 
-        $registrationData = $request->except('_token');
+        $data = request()->input();
 
-        if ($this->customer->create($registrationData)) {
+        $data['password'] = bcrypt($data['password']);
+
+        // $registrationData = $request->except('_token');
+
+        if ($this->customer->create($data)) {
 
             session()->flash('success', 'Account created successfully.');
 

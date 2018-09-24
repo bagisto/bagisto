@@ -100,14 +100,15 @@ class CartController extends Controller
     }
 
     /**
-     * This is a test for
-     * relationship existence
-     * from cart item to product
+     * This method will return
+     * the quantities from
+     * inventory sources whose
+     * status are not false.
      *
      * @return Array
      */
-    public function test() {
-        $cart = $this->cart->findOneByField('id', 110);
+    public function canAddOrUpdate() {
+        $cart = $this->cart->findOneByField('id', 144);
 
         $items = $cart->items;
 
@@ -120,15 +121,36 @@ class CartController extends Controller
         foreach($items as $item) {
             $inventories = $item->product->inventories;
 
-            foreach($inventories as $inventory) {
-                $totalQty = $totalQty + $inventory->qty;
+            $inventory_sources = $item->product->inventory_sources;
+
+            $totalQty = 0;
+            foreach($inventory_sources as $inventory_source) {
+
+                if($inventory_source->status!=0) {
+                    foreach($inventories as $inventory) {
+                        $totalQty = $totalQty + $inventory->qty;
+                    }
+
+                    array_push($allProdQty1, $totalQty);
+
+                    $allProdQty[$item->product->id] = $totalQty;
+                }
+
             }
-
-            array_push($allProdQty1, $totalQty);
-
-            $allProdQty[$item->product->id] = $totalQty;
         }
 
-        dd($allProdQty, $allProdQty1);
+        dd($allProdQty);
+
+        foreach ($items as $item) {
+            $inventories = $item->product->inventory_sources->where('status', '=', '1');
+
+            foreach($inventories as $inventory) {
+                dump($inventory->status);
+            }
+        }
+    }
+
+    public function test() {
+
     }
 }
