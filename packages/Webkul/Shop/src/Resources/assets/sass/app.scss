@@ -849,6 +849,7 @@ section.slider-block {
                 border-radius: 0px;
                 margin-right: 10px;
                 text-transform: uppercase;
+                white-space: nowrap;
             }
         }
     }
@@ -1053,14 +1054,6 @@ section.slider-block {
 
         .product-card {
 
-            .product-name {
-                font-size: 12px;
-            }
-
-            .product-description {
-                font-size: 12px;
-            }
-
             .product-ratings {
                 .total-reviews {
                     display: none;
@@ -1069,7 +1062,6 @@ section.slider-block {
 
             .cart-fav-seg {
                 .addtocart {
-                    white-space: nowrap;
                     font-size: 12px;
                 }
             }
@@ -1156,14 +1148,6 @@ section.slider-block {
 
         .product-card {
 
-            .product-name {
-                font-size: 12px;
-            }
-
-            .product-description {
-                font-size: 12px;
-            }
-
             .product-ratings {
                 .total-reviews {
                     display: none;
@@ -1172,7 +1156,6 @@ section.slider-block {
 
             .cart-fav-seg {
                 .addtocart {
-                    white-space: nowrap;
                     font-size: 12px;
                 }
             }
@@ -1624,13 +1607,13 @@ section.product-detail {
                         }
 
                         .whishlist-icon {
-                            margin-top: -100%;
+                            margin-top: -480px;
                             float: right;
                             margin-right: 10px;
                         }
 
                         .share-icon {
-                            margin-top: -100%;
+                            margin-top: -480px;
                             float: right;
                             margin-right: 40px;
                         }
@@ -1728,6 +1711,10 @@ section.product-detail {
                     font-size: 16px;
                     padding-left: 0;
                     font-weight: 600;
+                }
+
+                .accordian .accordian-content {
+                    padding: 20px 0px;
                 }
 
                 .attributes {

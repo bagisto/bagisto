@@ -930,6 +930,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   border-radius: 0px;
   margin-right: 10px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .main-container-wrapper .product-list .product-card {
@@ -1121,17 +1122,10 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   .main-container-wrapper .product-grid.max-4-col {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
-  .main-container-wrapper .product-card .product-name {
-    font-size: 12px;
-  }
-  .main-container-wrapper .product-card .product-description {
-    font-size: 12px;
-  }
   .main-container-wrapper .product-card .product-ratings .total-reviews {
     display: none;
   }
   .main-container-wrapper .product-card .cart-fav-seg .addtocart {
-    white-space: nowrap;
     font-size: 12px;
   }
   .main-container-wrapper .top-toolbar {
@@ -1186,17 +1180,10 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   .main-container-wrapper .product-grid.max-4-col {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
-  .main-container-wrapper .product-card .product-name {
-    font-size: 12px;
-  }
-  .main-container-wrapper .product-card .product-description {
-    font-size: 12px;
-  }
   .main-container-wrapper .product-card .product-ratings .total-reviews {
     display: none;
   }
   .main-container-wrapper .product-card .cart-fav-seg .addtocart {
-    white-space: nowrap;
     font-size: 12px;
   }
   .main-container-wrapper .top-toolbar {
@@ -1665,13 +1652,13 @@ section.product-detail div.layouter form div.product-image-group div .product-he
 }
 
 section.product-detail div.layouter form div.product-image-group div .product-hero-image .whishlist-icon {
-  margin-top: -100%;
+  margin-top: -480px;
   float: right;
   margin-right: 10px;
 }
 
 section.product-detail div.layouter form div.product-image-group div .product-hero-image .share-icon {
-  margin-top: -100%;
+  margin-top: -480px;
   float: right;
   margin-right: 40px;
 }
@@ -1765,6 +1752,10 @@ section.product-detail div.layouter form .details .accordian .accordian-header {
   font-size: 16px;
   padding-left: 0;
   font-weight: 600;
+}
+
+section.product-detail div.layouter form .details .accordian .accordian-content {
+  padding: 20px 0px;
 }
 
 section.product-detail div.layouter form .details .attributes {
