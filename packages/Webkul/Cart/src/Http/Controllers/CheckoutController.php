@@ -1,13 +1,14 @@
 <?php
 
 namespace Webkul\Cart\Http\Controllers;
-use Illuminate\Routing\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
+use Webkul\Cart\Facades\Cart;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Payment\Facades\Payment;
-use Webkul\Cart\Facades\Cart;
+use Webkul\Cart\Http\Requests\CustomerAddressForm;
 
 /**
  * Chekout controller for the customer
@@ -48,10 +49,14 @@ class CheckoutController extends Controller
     /**
      * Saves customer address.
      *
+     * @param  \Webkul\Cart\Http\Requests\CustomerAddressForm $request
      * @return \Illuminate\Http\Response
     */
-    public function saveAddress()
+    public function saveAddress(CustomerAddressForm $request)
     {
+        if(!Cart::saveCustomerAddress(request()->all())) {
+            // return response()->json(['redirect_url' => route('store.home')], 403)
+        }
 
         return response()->json(Shipping::collectRates());
     }
@@ -71,7 +76,7 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
     */
-    public function saveAPayment()
+    public function savePayment()
     {
     }
 }

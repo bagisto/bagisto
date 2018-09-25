@@ -217,4 +217,21 @@ class Cart {
             return redirect()->back();
         }
     }
+
+    /**
+     * Destroys the session
+     * maintained for cart
+     * on customer logout.
+     *
+     * @return Mixed
+     */
+    public function saveCustomerAddress($data)
+    {
+        if(!$cart = session()->get('cart'))
+            return false;
+
+        
+
+        return true;
+    }
 }
