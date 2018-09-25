@@ -1427,16 +1427,28 @@ $(document).ready(function () {
             },
 
             addServerErrors: function addServerErrors() {
-                var scope = null;
+                var scope = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
                 for (var key in serverErrors) {
+                    var inputNames = [];
+                    key.split('.').forEach(function (chunk, index) {
+                        if (index) {
+                            inputNames.push('[' + chunk + ']');
+                        } else {
+                            inputNames.push(chunk);
+                        }
+                    });
+
+                    var inputName = inputNames.join('');
+
                     var field = this.$validator.fields.find({
-                        name: key,
+                        name: inputName,
                         scope: scope
                     });
                     if (field) {
                         this.$validator.errors.add({
                             id: field.id,
-                            field: key,
+                            field: inputName,
                             msg: serverErrors[key][0],
                             scope: scope
                         });

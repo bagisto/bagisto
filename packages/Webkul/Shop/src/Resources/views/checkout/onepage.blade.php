@@ -157,6 +157,9 @@
                                 this_this.currentStep = 2;
                             }
                         })
+                        .catch(function (error) {
+                            this_this.handleErrorResponse(error.response, 'address-form')
+                        })
                 },
 
                 saveShipping () {
@@ -169,11 +172,14 @@
                                 this_this.currentStep = 3;
                             }
                         })
+                        .catch(function (error) {
+                            this_this.handleErrorResponse(error.response, 'shipping-form')
+                        })
                 },
 
                 savePayment () {
                     var this_this = this;
-                    this.$http.post("{{ route('shop.checkout.save-payment') }}", {'shipping_method': this.selected_shipping_method})
+                    this.$http.post("{{ route('shop.checkout.save-payment') }}", {'shipping_method': this.selected_payment_method})
                         .then(function(response) {
                             if(response.data.jump_to_section == 'payment') {
                                 shippingHtml = Vue.compile(response.data.html)
@@ -181,6 +187,20 @@
                                 this_this.currentStep = 4;
                             }
                         })
+                        .catch(function (error) {
+                            this_this.handleErrorResponse(error.response, 'payment-form')
+                        })
+                },
+
+                handleErrorResponse (response, scope) {
+                    if(response.status == 422) {
+                        serverErrors = response.data.errors;
+                        this.$root.addServerErrors(scope)
+                    } else if(response.status == 403) {
+                        if(response.data.redirect_url) {
+                            window.location.href = response.data.redirect_url;
+                        }
+                    }
                 }
             }
         })
