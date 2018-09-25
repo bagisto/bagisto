@@ -4,14 +4,11 @@ namespace Webkul\Cart;
 
 use Carbon\Carbon;
 
-//Cart repositories
 use Webkul\Cart\Repositories\CartRepository;
 use Webkul\Cart\Repositories\CartItemRepository;
 
-//Customer repositories
 use Webkul\Customer\Repositories\CustomerRepository;
 
-//Product Repository
 use Webkul\Product\Repositories\ProductRepository;
 
 use Cookie;
@@ -24,21 +21,20 @@ use Cookie;
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class Cart {
 
-    protected $cart;
+    protected $cart;    //cart repository instance
 
-    protected $cartItem;
+    protected $cartItem;    //cart_item repository instance
 
-    protected $customer;
+    protected $customer;    //customer repository instance
 
-    //Cookie expiry limit in minutes
-    protected $minutes;
+    protected $product;     //product repository instance
 
-    protected $product;
-
-    public function __construct(CartRepository $cart, CartItemRepository $cartItem, CustomerRepository $customer, $minutes = 150, ProductRepository $product) {
+    public function __construct(CartRepository $cart,
+    CartItemRepository $cartItem,
+    CustomerRepository $customer,
+    ProductRepository $product) {
 
         $this->customer = $customer;
 
@@ -46,34 +42,41 @@ class Cart {
 
         $this->cartItem = $cartItem;
 
-        $this->minutes = $minutes;
-
         $this->product = $product;
     }
 
     /**
-     * Create New Cart
-     * Cart, Cookie &
-     * Session.
+     * Create new cart
+     * instance with the
+     * current item added.
      *
-     * @return mixed
-    */
-
+     * @param Integer $id
+     * @param Mixed $data
+     *
+     * @return Mixed
+     */
     public function createNewCart($id, $data) {
-
         $cartData['channel_id'] = core()->getCurrentChannel()->id;
 
         if(auth()->guard('customer')->check()) {
-            $data['customer_id'] = auth()->guard('customer')->user()->id;
+            $cartData['customer_id'] = auth()->guard('customer')->user()->id;
 
-            $cartData['customer_full_name'] = auth()->guard('customer')->first_name .' '. auth()->guard('customer')->last_name;
+            $cartData['customer_full_name'] = auth()->guard('customer')->user()->first_name .' '. auth()->guard('customer')->user()->last_name;
         }
 
         if($cart = $this->cart->create($cartData)) {
-
+            $data['cart_id'] = $cart->id;
             $data['product_id'] = $id;
 
-            if($result = $cart->items()->create($data)) {
+            if ($data['is_configurable'] == "true") {
+                $temp = $data['super_attribute'];
+
+                unset($data['super_attribute']);
+
+                $data['additional'] = json_encode($temp);
+            }
+
+            if($result = $this->cartItem->create($data)) {
                 session()->put('cart', $cart);
 
                 session()->flash('success', 'Item Added To Cart Successfully');
@@ -86,21 +89,28 @@ class Cart {
         return redirect()->back();
     }
 
-    /*
-    handle the after login event for the customers
-    when their are pruoducts in the session or cookie
-    of the logged in user.
-    */
-
+    /**
+     * Add Items in a
+     * cart with some
+     * cart and item
+     * details.
+     *
+     * @param @id
+     * @param $data
+     *
+     * @return Mixed
+     */
     public function add($id, $data) {
+
+        // session()->forget('cart');
+        // return redirect()->back();
 
         if(session()->has('cart')) {
             $cart = session()->get('cart');
 
-            $cartItems = $cart->items;
+            $cartItems = $cart->items()->get();
 
             if(isset($cartItems)) {
-
                 foreach($cartItems as $cartItem) {
                     if($cartItem->product_id == $id) {
                         $prevQty = $cartItem->quantity;
@@ -118,6 +128,14 @@ class Cart {
                 $data['cart_id'] = $cart->id;
 
                 $data['product_id'] = $id;
+
+                if ($data['is_configurable'] == "true") {
+                    $temp = $data['super_attribute'];
+
+                    unset($data['super_attribute']);
+
+                    $data['additional'] = json_encode($temp);
+                }
 
                 $cart->items()->create($data);
 
@@ -138,6 +156,7 @@ class Cart {
      * use detach to remove the
      * current product from cart tables
      *
+     * @param Integer $id
      * @return Mixed
      */
     public function remove($id) {
@@ -146,12 +165,13 @@ class Cart {
     }
 
     /**
-     * Function to handle merge
-     * and sync the cookies products
-     * with the existing data of cart
-     * in the cart tables;
-    */
-
+     * This function handles
+     * when guest has some of
+     * cart products and then
+     * logs in.
+     *
+     * @return Redirect
+     */
     public function mergeCart() {
         if(session()->has('cart')) {
             $cart = session()->get('cart');
@@ -168,7 +188,7 @@ class Cart {
 
                         foreach($cartItems as $key => $cartItem) {
 
-                            if($cartItem->product_id == $customerCartItem->id) {
+                            if($cartItem->product_id == $customerCartItem->product_id) {
 
                                 $customerItemQuantity = $customerCartItem->quantity;
 
@@ -176,9 +196,9 @@ class Cart {
 
                                 $customerCartItem->update(['cart_id' => $customerCart->id, 'quantity' => $cartItemQuantity + $customerItemQuantity]);
 
-                                $cartItem->destroy();
+                                $this->cartItem->delete($cartItem->id);
 
-                                unset($cartItems[$key]);
+                                $cartItems->forget($key);
                             }
                         }
                     }
@@ -201,37 +221,5 @@ class Cart {
         } else {
             return redirect()->back();
         }
-    }
-
-    /**
-     * Destroys the session
-     * maintained for cart
-     * on customer logout.
-     *
-     * @return Mixed
-     */
-    public function destroyCart() {
-        if(session()->has('cart')) {
-            session()->forget('cart');
-
-            return redirect()->back();
-        }
-    }
-
-    /**
-     * Destroys the session
-     * maintained for cart
-     * on customer logout.
-     *
-     * @return Mixed
-     */
-    public function saveCustomerAddress($data)
-    {
-        if(!$cart = session()->get('cart'))
-            return false;
-
-        
-
-        return true;
     }
 }
