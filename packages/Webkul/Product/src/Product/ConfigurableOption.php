@@ -235,4 +235,14 @@ class ConfigurableOption extends AbstractProduct
 
         return $images;
     }
+
+    /**
+     * Get product images for configurable variations
+     *
+     * @param Product $product
+     * @return array
+     */
+    protected function is($product)
+    {
+    }
 }

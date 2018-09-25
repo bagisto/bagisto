@@ -31,17 +31,27 @@ $(document).ready(function () {
                 });
             },
 
-            addServerErrors: function () {
-                var scope = null;
+            addServerErrors: function (scope = null) {
                 for (var key in serverErrors) {
+                    var inputNames = [];
+                    key.split('.').forEach(function(chunk, index) {
+                        if(index) {
+                            inputNames.push('[' + chunk + ']')
+                        } else {
+                            inputNames.push(chunk)
+                        }
+                    })
+
+                    var inputName = inputNames.join('');
+
                     const field = this.$validator.fields.find({
-                        name: key,
+                        name: inputName,
                         scope: scope
                     });
                     if (field) {
                         this.$validator.errors.add({
                             id: field.id,
-                            field: key,
+                            field: inputName,
                             msg: serverErrors[key][0],
                             scope: scope
                         });
