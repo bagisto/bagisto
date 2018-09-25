@@ -6,45 +6,10 @@
         </div>
 
         <div class="cart-content">
-
             {{-- {{ dd($products) }} --}}
 
             <div class="left-side">
 
-                {{-- <div class="item">
-                    <img class="item-image" src="{{ bagisto_asset('images/jeans_big.jpg') }}" />
-
-                    <div class="item-details">
-
-                        <div class="item-title">
-                            Rainbow Creation Embroided
-                        </div>
-
-                        <div class="price">
-                            <span class="main-price">
-                                $24.00
-                            </span>
-                            <span class="real-price">
-                                $25.00
-                            </span>
-                            <span class="discount">
-                                10% Off
-                            </span>
-                        </div>
-
-                        <div class="summary">
-                            Color : Gray, Size : S, Sleeve type : Puffed Sleeves, Occasion : Birthday,  Marriage Anniversary
-                        </div>
-
-                        <div class="misc">
-                            <div class="qty-text">Quantity</div>
-                            <div class="box">1</div>
-                            <span class="remove">Remove</span>
-                            <span class="towishlist">Move to Wishlist</span>
-                        </div>
-                    </div>
-
-                </div> --}}
                 @foreach($products as $product)
                     <div class="item">
                         <div style="margin-right: 15px;">

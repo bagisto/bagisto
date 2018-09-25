@@ -48,8 +48,6 @@ class CartComposer
             $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
 
             if(isset($cart)) {
-                $cart = $this->cart->findOneByField('id', 144);
-
                 $cartItems = $this->cart->items($cart['id']);
 
                 $products = array();
@@ -74,8 +72,6 @@ class CartComposer
                 $cart = session()->get('cart');
 
                 if(isset($cart)) {
-                    $cart = $this->cart->findOneByField('id', 144);
-
                     $cartItems = $this->cart->items($cart['id']);
 
                     $products = array();

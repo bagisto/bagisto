@@ -102,9 +102,6 @@ class Cart {
      */
     public function add($id, $data) {
 
-        // session()->forget('cart');
-        // return redirect()->back();
-
         if(session()->has('cart')) {
             $cart = session()->get('cart');
 

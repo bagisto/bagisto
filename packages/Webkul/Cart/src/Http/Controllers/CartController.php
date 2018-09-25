@@ -4,19 +4,15 @@ namespace Webkul\Cart\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
 use Webkul\Cart\Repositories\CartRepository;
 use Webkul\Cart\Repositories\CartItemRepository;
-
 use Webkul\Product\Repositories\ProductRepository;
-
 use Webkul\Customer\Repositories\CustomerRepository;
-
 use Webkul\Product\Product\ProductImage;
 use Webkul\Product\Product\View as ProductView;
+use Webkul\Attribute\Repositories\AttributeOptionRepository;
 
 use Cart;
-use Cookie;
 
 /**
  * Cart controller for the customer
@@ -31,9 +27,17 @@ class CartController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * Protected Variables that
+     * holds instances of the
+     * repository classes.
      *
-     * @return \Illuminate\Http\Response
+     * @param Array $_config
+     * @param $cart
+     * @param $cartItem
+     * @param $customer
+     * @param $product
+     * @param $productImage
+     * @param $productView
      */
     protected $_config;
 
@@ -47,7 +51,26 @@ class CartController extends Controller
 
     protected $productView;
 
-    public function __construct(CartRepository $cart, CartItemRepository $cartItem, CustomerRepository $customer, ProductRepository $product, ProductImage $productImage, ProductView $productView) {
+    /**
+     * Initializing various
+     * required repositories
+     * and classes.
+     *
+     * @param Mixed $cart
+     * @param Mixed $cartItem
+     * @param Mixed $customer
+     * @param Mixed $product
+     * @param Mixed $productImage
+     * @param Mixed $productView
+     */
+    public function __construct(
+        CartRepository $cart,
+        CartItemRepository $cartItem,
+        CustomerRepository $customer,
+        ProductRepository $product,
+        ProductImage $productImage,
+        ProductView $productView)
+        {
 
         $this->middleware('customer')->except(['add', 'remove', 'test']);
 
@@ -75,20 +98,34 @@ class CartController extends Controller
      */
 
     public function add($id) {
+
+        session()->forget('cart');
+        return redirect()->back();
+
         $data = request()->input();
 
         if(!isset($data['is_configurable']) || !isset($data['product']) ||!isset($data['quantity'])) {
-            session()->flash('error', 'Cannot Product Due to User\'s miscreancy in system\'s integrity');
+            session()->flash('error', 'Cart System Integrity Violation');
 
             return redirect()->back();
+        } else {
+            //handle the accidental case
+            //when some one deleted
+            //form fields from the DOM
+            if($data['is_configurable']) {
+                if(!isset($data['super_attributes'])) {
+                    session()->flash('error', 'Cart System Integrity Violation');
+
+                    return redirect()->back();
+                }
+            }
         }
 
-        if($data['is_configurable'] == "false") {
-            $data['price'] = $this->product->findOneByField('id', $data['product'])->price;
-        } else {
-            $id = $data['selected_configurable_option'];
-
+        if(isset($data['is_configurable']) && $data['is_configurable']) {
             $data['price'] = $this->product->findOneByField('id', $data['selected_configurable_option'])->price;
+
+        } else {
+            $data['price'] = $this->product->findOneByField('id', $data['product'])->price;
         }
 
         Cart::add($id, $data);

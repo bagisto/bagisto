@@ -35,9 +35,9 @@ Route::group(['middleware' => ['web']], function () {
 
     // //Routes for product cart
 
-    Route::post('products/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.add');
+    Route::post('checkout/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.add');
 
-    Route::post('product/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.remove');
+    Route::post('checkout/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.remove');
 
     //Routes for product cart ends
 

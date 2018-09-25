@@ -20,6 +20,11 @@ class CreateCartTable extends Migration
             $table->string('session_id')->nullable();
             $table->integer('channel_id')->unsigned();
             $table->foreign('channel_id')->references('id')->on('channels');
+            $table->string('sku')->nullable();
+            $table->string('type')->nullable();
+            $table->string('name')->nullable();
+            $table->integer('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('cart');
             $table->string('coupon_code')->nullable();
             $table->boolean('is_gift')->nullable();
             $table->integer('items_count')->nullable();
