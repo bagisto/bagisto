@@ -78,4 +78,42 @@
 @endsection
 
 
+<style>
+
+    .header {
+        position: sticky;
+        top: 16px;
+    }
+
+</style>
+
+
+@push('scripts')
+
+    <script>
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+
+            var scrollTop = window.pageYOffset
+
+            var elems = document.getElementById("header-bottom");
+
+            if(scrollTop > 200){
+
+                elems.style.display = "none";
+
+            }else {
+                elems.style.display = "block";
+            }
+
+            console.log(scrollTop);
+        }
+
+    </script>
+
+@endpush
+
+
 
