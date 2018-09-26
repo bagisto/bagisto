@@ -147,14 +147,8 @@
         </div>
     </div>
 
-    <div class="header-bottom">
+    <div class="header-bottom" id="header-bottom">
     @include('shop::layouts.header.nav-menu.navmenu')
     </div>
 
 </div>
-
-@push('scripts')
-    <script>
-
-    </script>
-@endpush

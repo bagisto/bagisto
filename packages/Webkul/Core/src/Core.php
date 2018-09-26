@@ -141,7 +141,6 @@ class Core
         $channel = $this->getCurrentChannel();
 
         $currencyCode = $channel->base_currency->code;
-        // $currencyCode = $channel->base_currency;
 
         return currency($price, $currencyCode);
     }

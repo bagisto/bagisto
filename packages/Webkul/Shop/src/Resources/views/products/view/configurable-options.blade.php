@@ -30,7 +30,7 @@
                     <select v-validate="'required'" class="control" :name="['super_attribute[' + attribute.id + ']']" :disabled="attribute.disabled" @change="configure(attribute, $event.target.value)" :id="['attribute_' + attribute.id]">
 
                         <option v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
-                        
+
                     </select>
 
                     <span class="control-error" v-if="errors.has('super_attribute[' + attribute.id + ']')">
@@ -41,17 +41,17 @@
             </div>
         </script>
 
-        <?php $config = $configurableOptionHelper->getConfigurationConfig($product) ?>
+        {{--  <?php $config = $configurableOptionHelper->getConfigurationConfig($product) ?>  --}}
 
         <script>
-            
+
             Vue.component('product-options', {
 
                 template: '#product-options-template',
 
                 data: () => ({
                     config: @json($config),
-                    
+
                     childAttributes: [],
 
                     selectedProductId: '',
@@ -207,7 +207,7 @@
                             element.selectedIndex = "0";
                         }
                     },
-                    
+
                     getAttributeOptions (attributeId) {
                         var this_this = this,
                             options;
@@ -215,7 +215,7 @@
                         this.config.attributes.forEach(function(attribute, index) {
                             if (attribute.id == attributeId) {
                                 options = attribute.options;
-                            }    
+                            }
                         })
 
                         return options;
