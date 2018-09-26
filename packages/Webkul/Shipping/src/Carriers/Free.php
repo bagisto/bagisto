@@ -10,14 +10,14 @@ use Webkul\Shipping\Facades\Shipping;
  * Class Rate.
  *
  */
-class FlatRate extends AbstractShipping
+class Free extends AbstractShipping
 {
     /**
      * Payment method code
      *
      * @var string
      */
-    protected $code  = 'flatrate';
+    protected $code  = 'free';
 
     /**
      * Returns rate for flatrate
@@ -31,12 +31,12 @@ class FlatRate extends AbstractShipping
 
         $object = new CartShippingRate;
 
-        $object->carrier = 'flatrate';
+        $object->carrier = 'free';
         $object->carrier_title = $this->getConfigData('title');
-        $object->method = 'flatrate_flatrate';
+        $object->method = 'free_free';
         $object->method_title = $this->getConfigData('title');
         $object->method_description = $this->getConfigData('description');
-        $object->price = 10;
+        $object->price = 0;
 
         return $object;
     }

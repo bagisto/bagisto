@@ -70,13 +70,9 @@ class CartComposer
                 $view->with('cart', $products);
             }
         } else {
-            if(session()->has('cart')) {
-                $cart = session()->get('cart');
-
+            if($cart = session()->get('cart')) {
                 if(isset($cart)) {
-                    $cart = $this->cart->findOneByField('id', 144);
-
-                    $cartItems = $this->cart->items($cart['id']);
+                    $cartItems = $cart->items($cart['id']);
 
                     $products = array();
 

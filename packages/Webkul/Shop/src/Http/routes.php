@@ -10,15 +10,15 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.index'
     ]);
 
-    Route::get('/checkout', 'Webkul\Cart\Http\Controllers\CheckoutController@index')->defaults('_config', [
+    Route::get('/checkout/cart', 'Webkul\Cart\Http\Controllers\CartController@index')->defaults('_config', [
+        'view' => 'shop::checkout.cart.index'
+    ])->name('shop.checkout.cart.index');
+
+    Route::get('/checkout/onepage', 'Webkul\Cart\Http\Controllers\CheckoutController@index')->defaults('_config', [
         'view' => 'shop::checkout.onepage'
-    ])->name('shop.checkout');
+    ])->name('shop.checkout.onepage.index');
 
     Route::get('test', 'Webkul\Cart\Http\Controllers\CartController@test');
-
-    Route::get('cart', 'Webkul\Cart\Http\Controllers\CartController@beforeCheckout')->defaults('_config', [
-        'view' => 'shop::store.cart.index'
-    ]);
 
     Route::post('/checkout/save-address', 'Webkul\Cart\Http\Controllers\CheckoutController@saveAddress')->name('shop.checkout.save-address');
 
