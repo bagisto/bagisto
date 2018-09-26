@@ -49,7 +49,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.orders.index'
             ])->name('admin.customer.orders.index');
 
-            Route::get('customer/reviews', 'Webkul\Shop\Http\Controllers\ReviewController@index')->defaults('_config',[
+            Route::get('customer/reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
                 'view' => 'admin::customers.review.index'
             ])->name('admin.customer.review.index');
 
@@ -61,11 +61,11 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.store');
 
-            Route::get('customer/reviews/edit/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@edit')->defaults('_config',[
+            Route::get('customer/reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[
                 'view' => 'admin::customers.review.edit'
             ])->name('admin.customer.review.edit');
 
-            Route::put('customer/reviews/edit/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@update')->defaults('_config', [
+            Route::put('customer/reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@update')->defaults('_config', [
                 'redirect' => 'admin.customer.review.index'
             ])->name('admin.customer.review.update');
 
@@ -73,7 +73,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.edit'
             ])->name('admin.customer.edit');
 
-            Route::put('customer/reviews/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@update')->defaults('_config', [
+            Route::put('customer/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@update')->defaults('_config', [
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.update');
 

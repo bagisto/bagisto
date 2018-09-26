@@ -60,7 +60,8 @@ return [
 
     'checkout' => [
         'cart' => [
-
+            'title' => 'Shopping Cart',
+            'empty' => 'Shopping Cart Is Empty',
         ],
 
         'onepage' => [

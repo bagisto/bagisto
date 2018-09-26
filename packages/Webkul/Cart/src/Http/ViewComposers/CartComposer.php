@@ -44,6 +44,8 @@ class CartComposer
     }
 
     public function compose(View $view) {
+        // session()->forget('cart');
+        // return redirect()->back();
         if(auth()->guard('customer')->check()) {
             $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
 
@@ -68,9 +70,7 @@ class CartComposer
                 $view->with('cart', $products);
             }
         } else {
-            if(session()->has('cart')) {
-                $cart = session()->get('cart');
-
+            if($cart = session()->get('cart')) {
                 if(isset($cart)) {
                     $cartItems = $this->cart->items($cart['id']);
 

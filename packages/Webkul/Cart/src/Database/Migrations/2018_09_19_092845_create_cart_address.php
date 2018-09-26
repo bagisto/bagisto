@@ -15,6 +15,9 @@ class CreateCartAddress extends Migration
     {
         Schema::create('cart_address', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
             $table->string('address1');
             $table->string('address2')->nullable();
             $table->string('country');

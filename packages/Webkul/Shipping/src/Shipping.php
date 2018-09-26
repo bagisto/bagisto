@@ -3,6 +3,7 @@
 namespace Webkul\Shipping;
 
 use Illuminate\Support\Facades\Config;
+use Webkul\Cart\Facades\Cart;
 
 /**
  * Class Shipping.
@@ -10,10 +11,25 @@ use Illuminate\Support\Facades\Config;
  */
 class Shipping
 {
+    /**
+     * Rates
+     *
+     * @var array
+     */
     protected $rates = [];
 
+    /**
+     * Collects rate from available shipping methods
+     *
+     * @return array
+     */
     public function collectRates()
     {
+        if(!$cart = Cart::getCart())
+            return false;
+
+        $this->removeAllShippingRates();
+
         foreach(Config::get('carriers') as $shippingMethod) {
             $object = new $shippingMethod['class'];
 
@@ -26,12 +42,53 @@ class Shipping
             }
         }
 
+        $this->saveAllShippingRates();
+
         return [
                 'jump_to_section' => 'shipping',
                 'html' => view('shop::checkout.onepage.shipping', ['shippingRateGroups' => $this->getGroupedAllShippingRates()])->render()
             ];
     }
+    
+    /**
+     * Persist shipping rate to database
+     *
+     * @return void
+     */
+    public function removeAllShippingRates()
+    {
+        if(!$cart = Cart::getCart())
+            return;
 
+        foreach($cart->shipping_rates()->get() as $rate) {
+            $rate->delete();
+        }
+    }
+    
+    /**
+     * Persist shipping rate to database
+     *
+     * @return void
+     */
+    public function saveAllShippingRates()
+    {
+        if(!$cart = Cart::getCart())
+            return;
+
+        $shippingAddress = $cart->shipping_address;
+
+        foreach($this->rates as $rate) {
+            $rate->cart_address_id = $shippingAddress->id;
+
+            $rate->save();
+        }
+    }
+
+    /**
+     * Returns shipping rates, grouped by shipping method
+     *
+     * @return void
+     */
     public function getGroupedAllShippingRates()
     {
         $rates = [];

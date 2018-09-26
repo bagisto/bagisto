@@ -10,15 +10,15 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.index'
     ]);
 
-    Route::get('/checkout', 'Webkul\Cart\Http\Controllers\CheckoutController@index')->defaults('_config', [
+    Route::get('/checkout/cart', 'Webkul\Cart\Http\Controllers\CartController@index')->defaults('_config', [
+        'view' => 'shop::checkout.cart.index'
+    ])->name('shop.checkout.cart.index');
+
+    Route::get('/checkout/onepage', 'Webkul\Cart\Http\Controllers\CheckoutController@index')->defaults('_config', [
         'view' => 'shop::checkout.onepage'
-    ])->name('shop.checkout');
+    ])->name('shop.checkout.onepage.index');
 
     Route::get('test', 'Webkul\Cart\Http\Controllers\CartController@test');
-
-    Route::get('cart', 'Webkul\Cart\Http\Controllers\CartController@beforeCheckout')->defaults('_config', [
-        'view' => 'shop::store.cart.index'
-    ]);
 
     Route::post('/checkout/save-address', 'Webkul\Cart\Http\Controllers\CheckoutController@saveAddress')->name('shop.checkout.save-address');
 
@@ -51,12 +51,12 @@ Route::group(['middleware' => ['web']], function () {
     ])->name('shop.reviews.create');
 
     Route::post('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
-        'redirect' => 'shop.reviews.index'
+        'redirect' => 'customer.reviews.index'
     ])->name('shop.reviews.store');
 
-    Route::post('/reviews/create/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
-        'redirect' => 'admin.reviews.index'
-    ])->name('admin.reviews.store');
+    // Route::post('/reviews/create/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
+    //     'redirect' => 'admin.reviews.index'
+    // ])->name('admin.reviews.store');
 
 
     //customer routes starts here

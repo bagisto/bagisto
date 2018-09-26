@@ -11,9 +11,9 @@
     </div>
 
     <div class="product-information">
-    
+
         <div class="product-name">
-                
+
             {{ $product->id }}
 
             <a href="" title="{{ $product->name }}">
@@ -24,13 +24,13 @@
         <div class="product-description">
             {{ $product->short_description }}
         </div>
-        
+
         @include ('shop::products.price', ['product' => $product])
 
         @include ('shop::products.review', ['product' => $product])
 
         @include ('shop::products.add-to', ['product' => $product])
-    
+
     </div>
 
 </div>
