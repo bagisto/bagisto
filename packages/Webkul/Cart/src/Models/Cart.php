@@ -5,7 +5,7 @@ namespace Webkul\Cart\Models;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Product\Models\Product;
 use Webkul\Cart\Models\CartAddress;
-use Webkul\Cart\Models\CartShipping;
+use Webkul\Cart\Models\CartShippingRate;
 
 class Cart extends Model
 {
@@ -28,10 +28,42 @@ class Cart extends Model
     }
 
     /**
-     * Get the shipping for the cart.
+     * Get the biling address for the cart.
      */
-    public function shipping()
+    public function biling_address()
     {
-        return $this->hasMany(CartShipping::class);
+        return $this->addresses()->where('address_type', 'billing');
+    }
+
+    /**
+     * Get all of the attributes for the attribute groups.
+     */
+    public function getBilingAddressAttribute()
+    {
+        return $this->biling_address()->first();
+    }
+
+    /**
+     * Get the shipping address for the cart.
+     */
+    public function shipping_address()
+    {
+        return $this->addresses()->where('address_type', 'shipping');
+    }
+
+    /**
+     * Get all of the attributes for the attribute groups.
+     */
+    public function getShippingAddressAttribute()
+    {
+        return $this->shipping_address()->first();
+    }
+
+    /**
+     * Get the shipping rates for the cart.
+     */
+    public function shipping_rates()
+    {
+        return $this->hasManyThrough(CartShippingRate::class, CartAddress::class, 'cart_id', 'cart_address_id');
     }
 }

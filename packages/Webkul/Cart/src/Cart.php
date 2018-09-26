@@ -3,59 +3,94 @@
 namespace Webkul\Cart;
 
 use Carbon\Carbon;
-
 use Webkul\Cart\Repositories\CartRepository;
 use Webkul\Cart\Repositories\CartItemRepository;
-
+use Webkul\Cart\Repositories\CartAddressRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
-
 use Webkul\Product\Repositories\ProductRepository;
-
 use Cookie;
 
 /**
- * Facade for all
- * the methods to be
- * implemented in Cart.
+ * Facade for all the methods to be implemented in Cart.
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class Cart {
 
-    protected $cart;    //cart repository instance
+    /**
+     * CartRepository model
+     *
+     * @var mixed
+     */
+    protected $cart;
 
-    protected $cartItem;    //cart_item repository instance
+    /**
+     * CartItemRepository model
+     *
+     * @var mixed
+     */
+    protected $cartItem;
 
-    protected $customer;    //customer repository instance
+    /**
+     * CustomerRepository model
+     *
+     * @var mixed
+     */
+    protected $customer;
 
-    protected $product;     //product repository instance
+    /**
+     * CartAddressRepository model
+     *
+     * @var mixed
+     */
+    protected $cartAddress;
 
-    public function __construct(CartRepository $cart,
-    CartItemRepository $cartItem,
-    CustomerRepository $customer,
-    ProductRepository $product) {
+    /**
+     * ProductRepository model
+     *
+     * @var mixed
+     */
+    protected $product;
 
+    /**
+     * Create a new controller instance.
+     *
+     * @param  Webkul\Cart\Repositories\CartRepository $cart
+     * @param  Webkul\Cart\Repositories\CartItemRepository $cartItem
+     * @param  Webkul\Cart\Repositories\CartAddressRepository $cartAddress
+     * @param  Webkul\Customer\Repositories\CustomerRepository $customer
+     * @param  Webkul\Product\Repositories\ProductRepository $product
+     * @return void
+     */
+    public function __construct(
+        CartRepository $cart,
+        CartItemRepository $cartItem,
+        CartAddressRepository $cartAddress,
+        CustomerRepository $customer,
+        ProductRepository $product) 
+    {
         $this->customer = $customer;
 
         $this->cart = $cart;
 
         $this->cartItem = $cartItem;
 
+        $this->cartAddress = $cartAddress;
+
         $this->product = $product;
     }
 
     /**
-     * Create new cart
-     * instance with the
-     * current item added.
+     * Create new cart instance with the current item added.
      *
-     * @param Integer $id
-     * @param Mixed $data
+     * @param integer $id
+     * @param array $data
      *
-     * @return Mixed
+     * @return Response
      */
-    public function createNewCart($id, $data) {
+    public function createNewCart($id, $data)
+    {
         $cartData['channel_id'] = core()->getCurrentChannel()->id;
 
         if(auth()->guard('customer')->check()) {
@@ -84,23 +119,22 @@ class Cart {
                 return redirect()->back();
             }
         }
+
         session()->flash('error', 'Some error occured');
 
         return redirect()->back();
     }
 
     /**
-     * Add Items in a
-     * cart with some
-     * cart and item
-     * details.
+     * Add Items in a cart with some cart and item details.
      *
      * @param @id
      * @param $data
      *
-     * @return Mixed
+     * @return void
      */
-    public function add($id, $data) {
+    public function add($id, $data)
+    {
 
         // session()->forget('cart');
         // return redirect()->back();
@@ -153,26 +187,24 @@ class Cart {
     }
 
     /**
-     * use detach to remove the
-     * current product from cart tables
+     * Use detach to remove the current product from cart tables
      *
      * @param Integer $id
      * @return Mixed
      */
-    public function remove($id) {
+    public function remove($id)
+    {
 
         dd("Removing Item from Cart");
     }
 
     /**
-     * This function handles
-     * when guest has some of
-     * cart products and then
-     * logs in.
+     * This function handles when guest has some of cart products and then logs in.
      *
-     * @return Redirect
+     * @return Response
      */
-    public function mergeCart() {
+    public function mergeCart()
+    {
         if(session()->has('cart')) {
             $cart = session()->get('cart');
 
@@ -221,5 +253,81 @@ class Cart {
         } else {
             return redirect()->back();
         }
+    }
+
+    /**
+     * Returns cart
+     *
+     * @return Mixed
+     */
+    public function getCart()
+    {
+        if(!$cart = session()->get('cart'))
+            return false;
+        
+        return $cart;
+    }
+
+    /**
+     * Save customer address
+     *
+     * @return Mixed
+     */
+    public function saveCustomerAddress($data)
+    {
+        if(!$cart = $this->getCart())
+            return false;
+
+        $billingAddress = $data['billing'];
+        $shippingAddress = $data['shipping'];
+        $billingAddress['cart_id'] = $shippingAddress['cart_id'] = $cart->id;
+
+        if($billingAddressModel = $cart->biling_address) {
+            $this->cartAddress->update($billingAddress, $billingAddressModel->id);
+
+            if($shippingAddress = $cart->shipping_address) {
+                if(isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
+                    $this->cartAddress->update($billingAddress, $shippingAddress->id);
+                } else {
+                    $this->cartAddress->update($shippingAddress, $shippingAddress->id);
+                }
+            } else {
+                if(isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
+                    $this->cartAddress->create(array_merge($billingAddress, ['address_type' => 'shipping']));
+                } else {
+                    $this->cartAddress->create(array_merge($shippingAddress, ['address_type' => 'shipping']));
+                }
+            }
+        } else {
+            $this->cartAddress->create(array_merge($billingAddress, ['address_type' => 'billing']));
+
+            if(isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
+                $this->cartAddress->create(array_merge($billingAddress, ['address_type' => 'shipping']));
+            } else {
+                $this->cartAddress->create(array_merge($shippingAddress, ['address_type' => 'shipping']));
+            }
+        }
+        
+        return true;
+    }
+
+    /**
+     * Save shipping method for cart
+     *
+     * @param string $shippingMethodCode
+     * @return Mixed
+     */
+    public function saveShippingMethod($shippingMethodCode)
+    {
+        if(!$cart = $this->getCart())
+            return false;
+
+        foreach($cart->shipping_rates as $rate) {
+            if($rate->method != $shippingMethodCode) {
+                $rate->delete();
+            }
+        }
+
+        return true;
     }
 }
