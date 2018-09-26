@@ -1967,25 +1967,10 @@ section.cart .cart-content .right-side .coupon-section .after-coupon-amount .amo
   margin-right: auto;
 }
 
-@media all and (max-width: 480px) {
-  .attached-products-wrapper .title .border-bottom {
-    border-bottom: 1px solid rgba(162, 162, 162, 0.2);
-    display: inline-block;
-    width: 100%;
-    position: initial;
-    top: 40px;
-    left: 0%;
-    margin-left: 0px;
-  }
-}
-
 @media all and (min-width: 481px) and (max-width: 920px) {
   .attached-products-wrapper .title .border-bottom {
-    border-bottom: 1px solid rgba(162, 162, 162, 0.2);
-    display: inline-block;
     width: 100%;
     position: initial;
-    top: 40px;
     left: 0%;
     margin-left: 0px;
   }
