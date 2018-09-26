@@ -11,19 +11,22 @@
         </ul>
         <div class="dropdown-cart" :class="{ show: toggle }">
             <div class="dropdown-header">
-                <p class="heading">Cart Subtotal - $80</p>
+                <p class="heading">Cart Subtotal - $ {{ subtotal }}</p>
                 <i class="icon icon-menu-close" @click="dropOrHide"></i>
             </div>
 
             <div class="dropdown-content">
-                <div class="item">
-                    <div class="item-image">
-                        <img />
+                <div class="item" v-for="(item, index) in items" :key="index">
+                    <div class="item-image" v-if="item[2]!='null'">
+                        <img :src="item[2]"/>
+                    </div>
+                    <div class="item-image" v-else>
+                        <img :src="placeholder"/>
                     </div>
                     <div class="item-details">
-                        <div class="item-name">Some Item Name</div>
-                        <div class="item-price">$ Some Price</div>
-                        <div class="item-qty">Some Quantity</div>
+                        <div class="item-name">{{item[0]}}</div>
+                        <div class="item-price">$ {{ item[1] }}</div>
+                        <div class="item-qty">Quantity - {{ item[3] }}</div>
                     </div>
                 </div>
             </div>
@@ -41,14 +44,16 @@
 
 export default {
 	props: {
-		items: Array,
+		items: Object,
     },
 
     data(){
         return {
             toggle: true,
-            totalitems: 0,
-            cart_items: []
+            totalitems: parseInt(0),
+            cart_items: [],
+            placeholder: "http://localhost/bagisto/public/themes/default/assets/images/product/small-product-placeholder.png",
+            subtotal : parseInt(0)
         };
     },
 
@@ -59,8 +64,9 @@ export default {
     },
 
     mounted: function() {
-        if(this.items != undefined)
+        if(this.items != undefined) {
             this.initializeDropdown();
+        }
     },
 
     methods: {
@@ -73,8 +79,13 @@ export default {
         },
 
         initializeDropdown: function() {
-            this.totalitems = this.items.length;
             this.cart_items = this.items;
+
+            var item;
+            for(item in this.cart_items) {
+                this.subtotal = this.subtotal + parseInt(this.cart_items[item][1]);
+                this.totalitems = this.totalitems + 1;
+            }
         }
     }
 }
@@ -89,6 +100,7 @@ export default {
         background: #FFFFFF;
         border: 1px solid #E8E8E8;
         box-shadow: 1px 3px 6px 0 rgba(0,0,0,0.40);
+        color: #242424;
         padding: 20px;
         border-radius: 1px;
         right: 10%;
@@ -112,34 +124,47 @@ export default {
         width: 22px;
     }
 
+    .dropdown-cart > .dropdown-header p.heading {
+        font-weight: lighter;
+    }
+
     .dropdown-content {
         padding-top: 10px;
         padding-bottom: 10px;
+        margin-top: 7px;
     }
 
     .dropdown-content .item{
         display: flex;
         flex-direction: row;
         border-bottom: 1px solid #E8E8E8;
+        padding-top: 9px;
+        padding-bottom: 9px;
     }
+
     .dropdown-content .item img{
         height: 75px;
         width: 75px;
         margin-right: 8px;
     }
 
+    .dropdown-content .item-details{
+        height: 75px;
+    }
+
     .item-details .item-name {
         font-size: 16px;
         font-weight: bold;
-        margin-bottom: 10px;
+        margin-bottom: 9px;
     }
 
     .item-details .item-price {
-        margin-bottom: 10px;
+        margin-bottom: 9px;
     }
 
     .item-details .item-qty {
-        margin-bottom: 10px;
+        font-weight: lighter;
+        margin-bottom: 9px;
     }
 
     .dropdown-footer {
@@ -147,6 +172,7 @@ export default {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        margin-top: 4px;
     }
 
     .dropdown-footer button {

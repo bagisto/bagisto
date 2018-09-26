@@ -16,6 +16,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('test', 'Webkul\Cart\Http\Controllers\CartController@test');
 
+    Route::get('cart', 'Webkul\Cart\Http\Controllers\CartController@beforeCheckout')->defaults('_config', [
+        'view' => 'shop::store.cart.index'
+    ]);
+
     Route::post('/checkout/save-address', 'Webkul\Cart\Http\Controllers\CheckoutController@saveAddress')->name('shop.checkout.save-address');
 
     Route::post('/checkout/save-shipping', 'Webkul\Cart\Http\Controllers\CheckoutController@saveShipping')->name('shop.checkout.save-shipping');

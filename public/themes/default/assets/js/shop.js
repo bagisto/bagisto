@@ -1427,16 +1427,28 @@ $(document).ready(function () {
             },
 
             addServerErrors: function addServerErrors() {
-                var scope = null;
+                var scope = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
                 for (var key in serverErrors) {
+                    var inputNames = [];
+                    key.split('.').forEach(function (chunk, index) {
+                        if (index) {
+                            inputNames.push('[' + chunk + ']');
+                        } else {
+                            inputNames.push(chunk);
+                        }
+                    });
+
+                    var inputName = inputNames.join('');
+
                     var field = this.$validator.fields.find({
-                        name: key,
+                        name: inputName,
                         scope: scope
                     });
                     if (field) {
                         this.$validator.errors.add({
                             id: field.id,
-                            field: key,
+                            field: inputName,
                             msg: serverErrors[key][0],
                             scope: scope
                         });
@@ -31573,7 +31585,7 @@ exports = module.exports = __webpack_require__(10)(false);
 
 
 // module
-exports.push([module.i, "\n.show {\n    display: none;\n}\n.dropdown-cart {\n    position: absolute;\n    background: #FFFFFF;\n    border: 1px solid #E8E8E8;\n    -webkit-box-shadow: 1px 3px 6px 0 rgba(0,0,0,0.40);\n            box-shadow: 1px 3px 6px 0 rgba(0,0,0,0.40);\n    padding: 20px;\n    border-radius: 1px;\n    right: 10%;\n    top: 75px;\n    width: 387px;\n    z-index: 5;\n}\n.dropdown-cart > .dropdown-header {\n    width: 100%;\n}\n.dropdown-cart > .dropdown-header p{\n    display: inline;\n    line-height: 25px;\n}\n.dropdown-cart > .dropdown-header i{\n    cursor: pointer;\n    float: right;\n    height: 22px;\n    width: 22px;\n}\n.dropdown-content {\n    padding-top: 10px;\n    padding-bottom: 10px;\n}\n.dropdown-content .item{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    border-bottom: 1px solid #E8E8E8;\n}\n.dropdown-content .item img{\n    height: 75px;\n    width: 75px;\n    margin-right: 8px;\n}\n.item-details .item-name {\n    font-size: 16px;\n    font-weight: bold;\n    margin-bottom: 10px;\n}\n.item-details .item-price {\n    margin-bottom: 10px;\n}\n.item-details .item-qty {\n    margin-bottom: 10px;\n}\n.dropdown-footer {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.dropdown-footer button {\n    border-radius: 0px;\n}\n\n", ""]);
+exports.push([module.i, "\n.show {\n    display: none;\n}\n.dropdown-cart {\n    position: absolute;\n    background: #FFFFFF;\n    border: 1px solid #E8E8E8;\n    -webkit-box-shadow: 1px 3px 6px 0 rgba(0,0,0,0.40);\n            box-shadow: 1px 3px 6px 0 rgba(0,0,0,0.40);\n    color: #242424;\n    padding: 20px;\n    border-radius: 1px;\n    right: 10%;\n    top: 75px;\n    width: 387px;\n    z-index: 5;\n}\n.dropdown-cart > .dropdown-header {\n    width: 100%;\n}\n.dropdown-cart > .dropdown-header p{\n    display: inline;\n    line-height: 25px;\n}\n.dropdown-cart > .dropdown-header i{\n    cursor: pointer;\n    float: right;\n    height: 22px;\n    width: 22px;\n}\n.dropdown-cart > .dropdown-header p.heading {\n    font-weight: lighter;\n}\n.dropdown-content {\n    padding-top: 10px;\n    padding-bottom: 10px;\n    margin-top: 7px;\n}\n.dropdown-content .item{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    border-bottom: 1px solid #E8E8E8;\n    padding-top: 9px;\n    padding-bottom: 9px;\n}\n.dropdown-content .item img{\n    height: 75px;\n    width: 75px;\n    margin-right: 8px;\n}\n.dropdown-content .item-details{\n    height: 75px;\n}\n.item-details .item-name {\n    font-size: 16px;\n    font-weight: bold;\n    margin-bottom: 9px;\n}\n.item-details .item-price {\n    margin-bottom: 9px;\n}\n.item-details .item-qty {\n    font-weight: lighter;\n    margin-bottom: 9px;\n}\n.dropdown-footer {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    margin-top: 4px;\n}\n.dropdown-footer button {\n    border-radius: 0px;\n}\n\n", ""]);
 
 // exports
 
@@ -31621,20 +31633,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 // define the item component
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
-        items: Array
+        items: Object
     },
 
     data: function data() {
         return {
             toggle: true,
-            totalitems: 0,
-            cart_items: []
+            totalitems: parseInt(0),
+            cart_items: [],
+            placeholder: "http://localhost/bagisto/public/themes/default/assets/images/product/small-product-placeholder.png",
+            subtotal: parseInt(0)
         };
     },
 
@@ -31644,7 +31661,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     mounted: function mounted() {
-        if (this.items != undefined) this.initializeDropdown();
+        if (this.items != undefined) {
+            this.initializeDropdown();
+        }
     },
 
     methods: {
@@ -31657,8 +31676,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         initializeDropdown: function initializeDropdown() {
-            this.totalitems = this.items.length;
             this.cart_items = this.items;
+
+            var item;
+            for (item in this.cart_items) {
+                this.subtotal = this.subtotal + parseInt(this.cart_items[item][1]);
+                this.totalitems = this.totalitems + 1;
+            }
         }
     }
 });
@@ -31691,7 +31715,9 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "dropdown-cart", class: { show: _vm.toggle } }, [
       _c("div", { staticClass: "dropdown-header" }, [
-        _c("p", { staticClass: "heading" }, [_vm._v("Cart Subtotal - $80")]),
+        _c("p", { staticClass: "heading" }, [
+          _vm._v("Cart Subtotal - $ " + _vm._s(_vm.subtotal))
+        ]),
         _vm._v(" "),
         _c("i", {
           staticClass: "icon icon-menu-close",
@@ -31699,31 +31725,41 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _vm._m(0),
+      _c(
+        "div",
+        { staticClass: "dropdown-content" },
+        _vm._l(_vm.items, function(item, index) {
+          return _c("div", { key: index, staticClass: "item" }, [
+            item[2] != "null"
+              ? _c("div", { staticClass: "item-image" }, [
+                  _c("img", { attrs: { src: item[2] } })
+                ])
+              : _c("div", { staticClass: "item-image" }, [
+                  _c("img", { attrs: { src: _vm.placeholder } })
+                ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item-details" }, [
+              _c("div", { staticClass: "item-name" }, [
+                _vm._v(_vm._s(item[0]))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "item-price" }, [
+                _vm._v("$ " + _vm._s(item[1]))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "item-qty" }, [
+                _vm._v("Quantity - " + _vm._s(item[3]))
+              ])
+            ])
+          ])
+        })
+      ),
       _vm._v(" "),
-      _vm._m(1)
+      _vm._m(0)
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dropdown-content" }, [
-      _c("div", { staticClass: "item" }, [
-        _c("div", { staticClass: "item-image" }, [_c("img")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "item-details" }, [
-          _c("div", { staticClass: "item-name" }, [_vm._v("Some Item Name")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "item-price" }, [_vm._v("$ Some Price")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "item-qty" }, [_vm._v("Some Quantity")])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

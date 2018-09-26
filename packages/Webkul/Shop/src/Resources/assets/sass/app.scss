@@ -619,6 +619,7 @@ section.slider-block {
     margin-bottom: 5%;
 
     div.slider-content {
+        position: relative;
         height: 500px;
         margin-left: auto;
         margin-right: auto;
@@ -627,7 +628,7 @@ section.slider-block {
         ul.slider-images {
 
             li{
-                //both rules are equivalent to display none
+                //both combined are equivalent to display none
                 position: absolute;
                 visibility: hidden;
             }
@@ -635,7 +636,7 @@ section.slider-block {
             li.show {
                 display:block;
                 visibility: visible;
-                width: 80%;
+                width: 100%;
                 animation-name: example;
                 animation-duration: 4s;
             }
@@ -655,7 +656,7 @@ section.slider-block {
             position: absolute;
             user-select: none;
             bottom: 2%;
-            right: 11%;
+            right: 2%;
 
 
             .dark-left-icon {
@@ -3217,6 +3218,28 @@ section.cart {
                     border-radius: 50%;
                     display: inline-flex;
                     border: 1px solid #E8E8E8;
+                    background-repeat: no-repeat;
+                    background-position: center;
+
+                    &.address-info {
+                        background-image: url('../images/address.svg');
+                    }
+
+                    &.shipping {
+                        background-image: url('../images/shipping.svg');
+                    }
+
+                    &.payment {
+                        background-image: url('../images/payment.svg');
+                    }
+
+                    &.review {
+                        background-image: url('../images/finish.svg');
+                    }
+                }
+
+                &.completed {
+                    cursor: pointer;
 
                     img {
                         margin: auto;

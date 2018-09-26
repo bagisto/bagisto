@@ -50,8 +50,8 @@ class Cart {
      * instance with the
      * current item added.
      *
-     * @param @id
-     * @param $data
+     * @param Integer $id
+     * @param Mixed $data
      *
      * @return Mixed
      */
@@ -67,6 +67,14 @@ class Cart {
         if($cart = $this->cart->create($cartData)) {
             $data['cart_id'] = $cart->id;
             $data['product_id'] = $id;
+
+            if ($data['is_configurable'] == "true") {
+                $temp = $data['super_attribute'];
+
+                unset($data['super_attribute']);
+
+                $data['additional'] = json_encode($temp);
+            }
 
             if($result = $this->cartItem->create($data)) {
                 session()->put('cart', $cart);
@@ -93,6 +101,10 @@ class Cart {
      * @return Mixed
      */
     public function add($id, $data) {
+
+        // session()->forget('cart');
+        // return redirect()->back();
+
         if(session()->has('cart')) {
             $cart = session()->get('cart');
 
@@ -117,6 +129,14 @@ class Cart {
 
                 $data['product_id'] = $id;
 
+                if ($data['is_configurable'] == "true") {
+                    $temp = $data['super_attribute'];
+
+                    unset($data['super_attribute']);
+
+                    $data['additional'] = json_encode($temp);
+                }
+
                 $cart->items()->create($data);
 
                 session()->flash('success', 'Item Successfully Added To Cart');
@@ -136,6 +156,7 @@ class Cart {
      * use detach to remove the
      * current product from cart tables
      *
+     * @param Integer $id
      * @return Mixed
      */
     public function remove($id) {
