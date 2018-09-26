@@ -24,8 +24,8 @@ class CreateCartItemsTable extends Migration
             $table->foreign('tax_category_id')->references('id')->on('tax_categories');
             $table->string('coupon_code')->nullable();
             $table->decimal('weight', 12,4)->nullable();
-            $table->decimal('price', 12,4)->nullable();
-            $table->decimal('base_price', 12,4)->nullable();
+            $table->decimal('price', 12,4)->default(0)->nullable();
+            $table->decimal('base_price', 12,4)->default(0)->nullable();
             $table->decimal('custom_price', 12,4)->nullable();
             $table->decimal('discount_percent', 12,4)->nullable();
             $table->decimal('discount_amount', 12,4)->nullable();

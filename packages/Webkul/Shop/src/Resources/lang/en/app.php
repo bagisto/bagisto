@@ -88,6 +88,13 @@ return [
             'continue' => 'Continue',
             'shipping-method' => 'Shipping Method',
             'payment-information' => 'Payment Information'
+        ],
+
+        'total' => [
+            'order-summary' => 'Order Summary',
+            'sub-total' => 'Sub Total',
+            'grand-total' => 'Grand Total',
+            'delivery-charges' => 'Delivery Charges'
         ]
     ]
 ];

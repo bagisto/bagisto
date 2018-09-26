@@ -128,6 +128,17 @@ class Core
     }
 
     /**
+    * Convert price with currency symbol
+    *
+    * @param float $price
+    *  @return string
+    */
+    public function convertPrice($price, $currencyCode = null)
+    {
+        return $price;
+    }
+
+    /**
     * Format and convert price with currency symbol
     *
     * @param float $price
@@ -142,6 +153,17 @@ class Core
 
         $currencyCode = $channel->base_currency->code;
 
+        return currency($price, $currencyCode);
+    }
+
+    /**
+    * Format and convert price with currency symbol
+    *
+    * @param float $price
+    *  @return string
+    */
+    public function formatPrice($price, $currencyCode)
+    {
         return currency($price, $currencyCode);
     }
 

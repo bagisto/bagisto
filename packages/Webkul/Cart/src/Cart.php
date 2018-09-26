@@ -8,6 +8,7 @@ use Webkul\Cart\Repositories\CartItemRepository;
 use Webkul\Cart\Repositories\CartAddressRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Cart\Models\CartPayment;
 use Cookie;
 
 /**
@@ -264,8 +265,8 @@ class Cart {
     {
         if(!$cart = session()->get('cart'))
             return false;
-        
-        return $cart;
+
+        return $this->cart->find($cart->id);
     }
 
     /**
@@ -322,12 +323,71 @@ class Cart {
         if(!$cart = $this->getCart())
             return false;
 
-        foreach($cart->shipping_rates as $rate) {
-            if($rate->method != $shippingMethodCode) {
-                $rate->delete();
-            }
-        }
+        $cart->shipping_method = $shippingMethodCode;
+        $cart->save();
+
+        // foreach($cart->shipping_rates as $rate) {
+        //     if($rate->method != $shippingMethodCode) {
+        //         $rate->delete();
+        //     }
+        // }
 
         return true;
+    }
+
+    /**
+     * Save payment method for cart
+     *
+     * @param string $payment
+     * @return Mixed
+     */
+    public function savePaymentMethod($payment)
+    {
+        if(!$cart = $this->getCart())
+            return false;
+
+        if($cartPayment = $cart->payment)
+            $cartPayment->delete();
+
+        $cartPayment = new CartPayment;
+
+        $cartPayment->method = $payment['method'];
+        $cartPayment->cart_id = $cart->id;
+        $cartPayment->save();
+
+        return $cartPayment;
+    }
+
+    /**
+     * Updates cart totals
+     *
+     * @return void
+     */
+    public function collectTotals()
+    {
+        if(!$cart = $this->getCart())
+            return false;
+
+        $cart->grand_total = 0;
+        $cart->base_grand_total = 0;
+        $cart->sub_total = 0;
+        $cart->base_sub_total = 0;
+        $cart->sub_total_with_discount = 0;
+        $cart->base_sub_total_with_discount = 0;
+
+        foreach ($cart->items()->get() as $item) {
+            $cart->grand_total = (float) $cart->grand_total + $item->price;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $item->base_price;
+
+            $cart->sub_total = (float) $cart->sub_total + $item->price;
+            $cart->base_sub_total = (float) $cart->base_sub_total + $item->base_price;
+        }
+
+        if($shipping = $cart->selected_shipping_rate) {
+            $cart->grand_total = (float) $cart->grand_total + $shipping->price;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price;
+        }
+
+        $cart->save();
     }
 }
