@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Core\Http\Controllers;
+namespace Webkul\Product\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -53,29 +53,43 @@ class ReviewController extends Controller
         $this->_config = request('_config');
     }
 
-    /**
-     * Store a newly created resource in storage.
+     /**
+     * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+    */
+    public function index()
+    {
+        return view($this->_config['view']);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , $id)
-    {   
-        $this->validate(request(), [
-            'comment' => 'required',
-        ]);
+    public function edit($id)
+    {
+        $review = $this->productReview->find($id);
 
-        $input=$request->all();
+        return view($this->_config['view'],compact('review'));
+    }
 
-        $input['product_id']=$id;
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
 
-        $input['customer_id']=1;
+        $this->productReview->update(request()->all(), $id);
 
-        $this->productReview->create($input);
-
-        session()->flash('success', 'Review submitted successfully.');
+        session()->flash('success', 'Review updated successfully.');
 
         return redirect()->route($this->_config['redirect']);
     }
-    
 }

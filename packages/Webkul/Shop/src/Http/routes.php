@@ -51,12 +51,12 @@ Route::group(['middleware' => ['web']], function () {
     ])->name('shop.reviews.create');
 
     Route::post('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
-        'redirect' => 'shop.reviews.index'
+        'redirect' => 'customer.reviews.index'
     ])->name('shop.reviews.store');
 
-    Route::post('/reviews/create/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
-        'redirect' => 'admin.reviews.index'
-    ])->name('admin.reviews.store');
+    // Route::post('/reviews/create/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
+    //     'redirect' => 'admin.reviews.index'
+    // ])->name('admin.reviews.store');
 
 
     //customer routes starts here

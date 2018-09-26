@@ -5,6 +5,7 @@ namespace Webkul\Customer\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Repositories\ProductReviewRepository as ProductReview;
 use Webkul\Customer\Models\Customer;
 use Auth;
 
@@ -27,14 +28,29 @@ class CustomerController extends Controller
     protected $_config;
     protected $customer;
 
+    /**
+     * ProductReviewRepository object
+     *
+     * @var array
+    */
+    protected $productReview;
 
-    public function __construct(CustomerRepository $customer)
+    /**
+     * Create a new controller instance.
+     *
+     * @param  Webkul\Product\Repositories\ProductReviewRepository  $productReview
+     * @return void
+    */
+
+    public function __construct(CustomerRepository $customer , ProductReview $productReview)
     {
         $this->middleware('customer');
 
         $this->_config = request('_config');
 
         $this->customer = $customer;
+
+        $this->productReview = $productReview;
     }
 
     /**
@@ -141,7 +157,12 @@ class CustomerController extends Controller
     }
 
     public function reviews() {
-        return view($this->_config['view']);
+
+        $id = auth()->guard('customer')->user()->id;
+
+        $reviews = $this->productReview->getCustomerReview($id);
+
+        return view($this->_config['view'],compact('reviews'));
     }
 
     public function address() {

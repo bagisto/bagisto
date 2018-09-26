@@ -3,13 +3,13 @@
 <div class="layered-filter-wrapper">
 
     <layered-navigation></layered-navigation>
-    
+
 </div>
 
 @push('scripts')
     <script type="text/x-template" id="layered-navigation-template">
         <div>
-        
+
             <div class="filter-title">
                 {{ __('shop::app.products.layered-nav-title') }}
             </div>
@@ -17,7 +17,7 @@
             <div class="filter-content">
 
                 <div class="filter-attributes">
-                    
+
                     <filter-attribute-item v-for='(attribute, index) in attributes' :attribute="attribute" :key="index" :index="index" @onFilterAdded="addFilters(attribute.code, $event)" :appliedFilterValues="appliedFilters[attribute.code]">
                     </filter-attribute-item>
 
@@ -58,7 +58,7 @@
                 </ol>
 
                 <div class="price-range-wrapper" v-if="attribute.type == 'price'">
-                    <vue-slider 
+                    <vue-slider
                         ref="slider"
                         v-model="sliderConfig.value"
                         :process-style="sliderConfig.processStyle"
@@ -86,9 +86,9 @@
 
             created () {
                 var urlParams = new URLSearchParams(window.location.search);
-                
+
                 var entries = urlParams.entries();
-                
+
                 for(pair of entries) {
                    this.appliedFilters[pair[0]] = pair[1].split(',');
                 }
@@ -99,7 +99,7 @@
                     if(filters.length) {
                         this.appliedFilters[attributeCode] = filters;
                     } else {
-                        delete this.appliedFilters[attributeCode]; 
+                        delete this.appliedFilters[attributeCode];
                     }
 
                     this.applyFilter()
@@ -107,7 +107,7 @@
 
                 applyFilter () {
                     var params = [];
-                    
+
                     for(key in this.appliedFilters) {
                         params.push(key + '=' + this.appliedFilters[key].join(','))
                     }

@@ -45,11 +45,11 @@
                             <div class="control-group">
                                 <label for="name" >{{ __('admin::app.customers.reviews.status') }}</label>
                                 <select  class="control" name="status">
-                                    <option value="1">
-                                       1
+                                    <option value="pending" {{ $review->status == "pending" ? 'selected' : ''}}>
+                                        pending
                                     </option>
-                                    <option value="2">
-                                      2
+                                    <option value="approved" {{ $review->status == "approved" ? 'selected' : '' }}>
+                                        approved
                                     </option>
                                 </select>
                             </div>
