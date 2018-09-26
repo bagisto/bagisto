@@ -70,6 +70,13 @@ class CheckoutController extends Controller
     */
     public function saveShipping()
     {
+        $shippingMethod = request()->get('shipping_method');
+
+        if(!$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+
+        Cart::collectTotals();
+
         return response()->json(Payment::getSupportedPaymentMethods());
     }
 
@@ -80,5 +87,16 @@ class CheckoutController extends Controller
     */
     public function savePayment()
     {
+        $payment = request()->get('payment');
+
+        if(!$payment || !Cart::savePaymentMethod($payment))
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+
+        $cart = Cart::getCart();
+
+        return response()->json([
+                'jump_to_section' => 'review',
+                'html' => view('shop::checkout.onepage.review', compact('cart'))->render()
+            ]);
     }
 }
