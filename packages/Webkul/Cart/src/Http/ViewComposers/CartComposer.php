@@ -44,12 +44,12 @@ class CartComposer
     }
 
     public function compose(View $view) {
+        // session()->forget('cart');
+        // return redirect()->back();
         if(auth()->guard('customer')->check()) {
             $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
 
             if(isset($cart)) {
-                $cart = $this->cart->findOneByField('id', 144);
-
                 $cartItems = $this->cart->items($cart['id']);
 
                 $products = array();
@@ -72,7 +72,7 @@ class CartComposer
         } else {
             if($cart = session()->get('cart')) {
                 if(isset($cart)) {
-                    $cartItems = $cart->items($cart['id']);
+                    $cartItems = $this->cart->items($cart['id']);
 
                     $products = array();
 
