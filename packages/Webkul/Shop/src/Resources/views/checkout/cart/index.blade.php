@@ -20,7 +20,7 @@
 
                 <div class="left-side">
 
-                    <div class="cart-item-list">
+                    <div class="cart-item-list" style="margin-top: 0">
                         @foreach($cart->items as $item)
 
                             <?php 
@@ -41,20 +41,19 @@
                                     </div>
 
                                     <div class="price">
-                                        <span class="main-price">
-                                            {{ $item->price }}
-                                        </span>
-                                        <span class="real-price">
-                                            $25.00
-                                        </span>
-                                        <span class="discount">
-                                            10% Off
-                                        </span>
+                                        {{ core()->currency($item->base_price) }}
                                     </div>
 
-                                    <div class="summary" >
-                                        Color : Gray, Size : S
-                                    </div>
+                                    @if ($product->type == 'configurable')
+                        
+                                        <div class="summary" >
+                                            @foreach (cart()->getItemAttributeOptionDetails($item) as $key => $option)
+
+                                                {{ (!$key ? '' : ' , ') . $option['attribute_name'] . ' : ' . $option['option_label'] }}
+                                            
+                                            @endforeach
+                                        </div>
+                                    @endif
 
                                     <div class="misc">
                                         <div class="qty-text">Quantity</div>
@@ -71,14 +70,20 @@
                     
 
                     <div class="misc-controls">
-                        <span>Continue Shopping</span>
-                        <button class="btn btn-lg btn-primary">PROCEED TO CHECKOUT</button>
+                        <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
+
+                        <a href="{{ route('shop.checkout.onepage.index') }}" class="btn btn-lg btn-primary">
+                            {{ __('shop::app.checkout.cart.proceed-to-checkout') }}
+                        </a>
                     </div>
                 </div>
 
                 <div class="right-side">
 
-                    <div class="price-section">
+
+                    @include('shop::checkout.total.summary', ['cart' => $cart])
+
+                    <!--<div class="price-section">
                         <div class="title">
                             Price Detail
                         </div>
@@ -129,7 +134,7 @@
                             <span class="amount">$75.00</span>
                         </div>
 
-                    </div>
+                    </div>-->
 
                 </div>
 
