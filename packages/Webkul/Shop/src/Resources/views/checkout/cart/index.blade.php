@@ -20,51 +20,55 @@
 
                 <div class="left-side">
 
-                    @foreach($cart->items as $item)
+                    <div class="cart-item-list">
+                        @foreach($cart->items as $item)
 
-                        <?php 
-                            $product = $item->product; 
+                            <?php 
+                                $product = $item->product; 
 
-                            $productBaseImage = $productImageHelper->getProductBaseImage($product);
-                        ?>
+                                $productBaseImage = $productImageHelper->getProductBaseImage($product);
+                            ?>
 
-                        <div class="item">
-                            <div style="margin-right: 15px;">
-                                <img class="item-image" src="{{ $productBaseImage['medium_image_url'] }}" />
+                            <div class="item">
+                                <div style="margin-right: 15px;">
+                                    <img class="item-image" src="{{ $productBaseImage['medium_image_url'] }}" />
+                                </div>
+
+                                <div class="item-details">
+
+                                    <div class="item-title">
+                                        {{ $product->name }}
+                                    </div>
+
+                                    <div class="price">
+                                        <span class="main-price">
+                                            {{ $item->price }}
+                                        </span>
+                                        <span class="real-price">
+                                            $25.00
+                                        </span>
+                                        <span class="discount">
+                                            10% Off
+                                        </span>
+                                    </div>
+
+                                    <div class="summary" >
+                                        Color : Gray, Size : S
+                                    </div>
+
+                                    <div class="misc">
+                                        <div class="qty-text">Quantity</div>
+                                        <div class="box">{{ $item->quantity }}</div>
+                                        <span class="remove">Remove</span>
+                                        <span class="towishlist">Move to Wishlist</span>
+                                    </div>
+                                </div>
+
                             </div>
+                        @endforeach
 
-                            <div class="item-details">
-
-                                <div class="item-title">
-                                    {{ $product->name }}
-                                </div>
-
-                                <div class="price">
-                                    <span class="main-price">
-                                        {{ $item->price }}
-                                    </span>
-                                    <span class="real-price">
-                                        $25.00
-                                    </span>
-                                    <span class="discount">
-                                        10% Off
-                                    </span>
-                                </div>
-
-                                <div class="summary" >
-                                    Color : Gray, Size : S
-                                </div>
-
-                                <div class="misc">
-                                    <div class="qty-text">Quantity</div>
-                                    <div class="box">{{ $item->quantity }}</div>
-                                    <span class="remove">Remove</span>
-                                    <span class="towishlist">Move to Wishlist</span>
-                                </div>
-                            </div>
-
-                        </div>
-                    @endforeach
+                    </div>
+                    
 
                     <div class="misc-controls">
                         <span>Continue Shopping</span>
@@ -73,6 +77,7 @@
                 </div>
 
                 <div class="right-side">
+
                     <div class="price-section">
                         <div class="title">
                             Price Detail
@@ -94,6 +99,7 @@
                         </div>
 
                     </div>
+
                     <div class="coupon-section">
 
                         <span class="title">Apply Coupon</span>
