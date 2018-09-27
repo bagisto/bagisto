@@ -211,7 +211,7 @@ class Cart {
         if(!isset($data['is_configurable']) || !isset($data['product']) ||!isset($data['quantity'])) {
             session()->flash('error', 'Cart System Integrity Violation, Some Required Fields Missing.');
 
-            dd('discrepancy 1');
+            dd('Missing Essential Parameters, Cannot Proceed Further');
 
             return redirect()->back();
         } else {
@@ -219,7 +219,7 @@ class Cart {
                 if(!isset($data['super_attribute'])) {
                     session()->flash('error', 'Cart System Integrity Violation, Configurable Options Not Found In Request.');
 
-                    dd('discrepancy 2');
+                    dd('Super Attributes Missing From the Request Parameters.');
 
                     return redirect()->back();
                 }
@@ -398,47 +398,72 @@ class Cart {
 
                 if(isset($customerCart)) {
                     foreach($customerCartItems as $customerCartItem) {
-                        if($customerCartItem->type == "simple" && isset($customerCartItem->parent_id)) {
-                            //write the merge case whem the items exists with the customer cart also.
-                            $child = $customerCartItem;
+                        foreach($cartItems as $cartItem) {
 
-                            $parentId = $child->parent_id;
+                            if($cartItem->type == "simple" && !isset($cartItem->parent_id)) {
 
-                            $parent = $this->cartItem->findOneByField('id', $parentId);
+                                if($customerCartItem->type == "simple" && !isset($customerCartItem->parent_id)) {
 
-                            $parentPrice = $parent->price;
+                                    //update the customer cart item details and delete the guest instance
+                                    if($customerCartItem->product_id == $cartItem->productId) {
 
-                            $prevQty = $parent->quantity;
+                                        $prevQty = $cartItem->quantity;
+                                        $newQty = $customerCartItem->quantity;
 
-                            foreach ($cartItems as $key => $cartItem) {
-                                if ($cartItem->type == "simple" && isset($cartItem->parent_id)) {
-                                    $newQty = $data['quantity'];
-
-                                    $parent->update(['quantity' => $prevQty + $newQty, 'item_total' => $parentPrice * ($prevQty + $newQty)]);
-                                } else if($cartItem->type == "simple" && is_null($cartItem->parent_id)){
-
+                                        $customerCartItem->update([
+                                            'quantity' => $prevQty + $newQty,
+                                            'item_total' => $customerCartItem->price * ($prevQty + $newQty),
+                                            'base_item_total' => $customerCartItem->price * ($prevQty + $newQty),
+                                            'item_total_weight' => $customerCartItem->weight * ($prevQty + $newQty),
+                                            'base_item_total_weight' => $customerCartItem->weight * ($prevQty + $newQty)
+                                        ]);
+                                    }
                                 }
+                            } else if($cartItem->type == "simple" && isset($cartItem->parent_id)) {
 
-                            }
+                                if($customerCartItem->type == "simple" && isset($customerCartItem->parent_id)) {
 
-
-                        } elseif($customerCartItem->type == "simple" && is_null($customerCartItem->parent_id)) {
-                            foreach($cartItems as $key => $cartItem) {
-
-                                if($cartItem->product_id == $customerCartItem->product_id) {
-
-                                    $customerItemQuantity = $customerCartItem->quantity;
-
-                                    $cartItemQuantity = $cartItem->quantity;
-
-                                    $customerCartItem->update(['cart_id' => $customerCart->id, 'quantity' => $cartItemQuantity + $customerItemQuantity]);
-
-                                    $this->cartItem->delete($cartItem->id);
-
-                                    $cartItems->forget($key);
                                 }
                             }
                         }
+                        // if($customerCartItem->type == "simple" && isset($customerCartItem->parent_id)) {
+                        //     //write the merge case whem the items exists with the customer cart also.
+                        //     $child = $customerCartItem;
+
+                        //     $parentId = $child->parent_id;
+
+                        //     $parent = $this->cartItem->findOneByField('id', $parentId);
+
+                        //     $parentPrice = $parent->price;
+
+                        //     $prevQty = $parent->quantity;
+
+                        //     foreach ($cartItems as $key => $cartItem) {
+                        //         if ($cartItem->type == "simple" && isset($cartItem->parent_id)) {
+                        //             $newQty = $data['quantity'];
+
+                        //             $parent->update(['quantity' => $prevQty + $newQty, 'item_total' => $parentPrice * ($prevQty + $newQty)]);
+                        //         } else if($cartItem->type == "simple" && is_null($cartItem->parent_id)){
+
+                        //         }
+                        //     }
+                        // } elseif($customerCartItem->type == "simple" && !isset($customerCartItem->parent_id)) {
+                        //     foreach($cartItems as $key => $cartItem) {
+
+                        //         if($cartItem->product_id == $customerCartItem->product_id) {
+
+                        //             $customerItemQuantity = $customerCartItem->quantity;
+
+                        //             $cartItemQuantity = $cartItem->quantity;
+
+                        //             $customerCartItem->update(['cart_id' => $customerCart->id, 'quantity' => $cartItemQuantity + $customerItemQuantity]);
+
+                        //             $this->cartItem->delete($cartItem->id);
+
+                        //             $cartItems->forget($key);
+                        //         }
+                        //     }
+                        // }
                     }
 
                     foreach($cartItems as $cartItem) {
