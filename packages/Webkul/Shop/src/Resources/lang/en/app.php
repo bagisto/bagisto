@@ -87,7 +87,10 @@ return [
             'use_for_shipping' => 'Ship to this address',
             'continue' => 'Continue',
             'shipping-method' => 'Shipping Method',
-            'payment-information' => 'Payment Information'
+            'payment-information' => 'Payment Information',
+            'summary' => 'Summary of Order',
+            'price' => 'Price',
+            'quantity' => 'Quantity'
         ],
 
         'total' => [

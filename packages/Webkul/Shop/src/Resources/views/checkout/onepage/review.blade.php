@@ -1,190 +1,127 @@
-<div class="complete-page">
-    <div class="order-summary">
-        <span>Summary of Order</span>
+<div class="form-container">
+    <div class="form-header">
+        <h1>{{ __('shop::app.checkout.onepage.summary') }}</h1>
     </div>
 
     <div class="address">
 
-        <div class="shipping-address">
-            <div class="shipping-title">
+        <div class="address-card shipping-address left">
+            <div class="card-title">
                 <span>Shipping address</span>
             </div>
 
-            <div class="shipping-content">
-                <div class="name">
-                    <span>John Doe </span>
-                </div>
-                <div class="addr">
-                    <span>
-                        25 , Washington USA 5751434
-                    </span>
-                </div>
-                <div class="horizontal-rule">
-                </div>
-                <div class="contact">
-                    <span>Contact : 9876543210 </span>
-                </div>
+            <div class="card-content">
+                John Doe</br>
+                25 , Washington</br>
+                USA 5751434</br>
+                
+                <span class="horizontal-rule"></span>
+
+                Contact : 9876543210 
             </div>
         </div>
 
-        <div class="billing-address">
-            <div class="shipping-title">
+        <div class="address-card billing-addres right">
+            <div class="card-title">
                 <span>Billing address</span>
             </div>
 
-            <div class="shipping-content">
-                <div class="name">
-                    <span>John Doe </span>
-                </div>
-                <div class="addr">
-                    <span>
-                        25 , Washington USA 5751434
-                    </span>
-                </div>
-                <div class="horizontal-rule">
-                </div>
-                <div class="contact">
-                    <span>Contact : 9876543210 </span>
-                </div>
+            <div class="card-content">
+                John Doe</br>
+                25 , Washington</br>
+                USA 5751434</br>
+                
+                <span class="horizontal-rule"></span>
+
+                Contact : 9876543210 
             </div>
         </div>
 
     </div>
 
-    <div class="product-detail">
-        <div class="product-image">
-            <img src="{{asset('themes/default/assets/images/1.png')}}" />
-        </div>
+    @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
 
-        <div class="product-desc">
-            <div class="product-title">
-                <span>
-                    Rainbow creation Embroidered
-                </span>
-            </div>
-            <div class="price">
-                <span>
-                    <label>Price </label>
-                    <label class="bold"> $40.00 </label>
-                </span>
-            </div>
-            <div class="quantity">
-                <span>
-                    <label>Quantity</label>
-                    <label class="quat-bold"> 1 </label>
-                </span>
-            </div>
-            <div class="pro-attribute">
-                <span>
-                    Color : Grey, Size : S,Sleeve Type : Puffed Sleeves,Occasion : Birthday ,Marriage Anniversary
-                </span>
-            </div>
-        </div>
-    </div>
+    <div class="cart-item-list">
+        @foreach($cart->items as $item)
 
-    <div class="product-detail">
-        <div class="product-image">
-            <img src="{{asset('themes/default/assets/images/1.png')}}" />
-        </div>
+            <?php 
+                $product = $item->product; 
 
-        <div class="product-desc">
-            <div class="product-title">
-                <span>
-                    Rainbow creation Embroidered
-                </span>
+                $productBaseImage = $productImageHelper->getProductBaseImage($product);
+            ?>
+
+            <div class="item">
+                <div style="margin-right: 15px;">
+                    <img class="item-image" src="{{ $productBaseImage['medium_image_url'] }}" />
+                </div>
+
+                <div class="item-details">
+
+                    <div class="item-title">
+                        {{ $product->name }}
+                    </div>
+
+                    <div class="row">
+                        <span class="title">
+                            {{ __('shop::app.checkout.onepage.price') }}
+                        </span>
+                        <span class="value">
+                            {{ core()->currency($item->base_price) }}
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <span class="title">
+                            {{ __('shop::app.checkout.onepage.quantity') }}
+                        </span>
+                        <span class="value">
+                            {{ $item->quantity }}
+                        </span>
+                    </div>
+
+                    <div class="summary" >
+                        Color : Gray, Size : S
+                    </div>
+                </div>
+
             </div>
-            <div class="price">
-                <span>
-                    <label>Price </label>
-                    <label class="bold"> $40.00 </label>
-               </span>
-            </div>
-            <div class="quantity">
-                <span>
-                    <label>Quantity</label>
-                    <label class="quat-bold"> 1 </label>
-                </span>
-            </div>
-            <div class="pro-attribute">
-                <span>
-                    Color : Grey, Size : S,Sleeve Type : Puffed Sleeves,Occasion : Birthday ,Marriage Anniversary
-                </span>
-            </div>
-        </div>
+        @endforeach
+
     </div>
 
     <div class="order-description">
 
-        <div class="payment">
+        <div class="pull-left">
             
             <div class="shipping">
-                <div class="pay-icon">
-                    <img src="{{asset('themes/default/assets/images/shipping.svg')}}" />
+                <div class="decorator">
+                    <i class="icon shipping-icon"></i>
                 </div>
-                <div class="shipping-text">
-                    <div class="price">
-                        <span>
-                            $ 25.00
-                        </span>
-                    </div>
 
-                    <div class="fedex-shipping">
-                        <span>
-                            FedEx Shipping
-                        </span>
+                <div class="text">
+                    $ 25.00
+
+                    <div class="info">
+                        FedEx Shipping
                     </div>
                 </div>
             </div>
 
-            <div class="net-banking">
-                <div class="pay-icon">
-                    <img src="{{asset('themes/default/assets/images/payment.svg')}}" />
+            <div class="payment">
+                <div class="decorator">
+                    <i class="icon payment-icon"></i>
                 </div>
-                <span>Net banking </span>
+
+                <div class="text">
+                    Net banking 
+                </div>
             </div>
 
         </div>
 
-        <div class="product-bill">
+        <div class="pull-right">
 
-            <div class="sub-total">
-                <span>
-                    Subtotal
-                </span>
-                <span class="right">
-                    $ 2,506.00
-                </span>
-            </div>
-
-            <div class="charge-discount">
-                <span>
-                   Delivery Charges
-                </span>
-                <span class="right">
-                    $ 40.00
-                </span>
-            </div>
-
-            <div class="charge-discount">
-                <span>
-                   Coupan discount
-                </span>
-                <span class="right">
-                    $ 25.00
-                </span>
-            </div>
-
-            <div class="horizontal-rule">
-            </div>
-
-            <div class="amount-pay">
-                <span>
-                   Amount payable
-                </span>
-                <span class="right">
-                    $ 2,571.00
-                </span>
-            </div>
+            @include('shop::checkout.total.summary', ['cart' => $cart])
 
         </div>
 

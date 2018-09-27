@@ -140,7 +140,7 @@ body {
                         padding-right: 5px;
 
                         .cart-count {
-                            color: #0031f0;
+                            color: $brand-color;
                             padding-right: 3px;
                         }
                     }
@@ -184,7 +184,6 @@ body {
         margin-right: auto;
         border-top: 1px solid lightgrey;
         border-bottom: 1px solid lightgrey;
-        font-size: 16px;
         display: block;
 
         ul.nav {
@@ -299,8 +298,8 @@ body {
 }
 
 
+//=======>Need to be removed
 // header page responsive css start here
-
 @media all and (max-width: 480px) {
 
     .header {
@@ -353,8 +352,8 @@ body {
             display: none;
 
             .search-content {
-                border-top: 1px solid #e8e8e8;
-                border-bottom: 1px solid #e8e8e8;
+                border-top: 1px solid $border-color;
+                border-bottom: 1px solid $border-color;
                 height: 48px;
 
                 .icon.search-icon {
@@ -363,8 +362,6 @@ body {
                 }
 
                 span {
-                    font-size: 16px;
-                    color: #242424;
                     margin-bottom: -7px;
                     margin-left: 5px;
                 }
@@ -379,11 +376,9 @@ body {
                 margin-top: 14px;
                 height: 32px;
                 margin-bottom: 14px;
-                border-bottom: 1px solid #e8e8e8;
+                border-bottom: 1px solid $border-color;
 
                 span {
-                    font-size: 16px;
-                    color: #242424;
                     margin-left: 48px;
                 }
             }
@@ -404,7 +399,7 @@ body {
 
             .nav > li {
                 float: none;
-                border-bottom: 1px solid #e8e8e8;
+                border-bottom: 1px solid $border-color;
 
                 a {
                     margin-left: 10px;
@@ -418,14 +413,13 @@ body {
             }
 
             .nav > li:first-child {
-                border-top: 1px solid #e8e8e8;
+                border-top: 1px solid $border-color;
             }
 
             .nav > li:last-child {
                 float:none;
 
                 span {
-                    font-size: 16px;
                     color: #FF6472;
                     letter-spacing: -0.38px;
                 }
@@ -540,7 +534,7 @@ body {
 
             .nav > li {
                 float: none;
-                border-bottom: 1px solid #e8e8e8;
+                border-bottom: 1px solid $border-color;
 
                 a {
                     margin-left: 10px;
@@ -554,14 +548,13 @@ body {
             }
 
             .nav > li:first-child {
-                border-top: 1px solid #e8e8e8;
+                border-top: 1px solid $border-color;
             }
 
             .nav > li:last-child {
                 float:none;
 
                 span {
-                    font-size: 16px;
                     color: #FF6472;
                     letter-spacing: -0.38px;
                 }
@@ -608,9 +601,9 @@ body {
     }
 
 }
-
-
 // header page responsive ends here
+//<=======Need to be removed
+
 
 section.slider-block {
     display: block;
@@ -651,6 +644,7 @@ section.slider-block {
                 width:100%;
             }
         }
+
         div.slider-control {
             display: block;
             position: absolute;
@@ -660,7 +654,7 @@ section.slider-block {
 
 
             .dark-left-icon {
-                background-color: $background-color;
+                background-color: #f2f2f2;
                 height: 48px;
                 width: 48px;
                 max-height: 100%;
@@ -668,7 +662,7 @@ section.slider-block {
             }
 
             .light-right-icon {
-                background-color: $color-black;
+                background-color: #000;
                 height: 48px;
                 width: 48px;
                 max-height: 100%;
@@ -685,27 +679,25 @@ section.slider-block {
     min-height: 1px;
 
     .filter-title {
-        border-bottom: 1px solid #E8E8E8;
-        font-size: 16px;
+        border-bottom: 1px solid $border-color;
         color: $font-color;
         padding: 10px 0;
     }
 
     .filter-attributes {
         .filter-attributes-item {
-            border-bottom: 1px solid #E8E8E8;
+            border-bottom: 1px solid $border-color;
             padding-bottom: 10px;
 
             .filter-attributes-title {
                 padding: 10px 40px 0 10px;
-                font-size: 16px;
                 color: #5E5E5E;
                 cursor: pointer;
                 position: relative;
 
                 .remove-filter-link {
                     font-weight: 400;
-                    color: #0031F0;
+                    color: $brand-color;
                     margin-right: 10px;
                 }
 
@@ -730,7 +722,6 @@ section.slider-block {
 
                     li.item {
                         padding: 8px 0;
-                        font-size: 16px;
                         color: #5E5E5E;
 
                         .checkbox {
@@ -766,7 +757,6 @@ section.slider-block {
         }
     }
 }
-
 
 .main-container-wrapper {
     max-width: 80%;
@@ -812,7 +802,6 @@ section.slider-block {
         }
 
         .product-name {
-            font-size: 16px;
             margin-bottom: 14px;
             width: 100%;
             color: $font-color;
@@ -823,7 +812,6 @@ section.slider-block {
         }
 
         .product-description {
-            font-size: 16px;
             margin-bottom: 14px;
             display: none;
         }
@@ -907,7 +895,6 @@ section.slider-block {
             float: right;
 
             label {
-                font-size: 16px;
                 margin-right: 5px;
             }
 
@@ -915,7 +902,6 @@ section.slider-block {
                 background: #FFFFFF;
                 border: 1px solid #C7C7C7;
                 border-radius: 3px;
-                font-size: 16px;
                 color: $font-color;
                 padding: 10px;
             }
@@ -1028,8 +1014,9 @@ section.slider-block {
     }
 }
 
-// responsive category css start here
 
+//=======>Need to be removed
+// responsive category css start here
 @media all and (max-width: 480px) {
 
     .main-container-wrapper {
@@ -1078,7 +1065,7 @@ section.slider-block {
         }
 
         .top-toolbar {
-            border-bottom: 1px solid #E8E8E8;
+            border-bottom: 1px solid $border-color;
             margin-bottom: 10px;
 
             .page-info {
@@ -1129,7 +1116,6 @@ section.slider-block {
                 background: #FFFFFF;
                 border: 1px solid #C7C7C7;
                 border-radius: 3px;
-                font-size: 16px;
                 color: $font-color;
                 padding: 10px;
             }
@@ -1189,7 +1175,7 @@ section.slider-block {
         }
 
         .top-toolbar {
-            border-bottom: 1px solid #E8E8E8;
+            border-bottom: 1px solid $border-color;
             margin-bottom: 10px;
 
             .page-info {
@@ -1240,7 +1226,6 @@ section.slider-block {
                 background: #FFFFFF;
                 border: 1px solid #C7C7C7;
                 border-radius: 3px;
-                font-size: 16px;
                 color: $font-color;
                 padding: 10px;
             }
@@ -1251,9 +1236,10 @@ section.slider-block {
         }
     }
 }
+//<=======Need to be removed
+
 
 .product-price {
-    font-size: 16px;
     margin-bottom: 14px;
     width: 100%;
     font-weight: 600;
@@ -1264,20 +1250,18 @@ section.slider-block {
     }
 
     .regular-price {
-        font-size: 16px;
         color: #A5A5A5;
         text-decoration: line-through;
         margin-right: 10px;
     }
 
     .special-price {
-        font-size: 16px;
         color: #FF6472;
     }
 }
 
 .footer {
-    background-color: $footer-back;
+    background-color: #f2f2f2;
     padding-left: 10%;
     padding-right: 10%;
 
@@ -1294,10 +1278,9 @@ section.slider-block {
 
             .list-container {
                 .list-heading {
-                    font-size: 16px;
                     letter-spacing: -0.26px;
                     text-transform: uppercase;
-                    color: $list-heading-color;
+                    color: rgba(165, 165, 165, 1);
                 }
 
                 .list-group {
@@ -1305,7 +1288,6 @@ section.slider-block {
 
                     li {
                         margin-bottom: 12px;
-                        color: $list-color;
                         list-style-type: none;
                         text-transform: uppercase;
 
@@ -1343,7 +1325,7 @@ section.slider-block {
                         }
 
                         .btn-primary {
-                            background-color: $subscribe-btn-color;
+                            background-color: #000;
                             margin-top: 8px;
                             border-radius: 0px;
                             text-align: center;
@@ -1356,7 +1338,6 @@ section.slider-block {
 }
 
 //customers page css goes here
-
 .content {
     padding-top: 15%;
     padding-bottom: 15%;
@@ -1367,7 +1348,7 @@ section.slider-block {
         margin-right: auto;
         text-align: center;
         font-size: 18px;
-        color: $sign-up-text-color;
+        color: #5e5e5e;
         letter-spacing: -0.29px;
         text-align: center;
     }
@@ -1376,7 +1357,7 @@ section.slider-block {
         margin-left: auto;
         margin-right: auto;
         display: flex;
-        background: $background-color;
+        background: #f2f2f2;
         border: 1px solid $border-color;
         flex-direction: column;
         max-width: 530px;
@@ -1388,7 +1369,7 @@ section.slider-block {
         .login-text {
             font-size: 24px;
             font-weight: bold;
-            color: $login-text;
+            color: #3a3a3a;
             letter-spacing: -0.23px;
             margin-top: 5%;
             margin-bottom: 3%;
@@ -1404,7 +1385,7 @@ section.slider-block {
 
         .forgot-password-link {
             font-size: 17px;
-            color: $forgot-password-color;
+            color: $brand-color;
             letter-spacing: -0.11px;
             margin-bottom: 5%;
         }
@@ -1437,16 +1418,14 @@ section.slider-block {
         flex-direction: column;
         align-content: center;
         justify-content: flex-start;
-        border: 1px solid #e8e8e8;
-        background: $background-color;
+        border: 1px solid $border-color;
+        background: #f2f2f2;
         width: 25%;
         height: 100%;
         text-transform: capitalize;
-        font-size: 16px;
         color: #5e5e5e;
 
         li {
-            font-size: 16px;
             width: 95%;
             height: 50px;
             margin-left: 5%;
@@ -1467,7 +1446,7 @@ section.slider-block {
         }
 
         li.active {
-            color: $forgot-password-color;
+            color: $brand-color;
         }
     }
 
@@ -1487,7 +1466,7 @@ section.slider-block {
             .profile-edit {
                 font-size: 17px;
                 margin-top: 1%;
-                color: #0031f0;
+                color: $brand-color;
                 letter-spacing: -0.11px;
                 float: right;
             }
@@ -1497,13 +1476,12 @@ section.slider-block {
                 width: 100%;
                 height: 1px;
                 vertical-align: middle;
-                background: #e8e8e8;
+                background: $border-color;
             }
         }
     }
 
     .profile-content {
-        font-size: 16px;
         color: $profile-content-color;
         margin-top: 1.4%;
 
@@ -1536,7 +1514,7 @@ section.slider-block {
 
         .edit-form {
             display: flex;
-            background: $background-color;
+            background: #f2f2f2;
             border: 1px solid $border-color;
             flex-direction: column;
             min-height: 345px;
@@ -1550,8 +1528,7 @@ section.slider-block {
 
 // product pages css starts here
 section.product-detail {
-    font-size: 16px;
-    color: $product-font-color;
+    color: $font-color;
 
     div.category-breadcrumbs {
         display: inline;
@@ -1713,7 +1690,7 @@ section.product-detail {
 
                 .product-heading {
                     font-size: 24px;
-                    color: $product-font-color;
+                    color: $font-color;
                     margin-bottom: 15px;
                 }
 
@@ -1748,7 +1725,6 @@ section.product-detail {
                 }
 
                 .accordian .accordian-header {
-                    font-size: 16px;
                     padding-left: 0;
                     font-weight: 600;
                 }
@@ -1762,104 +1738,15 @@ section.product-detail {
                     width: 100%;
                     border-bottom: solid 1px rgba(162, 162, 162, 0.2);
                 }
-
-                .full-description {
-                    font-size: 16px;
-                }
             }
-
-            // .rating-reviews {
-            //     margin-top: 0px;
-            //     width: 50%;
-            //     margin-left: 20px;
-
-            //     .title-inline {
-            //         display: inline-flex;
-            //         align-items: center;
-            //         justify-content: space-between;
-            //         margin-bottom: 20px;
-            //         width: 100%;
-
-            //         button {
-            //             float: right;
-            //             border-radius: 0px !important;
-            //         }
-            //     }
-
-            //     .overall {
-            //         display: flex;
-            //         flex-direction: row;
-            //         align-items: center;
-            //         justify-content: space-between;
-            //         height: 150px;
-
-            //         .left-side {
-            //             margin-bottom: 20px;
-
-            //             .number{
-            //                 font-size: 34px;
-            //             }
-            //         }
-
-            //         .right-side {
-            //             display: block;
-
-            //             .rater {
-            //                 display: inline-flex;
-            //                 align-items: center;
-
-            //                 .star {
-            //                     width: 50px;
-            //                     height: 20px;
-            //                     padding: 1px;
-            //                     margin-right: 8px;
-            //                 }
-
-            //                 .line-bar {
-            //                     height: 4px;
-            //                     width: 158px;
-            //                     margin-right: 12px;
-            //                     background: $bar-color;
-
-            //                     .line-value {
-            //                         background-color: $dark-blue-shade;
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     }
-
-            //     .reviews {
-            //         margin-top: 34px;
-            //         margin-bottom: 90px;
-
-            //         .review {
-            //             margin-bottom: 25px;
-
-            //             .title {
-            //                 margin-bottom: 5px;
-            //             }
-
-            //             .stars {
-            //                 margin-bottom: 15px;
-            //             }
-            //             .message {
-            //                 margin-bottom: 10px;
-            //             }
-            //         }
-            //         .view-all {
-            //             margin-top:15px;
-            //             color: $logo-color;
-            //             margin-bottom:15px;
-            //         }
-            //     }
-            // }
         }
     }
 }
+// product pages css ends here
 
-// products responsive css start here
 
+//=======>Need to be removed
+// products responsive css starts here
 @media all and (max-width: 480px) {
 
     section.product-detail {
@@ -1912,7 +1799,7 @@ section.product-detail {
                 .details {
                     width: 100%;
                     margin-top: 20px;
-                    border-bottom: 1px solid #e8e8e8e8;
+                    border-bottom: 1px solid $border-color;
 
                     .attributes {
                         border-bottom: none;
@@ -1976,7 +1863,7 @@ section.product-detail {
                 .details {
                     width: 100%;
                     margin-top: 20px;
-                    border-bottom: 1px solid #e8e8e8e8;
+                    border-bottom: 1px solid $border-color;
 
                     .attributes {
                         border-bottom: none;
@@ -1987,8 +1874,8 @@ section.product-detail {
     }
 
 }
-
-// products responsive css end here
+// products responsive css ends here
+//<=======Need to be removed
 
 .rating-reviews {
 
@@ -2048,7 +1935,7 @@ section.product-detail {
 
         .view-all {
             margin-top:15px;
-            color: $logo-color;
+            color: $brand-color;
             margin-bottom:15px;
         }
     }
@@ -2056,8 +1943,7 @@ section.product-detail {
 
 /* cart pages and elements css begins here */
 section.cart {
-    color: $product-font-color;
-    font-size: 16px;
+    color: $font-color;
     margin-bottom: 80px;
 
     .title {
@@ -2069,214 +1955,216 @@ section.cart {
         padding: 1px;
         display: flex;
         flex-direction: row;
+    }
+}
 
-        .left-side {
-            width: 68.6%;
-            margin-right: 2.4%;
+.cart {
+    .left-side {
+        width: 68.6%;
+        margin-right: 2.4%;
+    }
 
-            .item {
-                padding: 1.1%;
-                margin-bottom: 20px;
-                display: flex;
-                flex-direction: row;
+    .right-side {
+        width: 29%;
+        display: block;
 
-                .item-image {
-                    height: 160px;
-                    width: 160px;
-                }
+        .price-section {
+            width: 100%;
+            padding: 10px 10px 18px 18px;
+            margin-bottom: 20px;
+
+            .title {
+                font-weight: bold;
+                padding-bottom: 8px;
+                margin-bottom: 10px;
+            }
+
+            .all-item-details {
+                margin-bottom: 17px;
 
                 .item-details {
-                    display: flex;
-                    flex-direction: column;
+                    margin-bottom: 10px;
 
-                    .item-title {
-                        font-size: 18px;
-                        margin-bottom: 10px;
+                    .name {
                     }
 
                     .price {
-                        margin-bottom: 10px;
-
-                        .main-price {
-                            font-size: 18px;
-                            margin-right: 4px;
-                        }
-
-                        .real-price {
-                            margin-right: 4px;
-                            text-decoration-line: line-through;
-                        }
-
-                        .discount {
-                            color: $product-price-color;
-                        }
-                    }
-
-                    .summary {
-                        margin-bottom: 17px;
-                    }
-
-                    .misc {
-                        display: inline-flex;
-                        align-items: center;
-                        justify-content: flex-start;
-
-                        div.qty-text {
-                            color: $gray-shade;
-                            margin-right: 10px;
-                        }
-
-                        div.box {
-                            height: 38px;
-                            width: 60px;
-                            text-align: center;
-                            line-height: 38px;
-                            border: 1px solid $border-color;
-                            border-radius: 3px;
-                            margin-right: 30px;
-                        }
-
-                        .remove {
-                            color: $dark-blue-shade;
-                            margin-right: 30px;
-                        }
-
-                        .towishlist {
-                            color : $dark-blue-shade;
-                        }
-
+                        float: right;
                     }
                 }
             }
+            .horizontal-rule {
+                width: 100%;
+                height: 1px;
+                vertical-align: middle;
+                background: $border-color;
+            }
 
-            .misc-controls {
-                float: right;
+            .total-details {
+                margin-top: 10px;
 
-                span {
-                    margin-right: 15px;
-                }
-
-                button {
-                    border-radius: 0px;
+                .amount {
+                    float: right;
                 }
             }
         }
 
-        .right-side {
-            width: 29%;
-            display: block;
+        .coupon-section {
+            padding: 10px 10px 18px 18px;
 
-            .price-section {
+            .title {
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .control-group {
+                margin-bottom: 12px !important;
+
+                input.coupon-input::-moz-placeholder {
+                    font-family: "montserrat", sans-serif;
+                    color: $font-color;
+                }
+
+                input.coupon-input::-webkit-input-placeholder {
+                    font-family: "montserrat", sans-serif;
+                    color: $font-color;
+                }
+
+            }
+
+            button {
+                margin-bottom: 10px;
+                background-color: #000;
+                border-radius: 0px;
+            }
+
+            .coupon-details {
+
+                .coupon {
+                    margin-bottom: 8px;
+
+                    .discount {
+                        float: right;
+                    }
+                }
+            }
+
+            .horizontal-rule {
                 width: 100%;
-                padding: 10px 10px 18px 18px;
-                margin-bottom: 20px;
-
-                .title {
-                    font-size: 16px;
-                    font-weight: bold;
-                    padding-bottom: 8px;
-                    margin-bottom: 10px;
-                }
-
-                .all-item-details {
-                    margin-bottom: 17px;
-
-                    .item-details {
-                        margin-bottom: 10px;
-
-                        .name {
-                        }
-
-                        .price {
-                            float: right;
-                        }
-                    }
-                }
-                .horizontal-rule {
-                    width: 100%;
-                    height: 1px;
-                    vertical-align: middle;
-                    background: #e8e8e8;
-                }
-
-                .total-details {
-                    margin-top: 10px;
-
-                    .amount {
-                        float: right;
-                    }
-                }
+                height: 1px;
+                vertical-align: middle;
+                background: $border-color;
+                margin-bottom: 9px;
             }
 
-            .coupon-section {
-                padding: 10px 10px 18px 18px;
+            .after-coupon-amount {
 
-                .title {
-                    font-size: 16px;
+                .name {
                     font-weight: bold;
-                    margin-bottom: 10px;
                 }
 
-                .control-group {
-                    margin-bottom: 12px !important;
-
-                    input.coupon-input::-moz-placeholder {
-                        font-family: "montserrat", sans-serif;
-                        font-size: 16px;
-                        color: $product-font-color;
-                    }
-
-                    input.coupon-input::-webkit-input-placeholder {
-                        font-family: "montserrat", sans-serif;
-                        font-size: 16px;
-                        color: $product-font-color;
-                    }
-
-                }
-
-                button {
-                    margin-bottom: 10px;
-                    background-color: $color-black;
-                    border-radius: 0px;
-                }
-
-                .coupon-details {
-
-                    .coupon {
-                        margin-bottom: 8px;
-
-                        .discount {
-                            float: right;
-                        }
-                    }
-                }
-
-                .horizontal-rule {
-                    width: 100%;
-                    height: 1px;
-                    vertical-align: middle;
-                    background: #e8e8e8;
-                    margin-bottom: 9px;
-                }
-
-                .after-coupon-amount {
-
-                    .name {
-                        font-weight: bold;
-                    }
-
-                    .amount {
-                        float: right;
-                        font-weight: bold;
-                    }
-
+                .amount {
+                    float: right;
+                    font-weight: bold;
                 }
 
             }
 
+        }
+
+    }
+}
+
+.cart-item-list {
+    margin-top: 21px;
+    padding: 1px;
+
+    .item {
+        padding: 1.1%;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+
+        .item-image {
+            height: 160px;
+            width: 160px;
+        }
+
+        .item-details {
+            display: flex;
+            flex-direction: column;
+
+            .item-title {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .price {
+                margin-bottom: 10px;
+
+                .main-price {
+                    font-size: 18px;
+                    margin-right: 4px;
+                }
+
+                .real-price {
+                    margin-right: 4px;
+                    text-decoration-line: line-through;
+                }
+
+                .discount {
+                    color: #FF6472;
+                }
+            }
+
+            .summary {
+                margin-bottom: 17px;
+            }
+
+            .misc {
+                display: inline-flex;
+                align-items: center;
+                justify-content: flex-start;
+
+                div.qty-text {
+                    color: #5E5E5E;
+                    margin-right: 10px;
+                }
+
+                div.box {
+                    height: 38px;
+                    width: 60px;
+                    text-align: center;
+                    line-height: 38px;
+                    border: 1px solid $border-color;
+                    border-radius: 3px;
+                    margin-right: 30px;
+                }
+
+                .remove {
+                    color: $brand-color;
+                    margin-right: 30px;
+                }
+
+                .towishlist {
+                    color : $brand-color;
+                }
+
+            }
         }
     }
 
+    .misc-controls {
+        float: right;
+
+        span {
+            margin-right: 15px;
+        }
+
+        button {
+            border-radius: 0px;
+        }
+    }
 }
 
 .attached-products-wrapper {
@@ -2285,7 +2173,7 @@ section.cart {
     .title {
         margin-bottom: 40px;
         font-size: 18px;
-        color: $product-font-color;
+        color: $font-color;
         text-align: center;
         position: relative;
 
@@ -2310,6 +2198,8 @@ section.cart {
     }
 }
 
+
+//=======>Need to be removed
 @media all and (max-width: 480px){
 
     .attached-products-wrapper {
@@ -2328,7 +2218,12 @@ section.cart {
         }
     }
 }
+//<=======Need to be removed
 
+
+
+
+//=======>Need to be removed
 @media all and (min-width: 481px) and (max-width: 920px) {
 
     .attached-products-wrapper {
@@ -2347,10 +2242,13 @@ section.cart {
         }
     }
 }
+//<=======Need to be removed
 
 
+
+
+//=======>Need to be removed
 // order page css start here
-
 .order {
     margin-left: 5.5%;
     margin-top: 1%;
@@ -2359,7 +2257,6 @@ section.cart {
     .order-section-head {
         .order-number {
             font-size: 28px;
-            color: #242424;
             text-transform: capitalize;
             text-align: left;
         }
@@ -2367,7 +2264,7 @@ section.cart {
         .order-cancel {
             font-size: 17px;
             margin-top: 1%;
-            color: #0031f0;
+            color: $brand-color;
             letter-spacing: -0.11px;
             float: right;
         }
@@ -2387,7 +2284,7 @@ section.cart {
             width: 100%;
             height: 1px;
             vertical-align: middle;
-            background: #e8e8e8;
+            background: $border-color;
         }
     }
 
@@ -2396,7 +2293,6 @@ section.cart {
     }
 
     .payment-place {
-        font-size: 16px;
         color: $profile-content-color;
         margin-top: 1.4%;
 
@@ -2410,7 +2306,6 @@ section.cart {
                 span {
                     color: #5E5E5E;
                     letter-spacing: -0.12px;
-                    font-size: 16px;
                 }
 
                 .processing {
@@ -2423,7 +2318,6 @@ section.cart {
                 span {
                     color: #5E5E5E;
                     letter-spacing: -0.12px;
-                    font-size: 16px;
                 }
             }
         }
@@ -2439,7 +2333,6 @@ section.cart {
                 span {
                     color: #5E5E5E;
                     letter-spacing: -0.12px;
-                    font-size: 16px;
                 }
             }
 
@@ -2448,7 +2341,6 @@ section.cart {
                 span {
                     color: #5E5E5E;
                     letter-spacing: -0.12px;
-                    font-size: 16px;
                 }
             }
         }
@@ -2458,7 +2350,7 @@ section.cart {
             width: 100%;
             height: 1px;
             vertical-align: middle;
-            background: #e8e8e8;
+            background: $border-color;
         }
     }
 
@@ -2595,7 +2487,7 @@ section.cart {
         width: 100%;
         height: 1px;
         vertical-align: middle;
-        background: #e8e8e8;
+        background: $border-color;
     }
 
     .order-information {
@@ -2614,17 +2506,14 @@ section.cart {
         }
 
         p {
-            font-size: 16px;
             color: #3A3A3A;
 
         }
     }
 }
-
 // oder page css end here
 
 // responsive order page css start here
-
 @media all and (max-width: 480px) {
 
     .order {
@@ -2653,8 +2542,6 @@ section.cart {
 
             .order-number {
                 text-align: center;
-                font-size: 16px;
-                color: #242424;
                 letter-spacing: -0.38px;
                 text-align: center;
                 margin-top: 13px;
@@ -2665,14 +2552,14 @@ section.cart {
                 float: right;
                 text-align: right;
                 font-size: 17px;
-                color: #0031F0;
+                color: $brand-color;
                 letter-spacing: -0.11px;
                 margin-top: 13px;
                 margin-bottom: 13px;
             }
 
             .horizon-rule {
-                border: .5px solid #E8E8E8;
+                border: .5px solid $border-color;
                 width: 150%;
                 margin-left: -10%;
                 margin-right: -10%;
@@ -2680,7 +2567,6 @@ section.cart {
         }
 
         .payment-place {
-            font-size: 16px;
             color: $profile-content-color;
             margin-top: 4%;
 
@@ -2738,7 +2624,7 @@ section.cart {
                 width: 100%;
                 height: 1px;
                 vertical-align: middle;
-                background: #e8e8e8;
+                background: $border-color;
             }
         }
 
@@ -2846,7 +2732,7 @@ section.cart {
         }
 
         .product-config {
-            border: 1px solid #E8E8E8;
+            border: 1px solid $border-color;
             height: 19%;
             width:100%;
             margin-top: 10px;
@@ -2873,7 +2759,6 @@ section.cart {
                     width:50%;
 
                     span {
-                        font-size: 16px;
                         color: #5E5E5E;
                         letter-spacing: -0.11px;
                     }
@@ -2933,8 +2818,6 @@ section.cart {
 
             .order-number {
                 text-align: center;
-                font-size: 16px;
-                color: #242424;
                 letter-spacing: -0.38px;
                 text-align: center;
                 margin-top: 13px;
@@ -2945,14 +2828,14 @@ section.cart {
                 float: right;
                 text-align: right;
                 font-size: 17px;
-                color: #0031F0;
+                color: $brand-color;
                 letter-spacing: -0.11px;
                 margin-top: 13px;
                 margin-bottom: 13px;
             }
 
             .horizon-rule {
-                border: .5px solid #E8E8E8;
+                border: .5px solid $border-color;
                 width: 150%;
                 margin-left: -10%;
                 margin-right: -10%;
@@ -2960,7 +2843,6 @@ section.cart {
         }
 
         .payment-place {
-            font-size: 16px;
             color: $profile-content-color;
             margin-top: 4%;
 
@@ -3018,7 +2900,7 @@ section.cart {
                 width: 100%;
                 height: 1px;
                 vertical-align: middle;
-                background: #e8e8e8;
+                background: $border-color;
             }
         }
 
@@ -3126,7 +3008,7 @@ section.cart {
         }
 
         .product-config {
-            border: 1px solid #E8E8E8;
+            border: 1px solid $border-color;
             height: 19%;
             width:100%;
             margin-top: 10px;
@@ -3153,7 +3035,6 @@ section.cart {
                     width:50%;
 
                     span {
-                        font-size: 16px;
                         color: #5E5E5E;
                         letter-spacing: -0.11px;
                     }
@@ -3186,9 +3067,11 @@ section.cart {
 
 }
 // responsive order css end here
+//<=======Need to be removed
+
 
 // checkout starts here
-.checkout-process{
+.checkout-process {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -3205,7 +3088,7 @@ section.cart {
             justify-content: space-between;
             width: 100%;
             padding-bottom: 15px;
-            border-bottom: 1px solid #E8E8E8;;
+            border-bottom: 1px solid $border-color;
 
             li {
                 height: 48px;
@@ -3217,7 +3100,7 @@ section.cart {
                     border: 1px solid black;
                     border-radius: 50%;
                     display: inline-flex;
-                    border: 1px solid #E8E8E8;
+                    border: 1px solid $border-color;
                     background-repeat: no-repeat;
                     background-position: center;
 
@@ -3250,7 +3133,6 @@ section.cart {
                     margin-left: 7px;
                     margin-top: auto;
                     margin-bottom: auto;
-                    font-size: 16px;
                 }
 
                 &.active {
@@ -3280,7 +3162,7 @@ section.cart {
             }
 
             .form-container {
-                border-bottom: 1px solid #E8E8E8;
+                border-bottom: 1px solid $border-color;
                 padding-top: 20px;
                 padding-bottom: 20px;
             }
@@ -3300,774 +3182,158 @@ section.cart {
                     margin-left: 28px;
                 }
             }
+
+            .address {
+                display: inline-block;
+                width: 100%;
+
+                .address-card {
+                    width: 50%;
+
+                    &.left {
+                        float: left;
+                    }
+
+                    &.right {
+                        float: right;
+                    }
+
+                    .card-title span {
+                        font-weight: 600;
+                    }
+
+                    .card-content {
+                        margin-top: 15px;
+                        color: #121212;
+                        line-height: 25px;
+
+                        .horizontal-rule {
+                            margin: 12px 0;
+                            display: block;
+                            width: 25px;
+                            background: #121212;
+                        }
+                    }
+                }
+            }
+
+            .cart-item-list {
+                .item {
+                    border: 1px solid $border-color;
+                    border-radius: 3px;
+                    padding: 20px;
+
+                    .row {
+                        .title {
+                            width: 100px;
+                            display: inline-block;
+                            color: #5E5E5E;
+                            font-weight: 500;
+                            margin-bottom: 10px;
+                        }
+
+                        .value {
+                            font-size: 18px;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+
+            .order-description {
+                display: inline-block;
+                width: 100%;
+
+                .shipping {
+                    margin-bottom: 25px;
+                }
+
+                .decorator {
+                    height: 48px;
+                    width: 48px;
+                    border-radius: 50%;
+                    border: 1px solid $border-color;
+                    vertical-align: middle;
+                    display: inline-block;
+                    text-align: center;
+
+                    .icon {
+                        margin-top: 7px;
+                    }
+                }
+
+                .text {
+                    font-weight: 600;
+                    vertical-align: middle;
+                    display: inline-block;
+
+                    .info {
+                        font-weight: 500;
+                        margin-top: 2px;
+                    }
+                }
+            }
+            // complete page end here
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 
     .col-right {
         width: 35%;
         padding-left: 40px;
-
-        .order-summary {
-
-            .price {
-
-                span {
-                    margin-left: 3px;
-                    font-size: 16px;
-                    color: #242424;
-                    font-weight: bold;
-                }
-            }
-
-            .item-detail {
-                margin-top:12px;
-
-                span {
-                    margin-left: 3px;
-
-                    label {
-                        font-size: 16px;
-                        color: #242424;
-                    }
-
-                    .right {
-                        float: right;
-                        font-size: 16px;
-                        color: #242424;
-                    }
-                }
-            }
-
-            .horizontal-rule {
-                margin-top: 6%;
-                width: 100%;
-                height: 1px;
-                vertical-align: middle;
-                background: #e8e8e8;
-            }
-
-            .payble-amount {
-                margin-top: 12px;
-
-                span {
-                    margin-left: 3px;
-                    font-weight: bold;
-
-                    label {
-                        font-size: 16px;
-                        color: #242424;
-                        font-weight: bold;
-                    }
-
-                    .right {
-
-                        float:right;
-                        font-size: 16px;
-                        color: #242424;
-                    }
-                }
-            }
-        }
     }
-}
-
-// checkout ends here
-
-// responsive checkout start here
-
-@media all and (max-width: 480px) {
-    .checkout-process{
-        width: 100%;
-        margin-top: 3%;
-
-        .left-side {
-            width: 100%;
-            margin-right: 0%;
-            height: 60px;
-
-            .checkout-menu {
-                width: 100%;
-
-                ul.checkout-detail {
-                    height: 60px;
-                    width: 100%;
-                    padding: 5px;
-
-                    li {
-                        height: 48px;
-
-                        .wrapper {
-                            display: flex;
-
-                            span {
-                               display: none;
-                            }
-                        }
-                    }
-
-                    .line {
-                        margin-top: 23px;
-                        width: 100%;
-                        margin-left: 5px;
-                        margin-right: 5px;
-                        border: 1px solid #E7E7E7;
-                        height: 1px;
-                    }
-                }
-
-                .horizontal-rule {
-                   display: none;
-                }
-            }
-        }
-
-        .right-side {
-            display: none;
-        }
-    }
-
-    .order-info{
-        width: 100%;
-        margin-right: 0%;
-        margin-top: 10px;
-        height:50px;
-
-        .control-group {
-
-            .control{
-                width:100%;
-            }
-        }
-
-        .different-billing-addr {
-            margin-top: 5%;
-        }
-
-        .horizontal-rule {
-            margin-top: 10%;
-        }
-
-        .countinue-button {
-            margin-top: 8%;
-        }
-    }
-}
-
-@media all and (min-width: 481px) and (max-width: 920px) {
-
-    .checkout-process{
-        width: 100%;
-        margin-top:3%;
-
-        .left-side {
-            width: 100%;
-            margin-right: 0%;
-            height: 60px;
-
-            .checkout-menu {
-                width: 100%;
-
-                ul.checkout-detail {
-                    height: 60px;
-                    width: 100%;
-                    padding: 5px;
-
-                    li {
-                        height: 48px;
-
-                        .wrapper {
-                            display:flex;
-
-                            span {
-                               display: none;
-                            }
-
-                        }
-                    }
-
-                    .line {
-                        margin-top: 23px;
-                        width: 100%;
-                        margin-left: 10px;
-                        margin-right: 10px;
-                        border: 1px solid #E7E7E7;
-                        height: 1px;
-                    }
-                }
-
-                .horizontal-rule {
-                   display: none;
-                }
-            }
-        }
-
-        .right-side {
-            display:none;
-        }
-    }
-
-    .order-info{
-        width: 100%;
-        margin-right: 0%;
-        margin-top: 10px;
-        height:50px;
-
-        .control-group {
-
-            .control{
-                width:100%;
-            }
-        }
-
-        .different-billing-addr {
-            margin-top: 3%;
-        }
-
-        .horizontal-rule {
-            margin-top: 10%;
-        }
-
-        .countinue-button {
-            margin-top: 5%;
-        }
-    }
-}
-// responsive checkout end here
-
-
-
-//shipment start here
-.ship-method {
-    width: 67%;
-    margin-right: 6%;
-    height: 600px;
-    margin-top: -190px;
-
-    .ship-info {
-
-        .ship-text{
-            font-size: 24px;
-            color: #242424;
-            letter-spacing: -0.58px;
-            font-weight: bold;
-        }
-    }
-
-    .ship-price {
-        margin-top: 31px;
-
-        .price-checkbox {
-            display:flex;
-
-            span {
-                margin-left: 8px;
-                font-size: 16px;
-                color: #242424;
-                line-height: 22px;
-                font-weight: bold;
-            }
-
-        }
-
-        .price-checkbox-text {
-            margin-left: 25px;
-            width:580px;
-            height:44px;
-            margin-top: 4px;
-
-            b {
-               font-size: 16px;
-            }
-
-            span {
-                font-size: 16px;
-                color: #242424;
-                line-height: 22px;
-            }
-        }
-
-
-    }
-
-    .horizontal-rule {
-        margin-top: 7%;
-        width: 100%;
-        height: 1px;
-        vertical-align: middle;
-        background: #e8e8e8;
-    }
-
-    .countinue-button {
-        margin-top: 3%;
-
-        button {
-            background: #0031F0;
-            font-size: 14px;
-            color: #FFFFFF;
-            letter-spacing: -0.26px;
-            text-align: center;
-            height: 38px;
-            width: 137px;
-            border: none;
-        }
-    }
-}
-//shipment end here
-
-// payment method start here
-.payment-method {
-    width: 67%;
-    margin-right: 6%;
-    height: 600px;
-    margin-top: -190px;
-
-    .payment-info {
-
-        .payment-text{
-            font-size: 24px;
-            color: #242424;
-            letter-spacing: -0.58px;
-            font-weight: bold;
-        }
-    }
-
-    .payment-price {
-        margin-top: 31px;
-
-        .payment-checkbox {
-            display:flex;
-
-            span {
-                margin-left: 8px;
-                font-size: 16px;
-                color: #242424;
-                line-height: 22px;
-                font-weight: bold;
-            }
-
-        }
-
-        .payment-checkbox-text {
-            margin-left: 25px;
-            width:580px;
-            height:44px;
-            margin-top: 4px;
-
-            b {
-               font-size: 16px;
-            }
-
-            span {
-                font-size: 16px;
-                color: #242424;
-                line-height: 22px;
-            }
-        }
-
-
-    }
-
-    .horizontal-rule {
-        margin-top: 7%;
-        width: 100%;
-        height: 1px;
-        vertical-align: middle;
-        background: #e8e8e8;
-    }
-
-    .countinue-button {
-        margin-top: 3%;
-
-        button {
-            background: #0031F0;
-            font-size: 14px; .horizontal-rule {
-                margin-top: 7%;
-                width: 100%;
-                height: 1px;
-                vertical-align: middle;
-                background: #e8e8e8;
-            }
-            color: #FFFFFF;
-            letter-spacing: -0.26px; .horizontal-rule {
-                margin-top: 7%;
-                width: 100%;
-                height: 1px;
-                vertical-align: middle;
-                background: #e8e8e8;
-            }
-            text-align: center;
-            height: 38px;
-            width: 137px;
-            border: none;
-        }
-    }
-}
-// payment method end here
-
-
-// complete page start here
-.complete-page{
-    width:880px;
-    height: 1050px;
 
     .order-summary {
-
-        span {
-            font-size: 24px;
-            color: #242424;
-            font-weight: bold;
-            letter-spacing: -0.58px;
+        h3 {
+            font-size: 16px;
         }
-    }
 
-    .address {
-        display: flex;
-        flex-direction: row;
-        margin-top: 30px;
+        .item-detail {
+            margin-top:12px;
 
-        .shipping-address {
-            height: 100px;
-            width: 415px;
-
-            .shipping-title {
-
-                span {
-                    font-weight: bold;
-                    font-size: 16px;
-                    color: #242424
-                }
-            }
-
-            .shipping-content {
-                margin-top: 15px;
-                width: 175px;
-
-                .addr {
-                    margin-top: 5px;
-
-                    span {
-                        font-size: 16px;
-                        color: #121212;
-                    }
-                }
-
-                .horizontal-rule {
-                    margin-top: 7%;
-                    width: 25px;
-                    height: 1px;
-                    vertical-align: middle;
-                    background: #121212;
-                }
-
-                .contact {
-                    margin-top: 10px;
-
-                    span {
-                        font-size: 16px;
-                        color: #121212;
-                    }
+            label {
+                &.right {
+                    float: right;
                 }
             }
         }
 
-        .billing-address {
-            width: 415px;
+        .payble-amount {
+            margin-top: 17px;
+            border-top: 1px solid $border-color;
+            padding-top: 12px;
 
-            .shipping-title {
+            label {
+                font-weight: bold;
 
-                span {
-                    font-weight: bold;
-                    font-size: 16px;
-                    color: #242424
-                }
-            }
-
-            .shipping-content {
-                margin-top: 15px;
-                width: 175px;
-
-                .addr {
-                    margin-top: 5px;
-
-                    span {
-                        font-size: 16px;
-                        color: #121212;
-                    }
-                }
-
-                .horizontal-rule {
-                    margin-top: 7%;
-                    width: 25px;
-                    height: 1px;
-                    vertical-align: middle;
-                    background: #121212;
-                }
-
-                .contact {
-                    margin-top: 10px;
-
-                    span {
-                        font-size: 16px;
-                        color: #121212;
-                    }
-                }
-            }
-        }
-    }
-
-    .product-detail {
-        height: 200px;
-        border: 1px solid #E8E8E8;
-        border-radius: 3px;
-        margin-top: 30px;
-        display: flex;
-        flex-direction: row;
-
-        .product-image {
-            margin: 20px 0px 20px 20px;
-
-            img {
-                height: 160px;
-                width:160px;
-            }
-        }
-        margin-top: 30px;
-        .product-desc {
-            margin-top: 20px;
-            margin-left: 10px;
-
-            .product-title {
-
-                span {
-                    font-size: 18px;
-                    color: #242424;
-                    letter-spacing: -0.43px;
-                    font-weight: bold;
-                }
-            }
-
-            .price {
-                margin-top:11px;
-
-                span {
-
-                    label {
-                        font-size: 16px;
-                        color: #5E5E5E;
-                    }
-
-                    label.bold {
-                        margin-left:45px;
-                        font-weight: bold;
-                        font-size: 18px;
-                        color: #242424;
-                    }
-                }
-            }
-
-            .quantity {
-                margin-top:11px;
-
-                span {
-
-                    label {
-                        font-size: 16px;
-                        color: #5E5E5E;
-                    }
-
-                    label.quat-bold {
-                        margin-left:15px;
-                        font-weight: bold;
-                        font-size: 18px;
-                        color: #242424;
-                    }
-                }
-            }
-
-            .pro-attribute {
-                width:413px;
-                margin-top:14px;
-
-                span {
-
-                    font-size: 16px;
-                    color: #242424;
-                }
-            }
-        }
-    }
-
-    .order-description {
-        height: 140px;
-        border-radius: 3px;
-        margin-top: 30px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-
-        .payment {
-
-            .shipping{
-                display: flex;
-                flex-direction: row;
-
-                .pay-icon {
-                    height: 48px;
-                    width: 48px;
-                    border-radius: 50%;
-                    border: 1px solid #E8E8E8;
-
-                    img {
-                        margin-left: 8px;
-                        margin-top: 8px;
-                    }
-
-                    span {
-                        margin-left: 10px;
-                        font-size: 16px;
-                        color: #242424;
-                        letter-spacing: -0.38px;
-                    }
-                }
-
-                .shipping-text {
-                    display: flex;
-                    flex-direction: column;
-
-                    .price {
-                        margin-top: 5px;
-                        margin-left: 5px;
-
-                        span {
-                            font-size: 16px;
-                            color: #242424;
-                            letter-spacing: -0.38px;
-                        }
-                    }
-
-                    .fedex-shipping {
-                        margin-left: 5px;
-
-                        span {
-                            font-size: 16px;
-                            color: #242424;
-                            letter-spacing: -0.38px;
-                        }
-                    }
-                }
-            }
-
-            .net-banking{
-                margin-top: 23px;
-                display: flex;
-                flex-direction: row;
-
-                .pay-icon {
-                    height: 48px;
-                    width: 48px;
-                    border-radius: 50%;
-                    border: 1px solid #E8E8E8;
-
-                    img {
-                        margin-left: 8px;
-                        margin-top: 8px;
-                    }
-                }
-
-                span {
-                    margin-left: 5px;
-                    margin-top: 15px;
-                    font-size: 16px;
-                    color: #242424;
-                    letter-spacing: -0.38px;
-                }
-            }
-        }
-
-        .product-bill {
-            height:200px;
-            width:300px;
-
-            .sub-total {
-
-                span {
-                    font-size: 16px;
-                    color: #242424;
-                    letter-spacing: -0.38px;
-                }
-
-                .right{
+                &.right {
                     float:right;
                 }
             }
-
-            .charge-discount {
-                margin-top: 10px;
-
-                span {
-                    font-size: 16px;
-                    color: #242424;
-                    letter-spacing: -0.38px;
-                }
-
-                .right{
-                    float:right;
-                }
-            }
-
-            .horizontal-rule {
-                margin-top: 5%;
-                width: 100%;
-                height: 1px;
-                vertical-align: middle;
-                background: #e8e8e8;
-            }
-
-            .amount-pay {
-                margin-top: 15px;
-
-                span {
-                    font-size: 16px;
-                    color: #242424;
-                    letter-spacing: -0.38px;
-                }
-
-                .right{
-                    float:right;
-                }
-            }
-        }
-    }
-
-    .horizontal-rule {
-        width: 100%;
-        height: 1px;
-        vertical-align: middle;
-        background: #e8e8e8;
-    }
-
-    .palce-order-button {
-        margin-top: 30px;
-
-        button {
-            width:137px;
-            height: 38px;
-            background: #0031F0;
-            font-size: 14px;
-            color: #FFFFFF;
-            letter-spacing: -0.26px;
-            text-align: center;
-            border:none;
         }
     }
 }
-// complete page end here
-
+// checkout ends here
 
 // review page start here
 section.review {
-    font-size: 16px;
-    color: $product-font-color;
+    color: $font-color;
 
     .category-breadcrumbs {
         display: inline;
@@ -4094,7 +3360,6 @@ section.review {
 
                 span {
                     font-size: 24px;
-                    color: #242424;
                     letter-spacing: -0.58px;
                 }
             }
@@ -4110,15 +3375,12 @@ section.review {
 
                 .pro-price-not {
                     margin-left: 10px;
-                    font-size: 16px;
                     color: #A5A5A5;
                     letter-spacing: -0.26px;
                 }
 
                 .offer {
                     margin-left: 10px;
-                    font-size: 16px;
-                    color: #242424;
                     letter-spacing: -0.26px;
                 }
             }
@@ -4132,8 +3394,6 @@ section.review {
                 margin-top: 10px;
 
                 span {
-                    font-size: 16px;
-                    color: #242424;
                     letter-spacing: -0.26px;
                 }
 
@@ -4145,7 +3405,6 @@ section.review {
 
             .rating {
                 margin-top : 25px;
-                font-size: 16px;
                 color: #5E5E5E;
                 letter-spacing: -0.12px;
 
@@ -4191,7 +3450,7 @@ section.review {
                 margin-top: 10px;
 
                 button {
-                    background: #0031F0;
+                    background: $brand-color;
                     font-size: 14px;
                     color: #FFFFFF;
                     letter-spacing: -0.26px;
@@ -4218,7 +3477,6 @@ section.review {
 
                         span {
                             font-size: 34px;
-                            color: #242424;
                             letter-spacing: -0.82px;
                             text-align: center;
                         }
@@ -4236,12 +3494,10 @@ section.review {
         }
     }
 }
-
 // review page end here
 
 
 // customer section css start here
-
 .cusomer-section {
     margin-left: 50px;
     width:100%;
@@ -4249,7 +3505,7 @@ section.review {
     .customer-section-info {
         display: flex;
         flex-direction: row;
-        border-top: 1px solid #E8E8E8;
+        border-top: 1px solid $border-color;
 
         .pro-img {
             margin-top: 10px;
@@ -4266,8 +3522,7 @@ section.review {
             width: 100%;
 
             .title {
-                font-size: 16px;
-                color: #0031F0;
+                color: $brand-color;
                 margin-top: 15px;
             }
 
@@ -4287,8 +3542,7 @@ section.review {
     }
 
     .customer-section-info:last-child {
-        border-bottom: 1px solid #e8e8e8;
+        border-bottom: 1px solid $border-color;
     }
 }
-
 // customer section css end here
