@@ -206,51 +206,49 @@ class Cart {
      *
      * @return array
      */
-    public function prepareItemData($id, $data) {
+    public function prepareItemData($productId, $data)
+    {
+        $product = $this->product->findOneByField('id', $productId);
+
         unset($data['_token']);
 
-        if(!isset($data['is_configurable']) || !isset($data['product']) ||!isset($data['quantity'])) {
+        //Check if the product is salable
+        if(!isset($data['product']) ||!isset($data['quantity'])) {
             session()->flash('error', 'Cart System Integrity Violation, Some Required Fields Missing.');
 
             dd('Missing Essential Parameters, Cannot Proceed Further');
 
             return redirect()->back();
         } else {
-            if($data['is_configurable'] == "true") {
-                if(!isset($data['super_attribute'])) {
-                    session()->flash('error', 'Cart System Integrity Violation, Configurable Options Not Found In Request.');
+            if($product->type == 'configurable' && !isset($data['super_attribute'])) {
+                session()->flash('error', 'Cart System Integrity Violation, Configurable Options Not Found In Request.');
 
-                    dd('Super Attributes Missing From the Request Parameters.');
+                dd('Super Attributes Missing From the Request Parameters.');
 
-                    return redirect()->back();
-                }
+                return redirect()->back();
             }
         }
 
-        $data['sku'] = $this->product->findOneByField('id', $data['product'])->sku;
+        if($product->type == 'configurable') {
+            //Check if the product is salable
+            $child = $this->product->findOneByField('id', $data['selected_configurable_option']);
 
-        if(isset($data['is_configurable']) && $data['is_configurable'] == "true") {
-            $parentData['sku'] = $data['sku'];
+            $parentData = [
+                'sku' => $product->sku,
+                'product_id' => $productId,
+                'quantity' => $data['quantity'],
+                'type' => 'configurable',
+                'name' => $product->name,
+                'price' => ($price = $child->price), //This shoulf final price
+                'base_price' => $price,
+                'item_total' => $price * $data['quantity'],
+                'base_item_total' => $price * $data['quantity'],
+                'weight' => ($weight = $child->weight),
+                'item_weight' => $weight * $parentData['quantity'],
+                'base_item_weight' => $weight * $parentData['quantity'],
+            ];
 
-            $parentData['product_id'] = $id;
-
-            $parentData['quantity'] = $data['quantity'];
-
-            $parentData['type'] = 'configurable';
-
-            $parentData['name'] = $this->product->findOneByField('id', $id)->name;
-
-            $parentData['price'] = $this->product->findOneByField('id', $data['selected_configurable_option'])->price;
-
-            $parentData['base_price'] = $parentData['price'];
-
-            $parentData['item_total'] = $parentData['price'] * $data['quantity'];
-
-            $parentData['base_item_total'] = $parentData['price'] * $data['quantity'];
-
-            $parentData['weight'] = $this->product->findOneByField('id', $data['selected_configurable_option'])->weight;
-
-            $parentData['item_weight'] = $parentData['weight'] * $parentData['quantity'];
+            
 
             $parentData['base_item_weight'] = $parentData['weight'] * $parentData['quantity'];
 
@@ -267,14 +265,14 @@ class Cart {
 
             return ['parent' => $parentData, 'child' => $childData];
         } else {
-            $data['product_id'] = $id;
+            $data['product_id'] = $productId;
             unset($data['product']);
 
             $data['type'] = 'simple';
 
-            $data['name'] = $this->product->findOneByField('id', $id)->name;
+            $data['name'] = $this->product->findOneByField('id', $productId)->name;
 
-            $data['price'] = $this->product->findOneByField('id', $id)->price;
+            $data['price'] = $this->product->findOneByField('id', $productId)->price;
 
             $data['base_price'] = $data['price'];
 
@@ -282,7 +280,7 @@ class Cart {
 
             $data['base_item_total'] = $data['price'] * $data['quantity'];
 
-            $data['weight'] = $this->product->findOneByField('id', $id)->weight;
+            $data['weight'] = $this->product->findOneByField('id', $productId)->weight;
 
             $data['item_weight'] = $data['weight'] * $data['quantity'];
 
