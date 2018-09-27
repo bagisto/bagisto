@@ -11,7 +11,6 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Product\ProductImage;
 use Webkul\Product\Product\View as ProductView;
 use Cart;
-use Cookie;
 
 /**
  * Cart controller for the customer
@@ -26,9 +25,17 @@ class CartController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * Protected Variables that
+     * holds instances of the
+     * repository classes.
      *
-     * @return \Illuminate\Http\Response
+     * @param Array $_config
+     * @param $cart
+     * @param $cartItem
+     * @param $customer
+     * @param $product
+     * @param $productImage
+     * @param $productView
      */
     protected $_config;
 
@@ -90,21 +97,11 @@ class CartController extends Controller
      */
 
     public function add($id) {
+        // session()->forget('cart');
+
+        // return redirect()->back();
+
         $data = request()->input();
-
-        if(!isset($data['is_configurable']) || !isset($data['product']) ||!isset($data['quantity'])) {
-            session()->flash('error', 'Cannot Product Due to User\'s miscreancy in system\'s integrity');
-
-            return redirect()->back();
-        }
-
-        if($data['is_configurable'] == "false") {
-            $data['price'] = $this->product->findOneByField('id', $data['product'])->price;
-        } else {
-            $id = $data['selected_configurable_option'];
-
-            $data['price'] = $this->product->findOneByField('id', $data['selected_configurable_option'])->price;
-        }
 
         Cart::add($id, $data);
 
@@ -120,57 +117,6 @@ class CartController extends Controller
         }
 
         return redirect()->back();
-    }
-
-    /**
-     * This method will return
-     * the quantities from
-     * inventory sources whose
-     * status are not false.
-     *
-     * @return Array
-     */
-    public function canAddOrUpdate() {
-        $cart = $this->cart->findOneByField('id', 144);
-
-        $items = $cart->items;
-
-        $allProdQty = array();
-
-        $allProdQty1 = array();
-
-        $totalQty = 0;
-
-        foreach($items as $item) {
-            $inventories = $item->product->inventories;
-
-            $inventory_sources = $item->product->inventory_sources;
-
-            $totalQty = 0;
-            foreach($inventory_sources as $inventory_source) {
-
-                if($inventory_source->status!=0) {
-                    foreach($inventories as $inventory) {
-                        $totalQty = $totalQty + $inventory->qty;
-                    }
-
-                    array_push($allProdQty1, $totalQty);
-
-                    $allProdQty[$item->product->id] = $totalQty;
-                }
-
-            }
-        }
-
-        dd($allProdQty);
-
-        foreach ($items as $item) {
-            $inventories = $item->product->inventory_sources->where('status', '=', '1');
-
-            foreach($inventories as $inventory) {
-                dump($inventory->status);
-            }
-        }
     }
 
     public function test() {
@@ -191,9 +137,17 @@ class CartController extends Controller
             else {
                 $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, 'null', $cartItem->quantity];
             }
+        }
+        dd($products);
+    }
+
+    public function mergeTest() {
+        $cartItems = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id)->items;
+
+        $tempId = 15;
+
+        foreach($cartItems as $cartItem) {
 
         }
-
-        dd($products);
     }
 }
