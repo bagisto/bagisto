@@ -508,6 +508,27 @@ class Cart {
     }
 
     /**
+     * Returns cart
+     *
+     * @return Mixed
+     */
+    public function getItemAttributeOptionDetails($item)
+    {
+        $data = [];
+
+        foreach($item->product->super_attributes as $attribute) {
+            $option = $attribute->options()->where('id', $item->child->{$attribute->code})->first();
+
+            $data['attributes'][$attribute->code] = [
+                'attribute_name' => $attribute->name,
+                'option_label' => $option->label,
+            ];
+        }
+
+        return $data;
+    }
+
+    /**
      * Save customer address
      *
      * @return Mixed

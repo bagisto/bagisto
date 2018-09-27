@@ -14,4 +14,20 @@ class CartItem extends Model
     public function product() {
         return $this->hasOne('Webkul\Product\Models\Product', 'id', 'product_id');
     }
+
+    /**
+     * Get the phone record associated with the user.
+     */
+    public function parent()
+    {
+        return $this->hasOne(self::class, 'parent_id');
+    }
+
+    /**
+     * Get the phone record associated with the user.
+     */
+    public function child()
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
 }

@@ -4,6 +4,7 @@ namespace Webkul\Cart\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Product\Models\Product;
+use Webkul\Cart\Models\CartItem;
 use Webkul\Cart\Models\CartAddress;
 use Webkul\Cart\Models\CartPayment;
 use Webkul\Cart\Models\CartShippingRate;
@@ -17,7 +18,7 @@ class Cart extends Model
     protected $hidden = ['coupon_code'];
 
     public function items() {
-        return $this->hasMany('Webkul\Cart\Models\CartItem');
+        return $this->hasMany(CartItem::class)->whereNull('parent_id');
     }
 
     /**

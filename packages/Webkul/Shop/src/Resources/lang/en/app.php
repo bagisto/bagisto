@@ -62,6 +62,8 @@ return [
         'cart' => [
             'title' => 'Shopping Cart',
             'empty' => 'Shopping Cart Is Empty',
+            'continue-shopping' => 'Continue Shopping',
+            'proceed-to-checkout' => 'Proceed To Checkout'
         ],
 
         'onepage' => [

@@ -84,11 +84,12 @@
                     </div>
 
                     @if ($product->type == 'configurable')
+                        
                         <div class="summary" >
-                            @foreach ($product->super_attributes as $attribute)
+                            @foreach (cart()->getItemAttributeOptionDetails($item) as $key => $option)
 
-                                {{ $attribute->name . ' : ' . $product->{$attribute->code} }},
-
+                                {{ (!$key ? '' : ' , ') . $option['attribute_name'] . ' : ' . $option['option_label'] }}
+                            
                             @endforeach
                         </div>
                     @endif
