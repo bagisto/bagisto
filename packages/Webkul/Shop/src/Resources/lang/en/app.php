@@ -63,7 +63,10 @@ return [
             'title' => 'Shopping Cart',
             'empty' => 'Shopping Cart Is Empty',
             'continue-shopping' => 'Continue Shopping',
-            'proceed-to-checkout' => 'Proceed To Checkout'
+            'proceed-to-checkout' => 'Proceed To Checkout',
+            'quantity' => 'Quantity',
+            'remove' => 'Remove',
+            'move-to-wishlist' => 'Move to Wishlist'
         ],
 
         'onepage' => [

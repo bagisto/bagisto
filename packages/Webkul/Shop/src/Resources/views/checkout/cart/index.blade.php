@@ -23,8 +23,8 @@
                     <div class="cart-item-list" style="margin-top: 0">
                         @foreach($cart->items as $item)
 
-                            <?php 
-                                $product = $item->product; 
+                            <?php
+                                $product = $item->product;
 
                                 $productBaseImage = $productImageHelper->getProductBaseImage($product);
                             ?>
@@ -45,21 +45,25 @@
                                     </div>
 
                                     @if ($product->type == 'configurable')
-                        
-                                        <div class="summary" >
-                                            @foreach (cart()->getItemAttributeOptionDetails($item) as $key => $option)
+
+                                        <div class="summary">
+                                            {{-- @foreach (cart::getItemAttributeOptionDetails($item) as $key => $option)
 
                                                 {{ (!$key ? '' : ' , ') . $option['attribute_name'] . ' : ' . $option['option_label'] }}
-                                            
-                                            @endforeach
+
+                                            @endforeach --}}
                                         </div>
                                     @endif
 
                                     <div class="misc">
-                                        <div class="qty-text">Quantity</div>
+                                        <div class="qty-text">{{ __('shop::app.checkout.cart.quantity') }}</div>
                                         <div class="box">{{ $item->quantity }}</div>
-                                        <span class="remove">Remove</span>
-                                        <span class="towishlist">Move to Wishlist</span>
+                                        @if($product->type == 'configurable')
+                                            <span class="remove"><a href="{{ route('cart.remove', $item->child->id) }}">{{ __('shop::app.checkout.cart.remove') }}</a></span>
+                                        @else
+                                            <span class="remove"><a href="{{ route('cart.remove', $item->id) }}">{{ __('shop::app.checkout.cart.remove') }}</a></span>
+                                        @endif
+                                        <span class="towishlist">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</span>
                                     </div>
                                 </div>
 
@@ -67,7 +71,7 @@
                         @endforeach
 
                     </div>
-                    
+
 
                     <div class="misc-controls">
                         <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
@@ -85,7 +89,7 @@
                 </div>
 
             </div>
-        
+
         @else
 
             <div class="title">
@@ -94,5 +98,5 @@
 
         @endif
     </section>
-    
+
 @endsection

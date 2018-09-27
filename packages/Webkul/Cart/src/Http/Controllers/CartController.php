@@ -85,6 +85,7 @@ class CartController extends Controller
      * @return Mixed
      */
     public function index() {
+        // dd(Cart::getCart());
         return view($this->_config['view'])->with('cart', Cart::getCart());
     }
 
@@ -97,10 +98,6 @@ class CartController extends Controller
      */
 
     public function add($id) {
-        // session()->forget('cart');
-
-        // return redirect()->back();
-
         $data = request()->input();
 
         Cart::add($id, $data);
@@ -108,46 +105,12 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function remove($id) {
-
-        if(auth()->guard('customer')->check()) {
-            Cart::remove($id);
-        } else {
-            Cart::guestUnitRemove($id);
-        }
+    public function remove($itemId) {
+        Cart::remove($itemId);
 
         return redirect()->back();
     }
 
     public function test() {
-        $cart = $this->cart->findOneByField('id', 144);
-
-        $cartItems = $this->cart->items($cart['id']);
-
-        $products = array();
-
-        foreach($cartItems as $cartItem) {
-            $image = $this->productImage->getGalleryImages($cartItem->product);
-
-            dump($cartItem->product);
-
-            if(isset($image[0]['small_image_url'])) {
-                $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, $image[0]['small_image_url'], $cartItem->quantity];
-            }
-            else {
-                $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, 'null', $cartItem->quantity];
-            }
-        }
-        dd($products);
-    }
-
-    public function mergeTest() {
-        $cartItems = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id)->items;
-
-        $tempId = 15;
-
-        foreach($cartItems as $cartItem) {
-
-        }
     }
 }
