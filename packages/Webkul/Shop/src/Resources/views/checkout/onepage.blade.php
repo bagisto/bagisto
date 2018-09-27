@@ -88,7 +88,7 @@
                     <div class="button-group">
 
                         <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()">
-                            {{ __('shop::app.checkout.onepage.continue') }}
+                            {{ __('shop::app.checkout.onepage.place-order') }}
                         </button>
 
                     </div>
