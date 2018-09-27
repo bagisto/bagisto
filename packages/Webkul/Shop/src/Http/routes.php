@@ -20,6 +20,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('test', 'Webkul\Cart\Http\Controllers\CartController@test');
 
+    Route::get('mtest', 'Webkul\Cart\Http\Controllers\CartController@mergeTest');
+
     Route::post('/checkout/save-address', 'Webkul\Cart\Http\Controllers\CheckoutController@saveAddress')->name('shop.checkout.save-address');
 
     Route::post('/checkout/save-shipping', 'Webkul\Cart\Http\Controllers\CheckoutController@saveShipping')->name('shop.checkout.save-shipping');

@@ -140,4 +140,14 @@ class CartController extends Controller
         }
         dd($products);
     }
+
+    public function mergeTest() {
+        $cartItems = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id)->items;
+
+        $tempId = 15;
+
+        foreach($cartItems as $cartItem) {
+
+        }
+    }
 }

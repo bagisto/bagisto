@@ -1460,10 +1460,10 @@ $(document).ready(function () {
                 var flashes = this.$refs.flashes;
 
                 flashMessages.forEach(function (flash) {
-                    console.log(flash);
                     flashes.addFlash(flash);
                 }, this);
             },
+
             responsiveHeader: function responsiveHeader() {}
         }
     });

@@ -20,7 +20,8 @@ class CreateCartShippingRatesTable extends Migration
             $table->string('method');
             $table->string('method_title');
             $table->string('method_description')->nullable();
-            $table->double('price')->nullable();
+            $table->double('price')->default(0)->nullable();
+            $table->double('base_price')->default(0)->nullable();
             $table->integer('cart_address_id')->nullable()->unsigned();
             $table->foreign('cart_address_id')->references('id')->on('cart_address');
             $table->timestamps();

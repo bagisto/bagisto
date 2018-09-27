@@ -18,4 +18,12 @@ class CartAddress extends Model
     {
         return $this->hasMany(CartShippingRate::class);
     }
+
+    /**
+     * Get all of the attributes for the attribute groups.
+     */
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }

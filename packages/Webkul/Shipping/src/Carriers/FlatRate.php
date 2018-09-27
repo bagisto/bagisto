@@ -36,7 +36,8 @@ class FlatRate extends AbstractShipping
         $object->method = 'flatrate_flatrate';
         $object->method_title = $this->getConfigData('title');
         $object->method_description = $this->getConfigData('description');
-        $object->price = 10;
+        $object->price = core()->convertPrice($this->getConfigData('default_rate'));
+        $object->base_price = $this->getConfigData('default_rate');
 
         return $object;
     }

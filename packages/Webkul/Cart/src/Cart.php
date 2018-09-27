@@ -8,6 +8,7 @@ use Webkul\Cart\Repositories\CartItemRepository;
 use Webkul\Cart\Repositories\CartAddressRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Cart\Models\CartPayment;
 use Cookie;
 
 /**
@@ -301,6 +302,10 @@ class Cart {
      */
     public function add($id, $data)
     {
+        // session()->forget('cart');
+
+        // return redirect()->back();
+
         $itemData = $this->prepareItemData($id, $data);
 
         if(session()->has('cart')) {
@@ -311,6 +316,7 @@ class Cart {
             if(isset($cartItems)) {
                 foreach($cartItems as $cartItem) {
                     if($data['is_configurable'] == "false") {
+
                         if($cartItem->product_id == $id) {
                             $prevQty = $cartItem->quantity;
 
@@ -323,6 +329,7 @@ class Cart {
                             return redirect()->back();
                         }
                     } else if($data['is_configurable'] == "true") {
+
                         //check the parent and child records that holds info abt this product.
                         if($cartItem->product_id == $data['selected_configurable_option']) {
                             $child = $cartItem;
@@ -397,79 +404,66 @@ class Cart {
                 $customerCartItems = $this->cart->items($customerCart['id']);
 
                 if(isset($customerCart)) {
-                    foreach($customerCartItems as $customerCartItem) {
-                        foreach($cartItems as $cartItem) {
+                    foreach($cartItems as $key => $cartItem) {
+                        // foreach($customerCartItems as $customerCartItem) {
 
-                            if($cartItem->type == "simple" && !isset($cartItem->parent_id)) {
+                        //     // dd($customerCartItems, $cartItems[0]->parent_id);
 
-                                if($customerCartItem->type == "simple" && !isset($customerCartItem->parent_id)) {
+                        //     if($cartItem->type == "simple" && $cartItem->parent_id == "null") {
+                        //         if($customerCartItem->type == "simple" && $customerCartItem->parent_id == "null") {
+                        //             //update the customer cart item details and delete the guest instance
 
-                                    //update the customer cart item details and delete the guest instance
-                                    if($customerCartItem->product_id == $cartItem->productId) {
+                        //             if($customerCartItem->product_id == $cartItem->productId) {
 
-                                        $prevQty = $cartItem->quantity;
-                                        $newQty = $customerCartItem->quantity;
+                        //                 $prevQty = $cartItem->quantity;
+                        //                 $newQty = $customerCartItem->quantity;
 
-                                        $customerCartItem->update([
-                                            'quantity' => $prevQty + $newQty,
-                                            'item_total' => $customerCartItem->price * ($prevQty + $newQty),
-                                            'base_item_total' => $customerCartItem->price * ($prevQty + $newQty),
-                                            'item_total_weight' => $customerCartItem->weight * ($prevQty + $newQty),
-                                            'base_item_total_weight' => $customerCartItem->weight * ($prevQty + $newQty)
-                                        ]);
-                                    }
-                                }
-                            } else if($cartItem->type == "simple" && isset($cartItem->parent_id)) {
+                        //                 $customerCartItem->update([
+                        //                     'quantity' => $prevQty + $newQty,
+                        //                     'item_total' => $customerCartItem->price * ($prevQty + $newQty),
+                        //                     'base_item_total' => $customerCartItem->price * ($prevQty + $newQty),
+                        //                     'item_total_weight' => $customerCartItem->weight * ($prevQty + $newQty),
+                        //                     'base_item_total_weight' => $customerCartItem->weight * ($prevQty + $newQty)
+                        //                 ]);
 
-                                if($customerCartItem->type == "simple" && isset($customerCartItem->parent_id)) {
-
-                                }
-                            }
-                        }
-                        // if($customerCartItem->type == "simple" && isset($customerCartItem->parent_id)) {
-                        //     //write the merge case whem the items exists with the customer cart also.
-                        //     $child = $customerCartItem;
-
-                        //     $parentId = $child->parent_id;
-
-                        //     $parent = $this->cartItem->findOneByField('id', $parentId);
-
-                        //     $parentPrice = $parent->price;
-
-                        //     $prevQty = $parent->quantity;
-
-                        //     foreach ($cartItems as $key => $cartItem) {
-                        //         if ($cartItem->type == "simple" && isset($cartItem->parent_id)) {
-                        //             $newQty = $data['quantity'];
-
-                        //             $parent->update(['quantity' => $prevQty + $newQty, 'item_total' => $parentPrice * ($prevQty + $newQty)]);
-                        //         } else if($cartItem->type == "simple" && is_null($cartItem->parent_id)){
-
+                        //                 $cartItems->forget($key);
+                        //             }
                         //         }
-                        //     }
-                        // } elseif($customerCartItem->type == "simple" && !isset($customerCartItem->parent_id)) {
-                        //     foreach($cartItems as $key => $cartItem) {
 
-                        //         if($cartItem->product_id == $customerCartItem->product_id) {
+                        //     } else if($cartItem->type == "simple" && $cartItem->parent_id != "null") {
 
-                        //             $customerItemQuantity = $customerCartItem->quantity;
+                        //         if($customerCartItem->type == "simple" && $customerCartItem->parent_id != "null") {
+                        //             //guest cartParent
+                        //             $cartItemParentId = $cartItem->parent_id;
+                        //             $cartItemParent = $this->cartItem->findOneByField('id', $cartItemParentId);
 
-                        //             $cartItemQuantity = $cartItem->quantity;
+                        //             //customer cartParent
+                        //             $customerItemParentId = $customerCartItem->parent_id;
+                        //             $customerItemParent = $this->cartItem->findOneByField('id', $customerItemParentId);
 
-                        //             $customerCartItem->update(['cart_id' => $customerCart->id, 'quantity' => $cartItemQuantity + $customerItemQuantity]);
+                        //             if($cartItem->product_id == $customerCartItem->product_id) {
+                        //                 $cartItemQuantity = $cartItemParent->quantity;
 
-                        //             $this->cartItem->delete($cartItem->id);
+                        //                 $customerCartItemQuantity = $customerItemParent->quantity;
 
-                        //             $cartItems->forget($key);
+                        //                 $customerCartItem->update([
+                        //                     'quantity' => $cartItemQuantity + $customerCartItemQuantity,
+                        //                     'item_total' => $customerItemParent->price * ($cartItemQuantity + $customerCartItemQuantity),
+                        //                     'base_item_total' => $customerItemParent->price * ($cartItemQuantity + $customerCartItemQuantity),
+                        //                     'item_total_weight' => $customerItemParent->weight * ($cartItemQuantity + $customerCartItemQuantity),
+                        //                     'base_item_total_weight' => $customerItemParent->weight * ($cartItemQuantity + $customerCartItemQuantity),
+                        //                 ]);
+
+                        //                 $cartItems->forget($key);
+                        //             }
                         //         }
                         //     }
                         // }
                     }
 
                     foreach($cartItems as $cartItem) {
-                        $cartItem->update(['cart_id' => $customerCart->id]);
+                        $cartItem->update(['cart_id' => $customerCart['id']]);
                     }
-
                     $this->cart->delete($cart->id);
 
                     return redirect()->back();
@@ -487,6 +481,20 @@ class Cart {
     }
 
     /**
+     * Destroys the session
+     * maintained for cart
+     * on customer logout.
+     *
+     * @return Mixed
+     */
+    public function destroyCart() {
+        if(session()->has('cart')) {
+            session()->forget('cart');
+            return redirect()->back();
+        }
+    }
+
+    /**
      * Returns cart
      *
      * @return Mixed
@@ -496,7 +504,7 @@ class Cart {
         if(!$cart = session()->get('cart'))
             return false;
 
-        return $cart;
+        return $this->cart->find($cart->id);
     }
 
     /**
@@ -553,12 +561,71 @@ class Cart {
         if(!$cart = $this->getCart())
             return false;
 
-        foreach($cart->shipping_rates as $rate) {
-            if($rate->method != $shippingMethodCode) {
-                $rate->delete();
-            }
-        }
+        $cart->shipping_method = $shippingMethodCode;
+        $cart->save();
+
+        // foreach($cart->shipping_rates as $rate) {
+        //     if($rate->method != $shippingMethodCode) {
+        //         $rate->delete();
+        //     }
+        // }
 
         return true;
+    }
+
+    /**
+     * Save payment method for cart
+     *
+     * @param string $payment
+     * @return Mixed
+     */
+    public function savePaymentMethod($payment)
+    {
+        if(!$cart = $this->getCart())
+            return false;
+
+        if($cartPayment = $cart->payment)
+            $cartPayment->delete();
+
+        $cartPayment = new CartPayment;
+
+        $cartPayment->method = $payment['method'];
+        $cartPayment->cart_id = $cart->id;
+        $cartPayment->save();
+
+        return $cartPayment;
+    }
+
+    /**
+     * Updates cart totals
+     *
+     * @return void
+     */
+    public function collectTotals()
+    {
+        if(!$cart = $this->getCart())
+            return false;
+
+        $cart->grand_total = 0;
+        $cart->base_grand_total = 0;
+        $cart->sub_total = 0;
+        $cart->base_sub_total = 0;
+        $cart->sub_total_with_discount = 0;
+        $cart->base_sub_total_with_discount = 0;
+
+        foreach ($cart->items()->get() as $item) {
+            $cart->grand_total = (float) $cart->grand_total + $item->price;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $item->base_price;
+
+            $cart->sub_total = (float) $cart->sub_total + $item->price;
+            $cart->base_sub_total = (float) $cart->base_sub_total + $item->base_price;
+        }
+
+        if($shipping = $cart->selected_shipping_rate) {
+            $cart->grand_total = (float) $cart->grand_total + $shipping->price;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price;
+        }
+
+        $cart->save();
     }
 }

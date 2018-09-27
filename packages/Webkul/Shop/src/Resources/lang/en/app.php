@@ -87,7 +87,21 @@ return [
             'use_for_shipping' => 'Ship to this address',
             'continue' => 'Continue',
             'shipping-method' => 'Shipping Method',
-            'payment-information' => 'Payment Information'
+            'payment-information' => 'Payment Information',
+            'summary' => 'Summary of Order',
+            'price' => 'Price',
+            'quantity' => 'Quantity',
+            'billing-address' => 'Billing Address',
+            'shipping-address' => 'Shipping Address',
+            'contact' => 'Contact',
+            'place-order' => 'Place Order'
+        ],
+
+        'total' => [
+            'order-summary' => 'Order Summary',
+            'sub-total' => 'Sub Total',
+            'grand-total' => 'Grand Total',
+            'delivery-charges' => 'Delivery Charges'
         ]
     ]
 ];

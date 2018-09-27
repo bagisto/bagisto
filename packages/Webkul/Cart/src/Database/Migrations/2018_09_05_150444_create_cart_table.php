@@ -19,6 +19,7 @@ class CreateCartTable extends Migration
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->integer('channel_id')->unsigned();
             $table->foreign('channel_id')->references('id')->on('channels');
+            $table->string('shipping_method')->nullable();
             $table->string('coupon_code')->nullable();
             $table->boolean('is_gift')->default(0);
             $table->integer('items_count')->nullable();
@@ -28,12 +29,12 @@ class CreateCartTable extends Migration
             $table->string('base_currency_code')->nullable();
             $table->string('store_currency_code')->nullable();
             $table->string('quote_currency_code')->nullable();
-            $table->decimal('grand_total', 12, 4)->nullable();
-            $table->decimal('base_grand_total', 12, 4)->nullable();
-            $table->decimal('sub_total', 12, 4)->nullable();
-            $table->decimal('base_sub_total', 12, 4)->nullable();
-            $table->decimal('sub_total_with_discount', 12, 4)->nullable();
-            $table->decimal('base_sub_total_with_discount', 12, 4)->nullable();
+            $table->decimal('grand_total', 12, 4)->default(0)->nullable();
+            $table->decimal('base_grand_total', 12, 4)->default(0)->nullable();
+            $table->decimal('sub_total', 12, 4)->default(0)->nullable();
+            $table->decimal('base_sub_total', 12, 4)->default(0)->nullable();
+            $table->decimal('sub_total_with_discount', 12, 4)->default(0)->nullable();
+            $table->decimal('base_sub_total_with_discount', 12, 4)->default(0)->nullable();
             $table->string('checkout_method')->nullable();
             $table->boolean('is_guest')->nullable();
             $table->boolean('is_active')->nullable()->default(0);
