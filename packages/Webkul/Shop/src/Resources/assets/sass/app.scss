@@ -1,6 +1,4 @@
-
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
-
 @import "icons";
 @import "mixins";
 @import "variables";
@@ -3189,14 +3187,7 @@ section.cart {
 
                 .address-card {
                     width: 50%;
-
-                    &.left {
-                        float: left;
-                    }
-
-                    &.right {
-                        float: right;
-                    }
+                    float: left;
 
                     .card-title span {
                         font-weight: 600;

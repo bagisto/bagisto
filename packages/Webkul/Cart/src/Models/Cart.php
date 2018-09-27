@@ -31,7 +31,7 @@ class Cart extends Model
     /**
      * Get the biling address for the cart.
      */
-    public function biling_address()
+    public function billing_address()
     {
         return $this->addresses()->where('address_type', 'billing');
     }
@@ -39,9 +39,9 @@ class Cart extends Model
     /**
      * Get all of the attributes for the attribute groups.
      */
-    public function getBilingAddressAttribute()
+    public function getBillingAddressAttribute()
     {
-        return $this->biling_address()->first();
+        return $this->billing_address()->first();
     }
 
     /**

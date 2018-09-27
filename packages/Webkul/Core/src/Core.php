@@ -8,6 +8,7 @@ use Webkul\Core\Models\Locale as LocaleModel;
 use Webkul\Core\Models\Currency as CurrencyModel;
 use Webkul\Core\Models\TaxCategory as TaxCategory;
 use Webkul\Core\Models\TaxRate as TaxRate;
+use Illuminate\Support\Facades\Config;
 
 class Core
 {
@@ -275,5 +276,22 @@ class Core
         $date->setTimezone($channel->timezone);
 
         return $date->format($format);
+    }
+
+    /**
+     * Retrieve information from payment configuration
+     *
+     * @param string $field
+     * @param int|string|null $channelId
+     *
+     * @return mixed
+     */
+    public function getConfigData($field, $channelId = null)
+    {
+        if (null === $channelId) {
+            $channelId = $this->getCurrentChannel()->id;
+        }
+
+        return Config::get($field);
     }
 }

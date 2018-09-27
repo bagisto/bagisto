@@ -5,37 +5,41 @@
 
     <div class="address">
 
-        <div class="address-card shipping-address left">
-            <div class="card-title">
-                <span>Shipping address</span>
+        @if ($billingAddress = $cart->billing_address)
+            <div class="address-card billing-address">
+                <div class="card-title">
+                    <span>{{ __('shop::app.checkout.onepage.billing-address') }}</span>
+                </div>
+
+                <div class="card-content">
+                    {{ $billingAddress->name }}</br>
+                    {{ $billingAddress->address1 }}, {{ $billingAddress->address2 ? $billingAddress->address2 . ',' : '' }} {{ $billingAddress->state }}</br>
+                    {{ country()->name($billingAddress->country) }} {{ $billingAddress->postcode }}</br>
+                    
+                    <span class="horizontal-rule"></span>
+
+                    {{ __('shop::app.checkout.onepage.contact') }} : {{ $billingAddress->phone }} 
+                </div>
             </div>
+        @endif
 
-            <div class="card-content">
-                John Doe</br>
-                25 , Washington</br>
-                USA 5751434</br>
-                
-                <span class="horizontal-rule"></span>
+        @if ($shippingAddress = $cart->shipping_address)
+            <div class="address-card shipping-address">
+                <div class="card-title">
+                    <span>{{ __('shop::app.checkout.onepage.shipping-address') }}</span>
+                </div>
 
-                Contact : 9876543210 
+                <div class="card-content">
+                    {{ $shippingAddress->name }}</br>
+                    {{ $shippingAddress->address1 }}, {{ $shippingAddress->address2 ? $shippingAddress->address2 . ',' : '' }} , {{ $shippingAddress->state }}</br>
+                    {{ country()->name($shippingAddress->country) }} {{ $shippingAddress->postcode }}</br>
+                    
+                    <span class="horizontal-rule"></span>
+
+                    {{ __('shop::app.checkout.onepage.contact') }} : {{ $shippingAddress->phone }} 
+                </div>
             </div>
-        </div>
-
-        <div class="address-card billing-addres right">
-            <div class="card-title">
-                <span>Billing address</span>
-            </div>
-
-            <div class="card-content">
-                John Doe</br>
-                25 , Washington</br>
-                USA 5751434</br>
-                
-                <span class="horizontal-rule"></span>
-
-                Contact : 9876543210 
-            </div>
-        </div>
+        @endif
 
     </div>
 
@@ -79,9 +83,15 @@
                         </span>
                     </div>
 
-                    <div class="summary" >
-                        Color : Gray, Size : S
-                    </div>
+                    @if ($product->type == 'configurable')
+                        <div class="summary" >
+                            @foreach ($product->super_attributes as $attribute)
+
+                                {{ $attribute->name . ' : ' . $product->{$attribute->code} }},
+
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
 
             </div>
@@ -91,7 +101,7 @@
 
     <div class="order-description">
 
-        <div class="pull-left">
+        <div class="pull-left" style="width: 50%;">
             
             <div class="shipping">
                 <div class="decorator">
@@ -99,10 +109,10 @@
                 </div>
 
                 <div class="text">
-                    $ 25.00
+                    {{ core()->currency($cart->selected_shipping_rate->base_price) }}
 
                     <div class="info">
-                        FedEx Shipping
+                        {{ $cart->selected_shipping_rate->method_title }}
                     </div>
                 </div>
             </div>
@@ -113,13 +123,13 @@
                 </div>
 
                 <div class="text">
-                    Net banking 
+                    {{ core()->getConfigData('paymentmethods.' . $cart->payment->method . '.title') }}
                 </div>
             </div>
 
         </div>
 
-        <div class="pull-right">
+        <div class="pull-right" style="width: 50%;">
 
             @include('shop::checkout.total.summary', ['cart' => $cart])
 

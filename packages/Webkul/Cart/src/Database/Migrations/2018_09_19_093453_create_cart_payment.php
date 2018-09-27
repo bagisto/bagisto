@@ -16,6 +16,7 @@ class CreateCartPayment extends Migration
         Schema::create('cart_payment', function (Blueprint $table) {
             $table->increments('id');
             $table->string('method');
+            $table->string('method_title')->nullable();
             $table->integer('cart_id')->nullable()->unsigned();
             $table->foreign('cart_id')->references('id')->on('cart');
             $table->timestamps();

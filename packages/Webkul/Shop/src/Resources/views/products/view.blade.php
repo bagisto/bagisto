@@ -11,7 +11,7 @@
             <span class="breadcrumb">Home</span> > <span class="breadcrumb">Men</span> > <span class="breadcrumb">Slit Open Jeans</span>
         </div>
         <div class="layouter">
-            <form method="POST" action="{{ route('cart.add', $product->id) }}">
+            <form method="POST" action="{{ route('cart.add', $product->id) }}" @submit.prevent="onSubmit">
                 @csrf()
 
                 <input type="hidden" name="product" value="{{ $product->id }}">

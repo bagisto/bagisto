@@ -90,7 +90,11 @@ return [
             'payment-information' => 'Payment Information',
             'summary' => 'Summary of Order',
             'price' => 'Price',
-            'quantity' => 'Quantity'
+            'quantity' => 'Quantity',
+            'billing-address' => 'Billing Address',
+            'shipping-address' => 'Shipping Address',
+            'contact' => 'Contact',
+            'place-order' => 'Place Order'
         ],
 
         'total' => [
