@@ -31,12 +31,12 @@ class CreateCartItemsTable extends Migration
             $table->decimal('total_weight', 12,4)->default(0);
             $table->decimal('base_total_weight', 12,4)->default(0);
             $table->decimal('price', 12,4)->default(1);
+            $table->decimal('base_price', 12,4)->default(0);
+            $table->decimal('custom_price', 12,4)->default(0);
             $table->decimal('total', 12,4)->default(0);
             $table->decimal('base_total', 12,4)->default(0);
             $table->decimal('total_with_discount', 12,4)->default(0);
             $table->decimal('base_total_with_discount', 12,4)->default(0);
-            $table->decimal('base_price', 12,4)->default(0);
-            $table->decimal('custom_price', 12,4)->default(0);
             $table->decimal('discount_percent', 12,4)->default(0);
             $table->decimal('discount_amount', 12,4)->default(0);
             $table->decimal('base_discount_amount', 12,4)->default(0);

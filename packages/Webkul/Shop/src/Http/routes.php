@@ -24,23 +24,33 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::post('/checkout/save-payment', 'Webkul\Shop\Http\Controllers\CheckoutController@savePayment')->name('shop.checkout.save-payment');
 
-    Route::get('test', 'Webkul\Cart\Http\Controllers\CartController@test');
+    Route::get('test', 'Webkul\Shop\Http\Controllers\CartController@test');
 
-    Route::get('mtest', 'Webkul\Cart\Http\Controllers\CartController@mergeTest');
+    Route::get('mtest', 'Webkul\Shop\Http\Controllers\CartController@mergeTest');
 
-    /* dummy routes ends here */
-
+    //dummy
+    Route::get('test', 'Webkul\Shop\Http\Controllers\CartController@test');
 
     Route::get('/products/{slug}', 'Webkul\Shop\Http\Controllers\ProductController@index')->defaults('_config', [
         'view' => 'shop::products.view'
     ])->name('shop.products.index');
 
     // //Routes for product cart
+    // Route::get('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@index')->defaults('_config', [
+    //     'view' => 'shop::checkout.cart.index'
+    // ])->name('shop.checkout.cart.index');
 
-    Route::post('checkout/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.add');
+    Route::post('product/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->name('cart.add');
 
-    Route::post('checkout/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.remove');
+    Route::get('product/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->name('cart.remove');
 
+    Route::post('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@updateBeforeCheckout')->defaults('_config',[
+        'redirect' => 'shop.checkout.cart.index'
+    ])->name('shop.checkout.cart.update');
+
+    Route::get('/checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->defaults('_config',[
+        'redirect' => 'shop.checkout.cart.index'
+    ])->name('shop.checkout.cart.remove');
     //Routes for product cart ends
 
     // Product Review routes

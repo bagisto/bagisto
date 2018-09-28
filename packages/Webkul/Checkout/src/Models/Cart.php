@@ -21,6 +21,10 @@ class Cart extends Model
         return $this->hasMany(CartItem::class)->whereNull('parent_id');
     }
 
+    public function all_items() {
+        return $this->hasMany(CartItem::class);
+    }
+
     /**
      * Get the addresses for the cart.
      */

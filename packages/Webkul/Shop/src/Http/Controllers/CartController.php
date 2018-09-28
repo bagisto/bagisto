@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers;
+namespace Webkul\Cart\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,7 +13,10 @@ use Webkul\Product\Product\View as ProductView;
 use Cart;
 
 /**
- * Cart controller for the customer and guest users for adding and removing the products in the cart.
+ * Cart controller for the customer
+ * and guest users for adding and
+ * removing the products in the
+ * cart.
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -22,7 +25,9 @@ class CartController extends Controller
 {
 
     /**
-     * Protected Variables that holds instances of the repository classes.
+     * Protected Variables that
+     * holds instances of the
+     * repository classes.
      *
      * @param Array $_config
      * @param $cart
@@ -80,6 +85,7 @@ class CartController extends Controller
      * @return Mixed
      */
     public function index() {
+        // dd(Cart::getCart());
         return view($this->_config['view'])->with('cart', Cart::getCart());
     }
 
@@ -92,10 +98,6 @@ class CartController extends Controller
      */
 
     public function add($id) {
-        // session()->forget('cart');
-
-        // return redirect()->back();
-
         $data = request()->input();
 
         Cart::add($id, $data);
@@ -103,46 +105,32 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function remove($id) {
+    /**
+     * Removes the item from
+     * the cart if it exists
+     *
+     * @param integer $itemId
+     */
+    public function remove($itemId) {
+        Cart::removeItem($itemId);
 
-        if(auth()->guard('customer')->check()) {
-            Cart::remove($id);
-        } else {
-            Cart::guestUnitRemove($id);
-        }
+        return redirect()->back();
+    }
+
+    /**
+     * Updates the quantity of the
+     *  items present in the cart.
+     *
+     * @return response
+     */
+    public function updateBeforeCheckout() {
+        $data = request()->except('_token');
+
+        Cart::update($data);
 
         return redirect()->back();
     }
 
     public function test() {
-        $cart = $this->cart->findOneByField('id', 144);
-
-        $cartItems = $this->cart->items($cart['id']);
-
-        $products = array();
-
-        foreach($cartItems as $cartItem) {
-            $image = $this->productImage->getGalleryImages($cartItem->product);
-
-            dump($cartItem->product);
-
-            if(isset($image[0]['small_image_url'])) {
-                $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, $image[0]['small_image_url'], $cartItem->quantity];
-            }
-            else {
-                $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, 'null', $cartItem->quantity];
-            }
-        }
-        dd($products);
-    }
-
-    public function mergeTest() {
-        $cartItems = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id)->items;
-
-        $tempId = 15;
-
-        foreach($cartItems as $cartItem) {
-
-        }
     }
 }
