@@ -35,6 +35,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('product/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.add');
 
     Route::get('product/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.remove');
+
+    Route::post('/checkout/cart', 'Webkul\Cart\Http\Controllers\CartController@updateBeforeCheckout')->defaults('_config',[
+        'redirect' => 'shop.checkout.cart.index'
+    ])->name('shop.checkout.cart.update');
+
+    Route::get('/checkout/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->defaults('_config',[
+        'redirect' => 'shop.checkout.cart.index'
+    ])->name('shop.checkout.cart.remove');
     //Routes for product cart ends
 
     // Product Review routes

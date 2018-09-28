@@ -83,80 +83,6 @@ class Cart {
     }
 
     /**
-     * Create new cart instance with the current item added.
-     *
-     * @param integer $id
-     * @param array $data
-     *
-     * @return Response
-     */
-    public function createNewCart($id, $data)
-    {
-        $itemData = $this->prepareItemData($id, $data);
-
-        $cartData['channel_id'] = core()->getCurrentChannel()->id;
-
-        // this will auto set the customer id for the cart instances if customer is authenticated
-        if(auth()->guard('customer')->check()) {
-            $cartData['customer_id'] = auth()->guard('customer')->user()->id;
-
-            $cartData['is_guest'] = 0;
-
-            $cartData['customer_full_name'] = auth()->guard('customer')->user()->first_name .' '. auth()->guard('customer')->user()->last_name;
-        }
-
-        $cartData['is_guest'] = 1;
-
-        $cartData['items_count'] = 1;
-
-        $cartData['items_qty'] = $data['quantity'];
-
-        if($cart = $this->cart->create($cartData)) {
-            $itemData['parent']['cart_id'] = $cart->id;
-
-            if ($data['is_configurable'] == "true") {
-                //parent product entry
-                $itemData['parent']['additional'] = json_encode($data);
-                if($parent = $this->cartItem->create($itemData['parent'])) {
-
-                    $itemData['child']['parent_id'] = $parent->id;
-                    $itemData['child']['cart_id'] = $cart->id;
-                    if($child = $this->cartItem->create($itemData['child'])) {
-                        session()->put('cart', $cart);
-
-                        session()->flash('success', 'Item Added To Cart Successfully');
-
-                        return redirect()->back();
-                    }
-                }
-
-                // $cart->update(['subtotal' => $itemData['parent']['price'], 'base_sub_total' => $itemData['parent']['price']]);
-                $this->collectTotals();
-
-                $this->collectQuantities();
-
-            } else if($data['is_configurable'] == "false") {
-                if($result = $this->cartItem->create($itemData['parent'])) {
-                    session()->put('cart', $cart);
-
-                    session()->flash('success', 'Item Added To Cart Successfully');
-
-                    return redirect()->back();
-                }
-
-                // $cart->update(['subtotal' => $itemData['parent']['price'], 'base_sub_total' => $itemData['parent']['price']]);
-                $this->collectTotals();
-
-                $this->collectQuantities();
-            }
-        }
-
-        session()->flash('error', 'Some Error Occured');
-
-        return redirect()->back();
-    }
-
-    /**
      * Prepare the other data for the product to be added.
      *
      * @param integer $id
@@ -235,6 +161,129 @@ class Cart {
     }
 
     /**
+     * Create new cart instance with the current item added.
+     *
+     * @param integer $id
+     * @param array $data
+     *
+     * @return Response
+     */
+    public function createNewCart($id, $data)
+    {
+        $itemData = $this->prepareItemData($id, $data);
+
+        $cartData['channel_id'] = core()->getCurrentChannel()->id;
+
+        // this will auto set the customer id for the cart instances if customer is authenticated
+        if(auth()->guard('customer')->check()) {
+            $cartData['customer_id'] = auth()->guard('customer')->user()->id;
+
+            $cartData['is_guest'] = 0;
+
+            $cartData['customer_full_name'] = auth()->guard('customer')->user()->first_name .' '. auth()->guard('customer')->user()->last_name;
+        } else {
+            $cartData['is_guest'] = 1;
+        }
+
+        $cartData['items_count'] = 1;
+
+        $cartData['items_qty'] = $data['quantity'];
+
+        if($cart = $this->cart->create($cartData)) {
+            $itemData['parent']['cart_id'] = $cart->id;
+
+            if ($data['is_configurable'] == "true") {
+                //parent product entry
+                $itemData['parent']['additional'] = json_encode($data);
+                if($parent = $this->cartItem->create($itemData['parent'])) {
+
+                    $itemData['child']['parent_id'] = $parent->id;
+                    $itemData['child']['cart_id'] = $cart->id;
+                    if($child = $this->cartItem->create($itemData['child'])) {
+                        session()->put('cart', $cart);
+
+                        session()->flash('success', 'Item Added To Cart Successfully');
+
+                        return redirect()->back();
+                    }
+                }
+
+                // $cart->update(['subtotal' => $itemData['parent']['price'], 'base_sub_total' => $itemData['parent']['price']]);
+                $this->collectQuantities();
+
+                $this->collectTotals();
+            } else if($data['is_configurable'] == "false") {
+                if($result = $this->cartItem->create($itemData['parent'])) {
+                    session()->put('cart', $cart);
+
+                    session()->flash('success', 'Item Added To Cart Successfully');
+
+                    return redirect()->back();
+                }
+
+                // $cart->update(['subtotal' => $itemData['parent']['price'], 'base_sub_total' => $itemData['parent']['price']]);
+                $this->collectQuantities();
+
+                $this->collectTotals();
+            }
+        }
+
+        session()->flash('error', 'Some Error Occured');
+
+        return redirect()->back();
+    }
+
+    /**
+     * Returns cart
+     *
+     * @return Mixed
+     */
+    public function getCart()
+    {
+        if(!$cart = session()->get('cart'))
+            return false;
+
+        return $this->cart->find($cart->id);
+    }
+
+    /**
+     * Method to check if the product is available and its required quantity
+     * is available or not in the inventory sources.
+     *
+     * @param integer $id
+     *
+     * @return Array
+     */
+    public function canAddOrUpdate($itemId, $quantity)
+    {
+        $item = $this->cartItem->findOneByField('id', $itemId);
+
+        $inventories = $item->product->inventories;
+
+        $inventory_sources = $item->product->inventory_sources;
+
+        $totalQty = 0;
+
+        foreach($inventory_sources as $inventory_source) {
+            if($inventory_source->status && $inventory_source->toArray()['pivot']['qty']) {
+                $totalQty = $totalQty + $inventory_source->toArray()['pivot']['qty'];
+            }
+        }
+
+        if ($quantity < 1) {
+            session()->flash('warning', 'Cannot Add Or Update Lesser than 1');
+
+            return redirect()->back();
+        }
+
+        if($quantity < $totalQty) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Add Items in a cart with some cart and item details.
      *
      * @param @id
@@ -259,15 +308,23 @@ class Cart {
                             $prevQty = $cartItem->quantity;
                             $newQty = $data['quantity'];
 
+                            $canBe = $this->canAddOrUpdate($cartItem->id, $prevQty + $newQty);
+
+                            if($canBe == false) {
+                                session()->flash('warning', 'The requested quantity is not available, please try back later.');
+
+                                return redirect()->back();
+                            }
+
                             $cartItem->update([
                                 'quantity' => $prevQty + $newQty,
-                                'total' => $parentPrice * ($prevQty + $newQty),
-                                'base_total' => $parentPrice * ($prevQty + $newQty)
+                                'total' => $cartItem->price * ($prevQty + $newQty),
+                                'base_total' => $cartItem->price * ($prevQty + $newQty)
                             ]);
 
-                            $this->collectTotals();
-
                             $this->collectQuantities();
+
+                            $this->collectTotals();
 
                             session()->flash('success', "Product Quantity Successfully Updated");
 
@@ -284,15 +341,23 @@ class Cart {
                                 $prevQty = $parent->quantity;
                                 $newQty = $data['quantity'];
 
+                                $canBe = $this->canAddOrUpdate($cartItem->child->id, $prevQty + $newQty);
+
+                                if($canBe == false) {
+                                    session()->flash('warning', 'The requested quantity is not available, please try back later.');
+
+                                    return redirect()->back();
+                                }
+
                                 $parent->update([
                                     'quantity' => $prevQty + $newQty,
                                     'total' => $parentPrice * ($prevQty + $newQty),
                                     'base_total' => $parentPrice * ($prevQty + $newQty)
                                 ]);
 
-                                $this->collectTotals();
-
                                 $this->collectQuantities();
+
+                                $this->collectTotals();
 
                                 session()->flash('success', "Product Quantity Successfully Updated");
 
@@ -303,18 +368,22 @@ class Cart {
                 }
 
                 if($data['is_configurable'] == "true") {
+                    $this->canAddOrUpdate($parent->child->id, $parent->quantity);
+
                     $parent = $cart->items()->create($itemData['parent']);
 
                     $itemData['child']['parent_id'] = $parent->id;
 
                     $cart->items()->create($itemData['child']);
                 } else if($data['is_configurable'] == "false"){
+                    // $this->canAddOrUpdate($parent->id, $parent->quantity);
+
                     $parent = $cart->items()->create($itemData['parent']);
                 }
 
-                $this->collectTotals();
-
                 $this->collectQuantities();
+
+                $this->collectTotals();
 
                 session()->flash('success', 'Item Successfully Added To Cart');
 
@@ -332,23 +401,96 @@ class Cart {
     }
 
     /**
-     * Use detach to remove the current product from cart tables
+     * Update the cart on
+     * cart checkout page
+     */
+    public function update($itemIds)
+    {
+        if(session()->has('cart')) {
+            $cart = session()->get('cart');
+
+            $items = $cart->items;
+
+            foreach($items as $item) {
+                foreach($itemIds['qty'] as $id => $quantity) {
+                    if($id == $item->id) {
+                        if($item->type == "configurable") {
+                            $canBe = $this->canAddOrUpdate($item->child->id, $quantity);
+                        } else {
+                            $canBe = $this->canAddOrUpdate($id, $quantity);
+                        }
+
+                        if($canBe == false) {
+                            session()->flash('warning', 'The requested quantity is not available, please try back later.');
+
+                            return redirect()->back();
+                        }
+
+                        $item->update(['quantity' => $quantity]);
+                    }
+                }
+            }
+
+            $items = $cart->items;
+
+            session()->flash('success', 'Cart Updated Successfully');
+
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Remove the item from the cart
      *
-     * @param Integer $id
      * @return response
      */
-    public function remove($id)
+    public function removeItem($itemId)
     {
-        $item = $this->cartItem->findOneByField('id', $id);
+        if(session()->has('cart')) {
+            $cart = session()->get('cart');
 
-        dd($item);
-        if($item->parent_id != "null") {
-            $item->delete($id);
-        } else {
-            $parentItem = $item->child;
+            $items = $cart->items;
 
-            dd($parentItem, $item);
+            foreach($items as $item) {
+                if($item->id == $itemId) {
+                    if($item->type == "configurable") {
+                        $child = $item->child;
+
+                        //delete the child first
+                        $result = $this->cartItem->delete($child->id);
+                        if($result)
+                            $result = $this->cartItem->delete($item->id);
+
+                        $this->collectQuantities();
+                        $this->collectTotals();
+                    } else if($item->type == "simple" && $item->parent_id == null){
+                        $result = $this->cartItem->delete($item->id);
+
+                        $this->collectQuantities();
+                        $this->collectTotals();
+                    }
+                }
+            }
+            $countItems = $this->cart->findOneByField('id', $cart->id)->items->count();
+
+            //delete the cart instance if no items are there
+            if($countItems == 0) {
+                $result = $this->cart->delete($cart->id);
+
+                session()->forget('cart');
+            } else {
+                session()->forget('cart');
+
+                session()->put('cart', $this->cart->findOneByField('id', $cart->id));
+            }
+
+            if ($result) {
+                session()->flash('sucess', 'Item Successfully Removed From Cart');
+            } else {
+                session()->flash('error', 'Item Cannot Be Removed From Cart');
+            }
         }
+        return redirect()->back();
     }
 
     /**
@@ -461,6 +603,28 @@ class Cart {
     }
 
     /**
+     * Update Cart Quantities, Weight
+     *
+     * @return void
+     */
+    public function collectQuantities()
+    {
+        if(!$cart = $this->getCart())
+            return false;
+
+        $quantities = 0;
+
+        foreach($cart->items as $item) {
+            $quantities = $quantities + $item->quantity;
+        }
+
+        $itemCount = $cart->items->count();
+
+        $cart->update(['items_count' => $itemCount, 'items_qty' => $quantities]);
+
+    }
+
+    /**
      * Updates cart totals
      *
      * @return void
@@ -491,27 +655,6 @@ class Cart {
         }
 
         $cart->save();
-    }
-
-    /**
-     * Update Cart Quantities, Weight
-     *
-     * @return void
-     */
-    public function collectQuantities() {
-        if(!$cart = $this->getCart())
-            return false;
-
-        $quantities = 0;
-
-        foreach($cart->items as $item) {
-            $quantities = $quantities + $item->quantity;
-        }
-
-        $itemCount = $cart->items->count();
-
-        $cart->update(['items_count' => $itemCount, 'items_qty' => $quantities]);
-
     }
 
     /**
@@ -551,6 +694,14 @@ class Cart {
 
                             $newQty = $guestCartItem->quantity;
 
+                            $canBe = $this->canAddOrUpdate($cartItem->id, $prevQty + $newQty);
+
+                            if($canBe == false) {
+                                session()->flash('warning', 'The requested quantity is not available, please try back later.');
+
+                                return redirect()->back();
+                            }
+
                             $cartItem->update([
                                 'quantity' => $prevQty + $newQty,
                                 'total' => $cartItem->price * ($prevQty + $newQty),
@@ -560,7 +711,7 @@ class Cart {
                             ]);
 
                             $guestCartItems->forget($key);
-                            $this->cartItem->delete($guestCart->id);
+                            $this->cartItem->delete($guestCartItem->id);
                         }
                     } else if($guestCartItem->type == "configurable" && $cartItem->type == "configurable") {
                         $guestCartItemChild = $guestCartItem->child;
@@ -570,6 +721,14 @@ class Cart {
                         if($guestCartItemChild->product_id == $cartItemChild->product_id) {
                             $prevQty = $guestCartItem->quantity;
                             $newQty = $cartItem->quantity;
+
+                            $canBe = $this->canAddOrUpdate($cartItem->child->id, $prevQty + $newQty);
+
+                            if($canBe == false) {
+                                session()->flash('warning', 'The requested quantity is not available, please try back later.');
+
+                                return redirect()->back();
+                            }
 
                             $cartItem->update([
                                 'quantity' => $prevQty + $newQty,
@@ -585,7 +744,7 @@ class Cart {
                             $this->cartItem->delete($guestCartItemChild->id);
 
                             //then parent will get deleted
-                            $this->cartItem->delete($guestCart->id);
+                            $this->cartItem->delete($guestCartItem->id);
                         }
                     }
                 }
@@ -612,75 +771,14 @@ class Cart {
             //put the customer cart instance
             session()->put('cart', $cart);
 
-            $this->collectTotals();
-
             $this->collectQuantities();
+
+            $this->collectTotals();
 
             return redirect()->back();
         } else {
             return redirect()->back();
         }
-    }
-
-     /**
-     * Method to check if the product is available and its required quantity
-     * is available or not in the inventory sources.
-     *
-     * @param integer $id
-     *
-     * @return Array
-     */
-    public function canCheckOut($productId, $quantity)
-    {
-        $items = $cart->items;
-
-        $allProdQty = array();
-
-        $allProdQty1 = array();
-
-        $totalQty = 0;
-
-        foreach($items as $item) {
-            $inventories = $item->product->inventories;
-
-            $inventory_sources = $item->product->inventory_sources;
-
-            $totalQty = 0;
-
-            foreach($inventory_sources as $inventory_source) {
-                if($inventory_source->status!=0) {
-                    foreach($inventories as $inventory) {
-                        $totalQty = $totalQty + $inventory->qty;
-                    }
-
-                    array_push($allProdQty1, $totalQty);
-
-                    $allProdQty[$item->product->id] = $totalQty;
-                }
-            }
-        }
-
-        foreach ($items as $item) {
-            $inventories = $item->product->inventory_sources->where('status', '=', '1');
-
-            foreach($inventories as $inventory) {
-                dump($inventory->status);
-            }
-        }
-        dd([true, false]);
-    }
-
-    /**
-     * Returns cart
-     *
-     * @return Mixed
-     */
-    public function getCart()
-    {
-        if(!$cart = session()->get('cart'))
-            return false;
-
-        return $this->cart->find($cart->id);
     }
 
     /**

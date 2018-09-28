@@ -81,6 +81,10 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+.btn.btn-primary {
+  border-radius: 0px;
+}
+
 .header {
   margin-top: 16px;
   margin-bottom: 21px;
@@ -1983,7 +1987,16 @@ section.cart .cart-content .left-side {
 }
 
 section.cart .cart-content .left-side .misc-controls {
-  float: right;
+  width: 100%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin-top: 20px;
 }
 
@@ -2064,14 +2077,16 @@ section.cart .cart-content .right-side {
   margin-right: 10px;
 }
 
-.cart-item-list .item .item-details .misc div.box {
+.cart-item-list .item .item-details .misc input.box {
   height: 38px;
   width: 60px;
+  font-size: 16px;
   text-align: center;
   line-height: 38px;
   border: 1px solid #E8E8E8;
   border-radius: 3px;
   margin-right: 30px;
+  border-radius: 0px;
 }
 
 .cart-item-list .item .item-details .misc .remove {

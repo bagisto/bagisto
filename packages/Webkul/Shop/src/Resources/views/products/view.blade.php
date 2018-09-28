@@ -35,9 +35,10 @@
                         {{ $product->short_description }}
                     </div>
 
-                    <div class="quantity control-group">
+                    <div class="quantity control-group" :class="[errors.has('quantity') ? 'has-error' : '']">
                     <label class="reqiured">Quantity</label>
-                        <input name="quantity" class="control" value="1" v-validate="'numeric'" required style="width: 60px;">
+                        <input name="quantity" class="control" value="1" v-validate="'required|numeric|min_value:1'" style="width: 60px;">
+                        <span class="control-error" v-if="errors.has('quantity')">@{{ errors.first('quantity') }}</span>
                     </div>
 
                     @if ($product->type == 'configurable')

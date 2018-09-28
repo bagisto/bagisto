@@ -105,8 +105,28 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Removes the item from
+     * the cart if it exists
+     *
+     * @param integer $itemId
+     */
     public function remove($itemId) {
-        Cart::remove($itemId);
+        Cart::removeItem($itemId);
+
+        return redirect()->back();
+    }
+
+    /**
+     * Updates the quantity of the
+     *  items present in the cart.
+     *
+     * @return response
+     */
+    public function updateBeforeCheckout() {
+        $data = request()->except('_token');
+
+        Cart::update($data);
 
         return redirect()->back();
     }

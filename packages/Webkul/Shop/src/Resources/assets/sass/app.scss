@@ -17,6 +17,10 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+.btn.btn-primary{
+    border-radius: 0px;
+}
+
 .header {
     margin-top: 16px;
     margin-bottom: 21px;
@@ -1960,7 +1964,11 @@ section.cart {
             float: left;
 
             .misc-controls {
-                float: right;
+                width: 100%;
+                display: inline-flex;
+                align-items: center;
+                justify-content: space-between;
+
                 margin-top: 20px;
 
                 a.link {
@@ -2024,14 +2032,16 @@ section.cart {
                     margin-right: 10px;
                 }
 
-                div.box {
+                input.box {
                     height: 38px;
                     width: 60px;
+                    font-size: 16px;
                     text-align: center;
                     line-height: 38px;
                     border: 1px solid $border-color;
                     border-radius: 3px;
                     margin-right: 30px;
+                    border-radius: 0px;
                 }
 
                 .remove {

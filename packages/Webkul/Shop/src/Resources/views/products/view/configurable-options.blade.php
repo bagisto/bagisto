@@ -27,7 +27,7 @@
                 <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
                     <label class="reqiured">@{{ attribute.label }}</label>
 
-                    <select v-validate="'required'" class="control" :name="['super_attribute[' + attribute.id + ']']" :disabled="attribute.disabled" @change="configure(attribute, $event.target.value)" :id="['attribute_' + attribute.id]" required>
+                    <select v-validate="'required'" class="control" :name="['super_attribute[' + attribute.id + ']']" :disabled="attribute.disabled" @change="configure(attribute, $event.target.value)" :id="['attribute_' + attribute.id]">
 
                         <option v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
 
