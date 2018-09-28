@@ -4,21 +4,23 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
         'view' => 'shop::home.index'
-    ])->name('store.home');
+    ])->name('shop.home.index');
 
     Route::get('/categories/{slug}', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
         'view' => 'shop::products.index'
     ]);
 
-    Route::get('/checkout', 'Webkul\Cart\Http\Controllers\CheckoutController@index')->defaults('_config', [
+    Route::get('/checkout/cart', 'Webkul\Cart\Http\Controllers\CartController@index')->defaults('_config', [
+        'view' => 'shop::checkout.cart.index'
+    ])->name('shop.checkout.cart.index');
+
+    Route::get('/checkout/onepage', 'Webkul\Cart\Http\Controllers\CheckoutController@index')->defaults('_config', [
         'view' => 'shop::checkout.onepage'
-    ])->name('shop.checkout');
+    ])->name('shop.checkout.onepage.index');
 
     Route::get('test', 'Webkul\Cart\Http\Controllers\CartController@test');
 
-    Route::get('cart', 'Webkul\Cart\Http\Controllers\CartController@beforeCheckout')->defaults('_config', [
-        'view' => 'shop::store.cart.index'
-    ]);
+    Route::get('mtest', 'Webkul\Cart\Http\Controllers\CartController@mergeTest');
 
     Route::post('/checkout/save-address', 'Webkul\Cart\Http\Controllers\CheckoutController@saveAddress')->name('shop.checkout.save-address');
 
@@ -35,9 +37,9 @@ Route::group(['middleware' => ['web']], function () {
 
     // //Routes for product cart
 
-    Route::post('products/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.add');
+    Route::post('checkout/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.add');
 
-    Route::post('product/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.remove');
+    Route::post('checkout/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.remove');
 
     //Routes for product cart ends
 

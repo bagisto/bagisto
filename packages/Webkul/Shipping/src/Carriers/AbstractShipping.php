@@ -67,16 +67,9 @@ abstract class AbstractShipping
      *
      * @return mixed
      */
-    public function getConfigData($field, $channelId = null)
+    public function getConfigData($field)
     {
-        if (null === $channelId) {
-            $channelId = core()->getCurrentChannel()->id;
-        }
-
-        $shippingConfig = Config::get('carriers.' . $this->getCode());
-
-        return $shippingConfig[$field];
+        return core()->getConfigData('carriers.' . $this->getCode() . '.' . $field);
     }
-
 }
 ?>

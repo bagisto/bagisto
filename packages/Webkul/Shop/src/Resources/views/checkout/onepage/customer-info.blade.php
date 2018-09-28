@@ -124,7 +124,7 @@
 
                 @foreach (country()->all() as $code => $country)
 
-                    <option value="{{ $country}}">{{ $country }}</option>
+                    <option value="{{ $code }}">{{ $country }}</option>
 
                 @endforeach
             </select>
@@ -264,7 +264,7 @@
 
                 @foreach (country()->all() as $code => $country)
 
-                    <option value="{{ $country}}">{{ $country }}</option>
+                    <option value="{{ $code }}">{{ $country }}</option>
 
                 @endforeach
             </select>

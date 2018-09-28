@@ -42,7 +42,6 @@ class CartRepository extends Repository
      * @param string $attribute
      * @return Mixed
      */
-
     public function update(array $data, $id, $attribute = "id")
     {
         $cart = $this->find($id);
@@ -51,60 +50,6 @@ class CartRepository extends Repository
 
         return $cart;
     }
-
-    public function getProducts($id) {
-
-        return $this->model->find($id)->with_products;
-    }
-
-    /**
-     * Method to attach
-     * associations
-     *
-     * @return Mixed
-    */
-    public function attach($cart_id, $product_id, $quantity, $price) {
-        return $this->model->findOrFail($cart_id)->with_products()->attach($cart_id, ['product_id' => $product_id, 'cart_id' => $cart_id, 'quantity' => $quantity, 'price' => $price]);
-    }
-
-    /**
-     * Create Cart Item
-     * Through Cart.
-     *
-     * @return Collection
-     */
-    public function createItem($cartId, $data) {
-        $cart = $this->model->findOrFail($cartId);
-
-        return $cart->items()->create($data);
-    }
-
-    /**
-     * This will update the
-     * quantity of product
-     * for the customer,
-     * in case of merge.
-     *
-     * @return Mixed
-     */
-    public function updateRelatedForMerge($cart_id, $product_id, $column, $value) {
-        $cart_product = $this->model->findOrFail($cart_id);
-
-        return $cart_product->with_products()->updateExistingPivot($product_id, array($column => $value));
-    }
-
-    /**
-     * Update the quantity of
-     * previously added item
-     * in the cart.
-     *
-     * @return Mixed
-     */
-
-    // public function updateRelatedInItems($cartId, $cartItemId, $column, $value) {
-
-    //     return $this->updateItem($cartId)->syncWithoutDetaching($cartItemId, [$column => $value]);
-    // }
 
     /**
      * Method to detach
@@ -121,6 +66,14 @@ class CartRepository extends Repository
         return $this->model->destroy($cart_id);
     }
 
+    /**
+     * Used to get items
+     * for cart explicitly,
+     * use cart instance
+     * instead.
+     *
+     * @return Mixed
+     */
     public function items($cartId) {
         return $this->model->find($cartId)->items;
     }

@@ -27,7 +27,7 @@
                 <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
                     <label class="reqiured">@{{ attribute.label }}</label>
 
-                    <select v-validate="'required'" class="control" :name="['super_attribute[' + attribute.id + ']']" :disabled="attribute.disabled" @change="configure(attribute, $event.target.value)" :id="['attribute_' + attribute.id]">
+                    <select v-validate="'required'" class="control" :name="['super_attribute[' + attribute.id + ']']" :disabled="attribute.disabled" @change="configure(attribute, $event.target.value)" :id="['attribute_' + attribute.id]" required>
 
                         <option v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
 
@@ -48,6 +48,8 @@
             Vue.component('product-options', {
 
                 template: '#product-options-template',
+
+            inject: ['$validator'],
 
                 data: () => ({
                     config: @json($config),

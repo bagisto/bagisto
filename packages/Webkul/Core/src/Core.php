@@ -8,6 +8,7 @@ use Webkul\Core\Models\Locale as LocaleModel;
 use Webkul\Core\Models\Currency as CurrencyModel;
 use Webkul\Core\Models\TaxCategory as TaxCategory;
 use Webkul\Core\Models\TaxRate as TaxRate;
+use Illuminate\Support\Facades\Config;
 
 class Core
 {
@@ -128,6 +129,17 @@ class Core
     }
 
     /**
+    * Convert price with currency symbol
+    *
+    * @param float $price
+    *  @return string
+    */
+    public function convertPrice($price, $currencyCode = null)
+    {
+        return $price;
+    }
+
+    /**
     * Format and convert price with currency symbol
     *
     * @param float $price
@@ -142,6 +154,17 @@ class Core
 
         $currencyCode = $channel->base_currency->code;
 
+        return currency($price, $currencyCode);
+    }
+
+    /**
+    * Format and convert price with currency symbol
+    *
+    * @param float $price
+    *  @return string
+    */
+    public function formatPrice($price, $currencyCode)
+    {
         return currency($price, $currencyCode);
     }
 
@@ -253,5 +276,22 @@ class Core
         $date->setTimezone($channel->timezone);
 
         return $date->format($format);
+    }
+
+    /**
+     * Retrieve information from payment configuration
+     *
+     * @param string $field
+     * @param int|string|null $channelId
+     *
+     * @return mixed
+     */
+    public function getConfigData($field, $channelId = null)
+    {
+        if (null === $channelId) {
+            $channelId = $this->getCurrentChannel()->id;
+        }
+
+        return Config::get($field);
     }
 }

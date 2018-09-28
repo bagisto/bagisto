@@ -43,7 +43,10 @@ class CheckoutController extends Controller
     */
     public function index()
     {
-        return view($this->_config['view']);
+        if(!$cart = Cart::getCart())
+            return redirect()->route('shop.checkout.cart.index');
+
+        return view($this->_config['view'])->with('cart', $cart);
     }
 
     /**
@@ -54,11 +57,10 @@ class CheckoutController extends Controller
     */
     public function saveAddress(CustomerAddressForm $request)
     {
-        if(!Cart::saveCustomerAddress(request()->all())) {
-            // return response()->json(['redirect_url' => route('store.home')], 403)
-        }
+        if(!Cart::saveCustomerAddress(request()->all()) || !$rates = Shipping::collectRates())
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
-        return response()->json(Shipping::collectRates());
+        return response()->json($rates);
     }
 
     /**
@@ -68,6 +70,13 @@ class CheckoutController extends Controller
     */
     public function saveShipping()
     {
+        $shippingMethod = request()->get('shipping_method');
+
+        if(!$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+
+        Cart::collectTotals();
+
         return response()->json(Payment::getSupportedPaymentMethods());
     }
 
@@ -78,5 +87,16 @@ class CheckoutController extends Controller
     */
     public function savePayment()
     {
+        $payment = request()->get('payment');
+
+        if(!$payment || !Cart::savePaymentMethod($payment))
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+
+        $cart = Cart::getCart();
+
+        return response()->json([
+                'jump_to_section' => 'review',
+                'html' => view('shop::checkout.onepage.review', compact('cart'))->render()
+            ]);
     }
 }

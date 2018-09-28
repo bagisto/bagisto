@@ -5,11 +5,8 @@ namespace Webkul\Customer\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
-
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Http\Listeners\CustomerEventsHandler;
-
-use Cookie;
 use Cart;
 /**
  * Session controller for the user customer

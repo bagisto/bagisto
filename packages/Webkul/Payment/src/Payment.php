@@ -21,7 +21,7 @@ class Payment
                 if($object->isAvailable()) {
                     $paymentMethods[] = [
                         'method' => $object->getCode(),
-                        'title' => $object->getTitle(),
+                        'method_title' => $object->getTitle(),
                         'description' => $object->getDescription(),
                     ];
                 }

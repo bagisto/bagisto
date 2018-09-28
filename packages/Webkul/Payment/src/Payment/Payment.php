@@ -58,14 +58,8 @@ abstract class Payment
      *
      * @return mixed
      */
-    public function getConfigData($field, $channelId = null)
+    public function getConfigData($field)
     {
-        if (null === $channelId) {
-            $channelId = core()->getCurrentChannel()->id;
-        }
-
-        $paymentConfig = Config::get('paymentmethods.' . $this->getCode());
-
-        return $paymentConfig[$field];
+        return core()->getConfigData('paymentmethods.' . $this->getCode() . '.' . $field);
     }
 }

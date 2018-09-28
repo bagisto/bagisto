@@ -4,7 +4,7 @@
 
             <ul class="logo-container">
                 <li>
-                    <a href="{{ route('store.home') }}">
+                    <a href="{{ route('shop.home.index') }}">
                         <img class="logo" src="{{ asset('vendor/webkul/shop/assets/images/logo.svg') }}" />
                     </a>
                 </li>
@@ -133,6 +133,8 @@
 
 </div>
 
+
+
 @push('scripts')
 
     <script>
@@ -141,39 +143,44 @@
 
             var hamMenu = document.getElementById("hammenu");
             var search = document.getElementById("search");
-            var content = document.getElementsByClassName("content-container")[0];
-
             var searchSuggestion = document.getElementsByClassName('search-suggestion')[0];
             var headerBottom = document.getElementsByClassName('header-bottom')[0];
 
-            console.log(searchSuggestion);
-
-            //hamMenu.addEventListener("click", header);
             search.addEventListener("click", header);
+            hamMenu.addEventListener("click", header);
 
             window.addEventListener('scroll', function() {
-
-                console.log(window.pageYOffset);
-
                 if(window.pageYOffset > 70){
                     headerBottom.style.visibility = "hidden";
 
                 }else{
                     headerBottom.style.visibility = "visible";
-
                 }
-
             });
 
-
             function header(){
-                alert('hello');
+
                 var className = document.getElementById(this.id).className;
 
+                if(className === 'icon search-icon' ){
+                    search.classList.remove("search-icon");
+                    search.classList.add("cross-icon");
+                    searchSuggestion.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }else if(className === 'icon sortable-icon'){
+                    hamMenu.classList.remove("sortable-icon");
+                    hamMenu.classList.add("cross-icon");
 
-                searchSuggestion.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-
+                    headerBottom.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }else{
+                    search.classList.remove("cross-icon");
+                    search.classList.add("search-icon");
+                    hamMenu.classList.remove("cross-icon");
+                    hamMenu.classList.add("sortable-icon");
+                    searchSuggestion.style.display = 'none';
+                    document.body.style.overflow = "scroll";
+                }
 
 
             }
