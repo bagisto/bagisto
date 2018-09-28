@@ -3,7 +3,7 @@
 namespace Webkul\Shipping;
 
 use Illuminate\Support\Facades\Config;
-use Webkul\Cart\Facades\Cart;
+use Webkul\Checkout\Facades\Cart;
 
 /**
  * Class Shipping.
@@ -49,7 +49,7 @@ class Shipping
                 'html' => view('shop::checkout.onepage.shipping', ['shippingRateGroups' => $this->getGroupedAllShippingRates()])->render()
             ];
     }
-    
+
     /**
      * Persist shipping rate to database
      *
@@ -64,7 +64,7 @@ class Shipping
             $rate->delete();
         }
     }
-    
+
     /**
      * Persist shipping rate to database
      *
