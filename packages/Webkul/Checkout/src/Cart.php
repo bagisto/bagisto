@@ -332,8 +332,9 @@ class Cart {
                         }
                     } else if($data['is_configurable'] == "true") {
                         if($cartItem->type == "configurable") {
-                            if($cartItem->child->product_id == $data['selected_configurable_option']) {
-                                $child = $cartItem->child;
+                            $temp = $this->cartItem->findOneByField('parent_id', $cartItem->id);
+                            if($temp->product_id == $data['selected_configurable_option']) {
+                                $child = $temp->child;
 
                                 $parent = $cartItem;
                                 $parentPrice = $parent->price;
@@ -368,11 +369,11 @@ class Cart {
                 }
 
                 if($data['is_configurable'] == "true") {
-                    $this->canAddOrUpdate($parent->child->id, $parent->quantity);
-
                     $parent = $cart->items()->create($itemData['parent']);
 
                     $itemData['child']['parent_id'] = $parent->id;
+
+                    // $this->canAddOrUpdate($parent->child->id, $parent->quantity);
 
                     $cart->items()->create($itemData['child']);
                 } else if($data['is_configurable'] == "false"){
