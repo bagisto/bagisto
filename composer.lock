@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c0c2a23aa2502c590b2ccf7975329ce1",
+    "content-hash": "762c5c196d8a9a7814101fd53d60b1cf",
     "packages": [
         {
             "name": "commerceguys/intl",
@@ -921,6 +921,173 @@
                 "nsm"
             ],
             "time": "2018-02-04T08:47:55+00:00"
+        },
+        {
+            "name": "konekt/concord",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkonekt/concord.git",
+                "reference": "7379f847fe1e90f9b71ce3f435dd9617ab8dfff5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkonekt/concord/zipball/7379f847fe1e90f9b71ce3f435dd9617ab8dfff5",
+                "reference": "7379f847fe1e90f9b71ce3f435dd9617ab8dfff5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "~5.4",
+                "illuminate/support": "~5.4",
+                "konekt/enum": "~2.1",
+                "konekt/enum-eloquent": "^1.1.3",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.4.2",
+                "phpunit/phpunit": "6.0 - 7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Konekt\\Concord\\ConcordServiceProvider"
+                    ],
+                    "aliases": {
+                        "Concord": "Konekt\\Concord\\Facades\\Concord",
+                        "Helper": "Konekt\\Concord\\Facades\\Helper"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Konekt\\Concord\\": "src"
+                },
+                "files": [
+                    "src/Support/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Attila Fulop",
+                    "homepage": "https://github.com/fulopattila122"
+                }
+            ],
+            "description": "Concord is a Laravel Extension for building modular Laravel Applications",
+            "time": "2018-08-11T08:25:39+00:00"
+        },
+        {
+            "name": "konekt/enum",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkonekt/enum.git",
+                "reference": "ab37d89e1a6f88a76f25c6dd88b56b8892de86f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkonekt/enum/zipball/ab37d89e1a6f88a76f25c6dd88b56b8892de86f2",
+                "reference": "ab37d89e1a6f88a76f25c6dd88b56b8892de86f2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "6.2 - 7.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Konekt\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Attila Fulop",
+                    "homepage": "https://github.com/fulopattila122"
+                }
+            ],
+            "description": "SPL inspired PHP enum class implementation",
+            "keywords": [
+                "artkonekt",
+                "enum",
+                "konekt"
+            ],
+            "time": "2018-06-09T13:03:01+00:00"
+        },
+        {
+            "name": "konekt/enum-eloquent",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkonekt/enum-eloquent.git",
+                "reference": "f67c981d549f69cddb9956ef51d16267c050a0c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkonekt/enum-eloquent/zipball/f67c981d549f69cddb9956ef51d16267c050a0c9",
+                "reference": "f67c981d549f69cddb9956ef51d16267c050a0c9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.*",
+                "konekt/enum": "^2.0.2",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "illuminate/events": "5.*",
+                "phpunit/phpunit": "~6.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Konekt\\Enum\\Eloquent\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Attila Fulop",
+                    "homepage": "https://github.com/fulopattila122"
+                }
+            ],
+            "description": "Enum attribute casting for Eloquent models",
+            "keywords": [
+                "artkonekt",
+                "eloquent",
+                "enum",
+                "konekt",
+                "laravel"
+            ],
+            "time": "2017-12-08T17:57:42+00:00"
         },
         {
             "name": "laravel/framework",
