@@ -11,13 +11,13 @@ use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Providers\ComposerServiceProvider;
 
-class CartServiceProvider extends ServiceProvider
+class CheckoutServiceProvider extends ServiceProvider
 {
 
     public function boot(Router $router)
     {
         include __DIR__ . '/../Http/helpers.php';
-        
+
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);

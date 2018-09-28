@@ -1,14 +1,14 @@
 <?php
 
-namespace Webkul\Cart;
+namespace Webkul\Checkout;
 
 use Carbon\Carbon;
-use Webkul\Cart\Repositories\CartRepository;
-use Webkul\Cart\Repositories\CartItemRepository;
-use Webkul\Cart\Repositories\CartAddressRepository;
+use Webkul\Checkout\Repositories\CartRepository;
+use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Checkout\Repositories\CartAddressRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Cart\Models\CartPayment;
+use Webkul\Checkout\Models\CartPayment;
 
 /**
  * Facade for all the methods to be implemented in Cart.
@@ -57,9 +57,9 @@ class Cart {
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Cart\Repositories\CartRepository $cart
-     * @param  Webkul\Cart\Repositories\CartItemRepository $cartItem
-     * @param  Webkul\Cart\Repositories\CartAddressRepository $cartAddress
+     * @param  Webkul\Checkout\Repositories\CartRepository $cart
+     * @param  Webkul\Checkout\Repositories\CartItemRepository $cartItem
+     * @param  Webkul\Checkout\Repositories\CartAddressRepository $cartAddress
      * @param  Webkul\Customer\Repositories\CustomerRepository $customer
      * @param  Webkul\Product\Repositories\ProductRepository $product
      * @return void

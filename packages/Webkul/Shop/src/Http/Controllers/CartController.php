@@ -1,11 +1,11 @@
 <?php
 
-namespace Webkul\Cart\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Cart\Repositories\CartRepository;
-use Webkul\Cart\Repositories\CartItemRepository;
+use Webkul\Checkout\Repositories\CartRepository;
+use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Product\ProductImage;

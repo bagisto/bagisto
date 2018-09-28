@@ -5,10 +5,10 @@ namespace Webkul\Shop\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
-use Webkul\Cart\Facades\Cart;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Payment\Facades\Payment;
-use Webkul\Cart\Http\Requests\CustomerAddressForm;
+use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 
 /**
  * Chekout controller for the customer and guest for placing order
@@ -51,7 +51,7 @@ class OnepageController extends Controller
     /**
      * Saves customer address.
      *
-     * @param  \Webkul\Cart\Http\Requests\CustomerAddressForm $request
+     * @param  \Webkul\Checkout\Http\Requests\CustomerAddressForm $request
      * @return \Illuminate\Http\Response
     */
     public function saveAddress(CustomerAddressForm $request)

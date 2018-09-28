@@ -5,8 +5,8 @@ namespace Webkul\Checkout\Http\ViewComposers;
 use Illuminate\View\View;
 use Illuminate\Support\Collection;
 
-use Webkul\Cart\Repositories\CartRepository;
-use Webkul\Cart\Repositories\CartItemRepository;
+use Webkul\Checkout\Repositories\CartRepository;
+use Webkul\Checkout\Repositories\CartItemRepository;
 
 //Product Image Helper Class
 use Webkul\Product\Product\ProductImage;

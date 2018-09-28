@@ -189,7 +189,7 @@ return [
         Webkul\Inventory\Providers\InventoryServiceProvider::class,
         Webkul\Product\Providers\ProductServiceProvider::class,
         Webkul\Theme\Providers\ThemeServiceProvider::class,
-        Webkul\Checkout\Providers\CartServiceProvider::class,
+        Webkul\Checkout\Providers\CheckoutServiceProvider::class,
         Webkul\Shipping\Providers\ShippingServiceProvider::class,
         Webkul\Payment\Providers\PaymentServiceProvider::class,
         Webkul\Sales\Providers\SalesServiceProvider::class,
