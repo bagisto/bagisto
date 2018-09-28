@@ -3,16 +3,16 @@
 namespace Webkul\Sales\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Router;
-use Illuminate\Foundation\AliasLoader;
+use Webkul\Sales\Providers\ModuleServiceProvider;
 
 class SalesServiceProvider extends ServiceProvider
 {
-
     public function boot(Router $router)
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        $this->app->register(ModuleServiceProvider::class);
     }
 
     /**

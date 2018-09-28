@@ -10,37 +10,45 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.index'
     ]);
 
-    Route::get('/checkout/onepage', 'Webkul\Cart\Http\Controllers\CheckoutController@index')->defaults('_config', [
+    Route::get('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@index')->defaults('_config', [
+        'view' => 'shop::checkout.cart.index'
+    ])->name('shop.checkout.cart.index');
+
+    Route::get('/checkout/onepage', 'Webkul\Shop\Http\Controllers\OnepageController@index')->defaults('_config', [
         'view' => 'shop::checkout.onepage'
     ])->name('shop.checkout.onepage.index');
 
-    Route::post('/checkout/save-address', 'Webkul\Cart\Http\Controllers\CheckoutController@saveAddress')->name('shop.checkout.save-address');
+    Route::post('/checkout/save-address', 'Webkul\Shop\Http\Controllers\CheckoutController@saveAddress')->name('shop.checkout.save-address');
 
-    Route::post('/checkout/save-shipping', 'Webkul\Cart\Http\Controllers\CheckoutController@saveShipping')->name('shop.checkout.save-shipping');
+    Route::post('/checkout/save-shipping', 'Webkul\Shop\Http\Controllers\CheckoutController@saveShipping')->name('shop.checkout.save-shipping');
 
-    Route::post('/checkout/save-payment', 'Webkul\Cart\Http\Controllers\CheckoutController@savePayment')->name('shop.checkout.save-payment');
+    Route::post('/checkout/save-payment', 'Webkul\Shop\Http\Controllers\CheckoutController@savePayment')->name('shop.checkout.save-payment');
+
+    Route::get('test', 'Webkul\Shop\Http\Controllers\CartController@test');
+
+    Route::get('mtest', 'Webkul\Shop\Http\Controllers\CartController@mergeTest');
 
     //dummy
-    Route::get('test', 'Webkul\Cart\Http\Controllers\CartController@test');
+    Route::get('test', 'Webkul\Shop\Http\Controllers\CartController@test');
 
     Route::get('/products/{slug}', 'Webkul\Shop\Http\Controllers\ProductController@index')->defaults('_config', [
         'view' => 'shop::products.view'
     ])->name('shop.products.index');
 
     // //Routes for product cart
-    Route::get('/checkout/cart', 'Webkul\Cart\Http\Controllers\CartController@index')->defaults('_config', [
-        'view' => 'shop::checkout.cart.index'
-    ])->name('shop.checkout.cart.index');
+    // Route::get('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@index')->defaults('_config', [
+    //     'view' => 'shop::checkout.cart.index'
+    // ])->name('shop.checkout.cart.index');
 
-    Route::post('product/cart/add/{id}', 'Webkul\Cart\Http\Controllers\CartController@add')->name('cart.add');
+    Route::post('product/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->name('cart.add');
 
-    Route::get('product/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->name('cart.remove');
+    Route::get('product/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->name('cart.remove');
 
-    Route::post('/checkout/cart', 'Webkul\Cart\Http\Controllers\CartController@updateBeforeCheckout')->defaults('_config',[
+    Route::post('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@updateBeforeCheckout')->defaults('_config',[
         'redirect' => 'shop.checkout.cart.index'
     ])->name('shop.checkout.cart.update');
 
-    Route::get('/checkout/cart/remove/{id}', 'Webkul\Cart\Http\Controllers\CartController@remove')->defaults('_config',[
+    Route::get('/checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->defaults('_config',[
         'redirect' => 'shop.checkout.cart.index'
     ])->name('shop.checkout.cart.remove');
     //Routes for product cart ends
