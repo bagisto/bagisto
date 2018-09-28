@@ -56,10 +56,10 @@
         var sort = document.getElementById("sort");
         var filter = document.getElementById("filter");
 
-        sort.addEventListener("click", myFunction);
-        filter.addEventListener("click", myFunction);
+        sort.addEventListener("click", filterSort);
+        filter.addEventListener("click", filterSort);
 
-        function myFunction(){
+        function filterSort(){
 
             let className = document.getElementById(this.id).className;
             var productGrid = document.getElementsByClassName('product-grid max-3-col');
@@ -72,11 +72,9 @@
                     filterLayered[i].style.display="block";
                     filterLayered[i].style.padding="20px";
                     filterLayered[i].style.width="100%";
-                    filterLayered[i].style.marginTop = "-100px";
+
                 }
-                for(let i=0 ; i < productGrid.length ; i++){
-                    productGrid[i].style.display = "none";
-                }
+
                 for(let i=0 ; i < sortLimiter.length ; i++){
                     sortLimiter[i].style.display = "none";
                 }
@@ -92,12 +90,10 @@
                 for(let i=0 ; i < filterLayered.length ; i++){
                     filterLayered[i].style.display="none";
                 }
-                for(let i=0 ; i < productGrid.length ; i++){
-                    productGrid[i].style.display = "none";
-                }
                 for(let i=0 ; i < sortLimiter.length ; i++){
                     sortLimiter[i].style.display = "flex";
                     sortLimiter[i].style.justifyContent = "space-between";
+                    sortLimiter[i].style.marginBottom = "20px";
                 }
 
                 sort.classList.remove('icon', 'sort-icon');
@@ -126,6 +122,7 @@
                 filter.classList.add('icon', 'filter-icon');
             }
         }
+
     }
 
 </script>

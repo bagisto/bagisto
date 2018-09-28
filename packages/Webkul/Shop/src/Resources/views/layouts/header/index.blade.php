@@ -121,29 +121,9 @@
                 <li class="search-box"><span class="icon search-icon" id="search"></span></li>
                 <li class="account-box"><span class="icon account-icon"></span></li>
                 <li class="cart-box"><span class="icon cart-icon"></span></li>
-                <li class="menu-box" ><span class="icon sortable-icon" id="sortable"></span></li>
+                <li class="menu-box" ><span class="icon sortable-icon" id="hammenu"></span></li>
             </ul>
-        </div>
-    </div>
 
-
-    {{-- Triggered on responsive mode only --}}
-
-    <div class="search-suggestion">
-        <div class="search-content">
-            <span class="icon search-icon"></span>
-            <span> Sarees India  </span>
-            <span class="icon search-icon right"></span>
-        </div>
-
-        <div class="suggestion">
-            <span>Designer sarees</span>
-        </div>
-        <div class="suggestion">
-            <span>India patter sarees</span>
-        </div>
-        <div class="suggestion">
-            <span>Border Sarees</span>
         </div>
     </div>
 
@@ -152,3 +132,53 @@
     </div>
 
 </div>
+
+@push('scripts')
+
+    <script>
+
+        window.onload = function() {
+
+            var hamMenu = document.getElementById("hammenu");
+            var search = document.getElementById("search");
+            var content = document.getElementsByClassName("content-container")[0];
+
+            var searchSuggestion = document.getElementsByClassName('search-suggestion')[0];
+            var headerBottom = document.getElementsByClassName('header-bottom')[0];
+
+            console.log(searchSuggestion);
+
+            //hamMenu.addEventListener("click", header);
+            search.addEventListener("click", header);
+
+            window.addEventListener('scroll', function() {
+
+                console.log(window.pageYOffset);
+
+                if(window.pageYOffset > 70){
+                    headerBottom.style.visibility = "hidden";
+
+                }else{
+                    headerBottom.style.visibility = "visible";
+
+                }
+
+            });
+
+
+            function header(){
+                alert('hello');
+                var className = document.getElementById(this.id).className;
+
+
+                searchSuggestion.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+
+
+
+            }
+        }
+
+    </script>
+
+@endpush

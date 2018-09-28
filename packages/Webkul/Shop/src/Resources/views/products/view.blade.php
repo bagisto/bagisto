@@ -78,21 +78,13 @@
 @endsection
 
 
-<style>
-
-    .header {
-        position: sticky;
-        top: 16px;
-    }
-
-</style>
-
-
 @push('scripts')
 
     <script>
 
         window.onscroll = function() {scrollFunction()};
+
+
 
         function scrollFunction() {
 
@@ -108,7 +100,7 @@
                 elems.style.display = "block";
             }
 
-            console.log(scrollTop);
+
         }
 
     </script>
