@@ -3,7 +3,7 @@
 namespace Webkul\Shipping\Carriers;
 
 use Config;
-use Webkul\Cart\Models\CartShippingRate;
+use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Shipping\Facades\Shipping;
 
 /**

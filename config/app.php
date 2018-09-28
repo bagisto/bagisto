@@ -175,6 +175,7 @@ return [
 
         //Repository
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        Konekt\Concord\ConcordServiceProvider::class,
 
         //Webkul packages
         Webkul\User\Providers\UserServiceProvider::class,
@@ -188,7 +189,7 @@ return [
         Webkul\Inventory\Providers\InventoryServiceProvider::class,
         Webkul\Product\Providers\ProductServiceProvider::class,
         Webkul\Theme\Providers\ThemeServiceProvider::class,
-        Webkul\Cart\Providers\CartServiceProvider::class,
+        Webkul\Checkout\Providers\CheckoutServiceProvider::class,
         Webkul\Shipping\Providers\ShippingServiceProvider::class,
         Webkul\Payment\Providers\PaymentServiceProvider::class,
         Webkul\Sales\Providers\SalesServiceProvider::class,
@@ -243,7 +244,7 @@ return [
         'Datagrid' => Webkul\Ui\DataGrid\Facades\DataGrid::class,
         'ProductGrid' => Webkul\Ui\DataGrid\Facades\ProductGrid::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Cart' => Webkul\Cart\Facades\Cart::class,
+        'Cart' => Webkul\Checkout\Facades\Cart::class,
         'Core' => Webkul\Core\Facades\Core::class
     ],
 
