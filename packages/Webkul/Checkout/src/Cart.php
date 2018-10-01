@@ -505,15 +505,28 @@ class Cart {
     {
         $data = [];
 
+        if(is_array($item->additional) && isset($item->additional['super_attribute'])) {
+            foreach($item->additional['super_attribute'] as $attributeId => $optionId) {
+                $option = $attribute->options()->where('id', $optionId)->first();
+                dd($option);
+            }
+        }
+
         foreach($item->product->super_attributes as $attribute) {
-            dd($item->child);
-            dd($attribute->options);
+            // dd($item->child);
+            // dd($attribute->options);
+
+            // dd($attribute->code);
+            dd($item->child->product->{$attribute->code});
             $option = $attribute->options()->where('id', $item->child->{$attribute->code})->first();
+            dd($option);
 
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name,
                 'option_label' => $option->label,
             ];
+
+            dd($data);
         }
 
         return $data;
