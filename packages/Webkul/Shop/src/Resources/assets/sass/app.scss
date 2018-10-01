@@ -7,29 +7,15 @@
 
 //main store front layouting
 .main-container-wrapper {
-    max-width: 1170px;
+    max-width: 1300px;
     width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
     margin-left: auto;
     margin-right: auto;
 
     .content-container {
         display: block;
-    }
-
-    .product-grid-4 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        grid-column-gap: 27px;
-        grid-row-gap: 15px;
-        grid-auto-rows: auto;
-    }
-
-    .product-grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(240px, 1fr));
-        grid-column-gap: 27px;
-        grid-row-gap: 15px;
-        grid-auto-rows: auto;
     }
 
     .product-list {
