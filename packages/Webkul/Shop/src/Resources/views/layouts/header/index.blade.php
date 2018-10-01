@@ -145,6 +145,7 @@
             var search = document.getElementById("search");
             var searchSuggestion = document.getElementsByClassName('search-suggestion')[0];
             var headerBottom = document.getElementsByClassName('header-bottom')[0];
+            var nav= document.getElementsByClassName('nav-responsive')[0];
 
             search.addEventListener("click", header);
             hamMenu.addEventListener("click", header);
@@ -167,11 +168,12 @@
                     search.classList.add("cross-icon");
                     searchSuggestion.style.display = 'block';
                     document.body.style.overflow = 'hidden';
+                    nav.style.display = 'none';
                 }else if(className === 'icon sortable-icon'){
                     hamMenu.classList.remove("sortable-icon");
                     hamMenu.classList.add("cross-icon");
-
-                    headerBottom.style.display = 'block';
+                    searchSuggestion.style.display = 'none';
+                    nav.style.display = 'block';
                     document.body.style.overflow = 'hidden';
                 }else{
                     search.classList.remove("cross-icon");
@@ -179,6 +181,7 @@
                     hamMenu.classList.remove("cross-icon");
                     hamMenu.classList.add("sortable-icon");
                     searchSuggestion.style.display = 'none';
+                    nav.style.display = 'none';
                     document.body.style.overflow = "scroll";
                 }
 

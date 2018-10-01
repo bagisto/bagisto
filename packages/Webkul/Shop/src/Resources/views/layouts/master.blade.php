@@ -55,6 +55,10 @@
 
         </div>
 
+        <div class="nav-responsive">
+            @include('shop::layouts.header.nav-menu.navmenu')
+        </div>
+
         @include('shop::layouts.footer')
 
     </div>

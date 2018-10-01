@@ -344,6 +344,15 @@ body {
     }
 }
 
+.nav-responsive {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background:white;
+    margin-top: 60px;
+}
 
 // header page responsive css start here
 
