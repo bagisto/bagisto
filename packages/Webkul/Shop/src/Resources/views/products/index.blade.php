@@ -11,7 +11,7 @@
 
             <div class="category-block">
 
-                <div class="hero-image mb-15">
+                <div class="hero-image mb-35">
                     <img src="https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?cs=srgb&dl=adolescent-casual-cute-428338.jpg&fm=jpg" />
                 </div>
 
