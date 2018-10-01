@@ -137,6 +137,58 @@ body {
   margin-bottom: 90px;
 }
 
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mt-25 {
+  margin-top: 25px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+
+.mt-35 {
+  margin-top: 35px;
+}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
+.mt-45 {
+  margin-top: 45px;
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.mt-60 {
+  margin-top: 60px;
+}
+
+.mt-70 {
+  margin-top: 70px;
+}
+
+.mt-80 {
+  margin-top: 80px;
+}
+
+.mt-90 {
+  margin-top: 90px;
+}
+
 .product-card .product-image {
   max-height: 350px;
   max-width: 280px;
@@ -193,6 +245,88 @@ body {
   margin-right: 10px;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+.layered-filter-wrapper {
+  width: 25%;
+  float: left;
+  padding-right: 20px;
+  min-height: 1px;
+}
+
+.layered-filter-wrapper .filter-title {
+  border-bottom: 1px solid #E8E8E8;
+  color: #242424;
+  padding: 10px 0;
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item {
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 10px;
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item .filter-attributes-title {
+  padding: 10px 40px 0 10px;
+  color: #5E5E5E;
+  cursor: pointer;
+  position: relative;
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item .filter-attributes-title .remove-filter-link {
+  font-weight: 400;
+  color: #0041FF;
+  margin-right: 10px;
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item .filter-attributes-title .icon {
+  background-image: url("../images/arrow-down.svg") !important;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: 15px;
+  top: 14px;
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item .filter-attributes-content {
+  padding: 10px;
+  display: none;
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item .filter-attributes-content ol.items {
+  padding: 0;
+  margin: 0;
+  list-style: none none;
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item .filter-attributes-content ol.items li.item {
+  padding: 8px 0;
+  color: #5E5E5E;
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item .filter-attributes-content ol.items li.item .checkbox {
+  margin: 0;
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item .filter-attributes-content ol.items li.item .checkbox .checkbox-view {
+  height: 16px;
+  width: 16px;
+  background-image: url("../images/checkbox.svg");
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item .filter-attributes-content ol.items li.item .checkbox input:checked + .checkbox-view {
+  background-image: url("../images/checkbox-checked.svg");
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item .filter-attributes-content .price-range-wrapper {
+  margin-top: 21px;
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item.active .filter-attributes-content {
+  display: block;
+}
+
+.layered-filter-wrapper .filter-attributes .filter-attributes-item.active .filter-attributes-title .icon {
+  background-image: url("../images//arrow-up.svg") !important;
 }
 
 .main-container-wrapper {
