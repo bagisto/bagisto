@@ -56,6 +56,28 @@
     }
 }
 
+//product page price styles
+.product-price {
+    margin-bottom: 14px;
+    width: 100%;
+    font-weight: 600;
+
+    .price-label {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .regular-price {
+        color: #A5A5A5;
+        text-decoration: line-through;
+        margin-right: 10px;
+    }
+
+    .special-price {
+        color: #FF6472;
+    }
+}
+
 //layered filter wrapper styles
 .layered-filter-wrapper {
     width: 25%;

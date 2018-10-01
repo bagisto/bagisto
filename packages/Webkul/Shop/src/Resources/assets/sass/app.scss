@@ -7,7 +7,7 @@
 
 //main store front layouting
 .main-container-wrapper {
-    max-width: 90%;
+    max-width: 1300px;
     width: auto;
     margin-left: auto;
     margin-right: auto;
@@ -128,106 +128,82 @@
     }
 }
 
-//category page
-.main {
-    .category-block {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
+//slider styles
+section.slider-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
 
-        .category-block {
-            width: 100%;
+    div.slider-content {
+        position: relative;
+        height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+
+
+        ul.slider-images {
+
+            li{
+                position: absolute;
+                visibility: hidden;
+            }
+
+            li.show {
+                display:block;
+                visibility: visible;
+                width: 100%;
+                animation-name: example;
+                animation-duration: 4s;
+            }
+
+            @keyframes example {
+                0%   {opacity: 0.1;}
+                100% {opacity: 1;}
+            }
+
+            li img {
+                height: 500px;
+                width:100%;
+            }
+        }
+
+        div.slider-control {
             display: block;
+            position: absolute;
+            user-select: none;
+            bottom: 2%;
+            right: 2%;
 
-            .hero-image {
-                border: 1px solid green;
 
-                img {
-                    width: 100%;
-                    height: 400px;
-                }
+            .dark-left-icon {
+                background-color: #f2f2f2;
+                height: 48px;
+                width: 48px;
+                max-height: 100%;
+                max-width: 100%;
+            }
+
+            .light-right-icon {
+                background-color: #000;
+                height: 48px;
+                width: 48px;
+                max-height: 100%;
+                max-width: 100%;
             }
         }
-    }
-
-    .top-toolbar {
-        width: 100%;
-        display: inline-block;
-
-        .page-info {
-            float: left;
-            color: $font-color;
-            line-height: 45px;
-
-            span:first-child {
-                display: inline;
-            }
-
-            span:last-child {
-                display: none;
-            }
-        }
-
-        .pager {
-            float: right;
-
-            label {
-                margin-right: 5px;
-            }
-
-            select {
-                background: #FFFFFF;
-                border: 1px solid #C7C7C7;
-                border-radius: 3px;
-                color: $font-color;
-                padding: 10px;
-            }
-
-            .view-mode {
-                display: inline-block;
-                margin-right: 20px;
-
-                a, span {
-                    display: inline-block;
-                    vertical-align: middle;
-
-                    &.grid-view {
-                        margin-right: 10px;
-                    }
-                }
-
-                .sort-filter {
-                    display: none;
-                }
-            }
-
-            .sorter {
-                display: inline-block;
-                margin-right: 10px;
-            }
-
-            .limiter {
-                display: inline-block;
-            }
-        }
-    }
-
-    .reponsive-sorter-limiter {
-        display: none;
-    }
-
-    .bottom-toolbar {
-        display: block;
-        margin-top: 40px;
-        margin-bottom: 40px;
-        text-align: center;
     }
 }
 
+//header navigation
 .header {
     margin-top: 16px;
     margin-bottom: 21px;
     user-select: none;
+
+    .search-suggestion {
+        display: none;
+    }
 
     .header-top {
         margin-bottom: 16px;
@@ -379,10 +355,6 @@
         }
     }
 
-    .search-suggestion {
-        display: none;
-    }
-
     .header-bottom {
         height: 48px;
         margin-left: auto;
@@ -502,183 +474,6 @@
     }
 }
 
-//slider styles
-section.slider-block {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 5%;
-
-    div.slider-content {
-        position: relative;
-        height: 500px;
-        margin-left: auto;
-        margin-right: auto;
-
-
-        ul.slider-images {
-
-            li{
-                //both combined are equivalent to display none
-                position: absolute;
-                visibility: hidden;
-            }
-
-            li.show {
-                display:block;
-                visibility: visible;
-                width: 100%;
-                animation-name: example;
-                animation-duration: 4s;
-            }
-
-            @keyframes example {
-                0%   {opacity: 0.1;}
-                100% {opacity: 1;}
-            }
-
-            li img {
-                height: 500px;
-                width:100%;
-            }
-        }
-
-        div.slider-control {
-            display: block;
-            position: absolute;
-            user-select: none;
-            bottom: 2%;
-            right: 2%;
-
-
-            .dark-left-icon {
-                background-color: #f2f2f2;
-                height: 48px;
-                width: 48px;
-                max-height: 100%;
-                max-width: 100%;
-            }
-
-            .light-right-icon {
-                background-color: #000;
-                height: 48px;
-                width: 48px;
-                max-height: 100%;
-                max-width: 100%;
-            }
-        }
-    }
-}
-
-//layered filter wrapper styles
-.layered-filter-wrapper {
-    width: 25%;
-    float: left;
-    padding-right: 20px;
-    min-height: 1px;
-
-    .filter-title {
-        border-bottom: 1px solid $border-color;
-        color: $font-color;
-        padding: 10px 0;
-    }
-
-    .filter-attributes {
-        .filter-attributes-item {
-            border-bottom: 1px solid $border-color;
-            padding-bottom: 10px;
-
-            .filter-attributes-title {
-                padding: 10px 40px 0 10px;
-                color: #5E5E5E;
-                cursor: pointer;
-                position: relative;
-
-                .remove-filter-link {
-                    font-weight: 400;
-                    color: $brand-color;
-                    margin-right: 10px;
-                }
-
-                .icon {
-                    background-image: url('../images/arrow-down.svg') !important;
-                    width: 10px;
-                    height: 10px;
-                    position: absolute;
-                    right: 15px;
-                    top: 14px;
-                }
-            }
-
-            .filter-attributes-content {
-                padding: 10px;
-                display: none;
-
-                ol.items {
-                    padding: 0;
-                    margin: 0;
-                    list-style: none none;
-
-                    li.item {
-                        padding: 8px 0;
-                        color: #5E5E5E;
-
-                        .checkbox {
-                            margin: 0;
-
-                            .checkbox-view {
-                                height: 16px;
-                                width: 16px;
-                                background-image: url("../images/checkbox.svg");
-                            }
-
-                            input:checked + .checkbox-view {
-                                background-image: url("../images/checkbox-checked.svg");
-                            }
-                        }
-                    }
-                }
-
-                .price-range-wrapper {
-                    margin-top: 21px;
-                }
-            }
-
-            &.active {
-                .filter-attributes-content {
-                    display: block;
-                }
-
-                .filter-attributes-title .icon {
-                    background-image: url('../images//arrow-up.svg') !important;
-                }
-            }
-        }
-    }
-}
-
-//product page price styles
-.product-price {
-    margin-bottom: 14px;
-    width: 100%;
-    font-weight: 600;
-
-    .price-label {
-        font-size: 14px;
-        font-weight: 400;
-    }
-
-    .regular-price {
-        color: #A5A5A5;
-        text-decoration: line-through;
-        margin-right: 10px;
-    }
-
-    .special-price {
-        color: #FF6472;
-    }
-}
-
 //footer responsive with out media query.
 .footer {
     background-color: #f2f2f2;
@@ -754,6 +549,105 @@ section.slider-block {
                 }
             }
         }
+    }
+}
+
+//category page
+.main {
+    .category-block {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        .category-block {
+            width: 100%;
+            display: block;
+
+            .hero-image {
+                border: 1px solid green;
+                display:block;
+                visibility: visible;
+                width: auto;
+
+                img {
+                    height: 400px;
+                    width:100%;
+                }
+            }
+        }
+    }
+
+    .top-toolbar {
+        width: 100%;
+        display: inline-block;
+
+        .page-info {
+            float: left;
+            color: $font-color;
+            line-height: 45px;
+
+            span:first-child {
+                display: inline;
+            }
+
+            span:last-child {
+                display: none;
+            }
+        }
+
+        .pager {
+            float: right;
+
+            label {
+                margin-right: 5px;
+            }
+
+            select {
+                background: #FFFFFF;
+                border: 1px solid #C7C7C7;
+                border-radius: 3px;
+                color: $font-color;
+                padding: 10px;
+            }
+
+            .view-mode {
+                display: inline-block;
+                margin-right: 20px;
+
+                a, span {
+                    display: inline-block;
+                    vertical-align: middle;
+
+                    &.grid-view {
+                        margin-right: 10px;
+                    }
+                }
+
+                .sort-filter {
+                    display: none;
+                }
+            }
+
+            .sorter {
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+            .limiter {
+                display: inline-block;
+            }
+        }
+    }
+
+    .reponsive-sorter-limiter {
+        display: none;
+    }
+
+    .bottom-toolbar {
+        display: block;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        text-align: center;
     }
 }
 
