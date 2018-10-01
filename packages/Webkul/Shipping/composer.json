@@ -17,7 +17,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Cart\\Providers\\ShippingServiceProvider"
+                "Webkul\\Shipping\\Providers\\ShippingServiceProvider"
             ],
             "aliases": {}
         }

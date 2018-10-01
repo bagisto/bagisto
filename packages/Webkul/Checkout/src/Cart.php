@@ -368,9 +368,9 @@ class Cart {
                 }
 
                 if($data['is_configurable'] == "true") {
-                    $this->canAddOrUpdate($parent->child->id, $parent->quantity);
-
                     $parent = $cart->items()->create($itemData['parent']);
+
+                    $this->canAddOrUpdate($parent->child->id, $parent->quantity);
 
                     $itemData['child']['parent_id'] = $parent->id;
 
@@ -503,7 +503,10 @@ class Cart {
         $data = [];
 
         foreach($item->product->super_attributes as $attribute) {
+            dd($item->child);
+            dd($attribute->options);
             $option = $attribute->options()->where('id', $item->child->{$attribute->code})->first();
+
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name,
                 'option_label' => $option->label,
