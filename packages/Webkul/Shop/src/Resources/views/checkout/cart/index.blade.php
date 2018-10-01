@@ -49,11 +49,11 @@
                                         @if ($product->type == 'configurable')
 
                                             <div class="summary">
-                                                {{-- @foreach (cart::getItemAttributeOptionDetails($item) as $key => $option)
+                                                @foreach (cart::getItemAttributeOptionDetails($item) as $key => $option)
 
                                                     {{ (!$key ? '' : ' , ') . $option['attribute_name'] . ' : ' . $option['option_label'] }}
 
-                                                @endforeach --}}
+                                                @endforeach
                                             </div>
                                         @endif
 
