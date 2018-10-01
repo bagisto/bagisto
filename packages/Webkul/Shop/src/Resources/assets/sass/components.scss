@@ -1,0 +1,57 @@
+// product card, requires no changes for responsiveness.
+.product-card {
+
+    .product-image {
+        max-height: 350px;
+        max-width: 280px;
+        margin-bottom: 10px;
+        background: #F2F2F2;
+
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .product-name {
+        margin-bottom: 14px;
+        width: 100%;
+        color: $font-color;
+
+        a {
+            color: $font-color;
+        }
+    }
+
+    .product-description {
+        margin-bottom: 14px;
+        display: none;
+    }
+
+    .product-ratings {
+        width: 100%;
+        margin-bottom: 14px;
+
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .total-reviews {
+            display: none;
+        }
+    }
+
+    .cart-fav-seg {
+        display: inline-flex;
+        width: 100%;
+        align-items: center;
+
+        .addtocart {
+            border-radius: 0px;
+            margin-right: 10px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+    }
+}
