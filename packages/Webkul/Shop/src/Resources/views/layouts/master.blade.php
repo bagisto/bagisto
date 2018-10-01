@@ -35,7 +35,7 @@
 
         </div>
 
-        <div class="search-suggestion">
+        {{--  <div class="search-suggestion">
 
             <div class="control-group">
                 <span class="icon search-icon"></span>
@@ -43,7 +43,7 @@
                 <span class="icon icon-menu-back right"></span>
             </div>
 
-            {{--  <div class="suggestion">
+            <div class="suggestion">
                 <span>Designer sarees</span>
             </div>
             <div class="suggestion">
@@ -51,13 +51,14 @@
             </div>
             <div class="suggestion">
                 <span>Border Sarees</span>
-            </div>  --}}
+            </div>
 
         </div>
 
         <div class="nav-responsive">
             @include('shop::layouts.header.nav-menu.navmenu')
-        </div>
+        </div>  --}}
+
 
         @include('shop::layouts.footer')
 

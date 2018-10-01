@@ -2,46 +2,54 @@
 
 @section('content-wrapper')
 
-    @include ('shop::products.list.layered-navigation')
+@inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
 
-    <div class="main" style="display: inline-block">
+    <div class="main">
 
-        @inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
+        <div class="category-block">
+            @include ('shop::products.list.layered-navigation')
 
-        <?php $products = $productRepository->findAllByCategory($category->id); ?>
+            <div class="category-block">
 
-        @include ('shop::products.list.toolbar')
+                <div class="hero-image mb-15">
+                    <img src="https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?cs=srgb&dl=adolescent-casual-cute-428338.jpg&fm=jpg" />
+                </div>
 
-        @inject ('toolbarHelper', 'Webkul\Product\Product\Toolbar')
+                <?php $products = $productRepository->findAllByCategory($category->id); ?>
 
-        @if ($toolbarHelper->getCurrentMode() == 'grid')
-            <div class="product-grid max-3-col">
+                @include ('shop::products.list.toolbar')
 
-                @foreach ($products as $product)
+                @inject ('toolbarHelper', 'Webkul\Product\Product\Toolbar')
 
-                    @include ('shop::products.list.card', ['product' => $product])
+                @if ($toolbarHelper->getCurrentMode() == 'grid')
+                    <div class="product-grid-3">
 
-                @endforeach
+                        @foreach ($products as $product)
 
+                            @include ('shop::products.list.card', ['product' => $product])
+
+                        @endforeach
+
+                    </div>
+                @else
+                    <div class="product-list">
+
+                        @foreach ($products as $product)
+
+                            @include ('shop::products.list.card', ['product' => $product])
+
+                        @endforeach
+
+                    </div>
+                @endif
+
+                <div class="bottom-toolbar">
+
+                    {{ $products->appends(request()->input())->links() }}
+
+                </div>
             </div>
-        @else
-            <div class="product-list">
-
-                @foreach ($products as $product)
-
-                    @include ('shop::products.list.card', ['product' => $product])
-
-                @endforeach
-
-            </div>
-        @endif
-
-        <div class="bottom-toolbar">
-
-            {{ $products->appends(request()->input())->links() }}
-
         </div>
-
     </div>
 
 @stop

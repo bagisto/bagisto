@@ -1,0 +1,144 @@
+// product card, requires no changes for responsiveness.
+.product-card {
+
+    .product-image {
+        max-height: 350px;
+        max-width: 280px;
+        margin-bottom: 10px;
+        background: #F2F2F2;
+
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .product-name {
+        margin-bottom: 14px;
+        width: 100%;
+        color: $font-color;
+
+        a {
+            color: $font-color;
+        }
+    }
+
+    .product-description {
+        margin-bottom: 14px;
+        display: none;
+    }
+
+    .product-ratings {
+        width: 100%;
+        margin-bottom: 14px;
+
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .total-reviews {
+            display: none;
+        }
+    }
+
+    .cart-fav-seg {
+        display: inline-flex;
+        width: 100%;
+        align-items: center;
+
+        .addtocart {
+            border-radius: 0px;
+            margin-right: 10px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+    }
+}
+
+//layered filter wrapper styles
+.layered-filter-wrapper {
+    width: 25%;
+    float: left;
+    padding-right: 20px;
+    min-height: 1px;
+
+    .filter-title {
+        border-bottom: 1px solid $border-color;
+        color: $font-color;
+        padding: 10px 0;
+    }
+
+    .filter-attributes {
+        .filter-attributes-item {
+            border-bottom: 1px solid $border-color;
+            padding-bottom: 10px;
+
+            .filter-attributes-title {
+                padding: 10px 40px 0 10px;
+                color: #5E5E5E;
+                cursor: pointer;
+                position: relative;
+
+                .remove-filter-link {
+                    font-weight: 400;
+                    color: $brand-color;
+                    margin-right: 10px;
+                }
+
+                .icon {
+                    background-image: url('../images/arrow-down.svg') !important;
+                    width: 10px;
+                    height: 10px;
+                    position: absolute;
+                    right: 15px;
+                    top: 14px;
+                }
+            }
+
+            .filter-attributes-content {
+                padding: 10px;
+                display: none;
+
+                ol.items {
+                    padding: 0;
+                    margin: 0;
+                    list-style: none none;
+
+                    li.item {
+                        padding: 8px 0;
+                        color: #5E5E5E;
+
+                        .checkbox {
+                            margin: 0;
+
+                            .checkbox-view {
+                                height: 16px;
+                                width: 16px;
+                                background-image: url("../images/checkbox.svg");
+                            }
+
+                            input:checked + .checkbox-view {
+                                background-image: url("../images/checkbox-checked.svg");
+                            }
+                        }
+                    }
+                }
+
+                .price-range-wrapper {
+                    margin-top: 21px;
+                }
+            }
+
+            &.active {
+                .filter-attributes-content {
+                    display: block;
+                }
+
+                .filter-attributes-title .icon {
+                    background-image: url('../images//arrow-up.svg') !important;
+                }
+            }
+        }
+    }
+}

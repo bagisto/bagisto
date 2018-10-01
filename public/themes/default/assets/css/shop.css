@@ -483,6 +483,44 @@ body {
   margin-top: 60px;
 }
 
+.nav-responsive ul.nav {
+  display: block;
+  font-size: 16px;
+  height: 48px;
+  max-width: 100%;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-responsive .nav ul {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #B1B1B1;
+  -webkit-box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
+          box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.nav-responsive .nav a {
+  display: block;
+  color: #242424;
+  text-decoration: none;
+  padding: 0.8em 0.3em 0.8em 0.5em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+.nav-responsive .nav {
+  vertical-align: top;
+  display: inline-block;
+}
+
+.nav-responsive .nav li {
+  position: relative;
+  height: 45px;
+}
+
 @media only screen and (max-width: 770px) {
   .header .header-top div.left-content ul.search-container li.search-group {
     display: none;

@@ -4,7 +4,7 @@
         <span class="featured-seperator" style="color:lightgrey;">_____</span>
     </div>
 
-    <div class="featured-grid product-grid max-4-col">
+    <div class="featured-grid product-grid-4">
         <div class="product-card">
             <div class="product-image">
                 <img src="vendor/webkul/shop/assets/images/grid.png" />

@@ -1,6 +1,6 @@
 @inject ('toolbarHelper', 'Webkul\Product\Product\Toolbar')
 
-<div class="top-toolbar">
+<div class="top-toolbar mb-35">
 
     <div class="page-info">
         <span>

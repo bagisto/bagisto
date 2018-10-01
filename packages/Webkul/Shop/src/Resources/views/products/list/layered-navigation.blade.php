@@ -22,9 +22,7 @@
                     </filter-attribute-item>
 
                 </div>
-
             </div>
-
         </div>
     </script>
 
