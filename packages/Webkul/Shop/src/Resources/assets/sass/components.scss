@@ -58,33 +58,19 @@
         }
     }
 
-    .product-description {
-        margin-bottom: 14px;
-        display: none;
-    }
-
     .product-ratings {
         width: 100%;
-        margin-bottom: 14px;
 
         .icon {
             width: 16px;
             height: 16px;
         }
-
-        .total-reviews {
-            display: none;
-        }
     }
 
     .cart-fav-seg {
         display: inline-flex;
-        width: 100%;
-        align-items: center;
-        justify-content: space-between;
 
         .addtocart {
-            border-radius: 0px;
             margin-right: 10px;
             text-transform: uppercase;
             white-space: nowrap;

@@ -15,7 +15,7 @@
             <div class="product-price">
                 <span>$65.00</span>
             </div>
-            <div class="product-ratings">
+            <div class="product-ratings mb-10">
                 <span>
                     <img src="vendor/webkul/shop/assets/images/5star.svg" />
                 </span>
@@ -36,7 +36,7 @@
             <div class="product-price">
                 <span>$65.00</span>
             </div>
-            <div class="product-ratings">
+            <div class="product-ratings mb-10">
                 <span>
                         <img src="vendor/webkul/shop/assets/images/5star.svg" />
                     </span>
@@ -57,7 +57,7 @@
             <div class="product-price">
                 <span>$65.00</span>
             </div>
-            <div class="product-ratings">
+            <div class="product-ratings mb-10">
                 <span>
                         <img src="vendor/webkul/shop/assets/images/5star.svg" />
                     </span>
@@ -78,7 +78,7 @@
             <div class="product-price">
                 <span>$65.00</span>
             </div>
-            <div class="product-ratings">
+            <div class="product-ratings mb-10">
                 <span>
                         <img src="vendor/webkul/shop/assets/images/5star.svg" />
                     </span>

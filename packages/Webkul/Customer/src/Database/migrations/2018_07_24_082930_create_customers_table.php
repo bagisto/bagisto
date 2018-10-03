@@ -15,6 +15,8 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('channel_id')->unsigned();
+            $table->foreign('channel_id')->references('id')->on('channels');
             $table->string('first_name');
             $table->string('last_name');
             $table->enum('gender', ['Male', 'Female']);
