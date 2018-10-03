@@ -16,9 +16,9 @@ class CreateCartTable extends Migration
         Schema::create('cart', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('customer_id')->unsigned()->nullable();
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->integer('channel_id')->unsigned();
-            $table->foreign('channel_id')->references('id')->on('channels');
+            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
             $table->string('shipping_method')->nullable();
             $table->string('coupon_code')->nullable();
             $table->boolean('is_gift')->default(0);

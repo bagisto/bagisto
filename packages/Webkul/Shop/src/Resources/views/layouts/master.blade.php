@@ -35,7 +35,7 @@
 
         </div>
 
-        @include('shop::layouts.footer')
+        @include('shop::layouts.footer.footer')
 
     </div>
 

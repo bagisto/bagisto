@@ -1,7 +1,7 @@
 @inject ('reviewHelper', 'Webkul\Product\Product\Review')
 @if ($total = $reviewHelper->getTotalReviews($product))
 
-    <div class="product-ratings">
+    <div class="product-ratings mb-10">
 
         <span class="stars">
             @for ($i = 1; $i <= round($reviewHelper->getAverageRating($product)); $i++)
