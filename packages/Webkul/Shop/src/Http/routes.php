@@ -35,11 +35,6 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.view'
     ])->name('shop.products.index');
 
-    // //Routes for product cart
-    // Route::get('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@index')->defaults('_config', [
-    //     'view' => 'shop::checkout.cart.index'
-    // ])->name('shop.checkout.cart.index');
-
     Route::post('product/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->name('cart.add');
 
     Route::get('product/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->name('cart.remove');

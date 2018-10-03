@@ -84,13 +84,23 @@
 
     .cart-fav-seg {
         display: inline-flex;
+        align-items: center;
 
         .addtocart {
             margin-right: 10px;
             text-transform: uppercase;
             white-space: nowrap;
         }
+
+        .product-card.wishlist-icon {
+            cursor: pointer;
+        }
     }
+}
+
+//wishlist-icon-hover
+.product-card.wishlist-icon:hover {
+    background-image: url('../images/wishadd.svg');
 }
 
 //product page price styles
