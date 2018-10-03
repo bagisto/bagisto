@@ -1,9 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
 @import "variables";
 @import "icons";
 @import "mixins";
-@import "override";
 @import "components";
+@import "override";
 
 //main store front layouting
 .main-container-wrapper {
@@ -179,6 +178,33 @@ section.slider-block {
             }
         }
     }
+}
+
+//responsive css for slider
+@media only screen and (max-width: 770px) {
+
+    section.slider-block {
+
+        div.slider-content {
+
+            div.slider-control {
+                display: flex;
+                justify-content:space-between;
+                bottom: 48%;
+                right: 0%;
+                width:100%;
+
+                .dark-left-icon {
+                   margin-left: 15px;
+                }
+
+                .light-right-icon {
+                   margin-right: 15px;
+                }
+            }
+        }
+    }
+
 }
 
 //header navigation
@@ -460,6 +486,54 @@ section.slider-block {
     }
 }
 
+//header page responsive css start here
+@media only screen and (max-width: 770px) {
+
+    .header {
+
+        .header-top {
+
+            div.left-content {
+
+                ul.search-container {
+                    li.search-group {
+                        display: none;
+                    }
+                }
+            }
+
+            div.right-content {
+                display: none;
+            }
+
+            .right-responsive {
+                display: inherit;
+            }
+        }
+
+
+        .header-bottom {
+            border-bottom: none;
+            display: none;
+
+            .nav > li {
+                float: none;
+                height: 48px;
+                border-bottom: 1px solid $border-color;
+            }
+
+            .nav > li:last-child {
+                float:none;
+            }
+
+            .nav > li:last-child img {
+                margin-left: 10px;
+            }
+        }
+    }
+
+}
+
 //footer responsive with out media query.
 .footer {
     background-color: #f2f2f2;
@@ -540,13 +614,13 @@ section.slider-block {
 
 //category page
 .main {
-    .category-block {
+    .category-container {
         display: flex;
         flex-direction: row;
         width: 100%;
 
         .category-block {
-            width: 100%;
+            width: 80%;
             display: block;
 
             .hero-image {
@@ -1457,6 +1531,44 @@ section.cart {
     }
 }
 // checkout ends here
+
+// checkout responsive start here
+@media only screen and (max-width: 770px) {
+
+    .checkout-process {
+        .col-main {
+            width: 100%;
+            padding-right: 0px;
+
+            ul.checkout-steps{
+                border-bottom: none;
+
+                span {
+                    display: none;
+                }
+
+                .line{
+                    flex-grow: 1;
+                    border-bottom: 1px solid $border-color;
+                    margin-left: 5px;
+                    margin-right: 5px;
+                }
+            }
+        }
+
+        .step-content {
+            .control-group .control {
+                width:100%;
+            }
+        }
+
+        .col-right {
+            display: none;
+        }
+    }
+
+}
+// checkout responsive end here
 
 .attached-products-wrapper {
     margin-bottom: 80px;

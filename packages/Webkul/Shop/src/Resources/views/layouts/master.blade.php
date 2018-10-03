@@ -35,31 +35,6 @@
 
         </div>
 
-        {{--  <div class="search-suggestion">
-
-            <div class="control-group">
-                <span class="icon search-icon"></span>
-                <input type="text" class="control" placeholder="Saress India">
-                <span class="icon icon-menu-back right"></span>
-            </div>
-
-            <div class="suggestion">
-                <span>Designer sarees</span>
-            </div>
-            <div class="suggestion">
-                <span>India patter sarees</span>
-            </div>
-            <div class="suggestion">
-                <span>Border Sarees</span>
-            </div>
-
-        </div>
-
-        <div class="nav-responsive">
-            @include('shop::layouts.header.nav-menu.navmenu')
-        </div>  --}}
-
-
         @include('shop::layouts.footer')
 
     </div>

@@ -133,9 +133,7 @@
 
 </div>
 
-
-
-@push('scripts')
+{{--  @push('scripts')
 
     <script>
 
@@ -184,11 +182,9 @@
                     nav.style.display = 'none';
                     document.body.style.overflow = "scroll";
                 }
-
-
             }
         }
 
     </script>
 
-@endpush
+@endpush  --}}

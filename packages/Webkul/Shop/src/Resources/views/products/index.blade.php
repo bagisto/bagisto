@@ -6,7 +6,7 @@
 
     <div class="main">
 
-        <div class="category-block">
+        <div class="category-container">
             @include ('shop::products.list.layered-navigation')
 
             <div class="category-block">
@@ -53,86 +53,3 @@
     </div>
 
 @stop
-
-
-@push('scripts')
-
-<script>
-
-    window.onload = function() {
-
-        var sort = document.getElementById("sort");
-        var filter = document.getElementById("filter");
-
-        sort.addEventListener("click", filterSort);
-        filter.addEventListener("click", filterSort);
-
-        function filterSort(){
-
-            let className = document.getElementById(this.id).className;
-            var productGrid = document.getElementsByClassName('product-grid max-3-col');
-            var filterLayered = document.getElementsByClassName('layered-filter-wrapper');
-            var sortLimiter = document.getElementsByClassName('reponsive-sorter-limiter');
-
-            if(className === 'icon filter-icon'){
-
-                for(let i=0 ; i < filterLayered.length ; i++){
-                    filterLayered[i].style.display="block";
-                    filterLayered[i].style.padding="20px";
-                    filterLayered[i].style.width="100%";
-
-                }
-
-                for(let i=0 ; i < sortLimiter.length ; i++){
-                    sortLimiter[i].style.display = "none";
-                }
-
-                filter.classList.remove('icon', 'filter-icon');
-                filter.classList.add('icon', 'cross-icon');
-                sort.classList.remove('icon', 'cross-icon');
-                sort.classList.remove('icon', 'sort-icon');
-                sort.classList.add('icon', 'sort-icon');
-
-            }else if(className === 'icon sort-icon'){
-
-                for(let i=0 ; i < filterLayered.length ; i++){
-                    filterLayered[i].style.display="none";
-                }
-                for(let i=0 ; i < sortLimiter.length ; i++){
-                    sortLimiter[i].style.display = "flex";
-                    sortLimiter[i].style.justifyContent = "space-between";
-                    sortLimiter[i].style.marginBottom = "20px";
-                }
-
-                sort.classList.remove('icon', 'sort-icon');
-                sort.classList.add('icon', 'cross-icon');
-                filter.classList.remove('icon', 'cross-icon');
-                filter.classList.remove('icon', 'filter-icon');
-                filter.classList.add('icon', 'filter-icon');
-
-            }else {
-
-                for(let i=0 ; i < productGrid.length ; i++){
-                    productGrid[i].style.display = "grid";
-                }
-                for(let i=0 ; i < filterLayered.length ; i++){
-                    filterLayered[i].style.display="none";
-                }
-                for(let i=0 ; i < sortLimiter.length ; i++){
-                    sortLimiter[i].style.display = "none";
-                }
-
-                sort.classList.remove('icon', 'cross-icon');
-                filter.classList.remove('icon', 'cross-icon');
-                sort.classList.remove('icon', 'sort-icon');
-                filter.classList.remove('icon', 'filter-icon');
-                sort.classList.add('icon', 'sort-icon');
-                filter.classList.add('icon', 'filter-icon');
-            }
-        }
-
-    }
-
-</script>
-
-@endpush

@@ -34,11 +34,8 @@
             @endif
 
             <div class="sort-filter">
-
                 <i class="icon sort-icon" id="sort" ></i>
-
                 <i class="icon filter-icon" id="filter"></i>
-
             </div>
 
         </div>
