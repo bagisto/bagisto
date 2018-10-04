@@ -426,12 +426,12 @@ class Cart {
                         }
 
                         $item->update(['quantity' => $quantity]);
+
+                        $this->collectTotals();
+                        $this->collectQuantities();
                     }
                 }
             }
-
-            $items = $cart->items;
-
             session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
 
             return redirect()->back();

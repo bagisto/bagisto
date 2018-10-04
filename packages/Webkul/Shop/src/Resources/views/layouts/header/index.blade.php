@@ -69,7 +69,8 @@
 
                                     <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
 
-                                    {{-- <li><a href="{{ route('customer.cart') }}">Cart</a></li> --}}
+                                    <li><a href="{{ route('shop.checkout.cart.index') }}">Cart</a></li>
+
                                     <li><a href="{{ route('customer.orders.index') }}">Orders</a></li>
 
                                     <li><a href="{{ route('customer.session.destroy') }}">Logout</a></li>
@@ -90,15 +91,16 @@
                         $cartInstance = session()->get('cart');
                     @endphp
                     <div class="dropdown-toggle">
-
                         <div style="display: inline-block; cursor: pointer;">
-                            <span class="name"><span class="count">  {{$cartInstance->items_count}} Products</span>
+                            @if($cartInstance->items_qty - intval($cartInstance->items_qty) > 0)
+                            <span class="name"><span class="count">  {{ $cartInstance->items_qty }} Products</span>
+                            @else
+                            <span class="name"><span class="count">  {{ intval($cartInstance->items_qty) }} Products</span>
+                            @endif
                         </div>
 
                         <i class="icon arrow-down-icon active"></i>
-
                     </div>
-
                     <div class="dropdown-list" style="display: none; top: 50px; right: 0px">
                         <div class="dropdown-container">
                             <div class="dropdown-cart">
@@ -107,14 +109,20 @@
                                 </div>
 
                                 <div class="dropdown-content">
+
                                     @foreach($cart as $product)
-                                    <div class="item" >
+
+                                    <div class="item">
                                         <div class="item-image" >
                                             <img src="{{$product['2']}}" />
                                         </div>
+
                                         <div class="item-details">
+
                                             <div class="item-name">{{$product['0']}}</div>
+
                                             <div class="item-price">{{$product['1']}}</div>
+
                                             <div class="item-qty">Quantity - {{$product['3']}}</div>
                                         </div>
                                     </div>
@@ -123,6 +131,7 @@
 
                                 <div class="dropdown-footer">
                                     <a href="{{ route('shop.checkout.cart.index') }}">View Shopping Cart</a>
+
                                     <button class="btn btn-primary btn-lg">CHECKOUT</button>
                                 </div>
                             </div>
@@ -131,6 +140,7 @@
                     @else
                     <div class="dropdown-toggle">
                         <div style="display: inline-block; cursor: pointer;">
+
                             <span class="name"><span class="count"> 0 &nbsp;</span>Products</span>
                         </div>
                     </div>
@@ -147,17 +157,10 @@
                         <div class="dropdown-toggle">
 
                             <span class="icon account-icon"></span>
-
-                            {{-- <div style="display: inline-block; cursor: pointer;">
-                                <span class="name">Account</span>
-                            </div>
-                            <i class="icon arrow-down-icon active"></i> --}}
-
                         </div>
 
                         @guest
                             <div class="dropdown-list bottom-right" style="display: none;">
-
                                 <div class="dropdown-container">
 
                                     <label>Account</label>
@@ -167,15 +170,15 @@
 
                                         <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
                                     </ul>
-
                                 </div>
-
                             </div>
                         @endguest
                         @auth('customer')
                             <div class="dropdown-list bottom-right" style="display: none;">
                                 <div class="dropdown-container">
+
                                     <label>Account</label>
+
                                     <ul>
                                         <li><a href="{{ route('customer.account.index') }}">Account</a></li>
 
@@ -185,7 +188,8 @@
 
                                         <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
 
-                                        {{-- <li><a href="{{ route('customer.cart') }}">Cart</a></li> --}}
+                                        <li><a href="{{ route('shop.checkout.cart.index') }}">Cart</a></li>
+
                                         <li><a href="{{ route('customer.orders.index') }}">Orders</a></li>
 
                                         <li><a href="{{ route('customer.session.destroy') }}">Logout</a></li>

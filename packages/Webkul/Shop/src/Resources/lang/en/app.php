@@ -120,9 +120,10 @@ return [
 
         'total' => [
             'order-summary' => 'Order Summary',
-            'sub-total' => 'Sub Total',
+            'sub-total' => 'Items',
             'grand-total' => 'Grand Total',
-            'delivery-charges' => 'Delivery Charges'
+            'delivery-charges' => 'Delivery Charges',
+            'price' => 'price'
         ]
     ]
 ];
