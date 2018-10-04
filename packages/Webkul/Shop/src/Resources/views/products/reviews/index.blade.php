@@ -10,7 +10,7 @@
             <span class="breadcrumb">Home</span> > <span class="breadcrumb">Men</span> > <span class="breadcrumb">Slit Open Jeans</span>
 
         </div>
-        <div class="layouter">
+        <div class="product-layouter">
 
             <div class="mixed-group">
 
@@ -41,6 +41,7 @@
                             10% Off
                         </span>
                     </div>
+
                 </div>
 
             </div>
@@ -113,6 +114,7 @@
                 </div>
 
             </div>
+
         </div>
     </section>
 @endsection

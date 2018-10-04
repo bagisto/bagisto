@@ -175,9 +175,19 @@ body {
                     }
                 }
             }
+
+            .reponsive-sorter-limiter {
+                display: none;
+
+                select {
+                    background: #FFFFFF;
+                    border: 1px solid #C7C7C7;
+                    border-radius: 3px;
+                    color: #242424;
+                    padding: 10px;
+                }
+            }
         }
-
-
     }
 
 }
@@ -194,3 +204,99 @@ body {
 //         grid-template-columns: 47.5% 47.5%;
 //     }
 // }
+
+
+
+//layered filter wrapper styles
+.layered-filter-wrapper {
+    width: 25%;
+    float: left;
+    padding-right: 20px;
+    min-height: 1px;
+
+    .filter-title {
+        border-bottom: 1px solid $border-color;
+        color: $font-color;
+        padding: 10px 0;
+    }
+
+    .filter-attributes {
+        .filter-attributes-item {
+            border-bottom: 1px solid $border-color;
+            padding-bottom: 10px;
+
+            .filter-attributes-title {
+                padding: 10px 40px 0 10px;
+                color: #5E5E5E;
+                cursor: pointer;
+                position: relative;
+
+                .remove-filter-link {
+                    font-weight: 400;
+                    color: $brand-color;
+                    margin-right: 10px;
+                }
+
+                .icon {
+                    background-image: url('../images/arrow-down.svg') !important;
+                    width: 10px;
+                    height: 10px;
+                    position: absolute;
+                    right: 15px;
+                    top: 14px;
+                }
+            }
+
+            .filter-attributes-content {
+                padding: 10px;
+                display: none;
+
+                ol.items {
+                    padding: 0;
+                    margin: 0;
+                    list-style: none none;
+
+                    li.item {
+                        padding: 8px 0;
+                        color: #5E5E5E;
+
+                        .checkbox {
+                            margin: 0;
+
+                            .checkbox-view {
+                                height: 16px;
+                                width: 16px;
+                                background-image: url("../images/checkbox.svg");
+                            }
+
+                            input:checked + .checkbox-view {
+                                background-image: url("../images/checkbox-checked.svg");
+                            }
+                        }
+                    }
+                }
+
+                .price-range-wrapper {
+                    margin-top: 21px;
+                }
+            }
+
+            &.active {
+                .filter-attributes-content {
+                    display: block;
+                }
+
+                .filter-attributes-title .icon {
+                    background-image: url('../images//arrow-up.svg') !important;
+                }
+            }
+        }
+    }
+}
+
+.responsive-layred-filter {
+    @extend .layered-filter-wrapper;
+    width: 100%;
+    float: none;
+    padding-right: 0px;
+}

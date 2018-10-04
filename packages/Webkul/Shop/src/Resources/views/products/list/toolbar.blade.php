@@ -77,7 +77,7 @@
 </div>
 
 
-<div class="reponsive-sorter-limiter">
+<div class="reponsive-sorter-limiter mb-20">
 
     <div class="sorter">
         <label>{{ __('shop::app.products.sort-by') }}</label>
@@ -111,6 +111,10 @@
         </select>
     </div>
 
+</div>
+
+<div class="responsive-layred-filter mb-20">
+    <layered-navigation></layered-navigation>
 </div>
 
 

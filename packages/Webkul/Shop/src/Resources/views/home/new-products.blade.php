@@ -4,7 +4,7 @@
         <span class="featured-seperator" style="color:lightgrey;">_____</span>
     </div>
 
-    <div class="new-product-grid product-grid-4">
+    <div class="product-grid-4">
         <div class="product-card">
             <div class="product-image">
                 <img src="vendor/webkul/shop/assets/images/new.png" />
@@ -21,7 +21,7 @@
                 </span>
             </div>
             <div class="cart-fav-seg">
-                <button class="btn btn-lg btn-primary addtocart">Add to Cart</button>
+                <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
                 <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     </span>
             </div>
             <div class="cart-fav-seg">
-                <button class="btn btn-lg btn-primary addtocart">Add to Cart</button>
+                <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
                 <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
             </div>
         </div>
@@ -63,7 +63,7 @@
                     </span>
             </div>
             <div class="cart-fav-seg">
-                <button class="btn btn-lg btn-primary addtocart">Add to Cart</button>
+                <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
                 <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
             </div>
         </div>
@@ -84,7 +84,7 @@
                     </span>
             </div>
             <div class="cart-fav-seg">
-                <button class="btn btn-lg btn-primary addtocart">Add to Cart</button>
+                <button class="btn btn-md btn-primary addtocart">Add to Cart</button>
                 <span><img src="vendor/webkul/shop/assets/images/wishadd.svg" /></span>
             </div>
         </div>
