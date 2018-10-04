@@ -48,21 +48,28 @@
                                         @if ($product->type == 'configurable')
 
                                             <div class="summary">
+                                                {{-- @foreach (cart::getItemAttributeOptionDetails($item) as $key => $option)
 
                                                 {{ Cart::getItemAttributeOptionDetails($item)['html'] }}
 
+                                                @endforeach --}}
                                             </div>
                                         @endif
 
-                                        <div class="misc" :class="[errors.has('quantity') ? 'has-error' : '']">
-                                            <div class="qty-text">{{ __('shop::app.checkout.cart.quantity') }}</div>
+                                        <div class="misc">
+                                            <div class="qty-text" :class="[errors.has('qty') ? 'has-error' : '']">{{ __('shop::app.checkout.cart.quantity.quantity') }}</div>
+
                                             {{-- <div class="box">{{ $item->quantity }}</div> --}}
                                             <input class="box" type="text" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}">
-                                            <span class="control-error" v-if="errors.has('qty[{{$item->qty}}]')">@{{ errors.first('quantity') }}</span>
+
+                                            <span class="control-error" v-if="errors.has('qty[{{$item->id}}]')">@{{ errors.first('qty') }}</span>
+
                                             {{-- @if($product->type == 'configurable')
-                                                <span class="remove"><a href="{{ route('shop.checkout.cart.remove', $item->child->id) }}">{{ __('shop::app.checkout.cart.remove') }}</a></span>
+                                            <span class="remove"><a href="{{ route('shop.checkout.cart.remove', $item->child->id) }}">{{ __('shop::app.checkout.cart.remove') }}</a></span>
                                             @else --}}
-                                                <span class="remove"><a href="{{ route('shop.checkout.cart.remove', $item->id) }}">{{ __('shop::app.checkout.cart.remove') }}</a></span>
+
+                                            <span class="remove"><a href="{{ route('shop.checkout.cart.remove', $item->id) }}">{{ __('shop::app.checkout.cart.remove') }}</a></span>
+
                                             {{-- @endif --}}
                                             <span class="towishlist">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</span>
                                         </div>

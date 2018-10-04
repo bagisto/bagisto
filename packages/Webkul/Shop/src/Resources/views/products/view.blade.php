@@ -78,35 +78,3 @@
 
 @endsection
 
-
-@push('scripts')
-
-    <script>
-
-        window.onscroll = function() {scrollFunction()};
-
-
-
-        function scrollFunction() {
-
-            var scrollTop = window.pageYOffset
-
-            var elems = document.getElementById("header-bottom");
-
-            if(scrollTop > 200){
-
-                elems.style.display = "none";
-
-            }else {
-                elems.style.display = "block";
-            }
-
-
-        }
-
-    </script>
-
-@endpush
-
-
-

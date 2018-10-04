@@ -1,4 +1,4 @@
-<div class="cart-fav-seg">
+<div class="add-to-buttons">
 
     @include ('shop::products.add-to-cart', ['product' => $product])
 
