@@ -76,16 +76,11 @@ class CartController extends Controller
     }
 
     /**
-     * Method to populate
-     * the cart page which
-     * will be populated
-     * before the checkout
-     * process.
+     * Method to populate the cart page which will be populated before the checkout process.
      *
      * @return Mixed
      */
     public function index() {
-        // dd(Cart::getCart());
         return view($this->_config['view'])->with('cart', Cart::getCart());
     }
 
@@ -126,6 +121,14 @@ class CartController extends Controller
     public function updateBeforeCheckout() {
         $data = request()->except('_token');
 
+        foreach($data['qty'] as $id => $quantity) {
+            // dd($id, $quantity);
+            if($quantity <= 0) {
+                session()->flash('warning', trans('shop::app.checkout.cart.quantity.illegal'));
+
+                return redirect()->back();
+            }
+        }
         Cart::update($data);
 
         return redirect()->back();
