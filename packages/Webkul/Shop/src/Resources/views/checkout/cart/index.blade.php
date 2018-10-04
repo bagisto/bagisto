@@ -27,7 +27,6 @@
 
                                 <?php
                                     $product = $item->product;
-
                                     $productBaseImage = $productImageHelper->getProductBaseImage($product);
                                 ?>
 
