@@ -10,9 +10,22 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.index'
     ]);
 
-    Route::get('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@index')->defaults('_config', [
+    Route::get('checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@index')->defaults('_config', [
         'view' => 'shop::checkout.cart.index'
     ])->name('shop.checkout.cart.index');
+
+    Route::post('checkout/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->name('cart.add');
+
+    Route::get('checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->name('cart.remove');
+
+    Route::post('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@updateBeforeCheckout')->defaults('_config',[
+        'redirect' => 'shop.checkout.cart.index'
+    ])->name('shop.checkout.cart.update');
+
+    Route::get('/checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->defaults('_config',[
+        'redirect' => 'shop.checkout.cart.index'
+    ])->name('shop.checkout.cart.remove');
+    //Routes for product cart ends
 
     Route::get('/checkout/onepage', 'Webkul\Shop\Http\Controllers\OnepageController@index')->defaults('_config', [
         'view' => 'shop::checkout.onepage'
@@ -30,10 +43,6 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::checkout.success'
     ])->name('shop.checkout.success');
 
-    Route::get('test', 'Webkul\Shop\Http\Controllers\CartController@test');
-
-    Route::get('mtest', 'Webkul\Shop\Http\Controllers\CartController@mergeTest');
-
     //dummy
     Route::get('test', 'Webkul\Shop\Http\Controllers\CartController@test');
 
@@ -41,18 +50,6 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.view'
     ])->name('shop.products.index');
 
-    Route::post('product/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->name('cart.add');
-
-    Route::get('product/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->name('cart.remove');
-
-    Route::post('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@updateBeforeCheckout')->defaults('_config',[
-        'redirect' => 'shop.checkout.cart.index'
-    ])->name('shop.checkout.cart.update');
-
-    Route::get('/checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->defaults('_config',[
-        'redirect' => 'shop.checkout.cart.index'
-    ])->name('shop.checkout.cart.remove');
-    //Routes for product cart ends
 
     // Product Review routes
     Route::get('/reviews/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@show')->defaults('_config', [

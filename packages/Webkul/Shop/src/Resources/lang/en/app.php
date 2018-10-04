@@ -1,10 +1,6 @@
 <?php
 
 return [
-    'common' => [
-        'error' => 'Something went wrong, please contact us or try again later.'
-    ],
-
     'customer' => [
         'signup-text' => [
             'account_exists' => 'Already have an account',
@@ -64,21 +60,28 @@ return [
 
     'checkout' => [
         'cart' => [
+            'integrity' => [
+                'missing_fields' =>'Cart System Integrity Violation, Some Required Fields Missing',
+                'missing_options' =>'Cart System Integrity Violation, Configurable product\'s options are missing',
+
+            ],
             'title' => 'Shopping Cart',
             'empty' => 'Shopping Cart Is Empty',
             'continue-shopping' => 'Continue Shopping',
             'proceed-to-checkout' => 'Proceed To Checkout',
-            'quantity' => 'Quantity',
             'remove' => 'Remove',
             'move-to-wishlist' => 'Move to Wishlist',
             'quantity' => [
                 'quantity' => 'Quantity',
-                'illegal' => 'Quantity cannot be lesser than one.'
+                'success' => 'Quantity successfully updated',
+                'illegal' => 'Quantity cannot be lesser than one',
+                'inventory_warning' => 'The requested quantity is not available, please try again later'
             ],
-            'remove' => [
-                'cannot' => 'No items to remove from the cart',
-                'success' => 'Item successfully removed from the cart',
-                'error' => 'Cannot remove item from cart'
+            'item' => [
+                'error_remove' => 'No items to remove from the cart',
+                'success' => 'Item successfully added to cart',
+                'success_remove' => 'Item removed successfully',
+                'error_add' => 'Item cannot be added to cart',
             ]
         ],
 

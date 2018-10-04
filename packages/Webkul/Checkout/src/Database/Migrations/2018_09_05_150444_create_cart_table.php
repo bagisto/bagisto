@@ -27,8 +27,8 @@ class CreateCartTable extends Migration
             $table->decimal('exchange_rate', 12, 4)->nullable();
             $table->string('global_currency_code')->nullable();
             $table->string('base_currency_code')->nullable();
-            $table->string('store_currency_code')->nullable();
-            $table->string('quote_currency_code')->nullable();
+            $table->string('channel_currency_code')->nullable();
+            $table->string('cart_currency_code')->nullable();
             $table->decimal('grand_total', 12, 4)->default(0)->nullable();
             $table->decimal('base_grand_total', 12, 4)->default(0)->nullable();
             $table->decimal('sub_total', 12, 4)->default(0)->nullable();
@@ -38,7 +38,9 @@ class CreateCartTable extends Migration
             $table->string('checkout_method')->nullable();
             $table->boolean('is_guest')->nullable();
             $table->boolean('is_active')->nullable()->default(0);
-            $table->string('customer_full_name')->nullable();
+            $table->string('customer_first_name')->nullable();
+            $table->string('customer_last_name')->nullable();
+            $table->string('customer_email')->nullable();
             $table->dateTime('conversion_time')->nullable();
             $table->timestamps();
         });
