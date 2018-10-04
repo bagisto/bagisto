@@ -504,13 +504,20 @@ class Cart {
     {
         $data = [];
 
+        $labels = [];
+
         foreach($item->product->super_attributes as $attribute) {
-            $option = $attribute->options()->where('id', $item->child->{$attribute->code})->first();
+            $option = $attribute->options()->where('id', $item->child->product->{$attribute->code})->first();
+
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name,
                 'option_label' => $option->label,
             ];
+
+            $labels[] = $attribute->name . ' : ' . $option->label;
         }
+
+        $data['html'] = implode(', ', $labels);
 
         return $data;
     }
