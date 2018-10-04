@@ -21,8 +21,6 @@
 
     <div id="app">
 
-        <flash-wrapper ref='flashes'></flash-wrapper>
-
         <div class="main-container-wrapper">
 
             @include('shop::layouts.header.index')

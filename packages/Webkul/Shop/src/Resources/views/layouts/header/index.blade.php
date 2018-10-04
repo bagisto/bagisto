@@ -151,7 +151,6 @@
                             {{-- <div style="display: inline-block; cursor: pointer;">
                                 <span class="name">Account</span>
                             </div>
-
                             <i class="icon arrow-down-icon active"></i> --}}
 
                         </div>
@@ -258,3 +257,59 @@
     </div>
 
 </div>
+
+{{--  @push('scripts')
+
+    <script>
+
+        window.onload = function() {
+
+            var hamMenu = document.getElementById("hammenu");
+            var search = document.getElementById("search");
+            var searchSuggestion = document.getElementsByClassName('search-suggestion')[0];
+            var headerBottom = document.getElementsByClassName('header-bottom')[0];
+            var nav= document.getElementsByClassName('nav-responsive')[0];
+
+            search.addEventListener("click", header);
+            hamMenu.addEventListener("click", header);
+
+            window.addEventListener('scroll', function() {
+                if(window.pageYOffset > 70){
+                    headerBottom.style.visibility = "hidden";
+
+                }else{
+                    headerBottom.style.visibility = "visible";
+                }
+            });
+
+            function header(){
+
+                var className = document.getElementById(this.id).className;
+
+                if(className === 'icon search-icon' ){
+                    search.classList.remove("search-icon");
+                    search.classList.add("cross-icon");
+                    searchSuggestion.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                    nav.style.display = 'none';
+                }else if(className === 'icon sortable-icon'){
+                    hamMenu.classList.remove("sortable-icon");
+                    hamMenu.classList.add("cross-icon");
+                    searchSuggestion.style.display = 'none';
+                    nav.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }else{
+                    search.classList.remove("cross-icon");
+                    search.classList.add("search-icon");
+                    hamMenu.classList.remove("cross-icon");
+                    hamMenu.classList.add("sortable-icon");
+                    searchSuggestion.style.display = 'none';
+                    nav.style.display = 'none';
+                    document.body.style.overflow = "scroll";
+                }
+            }
+        }
+
+    </script>
+
+@endpush  --}}

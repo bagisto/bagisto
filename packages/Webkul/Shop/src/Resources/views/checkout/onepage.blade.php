@@ -22,17 +22,23 @@
                         <div class="decorator address-info"></div>
                         <span>{{ __('shop::app.checkout.onepage.information') }}</span>
                     </li>
-                    
+
+                    <div class="line mb-25"></div>
+
                     <li :class="[currentStep == 2 || completedStep > 1 ? 'active' : '', completedStep > 1 ? 'completed' : '']" @click="navigateToStep(2)">
                         <div class="decorator shipping"></div>
                         <span>{{ __('shop::app.checkout.onepage.shipping') }}</span>
                     </li>
-                    
+
+                    <div class="line mb-25"></div>
+
                     <li :class="[currentStep == 3 || completedStep > 2 ? 'active' : '', completedStep > 2 ? 'completed' : '']" @click="navigateToStep(3)">
                         <div class="decorator payment"></div>
                         <span>{{ __('shop::app.checkout.onepage.payment') }}</span>
                     </li>
-                    
+
+                    <div class="line mb-25"></div>
+
                     <li :class="[currentStep == 4 ? 'active' : '']">
                         <div class="decorator review"></div>
                         <span>{{ __('shop::app.checkout.onepage.complete') }}</span>

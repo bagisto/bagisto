@@ -34,11 +34,8 @@
             @endif
 
             <div class="sort-filter">
-
                 <i class="icon sort-icon" id="sort" ></i>
-
                 <i class="icon filter-icon" id="filter"></i>
-
             </div>
 
         </div>
@@ -80,7 +77,7 @@
 </div>
 
 
-<div class="reponsive-sorter-limiter">
+<div class="reponsive-sorter-limiter mb-20">
 
     <div class="sorter">
         <label>{{ __('shop::app.products.sort-by') }}</label>
@@ -115,3 +112,9 @@
     </div>
 
 </div>
+
+<div class="responsive-layred-filter mb-20">
+    <layered-navigation></layered-navigation>
+</div>
+
+

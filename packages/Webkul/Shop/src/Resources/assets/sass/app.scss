@@ -1,9 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
 @import "variables";
 @import "icons";
 @import "mixins";
-@import "override";
 @import "components";
+@import "override";
 
 //main store front layouting
 .main-container-wrapper {
@@ -179,6 +178,33 @@ section.slider-block {
             }
         }
     }
+}
+
+//responsive css for slider
+@media only screen and (max-width: 770px) {
+
+    section.slider-block {
+
+        div.slider-content {
+
+            div.slider-control {
+                display: flex;
+                justify-content:space-between;
+                bottom: 48%;
+                right: 0%;
+                width:100%;
+
+                .dark-left-icon {
+                   margin-left: 15px;
+                }
+
+                .light-right-icon {
+                   margin-right: 15px;
+                }
+            }
+        }
+    }
+
 }
 
 //header navigation
@@ -638,13 +664,13 @@ section.slider-block {
 
 //category page
 .main {
-    .category-block {
+    .category-container {
         display: flex;
         flex-direction: row;
         width: 100%;
 
         .category-block {
-            width: 100%;
+            width: 80%;
             display: block;
 
             .hero-image {
@@ -724,6 +750,10 @@ section.slider-block {
     }
 
     .reponsive-sorter-limiter {
+        display: none;
+    }
+
+    .responsive-layred-filter{
         display: none;
     }
 
@@ -1556,6 +1586,44 @@ section.cart {
 }
 // checkout ends here
 
+// checkout responsive start here
+@media only screen and (max-width: 770px) {
+
+    .checkout-process {
+        .col-main {
+            width: 100%;
+            padding-right: 0px;
+
+            ul.checkout-steps{
+                border-bottom: none;
+
+                span {
+                    display: none;
+                }
+
+                .line{
+                    flex-grow: 1;
+                    border-bottom: 1px solid $border-color;
+                    margin-left: 5px;
+                    margin-right: 5px;
+                }
+            }
+        }
+
+        .step-content {
+            .control-group .control {
+                width:100%;
+            }
+        }
+
+        .col-right {
+            display: none;
+        }
+    }
+
+}
+// checkout responsive end here
+
 .attached-products-wrapper {
     margin-bottom: 80px;
 
@@ -1752,7 +1820,6 @@ section.review {
 }
 // review page end here
 
-
 // customer section css start here
 .cusomer-section {
     margin-left: 50px;
@@ -1802,3 +1869,4 @@ section.review {
     }
 }
 // customer section css end here
+

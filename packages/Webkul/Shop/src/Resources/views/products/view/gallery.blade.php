@@ -30,7 +30,7 @@
 
             <div class="product-hero-image" id="product-hero-image">
 
-                <img :src="currentLargeImageUrl" />
+                <img :src="currentLargeImageUrl" id="pro-img"/>
 
                 <div class="icon whishlist-icon"> </div>
 
