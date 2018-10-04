@@ -47,6 +47,14 @@ class Order extends Model implements OrderContract
     }
 
     /**
+     * Get the payment for the order.
+     */
+    public function payment()
+    {
+        return $this->hasMany(OrderPaymentProxy::modelClass());
+    }
+
+    /**
      * Get the biling address for the order.
      */
     public function billing_address()

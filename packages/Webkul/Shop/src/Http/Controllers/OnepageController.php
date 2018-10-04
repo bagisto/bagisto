@@ -9,6 +9,7 @@ use Webkul\Checkout\Facades\Cart;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Checkout\Http\Requests\CustomerAddressForm;
+use Webkul\Sales\Repositories\OrderRepository;
 
 /**
  * Chekout controller for the customer and guest for placing order
@@ -19,6 +20,13 @@ use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 class OnepageController extends Controller
 {
     /**
+     * OrderRepository object
+     *
+     * @var array
+     */
+    protected $orderRepository;
+
+    /**
      * Contains route related configuration
      *
      * @var array
@@ -28,10 +36,13 @@ class OnepageController extends Controller
     /**
      * Create a new controller instance.
      *
+     * @param  Webkul\Attribute\Repositories\OrderRepository  $orderRepository
      * @return void
      */
-    public function __construct()
+    public function __construct(OrderRepository $orderRepository)
     {
+        $this->orderRepository = $orderRepository;
+
         $this->_config = request('_config');
     }
 
@@ -97,5 +108,47 @@ class OnepageController extends Controller
                 'jump_to_section' => 'review',
                 'html' => view('shop::checkout.onepage.review', compact('cart'))->render()
             ]);
+    }
+
+    /**
+     * Saves order.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function saveOrder()
+    {
+        Cart::collectTotals();
+
+        $this->validateOrder();
+
+        $order = $this->orderRepository->create([]);
+
+        session()->flash('order', $order);
+
+        return response()->json([
+                'success' => true
+            ]);
+    }
+
+    /**
+     * Order success page
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function success()
+    {
+        if(!$order = session('order'))
+            return redirect()->route('shop.checkout.cart.index');
+
+        return view($this->_config['view'], compact('order'));
+    }
+
+    /**
+     * Validate order before creation
+     *
+     * @return mixed
+     */
+    public function validateOrder()
+    {
     }
 }
