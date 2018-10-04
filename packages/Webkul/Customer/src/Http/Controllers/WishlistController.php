@@ -60,7 +60,7 @@ class WishlistController extends Controller
      *
      * @param integer $itemId
      */
-    public function add() {
+    public function add($itemId) {
         dd('adding item to wishlist');
     }
 

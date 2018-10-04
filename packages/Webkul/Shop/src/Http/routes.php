@@ -10,6 +10,7 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::products.index'
     ]);
 
+    //checkout and cart
     Route::get('checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@index')->defaults('_config', [
         'view' => 'shop::checkout.cart.index'
     ])->name('shop.checkout.cart.index');
@@ -25,7 +26,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->defaults('_config',[
         'redirect' => 'shop.checkout.cart.index'
     ])->name('shop.checkout.cart.remove');
-    //Routes for product cart ends
 
     Route::get('/checkout/onepage', 'Webkul\Shop\Http\Controllers\OnepageController@index')->defaults('_config', [
         'view' => 'shop::checkout.onepage'
@@ -98,6 +98,11 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'customer.session.index'
             ])->name('customer.session.destroy');
 
+            //wishlist
+            Route::get('wishlist/add/{id}', 'Webkul\Customer\Http\Controllers\WishlistController@add')->name('customer.wishlist.add');
+
+            Route::get('wishlist/remove/{id}', 'Webkul\Customer\Http\Controllers\WishlistController@remove')->name('customer.wishlist.remove');
+
             //customer account
             Route::prefix('account')->group(function () {
 
@@ -119,12 +124,9 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@edit')->defaults('_config', [
                     'view' => 'shop::customers.account.profile.edit'
                 ])->name('customer.profile.edit');
-
                 /*  Profile Routes Ends Here  */
 
-
                 /*    Routes for Addresses   */
-
                 Route::get('address/index', 'Webkul\Customer\Http\Controllers\AddressController@index')->defaults('_config', [
                     'view' => 'shop::customers.account.address.address'
                 ])->name('customer.address.index');
@@ -162,7 +164,6 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('reviews', 'Webkul\Customer\Http\Controllers\CustomerController@reviews')->defaults('_config', [
                     'view' => 'shop::customers.account.reviews.reviews'
                 ])->name('customer.reviews.index');
-
             });
         });
     });

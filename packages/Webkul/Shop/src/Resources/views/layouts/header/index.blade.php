@@ -83,49 +83,75 @@
                 </li>
             </ul>
             <ul class="cart-dropdown-container">
+                <?php
+                    $cart = cart()->getCart();
+                ?>
+                @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
 
                 <li class="cart-dropdown">
                     <span class="icon cart-icon"></span>
                     @if(isset($cart) && session()->has('cart'))
                     @php
-                        $cartInstance = session()->get('cart');
+                        $items = $cart->items;
                     @endphp
                     <div class="dropdown-toggle">
                         <div style="display: inline-block; cursor: pointer;">
-                            @if($cartInstance->items_qty - intval($cartInstance->items_qty) > 0)
-                            <span class="name"><span class="count">  {{ $cartInstance->items_qty }} Products</span>
+                            @if($cart->items_qty - intval($cart->items_qty) > 0)
+                            <span class="name"><span class="count">  {{ $cart->items_qty }} Products</span>
                             @else
-                            <span class="name"><span class="count">  {{ intval($cartInstance->items_qty) }} Products</span>
+                            <span class="name"><span class="count">  {{ intval($cart->items_qty) }} Products</span>
                             @endif
                         </div>
 
                         <i class="icon arrow-down-icon active"></i>
+
                     </div>
                     <div class="dropdown-list" style="display: none; top: 50px; right: 0px">
                         <div class="dropdown-container">
                             <div class="dropdown-cart">
                                 <div class="dropdown-header">
-                                    <p class="heading">Cart Subtotal - {{ $cartInstance->sub_total }}</p>
+                                    <p class="heading">Cart Subtotal - {{ $cart->sub_total }}</p>
                                 </div>
 
                                 <div class="dropdown-content">
+                                    @foreach($items as $item)
+                                        @if($item->type == "configurable")
+                                        <div class="item">
+                                            <div class="item-image" >
+                                                @php
+                                                    $images = $productImageHelper->getProductBaseImage($item->child->product);
+                                                @endphp
+                                                <img src="{{ $images['small_image_url'] }}" />
+                                            </div>
 
-                                    @foreach($cart as $product)
+                                            <div class="item-details">
 
-                                    <div class="item">
-                                        <div class="item-image" >
-                                            <img src="{{$product['2']}}" />
+                                                <div class="item-name">{{ $item->child->name }}</div>
+
+                                                <div class="item-price">{{ $item->total }}</div>
+
+                                                <div class="item-qty">Quantity - {{ $item->quantity }}</div>
+                                            </div>
                                         </div>
+                                        @else
+                                        <div class="item">
+                                            <div class="item-image" >
+                                                @php
+                                                    $images = $productImageHelper->getProductBaseImage($item->product);
+                                                @endphp
+                                                <img src="{{ $images['small_image_url'] }}" />
+                                            </div>
 
-                                        <div class="item-details">
+                                            <div class="item-details">
 
-                                            <div class="item-name">{{$product['0']}}</div>
+                                                <div class="item-name">{{ $item->name }}</div>
 
-                                            <div class="item-price">{{$product['1']}}</div>
+                                                <div class="item-price">{{ $item->total }}</div>
 
-                                            <div class="item-qty">Quantity - {{$product['3']}}</div>
+                                                <div class="item-qty">Quantity - {{ $item->quantity }}</div>
+                                            </div>
                                         </div>
-                                    </div>
+                                        @endif
                                     @endforeach
                                 </div>
 
@@ -206,7 +232,7 @@
                     <li class="cart-dropdown">
                         @if(isset($cart) && session()->has('cart'))
                         @php
-                            $cartInstance = session()->get('cart');
+                            $cart = session()->get('cart');
                         @endphp
                         <div class="dropdown-toggle">
                             <span class="icon cart-icon"></span>
@@ -216,7 +242,7 @@
                             <div class="dropdown-container">
                                 <div class="dropdown-cart">
                                     <div class="dropdown-header">
-                                        <p class="heading">Cart Subtotal - {{ $cartInstance->sub_total }}</p>
+                                        <p class="heading">Cart Subtotal - {{ $cart->sub_total }}</p>
                                     </div>
 
                                     <div class="dropdown-content">

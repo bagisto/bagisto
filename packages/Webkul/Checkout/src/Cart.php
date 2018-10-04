@@ -96,7 +96,7 @@ class Cart {
 
         unset($data['_token']);
 
-        //Check if the product is salable
+        //Check if the product is saleable
         if(!isset($data['product']) ||!isset($data['quantity'])) {
             session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_fields'));
 
@@ -171,7 +171,7 @@ class Cart {
 
         $cartData['channel_id'] = core()->getCurrentChannel()->id;
 
-        // this will auto set the customer id for the cart instances if customer is authenticated
+        //auth user details else they will be set when the customer is guest
         if(auth()->guard('customer')->check()) {
             $cartData['customer_id'] = auth()->guard('customer')->user()->id;
 
@@ -191,7 +191,7 @@ class Cart {
         if($cart = $this->cart->create($cartData)) {
             $itemData['parent']['cart_id'] = $cart->id;
 
-            if ($data['is_configurable'] == "true") {
+            if ($this->product->find($id)->type == "configurable") {
                 //parent item entry
                 $itemData['parent']['additional'] = json_encode($data);
                 if($parent = $this->cartItem->create($itemData['parent'])) {
@@ -211,7 +211,7 @@ class Cart {
                         return redirect()->back();
                     }
                 }
-            } else if($data['is_configurable'] == "false") {
+            } else if($this->product->find($id)->type != "configurable") {
                 if($result = $this->cartItem->create($itemData['parent'])) {
                     session()->put('cart', $cart);
 
@@ -294,13 +294,13 @@ class Cart {
         $itemData = $this->prepareItemData($id, $data);
 
         if(session()->has('cart')) {
-            $cart = session()->get('cart');
+            $cart = $this->getCart();
 
             $cartItems = $cart->items()->get();
 
             if(isset($cartItems)) {
                 foreach($cartItems as $cartItem) {
-                    if($data['is_configurable'] == "false") {
+                    if($this->product->find($id)->type == "simple") {
 
                         if($cartItem->product_id == $id) {
                             $prevQty = $cartItem->quantity;
@@ -328,7 +328,7 @@ class Cart {
 
                             return redirect()->back();
                         }
-                    } else if($data['is_configurable'] == "true") {
+                    } else if($this->product->find($id)->type == "configurable") {
                         if($cartItem->type == "configurable") {
                             $temp = $this->cartItem->findOneByField('parent_id', $cartItem->id);
                             if($temp->product_id == $data['selected_configurable_option']) {
@@ -366,7 +366,7 @@ class Cart {
                     }
                 }
 
-                if($data['is_configurable'] == "true") {
+                if($this->product->find($id)->type == "configurable") {
                     $parent = $cart->items()->create($itemData['parent']);
 
                     $itemData['child']['parent_id'] = $parent->id;
@@ -374,7 +374,7 @@ class Cart {
                     // $this->canAddOrUpdate($parent->child->id, $parent->quantity);
 
                     $cart->items()->create($itemData['child']);
-                } else if($data['is_configurable'] == "false"){
+                } else if($this->product->find($id)->type != "configurable"){
                     // $this->canAddOrUpdate($parent->id, $parent->quantity);
 
                     $parent = $cart->items()->create($itemData['parent']);
@@ -406,7 +406,7 @@ class Cart {
     public function update($itemIds)
     {
         if(session()->has('cart')) {
-            $cart = session()->get('cart');
+            $cart = $this->getCart();
 
             $items = $cart->items;
 
@@ -446,7 +446,7 @@ class Cart {
     public function removeItem($itemId)
     {
         if(session()->has('cart')) {
-            $cart = session()->get('cart');
+            $cart = $this->getCart();
 
             $items = $cart->items;
 
@@ -666,10 +666,10 @@ class Cart {
         if(session()->has('cart')) {
             $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
 
-            $guestCart = session()->get('cart');
+            $guestCart = $this->getCart();
 
             if(!isset($cart)) {
-                $guestCart->update(['customer_id' => auth()->guard('customer')->user()->id]);
+                $guestCart->update(['customer_id' => auth()->guard('customer')->user()->id, 'is_guest' => 0]);
 
                 session()->forget('cart');
 

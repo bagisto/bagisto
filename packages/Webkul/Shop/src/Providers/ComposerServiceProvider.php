@@ -5,6 +5,7 @@ namespace Webkul\Shop\Providers;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Webkul\Product\Product\ProductImage;
 use View;
 
 class ComposerServiceProvider extends ServiceProvider
