@@ -1,4 +1,50 @@
 // product card, requires no changes for responsiveness.
+.product-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-column-gap: 40px;
+    grid-row-gap: 15px;
+    grid-auto-rows: auto;
+}
+
+.product-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+    grid-column-gap: 27px;
+    grid-row-gap: 15px;
+    grid-auto-rows: auto;
+}
+
+@media only screen and (max-width: 854px) {
+    .product-grid-4 {
+        grid-template-columns: 29.5% 29.5% 29.5%;
+        grid-column-gap: 35px;
+
+    }
+}
+
+@media only screen and (max-width: 653px) {
+    .product-grid-4 {
+        grid-template-columns: 48.5% 48.5%;
+        grid-column-gap: 17px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .product-card {
+        font-size: 90%;
+
+        .btn.btn-md {
+            padding: 5px;
+        }
+    }
+
+    .product-grid-4 {
+        grid-template-columns: 48.5% 48.5%;
+        grid-column-gap: 10px;
+    }
+}
+
 .product-card {
 
     .product-image {
@@ -24,34 +70,144 @@
     }
 
     .product-description {
-        margin-bottom: 14px;
         display: none;
     }
 
     .product-ratings {
         width: 100%;
-        margin-bottom: 14px;
 
         .icon {
             width: 16px;
             height: 16px;
         }
-
-        .total-reviews {
-            display: none;
-        }
     }
 
     .cart-fav-seg {
         display: inline-flex;
-        width: 100%;
         align-items: center;
 
         .addtocart {
-            border-radius: 0px;
             margin-right: 10px;
             text-transform: uppercase;
             white-space: nowrap;
+        }
+
+        .product-card.wishlist-icon {
+            cursor: pointer;
+        }
+    }
+}
+
+//wishlist-icon-hover
+.product-card.wishlist-icon:hover {
+    background-image: url('../images/wishadd.svg');
+}
+
+//product page price styles
+.product-price {
+    margin-bottom: 14px;
+    width: 100%;
+    font-weight: 600;
+
+    .price-label {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .regular-price {
+        color: #A5A5A5;
+        text-decoration: line-through;
+        margin-right: 10px;
+    }
+
+    .special-price {
+        color: #FF6472;
+    }
+}
+
+//layered filter wrapper styles
+.layered-filter-wrapper {
+    width: 25%;
+    float: left;
+    padding-right: 20px;
+    min-height: 1px;
+
+    .filter-title {
+        border-bottom: 1px solid $border-color;
+        color: $font-color;
+        padding: 10px 0;
+    }
+
+    .filter-attributes {
+        .filter-attributes-item {
+            border-bottom: 1px solid $border-color;
+            padding-bottom: 10px;
+
+            .filter-attributes-title {
+                padding: 10px 40px 0 10px;
+                color: #5E5E5E;
+                cursor: pointer;
+                position: relative;
+
+                .remove-filter-link {
+                    font-weight: 400;
+                    color: $brand-color;
+                    margin-right: 10px;
+                }
+
+                .icon {
+                    background-image: url('../images/arrow-down.svg') !important;
+                    width: 10px;
+                    height: 10px;
+                    position: absolute;
+                    right: 15px;
+                    top: 14px;
+                }
+            }
+
+            .filter-attributes-content {
+                padding: 10px;
+                display: none;
+
+                ol.items {
+                    padding: 0;
+                    margin: 0;
+                    list-style: none none;
+
+                    li.item {
+                        padding: 8px 0;
+                        color: #5E5E5E;
+
+                        .checkbox {
+                            margin: 0;
+
+                            .checkbox-view {
+                                height: 16px;
+                                width: 16px;
+                                background-image: url("../images/checkbox.svg");
+                            }
+
+                            input:checked + .checkbox-view {
+                                background-image: url("../images/checkbox-checked.svg");
+                            }
+                        }
+                    }
+                }
+
+                .price-range-wrapper {
+                    margin-top: 21px;
+                }
+            }
+
+            &.active {
+                .filter-attributes-content {
+                    display: block;
+                }
+
+                .filter-attributes-title .icon {
+                    background-image: url('../images//arrow-up.svg') !important;
+                }
+            }
         }
     }
 }

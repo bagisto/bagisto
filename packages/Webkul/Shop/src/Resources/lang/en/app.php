@@ -70,7 +70,16 @@ return [
             'proceed-to-checkout' => 'Proceed To Checkout',
             'quantity' => 'Quantity',
             'remove' => 'Remove',
-            'move-to-wishlist' => 'Move to Wishlist'
+            'move-to-wishlist' => 'Move to Wishlist',
+            'quantity' => [
+                'quantity' => 'Quantity',
+                'illegal' => 'Quantity cannot be lesser than one.'
+            ],
+            'remove' => [
+                'cannot' => 'No items to remove from the cart',
+                'success' => 'Item successfully removed from the cart',
+                'error' => 'Cannot remove item from cart'
+            ]
         ],
 
         'onepage' => [

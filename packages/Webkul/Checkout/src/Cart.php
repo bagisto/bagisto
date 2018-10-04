@@ -154,8 +154,6 @@ class Cart {
                 'base_total_weight' => $product->weight * $data['quantity'],
             ];
 
-            // dd(['parent' => $parentData, 'child' => null]);
-
             return ['parent' => $parentData, 'child' => null];
         }
     }
@@ -447,6 +445,7 @@ class Cart {
      */
     public function removeItem($itemId)
     {
+        dd($itemId);
         if(session()->has('cart')) {
             $cart = session()->get('cart');
 
@@ -486,11 +485,13 @@ class Cart {
             }
 
             if ($result) {
-                session()->flash('sucess', 'Item Successfully Removed From Cart');
+                session()->flash('sucess', trans('shop::app.checkout.cart.remove.success'));
             } else {
-                session()->flash('error', 'Item Cannot Be Removed From Cart');
+                session()->flash('error', trans('shop::app.checkout.cart.remove.error'));
             }
         }
+        session()->flash('warning', trans('shop::app.checkout.cart.remove.cannot'));
+
         return redirect()->back();
     }
 

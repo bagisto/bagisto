@@ -19,7 +19,7 @@ class CreateCartItemsTable extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->integer('quantity')->unsigned()->default(1);
             $table->integer('cart_id')->unsigned();
-            $table->foreign('cart_id')->references('id')->on('cart');
+            $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');
             $table->string('sku')->nullable();
             $table->string('type')->nullable();
             $table->string('name')->nullable();
