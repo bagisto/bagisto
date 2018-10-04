@@ -45,7 +45,7 @@
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('address-form')">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('address-form')" :disabled="disable_button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
@@ -59,7 +59,7 @@
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('shipping-form')">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('shipping-form')" :disabled="disable_button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
@@ -73,7 +73,7 @@
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('payment-form')">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('payment-form')" :disabled="disable_button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
@@ -87,7 +87,7 @@
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()">
+                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button">
                             {{ __('shop::app.checkout.onepage.place-order') }}
                         </button>
 
@@ -134,6 +134,8 @@
                 selected_shipping_method: '',
 
                 selected_payment_method: '',
+
+                disable_button: false,
             }),
 
             methods: {
@@ -160,8 +162,13 @@
 
                 saveAddress () {
                     var this_this = this;
+
+                    this.disable_button = true;
+
                     this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
                         .then(function(response) {
+                            this_this.disable_button = false;
+
                             if(response.data.jump_to_section == 'shipping') {
                                 shippingHtml = Vue.compile(response.data.html)
                                 this_this.completedStep = 1;
@@ -169,14 +176,21 @@
                             }
                         })
                         .catch(function (error) {
+                            this_this.disable_button = false;
+
                             this_this.handleErrorResponse(error.response, 'address-form')
                         })
                 },
 
                 saveShipping () {
                     var this_this = this;
+
+                    this.disable_button = true;
+
                     this.$http.post("{{ route('shop.checkout.save-shipping') }}", {'shipping_method': this.selected_shipping_method})
                         .then(function(response) {
+                            this_this.disable_button = false;
+
                             if(response.data.jump_to_section == 'payment') {
                                 paymentHtml = Vue.compile(response.data.html)
                                 this_this.completedStep = 2;
@@ -184,14 +198,21 @@
                             }
                         })
                         .catch(function (error) {
+                            this_this.disable_button = false;
+
                             this_this.handleErrorResponse(error.response, 'shipping-form')
                         })
                 },
 
                 savePayment () {
                     var this_this = this;
+
+                    this.disable_button = true;
+
                     this.$http.post("{{ route('shop.checkout.save-payment') }}", {'payment': this.selected_payment_method})
                         .then(function(response) {
+                            this_this.disable_button = false;
+
                             if(response.data.jump_to_section == 'review') {
                                 reviewHtml = Vue.compile(response.data.html)
                                 this_this.completedStep = 3;
@@ -199,12 +220,34 @@
                             }
                         })
                         .catch(function (error) {
+                            this_this.disable_button = false;
+
                             this_this.handleErrorResponse(error.response, 'payment-form')
                         })
                 },
 
                 placeOrder () {
+                    var this_this = this;
 
+                    this.disable_button = true;
+
+                    this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
+                        .then(function(response) {
+                            if(response.data.success) {
+                                if(response.data.redirect_url) {
+                                    window.location.href = response.data.redirect_url;
+                                } else {
+                                    window.location.href = "{{ route('shop.checkout.success') }}";
+                                }
+                            }
+                        })
+                        .catch(function (error) {
+                            this_this.disable_button = true;
+
+                            window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
+
+                            this_this.$root.addFlashMessages()
+                        })
                 },
 
                 handleErrorResponse (response, scope) {

@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'common' => [
+        'error' => 'Something went wrong, please contact us or try again later.'
+    ],
+
     'customer' => [
         'signup-text' => [
             'account_exists' => 'Already have an account',

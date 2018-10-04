@@ -19,7 +19,7 @@
             <div class="cart-content">
 
                 <div class="left-side">
-                    <form action="{{ route('shop.checkout.cart.update') }}" method="POST">
+                    <form action="{{ route('shop.checkout.cart.update') }}" method="POST" @submit.prevent="onSubmit">
 
                         <div class="cart-item-list" style="margin-top: 0">
                             @csrf
@@ -49,15 +49,13 @@
                                         @if ($product->type == 'configurable')
 
                                             <div class="summary">
-                                                @foreach (cart::getItemAttributeOptionDetails($item) as $key => $option)
 
-                                                    {{ (!$key ? '' : ' , ') . $option['attribute_name'] . ' : ' . $option['option_label'] }}
+                                                {{ Cart::getItemAttributeOptionDetails($item)['html'] }}
 
-                                                @endforeach
                                             </div>
                                         @endif
 
-                                        <div class="misc">
+                                        <div class="misc" :class="[errors.has('quantity') ? 'has-error' : '']">
                                             <div class="qty-text">{{ __('shop::app.checkout.cart.quantity') }}</div>
                                             {{-- <div class="box">{{ $item->quantity }}</div> --}}
                                             <input class="box" type="text" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}">

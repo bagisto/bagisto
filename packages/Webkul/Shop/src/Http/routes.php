@@ -18,11 +18,17 @@ Route::group(['middleware' => ['web']], function () {
         'view' => 'shop::checkout.onepage'
     ])->name('shop.checkout.onepage.index');
 
-    Route::post('/checkout/save-address', 'Webkul\Shop\Http\Controllers\CheckoutController@saveAddress')->name('shop.checkout.save-address');
+    Route::post('/checkout/save-address', 'Webkul\Shop\Http\Controllers\OnepageController@saveAddress')->name('shop.checkout.save-address');
 
-    Route::post('/checkout/save-shipping', 'Webkul\Shop\Http\Controllers\CheckoutController@saveShipping')->name('shop.checkout.save-shipping');
+    Route::post('/checkout/save-shipping', 'Webkul\Shop\Http\Controllers\OnepageController@saveShipping')->name('shop.checkout.save-shipping');
 
-    Route::post('/checkout/save-payment', 'Webkul\Shop\Http\Controllers\CheckoutController@savePayment')->name('shop.checkout.save-payment');
+    Route::post('/checkout/save-payment', 'Webkul\Shop\Http\Controllers\OnepageController@savePayment')->name('shop.checkout.save-payment');
+
+    Route::post('/checkout/save-order', 'Webkul\Shop\Http\Controllers\OnepageController@saveOrder')->name('shop.checkout.save-order');
+
+    Route::get('/checkout/success', 'Webkul\Shop\Http\Controllers\OnepageController@success')->defaults('_config', [
+        'view' => 'shop::checkout.success'
+    ])->name('shop.checkout.success');
 
     Route::get('test', 'Webkul\Shop\Http\Controllers\CartController@test');
 

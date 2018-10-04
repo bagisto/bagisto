@@ -52,8 +52,9 @@ class CoreServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
         $loader->alias('core', CoreFacade::class);
+
         $this->app->singleton('core', function () {
-            return new Core();
+            return app()->make(Core::class);
         });
     }
 }
