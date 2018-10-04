@@ -4,7 +4,7 @@
     if (! function_exists('core')) {
         function core()
         {
-            return new Core;
+            return app()->make(Core::class);
         }
     }
 

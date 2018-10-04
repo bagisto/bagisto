@@ -8,10 +8,40 @@ use Webkul\Core\Models\Locale as LocaleModel;
 use Webkul\Core\Models\Currency as CurrencyModel;
 use Webkul\Core\Models\TaxCategory as TaxCategory;
 use Webkul\Core\Models\TaxRate as TaxRate;
+use Webkul\Core\Repositories\CurrencyRepository;
+use Webkul\Core\Repositories\ExchangeRateRepository;
 use Illuminate\Support\Facades\Config;
 
 class Core
 {
+    /**
+     * CurrencyRepository model
+     *
+     * @var mixed
+     */
+    protected $currencyRepository;
+
+    /**
+     * ExchangeRateRepository model
+     *
+     * @var mixed
+     */
+    protected $exchangeRateRepository;
+
+    /**
+     * Create a new instance.
+     *
+     * @param  Webkul\Core\Repositories\CurrencyRepository     $currencyRepository
+     * @param  Webkul\Core\Repositories\ExchangeRateRepository $exchangeRateRepository
+     * @return void
+     */
+    public function __construct(CurrencyRepository $currencyRepository, ExchangeRateRepository $exchangeRateRepository)
+    {
+        $this->currencyRepository = $currencyRepository;
+
+        $this->exchangeRateRepository = $exchangeRateRepository;
+    }
+
     /**
     * Returns all channels
     *
@@ -84,6 +114,53 @@ class Core
     }
 
     /**
+    * Returns base channel's currency model
+    *
+    *  @return mixed
+    */
+    public function getBaseCurrency()
+    {
+        static $currency;
+
+        if($currency)
+            return $currency;
+
+        $currenctChannel = $this->getCurrentChannel();
+
+        return $currency = $currenctChannel->base_currency;
+    }
+
+    /**
+    * Returns base channel's currency code
+    *
+    *  @return string
+    */
+    public function getBaseCurrencyCode()
+    {
+        static $currencyCode;
+
+        if($currencyCode)
+            return $currencyCode;
+
+        return ($currency = $this->getBaseCurrency()) ? $currencyCode = $currency->code : '';
+    }
+
+    /**
+    * Returns base channel's currency symbol
+    *
+    *  @return string
+    */
+    public function getBaseCurrencySymbol()
+    {
+        static $currencySymbol;
+
+        if($currencySymbol)
+            return $currencySymbol;
+
+        return $currencySymbol = $this->getCurrentCurrency()->symbol;
+    }
+
+    /**
     * Returns current channel's currency model
     *
     *  @return mixed
@@ -134,9 +211,34 @@ class Core
     * @param float $price
     *  @return string
     */
-    public function convertPrice($price, $currencyCode = null)
+    public function convertPrice($amount, $sourceCurrencyCode = null, $targetCurrencyCode = null)
     {
-        return $price;
+        $sourceCurrency = !$sourceCurrencyCode
+                        ? $this->getBaseCurrency()
+                        : $this->currencyRepository->findByField('code', $sourceCurrencyCode);
+
+        $targetCurrency = !$targetCurrencyCode
+                        ? $this->getCurrentCurrency()
+                        : $this->currencyRepository->findByField('code', $targetCurrencyCode);
+
+        if(!$sourceCurrency || !$sourceCurrency)
+            return $amount;
+
+        if ($sourceCurrency->code === $targetCurrency->code)
+            return $amount;
+
+        $exchangeRate = $this->exchangeRateRepository->findOneWhere([
+            'source_currency' => $sourceCurrency->id,
+            'target_currency' => $targetCurrency->id,
+        ]);
+
+        if (null === $exchangeRate)
+            return $amount;
+
+        if ($exchangeRate->source_currency->code === $sourceCurrencyCode)
+            return (float) round($amount * $exchangeRate->ratio);
+
+        return (float) round($amount / $exchangeRate->ratio);
     }
 
     /**
@@ -145,16 +247,11 @@ class Core
     * @param float $price
     *  @return string
     */
-    public function currency($price)
+    public function currency($amount = 0)
     {
-        if(!$price)
-            $price = 0;
+        $currencyCode = $this->getCurrentCurrency()->code;
 
-        $channel = $this->getCurrentChannel();
-
-        $currencyCode = $channel->base_currency->code;
-
-        return currency($price, $currencyCode);
+        return currency($this->convertPrice($amount), $currencyCode);
     }
 
     /**

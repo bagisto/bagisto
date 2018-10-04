@@ -4,6 +4,8 @@ namespace Webkul\Sales\Repositories;
 
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Order Reposotory
@@ -54,8 +56,25 @@ class OrderRepository extends Repository
      */
     public function create(array $data)
     {
-        $order = $this->find(2);
+        $this->validateOrder();
 
-        dd($order->customer);
+        DB::beginTransaction();
+        
+        try {
+            Event::fire('checkout.order.save.before', $data);
+
+            $order = null;
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            throw $e;
+        }
+        
+        DB::commit();
+
+        Event::fire('checkout.order.save.after', $order);
+
+        return $order;
     }
 }

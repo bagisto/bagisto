@@ -371,8 +371,6 @@ class Cart {
                 if($data['is_configurable'] == "true") {
                     $parent = $cart->items()->create($itemData['parent']);
 
-                    $this->canAddOrUpdate($parent->child->id, $parent->quantity);
-
                     $itemData['child']['parent_id'] = $parent->id;
 
                     // $this->canAddOrUpdate($parent->child->id, $parent->quantity);
@@ -505,29 +503,20 @@ class Cart {
     {
         $data = [];
 
-        if(is_array($item->additional) && isset($item->additional['super_attribute'])) {
-            foreach($item->additional['super_attribute'] as $attributeId => $optionId) {
-                $option = $attribute->options()->where('id', $optionId)->first();
-                dd($option);
-            }
-        }
+        $labels = [];
 
         foreach($item->product->super_attributes as $attribute) {
-            // dd($item->child);
-            // dd($attribute->options);
-
-            // dd($attribute->code);
-            dd($item->child->product->{$attribute->code});
-            $option = $attribute->options()->where('id', $item->child->{$attribute->code})->first();
-            dd($option);
+            $option = $attribute->options()->where('id', $item->child->product->{$attribute->code})->first();
 
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name,
                 'option_label' => $option->label,
             ];
 
-            dd($data);
+            $labels[] = $attribute->name . ' : ' . $option->label;
         }
+
+        $data['html'] = implode(', ', $labels);
 
         return $data;
     }
