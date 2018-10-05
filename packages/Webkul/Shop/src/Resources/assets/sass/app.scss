@@ -1339,7 +1339,11 @@ section.cart {
                 .towishlist {
                     color : $brand-color;
                 }
+            }
 
+            .error-message {
+                color: #ff5656;
+                margin-top: 17px;
             }
         }
     }
@@ -1578,6 +1582,14 @@ section.cart {
     }
 }
 // checkout ends here
+
+.order-success-content {
+    padding: 40px 0;
+
+    .btn {
+        display: inline-block;
+    }
+}
 
 // checkout responsive start here
 @media only screen and (max-width: 770px) {

@@ -89,7 +89,8 @@ return [
                 'success' => 'Item successfully added to cart',
                 'success_remove' => 'Item removed successfully',
                 'error_add' => 'Item cannot be added to cart',
-            ]
+            ],
+            'quantity-error' => 'Requested quantity is not available.'
         ],
 
         'onepage' => [
@@ -131,6 +132,13 @@ return [
             'grand-total' => 'Grand Total',
             'delivery-charges' => 'Delivery Charges',
             'price' => 'price'
+        ],
+
+        'success' => [
+            'title' => 'Order successfully placed',
+            'thanks' => 'Thank you for your order!',
+            'order-id-info' => 'Your order id is #:order_id',
+            'info' => 'We will email you, your order details and tracking information.'
         ]
     ]
 ];

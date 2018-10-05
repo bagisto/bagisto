@@ -73,15 +73,17 @@ class OrderRepository extends Repository
         DB::beginTransaction();
         
         try {
-
-            die;
             Event::fire('checkout.order.save.before', $data);
 
             if(isset($data['customer']) && $data['customer'] instanceof Model) {
                 $data['customer_id'] = $data['customer']->id;
                 $data['customer_type'] = get_class($data['customer']);
+            } else {
+                unset($data['customer']);
             }
-            
+
+            $data['status'] = core()->getConfigData('paymentmethods.' . $data['payment']['method'] . '.status') ?? 'pending';
+
             $order = $this->model->create(array_merge($data, ['increment_id' => $this->generateIncrementId()]));
 
             $order->payment()->create($data['payment']);
@@ -94,8 +96,10 @@ class OrderRepository extends Repository
                 $orderItem = $this->orderItem->create(array_merge($item, ['order_id' => $order->id]));
 
                 if(isset($item['child']) && $item['child']) {
-                    $orderItem = $this->orderItem->create(array_merge($item['child'], ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
+                    $orderItem->child = $this->orderItem->create(array_merge($item['child'], ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
                 }
+
+                $this->orderItemInventory->create(['orderItem' => $orderItem]);
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -115,10 +119,10 @@ class OrderRepository extends Repository
      */
     public function generateIncrementId()
     {
-        $lastOrder = $this->orderBy('id', 'desc')->limit(1)->first();
+        $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
 
         $lastId = $lastOrder ? $lastOrder->id : 0;
 
-        return 000000000 + $last + 1;
+        return $lastId + 1;
     }
 }

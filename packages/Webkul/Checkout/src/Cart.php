@@ -153,6 +153,7 @@ class Cart {
                 'total_weight' => $product->weight * $data['quantity'],
                 'base_total_weight' => $product->weight * $data['quantity'],
             ];
+            
             return ['parent' => $parentData, 'child' => null];
         }
     }
@@ -204,8 +205,6 @@ class Cart {
 
                         session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
-                        $this->collectQuantities();
-
                         $this->collectTotals();
 
                         return redirect()->back();
@@ -216,8 +215,6 @@ class Cart {
                     session()->put('cart', $cart);
 
                     session()->flash('success', trans('shop::app.checkout.cart.item.success'));
-
-                    $this->collectQuantities();
 
                     $this->collectTotals();
 
@@ -238,15 +235,15 @@ class Cart {
      */
     public function getCart()
     {
+        $cart = null;
+
         if(session()->has('cart')) {
-
-            $cart = session()->get('cart');
+            $cart = $this->cart->find(session()->get('cart')->id);
         } else if(auth()->guard('customer')->check()) {
-
-            return $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
+            $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
         }
 
-        return $this->cart->find($cart->id);
+        return $cart && $cart->is_active ? $cart : null;
     }
 
     /**
@@ -299,7 +296,7 @@ class Cart {
             return redirect()->back();
         }
 
-        if($quantity < $totalQty) {
+        if($quantity <= $totalQty) {
             return true;
         } else {
             return false;
@@ -345,8 +342,6 @@ class Cart {
                                 'base_total' => $cartItem->price * ($prevQty + $newQty)
                             ]);
 
-                            $this->collectQuantities();
-
                             $this->collectTotals();
 
                             session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
@@ -379,8 +374,6 @@ class Cart {
                                     'base_total' => $parentPrice * ($prevQty + $newQty)
                                 ]);
 
-                                $this->collectQuantities();
-
                                 $this->collectTotals();
 
                                 session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
@@ -404,8 +397,6 @@ class Cart {
 
                     $parent = $cart->items()->create($itemData['parent']);
                 }
-
-                $this->collectQuantities();
 
                 $this->collectTotals();
 
@@ -453,7 +444,6 @@ class Cart {
                         $item->update(['quantity' => $quantity]);
 
                         $this->collectTotals();
-                        $this->collectQuantities();
                     }
                 }
             }
@@ -485,12 +475,10 @@ class Cart {
                         if($result)
                             $result = $this->cartItem->delete($item->id);
 
-                        $this->collectQuantities();
                         $this->collectTotals();
                     } else if($item->type == "simple" && $item->parent_id == null){
                         $result = $this->cartItem->delete($item->id);
 
-                        $this->collectQuantities();
                         $this->collectTotals();
                     }
                 }
@@ -526,13 +514,20 @@ class Cart {
     {
         $data = [];
 
+        $labels = [];
+
         foreach($item->product->super_attributes as $attribute) {
-            $option = $attribute->options()->where('id', $item->child->{$attribute->code})->first();
+            $option = $attribute->options()->where('id', $item->child->product->{$attribute->code})->first();
+
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name,
                 'option_label' => $option->label,
             ];
+
+            $labels[] = $attribute->name . ' : ' . $option->label;
         }
+
+        $data['html'] = implode(', ', $labels);
 
         return $data;
     }
@@ -627,28 +622,6 @@ class Cart {
     }
 
     /**
-     * Update Cart Quantities, Weight
-     *
-     * @return void
-     */
-    public function collectQuantities()
-    {
-        if(!$cart = $this->getCart())
-            return false;
-
-        $quantities = 0;
-
-        foreach($cart->items as $item) {
-            $quantities = $quantities + $item->quantity;
-        }
-
-        $itemCount = $cart->items->count();
-
-        $cart->update(['items_count' => $itemCount, 'items_qty' => $quantities]);
-
-    }
-
-    /**
      * Updates cart totals
      *
      * @return void
@@ -666,8 +639,8 @@ class Cart {
         $cart->base_sub_total_with_discount = 0;
 
         foreach ($cart->items()->get() as $item) {
-            $cart->grand_total = (float) $cart->grand_total + $item->price * $item->quantity;
-            $cart->base_grand_total = (float) $cart->base_grand_total + $item->base_price * $item->quantity;
+            $cart->grand_total = (float) $cart->grand_total + $item->total;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $item->base_total;
 
             $cart->sub_total = (float) $cart->sub_total + $item->price * $item->quantity;
             $cart->base_sub_total = (float) $cart->base_sub_total + $item->base_price * $item->quantity;
@@ -677,6 +650,15 @@ class Cart {
             $cart->grand_total = (float) $cart->grand_total + $shipping->price;
             $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price;
         }
+
+        $quantities = 0;
+        foreach($cart->items as $item) {
+            $quantities = $quantities + $item->quantity;
+        }
+
+        $cart->items_count = $cart->items->count();
+
+        $cart->items_qty = $quantities;
 
         $cart->save();
     }
@@ -795,8 +777,6 @@ class Cart {
             //put the customer cart instance
             session()->put('cart', $cart);
 
-            $this->collectQuantities();
-
             $this->collectTotals();
 
             return redirect()->back();
@@ -822,6 +802,53 @@ class Cart {
     }
 
     /**
+     * Checks if cart has any error
+     *
+     * @return boolean
+    */
+    public function hasError()
+    {
+        if(!$this->getCart())
+            return true;
+
+        if(!$this->isItemsHaveSufficientQuantity())
+            return true;
+            
+        return false;
+    }
+
+    /**
+     * Checks if all cart items have sufficient quantity.
+     *
+     * @return boolean
+     */
+    public function isItemsHaveSufficientQuantity()
+    {
+        foreach ($this->getCart()->items as $item) {
+            if(!$this->isItemHaveQuantity($item))
+                return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if all cart items have sufficient quantity.
+     *
+     * @return boolean
+     */
+    public function isItemHaveQuantity($item)
+    {
+        $product = $item->type == 'configurable' ? $item->child->product : $item->product;
+
+        if(!$product->haveSufficientQuantity($item->quantity))
+            return false;
+
+        return true;
+    }
+    
+
+    /**
      * Deactivates current cart
      *
      * @return void
@@ -829,7 +856,11 @@ class Cart {
     public function deActivateCart()
     {
         if($cart = $this->getCart()) {
-            $this->cart->update($cart->id, ['is_active' => false]);
+            $this->cart->update(['is_active' => false], $cart->id);
+
+            if(session()->has('cart')) {
+                session()->forget('cart');
+            }
         }
     }
 
@@ -848,7 +879,7 @@ class Cart {
             'customer_email' => $data['customer_email'],
             'customer_first_name' => $data['customer_first_name'],
             'customer_last_name' => $data['customer_last_name'],
-            'customer' => auth()->guard('customer')->user,
+            'customer' => auth()->guard('customer')->check() ? auth()->guard('customer')->user : null,
 
             'shipping_method' => $data['selected_shipping_rate']['method'],
             'shipping_description' => $data['selected_shipping_rate']['method_description'],
