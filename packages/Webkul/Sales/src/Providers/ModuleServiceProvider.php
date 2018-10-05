@@ -9,6 +9,7 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     protected $models = [
         \Webkul\Sales\Models\Order::class,
         \Webkul\Sales\Models\OrderItem::class,
+        \Webkul\Sales\Models\OrderItemInventory::class,
         \Webkul\Sales\Models\OrderAddress::class,
         \Webkul\Sales\Models\OrderPayment::class,
         \Webkul\Sales\Models\Invoice::class,

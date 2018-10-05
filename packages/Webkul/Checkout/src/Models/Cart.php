@@ -17,6 +17,8 @@ class Cart extends Model
 
     protected $hidden = ['coupon_code'];
 
+    protected $with = ['items', 'items.child', 'shipping_address', 'billing_address', 'selected_shipping_rate', 'payment'];
+
     public function items() {
         return $this->hasMany(CartItem::class)->whereNull('parent_id');
     }
@@ -76,9 +78,17 @@ class Cart extends Model
     /**
      * Get all of the attributes for the attribute groups.
      */
+    public function selected_shipping_rate()
+    {
+        return $this->shipping_rates()->where('method', $this->shipping_method);
+    }
+
+    /**
+     * Get all of the attributes for the attribute groups.
+     */
     public function getSelectedShippingRateAttribute()
     {
-        return $this->shipping_rates()->where('method', $this->shipping_method)->first();
+        return $this->selected_shipping_rate()->where('method', $this->shipping_method)->first();
     }
 
     /**

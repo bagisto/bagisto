@@ -65,16 +65,4 @@ class CartRepository extends Repository
 
         return $this->model->destroy($cart_id);
     }
-
-    /**
-     * Used to get items
-     * for cart explicitly,
-     * use cart instance
-     * instead.
-     *
-     * @return Mixed
-     */
-    public function items($cartId) {
-        return $this->model->find($cartId)->items;
-    }
 }

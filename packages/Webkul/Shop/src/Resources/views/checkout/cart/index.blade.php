@@ -68,7 +68,7 @@
                                             <span class="remove"><a href="{{ route('shop.checkout.cart.remove', $item->child->id) }}">{{ __('shop::app.checkout.cart.remove') }}</a></span>
                                             @else --}}
 
-                                            <span class="remove"><a href="{{ route('shop.checkout.cart.remove', $item->id) }}">{{ __('shop::app.checkout.cart.remove') }}</a></span>
+                                            <span class="remove"><a href="{{ route('shop.checkout.cart.remove', $item->id) }}">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
 
                                             {{-- @endif --}}
                                             <span class="towishlist">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</span>

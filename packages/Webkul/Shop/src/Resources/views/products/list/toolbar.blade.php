@@ -76,7 +76,6 @@
 
 </div>
 
-
 <div class="reponsive-sorter-limiter mb-20">
 
     <div class="sorter">
@@ -116,5 +115,3 @@
 <div class="responsive-layred-filter mb-20">
     <layered-navigation></layered-navigation>
 </div>
-
-

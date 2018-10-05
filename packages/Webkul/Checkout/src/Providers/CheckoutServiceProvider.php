@@ -42,7 +42,6 @@ class CheckoutServiceProvider extends ServiceProvider
      */
     protected function registerFacades()
     {
-
         //to make the cart facade and bind the
         //alias to the class needed to be called.
         $loader = AliasLoader::getInstance();
