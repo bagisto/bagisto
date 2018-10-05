@@ -44,53 +44,6 @@ class CartComposer
     }
 
     public function compose(View $view) {
-        // session()->forget('cart');
-        // return redirect()->back();
-        if(auth()->guard('customer')->check()) {
-            $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
-
-            if(isset($cart)) {
-                $cartItems = $this->cart->items($cart['id']);
-
-                $products = array();
-
-                foreach($cartItems as $cartItem) {
-                    $image = $this->productImage->getGalleryImages($cartItem->product);
-
-                    if(isset($image[0]['small_image_url'])) {
-                        $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, $image[0]['small_image_url'], $cartItem->quantity];
-                    }
-                    else {
-                        $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, 'null', $cartItem->quantity];
-                    }
-
-                }
-                session()->put('cart', $cart);
-
-                $view->with('cart', $products);
-            }
-        } else {
-            if($cart = session()->get('cart')) {
-                if(isset($cart)) {
-                    $cartItems = $this->cart->items($cart['id']);
-
-                    $products = array();
-
-                    foreach($cartItems as $cartItem) {
-                        $image = $this->productImage->getGalleryImages($cartItem->product);
-
-                        if(isset($image[0]['small_image_url'])) {
-                            $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, $image[0]['small_image_url'], $cartItem->quantity];
-                        }
-                        else {
-                            $products[$cartItem->product->id] = [$cartItem->product->name, $cartItem->price, 'null', $cartItem->quantity];
-                        }
-
-                    }
-
-                    $view->with('cart', $products);
-                }
-            }
-        }
+        
     }
 }

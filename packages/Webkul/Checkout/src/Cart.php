@@ -238,10 +238,33 @@ class Cart {
      */
     public function getCart()
     {
-        if(!$cart = session()->get('cart'))
-            return false;
+        if(session()->has('cart')) {
+            $cart = session()->get('cart');
+        } else if(auth()->guard('customer')->check()) {
+            return $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
+        }
 
         return $this->cart->find($cart->id);
+    }
+
+    /**
+     * Returns cart details in array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $cart = $this->getCart();
+
+        $data = $cart->toArray();
+
+        $data['shipping_address'] = current($data['shipping_address']);
+
+        $data['billing_address'] = current($data['billing_address']);
+
+        $data['selected_shipping_rate'] = $cart->selected_shipping_rate->toArray();
+
+        return $data;
     }
 
     /**
@@ -536,7 +559,7 @@ class Cart {
         $shippingAddress = $data['shipping'];
         $billingAddress['cart_id'] = $shippingAddress['cart_id'] = $cart->id;
 
-        if($billingAddressModel = $cart->biling_address) {
+        if($billingAddressModel = $cart->billing_address) {
             $this->cartAddress->update($billingAddress, $billingAddressModel->id);
 
             if($shippingAddress = $cart->shipping_address) {
@@ -791,9 +814,7 @@ class Cart {
     }
 
     /**
-     * Destroys the session
-     * maintained for cart
-     * on customer logout.
+     * Destroys the session maintained for cart on customer logout.
      *
      * @return response
      */
@@ -806,5 +827,90 @@ class Cart {
         } else {
             return redirect()->back();
         }
+    }
+
+    /**
+     * Deactivates current cart
+     *
+     * @return void
+     */
+    public function deActivateCart()
+    {
+        if($cart = $this->getCart()) {
+            $this->cart->update($cart->id, ['is_active' => false]);
+        }
+    }
+
+    /**
+     * Validate order before creation
+     *
+     * @return array
+     */
+    public function prepareDataForOrder()
+    {
+        $data = $this->toArray();
+
+        $finalData = [
+            'customer_id' => $data['customer_id'],
+            'is_guest' => $data['is_guest'],
+            'customer_email' => $data['customer_email'],
+            'customer_first_name' => $data['customer_first_name'],
+            'customer_last_name' => $data['customer_last_name'],
+            'customer' => auth()->guard('customer')->user,
+
+            'shipping_method' => $data['selected_shipping_rate']['method'],
+            'shipping_description' => $data['selected_shipping_rate']['method_description'],
+            'shipping_amount' => $data['selected_shipping_rate']['price'],
+            'base_shipping_amount' => $data['selected_shipping_rate']['base_price'],
+
+            'total_item_count' => $data['items_count'],
+            'total_qty_ordered' => $data['items_qty'],
+            'base_currency_code' => $data['base_currency_code'],
+            'channel_currency_code' => $data['channel_currency_code'],
+            'order_currency_code' => $data['cart_currency_code'],
+            'grand_total' => $data['grand_total'],
+            'base_grand_total' => $data['base_grand_total'],
+            'sub_total' => $data['sub_total'],
+            'base_sub_total' => $data['base_sub_total'],
+
+            'shipping_address' => array_except($data['shipping_address'], ['id', 'cart_id']),
+            'billing_address' => array_except($data['billing_address'], ['id', 'cart_id']),
+            'payment' => array_except($data['payment'], ['id', 'cart_id']),
+        ];
+
+        foreach($data['items'] as $item) {
+            $finalData['items'][] = $this->prepareDataForOrderItem($item);
+        }
+
+        return $finalData;
+    }
+
+    /**
+     * Prepares data for order item
+     *
+     * @return array
+     */
+    public function prepareDataForOrderItem($data)
+    {
+        $finalData = [
+            'product' => $this->product->find($data['product_id']),
+            'sku' => $data['sku'],
+            'type' => $data['type'],
+            'name' => $data['name'],
+            'weight' => $data['weight'],
+            'total_weight' => $data['total_weight'],
+            'qty_ordered' => $data['quantity'],
+            'price' => $data['price'],
+            'base_price' => $data['base_price'],
+            'total' => $data['total'],
+            'base_total' => $data['base_total'],
+            'additional' => $data['additional'],
+        ];
+
+        if(isset($data['child']) && $data['child']) {
+            $finalData['child'] = $this->prepareDataForOrderItem($data['child']);
+        }
+
+        return $finalData;
     }
 }
