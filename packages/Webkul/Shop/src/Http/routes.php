@@ -151,7 +151,7 @@ Route::group(['middleware' => ['web']], function () {
                 /*    Routes for Addresses ends here   */
 
                 /* Wishlist route */
-                Route::get('wishlist', 'Webkul\Customer\Http\Controllers\WishlistController@wishlist')->defaults('_config', [
+                Route::get('wishlist', 'Webkul\Customer\Http\Controllers\WishlistController@index')->defaults('_config', [
                     'view' => 'shop::customers.account.wishlist.wishlist'
                 ])->name('customer.wishlist.index');
 

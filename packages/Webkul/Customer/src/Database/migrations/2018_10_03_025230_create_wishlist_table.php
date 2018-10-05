@@ -27,7 +27,7 @@ class CreateWishlistTable extends Migration
             $table->json('item_options')->nullable();
             $table->date('moved_to_cart')->nullable();
             $table->boolean('shared')->nullable();
-            $table->date('time_of_moving');
+            $table->date('time_of_moving')->nullable();
             $table->timestamps();
         });
     }

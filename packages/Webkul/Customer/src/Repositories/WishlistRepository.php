@@ -51,4 +51,14 @@ class WishlistRepository extends Repository
 
         return $wishlist;
     }
+
+    /**
+     * To retrieve products with wishlist m
+     * for a listing resource.
+     *
+     * @param integer $id
+     */
+    public function getItemsWithProducts($id) {
+        return $this->model->find($id)->item_wishlist;
+    }
 }

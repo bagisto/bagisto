@@ -103,6 +103,46 @@
     }
 }
 
+//wishlist item
+.wishlist-item {
+    display: flex;
+    flex-direction:  row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 125px;
+
+    .media-info {
+        display: flex;
+        flex-direction: row;
+
+        .media {
+            height: 125px;
+            width: 100px;
+        }
+
+        .info {
+            display: block;
+            margin-left: 20px;
+        }
+    }
+
+    .operations {
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        a {
+            width: 100%;
+            span {
+                float: right;
+            }
+        }
+    }
+}
+
 //product page price styles
 .product-price {
     margin-bottom: 14px;
@@ -125,3 +165,9 @@
     }
 }
 
+//horizontal rule
+.horizontal-rule {
+    width: 100%;
+    height: 1px;
+    background: $border-color;
+}

@@ -58,6 +58,12 @@ return [
         'choose-option' => 'Choose an option'
     ],
 
+    'wishlist' => [
+        'title' => 'Wishlist',
+        'deleteall' => 'Delete All',
+        'moveall' => 'Move All Products To Cart'
+    ],
+
     'checkout' => [
         'cart' => [
             'integrity' => [
