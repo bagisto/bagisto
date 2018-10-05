@@ -53,10 +53,10 @@ class OnepageController extends Controller
     */
     public function index()
     {
-        if(!$cart = Cart::getCart())
+        if(Cart::hasError())
             return redirect()->route('shop.checkout.cart.index');
 
-        return view($this->_config['view'])->with('cart', $cart);
+        return view($this->_config['view'])->with('cart', Cart::getCart());
     }
 
     /**
@@ -67,7 +67,7 @@ class OnepageController extends Controller
     */
     public function saveAddress(CustomerAddressForm $request)
     {
-        if(!Cart::saveCustomerAddress(request()->all()) || !$rates = Shipping::collectRates())
+        if(Cart::hasError() || !Cart::saveCustomerAddress(request()->all()) || !$rates = Shipping::collectRates())
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         return response()->json($rates);
@@ -82,7 +82,7 @@ class OnepageController extends Controller
     {
         $shippingMethod = request()->get('shipping_method');
 
-        if(!$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
+        if(Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         Cart::collectTotals();
@@ -99,7 +99,7 @@ class OnepageController extends Controller
     {
         $payment = request()->get('payment');
 
-        if(!$payment || !Cart::savePaymentMethod($payment))
+        if(Cart::hasError() || !$payment || !Cart::savePaymentMethod($payment))
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         $cart = Cart::getCart();
@@ -117,6 +117,9 @@ class OnepageController extends Controller
     */
     public function saveOrder()
     {
+        if(Cart::hasError())
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+
         Cart::collectTotals();
 
         $this->validateOrder();

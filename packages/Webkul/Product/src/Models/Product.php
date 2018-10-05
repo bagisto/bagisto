@@ -141,13 +141,34 @@ class Product extends Model
      */
     public function isSaleable()
     {
-        if($this->status) {
-            if($this->inventories->sum('qty')) {
-                return true;
-            }
-        }
+        if(!$this->status)
+            return false;
+        
+        if($this->haveSufficientQuantity(1))
+            return true;
     
         return false;
+    }
+
+    /**
+     * @param integer $qty
+     *
+     * @return bool
+     */
+    public function haveSufficientQuantity($qty)
+    {
+        $inventories = $this->inventory_sources()->orderBy('priority', 'asc')->get();
+
+        $total = 0;
+
+        foreach($inventories as $inventorySource) {
+            if(!$inventorySource->status)
+                continue;
+
+            $total += $inventorySource->pivot->qty;
+        }
+
+        return $qty <= $total ? true : false;
     }
 
     /**
