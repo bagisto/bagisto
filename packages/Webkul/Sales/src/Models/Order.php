@@ -13,7 +13,7 @@ class Order extends Model implements OrderContract
      * Get the order items record associated with the order.
      */
     public function items() {
-        return $this->hasMany(CartItemProxy::modelClass())->whereNull('parent_id');
+        return $this->hasMany(OrderItemProxy::modelClass())->whereNull('parent_id');
     }
 
     /**

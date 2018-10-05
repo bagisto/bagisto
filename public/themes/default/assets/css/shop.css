@@ -1929,6 +1929,11 @@ section.cart .cart-content .right-side {
   color: #0041FF;
 }
 
+.cart-item-list .item .item-details .error-message {
+  color: #ff5656;
+  margin-top: 17px;
+}
+
 .order-summary h3 {
   font-size: 16px;
   margin-top: 0;
@@ -2157,6 +2162,14 @@ section.cart .cart-content .right-side {
 .checkout-process .col-right {
   width: 35%;
   padding-left: 40px;
+}
+
+.order-success-content {
+  padding: 40px 0;
+}
+
+.order-success-content .btn {
+  display: inline-block;
 }
 
 @media only screen and (max-width: 770px) {
