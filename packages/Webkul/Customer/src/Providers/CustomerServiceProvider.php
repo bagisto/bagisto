@@ -15,6 +15,8 @@ class CustomerServiceProvider extends ServiceProvider
     {
         $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
 
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'customer');
+
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'customer');
