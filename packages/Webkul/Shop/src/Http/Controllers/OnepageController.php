@@ -121,7 +121,9 @@ class OnepageController extends Controller
 
         $this->validateOrder();
 
-        $order = $this->orderRepository->create([]);
+        $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+
+        Cart::deActivateCart();
 
         session()->flash('order', $order);
 
@@ -150,5 +152,22 @@ class OnepageController extends Controller
      */
     public function validateOrder()
     {
+        $cart = Cart::getCart();
+
+        if(!$cart->shipping_address) {
+            throw new \Exception(trans('Please check shipping address.'));
+        }
+
+        if(!$cart->billing_address) {
+            throw new \Exception(trans('Please check billing address.'));
+        }
+
+        if(!$cart->selected_shipping_rate) {
+            throw new \Exception(trans('Please specify shipping method.'));
+        }
+
+        if(!$cart->payment) {
+            throw new \Exception(trans('Please specify payment method.'));
+        }
     }
 }

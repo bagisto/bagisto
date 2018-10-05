@@ -4,7 +4,7 @@
     if (! function_exists('cart')) {
         function cart()
         {
-            return new Cart;
+            return app()->make(Core::class);
         }
     }
 ?>

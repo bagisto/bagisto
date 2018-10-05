@@ -10,6 +10,8 @@ class OrderAddress extends Model implements OrderAddressContract
 {
     protected $table = 'order_address';
 
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
     /**
      * Get of the customer fullname.
      */

@@ -69,7 +69,7 @@ return [
             'continue-shopping' => 'Continue Shopping',
             'proceed-to-checkout' => 'Proceed To Checkout',
             'quantity' => 'Quantity',
-            'remove' => 'Remove',
+            'remove-link' => 'Remove',
             'move-to-wishlist' => 'Move to Wishlist',
             'quantity' => [
                 'quantity' => 'Quantity',
