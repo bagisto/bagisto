@@ -1051,28 +1051,20 @@ section.product-detail {
                             max-height: 480px;
                         }
 
-                        .whishlist-icon {
-                            margin-top: -480px;
-                            float: right;
-                            margin-right: 10px;
+                        .wishlist-icon {
+                            position: absolute;
+                            height: 32px;
+                            width: 32px;
+                            top: 15px;
+                            right: 15px;
                         }
 
                         .share-icon {
-                            margin-top: -480px;
-                            float: right;
-                            margin-right: 40px;
-                        }
-
-                        .wishlist {
                             position: absolute;
-                            top: 10px;
-                            right: 12px;
-                        }
-
-                        .share {
-                            position: absolute;
-                            top: 10px;
-                            right: 45px;
+                            height: 32px;
+                            width: 32px;
+                            top: 15px;
+                            right: 48px;
                         }
                     }
                 }

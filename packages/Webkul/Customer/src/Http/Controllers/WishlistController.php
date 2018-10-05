@@ -55,7 +55,30 @@ class WishlistController extends Controller
         return view($this->_config['view'])->with('customer', $customer);
     }
 
-    public function wishlist() {
-        return view($this->_config['view']);
+    /**
+     * Function to add item to the wishlist.
+     *
+     * @param integer $itemId
+     */
+    public function add($itemId) {
+        dd('adding item to wishlist');
+    }
+
+    /**
+     * Function to remove item to the wishlist.
+     *
+     * @param integer $itemId
+     */
+    public function remove($itemId) {
+        dd('removing item to wishlist');
+    }
+
+    /**
+     * Function to move item from wishlist to cart.
+     *
+     * @param integer $itemId
+     */
+    public function moveToCart() {
+        dd('adding item to wishlist');
     }
 }

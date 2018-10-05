@@ -178,11 +178,7 @@
   white-space: nowrap;
 }
 
-.product-card .cart-fav-seg .product-card.wishlist-icon {
-  cursor: pointer;
-}
-
-.product-card.wishlist-icon:hover {
+.add-to-wishlist .wishlist-icon:hover {
   background-image: url("../images/wishadd.svg");
 }
 
@@ -1622,28 +1618,20 @@ section.product-detail div.layouter form div.product-image-group div .product-he
   max-height: 480px;
 }
 
-section.product-detail div.layouter form div.product-image-group div .product-hero-image .whishlist-icon {
-  margin-top: -480px;
-  float: right;
-  margin-right: 10px;
+section.product-detail div.layouter form div.product-image-group div .product-hero-image .wishlist-icon {
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  top: 15px;
+  right: 15px;
 }
 
 section.product-detail div.layouter form div.product-image-group div .product-hero-image .share-icon {
-  margin-top: -480px;
-  float: right;
-  margin-right: 40px;
-}
-
-section.product-detail div.layouter form div.product-image-group div .product-hero-image .wishlist {
   position: absolute;
-  top: 10px;
-  right: 12px;
-}
-
-section.product-detail div.layouter form div.product-image-group div .product-hero-image .share {
-  position: absolute;
-  top: 10px;
-  right: 45px;
+  height: 32px;
+  width: 32px;
+  top: 15px;
+  right: 48px;
 }
 
 section.product-detail div.layouter form div.product-image-group .add-to-buttons {

@@ -91,15 +91,16 @@
             white-space: nowrap;
         }
 
-        .product-card.wishlist-icon {
-            cursor: pointer;
-        }
     }
 }
 
-//wishlist-icon-hover
-.product-card.wishlist-icon:hover {
-    background-image: url('../images/wishadd.svg');
+//wishlist icon hover properties
+.add-to-wishlist {
+    .wishlist-icon {
+        &:hover {
+            background-image: url('../images/wishadd.svg');
+        }
+    }
 }
 
 //product page price styles

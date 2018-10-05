@@ -1,4 +1,1 @@
-
-<div class="icon share-icon">
-    <a href="#"></a>
-</div>
+<span class="icon share-icon"></span>

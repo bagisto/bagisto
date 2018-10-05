@@ -5,9 +5,11 @@
         <div class="form-header">
             <h1>{{ __('shop::app.checkout.onepage.billing-address') }}</h1>
 
-            <a href="{{ route('customer.session.index') }}" class="btn btn-lg btn-primary">
-                {{ __('shop::app.checkout.onepage.sign-in') }}
-            </a>
+            @guest('customer')
+                <a href="{{ route('customer.session.index') }}" class="btn btn-lg btn-primary">
+                    {{ __('shop::app.checkout.onepage.sign-in') }}
+                </a>
+            @endguest
         </div>
 
         <div class="control-group" :class="[errors.has('address-form.billing[first_name]') ? 'has-error' : '']">

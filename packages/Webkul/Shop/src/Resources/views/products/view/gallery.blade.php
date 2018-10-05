@@ -1,5 +1,4 @@
 @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
-
 <?php $images = $productImageHelper->getGalleryImages($product); ?>
 
 <div class="product-image-group">
@@ -32,10 +31,10 @@
 
                 <img :src="currentLargeImageUrl" id="pro-img"/>
 
-                <div class="icon whishlist-icon"> </div>
+                {{-- Uncomment the line below for activating share links --}}
+                {{-- @include('shop::products.sharelinks') --}}
 
-                @include ('shop::products.sharelinks')
-
+                @include('shop::products.wishlist')
             </div>
 
 

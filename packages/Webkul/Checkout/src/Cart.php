@@ -83,7 +83,7 @@ class Cart {
     }
 
     /**
-     * Prepare the other data for the product to be added.
+     * Prepare the other data for the product to be success.
      *
      * @param integer $id
      * @param array $data
@@ -96,14 +96,14 @@ class Cart {
 
         unset($data['_token']);
 
-        //Check if the product is salable
+        //Check if the product is saleable
         if(!isset($data['product']) ||!isset($data['quantity'])) {
-            session()->flash('error', 'Cart System Integrity Violation, Some Required Fields Missing.');
+            session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_fields'));
 
             return redirect()->back();
         } else {
             if($product->type == 'configurable' && !isset($data['super_attribute'])) {
-                session()->flash('error', 'Cart System Integrity Violation, Configurable Options Not Found In Request.');
+                session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_options'));
 
                 return redirect()->back();
             }
@@ -153,13 +153,12 @@ class Cart {
                 'total_weight' => $product->weight * $data['quantity'],
                 'base_total_weight' => $product->weight * $data['quantity'],
             ];
-
             return ['parent' => $parentData, 'child' => null];
         }
     }
 
     /**
-     * Create new cart instance with the current item added.
+     * Create new cart instance with the current item success.
      *
      * @param integer $id
      * @param array $data
@@ -172,13 +171,15 @@ class Cart {
 
         $cartData['channel_id'] = core()->getCurrentChannel()->id;
 
-        // this will auto set the customer id for the cart instances if customer is authenticated
+        //auth user details else they will be set when the customer is guest
         if(auth()->guard('customer')->check()) {
             $cartData['customer_id'] = auth()->guard('customer')->user()->id;
 
             $cartData['is_guest'] = 0;
 
-            $cartData['customer_full_name'] = auth()->guard('customer')->user()->first_name .' '. auth()->guard('customer')->user()->last_name;
+            $cartData['customer_first_name'] = auth()->guard('customer')->user()->first_name;
+
+            $cartData['customer_last_name'] = auth()->guard('customer')->user()->last_name;
         } else {
             $cartData['is_guest'] = 1;
         }
@@ -190,43 +191,42 @@ class Cart {
         if($cart = $this->cart->create($cartData)) {
             $itemData['parent']['cart_id'] = $cart->id;
 
-            if ($data['is_configurable'] == "true") {
-                //parent product entry
+            if ($this->product->find($id)->type == "configurable") {
+                //parent item entry
                 $itemData['parent']['additional'] = json_encode($data);
                 if($parent = $this->cartItem->create($itemData['parent'])) {
 
+                    //child item entry
                     $itemData['child']['parent_id'] = $parent->id;
                     $itemData['child']['cart_id'] = $cart->id;
                     if($child = $this->cartItem->create($itemData['child'])) {
                         session()->put('cart', $cart);
 
-                        session()->flash('success', 'Item Added To Cart Successfully');
+                        session()->flash('success', trans('shop::app.checkout.cart.item.success'));
+
+                        $this->collectQuantities();
+
+                        $this->collectTotals();
 
                         return redirect()->back();
                     }
                 }
-
-                // $cart->update(['subtotal' => $itemData['parent']['price'], 'base_sub_total' => $itemData['parent']['price']]);
-                $this->collectQuantities();
-
-                $this->collectTotals();
-            } else if($data['is_configurable'] == "false") {
+            } else if($this->product->find($id)->type != "configurable") {
                 if($result = $this->cartItem->create($itemData['parent'])) {
                     session()->put('cart', $cart);
 
-                    session()->flash('success', 'Item Added To Cart Successfully');
+                    session()->flash('success', trans('shop::app.checkout.cart.item.success'));
+
+                    $this->collectQuantities();
+
+                    $this->collectTotals();
 
                     return redirect()->back();
                 }
-
-                // $cart->update(['subtotal' => $itemData['parent']['price'], 'base_sub_total' => $itemData['parent']['price']]);
-                $this->collectQuantities();
-
-                $this->collectTotals();
             }
         }
 
-        session()->flash('error', 'Some Error Occured');
+        session()->flash('error', trans('shop::app.checkout.cart.item.error_add'));
 
         return redirect()->back();
     }
@@ -239,8 +239,10 @@ class Cart {
     public function getCart()
     {
         if(session()->has('cart')) {
+
             $cart = session()->get('cart');
         } else if(auth()->guard('customer')->check()) {
+
             return $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
         }
 
@@ -292,7 +294,7 @@ class Cart {
         }
 
         if ($quantity < 1) {
-            session()->flash('warning', 'Cannot Add Or Update Lesser than 1');
+            session()->flash('warning', trans('shop::app.checkout.cart.quantity.warning'));
 
             return redirect()->back();
         }
@@ -317,13 +319,13 @@ class Cart {
         $itemData = $this->prepareItemData($id, $data);
 
         if(session()->has('cart')) {
-            $cart = session()->get('cart');
+            $cart = $this->getCart();
 
             $cartItems = $cart->items()->get();
 
             if(isset($cartItems)) {
                 foreach($cartItems as $cartItem) {
-                    if($data['is_configurable'] == "false") {
+                    if($this->product->find($id)->type == "simple") {
 
                         if($cartItem->product_id == $id) {
                             $prevQty = $cartItem->quantity;
@@ -332,7 +334,7 @@ class Cart {
                             $canBe = $this->canAddOrUpdate($cartItem->id, $prevQty + $newQty);
 
                             if($canBe == false) {
-                                session()->flash('warning', 'The requested quantity is not available, please try back later.');
+                                session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                                 return redirect()->back();
                             }
@@ -347,11 +349,11 @@ class Cart {
 
                             $this->collectTotals();
 
-                            session()->flash('success', "Product Quantity Successfully Updated");
+                            session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
 
                             return redirect()->back();
                         }
-                    } else if($data['is_configurable'] == "true") {
+                    } else if($this->product->find($id)->type == "configurable") {
                         if($cartItem->type == "configurable") {
                             $temp = $this->cartItem->findOneByField('parent_id', $cartItem->id);
                             if($temp->product_id == $data['selected_configurable_option']) {
@@ -366,7 +368,7 @@ class Cart {
                                 $canBe = $this->canAddOrUpdate($cartItem->child->id, $prevQty + $newQty);
 
                                 if($canBe == false) {
-                                    session()->flash('warning', 'The requested quantity is not available, please try back later.');
+                                    session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                                     return redirect()->back();
                                 }
@@ -381,7 +383,7 @@ class Cart {
 
                                 $this->collectTotals();
 
-                                session()->flash('success', "Product Quantity Successfully Updated");
+                                session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
 
                                 return redirect()->back();
                             }
@@ -389,7 +391,7 @@ class Cart {
                     }
                 }
 
-                if($data['is_configurable'] == "true") {
+                if($this->product->find($id)->type == "configurable") {
                     $parent = $cart->items()->create($itemData['parent']);
 
                     $itemData['child']['parent_id'] = $parent->id;
@@ -397,7 +399,7 @@ class Cart {
                     // $this->canAddOrUpdate($parent->child->id, $parent->quantity);
 
                     $cart->items()->create($itemData['child']);
-                } else if($data['is_configurable'] == "false"){
+                } else if($this->product->find($id)->type != "configurable"){
                     // $this->canAddOrUpdate($parent->id, $parent->quantity);
 
                     $parent = $cart->items()->create($itemData['parent']);
@@ -407,7 +409,7 @@ class Cart {
 
                 $this->collectTotals();
 
-                session()->flash('success', 'Item Successfully Added To Cart');
+                session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
                 return redirect()->back();
             } else {
@@ -429,7 +431,7 @@ class Cart {
     public function update($itemIds)
     {
         if(session()->has('cart')) {
-            $cart = session()->get('cart');
+            $cart = $this->getCart();
 
             $items = $cart->items;
 
@@ -443,19 +445,19 @@ class Cart {
                         }
 
                         if($canBe == false) {
-                            session()->flash('warning', 'The requested quantity is not available, please try back later.');
+                            session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                             return redirect()->back();
                         }
 
                         $item->update(['quantity' => $quantity]);
+
+                        $this->collectTotals();
+                        $this->collectQuantities();
                     }
                 }
             }
-
-            $items = $cart->items;
-
-            session()->flash('success', 'Cart Updated Successfully');
+            session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
 
             return redirect()->back();
         }
@@ -468,9 +470,8 @@ class Cart {
      */
     public function removeItem($itemId)
     {
-        dd($itemId);
         if(session()->has('cart')) {
-            $cart = session()->get('cart');
+            $cart = $this->getCart();
 
             $items = $cart->items;
 
@@ -508,13 +509,11 @@ class Cart {
             }
 
             if ($result) {
-                session()->flash('sucess', trans('shop::app.checkout.cart.remove.success'));
+                session()->flash('sucess', trans('shop::app.checkout.cart.quantity.success_remove'));
             } else {
-                session()->flash('error', trans('shop::app.checkout.cart.remove.error'));
+                session()->flash('error', trans('shop::app.checkout.cart.quantity.error_remove'));
             }
         }
-        session()->flash('warning', trans('shop::app.checkout.cart.remove.cannot'));
-
         return redirect()->back();
     }
 
@@ -527,20 +526,13 @@ class Cart {
     {
         $data = [];
 
-        $labels = [];
-
         foreach($item->product->super_attributes as $attribute) {
-            $option = $attribute->options()->where('id', $item->child->product->{$attribute->code})->first();
-
+            $option = $attribute->options()->where('id', $item->child->{$attribute->code})->first();
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name,
                 'option_label' => $option->label,
             ];
-
-            $labels[] = $attribute->name . ' : ' . $option->label;
         }
-
-        $data['html'] = implode(', ', $labels);
 
         return $data;
     }
@@ -699,10 +691,10 @@ class Cart {
         if(session()->has('cart')) {
             $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
 
-            $guestCart = session()->get('cart');
+            $guestCart = $this->getCart();
 
             if(!isset($cart)) {
-                $guestCart->update(['customer_id' => auth()->guard('customer')->user()->id]);
+                $guestCart->update(['customer_id' => auth()->guard('customer')->user()->id, 'is_guest' => 0]);
 
                 session()->forget('cart');
 

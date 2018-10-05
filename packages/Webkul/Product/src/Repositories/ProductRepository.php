@@ -395,7 +395,7 @@ class ProductRepository extends Repository
             ]));
 
         $params = request()->input();
-        
+
         return $this->scopeQuery(function($query){
                 return $query->distinct()->addSelect('products.*');
             })->paginate(isset($params['limit']) ? $params['limit'] : 9, ['products.id']);

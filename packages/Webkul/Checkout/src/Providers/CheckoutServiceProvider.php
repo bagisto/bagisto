@@ -23,8 +23,6 @@ class CheckoutServiceProvider extends ServiceProvider
         $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
 
         $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
-
-        $this->app->register(ComposerServiceProvider::class);
     }
 
     /**

@@ -49,7 +49,7 @@
 
                 template: '#product-options-template',
 
-            inject: ['$validator'],
+                inject: ['$validator'],
 
                 data: () => ({
                     config: @json($config),
