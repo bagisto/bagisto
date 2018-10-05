@@ -85,12 +85,13 @@
             <ul class="cart-dropdown-container">
                 <?php
                     $cart = cart()->getCart();
+                    // dd($cart);
                 ?>
                 @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
 
                 <li class="cart-dropdown">
                     <span class="icon cart-icon"></span>
-                    @if(isset($cart) && session()->has('cart'))
+                    @if(isset($cart))
                     @php
                         $items = $cart->items;
                     @endphp

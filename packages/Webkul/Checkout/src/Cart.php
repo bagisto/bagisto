@@ -238,8 +238,13 @@ class Cart {
      */
     public function getCart()
     {
-        if(!$cart = session()->get('cart'))
-            return false;
+        if(session()->has('cart')) {
+
+            $cart = session()->get('cart');
+        } else if(auth()->guard('customer')->check()) {
+
+            return $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
+        }
 
         return $this->cart->find($cart->id);
     }
