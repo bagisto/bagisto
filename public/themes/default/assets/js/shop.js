@@ -1076,7 +1076,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(54);
+module.exports = __webpack_require__(60);
 
 
 /***/ }),
@@ -1096,6 +1096,8 @@ Vue.component("category-item", __webpack_require__(39));
 Vue.component("image-slider", __webpack_require__(42));
 Vue.component("vue-slider", __webpack_require__(50));
 Vue.component("cart-dropdown", __webpack_require__(51));
+Vue.component("res-category-nav", __webpack_require__(54));
+Vue.component("res-category-item", __webpack_require__(57));
 
 $(document).ready(function () {
 
@@ -30701,10 +30703,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
 // define the item component
 /* harmony default export */ __webpack_exports__["default"] = ({
-
     props: {
         categories: {
             type: [Array, String, Object],
@@ -30715,13 +30715,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         url: String
     },
-
     data: function data() {
         return {
             items_count: 0
         };
     },
-
 
     computed: {
         items: function items() {
@@ -30847,21 +30845,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
 // define the item component
-
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         item: Object,
         url: String
     },
-
     data: function data() {
         return {
             items_count: 0
         };
     },
-
 
     computed: {
         haveChildren: function haveChildren() {
@@ -31740,6 +31734,251 @@ if (false) {
 
 /***/ }),
 /* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(55)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/components/res-category-nav.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1555b7ad", Component.options)
+  } else {
+    hotAPI.reload("data-v-1555b7ad", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// define the item component
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        categories: {
+            type: [Array, String, Object],
+            required: false,
+            default: function _default() {
+                return [];
+            }
+        },
+        url: String
+    },
+    data: function data() {
+        return {
+            items_count: 0
+        };
+    },
+
+    computed: {
+        items: function items() {
+            return JSON.parse(this.categories);
+        }
+    }
+});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "ul",
+    { staticClass: "nav" },
+    [
+      _vm._l(_vm.items, function(item, index) {
+        return _c("category-item", {
+          key: index,
+          attrs: { url: _vm.url, item: item, parent: index }
+        })
+      }),
+      _vm._v(" "),
+      _vm._m(0)
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("img", {
+        attrs: {
+          src:
+            "http://localhost/bagisto/public/vendor/webkul/shop/assets/images/offer-zone.svg"
+        }
+      }),
+      _vm._v(" "),
+      _c("span", [_vm._v("Offer Zone")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1555b7ad", module.exports)
+  }
+}
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(58)
+/* template */
+var __vue_template__ = __webpack_require__(59)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/components/res-category-item.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-616674f9", Component.options)
+  } else {
+    hotAPI.reload("data-v-616674f9", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+// define the item component
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        item: Object,
+        url: String
+    },
+    data: function data() {
+        return {
+            items_count: 0
+        };
+    },
+
+    computed: {
+        haveChildren: function haveChildren() {
+            return this.item.children.length ? true : false;
+        }
+    }
+});
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("li")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-616674f9", module.exports)
+  }
+}
+
+/***/ }),
+/* 60 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

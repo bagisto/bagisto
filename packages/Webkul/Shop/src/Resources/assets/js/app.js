@@ -11,6 +11,8 @@ Vue.component("category-item", require("./components/category-item.vue"));
 Vue.component("image-slider", require("./components/image-slider.vue"));
 Vue.component("vue-slider", require("vue-slider-component"));
 Vue.component("cart-dropdown", require("./components/cart-dropdown.vue"));
+Vue.component("res-category-nav", require("./components/res-category-nav.vue"));
+Vue.component("res-category-item", require("./components/res-category-item.vue"));
 
 $(document).ready(function () {
 
