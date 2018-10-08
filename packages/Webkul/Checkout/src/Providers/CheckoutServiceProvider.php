@@ -23,8 +23,6 @@ class CheckoutServiceProvider extends ServiceProvider
         $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
 
         $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
-
-        $this->app->register(ComposerServiceProvider::class);
     }
 
     /**
@@ -44,7 +42,6 @@ class CheckoutServiceProvider extends ServiceProvider
      */
     protected function registerFacades()
     {
-
         //to make the cart facade and bind the
         //alias to the class needed to be called.
         $loader = AliasLoader::getInstance();

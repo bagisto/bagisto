@@ -13,9 +13,11 @@ class Cart extends Model
 {
     protected $table = 'cart';
 
-    protected $fillable = ['customer_id', 'session_id', 'channel_id', 'coupon_code', 'is_gift', 'items_count', 'items_qty', 'exchange_rate', 'global_currency_code', 'base_currency_code', 'store_currency_code', 'quote_currency_code', 'grand_total', 'base_grand_total', 'sub_total', 'base_sub_total', 'sub_total_with_discount', 'base_sub_total_with_discount', 'checkout_method', 'is_guest', 'is_active', 'customer_full_name', 'conversion_time'];
+    protected $fillable = ['customer_id', 'session_id', 'channel_id', 'coupon_code', 'is_gift', 'items_count', 'items_qty', 'exchange_rate', 'global_currency_code', 'base_currency_code', 'channel_currency_code', 'cart_currency_code', 'grand_total', 'base_grand_total', 'sub_total', 'base_sub_total', 'sub_total_with_discount', 'base_sub_total_with_discount', 'checkout_method', 'is_guest', 'is_active', 'customer_first_name', 'conversion_time'];
 
     protected $hidden = ['coupon_code'];
+
+    protected $with = ['items', 'items.child', 'shipping_address', 'billing_address', 'selected_shipping_rate', 'payment'];
 
     public function items() {
         return $this->hasMany(CartItem::class)->whereNull('parent_id');
@@ -76,9 +78,17 @@ class Cart extends Model
     /**
      * Get all of the attributes for the attribute groups.
      */
+    public function selected_shipping_rate()
+    {
+        return $this->shipping_rates()->where('method', $this->shipping_method);
+    }
+
+    /**
+     * Get all of the attributes for the attribute groups.
+     */
     public function getSelectedShippingRateAttribute()
     {
-        return $this->shipping_rates()->where('method', $this->shipping_method)->first();
+        return $this->selected_shipping_rate()->where('method', $this->shipping_method)->first();
     }
 
     /**

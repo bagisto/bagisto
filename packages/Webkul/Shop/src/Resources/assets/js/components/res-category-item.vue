@@ -1,6 +1,15 @@
 <template>
     <li>
+        <a :href="this.item['translations'][0].slug">{{ this.item['translations'][0].name }}&emsp;<i class="icon dropdown-right-icon"
+        v-if="haveChildren && item.parent_id != null"></i></a>
 
+        <ul v-if="haveChildren" id="child">
+            <category-item
+                v-for="(child, index) in item.children"
+                :key="index"
+                :item="child">
+            </category-item>
+        </ul>
     </li>
 </template>
 <script>
@@ -17,7 +26,6 @@ export default {
     },
     computed: {
         haveChildren() {
-            console.log(this.item.name);
             return this.item.children.length ? true : false;
         }
     }

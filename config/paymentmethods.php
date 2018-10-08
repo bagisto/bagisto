@@ -6,7 +6,7 @@ return [
         'title' => 'Cash On Delivery',
         'description' => 'Cash On Delivery',
         'class' => 'Webkul\Payment\Payment\CashOnDelivery',
-        'order_status' => 'Pending',
+        'order_status' => 'pending',
         'active' => true
     ],
 
@@ -15,7 +15,7 @@ return [
         'title' => 'Money Transfer',
         'description' => 'Money Transfer',
         'class' => 'Webkul\Payment\Payment\MoneyTransfer',
-        'order_status' => 'Pending',
+        'order_status' => 'pending',
         'active' => true
     ]
 ];

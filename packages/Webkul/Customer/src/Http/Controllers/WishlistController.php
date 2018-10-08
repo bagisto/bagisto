@@ -5,6 +5,7 @@ namespace Webkul\Customer\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
 use Auth;
 
 /**
@@ -18,44 +19,101 @@ use Auth;
  */
 class WishlistController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     protected $_config;
+
     protected $customer;
 
+    protected $wishlist;
 
-    public function __construct(CustomerRepository $customer)
+    /**
+     * Initializes the required repository instances.
+     *
+     * @param $customer
+     * @param $wishlist
+     */
+    public function __construct(CustomerRepository $customer, WishlistRepository $wishlist)
     {
         $this->middleware('customer');
 
         $this->_config = request('_config');
 
         $this->customer = $customer;
+
+        $this->wishlist = $wishlist;
     }
 
     /**
-     * For taking the customer
-     * to the dashboard after
-     * authentication
-     * @return view
+     * Displays the listing resources if the customer having items in wishlist.
      */
-    private function getCustomer($id) {
-        $customer = collect($this->customer->findOneWhere(['id'=>$id]));
-        return $customer;
-    }
-
     public function index() {
-        $id = auth()->guard('customer')->user()->id;
+        $wishlists = $this->wishlist->findWhere(['channel_id' => core()->getCurrentChannel()->id,'customer_id' => auth()->guard('customer')->user()->id]);
 
-        $customer = $this->getCustomer($id);
+        $wishlistItems = array();
 
-        return view($this->_config['view'])->with('customer', $customer);
+        foreach($wishlists as $wishlist) {
+            array_push($wishlistItems, $this->wishlist->getItemsWithProducts($wishlist->id));
+        }
+
+        return view($this->_config['view'])->with('items', $wishlistItems);
     }
 
-    public function wishlist() {
-        return view($this->_config['view']);
+    /**
+     * Function to add item to the wishlist.
+     *
+     * @param integer $itemId
+     */
+    public function add($itemId) {
+
+        $data = [
+            'channel_id' => core()->getCurrentChannel()->id,
+            'product_id' => $itemId,
+            'customer_id' => auth()->guard('customer')->user()->id
+        ];
+
+        $checked = $this->wishlist->findWhere(['channel_id' => core()->getCurrentChannel()->id, 'product_id' => $itemId, 'customer_id' => auth()->guard('customer')->user()->id]);
+
+        if($checked->isEmpty()) {
+            if($this->wishlist->create($data)) {
+                session()->flash('success', trans('customer::app.wishlist.success'));
+
+                return redirect()->back();
+            } else {
+                session()->flash('error', trans('customer::app.wishlist.failure'));
+
+                return redirect()->back();
+            }
+        } else {
+            session()->flash('warning', trans('customer::app.wishlist.already'));
+
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Function to remove item to the wishlist.
+     *
+     * @param integer $itemId
+     */
+    public function remove($itemId) {
+
+        if($this->wishlist->deleteWhere(['customer_id' => auth()->guard('customer')->user()->id, 'channel_id' => core()->getCurrentChannel()->id, 'product_id' => $itemId])) {
+            session()->flash('success', trans('customer::app.wishlist.remove'));
+
+            return redirect()->back();
+        } else {
+            session()->flash('error', trans('customer::app.wishlist.remove-fail'));
+
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Function to move item from wishlist to cart.
+     *
+     * @param integer $itemId
+     */
+    public function moveToCart() {
+        dd('adding item to wishlist');
     }
 }

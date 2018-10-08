@@ -3,9 +3,12 @@
 namespace Webkul\Sales\Repositories;
 
 use Illuminate\Container\Container as App;
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\OrderItemInventoryRepository;
 
 /**
  * Order Reposotory
@@ -24,17 +27,28 @@ class OrderRepository extends Repository
     protected $orderItem;
 
     /**
+     * OrderItemInventoryRepository object
+     *
+     * @var Object
+     */
+    protected $orderItemInventory;
+
+    /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderItemRepository $orderItem
+     * @param  Webkul\Sales\Repositories\OrderItemRepository          $orderItem
+     * @param  Webkul\Sales\Repositories\OrderItemInventoryRepository $orderItemInventory
      * @return void
      */
     public function __construct(
         OrderItemRepository $orderItem,
+        OrderItemInventoryRepository $orderItemInventory,
         App $app
     )
     {
         $this->orderItem = $orderItem;
+
+        $this->orderItemInventory = $orderItemInventory;
 
         parent::__construct($app);
     }
@@ -56,15 +70,37 @@ class OrderRepository extends Repository
      */
     public function create(array $data)
     {
-        $this->validateOrder();
-
         DB::beginTransaction();
         
         try {
             Event::fire('checkout.order.save.before', $data);
 
-            $order = null;
+            if(isset($data['customer']) && $data['customer'] instanceof Model) {
+                $data['customer_id'] = $data['customer']->id;
+                $data['customer_type'] = get_class($data['customer']);
+            } else {
+                unset($data['customer']);
+            }
 
+            $data['status'] = core()->getConfigData('paymentmethods.' . $data['payment']['method'] . '.status') ?? 'pending';
+
+            $order = $this->model->create(array_merge($data, ['increment_id' => $this->generateIncrementId()]));
+
+            $order->payment()->create($data['payment']);
+
+            $order->addresses()->create($data['shipping_address']);
+            
+            $order->addresses()->create($data['billing_address']);
+
+            foreach($data['items'] as $item) {
+                $orderItem = $this->orderItem->create(array_merge($item, ['order_id' => $order->id]));
+
+                if(isset($item['child']) && $item['child']) {
+                    $orderItem->child = $this->orderItem->create(array_merge($item['child'], ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
+                }
+
+                $this->orderItemInventory->create(['orderItem' => $orderItem]);
+            }
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -76,5 +112,17 @@ class OrderRepository extends Repository
         Event::fire('checkout.order.save.after', $order);
 
         return $order;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function generateIncrementId()
+    {
+        $lastOrder = $this->model->orderBy('id', 'desc')->limit(1)->first();
+
+        $lastId = $lastOrder ? $lastOrder->id : 0;
+
+        return $lastId + 1;
     }
 }

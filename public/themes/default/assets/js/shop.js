@@ -30844,6 +30844,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 // define the item component
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -30873,12 +30882,20 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("li", [
-    _c("a", { attrs: { href: this.item["translations"][0].slug } }, [
-      _vm._v(_vm._s(this.item["translations"][0].name) + " "),
-      _vm.haveChildren && _vm.item.parent_id != null
-        ? _c("i", { staticClass: "icon dropdown-right-icon" })
-        : _vm._e()
+    _c("div", { staticClass: "name" }, [
+      _c("a", { attrs: { href: this.item["translations"][0].slug } }, [
+        _vm._v(_vm._s(this.item["translations"][0].name) + " "),
+        _vm.haveChildren && _vm.item.parent_id != null
+          ? _c("i", { staticClass: "icon dropdown-right-icon" })
+          : _vm._e()
+      ])
     ]),
+    _vm._v(" "),
+    _vm.haveChildren
+      ? _c("div", { staticClass: "click" }, [
+          _c("i", { staticClass: "icon dropdown-right-icon" })
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _vm.haveChildren
       ? _c(
@@ -31937,6 +31954,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 // define the item component
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -31965,7 +31991,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("li")
+  return _c("li", [
+    _c("a", { attrs: { href: this.item["translations"][0].slug } }, [
+      _vm._v(_vm._s(this.item["translations"][0].name) + " "),
+      _vm.haveChildren && _vm.item.parent_id != null
+        ? _c("i", { staticClass: "icon dropdown-right-icon" })
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _vm.haveChildren
+      ? _c(
+          "ul",
+          { attrs: { id: "child" } },
+          _vm._l(_vm.item.children, function(child, index) {
+            return _c("category-item", { key: index, attrs: { item: child } })
+          })
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

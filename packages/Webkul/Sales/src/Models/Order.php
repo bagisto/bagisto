@@ -7,13 +7,13 @@ use Webkul\Sales\Contracts\Order as OrderContract;
 
 class Order extends Model implements OrderContract
 {
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = ['id', 'items', 'shipping_address', 'billing_address', 'payment', 'created_at', 'updated_at'];
 
     /**
      * Get the order items record associated with the order.
      */
     public function items() {
-        return $this->hasMany(CartItemProxy::modelClass())->whereNull('parent_id');
+        return $this->hasMany(OrderItemProxy::modelClass())->whereNull('parent_id');
     }
 
     /**

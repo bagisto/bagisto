@@ -7,6 +7,8 @@ use Webkul\Sales\Contracts\OrderItem as OrderItemContract;
 
 class OrderItem extends Model implements OrderItemContract
 {
+    protected $guarded = ['id', 'child', 'created_at', 'updated_at'];
+
     /**
      * Get the order record associated with the order item.
      */
@@ -29,5 +31,12 @@ class OrderItem extends Model implements OrderItemContract
     public function child()
     {
         return $this->belongsTo(OrderItemProxy::modelClass(), 'parent_id');
+    }
+
+    /**
+     * Get the inventories record associated with the order item.
+     */
+    public function inventories() {
+        return $this->hasMany(CartItemInventoyrProxy::modelClass());
     }
 }

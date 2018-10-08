@@ -1,7 +1,16 @@
 <template>
     <li>
-        <a :href="this.item['translations'][0].slug">{{ this.item['translations'][0].name }}&emsp;<i class="icon dropdown-right-icon"
-        v-if="haveChildren && item.parent_id != null"></i></a>
+
+        <div class="name">
+            <a :href="this.item['translations'][0].slug">{{ this.item['translations'][0].name }}&emsp;<i class="icon dropdown-right-icon"
+            v-if="haveChildren && item.parent_id != null"></i></a>
+        </div>
+
+        <div class="click" v-if="haveChildren">
+            <i class="icon dropdown-right-icon"></i>
+        </div>
+
+
         <ul v-if="haveChildren">
             <category-item
                 v-for="(child, index) in item.children"

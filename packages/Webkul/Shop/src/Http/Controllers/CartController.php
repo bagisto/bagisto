@@ -122,7 +122,6 @@ class CartController extends Controller
         $data = request()->except('_token');
 
         foreach($data['qty'] as $id => $quantity) {
-            // dd($id, $quantity);
             if($quantity <= 0) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.illegal'));
 
@@ -135,5 +134,6 @@ class CartController extends Controller
     }
 
     public function test() {
+        $result = Cart::isConfigurable(9);
     }
 }

@@ -1,10 +1,6 @@
 <?php
 
 return [
-    'common' => [
-        'error' => 'Something went wrong, please contact us or try again later.'
-    ],
-
     'customer' => [
         'signup-text' => [
             'account_exists' => 'Already have an account',
@@ -62,24 +58,39 @@ return [
         'choose-option' => 'Choose an option'
     ],
 
+    'wishlist' => [
+        'title' => 'Wishlist',
+        'deleteall' => 'Delete All',
+        'moveall' => 'Move All Products To Cart'
+    ],
+
     'checkout' => [
         'cart' => [
+            'integrity' => [
+                'missing_fields' =>'Cart System Integrity Violation, Some Required Fields Missing',
+                'missing_options' =>'Cart System Integrity Violation, Configurable product\'s options are missing',
+
+            ],
             'title' => 'Shopping Cart',
             'empty' => 'Shopping Cart Is Empty',
             'continue-shopping' => 'Continue Shopping',
             'proceed-to-checkout' => 'Proceed To Checkout',
-            'quantity' => 'Quantity',
             'remove' => 'Remove',
+            'remove-link' => 'Remove',
             'move-to-wishlist' => 'Move to Wishlist',
             'quantity' => [
                 'quantity' => 'Quantity',
-                'illegal' => 'Quantity cannot be lesser than one.'
+                'success' => 'Quantity successfully updated',
+                'illegal' => 'Quantity cannot be lesser than one',
+                'inventory_warning' => 'The requested quantity is not available, please try again later'
             ],
-            'remove' => [
-                'cannot' => 'No items to remove from the cart',
-                'success' => 'Item successfully removed from the cart',
-                'error' => 'Cannot remove item from cart'
-            ]
+            'item' => [
+                'error_remove' => 'No items to remove from the cart',
+                'success' => 'Item successfully added to cart',
+                'success_remove' => 'Item removed successfully',
+                'error_add' => 'Item cannot be added to cart',
+            ],
+            'quantity-error' => 'Requested quantity is not available.'
         ],
 
         'onepage' => [
@@ -117,9 +128,17 @@ return [
 
         'total' => [
             'order-summary' => 'Order Summary',
-            'sub-total' => 'Sub Total',
+            'sub-total' => 'Items',
             'grand-total' => 'Grand Total',
-            'delivery-charges' => 'Delivery Charges'
+            'delivery-charges' => 'Delivery Charges',
+            'price' => 'price'
+        ],
+
+        'success' => [
+            'title' => 'Order successfully placed',
+            'thanks' => 'Thank you for your order!',
+            'order-id-info' => 'Your order id is #:order_id',
+            'info' => 'We will email you, your order details and tracking information.'
         ]
     ]
 ];

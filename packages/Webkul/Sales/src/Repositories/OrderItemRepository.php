@@ -24,4 +24,20 @@ class OrderItemRepository extends Repository
     {
         return 'Webkul\Sales\Contracts\OrderItem';
     }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function create(array $data)
+    {
+        if(isset($data['product']) && $data['product']) {
+            $data['product_id'] = $data['product']->id;
+            $data['product_type'] = get_class($data['product']);
+
+            unset($data['product']);
+        }
+
+        return $this->model->create($data);
+    }
 }

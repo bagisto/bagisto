@@ -69,7 +69,8 @@
 
                                     <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
 
-                                    {{-- <li><a href="{{ route('customer.cart') }}">Cart</a></li> --}}
+                                    <li><a href="{{ route('shop.checkout.cart.index') }}">Cart</a></li>
+
                                     <li><a href="{{ route('customer.orders.index') }}">Orders</a></li>
 
                                     <li><a href="{{ route('customer.session.destroy') }}">Logout</a></li>
@@ -83,57 +84,92 @@
             </ul>
             <ul class="cart-dropdown-container">
 
+                <?php $cart = cart()->getCart(); ?>
+
+                @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
+
                 <li class="cart-dropdown">
                     <span class="icon cart-icon"></span>
-                    @if(isset($cart))
-                    @php
-                        $cartInstance = session()->get('cart');
-                    @endphp
-                    <div class="dropdown-toggle">
+                    @if($cart)
+                        @php
+                            $items = $cart->items;
+                        @endphp
+                        <div class="dropdown-toggle">
+                            <div style="display: inline-block; cursor: pointer;">
+                                @if($cart->items_qty - intval($cart->items_qty) > 0)
+                                <span class="name"><span class="count">  {{ $cart->items_qty }} Products</span>
+                                @else
+                                <span class="name"><span class="count">  {{ intval($cart->items_qty) }} Products</span>
+                                @endif
+                            </div>
 
-                        <div style="display: inline-block; cursor: pointer;">
-                            <span class="name"><span class="count">  {{$cartInstance->items_count}} Products</span>
+                            <i class="icon arrow-down-icon active"></i>
+
                         </div>
-
-                        <i class="icon arrow-down-icon active"></i>
-
-                    </div>
-
-                    <div class="dropdown-list" style="display: none; top: 50px; right: 0px">
-                        <div class="dropdown-container">
-                            <div class="dropdown-cart">
-                                <div class="dropdown-header">
-                                    <p class="heading">Cart Subtotal - {{ $cartInstance->sub_total }}</p>
-                                </div>
-
-                                <div class="dropdown-content">
-                                    @foreach($cart as $product)
-                                    <div class="item" >
-                                        <div class="item-image" >
-                                            <img src="{{$product['2']}}" />
-                                        </div>
-                                        <div class="item-details">
-                                            <div class="item-name">{{$product['0']}}</div>
-                                            <div class="item-price">{{$product['1']}}</div>
-                                            <div class="item-qty">Quantity - {{$product['3']}}</div>
-                                        </div>
+                        <div class="dropdown-list" style="display: none; top: 50px; right: 0px">
+                            <div class="dropdown-container">
+                                <div class="dropdown-cart">
+                                    <div class="dropdown-header">
+                                        <p class="heading">Cart Subtotal - {{ $cart->sub_total }}</p>
                                     </div>
-                                    @endforeach
-                                </div>
 
-                                <div class="dropdown-footer">
-                                    <a href="{{ route('shop.checkout.cart.index') }}">View Shopping Cart</a>
-                                    <button class="btn btn-primary btn-lg">CHECKOUT</button>
+                                    <div class="dropdown-content">
+                                        @foreach($items as $item)
+                                            @if($item->type == "configurable")
+                                            <div class="item">
+                                                <div class="item-image" >
+                                                    @php
+                                                        $images = $productImageHelper->getProductBaseImage($item->child->product);
+                                                    @endphp
+                                                    <img src="{{ $images['small_image_url'] }}" />
+                                                </div>
+
+                                                <div class="item-details">
+
+                                                    <div class="item-name">{{ $item->child->name }}</div>
+
+                                                    <div class="item-price">{{ $item->total }}</div>
+
+                                                    <div class="item-qty">Quantity - {{ $item->quantity }}</div>
+                                                </div>
+                                            </div>
+                                            @else
+                                            <div class="item">
+                                                <div class="item-image" >
+                                                    @php
+                                                        $images = $productImageHelper->getProductBaseImage($item->product);
+                                                    @endphp
+                                                    <img src="{{ $images['small_image_url'] }}" />
+                                                </div>
+
+                                                <div class="item-details">
+
+                                                    <div class="item-name">{{ $item->name }}</div>
+
+                                                    <div class="item-price">{{ $item->total }}</div>
+
+                                                    <div class="item-qty">Quantity - {{ $item->quantity }}</div>
+                                                </div>
+                                            </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+
+                                    <div class="dropdown-footer">
+                                        <a href="{{ route('shop.checkout.cart.index') }}">View Shopping Cart</a>
+
+                                        <button class="btn btn-primary btn-lg">CHECKOUT</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @else
-                    <div class="dropdown-toggle">
-                        <div style="display: inline-block; cursor: pointer;">
-                            <span class="name"><span class="count"> 0 &nbsp;</span>Products</span>
+                        <div class="dropdown-toggle">
+                            <div style="display: inline-block; cursor: pointer;">
+
+                                <span class="name"><span class="count"> 0 &nbsp;</span>Products</span>
+                            </div>
                         </div>
-                    </div>
                     @endif
                 </li>
             </ul>
@@ -147,17 +183,10 @@
                         <div class="dropdown-toggle">
 
                             <span class="icon account-icon"></span>
-
-                            {{-- <div style="display: inline-block; cursor: pointer;">
-                                <span class="name">Account</span>
-                            </div>
-                            <i class="icon arrow-down-icon active"></i> --}}
-
                         </div>
 
                         @guest
                             <div class="dropdown-list bottom-right" style="display: none;">
-
                                 <div class="dropdown-container">
 
                                     <label>Account</label>
@@ -167,15 +196,15 @@
 
                                         <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
                                     </ul>
-
                                 </div>
-
                             </div>
                         @endguest
                         @auth('customer')
                             <div class="dropdown-list bottom-right" style="display: none;">
                                 <div class="dropdown-container">
+
                                     <label>Account</label>
+
                                     <ul>
                                         <li><a href="{{ route('customer.account.index') }}">Account</a></li>
 
@@ -185,7 +214,8 @@
 
                                         <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
 
-                                        {{-- <li><a href="{{ route('customer.cart') }}">Cart</a></li> --}}
+                                        <li><a href="{{ route('shop.checkout.cart.index') }}">Cart</a></li>
+
                                         <li><a href="{{ route('customer.orders.index') }}">Orders</a></li>
 
                                         <li><a href="{{ route('customer.session.destroy') }}">Logout</a></li>
@@ -200,9 +230,9 @@
                 <ul class="resp-cart-dropdown-container">
 
                     <li class="cart-dropdown">
-                        @if(isset($cart))
+                        @if(isset($cart) && session()->has('cart'))
                         @php
-                            $cartInstance = session()->get('cart');
+                            $cart = session()->get('cart');
                         @endphp
                         <div class="dropdown-toggle">
                             <span class="icon cart-icon"></span>
@@ -212,7 +242,7 @@
                             <div class="dropdown-container">
                                 <div class="dropdown-cart">
                                     <div class="dropdown-header">
-                                        <p class="heading">Cart Subtotal - {{ $cartInstance->sub_total }}</p>
+                                        <p class="heading">Cart Subtotal - {{ $cart->sub_total }}</p>
                                     </div>
 
                                     <div class="dropdown-content">
@@ -240,7 +270,9 @@
                         @else
                         <div class="dropdown-toggle">
                             <div style="display: inline-block; cursor: pointer;">
-                                <span class="name"><span class="count"> 0 &nbsp;</span>Products</span>
+                                {{-- <span class="name"><span class="count"> 0 &nbsp;
+                                    </span>Products</span> --}}
+                                <span class="icon cart-icon"></span>
                             </div>
                         </div>
                         @endif
@@ -265,13 +297,8 @@
         </div>
     </div>
 
-    <div class="header-bottom" id="header-bottom">
-    @include('shop::layouts.header.nav-menu.navmenu')
-    </div>
 
-    <div class="responsive-nav">
-        <res-category-nav categories='@json($categories)' url="{{url()->to('/')}}"></res-category-nav>
-    </div>
+
 
 </div>
 
@@ -355,8 +382,27 @@
                 layerFilter.style.display ="none";
             }
         }
+
+
+        var click=document.getElementsByClassName('click');
+
+        var y=document.getElementById('child');
+
+        console.log(y);
+
+
+        for(let i=0 ; i <click.length ; i++){
+
+            click[i].addEventListener("click",function(){
+
+            });
+        }
+
+
+
     }
 
 </script>
 
 @endpush
+</div>
