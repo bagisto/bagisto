@@ -13,8 +13,8 @@
 
 .icon-menu-close {
   background-image: URL("../images/icon-menu-close.svg");
-  width: 8px;
-  height: 8px;
+  width: 24px;
+  height: 24px;
   margin-left: auto;
   margin-bottom: 2px;
 }
@@ -340,6 +340,10 @@ body {
 
 .mb-90 {
   margin-bottom: 90px;
+}
+
+.mt-5 {
+  margin-top: 5px;
 }
 
 .mt-10 {
@@ -751,10 +755,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
           user-select: none;
 }
 
-.header .search-suggestion {
-  display: none;
-}
-
 .header .header-top {
   margin-bottom: 16px;
   display: -webkit-box;
@@ -1079,6 +1079,10 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   position: relative;
 }
 
+.header .header-bottom .nav li > .icon {
+  display: none;
+}
+
 .header .header-bottom .nav {
   vertical-align: top;
   display: inline-block;
@@ -1096,6 +1100,10 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 
 .header .header-bottom .nav > li > a {
   margin-bottom: 1px;
+}
+
+.header .header-bottom .nav > li > a .icon {
+  display: none;
 }
 
 .header .header-bottom .nav > li:last-child {
@@ -1163,6 +1171,41 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   right: 10px;
 }
 
+.header .search-responsive {
+  display: none;
+}
+
+.header .search-responsive .search-content {
+  border-bottom: 1px solid #e8e8e8;
+  height: 48px;
+}
+
+.header .search-responsive .search-content .search {
+  width: 70%;
+  margin-left: 20px;
+  height: 30px;
+  border: none;
+  font-size: 16px;
+  position: absolute;
+}
+
+.header .search-responsive .search-content .right {
+  float: right;
+}
+
+.header .search-responsive .search-content .suggestion {
+  position: absolute;
+  margin-left: 20px;
+}
+
+.header .search-responsive .search-content:first-child {
+  border-top: 1px solid #e8e8e8;
+}
+
+.header .responsive-nav {
+  display: none;
+}
+
 @media all and (max-width: 720px) {
   .header-bottom {
     display: none !important;
@@ -1180,6 +1223,46 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
     display: -webkit-box !important;
     display: -ms-flexbox !important;
     display: flex !important;
+  }
+  .responsive-nav {
+    margin-top: 20px;
+    display: none;
+  }
+  .responsive-nav .nav a {
+    display: inline-block;
+    color: #242424;
+    text-decoration: none;
+    padding: 0.8em 0.3em 0.8em 0.5em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    width: 90%;
+  }
+  .responsive-nav .nav li > .icon {
+    float: right;
+  }
+  .responsive-nav .nav li a > .icon {
+    display: none;
+  }
+  .responsive-nav .nav > li {
+    border-bottom: 1px solid #E8E8E8;
+  }
+  .responsive-nav .nav li:first-child {
+    border-top: 1px solid #E8E8E8;
+  }
+  .responsive-nav .nav > li:last-child {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    border-radius: 0 0 4px 0;
+    float: none;
+    height: 45px;
+  }
+  .responsive-nav .nav > li:last-child img {
+    margin-right: 6px;
   }
 }
 
@@ -1687,20 +1770,28 @@ section.product-detail div.layouter form div.product-image-group div .product-he
   max-height: 480px;
 }
 
-section.product-detail div.layouter form div.product-image-group div .product-hero-image .wishlist-icon {
-  position: absolute;
-  height: 32px;
-  width: 32px;
-  top: 15px;
-  right: 15px;
+section.product-detail div.layouter form div.product-image-group div .product-hero-image .whishlist-icon {
+  margin-top: -480px;
+  float: right;
+  margin-right: 10px;
 }
 
 section.product-detail div.layouter form div.product-image-group div .product-hero-image .share-icon {
+  margin-top: -480px;
+  float: right;
+  margin-right: 40px;
+}
+
+section.product-detail div.layouter form div.product-image-group div .product-hero-image .wishlist {
   position: absolute;
-  height: 32px;
-  width: 32px;
-  top: 15px;
-  right: 48px;
+  top: 10px;
+  right: 12px;
+}
+
+section.product-detail div.layouter form div.product-image-group div .product-hero-image .share {
+  position: absolute;
+  top: 10px;
+  right: 45px;
 }
 
 section.product-detail div.layouter form div.product-image-group .add-to-buttons {
@@ -1998,11 +2089,6 @@ section.cart .cart-content .right-side {
   color: #0041FF;
 }
 
-.cart-item-list .item .item-details .error-message {
-  color: #ff5656;
-  margin-top: 17px;
-}
-
 .order-summary h3 {
   font-size: 16px;
   margin-top: 0;
@@ -2231,14 +2317,6 @@ section.cart .cart-content .right-side {
 .checkout-process .col-right {
   width: 35%;
   padding-left: 40px;
-}
-
-.order-success-content {
-  padding: 40px 0;
-}
-
-.order-success-content .btn {
-  display: inline-block;
 }
 
 @media only screen and (max-width: 770px) {

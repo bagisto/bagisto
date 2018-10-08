@@ -213,10 +213,6 @@ section.slider-block {
     margin-bottom: 21px;
     user-select: none;
 
-    .search-suggestion {
-        display: none;
-    }
-
     .header-top {
         margin-bottom: 16px;
         display: flex;
@@ -421,7 +417,6 @@ section.slider-block {
                 }
             }
         }
-
         ul.right-responsive {
             display: none;
 
@@ -478,6 +473,10 @@ section.slider-block {
             position: relative;
         }
 
+        .nav  li  > .icon{
+            display: none;
+        }
+
         .nav {
             vertical-align: top;
             display: inline-block;
@@ -496,6 +495,10 @@ section.slider-block {
 
         .nav > li > a {
             margin-bottom: 1px;
+        }
+
+        .nav > li > a .icon{
+            display: none;
         }
 
         .nav > li:last-child {
@@ -560,9 +563,45 @@ section.slider-block {
             right: 10px;
         }
     }
+
+    .search-responsive {
+        display: none;
+
+        .search-content {
+            border-bottom: 1px solid #e8e8e8;
+            height: 48px;
+
+            .search {
+                width: 70%;
+                margin-left: 20px;
+                height: 30px;
+                border: none;
+                font-size: 16px;
+                position: absolute;
+            }
+
+            .right {
+                float: right;
+            }
+
+            .suggestion {
+               position: absolute;
+               margin-left:20px;
+            }
+        }
+
+        .search-content:first-child {
+            border-top: 1px solid #e8e8e8;
+        }
+    }
+
+    .responsive-nav {
+        display: none;
+    }
 }
 
 @media all and (max-width: 720px) {
+
     .header-bottom {
         display: none !important;
     }
@@ -583,6 +622,48 @@ section.slider-block {
         display: flex !important;
     }
 
+    .responsive-nav {
+        margin-top: 20px;
+        display: none;
+
+        .nav a {
+            display:inline-block;
+            color: $font-color;
+            text-decoration: none;
+            padding: 0.8em 0.3em 0.8em 0.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            width: 90%;
+        }
+
+        .nav  li  > .icon{
+            float: right;
+        }
+
+        .nav  li  a > .icon{
+            display: none;
+        }
+
+        .nav > li {
+            border-bottom: 1px solid $border-color;
+        }
+
+        .nav  li:first-child {
+            border-top: 1px solid $border-color;
+        }
+
+        .nav > li:last-child {
+            display:flex; align-items:center;
+            border-radius: 0 0 4px 0;
+            float:none;
+            height: 45px;
+
+            img {
+                margin-right:6px;
+            }
+        }
+    }
 }
 
 //footer responsive with out media query.
@@ -1051,20 +1132,28 @@ section.product-detail {
                             max-height: 480px;
                         }
 
-                        .wishlist-icon {
-                            position: absolute;
-                            height: 32px;
-                            width: 32px;
-                            top: 15px;
-                            right: 15px;
+                        .whishlist-icon {
+                            margin-top: -480px;
+                            float: right;
+                            margin-right: 10px;
                         }
 
                         .share-icon {
+                            margin-top: -480px;
+                            float: right;
+                            margin-right: 40px;
+                        }
+
+                        .wishlist {
                             position: absolute;
-                            height: 32px;
-                            width: 32px;
-                            top: 15px;
-                            right: 48px;
+                            top: 10px;
+                            right: 12px;
+                        }
+
+                        .share {
+                            position: absolute;
+                            top: 10px;
+                            right: 45px;
                         }
                     }
                 }
@@ -1339,11 +1428,7 @@ section.cart {
                 .towishlist {
                     color : $brand-color;
                 }
-            }
 
-            .error-message {
-                color: #ff5656;
-                margin-top: 17px;
             }
         }
     }
@@ -1582,14 +1667,6 @@ section.cart {
     }
 }
 // checkout ends here
-
-.order-success-content {
-    padding: 40px 0;
-
-    .btn {
-        display: inline-block;
-    }
-}
 
 // checkout responsive start here
 @media only screen and (max-width: 770px) {
@@ -1874,4 +1951,3 @@ section.review {
     }
 }
 // customer section css end here
-
