@@ -20,15 +20,17 @@ class CreateTaxRatesTable extends Migration
 
             $table->boolean('is_zip_from')->default(0);
 
-            $table->integer('zip_from')->unsigned()->nullable();
+            $table->string('zip_code')->nullable();
 
-            $table->integer('zip_to')->unsigned()->nullable();
+            $table->string('zip_from')->nullable();
+
+            $table->string('zip_to')->nullable();
 
             $table->string('state');
 
             $table->string('country');
 
-            $table->float('tax_rate', 6, 4);
+            $table->float('tax_rate', 12, 4);
 
             $table->timestamps();
         });

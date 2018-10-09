@@ -179,22 +179,24 @@ return [
     'configuration' => [
         'tax' => [
             'title' => 'Taxes',
-            'add-title' => 'Add Tax Rule'
+            'add-title' => 'Add Tax Category'
         ],
+
         'taxrule' => [
-            'title' => 'Add Tax Rule',
-            'create' => 'Create Tax Rule',
-            'general' => 'Tax Rule',
+            'title' => 'Add Tax Category',
+            'create' => 'Create Tax Category',
+            'general' => 'Tax Category',
             'select-channel' => 'Select Channel',
             'name' => 'Name',
             'code' => 'Code',
             'description' => 'Description',
             'select-taxrates' => 'Select Tax Rates',
             'edit' => [
-                'title' => 'Edit Tax Rule',
-                'edit-button-title' => 'Edit Rule'
+                'title' => 'Edit Tax Category',
+                'edit-button-title' => 'Edit Tax Category'
             ]
         ],
+
         'taxrate' => [
             'title' => 'Add Tax Rate',
             'general' => 'Tax Rate',
@@ -208,7 +210,8 @@ return [
             'edit' => [
                 'title' => 'Edit Tax Rate',
                 'edit-button-title' => 'Edit Rate'
-            ]
+            ],
+            'zip_code' => 'Zip Code'
         ],
     ],
 

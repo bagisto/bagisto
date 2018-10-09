@@ -153,7 +153,7 @@ class Cart {
                 'total_weight' => $product->weight * $data['quantity'],
                 'base_total_weight' => $product->weight * $data['quantity'],
             ];
-            
+
             return ['parent' => $parentData, 'child' => null];
         }
     }
@@ -703,8 +703,6 @@ class Cart {
                             $canBe = $this->canAddOrUpdate($cartItem->id, $prevQty + $newQty);
 
                             if($canBe == false) {
-                                session()->flash('warning', 'The requested quantity is not available, please try back later.');
-
                                 return redirect()->back();
                             }
 
@@ -813,7 +811,7 @@ class Cart {
 
         if(!$this->isItemsHaveSufficientQuantity())
             return true;
-            
+
         return false;
     }
 
@@ -846,7 +844,7 @@ class Cart {
 
         return true;
     }
-    
+
 
     /**
      * Deactivates current cart

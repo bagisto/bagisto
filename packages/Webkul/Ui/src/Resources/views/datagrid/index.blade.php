@@ -1,4 +1,4 @@
-<div class="grid-container{{-- $css->datagrid --}}">
+<div class="grid-container {{-- $css->datagrid --}}">
 
     {{-- For loading the filters from includes directory file --}}
     @include('ui::datagrid.filters.default')
@@ -53,7 +53,7 @@
                 $('.search-btn').click(function() {
 
                     search_value = $(".search-field").val();
-                    formURL('search','all',search_value,params);  //format for search
+                    formURL('search','all', search_value, params);  //format for search
                 });
 
                 //controls for header when sorting is done

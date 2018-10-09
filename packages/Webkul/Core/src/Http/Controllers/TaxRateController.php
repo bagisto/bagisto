@@ -77,6 +77,7 @@ class TaxRateController extends Controller
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier',
             'is_zip' => 'sometimes|confirmed',
+            'zip_code' => 'sometimes|required_without:is_zip',
             'zip_from' => 'nullable|numeric|required_with:is_zip',
             'zip_to' => 'nullable|numeric|required_with:is_zip,zip_from',
             'state' => 'required|string',
@@ -93,6 +94,8 @@ class TaxRateController extends Controller
 
             return redirect()->back();
         }
+
+        Session()->flash('warning', 'System Cannot Identify the cause of this error, contact system administrator.');
 
         return redirect()->back();
     }

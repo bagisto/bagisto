@@ -58,8 +58,6 @@ class ProductDataGrid
             ],
 
             'join' => [
-
-                //for getting name of attrib family.
                 [
                     'join' => 'leftjoin',
                     'table' => 'attribute_families as attfam',
@@ -69,19 +67,19 @@ class ProductDataGrid
                 ],
 
                 //for getting the attribute values.
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'product_attribute_values as pav',
-                    'primaryKey' => 'prods.id',
-                    'condition' => '=',
-                    'secondaryKey' => 'pav.product_id',
-                    'withAttributes' => [
-                        'condition' => [
-                            'attribute_id' => 2,
-                            'select' => 'name',
-                        ]
-                    ]
-                ],
+                // [
+                //     'join' => 'leftjoin',
+                //     'table' => 'product_attribute_values as pav',
+                //     'primaryKey' => 'prods.id',
+                //     'condition' => '=',
+                //     'secondaryKey' => 'pav.product_id',
+                //     'withAttributes' => [
+                //         'condition' => [
+                //             'attribute_id' => 2,
+                //             'select' => 'name',
+                //         ]
+                //     ]
+                // ],
 
                 // for getting the inventory quantity of a product
                 [
