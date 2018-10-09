@@ -77,11 +77,53 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.update');
 
-            // dummy number i.e-1 is used for creating view only
+            // Sales Routes
+            Route::prefix('sales')->group(function () {
+                // Sales Order Routes
+                Route::get('/orders', 'Webkul\Admin\Http\Controllers\Sales\OrderController@index')->defaults('_config', [
+                    'view' => 'admin::sales.orders.index'
+                ])->name('admin.sales.orders.index');
 
-            Route::get('customer/orders/1', 'Webkul\User\Http\Controllers\UserController@index')->defaults('_config', [
-                'view' => 'admin::customers.orders.order'
-            ])->name('admin.customer.orders.order');
+                Route::get('/orders/view/{id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@view')->defaults('_config', [
+                    'view' => 'admin::sales.orders.view'
+                ])->name('admin.sales.orders.view');
+
+
+                // Sales Invoices Routes
+                Route::get('/invoices', 'Webkul\Admin\Http\Controllers\Sales\InvoiceController@index')->defaults('_config', [
+                    'view' => 'admin::sales.invoices.index'
+                ])->name('admin.sales.invoices.index');
+
+                Route::get('/invoices/create/{order_id}', 'Webkul\Admin\Http\Controllers\Sales\InvoiceController@create')->defaults('_config', [
+                    'view' => 'admin::sales.invoices.create'
+                ])->name('admin.sales.invoices.create');
+
+                Route::post('/invoices/create/{order_id}', 'Webkul\Admin\Http\Controllers\Sales\InvoiceController@store')->defaults('_config', [
+                    'redirect' => 'admin.sales.orders.view'
+                ])->name('admin.sales.invoices.store');
+
+                Route::get('/invoices/view/{id}', 'Webkul\Admin\Http\Controllers\Sales\InvoiceController@view')->defaults('_config', [
+                    'view' => 'admin::sales.invoices.view'
+                ])->name('admin.sales.invoices.view');
+
+
+                // Sales Shipments Routes
+                Route::get('/shipments', 'Webkul\Admin\Http\Controllers\Sales\ShipmentController@index')->defaults('_config', [
+                    'view' => 'admin::sales.shipments.index'
+                ])->name('admin.sales.shipments.index');
+
+                Route::get('/shipments/create/{order_id}', 'Webkul\Admin\Http\Controllers\Sales\ShipmentController@create')->defaults('_config', [
+                    'view' => 'admin::sales.shipments.create'
+                ])->name('admin.sales.shipments.create');
+
+                Route::post('/shipments/create/{order_id}', 'Webkul\Admin\Http\Controllers\Sales\ShipmentController@store')->defaults('_config', [
+                    'redirect' => 'admin.sales.orders.view'
+                ])->name('admin.sales.shipments.store');
+
+                Route::get('/shipments/view/{id}', 'Webkul\Admin\Http\Controllers\Sales\ShipmentController@view')->defaults('_config', [
+                    'view' => 'admin::sales.shipments.view'
+                ])->name('admin.sales.shipments.view');
+            });
 
             // Catalog Routes
             Route::prefix('catalog')->group(function () {

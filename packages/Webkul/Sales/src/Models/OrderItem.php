@@ -10,6 +10,20 @@ class OrderItem extends Model implements OrderItemContract
     protected $guarded = ['id', 'child', 'created_at', 'updated_at'];
 
     /**
+     * Get remaining qty for shipping.
+     */
+    public function getQtyToShipAttribute() {
+        return $this->qty_ordered - $this->qty_shipped - $this->qty_refunded;
+    }
+
+    /**
+     * Get remaining qty for invoice.
+     */
+    public function getQtyToInvoiceAttribute() {
+        return $this->qty_ordered - $this->qty_invoiced - $this->qty_refunded;
+    }
+
+    /**
      * Get the order record associated with the order item.
      */
     public function order()
@@ -30,13 +44,27 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function child()
     {
-        return $this->belongsTo(OrderItemProxy::modelClass(), 'parent_id');
+        return $this->hasOne(OrderItemProxy::modelClass(), 'parent_id');
     }
 
     /**
      * Get the inventories record associated with the order item.
      */
     public function inventories() {
-        return $this->hasMany(CartItemInventoyrProxy::modelClass());
+        return $this->hasMany(CartItemInventoryProxy::modelClass());
+    }
+
+    /**
+     * Get the invoice items record associated with the order item.
+     */
+    public function invoice_items() {
+        return $this->hasMany(InvoiceItemProxy::modelClass());
+    }
+
+    /**
+     * Get the shipment items record associated with the order item.
+     */
+    public function shipment_items() {
+        return $this->hasMany(ShipmentItemProxy::modelClass());
     }
 }

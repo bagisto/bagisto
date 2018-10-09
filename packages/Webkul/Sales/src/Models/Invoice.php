@@ -7,6 +7,30 @@ use Webkul\Sales\Contracts\Invoice as InvoiceContract;
 
 class Invoice extends Model implements InvoiceContract
 {
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $statusLabel = [
+        'pending' => 'Pending',
+        'paid' => 'Paid',
+        'refunded' => 'Refunded',
+    ];
+
+    /**
+     * Returns the status label from status code
+     */
+    public function getStatusLabelAttribute()
+    {
+        return isset($this->statusLabel[$this->state]) ? $this->statusLabel[$this->state] : '';
+    }
+
+    /**
+     * Get the order that belongs to the invoice.
+     */
+    public function order()
+    {
+        return $this->belongsTo(OrderProxy::modelClass());
+    }
+
     /**
      * Get the invoice items record associated with the invoice.
      */
@@ -31,42 +55,10 @@ class Invoice extends Model implements InvoiceContract
     }
 
     /**
-     * Get the addresses for the invoice.
+     * Get the addresses for the shipment.
      */
-    public function addresses()
+    public function address()
     {
-        return $this->hasMany(OrderAddressProxy::modelClass());
-    }
-
-    /**
-     * Get the biling address for the invoice.
-     */
-    public function billing_address()
-    {
-        return $this->addresses()->where('address_type', 'billing');
-    }
-
-    /**
-     * Get billing address for the invoice.
-     */
-    public function getBillingAddressAttribute()
-    {
-        return $this->billing_address()->first();
-    }
-
-    /**
-     * Get the shipping address for the invoice.
-     */
-    public function shipping_address()
-    {
-        return $this->addresses()->where('address_type', 'shipping');
-    }
-
-    /**
-     * Get shipping address for the invoice.
-     */
-    public function getShippingAddressAttribute()
-    {
-        return $this->shipping_address()->first();
+        return $this->belongsTo(OrderAddressProxy::modelClass(), 'order_address_id');
     }
 }

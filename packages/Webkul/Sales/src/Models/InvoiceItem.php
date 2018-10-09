@@ -7,6 +7,8 @@ use Webkul\Sales\Contracts\InvoiceItem as InvoiceItemContract;
 
 class InvoiceItem extends Model implements InvoiceItemContract
 {
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+    
     /**
      * Get the invoice record associated with the invoice item.
      */
@@ -36,6 +38,6 @@ class InvoiceItem extends Model implements InvoiceItemContract
      */
     public function child()
     {
-        return $this->belongsTo(InvoiceItemProxy::modelClass(), 'parent_id');
+        return $this->hasOne(InvoiceItemProxy::modelClass(), 'parent_id');
     }
 }

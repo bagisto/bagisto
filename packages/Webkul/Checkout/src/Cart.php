@@ -633,17 +633,22 @@ class Cart {
 
         $cart->grand_total = 0;
         $cart->base_grand_total = 0;
+
         $cart->sub_total = 0;
         $cart->base_sub_total = 0;
-        $cart->sub_total_with_discount = 0;
-        $cart->base_sub_total_with_discount = 0;
+        
+        $cart->tax_total = 0;
+        $cart->base_tax_total = 0;
 
         foreach ($cart->items()->get() as $item) {
             $cart->grand_total = (float) $cart->grand_total + $item->total;
             $cart->base_grand_total = (float) $cart->base_grand_total + $item->base_total;
 
-            $cart->sub_total = (float) $cart->sub_total + $item->price * $item->quantity;
-            $cart->base_sub_total = (float) $cart->base_sub_total + $item->base_price * $item->quantity;
+            $cart->sub_total = (float) $cart->sub_total + $item->total;
+            $cart->base_sub_total = (float) $cart->base_sub_total + $item->base_total;
+
+            $cart->tax_total = (float) $cart->tax_total + $item->tax_amount;
+            $cart->base_tax_total = (float) $cart->base_tax_total + $item->base_tax_amount;
         }
 
         if($shipping = $cart->selected_shipping_rate) {
@@ -882,6 +887,7 @@ class Cart {
             'customer' => auth()->guard('customer')->check() ? auth()->guard('customer')->user : null,
 
             'shipping_method' => $data['selected_shipping_rate']['method'],
+            'shipping_title' => $data['selected_shipping_rate']['carrier_title'] . ' - ' . $data['selected_shipping_rate']['method_title'],
             'shipping_description' => $data['selected_shipping_rate']['method_description'],
             'shipping_amount' => $data['selected_shipping_rate']['price'],
             'base_shipping_amount' => $data['selected_shipping_rate']['base_price'],
@@ -895,10 +901,14 @@ class Cart {
             'base_grand_total' => $data['base_grand_total'],
             'sub_total' => $data['sub_total'],
             'base_sub_total' => $data['base_sub_total'],
+            'tax_amount' => $data['tax_total'],
+            'base_tax_amount' => $data['base_tax_total'],
 
             'shipping_address' => array_except($data['shipping_address'], ['id', 'cart_id']),
             'billing_address' => array_except($data['billing_address'], ['id', 'cart_id']),
             'payment' => array_except($data['payment'], ['id', 'cart_id']),
+
+            'channel' => core()->getCurrentChannel(),
         ];
 
         foreach($data['items'] as $item) {
@@ -927,6 +937,9 @@ class Cart {
             'base_price' => $data['base_price'],
             'total' => $data['total'],
             'base_total' => $data['base_total'],
+            'tax_percent' => $data['tax_percent'],
+            'tax_amount' => $data['tax_amount'],
+            'base_tax_amount' => $data['base_tax_amount'],
             'additional' => $data['additional'],
         ];
 

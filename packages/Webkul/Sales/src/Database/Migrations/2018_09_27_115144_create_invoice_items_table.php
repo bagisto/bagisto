@@ -35,7 +35,7 @@ class CreateInvoiceItemsTable extends Migration
             $table->integer('invoice_id')->unsigned()->nullable();
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->integer('parent_id')->unsigned()->nullable();
-            $table->foreign('parent_id')->references('id')->on('shipment_items')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('invoice_items')->onDelete('cascade');
 
             $table->json('additional')->nullable();
             $table->timestamps();

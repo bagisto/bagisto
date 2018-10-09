@@ -1,5 +1,7 @@
 Vue.component("flash-wrapper", require("./components/flash-wrapper"));
 Vue.component("flash", require("./components/flash"));
+Vue.component("tabs", require("./components/tabs/tabs"));
+Vue.component("tab", require("./components/tabs/tab"));
 Vue.component("accordian", require("./components/accordian"));
 Vue.component("tree-view", require("./components/tree-view/tree-view"));
 Vue.component("tree-item", require("./components/tree-view/tree-item"));
