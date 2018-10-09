@@ -14,6 +14,10 @@
     @extend %menu-properties;
     background-image: url("../images/Icon-Dashboard.svg");
 }
+.sales-icon {
+    @extend %menu-properties;
+    background-image: url("../images/Icon-Sales.svg");
+}
 .catalog-icon {
     @extend %menu-properties;
     background-image: url("../images/Icon-Catalog.svg");
@@ -179,6 +183,10 @@
         background-image: url("../images/Icon-Dashboard-Active.svg");
     }
 
+    .sales-icon {
+        background-image: url("../images/Icon-Sales-Active.svg");
+    }
+
     .catalog-icon {
         background-image: url("../images/Icon-Catalog-Active.svg");
     }
@@ -203,6 +211,10 @@
 
     &.dashboard-icon {
         background-image: url("../images/Icon-Dashboard-Active.svg");
+    }
+
+    &.sales-icon {
+        background-image: url("../images/Icon-Sales-Active.svg");
     }
 
     &.settings-icon {

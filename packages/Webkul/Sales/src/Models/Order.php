@@ -7,7 +7,29 @@ use Webkul\Sales\Contracts\Order as OrderContract;
 
 class Order extends Model implements OrderContract
 {
-    protected $guarded = ['id', 'items', 'shipping_address', 'billing_address', 'payment', 'created_at', 'updated_at'];
+    protected $guarded = ['id', 'items', 'shipping_address', 'billing_address', 'channel', 'payment', 'created_at', 'updated_at'];
+
+    protected $statusLabel = [
+        'pending' => 'Pending',
+        'processing' => 'Processing',
+        'canceled' => 'Canceled',
+        'closed' => 'Closed',
+    ];
+
+    /**
+     * Get the order items record associated with the order.
+     */
+    public function getCustomerFullNameAttribute() {
+        return $this->customer_first_name . ' ' . $this->customer_last_name;
+    }
+
+    /**
+     * Returns the status label from status code
+     */
+    public function getStatusLabelAttribute()
+    {
+        return $this->statusLabel[$this->status];
+    }
 
     /**
      * Get the order items record associated with the order.
@@ -51,7 +73,7 @@ class Order extends Model implements OrderContract
      */
     public function payment()
     {
-        return $this->hasMany(OrderPaymentProxy::modelClass());
+        return $this->hasOne(OrderPaymentProxy::modelClass());
     }
 
     /**
@@ -92,5 +114,33 @@ class Order extends Model implements OrderContract
     public function channel()
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Checks if new shipment is allow or not
+     */
+    public function canShip()
+    {
+        foreach ($this->items as $item) {
+            if ($item->qty_to_ship > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if new invoice is allow or not
+     */
+    public function canInvoice()
+    {
+        foreach ($this->items as $item) {
+            if ($item->qty_to_invoice > 0) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
