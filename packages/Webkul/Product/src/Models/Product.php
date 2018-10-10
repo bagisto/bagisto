@@ -186,7 +186,7 @@ class Product extends Model
                 $attributeModel = $this->attribute_family->custom_attributes()->where('attributes.code', $key)->first();
 
                 if($attributeModel) {
-                    $channel = request()->get('channel') ?: core()->getCurrentChannelCode();
+                    $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
 
                     $locale = request()->get('locale') ?: app()->getLocale();
 
@@ -225,7 +225,7 @@ class Product extends Model
         $hiddenAttributes = $this->getHidden();
 
         if(isset($this->id)) {
-            $channel = request()->get('channel') ?: core()->getCurrentChannelCode();
+            $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
 
             $locale = request()->get('locale') ?: app()->getLocale();
 

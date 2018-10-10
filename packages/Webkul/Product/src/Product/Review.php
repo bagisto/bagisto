@@ -37,21 +37,10 @@ class Review extends AbstractProduct
         return $product->reviews()->where('status', 'approved')->count();
     }
 
-    /**
-     * Returns the formated created at date
-     *
-    * @param ProductReview $review
-     * @return integer
-     */
-    public function formatDate($reviewCreatedAt)
-    {
-        return core()->formatDate($reviewCreatedAt, 'd, M Y');
-    }
-
      /**
      * Returns the total rating of the product
      *
-    * @param Product $product
+     * @param Product $product
      * @return integer
      */
     public function getTotalRating($product)

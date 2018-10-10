@@ -7,7 +7,7 @@
 @section('content')
     <div class="content">
         <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
-        <?php $channel = request()->get('channel') ?: core()->getCurrentChannelCode(); ?>
+        <?php $channel = request()->get('channel') ?: core()->getDefaultChannelCode(); ?>
 
         <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
 

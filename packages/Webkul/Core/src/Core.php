@@ -85,6 +85,34 @@ class Core
     }
 
     /**
+    * Returns default channel models
+    *
+    *  @return mixed
+    */
+    public function getDefaultChannel() {
+        static $channel;
+
+        if($channel)
+            return $channel;
+
+        return $channel = ChannelModel::first();
+    }
+
+    /**
+    * Returns default channel code
+    *
+    *  @return string
+    */
+    public function getDefaultChannelCode() {
+        static $channelCode;
+
+        if($channelCode)
+            return $channelCode;
+
+        return ($channel = $this->getDefaultChannel()) ? $channelCode = $channel->code : '';
+    }
+
+    /**
     * Returns all locales
     *
     *  @return Collection

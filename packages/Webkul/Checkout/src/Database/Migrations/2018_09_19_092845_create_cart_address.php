@@ -29,7 +29,7 @@ class CreateCartAddress extends Migration
             $table->integer('cart_id')->nullable()->unsigned();
             $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');
             $table->integer('customer_id')->nullable()->unsigned();
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();
         });
     }
