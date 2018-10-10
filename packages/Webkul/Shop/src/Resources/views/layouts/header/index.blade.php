@@ -85,7 +85,7 @@
             <ul class="cart-dropdown-container">
 
                 <?php $cart = cart()->getCart(); ?>
-                
+
                 @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
 
                 <li class="cart-dropdown">
@@ -285,13 +285,172 @@
                     </li>
                 </ul>
                 {{-- <li class="cart-box"><span class="icon cart-icon"></span></li> --}}
-                <li class="menu-box" ><span class="icon sortable-icon" id="sortable"></span></li>
+                <li class="menu-box" ><span class="icon sortable-icon" id="hammenu"></span></li>
             </ul>
         </div>
     </div>
 
     <div class="header-bottom" id="header-bottom">
-    @include('shop::layouts.header.nav-menu.navmenu')
+        @include('shop::layouts.header.nav-menu.navmenu')
+    </div>
+
+    <div class="search-responsive">
+        <div class="search-content">
+            <i class="icon search-icon mt-10"></i>
+            <input  class="search mt-5">
+            <i class="icon icon-menu-back right mt-10"></i>
+        </div>
+
+        <div class="search-content">
+            <i class="icon search-icon mt-10"></i>
+            <span class="suggestion mt-15">Designer sarees</span>
+        </div>
+    </div>
+
+    <div class="responsive-nav">
+        <category-nav categories='@json($categories)' url="{{url()->to('/')}}"></category-nav>
     </div>
 
 </div>
+
+
+
+@push('scripts')
+
+<script>
+
+    document.onreadystatechange = function () {
+        var state = document.readyState
+        var galleryTemplate = document.getElementById('product-gallery-template');
+        var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
+
+        if(galleryTemplate){
+            if (state == 'interactive') {
+                galleryTemplate.style.display="none";
+            } else  {
+                document.getElementById('loader').style.display="none";
+                addTOButton.style.display="flex";
+            }
+        }
+    }
+
+    window.onload = function() {
+
+        var hamMenu = document.getElementById("hammenu");
+        var search = document.getElementById("search");
+        var sort = document.getElementById("sort");
+        var filter = document.getElementById("filter");
+
+        var searchResponsive = document.getElementsByClassName('search-responsive')[0];
+        var sortLimit = document.getElementsByClassName('reponsive-sorter-limiter')[0];
+        var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
+        var navResponsive = document.getElementsByClassName('responsive-nav')[0];
+
+        var thumbList = document.getElementsByClassName('thumb-list')[0];
+        var thumbFrame = document.getElementsByClassName('thumb-frame');
+        var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
+
+        // for product page resize image
+
+        if(thumbList && productHeroImage){
+            thumbList.style.maxHeight = productHeroImage.offsetHeight + "px";
+            for(let i=0 ; i < thumbFrame.length ; i++){
+                thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
+            }
+        }
+
+        search.addEventListener("click", header);
+        hamMenu.addEventListener("click", header);
+
+        if(sort && filter){
+            sort.addEventListener("click", sortFilter);
+            filter.addEventListener("click", sortFilter);
+        }
+
+        window.addEventListener('resize', function(){
+            if(window.innerWidth > 720){
+                searchResponsive.style.display = 'none';
+                navResponsive.style.display = 'none';
+                if(layerFilter && sortLimit){
+                    layerFilter.style.display ="none";
+                    sortLimit.style.display ="none";
+                }
+            }
+            if(window.innerWidth < 1313 && window.innerWidth > 720){
+                if(thumbList){
+                    thumbList.style.maxHeight = productHeroImage.offsetHeight + "px";
+                    for(let i=0 ; i < thumbFrame.length ; i++){
+                        thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
+                    }
+                }
+            }else {
+                for(let i=0 ; i < thumbFrame.length ; i++){
+                    thumbFrame[i].style.height = 120 + "px";
+                }
+            }
+        });
+
+
+        // for header responsive icon
+
+        function header(){
+            var className = document.getElementById(this.id).className;
+
+            if(className === 'icon search-icon' ){
+                search.classList.remove("search-icon");
+                search.classList.add("icon-menu-close");
+                hamMenu.classList.remove("icon-menu-close");
+                hamMenu.classList.add("sortable-icon");
+                searchResponsive.style.display = 'block';
+                navResponsive.style.display = 'none';
+            }else if(className === 'icon sortable-icon'){
+                hamMenu.classList.remove("sortable-icon");
+                hamMenu.classList.add("icon-menu-close");
+                search.classList.remove("icon-menu-close");
+                search.classList.add("search-icon");
+                searchResponsive.style.display = 'none';
+                navResponsive.style.display = 'block';
+            }else{
+                search.classList.remove("icon-menu-close");
+                search.classList.add("search-icon");
+                hamMenu.classList.remove("icon-menu-close");
+                hamMenu.classList.add("sortable-icon");
+                searchResponsive.style.display = 'none';
+                navResponsive.style.display = 'none';
+            }
+        }
+
+        // for category page responsive filter & sort
+        function sortFilter(){
+            var className = document.getElementById(this.id).className;
+
+            if(className === 'icon sort-icon' ){
+                sort.classList.remove("sort-icon");
+                sort.classList.add("icon-menu-close");
+                filter.classList.remove("icon-menu-close");
+                filter.classList.add("filter-icon");
+                sortLimit.style.display ="flex";
+                sortLimit.style.justifyContent="space-between";
+                layerFilter.style.display ="none";
+            }else if(className === 'icon filter-icon'){
+                filter.classList.remove("filter-icon");
+                filter.classList.add("icon-menu-close");
+                sort.classList.remove("icon-menu-close");
+                sort.classList.add("sort-icon");
+                layerFilter.style.display ="block";
+                sortLimit.style.display ="none";
+            }else{
+                sort.classList.remove("icon-menu-close");
+                sort.classList.add("sort-icon");
+                filter.classList.remove("icon-menu-close");
+                filter.classList.add("filter-icon");
+                sortLimit.style.display ="none";
+                layerFilter.style.display ="none";
+            }
+        }
+    }
+
+</script>
+
+@endpush
+

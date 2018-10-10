@@ -7,7 +7,7 @@
         </div>
 
         <div class="product-grid max-4-col">
-                    
+
             @foreach ($product->up_sells()->paginate(4) as $up_sell_product)
 
                 @include ('shop::products.list.card', ['product' => $up_sell_product])
