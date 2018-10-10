@@ -1115,6 +1115,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
           align-items: center;
   border-radius: 0 0 4px 0;
   float: right;
+  display: none;
 }
 
 .header .header-bottom .nav > li:last-child img {
@@ -1251,15 +1252,9 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
     border-top: 1px solid #E8E8E8;
   }
   .responsive-nav .nav > li:last-child {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    border-radius: 0 0 4px 0;
     float: none;
     height: 45px;
+    display: none;
   }
   .responsive-nav .nav > li:last-child img {
     margin-right: 6px;

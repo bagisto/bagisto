@@ -505,6 +505,7 @@ section.slider-block {
             display:flex; align-items:center;
             border-radius: 0 0 4px 0;
             float:right;
+            display: none;
 
             img {
                 margin-right:6px;
@@ -654,10 +655,9 @@ section.slider-block {
         }
 
         .nav > li:last-child {
-            display:flex; align-items:center;
-            border-radius: 0 0 4px 0;
             float:none;
             height: 45px;
+            display: none;
 
             img {
                 margin-right:6px;
@@ -1280,23 +1280,6 @@ section.product-detail {
 // product pages css ends here
 
 // product pages responsive css start here
-
-// @media only screen and (max-width: 650px){
-
-//     section.product-detail div.layouter form {
-//         flex-direction: column;
-
-//         div.product-image-group {
-//             margin-right: 0px;
-//         }
-
-//         .details {
-//             width: 100%;
-//             margin-top: 20px;
-//         }
-//     }
-// }
-
 @media only screen and (max-width: 720px){
     section.product-detail div.layouter form {
         flex-direction: column;
