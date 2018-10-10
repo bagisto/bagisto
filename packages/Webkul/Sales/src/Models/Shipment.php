@@ -7,11 +7,21 @@ use Webkul\Sales\Contracts\Shipment as ShipmentContract;
 
 class Shipment extends Model implements ShipmentContract
 {
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    /**
+     * Get the order that belongs to the invoice.
+     */
+    public function order()
+    {
+        return $this->belongsTo(OrderProxy::modelClass());
+    }
+
     /**
      * Get the shipment items record associated with the shipment.
      */
     public function items() {
-        return $this->hasMany(ShipmentItemProxy::modelClass())->whereNull('parent_id');
+        return $this->hasMany(ShipmentItemProxy::modelClass());
     }
 
     /**
@@ -25,40 +35,8 @@ class Shipment extends Model implements ShipmentContract
     /**
      * Get the addresses for the shipment.
      */
-    public function addresses()
+    public function address()
     {
-        return $this->hasMany(OrderAddressProxy::modelClass());
-    }
-
-    /**
-     * Get the biling address for the shipment.
-     */
-    public function billing_address()
-    {
-        return $this->addresses()->where('address_type', 'billing');
-    }
-
-    /**
-     * Get billing address for the shipment.
-     */
-    public function getBillingAddressAttribute()
-    {
-        return $this->billing_address()->first();
-    }
-
-    /**
-     * Get the shipping address for the shipment.
-     */
-    public function shipping_address()
-    {
-        return $this->addresses()->where('address_type', 'shipping');
-    }
-
-    /**
-     * Get shipping address for the shipment.
-     */
-    public function getShippingAddressAttribute()
-    {
-        return $this->shipping_address()->first();
+        return $this->belongsTo(OrderAddressProxy::modelClass(), 'order_address_id');
     }
 }

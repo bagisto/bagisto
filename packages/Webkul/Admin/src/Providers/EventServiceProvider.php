@@ -42,6 +42,8 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('admin.menu.build', function ($menu) {
             $menu->add('dashboard', 'Dashboard', 'admin.dashboard.index', 1, 'dashboard-icon');
 
+            $menu->add('sales', 'Sales', 'admin.sales.orders.index', 1, 'sales-icon');
+
             $menu->add('catalog', 'Catalog', 'admin.catalog.products.index', 3, 'catalog-icon');
 
             $menu->add('catalog.products', 'Products', 'admin.catalog.products.index', 1);
@@ -56,9 +58,7 @@ class EventServiceProvider extends ServiceProvider
 
             $menu->add('customers.customers', 'Customers', 'admin.customer.index', 1, '');
 
-            $menu->add('customers.orders', 'Orders', 'admin.customer.orders.index', 2, '');
-
-            $menu->add('customers.reviews', 'Review', 'admin.customer.review.index', 3, '');
+            $menu->add('customers.reviews', 'Review', 'admin.customer.review.index', 2, '');
 
             // $menu->add('customers.blocked_customer', 'Blocked Customers', 'admin.account.edit', 2, '');
 

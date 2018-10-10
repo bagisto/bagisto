@@ -7,6 +7,8 @@ use Webkul\Sales\Contracts\ShipmentItem as ShipmentItemContract;
 
 class ShipmentItem extends Model implements ShipmentItemContract
 {
+    protected $guarded = ['id', 'child', 'created_at', 'updated_at'];
+    
     /**
      * Get the shipment record associated with the shipment item.
      */

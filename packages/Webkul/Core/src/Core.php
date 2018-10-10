@@ -249,6 +249,9 @@ class Core
     */
     public function currency($amount = 0)
     {
+        if(is_null($amount))
+            $price = 0;
+
         $currencyCode = $this->getCurrentCurrency()->code;
 
         return currency($this->convertPrice($amount), $currencyCode);
@@ -262,7 +265,24 @@ class Core
     */
     public function formatPrice($price, $currencyCode)
     {
+        if(is_null($price))
+            $price = 0;
+
         return currency($price, $currencyCode);
+    }
+
+    /**
+    * Format price with base currency symbol
+    *
+    * @param float $price
+    *  @return string
+    */
+    public function formatBasePrice($price)
+    {
+        if(is_null($price))
+            $price = 0;
+            
+        return currency($price, $this->getBaseCurrencyCode());
     }
 
     /**
