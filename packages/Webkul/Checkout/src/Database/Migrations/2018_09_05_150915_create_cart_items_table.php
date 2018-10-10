@@ -48,7 +48,7 @@ class CreateCartItemsTable extends Migration
             $table->json('additional')->nullable();
 
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('cart_id')->unsigned();
             $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');
             $table->integer('tax_category_id')->unsigned()->nullable();
@@ -57,7 +57,7 @@ class CreateCartItemsTable extends Migration
         });
 
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->foreign('parent_id')->references('id')->on('cart_items');
+            $table->foreign('parent_id')->references('id')->on('cart_items')->onDelete('cascade');
         });
     }
 

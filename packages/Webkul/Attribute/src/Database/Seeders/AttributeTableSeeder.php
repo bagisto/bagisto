@@ -56,12 +56,12 @@ class AttributeTableSeeder extends Seeder
             'is_configurable' => 0,
             'is_user_defined' => 0
         ], [
-            'code' => 'new_from',
-            'admin_name' => 'New From',
+            'code' => 'new',
+            'admin_name' => 'New',
             'en' => [
-                'name' => 'New From'
+                'name' => 'New'
             ],
-            'type' => 'datetime',
+            'type' => 'boolean',
             'position' => 4,
             'is_required' => 0,
             'value_per_locale' => 0,
@@ -70,12 +70,12 @@ class AttributeTableSeeder extends Seeder
             'is_configurable' => 0,
             'is_user_defined' => 0
         ], [
-            'code' => 'new_to',
-            'admin_name' => 'New To',
+            'code' => 'featured',
+            'admin_name' => 'Featured',
             'en' => [
-                'name' => 'New To'
+                'name' => 'Featured'
             ],
-            'type' => 'datetime',
+            'type' => 'boolean',
             'position' => 5,
             'is_required' => 0,
             'value_per_locale' => 0,

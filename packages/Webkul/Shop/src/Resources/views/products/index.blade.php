@@ -54,48 +54,5 @@
 
 @stop
 
-@push('scripts')
-    <script>
 
-        window.onload = function() {
-
-            var sort = document.getElementById("sort");
-            var filter = document.getElementById("filter");
-            var sortLimit = document.getElementsByClassName('reponsive-sorter-limiter')[0];
-            var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
-
-            sort.addEventListener("click", sortFilter);
-            filter.addEventListener("click", sortFilter);
-
-            function sortFilter(){
-                var className = document.getElementById(this.id).className;
-
-                if(className === 'icon sort-icon' ){
-                    sort.classList.remove("sort-icon");
-                    sort.classList.add("cross-icon");
-                    filter.classList.remove("cross-icon");
-                    filter.classList.add("filter-icon");
-                    sortLimit.style.display ="flex";
-                    sortLimit.style.justifyContent="space-between";
-                    layerFilter.style.display ="none";
-                }else if(className === 'icon filter-icon'){
-                    filter.classList.remove("filter-icon");
-                    filter.classList.add("cross-icon");
-                    sort.classList.remove("cross-icon");
-                    sort.classList.add("sort-icon");
-                    layerFilter.style.display ="block";
-                    sortLimit.style.display ="none";
-                }else{
-                    sort.classList.remove("cross-icon");
-                    sort.classList.add("sort-icon");
-                    filter.classList.remove("cross-icon");
-                    filter.classList.add("filter-icon");
-                    sortLimit.style.display ="none";
-                    layerFilter.style.display ="none";
-                }
-            }
-        }
-
-    </script>
-@endpush
 

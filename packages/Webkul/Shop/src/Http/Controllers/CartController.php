@@ -13,10 +13,8 @@ use Webkul\Product\Product\View as ProductView;
 use Cart;
 
 /**
- * Cart controller for the customer
- * and guest users for adding and
- * removing the products in the
- * cart.
+ * Cart controller for the customer and guest users for adding and
+ * removing the products in the cart.
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -25,9 +23,7 @@ class CartController extends Controller
 {
 
     /**
-     * Protected Variables that
-     * holds instances of the
-     * repository classes.
+     * Protected Variables that holds instances of the repository classes.
      *
      * @param Array $_config
      * @param $cart
@@ -85,9 +81,7 @@ class CartController extends Controller
     }
 
     /**
-     * Function for guests
-     * user to add the product
-     * in the cart.
+     * Function for guests user to add the product in the cart.
      *
      * @return Mixed
      */
@@ -101,8 +95,7 @@ class CartController extends Controller
     }
 
     /**
-     * Removes the item from
-     * the cart if it exists
+     * Removes the item from the cart if it exists
      *
      * @param integer $itemId
      */
@@ -113,8 +106,7 @@ class CartController extends Controller
     }
 
     /**
-     * Updates the quantity of the
-     *  items present in the cart.
+     * Updates the quantity of the items present in the cart.
      *
      * @return response
      */

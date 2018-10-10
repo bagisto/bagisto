@@ -30701,10 +30701,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
 // define the item component
 /* harmony default export */ __webpack_exports__["default"] = ({
-
     props: {
         categories: {
             type: [Array, String, Object],
@@ -30715,13 +30713,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         url: String
     },
-
     data: function data() {
         return {
             items_count: 0
         };
     },
-
 
     computed: {
         items: function items() {
@@ -30846,26 +30842,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
+//
+//
 
 // define the item component
-
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         item: Object,
         url: String
     },
-
     data: function data() {
         return {
-            items_count: 0
+            items_count: 0,
+            show: false
         };
     },
 
 
+    mounted: function mounted() {
+        if (window.innerWidth > 770) {
+            this.show = true;
+        }
+    },
+
     computed: {
         haveChildren: function haveChildren() {
             return this.item.children.length ? true : false;
+        }
+    },
+
+    methods: {
+        showOrHide: function showOrHide() {
+            this.show = !this.show;
         }
     }
 });
@@ -30886,7 +30896,18 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    _vm.haveChildren
+    _vm.haveChildren || _vm.item.parent_id == null
+      ? _c("i", {
+          class: [
+            _vm.show
+              ? "icon arrow-down-icon mt-15"
+              : "icon dropdown-right-icon mt-15"
+          ],
+          on: { click: _vm.showOrHide }
+        })
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.haveChildren && _vm.show
       ? _c(
           "ul",
           _vm._l(_vm.item.children, function(child, index) {

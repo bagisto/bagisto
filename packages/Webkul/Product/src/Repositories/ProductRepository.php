@@ -14,6 +14,8 @@ use Webkul\Product\Contracts\Criteria\SortCriteria;
 use Webkul\Product\Contracts\Criteria\AttributeToSelectCriteria;
 use Webkul\Product\Contracts\Criteria\FilterByAttributesCriteria;
 use Webkul\Product\Contracts\Criteria\FilterByCategoryCriteria;
+use Webkul\Product\Contracts\Criteria\NewProductsCriteria;
+use Webkul\Product\Contracts\Criteria\FeaturedProductsCriteria;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
@@ -422,5 +424,55 @@ class ProductRepository extends Repository
         throw (new ModelNotFoundException)->setModel(
             get_class($this->model), $slug
         );
+    }
+
+    /**
+     * Returns newly added product
+     *
+     * @return Collection
+     */
+    public function getNewProducts()
+    {
+        $this->pushCriteria(app(NewProductsCriteria::class));
+        $this->pushCriteria(app(AttributeToSelectCriteria::class)->addAttribueToSelect([
+                'name',
+                'description',
+                'short_description',
+                'price',
+                'special_price',
+                'special_price_from',
+                'special_price_to'
+            ]));
+
+        $params = request()->input();
+
+        return $this->scopeQuery(function($query) {
+                return $query->distinct()->addSelect('products.*')->orderBy('id', 'desc');
+            })->paginate(4, ['products.id']);
+    }
+
+    /**
+     * Returns featured product
+     *
+     * @return Collection
+     */
+    public function getFeaturedProducts()
+    {
+        $this->pushCriteria(app(FeaturedProductsCriteria::class));
+        $this->pushCriteria(app(AttributeToSelectCriteria::class)->addAttribueToSelect([
+                'name',
+                'description',
+                'short_description',
+                'price',
+                'special_price',
+                'special_price_from',
+                'special_price_to'
+            ]));
+
+        $params = request()->input();
+
+        return $this->scopeQuery(function($query) {
+                return $query->distinct()->addSelect('products.*')->orderBy('id', 'desc');
+            })->paginate(4, ['products.id']);
     }
 }

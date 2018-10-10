@@ -17,10 +17,8 @@
 </template>
 
 <script>
-
 // define the item component
 export default {
-
     props: {
 		categories: {
             type: [Array, String, Object],
@@ -29,13 +27,11 @@ export default {
         },
         url: String
     },
-
     data(){
         return {
             items_count:0
         };
     },
-
     computed: {
         items () {
             return JSON.parse(this.categories)
