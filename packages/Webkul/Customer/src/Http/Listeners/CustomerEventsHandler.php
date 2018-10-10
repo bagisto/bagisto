@@ -12,28 +12,12 @@ class CustomerEventsHandler {
     public function onCustomerLogin($event)
     {
         /**
-         * handle the user login
-         * event to manage the
-         * after login, if
-         * the user has added any
-         * products as guest then
-         * the cart items from session
-         * will be transferred from
-         * cookie to the cart table
-         * in the database.
+         * handle the user login event to manage the after login, if the user has added any products as guest then
+         * the cart items from session will be transferred from cookie to the cart table in the database.
          *
-         * Check whether cookie is
-         * present or not and then
-         * check emptiness and then
-         * do the appropriate actions.
+         * Check whether cookie is present or not and then check emptiness and then do the appropriate actions.
          */
         Cart::mergeCart();
-    }
-
-    //Customer Logout Event Handler.
-    public function onCustomerLogout($event)
-    {
-        Cart::destroyCart();
     }
 
     /**
@@ -45,7 +29,5 @@ class CustomerEventsHandler {
     public function subscribe($events)
     {
         $events->listen('customer.after.login', 'Webkul\Customer\Http\Listeners\CustomerEventsHandler@onCustomerLogin');
-
-        $events->listen('customer.after.logout', 'Webkul\Customer\Http\Listeners\CustomerEventsHandler@onCustomerLogout');
     }
 }

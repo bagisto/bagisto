@@ -185,27 +185,7 @@ class Product extends Model
 
                 $attributeModel = $this->attribute_family->custom_attributes()->where('attributes.code', $key)->first();
 
-                if($attributeModel) {
-                    $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
-
-                    $locale = request()->get('locale') ?: app()->getLocale();
-
-                    if($attributeModel->value_per_channel) {
-                        if($attributeModel->value_per_locale) {
-                            $attributeValue = $this->attribute_values()->where('channel', $channel)->where('locale', $locale)->where('attribute_id', $attributeModel->id)->first();
-                        } else {
-                            $attributeValue = $this->attribute_values()->where('channel', $channel)->where('attribute_id', $attributeModel->id)->first();
-                        }
-                    } else {
-                        if($attributeModel->value_per_locale) {
-                            $attributeValue = $this->attribute_values()->where('locale', $locale)->where('attribute_id', $attributeModel->id)->first();
-                        } else {
-                            $attributeValue = $this->attribute_values()->where('attribute_id', $attributeModel->id)->first();
-                        }
-                    }
-
-                    $this->attributes[$key] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attributeModel->type]];
-                }
+                $this->attributes[$key] = $this->getCustomAttributeValue($attributeModel);
 
                 return $this->getAttributeValue($key);
             }
@@ -225,34 +205,47 @@ class Product extends Model
         $hiddenAttributes = $this->getHidden();
 
         if(isset($this->id)) {
-            $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
-
-            $locale = request()->get('locale') ?: app()->getLocale();
-
             foreach ($this->attribute_family->custom_attributes as $attribute) {
                 if (in_array($attribute->code, $hiddenAttributes)) {
                     continue;
                 }
 
-                if($attribute->value_per_channel) {
-                    if($attribute->value_per_locale) {
-                        $attributeValue = $this->attribute_values()->where('channel', $channel)->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
-                    } else {
-                        $attributeValue = $this->attribute_values()->where('channel', $channel)->where('attribute_id', $attribute->id)->first();
-                    }
-                } else {
-                    if($attribute->value_per_locale) {
-                        $attributeValue = $this->attribute_values()->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
-                    } else {
-                        $attributeValue = $this->attribute_values()->where('attribute_id', $attribute->id)->first();
-                    }
-                }
-
-                $attributes[$attribute->code] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]];
+                $attributes[$attribute->code] = $this->getCustomAttributeValue($attribute);
             }
         }
 
         return $attributes;
+    }
+
+    /**
+     * Get an product attribute value.
+     *
+     * @return mixed
+     */
+    public function getCustomAttributeValue($attribute)
+    {
+        if(!$attribute)
+            return;
+
+        $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
+
+        $locale = request()->get('locale') ?: app()->getLocale();
+
+        if($attribute->value_per_channel) {
+            if($attribute->value_per_locale) {
+                $attributeValue = $this->attribute_values()->where('channel', $channel)->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
+            } else {
+                $attributeValue = $this->attribute_values()->where('channel', $channel)->where('attribute_id', $attribute->id)->first();
+            }
+        } else {
+            if($attribute->value_per_locale) {
+                $attributeValue = $this->attribute_values()->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
+            } else {
+                $attributeValue = $this->attribute_values()->where('attribute_id', $attribute->id)->first();
+            }
+        }
+
+        return $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]];
     }
 
     /**

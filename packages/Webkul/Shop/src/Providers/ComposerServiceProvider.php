@@ -26,5 +26,10 @@ class ComposerServiceProvider extends ServiceProvider
             ['shop::home.new-products'],
             'Webkul\Shop\Http\ViewComposers\NewProductListComposer'
         );
+
+        View::composer(
+            ['shop::home.featured-products'],
+            'Webkul\Shop\Http\ViewComposers\FeaturedProductListComposer'
+        );
     }
 }

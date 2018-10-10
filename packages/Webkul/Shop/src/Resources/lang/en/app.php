@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'home' => [
+        'featured-products' => 'Featured Products',
+        'new-products' => 'New Products'
+    ],
     'customer' => [
         'signup-text' => [
             'account_exists' => 'Already have an account',
