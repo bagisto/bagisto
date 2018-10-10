@@ -131,6 +131,7 @@ return [
             'sub-total' => 'Items',
             'grand-total' => 'Grand Total',
             'delivery-charges' => 'Delivery Charges',
+            'tax' => 'Tax',
             'price' => 'price'
         ],
 

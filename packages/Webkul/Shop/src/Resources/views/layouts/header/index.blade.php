@@ -97,9 +97,15 @@
                         <div class="dropdown-toggle">
                             <div style="display: inline-block; cursor: pointer;">
                                 @if($cart->items_qty - intval($cart->items_qty) > 0)
-                                <span class="name"><span class="count">  {{ $cart->items_qty }} Products</span>
+                                    <span class="name">
+                                        Cart
+                                        <span class="count"> ({{ $cart->items_qty }})</span>
+                                    </span>
                                 @else
-                                <span class="name"><span class="count">  {{ intval($cart->items_qty) }} Products</span>
+                                    <span class="name">
+                                        Cart
+                                        <span class="count"> ({{ intval($cart->items_qty) }})</span>
+                                    </span>
                                 @endif
                             </div>
 
@@ -167,7 +173,7 @@
                         <div class="dropdown-toggle">
                             <div style="display: inline-block; cursor: pointer;">
 
-                                <span class="name"><span class="count"> 0 &nbsp;</span>Products</span>
+                                <span class="name">Cart<span class="count"> (0) </span></span>
                             </div>
                         </div>
                     @endif

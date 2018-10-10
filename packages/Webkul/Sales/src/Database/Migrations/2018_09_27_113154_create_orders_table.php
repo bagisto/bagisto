@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string('increment_id');
             $table->string('status')->nullable();
+            $table->string('channel_name')->nullable();
 
             $table->boolean('is_guest')->nullable();
             $table->string('customer_email')->nullable();
@@ -24,6 +25,7 @@ class CreateOrdersTable extends Migration
             $table->string('customer_last_name')->nullable();
 
             $table->string('shipping_method')->nullable();
+            $table->string('shipping_title')->nullable();
             $table->string('shipping_description')->nullable();
             $table->string('coupon_code')->nullable();
             $table->boolean('is_gift')->default(0);
