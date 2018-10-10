@@ -57,7 +57,7 @@ class CreateCartItemsTable extends Migration
         });
 
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->foreign('parent_id')->references('id')->on('cart_items');
+            $table->foreign('parent_id')->references('id')->on('cart_items')->onDelete('cascade');
         });
     }
 

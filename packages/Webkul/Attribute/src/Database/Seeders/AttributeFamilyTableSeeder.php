@@ -31,10 +31,10 @@ class AttributeFamilyTableSeeder extends Seeder
                             'code' => 'url_key',
                             'position' => 3
                         ], [
-                            'code' => 'new_from',
+                            'code' => 'new',
                             'position' => 4
                         ], [
-                            'code' => 'new_to',
+                            'code' => 'featured',
                             'position' => 5
                         ], [
                             'code' => 'visible_individually',

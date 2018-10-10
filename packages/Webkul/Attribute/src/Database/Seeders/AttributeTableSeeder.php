@@ -14,9 +14,9 @@ class AttributeTableSeeder extends Seeder
         [
             'code' => 'sku',
             'admin_name' => 'SKU',
-            // 'en' => [
-            //     'name' => 'SKU'
-            // ],
+            'en' => [
+                'name' => 'SKU'
+            ],
             'type' => 'text',
             'position' => 1,
             'is_unique' => 1,
@@ -29,9 +29,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'name',
             'admin_name' => 'Name',
-            // 'en' => [
-            //     'name' => 'Name'
-            // ],
+            'en' => [
+                'name' => 'Name'
+            ],
             'type' => 'text',
             'position' => 2,
             'is_required' => 1,
@@ -43,9 +43,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'url_key',
             'admin_name' => 'URL Key',
-            // 'en' => [
-            //     'name' => 'URL Key'
-            // ],
+            'en' => [
+                'name' => 'URL Key'
+            ],
             'type' => 'text',
             'position' => 3,
             'is_unique' => 1,
@@ -56,12 +56,12 @@ class AttributeTableSeeder extends Seeder
             'is_configurable' => 0,
             'is_user_defined' => 0
         ], [
-            'code' => 'new_from',
-            'admin_name' => 'New From',
-            // 'en' => [
-            //     'name' => 'New From'
-            // ],
-            'type' => 'datetime',
+            'code' => 'new',
+            'admin_name' => 'New',
+            'en' => [
+                'name' => 'New'
+            ],
+            'type' => 'boolean',
             'position' => 4,
             'is_required' => 0,
             'value_per_locale' => 0,
@@ -70,12 +70,12 @@ class AttributeTableSeeder extends Seeder
             'is_configurable' => 0,
             'is_user_defined' => 0
         ], [
-            'code' => 'new_to',
-            'admin_name' => 'New To',
-            // 'en' => [
-            //     'name' => 'New To'
-            // ],
-            'type' => 'datetime',
+            'code' => 'featured',
+            'admin_name' => 'Featured',
+            'en' => [
+                'name' => 'Featured'
+            ],
+            'type' => 'boolean',
             'position' => 5,
             'is_required' => 0,
             'value_per_locale' => 0,
@@ -86,9 +86,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'visible_individually',
             'admin_name' => 'Visible Individually',
-            // 'en' => [
-            //     'name' => 'Visible Individually'
-            // ],
+            'en' => [
+                'name' => 'Visible Individually'
+            ],
             'type' => 'boolean',
             'position' => 6,
             'is_required' => 1,
@@ -100,9 +100,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'status',
             'admin_name' => 'Status',
-            // 'en' => [
-            //     'name' => 'Status'
-            // ],
+            'en' => [
+                'name' => 'Status'
+            ],
             'type' => 'boolean',
             'position' => 7,
             'is_required' => 1,
@@ -114,9 +114,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'short_description',
             'admin_name' => 'Short Description',
-            // 'en' => [
-            //     'name' => 'Short Description'
-            // ],
+            'en' => [
+                'name' => 'Short Description'
+            ],
             'type' => 'textarea',
             'position' => 8,
             'is_required' => 1,
@@ -128,9 +128,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'description',
             'admin_name' => 'Description',
-            // 'en' => [
-            //     'name' => 'Description'
-            // ],
+            'en' => [
+                'name' => 'Description'
+            ],
             'type' => 'textarea',
             'position' => 9,
             'is_required' => 1,
@@ -142,9 +142,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'price',
             'admin_name' => 'Price',
-            // 'en' => [
-            //     'name' => 'Price'
-            // ],
+            'en' => [
+                'name' => 'Price'
+            ],
             'type' => 'price',
             'position' => 10,
             'is_required' => 1,
@@ -156,9 +156,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'cost',
             'admin_name' => 'Cost',
-            // 'en' => [
-            //     'name' => 'Cost'
-            // ],
+            'en' => [
+                'name' => 'Cost'
+            ],
             'type' => 'price',
             'position' => 11,
             'is_required' => 0,
@@ -170,9 +170,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'special_price',
             'admin_name' => 'Special Price',
-            // 'en' => [
-            //     'name' => 'Special Price'
-            // ],
+            'en' => [
+                'name' => 'Special Price'
+            ],
             'type' => 'price',
             'position' => 12,
             'is_required' => 0,
@@ -184,9 +184,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'special_price_from',
             'admin_name' => 'Special Price From',
-            // 'en' => [
-            //     'name' => 'Special Price From'
-            // ],
+            'en' => [
+                'name' => 'Special Price From'
+            ],
             'type' => 'date',
             'position' => 13,
             'is_required' => 0,
@@ -198,9 +198,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'special_price_to',
             'admin_name' => 'Special Price To',
-            // 'en' => [
-            //     'name' => 'Special Price To'
-            // ],
+            'en' => [
+                'name' => 'Special Price To'
+            ],
             'type' => 'date',
             'position' => 14,
             'is_required' => 0,
@@ -212,9 +212,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'meta_title',
             'admin_name' => 'Meta Title',
-            // 'en' => [
-            //     'name' => 'Meta Description'
-            // ],
+            'en' => [
+                'name' => 'Meta Description'
+            ],
             'type' => 'textarea',
             'position' => 15,
             'is_required' => 0,
@@ -226,9 +226,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'meta_keywords',
             'admin_name' => 'Meta Keywords',
-            // 'en' => [
-            //     'name' => 'Meta Keywords'
-            // ],
+            'en' => [
+                'name' => 'Meta Keywords'
+            ],
             'type' => 'textarea',
             'position' => 16,
             'is_required' => 0,
@@ -240,9 +240,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'meta_description',
             'admin_name' => 'Meta Description',
-            // 'en' => [
-            //     'name' => 'Meta Description'
-            // ],
+            'en' => [
+                'name' => 'Meta Description'
+            ],
             'type' => 'textarea',
             'position' => 17,
             'is_required' => 0,
@@ -254,9 +254,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'width',
             'admin_name' => 'Width',
-            // 'en' => [
-            //     'name' => 'Width'
-            // ],
+            'en' => [
+                'name' => 'Width'
+            ],
             'type' => 'text',
             'validation' => 'numeric',
             'position' => 18,
@@ -269,9 +269,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'height',
             'admin_name' => 'Height',
-            // 'en' => [
-            //     'name' => 'Height'
-            // ],
+            'en' => [
+                'name' => 'Height'
+            ],
             'type' => 'text',
             'validation' => 'numeric',
             'position' => 19,
@@ -284,9 +284,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'depth',
             'admin_name' => 'Depth',
-            // 'en' => [
-            //     'name' => 'Depth'
-            // ],
+            'en' => [
+                'name' => 'Depth'
+            ],
             'type' => 'text',
             'validation' => 'numeric',
             'position' => 20,
@@ -299,9 +299,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'weight',
             'admin_name' => 'Weight',
-            // 'en' => [
-            //     'name' => 'Weight'
-            // ],
+            'en' => [
+                'name' => 'Weight'
+            ],
             'type' => 'text',
             'validation' => 'numeric',
             'position' => 21,
@@ -314,9 +314,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'color',
             'admin_name' => 'Color',
-            // 'en' => [
-            //     'name' => 'Color'
-            // ],
+            'en' => [
+                'name' => 'Color'
+            ],
             'type' => 'select',
             'position' => 22,
             'is_required' => 0,
@@ -356,9 +356,9 @@ class AttributeTableSeeder extends Seeder
         ], [
             'code' => 'size',
             'admin_name' => 'Size',
-            // 'en' => [
-            //     'name' => 'Size'
-            // ],
+            'en' => [
+                'name' => 'Size'
+            ],
             'type' => 'select',
             'position' => 23,
             'is_required' => 0,

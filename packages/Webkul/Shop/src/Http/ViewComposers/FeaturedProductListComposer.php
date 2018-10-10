@@ -7,12 +7,12 @@ use Illuminate\Support\Collection;
 use Webkul\Product\Repositories\ProductRepository as Product;
 
 /**
- * New Products page
+ * Featured Products page
  *
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class NewProductListComposer
+class FeaturedProductListComposer
 {
     /**
      * ProductRepository object
@@ -40,7 +40,7 @@ class NewProductListComposer
      */
     public function compose(View $view)
     {
-        $products = $this->product->getNewProducts();
+        $products = $this->product->getFeaturedProducts();
 
         $view->with('products', $products);
     }
