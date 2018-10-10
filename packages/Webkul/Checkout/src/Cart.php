@@ -237,10 +237,10 @@ class Cart {
     {
         $cart = null;
 
-        if(session()->has('cart')) {
-            $cart = $this->cart->find(session()->get('cart')->id);
-        } else if(auth()->guard('customer')->check()) {
+        if(auth()->guard('customer')->check()) {
             $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
+        } elseif(session()->has('cart')) {
+            $cart = $this->cart->find(session()->get('cart')->id);
         }
 
         return $cart && $cart->is_active ? $cart : null;
@@ -460,9 +460,7 @@ class Cart {
      */
     public function removeItem($itemId)
     {
-        if(session()->has('cart')) {
-            $cart = $this->getCart();
-
+        if($cart = $this->getCart()) {
             $items = $cart->items;
 
             foreach($items as $item) {

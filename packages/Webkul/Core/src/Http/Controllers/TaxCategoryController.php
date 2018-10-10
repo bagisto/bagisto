@@ -25,14 +25,6 @@ class TaxCategoryController extends Controller
     protected $_config;
 
     /**
-     * Contains the current
-     * channel.
-     *
-     * @var string
-     */
-    protected $currentChannelId;
-
-    /**
      * Tax Rule Repository object
      *
      * @var array
@@ -48,8 +40,6 @@ class TaxCategoryController extends Controller
     public function __construct(TaxRule $taxRule, TaxRate $taxRate, TaxMap $taxMap)
     {
         $this->middleware('admin');
-
-        $this->currentChannelId = core()->getCurrentChannel()->id;
 
         $this->taxRule = $taxRule;
 

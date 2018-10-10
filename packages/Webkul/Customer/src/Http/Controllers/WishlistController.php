@@ -47,7 +47,10 @@ class WishlistController extends Controller
      * Displays the listing resources if the customer having items in wishlist.
      */
     public function index() {
-        $wishlists = $this->wishlist->findWhere(['channel_id' => core()->getCurrentChannel()->id,'customer_id' => auth()->guard('customer')->user()->id]);
+        $wishlists = $this->wishlist->findWhere([
+                'channel_id' => core()->getCurrentChannel()->id,
+                'customer_id' => auth()->guard('customer')->user()->id]
+            );
 
         $wishlistItems = array();
 

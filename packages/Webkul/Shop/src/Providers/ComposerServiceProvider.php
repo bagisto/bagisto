@@ -17,17 +17,14 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //using the class based composers...
-        View::composer(['shop::layouts.header.index', 'shop::layouts.footer.footer'], 'Webkul\Shop\Http\ViewComposers\Categories\CategoryComposer');
-    }
+        View::composer(
+            ['shop::layouts.header.index', 'shop::layouts.footer.footer'],
+            'Webkul\Shop\Http\ViewComposers\CategoryComposer'
+        );
 
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
+        View::composer(
+            ['shop::home.new-products'],
+            'Webkul\Shop\Http\ViewComposers\NewProductListComposer'
+        );
     }
 }

@@ -1,10 +1,9 @@
 <?php
 
-namespace Webkul\Shop\Http\ViewComposers\Categories;
+namespace Webkul\Shop\Http\ViewComposers;
 
 use Illuminate\View\View;
 use Illuminate\Support\Collection;
-
 use Webkul\Category\Repositories\CategoryRepository as Category;
 
 
@@ -14,7 +13,6 @@ use Webkul\Category\Repositories\CategoryRepository as Category;
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class CategoryComposer
 {
     /**
@@ -36,13 +34,20 @@ class CategoryComposer
         $this->category = $category;
     }
 
+    /**
+     * Bind data to the view.
+     *
+     * @param  View  $view
+     * @return void
+     */
     public function compose(View $view)
     {
-        $collected_cat = array();
-        $categories = $this->category->getCategoryTree();
-        foreach ($categories as $category) {
-            array_push($collected_cat, collect($category));
+        $categories = [];
+
+        foreach ($this->category->getCategoryTree() as $category) {
+            array_push($categories, collect($category));
         }
-        $view->with('categories', $collected_cat);
+
+        $view->with('categories', $categories);
     }
 }
