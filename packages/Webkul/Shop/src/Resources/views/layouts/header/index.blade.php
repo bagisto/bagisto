@@ -1,7 +1,6 @@
 <div class="header" id="header">
     <div class="header-top">
         <div class="left-content">
-
             <ul class="logo-container">
                 <li>
                     <a href="{{ route('shop.home.index') }}">
@@ -22,30 +21,30 @@
         </div>
 
         <div class="right-content">
-
             <ul class="account-dropdown-container">
-
                 <li class="account-dropdown">
 
                     <span class="icon account-icon"></span>
 
                     <div class="dropdown-toggle">
-
                         <div style="display: inline-block; cursor: pointer;">
-                            <span class="name">Account</span>
+
+                            @guest('customer')
+                                <span class="name">Login & Register</span>
+                            @endguest
+
+                            @auth('customer')
+                                <span class="name">Account</span>
+                            @endauth
+
                         </div>
-
                         <i class="icon arrow-down-icon active"></i>
-
                     </div>
-
                     @guest
                         <div class="dropdown-list bottom-right" style="display: none;">
-
                             <div class="dropdown-container">
 
                                 <label>Account</label>
-
                                 <ul>
                                     <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
 
@@ -85,7 +84,7 @@
             <ul class="cart-dropdown-container">
 
                 <?php $cart = cart()->getCart(); ?>
-                
+
                 @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
 
                 <li class="cart-dropdown">

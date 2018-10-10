@@ -67,6 +67,21 @@ Route::group(['middleware' => ['web']], function () {
     //     'redirect' => 'admin.reviews.index'
     // ])->name('admin.reviews.store');
 
+    // forgot Password Routes
+    Route::get('/forgot-password', 'Webkul\Customer\Http\Controllers\ForgotPasswordController@create')->defaults('_config', [
+        'view' => 'shop::customers.signup.forgot-password'
+    ])->name('customer.forgot-password.create');
+
+    Route::post('/forgot-password', 'Webkul\Customer\Http\Controllers\ForgotPasswordController@store')->name('customer.forgot-password.store');
+
+    //Reset Password create
+    Route::get('/reset-password/{token}', 'Webkul\Customer\Http\Controllers\ResetPasswordController@create')->defaults('_config', [
+        'view' => 'shop::customers.signup.reset-password'
+    ])->name('password.reset');
+
+    Route::post('/reset-password', 'Webkul\Customer\Http\Controllers\ResetPasswordController@store')->defaults('_config', [
+        'redirect' => 'customer.session.index'
+    ])->name('customer.reset-password.store');
 
     //customer routes starts here
     Route::prefix('customer')->group(function () {

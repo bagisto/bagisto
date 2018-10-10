@@ -1,5 +1,9 @@
 @extends('shop::layouts.master')
 
+@section('page_title')
+Customer - Edit Profile
+@endsection
+
 @section('content-wrapper')
     <div class="account-content">
 
@@ -7,7 +11,9 @@
 
         <div class="edit-form-content">
 
-            <div class="title">Edit Profile</div>
+            <div class="section-head mb-10">
+                <div class="profile-heading">Edit Profile</div>
+            </div>
 
             <form method="post" action="{{ route('customer.profile.edit') }}">
 

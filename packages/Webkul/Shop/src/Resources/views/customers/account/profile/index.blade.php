@@ -6,23 +6,22 @@
 
     @include('shop::customers.account.partials.sidemenu')
 
-    <div class="profile">
+    <div class="account-lauyout = profile">
 
         <div class="section-head">
-            <span class="profile-heading">Profile</span>
+            <span class="profile-heading"> profile</span>
             <span class="profile-edit"><a href="{{ route('customer.profile.edit') }}">Edit</a></span>
             <div class="horizontal-rule"></div>
         </div>
 
         <div class="profile-content">
-        
             <table>
                 <tbody>
                     <tr>
                         <td>First Name</td>
                         <td>{{ $customer['first_name'] }}</td>
                     </tr>
-                    
+
                     <tr>
                         <td>Last Name</td>
                         <td>{{ $customer['last_name'] }}</td>

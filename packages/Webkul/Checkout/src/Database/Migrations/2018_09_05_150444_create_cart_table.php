@@ -47,9 +47,6 @@ class CreateCartTable extends Migration
             $table->string('checkout_method')->nullable();
             $table->boolean('is_guest')->nullable();
             $table->boolean('is_active')->nullable()->default(1);
-            $table->string('customer_first_name')->nullable();
-            $table->string('customer_last_name')->nullable();
-            $table->string('customer_email')->nullable();
             $table->dateTime('conversion_time')->nullable();
 
             $table->integer('customer_id')->unsigned()->nullable();

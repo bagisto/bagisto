@@ -1,5 +1,9 @@
 @extends('shop::layouts.master')
 
+@section('page_title')
+Customer - Address
+@endsection
+
 @section('content-wrapper')
 
 <div class="account-content">

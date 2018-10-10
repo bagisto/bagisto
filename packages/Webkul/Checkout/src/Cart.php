@@ -636,7 +636,7 @@ class Cart {
 
         $cart->sub_total = 0;
         $cart->base_sub_total = 0;
-        
+
         $cart->tax_total = 0;
         $cart->base_tax_total = 0;
 
