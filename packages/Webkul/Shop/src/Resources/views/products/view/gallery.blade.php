@@ -3,9 +3,17 @@
 
 <div class="product-image-group">
 
+    <div class="loader" id="loader">
+    </div>
+
     <product-gallery></product-gallery>
+
     @include ('shop::products.product-add')
+
 </div>
+
+
+
 @push('scripts')
 
     <script type="text/x-template" id="product-gallery-template">
@@ -36,7 +44,6 @@
 
                 @include('shop::products.wishlist')
             </div>
-
 
         </div>
     </script>

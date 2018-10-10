@@ -307,9 +307,26 @@
 
 </div>
 
+
+
 @push('scripts')
 
 <script>
+
+    document.onreadystatechange = function () {
+        var state = document.readyState
+        var galleryTemplate = document.getElementById('product-gallery-template');
+        var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
+
+        if(galleryTemplate){
+            if (state == 'interactive') {
+                galleryTemplate.style.display="none";
+            } else  {
+                document.getElementById('loader').style.display="none";
+                addTOButton.style.display="flex";
+            }
+        }
+    }
 
     window.onload = function() {
 
@@ -323,6 +340,18 @@
         var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
         var navResponsive = document.getElementsByClassName('responsive-nav')[0];
 
+        var thumbList = document.getElementsByClassName('thumb-list')[0];
+        var thumbFrame = document.getElementsByClassName('thumb-frame');
+        var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
+
+        // for product page resize image
+
+        if(thumbList && productHeroImage){
+            thumbList.style.maxHeight = productHeroImage.offsetHeight + "px";
+            for(let i=0 ; i < thumbFrame.length ; i++){
+                thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
+            }
+        }
 
         search.addEventListener("click", header);
         hamMenu.addEventListener("click", header);
@@ -336,13 +365,29 @@
             if(window.innerWidth > 720){
                 searchResponsive.style.display = 'none';
                 navResponsive.style.display = 'none';
-                layerFilter.style.display ="none";
-                sortLimit.style.display ="none";
+                if(layerFilter && sortLimit){
+                    layerFilter.style.display ="none";
+                    sortLimit.style.display ="none";
+                }
+            }
+            if(window.innerWidth < 1313 && window.innerWidth > 720){
+                if(thumbList){
+                    thumbList.style.maxHeight = productHeroImage.offsetHeight + "px";
+                    for(let i=0 ; i < thumbFrame.length ; i++){
+                        thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
+                    }
+                }
+            }else {
+                for(let i=0 ; i < thumbFrame.length ; i++){
+                    thumbFrame[i].style.height = 120 + "px";
+                }
             }
         });
 
-        function header(){
 
+        // for header responsive icon
+
+        function header(){
             var className = document.getElementById(this.id).className;
 
             if(className === 'icon search-icon' ){
@@ -369,6 +414,7 @@
             }
         }
 
+        // for category page responsive filter & sort
         function sortFilter(){
             var className = document.getElementById(this.id).className;
 
