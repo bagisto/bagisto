@@ -120,6 +120,7 @@ class CartController extends Controller
                 return redirect()->back();
             }
         }
+        
         Cart::update($data);
 
         return redirect()->back();
