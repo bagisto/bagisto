@@ -1081,6 +1081,11 @@ section.slider-block {
                 float: right;
             }
 
+            .side-menu-title-active::after {
+                content: url(../images//arrow-up.svg);
+                float: right;
+            }
+
             li {
                 width: 100%;
                 margin-left: 0%;

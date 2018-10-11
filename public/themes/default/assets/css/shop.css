@@ -1688,6 +1688,10 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
     content: url(../images/arrow-down.svg);
     float: right;
   }
+  .account-content .account-side-menu .side-menu-title-active::after {
+    content: url(../images//arrow-up.svg);
+    float: right;
+  }
   .account-content .account-side-menu li {
     width: 100%;
     margin-left: 0%;
