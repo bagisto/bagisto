@@ -1,6 +1,6 @@
 <template>
     <li>
-        <a :href="this.item['translations'][0].slug">{{ this.item['translations'][0].name }}&emsp;<i class="icon dropdown-right-icon"
+        <a :href="url+'/categories/'+this.item['translations'][0].slug">{{ this.item['translations'][0].name }}&emsp;<i class="icon dropdown-right-icon"
         v-if="haveChildren && item.parent_id != null"></i></a>
 
         <i :class="[show ? 'icon arrow-down-icon mt-15' : 'icon dropdown-right-icon mt-15']"
@@ -10,6 +10,7 @@
             <category-item
                 v-for="(child, index) in item.children"
                 :key="index"
+                :url="url"
                 :item="child">
             </category-item>
         </ul>

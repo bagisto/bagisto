@@ -871,25 +871,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   margin-right: 14px;
 }
 
-.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .account-icon {
-  cursor: pointer;
-  margin-right: 8px;
-  height: 24px;
-  width: 24px;
-}
-
-.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .account {
-  cursor: pointer;
-  padding-top: 3px;
-  padding-right: 5px;
-  margin-left: 8px;
-}
-
-.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .icon.arrow-down-icon {
-  cursor: pointer;
-  margin-top: 10px;
-}
-
 .header .header-top div.right-content ul.cart-dropdown-container {
   float: right;
   margin-left: 10px;
@@ -1823,19 +1804,7 @@ section.product-detail div.layouter form div.product-image-group div .product-he
   max-height: 480px;
 }
 
-section.product-detail div.layouter form div.product-image-group div .product-hero-image .whishlist-icon {
-  margin-top: -480px;
-  float: right;
-  margin-right: 10px;
-}
-
-section.product-detail div.layouter form div.product-image-group div .product-hero-image .share-icon {
-  margin-top: -480px;
-  float: right;
-  margin-right: 40px;
-}
-
-section.product-detail div.layouter form div.product-image-group div .product-hero-image .wishlist {
+section.product-detail div.layouter form div.product-image-group div .product-hero-image .add-to-wishlist {
   position: absolute;
   top: 10px;
   right: 12px;
@@ -1848,7 +1817,9 @@ section.product-detail div.layouter form div.product-image-group div .product-he
 }
 
 section.product-detail div.layouter form div.product-image-group .add-to-buttons {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;

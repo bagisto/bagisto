@@ -289,25 +289,6 @@ section.slider-block {
                     display: flex;
                     flex-direction: row;
                     margin-right: 14px;
-
-                    .account-icon {
-                        cursor:  pointer;
-                        margin-right: 8px;
-                        height: 24px;
-                        width: 24px;
-                    }
-
-                    .account {
-                        cursor:  pointer;
-                        padding-top: 3px;
-                        padding-right: 5px;
-                        margin-left: 8px;
-                    }
-
-                    .icon.arrow-down-icon {
-                        cursor:  pointer;
-                        margin-top: 10px;
-                    }
                 }
             }
 
@@ -1178,19 +1159,7 @@ section.product-detail {
                             max-height: 480px;
                         }
 
-                        .whishlist-icon {
-                            margin-top: -480px;
-                            float: right;
-                            margin-right: 10px;
-                        }
-
-                        .share-icon {
-                            margin-top: -480px;
-                            float: right;
-                            margin-right: 40px;
-                        }
-
-                        .wishlist {
+                        .add-to-wishlist {
                             position: absolute;
                             top: 10px;
                             right: 12px;
@@ -1204,9 +1173,8 @@ section.product-detail {
                     }
                 }
 
-
                 .add-to-buttons {
-                    display: none;
+                    display: flex;
                     flex-direction: row;
                     margin-top: 10px;
                     justify-content: space-between;

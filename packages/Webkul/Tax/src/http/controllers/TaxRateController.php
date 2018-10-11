@@ -1,10 +1,10 @@
 <?php
 
-namespace Webkul\Core\Http\Controllers;
+namespace Webkul\Tax\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Core\Repositories\TaxRatesRepository as TaxRate;
+use Webkul\Tax\Repositories\TaxRatesRepository as TaxRate;
 
 
 /**
@@ -32,7 +32,7 @@ class TaxRateController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\TaxRatesRepository  $taxRate
+     * @param  Webkul\Tax\Repositories\TaxRatesRepository  $taxRate
      * @return void
      */
     public function __construct(TaxRate $taxRate)
@@ -73,10 +73,11 @@ class TaxRateController extends Controller
      * @return mixed
      */
     public function create() {
+        // dd(request()->all());
 
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier',
-            'is_zip' => 'sometimes|confirmed',
+            'is_zip' => 'sometimes',
             'zip_code' => 'sometimes|required_without:is_zip',
             'zip_from' => 'nullable|numeric|required_with:is_zip',
             'zip_to' => 'nullable|numeric|required_with:is_zip,zip_from',
@@ -85,7 +86,14 @@ class TaxRateController extends Controller
             'tax_rate' => 'required|numeric'
         ]);
 
-        if($this->taxRate->create(request()->input())) {
+        $data = request()->all();
+        // dd($data);
+        if(isset($data['is_zip'])) {
+            $data['is_zip'] = 1;
+            unset($data['zip_code']);
+        }
+
+        if($this->taxRate->create($data)) {
             session()->flash('success', 'Tax Rate Created Successfully');
 
             return redirect()->route($this->_config['redirect']);
@@ -126,7 +134,7 @@ class TaxRateController extends Controller
 
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier,'.$id,
-            'is_zip' => 'sometimes|confirmed',
+            'is_zip' => 'sometimes',
             'zip_from' => 'nullable|numeric|required_with:is_zip',
             'zip_to' => 'nullable|numeric|required_with:is_zip,zip_from',
             'state' => 'required|string',

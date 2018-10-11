@@ -289,7 +289,8 @@ return [
                 'title' => 'Edit Tax Rate',
                 'edit-button-title' => 'Edit Rate'
             ],
-            'zip_code' => 'Zip Code'
+            'zip_code' => 'Zip Code',
+            'is_zip' => 'Enable Zip Range'
         ],
     ],
 

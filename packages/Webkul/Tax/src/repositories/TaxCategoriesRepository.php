@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Core\Repositories;
+namespace Webkul\Tax\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
@@ -19,7 +19,7 @@ class TaxCategoriesRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Core\Models\TaxCategory';
+        return 'Webkul\Tax\Models\TaxCategory';
     }
 
     /**

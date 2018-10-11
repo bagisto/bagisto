@@ -17,42 +17,25 @@
                     </div>
                 </li>
             </ul>
-
         </div>
 
         <div class="right-content">
-            @guest('customer')
-            <ul class="register-link" style="border-right: 2px solid #E8E8E8; ">
-                <span class="icon account-icon"></span>
-                <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
-            </ul>
-            @endguest
             <ul class="account-dropdown-container">
                 <li class="account-dropdown">
-
-                    <span class="icon account-icon"></span>
-
                     <div class="dropdown-toggle">
-                        <div style="display: inline-block; cursor: pointer;">
-
-                            @guest('customer')
-                                <span class="name">Sign In</span>
-                            @endguest
-
-                            @auth('customer')
-                                <span class="name">Account</span>
-                            @endauth
-
+                        <div style="display: inline-flex; align-items: center; cursor: pointer;">
+                            <span class="icon account-icon" style="margin-top: 5px;"></span>
+                            <i class="icon arrow-down-icon active"></i>
                         </div>
-                        <i class="icon arrow-down-icon active"></i>
                     </div>
                     @guest
                         <div class="dropdown-list bottom-right" style="display: none;">
                             <div class="dropdown-container">
-
                                 <label>Account</label>
-                                <ul>
+                                <ul class="account-dropdown-list">
                                     <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
+
+                                    <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
                                 </ul>
 
                             </div>

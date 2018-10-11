@@ -21,10 +21,6 @@
             <div class="page-content">
                 <div class="form-container">
                     @csrf()
-
-                    <accordian :title="'{{ __('admin::app.configuration.taxrule.general') }}'" :active="true">
-                        <div slot="body">
-
                             <div class="control-group" :class="[errors.has('channel') ? 'has-error' : '']">
                                 <label for="channel" class="required">{{ __('admin::app.configuration.taxrule.select-channel') }}</label>
 
@@ -74,10 +70,9 @@
                                     @endforeach
                                 </select>
 
-                                <span class="control-error" v-if="errors.has('taxrates')">@{{ errors.first('taxrates') }}</span>
+                                <span class="control-error" v-if="errors.first('taxrates')">@{{ errors.first('taxrates') }}</span>
                             </div>
-                        </div>
-                    </accordian>
+
 
                 </div>
             </div>

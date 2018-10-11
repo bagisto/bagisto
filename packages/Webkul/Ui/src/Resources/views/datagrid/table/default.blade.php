@@ -118,6 +118,13 @@
             </tr>
         </thead>
         <tbody class="{{ $css->tbody }}">
+            @if(count($results) == 0)
+            <tr>
+                <td colspan="{{ count($columns)+1 }}" style="text-align: center;">
+                    No Records Found.
+                </td>
+            </tr>
+            @endif
             @foreach ($results as $result)
             <tr>
 
