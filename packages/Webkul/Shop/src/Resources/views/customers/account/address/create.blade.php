@@ -6,9 +6,10 @@ Customer - Create Address
     <div class="account-content">
         @include('shop::customers.account.partials.sidemenu')
 
-        <div class="address-form-content">
-            <div class="title">Add Address</div>
-
+        <div class="edit-form-content">
+            <div class="section-head">
+                <div class="section-head">Add Address</div>
+            </div>
             <form method="post" action="{{ route('customer.address.create') }}">
 
                 <div class="edit-form">

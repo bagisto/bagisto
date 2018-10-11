@@ -1,4 +1,7 @@
 @extends('shop::layouts.master')
+@section('page_title')
+    {{ __('shop::app.customer.login-form.page-title') }}
+@endsection
 @section('content-wrapper')
 
     <div class="content">

@@ -21,6 +21,12 @@
         </div>
 
         <div class="right-content">
+            @guest('customer')
+            <ul class="register-link" style="border-right: 2px solid #E8E8E8; ">
+                <span class="icon account-icon"></span>
+                <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
+            </ul>
+            @endguest
             <ul class="account-dropdown-container">
                 <li class="account-dropdown">
 
@@ -30,7 +36,7 @@
                         <div style="display: inline-block; cursor: pointer;">
 
                             @guest('customer')
-                                <span class="name">Login & Register</span>
+                                <span class="name">Sign In</span>
                             @endguest
 
                             @auth('customer')
@@ -47,8 +53,6 @@
                                 <label>Account</label>
                                 <ul>
                                     <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
-
-                                    <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
                                 </ul>
 
                             </div>
@@ -275,15 +279,12 @@
                         @else
                         <div class="dropdown-toggle">
                             <div style="display: inline-block; cursor: pointer;">
-                                {{-- <span class="name"><span class="count"> 0 &nbsp;
-                                    </span>Products</span> --}}
                                 <span class="icon cart-icon"></span>
                             </div>
                         </div>
                         @endif
                     </li>
                 </ul>
-                {{-- <li class="cart-box"><span class="icon cart-icon"></span></li> --}}
                 <li class="menu-box" ><span class="icon sortable-icon" id="hammenu"></span></li>
             </ul>
         </div>

@@ -15,7 +15,7 @@ class CreateCartItemsTable extends Migration
     {
         Schema::create('cart_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('quantity')->unsigned()->default(1);
+            $table->integer('quantity')->unsigned()->default(0);
             $table->string('sku')->nullable();
             $table->string('type')->nullable();
             $table->string('name')->nullable();

@@ -1,7 +1,7 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-Customer - Address
+    {{ __('shop::app.customer.account.address.index.page-title') }}
 @endsection
 
 @section('content-wrapper')
@@ -13,14 +13,19 @@ Customer - Address
     <div class="profile">
 
         <div class="section-head">
-            <span class="profile-heading">Address</span>
-            <span class="profile-edit"><a href="{{ route('customer.address.edit') }}">Edit</a></span>
+            <span class="profile-heading">{{ __('shop::app.customer.account.address.index.title') }}</span>
+
+            <span class="profile-edit">
+                <a href="{{ route('customer.address.edit') }}">
+                    {{ __('shop::app.customer.account.address.index.edit') }}
+                </a>
+            </span>
             <div class="horizontal-rule"></div>
         </div>
 
         <div class="profile-content">
             @if($address->isEmpty())
-                <div>You don't have any saved addresses here, please create a new one by clicking the link below.</div>
+                <div>{{ __('shop::app.customer.account.address.index.empty') }}</div>
                 <br/>
                 <a href="{{ route('customer.address.create') }}">Create Address</a>
             @else
