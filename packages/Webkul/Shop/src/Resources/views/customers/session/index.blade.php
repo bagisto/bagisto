@@ -1,4 +1,7 @@
 @extends('shop::layouts.master')
+@section('page_title')
+    {{ __('shop::app.customer.login-form.page-title') }}
+@endsection
 @section('content-wrapper')
 
     <div class="content">
@@ -29,7 +32,7 @@
                 </div>
 
                 <div class="forgot-password-link">
-                    <a href="">{{ __('shop::app.customer.login-form.forgot_pass') }}</a>
+                    <a href="{{ route('customer.forgot-password.create') }}">{{ __('shop::app.customer.login-form.forgot_pass') }}</a>
                 </div>
 
                 <input class="btn btn-primary btn-lg" type="submit" value="{{ __('shop::app.customer.login-form.button_title') }}">

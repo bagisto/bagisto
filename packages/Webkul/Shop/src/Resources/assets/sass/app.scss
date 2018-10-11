@@ -867,7 +867,7 @@ section.slider-block {
         margin-left: auto;
         margin-right: auto;
         display: flex;
-        background: #f2f2f2;
+
         border: 1px solid $border-color;
         flex-direction: column;
         max-width: 530px;
@@ -929,7 +929,7 @@ section.slider-block {
         align-content: center;
         justify-content: flex-start;
         border: 1px solid $border-color;
-        background: #f2f2f2;
+
         width: 25%;
         height: 100%;
         text-transform: capitalize;
@@ -1015,6 +1015,31 @@ section.slider-block {
         margin-top: 1%;
         width: 100%;
 
+        .section-head {
+            .profile-heading {
+                font-size: 28px;
+                color: $font-color;
+                text-transform: capitalize;
+                text-align: left;
+            }
+
+            .profile-edit {
+                font-size: 17px;
+                margin-top: 1%;
+                color: $brand-color;
+                letter-spacing: -0.11px;
+                float: right;
+            }
+
+            .horizontal-rule {
+                margin-top: 1.1%;
+                width: 100%;
+                height: 1px;
+                vertical-align: middle;
+                background: $border-color;
+            }
+        }
+
         .edit-text {
             margin-bottom: 2%;
             margin-left: auto;
@@ -1024,7 +1049,7 @@ section.slider-block {
 
         .edit-form {
             display: flex;
-            background: #f2f2f2;
+
             border: 1px solid $border-color;
             flex-direction: column;
             min-height: 345px;

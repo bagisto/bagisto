@@ -58,8 +58,6 @@ class ProductDataGrid
             ],
 
             'join' => [
-
-                //for getting name of attrib family.
                 [
                     'join' => 'leftjoin',
                     'table' => 'attribute_families as attfam',

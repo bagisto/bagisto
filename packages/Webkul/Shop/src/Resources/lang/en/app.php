@@ -12,6 +12,7 @@ return [
         ],
 
         'signup-form' => [
+            'page-title' => 'Customer - Registration Form',
             'title' => 'Sign Up',
             'firstname' => 'First Name',
             'lastname' => 'Last Name',
@@ -31,11 +32,63 @@ return [
         ],
 
         'login-form' => [
-            'title' => 'Sign Up',
+            'page-title' => 'Customer - Login',
+            'title' => 'Sign In',
             'email' => 'E-Mail',
             'password' => 'Password',
             'forgot_pass' => 'Forgot Password?',
-            'button_title' => 'Sign In'
+            'button_title' => 'Sign In',
+            'remember' => 'Remember Me',
+            'footer' => '© Copyright 2018 Webkul Software, All rights reserved.'
+        ],
+
+        'forgot-password' => [
+            'title' => 'Recover Password',
+            'email' => 'E-Mail',
+            'submit' => 'Submit',
+            'page_title' => 'Customer - Forgot Password Form'
+        ],
+
+        'account' => [
+            'dashboard' => 'Customer - Edit Profile',
+
+            'profile' => [
+                'index' => [
+                    'page-title' => 'Customer - Profile',
+                    'title' => 'Profile',
+                    'edit' => 'Edit',
+                ],
+
+                'fname' => 'First Name',
+                'lname' => 'Last Name',
+                'gender' => 'Gender',
+                'dob' => 'Date Of Birth',
+                'phone' => 'Phone',
+                'email' => 'E-Mail',
+                'opassword' => 'Old Password',
+                'password' => 'Password',
+                'cpassword' => 'Confirm Password',
+                'submit' => 'Update Profile',
+
+                'edit-profile' => [
+                    'title' => 'Edit Profile',
+                    'page-title' => 'Customer - Edit Profile Form'
+                ]
+            ],
+
+            'address' => [
+                'index' => [
+                    'page-title' => 'Customer - Address',
+                    'title' => 'Address',
+                    'edit' => 'Edit',
+                    'empty' => 'You don\'t have any saved addresses here, please create a new one by clicking the link below.',
+                    'create' => 'Create Address',
+                ],
+
+                'edit' => [
+
+                ]
+            ]
         ]
     ],
 

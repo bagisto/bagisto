@@ -16,7 +16,7 @@ class TaxRate extends Model
     protected $table = 'tax_rates';
 
     protected $fillable = [
-        'identifier', 'is_zip_from', 'zip_from', 'zip_to', 'state', 'country', 'tax_rate'
+        'identifier', 'is_zip_from', 'zip_code', 'zip_from', 'zip_to', 'state', 'country', 'tax_rate'
     ];
 
     public function tax_categories() {

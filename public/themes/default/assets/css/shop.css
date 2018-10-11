@@ -96,8 +96,7 @@
 .product-grid-3 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  grid-column-gap: 27px;
-  grid-row-gap: 15px;
+  grid-gap: 27px;
   grid-auto-rows: auto;
 }
 
@@ -1461,7 +1460,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background: #f2f2f2;
   border: 1px solid #E8E8E8;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -1538,7 +1536,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
       -ms-flex-pack: start;
           justify-content: flex-start;
   border: 1px solid #E8E8E8;
-  background: #f2f2f2;
   width: 25%;
   height: 100%;
   text-transform: capitalize;
@@ -1627,6 +1624,29 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   width: 100%;
 }
 
+.account-content .edit-form-content .section-head .profile-heading {
+  font-size: 28px;
+  color: #242424;
+  text-transform: capitalize;
+  text-align: left;
+}
+
+.account-content .edit-form-content .section-head .profile-edit {
+  font-size: 17px;
+  margin-top: 1%;
+  color: #0041FF;
+  letter-spacing: -0.11px;
+  float: right;
+}
+
+.account-content .edit-form-content .section-head .horizontal-rule {
+  margin-top: 1.1%;
+  width: 100%;
+  height: 1px;
+  vertical-align: middle;
+  background: #E8E8E8;
+}
+
 .account-content .edit-form-content .edit-text {
   margin-bottom: 2%;
   margin-left: auto;
@@ -1638,7 +1658,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background: #f2f2f2;
   border: 1px solid #E8E8E8;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;

@@ -111,7 +111,7 @@ class AddressController extends Controller
             'country' => 'string|required',
             'state' => 'string|required',
             'city' => 'string|required',
-            'postcode' => 'numeric|required',
+            'postcode' => 'required',
 
         ]);
 
@@ -171,7 +171,7 @@ class AddressController extends Controller
             'country' => 'string|required',
             'state' => 'string|required',
             'city' => 'string|required',
-            'postcode' => 'numeric|required',
+            'postcode' => 'required',
 
         ]);
 

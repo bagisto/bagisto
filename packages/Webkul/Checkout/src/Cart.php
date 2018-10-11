@@ -123,7 +123,7 @@ class Cart {
             ];
         }
 
-        
+
         $price = ($product->type == 'configurable' ? $child->price : $product->price);
         $parentData = [
             'sku' => $product->sku,
@@ -703,7 +703,7 @@ class Cart {
 
         $cart->sub_total = 0;
         $cart->base_sub_total = 0;
-        
+
         $cart->tax_total = 0;
         $cart->base_tax_total = 0;
 
@@ -747,7 +747,7 @@ class Cart {
 
         if(!$this->isItemsHaveSufficientQuantity())
             return true;
-            
+
         return false;
     }
 
@@ -780,7 +780,7 @@ class Cart {
 
         return true;
     }
-    
+
     /**
      * Deactivates current cart
      *

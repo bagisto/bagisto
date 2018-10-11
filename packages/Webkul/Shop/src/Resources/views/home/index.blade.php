@@ -1,5 +1,9 @@
 @extends('shop::layouts.master')
 
+@section('page_title')
+Bagisto - Home
+@endsection
+
 @section('slider')
     @include('shop::home.slider')
 @endsection

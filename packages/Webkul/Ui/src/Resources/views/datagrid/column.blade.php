@@ -1,4 +1,4 @@
-<div class="{{ $css->datagrid }}">
+{{-- <div class="{{ $css->datagrid }}">
     <table class="{{ $css->table }}">
         <thread class="{{ $css->thread }}">
             <tr>
@@ -15,4 +15,4 @@
             </tr>
         </tbody>
     </table>
-</div>
+</div> --}}

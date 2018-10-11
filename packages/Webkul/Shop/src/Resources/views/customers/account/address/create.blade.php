@@ -1,11 +1,15 @@
 @extends('shop::layouts.master')
+@section('page_title')
+Customer - Create Address
+@endsection
 @section('content-wrapper')
     <div class="account-content">
         @include('shop::customers.account.partials.sidemenu')
 
-        <div class="address-form-content">
-            <div class="title">Add Address</div>
-
+        <div class="edit-form-content">
+            <div class="section-head">
+                <div class="section-head">Add Address</div>
+            </div>
             <form method="post" action="{{ route('customer.address.create') }}">
 
                 <div class="edit-form">
@@ -43,7 +47,7 @@
 
                     <div class="control-group" :class="[errors.has('postcode') ? 'has-error' : '']">
                         <label for="postcode">Postcode</label>
-                        <input type="text" class="control" name="postcode" v-validate="'required|digits:6'">
+                        <input type="text" class="control" name="postcode" v-validate="'required'">
                         <span class="control-error" v-if="errors.has('postcode')">@{{ errors.first('postcode') }}</span>
                     </div>
 
