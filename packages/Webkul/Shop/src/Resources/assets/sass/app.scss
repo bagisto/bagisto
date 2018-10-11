@@ -1059,6 +1059,42 @@ section.slider-block {
     //edit form ends
 }
 //account ends here
+
+//account responsive layout start here
+@media only screen and (max-width: 720px){
+    .account-content {
+        flex-direction: column;
+
+        .account-side-menu {
+            width: 100%;
+            border: none;
+            margin-bottom: 20px;
+
+            .side-menu-title {
+                height: 48px;
+                padding-top: 15px;
+                border: 1px solid;
+            }
+
+            .side-menu-title::after {
+                content: url(../images/arrow-down.svg);
+                float: right;
+            }
+
+            li {
+                width: 100%;
+                margin-left: 0%;
+            }
+
+            li:last-child {
+                border-bottom: 1px solid $border-color;
+            }
+        }
+    }
+
+}
+
+//account responsive layout end here
 //customers page css ends here
 
 // product pages css starts here

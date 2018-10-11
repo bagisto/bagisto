@@ -1667,6 +1667,36 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   padding: 25px;
 }
 
+@media only screen and (max-width: 720px) {
+  .account-content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .account-content .account-side-menu {
+    width: 100%;
+    border: none;
+    margin-bottom: 20px;
+  }
+  .account-content .account-side-menu .side-menu-title {
+    height: 48px;
+    padding-top: 15px;
+    border: 1px solid;
+  }
+  .account-content .account-side-menu .side-menu-title::after {
+    content: url(../images/arrow-down.svg);
+    float: right;
+  }
+  .account-content .account-side-menu li {
+    width: 100%;
+    margin-left: 0%;
+  }
+  .account-content .account-side-menu li:last-child {
+    border-bottom: 1px solid #E8E8E8;
+  }
+}
+
 section.product-detail {
   color: #242424;
 }
