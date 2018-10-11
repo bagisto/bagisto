@@ -639,6 +639,8 @@ class Cart {
             }
         }
 
+        $this->calulateTax();
+
         return true;
     }
 
@@ -698,6 +700,8 @@ class Cart {
         if(!$cart = $this->getCart())
             return false;
 
+        $this->calulateItemsTax();
+
         $cart->grand_total = 0;
         $cart->base_grand_total = 0;
 
@@ -733,6 +737,20 @@ class Cart {
         $cart->items_qty = $quantities;
 
         $cart->save();
+    }
+
+    /**
+     * Calculates cart items tax
+     *
+     * @return void
+    */
+    public function calulateItemsTax()
+    {
+        $cart = $this->getCart();
+
+        foreach ($cart->items()->get() as $item) {
+            $product = $item->product;
+        }
     }
 
     /**

@@ -41,8 +41,8 @@ class CreateCartTable extends Migration
             $table->decimal('tax_total', 12, 4)->default(0)->nullable();
             $table->decimal('base_tax_total', 12, 4)->default(0)->nullable();
 
-            $table->decimal('sub_total_with_discount', 12, 4)->default(0)->nullable();
-            $table->decimal('base_sub_total_with_discount', 12, 4)->default(0)->nullable();
+            $table->decimal('discount', 12, 4)->default(0)->nullable();
+            $table->decimal('base_discount', 12, 4)->default(0)->nullable();
 
             $table->string('checkout_method')->nullable();
             $table->boolean('is_guest')->nullable();
