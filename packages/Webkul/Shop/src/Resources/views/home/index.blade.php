@@ -1,7 +1,7 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-Bagisto - Home
+    {{ __('shop::app.home.page-title') }}
 @endsection
 
 @section('slider')

@@ -2,9 +2,11 @@
 
 return [
     'home' => [
+        'page-title' => 'Bagisto - Home',
         'featured-products' => 'Featured Products',
         'new-products' => 'New Products'
     ],
+
     'customer' => [
         'signup-text' => [
             'account_exists' => 'Already have an account',
@@ -80,13 +82,28 @@ return [
                 'index' => [
                     'page-title' => 'Customer - Address',
                     'title' => 'Address',
+                    'add' => 'Add Address',
                     'edit' => 'Edit',
                     'empty' => 'You don\'t have any saved addresses here, please create a new one by clicking the link below.',
                     'create' => 'Create Address',
                 ],
 
-                'edit' => [
+                'create' => [
+                    'page-title' => 'Customer - Add Address Form',
+                    'title' => 'Add Address',
+                    'address1' => 'Address Line 1',
+                    'address2' => 'Address Line 2',
+                    'country' => 'Country',
+                    'state' => 'State',
+                    'city' => 'City',
+                    'postcode' => 'Postal Code',
+                    'submit' => 'Create Address'
+                ],
 
+                'edit' => [
+                    'page-title' => 'Customer - Edit Address',
+                    'title' => 'Edit Address',
+                    'submit' => 'Edit Address'
                 ]
             ]
         ]
