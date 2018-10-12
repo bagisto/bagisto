@@ -92,7 +92,7 @@
 
                 <option value="">{{ __('shop::app.checkout.onepage.select-state') }}</option>
 
-                <option v-for='(state, index) in countryStates[address.billing.country]' value="state.code">
+                <option v-for='(state, index) in countryStates[address.billing.country]' :value="state.code">
                     @{{ state.default_name }}
                 </option>
 
@@ -243,7 +243,7 @@
 
                 <option value="">{{ __('shop::app.checkout.onepage.select-state') }}</option>
 
-                <option v-for='(state, index) in countryStates[address.shipping.country]' value="state.code">
+                <option v-for='(state, index) in countryStates[address.shipping.country]' :value="state.code">
                     @{{ state.default_name }}
                 </option>
 

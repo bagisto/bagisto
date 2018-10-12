@@ -409,9 +409,7 @@ class Core
     // $timezonelist = \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);
 
     /**
-     * Find all the tax
-     * rates associated
-     * with a tax category.
+     * Find all the tax rates associated with a tax category.
      *
      * @return Array
      */
@@ -421,8 +419,7 @@ class Core
     }
 
     /**
-     * To fetch all
-     * tax rates.
+     * To fetch all tax rates.
      *
      * @return Collection
      */

@@ -264,7 +264,7 @@ return [
 
         'tax-categories' => [
             'title' => 'Add Tax Category',
-            'create' => 'Create Tax Category',
+            'save-btn-title' => 'Save Tax Category',
             'general' => 'Tax Category',
             'select-channel' => 'Select Channel',
             'name' => 'Name',
@@ -279,6 +279,7 @@ return [
 
         'tax-rates' => [
             'title' => 'Add Tax Rate',
+            'save-btn-title' => 'Save Tax Rate',
             'general' => 'Tax Rate',
             'identifier' => 'Identifier',
             'is_zip' => 'Enable Zip Range',
