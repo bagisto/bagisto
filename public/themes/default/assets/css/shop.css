@@ -1029,9 +1029,9 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   margin-bottom: 8px;
 }
 
-.header .header-top div.right-content ul.cart-dropdown-container li.cart-dropdown .dropdown-list .dropdown-container .dropdown-footer button {
-  border-radius: 0px;
-  width: 130px;
+.header .header-top div.right-content ul.cart-dropdown-container li.cart-dropdown .dropdown-list .dropdown-container .dropdown-footer .btn {
+  max-width: 170px;
+  text-align: center;
 }
 
 .header .header-top ul.right-responsive {

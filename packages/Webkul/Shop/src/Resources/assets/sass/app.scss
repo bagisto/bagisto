@@ -416,9 +416,9 @@ section.slider-block {
                             margin-bottom: 8px;
                         }
 
-                        .dropdown-footer button {
-                            border-radius: 0px;
-                            width: 130px;
+                        .dropdown-footer .btn {
+                            max-width: 170px;
+                            text-align: center;
                         }
                     }
                 }

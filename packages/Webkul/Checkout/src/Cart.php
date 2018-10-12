@@ -504,6 +504,8 @@ class Cart {
         if($cart = $this->getCart()) {
             $this->cartItem->delete($itemId);
 
+            $this->collectTotals();
+
             //delete the cart instance if no items are there
             if($cart->items()->get()->count() == 0) {
                 $this->cart->delete($cart->id);

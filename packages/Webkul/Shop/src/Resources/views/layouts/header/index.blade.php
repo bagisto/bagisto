@@ -151,7 +151,7 @@
                                     <div class="dropdown-footer">
                                         <a href="{{ route('shop.checkout.cart.index') }}">View Shopping Cart</a>
 
-                                        <button class="btn btn-primary btn-lg"><a style="color: white;" href="{{ route('shop.checkout.onepage.index') }}">CHECKOUT</a></button>
+                                        <a class="btn btn-primary btn-lg" style="color: white;" href="{{ route('shop.checkout.onepage.index') }}">CHECKOUT</a>
                                     </div>
                                 </div>
                             </div>
@@ -223,48 +223,13 @@
                 <ul class="resp-cart-dropdown-container">
 
                     <li class="cart-dropdown">
-                        @if(isset($cart) && session()->has('cart'))
-                        @php
-                            $cart = session()->get('cart');
-                        @endphp
-                        <div class="dropdown-toggle">
-                            <span class="icon cart-icon"></span>
-                        </div>
-
-                        <div class="dropdown-list" style="display: none; top: 50px; right: 0px">
-                            <div class="dropdown-container">
-                                <div class="dropdown-cart">
-                                    <div class="dropdown-header">
-                                        <p class="heading">Cart Subtotal - {{ $cart->sub_total }}</p>
-                                    </div>
-
-                                    <div class="dropdown-content">
-                                        @foreach($cart as $product)
-                                        <div class="item" >
-                                            <div class="item-image" >
-                                                <img src="{{$product['2']}}" />
-                                            </div>
-                                            <div class="item-details">
-                                                <div class="item-name">{{$product['0']}}</div>
-                                                <div class="item-price">{{$product['1']}}</div>
-                                                <div class="item-qty">Quantity - {{$product['3']}}</div>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    </div>
-
-                                    <div class="dropdown-footer">
-                                        <a href="/">View Shopping Cart</a>
-                                        <button class="btn btn-primary btn-lg">CHECKOUT</button>
-                                    </div>
-                                </div>
-                            </div>
+                        @if(isset($cart))
+                        <div>
+                            <a href="{{ route('shop.checkout.cart.index') }}"><span class="icon cart-icon"></span></a>
                         </div>
                         @else
-                        <div class="dropdown-toggle">
-                            <div style="display: inline-block; cursor: pointer;">
-                                <span class="icon cart-icon"></span>
-                            </div>
+                        <div style="display: inline-block; cursor: pointer;">
+                            <span class="icon cart-icon"></span>
                         </div>
                         @endif
                     </li>
