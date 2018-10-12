@@ -124,7 +124,7 @@
             <select type="text" v-validate="'required'" class="control" id="billing[country]" name="billing[country]" v-model="address.billing.country">
                 <option value=""></option>
 
-                @foreach (country()->all() as $code => $country)
+                @foreach (core()->countries() as $code => $country)
 
                     <option value="{{ $code }}">{{ $country }}</option>
 
@@ -264,7 +264,7 @@
             <select type="text" v-validate="'required'" class="control" id="shipping[country]" name="shipping[country]" v-model="address.shipping.country">
                 <option value=""></option>
 
-                @foreach (country()->all() as $code => $country)
+                @foreach (core()->countries() as $code => $country)
 
                     <option value="{{ $code }}">{{ $country }}</option>
 

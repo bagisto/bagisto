@@ -4,7 +4,7 @@
             let handler = function(e) {
                 setTimeout(function(){ 
                     e.target.value = e.target.value.toString().toLowerCase()
-                        .replace(/[^\w ]+/g,'')
+                        .replace(/[^\w_ ]+/g,'')
                         .trim()
                         .replace(/ +/g,'-');
                 }, 100);

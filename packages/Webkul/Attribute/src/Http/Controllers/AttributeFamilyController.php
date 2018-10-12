@@ -98,7 +98,7 @@ class AttributeFamilyController extends Controller
      */
     public function edit(Attribute $attribute, $id)
     {
-        $attributeFamily = $this->attributeFamily->find($id, ['*'], ['attribute_groups.custom_attributes']);
+        $attributeFamily = $this->attributeFamily->with(['attribute_groups.custom_attributes'])->find($id, ['*']);
 
         $custom_attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
 

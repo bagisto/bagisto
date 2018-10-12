@@ -129,16 +129,6 @@ class Product extends Model
      *
      * @return bool
      */
-    public function isCustomAttribute($attribute)
-    {
-        return $this->attribute_family->custom_attributes->pluck('code')->contains($attribute);
-    }
-
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
     public function isSaleable()
     {
         if(!$this->status)
@@ -180,16 +170,15 @@ class Product extends Model
     public function getAttribute($key)
     {
         if (!method_exists(self::class, $key) && !in_array($key, ['parent_id', 'attribute_family_id']) && !isset($this->attributes[$key])) {
-            if (isset($this->id) && $this->isCustomAttribute($key)) {
+            if (isset($this->id)) {
                 $this->attributes[$key] = '';
 
-                $attributeModel = $this->attribute_family->custom_attributes()->where('attributes.code', $key)->first();
+                $attribute = app(\Webkul\Attribute\Repositories\AttributeRepository::class)->findOneByField('code', $key);
 
-                $this->attributes[$key] = $this->getCustomAttributeValue($attributeModel);
+                $this->attributes[$key] = $this->getCustomAttributeValue($attribute);
 
                 return $this->getAttributeValue($key);
             }
-
         }
 
         return parent::getAttribute($key);
@@ -227,7 +216,7 @@ class Product extends Model
         if(!$attribute)
             return;
 
-        $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
+        $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
         $locale = request()->get('locale') ?: app()->getLocale();
 

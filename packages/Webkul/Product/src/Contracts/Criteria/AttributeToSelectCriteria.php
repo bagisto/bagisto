@@ -60,12 +60,7 @@ class AttributeToSelectCriteria extends AbstractProduct implements CriteriaInter
     {
         $model = $model->select('products.*');
 
-        foreach ($this->attributeToSelect as $code) {
-            $attribute = $this->attribute->findOneByField('code', $code);
-
-            if(!$attribute)
-                continue;
-
+        foreach ($this->attribute->getProductDefaultAttributes() as $attribute) {
             $productValueAlias = 'pav_' . $attribute->code;
 
             $model = $model->leftJoin('product_attribute_values as ' . $productValueAlias, function($qb) use($attribute, $productValueAlias) {
@@ -76,7 +71,7 @@ class AttributeToSelectCriteria extends AbstractProduct implements CriteriaInter
                         ->where($productValueAlias . '.attribute_id', $attribute->id);
             });
 
-            $model = $model->addSelect($productValueAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $code);
+            $model = $model->addSelect($productValueAlias . '.' . ProductAttributeValue::$attributeTypeFields[$attribute->type] . ' as ' . $attribute->code);
         }
 
         return $model;
