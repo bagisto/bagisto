@@ -11,6 +11,7 @@ use Webkul\Core\Models\TaxRate as TaxRate;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 use Illuminate\Support\Facades\Config;
+use PragmaRX\Countries\Package\Countries;
 
 class Core
 {
@@ -35,7 +36,10 @@ class Core
      * @param  Webkul\Core\Repositories\ExchangeRateRepository $exchangeRateRepository
      * @return void
      */
-    public function __construct(CurrencyRepository $currencyRepository, ExchangeRateRepository $exchangeRateRepository)
+    public function __construct(
+        CurrencyRepository $currencyRepository,
+        ExchangeRateRepository $exchangeRateRepository
+    )
     {
         $this->currencyRepository = $currencyRepository;
 
@@ -278,7 +282,7 @@ class Core
     public function currency($amount = 0)
     {
         if(is_null($amount))
-            $price = 0;
+            $amount = 0;
 
         $currencyCode = $this->getCurrentCurrency()->code;
 
@@ -438,5 +442,50 @@ class Core
         }
 
         return Config::get($field);
+    }
+
+    /**
+     * Retrieve all countries
+     *
+     * @return Collection
+     */
+    public function countries()
+    {
+        $countries = new Countries;
+        
+        return $countries->all()->pluck('name.common', 'cca2');
+    }
+
+    /**
+     * Retrieve all country states
+     *
+     * @return Collection
+     */
+    public function states($countryCode)
+    {
+        $countries = new Countries;
+
+        return $countries->where('cca2', $countryCode)
+            ->first()
+            ->hydrateStates()
+            ->states
+            ->sortBy('name')
+            ->pluck('name', 'postal');
+    }
+
+    /**
+     * Retrieve all grouped states by country code
+     *
+     * @return Collection
+     */
+    public function groupedStatesByCountries()
+    {
+        $collection = [];
+
+        foreach ($this->countries() as $countryCode => $countryName) {
+            $collection[$countryCode] = $this->states($countryCode)->toArray();
+        }
+
+        return $collection;
     }
 }

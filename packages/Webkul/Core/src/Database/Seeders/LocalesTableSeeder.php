@@ -9,6 +9,8 @@ class LocalesTableSeeder extends Seeder
 {
     public function run()
     {
+        \Illuminate\Database\Eloquent\Model::reguard();
+        
         $locale = new Locale();
         $locale->code = 'en';
         $locale->name = 'English';
