@@ -13,7 +13,7 @@
                 <li class="search-group">
                     <input type="search" class="search-field" placeholder="Search for products">
                     <div class="search-icon-wrapper">
-                        <span class="icon search-icon"></span>
+                        <span class="icon icon-search"></span>
                     </div>
                 </li>
             </ul>
@@ -168,7 +168,7 @@
             </ul>
 
             <ul class="right-responsive">
-                <li class="search-box"><span class="icon search-icon" id="search"></span></li>
+                <li class="search-box"><span class="icon icon-search" id="search"></span></li>
                 <ul class="resp-account-dropdown-container">
 
                     <li class="account-dropdown">
@@ -234,7 +234,7 @@
                         @endif
                     </li>
                 </ul>
-                <li class="menu-box" ><span class="icon sortable-icon" id="hammenu"></span></li>
+                <li class="menu-box" ><span class="icon icon-menu" id="hammenu"></span></li>
             </ul>
         </div>
     </div>
@@ -245,13 +245,13 @@
 
     <div class="search-responsive">
         <div class="search-content">
-            <i class="icon search-icon mt-10"></i>
+            <i class="icon icon-search mt-10"></i>
             <input  class="search mt-5">
             <i class="icon icon-menu-back right mt-10"></i>
         </div>
 
         <div class="search-content">
-            <i class="icon search-icon mt-10"></i>
+            <i class="icon icon-search mt-10"></i>
             <span class="suggestion mt-15">Designer sarees</span>
         </div>
     </div>
