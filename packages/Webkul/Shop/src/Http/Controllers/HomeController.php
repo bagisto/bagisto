@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Webkul\Core\Repositories\SliderRepository as Sliders;
-use Webkul\Channel\Channel as Channel;
 
 /**
  * Home page controller
@@ -28,7 +27,6 @@ use Webkul\Channel\Channel as Channel;
 
     }
     public function index() {
-
         $current_channel = core()->getCurrentChannel();
 
         $all_sliders = $this->sliders->findWhere(['channel_id'=>$current_channel['id']]);

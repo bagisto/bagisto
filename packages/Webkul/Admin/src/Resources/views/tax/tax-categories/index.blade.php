@@ -8,15 +8,15 @@
             </div>
 
             <div class="page-action">
-                <a href="{{ route('admin.taxrule.show') }}" class="btn btn-lg btn-primary">
+                <a href="{{ route('admin.tax-categories.show') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.configuration.tax.add-title') }}
                 </a>
             </div>
         </div>
 
         <div class="page-content">
-            @inject('taxrule','Webkul\Admin\DataGrids\TaxRuleDataGrid')
-            {!! $taxrule->render() !!}
+            @inject('taxCategories','Webkul\Admin\DataGrids\TaxRuleDataGrid')
+            {!! $taxCategories->render() !!}
         </div>
     </div>
 @stop

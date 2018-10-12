@@ -4,7 +4,7 @@ namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class CountryState extends Model
 {
     public $timestamps = false;
 }

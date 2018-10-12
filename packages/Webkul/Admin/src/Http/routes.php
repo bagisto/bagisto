@@ -284,20 +284,6 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.locales.store');
 
 
-            // Country Routes
-            Route::get('/countries', 'Webkul\Core\Http\Controllers\CountryController@index')->defaults('_config', [
-                'view' => 'admin::settings.countries.index'
-            ])->name('admin.countries.index');
-
-            Route::get('/countries/create', 'Webkul\Core\Http\Controllers\CountryController@create')->defaults('_config', [
-                'view' => 'admin::settings.countries.create'
-            ])->name('admin.countries.create');
-
-            Route::post('/countries/create', 'Webkul\Core\Http\Controllers\CountryController@store')->defaults('_config', [
-                'redirect' => 'admin.countries.index'
-            ])->name('admin.countries.store');
-
-
             // Currency Routes
             Route::get('/currencies', 'Webkul\Core\Http\Controllers\CurrencyController@index')->defaults('_config', [
                 'view' => 'admin::settings.currencies.index'
@@ -400,54 +386,52 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin::sliders.index'
             ])->name('admin.sliders.store');
 
+
             //tax routes
-            Route::prefix('tax')->group(function () {
+            Route::get('/tax-categories', 'Webkul\Tax\Http\Controllers\TaxController@index')->defaults('_config', [
+                'view' => 'admin::tax.tax-categories.index'
+            ])->name('admin.tax-categories.index');
 
-                Route::get('taxrule', 'Webkul\Tax\Http\Controllers\TaxController@index')->defaults('_config', [
-                    'view' => 'admin::tax.taxrule.index'
-                ])->name('admin.taxrule.index');
+            // tax rule routes
+            Route::get('/tax-categories/create', 'Webkul\Tax\Http\Controllers\TaxCategoryController@show')->defaults('_config', [
+                'view' => 'admin::tax.tax-categories.create'
+            ])->name('admin.tax-categories.show');
 
-                // tax rule routes
-                Route::get('taxrule/create', 'Webkul\Tax\Http\Controllers\TaxCategoryController@show')->defaults('_config', [
-                    'view' => 'admin::tax.taxrule.create.create'
-                ])->name('admin.taxrule.show');
+            Route::post('/tax-categories/create', 'Webkul\Tax\Http\Controllers\TaxCategoryController@create')->defaults('_config', [
+                'redirect' => 'admin.tax-categories.index'
+            ])->name('admin.tax-categories.create');
 
-                Route::post('taxrule/create', 'Webkul\Tax\Http\Controllers\TaxCategoryController@create')->defaults('_config', [
-                    'redirect' => 'admin.taxrule.index'
-                ])->name('admin.taxrule.create');
+            Route::get('/tax-categories/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@edit')->defaults('_config', [
+                'view' => 'admin::tax.tax-categories.edit'
+            ])->name('admin.tax-categories.edit');
 
-                Route::get('/taxrule/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@edit')->defaults('_config', [
-                    'view' => 'admin::tax.taxrule.edit.edit'
-                ])->name('admin.taxrule.edit');
+            Route::put('/tax-categories/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@update')->defaults('_config', [
+                'redirect' => 'admin.tax-categories.index'
+            ])->name('admin.tax-categories.update');
 
-                Route::put('/taxrule/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@update')->defaults('_config', [
-                    'redirect' => 'admin.taxrule.index'
-                ])->name('admin.taxrule.update');
+            //tax rule ends
 
-                //tax rule ends
 
-                //tax rate
+            //tax rate
+            Route::get('tax-rates', 'Webkul\Tax\Http\Controllers\TaxRateController@index')->defaults('_config', [
+                'view' => 'admin::tax.tax-rates.index'
+            ])->name('admin.tax-rates.index');
 
-                Route::get('taxrate', 'Webkul\Tax\Http\Controllers\TaxRateController@index')->defaults('_config', [
-                    'view' => 'admin::tax.taxrate.index'
-                ])->name('admin.taxrate.index');
+            Route::get('tax-rates/create', 'Webkul\Tax\Http\Controllers\TaxRateController@show')->defaults('_config', [
+                'view' => 'admin::tax.tax-rates.create'
+            ])->name('admin.tax-rates.show');
 
-                Route::get('taxrate/create', 'Webkul\Tax\Http\Controllers\TaxRateController@show')->defaults('_config', [
-                    'view' => 'admin::tax.taxrate.create.taxrate'
-                ])->name('admin.taxrate.show');
+            Route::post('tax-rates/create', 'Webkul\Tax\Http\Controllers\TaxRateController@create')->defaults('_config', [
+                'redirect' => 'admin.tax-rates.index'
+            ])->name('admin.tax-rates.create');
 
-                Route::post('taxrate/create', 'Webkul\Tax\Http\Controllers\TaxRateController@create')->defaults('_config', [
-                    'redirect' => 'admin.taxrate.index'
-                ])->name('admin.taxrate.create');
+            Route::get('tax-rates/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@edit')->defaults('_config', [
+                'view' => 'admin::tax.tax-rates.edit'
+            ])->name('admin.tax-rates.store');
 
-                Route::get('taxrate/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@edit')->defaults('_config', [
-                    'view' => 'admin::tax.taxrate.edit.edit'
-                ])->name('admin.taxrate.store');
-
-                Route::put('taxrate/update/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@update')->defaults('_config', [
-                    'redirect' => 'admin.taxrate.index'
-                ])->name('admin.taxrate.update');
-            });
+            Route::put('tax-rates/update/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@update')->defaults('_config', [
+                'redirect' => 'admin.tax-rates.index'
+            ])->name('admin.tax-rates.update');
             //tax rate ends
         });
     });
