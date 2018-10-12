@@ -14,7 +14,7 @@
 
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.configuration.tax-categories.create') }}
+                        {{ __('admin::app.configuration.tax-rates.save-btn-title') }}
                     </button>
                 </div>
             </div>
