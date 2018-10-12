@@ -3,16 +3,18 @@
 namespace Webkul\Core\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Webkul\Core\Models\Currency;
+use DB;
 
 class CurrencyTableSeeder extends Seeder
 {
     public function run()
     {
-        $currency = new Currency();
-        $locale->code = 'USD';
-        $locale->name = 'US Dollar';
-        $locale->symbol = '$';
-        $locale->save();
+        DB::table('currencies')->delete();
+
+        DB::table('currencies')->insert([
+            'code' => 'USD',
+            'name' => 'US Dollar',
+            'symbol' => '$',
+        ]);
     }
 }

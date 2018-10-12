@@ -68,21 +68,19 @@ class EventServiceProvider extends ServiceProvider
 
             $menu->add('configuration.account', 'My Account', 'admin.account.edit', 1);
 
-            $menu->add('settings', 'Settings', 'admin.countries.index', 6, 'settings-icon');
+            $menu->add('settings', 'Settings', 'admin.locales.index', 6, 'settings-icon');
 
-            $menu->add('settings.countries', 'Countries', 'admin.countries.index', 1, '');
+            $menu->add('settings.locales', 'Locales', 'admin.locales.index', 1, '');
 
-            $menu->add('settings.locales', 'Locales', 'admin.locales.index', 2, '');
+            $menu->add('settings.currencies', 'Currencies', 'admin.currencies.index', 2, '');
 
-            $menu->add('settings.currencies', 'Currencies', 'admin.currencies.index', 3, '');
+            $menu->add('settings.exchange_rates', 'Exchange Rates', 'admin.exchange_rates.index', 3, '');
 
-            $menu->add('settings.exchange_rates', 'Exchange Rates', 'admin.exchange_rates.index', 4, '');
-
-            $menu->add('settings.inventory_sources', 'Inventory Sources', 'admin.inventory_sources.index', 5, '');
+            $menu->add('settings.inventory_sources', 'Inventory Sources', 'admin.inventory_sources.index', 4, '');
 
             $menu->add('settings.channels', 'Channels', 'admin.channels.index', 5, '');
 
-            $menu->add('settings.users', 'Users', 'admin.users.index', 7, '');
+            $menu->add('settings.users', 'Users', 'admin.users.index', 6, '');
 
             $menu->add('settings.users.users', 'Users', 'admin.users.index', 1, '');
 
@@ -90,11 +88,11 @@ class EventServiceProvider extends ServiceProvider
 
             $menu->add('settings.sliders', 'Create Sliders', 'admin.sliders.index', 8, '');
 
-            $menu->add('settings.tax', 'Taxes', 'admin.taxrule.index', 9, '');
+            $menu->add('settings.tax', 'Taxes', 'admin.tax-categories.index', 9, '');
 
-            $menu->add('settings.tax.taxrule', 'Add Tax Category', 'admin.taxrule.index', 1, '');
+            $menu->add('settings.tax.tax-categories', 'Add Tax Category', 'admin.tax-categories.index', 1, '');
 
-            $menu->add('settings.tax.taxrate', 'Add Tax Rates', 'admin.taxrate.index', 2, '');
+            $menu->add('settings.tax.tax-rates', 'Add Tax Rates', 'admin.tax-rates.index', 2, '');
         });
     }
 

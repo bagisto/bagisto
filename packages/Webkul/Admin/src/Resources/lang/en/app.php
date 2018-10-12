@@ -2,7 +2,9 @@
 
 return [
     'common' => [
-        'no-result-found' => 'We couldn\'t find any records.'
+        'no-result-found' => 'We couldn\'t find any records.',
+        'country' => 'Country',
+        'state' => 'State'
     ],
     'account' => [
         'header-title' => 'My Account',
@@ -260,7 +262,7 @@ return [
             'add-title' => 'Add Tax Category'
         ],
 
-        'taxrule' => [
+        'tax-categories' => [
             'title' => 'Add Tax Category',
             'create' => 'Create Tax Category',
             'general' => 'Tax Category',
@@ -275,7 +277,7 @@ return [
             ]
         ],
 
-        'taxrate' => [
+        'tax-rates' => [
             'title' => 'Add Tax Rate',
             'general' => 'Tax Rate',
             'identifier' => 'Identifier',
