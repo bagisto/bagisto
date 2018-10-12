@@ -19,7 +19,6 @@ class CreateCartItemsTable extends Migration
             $table->string('sku')->nullable();
             $table->string('type')->nullable();
             $table->string('name')->nullable();
-            $table->integer('parent_id')->unsigned()->nullable();
             $table->string('coupon_code')->nullable();
             $table->decimal('weight', 12,4)->default(1);
             $table->decimal('total_weight', 12,4)->default(0);
@@ -35,18 +34,14 @@ class CreateCartItemsTable extends Migration
             $table->decimal('tax_percent', 12, 4)->default(0)->nullable();
             $table->decimal('tax_amount', 12, 4)->default(0)->nullable();
             $table->decimal('base_tax_amount', 12, 4)->default(0)->nullable();
-
-            $table->decimal('total_with_discount', 12,4)->default(0);
-            $table->decimal('base_total_with_discount', 12,4)->default(0);
             
             $table->decimal('discount_percent', 12,4)->default(0);
             $table->decimal('discount_amount', 12,4)->default(0);
             $table->decimal('base_discount_amount', 12,4)->default(0);
-            $table->boolean('no_discount')->nullable()->default(0);
 
-            $table->boolean('free_shipping')->nullable()->default(0);
             $table->json('additional')->nullable();
 
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('cart_id')->unsigned();

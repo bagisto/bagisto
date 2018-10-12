@@ -3,6 +3,7 @@
 namespace Webkul\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Product\Models\Product;
 
 
 class CartItem extends Model
@@ -16,16 +17,8 @@ class CartItem extends Model
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function product() {
-        return $this->hasOne('Webkul\Product\Models\Product', 'id', 'product_id');
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
-
-    // /**
-    //  * Get the parent item
-    //  */
-    // public function parent()
-    // {
-    //     return $this->hasOne(self::class, 'parent_id', 'id');
-    // }
 
     /**
      * Get the child item.
