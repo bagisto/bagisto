@@ -105,7 +105,7 @@
                                 <?php $selectedCountry = old('country') ?: $inventorySource->country ?>
                                 <label for="country">{{ __('admin::app.settings.inventory_sources.country') }}</label>
                                 <select class="control" id="country" name="country">
-                                    @foreach(country()->all() as $countryCoode => $countryName)
+                                    @foreach(core()->countries() as $countryCoode => $countryName)
                                         <option value="{{ $countryCoode }}" {{ $selectedCountry == $countryCoode ? 'selected' : '' }}>
                                             {{ $countryName }}
                                         </option>

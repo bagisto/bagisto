@@ -5,6 +5,8 @@ namespace Webkul\Product\Product;
 use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
 use Webkul\Product\Product\ProductImage;
 use Webkul\Product\Product\Price;
+use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductAttributeValue;
 
 class ConfigurableOption extends AbstractProduct
 {
@@ -56,16 +58,19 @@ class ConfigurableOption extends AbstractProduct
      * @param Product $product
      * @return float
      */
-    public function getAllowProducts($product)
+    public function getAllowedProducts($product)
     {
-        $variants = [];
+        static $variants = [];
+
+        if(count($variants))
+            return $variants;
 
         foreach ($product->variants as $variant) {
             if ($variant->isSaleable()) {
                 $variants[] = $variant;
             }
         }
-        
+
         return $variants;
     }
 
@@ -77,7 +82,7 @@ class ConfigurableOption extends AbstractProduct
      */
     public function getConfigurationConfig($product)
     {
-        $options = $this->getOptions($product, $this->getAllowProducts($product));
+        $options = $this->getOptions($product, $this->getAllowedProducts($product));
 
         $config = [
             'attributes' => $this->getAttributesData($product, $options),
@@ -203,7 +208,7 @@ class ConfigurableOption extends AbstractProduct
     {
         $prices = [];
 
-        foreach ($this->getAllowProducts($product) as $variant) {
+        foreach ($this->getAllowedProducts($product) as $variant) {
             $prices[$variant->id] = [
                 'regular_price' => [
                     'formated_price' => core()->currency($variant->price),
@@ -229,20 +234,10 @@ class ConfigurableOption extends AbstractProduct
     {
         $images = [];
 
-        foreach ($this->getAllowProducts($product) as $variant) {
+        foreach ($this->getAllowedProducts($product) as $variant) {
             $images[$variant->id] = $this->productImage->getGalleryImages($variant);
         }
 
         return $images;
-    }
-
-    /**
-     * Get product images for configurable variations
-     *
-     * @param Product $product
-     * @return array
-     */
-    protected function is($product)
-    {
     }
 }

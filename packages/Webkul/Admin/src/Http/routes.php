@@ -403,24 +403,24 @@ Route::group(['middleware' => ['web']], function () {
             //tax routes
             Route::prefix('tax')->group(function () {
 
-                Route::get('taxrule', 'Webkul\Core\Http\Controllers\TaxController@index')->defaults('_config', [
+                Route::get('taxrule', 'Webkul\Tax\Http\Controllers\TaxController@index')->defaults('_config', [
                     'view' => 'admin::tax.taxrule.index'
                 ])->name('admin.taxrule.index');
 
                 // tax rule routes
-                Route::get('taxrule/create', 'Webkul\Core\Http\Controllers\TaxCategoryController@show')->defaults('_config', [
+                Route::get('taxrule/create', 'Webkul\Tax\Http\Controllers\TaxCategoryController@show')->defaults('_config', [
                     'view' => 'admin::tax.taxrule.create.create'
                 ])->name('admin.taxrule.show');
 
-                Route::post('taxrule/create', 'Webkul\Core\Http\Controllers\TaxCategoryController@create')->defaults('_config', [
+                Route::post('taxrule/create', 'Webkul\Tax\Http\Controllers\TaxCategoryController@create')->defaults('_config', [
                     'redirect' => 'admin.taxrule.index'
                 ])->name('admin.taxrule.create');
 
-                Route::get('/taxrule/edit/{id}', 'Webkul\Core\Http\Controllers\TaxCategoryController@edit')->defaults('_config', [
+                Route::get('/taxrule/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@edit')->defaults('_config', [
                     'view' => 'admin::tax.taxrule.edit.edit'
                 ])->name('admin.taxrule.edit');
 
-                Route::put('/taxrule/edit/{id}', 'Webkul\Core\Http\Controllers\TaxCategoryController@update')->defaults('_config', [
+                Route::put('/taxrule/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@update')->defaults('_config', [
                     'redirect' => 'admin.taxrule.index'
                 ])->name('admin.taxrule.update');
 
@@ -428,23 +428,23 @@ Route::group(['middleware' => ['web']], function () {
 
                 //tax rate
 
-                Route::get('taxrate', 'Webkul\Core\Http\Controllers\TaxRateController@index')->defaults('_config', [
+                Route::get('taxrate', 'Webkul\Tax\Http\Controllers\TaxRateController@index')->defaults('_config', [
                     'view' => 'admin::tax.taxrate.index'
                 ])->name('admin.taxrate.index');
 
-                Route::get('taxrate/create', 'Webkul\Core\Http\Controllers\TaxRateController@show')->defaults('_config', [
+                Route::get('taxrate/create', 'Webkul\Tax\Http\Controllers\TaxRateController@show')->defaults('_config', [
                     'view' => 'admin::tax.taxrate.create.taxrate'
                 ])->name('admin.taxrate.show');
 
-                Route::post('taxrate/create', 'Webkul\Core\Http\Controllers\TaxRateController@create')->defaults('_config', [
+                Route::post('taxrate/create', 'Webkul\Tax\Http\Controllers\TaxRateController@create')->defaults('_config', [
                     'redirect' => 'admin.taxrate.index'
                 ])->name('admin.taxrate.create');
 
-                Route::get('taxrate/edit/{id}', 'Webkul\Core\Http\Controllers\TaxRateController@edit')->defaults('_config', [
+                Route::get('taxrate/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@edit')->defaults('_config', [
                     'view' => 'admin::tax.taxrate.edit.edit'
                 ])->name('admin.taxrate.store');
 
-                Route::put('taxrate/update/{id}', 'Webkul\Core\Http\Controllers\TaxRateController@update')->defaults('_config', [
+                Route::put('taxrate/update/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@update')->defaults('_config', [
                     'redirect' => 'admin.taxrate.index'
                 ])->name('admin.taxrate.update');
             });

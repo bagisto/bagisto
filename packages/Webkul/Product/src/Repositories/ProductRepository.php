@@ -409,17 +409,20 @@ class ProductRepository extends Repository
      * @param string $slug
      * @return mixed
      */
-    public function findBySlugOrFail($slug)
+    public function findBySlugOrFail($slug, $columns = null)
     {
         $attribute = $this->attribute->findOneByField('code', 'url_key');
 
         $attributeValue = $this->attributeValue->findOneWhere([
             'attribute_id' => $attribute->id,
             ProductAttributeValue::$attributeTypeFields[$attribute->type] => $slug
-        ]);
+        ], ['product_id']);
 
-        if($attributeValue && $attributeValue->product)
-            return $attributeValue->product;
+        if($attributeValue && $attributeValue->product_id) {
+            $this->pushCriteria(app(AttributeToSelectCriteria::class)->addAttribueToSelect($columns));
+
+            return $this->find($attributeValue->product_id);
+        }
 
         throw (new ModelNotFoundException)->setModel(
             get_class($this->model), $slug
@@ -434,15 +437,7 @@ class ProductRepository extends Repository
     public function getNewProducts()
     {
         $this->pushCriteria(app(NewProductsCriteria::class));
-        $this->pushCriteria(app(AttributeToSelectCriteria::class)->addAttribueToSelect([
-                'name',
-                'description',
-                'short_description',
-                'price',
-                'special_price',
-                'special_price_from',
-                'special_price_to'
-            ]));
+        $this->pushCriteria(app(AttributeToSelectCriteria::class));
 
         $params = request()->input();
 
@@ -459,15 +454,7 @@ class ProductRepository extends Repository
     public function getFeaturedProducts()
     {
         $this->pushCriteria(app(FeaturedProductsCriteria::class));
-        $this->pushCriteria(app(AttributeToSelectCriteria::class)->addAttribueToSelect([
-                'name',
-                'description',
-                'short_description',
-                'price',
-                'special_price',
-                'special_price_from',
-                'special_price_to'
-            ]));
+        $this->pushCriteria(app(AttributeToSelectCriteria::class));
 
         $params = request()->input();
 

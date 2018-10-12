@@ -32,13 +32,13 @@
 
                                 <div class="item">
                                     <div style="margin-right: 15px;">
-                                        <img class="item-image" src="{{ $productBaseImage['medium_image_url'] }}" />
+                                        <a href="{{ url()->to('/').'/products/'.$product->url_key }}"><img class="item-image" src="{{ $productBaseImage['medium_image_url'] }}" /></a>
                                     </div>
 
                                     <div class="item-details">
 
                                         <div class="item-title">
-                                            {{ $product->name }}
+                                            <a href="{{ url()->to('/').'/products/'.$product->url_key }}">{{ $product->name }}</a>
                                         </div>
 
                                         <div class="price">
@@ -50,14 +50,14 @@
                                             <div class="summary">
 
                                                 {{ Cart::getItemAttributeOptionDetails($item)['html'] }}
-                                                
+
                                             </div>
                                         @endif
 
                                         <div class="misc">
                                             <div class="qty-text" :class="[errors.has('qty') ? 'has-error' : '']">{{ __('shop::app.checkout.cart.quantity.quantity') }}</div>
 
-                                            <input class="box" type="text" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}">
+                                            <input class="box" type="text" class="control" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}">
 
                                             <span class="control-error" v-if="errors.has('qty[{{$item->id}}]')">@{{ errors.first('qty') }}</span>
 

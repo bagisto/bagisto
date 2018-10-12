@@ -8,7 +8,7 @@ use Webkul\Core\Models\Currency;
 
 class Channel extends Model
 {
-    protected $fillable = ['code', 'name', 'description', 'default_locale', 'base_currency'];
+    protected $fillable = ['code', 'name', 'description', 'default_locale_id', 'base_currency_id'];
 
     /**
      * Get the channel locales.

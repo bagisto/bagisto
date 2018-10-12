@@ -70,6 +70,8 @@ class OnepageController extends Controller
         if(Cart::hasError() || !Cart::saveCustomerAddress(request()->all()) || !$rates = Shipping::collectRates())
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
+        Cart::collectTotals();
+
         return response()->json($rates);
     }
 

@@ -99,13 +99,13 @@
                                         @foreach($configurableFamily->configurable_attributes as $attribute)
                                             <tr>
                                                 <td>
-                                                    {{ $attribute->name }}
+                                                    {{ $attribute->admin_name }}
                                                 </td>
                                                 <td>
                                                     @foreach($attribute->options as $option)
                                                         <span class="label">
                                                             <input type="hidden" name="super_attributes[{{$attribute->code}}][]" value="{{ $option->id }}"/>
-                                                            {{ $option->label }}
+                                                            {{ $option->admin_name }}
 
                                                             <i class="icon cross-icon"></i>
                                                         </span>

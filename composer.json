@@ -18,6 +18,7 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^3.2",
+        "pragmarx/countries": "^0.5.9",
         "prettus/l5-repository": "^2.6",
         "propaganistas/laravel-intl": "^2.0"
     },
@@ -44,13 +45,15 @@
         "webkul/laravel-theme": "self.version",
         "webkul/laravel-shipping": "self.version",
         "webkul/laravel-payment": "self.version",
-        "webkul/laravel-sales": "self.version"
+        "webkul/laravel-sales": "self.version",
+        "webkul/laravel-tax": "self.version"
     },
     "autoload": {
         "classmap": [
             "database/seeds",
             "database/factories"
         ],
+
         "psr-4": {
             "App\\": "app/",
             "Webkul\\User\\": "packages/Webkul/User/src",
@@ -67,7 +70,8 @@
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
             "Webkul\\Shipping\\": "packages/Webkul/Shipping/src",
             "Webkul\\Payment\\": "packages/Webkul/Payment/src",
-            "Webkul\\Sales\\": "packages/Webkul/Sales/src"
+            "Webkul\\Sales\\": "packages/Webkul/Sales/src",
+            "Webkul\\Tax\\": "packages/Webkul/Tax/src"
         }
     },
     "autoload-dev": {

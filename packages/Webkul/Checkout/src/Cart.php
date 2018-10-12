@@ -94,27 +94,24 @@ class Cart {
     {
         $product = $this->product->findOneByField('id', $productId);
 
-        unset($data['_token']);
+        // dd($product);
 
-        //Check if the product is saleable
+        //Check if the product's information is proper or not.
         if(!isset($data['product']) || !isset($data['quantity'])) {
             session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_fields'));
 
-            return redirect()->back();
+            return false;
         } else {
             if($product->type == 'configurable' && !isset($data['super_attribute'])) {
                 session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_options'));
 
-                return redirect()->back();
+                return false;
             }
         }
 
         $child = $childData = null;
         if($product->type == 'configurable') {
-            //Check if the product is salable
             $child = $this->product->findOneByField('id', $data['selected_configurable_option']);
-
-            //child row data
             $childData = [
                 'product_id' => $data['selected_configurable_option'],
                 'sku' => $child->sku,
@@ -123,8 +120,8 @@ class Cart {
             ];
         }
 
-
         $price = ($product->type == 'configurable' ? $child->price : $product->price);
+
         $parentData = [
             'sku' => $product->sku,
             'product_id' => $productId,
@@ -153,14 +150,20 @@ class Cart {
      */
     public function add($id, $data)
     {
+
         $itemData = $this->prepareItemData($id, $data);
+
+        if($itemData == false) {
+            return false;
+        }
 
         if($cart = $this->getCart()) {
             $product = $this->product->find($id);
 
             $cartItems = $cart->items;
 
-            if($cartItems->count()) {
+            //check the isset conditions as collection empty object will mislead the condition and errorhandling case.
+            if(isset($cartItems) && $cartItems->count()) {
                 foreach($cartItems as $cartItem) {
                     if($product->type == "simple") {
 
@@ -173,7 +176,7 @@ class Cart {
                             if($canBe == false) {
                                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
-                                return redirect()->back();
+                                return false;
                             }
 
                             $cartItem->update([
@@ -186,7 +189,7 @@ class Cart {
 
                             session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
 
-                            return redirect()->back();
+                            return true;
                         }
                     } else if($product->type == "configurable") {
                         if($cartItem->type == "configurable") {
@@ -205,7 +208,7 @@ class Cart {
                                 if($canBe == false) {
                                     session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
-                                    return redirect()->back();
+                                    return false;
                                 }
 
                                 $parent->update([
@@ -218,7 +221,7 @@ class Cart {
 
                                 session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
 
-                                return redirect()->back();
+                                return true;
                             }
                         }
                     }
@@ -257,11 +260,16 @@ class Cart {
      * @param integer $id
      * @param array   $data
      *
-     * @return Response
+     * @return Booleans
      */
     public function createNewCart($id, $data)
     {
         $itemData = $this->prepareItemData($id, $data);
+
+        //if the item data is not valid to be processed it will be returning false
+        if($itemData == false) {
+            return false;
+        }
 
         $cartData['channel_id'] = core()->getCurrentChannel()->id;
 
@@ -276,9 +284,16 @@ class Cart {
             $cartData['is_guest'] = 1;
         }
 
+        //set the currency column with the respective currency
+        $cartData['global_currency_code'] = core()->getBaseCurrencyCode();
+        $cartData['base_currency_code'] = core()->getBaseCurrencyCode();
+        $cartData['channel_currency_code'] = core()->getBaseCurrencyCode();
+        $cartData['cart_currency_code'] = core()->getBaseCurrencyCode();
+        //set the cart items and quantity
         $cartData['items_count'] = 1;
         $cartData['items_qty'] = $data['quantity'];
 
+        //create the cart instance in the database
         if($cart = $this->cart->create($cartData)) {
             $itemData['parent']['cart_id'] = $cart->id;
             $product = $this->product->find($id);
@@ -332,14 +347,19 @@ class Cart {
 
             $guestCart = session()->get('cart');
 
+            //when the logged in customer is not having any of the cart instance previously and are active.
             if(!isset($cart)) {
-                $guestCart->update(['customer_id' => auth()->guard('customer')->user()->id, 'is_guest' => 0]);
+                $guestCart->update([
+                    'customer_id' => auth()->guard('customer')->user()->id,
+                    'is_guest' => 0,
+                    'customer_first_name' => auth()->guard('customer')->user()->first_name,
+                    'customer_last_name' => auth()->guard('customer')->user()->last_name,
+                    'customer_email' => auth()->guard('customer')->user()->email
+                ]);
 
                 session()->forget('cart');
 
-                session()->put('cart', $guestCart);
-
-                return redirect()->back();
+                return true;
             }
 
             $cartItems = $cart->items;
@@ -360,9 +380,8 @@ class Cart {
                             $canBe = $this->canAddOrUpdate($cartItem->id, $prevQty + $newQty);
 
                             if($canBe == false) {
-                                session()->flash('warning', 'The requested quantity is not available, please try back later.');
-
-                                return redirect()->back();
+                                $this->cartItem->delete($guestCartItem->id);
+                                continue;
                             }
 
                             $cartItem->update([
@@ -388,9 +407,8 @@ class Cart {
                             $canBe = $this->canAddOrUpdate($cartItem->child->id, $prevQty + $newQty);
 
                             if($canBe == false) {
-                                session()->flash('warning', 'The requested quantity is not available, please try back later.');
-
-                                return redirect()->back();
+                                $this->cartItem->delete($guestCartItem->id);
+                                continue;
                             }
 
                             $cartItem->update([
@@ -404,9 +422,9 @@ class Cart {
                             $guestCartItems->forget($key);
 
                             //child will be deleted first
-                            $this->cartItem->delete($guestCartItemChild->id);
+                            // $this->cartItem->delete($guestCartItemChild->id);
 
-                            //then parent will get deleted
+                            //then parent will also delete the child if any
                             $this->cartItem->delete($guestCartItem->id);
                         }
                     }
@@ -485,6 +503,8 @@ class Cart {
     {
         if($cart = $this->getCart()) {
             $this->cartItem->delete($itemId);
+
+            $this->collectTotals();
 
             //delete the cart instance if no items are there
             if($cart->items()->get()->count() == 0) {
@@ -638,8 +658,6 @@ class Cart {
                 $this->cartAddress->create(array_merge($shippingAddress, ['address_type' => 'shipping']));
             }
         }
-
-        $this->calulateTax();
 
         return true;
     }

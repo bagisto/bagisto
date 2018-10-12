@@ -18,7 +18,7 @@ class CreateTaxRatesTable extends Migration
 
             $table->string('identifier')->unique();
 
-            $table->boolean('is_zip_from')->default(0);
+            $table->boolean('is_zip')->default(0);
 
             $table->string('zip_code')->nullable();
 
@@ -30,7 +30,7 @@ class CreateTaxRatesTable extends Migration
 
             $table->string('country');
 
-            $table->float('tax_rate', 12, 4);
+            $table->decimal('tax_rate', 12, 4);
 
             $table->timestamps();
         });

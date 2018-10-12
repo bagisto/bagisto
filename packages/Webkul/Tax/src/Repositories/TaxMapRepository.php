@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Core\Repositories;
+namespace Webkul\Tax\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 
@@ -19,7 +19,7 @@ class TaxMapRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Core\Models\TaxMap';
+        return 'Webkul\Tax\Models\TaxMap';
     }
 
     /**

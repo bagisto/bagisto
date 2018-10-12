@@ -50,7 +50,7 @@
 
             <div class="signup-confirm" :class="[errors.has('agreement') ? 'has-error' : '']">
                 <span class="checkbox">
-                    <input type="checkbox" id="checkbox2" name="agreement" v-validate="'required|confirmed'">
+                    <input type="checkbox" id="checkbox2" name="agreement" v-validate="'required'">
                     <label class="checkbox-view" for="checkbox2"></label>
                     <span>{{ __('shop::app.customer.signup-form.agree') }}
                         <a href="">{{ __('shop::app.customer.signup-form.terms') }}</a> & <a href="">{{ __('shop::app.customer.signup-form.conditions') }}</a> {{ __('shop::app.customer.signup-form.using') }}.
