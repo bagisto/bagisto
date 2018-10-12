@@ -31,17 +31,26 @@ class AttributeFamilyTableSeeder extends Seeder
                             'code' => 'url_key',
                             'position' => 3
                         ], [
-                            'code' => 'new',
+                            'code' => 'tax_category_id',
                             'position' => 4
                         ], [
-                            'code' => 'featured',
+                            'code' => 'new',
                             'position' => 5
                         ], [
-                            'code' => 'visible_individually',
+                            'code' => 'featured',
                             'position' => 6
                         ], [
-                            'code' => 'status',
+                            'code' => 'visible_individually',
                             'position' => 7
+                        ], [
+                            'code' => 'status',
+                            'position' => 8
+                        ], [
+                            'code' => 'color',
+                            'position' => 9
+                        ], [
+                            'code' => 'size',
+                            'position' => 10
                         ]
                     ]
                 ], [

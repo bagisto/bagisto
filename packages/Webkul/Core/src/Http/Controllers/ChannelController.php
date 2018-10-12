@@ -75,11 +75,11 @@ class ChannelController extends Controller
             'code' => ['required', 'unique:channels,code', new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required',
             'locales' => 'required|array|min:1',
-            'default_locale' => 'required',
+            'default_locale_id' => 'required',
             'currencies' => 'required|array|min:1',
-            'base_currency' => 'required'
+            'base_currency_id' => 'required'
         ]);
-
+        
         $this->channel->create(request()->all());
 
         session()->flash('success', 'Channel created successfully.');

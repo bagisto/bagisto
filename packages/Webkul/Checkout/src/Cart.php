@@ -639,8 +639,6 @@ class Cart {
             }
         }
 
-        $this->calulateTax();
-
         return true;
     }
 

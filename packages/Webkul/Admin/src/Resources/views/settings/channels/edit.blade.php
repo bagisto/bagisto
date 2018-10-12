@@ -66,9 +66,9 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('default_locale_id') ? 'has-error' : '']">
-                                <label for="default_locale" class="required">{{ __('admin::app.settings.channels.default-locale') }}</label>
-                                <?php $selectedOption = old('default_locale') ?: $channel->default_locale_id ?>
-                                <select v-validate="'required'" class="control" id="default_locale" name="default_locale_id">
+                                <label for="default_locale_id" class="required">{{ __('admin::app.settings.channels.default-locale') }}</label>
+                                <?php $selectedOption = old('default_locale_id') ?: $channel->default_locale_id ?>
+                                <select v-validate="'required'" class="control" id="default_locale_id" name="default_locale_id">
                                     @foreach(core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->id }}" {{ $selectedOption == $locale->id ? 'selected' : '' }}>
                                             {{ $locale->name }}
@@ -92,9 +92,9 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('base_currency_id') ? 'has-error' : '']">
-                                <label for="base_currency" class="required">{{ __('admin::app.settings.channels.base-currency') }}</label>
-                                <?php $selectedOption = old('base_currency') ?: $channel->base_currency_id ?>
-                                <select v-validate="'required'" class="control" id="base_currency" name="base_currency_id">
+                                <label for="base_currency_id" class="required">{{ __('admin::app.settings.channels.base-currency') }}</label>
+                                <?php $selectedOption = old('base_currency_id') ?: $channel->base_currency_id ?>
+                                <select v-validate="'required'" class="control" id="base_currency_id" name="base_currency_id">
                                     @foreach(core()->getAllCurrencies() as $currency)
                                         <option value="{{ $currency->id }}" {{ $selectedOption == $currency->id ? 'selected' : '' }}>
                                             {{ $currency->name }}

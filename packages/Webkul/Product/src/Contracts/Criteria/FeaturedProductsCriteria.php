@@ -5,13 +5,14 @@ namespace Webkul\Product\Contracts\Criteria;
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Product\AbstractProduct;
 
 /**
  * Class MyCriteria.
  *
  * @package namespace App\Criteria;
  */
-class FeaturedProductsCriteria implements CriteriaInterface
+class FeaturedProductsCriteria extends AbstractProduct implements CriteriaInterface
 {
     /**
      * @var AttributeRepository
@@ -40,6 +41,8 @@ class FeaturedProductsCriteria implements CriteriaInterface
         $attribute = $this->attribute->findOneByField('code', 'featured');
 
         $model = $model->leftJoin('product_attribute_values as filter_featured', 'products.id', '=', 'filter_featured.product_id');
+
+        $model = $this->applyChannelLocaleFilter($attribute, $model, 'filter_featured');
 
         $model->where('filter_featured.boolean_value', 1)
             ->where('filter_featured.attribute_id', $attribute->id);
