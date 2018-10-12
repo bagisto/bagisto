@@ -15,15 +15,6 @@ class TaxServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
-
-        $router->aliasMiddleware('locale', Locale::class);
-
-        $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
-
-        $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
-
     }
 
     /**
@@ -33,19 +24,5 @@ class TaxServiceProvider extends ServiceProvider
      */
     public function register()
     {
-    }
-    /**
-     * Register Bouncer as a singleton.
-     *
-     * @return void
-     */
-    protected function registerFacades()
-    {
-        // $loader = AliasLoader::getInstance();
-        // $loader->alias('core', CoreFacade::class);
-
-        // $this->app->singleton('core', function () {
-        //     return app()->make(Core::class);
-        // });
     }
 }

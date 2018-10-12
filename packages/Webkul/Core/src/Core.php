@@ -10,8 +10,9 @@ use Webkul\Core\Models\TaxCategory as TaxCategory;
 use Webkul\Core\Models\TaxRate as TaxRate;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
+use Webkul\Core\Repositories\CountryRepository;
+use Webkul\Core\Repositories\CountryStateRepository;
 use Illuminate\Support\Facades\Config;
-use PragmaRX\Countries\Package\Countries;
 
 class Core
 {
@@ -30,20 +31,42 @@ class Core
     protected $exchangeRateRepository;
 
     /**
+     * CountryRepository model
+     *
+     * @var mixed
+     */
+    protected $countryRepository;
+
+    /**
+     * CountryStateRepository model
+     *
+     * @var mixed
+     */
+    protected $countryStateRepository;
+
+    /**
      * Create a new instance.
      *
      * @param  Webkul\Core\Repositories\CurrencyRepository     $currencyRepository
      * @param  Webkul\Core\Repositories\ExchangeRateRepository $exchangeRateRepository
+     * @param  Webkul\Core\Repositories\CountryRepository      $countryRepository
+     * @param  Webkul\Core\Repositories\CountryStateRepository $countryStateRepository
      * @return void
      */
     public function __construct(
         CurrencyRepository $currencyRepository,
-        ExchangeRateRepository $exchangeRateRepository
+        ExchangeRateRepository $exchangeRateRepository,
+        CountryRepository $countryRepository,
+        CountryStateRepository $countryStateRepository
     )
     {
         $this->currencyRepository = $currencyRepository;
 
         $this->exchangeRateRepository = $exchangeRateRepository;
+
+        $this->countryRepository = $countryRepository;
+
+        $this->countryStateRepository = $countryStateRepository;
     }
 
     /**
@@ -451,9 +474,7 @@ class Core
      */
     public function countries()
     {
-        $countries = new Countries;
-        
-        return $countries->all()->pluck('name.common', 'cca2');
+        return $this->countryRepository->all();
     }
 
     /**
@@ -463,14 +484,7 @@ class Core
      */
     public function states($countryCode)
     {
-        $countries = new Countries;
-
-        return $countries->where('cca2', $countryCode)
-            ->first()
-            ->hydrateStates()
-            ->states
-            ->sortBy('name')
-            ->pluck('name', 'postal');
+        return $this->countryStateRepository->findByField('country_code', $countryCode);
     }
 
     /**
@@ -482,8 +496,8 @@ class Core
     {
         $collection = [];
 
-        foreach ($this->countries() as $countryCode => $countryName) {
-            $collection[$countryCode] = $this->states($countryCode)->toArray();
+        foreach ($this->countries() as $country) {
+            $collection[$country->code] = $this->states($country->code)->toArray();
         }
 
         return $collection;
