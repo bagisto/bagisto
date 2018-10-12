@@ -393,7 +393,8 @@ return [
             'email' => 'Email',
             'date_of_birth' => 'Date of Birth',
             'phone' => 'Phone',
-            'customer_group' => 'Customer Group'
+            'customer_group' => 'Customer Group',
+            'save-btn-title' => 'Save Customer'
         ],
         'reviews' => [
             'title' => 'Title',

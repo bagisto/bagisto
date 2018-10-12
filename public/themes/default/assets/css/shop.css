@@ -85,6 +85,18 @@
   height: 32px;
 }
 
+.icon-arrow-up {
+  background-image: url("../images/arrow-up.svg");
+  width: 16px;
+  height: 16px;
+}
+
+.icon-arrow-down {
+  background-image: url("../images/arrow-down.svg");
+  width: 16px;
+  height: 16px;
+}
+
 .product-grid-4 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1078,6 +1090,10 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   position: relative;
 }
 
+.header .header-bottom .nav a:first-child {
+  margin-left: 20px;
+}
+
 .header .header-bottom .nav li > .icon {
   display: none;
 }
@@ -1235,8 +1251,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
     padding: 12px 4.8px 12px 8px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    position: relative;
-    width: 90%;
   }
   .responsive-nav .nav li > .icon {
     float: right;
@@ -1246,6 +1260,9 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   }
   .responsive-nav .nav > li {
     border-bottom: 1px solid #E8E8E8;
+  }
+  .responsive-nav .nav li {
+    padding-left: 20px;
   }
   .responsive-nav .nav li:first-child {
     border-top: 1px solid #E8E8E8;
@@ -1522,6 +1539,10 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   margin-bottom: 5.5%;
 }
 
+.account-content .side-menu-title {
+  display: none;
+}
+
 .account-content .account-side-menu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1579,6 +1600,10 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   margin-left: 5.5%;
   margin-top: 1%;
   width: 100%;
+}
+
+.account-content .profile .section-head .back-icon {
+  display: none;
 }
 
 .account-content .profile .section-head .profile-heading {
@@ -1674,30 +1699,62 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
         -ms-flex-direction: column;
             flex-direction: column;
   }
+  .account-content .side-menu-title {
+    height: 48px;
+    padding-top: 13px;
+    border: 1px solid;
+    font-size: 18px;
+    display: inline-block;
+  }
+  .account-content .side-menu-title .right {
+    float: right;
+    margin-top: 3px;
+  }
   .account-content .account-side-menu {
     width: 100%;
     border: none;
     margin-bottom: 20px;
-  }
-  .account-content .account-side-menu .side-menu-title {
-    height: 48px;
-    padding-top: 15px;
-    border: 1px solid;
-  }
-  .account-content .account-side-menu .side-menu-title::after {
-    content: url(../images/arrow-down.svg);
-    float: right;
-  }
-  .account-content .account-side-menu .side-menu-title-active::after {
-    content: url(../images//arrow-up.svg);
-    float: right;
+    display: none;
   }
   .account-content .account-side-menu li {
     width: 100%;
     margin-left: 0%;
   }
+  .account-content .account-side-menu li a {
+    color: black;
+  }
   .account-content .account-side-menu li:last-child {
     border-bottom: 1px solid #E8E8E8;
+  }
+  .account-content .profile {
+    margin-left: 0px;
+  }
+  .account-content .profile .section-head {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    border-top: 1px solid #E8E8E8;
+    border-bottom: 1px solid #E8E8E8;
+    height: 50px;
+    padding-top: 7px;
+  }
+  .account-content .profile .section-head .back-icon {
+    display: block;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  .account-content .profile .section-head .horizontal-rule {
+    display: none;
+  }
+  .account-content .profile-content table tbody tr {
+    display: grid;
+    margin-bottom: 20px;
+  }
+  .account-content .edit-form-content {
+    margin-left: 0px;
   }
 }
 

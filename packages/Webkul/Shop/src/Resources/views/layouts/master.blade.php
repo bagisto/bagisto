@@ -42,7 +42,6 @@
 
     <script type="text/javascript">
         window.flashMessages = [];
-
         @if($success = session('success'))
             window.flashMessages = [{'type': 'alert-success', 'message': "{{ $success }}" }];
         @elseif($warning = session('warning'))
@@ -50,7 +49,6 @@
         @elseif($error = session('error'))
             window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }];
         @endif
-
         window.serverErrors = [];
         @if (count($errors))
             window.serverErrors = @json($errors->getMessages());
@@ -61,6 +59,7 @@
     <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
 
     @stack('scripts')
+
 </body>
 
 </html>

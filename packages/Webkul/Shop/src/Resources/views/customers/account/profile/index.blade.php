@@ -8,9 +8,10 @@
 
     @include('shop::customers.account.partials.sidemenu')
 
-    <div class="account-lauyout = profile">
+    <div class="account profile">
 
         <div class="section-head">
+            <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
             <span class="profile-heading">{{ __('shop::app.customer.account.profile.index.title') }}</span>
             <span class="profile-edit"><a href="{{ route('customer.profile.edit') }}">{{ __('shop::app.customer.account.profile.index.edit') }}</a></span>
             <div class="horizontal-rule"></div>

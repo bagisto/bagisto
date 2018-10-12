@@ -473,6 +473,10 @@ section.slider-block {
             position: relative;
         }
 
+        .nav a:first-child{
+            margin-left: 20px;
+        }
+
         .nav  li  > .icon{
             display: none;
         }
@@ -634,8 +638,6 @@ section.slider-block {
             padding: 12px 4.8px 12px 8px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            position: relative;
-            width: 90%;
         }
 
         .nav  li  > .icon{
@@ -648,6 +650,10 @@ section.slider-block {
 
         .nav > li {
             border-bottom: 1px solid $border-color;
+        }
+
+        .nav li {
+            padding-left: 20px;
         }
 
         .nav  li:first-child {
@@ -923,6 +929,10 @@ section.slider-block {
     margin-top: 5.5%;
     margin-bottom: 5.5%;
 
+    .side-menu-title {
+        display: none;
+    }
+
     .account-side-menu {
         display: flex;
         flex-direction: column;
@@ -966,6 +976,10 @@ section.slider-block {
         width: 100%;
 
         .section-head {
+            .back-icon {
+                display: none;
+            }
+
             .profile-heading {
                 font-size: 28px;
                 color: $font-color;
@@ -1065,35 +1079,75 @@ section.slider-block {
     .account-content {
         flex-direction: column;
 
+        .side-menu-title {
+            height: 48px;
+            padding-top: 13px;
+            border: 1px solid;
+            font-size: 18px;
+            display: inline-block;
+
+            .right {
+                float: right;
+                margin-top: 3px;
+            }
+        }
+
         .account-side-menu {
             width: 100%;
             border: none;
             margin-bottom: 20px;
-
-            .side-menu-title {
-                height: 48px;
-                padding-top: 15px;
-                border: 1px solid;
-            }
-
-            .side-menu-title::after {
-                content: url(../images/arrow-down.svg);
-                float: right;
-            }
-
-            .side-menu-title-active::after {
-                content: url(../images//arrow-up.svg);
-                float: right;
-            }
+            display: none;
 
             li {
                 width: 100%;
                 margin-left: 0%;
             }
 
+            li a {
+                color: black;
+            }
+
             li:last-child {
                 border-bottom: 1px solid $border-color;
             }
+        }
+
+        .profile {
+            margin-left: 0px;
+
+            .section-head {
+                display: flex;
+                justify-content: space-between;
+                border-top: 1px solid $border-color;
+                border-bottom: 1px solid $border-color;
+                height: 50px;
+                padding-top: 7px;
+
+                .back-icon {
+                    display: block;
+                    cursor: pointer;
+                    margin-top: 5px;
+                }
+
+                .horizontal-rule {
+                    display: none;
+                }
+            }
+        }
+
+        .profile-content {
+            table {
+                tbody {
+                    tr {
+                        display: grid;
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+        }
+
+        .edit-form-content {
+            margin-left: 0px;
         }
     }
 
