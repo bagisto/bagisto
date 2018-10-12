@@ -23,9 +23,6 @@
                 <div class="form-container">
                     @csrf()
 
-                    <accordian :title="'{{ __('admin::app.configuration.taxrate.general') }}'" :active="true">
-                        <div slot="body">
-
                             <div class="control-group" :class="[errors.has('identifier') ? 'has-error' : '']">
                                 <label for="identifier" class="required">{{ __('admin::app.configuration.taxrate.identifier') }}</label>
 
@@ -53,7 +50,7 @@
                             <div class="control-group">
                                 <span class="checkbox">
 
-                                    <input type="checkbox" id="is_zip" name="is_zip" id="is_zip" onclick="myFunction()" value="{{ old('is_zip') }}">
+                                    <input type="checkbox" id="is_zip" name="is_zip" onclick="myFunction()">
 
                                     <label class="checkbox-view" for="is_zip"></label>
                                     Enable Zip Range
@@ -61,7 +58,7 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('zip_code') ? 'has-error' : '']" id="zip_code">
-                                <label for="zip_code" class="required">{{ __('admin::app.configuration.taxrate.zip_code') }}</label>
+                                <label for="zip_code">{{ __('admin::app.configuration.taxrate.zip_code') }}</label>
 
                                 <input class="control" id="zip_code" name="zip_code" value="{{ old('zip_code') }}"/>
 
@@ -69,17 +66,17 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('zip_from') ? 'has-error' : '']" id="zip_from">
-                                <label for="zip_from" class="required">{{ __('admin::app.configuration.taxrate.zip_from') }}</label>
+                                <label for="zip_from">{{ __('admin::app.configuration.taxrate.zip_from') }}</label>
 
-                                <input v-validate="'numeric'" class="control" id="zip_from" name="zip_from" value="{{ old('zip_from') }}"/>
+                                <input v-validate="'numeric'" class="control" name="zip_from" value="{{ old('zip_from') }}"/>
 
                                 <span class="control-error" v-if="errors.has('zip_from')">@{{ errors.first('zip_from') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('zip_to') ? 'has-error' : '']" id="zip_to">
-                                <label for="zip_to" class="required">{{ __('admin::app.configuration.taxrate.zip_to') }}</label>
+                                <label for="zip_to">{{ __('admin::app.configuration.taxrate.zip_to') }}</label>
 
-                                <input v-validate="'numeric'" class="control" id="zip_to" name="zip_to" value="{{ old('zip_to') }}"/>
+                                <input v-validate="'numeric'" class="control" name="zip_to" value="{{ old('zip_to') }}"/>
 
                                 <span class="control-error" v-if="errors.has('zip_to')">@{{ errors.first('zip_to') }}</span>
                             </div>
@@ -92,8 +89,6 @@
                                 <span class="control-error" v-if="errors.has('tax_rate')">@{{ errors.first('tax_rate') }}</span>
                             </div>
 
-                        </div>
-                    </accordian>
                 </div>
             </div>
         </form>
@@ -110,6 +105,8 @@
             function myFunction() {
                 value = document.getElementById('is_zip').checked;
 
+                // console.log(value);
+
                 if(value) {
                     document.getElementById("zip_from").style.display = "";
 
@@ -123,8 +120,6 @@
 
                     document.getElementById("zip_code").style.display = "";
                 }
-
-                console.log("Value = ", value);
             }
         </script>
     @endpush

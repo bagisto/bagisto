@@ -65,17 +65,12 @@
                     </accordian>
 
                     @include ('shop::products.view.attributes')
-
                     @include ('shop::products.view.reviews')
-
                 </div>
-
             </form>
-
         </div>
 
         @include ('shop::products.view.up-sells')
-
     </section>
 
 @endsection

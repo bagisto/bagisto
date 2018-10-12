@@ -1,13 +1,13 @@
 <?php
 
-namespace Webkul\Core\Http\Controllers;
+namespace Webkul\Tax\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Channel\Channel as Channel;
-use Webkul\Core\Repositories\TaxCategoriesRepository as TaxRule;
-use Webkul\Core\Repositories\TaxRatesRepository as TaxRate;
-use Webkul\Core\Repositories\TaxMapRepository as TaxMap;
+use Webkul\Channel as Channel;
+use Webkul\Tax\Repositories\TaxCategoriesRepository as TaxRule;
+use Webkul\Tax\Repositories\TaxRatesRepository as TaxRate;
+use Webkul\Tax\Repositories\TaxMapRepository as TaxMap;
 
 /**
  * Tax controller
@@ -34,7 +34,7 @@ class TaxCategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\TaxCategoriesRepository  $taxRule
+     * @param  Webkul\Tax\Repositories\TaxCategoriesRepository  $taxRule
      * @return void
      */
     public function __construct(TaxRule $taxRule, TaxRate $taxRate, TaxMap $taxMap)
@@ -76,6 +76,8 @@ class TaxCategoryController extends Controller
             'name' => 'required|string|unique:tax_categories,name',
             'description' => 'required|string'
         ]);
+
+        dd($data);
 
         if($currentTaxRule = $this->taxRule->create(request()->input())) {
             $allTaxRules = $data['taxrates'];

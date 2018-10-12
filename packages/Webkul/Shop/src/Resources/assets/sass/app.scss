@@ -279,7 +279,7 @@ section.slider-block {
             flex-direction: row;
             justify-content: flex-end;
             align-items: center;
-            cursor: pointer;
+            // cursor: pointer;
 
             ul.account-dropdown-container {
                 float: right;
@@ -290,23 +290,30 @@ section.slider-block {
                     flex-direction: row;
                     margin-right: 14px;
 
-                    .account-icon {
-                        cursor:  pointer;
-                        margin-right: 8px;
-                        height: 24px;
-                        width: 24px;
+                    .dropdown-list {
+                        width: 300px;
+                        padding: 25px;
                     }
 
-                    .account {
-                        cursor:  pointer;
-                        padding-top: 3px;
-                        padding-right: 5px;
-                        margin-left: 8px;
+                    .dropdown-container {
+                        padding: 0px;
+                        overflow: hidden;
                     }
 
-                    .icon.arrow-down-icon {
-                        cursor:  pointer;
-                        margin-top: 10px;
+                    ul.account-dropdown-list {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        li > a {
+                            color: white;
+                        }
+
+                        .btn {
+                            min-width: 100px;
+                            text-align: center;
+                        }
                     }
                 }
             }
@@ -353,7 +360,7 @@ section.slider-block {
                         }
 
                         .dropdown-cart > .dropdown-header i{
-                            cursor: pointer;
+                            // cursor: pointer;
                             float: right;
                             height: 22px;
                             width: 22px;
@@ -409,9 +416,9 @@ section.slider-block {
                             margin-bottom: 8px;
                         }
 
-                        .dropdown-footer button {
-                            border-radius: 0px;
-                            width: 130px;
+                        .dropdown-footer .btn {
+                            max-width: 170px;
+                            text-align: center;
                         }
                     }
                 }
@@ -1178,19 +1185,7 @@ section.product-detail {
                             max-height: 480px;
                         }
 
-                        .whishlist-icon {
-                            margin-top: -480px;
-                            float: right;
-                            margin-right: 10px;
-                        }
-
-                        .share-icon {
-                            margin-top: -480px;
-                            float: right;
-                            margin-right: 40px;
-                        }
-
-                        .wishlist {
+                        .add-to-wishlist {
                             position: absolute;
                             top: 10px;
                             right: 12px;
@@ -1204,9 +1199,8 @@ section.product-detail {
                     }
                 }
 
-
                 .add-to-buttons {
-                    display: none;
+                    display: flex;
                     flex-direction: row;
                     margin-top: 10px;
                     justify-content: space-between;

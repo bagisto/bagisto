@@ -852,7 +852,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  cursor: pointer;
 }
 
 .header .header-top div.right-content ul.account-dropdown-container {
@@ -871,23 +870,39 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   margin-right: 14px;
 }
 
-.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .account-icon {
-  cursor: pointer;
-  margin-right: 8px;
-  height: 24px;
-  width: 24px;
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .dropdown-list {
+  width: 300px;
+  padding: 25px;
 }
 
-.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .account {
-  cursor: pointer;
-  padding-top: 3px;
-  padding-right: 5px;
-  margin-left: 8px;
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .dropdown-container {
+  padding: 0px;
+  overflow: hidden;
 }
 
-.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .icon.arrow-down-icon {
-  cursor: pointer;
-  margin-top: 10px;
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown ul.account-dropdown-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown ul.account-dropdown-list li > a {
+  color: white;
+}
+
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown ul.account-dropdown-list .btn {
+  min-width: 100px;
+  text-align: center;
 }
 
 .header .header-top div.right-content ul.cart-dropdown-container {
@@ -945,7 +960,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 }
 
 .header .header-top div.right-content ul.cart-dropdown-container li.cart-dropdown .dropdown-list .dropdown-container .dropdown-cart > .dropdown-header i {
-  cursor: pointer;
   float: right;
   height: 22px;
   width: 22px;
@@ -1015,9 +1029,9 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   margin-bottom: 8px;
 }
 
-.header .header-top div.right-content ul.cart-dropdown-container li.cart-dropdown .dropdown-list .dropdown-container .dropdown-footer button {
-  border-radius: 0px;
-  width: 130px;
+.header .header-top div.right-content ul.cart-dropdown-container li.cart-dropdown .dropdown-list .dropdown-container .dropdown-footer .btn {
+  max-width: 170px;
+  text-align: center;
 }
 
 .header .header-top ul.right-responsive {
@@ -1823,19 +1837,7 @@ section.product-detail div.layouter form div.product-image-group div .product-he
   max-height: 480px;
 }
 
-section.product-detail div.layouter form div.product-image-group div .product-hero-image .whishlist-icon {
-  margin-top: -480px;
-  float: right;
-  margin-right: 10px;
-}
-
-section.product-detail div.layouter form div.product-image-group div .product-hero-image .share-icon {
-  margin-top: -480px;
-  float: right;
-  margin-right: 40px;
-}
-
-section.product-detail div.layouter form div.product-image-group div .product-hero-image .wishlist {
+section.product-detail div.layouter form div.product-image-group div .product-hero-image .add-to-wishlist {
   position: absolute;
   top: 10px;
   right: 12px;
@@ -1848,7 +1850,9 @@ section.product-detail div.layouter form div.product-image-group div .product-he
 }
 
 section.product-detail div.layouter form div.product-image-group .add-to-buttons {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;

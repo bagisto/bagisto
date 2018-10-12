@@ -193,6 +193,7 @@ return [
         Webkul\Shipping\Providers\ShippingServiceProvider::class,
         Webkul\Payment\Providers\PaymentServiceProvider::class,
         Webkul\Sales\Providers\SalesServiceProvider::class,
+        Webkul\Tax\Providers\TaxServiceProvider::class,
     ],
 
     /*
@@ -247,5 +248,4 @@ return [
         'Cart' => Webkul\Checkout\Facades\Cart::class,
         'Core' => Webkul\Core\Facades\Core::class
     ],
-
 ];

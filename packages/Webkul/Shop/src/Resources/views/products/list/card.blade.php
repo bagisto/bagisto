@@ -14,10 +14,10 @@
 
         <div class="product-name">
 
-            {{ $product->id }}
-
-            <a href="" title="{{ $product->name }}">
-                <span>{{ $product->name }}</span>
+            <a href="{{ url()->to('/').'/products/'.$product->url_key }}" title="{{ $product->name }}">
+                <span>
+                    {{ $product->name }}
+                </span>
             </a>
         </div>
 

@@ -17,42 +17,26 @@
                     </div>
                 </li>
             </ul>
-
         </div>
 
         <div class="right-content">
-            @guest('customer')
-            <ul class="register-link" style="border-right: 2px solid #E8E8E8; ">
-                <span class="icon account-icon"></span>
-                <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
-            </ul>
-            @endguest
             <ul class="account-dropdown-container">
                 <li class="account-dropdown">
-
-                    <span class="icon account-icon"></span>
-
                     <div class="dropdown-toggle">
-                        <div style="display: inline-block; cursor: pointer;">
-
-                            @guest('customer')
-                                <span class="name">Sign In</span>
-                            @endguest
-
-                            @auth('customer')
-                                <span class="name">Account</span>
-                            @endauth
-
+                        <div style="display: inline-flex; align-items: center; cursor: pointer;">
+                            <span class="icon account-icon" style="margin-top: 5px;"></span>
+                            <i class="icon arrow-down-icon active"></i>
                         </div>
-                        <i class="icon arrow-down-icon active"></i>
                     </div>
-                    @guest
+                    @guest('customer')
                         <div class="dropdown-list bottom-right" style="display: none;">
                             <div class="dropdown-container">
+                                <label>Account</label><br/>
+                                <span style="font-size: 12px;">Manage Cart, Orders & Wishlist.</span>
+                                <ul class="account-dropdown-list">
+                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.session.index') }}">Sign In</a></li>
 
-                                <label>Account</label>
-                                <ul>
-                                    <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
+                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.register.index') }}">Sign Up</a></li>
                                 </ul>
 
                             </div>
@@ -60,7 +44,7 @@
                         </div>
                     @endguest
                     @auth('customer')
-                        <div class="dropdown-list bottom-right" style="display: none;">
+                        <div class="dropdown-list bottom-right" style="display: none; max-width: 230px;">
                             <div class="dropdown-container">
                                 <label>Account</label>
                                 <ul>
@@ -167,7 +151,7 @@
                                     <div class="dropdown-footer">
                                         <a href="{{ route('shop.checkout.cart.index') }}">View Shopping Cart</a>
 
-                                        <button class="btn btn-primary btn-lg">CHECKOUT</button>
+                                        <a class="btn btn-primary btn-lg" style="color: white;" href="{{ route('shop.checkout.onepage.index') }}">CHECKOUT</a>
                                     </div>
                                 </div>
                             </div>
@@ -239,48 +223,13 @@
                 <ul class="resp-cart-dropdown-container">
 
                     <li class="cart-dropdown">
-                        @if(isset($cart) && session()->has('cart'))
-                        @php
-                            $cart = session()->get('cart');
-                        @endphp
-                        <div class="dropdown-toggle">
-                            <span class="icon cart-icon"></span>
-                        </div>
-
-                        <div class="dropdown-list" style="display: none; top: 50px; right: 0px">
-                            <div class="dropdown-container">
-                                <div class="dropdown-cart">
-                                    <div class="dropdown-header">
-                                        <p class="heading">Cart Subtotal - {{ $cart->sub_total }}</p>
-                                    </div>
-
-                                    <div class="dropdown-content">
-                                        @foreach($cart as $product)
-                                        <div class="item" >
-                                            <div class="item-image" >
-                                                <img src="{{$product['2']}}" />
-                                            </div>
-                                            <div class="item-details">
-                                                <div class="item-name">{{$product['0']}}</div>
-                                                <div class="item-price">{{$product['1']}}</div>
-                                                <div class="item-qty">Quantity - {{$product['3']}}</div>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    </div>
-
-                                    <div class="dropdown-footer">
-                                        <a href="/">View Shopping Cart</a>
-                                        <button class="btn btn-primary btn-lg">CHECKOUT</button>
-                                    </div>
-                                </div>
-                            </div>
+                        @if(isset($cart))
+                        <div>
+                            <a href="{{ route('shop.checkout.cart.index') }}"><span class="icon cart-icon"></span></a>
                         </div>
                         @else
-                        <div class="dropdown-toggle">
-                            <div style="display: inline-block; cursor: pointer;">
-                                <span class="icon cart-icon"></span>
-                            </div>
+                        <div style="display: inline-block; cursor: pointer;">
+                            <span class="icon cart-icon"></span>
                         </div>
                         @endif
                     </li>
@@ -306,151 +255,7 @@
             <span class="suggestion mt-15">Designer sarees</span>
         </div>
     </div>
+    <div class="responsive-nav-menu">
 
-    <div class="responsive-nav">
-        <category-nav categories='@json($categories)' url="{{url()->to('/')}}"></category-nav>
     </div>
-
 </div>
-
-
-
-@push('scripts')
-
-<script>
-
-    document.onreadystatechange = function () {
-        var state = document.readyState
-        var galleryTemplate = document.getElementById('product-gallery-template');
-        var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
-
-        if(galleryTemplate){
-            if (state == 'interactive') {
-                galleryTemplate.style.display="none";
-            } else  {
-                document.getElementById('loader').style.display="none";
-                addTOButton.style.display="flex";
-            }
-        }
-    }
-
-    window.onload = function() {
-
-        var hamMenu = document.getElementById("hammenu");
-        var search = document.getElementById("search");
-        var sort = document.getElementById("sort");
-        var filter = document.getElementById("filter");
-
-        var searchResponsive = document.getElementsByClassName('search-responsive')[0];
-        var sortLimit = document.getElementsByClassName('reponsive-sorter-limiter')[0];
-        var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
-        var navResponsive = document.getElementsByClassName('responsive-nav')[0];
-
-        var thumbList = document.getElementsByClassName('thumb-list')[0];
-        var thumbFrame = document.getElementsByClassName('thumb-frame');
-        var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
-
-        // for product page resize image
-
-        if(thumbList && productHeroImage){
-            thumbList.style.maxHeight = productHeroImage.offsetHeight + "px";
-            for(let i=0 ; i < thumbFrame.length ; i++){
-                thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
-            }
-        }
-
-        search.addEventListener("click", header);
-        hamMenu.addEventListener("click", header);
-
-        if(sort && filter){
-            sort.addEventListener("click", sortFilter);
-            filter.addEventListener("click", sortFilter);
-        }
-
-        window.addEventListener('resize', function(){
-            if(window.innerWidth > 720){
-                searchResponsive.style.display = 'none';
-                navResponsive.style.display = 'none';
-                if(layerFilter && sortLimit){
-                    layerFilter.style.display ="none";
-                    sortLimit.style.display ="none";
-                }
-            }
-            if(window.innerWidth < 1313 && window.innerWidth > 720){
-                if(thumbList){
-                    thumbList.style.maxHeight = productHeroImage.offsetHeight + "px";
-                    for(let i=0 ; i < thumbFrame.length ; i++){
-                        thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
-                    }
-                }
-            }else {
-                for(let i=0 ; i < thumbFrame.length ; i++){
-                    thumbFrame[i].style.height = 120 + "px";
-                }
-            }
-        });
-
-
-        // for header responsive icon
-
-        function header(){
-            var className = document.getElementById(this.id).className;
-
-            if(className === 'icon search-icon' ){
-                search.classList.remove("search-icon");
-                search.classList.add("icon-menu-close");
-                hamMenu.classList.remove("icon-menu-close");
-                hamMenu.classList.add("sortable-icon");
-                searchResponsive.style.display = 'block';
-                navResponsive.style.display = 'none';
-            }else if(className === 'icon sortable-icon'){
-                hamMenu.classList.remove("sortable-icon");
-                hamMenu.classList.add("icon-menu-close");
-                search.classList.remove("icon-menu-close");
-                search.classList.add("search-icon");
-                searchResponsive.style.display = 'none';
-                navResponsive.style.display = 'block';
-            }else{
-                search.classList.remove("icon-menu-close");
-                search.classList.add("search-icon");
-                hamMenu.classList.remove("icon-menu-close");
-                hamMenu.classList.add("sortable-icon");
-                searchResponsive.style.display = 'none';
-                navResponsive.style.display = 'none';
-            }
-        }
-
-        // for category page responsive filter & sort
-        function sortFilter(){
-            var className = document.getElementById(this.id).className;
-
-            if(className === 'icon sort-icon' ){
-                sort.classList.remove("sort-icon");
-                sort.classList.add("icon-menu-close");
-                filter.classList.remove("icon-menu-close");
-                filter.classList.add("filter-icon");
-                sortLimit.style.display ="flex";
-                sortLimit.style.justifyContent="space-between";
-                layerFilter.style.display ="none";
-            }else if(className === 'icon filter-icon'){
-                filter.classList.remove("filter-icon");
-                filter.classList.add("icon-menu-close");
-                sort.classList.remove("icon-menu-close");
-                sort.classList.add("sort-icon");
-                layerFilter.style.display ="block";
-                sortLimit.style.display ="none";
-            }else{
-                sort.classList.remove("icon-menu-close");
-                sort.classList.add("sort-icon");
-                filter.classList.remove("icon-menu-close");
-                filter.classList.add("filter-icon");
-                sortLimit.style.display ="none";
-                layerFilter.style.display ="none";
-            }
-        }
-    }
-
-</script>
-
-@endpush
-

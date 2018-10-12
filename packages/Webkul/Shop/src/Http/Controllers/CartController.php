@@ -88,7 +88,7 @@ class CartController extends Controller
 
     public function add($id) {
         $data = request()->input();
-
+        // dd($data);
         Cart::add($id, $data);
 
         return redirect()->back();
@@ -120,7 +120,7 @@ class CartController extends Controller
                 return redirect()->back();
             }
         }
-        
+
         Cart::update($data);
 
         return redirect()->back();

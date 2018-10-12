@@ -32,13 +32,13 @@
 
                                 <div class="item">
                                     <div style="margin-right: 15px;">
-                                        <img class="item-image" src="{{ $productBaseImage['medium_image_url'] }}" />
+                                        <a href="{{ url()->to('/').'/products/'.$product->url_key }}"><img class="item-image" src="{{ $productBaseImage['medium_image_url'] }}" /></a>
                                     </div>
 
                                     <div class="item-details">
 
                                         <div class="item-title">
-                                            {{ $product->name }}
+                                            <a href="{{ url()->to('/').'/products/'.$product->url_key }}">{{ $product->name }}</a>
                                         </div>
 
                                         <div class="price">
@@ -50,7 +50,7 @@
                                             <div class="summary">
 
                                                 {{ Cart::getItemAttributeOptionDetails($item)['html'] }}
-                                                
+
                                             </div>
                                         @endif
 
