@@ -4,7 +4,11 @@ return [
     'home' => [
         'page-title' => 'Bagisto - Home',
         'featured-products' => 'Featured Products',
-        'new-products' => 'New Products'
+        'new-products' => 'New Products',
+
+        'product-card' => [
+            'add-to-cart' => 'ADD TO CART'
+        ]
     ],
 
     'customer' => [

@@ -28,14 +28,15 @@
                             <i class="icon arrow-down-icon active"></i>
                         </div>
                     </div>
-                    @guest
+                    @guest('customer')
                         <div class="dropdown-list bottom-right" style="display: none;">
                             <div class="dropdown-container">
-                                <label>Account</label>
+                                <label>Account</label><br/>
+                                <span style="font-size: 12px;">Manage Cart, Orders & Wishlist.</span>
                                 <ul class="account-dropdown-list">
-                                    <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
+                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.session.index') }}">Sign In</a></li>
 
-                                    <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
+                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.register.index') }}">Sign Up</a></li>
                                 </ul>
 
                             </div>
@@ -43,7 +44,7 @@
                         </div>
                     @endguest
                     @auth('customer')
-                        <div class="dropdown-list bottom-right" style="display: none;">
+                        <div class="dropdown-list bottom-right" style="display: none; max-width: 230px;">
                             <div class="dropdown-container">
                                 <label>Account</label>
                                 <ul>
@@ -150,7 +151,7 @@
                                     <div class="dropdown-footer">
                                         <a href="{{ route('shop.checkout.cart.index') }}">View Shopping Cart</a>
 
-                                        <button class="btn btn-primary btn-lg">CHECKOUT</button>
+                                        <button class="btn btn-primary btn-lg"><a style="color: white;" href="{{ route('shop.checkout.onepage.index') }}">CHECKOUT</a></button>
                                     </div>
                                 </div>
                             </div>

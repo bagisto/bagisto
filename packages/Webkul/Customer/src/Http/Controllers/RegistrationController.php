@@ -51,7 +51,7 @@ class RegistrationController extends Controller
      */
     public function create(Request $request)
     {
-
+        // dd(request()->input());
         $request->validate([
 
             'first_name' => 'string|required',
@@ -64,8 +64,6 @@ class RegistrationController extends Controller
         $data = request()->input();
 
         $data['password'] = bcrypt($data['password']);
-
-        // $registrationData = $request->except('_token');
 
         if ($this->customer->create($data)) {
 

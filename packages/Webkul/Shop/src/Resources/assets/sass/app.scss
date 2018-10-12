@@ -279,7 +279,7 @@ section.slider-block {
             flex-direction: row;
             justify-content: flex-end;
             align-items: center;
-            cursor: pointer;
+            // cursor: pointer;
 
             ul.account-dropdown-container {
                 float: right;
@@ -289,6 +289,32 @@ section.slider-block {
                     display: flex;
                     flex-direction: row;
                     margin-right: 14px;
+
+                    .dropdown-list {
+                        width: 300px;
+                        padding: 25px;
+                    }
+
+                    .dropdown-container {
+                        padding: 0px;
+                        overflow: hidden;
+                    }
+
+                    ul.account-dropdown-list {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        li > a {
+                            color: white;
+                        }
+
+                        .btn {
+                            min-width: 100px;
+                            text-align: center;
+                        }
+                    }
                 }
             }
 
@@ -334,7 +360,7 @@ section.slider-block {
                         }
 
                         .dropdown-cart > .dropdown-header i{
-                            cursor: pointer;
+                            // cursor: pointer;
                             float: right;
                             height: 22px;
                             width: 22px;

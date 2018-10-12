@@ -852,7 +852,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  cursor: pointer;
 }
 
 .header .header-top div.right-content ul.account-dropdown-container {
@@ -869,6 +868,41 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
       -ms-flex-direction: row;
           flex-direction: row;
   margin-right: 14px;
+}
+
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .dropdown-list {
+  width: 300px;
+  padding: 25px;
+}
+
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .dropdown-container {
+  padding: 0px;
+  overflow: hidden;
+}
+
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown ul.account-dropdown-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown ul.account-dropdown-list li > a {
+  color: white;
+}
+
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown ul.account-dropdown-list .btn {
+  min-width: 100px;
+  text-align: center;
 }
 
 .header .header-top div.right-content ul.cart-dropdown-container {
@@ -926,7 +960,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 }
 
 .header .header-top div.right-content ul.cart-dropdown-container li.cart-dropdown .dropdown-list .dropdown-container .dropdown-cart > .dropdown-header i {
-  cursor: pointer;
   float: right;
   height: 22px;
   width: 22px;
