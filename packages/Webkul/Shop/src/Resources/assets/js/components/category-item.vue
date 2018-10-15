@@ -1,10 +1,11 @@
+
 <template>
     <li>
         <a :href="url+'/categories/'+this.item['translations'][0].slug">{{ this.item['translations'][0].name }}&emsp;<i class="icon dropdown-right-icon"
         v-if="haveChildren && item.parent_id != null"></i></a>
 
         <i :class="[show ? 'icon arrow-down-icon mt-15' : 'icon dropdown-right-icon mt-15']"
-        v-if="haveChildren || item.parent_id == null"  @click="showOrHide"></i>
+        v-if="haveChildren"  @click="showOrHide"></i>
 
         <ul v-if="haveChildren && show">
             <category-item
@@ -29,19 +30,16 @@ export default {
             show: false,
         };
     },
-
     mounted: function() {
         if(window.innerWidth > 770){
             this.show = true;
         }
     },
-
     computed: {
         haveChildren() {
             return this.item.children.length ? true : false;
         }
     },
-
     methods: {
         showOrHide: function() {
             this.show = !this.show;

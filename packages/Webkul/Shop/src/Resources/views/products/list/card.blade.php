@@ -13,7 +13,6 @@
     <div class="product-information">
 
         <div class="product-name">
-
             <a href="{{ url()->to('/').'/products/'.$product->url_key }}" title="{{ $product->name }}">
                 <span>
                     {{ $product->name }}
@@ -29,8 +28,22 @@
 
         @include ('shop::products.review', ['product' => $product])
 
-        @include ('shop::products.add-to', ['product' => $product])
-
+        @if(Route::currentRouteName() == "shop.products.index")
+            @include ('shop::products.add-to', ['product' => $product])
+        @else
+            @if($product->type == "configurable")
+                <a href="{{ route('cart.add.configurable', $product->url_key) }}" class="btn btn-lg btn-primary addtocart">{{ __('shop::app.home.product-card.add-to-cart') }}</a>
+            @else
+                <form action="{{route('cart.add', $product->id)}}" method="POST">
+                    @csrf
+                    <input type="hidden" name="product" value="{{ $product->id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" value="false" name="is_configurable">
+                    <button class="btn btn-lg btn-primary addtocart">{{ __('shop::app.home.product-card.add-to-cart') }}</button>
+                </form>
+                @include('shop::products.wishlist')
+            @endif
+        @endif
     </div>
 
 </div>

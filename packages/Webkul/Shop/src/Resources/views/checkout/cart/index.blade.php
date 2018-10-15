@@ -57,7 +57,7 @@
                                         <div class="misc">
                                             <div class="qty-text" :class="[errors.has('qty') ? 'has-error' : '']">{{ __('shop::app.checkout.cart.quantity.quantity') }}</div>
 
-                                            <input class="box" type="text" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}">
+                                            <input class="box" type="text" class="control" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}">
 
                                             <span class="control-error" v-if="errors.has('qty[{{$item->id}}]')">@{{ errors.first('qty') }}</span>
 

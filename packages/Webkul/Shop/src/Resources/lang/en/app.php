@@ -109,6 +109,24 @@ return [
                     'title' => 'Edit Address',
                     'submit' => 'Edit Address'
                 ]
+            ],
+
+            'order' => [
+                'index' => [
+                    'page-title' => 'Customer-Order',
+                    'title' => 'Orders',
+                    'order_id' => 'Order ID',
+                    'date' => 'Date',
+                    'status' => 'Status',
+                    'item' => 'Item',
+                    'total' => 'total'
+                ]
+            ],
+
+            'review' => [
+                'index' => [
+                    'title' => 'Reviews'
+                ]
             ]
         ]
     ],
@@ -147,8 +165,8 @@ return [
             'integrity' => [
                 'missing_fields' =>'Cart System Integrity Violation, Some Required Fields Missing',
                 'missing_options' =>'Cart System Integrity Violation, Configurable product\'s options are missing',
-
             ],
+
             'title' => 'Shopping Cart',
             'empty' => 'Shopping Cart Is Empty',
             'continue-shopping' => 'Continue Shopping',
@@ -156,6 +174,7 @@ return [
             'remove' => 'Remove',
             'remove-link' => 'Remove',
             'move-to-wishlist' => 'Move to Wishlist',
+            'add-config-warning' => 'Please Select Option Before Adding To Cart',
             'quantity' => [
                 'quantity' => 'Quantity',
                 'success' => 'Quantity successfully updated',

@@ -123,22 +123,22 @@ class CustomerDataGrid
                     'label' => 'Name',
                 ],
                 [
+                    'name' => 'email',
+                    'alias' => 'customerEmail',
+                    'type' => 'string',
+                    'label' => 'Email',
+                ],
+                [
                     'name' => 'phone',
                     'alias' => 'customerPhone',
                     'type' => 'number',
                     'label' => 'Phone',
                 ],
                 [
-                    'name' => 'email',
-                    'alias' => 'customerEmail',
-                    'type' => 'string',
-                    'label' => 'Comment',
-                ],
-                [
                     'name' => 'customer_group_id',
                     'alias' => 'customerGroupId',
-                    'type' => 'number',
-                    'label' => 'Status',
+                    'type' => 'string',
+                    'label' => 'Customer Group',
                 ],
             ],
 

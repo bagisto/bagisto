@@ -55,6 +55,18 @@
     height: 24px;
 }
 
+.icon-menu {
+    background-image:URL('../images/icon-menu.svg');
+    width: 24px;
+    height: 24px;
+}
+
+.icon-search {
+    background-image:URL('../images/icon-search.svg');
+    width: 24px;
+    height: 24px;
+}
+
 .icon-menu-back {
     background-image:URL('../images/icon-menu-back.svg');
     width: 24px;
@@ -83,4 +95,28 @@
     background-image: url('../images/wishlist.svg');
     width: 32px;
     height: 32px;
+}
+
+.icon-arrow-up {
+    background-image: url('../images/arrow-up.svg');
+    width: 16px;
+    height: 16px;
+}
+
+.icon-arrow-down {
+    background-image: url('../images/arrow-down.svg');
+    width: 16px;
+    height: 16px;
+}
+
+.expand-icon {
+    background-image: url("../images/Expand-Light.svg");
+    width: 18px;
+    height: 18px;
+}
+
+.expand-on-icon {
+    background-image: url("../images/Expand-Light-On.svg");
+    width: 18px;
+    height: 18px;
 }
