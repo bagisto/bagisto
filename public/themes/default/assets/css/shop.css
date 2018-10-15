@@ -97,6 +97,18 @@
   height: 16px;
 }
 
+.expand-icon {
+  background-image: url("../images/Expand-Light.svg");
+  width: 18px;
+  height: 18px;
+}
+
+.expand-on-icon {
+  background-image: url("../images/Expand-Light-On.svg");
+  width: 18px;
+  height: 18px;
+}
+
 .product-grid-4 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1283,9 +1295,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   .responsive-nav .nav > li {
     border-bottom: 1px solid #E8E8E8;
   }
-  .responsive-nav .nav li {
-    padding-left: 20px;
-  }
   .responsive-nav .nav li:first-child {
     border-top: 1px solid #E8E8E8;
   }
@@ -1717,7 +1726,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   .account-content .side-menu-title {
     height: 48px;
     padding-top: 13px;
-    border: 1px solid;
+    border: 1px solid #E8E8E8;
     font-size: 18px;
     display: inline-block;
   }
@@ -1770,6 +1779,9 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   }
   .account-content .edit-form-content {
     margin-left: 0px;
+  }
+  .account-content .edit-form-content .control-group .control {
+    width: 100%;
   }
 }
 

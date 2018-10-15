@@ -82,6 +82,8 @@
         var state = document.readyState
         var galleryTemplate = document.getElementById('product-gallery-template');
         var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
+        var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
+
         if(galleryTemplate){
             if (state == 'interactive') {
                 galleryTemplate.style.display="none";

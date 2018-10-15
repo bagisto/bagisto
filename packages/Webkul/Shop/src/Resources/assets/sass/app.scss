@@ -501,7 +501,6 @@ section.slider-block {
         .nav > li {
             float: left;
             margin-right: 1px;
-
         }
 
         .nav > li > a {
@@ -664,15 +663,11 @@ section.slider-block {
             display: none;
         }
 
-        .nav > li {
+        .nav > li  {
             border-bottom: 1px solid $border-color;
         }
 
-        .nav li {
-            padding-left: 20px;
-        }
-
-        .nav  li:first-child {
+        .nav li:first-child {
             border-top: 1px solid $border-color;
         }
 
@@ -1098,7 +1093,7 @@ section.slider-block {
         .side-menu-title {
             height: 48px;
             padding-top: 13px;
-            border: 1px solid;
+            border: 1px solid $border-color;
             font-size: 18px;
             display: inline-block;
 
@@ -1164,9 +1159,12 @@ section.slider-block {
 
         .edit-form-content {
             margin-left: 0px;
+
+            .control-group .control {
+                width:100%;
+            }
         }
     }
-
 }
 
 //account responsive layout end here

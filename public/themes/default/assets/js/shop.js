@@ -30845,8 +30845,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 // define the item component
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -30857,7 +30855,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             items_count: 0,
-            show: false
+            show: false,
+            margin: 0
         };
     },
 
@@ -30870,6 +30869,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         haveChildren: function haveChildren() {
+
+            console.log(this.margin++);
+
+            if (this.item.children.length) {
+
+                console.log(this.margin++);
+            }
+
             return this.item.children.length ? true : false;
         }
     },
@@ -30914,15 +30921,15 @@ var render = function() {
         })
       : _vm._e(),
     _vm._v(" "),
-    _vm.haveChildren && _vm.show
+    _vm.haveChildren
       ? _c(
           "ul",
           _vm._l(_vm.item.children, function(child, index) {
-            return _c(
-              "category-item",
-              { key: index, attrs: { url: _vm.url, item: child } },
-              [_vm._v("\n\n            " + _vm._s(child) + "\n        ")]
-            )
+            return _c("category-item", {
+              key: index,
+              style: "margin-left: " + 20 + "px",
+              attrs: { url: _vm.url, item: child }
+            })
           })
         )
       : _vm._e()
