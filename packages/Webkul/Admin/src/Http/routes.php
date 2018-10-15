@@ -69,7 +69,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.review.index'
             ])->name('admin.customer.review.index');
 
-             Route::get('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[
+            Route::get('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[
                 'view' => 'admin::customers.review.edit'
             ])->name('admin.customer.review.edit');
 
@@ -87,6 +87,10 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/orders/view/{id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@view')->defaults('_config', [
                     'view' => 'admin::sales.orders.view'
                 ])->name('admin.sales.orders.view');
+
+                Route::get('/orders/cancel/{order_id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@cancel')->defaults('_config', [
+                    'view' => 'admin::sales.orders.cancel'
+                ])->name('admin.sales.orders.cancel');
 
 
                 // Sales Invoices Routes

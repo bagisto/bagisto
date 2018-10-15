@@ -586,6 +586,17 @@ body {
         }
     }
 
+    .table {
+        .qty-row {
+            display: block;
+            margin-bottom: 5px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
     .sale-summary {
         margin-top: 2%;
         height: 130px;
@@ -594,11 +605,18 @@ body {
         tr {
 
             td {
-                padding: 3px 8px;
+                padding: 5px 8px;
             }
 
             &.bold {
                 font-weight: 600;
+                font-size: 15px;
+            }
+
+            &.border {
+                td {
+                    border-bottom: 1px solid $border-color;
+                }
             }
         }
     }

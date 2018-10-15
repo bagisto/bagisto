@@ -67,4 +67,21 @@ class OrderController extends Controller
 
         return view($this->_config['view'], compact('order'));
     }
+
+    /**
+     * Cancel action for the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function cancel($id)
+    {
+        if($this->order->cancel($id)) {
+            session()->flash('success', trans('Order canceled successfully.'));
+        } else {
+            session()->flash('error', trans('Order can not be canceled.'));
+        }
+
+        return redirect()->back();
+    }
 }

@@ -10,7 +10,7 @@ class Attribute extends TranslatableModel
 {
     public $translatedAttributes = ['name'];
 
-    protected $fillable = ['code', 'admin_name', 'type', 'position', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel', 'is_filterable', 'is_configurable', 'is_visible_on_front'];
+    protected $fillable = ['code', 'admin_name', 'type', 'position', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel', 'is_filterable', 'is_configurable', 'is_visible_on_front', 'is_user_defined'];
 
     protected $with = ['options'];
 

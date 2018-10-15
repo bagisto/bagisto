@@ -26,6 +26,7 @@ class CreateOrderItemsTable extends Migration
             $table->integer('qty_ordered')->default(0)->nullable();
             $table->integer('qty_shipped')->default(0)->nullable();
             $table->integer('qty_invoiced')->default(0)->nullable();
+            $table->integer('qty_canceled')->default(0)->nullable();
             $table->integer('qty_refunded')->default(0)->nullable();
 
             $table->decimal('price', 12,4)->default(0);

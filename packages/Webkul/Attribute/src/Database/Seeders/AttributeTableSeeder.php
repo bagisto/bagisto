@@ -61,7 +61,7 @@ class AttributeTableSeeder extends Seeder
             'en' => [
                 'name' => 'Tax Category'
             ],
-            'type' => 'text',
+            'type' => 'select',
             'position' => 4,
             'is_unique' => 0,
             'is_required' => 0,

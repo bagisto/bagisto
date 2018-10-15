@@ -7,11 +7,12 @@ use Webkul\Sales\Contracts\Order as OrderContract;
 
 class Order extends Model implements OrderContract
 {
-    protected $guarded = ['id', 'items', 'shipping_address', 'billing_address', 'channel', 'payment', 'created_at', 'updated_at'];
+    protected $guarded = ['id', 'items', 'shipping_address', 'billing_address', 'customer', 'channel', 'payment', 'created_at', 'updated_at'];
 
     protected $statusLabel = [
         'pending' => 'Pending',
         'processing' => 'Processing',
+        'completed' => 'Completed',
         'canceled' => 'Canceled',
         'closed' => 'Closed',
     ];
@@ -29,6 +30,22 @@ class Order extends Model implements OrderContract
     public function getStatusLabelAttribute()
     {
         return $this->statusLabel[$this->status];
+    }
+
+    /**
+     * Return base total due amount
+     */
+    public function getBaseTotalDueAttribute()
+    {
+        return $this->base_grand_total - $this->base_grand_total_invoiced;
+    }
+
+    /**
+     * Return total due amount
+     */
+    public function getTotalDueAttribute()
+    {
+        return $this->grand_total - $this->base_total_invoiced;
     }
 
     /**
@@ -141,6 +158,20 @@ class Order extends Model implements OrderContract
             }
         }
         
+        return false;
+    }
+
+    /**
+     * Checks if order could can canceled on not
+     */
+    public function canCancel()
+    {
+        foreach($this->items as $item) {
+            if ($item->qty_to_cancel > 0) {
+                return true;
+            }
+        }
+
         return false;
     }
 }
