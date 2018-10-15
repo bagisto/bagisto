@@ -25,7 +25,7 @@
 
             @if(count($items))
             @foreach($items as $item)
-                <div class="account-item-card mb-10">
+                <div class="account-item-card mt-15 mb-15">
                     <div class="media-info">
                         @php
                             $image = $productImageHelper->getProductBaseImage($item);
