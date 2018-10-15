@@ -513,6 +513,10 @@ h2 {
             background: $danger-color;
         }
 
+        &.alert-info {
+            background: $info-color;
+        }
+
         &.alert-success {
             background: $success-color;
         }

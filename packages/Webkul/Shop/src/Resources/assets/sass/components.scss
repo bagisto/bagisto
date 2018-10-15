@@ -1,3 +1,58 @@
+.product-card {
+
+    .product-image {
+        max-height: 350px;
+        max-width: 280px;
+        margin-bottom: 10px;
+        background: #F2F2F2;
+
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .product-name {
+        margin-bottom: 14px;
+        width: 100%;
+        color: $font-color;
+
+        a {
+            color: $font-color;
+        }
+    }
+
+    .product-description {
+        display: none;
+    }
+
+    .product-ratings {
+        width: 100%;
+
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    .cart-wish-wrap {
+        display: inline-flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 40px;
+
+        .addtocart {
+            margin-right: 10px;
+            text-transform: uppercase;
+
+        }
+
+        .add-to-wishlist {
+            margin-top: 5px;
+        }
+    }
+}
+
 // product card, requires no changes for responsiveness.
 .product-grid-4 {
     display: grid;
@@ -43,55 +98,6 @@
     }
 }
 
-.product-card {
-
-    .product-image {
-        max-height: 350px;
-        max-width: 280px;
-        margin-bottom: 10px;
-        background: #F2F2F2;
-
-        img {
-            display: block;
-            width: 100%;
-        }
-    }
-
-    .product-name {
-        margin-bottom: 14px;
-        width: 100%;
-        color: $font-color;
-
-        a {
-            color: $font-color;
-        }
-    }
-
-    .product-description {
-        display: none;
-    }
-
-    .product-ratings {
-        width: 100%;
-
-        .icon {
-            width: 16px;
-            height: 16px;
-        }
-    }
-
-    .cart-fav-seg {
-        display: inline-flex;
-        align-items: center;
-
-        .addtocart {
-            margin-right: 10px;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-    }
-}
 
 //wishlist icon hover properties
 .add-to-wishlist {
@@ -140,7 +146,7 @@
         text-align: left;
     }
 
-    .account-edit {
+    .account-action {
         font-size: 17px;
         margin-top: 1%;
         color: $brand-color;
