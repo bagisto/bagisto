@@ -540,7 +540,7 @@ section.slider-block {
             right:5px;
         }
 
-        /* submenu positioning*/
+        /* submenu positioning */
 
         .nav ul {
             position: absolute;
@@ -558,7 +558,6 @@ section.slider-block {
         .nav > li:hover > ul {
             left: auto;
             min-width: 100%;
-
         }
 
         .nav > li li:hover {
@@ -863,312 +862,6 @@ section.slider-block {
         text-align: center;
     }
 }
-
-//customers page css goes here
-.content {
-    padding-top: 15%;
-    padding-bottom: 15%;
-
-    .sign-up-text {
-        margin-bottom: 2%;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-        font-size: 18px;
-        color: $font-color-light;
-
-        text-align: center;
-    }
-
-    .login-form {
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-
-        border: 1px solid $border-color;
-        flex-direction: column;
-        max-width: 530px;
-        min-width: 380px;
-        min-height: 345px;
-        padding-left: 25px;
-        padding-right: 25px;
-
-        .login-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: $font-color;
-
-            margin-top: 5%;
-            margin-bottom: 3%;
-        }
-
-        .control-group {
-            margin-bottom: 15px !important;
-
-            .control {
-                width: 100% !important;
-            }
-        }
-
-        .forgot-password-link {
-            font-size: 17px;
-            color: $brand-color;
-
-            margin-bottom: 5%;
-        }
-        .signup-confirm {
-
-            margin-bottom: 5%;
-        }
-
-        .btn-primary {
-            width: 100%;
-            text-transform: uppercase;
-            border-radius: 0px;
-            height: 45px;
-            margin-bottom: 4%;
-        }
-    }
-}
-
-//customer pages styles goes here
-//account layout
-.account-content {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    margin-top: 5.5%;
-    margin-bottom: 5.5%;
-
-    .side-menu-title {
-        display: none;
-    }
-
-    .account-side-menu {
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        justify-content: flex-start;
-        border: 1px solid $border-color;
-
-        width: 25%;
-        height: 100%;
-        text-transform: capitalize;
-        color: $font-color-light;
-
-        li {
-            width: 95%;
-            height: 50px;
-            margin-left: 5%;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-            border-bottom: 1px solid $border-color;
-            text-align: center;
-        }
-
-        li:first-child {
-            border-top: none;
-        }
-
-        li:last-child {
-            border-bottom: none;
-        }
-
-        li.active {
-            color: $brand-color;
-        }
-    }
-
-    .profile {
-        margin-left: 5.5%;
-        margin-top: 1%;
-        width: 100%;
-
-        .section-head {
-            .back-icon {
-                display: none;
-            }
-
-            .profile-heading {
-                font-size: 28px;
-                color: $font-color;
-                text-transform: capitalize;
-                text-align: left;
-            }
-
-            .profile-edit {
-                font-size: 17px;
-                margin-top: 1%;
-                color: $brand-color;
-
-                float: right;
-            }
-
-            .horizontal-rule {
-                margin-top: 1.1%;
-                width: 100%;
-                height: 1px;
-                vertical-align: middle;
-                background: $border-color;
-            }
-        }
-    }
-
-    .profile-content {
-        color: $other-font-color;
-        margin-top: 1.4%;
-
-        table {
-            tbody {
-                tr {
-                    height: 45px;
-
-                    td {
-                        width: 250px;
-                        text-transform: capitalize;
-                    }
-                }
-            }
-        }
-    }
-
-    //edit form
-    .edit-form-content {
-        margin-left: 5.5%;
-        margin-top: 1%;
-        width: 100%;
-
-        .section-head {
-            .profile-heading {
-                font-size: 28px;
-                color: $font-color;
-                text-transform: capitalize;
-                text-align: left;
-            }
-
-            .profile-edit {
-                font-size: 17px;
-                margin-top: 1%;
-                color: $brand-color;
-
-                float: right;
-            }
-
-            .horizontal-rule {
-                margin-top: 1.1%;
-                width: 100%;
-                height: 1px;
-                vertical-align: middle;
-                background: $border-color;
-            }
-        }
-
-        .edit-text {
-            margin-bottom: 2%;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 24px;
-        }
-
-        .edit-form {
-            display: flex;
-
-            border: 1px solid $border-color;
-            flex-direction: column;
-            min-height: 345px;
-            padding: 25px;
-        }
-    }
-    //edit form ends
-}
-//account ends here
-
-//account responsive layout start here
-@media only screen and (max-width: 720px){
-    .account-content {
-        flex-direction: column;
-
-        .side-menu-title {
-            height: 48px;
-            padding-top: 13px;
-            border: 1px solid $border-color;
-            font-size: 18px;
-            display: inline-block;
-
-            .right {
-                float: right;
-                margin-top: 3px;
-            }
-        }
-
-        .account-side-menu {
-            width: 100%;
-            border: none;
-            margin-bottom: 20px;
-            display: none;
-
-            li {
-                width: 100%;
-                margin-left: 0%;
-            }
-
-            li a {
-                color: black;
-            }
-
-            li:last-child {
-                border-bottom: 1px solid $border-color;
-            }
-        }
-
-        .profile {
-            margin-left: 0px;
-
-            .section-head {
-                display: flex;
-                justify-content: space-between;
-                border-top: 1px solid $border-color;
-                border-bottom: 1px solid $border-color;
-                height: 50px;
-                padding-top: 7px;
-
-                .back-icon {
-                    display: block;
-                    cursor: pointer;
-                    margin-top: 5px;
-                }
-
-                .horizontal-rule {
-                    display: none;
-                }
-            }
-        }
-
-        .profile-content {
-            table {
-                tbody {
-                    tr {
-                        display: grid;
-                        margin-bottom: 20px;
-                    }
-                }
-            }
-        }
-
-        .edit-form-content {
-            margin-left: 0px;
-
-            .control-group .control {
-                width:100%;
-            }
-        }
-    }
-}
-
-//account responsive layout end here
-//customers page css ends here
 
 // product pages css starts here
 section.product-detail {
@@ -2120,54 +1813,148 @@ section.review {
 }
 // review page end here
 
-// customer section css start here
-.cusomer-section {
-    margin-left: 50px;
-    width:100%;
 
-    .customer-section-info {
-        display: flex;
-        flex-direction: row;
-        border-top: 1px solid $border-color;
+//customers auth page css goes here
+.auth-content {
+    padding-top: 15%;
+    padding-bottom: 15%;
 
-        .pro-img {
-            margin-top: 10px;
-            margin-bottom: 5px;
+    .sign-up-text {
+        margin-bottom: 2%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-size: 18px;
+        color: $font-color-light;
 
-            img {
-               height: 125px;
-               width: 100px;
-            }
-        }
-
-        .pro-discription {
-            margin-left: 20px;
-            width: 100%;
-
-            .title {
-                color: $brand-color;
-                margin-top: 15px;
-            }
-
-            .rating {
-                margin-top: 10px;
-
-                .icon {
-                    height: 16px;
-                    width: 16px;
-                }
-            }
-
-            .discription {
-                margin-top: 15px;
-            }
-        }
+        text-align: center;
     }
 
-    .customer-section-info:last-child {
-        border-bottom: 1px solid $border-color;
+    .login-form {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+
+        border: 1px solid $border-color;
+        flex-direction: column;
+        max-width: 530px;
+        min-width: 380px;
+        min-height: 345px;
+        padding-left: 25px;
+        padding-right: 25px;
+
+        .login-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: $font-color;
+
+            margin-top: 5%;
+            margin-bottom: 3%;
+        }
+
+        .control-group {
+            margin-bottom: 15px !important;
+
+            .control {
+                width: 100% !important;
+            }
+        }
+
+        .forgot-password-link {
+            font-size: 17px;
+            color: $brand-color;
+
+            margin-bottom: 5%;
+        }
+        .signup-confirm {
+
+            margin-bottom: 5%;
+        }
+
+        .btn-primary {
+            width: 100%;
+            text-transform: uppercase;
+            border-radius: 0px;
+            height: 45px;
+            margin-bottom: 4%;
+        }
     }
 }
-// customer section css end here
 
+//customer account pages layouts
+.account-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5.5%;
+    margin-bottom: 5.5%;
 
+    .account-side-menu {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: flex-start;
+        border: 1px solid $border-color;
+        width: 25%;
+        height: 100%;
+        text-transform: capitalize;
+        color: $font-color-light;
+
+        li {
+            width: 95%;
+            height: 50px;
+            margin-left: 5%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            border-bottom: 1px solid $border-color;
+            text-align: center;
+        }
+
+        li:first-child {
+            border-top: none;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        li.active {
+            color: $brand-color;
+        }
+    }
+    //customer account pages content
+    .account-layout {
+        margin-left: 5.5%;
+        margin-top: 1%;
+        width: 100%;
+    }
+}
+
+//Account content inside a table
+.account-table-content {
+    color: $font-color;
+    margin-top: 1.4%;
+
+    table {
+        tbody {
+            tr {
+                height: 45px;
+
+                td {
+                    width: 250px;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}
+
+.edit-form {
+    display: flex;
+    border: 1px solid $border-color;
+    flex-direction: column;
+    min-height: 345px;
+    padding: 25px;
+}

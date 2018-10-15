@@ -100,16 +100,7 @@
                     <accordian :title="'{{ __('admin::app.settings.inventory_sources.address') }}'" :active="true">
                         <div slot="body">
 
-                            <div class="control-group">
-                                <label for="country">{{ __('admin::app.settings.inventory_sources.country') }}</label>
-                                <select class="control" id="country" name="country">
-                                    @foreach(core()->countries() as $countryCoode => $countryName)
-                                        <option value="{{ $countryCoode }}" {{ old('country') == $countryCoode ? 'selected' : '' }}>
-                                            {{ $countryName }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            @include ('admin::common.create-country-state')
 
                             <div class="control-group">
                                 <label for="state">{{ __('admin::app.settings.inventory_sources.state') }}</label>

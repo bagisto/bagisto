@@ -10,13 +10,13 @@
 
     @include('shop::customers.account.partials.sidemenu')
 
-    <div class="profile">
+    <div class="account-layout">
 
-        <div class="section-head">
-            <span class="profile-heading">{{ __('shop::app.customer.account.address.index.title') }}</span>
+        <div class="account-head">
+            <span class="account-heading">{{ __('shop::app.customer.account.address.index.title') }}</span>
 
             @if(!$address->isEmpty())
-            <span class="profile-edit">
+            <span class="account-edit">
                 <a href="{{ route('customer.address.edit') }}">
                     {{ __('shop::app.customer.account.address.index.edit') }}
                 </a>
@@ -25,7 +25,7 @@
             <div class="horizontal-rule"></div>
         </div>
 
-        <div class="profile-content">
+        <div class="account-table-content">
             @if($address->isEmpty())
                 <div>{{ __('shop::app.customer.account.address.index.empty') }}</div>
                 <br/>

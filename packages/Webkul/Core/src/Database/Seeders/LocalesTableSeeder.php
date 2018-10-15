@@ -3,22 +3,20 @@
 namespace Webkul\Core\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Webkul\Core\Models\Locale;
+use DB;
 
 class LocalesTableSeeder extends Seeder
 {
     public function run()
     {
-        \Illuminate\Database\Eloquent\Model::reguard();
-        
-        $locale = new Locale();
-        $locale->code = 'en';
-        $locale->name = 'English';
-        $locale->save();
+        DB::table('locales')->delete();
 
-        $locale = new Locale();
-        $locale->code = 'fr';
-        $locale->name = 'French';
-        $locale->save();
+        DB::table('locales')->insert([
+                'code' => 'en',
+                'name' => 'English',
+            ], [
+                'code' => 'fr',
+                'name' => 'French',
+            ]);
     }
 }

@@ -77,8 +77,6 @@ class TaxCategoryController extends Controller
             'description' => 'required|string'
         ]);
 
-        dd($data);
-
         if($currentTaxRule = $this->taxRule->create(request()->input())) {
             $allTaxRules = $data['taxrates'];
 

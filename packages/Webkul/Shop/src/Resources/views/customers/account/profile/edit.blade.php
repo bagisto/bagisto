@@ -9,10 +9,10 @@
 
         @include('shop::customers.account.partials.sidemenu')
 
-        <div class="edit-form-content">
+        <div class="account-layout">
 
-            <div class="section-head mb-10">
-                <div class="profile-heading">{{ __('shop::app.customer.account.profile.edit-profile.title') }}</div>
+            <div class="account-head mb-10">
+                <div class="account-heading">{{ __('shop::app.customer.account.profile.edit-profile.title') }}</div>
             </div>
 
             <form method="post" action="{{ route('customer.profile.edit') }}">

@@ -153,7 +153,7 @@ class Cart {
 
         $itemData = $this->prepareItemData($id, $data);
 
-        if($itemData == false) {
+        if(!$itemData) {
             return false;
         }
 

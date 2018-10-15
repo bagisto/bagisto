@@ -199,6 +199,7 @@ return [
             'address2' => 'Address 2',
             'city' => 'City',
             'state' => 'State',
+            'select-state' => 'Select a region, state or province.',
             'postcode' => 'Zip/Postcode',
             'phone' => 'Telephone',
             'country' => 'Country',

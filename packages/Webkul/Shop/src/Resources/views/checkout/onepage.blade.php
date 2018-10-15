@@ -142,6 +142,8 @@
                 selected_payment_method: '',
 
                 disable_button: false,
+
+                countryStates: @json(core()->groupedStatesByCountries())
             }),
 
             methods: {
@@ -150,6 +152,13 @@
                         this.currentStep = step
                         this.completedStep = step - 1;
                     }
+                },
+
+                haveStates(addressType) {
+                    if(this.countryStates[this.address[addressType].country] && this.countryStates[this.address[addressType].country].length)
+                        return true;
+                    
+                    return false;
                 },
 
                 validateForm: function (scope) {
