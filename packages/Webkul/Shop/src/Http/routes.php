@@ -119,6 +119,10 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('wishlist/remove/{id}', 'Webkul\Customer\Http\Controllers\WishlistController@remove')->name('customer.wishlist.remove');
 
+            Route::get('wishlist/move/{id}', 'Webkul\Customer\Http\Controllers\WishlistController@move')->name('customer.wishlist.move');
+
+            Route::get('wishlist/moveall', 'Webkul\Customer\Http\Controllers\WishlistController@moveAll')->name('customer.wishlist.moveall');
+
             //customer account
             Route::prefix('account')->group(function () {
 

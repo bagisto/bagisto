@@ -277,35 +277,10 @@
         var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
         var navResponsive = document.getElementsByClassName('responsive-nav')[0];
         var thumbList = document.getElementsByClassName('thumb-list')[0];
-        var thumbFrame = document.getElementsByClassName('thumb-frame');
-        var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
 
         search.addEventListener("click", header);
         hamMenu.addEventListener("click", header);
 
-        // activate on window resize
-        window.addEventListener('resize', function(){
-            if(window.innerWidth > 720){
-                searchResponsive.style.display = 'none';
-                navResponsive.style.display = 'none';
-                if(layerFilter && sortLimit){
-                    layerFilter.style.display ="none";
-                    sortLimit.style.display ="none";
-                }
-            }
-            if(window.innerWidth < 1313 && window.innerWidth > 720){
-                if(thumbList){
-                    thumbList.style.maxHeight = productHeroImage.offsetHeight + "px";
-                    for(let i=0 ; i < thumbFrame.length ; i++){
-                        thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
-                    }
-                }
-            }else {
-                for(let i=0 ; i < thumbFrame.length ; i++){
-                    thumbFrame[i].style.height = 120 + "px";
-                }
-            }
-        });
 
         // for header responsive icon
         function header(){

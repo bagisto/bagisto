@@ -40,7 +40,7 @@
                     <div class="operations">
                         <a class="mb-50" href="{{ route('customer.wishlist.remove', $item->id) }}"><span class="icon trash-icon"></span></a>
 
-                        <button class="btn btn-primary btn-md">{{ __('shop::app.wishlist.move-to-cart') }}</button>
+                        <a href="{{ route('customer.wishlist.move', $item->id) }}" class="btn btn-primary btn-md">{{ __('shop::app.wishlist.move-to-cart') }}</a>
                     </div>
                 </div>
                 <div class="horizontal-rule mb-10 mt-10"></div>
