@@ -127,7 +127,7 @@ class ShipmentRepository extends Repository
                 $this->orderItem->update(['qty_shipped' => $orderItem->qty_shipped + $qty], $orderItem->id);
             }
 
-            $this->order->updateOrderStatus($order->id);
+            $this->order->updateOrderStatus($order);
         } catch (\Exception $e) {
             DB::rollBack();
 

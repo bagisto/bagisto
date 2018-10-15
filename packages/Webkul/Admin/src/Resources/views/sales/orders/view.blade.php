@@ -15,6 +15,12 @@
             </div>
 
             <div class="page-action">
+                @if($order->canCancel())
+                    <a href="{{ route('admin.sales.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('admin::app.sales.orders.cancel-confirm-msg') }}'">
+                        {{ __('admin::app.sales.orders.cancel-btn-title') }}
+                    </a>
+                @endif
+
                 @if($order->canInvoice())
                     <a href="{{ route('admin.sales.invoices.create', $order->id) }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.sales.orders.invoice-btn-title') }}
@@ -229,7 +235,19 @@
                                                     <td>{{ $item->name }}</td>
                                                     <td>{{ core()->formatBasePrice($item->base_price) }}</td>
                                                     <td>{{ $item->qty_ordered }}</td>
-                                                    <td>Packed (2)</td>
+                                                    <td>
+                                                        <span class="qty-row">
+                                                            {{ $item->qty_invoiced ? __('admin::app.sales.orders.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
+                                                        </span>
+
+                                                        <span class="qty-row">
+                                                            {{ $item->qty_shipped ? __('admin::app.sales.orders.item-shipped', ['qty_shipped' => $item->qty_shipped]) : '' }}
+                                                        </span>
+
+                                                        <span class="qty-row">
+                                                            {{ $item->qty_canceled ? __('admin::app.sales.orders.item-canceled', ['qty_canceled' => $item->qty_canceled]) : '' }}
+                                                        </span>
+                                                    </td>
                                                     <td>{{ core()->formatBasePrice($item->base_total) }}</td>
                                                     <td>{{ $item->tax_percent }}%</td>
                                                     <td>{{ core()->formatBasePrice($item->base_tax_amount) }}</td>
@@ -252,7 +270,7 @@
                                         <td>{{ core()->formatBasePrice($order->base_shipping_amount) }}</td>
                                     </tr>
 
-                                    <tr>
+                                    <tr class="border">
                                         <td>{{ __('admin::app.sales.orders.tax') }}</td>
                                         <td>-</td>
                                         <td>{{ core()->formatBasePrice($order->base_tax_amount) }}</td>
@@ -262,6 +280,24 @@
                                         <td>{{ __('admin::app.sales.orders.grand-total') }}</td>
                                         <td>-</td>
                                         <td>{{ core()->formatBasePrice($order->base_grand_total) }}</td>
+                                    </tr>
+
+                                    <tr class="bold">
+                                        <td>{{ __('admin::app.sales.orders.total-paid') }}</td>
+                                        <td>-</td>
+                                        <td>{{ core()->formatBasePrice($order->base_grand_total_invoiced) }}</td>
+                                    </tr>
+
+                                    <tr class="bold">
+                                        <td>{{ __('admin::app.sales.orders.total-refunded') }}</td>
+                                        <td>-</td>
+                                        <td>{{ core()->formatBasePrice($order->base_grand_total_refunded) }}</td>
+                                    </tr>
+
+                                    <tr class="bold">
+                                        <td>{{ __('admin::app.sales.orders.total-due') }}</td>
+                                        <td>-</td>
+                                        <td>{{ core()->formatBasePrice($order->base_total_due) }}</td>
                                     </tr>
                                 </table>
 

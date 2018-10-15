@@ -8,6 +8,7 @@ use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Checkout\Repositories\CartAddressRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Checkout\Models\CartPayment;
 
 /**
@@ -55,6 +56,13 @@ class Cart {
     protected $product;
 
     /**
+     * TaxCategoryRepository model
+     *
+     * @var mixed
+     */
+    protected $taxCategory;
+
+    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Checkout\Repositories\CartRepository        $cart
@@ -62,6 +70,7 @@ class Cart {
      * @param  Webkul\Checkout\Repositories\CartAddressRepository $cartAddress
      * @param  Webkul\Customer\Repositories\CustomerRepository    $customer
      * @param  Webkul\Product\Repositories\ProductRepository      $product
+     * @param  Webkul\Product\Repositories\TaxCategoryRepository  $taxCategory
      * @return void
      */
     public function __construct(
@@ -69,7 +78,9 @@ class Cart {
         CartItemRepository $cartItem,
         CartAddressRepository $cartAddress,
         CustomerRepository $customer,
-        ProductRepository $product)
+        ProductRepository $product,
+        TaxCategoryRepository $taxCategory
+    )
     {
         $this->customer = $customer;
 
@@ -80,6 +91,8 @@ class Cart {
         $this->cartAddress = $cartAddress;
 
         $this->product = $product;
+
+        $this->taxCategory = $taxCategory;
     }
 
     /**
@@ -564,7 +577,11 @@ class Cart {
         $cart = null;
 
         if(auth()->guard('customer')->check()) {
-            $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
+            $cart = $this->cart->findOneWhere([
+                    'customer_id' => auth()->guard('customer')->user()->id,
+                    'is_active' => 1
+                ]);
+
         } elseif(session()->has('cart')) {
             $cart = $this->cart->find(session()->get('cart')->id);
         }
@@ -659,6 +676,8 @@ class Cart {
             }
         }
 
+        // If customer is guest, than save shipping address's email and name in cart as customer details
+
         return true;
     }
 
@@ -718,20 +737,15 @@ class Cart {
         if(!$cart = $this->getCart())
             return false;
 
-        $this->calulateItemsTax();
+        $this->calculateItemsTax();
 
-        $cart->grand_total = 0;
-        $cart->base_grand_total = 0;
-
-        $cart->sub_total = 0;
-        $cart->base_sub_total = 0;
-
-        $cart->tax_total = 0;
-        $cart->base_tax_total = 0;
+        $cart->grand_total = $cart->base_grand_total = 0;
+        $cart->sub_total = $cart->base_sub_total = 0;
+        $cart->tax_total = $cart->base_tax_total = 0;
 
         foreach ($cart->items()->get() as $item) {
-            $cart->grand_total = (float) $cart->grand_total + $item->total;
-            $cart->base_grand_total = (float) $cart->base_grand_total + $item->base_total;
+            $cart->grand_total = (float) $cart->grand_total + $item->total + $item->tax_amount;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $item->base_total + $item->base_tax_amount;
 
             $cart->sub_total = (float) $cart->sub_total + $item->total;
             $cart->base_sub_total = (float) $cart->base_sub_total + $item->base_total;
@@ -762,12 +776,46 @@ class Cart {
      *
      * @return void
     */
-    public function calulateItemsTax()
+    public function calculateItemsTax()
     {
         $cart = $this->getCart();
 
+        if(!$shippingAddress = $cart->shipping_address)
+            return;
+
         foreach ($cart->items()->get() as $item) {
-            $product = $item->product;
+            $taxCategory = $this->taxCategory->find($item->product->tax_category_id);
+
+            if(!$taxCategory)
+                continue;
+
+            $taxRates = $taxCategory->tax_rates()->where([
+                    'state' => $shippingAddress->state,
+                    'country' => $shippingAddress->country,
+                ])->orderBy('tax_rate', 'desc')->get();
+
+            foreach($taxRates as $rate) {
+                $haveTaxRate = false;
+
+                if(!$rate->is_zip) {
+                    if($rate->zip_code == '*' || $rate->zip_code == $shippingAddress->postcode) {
+                        $haveTaxRate = true;
+                    }
+                } else {
+                    if($shippingAddress->postcode >= $rate->zip_code && $shippingAddress->postcode <= $rate->zip_code) {
+                        $haveTaxRate = true;
+                    }
+                }
+
+                if($haveTaxRate) {
+                    $item->tax_percent = $rate->tax_rate;
+                    $item->tax_amount = ($item->total * $rate->tax_rate) / 100;
+                    $item->base_tax_amount = ($item->base_total * $rate->tax_rate) / 100;
+
+                    $item->save();
+                    break;
+                }
+            }
         }
     }
 
@@ -848,7 +896,7 @@ class Cart {
             'customer_email' => $data['customer_email'],
             'customer_first_name' => $data['customer_first_name'],
             'customer_last_name' => $data['customer_last_name'],
-            'customer' => auth()->guard('customer')->check() ? auth()->guard('customer')->user : null,
+            'customer' => auth()->guard('customer')->check() ? auth()->guard('customer')->user() : null,
 
             'shipping_method' => $data['selected_shipping_rate']['method'],
             'shipping_title' => $data['selected_shipping_rate']['carrier_title'] . ' - ' . $data['selected_shipping_rate']['method_title'],

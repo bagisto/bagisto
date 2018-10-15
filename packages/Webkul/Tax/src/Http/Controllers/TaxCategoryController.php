@@ -5,8 +5,8 @@ namespace Webkul\Tax\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Channel as Channel;
-use Webkul\Tax\Repositories\TaxCategoriesRepository as TaxRule;
-use Webkul\Tax\Repositories\TaxRatesRepository as TaxRate;
+use Webkul\Tax\Repositories\TaxCategoryRepository as TaxRule;
+use Webkul\Tax\Repositories\TaxRateRepository as TaxRate;
 use Webkul\Tax\Repositories\TaxMapRepository as TaxMap;
 
 /**
@@ -34,7 +34,7 @@ class TaxCategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Tax\Repositories\TaxCategoriesRepository  $taxRule
+     * @param  Webkul\Tax\Repositories\TaxCategoryRepository  $taxRule
      * @return void
      */
     public function __construct(TaxRule $taxRule, TaxRate $taxRate, TaxMap $taxMap)

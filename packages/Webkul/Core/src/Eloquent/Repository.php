@@ -47,6 +47,42 @@ abstract class Repository extends BaseRepository {
     }
 
     /**
+     * Find data by id
+     *
+     * @param       $id
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function find($id, $columns = ['*'])
+    {
+        $this->applyCriteria();
+        $this->applyScope();
+        $model = $this->model->find($id, $columns);
+        $this->resetModel();
+
+        return $this->parserResult($model);
+    }
+
+    /**
+     * Find data by id
+     *
+     * @param       $id
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function findOrFail($id, $columns = ['*'])
+    {
+        $this->applyCriteria();
+        $this->applyScope();
+        $model = $this->model->findOrFail($id, $columns);
+        $this->resetModel();
+
+        return $this->parserResult($model);
+    }
+
+    /**
      * @return mixed
      */
     public function getModel()

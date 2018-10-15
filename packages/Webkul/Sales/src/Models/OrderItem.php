@@ -13,14 +13,21 @@ class OrderItem extends Model implements OrderItemContract
      * Get remaining qty for shipping.
      */
     public function getQtyToShipAttribute() {
-        return $this->qty_ordered - $this->qty_shipped - $this->qty_refunded;
+        return $this->qty_ordered - $this->qty_shipped - $this->qty_refunded - $this->qty_canceled;
     }
 
     /**
      * Get remaining qty for invoice.
      */
     public function getQtyToInvoiceAttribute() {
-        return $this->qty_ordered - $this->qty_invoiced - $this->qty_refunded;
+        return $this->qty_ordered - $this->qty_invoiced - $this->qty_canceled;
+    }
+
+    /**
+     * Get remaining qty for cancel.
+     */
+    public function getQtyToCancelAttribute() {
+        return $this->qty_ordered - $this->qty_canceled - $this->qty_invoiced;
     }
 
     /**

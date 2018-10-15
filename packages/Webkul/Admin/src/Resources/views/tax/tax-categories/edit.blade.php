@@ -69,7 +69,7 @@
                             <div class="control-group" :class="[errors.has('taxrates') ? 'has-error' : '']">
                                 <label for="taxrates" class="required">{{ __('admin::app.configuration.tax-categories.select-taxrates') }}</label>
 
-                                @inject('taxRates', 'Webkul\Core\Repositories\TaxRatesRepository')
+                                @inject('taxRates', 'Webkul\Tax\Repositories\TaxRateRepository')
 
                                 <select multiple="multiple" class="control" id="taxrates" name="taxrates[]" v-validate="'required'">
                                     @foreach($taxRates->all() as $taxRate)
