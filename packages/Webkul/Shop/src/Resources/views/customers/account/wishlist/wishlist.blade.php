@@ -7,13 +7,13 @@
 
     @include('shop::customers.account.partials.sidemenu')
 
-    <div class="profile">
+    <div class="account-layout">
 
-        <div class="section-head">
-            <span class="profile-heading">{{ __('shop::app.wishlist.title') }}</span>
+        <div class="account-head">
+            <span class="account-heading">{{ __('shop::app.wishlist.title') }}</span>
 
             @if(count($items))
-            <div class="profile-edit">
+            <div class="account-edit">
                 <a href="" style="margin-right: 15px;">{{ __('shop::app.wishlist.deleteall') }}</a>
                 <a href="">{{ __('shop::app.wishlist.moveall') }}</a>
             </div>
@@ -21,11 +21,11 @@
             <div class="horizontal-rule"></div>
         </div>
 
-        <div class="profile-content">
+        <div class="account-items-list">
 
             @if(count($items))
             @foreach($items as $item)
-                <div class="wishlist-item mb-10">
+                <div class="account-item-card mb-10">
                     <div class="media-info">
                         @php
                             $image = $productImageHelper->getProductBaseImage($item);

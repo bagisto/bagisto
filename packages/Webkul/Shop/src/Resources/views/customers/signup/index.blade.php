@@ -4,7 +4,7 @@
 @endsection
 @section('content-wrapper')
 
-<div class="content">
+<div class="auth-content">
 
     <div class="sign-up-text">
         {{ __('shop::app.customer.signup-text.account_exists') }} - <a href="{{ route('customer.session.index') }}">{{ __('shop::app.customer.signup-text.title') }}</a>

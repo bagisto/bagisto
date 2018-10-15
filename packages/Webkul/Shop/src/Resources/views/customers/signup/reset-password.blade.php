@@ -2,7 +2,7 @@
 
 @section('content-wrapper')
 
-<div class="content">
+<div class="auth-content">
 
     <form method="post" action="{{ route('customer.reset-password.store') }}" >
 

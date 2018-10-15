@@ -8,15 +8,20 @@
 
     @include('shop::customers.account.partials.sidemenu')
 
-    <div class="account-lauyout = profile">
+    <div class="account-layout">
 
-        <div class="section-head">
-            <span class="profile-heading">{{ __('shop::app.customer.account.profile.index.title') }}</span>
-            <span class="profile-edit"><a href="{{ route('customer.profile.edit') }}">{{ __('shop::app.customer.account.profile.index.edit') }}</a></span>
+        <div class="account-head">
+
+            <span class="account-heading">{{ __('shop::app.customer.account.profile.index.title') }}</span>
+
+            <span class="account-edit">
+                <a href="{{ route('customer.profile.edit') }}">{{ __('shop::app.customer.account.profile.index.edit') }}</a>
+            </span>
+
             <div class="horizontal-rule"></div>
         </div>
 
-        <div class="profile-content">
+        <div class="account-table-content">
             <table>
                 <tbody>
                     <tr>
@@ -50,10 +55,7 @@
                     </tr>
                 </tbody>
             </table>
-
         </div>
-
     </div>
-
 </div>
 @endsection

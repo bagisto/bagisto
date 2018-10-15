@@ -4,7 +4,7 @@
 @endsection
 @section('content-wrapper')
 
-<div class="content">
+<div class="auth-content">
 
     <form method="post" action="{{ route('customer.forgot-password.store') }}">
 
