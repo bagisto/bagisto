@@ -138,8 +138,8 @@ class InvoiceRepository extends Repository
                             'base_price' => $childOrderItem->base_price,
                             'total' => $childOrderItem->price * $qty,
                             'base_total' => $childOrderItem->base_price * $qty,
-                            'tax_amount' => ( ($childOrderItem->tax_amount / $childOrderItem->qty_ordered) * $qty ),
-                            'base_tax_amount' => ( ($childOrderItem->base_tax_amount / $childOrderItem->qty_ordered) * $qty ),
+                            'tax_amount' => 0,
+                            'base_tax_amount' => 0,
                             'product_id' => $childOrderItem->product_id,
                             'product_type' => $childOrderItem->product_type,
                             'additional' => $childOrderItem->additional,
@@ -153,7 +153,7 @@ class InvoiceRepository extends Repository
 
             $this->order->collectTotals($order);
 
-            $this->order->updateOrderStatus($order->id);
+            $this->order->updateOrderStatus($order);
         } catch (\Exception $e) {
             DB::rollBack();
 

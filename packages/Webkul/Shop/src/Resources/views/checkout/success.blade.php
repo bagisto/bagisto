@@ -6,7 +6,7 @@
 
 @section('content-wrapper')
 
-    <div class="order-success-content">
+    <div class="order-success-content" style="min-height: 300px;">
 
         <h1>{{ __('shop::app.checkout.success.thanks') }}</h1>
 
@@ -15,7 +15,7 @@
         <p>{{ __('shop::app.checkout.success.info') }}</p>
 
         <div class="misc-controls">
-            <a href="{{ route('shop.home.index') }}" class="btn btn-lg btn-primary">
+            <a style="display: inline-block" href="{{ route('shop.home.index') }}" class="btn btn-lg btn-primary">
                 {{ __('shop::app.checkout.cart.continue-shopping') }}
             </a>
         </div>
