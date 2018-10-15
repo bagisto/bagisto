@@ -1,7 +1,7 @@
-<div class="side-menu-title mb-20" id="side-menu-title">
+{{--  <div class="side-menu-title mb-20" id="side-menu-title">
     <strong>Menu</strong>
     <i class="icon icon-arrow-down right" id="down-icon"></i>
-</div>
+</div>  --}}
 
 <ul class="account-side-menu">
     @foreach($menu->items as $key=>$value)

@@ -30901,7 +30901,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm.haveChildren || _vm.item.parent_id == null
+    _vm.haveChildren
       ? _c("i", {
           class: [
             _vm.show

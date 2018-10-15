@@ -71,7 +71,7 @@ class OrderRepository extends Repository
     public function create(array $data)
     {
         DB::beginTransaction();
-        
+
         try {
             Event::fire('checkout.order.save.before', $data);
 
@@ -97,7 +97,7 @@ class OrderRepository extends Repository
             $order->payment()->create($data['payment']);
 
             $order->addresses()->create($data['shipping_address']);
-            
+
             $order->addresses()->create($data['billing_address']);
 
             foreach($data['items'] as $item) {
@@ -114,7 +114,7 @@ class OrderRepository extends Repository
 
             throw $e;
         }
-        
+
         DB::commit();
 
         Event::fire('checkout.order.save.after', $order);
@@ -179,5 +179,14 @@ class OrderRepository extends Repository
         $order->save();
 
         return $order;
+    }
+
+     /**
+     * @param int $customerId
+     * @return void
+     */
+    public function customerOrder($customerId)
+    {
+       return $this->model->where('customer_id',$customerId)->get();
     }
 }

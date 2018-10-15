@@ -280,8 +280,6 @@
         var thumbFrame = document.getElementsByClassName('thumb-frame');
         var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
 
-        console.log(productHeroImage);
-
         search.addEventListener("click", header);
         hamMenu.addEventListener("click", header);
 
@@ -312,25 +310,25 @@
         // for header responsive icon
         function header(){
             var className = document.getElementById(this.id).className;
-            if(className === 'icon search-icon' ){
-                search.classList.remove("search-icon");
+            if(className === 'icon icon-search' ){
+                search.classList.remove("icon-search");
                 search.classList.add("icon-menu-close");
                 hamMenu.classList.remove("icon-menu-close");
-                hamMenu.classList.add("sortable-icon");
+                hamMenu.classList.add("icon-menu");
                 searchResponsive.style.display = 'block';
                 navResponsive.style.display = 'none';
-            }else if(className === 'icon sortable-icon'){
-                hamMenu.classList.remove("sortable-icon");
+            }else if(className === 'icon icon-menu'){
+                hamMenu.classList.remove("icon-menu");
                 hamMenu.classList.add("icon-menu-close");
                 search.classList.remove("icon-menu-close");
-                search.classList.add("search-icon");
+                search.classList.add("icon-search");
                 searchResponsive.style.display = 'none';
                 navResponsive.style.display = 'block';
             }else{
                 search.classList.remove("icon-menu-close");
-                search.classList.add("search-icon");
+                search.classList.add("icon-search");
                 hamMenu.classList.remove("icon-menu-close");
-                hamMenu.classList.add("sortable-icon");
+                hamMenu.classList.add("icon-menu");
                 searchResponsive.style.display = 'none';
                 navResponsive.style.display = 'none';
             }

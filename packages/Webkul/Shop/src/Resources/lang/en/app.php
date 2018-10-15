@@ -121,6 +121,12 @@ return [
                     'item' => 'Item',
                     'total' => 'total'
                 ]
+            ],
+
+            'review' => [
+                'index' => [
+                    'title' => 'Reviews'
+                ]
             ]
         ]
     ],

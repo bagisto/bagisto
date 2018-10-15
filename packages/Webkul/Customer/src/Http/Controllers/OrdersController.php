@@ -5,7 +5,7 @@ namespace Webkul\Customer\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Customer\Repositories\CustomerRepository;
-
+use Webkul\Sales\Repositories\OrderRepository;
 use Auth;
 
 /**
@@ -26,26 +26,18 @@ class OrdersController extends Controller
      */
     protected $_config;
     protected $customer;
+    protected $order;
 
 
-    public function __construct(CustomerRepository $customer)
+    public function __construct(CustomerRepository $customer ,OrderRepository $order)
     {
         $this->middleware('customer');
 
         $this->_config = request('_config');
 
         $this->customer = $customer;
-    }
 
-    /**
-     * For taking the customer
-     * to the dashboard after
-     * authentication
-     * @return view
-     */
-    private function getCustomer($id) {
-        $customer = collect($this->customer->findOneWhere(['id'=>$id]));
-        return $customer;
+        $this->order = $order;
     }
 
     public function index() {
@@ -60,9 +52,9 @@ class OrdersController extends Controller
 
         $id = auth()->guard('customer')->user()->id;
 
-        $order = $this->customer->with('customerOrder')->findOneWhere(['id'=>$id]);
+        $orders = $this->order->customerOrder($id);
 
-        return view($this->_config['view'],compact('order'));
+        return view($this->_config['view'],compact('orders'));
     }
 }
 

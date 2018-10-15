@@ -5,7 +5,7 @@
         v-if="haveChildren && item.parent_id != null"></i></a>
 
         <i :class="[show ? 'icon arrow-down-icon mt-15' : 'icon dropdown-right-icon mt-15']"
-        v-if="haveChildren || item.parent_id == null"  @click="showOrHide"></i>
+        v-if="haveChildren"  @click="showOrHide"></i>
 
         <ul v-if="haveChildren && show">
             <category-item

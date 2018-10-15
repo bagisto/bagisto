@@ -38,14 +38,4 @@ class Customer extends Authenticatable
     {
         return $this->belongsTo(CustomersGroups::class);
     }
-
-    /**
-     * Get the customer order.
-     */
-    public function customerOrder()
-    {
-        return $this->hasMany(Order::class);
-    }
-
-
 }

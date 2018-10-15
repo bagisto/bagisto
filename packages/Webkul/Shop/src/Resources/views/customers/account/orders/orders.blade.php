@@ -7,18 +7,17 @@
 @section('content-wrapper')
 
 <div class="account-content">
-
     @include('shop::customers.account.partials.sidemenu')
 
-    <div class="account profile">
+    <div class="account-layout">
 
-        <div class="section-head">
-            <h3> {{ __('shop::app.customer.account.order.index.title') }} </h3>
+        <div class="account-head">
+            <span class="account-heading">{{ __('shop::app.customer.account.order.index.title') }}</span>
+            <div class="horizontal-rule"></div>
         </div>
 
-        {{ dd($order)}}
+        <div class="account-items-list">
 
-        <div class="profile-content">
             <div class="table">
                 <table>
                     <thead>
@@ -30,27 +29,25 @@
                             <th> {{ __('shop::app.customer.account.order.index.total') }} </th>
                         </tr>
                     </thead>
+
                     <tbody>
+                        @foreach($orders as $order)
                         <tr>
-                            <td>PROD124</td>
-                            <td>Apple iPhone 7- White-32GB</td>
-                            <td>Packed (2)</td>
-                            <td>2</td>
-                            <td>$700.00</td>
-                        </tr>
-                        <tr>
-                            <td>PROD128</td>
-                            <td>Blue Linen T-Shirt for Men- Small- Red</td>
+                            <td>{{ $order->id }}</td>
+                            <td></td>
                             <td>Shipped (2)</td>
                             <td>2</td>
                             <td>$35.00</td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
+
         </div>
 
     </div>
+
 
 </div>
 @endsection
