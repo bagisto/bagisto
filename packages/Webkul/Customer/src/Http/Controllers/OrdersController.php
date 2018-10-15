@@ -56,6 +56,13 @@ class OrdersController extends Controller
     }
 
     public function orders() {
-        return view($this->_config['view']);
+
+        $id = auth()->guard('customer')->user()->id;
+
+        $order = $this->customer->with('customerOrder')->findOneWhere(['id'=>$id]);
+
+        return view($this->_config['view'],compact('order'));
     }
 }
+
+

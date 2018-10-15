@@ -1,6 +1,6 @@
 @extends('shop::layouts.master')
 @section('page_title')
-    {{ __('shop::app.customer.account.profile.index.page-title') }}
+    {{ __('shop::app.order.page-title') }}
 @endsection
 @section('content-wrapper')
 

@@ -82,7 +82,6 @@
         var state = document.readyState
         var galleryTemplate = document.getElementById('product-gallery-template');
         var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
-        var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
 
         if(galleryTemplate){
             if (state == 'interactive') {
@@ -98,6 +97,7 @@
 
         var thumbList = document.getElementsByClassName('thumb-list')[0];
         var thumbFrame = document.getElementsByClassName('thumb-frame');
+        var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
 
         // for product page resize image
         if(thumbList && productHeroImage){

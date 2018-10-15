@@ -42,7 +42,6 @@ export default {
     },
     methods: {
         showOrHide: function() {
-            alert('gfgf');
             this.show = !this.show;
         }
     }

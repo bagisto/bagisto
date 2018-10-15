@@ -280,6 +280,8 @@
         var thumbFrame = document.getElementsByClassName('thumb-frame');
         var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
 
+        console.log(productHeroImage);
+
         search.addEventListener("click", header);
         hamMenu.addEventListener("click", header);
 

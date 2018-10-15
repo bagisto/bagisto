@@ -178,7 +178,7 @@ Route::group(['middleware' => ['web']], function () {
 
                 /* Reviews route */
                 Route::get('reviews', 'Webkul\Customer\Http\Controllers\CustomerController@reviews')->defaults('_config', [
-                    'view' => 'shop::customers.account.reviews.reviews'
+                    'view' => 'shop::customers.account.reviews.index'
                 ])->name('customer.reviews.index');
             });
         });

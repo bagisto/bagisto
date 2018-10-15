@@ -5,6 +5,7 @@ namespace Webkul\Customer\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webkul\Customer\Models\CustomersGroups;
+use Webkul\Sales\Models\Order;
 
 // use Webkul\User\Notifications\AdminResetPassword;
 
@@ -36,6 +37,14 @@ class Customer extends Authenticatable
     public function customerGroup()
     {
         return $this->belongsTo(CustomersGroups::class);
+    }
+
+    /**
+     * Get the customer order.
+     */
+    public function customerOrder()
+    {
+        return $this->hasMany(Order::class);
     }
 
 
