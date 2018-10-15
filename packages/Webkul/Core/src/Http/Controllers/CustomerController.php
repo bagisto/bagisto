@@ -84,11 +84,11 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'first_name' => 'string|required',
             'last_name' => 'string|required',
-            'email' => 'email|required',
-
+            'gender' => 'required',
+            'phone' => 'nullable|numeric',
+            'email' => 'required|unique:customers,email'
         ]);
 
         $data=$request->all();
@@ -102,7 +102,6 @@ class CustomerController extends Controller
         session()->flash('success', 'Customer created successfully.');
 
         return redirect()->route($this->_config['redirect']);
-
     }
 
     /**
@@ -129,6 +128,13 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'first_name' => 'string|required',
+            'last_name' => 'string|required',
+            'gender' => 'required',
+            'phone' => 'nullable|numeric',
+            'email' => 'required|unique:customers,email,'. $id
+        ]);
 
         $this->customer->update(request()->all(),$id);
 
@@ -136,6 +142,4 @@ class CustomerController extends Controller
 
         return redirect()->route($this->_config['redirect']);
     }
-
-
 }

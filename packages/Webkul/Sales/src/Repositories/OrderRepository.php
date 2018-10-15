@@ -71,7 +71,7 @@ class OrderRepository extends Repository
     public function create(array $data)
     {
         DB::beginTransaction();
-        
+
         try {
             Event::fire('checkout.order.save.before', $data);
 
@@ -97,7 +97,7 @@ class OrderRepository extends Repository
             $order->payment()->create($data['payment']);
 
             $order->addresses()->create($data['shipping_address']);
-            
+
             $order->addresses()->create($data['billing_address']);
 
             foreach($data['items'] as $item) {
@@ -114,12 +114,36 @@ class OrderRepository extends Repository
 
             throw $e;
         }
-        
+
         DB::commit();
 
         Event::fire('checkout.order.save.after', $order);
 
         return $order;
+    }
+
+    /**
+     * @param int $orderId
+     * @return mixed
+     */
+    public function cancel($orderId)
+    {
+        $order = $this->findOrFail($orderId);
+
+        if(!$order->canCancel())
+            return false;
+
+        foreach($order->items as $item) {
+            if($item->qty_to_cancel) {
+                $item->qty_canceled += $item->qty_to_cancel;
+
+                $item->save();
+            }
+        }
+
+        $this->updateOrderStatus($order);
+
+        return true;
     }
 
     /**
@@ -135,12 +159,94 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param int $orderId
+     * @param mixed $order
      * @return void
      */
-    public function updateOrderStatus(int $orderId)
+    public function isInCompletedState($order)
     {
-        $order = $this->find($orderId);
+        $totalQtyOrdered = 0;
+        $totalQtyInvoiced = 0;
+        $totalQtyShipped = 0;
+        $totalQtyRefunded = 0;
+        $totalQtyCanceled = 0;
+
+        foreach($order->items  as $item) {
+            $totalQtyOrdered += $item->qty_ordered;
+            $totalQtyInvoiced += $item->qty_invoiced;
+            $totalQtyShipped += $item->qty_shipped;
+            $totalQtyRefunded += $item->qty_refunded;
+            $totalQtyCanceled += $item->qty_canceled;
+        }
+
+        if($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled) && 
+            $totalQtyOrdered == $totalQtyInvoiced + $totalQtyRefunded + $totalQtyCanceled &&
+            $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled)
+            return true;
+
+        return false;
+    }
+
+    /**
+     * @param mixed $order
+     * @return void
+     */
+    public function isInCanceledState($order)
+    {
+        $totalQtyOrdered = 0;
+        $totalQtyCanceled = 0;
+
+        foreach($order->items  as $item) {
+            $totalQtyOrdered += $item->qty_ordered;
+            $totalQtyCanceled += $item->qty_canceled;
+        }
+
+        if($totalQtyOrdered == $totalQtyCanceled)
+            return true;
+
+        return false;
+    }
+
+    /**
+     * @param mixed $order
+     * @return void
+     */
+    public function isInClosedState($order)
+    {
+        $totalQtyOrdered = 0;
+        $totalQtyRefunded = 0;
+        $totalQtyCanceled = 0;
+
+        foreach($order->items  as $item) {
+            $totalQtyOrdered += $item->qty_ordered;
+            $totalQtyRefunded += $item->qty_refunded;
+            $totalQtyCanceled += $item->qty_canceled;
+        }
+
+        if($totalQtyOrdered == $totalQtyRefunded + $totalQtyCanceled)
+            return true;
+
+        return false;
+    }
+
+    /**
+     * @param mixed $order
+     * @return void
+     */
+    public function updateOrderStatus($order)
+    {
+        $status = 'processing';
+
+        if($this->isInCompletedState($order))
+            $status = 'completed';
+
+        if($this->isInCanceledState($order))
+            $status = 'canceled';
+
+        if($this->isInClosedState($order))
+            $status = 'closed';
+
+        $order->status = $status;
+        $order->save();
     }
 
     /**
@@ -179,5 +285,14 @@ class OrderRepository extends Repository
         $order->save();
 
         return $order;
+    }
+
+     /**
+     * @param int $customerId
+     * @return void
+     */
+    public function customerOrder($customerId)
+    {
+       return $this->model->where('customer_id',$customerId)->get();
     }
 }

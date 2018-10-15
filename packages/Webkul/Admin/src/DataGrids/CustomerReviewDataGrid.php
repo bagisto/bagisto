@@ -100,7 +100,7 @@ class CustomerReviewDataGrid
                 ],
                 [
                     'name' => 'status',
-                    'alias' => 'countryStatus',
+                    'alias' => 'reviewStatus',
                     'type' => 'number',
                     'label' => 'Status',
                     'sortable' => true,
@@ -113,7 +113,7 @@ class CustomerReviewDataGrid
             'filterable' => [
                 [
                     'name' => 'id',
-                    'alias' => 'countryId',
+                    'alias' => 'reviewId',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
@@ -137,9 +137,9 @@ class CustomerReviewDataGrid
                 ],
                 [
                     'name' => 'status',
-                    'alias' => 'countryStatus',
-                    'type' => 'number',
-                    'label' => 'Code',
+                    'alias' => 'reviewStatus',
+                    'type' => 'string',
+                    'label' => 'Status',
                 ],
             ],
 

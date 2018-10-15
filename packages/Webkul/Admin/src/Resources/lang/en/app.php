@@ -73,6 +73,7 @@ return [
         'orders' => [
             'title' => 'Orders',
             'view-title' => 'Order #:order_id',
+            'cancel-btn-title' => 'Cancel',
             'shipment-btn-title' => 'Ship',
             'invoice-btn-title' => 'Invoice',
             'info' => 'Information',
@@ -102,6 +103,9 @@ return [
             'product-name' => 'Product Name',
             'qty' => 'Qty',
             'item-status' => 'Item Status',
+            'item-invoice' => 'Invoiced (:qty_invoiced)',
+            'item-shipped' => 'shipped (:qty_shipped)',
+            'item-canceled' => 'Canceled (:qty_canceled)',
             'price' => 'Price',
             'total' => 'Total',
             'subtotal' => 'Subtotal',
@@ -110,7 +114,11 @@ return [
             'tax-percent' => 'Tax Percent',
             'tax-amount' => 'Tax Amount',
             'discount-amount' => 'Discount Amount',
-            'grand-total' => 'Grand Total'
+            'grand-total' => 'Grand Total',
+            'total-paid' => 'Total Paid',
+            'total-refunded' => 'Total Refunded',
+            'total-due' => 'Total Due',
+            'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
         ],
         'invoices' => [
             'id' => 'Id',
@@ -397,7 +405,8 @@ return [
             'email' => 'Email',
             'date_of_birth' => 'Date of Birth',
             'phone' => 'Phone',
-            'customer_group' => 'Customer Group'
+            'customer_group' => 'Customer Group',
+            'save-btn-title' => 'Save Customer'
         ],
         'reviews' => [
             'title' => 'Title',

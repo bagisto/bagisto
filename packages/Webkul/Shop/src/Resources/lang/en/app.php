@@ -116,6 +116,24 @@ return [
                     'title' => 'Edit Address',
                     'submit' => 'Edit Address'
                 ]
+            ],
+
+            'order' => [
+                'index' => [
+                    'page-title' => 'Customer-Order',
+                    'title' => 'Orders',
+                    'order_id' => 'Order ID',
+                    'date' => 'Date',
+                    'status' => 'Status',
+                    'item' => 'Item',
+                    'total' => 'total'
+                ]
+            ],
+
+            'review' => [
+                'index' => [
+                    'title' => 'Reviews'
+                ]
             ]
         ]
     ],

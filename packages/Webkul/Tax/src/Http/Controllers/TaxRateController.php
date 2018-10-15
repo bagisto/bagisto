@@ -4,7 +4,7 @@ namespace Webkul\Tax\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Tax\Repositories\TaxRatesRepository as TaxRate;
+use Webkul\Tax\Repositories\TaxRateRepository as TaxRate;
 
 
 /**
@@ -32,7 +32,7 @@ class TaxRateController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Tax\Repositories\TaxRatesRepository  $taxRate
+     * @param  Webkul\Tax\Repositories\TaxRateRepository  $taxRate
      * @return void
      */
     public function __construct(TaxRate $taxRate)

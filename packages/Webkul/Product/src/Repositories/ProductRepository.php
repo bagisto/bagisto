@@ -159,9 +159,9 @@ class ProductRepository extends Repository
         $attributes = $product->attribute_family->custom_attributes;
 
         foreach ($attributes as $attribute) {
-            if(!isset($data[$attribute->code]) || !$data[$attribute->code])
+            if(!isset($data[$attribute->code]) || ($attribute->code == 'boolean' && !$data[$attribute->code]))
                 continue;
-
+            
             $attributeValue = $this->attributeValue->findOneWhere([
                     'product_id' => $product->id,
                     'attribute_id' => $attribute->id,

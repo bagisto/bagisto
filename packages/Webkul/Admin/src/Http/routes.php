@@ -49,10 +49,6 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.orders.index'
             ])->name('admin.customer.orders.index');
 
-            Route::get('customer/reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
-                'view' => 'admin::customers.review.index'
-            ])->name('admin.customer.review.index');
-
             Route::get('customer/create', 'Webkul\Core\Http\Controllers\CustomerController@create')->defaults('_config',[
                 'view' => 'admin::customers.create'
             ])->name('admin.customer.create');
@@ -61,14 +57,6 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.store');
 
-            Route::get('customer/reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[
-                'view' => 'admin::customers.review.edit'
-            ])->name('admin.customer.review.edit');
-
-            Route::put('customer/reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@update')->defaults('_config', [
-                'redirect' => 'admin.customer.review.index'
-            ])->name('admin.customer.review.update');
-
             Route::get('customer/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@edit')->defaults('_config',[
                 'view' => 'admin::customers.edit'
             ])->name('admin.customer.edit');
@@ -76,6 +64,18 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('customer/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@update')->defaults('_config', [
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.update');
+
+            Route::get('reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
+                'view' => 'admin::customers.review.index'
+            ])->name('admin.customer.review.index');
+
+            Route::get('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[
+                'view' => 'admin::customers.review.edit'
+            ])->name('admin.customer.review.edit');
+
+            Route::put('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@update')->defaults('_config', [
+                'redirect' => 'admin.customer.review.index'
+            ])->name('admin.customer.review.update');
 
             // Sales Routes
             Route::prefix('sales')->group(function () {
@@ -87,6 +87,10 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/orders/view/{id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@view')->defaults('_config', [
                     'view' => 'admin::sales.orders.view'
                 ])->name('admin.sales.orders.view');
+
+                Route::get('/orders/cancel/{order_id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@cancel')->defaults('_config', [
+                    'view' => 'admin::sales.orders.cancel'
+                ])->name('admin.sales.orders.cancel');
 
 
                 // Sales Invoices Routes

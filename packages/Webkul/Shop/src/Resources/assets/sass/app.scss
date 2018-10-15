@@ -480,6 +480,10 @@ section.slider-block {
             position: relative;
         }
 
+        .nav a:first-child{
+            margin-left: 20px;
+        }
+
         .nav  li  > .icon{
             display: none;
         }
@@ -497,7 +501,6 @@ section.slider-block {
         .nav > li {
             float: left;
             margin-right: 1px;
-
         }
 
         .nav > li > a {
@@ -649,8 +652,6 @@ section.slider-block {
             padding: 12px 4.8px 12px 8px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            position: relative;
-            width: 90%;
         }
 
         .nav  li  > .icon{
@@ -661,11 +662,11 @@ section.slider-block {
             display: none;
         }
 
-        .nav > li {
+        .nav > li  {
             border-bottom: 1px solid $border-color;
         }
 
-        .nav  li:first-child {
+        .nav li:first-child {
             border-top: 1px solid $border-color;
         }
 

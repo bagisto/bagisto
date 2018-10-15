@@ -43,7 +43,7 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="name" >{{ __('admin::app.customers.reviews.status') }}</label>
+                                <label for="name" class="required">{{ __('admin::app.customers.reviews.status') }}</label>
                                 <select  class="control" name="status">
                                     <option value="pending" {{ $review->status == "pending" ? 'selected' : ''}}>
                                         pending

@@ -75,4 +75,42 @@
 
 @endsection
 
+@push('scripts')
+<script>
+
+    document.onreadystatechange = function () {
+        var state = document.readyState
+        var galleryTemplate = document.getElementById('product-gallery-template');
+        var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
+
+        if(galleryTemplate){
+            if (state == 'interactive') {
+                galleryTemplate.style.display="none";
+            } else  {
+                document.getElementById('loader').style.display="none";
+                addTOButton.style.display="flex";
+            }
+        }
+    }
+
+    $(document).ready(function() {
+
+        var thumbList = document.getElementsByClassName('thumb-list')[0];
+        var thumbFrame = document.getElementsByClassName('thumb-frame');
+        var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
+
+        // for product page resize image
+        if(thumbList && productHeroImage){
+            thumbList.style.maxHeight = productHeroImage.offsetHeight + "px";
+            for(let i=0 ; i < thumbFrame.length ; i++){
+                thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
+            }
+        }
+    })
+
+</script>
+@endpush
+
+
+
 
