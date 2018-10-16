@@ -117,6 +117,16 @@
     height: 18px;
 }
 
+.sort-up-icon {
+    // background-image: url("../images/Icon-Sort-Up.svg");
+    // width: 18px;
+    // height: 18px;
+    background-image: url("../images/Icon-Sort-Down.svg");
+    width: 18px;
+    height: 18px;
+    transform: rotate(180deg);
+}
+
 .primary-back-icon {
     background-image: url("../images/Icon-Back-Primary.svg");
     width: 24px;

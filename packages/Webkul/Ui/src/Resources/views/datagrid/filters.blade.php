@@ -1,5 +1,4 @@
 <div class="{{ $css->filter }}filter-wrapper">
-    {{-- for loading the filters from another file --}}
     <div class="filter-row-one">
         <div class="search-filter" style="display: inline-flex; align-items: center;">
             <input type="search" class="control search-field" placeholder="Search Users" value="" />

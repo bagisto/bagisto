@@ -596,7 +596,7 @@ class DataGrid
                             array_values($value)[0]
                         );
                     } else {
-                        throw new \Exception('Multiple Sort keys Found, Please Resolve the URL Manually.');
+                        throw new \Exception('Multiple Sort keys Found, Please Resolve the URL Manually');
                     }
                 } elseif ($key=="search") {
 

@@ -37,7 +37,7 @@ class CustomerDataGrid
                     'route' => route('admin.datagrid.delete'),
                     'method' => 'DELETE',
                     'label' => 'Delete',
-                    'type' => 'button',
+                    'type' => 'button', //select || button only
                 ],
             ],
 
@@ -55,20 +55,10 @@ class CustomerDataGrid
                 ],
             ],
 
-            'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
-            ],
+            'join' => [],
 
             //use aliasing on secodary columns if join is performed
-
             'columns' => [
-
                 [
                     'name' => 'id',
                     'alias' => 'customerId',
@@ -81,14 +71,14 @@ class CustomerDataGrid
                     'alias' => 'customerFirstName',
                     'type' => 'string',
                     'label' => 'Name',
-                    'sortable' => true,
+                    'sortable' => false,
                 ],
                 [
                     'name' => 'email',
                     'alias' => 'customerEmail',
                     'type' => 'string',
                     'label' => 'Email',
-                    'sortable' => true,
+                    'sortable' => false,
                 ],
                 [
                     'name' => 'phone',
@@ -102,7 +92,7 @@ class CustomerDataGrid
                     'alias' => 'customerGroupId',
                     'type' => 'number',
                     'label' => 'Customer Group',
-                    'sortable' => true,
+                    'sortable' => false,
                 ],
             ],
 

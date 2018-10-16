@@ -1,6 +1,7 @@
 <?php
 
 Route::group(['middleware' => ['web']], function () {
+
     Route::get('/', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
         'view' => 'shop::home.index'
     ])->name('shop.home.index');
@@ -167,7 +168,6 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('address/edit', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [
                     'redirect' => 'customer.address.index'
                 ])->name('customer.address.edit');
-
                 /*    Routes for Addresses ends here   */
 
                 /* Wishlist route */
@@ -188,5 +188,4 @@ Route::group(['middleware' => ['web']], function () {
         });
     });
     //customer routes end here
-
 });
