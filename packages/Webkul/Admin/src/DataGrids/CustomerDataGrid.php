@@ -30,7 +30,7 @@ class CustomerDataGrid
             'table' => 'customers',
             'select' => 'id',
             'perpage' => 10,
-            'aliased' => false, //use this with false as default and true in case of joins
+            'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
                 [
@@ -55,41 +55,43 @@ class CustomerDataGrid
                 ],
             ],
 
-            'join' => [],
+            'join' => [
+
+            ],
 
             //use aliasing on secodary columns if join is performed
             'columns' => [
                 [
                     'name' => 'id',
-                    'alias' => 'customerId',
+                    'alias' => 'ID',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Customer ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'first_name',
-                    'alias' => 'customerFirstName',
+                    'alias' => 'FirstName',
                     'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Customer First Name',
                     'sortable' => false,
                 ],
                 [
                     'name' => 'email',
-                    'alias' => 'customerEmail',
+                    'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'Email',
+                    'label' => 'Customer E-Mail',
                     'sortable' => false,
                 ],
                 [
                     'name' => 'phone',
-                    'alias' => 'customerPhone',
+                    'alias' => 'Phone',
                     'type' => 'number',
-                    'label' => 'Phone',
+                    'label' => 'Customer Phone',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'customer_group_id',
-                    'alias' => 'customerGroupId',
+                    'alias' => 'CustomerGroupId',
                     'type' => 'number',
                     'label' => 'Customer Group',
                     'sortable' => false,
@@ -102,48 +104,30 @@ class CustomerDataGrid
 
                 [
                     'name' => 'id',
-                    'alias' => 'customerId',
+                    'alias' => 'ID',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Customer ID',
                 ],
                 [
                     'name' => 'first_name',
-                    'alias' => 'customerFirstName',
+                    'alias' => 'FirstName',
                     'type' => 'string',
-                    'label' => 'Name',
-                ],
-                [
-                    'name' => 'email',
-                    'alias' => 'customerEmail',
-                    'type' => 'string',
-                    'label' => 'Email',
-                ],
-                [
-                    'name' => 'phone',
-                    'alias' => 'customerPhone',
-                    'type' => 'number',
-                    'label' => 'Phone',
-                ],
-                [
-                    'name' => 'customer_group_id',
-                    'alias' => 'customerGroupId',
-                    'type' => 'string',
-                    'label' => 'Customer Group',
-                ],
+                    'label' => 'Customer First Name',
+                ]
             ],
 
             //don't use aliasing in case of searchables
 
             'searchable' => [
                 [
-                    'column' => 'first_name',
+                    'column' => 'FirstName',
                     'type' => 'string',
-                    'label' => 'Title',
+                    'label' => 'Customer First Name',
                 ],
                 [
                     'column' => 'email',
                     'type' => 'string',
-                    'label' => 'Rating',
+                    'label' => 'Customer E-Mail',
                 ],
             ],
 
