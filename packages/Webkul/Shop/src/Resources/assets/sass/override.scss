@@ -169,6 +169,7 @@ body {
                         }
 
                         .sort-filter {
+                            cursor: pointer;
                             display: inline-block;
                             margin-top: 10px;
                         }
@@ -195,21 +196,6 @@ body {
     }
 
 }
-
-// @media only screen and (max-width: 660px) {
-//     .product-grid-3 {
-//         grid-template-columns: 48.5% 48.5%;
-//         grid-column-gap: 20px;
-//     }
-// }
-
-// @media only screen and (max-width: 480px) {
-//     .product-grid-3 {
-//         grid-template-columns: 47.5% 47.5%;
-//     }
-// }
-
-
 
 //layered filter wrapper styles
 .layered-filter-wrapper {
@@ -299,7 +285,6 @@ body {
 }
 
 .responsive-layred-filter {
-    @extend .layered-filter-wrapper;
     width: 100%;
     float: none;
     padding-right: 0px;

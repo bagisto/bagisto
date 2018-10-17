@@ -75,7 +75,7 @@
 
 @endsection
 
-@push('scripts')
+{{--  @push('scripts')
 <script>
 
     document.onreadystatechange = function () {
@@ -93,11 +93,13 @@
         }
     }
 
-    $(document).ready(function() {
+    {{--  $(document).ready(function() {
 
         var thumbList = document.getElementsByClassName('thumb-list')[0];
         var thumbFrame = document.getElementsByClassName('thumb-frame');
         var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
+
+        console.log(productHeroImage.offsetHeight);
 
         // for product page resize image
         if(thumbList && productHeroImage){
@@ -106,10 +108,10 @@
                 thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
             }
         }
-    })
+    })  --}}
 
-</script>
-@endpush
+{{--  </script>
+@endpush  --}}
 
 
 

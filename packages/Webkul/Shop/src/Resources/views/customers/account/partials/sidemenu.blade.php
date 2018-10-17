@@ -1,7 +1,7 @@
-{{--  <div class="side-menu-title mb-20" id="side-menu-title">
+<div class="responsive-side-menu" id="responsive-side-menu">
     <strong>Menu</strong>
     <i class="icon icon-arrow-down right" id="down-icon"></i>
-</div>  --}}
+</div>
 
 <ul class="account-side-menu">
     @foreach($menu->items as $key=>$value)
@@ -18,7 +18,7 @@
 
     $(document).ready(function(){
 
-        var sideMenuTitle = document.getElementById("side-menu-title");
+        var sideMenuTitle = document.getElementById("responsive-side-menu");
         var downIcon = document.getElementById("down-icon");
         var accountSideMenu = document.getElementsByClassName("account-side-menu");
 

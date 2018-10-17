@@ -426,6 +426,7 @@ section.slider-block {
         }
         ul.right-responsive {
             display: none;
+            cursor: pointer;
 
             li {
                 margin-right : 5px;
@@ -666,6 +667,10 @@ section.slider-block {
             border-bottom: 1px solid $border-color;
         }
 
+        .nav li ul  {
+            padding-left: 30px;
+        }
+
         .nav li:first-child {
             border-top: 1px solid $border-color;
         }
@@ -674,6 +679,7 @@ section.slider-block {
             float:none;
             height: 45px;
             display: none;
+            border: none;
 
             img {
                 margin-right:6px;
@@ -887,23 +893,6 @@ section.product-detail {
                 width: 604px;
                 height: 650px;
                 max-width: 604px;
-
-                .loader {
-                    border: 16px solid $border-color;
-                    border-top: 16px solid $brand-color;
-                    border-radius: 50%;
-                    width: 50px;
-                    height: 50px;
-                    animation: spin 2s linear infinite;
-                    margin-left: 20%;
-                    position: absolute;
-                    margin-top: 200px;
-                }
-
-                @keyframes spin {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                }
 
                 div {
                     display: flex;
@@ -1924,11 +1913,96 @@ section.review {
             color: $brand-color;
         }
     }
+
+    .responsive-side-menu{
+        display: none;
+    }
     //customer account pages content
     .account-layout {
         margin-left: 5.5%;
         margin-top: 1%;
         width: 100%;
+
+        .back-icon {
+           display: none;
+        }
+    }
+}
+//customer account page respoinsive css
+@media only screen and (max-width: 770px) {
+    .account-content {
+        flex-direction: column;
+
+        .account-side-menu {
+            display: none;
+            width:100%;
+            border: none;
+
+            li {
+                margin-left: 0%;
+                width: 100%;
+
+                a {
+                    color : $font-color;
+                }
+            }
+        }
+
+        .responsive-side-menu {
+            cursor: pointer;
+            padding-top:13px;
+            display: block;
+            height: 46px;
+            border-bottom: 1px solid $border-color;
+            border-top: 1px solid $border-color;
+
+            .right {
+                float: right;
+            }
+        }
+
+        .account-layout {
+            margin-left: 0%;
+            margin-top: 20px;
+
+            .account-head  {
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid $border-color;
+                border-top: 1px solid $border-color;
+                height: 46px;
+
+                .back-icon {
+                    display: block;
+                }
+
+                span {
+                    margin-top: 12px;
+                    font-size: 18px;
+                }
+
+                .horizontal-rule {
+                    display: none;
+                }
+            }
+
+            .account-table-content {
+                margin-top: 2%;
+
+                table tbody tr {
+                    display: grid;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+
+        .account-items-list , .edit-form {
+            margin-top: 20px;
+        }
+
+        .control-group .control {
+            width: 100%;
+        }
     }
 }
 

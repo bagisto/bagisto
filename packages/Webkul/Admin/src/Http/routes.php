@@ -41,27 +41,27 @@ Route::group(['middleware' => ['web']], function () {
 
             //Customers Management Routes
 
-            Route::get('customer', 'Webkul\Core\Http\Controllers\CustomerController@index')->defaults('_config', [
+            Route::get('customer', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config', [
                 'view' => 'admin::customers.index'
             ])->name('admin.customer.index');
 
-            Route::get('customer/orders', 'Webkul\Core\Http\Controllers\CustomerController@index')->defaults('_config',[
+            Route::get('customer/orders', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config',[
                 'view' => 'admin::customers.orders.index'
             ])->name('admin.customer.orders.index');
 
-            Route::get('customer/create', 'Webkul\Core\Http\Controllers\CustomerController@create')->defaults('_config',[
+            Route::get('customer/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@create')->defaults('_config',[
                 'view' => 'admin::customers.create'
             ])->name('admin.customer.create');
 
-            Route::post('customer/create', 'Webkul\Core\Http\Controllers\CustomerController@store')->defaults('_config',[
+            Route::post('customer/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@store')->defaults('_config',[
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.store');
 
-            Route::get('customer/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@edit')->defaults('_config',[
+            Route::get('customer/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@edit')->defaults('_config',[
                 'view' => 'admin::customers.edit'
             ])->name('admin.customer.edit');
 
-            Route::put('customer/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@update')->defaults('_config', [
+            Route::put('customer/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@update')->defaults('_config', [
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.update');
 

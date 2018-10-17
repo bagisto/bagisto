@@ -10,8 +10,8 @@
     <div class="account-layout">
 
         <div class="account-head">
-            <span class="account-heading">{{ __('shop::app.wishlist.title') }}</span>
 
+            <span class="account-heading">{{ __('shop::app.wishlist.title') }}</span>
             @if(count($items))
             <div class="account-edit">
                 <a href="" style="margin-right: 15px;">{{ __('shop::app.wishlist.deleteall') }}</a>

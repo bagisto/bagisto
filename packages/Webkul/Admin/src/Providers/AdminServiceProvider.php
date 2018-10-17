@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Blade;
 use Webkul\Admin\Providers\EventServiceProvider;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Webkul\Admin\Exceptions\Handler;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -29,6 +31,11 @@ class AdminServiceProvider extends ServiceProvider
         $this->composeView();
 
         $this->app->register(EventServiceProvider::class);
+
+        $this->app->bind(
+            ExceptionHandler::class,
+            Handler::class
+        );
     }
 
     /**
