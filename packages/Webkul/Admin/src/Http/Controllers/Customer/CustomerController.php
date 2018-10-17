@@ -142,4 +142,19 @@ class CustomerController extends Controller
 
         return redirect()->route($this->_config['redirect']);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $this->customer->delete($id);
+
+        session()->flash('success', 'Customer deleted successfully.');
+
+        return redirect()->back();
+    }
 }

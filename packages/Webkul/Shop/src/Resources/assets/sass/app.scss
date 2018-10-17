@@ -263,11 +263,12 @@ section.slider-block {
                         border-top-right-radius: 3px;
                         border-bottom-right-radius: 3px;
 
-                        .search-icon {
+                        .search-icon, .icon-search {
                             margin-top: 4px;
                             margin-left: 4px;
                             height: 24px;
                             width: 24px;
+                            cursor: pointer;
                         }
                     }
                 }
@@ -450,8 +451,8 @@ section.slider-block {
         height: 48px;
         margin-left: auto;
         margin-right: auto;
-        border-top: 1px solid lightgrey;
-        border-bottom: 1px solid lightgrey;
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
         display: block;
 
         ul.nav {
@@ -915,7 +916,7 @@ section.product-detail {
                             max-height: 120px;
 
                             &.active {
-                                border-color: $border-color1;
+                                border-color: $border-color;
                             }
 
                             img {
