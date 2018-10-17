@@ -3,7 +3,7 @@
 
 <div class="product-image-group">
 
-    <div class="loader" id="loader">
+    <div class="cp-spinner cp-round" id="loader">
     </div>
 
     <product-gallery></product-gallery>

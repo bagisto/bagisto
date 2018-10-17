@@ -244,17 +244,17 @@
         @include('shop::layouts.header.nav-menu.navmenu')
     </div>
 
-    <div class="search-responsive">
+    <div class="search-responsive mt-10">
         <div class="search-content">
             <i class="icon icon-search mt-10"></i>
             <input  class="search mt-5">
             <i class="icon icon-menu-back right mt-10"></i>
         </div>
 
-        <div class="search-content">
+        {{--  <div class="search-content">
             <i class="icon icon-search mt-10"></i>
             <span class="suggestion mt-15">Designer sarees</span>
-        </div>
+        </div>  --}}
     </div>
 
     <div class="responsive-nav">

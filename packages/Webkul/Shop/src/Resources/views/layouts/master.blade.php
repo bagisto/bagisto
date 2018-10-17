@@ -39,7 +39,6 @@
         @include('shop::layouts.footer.footer')
 
     </div>
-
     <script type="text/javascript">
         window.flashMessages = [];
 
@@ -56,9 +55,10 @@
         @endif
 
         window.serverErrors = [];
-
-        @if (count($errors))
-            window.serverErrors = @json($errors->getMessages());
+        @if(isset($errors))
+            @if (count($errors))
+                window.serverErrors = @json($errors->getMessages());
+            @endif
         @endif
     </script>
 

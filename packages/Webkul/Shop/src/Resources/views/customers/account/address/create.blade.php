@@ -8,6 +8,7 @@
 
         <div class="account-layout">
             <div class="account-head mb-15">
+                {{--  <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>  --}}
                 <div class="account-heading">{{ __('shop::app.customer.account.address.create.title') }}</div>
             </div>
             <form method="post" action="{{ route('customer.address.create') }}" @submit.prevent="onSubmit">

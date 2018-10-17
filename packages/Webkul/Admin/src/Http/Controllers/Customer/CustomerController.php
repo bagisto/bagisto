@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Core\Http\Controllers;
+namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

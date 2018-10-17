@@ -74,5 +74,27 @@
     </section>
 @endsection
 
+@push('scripts')
+<script>
+
+    document.onreadystatechange = function () {
+        var state = document.readyState
+        var galleryTemplate = document.getElementById('product-gallery-template');
+        var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
+
+        if(galleryTemplate){
+            if (state == 'interactive') {
+                galleryTemplate.style.display="none";
+            } else  {
+                document.getElementById('loader').style.display="none";
+                addTOButton.style.display="flex";
+            }
+        }
+    }
+
+</script>
+@endpush
+
+
 
 
