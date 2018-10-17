@@ -8,7 +8,7 @@
 
         <div class="account-layout">
 
-            <div class="account-head mb-10">
+            <div class="account-head mb-15">
                 <div class="account-heading">{{ __('shop::app.customer.account.address.edit.title') }}</div>
             </div>
 

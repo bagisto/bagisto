@@ -1,5 +1,4 @@
 <div class="{{ $css->filter }}filter-wrapper">
-    {{-- for loading the filters from another file --}}
     <div class="filter-row-one">
         <div class="search-filter" style="display: inline-flex; align-items: center;">
             <input type="search" class="control search-field" placeholder="Search Users" value="" />
@@ -24,7 +23,8 @@
             <div class="more-filters">
                 <div class="dropdown-toggle">
                     <div class="dropdown-header">
-                        <span class="name">Filter</span> {{-- <span class="role">Filter</span> --}}
+                        <span class="name">Filter</span>
+                        {{-- <span class="role">Filter</span> --}}
                         <i class="icon arrow-down-icon active"></i>
                     </div>
                 </div>

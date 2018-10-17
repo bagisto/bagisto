@@ -11,6 +11,13 @@ return [
         ]
     ],
 
+    'reviews' => [
+        'add-review-page-title' => 'Add Review',
+        'write-review' => 'Write a review',
+        'review-title' => 'Give Your Review a Title',
+        'empty' => 'You Haven\'t Reviewed Any Product Yet'
+    ],
+
     'customer' => [
         'signup-text' => [
             'account_exists' => 'Already have an account',
@@ -191,7 +198,11 @@ return [
     'wishlist' => [
         'title' => 'Wishlist',
         'deleteall' => 'Delete All',
-        'moveall' => 'Move All Products To Cart'
+        'moveall' => 'Move All Products To Cart',
+        'move-to-cart' => 'Move To Cart',
+        'empty' => 'You Have No Items In Your Wishlist',
+        'add' => 'Item Successfully Added To Wishlist',
+        'remove' => 'Item Successfully Removed From Wishlist'
     ],
 
     'checkout' => [

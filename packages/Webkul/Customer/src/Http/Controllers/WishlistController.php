@@ -5,7 +5,9 @@ namespace Webkul\Customer\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Cart;
 use Auth;
 
 /**
@@ -26,13 +28,15 @@ class WishlistController extends Controller
 
     protected $wishlist;
 
+    protected $product;
+
     /**
      * Initializes the required repository instances.
      *
      * @param $customer
      * @param $wishlist
      */
-    public function __construct(CustomerRepository $customer, WishlistRepository $wishlist)
+    public function __construct(CustomerRepository $customer, WishlistRepository $wishlist, ProductRepository $product)
     {
         $this->middleware('customer');
 
@@ -41,6 +45,8 @@ class WishlistController extends Controller
         $this->customer = $customer;
 
         $this->wishlist = $wishlist;
+
+        $this->product = $product;
     }
 
     /**
@@ -67,6 +73,15 @@ class WishlistController extends Controller
      * @param integer $itemId
      */
     public function add($itemId) {
+        $product = $this->product->findOneByField('id', $itemId);
+
+        if($product->type == "configurable") {
+            $slug = $product->url_key;
+
+            session()->flash('warning', trans('customer::app.wishlist.select-options'));
+
+            return redirect()->route('shop.products.index', $slug);
+        }
 
         $data = [
             'channel_id' => core()->getCurrentChannel()->id,
@@ -112,11 +127,44 @@ class WishlistController extends Controller
     }
 
     /**
+     * Add the configurable product
+     * to the wishlist.
+     *
+     * @return response
+     */
+    public function addconfigurable($urlkey) {
+        dd($urlkey);
+        session()->flash('warning', trans('Select options before adding to wishlist'));
+        return redirect()->route('shop.products.index', $urlkey);
+    }
+
+    /**
      * Function to move item from wishlist to cart.
      *
      * @param integer $itemId
      */
-    public function moveToCart() {
-        dd('adding item to wishlist');
+    public function moveAll() {
+        Cart::moveAllToCart();
+    }
+
+    /**
+     * Function to move item from wishlist to cart.
+     *
+     * @param integer $itemId
+     */
+    public function move($productId) {
+        $result = Cart::moveToCart($productId);
+
+        $wishlist = $this->wishlist->findWhere(['customer_id' => auth()->guard('customer')->user()->id, 'product_id' => $productId]);
+
+        if($this->wishlist->delete($wishlist[0]->id)) {
+            session()->flash('success', 'Item Moved To Cart Successfully');
+
+            return redirect()->back();
+        } else {
+            session()->flash('error', 'Item Cannot Be Moved To Cart Successfully');
+
+            return redirect()->back();
+        }
     }
 }

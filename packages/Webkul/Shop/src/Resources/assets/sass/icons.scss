@@ -15,8 +15,12 @@
     background-image:URL('../images/icon-menu-close.svg');
     width: 24px;
     height: 24px;
-    margin-left:auto;
-    margin-bottom: 2px;
+}
+
+.icon-menu-close-adj {
+    background-image:URL('../images/cross-icon-adj.svg');
+    width: 32px;
+    height: 32px;
 }
 
 .grid-view-icon {

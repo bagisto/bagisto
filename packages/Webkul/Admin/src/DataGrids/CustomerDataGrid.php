@@ -30,14 +30,14 @@ class CustomerDataGrid
             'table' => 'customers',
             'select' => 'id',
             'perpage' => 10,
-            'aliased' => false, //use this with false as default and true in case of joins
+            'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
                 [
                     'route' => route('admin.datagrid.delete'),
                     'method' => 'DELETE',
                     'label' => 'Delete',
-                    'type' => 'button',
+                    'type' => 'button', //select || button only
                 ],
             ],
 
@@ -56,53 +56,45 @@ class CustomerDataGrid
             ],
 
             'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
+
             ],
 
             //use aliasing on secodary columns if join is performed
-
             'columns' => [
-
                 [
                     'name' => 'id',
-                    'alias' => 'customerId',
+                    'alias' => 'ID',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Customer ID',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'first_name',
-                    'alias' => 'customerFirstName',
+                    'alias' => 'FirstName',
                     'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
+                    'label' => 'Customer First Name',
+                    'sortable' => false,
                 ],
                 [
                     'name' => 'email',
-                    'alias' => 'customerEmail',
+                    'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'Email',
-                    'sortable' => true,
+                    'label' => 'Customer E-Mail',
+                    'sortable' => false,
                 ],
                 [
                     'name' => 'phone',
-                    'alias' => 'customerPhone',
+                    'alias' => 'Phone',
                     'type' => 'number',
-                    'label' => 'Phone',
+                    'label' => 'Customer Phone',
                     'sortable' => true,
                 ],
                 [
                     'name' => 'customer_group_id',
-                    'alias' => 'customerGroupId',
+                    'alias' => 'CustomerGroupId',
                     'type' => 'number',
                     'label' => 'Customer Group',
-                    'sortable' => true,
+                    'sortable' => false,
                 ],
             ],
 
@@ -111,49 +103,31 @@ class CustomerDataGrid
             'filterable' => [
 
                 [
-                    'name' => 'id',
-                    'alias' => 'customerId',
+                    'column' => 'id',
+                    'alias' => 'ID',
                     'type' => 'number',
-                    'label' => 'ID',
+                    'label' => 'Customer ID',
                 ],
                 [
-                    'name' => 'first_name',
-                    'alias' => 'customerFirstName',
+                    'column' => 'first_name',
+                    'alias' => 'FirstName',
                     'type' => 'string',
-                    'label' => 'Name',
-                ],
-                [
-                    'name' => 'email',
-                    'alias' => 'customerEmail',
-                    'type' => 'string',
-                    'label' => 'Email',
-                ],
-                [
-                    'name' => 'phone',
-                    'alias' => 'customerPhone',
-                    'type' => 'number',
-                    'label' => 'Phone',
-                ],
-                [
-                    'name' => 'customer_group_id',
-                    'alias' => 'customerGroupId',
-                    'type' => 'string',
-                    'label' => 'Customer Group',
-                ],
+                    'label' => 'Customer First Name',
+                ]
             ],
 
             //don't use aliasing in case of searchables
 
             'searchable' => [
                 [
-                    'column' => 'first_name',
+                    'column' => 'FirstName',
                     'type' => 'string',
-                    'label' => 'Title',
+                    'label' => 'Customer First Name',
                 ],
                 [
                     'column' => 'email',
                     'type' => 'string',
-                    'label' => 'Rating',
+                    'label' => 'Customer E-Mail',
                 ],
             ],
 

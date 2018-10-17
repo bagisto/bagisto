@@ -262,79 +262,46 @@
     </div>
 </div>
 
-
-
 @push('scripts')
+    <script>
+        window.onload = function() {
+            var hamMenu = document.getElementById("hammenu");
+            var search = document.getElementById("search");
+            var searchResponsive = document.getElementsByClassName('search-responsive')[0];
+            var sortLimit = document.getElementsByClassName('reponsive-sorter-limiter')[0];
+            var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
+            var navResponsive = document.getElementsByClassName('responsive-nav')[0];
+            var thumbList = document.getElementsByClassName('thumb-list')[0];
 
-<script>
+            search.addEventListener("click", header);
+            hamMenu.addEventListener("click", header);
 
-    window.onload = function() {
-        var hamMenu = document.getElementById("hammenu");
-        var search = document.getElementById("search");
-
-        var searchResponsive = document.getElementsByClassName('search-responsive')[0];
-        var sortLimit = document.getElementsByClassName('reponsive-sorter-limiter')[0];
-        var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
-        var navResponsive = document.getElementsByClassName('responsive-nav')[0];
-        var thumbList = document.getElementsByClassName('thumb-list')[0];
-        var thumbFrame = document.getElementsByClassName('thumb-frame');
-        var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
-
-        search.addEventListener("click", header);
-        hamMenu.addEventListener("click", header);
-
-        // activate on window resize
-        window.addEventListener('resize', function(){
-            if(window.innerWidth > 720){
-                searchResponsive.style.display = 'none';
-                navResponsive.style.display = 'none';
-                if(layerFilter && sortLimit){
-                    layerFilter.style.display ="none";
-                    sortLimit.style.display ="none";
+            // for header responsive icon
+            function header(){
+                var className = document.getElementById(this.id).className;
+                if(className === 'icon icon-search' ){
+                    search.classList.remove("icon-search");
+                    search.classList.add("icon-menu-close");
+                    hamMenu.classList.remove("icon-menu-close");
+                    hamMenu.classList.add("icon-menu");
+                    searchResponsive.style.display = 'block';
+                    navResponsive.style.display = 'none';
+                }else if(className === 'icon icon-menu'){
+                    hamMenu.classList.remove("icon-menu");
+                    hamMenu.classList.add("icon-menu-close");
+                    search.classList.remove("icon-menu-close");
+                    search.classList.add("icon-search");
+                    searchResponsive.style.display = 'none';
+                    navResponsive.style.display = 'block';
+                }else{
+                    search.classList.remove("icon-menu-close");
+                    search.classList.add("icon-search");
+                    hamMenu.classList.remove("icon-menu-close");
+                    hamMenu.classList.add("icon-menu");
+                    searchResponsive.style.display = 'none';
+                    navResponsive.style.display = 'none';
                 }
-            }
-            if(window.innerWidth < 1313 && window.innerWidth > 720){
-                if(thumbList){
-                    thumbList.style.maxHeight = productHeroImage.offsetHeight + "px";
-                    for(let i=0 ; i < thumbFrame.length ; i++){
-                        thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
-                    }
-                }
-            }else {
-                for(let i=0 ; i < thumbFrame.length ; i++){
-                    thumbFrame[i].style.height = 120 + "px";
-                }
-            }
-        });
-
-        // for header responsive icon
-        function header(){
-            var className = document.getElementById(this.id).className;
-            if(className === 'icon icon-search' ){
-                search.classList.remove("icon-search");
-                search.classList.add("icon-menu-close");
-                hamMenu.classList.remove("icon-menu-close");
-                hamMenu.classList.add("icon-menu");
-                searchResponsive.style.display = 'block';
-                navResponsive.style.display = 'none';
-            }else if(className === 'icon icon-menu'){
-                hamMenu.classList.remove("icon-menu");
-                hamMenu.classList.add("icon-menu-close");
-                search.classList.remove("icon-menu-close");
-                search.classList.add("icon-search");
-                searchResponsive.style.display = 'none';
-                navResponsive.style.display = 'block';
-            }else{
-                search.classList.remove("icon-menu-close");
-                search.classList.add("icon-search");
-                hamMenu.classList.remove("icon-menu-close");
-                hamMenu.classList.add("icon-menu");
-                searchResponsive.style.display = 'none';
-                navResponsive.style.display = 'none';
             }
         }
-    }
-
-</script>
-
+    </script>
 @endpush

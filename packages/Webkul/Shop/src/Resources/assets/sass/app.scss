@@ -481,7 +481,7 @@ section.slider-block {
         }
 
         .nav a:first-child{
-            margin-left: 20px;
+            // margin-left: 20px;
         }
 
         .nav  li  > .icon{
@@ -1658,61 +1658,51 @@ section.review {
 
     .review-layouter {
         display: flex;
-        flex-flow: row;
-        margin-top: 20px;
+        flex-direction: row;
 
         .product-info {
 
-            .image {
-                border:1px solid red;
-
+            .product-image {
                 img {
+                    display: block;
                     height: 280px;
                     width: 280px;
                 }
             }
 
-            .heading {
+            .product-name {
                 margin-top: 20px;
 
                 span {
                     font-size: 24px;
-
                 }
             }
 
-            .price {
+            .product-price {
                 margin-top: 10px;
 
                 .pro-price {
                     font-size: 24px;
                     color: $disc-price;
-
                 }
 
                 .pro-price-not {
                     margin-left: 10px;
                     color: $disc-price-pro;
-
                 }
 
                 .offer {
                     margin-left: 10px;
-
                 }
             }
         }
 
-        .review-info {
+        .review-form {
             margin-left: 20px;
             width: 49%;
 
             .heading {
                 margin-top: 10px;
-
-                span {
-
-                }
 
                 .btn.btn-primary.right {
                    float: right;

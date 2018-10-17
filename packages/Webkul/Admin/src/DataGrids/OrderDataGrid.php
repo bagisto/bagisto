@@ -5,15 +5,14 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-
 /**
- * Category DataGrid
+ * Order DataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class CategoryDataGrid
+class OrderDataGrid
 {
     /**
      * The Data Grid implementation.
@@ -26,10 +25,10 @@ class CategoryDataGrid
     {
 
             return DataGrid::make([
-            'name' => 'Categories',
-            'table' => 'categories as cat',
-            'select' => 'cat.id',
-            'perpage' => 10,
+            'name' => 'Orders',
+            'table' => 'orders as ord',
+            'select' => 'ord.id',
+            'perpage' => 5,
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
