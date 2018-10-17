@@ -30,5 +30,4 @@
             }
         });
     });
-</script>
 @endpush
