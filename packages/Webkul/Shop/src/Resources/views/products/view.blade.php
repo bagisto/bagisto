@@ -65,15 +65,13 @@
                     </accordian>
 
                     @include ('shop::products.view.attributes')
-                    
+
                     @include ('shop::products.view.reviews')
                 </div>
             </form>
         </div>
-
         @include ('shop::products.view.up-sells')
     </section>
-
 @endsection
 
 @push('scripts')
@@ -93,21 +91,6 @@
             }
         }
     }
-
-    $(document).ready(function() {
-
-        var thumbList = document.getElementsByClassName('thumb-list')[0];
-        var thumbFrame = document.getElementsByClassName('thumb-frame');
-        var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
-
-        // for product page resize image
-        if(thumbList && productHeroImage){
-            thumbList.style.maxHeight = productHeroImage.offsetHeight + "px";
-            for(let i=0 ; i < thumbFrame.length ; i++){
-                thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
-            }
-        }
-    })
 
 </script>
 @endpush

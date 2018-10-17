@@ -12,11 +12,11 @@
 
         <div class="account-head">
 
-            {{--  <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>  --}}
+            <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
 
             <span class="account-heading">{{ __('shop::app.customer.account.profile.index.title') }}</span>
 
-            <span class="account-edit">
+            <span class="account-action">
                 <a href="{{ route('customer.profile.edit') }}">{{ __('shop::app.customer.account.profile.index.edit') }}</a>
             </span>
 

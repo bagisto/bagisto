@@ -13,14 +13,14 @@
         @yield('head')
 
         @yield('css')
-        
+
     </head>
-    
+
     <body>
         <div id="app">
 
             <flash-wrapper ref='flashes'></flash-wrapper>
-        
+
             @include ('admin::layouts.nav-top')
 
             @include ('admin::layouts.nav-left')
@@ -44,8 +44,10 @@
             @endif
 
             window.serverErrors = [];
-            @if (count($errors))
-                window.serverErrors = @json($errors->getMessages());
+            @if(isset($errors))
+                @if (count($errors))
+                    window.serverErrors = @json($errors->getMessages());
+                @endif
             @endif
         </script>
 

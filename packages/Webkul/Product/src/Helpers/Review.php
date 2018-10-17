@@ -7,7 +7,7 @@ class Review extends AbstractProduct
     /**
      * Returns the product's avg rating
      *
-    * @param Product $product
+     * @param Product $product
      * @return float
      */
     public function getReviews($product)
@@ -18,7 +18,7 @@ class Review extends AbstractProduct
     /**
      * Returns the product's avg rating
      *
-    * @param Product $product
+     * @param Product $product
      * @return float
      */
     public function getAverageRating($product)

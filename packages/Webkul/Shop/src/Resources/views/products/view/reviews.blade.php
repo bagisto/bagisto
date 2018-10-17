@@ -70,4 +70,10 @@
 
     </div>
 </div>
+@else
+    @if(!is_null($customer))
+        <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
+            {{ __('shop::app.products.write-review-btn') }}
+        </a>
+    @endif
 @endif

@@ -9,11 +9,12 @@
 
     <div class="account-layout">
 
-        <div class="account-head">
+        <div class="account-head mb-15">
             <span class="account-heading">{{ __('shop::app.wishlist.title') }}</span>
 
+            <span class="account-heading">{{ __('shop::app.wishlist.title') }}</span>
             @if(count($items))
-            <div class="account-edit">
+            <div class="account-action">
                 <a href="" style="margin-right: 15px;">{{ __('shop::app.wishlist.deleteall') }}</a>
                 <a href="">{{ __('shop::app.wishlist.moveall') }}</a>
             </div>
@@ -40,7 +41,7 @@
                     <div class="operations">
                         <a class="mb-50" href="{{ route('customer.wishlist.remove', $item->id) }}"><span class="icon trash-icon"></span></a>
 
-                        <button class="btn btn-primary btn-md">Move To Cart</button>
+                        <a href="{{ route('customer.wishlist.move', $item->id) }}" class="btn btn-primary btn-md">{{ __('shop::app.wishlist.move-to-cart') }}</a>
                     </div>
                 </div>
                 <div class="horizontal-rule mb-10 mt-10"></div>

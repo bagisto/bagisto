@@ -129,25 +129,25 @@ class ProductDataGrid
             'filterable' => [
                 //column, type, and label
                 [
-                    'name' => 'prods.id',
+                    'column' => 'prods.id',
                     'alias' => 'productID',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
-                    'name' => 'prods.sku',
+                    'column' => 'prods.sku',
                     'alias' => 'productCode',
                     'type' => 'string',
                     'label' => 'SKU',
                 ],
                 [
-                    'name' => 'attfam.name',
+                    'column' => 'attfam.name',
                     'alias' => 'FamilyName',
                     'type' => 'string',
                     'label' => 'Family Name',
                 ],
                 [
-                    'name' => 'pi.qty',
+                    'column' => 'pi.qty',
                     'alias' => 'ProductQuantity',
                     'type' => 'number',
                     'label' => 'Product Quatity',

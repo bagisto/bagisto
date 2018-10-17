@@ -19,7 +19,7 @@ class CustomerReviewDataGrid
      * The CustomerReviewDataGrid
      * implementation.
      *
-     * @var ReviewsDataGrid
+     * @var CustomerReviewsDataGrid
      * for Reviews
      */
 
@@ -57,13 +57,6 @@ class CustomerReviewDataGrid
             ],
 
             'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
             ],
 
             //use aliasing on secodary columns if join is performed
@@ -76,67 +69,51 @@ class CustomerReviewDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'title',
                     'alias' => 'titleName',
                     'type' => 'string',
                     'label' => 'Title',
                     'sortable' => true,
-                ],
-                [
-                    'name' => 'rating',
-                    'alias' => 'productRating',
-                    'type' => 'number',
-                    'label' => 'Rating',
-                    'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'comment',
                     'alias' => 'productComment',
                     'type' => 'string',
                     'label' => 'Comment',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'status',
                     'alias' => 'reviewStatus',
                     'type' => 'number',
                     'label' => 'Status',
                     'sortable' => true,
                 ],
-
             ],
 
             //don't use aliasing in case of filters
-
             'filterable' => [
                 [
-                    'name' => 'id',
+                    'column' => 'id',
                     'alias' => 'reviewId',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
-                    'name' => 'title',
+                ], [
+                    'column' => 'title',
                     'alias' => 'titleName',
                     'type' => 'string',
                     'label' => 'Title',
-                ],
-                [
-                    'name' => 'rating',
+                ], [
+                    'column' => 'rating',
                     'alias' => 'productRating',
                     'type' => 'number',
                     'label' => 'Rating',
-                ],
-                [
-                    'name' => 'comment',
+                ], [
+                    'column' => 'comment',
                     'alias' => 'productComment',
                     'type' => 'string',
                     'label' => 'Comment',
-                ],
-                [
-                    'name' => 'status',
+                ], [
+                    'column' => 'status',
                     'alias' => 'reviewStatus',
                     'type' => 'string',
                     'label' => 'Status',
@@ -144,14 +121,12 @@ class CustomerReviewDataGrid
             ],
 
             //don't use aliasing in case of searchables
-
             'searchable' => [
                 [
                     'column' => 'title',
                     'type' => 'string',
                     'label' => 'Title',
-                ],
-                [
+                ], [
                     'column' => 'rating',
                     'type' => 'number',
                     'label' => 'Rating',

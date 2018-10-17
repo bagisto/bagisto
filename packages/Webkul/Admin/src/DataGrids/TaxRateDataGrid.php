@@ -24,7 +24,6 @@ class TaxRateDataGrid
     {
 
         return DataGrid::make([
-
             'name' => 'Tax Rates',
             'table' => 'tax_rates as tr',
             'select' => 'tr.id',
@@ -64,21 +63,13 @@ class TaxRateDataGrid
                     'icon' => 'icon trash-icon',
                 ],
             ],
-            'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
-            ],
+            'join' => [],
 
             //use aliasing on secodary columns if join is performed
             'columns' => [
                 [
                     'name' => 'tr.id',
-                    'alias' => 'ID',
+                    'alias' => 'id',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
@@ -90,7 +81,7 @@ class TaxRateDataGrid
                     'label' => 'Identifier',
                     'sortable' => true,
                     // 'wrapper' => function ($value, $object) {
-                    //     return '<a class="color-red">' . $object->Name . '</a>';
+                    //     return '<a class="color-red">' . $object->identifier . '</a>';
                     // },
                 ],
                 [
@@ -119,32 +110,27 @@ class TaxRateDataGrid
             //don't use aliasing in case of filters
             'filterable' => [
                 [
-                    'name' => 'tr.id',
+                    'column' => 'tr.id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
-                    'name' => 'tr.identifier',
+                ], [
+                    'column' => 'tr.identifier',
                     'alias' => 'identifier',
                     'type' => 'string',
                     'label' => 'Identifier',
-                ],
-                [
-                    'name' => 'tr.state',
+                ], [
+                    'column' => 'tr.state',
                     'alias' => 'state',
                     'type' => 'string',
                     'label' => 'State',
-                ],
-                [
-                    'name' => 'tr.country',
+                ], [
+                    'column' => 'tr.country',
                     'alias' => 'country',
                     'type' => 'string',
                     'label' => 'Country',
-                ],
-
-                [
-                    'name' => 'tr.tax_rate',
+                ], [
+                    'column' => 'tr.tax_rate',
                     'alias' => 'tax_rate',
                     'type' => 'number',
                     'label' => 'Tax Rate',
@@ -156,22 +142,6 @@ class TaxRateDataGrid
                     'column' => 'tr.identifier',
                     'type' => 'string',
                     'label' => 'Identifier',
-                ],
-                [
-                    'column' => 'tr.state',
-                    'type' => 'string',
-                    'label' => 'State',
-                ],
-                [
-                    'column' => 'tr.country',
-                    'type' => 'string',
-                    'label' => 'Country',
-                ],
-
-                [
-                    'column' => 'tr.tax_rate',
-                    'type' => 'number',
-                    'label' => 'Tax Rate',
                 ],
             ],
             'operators' => [

@@ -426,6 +426,7 @@ section.slider-block {
         }
         ul.right-responsive {
             display: none;
+            cursor: pointer;
 
             li {
                 margin-right : 5px;
@@ -481,7 +482,7 @@ section.slider-block {
         }
 
         .nav a:first-child{
-            margin-left: 20px;
+            // margin-left: 20px;
         }
 
         .nav  li  > .icon{
@@ -666,6 +667,10 @@ section.slider-block {
             border-bottom: 1px solid $border-color;
         }
 
+        .nav li ul  {
+            padding-left: 30px;
+        }
+
         .nav li:first-child {
             border-top: 1px solid $border-color;
         }
@@ -674,6 +679,7 @@ section.slider-block {
             float:none;
             height: 45px;
             display: none;
+            border: none;
 
             img {
                 margin-right:6px;
@@ -887,23 +893,6 @@ section.product-detail {
                 width: 604px;
                 height: 650px;
                 max-width: 604px;
-
-                .loader {
-                    border: 16px solid $border-color;
-                    border-top: 16px solid $brand-color;
-                    border-radius: 50%;
-                    width: 50px;
-                    height: 50px;
-                    animation: spin 2s linear infinite;
-                    margin-left: 20%;
-                    position: absolute;
-                    margin-top: 200px;
-                }
-
-                @keyframes spin {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                }
 
                 div {
                     display: flex;
@@ -1658,61 +1647,51 @@ section.review {
 
     .review-layouter {
         display: flex;
-        flex-flow: row;
-        margin-top: 20px;
+        flex-direction: row;
 
         .product-info {
 
-            .image {
-                border:1px solid red;
-
+            .product-image {
                 img {
+                    display: block;
                     height: 280px;
                     width: 280px;
                 }
             }
 
-            .heading {
+            .product-name {
                 margin-top: 20px;
 
                 span {
                     font-size: 24px;
-
                 }
             }
 
-            .price {
+            .product-price {
                 margin-top: 10px;
 
                 .pro-price {
                     font-size: 24px;
                     color: $disc-price;
-
                 }
 
                 .pro-price-not {
                     margin-left: 10px;
                     color: $disc-price-pro;
-
                 }
 
                 .offer {
                     margin-left: 10px;
-
                 }
             }
         }
 
-        .review-info {
+        .review-form {
             margin-left: 20px;
             width: 49%;
 
             .heading {
                 margin-top: 10px;
-
-                span {
-
-                }
 
                 .btn.btn-primary.right {
                    float: right;

@@ -13,14 +13,17 @@
     <div class="account-layout">
 
         <div class="account-head">
+            <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
             <span class="account-heading">{{ __('shop::app.customer.account.address.index.title') }}</span>
 
             @if(!$address->isEmpty())
-            <span class="account-edit">
+            <span class="account-action">
                 <a href="{{ route('customer.address.edit') }}">
                     {{ __('shop::app.customer.account.address.index.edit') }}
                 </a>
             </span>
+            @else
+            <span></span>
             @endif
             <div class="horizontal-rule"></div>
         </div>
