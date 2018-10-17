@@ -40,30 +40,32 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->name('admin.dashboard.index');
 
             //Customers Management Routes
-
-            Route::get('customers', 'Webkul\Core\Http\Controllers\CustomerController@index')->defaults('_config', [
+            Route::get('customer', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config', [
                 'view' => 'admin::customers.index'
             ])->name('admin.customer.index');
 
-            Route::get('customers/orders', 'Webkul\Core\Http\Controllers\CustomerController@index')->defaults('_config',[
+            Route::get('customer/orders', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config',[
                 'view' => 'admin::customers.orders.index'
             ])->name('admin.customer.orders.index');
 
-            Route::get('customers/create', 'Webkul\Core\Http\Controllers\CustomerController@create')->defaults('_config',[
+            Route::get('customer/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@create')->defaults('_config',[
                 'view' => 'admin::customers.create'
             ])->name('admin.customer.create');
 
-            Route::post('customers/create', 'Webkul\Core\Http\Controllers\CustomerController@store')->defaults('_config',[
+            Route::post('customer/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@store')->defaults('_config',[
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.store');
 
-            Route::get('customers/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@edit')->defaults('_config',[
+            Route::get('customer/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@edit')->defaults('_config',[
                 'view' => 'admin::customers.edit'
             ])->name('admin.customer.edit');
 
-            Route::put('customers/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@update')->defaults('_config', [
+            Route::put('customer/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@update')->defaults('_config', [
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.update');
+
+            Route::get('customers/delete/{id}', 'Webkul\Admin\Http\Controllers\CustomerController@destroy')->name('admin.customer.delete');
+
 
             Route::get('reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
                 'view' => 'admin::customers.review.index'
@@ -76,6 +78,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@update')->defaults('_config', [
                 'redirect' => 'admin.customer.review.index'
             ])->name('admin.customer.review.update');
+
 
             // Sales Routes
             Route::prefix('sales')->group(function () {
@@ -153,6 +156,8 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.products.index'
                 ])->name('admin.catalog.products.update');
 
+                Route::get('/products/delete/{id}', 'Webkul\Product\Http\Controllers\ProductController@destroy')->name('admin.catalog.products.delete');
+
 
                 // Catalog Category Routes
                 Route::get('/categories', 'Webkul\Category\Http\Controllers\CategoryController@index')->defaults('_config', [
@@ -174,6 +179,8 @@ Route::group(['middleware' => ['web']], function () {
                 Route::put('/categories/edit/{id}', 'Webkul\Category\Http\Controllers\CategoryController@update')->defaults('_config', [
                     'redirect' => 'admin.catalog.categories.index'
                 ])->name('admin.catalog.categories.update');
+
+                Route::get('/categories/delete/{id}', 'Webkul\Category\Http\Controllers\CategoryController@destroy')->name('admin.catalog.categories.delete');
 
 
                 // Catalog Attribute Routes
@@ -197,9 +204,7 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.attributes.index'
                 ])->name('admin.catalog.attributes.update');
 
-                Route::get('/attributes/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@destroy')->defaults('_config', [
-                    'view' => 'admin::catalog.attributes.delete'
-                ])->name('admin.catalog.attributes.delete');
+                Route::get('/attributes/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@destroy')->name('admin.catalog.attributes.delete');
 
 
                 // Catalog Family Routes
@@ -222,6 +227,8 @@ Route::group(['middleware' => ['web']], function () {
                 Route::put('/families/edit/{id}', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@update')->defaults('_config', [
                     'redirect' => 'admin.catalog.families.index'
                 ])->name('admin.catalog.families.update');
+
+                Route::get('/families/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@destroy')->name('admin.catalog.families.delete');
             });
 
 
@@ -291,6 +298,8 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.locales.index'
             ])->name('admin.locales.store');
 
+            Route::get('/locales/delete/{id}', 'Webkul\Core\Http\Controllers\LocaleController@destroy')->name('admin.locales.delete');
+
 
             // Currency Routes
             Route::get('/currencies', 'Webkul\Core\Http\Controllers\CurrencyController@index')->defaults('_config', [
@@ -304,6 +313,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/currencies/create', 'Webkul\Core\Http\Controllers\CurrencyController@store')->defaults('_config', [
                 'redirect' => 'admin.currencies.index'
             ])->name('admin.currencies.store');
+
+            Route::get('/currencies/delete/{id}', 'Webkul\Core\Http\Controllers\CurrencyController@destroy')->name('admin.currencies.delete');
 
 
             // Exchange Rates Routes
@@ -327,6 +338,8 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.exchange_rates.index'
             ])->name('admin.exchange_rates.update');
 
+            Route::get('/exchange_rates/delete/{id}', 'Webkul\Core\Http\Controllers\ExchangeRateController@destroy')->name('admin.exchange_rates.delete');
+
 
             // Inventory Source Routes
             Route::get('/inventory_sources', 'Webkul\Inventory\Http\Controllers\InventorySourceController@index')->defaults('_config', [
@@ -348,6 +361,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('/inventory_sources/edit/{id}', 'Webkul\Inventory\Http\Controllers\InventorySourceController@update')->defaults('_config', [
                 'redirect' => 'admin.inventory_sources.index'
             ])->name('admin.inventory_sources.update');
+
+            Route::get('/inventory_sources/delete/{id}', 'Webkul\Inventory\Http\Controllers\InventorySourceController@destroy')->name('admin.inventory_sources.delete');
 
 
             // Channel Routes
@@ -371,6 +386,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.channels.index'
             ])->name('admin.channels.update');
 
+            Route::get('/channels/delete/{id}', 'Webkul\Core\Http\Controllers\ChannelController@destroy')->name('admin.channels.delete');
 
 
             // Admin Profile route

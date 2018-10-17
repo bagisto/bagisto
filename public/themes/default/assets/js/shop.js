@@ -30905,7 +30905,7 @@ var render = function() {
       ? _c("i", {
           class: [
             _vm.show
-              ? "icon arrow-down-icon mt-15"
+              ? "icon icon-arrow-down mt-15"
               : "icon dropdown-right-icon mt-15"
           ],
           on: { click: _vm.showOrHide }

@@ -36,6 +36,20 @@ class ShopServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $themes = $this->app->make('themes');
+
+        if (!$themes->current() && \Config::get('themes.default')) {
+            $themes->set(\Config::get('themes.default'));
+        }
+    }
+
+    /**
      * Bind the the data to the views
      *
      * @return void
@@ -64,7 +78,7 @@ class ShopServiceProvider extends ServiceProvider
 
         Event::listen('customer.menu.build', function ($menu) {
             $menu->add('profile', 'Profile', 'customer.profile.index', 1);
-            
+
             $menu->add('orders', 'Orders', 'customer.orders.index', 2);
 
             $menu->add('address', 'Address', 'customer.address.index', 3);

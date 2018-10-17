@@ -7,7 +7,7 @@
 @section('content')
     <div class="content">
 
-        <form method="POST" action="{{ route('admin.channels.update', $channel->id) }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.channels.update', $channel->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
                 <div class="page-title">
                     <h1>{{ __('admin::app.settings.channels.edit-title') }}</h1>
@@ -30,7 +30,8 @@
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.channels.code') }}</label>
-                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') ?: $channel->code }}" v-code/>
+                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ $channel->code }}" disabled="disabled"/>
+                                <input type="hidden" name="code" value="{{ $channel->code }}"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
@@ -102,6 +103,37 @@
                                     @endforeach
                                 </select>
                                 <span class="control-error" v-if="errors.has('base_currency_id')">@{{ errors.first('base_currency_id') }}</span>
+                            </div>
+
+                        </div>
+                    </accordian>
+
+                    <accordian :title="'{{ __('admin::app.settings.channels.design') }}'" :active="true">
+                        <div slot="body">
+                            <div class="control-group">
+                                <label for="theme">{{ __('admin::app.settings.channels.theme') }}</label>
+
+                                <?php $selectedOption = old('theme') ?: $channel->theme ?>
+
+                                <select class="control" id="theme" name="theme">
+                                    @foreach(themes()->all() as $theme)
+                                        <option value="{{ $theme->code }}" {{ $selectedOption == $theme->code ? 'selected' : '' }}>
+                                            {{ $theme->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label>{{ __('admin::app.settings.channels.logo') }}
+
+                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false" :images='"{{ $channel->logo_url }}"'></image-wrapper>
+                            </div>
+
+                            <div class="control-group">
+                                <label>{{ __('admin::app.settings.channels.favicon') }}
+
+                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="favicon" :multiple="false" :images='"{{ $channel->favicon_url }}"'></image-wrapper>
                             </div>
 
                         </div>

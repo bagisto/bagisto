@@ -134,5 +134,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->category->delete($id);
+
+        session()->flash('success', 'Category deleted successfully.');
+
+        return redirect()->back();
     }
 }

@@ -200,6 +200,7 @@ return [
         Konekt\Concord\ConcordServiceProvider::class,
 
         //Webkul packages
+        Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\Admin\Providers\AdminServiceProvider::class,
         Webkul\Ui\Providers\UiServiceProvider::class,
@@ -210,7 +211,6 @@ return [
         Webkul\Customer\Providers\CustomerServiceProvider::class,
         Webkul\Inventory\Providers\InventoryServiceProvider::class,
         Webkul\Product\Providers\ProductServiceProvider::class,
-        Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\Checkout\Providers\CheckoutServiceProvider::class,
         Webkul\Shipping\Providers\ShippingServiceProvider::class,
         Webkul\Payment\Providers\PaymentServiceProvider::class,
