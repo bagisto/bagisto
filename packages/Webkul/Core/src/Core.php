@@ -3,63 +3,80 @@
 namespace Webkul\Core;
 
 use Carbon\Carbon;
-use Webkul\Core\Models\Channel as ChannelModel;
-use Webkul\Core\Models\Locale as LocaleModel;
-use Webkul\Core\Models\Currency as CurrencyModel;
-use Webkul\Core\Models\TaxCategory as TaxCategory;
-use Webkul\Core\Models\TaxRate as TaxRate;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
+use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Core\Repositories\LocaleRepository;
 use Illuminate\Support\Facades\Config;
 
 class Core
 {
     /**
-     * CurrencyRepository model
+     * ChannelRepository class
+     *
+     * @var mixed
+     */
+    protected $channelRepository;
+
+    /**
+     * CurrencyRepository class
      *
      * @var mixed
      */
     protected $currencyRepository;
 
     /**
-     * ExchangeRateRepository model
+     * ExchangeRateRepository class
      *
      * @var mixed
      */
     protected $exchangeRateRepository;
 
     /**
-     * CountryRepository model
+     * CountryRepository class
      *
      * @var mixed
      */
     protected $countryRepository;
 
     /**
-     * CountryStateRepository model
+     * CountryStateRepository class
      *
      * @var mixed
      */
     protected $countryStateRepository;
 
     /**
+     * LocaleRepository class
+     *
+     * @var mixed
+     */
+    protected $localeRepository;
+
+    /**
      * Create a new instance.
      *
+     * @param  Webkul\Core\Repositories\ChannelRepository      $channelRepository
      * @param  Webkul\Core\Repositories\CurrencyRepository     $currencyRepository
      * @param  Webkul\Core\Repositories\ExchangeRateRepository $exchangeRateRepository
      * @param  Webkul\Core\Repositories\CountryRepository      $countryRepository
      * @param  Webkul\Core\Repositories\CountryStateRepository $countryStateRepository
+     * @param  Webkul\Core\Repositories\LocaleRepository       $localeRepository
      * @return void
      */
     public function __construct(
+        ChannelRepository $channelRepository,
         CurrencyRepository $currencyRepository,
         ExchangeRateRepository $exchangeRateRepository,
         CountryRepository $countryRepository,
-        CountryStateRepository $countryStateRepository
+        CountryStateRepository $countryStateRepository,
+        LocaleRepository $localeRepository
     )
     {
+        $this->channelRepository = $channelRepository;
+
         $this->currencyRepository = $currencyRepository;
 
         $this->exchangeRateRepository = $exchangeRateRepository;
@@ -67,6 +84,8 @@ class Core
         $this->countryRepository = $countryRepository;
 
         $this->countryStateRepository = $countryStateRepository;
+
+        $this->localeRepository = $localeRepository;
     }
 
     /**
@@ -80,7 +99,7 @@ class Core
         if($channels)
             return $channels;
 
-        return $channels = ChannelModel::all();
+        return $channels = $this->channelRepository->all();
     }
 
     /**
@@ -94,7 +113,7 @@ class Core
         if($channel)
             return $channel;
 
-        return $channel = ChannelModel::first();
+        return $channel = $this->channelRepository->first();
     }
 
     /**
@@ -122,7 +141,7 @@ class Core
         if($channel)
             return $channel;
 
-        return $channel = ChannelModel::first();
+        return $channel = $this->channelRepository->first();
     }
 
     /**
@@ -150,7 +169,7 @@ class Core
         if($locales)
             return $locales;
 
-        return $locales = LocaleModel::all();
+        return $locales = $this->localeRepository->all();
     }
 
     /**
@@ -165,7 +184,7 @@ class Core
         if($currencies)
             return $currencies;
 
-        return $currencies = CurrencyModel::all();
+        return $currencies = $this->currencyRepository->all();
     }
 
     /**
@@ -180,9 +199,12 @@ class Core
         if($currency)
             return $currency;
 
-        $currenctChannel = $this->getCurrentChannel();
+        $baseCurrency = $this->currencyRepository->findOneByField('code', config('app.currency'));
 
-        return $currency = $currenctChannel->base_currency;
+        if(!$baseCurrency)
+            $baseCurrency = $this->currencyRepository->first();
+
+        return $currency = $baseCurrency;
     }
 
     /**
@@ -212,7 +234,54 @@ class Core
         if($currencySymbol)
             return $currencySymbol;
 
-        return $currencySymbol = $this->getCurrentCurrency()->symbol;
+        return $currencySymbol = $this->getBaseCurrency()->symbol ?? $this->getBaseCurrencyCode();
+    }
+
+    /**
+    * Returns base channel's currency model
+    *
+    *  @return mixed
+    */
+    public function getChannelBaseCurrency()
+    {
+        static $currency;
+
+        if($currency)
+            return $currency;
+
+        $currenctChannel = $this->getCurrentChannel();
+
+        return $currency = $currenctChannel->base_currency;
+    }
+
+    /**
+    * Returns base channel's currency code
+    *
+    *  @return string
+    */
+    public function getChannelBaseCurrencyCode()
+    {
+        static $currencyCode;
+
+        if($currencyCode)
+            return $currencyCode;
+
+        return ($currency = $this->getChannelBaseCurrency()) ? $currencyCode = $currency->code : '';
+    }
+
+    /**
+    * Returns base channel's currency symbol
+    *
+    *  @return string
+    */
+    public function getChannelBaseCurrencySymbol()
+    {
+        static $currencySymbol;
+
+        if($currencySymbol)
+            return $currencySymbol;
+
+        return $currencySymbol = $this->getChannelBaseCurrency()->symbol;
     }
 
     /**
@@ -227,7 +296,7 @@ class Core
         if($currency)
             return $currency;
 
-        return $currency = CurrencyModel::first();
+        return $currency = $this->currencyRepository->first();
     }
 
     /**
@@ -261,39 +330,29 @@ class Core
     }
 
     /**
-    * Convert price with currency symbol
+    * Converts price
     *
-    * @param float $price
-    *  @return string
+    * @param float  $price
+    * @param string $targetCurrencyCode
+    * @return string
     */
-    public function convertPrice($amount, $sourceCurrencyCode = null, $targetCurrencyCode = null)
+    public function convertPrice($amount, $targetCurrencyCode = null)
     {
-        $sourceCurrency = !$sourceCurrencyCode
-                        ? $this->getBaseCurrency()
-                        : $this->currencyRepository->findByField('code', $sourceCurrencyCode);
-
         $targetCurrency = !$targetCurrencyCode
                         ? $this->getCurrentCurrency()
                         : $this->currencyRepository->findByField('code', $targetCurrencyCode);
 
-        if(!$sourceCurrency || !$sourceCurrency)
-            return $amount;
-
-        if ($sourceCurrency->code === $targetCurrency->code)
+        if(!$targetCurrency)
             return $amount;
 
         $exchangeRate = $this->exchangeRateRepository->findOneWhere([
-            'source_currency' => $sourceCurrency->id,
             'target_currency' => $targetCurrency->id,
         ]);
 
         if (null === $exchangeRate)
             return $amount;
 
-        if ($exchangeRate->source_currency->code === $sourceCurrencyCode)
-            return (float) round($amount * $exchangeRate->ratio);
-
-        return (float) round($amount / $exchangeRate->ratio);
+        return (float) round($amount * $exchangeRate->rate);
     }
 
     /**
@@ -404,27 +463,6 @@ class Core
     function is_empty_date($date)
     {
         return preg_replace('#[ 0:-]#', '', $date) === '';
-    }
-
-    // $timezonelist = \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);
-
-    /**
-     * Find all the tax rates associated with a tax category.
-     *
-     * @return Array
-     */
-
-    public function withRates($id) {
-        return TaxCategory::findOrFail($id)->tax_rates;
-    }
-
-    /**
-     * To fetch all tax rates.
-     *
-     * @return Collection
-     */
-    public function getAllTaxRates() {
-        return TaxRate::all();
     }
 
     /**

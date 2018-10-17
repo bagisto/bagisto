@@ -5,7 +5,7 @@ namespace Webkul\Tax\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Channel as Channel;
-use Webkul\Tax\Repositories\TaxCategoryRepository as TaxRule;
+use Webkul\Tax\Repositories\TaxCategoryRepository as TaxCategory;
 use Webkul\Tax\Repositories\TaxRateRepository as TaxRate;
 use Webkul\Tax\Repositories\TaxMapRepository as TaxMap;
 
@@ -25,23 +25,43 @@ class TaxCategoryController extends Controller
     protected $_config;
 
     /**
-     * Tax Rule Repository object
+     * TaxCategoryRepository
      *
-     * @var array
+     * @var mixed
      */
-    protected $taxRule;
+    protected $taxCategory;
+
+    /**
+     * TaxRateRepository
+     *
+     * @var mixed
+     */
+    protected $taxRate;
+
+    /**
+     * TaxMapRepository
+     *
+     * @var mixed
+     */
+    protected $taxMap;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Tax\Repositories\TaxCategoryRepository  $taxRule
+     * @param  Webkul\Tax\Repositories\TaxCategoryRepository $taxCategory
+     * @param  Webkul\Tax\Repositories\TaxRateRepository     $taxRate
+     * @param  Webkul\Tax\Repositories\TaxMapRepository      $taxMap
      * @return void
      */
-    public function __construct(TaxRule $taxRule, TaxRate $taxRate, TaxMap $taxMap)
+    public function __construct(
+        TaxCategory $taxCategory, 
+        TaxRate $taxRate,
+        TaxMap $taxMap
+    )
     {
         $this->middleware('admin');
 
-        $this->taxRule = $taxRule;
+        $this->taxCategory = $taxCategory;
 
         $this->taxRate = $taxRate;
 
@@ -52,7 +72,7 @@ class TaxCategoryController extends Controller
 
     /**
      * Function to show
-     * the tax rule form
+     * the tax category form
      *
      * @return view
      */
@@ -63,7 +83,7 @@ class TaxCategoryController extends Controller
 
     /**
      * Function to create
-     * the tax rule.
+     * the tax category.
      *
      * @return view
      */
@@ -77,50 +97,44 @@ class TaxCategoryController extends Controller
             'description' => 'required|string'
         ]);
 
-        if($currentTaxRule = $this->taxRule->create(request()->input())) {
-            $allTaxRules = $data['taxrates'];
+        if($currentTaxCategory = $this->taxCategory->create(request()->input())) {
+            $allTaxCategorys = $data['taxrates'];
 
-            $this->taxRule->onlyAttach($currentTaxRule->id, $allTaxRules);
+            $this->taxCategory->onlyAttach($currentTaxCategory->id, $allTaxCategorys);
 
-            session()->flash('success', 'New Tax Rule Created');
+            session()->flash('success', 'New Tax Category Created');
 
             return redirect()->route($this->_config['redirect']);
         } else {
-            session()->flash('error', 'Cannot create the tax rule');
+            session()->flash('error', 'Cannot create the tax category');
         }
 
         return view($this->_config['view']);
     }
 
     /**
-     * To show the edit
-     * form form the tax
-     * rule
+     * To show the edit form form the tax category
      *
      * @return view
      */
 
-    public function edit($id) {
+    public function edit($id)
+    {
+        $taxCategory = $this->taxCategory->findOrFail($id);
 
-        $taxRates = core()->withRates($id)->toArray();
-
-        $taxRule = $this->taxRule->findByField('id', $id)->toArray();
-
-        return view($this->_config['view'])->with('data', [$taxRule, $taxRates]);
-
+        return view($this->_config['view'], compact('taxCategory'));
     }
 
     /**
-     * To update the
-     * tax rule
+     * To update the tax category
      *
      * @return view
      */
 
     public function update($id) {
-        //return the tax rule data with the mapping table data also,
+        //return the tax category data with the mapping table data also,
         //allow the user to change the tax rates associated with the
-        // rule also.
+        // category also.
         $this->validate(request(), [
             'channel' => 'required|numeric',
             'code' => 'required|string|unique:tax_categories,id,'.$id,
@@ -138,7 +152,7 @@ class TaxCategoryController extends Controller
         $data['description'] = request()->input('description');
 
         if($this->taxRate->update($data, $id)) {
-            $this->taxRule->syncAndDetach($id, request()->input('taxrates'));
+            $this->taxCategory->syncAndDetach($id, request()->input('taxrates'));
 
             session()->flash('success', 'Tax Category is successfully edited.');
 
@@ -151,17 +165,16 @@ class TaxCategoryController extends Controller
     }
 
     /**
-     * Destroy a tax rule
+     * Destroy a tax category
      *
      * @return mixed
      */
 
     public function destroy($id) {
-        if($this->taxRule()->delete($id)) {
-            session()->flash('success', 'The tax rule is successfully deleted');
+        if($this->taxCategory()->delete($id)) {
+            session()->flash('success', 'The tax category is successfully deleted');
 
             return redirect()->back();
         }
     }
-
 }

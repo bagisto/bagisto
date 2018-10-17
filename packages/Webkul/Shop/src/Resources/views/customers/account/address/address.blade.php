@@ -17,7 +17,7 @@
             <span class="account-heading">{{ __('shop::app.customer.account.address.index.title') }}</span>
 
             @if(!$address->isEmpty())
-            <span class="account-edit">
+            <span class="account-action">
                 <a href="{{ route('customer.address.edit') }}">
                     {{ __('shop::app.customer.account.address.index.edit') }}
                 </a>

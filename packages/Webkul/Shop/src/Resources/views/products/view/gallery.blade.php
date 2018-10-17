@@ -1,4 +1,4 @@
-@inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
+@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 <?php $images = $productImageHelper->getGalleryImages($product); ?>
 
 <div class="product-image-group">

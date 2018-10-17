@@ -88,7 +88,7 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::sales.orders.view'
                 ])->name('admin.sales.orders.view');
 
-                Route::get('/orders/cancel/{order_id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@cancel')->defaults('_config', [
+                Route::get('/orders/cancel/{id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@cancel')->defaults('_config', [
                     'view' => 'admin::sales.orders.cancel'
                 ])->name('admin.sales.orders.cancel');
 
@@ -196,6 +196,10 @@ Route::group(['middleware' => ['web']], function () {
                 Route::put('/attributes/edit/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@update')->defaults('_config', [
                     'redirect' => 'admin.catalog.attributes.index'
                 ])->name('admin.catalog.attributes.update');
+
+                Route::get('/attributes/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@destroy')->defaults('_config', [
+                    'view' => 'admin::catalog.attributes.delete'
+                ])->name('admin.catalog.attributes.delete');
 
 
                 // Catalog Family Routes
@@ -367,8 +371,6 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.channels.index'
             ])->name('admin.channels.update');
 
-
-
             // Admin Profile route
             Route::get('/account', 'Webkul\User\Http\Controllers\AccountController@edit')->defaults('_config', [
                 'view' => 'admin::account.edit'
@@ -396,7 +398,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::tax.tax-categories.index'
             ])->name('admin.tax-categories.index');
 
-            // tax rule routes
+            // tax category routes
             Route::get('/tax-categories/create', 'Webkul\Tax\Http\Controllers\TaxCategoryController@show')->defaults('_config', [
                 'view' => 'admin::tax.tax-categories.create'
             ])->name('admin.tax-categories.show');
@@ -413,7 +415,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.tax-categories.index'
             ])->name('admin.tax-categories.update');
 
-            //tax rule ends
+            //tax category ends
 
 
             //tax rate

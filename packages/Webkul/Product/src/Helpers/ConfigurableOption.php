@@ -1,10 +1,10 @@
 <?php
 
-namespace Webkul\Product\Product;
+namespace Webkul\Product\Helpers;
 
 use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
-use Webkul\Product\Product\ProductImage;
-use Webkul\Product\Product\Price;
+use Webkul\Product\Helpers\ProductImage;
+use Webkul\Product\Helpers\Price;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
 
@@ -35,8 +35,8 @@ class ConfigurableOption extends AbstractProduct
      * Create a new controller instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeOptionRepository $attributeOption
-     * @param  Webkul\Product\Product\ProductImage                     $productImage
-     * @param  Webkul\Product\Product\Price                            $price
+     * @param  Webkul\Product\Helpers\ProductImage                     $productImage
+     * @param  Webkul\Product\Helpers\Price                            $price
      * @return void
      */
     public function __construct(

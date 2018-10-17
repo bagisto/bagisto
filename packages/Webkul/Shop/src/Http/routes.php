@@ -1,6 +1,7 @@
 <?php
 
 Route::group(['middleware' => ['web']], function () {
+
     Route::get('/', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
         'view' => 'shop::home.index'
     ])->name('shop.home.index');
@@ -119,6 +120,10 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('wishlist/remove/{id}', 'Webkul\Customer\Http\Controllers\WishlistController@remove')->name('customer.wishlist.remove');
 
+            Route::get('wishlist/move/{id}', 'Webkul\Customer\Http\Controllers\WishlistController@move')->name('customer.wishlist.move');
+
+            Route::get('wishlist/moveall', 'Webkul\Customer\Http\Controllers\WishlistController@moveAll')->name('customer.wishlist.moveall');
+
             //customer account
             Route::prefix('account')->group(function () {
 
@@ -163,7 +168,6 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('address/edit', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [
                     'redirect' => 'customer.address.index'
                 ])->name('customer.address.edit');
-
                 /*    Routes for Addresses ends here   */
 
                 /* Wishlist route */
@@ -172,9 +176,13 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('customer.wishlist.index');
 
                 /* Orders route */
-                Route::get('orders', 'Webkul\Customer\Http\Controllers\OrdersController@orders')->defaults('_config', [
-                    'view' => 'shop::customers.account.orders.orders'
+                Route::get('orders', 'Webkul\Shop\Http\Controllers\OrderController@index')->defaults('_config', [
+                    'view' => 'shop::customers.account.orders.index'
                 ])->name('customer.orders.index');
+
+                Route::get('orders/view/{id}', 'Webkul\Shop\Http\Controllers\OrderController@view')->defaults('_config', [
+                    'view' => 'shop::customers.account.orders.view'
+                ])->name('customer.orders.view');
 
                 /* Reviews route */
                 Route::get('reviews', 'Webkul\Customer\Http\Controllers\CustomerController@reviews')->defaults('_config', [
@@ -184,5 +192,4 @@ Route::group(['middleware' => ['web']], function () {
         });
     });
     //customer routes end here
-
 });

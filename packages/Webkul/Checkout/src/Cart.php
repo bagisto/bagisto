@@ -107,8 +107,6 @@ class Cart {
     {
         $product = $this->product->findOneByField('id', $productId);
 
-        // dd($product);
-
         //Check if the product's information is proper or not.
         if(!isset($data['product']) || !isset($data['quantity'])) {
             session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_fields'));
@@ -300,8 +298,8 @@ class Cart {
         //set the currency column with the respective currency
         $cartData['global_currency_code'] = core()->getBaseCurrencyCode();
         $cartData['base_currency_code'] = core()->getBaseCurrencyCode();
-        $cartData['channel_currency_code'] = core()->getBaseCurrencyCode();
-        $cartData['cart_currency_code'] = core()->getBaseCurrencyCode();
+        $cartData['channel_currency_code'] = core()->getChannelBaseCurrencyCode();
+        $cartData['cart_currency_code'] = core()->getCurrentCurrencyCode();
         //set the cart items and quantity
         $cartData['items_count'] = 1;
         $cartData['items_qty'] = $data['quantity'];
@@ -960,5 +958,25 @@ class Cart {
         }
 
         return $finalData;
+    }
+
+    /**
+     * Move to Cart
+     *
+     * Move a wishlist item to cart
+     */
+    public function moveToCart($productId) {
+        $data = [
+            'product' => $productId,
+            'quantity' => 1,
+        ];
+
+        $result = $this->add($productId, $data);
+
+        if($result instanceof Collection || $result == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

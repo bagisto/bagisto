@@ -8,8 +8,8 @@ use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Product\ProductImage;
-use Webkul\Product\Product\View as ProductView;
+use Webkul\Product\Helpers\ProductImage;
+use Webkul\Product\Helpers\View as ProductView;
 use Cart;
 
 /**

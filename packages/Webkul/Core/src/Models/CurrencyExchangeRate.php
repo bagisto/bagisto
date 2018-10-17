@@ -12,6 +12,6 @@ class CurrencyExchangeRate extends Model
      * @var array
      */
     protected $fillable = [
-        'source_currency', 'target_currency', 'ratio'
+        'target_currency', 'rate'
     ];
 }

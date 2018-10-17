@@ -6,8 +6,11 @@ return [
         'country' => 'Country',
         'state' => 'State'
     ],
+    'dashboard' => [
+        'title' => 'Dashboard'
+    ],
     'account' => [
-        'header-title' => 'My Account',
+        'title' => 'My Account',
         'save-btn-title' => 'Save',
         'general' => 'General',
         'name' => 'Name',
@@ -154,7 +157,7 @@ return [
     ],
     'catalog' => [
         'products' => [
-            'products' => 'Products',
+            'title' => 'Products',
             'add-product-btn-title' => 'Add Product',
             'add-title' => 'Add Product',
             'edit-title' => 'Edit Product',
@@ -185,6 +188,7 @@ return [
             'add-image-btn-title' => 'Add Image'
         ],
         'attributes' => [
+            'title' => 'Attributes',
             'add-title' => 'Add Attribute',
             'edit-title' => 'Edit Attribute',
             'save-btn-title' => 'Save Attribute',
@@ -225,7 +229,7 @@ return [
             'is_visible_on_front' => 'Visible on Product View Page on Front-end'
         ],
         'families' => [
-            'families' => 'Families',
+            'title' => 'Families',
             'add-family-btn-title' => 'Add Family',
             'add-title' => 'Add Family',
             'edit-title' => 'Edit Family',
@@ -243,7 +247,7 @@ return [
             'group-exist-error' => 'Group with same name already exists.'
         ],
         'categories' => [
-            'categories' => 'Categories',
+            'title' => 'Categories',
             'add-title' => 'Add Category',
             'edit-title' => 'Edit Category',
             'save-btn-title' => 'Save Category',
@@ -265,13 +269,10 @@ return [
     ],
 
     'configuration' => [
-        'tax' => [
-            'title' => 'Taxes',
-            'add-title' => 'Add Tax Category'
-        ],
-
         'tax-categories' => [
-            'title' => 'Add Tax Category',
+            'title' => 'Tax Categories',
+            'add-title' => 'Add Tax Category',
+            'edit-title' => 'Edit Tax Category',
             'save-btn-title' => 'Save Tax Category',
             'general' => 'Tax Category',
             'select-channel' => 'Select Channel',
@@ -286,7 +287,9 @@ return [
         ],
 
         'tax-rates' => [
-            'title' => 'Add Tax Rate',
+            'title' => 'Tax Rates',
+            'add-title' => 'Add Tax Rate',
+            'edit-title' => 'Edit Tax Rate',
             'save-btn-title' => 'Save Tax Rate',
             'general' => 'Tax Rate',
             'identifier' => 'Identifier',
@@ -342,7 +345,7 @@ return [
             'general' => 'General',
             'source_currency' => 'Source Currency',
             'target_currency' => 'Target Currency',
-            'ratio' => 'Ratio'
+            'rate' => 'Rate'
         ],
         'inventory_sources' => [
             'title' => 'Inventory Sources',
@@ -409,11 +412,46 @@ return [
             'save-btn-title' => 'Save Customer'
         ],
         'reviews' => [
-            'title' => 'Title',
-            'name' => 'Reviews',
+            'title' => 'Reviews',
+            'edit-title' => 'Edit Review',
             'rating' => 'Rating',
             'status' => 'Status',
             'comment' => 'Comment'
+        ]
+    ],
+    'mail' => [
+        'order' => [
+            'subject' => 'New Order Confirmation',
+            'heading' => 'Order Confirmation!',
+            'dear' => 'Dear :customer_name',
+            'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+            'summary' => 'Summary of Order',
+            'shipping-address' => 'Shipping Address',
+            'billing-address' => 'Billing Address',
+            'contact' => 'Contact',
+            'shipping' => 'Shipping',
+            'payment' => 'Payment',
+            'price' => 'Price',
+            'quantity' => 'Quantity',
+            'subtotal' => 'Subtotal',
+            'shipping-handling' => 'Shipping & Handling',
+            'tax' => 'Tax',
+            'grand-total' => 'Grand Total',
+            'final-summary' => 'Thanks for showing your intrest in our store. we will send you track number once it shiped.',
+            'help' => 'If you need any kind of help please contact us at :support_email',
+            'thanks' => 'Thanks!'
+        ],
+        'invoice' => [
+            'heading' => 'Your Invoice #:invoice_id for Order #:order_id',
+            'subject' => 'Invoice for your order #:order_id',
+            'summary' => 'Summary of Invoice',
+        ],
+        'shipment' => [
+            'heading' => 'Your Shipment #:shipment_id for Order #:order_id',
+            'subject' => 'Shipment for your order #:order_id',
+            'summary' => 'Summary of Shipment',
+            'carrier' => 'Carrier',
+            'tracking-number' => 'Tracking Number'
         ]
     ]
 ];

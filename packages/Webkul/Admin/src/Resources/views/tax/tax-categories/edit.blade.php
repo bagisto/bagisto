@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.tax-categories.update', $data[0][0]['id']) }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.tax-categories.update', $taxCategory->id) }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
                     <h1>{{ __('admin::app.configuration.tax-categories.edit.title') }}</h1>
@@ -32,7 +32,7 @@
                                 <select class="control" name="channel">
                                     @foreach(core()->getAllChannels() as $channelModel)
 
-                                        <option @if($data[0][0]['channel_id'] == $channelModel->id) selected @endif value="{{ $channelModel->id }}">
+                                        <option @if($taxCategory->channel_id == $channelModel->id) selected @endif value="{{ $channelModel->id }}">
                                             {{ $channelModel->name }}
                                         </option>
 
@@ -45,7 +45,7 @@
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.configuration.tax-categories.code') }}</label>
 
-                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ $data[0][0]['code'] }}"/>
+                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ $taxCategory->code }}"/>
 
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
@@ -53,7 +53,7 @@
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.configuration.tax-categories.name') }}</label>
 
-                                <input v-validate="'required'" class="control" id="name" name="name" value="{{ $data[0][0]['name'] }}"/>
+                                <input v-validate="'required'" class="control" id="name" name="name" value="{{ $taxCategory->name }}"/>
 
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
@@ -61,7 +61,7 @@
                             <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
                                 <label for="description" class="required">{{ __('admin::app.configuration.tax-categories.description') }}</label>
 
-                                <textarea v-validate="'required'" class="control" id="description" name="description">{{ $data[0][0]['description'] }}</textarea>
+                                <textarea v-validate="'required'" class="control" id="description" name="description">{{ $taxCategory->description }}</textarea>
 
                                 <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                             </div>
@@ -74,12 +74,7 @@
                                 <select multiple="multiple" class="control" id="taxrates" name="taxrates[]" v-validate="'required'">
                                     @foreach($taxRates->all() as $taxRate)
 
-                                        <option value="{{ $taxRate->id }}"
-                                        @foreach($data[1] as $selectedRate)
-                                            @if($taxRate->id == $selectedRate['id'])
-                                                selected
-                                            @endif
-                                        @endforeach>
+                                        <option value="{{ $taxRate->id }}" {{ is_numeric($taxCategory->pluck('id')->search($taxRate->id)) ? 'selected' : '' }}>
                                             {{ $taxRate->identifier }}
                                         </option>
 

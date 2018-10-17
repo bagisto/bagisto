@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Product\Product;
+namespace Webkul\Product\Helpers;
 
 class View extends AbstractProduct
 {
@@ -17,7 +17,7 @@ class View extends AbstractProduct
         $attributes = $product->attribute_family->custom_attributes;
 
         foreach($attributes as $attribute) {
-            if($attribute->is_visible_on_front) {
+            if($attribute->is_visible_on_front && $product->{$attribute->code}) {
                 $data[] = [
                     'code' => $attribute->code,
                     'label' => $attribute->name,

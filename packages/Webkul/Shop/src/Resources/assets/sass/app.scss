@@ -482,7 +482,7 @@ section.slider-block {
         }
 
         .nav a:first-child{
-            margin-left: 20px;
+            // margin-left: 20px;
         }
 
         .nav  li  > .icon{
@@ -1054,7 +1054,7 @@ section.product-detail {
                 .full-specifications {
                     td {
                         padding: 10px 0;
-                        color: $font-color-light;
+                        color: $other-font-color;
 
                         &:first-child {
                             padding-right: 40px;
@@ -1647,61 +1647,51 @@ section.review {
 
     .review-layouter {
         display: flex;
-        flex-flow: row;
-        margin-top: 20px;
+        flex-direction: row;
 
         .product-info {
 
-            .image {
-                border:1px solid red;
-
+            .product-image {
                 img {
+                    display: block;
                     height: 280px;
                     width: 280px;
                 }
             }
 
-            .heading {
+            .product-name {
                 margin-top: 20px;
 
                 span {
                     font-size: 24px;
-
                 }
             }
 
-            .price {
+            .product-price {
                 margin-top: 10px;
 
                 .pro-price {
                     font-size: 24px;
                     color: $disc-price;
-
                 }
 
                 .pro-price-not {
                     margin-left: 10px;
                     color: $disc-price-pro;
-
                 }
 
                 .offer {
                     margin-left: 10px;
-
                 }
             }
         }
 
-        .review-info {
+        .review-form {
             margin-left: 20px;
             width: 49%;
 
             .heading {
                 margin-top: 10px;
-
-                span {
-
-                }
 
                 .btn.btn-primary.right {
                    float: right;
@@ -1886,8 +1876,8 @@ section.review {
         border: 1px solid $border-color;
         width: 25%;
         height: 100%;
-        text-transform: capitalize;
         color: $font-color-light;
+        position: relative;
 
         li {
             width: 95%;
@@ -1899,6 +1889,16 @@ section.review {
             align-items: center;
             border-bottom: 1px solid $border-color;
             text-align: center;
+
+            a {
+                color: #5E5E5E;
+            }
+
+            .icon {
+                display: none;
+                position: absolute;
+                right: 12px;
+            }
         }
 
         li:first-child {
@@ -1910,98 +1910,23 @@ section.review {
         }
 
         li.active {
-            color: $brand-color;
+            a {
+                color: $brand-color;
+            }
+
+            .icon {
+                display: inline-block;
+            }
         }
     }
 
-    .responsive-side-menu{
-        display: none;
-    }
     //customer account pages content
     .account-layout {
-        margin-left: 5.5%;
-        margin-top: 1%;
+        margin-left: 40px;
         width: 100%;
 
-        .back-icon {
-           display: none;
-        }
-    }
-}
-//customer account page respoinsive css
-@media only screen and (max-width: 770px) {
-    .account-content {
-        flex-direction: column;
-
-        .account-side-menu {
-            display: none;
-            width:100%;
-            border: none;
-
-            li {
-                margin-left: 0%;
-                width: 100%;
-
-                a {
-                    color : $font-color;
-                }
-            }
-        }
-
-        .responsive-side-menu {
-            cursor: pointer;
-            padding-top:13px;
-            display: block;
-            height: 46px;
-            border-bottom: 1px solid $border-color;
-            border-top: 1px solid $border-color;
-
-            .right {
-                float: right;
-            }
-        }
-
-        .account-layout {
-            margin-left: 0%;
-            margin-top: 20px;
-
-            .account-head  {
-                display: flex;
-                justify-content: space-between;
-                border-bottom: 1px solid $border-color;
-                border-top: 1px solid $border-color;
-                height: 46px;
-
-                .back-icon {
-                    display: block;
-                }
-
-                span {
-                    margin-top: 12px;
-                    font-size: 18px;
-                }
-
-                .horizontal-rule {
-                    display: none;
-                }
-            }
-
-            .account-table-content {
-                margin-top: 2%;
-
-                table tbody tr {
-                    display: grid;
-                    margin-bottom: 20px;
-                }
-            }
-        }
-
-        .account-items-list , .edit-form {
-            margin-top: 20px;
-        }
-
-        .control-group .control {
-            width: 100%;
+        .account-head {
+            margin-bottom: 20px;
         }
     }
 }
@@ -2031,4 +1956,98 @@ section.review {
     flex-direction: column;
     min-height: 345px;
     padding: 25px;
+}
+
+.sale-container {
+    color: #5E5E5E;
+
+    .sale-section {
+
+        .secton-title {
+            font-size: 18px;
+            color: #8E8E8E;
+            padding: 15px 0;
+            border-bottom: 1px solid $border-color;
+        }
+
+        .section-content {
+            display: block;
+            padding: 20px 0;
+            border-bottom: 1px solid #E8E8E8;
+
+            .row {
+                display: block;
+                padding: 7px 0;
+
+                .title {
+                    width: 200px;
+                    letter-spacing: -0.26px;
+                    display: inline-block;
+                }
+
+                .value {
+                    letter-spacing: -0.26px;
+                    display: inline-block;
+                }
+            }
+
+            .order-box-container {
+                display: inline-block;
+                width: 100%;
+
+                .box {
+                    float: left;
+                    width: 25%;
+
+                    .box-title {
+                        padding: 10px 0;
+                        font-size: 18px;
+                        color: #8E8E8E;
+                    }
+
+
+                    .box-content {
+                        color: #3A3A3A;
+                    }
+                }
+            }
+
+            .qty-row {
+                display: block;
+            }
+        }
+    }
+
+    .totals {
+        padding-top: 20px;
+        display: inline-block;
+        width: 100%;
+        border-top: solid 1px #E8E8E8;
+
+        .sale-summary {
+            height: 130px;
+            float: right;
+            border-collapse: collapse;
+
+            tr {
+
+                td {
+                    padding: 5px 8px;
+                    width: auto;
+                    color: #3A3A3A;
+                }
+
+                &.bold {
+                    font-weight: 600;
+                    font-size: 15px;
+                }
+
+                &.border {
+                    td {
+                        border-bottom: 1px solid $border-color;
+                    }
+                }
+            }
+        }
+    }
 }

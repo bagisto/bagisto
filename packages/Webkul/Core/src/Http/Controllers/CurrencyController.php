@@ -92,6 +92,14 @@ class CurrencyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($this->currency->count() == 1) {
+            session()->flash('error', 'At least one currency is required.');
+        } else {
+            $this->currency->delete($id);
+
+            session()->flash('success', 'Currency deleted successfully.');
+        }
+
+        return redirect()->back();
     }
 }

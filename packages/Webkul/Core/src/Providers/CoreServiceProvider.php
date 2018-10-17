@@ -18,19 +18,15 @@ class CoreServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         include __DIR__ . '/../Http/helpers.php';
+
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
+
         $router->aliasMiddleware('locale', Locale::class);
 
-        $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
-
-        $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
-
-        // $this->publishes([
-        //     __DIR__ . '/../../publishable/lang' => public_path('vendor/webkul/core/lang'),
-        // ], 'public');
-
         Validator::extend('slug', 'Webkul\Core\Contracts\Validations\Slug@passes');
+        
         Validator::extend('code', 'Webkul\Core\Contracts\Validations\Code@passes');
     }
     

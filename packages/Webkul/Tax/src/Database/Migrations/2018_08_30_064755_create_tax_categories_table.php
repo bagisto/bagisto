@@ -37,6 +37,6 @@ class CreateTaxCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tax_rules');
+        Schema::dropIfExists('tax_categories');
     }
 }

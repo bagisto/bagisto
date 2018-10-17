@@ -1,4 +1,4 @@
-@inject ('reviewHelper', 'Webkul\Product\Product\Review')
+@inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @if ($total = $reviewHelper->getTotalReviews($product))
 <div class="rating-reviews">
     <div class="rating-header">
@@ -70,4 +70,10 @@
 
     </div>
 </div>
+@else
+    @if(!is_null($customer))
+        <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
+            {{ __('shop::app.products.write-review-btn') }}
+        </a>
+    @endif
 @endif

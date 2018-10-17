@@ -13,7 +13,7 @@
 
             <div class="page-action">
                 <a href="{{ route('admin.tax-rates.show') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.configuration.tax-rates.title') }}
+                    {{ __('admin::app.configuration.tax-rates.add-title') }}
                 </a>
             </div>
         </div>

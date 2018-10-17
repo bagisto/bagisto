@@ -133,6 +133,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->category->delete($id);
     }
 }

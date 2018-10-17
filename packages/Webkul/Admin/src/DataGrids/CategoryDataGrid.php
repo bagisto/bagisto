@@ -69,7 +69,6 @@ class CategoryDataGrid
                     'condition' => '=',
                     'secondaryKey' => 'cta.category_id',
                 ],
-
             ],
 
             //use aliasing on secodary columns if join is performed
@@ -105,44 +104,56 @@ class CategoryDataGrid
                     'type' => 'string',
                     'label' => 'Visible in Menu',
                     'sortable' => true,
+                    'wrapper' => function ($value) {
+                        if($value == 0)
+                            return "False";
+                        else
+                            return "True";
+                    },
                 ],
 
             ],
 
             'filterable' => [
-                // [
-                //     'column' => 'id',
-                //     'alias' => 'attribute_family_id',
-                //     'type' => 'number',
-                //     'label' => 'ID',
-                // ],
-                // [
-                //     'column' => 'code',
-                //     'alias' => 'attribute_family_code',
-                //     'type' => 'string',
-                //     'label' => 'Code',
-                // ],
-                // [
-                //     'column' => 'name',
-                //     'alias' => 'attribute_family_name',
-                //     'type' => 'string',
-                //     'label' => 'Name',
-                // ],
+                [
+                    'column' => 'cat.id',
+                    'alias' => 'catID',
+                    'type' => 'number',
+                    'label' => 'Category ID',
+                ], [
+                    'column' => 'ct.name',
+                    'alias' => 'catName',
+                    'type' => 'string',
+                    'label' => 'Category Name',
+                ], [
+                    'column' => 'cta.name',
+                    'alias' => 'parentName',
+                    'type' => 'string',
+                    'label' => 'Parent Name',
+                ], [
+                    'column' => 'cat.status',
+                    'alias' => 'catStatus',
+                    'type' => 'string',
+                    'label' => 'Visible in Menu',
+                ],
             ],
 
             //don't use aliasing in case of searchables
 
             'searchable' => [
-                // [
-                //     'column' => 'name',
-                //     'type' => 'string',
-                //     'label' => 'Name',
-                // ],
-                // [
-                //     'column' => 'code',
-                //     'type' => 'string',
-                //     'label' => 'Code',
-                // ],
+                [
+                    'column' => 'cat.id',
+                    'type' => 'number',
+                    'label' => 'Category ID',
+                ], [
+                    'column' => 'ct.name',
+                    'type' => 'string',
+                    'label' => 'Category Name',
+                ], [
+                    'column' => 'cat.status',
+                    'type' => 'string',
+                    'label' => 'Visible in Menu',
+                ]
             ],
 
             //list of viable operators that will be used
@@ -158,14 +169,11 @@ class CategoryDataGrid
                 'nlike' => "not like",
             ],
             // 'css' => []
-
         ]);
-
     }
 
     public function render()
     {
-
         return $this->createCategoryDataGrid()->render();
 
     }
