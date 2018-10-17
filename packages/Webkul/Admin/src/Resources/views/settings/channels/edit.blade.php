@@ -30,7 +30,8 @@
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.channels.code') }}</label>
-                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') ?: $channel->code }}" v-code/>
+                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ $channel->code }}" disabled="disabled"/>
+                                <input type="hidden" name="code" value="{{ $channel->code }}"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
@@ -109,6 +110,19 @@
 
                     <accordian :title="'{{ __('admin::app.settings.channels.design') }}'" :active="true">
                         <div slot="body">
+                            <div class="control-group">
+                                <label for="theme">{{ __('admin::app.settings.channels.theme') }}</label>
+
+                                <?php $selectedOption = old('theme') ?: $channel->theme ?>
+
+                                <select class="control" id="theme" name="theme">
+                                    @foreach(themes()->all() as $theme)
+                                        <option value="{{ $theme->code }}" {{ $selectedOption == $theme->code ? 'selected' : '' }}>
+                                            {{ $theme->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
                             <div class="control-group">
                                 <label>{{ __('admin::app.settings.channels.logo') }}
@@ -119,7 +133,7 @@
                             <div class="control-group">
                                 <label>{{ __('admin::app.settings.channels.favicon') }}
 
-                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="favicon" :multiple="false"></image-wrapper>
+                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="favicon" :multiple="false" :images='"{{ $channel->favicon_url }}"'></image-wrapper>
                             </div>
 
                         </div>

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Channel extends Model
 {
-    protected $fillable = ['code', 'name', 'description', 'default_locale_id', 'base_currency_id'];
+    protected $fillable = ['code', 'name', 'description', 'default_locale_id', 'base_currency_id', 'theme'];
 
     /**
      * Get the channel locales.
@@ -51,6 +51,9 @@ class Channel extends Model
      */
     public function logo_url()
     {
+        if(!$this->logo)
+            return;
+
         return Storage::url($this->logo);
     }
 
@@ -67,6 +70,9 @@ class Channel extends Model
      */
     public function favicon_url()
     {
+        if(!$this->favicon)
+            return;
+
         return Storage::url($this->favicon);
     }
 
