@@ -262,54 +262,46 @@
     </div>
 </div>
 
-
-
 @push('scripts')
+    <script>
+        window.onload = function() {
+            var hamMenu = document.getElementById("hammenu");
+            var search = document.getElementById("search");
+            var searchResponsive = document.getElementsByClassName('search-responsive')[0];
+            var sortLimit = document.getElementsByClassName('reponsive-sorter-limiter')[0];
+            var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
+            var navResponsive = document.getElementsByClassName('responsive-nav')[0];
+            var thumbList = document.getElementsByClassName('thumb-list')[0];
 
-<script>
+            search.addEventListener("click", header);
+            hamMenu.addEventListener("click", header);
 
-    window.onload = function() {
-        var hamMenu = document.getElementById("hammenu");
-        var search = document.getElementById("search");
-
-        var searchResponsive = document.getElementsByClassName('search-responsive')[0];
-        var sortLimit = document.getElementsByClassName('reponsive-sorter-limiter')[0];
-        var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
-        var navResponsive = document.getElementsByClassName('responsive-nav')[0];
-        var thumbList = document.getElementsByClassName('thumb-list')[0];
-
-        search.addEventListener("click", header);
-        hamMenu.addEventListener("click", header);
-
-
-        // for header responsive icon
-        function header(){
-            var className = document.getElementById(this.id).className;
-            if(className === 'icon icon-search' ){
-                search.classList.remove("icon-search");
-                search.classList.add("icon-menu-close");
-                hamMenu.classList.remove("icon-menu-close");
-                hamMenu.classList.add("icon-menu");
-                searchResponsive.style.display = 'block';
-                navResponsive.style.display = 'none';
-            }else if(className === 'icon icon-menu'){
-                hamMenu.classList.remove("icon-menu");
-                hamMenu.classList.add("icon-menu-close");
-                search.classList.remove("icon-menu-close");
-                search.classList.add("icon-search");
-                searchResponsive.style.display = 'none';
-                navResponsive.style.display = 'block';
-            }else{
-                search.classList.remove("icon-menu-close");
-                search.classList.add("icon-search");
-                hamMenu.classList.remove("icon-menu-close");
-                hamMenu.classList.add("icon-menu");
-                searchResponsive.style.display = 'none';
-                navResponsive.style.display = 'none';
+            // for header responsive icon
+            function header(){
+                var className = document.getElementById(this.id).className;
+                if(className === 'icon icon-search' ){
+                    search.classList.remove("icon-search");
+                    search.classList.add("icon-menu-close");
+                    hamMenu.classList.remove("icon-menu-close");
+                    hamMenu.classList.add("icon-menu");
+                    searchResponsive.style.display = 'block';
+                    navResponsive.style.display = 'none';
+                }else if(className === 'icon icon-menu'){
+                    hamMenu.classList.remove("icon-menu");
+                    hamMenu.classList.add("icon-menu-close");
+                    search.classList.remove("icon-menu-close");
+                    search.classList.add("icon-search");
+                    searchResponsive.style.display = 'none';
+                    navResponsive.style.display = 'block';
+                }else{
+                    search.classList.remove("icon-menu-close");
+                    search.classList.add("icon-search");
+                    hamMenu.classList.remove("icon-menu-close");
+                    hamMenu.classList.add("icon-menu");
+                    searchResponsive.style.display = 'none';
+                    navResponsive.style.display = 'none';
+                }
             }
         }
-    }
-
-</script>
-
+    </script>
 @endpush

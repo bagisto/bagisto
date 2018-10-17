@@ -5,7 +5,6 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-
 /**
  * Order DataGrid
  *
@@ -26,10 +25,10 @@ class OrderDataGrid
     {
 
             return DataGrid::make([
-            'name' => 'Categories',
-            'table' => 'categories as cat',
-            'select' => 'cat.id',
-            'perpage' => 10,
+            'name' => 'Orders',
+            'table' => 'orders as ord',
+            'select' => 'ord.id',
+            'perpage' => 5,
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
