@@ -11,6 +11,12 @@ return [
         ]
     ],
 
+    'footer' => [
+        'subscribe-newsletter' => 'Subscribe Newsletter',
+        'subscribe' => 'Subscribe',
+        'locale' => 'Locale',
+    ],
+
     'reviews' => [
         'add-review-page-title' => 'Add Review',
         'write-review' => 'Write a review',

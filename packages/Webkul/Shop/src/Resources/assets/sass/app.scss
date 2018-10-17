@@ -728,21 +728,19 @@ section.slider-block {
                 }
 
                 .form-container {
-                    padding-top: 10px;
+                    padding-top: 5px;
 
                     .control-group {
-                        margin: 0;
-
                         .subscribe-field {
                             width: 100%;
-                        }
 
-                        .subscribe-field::-webkit-input-placeholder {
-                            font-family: "montserrat", sans-serif;
-                        }
+                            &::-webkit-input-placeholder {
+                                font-family: "montserrat", sans-serif;
+                            }
 
-                        .subscribe-field::-moz-placeholder {
-                            font-family: "montserrat", sans-serif;
+                            &::-moz-placeholder {
+                                font-family: "montserrat", sans-serif;
+                            }
                         }
 
                         .btn-primary {
@@ -750,6 +748,10 @@ section.slider-block {
                             margin-top: 8px;
                             border-radius: 0px;
                             text-align: center;
+                        }
+
+                        .locale-switcher {
+                            width: 100%;
                         }
                     }
                 }
