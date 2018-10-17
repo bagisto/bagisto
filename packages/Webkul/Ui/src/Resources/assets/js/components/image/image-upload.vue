@@ -29,15 +29,23 @@
         mounted: function() {
 
             this.sample = "";
+
             var element = this.$el.getElementsByTagName("input")[0];
+
             var this_this = this;
+
             element.onchange = function() {
                 var fReader = new FileReader();
+
                 fReader.readAsDataURL(element.files[0]);
+
                 fReader.onload = function(event) {
                     this.img = document.getElementsByTagName("input")[0];
+
                     this.img.src = event.target.result;
+
                     this_this.newImage = this.img.src;
+
                     this_this.changePreview();
                 };
             }

@@ -14,7 +14,7 @@
 
             <div class="account-items-list">
 
-                @if(is_null($reviews))
+                @if(!is_null($reviews))
                     @foreach($reviews as $review)
                     <div class="account-item-card mt-15 mb-15">
                         <div class="media-info">

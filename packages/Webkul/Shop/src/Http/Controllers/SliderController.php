@@ -49,12 +49,59 @@ class SliderController extends controller
     }
 
     /**
-     * Creates the new
-     * sider item
+     * Creates the new sider item.
+     *
+     * @return response
      */
     public function store() {
+
         $this->slider->create(request()->all());
+
         session()->flash('success', 'Slider created successfully.');
+
+        return redirect()->back();
+    }
+
+    /**
+     * Edit the previously created slider item.
+     *
+     * @return mixed
+     */
+    public function edit($id) {
+        $slider = $this->slider->find($id);
+
+        return view($this->_config['view'])->with('slider', $slider);
+    }
+
+    /**
+     * Edit the previously created slider item.
+     *
+     * @return response
+     */
+    public function update($id) {
+        if($this->slider->update(request()->all(), $id)) {
+            session()->flash('success', 'Slider Item Successfully Updated');
+        } else {
+            session()->flash('error', 'Slider Cannot Be Updated');
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * Delete a slider item and preserve the last one from deleting
+     *
+     * @return mixed
+     */
+    public function destroy($id) {
+        if($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1) {
+            session()->flash('warning', 'Cannot Delete The Last Slider Item');
+        } else {
+            $this->slider->destroy($id);
+
+            session()->flash('success', 'Slider Item Successfully Deleted');
+        }
+
         return redirect()->back();
     }
 }

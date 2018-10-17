@@ -14,7 +14,7 @@ use Webkul\Product\Repositories\ProductRepository;
  */
 class ProductReviewRepository extends Repository
 {
-      /**
+    /**
      * ProductImageRepository object
      *
      * @var array
@@ -51,9 +51,13 @@ class ProductReviewRepository extends Repository
      *
      * @param int $customerId
      */
-    function getCustomerReview($customerId)
+    function getCustomerReview()
     {
-        $reviews = $this->model->where('customer_id',$customerId)->with('product')->get();
+        $customerId = auth()->guard('customer')->user()->id;
+
+        $reviews = $this->model->where(['customer_id'=> $customerId, 'status' => 'approved'])->with('product')->get();
+
+        // dd($reviews);
 
         return $reviews;
     }

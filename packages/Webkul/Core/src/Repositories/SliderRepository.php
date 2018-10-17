@@ -33,10 +33,22 @@ class SliderRepository extends Repository
         $image_name = uniqid(20).'.'.$image->getClientOriginalExtension();
 
         $destinationPath = public_path('/vendor/webkul/shop/assets/images/slider');
+
         $path = $image->move($destinationPath, $image_name);
+
         $path= 'vendor/webkul/shop/assets/images/slider/'.$image_name;
+
         $data['path'] = $path;
+
         $this->model->create($data);
     }
 
+    /**
+     * Delete a slider item and delete the image from the disk or where ever it is
+     *
+     * @return Boolean
+     */
+    public function destroy($id) {
+        return $this->model->destroy($id);
+    }
 }
