@@ -11,7 +11,7 @@
             ></image-item>
         </div>
 
-        <label class="btn btn-lg btn-primary" style="display: inline-block" @click="createFileType">{{ buttonLabel }}</label>
+        <label class="btn btn-lg btn-primary" style="display: inline-block; width: auto" @click="createFileType">{{ buttonLabel }}</label>
     </div>
 </template>
 
@@ -37,9 +37,15 @@
             },
 
             images: {
-                type: Array,
+                type: Array|String,
                 required: false,
                 default: () => ([])
+            },
+
+            multiple: {
+                type: Boolean,
+                required: false,
+                default: true
             }
         },
 
@@ -53,14 +59,31 @@
         created () {
             var this_this = this;
             
-            this.images.forEach(function(image) {
-                this_this.items.push(image)
-                this_this.imageCount++;
-            });
+            if(this.multiple) {
+                this.images.forEach(function(image) {
+                    this_this.items.push(image)
+
+                    this_this.imageCount++;
+                });
+            } else {
+                if(this.images && this.images != '') {
+                    this.items.push({'id': 'image_' + this.imageCount, 'url': this.images})
+
+                    this.imageCount++;
+                }
+            }
         },
 
         methods: {
             createFileType () {
+                var this_this = this;
+
+                if(!this.multiple) {
+                    this.items.forEach(function(image) {
+                        this_this.removeImage(image)
+                    });
+                }
+
                 this.imageCount++;
 
                 this.items.push({'id': 'image_' + this.imageCount});
