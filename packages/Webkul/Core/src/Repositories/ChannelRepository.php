@@ -3,6 +3,7 @@
 namespace Webkul\Core\Repositories;
  
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Channel Reposotory
@@ -34,6 +35,10 @@ class ChannelRepository extends Repository
 
         $channel->currencies()->sync($data['currencies']);
 
+        $this->uploadImages($data, $channel);
+
+        $this->uploadImages($data, $channel, 'favicon');
+
         return $channel;
     }
 
@@ -53,6 +58,38 @@ class ChannelRepository extends Repository
 
         $channel->currencies()->sync($data['currencies']);
 
+        $this->uploadImages($data, $channel);
+
+        $this->uploadImages($data, $channel, 'favicon');
+
         return $channel;
+    }
+
+    /**
+     * @param array $data
+     * @param mixed $channel
+     * @return void
+     */
+    public function uploadImages($data, $channel, $type = "logo")
+    {
+        if(isset($data[$type])) {
+            foreach ($data[$type] as $imageId => $image) {
+                $file = $type . '.' . $imageId;
+                $dir = 'channel/' . $channel->id;
+
+                if(request()->hasFile($file)) {
+                    if($channel->{$type}) {
+                        Storage::delete($channel->{$type});
+                    }
+
+                    $channel->{$type} = request()->file($file)->store($dir);
+                    $channel->save();
+                }
+            }
+        } else {
+            if($channel->{$type}) {
+                Storage::delete($channel->{$type});
+            }
+        }
     }
 }

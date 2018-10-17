@@ -52,6 +52,12 @@
                                 </tr>
 
                             @endforeach
+
+                            @if (!$orders->count())
+                                <tr>
+                                    <td class="empty" colspan="4">{{ __('admin::app.common.no-result-found') }}</td>
+                                <tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

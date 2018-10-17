@@ -7,7 +7,7 @@
 @section('content')
     <div class="content">
 
-        <form method="POST" action="{{ route('admin.channels.update', $channel->id) }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.channels.update', $channel->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
                 <div class="page-title">
                     <h1>{{ __('admin::app.settings.channels.edit-title') }}</h1>
@@ -102,6 +102,24 @@
                                     @endforeach
                                 </select>
                                 <span class="control-error" v-if="errors.has('base_currency_id')">@{{ errors.first('base_currency_id') }}</span>
+                            </div>
+
+                        </div>
+                    </accordian>
+
+                    <accordian :title="'{{ __('admin::app.settings.channels.design') }}'" :active="true">
+                        <div slot="body">
+
+                            <div class="control-group">
+                                <label>{{ __('admin::app.settings.channels.logo') }}
+
+                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false" :images='"{{ $channel->logo_url }}"'></image-wrapper>
+                            </div>
+
+                            <div class="control-group">
+                                <label>{{ __('admin::app.settings.channels.favicon') }}
+
+                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="favicon" :multiple="false"></image-wrapper>
                             </div>
 
                         </div>

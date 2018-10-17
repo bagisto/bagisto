@@ -386,7 +386,10 @@ return [
             'locales' => 'Locales',
             'default-locale' => 'Default Locale',
             'currencies' => 'Currencies',
-            'base-currency' => 'Base Currency'
+            'base-currency' => 'Base Currency',
+            'design' => 'Design',
+            'logo' => 'Logo',
+            'favicon' => 'Favicon'
         ],
 
         'sliders' => [

@@ -31,6 +31,7 @@
             this.sample = "";
             var element = this.$el.getElementsByTagName("input")[0];
             var this_this = this;
+            
             element.onchange = function() {
                 var fReader = new FileReader();
                 fReader.readAsDataURL(element.files[0]);
