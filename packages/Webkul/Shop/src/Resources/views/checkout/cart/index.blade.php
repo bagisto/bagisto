@@ -6,7 +6,7 @@
 
 @section('content-wrapper')
 
-    @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
+    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
     <section class="cart">
 

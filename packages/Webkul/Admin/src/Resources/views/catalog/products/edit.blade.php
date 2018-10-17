@@ -83,9 +83,13 @@
 
                                         @if(view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
 
-                                            <div class="control-group" :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']">
+                                            <div class="control-group {{ $attribute->type }}" :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']">
                                                 <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
                                                     {{ $attribute->admin_name }}
+
+                                                    @if ($attribute->type == 'price')
+                                                        <span class="currency-code">({{ core()->getBaseCurrencySymbol() }})</span>
+                                                    @endif
 
                                                     <?php
                                                         $channel_locale = [];

@@ -43,7 +43,7 @@
 
     </div>
 
-    @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
+    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
     <div class="cart-item-list">
         @foreach($cart->items as $item)

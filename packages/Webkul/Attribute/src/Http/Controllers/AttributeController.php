@@ -127,6 +127,16 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $attribute = $this->attribute->findOrFail($id);
+         
+        if(!$attribute->is_user_defined) {
+            session()->flash('error', 'Can not delete system attribute.');
+        } else {
+            $this->attribute->delete($id);
+
+            session()->flash('success', 'Attribute deleted successfully.');
+        }
+
+        return redirect()->back();
     }
 }

@@ -5,7 +5,7 @@ namespace Webkul\User\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfNotAdmin
+class Bouncer
 {
     /**
     * Handle an incoming request.
@@ -21,6 +21,24 @@ class RedirectIfNotAdmin
             return redirect()->route('admin.session.create');
         }
 
+        $this->checkIfAuthorized($request);
+
         return $next($request);
+    }
+
+    public function checkIfAuthorized($request)
+    {
+        if(!$role = auth()->guard('admin')->user()->role)
+            abort(401, 'This action is unauthorized.');
+
+        if($role->permission_type == 'all'){
+            return;
+        } else {
+            $acl = app('acl');
+
+            if($acl && isset($acl->roles[Route::currentRouteName()])) {
+                bouncer()->allow($acl->roles[Route::currentRouteName()]);
+            }
+        }
     }
 }

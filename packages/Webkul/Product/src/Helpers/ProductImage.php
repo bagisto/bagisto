@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Product\Product;
+namespace Webkul\Product\Helpers;
 
 use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
 use Illuminate\Support\Facades\Storage;

@@ -164,7 +164,7 @@ class AttributeTableSeeder extends Seeder
             'position' => 11,
             'is_required' => 1,
             'value_per_locale' => 0,
-            'value_per_channel' => 1,
+            'value_per_channel' => 0,
             'is_filterable' => 1,
             'is_configurable' => 0,
             'is_user_defined' => 0
@@ -192,7 +192,7 @@ class AttributeTableSeeder extends Seeder
             'position' => 13,
             'is_required' => 0,
             'value_per_locale' => 0,
-            'value_per_channel' => 1,
+            'value_per_channel' => 0,
             'is_filterable' => 0,
             'is_configurable' => 0,
             'is_user_defined' => 0

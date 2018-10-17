@@ -15,10 +15,9 @@ class CreateCurrencyExchangeRatesTable extends Migration
     {
         Schema::create('currency_exchange_rates', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('source_currency')->unsigned();
+            $table->decimal('rate', 10, 5);
+            
             $table->integer('target_currency')->unsigned();
-            $table->decimal('ratio', 10, 5);
-            $table->foreign('source_currency')->references('id')->on('currencies')->onDelete('cascade');
             $table->foreign('target_currency')->references('id')->on('currencies')->onDelete('cascade');
             $table->timestamps();
         });

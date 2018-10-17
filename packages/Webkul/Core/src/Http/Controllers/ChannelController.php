@@ -133,6 +133,14 @@ class ChannelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($this->channel->count() == 1) {
+            session()->flash('error', 'At least one channel is required.');
+        } else {
+            $this->channel->delete($id);
+
+            session()->flash('success', 'Channel deleted successfully.');
+        }
+
+        return redirect()->back();
     }
 }

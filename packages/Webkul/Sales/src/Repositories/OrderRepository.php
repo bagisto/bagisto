@@ -286,13 +286,4 @@ class OrderRepository extends Repository
 
         return $order;
     }
-
-     /**
-     * @param int $customerId
-     * @return void
-     */
-    public function customerOrder($customerId)
-    {
-       return $this->model->where('customer_id',$customerId)->get();
-    }
 }

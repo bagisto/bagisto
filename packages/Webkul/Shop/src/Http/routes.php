@@ -172,9 +172,13 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('customer.wishlist.index');
 
                 /* Orders route */
-                Route::get('orders', 'Webkul\Customer\Http\Controllers\OrdersController@orders')->defaults('_config', [
-                    'view' => 'shop::customers.account.orders.orders'
+                Route::get('orders', 'Webkul\Shop\Http\Controllers\OrderController@index')->defaults('_config', [
+                    'view' => 'shop::customers.account.orders.index'
                 ])->name('customer.orders.index');
+
+                Route::get('orders/view/{id}', 'Webkul\Shop\Http\Controllers\OrderController@view')->defaults('_config', [
+                    'view' => 'shop::customers.account.orders.view'
+                ])->name('customer.orders.view');
 
                 /* Reviews route */
                 Route::get('reviews', 'Webkul\Customer\Http\Controllers\CustomerController@reviews')->defaults('_config', [

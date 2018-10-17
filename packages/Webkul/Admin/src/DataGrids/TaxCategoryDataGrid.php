@@ -6,26 +6,26 @@ use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
 /**
- * Tax Rules DataGrid
+ * Tax Category DataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class TaxRuleDataGrid
+class TaxCategoryDataGrid
 {
     /**
-     * The Tax Rule Data
+     * The Tax Category Data
      * Grid implementation.
      *
-     * @var TaxRuleDataGrid
+     * @var TaxCategoryDataGrid
      */
-    public function createTaxRuleDataGrid()
+    public function createTaxCategoryDataGrid()
     {
 
         return DataGrid::make([
 
-            'name' => 'Tax Rule',
+            'name' => 'Tax Category',
             'table' => 'tax_categories as tr',
             'select' => 'tr.id',
             'perpage' => 10,
@@ -154,7 +154,7 @@ class TaxRuleDataGrid
 
     public function render() {
 
-        return $this->createTaxRuleDataGrid()->render();
+        return $this->createTaxCategoryDataGrid()->render();
 
     }
 }

@@ -5,7 +5,7 @@ namespace Webkul\Tax\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Core\Repositories\ChannelRepository as Channel;
-use Webkul\Tax\Repositories\TaxCategoryRepository as TaxRule;
+use Webkul\Tax\Repositories\TaxCategoryRepository as TaxCategory;
 use Webkul\Tax\Repositories\TaxRateRepository as TaxRate;
 use Webkul\Tax\Repositories\TaxMapRepository as TaxMap;
 
@@ -33,11 +33,11 @@ class TaxController extends Controller
     protected $channel;
 
     /**
-     * Tax Rule Repository object
+     * Tax Category Repository object
      *
      * @var array
      */
-    protected $taxRule;
+    protected $taxCategory;
 
     /**
      * Tax Rate Repository object
@@ -56,19 +56,19 @@ class TaxController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\ChannelRepository  $channel
-     * @param  Webkul\Tax\Repositories\TaxCategoryRepository  $taxRule
-     * @param  Webkul\Tax\Repositories\TaxRateRepository  $taxRate
-     * @param  Webkul\Tax\Repositories\TaxMapRepository  $taxMap
+     * @param  Webkul\Core\Repositories\ChannelRepository    $channel
+     * @param  Webkul\Tax\Repositories\TaxCategoryRepository $taxCategory
+     * @param  Webkul\Tax\Repositories\TaxRateRepository     $taxRate
+     * @param  Webkul\Tax\Repositories\TaxMapRepository      $taxMap
      * @return void
      */
-    public function __construct(Channel $channel, TaxRule $taxRule, TaxRate $taxRate, TaxMap $taxMap)
+    public function __construct(Channel $channel, TaxCategory $taxCategory, TaxRate $taxRate, TaxMap $taxMap)
     {
         $this->middleware('admin');
 
         $this->channel = $channel;
 
-        $this->taxRule = $taxRule;
+        $this->taxCategory = $taxCategory;
 
         $this->taxRate = $taxRate;
 

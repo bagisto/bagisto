@@ -138,6 +138,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($this->admin->count() == 1) {
+            session()->flash('error', 'At least one admin is required.');
+        } else {
+            $this->admin->delete($id);
+
+            session()->flash('success', 'Admin source deleted successfully.');
+        }
+
+        return redirect()->back();
     }
 }

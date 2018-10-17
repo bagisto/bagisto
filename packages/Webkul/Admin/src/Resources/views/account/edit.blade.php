@@ -1,12 +1,16 @@
 @extends('admin::layouts.content')
 
+@section('page_title')
+    {{ __('admin::app.account.title') }}
+@stop
+
 @section('content')
     <div class="content">
         <form method="POST" action="" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        {{ __('admin::app.account.header-title') }}
+                        {{ __('admin::app.account.title') }}
                     </h1>
                 </div>
 

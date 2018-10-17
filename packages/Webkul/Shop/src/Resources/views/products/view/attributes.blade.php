@@ -1,23 +1,25 @@
-@inject ('productViewHelper', 'Webkul\Product\Product\View')
+@inject ('productViewHelper', 'Webkul\Product\Helpers\View')
 
-<accordian :title="'{{ __('shop::app.products.specification') }}'" :active="false">
-    <div slot="header">
-        {{ __('shop::app.products.specification') }}
-        <i class="icon expand-icon right"></i>
-    </div>
+@if ($customAttributeValues = $productViewHelper->getAdditionalData($product))
+    <accordian :title="'{{ __('shop::app.products.specification') }}'" :active="false">
+        <div slot="header">
+            {{ __('shop::app.products.specification') }}
+            <i class="icon expand-icon right"></i>
+        </div>
 
-    <div slot="body">
-        <table class="full-specifications">
+        <div slot="body">
+            <table class="full-specifications">
 
-            @foreach ($productViewHelper->getAdditionalData($product) as $attribute)
+                @foreach ($customAttributeValues as $attribute)
 
-                <tr>
-                    <td>{{ $attribute['label'] }}</td>
-                    <td> - {{ $attribute['value'] }}</td>
-                </tr>
+                    <tr>
+                        <td>{{ $attribute['label'] }}</td>
+                        <td> - {{ $attribute['value'] }}</td>
+                    </tr>
 
-            @endforeach
+                @endforeach
 
-        </table>
-    </div>
-</accordian>
+            </table>
+        </div>
+    </accordian>
+@endif

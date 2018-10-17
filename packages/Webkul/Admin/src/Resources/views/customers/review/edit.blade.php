@@ -1,5 +1,9 @@
 @extends('admin::layouts.content')
 
+@section('page_title')
+    {{ __('admin::app.customers.reviews.edit-title') }}
+@stop
+
 @section('content')
     <div class="content">
         <form method="POST" action="{{ route('admin.customer.review.update', $review->id) }}">
@@ -7,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        {{ __('admin::app.customers.reviews.name') }}
+                        {{ __('admin::app.customers.reviews.edit-title') }}
                     </h1>
                 </div>
 

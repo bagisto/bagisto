@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.configuration.tax-rates.title') }}
+    {{ __('admin::app.configuration.tax-rates.add-title') }}
 @stop
 
 @section('content')
@@ -9,7 +9,7 @@
         <form method="POST" action="{{ route('admin.tax-rates.create') }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('admin::app.configuration.tax-rates.title') }}</h1>
+                    <h1>{{ __('admin::app.configuration.tax-rates.add-title') }}</h1>
                 </div>
 
                 <div class="page-action">

@@ -91,6 +91,14 @@ class LocaleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($this->locale->count() == 1) {
+            session()->flash('error', 'At least one locale is required.');
+        } else {
+            $this->locale->delete($id);
+
+            session()->flash('success', 'Locale deleted successfully.');
+        }
+
+        return redirect()->back();
     }
 }

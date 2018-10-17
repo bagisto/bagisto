@@ -45,7 +45,7 @@ class Order extends Model implements OrderContract
      */
     public function getTotalDueAttribute()
     {
-        return $this->grand_total - $this->base_total_invoiced;
+        return $this->grand_total - $this->grand_total_invoiced;
     }
 
     /**
