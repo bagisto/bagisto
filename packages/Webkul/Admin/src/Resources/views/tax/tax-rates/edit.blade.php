@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.configuration.tax-rates.title') }}
+    {{ __('admin::app.configuration.tax-rates.edit-title') }}
 @stop
 
 @section('content')

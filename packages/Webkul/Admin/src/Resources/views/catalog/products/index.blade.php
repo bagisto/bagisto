@@ -1,10 +1,14 @@
 @extends('admin::layouts.content')
 
+@section('page_title')
+    {{ __('admin::app.catalog.products.title') }}
+@stop
+
 @section('content')
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h1>{{ __('admin::app.catalog.products.products') }}</h1>
+                <h1>{{ __('admin::app.catalog.products.title') }}</h1>
             </div>
 
             <div class="page-action">

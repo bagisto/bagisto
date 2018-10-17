@@ -24,36 +24,49 @@
                 <div class="form-container">
                     @csrf()
 
-                    <accordian :title="'{{ __('admin::app.settings.exchange_rates.general') }}'" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('source_currency') ? 'has-error' : '']">
-                                <label for="source_currency" class="required">{{ __('admin::app.settings.exchange_rates.source_currency') }}</label>
-                                <select v-validate="'required'" class="control" name="source_currency">
-                                    @foreach($currencies as $currency)
-                                        <option value="{{ $currency->id }}">{{ $currency->name }}</option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('source_currency')">@{{ errors.first('source_currency') }}</span>
-                            </div>
+                    <div class="table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        {{ __('admin::app.settings.exchange_rates.source_currency') }}
+                                    </th>
+                                    <th>
+                                        {{ __('admin::app.settings.exchange_rates.target_currency') }}
+                                    </th>
+                                    <th>
+                                        {{ __('admin::app.settings.exchange_rates.rate') }}
+                                    </th>
+                                </tr>
+                            </thead>
 
-                            <div class="control-group" :class="[errors.has('target_currency') ? 'has-error' : '']">
-                                <label for="target_currency" class="required">{{ __('admin::app.settings.exchange_rates.target_currency') }}</label>
-                                <select v-validate="'required'" class="control" name="target_currency">
-                                    @foreach($currencies as $currency)
-                                        <option value="{{ $currency->id }}">{{ $currency->name }}</option>
-                                    @endforeach
-                                </select> 
-                                <span class="control-error" v-if="errors.has('target_currency')">@{{ errors.first('target_currency') }}</span>
-                            </div>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        {{ core()->getBaseCurrencyCode() }}
+                                    </td>
 
-                            <div class="control-group" :class="[errors.has('ratio') ? 'has-error' : '']">
-                                <label for="ratio" class="required">{{ __('admin::app.settings.exchange_rates.ratio') }}</label>
-                                <input v-validate="'required'" class="control" id="ratio" name="ratio" value="{{ old('ratio') }}"/>
-                                <span class="control-error" v-if="errors.has('ratio')">@{{ errors.first('ratio') }}</span>
-                            </div>
-                        </div>
-                    </accordian>
-
+                                    <td>
+                                        <div class="control-group" :class="[errors.has('target_currency') ? 'has-error' : '']">
+                                            <select v-validate="'required'" class="control" name="target_currency">
+                                                @foreach($currencies as $currency)
+                                                    <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                                @endforeach
+                                            </select> 
+                                            <span class="control-error" v-if="errors.has('target_currency')">@{{ errors.first('target_currency') }}</span>
+                                        </div>
+                                    </td>
+                                    
+                                    <td>
+                                        <div class="control-group" :class="[errors.has('rate') ? 'has-error' : '']">
+                                            <input v-validate="'required'" class="control" id="rate" name="rate" value="{{ old('rate') }}"/>
+                                            <span class="control-error" v-if="errors.has('rate')">@{{ errors.first('rate') }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </form>

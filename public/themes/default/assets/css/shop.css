@@ -1769,7 +1769,7 @@ section.product-detail div.layouter form .details .description {
 
 section.product-detail div.layouter form .details .full-specifications td {
   padding: 10px 0;
-  color: #A5A5A5;
+  color: #5E5E5E;
 }
 
 section.product-detail div.layouter form .details .full-specifications td:first-child {
@@ -2592,8 +2592,8 @@ section.review .review-layouter .review-info .review-detail .rating-calculate .p
   border: 1px solid #E8E8E8;
   width: 25%;
   height: 100%;
-  text-transform: capitalize;
   color: #A5A5A5;
+  position: relative;
 }
 
 .account-content .account-side-menu li {
@@ -2617,6 +2617,16 @@ section.review .review-layouter .review-info .review-detail .rating-calculate .p
   text-align: center;
 }
 
+.account-content .account-side-menu li a {
+  color: #5E5E5E;
+}
+
+.account-content .account-side-menu li .icon {
+  display: none;
+  position: absolute;
+  right: 12px;
+}
+
 .account-content .account-side-menu li:first-child {
   border-top: none;
 }
@@ -2625,14 +2635,21 @@ section.review .review-layouter .review-info .review-detail .rating-calculate .p
   border-bottom: none;
 }
 
-.account-content .account-side-menu li.active {
+.account-content .account-side-menu li.active a {
   color: #0031F0;
 }
 
+.account-content .account-side-menu li.active .icon {
+  display: inline-block;
+}
+
 .account-content .account-layout {
-  margin-left: 5.5%;
-  margin-top: 1%;
+  margin-left: 40px;
   width: 100%;
+}
+
+.account-content .account-layout .account-head {
+  margin-bottom: 20px;
 }
 
 .account-table-content {
@@ -2660,4 +2677,89 @@ section.review .review-layouter .review-info .review-detail .rating-calculate .p
           flex-direction: column;
   min-height: 345px;
   padding: 25px;
+}
+
+.sale-container {
+  color: #5E5E5E;
+}
+
+.sale-container .sale-section .secton-title {
+  font-size: 18px;
+  color: #8E8E8E;
+  padding: 15px 0;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.sale-container .sale-section .section-content {
+  display: block;
+  padding: 20px 0;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.sale-container .sale-section .section-content .row {
+  display: block;
+  padding: 7px 0;
+}
+
+.sale-container .sale-section .section-content .row .title {
+  width: 200px;
+  letter-spacing: -0.26px;
+  display: inline-block;
+}
+
+.sale-container .sale-section .section-content .row .value {
+  letter-spacing: -0.26px;
+  display: inline-block;
+}
+
+.sale-container .sale-section .section-content .order-box-container {
+  display: inline-block;
+  width: 100%;
+}
+
+.sale-container .sale-section .section-content .order-box-container .box {
+  float: left;
+  width: 25%;
+}
+
+.sale-container .sale-section .section-content .order-box-container .box .box-title {
+  padding: 10px 0;
+  font-size: 18px;
+  color: #8E8E8E;
+}
+
+.sale-container .sale-section .section-content .order-box-container .box .box-content {
+  color: #3A3A3A;
+}
+
+.sale-container .sale-section .section-content .qty-row {
+  display: block;
+}
+
+.sale-container .totals {
+  padding-top: 20px;
+  display: inline-block;
+  width: 100%;
+  border-top: solid 1px #E8E8E8;
+}
+
+.sale-container .totals .sale-summary {
+  height: 130px;
+  float: right;
+  border-collapse: collapse;
+}
+
+.sale-container .totals .sale-summary tr td {
+  padding: 5px 8px;
+  width: auto;
+  color: #3A3A3A;
+}
+
+.sale-container .totals .sale-summary tr.bold {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.sale-container .totals .sale-summary tr.border td {
+  border-bottom: 1px solid #E8E8E8;
 }

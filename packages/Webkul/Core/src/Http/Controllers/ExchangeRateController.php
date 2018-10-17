@@ -84,15 +84,9 @@ class ExchangeRateController extends Controller
      */
     public function store(Request $request)
     {
-        $sourceCurrency = request()->get('source_currency');
         $this->validate(request(), [
-            'source_currency' => 'required',
-            'target_currency' => ['required', function ($attribute, $value, $fail) use ($sourceCurrency) {
-                if ($value == $sourceCurrency) {
-                    $fail('The :attribute value should be different from source currency.');
-                }
-            }],
-            'ratio' => 'required|numeric'
+            'target_currency' => 'required',
+            'rate' => 'required|numeric'
         ]);
 
         $this->exchangeRate->create(request()->all());
@@ -127,7 +121,6 @@ class ExchangeRateController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'source_currency' => 'required',
             'target_currency' => 'required',
             'ratio' => 'required|numeric'
         ]);
@@ -147,6 +140,6 @@ class ExchangeRateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->exchangeRate->delete($id);
     }
 }

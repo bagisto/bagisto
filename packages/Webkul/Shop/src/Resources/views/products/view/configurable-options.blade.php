@@ -1,6 +1,6 @@
 @if ($product->type == 'configurable')
 
-    @inject ('configurableOptionHelper', 'Webkul\Product\Product\ConfigurableOption')
+    @inject ('configurableOptionHelper', 'Webkul\Product\Helpers\ConfigurableOption')
 
     <product-options>
         <!--<div class="attribute control-group has-error">

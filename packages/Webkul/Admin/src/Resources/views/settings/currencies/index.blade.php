@@ -1,5 +1,9 @@
 @extends('admin::layouts.content')
 
+@section('page_title')
+    {{ __('admin::app.settings.currencies.title') }}
+@stop
+
 @section('content')
     <div class="content">
         <div class="page-header">

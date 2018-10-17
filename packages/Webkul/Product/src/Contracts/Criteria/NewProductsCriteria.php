@@ -5,7 +5,7 @@ namespace Webkul\Product\Contracts\Criteria;
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Product\AbstractProduct;
+use Webkul\Product\Helpers\AbstractProduct;
 
 /**
  * Class MyCriteria.

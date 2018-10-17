@@ -77,13 +77,6 @@ class ExchangeRatesDataGrid
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'source_currency',
-                    'alias' => 'exchSourceCurrency',
-                    'type' => 'string',
-                    'label' => 'Source Currency',
-                    'sortable' => true,
-                ],
-                [
                     'name' => 'target_currency',
                     'alias' => 'exchTargetCurrency',
                     'type' => 'string',
@@ -91,10 +84,10 @@ class ExchangeRatesDataGrid
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'ratio',
-                    'alias' => 'exchRatio',
+                    'name' => 'rate',
+                    'alias' => 'exchRate',
                     'type' => 'string',
-                    'label' => 'Exchange Ratio',
+                    'label' => 'Exchange Rate',
                 ],
 
             ],
@@ -109,13 +102,6 @@ class ExchangeRatesDataGrid
                     'label' => 'Rate ID',
                 ],
                 [
-                    'column' => 'source_currency',
-                    'alias' => 'exchSourceCurrency',
-                    'type' => 'string',
-                    'label' => 'Source Currency',
-                    'sortable' => true,
-                ],
-                [
                     'column' => 'target_currency',
                     'alias' => 'exchTargetCurrency',
                     'type' => 'string',
@@ -127,11 +113,6 @@ class ExchangeRatesDataGrid
             //don't use aliasing in case of searchables
 
             'searchable' => [
-                [
-                    'column' => 'source_currency',
-                    'type' => 'string',
-                    'label' => 'Source Currency',
-                ],
                 [
                     'column' => 'target_currency',
                     'type' => 'string',

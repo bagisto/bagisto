@@ -1,4 +1,4 @@
-@inject ('reviewHelper', 'Webkul\Product\Product\Review')
+@inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 @if ($total = $reviewHelper->getTotalReviews($product))
 
     <div class="product-ratings mb-10">
