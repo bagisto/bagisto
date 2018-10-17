@@ -31404,6 +31404,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             default: function _default() {
                 return [];
             }
+        },
+
+        public_path: {
+            type: String,
+            required: true
         }
     },
 
@@ -31431,8 +31436,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setProps: function setProps() {
 
             var this_this = this;
+
             this.slides.forEach(function (slider) {
-                this_this.images.push(slider.path);
+                this_this.images.push(this_this.public_path + '/storage/' + slider.path);
             });
             this.currentIndex = 0;
 

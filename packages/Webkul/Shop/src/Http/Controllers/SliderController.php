@@ -45,7 +45,7 @@ class SliderController extends controller
     public function create() {
         $channels = core()->getAllChannels();
 
-        return view($this->_config['view'])->with('channels',[$channels]);
+        return view($this->_config['view']);
     }
 
     /**
@@ -79,7 +79,7 @@ class SliderController extends controller
      * @return response
      */
     public function update($id) {
-        if($this->slider->update(request()->all(), $id)) {
+        if($this->slider->updateItem(request()->all(), $id)) {
             session()->flash('success', 'Slider Item Successfully Updated');
         } else {
             session()->flash('error', 'Slider Cannot Be Updated');
