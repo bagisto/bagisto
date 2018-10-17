@@ -5,6 +5,7 @@
 @stop
 
 @section('content-wrapper')
+
     <?php $order = $invoice->order; ?>
 
     <div class="content full-page">

@@ -16,7 +16,8 @@
 
                 @include ('shop::products.list.toolbar')
 
-                @inject ('toolbarHelper', 'Webkul\Product\Product\Toolbar')
+                @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
+
                 @if ($toolbarHelper->getCurrentMode() == 'grid')
                     <div class="product-grid-3">
                         @foreach ($products as $product)

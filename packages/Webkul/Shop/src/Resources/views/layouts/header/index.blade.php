@@ -74,7 +74,7 @@
 
                 <?php $cart = cart()->getCart(); ?>
 
-                @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
+                @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
                 <li class="cart-dropdown">
                     <span class="icon cart-icon"></span>

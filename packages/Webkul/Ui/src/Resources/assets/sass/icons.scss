@@ -118,9 +118,6 @@
 }
 
 .sort-up-icon {
-    // background-image: url("../images/Icon-Sort-Up.svg");
-    // width: 18px;
-    // height: 18px;
     background-image: url("../images/Icon-Sort-Down.svg");
     width: 18px;
     height: 18px;
@@ -206,6 +203,10 @@
         background-image: url("../images/Icon-Catalog-Active.svg");
     }
 
+    .customer-icon {
+        background-image: url("../images/Icon-Customers-Active.svg");
+    }
+
     .settings-icon {
         background-image: url("../images/Icon-Settings-Active.svg");
     }
@@ -226,6 +227,10 @@
 
     &.dashboard-icon {
         background-image: url("../images/Icon-Dashboard-Active.svg");
+    }
+
+    &.customer-icon {
+        background-image: url("../images/Icon-Customers-Active.svg");
     }
 
     &.sales-icon {

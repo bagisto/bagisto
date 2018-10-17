@@ -1,6 +1,6 @@
 <div class="product-price">
 
-    @inject ('priceHelper', 'Webkul\Product\Product\Price')
+    @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
 
     @if ($product->type == 'configurable')
 

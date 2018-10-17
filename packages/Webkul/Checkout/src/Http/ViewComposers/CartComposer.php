@@ -9,7 +9,7 @@ use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 
 //Product Image Helper Class
-use Webkul\Product\Product\ProductImage;
+use Webkul\Product\Helpers\ProductImage;
 
 use Cart;
 

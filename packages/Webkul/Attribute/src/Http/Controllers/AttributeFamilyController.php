@@ -135,6 +135,14 @@ class AttributeFamilyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($this->attributeFamily->count() == 1) {
+            session()->flash('error', 'At least one family is required.');
+        } else {
+            $this->attributeFamily->delete($id);
+
+            session()->flash('success', 'Family deleted successfully.');
+        }
+
+        return redirect()->back();
     }
 }

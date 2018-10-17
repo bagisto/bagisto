@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Product\Product;
+namespace Webkul\Product\Helpers;
 
 use Webkul\Product\Models\ProductAttributeValue;
 

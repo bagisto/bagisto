@@ -41,27 +41,27 @@ Route::group(['middleware' => ['web']], function () {
 
             //Customers Management Routes
 
-            Route::get('customer', 'Webkul\Core\Http\Controllers\CustomerController@index')->defaults('_config', [
+            Route::get('customers', 'Webkul\Core\Http\Controllers\CustomerController@index')->defaults('_config', [
                 'view' => 'admin::customers.index'
             ])->name('admin.customer.index');
 
-            Route::get('customer/orders', 'Webkul\Core\Http\Controllers\CustomerController@index')->defaults('_config',[
+            Route::get('customers/orders', 'Webkul\Core\Http\Controllers\CustomerController@index')->defaults('_config',[
                 'view' => 'admin::customers.orders.index'
             ])->name('admin.customer.orders.index');
 
-            Route::get('customer/create', 'Webkul\Core\Http\Controllers\CustomerController@create')->defaults('_config',[
+            Route::get('customers/create', 'Webkul\Core\Http\Controllers\CustomerController@create')->defaults('_config',[
                 'view' => 'admin::customers.create'
             ])->name('admin.customer.create');
 
-            Route::post('customer/create', 'Webkul\Core\Http\Controllers\CustomerController@store')->defaults('_config',[
+            Route::post('customers/create', 'Webkul\Core\Http\Controllers\CustomerController@store')->defaults('_config',[
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.store');
 
-            Route::get('customer/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@edit')->defaults('_config',[
+            Route::get('customers/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@edit')->defaults('_config',[
                 'view' => 'admin::customers.edit'
             ])->name('admin.customer.edit');
 
-            Route::put('customer/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@update')->defaults('_config', [
+            Route::put('customers/edit/{id}', 'Webkul\Core\Http\Controllers\CustomerController@update')->defaults('_config', [
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.update');
 
@@ -88,7 +88,7 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::sales.orders.view'
                 ])->name('admin.sales.orders.view');
 
-                Route::get('/orders/cancel/{order_id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@cancel')->defaults('_config', [
+                Route::get('/orders/cancel/{id}', 'Webkul\Admin\Http\Controllers\Sales\OrderController@cancel')->defaults('_config', [
                     'view' => 'admin::sales.orders.cancel'
                 ])->name('admin.sales.orders.cancel');
 
@@ -196,6 +196,10 @@ Route::group(['middleware' => ['web']], function () {
                 Route::put('/attributes/edit/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@update')->defaults('_config', [
                     'redirect' => 'admin.catalog.attributes.index'
                 ])->name('admin.catalog.attributes.update');
+
+                Route::get('/attributes/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@destroy')->defaults('_config', [
+                    'view' => 'admin::catalog.attributes.delete'
+                ])->name('admin.catalog.attributes.delete');
 
 
                 // Catalog Family Routes
@@ -396,7 +400,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::tax.tax-categories.index'
             ])->name('admin.tax-categories.index');
 
-            // tax rule routes
+            // tax category routes
             Route::get('/tax-categories/create', 'Webkul\Tax\Http\Controllers\TaxCategoryController@show')->defaults('_config', [
                 'view' => 'admin::tax.tax-categories.create'
             ])->name('admin.tax-categories.show');
@@ -413,7 +417,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.tax-categories.index'
             ])->name('admin.tax-categories.update');
 
-            //tax rule ends
+            //tax category ends
 
 
             //tax rate

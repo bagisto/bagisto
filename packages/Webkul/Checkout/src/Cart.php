@@ -298,8 +298,8 @@ class Cart {
         //set the currency column with the respective currency
         $cartData['global_currency_code'] = core()->getBaseCurrencyCode();
         $cartData['base_currency_code'] = core()->getBaseCurrencyCode();
-        $cartData['channel_currency_code'] = core()->getBaseCurrencyCode();
-        $cartData['cart_currency_code'] = core()->getBaseCurrencyCode();
+        $cartData['channel_currency_code'] = core()->getChannelBaseCurrencyCode();
+        $cartData['cart_currency_code'] = core()->getCurrentCurrencyCode();
         //set the cart items and quantity
         $cartData['items_count'] = 1;
         $cartData['items_qty'] = $data['quantity'];

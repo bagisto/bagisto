@@ -5,7 +5,7 @@ namespace Webkul\Tax\Repositories;
 use Webkul\Core\Eloquent\Repository;
 
 /**
- * Tax Rule Reposotory
+ * Tax Category Reposotory
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -28,9 +28,9 @@ class TaxCategoryRepository extends Repository
      */
     public function create(array $data)
     {
-        $taxRule = $this->model->create($data);
+        $taxCategory = $this->model->create($data);
 
-        return $taxRule;
+        return $taxCategory;
     }
 
     /**
@@ -42,9 +42,9 @@ class TaxCategoryRepository extends Repository
      */
     public function update(array $data, $id, $attribute = "id")
     {
-        $taxRule = $this->find($id);
+        $taxCategory = $this->find($id);
 
-        $taxRule->update($data);
+        $taxCategory->update($data);
 
         return $taxmap;
     }

@@ -1,6 +1,6 @@
 <div class="product-card">
 
-    @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
+    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
     <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
 

@@ -3,7 +3,7 @@
 @section('content-wrapper')
 
 <div class="account-content">
-    @inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
+    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
     @include('shop::customers.account.partials.sidemenu')
 

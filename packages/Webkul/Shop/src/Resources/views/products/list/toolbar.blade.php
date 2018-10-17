@@ -1,4 +1,4 @@
-@inject ('toolbarHelper', 'Webkul\Product\Product\Toolbar')
+@inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
 <div class="top-toolbar mb-35">
 

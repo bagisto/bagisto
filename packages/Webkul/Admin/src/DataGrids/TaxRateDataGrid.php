@@ -15,7 +15,7 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
 class TaxRateDataGrid
 {
     /**
-     * The Tax Rule Data
+     * The Tax Category Data
      * Grid implementation.
      *
      * @var TaxRateDataGrid

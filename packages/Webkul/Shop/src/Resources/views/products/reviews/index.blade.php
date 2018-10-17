@@ -1,5 +1,5 @@
-@inject ('reviewHelper', 'Webkul\Product\Product\Review')
-@inject ('priceHelper', 'Webkul\Product\Product\Price')
+@inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
+@inject ('priceHelper', 'Webkul\Product\Helpers\Price')
 
 
 @extends('shop::layouts.master')

@@ -120,6 +120,14 @@ class InventorySourceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($this->inventorySource->count() == 1) {
+            session()->flash('error', 'At least one inventory source is required.');
+        } else {
+            $this->inventorySource->delete($id);
+
+            session()->flash('success', 'Inventory source deleted successfully.');
+        }
+
+        return redirect()->back();
     }
 }

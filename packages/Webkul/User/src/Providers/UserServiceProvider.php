@@ -8,7 +8,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
 use Webkul\User\Bouncer;
 use Webkul\User\Facades\Bouncer as BouncerFacade;
-use Webkul\User\Http\Middleware\RedirectIfNotAdmin;
+use Webkul\User\Http\Middleware\Bouncer as BouncerMiddleware;
 use Webkul\User\ACLCreator;
 
 class UserServiceProvider extends ServiceProvider
@@ -20,7 +20,9 @@ class UserServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
+        include __DIR__ . '/../Http/helpers.php';
+
+        $router->aliasMiddleware('admin', BouncerMiddleware::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 

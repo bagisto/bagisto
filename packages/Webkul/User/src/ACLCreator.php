@@ -6,6 +6,8 @@ class ACLCreator {
 
 	public $items = [];
 
+	public $roles = [];
+
 	/**
 	 * Shortcut method for create a acl with a callback.
 	 * This will allow you to do things like fire an event on creation.
@@ -41,6 +43,8 @@ class ACLCreator {
 
 		$children = str_replace('.', '.children.', $key);
 		$this->array_set($this->items, $children, $item);
+
+		$this->roles[$route] = $key;
 	}
 
 	/**

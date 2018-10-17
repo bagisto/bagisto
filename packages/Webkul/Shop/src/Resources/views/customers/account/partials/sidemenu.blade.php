@@ -1,12 +1,13 @@
-{{--  <div class="side-menu-title mb-20" id="side-menu-title">
-    <strong>Menu</strong>
-    <i class="icon icon-arrow-down right" id="down-icon"></i>
-</div>  --}}
-
 <ul class="account-side-menu">
-    @foreach($menu->items as $key=>$value)
+    @foreach($menu->items as $menuItem)
 
-        <li><a href="{{ $value['url'] }}">{{ $value['name'] }}</a></li>
+        <li class="menu-item {{ $menu->getActive($menuItem) }}">
+            <a href="{{ $menuItem['url'] }}">
+                {{ $menuItem['name'] }}
+            </a>
+
+            <i class="icon angle-right-icon"></i>
+        </li>
 
     @endforeach
 </ul>

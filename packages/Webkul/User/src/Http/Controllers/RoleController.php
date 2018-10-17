@@ -125,6 +125,14 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($this->role->count() == 1) {
+            session()->flash('error', 'At least one role is required.');
+        } else {
+            $this->role->delete($id);
+
+            session()->flash('success', 'Role source deleted successfully.');
+        }
+
+        return redirect()->back();
     }
 }

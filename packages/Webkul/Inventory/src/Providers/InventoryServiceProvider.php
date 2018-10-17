@@ -5,7 +5,6 @@ namespace Webkul\Inventory\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
-use Webkul\User\Http\Middleware\RedirectIfNotAdmin;
 
 class InventoryServiceProvider extends ServiceProvider
 {
@@ -16,8 +15,6 @@ class InventoryServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $router->aliasMiddleware('admin', RedirectIfNotAdmin::class);
-
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 

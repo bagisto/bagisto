@@ -85,6 +85,14 @@ abstract class Repository extends BaseRepository {
     /**
      * @return mixed
      */
+    public function count()
+    {
+        return $this->model->count();
+    }
+
+    /**
+     * @return mixed
+     */
     public function getModel()
     {
         return $this->model;

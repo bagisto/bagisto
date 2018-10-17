@@ -414,6 +414,7 @@ h2 {
     color: #333333;
     width: 750px;
     max-width: 100%;
+    position: relative;
 
     label {
         display: block;
@@ -479,6 +480,13 @@ h2 {
 
     &.has-error .control-error {
         display: block;
+    }
+
+    &.price {
+        .currency-code {
+            vertical-align: middle;
+            display: inline-block;
+        }
     }
 }
 

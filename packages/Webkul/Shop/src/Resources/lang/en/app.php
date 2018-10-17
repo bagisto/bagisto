@@ -120,13 +120,47 @@ return [
 
             'order' => [
                 'index' => [
-                    'page-title' => 'Customer-Order',
+                    'page-title' => 'Customer - Orders',
                     'title' => 'Orders',
                     'order_id' => 'Order ID',
                     'date' => 'Date',
                     'status' => 'Status',
-                    'item' => 'Item',
-                    'total' => 'total'
+                    'total' => 'Total'
+                ],
+
+                'view' => [
+                    'page-tile' => 'Order #:order_id',
+                    'info' => 'Information',
+                    'placed-on' => 'Placed On',
+                    'products-ordered' => 'Products Ordered',
+                    'invoices' => 'Invoices',
+                    'shipments' => 'Shipments',
+                    'SKU' => 'SKU',
+                    'product-name' => 'Name',
+                    'qty' => 'Qty',
+                    'item-status' => 'Item Status',
+                    'item-ordered' => 'Ordered (:qty_ordered)',
+                    'item-invoice' => 'Invoiced (:qty_invoiced)',
+                    'item-shipped' => 'shipped (:qty_shipped)',
+                    'item-canceled' => 'Canceled (:qty_canceled)',
+                    'price' => 'Price',
+                    'total' => 'Total',
+                    'subtotal' => 'Subtotal',
+                    'shipping-handling' => 'Shipping & Handling',
+                    'tax' => 'Tax',
+                    'tax-percent' => 'Tax Percent',
+                    'tax-amount' => 'Tax Amount',
+                    'discount-amount' => 'Discount Amount',
+                    'grand-total' => 'Grand Total',
+                    'total-paid' => 'Total Paid',
+                    'total-refunded' => 'Total Refunded',
+                    'total-due' => 'Total Due',
+                    'shipping-address' => 'Shipping Address',
+                    'billing-address' => 'Billing Address',
+                    'shipping-method' => 'Shipping Method',
+                    'payment-method' => 'Payment Method',
+                    'individual-invoice' => 'Invoice #:invoice_id',
+                    'individual-shipment' => 'Shipment #:shipment_id',
                 ]
             ],
 

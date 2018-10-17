@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Product\Product;
+namespace Webkul\Product\Helpers;
 
 class Toolbar extends AbstractProduct
 {

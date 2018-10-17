@@ -1,4 +1,4 @@
-@inject ('productImageHelper', 'Webkul\Product\Product\ProductImage')
+@inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @extends('shop::layouts.master')
 @section('content-wrapper')
