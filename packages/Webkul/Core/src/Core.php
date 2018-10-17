@@ -93,7 +93,8 @@ class Core
     *
     *  @return Collection
     */
-    public function getAllChannels() {
+    public function getAllChannels()
+    {
         static $channels;
 
         if($channels)
@@ -107,13 +108,23 @@ class Core
     *
     *  @return mixed
     */
-    public function getCurrentChannel() {
+    public function getCurrentChannel()
+    {
         static $channel;
 
         if($channel)
             return $channel;
 
-        return $channel = $this->channelRepository->first();
+        $channel = $this->channelRepository->findWhereIn('hostname', [
+                request()->getHttpHost(),
+                'http://' . request()->getHttpHost(),
+                'https://' . request()->getHttpHost()
+            ])->first();
+        
+        if(!$channel)
+            $channel = $this->channelRepository->first();
+
+        return $channel;
     }
 
     /**
@@ -121,7 +132,8 @@ class Core
     *
     *  @return string
     */
-    public function getCurrentChannelCode() {
+    public function getCurrentChannelCode()
+    {
         static $channelCode;
 
         if($channelCode)
@@ -135,7 +147,8 @@ class Core
     *
     *  @return mixed
     */
-    public function getDefaultChannel() {
+    public function getDefaultChannel()
+    {
         static $channel;
 
         if($channel)
@@ -149,7 +162,8 @@ class Core
     *
     *  @return string
     */
-    public function getDefaultChannelCode() {
+    public function getDefaultChannelCode()
+    {
         static $channelCode;
 
         if($channelCode)
@@ -163,7 +177,8 @@ class Core
     *
     *  @return Collection
     */
-    public function getAllLocales() {
+    public function getAllLocales()
+    {
         static $locales;
 
         if($locales)

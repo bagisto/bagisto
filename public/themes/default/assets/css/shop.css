@@ -1402,11 +1402,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 }
 
 .footer .footer-content .footer-list-container .list-container .form-container {
-  padding-top: 10px;
-}
-
-.footer .footer-content .footer-list-container .list-container .form-container .control-group {
-  margin: 0;
+  padding-top: 5px;
 }
 
 .footer .footer-content .footer-list-container .list-container .form-container .control-group .subscribe-field {
@@ -1426,6 +1422,10 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   margin-top: 8px;
   border-radius: 0px;
   text-align: center;
+}
+
+.footer .footer-content .footer-list-container .list-container .form-container .control-group .locale-switcher {
+  width: 100%;
 }
 
 .main .category-container {

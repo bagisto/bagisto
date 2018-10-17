@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
+use Webkul\Shop\Http\Middleware\Locale;
+use Webkul\Shop\Http\Middleware\Theme;
 use Webkul\Shop\Providers\ComposerServiceProvider;
 use Webkul\Ui\Menu;
 
@@ -16,7 +18,7 @@ class ShopServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Router $router)
     {
         include __DIR__ . '/../Http/routes.php';
 
@@ -27,6 +29,10 @@ class ShopServiceProvider extends ServiceProvider
         ], 'public');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shop');
+
+        $router->aliasMiddleware('locale', Locale::class);
+
+        $router->aliasMiddleware('theme', Theme::class);
 
         $this->app->register(ComposerServiceProvider::class);
 
