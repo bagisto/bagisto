@@ -689,7 +689,6 @@ class DataGrid
         $parsed = $this->parse();
 
         if ($this->aliased==true) {
-
             //flags
             $table_alias = false;
             $join_table_alias = false;
@@ -710,7 +709,7 @@ class DataGrid
             //check whether exploded string still has same table name
             if ($exploded[0]==$this->table) {
                 $table_alias = false;
-            } else { // (isset($exploded))
+            } else {
                 $table_alias = true;
                 $table_name = trim($exploded[0]);
                 $table_alias = trim($exploded[1]);
