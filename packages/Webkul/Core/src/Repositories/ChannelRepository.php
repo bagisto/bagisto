@@ -90,6 +90,9 @@ class ChannelRepository extends Repository
             if($channel->{$type}) {
                 Storage::delete($channel->{$type});
             }
+
+            $channel->{$type} = null;
+            $channel->save();
         }
     }
 }

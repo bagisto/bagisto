@@ -36,6 +36,20 @@ class ShopServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $themes = $this->app->make('themes');
+
+        if (!$themes->current() && \Config::get('themes.default')) {
+            $themes->set(\Config::get('themes.default'));
+        }
+    }
+
+    /**
      * Bind the the data to the views
      *
      * @return void

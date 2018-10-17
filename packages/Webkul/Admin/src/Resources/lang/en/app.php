@@ -388,6 +388,7 @@ return [
             'currencies' => 'Currencies',
             'base-currency' => 'Base Currency',
             'design' => 'Design',
+            'theme' => 'Theme',
             'logo' => 'Logo',
             'favicon' => 'Favicon'
         ],

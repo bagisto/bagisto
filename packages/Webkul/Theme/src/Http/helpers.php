@@ -1,11 +1,9 @@
 <?php
 
-use Webkul\Theme\Themes;
-
 if (! function_exists('themes')) {
     function themes()
     {
-        return new Themes;
+        return app()->make('themes');
     }
 }
 

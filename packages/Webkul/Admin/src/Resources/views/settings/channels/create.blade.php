@@ -104,6 +104,16 @@
 
                     <accordian :title="'{{ __('admin::app.settings.channels.design') }}'" :active="true">
                         <div slot="body">
+                            <div class="control-group">
+                                <label for="theme">{{ __('admin::app.settings.channels.theme') }}</label>
+                                <select class="control" id="theme" name="theme">
+                                    @foreach(themes()->all() as $theme)
+                                        <option value="{{ $theme->code }}" {{ old('theme') == $theme->code ? 'selected' : '' }}>
+                                            {{ $theme->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
                             <div class="control-group">
                                 <label>{{ __('admin::app.settings.channels.logo') }}
