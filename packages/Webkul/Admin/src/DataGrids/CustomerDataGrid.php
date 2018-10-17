@@ -103,13 +103,13 @@ class CustomerDataGrid
             'filterable' => [
 
                 [
-                    'name' => 'id',
+                    'column' => 'id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'Customer ID',
                 ],
                 [
-                    'name' => 'first_name',
+                    'column' => 'first_name',
                     'alias' => 'FirstName',
                     'type' => 'string',
                     'label' => 'Customer First Name',

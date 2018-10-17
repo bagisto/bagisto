@@ -23,7 +23,8 @@
             <div class="more-filters">
                 <div class="dropdown-toggle">
                     <div class="dropdown-header">
-                        <span class="name">Filter</span> {{-- <span class="role">Filter</span> --}}
+                        <span class="name">Filter</span>
+                        {{-- <span class="role">Filter</span> --}}
                         <i class="icon arrow-down-icon active"></i>
                     </div>
                 </div>

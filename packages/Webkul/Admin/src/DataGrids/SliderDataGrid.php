@@ -67,28 +67,25 @@ class SliderDataGrid
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
-
                 [
                     'name' => 's.id',
                     'alias' => 'sliderId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 's.title',
                     'alias' => 'sliderTitle',
                     'type' => 'string',
                     'label' => 'title',
-                ],
-                [
+                    'sortable' => false
+                ], [
                     'name' => 's.channel_id',
                     'alias' => 'channelId',
                     'type' => 'string',
                     'label' => 'Channel ID',
-                    'sortable' => true,
-                ],
-                [
+                    'sortable' => false,
+                ], [
                     'name' => 'c.name',
                     'alias' => 'channelName',
                     'type' => 'string',
@@ -98,41 +95,31 @@ class SliderDataGrid
             ],
 
             //don't use aliasing in case of filters
-
             'filterable' => [
                 [
-                    'column' => 'id',
-                    'alias' => 'locale_id',
+                    'column' => 's.id',
+                    'alias' => 'sliderId',
                     'type' => 'number',
-                    'label' => 'ID',
-                ],
-                [
-                    'column' => 'code',
-                    'alias' => 'locale_code',
+                    'label' => 'ID'
+                ], [
+                    'column' => 's.title',
+                    'alias' => 'SliderTitle',
                     'type' => 'string',
-                    'label' => 'Code',
-                ],
-                [
-                    'column' => 'name',
-                    'alias' => 'locale_name',
-                    'type' => 'string',
-                    'label' => 'Name',
+                    'label' => 'Slider Title'
                 ],
             ],
 
             //don't use aliasing in case of searchables
-
             'searchable' => [
-                // [
-                //     'column' => 'name',
-                //     'type' => 'string',
-                //     'label' => 'Name',
-                // ],
-                // [
-                //     'column' => 'code',
-                //     'type' => 'string',
-                //     'label' => 'Code',
-                // ],
+                [
+                    'column' => 's.id',
+                    'type' => 'number',
+                    'label' => 'ID'
+                ], [
+                    'column' => 's.title',
+                    'type' => 'string',
+                    'label' => 'Slider Title'
+                ]
             ],
 
             //list of viable operators that will be used
@@ -148,9 +135,7 @@ class SliderDataGrid
                 'nlike' => "not like",
             ],
             // 'css' => []
-
         ]);
-
     }
 
     public function render()

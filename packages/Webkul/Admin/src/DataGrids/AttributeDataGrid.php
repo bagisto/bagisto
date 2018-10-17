@@ -60,7 +60,6 @@ class AttributeDataGrid
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
-
                 [
                     'name' => 'id',
                     'alias' => 'attributeId',
@@ -87,37 +86,60 @@ class AttributeDataGrid
                     'alias' => 'attributeType',
                     'type' => 'string',
                     'label' => 'Type',
-                    'sortable' => true,
+                    'sortable' => false,
                 ],
                 [
                     'name' => 'is_required',
                     'alias' => 'attributeIsRequired',
                     'type' => 'string',
                     'label' => 'Required',
-                    'sortable' => true,
+                    'sortable' => false,
+                    'wrapper' => function ($value) {
+                        if($value == 0)
+                            return "False";
+                        else
+                            return "True";
+                    },
                 ],
                 [
                     'name' => 'is_unique',
                     'alias' => 'attributeIsUnique',
                     'type' => 'string',
                     'label' => 'Unique',
-                    'sortable' => true,
+                    'sortable' => false,
+                    'wrapper' => function ($value) {
+                        if($value == 0)
+                            return "False";
+                        else
+                            return "True";
+                    },
                 ],
                 [
                     'name' => 'value_per_locale',
                     'alias' => 'attributeValuePerLocale',
                     'type' => 'string',
                     'label' => 'ValuePerLocale',
-                    'sortable' => true,
+                    'sortable' => false,
+                    'wrapper' => function ($value) {
+                        if($value == 0)
+                            return "False";
+                        else
+                            return "True";
+                    },
                 ],
                 [
                     'name' => 'value_per_channel',
                     'alias' => 'attributeValuePerChannel',
                     'type' => 'string',
                     'label' => 'ValuePerChannel',
-                    'sortable' => true,
+                    'sortable' => false,
+                    'wrapper' => function ($value) {
+                        if($value == 0)
+                            return "False";
+                        else
+                            return "True";
+                    },
                 ],
-
             ],
 
             'filterable' => [
@@ -148,7 +170,6 @@ class AttributeDataGrid
             ],
 
             //don't use aliasing in case of searchables
-
             'searchable' => [
                 [
                     'column' => 'code',

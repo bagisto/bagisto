@@ -104,6 +104,12 @@ class CategoryDataGrid
                     'type' => 'string',
                     'label' => 'Visible in Menu',
                     'sortable' => true,
+                    'wrapper' => function ($value) {
+                        if($value == 0)
+                            return "False";
+                        else
+                            return "True";
+                    },
                 ],
 
             ],

@@ -64,7 +64,6 @@ class InventorySourcesDataGrid
             ],
 
             //use aliasing on secodary columns if join is performed
-
             'columns' => [
 
                 [
@@ -73,34 +72,36 @@ class InventorySourcesDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'code',
                     'alias' => 'inventoryCode',
                     'type' => 'string',
                     'label' => 'Code',
-                    'sortable' => true,
-                ],
-                [
+                    'sortable' => false,
+                ], [
                     'name' => 'name',
                     'alias' => 'inventoryName',
                     'type' => 'string',
                     'label' => 'Name',
-                    'sortable' => true,
-                ],
-                [
+                    'sortable' => false,
+                ], [
                     'name' => 'priority',
                     'alias' => 'inventoryPriority',
                     'type' => 'string',
                     'label' => 'Priority',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'status',
                     'alias' => 'inventoryStatus',
                     'type' => 'string',
                     'label' => 'Status',
                     'sortable' => true,
+                    'wrapper' => function ($value) {
+                        if($value == 0)
+                            return "In Active";
+                        else
+                            return "Active";
+                    },
                 ],
 
             ],
