@@ -12,6 +12,10 @@
 
         @if ($priceHelper->haveSpecialPrice($product))
 
+            <div class="sticker sale">
+                {{ __('shop::app.products.sale') }}
+            </div>
+
             <span class="regular-price">{{ core()->currency($product->price) }}</span>
 
             <span class="special-price">{{ core()->currency($priceHelper->getSpecialPrice($product)) }}</span>

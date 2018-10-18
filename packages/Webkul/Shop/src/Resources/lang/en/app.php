@@ -4,11 +4,7 @@ return [
     'home' => [
         'page-title' => 'Bagisto - Home',
         'featured-products' => 'Featured Products',
-        'new-products' => 'New Products',
-
-        'product-card' => [
-            'add-to-cart' => 'ADD TO CART'
-        ]
+        'new-products' => 'New Products'
     ],
 
     'footer' => [
@@ -198,7 +194,13 @@ return [
         'up-sell-title' => 'We found other products you might like!',
         'reviews-title' => 'Ratings & Reviews',
         'write-review-btn' => 'Write Review',
-        'choose-option' => 'Choose an option'
+        'choose-option' => 'Choose an option',
+        'sale' => 'Sale',
+        'new' => 'New',
+        'empty' => 'No products available in this category.',
+        'add-to-cart' => 'Add To Cart',
+        'buy-now' => 'Buy Now',
+        'whoops' => 'Whoops!'
     ],
 
     'wishlist' => [
@@ -219,7 +221,8 @@ return [
             ],
 
             'title' => 'Shopping Cart',
-            'empty' => 'Shopping Cart Is Empty',
+            'empty' => 'Your shopping cart is empty.',
+            'update-cart' => 'Update Cart',
             'continue-shopping' => 'Continue Shopping',
             'proceed-to-checkout' => 'Proceed To Checkout',
             'remove' => 'Remove',
