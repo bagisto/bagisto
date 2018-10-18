@@ -1,1 +1,3 @@
-<button class="btn btn-lg btn-primary buynow">BUY NOW!</button>
+<button class="btn btn-lg btn-primary buynow">
+    {{ __('shop::app.products.buy-now') }}
+</button>

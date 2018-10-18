@@ -1,14 +1,20 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ $product->name }}
+    {{ $product->meta_title ?? $product->name }}
+@stop
+
+@section('seo')
+    <meta name="description" content="{{ $product->meta_description }}"/>
+    <meta name="description" content="{{ $product->meta_keywords }}"/>
 @stop
 
 @section('content-wrapper')
     <section class="product-detail">
-        <div class="category-breadcrumbs">
+        <!--<div class="category-breadcrumbs">
             <span class="breadcrumb">Home</span> > <span class="breadcrumb">Men</span> > <span class="breadcrumb">Slit Open Jeans</span>
-        </div>
+        </div>-->
+        
         <div class="layouter">
             <form method="POST" action="{{ route('cart.add', $product->id) }}" @submit.prevent="onSubmit">
                 @csrf()
@@ -23,12 +29,11 @@
                         <span>{{ $product->name }}</span>
                     </div>
 
-                    {{-- @include ('shop::products.review', ['product' => $product]) --}}
+                    @include ('shop::products.review', ['product' => $product])
 
                     @include ('shop::products.price', ['product' => $product])
 
                     @include ('shop::products.view.stock')
-
 
                     <div class="description">
                         {{ $product->short_description }}
