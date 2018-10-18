@@ -15,7 +15,7 @@ class Code implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match('/^[a-z]+[a-z0-9_]+$/', $value);
+        return preg_match('/^[a-zA-Z]+[a-zA-Z0-9_]+$/', $value);
     }
 
     /**

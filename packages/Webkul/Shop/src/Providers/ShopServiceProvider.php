@@ -8,6 +8,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Theme;
+use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Providers\ComposerServiceProvider;
 use Webkul\Ui\Menu;
 
@@ -31,8 +32,8 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shop');
 
         $router->aliasMiddleware('locale', Locale::class);
-
         $router->aliasMiddleware('theme', Theme::class);
+        $router->aliasMiddleware('currency', Currency::class);
 
         $this->app->register(ComposerServiceProvider::class);
 
