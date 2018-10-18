@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => ['web', 'theme', 'locale']], function () {
+Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function () {
 
     Route::get('/', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
         'view' => 'shop::home.index'

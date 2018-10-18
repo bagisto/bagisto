@@ -89,7 +89,7 @@
 
                             <div class="control-group" :class="[errors.has('slug') ? 'has-error' : '']">
                                 <label for="slug" class="required">{{ __('admin::app.catalog.categories.slug') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="slug" name="slug" value="{{ old('slug') }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="slug" name="slug" value="{{ old('slug') }}" v-slugify/>
                                 <span class="control-error" v-if="errors.has('slug')">@{{ errors.first('slug') }}</span>
                             </div>
 

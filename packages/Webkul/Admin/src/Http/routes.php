@@ -298,6 +298,14 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.locales.index'
             ])->name('admin.locales.store');
 
+            Route::get('/locales/edit/{id}', 'Webkul\Core\Http\Controllers\LocaleController@edit')->defaults('_config', [
+                'view' => 'admin::settings.locales.edit'
+            ])->name('admin.locales.edit');
+
+            Route::put('/locales/edit/{id}', 'Webkul\Core\Http\Controllers\LocaleController@update')->defaults('_config', [
+                'redirect' => 'admin.locales.index'
+            ])->name('admin.locales.update');
+
             Route::get('/locales/delete/{id}', 'Webkul\Core\Http\Controllers\LocaleController@destroy')->name('admin.locales.delete');
 
 
@@ -313,6 +321,14 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/currencies/create', 'Webkul\Core\Http\Controllers\CurrencyController@store')->defaults('_config', [
                 'redirect' => 'admin.currencies.index'
             ])->name('admin.currencies.store');
+
+            Route::get('/currencies/edit/{id}', 'Webkul\Core\Http\Controllers\CurrencyController@edit')->defaults('_config', [
+                'view' => 'admin::settings.currencies.edit'
+            ])->name('admin.currencies.edit');
+
+            Route::put('/currencies/edit/{id}', 'Webkul\Core\Http\Controllers\CurrencyController@update')->defaults('_config', [
+                'redirect' => 'admin.currencies.index'
+            ])->name('admin.currencies.update');
 
             Route::get('/currencies/delete/{id}', 'Webkul\Core\Http\Controllers\CurrencyController@destroy')->name('admin.currencies.delete');
 

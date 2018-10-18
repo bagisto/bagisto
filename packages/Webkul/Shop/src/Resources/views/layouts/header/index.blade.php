@@ -25,6 +25,27 @@
         </div>
 
         <div class="right-content">
+            @if (core()->getCurrentChannel()->currencies->count() > 1)
+                <div class="currency-switcher">
+                    <div class="dropdown-toggle">
+                        USD
+                        <i class="icon arrow-down-icon active"></i>
+                    </div>
+
+                    <div class="dropdown-list bottom-right">
+                        <div class="dropdown-container">
+                            <ul>
+                                @foreach (core()->getCurrentChannel()->currencies as $currency)
+                                    <li>
+                                        <a href="?currency={{ $currency->code }}">{{ $currency->code }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             <ul class="account-dropdown-container">
                 <li class="account-dropdown">
                     <div class="dropdown-toggle">
