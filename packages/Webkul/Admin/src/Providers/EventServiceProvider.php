@@ -29,19 +29,21 @@ class EventServiceProvider extends ServiceProvider
             'route' => 'admin.sales.orders.index',
             'sort' => 1,
             'icon-class' => '',
-        ], [
-            'key' => 'sales.shipments',
-            'name' => 'Shipments',
-            'route' => 'admin.sales.orders.index',
-            'sort' => 2,
-            'icon-class' => '',
-        ], [
-            'key' => 'sales.invoices',
-            'name' => 'Invoices',
-            'route' => 'admin.sales.orders.index',
-            'sort' => 3,
-            'icon-class' => '',
-        ], [
+        ],
+        // [
+        //     'key' => 'sales.shipments',
+        //     'name' => 'Shipments',
+        //     'route' => 'admin.sales.orders.index',
+        //     'sort' => 2,
+        //     'icon-class' => '',
+        // ], [
+        //     'key' => 'sales.invoices',
+        //     'name' => 'Invoices',
+        //     'route' => 'admin.sales.orders.index',
+        //     'sort' => 3,
+        //     'icon-class' => '',
+        // ],
+        [
             'key' => 'catalog',
             'name' => 'Catalog',
             'route' => 'admin.catalog.products.index',

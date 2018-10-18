@@ -29,7 +29,8 @@ class OrderDataGrid
             'table' => 'orders as or',
             'select' => 'or.id',
             'perpage' => 5,
-            'aliased' => true, //use this with false as default and true in case of joins
+            'aliased' => false,
+            //True in case of joins else aliasing key required on all cases
 
             'massoperations' =>[
                 [
@@ -40,36 +41,9 @@ class OrderDataGrid
                 ],
             ],
 
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
-                    'type' => 'Delete',
-                    'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
+            'actions' => [ ],
 
-            'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'order_address as oa',
-                //     'primaryKey' => 'or.id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'oa.order_id',
-                // ],
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'category_translations as cta',
-                //     'primaryKey' => 'cat.parent_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'cta.category_id',
-                // ],
-            ],
+            'join' => [],
 
             //use aliasing on secodary columns if join is performed
 
@@ -81,63 +55,62 @@ class OrderDataGrid
                     'label' => 'ID',
                     'sortable' => true,
                 ], [
-                    'name' => 'or.status',
-                    'alias' => 'orstatus',
+                    'name' => 'or.customer_first_name',
+                    'alias' => 'oafirstname',
                     'type' => 'string',
-                    'label' => 'Status',
-                    'sortable' => true,
-                    // 'wrapper' => function ($value) {
-                    //     if($value == 0)
-                    //         return "False";
-                    //     else
-                    //         return "True";
-                    // },
+                    'label' => 'Billed To',
+                    'sortable' => false,
                 ], [
                     'name' => 'or.base_grand_total',
                     'alias' => 'orbasegrandtotal',
                     'type' => 'string',
                     'label' => 'Base Total',
                     'sortable' => true,
+                    'wrapper' => function ($value) {
+                        return core()->currency($value);
+                    }
+                ], [
+                    'name' => 'or.grand_total',
+                    'alias' => 'oagrandtotal',
+                    'type' => 'string',
+                    'label' => 'Grand Total',
+                    'sortable' => false,
+                    'wrapper' => function ($value) {
+                        return core()->currency($value);
+                    }
+                ], [
+                    'name' => 'or.status',
+                    'alias' => 'orstatus',
+                    'type' => 'string',
+                    'label' => 'Status',
+                    'sortable' => true,
+                    'wrapper' => function ($value) {
+                        if($value == 'completed')
+                            return '<span class="badge badge-md badge-success">Completed</span>';
+                        else if($value == "cancelled")
+                            return '<span class="badge badge-md badge-danger">Completed</span>';
+                        else if($value == "closed")
+                            return '<span class="badge badge-md badge-info">Completed</span>';
+                        else if($value == "pending")
+                            return '<span class="badge badge-md badge-warning">Pending</span>';
+
+                    },
                 ],
-                // [
-                //     'name' => 'or.customer_first_name',
-                //     'alias' => 'oafirstname',
-                //     'type' => 'string',
-                //     'label' => 'Billed To',
-                //     'sortable' => false,
-                // ], [
-                //     'name' => 'oa.first_name',
-                //     'alias' => 'oafirstname',
-                //     'type' => 'string',
-                //     'label' => 'Shipped To',
-                //     'sortable' => false,
-                // ],
             ],
 
             'filterable' => [
-                // [
-                //     'column' => 'cat.id',
-                //     'alias' => 'catID',
-                //     'type' => 'number',
-                //     'label' => 'Category ID',
-                // ], [
-                //     'column' => 'ct.name',
-                //     'alias' => 'catName',
-                //     'type' => 'string',
-                //     'label' => 'Category Name',
-                // ], [
-                //     'column' => 'cta.name',
-                //     'alias' => 'parentName',
-                //     'type' => 'string',
-                //     'label' => 'Parent Name',
-                // ], [
-                //     'column' => 'cat.status',
-                //     'alias' => 'catStatus',
-                //     'type' => 'string',
-                //     'label' => 'Visible in Menu',
-                // ],
+                [
+                    'column' => 'or.id',
+                    'alias' => 'orderid',
+                    'type' => 'number',
+                    'label' => 'ID',
+                ], [
+                    'name' => 'or.status',
+                    'alias' => 'orstatus',
+                    'type' => 'string',
+                    'label' => 'Status'
+                ]
             ],
-
             //don't use aliasing in case of searchables
 
             'searchable' => [

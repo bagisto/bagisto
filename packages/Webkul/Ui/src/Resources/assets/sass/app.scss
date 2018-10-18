@@ -773,37 +773,39 @@ h2 {
 }
 
 .badge {
-    background: #E7E7E7;
-    @include border-radius(2px);
+    @include border-radius(50px);
+    color: white;
     padding: 8px;
-    color: #000311;
-    display: inline-block;
 
-    &.label-sm {
+    &.badge-sm {
         padding: 5px;
     }
 
-    &.label-md {
-        padding: 8px;
+    &.badge-md {
+        padding: 3px 10px;
     }
 
-    &.label-lg {
+    &.badge-lg {
         padding: 11px;
     }
 
-    &.label-xl {
+    &.badge-xl {
         padding: 14px;
     }
 
-    &.success {
+    &.badge-success {
         background-color: $success-color;
     }
 
-    &.danger {
+    &.badge-info {
+        background-color: $brand-color;
+    }
+
+    &.badge-danger {
         background-color: $danger-color;
     }
 
-    &.warning {
+    &.badge-warning {
         background-color: $warning-color;
     }
 }
@@ -836,7 +838,6 @@ h2 {
         }
 
         .remove-image {
-            // display: none;
             background-image: linear-gradient(-180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.24) 100%);
             @include border-radius(0 0 4px 4px);
             position: absolute;
