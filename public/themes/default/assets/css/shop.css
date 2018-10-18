@@ -2836,3 +2836,9 @@ section.review .review-layouter .review-form .review-detail .rating-calculate .p
     width: 100%;
   }
 }
+
+.cp-spinner {
+  margin-left: 46%;
+  margin-top: 35%;
+  margin-bottom: 35%;
+}
