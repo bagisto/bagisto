@@ -79,7 +79,7 @@ class ChannelController extends Controller
             'currencies' => 'required|array|min:1',
             'base_currency_id' => 'required'
         ]);
-        
+
         $this->channel->create(request()->all());
 
         session()->flash('success', 'Channel created successfully.');

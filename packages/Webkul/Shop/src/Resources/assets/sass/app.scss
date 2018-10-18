@@ -2052,3 +2052,80 @@ section.review {
         }
     }
 }
+
+@media only screen and (max-width: 770px) {
+    .account-content {
+        flex-direction: column;
+
+        .account-side-menu {
+            display: none;
+            width:100%;
+            border: none;
+
+            li {
+                margin-left: 0%;
+                width: 100%;
+
+                a {
+                    color : $font-color;
+                }
+            }
+        }
+
+        .responsive-side-menu {
+            cursor: pointer;
+            padding-top:13px;
+            display: block;
+            height: 46px;
+            border-bottom: 1px solid $border-color;
+            border-top: 1px solid $border-color;
+
+            .right {
+                float: right;
+            }
+        }
+
+        .account-layout {
+            margin-left: 0%;
+            margin-top: 20px;
+
+            .account-head  {
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid $border-color;
+                border-top: 1px solid $border-color;
+                height: 46px;
+
+                .back-icon {
+                    display: block;
+                }
+
+                span {
+                    margin-top: 12px;
+                    font-size: 18px;
+                }
+
+                .horizontal-rule {
+                    display: none;
+                }
+            }
+
+            .account-table-content {
+                margin-top: 2%;
+
+                table tbody tr {
+                    display: grid;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+
+        .account-items-list , .edit-form {
+            margin-top: 20px;
+        }
+
+        .control-group .control {
+            width: 100%;
+        }
+    }
+}

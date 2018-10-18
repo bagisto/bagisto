@@ -57,4 +57,23 @@ class SliderController extends controller
         session()->flash('success', 'Slider created successfully.');
         return redirect()->back();
     }
+
+      /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if($this->slider->count() == 1) {
+            session()->flash('error', 'At least one slider is required.');
+        } else {
+            $this->slider->delete($id);
+
+            session()->flash('success', 'Slider deleted successfully.');
+        }
+
+        return redirect()->back();
+    }
 }

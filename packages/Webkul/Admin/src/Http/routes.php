@@ -64,8 +64,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.update');
 
-            Route::get('customers/delete/{id}', 'Webkul\Admin\Http\Controllers\CustomerController@destroy')->name('admin.customer.delete');
-
+            Route::get('customer/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@destroy')->name('admin.customer.delete');
 
             Route::get('reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
                 'view' => 'admin::customers.review.index'
@@ -262,6 +261,8 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.users.index'
             ])->name('admin.users.update');
 
+            Route::get('/users/delete/{id}', 'Webkul\User\Http\Controllers\UserController@destroy')->name('admin.users.delete');
+
 
             // User Role Routes
             Route::get('/roles', 'Webkul\User\Http\Controllers\RoleController@index')->defaults('_config', [
@@ -410,6 +411,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin::sliders.index'
             ])->name('admin.sliders.store');
 
+            Route::get('/slider/delete/{id}', 'Webkul\Shop\Http\Controllers\SliderController@destroy')->name('admin.sliders.delete');
 
             //tax routes
             Route::get('/tax-categories', 'Webkul\Tax\Http\Controllers\TaxController@index')->defaults('_config', [
@@ -432,6 +434,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('/tax-categories/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@update')->defaults('_config', [
                 'redirect' => 'admin.tax-categories.index'
             ])->name('admin.tax-categories.update');
+
+            Route::get('/tax-categories/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@destroy')->name('admin.tax-categories.delete');
 
             //tax category ends
 
@@ -456,6 +460,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('tax-rates/update/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@update')->defaults('_config', [
                 'redirect' => 'admin.tax-rates.index'
             ])->name('admin.tax-rates.update');
+
+            Route::get('/tax-rates/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@destroy')->name('admin.tax-rates.delete');
             //tax rate ends
         });
     });

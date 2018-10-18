@@ -11,5 +11,5 @@ class Category extends TranslatableModel
 
     public $translatedAttributes = ['name', 'description', 'slug', 'meta_title', 'meta_description', 'meta_keywords'];
 
-    protected $fillable = ['position', 'status', 'parent_id','image'];
+    protected $fillable = ['position', 'status', 'parent_id'];
 }

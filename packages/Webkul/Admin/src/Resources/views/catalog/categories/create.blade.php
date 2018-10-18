@@ -66,6 +66,12 @@
                                 <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                             </div>
 
+                            <div class="control-group">
+                                <label>{{ __('admin::app.catalog.categories.image') }}
+
+                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false"></image-wrapper>
+                            </div>
+
                         </div>
                     </accordian>
 

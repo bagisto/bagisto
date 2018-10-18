@@ -8,7 +8,7 @@
     <div class="content">
         <?php $locale = request()->get('locale') ?: app()->getLocale(); ?>
 
-        <form method="POST" action="" @submit.prevent="onSubmit">
+        <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
             <div class="page-header">
                 <div class="page-title">
@@ -77,6 +77,13 @@
                                 <label for="description" class="required">{{ __('admin::app.catalog.categories.description') }}</label>
                                 <textarea v-validate="'required'" class="control" id="description" name="{{$locale}}[description]">{{ old($locale)['description'] ?: $category->translate($locale)['description'] }}</textarea>
                                 <span class="control-error" v-if="errors.has('{{$locale}}[description]')">@{{ errors.first('{!!$locale!!}[description]') }}</span>
+                            </div>
+
+                            <div class="control-group">
+                                <label>{{ __('admin::app.catalog.categories.image') }}
+
+                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false"></image-wrapper>
+
                             </div>
 
                         </div>

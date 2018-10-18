@@ -1,4 +1,4 @@
-<div class="responsive-side-menu" id="responsive-side-menu">
+<div class="responsive-side-menu" id="responsive-side-menu" style="display: none">
     Menu
     <i class="icon icon-arrow-down right" id="down-icon"></i>
 </div>

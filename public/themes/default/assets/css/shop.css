@@ -2733,3 +2733,73 @@ section.review .review-layouter .review-form .review-detail .rating-calculate .p
 .sale-container .totals .sale-summary tr.border td {
   border-bottom: 1px solid #C7C7C7;
 }
+
+@media only screen and (max-width: 770px) {
+  .account-content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .account-content .account-side-menu {
+    display: none;
+    width: 100%;
+    border: none;
+  }
+  .account-content .account-side-menu li {
+    margin-left: 0%;
+    width: 100%;
+  }
+  .account-content .account-side-menu li a {
+    color: #242424;
+  }
+  .account-content .responsive-side-menu {
+    cursor: pointer;
+    padding-top: 13px;
+    display: block;
+    height: 46px;
+    border-bottom: 1px solid #C7C7C7;
+    border-top: 1px solid #C7C7C7;
+  }
+  .account-content .responsive-side-menu .right {
+    float: right;
+  }
+  .account-content .account-layout {
+    margin-left: 0%;
+    margin-top: 20px;
+  }
+  .account-content .account-layout .account-head {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    border-bottom: 1px solid #C7C7C7;
+    border-top: 1px solid #C7C7C7;
+    height: 46px;
+  }
+  .account-content .account-layout .account-head .back-icon {
+    display: block;
+  }
+  .account-content .account-layout .account-head span {
+    margin-top: 12px;
+    font-size: 18px;
+  }
+  .account-content .account-layout .account-head .horizontal-rule {
+    display: none;
+  }
+  .account-content .account-layout .account-table-content {
+    margin-top: 2%;
+  }
+  .account-content .account-layout .account-table-content table tbody tr {
+    display: grid;
+    margin-bottom: 20px;
+  }
+  .account-content .account-items-list, .account-content .edit-form {
+    margin-top: 20px;
+  }
+  .account-content .control-group .control {
+    width: 100%;
+  }
+}
