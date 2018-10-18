@@ -14,7 +14,7 @@
                 <div class="dropdown-toggle">
                     <div style="display: inline-block; vertical-align: middle;">
                         <span class="name">
-                            {{--  {{ auth()->guard('admin')->user()->name }}  --}}
+                            {{ auth()->guard('admin')->user()->name }}
                         </span>
 
                         <span class="role">
