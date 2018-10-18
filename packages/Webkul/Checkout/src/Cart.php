@@ -159,9 +159,12 @@ class Cart {
      *
      * @return void
      */
-    public function add($id, $data)
+    public function add($id, $data, $prepared = false, $preparedData = [])
     {
-        $itemData = $this->prepareItemData($id, $data);
+        if($prepared == false)
+            $itemData = $this->prepareItemData($id, $data);
+        else
+            $itemData = $preparedData;
 
         if(!$itemData) {
             return false;
@@ -953,17 +956,78 @@ class Cart {
      * Move a wishlist item to cart
      */
     public function moveToCart($productId) {
-        $data = [
-            'product' => $productId,
-            'quantity' => 1,
+        $product = $this->product->find($productId);
+
+        if($product->configurable == null) {
+            $data = [
+                'product' => $productId,
+                'quantity' => 1,
+            ];
+
+            $result = $this->add($productId, $data);
+
+            if($result instanceof Collection || $result == true) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            //in case the product added is a configurable product.
+            $result = $this->moveConfigurableFromWishlistToCart($product->parent_id, $product->id);
+
+            if(is_array($result)) {
+                $data['quantity'] = 1;
+
+                $data['selected_configurable_option'] = $product->parent_id;
+
+                $moved = $this->add($data['selected_configurable_option'], $data, true, $result);
+
+                if($moved) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+    }
+
+    /**
+     * Move a configurable product from wishlist to cart.
+     *
+     * @return mixed
+     */
+    public function moveConfigurableFromWishlistToCart($configurableproductId, $productId) {
+        $product = $this->find($configurableproductId);
+
+        $child = $childData = null;
+        if($product->type == 'configurable') {
+            $child = $this->product->findOneByField('id', $productId);
+
+            $childData = [
+                'product_id' => $data['selected_configurable_option'],
+                'sku' => $child->sku,
+                'name' => $child->name,
+                'type' => 'simple'
+            ];
+        }
+
+        $price = ($product->type == 'configurable' ? $child->price : $product->price);
+
+        $parentData = [
+            'sku' => $product->sku,
+            'product_id' => $productId,
+            'quantity' => $data['quantity'],
+            'type' => $product->type,
+            'name' => $product->name,
+            'price' => core()->convertPrice($price),
+            'base_price' => $price,
+            'total' => core()->convertPrice($price * $data['quantity']),
+            'base_total' => $price * $data['quantity'],
+            'weight' => $weight = ($product->type == 'configurable' ? $child->weight : $product->weight),
+            'total_weight' => $weight * $data['quantity'],
+            'base_total_weight' => $weight * $data['quantity']
         ];
 
-        $result = $this->add($productId, $data);
-
-        if($result instanceof Collection || $result == true) {
-            return true;
-        } else {
-            return false;
-        }
+        return ['parent' => $parentData, 'child' => $childData];
     }
 }
