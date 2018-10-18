@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
 
@@ -13,12 +13,15 @@
 
     @yield('head')
 
+    @section('seo')
+        <meta name="description" content="{{ core()->getCurrentChannel()->description }}"/>
+    @show
+
     @yield('css')
 
 </head>
 
 <body>
-
     <div id="app">
         <flash-wrapper ref='flashes'></flash-wrapper>
 

@@ -1,1 +1,3 @@
-<button class="btn btn-lg btn-primary addtocart">{{ __('shop::app.home.product-card.add-to-cart') }}</button>
+<button class="btn btn-lg btn-primary addtocart">
+    {{ __('shop::app.products.add-to-cart') }}
+</button>
