@@ -100,108 +100,13 @@
 
             <ul class="cart-dropdown-container">
 
-                <?php $cart = cart()->getCart(); ?>
 
                 @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
                 <li class="cart-dropdown">
                     <span class="icon cart-icon"></span>
-                    @if($cart)
-                        <?php $items = $cart->items; ?>
-
-                        <div class="dropdown-toggle">
-                            <div style="display: inline-block; cursor: pointer;">
-                                @if($cart->items_qty - intval($cart->items_qty) > 0)
-
-                                    <span class="name">
-                                        Cart
-                                        <span class="count"> ({{ $cart->items_qty }})</span>
-                                    </span>
-
-                                @else
-
-                                    <span class="name">
-                                        Cart
-                                        <span class="count"> ({{ intval($cart->items_qty) }})</span>
-                                    </span>
-
-                                @endif
-                            </div>
-
-                            <i class="icon arrow-down-icon active"></i>
-                        </div>
-
-                        <div class="dropdown-list" style="display: none; top: 50px; right: 0px">
-                            <div class="dropdown-container">
-                                <div class="dropdown-cart">
-                                    <div class="dropdown-header">
-                                        <p class="heading">Cart Subtotal - {{ $cart->sub_total }}</p>
-                                    </div>
-
-                                    <div class="dropdown-content">
-                                        @foreach($items as $item)
-                                            @if($item->type == "configurable")
-
-                                                <div class="item">
-                                                    <div class="item-image" >
-                                                        @php
-                                                            $images = $productImageHelper->getProductBaseImage($item->child->product);
-                                                        @endphp
-                                                        <img src="{{ $images['small_image_url'] }}" />
-                                                    </div>
-
-                                                    <div class="item-details">
-
-                                                        <div class="item-name">{{ $item->child->name }}</div>
-
-                                                        <div class="item-price">{{ $item->total }}</div>
-
-                                                        <div class="item-qty">Quantity - {{ $item->quantity }}</div>
-                                                    </div>
-                                                </div>
-
-                                            @else
-
-                                                <div class="item">
-                                                    <div class="item-image" >
-                                                        @php
-                                                            $images = $productImageHelper->getProductBaseImage($item->product);
-                                                        @endphp
-                                                        <img src="{{ $images['small_image_url'] }}" />
-                                                    </div>
-
-                                                    <div class="item-details">
-
-                                                        <div class="item-name">{{ $item->name }}</div>
-
-                                                        <div class="item-price">{{ $item->total }}</div>
-
-                                                        <div class="item-qty">Quantity - {{ $item->quantity }}</div>
-                                                    </div>
-                                                </div>
-
-                                            @endif
-                                        @endforeach
-                                    </div>
-
-                                    <div class="dropdown-footer">
-                                        <a href="{{ route('shop.checkout.cart.index') }}">View Shopping Cart</a>
-
-                                        <a class="btn btn-primary btn-lg" style="color: white;" href="{{ route('shop.checkout.onepage.index') }}">CHECKOUT</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    @else
-
-                        <div class="dropdown-toggle">
-                            <div style="display: inline-block; cursor: pointer;">
-
-                                <span class="name">Cart<span class="count"> (0) </span></span>
-                            </div>
-                        </div>
-                    @endif
+                    
+                    @include('shop::checkout.cart.mini-cart')
                 </li>
             </ul>
 
@@ -263,14 +168,18 @@
                 <ul class="resp-cart-dropdown-container">
 
                     <li class="cart-dropdown">
+                        <?php $cart = cart()->getCart(); ?>
+                        
                         @if(isset($cart))
-                        <div>
-                            <a href="{{ route('shop.checkout.cart.index') }}"><span class="icon cart-icon"></span></a>
-                        </div>
+                            <div>
+                                <a href="{{ route('shop.checkout.cart.index') }}">
+                                    <span class="icon cart-icon"></span>
+                                </a>
+                            </div>
                         @else
-                        <div style="display: inline-block; cursor: pointer;">
-                            <span class="icon cart-icon"></span>
-                        </div>
+                            <div style="display: inline-block; cursor: pointer;">
+                                <span class="icon cart-icon"></span>
+                            </div>
                         @endif
                     </li>
                 </ul>

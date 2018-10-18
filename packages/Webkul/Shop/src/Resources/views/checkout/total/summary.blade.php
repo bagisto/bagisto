@@ -3,11 +3,7 @@
 
     <div class="item-detail">
         <label>
-            @if($cart->items_qty - intval($cart->items_qty) > 0)
-                {{ $cart->items_qty }}
-            @else
-                {{ intval($cart->items_qty) }}
-            @endif
+            {{ intval($cart->items_qty) }}
             {{ __('shop::app.checkout.total.sub-total') }}
             {{ __('shop::app.checkout.total.price') }}
         </label>

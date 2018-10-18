@@ -85,7 +85,7 @@ class ExchangeRateController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'target_currency' => 'required',
+            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency'],
             'rate' => 'required|numeric'
         ]);
 
@@ -121,8 +121,8 @@ class ExchangeRateController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'target_currency' => 'required',
-            'ratio' => 'required|numeric'
+            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,' . $id],
+            'rate' => 'required|numeric'
         ]);
 
         $this->exchangeRate->update(request()->all(), $id);
