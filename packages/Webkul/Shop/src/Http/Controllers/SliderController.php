@@ -58,22 +58,18 @@ class SliderController extends controller
         return redirect()->back();
     }
 
-      /**
-     * Remove the specified resource from storage.
+     /**
+     * Delete a slider item and preserve the last one from deleting
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function destroy($id)
-    {
-        if($this->slider->count() == 1) {
-            session()->flash('error', 'At least one slider is required.');
+    public function destroy($id) {
+        if($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1) {
+            session()->flash('warning', 'Cannot Delete The Last Slider Item');
         } else {
-            $this->slider->delete($id);
-
-            session()->flash('success', 'Slider deleted successfully.');
+            $this->slider->destroy($id);
+            session()->flash('success', 'Slider Item Successfully Deleted');
         }
-
         return redirect()->back();
     }
 }
