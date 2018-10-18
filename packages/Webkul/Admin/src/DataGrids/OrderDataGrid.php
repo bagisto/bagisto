@@ -6,7 +6,7 @@ use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
 /**
- * Order DataGrid
+ * orderDataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -14,20 +14,20 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
 
 class OrderDataGrid
 {
+
     /**
      * The Data Grid implementation.
      *
-     * @var AttributeDataGrid
-     * for countries
+     * @var orderDataGrid
+     * for orders
      */
-
-    public function createCategoryDataGrid()
+    public function createOrderDataGrid()
     {
 
             return DataGrid::make([
-            'name' => 'Orders',
-            'table' => 'orders as ord',
-            'select' => 'ord.id',
+            'name' => 'orders',
+            'table' => 'orders as or',
+            'select' => 'or.id',
             'perpage' => 5,
             'aliased' => true, //use this with false as default and true in case of joins
 
@@ -55,104 +55,105 @@ class OrderDataGrid
             ],
 
             'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'category_translations as ct',
-                    'primaryKey' => 'cat.id',
-                    'condition' => '=',
-                    'secondaryKey' => 'ct.category_id',
-                ], [
-                    'join' => 'leftjoin',
-                    'table' => 'category_translations as cta',
-                    'primaryKey' => 'cat.parent_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'cta.category_id',
-                ],
+                // [
+                //     'join' => 'leftjoin',
+                //     'table' => 'order_address as oa',
+                //     'primaryKey' => 'or.id',
+                //     'condition' => '=',
+                //     'secondaryKey' => 'oa.order_id',
+                // ],
+                // [
+                //     'join' => 'leftjoin',
+                //     'table' => 'category_translations as cta',
+                //     'primaryKey' => 'cat.parent_id',
+                //     'condition' => '=',
+                //     'secondaryKey' => 'cta.category_id',
+                // ],
             ],
 
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
                 [
-                    'name' => 'cat.id',
-                    'alias' => 'catID',
+                    'name' => 'or.id',
+                    'alias' => 'orderid',
                     'type' => 'number',
-                    'label' => 'Category ID',
+                    'label' => 'ID',
                     'sortable' => true,
                 ], [
-                    'name' => 'ct.name',
-                    'alias' => 'catName',
+                    'name' => 'or.status',
+                    'alias' => 'orstatus',
                     'type' => 'string',
-                    'label' => 'Category Name',
-                    'sortable' => false,
-                ], [
-                    'name' => 'cat.position',
-                    'alias' => 'catPosition',
-                    'type' => 'string',
-                    'label' => 'Category Position',
-                    'sortable' => false,
-                ], [
-                    'name' => 'cta.name',
-                    'alias' => 'parentName',
-                    'type' => 'string',
-                    'label' => 'Parent Name',
+                    'label' => 'Status',
                     'sortable' => true,
+                    // 'wrapper' => function ($value) {
+                    //     if($value == 0)
+                    //         return "False";
+                    //     else
+                    //         return "True";
+                    // },
                 ], [
-                    'name' => 'cat.status',
-                    'alias' => 'catStatus',
+                    'name' => 'or.base_grand_total',
+                    'alias' => 'orbasegrandtotal',
                     'type' => 'string',
-                    'label' => 'Visible in Menu',
+                    'label' => 'Base Total',
                     'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 0)
-                            return "False";
-                        else
-                            return "True";
-                    },
                 ],
-
+                // [
+                //     'name' => 'or.customer_first_name',
+                //     'alias' => 'oafirstname',
+                //     'type' => 'string',
+                //     'label' => 'Billed To',
+                //     'sortable' => false,
+                // ], [
+                //     'name' => 'oa.first_name',
+                //     'alias' => 'oafirstname',
+                //     'type' => 'string',
+                //     'label' => 'Shipped To',
+                //     'sortable' => false,
+                // ],
             ],
 
             'filterable' => [
-                [
-                    'column' => 'cat.id',
-                    'alias' => 'catID',
-                    'type' => 'number',
-                    'label' => 'Category ID',
-                ], [
-                    'column' => 'ct.name',
-                    'alias' => 'catName',
-                    'type' => 'string',
-                    'label' => 'Category Name',
-                ], [
-                    'column' => 'cta.name',
-                    'alias' => 'parentName',
-                    'type' => 'string',
-                    'label' => 'Parent Name',
-                ], [
-                    'column' => 'cat.status',
-                    'alias' => 'catStatus',
-                    'type' => 'string',
-                    'label' => 'Visible in Menu',
-                ],
+                // [
+                //     'column' => 'cat.id',
+                //     'alias' => 'catID',
+                //     'type' => 'number',
+                //     'label' => 'Category ID',
+                // ], [
+                //     'column' => 'ct.name',
+                //     'alias' => 'catName',
+                //     'type' => 'string',
+                //     'label' => 'Category Name',
+                // ], [
+                //     'column' => 'cta.name',
+                //     'alias' => 'parentName',
+                //     'type' => 'string',
+                //     'label' => 'Parent Name',
+                // ], [
+                //     'column' => 'cat.status',
+                //     'alias' => 'catStatus',
+                //     'type' => 'string',
+                //     'label' => 'Visible in Menu',
+                // ],
             ],
 
             //don't use aliasing in case of searchables
 
             'searchable' => [
-                [
-                    'column' => 'cat.id',
-                    'type' => 'number',
-                    'label' => 'Category ID',
-                ], [
-                    'column' => 'ct.name',
-                    'type' => 'string',
-                    'label' => 'Category Name',
-                ], [
-                    'column' => 'cat.status',
-                    'type' => 'string',
-                    'label' => 'Visible in Menu',
-                ]
+                // [
+                //     'column' => 'cat.id',
+                //     'type' => 'number',
+                //     'label' => 'Category ID',
+                // ], [
+                //     'column' => 'ct.name',
+                //     'type' => 'string',
+                //     'label' => 'Category Name',
+                // ], [
+                //     'column' => 'cat.status',
+                //     'type' => 'string',
+                //     'label' => 'Visible in Menu',
+                // ]
             ],
 
             //list of viable operators that will be used
@@ -173,7 +174,7 @@ class OrderDataGrid
 
     public function render()
     {
-        return $this->createCategoryDataGrid()->render();
+        return $this->createOrderDataGrid()->render();
 
     }
 }
