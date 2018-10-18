@@ -383,6 +383,7 @@ return [
             'code' => 'Code',
             'name' => 'Name',
             'description' => 'Description',
+            'hostname' => 'Hostname',
             'currencies-and-locales' => 'Currencies and Locales',
             'locales' => 'Locales',
             'default-locale' => 'Default Locale',

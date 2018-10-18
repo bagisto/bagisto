@@ -31,7 +31,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
         // Admin Routes
-        Route::group(['middleware' => ['admin', 'locale']], function () {
+        Route::group(['middleware' => ['admin']], function () {
             Route::get('/logout', 'Webkul\User\Http\Controllers\SessionController@destroy')->defaults('_config', [
                 'redirect' => 'admin.session.create'
             ])->name('admin.session.destroy');

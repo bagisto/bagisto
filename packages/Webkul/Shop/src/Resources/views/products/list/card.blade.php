@@ -4,6 +4,12 @@
 
     <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
 
+    @if($product->new)
+        <div class="sticker new">
+            {{ __('shop::app.products.new') }}
+        </div>
+    @endif
+
     <div class="product-image">
         <a href="{{ route('shop.products.index', $product->url_key) }}" title="{{ $product->name }}">
             <img src="{{ $productBaseImage['medium_image_url'] }}" />
@@ -32,7 +38,7 @@
             @include ('shop::products.add-to', ['product' => $product])
         @else
             @if($product->type == "configurable")
-                <a href="{{ route('cart.add.configurable', $product->url_key) }}" class="btn btn-lg btn-primary addtocart">{{ __('shop::app.home.product-card.add-to-cart') }}</a>
+                <a href="{{ route('cart.add.configurable', $product->url_key) }}" class="btn btn-lg btn-primary addtocart">{{ __('shop::app.products.add-to-cart') }}</a>
                 @include('shop::products.wishlist')
             @else
                 <div class="cart-wish-wrap">
@@ -41,7 +47,7 @@
                         <input type="hidden" name="product" value="{{ $product->id }}">
                         <input type="hidden" name="quantity" value="1">
                         <input type="hidden" value="false" name="is_configurable">
-                        <button class="btn btn-lg btn-primary addtocart">{{ __('shop::app.home.product-card.add-to-cart') }}</button>
+                        <button class="btn btn-lg btn-primary addtocart">{{ __('shop::app.products.add-to-cart') }}</button>
                     </form>
                     @include('shop::products.wishlist')
                 </div>

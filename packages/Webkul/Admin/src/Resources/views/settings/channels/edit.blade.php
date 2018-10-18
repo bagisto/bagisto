@@ -47,6 +47,11 @@
                                 <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                             </div>
 
+                            <div class="control-group">
+                                <label for="hostname">{{ __('admin::app.settings.channels.hostname') }}</label>
+                                <input type="text" class="control" id="hostname" name="hostname" value="{{ $channel->hostname }}" placeholder="https://www.example.com"/>
+                            </div>
+
                         </div>
                     </accordian>
 

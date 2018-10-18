@@ -22,7 +22,9 @@
                     <form action="{{ route('shop.checkout.cart.update') }}" method="POST" @submit.prevent="onSubmit">
 
                         <div class="cart-item-list" style="margin-top: 0">
+
                             @csrf
+
                             @foreach($cart->items as $item)
 
                                 <?php
@@ -76,11 +78,14 @@
                                 </div>
                             @endforeach
                         </div>
+
                         <div class="misc-controls">
                             <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
 
                             <div>
-                                <input type="submit" class="btn btn-lg btn-primary" value="Update Cart" />
+                                <button type="submit" class="btn btn-lg btn-primary">
+                                    {{ __('shop::app.checkout.cart.update-cart') }}
+                                </button>
 
                                 @if (!cart()->hasError())
                                     <a href="{{ route('shop.checkout.onepage.index') }}" class="btn btn-lg btn-primary">
@@ -96,9 +101,21 @@
                     @include('shop::checkout.total.summary', ['cart' => $cart])
                 </div>
             </div>
+
         @else
+
             <div class="title">
-                {{ __('shop::app.checkout.cart.empty') }}
+                {{ __('shop::app.checkout.cart.title') }}
+            </div>
+
+            <div class="cart-content">
+                <p>
+                    {{ __('shop::app.checkout.cart.empty') }}
+                </p>
+
+                <p style="display: inline-block;">
+                    <a style="display: inline-block;" href="{{ route('shop.home.index') }}" class="btn btn-lg btn-primary">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
+                </p>
             </div>
 
         @endif

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Channel extends Model
 {
-    protected $fillable = ['code', 'name', 'description', 'default_locale_id', 'base_currency_id', 'theme'];
+    protected $fillable = ['code', 'name', 'description', 'theme', 'hostname', 'default_locale_id', 'base_currency_id'];
 
     /**
      * Get the channel locales.

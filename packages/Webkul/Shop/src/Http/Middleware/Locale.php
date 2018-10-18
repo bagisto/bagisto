@@ -1,15 +1,14 @@
 <?php
 
-namespace Webkul\Core\Http\Middleware;
+namespace Webkul\Shop\Http\Middleware;
 
-use Webkul\Core\Models\Locale as LocaleModel;
 use Webkul\Core\Repositories\LocaleRepository;
 use Closure;
 
 class Locale
 {
     /**
-     * @var \Webkul\Core\Repositories\LocaleRepository
+     * @var LocaleRepository
      */
     protected $locale;
 
@@ -32,7 +31,13 @@ class Locale
     {
         if($locale = $request->get('locale')) {
             if($this->locale->findOneByField('code', $locale)) {
-                // app()->setLocale($locale);
+                app()->setLocale($locale);
+
+                session()->put('locale', $locale);
+            }
+        } else {
+            if($locale = session()->get('locale')) {
+                app()->setLocale($locale);
             }
         }
 
