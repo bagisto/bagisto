@@ -238,21 +238,6 @@ class Core
     }
 
     /**
-    * Returns base channel's currency symbol
-    *
-    *  @return string
-    */
-    public function getBaseCurrencySymbol()
-    {
-        static $currencySymbol;
-
-        if($currencySymbol)
-            return $currencySymbol;
-
-        return $currencySymbol = $this->getBaseCurrency()->symbol ?? $this->getBaseCurrencyCode();
-    }
-
-    /**
     * Returns base channel's currency model
     *
     *  @return mixed
@@ -285,21 +270,6 @@ class Core
     }
 
     /**
-    * Returns base channel's currency symbol
-    *
-    *  @return string
-    */
-    public function getChannelBaseCurrencySymbol()
-    {
-        static $currencySymbol;
-
-        if($currencySymbol)
-            return $currencySymbol;
-
-        return $currencySymbol = $this->getChannelBaseCurrency()->symbol;
-    }
-
-    /**
     * Returns current channel's currency model
     *
     *  @return mixed
@@ -311,7 +281,12 @@ class Core
         if($currency)
             return $currency;
 
-        return $currency = $this->currencyRepository->first();
+        if($currencyCode = session()->get('currency')) {
+            if($currency = $this->currencyRepository->findOneByField('code', $currencyCode))
+                return $currency;
+        }
+
+        return $currency = $this->getChannelBaseCurrency();
     }
 
     /**
@@ -327,21 +302,6 @@ class Core
             return $currencyCode;
 
         return ($currency = $this->getCurrentCurrency()) ? $currencyCode = $currency->code : '';
-    }
-
-    /**
-    * Returns current channel's currency symbol
-    *
-    *  @return string
-    */
-    public function getCurrentCurrencySymbol()
-    {
-        static $currencySymbol;
-
-        if($currencySymbol)
-            return $currencySymbol;
-
-        return $currencySymbol = $this->getCurrentCurrency()->symbol;
     }
 
     /**

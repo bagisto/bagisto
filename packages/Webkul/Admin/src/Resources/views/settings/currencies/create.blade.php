@@ -37,12 +37,6 @@
                                 <input v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') }}"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
-
-                            <div class="control-group" :class="[errors.has('symbol') ? 'has-error' : '']">
-                                <label for="symbol" class="required">{{ __('admin::app.settings.currencies.symbol') }}</label>
-                                <input v-validate="'required'" class="control" id="symbol" name="symbol" value="{{ old('symbol') }}"/>
-                                <span class="control-error" v-if="errors.has('symbol')">@{{ errors.first('symbol') }}</span>
-                            </div>
                         </div>
                     </accordian>
 
