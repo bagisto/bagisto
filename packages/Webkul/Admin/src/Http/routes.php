@@ -402,14 +402,27 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.sliders.index');
 
             // Admin Store Front Settings Route
-            Route::get('/slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
+
+            //slider create
+            Route::get('slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
                 'view' => 'admin::settings.sliders.create'
             ])->name('admin.sliders.create');
 
-            Route::post('/slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
+            Route::post('slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
                 'redirect' => 'admin::sliders.index'
             ])->name('admin.sliders.store');
 
+            //slider edit
+            Route::get('slider/edit/{id}','Webkul\Shop\Http\Controllers\SliderController@edit')->defaults('_config',[
+                'view' => 'admin::settings.sliders.edit'
+            ])->name('admin.sliders.edit');
+
+            Route::post('slider/edit/{id}','Webkul\Shop\Http\Controllers\SliderController@update')->defaults('_config',[
+                'redirect' => 'admin::sliders.index'
+            ])->name('admin.sliders.update');
+
+            //destroy a slider item
+            Route::get('slider/delete/{id}', 'Webkul\Shop\Http\Controllers\SliderController@destroy');
 
             //tax routes
             Route::get('/tax-categories', 'Webkul\Tax\Http\Controllers\TaxController@index')->defaults('_config', [

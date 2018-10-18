@@ -8,7 +8,8 @@
         <div class="account-layout">
 
             <div class="account-head">
-                <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
+                {{-- <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span> --}}
+
                 <span class="account-heading">{{ __('shop::app.customer.account.review.index.title') }}</span>
                 <span></span>
                 <div class="horizontal-rule"></div>
@@ -16,7 +17,7 @@
 
             <div class="account-items-list">
 
-                @if(is_null($reviews))
+                @if(!is_null($reviews))
                     @foreach($reviews as $review)
                     <div class="account-item-card mt-15 mb-15">
                         <div class="media-info">

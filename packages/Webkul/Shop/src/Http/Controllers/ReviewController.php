@@ -46,6 +46,10 @@ class ReviewController extends Controller
      */
     public function __construct(Product $product, ProductReview $productReview)
     {
+        $this->middleware('admin');
+
+        $this->middleware('customer')->only(['create', 'store']);
+
         $this->product = $product;
 
         $this->productReview = $productReview;
@@ -118,7 +122,7 @@ class ReviewController extends Controller
         return view($this->_config['view'],compact('product'));
     }
 
-     /**
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -131,7 +135,7 @@ class ReviewController extends Controller
         return view($this->_config['view'],compact('review'));
     }
 
-     /**
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
