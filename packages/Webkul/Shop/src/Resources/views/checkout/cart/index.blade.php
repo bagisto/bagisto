@@ -28,26 +28,30 @@
                             @foreach($cart->items as $item)
 
                                 <?php
-                                    $product = $item->product;
-                                    $productBaseImage = $productImageHelper->getProductBaseImage($product);
+                                    if($item->type == "configurable")
+                                        $productBaseImage = $productImageHelper->getProductBaseImage($item->child->product);
+                                    else
+                                        $productBaseImage = $productImageHelper->getProductBaseImage($item->product);
                                 ?>
 
                                 <div class="item">
                                     <div style="margin-right: 15px;">
-                                        <a href="{{ url()->to('/').'/products/'.$product->url_key }}"><img class="item-image" src="{{ $productBaseImage['medium_image_url'] }}" /></a>
+                                        <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}"><img class="item-image" src="{{ $productBaseImage['medium_image_url'] }}" /></a>
                                     </div>
 
                                     <div class="item-details">
 
                                         <div class="item-title">
-                                            <a href="{{ url()->to('/').'/products/'.$product->url_key }}">{{ $product->name }}</a>
+                                            <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}">
+                                                {{ $item->product->name }}
+                                            </a>
                                         </div>
 
                                         <div class="price">
                                             {{ core()->currency($item->base_price) }}
                                         </div>
 
-                                        @if ($product->type == 'configurable')
+                                        @if ($item->type == 'configurable')
 
                                             <div class="summary">
 
