@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="{{ bagisto_asset('css/shop.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
 
+    @if ($favicon = core()->getCurrentChannel()->favicon_url)
+        <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
+    @else
+        <link rel="icon" sizes="16x16" href="{{ bagisto_asset('images/favicon.ico') }}" />
+    @endif
+
     @yield('head')
 
     @section('seo')

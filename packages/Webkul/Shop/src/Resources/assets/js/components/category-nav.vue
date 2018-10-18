@@ -7,11 +7,6 @@
             :item="item"
             :parent="index">
         </category-item>
-
-        <li>
-            <img src="http://localhost/bagisto/public/vendor/webkul/shop/assets/images/offer-zone.svg"/>
-            <span>Offer Zone</span>
-        </li>
     </ul>
 </template>
 

@@ -39,6 +39,15 @@ class AdminServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+    }
+
+    /**
      * Bind the the data to the views
      *
      * @return void
@@ -74,19 +83,6 @@ class AdminServiceProvider extends ServiceProvider
 
             $view->with('menu', $menu)->with('subMenus', $subMenus)->with('tabs', $tabs);
         });
-    }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        // $this->mergeConfigFrom(
-        //     __DIR__ . '/../Config/auth.php',
-        //     'auth'
-        // );
     }
 
     /**
