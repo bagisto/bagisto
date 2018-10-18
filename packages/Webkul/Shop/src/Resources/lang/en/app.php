@@ -241,7 +241,8 @@ return [
                 'success_remove' => 'Item removed successfully',
                 'error_add' => 'Item cannot be added to cart',
             ],
-            'quantity-error' => 'Requested quantity is not available.'
+            'quantity-error' => 'Requested quantity is not available.',
+            'cart-subtotal' => 'Cart Subtotal'
         ],
 
         'onepage' => [

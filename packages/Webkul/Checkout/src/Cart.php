@@ -161,7 +161,6 @@ class Cart {
      */
     public function add($id, $data)
     {
-
         $itemData = $this->prepareItemData($id, $data);
 
         if(!$itemData) {
@@ -195,8 +194,6 @@ class Cart {
                                 'total' => core()->convertPrice($cartItem->price * ($prevQty + $newQty)),
                                 'base_total' => $cartItem->price * ($prevQty + $newQty)
                             ]);
-
-                            $this->collectTotals();
 
                             session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
 
@@ -247,8 +244,6 @@ class Cart {
                 } else if($product->type != "configurable"){
                     $parent = $cart->items()->create($itemData['parent']);
                 }
-
-                $this->collectTotals();
 
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
@@ -323,8 +318,6 @@ class Cart {
 
                         session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
-                        $this->collectTotals();
-
                         return $cart;
                     }
                 }
@@ -333,8 +326,6 @@ class Cart {
                     $this->putCart($cart);
 
                     session()->flash('success', trans('shop::app.checkout.cart.item.success'));
-
-                    $this->collectTotals();
 
                     return $cart;
                 }
@@ -493,8 +484,6 @@ class Cart {
                         }
 
                         $item->update(['quantity' => $quantity]);
-
-                        $this->collectTotals();
                     }
                 }
             }
@@ -514,8 +503,6 @@ class Cart {
     {
         if($cart = $this->getCart()) {
             $this->cartItem->delete($itemId);
-
-            $this->collectTotals();
 
             //delete the cart instance if no items are there
             if($cart->items()->get()->count() == 0) {
