@@ -155,14 +155,20 @@ class WishlistController extends Controller
     public function move($productId) {
         $result = Cart::moveToCart($productId);
 
-        $wishlist = $this->wishlist->findWhere(['customer_id' => auth()->guard('customer')->user()->id, 'product_id' => $productId]);
+        if($result) {
+            $wishlist = $this->wishlist->findWhere(['customer_id' => auth()->guard('customer')->user()->id, 'product_id' => $productId]);
 
-        if($this->wishlist->delete($wishlist[0]->id)) {
-            session()->flash('success', 'Item Moved To Cart Successfully');
+            if($this->wishlist->delete($wishlist[0]->id)) {
+                session()->flash('success', 'Item Moved To Cart Successfully');
 
-            return redirect()->back();
+                return redirect()->back();
+            } else {
+                session()->flash('error', 'Item Cannot Be Moved To Cart Successfully');
+
+                return redirect()->back();
+            }
         } else {
-            session()->flash('error', 'Item Cannot Be Moved To Cart Successfully');
+            Session('error', 'Cannot Add The Product To Wishlist Due To Unknown Problems, Please Checkback Later');
 
             return redirect()->back();
         }
