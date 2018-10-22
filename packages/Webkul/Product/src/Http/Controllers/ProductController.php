@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductRepository as Product;
+use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
+use Webkul\Product\Helpers\Price;
+use Event;
 
 /**
  * Product controller
@@ -54,6 +57,20 @@ class ProductController extends Controller
     protected $product;
 
     /**
+     * ProductGrid Repository object
+     *
+     * @var array
+     */
+    protected $productGrid;
+
+    /**
+     * Price Object
+     *
+     * @var array
+     */
+    Protected $price;
+
+    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
@@ -66,7 +83,9 @@ class ProductController extends Controller
         AttributeFamily $attributeFamily,
         Category $category,
         InventorySource $inventorySource,
-        Product $product)
+        Product $product,
+        ProductGrid $productGrid,
+        Price $price)
     {
         $this->attributeFamily = $attributeFamily;
 
@@ -75,6 +94,10 @@ class ProductController extends Controller
         $this->inventorySource = $inventorySource;
 
         $this->product = $product;
+
+        $this->productGrid = $productGrid;
+
+        $this->price = $price;
 
         $this->_config = request('_config');
     }
@@ -112,6 +135,9 @@ class ProductController extends Controller
      */
     public function store()
     {
+        //before store of the product
+        // Event::fire('product.save.before', false);
+
         if(!request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
             return redirect(url()->current() . '?family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
         }
@@ -129,6 +155,9 @@ class ProductController extends Controller
         ]);
 
         $product = $this->product->create(request()->all());
+
+        //after store of the product
+        Event::fire('product.save.after', $product);
 
         session()->flash('success', 'Product created successfully.');
 
@@ -161,7 +190,13 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
+        //before update of product
+        // Event::fire('product.update.before', false);
+
         $this->product->update(request()->all(), $id);
+
+        //after update of product
+        Event::fire('product.update.after', $this->product->find($id));
 
         session()->flash('success', 'Product updated successfully.');
 
@@ -178,8 +213,45 @@ class ProductController extends Controller
     {
         $this->product->delete($id);
 
+        //before update of product
+        Event::fire('product.delete.after', $id);
+
         session()->flash('success', 'Product deleted successfully.');
 
         return redirect()->back();
+    }
+
+    public function test() {
+        $gridObject = [];
+
+        foreach($this->product->all() as $product) {
+            $gridObject = [
+                'product_id' => $product->id,
+                'sku' => $product->sku,
+                'type' => $product->type,
+                'product_name' => $product->sku,
+                'attribute_family_name' => $product->toArray()['attribute_family']['name'],
+                'price' => $this->price->getMinimalPrice($product)
+            ];
+
+            if($product->type == 'configurable') {
+                $gridObject['quantity'] = 0;
+            } else {
+                $qty = 0;
+
+                foreach($product->toArray()['inventories'] as $inventorySource) {
+                    $qty = $qty + $inventorySource['qty'];
+                }
+
+                $gridObject['quantity'] = $qty;
+
+                $qty = 0;
+            }
+            $this->productGrid->create($gridObject);
+
+            $gridObject = [];
+        }
+
+        return true;
     }
 }

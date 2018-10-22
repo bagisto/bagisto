@@ -2,6 +2,8 @@
 
 Route::group(['middleware' => ['web']], function () {
     Route::prefix('admin')->group(function () {
+        Route::get('/grid', 'Webkul\Product\Http\Controllers\ProductController@test');
+
         // Login Routes
         Route::get('/login', 'Webkul\User\Http\Controllers\SessionController@create')->defaults('_config', [
             'view' => 'admin::users.sessions.create'
@@ -380,7 +382,6 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/inventory_sources/delete/{id}', 'Webkul\Inventory\Http\Controllers\InventorySourceController@destroy')->name('admin.inventory_sources.delete');
 
-
             // Channel Routes
             Route::get('/channels', 'Webkul\Core\Http\Controllers\ChannelController@index')->defaults('_config', [
                 'view' => 'admin::settings.channels.index'
@@ -461,9 +462,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('/tax-categories/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@update')->defaults('_config', [
                 'redirect' => 'admin.tax-categories.index'
             ])->name('admin.tax-categories.update');
-
             //tax category ends
-
 
             //tax rate
             Route::get('tax-rates', 'Webkul\Tax\Http\Controllers\TaxRateController@index')->defaults('_config', [

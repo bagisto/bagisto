@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Observers\ProductObserver;
+use Event;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,16 @@ class ProductServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
+        // Event::listen('product.save.before', 'Webkul\Product\Listeners\ProductListener@beforeProductUpdate');
+
+        Event::listen('product.save.after', 'Webkul\Product\Listeners\ProductListener@afterProductSave');
+
+        // Event::listen('product.update.before', 'Webkul\Product\Listeners\ProductListener@beforeProductUpdate');
+
+        Event::listen('product.update.after', 'Webkul\Product\Listeners\ProductListener@beforeProductUpdate');
+
+        Event::listen('product.delete.after', 'Webkul\Product\Listeners\ProductListener@afterProductDelete');
+
         Product::observe(ProductObserver::class);
     }
 
@@ -28,6 +39,6 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
+
     }
 }

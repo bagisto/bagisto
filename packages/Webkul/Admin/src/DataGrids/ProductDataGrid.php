@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\ProductGrid;
+use Webkul\Ui\DataGrid\Facades\DataGrid;
 use Webkul\Channel\Repositories\ChannelRepository;
 use Webkul\Product\Repositories\ProductRepository;
 /**
@@ -22,9 +22,9 @@ class ProductDataGrid
 
     public function createProductDataGrid()
     {
-        return ProductGrid::make([
+        return DataGrid::make([
             'name' => 'Products',
-            'table' => 'products as prods',
+            'table' => 'products_grid as prods',
             'select' => 'prods.id',
             'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
@@ -52,43 +52,7 @@ class ProductDataGrid
                 ],
             ],
 
-            'attributeColumns' => [
-                'name', 'price'
-            ],
-
             'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'attribute_families as attfam',
-                    'primaryKey' => 'prods.attribute_family_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'attfam.id',
-                ],
-
-                //for getting the attribute values.
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'product_attribute_values as pav',
-                //     'primaryKey' => 'prods.id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'pav.product_id',
-                //     'withAttributes' => [
-                //         'condition' => [
-                //             'attribute_id' => 2,
-                //             'select' => 'name',
-                //         ]
-                //     ]
-                // ],
-
-                // for getting the inventory quantity of a product
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'product_inventories as pi',
-                    'primaryKey' => 'prods.id',
-                    'condition' => '=',
-                    'secondaryKey' => 'pi.product_id',
-                ],
-
             ],
 
             //use aliasing on secodary columns if join is performed
@@ -96,7 +60,7 @@ class ProductDataGrid
             'columns' => [
                 //name, alias, type, label, sortable
                 [
-                    'name' => 'prods.id',
+                    'name' => 'prods.product_id',
                     'alias' => 'productID',
                     'type' => 'number',
                     'label' => 'ID',
@@ -104,20 +68,13 @@ class ProductDataGrid
                 ],
                 [
                     'name' => 'prods.sku',
-                    'alias' => 'productCode',
+                    'alias' => 'productSku',
                     'type' => 'string',
                     'label' => 'SKU',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'attfam.name',
-                    'alias' => 'FamilyName',
-                    'type' => 'string',
-                    'label' => 'Family Name',
-                    'sortable' => true,
-                ],
-                [
-                    'name' => 'pi.qty',
+                    'name' => 'prods.quantity',
                     'alias' => 'ProductQuantity',
                     'type' => 'string',
                     'label' => 'Product Quantity',
@@ -127,56 +84,56 @@ class ProductDataGrid
 
             'filterable' => [
                 //column, type, and label
-                [
-                    'column' => 'prods.id',
-                    'alias' => 'productID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ],
-                [
-                    'column' => 'prods.sku',
-                    'alias' => 'productCode',
-                    'type' => 'string',
-                    'label' => 'SKU',
-                ],
-                [
-                    'column' => 'attfam.name',
-                    'alias' => 'FamilyName',
-                    'type' => 'string',
-                    'label' => 'Family Name',
-                ],
-                [
-                    'column' => 'pi.qty',
-                    'alias' => 'ProductQuantity',
-                    'type' => 'number',
-                    'label' => 'Product Quatity',
-                ],
+                // [
+                //     'column' => 'prods.id',
+                //     'alias' => 'productID',
+                //     'type' => 'number',
+                //     'label' => 'ID',
+                // ],
+                // [
+                //     'column' => 'prods.sku',
+                //     'alias' => 'productCode',
+                //     'type' => 'string',
+                //     'label' => 'SKU',
+                // ],
+                // [
+                //     'column' => 'attfam.name',
+                //     'alias' => 'FamilyName',
+                //     'type' => 'string',
+                //     'label' => 'Family Name',
+                // ],
+                // [
+                //     'column' => 'pi.qty',
+                //     'alias' => 'ProductQuantity',
+                //     'type' => 'number',
+                //     'label' => 'Product Quatity',
+                // ],
             ],
 
             //don't use aliasing in case of searchables
 
             'searchable' => [
                 //column, type and label
-                [
-                    'column' => 'prods.id',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ],
-                [
-                    'column' => 'prods.sku',
-                    'type' => 'string',
-                    'label' => 'SKU',
-                ],
-                [
-                    'column' => 'attfam.name',
-                    'type' => 'string',
-                    'label' => 'Family Name',
-                ],
-                [
-                    'column' => 'pi.qty',
-                    'type' => 'string',
-                    'label' => 'Product Quatity',
-                ],
+                // [
+                //     'column' => 'prods.id',
+                //     'type' => 'number',
+                //     'label' => 'ID',
+                // ],
+                // [
+                //     'column' => 'prods.sku',
+                //     'type' => 'string',
+                //     'label' => 'SKU',
+                // ],
+                // [
+                //     'column' => 'attfam.name',
+                //     'type' => 'string',
+                //     'label' => 'Family Name',
+                // ],
+                // [
+                //     'column' => 'pi.qty',
+                //     'type' => 'string',
+                //     'label' => 'Product Quatity',
+                // ],
             ],
 
             //list of viable operators that will be used
