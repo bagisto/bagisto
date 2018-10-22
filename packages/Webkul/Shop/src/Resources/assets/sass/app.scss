@@ -382,6 +382,21 @@ section.slider-block {
             align-items: center;
             // cursor: pointer;
 
+            .currency-switcher {
+                float: right;
+                border-right: 2px solid $border-color;
+                cursor: pointer;
+
+                .dropdown-list {
+                    width: 100px;
+                    top: 37px;
+
+                    .dropdown-container {
+                        padding: 0 10px;
+                    }
+                }
+            }
+
             ul.account-dropdown-container {
                 float: right;
                 border-right: 2px solid $border-color;
@@ -390,6 +405,7 @@ section.slider-block {
                     display: flex;
                     flex-direction: row;
                     margin-right: 14px;
+                    margin-left: 14px;
 
                     .dropdown-list {
                         width: 300px;
@@ -611,21 +627,6 @@ section.slider-block {
 
         .nav > li > a .icon{
             display: none;
-        }
-
-        .nav > li:last-child {
-            display:flex; align-items:center;
-            border-radius: 0 0 4px 0;
-            float:right;
-            display: none;
-
-            img {
-                margin-right:6px;
-            }
-        }
-
-        .nav > li:last-child > a {
-            border-radius: 0 4px 0 0;
         }
 
         .nav li li a {

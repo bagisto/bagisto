@@ -61,9 +61,9 @@
                                     </td>
 
                                     <td>
-                                        <div class="control-group" :class="[errors.has('ratio') ? 'has-error' : '']">
-                                            <input v-validate="'required'" class="control" id="ratio" name="ratio" value="{{ old('ratio') ?: $exchangeRate->ratio }}"/>
-                                            <span class="control-error" v-if="errors.has('ratio')">@{{ errors.first('ratio') }}</span>
+                                        <div class="control-group" :class="[errors.has('rate') ? 'has-error' : '']">
+                                            <input v-validate="'required'" class="control" id="rate" name="rate" value="{{ old('rate') ?: $exchangeRate->rate }}"/>
+                                            <span class="control-error" v-if="errors.has('rate')">@{{ errors.first('rate') }}</span>
                                         </div>
                                     </td>
                                 <tr>

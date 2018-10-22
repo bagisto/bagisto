@@ -312,8 +312,8 @@ return [
     'settings' => [
         'locales' => [
             'title' => 'Locales',
-            'add-locale-title' => 'Add Locale',
-            'edit-locale-title' => 'Edit Locale',
+            'add-title' => 'Add Locale',
+            'edit-title' => 'Edit Locale',
             'add-title' => 'Add Locale',
             'save-btn-title' => 'Save Locale',
             'general' => 'General',

@@ -772,6 +772,42 @@ h2 {
     }
 }
 
+.badge {
+    background: #E7E7E7;
+    @include border-radius(2px);
+    padding: 8px;
+    color: #000311;
+    display: inline-block;
+
+    &.label-sm {
+        padding: 5px;
+    }
+
+    &.label-md {
+        padding: 8px;
+    }
+
+    &.label-lg {
+        padding: 11px;
+    }
+
+    &.label-xl {
+        padding: 14px;
+    }
+
+    &.success {
+        background-color: $success-color;
+    }
+
+    &.danger {
+        background-color: $danger-color;
+    }
+
+    &.warning {
+        background-color: $warning-color;
+    }
+}
+
 .image-wrapper {
     margin-bottom: 20px;
     display: inline-block;

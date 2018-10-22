@@ -88,8 +88,10 @@ class CartController extends Controller
 
     public function add($id) {
         $data = request()->input();
-        // dd($data);
+        
         Cart::add($id, $data);
+
+        Cart::collectTotals();
 
         return redirect()->back();
     }
@@ -101,6 +103,8 @@ class CartController extends Controller
      */
     public function remove($itemId) {
         Cart::removeItem($itemId);
+
+        Cart::collectTotals();
 
         return redirect()->back();
     }
@@ -122,6 +126,8 @@ class CartController extends Controller
         }
 
         Cart::update($data);
+
+        Cart::collectTotals();
 
         return redirect()->back();
     }

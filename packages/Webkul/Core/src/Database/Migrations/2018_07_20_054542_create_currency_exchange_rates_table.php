@@ -17,7 +17,7 @@ class CreateCurrencyExchangeRatesTable extends Migration
             $table->increments('id');
             $table->decimal('rate', 10, 5);
             
-            $table->integer('target_currency')->unsigned();
+            $table->integer('target_currency')->unique()->unsigned();
             $table->foreign('target_currency')->references('id')->on('currencies')->onDelete('cascade');
             $table->timestamps();
         });

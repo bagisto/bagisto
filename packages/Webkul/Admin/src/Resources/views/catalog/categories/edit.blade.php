@@ -109,7 +109,7 @@
 
                             <div class="control-group" :class="[errors.has('{{$locale}}[slug]') ? 'has-error' : '']">
                                 <label for="slug" class="required">{{ __('admin::app.catalog.categories.slug') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="slug" name="{{$locale}}[slug]" value="{{ old($locale)['slug'] ?: $category->translate($locale)['slug'] }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="slug" name="{{$locale}}[slug]" value="{{ old($locale)['slug'] ?: $category->translate($locale)['slug'] }}" v-slugify/>
                                 <span class="control-error" v-if="errors.has('{{$locale}}[slug]')">@{{ errors.first('{!!$locale!!}[slug]') }}</span>
                             </div>
 

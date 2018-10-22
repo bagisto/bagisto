@@ -84,6 +84,40 @@ class LocaleController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $locale = $this->locale->find($id);
+
+        return view($this->_config['view'], compact('locale'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate(request(), [
+            'code' => ['required', 'unique:locales,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'name' => 'required'
+        ]);
+
+        $this->locale->update(request()->all(), $id);
+
+        session()->flash('success', 'Locale updated successfully.');
+
+        return redirect()->route($this->_config['redirect']);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
