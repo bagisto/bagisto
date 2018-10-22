@@ -161,10 +161,12 @@ class Cart {
      */
     public function add($id, $data, $prepared = false, $preparedData = [])
     {
-        if($prepared == false)
+        if($prepared == false) {
             $itemData = $this->prepareItemData($id, $data);
-        else
+        }
+        else {
             $itemData = $preparedData;
+        }
 
         if(!$itemData) {
             return false;
@@ -175,7 +177,7 @@ class Cart {
 
             $cartItems = $cart->items;
 
-            //check the isset conditions as collection empty object will mislead the condition and errorhandling case.
+            //check the isset conditions as collection empty object will mislead the condition and error handling case.
             if(isset($cartItems) && $cartItems->count()) {
                 foreach($cartItems as $cartItem) {
                     if($product->type == "simple") {
@@ -205,6 +207,12 @@ class Cart {
                     } else if($product->type == "configurable") {
                         if($cartItem->type == "configurable") {
                             $temp = $this->cartItem->findOneByField('parent_id', $cartItem->id);
+
+                            if($prepared == true) {
+                                $data['selected_configurable_option'] = $preparedData['parent']['product_id'];
+                            }
+
+
                             if($temp->product_id == $data['selected_configurable_option']) {
                                 $child = $temp->child;
 
@@ -255,11 +263,23 @@ class Cart {
                 if(isset($cart)) {
                     $this->cart->delete($cart->id);
                 } else {
-                    return $this->createNewCart($id, $data);
+                    if($prepared == false) {
+                        return $this->createNewCart($id, $data);
+                    }
+                    else {
+                        return $this->createNewCart($id, $data, true, $preparedData);
+                    }
+
                 }
             }
         } else {
-            return $this->createNewCart($id, $data);
+            // return $this->createNewCart($id, $data);
+            if($prepared == false) {
+                return $this->createNewCart($id, $data);
+            }
+            else {
+                return $this->createNewCart($id, $data, true, $preparedData);
+            }
         }
     }
 
@@ -271,9 +291,12 @@ class Cart {
      *
      * @return Booleans
      */
-    public function createNewCart($id, $data)
+    public function createNewCart($id, $data, $prepared = false, $preparedData = [])
     {
-        $itemData = $this->prepareItemData($id, $data);
+        if($prepared == false)
+            $itemData = $this->prepareItemData($id, $data);
+        else
+            $itemData = $preparedData;
 
         //if the item data is not valid to be processed it will be returning false
         if($itemData == false) {
@@ -300,7 +323,13 @@ class Cart {
         $cartData['cart_currency_code'] = core()->getCurrentCurrencyCode();
         //set the cart items and quantity
         $cartData['items_count'] = 1;
-        $cartData['items_qty'] = $data['quantity'];
+
+        if($prepared == false) {
+            $cartData['items_qty'] = $data['quantity'];
+        } else {
+            $cartData['items_qty'] = 1;
+        }
+
 
         //create the cart instance in the database
         if($cart = $this->cart->create($cartData)) {
@@ -309,7 +338,11 @@ class Cart {
 
             if ($product->type == "configurable") {
                 //parent item entry
-                $itemData['parent']['additional'] = json_encode($data);
+                if($prepared == false) {
+                    $itemData['parent']['additional'] = json_encode($data);
+                } else {
+                    $itemData['parent']['additional'] = json_encode($preparedData);
+                }
 
                 if($parent = $this->cartItem->create($itemData['parent'])) {
                     //child item entry
@@ -958,7 +991,7 @@ class Cart {
     public function moveToCart($productId) {
         $product = $this->product->find($productId);
 
-        if($product->configurable == null) {
+        if($product->parent_id == null ||$product->parent_id == 'null') {
             $data = [
                 'product' => $productId,
                 'quantity' => 1,
@@ -997,14 +1030,14 @@ class Cart {
      * @return mixed
      */
     public function moveConfigurableFromWishlistToCart($configurableproductId, $productId) {
-        $product = $this->find($configurableproductId);
+        $product = $this->product->find($configurableproductId);
 
         $child = $childData = null;
         if($product->type == 'configurable') {
             $child = $this->product->findOneByField('id', $productId);
 
             $childData = [
-                'product_id' => $data['selected_configurable_option'],
+                'product_id' => $configurableproductId,
                 'sku' => $child->sku,
                 'name' => $child->name,
                 'type' => 'simple'
@@ -1016,16 +1049,16 @@ class Cart {
         $parentData = [
             'sku' => $product->sku,
             'product_id' => $productId,
-            'quantity' => $data['quantity'],
+            'quantity' => 1,
             'type' => $product->type,
             'name' => $product->name,
             'price' => core()->convertPrice($price),
             'base_price' => $price,
-            'total' => core()->convertPrice($price * $data['quantity']),
-            'base_total' => $price * $data['quantity'],
+            'total' => core()->convertPrice($price),
+            'base_total' => $price,
             'weight' => $weight = ($product->type == 'configurable' ? $child->weight : $product->weight),
-            'total_weight' => $weight * $data['quantity'],
-            'base_total_weight' => $weight * $data['quantity']
+            'total_weight' => $weight,
+            'base_total_weight' => $weight
         ];
 
         return ['parent' => $parentData, 'child' => $childData];

@@ -16,8 +16,7 @@ use Webkul\Product\Repositories\ProductRepository;
 class ProductDataGrid
 {
     /**
-     * The Data Grid implementation.
-     * @var ProductDataGrid
+     * The Data Grid implementation @var ProductDataGrid
      * for Products
      */
 

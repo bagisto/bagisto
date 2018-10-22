@@ -159,6 +159,8 @@ class WishlistController extends Controller
             $wishlist = $this->wishlist->findWhere(['customer_id' => auth()->guard('customer')->user()->id, 'product_id' => $productId]);
 
             if($this->wishlist->delete($wishlist[0]->id)) {
+                Cart::collectTotals();
+
                 session()->flash('success', 'Item Moved To Cart Successfully');
 
                 return redirect()->back();
