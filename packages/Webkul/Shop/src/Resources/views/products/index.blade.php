@@ -23,7 +23,7 @@
                 </div>
 
                 <?php $products = $productRepository->findAllByCategory($category->id); ?>
-                
+
                 @if ($products->count())
 
                     @include ('shop::products.list.toolbar')
@@ -84,7 +84,7 @@
                     sort.classList.remove("sort-icon");
                     sort.classList.add("icon-menu-close-adj");
 
-                    filter.classList.remove("icon-menu-close-adj");
+                    filter.classList.remove("icon-menu-close");
                     filter.classList.add("filter-icon");
 
                     sortLimit.style.display = "flex";

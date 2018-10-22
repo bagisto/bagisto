@@ -13,7 +13,7 @@
             </div>
             <div class="page-action">
                 <a href="{{ route('admin.customer.create') }}" class="btn btn-lg btn-primary">
-                    {{ __('Add Customer') }}
+                    {{ __('admin::app.customers.customers.add-title') }}
                 </a>
             </div>
         </div>

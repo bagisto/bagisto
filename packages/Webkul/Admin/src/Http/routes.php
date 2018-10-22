@@ -70,6 +70,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.review.index'
             ])->name('admin.customer.review.index');
 
+            // Reviews Routes
             Route::get('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[
                 'view' => 'admin::customers.review.edit'
             ])->name('admin.customer.review.edit');
@@ -78,6 +79,29 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.review.index'
             ])->name('admin.customer.review.update');
 
+            // Customer Groups Routes
+
+            Route::get('groups', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@index')->defaults('_config',[
+                'view' => 'admin::customers.group.index'
+            ])->name('admin.groups.index');
+
+            Route::get('groups/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@create')->defaults('_config',[
+                'view' => 'admin::customers.group.create'
+            ])->name('admin.groups.create');
+
+            Route::post('groups/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@store')->defaults('_config',[
+                'redirect' => 'admin.groups.index'
+            ])->name('admin.groups.store');
+
+            Route::get('groups/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@edit')->defaults('_config',[
+                'view' => 'admin::customers.group.edit'
+            ])->name('admin.groups.edit');
+
+            Route::put('groups/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@update')->defaults('_config',[
+                'redirect' => 'admin.groups.index'
+            ])->name('admin.groups.update');
+
+            Route::get('groups/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@destroy')->name('admin.groups.delete');
 
             // Sales Routes
             Route::prefix('sales')->group(function () {
@@ -403,11 +427,13 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.sliders.index');
 
             // Admin Store Front Settings Route
-            Route::get('/slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
+
+            //slider create
+            Route::get('slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
                 'view' => 'admin::settings.sliders.create'
             ])->name('admin.sliders.create');
 
-            Route::post('/slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
+            Route::post('slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
                 'redirect' => 'admin::sliders.index'
             ])->name('admin.sliders.store');
 
@@ -415,9 +441,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('slider/edit/{id}','Webkul\Shop\Http\Controllers\SliderController@edit')->defaults('_config',[
                 'view' => 'admin::settings.sliders.edit'
             ])->name('admin.sliders.edit');
+
             Route::post('slider/edit/{id}','Webkul\Shop\Http\Controllers\SliderController@update')->defaults('_config',[
                 'redirect' => 'admin::sliders.index'
             ])->name('admin.sliders.update');
+
             //destroy a slider item
             Route::get('slider/delete/{id}', 'Webkul\Shop\Http\Controllers\SliderController@destroy');
 

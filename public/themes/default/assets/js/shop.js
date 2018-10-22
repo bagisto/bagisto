@@ -30693,11 +30693,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 // define the item component
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -30735,36 +30730,15 @@ var render = function() {
   return _c(
     "ul",
     { staticClass: "nav" },
-    [
-      _vm._l(_vm.items, function(item, index) {
-        return _c("category-item", {
-          key: index,
-          attrs: { url: _vm.url, item: item, parent: index }
-        })
-      }),
-      _vm._v(" "),
-      _vm._m(0)
-    ],
-    2
+    _vm._l(_vm.items, function(item, index) {
+      return _c("category-item", {
+        key: index,
+        attrs: { url: _vm.url, item: item, parent: index }
+      })
+    })
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("img", {
-        attrs: {
-          src:
-            "http://localhost/bagisto/public/vendor/webkul/shop/assets/images/offer-zone.svg"
-        }
-      }),
-      _vm._v(" "),
-      _c("span", [_vm._v("Offer Zone")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -31404,6 +31378,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             default: function _default() {
                 return [];
             }
+        },
+
+        public_path: {
+            type: String,
+            required: true
         }
     },
 
@@ -31431,8 +31410,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setProps: function setProps() {
 
             var this_this = this;
+
             this.slides.forEach(function (slider) {
-                this_this.images.push(slider.path);
+                this_this.images.push(this_this.public_path + '/storage/' + slider.path);
             });
             this.currentIndex = 0;
 

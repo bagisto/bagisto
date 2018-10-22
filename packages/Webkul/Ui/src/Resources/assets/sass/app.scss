@@ -574,7 +574,12 @@ h2 {
 }
 
 .accordian {
+    display: inline-block;
+    width: 100%;
+
     .accordian-header {
+        width: 100%;
+        display: inline-block;
         font-size: 18px;
         color: $font-color;
         border-bottom: solid 1px $border-color;

@@ -25,6 +25,11 @@ export default {
             type: Array,
             required: true,
             default: () => [],
+        },
+
+        public_path: {
+            type: String,
+            required: true,
         }
     },
 
@@ -53,8 +58,9 @@ export default {
         setProps() {
 
             var this_this = this;
+
             this.slides.forEach(function(slider) {
-            this_this.images.push(slider.path);
+                this_this.images.push(this_this.public_path+'/storage/'+slider.path);
             });
             this.currentIndex = 0;
 

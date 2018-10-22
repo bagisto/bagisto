@@ -406,7 +406,19 @@ return [
         ],
     ],
     'customers' => [
+        'groups' =>[
+            'add-title' => 'Add Group',
+            'edit-title' => 'Edit Group',
+            'save-btn-title' => 'Save Group',
+            'title' => 'Groups',
+            'save-btn-title' => 'Save Group',
+            'name' => 'Name',
+            'is_user_defined' => 'User Defined',
+            'yes' => 'Yes'
+        ],
         'customers' => [
+            'add-title' => 'Add Customer',
+            'edit-title' => 'Edit Customer',
             'title' => 'Customers',
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
@@ -415,7 +427,8 @@ return [
             'date_of_birth' => 'Date of Birth',
             'phone' => 'Phone',
             'customer_group' => 'Customer Group',
-            'save-btn-title' => 'Save Customer'
+            'save-btn-title' => 'Save Customer',
+            'channel_name' => 'Channel Name'
         ],
         'reviews' => [
             'title' => 'Reviews',
@@ -458,6 +471,28 @@ return [
             'summary' => 'Summary of Shipment',
             'carrier' => 'Carrier',
             'tracking-number' => 'Tracking Number'
+        ]
+    ],
+    'error' => [
+        'go-to-home' => 'GO TO HOME',
+
+        '404' => [
+            'page-title' => 'Page not found',
+            'name' => '404',
+            'title' => 'Page Not found',
+            'message' => 'The Page you are looking for doesnt exist or have secrately    escaped;head back to home and make a fresh move again.'
+        ],
+        '403' => [
+            'page-title' => '403 forbidden',
+            'name' => '403',
+            'title' => 'Forbidden error',
+            'message' => 'You do not have permission to access this page'
+        ],
+        '500' => [
+            'page-title' => '500 Internal Server Error',
+            'name' => '500',
+            'title' => 'Internal Server Error',
+            'message' => 'You do not have permission to access this page'
         ]
     ]
 ];

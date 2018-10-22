@@ -1,8 +1,12 @@
 @extends('admin::layouts.content')
 
+@section('page_title')
+    {{ __('admin::app.customers.customers.add-title') }}
+@stop
+
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.customer.store') }}">
+        <form method="POST" action="{{ route('admin.customer.store') }}" @submit.prevent="onSubmit">
 
             <div class="page-header">
                 <div class="page-title">
@@ -45,7 +49,7 @@
 
                     <div class="control-group" :class="[errors.has('gender') ? 'has-error' : '']">
                         <label for="gender" class="required">{{ __('admin::app.customers.customers.gender') }}</label>
-                        <select name="gender" class="control" v-validate="'gender'">
+                        <select name="gender" class="control" v-validate="'required'">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
@@ -64,12 +68,22 @@
                     </div>
 
                     <div class="control-group">
-                        <label for="name" >{{ __('admin::app.customers.customers.customer_group') }}</label>
+                        <label for="customerGroup" >{{ __('admin::app.customers.customers.customer_group') }}</label>
                         <select  class="control" name="customer_group_id">
                         @foreach ($customerGroup as $group)
                             <option value="{{ $group->id }}"> {{ $group->group_name}} </>
                         @endforeach
                         </select>
+                    </div>
+
+                    <div class="control-group" :class="[errors.has('channel_id') ? 'has-error' : '']">
+                        <label for="channel" >{{ __('admin::app.customers.customers.channel_name') }}</label>
+                        <select  class="control" name="channel_id" v-validate="'required'">
+                        @foreach ($channelName as $channel)
+                            <option value="{{ $channel->id }}"> {{ $channel->name}} </>
+                        @endforeach
+                        </select>
+                        <span class="control-error" v-if="errors.has('channel_id')">@{{ errors.first('channel_id') }}</span>
                     </div>
 
                 </div>

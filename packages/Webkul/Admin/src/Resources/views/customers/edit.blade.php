@@ -1,5 +1,9 @@
 @extends('admin::layouts.content')
 
+@section('page_title')
+    {{ __('admin::app.customers.customers.edit-title') }}
+@stop
+
 @section('content')
     <div class="content">
         <form method="POST" action="{{ route('admin.customer.update', $customer->id) }}">
@@ -47,7 +51,7 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="email" class="required">{{ __('admin::app.customers.customers.gender') }}</label>
+                                <label for="gender" class="required">{{ __('admin::app.customers.customers.gender') }}</label>
                                 <select name="gender" class="control" v-validate="'gender'" value="{{ $customer->gender }}" v-validate="'required'">
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -67,21 +71,40 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="name" >{{ __('admin::app.customers.customers.customer_group') }}</label>
+                                <label for="customerGroup" >{{ __('admin::app.customers.customers.customer_group') }}</label>
 
                                 @if(!is_null($customer->customer_group_id))
-                                    <?php $selectedOption = $customer->customerGroup->id ?>
+                                    <?php $selectedCustomerOption = $customer->customerGroup->id ?>
+                                @else
+                                    <?php $selectedCustomerOption = '' ?>
                                 @endif
 
                                 <select  class="control" name="customer_group_id">
-
                                     @foreach($customerGroup as $group)
-                                    <option value="{{ $group->id }}" {{ $selectedOption == $group->id ? 'selected' : '' }}>
+                                    <option value="{{ $group->id }}" {{ $selectedCustomerOption == $group->id ? 'selected' : '' }}>
                                         {{ $group->group_name}}
                                     </option>
                                     @endforeach
-
                                 </select>
+                            </div>
+
+                            <div class="control-group" :class="[errors.has('channel_id') ? 'has-error' : '']">
+                                <label for="channel" >{{ __('admin::app.customers.customers.channel_name') }}</label>
+
+                                @if(!is_null($customer->channel_id))
+                                    <?php $selectedChannelOption = $customer->channel_id ?>
+                                @else
+                                    <?php $selectedChannelOption = $customer->channel_id ?>
+                                @endif
+
+                                <select  class="control" name="channel_id" v-validate="'required'">
+                                    @foreach($channelName as $channel)
+                                    <option value="{{ $channel->id }}" {{ $selectedChannelOption == $channel->id ? 'selected' : '' }}>
+                                        {{ $channel->name}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                <span class="control-error" v-if="errors.has('channel_id')">@{{ errors.first('channel_id') }}</span>
                             </div>
 
                         </div>

@@ -10,10 +10,7 @@ use Webkul\Customer\Models\Customer;
 use Auth;
 
 /**
- * Customer controlller for the customer
- * basically for the tasks of customers
- * which will be done after customer
- * authenticastion.
+ * Customer controlller for the customer basically for the tasks of customers which will be done after customer authentication.
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -36,7 +33,7 @@ class CustomerController extends Controller
     protected $productReview;
 
     /**
-     * Create a new controller instance.
+     * Create a new Repository instance.
      *
      * @param  Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
@@ -54,9 +51,8 @@ class CustomerController extends Controller
     }
 
     /**
-     * For taking the customer
-     * to the dashboard after
-     * authentication
+     * For taking the customer to the dashboard after authentication
+     *
      * @return view
      */
     private function getCustomer($id) {
@@ -65,9 +61,8 @@ class CustomerController extends Controller
     }
 
     /**
-     * Taking the customer
-     * to profile details
-     * page
+     * Taking the customer to profile details page
+     *
      * @return View
      */
     public function index() {
@@ -79,8 +74,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * For loading the
-     * edit form page.
+     * For loading the edit form page.
      *
      * @return View
      */
@@ -93,9 +87,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Edit function
-     * for editing customer
-     * profile.
+     * Edit function for editing customer profile.
      *
      * @return Redirect.
      */
@@ -148,23 +140,40 @@ class CustomerController extends Controller
         }
     }
 
+    /**
+     * Load the view for the customer account panel, showing orders in a table.
+     *
+     * @return Mixed
+     */
     public function orders() {
         return view($this->_config['view']);
     }
 
+    /**
+     * Load the view for the customer account panel, showing wishlist items.
+     *
+     * @return Mixed
+     */
     public function wishlist() {
         return view($this->_config['view']);
     }
 
+    /**
+     * Load the view for the customer account panel, showing approved reviews.
+     *
+     * @return Mixed
+     */
     public function reviews() {
-
-        $id = auth()->guard('customer')->user()->id;
-
-        $reviews = $this->productReview->getCustomerReview($id);
+        $reviews = $this->productReview->getCustomerReview();
 
         return view($this->_config['view'],compact('reviews'));
     }
 
+    /**
+     * Load the view for the customer account panel, shows the customer address.
+     *
+     * @return Mixed
+     */
     public function address() {
         return view($this->_config['view']);
     }

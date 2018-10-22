@@ -285,6 +285,7 @@ body {
 }
 
 .responsive-layred-filter {
+    @extend .layered-filter-wrapper;
     width: 100%;
     float: none;
     padding-right: 0px;

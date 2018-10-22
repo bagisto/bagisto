@@ -4,13 +4,13 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository as Customer;
 use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
+use Webkul\Core\Repositories\ChannelRepository as Channel;
 
 /**
- * Customer controlller for the customer
- * to show customer data on admin login
+ * Customer controlller
  *
  * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -39,19 +39,29 @@ class CustomerController extends Controller
     protected $customerGroup;
 
      /**
+     * ChannelRepository object
+     *
+     * @var array
+     */
+    protected $channel;
+
+     /**
      * Create a new controller instance.
      *
      * @param Webkul\Customer\Repositories\CustomerRepository as customer;
      * @param Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
+     * @param Webkul\Core\Repositories\ChannelRepository as Channel;
      * @return void
      */
-    public function __construct(Customer $customer , CustomerGroup $customerGroup )
+    public function __construct(Customer $customer, CustomerGroup $customerGroup, Channel $channel )
     {
         $this->_config = request('_config');
 
         $this->customer = $customer;
 
         $this->customerGroup = $customerGroup;
+
+        $this->channel = $channel;
     }
 
     /**
@@ -73,7 +83,9 @@ class CustomerController extends Controller
     {
         $customerGroup = $this->customerGroup->all();
 
-        return view($this->_config['view'],compact('customerGroup'));
+        $channelName = $this->channel->all();
+
+        return view($this->_config['view'],compact('customerGroup','channelName'));
     }
 
      /**
@@ -81,17 +93,18 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        $request->validate([
+        $this->validate(request(), [
+            'channel_id' => 'required',
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',
-            'phone' => 'nullable|numeric',
+            'phone' => 'nullable|numeric|unique:customers,phone',
             'email' => 'required|unique:customers,email'
         ]);
 
-        $data=$request->all();
+        $data=request()->all();
 
         $password = bcrypt(rand(100000,10000000));
 
@@ -116,7 +129,9 @@ class CustomerController extends Controller
 
         $customerGroup = $this->customerGroup->all();
 
-        return view($this->_config['view'],compact('customer','customerGroup'));
+        $channelName = $this->channel->all();
+
+        return view($this->_config['view'],compact('customer', 'customerGroup', 'channelName'));
     }
 
      /**
@@ -128,11 +143,12 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $this->validate(request(), [
+            'channel_id' => 'required',
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',
-            'phone' => 'nullable|numeric',
+            'phone' => 'nullable|numeric|unique:customers,phone,'. $id,
             'email' => 'required|unique:customers,email,'. $id
         ]);
 

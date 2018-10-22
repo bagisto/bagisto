@@ -1,10 +1,11 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-
+    {{ __('admin::app.error.403.page-title') }}
 @stop
 
 @section('content')
+
     <div class="error-container" style="width: 100%; display: flex; justify-content: center;">
 
         <div class="wrapper" style="display: flex; height: 60vh; width: 100%;
@@ -14,11 +15,17 @@
 
                 <div class="error-title" style="font-size: 100px;color: #5E5E5E"> {{ $code }}</div>
 
-                <div class="error-messgae" style="font-size: 24px;color: #5E5E5E">Page Not Found</div>
+                <div class="error-messgae" style="font-size: 24px;color: #5E5E5E">
+                    {{ __('admin::app.error.500.title') }}
+                </div>
 
-                <div class="error-description" style="margin-top: 20px;margin-bottom: 20px;color: #242424">The Page you are looking for doesnt exist or have secrately escaped;head backm to home and make a fresh move again.</div>
+                <div class="error-description" style="margin-top: 20px;margin-bottom: 20px;color: #242424">
+                    {{ __('admin::app.error.500.message') }}
+                </div>
 
-                <a href="{{ route('admin.dashboard.index') }}">GO TO HOME</a>
+                <a href="{{ route('admin.dashboard.index') }}">
+                    {{ __('admin::app.error.go-to-home') }}
+                </a>
 
             </div>
 
@@ -27,4 +34,5 @@
         </div>
 
     </div>
+
 @stop
