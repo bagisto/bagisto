@@ -51,19 +51,19 @@ class RegistrationController extends Controller
      */
     public function create(Request $request)
     {
-        // dd(request()->input());
         $request->validate([
-
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'email' => 'email|required',
             'password' => 'confirmed|min:6|required',
-            'agreement' => 'confirmed'
+            'agreement' => 'required'
         ]);
 
         $data = request()->input();
 
         $data['password'] = bcrypt($data['password']);
+
+        $data['channel_id'] = core()->getCurrentChannel()->id;
 
         if ($this->customer->create($data)) {
 
@@ -72,11 +72,9 @@ class RegistrationController extends Controller
             return redirect()->route($this->_config['redirect']);
 
         } else {
-
             session()->flash('error', 'Cannot Create Your Account.');
 
             return redirect()->back();
-
         }
     }
 }

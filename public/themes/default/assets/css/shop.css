@@ -18,6 +18,13 @@
   margin-left: auto;
 }
 
+.icon-menu-close-adj {
+  background-image: URL("../images/cross-icon-adj.svg");
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+}
+
 .grid-view-icon {
   background-image: URL("../images/icon-grid-view.svg");
   width: 24px;
@@ -1044,7 +1051,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 }
 
 .header .header-bottom {
-  height: 48px;
+  height: 47px;
   margin-left: auto;
   margin-right: auto;
   border-top: 1px solid #C7C7C7;
@@ -1056,7 +1063,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 .header .header-bottom ul.nav {
   display: block;
   font-size: 16px;
-  height: 48px;
   max-width: 100%;
   width: auto;
   margin-left: auto;

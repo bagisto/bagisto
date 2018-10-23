@@ -21,35 +21,33 @@
             </div>
 
             <div class="account-items-list">
-
-                @if(!is_null($reviews))
+                @if(!$reviews->isEmpty())
                     @foreach($reviews as $review)
-                    <div class="account-item-card mt-15 mb-15">
-                        <div class="media-info">
-                            <?php $image = $productImageHelper->getGalleryImages($review->product); ?>
-                            <img class="media" src="{{ $image[0]['small_image_url'] }}" />
+                        <div class="account-item-card mt-15 mb-15">
+                            <div class="media-info">
+                                <?php $image = $productImageHelper->getGalleryImages($review->product); ?>
+                                <img class="media" src="{{ $image[0]['small_image_url'] }}" />
 
-                            <div class="info mt-20">
-                                <div class="product-name">{{$review->product->name}}</div>
+                                <div class="info mt-20">
+                                    <div class="product-name">{{$review->product->name}}</div>
 
-                                <div>
-                                    @for($i=0 ; $i < $review->rating ; $i++)
-                                        <span class="icon star-icon"></span>
-                                    @endfor
-                                </div>
+                                    <div>
+                                        @for($i=0 ; $i < $review->rating ; $i++)
+                                            <span class="icon star-icon"></span>
+                                        @endfor
+                                    </div>
 
-                                <div>
-                                    {{ $review->comment }}
+                                    <div>
+                                        {{ $review->comment }}
+                                    </div>
                                 </div>
                             </div>
+
+                            <div class="operations">
+
+                            </div>
                         </div>
-
-                        <div class="operations">
-
-                        </div>
-
-                    </div>
-                    <div class="horizontal-rule mb-10 mt-10"></div>
+                        <div class="horizontal-rule mb-10 mt-10"></div>
                     @endforeach
                 @else
                     <div class="empty">

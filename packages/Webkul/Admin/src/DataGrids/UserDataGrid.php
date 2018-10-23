@@ -111,13 +111,7 @@ class UserDataGrid
                     'label' => 'Role Name',
                     'sortable' => true,
                 ],
-                [
-                    'name' => 'r.id',
-                    'alias' => 'xc',
-                    'type' => 'string',
-                    'label' => 'Role ID',
-                    'sortable' => true,
-                ],
+
             ],
             //don't use aliasing in case of filters
             'filterable' => [
@@ -133,12 +127,7 @@ class UserDataGrid
                     'type' => 'number',
                     'label' => 'Admin ID'
                 ],
-                [
-                    'column' => 'r.id',
-                    'alias' => 'xc',
-                    'type' => 'number',
-                    'label' => 'Role ID'
-                ]
+
             ],
             //don't use aliasing in case of searchables
             'searchable' => [
@@ -146,8 +135,7 @@ class UserDataGrid
                     'column' => 'u.email',
                     'type' => 'string',
                     'label' => 'E-Mail'
-                ],
-                [
+                ], [
                     'column' => 'u.name',
                     'type' => 'string',
                     'label' => 'Name'

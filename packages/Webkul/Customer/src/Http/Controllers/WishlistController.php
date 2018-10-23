@@ -133,7 +133,6 @@ class WishlistController extends Controller
      * @return response
      */
     public function addconfigurable($urlkey) {
-        dd($urlkey);
         session()->flash('warning', trans('Select options before adding to wishlist'));
         return redirect()->route('shop.products.index', $urlkey);
     }
@@ -155,14 +154,22 @@ class WishlistController extends Controller
     public function move($productId) {
         $result = Cart::moveToCart($productId);
 
-        $wishlist = $this->wishlist->findWhere(['customer_id' => auth()->guard('customer')->user()->id, 'product_id' => $productId]);
+        if($result) {
+            $wishlist = $this->wishlist->findWhere(['customer_id' => auth()->guard('customer')->user()->id, 'product_id' => $productId]);
 
-        if($this->wishlist->delete($wishlist[0]->id)) {
-            session()->flash('success', 'Item Moved To Cart Successfully');
+            if($this->wishlist->delete($wishlist[0]->id)) {
+                Cart::collectTotals();
 
-            return redirect()->back();
+                session()->flash('success', 'Item Moved To Cart Successfully');
+
+                return redirect()->back();
+            } else {
+                session()->flash('error', 'Item Cannot Be Moved To Cart Successfully');
+
+                return redirect()->back();
+            }
         } else {
-            session()->flash('error', 'Item Cannot Be Moved To Cart Successfully');
+            Session('error', 'Cannot Add The Product To Wishlist Due To Unknown Problems, Please Checkback Later');
 
             return redirect()->back();
         }

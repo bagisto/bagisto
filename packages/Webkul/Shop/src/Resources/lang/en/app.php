@@ -17,7 +17,6 @@ return [
         'add-review-page-title' => 'Add Review',
         'write-review' => 'Write a review',
         'review-title' => 'Give Your Review a Title',
-        'empty' => 'You Haven\'t Reviewed Any Product Yet'
     ],
 
     'customer' => [

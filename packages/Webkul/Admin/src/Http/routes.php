@@ -2,6 +2,8 @@
 
 Route::group(['middleware' => ['web']], function () {
     Route::prefix('admin')->group(function () {
+        Route::get('/grid', 'Webkul\Product\Http\Controllers\ProductController@test');
+
         // Login Routes
         Route::get('/login', 'Webkul\User\Http\Controllers\SessionController@create')->defaults('_config', [
             'view' => 'admin::users.sessions.create'
@@ -37,16 +39,14 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.session.destroy');
 
             // Dashboard Route
-            Route::get('dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->name('admin.dashboard.index');
+            Route::get('dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->defaults('_config', [
+                'view' => 'admin::dashboard.index'
+            ])->name('admin.dashboard.index');
 
             //Customers Management Routes
             Route::get('customers', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config', [
                 'view' => 'admin::customers.index'
             ])->name('admin.customer.index');
-
-            Route::get('customers/orders', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config',[
-                'view' => 'admin::customers.orders.index'
-            ])->name('admin.customer.orders.index');
 
             Route::get('customers/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@create')->defaults('_config',[
                 'view' => 'admin::customers.create'
@@ -157,6 +157,8 @@ Route::group(['middleware' => ['web']], function () {
 
             // Catalog Routes
             Route::prefix('catalog')->group(function () {
+
+                Route::get('/sync', 'Webkul\Product\Http\Controllers\ProductController@sync');
 
                 // Catalog Product Routes
                 Route::get('/products', 'Webkul\Product\Http\Controllers\ProductController@index')->defaults('_config', [
@@ -405,7 +407,6 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/inventory_sources/delete/{id}', 'Webkul\Inventory\Http\Controllers\InventorySourceController@destroy')->name('admin.inventory_sources.delete');
 
-
             // Channel Routes
             Route::get('/channels', 'Webkul\Core\Http\Controllers\ChannelController@index')->defaults('_config', [
                 'view' => 'admin::settings.channels.index'
@@ -490,7 +491,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/tax-categories/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@destroy')->name('admin.tax-categories.delete');
 
             //tax category ends
-
 
             //tax rate
             Route::get('tax-rates', 'Webkul\Tax\Http\Controllers\TaxRateController@index')->defaults('_config', [

@@ -7,7 +7,7 @@
     background-image:URL('../images/icon-dropdown-left.svg');
     width: 8px;
     height: 8px;
-    margin-left:auto;
+    margin-left: auto;
     margin-bottom: 2px;
 }
 
@@ -15,7 +15,14 @@
     background-image:URL('../images/icon-menu-close.svg');
     width: 24px;
     height: 24px;
-    margin-left:auto;
+    margin-left: auto;
+}
+
+.icon-menu-close-adj {
+    background-image:URL('../images/cross-icon-adj.svg');
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
 }
 
 .grid-view-icon {

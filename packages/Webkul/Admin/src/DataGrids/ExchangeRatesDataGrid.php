@@ -27,10 +27,10 @@ class ExchangeRatesDataGrid
 
             return DataGrid::make([
             'name' => 'Exchange Rates',
-            'table' => 'currency_exchange_rates',
-            'select' => 'id',
+            'table' => 'currency_exchange_rates as cer',
+            'select' => 'cer.id',
             'perpage' => 5,
-            'aliased' => false, //use this with false as default and true in case of joins
+            'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
                 [
@@ -56,13 +56,13 @@ class ExchangeRatesDataGrid
             ],
 
             'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'currencies as curr',
+                    'primaryKey' => 'cer.target_currency',
+                    'condition' => '=',
+                    'secondaryKey' => 'curr.id',
+                ]
             ],
 
             //use aliasing on secodary columns if join is performed
@@ -70,39 +70,38 @@ class ExchangeRatesDataGrid
             'columns' => [
 
                 [
-                    'name' => 'id',
+                    'name' => 'cer.id',
                     'alias' => 'exchID',
                     'type' => 'number',
                     'label' => 'Rate ID',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'target_currency',
-                    'alias' => 'exchTargetCurrency',
+                    'name' => 'curr.name',
+                    'alias' => 'currencyname',
                     'type' => 'string',
-                    'label' => 'Target Currency',
+                    'label' => 'Currency Name',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'rate',
+                    'name' => 'cer.rate',
                     'alias' => 'exchRate',
                     'type' => 'string',
                     'label' => 'Exchange Rate',
                 ],
-
             ],
 
             //don't use aliasing in case of filters
 
             'filterable' => [
                 [
-                    'column' => 'id',
+                    'column' => 'cer.id',
                     'alias' => 'exchId',
                     'type' => 'number',
                     'label' => 'Rate ID',
                 ],
                 [
-                    'column' => 'target_currency',
+                    'column' => 'curr.name',
                     'alias' => 'exchTargetCurrency',
                     'type' => 'string',
                     'label' => 'Target Currency',
