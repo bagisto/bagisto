@@ -685,7 +685,6 @@ class ProductGrid
     {
         foreach ($this->columns as $column) {
             if ($column->filter) { // if the filter bag in array exists then these will be applied.
-                dd($column);
                 if (count($column->filter['condition']) == count($column->filter['condition'], COUNT_RECURSIVE)) {
                     $this->query->{$column->filter['function']}(...$column->filter['condition']);
                 } else {

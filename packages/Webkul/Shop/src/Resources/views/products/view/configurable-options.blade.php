@@ -109,6 +109,21 @@
                             } else {
                                 this.selectedProductId = attribute.options[attribute.selectedIndex].allowedProducts[0];
                             }
+
+                            var prevLink = $('#wishlist-changer').attr('href');
+                            if(this.selectedProductId != '') {
+                                var splitted = prevLink.split("/");
+
+                                var lastItem = splitted.pop();
+
+                                lastItem = this.selectedProductId;
+
+                                var joined = splitted.join('/');
+
+                                var newWishlistUrl = joined+'/'+lastItem;
+
+                                $('#wishlist-changer').attr('href', newWishlistUrl);
+                            }
                         } else {
                             attribute.selectedIndex = 0;
 

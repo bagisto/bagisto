@@ -18,6 +18,13 @@
   margin-left: auto;
 }
 
+.icon-menu-close-adj {
+  background-image: URL("../images/cross-icon-adj.svg");
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+}
+
 .grid-view-icon {
   background-image: URL("../images/icon-grid-view.svg");
   width: 24px;
@@ -834,15 +841,9 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-    bottom: 48%;
+    bottom: 46%;
     right: 0%;
     width: 100%;
-  }
-  section.slider-block div.slider-content div.slider-control .dark-left-icon {
-    margin-left: 15px;
-  }
-  section.slider-block div.slider-content div.slider-control .light-right-icon {
-    margin-right: 15px;
   }
 }
 
@@ -1174,7 +1175,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 }
 
 .header .header-bottom {
-  height: 48px;
+  height: 47px;
   margin-left: auto;
   margin-right: auto;
   border-top: 1px solid #C7C7C7;
@@ -1186,7 +1187,6 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 .header .header-bottom ul.nav {
   display: block;
   font-size: 16px;
-  height: 48px;
   max-width: 100%;
   width: auto;
   margin-left: auto;
