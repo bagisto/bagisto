@@ -7,7 +7,25 @@ return [
         'state' => 'State'
     ],
     'dashboard' => [
-        'title' => 'Dashboard'
+        'title' => 'Dashboard',
+        'from' => 'From',
+        'to' => 'To',
+        'total-customers' => 'Total Customers',
+        'total-orders' => 'Total Orders',
+        'total-sale' => 'Total Sale',
+        'average-sale' => 'Average Order Sale',
+        'increased' => ':progress% Increased',
+        'decreased' => ':progress% Decreased',
+        'sales' => 'Sales',
+        'top-performing-categories' => 'Top Performing Categories',
+        'product-count' => ':count Products',
+        'top-selling-products' => 'Top Selling Products',
+        'sale-count' => ':count Sales',
+        'customer-with-most-sales' => 'Customer With Most Sales',
+        'order-count' => ':count Orders',
+        'revenue' => 'Revenue :total',
+        'stock-threshold' => 'Stock Threshold',
+        'qty-left' => ':qty Left',
     ],
     'account' => [
         'title' => 'My Account',
@@ -32,6 +50,8 @@ return [
             'title' => 'Reset Password',
             'title' => 'Reset Password',
             'email' => 'Registered Email',
+            'password' => 'Password',
+            'confirm-password' => 'Confirm Password',
             'back-link-title' => 'Back to Sign In',
             'submit-btn-title' => 'Reset Password'
         ],
@@ -457,6 +477,13 @@ return [
             'summary' => 'Summary of Shipment',
             'carrier' => 'Carrier',
             'tracking-number' => 'Tracking Number'
+        ],
+        'forget-password' => [
+            'dear' => 'Dear :name',
+            'info' => 'You are receiving this email because we received a password reset request for your account.',
+            'reset-password' => 'Reset Password',
+            'final-summary' => 'If you did not request a password reset, no further action is required.',
+            'thanks' => 'Thanks!'
         ]
     ]
 ];

@@ -39,16 +39,14 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.session.destroy');
 
             // Dashboard Route
-            Route::get('dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->name('admin.dashboard.index');
+            Route::get('dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->defaults('_config', [
+                'view' => 'admin::dashboard.index'
+            ])->name('admin.dashboard.index');
 
             //Customers Management Routes
             Route::get('customers', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config', [
                 'view' => 'admin::customers.index'
             ])->name('admin.customer.index');
-
-            Route::get('customers/orders', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config',[
-                'view' => 'admin::customers.orders.index'
-            ])->name('admin.customer.orders.index');
 
             Route::get('customers/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@create')->defaults('_config',[
                 'view' => 'admin::customers.create'

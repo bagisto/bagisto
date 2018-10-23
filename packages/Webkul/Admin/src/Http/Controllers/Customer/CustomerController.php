@@ -73,7 +73,7 @@ class CustomerController extends Controller
     {
         $customerGroup = $this->customerGroup->all();
 
-        return view($this->_config['view'],compact('customerGroup'));
+        return view($this->_config['view'], compact('customerGroup'));
     }
 
      /**

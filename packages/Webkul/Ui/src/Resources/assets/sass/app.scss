@@ -462,6 +462,19 @@ h2 {
         }
     }
 
+    &.date, &.datetime {
+        &::after {
+            background-image: url("../images/Icon-Calendar.svg");
+            width: 24px;
+            height: 24px;
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: -34px;
+            margin-top: 2px;
+        }
+    }
+
     .control-info {
         display: block;
         font-style: italic;
