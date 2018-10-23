@@ -9,7 +9,7 @@ class ProductGrid extends Model
 {
     protected $table = 'products_grid';
 
-    protected $fillable = ['product_id', 'sku', 'type', 'attribute_family_name', 'product_name', 'quantity', 'cost', 'price'];
+    protected $fillable = ['product_id', 'sku', 'type', 'attribute_family_name', 'name', 'quantity', 'cost', 'price', 'status'];
 
     public $timestamps = false;
 

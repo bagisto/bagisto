@@ -10,7 +10,6 @@ use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
-use Webkul\Product\Helpers\Price;
 use Event;
 
 /**
@@ -64,13 +63,6 @@ class ProductController extends Controller
     protected $productGrid;
 
     /**
-     * Price Object
-     *
-     * @var array
-     */
-    Protected $price;
-
-    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
@@ -84,8 +76,7 @@ class ProductController extends Controller
         Category $category,
         InventorySource $inventorySource,
         Product $product,
-        ProductGrid $productGrid,
-        Price $price)
+        ProductGrid $productGrid)
     {
         $this->attributeFamily = $attributeFamily;
 
@@ -96,8 +87,6 @@ class ProductController extends Controller
         $this->product = $product;
 
         $this->productGrid = $productGrid;
-
-        $this->price = $price;
 
         $this->_config = request('_config');
     }
@@ -190,8 +179,8 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
-        //before update of product
-        // Event::fire('product.update.before', false);
+        // before update of product
+        // Event::fire('product.update.before', $id);
 
         $this->product->update(request()->all(), $id);
 
@@ -221,37 +210,7 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function test() {
-        $gridObject = [];
-
-        foreach($this->product->all() as $product) {
-            $gridObject = [
-                'product_id' => $product->id,
-                'sku' => $product->sku,
-                'type' => $product->type,
-                'product_name' => $product->sku,
-                'attribute_family_name' => $product->toArray()['attribute_family']['name'],
-                'price' => $this->price->getMinimalPrice($product)
-            ];
-
-            if($product->type == 'configurable') {
-                $gridObject['quantity'] = 0;
-            } else {
-                $qty = 0;
-
-                foreach($product->toArray()['inventories'] as $inventorySource) {
-                    $qty = $qty + $inventorySource['qty'];
-                }
-
-                $gridObject['quantity'] = $qty;
-
-                $qty = 0;
-            }
-            $this->productGrid->create($gridObject);
-
-            $gridObject = [];
-        }
-
-        return true;
+    public function sync() {
+        Event::fire('products.datagrid.create', true);
     }
 }

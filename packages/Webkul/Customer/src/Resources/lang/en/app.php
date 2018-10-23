@@ -10,4 +10,7 @@ return [
         'empty' => 'You Don\'t Have Any Items In Your Wishlist',
         'select-options' => 'Need To Select Options Before Adding To Wishlist'
     ],
+    'reviews' => [
+        'empty' => 'You Haven\'t Reviewed Any Product Yet'
+    ]
 ];

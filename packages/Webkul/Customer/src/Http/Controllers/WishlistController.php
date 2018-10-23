@@ -133,7 +133,6 @@ class WishlistController extends Controller
      * @return response
      */
     public function addconfigurable($urlkey) {
-        dd($urlkey);
         session()->flash('warning', trans('Select options before adding to wishlist'));
         return redirect()->route('shop.products.index', $urlkey);
     }

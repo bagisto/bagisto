@@ -135,8 +135,7 @@ class UserDataGrid
                     'column' => 'u.email',
                     'type' => 'string',
                     'label' => 'E-Mail'
-                ],
-                [
+                ], [
                     'column' => 'u.name',
                     'type' => 'string',
                     'label' => 'Name'

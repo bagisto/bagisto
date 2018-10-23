@@ -19,15 +19,17 @@ class ProductServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
-        // Event::listen('product.save.before', 'Webkul\Product\Listeners\ProductListener@beforeProductUpdate');
+        Event::listen('products.datagrid.create', 'Webkul\Admin\Listeners\Product@sync');
 
-        Event::listen('product.save.after', 'Webkul\Product\Listeners\ProductListener@afterProductSave');
+        Event::listen('product.save.after', 'Webkul\Admin\Listeners\Product@afterProductCreated');
 
-        // Event::listen('product.update.before', 'Webkul\Product\Listeners\ProductListener@beforeProductUpdate');
+        Event::listen('product.update.before',
+        'Webkul\Admin\Listeners\Product@beforeProductUpdate');
 
-        Event::listen('product.update.after', 'Webkul\Product\Listeners\ProductListener@beforeProductUpdate');
+        Event::listen('product.update.after',
+        'Webkul\Admin\Listeners\Product@afterProductUpdate');
 
-        Event::listen('product.delete.after', 'Webkul\Product\Listeners\ProductListener@afterProductDelete');
+        Event::listen('product.delete.after', 'Webkul\Admin\Listeners\Product@afterProductDelete');
 
         Product::observe(ProductObserver::class);
     }

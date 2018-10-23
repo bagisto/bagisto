@@ -14,7 +14,6 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
 
 class OrderDataGrid
 {
-
     /**
      * The Data Grid implementation.
      *
@@ -114,19 +113,17 @@ class OrderDataGrid
             //don't use aliasing in case of searchables
 
             'searchable' => [
-                // [
-                //     'column' => 'cat.id',
-                //     'type' => 'number',
-                //     'label' => 'Category ID',
-                // ], [
-                //     'column' => 'ct.name',
-                //     'type' => 'string',
-                //     'label' => 'Category Name',
-                // ], [
-                //     'column' => 'cat.status',
-                //     'type' => 'string',
-                //     'label' => 'Visible in Menu',
-                // ]
+                [
+                    'column' => 'or.id',
+                    'alias' => 'orderid',
+                    'type' => 'number',
+                    'label' => 'ID',
+                ], [
+                    'name' => 'or.status',
+                    'alias' => 'orstatus',
+                    'type' => 'string',
+                    'label' => 'Status'
+                ]
             ],
 
             //list of viable operators that will be used

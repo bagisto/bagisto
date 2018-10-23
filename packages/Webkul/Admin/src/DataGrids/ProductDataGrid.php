@@ -25,17 +25,12 @@ class ProductDataGrid
         return DataGrid::make([
             'name' => 'Products',
             'table' => 'products_grid as prods',
-            'select' => 'prods.id',
-            'perpage' => 10,
+            'select' => 'prods.product_id',
+            'perpage' => 5,
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
+                //check other grid for configuration and make of your own
             ],
 
             'actions' => [
@@ -61,19 +56,50 @@ class ProductDataGrid
                 //name, alias, type, label, sortable
                 [
                     'name' => 'prods.product_id',
-                    'alias' => 'productID',
-                    'type' => 'number',
+                    'alias' => 'id',
+                    'type' => 'string',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'prods.sku',
                     'alias' => 'productSku',
                     'type' => 'string',
                     'label' => 'SKU',
                     'sortable' => true,
-                ],
-                [
+                ], [
+                    'name' => 'prods.name',
+                    'alias' => 'ProductName',
+                    'type' => 'string',
+                    'label' => 'Product Name',
+                    'sortable' => false,
+                ], [
+                    'name' => 'prods.type',
+                    'alias' => 'ProductType',
+                    'type' => 'string',
+                    'label' => 'Product Type',
+                    'sortable' => false,
+                ], [
+                    'name' => 'prods.status',
+                    'alias' => 'ProductStatus',
+                    'type' => 'string',
+                    'label' => 'Product Status',
+                    'sortable' => false,
+                    'wrapper' => function ($value) {
+                        if($value == 1)
+                            return 'Active';
+                        else
+                            return 'Inactive';
+                    },
+                ], [
+                    'name' => 'prods.price',
+                    'alias' => 'ProductPrice',
+                    'type' => 'string',
+                    'label' => 'Product Price',
+                    'sortable' => false,
+                    'wrapper' => function ($value) {
+                        return core()->formatBasePrice($value);
+                    },
+                ], [
                     'name' => 'prods.quantity',
                     'alias' => 'ProductQuantity',
                     'type' => 'string',
@@ -83,57 +109,50 @@ class ProductDataGrid
             ],
 
             'filterable' => [
-                //column, type, and label
-                // [
-                //     'column' => 'prods.id',
-                //     'alias' => 'productID',
-                //     'type' => 'number',
-                //     'label' => 'ID',
-                // ],
-                // [
-                //     'column' => 'prods.sku',
-                //     'alias' => 'productCode',
-                //     'type' => 'string',
-                //     'label' => 'SKU',
-                // ],
-                // [
-                //     'column' => 'attfam.name',
-                //     'alias' => 'FamilyName',
-                //     'type' => 'string',
-                //     'label' => 'Family Name',
-                // ],
-                // [
-                //     'column' => 'pi.qty',
-                //     'alias' => 'ProductQuantity',
-                //     'type' => 'number',
-                //     'label' => 'Product Quatity',
-                // ],
+                //column, alias, type, and label
+                [
+                    'column' => 'prods.product_id',
+                    'alias' => 'productID',
+                    'type' => 'number',
+                    'label' => 'ID',
+                ], [
+                    'column' => 'prods.sku',
+                    'alias' => 'productSku',
+                    'type' => 'string',
+                    'label' => 'SKU',
+                ], [
+                    'column' => 'prods.name',
+                    'alias' => 'ProductName',
+                    'type' => 'string',
+                    'label' => 'Product Name',
+                ], [
+                    'column' => 'prods.type',
+                    'alias' => 'ProductType',
+                    'type' => 'string',
+                    'label' => 'Product Type',
+                ]
             ],
-
             //don't use aliasing in case of searchables
 
             'searchable' => [
                 //column, type and label
-                // [
-                //     'column' => 'prods.id',
-                //     'type' => 'number',
-                //     'label' => 'ID',
-                // ],
-                // [
-                //     'column' => 'prods.sku',
-                //     'type' => 'string',
-                //     'label' => 'SKU',
-                // ],
-                // [
-                //     'column' => 'attfam.name',
-                //     'type' => 'string',
-                //     'label' => 'Family Name',
-                // ],
-                // [
-                //     'column' => 'pi.qty',
-                //     'type' => 'string',
-                //     'label' => 'Product Quatity',
-                // ],
+                [
+                    'column' => 'prods.product_id',
+                    'type' => 'number',
+                    'label' => 'ID',
+                ], [
+                    'column' => 'prods.sku',
+                    'type' => 'string',
+                    'label' => 'SKU',
+                ], [
+                    'column' => 'prods.name',
+                    'type' => 'string',
+                    'label' => 'Product Name',
+                ], [
+                    'column' => 'prods.type',
+                    'type' => 'string',
+                    'label' => 'Product Type',
+                ]
             ],
 
             //list of viable operators that will be used
