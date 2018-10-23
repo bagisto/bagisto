@@ -25,11 +25,11 @@
                         <div class="sale-section">
                             <div class="section-content">
                                 <div class="row">
-                                    <span class="title"> 
+                                    <span class="title">
                                         {{ __('shop::app.customer.account.order.view.placed-on') }}
                                     </span>
 
-                                    <span class="value"> 
+                                    <span class="value">
                                         {{ core()->formatDate($order->created_at, 'd M Y') }}
                                     </span>
                                 </div>
@@ -214,7 +214,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            
+
                             @endforeach
 
                         </tab>
@@ -245,7 +245,7 @@
                                                 <tbody>
 
                                                     @foreach ($shipment->items as $item)
-                                                    
+
                                                         <tr>
                                                             <td>{{ $item->sku }}</td>
                                                             <td>{{ $item->name }}</td>
@@ -320,7 +320,7 @@
                 </div>
 
             </div>
-        
+
         </div>
 
     </div>

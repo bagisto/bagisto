@@ -168,7 +168,12 @@ return [
 
             'review' => [
                 'index' => [
-                    'title' => 'Reviews'
+                    'title' => 'Reviews',
+                    'page-title' => 'Customer - Reviews'
+                ],
+
+                'view' => [
+                    'page-tile' => 'Review #:id',
                 ]
             ]
         ]

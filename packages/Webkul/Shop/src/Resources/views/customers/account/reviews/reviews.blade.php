@@ -1,6 +1,11 @@
 @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @extends('shop::layouts.master')
+
+@section('page_title')
+    {{ __('shop::app.customer.account.review.view.page-title') }}
+@endsection
+
 @section('content-wrapper')
     <div class="account-content">
         @include('shop::customers.account.partials.sidemenu')

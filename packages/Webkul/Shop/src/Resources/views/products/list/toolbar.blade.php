@@ -7,7 +7,12 @@
             {{ __('shop::app.products.pager-info', ['showing' => $products->firstItem() . '-' . $products->lastItem(), 'total' => $products->total()]) }}
         </span>
 
-        <span>Men</span>
+        <span> Men </span>
+
+        <span class="sort-filter">
+            <i class="icon sort-icon" id="sort" ></i>
+            <i class="icon filter-icon" id="filter"></i>
+        </span>
     </div>
 
     <div class="pager">
@@ -32,12 +37,6 @@
                     <i class="icon list-view-icon"></i>
                 </a>
             @endif
-
-            <div class="sort-filter">
-                <i class="icon sort-icon" id="sort" ></i>
-                <i class="icon filter-icon" id="filter"></i>
-            </div>
-
         </div>
 
         <div class="sorter">
@@ -76,41 +75,6 @@
 
 </div>
 
-<div class="reponsive-sorter-limiter mb-20">
-
-    <div class="sorter">
-        <label>{{ __('shop::app.products.sort-by') }}</label>
-
-        <select onchange="window.location.href = this.value">
-
-            @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
-
-                <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
-                    {{ __('shop::app.products.' . $order) }}
-                </option>
-
-            @endforeach
-
-        </select>
-    </div>
-
-    <div class="limiter">
-        <label>{{ __('shop::app.products.show') }}</label>
-
-        <select onchange="window.location.href = this.value">
-
-            @foreach ($toolbarHelper->getAvailableLimits() as $limit)
-
-                <option value="{{ $toolbarHelper->getLimitUrl($limit) }}" {{ $toolbarHelper->isLimitCurrent($limit) ? 'selected' : '' }}>
-                    {{ $limit }}
-                </option>
-
-            @endforeach
-
-        </select>
-    </div>
-
-</div>
 
 <div class="responsive-layred-filter mb-20">
     <layered-navigation></layered-navigation>

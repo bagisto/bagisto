@@ -69,8 +69,10 @@
         $(document).ready(function() {
             var sort = document.getElementById("sort");
             var filter = document.getElementById("filter");
-            var sortLimit = document.getElementsByClassName('reponsive-sorter-limiter')[0];
+            var sortLimit = document.getElementsByClassName('pager')[0];
             var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
+
+            layerFilter.style.display ="none";
 
             if(sort && filter) {
                 sort.addEventListener("click", sortFilter);
@@ -84,7 +86,7 @@
                     sort.classList.remove("sort-icon");
                     sort.classList.add("icon-menu-close-adj");
 
-                    filter.classList.remove("icon-menu-close");
+                    filter.classList.remove("icon-menu-close-adj");
                     filter.classList.add("filter-icon");
 
                     sortLimit.style.display = "flex";
@@ -98,6 +100,8 @@
                     sort.classList.add("sort-icon");
 
                     layerFilter.style.display = "block";
+                    layerFilter.style.marginTop = "10px";
+
                     sortLimit.style.display = "none";
                 } else {
                     sort.classList.remove("icon-menu-close-adj");

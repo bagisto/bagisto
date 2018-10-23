@@ -1,6 +1,11 @@
 @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
 @extends('shop::layouts.master')
+
+@section('page_title')
+    {{ __('shop::app.customer.account.review.index.page-title') }}
+@endsection
+
 @section('content-wrapper')
     <div class="account-content">
         @include('shop::customers.account.partials.sidemenu')
@@ -48,7 +53,7 @@
                     @endforeach
                 @else
                     <div class="empty">
-                        {{--  {{ __('customer::app.wishlist.empty') }}  --}}
+                        {{ __('customer::app.reviews.empty') }}
                     </div>
                 @endif
 

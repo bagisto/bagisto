@@ -3,7 +3,7 @@ namespace Webkul\Customer\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CustomersGroups extends Model
+class CustomerGroup extends Model
 {
     protected $table = 'customer_groups';
 
