@@ -46,6 +46,6 @@ class NewShipmentNotification extends Mailable
 
         return $this->to($order->customer_email, $order->customer_full_name)
                     ->subject(trans('admin::app.mail.shipment.subject', ['order_id' => $order->id]))
-                    ->view('admin::emails.sales.new-shipment');
+                    ->view('shop::emails.sales.new-shipment');
     }
 }

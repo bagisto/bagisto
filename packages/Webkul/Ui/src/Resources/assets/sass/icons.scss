@@ -190,6 +190,30 @@
     height: 13px;
 }
 
+.profile-pic-icon {
+    background-image: url("../images/Profile-Pic.svg");
+    width: 60px;
+    height: 60px;
+}
+
+.graph-up-icon {
+    background-image: url("../images/Icon-Graph-Green.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.graph-down-icon {
+    background-image: url("../images/Icon-Graph-Red.svg");
+    width: 24px;
+    height: 24px;
+}
+
+.no-result-icon {
+    background-image: url("../images/limited-icon.svg");
+    width: 52px;
+    height: 47px;
+}
+
 .active {
     .dashboard-icon {
         background-image: url("../images/Icon-Dashboard-Active.svg");

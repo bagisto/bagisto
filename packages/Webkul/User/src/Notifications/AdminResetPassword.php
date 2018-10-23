@@ -7,7 +7,6 @@ use Illuminate\Auth\Notifications\ResetPassword;
 
 class AdminResetPassword extends ResetPassword
 {
-
     /**
      * Build the mail representation of the notification.
      *
@@ -21,8 +20,9 @@ class AdminResetPassword extends ResetPassword
         }
 
         return (new MailMessage)
-            ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', route('admin.reset-password.create', $this->token))
-            ->line('If you did not request a password reset, no further action is required.');
+            ->view('shop::emails.admin.forget-password')->with([
+                'user_name' => $notifiable->name,
+                'token' => $this->token
+            ]);
     }
 }

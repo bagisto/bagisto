@@ -80,7 +80,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
     //Reset Password create
     Route::get('/reset-password/{token}', 'Webkul\Customer\Http\Controllers\ResetPasswordController@create')->defaults('_config', [
         'view' => 'shop::customers.signup.reset-password'
-    ])->name('password.reset');
+    ])->name('customer.reset-password.create');
 
     Route::post('/reset-password', 'Webkul\Customer\Http\Controllers\ResetPasswordController@store')->defaults('_config', [
         'redirect' => 'customer.session.index'
