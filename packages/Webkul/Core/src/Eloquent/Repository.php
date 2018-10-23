@@ -87,7 +87,41 @@ abstract class Repository extends BaseRepository {
      */
     public function count()
     {
-        return $this->model->count();
+        $this->applyCriteria();
+        $this->applyScope();
+
+        $total = $this->model->count();
+        $this->resetModel();
+
+        return $total;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function sum($columns)
+    {
+        $this->applyCriteria();
+        $this->applyScope();
+
+        $sum = $this->model->sum($columns);
+        $this->resetModel();
+
+        return $sum;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function avg($columns)
+    {
+        $this->applyCriteria();
+        $this->applyScope();
+
+        $avg = $this->model->avg($columns);
+        $this->resetModel();
+
+        return $avg;
     }
 
     /**

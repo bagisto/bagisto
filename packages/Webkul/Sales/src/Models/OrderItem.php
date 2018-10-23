@@ -4,6 +4,7 @@ namespace Webkul\Sales\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Sales\Contracts\OrderItem as OrderItemContract;
+use Webkul\Product\Models\Product;
 
 class OrderItem extends Model implements OrderItemContract
 {

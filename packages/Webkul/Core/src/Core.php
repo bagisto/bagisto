@@ -512,4 +512,77 @@ class Core
 
         return $collection;
     }
+
+    /**
+     * Returns time intervals
+     *
+     * @return array
+     */
+    public function getTimeInterval($startDate, $endDate) {
+        $timeIntervals = [];
+
+        $totalDays = $startDate->diffInDays($endDate);
+        $totalMonths = $startDate->diffInMonths($endDate);
+        
+        $startWeekDay = Carbon::createFromTimeString($this->xWeekRange($startDate, 0) . ' 00:00:01');
+        $endWeekDay = Carbon::createFromTimeString($this->xWeekRange($endDate, 1) . ' 23:59:59');
+        $totalWeeks = $startWeekDay->diffInWeeks($endWeekDay);
+
+        if($totalMonths > 5) {
+            for ($i = 0; $i < $totalMonths; $i++) { 
+                $date = clone $startDate;
+                $date->addMonths($i);
+
+                $start = Carbon::createFromTimeString($date->format('Y-m-d') . ' 00:00:01');
+                $end =  $totalMonths - 1 == $i
+                        ? $endDate
+                        : Carbon::createFromTimeString($date->format('Y-m-d') . ' 23:59:59');
+
+                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('M')];
+            }
+        } elseif($totalWeeks > 6) {
+            for ($i = 0; $i < $totalWeeks; $i++) { 
+                $date = clone $startDate;
+                $date->addWeeks($i);
+
+                $start = $i == 0
+                        ? $startDate
+                        : Carbon::createFromTimeString($this->xWeekRange($date, 0) . ' 00:00:01');
+                $end = $totalWeeks - 1 == $i
+                        ? $endDate
+                        : Carbon::createFromTimeString($this->xWeekRange($date, 1) . ' 23:59:59');
+
+                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('d M')];
+            }
+        } else {
+            for ($i = 0; $i < $totalDays; $i++) { 
+                $date = clone $startDate;
+                $date->addDays($i);
+
+                $start = Carbon::createFromTimeString($date->format('Y-m-d') . ' 00:00:01');
+                $end = Carbon::createFromTimeString($date->format('Y-m-d') . ' 23:59:59');
+
+                $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('d M')];
+            }
+        }
+
+        return $timeIntervals;
+    }
+
+    /**
+     * @return string
+     */
+    public function xWeekRange($date, $day) {
+        $ts = strtotime($date);
+
+        if(!$day) {
+            $start = (date('D', $ts) == 'Sun') ? $ts : strtotime('last sunday', $ts);
+
+            return date('Y-m-d', $start);
+        } else {
+            $end = (date('D', $ts) == 'Sat') ? $ts : strtotime('next saturday', $ts);
+
+            return date('Y-m-d', $end);
+        }
+    }
 }
