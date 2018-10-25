@@ -509,25 +509,51 @@ class Cart {
                     if($id == $item->id) {
                         if($item->type == "configurable") {
                             $canBe = $this->canAddOrUpdate($item->child->id, $quantity);
+
+                            if($canBe == false) {
+                                session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
+
+                                return $cart;
+                            }
+
+                            $item->update([
+                                'quantity' => $quantity,
+                                'total' => core()->convertPrice($item->price * ($quantity)),
+                                'base_total' => $item->price * ($quantity),
+                                'total_weight' => $item->weight * ($quantity),
+                                'base_total_weight' => $item->weight * ($quantity)
+                            ]);
                         } else {
                             $canBe = $this->canAddOrUpdate($id, $quantity);
+
+                            if($canBe == false) {
+                                session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
+
+                                return $cart;
+                            }
+                            $prevQty = $item->quantity;
+
+                            $item->update([
+                                'quantity' => $quantity,
+                                'total' => core()->convertPrice($item->price * ($quantity)),
+                                'base_total' => $item->price * ($quantity),
+                                'total_weight' => $item->weight * ($quantity),
+                                'base_total_weight' => $item->weight * ($quantity)
+                            ]);
                         }
-
-                        if($canBe == false) {
-                            session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
-
-                            return $cart;
-                        }
-
-                        $item->update(['quantity' => $quantity]);
                     }
                 }
             }
+            $this->collectTotals();
 
             session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
-        }
 
-        return $cart;
+            return $cart;
+        } else {
+            session()->flash('warning', trans('shop::app.checkout.cart.integrity.missing_fields'));
+
+            return false;
+        }
     }
 
     /**
@@ -758,6 +784,8 @@ class Cart {
         if(!$cart = $this->getCart())
             return false;
 
+        $this->validateItems();
+
         $this->calculateItemsTax();
 
         $cart->grand_total = $cart->base_grand_total = 0;
@@ -790,6 +818,60 @@ class Cart {
         $cart->items_qty = $quantities;
 
         $cart->save();
+    }
+
+    /**
+     * To validate if the product information is changed by admin and the items have
+     * been added to the cart before it.
+     *
+     * @return boolean
+     */
+    public function validateItems() {
+        $cart = $this->getCart();
+
+        if(count($cart->items) == 0) {
+            $this->cart->delete($cart->id);
+
+            return redirect()->route('shop.home.index');
+        } else {
+            $items = $cart->items;
+
+            foreach($items as $item) {
+                if($item->product->type == 'configurable') {
+                    if($item->product->sku != $item->sku) {
+                        $item->update(['sku' => $item->product->sku]);
+
+                    } else if($item->product->name != $item->name) {
+                        $item->update(['name' => $item->product->name]);
+
+                    } else if($item->child->product->price != $item->price) {
+                        $item->update([
+                            'price' => $item->child->product->price,
+                            'base_price' => $item->child->product->price,
+                            'total' => core()->convertPrice($item->child->product->price * ($item->quantity)),
+                            'base_total' => $item->child->product->price * ($item->quantity),
+                        ]);
+                    }
+
+                } else if($item->product->type == 'simple') {
+                    if($item->product->sku != $item->sku) {
+                        $item->update(['sku' => $item->product->sku]);
+
+                    } else if($item->product->name != $item->name) {
+                        $item->update(['name' => $item->product->name]);
+
+                    } else if($item->product->price != $item->price) {
+                        $item->update([
+                            'price' => $item->product->price,
+                            'base_price' => $item->product->price,
+                            'total' => core()->convertPrice($item->child->product->price * ($item->quantity)),
+                            'base_total' => $item->child->product->price * ($item->quantity),
+                        ]);
+                    }
+                }
+            }
+            return true;
+        }
     }
 
     /**

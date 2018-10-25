@@ -44,7 +44,7 @@ class CategoryComposer
     {
         $categories = [];
 
-        foreach ($this->category->getCategoryTree() as $category) {
+        foreach ($this->category->getVisibleCategoryTree() as $category) {
             array_push($categories, collect($category));
         }
 
