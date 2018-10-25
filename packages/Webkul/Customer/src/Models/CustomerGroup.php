@@ -7,5 +7,5 @@ class CustomerGroup extends Model
 {
     protected $table = 'customer_groups';
 
-    protected $fillable = ['group_name', 'is_user_defined'];
+    protected $fillable = ['name', 'is_user_defined'];
 }

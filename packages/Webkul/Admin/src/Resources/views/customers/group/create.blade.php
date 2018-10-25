@@ -27,23 +27,12 @@
                 <div class="form-container">
                     @csrf()
 
-                    <div class="control-group" :class="[errors.has('group_name') ? 'has-error' : '']">
-                        <label for="group_name" class="required">
+                    <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
+                        <label for="name" class="required">
                             {{ __('admin::app.customers.groups.name') }}
                         </label>
-                        <input type="text" class="control" name="group_name" v-validate="'required'" value="{{ old('group_name') }}">
-                        <span class="control-error" v-if="errors.has('group_name')">@{{ errors.first('group_name') }}</span>
-                    </div>
-
-                    <div class="control-group">
-                        <label for="is_user_defined">
-                            {{ __('admin::app.customers.groups.is_user_defined') }}
-                        </label>
-                        <span class="checkbox">
-                            <input type="checkbox"  name="is_user_defined" value="0">
-                            <label class="checkbox-view" for="is_user_defined"></label>
-                            {{ __('admin::app.customers.groups.yes') }}
-                        </span>
+                        <input type="text" class="control" name="name" v-validate="'required'" value="{{ old('name') }}">
+                        <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                     </div>
 
                 </div>

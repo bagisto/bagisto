@@ -82,7 +82,7 @@
                                 <select  class="control" name="customer_group_id">
                                     @foreach($customerGroup as $group)
                                     <option value="{{ $group->id }}" {{ $selectedCustomerOption == $group->id ? 'selected' : '' }}>
-                                        {{ $group->group_name}}
+                                        {{ $group->name}}
                                     </option>
                                     @endforeach
                                 </select>
