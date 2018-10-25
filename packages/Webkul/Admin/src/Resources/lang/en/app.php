@@ -519,7 +519,13 @@ return [
             'page-title' => '500 Internal Server Error',
             'name' => '500',
             'title' => 'Internal Server Error',
-            'message' => 'You do not have permission to access this page'
-        ]
+            'message' => 'The Server Encountered an internal error.'
+        ],
+        '401' => [
+            'page-title' => '401 Unauthorized Error',
+            'name' => '401',
+            'title' => 'Unauthorized Error',
+            'message' => 'The request has not been applied because it lacks valid authentication credentials for the target resource.'
+        ],
     ]
 ];
