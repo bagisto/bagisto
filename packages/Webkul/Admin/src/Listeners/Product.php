@@ -128,7 +128,7 @@ class Product {
     public function afterProductCreated($product) {
         $data = $this->prepareData($product);
 
-        $result = $this->saveProduct($data);
+        $result = $this->saveProduct($product, $data);
 
         return $result;
     }
@@ -138,16 +138,32 @@ class Product {
      *
      * @return boolean
      */
-    public function saveProduct($product) {
-        dd('check here whether to create or update there');
+    public function saveProduct($product, $data) {
+        die;
 
-        //two cases already created and update previous with simple and configurable
+        if ($this->productGrid->findOneByField('product_id', $product->id)) {
+            if($product->type == 'configurable') {
 
-        if($this->productGrid->create($product)) {
-            return true;
+            } else {
+                if($this->productGrid->update($product, $id)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         } else {
-            return false;
+            if($product->type == 'configurable') {
+
+            } else {
+                if($this->productGrid->create($product)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
+
+
     }
 
     /**
