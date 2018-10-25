@@ -77,7 +77,7 @@
                             <input type="text" v-validate="'required'" class="control" id="sku" name="sku" value="{{ $sku ?: old('sku') }}"/>
                             <span class="control-error" v-if="errors.has('sku')">@{{ errors.first('sku') }}</span>
                         </div>
-                    
+
                     </div>
                 </accordian>
 
@@ -94,7 +94,7 @@
                                             <th></th>
                                         </tr>
                                     </thead>
-                                        
+
                                     <tbody>
                                         @foreach($configurableFamily->configurable_attributes as $attribute)
                                             <tr>

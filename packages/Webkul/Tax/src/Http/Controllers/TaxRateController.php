@@ -154,4 +154,23 @@ class TaxRateController extends Controller
 
         return redirect()->back();
     }
+
+      /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if($this->taxRate->count() == 1) {
+            session()->flash('error', 'At least one tax rate is required.');
+        } else {
+            $this->taxRate->delete($id);
+
+            session()->flash('success', 'Tax rate deleted successfully.');
+        }
+
+        return redirect()->back();
+    }
 }

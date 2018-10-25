@@ -105,7 +105,7 @@
 
                 <li class="cart-dropdown">
                     <span class="icon cart-icon"></span>
-                    
+
                     @include('shop::checkout.cart.mini-cart')
                 </li>
             </ul>
@@ -169,7 +169,7 @@
 
                     <li class="cart-dropdown">
                         <?php $cart = cart()->getCart(); ?>
-                        
+
                         @if(isset($cart))
                             <div>
                                 <a href="{{ route('shop.checkout.cart.index') }}">
@@ -205,9 +205,6 @@
         </div>  --}}
     </div>
 
-    <div class="responsive-nav">
-        <category-nav categories='@json($categories)' url="{{url()->to('/')}}"></category-nav>
-    </div>
 </div>
 
 @push('scripts')
@@ -216,15 +213,11 @@
             var hamMenu = document.getElementById("hammenu");
             var search = document.getElementById("search");
             var searchResponsive = document.getElementsByClassName('search-responsive')[0];
-            var sortLimit = document.getElementsByClassName('reponsive-sorter-limiter')[0];
-            var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
-            var navResponsive = document.getElementsByClassName('responsive-nav')[0];
-            var thumbList = document.getElementsByClassName('thumb-list')[0];
+            var navResponsive = document.getElementsByClassName('header-bottom')[0];
 
             search.addEventListener("click", header);
             hamMenu.addEventListener("click", header);
 
-            // for header responsive icon
             function header() {
                 var className = document.getElementById(this.id).className;
                 if(className === 'icon icon-search' ) {

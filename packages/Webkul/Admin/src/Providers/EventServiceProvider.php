@@ -92,6 +92,12 @@ class EventServiceProvider extends ServiceProvider
             'sort' => 2,
             'icon-class' => '',
         ], [
+            'key' => 'customers.groups',
+            'name' => 'Groups',
+            'route' => 'admin.groups.index',
+            'sort' => 3,
+            'icon-class' => '',
+        ], [
             'key' => 'configuration',
             'name' => 'Configure',
             'route' => 'admin.account.edit',

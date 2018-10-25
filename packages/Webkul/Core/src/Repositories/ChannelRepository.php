@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Core\Repositories;
- 
+
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Storage;
 
@@ -72,6 +72,7 @@ class ChannelRepository extends Repository
      */
     public function uploadImages($data, $channel, $type = "logo")
     {
+
         if(isset($data[$type])) {
             foreach ($data[$type] as $imageId => $image) {
                 $file = $type . '.' . $imageId;

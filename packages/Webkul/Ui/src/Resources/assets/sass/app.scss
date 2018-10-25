@@ -880,9 +880,7 @@ h2 {
     height: 48px;
     display: inline-block;
     box-sizing: border-box;
-    position: absolute;
-    margin-left: 18.5%;
-    margin-top: 15%;
+    position: relative;
 }
 
 .cp-round:before {
@@ -916,7 +914,6 @@ h2 {
     top: 0;
     left: 0;
     animation: spin 1s ease-in-out infinite;
-
 }
 
 @keyframes spin {

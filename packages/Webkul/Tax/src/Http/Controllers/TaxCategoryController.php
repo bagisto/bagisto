@@ -54,7 +54,7 @@ class TaxCategoryController extends Controller
      * @return void
      */
     public function __construct(
-        TaxCategory $taxCategory, 
+        TaxCategory $taxCategory,
         TaxRate $taxRate,
         TaxMap $taxMap
     )
@@ -165,16 +165,21 @@ class TaxCategoryController extends Controller
     }
 
     /**
-     * Destroy a tax category
+     * Remove the specified resource from storage.
      *
-     * @return mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
+    public function destroy($id)
+    {
+        if($this->taxCategory->count() == 1) {
+            session()->flash('error', 'At least one tax category is required.');
+        } else {
+            $this->taxCategorye->delete($id);
 
-    public function destroy($id) {
-        if($this->taxCategory()->delete($id)) {
-            session()->flash('success', 'The tax category is successfully deleted');
-
-            return redirect()->back();
+            session()->flash('success', 'Tax category deleted successfully.');
         }
+
+        return redirect()->back();
     }
 }

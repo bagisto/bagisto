@@ -86,7 +86,4 @@ class TaxController extends Controller
     {
         return view($this->_config['view']);
     }
-
-
-
 }

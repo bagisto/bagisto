@@ -9,7 +9,9 @@
         <div class="account-layout">
 
             <div class="account-head mb-15">
-                <div class="account-heading">{{ __('shop::app.customer.account.address.edit.title') }}</div>
+                <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
+                <span class="account-heading">{{ __('shop::app.customer.account.address.edit.title') }}</span>
+                <span></span>
             </div>
 
             <form method="post" action="{{ route('customer.address.edit') }}">

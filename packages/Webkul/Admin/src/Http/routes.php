@@ -64,13 +64,13 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.update');
 
-            Route::get('customers/delete/{id}', 'Webkul\Admin\Http\Controllers\CustomerController@destroy')->name('admin.customer.delete');
-
+            Route::get('customers/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@destroy')->name('admin.customer.delete');
 
             Route::get('reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
                 'view' => 'admin::customers.review.index'
             ])->name('admin.customer.review.index');
 
+            // Reviews Routes
             Route::get('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[
                 'view' => 'admin::customers.review.edit'
             ])->name('admin.customer.review.edit');
@@ -79,6 +79,29 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.review.index'
             ])->name('admin.customer.review.update');
 
+            // Customer Groups Routes
+
+            Route::get('groups', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@index')->defaults('_config',[
+                'view' => 'admin::customers.group.index'
+            ])->name('admin.groups.index');
+
+            Route::get('groups/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@create')->defaults('_config',[
+                'view' => 'admin::customers.group.create'
+            ])->name('admin.groups.create');
+
+            Route::post('groups/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@store')->defaults('_config',[
+                'redirect' => 'admin.groups.index'
+            ])->name('admin.groups.store');
+
+            Route::get('groups/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@edit')->defaults('_config',[
+                'view' => 'admin::customers.group.edit'
+            ])->name('admin.groups.edit');
+
+            Route::put('groups/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@update')->defaults('_config',[
+                'redirect' => 'admin.groups.index'
+            ])->name('admin.groups.update');
+
+            Route::get('groups/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@destroy')->name('admin.groups.delete');
 
             // Sales Routes
             Route::prefix('sales')->group(function () {
@@ -263,6 +286,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('/users/edit/{id}', 'Webkul\User\Http\Controllers\UserController@update')->defaults('_config', [
                 'redirect' => 'admin.users.index'
             ])->name('admin.users.update');
+
+            Route::get('/users/delete/{id}', 'Webkul\User\Http\Controllers\UserController@destroy')->name('admin.users.delete');
 
 
             // User Role Routes
@@ -462,6 +487,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('/tax-categories/edit/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@update')->defaults('_config', [
                 'redirect' => 'admin.tax-categories.index'
             ])->name('admin.tax-categories.update');
+
+            Route::get('/tax-categories/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@destroy')->name('admin.tax-categories.delete');
+
             //tax category ends
 
             //tax rate
@@ -484,6 +512,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('tax-rates/update/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@update')->defaults('_config', [
                 'redirect' => 'admin.tax-rates.index'
             ])->name('admin.tax-rates.update');
+
+            Route::get('/tax-rates/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@destroy')->name('admin.tax-rates.delete');
             //tax rate ends
         });
     });

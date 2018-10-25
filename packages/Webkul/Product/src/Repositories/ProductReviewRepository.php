@@ -57,8 +57,6 @@ class ProductReviewRepository extends Repository
 
         $reviews = $this->model->where(['customer_id'=> $customerId, 'status' => 'approved'])->with('product')->get();
 
-        // dd($reviews);
-
         return $reviews;
     }
 }
