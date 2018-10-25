@@ -87,7 +87,7 @@
                         
                         <div class="summary" >
 
-                            {{ Cart::getItemAttributeOptionDetails($item)['html'] }}
+                            {{ Cart::getProductAttributeOptionDetails($item->child->product)['html'] }}
                             
                         </div>
                     @endif

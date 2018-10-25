@@ -124,11 +124,15 @@ class Cart {
         if($product->type == 'configurable') {
             $child = $this->product->findOneByField('id', $data['selected_configurable_option']);
 
-            dd($child);
+            $productAddtionalData = $this->getProductAttributeOptionDetails($child);
 
-            $itemAddtionalData = $this->getItemAttributeOptionDetails($child);
+            unset($productAddtionalData['html']);
 
-            dd($itemAddtionalData);
+            $additional = [
+                'request' => $data,
+                'variant_id' => $data['selected_configurable_option'],
+                'attributes' => $productAddtionalData
+            ];
 
             $childData = [
                 'product_id' => $data['selected_configurable_option'],
@@ -152,7 +156,8 @@ class Cart {
             'base_total' => $price * $data['quantity'],
             'weight' => $weight = ($product->type == 'configurable' ? $child->weight : $product->weight),
             'total_weight' => $weight * $data['quantity'],
-            'base_total_weight' => $weight * $data['quantity']
+            'base_total_weight' => $weight * $data['quantity'],
+            'additional' => json_encode($additional)
         ];
 
         return ['parent' => $parentData, 'child' => $childData];
@@ -666,17 +671,18 @@ class Cart {
      *
      * @return Mixed
      */
-    public function getItemAttributeOptionDetails($item)
+    public function getProductAttributeOptionDetails($product)
     {
         $data = [];
 
         $labels = [];
 
-        foreach($item->product->super_attributes as $attribute) {
-            $option = $attribute->options()->where('id', $item->child->product->{$attribute->code})->first();
+        foreach($product->parent->super_attributes as $attribute) {
+            $option = $attribute->options()->where('id', $product->{$attribute->code})->first();
 
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name,
+                'option_id' => $option->id,
                 'option_label' => $option->label,
             ];
 
@@ -1133,6 +1139,16 @@ class Cart {
 
         $price = ($product->type == 'configurable' ? $child->price : $product->price);
 
+        $productAddtionalData = $this->getProductAttributeOptionDetails($child);
+
+        unset($productAddtionalData['html']);
+
+        $additional = [
+            'request' => $data,
+            'variant_id' => $data['selected_configurable_option'],
+            'attributes' => $productAddtionalData
+        ];
+
         $parentData = [
             'sku' => $product->sku,
             'product_id' => $productId,
@@ -1145,7 +1161,8 @@ class Cart {
             'base_total' => $price,
             'weight' => $weight = ($product->type == 'configurable' ? $child->weight : $product->weight),
             'total_weight' => $weight,
-            'base_total_weight' => $weight
+            'base_total_weight' => $weight,
+            'additional' => json_encode($additonal)
         ];
 
         return ['parent' => $parentData, 'child' => $childData];
