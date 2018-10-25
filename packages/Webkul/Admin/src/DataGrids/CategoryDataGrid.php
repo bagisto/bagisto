@@ -80,10 +80,6 @@ class CategoryDataGrid
                     'type' => 'number',
                     'label' => 'Category ID',
                     'sortable' => true,
-                    'filter' => [
-                        'function' => 'where',
-                        'condition' => ['cta.locale', app()->getLocale()]
-                    ],
                 ], [
                     'name' => 'ct.name',
                     'alias' => 'cat_name',
@@ -114,6 +110,16 @@ class CategoryDataGrid
                         else
                             return "True";
                     },
+                ], [
+                    'name' => 'cta.locale',
+                    'alias' => 'cat_locale',
+                    'type' => 'string',
+                    'label' => 'Locale',
+                    'sortable' => true,
+                    'filter' => [
+                        'function' => 'where',
+                        'condition' => ['cta.locale', app()->getLocale()]
+                    ],
                 ]
             ],
 
