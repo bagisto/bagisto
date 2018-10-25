@@ -6,10 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webkul\Customer\Models\CustomerGroup;
 use Webkul\Sales\Models\Order;
-
-// use Webkul\User\Notifications\AdminResetPassword;
-
-// use Webkul\User\Notifications\AdminResetPassword;
+use Webkul\Customer\Notifications\CustomerResetPassword;
 
 
 class Customer extends Authenticatable
@@ -37,5 +34,16 @@ class Customer extends Authenticatable
     public function customerGroup()
     {
         return $this->belongsTo(CustomerGroup::class);
+    }
+
+    /**
+    * Send the password reset notification.
+    *
+    * @param  string  $token
+    * @return void
+    */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomerResetPassword($token));
     }
 }

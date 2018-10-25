@@ -20,7 +20,7 @@ class AdminResetPassword extends ResetPassword
         }
 
         return (new MailMessage)
-            ->view('shop::emails.admin.forget-password')->with([
+            ->view('shop::emails.admin.forget-password', [
                 'user_name' => $notifiable->name,
                 'token' => $this->token
             ]);
