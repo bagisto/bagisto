@@ -38,8 +38,10 @@
             @include ('shop::products.add-to', ['product' => $product])
         @else
             @if($product->type == "configurable")
-                <a href="{{ route('cart.add.configurable', $product->url_key) }}" class="btn btn-lg btn-primary addtocart">{{ __('shop::app.products.add-to-cart') }}</a>
+                <div class="cart-wish-wrap">
+                    <a href="{{ route('cart.add.configurable', $product->url_key) }}" class="btn btn-lg btn-primary addtocart">{{ __('shop::app.products.add-to-cart') }}</a>
                 @include('shop::products.wishlist')
+                </div>
             @else
                 <div class="cart-wish-wrap">
                     <form action="{{route('cart.add', $product->id)}}" method="POST">

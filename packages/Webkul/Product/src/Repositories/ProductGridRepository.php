@@ -105,8 +105,7 @@ class ProductGridRepository extends Repository
 
                     $gridObject['quantity'] = $qty;
                 }
-
-                return $this->getModel()->where('product_id', $product->id)->update($gridObject);
+                return $this->getModel()->where('product_id', $variant->id)->update($gridObject);
             }
         }
         return false;

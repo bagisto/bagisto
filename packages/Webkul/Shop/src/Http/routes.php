@@ -120,6 +120,22 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
 
             Route::get('wishlist/moveall', 'Webkul\Customer\Http\Controllers\WishlistController@moveAll')->name('customer.wishlist.moveall');
 
+            // Forget Password Routes
+            Route::get('/forget-password', 'Webkul\Customer\Http\Controllers\ForgetPasswordController@create')->defaults('_config', [
+                'view' => 'shop::customers.signup.forget-password'
+            ])->name('customer.forget-password.create');
+
+            Route::post('/forget-password', 'Webkul\Customer\Http\Controllers\ForgetPasswordController@store')->name('customer.forget-password.store');
+
+            //Reset Password create
+            Route::get('/reset-password/{token}', 'Webkul\Customer\Http\Controllers\ResetPasswordController@create')->defaults('_config', [
+                'view' => 'shop::customers.signup.reset-password'
+            ])->name('password.reset');
+
+            Route::post('/reset-password', 'Webkul\Customer\Http\Controllers\ResetPasswordController@store')->defaults('_config', [
+                'redirect' => 'customer.session.index'
+            ])->name('customer.reset-password.store');
+
             //customer account
             Route::prefix('account')->group(function () {
 

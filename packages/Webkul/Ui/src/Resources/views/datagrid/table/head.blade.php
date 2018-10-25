@@ -99,7 +99,7 @@
             @endif
         @endforeach
         @if(count($actions))
-            <th>
+            <th style="width: 85px;">
                 {{ __('ui::app.datagrid.actions') }}
             </th>
         @endif
