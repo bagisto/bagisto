@@ -21,7 +21,6 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::post('/forget-password', 'Webkul\User\Http\Controllers\ForgetPasswordController@store')->name('admin.forget-password.store');
 
-
         // Reset Password Routes
         Route::get('/reset-password/{token}', 'Webkul\User\Http\Controllers\ResetPasswordController@create')->defaults('_config', [
             'view' => 'admin::users.reset-password.create'

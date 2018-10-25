@@ -37,7 +37,7 @@ class DataGridController extends Controller
                 ], [
                     'column' => 'u.email',
                     'type' => 'string',
-                    'label' => 'Admin E-Mail',
+                    'label' => 'Admin Email',
                 ], [
                     'column' => 'u.name',
                     'type' => 'string',
@@ -76,7 +76,7 @@ class DataGridController extends Controller
                 [
                     'name' => 'u.email',
                     'type' => 'string',
-                    'label' => 'Admin E-Mail',
+                    'label' => 'Admin Email',
                     'sortable' => true,
                     'filterable' => true
                 ],

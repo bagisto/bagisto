@@ -76,17 +76,11 @@
                             <div class="dropdown-container">
                                 <label>Account</label>
                                 <ul>
-                                    <li><a href="{{ route('customer.account.index') }}">Account</a></li>
-
                                     <li><a href="{{ route('customer.profile.index') }}">Profile</a></li>
-
-                                    <li><a href="{{ route('customer.address.index') }}">Address</a></li>
 
                                     <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
 
                                     <li><a href="{{ route('shop.checkout.cart.index') }}">Cart</a></li>
-
-                                    <li><a href="{{ route('customer.orders.index') }}">Orders</a></li>
 
                                     <li><a href="{{ route('customer.session.destroy') }}">Logout</a></li>
                                 </ul>
@@ -143,17 +137,11 @@
                                     <label>Account</label>
 
                                     <ul>
-                                        <li><a href="{{ route('customer.account.index') }}">Account</a></li>
-
                                         <li><a href="{{ route('customer.profile.index') }}">Profile</a></li>
-
-                                        <li><a href="{{ route('customer.address.index') }}">Address</a></li>
 
                                         <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
 
                                         <li><a href="{{ route('shop.checkout.cart.index') }}">Cart</a></li>
-
-                                        <li><a href="{{ route('customer.orders.index') }}">Orders</a></li>
 
                                         <li><a href="{{ route('customer.session.destroy') }}">Logout</a></li>
                                     </ul>

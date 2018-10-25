@@ -72,7 +72,7 @@ class LocaleController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'code' => 'required|unique:locales,code',
+            'code' => ['required', 'unique:locales,code', new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required'
         ]);
 

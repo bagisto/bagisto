@@ -458,48 +458,6 @@ return [
             'comment' => 'Comment'
         ]
     ],
-    'mail' => [
-        'order' => [
-            'subject' => 'New Order Confirmation',
-            'heading' => 'Order Confirmation!',
-            'dear' => 'Dear :customer_name',
-            'greeting' => 'Thanks for your Order :order_id placed on :created_at',
-            'summary' => 'Summary of Order',
-            'shipping-address' => 'Shipping Address',
-            'billing-address' => 'Billing Address',
-            'contact' => 'Contact',
-            'shipping' => 'Shipping',
-            'payment' => 'Payment',
-            'price' => 'Price',
-            'quantity' => 'Quantity',
-            'subtotal' => 'Subtotal',
-            'shipping-handling' => 'Shipping & Handling',
-            'tax' => 'Tax',
-            'grand-total' => 'Grand Total',
-            'final-summary' => 'Thanks for showing your intrest in our store. we will send you track number once it shiped.',
-            'help' => 'If you need any kind of help please contact us at :support_email',
-            'thanks' => 'Thanks!'
-        ],
-        'invoice' => [
-            'heading' => 'Your Invoice #:invoice_id for Order #:order_id',
-            'subject' => 'Invoice for your order #:order_id',
-            'summary' => 'Summary of Invoice',
-        ],
-        'shipment' => [
-            'heading' => 'Your Shipment #:shipment_id for Order #:order_id',
-            'subject' => 'Shipment for your order #:order_id',
-            'summary' => 'Summary of Shipment',
-            'carrier' => 'Carrier',
-            'tracking-number' => 'Tracking Number'
-        ],
-        'forget-password' => [
-            'dear' => 'Dear :name',
-            'info' => 'You are receiving this email because we received a password reset request for your account.',
-            'reset-password' => 'Reset Password',
-            'final-summary' => 'If you did not request a password reset, no further action is required.',
-            'thanks' => 'Thanks!'
-        ]
-    ],
     'error' => [
         'go-to-home' => 'GO TO HOME',
 

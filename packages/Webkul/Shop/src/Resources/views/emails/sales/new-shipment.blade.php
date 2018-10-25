@@ -1,4 +1,4 @@
-@component('admin::emails.layouts.master')
+@component('shop::emails.layouts.master')
     <div style="text-align: center;">
         <a href="{{ config('app.url') }}">
             <img src="{{ bagisto_asset('vendor/webkul/shop/assets/images/logo.svg') }}">
@@ -10,15 +10,15 @@
     <div style="padding: 30px;">
         <div style="font-size: 20px;color: #242424;line-height: 30px;margin-bottom: 34px;">
             <span style="font-weight: bold;">
-                {{ __('admin::app.mail.shipment.heading', ['order_id' => $order->id, 'shipment_id' => $shipment->id]) }}
+                {{ __('shop::app.mail.shipment.heading', ['order_id' => $order->id, 'shipment_id' => $shipment->id]) }}
             </span> <br>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                {{ __('admin::app.mail.order.dear', ['customer_name' => $order->customer_full_name]) }},
+                {{ __('shop::app.mail.order.dear', ['customer_name' => $order->customer_full_name]) }},
             </p>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                {!! __('admin::app.mail.order.greeting', [
+                {!! __('shop::app.mail.order.greeting', [
                     'order_id' => '<a href="' . route('customer.orders.view', $order->id) . '" style="color: #0041FF; font-weight: bold;">#' . $order->id . '</a>',
                     'created_at' => $order->created_at
                     ]) 
@@ -27,13 +27,13 @@
         </div>
 
         <div style="font-weight: bold;font-size: 20px;color: #242424;line-height: 30px;margin-bottom: 20px !important;">
-            {{ __('admin::app.mail.shipment.summary') }}
+            {{ __('shop::app.mail.shipment.summary') }}
         </div>
 
         <div style="display: flex;flex-direction: row;margin-top: 20px;justify-content: space-between;margin-bottom: 40px;">
             <div style="line-height: 25px;">
                 <div style="font-weight: bold;font-size: 16px;color: #242424;">
-                    {{ __('admin::app.mail.order.shipping-address') }}
+                    {{ __('shop::app.mail.order.shipping-address') }}
                 </div>
 
                 <div>
@@ -51,11 +51,11 @@
                 <div>---</div>
 
                 <div style="margin-bottom: 40px;">
-                    {{ __('admin::app.mail.order.contact') }} : {{ $order->shipping_address->phone }} 
+                    {{ __('shop::app.mail.order.contact') }} : {{ $order->shipping_address->phone }} 
                 </div>
 
                 <div style="font-size: 16px;color: #242424;">
-                    {{ __('admin::app.mail.order.shipping') }}
+                    {{ __('shop::app.mail.order.shipping') }}
                 </div>
 
                 <div style="font-size: 16px;color: #242424;">
@@ -64,18 +64,18 @@
                     </div>
 
                     <div style="margin-top: 5px;">
-                        <span style="font-weight: bold;">{{ __('admin::app.mail.shipment.carrier') }} : </span>{{ $shipment->carrier_title }}
+                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.carrier') }} : </span>{{ $shipment->carrier_title }}
                     </div>
 
                     <div style="margin-top: 5px;">
-                        <span style="font-weight: bold;">{{ __('admin::app.mail.shipment.tracking-number') }} : </span>{{ $shipment->track_number }}
+                        <span style="font-weight: bold;">{{ __('shop::app.mail.shipment.tracking-number') }} : </span>{{ $shipment->track_number }}
                     </div>
                 </div>
             </div>
 
             <div style="line-height: 25px;">
                 <div style="font-weight: bold;font-size: 16px;color: #242424;">
-                    {{ __('admin::app.mail.order.billing-address') }}
+                    {{ __('shop::app.mail.order.billing-address') }}
                 </div>
 
                 <div>
@@ -93,11 +93,11 @@
                 <div>---</div>
 
                 <div style="margin-bottom: 40px;">
-                    {{ __('admin::app.mail.order.contact') }} : {{ $order->billing_address->phone }} 
+                    {{ __('shop::app.mail.order.contact') }} : {{ $order->billing_address->phone }} 
                 </div>
 
                 <div style="font-size: 16px; color: #242424;">
-                    {{ __('admin::app.mail.order.payment') }}
+                    {{ __('shop::app.mail.order.payment') }}
                 </div>
 
                 <div style="font-weight: bold;font-size: 16px; color: #242424;">
@@ -114,7 +114,7 @@
 
                 <div style="margin-bottom: 10px;">
                     <label style="font-size: 16px;color: #5E5E5E;">
-                        {{ __('admin::app.mail.order.price') }}
+                        {{ __('shop::app.mail.order.price') }}
                     </label>
                     <span style="font-size: 18px;color: #242424;margin-left: 40px;font-weight: bold;">
                         {{ core()->formatPrice($item->price, $order->order_currency_code) }}
@@ -123,7 +123,7 @@
 
                 <div style="margin-bottom: 10px;">
                     <label style="font-size: 16px;color: #5E5E5E;">
-                        {{ __('admin::app.mail.order.quantity') }}
+                        {{ __('shop::app.mail.order.quantity') }}
                     </label>
                     <span style="font-size: 18px;color: #242424;margin-left: 40px;font-weight: bold;">
                         {{ $item->qty }}
@@ -141,14 +141,14 @@
         <div style="margin-top: 20px;font-size: 16px;color: #5E5E5E;line-height: 24px;display: inline-block;width: 100%">
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
                 {!! 
-                    __('admin::app.mail.order.help', [
+                    __('shop::app.mail.order.help', [
                         'support_email' => '<a style="color:#0041FF" href="mailto:' . config('mail.from.address') . '">' . config('mail.from.address'). '</a>'
                         ]) 
                 !!}
             </p>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                {{ __('admin::app.mail.order.thanks') }}
+                {{ __('shop::app.mail.order.thanks') }}
             </p>
         </div>
     </div>
