@@ -462,7 +462,7 @@ return [
         'go-to-home' => 'GO TO HOME',
 
         '404' => [
-            'page-title' => 'Page not found',
+            'page-title' => '404 Page not found',
             'name' => '404',
             'title' => 'Page Not found',
             'message' => 'The Page you are looking for doesnt exist or have secrately    escaped;head back to home and make a fresh move again.'
