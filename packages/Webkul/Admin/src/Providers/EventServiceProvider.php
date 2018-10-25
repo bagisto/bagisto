@@ -165,7 +165,7 @@ class EventServiceProvider extends ServiceProvider
             'icon-class' => '',
         ], [
             'key' => 'settings.sliders',
-            'name' => 'Create Sliders',
+            'name' => 'Sliders',
             'route' => 'admin.sliders.index',
             'sort' => 7,
             'icon-class' => '',

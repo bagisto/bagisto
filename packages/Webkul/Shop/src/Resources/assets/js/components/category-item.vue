@@ -1,4 +1,3 @@
-
 <template>
     <li>
         <a :href="url+'/categories/'+this.item['translations'][0].slug">{{ this.item['translations'][0].name }}&emsp;<i class="icon dropdown-right-icon"
@@ -17,6 +16,7 @@
         </ul>
     </li>
 </template>
+
 <script>
 // define the item component
 export default {
