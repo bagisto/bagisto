@@ -33,14 +33,6 @@
                         <a href="{{ route('admin.forget-password.create') }}">{{ __('admin::app.users.sessions.forget-password-link-title') }}</a>
                     </div>
 
-                    <div class="control-group">
-                        <span class="checkbox">
-                            <input type="checkbox" id="remember" name="remember" value="1">
-                            <label class="checkbox-view" for="remember"></label>
-                            {{ __('admin::app.users.sessions.remember-me') }}
-                        </span>
-                    </div>
-
                     <div class="button-group">
                         <button class="btn btn-xl btn-primary">{{ __('admin::app.users.sessions.submit-btn-title') }}</button>
                     </div>
