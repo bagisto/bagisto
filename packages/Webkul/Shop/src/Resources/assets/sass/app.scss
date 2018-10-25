@@ -604,6 +604,11 @@ section.slider-block {
 
                 li {
                     display: flex;
+
+                    img {
+                       max-width: 120px;
+                       max-height: 40px;
+                    }
                 }
             }
 

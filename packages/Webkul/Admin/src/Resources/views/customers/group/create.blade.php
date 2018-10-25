@@ -35,17 +35,6 @@
                         <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                     </div>
 
-                    <div class="control-group">
-                        <label for="is_user_defined">
-                            {{ __('admin::app.customers.groups.is_user_defined') }}
-                        </label>
-                        <span class="checkbox">
-                            <input type="checkbox"  name="is_user_defined" value="0">
-                            <label class="checkbox-view" for="is_user_defined"></label>
-                            {{ __('admin::app.customers.groups.yes') }}
-                        </span>
-                    </div>
-
                 </div>
 
             </div>

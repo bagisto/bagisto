@@ -784,6 +784,11 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   display: flex;
 }
 
+.header .header-top div.left-content ul.logo-container li img {
+  max-width: 120px;
+  max-height: 40px;
+}
+
 .header .header-top div.left-content ul.search-container li.search-group {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;

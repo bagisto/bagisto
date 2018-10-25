@@ -462,7 +462,7 @@ return [
         'go-to-home' => 'GO TO HOME',
 
         '404' => [
-            'page-title' => 'Page not found',
+            'page-title' => '404 Page not found',
             'name' => '404',
             'title' => 'Page Not found',
             'message' => 'The Page you are looking for doesnt exist or have secrately    escaped;head back to home and make a fresh move again.'
@@ -477,7 +477,13 @@ return [
             'page-title' => '500 Internal Server Error',
             'name' => '500',
             'title' => 'Internal Server Error',
-            'message' => 'You do not have permission to access this page'
-        ]
+            'message' => 'The Server Encountered an internal error.'
+        ],
+        '401' => [
+            'page-title' => '401 Unauthorized Error',
+            'name' => '401',
+            'title' => 'Unauthorized Error',
+            'message' => 'The request has not been applied because it lacks valid authentication credentials for the target resource.'
+        ],
     ]
 ];

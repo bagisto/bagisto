@@ -1,5 +1,9 @@
 @extends('shop::layouts.master')
 
+@section('page_title')
+    {{ __('admin::app.error.403.page-title') }}
+@stop
+
 @section('content-wrapper')
 
     <div class="error-container" style="width: 100%; display: flex; justify-content: center;">
@@ -9,7 +13,7 @@
 
             <div class="error-box"  style="width: 50%">
 
-                <div class="error-title" style="font-size: 100px;color: #5E5E5E"> {{ $code }}</div>
+                <div class="error-title" style="font-size: 100px;color: #5E5E5E">  {{ __('admin::app.error.403.name') }}  </div>
 
                 <div class="error-messgae" style="font-size: 24px;color: #5E5E5E">
                     {{ __('admin::app.error.403.title') }}
