@@ -84,7 +84,7 @@ class CustomerGroupDataGrid
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'cg.group_name',
+                    'name' => 'cg.name',
                     'alias' => 'Name',
                     'type' => 'string',
                     'label' => 'Name',
@@ -107,7 +107,7 @@ class CustomerGroupDataGrid
             //don't use aliasing in case of filters
             'filterable' => [
                 [
-                    'column' => 'cg.group_name',
+                    'column' => 'cg.name',
                     'alias' => 'Name',
                     'type' => 'string',
                     'label' => 'Name'

@@ -26,11 +26,11 @@ class CreateInventorySourcesTable extends Migration
             $table->string('state')->nullable();
             $table->string('city')->nullable();
             $table->string('street')->nullable();
-            $table->string('postcode');
+            $table->string('postcode')->nullable();
             $table->integer('priority')->default(0);
             $table->decimal('latitude', 10, 5)->nullable();
             $table->decimal('longitude', 10, 5)->nullable();
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

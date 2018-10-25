@@ -29,12 +29,12 @@
 
                     <input name="_method" type="hidden" value="PUT">
 
-                    <div class="control-group" :class="[errors.has('group_name') ? 'has-error' : '']">
-                        <label for="group_name" class="required">
+                    <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
+                        <label for="name" class="required">
                             {{ __('admin::app.customers.groups.name') }}
                         </label>
-                        <input type="text" class="control" name="group_name" v-validate="'required'" value="{{ $group->group_name }}">
-                        <span class="control-error" v-if="errors.has('group_name')">@{{ errors.first('group_name') }}</span>
+                        <input type="text" class="control" name="name" v-validate="'required'" value="{{ $group->name }}">
+                        <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                     </div>
 
                     <div class="control-group">
