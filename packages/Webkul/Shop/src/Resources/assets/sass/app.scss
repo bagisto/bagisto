@@ -738,10 +738,6 @@ section.slider-block {
             border-top: 1px solid $border-color;
         }
     }
-
-    .responsive-nav {
-        display: none;
-    }
 }
 
 @media all and (max-width: 720px) {
@@ -753,7 +749,6 @@ section.slider-block {
 
             .nav a {
                 display:inline-block;
-                padding: 12px 4.8px 12px 8px;
             }
 
             ul.nav , .nav li{
@@ -764,13 +759,18 @@ section.slider-block {
                 float: none;
             }
 
-            .nav li ul  {
-                padding-left: 20px;
-            }
+            // .nav li ul  {
+            //     padding-left: 20px;
+            // }
 
             .nav  li  > .icon{
                 float: right;
                 display: block;
+            }
+
+            .nav li .left{
+                height: 16px;
+                width: 16px;
             }
 
             .nav  li  a > .icon{
@@ -781,6 +781,11 @@ section.slider-block {
                 position: unset;
                 border: none;
                 box-shadow: none;
+            }
+
+            .nav > li li:hover > ul {
+                margin-left: 0px;
+                top: 0px;
             }
         }
     }
@@ -1360,7 +1365,6 @@ section.product-detail {
                     margin-right: 0px;
 
                     .thumb-frame {
-
                         img {
                             height: 100%;
                             width: auto;
@@ -1392,11 +1396,8 @@ section.product-detail {
 }
 
 @media only screen and (max-width: 510px){
-
     section.product-detail div.layouter form {
-
         div.product-image-group {
-
             .product-hero-image img {
                 width: 100% !important;
             }
@@ -1892,49 +1893,37 @@ section.cart {
 
 // review page start here
 section.review {
-    color: $font-color;
-
     .category-breadcrumbs {
         display: inline;
     }
 
     .review-layouter {
         display: flex;
-        flex-direction: row;
 
         .product-info {
+            font-size: 24px;
 
             .product-image {
                 img {
-                    display: block;
                     height: 280px;
                     width: 280px;
                 }
             }
 
-            .product-name {
-                margin-top: 20px;
-
-                span {
-                    font-size: 24px;
-                }
-            }
-
             .product-price {
-                margin-top: 10px;
-
                 .pro-price {
-                    font-size: 24px;
                     color: $disc-price;
                 }
 
                 .pro-price-not {
                     margin-left: 10px;
+                    font-size: 16px;
                     color: $disc-price-pro;
                 }
 
                 .offer {
                     margin-left: 10px;
+                    font-size: 16px;
                 }
             }
         }
@@ -1944,69 +1933,41 @@ section.review {
             width: 49%;
 
             .heading {
-                margin-top: 10px;
+                color: #242424;
+                font-weight: 600;
 
-                .btn.btn-primary.right {
+                .right {
                    float: right;
                    margin-top: -10px;
                 }
             }
 
             .rating {
-                margin-top : 25px;
                 color: $font-color-light;
 
-
-                span {
-                    display: inline;
-                }
-            }
-
-            .stars {
-
-                width: 270px;
-                display: inline-block;
-
                 label.star {
-                font-size: 36px;
-                color: #d4d4d4;
-                transition: all .2s;
+                    font-size: 25px;
+                    color: #d4d4d4;
+                    transition: all .2s;
                 }
 
                 label.star:before {
                     content: '\2605';
                 }
-
             }
 
             .write-review {
-                margin-top: 25px;
-
-                .control-group {
-                    margin-bottom: 0px;
-
-                    textarea {
-                        margin-top: 5px;
-                        border: 2px solid $border-color;
-                        border-radius: 3px;
-                        width: 600px;
-                        height: 120px;
-                    }
+                label {
+                    color: $font-color-light;
+                    font-size: 16px;
                 }
-            }
-
-            .submit-button {
-                margin-top: 10px;
-
-                button {
-                    background: $brand-color;
-                    font-size: 14px;
-                    color: $background-color;
-
-                    text-align: center;
-                    width: 120px;
-                    height: 38px;
-                    border: none;
+                textarea {
+                    margin-top: 5px;
+                    border: 2px solid $border-color;
+                    color: $font-color-light;
+                    border-radius: 3px;
+                    width: 90%;
+                    height: 120px;
                 }
             }
 
@@ -2023,17 +1984,14 @@ section.review {
                     width: 48%;
 
                     .avg-rating-count{
-
                         span {
                             font-size: 34px;
-
                             text-align: center;
                         }
                     }
                 }
 
                 .rating-calculate {
-
                     .progress-only {
                         width:20px;
                         border: 1px solid blue;
@@ -2041,9 +1999,122 @@ section.review {
                 }
             }
         }
+
+        .ratings-reviews {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .left-side {
+                padding: 40px 20px 40px 20px;
+                width: 50%;
+
+                .rate {
+                    font-size: 34px;
+                }
+
+                .stars.icon {
+                    height: 16px;
+                    width: 16px;
+                }
+            }
+
+            .right-side {
+                width: 50%;
+
+                .rater {
+                    display: inline-flex;
+                    align-items: center;
+                    padding-top: 5px;
+                    width: 100%;
+
+                    .star-name {
+                        margin-right: 5px;
+                    }
+
+                    .rate-number {
+                        width:15px;
+                    }
+
+                    .percentage {
+                        width: 15%;
+                        margin-right: 10px;
+
+                        span {
+                            float: right;
+                            white-space: nowrap;
+                        }
+                    }
+
+                    .line-bar {
+                        height: 4px;
+                        width: 65%;
+                        margin-right: 5px;
+                        background: #D8D8D8;
+
+                        .line-value {
+                            background-color: #0031F0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 // review page end here
+
+// review responsive css start here
+@media only screen and (max-width: 770px) {
+    section.review {
+        .category-breadcrumbs{
+            display: none;
+        }
+
+        .review-layouter {
+            flex-direction: column;
+
+            .product-info .product-image {
+                max-width: 280px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .review-form {
+                width: 100%;
+                margin-left: 0px;
+
+                .heading .right {
+                    margin-top: 50px;
+                }
+
+                .ratings-reviews {
+                    flex-direction: column;
+                    width: 100%;
+
+                    .left-side {
+                        width: 100%;
+                        padding: 0px 0px 40px 0px;
+                        margin-top: -50px;
+                    }
+
+                    .right-side {
+                        width: 100%;
+
+                        .rater .line-bar {
+                            width: 100%;
+                        }
+
+                        .rater .percentage {
+                            width: 10%;
+                            margin-right: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+//review responsive css end here
 
 
 //customers auth page css goes here
@@ -2180,6 +2251,88 @@ section.review {
 
         .account-head {
             margin-bottom: 20px;
+
+            .back-icon {
+                display: none;
+            }
+        }
+    }
+}
+
+//customer account page responsive layout
+@media only screen and (max-width: 770px) {
+    .account-content {
+        flex-direction: column;
+
+        .account-side-menu {
+            display: none;
+            width:100%;
+            border: none;
+
+            li {
+                margin-left: 0%;
+                width: 100%;
+
+                a {
+                    color : $font-color;
+                }
+            }
+        }
+
+        .responsive-side-menu {
+            cursor: pointer;
+            padding-top:13px;
+            display: block;
+            height: 46px;
+            border-bottom: 1px solid $border-color;
+            border-top: 1px solid $border-color;
+
+            .right {
+                float: right;
+            }
+        }
+
+        .account-layout {
+            margin-left: 0%;
+            margin-top: 20px;
+
+            .account-head  {
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid $border-color;
+                border-top: 1px solid $border-color;
+                height: 46px;
+
+                .back-icon {
+                    display: block;
+                }
+
+                span {
+                    margin-top: 12px;
+                    font-size: 18px;
+                }
+
+                .horizontal-rule {
+                    display: none;
+                }
+            }
+
+            .account-table-content {
+                margin-top: 2%;
+
+                table tbody tr {
+                    display: grid;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+
+        .account-items-list , .edit-form {
+            margin-top: 20px;
+        }
+
+        .control-group .control {
+            width: 100%;
         }
     }
 }
@@ -2258,7 +2411,6 @@ section.review {
                         color: #8E8E8E;
                     }
 
-
                     .box-content {
                         color: #3A3A3A;
                     }
@@ -2267,6 +2419,10 @@ section.review {
 
             .qty-row {
                 display: block;
+            }
+
+            .responsive-table {
+                display: none;
             }
         }
     }
@@ -2318,38 +2474,41 @@ section.review {
                     }
                 }
 
-                // .table {
-                //     table {
-                //         display: flex;
-                //         border: none;
+                .table{
+                    display: none;
+                }
 
-                //         tr {
-                //              display: grid;
-                //         }
+                .responsive-table {
+                    border: 1px solid $border-color;
+                    margin-top: 5px;
+                    width: 100%;
+                    display: block;
 
-                //         thead th , tbody td {
-                //             font-weight: 700;
-                //             padding: 12px 0px;
-                //             background: none;
-                //             color: $font-color;
-                //         }
-                //     }
-                // }
+                    tbody td {
+                        padding: 8px 5px;
+
+                        &:first-child {
+                            width: 25%;
+                        }
+
+                        &:last-child {
+                            padding-left: 10px;
+                        }
+                    }
+                }
 
                 .totals {
                     .sale-summary {
                         width: 100%;
 
-                        tr {
-                            td {
-                                &:nth-child(2) {
-                                   display: none;
-                                }
-
+                        tr td {
+                            &:nth-child(2) {
+                                display: none;
                             }
                         }
                     }
                 }
+
                 .order-box-container {
                     display: flex;
                     flex-direction: column;
@@ -2360,85 +2519,6 @@ section.review {
                     }
                 }
             }
-        }
-    }
-}
-
-
-
-@media only screen and (max-width: 770px) {
-    .account-content {
-        flex-direction: column;
-
-        .account-side-menu {
-            display: none;
-            width:100%;
-            border: none;
-
-            li {
-                margin-left: 0%;
-                width: 100%;
-
-                a {
-                    color : $font-color;
-                }
-            }
-        }
-
-        .responsive-side-menu {
-            cursor: pointer;
-            padding-top:13px;
-            display: block;
-            height: 46px;
-            border-bottom: 1px solid $border-color;
-            border-top: 1px solid $border-color;
-
-            .right {
-                float: right;
-            }
-        }
-
-        .account-layout {
-            margin-left: 0%;
-            margin-top: 20px;
-
-            .account-head  {
-                display: flex;
-                justify-content: space-between;
-                border-bottom: 1px solid $border-color;
-                border-top: 1px solid $border-color;
-                height: 46px;
-
-                .back-icon {
-                    display: block;
-                }
-
-                span {
-                    margin-top: 12px;
-                    font-size: 18px;
-                }
-
-                .horizontal-rule {
-                    display: none;
-                }
-            }
-
-            .account-table-content {
-                margin-top: 2%;
-
-                table tbody tr {
-                    display: grid;
-                    margin-bottom: 20px;
-                }
-            }
-        }
-
-        .account-items-list , .edit-form {
-            margin-top: 20px;
-        }
-
-        .control-group .control {
-            width: 100%;
         }
     }
 }

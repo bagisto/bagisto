@@ -30880,7 +30880,7 @@ var render = function() {
           class: [
             _vm.show
               ? "icon icon-arrow-down mt-15"
-              : "icon dropdown-right-icon mt-15"
+              : "icon dropdown-right-icon left mt-15"
           ],
           on: { click: _vm.showOrHide }
         })

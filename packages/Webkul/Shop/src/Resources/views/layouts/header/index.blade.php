@@ -213,15 +213,11 @@
             var hamMenu = document.getElementById("hammenu");
             var search = document.getElementById("search");
             var searchResponsive = document.getElementsByClassName('search-responsive')[0];
-            var sortLimit = document.getElementsByClassName('reponsive-sorter-limiter')[0];
-            var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
             var navResponsive = document.getElementsByClassName('header-bottom')[0];
-            var thumbList = document.getElementsByClassName('thumb-list')[0];
 
             search.addEventListener("click", header);
             hamMenu.addEventListener("click", header);
 
-            // for header responsive icon
             function header() {
                 var className = document.getElementById(this.id).className;
                 if(className === 'icon icon-search' ) {

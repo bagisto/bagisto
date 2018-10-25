@@ -17,6 +17,9 @@ return [
         'add-review-page-title' => 'Add Review',
         'write-review' => 'Write a review',
         'review-title' => 'Give Your Review a Title',
+        'product-review-page-title' => 'Product Review',
+        'rating-reviews' => 'Rating & Reviews',
+        'submit' => 'SUBMIT',
     ],
 
     'customer' => [
