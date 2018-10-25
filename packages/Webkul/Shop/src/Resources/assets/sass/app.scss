@@ -574,7 +574,6 @@ section.slider-block {
         ul.nav {
             display: block;
             font-size:16px;
-            // height: 48px;
             max-width: 100%;
             width: auto;
             margin-left: auto;
@@ -596,10 +595,6 @@ section.slider-block {
             text-transform: uppercase;
             letter-spacing: -0.38px;
             position: relative;
-        }
-
-        .nav a:first-child{
-            // margin-left: 20px;
         }
 
         .nav  li  > .icon{
