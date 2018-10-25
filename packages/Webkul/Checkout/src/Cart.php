@@ -123,6 +123,13 @@ class Cart {
         $child = $childData = null;
         if($product->type == 'configurable') {
             $child = $this->product->findOneByField('id', $data['selected_configurable_option']);
+
+            dd($child);
+
+            $itemAddtionalData = $this->getItemAttributeOptionDetails($child);
+
+            dd($itemAddtionalData);
+
             $childData = [
                 'product_id' => $data['selected_configurable_option'],
                 'sku' => $child->sku,
@@ -655,7 +662,7 @@ class Cart {
     }
 
     /**
-     * Returns cart
+     * Returns the items details of the configurable and simple products
      *
      * @return Mixed
      */

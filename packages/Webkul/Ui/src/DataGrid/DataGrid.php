@@ -774,7 +774,7 @@ class DataGrid
 
             $this->results = $this->query->get();
 
-            $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
+            $this->results = $this->query->distinct()->paginate($this->perpage)->appends(request()->except('page'));
 
             return $this->results;
 
