@@ -659,17 +659,18 @@ class Cart {
      *
      * @return Mixed
      */
-    public function getItemAttributeOptionDetails($item)
+    public function getProductAttributeOptionDetails($product)
     {
         $data = [];
 
         $labels = [];
 
-        foreach($item->product->super_attributes as $attribute) {
-            $option = $attribute->options()->where('id', $item->child->product->{$attribute->code})->first();
+        foreach($product->parent->super_attributes as $attribute) {
+            $option = $attribute->options()->where('id', $product->{$attribute->code})->first();
 
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name,
+                'option_id' => $option->id,
                 'option_label' => $option->label,
             ];
 
