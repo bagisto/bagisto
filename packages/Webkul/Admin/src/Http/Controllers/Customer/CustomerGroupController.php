@@ -70,7 +70,7 @@ class CustomerGroupController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'group_name' => 'string|required',
+            'name' => 'string|required',
         ]);
 
         $this->customerGroup->create(request()->all());
@@ -103,7 +103,7 @@ class CustomerGroupController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'group_name' => 'string|required',
+            'name' => 'string|required',
         ]);
 
         $this->customerGroup->update(request()->all(),$id);

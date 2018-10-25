@@ -1,7 +1,20 @@
 @extends('shop::layouts.master')
+
 @section('page_title')
  {{ __('shop::app.customer.forgot-password.page_title') }}
-@endsection
+@stop
+
+@section('css')
+    <style>
+        .button-group {
+            margin-bottom: 25px;
+        }
+        .primary-back-icon {
+            vertical-align: middle;
+        }
+    </style>
+@stop
+
 @section('content-wrapper')
 
 <div class="auth-content">
@@ -20,7 +33,16 @@
                 <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
             </div>
 
-            <input class="btn btn-primary btn-lg" type="submit" value="{{ __('shop::app.customer.forgot-password.submit') }}">
+            <div class="button-group">
+                <input class="btn btn-primary btn-lg" type="submit" value="{{ __('shop::app.customer.forgot-password.submit') }}">
+            </div>
+
+            <div class="control-group" style="margin-bottom: 0px;">
+                <a href="{{ route('customer.session.index') }}">
+                    <i class="icon primary-back-icon"></i>
+                    Back to Sign In
+                </a>
+            </div>
 
         </div>
     </form>

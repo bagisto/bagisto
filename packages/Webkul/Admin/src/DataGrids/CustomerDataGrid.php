@@ -79,7 +79,7 @@ class CustomerDataGrid
                     'name' => 'email',
                     'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'E-Mail',
+                    'label' => 'Email',
                     'sortable' => false,
                 ],
                 [
@@ -127,7 +127,7 @@ class CustomerDataGrid
                 [
                     'column' => 'email',
                     'type' => 'string',
-                    'label' => 'E-Mail',
+                    'label' => 'Email',
                 ],
             ],
 

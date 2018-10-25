@@ -66,24 +66,24 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
         'redirect' => 'customer.reviews.index'
     ])->name('shop.reviews.store');
 
-    // forgot Password Routes
-    Route::get('/forgot-password', 'Webkul\Customer\Http\Controllers\ForgotPasswordController@create')->defaults('_config', [
-        'view' => 'shop::customers.signup.forgot-password'
-    ])->name('customer.forgot-password.create');
-
-    Route::post('/forgot-password', 'Webkul\Customer\Http\Controllers\ForgotPasswordController@store')->name('customer.forgot-password.store');
-
-    //Reset Password create
-    Route::get('/reset-password/{token}', 'Webkul\Customer\Http\Controllers\ResetPasswordController@create')->defaults('_config', [
-        'view' => 'shop::customers.signup.reset-password'
-    ])->name('customer.reset-password.create');
-
-    Route::post('/reset-password', 'Webkul\Customer\Http\Controllers\ResetPasswordController@store')->defaults('_config', [
-        'redirect' => 'customer.session.index'
-    ])->name('customer.reset-password.store');
 
     //customer routes starts here
     Route::prefix('customer')->group(function () {
+        // forgot Password Routes
+        Route::get('/forgot-password', 'Webkul\Customer\Http\Controllers\ForgotPasswordController@create')->defaults('_config', [
+            'view' => 'shop::customers.signup.forgot-password'
+        ])->name('customer.forgot-password.create');
+
+        Route::post('/forgot-password', 'Webkul\Customer\Http\Controllers\ForgotPasswordController@store')->name('customer.forgot-password.store');
+
+        //Reset Password create
+        Route::get('/reset-password/{token}', 'Webkul\Customer\Http\Controllers\ResetPasswordController@create')->defaults('_config', [
+            'view' => 'shop::customers.signup.reset-password'
+        ])->name('customer.reset-password.create');
+
+        Route::post('/reset-password', 'Webkul\Customer\Http\Controllers\ResetPasswordController@store')->defaults('_config', [
+            'redirect' => 'customer.session.index'
+        ])->name('customer.reset-password.store');
 
         // Login Routes
         Route::get('login', 'Webkul\Customer\Http\Controllers\SessionController@show')->defaults('_config', [
@@ -91,7 +91,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
         ])->name('customer.session.index');
 
         Route::post('login', 'Webkul\Customer\Http\Controllers\SessionController@create')->defaults('_config', [
-            'redirect' => 'customer.account.index'
+            'redirect' => 'customer.profile.index'
         ])->name('customer.session.create');
 
         // Registration Routes
@@ -119,22 +119,6 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
             Route::get('wishlist/move/{id}', 'Webkul\Customer\Http\Controllers\WishlistController@move')->name('customer.wishlist.move');
 
             Route::get('wishlist/moveall', 'Webkul\Customer\Http\Controllers\WishlistController@moveAll')->name('customer.wishlist.moveall');
-
-            // Forget Password Routes
-            Route::get('/forget-password', 'Webkul\Customer\Http\Controllers\ForgetPasswordController@create')->defaults('_config', [
-                'view' => 'shop::customers.signup.forget-password'
-            ])->name('customer.forget-password.create');
-
-            Route::post('/forget-password', 'Webkul\Customer\Http\Controllers\ForgetPasswordController@store')->name('customer.forget-password.store');
-
-            //Reset Password create
-            Route::get('/reset-password/{token}', 'Webkul\Customer\Http\Controllers\ResetPasswordController@create')->defaults('_config', [
-                'view' => 'shop::customers.signup.reset-password'
-            ])->name('password.reset');
-
-            Route::post('/reset-password', 'Webkul\Customer\Http\Controllers\ResetPasswordController@store')->defaults('_config', [
-                'redirect' => 'customer.session.index'
-            ])->name('customer.reset-password.store');
 
             //customer account
             Route::prefix('account')->group(function () {

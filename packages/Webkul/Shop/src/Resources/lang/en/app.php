@@ -45,13 +45,13 @@ return [
 
         'login-text' => [
             'no_account' => 'Don\'t have account',
-            'title' => 'Sign In',
+            'title' => 'Sign Up',
         ],
 
         'login-form' => [
             'page-title' => 'Customer - Login',
             'title' => 'Sign In',
-            'email' => 'E-Mail',
+            'email' => 'Email',
             'password' => 'Password',
             'forgot_pass' => 'Forgot Password?',
             'button_title' => 'Sign In',
@@ -61,9 +61,18 @@ return [
 
         'forgot-password' => [
             'title' => 'Recover Password',
-            'email' => 'E-Mail',
+            'email' => 'Email',
             'submit' => 'Submit',
             'page_title' => 'Customer - Forgot Password Form'
+        ],
+
+        'reset-password' => [
+            'title' => 'Reset Password',
+            'email' => 'Registered Email',
+            'password' => 'Password',
+            'confirm-password' => 'Confirm Password',
+            'back-link-title' => 'Back to Sign In',
+            'submit-btn-title' => 'Reset Password'
         ],
 
         'account' => [
@@ -81,7 +90,7 @@ return [
                 'gender' => 'Gender',
                 'dob' => 'Date Of Birth',
                 'phone' => 'Phone',
-                'email' => 'E-Mail',
+                'email' => 'Email',
                 'opassword' => 'Old Password',
                 'password' => 'Password',
                 'cpassword' => 'Confirm Password',
@@ -301,5 +310,48 @@ return [
             'order-id-info' => 'Your order id is #:order_id',
             'info' => 'We will email you, your order details and tracking information.'
         ]
-    ]
+    ],
+
+    'mail' => [
+        'order' => [
+            'subject' => 'New Order Confirmation',
+            'heading' => 'Order Confirmation!',
+            'dear' => 'Dear :customer_name',
+            'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+            'summary' => 'Summary of Order',
+            'shipping-address' => 'Shipping Address',
+            'billing-address' => 'Billing Address',
+            'contact' => 'Contact',
+            'shipping' => 'Shipping',
+            'payment' => 'Payment',
+            'price' => 'Price',
+            'quantity' => 'Quantity',
+            'subtotal' => 'Subtotal',
+            'shipping-handling' => 'Shipping & Handling',
+            'tax' => 'Tax',
+            'grand-total' => 'Grand Total',
+            'final-summary' => 'Thanks for showing your intrest in our store. we will send you track number once it shiped.',
+            'help' => 'If you need any kind of help please contact us at :support_email',
+            'thanks' => 'Thanks!'
+        ],
+        'invoice' => [
+            'heading' => 'Your Invoice #:invoice_id for Order #:order_id',
+            'subject' => 'Invoice for your order #:order_id',
+            'summary' => 'Summary of Invoice',
+        ],
+        'shipment' => [
+            'heading' => 'Your Shipment #:shipment_id for Order #:order_id',
+            'subject' => 'Shipment for your order #:order_id',
+            'summary' => 'Summary of Shipment',
+            'carrier' => 'Carrier',
+            'tracking-number' => 'Tracking Number'
+        ],
+        'forget-password' => [
+            'dear' => 'Dear :name',
+            'info' => 'You are receiving this email because we received a password reset request for your account.',
+            'reset-password' => 'Reset Password',
+            'final-summary' => 'If you did not request a password reset, no further action is required.',
+            'thanks' => 'Thanks!'
+        ]
+    ],
 ];

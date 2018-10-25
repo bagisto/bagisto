@@ -69,6 +69,7 @@ class InventorySourceController extends Controller
     public function store()
     {
         $this->validate(request(), [
+            'code' => ['required', 'unique:inventory_sources,code', new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required'
         ]);
 
@@ -102,6 +103,7 @@ class InventorySourceController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
+            'code' => ['required', 'unique:inventory_sources,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required',
         ]);
 
