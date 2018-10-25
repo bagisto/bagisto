@@ -10,17 +10,18 @@
         </div> --}}
 
         <div class="review-layouter mb-20">
+
             <div class="product-info">
+
                 <div class="product-image">
                     <img src="{{ bagisto_asset('images/jeans_big.jpg') }}" />
                 </div>
 
-                <div class="product-name">
+                <div class="product-name mt-20">
                     <span>{{ $product->name }}</span>
                 </div>
 
-                <div class="product-price">
-
+                <div class="product-price mt-10">
                     @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
 
                     @if ($product->type == 'configurable')
@@ -33,26 +34,24 @@
                         @endif
                     @endif
 
-                    {{-- <span class="pro-price-not">
+                    {{--  <span class="pro-price-not">
                         <strike> $45.00 </strike>
                     </span>
 
-                    <span class="offer"> 10% Off </span> --}}
+                    <span class="offer"> 10% Off </span>  --}}
                 </div>
             </div>
 
             <div class="review-form">
                 <form method="POST" action="{{ route('shop.reviews.store', $product->id ) }}">
                     @csrf
-                    <div class="heading">
+                    <div class="heading mt-10">
                         <span>{{ __('shop::app.reviews.write-review') }}</span>
                     </div>
 
-                    <div class="rating">
-                        <span> {{ __('admin::app.customers.reviews.rating') }} </span>
-                    </div>
+                    <div class="rating mt-20">
+                        <div class="rating-title"> {{ __('admin::app.customers.reviews.rating') }} </div>
 
-                    <div class="stars">
                         <label class="star star-5" for="star-5" onclick="calculateRating(id)" id="1"></label>
 
                         <label class="star star-4" for="star-4" onclick="calculateRating(id)" id="2"></label>
@@ -63,35 +62,34 @@
 
                         <label class="star star-1" for="star-1" onclick="calculateRating(id)" id="5"></label>
 
-                        <input type="name" name="title" class="form-control" placeholder="{{ __('shop::app.reviews.review-title') }}">
-
                         <input type="hidden" id="rating" name="rating">
-
                     </div>
 
-                    <div class="write-review">
+                    <div>
+                        <input type="name" name="title" class="form-control" placeholder="{{ __('shop::app.reviews.review-title') }}">
+                    </div>
+
+                    <div class="write-review mt-20">
                         <div class="control-group">
                             <label for="review">{{ __('admin::app.customers.reviews.comment') }}</label>
                             <textarea name="comment">
-
                             </textarea>
                         </div>
                     </div>
 
-                    <div class="submit-button">
-                        <button type="submit" class="btn btn-lg btn-primary"> SUBMIT </button>
-                    </div>
+                    <a type="submit" class="btn btn-lg btn-primary">
+                        {{ __('shop::app.reviews.submit') }}
+                    </a>
+
                 </form>
-
             </div>
-        </div>
 
+        </div>
     </section>
 @endsection
 
 
 @push('scripts')
-
 <script>
 
     function calculateRating(id){
@@ -110,5 +108,4 @@
     }
 
 </script>
-
 @endpush

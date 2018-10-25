@@ -140,6 +140,14 @@ class ExchangeRateController extends Controller
      */
     public function destroy($id)
     {
-        $this->exchangeRate->delete($id);
+        if($this->exchangeRate->count() == 1) {
+            session()->flash('error', 'At least one Exchange rate is required.');
+        } else {
+            $this->exchangeRate->delete($id);
+
+            session()->flash('success', 'Exchange rate deleted successfully.');
+        }
+
+        return redirect()->back();
     }
 }

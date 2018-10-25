@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Category\Repositories;
- 
+
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Category\Models\Category;
 use Illuminate\Container\Container as App;
@@ -44,7 +44,7 @@ class CategoryRepository extends Repository
     {
         if(isset($data['locale']) && $data['locale'] == 'all') {
             $model = app()->make($this->model());
-            
+
             foreach(core()->getAllLocales() as $locale) {
                 foreach ($model->translatedAttributes as $attribute) {
                     if(isset($data[$attribute])) {
@@ -54,7 +54,11 @@ class CategoryRepository extends Repository
             }
         }
 
-        return $this->model->create($data);
+        $category = $this->model->create($data);
+
+        $this->uploadImages($data, $category);
+
+        return $category;
     }
 
     /**
@@ -98,5 +102,53 @@ class CategoryRepository extends Repository
         throw (new ModelNotFoundException)->setModel(
             get_class($this->model), $slug
         );
+    }
+
+    /**
+     * @param array $data
+     * @param $id
+     * @param string $attribute
+     * @return mixed
+     */
+    public function update(array $data, $id, $attribute = "id")
+    {
+        $category = $this->find($id);
+
+        $category->update($data);
+
+        $this->uploadImages($data, $category);
+
+        return $category;
+    }
+
+    /**
+     * @param array $data
+     * @param mixed $category
+     * @return void
+     */
+    public function uploadImages($data, $category,$type = "image")
+    {
+        if(isset($data[$type])) {
+            foreach ($data[$type] as $imageId => $image) {
+                $file = $type . '.' . $imageId;
+                $dir = 'category/' . $category->id;
+
+                if(request()->hasFile($file)) {
+                    if($category->{$type}) {
+                        Storage::delete($category->{$type});
+                    }
+
+                    $category->{$type} = request()->file($file)->store($dir);
+                    $category->save();
+                }
+            }
+        } else {
+            if($category->{$type}) {
+                Storage::delete($category->{$type});
+            }
+
+            $category->{$type} = null;
+            $category->save();
+        }
     }
 }

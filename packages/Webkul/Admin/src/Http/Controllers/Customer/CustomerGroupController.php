@@ -1,54 +1,52 @@
 <?php
 
-namespace Webkul\Core\Http\Controllers;
+namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Core\Repositories\ChannelRepository as Channel;
-
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
 
 /**
- * Channel controller
+ * CustomerGroup controlller
  *
- * @author    Jitendra Singh <jitendra@webkul.com>
+ * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class ChannelController extends Controller
+class CustomerGroupController extends Controller
 {
     /**
      * Contains route related configuration
      *
      * @var array
-     */
+    */
     protected $_config;
 
     /**
-     * ChannelRepository object
+     * CustomerGroupRepository object
      *
      * @var array
-     */
-    protected $channel;
+    */
+    protected $customerGroup;
 
-    /**
+     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\ChannelRepository  $channel
+     * @param Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
      * @return void
      */
-    public function __construct(Channel $channel)
+    public function __construct(CustomerGroup $customerGroup)
     {
-        $this->middleware('admin');
-
-        $this->channel = $channel;
-
         $this->_config = request('_config');
+
+        $this->customerGroup = $customerGroup;
     }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+    */
     public function index()
     {
         return view($this->_config['view']);
@@ -64,7 +62,7 @@ class ChannelController extends Controller
         return view($this->_config['view']);
     }
 
-    /**
+     /**
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\Response
@@ -72,22 +70,17 @@ class ChannelController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:channels,code', new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required',
-            'locales' => 'required|array|min:1',
-            'default_locale_id' => 'required',
-            'currencies' => 'required|array|min:1',
-            'base_currency_id' => 'required'
+            'group_name' => 'string|required',
         ]);
 
-        $this->channel->create(request()->all());
+        $this->customerGroup->create(request()->all());
 
-        session()->flash('success', 'Channel created successfully.');
+        session()->flash('success', 'Customer Group created successfully.');
 
         return redirect()->route($this->_config['redirect']);
     }
 
-    /**
+     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -95,12 +88,12 @@ class ChannelController extends Controller
      */
     public function edit($id)
     {
-        $channel = $this->channel->with(['locales', 'currencies'])->find($id);
+        $group = $this->customerGroup->findOneWhere(['id'=>$id]);
 
-        return view($this->_config['view'], compact('channel'));
+        return view($this->_config['view'],compact('group'));
     }
 
-    /**
+     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
@@ -110,17 +103,12 @@ class ChannelController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required',
-            'locales' => 'required|array|min:1',
-            'default_locale_id' => 'required',
-            'currencies' => 'required|array|min:1',
-            'base_currency_id' => 'required'
+            'group_name' => 'string|required',
         ]);
 
-        $this->channel->update(request()->all(), $id);
+        $this->customerGroup->update(request()->all(),$id);
 
-        session()->flash('success', 'Channel updated successfully.');
+        session()->flash('success', 'Customer Group updated successfully.');
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -133,12 +121,14 @@ class ChannelController extends Controller
      */
     public function destroy($id)
     {
-        if($this->channel->count() == 1) {
-            session()->flash('error', 'At least one channel is required.');
-        } else {
-            $this->channel->delete($id);
+        $group = $this->customerGroup->findOneWhere(['id'=>$id]);
 
-            session()->flash('success', 'Channel deleted successfully.');
+        if($group->is_user_defined == 1) {
+            session()->flash('error', 'This Customer Group can not be deleted');
+        } else {
+            $this->customerGroup->delete($id);
+
+            session()->flash('success', 'Customer Group deleted successfully.');
         }
 
         return redirect()->back();

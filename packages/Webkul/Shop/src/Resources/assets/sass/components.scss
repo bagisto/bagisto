@@ -1,18 +1,3 @@
-@media only screen and (max-width: 425px) {
-    .product-card {
-        font-size: 90%;
-
-        .btn.btn-md {
-            padding: 5px;
-        }
-    }
-
-    .product-grid-4 {
-        grid-template-columns: 48.5% 48.5%;
-        grid-column-gap: 10px;
-    }
-}
-
 
 //wishlist icon hover properties
 .add-to-wishlist {
