@@ -19,7 +19,19 @@
 
             <div class="category-block">
                 <div class="hero-image mb-35">
-                    <img src="https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?cs=srgb&dl=adolescent-casual-cute-428338.jpg&fm=jpg" />
+                    {{-- <img src="https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?cs=srgb&dl=adolescent-casual-cute-428338.jpg&fm=jpg" /> --}}
+
+                    @if(is_null($category->image))
+                        <img src="https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?cs=srgb&dl=adolescent-casual-cute-428338.jpg&fm=jpg" />
+                    @else
+                        <?php
+                            $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+                            $src=$protocol. request()->getHttpHost().'/bagisto/public/storage/'.$category->image;
+                        ?>
+
+                        <img class="logo" src="{{ $src }}" />
+                    @endif
                 </div>
 
                 <?php $products = $productRepository->findAllByCategory($category->id); ?>

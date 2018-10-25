@@ -468,7 +468,7 @@ return [
             'message' => 'The Page you are looking for doesnt exist or have secrately    escaped;head back to home and make a fresh move again.'
         ],
         '403' => [
-            'page-title' => '403 forbidden',
+            'page-title' => '403 forbidden Error',
             'name' => '403',
             'title' => 'Forbidden error',
             'message' => 'You do not have permission to access this page'
