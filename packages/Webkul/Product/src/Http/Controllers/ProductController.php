@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductRepository as Product;
+use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
+use Event;
 
 /**
  * Product controller
@@ -54,6 +56,13 @@ class ProductController extends Controller
     protected $product;
 
     /**
+     * ProductGrid Repository object
+     *
+     * @var array
+     */
+    protected $productGrid;
+
+    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
@@ -66,7 +75,8 @@ class ProductController extends Controller
         AttributeFamily $attributeFamily,
         Category $category,
         InventorySource $inventorySource,
-        Product $product)
+        Product $product,
+        ProductGrid $productGrid)
     {
         $this->attributeFamily = $attributeFamily;
 
@@ -75,6 +85,8 @@ class ProductController extends Controller
         $this->inventorySource = $inventorySource;
 
         $this->product = $product;
+
+        $this->productGrid = $productGrid;
 
         $this->_config = request('_config');
     }
@@ -112,6 +124,9 @@ class ProductController extends Controller
      */
     public function store()
     {
+        //before store of the product
+        // Event::fire('product.save.before', false);
+
         if(!request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
             return redirect(url()->current() . '?family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
         }
@@ -129,6 +144,9 @@ class ProductController extends Controller
         ]);
 
         $product = $this->product->create(request()->all());
+
+        //after store of the product
+        Event::fire('product.save.after', $product);
 
         session()->flash('success', 'Product created successfully.');
 
@@ -161,7 +179,13 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
+        // before update of product
+        // Event::fire('product.update.before', $id);
+
         $this->product->update(request()->all(), $id);
+
+        //after update of product
+        Event::fire('product.update.after', $this->product->find($id));
 
         session()->flash('success', 'Product updated successfully.');
 
@@ -178,8 +202,15 @@ class ProductController extends Controller
     {
         $this->product->delete($id);
 
+        //before update of product
+        Event::fire('product.delete.after', $id);
+
         session()->flash('success', 'Product deleted successfully.');
 
         return redirect()->back();
+    }
+
+    public function sync() {
+        Event::fire('products.datagrid.create', true);
     }
 }

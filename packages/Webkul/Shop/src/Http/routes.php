@@ -66,10 +66,6 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
         'redirect' => 'customer.reviews.index'
     ])->name('shop.reviews.store');
 
-    // Route::post('/reviews/create/{slug}', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
-    //     'redirect' => 'admin.reviews.index'
-    // ])->name('admin.reviews.store');
-
     // forgot Password Routes
     Route::get('/forgot-password', 'Webkul\Customer\Http\Controllers\ForgotPasswordController@create')->defaults('_config', [
         'view' => 'shop::customers.signup.forgot-password'

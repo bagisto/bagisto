@@ -28,7 +28,6 @@ class AddressController extends Controller
     protected $customer;
     protected $address;
 
-
     public function __construct(CustomerRepository $customer, CustomerAddressRepository $address)
     {
         $this->middleware('customer');
@@ -41,22 +40,9 @@ class AddressController extends Controller
     }
 
     /**
-     * Getting logged in
-     * customer helper
-     * @return Array
-     */
-    private function getCustomer($id) {
-
-        $customer = collect($this->customer->findOneWhere(['id'=>$id]));
-
-        return $customer;
-    }
-
-    /**
-     * Getting logged in
-     * customer address
-     * helper
-     * @return Array
+     * Getting logged in customer address helper
+     *
+     * @return array
      */
     private function getAddress($id) {
 
@@ -66,16 +52,13 @@ class AddressController extends Controller
 
     }
 
-
     /**
-     * Address Route
-     * index page
-     * @return View
+     * Address Route index page
+     *
+     * @return view
      */
     public function index() {
         $id = auth()->guard('customer')->user()->id;
-
-        $customer = $this->getCustomer($id);
 
         $address = $this->getAddress($id);
 
@@ -83,20 +66,18 @@ class AddressController extends Controller
     }
 
     /**
-     * Show the address
-     * create form
-     * @return View
+     * Show the address create form
+     *
+     * @return view
      */
     public function show() {
         return view($this->_config['view']);
     }
 
     /**
-     * Create a new
-     * address for
-     * customer.
+     * Create a new address for customer.
      *
-     * @return View
+     * @return view
      */
     public function create() {
 
@@ -144,11 +125,9 @@ class AddressController extends Controller
     }
 
     /**
-     * For editing the
-     * existing address
-     * of the customer
+     * For editing the existing address of the customer
      *
-     * @return View
+     * @return view
      */
     public function showEdit() {
 
@@ -160,6 +139,12 @@ class AddressController extends Controller
 
     }
 
+    /**
+     * Edits the premade resource of customer called
+     * Address.
+     *
+     * @return redirect
+     */
     public function edit() {
 
         $id = auth()->guard('customer')->user()->id;

@@ -98,8 +98,10 @@
                     </th>
             @endif
         @endforeach
-        <th>
-            {{ __('ui::app.datagrid.actions') }}
-        </th>
+        @if(count($actions))
+            <th>
+                {{ __('ui::app.datagrid.actions') }}
+            </th>
+        @endif
     </tr>
 </thead>

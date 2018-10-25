@@ -68,29 +68,25 @@ class RolesDataGrid
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
-
                 [
                     'name' => 'id',
                     'alias' => 'roleId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'name',
                     'alias' => 'roleName',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'permission_type',
                     'alias' => 'rolePermissionType',
                     'type' => 'string',
                     'label' => 'Permission Type',
                     'sortable' => true,
                 ],
-
             ],
 
             //don't use aliasing in case of filters
@@ -101,14 +97,12 @@ class RolesDataGrid
                     'alias' => 'roleId',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
+                ], [
                     'column' => 'name',
                     'alias' => 'roleName',
                     'type' => 'string',
                     'label' => 'Name',
-                ],
-                [
+                ], [
                     'column' => 'permission_type',
                     'alias' => 'rolePermissionType',
                     'type' => 'string',
@@ -123,8 +117,7 @@ class RolesDataGrid
                     'column' => 'name',
                     'type' => 'string',
                     'label' => 'Name',
-                ],
-                [
+                ], [
                     'column' => 'permission_type',
                     'type' => 'string',
                     'label' => 'Permission Type',

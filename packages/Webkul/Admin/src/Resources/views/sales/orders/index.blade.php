@@ -1,10 +1,10 @@
-@extends('admin::layouts.master')
+@extends('admin::layouts.content')
 
 @section('page_title')
     {{ __('admin::app.sales.orders.title') }}
 @stop
 
-@section('content-wrapper')
+@section('content')
     <div class="content full-page">
         <div class="page-header">
             <div class="page-title">
@@ -16,7 +16,8 @@
         </div>
 
         <div class="page-content">
-
+            @inject('orderGrid', 'Webkul\Admin\DataGrids\OrderDataGrid')
+            {!! $orderGrid->render() !!}
         </div>
     </div>
 @stop

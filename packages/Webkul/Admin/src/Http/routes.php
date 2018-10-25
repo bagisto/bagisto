@@ -2,6 +2,8 @@
 
 Route::group(['middleware' => ['web']], function () {
     Route::prefix('admin')->group(function () {
+        Route::get('/grid', 'Webkul\Product\Http\Controllers\ProductController@test');
+
         // Login Routes
         Route::get('/login', 'Webkul\User\Http\Controllers\SessionController@create')->defaults('_config', [
             'view' => 'admin::users.sessions.create'
@@ -132,6 +134,8 @@ Route::group(['middleware' => ['web']], function () {
 
             // Catalog Routes
             Route::prefix('catalog')->group(function () {
+
+                Route::get('/sync', 'Webkul\Product\Http\Controllers\ProductController@sync');
 
                 // Catalog Product Routes
                 Route::get('/products', 'Webkul\Product\Http\Controllers\ProductController@index')->defaults('_config', [
@@ -378,7 +382,6 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/inventory_sources/delete/{id}', 'Webkul\Inventory\Http\Controllers\InventorySourceController@destroy')->name('admin.inventory_sources.delete');
 
-
             // Channel Routes
             Route::get('/channels', 'Webkul\Core\Http\Controllers\ChannelController@index')->defaults('_config', [
                 'view' => 'admin::settings.channels.index'
@@ -416,14 +419,27 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.sliders.index');
 
             // Admin Store Front Settings Route
-            Route::get('/slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
+
+            //slider create
+            Route::get('slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
                 'view' => 'admin::settings.sliders.create'
             ])->name('admin.sliders.create');
 
-            Route::post('/slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
+            Route::post('slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
                 'redirect' => 'admin::sliders.index'
             ])->name('admin.sliders.store');
 
+            //slider edit
+            Route::get('slider/edit/{id}','Webkul\Shop\Http\Controllers\SliderController@edit')->defaults('_config',[
+                'view' => 'admin::settings.sliders.edit'
+            ])->name('admin.sliders.edit');
+
+            Route::post('slider/edit/{id}','Webkul\Shop\Http\Controllers\SliderController@update')->defaults('_config',[
+                'redirect' => 'admin::sliders.index'
+            ])->name('admin.sliders.update');
+
+            //destroy a slider item
+            Route::get('slider/delete/{id}', 'Webkul\Shop\Http\Controllers\SliderController@destroy');
 
             //tax routes
             Route::get('/tax-categories', 'Webkul\Tax\Http\Controllers\TaxController@index')->defaults('_config', [
@@ -447,7 +463,6 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.tax-categories.index'
             ])->name('admin.tax-categories.update');
             //tax category ends
-
 
             //tax rate
             Route::get('tax-rates', 'Webkul\Tax\Http\Controllers\TaxRateController@index')->defaults('_config', [

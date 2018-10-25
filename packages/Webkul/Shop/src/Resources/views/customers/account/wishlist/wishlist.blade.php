@@ -12,7 +12,6 @@
         <div class="account-head mb-15">
             <span class="account-heading">{{ __('shop::app.wishlist.title') }}</span>
 
-            <span class="account-heading">{{ __('shop::app.wishlist.title') }}</span>
             @if(count($items))
             <div class="account-action">
                 <a href="" style="margin-right: 15px;">{{ __('shop::app.wishlist.deleteall') }}</a>
