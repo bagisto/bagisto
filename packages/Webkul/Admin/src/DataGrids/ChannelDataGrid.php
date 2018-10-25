@@ -29,7 +29,7 @@ class ChannelDataGrid
             'name' => 'Channels',
             'table' => 'channels',
             'select' => 'id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[

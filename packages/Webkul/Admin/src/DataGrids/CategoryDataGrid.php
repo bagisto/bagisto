@@ -62,12 +62,6 @@ class CategoryDataGrid
                     'primaryKey' => 'cat.id',
                     'condition' => '=',
                     'secondaryKey' => 'ct.category_id',
-                ], [
-                    'join' => 'leftjoin',
-                    'table' => 'category_translations as cta',
-                    'primaryKey' => 'cat.parent_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'cta.category_id',
                 ],
             ],
 
@@ -92,13 +86,15 @@ class CategoryDataGrid
                     'type' => 'string',
                     'label' => 'Category Position',
                     'sortable' => false,
-                ], [
-                    'name' => 'cta.name',
-                    'alias' => 'parent_name',
-                    'type' => 'string',
-                    'label' => 'Parent Name',
-                    'sortable' => true,
-                ], [
+                ],
+                // [
+                //     'name' => 'cta.name',
+                //     'alias' => 'parent_name',
+                //     'type' => 'string',
+                //     'label' => 'Parent Name',
+                //     'sortable' => true,
+                // ],
+                [
                     'name' => 'cat.status',
                     'alias' => 'cat_status',
                     'type' => 'string',
@@ -110,15 +106,16 @@ class CategoryDataGrid
                         else
                             return "True";
                     },
-                ], [
-                    'name' => 'cta.locale',
+                ],
+                [
+                    'name' => 'ct.locale',
                     'alias' => 'cat_locale',
                     'type' => 'string',
                     'label' => 'Locale',
                     'sortable' => true,
                     'filter' => [
-                        'function' => 'where',
-                        'condition' => ['cta.locale', app()->getLocale()]
+                        'function' => 'orWhere',
+                        'condition' => ['ct.locale', app()->getLocale()]
                     ],
                 ]
             ],
@@ -134,12 +131,14 @@ class CategoryDataGrid
                     'alias' => 'catName',
                     'type' => 'string',
                     'label' => 'Category Name',
-                ], [
-                    'column' => 'cta.name',
-                    'alias' => 'parentName',
-                    'type' => 'string',
-                    'label' => 'Parent Name',
-                ], [
+                ],
+                // [
+                //     'column' => 'cta.name',
+                //     'alias' => 'parentName',
+                //     'type' => 'string',
+                //     'label' => 'Parent Name',
+                // ],
+                [
                     'column' => 'cat.status',
                     'alias' => 'catStatus',
                     'type' => 'string',

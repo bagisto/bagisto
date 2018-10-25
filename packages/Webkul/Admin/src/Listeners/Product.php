@@ -44,21 +44,106 @@ class Product {
     }
 
     /**
+     * Prepare the data from the product created
+     *
+     * @return array $data
+     */
+    public function prepareData($product) {
+        $gridObject = [];
+        $gridObject = [
+            'product_id' => $product->id,
+            'sku' => $product->sku,
+            'type' => $product->type,
+            'attribute_family_name' => $product->attribute_family->name,
+        ];
+
+        $variantObjects = [];
+
+        if($this->productGrid->findOneByField('product_id', $product->id)) {
+            $gridObject['name'] = $product->name;
+            $gridObject['status'] = $product->status;
+
+            if($product->type == 'configurable') {
+                $gridObject['quantity'] = 0;
+                $gridObject['price'] = $this->price->getMinimalPrice($product);
+
+                $variants = $product->variants;
+
+                if(count($variants)) {
+                    foreach($variants as $variant) {
+                        $variantObject = [
+                            'product_id' => $variant->id,
+                            'sku' => $variant->sku,
+                            'type' => $variant->type,
+                            'attribute_family_name' => $variant->toArray()['attribute_family']['name'],
+                            'name' => $variant->name,
+                            'status' => $variant->status,
+                        ];
+
+                        $qty = 1;
+
+                        foreach($variant->toArray()['inventories'] as $inventorySource) {
+                            $qty = $qty + $inventorySource['qty'];
+                        }
+
+                        $variantObject['price'] = $product->price;
+                        $variantObject['quantity'] = $qty;
+
+                        array_push($variantObjects, $variantObject);
+
+                        $qty = 0;
+                    }
+                }
+
+                return [
+                    'parent' => $gridObject,
+                    'variants' => $variantObjects
+                ];
+
+            } else {
+                $qty = 0;
+
+                foreach($product->toArray()['inventories'] as $inventorySource) {
+                    $qty = $qty + $inventorySource['qty'];
+                }
+
+                $gridObject['price'] = $product->price;
+                $gridObject['quantity'] = $qty;
+
+                $qty = 0;
+
+                return [
+                    'parent' => $gridObject,
+                    'variants' => $variantObjects
+                ];
+            }
+        }
+    }
+
+    /**
      * Creates a new entry in the product grid whenever a new product is created.
      *
      * @return boolean
      */
     public function afterProductCreated($product) {
-        $gridObject = [];
+        $data = $this->prepareData($product);
 
-        $gridObject = [
-            'product_id' => $product->id,
-            'sku' => $product->sku,
-            'type' => $product->type,
-            'attribute_family_name' => $product->toArray()['attribute_family']['name'],
-        ];
+        $result = $this->saveProduct($data);
 
-        if($this->productGrid->create($gridObject)) {
+        return $result;
+    }
+
+    /**
+     * Save the product to the product as the product data grid instance
+     *
+     * @return boolean
+     */
+    public function saveProduct($product) {
+        dd('check here whether to create or update there');
+
+        //two cases already created and update previous with simple and configurable
+
+        if($this->productGrid->create($product)) {
             return true;
         } else {
             return false;

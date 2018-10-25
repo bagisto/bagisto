@@ -28,7 +28,7 @@ class LocalesDataGrid
             'name' => 'Locales',
             'table' => 'locales',
             'select' => 'id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
