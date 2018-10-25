@@ -20,6 +20,7 @@ class CreateChannelsTable extends Migration
             $table->text('description')->nullable();
             $table->string('timezone')->nullable();
             $table->string('theme')->nullable();
+            $table->string('hostname')->nullable();
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
             $table->integer('default_locale_id')->unsigned();

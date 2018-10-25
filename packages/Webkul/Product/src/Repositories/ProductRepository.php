@@ -11,6 +11,7 @@ use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Contracts\Criteria\SortCriteria;
+use Webkul\Product\Contracts\Criteria\ActiveProductCriteria;
 use Webkul\Product\Contracts\Criteria\AttributeToSelectCriteria;
 use Webkul\Product\Contracts\Criteria\FilterByAttributesCriteria;
 use Webkul\Product\Contracts\Criteria\FilterByCategoryCriteria;
@@ -383,6 +384,7 @@ class ProductRepository extends Repository
      */
     public function findAllByCategory($categoryId = null)
     {
+        $this->pushCriteria(app(ActiveProductCriteria::class));
         $this->pushCriteria(app(SortCriteria::class));
         $this->pushCriteria(app(FilterByAttributesCriteria::class));
         $this->pushCriteria(new FilterByCategoryCriteria($categoryId));
@@ -419,9 +421,12 @@ class ProductRepository extends Repository
         ], ['product_id']);
 
         if($attributeValue && $attributeValue->product_id) {
+            $this->pushCriteria(app(ActiveProductCriteria::class));
             $this->pushCriteria(app(AttributeToSelectCriteria::class)->addAttribueToSelect($columns));
 
-            return $this->find($attributeValue->product_id);
+            $product = $this->findOrFail($attributeValue->product_id);
+
+            return $product;
         }
 
         throw (new ModelNotFoundException)->setModel(
@@ -436,6 +441,7 @@ class ProductRepository extends Repository
      */
     public function getNewProducts()
     {
+        $this->pushCriteria(app(ActiveProductCriteria::class));
         $this->pushCriteria(app(NewProductsCriteria::class));
         $this->pushCriteria(app(AttributeToSelectCriteria::class));
 
@@ -453,6 +459,7 @@ class ProductRepository extends Repository
      */
     public function getFeaturedProducts()
     {
+        $this->pushCriteria(app(ActiveProductCriteria::class));
         $this->pushCriteria(app(FeaturedProductsCriteria::class));
         $this->pushCriteria(app(AttributeToSelectCriteria::class));
 

@@ -1,13 +1,15 @@
 @extends('shop::layouts.master')
+
 @section('page_title')
     {{ __('shop::app.customer.login-form.page-title') }}
 @endsection
+
 @section('content-wrapper')
 
     <div class="auth-content">
 
         <div class="sign-up-text">
-            {{ __('shop::app.customer.login-text.no_account') }} - <a href="{{ route('customer.register.index') }}">{{ __('shop::app.customer.login-form.title') }}</a>
+            {{ __('shop::app.customer.login-text.no_account') }} - <a href="{{ route('customer.register.index') }}">{{ __('shop::app.customer.login-text.title') }}</a>
 
         </div>
 

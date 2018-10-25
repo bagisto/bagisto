@@ -2142,17 +2142,12 @@ section.review {
         flex-direction: column;
         max-width: 530px;
         min-width: 380px;
-        min-height: 345px;
-        padding-left: 25px;
-        padding-right: 25px;
+        padding: 25px;
 
         .login-text {
             font-size: 24px;
-            font-weight: bold;
-            color: $font-color;
-
-            margin-top: 5%;
-            margin-bottom: 3%;
+            font-weight: 600;
+            margin-bottom: 30px;
         }
 
         .control-group {
@@ -2169,17 +2164,14 @@ section.review {
 
             margin-bottom: 5%;
         }
-        .signup-confirm {
 
+        .signup-confirm {
             margin-bottom: 5%;
         }
 
         .btn-primary {
             width: 100%;
             text-transform: uppercase;
-            border-radius: 0px;
-            height: 45px;
-            margin-bottom: 4%;
         }
     }
 }

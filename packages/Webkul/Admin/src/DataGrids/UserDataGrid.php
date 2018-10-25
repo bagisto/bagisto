@@ -101,7 +101,7 @@ class UserDataGrid
                     'name' => 'u.email',
                     'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'E-Mail',
+                    'label' => 'Email',
                     'sortable' => true,
                 ],
                 [
@@ -134,7 +134,7 @@ class UserDataGrid
                 [
                     'column' => 'u.email',
                     'type' => 'string',
-                    'label' => 'E-Mail'
+                    'label' => 'Email'
                 ], [
                     'column' => 'u.name',
                     'type' => 'string',

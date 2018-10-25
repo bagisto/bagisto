@@ -22,37 +22,20 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
         if ($exception instanceof HttpException) {
             $statusCode = $exception->getStatusCode();
 
             if (strpos($_SERVER['REQUEST_URI'], 'admin') !== false) {
-                switch ($statusCode) {
-                    case 404:
-                        return response()->view('admin::errors.404', [], 404);
-                        break;
-                    case 403:
-                        return response()->view('admin::errors.403', [], 403);
-                        break;
-                    case 401:
-                        return response()->view('admin::errors.401', [], 401);
-                        break;
-                    default:
-                        return response()->view('admin::errors.500', [], 500);
-                }
+                return response(view('admin::errors.'.$statusCode, [
+                    'msg' => $exception->getMessage(),
+                    'code' => $statusCode
+                ]), $statusCode);
             } else {
-                switch ($statusCode) {
-                    case 404:
-                        return response()->view('shop::errors.404', [], 404);
-                        break;
-                    case 403:
-                        return response()->view('shop::errors.403', [], 403);
-                        break;
-                    case 401:
-                        return response()->view('shop::errors.401', [], 401);
-                        break;
-                    default:
-                        return response()->view('shop::errors.500', [], 500);
-                }
+                return response(view('shop::errors.'.$statusCode, [
+                    'msg' => $exception->getMessage(),
+                    'code' => $statusCode
+                ]), $statusCode);
             }
         } else if ($exception instanceof ModelNotFoundException) {
 

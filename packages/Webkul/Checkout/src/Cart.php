@@ -236,8 +236,6 @@ class Cart {
                                     'base_total' => $parentPrice * ($prevQty + $newQty)
                                 ]);
 
-                                $this->collectTotals();
-
                                 session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
 
                                 return true;
