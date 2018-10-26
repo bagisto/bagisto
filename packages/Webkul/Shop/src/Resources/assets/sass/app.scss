@@ -829,6 +829,7 @@ section.slider-block {
                 }
             }
         }
+
         ul.right-responsive {
             display: none;
             cursor: pointer;
@@ -1065,6 +1066,7 @@ section.slider-block {
 
     ul.right-responsive {
         display: flex !important;
+        margin-left: 12px;
     }
 }
 
@@ -1671,7 +1673,6 @@ section.product-detail {
 .rating-reviews {
 
     .rating-header {
-        font-weight: 600;
         padding: 20px 0;
     }
 

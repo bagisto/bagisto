@@ -1284,6 +1284,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
     display: -webkit-box !important;
     display: -ms-flexbox !important;
     display: flex !important;
+    margin-left: 12px;
   }
 }
 
@@ -1882,7 +1883,6 @@ section.product-detail div.layouter form .details .attributes {
 }
 
 .rating-reviews .rating-header {
-  font-weight: 600;
   padding: 20px 0;
 }
 

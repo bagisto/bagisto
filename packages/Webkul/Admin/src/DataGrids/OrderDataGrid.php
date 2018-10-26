@@ -92,7 +92,6 @@ class OrderDataGrid
                             return '<span class="badge badge-md badge-info">Completed</span>';
                         else if($value == "pending")
                             return '<span class="badge badge-md badge-warning">Pending</span>';
-
                     },
                 ],
             ],

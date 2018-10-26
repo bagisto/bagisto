@@ -32,8 +32,6 @@
 
         @include ('shop::products.price', ['product' => $product])
 
-        @include ('shop::products.review', ['product' => $product])
-
         @if(Route::currentRouteName() == "shop.products.index")
             @include ('shop::products.add-to', ['product' => $product])
         @else

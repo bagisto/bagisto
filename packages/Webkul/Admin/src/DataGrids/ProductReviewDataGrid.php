@@ -13,17 +13,17 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class CustomerReviewDataGrid
+class ProductReviewDataGrid
 {
     /**
-     * The CustomerReviewDataGrid
+     * The ProductReviewDataGrid
      * implementation.
      *
      * @var CustomerReviewsDataGrid
      * for Reviews
      */
 
-    public function createCustomerReviewDataGrid()
+    public function createProductReviewDataGrid()
     {
 
             return DataGrid::make([
@@ -87,6 +87,12 @@ class CustomerReviewDataGrid
                     'type' => 'number',
                     'label' => 'Status',
                     'sortable' => true,
+                    'wrapper' => function ($value) {
+                        if($value == 'approved')
+                            return '<span class="badge badge-md badge-success">Approved</span>';
+                        else if($value == "pending")
+                            return '<span class="badge badge-md badge-warning">Pending</span>';
+                    },
                 ],
             ],
 
@@ -153,6 +159,6 @@ class CustomerReviewDataGrid
 
     public function render()
     {
-        return $this->createCustomerReviewDataGrid()->render();
+        return $this->createProductReviewDataGrid()->render();
     }
 }

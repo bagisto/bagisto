@@ -46,7 +46,7 @@ class ReviewController extends Controller
      */
     public function __construct(Product $product, ProductReview $productReview)
     {
-        $this->middleware('admin');
+        $this->middleware('admin')->only(['update', 'destroy']);
 
         $this->middleware('customer')->only(['create', 'store']);
 
@@ -150,5 +150,14 @@ class ReviewController extends Controller
         session()->flash('success', 'Review updated successfully.');
 
         return redirect()->route($this->_config['redirect']);
+    }
+
+    /**
+     * Delete the review of the current product
+     *
+     * @return response
+     */
+    public function destroy() {
+
     }
 }
