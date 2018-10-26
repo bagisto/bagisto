@@ -28,7 +28,7 @@ class SliderDataGrid
             'name' => 'Sliders',
             'table' => 'sliders as s',
             'select' => 's.id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[

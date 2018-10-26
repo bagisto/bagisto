@@ -29,7 +29,7 @@ class AttributeDataGrid
             'name' => 'Attributes',
             'table' => 'attributes',
             'select' => 'id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => true,
 
             'massoperations' => [

@@ -27,7 +27,7 @@ class OrderDataGrid
             'name' => 'orders',
             'table' => 'orders as or',
             'select' => 'or.id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => false,
             //True in case of joins else aliasing key required on all cases
 

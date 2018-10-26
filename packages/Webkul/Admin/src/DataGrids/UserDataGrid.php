@@ -29,7 +29,7 @@ class UserDataGrid
             'name' => 'Admins',
             'table' => 'admins as u',
             'select' => 'u.id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
