@@ -48,7 +48,7 @@ class ReviewController extends Controller
     {
         $this->middleware('admin')->only(['update', 'destroy']);
 
-        $this->middleware('customer')->only(['create', 'store']);
+        $this->middleware('customer')->only(['create', 'store', 'destroy']);
 
         $this->product = $product;
 
@@ -157,7 +157,11 @@ class ReviewController extends Controller
      *
      * @return response
      */
-    public function destroy() {
+    public function destroy($id) {
+        $this->productReview->delete($id);
 
+        success()->flash('success', 'Product Review Successfully Deleted');
+
+        return redirect()->back();
     }
 }
