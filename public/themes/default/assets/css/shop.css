@@ -358,6 +358,11 @@ body {
   margin-left: 20px;
 }
 
+.account-item-card .media-info .info .stars.icon {
+  height: 16px;
+  width: 16px;
+}
+
 .account-item-card .operations {
   height: 120px;
   display: -webkit-box;
@@ -2120,7 +2125,7 @@ section.cart .cart-content .right-side {
 @media only screen and (max-width: 560px) {
   section.cart .cart-content .left-side .misc-controls {
     display: block;
-    top: 150px;
+    top: 180px;
   }
   section.cart .cart-content .left-side .misc-controls div {
     margin-top: 10px;
@@ -2590,6 +2595,12 @@ section.review .review-layouter .ratings-reviews .right-side .rater .line-bar .l
   background-color: #0031F0;
 }
 
+@media only screen and (max-width: 1150px) {
+  section.review .review-layouter .review-form .ratings-reviews .right-side .rater .line-bar {
+    width: 60%;
+  }
+}
+
 @media only screen and (max-width: 770px) {
   section.review .category-breadcrumbs {
     display: none;
@@ -2633,6 +2644,18 @@ section.review .review-layouter .ratings-reviews .right-side .rater .line-bar .l
   section.review .review-layouter .review-form .ratings-reviews .right-side .rater .percentage {
     width: 10%;
     margin-right: 0px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  section.review .review-layouter .review-form .ratings-reviews .right-side .rater .line-bar {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 412px) {
+  section.review .review-layouter .review-form .ratings-reviews .right-side .rater .line-bar {
+    width: 75%;
   }
 }
 
