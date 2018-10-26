@@ -142,7 +142,6 @@ class Product {
             } else {
                 $productGridObject->update($data['parent']);
                 if(count($data['variants'])) {
-                    dd($data['variants']);
                     foreach($data['variants'] as $variant) {
                         $variantObject = $this->productGrid->findOneByField('product_id', $variant['product_id']);
                         if(!is_null($variantObject)) {
