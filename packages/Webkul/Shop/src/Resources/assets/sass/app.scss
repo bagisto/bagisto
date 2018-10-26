@@ -1512,10 +1512,11 @@ section.product-detail {
                 }
 
                 .add-to-buttons {
-                    display: flex;
+                    display: none;
                     flex-direction: row;
                     margin-top: 10px;
                     justify-content: space-between;
+
 
                     .addtocart {
                         border-radius: 0px;
@@ -1949,6 +1950,34 @@ section.cart {
         }
     }
 }
+
+@media only screen and (max-width: 386px){
+    section.cart {
+        .cart-content {
+            .left-side {
+                .misc-controls div {
+                    button {
+                        width: 100%;
+                    }
+
+                    a {
+                        margin-top: 10px;
+                        width: 100%;
+                        text-align: center;
+                    }
+                }
+
+                .box, .remove{
+                    margin-right: 15px !important;
+                }
+            }
+
+            .right-side {
+                top: -130px;
+            }
+        }
+    }
+}
 //cart pages responsive css end
 
 // checkout starts here
@@ -2185,6 +2214,28 @@ section.cart {
 
         .col-right {
             display: none;
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .checkout-process {
+        .col-main {
+            .step-content {
+                .address, .order-description {
+                    display: flex;
+                    flex-direction: column;
+
+                    .billing-address, .pull-left {
+                        width: 100% !important;
+                    }
+
+                    .shipping-address, .pull-right {
+                        width: 100% !important;
+                        margin-top: 20px;
+                    }
+                }
+            }
         }
     }
 }
@@ -2446,10 +2497,12 @@ section.review {
         .review-layouter {
             flex-direction: column;
 
-            .product-info .product-image {
-                max-width: 280px;
-                margin-left: auto;
-                margin-right: auto;
+            .product-info {
+                .product-image, .product-name, .product-price {
+                    max-width: 280px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
             }
 
             .review-form {
@@ -2922,7 +2975,22 @@ section.review {
 
 // css for loader
 .cp-spinner {
-    margin-left: 46%;
-    margin-top: 35%;
-    margin-bottom: 35%;
+    margin-left: 19%;
+    margin-top: 13%;
+    position: absolute;
+    margin-bottom: 20%;
 }
+
+@media only screen and (max-width: 720px) {
+    .cp-spinner {
+        margin-left: 42.5%;
+        margin-top: 30%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .cp-spinner {
+        margin-top: 50%;
+    }
+}
+
