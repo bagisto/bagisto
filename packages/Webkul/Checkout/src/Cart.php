@@ -1164,4 +1164,21 @@ class Cart {
 
         return ['parent' => $parentData, 'child' => $childData];
     }
+
+    /**
+     * Handle the buy now process for simple as well as configurable products
+     *
+     * @return response mixed
+     */
+    public function proceedForBuyNow($id) {
+        $product = $this->product->findOneByField('id', $id);
+
+        if($product->type == 'configurable') {
+            session()->flash('warning', 'Please Select Options Before Buying This Product');
+
+            return false;
+        } else {
+            $this->moveToCart($id);
+        }
+    }
 }

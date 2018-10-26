@@ -78,6 +78,10 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.review.index'
             ])->name('admin.customer.review.update');
 
+            Route::get('reviews/delete/{id}', 'Webkul\Product\Http\Controllers\ReviewController@destroy')->defaults('_config', [
+                'redirect' => 'admin.customer.review.index'
+            ])->name('admin.customer.review.delete');
+
             // Customer Groups Routes
 
             Route::get('groups', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@index')->defaults('_config',[

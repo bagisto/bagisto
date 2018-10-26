@@ -85,11 +85,23 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $this->productReview->update(request()->all(), $id);
 
         session()->flash('success', 'Review updated successfully.');
 
         return redirect()->route($this->_config['redirect']);
+    }
+
+     /**
+     * Delete the review of the current product
+     *
+     * @return response
+     */
+    public function destroy($id) {
+        $this->productReview->delete($id);
+
+        session()->flash('success', 'Product Review Successfully Deleted');
+
+        return redirect()->back();
     }
 }

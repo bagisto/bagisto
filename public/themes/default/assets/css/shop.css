@@ -878,6 +878,12 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   cursor: pointer;
 }
 
+.header .header-top div.right-content .currency-switcher .dropdown-toggle {
+  line-height: 25px;
+  margin-left: 14px;
+  margin-right: 14px;
+}
+
 .header .header-top div.right-content .currency-switcher .dropdown-list {
   width: 100px;
   top: 37px;
@@ -890,6 +896,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
 .header .header-top div.right-content ul.account-dropdown-container {
   float: right;
   border-right: 2px solid #C7C7C7;
+  cursor: pointer;
 }
 
 .header .header-top div.right-content ul.account-dropdown-container li.account-dropdown {
@@ -900,8 +907,24 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin-right: 14px;
   margin-left: 14px;
+  margin-right: 14px;
+}
+
+.header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .account {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .header .header-top div.right-content ul.account-dropdown-container li.account-dropdown .dropdown-list {
@@ -1286,6 +1309,7 @@ section.slider-block div.slider-content div.slider-control .light-right-icon {
     display: -webkit-box !important;
     display: -ms-flexbox !important;
     display: flex !important;
+    margin-left: 12px;
   }
 }
 
@@ -1888,7 +1912,6 @@ section.product-detail div.layouter form .details .attributes {
 }
 
 .rating-reviews .rating-header {
-  font-weight: 600;
   padding: 20px 0;
 }
 
