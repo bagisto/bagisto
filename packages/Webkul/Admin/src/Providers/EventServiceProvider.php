@@ -86,15 +86,15 @@ class EventServiceProvider extends ServiceProvider
             'sort' => 1,
             'icon-class' => '',
         ], [
-            'key' => 'customers.reviews',
-            'name' => 'Reviews',
-            'route' => 'admin.customer.review.index',
-            'sort' => 2,
-            'icon-class' => '',
-        ], [
             'key' => 'customers.groups',
             'name' => 'Groups',
             'route' => 'admin.groups.index',
+            'sort' => 2,
+            'icon-class' => '',
+        ], [
+            'key' => 'customers.reviews',
+            'name' => 'Reviews',
+            'route' => 'admin.customer.review.index',
             'sort' => 3,
             'icon-class' => '',
         ], [

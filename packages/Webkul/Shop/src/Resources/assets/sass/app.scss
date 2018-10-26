@@ -227,7 +227,7 @@ body {
             display: block;
             margin-left: 20px;
 
-            .stars.icon {
+            .stars .icon {
                 height: 16px;
                 width: 16px;
             }
@@ -1086,6 +1086,10 @@ section.slider-block {
 
                 .list-group {
                     padding-top: 25px;
+
+                    a {
+                        color: #242424;
+                    }
 
                     li {
                         margin-bottom: 12px;
@@ -2222,6 +2226,10 @@ section.review {
                 }
             }
 
+            .product-name a {
+                color: #242424;
+            }
+
             .product-price {
                 .pro-price {
                     color: $disc-price;
@@ -2348,7 +2356,7 @@ section.review {
                     font-size: 34px;
                 }
 
-                .stars.icon {
+                .stars .icon {
                     height: 16px;
                     width: 16px;
                 }

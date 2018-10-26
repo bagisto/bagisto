@@ -28,12 +28,21 @@
                 <span class="list-heading">Connect With Us</span>
 
                 <ul class="list-group">
-                    <li><span class="icon-wrapper"><span class="icon icon-dashboard"></span></span>Facebook</li>
-                    <li><span class="icon-wrapper"><span class="icon icon-dashboard"></span></span>Twitter</li>
-                    <li><span class="icon-wrapper"><span class="icon icon-dashboard"></span></span>Instagram</li>
-                    <li><span class="icon-wrapper"><span class="icon icon-dashboard"></span></span>Google+</li>
-                    <li><span class="icon-wrapper"><span class="icon icon-dashboard"></span></span>LinkedIn</li>
-
+                    <a href="">
+                        <li><span class="icon-wrapper"><span class="icon icon-facebook"></span></span>Facebook</li>
+                    </a>
+                    <a href="">
+                        <li><span class="icon-wrapper"><span class="icon icon-twitter"></span></span>Twitter</li>
+                    </a>
+                    <a href="">
+                        <li><span class="icon-wrapper"><span class="icon icon-instagram"></span></span>Instagram</li>
+                    </a>
+                    <a href="">
+                        <li><span class="icon-wrapper"><span class="icon icon-google-plus"></span></span>Google+</li>
+                    </a>
+                    <a href="">
+                        <li><span class="icon-wrapper"><span class="icon icon-linkedin"></span></span>LinkedIn</li>
+                    </a>
                 </ul>
             </div>
 
@@ -54,7 +63,7 @@
                             @foreach (core()->getCurrentChannel()->locales as $locale)
                                 <option value="?locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
                             @endforeach
-                            
+
                         </select>
                     </div>
                 </div>

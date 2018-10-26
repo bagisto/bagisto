@@ -6,20 +6,28 @@
 @extends('shop::layouts.master')
 @section('content-wrapper')
     <section class="review">
-        <div class="category-breadcrumbs">
+        {{--  <div class="category-breadcrumbs">
 
             <span class="breadcrumb">Home</span> > <span class="breadcrumb">Men</span> > <span class="breadcrumb">Slit Open Jeans</span>
 
-        </div>
+        </div>  --}}
         <div class="review-layouter">
+
+            @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+
+            <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
 
             <div class="product-info">
                 <div class="product-image">
-                    <img src="{{ bagisto_asset('images/jeans_big.jpg') }}" />
+                    <a href="{{ route('shop.products.index', $product->url_key) }}" title="{{ $product->name }}">
+                        <img src="{{ $productBaseImage['medium_image_url'] }}" />
+                    </a>
                 </div>
 
                 <div class="product-name mt-20">
-                    <span>{{ $product->name }}</span>
+                    <a href="{{ url()->to('/').'/products/'.$product->url_key }}" title="{{ $product->name }}">
+                        <span>{{ $product->name }}</span>
+                    </a>
                 </div>
 
                 <div class="product-price mt-10">
