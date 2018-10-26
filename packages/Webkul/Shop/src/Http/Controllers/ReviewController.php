@@ -98,9 +98,9 @@ class ReviewController extends Controller
 
         $customer_id = auth()->guard('customer')->user()->id;
 
-        $data['status']='pending';
-        $data['product_id']=$id;
-        $data['customer_id']=$customer_id;
+        $data['status'] = 'pending';
+        $data['product_id'] = $id;
+        $data['customer_id'] = $customer_id;
 
         $this->productReview->create($data);
 
@@ -109,7 +109,7 @@ class ReviewController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
-     /**
+    /**
      * Display reviews accroding to product.
      *
      * @param  string $slug
@@ -144,7 +144,6 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $this->productReview->update(request()->all(), $id);
 
         session()->flash('success', 'Review updated successfully.');
@@ -157,7 +156,8 @@ class ReviewController extends Controller
      *
      * @return response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $this->productReview->delete($id);
 
         success()->flash('success', 'Product Review Successfully Deleted');
