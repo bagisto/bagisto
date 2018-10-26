@@ -232,7 +232,13 @@
                                                     <td>
                                                         {{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}
                                                     </td>
-                                                    <td>{{ $item->name }}</td>
+                                                    <td>
+                                                        {{ $item->name }}
+
+                                                        @if ($html = $item->getOptionDetailHtml())
+                                                            <p>{{ $html }}</p>
+                                                        @endif
+                                                    </td>
                                                     <td>{{ core()->formatBasePrice($item->base_price) }}</td>
                                                     <td>{{ $item->qty_ordered }}</td>
                                                     <td>

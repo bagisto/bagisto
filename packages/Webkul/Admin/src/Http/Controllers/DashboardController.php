@@ -180,6 +180,7 @@ class DashboardController extends Controller
             'stock_threshold' => $this->getStockThreshold(),
         ];
 
+
         foreach (core()->getTimeInterval($this->startDate, $this->endDate) as $interval) {
             $statistics['sale_graph']['label'][] = $interval['start']->format('d M');
 
