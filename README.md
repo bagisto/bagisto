@@ -32,7 +32,7 @@ It packs in lots of demanding features that allows your business to scale in no 
 * Simple and Configurable Products.
 * check out [more....](https://bagisto.com/features/).
 
-**For Developers**
+**For Developers**: 
 Dev guys can take advantage of two of the hottest frameworks used in this project Laravel and Vue.js, both of these frameworks have been used in Bagisto.
 Bagisto is using power of both of these frameworks and making best out of it out of the box.
 
