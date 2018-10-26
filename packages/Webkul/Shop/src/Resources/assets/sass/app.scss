@@ -516,6 +516,10 @@ section.slider-block {
 
         ul.slider-images {
 
+            .show-content {
+                display: none;
+            }
+
             li{
                 position: absolute;
                 visibility: hidden;
@@ -530,7 +534,12 @@ section.slider-block {
                 animation-duration: 4s;
 
                 .show-content {
+                    display: flex;
                     position: absolute;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
                     height: 100%;
                     width: 100%;
                     top: 0px;
