@@ -200,6 +200,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        Event::fire('product.delete.before', $id);
+
         $this->product->delete($id);
 
         //before update of product
