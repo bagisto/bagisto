@@ -40,7 +40,20 @@ class OrderDataGrid
                 ],
             ],
 
-            'actions' => [ ],
+            'actions' => [
+                [
+                    'type' => 'Edit',
+                    'route' => route('admin.datagrid.delete'),
+                    'confirm_text' => 'Do you really wanis?',
+                    'icon' => 'icon pencil-lg-icon',
+                ],
+                [
+                    'type' => 'Delete',
+                    'route' => route('admin.datagrid.delete'),
+                    'confirm_text' => 'Do you really want to do this?',
+                    'icon' => 'icon trash-icon',
+                ],
+            ],
 
             'join' => [],
 

@@ -27,7 +27,7 @@
 
                     <div class="control-group" :class="[errors.has('address2') ? 'has-error' : '']">
                         <label for="address2">{{ __('shop::app.customer.account.address.create.address2') }}</label>
-                        <input type="text" class="control" name="address2" v-validate="'required'" value ="{{ $address['address2'] }}">
+                        <input type="text" class="control" name="address2" value ="{{ $address['address2'] }}">
                         <span class="control-error" v-if="errors.has('address2')">@{{ errors.first('address2') }}</span>
                     </div>
 
