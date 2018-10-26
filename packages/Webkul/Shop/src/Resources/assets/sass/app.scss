@@ -226,6 +226,11 @@ body {
         .info {
             display: block;
             margin-left: 20px;
+
+            .stars .icon {
+                height: 16px;
+                width: 16px;
+            }
         }
     }
 
@@ -1097,6 +1102,10 @@ section.slider-block {
                 .list-group {
                     padding-top: 25px;
 
+                    a {
+                        color: #242424;
+                    }
+
                     li {
                         margin-bottom: 12px;
                         list-style-type: none;
@@ -1927,7 +1936,7 @@ section.cart {
         .cart-content {
             .left-side .misc-controls {
                 display: block;
-                top: 150px;
+                top: 180px;
 
                 div {
                     margin-top: 10px;
@@ -2231,6 +2240,10 @@ section.review {
                 }
             }
 
+            .product-name a {
+                color: #242424;
+            }
+
             .product-price {
                 .pro-price {
                     color: $disc-price;
@@ -2357,7 +2370,7 @@ section.review {
                     font-size: 34px;
                 }
 
-                .stars.icon {
+                .stars .icon {
                     height: 16px;
                     width: 16px;
                 }
@@ -2408,6 +2421,22 @@ section.review {
 // review page end here
 
 // review responsive css start here
+@media only screen and (max-width: 1150px) {
+    section.review {
+        .review-layouter {
+            .review-form {
+                .ratings-reviews {
+                    .right-side {
+                        .rater .line-bar {
+                            width: 60%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 770px) {
     section.review {
         .category-breadcrumbs{
@@ -2451,6 +2480,38 @@ section.review {
                         .rater .percentage {
                             width: 10%;
                             margin-right: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    section.review {
+        .review-layouter {
+            .review-form {
+                .ratings-reviews {
+                    .right-side {
+                        .rater .line-bar {
+                            width: 90%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 412px) {
+    section.review {
+        .review-layouter {
+            .review-form {
+                .ratings-reviews {
+                    .right-side {
+                        .rater .line-bar {
+                            width: 75%;
                         }
                     }
                 }

@@ -26,18 +26,25 @@
                         <div class="account-item-card mt-15 mb-15">
                             <div class="media-info">
                                 <?php $image = $productImageHelper->getGalleryImages($review->product); ?>
-                                <img class="media" src="{{ $image[0]['small_image_url'] }}" />
 
-                                <div class="info mt-20">
-                                    <div class="product-name">{{$review->product->name}}</div>
+                                <a href="{{ url()->to('/').'/products/'.$review->product->url_key }}" title="{{ $review->product->name }}">
+                                    <img class="media" src="{{ $image[0]['small_image_url'] }}"/>
+                                </a>
 
-                                    <div>
+                                <div class="info">
+                                    <div class="product-name">
+                                        <a href="{{ url()->to('/').'/products/'.$review->product->url_key }}" title="{{ $review->product->name }}">
+                                            {{$review->product->name}}
+                                        </a>
+                                    </div>
+
+                                    <div class="stars mt-10">
                                         @for($i=0 ; $i < $review->rating ; $i++)
                                             <span class="icon star-icon"></span>
                                         @endfor
                                     </div>
 
-                                    <div>
+                                    <div class="mt-10">
                                         {{ $review->comment }}
                                     </div>
                                 </div>

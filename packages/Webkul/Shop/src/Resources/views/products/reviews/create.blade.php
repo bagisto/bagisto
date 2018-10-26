@@ -13,12 +13,20 @@
 
             <div class="product-info">
 
+                @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+
+                <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
+
                 <div class="product-image">
-                    <img src="{{ bagisto_asset('images/jeans_big.jpg') }}" />
+                    <a href="{{ route('shop.products.index', $product->url_key) }}" title="{{ $product->name }}">
+                        <img src="{{ $productBaseImage['medium_image_url'] }}" />
+                    </a>
                 </div>
 
                 <div class="product-name mt-20">
-                    <span>{{ $product->name }}</span>
+                    <a href="{{ url()->to('/').'/products/'.$product->url_key }}" title="{{ $product->name }}">
+                        <span>{{ $product->name }}</span>
+                    </a>
                 </div>
 
                 <div class="product-price mt-10">
