@@ -43,7 +43,7 @@
             </div>
 
             <div class="review-form">
-                <form method="POST" action="{{ route('shop.reviews.store', $product->id ) }}">
+                <form method="POST" action="{{ route('shop.reviews.store', $product->id ) }}" @submit.prevent="onSubmit">
                     @csrf
                     <div class="heading mt-10">
                         <span>{{ __('shop::app.reviews.write-review') }}</span>
@@ -62,24 +62,34 @@
 
                         <label class="star star-1" for="star-1" onclick="calculateRating(id)" id="5"></label>
 
-                        <input type="hidden" id="rating" name="rating">
+                        <input type="hidden" id="rating" name="rating" v-validate="'required'">
+
+                        {{-- <div class="control-error" v-if="errors.has('rating')">@{{ errors.first('rating') }}</div> --}}
                     </div>
 
-                    <div>
-                        <input type="name" name="title" class="form-control" placeholder="{{ __('shop::app.reviews.review-title') }}">
+
+                    <div class="control-group mt-20" :class="[errors.has('title') ? 'has-error' : '']">
+                        <label for="title" class="required">
+                            {{ __('shop::app.reviews.title') }}
+                        </label>
+                        <input  type="text" class="control" name="title" v-validate="'required'" value="{{ old('title') }}">
+                        <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
                     </div>
 
                     <div class="write-review mt-20">
-                        <div class="control-group">
-                            <label for="review">{{ __('admin::app.customers.reviews.comment') }}</label>
-                            <textarea name="comment">
+                        <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
+                            <label for="review" class="required">
+                                {{ __('admin::app.customers.reviews.comment') }}
+                            </label>
+                            <textarea type="text" class="control" name="comment" v-validate="'required'" value="{{ old('comment') }}">
                             </textarea>
+                            <span class="control-error" v-if="errors.has('comment')">@{{ errors.first('comment') }}</span>
                         </div>
                     </div>
 
-                    <a type="submit" class="btn btn-lg btn-primary">
+                    <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('shop::app.reviews.submit') }}
-                    </a>
+                    </button>
 
                 </form>
             </div>

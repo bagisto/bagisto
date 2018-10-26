@@ -604,6 +604,11 @@ section.slider-block {
 
                 li {
                     display: flex;
+
+                    img {
+                       max-width: 120px;
+                       max-height: 40px;
+                    }
                 }
             }
 
@@ -1584,7 +1589,7 @@ section.product-detail {
 // product pages css ends here
 
 // product pages responsive css start here
-@media only screen and (max-width: 720px){
+@media only screen and (max-width: 720px) {
     section.product-detail div.layouter form {
         flex-direction: column;
 
@@ -1638,7 +1643,7 @@ section.product-detail {
     }
 }
 
-@media only screen and (max-width: 510px){
+@media only screen and (max-width: 510px) {
     section.product-detail div.layouter form {
         div.product-image-group {
             .product-hero-image img {
@@ -1756,6 +1761,7 @@ section.cart {
     }
 }
 
+
 .cart-item-list {
     margin-top: 21px;
     padding: 1px;
@@ -1863,6 +1869,64 @@ section.cart {
         }
     }
 }
+
+// cart pages responsive css start
+@media only screen and (max-width: 770px){
+    section.cart {
+        .cart-content {
+            display: block;
+
+            .left-side {
+                width: 100%;
+                float: none;
+
+                .cart-item-list {
+                    .item {
+                        .item-image {
+                            height: 90px;
+                            width: 90px;
+                        }
+                        .item-details .misc {
+                            margin-left: -105px;
+                        }
+                    }
+                }
+
+                .misc-controls {
+                    position: relative;
+                    top: 200px;
+                }
+            }
+
+            .right-side {
+                width: 100%;
+                padding-left: 0px;
+                position: relative;
+                top: -40px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 560px){
+    section.cart {
+        .cart-content {
+            .left-side .misc-controls {
+                display: block;
+                top: 150px;
+
+                div {
+                    margin-top: 10px;
+                }
+            }
+
+            .right-side {
+                top: -80px;
+            }
+        }
+    }
+}
+//cart pages responsive css end
 
 // checkout starts here
 .checkout-process {
@@ -2188,6 +2252,13 @@ section.review {
             .rating {
                 color: $font-color-light;
 
+                .rating-title::after {
+                    content: "*";
+                    color: #FC6868;
+                    font-weight: 700;
+                    display: inline-block;
+                }
+
                 label.star {
                     font-size: 25px;
                     color: #d4d4d4;
@@ -2197,6 +2268,22 @@ section.review {
                 label.star:before {
                     content: '\2605';
                 }
+            }
+
+            .control-group {
+                label {
+                    color: $font-color-light;
+                    font-size: 16px;
+                }
+                .control {
+                    width: 90%;
+                    color: $font-color-light;
+                }
+            }
+
+            .control-error {
+                color: #ff5656;
+                font-size: 14px;
             }
 
             .write-review {

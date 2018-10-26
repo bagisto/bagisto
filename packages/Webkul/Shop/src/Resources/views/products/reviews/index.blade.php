@@ -89,10 +89,6 @@
                 </div>
 
                 <div class="rating-reviews">
-                    {{--  <div class="rating-header">
-                        {{ __('shop::app.products.reviews-title') }}
-                    </div>  --}}
-
                     <div class="reviews">
 
                         @foreach ($reviewHelper->getReviews($product)->paginate(10) as $review)
@@ -130,12 +126,9 @@
                     </div>
                 </div>
 
-
-
             </div>
 
         </div>
-
     </section>
 @endsection
 
@@ -147,22 +140,17 @@
 
         var percentage = {};
         <?php foreach ($reviewHelper->getPercentageRating($product) as $key=>$count) { ?>
-            percentage.<?php echo $key; ?> = <?php echo "'$count';"; ?>
+
+            percentage = <?php echo "'$count';"; ?>
+            id = <?php echo "'$key';"; ?>
+            idNumber = id + 'star';
+
+            document.getElementById(id).style.width = percentage + "%";
+            document.getElementById(id).style.height = 4 + "px";
+            document.getElementById(idNumber).innerHTML = id ;
+
         <?php } ?>
 
-        var i=5;
-
-        for(var key in percentage){
-            width= percentage[key] ;
-            let id =key + 'star';
-
-            document.getElementById(key).style.width = width + "%";
-            document.getElementById(key).style.height = 4 + "px";
-            document.getElementById(id).innerHTML = i ;
-            i--;
-
-            {{--  document.getElementById(id).innerHTML = i + '\xa0\xa0' + "star";  --}}
-        }
     })();
 
 </script>

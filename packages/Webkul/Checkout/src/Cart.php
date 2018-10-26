@@ -121,18 +121,16 @@ class Cart {
         }
 
         $child = $childData = null;
+        $additional = [];
         if($product->type == 'configurable') {
             $child = $this->product->findOneByField('id', $data['selected_configurable_option']);
 
-            $productAddtionalData = $this->getProductAttributeOptionDetails($child);
+            $additional = $this->getProductAttributeOptionDetails($child);
 
-            unset($productAddtionalData['html']);
+            unset($additional['html']);
 
-            $additional = [
-                'request' => $data,
-                'variant_id' => $data['selected_configurable_option'],
-                'attributes' => $productAddtionalData
-            ];
+            $additional['request'] = $data;
+            $additional['variant_id'] = $data['selected_configurable_option'];
 
             $childData = [
                 'product_id' => $data['selected_configurable_option'],
@@ -157,7 +155,7 @@ class Cart {
             'weight' => $weight = ($product->type == 'configurable' ? $child->weight : $product->weight),
             'total_weight' => $weight * $data['quantity'],
             'base_total_weight' => $weight * $data['quantity'],
-            'additional' => json_encode($additional)
+            'additional' => $additional
         ];
 
         return ['parent' => $parentData, 'child' => $childData];
@@ -175,8 +173,7 @@ class Cart {
     {
         if($prepared == false) {
             $itemData = $this->prepareItemData($id, $data);
-        }
-        else {
+        } else {
             $itemData = $preparedData;
         }
 

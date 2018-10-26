@@ -95,7 +95,7 @@
         </div>
 
         @foreach ($order->items as $item)
-            <div style="background: #FFFFFF;border: 1px solid #E8E8E8;border-radius: 3px;padding: 20px">
+            <div style="background: #FFFFFF;border: 1px solid #E8E8E8;border-radius: 3px;padding: 20px;margin-bottom: 10px">
                 <p style="font-size: 18px;color: #242424;line-height: 24px;margin-top: 0;margin-bottom: 10px;font-weight: bold;">
                     {{ $item->name }}
                 </p>
@@ -118,11 +118,13 @@
                     </span>
                 </div>
                 
-                <div style="">
-                    <label style="margin-top: 10px; font-size: 16px;color: #5E5E5E; display: block;">
-                        Color : Gray, Size  : S
-                    </label>
-                </div>
+                @if ($html = $item->getOptionDetailHtml())
+                    <div style="">
+                        <label style="margin-top: 10px; font-size: 16px;color: #5E5E5E; display: block;">
+                            {{ $html }}
+                        </label>
+                    </div>
+                @endif
             </div>
         @endforeach
 

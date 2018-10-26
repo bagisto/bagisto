@@ -90,19 +90,6 @@ class CustomerGroupDataGrid
                     'label' => 'Name',
                     'sortable' => true,
                 ],
-                [
-                    'name' => 'cg.is_user_defined',
-                    'alias' => 'User Defined',
-                    'type' => 'boolean',
-                    'label' => 'User Defined',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 1)
-                            return "False";
-                        else
-                            return "True";
-                    },
-                ],
             ],
             //don't use aliasing in case of filters
             'filterable' => [
@@ -118,12 +105,6 @@ class CustomerGroupDataGrid
                     'type' => 'number',
                     'label' => 'ID'
                 ],
-                [
-                    'column' => 'cg.is_user_defined',
-                    'alias' => 'User Defined',
-                    'type' => 'boolean',
-                    'label' => 'User Defined'
-                ]
             ],
             //don't use aliasing in case of searchables
             'searchable' => [
@@ -158,6 +139,5 @@ class CustomerGroupDataGrid
     public function render() {
 
         return $this->createCustomerGroupDataGrid()->render();
-
     }
 }

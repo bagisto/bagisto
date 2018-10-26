@@ -1,6 +1,6 @@
 {
-    "name": "jitendra-webkul/bagisto",
-    "description": "The Laravel Framework.",
+    "name": "bagisto/bagisto",
+    "description": "Bagisto Ecommerce",
     "keywords": [
         "framework",
         "laravel"

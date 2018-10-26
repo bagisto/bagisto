@@ -81,6 +81,7 @@ h2 {
     cursor: pointer;
     transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     font: inherit;
+    display: inline-block;
 
     &:hover,
     &:active,
@@ -586,11 +587,11 @@ h2 {
     }
 }
 
-.accordian {
+.accordian, accordian {
     display: inline-block;
     width: 100%;
 
-    .accordian-header {
+    .accordian-header, div[slot*="header"] {
         width: 100%;
         display: inline-block;
         font-size: 18px;
@@ -620,7 +621,7 @@ h2 {
         }
     }
 
-    .accordian-content {
+    .accordian-content, div[slot*="body"] {
         width: 100%;
         padding: 20px 15px;
         display: none;
