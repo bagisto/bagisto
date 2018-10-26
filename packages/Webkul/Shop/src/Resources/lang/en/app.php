@@ -7,6 +7,17 @@ return [
         'new-products' => 'New Products'
     ],
 
+    'header' => [
+        'title' => 'Account',
+        'dropdown-text' => 'Manage Cart, Orders & Wishlist.',
+        'sign-in' => 'Sign In',
+        'sign-up' => 'Sign Up',
+        'profile' => 'Profile',
+        'wishlist' => 'Wishlist',
+        'cart' => 'Cart',
+        'logout' => 'Logout'
+    ],
+
     'footer' => [
         'subscribe-newsletter' => 'Subscribe Newsletter',
         'subscribe' => 'Subscribe',

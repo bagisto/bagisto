@@ -655,12 +655,17 @@ section.slider-block {
             flex-direction: row;
             justify-content: flex-end;
             align-items: center;
-            // cursor: pointer;
 
             .currency-switcher {
                 float: right;
                 border-right: 2px solid $border-color;
                 cursor: pointer;
+
+                .dropdown-toggle {
+                    line-height: 25px;
+                    margin-left: 14px;
+                    margin-right: 14px;
+                }
 
                 .dropdown-list {
                     width: 100px;
@@ -675,12 +680,20 @@ section.slider-block {
             ul.account-dropdown-container {
                 float: right;
                 border-right: 2px solid $border-color;
+                cursor: pointer;
 
                 li.account-dropdown {
                     display: flex;
                     flex-direction: row;
-                    margin-right: 14px;
                     margin-left: 14px;
+                    margin-right: 14px;
+
+                    .account {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
 
                     .dropdown-list {
                         width: 300px;
