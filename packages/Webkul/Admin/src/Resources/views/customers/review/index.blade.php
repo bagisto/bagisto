@@ -19,7 +19,7 @@
         </div>
 
         <div class="page-content">
-            @inject('review','Webkul\Admin\DataGrids\CustomerReviewDataGrid')
+            @inject('review','Webkul\Admin\DataGrids\ProductReviewDataGrid')
             {!! $review->render() !!}
         </div>
     </div>

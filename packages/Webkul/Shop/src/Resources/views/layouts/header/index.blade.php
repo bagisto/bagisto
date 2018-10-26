@@ -26,9 +26,9 @@
 
         <div class="right-content">
             @if (core()->getCurrentChannel()->currencies->count() > 1)
-                <div class="currency-switcher">
+                <ul class="currency-switcher">
                     <div class="dropdown-toggle">
-                        USD
+                        {{ core()->getCurrentCurrencyCode() }}
                         <i class="icon arrow-down-icon active"></i>
                     </div>
 
@@ -43,27 +43,25 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </ul>
             @endif
 
             <ul class="account-dropdown-container">
                 <li class="account-dropdown">
-                    <div class="dropdown-toggle">
-                        <div style="display: inline-flex; align-items: center; cursor: pointer;">
-                            <span class="icon account-icon" style="margin-top: 5px;"></span>
-                            <i class="icon arrow-down-icon active"></i>
-                        </div>
+                    <div class="dropdown-toggle account">
+                        <span class="icon account-icon"></span>
+                        <i class="icon arrow-down-icon active"></i>
                     </div>
 
                     @guest('customer')
                         <div class="dropdown-list bottom-right" style="display: none;">
                             <div class="dropdown-container">
-                                <label>Account</label><br/>
-                                <span style="font-size: 12px;">Manage Cart, Orders & Wishlist.</span>
+                                <label>{{ __('shop::app.header.title') }}</label><br/>
+                                <span style="font-size: 12px;">{{ __('shop::app.header.dropdown-text') }}</span>
                                 <ul class="account-dropdown-list">
-                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.session.index') }}">Sign In</a></li>
+                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.session.index') }}">{{ __('shop::app.header.sign-in') }}</a></li>
 
-                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.register.index') }}">Sign Up</a></li>
+                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.register.index') }}">{{ __('shop::app.header.sign-up') }}</a></li>
                                 </ul>
 
                             </div>
@@ -74,32 +72,27 @@
                     @auth('customer')
                         <div class="dropdown-list bottom-right" style="display: none; max-width: 230px;">
                             <div class="dropdown-container">
-                                <label>Account</label>
+                                <label>{{ __('shop::app.header.title') }}</label>
                                 <ul>
-                                    <li><a href="{{ route('customer.profile.index') }}">Profile</a></li>
+                                    <li><a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a></li>
 
-                                    <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a></li>
 
-                                    <li><a href="{{ route('shop.checkout.cart.index') }}">Cart</a></li>
+                                    <li><a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.header.cart') }}</a></li>
 
-                                    <li><a href="{{ route('customer.session.destroy') }}">Logout</a></li>
+                                    <li><a href="{{ route('customer.session.destroy') }}">{{ __('shop::app.header.logout') }}</a></li>
                                 </ul>
-
                             </div>
-
                         </div>
                     @endauth
                 </li>
             </ul>
 
             <ul class="cart-dropdown-container">
-
-
                 @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
                 <li class="cart-dropdown">
                     <span class="icon cart-icon"></span>
-
                     @include('shop::checkout.cart.mini-cart')
                 </li>
             </ul>
@@ -109,22 +102,18 @@
                 <ul class="resp-account-dropdown-container">
 
                     <li class="account-dropdown">
-
                         <div class="dropdown-toggle">
-
                             <span class="icon account-icon"></span>
                         </div>
 
                         @guest
                             <div class="dropdown-list bottom-right" style="display: none;">
                                 <div class="dropdown-container">
-
-                                    <label>Account</label>
+                                    <label>{{ __('shop::app.header.title') }}</label>
 
                                     <ul>
-                                        <li><a href="{{ route('customer.session.index') }}">Sign In</a></li>
-
-                                        <li><a href="{{ route('customer.register.index') }}">Sign Up</a></li>
+                                        <li><a href="{{ route('customer.session.index') }}">{{ __('shop::app.header.sign-in') }}</a></li>
+                                        <li><a href="{{ route('customer.register.index') }}">{{ __('shop::app.header.sign-up') }}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -134,16 +123,16 @@
                             <div class="dropdown-list bottom-right" style="display: none;">
                                 <div class="dropdown-container">
 
-                                    <label>Account</label>
+                                    <label>{{ __('shop::app.header.title') }}</label>
 
                                     <ul>
-                                        <li><a href="{{ route('customer.profile.index') }}">Profile</a></li>
+                                        <li><a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a></li>
 
-                                        <li><a href="{{ route('customer.wishlist.index') }}">Wishlist</a></li>
+                                        <li><a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a></li>
 
-                                        <li><a href="{{ route('shop.checkout.cart.index') }}">Cart</a></li>
+                                        <li><a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.header.cart') }}</a></li>
 
-                                        <li><a href="{{ route('customer.session.destroy') }}">Logout</a></li>
+                                        <li><a href="{{ route('customer.session.destroy') }}">{{ __('shop::app.header.logout') }}</a></li>
                                     </ul>
 
                                 </div>

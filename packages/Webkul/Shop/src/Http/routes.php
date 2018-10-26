@@ -45,8 +45,8 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
         'view' => 'shop::checkout.success'
     ])->name('shop.checkout.success');
 
-    //dummy
-    Route::get('test', 'Webkul\Shop\Http\Controllers\CartController@test');
+    //buy now
+    Route::get('buynow/{id}', 'Webkul\Shop\Http\Controllers\CartController@test')->name('shop.product.buynow');
 
     Route::get('/products/{slug}', 'Webkul\Shop\Http\Controllers\ProductController@index')->defaults('_config', [
         'view' => 'shop::products.view'
