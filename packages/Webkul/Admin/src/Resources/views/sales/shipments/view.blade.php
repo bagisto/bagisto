@@ -233,7 +233,13 @@
                                     @foreach ($shipment->items as $item)
                                         <tr>
                                             <td>{{ $item->sku }}</td>
-                                            <td>{{ $item->name }}</td>
+                                            <td>
+                                                {{ $item->name }}
+
+                                                @if ($html = $item->getOptionDetailHtml())
+                                                    <p>{{ $html }}</p>
+                                                @endif
+                                            </td>
                                             <td>{{ $item->qty }}</td>
                                         </tr>
                                     @endforeach

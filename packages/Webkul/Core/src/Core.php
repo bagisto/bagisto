@@ -521,8 +521,8 @@ class Core
     public function getTimeInterval($startDate, $endDate) {
         $timeIntervals = [];
 
-        $totalDays = $startDate->diffInDays($endDate);
-        $totalMonths = $startDate->diffInMonths($endDate);
+        $totalDays = $startDate->diffInDays($endDate) + 1;
+        $totalMonths = $startDate->diffInMonths($endDate) + 1;
         
         $startWeekDay = Carbon::createFromTimeString($this->xWeekRange($startDate, 0) . ' 00:00:01');
         $endWeekDay = Carbon::createFromTimeString($this->xWeekRange($endDate, 1) . ' 23:59:59');
@@ -555,7 +555,7 @@ class Core
                 $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('d M')];
             }
         } else {
-            for ($i = 0; $i < $totalDays; $i++) { 
+            for ($i = 0; $i < $totalDays; $i++) {
                 $date = clone $startDate;
                 $date->addDays($i);
 

@@ -10,6 +10,10 @@ class OrderItem extends Model implements OrderItemContract
 {
     protected $guarded = ['id', 'child', 'created_at', 'updated_at'];
 
+    protected $casts = [
+        'additional' => 'array',
+    ];
+
     /**
      * Get remaining qty for shipping.
      */
@@ -74,5 +78,22 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function shipment_items() {
         return $this->hasMany(ShipmentItemProxy::modelClass());
+    }
+
+    /**
+     * Returns configurable option html
+     */
+    public function getOptionDetailHtml()
+    {
+
+        if($this->type == 'configurable' && isset($this->additional['attributes'])) {
+            $labels = [];
+
+            foreach($this->additional['attributes'] as $attribute) {
+                $labels[] = $attribute['attribute_name'] . ' : ' . $attribute['option_label'];
+            }
+
+            return implode(', ', $labels);
+        }
     }
 }
