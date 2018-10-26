@@ -203,7 +203,7 @@ class ProductController extends Controller
         $this->product->delete($id);
 
         //before update of product
-        Event::fire('product.delete.after', $id);
+        // Event::fire('product.delete.after', $id);
 
         session()->flash('success', 'Product deleted successfully.');
 
