@@ -100,7 +100,7 @@
 
     <div class="order-description">
 
-        <div class="pull-left" style="width: 50%;">
+        <div class="pull-left" style="width: 50%;float: left;">
             
             <div class="shipping">
                 <div class="decorator">
@@ -128,7 +128,7 @@
 
         </div>
 
-        <div class="pull-right" style="width: 50%;">
+        <div class="pull-right" style="width: 50%;float: left;">
 
             @include('shop::checkout.total.summary', ['cart' => $cart])
 

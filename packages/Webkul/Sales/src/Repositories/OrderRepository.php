@@ -109,6 +109,8 @@ class OrderRepository extends Repository
 
                 $this->orderItemInventory->create(['orderItem' => $orderItem]);
             }
+
+            Event::fire('checkout.order.save.after', $order);
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -116,8 +118,6 @@ class OrderRepository extends Repository
         }
 
         DB::commit();
-
-        Event::fire('checkout.order.save.after', $order);
 
         return $order;
     }

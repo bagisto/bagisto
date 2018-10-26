@@ -117,6 +117,17 @@
         var paymentHtml = '';
         var reviewHtml = '';
         var summaryHtml = Vue.compile(`<?php echo view('shop::checkout.total.summary', ['cart' => $cart])->render(); ?>`);
+        var customerAddress = null;
+        @auth('customer')
+            @if(auth('customer')->user()->address)
+                customerAddress = @json(auth('customer')->user()->address);
+            @else
+                customerAddress = {};
+            @endif
+            customerAddress.email = "{{ auth('customer')->user()->email }}";
+            customerAddress.first_name = "{{ auth('customer')->user()->first_name }}";
+            customerAddress.last_name = "{{ auth('customer')->user()->last_name }}";
+        @endauth
 
         Vue.component('checkout', {
 
@@ -145,6 +156,13 @@
 
                 countryStates: @json(core()->groupedStatesByCountries())
             }),
+
+            created() {
+                if(customerAddress) {
+                    this.address.billing = customerAddress;
+                    this.address.use_for_shipping = true;
+                }
+            },
 
             methods: {
                 navigateToStep (step) {
