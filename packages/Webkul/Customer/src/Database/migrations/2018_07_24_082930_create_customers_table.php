@@ -16,7 +16,7 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('channel_id')->unsigned();
-            $table->foreign('channel_id')->references('id')->on('channels');
+            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('SET NULL');
             $table->string('first_name');
             $table->string('last_name');
             $table->enum('gender', ['Male', 'Female']);
@@ -26,7 +26,7 @@ class CreateCustomersTable extends Migration
             $table->tinyInteger('status')->default(1);
             $table->string('password');
             $table->integer('customer_group_id')->unsigned()->nullable();
-            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
+            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('SET NULL');
             $table->boolean('subscribed_to_news_letter')->default(0);
             $table->rememberToken();
             $table->timestamps();
