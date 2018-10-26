@@ -1,8 +1,0 @@
-php artisan make:controller UserController && mv app/Http/Controllers/UserController.php packages/Webkul/User/src/Ht
-tp/Controllers
-
-php artisan make:migration foo --path=packages/Webkul/User/src/Database/Migrations
-
-php artisan db:seed --class=Webkul\\User\\Database\\Seeders\\DatabaseSeeder
-
-php artisan route:cache
