@@ -70,19 +70,19 @@ class ProductDataGrid
                     'name' => 'prods.name',
                     'alias' => 'ProductName',
                     'type' => 'string',
-                    'label' => 'Product Name',
+                    'label' => 'Name',
                     'sortable' => false,
                 ], [
                     'name' => 'prods.type',
                     'alias' => 'ProductType',
                     'type' => 'string',
-                    'label' => 'Product Type',
+                    'label' => 'Type',
                     'sortable' => false,
                 ], [
                     'name' => 'prods.status',
                     'alias' => 'ProductStatus',
                     'type' => 'string',
-                    'label' => 'Product Status',
+                    'label' => 'Status',
                     'sortable' => false,
                     'wrapper' => function ($value) {
                         if($value == 1)
@@ -94,7 +94,7 @@ class ProductDataGrid
                     'name' => 'prods.price',
                     'alias' => 'ProductPrice',
                     'type' => 'string',
-                    'label' => 'Product Price',
+                    'label' => 'Price',
                     'sortable' => false,
                     'wrapper' => function ($value) {
                         return core()->formatBasePrice($value);

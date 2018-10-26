@@ -50,6 +50,8 @@ class Product {
      */
     public function prepareData($product) {
         $gridObject = [];
+        $variantObjects = [];
+
         $gridObject = [
             'product_id' => $product->id,
             'sku' => $product->sku,
@@ -57,15 +59,13 @@ class Product {
             'attribute_family_name' => $product->attribute_family->name,
         ];
 
-        $variantObjects = [];
-
         if($this->productGrid->findOneByField('product_id', $product->id)) {
             $gridObject['name'] = $product->name;
             $gridObject['status'] = $product->status;
 
             if($product->type == 'configurable') {
                 $gridObject['quantity'] = 0;
-                $gridObject['price'] = $this->price->getMinimalPrice($product);
+                $gridObject['price'] = 0;
 
                 $variants = $product->variants;
 
@@ -80,13 +80,13 @@ class Product {
                             'status' => $variant->status,
                         ];
 
-                        $qty = 1;
-
-                        foreach($variant->toArray()['inventories'] as $inventorySource) {
-                            $qty = $qty + $inventorySource['qty'];
+                        $qty = 0;
+                        //inventories and inventory sources relation for the variants return empty or null collection objects only
+                        foreach($variant->inventories()->get() as $inventory_source) {
+                            $qty = $qty + $inventory_source->qty;
                         }
 
-                        $variantObject['price'] = $product->price;
+                        $variantObject['price'] = $variant->price;
                         $variantObject['quantity'] = $qty;
 
                         array_push($variantObjects, $variantObject);
@@ -97,8 +97,8 @@ class Product {
             } else {
                 $qty = 0;
 
-                foreach($product->toArray()['inventories'] as $inventorySource) {
-                    $qty = $qty + $inventorySource['qty'];
+                foreach($product->inventories->get() as $inventory_source) {
+                    $qty = $qty + $inventory_source->qty;
                 }
 
                 $gridObject['price'] = $product->price;
@@ -107,7 +107,6 @@ class Product {
                 $qty = 0;
             }
         }
-        // dd($gridObject, $variantObjects);
         return [
             'parent' => $gridObject,
             'variants' => $variantObjects
@@ -136,15 +135,16 @@ class Product {
 
         $productGridObject = $this->productGrid->findOneByField('product_id', $product->id);
         // dd($product, $data, $productGridObject);
-        if (!is_null($productGridObject)) {
+        if(!is_null($productGridObject)) {
             if($product->type == 'simple') {
                 $r = $productGridObject->update($data['parent']);
             } else {
                 $productGridObject->update($data['parent']);
+
                 if(count($data['variants'])) {
-                    dd($data['variants']);
                     foreach($data['variants'] as $variant) {
                         $variantObject = $this->productGrid->findOneByField('product_id', $variant['product_id']);
+
                         if(!is_null($variantObject)) {
                             $variantObject->update($variant);
                         } else {
@@ -156,7 +156,7 @@ class Product {
         } else {
             $this->productGrid->create($data['parent']);
 
-            //no need for tese lines
+            //no need for these lines
             if(count($data['variants'])) {
                 foreach($data['variants'] as $variant) {
                     $this->productGrid->create($variant);
@@ -176,37 +176,8 @@ class Product {
     }
 
     /**
-     * Event after the product update
-     *
-     * @var collection product
-     *
-     * return boolean
+     * Manually invoke this function when you have created the products by importing or seeding or factory.
      */
-    public function afterProductUpdate($product) {
-        //update product grid here
-        $this->productGrid->updateWhere($product);
-
-        return true;
-    }
-
-    /**
-     * Event after deletion of the product
-     *
-     * @return boolean
-     */
-    public function afterProductDelete($productId) {
-        return true;
-    }
-
-    /**
-     * Fill attributes for that product after the creation
-     *
-     * @return boolean
-     */
-    public function fillAttribute() {
-
-    }
-
     public function sync() {
         $gridObject = [];
 

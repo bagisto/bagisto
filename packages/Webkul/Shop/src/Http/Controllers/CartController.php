@@ -88,7 +88,7 @@ class CartController extends Controller
 
     public function add($id) {
         $data = request()->input();
-        
+
         Cart::add($id, $data);
 
         Cart::collectTotals();
@@ -143,7 +143,11 @@ class CartController extends Controller
         return redirect()->route('shop.products.index', $slug);
     }
 
-    public function test() {
-        $result = Cart::isConfigurable(9);
+    public function test($id) {
+        $result = Cart::proceedForBuyNow($id);
+
+        if(!$result) {
+            return redirect()->back();
+        }
     }
 }

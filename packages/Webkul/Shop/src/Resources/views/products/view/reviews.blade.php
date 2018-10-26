@@ -27,11 +27,11 @@
 
             </div>
 
-            @if(!is_null($customer))
+            @auth('customer')
             <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
                 {{ __('shop::app.products.write-review-btn') }}
             </a>
-            @endif
+            @endauth
 
         </div>
 
@@ -72,7 +72,7 @@
         </div>
     </div>
 @else
-    @if(!is_null($customer))
+    @auth('customer')
         <div class="rating-reviews">
             <div class="rating-header">
                 <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
@@ -80,5 +80,5 @@
                 </a>
             </div>
         </div>
-    @endif
+    @endauth
 @endif
