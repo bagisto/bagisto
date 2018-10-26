@@ -210,6 +210,8 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('checkout.invoice.save.after', 'Webkul\Admin\Listeners\Order@sendNewInvoiceMail');
 
         Event::listen('checkout.invoice.save.after', 'Webkul\Admin\Listeners\Order@sendNewShipmentMail');
+
+        Event::listen('checkout.order.save.after', 'Webkul\Admin\Listeners\Order@updateProductInventory');
     }
 
     /**
