@@ -75,6 +75,19 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * get visible category tree
+     *
+     * @param integer $id
+     * @return mixed
+     */
+    public function getVisibleCategoryTree($id = null)
+    {
+        return $id
+            ? Category::orderBy('position', 'ASC')->where('id', '!=', $id)->where('status', '=', '1')->get()->toTree()
+            : Category::orderBy('position', 'ASC')->where('status', '=', '1')->get()->toTree();
+    }
+
+    /**
      * Checks slug is unique or not based on locale
      *
      * @param integer $id

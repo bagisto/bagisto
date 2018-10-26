@@ -446,7 +446,6 @@ class DataGrid
      * Adds expressional verbs to be used
      * @return $this
      */
-
     public function setOperators(array $operators)
     {
         $this->operators = $operators ?: [];
@@ -458,7 +457,6 @@ class DataGrid
      *
      * @return $this
      */
-
     public function addPagination($pagination = [])
     {
         if ($pagination instanceof Pagination) {
@@ -477,7 +475,6 @@ class DataGrid
      * make from controller.
      * @return $this
      */
-
     private function getSelect()
     {
         $select = [];
@@ -501,7 +498,6 @@ class DataGrid
      * name.
      * @return string
      */
-
     public function findAlias($column_alias) {
         foreach($this->columns as $column) {
             if($column->alias == $column_alias) {
@@ -515,7 +511,6 @@ class DataGrid
      * and get it ready
      * to be used.
      */
-
     private function parse()
     {
         $parsed = [];
@@ -534,7 +529,6 @@ class DataGrid
      * ->join('contacts', 'users.id', '=', 'contacts.user_id')
      * @return $this->query
      */
-
     private function getQueryWithJoin()
     {
         foreach ($this->join as $join) {
@@ -546,7 +540,8 @@ class DataGrid
     {
         foreach ($this->columns as $column) {
             if ($column->filter) { // if the filter bag in array exists then these will be applied.
-                if (count($column->filter['condition']) == count($column->filter['condition'], COUNT_RECURSIVE)) {
+                // if (count($column->filter['condition']) == count($column->filter['condition'], COUNT_RECURSIVE)) {
+                if (count($column->filter['condition']) == 2) {
                     $this->query->{$column->filter['function']}(...$column->filter['condition']);
                 } else {
                     if (count($column->filter['condition']) == 3) {
@@ -570,10 +565,9 @@ class DataGrid
     }
 
     /**
-     * Function runs when
-     * filters, sort, search
-     * any of it is applied
-     * @return $this->query
+     * Function runs when filters, sort, search any of it is applied
+     *
+     * @return QueryBuilder object
      */
 
     private function getQueryWithFilters()
@@ -753,7 +747,6 @@ class DataGrid
                                         $alias_proper_secondary = true;
                                     } else {
                                         throw new \Exception('Aliases of Join table and the secondary key columns do not match');
-
                                     }
                                 } else {
                                     throw new \Exception('Improper aliasing on secondary/join column for join');
@@ -781,7 +774,7 @@ class DataGrid
 
             $this->results = $this->query->get();
 
-            $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
+            $this->results = $this->query->distinct()->paginate($this->perpage)->appends(request()->except('page'));
 
             return $this->results;
 

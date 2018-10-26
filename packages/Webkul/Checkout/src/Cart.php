@@ -123,6 +123,17 @@ class Cart {
         $child = $childData = null;
         if($product->type == 'configurable') {
             $child = $this->product->findOneByField('id', $data['selected_configurable_option']);
+
+            $productAddtionalData = $this->getProductAttributeOptionDetails($child);
+
+            unset($productAddtionalData['html']);
+
+            $additional = [
+                'request' => $data,
+                'variant_id' => $data['selected_configurable_option'],
+                'attributes' => $productAddtionalData
+            ];
+
             $childData = [
                 'product_id' => $data['selected_configurable_option'],
                 'sku' => $child->sku,
@@ -145,7 +156,8 @@ class Cart {
             'base_total' => $price * $data['quantity'],
             'weight' => $weight = ($product->type == 'configurable' ? $child->weight : $product->weight),
             'total_weight' => $weight * $data['quantity'],
-            'base_total_weight' => $weight * $data['quantity']
+            'base_total_weight' => $weight * $data['quantity'],
+            'additional' => json_encode($additional)
         ];
 
         return ['parent' => $parentData, 'child' => $childData];
@@ -507,25 +519,51 @@ class Cart {
                     if($id == $item->id) {
                         if($item->type == "configurable") {
                             $canBe = $this->canAddOrUpdate($item->child->id, $quantity);
+
+                            if($canBe == false) {
+                                session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
+
+                                return $cart;
+                            }
+
+                            $item->update([
+                                'quantity' => $quantity,
+                                'total' => core()->convertPrice($item->price * ($quantity)),
+                                'base_total' => $item->price * ($quantity),
+                                'total_weight' => $item->weight * ($quantity),
+                                'base_total_weight' => $item->weight * ($quantity)
+                            ]);
                         } else {
                             $canBe = $this->canAddOrUpdate($id, $quantity);
+
+                            if($canBe == false) {
+                                session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
+
+                                return $cart;
+                            }
+                            $prevQty = $item->quantity;
+
+                            $item->update([
+                                'quantity' => $quantity,
+                                'total' => core()->convertPrice($item->price * ($quantity)),
+                                'base_total' => $item->price * ($quantity),
+                                'total_weight' => $item->weight * ($quantity),
+                                'base_total_weight' => $item->weight * ($quantity)
+                            ]);
                         }
-
-                        if($canBe == false) {
-                            session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
-
-                            return $cart;
-                        }
-
-                        $item->update(['quantity' => $quantity]);
                     }
                 }
             }
+            $this->collectTotals();
 
             session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
-        }
 
-        return $cart;
+            return $cart;
+        } else {
+            session()->flash('warning', trans('shop::app.checkout.cart.integrity.missing_fields'));
+
+            return false;
+        }
     }
 
     /**
@@ -629,21 +667,22 @@ class Cart {
     }
 
     /**
-     * Returns cart
+     * Returns the items details of the configurable and simple products
      *
      * @return Mixed
      */
-    public function getItemAttributeOptionDetails($item)
+    public function getProductAttributeOptionDetails($product)
     {
         $data = [];
 
         $labels = [];
 
-        foreach($item->product->super_attributes as $attribute) {
-            $option = $attribute->options()->where('id', $item->child->product->{$attribute->code})->first();
+        foreach($product->parent->super_attributes as $attribute) {
+            $option = $attribute->options()->where('id', $product->{$attribute->code})->first();
 
             $data['attributes'][$attribute->code] = [
                 'attribute_name' => $attribute->name,
+                'option_id' => $option->id,
                 'option_label' => $option->label,
             ];
 
@@ -756,6 +795,8 @@ class Cart {
         if(!$cart = $this->getCart())
             return false;
 
+        $this->validateItems();
+
         $this->calculateItemsTax();
 
         $cart->grand_total = $cart->base_grand_total = 0;
@@ -788,6 +829,60 @@ class Cart {
         $cart->items_qty = $quantities;
 
         $cart->save();
+    }
+
+    /**
+     * To validate if the product information is changed by admin and the items have
+     * been added to the cart before it.
+     *
+     * @return boolean
+     */
+    public function validateItems() {
+        $cart = $this->getCart();
+
+        if(count($cart->items) == 0) {
+            $this->cart->delete($cart->id);
+
+            return redirect()->route('shop.home.index');
+        } else {
+            $items = $cart->items;
+
+            foreach($items as $item) {
+                if($item->product->type == 'configurable') {
+                    if($item->product->sku != $item->sku) {
+                        $item->update(['sku' => $item->product->sku]);
+
+                    } else if($item->product->name != $item->name) {
+                        $item->update(['name' => $item->product->name]);
+
+                    } else if($item->child->product->price != $item->price) {
+                        $item->update([
+                            'price' => $item->child->product->price,
+                            'base_price' => $item->child->product->price,
+                            'total' => core()->convertPrice($item->child->product->price * ($item->quantity)),
+                            'base_total' => $item->child->product->price * ($item->quantity),
+                        ]);
+                    }
+
+                } else if($item->product->type == 'simple') {
+                    if($item->product->sku != $item->sku) {
+                        $item->update(['sku' => $item->product->sku]);
+
+                    } else if($item->product->name != $item->name) {
+                        $item->update(['name' => $item->product->name]);
+
+                    } else if($item->product->price != $item->price) {
+                        $item->update([
+                            'price' => $item->product->price,
+                            'base_price' => $item->product->price,
+                            'total' => core()->convertPrice($item->child->product->price * ($item->quantity)),
+                            'base_total' => $item->child->product->price * ($item->quantity),
+                        ]);
+                    }
+                }
+            }
+            return true;
+        }
     }
 
     /**
@@ -1044,6 +1139,16 @@ class Cart {
 
         $price = ($product->type == 'configurable' ? $child->price : $product->price);
 
+        $productAddtionalData = $this->getProductAttributeOptionDetails($child);
+
+        unset($productAddtionalData['html']);
+
+        $additional = [
+            'request' => $data,
+            'variant_id' => $data['selected_configurable_option'],
+            'attributes' => $productAddtionalData
+        ];
+
         $parentData = [
             'sku' => $product->sku,
             'product_id' => $productId,
@@ -1056,7 +1161,8 @@ class Cart {
             'base_total' => $price,
             'weight' => $weight = ($product->type == 'configurable' ? $child->weight : $product->weight),
             'total_weight' => $weight,
-            'base_total_weight' => $weight
+            'base_total_weight' => $weight,
+            'additional' => json_encode($additonal)
         ];
 
         return ['parent' => $parentData, 'child' => $childData];

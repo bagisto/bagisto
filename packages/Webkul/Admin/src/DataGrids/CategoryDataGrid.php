@@ -76,31 +76,31 @@ class CategoryDataGrid
             'columns' => [
                 [
                     'name' => 'cat.id',
-                    'alias' => 'catID',
+                    'alias' => 'cat_id',
                     'type' => 'number',
                     'label' => 'Category ID',
                     'sortable' => true,
                 ], [
                     'name' => 'ct.name',
-                    'alias' => 'catName',
+                    'alias' => 'cat_name',
                     'type' => 'string',
                     'label' => 'Category Name',
                     'sortable' => false,
                 ], [
                     'name' => 'cat.position',
-                    'alias' => 'catPosition',
+                    'alias' => 'cat_position',
                     'type' => 'string',
                     'label' => 'Category Position',
                     'sortable' => false,
                 ], [
                     'name' => 'cta.name',
-                    'alias' => 'parentName',
+                    'alias' => 'parent_name',
                     'type' => 'string',
                     'label' => 'Parent Name',
                     'sortable' => true,
                 ], [
                     'name' => 'cat.status',
-                    'alias' => 'catStatus',
+                    'alias' => 'cat_status',
                     'type' => 'string',
                     'label' => 'Visible in Menu',
                     'sortable' => true,
@@ -110,8 +110,17 @@ class CategoryDataGrid
                         else
                             return "True";
                     },
-                ],
-
+                ], [
+                    'name' => 'cta.locale',
+                    'alias' => 'cat_locale',
+                    'type' => 'string',
+                    'label' => 'Locale',
+                    'sortable' => true,
+                    'filter' => [
+                        'function' => 'where',
+                        'condition' => ['cta.locale', app()->getLocale()]
+                    ],
+                ]
             ],
 
             'filterable' => [
