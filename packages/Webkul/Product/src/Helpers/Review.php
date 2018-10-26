@@ -58,7 +58,7 @@ class Review extends AbstractProduct
     public function getPercentageRating($product)
     {
         $reviews = $product->reviews()->where('status','approved')
-                    ->select('rating', DB::raw     ('count(*) as total'))
+                    ->select('rating', DB::raw('count(*) as total'))
                     ->groupBy('rating')
                     ->orderBy('rating','desc')
                     ->get();

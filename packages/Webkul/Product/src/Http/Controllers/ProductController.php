@@ -182,10 +182,10 @@ class ProductController extends Controller
         // before update of product
         // Event::fire('product.update.before', $id);
 
-        $this->product->update(request()->all(), $id);
+        $product = $this->product->update(request()->all(), $id);
 
         //after update of product
-        Event::fire('product.update.after', $this->product->find($id));
+        Event::fire('product.save.after', $product);
 
         session()->flash('success', 'Product updated successfully.');
 

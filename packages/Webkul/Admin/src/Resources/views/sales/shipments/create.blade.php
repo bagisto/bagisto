@@ -235,7 +235,13 @@
                                             @if ($item->qty_to_ship > 0)
                                                 <tr>
                                                     <td>{{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}</td>
-                                                    <td>{{ $item->name }}</td>
+                                                    <td>
+                                                        {{ $item->name }}
+
+                                                        @if ($html = $item->getOptionDetailHtml())
+                                                            <p>{{ $html }}</p>
+                                                        @endif
+                                                    </td>
                                                     <td>{{ $item->qty_ordered }}</td>
                                                     <td>
                                                         <div class="control-group" :class="[errors.has('shipment[items][{{ $item->id }}]') ? 'has-error' : '']">
