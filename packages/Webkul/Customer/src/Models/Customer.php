@@ -46,4 +46,12 @@ class Customer extends Authenticatable
     {
         $this->notify(new CustomerResetPassword($token));
     }
+
+    /**
+     * Get the customer address that owns the customer.
+     */
+    public function address()
+    {
+        return $this->hasOne(CustomerAddress::class);
+    }
 }
