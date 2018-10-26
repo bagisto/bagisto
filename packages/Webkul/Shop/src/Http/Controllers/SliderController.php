@@ -10,7 +10,7 @@ use Webkul\Core\Repositories\SliderRepository as Slider;
 /**
  * Slider controller for managing the slider controls.
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
@@ -28,18 +28,18 @@ class SliderController extends controller
     }
 
     /**
-     * Loads the index
-     * for the sliders
-     * settings.
+     * Loads the index for the sliders settings.
+     *
+     * @return mixed
      */
-
     public function index() {
         return view($this->_config['view']);
     }
+
     /**
-     * Loads the form
-     * for creating
-     * slider.
+     * Loads the form for creating slider.
+     *
+     * @return mixed
      */
 
     public function create() {
