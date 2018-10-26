@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.settings.sliders.add-title') }}
+    {{ __('admin::app.settings.sliders.edit-title') }}
 @stop
 
 @section('content')
@@ -9,7 +9,7 @@
         <form method="POST" action="{{ route('admin.sliders.update', $slider->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('admin::app.settings.sliders.add-title') }}</h1>
+                    <h1>{{ __('admin::app.settings.sliders.edit-title') }}</h1>
                 </div>
 
                 <div class="page-action">
@@ -51,6 +51,9 @@
 
                             <span class="control-error" v-if="errors.has('image')">@{{ errors.first('image') }}</span>
                         </image-upload>
+                        {{-- <div class="control-group">
+                            <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false"></image-wrapper>
+                        </div> --}}
                     </div>
 
                     <div class="control-group" :class="[errors.has('content') ? 'has-error' : '']">

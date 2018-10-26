@@ -523,10 +523,18 @@ section.slider-block {
 
             li.show {
                 display:block;
+                position: relative;
                 visibility: visible;
                 width: 100%;
                 animation-name: example;
                 animation-duration: 4s;
+
+                .show-content {
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    top: 0px;
+                }
             }
 
             @keyframes example {

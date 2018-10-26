@@ -31400,6 +31400,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     mounted: function mounted() {
         this.getProps();
+
+        this.getTest();
     },
 
 
@@ -31407,8 +31409,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getProps: function getProps() {
             this.setProps();
         },
+        getTest: function getTest() {
+            console.log('hello world');
+        },
         setProps: function setProps() {
-
             var this_this = this;
 
             this.slides.forEach(function (slider) {
@@ -31425,22 +31429,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
         changeIndexLeft: function changeIndexLeft() {
-
             if (this.currentIndex > 0) {
-
                 this.currentIndex--;
             } else if (this.currentIndex == 0) {
-
                 this.currentIndex = this.images.length - 1;
             }
         },
+
         changeIndexRight: function changeIndexRight() {
-
             if (this.currentIndex < this.images.length - 1) {
-
                 this.currentIndex++;
             } else if (this.currentIndex == this.images.length - 1) {
-
                 this.currentIndex = 0;
             }
         }

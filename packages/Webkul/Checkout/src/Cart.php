@@ -621,7 +621,7 @@ class Cart {
 
     /**
      * Can Add the product or not will check the quantity for that particular product
-     * before adding it each time.
+     * before creation of the cart.
      *
      * @return boolean
      */
