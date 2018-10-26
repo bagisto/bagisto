@@ -94,12 +94,6 @@ class Product {
                         $qty = 0;
                     }
                 }
-
-                return [
-                    'parent' => $gridObject,
-                    'variants' => $variantObjects
-                ];
-
             } else {
                 $qty = 0;
 
@@ -111,13 +105,13 @@ class Product {
                 $gridObject['quantity'] = $qty;
 
                 $qty = 0;
-
-                return [
-                    'parent' => $gridObject,
-                    'variants' => $variantObjects
-                ];
             }
         }
+        // dd($gridObject, $variantObjects);
+        return [
+            'parent' => $gridObject,
+            'variants' => $variantObjects
+        ];
     }
 
     /**
@@ -139,31 +133,37 @@ class Product {
      * @return boolean
      */
     public function saveProduct($product, $data) {
-        die;
 
-        if ($this->productGrid->findOneByField('product_id', $product->id)) {
-            if($product->type == 'configurable') {
-
+        $productGridObject = $this->productGrid->findOneByField('product_id', $product->id);
+        // dd($product, $data, $productGridObject);
+        if (!is_null($productGridObject)) {
+            if($product->type == 'simple') {
+                $r = $productGridObject->update($data['parent']);
             } else {
-                if($this->productGrid->update($product, $id)) {
-                    return true;
-                } else {
-                    return false;
+                $productGridObject->update($data['parent']);
+                if(count($data['variants'])) {
+                    dd($data['variants']);
+                    foreach($data['variants'] as $variant) {
+                        $variantObject = $this->productGrid->findOneByField('product_id', $variant['product_id']);
+                        if(!is_null($variantObject)) {
+                            $variantObject->update($variant);
+                        } else {
+                            $this->productGrid->create($variant);
+                        }
+                    }
                 }
             }
         } else {
-            if($product->type == 'configurable') {
+            $this->productGrid->create($data['parent']);
 
-            } else {
-                if($this->productGrid->create($product)) {
-                    return true;
-                } else {
-                    return false;
+            //no need for tese lines
+            if(count($data['variants'])) {
+                foreach($data['variants'] as $variant) {
+                    $this->productGrid->create($variant);
                 }
             }
         }
-
-
+        return true;
     }
 
     /**
