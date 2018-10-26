@@ -2090,6 +2090,46 @@ section.cart .cart-content .right-side {
   float: right;
 }
 
+@media only screen and (max-width: 770px) {
+  section.cart .cart-content {
+    display: block;
+  }
+  section.cart .cart-content .left-side {
+    width: 100%;
+    float: none;
+  }
+  section.cart .cart-content .left-side .cart-item-list .item .item-image {
+    height: 90px;
+    width: 90px;
+  }
+  section.cart .cart-content .left-side .cart-item-list .item .item-details .misc {
+    margin-left: -105px;
+  }
+  section.cart .cart-content .left-side .misc-controls {
+    position: relative;
+    top: 200px;
+  }
+  section.cart .cart-content .right-side {
+    width: 100%;
+    padding-left: 0px;
+    position: relative;
+    top: -40px;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  section.cart .cart-content .left-side .misc-controls {
+    display: block;
+    top: 150px;
+  }
+  section.cart .cart-content .left-side .misc-controls div {
+    margin-top: 10px;
+  }
+  section.cart .cart-content .right-side {
+    top: -80px;
+  }
+}
+
 .checkout-process {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2404,6 +2444,13 @@ section.review .review-layouter .review-form .rating {
   color: #A5A5A5;
 }
 
+section.review .review-layouter .review-form .rating .rating-title::after {
+  content: "*";
+  color: #FC6868;
+  font-weight: 700;
+  display: inline-block;
+}
+
 section.review .review-layouter .review-form .rating label.star {
   font-size: 25px;
   color: #d4d4d4;
@@ -2413,6 +2460,21 @@ section.review .review-layouter .review-form .rating label.star {
 
 section.review .review-layouter .review-form .rating label.star:before {
   content: '\2605';
+}
+
+section.review .review-layouter .review-form .control-group label {
+  color: #A5A5A5;
+  font-size: 16px;
+}
+
+section.review .review-layouter .review-form .control-group .control {
+  width: 90%;
+  color: #A5A5A5;
+}
+
+section.review .review-layouter .review-form .control-error {
+  color: #ff5656;
+  font-size: 14px;
 }
 
 section.review .review-layouter .review-form .write-review label {

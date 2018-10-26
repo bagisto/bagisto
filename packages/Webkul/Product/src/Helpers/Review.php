@@ -1,6 +1,7 @@
 <?php
 
 namespace Webkul\Product\Helpers;
+use DB;
 
 class Review extends AbstractProduct
 {
@@ -56,42 +57,27 @@ class Review extends AbstractProduct
      */
     public function getPercentageRating($product)
     {
-        $reviews['five'] = $product->reviews()->where('rating', 5)->where('status','approved')->count();
+        $reviews = $product->reviews()->where('status','approved')
+                    ->select('rating', DB::raw('count(*) as total'))
+                    ->groupBy('rating')
+                    ->orderBy('rating','desc')
+                    ->get();
 
-        $reviews['four'] = $product->reviews()->where('rating', 4)->where('status','approved')->count();
-
-        $reviews['three'] = $product->reviews()->where('rating', 3)->where('status','approved')->count();
-
-        $reviews['two'] = $product->reviews()->where('rating', 2)->where('status','approved')->count();
-
-        $reviews['one'] = $product->reviews()->where('rating', 1)->where('status','approved')->count();
-
-        foreach($reviews as $key=>$review){
-
-            if($this->getTotalReviews($product) == 0){
-                $percentage[$key]=0;
-            }else{
-                $percentage[$key] = round(($review/$this->getTotalReviews($product))*100);
+        for($i=5; $i >= 1; $i--) {
+            if(!$reviews->isEmpty()) {
+                foreach ($reviews as $review) {
+                    if($review->rating == $i) {
+                        $percentage[$i] = round(($review->total/$this->getTotalReviews($product))*100);
+                        break;
+                    } else {
+                        $percentage[$i]=0;
+                    }
+                }
+            } else {
+                $percentage[$i]=0;
             }
         }
 
         return $percentage;
-    }
-
-    /**
-    * Returns the product accroding to paginate
-    *
-    * @param Product $product
-    * @return integer
-    */
-
-    public function loadMore($product)
-    {
-        $link = $_SERVER['PHP_SELF'];
-        $link_array = explode('/',$link);
-        $last=end($link_array);
-        $itemPerPage = 1*5;
-
-        return $product->reviews()->where('status','approved')->paginate($itemPerPage);
     }
 }

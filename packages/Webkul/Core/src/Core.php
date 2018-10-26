@@ -120,7 +120,7 @@ class Core
                 'http://' . request()->getHttpHost(),
                 'https://' . request()->getHttpHost()
             ])->first();
-        
+
         if(!$channel)
             $channel = $this->channelRepository->first();
 
@@ -370,7 +370,7 @@ class Core
     {
         if(is_null($price))
             $price = 0;
-            
+
         return currency($price, $this->getBaseCurrencyCode());
     }
 
@@ -523,13 +523,13 @@ class Core
 
         $totalDays = $startDate->diffInDays($endDate) + 1;
         $totalMonths = $startDate->diffInMonths($endDate) + 1;
-        
+
         $startWeekDay = Carbon::createFromTimeString($this->xWeekRange($startDate, 0) . ' 00:00:01');
         $endWeekDay = Carbon::createFromTimeString($this->xWeekRange($endDate, 1) . ' 23:59:59');
         $totalWeeks = $startWeekDay->diffInWeeks($endWeekDay);
 
         if($totalMonths > 5) {
-            for ($i = 0; $i < $totalMonths; $i++) { 
+            for ($i = 0; $i < $totalMonths; $i++) {
                 $date = clone $startDate;
                 $date->addMonths($i);
 
@@ -541,7 +541,7 @@ class Core
                 $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('M')];
             }
         } elseif($totalWeeks > 6) {
-            for ($i = 0; $i < $totalWeeks; $i++) { 
+            for ($i = 0; $i < $totalWeeks; $i++) {
                 $date = clone $startDate;
                 $date->addWeeks($i);
 
