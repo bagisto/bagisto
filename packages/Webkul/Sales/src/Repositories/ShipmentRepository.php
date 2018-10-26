@@ -128,6 +128,8 @@ class ShipmentRepository extends Repository
             }
 
             $this->order->updateOrderStatus($order);
+
+            Event::fire('sales.shipment.save.after', $shipment);
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -135,8 +137,6 @@ class ShipmentRepository extends Repository
         }
         
         DB::commit();
-
-        Event::fire('sales.shipment.save.after', $shipment);
 
         return $shipment;
     }

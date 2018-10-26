@@ -734,11 +734,11 @@ class Cart {
         if($billingAddressModel = $cart->billing_address) {
             $this->cartAddress->update($billingAddress, $billingAddressModel->id);
 
-            if($shippingAddress = $cart->shipping_address) {
+            if($shippingAddressModel = $cart->shipping_address) {
                 if(isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                    $this->cartAddress->update($billingAddress, $shippingAddress->id);
+                    $this->cartAddress->update($billingAddress, $shippingAddressModel->id);
                 } else {
-                    $this->cartAddress->update($shippingAddress, $shippingAddress->id);
+                    $this->cartAddress->update($shippingAddress, $shippingAddressModel->id);
                 }
             } else {
                 if(isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
@@ -757,7 +757,10 @@ class Cart {
             }
         }
 
-        // If customer is guest, than save shipping address's email and name in cart as customer details
+        $cart->customer_email = $cart->shipping_address->email;
+        $cart->customer_first_name = $cart->shipping_address->first_name;
+        $cart->customer_last_name = $cart->shipping_address->last_name;
+        $cart->save();
 
         return true;
     }

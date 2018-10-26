@@ -75,7 +75,7 @@
                 <div class="adjacent-center">
 
                     <div class="brand-logo">
-                        <img src="{{ asset('vendor/webkul/admin/assets/images/logo.png') }}" alt="Bagisto"/>
+                        <img src="{{ asset('vendor/webkul/ui/assets/images/logo.png') }}" alt="Bagisto"/>
                     </div>
 
                     @yield('content')

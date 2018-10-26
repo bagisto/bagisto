@@ -12,7 +12,7 @@ class AdminsTableSeeder extends Seeder
     {
         $role = Role::first();
         $admin = new Admin();
-        $admin->name = str_random(8);
+        $admin->name = 'Example';
         $admin->email = 'admin@example.com';
         $admin->password = bcrypt('admin123');
         $admin->status = 1;

@@ -154,6 +154,8 @@ class InvoiceRepository extends Repository
             $this->order->collectTotals($order);
 
             $this->order->updateOrderStatus($order);
+
+            Event::fire('sales.invoice.save.after', $invoice);
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -161,8 +163,6 @@ class InvoiceRepository extends Repository
         }
         
         DB::commit();
-
-        Event::fire('sales.invoice.save.after', $invoice);
 
         return $invoice;
     }
