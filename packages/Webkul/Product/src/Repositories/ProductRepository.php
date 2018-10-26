@@ -154,15 +154,16 @@ class ProductRepository extends Repository
 
         $product->update($data);
 
-        if(isset($data['categories']))
+        if(isset($data['categories'])) {
             $product->categories()->sync($data['categories']);
+        }
 
         $attributes = $product->attribute_family->custom_attributes;
 
         foreach ($attributes as $attribute) {
             if(!isset($data[$attribute->code]) || ($attribute->code == 'boolean' && !$data[$attribute->code]))
                 continue;
-            
+
             $attributeValue = $this->attributeValue->findOneWhere([
                     'product_id' => $product->id,
                     'attribute_id' => $attribute->id,
@@ -172,16 +173,17 @@ class ProductRepository extends Repository
 
             if(!$attributeValue) {
                 $this->attributeValue->create([
-                        'product_id' => $product->id,
-                        'attribute_id' => $attribute->id,
-                        'value' => $data[$attribute->code],
-                        'channel' => $attribute->value_per_channel ? $data['channel'] : null,
-                        'locale' => $attribute->value_per_locale ? $data['locale'] : null
-                    ]);
+                    'product_id' => $product->id,
+                    'attribute_id' => $attribute->id,
+                    'value' => $data[$attribute->code],
+                    'channel' => $attribute->value_per_channel ? $data['channel'] : null,
+                    'locale' => $attribute->value_per_locale ? $data['locale'] : null
+                ]);
             } else {
                 $this->attributeValue->update([
-                        ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
-                    ], $attributeValue->id);
+                    ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
+                    ], $attributeValue->id
+                );
             }
         }
 

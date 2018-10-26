@@ -26,7 +26,7 @@ class ProductDataGrid
             'name' => 'Products',
             'table' => 'products_grid as prods',
             'select' => 'prods.product_id',
-            'perpage' => 5,
+            'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[

@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Product\Repositories;
- 
+
 use Illuminate\Container\Container as App;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
@@ -14,7 +14,7 @@ use Webkul\Product\Models\ProductAttributeValue;
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ProductAttributeValueRepository extends Repository
-{    
+{
     /**
      * AttributeRepository object
      *
