@@ -83,8 +83,7 @@ php artisan vendor:publish
 ~~~
 
 
-> That's it, now just execute the project on your specified domain entry point on the installation on public folder inside
-project installation directory.
+> That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
 
 
 
