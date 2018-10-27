@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Http\Listeners\CustomerEventsHandler;
 use Cart;
+
 /**
  * Session controller for the user customer
  *
@@ -27,7 +28,6 @@ class SessionController extends Controller
     {
 
         $this->middleware('customer')->except(['show','create']);
-
         $this->_config = request('_config');
 
         $subscriber = new CustomerEventsHandler;
@@ -53,13 +53,11 @@ class SessionController extends Controller
         ]);
 
         if (!auth()->guard('customer')->attempt(request(['email', 'password']))) {
-
             session()->flash('error', 'Please check your credentials and try again.');
             return back();
         }
 
         //Event passed to prepare cart after login
-
         Event::fire('customer.after.login', $request->input('email'));
 
         return redirect()->intended(route($this->_config['redirect']));

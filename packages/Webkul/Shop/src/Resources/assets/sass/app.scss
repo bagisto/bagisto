@@ -140,7 +140,64 @@ body {
     margin-top: 90px;
 }
 
+
 //components
+.bold {
+    font-weight: bold;
+    color: #3A3A3A;
+}
+
+/* The container */
+.radio-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 16px;
+        width: 16px;
+        background-color: white;
+        border: 2px solid #FF6472;
+        border-radius: 50%;
+    }
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .checkmark:after {
+        top: 2px;
+        left: 2px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #FF6472;
+   }
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
 
 //wishlist icon hover properties
 .add-to-wishlist {
@@ -2735,7 +2792,6 @@ section.review {
                 margin-top: 2%;
 
                 table tbody tr {
-                    display: grid;
                     margin-bottom: 20px;
                 }
             }
@@ -2754,7 +2810,6 @@ section.review {
 //Account content inside a table
 .account-table-content {
     color: $font-color;
-    margin-top: 1.4%;
 
     table {
         tbody {
@@ -2766,6 +2821,64 @@ section.review {
                     text-transform: capitalize;
                 }
             }
+        }
+    }
+}
+
+//address holder and address card
+.address-holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.address-card {
+    width: 260px;
+    border: 1px solid #E8E8E8;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 25px 1px 22px 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+
+    .control-group {
+        width: 15px;
+        height: 15px;
+        margin-top: 10px;
+    }
+
+    .details {
+        font-weight: lighter;
+        margin-left: 15px;
+
+        span {
+            display: block;
+            margin: 8px;
+        }
+
+        .control-links {
+            width: 90%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+
+            .btn {
+                height: 30px;
+            }
+        }
+
+        .default-address {
+            position: absolute;
+            top: -3px;
+            right: -3px;
         }
     }
 }

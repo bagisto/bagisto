@@ -23,32 +23,4 @@ class CustomerAddressRepository extends Repository
     {
         return 'Webkul\Customer\Models\CustomerAddress';
     }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-
-    public function create(array $data)
-    {
-        $address = $this->model->create($data);
-
-        return $address;
-    }
-
-    /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
-     */
-
-    public function update(array $data, $id, $attribute = "id")
-    {
-        $address = $this->findOneByField('customer_id', $id);
-
-        $address->update($data);
-
-        return $address;
-    }
 }

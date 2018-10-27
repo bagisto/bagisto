@@ -11,7 +11,8 @@
 
         <link rel="stylesheet" href="{{ asset('vendor/webkul/admin/assets/css/admin.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
-
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
         @yield('head')
 
         @yield('css')
@@ -54,22 +55,16 @@
         </script>
 
         <script type="text/javascript" src="{{ asset('vendor/webkul/admin/assets/js/admin.js') }}"></script>
+
         <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
 
-        <script type="text/javascript" src="{{ asset('js/tinyMCE/tinymce.min.js') }}">
+        <script type="text/javascript" src="{{ asset('js/tinyMCE/tinymce.min.js') }}"></script>
+        <script>
             tinymce.init({
-            selector: 'textarea',
-            height: 500,
-            menubar: false,
-            plugins: [
-                'advlist autolink lists link image charmap print preview anchor textcolor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table contextmenu paste code help wordcount'
-            ],
-            toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-            content_css: [
-                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                '//www.tinymce.com/css/codepen.min.css']
+                seletor: 'textarea',
+                height: 500,
+                menubar: false,
+                toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat'
             });
         </script>
 

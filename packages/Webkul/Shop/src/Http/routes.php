@@ -122,11 +122,9 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
 
             //customer account
             Route::prefix('account')->group(function () {
-
                 Route::get('index', 'Webkul\Customer\Http\Controllers\AccountController@index')->defaults('_config', [
                     'view' => 'shop::customers.account.index'
                 ])->name('customer.account.index');
-
 
                 /*   Profile Routes Starts Here    */
                 Route::get('profile', 'Webkul\Customer\Http\Controllers\CustomerController@index')->defaults('_config', [
@@ -157,13 +155,17 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
                     'redirect' => 'customer.address.index'
                 ])->name('customer.address.create');
 
-                Route::get('address/edit', 'Webkul\Customer\Http\Controllers\AddressController@showEdit')->defaults('_config', [
+                Route::get('address/edit/{id}', 'Webkul\Customer\Http\Controllers\AddressController@showEdit')->defaults('_config', [
                     'view' => 'shop::customers.account.address.edit'
                 ])->name('customer.address.edit');
 
-                Route::post('address/edit', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [
+                Route::post('address/edit/{id}', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [
                     'redirect' => 'customer.address.index'
                 ])->name('customer.address.edit');
+
+                Route::get('address/default/{id}', 'Webkul\Customer\Http\Controllers\AddressController@makeDefault')->name('make.default.address');
+
+                Route::get('address/delete/{id}', 'Webkul\Customer\Http\Controllers\AddressController@destroy')->name('address.delete');
                 /*    Routes for Addresses ends here   */
 
                 /* Wishlist route */

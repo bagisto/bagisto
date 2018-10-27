@@ -122,6 +122,9 @@ return [
                     'edit' => 'Edit',
                     'empty' => 'You don\'t have any saved addresses here, please create a new one by clicking the link below.',
                     'create' => 'Create Address',
+                    'delete' => 'Delete',
+                    'make-default' => 'Make Default',
+                    'default' => 'Default'
                 ],
 
                 'create' => [
@@ -140,6 +143,10 @@ return [
                     'page-title' => 'Customer - Edit Address',
                     'title' => 'Edit Address',
                     'submit' => 'Edit Address'
+                ],
+                'delete' => [
+                    'success' => 'Address Successfully Deleted',
+                    'failure' => 'Address Cannot Be Deleted'
                 ]
             ],
 
