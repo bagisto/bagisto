@@ -51,19 +51,18 @@
 
                             <span class="control-error" v-if="errors.has('image')">@{{ errors.first('image') }}</span>
                         </image-upload>
-                        {{-- <div class="control-group">
-                            <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false"></image-wrapper>
-                        </div> --}}
                     </div>
 
                     <div class="control-group" :class="[errors.has('content') ? 'has-error' : '']">
                         <label for="content">{{ __('admin::app.settings.sliders.content') }}</label>
 
-                        <textarea class="control" id="add_content" name="content" v-validate="'required'" rows="5">{{ $slider->content ? : old('content') }}</textarea>
+                        <div class="panel-body">
+                                <textarea class="control" id="add_content" name="content" v-validate="'required'" rows="5">{{ $slider->content ? : old('content') }}</textarea>
+                        </div>
+
 
                         <span class="control-error" v-if="errors.has('content')">@{{ errors.first('content') }}</span>
                     </div>
-
 
                 </div>
             </div>

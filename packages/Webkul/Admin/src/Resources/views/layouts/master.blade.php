@@ -6,20 +6,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
         <link rel="icon" sizes="16x16" href="{{ asset('vendor/webkul/ui/assets/images/favicon.ico') }}" />
 
         <link rel="stylesheet" href="{{ asset('vendor/webkul/admin/assets/css/admin.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+
         @yield('head')
 
         @yield('css')
 
     </head>
 
-    <body>
+    <body onload="loadTinyMCE()">
         <div id="app">
 
             <flash-wrapper ref='flashes'></flash-wrapper>
@@ -55,21 +53,27 @@
         </script>
 
         <script type="text/javascript" src="{{ asset('vendor/webkul/admin/assets/js/admin.js') }}"></script>
-
         <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
-
-        <script type="text/javascript" src="{{ asset('js/tinyMCE/tinymce.min.js') }}"></script>
-        <script>
-            tinymce.init({
-                seletor: 'textarea',
-                height: 500,
-                menubar: false,
-                toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat'
-            });
-        </script>
-
-
         @stack('scripts')
+
+        <script src="{{ asset('js/tinyMCE/tinymce.min.js') }}"></script>
+
+        <script>
+            function loadTinyMCE() {
+                tinymce.init({
+                    selector: 'textarea',
+                    height: 300,
+                    width: 535,
+                    plugins: 'image imagetools media wordcount save fullscreen',
+                    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+                    image_advtab: true,
+                    templates: [
+                        { title: 'Test template 1', content: 'Test 1' },
+                        { title: 'Test template 2', content: 'Test 2' }
+                    ],
+                });
+            }
+        </script>
 
         <div class="modal-overlay"></div>
     </body>

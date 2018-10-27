@@ -24,7 +24,6 @@ class SliderController extends controller
     {
         $this->slider = $slider;
         $this->_config = request('_config');
-
     }
 
     /**
@@ -54,7 +53,7 @@ class SliderController extends controller
      * @return response
      */
     public function store() {
-
+        // dd(request()->all());
         $this->slider->create(request()->all());
 
         session()->flash('success', 'Slider created successfully.');

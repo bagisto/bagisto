@@ -57,7 +57,7 @@
                     <div class="control-group" :class="[errors.has('content') ? 'has-error' : '']">
                         <label for="content">{{ __('admin::app.settings.sliders.content') }}</label>
 
-                        <textarea class="control" id="add_content" name="content" v-validate="'required'" rows="5"></textarea>
+                        <textarea class="control" id="add_content" name="content" rows="5"></textarea>
                         {{-- <textarea></textarea> --}}
 
                         <span class="control-error" v-if="errors.has('content')">@{{ errors.first('content') }}</span>
