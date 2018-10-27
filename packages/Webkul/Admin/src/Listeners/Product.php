@@ -97,7 +97,7 @@ class Product {
             } else {
                 $qty = 0;
 
-                foreach($product->inventories->get() as $inventory_source) {
+                foreach($product->inventories()->get() as $inventory_source) {
                     $qty = $qty + $inventory_source->qty;
                 }
 

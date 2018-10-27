@@ -465,7 +465,7 @@ return [
             'page-title' => '404 Page not found',
             'name' => '404',
             'title' => 'Page Not found',
-            'message' => 'The Page you are looking for doesnt exist or have secrately    escaped;head back to home and make a fresh move again.'
+            'message' => 'The Page you are looking for does not exist or have been moved. Navigate using sidemenu.'
         ],
         '403' => [
             'page-title' => '403 forbidden Error',

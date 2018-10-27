@@ -169,8 +169,7 @@ class Cart {
      *
      * @return void
      */
-    public function add($id, $data, $prepared = false, $preparedData = [])
-    {
+    public function add($id, $data, $prepared = false, $preparedData = []) {
         if($prepared == false) {
             $itemData = $this->prepareItemData($id, $data);
         } else {
@@ -298,12 +297,24 @@ class Cart {
      *
      * @return Booleans
      */
-    public function createNewCart($id, $data, $prepared = false, $preparedData = [])
-    {
-        if($prepared == false)
+    public function createNewCart($id, $data, $prepared = false, $preparedData = []) {
+        if($prepared == false) {
+            if(isset($data['selected_configurable_option'])) {
+                $canAdd = $this->canAdd($data['selected_configurable_option'], $data['quantity']);
+            } else {
+                $canAdd = $this->canAdd($id, $data['quantity']);
+            }
+
+            if(!$canAdd) {
+                session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
+
+                return false;
+            }
+
             $itemData = $this->prepareItemData($id, $data);
-        else
+        } else {
             $itemData = $preparedData;
+        }
 
         //if the item data is not valid to be processed it will be returning false
         if($itemData == false) {
@@ -336,7 +347,6 @@ class Cart {
         } else {
             $cartData['items_qty'] = 1;
         }
-
 
         //create the cart instance in the database
         if($cart = $this->cart->create($cartData)) {
@@ -610,6 +620,22 @@ class Cart {
     }
 
     /**
+     * Can Add the product or not will check the quantity for that particular product
+     * before adding it each time.
+     *
+     * @return boolean
+     */
+    public function canAdd($id, $qty) {
+        $product = $this->product->find($id);
+
+        if($product->haveSufficientQuantity($qty)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Save cart
      *
      * @return mixed
@@ -708,11 +734,11 @@ class Cart {
         if($billingAddressModel = $cart->billing_address) {
             $this->cartAddress->update($billingAddress, $billingAddressModel->id);
 
-            if($shippingAddress = $cart->shipping_address) {
+            if($shippingAddressModel = $cart->shipping_address) {
                 if(isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                    $this->cartAddress->update($billingAddress, $shippingAddress->id);
+                    $this->cartAddress->update($billingAddress, $shippingAddressModel->id);
                 } else {
-                    $this->cartAddress->update($shippingAddress, $shippingAddress->id);
+                    $this->cartAddress->update($shippingAddress, $shippingAddressModel->id);
                 }
             } else {
                 if(isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
@@ -731,7 +757,10 @@ class Cart {
             }
         }
 
-        // If customer is guest, than save shipping address's email and name in cart as customer details
+        $cart->customer_email = $cart->shipping_address->email;
+        $cart->customer_first_name = $cart->shipping_address->first_name;
+        $cart->customer_last_name = $cart->shipping_address->last_name;
+        $cart->save();
 
         return true;
     }
@@ -1122,6 +1151,14 @@ class Cart {
     public function moveConfigurableFromWishlistToCart($configurableproductId, $productId) {
         $product = $this->product->find($configurableproductId);
 
+        $canAdd = $this->product->find($productId)->haveSufficientQuantity(1);
+
+        if(!$canAdd) {
+            session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
+
+            return false;
+        }
+
         $child = $childData = null;
         if($product->type == 'configurable') {
             $child = $this->product->findOneByField('id', $productId);
@@ -1141,8 +1178,8 @@ class Cart {
         unset($productAddtionalData['html']);
 
         $additional = [
-            'request' => $data,
-            'variant_id' => $data['selected_configurable_option'],
+            'request' => $childData,
+            'variant_id' => $productId,
             'attributes' => $productAddtionalData
         ];
 
@@ -1159,7 +1196,7 @@ class Cart {
             'weight' => $weight = ($product->type == 'configurable' ? $child->weight : $product->weight),
             'total_weight' => $weight,
             'base_total_weight' => $weight,
-            'additional' => json_encode($additonal)
+            'additional' => json_encode($additional)
         ];
 
         return ['parent' => $parentData, 'child' => $childData];
