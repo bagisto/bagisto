@@ -2897,6 +2897,33 @@ section.review .review-layouter .ratings-reviews .right-side .rater .line-bar .l
   display: none;
 }
 
+.account-table-content {
+  color: #242424;
+  margin-top: 1.4%;
+}
+
+.account-table-content table tbody tr {
+  height: 45px;
+}
+
+.account-table-content table tbody tr td {
+  width: 250px;
+  text-transform: capitalize;
+}
+
+.edit-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 1px solid #C7C7C7;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 345px;
+  padding: 25px;
+}
+
 @media only screen and (max-width: 770px) {
   .account-content {
     -webkit-box-orient: vertical;
@@ -2919,7 +2946,7 @@ section.review .review-layouter .ratings-reviews .right-side .rater .line-bar .l
   .account-content .responsive-side-menu {
     cursor: pointer;
     padding-top: 13px;
-    display: block;
+    display: block !important;
     height: 46px;
     border-bottom: 1px solid #C7C7C7;
     border-top: 1px solid #C7C7C7;
@@ -2956,42 +2983,21 @@ section.review .review-layouter .ratings-reviews .right-side .rater .line-bar .l
     margin-top: 2%;
   }
   .account-content .account-layout .account-table-content table tbody tr {
-    display: grid;
     margin-bottom: 20px;
+  }
+  .account-content .account-layout .account-table-content table tbody tr td {
+    display: block;
+    padding-top: 5px;
   }
   .account-content .account-items-list, .account-content .edit-form {
     margin-top: 20px;
   }
+  .account-content .account-items-list.table {
+    display: none;
+  }
   .account-content .control-group .control {
     width: 100%;
   }
-}
-
-.account-table-content {
-  color: #242424;
-  margin-top: 1.4%;
-}
-
-.account-table-content table tbody tr {
-  height: 45px;
-}
-
-.account-table-content table tbody tr td {
-  width: 250px;
-  text-transform: capitalize;
-}
-
-.edit-form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  border: 1px solid #C7C7C7;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  min-height: 345px;
-  padding: 25px;
 }
 
 .sale-container {

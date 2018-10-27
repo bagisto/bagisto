@@ -2709,6 +2709,33 @@ section.review {
     }
 }
 
+//Account content inside a table
+.account-table-content {
+    color: $font-color;
+    margin-top: 1.4%;
+
+    table {
+        tbody {
+            tr {
+                height: 45px;
+
+                td {
+                    width: 250px;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}
+
+.edit-form {
+    display: flex;
+    border: 1px solid $border-color;
+    flex-direction: column;
+    min-height: 345px;
+    padding: 25px;
+}
+
 //customer account page responsive layout
 @media only screen and (max-width: 770px) {
     .account-content {
@@ -2732,7 +2759,7 @@ section.review {
         .responsive-side-menu {
             cursor: pointer;
             padding-top:13px;
-            display: block;
+            display: block !important;
             height: 46px;
             border-bottom: 1px solid $border-color;
             border-top: 1px solid $border-color;
@@ -2771,8 +2798,12 @@ section.review {
                 margin-top: 2%;
 
                 table tbody tr {
-                    display: grid;
                     margin-bottom: 20px;
+
+                    td {
+                        display: block;
+                        padding-top: 5px;
+                    }
                 }
             }
         }
@@ -2781,37 +2812,14 @@ section.review {
             margin-top: 20px;
         }
 
+        .account-items-list.table {
+            display: none;
+        }
+
         .control-group .control {
             width: 100%;
         }
     }
-}
-
-//Account content inside a table
-.account-table-content {
-    color: $font-color;
-    margin-top: 1.4%;
-
-    table {
-        tbody {
-            tr {
-                height: 45px;
-
-                td {
-                    width: 250px;
-                    text-transform: capitalize;
-                }
-            }
-        }
-    }
-}
-
-.edit-form {
-    display: flex;
-    border: 1px solid $border-color;
-    flex-direction: column;
-    min-height: 345px;
-    padding: 25px;
 }
 
 .sale-container {

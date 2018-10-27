@@ -1,4 +1,4 @@
-<div class="responsive-side-menu" id="responsive-side-menu" style="display:none">
+<div class="responsive-side-menu" id="responsive-side-menu" style="display: none">
     Menu
     <i class="icon icon-arrow-down right" id="down-icon"></i>
 </div>
@@ -22,18 +22,16 @@
         var downIcon = document.getElementById("down-icon");
         var accountSideMenu = document.getElementsByClassName("account-side-menu");
 
-        console.log(accountSideMenu);
-
         sideMenuTitle.addEventListener("click", function(){
-            if(downIcon.className == 'icon icon-arrow-down right'){
-                for(let i=0 ; i < accountSideMenu.length ; i++){
+            if(downIcon.className == 'icon icon-arrow-down right') {
+                for(let i=0 ; i < accountSideMenu.length ; i++) {
                     accountSideMenu[i].style.display="block";
                 }
 
                 downIcon.classList.remove("icon","icon-arrow-down","right");
                 downIcon.classList.add("icon","icon-arrow-up","right");
-            }else{
-                for(let i=0 ; i < accountSideMenu.length ; i++){
+            }else {
+                for(let i=0 ; i < accountSideMenu.length ; i++) {
                     accountSideMenu[i].style.display="none";
                 }
 
