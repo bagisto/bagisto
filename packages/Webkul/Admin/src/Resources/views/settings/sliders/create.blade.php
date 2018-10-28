@@ -44,21 +44,20 @@
                     <div class="control-group" :class="[errors.has('image') ? 'has-error' : '']">
                         <label for="new_image">{{ __('admin::app.settings.sliders.image') }}</label>
 
-                        <image-upload>
+                        {{-- <image-upload>
 
                             <input type="file" class="control" id="add_image" name="image" value="" v-validate="'image|required'" placeholder="Upload from Outer"/>
 
                             <span class="control-error" v-if="errors.has('image')">@{{ errors.first('image') }}</span>
-                            {{-- The image field validation is not working, resolve it. --}}
 
-                        </image-upload>
+                        </image-upload> --}}
+                        <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false"></image-wrapper>
                     </div>
 
                     <div class="control-group" :class="[errors.has('content') ? 'has-error' : '']">
                         <label for="content">{{ __('admin::app.settings.sliders.content') }}</label>
 
                         <textarea class="control" id="add_content" name="content" rows="5"></textarea>
-                        {{-- <textarea></textarea> --}}
 
                         <span class="control-error" v-if="errors.has('content')">@{{ errors.first('content') }}</span>
                     </div>

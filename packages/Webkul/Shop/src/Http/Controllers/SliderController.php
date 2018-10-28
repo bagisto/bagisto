@@ -53,12 +53,11 @@ class SliderController extends controller
      * @return response
      */
     public function store() {
-        // dd(request()->all());
-        $this->slider->create(request()->all());
+        $this->slider->save(request()->all());
 
         session()->flash('success', 'Slider created successfully.');
 
-        return redirect()->back();
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
@@ -78,7 +77,9 @@ class SliderController extends controller
      * @return response
      */
     public function update($id) {
-        if($this->slider->updateItem(request()->all(), $id)) {
+        $result = $this->slider->updateItem(request()->all(), $id);
+
+        if($result) {
             session()->flash('success', 'Slider Item Successfully Updated');
         } else {
             session()->flash('error', 'Slider Cannot Be Updated');

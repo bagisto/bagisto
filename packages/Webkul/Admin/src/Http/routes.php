@@ -454,7 +454,7 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.sliders.create');
 
             Route::post('slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
-                'redirect' => 'admin::sliders.index'
+                'redirect' => 'admin.sliders.index'
             ])->name('admin.sliders.store');
 
             //slider edit

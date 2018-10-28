@@ -41,20 +41,34 @@ class SliderRepository extends Repository
      * @param array $data
      * @return mixed
      */
-    public function create(array $data)
+    public function save(array $data)
     {
-
         $channelName = $this->channel->find($data['channel_id'])->name;
 
         $dir = 'slider_images/' . $channelName;
 
-        $image = request()->file('image')->store($dir);
+        $uploaded = false;
 
-        unset($data['image'], $data['_token']);
+        $image = $first = array_first($data['image'], function ($value, $key) {
+            if($value)
+                return $value;
+            else
+                return false;
+        });
 
-        $data['path'] = $image;
+        if($image != false) {
+            $uploaded = $image->store($dir);
 
-        $this->model->create($data);
+            unset($data['image'], $data['_token']);
+        }
+
+        if($uploaded) {
+            $data['path'] = $uploaded;
+        } else {
+            unset($data['image']);
+        }
+
+        return $this->create($data);
     }
 
     /**
@@ -67,13 +81,33 @@ class SliderRepository extends Repository
 
         $dir = 'slider_images/' . $channelName;
 
-        $image = request()->file('image')->store($dir);
+        $uploaded = false;
+        $image = $first = array_first($data['image'], function ($value, $key) {
+            if($value)
+                return $value;
+            else
+                return false;
+        });
 
-        unset($data['image'], $data['_token']);
+        if($image != false) {
+            $uploaded = $image->store($dir);
 
-        $data['path'] = $image;
+            unset($data['image'], $data['_token']);
+        }
+
+        if($uploaded) {
+            $sliderItem = $this->find($id);
+
+            $deleted = Storage::delete($sliderItem->path);
+
+            $data['path'] = $uploaded;
+        } else {
+            unset($data['image']);
+        }
 
         $this->update($data, $id);
+
+        return true;
     }
 
     /**

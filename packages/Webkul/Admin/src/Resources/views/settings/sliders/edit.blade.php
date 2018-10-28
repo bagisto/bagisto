@@ -43,23 +43,16 @@
                         <span class="control-error" v-if="errors.has('channel_id')">@{{ errors.first('channel_id') }}</span>
                     </div>
 
-                    <div class="control-group" :class="[errors.has('image') ? 'has-error' : '']">
-                        <label for="new_image">{{ __('admin::app.settings.sliders.image') }}</label>
-
-                        <image-upload>
-                            <input type="file" class="control" id="add_image" name="image" value="" v-validate="'image|required'" placeholder="Upload Image" />
-
-                            <span class="control-error" v-if="errors.has('image')">@{{ errors.first('image') }}</span>
-                        </image-upload>
+                    <div class="control-group">
+                        <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false" :images='"{{ url('storage/'.$slider->path) }}"'></image-wrapper>
                     </div>
 
                     <div class="control-group" :class="[errors.has('content') ? 'has-error' : '']">
                         <label for="content">{{ __('admin::app.settings.sliders.content') }}</label>
 
                         <div class="panel-body">
-                                <textarea class="control" id="add_content" name="content" v-validate="'required'" rows="5">{{ $slider->content ? : old('content') }}</textarea>
+                            <textarea class="control" id="add_content" name="content" v-validate="'required'" rows="5">{{ $slider->content ? : old('content') }}</textarea>
                         </div>
-
 
                         <span class="control-error" v-if="errors.has('content')">@{{ errors.first('content') }}</span>
                     </div>
