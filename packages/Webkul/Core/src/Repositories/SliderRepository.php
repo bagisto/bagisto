@@ -48,13 +48,16 @@ class SliderRepository extends Repository
         $dir = 'slider_images/' . $channelName;
 
         $uploaded = false;
+        $image = false;
 
-        $image = $first = array_first($data['image'], function ($value, $key) {
-            if($value)
-                return $value;
-            else
-                return false;
-        });
+        if(isset($data['image'])) {
+            $image = $first = array_first($data['image'], function ($value, $key) {
+                if($value)
+                    return $value;
+                else
+                    return false;
+            });
+        }
 
         if($image != false) {
             $uploaded = $image->store($dir);
@@ -82,12 +85,16 @@ class SliderRepository extends Repository
         $dir = 'slider_images/' . $channelName;
 
         $uploaded = false;
-        $image = $first = array_first($data['image'], function ($value, $key) {
-            if($value)
-                return $value;
-            else
-                return false;
-        });
+        $image = false;
+
+        if(isset($data['image'])) {
+            $image = $first = array_first($data['image'], function ($value, $key) {
+                if($value)
+                    return $value;
+                else
+                    return false;
+            });
+        }
 
         if($image != false) {
             $uploaded = $image->store($dir);

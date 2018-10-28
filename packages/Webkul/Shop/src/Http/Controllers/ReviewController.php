@@ -94,7 +94,7 @@ class ReviewController extends Controller
             'title'   => 'required',
         ]);
 
-        $data=$request->all();
+        $data = request()->all();
 
         $customer_id = auth()->guard('customer')->user()->id;
 

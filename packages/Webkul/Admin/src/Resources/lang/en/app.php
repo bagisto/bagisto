@@ -423,7 +423,13 @@ return [
             'general' => 'General',
             'image' => 'Image',
             'content' => 'Content',
-            'channels' => 'Channel'
+            'channels' => 'Channel',
+            'created-success' => 'Slider Item Created Successfully',
+            'created-fault' => 'Error In Creating Slider Item',
+            'update-success' => 'Slider Item Successfully Updated',
+            'update-fail' => 'Slider Cannot Be Updated',
+            'delete-success' => 'Cannot Delete The Last Slider Item',
+            'delete-fail' => 'Slider Item Successfully Deleted'
         ],
     ],
     'customers' => [

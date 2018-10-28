@@ -5,7 +5,7 @@
         <ul class="slider-images">
             <li v-for="(image, index) in images" :key="index" v-bind:class="{'show': index==currentIndex}">
                 <img class="slider-item" :src="image" />
-                <div class="show-content" v-for="(content, index) in content" :key="index" v-html="content"></div>
+                <div class="show-content" v-bind:class="{'show': index==currentIndex}" :key="index" v-html="content[index]"></div>
             </li>
         </ul>
 
