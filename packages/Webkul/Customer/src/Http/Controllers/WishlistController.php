@@ -11,10 +11,8 @@ use Cart;
 use Auth;
 
 /**
- * Customer controlller for the customer
- * basically for the tasks of customers
- * which will be done after customer
- * authenticastion.
+ * Customer controlller for the customer basically for the tasks of customers which will be done
+ *  after customer authenticastion.
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)

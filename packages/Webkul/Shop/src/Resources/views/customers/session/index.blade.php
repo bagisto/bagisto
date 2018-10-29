@@ -1,25 +1,19 @@
 @extends('shop::layouts.master')
-
 @section('page_title')
     {{ __('shop::app.customer.login-form.page-title') }}
 @endsection
-
 @section('content-wrapper')
 
     <div class="auth-content">
 
         <div class="sign-up-text">
             {{ __('shop::app.customer.login-text.no_account') }} - <a href="{{ route('customer.register.index') }}">{{ __('shop::app.customer.login-text.title') }}</a>
-
         </div>
 
-        <form method="POST" action="{{ route('customer.session.create') }}">
-
+        <form method="POST" action="{{ route('customer.session.create') }}" @submit.prevent="onSubmit">
             {{ csrf_field() }}
-
             <div class="login-form">
-
-                <div class="login-text">{{ __('shop::app.customer.login-text.title') }}</div>
+                <div class="login-text">{{ __('shop::app.customer.login-form.title') }}</div>
 
                 <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
                     <label for="email">{{ __('shop::app.customer.login-form.email') }}</label>
@@ -38,7 +32,6 @@
                 </div>
 
                 <input class="btn btn-primary btn-lg" type="submit" value="{{ __('shop::app.customer.login-form.button_title') }}">
-
             </div>
         </form>
     </div>

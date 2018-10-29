@@ -15,11 +15,13 @@
 
             <ul class="search-container">
                 <li class="search-group">
-                    <input type="search" class="search-field" placeholder="Search for products">
+                    <form role="search" action="{{ route('shop.search.index') }}" method="GET" @submit.prevent="onSubmit" style="display: inherit;">
+                        <input type="search" name="term" class="search-field" placeholder="products, categories" v-validate="'required'">
 
-                    <div class="search-icon-wrapper">
-                        <span class="icon icon-search"></span>
-                    </div>
+                        <div class="search-icon-wrapper">
+                            <button class="icon icon-search" class="background: none;"></button>
+                        </div>
+                    </form>
                 </li>
             </ul>
         </div>

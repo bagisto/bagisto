@@ -72,7 +72,7 @@
 
                         <input type="hidden" id="rating" name="rating" v-validate="'required'">
 
-                        {{-- <div class="control-error" v-if="errors.has('rating')">@{{ errors.first('rating') }}</div> --}}
+                        <div class="control-error" v-if="errors.has('rating')">@{{ errors.first('rating') }}</div>
                     </div>
 
 

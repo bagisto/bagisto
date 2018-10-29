@@ -2,9 +2,10 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Webkul\Shop\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Webkul\Core\Repositories\SliderRepository as Slider;
 
 /**
@@ -24,7 +25,6 @@ class SliderController extends controller
     {
         $this->slider = $slider;
         $this->_config = request('_config');
-
     }
 
     /**
@@ -54,12 +54,20 @@ class SliderController extends controller
      * @return response
      */
     public function store() {
+        $this->validate(request(), [
+            'title' => 'string|required',
+            'channel_id' => 'required',
+            'image'  => 'required',
+        ]);
 
-        $this->slider->create(request()->all());
+        $result = $this->slider->save(request()->all());
 
-        session()->flash('success', 'Slider created successfully.');
+        if($result)
+            session()->flash('success', trans('admin::app.settings.sliders.created-success'));
+        else
+            session()->flash('success', trans('admin::app.settings.sliders.created-fail'));
 
-        return redirect()->back();
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
@@ -79,13 +87,20 @@ class SliderController extends controller
      * @return response
      */
     public function update($id) {
-        if($this->slider->updateItem(request()->all(), $id)) {
-            session()->flash('success', 'Slider Item Successfully Updated');
+        $this->validate(request(), [
+            'title' => 'string|required',
+            'channel_id' => 'required',
+        ]);
+
+        $result = $this->slider->updateItem(request()->all(), $id);
+
+        if($result) {
+            session()->flash('success', trans('admin::app.settings.sliders.update-success'));
         } else {
-            session()->flash('error', 'Slider Cannot Be Updated');
+            session()->flash('error', trans('admin::app.settings.sliders.update-fail'));
         }
 
-        return redirect()->back();
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
@@ -95,11 +110,11 @@ class SliderController extends controller
      */
     public function destroy($id) {
         if($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1) {
-            session()->flash('warning', 'Cannot Delete The Last Slider Item');
+            session()->flash('warning', trans('admin::app.settings.sliders.delete-success'));
         } else {
             $this->slider->destroy($id);
 
-            session()->flash('success', 'Slider Item Successfully Deleted');
+            session()->flash('success', trans('admin::app.settings.sliders.delete-fail'));
         }
 
         return redirect()->back();

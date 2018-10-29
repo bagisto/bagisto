@@ -2,6 +2,8 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Webkul\Shop\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Category\Repositories\CategoryRepository as Category;

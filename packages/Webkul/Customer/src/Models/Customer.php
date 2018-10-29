@@ -50,8 +50,16 @@ class Customer extends Authenticatable
     /**
      * Get the customer address that owns the customer.
      */
-    public function address()
+    public function addresses()
     {
-        return $this->hasOne(CustomerAddress::class);
+        return $this->hasMany(CustomerAddress::class, 'customer_id');
+    }
+
+    /**
+     * Get default customer address that owns the customer.
+     */
+    public function defaultAddress()
+    {
+        return $this->hasOne(CustomerAddress::class, 'customer_id')->where('default_address', 1);
     }
 }

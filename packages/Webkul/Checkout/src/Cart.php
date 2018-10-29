@@ -621,7 +621,7 @@ class Cart {
 
     /**
      * Can Add the product or not will check the quantity for that particular product
-     * before adding it each time.
+     * before creation of the cart.
      *
      * @return boolean
      */
@@ -1149,6 +1149,7 @@ class Cart {
      * @return mixed
      */
     public function moveConfigurableFromWishlistToCart($configurableproductId, $productId) {
+        // dd('moving configurable');
         $product = $this->product->find($configurableproductId);
 
         $canAdd = $this->product->find($productId)->haveSufficientQuantity(1);
@@ -1196,7 +1197,7 @@ class Cart {
             'weight' => $weight = ($product->type == 'configurable' ? $child->weight : $product->weight),
             'total_weight' => $weight,
             'base_total_weight' => $weight,
-            'additional' => json_encode($additional)
+            'additional' => $additional
         ];
 
         return ['parent' => $parentData, 'child' => $childData];

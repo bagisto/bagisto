@@ -31,9 +31,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Opens up the
-     * user's sign up
-     * form.
+     * Opens up the user's sign up form.
      *
      * @return view
      */
@@ -43,9 +41,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Method to store
-     * user's sign up
-     * form data to DB
+     * Method to store user's sign up form data to DB.
      *
      * @return Mixed
      */
@@ -69,7 +65,9 @@ class RegistrationController extends Controller
 
             session()->flash('success', 'Account Created Successfully');
 
-            return redirect()->route($this->_config['redirect']);
+            return redirect()->back();
+
+            // return redirect()->route($this->_config['redirect'])->with('message', 'Account Created Successfully, Try To Log In');
 
         } else {
             session()->flash('error', 'Cannot Create Your Account');

@@ -3,9 +3,9 @@
     <div class="slider-content" v-if="images.length>0">
 
         <ul class="slider-images">
-            <li v-for="(image,index) in images" :key="index" v-bind:class="{'show': index==currentIndex}">
+            <li v-for="(image, index) in images" :key="index" v-bind:class="{'show': index==currentIndex}">
                 <img class="slider-item" :src="image" />
-                <!-- <div class="show-content"></div> -->
+                <div class="show-content" v-bind:class="{'show': index==currentIndex}" :key="index" v-html="content[index]"></div>
             </li>
         </ul>
 
@@ -56,11 +56,12 @@ export default {
         },
 
         setProps() {
-
             var this_this = this;
 
             this.slides.forEach(function(slider) {
                 this_this.images.push(this_this.public_path+'/storage/'+slider.path);
+
+                this_this.content.push(slider.content);
             });
             this.currentIndex = 0;
 
@@ -69,39 +70,22 @@ export default {
             } else {
                 this.images_loaded = true;
             }
-
-
         },
 
         changeIndexLeft: function() {
-
             if (this.currentIndex > 0) {
-
                 this.currentIndex--;
-
-            }
-
-            else if(this.currentIndex == 0) {
-
+            } else if(this.currentIndex == 0) {
                 this.currentIndex = this.images.length-1;
-
             }
-
         },
+
         changeIndexRight: function() {
-
             if(this.currentIndex < this.images.length-1) {
-
                 this.currentIndex++;
-
-            }
-
-            else if(this.currentIndex == this.images.length-1) {
-
+            } else if(this.currentIndex == this.images.length-1) {
                 this.currentIndex = 0;
-
             }
-
         }
     }
 };
