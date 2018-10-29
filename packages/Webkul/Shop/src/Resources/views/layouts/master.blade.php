@@ -55,9 +55,6 @@
             window.flashMessages = [{'type': 'alert-success', 'message': "{{ $success }}" }];
         @elseif($warning = session('warning'))
             window.flashMessages = [{'type': 'alert-warning', 'message': "{{ $warning }}" }];
-        @elseif($warning = session('info'))
-            window.flashMessages = [{'type': 'alert-info', 'message': "{{ $info }}" }
-            ];
         @elseif($error = session('error'))
             window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }
             ];
