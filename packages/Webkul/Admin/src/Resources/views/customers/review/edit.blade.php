@@ -50,10 +50,10 @@
                                 <label for="name" class="required">{{ __('admin::app.customers.reviews.status') }}</label>
                                 <select  class="control" name="status">
                                     <option value="pending" {{ $review->status == "pending" ? 'selected' : ''}}>
-                                        pending
+                                        Pending
                                     </option>
                                     <option value="approved" {{ $review->status == "approved" ? 'selected' : '' }}>
-                                        approved
+                                        Approved
                                     </option>
                                 </select>
                             </div>

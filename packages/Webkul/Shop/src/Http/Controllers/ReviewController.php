@@ -95,9 +95,7 @@ class ReviewController extends Controller
         ]);
 
         $data=$request->all();
-
         $customer_id = auth()->guard('customer')->user()->id;
-
         $data['status'] = 'pending';
         $data['product_id'] = $id;
         $data['customer_id'] = $customer_id;

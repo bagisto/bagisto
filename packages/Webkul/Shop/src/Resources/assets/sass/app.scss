@@ -1785,7 +1785,6 @@ section.cart {
     }
 }
 
-
 .cart-item-list {
     margin-top: 21px;
     padding: 1px;
@@ -2438,6 +2437,7 @@ section.review {
 
                     .star-name {
                         margin-right: 5px;
+                        width: 35px;
                     }
 
                     .rate-number {
@@ -2445,7 +2445,7 @@ section.review {
                     }
 
                     .percentage {
-                        width: 15%;
+                        width: 50px;
                         margin-right: 10px;
 
                         span {
@@ -2456,8 +2456,9 @@ section.review {
 
                     .line-bar {
                         height: 4px;
-                        width: 65%;
+                        width: calc(100% - 100px);
                         margin-right: 5px;
+                        margin-left: 5px;
                         background: #D8D8D8;
 
                         .line-value {
@@ -2472,22 +2473,6 @@ section.review {
 // review page end here
 
 // review responsive css start here
-@media only screen and (max-width: 1150px) {
-    section.review {
-        .review-layouter {
-            .review-form {
-                .ratings-reviews {
-                    .right-side {
-                        .rater .line-bar {
-                            width: 60%;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 @media only screen and (max-width: 770px) {
     section.review {
         .category-breadcrumbs{
@@ -2526,12 +2511,7 @@ section.review {
                     .right-side {
                         width: 100%;
 
-                        .rater .line-bar {
-                            width: 100%;
-                        }
-
                         .rater .percentage {
-                            width: 10%;
                             margin-right: 0px;
                         }
                     }
@@ -2541,37 +2521,6 @@ section.review {
     }
 }
 
-@media only screen and (max-width: 450px) {
-    section.review {
-        .review-layouter {
-            .review-form {
-                .ratings-reviews {
-                    .right-side {
-                        .rater .line-bar {
-                            width: 90%;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 412px) {
-    section.review {
-        .review-layouter {
-            .review-form {
-                .ratings-reviews {
-                    .right-side {
-                        .rater .line-bar {
-                            width: 75%;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 //review responsive css end here
 
 
@@ -2706,6 +2655,10 @@ section.review {
                 display: none;
             }
         }
+
+        .responsive-table, .responsive-empty {
+            display: none;
+        }
     }
 }
 
@@ -2798,11 +2751,10 @@ section.review {
                 margin-top: 2%;
 
                 table tbody tr {
-                    margin-bottom: 20px;
+                    height: 70px;
 
                     td {
                         display: block;
-                        padding-top: 5px;
                     }
                 }
             }
@@ -2810,6 +2762,33 @@ section.review {
 
         .account-items-list , .edit-form {
             margin-top: 20px;
+
+            .table {
+                display: none;
+            }
+
+            .responsive-empty {
+                display: block;
+            }
+
+            .responsive-table {
+                border: 1px solid $border-color;
+                margin-top: 5px;
+                width: 100%;
+                display: block;
+
+                tbody td {
+                    padding: 8px 5px;
+
+                    &:first-child {
+                        width: 25%;
+                    }
+
+                    &:last-child {
+                        padding-left: 10px;
+                    }
+                }
+            }
         }
 
         .account-items-list.table {

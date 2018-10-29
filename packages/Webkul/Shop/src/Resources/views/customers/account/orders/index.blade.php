@@ -64,6 +64,49 @@
                     </table>
                 </div>
 
+                @foreach($orders as $order)
+                    <table class="responsive-table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{ __('shop::app.customer.account.order.index.order_id') }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('customer.orders.view', $order->id) }}">
+                                        #{{ $order->id }}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ __('shop::app.customer.account.order.index.date')  }}
+                                </td>
+                                <td>{{ core()->formatDate($order->created_at, 'd M Y') }}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ __('shop::app.customer.account.order.index.total')  }}
+                                </td>
+                                <td>
+                                    {{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ __('shop::app.customer.account.order.index.status')  }}
+                                </td>
+                                <td>
+                                    <span class="order-status {{ $order->status }}">{{ $order->status_label }}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                @endforeach
+
+                @if (!$orders->count())
+                    <div class="responsive-empty">{{ __('admin::app.common.no-result-found') }}</div>
+                @endif
+
             </div>
 
         </div>

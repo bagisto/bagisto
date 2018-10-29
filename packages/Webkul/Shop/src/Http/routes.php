@@ -181,7 +181,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
                 ])->name('customer.orders.view');
 
                 /* Reviews route */
-                Route::get('reviews', 'Webkul\Customer\Http\Controllers\CustomerController@reviews')->defaults('_config', [
+                Route::get('reviews', 'Webkul\Shop\Http\Controllers\ReviewController@reviews')->defaults('_config', [
                     'view' => 'shop::customers.account.reviews.index'
                 ])->name('customer.reviews.index');
             });
