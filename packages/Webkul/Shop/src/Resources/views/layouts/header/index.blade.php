@@ -15,8 +15,8 @@
 
             <ul class="search-container">
                 <li class="search-group">
-                    <form role="search" action="{{ route('shop.search.index') }}" method="GET" @submit.prevent="onSubmit" style="display: inherit;">
-                        <input type="search" name="term" class="search-field" placeholder="products, categories" v-validate="'required'">
+                    <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
+                        <input type="search" name="term" class="search-field" placeholder="products, categories" required>
 
                         <div class="search-icon-wrapper">
                             <button class="icon icon-search" class="background: none;"></button>
