@@ -49,7 +49,7 @@
                     <div class="control-group" :class="[errors.has('content') ? 'has-error' : '']">
                         <label for="content">{{ __('admin::app.settings.sliders.content') }}</label>
 
-                        <textarea class="control" id="add_content" name="content" rows="5"></textarea>
+                        <textarea id="tiny" class="control" id="add_content" name="content" rows="5"></textarea>
 
                         <span class="control-error" v-if="errors.has('content')">@{{ errors.first('content') }}</span>
                     </div>

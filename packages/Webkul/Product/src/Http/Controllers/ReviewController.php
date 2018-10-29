@@ -76,7 +76,7 @@ class ReviewController extends Controller
         return view($this->_config['view'],compact('review'));
     }
 
-     /**
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
@@ -92,7 +92,7 @@ class ReviewController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
-     /**
+    /**
      * Delete the review of the current product
      *
      * @return response

@@ -12,6 +12,11 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
         'view' => 'shop::products.index'
     ]);
 
+    //Store front search
+    Route::get('/search', 'Webkul\Shop\Http\Controllers\SearchController@index')->defaults('_config', [
+        'view' => 'shop::search.search'
+    ])->name('shop.search.index');
+
     //checkout and cart
     //Cart Items(listing)
     Route::get('checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@index')->defaults('_config', [

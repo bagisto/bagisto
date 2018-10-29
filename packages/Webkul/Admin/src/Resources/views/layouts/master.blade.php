@@ -61,7 +61,7 @@
         <script>
             function loadTinyMCE() {
                 tinymce.init({
-                    selector: 'textarea',
+                    selector: 'textarea#tiny',
                     height: 300,
                     width: 535,
                     plugins: 'image imagetools media wordcount save fullscreen',

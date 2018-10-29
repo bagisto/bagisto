@@ -6,6 +6,8 @@ use Webkul\Shop\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+use Webkul\Core\Repositories\SearchRepository as Search;
+
 /**
  * Search controller
  *
@@ -16,20 +18,29 @@ use Illuminate\Http\Response;
  class SearchController extends controller
 {
     protected $_config;
-    protected $sliders;
-    protected $current_channel;
 
-    public function __construct(Sliders $s)
+    protected $search;
+
+    public function __construct(Search $search)
     {
         $this->_config = request('_config');
 
-        $this->sliders = $s;
+        $this->search = $search;
     }
 
     /**
      * Index to handle the view loaded with the search results
      */
-    public function index($data) {
-        return redirect()->back();
+    public function index() {
+        $results = null;
+
+        $results = $this->search->search(request()->all());
+
+        if($results) {
+            return view($this->_config['view'])->with('results', $results);
+        } else {
+            return view($this->_config['view'])->with('results', null);
+        }
+
     }
 }

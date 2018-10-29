@@ -24,6 +24,11 @@ return [
         'locale' => 'Locale',
     ],
 
+    'search' => [
+        'no-results' => 'No Results Found.',
+        'page-title' => 'Bagisto - Search'
+    ],
+
     'reviews' => [
         'title' => 'Title',
         'add-review-page-title' => 'Add Review',
