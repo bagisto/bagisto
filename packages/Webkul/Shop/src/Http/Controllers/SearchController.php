@@ -6,7 +6,7 @@ use Webkul\Shop\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-use Webkul\Core\Repositories\SearchRepository as Search;
+use Webkul\Product\Repositories\SearchRepository as Search;
 
 /**
  * Search controller
@@ -31,15 +31,16 @@ use Webkul\Core\Repositories\SearchRepository as Search;
     /**
      * Index to handle the view loaded with the search results
      */
-    public function index() {
+    public function index()
+    {
         $results = null;
 
         $results = $this->search->search(request()->all());
 
         if($results) {
-            return view($this->_config['view'])->with('results', $results);
+            return view($this->_config['view'])->with('products', $results);
         } else {
-            return view($this->_config['view'])->with('results', null);
+            return view($this->_config['view'])->with('products', null);
         }
 
     }

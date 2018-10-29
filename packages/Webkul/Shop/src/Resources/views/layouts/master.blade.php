@@ -46,6 +46,11 @@
         </div>
 
         @include('shop::layouts.footer.footer')
+        <div class="footer-bottom">
+            <p>
+                © Copyright 2018 Webkul Software, All rights reserved.
+            </p>
+        </div>
 
     </div>
     <script type="text/javascript">
