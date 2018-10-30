@@ -27,7 +27,9 @@ return [
 
     'search' => [
         'no-results' => 'No Results Found.',
-        'page-title' => 'Bagisto - Search'
+        'page-title' => 'Bagisto - Search',
+        'found-results' => 'Search Results Found',
+        'found-result' => 'Search Result Found'
     ],
 
     'reviews' => [
@@ -380,4 +382,8 @@ return [
             'thanks' => 'Thanks!'
         ]
     ],
+
+    'webkul' => [
+        'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved.'
+    ]
 ];

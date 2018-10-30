@@ -46,7 +46,11 @@
         </div>
 
         @include('shop::layouts.footer.footer')
-
+        <div class="footer-bottom">
+            <p>
+                {{ __('shop::app.webkul.copy-right') }}
+            </p>
+        </div>
     </div>
     <script type="text/javascript">
         window.flashMessages = [];

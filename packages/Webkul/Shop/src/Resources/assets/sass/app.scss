@@ -316,6 +316,14 @@ input {
     display: block;
     width: 100%;
 }
+//no search results
+.search-result-status {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 //main store front layouting
 .main-container-wrapper {
@@ -344,27 +352,6 @@ input {
         grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
         grid-gap: 27px;
         grid-auto-rows: auto;
-    }
-
-    @media only screen and (max-width: 551px) {
-        .product-grid-3 {
-            grid-template-columns: 48.5% 48.5%;
-            grid-column-gap: 20px;
-        }
-    }
-
-    @media only screen and (max-width: 854px) {
-        .product-grid-4 {
-            grid-template-columns: 29.5% 29.5% 29.5%;
-            grid-column-gap: 35px;
-        }
-    }
-
-    @media only screen and (max-width: 653px) {
-        .product-grid-4 {
-            grid-template-columns: 48.5% 48.5%;
-            grid-column-gap: 17px;
-        }
     }
 
     .product-card {
@@ -439,6 +426,33 @@ input {
             &.new {
                 background: #2ED04C;
             }
+        }
+    }
+
+    @media only screen and (max-width: 580px) {
+        .main-container-wrapper {
+            padding: 0px;
+        }
+    }
+    //product components
+    @media only screen and (max-width: 551px) {
+        .product-grid-3 {
+            grid-template-columns: 48.5% 48.5%;
+            grid-column-gap: 20px;
+        }
+    }
+
+    @media only screen and (max-width: 854px) {
+        .product-grid-4 {
+            grid-template-columns: 29.5% 29.5% 29.5%;
+            grid-column-gap: 35px;
+        }
+    }
+
+    @media only screen and (max-width: 653px) {
+        .product-grid-4 {
+            grid-template-columns: 48.5% 48.5%;
+            grid-column-gap: 17px;
         }
     }
 
@@ -561,6 +575,13 @@ input {
     }
 }
 
+@media only screen and (max-width: 530px) {
+    .main-container-wrapper {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
 //slider styles
 section.slider-block {
     display: block;
@@ -600,10 +621,15 @@ section.slider-block {
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
-                    color: white;
+                    color: $font-color;
                     height: 100%;
                     width: 100%;
                     top: 0px;
+
+                    // * {
+                    //     color: blue;
+                    //     font-size: 112px;
+                    // }
                 }
             }
 
@@ -907,6 +933,10 @@ section.slider-block {
                             justify-content: space-between;
                             align-items: center;
                             margin-bottom: 8px;
+
+                            .btn {
+                                margin: 0;
+                            }
                         }
 
                         .dropdown-footer .btn {
@@ -1162,7 +1192,7 @@ section.slider-block {
     }
 }
 
-//footer responsive with out media query.
+//footer
 .footer {
     background-color: $background-color;
     padding-left: 10%;
@@ -1264,6 +1294,18 @@ section.slider-block {
     }
 }
 
+.footer-bottom {
+    margin-top: -16px;
+    width: 100%;
+    height: 120px;
+    font-size: 16px;
+    color: #A5A5A5;
+    letter-spacing: -0.26px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
 //category page
 .main {
@@ -1727,6 +1769,7 @@ section.product-detail {
             margin-right: 0px;
             max-width: none;
             width: auto;
+            height: auto;
 
             .loader {
                 margin-left: 47%;
@@ -2652,7 +2695,7 @@ section.review {
 
         border: 1px solid $border-color;
         flex-direction: column;
-        max-width: 530px;
+        max-width: 500px;
         min-width: 380px;
         padding: 25px;
 
@@ -2786,6 +2829,64 @@ section.review {
     }
 }
 
+//address holder and address card
+.address-holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.address-card-1 {
+    width: 260px;
+    border: 1px solid #E8E8E8;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 25px 1px 22px 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+
+    .control-group {
+        width: 15px;
+        height: 15px;
+        margin-top: 10px;
+    }
+
+    .details {
+        font-weight: lighter;
+        margin-left: 15px;
+
+        span {
+            display: block;
+            margin: 8px;
+        }
+
+        .control-links {
+            width: 90%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+
+            .btn {
+                height: 30px;
+            }
+        }
+
+        .default-address {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+        }
+    }
+}
+
 .edit-form {
     display: flex;
     border: 1px solid $border-color;
@@ -2796,6 +2897,7 @@ section.review {
 
 //customer account page responsive layout
 @media only screen and (max-width: 770px) {
+
     .account-content {
         flex-direction: column;
 
@@ -2909,6 +3011,7 @@ section.review {
             width: 100%;
         }
     }
+
 }
 
 .sale-container {

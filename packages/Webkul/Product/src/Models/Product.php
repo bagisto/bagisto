@@ -57,7 +57,7 @@ class Product extends Model
      */
     public function parent()
     {
-        return $this->belongsTo(self::class);
+        return $this->belongsTo(self::class, 'parent_id');
     }
 
     /**
@@ -133,10 +133,10 @@ class Product extends Model
     {
         if(!$this->status)
             return false;
-        
+
         if($this->haveSufficientQuantity(1))
             return true;
-    
+
         return false;
     }
 
@@ -247,5 +247,5 @@ class Product extends Model
     {
         return new \Webkul\Product\Database\Eloquent\Builder($query);
     }
-    
+
 }

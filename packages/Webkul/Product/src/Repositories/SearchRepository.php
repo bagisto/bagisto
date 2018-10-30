@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Core\Repositories;
+namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container as App;
 
@@ -46,6 +46,6 @@ class SearchRepository extends Repository
 
         $products = $this->product->searchProductByAttribute($term);
 
-        dd($products);
+        return $products;
     }
 }
