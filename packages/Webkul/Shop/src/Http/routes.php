@@ -228,6 +228,11 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
                 Route::get('reviews', 'Webkul\Customer\Http\Controllers\CustomerController@reviews')->defaults('_config', [
                     'view' => 'shop::customers.account.reviews.index'
                 ])->name('customer.reviews.index');
+
+                //Customer review delete
+                Route::get('review/delete/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@destroy')->defaults('_config', [
+                    'redirect' => 'customer.reviews.index'
+                ])->name('customer.review.delete');
             });
         });
     });

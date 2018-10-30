@@ -1091,8 +1091,12 @@ section.slider-block {
 }
 
 @media all and (max-width: 720px) {
-
     .header {
+
+        .currency-switcher {
+            display: none !important;
+        }
+
         .header-bottom {
             height: auto;
             display: none;
@@ -1237,10 +1241,29 @@ section.slider-block {
                         }
                     }
                 }
+
+                .currency {
+                    display: none;
+                }
             }
         }
     }
 }
+
+@media all and (max-width: 720px) {
+    .footer {
+        padding-left: 15px;
+
+        .footer-list-container {
+            padding-left: 0px !important;
+        }
+
+        .currency {
+            display: block !important;
+        }
+    }
+}
+
 
 //category page
 .main {
@@ -1348,7 +1371,6 @@ section.slider-block {
             display: block;
 
             .hero-image {
-                border: 1px solid green;
                 display:block;
                 visibility: visible;
                 width: auto;
@@ -2816,6 +2838,11 @@ section.review {
                 border-top: 1px solid $border-color;
                 height: 46px;
 
+                .account-action {
+                    margin-top: 12px;
+                    margin-left: 15px;
+                }
+
                 .back-icon {
                     display: block;
                 }
@@ -2834,15 +2861,11 @@ section.review {
                 margin-top: 2%;
 
                 table tbody tr {
-<<<<<<< HEAD
                     height: 70px;
 
                     td {
                         display: block;
                     }
-=======
-                    margin-bottom: 20px;
->>>>>>> e2c036ced0d1382b03c6a963bb7965d1d40488e2
                 }
             }
         }
@@ -2854,15 +2877,9 @@ section.review {
                 display: none;
             }
 
-<<<<<<< HEAD
             .responsive-empty {
                 display: block;
             }
-=======
-//Account content inside a table
-.account-table-content {
-    color: $font-color;
->>>>>>> e2c036ced0d1382b03c6a963bb7965d1d40488e2
 
             .responsive-table {
                 border: 1px solid $border-color;
@@ -2884,7 +2901,6 @@ section.review {
             }
         }
 
-<<<<<<< HEAD
         .account-items-list.table {
             display: none;
         }
@@ -2893,72 +2909,6 @@ section.review {
             width: 100%;
         }
     }
-=======
-//address holder and address card
-.address-holder {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-.address-card {
-    width: 260px;
-    border: 1px solid #E8E8E8;
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 25px 1px 22px 15px;
-    margin-right: 15px;
-    margin-bottom: 15px;
-
-    .control-group {
-        width: 15px;
-        height: 15px;
-        margin-top: 10px;
-    }
-
-    .details {
-        font-weight: lighter;
-        margin-left: 15px;
-
-        span {
-            display: block;
-            margin: 8px;
-        }
-
-        .control-links {
-            width: 90%;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-
-            .btn {
-                height: 30px;
-            }
-        }
-
-        .default-address {
-            position: absolute;
-            top: -3px;
-            right: -3px;
-        }
-    }
-}
-
-.edit-form {
-    display: flex;
-    border: 1px solid $border-color;
-    flex-direction: column;
-    min-height: 345px;
-    padding: 25px;
->>>>>>> e2c036ced0d1382b03c6a963bb7965d1d40488e2
 }
 
 .sale-container {
@@ -3085,7 +3035,7 @@ section.review {
                         padding: 8px 5px;
 
                         &:first-child {
-                            width: 25%;
+                            width: 35%;
                         }
 
                         &:last-child {

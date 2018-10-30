@@ -32,8 +32,14 @@
                         @endphp
                         <img class="media" src="{{ $image['small_image_url'] }}" />
 
+                        {{--  {{ dd($item['url_key'])}}  --}}
+
                         <div class="info mt-20">
-                            <div class="product-name">{{$item->name}}</div>
+                            <div class="product-name">
+                                {{--  <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}" title="{{ $item->product->name }}">  --}}
+                                    {{$item->name}}
+                                {{--  </a>  --}}
+                            </div>
                         </div>
                     </div>
 
