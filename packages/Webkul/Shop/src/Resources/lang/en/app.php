@@ -15,7 +15,8 @@ return [
         'profile' => 'Profile',
         'wishlist' => 'Wishlist',
         'cart' => 'Cart',
-        'logout' => 'Logout'
+        'logout' => 'Logout',
+        'search-text' => 'Search products here...'
     ],
 
     'footer' => [
@@ -244,7 +245,10 @@ return [
         'empty' => 'No products available in this category.',
         'add-to-cart' => 'Add To Cart',
         'buy-now' => 'Buy Now',
-        'whoops' => 'Whoops!'
+        'whoops' => 'Whoops!',
+        'quantity' => 'Quantity',
+        'in-stock' => 'In Stock',
+        'out-of-stock' => 'Out Of Stock'
     ],
 
     'wishlist' => [

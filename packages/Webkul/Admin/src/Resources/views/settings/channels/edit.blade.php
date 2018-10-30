@@ -130,6 +130,20 @@
                             </div>
 
                             <div class="control-group">
+                                <label for="home_page_content" class="required">{{ __('admin::app.settings.channels.home_page_content') }}</label>
+                                <textarea class="control" id="home_page_content" name="home_page_content">
+                                    {{ old('home_page_content') ?: $channel->home_page_content }}
+                                </textarea>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="footer_content" class="required">{{ __('admin::app.settings.channels.footer_content') }}</label>
+                                <textarea class="control" id="footer_content" name="footer_content">
+                                    {{ old('footer_content') ?: $channel->footer_content }}
+                                </textarea>
+                            </div>
+
+                            <div class="control-group">
                                 <label>{{ __('admin::app.settings.channels.logo') }}
 
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="logo" :multiple="false" :images='"{{ $channel->logo_url }}"'></image-wrapper>
@@ -149,3 +163,25 @@
         </form>
     </div>
 @stop
+
+@push('scripts')
+    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            tinymce.init({
+                selector: 'textarea#home_page_content,textarea#footer_content',
+                height: 200,
+                width: "100%",
+                plugins: 'image imagetools media wordcount save fullscreen code',
+                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code',
+                image_advtab: true,
+                valid_elements : '*[*]',
+                templates: [
+                    { title: 'Test template 1', content: 'Test 1' },
+                    { title: 'Test template 2', content: 'Test 2' }
+                ],
+            });
+        });
+    </script>
+@endpush

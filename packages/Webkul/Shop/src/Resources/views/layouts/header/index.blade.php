@@ -16,10 +16,12 @@
             <ul class="search-container">
                 <li class="search-group">
                     <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
-                        <input type="search" name="term" class="search-field" placeholder="products, categories" required>
+                        <input type="search" name="term" class="search-field" placeholder="{{ __('shop::app.header.search-text') }}" required>
 
                         <div class="search-icon-wrapper">
-                            <button class="icon icon-search" class="background: none;"></button>
+                            <button class="" class="background: none;">
+                                <i class="icon icon-search"></i>
+                            </button>
                         </div>
                     </form>
                 </li>

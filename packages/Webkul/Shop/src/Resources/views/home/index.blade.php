@@ -4,12 +4,8 @@
     {{ __('shop::app.home.page-title') }}
 @endsection
 
-@section('slider')
-    @include('shop::home.slider')
-@endsection
-
 @section('content-wrapper')
-    @include('shop::home.featured-products')
 
-    @include('shop::home.new-products')
+    {!! DbView::make(core()->getCurrentChannel())->field('home_page_content')->with(['sliderData' => $sliderData])->render() !!}
+
 @endsection

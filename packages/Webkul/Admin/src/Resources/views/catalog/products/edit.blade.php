@@ -140,8 +140,9 @@
 @stop
 
 @push('scripts')
-    <script>
+    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
 
+    <script>
         $(document).ready(function () {
             $('#channel-switcher, #locale-switcher').on('change', function (e) {
                 $('#channel-switcher').val()
@@ -149,6 +150,19 @@
 
                 window.location.href = "{{ route('admin.catalog.products.edit', $product->id)  }}" + query;
             })
+
+            tinymce.init({
+                selector: 'textarea#description, textarea#short_description',
+                height: 200,
+                width: "100%",
+                plugins: 'image imagetools media wordcount save fullscreen code',
+                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code',
+                image_advtab: true,
+                templates: [
+                    { title: 'Test template 1', content: 'Test 1' },
+                    { title: 'Test template 2', content: 'Test 2' }
+                ],
+            });
         });
     </script>
 @endpush

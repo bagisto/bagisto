@@ -33,15 +33,15 @@
 
                     @include ('shop::products.price', ['product' => $product])
 
-                    @include ('shop::products.view.stock')
+                    @include ('shop::products.view.stock', ['product' => $product])
 
                     <div class="description">
-                        {{ $product->short_description }}
+                        {!! $product->short_description !!}
                     </div>
 
                     <div class="quantity control-group" :class="[errors.has('quantity') ? 'has-error' : '']">
 
-                    <label class="reqiured">Quantity</label>
+                    <label class="reqiured">{{ __('shop::app.products.quantity') }}</label>
 
                         <input name="quantity" class="control" value="1" v-validate="'required|numeric|min_value:1'" style="width: 60px;">
 
@@ -64,7 +64,7 @@
 
                         <div slot="body">
                             <div class="full-description">
-                                {{ $product->description }}
+                                {!! $product->description !!}
                             </div>
                         </div>
                     </accordian>

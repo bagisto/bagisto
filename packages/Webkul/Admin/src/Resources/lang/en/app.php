@@ -411,6 +411,8 @@ return [
             'base-currency' => 'Base Currency',
             'design' => 'Design',
             'theme' => 'Theme',
+            'home_page_content' => 'Home Page Content',
+            'footer_content' => 'footer_content',
             'logo' => 'Logo',
             'favicon' => 'Favicon'
         ],
