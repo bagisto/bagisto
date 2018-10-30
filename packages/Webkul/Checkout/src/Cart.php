@@ -1222,17 +1222,14 @@ class Cart {
      * @param instance cartItem $id
      */
     public function moveToWishlist($itemId) {
-        $item = $this->findOneByField($itemId);
-
+        $item = $this->cartItem->findOneByField('id', $itemId);
+        dd($item->cart);
         if(!$item)
             return false;
 
-        if($item->parent_id == 'null' ||$item->parent_id == null) {
-            $variantSku = $item->child->sku;
-            $variantName = $item->child->name;
-        } else {
-
-        }
+        // $wishlist[
+        //     'channel_id' =>
+        // ];
     }
 
     /**
