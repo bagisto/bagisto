@@ -10,7 +10,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
     //Store front header nav-menu fetch
     Route::get('/categories/{slug}', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
         'view' => 'shop::products.index'
-    ]);
+    ])->name('shop.categories.index');
 
     //Store front search
     Route::get('/search', 'Webkul\Shop\Http\Controllers\SearchController@index')->defaults('_config', [

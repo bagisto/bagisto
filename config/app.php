@@ -198,6 +198,7 @@ return [
         //Repository
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Konekt\Concord\ConcordServiceProvider::class,
+        Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider::class,
 
         //Webkul packages
         Webkul\Theme\Providers\ThemeServiceProvider::class,
@@ -268,6 +269,7 @@ return [
         'ProductGrid' => Webkul\Ui\DataGrid\Facades\ProductGrid::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Cart' => Webkul\Checkout\Facades\Cart::class,
-        'Core' => Webkul\Core\Facades\Core::class
+        'Core' => Webkul\Core\Facades\Core::class,
+        'DbView' => Flynsarmy\DbBladeCompiler\Facades\DbView::class
     ],
 ];

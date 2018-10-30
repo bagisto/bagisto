@@ -17,7 +17,7 @@
 
     </head>
 
-    <body onload="loadTinyMCE()">
+    <body>
         <div id="app">
 
             <flash-wrapper ref='flashes'></flash-wrapper>
@@ -54,26 +54,8 @@
 
         <script type="text/javascript" src="{{ asset('vendor/webkul/admin/assets/js/admin.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
+        
         @stack('scripts')
-
-        <script src="{{ asset('js/tinyMCE/tinymce.min.js') }}"></script>
-
-        <script>
-            function loadTinyMCE() {
-                tinymce.init({
-                    selector: 'textarea#tiny',
-                    height: 300,
-                    width: 535,
-                    plugins: 'image imagetools media wordcount save fullscreen',
-                    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-                    image_advtab: true,
-                    templates: [
-                        { title: 'Test template 1', content: 'Test 1' },
-                        { title: 'Test template 2', content: 'Test 2' }
-                    ],
-                });
-            }
-        </script>
 
         <div class="modal-overlay"></div>
     </body>
