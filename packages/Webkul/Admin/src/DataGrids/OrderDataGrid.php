@@ -91,6 +91,12 @@ class OrderDataGrid
                         return core()->currency($value);
                     }
                 ], [
+                    'name' => 'or.created_at',
+                    'alias' => 'created_at',
+                    'type' => 'string',
+                    'label' => 'Order Date',
+                    'sortable' => false,
+                ], [
                     'name' => 'or.status',
                     'alias' => 'orstatus',
                     'type' => 'string',

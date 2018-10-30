@@ -442,28 +442,29 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('/account', 'Webkul\User\Http\Controllers\AccountController@update')->name('admin.account.update');
 
             // Admin Store Front Settings Route
+            //slider index
             Route::get('/slider','Webkul\Shop\Http\Controllers\SliderController@index')->defaults('_config',[
                 'view' => 'admin::settings.sliders.index'
             ])->name('admin.sliders.index');
 
-            // Admin Store Front Settings Route
-
-            //slider create
+            //slider create show
             Route::get('slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
                 'view' => 'admin::settings.sliders.create'
             ])->name('admin.sliders.create');
 
+            //slider create show
             Route::post('slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
-                'redirect' => 'admin::sliders.index'
+                'redirect' => 'admin.sliders.index'
             ])->name('admin.sliders.store');
 
-            //slider edit
+            //slider edit show
             Route::get('slider/edit/{id}','Webkul\Shop\Http\Controllers\SliderController@edit')->defaults('_config',[
                 'view' => 'admin::settings.sliders.edit'
             ])->name('admin.sliders.edit');
 
+            //slider edit update
             Route::post('slider/edit/{id}','Webkul\Shop\Http\Controllers\SliderController@update')->defaults('_config',[
-                'redirect' => 'admin::sliders.index'
+                'redirect' => 'admin.sliders.index'
             ])->name('admin.sliders.update');
 
             //destroy a slider item

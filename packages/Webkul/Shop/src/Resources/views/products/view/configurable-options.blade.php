@@ -110,20 +110,23 @@
                                 this.selectedProductId = attribute.options[attribute.selectedIndex].allowedProducts[0];
                             }
 
-                            var prevLink = $('#wishlist-changer').attr('href');
-                            if(this.selectedProductId != '') {
-                                var splitted = prevLink.split("/");
+                            @auth('customer')
+                                var prevLink = $('#wishlist-changer').attr('href');
 
-                                var lastItem = splitted.pop();
+                                if(this.selectedProductId != '') {
+                                    var splitted = prevLink.split("/");
 
-                                lastItem = this.selectedProductId;
+                                    var lastItem = splitted.pop();
 
-                                var joined = splitted.join('/');
+                                    lastItem = this.selectedProductId;
 
-                                var newWishlistUrl = joined+'/'+lastItem;
+                                    var joined = splitted.join('/');
 
-                                $('#wishlist-changer').attr('href', newWishlistUrl);
-                            }
+                                    var newWishlistUrl = joined+'/'+lastItem;
+
+                                    $('#wishlist-changer').attr('href', newWishlistUrl);
+                                }
+                            @endauth
                         } else {
                             attribute.selectedIndex = 0;
 

@@ -24,6 +24,13 @@ return [
         'locale' => 'Locale',
     ],
 
+    'search' => [
+        'no-results' => 'No Results Found.',
+        'page-title' => 'Bagisto - Search',
+        'found-results' => 'Search Results Found',
+        'found-result' => 'Search Result Found'
+    ],
+
     'reviews' => [
         'title' => 'Title',
         'add-review-page-title' => 'Add Review',
@@ -122,6 +129,9 @@ return [
                     'edit' => 'Edit',
                     'empty' => 'You don\'t have any saved addresses here, please create a new one by clicking the link below.',
                     'create' => 'Create Address',
+                    'delete' => 'Delete',
+                    'make-default' => 'Make Default',
+                    'default' => 'Default'
                 ],
 
                 'create' => [
@@ -140,6 +150,10 @@ return [
                     'page-title' => 'Customer - Edit Address',
                     'title' => 'Edit Address',
                     'submit' => 'Edit Address'
+                ],
+                'delete' => [
+                    'success' => 'Address Successfully Deleted',
+                    'failure' => 'Address Cannot Be Deleted'
                 ]
             ],
 
@@ -366,4 +380,8 @@ return [
             'thanks' => 'Thanks!'
         ]
     ],
+
+    'webkul' => [
+        'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved.'
+    ]
 ];

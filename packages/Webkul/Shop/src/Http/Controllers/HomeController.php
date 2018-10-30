@@ -2,9 +2,9 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Webkul\Shop\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Webkul\Core\Repositories\SliderRepository as Sliders;
 
 /**

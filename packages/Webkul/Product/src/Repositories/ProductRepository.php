@@ -17,6 +17,8 @@ use Webkul\Product\Contracts\Criteria\FilterByAttributesCriteria;
 use Webkul\Product\Contracts\Criteria\FilterByCategoryCriteria;
 use Webkul\Product\Contracts\Criteria\NewProductsCriteria;
 use Webkul\Product\Contracts\Criteria\FeaturedProductsCriteria;
+use Webkul\Product\Contracts\Criteria\SearchByAttributeCriteria;
+use Webkul\Product\Contracts\Criteria\SearchByCategoryCriteria;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
@@ -470,5 +472,32 @@ class ProductRepository extends Repository
         return $this->scopeQuery(function($query) {
                 return $query->distinct()->addSelect('products.*')->orderBy('id', 'desc');
             })->paginate(4, ['products.id']);
+    }
+
+    /**
+     * Search Product by Attribute
+     *
+     * @return Collection
+     */
+    public function searchProductByAttribute($term) {
+        // $findIn = $this->breakTheTerm($term);
+
+        $this->pushCriteria(app(SearchByAttributeCriteria::class));
+        // $this->pushCriteria(app(SearchByCategoryCriteria::class));
+
+        return $this->scopeQuery(function($query) use($term) {
+            return $query->distinct()->addSelect('products.*')->where('pav.text_value', 'like', '%'.$term.'%');
+            // ->where('category_translations.name', 'like', '%'.'clothes'.'%');
+        })->get();
+    }
+
+    /**
+     * break the search term into explode by using space and tell which exploded item is attribute
+     * , category, super attribute or combination of them.
+     */
+    public function breakTheTerm($term) {
+        $explodedTerm = (explode(" ", $term));
+
+        dd($term);
     }
 }

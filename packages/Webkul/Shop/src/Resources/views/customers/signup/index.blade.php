@@ -15,7 +15,6 @@
         {{ csrf_field() }}
 
         <div class="login-form">
-
             <div class="login-text">{{ __('shop::app.customer.signup-form.title') }}</div>
 
             <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
@@ -48,13 +47,21 @@
                 <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
             </div>
 
-            <div class="signup-confirm" :class="[errors.has('agreement') ? 'has-error' : '']">
+            {{-- <div class="signup-confirm" :class="[errors.has('agreement') ? 'has-error' : '']">
                 <span class="checkbox">
                     <input type="checkbox" id="checkbox2" name="agreement" v-validate="'required'">
                     <label class="checkbox-view" for="checkbox2"></label>
                     <span>{{ __('shop::app.customer.signup-form.agree') }}
                         <a href="">{{ __('shop::app.customer.signup-form.terms') }}</a> & <a href="">{{ __('shop::app.customer.signup-form.conditions') }}</a> {{ __('shop::app.customer.signup-form.using') }}.
                     </span>
+                </span>
+                <span class="control-error" v-if="errors.has('agreement')">@{{ errors.first('agreement') }}</span>
+            </div> --}}
+            <div class="control-group" :class="[errors.has('agreement') ? 'has-error' : '']">
+
+                <input type="checkbox" id="checkbox2" name="agreement" v-validate="'required'">
+                <span>{{ __('shop::app.customer.signup-form.agree') }}
+                    <a href="">{{ __('shop::app.customer.signup-form.terms') }}</a> & <a href="">{{ __('shop::app.customer.signup-form.conditions') }}</a> {{ __('shop::app.customer.signup-form.using') }}.
                 </span>
                 <span class="control-error" v-if="errors.has('agreement')">@{{ errors.first('agreement') }}</span>
             </div>

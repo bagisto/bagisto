@@ -46,8 +46,6 @@ class ReviewController extends Controller
      */
     public function __construct(Product $product, ProductReview $productReview)
     {
-        $this->middleware('admin')->only(['update', 'destroy']);
-
         $this->middleware('customer')->only(['create', 'store', 'destroy']);
 
         $this->product = $product;
@@ -55,16 +53,6 @@ class ReviewController extends Controller
         $this->productReview = $productReview;
 
         $this->_config = request('_config');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-    */
-    public function index()
-    {
-        return view($this->_config['view']);
     }
 
     /**
@@ -94,7 +82,7 @@ class ReviewController extends Controller
             'title'   => 'required',
         ]);
 
-        $data=$request->all();
+        $data = request()->all();
 
         $customer_id = auth()->guard('customer')->user()->id;
 
@@ -120,35 +108,6 @@ class ReviewController extends Controller
         $product = $this->product->findBySlugOrFail($slug);
 
         return view($this->_config['view'],compact('product'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $review = $this->productReview->find($id);
-
-        return view($this->_config['view'],compact('review'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $this->productReview->update(request()->all(), $id);
-
-        session()->flash('success', 'Review updated successfully.');
-
-        return redirect()->route($this->_config['redirect']);
     }
 
     /**

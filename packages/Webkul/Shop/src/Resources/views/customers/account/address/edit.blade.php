@@ -14,7 +14,7 @@
                 <span></span>
             </div>
 
-            <form method="post" action="{{ route('customer.address.edit') }}">
+            <form method="post" action="{{ route('customer.address.edit', $address['id']) }}">
 
                 <div class="account-table-content">
                     @csrf
