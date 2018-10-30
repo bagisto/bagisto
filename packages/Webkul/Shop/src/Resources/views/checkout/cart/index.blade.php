@@ -67,9 +67,16 @@
 
                                             <span class="control-error" v-if="errors.has('qty[{{$item->id}}]')">@{{ errors.first('qty') }}</span>
 
-                                            <span class="remove"><a href="{{ route('shop.checkout.cart.remove', $item->id) }}">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
+                                            <span class="remove">
+                                                <a href="{{ route('shop.checkout.cart.remove', $item->id) }}">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
 
-                                            <span class="towishlist">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</span>
+                                            <span class="towishlist">
+                                                @if($item->parent_id != 'null' ||$item->parent_id != null)
+                                                    <a href="{{ route('shop.movetowishlist', $item->id) }}">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                @else
+                                                    <a href="{{ route('shop.movetowishlist', $item->child->id) }}">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                @endif
+                                            </span>
                                         </div>
 
                                         @if (!cart()->isItemHaveQuantity($item))

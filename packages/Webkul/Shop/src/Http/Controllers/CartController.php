@@ -150,4 +150,16 @@ class CartController extends Controller
             return redirect()->back();
         }
     }
+
+    /**
+     * Function to move a already added product to wishlist
+     * will run only on customer authentication.
+     *
+     * @param instance cartItem $id
+     */
+    public function moveToWishlist($id) {
+        $result = Cart::moveToWishlist($id);
+
+        dd($result);
+    }
 }

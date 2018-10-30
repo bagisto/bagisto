@@ -67,6 +67,9 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
     //Shop buynow button action
     Route::get('buynow/{id}', 'Webkul\Shop\Http\Controllers\CartController@test')->name('shop.product.buynow');
 
+    //Shop buynow button action
+    Route::get('move/cart/{id}', 'Webkul\Shop\Http\Controllers\CartController@moveToWishlist')->name('shop.movetowishlist');
+
     //Show Product Details Page(For individually Viewable Product)
     Route::get('/products/{slug}', 'Webkul\Shop\Http\Controllers\ProductController@index')->defaults('_config', [
         'view' => 'shop::products.view'

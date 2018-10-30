@@ -10,6 +10,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Checkout\Models\CartPayment;
+use Webkul\Customer\Repositories\WishlistRepository;
 
 /**
  * Facade for all the methods to be implemented in Cart.
@@ -63,6 +64,13 @@ class Cart {
     protected $taxCategory;
 
     /**
+     * WishlistRepository model
+     *
+     * @var mixed
+     */
+    protected $wishlist;
+
+    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Checkout\Repositories\CartRepository        $cart
@@ -79,7 +87,8 @@ class Cart {
         CartAddressRepository $cartAddress,
         CustomerRepository $customer,
         ProductRepository $product,
-        TaxCategoryRepository $taxCategory
+        TaxCategoryRepository $taxCategory,
+        WishlistRepository $wishlist
     )
     {
         $this->customer = $customer;
@@ -93,6 +102,8 @@ class Cart {
         $this->product = $product;
 
         $this->taxCategory = $taxCategory;
+
+        $this->wishlist = $wishlist;
     }
 
     /**
@@ -700,6 +711,7 @@ class Cart {
 
         $labels = [];
 
+        $attribute = $product->parent->super_attributes;
         foreach($product->parent->super_attributes as $attribute) {
             $option = $attribute->options()->where('id', $product->{$attribute->code})->first();
 
@@ -1178,11 +1190,17 @@ class Cart {
 
         unset($productAddtionalData['html']);
 
-        $additional = [
-            'request' => $childData,
-            'variant_id' => $productId,
-            'attributes' => $productAddtionalData
-        ];
+        // $additional = [
+        //     'request' => $childData,
+        //     'variant_id' => $productId,
+        //     'attributes' => $productAddtionalData
+        // ];
+        $additional['_token'] = null;
+        $additional['product'] = $product->id;
+        $additional['quantity'] = 1;
+        $additional['is_configurable'] = true;
+        $additional['selected_configurable_option'] = $child->id;
+        $additional['super_attributes'] = $productAddtionalData;
 
         $parentData = [
             'sku' => $product->sku,
@@ -1199,8 +1217,28 @@ class Cart {
             'base_total_weight' => $weight,
             'additional' => $additional
         ];
-
+        // dd(['parent' => $parentData, 'child' => $childData]);
         return ['parent' => $parentData, 'child' => $childData];
+    }
+
+    /**
+     * Function to move a already added product to wishlist
+     * will run only on customer authentication.
+     *
+     * @param instance cartItem $id
+     */
+    public function moveToWishlist($itemId) {
+        $item = $this->findOneByField($itemId);
+
+        if(!$item)
+            return false;
+
+        if($item->parent_id == 'null' ||$item->parent_id == null) {
+            $variantSku = $item->child->sku;
+            $variantName = $item->child->name;
+        } else {
+
+        }
     }
 
     /**

@@ -429,6 +429,48 @@ input {
         }
     }
 
+    @media only screen and (max-width: 580px) {
+        .main-container-wrapper {
+            padding: 0px;
+        }
+    }
+    //product components
+    @media only screen and (max-width: 551px) {
+        .product-grid-3 {
+            grid-template-columns: 48.5% 48.5%;
+            grid-column-gap: 20px;
+        }
+    }
+
+    @media only screen and (max-width: 854px) {
+        .product-grid-4 {
+            grid-template-columns: 29.5% 29.5% 29.5%;
+            grid-column-gap: 35px;
+        }
+    }
+
+    @media only screen and (max-width: 653px) {
+        .product-grid-4 {
+            grid-template-columns: 48.5% 48.5%;
+            grid-column-gap: 17px;
+        }
+    }
+
+    @media only screen and (max-width: 425px) {
+        .product-card {
+            font-size: 90%;
+
+            .btn.btn-md {
+                padding: 5px;
+            }
+        }
+
+        .product-grid-4 {
+            grid-template-columns: 48.5% 48.5%;
+            grid-column-gap: 10px;
+        }
+    }
+
     .product-list {
         min-height: 200px;
 
@@ -532,40 +574,11 @@ input {
         }
     }
 }
-//product components
-@media only screen and (max-width: 551px) {
-    .product-grid-3 {
-        grid-template-columns: 48.5% 48.5%;
-        grid-column-gap: 20px;
-    }
-}
 
-@media only screen and (max-width: 854px) {
-    .product-grid-4 {
-        grid-template-columns: 29.5% 29.5% 29.5%;
-        grid-column-gap: 35px;
-    }
-}
-
-@media only screen and (max-width: 653px) {
-    .product-grid-4 {
-        grid-template-columns: 48.5% 48.5%;
-        grid-column-gap: 17px;
-    }
-}
-
-@media only screen and (max-width: 425px) {
-    .product-card {
-        font-size: 90%;
-
-        .btn.btn-md {
-            padding: 5px;
-        }
-    }
-
-    .product-grid-4 {
-        grid-template-columns: 48.5% 48.5%;
-        grid-column-gap: 10px;
+@media only screen and (max-width: 530px) {
+    .main-container-wrapper {
+        padding-left: 0px;
+        padding-right: 0px;
     }
 }
 
@@ -2649,7 +2662,7 @@ section.review {
 
         border: 1px solid $border-color;
         flex-direction: column;
-        max-width: 530px;
+        max-width: 500px;
         min-width: 380px;
         padding: 25px;
 

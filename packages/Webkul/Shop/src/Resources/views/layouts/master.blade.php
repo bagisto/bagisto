@@ -48,10 +48,9 @@
         @include('shop::layouts.footer.footer')
         <div class="footer-bottom">
             <p>
-                © Copyright 2018 Webkul Software, All rights reserved.
+                {{ __('shop::app.webkul.copy-right') }}
             </p>
         </div>
-
     </div>
     <script type="text/javascript">
         window.flashMessages = [];
