@@ -184,10 +184,10 @@ class DashboardController extends Controller
         foreach (core()->getTimeInterval($this->startDate, $this->endDate) as $interval) {
             $statistics['sale_graph']['label'][] = $interval['start']->format('d M');
 
-            $total = number_format($this->order->scopeQuery(function($query) use($interval) {
+            $total = $this->order->scopeQuery(function($query) use($interval) {
                         return $query->where('orders.created_at', '>=', $interval['start'])
                             ->where('orders.created_at', '<=', $interval['end']);
-                    })->sum('base_grand_total'), 2);
+                    })->sum('base_grand_total');
                 
             $statistics['sale_graph']['total'][] = $total;
             $statistics['sale_graph']['formated_total'][] = core()->formatBasePrice($total);
