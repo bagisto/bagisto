@@ -309,6 +309,7 @@ class Cart {
      * @return Booleans
      */
     public function createNewCart($id, $data, $prepared = false, $preparedData = []) {
+        // dd($id, $data, $prepared,$preparedData);
         if($prepared == false) {
             if(isset($data['selected_configurable_option'])) {
                 $canAdd = $this->canAdd($data['selected_configurable_option'], $data['quantity']);
@@ -368,8 +369,6 @@ class Cart {
                 //parent item entry
                 if($prepared == false) {
                     $itemData['parent']['additional'] = json_encode($data);
-                } else {
-                    $itemData['parent']['additional'] = json_encode($preparedData);
                 }
 
                 if($parent = $this->cartItem->create($itemData['parent'])) {
@@ -1140,11 +1139,12 @@ class Cart {
             $result = $this->moveConfigurableFromWishlistToCart($product->parent_id, $product->id);
 
             if(is_array($result)) {
+                $data['_token'] = 'null';
                 $data['quantity'] = 1;
+                $data['product'] = $product->parent_id;
+                $data['selected_configurable_option'] = $product->id;
 
-                $data['selected_configurable_option'] = $product->parent_id;
-
-                $moved = $this->add($data['selected_configurable_option'], $data, true, $result);
+                $moved = $this->add($product->parent_id, $data, true, $result);
 
                 if($moved) {
                     return true;
@@ -1161,7 +1161,7 @@ class Cart {
      * @return mixed
      */
     public function moveConfigurableFromWishlistToCart($configurableproductId, $productId) {
-        // dd('moving configurable');
+        // dd($configurableproductId, $productId);
         $product = $this->product->find($configurableproductId);
 
         $canAdd = $this->product->find($productId)->haveSufficientQuantity(1);
@@ -1177,7 +1177,7 @@ class Cart {
             $child = $this->product->findOneByField('id', $productId);
 
             $childData = [
-                'product_id' => $configurableproductId,
+                'product_id' => $productId,
                 'sku' => $child->sku,
                 'name' => $child->name,
                 'type' => 'simple'
@@ -1190,21 +1190,15 @@ class Cart {
 
         unset($productAddtionalData['html']);
 
-        // $additional = [
-        //     'request' => $childData,
-        //     'variant_id' => $productId,
-        //     'attributes' => $productAddtionalData
-        // ];
-        $additional['_token'] = null;
-        $additional['product'] = $product->id;
-        $additional['quantity'] = 1;
-        $additional['is_configurable'] = true;
-        $additional['selected_configurable_option'] = $child->id;
-        $additional['super_attributes'] = $productAddtionalData;
+        $additional = [
+            'request' => $childData,
+            'variant_id' => $productId,
+            'attributes' => $productAddtionalData['attributes']
+        ];
 
         $parentData = [
             'sku' => $product->sku,
-            'product_id' => $productId,
+            'product_id' => $configurableproductId,
             'quantity' => 1,
             'type' => $product->type,
             'name' => $product->name,

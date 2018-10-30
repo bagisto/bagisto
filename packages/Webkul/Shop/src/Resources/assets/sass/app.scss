@@ -621,10 +621,15 @@ section.slider-block {
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
-                    color: white;
+                    color: $font-color;
                     height: 100%;
                     width: 100%;
                     top: 0px;
+
+                    // * {
+                    //     color: blue;
+                    //     font-size: 112px;
+                    // }
                 }
             }
 
@@ -928,6 +933,10 @@ section.slider-block {
                             justify-content: space-between;
                             align-items: center;
                             margin-bottom: 8px;
+
+                            .btn {
+                                margin: 0;
+                            }
                         }
 
                         .dropdown-footer .btn {
@@ -2873,7 +2882,7 @@ section.review {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     width: 100%;
 }
