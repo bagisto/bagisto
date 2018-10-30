@@ -257,6 +257,11 @@ return [
         'remove' => 'Item Successfully Removed From Wishlist'
     ],
 
+    'buynow' => [
+        'no-options' => 'Please Select Options Before Buying This Product'
+    ],
+
+
     'checkout' => [
         'cart' => [
             'integrity' => [
