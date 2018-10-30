@@ -136,12 +136,12 @@ class AddressController extends Controller
      * @return Mixed | @return response
      */
     public function makeDefault($id) {
-        $default = $this->customer->defaultAddress;
+        if($default = $this->customer->default_address) {
+            $this->address->find($default->id)->update(['default_address' => 0]);
+        }
 
-        $result = $this->address->find($default->id)->update(['default_address' => 0]);
-
-        if($this->address->find($id)->update(['default_address' => 1])) {
-
+        if($address = $this->address->find($id)) {
+            $address->update(['default_address' => 1]);
         } else {
             session()->flash('success', 'Default Cannot Be Address Changed');
         }

@@ -119,8 +119,8 @@
         var summaryHtml = Vue.compile(`<?php echo view('shop::checkout.total.summary', ['cart' => $cart])->render(); ?>`);
         var customerAddress = null;
         @auth('customer')
-            @if(auth('customer')->user()->address)
-                customerAddress = @json(auth('customer')->user()->address);
+            @if(auth('customer')->user()->default_address)
+                customerAddress = @json(auth('customer')->user()->default_address);
             @else
                 customerAddress = {};
             @endif
