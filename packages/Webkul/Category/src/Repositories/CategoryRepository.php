@@ -7,6 +7,7 @@ use Webkul\Category\Models\Category;
 use Illuminate\Container\Container as App;
 use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Category Reposotory

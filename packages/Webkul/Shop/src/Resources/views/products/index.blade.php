@@ -19,16 +19,19 @@
 
             <div class="category-block">
                 <div class="hero-image mb-35">
-                    @if(is_null($category->image))
-                        <img src="https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?cs=srgb&dl=adolescent-casual-cute-428338.jpg&fm=jpg" />
-                    @else
+                    @if(!is_null($category->image))
                         <?php
                             $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 
-                            $src=$protocol. request()->getHttpHost().'/bagisto/public/storage/'.$category->image;
+                            if(request()->getHttpHost() == 'localhost') {
+                                $src=$protocol. request()->getHttpHost().'/bagisto/public/storage/'.$category->image;
+                            }else {
+                                $src=$protocol. request()->getHttpHost().'/storage/'.$category->image;
+                            }
                         ?>
 
                         <img class="logo" src="{{ $src }}" />
+
                     @endif
                 </div>
 

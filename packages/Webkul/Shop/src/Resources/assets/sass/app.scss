@@ -1121,8 +1121,12 @@ section.slider-block {
 }
 
 @media all and (max-width: 720px) {
-
     .header {
+
+        .currency-switcher {
+            display: none !important;
+        }
+
         .header-bottom {
             height: auto;
             display: none;
@@ -1267,7 +1271,25 @@ section.slider-block {
                         }
                     }
                 }
+
+                .currency {
+                    display: none;
+                }
             }
+        }
+    }
+}
+
+@media all and (max-width: 720px) {
+    .footer {
+        padding-left: 15px;
+
+        .footer-list-container {
+            padding-left: 0px !important;
+        }
+
+        .currency {
+            display: block !important;
         }
     }
 }
@@ -1391,7 +1413,6 @@ section.slider-block {
             display: block;
 
             .hero-image {
-                border: 1px solid green;
                 display:block;
                 visibility: visible;
                 width: auto;
@@ -1638,10 +1659,11 @@ section.product-detail {
                 }
 
                 .add-to-buttons {
-                    display: flex;
+                    display: none;
                     flex-direction: row;
                     margin-top: 10px;
                     justify-content: space-between;
+
 
                     .addtocart {
                         border-radius: 0px;
@@ -1747,6 +1769,7 @@ section.product-detail {
             margin-right: 0px;
             max-width: none;
             width: auto;
+            height: auto;
 
             .loader {
                 margin-left: 47%;
@@ -1910,7 +1933,6 @@ section.cart {
     }
 }
 
-
 .cart-item-list {
     margin-top: 21px;
     padding: 1px;
@@ -2071,6 +2093,34 @@ section.cart {
 
             .right-side {
                 top: -80px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 386px){
+    section.cart {
+        .cart-content {
+            .left-side {
+                .misc-controls div {
+                    button {
+                        width: 100%;
+                    }
+
+                    a {
+                        margin-top: 10px;
+                        width: 100%;
+                        text-align: center;
+                    }
+                }
+
+                .box, .remove{
+                    margin-right: 15px !important;
+                }
+            }
+
+            .right-side {
+                top: -130px;
             }
         }
     }
@@ -2314,6 +2364,28 @@ section.cart {
         }
     }
 }
+
+@media only screen and (max-width: 480px) {
+    .checkout-process {
+        .col-main {
+            .step-content {
+                .address, .order-description {
+                    display: flex;
+                    flex-direction: column;
+
+                    .billing-address, .pull-left {
+                        width: 100% !important;
+                    }
+
+                    .shipping-address, .pull-right {
+                        width: 100% !important;
+                        margin-top: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
 // checkout responsive end here
 
 .attached-products-wrapper {
@@ -2513,6 +2585,7 @@ section.review {
 
                     .star-name {
                         margin-right: 5px;
+                        width: 35px;
                     }
 
                     .rate-number {
@@ -2520,7 +2593,7 @@ section.review {
                     }
 
                     .percentage {
-                        width: 15%;
+                        width: 50px;
                         margin-right: 10px;
 
                         span {
@@ -2531,8 +2604,9 @@ section.review {
 
                     .line-bar {
                         height: 4px;
-                        width: 65%;
+                        width: calc(100% - 100px);
                         margin-right: 5px;
+                        margin-left: 5px;
                         background: #D8D8D8;
 
                         .line-value {
@@ -2547,22 +2621,6 @@ section.review {
 // review page end here
 
 // review responsive css start here
-@media only screen and (max-width: 1150px) {
-    section.review {
-        .review-layouter {
-            .review-form {
-                .ratings-reviews {
-                    .right-side {
-                        .rater .line-bar {
-                            width: 60%;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 @media only screen and (max-width: 770px) {
     section.review {
         .category-breadcrumbs{
@@ -2572,10 +2630,12 @@ section.review {
         .review-layouter {
             flex-direction: column;
 
-            .product-info .product-image {
-                max-width: 280px;
-                margin-left: auto;
-                margin-right: auto;
+            .product-info {
+                .product-image, .product-name, .product-price {
+                    max-width: 280px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
             }
 
             .review-form {
@@ -2599,12 +2659,7 @@ section.review {
                     .right-side {
                         width: 100%;
 
-                        .rater .line-bar {
-                            width: 100%;
-                        }
-
                         .rater .percentage {
-                            width: 10%;
                             margin-right: 0px;
                         }
                     }
@@ -2614,37 +2669,6 @@ section.review {
     }
 }
 
-@media only screen and (max-width: 450px) {
-    section.review {
-        .review-layouter {
-            .review-form {
-                .ratings-reviews {
-                    .right-side {
-                        .rater .line-bar {
-                            width: 90%;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 412px) {
-    section.review {
-        .review-layouter {
-            .review-form {
-                .ratings-reviews {
-                    .right-side {
-                        .rater .line-bar {
-                            width: 75%;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 //review responsive css end here
 
 
@@ -2779,82 +2803,9 @@ section.review {
                 display: none;
             }
         }
-    }
-}
 
-//customer account page responsive layout
-@media only screen and (max-width: 770px) {
-    .account-content {
-        flex-direction: column;
-
-        .account-side-menu {
+        .responsive-table, .responsive-empty {
             display: none;
-            width:100%;
-            border: none;
-
-            li {
-                margin-left: 0%;
-                width: 100%;
-
-                a {
-                    color : $font-color;
-                }
-            }
-        }
-
-        .responsive-side-menu {
-            cursor: pointer;
-            padding-top:13px;
-            display: block;
-            height: 46px;
-            border-bottom: 1px solid $border-color;
-            border-top: 1px solid $border-color;
-
-            .right {
-                float: right;
-            }
-        }
-
-        .account-layout {
-            margin-left: 0%;
-            margin-top: 20px;
-
-            .account-head  {
-                display: flex;
-                justify-content: space-between;
-                border-bottom: 1px solid $border-color;
-                border-top: 1px solid $border-color;
-                height: 46px;
-
-                .back-icon {
-                    display: block;
-                }
-
-                span {
-                    margin-top: 12px;
-                    font-size: 18px;
-                }
-
-                .horizontal-rule {
-                    display: none;
-                }
-            }
-
-            .account-table-content {
-                margin-top: 2%;
-
-                table tbody tr {
-                    margin-bottom: 20px;
-                }
-            }
-        }
-
-        .account-items-list , .edit-form {
-            margin-top: 20px;
-        }
-
-        .control-group .control {
-            width: 100%;
         }
     }
 }
@@ -2862,6 +2813,7 @@ section.review {
 //Account content inside a table
 .account-table-content {
     color: $font-color;
+    margin-top: 1.4%;
 
     table {
         tbody {
@@ -2887,7 +2839,7 @@ section.review {
     width: 100%;
 }
 
-.address-card {
+.address-card-1 {
     width: 260px;
     border: 1px solid #E8E8E8;
     display: flex;
@@ -2941,6 +2893,125 @@ section.review {
     flex-direction: column;
     min-height: 345px;
     padding: 25px;
+}
+
+//customer account page responsive layout
+@media only screen and (max-width: 770px) {
+
+    .account-content {
+        flex-direction: column;
+
+        .account-side-menu {
+            display: none;
+            width:100%;
+            border: none;
+
+            li {
+                margin-left: 0%;
+                width: 100%;
+
+                a {
+                    color : $font-color;
+                }
+            }
+        }
+
+        .responsive-side-menu {
+            cursor: pointer;
+            padding-top:13px;
+            display: block !important;
+            height: 46px;
+            border-bottom: 1px solid $border-color;
+            border-top: 1px solid $border-color;
+
+            .right {
+                float: right;
+            }
+        }
+
+        .account-layout {
+            margin-left: 0%;
+            margin-top: 20px;
+
+            .account-head  {
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid $border-color;
+                border-top: 1px solid $border-color;
+                height: 46px;
+
+                .account-action {
+                    margin-top: 12px;
+                    margin-left: 15px;
+                }
+
+                .back-icon {
+                    display: block;
+                }
+
+                span {
+                    margin-top: 12px;
+                    font-size: 18px;
+                }
+
+                .horizontal-rule {
+                    display: none;
+                }
+            }
+
+            .account-table-content {
+                margin-top: 2%;
+
+                table tbody tr {
+                    height: 70px;
+
+                    td {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .account-items-list , .edit-form {
+            margin-top: 20px;
+
+            .table {
+                display: none;
+            }
+
+            .responsive-empty {
+                display: block;
+            }
+
+            .responsive-table {
+                border: 1px solid $border-color;
+                margin-top: 5px;
+                width: 100%;
+                display: block;
+
+                tbody td {
+                    padding: 8px 5px;
+
+                    &:first-child {
+                        width: 25%;
+                    }
+
+                    &:last-child {
+                        padding-left: 10px;
+                    }
+                }
+            }
+        }
+
+        .account-items-list.table {
+            display: none;
+        }
+
+        .control-group .control {
+            width: 100%;
+        }
+    }
+
 }
 
 .sale-container {
@@ -3067,7 +3138,7 @@ section.review {
                         padding: 8px 5px;
 
                         &:first-child {
-                            width: 25%;
+                            width: 35%;
                         }
 
                         &:last-child {
@@ -3104,7 +3175,22 @@ section.review {
 
 // css for loader
 .cp-spinner {
-    margin-left: 46%;
-    margin-top: 35%;
-    margin-bottom: 35%;
+    margin-left: 19%;
+    margin-top: 13%;
+    position: absolute;
+    margin-bottom: 20%;
 }
+
+@media only screen and (max-width: 720px) {
+    .cp-spinner {
+        margin-left: 42.5%;
+        margin-top: 30%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .cp-spinner {
+        margin-top: 50%;
+    }
+}
+

@@ -87,11 +87,9 @@
             var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
 
             if(galleryTemplate){
-                if (state == 'interactive') {
-                    galleryTemplate.style.display="none";
-                } else  {
+                if (state != 'interactive') {
                     document.getElementById('loader').style.display="none";
-                    // addTOButton.style.display="flex";
+                    addTOButton.style.display="flex";
                 }
             }
         }

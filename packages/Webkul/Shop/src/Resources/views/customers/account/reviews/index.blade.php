@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="operations">
-
+                                <a class="mb-50" href="{{ route('customer.review.delete', $review->id) }}"><span class="icon trash-icon"></span></a>
                             </div>
                         </div>
                         <div class="horizontal-rule mb-10 mt-10"></div>

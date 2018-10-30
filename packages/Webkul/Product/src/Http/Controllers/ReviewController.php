@@ -95,12 +95,14 @@ class ReviewController extends Controller
     /**
      * Delete the review of the current product
      *
-     * @return response
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $this->productReview->delete($id);
 
-        session()->flash('success', 'Product Review Successfully Deleted');
+        session()->flash('success', 'Review Successfully Deleted');
 
         return redirect()->back();
     }

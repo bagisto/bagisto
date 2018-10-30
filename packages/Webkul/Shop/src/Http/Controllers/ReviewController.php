@@ -119,7 +119,7 @@ class ReviewController extends Controller
     {
         $this->productReview->delete($id);
 
-        success()->flash('success', 'Product Review Successfully Deleted');
+        session()->flash('success', 'Product Review Successfully Deleted');
 
         return redirect()->back();
     }

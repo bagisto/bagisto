@@ -1513,7 +1513,10 @@ h2 {
   display: inline-block;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+<<<<<<< HEAD
+=======
   position: relative;
+>>>>>>> 8d741a05ccba81e54055601f614b1be55f5f7ad7
 }
 
 .cp-round:before {

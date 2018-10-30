@@ -22,6 +22,7 @@ return [
         'subscribe-newsletter' => 'Subscribe Newsletter',
         'subscribe' => 'Subscribe',
         'locale' => 'Locale',
+        'currency' => 'Currency',
     ],
 
     'search' => [
@@ -96,6 +97,7 @@ return [
 
         'account' => [
             'dashboard' => 'Customer - Edit Profile',
+            'menu' => 'Menu',
 
             'profile' => [
                 'index' => [

@@ -34,7 +34,7 @@
             @else
                 <div class="address-holder">
                     @foreach($addresses as $address)
-                        <div class="address-card">
+                        <div class="address-card-1">
                             {{-- <div class="control-group">
                                 <label class="radio-container">
                                     <input class="control" type="radio" name="radio">
