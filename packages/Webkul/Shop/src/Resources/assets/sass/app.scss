@@ -1143,13 +1143,13 @@ section.slider-block {
                 float: none;
             }
 
-            // .nav li ul  {
-            //     padding-left: 20px;
-            // }
-
             .nav  li  > .icon{
                 float: right;
                 display: block;
+            }
+
+            .icon.icon-arrow-down {
+                margin-right: 5px;
             }
 
             .nav li .left{
@@ -1769,7 +1769,7 @@ section.product-detail {
             margin-right: 0px;
             max-width: none;
             width: auto;
-            height: auto;
+            // height: auto;
 
             .loader {
                 margin-left: 47%;
@@ -2051,18 +2051,6 @@ section.cart {
                 width: 100%;
                 float: none;
 
-                .cart-item-list {
-                    .item {
-                        .item-image {
-                            height: 90px;
-                            width: 90px;
-                        }
-                        .item-details .misc {
-                            margin-left: -105px;
-                        }
-                    }
-                }
-
                 .misc-controls {
                     position: relative;
                     top: 200px;
@@ -2082,12 +2070,26 @@ section.cart {
 @media only screen and (max-width: 560px){
     section.cart {
         .cart-content {
-            .left-side .misc-controls {
-                display: block;
-                top: 180px;
+            .left-side {
+                .cart-item-list {
+                    .item {
+                        .item-image {
+                            height: 90px;
+                            width: 90px;
+                        }
+                        .item-details .misc {
+                            margin-left: -105px;
+                        }
+                    }
+                }
 
-                div {
-                    margin-top: 10px;
+                .misc-controls {
+                    display: block;
+                    top: 180px;
+
+                    div {
+                        margin-top: 10px;
+                    }
                 }
             }
 
@@ -2897,7 +2899,6 @@ section.review {
 
 //customer account page responsive layout
 @media only screen and (max-width: 770px) {
-
     .account-content {
         flex-direction: column;
 
@@ -2969,6 +2970,10 @@ section.review {
                         display: block;
                     }
                 }
+
+                .address-holder {
+                    justify-content: center;
+                }
             }
         }
 
@@ -3011,7 +3016,6 @@ section.review {
             width: 100%;
         }
     }
-
 }
 
 .sale-container {

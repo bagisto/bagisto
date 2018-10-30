@@ -172,11 +172,13 @@
     </div>
 
     <div class="search-responsive mt-10">
-        <div class="search-content">
-            <i class="icon icon-search mt-10"></i>
-            <input  class="search mt-5">
-            <i class="icon icon-menu-back right mt-10"></i>
-        </div>
+        <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
+            <div class="search-content">
+                <i class="icon icon-search mt-10"></i>
+                <input type="search" name="term" class="search mt-5">
+                <i class="icon icon-menu-back right mt-10"></i>
+            </div>
+        </form>
 
         {{--  <div class="search-content">
             <i class="icon icon-search mt-10"></i>
@@ -188,7 +190,7 @@
 
 @push('scripts')
     <script>
-        window.onload = function() {
+        $(document).ready(function() {
             var hamMenu = document.getElementById("hammenu");
             var search = document.getElementById("search");
             var searchResponsive = document.getElementsByClassName('search-responsive')[0];
@@ -222,6 +224,6 @@
                     navResponsive.style.display = 'none';
                 }
             }
-        }
+        });
     </script>
 @endpush
