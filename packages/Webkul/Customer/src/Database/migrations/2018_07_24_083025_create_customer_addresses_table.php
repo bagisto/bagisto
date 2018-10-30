@@ -24,6 +24,8 @@ class CreateCustomerAddressesTable extends Migration
             $table->string('city');
             $table->integer('postcode');
             $table->string('phone');
+            $table->boolean('default_address')->default(0);
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }
