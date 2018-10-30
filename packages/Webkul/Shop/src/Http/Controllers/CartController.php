@@ -54,7 +54,7 @@ class CartController extends Controller
         ProductView $productView
     ) {
 
-        // $this->middleware('customer')->except(['add', 'remove', 'test']);
+        $this->middleware('customer')->only(['moveToWishlist']);
 
         $this->customer = $customer;
 
@@ -138,16 +138,20 @@ class CartController extends Controller
      *
      * @return response
      */
-    public function addconfigurable($slug) {
+    public function addConfigurable($slug) {
         session()->flash('warning', trans('shop::app.checkout.cart.add-config-warning'));
         return redirect()->route('shop.products.index', $slug);
     }
 
-    public function test($id) {
+    public function buyNow($id) {
         $result = Cart::proceedForBuyNow($id);
+
+        Cart::collectTotals();
 
         if(!$result) {
             return redirect()->back();
+        } else {
+            return redirect()->route('shop.checkout.onepage.index');
         }
     }
 
@@ -160,6 +164,18 @@ class CartController extends Controller
     public function moveToWishlist($id) {
         $result = Cart::moveToWishlist($id);
 
-        dd($result);
+        if($result) {
+            Cart::collectTotals();
+
+            session()->flash('success', 'Item Successfully Moved To Wishlist');
+
+            return redirect()->back();
+        } else {
+            session()->flash('warning', 'Cannot move item to wishlist');
+
+            return redirect()->back();
+        }
+
+
     }
 }

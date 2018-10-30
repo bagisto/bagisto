@@ -10,7 +10,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
     //Store front header nav-menu fetch
     Route::get('/categories/{slug}', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
         'view' => 'shop::products.index'
-    ]);
+    ])->name('shop.categories.index');
 
     //Store front search
     Route::get('/search', 'Webkul\Shop\Http\Controllers\SearchController@index')->defaults('_config', [
@@ -27,7 +27,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
     Route::post('checkout/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->name('cart.add');
 
     //Cart Items Add Configurable for more
-    Route::get('checkout/cart/addconfigurable/{slug}', 'Webkul\Shop\Http\Controllers\CartController@addconfigurable')->name('cart.add.configurable');
+    Route::get('checkout/cart/addconfigurable/{slug}', 'Webkul\Shop\Http\Controllers\CartController@addConfigurable')->name('cart.add.configurable');
 
     //Cart Items Remove
     Route::get('checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->name('cart.remove');
@@ -65,10 +65,10 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
     ])->name('shop.checkout.success');
 
     //Shop buynow button action
-    Route::get('buynow/{id}', 'Webkul\Shop\Http\Controllers\CartController@test')->name('shop.product.buynow');
+    Route::get('buynow/{id}', 'Webkul\Shop\Http\Controllers\CartController@buyNow')->name('shop.product.buynow');
 
     //Shop buynow button action
-    Route::get('move/cart/{id}', 'Webkul\Shop\Http\Controllers\CartController@moveToWishlist')->name('shop.movetowishlist');
+    Route::get('move/wishlist/{id}', 'Webkul\Shop\Http\Controllers\CartController@moveToWishlist')->name('shop.movetowishlist');
 
     //Show Product Details Page(For individually Viewable Product)
     Route::get('/products/{slug}', 'Webkul\Shop\Http\Controllers\ProductController@index')->defaults('_config', [

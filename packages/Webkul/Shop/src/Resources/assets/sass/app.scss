@@ -747,17 +747,10 @@ section.slider-block {
                         border-top-right-radius: 3px;
                         border-bottom-right-radius: 3px;
 
-                        .search-icon, .icon-search {
-                            margin-top: 4px;
-                            margin-left: 4px;
-                            height: 24px;
-                            width: 24px;
-                            cursor: pointer;
-                            border: none;
-                            padding: 0;
-                            font: inherit;
-                            cursor: pointer;
-                            outline: inherit;
+                        button {
+                            background: #fff;
+                            border: 0;
+                            padding: 3px 5px;
                         }
                     }
                 }
@@ -1197,6 +1190,8 @@ section.slider-block {
     background-color: $background-color;
     padding-left: 10%;
     padding-right: 10%;
+    width: 100%;
+    display: inline-block;
 
     .footer-content {
         .footer-list-container {
@@ -1228,17 +1223,12 @@ section.slider-block {
                         list-style-type: none;
                         text-transform: uppercase;
 
-                        span.icon-wrapper {
+                        span.icon {
                             display: inline-block;
                             vertical-align: middle;
                             margin-right: 5px;
                             height: 24px;
                             width: 24px;
-
-                            span.icon {
-                                height: 24px;
-                                width: 24px;
-                            }
                         }
                     }
                 }
@@ -1721,12 +1711,30 @@ section.product-detail {
 
                 .stock-status {
                     margin-bottom: 15px;
+                    font-weight: 600;
+                    color: #FC6868;
+                    
+                    &.active {
+                        color: #4CAF50;
+                    }
                 }
 
                 .description {
                     margin-bottom: 15px;
                     padding-bottom: 15px;
-                    border-bottom: solid 1px rgba(162, 162, 162, 0.2)
+                    border-bottom: solid 1px rgba(162, 162, 162, 0.2);
+
+                    ul {
+                        padding-left: 40px;
+                        list-style: disc;
+                    }
+                }
+
+                .full-description {
+                    ul {
+                        padding-left: 40px;
+                        list-style: disc;
+                    }
                 }
 
                 .full-specifications {

@@ -62,7 +62,7 @@
 
                                     <div class="item-name">{{ $item->name }}</div>
 
-                                    <div class="item-price">{{ $item->total }}</div>
+                                    <div class="item-price">{{ core()->currency($item->total) }}</div>
 
                                     <div class="item-qty">Quantity - {{ $item->quantity }}</div>
                                 </div>

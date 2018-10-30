@@ -181,6 +181,7 @@ class Cart {
      * @return void
      */
     public function add($id, $data, $prepared = false, $preparedData = []) {
+        // dd($id, $data, $prepared, $preparedData);
         if($prepared == false) {
             $itemData = $this->prepareItemData($id, $data);
         } else {
@@ -192,15 +193,19 @@ class Cart {
         }
 
         if($cart = $this->getCart()) {
-            $product = $this->product->find($id);
+            if($prepared == true) {
+                $product = $this->product->find($preparedData['parent']['product_id']);
+            } else {
+                $product = $this->product->find($id);
+            }
 
             $cartItems = $cart->items;
 
             //check the isset conditions as collection empty object will mislead the condition and error handling case.
             if(isset($cartItems) && $cartItems->count()) {
+                //for previously added items
                 foreach($cartItems as $cartItem) {
                     if($product->type == "simple") {
-
                         if($cartItem->product_id == $id) {
                             $prevQty = $cartItem->quantity;
                             $newQty = $data['quantity'];
@@ -224,13 +229,8 @@ class Cart {
                             return true;
                         }
                     } else if($product->type == "configurable") {
-                        if($cartItem->type == "configurable") {
+                        if ($cartItem->type == "configurable") {
                             $temp = $this->cartItem->findOneByField('parent_id', $cartItem->id);
-
-                            if($prepared == true) {
-                                $data['selected_configurable_option'] = $preparedData['parent']['product_id'];
-                            }
-
 
                             if($temp->product_id == $data['selected_configurable_option']) {
                                 $child = $temp->child;
@@ -263,13 +263,29 @@ class Cart {
                     }
                 }
 
+                //for new items
                 if($product->type == "configurable") {
+                    $canAdd = $this->canAdd($itemData['child']['product_id'], 1);
+
+                    if($canAdd == false) {
+                        session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
+
+                        return false;
+                    }
+
                     $parent = $cart->items()->create($itemData['parent']);
 
                     $itemData['child']['parent_id'] = $parent->id;
 
                     $cart->items()->create($itemData['child']);
-                } else if($product->type != "configurable"){
+                } else if($product->type != "configurable") {
+                    $canAdd = $this->canAdd($itemData['parent']['product_id'], 1);
+
+                    if($canAdd == false) {
+                        session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
+
+                        return false;
+                    }
                     $parent = $cart->items()->create($itemData['parent']);
                 }
 
@@ -277,6 +293,7 @@ class Cart {
 
                 return $cart;
             } else {
+                //rare case of accidents
                 if(isset($cart)) {
                     $this->cart->delete($cart->id);
                 } else {
@@ -290,7 +307,6 @@ class Cart {
                 }
             }
         } else {
-            // return $this->createNewCart($id, $data);
             if($prepared == false) {
                 return $this->createNewCart($id, $data);
             }
@@ -1146,7 +1162,7 @@ class Cart {
 
                 $moved = $this->add($product->parent_id, $data, true, $result);
 
-                if($moved) {
+                if(isset($moved)) {
                     return true;
                 } else {
                     return false;
@@ -1222,14 +1238,43 @@ class Cart {
      * @param instance cartItem $id
      */
     public function moveToWishlist($itemId) {
-        $item = $this->cartItem->findOneByField('id', $itemId);
-        dd($item->cart);
-        if(!$item)
-            return false;
+        $cart = $this->getCart();
+        $items = $cart->items;
+        $wishlist = [];
+        $wishlist = [
+            'channel_id' => $cart->channel_id,
+            'customer_id' => auth()->guard('customer')->user()->id,
+        ];
 
-        // $wishlist[
-        //     'channel_id' =>
-        // ];
+        foreach($items as $item) {
+            if($item->id == $itemId) {
+                if(is_null($item['parent_id']) && $item['type'] == 'simple') {
+                    $wishlist['product_id'] = $item->product_id;
+                } else {
+                    $wishlist['product_id'] = $item->child->product_id;
+                    $wishtlist['options'] = $item->addtional;
+                }
+
+                $shouldBe = $this->wishlist->findWhere(['customer_id' => auth()->guard('customer')->user()->id, 'product_id' => $wishlist['product_id']]);
+
+                if($shouldBe->isEmpty()) {
+                    $wishlist = $this->wishlist->create($wishlist);
+                }
+
+                $result = $this->cartItem->delete($itemId);
+
+                if($result) {
+                    if($cart->items()->count() == 0)
+                        $this->cart->delete($cart->id);
+
+                    session()->flash('success', 'Item Move To Wishlist Successfully');
+
+                    return $result;
+                } else {
+                    return $result;
+                }
+            }
+        }
     }
 
     /**
@@ -1241,11 +1286,13 @@ class Cart {
         $product = $this->product->findOneByField('id', $id);
 
         if($product->type == 'configurable') {
-            session()->flash('warning', 'Please Select Options Before Buying This Product');
+            session()->flash('warning', trans('shop::app.buynow.no-options'));
 
             return false;
         } else {
-            $this->moveToCart($id);
+            $result = $this->moveToCart($id);
+
+            return $result;
         }
     }
 }
