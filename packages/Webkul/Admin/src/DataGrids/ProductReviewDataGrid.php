@@ -28,10 +28,10 @@ class ProductReviewDataGrid
 
             return DataGrid::make([
             'name' => 'Review',
-            'table' => 'product_reviews',
-            'select' => 'id',
+            'table' => 'product_reviews as pr',
+            'select' => 'pr.id',
             'perpage' => 10,
-            'aliased' => false, //use this with false as default and true in case of joins
+            'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
                 [
@@ -57,6 +57,13 @@ class ProductReviewDataGrid
             ],
 
             'join' => [
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'products_grid as pt',
+                    'primaryKey' => 'pr.product_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'pt.product_id',
+                ]
             ],
 
             //use aliasing on secodary columns if join is performed
@@ -64,25 +71,33 @@ class ProductReviewDataGrid
             'columns' => [
 
                 [
-                    'name' => 'id',
+                    'name' => 'pr.id',
                     'alias' => 'reviewId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ], [
-                    'name' => 'title',
+                    'name' => 'pr.title',
                     'alias' => 'titleName',
                     'type' => 'string',
                     'label' => 'Title',
                     'sortable' => true,
                 ], [
-                    'name' => 'comment',
+                    'name' => 'pr.comment',
                     'alias' => 'productComment',
                     'type' => 'string',
                     'label' => 'Comment',
                     'sortable' => true,
-                ], [
-                    'name' => 'status',
+                ],
+                [
+                    'name' => 'pt.name',
+                    'alias' => 'productName',
+                    'type' => 'string',
+                    'label' => 'Product Name',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'pr.status',
                     'alias' => 'reviewStatus',
                     'type' => 'number',
                     'label' => 'Status',
@@ -99,27 +114,27 @@ class ProductReviewDataGrid
             //don't use aliasing in case of filters
             'filterable' => [
                 [
-                    'column' => 'id',
+                    'column' => 'pr.id',
                     'alias' => 'reviewId',
                     'type' => 'number',
                     'label' => 'ID',
                 ], [
-                    'column' => 'title',
+                    'column' => 'pr.title',
                     'alias' => 'titleName',
                     'type' => 'string',
                     'label' => 'Title',
                 ], [
-                    'column' => 'rating',
-                    'alias' => 'productRating',
-                    'type' => 'number',
-                    'label' => 'Rating',
-                ], [
-                    'column' => 'comment',
+                    'column' => 'pr.comment',
                     'alias' => 'productComment',
                     'type' => 'string',
                     'label' => 'Comment',
                 ], [
-                    'column' => 'status',
+                    'column' => 'pt.name',
+                    'alias' => 'productName',
+                    'type' => 'string',
+                    'label' => 'Product Name',
+                ],[
+                    'column' => 'pr.status',
                     'alias' => 'reviewStatus',
                     'type' => 'string',
                     'label' => 'Status',
