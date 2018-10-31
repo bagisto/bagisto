@@ -2,20 +2,7 @@
 
     @inject ('configurableOptionHelper', 'Webkul\Product\Helpers\ConfigurableOption')
 
-    <product-options>
-        <!--<div class="attribute control-group has-error">
-            <label class="reqiured">Color</label>
-            <select name="super_attribute[104]" id="attribute_104" class="control" data-vv-id="1" aria-required="true" aria-invalid="true">
-                <option value="">Choose an option</option>
-            </select>
-        </div>
-
-        <div class="attribute control-group">
-            <label class="reqiured">Size</label>
-            <select name="super_attribute[105]" disabled="disabled" id="attribute_105" class="control" data-vv-id="2" aria-required="true" aria-invalid="false">
-            </select>
-        </div>-->
-    </product-options>
+    <product-options></product-options>
 
     @push('scripts')
 
@@ -41,7 +28,7 @@
             </div>
         </script>
 
-        {{--  <?php $config = $configurableOptionHelper->getConfigurationConfig($product) ?>  --}}
+        <?php $config = $configurableOptionHelper->getConfigurationConfig($product) ?>
 
         <script>
 
@@ -112,7 +99,7 @@
 
                             //wishlist anchor href changer with options
                             @auth('customer')
-                                var wishlistLink = $('#wishlist-changer').attr('href');
+                                var wishlistLink = $('#wishlist-changer').attr('data-href');
 
                                 if(this.selectedProductId != '') {
                                     var splitted = wishlistLink.split("/");
@@ -123,14 +110,14 @@
 
                                     var joined = splitted.join('/');
 
-                                    var newWishlistUrl = joined+'/'+lastItem;
+                                    var newWishlistUrl = joined + '/' + lastItem;
 
-                                    $('#wishlist-changer').attr('href', newWishlistUrl);
+                                    $('#wishlist-changer').attr('data-href', newWishlistUrl);
                                 }
                             @endauth
 
                             //buy now anchor href changer with options
-                            var buyNowLink = $('#buynow-changer').attr('href');
+                            var buyNowLink = $('.btn.buynow').attr('data-href');
 
                             if(this.selectedProductId != '') {
                                 var splitted = buyNowLink.split("/");
@@ -141,9 +128,9 @@
 
                                 var joined = splitted.join('/');
 
-                                var newBuyNowUrl = joined+'/'+lastItem;
+                                var newBuyNowUrl = joined + '/' + lastItem;
 
-                                $('#buynow-changer').attr('href', newBuyNowUrl);
+                                $('.btn.buynow').attr('data-href', newBuyNowUrl);
                             }
                         } else {
                             attribute.selectedIndex = 0;

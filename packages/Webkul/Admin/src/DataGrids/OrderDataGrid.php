@@ -42,9 +42,9 @@ class OrderDataGrid
 
             'actions' => [
                 [
-                    'type' => 'Edit',
+                    'type' => 'View',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really wanis?',
+                    'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon pencil-lg-icon',
                 ],
                 [
@@ -106,9 +106,9 @@ class OrderDataGrid
                         if($value == 'completed')
                             return '<span class="badge badge-md badge-success">Completed</span>';
                         else if($value == "cancelled")
-                            return '<span class="badge badge-md badge-danger">Completed</span>';
+                            return '<span class="badge badge-md badge-danger">Cancelled</span>';
                         else if($value == "closed")
-                            return '<span class="badge badge-md badge-info">Completed</span>';
+                            return '<span class="badge badge-md badge-info">Closed</span>';
                         else if($value == "pending")
                             return '<span class="badge badge-md badge-warning">Pending</span>';
                     },
@@ -163,6 +163,5 @@ class OrderDataGrid
     public function render()
     {
         return $this->createOrderDataGrid()->render();
-
     }
 }
