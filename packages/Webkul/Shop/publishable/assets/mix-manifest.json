@@ -1,4 +1,16 @@
 {
+<<<<<<< HEAD
     "/js/shop.js": "/js/shop.js",
     "/css/shop.css": "/css/shop.css"
 }
+=======
+<<<<<<< HEAD
+    "/js/shop.js": "/js/shop.js",
+    "/css/shop.css": "/css/shop.css"
+}
+=======
+    "/js/shop.js": "/js/shop.js?id=55f8798e657b22f380c9",
+    "/css/shop.css": "/css/shop.css?id=9aad6e8b5717a4ac508c"
+}
+>>>>>>> b92c299cfd943822554521d62e1e7946f2ff8031
+>>>>>>> dcf8dc17752b718972e34e478eac2fb8c5845450
