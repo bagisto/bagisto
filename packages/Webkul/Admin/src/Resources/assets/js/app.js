@@ -28,12 +28,24 @@ $(document).ready(function () {
         },
 
         methods: {
-            onSubmit(e) {
+            onSubmit: function (e) {
+                this.toggleButtonDisable(true);
+
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         e.target.submit();
+                    } else {
+                        this.toggleButtonDisable(false);
                     }
                 });
+            },
+
+            toggleButtonDisable (value) {
+                var buttons = document.getElementsByTagName("button");
+
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].disabled = value;
+                }
             },
 
             addServerErrors() {

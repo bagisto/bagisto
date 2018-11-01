@@ -73,21 +73,19 @@ class TaxRateController extends Controller
      * @return mixed
      */
     public function create() {
-        // dd(request()->all());
-
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier',
             'is_zip' => 'sometimes',
             'zip_code' => 'sometimes|required_without:is_zip',
-            'zip_from' => 'nullable|numeric|required_with:is_zip',
-            'zip_to' => 'nullable|numeric|required_with:is_zip,zip_from',
+            'zip_from' => 'nullable|required_with:is_zip',
+            'zip_to' => 'nullable|required_with:is_zip,zip_from',
             'state' => 'required|string',
             'country' => 'required|string',
             'tax_rate' => 'required|numeric'
         ]);
 
         $data = request()->all();
-        // dd($data);
+        
         if(isset($data['is_zip'])) {
             $data['is_zip'] = 1;
             unset($data['zip_code']);
@@ -115,13 +113,11 @@ class TaxRateController extends Controller
      *
      * @return mixed
      */
+    public function edit($id)
+    {
+        $taxRate = $this->taxRate->find($id);
 
-    public function edit($id) {
-
-        $data = collect($this->taxRate->findOneByField('id', $id));
-
-        return view($this->_config['view'])->with('data', $data);
-
+        return view($this->_config['view'])->with('taxRate', $taxRate);
     }
 
     /**
@@ -130,13 +126,13 @@ class TaxRateController extends Controller
      *
      * @return mixed
      */
-    public function update($id) {
-
+    public function update($id)
+    {
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier,'.$id,
             'is_zip' => 'sometimes',
-            'zip_from' => 'nullable|numeric|required_with:is_zip',
-            'zip_to' => 'nullable|numeric|required_with:is_zip,zip_from',
+            'zip_from' => 'nullable|required_with:is_zip',
+            'zip_to' => 'nullable|required_with:is_zip,zip_from',
             'state' => 'required|string',
             'country' => 'required|string',
             'tax_rate' => 'required|numeric'

@@ -83,7 +83,7 @@
 @push('scripts')
 
     <script type="text/x-template" id="product-view-template">
-        <form method="POST" action="{{ route('cart.add', $product->id) }}" @click.prevent="onSubmit($event)">
+        <form method="POST" id="product-form" action="{{ route('cart.add', $product->id) }}" @click.prevent="onSubmit($event)">
 
             <slot></slot>
 
@@ -108,7 +108,7 @@
                             if(e.target.getAttribute('data-href')) {
                                 window.location.href = e.target.getAttribute('data-href');
                             } else {
-                                e.target.submit();
+                                document.getElementById('product-form').submit();
                             }
                         }
                     });
@@ -130,7 +130,3 @@
         }
     </script>
 @endpush
-
-
-
-

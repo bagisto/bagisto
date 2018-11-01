@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository as Order;
 use Webkul\Sales\Repositories\InvoiceRepository as Invoice;
+use PDF;
 
 /**
  * Sales Invoice controller
@@ -134,5 +135,20 @@ class InvoiceController extends Controller
         $invoice = $this->invoice->find($id);
 
         return view($this->_config['view'], compact('invoice'));
+    }
+
+    /**
+     * Print and download the for the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function print($id)
+    {
+        $invoice = $this->invoice->find($id);
+
+        $pdf = PDF::loadView('admin::sales.invoices.pdf', compact('invoice'))->setPaper('a4');
+
+        return $pdf->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
     }
 }

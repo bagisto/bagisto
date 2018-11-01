@@ -9,6 +9,7 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
+        "barryvdh/laravel-dompdf": "^0.8.0@dev",
         "dimsav/laravel-translatable": "^9.0",
         "fideloper/proxy": "^4.0",
         "flynsarmy/db-blade-compiler": "*",

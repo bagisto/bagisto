@@ -23,6 +23,12 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $_config;
+
+    /**
+     * CustomerRepository object
+     *
+     * @var array
+    */
     protected $customer;
 
     /**
@@ -35,11 +41,14 @@ class CustomerController extends Controller
     /**
      * Create a new Repository instance.
      *
-     * @param  Webkul\Product\Repositories\ProductReviewRepository  $productReview
+     * @param  Webkul\Customer\Repositories\CustomerRepository     $customer
+     * @param  Webkul\Product\Repositories\ProductReviewRepository $productReview
      * @return void
     */
-
-    public function __construct(CustomerRepository $customer , ProductReview $productReview)
+    public function __construct(
+        CustomerRepository $customer,
+        ProductReview $productReview
+    )
     {
         $this->middleware('customer');
 
@@ -51,26 +60,15 @@ class CustomerController extends Controller
     }
 
     /**
-     * For taking the customer to the dashboard after authentication
-     *
-     * @return view
-     */
-    private function getCustomer($id) {
-        $customer = collect($this->customer->findOneWhere(['id'=>$id]));
-        return $customer;
-    }
-
-    /**
      * Taking the customer to profile details page
      *
      * @return View
      */
-    public function index() {
-        $id = auth()->guard('customer')->user()->id;
+    public function index()
+    {
+        $customer = $this->customer->find(auth()->guard('customer')->user()->id);
 
-        $customer = $this->getCustomer($id);
-
-        return view($this->_config['view'])->with('customer', $customer);
+        return view($this->_config['view'], compact('customer'));
     }
 
     /**
@@ -78,12 +76,11 @@ class CustomerController extends Controller
      *
      * @return View
      */
-    public function editIndex() {
-        $id = auth()->guard('customer')->user()->id;
+    public function editIndex()
+    {
+        $customer = $this->customer->find(auth()->guard('customer')->user()->id);
 
-        $customer = $this->getCustomer($id);
-
-        return view($this->_config['view'])->with('customer', $customer);
+        return view($this->_config['view'], compact('customer'));
     }
 
     /**
@@ -91,7 +88,8 @@ class CustomerController extends Controller
      *
      * @return Redirect.
      */
-    public function edit() {
+    public function edit()
+    {
 
         $id = auth()->guard('customer')->user()->id;
 
@@ -101,7 +99,6 @@ class CustomerController extends Controller
             'last_name' => 'string',
             'gender' => 'required',
             'date_of_birth' => 'date',
-            'phone' => 'string|size:10',
             'email' => 'email|unique:customers,email,'.$id,
             'password' => 'confirmed|required_if:oldpassword,!=,null'
 
@@ -110,8 +107,8 @@ class CustomerController extends Controller
         $data = collect(request()->input())->except('_token')->toArray();
 
         if($data['oldpassword'] == null) {
-
             $data = collect(request()->input())->except(['_token','password','password_confirmation','oldpassword'])->toArray();
+            
             if($this->customer->update($data, $id)) {
                 Session()->flash('success','Profile Updated Successfully');
 
@@ -121,9 +118,7 @@ class CustomerController extends Controller
 
                 return redirect()->back();
             }
-
         } else {
-
             $data = collect(request()->input())->except(['_token','oldpassword'])->toArray();
 
             $data['password'] = bcrypt($data['password']);
@@ -145,7 +140,8 @@ class CustomerController extends Controller
      *
      * @return Mixed
      */
-    public function orders() {
+    public function orders()
+    {
         return view($this->_config['view']);
     }
 
@@ -154,7 +150,8 @@ class CustomerController extends Controller
      *
      * @return Mixed
      */
-    public function wishlist() {
+    public function wishlist()
+    {
         return view($this->_config['view']);
     }
 
@@ -163,10 +160,11 @@ class CustomerController extends Controller
      *
      * @return Mixed
      */
-    public function reviews() {
+    public function reviews()
+    {
         $reviews = $this->productReview->getCustomerReview();
 
-        return view($this->_config['view'],compact('reviews'));
+        return view($this->_config['view'], compact('reviews'));
     }
 
     /**
@@ -174,7 +172,8 @@ class CustomerController extends Controller
      *
      * @return Mixed
      */
-    public function address() {
+    public function address()
+    {
         return view($this->_config['view']);
     }
 }

@@ -145,6 +145,7 @@ return [
         ],
         'invoices' => [
             'id' => 'Id',
+            'invoice-id' => 'Invoice Id',
             'date' => 'Invoice Date',
             'order-id' => 'Order Id',
             'customer-name' => 'Customer Name',
@@ -157,6 +158,10 @@ return [
             'qty-ordered' => 'Qty Ordered',
             'qty-to-invoice' => 'Qty to Invoice',
             'view-title' => 'Invoice #:invoice_id',
+            'bill-to' => 'Bill to',
+            'ship-to' => 'Ship to',
+            'print' => 'Print',
+            'order-date' => 'Order Date'
         ],
         'shipments' => [
             'id' => 'Id',
@@ -318,6 +323,7 @@ return [
             'zip_from' => 'Zip From',
             'zip_to' => 'Zip To',
             'state' => 'State',
+            'select-state' => 'Select a region, state or province.',
             'country' => 'Country',
             'tax_rate' => 'Rate',
             'edit' => [
@@ -325,7 +331,7 @@ return [
                 'edit-button-title' => 'Edit Rate'
             ],
             'zip_code' => 'Zip Code',
-            'is_zip' => 'Enable Zip Range'
+            'is_zip' => 'Enable Zip Range',
         ],
     ],
 
@@ -457,7 +463,10 @@ return [
             'phone' => 'Phone',
             'customer_group' => 'Customer Group',
             'save-btn-title' => 'Save Customer',
-            'channel_name' => 'Channel Name'
+            'channel_name' => 'Channel Name',
+            'state' => 'State',
+            'select-state' => 'Select a region, state or province.',
+            'country' => 'Country'
         ],
         'reviews' => [
             'title' => 'Reviews',

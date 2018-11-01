@@ -23,10 +23,15 @@ class AddressController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $_config;
+
     protected $customer;
+
     protected $address;
 
-    public function __construct(CustomerRepository $customer, CustomerAddressRepository $address)
+    public function __construct(
+        CustomerRepository $customer,
+        CustomerAddressRepository $address
+    )
     {
         $this->middleware('customer');
 
@@ -42,7 +47,8 @@ class AddressController extends Controller
      *
      * @return view
      */
-    public function index() {
+    public function index()
+    {
         return view($this->_config['view'])->with('addresses', $this->customer->addresses);
     }
 
@@ -51,7 +57,8 @@ class AddressController extends Controller
      *
      * @return view
      */
-    public function show() {
+    public function create()
+    {
         return view($this->_config['view']);
     }
 
@@ -60,16 +67,17 @@ class AddressController extends Controller
      *
      * @return view
      */
-    public function create() {
+    public function store()
+    {
         $data = collect(request()->input())->except('_token')->toArray();
 
         $this->validate(request(), [
             'address1' => 'string|required',
-            'address2' => 'string|required',
             'country' => 'string|required',
             'state' => 'string|required',
             'city' => 'string|required',
             'postcode' => 'required',
+            'phone' => 'required'
         ]);
 
         $cust_id['customer_id'] = $this->customer->id;
@@ -95,10 +103,11 @@ class AddressController extends Controller
      *
      * @return view
      */
-    public function showEdit($id) {
-        $address = $this->customer->addresses->where('id', $id);
+    public function edit($id)
+    {
+        $address = $this->address->find($id);
 
-        return view($this->_config['view'])->with('address', $address->first());
+        return view($this->_config['view'], compact('address'));
     }
 
     /**
@@ -107,35 +116,32 @@ class AddressController extends Controller
      *
      * @return redirect
      */
-    public function edit($id) {
+    public function update($id)
+    {
         $this->validate(request(), [
             'address1' => 'string|required',
-            'address2' => 'string|required',
             'country' => 'string|required',
             'state' => 'string|required',
             'city' => 'string|required',
-            'postcode' => 'required',
+            'postcode' => 'required'
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();
 
-        if($this->address->update($data, $id)) {
-            Session()->flash('success','Address Updated Successfully.');
+        $this->address->update($data, $id);
 
-            return redirect()->route('customer.address.index');
-        } else {
-            Session()->flash('success','Address Cannot be Updated.');
+        Session()->flash('success','Address Updated Successfully.');
 
-            return redirect()->route('customer.address.edit');
-        }
+        return redirect()->route('customer.address.index');
     }
 
     /**
      * To change the default address or make the default address, by default when first address is created will be the default address
      *
-     * @return Mixed | @return response
+     * @return Response
      */
-    public function makeDefault($id) {
+    public function makeDefault($id)
+    {
         if($default = $this->customer->default_address) {
             $this->address->find($default->id)->update(['default_address' => 0]);
         }
@@ -156,7 +162,8 @@ class AddressController extends Controller
      *
      * @return response mixed
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $this->address->delete($id);
 
         session()->flash('success', trans('shop::app.address.delete.success'));

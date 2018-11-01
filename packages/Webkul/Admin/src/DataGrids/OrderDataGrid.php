@@ -103,10 +103,12 @@ class OrderDataGrid
                     'label' => 'Status',
                     'sortable' => true,
                     'wrapper' => function ($value) {
-                        if($value == 'completed')
+                        if($value == 'processing')
+                            return '<span class="badge badge-md badge-success">Processing</span>';
+                        else if($value == 'completed')
                             return '<span class="badge badge-md badge-success">Completed</span>';
-                        else if($value == "cancelled")
-                            return '<span class="badge badge-md badge-danger">Cancelled</span>';
+                        else if($value == "canceled")
+                            return '<span class="badge badge-md badge-danger">Canceled</span>';
                         else if($value == "closed")
                             return '<span class="badge badge-md badge-info">Closed</span>';
                         else if($value == "pending")
