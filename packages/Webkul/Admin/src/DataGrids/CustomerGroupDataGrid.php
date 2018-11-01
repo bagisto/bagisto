@@ -109,9 +109,9 @@ class CustomerGroupDataGrid
             //don't use aliasing in case of searchables
             'searchable' => [
                 [
-                    'column' => 'cg.code',
-                    'type' => 'string',
-                    'label' => 'Code'
+                    'column' => 'cg.id',
+                    'type' => 'number',
+                    'label' => 'Id'
                 ],
                 [
                     'column' => 'cg.name',
