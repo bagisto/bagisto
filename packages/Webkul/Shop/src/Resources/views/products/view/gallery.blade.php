@@ -8,11 +8,9 @@
 
     <product-gallery></product-gallery>
 
-    @include ('shop::products.product-add')
+    @include ('shop::products.view.product-add')
 
 </div>
-
-
 
 @push('scripts')
 
@@ -42,7 +40,11 @@
                 {{-- Uncomment the line below for activating share links --}}
                 {{-- @include('shop::products.sharelinks') --}}
 
-                @include('shop::products.wishlist')
+                @auth('customer')
+                    <button type="submit" class="add-to-wishlist" data-href="{{ route('customer.wishlist.add', $product->id) }}" id="wishlist-changer">
+                    </button>
+                @endauth
+
             </div>
 
         </div>

@@ -17,7 +17,7 @@
 
     </head>
 
-    <body>
+    <body class="rtl">
         <div id="app">
 
             <flash-wrapper ref='flashes'></flash-wrapper>
@@ -54,7 +54,7 @@
 
         <script type="text/javascript" src="{{ asset('vendor/webkul/admin/assets/js/admin.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
-        
+
         @stack('scripts')
 
         <div class="modal-overlay"></div>

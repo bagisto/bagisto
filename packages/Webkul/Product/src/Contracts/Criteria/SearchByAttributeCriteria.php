@@ -35,6 +35,11 @@ class SearchByAttributeCriteria extends AbstractProduct implements CriteriaInter
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        return $model = $model->leftJoin('product_attribute_values as pav', 'products.id', '=', 'pav.product_id')->where('attribute_id', '=', 75)->where('products.parent_id', '=', null);
+        $attribute = $this->attribute->findOneByField('code', 'name');
+
+        return $model
+            ->leftJoin('product_attribute_values as pav', 'products.id', '=', 'pav.product_id')
+            ->where('attribute_id', '=', $attribute->id)
+            ->where('products.parent_id', '=', null);
     }
 }
