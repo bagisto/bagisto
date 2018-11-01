@@ -30,32 +30,27 @@
                 <tbody>
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.fname') }}</td>
-                        <td>{{ $customer['first_name'] }}</td>
+                        <td>{{ $customer->first_name }}</td>
                     </tr>
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.lname') }}</td>
-                        <td>{{ $customer['last_name'] }}</td>
+                        <td>{{ $customer->last_name }}</td>
                     </tr>
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.gender') }}</td>
-                        <td>{{ $customer['gender'] }}</td>
+                        <td>{{ $customer->gender }}</td>
                     </tr>
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.dob') }}</td>
-                        <td>{{ $customer['date_of_birth'] }}</td>
+                        <td>{{ $customer->date_of_birth }}</td>
                     </tr>
 
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.email') }}</td>
-                        <td>{{ $customer['email'] }}</td>
-                    </tr>
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.phone') }}</td>
-                        <td>{{ $customer['phone'] }}</td>
+                        <td>{{ $customer->email }}</td>
                     </tr>
                 </tbody>
             </table>

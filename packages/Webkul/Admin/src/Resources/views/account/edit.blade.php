@@ -37,7 +37,7 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                                <label for="email">{{ __('admin::app.account.email') }}</label>
+                                <label for="email" class="required">{{ __('admin::app.account.email') }}</label>
                                 <input type="text" v-validate="'required|email'" class="control" id="email" name="email" value="{{ $user->email }}"/>
                                 <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
                             </div>

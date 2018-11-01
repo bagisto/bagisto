@@ -35,37 +35,34 @@
                 <div class="address-holder">
                     @foreach($addresses as $address)
                         <div class="address-card-1">
-                            {{-- <div class="control-group">
-                                <label class="radio-container">
-                                    <input class="control" type="radio" name="radio">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div> --}}
-
                             <div class="details">
                                 <span class="bold">{{ auth()->guard('customer')->user()->name }}</span>
-                                <span>{{ $address['address1'] }}</span>
-                                <span>{{ $address['address2'] }}</span>
-                                <span>{{ $address['country'] }}</span>
-                                <span>{{ $address['state'] }}</span>
-                                <span>{{ $address['city'] }}</span>
-                                <span>{{ $address['postcode'] }}</span>
+                                {{ $address->name }}</br>
+                                {{ $address->address1 }}, {{ $address->address2 ? $address->address2 . ',' : '' }}</br>
+                                {{ $address->city }}</br>
+                                {{ $address->state }}</br>
+                                {{ country()->name($address->country) }} {{ $address->postcode }}</br></br>
+                                {{ __('shop::app.customer.account.address.index.contact') }} : {{ $address->phone }} 
 
                                 <div class="control-links mt-20">
                                     <span>
-                                        <a href="{{ route('customer.address.edit', $address['id']) }}"><i class="icon pencil-lg-icon"></i></a>
+                                        <a href="{{ route('customer.address.edit', $address->id) }}">
+                                            {{ __('shop::app.customer.account.address.index.edit') }}
+                                        </a>
                                     </span>
 
                                     <span>
-                                        <a href="{{ route('address.delete', $address['id']) }}"><i class="icon trash-icon"></i></a>
+                                        <a href="{{ route('address.delete', $address->id) }}">
+                                            {{ __('shop::app.customer.account.address.index.delete') }}
+                                        </a>
                                     </span>
                                 </div>
 
-                                @if($address['default_address'] == 1)
+                                @if($address->default_address)
                                     <span class="default-address badge badge-md badge-success">{{ __('shop::app.customer.account.address.index.default') }}</span>
                                 @else
                                     <div class="make-default mt-20">
-                                        <a href="{{ route('make.default.address', $address['id']) }}" class="btn btn-md btn-primary">{{ __('shop::app.customer.account.address.index.make-default') }}</a>
+                                        <a href="{{ route('make.default.address', $address->id) }}" class="btn btn-md btn-primary">{{ __('shop::app.customer.account.address.index.make-default') }}</a>
                                     </div>
                                 @endif
 

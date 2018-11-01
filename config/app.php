@@ -199,6 +199,7 @@ return [
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Konekt\Concord\ConcordServiceProvider::class,
         Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         //Webkul packages
         Webkul\Theme\Providers\ThemeServiceProvider::class,
@@ -270,6 +271,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Cart' => Webkul\Checkout\Facades\Cart::class,
         'Core' => Webkul\Core\Facades\Core::class,
-        'DbView' => Flynsarmy\DbBladeCompiler\Facades\DbView::class
+        'DbView' => Flynsarmy\DbBladeCompiler\Facades\DbView::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class
     ],
 ];

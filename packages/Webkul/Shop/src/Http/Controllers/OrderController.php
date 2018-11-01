@@ -5,7 +5,9 @@ namespace Webkul\Shop\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\InvoiceRepository;
 use Auth;
+use PDF;
 
 /**
  * Customer controlller for the customer basically for the tasks of customers
@@ -31,18 +33,31 @@ class OrderController extends Controller
     protected $order;
 
     /**
+     * InvoiceRepository object
+     *
+     * @var array
+     */
+    protected $invoice;
+
+    /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Order\Repositories\OrderRepository $order
+     * @param  Webkul\Order\Repositories\OrderRepository   $order
+     * @param  Webkul\Order\Repositories\InvoiceRepository $invoice
      * @return void
      */
-    public function __construct(OrderRepository $order)
+    public function __construct(
+        OrderRepository $order,
+        InvoiceRepository $invoice
+    )
     {
         $this->middleware('customer');
 
         $this->_config = request('_config');
 
         $this->order = $order;
+
+        $this->invoice = $invoice;
     }
 
     /**
@@ -69,5 +84,20 @@ class OrderController extends Controller
         $order = $this->order->find($id);
 
         return view($this->_config['view'], compact('order'));
+    }
+
+    /**
+     * Print and download the for the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function print($id)
+    {
+        $invoice = $this->invoice->find($id);
+
+        $pdf = PDF::loadView('shop::customers.account.orders.pdf', compact('invoice'))->setPaper('a4');
+
+        return $pdf->download('invoice-' . $invoice->created_at->format('d-m-Y') . '.pdf');
     }
 }

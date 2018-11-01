@@ -109,6 +109,7 @@ h2 {
         color: #ffffff;
     }
 
+    &:disabled,
     &[disabled="disabled"],
     &[disabled="disabled"]:hover,
     &[disabled="disabled"]:active {
@@ -118,6 +119,7 @@ h2 {
         opacity: 1;
     }
 }
+
 .dropdown-open {
     position: relative;
 }
