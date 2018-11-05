@@ -345,6 +345,7 @@ input {
         grid-auto-rows: auto;
         grid-column-gap: 48px;
         grid-row-gap: 15px;
+        justify-items: end;
     }
 
     .product-grid-3 {
@@ -352,6 +353,7 @@ input {
         grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
         grid-gap: 27px;
         grid-auto-rows: auto;
+        justify-items: center;
     }
 
     .product-card {
@@ -402,6 +404,7 @@ input {
                 margin-right: 10px;
                 text-transform: uppercase;
                 text-align: left;
+                box-shadow: 1px 1px 0px #ccc;
             }
 
             .add-to-wishlist {
@@ -422,6 +425,7 @@ input {
             padding: 4px 13px;
             font-size: 14px;
             color: #fff;
+            box-shadow: 1px 1px 1px #cccccc;
 
             &.sale {
                 background: #FF6472;
@@ -431,6 +435,10 @@ input {
                 background: #2ED04C;
             }
         }
+    }
+
+    .product-card:hover {
+        box-shadow: 1px 1px 10px #ccc;
     }
 
     @media only screen and (max-width: 580px) {
