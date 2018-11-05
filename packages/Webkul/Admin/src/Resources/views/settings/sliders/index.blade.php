@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-
+    {{ __('admin::app.settings.sliders.title') }}
 @stop
 
 @section('content')

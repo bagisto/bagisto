@@ -195,7 +195,7 @@ class OrderRepository extends Repository
         $totalQtyOrdered = 0;
         $totalQtyCanceled = 0;
 
-        foreach($order->items  as $item) {
+        foreach($order->items as $item) {
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyCanceled += $item->qty_canceled;
         }
@@ -241,8 +241,7 @@ class OrderRepository extends Repository
 
         if($this->isInCanceledState($order))
             $status = 'canceled';
-
-        if($this->isInClosedState($order))
+        elseif($this->isInClosedState($order))
             $status = 'closed';
 
         $order->status = $status;

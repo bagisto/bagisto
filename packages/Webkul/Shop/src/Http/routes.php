@@ -188,36 +188,36 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
 
                 /*    Routes for Addresses   */
                 //Customer Address Show
-                Route::get('address/index', 'Webkul\Customer\Http\Controllers\AddressController@index')->defaults('_config', [
-                    'view' => 'shop::customers.account.address.address'
+                Route::get('addresses', 'Webkul\Customer\Http\Controllers\AddressController@index')->defaults('_config', [
+                    'view' => 'shop::customers.account.address.index'
                 ])->name('customer.address.index');
 
                 //Customer Address Create Form Show
-                Route::get('address/create', 'Webkul\Customer\Http\Controllers\AddressController@show')->defaults('_config', [
+                Route::get('addresses/create', 'Webkul\Customer\Http\Controllers\AddressController@create')->defaults('_config', [
                     'view' => 'shop::customers.account.address.create'
                 ])->name('customer.address.create');
 
                 //Customer Address Create Form Store
-                Route::post('address/create', 'Webkul\Customer\Http\Controllers\AddressController@create')->defaults('_config', [
+                Route::post('addresses/create', 'Webkul\Customer\Http\Controllers\AddressController@store')->defaults('_config', [
                     'view' => 'shop::customers.account.address.address',
                     'redirect' => 'customer.address.index'
                 ])->name('customer.address.create');
 
                 //Customer Address Edit Form Show
-                Route::get('address/edit/{id}', 'Webkul\Customer\Http\Controllers\AddressController@showEdit')->defaults('_config', [
+                Route::get('addresses/edit/{id}', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [
                     'view' => 'shop::customers.account.address.edit'
                 ])->name('customer.address.edit');
 
                 //Customer Address Edit Form Store
-                Route::post('address/edit/{id}', 'Webkul\Customer\Http\Controllers\AddressController@edit')->defaults('_config', [
+                Route::put('addresses/edit/{id}', 'Webkul\Customer\Http\Controllers\AddressController@update')->defaults('_config', [
                     'redirect' => 'customer.address.index'
                 ])->name('customer.address.edit');
 
                 //Customer Address Make Default
-                Route::get('address/default/{id}', 'Webkul\Customer\Http\Controllers\AddressController@makeDefault')->name('make.default.address');
+                Route::get('addresses/default/{id}', 'Webkul\Customer\Http\Controllers\AddressController@makeDefault')->name('make.default.address');
 
                 //Customer Address Delete
-                Route::get('address/delete/{id}', 'Webkul\Customer\Http\Controllers\AddressController@destroy')->name('address.delete');
+                Route::get('addresses/delete/{id}', 'Webkul\Customer\Http\Controllers\AddressController@destroy')->name('address.delete');
 
                 /* Wishlist route */
                 //Customer wishlist(listing)
@@ -236,6 +236,11 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
                     'view' => 'shop::customers.account.orders.view'
                 ])->name('customer.orders.view');
 
+                //Prints invoice
+                Route::get('orders/print/{id}', 'Webkul\Shop\Http\Controllers\OrderController@print')->defaults('_config', [
+                    'view' => 'shop::customers.account.orders.print'
+                ])->name('customer.orders.print');
+
                 /* Reviews route */
                 //Customer reviews(listing) only approved
                 Route::get('reviews', 'Webkul\Customer\Http\Controllers\CustomerController@reviews')->defaults('_config', [
@@ -243,7 +248,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
                 ])->name('customer.reviews.index');
 
                 //Customer review delete
-                Route::get('review/delete/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@destroy')->defaults('_config', [
+                Route::get('reviews/delete/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@destroy')->defaults('_config', [
                     'redirect' => 'customer.reviews.index'
                 ])->name('customer.review.delete');
             });

@@ -207,7 +207,7 @@ input {
 .add-to-wishlist {
     .wishlist-icon {
         &:hover {
-            background-image: url('../images/wishadd.svg');
+            background-image: url('../images/wishlist-added.svg');
         }
     }
 }
@@ -406,6 +406,10 @@ input {
 
             .add-to-wishlist {
                 margin-top: 5px;
+                background: transparent;
+                border: 0;
+                cursor: pointer;
+                padding: 0;
             }
         }
 
@@ -1547,7 +1551,7 @@ section.product-detail {
         margin-top: 20px;
         margin-bottom: 20px;
 
-        form {
+        .form-container {
             display: flex;
             flex-direction: row;
             // justify-content: space-between;
@@ -1635,10 +1639,22 @@ section.product-detail {
                         }
 
                         .add-to-wishlist {
+                            background-image: url('../images/wishlist.svg');
                             position: absolute;
                             top: 10px;
                             right: 12px;
+                            background-color: transparent;
+                            border: 0;
+                            cursor: pointer;
+                            padding: 0;
+                            width: 32px;
+                            height: 32px;
+
+                            &:hover {
+                                background-image: url('../images/wishlist-added.svg');
+                            }
                         }
+
 
                         .share {
                             position: absolute;
@@ -1713,7 +1729,7 @@ section.product-detail {
                     margin-bottom: 15px;
                     font-weight: 600;
                     color: #FC6868;
-                    
+
                     &.active {
                         color: #4CAF50;
                     }
@@ -1833,6 +1849,15 @@ section.product-detail {
         }
     }
 }
+
+@media only screen and (max-width: 510px) {
+    section.product-detail div.layouter form {
+        .details {
+            margin-top: -90px;
+        }
+    }
+}
+
 //product pages responsive css end here
 
 //rating and reviews of product pages
@@ -2086,7 +2111,9 @@ section.cart {
                             width: 90px;
                         }
                         .item-details .misc {
-                            margin-left: -105px;
+                            display: flex;
+                            flex-wrap: wrap;
+                            line-height: 40px;
                         }
                     }
                 }
@@ -2349,6 +2376,7 @@ section.cart {
 
             ul.checkout-steps{
                 border-bottom: none;
+                padding-bottom: 0px;
 
                 span {
                     display: none;
@@ -2364,6 +2392,8 @@ section.cart {
         }
 
         .step-content {
+            padding-top: 0px;
+
             .control-group .control {
                 width:100%;
             }
@@ -2832,7 +2862,6 @@ section.review {
 
                 td {
                     width: 250px;
-                    text-transform: capitalize;
                 }
             }
         }
@@ -2857,7 +2886,7 @@ section.review {
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 25px 1px 22px 15px;
+    padding: 20px;
     margin-right: 15px;
     margin-bottom: 15px;
 
@@ -2869,11 +2898,9 @@ section.review {
 
     .details {
         font-weight: lighter;
-        margin-left: 15px;
 
         span {
             display: block;
-            margin: 8px;
         }
 
         .control-links {
@@ -2891,8 +2918,8 @@ section.review {
 
         .default-address {
             position: absolute;
-            top: -3px;
-            right: -3px;
+            top: 10px;
+            right: 10px;
         }
     }
 }
@@ -3187,22 +3214,17 @@ section.review {
 
 // css for loader
 .cp-spinner {
-    margin-left: 19%;
-    margin-top: 13%;
     position: absolute;
-    margin-bottom: 20%;
+    left: 26%;
+    margin-top: calc(20% - 80px);
 }
 
 @media only screen and (max-width: 720px) {
     .cp-spinner {
-        margin-left: 42.5%;
-        margin-top: 30%;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .cp-spinner {
-        margin-top: 50%;
+        left: 50%;
+        margin-left: -24px;
+        top: 50%;
+        margin-top: -24px;
     }
 }
 

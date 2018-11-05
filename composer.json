@@ -9,6 +9,7 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
+        "barryvdh/laravel-dompdf": "^0.8.0@dev",
         "dimsav/laravel-translatable": "^9.0",
         "fideloper/proxy": "^4.0",
         "flynsarmy/db-blade-compiler": "*",
@@ -31,22 +32,22 @@
         "phpunit/phpunit": "^7.0"
     },
     "replace": {
-        "webkul/laravel-user": "self.version",
-        "webkul/laravel-admin": "self.version",
-        "webkul/laravel-ui": "self.version",
-        "webkul/laravel-core": "self.version",
-        "webkul/laravel-attribute": "self.version",
-        "webkul/laravel-checkout": "self.version",
-        "webkul/laravel-customer": "self.version",
-        "webkul/laravel-inventory": "self.version",
-        "webkul/laravel-category": "self.version",
-        "webkul/laravel-product": "self.version",
-        "webkul/laravel-shop": "self.version",
-        "webkul/laravel-theme": "self.version",
-        "webkul/laravel-shipping": "self.version",
-        "webkul/laravel-payment": "self.version",
-        "webkul/laravel-sales": "self.version",
-        "webkul/laravel-tax": "self.version"
+        "webkul/laravel-user": "v0.1.0",
+        "webkul/laravel-admin": "v0.1.0",
+        "webkul/laravel-ui": "v0.1.0",
+        "webkul/laravel-core": "v0.1.0",
+        "webkul/laravel-attribute": "v0.1.0",
+        "webkul/laravel-checkout": "v0.1.0",
+        "webkul/laravel-customer": "v0.1.0",
+        "webkul/laravel-inventory": "v0.1.0",
+        "webkul/laravel-category": "v0.1.0",
+        "webkul/laravel-product": "v0.1.0",
+        "webkul/laravel-shop": "v0.1.0",
+        "webkul/laravel-theme": "v0.1.0",
+        "webkul/laravel-shipping": "v0.1.0",
+        "webkul/laravel-payment": "v0.1.0",
+        "webkul/laravel-sales": "v0.1.0",
+        "webkul/laravel-tax": "v0.1.0"
     },
     "autoload": {
         "classmap": [
@@ -101,6 +102,5 @@
         "sort-packages": true,
         "optimize-autoloader": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "minimum-stability": "dev"
 }

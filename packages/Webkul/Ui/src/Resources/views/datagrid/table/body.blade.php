@@ -21,7 +21,7 @@
         @if(count($actions))
         <td class="action">
             @foreach($actions as $action)
-                <a @if($action['type'] == "Edit") href="{{ url()->current().'/edit/'.$result->id }}" @elseif($action['type']=="Delete") href="{{ url()->current().'/delete/'.$result->id }}" @endif  class="Action-{{ $action['type'] }}" id="{{ $result->id }}" onclick="return confirm_click('{{ $action['confirm_text'] }}');">
+                <a @if($action['type'] == "Edit") href="{{ url()->current().'/edit/'.$result->id }}" @elseif($action['type'] == "View") href="{{ url()->current().'/view/'.$result->id }}" @elseif($action['type']=="Delete") href="{{ url()->current().'/delete/'.$result->id }}" @endif  class="Action-{{ $action['type'] }}" id="{{ $result->id }}" onclick="return confirm_click('{{ $action['confirm_text'] }}');">
                     <i class="{{ $action['icon'] }}"></i>
                 </a>
             @endforeach

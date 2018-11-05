@@ -134,7 +134,8 @@ return [
                     'create' => 'Create Address',
                     'delete' => 'Delete',
                     'make-default' => 'Make Default',
-                    'default' => 'Default'
+                    'default' => 'Default',
+                    'contact' => 'Contact'
                 ],
 
                 'create' => [
@@ -144,15 +145,17 @@ return [
                     'address2' => 'Address Line 2',
                     'country' => 'Country',
                     'state' => 'State',
+                    'select-state' => 'Select a region, state or province.',
                     'city' => 'City',
                     'postcode' => 'Postal Code',
-                    'submit' => 'Create Address'
+                    'phone' => 'Phone',
+                    'submit' => 'Save Address'
                 ],
 
                 'edit' => [
                     'page-title' => 'Customer - Edit Address',
                     'title' => 'Edit Address',
-                    'submit' => 'Edit Address'
+                    'submit' => 'Save Address'
                 ],
                 'delete' => [
                     'success' => 'Address Successfully Deleted',
@@ -203,6 +206,13 @@ return [
                     'payment-method' => 'Payment Method',
                     'individual-invoice' => 'Invoice #:invoice_id',
                     'individual-shipment' => 'Shipment #:shipment_id',
+                    'print' => 'Print',
+                    'invoice-id' => 'Invoice Id',
+                    'order-id' => 'Order Id',
+                    'order-date' => 'Order Date',
+                    'bill-to' => 'Bill to',
+                    'ship-to' => 'Ship to',
+                    'contact' => 'Contact'
                 ]
             ],
 

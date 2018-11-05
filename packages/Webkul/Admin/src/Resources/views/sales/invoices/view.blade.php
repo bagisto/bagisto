@@ -15,6 +15,9 @@
             </div>
 
             <div class="page-action">
+                <a href="{{ route('admin.sales.invoices.print', $invoice->id) }}" class="btn btn-lg btn-primary">
+                    {{ __('admin::app.sales.invoices.print') }}
+                </a>
             </div>
         </div>
 
