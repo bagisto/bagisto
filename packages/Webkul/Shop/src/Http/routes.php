@@ -17,6 +17,16 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
         'view' => 'shop::search.search'
     ])->name('shop.search.index');
 
+    //Country State Selector
+    Route::get('get/countries', 'Webkul\Core\Http\Controllers\CountryStateController@getCountries')->defaults('_config', [
+        'view' => 'shop::test'
+    ])->name('get.countries');
+
+    //Get States When Country is Passed
+    Route::get('get/states/{country}', 'Webkul\Core\Http\Controllers\CountryStateController@getStates')->defaults('_config', [
+        'view' => 'shop::test'
+    ])->name('get.states');
+
     //checkout and cart
     //Cart Items(listing)
     Route::get('checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@index')->defaults('_config', [

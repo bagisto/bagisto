@@ -131,7 +131,6 @@
 
                             //buy now anchor href changer with options
                             var buyNowLink = $('#buynow-changer').attr('href');
-
                             if(this.selectedProductId != '') {
                                 var splitted = buyNowLink.split("/");
 

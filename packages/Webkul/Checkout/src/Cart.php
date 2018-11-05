@@ -532,9 +532,9 @@ class Cart {
 
             $this->collectTotals();
 
-            return redirect()->back();
+            return true;
         } else {
-            return redirect()->back();
+            return true;
         }
     }
 
@@ -615,7 +615,7 @@ class Cart {
 
                 session()->forget('cart');
 
-                session()->flash('success', trans('shop::app.checkout.cart.quantity.success_remove'));
+                session()->flash('success', trans('shop::app.checkout.cart.item.success-remove'));
             }
         }
     }
@@ -633,7 +633,7 @@ class Cart {
         if ($quantity < 1) {
             session()->flash('warning', trans('shop::app.checkout.cart.quantity.warning'));
 
-            return redirect()->back();
+            return false;
         }
 
         $item = $this->cartItem->findOneByField('id', $itemId);
@@ -893,6 +893,7 @@ class Cart {
     public function validateItems() {
         $cart = $this->getCart();
 
+        //rare case of accident-->used when there are no items.
         if(count($cart->items) == 0) {
             $this->cart->delete($cart->id);
 
