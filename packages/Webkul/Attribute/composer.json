@@ -1,5 +1,5 @@
 {
-    "name": "webkul/laravel-attribute",
+    "name": "bagisto/laravel-attribute",
     "license": "MIT",
     "authors": [
         {
@@ -9,7 +9,7 @@
     ],
     "require": {
         "nwidart/laravel-modules": "^3.2",
-        "webkul/laravel-core": "dev-master"
+        "bagisto/laravel-core": "dev-master"
     },
     "autoload": {
         "psr-4": {
