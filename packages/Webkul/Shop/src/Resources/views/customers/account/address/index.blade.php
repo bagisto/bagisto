@@ -35,14 +35,14 @@
                 <div class="address-holder">
                     @foreach($addresses as $address)
                         <div class="address-card-1">
-                            <div class="details">
+                            <div class="details @if($address->default_address) mt-20 @endif">
                                 <span class="bold">{{ auth()->guard('customer')->user()->name }}</span>
                                 {{ $address->name }}</br>
                                 {{ $address->address1 }}, {{ $address->address2 ? $address->address2 . ',' : '' }}</br>
                                 {{ $address->city }}</br>
                                 {{ $address->state }}</br>
                                 {{ country()->name($address->country) }} {{ $address->postcode }}</br></br>
-                                {{ __('shop::app.customer.account.address.index.contact') }} : {{ $address->phone }} 
+                                {{ __('shop::app.customer.account.address.index.contact') }} : {{ $address->phone }}
 
                                 <div class="control-links mt-20">
                                     <span>

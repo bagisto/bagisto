@@ -18,10 +18,15 @@
             <div class="list-container">
                 <span class="list-heading">{{ __('shop::app.footer.subscribe-newsletter') }}</span>
                 <div class="form-container">
-                    <div class="control-group">
-                        <input type="text" class="control subscribe-field" placeholder="Email Address"><br/>
-                        <button class="btn btn-md btn-primary">{{ __('shop::app.footer.subscribe') }}</button>
-                    </div>
+                    <form action="{{ route('shop.subscribe') }}" @submit.prevent="onSubmit">
+                        <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
+                            <input type="text" class="control subscribe-field" name="email" placeholder="Email Address" required><br/>
+
+                            <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
+
+                            <button class="btn btn-md btn-primary">{{ __('shop::app.subscription.subscribe') }}</button>
+                        </div>
+                    </form>
                 </div>
 
                 <span class="list-heading">{{ __('shop::app.footer.locale') }}</span>

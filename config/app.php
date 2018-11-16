@@ -140,11 +140,10 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+
     /*
         Code Editor
-
     */
-
     'editor' =>'vscode',
 
 
