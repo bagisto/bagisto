@@ -2,8 +2,8 @@
 
 namespace Webkul\Paypal\Helpers;
 
-use Webkul\Sales\Respositories\OrderRepository;
-use Webkul\Sales\Respositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\InvoiceRepository;
 
 /**
  * Paypal ipn listener helper
