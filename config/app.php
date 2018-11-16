@@ -216,6 +216,7 @@ return [
         Webkul\Checkout\Providers\CheckoutServiceProvider::class,
         Webkul\Shipping\Providers\ShippingServiceProvider::class,
         Webkul\Payment\Providers\PaymentServiceProvider::class,
+        Webkul\Paypal\Providers\PaypalServiceProvider::class,
         Webkul\Sales\Providers\SalesServiceProvider::class,
         Webkul\Tax\Providers\TaxServiceProvider::class,
     ],

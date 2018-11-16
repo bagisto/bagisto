@@ -17,6 +17,17 @@ return [
         'class' => 'Webkul\Payment\Payment\MoneyTransfer',
         'order_status' => 'pending',
         'active' => true
+    ],
+
+    'paypal_standard' => [
+        'code' => 'paypal_standard',
+        'title' => 'Paypal Standard',
+        'description' => 'Paypal Standard',
+        'class' => 'Webkul\Paypal\Payment\Standard',
+        'order_status' => 'pending_payment',
+        'sandbox' => true,
+        'active' => true,
+        'business_account' => 'test@webkul.com'
     ]
 ];
 

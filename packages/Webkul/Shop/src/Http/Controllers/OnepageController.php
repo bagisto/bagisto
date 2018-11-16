@@ -127,6 +127,15 @@ class OnepageController extends Controller
 
         $this->validateOrder();
 
+        $cart = Cart::getCart();
+
+        if($redirectUrl = Payment::getRedirectUrl($cart)) {
+            return response()->json([
+                    'success' => true,
+                    'redirect_url' => $redirectUrl
+                ]);
+        }
+
         $order = $this->orderRepository->create(Cart::prepareDataForOrder());
 
         Cart::deActivateCart();
@@ -134,7 +143,7 @@ class OnepageController extends Controller
         session()->flash('order', $order);
 
         return response()->json([
-                'success' => true
+                'success' => true,
             ]);
     }
 

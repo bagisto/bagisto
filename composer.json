@@ -71,6 +71,7 @@
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
             "Webkul\\Shipping\\": "packages/Webkul/Shipping/src",
             "Webkul\\Payment\\": "packages/Webkul/Payment/src",
+            "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
             "Webkul\\Sales\\": "packages/Webkul/Sales/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src"
         }
