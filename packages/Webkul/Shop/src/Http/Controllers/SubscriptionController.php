@@ -81,13 +81,15 @@ class SubscriptionController extends Controller
                 }
             };
         } else {
-            $unique = $this->subscription->findWhere(['email' => $email]);
+            $alreadySubscribed = $this->subscription->findWhere(['email' => $email]);
 
-            if($unique->count() > 0) {
-                return 0;
-            } else {
-                return 1;
-            }
+            $unique = function() use($alreadySubscribed){
+                if($alreadySubscribed->count() > 0) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            };
         }
 
         if($unique()) {

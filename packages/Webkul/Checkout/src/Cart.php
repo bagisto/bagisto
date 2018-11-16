@@ -1061,9 +1061,13 @@ class Cart {
 
             return false;
         } else {
-            $result = $this->moveToCart($id);
+            $simpleOrVariant = $this->product->find($id);
 
-            return $result;
+            if($simpleOrVariant->type == 'simple') {
+                $result = $this->add($id, $data);
+
+                return $result;
+            }
         }
     }
 }
