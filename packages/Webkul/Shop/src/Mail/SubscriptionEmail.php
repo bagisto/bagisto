@@ -17,6 +17,12 @@ class SubscriptionEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $subscriptionData;
+
+    public function __construct($subscriptionData) {
+        $this->subscriptionData = $subscriptionData;
+    }
+
     /**
      * Build the message.
      *
@@ -24,8 +30,8 @@ class SubscriptionEmail extends Mailable
      */
     public function build()
     {
-        return $this->to('prashant.singh852@webkul.com', auth()->guard('customer')->user())
+        return $this->to($this->subscriptionData['email'])
             ->subject('subscription email')
-            ->view('shop::emails.customer.subscription-email')->with('data', ['content' => 'You Are Subscribed', 'token' => 'token']);
+            ->view('shop::emails.customer.subscription-email')->with('data', ['content' => 'You Are Subscribed', 'token' => $this->subscriptionData['token']]);
     }
 }

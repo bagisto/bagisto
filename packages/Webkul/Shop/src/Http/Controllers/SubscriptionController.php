@@ -115,7 +115,10 @@ class SubscriptionController extends Controller
                 return redirect()->back();
             }
 
-            Mail::send(new SubscriptionEmail);
+            $subscriptionData['email'] = $email;
+            $subscriptionData['token'] = $token;
+
+            Mail::send(new SubscriptionEmail($subscriptionData));
 
             session()->flash('success', trans('shop::app.subscription.subscribed'));
 
