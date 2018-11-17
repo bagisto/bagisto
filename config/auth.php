@@ -13,8 +13,8 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
-            'provider' => 'admins',
+            'driver' => 'passport',
+            'provider' => 'customers',
         ],
 
         'customer' =>[
@@ -27,10 +27,10 @@ return [
             'provider' => 'admins'
         ],
 
-        'admin-api' => [
-            'driver' => 'token',
-            'provider' => 'admins',
-        ]
+        // 'admin-api' => [
+        //     'driver' => 'token',
+        //     'provider' => 'admins',
+        // ]
     ],
 
     'providers' => [

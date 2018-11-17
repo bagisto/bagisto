@@ -1,7 +1,8 @@
 <?php
 
-namespace Webkul\Customer\Http\Controllers;
+namespace Webkul\API\Http\Controllers\Customer;
 
+use Webkul\API\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
@@ -10,12 +11,12 @@ use Webkul\Customer\Http\Listeners\CustomerEventsHandler;
 use Cart;
 
 /**
- * Session controller for the user customer
+ * Session controller for the APIs of user customer
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
+ * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class SessionController extends Controller
+class AuthController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,22 +27,13 @@ class SessionController extends Controller
 
     public function __construct()
     {
+
         $this->middleware('customer')->except(['show','create']);
         $this->_config = request('_config');
 
         $subscriber = new CustomerEventsHandler;
 
         Event::subscribe($subscriber);
-
-    }
-
-    public function show()
-    {
-        if(auth()->guard('customer')->check()) {
-            return redirect()->route('customer.account.index');
-        } else {
-            return view($this->_config['view']);
-        }
     }
 
     public function create(Request $request)
@@ -52,14 +44,18 @@ class SessionController extends Controller
         ]);
 
         if (!auth()->guard('customer')->attempt(request(['email', 'password']))) {
-            session()->flash('error', 'Please check your credentials and try again.');
-            return back();
+            return response()->json([false], 200);
         }
 
-        //Event passed to prepare cart after login
-        Event::fire('customer.after.login', $request->input('email'));
+        if(auth()->guard('customer')->check()) {
+            $customer = auth()->guard('customer')->user();
 
-        return redirect()->intended(route($this->_config['redirect']));
+            $token = $customer->createToken('customer-token')->accessToken;
+
+            return response()->json([$token], 200);
+        } else {
+            return response()->json([false], 200);
+        }
     }
 
     public function destroy($id)

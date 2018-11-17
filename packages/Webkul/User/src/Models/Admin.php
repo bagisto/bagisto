@@ -2,6 +2,7 @@
 
 namespace Webkul\User\Models;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webkul\User\Models\Role;
@@ -10,7 +11,7 @@ use Webkul\User\Notifications\AdminResetPassword;
 
 class Admin extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.

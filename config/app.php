@@ -217,6 +217,7 @@ return [
         Webkul\Payment\Providers\PaymentServiceProvider::class,
         Webkul\Sales\Providers\SalesServiceProvider::class,
         Webkul\Tax\Providers\TaxServiceProvider::class,
+        Webkul\API\Providers\APIServiceProvider::class,
     ],
 
     /*

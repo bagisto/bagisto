@@ -18,6 +18,7 @@
         "kalnoy/nestedset": "^4.3",
         "konekt/concord": "^1.2",
         "laravel/framework": "5.6.*",
+        "laravel/passport": "^8.0@dev",
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^3.2",
         "prettus/l5-repository": "^2.6",
@@ -47,7 +48,8 @@
         "webkul/laravel-shipping": "v0.1.0",
         "webkul/laravel-payment": "v0.1.0",
         "webkul/laravel-sales": "v0.1.0",
-        "webkul/laravel-tax": "v0.1.0"
+        "webkul/laravel-tax": "v0.1.0",
+        "webkul/laravel-api": "v0.1.0"
     },
     "autoload": {
         "classmap": [
@@ -72,7 +74,8 @@
             "Webkul\\Shipping\\": "packages/Webkul/Shipping/src",
             "Webkul\\Payment\\": "packages/Webkul/Payment/src",
             "Webkul\\Sales\\": "packages/Webkul/Sales/src",
-            "Webkul\\Tax\\": "packages/Webkul/Tax/src"
+            "Webkul\\Tax\\": "packages/Webkul/Tax/src",
+            "Webkul\\API\\": "packages/Webkul/API"
         }
     },
     "autoload-dev": {

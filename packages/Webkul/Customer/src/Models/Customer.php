@@ -2,6 +2,7 @@
 
 namespace Webkul\Customer\Models;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webkul\Customer\Models\CustomerGroup;
@@ -13,7 +14,7 @@ use Webkul\Customer\Notifications\CustomerResetPassword;
 
 class Customer extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     protected $table = 'customers';
 
