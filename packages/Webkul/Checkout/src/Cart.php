@@ -189,7 +189,7 @@ class Cart {
 
             return true;
         } else {
-            $this->create($id, $data);
+            return $this->create($id, $data);
         }
     }
 
@@ -1063,7 +1063,18 @@ class Cart {
         } else {
             $simpleOrVariant = $this->product->find($id);
 
-            if($simpleOrVariant->type == 'simple') {
+            if($simpleOrVariant->parent_id != null) {
+                $parent = $simpleOrVariant->parent;
+
+                $data['product'] = $parent->id;
+                $data['selected_configurable_option'] = $simpleOrVariant->id;
+                $data['quantity'] = 1;
+                $data['super_attribute'] = 'From Buy Now';
+
+                $result = $this->add($parent->id, $data);
+
+                return $result;
+            } else {
                 $result = $this->add($id, $data);
 
                 return $result;
