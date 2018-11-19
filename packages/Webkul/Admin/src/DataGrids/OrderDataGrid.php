@@ -32,12 +32,12 @@ class OrderDataGrid
             //True in case of joins else aliasing key required on all cases
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [
@@ -47,12 +47,12 @@ class OrderDataGrid
                     'confirm_text' => 'Do you really want to do this?',
                     'icon' => 'icon pencil-lg-icon',
                 ],
-                [
-                    'type' => 'Delete',
-                    'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
-                    'icon' => 'icon trash-icon',
-                ],
+                // [
+                //     'type' => 'Delete',
+                //     'route' => route('admin.datagrid.delete'),
+                //     'confirm_text' => 'Do you really want to do this?',
+                //     'icon' => 'icon trash-icon',
+                // ],
             ],
 
             'join' => [],

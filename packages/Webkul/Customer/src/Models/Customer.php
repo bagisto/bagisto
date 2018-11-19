@@ -2,7 +2,7 @@
 
 namespace Webkul\Customer\Models;
 
-use Laravel\Passport\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webkul\Customer\Models\CustomerGroup;
@@ -12,9 +12,9 @@ use Webkul\Customer\Models\Wishlist;
 use Webkul\Customer\Notifications\CustomerResetPassword;
 
 
-class Customer extends Authenticatable
+class Customer extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, Notifiable;
+    use Notifiable;
 
     protected $table = 'customers';
 
@@ -22,7 +22,27 @@ class Customer extends Authenticatable
 
     protected $hidden = ['password', 'remember_token'];
 
-     /**
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    /**
      * Get the customer full name.
      */
     public function getNameAttribute() {

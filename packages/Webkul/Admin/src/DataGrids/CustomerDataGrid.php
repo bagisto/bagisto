@@ -83,13 +83,6 @@ class CustomerDataGrid
                     'sortable' => false,
                 ],
                 [
-                    'name' => 'phone',
-                    'alias' => 'Phone',
-                    'type' => 'number',
-                    'label' => 'Phone',
-                    'sortable' => true,
-                ],
-                [
                     'name' => 'customer_group_id',
                     'alias' => 'CustomerGroupId',
                     'type' => 'number',

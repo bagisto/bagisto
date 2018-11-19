@@ -1,16 +1,15 @@
 <?php
 
-use Illuminate\Http\Request;
-
-Route::prefix('api')->group(function () {
-    //customer APIs
-    Route::prefix('customer')->group(function () {
-        Route::post('login', 'Webkul\API\Http\Controllers\Customer\AuthController@create')->name('login');
-    });
-
-    //Admin APIs
-    Route::prefix('admin')->group(function () {
-        Route::post('login', 'Webkul\API\Http\Controllers\Admin\AuthController@create');
-    });
+Route::group(['middleware' => 'api', 'namespace' => 'Webkul\API\Http\Controllers', 'prefix' => 'api/customer'], function ($router) {
+    Route::post('login', 'Customer\AuthController@create');
+    Route::post('logout', 'Customer\AuthController@destroy');
+    Route::post('refresh', 'Customer\AuthController@refresh');
+    Route::post('me', 'Customer\AuthController@me');
 });
 
+Route::group(['namespace' => 'Webkul\API\Http\Controllers', 'prefix' => 'api/admin'], function ($router) {
+    Route::post('login', 'Admin\AuthController@create');
+    Route::post('logout', 'Admin\AuthController@destroy');
+    Route::post('refresh', 'Admin\AuthController@refresh');
+    Route::post('me', 'Admin\AuthController@me');
+});

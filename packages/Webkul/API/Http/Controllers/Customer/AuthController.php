@@ -6,8 +6,8 @@ use Webkul\API\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
-use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Http\Listeners\CustomerEventsHandler;
+use Auth;
 use Cart;
 
 /**
@@ -43,27 +43,68 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if (!auth()->guard('customer')->attempt(request(['email', 'password']))) {
-            return response()->json([false], 200);
+        $credentials['email'] = $request->input('email');
+        $credentials['password'] = $request->input('password');
+
+        if ($token = $this->guard()->attempt(request(['email', 'password']))) {
+            return $this->respondWithToken($token);
         }
 
-        if(auth()->guard('customer')->check()) {
-            $customer = auth()->guard('customer')->user();
+        return response()->json(['error' => 'Unauthorized'], 401);
+    }
 
-            $token = $customer->createToken('customer-token')->accessToken;
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
+            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_email' => auth()->guard('customer')->user()->email
+        ]);
+    }
 
-            return response()->json([$token], 200);
-        } else {
-            return response()->json([false], 200);
-        }
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\Guard
+     */
+    public function guard()
+    {
+        return Auth::guard('api');
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+        return $this->respondWithToken($this->guard()->refresh());
+    }
+
+    /**
+     * Get the authenticated User
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function me()
+    {
+        return response()->json($this->guard()->user());
     }
 
     public function destroy($id)
     {
-        auth()->guard('customer')->logout();
+        $this->guard()->logout();
 
-        Event::fire('customer.after.logout', $id);
-
-        return redirect()->route($this->_config['redirect']);
+        return response()->json(['message' => 'Successfully logged out']);
     }
 }

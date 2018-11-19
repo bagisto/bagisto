@@ -13,7 +13,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'passport',
+            'driver' => 'jwt',
             'provider' => 'customers',
         ],
 
@@ -27,10 +27,10 @@ return [
             'provider' => 'admins'
         ],
 
-        // 'admin-api' => [
-        //     'driver' => 'token',
-        //     'provider' => 'admins',
-        // ]
+        'admin-api' => [
+            'driver' => 'jwt',
+            'provider' => 'admins',
+        ]
     ],
 
     'providers' => [
