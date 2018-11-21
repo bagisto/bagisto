@@ -69,8 +69,16 @@ class InventorySourceController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:inventory_sources,code', new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required'
+            'code'           => ['required', 'unique:inventory_sources,code', new \Webkul\Core\Contracts\Validations\Code],
+            'name'           => 'required',
+            'contact_name'   => 'required',
+            'contact_email'  => 'required',
+            'contact_number' => 'required',
+            'street'         => 'required',
+            'country'        => 'required',
+            'state'          => 'required',
+            'city'           => 'required',
+            'postcode'       => 'required'
         ]);
 
         $this->inventorySource->create(request()->all());
@@ -103,8 +111,16 @@ class InventorySourceController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:inventory_sources,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required',
+            'code'           => ['required', 'unique:inventory_sources,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'name'           => 'required',
+            'contact_name'   => 'required',
+            'contact_email'  => 'required',
+            'contact_number' => 'required',
+            'street'         => 'required',
+            'country'        => 'required',
+            'state'          => 'required',
+            'city'           => 'required',
+            'postcode'       => 'required'
         ]);
 
         $this->inventorySource->update(request()->all(), $id);
