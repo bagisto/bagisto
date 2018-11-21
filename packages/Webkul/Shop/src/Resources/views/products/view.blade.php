@@ -83,7 +83,7 @@
 @push('scripts')
 
     <script type="text/x-template" id="product-view-template">
-        <form method="POST" id="product-form" action="{{ route('cart.add', $product->id) }}" @click.prevent="onSubmit($event)">
+        <form method="POST" id="product-form" action="{{ route('cart.add', $product->id) }}" @click="onSubmit($event)">
 
             <slot></slot>
 
@@ -102,6 +102,8 @@
                 onSubmit (e) {
                     if(e.target.getAttribute('type') != 'submit')
                         return;
+
+                    e.preventDefault();
 
                     this.$validator.validateAll().then(result => {
                         if (result) {

@@ -72,21 +72,27 @@ default.
 
 # 4.Installation:
 
-**Run the Command**
+**1. Run the Command**
 ~~~
 php artisan migrate
 ~~~
 
-**Run the Command**
+**2. Run the Command**
 ~~~
 php artisan db:seed
 ~~~
 
-**Run the Command**
+**3. Run the Command**
 ~~~
 php artisan vendor:publish
+
+-> Press 0 and then press enter to publish all assets and configurations.
 ~~~
 
+**4. Run the Command**
+```
+php artisan storage:link
+```
 
 > That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
 

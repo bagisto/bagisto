@@ -11,10 +11,12 @@ class Order extends Model implements OrderContract
 
     protected $statusLabel = [
         'pending' => 'Pending',
+        'pending_payment' => 'Pending Payment',
         'processing' => 'Processing',
         'completed' => 'Completed',
         'canceled' => 'Canceled',
         'closed' => 'Closed',
+        'fraud' => 'Fraud'
     ];
 
     /**
@@ -138,6 +140,9 @@ class Order extends Model implements OrderContract
      */
     public function canShip()
     {
+        if($this->status == 'fraud')
+            return false;
+
         foreach ($this->items as $item) {
             if ($item->qty_to_ship > 0) {
                 return true;
@@ -152,6 +157,9 @@ class Order extends Model implements OrderContract
      */
     public function canInvoice()
     {
+        if($this->status == 'fraud')
+            return false;
+            
         foreach ($this->items as $item) {
             if ($item->qty_to_invoice > 0) {
                 return true;
@@ -166,6 +174,9 @@ class Order extends Model implements OrderContract
      */
     public function canCancel()
     {
+        if($this->status == 'fraud')
+            return false;
+            
         foreach($this->items as $item) {
             if ($item->qty_to_cancel > 0) {
                 return true;

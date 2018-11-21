@@ -906,6 +906,8 @@ class Cart {
         $data = $this->toArray();
 
         $finalData = [
+            'cart_id' => $this->getCart()->id,
+
             'customer_id' => $data['customer_id'],
             'is_guest' => $data['is_guest'],
             'customer_email' => $data['customer_email'],

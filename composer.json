@@ -32,23 +32,22 @@
         "phpunit/phpunit": "^7.0"
     },
     "replace": {
-        "webkul/laravel-user": "v0.1.0",
-        "webkul/laravel-admin": "v0.1.0",
-        "webkul/laravel-ui": "v0.1.0",
-        "webkul/laravel-core": "v0.1.0",
-        "webkul/laravel-attribute": "v0.1.0",
-        "webkul/laravel-checkout": "v0.1.0",
-        "webkul/laravel-customer": "v0.1.0",
-        "webkul/laravel-inventory": "v0.1.0",
-        "webkul/laravel-category": "v0.1.0",
-        "webkul/laravel-product": "v0.1.0",
-        "webkul/laravel-shop": "v0.1.0",
-        "webkul/laravel-theme": "v0.1.0",
-        "webkul/laravel-shipping": "v0.1.0",
-        "webkul/laravel-payment": "v0.1.0",
-        "webkul/laravel-sales": "v0.1.0",
-        "webkul/laravel-tax": "v0.1.0",
-        "webkul/laravel-api": "v0.1.0"
+        "bagisto/laravel-user": "v0.1.0",
+        "bagisto/laravel-admin": "v0.1.0",
+        "bagisto/laravel-ui": "v0.1.0",
+        "bagisto/laravel-core": "v0.1.0",
+        "bagisto/laravel-attribute": "v0.1.0",
+        "bagisto/laravel-checkout": "v0.1.0",
+        "bagisto/laravel-customer": "v0.1.0",
+        "bagisto/laravel-inventory": "v0.1.0",
+        "bagisto/laravel-category": "v0.1.0",
+        "bagisto/laravel-product": "v0.1.0",
+        "bagisto/laravel-shop": "v0.1.0",
+        "bagisto/laravel-theme": "v0.1.0",
+        "bagisto/laravel-shipping": "v0.1.0",
+        "bagisto/laravel-payment": "v0.1.0",
+        "bagisto/laravel-sales": "v0.1.0",
+        "bagisto/laravel-tax": "v0.1.0"
     },
     "autoload": {
         "classmap": [
@@ -72,6 +71,7 @@
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
             "Webkul\\Shipping\\": "packages/Webkul/Shipping/src",
             "Webkul\\Payment\\": "packages/Webkul/Payment/src",
+            "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
             "Webkul\\Sales\\": "packages/Webkul/Sales/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\API\\": "packages/Webkul/API"

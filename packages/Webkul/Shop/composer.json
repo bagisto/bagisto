@@ -1,5 +1,5 @@
 {
-    "name": "webkul/laravel-shop",
+    "name": "bagisto/laravel-shop",
     "license": "MIT",
     "description" : "Shop package for store front and customers",
     "authors": [

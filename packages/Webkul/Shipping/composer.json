@@ -1,5 +1,5 @@
 {
-    "name": "webkul/laravel-shipping",
+    "name": "bagisto/laravel-shipping",
     "description": "Shipping Package for Shipping Method",
     "license": "MIT",
     "authors": [
