@@ -15,7 +15,15 @@ class InventoryTableSeeder extends Seeder
             'id' => 1,
             'code' => 'default',
             'name' => 'Default',
+            'contact_name' => 'Detroit Warehouse',
+            'contact_email' => 'warehouse@example.com',
+            'contact_number' => 1234567899,
             'status' => 1,
+            'country' => 'US',
+            'state' => 'MI',
+            'street' => '12th Street',
+            'city' => 'Detroit',
+            'postcode' => '48127',
         ]);
     }
 }

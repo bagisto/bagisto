@@ -60,6 +60,8 @@ class AccountController extends Controller
 
         if(!$data['password'])
             unset($data['password']);
+        else
+            $data['password'] = bcrypt($data['password']);
 
         $user->update($data);
 
