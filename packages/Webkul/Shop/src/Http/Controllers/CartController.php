@@ -85,11 +85,14 @@ class CartController extends Controller
      *
      * @return Mixed
      */
-
     public function add($id) {
-        $data = request()->input();
+        $result = Cart::add($id, request()->except('_token'));
 
-        Cart::add($id, $data);
+        if($result) {
+            session()->flash('success', trans('shop::app.checkout.cart.item.success'));
+        } else {
+            session()->flash('success', trans('shop::app.checkout.cart.item.error-add'));
+        }
 
         Cart::collectTotals();
 
@@ -115,9 +118,9 @@ class CartController extends Controller
      * @return response
      */
     public function updateBeforeCheckout() {
-        $data = request()->except('_token');
+        $request = request()->except('_token');
 
-        foreach($data['qty'] as $id => $quantity) {
+        foreach($request['qty'] as $id => $quantity) {
             if($quantity <= 0) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.illegal'));
 
@@ -125,7 +128,16 @@ class CartController extends Controller
             }
         }
 
-        Cart::update($data);
+        foreach($request['qty'] as $key => $value) {
+            $item = $this->cartItem->findOneByField('id', $key);
+
+            $data['quantity'] = $value;
+
+            Cart::updateItem($item->product_id, $data, $key);
+
+            unset($item);
+            unset($data);
+        }
 
         Cart::collectTotals();
 
@@ -144,7 +156,7 @@ class CartController extends Controller
     }
 
     public function buyNow($id) {
-        $result = Cart::proceedForBuyNow($id);
+        $result = Cart::proceedToBuyNow($id);
 
         Cart::collectTotals();
 
@@ -164,14 +176,14 @@ class CartController extends Controller
     public function moveToWishlist($id) {
         $result = Cart::moveToWishlist($id);
 
-        if($result) {
+        if(!$result) {
             Cart::collectTotals();
 
-            session()->flash('success', 'Item Successfully Moved To Wishlist');
+            session()->flash('success', trans('shop::app.wishlist.moved'));
 
             return redirect()->back();
         } else {
-            session()->flash('warning', 'Cannot move item to wishlist');
+            session()->flash('warning', trans('shop::app.wishlist.move-error'));
 
             return redirect()->back();
         }

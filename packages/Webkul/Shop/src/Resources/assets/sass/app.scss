@@ -281,12 +281,14 @@ input {
 
         .media {
             height: 125px;
-            width: 125px;
+            width: 110px;
         }
 
         .info {
-            display: block;
             margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
 
             .stars .icon {
                 height: 16px;
@@ -299,7 +301,7 @@ input {
         height: 120px;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
 
         a {
@@ -345,6 +347,7 @@ input {
         grid-auto-rows: auto;
         grid-column-gap: 48px;
         grid-row-gap: 15px;
+        justify-items: end;
     }
 
     .product-grid-3 {
@@ -352,6 +355,7 @@ input {
         grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
         grid-gap: 27px;
         grid-auto-rows: auto;
+        justify-items: center;
     }
 
     .product-card {
@@ -402,6 +406,7 @@ input {
                 margin-right: 10px;
                 text-transform: uppercase;
                 text-align: left;
+                box-shadow: 1px 1px 0px #ccc;
             }
 
             .add-to-wishlist {
@@ -422,6 +427,7 @@ input {
             padding: 4px 13px;
             font-size: 14px;
             color: #fff;
+            box-shadow: 1px 1px 1px #cccccc;
 
             &.sale {
                 background: #FF6472;
@@ -431,6 +437,10 @@ input {
                 background: #2ED04C;
             }
         }
+    }
+
+    .product-card:hover {
+        box-shadow: 1px 1px 10px #ccc;
     }
 
     @media only screen and (max-width: 580px) {
@@ -480,7 +490,9 @@ input {
 
         .product-card {
             width: 100%;
-            display: inline-block;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             margin-bottom: 20px;
 
             .product-image {
@@ -1955,6 +1967,12 @@ section.cart {
                 a.link {
                     margin-right: 15px;
                 }
+
+                div {
+                    button {
+                        margin-right: 15px;
+                    }
+                }
             }
         }
 
@@ -1981,11 +1999,14 @@ section.cart {
         .item-image {
             height: 160px;
             width: 160px;
+            box-shadow: 1px 1px 1px $border-color;
         }
 
         .item-details {
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
 
             .item-title {
                 font-size: 18px;
@@ -2008,37 +2029,44 @@ section.cart {
             }
 
             .misc {
-                display: inline-flex;
-                align-items: center;
+                display: flex;
+                width: 100%;
+                flex-direction: row;
                 justify-content: flex-start;
+                align-items: flex-start;
 
-                div.qty-text {
-                    color: $font-color-light;
-                    margin-right: 10px;
+                .control-group {
+                    font-size: 16px !important;
+                    width: 220px;
+                    margin: 0px;
+
+                    .wrap {
+                        display: inline-flex;
+                        align-items: center;
+                    }
+
+                    label {
+                        margin-right: 15px;
+                    }
+
+                    .control {
+                        height: 38px;
+                        width: 60px;
+                        border-radius: 3px;
+                        text-align: center;
+                        line-height: 38px;
+                    }
                 }
 
-                input.box {
-                    height: 38px;
-                    width: 60px;
-                    font-size: 16px;
-                    text-align: center;
-                    line-height: 38px;
-                    border: 1px solid $border-color;
-                    border-radius: 3px;
-                    margin-right: 30px;
-                    border-radius: 0px;
+                .remove, .towishlist {
+                    margin-top: 18px;
+                    margin-right: 15px;
                 }
-
-                .remove {
-                    color: $brand-color;
-                    margin-right: 30px;
-                }
-
-                .towishlist {
-                    color : $brand-color;
-                }
-
             }
+        }
+
+        .error-message {
+            color: $disc-price;
         }
     }
 }
@@ -2837,7 +2865,6 @@ section.review {
         width: 100%;
 
         .account-head {
-            margin-bottom: 20px;
 
             .back-icon {
                 display: none;
@@ -2880,7 +2907,7 @@ section.review {
 
 .address-card-1 {
     width: 260px;
-    border: 1px solid #E8E8E8;
+    border: 1px solid $border-color;
     display: flex;
     position: relative;
     flex-direction: row;

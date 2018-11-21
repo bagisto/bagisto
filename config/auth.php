@@ -14,7 +14,7 @@ return [
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'admins',
+            'provider' => 'customers',
         ],
 
         'customer' =>[

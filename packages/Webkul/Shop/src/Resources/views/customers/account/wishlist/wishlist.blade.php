@@ -14,8 +14,7 @@
 
             @if(count($items))
             <div class="account-action">
-                <a href="" style="margin-right: 15px;">{{ __('shop::app.wishlist.deleteall') }}</a>
-                <a href="">{{ __('shop::app.wishlist.moveall') }}</a>
+                <a href="{{ route('customer.wishlist.removeall') }}" style="margin-right: 15px;">{{ __('shop::app.wishlist.deleteall') }}</a>
             </div>
             @endif
             <div class="horizontal-rule"></div>
@@ -23,23 +22,28 @@
 
         <div class="account-items-list">
 
-            @if(count($items))
+            @if($items->count())
             @foreach($items as $item)
                 <div class="account-item-card mt-15 mb-15">
                     <div class="media-info">
                         @php
-                            $image = $productImageHelper->getProductBaseImage($item);
+                            $image = $productImageHelper->getProductBaseImage($item->product);
                         @endphp
-                        <img class="media" src="{{ $image['small_image_url'] }}" />
-
-                        {{--  {{ dd($item['url_key'])}}  --}}
-
-                        <div class="info mt-20">
+                        <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}" title="{{ $item->product->name }}">
+                            <img class="media" src="{{ $image['small_image_url'] }}" />
+                        </a>
+                        <div class="info">
                             <div class="product-name">
-                                {{--  <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}" title="{{ $item->product->name }}">  --}}
-                                    {{$item->name}}
-                                {{--  </a>  --}}
+                                <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}" title="{{ $item->product->name }}">
+                                    {{$item->product->name}}
+                                </a>
                             </div>
+                            @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
+                            <span class="stars" style="display: inline">
+                                @for($i=1;$i<=$reviewHelper->getAverageRating($item->product);$i++)
+                                    <span class="icon star-icon"></span>
+                                @endfor
+                            </span>
                         </div>
                     </div>
 

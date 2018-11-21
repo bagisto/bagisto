@@ -26,18 +26,6 @@ class CartItemRepository extends Repository
 
     /**
      * @param array $data
-     * @return mixed
-     */
-
-    public function create(array $data)
-    {
-        $cartitems = $this->model->create($data);
-
-        return $cartitems;
-    }
-
-    /**
-     * @param array $data
      * @param $id
      * @param string $attribute
      * @return mixed

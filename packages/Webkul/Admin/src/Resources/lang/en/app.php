@@ -144,6 +144,7 @@ return [
             'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
         ],
         'invoices' => [
+            'title' => 'Invoices',
             'id' => 'Id',
             'invoice-id' => 'Invoice Id',
             'date' => 'Invoice Date',
@@ -164,6 +165,7 @@ return [
             'order-date' => 'Order Date'
         ],
         'shipments' => [
+            'title' => 'Shipments',
             'id' => 'Id',
             'date' => 'Shipment Date',
             'order-id' => 'Order Id',

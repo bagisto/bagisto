@@ -1,7 +1,7 @@
-<div class="{{ $css->filter }}filter-wrapper">
+<div class="{{ $css->filter }} filter-wrapper">
     <div class="filter-row-one">
         <div class="search-filter" style="display: inline-flex; align-items: center;">
-            <input type="search" class="control search-field" placeholder="Search Users" value="" />
+            <input type="search" class="control search-field" placeholder="Search Here..." value="" />
             <div class="ic-wrapper">
                 <span class="icon search-icon search-btn"></span>
             </div>

@@ -49,7 +49,17 @@
                                     </td>
 
                                     <td>
-                                        <span class="order-status {{ $order->status }}">{{ $order->status_label }}</span>
+                                        @if($order->status == 'processing')
+                                            <span class="badge badge-md badge-success">Processing</span>
+                                        @elseif($order->status == 'completed')
+                                            <span class="badge badge-md badge-success">Completed</span>
+                                        @elseif($order->status == "canceled")
+                                            <span class="badge badge-md badge-danger">Canceled</span>
+                                        @elseif($order->status == "closed")
+                                            <span class="badge badge-md badge-info">Closed</span>
+                                        @elseif($order->status == "pending")
+                                            <span class="badge badge-md badge-warning">Pending</span>
+                                        @endif
                                     </td>
                                 </tr>
 

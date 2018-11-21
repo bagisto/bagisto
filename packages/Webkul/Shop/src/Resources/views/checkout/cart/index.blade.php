@@ -59,13 +59,16 @@
 
                                             </div>
                                         @endif
-
                                         <div class="misc">
-                                            <div class="qty-text" :class="[errors.has('qty') ? 'has-error' : '']">{{ __('shop::app.checkout.cart.quantity.quantity') }}</div>
+                                            <div class="control-group" :class="[errors.has('qty[{{$item->id}}]') ? 'has-error' : '']">
+                                                <div class="wrap">
+                                                    <label for="qty[{{$item->id}}]">{{ __('shop::app.checkout.cart.quantity.quantity') }}</label>
 
-                                            <input class="box" type="text" class="control" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}">
+                                                    <input type="text" class="control" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}">
+                                                </div>
 
-                                            <span class="control-error" v-if="errors.has('qty[{{$item->id}}]')">@{{ errors.first('qty') }}</span>
+                                                <span class="control-error" v-if="errors.has('qty[{{$item->id}}]')">@{{ errors.first('qty[{!!$item->id!!}]') }}</span>
+                                            </div>
 
                                             <span class="remove">
                                                 <a href="{{ route('shop.checkout.cart.remove', $item->id) }}" onclick="removeLink('Do you really want to do this?')">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
@@ -74,14 +77,14 @@
                                                 @if($item->parent_id != 'null' ||$item->parent_id != null)
                                                     <a href="{{ route('shop.movetowishlist', $item->id) }}" onclick="removeLink('Do you really want to do this?')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
                                                 @else
-                                                    <a href="{{ route('shop.movetowishlist', $item->child->id) }}" onclick="removeLink('Do you really want to do this?')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                    <a href="{{ route('shop.movetowishlist', $item->child->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
                                                 @endif
                                             </span>
                                         </div>
 
                                         @if (!cart()->isItemHaveQuantity($item))
-                                            <div class="error-message">
-                                                {{ __('shop::app.checkout.cart.quantity-error') }}
+                                            <div class="error-message mt-15">
+                                                * {{ __('shop::app.checkout.cart.quantity-error') }}
                                             </div>
                                         @endif
                                     </div>

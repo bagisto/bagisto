@@ -28,7 +28,7 @@
                                 <div class="product-name">{{$review->product->name}}</div>
 
                                 <div>
-                                    @for($i=0 ; $i < $review->rating ; $i++)
+                                    @for($i=0;$i<$review->rating;$i++)
                                         <span class="icon star-icon"></span>
                                     @endfor
                                 </div>

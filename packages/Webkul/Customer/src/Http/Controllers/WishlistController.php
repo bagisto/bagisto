@@ -51,17 +51,11 @@ class WishlistController extends Controller
      * Displays the listing resources if the customer having items in wishlist.
      */
     public function index() {
-        $wishlists = $this->wishlist->findWhere([
-                'channel_id' => core()->getCurrentChannel()->id,
-                'customer_id' => auth()->guard('customer')->user()->id]
-            );
-
-        $wishlistItems = array();
-
-        foreach($wishlists as $wishlist) {
-            array_push($wishlistItems, $this->wishlist->getItemsWithProducts($wishlist->id));
-        }
-
+        $wishlistItems = $this->wishlist->findWhere([
+            'channel_id' => core()->getCurrentChannel()->id,
+            'customer_id' => auth()->guard('customer')->user()->id]
+        );
+        // dd($wishlistItems->count());
         return view($this->_config['view'])->with('items', $wishlistItems);
     }
 
@@ -72,14 +66,6 @@ class WishlistController extends Controller
      */
     public function add($itemId) {
         $product = $this->product->findOneByField('id', $itemId);
-
-        if($product->type == "configurable") {
-            $slug = $product->url_key;
-
-            session()->flash('warning', trans('customer::app.wishlist.select-options'));
-
-            return redirect()->route('shop.products.index', $slug);
-        }
 
         $data = [
             'channel_id' => core()->getCurrentChannel()->id,
@@ -112,9 +98,10 @@ class WishlistController extends Controller
      * @param integer $itemId
      */
     public function remove($itemId) {
+        $result = $this->wishlist->deleteWhere(['customer_id' => auth()->guard('customer')->user()->id, 'channel_id' => core()->getCurrentChannel()->id, 'id' => $itemId]);
 
-        if($this->wishlist->deleteWhere(['customer_id' => auth()->guard('customer')->user()->id, 'channel_id' => core()->getCurrentChannel()->id, 'product_id' => $itemId])) {
-            session()->flash('success', trans('customer::app.wishlist.remove'));
+        if($result) {
+            session()->flash('success', trans('customer::app.wishlist.removed'));
 
             return redirect()->back();
         } else {
@@ -125,51 +112,58 @@ class WishlistController extends Controller
     }
 
     /**
-     * Add the configurable product
-     * to the wishlist.
-     *
-     * @return response
-     */
-    public function addconfigurable($urlkey) {
-        session()->flash('warning', trans('Select options before adding to wishlist'));
-        return redirect()->route('shop.products.index', $urlkey);
-    }
-
-    /**
      * Function to move item from wishlist to cart.
      *
      * @param integer $itemId
      */
-    public function moveAll() {
-        Cart::moveAllToCart();
-    }
+    public function move($itemId) {
+        $wishlistItem = $this->wishlist->findOneByField('id', $itemId);
+        $result = Cart::moveToCart($wishlistItem);
 
-    /**
-     * Function to move item from wishlist to cart.
-     *
-     * @param integer $itemId
-     */
-    public function move($productId) {
-        $result = Cart::moveToCart($productId);
+        if($result == 1) {
+            if($wishlistItem->delete()) {
+                session()->flash('success', trans('shop::app.wishlist.moved'));
 
-        if($result) {
-            $wishlist = $this->wishlist->findWhere(['customer_id' => auth()->guard('customer')->user()->id, 'product_id' => $productId]);
-
-            if($this->wishlist->delete($wishlist[0]->id)) {
                 Cart::collectTotals();
-
-                session()->flash('success', 'Item Moved To Cart Successfully');
 
                 return redirect()->back();
             } else {
-                session()->flash('error', 'Item Cannot Be Moved To Cart Successfully');
+                session()->flash('error', trans('shop::app.wishlist.move-error'));
 
                 return redirect()->back();
             }
-        } else {
-            Session('error', 'Cannot Add The Product To Wishlist Due To Unknown Problems, Please Checkback Later');
+        } else if($result == 0) {
+            Session('error', trans('shop::app.wishlist.error'));
 
             return redirect()->back();
+        } else if($result == -1) {
+            if(!$wishlistItem->delete()) {
+                session()->flash('error', trans('shop::app.wishlist.move-error'));
+
+                return redirect()->back();
+            }
+
+            session()->flash('warning', trans('shop::app.checkout.cart.add-config-warning'));
+
+            return redirect()->route('shop.products.index', $wishlistItem->product->url_key);
         }
+    }
+
+    /**
+     * Function to remove all of the items items in the customer's wishlist
+     *
+     * @return Mixed Response & Boolean
+     */
+    public function removeAll() {
+        $wishlistItems = auth()->guard('customer')->user()->wishlist_items;
+
+        if($wishlistItems->count() > 0) {
+            foreach($wishlistItems as $wishlistItem) {
+                $this->wishlist->delete($wishlistItem->id);
+            }
+        }
+
+        session()->flash('success', trans('customer::app.wishlist.remove-all-success'));
+        return redirect()->back();
     }
 }

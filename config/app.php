@@ -140,11 +140,10 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+
     /*
         Code Editor
-
     */
-
     'editor' =>'vscode',
 
 
@@ -219,6 +218,7 @@ return [
         Webkul\Paypal\Providers\PaypalServiceProvider::class,
         Webkul\Sales\Providers\SalesServiceProvider::class,
         Webkul\Tax\Providers\TaxServiceProvider::class,
+        Webkul\API\Providers\APIServiceProvider::class,
     ],
 
     /*
@@ -273,6 +273,6 @@ return [
         'Cart' => Webkul\Checkout\Facades\Cart::class,
         'Core' => Webkul\Core\Facades\Core::class,
         'DbView' => Flynsarmy\DbBladeCompiler\Facades\DbView::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 ];
