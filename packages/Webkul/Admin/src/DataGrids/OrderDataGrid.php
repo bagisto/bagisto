@@ -113,6 +113,10 @@ class OrderDataGrid
                             return '<span class="badge badge-md badge-info">Closed</span>';
                         else if($value == "pending")
                             return '<span class="badge badge-md badge-warning">Pending</span>';
+                        else if($value == "pending_payment")
+                            return '<span class="badge badge-md badge-warning">Pending Payment</span>';
+                        else if($value == "fraud")
+                            return '<span class="badge badge-md badge-danger">Fraud</span>';
                     },
                 ],
             ],
