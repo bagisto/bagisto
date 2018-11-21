@@ -2,14 +2,13 @@
 
 namespace Webkul\User\Models;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webkul\User\Models\Role;
 use Webkul\User\Notifications\AdminResetPassword;
 
 
-class Admin extends Authenticatable implements JWTSubject
+class Admin extends Authenticatable
 {
     use Notifiable;
 
@@ -30,26 +29,6 @@ class Admin extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
 
     /**
      * Get the role that owns the admin.

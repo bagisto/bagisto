@@ -2,7 +2,6 @@
 
 namespace Webkul\Customer\Models;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webkul\Customer\Models\CustomerGroup;
@@ -11,8 +10,7 @@ use Webkul\Sales\Models\Order;
 use Webkul\Customer\Models\Wishlist;
 use Webkul\Customer\Notifications\CustomerResetPassword;
 
-
-class Customer extends Authenticatable implements JWTSubject
+class Customer extends Authenticatable
 {
     use Notifiable;
 
@@ -21,26 +19,6 @@ class Customer extends Authenticatable implements JWTSubject
     protected $fillable = ['first_name', 'channel_id', 'last_name', 'gender', 'date_of_birth', 'email', 'password', 'customer_group_id', 'subscribed_to_news_letter'];
 
     protected $hidden = ['password', 'remember_token'];
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
 
     /**
      * Get the customer full name.
@@ -94,7 +72,7 @@ class Customer extends Authenticatable implements JWTSubject
     /**
      * get all cart inactive cart instance of a customer
      */
-    public function carts() {
+    public function all_carts() {
         return $this->hasMany(Cart::class, 'customer_id');
     }
 

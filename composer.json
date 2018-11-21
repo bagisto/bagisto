@@ -21,8 +21,7 @@
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^3.2",
         "prettus/l5-repository": "^2.6",
-        "propaganistas/laravel-intl": "^2.0",
-        "tymon/jwt-auth": "dev-develop"
+        "propaganistas/laravel-intl": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

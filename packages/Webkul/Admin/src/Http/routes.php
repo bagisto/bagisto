@@ -2,8 +2,6 @@
 
 Route::group(['middleware' => ['web']], function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/grid', 'Webkul\Product\Http\Controllers\ProductController@test');
-
         // Login Routes
         Route::get('/login', 'Webkul\User\Http\Controllers\SessionController@create')->defaults('_config', [
             'view' => 'admin::users.sessions.create'
@@ -12,7 +10,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/login', 'Webkul\User\Http\Controllers\SessionController@store')->defaults('_config', [
             'redirect' => 'admin.dashboard.index'
         ])->name('admin.session.store');
-
 
         // Forget Password Routes
         Route::get('/forget-password', 'Webkul\User\Http\Controllers\ForgetPasswordController@create')->defaults('_config', [
@@ -29,7 +26,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/reset-password', 'Webkul\User\Http\Controllers\ResetPasswordController@store')->defaults('_config', [
             'redirect' => 'admin.dashboard.index'
         ])->name('admin.reset-password.store');
-
 
         // Admin Routes
         Route::group(['middleware' => ['admin']], function () {
@@ -444,6 +440,22 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.account.edit');
 
             Route::put('/account', 'Webkul\User\Http\Controllers\AccountController@update')->name('admin.account.update');
+
+            //API Authorizations
+            Route::get('/api/clients', 'Webkul\Admin\Http\Controllers\AuthorizationController@show')->defaults('_config', [
+                'view' => 'admin::apiauth.client'
+             ])->name('admin.index.oauth.client');
+
+             //view an OAuth API Client
+             Route::get('/api/clients/view/{id}', 'Webkul\Admin\Http\Controllers\AuthorizationController@view')->defaults('_config', [
+                'view' => 'admin::apiauth.view'
+             ])->name('admin.view.oauth.client');
+
+            //edit an OAuth API Client
+            Route::get('/api/clients/delete/{id}', 'Webkul\Admin\Http\Controllers\AuthorizationController@delete')->defaults('_config', [
+                'view' => 'admin::apiauth.edit'
+            ])->name('admin.delete.oauth.client');
+
 
             // Admin Store Front Settings Route
             //slider index
