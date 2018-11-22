@@ -16,7 +16,7 @@
                 <span class="account-heading">{{ __('shop::app.customer.account.address.create.title') }}</span>
                 <span></span>
             </div>
-            
+
             <form method="post" action="{{ route('customer.address.create') }}" @submit.prevent="onSubmit">
 
                 <div class="account-table-content">
@@ -56,11 +56,11 @@
 
                     <div class="button-group">
                         <input class="btn btn-primary btn-lg" type="submit" value="{{ __('shop::app.customer.account.address.create.submit') }}">
-                        <button class="btn btn-primary btn-lg" type="submit">
+                        {{-- <button class="btn btn-primary btn-lg" type="submit">
                             {{ __('shop::app.customer.account.address.edit.submit') }}
-                        </button>
+                        </button> --}}
                     </div>
-                        
+
                 </div>
 
             </form>

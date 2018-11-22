@@ -24,6 +24,8 @@ class AddressController extends Controller
 
     public function __construct(CustomerAddress $customerAddress)
     {
+        $this->middleware('customer');
+
         $this->customerAddress = $customerAddress;
 
         if(auth()->guard('customer')->check()) {
@@ -38,7 +40,7 @@ class AddressController extends Controller
      *
      * @return response JSON
      */
-    public function getAddress() {
+    public function get() {
         if($this->customer == false) {
             return response()->json($this->customer, 401);
         } else {
@@ -48,7 +50,7 @@ class AddressController extends Controller
         }
     }
 
-    public function getDefaultAddress() {
+    public function getDefault() {
         if($this->customer == false) {
             return response()->json($this->customer, 401);
         } else {
@@ -62,7 +64,7 @@ class AddressController extends Controller
         }
     }
 
-    public function createAddress() {
+    public function create() {
         $data = request()->all();
 
         $validator = Validator::make(request()->all(), [
@@ -86,14 +88,34 @@ class AddressController extends Controller
             $data['default_address'] = 1;
         }
 
-        if($this->address->create($data)) {
-            session()->flash('success', 'Address have been successfully added.');
+        $result = $this->customerAddress->create($data);
 
-            return redirect()->route($this->_config['redirect']);
+        if($result) {
+            return response()->json(true, 200);
         } else {
-            session()->flash('error', 'Address cannot be added.');
-
-            return redirect()->back();
+            return response()->json(false, 200);
         }
+    }
+
+    public function delete($id) {
+        $result = $this->customerAddress->delete($id);
+
+        return response()->json($result, 200);
+    }
+
+    public function makeDefault($id) {
+        $defaultAddress = $this->customer->default_address;
+
+        if($defaultAddress != null && $defaultAddress->count() > 0) {
+            $defaultAddress->update(['default_address' => 0]);
+        }
+
+        if($this->customerAddress->find($id)->default_address == 1) {
+            return response()->json(false, 200);
+        }
+
+        $result = $this->customerAddress->update(['default_address' => 1], $id);
+
+        return response()->json($result, 200);
     }
 }

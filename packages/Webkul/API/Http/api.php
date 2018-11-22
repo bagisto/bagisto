@@ -14,10 +14,14 @@ Route::group(['namespace' => 'Webkul\API\Http\Controllers\Customer', 'prefix' =>
     Route::get('get/wishlist', 'WishlistController@getWishlist');
 
     //address
-    Route::get('get/address', 'AddressController@getAddress');
-    Route::get('get/default/address', 'AddressController@getDefaultAddress');
+    Route::get('get/address', 'AddressController@get');
+    Route::get('get/default/address', 'AddressController@getDefault');
 
-    Route::post('create/address', 'AddressController@createAddress');
+    Route::post('create/address', 'AddressController@create');
+
+    Route::put('make/default/address/{id}', 'AddressController@makeDefault');
+
+    Route::delete('delete/address/{id}', 'AddressController@delete');
 });
 
 Route::group(['namespace' => 'Webkul\API\Http\Controllers\Shop', 'prefix' => 'api/cart'], function ($router) {

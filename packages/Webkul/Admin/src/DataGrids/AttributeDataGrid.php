@@ -5,7 +5,6 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-
 /**
  * Attributes DataGrid
  *
