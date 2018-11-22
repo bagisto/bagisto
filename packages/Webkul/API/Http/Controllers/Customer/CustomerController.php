@@ -8,6 +8,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Auth;
 use Cart;
+use Validator;
+use Hash;
 
 /**
  * Customer controller for the APIs of Profile customer
@@ -37,17 +39,46 @@ class CustomerController extends Controller
         if($this->customer == 'unauthorized') {
             return response()->json($this->customer, 401);
         } else {
-            $customer = [
-                'id' => $this->customer->id,
-                'first_name' => $this->customer->first_name,
-                'last_name' => $this->customer->last_name,
-                'gender' => $this->customer->gender,
-                'date_of_birth' => $this->customer->date_of_birth,
-                'email' => $this->customer->email,
-                'subscribed_to_news_letter' => $this->customer->subscribed_to_news_letter,
-            ];
+            $customer = auth()->guard('customer')->user();
         }
 
         return response()->json($customer, 200);
+    }
+
+    public function updateProfile($id) {
+        $validator = Validator::make(request()->all(), [
+            'first_name' => 'string|required',
+            'last_name' => 'string|required',
+            'gender' => 'required',
+            'date_of_birth' => 'date',
+            'email' => 'email|required|unique:customers,email,'.$id,
+            'password' => 'confirmed|required_if:oldpassword,!=,null'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 400);
+        }
+
+        $data = collect(request()->all())->toArray();
+
+        if($data['oldpassword'] == null) {
+            $data = collect(request()->input())->except([ 'oldpassword', 'password', 'password_confirmation'])->toArray();
+        } else {
+            if(Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
+                $data = collect(request()->input())->toArray();
+
+                $data['password'] = bcrypt($data['password']);
+            } else {
+                return response()->json('Old password does not match', 200);
+            }
+        }
+
+        $result = $this->customer->update($data);
+
+        if($result) {
+            return response()->json(true, 200);
+        } else {
+            return response()->json(false, 200);
+        }
     }
 }

@@ -7,8 +7,9 @@ Route::group(['namespace' => 'Webkul\API\Http\Controllers\Customer', 'prefix' =>
     //auth route for customer
     Route::post('logout', 'AuthController@destroy');
 
-    //get user
-    Route::get('get/user', 'CustomerController@getProfile');
+    //get customer profile
+    Route::get('get/profile', 'CustomerController@getProfile');
+    Route::put('update/profile/{id}', 'CustomerController@updateProfile');
 
     //wishlist
     Route::get('get/wishlist', 'WishlistController@getWishlist');
@@ -16,11 +17,8 @@ Route::group(['namespace' => 'Webkul\API\Http\Controllers\Customer', 'prefix' =>
     //address
     Route::get('get/address', 'AddressController@get');
     Route::get('get/default/address', 'AddressController@getDefault');
-
     Route::post('create/address', 'AddressController@create');
-
     Route::put('make/default/address/{id}', 'AddressController@makeDefault');
-
     Route::delete('delete/address/{id}', 'AddressController@delete');
 });
 

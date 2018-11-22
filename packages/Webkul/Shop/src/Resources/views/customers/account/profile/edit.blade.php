@@ -58,7 +58,7 @@
 
                     <div class="control-group" :class="[errors.has('old_password') ? 'has-error' : '']">
                         <label for="password">{{ __('shop::app.customer.account.profile.opassword') }}</label>
-                        <input type="oldpassword" class="control" name="oldpassword">
+                        <input type="password" class="control" name="oldpassword">
                         <span class="control-error" v-if="errors.has('oldpassword')">@{{ errors.first('oldpassword') }}</span>
                     </div>
 
@@ -68,7 +68,7 @@
                         <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                     </div>
 
-                    <div class="control-group">
+                    <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
                         <label for="password">{{ __('shop::app.customer.account.profile.cpassword') }}</label>
                         <input type="password" class="control" name="password_confirmation">
                         <span>@{{ errors.first('password') }}</span>
