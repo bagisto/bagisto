@@ -4,6 +4,9 @@ Route::group(['namespace' => 'Webkul\API\Http\Controllers\Customer', 'prefix' =>
     //auth route for customer
     Route::post('login', 'AuthController@create');
 
+    //auth route for customer
+    Route::post('logout', 'AuthController@destroy');
+
     //get user
     Route::get('get/user', 'CustomerController@getProfile');
 
@@ -13,6 +16,8 @@ Route::group(['namespace' => 'Webkul\API\Http\Controllers\Customer', 'prefix' =>
     //address
     Route::get('get/address', 'AddressController@getAddress');
     Route::get('get/default/address', 'AddressController@getDefaultAddress');
+
+    Route::post('create/address', 'AddressController@createAddress');
 });
 
 Route::group(['namespace' => 'Webkul\API\Http\Controllers\Shop', 'prefix' => 'api/cart'], function ($router) {

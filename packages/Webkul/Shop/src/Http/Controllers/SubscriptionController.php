@@ -84,7 +84,7 @@ class SubscriptionController extends Controller
             $alreadySubscribed = $this->subscription->findWhere(['email' => $email]);
 
             $unique = function() use($alreadySubscribed){
-                if($alreadySubscribed->count() > 0) {
+                if($alreadySubscribed->count() > 0 ) {
                     return 0;
                 } else {
                     return 1;
@@ -105,7 +105,7 @@ class SubscriptionController extends Controller
                 ]);
             } else {
                 $user = auth()->guard('customer')->user();
-
+                $token = auth()->guard('customer')->user()->email;
                 $result = $user->update(['subscribed_to_news_letter' => 1]);
             }
 
@@ -138,6 +138,27 @@ class SubscriptionController extends Controller
      * @var string $token
      */
     public function unsubscribe($token) {
-        dd('unsubscribing');
+        if(auth()->guard('customer')->check()) {
+            if(auth()->guard('customer')->user()->email == $token) {
+                auth()->guard('customer')->user()->update(['subscribed_to_news_letter' => 0]);
+                session('info', 'You Are Unsubscribed');
+            } else {
+                session()->flash('warning', 'You must be logged in with correct to unsubscribe');
+            }
+        } else {
+            $subscriber = $this->subscription->findOneByField('token', $token);
+
+            if($subscriber->count() > 0 && $subscriber->delete()) {
+                session('info', 'You Are Unsubscribed');
+            } else {
+                session('info', 'You Have Already Unsubscribed');
+            }
+
+            if($this->customer->findOneByField('email', $token)) {
+                session('info', 'You must Logged In To Unsubscribe');
+            }
+        }
+
+        return redirect()->back();
     }
 }

@@ -4,6 +4,8 @@ namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
+use Webkul\Customer\Mail\VerificationEmail;
 use Illuminate\Routing\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 
@@ -61,18 +63,56 @@ class RegistrationController extends Controller
 
         $data['channel_id'] = core()->getCurrentChannel()->id;
 
+        $data['is_verified'] = 0;
+
         if ($this->customer->create($data)) {
+
+            $verificationData['email'] = $data['email'];
 
             session()->flash('success', 'Account Created Successfully');
 
-            return redirect()->back();
+            $attempt = auth()->guard('customer')->attempt(request(['email', 'password']));
 
-            // return redirect()->route($this->_config['redirect'])->with('message', 'Account Created Successfully, Try To Log In');
+            if($attempt) {
+                try {
+                    Mail::send(new VerificationEmail($verificationData));
+                }catch(\Exception $e) {
+                    session()->flash('success', 'Account Created Successfully, But Verification Email Is Not Sent.');
 
+                    return redirect()->route($this->_config['redirect']);
+                }
+
+                return redirect()->route($this->_config['redirect']);
+            } else {
+                return redirect()->back();
+            }
         } else {
             session()->flash('error', 'Cannot Create Your Account');
 
             return redirect()->back();
         }
+    }
+
+    /**
+     * Method to verify account
+     *
+     */
+    public function verifyAccount($email)
+    {
+        $customer = $this->customer->findOneByField('email', $email);
+
+        if($customer) {
+            if($customer->is_verified == 1) {
+                session()->flash('error', 'Your Account is already verified');
+            } else {
+                $data['is_verified'] = 1;
+                $this->customer->update($data,$customer->id);
+                session()->flash('info', 'Your Account has been verified');
+            }
+        } else {
+            session()->flash('error', 'You dont have account with us');
+        }
+
+        return redirect()->back();
     }
 }

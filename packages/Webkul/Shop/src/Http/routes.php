@@ -150,6 +150,9 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
             'redirect' => 'customer.account.index',
         ])->name('customer.register.create');
 
+        //verify account
+        Route::get('/verify-account/{email}', 'Webkul\Customer\Http\Controllers\RegistrationController@verifyAccount')->name('customer.verify');
+
         // Auth Routes
         Route::group(['middleware' => ['customer']], function () {
 

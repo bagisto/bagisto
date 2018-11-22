@@ -35,6 +35,14 @@
 
             @include('shop::layouts.header.index')
 
+            @auth('customer')
+                @if(auth()->guard('customer')->user()->is_verified == 0)
+                    <div class="verify-account">
+                        <span>Verify Your Account</span>
+                    </div>
+                @endif
+            @endauth
+
             @yield('slider')
 
             <div class="content-container">

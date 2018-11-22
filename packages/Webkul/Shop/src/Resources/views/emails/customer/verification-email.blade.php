@@ -16,8 +16,8 @@
         </div>
 
         <div  style="margin-top: 40px; text-align: center">
-            <a href="{{ route('shop.unsubscribe', $data['token']) }}" href="#" style="font-size: 16px;
-            color: #FFFFFF; text-align: center; background: #0031F0; padding: 10px 100px;text-decoration: none;"> {{ __('shop::app.subscription.unsubscribe') }} </a>
+            <a href="{{ route('customer.verify', $data['email']) }}"href="#" style="font-size: 16px;
+            color: #FFFFFF; text-align: center; background: #0031F0; padding: 10px 100px;text-decoration: none;">Verify Your Account</a>
         </div>
     </div>
 

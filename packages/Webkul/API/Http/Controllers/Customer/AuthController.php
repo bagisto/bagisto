@@ -18,14 +18,6 @@ use Cart;
  */
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        // $this->middleware('customer')->except(['show','create']);
-        // $this->_config = request('_config');
-        // $subscriber = new CustomerEventsHandler;
-        // Event::subscribe($subscriber);
-    }
-
     /**
      * To get the details of user to display on profile
      *
@@ -34,10 +26,22 @@ class AuthController extends Controller
     public function create() {
         $data = request()->except('_token');
 
-        if(!auth()->guard('customer')->attempt($data)) {
-            return response()->json('Incorrect Credentials', 200);
+        if(!auth()->guard('customer')->check()) {
+            if(!auth()->guard('customer')->attempt($data)) {
+                return response()->json(['unauthenticated', 'invalid creds'], 401);
+            } else {
+                return response()->json(['authenticated'], 200);
+            }
         } else {
-            return response()->json(auth()->guard('customer')->user(), 200);
+            return response()->json(['already authenticated'], 200);
+        }
+    }
+
+    public function destroy() {
+        if(auth()->guard('customer')->logout()) {
+            return response()->json(['logged out'], 200);
+        } else {
+            return response()->json(['already logged out'], 200);
         }
     }
 }

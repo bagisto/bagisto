@@ -23,18 +23,22 @@ class WishlistController extends Controller
         if(auth()->guard('customer')->check()) {
             $this->customer = auth()->guard('customer')->user();
         } else {
-            return response()->json('Unauthorized', 401);
+            $this->customer = false;
         }
     }
 
     public function getWishlist()
     {
-        $wishlist = $this->customer->wishlist_items;
-
-        if($wishlist->count() > 0) {
-            return response()->json($wishlist, 200);
+        if($this->customer == false) {
+            return response()->json($this->customer, 401);
         } else {
-            return response()->json('Wishlist Empty', 200);
+            $wishlist = $this->customer->wishlist_items;
+
+            if($wishlist->count() > 0) {
+                return response()->json($wishlist, 200);
+            } else {
+                return response()->json('Wishlist Empty', 200);
+            }
         }
     }
 }

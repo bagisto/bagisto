@@ -24,7 +24,7 @@ class CustomerController extends Controller
         if(auth()->guard('customer')->check()) {
             $this->customer = auth()->guard('customer')->user();
         } else {
-            return response()->json('Unauthorized', 401);
+            $this->customer = 'unauthorized';
         }
     }
 
@@ -34,6 +34,20 @@ class CustomerController extends Controller
      * @return response JSON
      */
     public function getProfile() {
-        return $this->customer;
+        if($this->customer == 'unauthorized') {
+            return response()->json($this->customer, 401);
+        } else {
+            $customer = [
+                'id' => $this->customer->id,
+                'first_name' => $this->customer->first_name,
+                'last_name' => $this->customer->last_name,
+                'gender' => $this->customer->gender,
+                'date_of_birth' => $this->customer->date_of_birth,
+                'email' => $this->customer->email,
+                'subscribed_to_news_letter' => $this->customer->subscribed_to_news_letter,
+            ];
+        }
+
+        return response()->json($customer, 200);
     }
 }

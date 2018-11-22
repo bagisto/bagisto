@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-
 /**
  * Subscriber Mail class
  *
@@ -16,13 +15,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class SubscriptionEmail extends Mailable
 {
     use Queueable, SerializesModels;
-
     public $subscriptionData;
-
     public function __construct($subscriptionData) {
         $this->subscriptionData = $subscriptionData;
     }
-
     /**
      * Build the message.
      *
