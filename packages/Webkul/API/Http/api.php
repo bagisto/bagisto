@@ -1,6 +1,10 @@
 <?php
 
 Route::group(['namespace' => 'Webkul\API\Http\Controllers\Customer', 'prefix' => 'api/customer'], function ($router) {
+    Route::post('/register', 'RegistrationController@create');
+});
+
+Route::group(['namespace' => 'Webkul\API\Http\Controllers\Customer', 'prefix' => 'api/customer'], function ($router) {
     //auth route for customer
     Route::post('login', 'AuthController@create');
 
