@@ -10,7 +10,7 @@
 # About Bagisto
 
 [Bagisto](https://www.bagisto.com) is a hand tailored E-Commerce framework designed on some of the hottest opensource technologies
-such as [Laravel](https://laravel.com) a [PHP](https://secure.php.net/) framework, [Vue.js](https://vuejs.org)
+such as [Laravel](https://laravel.com) a [PHP](https://secure.php.net) framework, [Vue.js](https://vuejs.org)
 a [Node.js](https://nodejs.org) framework.
 
 **Bagisto is viable attempt to cut down your time, cost and workforce for building online stores or migrating from physical stores
@@ -33,6 +33,7 @@ It packs in lots of demanding features that allows your business to scale in no 
 * check out [more....](https://bagisto.com/features/).
 
 **For Developers**:
+
 Dev guys can take advantage of two of the hottest frameworks used in this project Laravel and Vue.js, both of these frameworks have been used in Bagisto.
 Bagisto is using power of both of these frameworks and making best out of it out of the box.
 
@@ -55,7 +56,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 composer create-project bagisto/bagisto
 ~~~
 
-if the above command's process was successful, you will find directory **bagisto** and all of the code will be inside it.
+If the above command's process was successful, you will find directory **bagisto** and all of the code will be inside it.
 
 After it set your **.env** variable, especially the ones below:
 * **APP_URL**
@@ -110,4 +111,5 @@ php artisan vendor:publish
 
 
 # License
+
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://opensource.org/licenses/MIT).
