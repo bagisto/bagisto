@@ -7,7 +7,7 @@
 4. #### Configuration
 
 
-# 1. About Bagisto:
+### 1. About Bagisto:
 
 [Bagisto](https://www.bagisto.com) is a hand tailored E-Commerce framework designed on some of the hottest opensource technologies
 such as [Laravel](https://laravel.com) a [PHP](https://secure.php.net/) framework, [Vue.js](https://vuejs.org)
@@ -15,6 +15,8 @@ a [Node.js](https://nodejs.org) framework.
 
 **Bagisto is viable attempt to cut down your time, cost and workforce for building online stores or migrating from physical stores
 to the ever demanding online world. Your business whether small or huge it suits all and very simple to set it up.**
+
+**We are also having a forum for any type of your concern, feature request discussions. Please visit: [Bagisto Forums](https://forums.bagisto.com/)**
 
 It packs in lots of demanding features that allows your business to scale in no time:
 
@@ -30,14 +32,13 @@ It packs in lots of demanding features that allows your business to scale in no 
 * Orders Management System.
 * Customer Cart, Wishlist, Product Reviews.
 * Simple and Configurable Products.
-* check out [more....](https://bagisto.com/features/).
+* Check out [more....](https://bagisto.com/features/).
 
 **For Developers**:
 Dev guys can take advantage of two of the hottest frameworks used in this project Laravel and Vue.js, both of these frameworks have been used in Bagisto.
 Bagisto is using power of both of these frameworks and making best out of it out of the box.
 
-
-# 2. Requirements:
+### 2. Requirements:
 
 * **OS**: Ubuntu 16.04 LTS or higher.
 * **SERVER**: Apache 2 or NGINX
@@ -48,7 +49,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 * **Node**: 8.11.3 LTS or higher.
 * **Composer**: 1.6.5 or higher.
 
-# 3. Configuration:
+### 3. Configuration:
 
 **Run this Command** to download the project on to your local machine or server:
 ~~~
@@ -70,7 +71,7 @@ Although you have to set the mailer variables also for full functioning of your 
 default.
 
 
-# 4.Installation:
+### 4.Installation:
 
 **1. Run the Command**
 ~~~
@@ -96,17 +97,14 @@ php artisan storage:link
 
 > That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
 
-**Migration from v0.1.0 to v0.1.1**
+
+# Migration from v0.1.0 to v0.1.1
 
 **Run commands below:**
 
-'''
-php artisan migrate
-'''
+> **php artisan migrate**
 
-'''
-php artisan vendor:publish
-'''
+> **php artisan vendor:publish**
 
 
 # License
