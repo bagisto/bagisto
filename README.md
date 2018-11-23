@@ -1,13 +1,13 @@
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;![Bagisto Logo](https://bagisto.com/wp-content/themes/bagisto/images/logo.png)
 
 
-1. #### Introduction
-2. #### Requirements
-3. #### Installation
-4. #### Configuration
+1. **[Introduction](#about-bagisto)**
+2. **[Requirements](#requirements)**
+3. **[Configuration](#configuration)**
+4. **[Installation](#installation)**
 
 
-# 1. About Bagisto:
+# About Bagisto
 
 [Bagisto](https://www.bagisto.com) is a hand tailored E-Commerce framework designed on some of the hottest opensource technologies
 such as [Laravel](https://laravel.com) a [PHP](https://secure.php.net/) framework, [Vue.js](https://vuejs.org)
@@ -37,7 +37,7 @@ Dev guys can take advantage of two of the hottest frameworks used in this projec
 Bagisto is using power of both of these frameworks and making best out of it out of the box.
 
 
-# 2. Requirements:
+# Requirements
 
 * **OS**: Ubuntu 16.04 LTS or higher.
 * **SERVER**: Apache 2 or NGINX
@@ -48,7 +48,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 * **Node**: 8.11.3 LTS or higher.
 * **Composer**: 1.6.5 or higher.
 
-# 3. Configuration:
+# Configuration
 
 **Run this Command** to download the project on to your local machine or server:
 ~~~
@@ -70,7 +70,7 @@ Although you have to set the mailer variables also for full functioning of your 
 default.
 
 
-# 4. Installation:
+# Installation
 
 **1. Run the Command**
 ~~~
