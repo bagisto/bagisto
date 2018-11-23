@@ -70,7 +70,7 @@ Although you have to set the mailer variables also for full functioning of your 
 default.
 
 
-# 4.Installation:
+# 4. Installation:
 
 **1. Run the Command**
 ~~~
