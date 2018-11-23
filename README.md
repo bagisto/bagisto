@@ -100,13 +100,13 @@ php artisan storage:link
 
 **Run commands below:**
 
-'''
+```
 php artisan migrate
-'''
+```
 
-'''
+```
 php artisan vendor:publish
-'''
+```
 
 
 # License
