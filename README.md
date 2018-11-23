@@ -96,6 +96,17 @@ php artisan storage:link
 
 > That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
 
+**Migration from v0.1.0 to v0.1.1**
+
+**Run commands below:**
+
+'''
+php artisan migrate
+'''
+
+'''
+php artisan vendor:publish
+'''
 
 
 # License
