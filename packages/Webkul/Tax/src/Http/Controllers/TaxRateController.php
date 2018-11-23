@@ -85,23 +85,21 @@ class TaxRateController extends Controller
         ]);
 
         $data = request()->all();
-        
+
         if(isset($data['is_zip'])) {
             $data['is_zip'] = 1;
             unset($data['zip_code']);
         }
 
         if($this->taxRate->create($data)) {
-            session()->flash('success', 'Tax Rate Created Successfully');
+            session()->flash('success', trans('admin::app.settings.tax-rates.create-success'));
 
             return redirect()->route($this->_config['redirect']);
         } else {
-            session()->flash('error', 'Cannot Create Tax Rate');
+            session()->flash('error', trans('admin::app.settings.tax-rates.create-error'));
 
             return redirect()->back();
         }
-
-        Session()->flash('warning', 'System Cannot Identify the cause of this error, contact system administrator.');
 
         return redirect()->back();
     }
@@ -139,11 +137,11 @@ class TaxRateController extends Controller
         ]);
 
         if($this->taxRate->update(request()->input(), $id)) {
-            session()->flash('success', 'Tax Rate Updated Successfully');
+            session()->flash('success', trans('admin::app.settings.tax-rates.update-success'));
 
             return redirect()->route($this->_config['redirect']);
         } else {
-            session()->flash('error', 'Cannot Create Tax Rate');
+            session()->flash('error', trans('admin::app.settings.tax-rates.update-error'));
 
             return redirect()->back();
         }
@@ -160,11 +158,11 @@ class TaxRateController extends Controller
     public function destroy($id)
     {
         if($this->taxRate->count() == 1) {
-            session()->flash('error', 'At least one tax rate is required.');
+            session()->flash('error', trans('admin::app.settings.tax-rates.atleast-one'));
         } else {
             $this->taxRate->delete($id);
 
-            session()->flash('success', 'Tax rate deleted successfully.');
+            session()->flash('success', trans('admin::app.settings.tax-rates.delete'));
         }
 
         return redirect()->back();

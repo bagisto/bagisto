@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.configuration.tax-categories.add-title') }}
+    {{ __('admin::app.settings.tax-categories.add-title') }}
 @stop
 
 @section('content')
@@ -9,12 +9,12 @@
         <form method="POST" action="{{ route('admin.tax-categories.create') }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('admin::app.configuration.tax-categories.add-title') }}</h1>
+                    <h1>{{ __('admin::app.settings.tax-categories.add-title') }}</h1>
                 </div>
 
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.configuration.tax-categories.save-btn-title') }}
+                        {{ __('admin::app.settings.tax-categories.save-btn-title') }}
                     </button>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="form-container">
                     @csrf()
                             <div class="control-group" :class="[errors.has('channel') ? 'has-error' : '']">
-                                <label for="channel" class="required">{{ __('admin::app.configuration.tax-categories.select-channel') }}</label>
+                                <label for="channel" class="required">{{ __('admin::app.settings.tax-categories.select-channel') }}</label>
 
                                 <select class="control" name="channel_id">
                                     @foreach(core()->getAllChannels() as $channelModel)
@@ -38,7 +38,7 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">{{ __('admin::app.configuration.tax-categories.code') }}</label>
+                                <label for="code" class="required">{{ __('admin::app.settings.tax-categories.code') }}</label>
 
                                 <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}"/>
 
@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.configuration.tax-categories.name') }}</label>
+                                <label for="name" class="required">{{ __('admin::app.settings.tax-categories.name') }}</label>
 
                                 <input v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') }}"/>
 
@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
-                                <label for="description" class="required">{{ __('admin::app.configuration.tax-categories.description') }}</label>
+                                <label for="description" class="required">{{ __('admin::app.settings.tax-categories.description') }}</label>
 
                                 <textarea v-validate="'required'" class="control" id="description" name="description" value="{{ old('description') }}"></textarea>
 
@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('taxrates') ? 'has-error' : '']">
-                                <label for="taxrates" class="required">{{ __('admin::app.configuration.tax-categories.select-taxrates') }}</label>
+                                <label for="taxrates" class="required">{{ __('admin::app.settings.tax-categories.select-taxrates') }}</label>
 
                                 <select multiple="multiple" v-validate="'required'" class="control" id="taxrates" name="taxrates[]" value="{{ old('taxrates') }}">
                                     @foreach($taxRates as $taxRate)

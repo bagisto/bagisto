@@ -92,21 +92,24 @@ class TaxCategoryController extends Controller
         $data = request()->input();
 
         $this->validate(request(), [
+            'channel_id' => 'required|numeric',
             'code' => 'required|string|unique:tax_categories,id',
             'name' => 'required|string|unique:tax_categories,name',
-            'description' => 'required|string'
+            'description' => 'required|string',
+            'taxrates' => 'array|required'
         ]);
 
-        if($currentTaxCategory = $this->taxCategory->create(request()->input())) {
-            $allTaxCategorys = $data['taxrates'];
+        if($taxCategory = $this->taxCategory->create(request()->input())) {
+            $allTaxCategories = $data['taxrates'];
 
-            $this->taxCategory->onlyAttach($currentTaxCategory->id, $allTaxCategorys);
+            //attach the categories in the tax map table
+            $this->taxCategory->attachOrDetach($taxCategory, $allTaxCategories);
 
-            session()->flash('success', 'New Tax Category Created');
+            session()->flash('success', trans('admin::app.settings.tax-categories.create-success'));
 
             return redirect()->route($this->_config['redirect']);
         } else {
-            session()->flash('error', 'Cannot create the tax category');
+            session()->flash('error', trans('admin::app.settings.tax-categories.create-error'));
         }
 
         return view($this->_config['view']);
@@ -132,33 +135,27 @@ class TaxCategoryController extends Controller
      */
 
     public function update($id) {
-        //return the tax category data with the mapping table data also,
-        //allow the user to change the tax rates associated with the
-        // category also.
         $this->validate(request(), [
-            'channel' => 'required|numeric',
-            'code' => 'required|string|unique:tax_categories,id,'.$id,
+            'channel_id' => 'required|numeric',
+            'code' => 'required|string|unique:tax_categories,code,'.$id,
             'name' => 'required|string|unique:tax_categories,name,'.$id,
             'description' => 'required|string',
             'taxrates' => 'array|required'
         ]);
 
-        $data['channel_id'] = request()->input('channel');
+        $data = request()->input();
 
-        $data['code'] = request()->input('code');
+        if($taxCategory = $this->taxCategory->update($data, $id)) {
+            $taxRates = $data['taxrates'];
 
-        $data['name'] = request()->input('name');
+            //attach the categories in the tax map table
+            $this->taxCategory->attachOrDetach($taxCategory, $taxRates);
 
-        $data['description'] = request()->input('description');
-
-        if($this->taxRate->update($data, $id)) {
-            $this->taxCategory->syncAndDetach($id, request()->input('taxrates'));
-
-            session()->flash('success', 'Tax Category is successfully edited.');
+            session()->flash('success', trans('admin::app.settings.tax-categories.update-success'));
 
             return redirect()->route($this->_config['redirect']);
         } else {
-            session()->flash('error', 'Tax Category Cannot be Updated Successfully.');
+            session()->flash('error', trans('admin::app.settings.tax-categories.update-error'));
 
             return redirect()->back();
         }
@@ -173,11 +170,11 @@ class TaxCategoryController extends Controller
     public function destroy($id)
     {
         if($this->taxCategory->count() == 1) {
-            session()->flash('error', 'At least one tax category is required.');
+            session()->flash('error', trans('admin::app.settings.tax-categories.atleast-one'));
         } else {
-            $this->taxCategorye->delete($id);
+            $this->taxCategory->delete($id);
 
-            session()->flash('success', 'Tax category deleted successfully.');
+            session()->flash('success', trans('admin::app.settings.tax-categories.delete'));
         }
 
         return redirect()->back();
