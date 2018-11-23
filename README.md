@@ -1,13 +1,16 @@
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;![Bagisto Logo](https://bagisto.com/wp-content/themes/bagisto/images/logo.png)
 
 
-1. #### Introduction
-2. #### Requirements
-3. #### Installation
-4. #### Configuration
+# Topics
+1. ### Introduction
+2. ### Requirements
+3. ### Installation
+4. ### Configuration
+5. ### Migration Guides
+6. ### License
 
 
-### 1. About Bagisto:
+### 1. Introduction:
 
 [Bagisto](https://www.bagisto.com) is a hand tailored E-Commerce framework designed on some of the hottest opensource technologies
 such as [Laravel](https://laravel.com) a [PHP](https://secure.php.net/) framework, [Vue.js](https://vuejs.org)
@@ -71,7 +74,7 @@ Although you have to set the mailer variables also for full functioning of your 
 default.
 
 
-### 4.Installation:
+### 4. Installation:
 
 **1. Run the Command**
 ~~~
@@ -98,7 +101,7 @@ php artisan storage:link
 > That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
 
 
-# Migration from v0.1.0 to v0.1.1
+### 5. Migration from v0.1.0 to v0.1.1
 
 **Run commands below:**
 
@@ -107,5 +110,5 @@ php artisan storage:link
 > **php artisan vendor:publish**
 
 
-# License
+### 6. License
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://opensource.org/licenses/MIT).
