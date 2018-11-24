@@ -75,6 +75,12 @@ class WishlistController extends Controller
 
         $checked = $this->wishlist->findWhere(['channel_id' => core()->getCurrentChannel()->id, 'product_id' => $itemId, 'customer_id' => auth()->guard('customer')->user()->id]);
 
+        //accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
+        if($product->parent_id != null || $product->parent_id != 'null') {
+            $product = $this->product->findOneByField('id', $product->parent_id);
+            $data['product_id'] = $product->parent_id;
+        }
+
         if($checked->isEmpty()) {
             if($this->wishlist->create($data)) {
                 session()->flash('success', trans('customer::app.wishlist.success'));

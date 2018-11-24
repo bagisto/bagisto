@@ -26,23 +26,23 @@ class CustomerController extends Controller
         if(auth()->guard('customer')->check()) {
             $this->customer = auth()->guard('customer')->user();
         } else {
-            $this->customer = 'unauthorized';
+            $this->customer['message'] = 'unauthorized';
+            $this->unAuthorized();
         }
+    }
+
+    public function unAuthorized() {
+        return response()->json($this->customer, 401);
     }
 
     /**
      * To get the details of user to display on profile
+     * Only accepts the id of simple or configurable product
      *
      * @return response JSON
      */
     public function getProfile() {
-        if($this->customer == 'unauthorized') {
-            return response()->json($this->customer, 401);
-        } else {
-            $customer = auth()->guard('customer')->user();
-        }
-
-        return response()->json($customer, 200);
+        return response()->json($this->customer, 200);
     }
 
     public function updateProfile($id) {
@@ -72,6 +72,8 @@ class CustomerController extends Controller
                 return response()->json('Old password does not match', 200);
             }
         }
+
+        dd($data);
 
         $result = $this->customer->update($data);
 

@@ -6,9 +6,8 @@ use Webkul\API\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
-use Auth;
-// use Cart;
 use Webkul\Checkout\Repositories\CartRepository;
+use Auth;
 
 /**
  * Cart controller for the APIs of User Cart
@@ -29,8 +28,13 @@ class CartController extends Controller
         if(auth()->guard('customer')->check()) {
             $this->customer = auth()->guard('customer')->user();
         } else {
-            return response()->json('Unauthorized', 401);
+            $this->customer['message'] = 'unauthorized';
+            $this->unAuthorized();
         }
+    }
+
+    public function unAuthorized() {
+        return response()->json($this->customer, 401);
     }
 
     public function getAllCart() {
@@ -45,5 +49,12 @@ class CartController extends Controller
 
     public function getActiveCart() {
         return $this->customer->cart;
+    }
+
+    /**
+     * Add a new item in the cart
+     */
+    public function add($id) {
+        dd('add to cart', $id);
     }
 }

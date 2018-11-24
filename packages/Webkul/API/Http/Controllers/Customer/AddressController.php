@@ -24,15 +24,20 @@ class AddressController extends Controller
 
     public function __construct(CustomerAddress $customerAddress)
     {
-        $this->middleware('customer');
+        $this->middleware('auth:customer');
 
         $this->customerAddress = $customerAddress;
 
         if(auth()->guard('customer')->check()) {
             $this->customer = auth()->guard('customer')->user();
         } else {
-            $this->customer = false;
+            $this->customer['message'] = 'unauthorized';
+            $this->unAuthorized();
         }
+    }
+
+    public function unAuthorized() {
+        return response()->json($this->customer, 401);
     }
 
     /**

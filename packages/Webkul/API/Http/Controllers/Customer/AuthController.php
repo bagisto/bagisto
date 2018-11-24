@@ -28,20 +28,17 @@ class AuthController extends Controller
 
         if(!auth()->guard('customer')->check()) {
             if(!auth()->guard('customer')->attempt($data)) {
-                return response()->json(['unauthenticated', 'invalid creds'], 401);
+                return response()->json(['message' => 'unauthenticated', 'details' => 'invalid creds'], 401);
             } else {
-                return response()->json(['authenticated'], 200);
+                return response()->json(['message' => 'authenticated', 'user' => auth()->guard('customer')->user()], 200);
             }
         } else {
-            return response()->json(['already authenticated'], 200);
+            return response()->json(['message' => 'already authenticated'], 200);
         }
     }
 
     public function destroy() {
-        if(auth()->guard('customer')->logout()) {
-            return response()->json(['logged out'], 200);
-        } else {
-            return response()->json(['already logged out'], 200);
-        }
+        auth()->guard('customer')->logout();
+        return response()->json(['message' => 'logged out'], 200);
     }
 }
