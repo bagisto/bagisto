@@ -73,8 +73,6 @@ class CustomerController extends Controller
             }
         }
 
-        dd($data);
-
         $result = $this->customer->update($data);
 
         if($result) {
@@ -83,4 +81,34 @@ class CustomerController extends Controller
             return response()->json(false, 200);
         }
     }
+
+    /**
+     * Get all instances of cart for currently logged in customer
+     *
+     * @return collection Cart
+     */
+    public function getAllCart() {
+        $carts = $this->customer->carts;
+
+        if($cart->count() > 0) {
+            return response()->json(['message' => 'successful','items' => $cart], 200);
+        } else {
+            return response()->json(['message' => 'empty', 'items' => null], 200);
+        }
+    }
+
+    public function getActiveCart() {
+        $cart = Cart::getCart();
+
+        if($cart == null) {
+            return response()->json(['message' => 'empty', 'items' => 'null']);
+        }
+
+        if($cart->count() > 0 ) {
+            return response()->json(['message' => 'success', 'items' => $cart]);
+        } else {
+            return response()->json(['message' => 'empty', 'items' => 'null']);
+        }
+    }
+
 }

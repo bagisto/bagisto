@@ -34,19 +34,18 @@ Route::group(['namespace' => 'Webkul\API\Http\Controllers\Customer', 'prefix' =>
 
     //cart
     //active + inactive instances of cart for the current logged in user
-    Route::get('get/all', 'CartController@getAllCart');
+    Route::get('get/all', 'CustomerController@getAllCart');
     //active instances of cart for the current logged in user
-    Route::get('get/active', 'CartController@getActiveCart');
-    //inactive instances of cart for the current logged in user
-    Route::get('get/inactive', 'CartController@getInactiveCart');
+    Route::get('get/active', 'CustomerController@getActiveCart');
 });
 
 Route::group(['namespace' => 'Webkul\API\Http\Controllers\Shop', 'prefix' => 'api/cart'], function ($router) {
     //cart
+    Route::get('get', 'CartController@get');
     //add item in the cart
-    // Route::get('add/{id}', 'CartController@add');
+    Route::post('add/{id}', 'CartController@add');
     //remove item to the cart
-    // Route::get('remove/{id}', 'CartController@add');
+    Route::get('remove/{id}', 'CartController@remove');
 });
 
 Route::group(['namespace' => 'Webkul\API\Http\Controllers\Product', 'prefix' => 'api/product'], function ($router) {
