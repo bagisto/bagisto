@@ -34,22 +34,19 @@ class WishlistController extends Controller
         }
     }
 
-    public function unAuthorized() {
+    public function unAuthorized()
+    {
         return response()->json($this->customer, 401);
     }
 
     public function getWishlist()
     {
-        if($this->customer == false) {
-            return response()->json($this->customer, 401);
-        } else {
-            $wishlist = $this->customer->wishlist_items;
+        $wishlist = $this->customer->wishlist_items;
 
-            if($wishlist->count() > 0) {
-                return response()->json($wishlist, 200);
-            } else {
-                return response()->json(['message' => 'Wishlist Empty', 'Items' => null], 200);
-            }
+        if($wishlist->count() > 0) {
+            return response()->json($wishlist, 200);
+        } else {
+            return response()->json(['message' => 'Wishlist Empty', 'Items' => null], 200);
         }
     }
 
@@ -92,7 +89,8 @@ class WishlistController extends Controller
      *
      * @param integer $itemId
      */
-    public function delete($itemId) {
+    public function delete($itemId)
+    {
         $result = $this->wishlist->deleteWhere(['customer_id' => auth()->guard('customer')->user()->id, 'channel_id' => core()->getCurrentChannel()->id, 'id' => $itemId]);
 
         if($result) {

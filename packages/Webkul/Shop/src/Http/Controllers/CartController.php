@@ -86,6 +86,8 @@ class CartController extends Controller
      * @return Mixed
      */
     public function add($id) {
+        // dd($id, request()->all());
+
         $result = Cart::add($id, request()->except('_token'));
 
         if($result) {

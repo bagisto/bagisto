@@ -41,11 +41,13 @@ class CustomerController extends Controller
      *
      * @return response JSON
      */
-    public function getProfile() {
+    public function getProfile()
+    {
         return response()->json($this->customer, 200);
     }
 
-    public function updateProfile($id) {
+    public function updateProfile($id)
+    {
         $validator = Validator::make(request()->all(), [
             'first_name' => 'string|required',
             'last_name' => 'string|required',

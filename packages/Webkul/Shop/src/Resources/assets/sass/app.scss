@@ -918,10 +918,16 @@ section.slider-block {
                         }
 
                         .dropdown-content .item-details{
-                            height: 75px;
+                            max-height: 125px;
                         }
 
                         .item-details .item-name {
+                            font-size: 16px;
+                            font-weight: bold;
+                            margin-bottom: 8px;
+                        }
+
+                        .item-details .item-options {
                             font-size: 16px;
                             font-weight: bold;
                             margin-bottom: 8px;

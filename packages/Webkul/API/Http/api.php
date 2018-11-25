@@ -1,5 +1,7 @@
 <?php
-
+Route::get('login', function() {
+    return response()->json(['message' => 'unauthorized'])->name('login');
+});
 Route::group(['middleware' => 'api','namespace' => 'Webkul\API\Http\Controllers\Customer', 'prefix' => 'api/customer'], function ($router) {
     Route::post('/register', 'RegistrationController@create');
 });

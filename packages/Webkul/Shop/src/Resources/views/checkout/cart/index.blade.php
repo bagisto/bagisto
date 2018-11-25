@@ -5,28 +5,20 @@
 @stop
 
 @section('content-wrapper')
-
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
     <section class="cart">
-
         @if ($cart)
-
             <div class="title">
                 {{ __('shop::app.checkout.cart.title') }}
             </div>
 
             <div class="cart-content">
-
                 <div class="left-side">
                     <form action="{{ route('shop.checkout.cart.update') }}" method="POST" @submit.prevent="onSubmit">
 
                         <div class="cart-item-list" style="margin-top: 0">
-
                             @csrf
-
                             @foreach($cart->items as $item)
-
                                 <?php
                                     if($item->type == "configurable")
                                         $productBaseImage = $productImageHelper->getProductBaseImage($item->child->product);
