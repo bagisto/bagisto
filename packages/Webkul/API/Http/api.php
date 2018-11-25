@@ -1,7 +1,5 @@
 <?php
-Route::get('login', function() {
-    return response()->json(['message' => 'unauthorized'])->name('login');
-});
+
 Route::group(['middleware' => 'api','namespace' => 'Webkul\API\Http\Controllers\Customer', 'prefix' => 'api/customer'], function ($router) {
     Route::post('/register', 'RegistrationController@create');
 });
@@ -48,6 +46,10 @@ Route::group(['namespace' => 'Webkul\API\Http\Controllers\Shop', 'prefix' => 'ap
     Route::post('add/{id}', 'CartController@add');
     //remove item to the cart
     Route::get('remove/{id}', 'CartController@remove');
+    //get cart and all item for cart checkout
+    Route::get('/onepage', 'CartController@onePage');
+    //update OnePage
+    Route::put('/update/onepage', 'CartController@updateOnePage');
 });
 
 Route::group(['namespace' => 'Webkul\API\Http\Controllers\Product', 'prefix' => 'api/product'], function ($router) {

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Repositories\CartRepository;
+use Webkul\Checkout\Repositories\CartItemRepository as CartItem;
+use Webkul\API\Http\Controllers\Shop\OnePagePresenter as PresenterOne;
 use Auth;
 use Cart;
 
@@ -19,12 +21,14 @@ use Cart;
 class CartController extends Controller
 {
     protected $customer;
-
     protected $cart;
+    protected $cartItem;
 
-    public function __construct(CartRepository $cart)
+    public function __construct(CartRepository $cart, CartItem $cartItem)
     {
         $this->cart = $cart;
+
+        $this->cartItem = $cartItem;
     }
 
     /**
@@ -35,11 +39,11 @@ class CartController extends Controller
     public function get() {
         $cart = Cart::getCart();
 
-        if($cart->count() > 0) {
-            return response()->json(['message' => 'success', 'items' => $cart]);
-        } else {
+        if($cart == null || $cart == 'null') {
             return response()->json(['message' => 'empty', 'items' => null]);
         }
+
+        return response()->json(['message' => 'success', 'items' => $cart]);
     }
 
     /**
@@ -47,8 +51,7 @@ class CartController extends Controller
      *
      * @return Mixed
      */
-    public function add($id)
-    {
+    public function add($id) {
         $result = Cart::add($id, request()->all());
 
         if($result) {
@@ -74,11 +77,29 @@ class CartController extends Controller
     }
 
     /**
+     * Before checkout starts or full details on the cart
+     *
+     * @return response json
+     */
+    public function onePage() {
+        $cart = Cart::getCart();
+
+        if($cart == null || $cart == 'null') {
+            return response()->json(['message' => 'empty', 'items' => null]);
+        }
+
+        $presenter = new PresenterOne();
+        $summary = $presenter->presenter($cart);
+
+        return response()->json(['message' => 'success', 'items' => $cart->items, 'summary' => $summary]);
+    }
+
+    /**
      * Updates the quantity of the items present in the cart.
      *
      * @return response JSON
      */
-    public function updateBeforeCheckout() {
+    public function updateOnePage() {
         $request = request()->except('_token');
 
         foreach($request['qty'] as $id => $quantity) {
@@ -92,7 +113,7 @@ class CartController extends Controller
 
             $data['quantity'] = $value;
 
-            Cart::updateItem($item->product_id, $data, $key);
+            $result = Cart::updateItem($item->product_id, $data, $key);
 
             unset($item);
             unset($data);
@@ -100,6 +121,6 @@ class CartController extends Controller
 
         Cart::collectTotals();
 
-        return response()->json(['message' => 'success']);
+        return response()->json(['message' => 'success', 'items' => Cart::getCart()]);
     }
 }

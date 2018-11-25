@@ -325,7 +325,9 @@ class Cart {
 
     /**
      * Update the cartItem on cart checkout page and if already added item is added again
-     *
+     * @param $id product_id of cartItem instance
+     * @param $data new requested quantities by customer
+     * @param $itemId is id from cartItem instance
      * @return boolean
      */
     public function updateItem($id, $data, $itemId)
@@ -371,7 +373,6 @@ class Cart {
 
             return false;
         }
-
     }
 
     /**
