@@ -8,7 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository as CartItem;
-use Webkul\API\Http\Controllers\Shop\OnePagePresenter as PresenterOne;
+use Webkul\API\Http\Controllers\Shop\Presenter as Presenter;
 use Auth;
 use Cart;
 
@@ -88,8 +88,8 @@ class CartController extends Controller
             return response()->json(['message' => 'empty', 'items' => null]);
         }
 
-        $presenter = new PresenterOne();
-        $summary = $presenter->presenter($cart);
+        $presenter = new Presenter();
+        $summary = $presenter->onePagePresenter($cart);
 
         return response()->json(['message' => 'success', 'items' => $cart->items, 'summary' => $summary]);
     }
