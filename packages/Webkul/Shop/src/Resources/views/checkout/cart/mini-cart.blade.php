@@ -31,16 +31,23 @@
                         {{-- @if($item->type == "configurable") --}}
                             <div class="item">
                                 <div class="item-image" >
-                                    @php
-                                        $images = $productImageHelper->getProductBaseImage($item->product);
-                                    @endphp
+                                    <?php
+                                        if($item->type == "configurable")
+                                            $images = $productImageHelper->getProductBaseImage($item->child->product);
+                                        else
+                                            $images = $productImageHelper->getProductBaseImage($item->product);
+                                    ?>
                                     <img src="{{ $images['small_image_url'] }}" />
                                 </div>
 
                                 <div class="item-details">
-                                    <div class="item-name">{{ $item->name }}</div>
+                                    {{-- @if($item->type == "configurable")
+                                        <div class="item-name">{{ $item->child->name }}</div>
+                                    @else --}}
+                                        <div class="item-name">{{ $item->name }}</div>
+                                    {{-- @endif --}}
 
-                                    @if($item->product->type == "configurable")
+                                    @if($item->type == "configurable")
                                         <div class="item-options">
                                             {{ trim(Cart::getProductAttributeOptionDetails($item->child->product)['html']) }}
                                         </div>
@@ -51,24 +58,6 @@
                                     <div class="item-qty">Quantity - {{ $item->quantity }}</div>
                                 </div>
                             </div>
-                        {{-- @else
-                            <div class="item">
-                                <div class="item-image" >
-                                    @php
-                                        $images = $productImageHelper->getProductBaseImage($item->product);
-                                    @endphp
-                                    <img src="{{ $images['small_image_url'] }}" />
-                                </div>
-
-                                <div class="item-details">
-                                    <div class="item-name">{{ $item->name }}</div>
-
-                                    <div class="item-price">{{ core()->currency($item->total) }}</div>
-
-                                    <div class="item-qty">Quantity - {{ $item->quantity }}</div>
-                                </div>
-                            </div>
-                        @endif --}}
                     @endforeach
                 </div>
 
