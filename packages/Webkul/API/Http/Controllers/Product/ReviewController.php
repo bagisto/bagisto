@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Repositories\ProductReviewRepository as ProductReview;
+use Webkul\Product\Helpers\Review;
 use Validator;
 
 /**
@@ -39,19 +40,27 @@ class ReviewController extends Controller
     protected $productReview;
 
     /**
+     * Review helper Object
+     *
+     */
+    protected $reviewHelper;
+
+    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Product\Repositories\ProductRepository        $product
      * @param  Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
      */
-    public function __construct(Product $product, ProductReview $productReview)
+    public function __construct(Product $product, ProductReview $productReview, Review $reviewHelper)
     {
         // $this->middleware('customer')->only(['create', 'store', 'destroy']);
 
         $this->product = $product;
 
         $this->productReview = $productReview;
+
+        $this->reviewHelper = $reviewHelper;
 
         $this->_config = request('_config');
     }
@@ -97,7 +106,9 @@ class ReviewController extends Controller
     {
         $product = $this->product->findBySlugOrFail($slug);
 
-        return view($this->_config['view'],compact('product'));
+        $productReviews = $this->reviewHelper->getReviews($product)->get();
+
+        return $productReviews;
     }
 
     /**

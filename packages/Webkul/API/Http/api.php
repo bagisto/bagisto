@@ -56,19 +56,16 @@ Route::group(['namespace' => 'Webkul\API\Http\Controllers\Product', 'prefix' => 
     //product
     //to get all products
     Route::get('get/all', 'ProductController@getAll');
-
     //to fetch the new products
     Route::get('get/new', 'ProductController@getNew');
-
     //to fetch the featured product
     Route::get('get/featured', 'ProductController@getFeatured');
-
     //to get the product by its slug
     Route::get('get/{slug}', 'ProductController@getBySlug');
 
+    //product reviews get and create
     //to get the reviews of the product
     Route::get('review/{slug}', 'ReviewController@show');
-
     //to store the review for a product
     Route::post('review/{slug}', 'ReviewController@create');
 });
