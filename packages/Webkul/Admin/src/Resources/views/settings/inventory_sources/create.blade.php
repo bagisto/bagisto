@@ -74,24 +74,27 @@
                     <accordian :title="'{{ __('admin::app.settings.inventory_sources.contact-info') }}'" :active="true">
                         <div slot="body">
 
-                            <div class="control-group">
-                                <label for="contact_name">{{ __('admin::app.settings.inventory_sources.contact_name') }}</label>
-                                <input class="control" id="contact_name" name="contact_name" value="{{ old('contact_name') }}"/>
+                            <div class="control-group" :class="[errors.has('contact_name') ? 'has-error' : '']">
+                                <label for="contact_name" class="required">{{ __('admin::app.settings.inventory_sources.contact_name') }}</label>
+                                <input class="control" v-validate="'required'" class="required" id="contact_name" name="contact_name" value="{{ old('contact_name') }}"/>
+                                <span class="control-error" v-if="errors.has('contact_name')">@{{ errors.first('contact_name') }}</span>
                             </div>
 
-                            <div class="control-group">
-                                <label for="contact_email">{{ __('admin::app.settings.inventory_sources.contact_email') }}</label>
-                                <input class="control" id="contact_email" name="contact_email" value="{{ old('contact_email') }}"/>
+                            <div class="control-group" :class="[errors.has('contact_email') ? 'has-error' : '']">
+                                <label for="contact_email" class="required">{{ __('admin::app.settings.inventory_sources.contact_email') }}</label>
+                                <input class="control" v-validate="'required'" class="required" id="contact_email" name="contact_email" value="{{ old('contact_email') }}"/>
+                                <span class="control-error" v-if="errors.has('contact_email')">@{{ errors.first('contact_email') }}</span>
                             </div>
 
-                            <div class="control-group">
-                                <label for="contact_number">{{ __('admin::app.settings.inventory_sources.contact_number') }}</label>
-                                <input class="control" id="contact_number" name="contact_number" value="{{ old('contact_number') }}"/>
+                            <div class="control-group" :class="[errors.has('contact_number') ? 'has-error' : '']">
+                                <label for="contact_number" class="required">{{ __('admin::app.settings.inventory_sources.contact_number') }}</label>
+                                <input class="control" v-validate="'required'" class="required" id="contact_number" name="contact_number" value="{{ old('contact_number') }}"/>
+                                <span class="control-error" v-if="errors.has('contact_number')">@{{ errors.first('contact_number') }}</span>
                             </div>
 
                             <div class="control-group">
                                 <label for="contact_fax">{{ __('admin::app.settings.inventory_sources.contact_fax') }}</label>
-                                <input class="control" id="country" name="contact_fax" value="{{ old('contact_fax') }}"/>
+                                <input class="control" class="required" id="country" name="contact_fax" value="{{ old('contact_fax') }}"/>
                             </div>
 
                         </div>
@@ -100,26 +103,24 @@
                     <accordian :title="'{{ __('admin::app.settings.inventory_sources.address') }}'" :active="true">
                         <div slot="body">
 
-                            @include ('admin::common.create-country-state')
+                            @include ('admin::customers.country-state', ['countryCode' => old('country'), 'stateCode' => old('state')])
 
-                            <div class="control-group">
-                                <label for="state">{{ __('admin::app.settings.inventory_sources.state') }}</label>
-                                <input class="control" id="state" name="state" value="{{ old('state') }}"/>
+                            <div class="control-group" :class="[errors.has('city') ? 'has-error' : '']">
+                                <label for="city" class="required">{{ __('admin::app.settings.inventory_sources.city') }}</label>
+                                <input v-validate="'required'" class="control" id="city" name="city" value="{{ old('city') }}"/>
+                                <span class="control-error" v-if="errors.has('city')">@{{ errors.first('city') }}</span>
                             </div>
 
-                            <div class="control-group">
-                                <label for="city">{{ __('admin::app.settings.inventory_sources.city') }}</label>
-                                <input class="control" id="city" name="city" value="{{ old('city') }}"/>
+                            <div class="control-group" :class="[errors.has('street') ? 'has-error' : '']">
+                                <label for="street" class="required">{{ __('admin::app.settings.inventory_sources.street') }}</label>
+                                <input v-validate="'required'" class="control" id="street" name="street" value="{{ old('street') }}"/>
+                                <span class="control-error" v-if="errors.has('street')">@{{ errors.first('street') }}</span>
                             </div>
 
-                            <div class="control-group">
-                                <label for="street">{{ __('admin::app.settings.inventory_sources.street') }}</label>
-                                <input class="control" id="street" name="street" value="{{ old('street') }}"/>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="postcode">{{ __('admin::app.settings.inventory_sources.postcode') }}</label>
-                                <input class="control" id="postcode" name="postcode" value="{{ old('postcode') }}"/>
+                            <div class="control-group" :class="[errors.has('postcode') ? 'has-error' : '']">
+                                <label for="postcode" class="required">{{ __('admin::app.settings.inventory_sources.postcode') }}</label>
+                                <input v-validate="'required'" class="control" id="postcode" name="postcode" value="{{ old('postcode') }}"/>
+                                <span class="control-error" v-if="errors.has('postcode')">@{{ errors.first('postcode') }}</span>
                             </div>
 
                         </div>

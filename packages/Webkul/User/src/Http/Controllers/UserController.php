@@ -87,7 +87,12 @@ class UserController extends Controller
      */
     public function store(UserForm $request)
     {
-        $this->admin->create(request()->all());
+        $data = request()->all();
+        
+        if(isset($data['password']) && $data['password'])
+            $data['password'] = bcrypt($data['password']);
+
+        $this->admin->create($data);
 
         session()->flash('success', 'User created successfully.');
 
@@ -122,6 +127,8 @@ class UserController extends Controller
 
         if(!$data['password'])
             unset($data['password']);
+        else
+            $data['password'] = bcrypt($data['password']);
 
         $this->admin->update($data, $id);
 

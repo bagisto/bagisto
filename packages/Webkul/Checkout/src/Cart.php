@@ -738,7 +738,8 @@ class Cart {
      *
      * @return boolean
      */
-    public function validateItems() {
+    public function validateItems()
+    {
         $cart = $this->getCart();
 
         //rare case of accident-->used when there are no items.
