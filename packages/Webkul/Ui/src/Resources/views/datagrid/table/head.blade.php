@@ -1,5 +1,5 @@
 <thead>
-    <tr class="mass-action" style="display: none; height:63px;">
+    {{-- <tr class="mass-action" style="display: none; height:63px;">
         <th colspan="{{ count($columns)+1 }}">
             <div class="mass-action-wrapper">
 
@@ -7,7 +7,6 @@
                     <span class="icon checkbox-dash-icon"></span>
                 </span>
 
-                {{-- Mass operation implementation --}}
                 @foreach($massoperations as $massoperation)
                     @if($massoperation['type'] == "button")
 
@@ -68,14 +67,14 @@
                 @endforeach
             </div>
         </th>
-    </tr>
+    </tr> --}}
     <tr class="table-grid-header">
-        <th>
+        {{-- <th>
             <span class="checkbox">
                 <input type="checkbox" id="mastercheckbox">
                 <label class="checkbox-view" for="checkbox"></label>
             </span>
-        </th>
+        </th> --}}
         @foreach ($columns as $column)
             @if($column->sortable == "true")
                 <th class="grid_head sortable"

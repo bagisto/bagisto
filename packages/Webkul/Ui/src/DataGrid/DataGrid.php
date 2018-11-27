@@ -55,18 +55,14 @@ class DataGrid
      * Pagination variable
      * @var String
      */
-
     protected $perpage;
-
 
     /**
      * Table
      *
      * @var String Classs name $table
      */
-
     protected $table;
-
 
     /**
      * Join
@@ -82,27 +78,21 @@ class DataGrid
      *      'callback' => 'not supported yet'
      * ]
      */
-
      protected $join;
-
 
      /**
      * Collection Object of Column $columns
      *
      * @var Collection
      */
-
      protected $columns;
-
 
      /**
      * array of columns
      * to be filtered
      * @var Array
      */
-
      protected $filterable;
-
 
      /**
      * array of columns
@@ -110,53 +100,40 @@ class DataGrid
      *
      * @var Array
      */
-
      protected $searchable;
-
 
      /**
      * mass operations
      *
      * @var Array
      */
-
      protected $massoperations;
-
 
      /**
      * Pagination $pagination
      *
      * @var Pagination
      */
-
-
      protected $pagination;
-
 
     /**
      * Css $css
      *
      * @var Css
      */
-
      protected $css;
-
 
      /**
      * Actions $action
      * @var action
      */
-
     protected $actions;
-
 
     /**
      * URL parse $parsed
      * @var parse
      */
-
      protected $parsed;
-
 
      /*
     public function __construct(
@@ -515,10 +492,12 @@ class DataGrid
     {
         $parsed = [];
         $unparsed = url()->full();
-        if (count(explode('?', $unparsed))>1) {
+        if (count(explode('?', $unparsed)) > 1) {
             $to_be_parsed = explode('?', $unparsed)[1];
+
             parse_str($to_be_parsed, $parsed);
             unset($parsed['page']);
+
             return $parsed;
         } else {
             return $parsed;
