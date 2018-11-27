@@ -79,7 +79,7 @@ class OrderDataGrid
                     'label' => 'Base Total',
                     'sortable' => true,
                     'wrapper' => function ($value) {
-                        return core()->currency($value);
+                        return core()->formatBasePrice($value);
                     }
                 ], [
                     'name' => 'or.grand_total',
@@ -88,7 +88,7 @@ class OrderDataGrid
                     'label' => 'Grand Total',
                     'sortable' => false,
                     'wrapper' => function ($value) {
-                        return core()->currency($value);
+                        return core()->formatBasePrice($value);
                     }
                 ], [
                     'name' => 'or.created_at',
