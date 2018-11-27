@@ -11,12 +11,14 @@ Route::group(['middleware' => ['web']], function () {
             'redirect' => 'admin.dashboard.index'
         ])->name('admin.session.store');
 
+
         // Forget Password Routes
         Route::get('/forget-password', 'Webkul\User\Http\Controllers\ForgetPasswordController@create')->defaults('_config', [
             'view' => 'admin::users.forget-password.create'
         ])->name('admin.forget-password.create');
 
         Route::post('/forget-password', 'Webkul\User\Http\Controllers\ForgetPasswordController@store')->name('admin.forget-password.store');
+
 
         // Reset Password Routes
         Route::get('/reset-password/{token}', 'Webkul\User\Http\Controllers\ResetPasswordController@create')->defaults('_config', [
@@ -27,16 +29,19 @@ Route::group(['middleware' => ['web']], function () {
             'redirect' => 'admin.dashboard.index'
         ])->name('admin.reset-password.store');
 
+
         // Admin Routes
         Route::group(['middleware' => ['admin']], function () {
             Route::get('/logout', 'Webkul\User\Http\Controllers\SessionController@destroy')->defaults('_config', [
                 'redirect' => 'admin.session.create'
             ])->name('admin.session.destroy');
 
+
             // Dashboard Route
             Route::get('dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->defaults('_config', [
                 'view' => 'admin::dashboard.index'
             ])->name('admin.dashboard.index');
+
 
             //Customers Management Routes
             Route::get('customers', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config', [
@@ -65,6 +70,13 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.review.index'
             ])->name('admin.customer.review.index');
 
+
+            //Customers Management Routes
+            Route::get('configuration/sales/general', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
+                'view' => 'admin::configuration.sales.general'
+            ])->name('admin.configuration.sales.general');
+
+
             // Reviews Routes
             Route::get('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[
                 'view' => 'admin::customers.review.edit'
@@ -78,8 +90,8 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.review.index'
             ])->name('admin.customer.review.delete');
 
-            // Customer Groups Routes
 
+            // Customer Groups Routes
             Route::get('groups', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@index')->defaults('_config',[
                 'view' => 'admin::customers.group.index'
             ])->name('admin.groups.index');
@@ -101,6 +113,7 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.groups.update');
 
             Route::get('groups/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@destroy')->name('admin.groups.delete');
+
 
             // Sales Routes
             Route::prefix('sales')->group(function () {
@@ -158,10 +171,12 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('admin.sales.shipments.view');
             });
 
+
             // Catalog Routes
             Route::prefix('catalog')->group(function () {
 
                 Route::get('/sync', 'Webkul\Product\Http\Controllers\ProductController@sync');
+
 
                 // Catalog Product Routes
                 Route::get('/products', 'Webkul\Product\Http\Controllers\ProductController@index')->defaults('_config', [
@@ -268,6 +283,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::any('datagrid/massaction/delete', 'Webkul\Admin\Http\Controllers\DataGridController@massDelete')->name('admin.datagrid.delete');
 
             Route::any('datagrid/massaction/edit','Webkul\Admin\Http\Controllers\DataGridController@massUpdate')->name('admin.datagrid.edit');
+
 
             // User Routes
             Route::get('/users', 'Webkul\User\Http\Controllers\UserController@index')->defaults('_config', [
@@ -491,6 +507,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::tax.tax-categories.index'
             ])->name('admin.tax-categories.index');
 
+
             // tax category routes
             Route::get('/tax-categories/create', 'Webkul\Tax\Http\Controllers\TaxCategoryController@show')->defaults('_config', [
                 'view' => 'admin::tax.tax-categories.create'
@@ -509,8 +526,8 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.tax-categories.update');
 
             Route::get('/tax-categories/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@destroy')->name('admin.tax-categories.delete');
-
             //tax category ends
+
 
             //tax rate
             Route::get('tax-rates', 'Webkul\Tax\Http\Controllers\TaxRateController@index')->defaults('_config', [

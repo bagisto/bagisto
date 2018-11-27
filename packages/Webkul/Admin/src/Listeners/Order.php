@@ -22,7 +22,11 @@ class Order {
      */
     public function sendNewOrderMail($order)
     {
-        Mail::send(new NewOrderNotification($order));
+        try {
+            Mail::send(new NewOrderNotification($order));
+        } catch (\Exception $e) {
+            
+        }
     }
 
     /**
@@ -32,7 +36,11 @@ class Order {
      */
     public function sendNewInvoiceMail($invoice)
     {
-        Mail::send(new NewInvoiceNotification($invoice));
+        try {
+            Mail::send(new NewInvoiceNotification($invoice));
+        } catch (\Exception $e) {
+            
+        }
     }
 
     /**
@@ -42,7 +50,11 @@ class Order {
      */
     public function sendNewShipmentMail($shipment)
     {
-        Mail::send(new NewShipmentNotification($shipment));
+        try {
+            Mail::send(new NewShipmentNotification($shipment));
+        } catch (\Exception $e) {
+            
+        }
     }
 
     /**

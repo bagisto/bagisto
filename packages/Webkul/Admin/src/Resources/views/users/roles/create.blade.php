@@ -28,7 +28,7 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.users.roles.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="email" name="name" value="{{ old('name') }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="email" name="name" data-vv-as="&quot;{{ __('admin::app.users.roles.name') }}&quot;" value="{{ old('name') }}"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 

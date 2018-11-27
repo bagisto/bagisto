@@ -24,14 +24,14 @@
                     @csrf()
                     <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
                         <label for="title">{{ __('admin::app.settings.sliders.title') }}</label>
-                        <input type="text" class="control" name="title" v-validate="'required'">
+                        <input type="text" class="control" name="title" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.title') }}&quot;">
                         <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
                     </div>
 
                     <?php $channels = core()->getAllChannels() ?>
                     <div class="control-group" :class="[errors.has('channel_id') ? 'has-error' : '']">
                         <label for="channel_id">{{ __('admin::app.settings.sliders.channels') }}</label>
-                        <select class="control" id="channel_id" name="channel_id" v-validate="'required'">
+                        <select class="control" id="channel_id" name="channel_id" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.channels') }}&quot;">
                             @foreach($channels as $channel)
                                 <option value="{{ $channel->id }}" @if($channel->id == old('channel_id')) selected @endif>
                                     {{ __($channel->name) }}

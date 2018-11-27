@@ -44,13 +44,13 @@
 
                             <div class="control-group" :class="[errors.has('{{$locale}}[name]') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.catalog.categories.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" value="{{ old($locale)['name'] ?: $category->translate($locale)['name'] }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="name" name="{{$locale}}[name]" value="{{ old($locale)['name'] ?: $category->translate($locale)['name'] }}" data-vv-as="&quot;{{ __('admin::app.catalog.categories.name') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('{{$locale}}[name]')">@{{ errors.first('{!!$locale!!}[name]') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
                                 <label for="status" class="required">{{ __('admin::app.catalog.categories.visible-in-menu') }}</label>
-                                <select class="control" v-validate="'required'" id="status" name="status">
+                                <select class="control" v-validate="'required'" id="status" name="status" data-vv-as="&quot;{{ __('admin::app.catalog.categories.visible-in-menu') }}&quot;">
                                     <option value="1" {{ $category->status ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.categories.yes') }}
                                     </option>
@@ -62,8 +62,8 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('position') ? 'has-error' : '']">
-                                <label for="position">{{ __('admin::app.catalog.categories.position') }}</label>
-                                <input type="text" v-validate="'required|numeric'" class="control" id="position" name="position" value="{{ old('position') ?: $category->position }}"/>
+                                <label for="position" class="required">{{ __('admin::app.catalog.categories.position') }}</label>
+                                <input type="text" v-validate="'required|numeric'" class="control" id="position" name="position" value="{{ old('position') ?: $category->position }}" data-vv-as="&quot;{{ __('admin::app.catalog.categories.position') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('position')">@{{ errors.first('position') }}</span>
                             </div>
 
@@ -75,7 +75,9 @@
 
                             <div class="control-group" :class="[errors.has('{{$locale}}[description]') ? 'has-error' : '']">
                                 <label for="description" class="required">{{ __('admin::app.catalog.categories.description') }}</label>
-                                <textarea v-validate="'required'" class="control" id="description" name="{{$locale}}[description]">{{ old($locale)['description'] ?: $category->translate($locale)['description'] }}</textarea>
+                                <textarea v-validate="'required'" class="control" id="description" name="{{$locale}}[description]" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">
+                                    {{ old($locale)['description'] ?: $category->translate($locale)['description'] }}
+                                </textarea>
                                 <span class="control-error" v-if="errors.has('{{$locale}}[description]')">@{{ errors.first('{!!$locale!!}[description]') }}</span>
                             </div>
 
@@ -109,7 +111,7 @@
 
                             <div class="control-group" :class="[errors.has('{{$locale}}[slug]') ? 'has-error' : '']">
                                 <label for="slug" class="required">{{ __('admin::app.catalog.categories.slug') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="slug" name="{{$locale}}[slug]" value="{{ old($locale)['slug'] ?: $category->translate($locale)['slug'] }}" v-slugify/>
+                                <input type="text" v-validate="'required'" class="control" id="slug" name="{{$locale}}[slug]" value="{{ old($locale)['slug'] ?: $category->translate($locale)['slug'] }}" data-vv-as="&quot;{{ __('admin::app.catalog.categories.slug') }}&quot;" v-slugify/>
                                 <span class="control-error" v-if="errors.has('{{$locale}}[slug]')">@{{ errors.first('{!!$locale!!}[slug]') }}</span>
                             </div>
 
