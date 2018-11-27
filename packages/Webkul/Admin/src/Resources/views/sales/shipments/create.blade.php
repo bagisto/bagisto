@@ -197,7 +197,7 @@
 
                                     <div class="control-group" :class="[errors.has('shipment[carrier_title]') ? 'has-error' : '']" style="margin-top: 40px">
                                         <label for="shipment[carrier_title]" class="required">{{ __('admin::app.sales.shipments.carrier-title') }}</label>
-                                        <input type="text" v-validate="'required'" class="control" id="shipment[carrier_title]" name="shipment[carrier_title]"/>
+                                        <input type="text" v-validate="'required'" class="control" id="shipment[carrier_title]" name="shipment[carrier_title]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.carrier-title') }}&quot;"/>
                                         <span class="control-error" v-if="errors.has('shipment[carrier_title]')">
                                             @{{ errors.first('shipment[carrier_title]') }}
                                         </span>
@@ -205,7 +205,7 @@
 
                                     <div class="control-group" :class="[errors.has('shipment[track_number]') ? 'has-error' : '']">
                                         <label for="shipment[track_number]" class="required">{{ __('admin::app.sales.shipments.tracking-number') }}</label>
-                                        <input type="text" v-validate="'required'" class="control" id="shipment[track_number]" name="shipment[track_number]"/>
+                                        <input type="text" v-validate="'required'" class="control" id="shipment[track_number]" name="shipment[track_number]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.tracking-number') }}&quot;"/>
                                         <span class="control-error" v-if="errors.has('shipment[track_number]')">
                                             @{{ errors.first('shipment[track_number]') }}
                                         </span>
@@ -245,7 +245,7 @@
                                                     <td>{{ $item->qty_ordered }}</td>
                                                     <td>
                                                         <div class="control-group" :class="[errors.has('shipment[items][{{ $item->id }}]') ? 'has-error' : '']">
-                                                            <input type="text" v-validate="'required|numeric|min:0'" class="control" id="shipment[items][{{ $item->id }}]" name="shipment[items][{{ $item->id }}]" value="{{ $item->qty_to_ship }}"/>
+                                                            <input type="text" v-validate="'required|numeric|min:0'" class="control" id="shipment[items][{{ $item->id }}]" name="shipment[items][{{ $item->id }}]" value="{{ $item->qty_to_ship }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;"/>
 
                                                             <span class="control-error" v-if="errors.has('shipment[items][{{ $item->id }}]')">
                                                                 @verbatim

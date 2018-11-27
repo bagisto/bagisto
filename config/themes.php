@@ -7,7 +7,7 @@ return [
         'default' => [
             'views_path' => 'resources/themes/default/views',
             'assets_path' => 'public/themes/default/assets',
-            'name' => 'Dafault'
+            'name' => 'Default'
         ],
 
         // 'bliss' => [

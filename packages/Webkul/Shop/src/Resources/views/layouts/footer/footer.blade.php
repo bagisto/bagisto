@@ -1,17 +1,20 @@
 <div class="footer">
     <div class="footer-content">
         <div class="footer-list-container">
-            <div class="list-container">
-                <span class="list-heading">Categories</span>
 
-                <ul class="list-group">
-                    @foreach($categories as $key => $category)
-                        <li>
-                            <a href="{{ route('shop.categories.index', $category['slug']) }}">{{ $category['name'] }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+            @if(count($categories))
+                <div class="list-container">
+                    <span class="list-heading">Categories</span>
+
+                    <ul class="list-group">
+                        @foreach($categories as $key => $category)
+                            <li>
+                                <a href="{{ route('shop.categories.index', $category->slug) }}">{{ $category->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             {!! DbView::make(core()->getCurrentChannel())->field('footer_content')->render() !!}
 

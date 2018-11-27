@@ -29,20 +29,19 @@
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.channels.code') }}</label>
-                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}" v-code/>
+                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}" data-vv-as="&quot;{{ __('admin::app.settings.channels.code') }}&quot;" v-code/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.settings.channels.name') }}</label>
-                                <input v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') }}"/>
+                                <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.settings.channels.name') }}&quot;" value="{{ old('name') }}"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
-                                <label for="description" class="required">{{ __('admin::app.settings.channels.description') }}</label>
+                            <div class="control-group">
+                                <label for="description">{{ __('admin::app.settings.channels.description') }}</label>
                                 <textarea class="control" id="description" name="description">{{ old('description') }}</textarea>
-                                <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                             </div>
 
                             <div class="control-group">
@@ -58,7 +57,7 @@
 
                             <div class="control-group" :class="[errors.has('locales[]') ? 'has-error' : '']">
                                 <label for="locales" class="required">{{ __('admin::app.settings.channels.locales') }}</label>
-                                <select v-validate="'required'" class="control" id="locales" name="locales[]" multiple>
+                                <select v-validate="'required'" class="control" id="locales" name="locales[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.locales') }}&quot;" multiple>
                                     @foreach(core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->id }}" {{ old('locales') && in_array($locale->id, old('locales')) ? 'selected' : '' }}>
                                             {{ $locale->name }}
@@ -70,7 +69,7 @@
 
                             <div class="control-group" :class="[errors.has('default_locale_id') ? 'has-error' : '']">
                                 <label for="default_locale_id" class="required">{{ __('admin::app.settings.channels.default-locale') }}</label>
-                                <select v-validate="'required'" class="control" id="default_locale_id" name="default_locale_id">
+                                <select v-validate="'required'" class="control" id="default_locale_id" name="default_locale_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.default-locale') }}&quot;">
                                     @foreach(core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->id }}" {{ old('default_locale_id') == $locale->id ? 'selected' : '' }}>
                                             {{ $locale->name }}
@@ -82,7 +81,7 @@
 
                             <div class="control-group" :class="[errors.has('currencies[]') ? 'has-error' : '']">
                                 <label for="currencies" class="required">{{ __('admin::app.settings.channels.currencies') }}</label>
-                                <select v-validate="'required'" class="control" id="currencies" name="currencies[]" multiple>
+                                <select v-validate="'required'" class="control" id="currencies" name="currencies[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.currencies') }}&quot;" multiple>
                                     @foreach(core()->getAllCurrencies() as $currency)
                                         <option value="{{ $currency->id }}" {{ old('currencies') && in_array($currency->id, old('currencies')) ? 'selected' : '' }}>
                                             {{ $currency->name }}
@@ -94,7 +93,7 @@
 
                             <div class="control-group" :class="[errors.has('base_currency_id') ? 'has-error' : '']">
                                 <label for="base_currbase_currency_idency" class="required">{{ __('admin::app.settings.channels.base-currency') }}</label>
-                                <select v-validate="'required'" class="control" id="base_currency_id" name="base_currency_id">
+                                <select v-validate="'required'" class="control" id="base_currency_id" name="base_currency_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.base-currency') }}&quot;">
                                     @foreach(core()->getAllCurrencies() as $currency)
                                         <option value="{{ $currency->id }}" {{ old('base_currency_id') == $currency->id ? 'selected' : '' }}>
                                             {{ $currency->name }}
@@ -121,14 +120,14 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="home_page_content" class="required">{{ __('admin::app.settings.channels.home_page_content') }}</label>
+                                <label for="home_page_content">{{ __('admin::app.settings.channels.home_page_content') }}</label>
                                 <textarea class="control" id="home_page_content" name="home_page_content">
                                     {{ old('home_page_content') }}
                                 </textarea>
                             </div>
 
                             <div class="control-group">
-                                <label for="footer_content" class="required">{{ __('admin::app.settings.channels.footer_content') }}</label>
+                                <label for="footer_content">{{ __('admin::app.settings.channels.footer_content') }}</label>
                                 <textarea class="control" id="footer_content" name="footer_content">
                                     {{ old('footer_content') }}
                                 </textarea>

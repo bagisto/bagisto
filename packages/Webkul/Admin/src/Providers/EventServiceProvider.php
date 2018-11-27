@@ -109,6 +109,18 @@ class EventServiceProvider extends ServiceProvider
             'sort' => 1,
             'icon-class' => '',
         ], [
+            'key' => 'configuration.sales',
+            'name' => 'Sales',
+            'route' => 'admin.configuration.sales.general',
+            'sort' => 1,
+            'icon-class' => '',
+        ], [
+            'key' => 'configuration.sales.general',
+            'name' => 'General',
+            'route' => 'admin.configuration.sales.general',
+            'sort' => 1,
+            'icon-class' => '',
+        ], [
             'key' => 'settings',
             'name' => 'Settings',
             'route' => 'admin.locales.index',

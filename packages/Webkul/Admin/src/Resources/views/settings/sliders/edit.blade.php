@@ -26,14 +26,14 @@
 
                     <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
                         <label for="title">{{ __('admin::app.settings.sliders.title') }}</label>
-                        <input type="text" class="control" name="title" v-validate="'required'" value="{{ $slider->title ?: old('title') }}">
+                        <input type="text" class="control" name="title" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.title') }}&quot;" value="{{ $slider->title ?: old('title') }}">
                         <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
                     </div>
 
                     <?php $channels = core()->getAllChannels() ?>
                     <div class="control-group" :class="[errors.has('channel_id') ? 'has-error' : '']">
                         <label for="channel_id">{{ __('admin::app.settings.sliders.channels') }}</label>
-                        <select class="control" id="channel_id" name="channel_id" value="" v-validate="'required'">
+                        <select class="control" id="channel_id" name="channel_id" data-vv-as="&quot;{{ __('admin::app.settings.sliders.channels') }}&quot;" value="" v-validate="'required'">
                             @foreach($channels as $channel)
                                 <option value="{{ $channel->id }}" @if($channel->id == $slider->channel_id) selected @endif>
                                     {{ __($channel->name) }}
@@ -47,11 +47,11 @@
                         <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false" :images='"{{ url('storage/'.$slider->path) }}"'></image-wrapper>
                     </div>
 
-                    <div class="control-group" :class="[errors.has('content') ? 'has-error' : '']">
+                    <div class="control-group">
                         <label for="content">{{ __('admin::app.settings.sliders.content') }}</label>
 
                         <div class="panel-body">
-                            <textarea id="tiny" class="control" id="add_content" name="content" v-validate="'required'" rows="5">{{ $slider->content ? : old('content') }}</textarea>
+                            <textarea id="tiny" class="control" id="add_content" name="content" rows="5">{{ $slider->content ? : old('content') }}</textarea>
                         </div>
 
                         <span class="control-error" v-if="errors.has('content')">@{{ errors.first('content') }}</span>

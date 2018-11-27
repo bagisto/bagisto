@@ -33,7 +33,7 @@
                         <label for="name" class="required">
                             {{ __('admin::app.customers.groups.name') }}
                         </label>
-                        <input type="text" class="control" name="name" v-validate="'required'" value="{{ $group->name }}">
+                        <input type="text" class="control" name="name" v-validate="'required'" value="{{ $group->name }}" data-vv-as="&quot;{{ __('admin::app.customers.groups.name') }}&quot;">
                         <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                     </div>
                 </div>

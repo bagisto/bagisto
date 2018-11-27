@@ -335,6 +335,13 @@ return [
             'zip_code' => 'Zip Code',
             'is_zip' => 'Enable Zip Range',
         ],
+
+        'sales' => [
+            'general' => [
+                'title' => 'General',
+                'save-btn-title' => 'Save'
+            ]
+        ]
     ],
 
     'settings' => [
@@ -420,7 +427,7 @@ return [
             'design' => 'Design',
             'theme' => 'Theme',
             'home_page_content' => 'Home Page Content',
-            'footer_content' => 'footer_content',
+            'footer_content' => 'Footer Content',
             'logo' => 'Logo',
             'favicon' => 'Favicon'
         ],
@@ -442,6 +449,7 @@ return [
             'delete-fail' => 'Slider Item Successfully Deleted'
         ],
     ],
+
     'customers' => [
         'groups' =>[
             'add-title' => 'Add Group',
@@ -478,6 +486,7 @@ return [
             'comment' => 'Comment'
         ]
     ],
+
     'error' => [
         'go-to-home' => 'GO TO HOME',
 

@@ -46,7 +46,7 @@
 
                         <div class="control-group" :class="[errors.has('type') ? 'has-error' : '']">
                             <label for="type" class="required">{{ __('admin::app.catalog.products.product-type') }}</label>
-                            <select class="control" v-validate="'required'" id="type" name="type" {{ $familyId ? 'disabled' : '' }}>
+                            <select class="control" v-validate="'required'" id="type" name="type" {{ $familyId ? 'disabled' : '' }} data-vv-as="&quot;{{ __('admin::app.catalog.products.product-type') }}&quot;">
                                 <option value="simple">{{ __('admin::app.catalog.products.simple') }}</option>
                                 <option value="configurable" {{ $familyId ? 'selected' : '' }}>{{ __('admin::app.catalog.products.configurable') }}</option>
                             </select>
@@ -59,7 +59,7 @@
 
                         <div class="control-group" :class="[errors.has('attribute_family_id') ? 'has-error' : '']">
                             <label for="attribute_family_id" class="required">{{ __('admin::app.catalog.products.familiy') }}</label>
-                            <select class="control" v-validate="'required'" id="attribute_family_id" name="attribute_family_id" {{ $familyId ? 'disabled' : '' }}>
+                            <select class="control" v-validate="'required'" id="attribute_family_id" name="attribute_family_id" {{ $familyId ? 'disabled' : '' }} data-vv-as="&quot;{{ __('admin::app.catalog.products.familiy') }}&quot;">
                                 <option value=""></option>
                                 @foreach($families as $family)
                                     <option value="{{ $family->id }}" {{ ($familyId == $family->id || old('attribute_family_id') == $family->id) ? 'selected' : '' }}>{{ $family->name }}</option>
@@ -74,7 +74,7 @@
 
                         <div class="control-group" :class="[errors.has('sku') ? 'has-error' : '']">
                             <label for="sku">{{ __('admin::app.catalog.products.sku') }}</label>
-                            <input type="text" v-validate="'required'" class="control" id="sku" name="sku" value="{{ $sku ?: old('sku') }}"/>
+                            <input type="text" v-validate="'required'" class="control" id="sku" name="sku" value="{{ $sku ?: old('sku') }}" data-vv-as="&quot;{{ __('admin::app.catalog.products.sku') }}&quot;"/>
                             <span class="control-error" v-if="errors.has('sku')">@{{ errors.first('sku') }}</span>
                         </div>
 
