@@ -185,7 +185,7 @@ class ProductController extends Controller
         $product = $this->product->update(request()->all(), $id);
 
         //after update of product
-        Event::fire('product.save.after', $product);
+        Event::fire('product.update.after', $product);
 
         session()->flash('success', 'Product updated successfully.');
 
@@ -212,6 +212,9 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
+    /*
+     * To be manually invoked when data is seeded into products
+     */
     public function sync() {
         Event::fire('products.datagrid.create', true);
     }

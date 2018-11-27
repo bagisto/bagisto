@@ -16,7 +16,7 @@ class Customer extends Authenticatable
 
     protected $table = 'customers';
 
-    protected $fillable = ['first_name', 'channel_id', 'last_name', 'gender', 'date_of_birth', 'email', 'password', 'customer_group_id', 'subscribed_to_news_letter'];
+    protected $fillable = ['first_name', 'channel_id', 'last_name', 'gender', 'date_of_birth', 'email', 'password', 'customer_group_id', 'subscribed_to_news_letter', 'is_verified', 'token'];
 
     protected $hidden = ['password', 'remember_token'];
 

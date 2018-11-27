@@ -9,13 +9,10 @@
                     {{ __('shop::app.customer.account.address.create.country') }}
                 </label>
 
-                <select type="text" v-validate="'required'" class="control" id="country" name="country" v-model="country">
+                <select type="text" v-validate="'required'" class="control" id="country" name="country" v-model="country" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.country') }}&quot;">
                     <option value=""></option>
-
                     @foreach (core()->countries() as $country)
-
                         <option value="{{ $country->code }}">{{ $country->name }}</option>
-
                     @endforeach
                 </select>
 
@@ -29,9 +26,8 @@
                     {{ __('shop::app.customer.account.address.create.state') }}
                 </label>
 
-                <input type="text" v-validate="'required'" class="control" id="state" name="state" v-model="state" v-if="!haveStates()"/>
-
-                <select v-validate="'required'" class="control" id="state" name="state" v-model="state" v-if="haveStates()">
+                <input type="text" v-validate="'required'" class="control" id="state" name="state" v-model="state" v-if="!haveStates()" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.state') }}&quot;"/>
+                <select v-validate="'required'" class="control" id="state" name="state" v-model="state" v-if="haveStates()" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.state') }}&quot;">
 
                     <option value="">{{ __('shop::app.customer.account.address.create.select-state') }}</option>
 
@@ -67,7 +63,7 @@
                 haveStates() {
                     if(this.countryStates[this.country] && this.countryStates[this.country].length)
                         return true;
-                    
+
                     return false;
                 },
             }

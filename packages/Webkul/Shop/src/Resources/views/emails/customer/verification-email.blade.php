@@ -16,7 +16,7 @@
         </div>
 
         <div  style="margin-top: 40px; text-align: center">
-            <a href="{{ route('customer.verify', $data['email']) }}"href="#" style="font-size: 16px;
+            <a href="{{ route('customer.verify', $data['token']) }}" style="font-size: 16px;
             color: #FFFFFF; text-align: center; background: #0031F0; padding: 10px 100px;text-decoration: none;">Verify Your Account</a>
         </div>
     </div>

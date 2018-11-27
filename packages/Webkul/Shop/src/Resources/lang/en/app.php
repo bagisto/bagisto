@@ -4,7 +4,9 @@ return [
     'home' => [
         'page-title' => 'Bagisto - Home',
         'featured-products' => 'Featured Products',
-        'new-products' => 'New Products'
+        'new-products' => 'New Products',
+        'verify-email' => 'Verify Your Email Account',
+        'resend-verify-email' => 'Resend Verification Email'
     ],
 
     'header' => [
@@ -69,7 +71,17 @@ return [
             'agree' => 'Agree',
             'terms' => 'Terms',
             'conditions' => 'Conditions',
-            'using' => 'by using this website'
+            'using' => 'by using this website',
+            'agreement' => 'Agreement',
+            'success' => 'Account Created Successfully, An Email Has Been Sent To Your For Account Verification',
+            'success-verify-email-not-sent' => 'Account Created Successfully, But Verification Email Is Not Sent',
+            'failed' => 'Error! Cannot Create Your Account, Try Again Later',
+            'already-verified' => 'Your Account is already verified Or Please Try Sending A New Verification Email Again',
+            'verification-not-sent' => 'Error! Problem In Sending Verification Email, Try Again Later',
+            'verification-sent' => 'Verification Email Sent',
+            'verified' => 'Your Account Has Been Verified, Try To Login Now',
+            'verify-failed' => 'We Cannot Verify Your Mail Account',
+            'dont-have-account' => 'You Do Not Have Account With Us',
         ],
 
         'login-text' => [
@@ -85,7 +97,10 @@ return [
             'forgot_pass' => 'Forgot Password?',
             'button_title' => 'Sign In',
             'remember' => 'Remember Me',
-            'footer' => '© Copyright 2018 Webkul Software, All rights reserved'
+            'footer' => '© Copyright 2018 Webkul Software, All rights reserved',
+            'invalid-creds' => 'Please Check Your Credentials And Try Again',
+            'verify-first' => 'Verify Your Email Account First',
+            'resend-verification' => 'Resend Verification Mail Again'
         ],
 
         'forgot-password' => [
@@ -358,6 +373,7 @@ return [
             'continue' => 'Continue',
             'shipping-method' => 'Shipping Method',
             'payment-information' => 'Payment Information',
+            'payment-method' => 'Payment Method',
             'summary' => 'Summary of Order',
             'price' => 'Price',
             'quantity' => 'Quantity',

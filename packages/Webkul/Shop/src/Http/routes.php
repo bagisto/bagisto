@@ -147,11 +147,14 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
 
         //registration form store
         Route::post('register', 'Webkul\Customer\Http\Controllers\RegistrationController@create')->defaults('_config', [
-            'redirect' => 'customer.account.index',
+            'redirect' => 'customer.session.index',
         ])->name('customer.register.create');
 
         //verify account
-        Route::get('/verify-account/{email}', 'Webkul\Customer\Http\Controllers\RegistrationController@verifyAccount')->name('customer.verify');
+        Route::get('/verify-account/{token}', 'Webkul\Customer\Http\Controllers\RegistrationController@verifyAccount')->name('customer.verify');
+
+        //resend verification email
+        Route::get('/resend/verification/{email}', 'Webkul\Customer\Http\Controllers\RegistrationController@resendVerificationEmail')->name('customer.resend.verification-email');
 
         // Auth Routes
         Route::group(['middleware' => ['customer']], function () {

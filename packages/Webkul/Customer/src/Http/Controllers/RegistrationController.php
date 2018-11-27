@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Webkul\Customer\Mail\VerificationEmail;
 use Illuminate\Routing\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Cookie;
 
 /**
  * Registration controller
@@ -25,9 +26,10 @@ class RegistrationController extends Controller
     protected $_config;
     protected $customer;
 
-
-    public function __construct(CustomerRepository $customer)
-    {
+    /**
+     * @param CustomerRepository object $customer
+     */
+    public function __construct(CustomerRepository $customer) {
         $this->_config = request('_config');
         $this->customer = $customer;
     }
@@ -37,8 +39,7 @@ class RegistrationController extends Controller
      *
      * @return view
      */
-    public function show()
-    {
+    public function show() {
         return view($this->_config['view']);
     }
 
@@ -47,8 +48,7 @@ class RegistrationController extends Controller
      *
      * @return Mixed
      */
-    public function create(Request $request)
-    {
+    public function create(Request $request) {
         $request->validate([
             'first_name' => 'string|required',
             'last_name' => 'string|required',
@@ -65,29 +65,26 @@ class RegistrationController extends Controller
 
         $data['is_verified'] = 0;
 
-        if ($this->customer->create($data)) {
+        $verificationData['email'] = $data['email'];
+        $verificationData['token'] = md5(uniqid(rand(), true));
+        $data['token'] = $verificationData['token'];
+        $created = $this->customer->create($data);
 
-            $verificationData['email'] = $data['email'];
+        if ($created) {
+            try {
+                session()->flash('success', trans('shop::app.customer.signup-form.success'));
 
-            session()->flash('success', 'Account Created Successfully');
-
-            $attempt = auth()->guard('customer')->attempt(request(['email', 'password']));
-
-            if($attempt) {
-                try {
-                    Mail::send(new VerificationEmail($verificationData));
-                }catch(\Exception $e) {
-                    session()->flash('success', 'Account Created Successfully, But Verification Email Is Not Sent.');
-
-                    return redirect()->route($this->_config['redirect']);
-                }
+                Mail::send(new VerificationEmail($verificationData));
+            } catch(\Exception $e) {
+                session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-not-sent'));
 
                 return redirect()->route($this->_config['redirect']);
-            } else {
-                return redirect()->back();
             }
+
+
+            return redirect()->route($this->_config['redirect']);
         } else {
-            session()->flash('error', 'Cannot Create Your Account');
+            session()->flash('error', trans('shop::app.customer.signup-form.failed'));
 
             return redirect()->back();
         }
@@ -97,21 +94,44 @@ class RegistrationController extends Controller
      * Method to verify account
      *
      */
-    public function verifyAccount($email)
-    {
-        $customer = $this->customer->findOneByField('email', $email);
+    public function verifyAccount($token) {
+        $customer = $this->customer->findOneByField('token', $token);
 
         if($customer) {
-            if($customer->is_verified == 1) {
-                session()->flash('error', 'Your Account is already verified');
-            } else {
-                $data['is_verified'] = 1;
-                $this->customer->update($data,$customer->id);
-                session()->flash('info', 'Your Account has been verified');
-            }
+            $customer->update(['is_verified' => 1, 'token' => 'NULL']);
+
+            session()->flash('success', trans('shop::app.customer.signup-form.verified'));
         } else {
-            session()->flash('error', 'You dont have account with us');
+            session()->flash('warning', trans('shop::app.customer.signup-form.verify-failed'));
         }
+
+        return redirect()->route('customer.session.index');
+    }
+
+    public function resendVerificationEmail($email) {
+        $verificationData['email'] = $email;
+        $verificationData['token'] = md5(uniqid(rand(), true));
+
+        $customer = $this->customer->findOneByField('email', $email);
+
+        $this->customer->update(['token' => $verificationData['token']], $customer->id);
+
+        try {
+            Mail::send(new VerificationEmail($verificationData));
+
+            if(Cookie::has('enable-resend')) {
+                \Cookie::queue(\Cookie::forget('enable-resend'));
+            }
+
+            if(Cookie::has('email-for-resend')) {
+                \Cookie::queue(\Cookie::forget('email-for-resend'));
+            }
+        } catch(\Exception $e) {
+            session()->flash('success', trans('shop::app.customer.signup-form.verification-not-sent'));
+
+            return redirect()->back();
+        }
+        session()->flash('success', trans('shop::app.customer.signup-form.verification-sent'));
 
         return redirect()->back();
     }
