@@ -31,7 +31,9 @@ $(document).ready(function () {
         methods: {
             onSubmit: function (e) {
                 this.toggleButtonDisable(true);
-                tinyMCE.triggerSave();
+
+                if(typeof tinyMCE !== 'undefined')
+                    tinyMCE.triggerSave();
 
                 this.$validator.validateAll().then(result => {
                     if (result) {
