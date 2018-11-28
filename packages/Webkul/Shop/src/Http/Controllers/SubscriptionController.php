@@ -19,7 +19,6 @@ use Webkul\Core\Repositories\SubscribersListRepository as Subscription;
  */
 class SubscriptionController extends Controller
 {
-
     /**
      * User object
      *
@@ -48,17 +47,13 @@ class SubscriptionController extends Controller
      */
     public function __construct(Customer $customer, Subscription $subscription)
     {
-        $this->user = auth()->guard('customer')->user();
-
-        $this->customer = $customer;
-
         $this->subscription = $subscription;
 
         $this->_config = request('_config');
     }
 
     /**
-     * Subscribes Customers and Guests to subscription mailing list and checks if already subscribed
+     * Subscribes email to the email subscription list
      */
     public function subscribe()
     {
@@ -70,44 +65,27 @@ class SubscriptionController extends Controller
 
         $unique = 0;
 
-        if(auth()->guard('customer')->check()) {
-            $unique = function() use($email) {
-                $count = $this->customer->findWhere(['email' => $email]);
+        $alreadySubscribed = $this->subscription->findWhere(['email' => $email]);
 
-                if($count->count() > 0 && $count->first()->subscribed_to_news_letter == 1) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-            };
-        } else {
-            $alreadySubscribed = $this->subscription->findWhere(['email' => $email]);
-
-            $unique = function() use($alreadySubscribed){
-                if($alreadySubscribed->count() > 0 ) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-            };
-        }
+        $unique = function() use($alreadySubscribed){
+            if($alreadySubscribed->count() > 0 ) {
+                return 0;
+            } else {
+                return 1;
+            }
+        };
 
         if($unique()) {
             $token = uniqid();
+
             $result = false;
 
-            if(!auth()->guard('customer')->check()) {
-                $result = $this->subscription->create([
-                    'email' => $email,
-                    'channel_id' => core()->getCurrentChannel()->id,
-                    'is_subscribed' => 1,
-                    'token' => $token
-                ]);
-            } else {
-                $user = auth()->guard('customer')->user();
-                $token = auth()->guard('customer')->user()->email;
-                $result = $user->update(['subscribed_to_news_letter' => 1]);
-            }
+            $result = $this->subscription->create([
+                'email' => $email,
+                'channel_id' => core()->getCurrentChannel()->id,
+                'is_subscribed' => 1,
+                'token' => $token
+            ]);
 
             if(!$result) {
                 session()->flash('error', trans('shop::app.subscription.not-subscribed'));
@@ -121,12 +99,8 @@ class SubscriptionController extends Controller
             Mail::send(new SubscriptionEmail($subscriptionData));
 
             session()->flash('success', trans('shop::app.subscription.subscribed'));
-
-            return redirect()->back();
         } else {
             session()->flash('error', trans('shop::app.subscription.already'));
-
-            return redirect()->back();
         }
 
         return redirect()->back();
@@ -138,27 +112,14 @@ class SubscriptionController extends Controller
      * @var string $token
      */
     public function unsubscribe($token) {
-        if(auth()->guard('customer')->check()) {
-            if(auth()->guard('customer')->user()->email == $token) {
-                auth()->guard('customer')->user()->update(['subscribed_to_news_letter' => 0]);
-                session('info', 'You Are Unsubscribed');
-            } else {
-                session()->flash('warning', 'You must be logged in with correct to unsubscribe');
-            }
+        $subscriber = $this->subscription->findOneByField('token', $token);
+
+        if($subscriber->count() > 0 && $subscriber->is_subscribed == 1 &&$subscriber->update(['is_subscribed' => 0])) {
+            session()->flash('info', trans('shop::app.subscription.unsubscribed'));
         } else {
-            $subscriber = $this->subscription->findOneByField('token', $token);
-
-            if($subscriber->count() > 0 && $subscriber->delete()) {
-                session('info', 'You Are Unsubscribed');
-            } else {
-                session('info', 'You Have Already Unsubscribed');
-            }
-
-            if($this->customer->findOneByField('email', $token)) {
-                session('info', 'You must Logged In To Unsubscribe');
-            }
+            session()->flash('info', trans('shop::app.subscription.already-unsub'));
         }
 
-        return redirect()->back();
+        return redirect()->route('shop.home.index');
     }
 }

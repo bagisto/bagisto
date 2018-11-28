@@ -18,11 +18,9 @@
             <div class="list-container">
                 <span class="list-heading">{{ __('shop::app.footer.subscribe-newsletter') }}</span>
                 <div class="form-container">
-                    <form action="{{ route('shop.subscribe') }}" @submit.prevent="onSubmit">
+                    <form action="{{ route('shop.subscribe') }}">
                         <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
                             <input type="text" class="control subscribe-field" name="email" placeholder="Email Address" required><br/>
-
-                            <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
 
                             <button class="btn btn-md btn-primary">{{ __('shop::app.subscription.subscribe') }}</button>
                         </div>

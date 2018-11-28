@@ -34,19 +34,15 @@
             </ul>
 
             <div class="product-hero-image" id="product-hero-image">
-
                 <img :src="currentLargeImageUrl" id="pro-img"/>
 
                 {{-- Uncomment the line below for activating share links --}}
                 {{-- @include('shop::products.sharelinks') --}}
-
                 @auth('customer')
-                    <button type="submit" class="add-to-wishlist" data-href="{{ route('customer.wishlist.add', $product->id) }}" id="wishlist-changer">
-                    </button>
+                    <a class="add-to-wishlist" href="{{ route('customer.wishlist.add', $product->id) }}">
+                    </a>
                 @endauth
-
             </div>
-
         </div>
     </script>
 

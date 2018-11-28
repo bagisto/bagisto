@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
+use DB;
 
 /**
  * OrderShipmentsDataGrid
@@ -82,7 +83,10 @@ class OrderShipmentsDataGrid
                     'alias' => 'order_customer_first_name',
                     'type' => 'string',
                     'label' => 'Customer Name',
-                    'sortable' => false
+                    'sortable' => false,
+                    // 'wrapper' => function($value) {
+                    //     return $value.$last_name;
+                    // }
                 ], [
                     'name' => 'ors.created_at',
                     'alias' => 'orscreated',

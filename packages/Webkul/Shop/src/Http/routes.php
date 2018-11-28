@@ -12,7 +12,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
     Route::get('/subscribe', 'Webkul\Shop\Http\Controllers\SubscriptionController@subscribe')->name('shop.subscribe');
 
     //unsubscribe
-    Route::get('/unsubscribe', 'Webkul\Shop\Http\Controllers\SubscriptionController@unSubscribe')->name('shop.unsubscribe');
+    Route::get('/unsubscribe/{token}', 'Webkul\Shop\Http\Controllers\SubscriptionController@unsubscribe')->name('shop.unsubscribe');
 
     //Store front header nav-menu fetch
     Route::get('/categories/{slug}', 'Webkul\Shop\Http\Controllers\CategoryController@index')->defaults('_config', [
@@ -125,7 +125,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
 
         // Reset Password Form Store
         Route::post('/reset-password', 'Webkul\Customer\Http\Controllers\ResetPasswordController@store')->defaults('_config', [
-            'redirect' => 'customer.session.index'
+            'redirect' => 'customer.profile.index'
         ])->name('customer.reset-password.store');
 
         // Login Routes

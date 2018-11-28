@@ -12,9 +12,9 @@
                 <input type="hidden" name="selected_configurable_option" :value="selectedProductId">
 
                 <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
-                    <label class="reqiured">@{{ attribute.label }}</label>
+                    <label class="required">@{{ attribute.label }}</label>
 
-                    <select v-validate="'required'" class="control" :name="['super_attribute[' + attribute.id + ']']" :disabled="attribute.disabled" @change="configure(attribute, $event.target.value)" :id="['attribute_' + attribute.id]">
+                    <select v-validate="'required'" class="control" :name="['super_attribute[' + attribute.id + ']']" :disabled="attribute.disabled" @change="configure(attribute, $event.target.value)" :id="['attribute_' + attribute.id]" :data-vv-as="'&quot;' + attribute.label + '&quot;'">
 
                         <option v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
 
@@ -98,23 +98,23 @@
                             }
 
                             //wishlist anchor href changer with options
-                            @auth('customer')
-                                var wishlistLink = $('#wishlist-changer').attr('data-href');
+                            // @auth('customer')
+                            //     var wishlistLink = $('#wishlist-changer').attr('data-href');
 
-                                if(this.selectedProductId != '') {
-                                    var splitted = wishlistLink.split("/");
+                            //     if(this.selectedProductId != '') {
+                            //         var splitted = wishlistLink.split("/");
 
-                                    var lastItem = splitted.pop();
+                            //         var lastItem = splitted.pop();
 
-                                    lastItem = this.selectedProductId;
+                            //         lastItem = this.selectedProductId;
 
-                                    var joined = splitted.join('/');
+                            //         var joined = splitted.join('/');
 
-                                    var newWishlistUrl = joined + '/' + lastItem;
+                            //         var newWishlistUrl = joined + '/' + lastItem;
 
-                                    $('#wishlist-changer').attr('data-href', newWishlistUrl);
-                                }
-                            @endauth
+                            //         $('#wishlist-changer').attr('data-href', newWishlistUrl);
+                            //     }
+                            // @endauth
 
                             //buy now anchor href changer with options
                             var buyNowLink = $('.btn.buynow').attr('data-href');

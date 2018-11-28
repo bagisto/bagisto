@@ -55,7 +55,7 @@ class WishlistController extends Controller
             'channel_id' => core()->getCurrentChannel()->id,
             'customer_id' => auth()->guard('customer')->user()->id]
         );
-        // dd($wishlistItems->count());
+
         return view($this->_config['view'])->with('items', $wishlistItems);
     }
 
@@ -76,7 +76,7 @@ class WishlistController extends Controller
         $checked = $this->wishlist->findWhere(['channel_id' => core()->getCurrentChannel()->id, 'product_id' => $itemId, 'customer_id' => auth()->guard('customer')->user()->id]);
 
         //accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
-        if($product->parent_id != null || $product->parent_id != 'null') {
+        if($product->parent_id != null) {
             $product = $this->product->findOneByField('id', $product->parent_id);
             $data['product_id'] = $product->parent_id;
         }
@@ -149,7 +149,7 @@ class WishlistController extends Controller
                 return redirect()->back();
             }
 
-            session()->flash('warning', trans('shop::app.checkout.cart.add-config-warning'));
+            session()->flash('info', trans('shop::app.checkout.cart.add-config-warning'));
 
             return redirect()->route('shop.products.index', $wishlistItem->product->url_key);
         }

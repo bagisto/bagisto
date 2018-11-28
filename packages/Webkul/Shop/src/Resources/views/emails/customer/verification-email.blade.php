@@ -8,11 +8,12 @@
         </div>
 
         <div  style="font-size:16px; color:#242424; font-weight:600; margin-top: 60px; margin-bottom: 15px">
-            {{ __('shop::app.subscription.title') }}
+            Bagisto - Email Verification
         </div>
 
         <div>
-            {{ __('shop::app.subscription.message') }}
+            This is the mail to verify that the email address you entered is yours.
+            Kindly click the 'Verify Your Account' button below to verify your account.
         </div>
 
         <div  style="margin-top: 40px; text-align: center">

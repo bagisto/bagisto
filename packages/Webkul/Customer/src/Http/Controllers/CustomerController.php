@@ -105,15 +105,23 @@ class CustomerController extends Controller
 
         $data = collect(request()->input())->except('_token')->toArray();
 
+        if($data['date_of_birth'] == "") {
+            unset($data['date_of_birth']);
+        }
+
         if($data['oldpassword'] == null) {
             $data = collect(request()->input())->except(['_token','password','password_confirmation','oldpassword'])->toArray();
 
+            if($data['date_of_birth'] == "") {
+                unset($data['date_of_birth']);
+            }
+
             if($this->customer->update($data, $id)) {
-                Session()->flash('success','Profile Updated Successfully');
+                Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
                 return redirect()->back();
             } else {
-                Session()->flash('success','Profile Cannot Be Updated Successfully');
+                Session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
 
                 return redirect()->back();
             }
@@ -122,18 +130,22 @@ class CustomerController extends Controller
                 $data = collect(request()->input())->except(['_token','oldpassword'])->toArray();
 
                 $data['password'] = bcrypt($data['password']);
+
+                if($data['date_of_birth'] == "") {
+                    unset($data['date_of_birth']);
+                }
             } else {
-                session()->flash('warning', 'The Old Password Does Not Match');
+                session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
 
                 return redirect()->back();
             }
 
             if($this->customer->update($data, $id)) {
-                Session()->flash('success','Profile Updated Successfully');
+                Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
                 return redirect()->back();
             } else {
-                Session()->flash('success','Profile Cannot Be Updated Successfully');
+                Session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
 
                 return redirect()->back();
             }

@@ -33,7 +33,9 @@ return [
         'subscribe' => 'Subscribe',
         'subscribed' => 'You Are Now Subscribed To Subscription Emails',
         'not-subscribed' => 'You Cannot Be Subscribed To Subscription Emails, Try Again After Some time',
-        'already' => 'You Are Already Subscribed To Our Subscription List'
+        'already' => 'You Are Already Subscribed To Our Subscription List',
+        'unsubscribed' => 'You Are Unsubscribed From Bagisto Subscription Mails',
+        'already-unsub' => 'You Are Already Unsubscribed'
     ],
 
     'search' => [
@@ -129,6 +131,10 @@ return [
                     'title' => 'Profile',
                     'edit' => 'Edit',
                 ],
+
+                'edit-success' => 'Profile Updated Successfully',
+                'edit-fail' => 'Error! Profile Cannot Be Updated, Please Try Again Later',
+                'unmatch' => 'The Old Password Does Not Match',
 
                 'fname' => 'First Name',
                 'lname' => 'Last Name',

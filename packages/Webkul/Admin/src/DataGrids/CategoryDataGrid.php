@@ -123,12 +123,12 @@ class CategoryDataGrid
             'filterable' => [
                 [
                     'column' => 'cat.id',
-                    'alias' => 'catID',
+                    'alias' => 'cat_id',
                     'type' => 'number',
                     'label' => 'Category ID',
                 ], [
                     'column' => 'ct.name',
-                    'alias' => 'catName',
+                    'alias' => 'cat_name',
                     'type' => 'string',
                     'label' => 'Category Name',
                 ],
@@ -140,7 +140,7 @@ class CategoryDataGrid
                 // ],
                 [
                     'column' => 'cat.status',
-                    'alias' => 'catStatus',
+                    'alias' => 'cat_status',
                     'type' => 'string',
                     'label' => 'Visible in Menu',
                 ],
