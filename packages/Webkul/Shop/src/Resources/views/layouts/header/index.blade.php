@@ -187,14 +187,6 @@
             <span class="suggestion mt-15">Designer sarees</span>
         </div>  --}}
     </div>
-
-    @auth('customer')
-        @if(auth()->guard('customer')->user()->is_verified == 0)
-            <div class="verify-account">
-                <span>{{ __('shop::app.home.verify-email') }}</span>
-            </div>
-        @endif
-    @endauth
 </div>
 
 @push('scripts')

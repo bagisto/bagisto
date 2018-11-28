@@ -13,11 +13,10 @@ class RemoveCostColumnFromDatagrid extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('product_grid')) {
-            Schema::table('products_grid', function (Blueprint $table) {
-                $table->dropColumn('cost');
-            });
-        }
+        Schema::table('products_grid', function (Blueprint $table) {
+            $table->dropColumn('cost');
+            $table->dropColumn('attribute_family_name');
+        });
     }
 
     /**
@@ -27,10 +26,9 @@ class RemoveCostColumnFromDatagrid extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('product_grid')) {
-            Schema::table('products_grid', function (Blueprint $table) {
-                $table->string('cost');
-            });
-        }
+        Schema::table('products_grid', function (Blueprint $table) {
+            $table->string('cost');
+            $table->string('attribute_family_name')->nullable();
+        });
     }
 }

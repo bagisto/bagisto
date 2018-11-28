@@ -103,9 +103,9 @@ class SliderDataGrid
                     'label' => 'ID'
                 ], [
                     'column' => 's.title',
-                    'alias' => 'SliderTitle',
+                    'alias' => 'sliderTitle',
                     'type' => 'string',
-                    'label' => 'Slider Title'
+                    'label' => 'title'
                 ],
             ],
 

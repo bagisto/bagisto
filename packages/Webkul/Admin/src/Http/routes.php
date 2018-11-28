@@ -174,9 +174,7 @@ Route::group(['middleware' => ['web']], function () {
 
             // Catalog Routes
             Route::prefix('catalog')->group(function () {
-
                 Route::get('/sync', 'Webkul\Product\Http\Controllers\ProductController@sync');
-
 
                 // Catalog Product Routes
                 Route::get('/products', 'Webkul\Product\Http\Controllers\ProductController@index')->defaults('_config', [

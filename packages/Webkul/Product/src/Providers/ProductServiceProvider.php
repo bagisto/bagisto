@@ -19,7 +19,7 @@ class ProductServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
-        Event::listen('products.datagrid.create', 'Webkul\Admin\Listeners\Product@sync');
+        Event::listen('products.datagrid.sync', 'Webkul\Admin\Listeners\Product@sync');
 
         Event::listen('product.save.after', 'Webkul\Admin\Listeners\Product@afterProductCreated');
 
