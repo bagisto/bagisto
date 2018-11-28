@@ -111,6 +111,7 @@ class InvoiceRepository extends Repository
                 $invoiceItem = $this->invoiceItem->create([
                         'invoice_id' => $invoice->id,
                         'order_item_id' => $orderItem->id,
+                        'state' => 'paid',
                         'name' => $orderItem->name,
                         'sku' => $orderItem->sku,
                         'qty' => $qty,
