@@ -77,7 +77,7 @@ class AttributeDataGrid
                     'name' => 'admin_name',
                     'alias' => 'attributeAdminName',
                     'type' => 'string',
-                    'label' => 'AdminName',
+                    'label' => 'Name',
                     'sortable' => true,
                 ],
                 [
