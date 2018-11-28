@@ -67,7 +67,7 @@ class OrderDataGrid
                     'label' => 'ID',
                     'sortable' => true,
                 ], [
-                    'name' => 'or.customer_first_name',
+                    'name' => 'CONCAT(or.customer_first_name, " ", or.customer_last_name)',
                     'alias' => 'oafirstname',
                     'type' => 'string',
                     'label' => 'Billed To',
