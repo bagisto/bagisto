@@ -2,12 +2,12 @@
 
 namespace Webkul\Category\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
 use Webkul\Category\Models\Category;
+use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Container\Container as App;
 use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Category Reposotory
@@ -32,7 +32,7 @@ class CategoryRepository extends Repository
      *
      * @return mixed
      */
-    function model()
+    public function model()
     {
         return 'Webkul\Category\Models\Category';
     }
@@ -43,12 +43,12 @@ class CategoryRepository extends Repository
      */
     public function create(array $data)
     {
-        if(isset($data['locale']) && $data['locale'] == 'all') {
+        if (isset($data['locale']) && $data['locale'] == 'all') {
             $model = app()->make($this->model());
 
-            foreach(core()->getAllLocales() as $locale) {
+            foreach (core()->getAllLocales() as $locale) {
                 foreach ($model->translatedAttributes as $attribute) {
-                    if(isset($data[$attribute])) {
+                    if (isset($data[$attribute])) {
                         $data[$locale->code][$attribute] = $data[$attribute];
                     }
                 }
@@ -84,8 +84,8 @@ class CategoryRepository extends Repository
     public function getVisibleCategoryTree($id = null)
     {
         return $id
-            ? Category::orderBy('position', 'ASC')->where('id', '!=', $id)->where('status', '=', '1')->get()->toTree()
-            : Category::orderBy('position', 'ASC')->where('status', '=', '1')->get()->toTree();
+            ? Category::orderBy('position', 'ASC')->where('id', '!=', $id)->where('status', 1)->get()->toTree()
+            : Category::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
     }
 
     /**
@@ -97,7 +97,13 @@ class CategoryRepository extends Repository
      */
     public function isSlugUnique($id, $slug)
     {
-        return CategoryTranslation::where('category_id', '!=', $id)->where('slug', '=', $slug)->first() ? false : true;
+        $exists = CategoryTranslation::where('category_id', '<>', $id)
+            ->where('slug', $slug)
+            ->limit(1)
+            ->select(\DB::raw(1))
+            ->exists();
+
+        return $exists ? false : true;
     }
 
     /**
@@ -110,8 +116,9 @@ class CategoryRepository extends Repository
     {
         $category = $this->model->whereTranslation('slug', $slug)->first();
 
-        if($category)
+        if ($category) {
             return $category;
+        }
 
         throw (new ModelNotFoundException)->setModel(
             get_class($this->model), $slug
@@ -140,24 +147,26 @@ class CategoryRepository extends Repository
      * @param mixed $category
      * @return void
      */
-    public function uploadImages($data, $category,$type = "image")
+    public function uploadImages($data, $category, $type = "image")
     {
-        if(isset($data[$type])) {
+        if (isset($data[$type])) {
+            $request = request();
+
             foreach ($data[$type] as $imageId => $image) {
                 $file = $type . '.' . $imageId;
                 $dir = 'category/' . $category->id;
 
-                if(request()->hasFile($file)) {
-                    if($category->{$type}) {
+                if ($request->hasFile($file)) {
+                    if ($category->{$type}) {
                         Storage::delete($category->{$type});
                     }
 
-                    $category->{$type} = request()->file($file)->store($dir);
+                    $category->{$type} = $request->file($file)->store($dir);
                     $category->save();
                 }
             }
         } else {
-            if($category->{$type}) {
+            if ($category->{$type}) {
                 Storage::delete($category->{$type});
             }
 
