@@ -243,11 +243,17 @@ class Product {
 
                 $qty = 0;
             }
-            $this->productGrid->create($gridObject);
+
+            $oldGridObject = $this->productGrid->findOneByField('product_id', $product->id);
+
+            if($oldGridObject) {
+                $oldGridObject->update($gridObject);
+            } else {
+                $this->productGrid->create($gridObject);
+            }
 
             $gridObject = [];
         }
-
         return true;
     }
 }

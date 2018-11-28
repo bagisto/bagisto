@@ -104,16 +104,16 @@ class TaxCategoryDataGrid
             //don't use aliasing in case of filters
             'filterable' => [
                 [
-                    'column' => 'tr.name',
-                    'alias' => 'Name',
-                    'type' => 'number',
-                    'label' => 'Name'
-                ],
-                [
                     'column' => 'tr.id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'ID'
+                ],
+                [
+                    'column' => 'tr.name',
+                    'alias' => 'Name',
+                    'type' => 'string',
+                    'label' => 'Name'
                 ],
                 [
                     'column' => 'tr.code',
