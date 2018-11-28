@@ -79,14 +79,11 @@ class OrderShipmentsDataGrid
                     'label' => 'Total Quantity',
                     'sortable' => true
                 ], [
-                    'name' => 'ors.customer_first_name',
+                    'name' => 'CONCAT(ors.customer_first_name, " ", ors.customer_last_name)',
                     'alias' => 'order_customer_first_name',
                     'type' => 'string',
                     'label' => 'Customer Name',
                     'sortable' => false,
-                    // 'wrapper' => function($value) {
-                    //     return $value.$last_name;
-                    // }
                 ], [
                     'name' => 'ors.created_at',
                     'alias' => 'orscreated',
