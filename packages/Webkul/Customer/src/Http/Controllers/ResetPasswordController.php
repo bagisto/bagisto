@@ -62,7 +62,6 @@ class ResetPasswordController extends Controller
      */
     public function store()
     {
-        //dd(request()->input());
         $this->validate(request(), [
             'token' => 'required',
             'email' => 'required|email',
@@ -74,7 +73,7 @@ class ResetPasswordController extends Controller
                 $this->resetPassword($customer, $password);
             }
         );
-       // dd($response);
+
         if($response == Password::PASSWORD_RESET) {
             return redirect()->route($this->_config['redirect']);
         }

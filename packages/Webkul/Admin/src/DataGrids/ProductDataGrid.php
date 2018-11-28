@@ -168,7 +168,6 @@ class ProductDataGrid
                 'nlike' => "not like",
             ],
             // 'css' => []
-
         ]);
 
     }

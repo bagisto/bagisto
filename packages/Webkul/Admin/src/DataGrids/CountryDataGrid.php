@@ -33,12 +33,12 @@ class CountryDataGrid
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [

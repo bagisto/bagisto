@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.configuration.tax-rates.edit-title') }}
+    {{ __('admin::app.settings.tax-rates.edit-title') }}
 @stop
 
 @section('content')
@@ -9,12 +9,12 @@
         <form method="POST" action="{{ route('admin.tax-rates.update', $taxRate->id) }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('admin::app.configuration.tax-rates.edit.title') }}</h1>
+                    <h1>{{ __('admin::app.settings.tax-rates.edit.title') }}</h1>
                 </div>
 
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.configuration.tax-rates.save-btn-title') }}
+                        {{ __('admin::app.settings.tax-rates.edit-title') }}
                     </button>
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <div class="page-content">
                 <div class="form-container">
                     @method('PUT')
-                    
+
                     @csrf()
 
                     <div class="control-group" :class="[errors.has('identifier') ? 'has-error' : '']">

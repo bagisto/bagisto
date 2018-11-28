@@ -5,28 +5,20 @@
 @stop
 
 @section('content-wrapper')
-
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
     <section class="cart">
-
         @if ($cart)
-
             <div class="title">
                 {{ __('shop::app.checkout.cart.title') }}
             </div>
 
             <div class="cart-content">
-
                 <div class="left-side">
                     <form action="{{ route('shop.checkout.cart.update') }}" method="POST" @submit.prevent="onSubmit">
 
                         <div class="cart-item-list" style="margin-top: 0">
-
                             @csrf
-
                             @foreach($cart->items as $item)
-
                                 <?php
                                     if($item->type == "configurable")
                                         $productBaseImage = $productImageHelper->getProductBaseImage($item->child->product);
@@ -64,7 +56,7 @@
                                                 <div class="wrap">
                                                     <label for="qty[{{$item->id}}]">{{ __('shop::app.checkout.cart.quantity.quantity') }}</label>
 
-                                                    <input type="text" class="control" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}">
+                                                    <input type="text" class="control" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}" data-vv-as="&quot;{{ __('shop::app.checkout.cart.quantity.quantity') }}&quot;">
                                                 </div>
 
                                                 <span class="control-error" v-if="errors.has('qty[{{$item->id}}]')">@{{ errors.first('qty[{!!$item->id!!}]') }}</span>
@@ -73,13 +65,15 @@
                                             <span class="remove">
                                                 <a href="{{ route('shop.checkout.cart.remove', $item->id) }}" onclick="removeLink('Do you really want to do this?')">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
 
-                                            <span class="towishlist">
-                                                @if($item->parent_id != 'null' ||$item->parent_id != null)
-                                                    <a href="{{ route('shop.movetowishlist', $item->id) }}" onclick="removeLink('Do you really want to do this?')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
-                                                @else
-                                                    <a href="{{ route('shop.movetowishlist', $item->child->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
-                                                @endif
-                                            </span>
+                                            @auth('customer')
+                                                <span class="towishlist">
+                                                    @if($item->parent_id != 'null' ||$item->parent_id != null)
+                                                        <a href="{{ route('shop.movetowishlist', $item->id) }}" onclick="removeLink('Do you really want to do this?')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                    @else
+                                                        <a href="{{ route('shop.movetowishlist', $item->child->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                    @endif
+                                                </span>
+                                            @endauth
                                         </div>
 
                                         @if (!cart()->isItemHaveQuantity($item))

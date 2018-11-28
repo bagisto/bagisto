@@ -19,10 +19,16 @@ class Cart extends Model
 
     protected $with = ['items', 'items.child', 'shipping_address', 'billing_address', 'selected_shipping_rate', 'payment'];
 
+    /**
+     * To get relevant associated items with the cart instance
+     */
     public function items() {
         return $this->hasMany(CartItem::class)->whereNull('parent_id');
     }
 
+    /**
+     * To get all the associated items with the cart instance even the parent and child items of configurable products
+     */
     public function all_items() {
         return $this->hasMany(CartItem::class);
     }

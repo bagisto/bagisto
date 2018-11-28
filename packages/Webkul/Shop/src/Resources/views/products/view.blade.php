@@ -39,9 +39,9 @@
 
                         <div class="quantity control-group" :class="[errors.has('quantity') ? 'has-error' : '']">
 
-                            <label class="reqiured">{{ __('shop::app.products.quantity') }}</label>
+                            <label class="required">{{ __('shop::app.products.quantity') }}</label>
 
-                            <input name="quantity" class="control" value="1" v-validate="'required|numeric|min_value:1'" style="width: 60px;">
+                            <input name="quantity" class="control" value="1" v-validate="'required|numeric|min_value:1'" style="width: 60px;" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;">
 
                             <span class="control-error" v-if="errors.has('quantity')">@{{ errors.first('quantity') }}</span>
                         </div>

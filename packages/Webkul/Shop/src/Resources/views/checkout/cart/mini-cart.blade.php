@@ -21,54 +21,43 @@
             <div class="dropdown-cart">
                 <div class="dropdown-header">
                     <p class="heading">
-                        {{ __('shop::app.checkout.cart.cart-subtotal') }} - 
+                        {{ __('shop::app.checkout.cart.cart-subtotal') }} -
                         {{ core()->currency($cart->sub_total) }}
                     </p>
                 </div>
 
                 <div class="dropdown-content">
                     @foreach($items as $item)
-                        @if($item->type == "configurable")
-
+                        {{-- @if($item->type == "configurable") --}}
                             <div class="item">
                                 <div class="item-image" >
-                                    @php
-                                        $images = $productImageHelper->getProductBaseImage($item->child->product);
-                                    @endphp
+                                    <?php
+                                        if($item->type == "configurable")
+                                            $images = $productImageHelper->getProductBaseImage($item->child->product);
+                                        else
+                                            $images = $productImageHelper->getProductBaseImage($item->product);
+                                    ?>
                                     <img src="{{ $images['small_image_url'] }}" />
                                 </div>
 
                                 <div class="item-details">
+                                    {{-- @if($item->type == "configurable")
+                                        <div class="item-name">{{ $item->child->name }}</div>
+                                    @else --}}
+                                        <div class="item-name">{{ $item->name }}</div>
+                                    {{-- @endif --}}
 
-                                    <div class="item-name">{{ $item->child->name }}</div>
+                                    @if($item->type == "configurable")
+                                        <div class="item-options">
+                                            {{ trim(Cart::getProductAttributeOptionDetails($item->child->product)['html']) }}
+                                        </div>
+                                    @endif
 
                                     <div class="item-price">{{ core()->currency($item->total) }}</div>
 
                                     <div class="item-qty">Quantity - {{ $item->quantity }}</div>
                                 </div>
                             </div>
-
-                        @else
-
-                            <div class="item">
-                                <div class="item-image" >
-                                    @php
-                                        $images = $productImageHelper->getProductBaseImage($item->product);
-                                    @endphp
-                                    <img src="{{ $images['small_image_url'] }}" />
-                                </div>
-
-                                <div class="item-details">
-
-                                    <div class="item-name">{{ $item->name }}</div>
-
-                                    <div class="item-price">{{ core()->currency($item->total) }}</div>
-
-                                    <div class="item-qty">Quantity - {{ $item->quantity }}</div>
-                                </div>
-                            </div>
-
-                        @endif
                     @endforeach
                 </div>
 

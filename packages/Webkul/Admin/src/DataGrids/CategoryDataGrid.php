@@ -33,12 +33,12 @@ class CategoryDataGrid
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [
@@ -112,7 +112,7 @@ class CategoryDataGrid
                     'alias' => 'cat_locale',
                     'type' => 'string',
                     'label' => 'Locale',
-                    'sortable' => true,
+                    'sortable' => false,
                     'filter' => [
                         'function' => 'orWhere',
                         'condition' => ['ct.locale', app()->getLocale()]
@@ -123,12 +123,12 @@ class CategoryDataGrid
             'filterable' => [
                 [
                     'column' => 'cat.id',
-                    'alias' => 'catID',
+                    'alias' => 'cat_id',
                     'type' => 'number',
                     'label' => 'Category ID',
                 ], [
                     'column' => 'ct.name',
-                    'alias' => 'catName',
+                    'alias' => 'cat_name',
                     'type' => 'string',
                     'label' => 'Category Name',
                 ],
@@ -140,7 +140,7 @@ class CategoryDataGrid
                 // ],
                 [
                     'column' => 'cat.status',
-                    'alias' => 'catStatus',
+                    'alias' => 'cat_status',
                     'type' => 'string',
                     'label' => 'Visible in Menu',
                 ],

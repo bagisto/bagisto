@@ -13,13 +13,13 @@
 
                     @foreach ($rateGroup['rates'] as $rate)
                         <span class="radio" >
-                            <input v-validate="'required'" type="radio" id="{{ $rate->method }}" name="shipping_method" value="{{ $rate->method }}" v-model="selected_shipping_method" @change="methodSelected()">
+                            <input v-validate="'required'" type="radio" id="{{ $rate->method }}" name="shipping_method" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.shipping-method') }}&quot;" value="{{ $rate->method }}" v-model="selected_shipping_method" @change="methodSelected()">
                             <label class="radio-view" for="{{ $rate->method }}"></label>
                             {{ $rate->method_title }}
                             <b>{{ core()->currency($rate->base_price) }}</b>
                         </span>
                     @endforeach
-                        
+
                 @endforeach
 
                 <span class="control-error" v-if="errors.has('shipping-form.shipping_method')">

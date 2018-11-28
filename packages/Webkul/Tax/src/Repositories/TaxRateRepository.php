@@ -21,30 +21,4 @@ class TaxRateRepository extends Repository
     {
         return 'Webkul\Tax\Models\TaxRate';
     }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function create(array $data)
-    {
-        $taxRate = $this->model->create($data);
-
-        return $taxRate;
-    }
-
-    /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
-     */
-    public function update(array $data, $id, $attribute = "id")
-    {
-        $taxRate = $this->find($id);
-
-        $taxRate->update($data);
-
-        return $taxRate;
-    }
 }

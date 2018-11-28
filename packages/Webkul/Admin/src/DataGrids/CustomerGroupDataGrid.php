@@ -32,23 +32,23 @@ class CustomerGroupDataGrid
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
-                [
-                    'route' => route('admin.datagrid.index'),
-                    'method' => 'POST',
-                    'label' => 'View Grid',
-                    'type' => 'select',
-                    'options' =>[
-                        1 => 'Edit',
-                        2 => 'Set',
-                        3 => 'Change Status'
-                    ]
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
+                // [
+                //     'route' => route('admin.datagrid.index'),
+                //     'method' => 'POST',
+                //     'label' => 'View Grid',
+                //     'type' => 'select',
+                //     'options' =>[
+                //         1 => 'Edit',
+                //         2 => 'Set',
+                //         3 => 'Change Status'
+                //     ]
+                // ],
             ],
             'actions' => [
                 [

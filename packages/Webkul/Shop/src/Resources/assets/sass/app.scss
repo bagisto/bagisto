@@ -198,6 +198,15 @@ input {
    }
 }
 
+/*  Verify Email  */
+.verify-account {
+    width: 100%;
+    height: 30px;
+    background-color: $border-color;
+    line-height: 30px;
+    text-align: center;
+}
+
 /* Show the indicator (dot/circle) when checked */
 .radio-container input:checked ~ .checkmark:after {
     display: block;
@@ -918,10 +927,16 @@ section.slider-block {
                         }
 
                         .dropdown-content .item-details{
-                            height: 75px;
+                            max-height: 125px;
                         }
 
                         .item-details .item-name {
+                            font-size: 16px;
+                            font-weight: bold;
+                            margin-bottom: 8px;
+                        }
+
+                        .item-details .item-options {
                             font-size: 16px;
                             font-weight: bold;
                             margin-bottom: 8px;
@@ -1643,6 +1658,7 @@ section.product-detail {
                         width: 100%;
                         max-height: 480px;
                         height: 100%;
+                        box-shadow: 1px 1px 2px $border-color;
 
                         img {
                             width: 100%;
@@ -1680,11 +1696,12 @@ section.product-detail {
                     display: none;
                     flex-direction: row;
                     margin-top: 10px;
+                    width: 79.5%;
+                    float: right;
                     justify-content: space-between;
 
 
                     .addtocart {
-                        border-radius: 0px;
                         width: 49%;
                         background: black;
                         white-space: nowrap;
@@ -1692,9 +1709,7 @@ section.product-detail {
                     }
 
                     .buynow {
-                        border-radius: 0px;
                         width: 49%;
-                        float:right;
                         white-space: nowrap;
                         text-transform: uppercase;
                     }

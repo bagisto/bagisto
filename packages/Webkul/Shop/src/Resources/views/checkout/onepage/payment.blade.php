@@ -10,12 +10,12 @@
 
                 @foreach ($paymentMethods as $payment)
 
-                    <span class="radio" >
-                        <input v-validate="'required'" type="radio" id="{{ $payment['method'] }}" name="payment[method]" value="{{ $payment['method'] }}" v-model="payment.method" @change="methodSelected()">
+                    <span class="radio">
+                        <input v-validate="'required'" type="radio" id="{{ $payment['method'] }}" name="payment[method]" value="{{ $payment['method'] }}" v-model="payment.method" @change="methodSelected()" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.payment-method') }}&quot;">
                         <label class="radio-view" for="{{ $payment['method'] }}"></label>
                         {{ $payment['method_title'] }}
                     </span>
-                    
+
                     <span class="control-info">{{ $payment['description'] }}</span>
 
                 @endforeach

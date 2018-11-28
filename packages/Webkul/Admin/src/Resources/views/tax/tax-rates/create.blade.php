@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.configuration.tax-rates.add-title') }}
+    {{ __('admin::app.settings.tax-rates.add-title') }}
 @stop
 
 @section('content')
@@ -9,12 +9,12 @@
         <form method="POST" action="{{ route('admin.tax-rates.create') }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('admin::app.configuration.tax-rates.add-title') }}</h1>
+                    <h1>{{ __('admin::app.settings.tax-rates.add-title') }}</h1>
                 </div>
 
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.configuration.tax-rates.save-btn-title') }}
+                        {{ __('admin::app.settings.tax-rates.save-btn-title') }}
                     </button>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                 <span class="checkbox">
                     <input type="checkbox" id="is_zip" name="is_zip" v-model="is_zip">
                     <label class="checkbox-view" for="is_zip"></label>
-                    {{ __('admin::app.configuration.tax-rates.is_zip') }}
+                    {{ __('admin::app.settings.tax-rates.is_zip') }}
                 </span>
             </div>
 

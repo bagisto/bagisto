@@ -5,7 +5,6 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-
 /**
  * Attributes DataGrid
  *
@@ -33,12 +32,12 @@ class AttributeDataGrid
             'aliased' => true,
 
             'massoperations' => [
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [
@@ -148,20 +147,17 @@ class AttributeDataGrid
                     'alias' => 'attributeId',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'alias' => 'attributeCode',
                     'type' => 'string',
                     'label' => 'Code',
-                ],
-                [
+                ], [
                     'column' => 'admin_name',
                     'alias' => 'attributeAdminName',
                     'type' => 'string',
-                    'label' => 'AdminName',
-                ],
-                [
+                    'label' => 'Name',
+                ], [
                     'column' => 'type',
                     'alias' => 'attributeType',
                     'type' => 'string',
@@ -175,13 +171,11 @@ class AttributeDataGrid
                     'column' => 'code',
                     'alias' => 'attributeCode',
                     'type' => 'string',
-                ],
-                [
+                ], [
                     'column' => 'admin_name',
                     'alias' => 'attributeAdminName',
                     'type' => 'string',
-                ],
-                [
+                ], [
                     'column' => 'type',
                     'alias' => 'attributeType',
                     'type' => 'string',

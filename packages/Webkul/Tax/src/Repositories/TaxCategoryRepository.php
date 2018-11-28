@@ -22,61 +22,11 @@ class TaxCategoryRepository extends Repository
         return 'Webkul\Tax\Models\TaxCategory';
     }
 
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function create(array $data)
-    {
-        $taxCategory = $this->model->create($data);
+    public function attachOrDetach($taxCategory, $data) {
+        $taxRates = $taxCategory->tax_rates;
 
-        return $taxCategory;
+        $this->model->findOrFail($taxCategory->id)->tax_rates()->sync($data);
+
+        return true;
     }
-
-    /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     *
-     * @return mixed
-     */
-    public function update(array $data, $id, $attribute = "id")
-    {
-        $taxCategory = $this->find($id);
-
-        $taxCategory->update($data);
-
-        return $taxmap;
-    }
-
-    /**
-     * Method to attach
-     * associations
-     *
-     * @return mixed
-    */
-    public function onlyAttach($id, $taxRates) {
-
-        foreach($taxRates as $key => $value) {
-
-            $this->model->findOrFail($id)->tax_rates()->attach($id, ['tax_category_id' => $id, 'tax_rate_id' => $value]);
-        }
-    }
-
-
-    /**
-     * Method to detach
-     * and attach the
-     * associations
-     *
-     * @return mixed
-    */
-    public function syncAndDetach($id, $taxRates) {
-        $this->model->findOrFail($id)->tax_rates()->detach();
-
-        foreach($taxRates as $key => $value) {
-            $this->model->findOrFail($id)->tax_rates()->attach($id, ['tax_category_id' => $id, 'tax_rate_id' => $value]);
-        }
-    }
-
 }

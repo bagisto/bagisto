@@ -8,6 +8,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductReviewRepository as ProductReview;
 use Webkul\Customer\Models\Customer;
 use Auth;
+use Hash;
 
 /**
  * Customer controlller for the customer basically for the tasks of customers which will be done after customer authentication.
@@ -94,41 +95,57 @@ class CustomerController extends Controller
         $id = auth()->guard('customer')->user()->id;
 
         $this->validate(request(), [
-
             'first_name' => 'string',
             'last_name' => 'string',
             'gender' => 'required',
             'date_of_birth' => 'date',
             'email' => 'email|unique:customers,email,'.$id,
             'password' => 'confirmed|required_if:oldpassword,!=,null'
-
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();
 
+        if($data['date_of_birth'] == "") {
+            unset($data['date_of_birth']);
+        }
+
         if($data['oldpassword'] == null) {
             $data = collect(request()->input())->except(['_token','password','password_confirmation','oldpassword'])->toArray();
-            
+
+            if($data['date_of_birth'] == "") {
+                unset($data['date_of_birth']);
+            }
+
             if($this->customer->update($data, $id)) {
-                Session()->flash('success','Profile Updated Successfully');
+                Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
                 return redirect()->back();
             } else {
-                Session()->flash('success','Profile Updated Successfully');
+                Session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
 
                 return redirect()->back();
             }
         } else {
-            $data = collect(request()->input())->except(['_token','oldpassword'])->toArray();
+            if(Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
+                $data = collect(request()->input())->except(['_token','oldpassword'])->toArray();
 
-            $data['password'] = bcrypt($data['password']);
+                $data['password'] = bcrypt($data['password']);
+
+                if($data['date_of_birth'] == "") {
+                    unset($data['date_of_birth']);
+                }
+            } else {
+                session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
+
+                return redirect()->back();
+            }
 
             if($this->customer->update($data, $id)) {
-                Session()->flash('success','Profile Updated Successfully');
+                Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
                 return redirect()->back();
             } else {
-                Session()->flash('success','Profile Updated Successfully');
+                Session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
 
                 return redirect()->back();
             }

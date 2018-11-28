@@ -31,21 +31,22 @@ class OrderInvoicesDataGrid
             'aliased' => false,
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [
+                [
+                    'type' => 'View',
+                    'route' => route('admin.datagrid.delete'),
+                    'confirm_text' => 'Do you really want to do this?',
+                    'icon' => 'icon pencil-lg-icon',
+                ],
                 // [
-                //     'type' => 'View',
-                //     'route' => route('admin.datagrid.delete'),
-                //     'confirm_text' => 'Do you really want to do this?',
-                //     'icon' => 'icon pencil-lg-icon',
-                // ], [
                 //     'type' => 'Delete',
                 //     'route' => route('admin.datagrid.delete'),
                 //     'confirm_text' => 'Do you really want to do this?',
@@ -53,7 +54,15 @@ class OrderInvoicesDataGrid
                 // ]
             ],
 
-            'join' => [],
+            'join' => [
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'orders as ors',
+                    'primaryKey' => 'inv.order_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'ors.id',
+                ]
+            ],
 
             //use aliasing on secodary columns if join is performed
 
@@ -65,23 +74,29 @@ class OrderInvoicesDataGrid
                     'label' => 'ID',
                     'sortable' => true
                 ], [
-                    'name' => 'inv.state',
-                    'alias' => 'invstate',
+                    'name' => 'inv.order_id',
+                    'alias' => 'invorderid',
                     'type' => 'number',
-                    'label' => 'State',
+                    'label' => 'Order ID',
                     'sortable' => true
                 ], [
-                    'name' => 'inv.total_qty',
-                    'alias' => 'invtotalqty',
-                    'type' => 'number',
-                    'label' => 'Quantity',
-                    'sortable' => true
+                    'name' => 'inv.state',
+                    'alias' => 'invstate',
+                    'type' => 'string',
+                    'label' => 'State',
+                    'sortable' => false
                 ], [
                     'name' => 'inv.grand_total',
                     'alias' => 'invgrandtotal',
                     'type' => 'number',
-                    'label' => 'Grand Total',
-                    'sortable' => true
+                    'label' => 'Amount',
+                    'sortable' => false
+                ], [
+                    'name' => 'inv.created_at',
+                    'alias' => 'invcreated_at',
+                    'type' => 'date',
+                    'label' => 'Invoice Date',
+                    'sortable' => false
                 ]
             ],
 
