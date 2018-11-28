@@ -32,19 +32,19 @@
 
                     <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
                         <label for="email">{{ __('admin::app.users.reset-password.email') }}</label>
-                        <input type="text" v-validate="'required|email'" class="control" id="email" name="email" value="{{ old('email') }}"/>
+                        <input type="text" v-validate="'required|email'" class="control" id="email" name="email" data-vv-as="&quot;{{ __('admin::app.users.reset-password.email') }}&quot;" value="{{ old('email') }}"/>
                         <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                         <label for="password">{{ __('admin::app.users.reset-password.password') }}</label>
-                        <input type="password" v-validate="'required|min:6'" class="control" id="password" name="password"/>
+                        <input type="password" v-validate="'required|min:6'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.reset-password.password') }}&quot;"/>
                         <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
                         <label for="password_confirmation">{{ __('admin::app.users.reset-password.confirm-password') }}</label>
-                        <input type="password" v-validate="'required|min:6|confirmed:password'" class="control" id="password_confirmation" name="password_confirmation" data-vv-as="password"/>
+                        <input type="password" v-validate="'required|min:6|confirmed:password'" class="control" id="password_confirmation" name="password_confirmation" data-vv-as="&quot;{{ __('admin::app.users.reset-password.confirm-password') }}&quot;" data-vv-as="password"/>
                         <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
                     </div>
                     

@@ -32,13 +32,13 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.account.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ $user->name }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ $user->name }}"  data-vv-as="&quot;{{ __('admin::app.account.name') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
                                 <label for="email" class="required">{{ __('admin::app.account.email') }}</label>
-                                <input type="text" v-validate="'required|email'" class="control" id="email" name="email" value="{{ $user->email }}"/>
+                                <input type="text" v-validate="'required|email'" class="control" id="email" name="email" value="{{ $user->email }}"  data-vv-as="&quot;{{ __('admin::app.account.email') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
                             </div>
                         </div>
@@ -48,13 +48,13 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                                 <label for="password">{{ __('admin::app.account.password') }}</label>
-                                <input type="password" v-validate="'min:6'" class="control" id="password" name="password"/>
+                                <input type="password" v-validate="'min:6'" class="control" id="password" name="password"  data-vv-as="&quot;{{ __('admin::app.account.password') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
                                 <label for="password_confirmation">{{ __('admin::app.account.confirm-password') }}</label>
-                                <input type="password" v-validate="'min:6|confirmed:password'" class="control" id="password_confirmation" name="password_confirmation"/>
+                                <input type="password" v-validate="'min:6|confirmed:password'" class="control" id="password_confirmation" name="password_confirmation" data-vv-as="&quot;{{ __('admin::app.account.confirm-password') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
                             </div>
                         </div>

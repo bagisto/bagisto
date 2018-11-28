@@ -389,7 +389,10 @@ class Cart {
             if($cart->items()->get()->count() == 0) {
                 $this->cart->delete($cart->id);
 
-                $this->deActivateCart();
+                // $this->deActivateCart();
+                if(session()->has('cart')) {
+                    session()->forget('cart');
+                }
             }
 
             session()->flash('success', trans('shop::app.checkout.cart.item.success-remove'));
@@ -819,7 +822,7 @@ class Cart {
                         $haveTaxRate = true;
                     }
                 } else {
-                    if($shippingAddress->postcode >= $rate->zip_code && $shippingAddress->postcode <= $rate->zip_code) {
+                    if($shippingAddress->postcode >= $rate->zip_from && $shippingAddress->postcode <= $rate->zip_to) {
                         $haveTaxRate = true;
                     }
                 }

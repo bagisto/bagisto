@@ -297,6 +297,51 @@ return [
     ],
 
     'configuration' => [
+        'tax-categories' => [
+            'title' => 'Tax Categories',
+            'add-title' => 'Add Tax Category',
+            'edit-title' => 'Edit Tax Category',
+            'save-btn-title' => 'Save Tax Category',
+            'general' => 'Tax Category',
+            'select-channel' => 'Select Channel',
+            'name' => 'Name',
+            'code' => 'Code',
+            'description' => 'Description',
+            'select-taxrates' => 'Select Tax Rates',
+            'edit' => [
+                'title' => 'Edit Tax Category',
+                'edit-button-title' => 'Edit Tax Category'
+            ]
+        ],
+
+        'tax-rates' => [
+            'title' => 'Tax Rates',
+            'add-title' => 'Add Tax Rate',
+            'edit-title' => 'Edit Tax Rate',
+            'save-btn-title' => 'Save Tax Rate',
+            'general' => 'Tax Rate',
+            'identifier' => 'Identifier',
+            'is_zip' => 'Enable Zip Range',
+            'zip_from' => 'Zip From',
+            'zip_to' => 'Zip To',
+            'state' => 'State',
+            'select-state' => 'Select a region, state or province.',
+            'country' => 'Country',
+            'tax_rate' => 'Rate',
+            'edit' => [
+                'title' => 'Edit Tax Rate',
+                'edit-button-title' => 'Edit Rate'
+            ],
+            'zip_code' => 'Zip Code',
+            'is_zip' => 'Enable Zip Range',
+        ],
+
+        'sales' => [
+            'general' => [
+                'title' => 'General',
+                'save-btn-title' => 'Save'
+            ]
+        ]
     ],
 
     'settings' => [
@@ -382,7 +427,7 @@ return [
             'design' => 'Design',
             'theme' => 'Theme',
             'home_page_content' => 'Home Page Content',
-            'footer_content' => 'footer_content',
+            'footer_content' => 'Footer Content',
             'logo' => 'Logo',
             'favicon' => 'Favicon'
         ],
@@ -455,6 +500,7 @@ return [
             'atleast-one' => 'Cannot Delete Last Tax Rate'
         ],
     ],
+
     'customers' => [
         'groups' =>[
             'add-title' => 'Add Group',
@@ -491,6 +537,7 @@ return [
             'comment' => 'Comment'
         ]
     ],
+
     'error' => [
         'go-to-home' => 'GO TO HOME',
 

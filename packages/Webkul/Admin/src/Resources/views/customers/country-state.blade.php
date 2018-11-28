@@ -9,7 +9,7 @@
                     {{ __('admin::app.customers.customers.country') }}
                 </label>
 
-                <select type="text" v-validate="'required'" class="control" id="country" name="country" v-model="country">
+                <select type="text" v-validate="'required'" class="control" id="country" name="country" v-model="country" data-vv-as="&quot;{{ __('admin::app.customers.customers.country') }}&quot;">
                     <option value=""></option>
 
                     @foreach (core()->countries() as $country)
@@ -29,9 +29,9 @@
                     {{ __('admin::app.customers.customers.state') }}
                 </label>
 
-                <input type="text" v-validate="'required'" class="control" id="state" name="state" v-model="state" v-if="!haveStates()"/>
+                <input type="text" v-validate="'required'" class="control" id="state" name="state" v-model="state" v-if="!haveStates()" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;"/>
 
-                <select v-validate="'required'" class="control" id="state" name="state" v-model="state" v-if="haveStates()">
+                <select v-validate="'required'" class="control" id="state" name="state" v-model="state" v-if="haveStates()" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;">
 
                     <option value="">{{ __('admin::app.customers.customers.select-state') }}</option>
 

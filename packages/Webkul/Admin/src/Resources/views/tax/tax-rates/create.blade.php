@@ -36,8 +36,8 @@
     <script type="text/x-template" id="tax-rate-form-template">
         <div>
             <div class="control-group" :class="[errors.has('identifier') ? 'has-error' : '']">
-                <label for="identifier" class="required">{{ __('admin::app.settings.tax-rates.identifier') }}</label>
-                <input v-validate="'required'" class="control" id="identifier" name="identifier" value="{{ old('identifier') }}"/>
+                <label for="identifier" class="required">{{ __('admin::app.configuration.tax-rates.identifier') }}</label>
+                <input v-validate="'required'" class="control" id="identifier" name="identifier" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.identifier') }}&quot;" value="{{ old('identifier') }}"/>
                 <span class="control-error" v-if="errors.has('identifier')">@{{ errors.first('identifier') }}</span>
             </div>
 
@@ -52,28 +52,28 @@
             </div>
 
             <div v-if="!is_zip" class="control-group" :class="[errors.has('zip_code') ? 'has-error' : '']" id="zip_code">
-                <label for="zip_code" class="required">{{ __('admin::app.settings.tax-rates.zip_code') }}</label>
-                <input v-validate="'required'" class="control" id="zip_code" name="zip_code" value="{{ old('zip_code') }}"/>
+                <label for="zip_code" class="required">{{ __('admin::app.configuration.tax-rates.zip_code') }}</label>
+                <input v-validate="'required'" class="control" id="zip_code" name="zip_code" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_code') }}&quot;" value="{{ old('zip_code') }}"/>
                 <span class="control-error" v-if="errors.has('zip_code')">@{{ errors.first('zip_code') }}</span>
             </div>
 
             <span v-if="is_zip">
                 <div class="control-group" :class="[errors.has('zip_from') ? 'has-error' : '']" id="zip_from">
-                    <label for="zip_from" class="required">{{ __('admin::app.settings.tax-rates.zip_from') }}</label>
-                    <input v-validate="'required'" class="control" name="zip_from" value="{{ old('zip_from') }}"/>
+                    <label for="zip_from" class="required">{{ __('admin::app.configuration.tax-rates.zip_from') }}</label>
+                    <input v-validate="'required'" class="control" name="zip_from" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_from') }}&quot;" value="{{ old('zip_from') }}"/>
                     <span class="control-error" v-if="errors.has('zip_from')">@{{ errors.first('zip_from') }}</span>
                 </div>
 
                 <div class="control-group" :class="[errors.has('zip_to') ? 'has-error' : '']" id="zip_to">
-                    <label for="zip_to" class="required">{{ __('admin::app.settings.tax-rates.zip_to') }}</label>
-                    <input v-validate="'required'" class="control" name="zip_to" value="{{ old('zip_to') }}"/>
+                    <label for="zip_to" class="required">{{ __('admin::app.configuration.tax-rates.zip_to') }}</label>
+                    <input v-validate="'required'" class="control" name="zip_to" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.zip_to') }}&quot;" value="{{ old('zip_to') }}"/>
                     <span class="control-error" v-if="errors.has('zip_to')">@{{ errors.first('zip_to') }}</span>
                 </div>
             </span>
 
             <div class="control-group" :class="[errors.has('tax_rate') ? 'has-error' : '']">
-                <label for="tax_rate" class="required">{{ __('admin::app.settings.tax-rates.tax_rate') }}</label>
-                <input v-validate="'required'" class="control" id="tax_rate" name="tax_rate" value="{{ old('tax_rate') }}"/>
+                <label for="tax_rate" class="required">{{ __('admin::app.configuration.tax-rates.tax_rate') }}</label>
+                <input v-validate="'required'" class="control" id="tax_rate" name="tax_rate" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.tax_rate') }}&quot;" value="{{ old('tax_rate') }}"/>
                 <span class="control-error" v-if="errors.has('tax_rate')">@{{ errors.first('tax_rate') }}</span>
             </div>
         </div>

@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'common' => [
+        'error' => 'Something went wrong, please try again later.'
+    ],
+
     'home' => [
         'page-title' => 'Bagisto - Home',
         'featured-products' => 'Featured Products',

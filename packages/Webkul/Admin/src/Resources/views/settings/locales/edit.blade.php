@@ -30,14 +30,14 @@
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.settings.locales.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ $locale->code }}" disabled="disabled"/>
+                                <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.locales.code') }}&quot;" value="{{ $locale->code }}" disabled="disabled"/>
                                 <input type="hidden" name="code" value="{{ $locale->code }}"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.settings.locales.name') }}</label>
-                                <input v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') ?: $locale->name }}"/>
+                                <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.settings.locales.name') }}&quot;" value="{{ old('name') ?: $locale->name }}"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
                         </div>

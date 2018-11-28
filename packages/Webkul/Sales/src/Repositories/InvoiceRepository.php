@@ -93,6 +93,7 @@ class InvoiceRepository extends Repository
             $invoice = $this->model->create([
                     'order_id' => $order->id,
                     'total_qty' => $totalQty,
+                    'status' => 'paid',
                     'base_currency_code' => $order->base_currency_code,
                     'channel_currency_code' => $order->channel_currency_code,
                     'order_currency_code' => $order->order_currency_code,

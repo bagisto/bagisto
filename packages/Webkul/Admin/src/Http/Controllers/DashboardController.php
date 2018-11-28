@@ -294,9 +294,9 @@ class DashboardController extends Controller
             $this->endDate = Carbon::now();
 
         $this->lastStartDate = clone $this->startDate;
-        $this->lastEndDate = clone $this->endDate;
+        $this->lastEndDate = clone $this->startDate;
 
-        $this->lastStartDate->subDays($this->lastStartDate->diffInDays($this->lastEndDate));
-        $this->lastEndDate->subDays($this->lastStartDate->diffInDays($this->lastEndDate));
+        $this->lastStartDate->subDays($this->startDate->diffInDays($this->endDate));
+        // $this->lastEndDate->subDays($this->lastStartDate->diffInDays($this->lastEndDate));
     }
 }

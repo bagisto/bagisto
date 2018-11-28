@@ -30,14 +30,14 @@
                         <div slot="body">
                         
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <input type="text" v-validate="'required'" name="code" class="control" id="code" value="{{ $attributeFamily->code }}" disabled="disabled" v-code/>
+                                <input type="text" v-validate="'required'" name="code" class="control" id="code" value="{{ $attributeFamily->code }}" disabled="disabled" data-vv-as="&quot;{{ __('admin::app.catalog.families.code') }}&quot;" v-code/>
                                 <input type="hidden" name="code" value="{{ $attributeFamily->code }}"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
                         
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.catalog.families.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') ?: $attributeFamily->name }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') ?: $attributeFamily->name }}" data-vv-as="&quot;{{ __('admin::app.catalog.families.name') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
@@ -80,13 +80,13 @@
 
                     <div class="control-group" :class="[errors.has('add-group-form.groupName') ? 'has-error' : '']">
                         <label for="groupName" class="required">{{ __('admin::app.catalog.families.name') }}</label>
-                        <input type="text" v-validate="'required'" v-model="group.groupName" class="control" id="groupName" name="groupName"/>
+                        <input type="text" v-validate="'required'" v-model="group.groupName" class="control" id="groupName" name="groupName" data-vv-as="&quot;{{ __('admin::app.catalog.families.name') }}&quot;"/>
                         <span class="control-error" v-if="errors.has('add-group-form.groupName')">@{{ errors.first('add-group-form.groupName') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('add-group-form.position') ? 'has-error' : '']">
-                        <label for="position">{{ __('admin::app.catalog.families.position') }}</label>
-                        <input type="text" v-validate="'required|numeric'" v-model="group.position" class="control" id="position" name="position"/>
+                        <label for="position" class="required">{{ __('admin::app.catalog.families.position') }}</label>
+                        <input type="text" v-validate="'required|numeric'" v-model="group.position" class="control" id="position" name="position" data-vv-as="&quot;{{ __('admin::app.catalog.families.position') }}&quot;"/>
                         <span class="control-error" v-if="errors.has('add-group-form.position')">@{{ errors.first('add-group-form.position') }}</span>
                     </div>
 

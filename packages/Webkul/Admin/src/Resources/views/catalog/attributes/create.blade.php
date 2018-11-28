@@ -28,7 +28,7 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code">{{ __('admin::app.catalog.attributes.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}" v-code/>
+                                <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}"  data-vv-as="&quot;{{ __('admin::app.catalog.attributes.code') }}&quot;" v-code/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
 
@@ -53,7 +53,7 @@
 
                             <div class="control-group" :class="[errors.has('admin_name') ? 'has-error' : '']">
                                 <label for="admin_name" class="required">{{ __('admin::app.catalog.attributes.admin') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="admin_name" name="admin_name" value="{{ old('admin_name') }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="admin_name" name="admin_name" value="{{ old('admin_name') }}" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('admin_name')">@{{ errors.first('admin_name') }}</span>
                             </div>
 
@@ -196,7 +196,7 @@
                         <tr v-for="row in optionRows">
                             <td>
                                 <div class="control-group" :class="[errors.has(adminName(row)) ? 'has-error' : '']">
-                                    <input type="text" v-validate="'required'" v-model="row['admin_name']" :name="adminName(row)" class="control"/>
+                                    <input type="text" v-validate="'required'" v-model="row['admin_name']" :name="adminName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has(adminName(row))">@{{ errors.first(adminName(row)) }}</span>
                                 </div>
                             </td>
@@ -204,7 +204,7 @@
                             @foreach(Webkul\Core\Models\Locale::all() as $locale)
                                 <td>
                                     <div class="control-group" :class="[errors.has(localeInputName(row, '{{ $locale->code }}')) ? 'has-error' : '']">
-                                        <input type="text" v-validate="'required'" v-model="row['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control"/>
+                                        <input type="text" v-validate="'required'" v-model="row['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
                                         <span class="control-error" v-if="errors.has(localeInputName(row, '{{ $locale->code }}'))">@{{ errors.first(localeInputName(row, '{!! $locale->code !!}')) }}</span>
                                     </div>
                                 </td>
@@ -212,7 +212,7 @@
 
                             <td>
                                 <div class="control-group" :class="[errors.has(sortOrderName(row)) ? 'has-error' : '']">
-                                    <input type="text" v-validate="'required|numeric'" :name="sortOrderName(row)" class="control"/>
+                                    <input type="text" v-validate="'required|numeric'" :name="sortOrderName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.position') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has(sortOrderName(row))">@{{ errors.first(sortOrderName(row)) }}</span>
                                 </div>
                             </td>

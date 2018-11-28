@@ -163,7 +163,7 @@ class ProductRepository extends Repository
         $attributes = $product->attribute_family->custom_attributes;
 
         foreach ($attributes as $attribute) {
-            if(!isset($data[$attribute->code]) || ($attribute->type == 'boolean' && !$data[$attribute->code]) || in_array($attribute->type, ['date', 'datetime']) && !$data[$attribute->code])
+            if(!isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && !$data[$attribute->code]))
                 continue;
 
             $attributeValue = $this->attributeValue->findOneWhere([

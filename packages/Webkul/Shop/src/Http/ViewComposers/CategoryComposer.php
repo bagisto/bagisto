@@ -45,7 +45,8 @@ class CategoryComposer
         $categories = [];
 
         foreach ($this->category->getVisibleCategoryTree() as $category) {
-            array_push($categories, collect($category));
+            if($category->slug)
+                array_push($categories, $category);
         }
 
         $view->with('categories', $categories);

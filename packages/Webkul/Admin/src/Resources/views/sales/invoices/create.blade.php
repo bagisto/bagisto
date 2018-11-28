@@ -229,7 +229,7 @@
                                                     <td>{{ $item->qty_ordered }}</td>
                                                     <td>
                                                         <div class="control-group" :class="[errors.has('invoice[items][{{ $item->id }}]') ? 'has-error' : '']">
-                                                            <input type="text" v-validate="'required|numeric|min:0'" class="control" id="invoice[items][{{ $item->id }}]" name="invoice[items][{{ $item->id }}]" value="{{ $item->qty_to_invoice }}"/>
+                                                            <input type="text" v-validate="'required|numeric|min:0'" class="control" id="invoice[items][{{ $item->id }}]" name="invoice[items][{{ $item->id }}]" value="{{ $item->qty_to_invoice }}" data-vv-as="&quot;{{ __('admin::app.sales.invoices.qty-to-invoice') }}&quot;"/>
 
                                                             <span class="control-error" v-if="errors.has('invoice[items][{{ $item->id }}]')">
                                                                 @verbatim

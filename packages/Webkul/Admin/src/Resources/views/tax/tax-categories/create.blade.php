@@ -21,58 +21,58 @@
             <div class="page-content">
                 <div class="form-container">
                     @csrf()
-                            <div class="control-group" :class="[errors.has('channel') ? 'has-error' : '']">
-                                <label for="channel" class="required">{{ __('admin::app.settings.tax-categories.select-channel') }}</label>
 
-                                <select class="control" name="channel_id">
-                                    @foreach(core()->getAllChannels() as $channelModel)
+                    <div class="control-group" :class="[errors.has('channel') ? 'has-error' : '']">
+                        <label for="channel" class="required">{{ __('admin::app.configuration.tax-categories.select-channel') }}</label>
 
-                                        <option value="{{ $channelModel->id }}">
-                                            {{ $channelModel->name }}
-                                        </option>
+                        <select class="control" name="channel_id">
+                            @foreach(core()->getAllChannels() as $channelModel)
 
-                                    @endforeach
-                                </select>
+                                <option value="{{ $channelModel->id }}">
+                                    {{ $channelModel->name }}
+                                </option>
 
-                                <span class="control-error" v-if="errors.has('channel')">@{{ errors.first('channel') }}</span>
-                            </div>
+                            @endforeach
+                        </select>
 
-                            <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">{{ __('admin::app.settings.tax-categories.code') }}</label>
+                        <span class="control-error" v-if="errors.has('channel')">@{{ errors.first('channel') }}</span>
+                    </div>
 
-                                <input v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}"/>
+                    <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
+                        <label for="code" class="required">{{ __('admin::app.configuration.tax-categories.code') }}</label>
 
-                                <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
-                            </div>
+                        <input v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.code') }}&quot;" value="{{ old('code') }}"/>
 
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.settings.tax-categories.name') }}</label>
+                        <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
+                    </div>
 
-                                <input v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') }}"/>
+                    <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
+                        <label for="name" class="required">{{ __('admin::app.configuration.tax-categories.name') }}</label>
 
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
-                            </div>
+                        <input v-validate="'required'" class="control" id="name" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.name') }}&quot;" name="name" value="{{ old('name') }}"/>
 
-                            <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
-                                <label for="description" class="required">{{ __('admin::app.settings.tax-categories.description') }}</label>
+                        <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+                    </div>
 
-                                <textarea v-validate="'required'" class="control" id="description" name="description" value="{{ old('description') }}"></textarea>
+                    <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
+                        <label for="description" class="required">{{ __('admin::app.configuration.tax-categories.description') }}</label>
 
-                                <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
-                            </div>
+                        <textarea v-validate="'required'" class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.description') }}&quot;" value="{{ old('description') }}"></textarea>
 
-                            <div class="control-group" :class="[errors.has('taxrates') ? 'has-error' : '']">
-                                <label for="taxrates" class="required">{{ __('admin::app.settings.tax-categories.select-taxrates') }}</label>
+                        <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
+                    </div>
 
-                                <select multiple="multiple" v-validate="'required'" class="control" id="taxrates" name="taxrates[]" value="{{ old('taxrates') }}">
-                                    @foreach($taxRates as $taxRate)
-                                        <option value="{{ $taxRate['id'] }}">{{ $taxRate['identifier'] }}</option>
-                                    @endforeach
-                                </select>
+                    <div class="control-group" :class="[errors.has('taxrates[]') ? 'has-error' : '']">
+                        <label for="taxrates" class="required">{{ __('admin::app.configuration.tax-categories.select-taxrates') }}</label>
 
-                                <span class="control-error" v-if="errors.first('taxrates')">@{{ errors.first('taxrates') }}</span>
-                            </div>
+                        <select multiple="multiple" v-validate="'required'" class="control" id="taxrates" name="taxrates[]" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.select-taxrates') }}&quot;" value="{{ old('taxrates') }}">
+                            @foreach($taxRates as $taxRate)
+                                <option value="{{ $taxRate['id'] }}">{{ $taxRate['identifier'] }}</option>
+                            @endforeach
+                        </select>
 
+                        <span class="control-error" v-if="errors.first('taxrates[]')">@{{ errors.first('taxrates[]') }}</span>
+                    </div>
 
                 </div>
             </div>

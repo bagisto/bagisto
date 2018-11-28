@@ -42,44 +42,29 @@
                     <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                         <label for="code" class="required">{{ __('admin::app.settings.tax-categories.code') }}</label>
 
-                        <input v-validate="'required'" class="control" id="code" name="code" value="{{ $taxCategory->code }}"/>
-
-                        <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
-                    </div>
+                        <input v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.code') }}&quot;" value="{{ $taxCategory->code }}"/>
 
                     <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                         <label for="name" class="required">{{ __('admin::app.settings.tax-categories.name') }}</label>
-
-                        <input v-validate="'required'" class="control" id="name" name="name" value="{{ $taxCategory->name }}"/>
-
-                        <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
-                    </div>
+                        <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.name') }}&quot;" value="{{ $taxCategory->name }}"/>
 
                     <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
                         <label for="description" class="required">{{ __('admin::app.settings.tax-categories.description') }}</label>
+                        <textarea v-validate="'required'" class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.description') }}&quot;">
+                            {{ $taxCategory->description }}
+                        </textarea>
 
-                        <textarea v-validate="'required'" class="control" id="description" name="description">{{ $taxCategory->description }}</textarea>
-
-                        <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('taxrates') ? 'has-error' : '']">
+                    <div class="control-group" :class="[errors.has('taxrates[]') ? 'has-error' : '']">
                         <label for="taxrates" class="required">{{ __('admin::app.settings.tax-categories.select-taxrates') }}</label>
 
                         @inject('taxRates', 'Webkul\Tax\Repositories\TaxRateRepository')
-                        <select multiple="multiple" class="control" id="taxrates" name="taxrates[]" v-validate="'required'">
+                        <select multiple="multiple" class="control" id="taxrates" name="taxrates[]" data-vv-as="&quot;{{ __('admin::app.settings.tax-categories.select-taxrates') }}&quot;" v-validate="'required'">
                             @foreach($taxRates->all() as $taxRate)
-
-                                <option value="{{ $taxRate->id }}" {{ is_numeric($taxCategory->pluck('id')->search($taxRate->id)) ? 'selected' : '' }}>
-
-                                {{-- <option value="{{ $taxRate->id }}"> --}}
-                                    {{ $taxRate->identifier }}
-                                </option>
-
+                                <option value="{{ $taxRate->id }}" {{ is_numeric($taxCategory->tax_rates->pluck('id')->search($taxRate->id)) ? 'selected' : '' }}>{{ $taxRate->identifier }}</option>
                             @endforeach
                         </select>
 
-                        <span class="control-error" v-if="errors.has('taxrates')">@{{ errors.first('taxrates[]') }}</span>
+                        <span class="control-error" v-if="errors.has('taxrates[]')">@{{ errors.first('taxrates[]') }}</span>
                     </div>
                 </div>
             </div>
