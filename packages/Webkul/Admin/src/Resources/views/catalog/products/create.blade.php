@@ -73,7 +73,7 @@
                         </div>
 
                         <div class="control-group" :class="[errors.has('sku') ? 'has-error' : '']">
-                            <label for="sku">{{ __('admin::app.catalog.products.sku') }}</label>
+                            <label for="sku" class="required">{{ __('admin::app.catalog.products.sku') }}</label>
                             <input type="text" v-validate="'required'" class="control" id="sku" name="sku" value="{{ $sku ?: old('sku') }}" data-vv-as="&quot;{{ __('admin::app.catalog.products.sku') }}&quot;"/>
                             <span class="control-error" v-if="errors.has('sku')">@{{ errors.first('sku') }}</span>
                         </div>
