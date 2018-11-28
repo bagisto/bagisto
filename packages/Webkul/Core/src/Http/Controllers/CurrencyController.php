@@ -72,7 +72,7 @@ class CurrencyController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'code' => 'required|unique:countries,code',
+            'code' => 'required|unique:currencies,code',
             'name' => 'required'
         ]);
 

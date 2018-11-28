@@ -4,6 +4,7 @@ namespace Webkul\Attribute\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Attribute\Models\AttributeGroup;
+use Webkul\Product\Models\Product;
 
 class AttributeFamily extends Model
 {
@@ -45,5 +46,13 @@ class AttributeFamily extends Model
     public function getConfigurableAttributesAttribute()
     {
         return $this->custom_attributes()->where('attributes.is_configurable', 1)->where('attributes.type', 'select')->get();
+    }
+
+    /**
+     * Get all of the products.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }
