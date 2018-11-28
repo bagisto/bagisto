@@ -135,8 +135,12 @@ class AttributeFamilyController extends Controller
      */
     public function destroy($id)
     {
+        $attributeFamily = $this->attributeFamily->find($id);
+
         if($this->attributeFamily->count() == 1) {
             session()->flash('error', 'At least one family is required.');
+        } else if ($attributeFamily->products()->count()) {
+            session()->flash('error', 'Attribute family is used in products.');
         } else {
             $this->attributeFamily->delete($id);
 
