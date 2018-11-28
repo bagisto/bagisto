@@ -67,11 +67,11 @@ class CustomerDataGrid
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'first_name',
-                    'alias' => 'FirstName',
+                    'name' => 'CONCAT(first_name, " ", last_name)',
+                    'alias' => 'Name',
                     'type' => 'string',
-                    'label' => 'First Name',
-                    'sortable' => false,
+                    'label' => 'Name',
+                    'sortable' => true,
                 ],
                 [
                     'name' => 'email',

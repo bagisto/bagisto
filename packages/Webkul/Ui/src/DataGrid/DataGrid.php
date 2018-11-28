@@ -456,16 +456,14 @@ class DataGrid
     {
         $select = [];
         foreach ($this->columns as $column) {
-            $select[] = $column->name.' as '.$column->alias;
+            $this->query->addselect(DB::raw($column->name.' as '.$column->alias));
         }
 
-        $this->query->select(...$select);
+        // $this->query->select(...$select);
 
         if ($this->select) {
             $this->query->addselect($this->select);
         }
-
-        // dd($this->query);
     }
 
     /**
