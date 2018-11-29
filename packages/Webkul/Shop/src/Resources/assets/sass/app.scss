@@ -1677,17 +1677,12 @@ section.product-detail {
                     display: none;
                     flex-direction: row;
                     margin-top: 10px;
-                    width: 100%;
-                    justify-content: flex-end;
+                    width: 79.5%;
+                    float: right;
+                    justify-content: space-between;
 
-                    .wrap {
-                        display: flex;
-                        justify-content: space-between;
-                        width: 80%;
-                    }
 
                     .addtocart {
-                        border-radius: 0px;
                         width: 49%;
                         background: black;
                         white-space: nowrap;
@@ -1695,9 +1690,7 @@ section.product-detail {
                     }
 
                     .buynow {
-                        border-radius: 0px;
                         width: 49%;
-                        float:right;
                         white-space: nowrap;
                         text-transform: uppercase;
                     }
@@ -1850,6 +1843,10 @@ section.product-detail {
                     flex-direction: row;
                     width: 100% !important;
                 }
+            }
+
+            .add-to-buttons {
+                width: 100%;
             }
         }
 
