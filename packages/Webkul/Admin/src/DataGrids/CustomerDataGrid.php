@@ -65,22 +65,19 @@ class CustomerDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'CONCAT(first_name, " ", last_name)',
                     'alias' => 'Name',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'email',
                     'alias' => 'Email',
                     'type' => 'string',
                     'label' => 'Email',
                     'sortable' => false,
-                ],
-                [
+                ], [
                     'name' => 'customer_group_id',
                     'alias' => 'CustomerGroupId',
                     'type' => 'number',
@@ -90,21 +87,18 @@ class CustomerDataGrid
             ],
 
             //don't use aliasing in case of filters
-
             'filterable' => [
-
                 [
                     'column' => 'id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
-                    'column' => 'first_name',
-                    'alias' => 'FirstName',
+                ], [
+                    'column' => 'email',
+                    'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'First Name',
-                ]
+                    'label' => 'Email',
+                ],
             ],
 
             //don't use aliasing in case of searchables
@@ -114,11 +108,10 @@ class CustomerDataGrid
                     'column' => 'FirstName',
                     'type' => 'string',
                     'label' => 'First Name',
-                ],
-                [
+                ], [
                     'column' => 'email',
+                    'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'Email',
                 ],
             ],
 

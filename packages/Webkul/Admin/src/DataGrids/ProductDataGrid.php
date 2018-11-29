@@ -71,19 +71,19 @@ class ProductDataGrid
                     'alias' => 'ProductName',
                     'type' => 'string',
                     'label' => 'Name',
-                    'sortable' => false,
+                    'sortable' => true,
                 ], [
                     'name' => 'prods.type',
                     'alias' => 'ProductType',
                     'type' => 'string',
                     'label' => 'Type',
-                    'sortable' => false,
+                    'sortable' => true,
                 ], [
                     'name' => 'prods.status',
                     'alias' => 'ProductStatus',
                     'type' => 'string',
                     'label' => 'Status',
-                    'sortable' => false,
+                    'sortable' => true,
                     'wrapper' => function ($value) {
                         if($value == 1)
                             return 'Active';
@@ -95,13 +95,13 @@ class ProductDataGrid
                     'alias' => 'ProductPrice',
                     'type' => 'string',
                     'label' => 'Price',
-                    'sortable' => false,
+                    'sortable' => true,
                     'wrapper' => function ($value) {
                         return core()->formatBasePrice($value);
                     },
                 ], [
                     'name' => 'prods.attribute_family_name',
-                    'alias' => 'product_attribute_family_name',
+                    'alias' => 'productattributefamilyname',
                     'type' => 'string',
                     'label' => 'Attribute Family',
                     'sortable' => true,
@@ -110,7 +110,7 @@ class ProductDataGrid
                     'alias' => 'ProductQuantity',
                     'type' => 'string',
                     'label' => 'Product Quantity',
-                    'sortable' => false,
+                    'sortable' => true,
                 ],
             ],
 

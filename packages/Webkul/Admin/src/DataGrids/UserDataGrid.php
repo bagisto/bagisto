@@ -87,8 +87,7 @@ class UserDataGrid
                     // 'wrapper' => function ($value, $object) {
                     //     return '<a class="color-red">' . $object->ID . '</a>';
                     // },
-                ],
-                [
+                ], [
                     'name' => 'u.name',
                     'alias' => 'Name',
                     'type' => 'string',
@@ -97,38 +96,43 @@ class UserDataGrid
                     // 'wrapper' => function ($value, $object) {
                     //     return '<a class="color-red">' . $object->Name . '</a>';
                     // },
-                ],
-                [
+                ], [
                     'name' => 'u.email',
                     'alias' => 'Email',
                     'type' => 'string',
                     'label' => 'Email',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'r.name',
-                    'alias' => 'xa',
+                    'alias' => 'rolename',
                     'type' => 'string',
                     'label' => 'Role Name',
                     'sortable' => true,
                 ],
-
             ],
             //don't use aliasing in case of filters
             'filterable' => [
-                [
-                    'column' => 'u.name',
-                    'alias' => 'Name',
-                    'type' => 'string',
-                    'label' => 'Name'
-                ],
                 [
                     'column' => 'u.id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'Admin ID'
-                ],
-
+                ], [
+                    'column' => 'u.name',
+                    'alias' => 'Name',
+                    'type' => 'string',
+                    'label' => 'Name'
+                ], [
+                    'column' => 'u.email',
+                    'alias' => 'Email',
+                    'type' => 'string',
+                    'label' => 'Email',
+                ], [
+                    'column' => 'r.name',
+                    'alias' => 'rolename',
+                    'type' => 'string',
+                    'label' => 'Role Name',
+                ]
             ],
             //don't use aliasing in case of searchables
             'searchable' => [
@@ -140,6 +144,14 @@ class UserDataGrid
                     'column' => 'u.name',
                     'type' => 'string',
                     'label' => 'Name'
+                ], [
+                    'column' => 'u.email',
+                    'type' => 'string',
+                    'label' => 'Email',
+                ], [
+                    'column' => 'r.name',
+                    'type' => 'string',
+                    'label' => 'Role Name',
                 ]
             ],
             'operators' => [

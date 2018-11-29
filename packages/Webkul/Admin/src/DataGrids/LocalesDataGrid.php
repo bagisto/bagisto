@@ -64,25 +64,21 @@ class LocalesDataGrid
                 // ]
             ],
 
-            //use aliasing on secodary columns if join is performed
-
+            //use aliasing as attribute
             'columns' => [
-
                 [
                     'name' => 'id',
                     'alias' => 'localeId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'code',
                     'alias' => 'localeCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'name',
                     'alias' => 'localeName',
                     'type' => 'string',
@@ -93,21 +89,18 @@ class LocalesDataGrid
             ],
 
             //don't use aliasing in case of filters
-
             'filterable' => [
                 [
                     'column' => 'id',
                     'alias' => 'localeId',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'alias' => 'localeCode',
                     'type' => 'string',
                     'label' => 'Code',
-                ],
-                [
+                ], [
                     'column' => 'name',
                     'alias' => 'localeName',
                     'type' => 'string',
@@ -116,14 +109,12 @@ class LocalesDataGrid
             ],
 
             //don't use aliasing in case of searchables
-
             'searchable' => [
                 [
                     'column' => 'name',
                     'type' => 'string',
                     'label' => 'Name',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'type' => 'string',
                     'label' => 'Code',

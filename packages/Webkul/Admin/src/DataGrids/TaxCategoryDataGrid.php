@@ -82,18 +82,13 @@ class TaxCategoryDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'tr.name',
                     'alias' => 'Name',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
-                    // 'wrapper' => function ($value, $object) {
-                    //     return '<a class="color-red">' . $object->Name . '</a>';
-                    // },
-                ],
-                [
+                ], [
                     'name' => 'tr.code',
                     'alias' => 'code',
                     'type' => 'string',
@@ -101,6 +96,7 @@ class TaxCategoryDataGrid
                     'sortable' => true,
                 ],
             ],
+
             //don't use aliasing in case of filters
             'filterable' => [
                 [
@@ -108,28 +104,26 @@ class TaxCategoryDataGrid
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'ID'
-                ],
-                [
+                ], [
                     'column' => 'tr.name',
                     'alias' => 'Name',
                     'type' => 'string',
                     'label' => 'Name'
-                ],
-                [
+                ], [
                     'column' => 'tr.code',
                     'alias' => 'code',
                     'type' => 'string',
                     'label' => 'Code'
                 ]
             ],
+
             //don't use aliasing in case of searchables
             'searchable' => [
                 [
                     'column' => 'tr.code',
                     'type' => 'string',
                     'label' => 'Code'
-                ],
-                [
+                ], [
                     'column' => 'tr.name',
                     'type' => 'string',
                     'label' => 'Name'

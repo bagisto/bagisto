@@ -70,33 +70,25 @@ class CategoryDataGrid
             'columns' => [
                 [
                     'name' => 'cat.id',
-                    'alias' => 'cat_id',
+                    'alias' => 'catid',
                     'type' => 'number',
-                    'label' => 'Category ID',
+                    'label' => 'ID',
                     'sortable' => true,
                 ], [
                     'name' => 'ct.name',
-                    'alias' => 'cat_name',
+                    'alias' => 'catname',
                     'type' => 'string',
-                    'label' => 'Category Name',
-                    'sortable' => false,
+                    'label' => 'Name',
+                    'sortable' => true,
                 ], [
                     'name' => 'cat.position',
-                    'alias' => 'cat_position',
+                    'alias' => 'catposition',
                     'type' => 'string',
-                    'label' => 'Category Position',
-                    'sortable' => false,
-                ],
-                // [
-                //     'name' => 'cta.name',
-                //     'alias' => 'parent_name',
-                //     'type' => 'string',
-                //     'label' => 'Parent Name',
-                //     'sortable' => true,
-                // ],
-                [
+                    'label' => 'Position',
+                    'sortable' => true,
+                ], [
                     'name' => 'cat.status',
-                    'alias' => 'cat_status',
+                    'alias' => 'catstatus',
                     'type' => 'string',
                     'label' => 'Visible in Menu',
                     'sortable' => true,
@@ -106,13 +98,12 @@ class CategoryDataGrid
                         else
                             return "True";
                     },
-                ],
-                [
+                ], [
                     'name' => 'ct.locale',
-                    'alias' => 'cat_locale',
+                    'alias' => 'catlocale',
                     'type' => 'string',
                     'label' => 'Locale',
-                    'sortable' => false,
+                    'sortable' => true,
                     'filter' => [
                         'function' => 'orWhere',
                         'condition' => ['ct.locale', app()->getLocale()]
@@ -123,24 +114,17 @@ class CategoryDataGrid
             'filterable' => [
                 [
                     'column' => 'cat.id',
-                    'alias' => 'cat_id',
+                    'alias' => 'catid',
                     'type' => 'number',
-                    'label' => 'Category ID',
+                    'label' => 'ID',
                 ], [
                     'column' => 'ct.name',
-                    'alias' => 'cat_name',
+                    'alias' => 'catname',
                     'type' => 'string',
-                    'label' => 'Category Name',
-                ],
-                // [
-                //     'column' => 'cta.name',
-                //     'alias' => 'parentName',
-                //     'type' => 'string',
-                //     'label' => 'Parent Name',
-                // ],
-                [
+                    'label' => 'Name',
+                ], [
                     'column' => 'cat.status',
-                    'alias' => 'cat_status',
+                    'alias' => 'catstatus',
                     'type' => 'string',
                     'label' => 'Visible in Menu',
                 ],
@@ -152,11 +136,11 @@ class CategoryDataGrid
                 [
                     'column' => 'cat.id',
                     'type' => 'number',
-                    'label' => 'Category ID',
+                    'label' => 'ID',
                 ], [
                     'column' => 'ct.name',
                     'type' => 'string',
-                    'label' => 'Category Name',
+                    'label' => 'Name',
                 ], [
                     'column' => 'cat.status',
                     'type' => 'string',

@@ -78,13 +78,7 @@ class SliderDataGrid
                     'alias' => 'sliderTitle',
                     'type' => 'string',
                     'label' => 'title',
-                    'sortable' => false
-                ], [
-                    'name' => 's.channel_id',
-                    'alias' => 'channelId',
-                    'type' => 'string',
-                    'label' => 'Channel ID',
-                    'sortable' => false,
+                    'sortable' => true
                 ], [
                     'name' => 'c.name',
                     'alias' => 'channelName',
@@ -106,7 +100,12 @@ class SliderDataGrid
                     'alias' => 'sliderTitle',
                     'type' => 'string',
                     'label' => 'title'
-                ],
+                ], [
+                    'column' => 'c.name',
+                    'alias' => 'channelName',
+                    'type' => 'string',
+                    'label' => 'Channel Name',
+                ]
             ],
 
             //don't use aliasing in case of searchables
@@ -119,6 +118,10 @@ class SliderDataGrid
                     'column' => 's.title',
                     'type' => 'string',
                     'label' => 'Slider Title'
+                ], [
+                    'column' => 'c.name',
+                    'type' => 'string',
+                    'label' => 'Channel Name',
                 ]
             ],
 

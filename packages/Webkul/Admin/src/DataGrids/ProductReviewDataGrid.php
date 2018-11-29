@@ -69,7 +69,6 @@ class ProductReviewDataGrid
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
-
                 [
                     'name' => 'pr.id',
                     'alias' => 'reviewId',
@@ -88,15 +87,13 @@ class ProductReviewDataGrid
                     'type' => 'string',
                     'label' => 'Comment',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'pt.name',
                     'alias' => 'productName',
                     'type' => 'string',
                     'label' => 'Product Name',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'pr.status',
                     'alias' => 'reviewStatus',
                     'type' => 'number',
@@ -134,7 +131,7 @@ class ProductReviewDataGrid
                     'alias' => 'productName',
                     'type' => 'string',
                     'label' => 'Product Name',
-                ],[
+                ], [
                     'column' => 'pr.status',
                     'alias' => 'reviewStatus',
                     'type' => 'string',
@@ -152,6 +149,10 @@ class ProductReviewDataGrid
                     'column' => 'rating',
                     'type' => 'number',
                     'label' => 'Rating',
+                ], [
+                    'column' => 'pt.name',
+                    'alias' => 'productName',
+                    'type' => 'string',
                 ],
             ],
 

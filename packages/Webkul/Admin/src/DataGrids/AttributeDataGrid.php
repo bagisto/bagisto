@@ -65,73 +65,66 @@ class AttributeDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'code',
                     'alias' => 'attributeCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'admin_name',
                     'alias' => 'attributeAdminName',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'type',
                     'alias' => 'attributeType',
                     'type' => 'string',
                     'label' => 'Type',
-                    'sortable' => false,
-                ],
-                [
+                    'sortable' => true,
+                ], [
                     'name' => 'is_required',
                     'alias' => 'attributeIsRequired',
                     'type' => 'string',
                     'label' => 'Required',
-                    'sortable' => false,
+                    'sortable' => true,
                     'wrapper' => function ($value) {
                         if($value == 0)
                             return "False";
                         else
                             return "True";
                     },
-                ],
-                [
+                ], [
                     'name' => 'is_unique',
                     'alias' => 'attributeIsUnique',
                     'type' => 'string',
                     'label' => 'Unique',
-                    'sortable' => false,
+                    'sortable' => true,
                     'wrapper' => function ($value) {
                         if($value == 0)
                             return "False";
                         else
                             return "True";
                     },
-                ],
-                [
+                ], [
                     'name' => 'value_per_locale',
                     'alias' => 'attributeValuePerLocale',
                     'type' => 'string',
                     'label' => 'ValuePerLocale',
-                    'sortable' => false,
+                    'sortable' => true,
                     'wrapper' => function ($value) {
                         if($value == 0)
                             return "False";
                         else
                             return "True";
                     },
-                ],
-                [
+                ], [
                     'name' => 'value_per_channel',
                     'alias' => 'attributeValuePerChannel',
                     'type' => 'string',
                     'label' => 'ValuePerChannel',
-                    'sortable' => false,
+                    'sortable' => true,
                     'wrapper' => function ($value) {
                         if($value == 0)
                             return "False";

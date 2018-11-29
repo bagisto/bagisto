@@ -68,29 +68,25 @@ class CountryDataGrid
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
-
                 [
                     'name' => 'id',
                     'alias' => 'countryId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'code',
                     'alias' => 'countryCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'name',
                     'alias' => 'countryName',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'status',
                     'alias' => 'countryStatus',
                     'type' => 'number',
@@ -101,27 +97,23 @@ class CountryDataGrid
             ],
 
             //don't use aliasing in case of filters
-
             'filterable' => [
                 [
                     'column' => 'id',
                     'alias' => 'countryId',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'alias' => 'countryCode',
                     'type' => 'string',
                     'label' => 'Code',
-                ],
-                [
+                ], [
                     'column' => 'name',
                     'alias' => 'countryName',
                     'type' => 'string',
                     'label' => 'Name',
-                ],
-                [
+                ], [
                     'column' => 'status',
                     'alias' => 'countryStatus',
                     'type' => 'number',
@@ -136,12 +128,19 @@ class CountryDataGrid
                     'column' => 'name',
                     'type' => 'string',
                     'label' => 'Name',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'type' => 'string',
                     'label' => 'Code',
-                ],
+                ], [
+                    'column' => 'name',
+                    'type' => 'string',
+                    'label' => 'Name',
+                ], [
+                    'column' => 'status',
+                    'type' => 'number',
+                    'label' => 'Code',
+                ]
             ],
 
             //list of viable operators that will be used

@@ -55,13 +55,13 @@ class OrderInvoicesDataGrid
             ],
 
             'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'orders as ors',
-                    'primaryKey' => 'inv.order_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'ors.id',
-                ]
+                // [
+                //     'join' => 'leftjoin',
+                //     'table' => 'orders as ors',
+                //     'primaryKey' => 'inv.order_id',
+                //     'condition' => '=',
+                //     'secondaryKey' => 'ors.id',
+                // ]
             ],
 
             //use aliasing on secodary columns if join is performed
@@ -79,24 +79,26 @@ class OrderInvoicesDataGrid
                     'type' => 'number',
                     'label' => 'Order ID',
                     'sortable' => true
-                ], [
-                    'name' => 'inv.state',
-                    'alias' => 'invstate',
-                    'type' => 'string',
-                    'label' => 'State',
-                    'sortable' => false
-                ], [
+                ],
+                // [
+                //     'name' => 'inv.state',
+                //     'alias' => 'invstate',
+                //     'type' => 'string',
+                //     'label' => 'State',
+                //     'sortable' => false
+                // ],
+                [
                     'name' => 'inv.grand_total',
                     'alias' => 'invgrandtotal',
                     'type' => 'number',
                     'label' => 'Amount',
-                    'sortable' => false
+                    'sortable' => true
                 ], [
                     'name' => 'inv.created_at',
                     'alias' => 'invcreated_at',
                     'type' => 'date',
                     'label' => 'Invoice Date',
-                    'sortable' => false
+                    'sortable' => true
                 ]
             ],
 

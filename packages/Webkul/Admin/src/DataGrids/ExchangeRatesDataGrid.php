@@ -85,6 +85,7 @@ class ExchangeRatesDataGrid
                     'alias' => 'exchrate',
                     'type' => 'string',
                     'label' => 'Exchange Rate',
+                    'sortable' => true
                 ],
             ],
 
@@ -100,6 +101,11 @@ class ExchangeRatesDataGrid
                     'alias' => 'exchcurrname',
                     'type' => 'string',
                     'label' => 'Currency Name',
+                ], [
+                    'column' => 'cer.rate',
+                    'alias' => 'exchrate',
+                    'type' => 'string',
+                    'label' => 'Exchange Rate',
                 ],
             ],
 
@@ -109,6 +115,10 @@ class ExchangeRatesDataGrid
                     'column' => 'exchcurrname',
                     'type' => 'string',
                     'label' => 'Currency Name',
+                ], [
+                    'column' => 'cer.rate',
+                    'type' => 'string',
+                    'label' => 'Exchange Rate',
                 ],
             ],
 

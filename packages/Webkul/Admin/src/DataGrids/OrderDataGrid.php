@@ -92,10 +92,10 @@ class OrderDataGrid
                     }
                 ], [
                     'name' => 'or.created_at',
-                    'alias' => 'created_at',
+                    'alias' => 'createdat',
                     'type' => 'string',
                     'label' => 'Order Date',
-                    'sortable' => false,
+                    'sortable' => true,
                 ], [
                     'name' => 'or.status',
                     'alias' => 'orstatus',
@@ -129,11 +129,11 @@ class OrderDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                 ], [
-                    'name' => 'or.status',
+                    'column' => 'or.status',
                     'alias' => 'orstatus',
                     'type' => 'string',
                     'label' => 'Status'
-                ]
+                ],
             ],
             //don't use aliasing in case of searchables
 
@@ -142,12 +142,10 @@ class OrderDataGrid
                     'column' => 'or.id',
                     'alias' => 'orderid',
                     'type' => 'number',
-                    'label' => 'ID',
                 ], [
-                    'name' => 'or.status',
+                    'column' => 'or.status',
                     'alias' => 'orstatus',
                     'type' => 'string',
-                    'label' => 'Status'
                 ]
             ],
 

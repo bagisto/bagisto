@@ -68,51 +68,50 @@ class ChannelDataGrid
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
-
                 [
                     'name' => 'id',
                     'alias' => 'channelID',
                     'type' => 'number',
-                    'label' => 'Channel ID',
+                    'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'code',
                     'alias' => 'channelCode',
                     'type' => 'string',
-                    'label' => 'Channel Code',
+                    'label' => 'Code',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'name',
                     'alias' => 'channelName',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Name',
+                    'sortable' => true,
+                ], [
+                    'name' => 'hostname',
+                    'alias' => 'channelHostName',
+                    'type' => 'string',
+                    'label' => 'Host Name',
                     'sortable' => true,
                 ],
-
             ],
 
             //don't use aliasing in case of filters
-
             'filterable' => [
                 [
                     'column' => 'id',
                     'alias' => 'channelID',
                     'type' => 'number',
-                    'label' => 'Channel ID',
-                ],
-                [
+                    'label' => 'ID',
+                ], [
                     'column' => 'code',
                     'alias' => 'channelCode',
                     'type' => 'string',
-                    'label' => 'Channel Code',
-                ],
-                [
+                    'label' => 'Code',
+                ], [
                     'column' => 'name',
                     'alias' => 'channelName',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Name',
                 ],
             ],
 
@@ -122,12 +121,19 @@ class ChannelDataGrid
                 [
                     'column' => 'name',
                     'type' => 'string',
-                    'label' => 'Channel Name',
-                ],
-                [
+                    'label' => 'Name',
+                ], [
                     'column' => 'code',
                     'type' => 'string',
-                    'label' => 'Channel Code',
+                    'label' => 'Code',
+                ], [
+                    'column' => 'hostname',
+                    'type' => 'string',
+                    'label' => 'Host Name',
+                ], [
+                    'column' => 'name',
+                    'type' => 'string',
+                    'label' => 'Name',
                 ],
             ],
 
