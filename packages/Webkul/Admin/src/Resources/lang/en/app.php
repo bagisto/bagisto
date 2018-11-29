@@ -501,7 +501,7 @@ return [
         ],
 
         'subscribers' => [
-            'title' => 'Subscribers'
+            'title' => 'News Letter Subscribers'
         ]
     ],
 
