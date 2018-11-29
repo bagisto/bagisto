@@ -655,11 +655,11 @@ section.slider-block {
 
         div.slider-control {
             display: block;
+            cursor: pointer;
             position: absolute;
             user-select: none;
             bottom: 2%;
             right: 2%;
-
 
             .dark-left-icon {
                 background-color: $background-color;
@@ -917,6 +917,11 @@ section.slider-block {
                         .item-details .item-name {
                             font-size: 16px;
                             font-weight: bold;
+                            margin-bottom: 8px;
+                        }
+
+                        .item-details .item-options {
+                            font-size: 16px;
                             margin-bottom: 8px;
                         }
 

@@ -45,12 +45,12 @@ class AttributeFamilyDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -68,22 +68,19 @@ class AttributeFamilyDataGrid
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
-
                 [
                     'name' => 'id',
                     'alias' => 'attributeFamilyId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'code',
                     'alias' => 'attributeFamilyCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'name',
                     'alias' => 'attributeFamilyName',
                     'type' => 'string',
@@ -98,14 +95,12 @@ class AttributeFamilyDataGrid
                     'alias' => 'attributeFamilyId',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'alias' => 'attributeFamilyCode',
                     'type' => 'string',
                     'label' => 'Code',
-                ],
-                [
+                ], [
                     'column' => 'name',
                     'alias' => 'attributeFamilyName',
                     'type' => 'string',
@@ -120,8 +115,7 @@ class AttributeFamilyDataGrid
                     'column' => 'name',
                     'type' => 'string',
                     'label' => 'Name',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'type' => 'string',
                     'label' => 'Code',

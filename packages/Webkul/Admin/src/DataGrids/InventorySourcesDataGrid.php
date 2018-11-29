@@ -43,7 +43,7 @@ class InventorySourcesDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.edit'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
@@ -77,13 +77,13 @@ class InventorySourcesDataGrid
                     'alias' => 'inventoryCode',
                     'type' => 'string',
                     'label' => 'Code',
-                    'sortable' => false,
+                    'sortable' => true,
                 ], [
                     'name' => 'name',
                     'alias' => 'inventoryName',
                     'type' => 'string',
                     'label' => 'Name',
-                    'sortable' => false,
+                    'sortable' => true,
                 ], [
                     'name' => 'priority',
                     'alias' => 'inventoryPriority',
@@ -114,14 +114,12 @@ class InventorySourcesDataGrid
                     'alias' => 'inventoryID',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'alias' => 'inventoryCode',
                     'type' => 'string',
                     'label' => 'Code',
-                ],
-                [
+                ], [
                     'column' => 'name',
                     'alias' => 'inventoryName',
                     'type' => 'string',
@@ -136,11 +134,14 @@ class InventorySourcesDataGrid
                     'column' => 'name',
                     'type' => 'string',
                     'label' => 'Name',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'type' => 'string',
                     'label' => 'Code',
+                ], [
+                    'column' => 'name',
+                    'type' => 'string',
+                    'label' => 'Name',
                 ],
             ],
 

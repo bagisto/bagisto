@@ -44,7 +44,7 @@ class OrderDataGrid
                 [
                     'type' => 'View',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to view this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ],
                 // [
@@ -92,16 +92,23 @@ class OrderDataGrid
                     }
                 ], [
                     'name' => 'or.created_at',
-                    'alias' => 'created_at',
+                    'alias' => 'createdat',
                     'type' => 'string',
                     'label' => 'Order Date',
-                    'sortable' => false,
+                    'sortable' => true,
+                ], [
+                    'name' => 'or.channel_name',
+                    'alias' => 'channelname',
+                    'type' => 'string',
+                    'label' => 'Channel Name',
+                    'sortable' => true,
                 ], [
                     'name' => 'or.status',
                     'alias' => 'orstatus',
                     'type' => 'string',
                     'label' => 'Status',
                     'sortable' => true,
+                    'closure' => true, //to be used when ever wrappers or callables are used
                     'wrapper' => function ($value) {
                         if($value == 'processing')
                             return '<span class="badge badge-md badge-success">Processing</span>';
@@ -128,11 +135,11 @@ class OrderDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                 ], [
-                    'name' => 'or.status',
+                    'column' => 'or.status',
                     'alias' => 'orstatus',
                     'type' => 'string',
                     'label' => 'Status'
-                ]
+                ],
             ],
             //don't use aliasing in case of searchables
 
@@ -141,12 +148,10 @@ class OrderDataGrid
                     'column' => 'or.id',
                     'alias' => 'orderid',
                     'type' => 'number',
-                    'label' => 'ID',
                 ], [
-                    'name' => 'or.status',
+                    'column' => 'or.status',
                     'alias' => 'orstatus',
                     'type' => 'string',
-                    'label' => 'Status'
                 ]
             ],
 

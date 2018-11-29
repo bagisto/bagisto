@@ -43,12 +43,12 @@ class CustomerDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -71,29 +71,19 @@ class CustomerDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
-                    'name' => 'cus.first_name',
-                    'alias' => 'FirstName',
+                ], [
+                    'name' => 'CONCAT(first_name, " ", last_name)',
+                    'alias' => 'Name',
                     'type' => 'string',
-                    'label' => 'First Name',
-                    'sortable' => false,
-                ],
-                [
-                    'name' => 'cus.email',
+                    'label' => 'Name',
+                    'sortable' => true,
+                ], [
+                    'name' => 'email',
                     'alias' => 'Email',
                     'type' => 'string',
                     'label' => 'Email',
                     'sortable' => false,
-                ],
-                [
-                    'name' => 'cus.phone',
-                    'alias' => 'Phone',
-                    'type' => 'number',
-                    'label' => 'Phone',
-                    'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'cg.name',
                     'alias' => 'CustomerGroupName',
                     'type' => 'string',
@@ -103,26 +93,18 @@ class CustomerDataGrid
             ],
 
             //don't use aliasing in case of filters
-
             'filterable' => [
                 [
                     'column' => 'cus.id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
-                    'column' => 'cus.first_name',
-                    'alias' => 'FirstName',
+                ], [
+                    'column' => 'email',
+                    'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'First Name',
+                    'label' => 'Email',
                 ],
-                [
-                    'column' => 'cg.name',
-                    'alias' => 'CustomerGroupName',
-                    'type' => 'string',
-                    'label' => 'Group Name',
-                ]
             ],
 
             //don't use aliasing in case of searchables
@@ -132,11 +114,10 @@ class CustomerDataGrid
                     'column' => 'FirstName',
                     'type' => 'string',
                     'label' => 'First Name',
-                ],
-                [
+                ], [
                     'column' => 'email',
+                    'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'Email',
                 ],
             ],
 

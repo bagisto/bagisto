@@ -56,13 +56,13 @@ class UserDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really wanis?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ],
                 [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -84,51 +84,55 @@ class UserDataGrid
                     'type' => 'string',
                     'label' => 'Admin ID',
                     'sortable' => true,
-                    'wrapper' => function ($value, $object) {
-                        return '<a class="color-red">' . $object->ID . '</a>';
-                    },
-                ],
-                [
+                    // 'wrapper' => function ($value, $object) {
+                    //     return '<a class="color-red">' . $object->ID . '</a>';
+                    // },
+                ], [
                     'name' => 'u.name',
                     'alias' => 'Name',
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
-                    'wrapper' => function ($value, $object) {
-                        return '<a class="color-red">' . $object->Name . '</a>';
-                    },
-                ],
-                [
+                    // 'wrapper' => function ($value, $object) {
+                    //     return '<a class="color-red">' . $object->Name . '</a>';
+                    // },
+                ], [
                     'name' => 'u.email',
                     'alias' => 'Email',
                     'type' => 'string',
                     'label' => 'Email',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'r.name',
-                    'alias' => 'xa',
+                    'alias' => 'rolename',
                     'type' => 'string',
                     'label' => 'Role Name',
                     'sortable' => true,
                 ],
-
             ],
             //don't use aliasing in case of filters
             'filterable' => [
-                [
-                    'column' => 'u.name',
-                    'alias' => 'Name',
-                    'type' => 'string',
-                    'label' => 'Name'
-                ],
                 [
                     'column' => 'u.id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'Admin ID'
-                ],
-
+                ], [
+                    'column' => 'u.name',
+                    'alias' => 'Name',
+                    'type' => 'string',
+                    'label' => 'Name'
+                ], [
+                    'column' => 'u.email',
+                    'alias' => 'Email',
+                    'type' => 'string',
+                    'label' => 'Email',
+                ], [
+                    'column' => 'r.name',
+                    'alias' => 'rolename',
+                    'type' => 'string',
+                    'label' => 'Role Name',
+                ]
             ],
             //don't use aliasing in case of searchables
             'searchable' => [
@@ -140,6 +144,14 @@ class UserDataGrid
                     'column' => 'u.name',
                     'type' => 'string',
                     'label' => 'Name'
+                ], [
+                    'column' => 'u.email',
+                    'type' => 'string',
+                    'label' => 'Email',
+                ], [
+                    'column' => 'r.name',
+                    'type' => 'string',
+                    'label' => 'Role Name',
                 ]
             ],
             'operators' => [

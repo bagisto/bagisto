@@ -44,7 +44,7 @@ class CurrencyDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
@@ -74,15 +74,13 @@ class CurrencyDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'code',
                     'alias' => 'currencyCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'name',
                     'alias' => 'currencyName',
                     'type' => 'string',
@@ -100,14 +98,12 @@ class CurrencyDataGrid
                     'alias' => 'currencyId',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'alias' => 'currencyCode',
                     'type' => 'string',
                     'label' => 'Code',
-                ],
-                [
+                ], [
                     'column' => 'name',
                     'alias' => 'currencyName',
                     'type' => 'string',
@@ -119,11 +115,14 @@ class CurrencyDataGrid
 
             'searchable' => [
                 [
+                    'column' => 'id',
+                    'alias' => 'currencyId',
+                    'type' => 'number',
+                ], [
                     'column' => 'name',
                     'type' => 'string',
                     'label' => 'Name',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'type' => 'string',
                     'label' => 'Code',

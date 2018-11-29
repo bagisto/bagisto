@@ -76,7 +76,7 @@
                     @auth('customer')
                         <div class="dropdown-list bottom-right" style="display: none; max-width: 230px;">
                             <div class="dropdown-container">
-                                <label>{{ __('shop::app.header.title') }}</label>
+                                <label>{{ auth()->guard('customer')->user()->first_name }}</label>
                                 <ul>
                                     <li><a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a></li>
 
@@ -127,7 +127,7 @@
                             <div class="dropdown-list bottom-right" style="display: none;">
                                 <div class="dropdown-container">
 
-                                    <label>{{ __('shop::app.header.title') }}</label>
+                                    <label>{{ auth()->guard('customer')->user()->first_name }}</label>
 
                                     <ul>
                                         <li><a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a></li>

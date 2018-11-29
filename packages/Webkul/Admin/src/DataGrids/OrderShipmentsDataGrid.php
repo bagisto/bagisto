@@ -43,7 +43,7 @@ class OrderShipmentsDataGrid
                 [
                     'type' => 'View',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to view this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ],
             ],
@@ -68,19 +68,19 @@ class OrderShipmentsDataGrid
                     'sortable' => true
                 ], [
                     'name' => 'ship.order_id',
-                    'alias' => 'order_id',
+                    'alias' => 'orderid',
                     'type' => 'number',
                     'label' => 'Order ID',
                     'sortable' => true
                 ], [
                     'name' => 'ship.total_qty',
-                    'alias' => 'total_qty',
+                    'alias' => 'shiptotalqty',
                     'type' => 'number',
                     'label' => 'Total Quantity',
                     'sortable' => true
                 ], [
                     'name' => 'CONCAT(ors.customer_first_name, " ", ors.customer_last_name)',
-                    'alias' => 'order_customer_first_name',
+                    'alias' => 'ordercustomerfirstname',
                     'type' => 'string',
                     'label' => 'Customer Name',
                     'sortable' => false,
@@ -92,7 +92,7 @@ class OrderShipmentsDataGrid
                     'sortable' => true
                 ], [
                     'name' => 'ship.created_at',
-                    'alias' => 'ship_date',
+                    'alias' => 'shipdate',
                     'type' => 'string',
                     'label' => 'Shipment Date',
                     'sortable' => false
@@ -111,10 +111,9 @@ class OrderShipmentsDataGrid
 
             'searchable' => [
                 // [
-                //     'column' => 'or.id',
-                //     'alias' => 'orderid',
-                //     'type' => 'number',
-                //     'label' => 'ID',
+                //     'column' => 'ors.customer_first_name',
+                //     'alias' => 'ordercustomerfirstname',
+                //     'type' => 'string',
                 // ]
             ],
 

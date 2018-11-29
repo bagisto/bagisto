@@ -15,7 +15,13 @@
             </span>
         </td> --}}
         @foreach ($columns as $column)
-            <td class="">{!! $column->render($result) !!}</td>
+            @if(isset($column->closure))
+                @if($column->closure == true)
+                    <td class="">{!! $column->render($result) !!}</td>
+                @endif
+            @else
+                <td class="">{{ $column->render($result) }}</td>
+            @endif
         @endforeach
         @if(count($actions))
         <td class="action">
