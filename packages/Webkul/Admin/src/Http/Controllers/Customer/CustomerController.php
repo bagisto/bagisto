@@ -57,6 +57,8 @@ class CustomerController extends Controller
     {
         $this->_config = request('_config');
 
+        $this->middleware('admin');
+
         $this->customer = $customer;
 
         $this->customerGroup = $customerGroup;

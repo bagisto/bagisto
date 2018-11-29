@@ -25,18 +25,18 @@ class CustomerDataGrid
 
             return DataGrid::make([
             'name' => 'Customer',
-            'table' => 'customers',
-            'select' => 'id',
+            'table' => 'customers as cus',
+            'select' => 'cus.id',
             'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button', //select || button only
-                // ],
+                [
+                    'route' => route('admin.datagrid.delete'),
+                    'method' => 'DELETE',
+                    'label' => 'Delete',
+                    'type' => 'button', //select || button only
+                ],
             ],
 
             'actions' => [
@@ -54,37 +54,50 @@ class CustomerDataGrid
             ],
 
             'join' => [
-
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'customer_groups as cg',
+                    'primaryKey' => 'cus.customer_group_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'cg.id',
+                ]
             ],
 
             //use aliasing on secodary columns if join is performed
             'columns' => [
                 [
-                    'name' => 'id',
+                    'name' => 'cus.id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
                 ],
                 [
-                    'name' => 'CONCAT(first_name, " ", last_name)',
-                    'alias' => 'Name',
+                    'name' => 'cus.first_name',
+                    'alias' => 'FirstName',
                     'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
+                    'label' => 'First Name',
+                    'sortable' => false,
                 ],
                 [
-                    'name' => 'email',
+                    'name' => 'cus.email',
                     'alias' => 'Email',
                     'type' => 'string',
                     'label' => 'Email',
                     'sortable' => false,
                 ],
                 [
-                    'name' => 'customer_group_id',
-                    'alias' => 'CustomerGroupId',
+                    'name' => 'cus.phone',
+                    'alias' => 'Phone',
                     'type' => 'number',
-                    'label' => 'Group ID',
+                    'label' => 'Phone',
+                    'sortable' => true,
+                ],
+                [
+                    'name' => 'cg.name',
+                    'alias' => 'CustomerGroupName',
+                    'type' => 'string',
+                    'label' => 'Group Name',
                     'sortable' => false,
                 ],
             ],
@@ -92,18 +105,23 @@ class CustomerDataGrid
             //don't use aliasing in case of filters
 
             'filterable' => [
-
                 [
-                    'column' => 'id',
+                    'column' => 'cus.id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'ID',
                 ],
                 [
-                    'column' => 'first_name',
+                    'column' => 'cus.first_name',
                     'alias' => 'FirstName',
                     'type' => 'string',
                     'label' => 'First Name',
+                ],
+                [
+                    'column' => 'cg.name',
+                    'alias' => 'CustomerGroupName',
+                    'type' => 'string',
+                    'label' => 'Group Name',
                 ]
             ],
 
