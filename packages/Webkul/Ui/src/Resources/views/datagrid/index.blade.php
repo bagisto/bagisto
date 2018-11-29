@@ -37,6 +37,13 @@
                     formURL('search', 'all', search_value, params);  //format for search
                 });
 
+                $(".search-field").on('keyup', function (e) {
+                    if (e.keyCode == 13) {
+                        search_value = $(".search-field").val();
+                        formURL('search', 'all', search_value, params);  //format for search
+                    }
+                });
+
                 //controls for header when sorting is done
                 $('.grid_head').on('click', function() {
                     var column = $(this).data('column-name');
