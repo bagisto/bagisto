@@ -66,6 +66,9 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('customers/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@destroy')->name('admin.customer.delete');
 
+             //DataGrid Export
+            Route::get('customer-export', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@export')->name('admin.customer.export');
+
             Route::get('reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
                 'view' => 'admin::customers.review.index'
             ])->name('admin.customer.review.index');

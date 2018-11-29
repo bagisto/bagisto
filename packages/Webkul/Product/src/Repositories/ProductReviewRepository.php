@@ -55,7 +55,7 @@ class ProductReviewRepository extends Repository
     {
         $customerId = auth()->guard('customer')->user()->id;
 
-        $reviews = $this->model->where(['customer_id'=> $customerId, 'status' => 'approved'])->with('product')->get();
+        $reviews = $this->model->where(['customer_id'=> $customerId])->with('product')->get();
 
         return $reviews;
     }
