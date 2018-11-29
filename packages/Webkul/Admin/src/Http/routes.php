@@ -456,22 +456,29 @@ Route::group(['middleware' => ['web']], function () {
             Route::put('/account', 'Webkul\User\Http\Controllers\AccountController@update')->name('admin.account.update');
 
             //API Authorizations
-            Route::get('/api/clients', 'Webkul\Admin\Http\Controllers\AuthorizationController@show')->defaults('_config', [
-                'view' => 'admin::apiauth.client'
-             ])->name('admin.index.oauth.client');
+            // Route::get('/api/clients', 'Webkul\Admin\Http\Controllers\AuthorizationController@show')->defaults('_config', [
+            //     'view' => 'admin::apiauth.client'
+            //  ])->name('admin.index.oauth.client');
 
-             //view an OAuth API Client
-             Route::get('/api/clients/view/{id}', 'Webkul\Admin\Http\Controllers\AuthorizationController@view')->defaults('_config', [
-                'view' => 'admin::apiauth.view'
-             ])->name('admin.view.oauth.client');
+            //  //view an OAuth API Client
+            //  Route::get('/api/clients/view/{id}', 'Webkul\Admin\Http\Controllers\AuthorizationController@view')->defaults('_config', [
+            //     'view' => 'admin::apiauth.view'
+            //  ])->name('admin.view.oauth.client');
 
-            //edit an OAuth API Client
-            Route::get('/api/clients/delete/{id}', 'Webkul\Admin\Http\Controllers\AuthorizationController@delete')->defaults('_config', [
-                'view' => 'admin::apiauth.edit'
-            ])->name('admin.delete.oauth.client');
+            // //edit an OAuth API Client
+            // Route::get('/api/clients/delete/{id}', 'Webkul\Admin\Http\Controllers\AuthorizationController@delete')->defaults('_config', [
+            //     'view' => 'admin::apiauth.edit'
+            // ])->name('admin.delete.oauth.client');
 
 
             // Admin Store Front Settings Route
+            Route::get('/subscribers','Webkul\Core\Http\Controllers\SubscriptionController@index')->defaults('_config',[
+                'view' => 'admin::settings.subscribers.index'
+            ])->name('admin.subscribers.index');
+
+            //destroy a newsletter subscription item
+            Route::get('subscribers/delete/{id}', 'Webkul\Core\Http\Controllers\SubscriptionController@destroy');
+
             //slider index
             Route::get('/slider','Webkul\Shop\Http\Controllers\SliderController@index')->defaults('_config',[
                 'view' => 'admin::settings.sliders.index'

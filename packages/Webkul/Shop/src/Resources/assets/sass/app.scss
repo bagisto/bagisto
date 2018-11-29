@@ -671,11 +671,11 @@ section.slider-block {
 
         div.slider-control {
             display: block;
+            cursor: pointer;
             position: absolute;
             user-select: none;
             bottom: 2%;
             right: 2%;
-
 
             .dark-left-icon {
                 background-color: $background-color;

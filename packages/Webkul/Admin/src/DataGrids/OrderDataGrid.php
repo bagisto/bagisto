@@ -97,6 +97,12 @@ class OrderDataGrid
                     'label' => 'Order Date',
                     'sortable' => true,
                 ], [
+                    'name' => 'or.channel_name',
+                    'alias' => 'channelname',
+                    'type' => 'string',
+                    'label' => 'Channel Name',
+                    'sortable' => true,
+                ], [
                     'name' => 'or.status',
                     'alias' => 'orstatus',
                     'type' => 'string',
