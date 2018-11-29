@@ -46,12 +46,12 @@ class ProductReviewDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -102,6 +102,7 @@ class ProductReviewDataGrid
                     'type' => 'number',
                     'label' => 'Status',
                     'sortable' => true,
+                    'closure' => true,
                     'wrapper' => function ($value) {
                         if($value == 'approved')
                             return '<span class="badge badge-md badge-success">Approved</span>';

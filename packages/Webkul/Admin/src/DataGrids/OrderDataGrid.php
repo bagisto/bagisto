@@ -44,7 +44,7 @@ class OrderDataGrid
                 [
                     'type' => 'View',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to view this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ],
                 // [
@@ -102,6 +102,7 @@ class OrderDataGrid
                     'type' => 'string',
                     'label' => 'Status',
                     'sortable' => true,
+                    'closure' => true, //to be used when ever wrappers or callables are used
                     'wrapper' => function ($value) {
                         if($value == 'processing')
                             return '<span class="badge badge-md badge-success">Processing</span>';

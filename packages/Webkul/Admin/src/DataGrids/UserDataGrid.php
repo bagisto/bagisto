@@ -56,13 +56,13 @@ class UserDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really wanis?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ],
                 [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -84,9 +84,9 @@ class UserDataGrid
                     'type' => 'string',
                     'label' => 'Admin ID',
                     'sortable' => true,
-                    'wrapper' => function ($value, $object) {
-                        return '<a class="color-red">' . $object->ID . '</a>';
-                    },
+                    // 'wrapper' => function ($value, $object) {
+                    //     return '<a class="color-red">' . $object->ID . '</a>';
+                    // },
                 ],
                 [
                     'name' => 'u.name',
@@ -94,9 +94,9 @@ class UserDataGrid
                     'type' => 'string',
                     'label' => 'Name',
                     'sortable' => true,
-                    'wrapper' => function ($value, $object) {
-                        return '<a class="color-red">' . $object->Name . '</a>';
-                    },
+                    // 'wrapper' => function ($value, $object) {
+                    //     return '<a class="color-red">' . $object->Name . '</a>';
+                    // },
                 ],
                 [
                     'name' => 'u.email',

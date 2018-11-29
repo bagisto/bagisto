@@ -43,7 +43,7 @@ class InventorySourcesDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.edit'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',

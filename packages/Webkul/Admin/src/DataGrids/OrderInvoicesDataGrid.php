@@ -43,7 +43,7 @@ class OrderInvoicesDataGrid
                 [
                     'type' => 'View',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to view this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ],
                 // [

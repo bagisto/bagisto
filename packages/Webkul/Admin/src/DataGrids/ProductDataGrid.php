@@ -37,12 +37,12 @@ class ProductDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -99,6 +99,12 @@ class ProductDataGrid
                     'wrapper' => function ($value) {
                         return core()->formatBasePrice($value);
                     },
+                ], [
+                    'name' => 'prods.attribute_family_name',
+                    'alias' => 'product_attribute_family_name',
+                    'type' => 'string',
+                    'label' => 'Attribute Family',
+                    'sortable' => true,
                 ], [
                     'name' => 'prods.quantity',
                     'alias' => 'ProductQuantity',
