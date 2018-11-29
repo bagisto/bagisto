@@ -527,7 +527,8 @@ return [
             'channel_name' => 'Channel Name',
             'state' => 'State',
             'select-state' => 'Select a region, state or province.',
-            'country' => 'Country'
+            'country' => 'Country',
+            'export' => 'Export'
         ],
         'reviews' => [
             'title' => 'Reviews',

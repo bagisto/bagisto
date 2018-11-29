@@ -16,11 +16,9 @@
                     {{ __('admin::app.customers.customers.add-title') }}
                 </a>
 
-
-                <a href="{{ route('admin.datagrid.export') }}" class="btn btn-lg btn-primary">
-                    Export
+                <a href="{{ route('admin.customer.export') }}" class="btn btn-lg btn-primary">
+                    {{ __('admin::app.customers.customers.export') }}
                 </a>
-
             </div>
         </div>
 
