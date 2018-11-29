@@ -550,6 +550,9 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/tax-rates/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@destroy')->name('admin.tax-rates.delete');
             //tax rate ends
+
+            //DataGrid Export
+            Route::get('export', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@export')->name('admin.datagrid.export');
         });
     });
 });

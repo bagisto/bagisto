@@ -15,8 +15,15 @@
                 <a href="{{ route('admin.customer.create') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.customers.customers.add-title') }}
                 </a>
+
+
+                <a href="{{ route('admin.datagrid.export') }}" class="btn btn-lg btn-primary">
+                    Export
+                </a>
+
             </div>
         </div>
+
 
         <div class="page-content">
             @inject('customer','Webkul\Admin\DataGrids\CustomerDataGrid')
