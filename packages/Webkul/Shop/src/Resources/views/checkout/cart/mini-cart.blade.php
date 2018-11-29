@@ -62,9 +62,9 @@
                 </div>
 
                 <div class="dropdown-footer">
-                    <a href="{{ route('shop.checkout.cart.index') }}">View Shopping Cart</a>
+                    <a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.minicart.view-cart') }}</a>
 
-                    <a class="btn btn-primary btn-lg" style="color: white;" href="{{ route('shop.checkout.onepage.index') }}">CHECKOUT</a>
+                    <a class="btn btn-primary btn-lg" style="color: white;" href="{{ route('shop.checkout.onepage.index') }}">{{ __('shop::app.minicart.checkout') }}</a>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@
     <div class="dropdown-toggle">
         <div style="display: inline-block; cursor: pointer;">
 
-            <span class="name">Cart<span class="count"> (0) </span></span>
+            <span class="name">{{ __('shop::app.minicart.cart') }}<span class="count"> ({{ __('shop::app.minicart.zero') }}) </span></span>
         </div>
     </div>
 @endif

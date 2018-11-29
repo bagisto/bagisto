@@ -499,6 +499,10 @@ return [
             'delete' => 'Tax Rate Deleted Successfully',
             'atleast-one' => 'Cannot Delete Last Tax Rate'
         ],
+
+        'subscribers' => [
+            'title' => 'News Letter Subscribers'
+        ]
     ],
 
     'customers' => [

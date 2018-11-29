@@ -6,30 +6,30 @@ use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
 /**
- * Sliders DataGrid
+ * orderDataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class SliderDataGrid
+class NewsLetterDataGrid
 {
     /**
      * The Data Grid implementation.
      *
-     * @var SliderDataGrid
-     * for Sliders
+     * @var newsletterDataGrid
+     * for orders
      */
-
-    public function createSliderDataGrid()
+    public function newsLetterDataGrid()
     {
 
             return DataGrid::make([
-            'name' => 'Sliders',
-            'table' => 'sliders as s',
-            'select' => 's.id',
+            'name' => 'Subscriberslist',
+            'table' => 'subscribers_list as sublist',
+            'select' => 'sublist.id',
             'perpage' => 10,
-            'aliased' => true, //use this with false as default and true in case of joins
+            'aliased' => false,
+            //True in case of joins else aliasing key required on all cases
 
             'massoperations' =>[
                 // [
@@ -42,11 +42,6 @@ class SliderDataGrid
 
             'actions' => [
                 [
-                    'type' => 'Edit',
-                    'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
                     'confirm_text' => 'Do you really want to delete this record?',
@@ -54,74 +49,70 @@ class SliderDataGrid
                 ],
             ],
 
-            'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'channels as c',
-                    'primaryKey' => 's.channel_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'c.id',
-                ]
-            ],
+            'join' => [],
 
             //use aliasing on secodary columns if join is performed
-
             'columns' => [
                 [
-                    'name' => 's.id',
-                    'alias' => 'sliderId',
+                    'name' => 'sublist.id',
+                    'alias' => 'subid',
                     'type' => 'number',
                     'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 's.title',
-                    'alias' => 'sliderTitle',
-                    'type' => 'string',
-                    'label' => 'title',
                     'sortable' => true
                 ], [
-                    'name' => 'c.name',
-                    'alias' => 'channelName',
+                    'name' => 'sublist.is_subscribed',
+                    'alias' => 'issubs',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Subscribed',
                     'sortable' => true,
-                ],
-            ],
-
-            //don't use aliasing in case of filters
-            'filterable' => [
-                [
-                    'column' => 's.id',
-                    'alias' => 'sliderId',
-                    'type' => 'number',
-                    'label' => 'ID'
+                    'wrapper' => function ($value) {
+                        if($value == 0)
+                            return "False";
+                        else
+                            return "True";
+                    },
                 ], [
-                    'column' => 's.title',
-                    'alias' => 'sliderTitle',
+                    'name' => 'sublist.email',
+                    'alias' => 'subsemail',
                     'type' => 'string',
-                    'label' => 'title'
-                ], [
-                    'column' => 'c.name',
-                    'alias' => 'channelName',
-                    'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Email',
+                    'sortable' => true
                 ]
             ],
 
+            'filterable' => [
+                [
+                    'column' => 'sublist.id',
+                    'alias' => 'subid',
+                    'type' => 'number',
+                    'label' => 'ID',
+                ], [
+                    'column' => 'sublist.is_subscribed',
+                    'alias' => 'issubs',
+                    'type' => 'string',
+                    'label' => 'Subscribed',
+                ], [
+                    'column' => 'sublist.email',
+                    'alias' => 'subsemail',
+                    'type' => 'string',
+                    'label' => 'Email',
+                ]
+            ],
             //don't use aliasing in case of searchables
+
             'searchable' => [
                 [
-                    'column' => 's.id',
+                    'column' => 'sublist.id',
                     'type' => 'number',
-                    'label' => 'ID'
+                    'label' => 'ID',
                 ], [
-                    'column' => 's.title',
+                    'column' => 'sublist.is_subscribed',
                     'type' => 'string',
-                    'label' => 'Slider Title'
+                    'label' => 'Subscribed',
                 ], [
-                    'column' => 'c.name',
+                    'column' => 'sublist.email',
                     'type' => 'string',
-                    'label' => 'Channel Name',
+                    'label' => 'Email',
                 ]
             ],
 
@@ -143,6 +134,6 @@ class SliderDataGrid
 
     public function render()
     {
-        return $this->createSliderDataGrid()->render();
+        return $this->newsLetterDataGrid()->render();
     }
 }

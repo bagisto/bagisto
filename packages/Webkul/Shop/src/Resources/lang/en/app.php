@@ -25,6 +25,13 @@ return [
         'search-text' => 'Search products here'
     ],
 
+    'minicart' => [
+        'view-cart' => 'View Shopping Cart',
+        'checkout' => 'Checkout',
+        'cart' => 'Cart',
+        'zero' => '0'
+    ],
+
     'footer' => [
         'subscribe-newsletter' => 'Subscribe Newsletter',
         'subscribe' => 'Subscribe',
