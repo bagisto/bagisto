@@ -176,9 +176,13 @@
     <div class="search-responsive mt-10">
         <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
             <div class="search-content">
-                <i class="icon icon-search mt-10"></i>
+                <button class="" style="background: none; border: none; padding: 0px;">
+                    <i class="icon icon-search mt-10"></i>
+                </button>
                 <input type="search" name="term" class="search mt-5">
-                <i class="icon icon-menu-back right mt-10"></i>
+                <button class="" style="background: none; float: right; border: none; padding: 0px;">
+                    <i class="icon icon-menu-back right mt-10"></i>
+                </button>
             </div>
         </form>
 
