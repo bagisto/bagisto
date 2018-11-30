@@ -2,7 +2,7 @@
 
 return [
     'common' => [
-        'no-result-found' => 'We couldn\'t find any records.',
+        'no-result-found' => 'We could not find any records.',
         'country' => 'Country',
         'state' => 'State'
     ],
@@ -27,6 +27,15 @@ return [
         'stock-threshold' => 'Stock Threshold',
         'qty-left' => ':qty Left',
     ],
+
+    'datagrid' => [
+        'mass-ops' => [
+            'method-error' => 'Error! Wrong method detected, please check mass action configuration',
+            'delete-success' => 'Selected index of :resource were successfully deleted',
+            'partial-action' => 'Some actions were not performed due restricted system constraints on :resource'
+        ]
+    ],
+
     'account' => [
         'title' => 'My Account',
         'save-btn-title' => 'Save',

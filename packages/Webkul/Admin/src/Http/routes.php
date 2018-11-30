@@ -7,10 +7,10 @@ Route::group(['middleware' => ['web']], function () {
             'view' => 'admin::users.sessions.create'
         ])->name('admin.session.create');
 
+        //login post route to admin auth controller
         Route::post('/login', 'Webkul\User\Http\Controllers\SessionController@store')->defaults('_config', [
             'redirect' => 'admin.dashboard.index'
         ])->name('admin.session.store');
-
 
         // Forget Password Routes
         Route::get('/forget-password', 'Webkul\User\Http\Controllers\ForgetPasswordController@create')->defaults('_config', [
@@ -18,7 +18,6 @@ Route::group(['middleware' => ['web']], function () {
         ])->name('admin.forget-password.create');
 
         Route::post('/forget-password', 'Webkul\User\Http\Controllers\ForgetPasswordController@store')->name('admin.forget-password.store');
-
 
         // Reset Password Routes
         Route::get('/reset-password/{token}', 'Webkul\User\Http\Controllers\ResetPasswordController@create')->defaults('_config', [
@@ -36,12 +35,10 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.session.create'
             ])->name('admin.session.destroy');
 
-
             // Dashboard Route
             Route::get('dashboard', 'Webkul\Admin\Http\Controllers\DashboardController@index')->defaults('_config', [
                 'view' => 'admin::dashboard.index'
             ])->name('admin.dashboard.index');
-
 
             //Customers Management Routes
             Route::get('customers', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config', [
@@ -248,8 +245,9 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.attributes.index'
                 ])->name('admin.catalog.attributes.update');
 
-                Route::get('/attributes/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@destroy')->name('admin.catalog.attributes.delete');
+                Route::get('/attributes/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@destroy')->name('admin.catalog.attributes.edit');
 
+                Route::delete('/attributes/massdelete', 'Webkul\Attribute\Http\Controllers\AttributeController@massDestroy')->name('admin.catalog.attributes.massdelete');
 
                 // Catalog Family Routes
                 Route::get('/families', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@index')->defaults('_config', [
@@ -283,7 +281,7 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::any('datagrid/massaction/delete', 'Webkul\Admin\Http\Controllers\DataGridController@massDelete')->name('admin.datagrid.delete');
 
-            Route::any('datagrid/massaction/edit','Webkul\Admin\Http\Controllers\DataGridController@massUpdate')->name('admin.datagrid.edit');
+            Route::any('datagrid/massaction/update','Webkul\Admin\Http\Controllers\DataGridController@massUpdate')->name('admin.datagrid.update');
 
 
             // User Routes
@@ -378,6 +376,8 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.currencies.update');
 
             Route::get('/currencies/delete/{id}', 'Webkul\Core\Http\Controllers\CurrencyController@destroy')->name('admin.currencies.delete');
+
+            Route::any('/currencies/massdelete', 'Webkul\Core\Http\Controllers\CurrencyController@massDestroy')->name('admin.currencies.massdelete');
 
 
             // Exchange Rates Routes

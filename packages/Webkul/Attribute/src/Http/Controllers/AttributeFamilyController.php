@@ -149,4 +149,38 @@ class AttributeFamilyController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Remove the specified resources from database
+     *
+     * @return response \Illuminate\Http\Response
+     */
+    public function massDestroy() {
+        $suppressFlash = false;
+
+        if(request()->isMethod('delete')) {
+            $indexes = explode(',', request()->input('indexes'));
+
+            foreach($indexes as $key => $value) {
+                try {
+                    $this->attributeFamily->delete($value);
+                } catch(\Exception $e) {
+                    $suppressFlash = true;
+
+                    continue;
+                }
+            }
+
+            if(!$suppressFlash)
+                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success'));
+            else
+                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Attribute Family']));
+
+            return redirect()->back();
+        } else {
+            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+
+            return redirect()->back();
+        }
+    }
 }

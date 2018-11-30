@@ -8,12 +8,12 @@
     @endif
     @foreach ($results as $result)
     <tr>
-        {{-- <td class="">
+        <td class="">
             <span class="checkbox">
                 <input type="checkbox" class="indexers" id="{{ $result->id }}" name="checkbox[]">
                 <label class="checkbox-view" for="checkbox1"></label>
             </span>
-        </td> --}}
+        </td>
         @foreach ($columns as $column)
             @if(isset($column->closure))
                 @if($column->closure == true)
