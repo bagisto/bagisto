@@ -185,9 +185,7 @@ class Cart {
                 $result = $this->createItem($id, $data);
             }
 
-            session()->flash('success', trans('shop::checkout.cart.success'));
-
-            return true;
+            return $result;
         } else {
             return $this->create($id, $data);
         }
