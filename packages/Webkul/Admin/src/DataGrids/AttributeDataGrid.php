@@ -111,7 +111,7 @@ class AttributeDataGrid
                     'name' => 'value_per_locale',
                     'alias' => 'attributeValuePerLocale',
                     'type' => 'string',
-                    'label' => 'ValuePerLocale',
+                    'label' => 'Locale based',
                     'sortable' => true,
                     'wrapper' => function ($value) {
                         if($value == 0)
@@ -123,7 +123,7 @@ class AttributeDataGrid
                     'name' => 'value_per_channel',
                     'alias' => 'attributeValuePerChannel',
                     'type' => 'string',
-                    'label' => 'ValuePerChannel',
+                    'label' => 'Channel based',
                     'sortable' => true,
                     'wrapper' => function ($value) {
                         if($value == 0)
