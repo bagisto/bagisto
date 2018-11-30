@@ -32,19 +32,19 @@ class SliderDataGrid
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
@@ -78,13 +78,7 @@ class SliderDataGrid
                     'alias' => 'sliderTitle',
                     'type' => 'string',
                     'label' => 'title',
-                    'sortable' => false
-                ], [
-                    'name' => 's.channel_id',
-                    'alias' => 'channelId',
-                    'type' => 'string',
-                    'label' => 'Channel ID',
-                    'sortable' => false,
+                    'sortable' => true
                 ], [
                     'name' => 'c.name',
                     'alias' => 'channelName',
@@ -103,10 +97,15 @@ class SliderDataGrid
                     'label' => 'ID'
                 ], [
                     'column' => 's.title',
-                    'alias' => 'SliderTitle',
+                    'alias' => 'sliderTitle',
                     'type' => 'string',
-                    'label' => 'Slider Title'
-                ],
+                    'label' => 'title'
+                ], [
+                    'column' => 'c.name',
+                    'alias' => 'channelName',
+                    'type' => 'string',
+                    'label' => 'Channel Name',
+                ]
             ],
 
             //don't use aliasing in case of searchables
@@ -119,6 +118,10 @@ class SliderDataGrid
                     'column' => 's.title',
                     'type' => 'string',
                     'label' => 'Slider Title'
+                ], [
+                    'column' => 'c.name',
+                    'type' => 'string',
+                    'label' => 'Channel Name',
                 ]
             ],
 

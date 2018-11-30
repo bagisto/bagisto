@@ -8,15 +8,20 @@
     @endif
     @foreach ($results as $result)
     <tr>
-
-        <td class="">
+        {{-- <td class="">
             <span class="checkbox">
                 <input type="checkbox" class="indexers" id="{{ $result->id }}" name="checkbox[]">
                 <label class="checkbox-view" for="checkbox1"></label>
             </span>
-        </td>
+        </td> --}}
         @foreach ($columns as $column)
-            <td class="">{!! $column->render($result) !!}</td>
+            @if(isset($column->closure))
+                @if($column->closure == true)
+                    <td class="">{!! $column->render($result) !!}</td>
+                @endif
+            @else
+                <td class="">{{ $column->render($result) }}</td>
+            @endif
         @endforeach
         @if(count($actions))
         <td class="action">

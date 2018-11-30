@@ -75,7 +75,6 @@
                         <div class="control-error" v-if="errors.has('rating')">@{{ errors.first('rating') }}</div>
                     </div>
 
-
                     <div class="control-group mt-20" :class="[errors.has('title') ? 'has-error' : '']">
                         <label for="title" class="required">
                             {{ __('shop::app.reviews.title') }}
@@ -84,15 +83,13 @@
                         <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
                     </div>
 
-                    <div class="write-review mt-20">
-                        <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
-                            <label for="review" class="required">
-                                {{ __('admin::app.customers.reviews.comment') }}
-                            </label>
-                            <textarea type="text" class="control" name="comment" v-validate="'required'" value="{{ old('comment') }}">
-                            </textarea>
-                            <span class="control-error" v-if="errors.has('comment')">@{{ errors.first('comment') }}</span>
-                        </div>
+                    <div class="control-group" :class="[errors.has('comment') ? 'has-error' : '']">
+                        <label for="comment" class="required">
+                            {{ __('admin::app.customers.reviews.comment') }}
+                        </label>
+                        <textarea type="text" class="control" name="comment" v-validate="'required'" value="{{ old('comment') }}">
+                        </textarea>
+                        <span class="control-error" v-if="errors.has('comment')">@{{ errors.first('comment') }}</span>
                     </div>
 
                     <button type="submit" class="btn btn-lg btn-primary">

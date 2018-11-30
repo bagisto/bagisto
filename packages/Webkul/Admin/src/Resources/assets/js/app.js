@@ -1,6 +1,7 @@
 window.jQuery = window.$ = $ = require("jquery");
 window.Vue = require("vue");
 window.VeeValidate = require("vee-validate");
+require("./bootstrap");
 
 Vue.use(VeeValidate);
 
@@ -30,6 +31,9 @@ $(document).ready(function () {
         methods: {
             onSubmit: function (e) {
                 this.toggleButtonDisable(true);
+
+                if(typeof tinyMCE !== 'undefined')
+                    tinyMCE.triggerSave();
 
                 this.$validator.validateAll().then(result => {
                     if (result) {

@@ -132,9 +132,13 @@ class AttributeController extends Controller
         if(!$attribute->is_user_defined) {
             session()->flash('error', 'Can not delete system attribute.');
         } else {
-            $this->attribute->delete($id);
+            try {
+                $this->attribute->delete($id);
 
-            session()->flash('success', 'Attribute deleted successfully.');
+                session()->flash('success', 'Attribute deleted successfully.');
+            } catch(\Exception $e) {
+                session()->flash('error', 'Attribute is used in configurable products.');
+            }
         }
 
         return redirect()->back();

@@ -6,9 +6,11 @@ use Webkul\API\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
-use Auth;
-// use Cart;
 use Webkul\Checkout\Repositories\CartRepository;
+use Webkul\Checkout\Repositories\CartItemRepository as CartItem;
+use Webkul\API\Http\Controllers\Shop\Presenter as Presenter;
+use Auth;
+use Cart;
 
 /**
  * Cart controller for the APIs of User Cart
@@ -19,31 +21,106 @@ use Webkul\Checkout\Repositories\CartRepository;
 class CartController extends Controller
 {
     protected $customer;
-
     protected $cart;
+    protected $cartItem;
 
-    public function __construct(CartRepository $cart)
+    public function __construct(CartRepository $cart, CartItem $cartItem)
     {
         $this->cart = $cart;
 
-        if(auth()->guard('customer')->check()) {
-            $this->customer = auth()->guard('customer')->user();
+        $this->cartItem = $cartItem;
+    }
+
+    /**
+     * Function to get the current cart instance for customer or guest
+     *
+     * @return Response array && Collection Cart
+     */
+    public function get() {
+        $cart = Cart::getCart();
+
+        if($cart == null || $cart == 'null') {
+            return response()->json(['message' => 'empty', 'items' => null]);
+        }
+
+        return response()->json(['message' => 'success', 'items' => $cart]);
+    }
+
+    /**
+     * Function for guests user to add the product in the cart.
+     *
+     * @return Mixed
+     */
+    public function add($id) {
+        $result = Cart::add($id, request()->all());
+
+        if($result) {
+            Cart::collectTotals();
+
+            return response()->json(['message' => 'successful', 'items' => Cart::getCart()->items]);
         } else {
-            return response()->json('Unauthorized', 401);
+            return response()->json(['message' => 'failed', 'items' => Cart::getCart()->items]);
         }
     }
 
-    public function getAllCart() {
-        $carts = $this->customer->carts;
+    /**
+     * Removes the item from the cart if it exists
+     *
+     * @param integer $itemId
+     */
+    public function remove($itemId) {
+        $result = Cart::removeItem($itemId);
 
-        if($cart->count() > 0) {
-            return response()->json($cart, 200);
-        } else {
-            return response()->json('Cart Empty', 200);
-        }
+        Cart::collectTotals();
+
+        return response()->json(['message' => $result, 'items' => Cart::getCart()]);
     }
 
-    public function getActiveCart() {
-        return $this->customer->cart;
+    /**
+     * Before checkout starts or full details on the cart
+     *
+     * @return response json
+     */
+    public function onePage() {
+        $cart = Cart::getCart();
+
+        if($cart == null || $cart == 'null') {
+            return response()->json(['message' => 'empty', 'items' => null]);
+        }
+
+        $presenter = new Presenter();
+        $summary = $presenter->onePagePresenter($cart);
+
+        return response()->json(['message' => 'success', 'items' => $cart->items, 'summary' => $summary]);
+    }
+
+    /**
+     * Updates the quantity of the items present in the cart.
+     *
+     * @return response JSON
+     */
+    public function updateOnePage() {
+        $request = request()->except('_token');
+
+        foreach($request['qty'] as $id => $quantity) {
+            if($quantity <= 0) {
+                return response()->json(['message' => 'Illegal Quantity', 'status' => 'error']);
+            }
+        }
+
+        foreach($request['qty'] as $key => $value) {
+            $item = $this->cartItem->findOneByField('id', $key);
+
+            $data['quantity'] = $value;
+
+            $result = Cart::updateItem($item->product_id, $data, $key);
+
+            unset($item);
+            unset($data);
+        }
+
+        Cart::collectTotals();
+
+        return response()->json(['message' => 'success', 'items' => Cart::getCart()]);
     }
 }

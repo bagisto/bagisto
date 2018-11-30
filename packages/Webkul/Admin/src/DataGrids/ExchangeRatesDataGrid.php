@@ -33,19 +33,19 @@ class ExchangeRatesDataGrid
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
@@ -68,54 +68,57 @@ class ExchangeRatesDataGrid
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
-
                 [
                     'name' => 'cer.id',
-                    'alias' => 'exchID',
+                    'alias' => 'exchid',
                     'type' => 'number',
                     'label' => 'Rate ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'curr.name',
-                    'alias' => 'currencyname',
+                    'alias' => 'exchcurrname',
                     'type' => 'string',
                     'label' => 'Currency Name',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'cer.rate',
-                    'alias' => 'exchRate',
+                    'alias' => 'exchrate',
+                    'type' => 'string',
+                    'label' => 'Exchange Rate',
+                    'sortable' => true
+                ],
+            ],
+
+            //don't use aliasing in case of filters
+            'filterable' => [
+                [
+                    'column' => 'cer.id',
+                    'alias' => 'exchid',
+                    'type' => 'number',
+                    'label' => 'Rate ID',
+                ], [
+                    'column' => 'curr.name',
+                    'alias' => 'exchcurrname',
+                    'type' => 'string',
+                    'label' => 'Currency Name',
+                ], [
+                    'column' => 'cer.rate',
+                    'alias' => 'exchrate',
                     'type' => 'string',
                     'label' => 'Exchange Rate',
                 ],
             ],
 
-            //don't use aliasing in case of filters
-
-            'filterable' => [
-                [
-                    'column' => 'cer.id',
-                    'alias' => 'exchId',
-                    'type' => 'number',
-                    'label' => 'Rate ID',
-                ],
-                [
-                    'column' => 'curr.name',
-                    'alias' => 'exchTargetCurrency',
-                    'type' => 'string',
-                    'label' => 'Target Currency',
-                    'sortable' => true,
-                ],
-            ],
-
             //don't use aliasing in case of searchables
-
             'searchable' => [
                 [
-                    'column' => 'target_currency',
+                    'column' => 'exchcurrname',
                     'type' => 'string',
-                    'label' => 'Target Currency',
+                    'label' => 'Currency Name',
+                ], [
+                    'column' => 'cer.rate',
+                    'type' => 'string',
+                    'label' => 'Exchange Rate',
                 ],
             ],
 

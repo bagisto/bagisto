@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids;
 
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
+use DB;
 
 /**
  * OrderShipmentsDataGrid
@@ -22,41 +23,42 @@ class OrderShipmentsDataGrid
      */
     public function createOrderShipmentsDataGrid()
     {
-
         return DataGrid::make([
             'name' => 'shipments',
             'table' => 'shipments as ship',
             'select' => 'ship.id',
             'perpage' => 10,
-            'aliased' => false,
+            'aliased' => true,
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [
-                // [
-                //     'type' => 'View',
-                //     'route' => route('admin.datagrid.delete'),
-                //     'confirm_text' => 'Do you really want to do this?',
-                //     'icon' => 'icon pencil-lg-icon',
-                // ], [
-                //     'type' => 'Delete',
-                //     'route' => route('admin.datagrid.delete'),
-                //     'confirm_text' => 'Do you really want to do this?',
-                //     'icon' => 'icon trash-icon',
-                // ]
+                [
+                    'type' => 'View',
+                    'route' => route('admin.datagrid.delete'),
+                    'confirm_text' => 'Do you really want to view this record?',
+                    'icon' => 'icon pencil-lg-icon',
+                ],
             ],
 
-            'join' => [],
+            'join' => [
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'orders as ors',
+                    'primaryKey' => 'ship.order_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'ors.id',
+                ]
+            ],
 
             //use aliasing on secodary columns if join is performed
-
             'columns' => [
                 [
                     'name' => 'ship.id',
@@ -65,24 +67,36 @@ class OrderShipmentsDataGrid
                     'label' => 'ID',
                     'sortable' => true
                 ], [
-                    'name' => 'ship.status',
-                    'alias' => 'shipstatus',
+                    'name' => 'ship.order_id',
+                    'alias' => 'orderid',
+                    'type' => 'number',
+                    'label' => 'Order ID',
+                    'sortable' => true
+                ], [
+                    'name' => 'ship.total_qty',
+                    'alias' => 'shiptotalqty',
+                    'type' => 'number',
+                    'label' => 'Total Quantity',
+                    'sortable' => true
+                ], [
+                    'name' => 'CONCAT(ors.customer_first_name, " ", ors.customer_last_name)',
+                    'alias' => 'ordercustomerfirstname',
                     'type' => 'string',
-                    'label' => 'Status',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 'processing')
-                            return '<span class="badge badge-md badge-success">Processing</span>';
-                        else if($value == 'completed')
-                            return '<span class="badge badge-md badge-success">Completed</span>';
-                        else if($value == "canceled")
-                            return '<span class="badge badge-md badge-danger">Canceled</span>';
-                        else if($value == "closed")
-                            return '<span class="badge badge-md badge-info">Closed</span>';
-                        else if($value == "pending")
-                            return '<span class="badge badge-md badge-warning">Pending</span>';
-                    },
-                ],
+                    'label' => 'Customer Name',
+                    'sortable' => false,
+                ], [
+                    'name' => 'ors.created_at',
+                    'alias' => 'orscreated',
+                    'type' => 'date',
+                    'label' => 'Order Date',
+                    'sortable' => true
+                ], [
+                    'name' => 'ship.created_at',
+                    'alias' => 'shipdate',
+                    'type' => 'string',
+                    'label' => 'Shipment Date',
+                    'sortable' => false
+                ]
             ],
 
             'filterable' => [
@@ -97,10 +111,9 @@ class OrderShipmentsDataGrid
 
             'searchable' => [
                 // [
-                //     'column' => 'or.id',
-                //     'alias' => 'orderid',
-                //     'type' => 'number',
-                //     'label' => 'ID',
+                //     'column' => 'ors.customer_first_name',
+                //     'alias' => 'ordercustomerfirstname',
+                //     'type' => 'string',
                 // ]
             ],
 

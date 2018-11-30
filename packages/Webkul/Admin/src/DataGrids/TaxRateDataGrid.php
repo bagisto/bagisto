@@ -31,35 +31,35 @@ class TaxRateDataGrid
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
-                [
-                    'route' => route('admin.datagrid.index'),
-                    'method' => 'POST',
-                    'label' => 'View Grid',
-                    'type' => 'select',
-                    'options' =>[
-                        1 => 'Edit',
-                        2 => 'Set',
-                        3 => 'Change Status'
-                    ]
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
+                // [
+                //     'route' => route('admin.datagrid.index'),
+                //     'method' => 'POST',
+                //     'label' => 'View Grid',
+                //     'type' => 'select',
+                //     'options' =>[
+                //         1 => 'Edit',
+                //         2 => 'Set',
+                //         3 => 'Change Status'
+                //     ]
+                // ],
             ],
             'actions' => [
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really wanis?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ],
                 [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -73,8 +73,7 @@ class TaxRateDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'tr.identifier',
                     'alias' => 'identifier',
                     'type' => 'string',
@@ -83,25 +82,21 @@ class TaxRateDataGrid
                     // 'wrapper' => function ($value, $object) {
                     //     return '<a class="color-red">' . $object->identifier . '</a>';
                     // },
-                ],
-                [
+                ], [
                     'name' => 'tr.state',
                     'alias' => 'state',
                     'type' => 'string',
                     'label' => 'State',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'tr.country',
                     'alias' => 'country',
                     'type' => 'string',
                     'label' => 'Country',
                     'sortable' => true,
-                ],
-
-                [
+                ], [
                     'name' => 'tr.tax_rate',
-                    'alias' => 'tax_rate',
+                    'alias' => 'taxrate',
                     'type' => 'number',
                     'label' => 'Tax Rate',
                     'sortable' => true,
@@ -131,7 +126,7 @@ class TaxRateDataGrid
                     'label' => 'Country',
                 ], [
                     'column' => 'tr.tax_rate',
-                    'alias' => 'tax_rate',
+                    'alias' => 'taxrate',
                     'type' => 'number',
                     'label' => 'Tax Rate',
                 ],
@@ -142,6 +137,18 @@ class TaxRateDataGrid
                     'column' => 'tr.identifier',
                     'type' => 'string',
                     'label' => 'Identifier',
+                ], [
+                    'column' => 'tr.state',
+                    'type' => 'string',
+                    'label' => 'State',
+                ], [
+                    'column' => 'tr.country',
+                    'type' => 'string',
+                    'label' => 'Country',
+                ], [
+                    'column' => 'tr.tax_rate',
+                    'type' => 'number',
+                    'label' => 'Tax Rate',
                 ],
             ],
             'operators' => [

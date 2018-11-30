@@ -38,7 +38,7 @@ class CustomerAddressForm extends FormRequest
             'billing.country' => ['required']
         ];
 
-        if(!$this->get('billing')['use_for_shipping']) {
+        if(isset($this->get('billing')['use_for_shipping']) && !$this->get('billing')['use_for_shipping']) {
             $this->rules = array_merge($this->rules, [
                 'shipping.first_name' => ['required'],
                 'shipping.last_name' => ['required'],

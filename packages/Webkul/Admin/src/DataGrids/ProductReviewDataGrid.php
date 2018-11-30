@@ -34,24 +34,24 @@ class ProductReviewDataGrid
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -69,7 +69,6 @@ class ProductReviewDataGrid
             //use aliasing on secodary columns if join is performed
 
             'columns' => [
-
                 [
                     'name' => 'pr.id',
                     'alias' => 'reviewId',
@@ -88,20 +87,19 @@ class ProductReviewDataGrid
                     'type' => 'string',
                     'label' => 'Comment',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'pt.name',
                     'alias' => 'productName',
                     'type' => 'string',
                     'label' => 'Product Name',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'pr.status',
                     'alias' => 'reviewStatus',
                     'type' => 'number',
                     'label' => 'Status',
                     'sortable' => true,
+                    'closure' => true,
                     'wrapper' => function ($value) {
                         if($value == 'approved')
                             return '<span class="badge badge-md badge-success">Approved</span>';
@@ -133,7 +131,7 @@ class ProductReviewDataGrid
                     'alias' => 'productName',
                     'type' => 'string',
                     'label' => 'Product Name',
-                ],[
+                ], [
                     'column' => 'pr.status',
                     'alias' => 'reviewStatus',
                     'type' => 'string',
@@ -151,6 +149,10 @@ class ProductReviewDataGrid
                     'column' => 'rating',
                     'type' => 'number',
                     'label' => 'Rating',
+                ], [
+                    'column' => 'pt.name',
+                    'alias' => 'productName',
+                    'type' => 'string',
                 ],
             ],
 

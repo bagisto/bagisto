@@ -91,7 +91,7 @@ class CartController extends Controller
         if($result) {
             session()->flash('success', trans('shop::app.checkout.cart.item.success'));
         } else {
-            session()->flash('success', trans('shop::app.checkout.cart.item.error-add'));
+            session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
         }
 
         Cart::collectTotals();

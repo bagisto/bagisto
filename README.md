@@ -76,24 +76,18 @@ default.
 
 ### 4. Installation:
 
-**1. Run the Command**
+**Run these Commands Below**
 ~~~
 php artisan migrate
 ~~~
-
-**2. Run the Command**
 ~~~
 php artisan db:seed
 ~~~
-
-**3. Run the Command**
 ~~~
 php artisan vendor:publish
 
 -> Press 0 and then press enter to publish all assets and configurations.
 ~~~
-
-**4. Run the Command**
 ```
 php artisan storage:link
 ```
@@ -110,7 +104,16 @@ php artisan storage:link
 > **php artisan vendor:publish**
 
 
-### 6. License
+### 6. Migration from v0.1.1 to v0.1.2
+
+**Run commands below:**
+
+> **php artisan migrate**
+
+> **php artisan vendor:publish**
+
+
+### 7. License
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://opensource.org/licenses/MIT).
 
 ### Coming Soon:

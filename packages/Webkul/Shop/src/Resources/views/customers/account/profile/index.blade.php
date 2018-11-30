@@ -52,6 +52,16 @@
                         <td>{{ __('shop::app.customer.account.profile.email') }}</td>
                         <td>{{ $customer->email }}</td>
                     </tr>
+
+                    {{-- @if($customer->subscribed_to_news_letter == 1)
+                        <tr>
+                            <td> {{ __('shop::app.footer.subscribe-newsletter') }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" href="{{ route('shop.unsubscribe', $customer->email) }}">{{ __('shop::app.subscription.unsubscribe') }} </a>
+                            </td>
+                        </tr>
+                    @endif --}}
+
                 </tbody>
             </table>
         </div>

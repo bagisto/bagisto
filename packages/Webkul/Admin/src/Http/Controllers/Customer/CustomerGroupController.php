@@ -39,6 +39,8 @@ class CustomerGroupController extends Controller
     {
         $this->_config = request('_config');
 
+        $this->middleware('admin');
+
         $this->customerGroup = $customerGroup;
     }
 
@@ -123,7 +125,7 @@ class CustomerGroupController extends Controller
     {
         $group = $this->customerGroup->findOneWhere(['id'=>$id]);
 
-        if($group->is_user_defined == 1) {
+        if(!$group->is_user_defined) {
             session()->flash('error', 'This Customer Group can not be deleted');
         } else {
             $this->customerGroup->delete($id);

@@ -32,19 +32,19 @@ class LocalesDataGrid
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really edit this record?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
@@ -64,25 +64,21 @@ class LocalesDataGrid
                 // ]
             ],
 
-            //use aliasing on secodary columns if join is performed
-
+            //use aliasing as attribute
             'columns' => [
-
                 [
                     'name' => 'id',
                     'alias' => 'localeId',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'code',
                     'alias' => 'localeCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'name',
                     'alias' => 'localeName',
                     'type' => 'string',
@@ -93,21 +89,18 @@ class LocalesDataGrid
             ],
 
             //don't use aliasing in case of filters
-
             'filterable' => [
                 [
                     'column' => 'id',
                     'alias' => 'localeId',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'alias' => 'localeCode',
                     'type' => 'string',
                     'label' => 'Code',
-                ],
-                [
+                ], [
                     'column' => 'name',
                     'alias' => 'localeName',
                     'type' => 'string',
@@ -116,14 +109,12 @@ class LocalesDataGrid
             ],
 
             //don't use aliasing in case of searchables
-
             'searchable' => [
                 [
                     'column' => 'name',
                     'type' => 'string',
                     'label' => 'Name',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'type' => 'string',
                     'label' => 'Code',

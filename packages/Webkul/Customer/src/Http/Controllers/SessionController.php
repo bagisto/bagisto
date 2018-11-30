@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Http\Listeners\CustomerEventsHandler;
 use Cart;
+use Cookie;
 
 /**
  * Session controller for the user customer
@@ -38,7 +39,7 @@ class SessionController extends Controller
     public function show()
     {
         if(auth()->guard('customer')->check()) {
-            return redirect()->route('customer.account.index');
+            return redirect()->route('customer.session.index');
         } else {
             return view($this->_config['view']);
         }
@@ -52,8 +53,21 @@ class SessionController extends Controller
         ]);
 
         if (!auth()->guard('customer')->attempt(request(['email', 'password']))) {
-            session()->flash('error', 'Please check your credentials and try again.');
-            return back();
+            session()->flash('error', trans('shop::app.customer.login-form.invalid-creds'));
+
+            return redirect()->back();
+        }
+
+        if(auth()->guard('customer')->user()->is_verified == 0) {
+            session()->flash('info', trans('shop::app.customer.login-form.verify-first'));
+
+            Cookie::queue(Cookie::make('enable-resend', 'true', 1));
+
+            Cookie::queue(Cookie::make('email-for-resend', $request->input('email'), 1));
+
+            auth()->guard('customer')->logout();
+
+            return redirect()->back();
         }
 
         //Event passed to prepare cart after login

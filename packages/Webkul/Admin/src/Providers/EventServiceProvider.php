@@ -108,7 +108,7 @@ class EventServiceProvider extends ServiceProvider
             'route' => 'admin.account.edit',
             'sort' => 1,
             'icon-class' => '',
-        ], 
+        ],
         // [
         //     'key' => 'configuration.sales',
         //     'name' => 'Sales',
@@ -121,7 +121,7 @@ class EventServiceProvider extends ServiceProvider
         //     'route' => 'admin.configuration.sales.general',
         //     'sort' => 1,
         //     'icon-class' => '',
-        // ], 
+        // ],
         [
             'key' => 'settings',
             'name' => 'Settings',
@@ -200,6 +200,12 @@ class EventServiceProvider extends ServiceProvider
             'route' => 'admin.tax-rates.index',
             'sort' => 2,
             'icon-class' => '',
+        ], [
+            'key' => 'settings.subscribers',
+            'name' => 'Newsletter Subscription',
+            'route' => 'admin.subscribers.index',
+            'sort' => 9,
+            'icon-class' => '',
         ],
     ];
 
@@ -276,11 +282,11 @@ class EventServiceProvider extends ServiceProvider
             $acl->add('catalog.attributes', 'Attributes', 'admin.catalog.attributes.index', 3);
 
             $acl->add('catalog.families', 'Families', 'admin.catalog.families.index', 4);
-            
+
             $acl->add('customers', 'Customers', 'admin.customers.index', 4);
 
             $acl->add('customers.customers', 'Customers', 'admin.customers.index', 1);
-            
+
             $acl->add('customers.groups', 'Groups', 'admin.groups.index', 2);
 
             $acl->add('customers.reviews', 'Reviews', 'admin.customers.reviews.index', 3);

@@ -25,8 +25,8 @@ class CustomerDataGrid
 
             return DataGrid::make([
             'name' => 'Customer',
-            'table' => 'customers',
-            'select' => 'id',
+            'table' => 'customers as cus',
+            'select' => 'cus.id',
             'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
 
@@ -43,68 +43,68 @@ class CustomerDataGrid
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
 
             'join' => [
-
+                [
+                    'join' => 'leftjoin',
+                    'table' => 'customer_groups as cg',
+                    'primaryKey' => 'cus.customer_group_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'cg.id',
+                ]
             ],
 
             //use aliasing on secodary columns if join is performed
             'columns' => [
                 [
-                    'name' => 'id',
+                    'name' => 'cus.id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
-                    'name' => 'first_name',
-                    'alias' => 'FirstName',
+                ], [
+                    'name' => 'CONCAT(first_name, " ", last_name)',
+                    'alias' => 'Name',
                     'type' => 'string',
-                    'label' => 'First Name',
-                    'sortable' => false,
-                ],
-                [
+                    'label' => 'Name',
+                    'sortable' => true,
+                ], [
                     'name' => 'email',
                     'alias' => 'Email',
                     'type' => 'string',
                     'label' => 'Email',
                     'sortable' => false,
-                ],
-                [
-                    'name' => 'customer_group_id',
-                    'alias' => 'CustomerGroupId',
-                    'type' => 'number',
-                    'label' => 'Group ID',
+                ], [
+                    'name' => 'cg.name',
+                    'alias' => 'CustomerGroupName',
+                    'type' => 'string',
+                    'label' => 'Group Name',
                     'sortable' => false,
                 ],
             ],
 
             //don't use aliasing in case of filters
-
             'filterable' => [
-
                 [
-                    'column' => 'id',
+                    'column' => 'cus.id',
                     'alias' => 'ID',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
-                    'column' => 'first_name',
-                    'alias' => 'FirstName',
+                ], [
+                    'column' => 'email',
+                    'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'First Name',
-                ]
+                    'label' => 'Email',
+                ],
             ],
 
             //don't use aliasing in case of searchables
@@ -114,11 +114,10 @@ class CustomerDataGrid
                     'column' => 'FirstName',
                     'type' => 'string',
                     'label' => 'First Name',
-                ],
-                [
+                ], [
                     'column' => 'email',
+                    'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'Email',
                 ],
             ],
 

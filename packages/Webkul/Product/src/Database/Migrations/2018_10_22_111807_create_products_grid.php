@@ -17,6 +17,7 @@ class CreateProductsGrid extends Migration
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->string('attribute_family_name')->nullable();
             $table->string('sku')->nullable();
             $table->string('type')->nullable();
             $table->string('name')->nullable();
@@ -24,7 +25,6 @@ class CreateProductsGrid extends Migration
             $table->string('cost')->default(0);
             $table->string('price')->nullable();
             $table->string('status')->nullable();
-            $table->string('attribute_family_name')->nullable();
         });
     }
 

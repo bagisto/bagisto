@@ -5,7 +5,6 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-
 /**
  * Attributes DataGrid
  *
@@ -33,24 +32,24 @@ class AttributeDataGrid
             'aliased' => true,
 
             'massoperations' => [
-                [
-                    'route' => route('admin.datagrid.delete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
-                ],
+                // [
+                //     'route' => route('admin.datagrid.delete'),
+                //     'method' => 'DELETE',
+                //     'label' => 'Delete',
+                //     'type' => 'button',
+                // ],
             ],
 
             'actions' => [
                 [
                     'type' => 'Edit',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
                     'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to do this?',
+                    'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
             ],
@@ -66,73 +65,66 @@ class AttributeDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'code',
                     'alias' => 'attributeCode',
                     'type' => 'string',
                     'label' => 'Code',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'admin_name',
                     'alias' => 'attributeAdminName',
                     'type' => 'string',
-                    'label' => 'AdminName',
+                    'label' => 'Name',
                     'sortable' => true,
-                ],
-                [
+                ], [
                     'name' => 'type',
                     'alias' => 'attributeType',
                     'type' => 'string',
                     'label' => 'Type',
-                    'sortable' => false,
-                ],
-                [
+                    'sortable' => true,
+                ], [
                     'name' => 'is_required',
                     'alias' => 'attributeIsRequired',
                     'type' => 'string',
                     'label' => 'Required',
-                    'sortable' => false,
+                    'sortable' => true,
                     'wrapper' => function ($value) {
                         if($value == 0)
                             return "False";
                         else
                             return "True";
                     },
-                ],
-                [
+                ], [
                     'name' => 'is_unique',
                     'alias' => 'attributeIsUnique',
                     'type' => 'string',
                     'label' => 'Unique',
-                    'sortable' => false,
+                    'sortable' => true,
                     'wrapper' => function ($value) {
                         if($value == 0)
                             return "False";
                         else
                             return "True";
                     },
-                ],
-                [
+                ], [
                     'name' => 'value_per_locale',
                     'alias' => 'attributeValuePerLocale',
                     'type' => 'string',
-                    'label' => 'ValuePerLocale',
-                    'sortable' => false,
+                    'label' => 'Locale based',
+                    'sortable' => true,
                     'wrapper' => function ($value) {
                         if($value == 0)
                             return "False";
                         else
                             return "True";
                     },
-                ],
-                [
+                ], [
                     'name' => 'value_per_channel',
                     'alias' => 'attributeValuePerChannel',
                     'type' => 'string',
-                    'label' => 'ValuePerChannel',
-                    'sortable' => false,
+                    'label' => 'Channel based',
+                    'sortable' => true,
                     'wrapper' => function ($value) {
                         if($value == 0)
                             return "False";
@@ -148,20 +140,17 @@ class AttributeDataGrid
                     'alias' => 'attributeId',
                     'type' => 'number',
                     'label' => 'ID',
-                ],
-                [
+                ], [
                     'column' => 'code',
                     'alias' => 'attributeCode',
                     'type' => 'string',
                     'label' => 'Code',
-                ],
-                [
+                ], [
                     'column' => 'admin_name',
                     'alias' => 'attributeAdminName',
                     'type' => 'string',
-                    'label' => 'AdminName',
-                ],
-                [
+                    'label' => 'Name',
+                ], [
                     'column' => 'type',
                     'alias' => 'attributeType',
                     'type' => 'string',
@@ -175,13 +164,11 @@ class AttributeDataGrid
                     'column' => 'code',
                     'alias' => 'attributeCode',
                     'type' => 'string',
-                ],
-                [
+                ], [
                     'column' => 'admin_name',
                     'alias' => 'attributeAdminName',
                     'type' => 'string',
-                ],
-                [
+                ], [
                     'column' => 'type',
                     'alias' => 'attributeType',
                     'type' => 'string',

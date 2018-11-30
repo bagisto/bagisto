@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.configuration.tax-categories.add-title') }}
+    {{ __('admin::app.settings.tax-categories.add-title') }}
 @stop
 
 @section('content')
@@ -9,12 +9,12 @@
         <form method="POST" action="{{ route('admin.tax-categories.create') }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('admin::app.configuration.tax-categories.add-title') }}</h1>
+                    <h1>{{ __('admin::app.settings.tax-categories.add-title') }}</h1>
                 </div>
 
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.configuration.tax-categories.save-btn-title') }}
+                        {{ __('admin::app.settings.tax-categories.save-btn-title') }}
                     </button>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                         <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                     </div>
 
-                    <div class="control-group" :class="[errors.has('taxrates') ? 'has-error' : '']">
+                    <div class="control-group" :class="[errors.has('taxrates[]') ? 'has-error' : '']">
                         <label for="taxrates" class="required">{{ __('admin::app.configuration.tax-categories.select-taxrates') }}</label>
 
                         <select multiple="multiple" v-validate="'required'" class="control" id="taxrates" name="taxrates[]" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.select-taxrates') }}&quot;" value="{{ old('taxrates') }}">
@@ -71,7 +71,7 @@
                             @endforeach
                         </select>
 
-                        <span class="control-error" v-if="errors.first('taxrates')">@{{ errors.first('taxrates') }}</span>
+                        <span class="control-error" v-if="errors.first('taxrates[]')">@{{ errors.first('taxrates[]') }}</span>
                     </div>
 
                 </div>
