@@ -2,6 +2,139 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v0.1.2(30th of November, 2018)** - *Release*
+
+* #185 - [fixed] Search not working in responsive mode
+
+* #187 - [fixed] We can add column "Group Name" instead of Group Id and also add this column in filter in Customers Grid
+
+* #247 - [fixed] Displaying wrong number of products and sales in category, on dashboard
+
+* #207 - [fixed] Two button are not required to save address
+
+* #119 - [fixed] Set value in the login form fields(on Demo)
+
+* #245 - [fixed] Add Sales and Customers also in Custom Permission option of Access Control
+
+* #126 - [fixed] Add asterisk symbol on SKU field
+
+* #224 - [fixed] Status column in Invoice remains blank
+
+* #192 - [fixed] Not able to checkout with different shipping address
+
+* #188 - [fixed] Unable to delete Customer Group
+
+* #151 - [fixed] Description and Short description field are throwing validation error message even if description is written
+
+* #162 - [fixed] No response when click on "Add to Cart" for configurable product on home page and category page
+
+* #180 - [fixed] Not accepting the code for Currency if it is already used in locales
+
+* #121 - [fixed] buy now button is not working on index page for some products
+
+* #134 - [fixed] Unable to login with the user account that is created in user grid with custom access
+
+* #154 - [fixed] While creating channel Description field,Home Page Content and footer _content is required, but it doesn't throw any validation error if we leave that field blank
+
+* #146 - [fixed] Tax is not added on product at checkout
+
+* #161 - [fixed] Inappropriate validation message(System wide fix is applied for validation messages)
+
+* #142 - [fixed] Correct the spelling of "default" in theme
+
+* #165 - [fixed] If a Product is selected as disabled at time of creation,then also it is visible at store front
+
+* #133 - [fixed] Add asterisk symbol for email field in Add User page
+
+* #175 - [fixed] Getting exception in deleting attributes
+
+* #165 - [feature] No grid is available in back-end to manage Newsletter
+
+* #235 - [fixed] User name should display on account dropdown(In case of signed-in user)
+
+* #200 - [fixed] Getting exception when applying filter on Exchange Rates grid
+
+* #225 - [fixed] Slider button should display as clickable on mouse hover
+
+* #148 - [fixed] Search Functionality is not working in all grid of Admin panel
+
+* #216 - [added] Add a Column "Channel" to verify from which channel order has been placed and also add this column in filter
+
+* #237 - [fixed] Incorrect response message after deleting product from wishlist
+
+* #201 - [fixed] Getting exception when applying filter in slider
+
+* #202 - [fixed] Correct the background text of filter field in Taxes grid.Text should be according to selected column(placeholder)
+
+* #232 - [added] Add sorting functionality in column "Name" of Inventory Grid
+
+* #230 - [added] Add Sorting functionality on column "Status" of Product Grid
+
+* #229 - [added] Add sorting functionality on Column "Type" in Product Grid, so that product can be sorted according to type
+
+* #244 - [fixed] Getting exception when applying sorting on Tax Rate
+
+* #242 - [fixed] Confirmation message should be "Do you really want to edit this record?", on editing slider
+
+* #236 - [fixed] Incorrect response message after removing a product from cart
+
+* #206 - [fixed] Correct the confirmation message in pop-up when click on Edit User
+
+* #174 - [fixed] Getting Exception while applying filter on category page
+
+* #149 - [fixed] Getting exception in creating configurable product.
+
+* #184 - [fixed] Product page mandatory fields are missing '*' or asterisk as failing to indicate required field and inappropriate validation message
+
+* #162 - [fixed] No response when click on "Add to Cart" for configurable product on home page and category page
+
+* #164 - [fixed] Loss of data from content field of Slider
+
+* #166 - [fixed] Getting 404 error on deleting order
+
+* #178 - [fixed] Change the Column Name
+
+* #129 - [fixed] Getting issue when deleting orders.Mass action is not working in any grid(Getting Internal server error) while updating status(mass actions will return in next release and the issue will remain open till next release)
+
+* #181 - [fixed] Change the column name in filter from "Target Currency" to "Currency Name"
+
+* #172 - [fixed] Getting 500 Internal Server Error on updating Users
+
+* #173 - [fixed] Getting 500 Internal Server Error on Updating taxes
+
+* #177 - [fixed] Getting Exception when clicking on column locale
+
+* #125 - [fixed] Delete button is not available for mass delete of Products in Product Grid(mass actions will return in next release and the issue will remain open till next release)
+
+* #132 - [fixed] Issue in Mass Deletion.This issue exists for every grid(mass actions will return in next release and the issue will remain open till next release)
+
+* #137 - [fixed] By default Gender is selected as Male for every customer
+
+* #141 - [fixed] Subscribe button on storefront is unresponsive
+
+* #145 - [fixed] Edit Functionality of Tax Categories is not Working
+
+* #157 - [fixed] Old password check in edit profile ain't working for customers
+
+* #120 - [fixed] After signup on the frontend, the customer is still not the signup page
+
+* #139 - [fixed] Encountered exception while changing locale on storefront
+
+* #144 - [fixed] "Move All Products To Cart" and "Delete All" link is not working in Wishlist grid(Move all products to cart is removed and delete all works now)
+
+* #150 - [fixed] If currency changes on store front then on admin panel in Order Grid currency changes according to store front
+
+* [fixes] More ACL added.
+
+* [feature] Paypal integration.
+
+* [feature] Newsletter subscription.
+
+* [feature] Email Verification for customers.
+
+* [feature] News letter grid for Admin.
+
+
 ## **v0.1.1(13th of November, 2018)** - *Release*
 
 * #94 - [fixed] Sign-in page shows signup text(@prashant-webkul)
