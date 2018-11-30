@@ -76,24 +76,18 @@ default.
 
 ### 4. Installation:
 
-**1. Run the Command**
+**Run these Commands Below**
 ~~~
 php artisan migrate
 ~~~
-
-**2. Run the Command**
 ~~~
 php artisan db:seed
 ~~~
-
-**3. Run the Command**
 ~~~
 php artisan vendor:publish
 
 -> Press 0 and then press enter to publish all assets and configurations.
 ~~~
-
-**4. Run the Command**
 ```
 php artisan storage:link
 ```
