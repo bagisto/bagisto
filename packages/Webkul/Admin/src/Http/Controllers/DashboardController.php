@@ -211,6 +211,7 @@ class DashboardController extends Controller
             ->where('category_translations.locale', app()->getLocale())
             ->where('order_items.created_at', '>=', $this->startDate)
             ->where('order_items.created_at', '<=', $this->endDate)
+            ->where('order_items.qty_ordered', '>', 0)
             ->addSelect(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
             ->addSelect(DB::raw('COUNT(products.id) as total_products'))
             ->addSelect('order_items.id', 'categories.id as category_id', 'category_translations.name')
