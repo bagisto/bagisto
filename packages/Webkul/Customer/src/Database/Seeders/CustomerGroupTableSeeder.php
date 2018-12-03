@@ -14,7 +14,7 @@ class CustomerGroupTableSeeder extends Seeder
         DB::table('customer_groups')->insert([
             'id' => 1,
             'name' => 'General',
-            'is_user_defined' => 1,
+            'is_user_defined' => 0,
         ], [
             'id' => 2,
             'name' => 'Wholesale',

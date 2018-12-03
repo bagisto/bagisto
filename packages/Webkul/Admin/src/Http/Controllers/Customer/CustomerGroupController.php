@@ -75,7 +75,11 @@ class CustomerGroupController extends Controller
             'name' => 'string|required',
         ]);
 
-        $this->customerGroup->create(request()->all());
+        $data = request()->all();
+
+        $data['is_user_defined'] = 1;
+
+        $this->customerGroup->create($data);
 
         session()->flash('success', 'Customer Group created successfully.');
 
@@ -125,22 +129,12 @@ class CustomerGroupController extends Controller
     {
         $group = $this->customerGroup->findOneByField('id', $id);
 
-        $checked = false;
+        if($group->is_user_defined == 0) {
+            session()->flash('warning', 'Cannot delete the default group');
+        } else {
+            session()->flash('success', 'Customer Group deleted successfully');
 
-        if($group->is_user_defined == 1) {
-            $checked = true;
-
-            session()->flash('warning', 'Cannot delete the last customer group');
-        }
-
-        if(!$check) {
-            if(count($this->customerGroup->all()) == 1) {
-                session()->flash('warning', 'Cannot delete the last customer group');
-            } else {
-                session()->flash('success', 'Customer Group deleted successfully');
-
-                $this->customerGroup->delete($id);
-            }
+            $this->customerGroup->delete($id);
         }
 
         return redirect()->back();
