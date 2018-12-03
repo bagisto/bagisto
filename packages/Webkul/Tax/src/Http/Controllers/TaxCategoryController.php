@@ -144,21 +144,22 @@ class TaxCategoryController extends Controller
         ]);
 
         $data = request()->input();
+        
+        $taxCategory = $this->taxCategory->update($data, $id);
 
-        if($taxCategory = $this->taxCategory->update($data, $id)) {
-            $taxRates = $data['taxrates'];
-
-            //attach the categories in the tax map table
-            $this->taxCategory->attachOrDetach($taxCategory, $taxRates);
-
-            session()->flash('success', trans('admin::app.settings.tax-categories.update-success'));
-
-            return redirect()->route($this->_config['redirect']);
-        } else {
+        if(!$taxCategory) {
             session()->flash('error', trans('admin::app.settings.tax-categories.update-error'));
-
             return redirect()->back();
         }
+        
+        $taxRates = $data['taxrates'];
+
+        //attach the categories in the tax map table
+        $this->taxCategory->attachOrDetach($taxCategory, $taxRates);
+
+        session()->flash('success', trans('admin::app.settings.tax-categories.update-success'));
+
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
