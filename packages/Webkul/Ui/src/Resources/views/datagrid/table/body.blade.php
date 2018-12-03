@@ -8,26 +8,39 @@
     @endif
     @foreach ($results as $result)
     <tr>
-        <td class="">
+        @if(count($massoperations))
+        <td>
             <span class="checkbox">
                 <input type="checkbox" class="indexers" id="{{ $result->id }}" name="checkbox[]">
                 <label class="checkbox-view" for="checkbox1"></label>
             </span>
         </td>
+        @endif
         @foreach ($columns as $column)
             @if(isset($column->closure))
                 @if($column->closure == true)
-                    <td class="">{!! $column->render($result) !!}</td>
+                    <td>{!! $column->render($result) !!}</td>
                 @endif
             @else
-                <td class="">{{ $column->render($result) }}</td>
+                <td>{{ $column->render($result) }}</td>
             @endif
         @endforeach
         @if(count($actions))
         <td class="action">
             @foreach($actions as $action)
-                <a @if($action['type'] == "Edit") href="{{ url()->current().'/edit/'.$result->id }}" @elseif($action['type'] == "View") href="{{ url()->current().'/view/'.$result->id }}" @elseif($action['type']=="Delete") href="{{ url()->current().'/delete/'.$result->id }}" @endif  class="Action-{{ $action['type'] }}" id="{{ $result->id }}" onclick="return confirm_click('{{ $action['confirm_text'] }}');">
-                    <i class="{{ $action['icon'] }}"></i>
+                <a
+                    href="{{ route($action['route'], $result->id) }}"
+                    class="Action-{{ $action['type'] }}"
+                    id="{{ $result->id }}"
+                    @if(isset($action['confirm_text']))
+                        onclick="return confirm_click('{{ $action['confirm_text'] }}');"
+                    @endif
+                    >
+                    <i
+                    @if(isset($action['icon-alt']))
+                        title="{{ $action['icon-alt'] }}"
+                    @endif
+                    class="{{ $action['icon'] }}"></i>
                 </a>
             @endforeach
         </td>

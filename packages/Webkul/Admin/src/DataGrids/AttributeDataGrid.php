@@ -48,7 +48,7 @@ class AttributeDataGrid
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
-                    'route' => 'admin.catalog.attributes.edit',
+                    'route' => 'admin.catalog.attributes.delete',
                     'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],

@@ -42,12 +42,12 @@ class InventorySourcesDataGrid
             'actions' => [
                 [
                     'type' => 'Edit',
-                    'route' => route('admin.datagrid.edit'),
+                    'route' => 'admin.inventory_sources.edit',
                     'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
-                    'route' => route('admin.datagrid.delete'),
+                    'route' => 'admin.inventory_sources.delete',
                     'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],

@@ -4,7 +4,9 @@ return [
     'common' => [
         'no-result-found' => 'We could not find any records.',
         'country' => 'Country',
-        'state' => 'State'
+        'state' => 'State',
+        'true' => 'True',
+        'false' => 'False'
     ],
     'dashboard' => [
         'title' => 'Dashboard',
@@ -507,10 +509,6 @@ return [
             'update-error' => 'Error! Tax Rate Cannot Be Updated',
             'delete' => 'Tax Rate Deleted Successfully',
             'atleast-one' => 'Cannot Delete Last Tax Rate'
-        ],
-
-        'subscribers' => [
-            'title' => 'News Letter Subscribers'
         ]
     ],
 
@@ -549,6 +547,15 @@ return [
             'rating' => 'Rating',
             'status' => 'Status',
             'comment' => 'Comment'
+        ],
+        'subscribers' => [
+            'title' => 'News Letter Subscribers',
+            'title-edit' => 'Edit News Letter Subscriber',
+            'email' => 'Email',
+            'is_subscribed' => 'Subscribed',
+            'edit-btn-title' => 'Update Subscriber',
+            'update-success' => 'You updated subscriber',
+            'update-failed' => 'Error! You cannot unsubscribed the subscriber'
         ]
     ],
 

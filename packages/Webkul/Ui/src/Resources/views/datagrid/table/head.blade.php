@@ -1,4 +1,5 @@
 <thead>
+    @if(count($massoperations))
     <tr class="mass-action" style="display: none; height:63px;">
         <th colspan="{{ count($columns)+1 }}" style="width: 100%;">
             <div class="mass-action-wrapper">
@@ -70,13 +71,16 @@
             </div>
         </th>
     </tr>
+    @endif
     <tr class="table-grid-header">
+        @if(count($massoperations))
         <th>
             <span class="checkbox">
                 <input type="checkbox" id="mastercheckbox">
                 <label class="checkbox-view" for="checkbox"></label>
             </span>
         </th>
+        @endif
         @foreach ($columns as $column)
             @if($column->sortable == "true")
                 <th class="grid_head sortable"

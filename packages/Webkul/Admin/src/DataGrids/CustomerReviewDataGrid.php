@@ -7,13 +7,13 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
 
 
 /**
- * Review DataGrid
+ * CustomerReview DataGrid
  *
  * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com> @rahul-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 
-class ProductReviewDataGrid
+class CustomerReviewDataGrid
 {
     /**
      * The ProductReviewDataGrid
@@ -23,7 +23,7 @@ class ProductReviewDataGrid
      * for Reviews
      */
 
-    public function createProductReviewDataGrid()
+    public function createCustomerReviewDataGrid()
     {
 
             return DataGrid::make([
@@ -45,12 +45,12 @@ class ProductReviewDataGrid
             'actions' => [
                 [
                     'type' => 'Edit',
-                    'route' => route('admin.datagrid.delete'),
+                    'route' => 'admin.customer.review.edit',
                     'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
-                    'route' => route('admin.datagrid.delete'),
+                    'route' => 'admin.customer.review.delete',
                     'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
@@ -176,6 +176,6 @@ class ProductReviewDataGrid
 
     public function render()
     {
-        return $this->createProductReviewDataGrid()->render();
+        return $this->createCustomerReviewDataGrid()->render();
     }
 }

@@ -26,7 +26,12 @@ class CurrencyRepository extends Repository
         if($this->model->count() == 1) {
             return false;
         } else {
-            $this->currency->delete($id);
+            if($this->model->destroy($id)) {
+                return true;
+            } else {
+                return false;
+            }
+
         }
     }
 }
