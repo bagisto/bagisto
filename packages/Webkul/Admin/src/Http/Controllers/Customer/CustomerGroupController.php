@@ -123,14 +123,24 @@ class CustomerGroupController extends Controller
      */
     public function destroy($id)
     {
-        $group = $this->customerGroup->findOneWhere(['id'=>$id]);
+        $group = $this->customerGroup->findOneByField('id', $id);
 
-        if(!$group->is_user_defined) {
-            session()->flash('error', 'This Customer Group can not be deleted');
-        } else {
-            $this->customerGroup->delete($id);
+        $checked = false;
 
-            session()->flash('success', 'Customer Group deleted successfully.');
+        if($group->is_user_defined == 1) {
+            $checked = true;
+
+            session()->flash('warning', 'Cannot delete the last customer group');
+        }
+
+        if(!$check) {
+            if(count($this->customerGroup->all()) == 1) {
+                session()->flash('warning', 'Cannot delete the last customer group');
+            } else {
+                session()->flash('success', 'Customer Group deleted successfully');
+
+                $this->customerGroup->delete($id);
+            }
         }
 
         return redirect()->back();
