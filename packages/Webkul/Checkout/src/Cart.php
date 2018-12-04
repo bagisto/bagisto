@@ -185,9 +185,7 @@ class Cart {
                 $result = $this->createItem($id, $data);
             }
 
-            session()->flash('success', trans('shop::checkout.cart.success'));
-
-            return true;
+            return $result;
         } else {
             return $this->create($id, $data);
         }
@@ -696,10 +694,14 @@ class Cart {
      */
     public function collectTotals()
     {
+        $validated = $this->validateItems();
+
+        if(!$validated) {
+            return false;
+        }
+
         if(!$cart = $this->getCart())
             return false;
-
-        $this->validateItems();
 
         $this->calculateItemsTax();
 
@@ -745,11 +747,15 @@ class Cart {
     {
         $cart = $this->getCart();
 
+        if(!$cart) {
+            return false;
+        }
+
         //rare case of accident-->used when there are no items.
         if(count($cart->items) == 0) {
             $this->cart->delete($cart->id);
 
-            return redirect()->route('shop.home.index');
+            return false;
         } else {
             $items = $cart->items;
 
@@ -1082,6 +1088,10 @@ class Cart {
 
                 return $result;
             } else {
+                $data['product'] = $id;
+                $data['is_configurable'] = false;
+                $data['quantity'] = 1;
+
                 $result = $this->add($id, $data);
 
                 return $result;
