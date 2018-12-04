@@ -29,14 +29,16 @@
                         @php
                             $image = $productImageHelper->getProductBaseImage($item->product);
                         @endphp
-                        <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}" title="{{ $item->product->name }}">
                             <img class="media" src="{{ $image['small_image_url'] }}" />
-                        </a>
+                        {{-- <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}" title="{{ $item->product->name }}">
+
+                        </a> --}}
                         <div class="info">
                             <div class="product-name">
-                                <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}" title="{{ $item->product->name }}">
-                                    {{$item->product->name}}
-                                </a>
+                                {{$item->product->name}}
+                                {{-- <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}" title="{{ $item->product->name }}">
+
+                                </a> --}}
                             </div>
                             @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
                             <span class="stars" style="display: inline">

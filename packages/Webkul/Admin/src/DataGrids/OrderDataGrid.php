@@ -43,9 +43,10 @@ class OrderDataGrid
             'actions' => [
                 [
                     'type' => 'View',
-                    'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to view this record?',
-                    'icon' => 'icon pencil-lg-icon',
+                    'route' => 'admin.sales.orders.view',
+                    // 'confirm_text' => 'Do you really want to view this record?',
+                    'icon' => 'icon eye-icon',
+                    'icon-alt' => 'View'
                 ],
                 // [
                 //     'type' => 'Delete',

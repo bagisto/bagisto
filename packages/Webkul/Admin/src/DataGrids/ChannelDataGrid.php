@@ -44,12 +44,12 @@ class ChannelDataGrid
             'actions' => [
                 [
                     'type' => 'Edit',
-                    'route' => route('admin.datagrid.delete'),
+                    'route' => 'admin.channels.edit',
                     'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
-                    'route' => route('admin.datagrid.delete'),
+                    'route' => 'admin.channels.delete',
                     'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
