@@ -793,6 +793,8 @@ class DataGrid
 
         return view('ui::datagrid.index', [
             'css' => $this->css,
+            'table' => $this->table,
+            'name' => $this->name,
             'results' => $this->results,
             'columns' => $this->columns,
             'filterable' =>$this->filterable,

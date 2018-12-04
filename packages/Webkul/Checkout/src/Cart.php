@@ -409,12 +409,18 @@ class Cart {
     public function mergeCart()
     {
         if(session()->has('cart')) {
-            $cart = $this->cart->findOneByField('customer_id', auth()->guard('customer')->user()->id);
+            $cart = $this->cart->findWhere(['customer_id' => auth()->guard('customer')->user()->id, 'is_active' => 1]);
+
+            if($cart->count()) {
+                $cart = $cart->first();
+            } else {
+                $cart = false;
+            }
 
             $guestCart = session()->get('cart');
 
             //when the logged in customer is not having any of the cart instance previously and are active.
-            if(!isset($cart)) {
+            if(!$cart) {
                 $guestCart->update([
                     'customer_id' => auth()->guard('customer')->user()->id,
                     'is_guest' => 0,

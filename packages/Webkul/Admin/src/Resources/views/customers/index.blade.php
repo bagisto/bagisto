@@ -4,8 +4,6 @@
     {{ __('admin::app.customers.customers.title') }}
 @stop
 
-@inject('customer','Webkul\Admin\DataGrids\CustomerDataGrid')
-
 @section('content')
 
     <div class="content">
@@ -14,9 +12,9 @@
                 <h1>{{ __('admin::app.customers.customers.title') }}</h1>
             </div>
             <div class="page-action">
-                <div class="export">
+                <div class="export" style="display: inline-flex; cursor: pointer; position: absolute; right: 13%">
                     <i class="export-icon"></i>
-                    <span @click="showModal('downloadDataGrid')">
+                    <span @click="showModal('downloadDataGrid')" style="margin-top: 8px; margin-left: 5px">
                         {{ __('admin::app.export.export') }}
                     </span>
                 </div>
@@ -29,6 +27,7 @@
 
 
         <div class="page-content">
+            @inject('customer','Webkul\Admin\DataGrids\CustomerDataGrid')
             {!! $customer->render() !!}
         </div>
     </div>

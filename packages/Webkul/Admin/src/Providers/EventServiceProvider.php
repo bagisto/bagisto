@@ -97,6 +97,12 @@ class EventServiceProvider extends ServiceProvider
             'sort' => 3,
             'icon-class' => '',
         ], [
+            'key' => 'customers.subscribers',
+            'name' => 'Newsletter Subscription',
+            'route' => 'admin.customers.subscribers.index',
+            'sort' => 4,
+            'icon-class' => '',
+        ], [
             'key' => 'configuration',
             'name' => 'Configure',
             'route' => 'admin.account.edit',
@@ -200,13 +206,7 @@ class EventServiceProvider extends ServiceProvider
             'route' => 'admin.tax-rates.index',
             'sort' => 2,
             'icon-class' => '',
-        ], [
-            'key' => 'settings.subscribers',
-            'name' => 'Newsletter Subscription',
-            'route' => 'admin.subscribers.index',
-            'sort' => 9,
-            'icon-class' => '',
-        ],
+        ]
     ];
 
     /**

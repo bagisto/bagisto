@@ -32,23 +32,23 @@ class AttributeDataGrid
             'aliased' => true,
 
             'massoperations' => [
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
+                [
+                    'route' => route('admin.catalog.attributes.massdelete'),
+                    'method' => 'DELETE',
+                    'label' => 'Delete',
+                    'type' => 'button',
+                ]
             ],
 
             'actions' => [
                 [
                     'type' => 'Edit',
-                    'route' => route('admin.datagrid.delete'),
+                    'route' => 'admin.catalog.attributes.edit',
                     'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
-                    'route' => route('admin.datagrid.delete'),
+                    'route' => 'admin.catalog.attributes.delete',
                     'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
@@ -57,7 +57,6 @@ class AttributeDataGrid
             'join' => [],
 
             //use aliasing on secodary columns if join is performed
-
             'columns' => [
                 [
                     'name' => 'id',

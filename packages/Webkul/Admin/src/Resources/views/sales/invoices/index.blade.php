@@ -4,19 +4,17 @@
     {{ __('admin::app.sales.invoices.title') }}
 @stop
 
-@inject('orderInvoicesGrid', 'Webkul\Admin\DataGrids\OrderInvoicesDataGrid')
-
 @section('content')
-    <div class="content full-page">
+    <div class="content">
         <div class="page-header">
             <div class="page-title">
                 <h1>{{ __('admin::app.sales.invoices.title') }}</h1>
             </div>
 
             <div class="page-action">
-                <div class="export">
+                <div class="export" style="display: flex; cursor: pointer">
                     <i class="export-icon"></i>
-                    <span @click="showModal('downloadDataGrid')">
+                    <span @click="showModal('downloadDataGrid')" style="margin-top: 8px;margin-right: 5px; margin-left: 5px">
                         {{ __('admin::app.export.export') }}
                     </span>
                 </div>
@@ -24,6 +22,7 @@
         </div>
 
         <div class="page-content">
+            @inject('orderInvoicesGrid', 'Webkul\Admin\DataGrids\OrderInvoicesDataGrid')
             {!! $orderInvoicesGrid->render() !!}
         </div>
     </div>

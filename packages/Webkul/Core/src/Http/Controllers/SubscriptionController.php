@@ -47,6 +47,41 @@ class SubscriptionController extends Controller
     }
 
     /**
+     * To unsubscribe the user without deleting the resource of the subscribed user
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function edit($id) {
+        $subscriber = $this->subscribers->findOneByField('id', $id);
+
+        return view($this->_config['view'])->with('subscriber', $subscriber);
+    }
+
+    /**
+     * To unsubscribe the user without deleting the resource of the subscribed user
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function update($id) {
+        $data = request()->all();
+
+        $subscriber = $this->subscribers->findOneByField('id', $id);
+
+        $result = $subscriber->update($data);
+
+        if($result)
+            session()->flash('success', trans('admin::app.settings.subscribers.update-success'));
+        else
+            session()->flash('error', trans('admin::app.settings.subscribers.update-failed'));
+
+        return redirect()->route($this->_config['redirect']);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
