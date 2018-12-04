@@ -14,14 +14,12 @@
             </div>
 
             <div class="page-action">
-
                 <div class="export">
                     <i class="export-icon"></i>
                     <span @click="showModal('downloadDataGrid')">
                         {{ __('admin::app.export.export') }}
                     </span>
                 </div>
-
             </div>
         </div>
 
