@@ -4,11 +4,7 @@ namespace Webkul\User\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Route;
-=======
-use Route;
->>>>>>> a60ca52eb69bf055764c4f182e32adc54b39a2a3
 
 class Bouncer
 {
