@@ -749,8 +749,6 @@ class DataGrid
                 $this->getQueryWithFilters();
             }
 
-            $this->results = $this->query->get();
-
             $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
 
             return $this->results;
@@ -767,8 +765,6 @@ class DataGrid
                 $this->getQueryWithFilters();
             }
 
-            $this->results = $this->query->get();
-
             $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
 
             return $this->results;
@@ -782,13 +778,14 @@ class DataGrid
      *
      * @return view
      */
-
     public function render()
     {
         $this->getDbQueryResults();
 
         return view('ui::datagrid.index', [
             'css' => $this->css,
+            'table' => $this->table,
+            'name' => $this->name,
             'results' => $this->results,
             'columns' => $this->columns,
             'filterable' =>$this->filterable,

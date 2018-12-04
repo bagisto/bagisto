@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Core\Repositories;
- 
+
 use Webkul\Core\Eloquent\Repository;
 
 /**
@@ -20,5 +20,18 @@ class CurrencyRepository extends Repository
     function model()
     {
         return 'Webkul\Core\Models\Currency';
+    }
+
+    public function delete($id) {
+        if($this->model->count() == 1) {
+            return false;
+        } else {
+            if($this->model->destroy($id)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }
     }
 }

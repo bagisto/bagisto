@@ -1,6 +1,7 @@
 <thead>
-    {{-- <tr class="mass-action" style="display: none; height:63px;">
-        <th colspan="{{ count($columns)+1 }}">
+    @if(count($massoperations))
+    <tr class="mass-action" style="display: none; height:63px;">
+        <th colspan="{{ count($columns)+1 }}" style="width: 100%;">
             <div class="mass-action-wrapper">
 
                 <span class="massaction-remove">
@@ -11,8 +12,8 @@
                     @if($massoperation['type'] == "button")
 
                     <form onsubmit="return confirm('Are You Sure?');"
-                        @if(strtoupper($massoperation[ 'method'])=="GET" || strtoupper($massoperation['method'])=="POST" )
-                            method="{{ strtoupper($massoperation['method']) }}"
+                        @if(strtoupper($massoperation['method']) == "GET")
+                            method="GET"
                         @else
                             method="POST"
                         @endif
@@ -26,6 +27,8 @@
                         @method($massoperation['method'])
 
                         @endif
+
+                        <input type="hidden" value="{{ $table }}" name="table_name">
 
                         <input type="hidden" id="indexes" name="indexes" value="">
 
@@ -67,14 +70,17 @@
                 @endforeach
             </div>
         </th>
-    </tr> --}}
+    </tr>
+    @endif
     <tr class="table-grid-header">
-        {{-- <th>
+        @if(count($massoperations))
+        <th>
             <span class="checkbox">
                 <input type="checkbox" id="mastercheckbox">
                 <label class="checkbox-view" for="checkbox"></label>
             </span>
-        </th> --}}
+        </th>
+        @endif
         @foreach ($columns as $column)
             @if($column->sortable == "true")
                 <th class="grid_head sortable"

@@ -125,14 +125,47 @@ class CurrencyController extends Controller
      */
     public function destroy($id)
     {
-        if($this->currency->count() == 1) {
-            session()->flash('error', 'At least one currency is required.');
-        } else {
-            $this->currency->delete($id);
+        $result = $this->currency->delete($id);
 
+        if($result)
             session()->flash('success', 'Currency deleted successfully.');
-        }
+        else
+            session()->flash('error', 'At least one currency is required.');
 
         return redirect()->back();
+    }
+
+    /**
+     * Remove the specified resources from database
+     *
+     * @return response \Illuminate\Http\Response
+     */
+    public function massDestroy() {
+        $suppressFlash = false;
+
+        if(request()->isMethod('delete')) {
+            $indexes = explode(',', request()->input('indexes'));
+
+            foreach($indexes as $key => $value) {
+                try {
+                    $this->currency->delete($value);
+                } catch(\Exception $e) {
+                    $suppressFlash = true;
+
+                    continue;
+                }
+            }
+
+            if(!$suppressFlash)
+                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'currencies']));
+            else
+                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'currencies']));
+
+            return redirect()->back();
+        } else {
+            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+
+            return redirect()->back();
+        }
     }
 }

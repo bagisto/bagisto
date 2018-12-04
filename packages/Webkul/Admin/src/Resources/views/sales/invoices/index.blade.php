@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-    <div class="content full-page">
+    <div class="content">
         <div class="page-header">
             <div class="page-title">
                 <h1>{{ __('admin::app.sales.invoices.title') }}</h1>

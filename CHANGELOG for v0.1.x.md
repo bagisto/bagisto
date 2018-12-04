@@ -4,6 +4,14 @@
 
 ## **v0.1.2(30th of November, 2018)** - *Release*
 
+* [feature] Paypal integration for online payments
+
+* [feature] Newsletter subscription
+
+* [feature] Email Verification for customers
+
+* [feature] News letter grid for Admin
+
 * #185 - [fixed] Search not working in responsive mode
 
 * #187 - [fixed] We can add column "Group Name" instead of Group Id and also add this column in filter in Customers Grid
@@ -125,14 +133,6 @@
 * #150 - [fixed] If currency changes on store front then on admin panel in Order Grid currency changes according to store front
 
 * [fixes] More ACL added.
-
-* [feature] Paypal integration.
-
-* [feature] Newsletter subscription.
-
-* [feature] Email Verification for customers.
-
-* [feature] News letter grid for Admin.
 
 
 ## **v0.1.1(13th of November, 2018)** - *Release*

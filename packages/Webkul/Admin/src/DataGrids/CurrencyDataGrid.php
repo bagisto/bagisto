@@ -24,7 +24,7 @@ class CurrencyDataGrid
     public function createCurrencyDataGrid()
     {
 
-            return DataGrid::make([
+        return DataGrid::make([
             'name' => 'Currencies',
             'table' => 'currencies',
             'select' => 'id',
@@ -32,23 +32,23 @@ class CurrencyDataGrid
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
+                [
+                    'route' => route('admin.currencies.massdelete'),
+                    'method' => 'DELETE',
+                    'label' => 'Delete',
+                    'type' => 'button',
+                ]
             ],
 
             'actions' => [
                 [
                     'type' => 'Edit',
-                    'route' => route('admin.datagrid.delete'),
-                    'confirm_text' => 'Do you really want to edit this record?',
+                    'route' => 'admin.currencies.edit',
+                    // 'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
                 ], [
                     'type' => 'Delete',
-                    'route' => route('admin.datagrid.delete'),
+                    'route' => 'admin.currencies.delete',
                     'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
                 ],
@@ -65,9 +65,7 @@ class CurrencyDataGrid
             ],
 
             //use aliasing on secodary columns if join is performed
-
             'columns' => [
-
                 [
                     'name' => 'id',
                     'alias' => 'currencyId',
