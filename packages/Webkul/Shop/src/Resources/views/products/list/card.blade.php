@@ -1,3 +1,5 @@
+{!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $product]) !!}
+
 <div class="product-card">
 
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
@@ -60,3 +62,5 @@
     </div>
 
 </div>
+
+{!! view_render_event('bagisto.shop.products.list.card.after', ['product' => $product]) !!}

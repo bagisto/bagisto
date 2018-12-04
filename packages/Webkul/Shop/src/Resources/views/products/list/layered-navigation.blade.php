@@ -2,7 +2,11 @@
 
 <div class="layered-filter-wrapper">
 
+    {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
+
     <layered-navigation></layered-navigation>
+
+    {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
 
 </div>
 

@@ -3,17 +3,30 @@
     <i class="icon icon-arrow-down right" id="down-icon"></i>
 </div>
 
-<ul class="account-side-menu">
-    @foreach($menu->items as $menuItem)
-        <li class="menu-item {{ $menu->getActive($menuItem) }}">
-            <a href="{{ $menuItem['url'] }}">
-                {{ $menuItem['name'] }}
-            </a>
 
-            <i class="icon angle-right-icon"></i>
-        </li>
+<div class="sidebar">
+    @foreach($menu->items as $menuItem)
+        <div class="menu-block">
+            <div class="menu-block-title">
+                {{ $menuItem['name'] }}
+            </div>
+
+            <div class="menu-block-content">
+                <ul class="menubar">
+                    @foreach($menuItem['children'] as $subMenuItem)
+                        <li class="menu-item {{ $menu->getActive($subMenuItem) }}">
+                            <a href="{{ $subMenuItem['url'] }}">
+                                {{ $subMenuItem['name'] }}
+                            </a>
+
+                            <i class="icon angle-right-icon"></i>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     @endforeach
-</ul>
+</div>
 
 @push('scripts')
 <script>

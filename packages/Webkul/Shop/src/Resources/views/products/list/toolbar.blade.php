@@ -1,5 +1,7 @@
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
+{!! view_render_event('bagisto.shop.products.list.toolbar.before') !!}
+
 <div class="top-toolbar mb-35">
 
     <div class="page-info">
@@ -74,6 +76,8 @@
     </div>
 
 </div>
+
+{!! view_render_event('bagisto.shop.products.list.toolbar.after') !!}
 
 
 <div class="responsive-layred-filter mb-20">

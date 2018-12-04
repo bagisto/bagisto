@@ -10,12 +10,16 @@
         {{ __('shop::app.customer.signup-text.account_exists') }} - <a href="{{ route('customer.session.index') }}">{{ __('shop::app.customer.signup-text.title') }}</a>
     </div>
 
+    {!! view_render_event('bagisto.shop.customers.signup.before') !!}
+
     <form method="post" action="{{ route('customer.register.create') }}" @submit.prevent="onSubmit">
 
         {{ csrf_field() }}
 
         <div class="login-form">
             <div class="login-text">{{ __('shop::app.customer.signup-form.title') }}</div>
+
+            {!! view_render_event('bagisto.shop.customers.signup_form_controls.before') !!}
 
             <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
                 <label for="first_name" class="required">{{ __('shop::app.customer.signup-form.firstname') }}</label>
@@ -57,6 +61,9 @@
                 </span>
                 <span class="control-error" v-if="errors.has('agreement')">@{{ errors.first('agreement') }}</span>
             </div> --}}
+
+            {!! view_render_event('bagisto.shop.customers.signup_form_controls.after') !!}
+            
             <div class="control-group" :class="[errors.has('agreement') ? 'has-error' : '']">
 
                 <input type="checkbox" id="checkbox2" name="agreement" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.agreement') }}&quot;">
@@ -70,5 +77,7 @@
 
         </div>
     </form>
+
+    {!! view_render_event('bagisto.shop.customers.signup.after') !!}
 </div>
 @endsection

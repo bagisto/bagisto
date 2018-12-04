@@ -13,6 +13,8 @@
     @inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
 
     <div class="main">
+        {!! view_render_event('bagisto.shop.products.index.before', ['category' => $category]) !!}
+
         <div class="category-container">
 
             @include ('shop::products.list.layered-navigation')
@@ -48,9 +50,13 @@
                         </div>
                     @endif
 
+                    {!! view_render_event('bagisto.shop.products.index.pagination.before') !!}
+
                     <div class="bottom-toolbar">
                         {{ $products->appends(request()->input())->links() }}
                     </div>
+
+                    {!! view_render_event('bagisto.shop.products.index.pagination.after') !!}
 
                 @else
 
@@ -65,6 +71,8 @@
                 @endif
             </div>
         </div>
+
+        {!! view_render_event('bagisto.shop.products.index.after', ['category' => $category]) !!}
     </div>
 @stop
 

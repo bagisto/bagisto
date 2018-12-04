@@ -8,7 +8,9 @@
     @if(!$products)
         {{  __('shop::app.search.no-results') }}
     @endif
+
     <div class="main mb-30" style="min-height: 27vh;">
+    
         @if($products->isEmpty())
             <div class="search-result-status">
                 <h2>{{ __('shop::app.products.whoops') }}</h2>
@@ -34,4 +36,5 @@
             </div>
         @endif
     </div>
+    
 @endsection

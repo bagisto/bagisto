@@ -19,10 +19,14 @@
                 <span></span>
             </div>
 
+            {!! view_render_event('bagisto.shop.customers.account.profile.edit.before', ['customer' => $customer]) !!}
+
             <form method="post" action="{{ route('customer.profile.edit') }}">
 
                 <div class="edit-form">
                     @csrf
+
+                    {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.before', ['customer' => $customer]) !!}
 
                     <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
                         <label for="first_name" class="required">{{ __('shop::app.customer.account.profile.fname') }}</label>
@@ -76,12 +80,16 @@
                         <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
                     </div>
 
+                    {!! view_render_event('bagisto.shop.customers.account.profile.edit_form_controls.after', ['customer' => $customer]) !!}
+
                     <div class="button-group">
                         <input class="btn btn-primary btn-lg" type="submit" value="{{ __('shop::app.customer.account.profile.submit') }}">
                     </div>
                 </div>
 
             </form>
+
+            {!! view_render_event('bagisto.shop.customers.account.profile.edit.after', ['customer' => $customer]) !!}
 
         </div>
 
