@@ -26,6 +26,8 @@
             <div class="horizontal-rule"></div>
         </div>
 
+        {!! view_render_event('bagisto.shop.customers.account.address.list.before', ['addresses' => $addresses]) !!}
+
         <div class="account-table-content">
             @if($addresses->isEmpty())
                 <div>{{ __('shop::app.customer.account.address.index.empty') }}</div>
@@ -72,6 +74,8 @@
                 </div>
             @endif
         </div>
+
+        {!! view_render_event('bagisto.shop.customers.account.address.list.after', ['addresses' => $addresses]) !!}
     </div>
 </div>
 @endsection

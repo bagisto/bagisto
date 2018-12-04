@@ -1,3 +1,5 @@
+{!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
+
 <div class="product-price">
 
     @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
@@ -29,3 +31,5 @@
     @endif
 
 </div>
+
+{!! view_render_event('bagisto.shop.products.price.after', ['product' => $product]) !!}

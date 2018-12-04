@@ -1,3 +1,5 @@
+{!! view_render_event('bagisto.shop.products.view.up-sells.after', ['product' => $product]) !!}
+
 @if ($product->up_sells()->count())
     <div class="attached-products-wrapper">
 
@@ -18,3 +20,5 @@
 
     </div>
 @endif
+
+{!! view_render_event('bagisto.shop.products.view.up-sells.after', ['product' => $product]) !!}

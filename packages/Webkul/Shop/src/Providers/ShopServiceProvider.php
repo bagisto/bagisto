@@ -84,15 +84,17 @@ class ShopServiceProvider extends ServiceProvider
         });
 
         Event::listen('customer.menu.build', function ($menu) {
-            $menu->add('profile', 'Profile', 'customer.profile.index', 1);
+            $menu->add('account', 'My Account', 'customer.profile.index', 1);
 
-            $menu->add('orders', 'Orders', 'customer.orders.index', 2);
+            $menu->add('account.profile', 'Profile', 'customer.profile.index', 1);
 
-            $menu->add('address', 'Address', 'customer.address.index', 3);
+            $menu->add('account.orders', 'Orders', 'customer.orders.index', 2);
 
-            $menu->add('reviews', 'Reviews', 'customer.reviews.index', 4);
+            $menu->add('account.address', 'Address', 'customer.address.index', 3);
 
-            $menu->add('wishlist', 'Wishlist', 'customer.wishlist.index', 5);
+            $menu->add('account.reviews', 'Reviews', 'customer.reviews.index', 4);
+
+            $menu->add('account.wishlist', 'Wishlist', 'customer.wishlist.index', 5);
         });
     }
 }

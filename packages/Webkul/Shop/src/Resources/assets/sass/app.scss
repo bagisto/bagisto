@@ -2805,54 +2805,60 @@ section.review {
     margin-top: 5.5%;
     margin-bottom: 5.5%;
 
-    .account-side-menu {
+    .sidebar {
         display: flex;
         flex-direction: column;
         align-content: center;
         justify-content: flex-start;
-        border: 1px solid $border-color;
         width: 25%;
         height: 100%;
-        color: $font-color-light;
-        position: relative;
+    }
 
-        li {
-            width: 95%;
-            height: 50px;
-            margin-left: 5%;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-            border-bottom: 1px solid $border-color;
-            text-align: center;
+    .menu-block {
 
-            a {
-                color: $other-font-color;
+        .menubar {
+            border: 1px solid $border-color;
+            color: $font-color-light;
+            position: relative;
+
+            li {
+                width: 95%;
+                height: 50px;
+                margin-left: 5%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                border-bottom: 1px solid $border-color;
+                text-align: center;
+
+                a {
+                    color: $other-font-color;
+                }
+
+                .icon {
+                    display: none;
+                    position: absolute;
+                    right: 12px;
+                }
             }
 
-            .icon {
-                display: none;
-                position: absolute;
-                right: 12px;
-            }
-        }
-
-        li:first-child {
-            border-top: none;
-        }
-
-        li:last-child {
-            border-bottom: none;
-        }
-
-        li.active {
-            a {
-                color: $brand-color;
+            li:first-child {
+                border-top: none;
             }
 
-            .icon {
-                display: inline-block;
+            li:last-child {
+                border-bottom: none;
+            }
+
+            li.active {
+                a {
+                    color: $brand-color;
+                }
+
+                .icon {
+                    display: inline-block;
+                }
             }
         }
     }

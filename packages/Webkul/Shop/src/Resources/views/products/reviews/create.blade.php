@@ -1,8 +1,11 @@
 @extends('shop::layouts.master')
+
 @section('page_title')
     {{ __('shop::app.reviews.add-review-page-title') }} - {{ $product->name }}
 @endsection
+
 @section('content-wrapper')
+
     <section class="review">
 
         {{-- <div class="category-breadcrumbs">
@@ -101,26 +104,29 @@
 
         </div>
     </section>
+    
 @endsection
 
 
 @push('scripts')
-<script>
 
-    function calculateRating(id){
+    <script>
 
-        var a=document.getElementById(id);
-        document.getElementById("rating").value = id;
+        function calculateRating(id){
 
-        for (let i=1 ; i <= 5 ; i++){
+            var a=document.getElementById(id);
+            document.getElementById("rating").value = id;
 
-            if(id >= i){
-                document.getElementById(i).style.color="#242424";
-            }else{
-                document.getElementById(i).style.color="#d4d4d4";
+            for (let i=1 ; i <= 5 ; i++){
+
+                if(id >= i){
+                    document.getElementById(i).style.color="#242424";
+                }else{
+                    document.getElementById(i).style.color="#d4d4d4";
+                }
             }
         }
-    }
 
-</script>
+    </script>
+
 @endpush

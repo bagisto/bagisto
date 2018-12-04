@@ -19,6 +19,8 @@
                 <span></span>
             </div>
 
+            {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
+
             <div class="sale-container">
 
                 <tabs>
@@ -489,6 +491,8 @@
                 </div>
 
             </div>
+
+            {!! view_render_event('bagisto.shop.customers.account.orders.view.after', ['order' => $order]) !!}
 
         </div>
 
