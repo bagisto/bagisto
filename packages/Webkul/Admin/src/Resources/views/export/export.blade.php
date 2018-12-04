@@ -1,8 +1,8 @@
 <table>
     <thead>
         <tr>
-            @foreach($header as $col)
-                <th> {{ $col}} </th>
+            @foreach ($columns as $column)
+                <th>{{ $column->label }}</th>
             @endforeach
         </tr>
     </thead>

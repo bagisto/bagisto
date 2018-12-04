@@ -125,7 +125,7 @@ class CustomerGroupController extends Controller
     {
         $group = $this->customerGroup->findOneWhere(['id'=>$id]);
 
-        if(!$group->is_user_defined) {
+        if($group->is_user_defined) {
             session()->flash('error', 'This Customer Group can not be deleted');
         } else {
             $this->customerGroup->delete($id);

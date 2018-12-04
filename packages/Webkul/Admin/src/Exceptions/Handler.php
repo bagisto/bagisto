@@ -54,13 +54,13 @@ class Handler extends ExceptionHandler
                         return response()->view('shop::errors.500', [], 500);
                 }
             }
-        } else if ($exception instanceof \ModelNotFoundException) {
+        } else if ($exception instanceof ModelNotFoundException) {
             if (strpos($_SERVER['REQUEST_URI'], 'admin') !== false){
                 return response()->view('admin::errors.404', [], 404);
             }else {
                 return response()->view('shop::errors.404', [], 404);
             }
-        } else if ($exception instanceof \PDOException) {
+        } else if ($exception instanceof PDOException) {
             if (strpos($_SERVER['REQUEST_URI'], 'admin') !== false){
                 return response()->view('admin::errors.500', [], 500);
             } else {

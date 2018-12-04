@@ -4,6 +4,8 @@
     {{ __('admin::app.customers.customers.title') }}
 @stop
 
+@inject('customer','Webkul\Admin\DataGrids\CustomerDataGrid')
+
 @section('content')
 
     <div class="content">
@@ -16,15 +18,18 @@
                     {{ __('admin::app.customers.customers.add-title') }}
                 </a>
 
-                <a href="{{ route('admin.customer.export') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.customers.customers.export') }}
-                </a>
+                <form method="POST" action="{{ route('admin.datagrid.export') }}">
+                    @csrf()
+                    <button type="submit" class="btn btn-lg btn-primary">
+                        {{ __('admin::app.customers.customers.export') }}
+                    </button>
+                    <input type="hidden" name="gridData" value="{{serialize($customer)}}">
+                </form>
             </div>
         </div>
 
 
         <div class="page-content">
-            @inject('customer','Webkul\Admin\DataGrids\CustomerDataGrid')
             {!! $customer->render() !!}
         </div>
     </div>
