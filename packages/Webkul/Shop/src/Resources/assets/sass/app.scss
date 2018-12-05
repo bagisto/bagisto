@@ -144,6 +144,13 @@ input {
     margin-top: 90px;
 }
 
+//pagination
+.pagination.shop{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
 
 //components
 .bold {

@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Pagination\Paginator;
 use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Theme;
 use Webkul\Shop\Http\Middleware\Currency;
@@ -40,6 +41,9 @@ class ShopServiceProvider extends ServiceProvider
         $this->composeView();
 
         $this->createCustomerMenu();
+
+        Paginator::defaultView('shop::partials.pagination');
+        Paginator::defaultSimpleView('shop::partials.pagination');
     }
 
     /**

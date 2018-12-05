@@ -39,7 +39,7 @@ class SearchByAttributeCriteria extends AbstractProduct implements CriteriaInter
 
         return $model
             ->leftJoin('product_attribute_values as pav', 'products.id', '=', 'pav.product_id')
-            ->where('attribute_id', '=', $attribute->id)
+            ->where('pav.attribute_id', '=', $attribute->id)
             ->where('products.parent_id', '=', null);
     }
 }

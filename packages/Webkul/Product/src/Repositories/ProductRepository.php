@@ -480,15 +480,12 @@ class ProductRepository extends Repository
      * @return Collection
      */
     public function searchProductByAttribute($term) {
-        // $findIn = $this->breakTheTerm($term);
-
+        $this->pushCriteria(app(ActiveProductCriteria::class));
         $this->pushCriteria(app(SearchByAttributeCriteria::class));
-        // $this->pushCriteria(app(SearchByCategoryCriteria::class));
 
         return $this->scopeQuery(function($query) use($term) {
             return $query->distinct()->addSelect('products.*')->where('pav.text_value', 'like', '%'.$term.'%');
-            // ->where('category_translations.name', 'like', '%'.'clothes'.'%');
-        })->get();
+        })->paginate(4);
     }
 
     /**

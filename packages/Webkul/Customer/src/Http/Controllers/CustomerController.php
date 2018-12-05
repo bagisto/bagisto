@@ -91,7 +91,6 @@ class CustomerController extends Controller
      */
     public function edit()
     {
-
         $id = auth()->guard('customer')->user()->id;
 
         $this->validate(request(), [
