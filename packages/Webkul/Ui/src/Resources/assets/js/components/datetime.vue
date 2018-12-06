@@ -16,9 +16,9 @@ export default {
 	},
 
 	data() {
-			return {
+		return {
 			datepicker: null
-			};
+		};
 	},
 
 	mounted() {

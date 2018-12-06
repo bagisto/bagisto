@@ -71,8 +71,12 @@
 
                                                 $disabled = true;
                                             } else {
-                                                if($attribute->is_required) {
+                                                if ($attribute->is_required) {
                                                     array_push($validations, 'required');
+                                                }
+
+                                                if ($attribute->type == 'price') {
+                                                    array_push($validations, 'decimal');
                                                 }
 
                                                 array_push($validations, $attribute->validation);

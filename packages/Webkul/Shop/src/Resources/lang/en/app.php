@@ -279,7 +279,7 @@ return [
         'newest-first' => 'Newest First',
         'oldest-first' => 'Oldest First',
         'cheapest-first' => 'Cheapest First',
-        'expansive-first' => 'Expansive First',
+        'expensive-first' => 'Expensive First',
         'show' => 'Show',
         'pager-info' => 'Showing :showing of :total Items',
         'description' => 'Description',

@@ -62,8 +62,7 @@
 
                             <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
                                 <label for="description" class="required">{{ __('admin::app.catalog.categories.description') }}</label>
-                                <textarea v-validate="'required'" class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">
-                                    {{ old('description') }}</textarea>
+                                <textarea v-validate="'required'" class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old('description') }}</textarea>
                                 <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                             </div>
 
