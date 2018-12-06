@@ -124,7 +124,7 @@
                             </div>
 
                             <div class="control-group">
-                                <?php $selectedValidation = old('input_validation') ?: $attribute->input_validation ?>
+                                <?php $selectedValidation = old('validation') ?: $attribute->validation ?>
                                 <label for="validation">{{ __('admin::app.catalog.attributes.input_validation') }}</label>
                                 <select class="control" id="validation" name="validation">
                                     <option value=""></option>
@@ -148,18 +148,6 @@
 
                     <accordian :title="'{{ __('admin::app.catalog.attributes.configuration') }}'" :active="true">
                         <div slot="body">
-
-                            <div class="control-group">
-                                <label for="status">{{ __('admin::app.catalog.attributes.status') }}</label>
-                                <select class="control" id="status" name="status">
-                                    <option value="1" {{ $attribute->status ? 'selected' : '' }}>
-                                        {{ __('admin::app.catalog.attributes.yes') }}
-                                    </option>
-                                    <option value="0" {{ $attribute->status ? '' : 'selected' }}>
-                                        {{ __('admin::app.catalog.attributes.no') }}
-                                    </option>
-                                </select>
-                            </div>
                         
                             <div class="control-group">
                                 <label for="value_per_locale">{{ __('admin::app.catalog.attributes.value_per_locale') }}</label>

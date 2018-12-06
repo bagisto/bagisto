@@ -16,7 +16,7 @@
 
                     <tr>
                         <td>{{ $attribute['label'] }}</td>
-                        <td> - {{ $attribute['value'] }}</td>
+                        <td>{{ $attribute['value'] }}</td>
                     </tr>
 
                 @endforeach

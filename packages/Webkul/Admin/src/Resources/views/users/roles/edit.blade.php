@@ -36,9 +36,7 @@
 
                             <div class="control-group">
                                 <label for="description">{{ __('admin::app.users.roles.description') }}</label>
-                                <textarea class="control" id="description" name="description">
-                                    {{ old('description') ?: $role->description }}
-                                </textarea>
+                                <textarea class="control" id="description" name="description">{{ old('description') ?: $role->description }}</textarea>
                             </div>
                         </div>
                     </accordian>
