@@ -80,7 +80,7 @@ class AttributeDataGrid
                 ], [
                     'name' => 'is_required',
                     'alias' => 'attributeIsRequired',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Required',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -149,6 +149,11 @@ class AttributeDataGrid
                     'alias' => 'attributeType',
                     'type' => 'string',
                     'label' => 'Type',
+                ], [
+                    'name' => 'is_required',
+                    'alias' => 'attributeIsRequired',
+                    'type' => 'boolean',
+                    'label' => 'Required',
                 ],
             ],
 

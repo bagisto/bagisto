@@ -64,7 +64,7 @@ class NewsLetterDataGrid
                 ], [
                     'name' => 'sublist.is_subscribed',
                     'alias' => 'issubs',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Subscribed',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -91,7 +91,7 @@ class NewsLetterDataGrid
                 ], [
                     'column' => 'sublist.is_subscribed',
                     'alias' => 'issubs',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Subscribed',
                 ], [
                     'column' => 'sublist.email',

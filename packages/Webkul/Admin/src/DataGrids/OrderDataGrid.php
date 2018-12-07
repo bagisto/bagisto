@@ -131,7 +131,7 @@ class OrderDataGrid
                 ], [
                     'column' => 'or.created_at',
                     'alias' => 'createdat',
-                    'type' => 'datetime',
+                    'type' => 'string',
                     'label' => 'Order Date',
                 ],
             ],
@@ -161,6 +161,7 @@ class OrderDataGrid
                 'like' => "like",
                 'nlike' => "not like",
             ],
+
             // 'css' => []
         ]);
     }
