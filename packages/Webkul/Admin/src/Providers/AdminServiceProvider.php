@@ -42,16 +42,6 @@ class AdminServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->registerFacades();
-    }
-
-    /**
      * Bind the the data to the views
      *
      * @return void
@@ -101,20 +91,5 @@ class AdminServiceProvider extends ServiceProvider
         $config = $this->app['config']->get($key, []);
 
         $this->app['config']->set($key, array_merge($config, require $path));
-    }
-
-    /**
-     * Register Bouncer as a singleton.
-     *
-     * @return void
-     */
-    protected function registerFacades()
-    {
-        $loader = AliasLoader::getInstance();
-        $loader->alias('configuration', ConfigurationFacade::class);
-
-        $this->app->singleton('configuration', function () {
-            return new Configuration();
-        });
     }
 }

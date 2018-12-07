@@ -1,6 +1,6 @@
-<select v-validate="'{{$validations}}'" class="control" id="{{ $name }}" name="{{ $name }}" data-vv-as="&quot;{{ $fieldDetail['name'] }}&quot;" >
+<select v-validate="'{{$validations}}'" class="control" id="{{ $name }}" name="{{ $name }}" data-vv-as="&quot;{{ $field['name'] }}&quot;" >
 
-    @foreach($fieldDetail['options'] as $option)
+    @foreach($field['options'] as $option)
 
         <?php
             if($option['value']) {
@@ -9,7 +9,7 @@
                 $value = 0;
             }
 
-            $selectedOption = $configData['value'] ? $configData['value'] : '';
+            $selectedOption = core()->getConfigData($name) ?? '';
         ?>
 
         <option value="{{ $value }}" {{ $value == $selectedOption ? 'selected' : ''}}>
