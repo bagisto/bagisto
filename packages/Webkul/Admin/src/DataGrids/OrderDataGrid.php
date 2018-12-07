@@ -131,7 +131,7 @@ class OrderDataGrid
                 ], [
                     'column' => 'or.created_at',
                     'alias' => 'createdat',
-                    'type' => 'string',
+                    'type' => 'datetime',
                     'label' => 'Order Date',
                 ],
             ],

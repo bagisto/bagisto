@@ -94,8 +94,8 @@
                             <li class="filter-response-boolean">
                                 <select class="control response-boolean">
                                     <option selected disabled>Select Value</option>
-                                    <option value="1">True</option>
-                                    <option value="0">False</option>
+                                    <option value="1">True / Active</option>
+                                    <option value="0">False / Inactive</option>
                                 </select>
                             </li>
 
