@@ -9,6 +9,7 @@ use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Repositories\LocaleRepository;
+use Webkul\Core\Repositories\CoreConfigRepository;
 use Illuminate\Support\Facades\Config;
 
 class Core
@@ -56,6 +57,13 @@ class Core
     protected $localeRepository;
 
     /**
+     * CoreConfigRepository class
+     *
+     * @var mixed
+     */
+    protected $coreConfigRepository;
+
+    /**
      * Create a new instance.
      *
      * @param  Webkul\Core\Repositories\ChannelRepository      $channelRepository
@@ -64,6 +72,7 @@ class Core
      * @param  Webkul\Core\Repositories\CountryRepository      $countryRepository
      * @param  Webkul\Core\Repositories\CountryStateRepository $countryStateRepository
      * @param  Webkul\Core\Repositories\LocaleRepository       $localeRepository
+     * @param  Webkul\Core\Repositories\CoreConfigRepository   $coreConfigRepository
      * @return void
      */
     public function __construct(
@@ -72,7 +81,8 @@ class Core
         ExchangeRateRepository $exchangeRateRepository,
         CountryRepository $countryRepository,
         CountryStateRepository $countryStateRepository,
-        LocaleRepository $localeRepository
+        LocaleRepository $localeRepository,
+        CoreConfigRepository $coreConfigRepository
     )
     {
         $this->channelRepository = $channelRepository;
@@ -86,6 +96,8 @@ class Core
         $this->countryStateRepository = $countryStateRepository;
 
         $this->localeRepository = $localeRepository;
+
+        $this->coreConfigRepository = $coreConfigRepository;
     }
 
     /**
@@ -468,13 +480,21 @@ class Core
      *
      * @return mixed
      */
-    public function getConfigData($field, $channelId = null)
+    public function getConfigData($field, $channel = null, $locale = null)
     {
-        if (null === $channelId) {
-            $channelId = $this->getCurrentChannel()->id;
+        if (null === $channel) {
+            $channel = $this->getCurrentChannel()->code;
         }
 
-        return Config::get($field);
+        if (null === $locale) {
+            $locale = app()->getLocale();
+        }
+
+        $coreConfigValue = $this->coreConfigRepository->findOneWhere([
+            'code' => $field
+        ]);
+
+        return $coreConfigValue;
     }
 
     /**

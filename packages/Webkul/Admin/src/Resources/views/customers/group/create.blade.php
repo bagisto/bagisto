@@ -23,7 +23,6 @@
             </div>
 
             <div class="page-content">
-
                 <div class="form-container">
                     @csrf()
 
@@ -36,8 +35,8 @@
                     </div>
 
                 </div>
-
             </div>
+
         </form>
     </div>
 @stop

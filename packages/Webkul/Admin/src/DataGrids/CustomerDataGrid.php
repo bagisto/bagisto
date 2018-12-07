@@ -104,7 +104,12 @@ class CustomerDataGrid
                     'alias' => 'Email',
                     'type' => 'string',
                     'label' => 'Email',
-                ],
+                ], [
+                    'column' => 'cg.name',
+                    'alias' => 'CustomerGroupName',
+                    'type' => 'string',
+                    'label' => 'Group Name',
+                ]
             ],
 
             //don't use aliasing in case of searchables
@@ -139,10 +144,10 @@ class CustomerDataGrid
 
     }
 
-    public function render()
+    public function render($pagination = true)
     {
 
-        return $this->createCustomerDataGrid()->render();
+        return $this->createCustomerDataGrid()->render($pagination);
 
     }
 }

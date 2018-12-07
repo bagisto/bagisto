@@ -172,8 +172,8 @@ class OrderDataGrid
         ]);
     }
 
-    public function render()
+    public function render($pagination = true)
     {
-        return $this->createOrderDataGrid()->render();
+        return $this->createOrderDataGrid()->render($pagination);
     }
 }

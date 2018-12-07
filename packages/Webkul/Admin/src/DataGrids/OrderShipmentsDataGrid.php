@@ -134,8 +134,8 @@ class OrderShipmentsDataGrid
         ]);
     }
 
-    public function render()
+    public function render($pagination = true)
     {
-        return $this->createOrderShipmentsDataGrid()->render();
+        return $this->createOrderShipmentsDataGrid()->render($pagination);
     }
 }

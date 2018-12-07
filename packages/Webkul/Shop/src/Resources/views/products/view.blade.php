@@ -157,7 +157,7 @@
 
             if(thumbList && productHeroImage){
 
-                for(let i=0 ; i < thumbFrame.length ; i++){
+                for(let i=0; i < thumbFrame.length ; i++) {
                     thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
                     thumbFrame[i].style.width = (productHeroImage.offsetHeight/4)+ "px";
                 }
@@ -170,7 +170,7 @@
             window.onresize = function() {
                 if(thumbList && productHeroImage){
 
-                    for(let i=0 ; i < thumbFrame.length ; i++){
+                    for(let i=0; i < thumbFrame.length; i++) {
                         thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
                         thumbFrame[i].style.width = (productHeroImage.offsetHeight/4)+ "px";
                     }

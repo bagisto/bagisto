@@ -71,7 +71,7 @@ class ExchangeRateController extends Controller
      */
     public function create()
     {
-        $currencies = $this->currency->all();
+        $currencies = $this->currency->with('CurrencyExchangeRate')->all();
 
         return view($this->_config['view'], compact('currencies'));
     }

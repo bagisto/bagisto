@@ -65,6 +65,8 @@ class RegistrationController extends Controller
 
         $data['is_verified'] = 0;
 
+        $data['customer_group_id'] = 1;
+
         $verificationData['email'] = $data['email'];
         $verificationData['token'] = md5(uniqid(rand(), true));
         $data['token'] = $verificationData['token'];

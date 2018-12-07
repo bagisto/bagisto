@@ -348,9 +348,12 @@ return [
         ],
 
         'sales' => [
-            'general' => [
-                'title' => 'General',
-                'save-btn-title' => 'Save'
+            'shipping-method' => [
+                'title' => 'Shipping Methods',
+                'save-btn-title' => 'Save',
+                'description' => 'Description',
+                'active' => 'Active',
+                'status' => 'Status'
             ]
         ]
     ],
@@ -538,8 +541,7 @@ return [
             'channel_name' => 'Channel Name',
             'state' => 'State',
             'select-state' => 'Select a region, state or province.',
-            'country' => 'Country',
-            'export' => 'Export'
+            'country' => 'Country'
         ],
         'reviews' => [
             'title' => 'Reviews',
@@ -586,5 +588,11 @@ return [
             'title' => 'Unauthorized Error',
             'message' => 'The request has not been applied because it lacks valid authentication credentials for the target resource.'
         ],
+    ],
+
+    'export' => [
+       'export' => 'Export',
+       'format' => 'Select Format',
+       'download' => 'Download'
     ]
 ];

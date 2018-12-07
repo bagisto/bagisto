@@ -132,8 +132,8 @@ class OrderInvoicesDataGrid
         ]);
     }
 
-    public function render()
+    public function render($pagination = true)
     {
-        return $this->createOrderInvoicesDataGrid()->render();
+        return $this->createOrderInvoicesDataGrid()->render($pagination);
     }
 }

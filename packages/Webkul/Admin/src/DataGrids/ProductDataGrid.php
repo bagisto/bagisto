@@ -185,4 +185,10 @@ class ProductDataGrid
 
     }
 
+    public function export()
+    {
+        $paginate = false;
+        return $this->createProductDataGrid()->render($paginate);
+    }
+
 }
