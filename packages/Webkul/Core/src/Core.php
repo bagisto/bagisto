@@ -483,18 +483,21 @@ class Core
     public function getConfigData($field, $channel = null, $locale = null)
     {
         if (null === $channel) {
-            $channel = $this->getCurrentChannel()->code;
+            $channel = request()->get('channel') ?: ($this->getCurrentChannelCode() ?: $this->getDefaultChannelCode());
         }
 
         if (null === $locale) {
-            $locale = app()->getLocale();
+            $locale = request()->get('locale') ?: app()->getLocale();
         }
 
         $coreConfigValue = $this->coreConfigRepository->findOneWhere([
             'code' => $field
         ]);
 
-        return $coreConfigValue;
+        if(!$coreConfigValue)
+            return Config::get($field);
+
+        return $coreConfigValue->value;
     }
 
     /**
