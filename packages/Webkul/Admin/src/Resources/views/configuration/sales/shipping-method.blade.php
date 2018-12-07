@@ -54,73 +54,69 @@
                 <div class="form-container">
                     @csrf()
 
-                    @foreach($shippingMethods as $fields)
-                    <?php
-                        $methodFields = $fields->getConfigFields();
-                        $code = $fields->getCode();
-                    ?>
-
-                    <accordian  :active="true">
-                        <div slot="body">
-                            @foreach($methodFields as $fieldDetail)
-
-                                <?php
-                                    $validations = [];
-                                    $disabled = false;
-
-                                    if(isset($fieldDetail['validation'])) {
-                                        array_push($validations, $fieldDetail['validation']);
-                                    }else {
-                                        $disabled = true;
-                                    }
-
-                                    $validations = implode('|', array_filter($validations));
-                                ?>
-
-                                @if(view()->exists($typeView = 'admin::configuration.sales.field-types.' . $fieldDetail['type']))
+                    @foreach (config('core.carriers') as $method => $carrier)
+                    
+                        <accordian :title="'{{ __(config('carriers.' . $method . '.title')) }}'" :active="true">
+                            <div slot="body">
+                                @foreach ($carrier as $field)
 
                                     <?php
-                                        $name = 'carrires'.'.'.$code.'.'.$fieldDetail['name'];
+                                        $validations = [];
+                                        $disabled = false;
+
+                                        if (isset($field['validation'])) {
+                                            array_push($validations, $field['validation']);
+                                        } else {
+                                            $disabled = true;
+                                        }
+
+                                        $validations = implode('|', array_filter($validations));
                                     ?>
 
-                                    <div class="control-group {{ $fieldDetail['type'] }}" :class="[errors.has('{{ $name }}') ? 'has-error' : '']">
-                                        <label for="{{ $name }}" {{ $disabled == false   ? 'class=required' : '' }}>
-
-                                            {{ $fieldDetail['title'] }}
-
-                                            <?php
-                                                $channel_locale = [];
-
-                                                if(isset($fieldDetail['channel_based']) && $fieldDetail['channel_based'])
-                                                {
-                                                    array_push($channel_locale, $channel);
-                                                }
-
-                                                if(isset($fieldDetail['locale_based']) && $fieldDetail['locale_based']) {
-                                                    array_push($channel_locale, $locale);
-                                                }
-                                            ?>
-
-                                            @if(count($channel_locale))
-                                                <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
-                                            @endif
-
-                                        </label>
+                                    @if (view()->exists($typeView = 'admin::configuration.sales.field-types.' . $field['type']))
 
                                         <?php
-                                            $configData = core()->getConfigData($name, current($channel_locale),  next($channel_locale));
+                                            $name = 'carriers' . '.' . $method . '.' . $field['name'];
                                         ?>
 
-                                        @include ($typeView)
+                                        <div class="control-group {{ $field['type'] }}" :class="[errors.has('{{ $name }}') ? 'has-error' : '']">
+                                            <label for="{{ $name }}" {{ $disabled == false   ? 'class=required' : '' }}>
 
-                                        <span class="control-error" v-if="errors.has('{{ $name }}')">@{{ errors.first('{!! $name !!}') }}</span>
+                                                {{ $field['title'] }}
 
-                                    </div>
+                                                <?php
+                                                    $channel_locale = [];
 
-                                @endif
-                            @endforeach
-                        </div>
-                    </accordian>
+                                                    if(isset($field['channel_based']) && $field['channel_based'])
+                                                    {
+                                                        array_push($channel_locale, $channel);
+                                                    }
+
+                                                    if(isset($field['locale_based']) && $field['locale_based']) {
+                                                        array_push($channel_locale, $locale);
+                                                    }
+                                                ?>
+
+                                                @if(count($channel_locale))
+                                                    <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
+                                                @endif
+
+                                            </label>
+
+                                            <?php
+                                                $configData = core()->getConfigData($name, current($channel_locale),  next($channel_locale));
+                                            ?>
+
+                                            @include ($typeView)
+
+                                            <span class="control-error" v-if="errors.has('{{ $name }}')">@{{ errors.first('{!! $name !!}') }}</span>
+
+                                        </div>
+
+                                    @endif
+                                @endforeach
+                            </div>
+                        </accordian>
 
                     @endforeach
 

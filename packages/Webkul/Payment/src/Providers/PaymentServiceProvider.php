@@ -28,6 +28,10 @@ class PaymentServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerFacades();
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/paymentmethods.php', 'paymentmethods'
+        );
     }
     /**
      * Register Bouncer as a singleton.
