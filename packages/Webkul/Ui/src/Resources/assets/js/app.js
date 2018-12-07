@@ -14,3 +14,7 @@ Vue.component("image-item", require("./components/image/image-item"));
 Vue.directive("slugify", require("./directives/slugify"));
 Vue.directive("code", require("./directives/code"));
 Vue.directive("alert", require("./directives/alert"));
+Vue.component("datetime", require("./components/datetime"));
+Vue.component("date", require("./components/date"));
+
+require('flatpickr/dist/flatpickr.css');

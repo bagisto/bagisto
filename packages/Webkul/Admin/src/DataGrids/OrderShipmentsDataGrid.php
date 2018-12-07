@@ -12,14 +12,11 @@ use DB;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class OrderShipmentsDataGrid
 {
+
     /**
-     * The Order Shipments Data Grid implementation.
-     *
-     * @var OrderShipmentsDataGrid
-     * for shipments of orders
+     * The Order Shipments Data Grid implementation for shipments of orders
      */
     public function createOrderShipmentsDataGrid()
     {
@@ -134,8 +131,8 @@ class OrderShipmentsDataGrid
         ]);
     }
 
-    public function render()
+    public function render($pagination = true)
     {
-        return $this->createOrderShipmentsDataGrid()->render();
+        return $this->createOrderShipmentsDataGrid()->render($pagination);
     }
 }

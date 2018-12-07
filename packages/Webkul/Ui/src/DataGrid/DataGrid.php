@@ -654,7 +654,7 @@ class DataGrid
         }
     }
 
-    private function getDbQueryResults()
+    private function getDbQueryResults($pagination = true)
     {
         $parsed = $this->parse();
 
@@ -778,9 +778,10 @@ class DataGrid
      *
      * @return view
      */
-    public function render()
+
+    public function render($pagination = true)
     {
-        $this->getDbQueryResults();
+        $this->getDbQueryResults($pagination);
 
         return view('ui::datagrid.index', [
             'css' => $this->css,

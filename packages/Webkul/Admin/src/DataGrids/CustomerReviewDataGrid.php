@@ -12,17 +12,12 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com> @rahul-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class CustomerReviewDataGrid
 {
-    /**
-     * The ProductReviewDataGrid
-     * implementation.
-     *
-     * @var CustomerReviewsDataGrid
-     * for Reviews
-     */
 
+    /**
+     * The ProductReviewDataGrid implementation for Product Reviews
+     */
     public function createCustomerReviewDataGrid()
     {
 

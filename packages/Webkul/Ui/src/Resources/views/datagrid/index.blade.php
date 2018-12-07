@@ -34,6 +34,7 @@
                         // actions.push(massactions[key].action);
                     }
                 @endif
+
                 params = (new URL(document.location)).search;
 
                 if(params.length > 0) {
@@ -86,8 +87,7 @@
                         //show the two wanted
                         $('.filter-condition-dropdown-string').css('display','inherit');
                         $('.filter-response-string').css('display','inherit');
-                    }
-                    else if(typeValue == 'boolean') {
+                    } else if(typeValue == 'boolean') {
                         //hide unwanted
                         $('.filter-condition-dropdown-string').css('display','none');
                         $('.filter-condition-dropdown-number').css('display','none');
@@ -98,8 +98,7 @@
 
                         //only true or false for that column is needed as input
                         $('.filter-response-boolean').css('display','inherit');
-                    }
-                    else if(typeValue == 'datetime') {
+                    } else if(typeValue == 'datetime') {
                         //hide unwanted
                         $('.filter-condition-dropdown-string').css('display','none');
                         $('.filter-condition-dropdown-number').css('display','none');
@@ -110,8 +109,7 @@
                         //show what is wanted
                         $('.filter-condition-dropdown-datetime').css('display','inherit');
                         $('.filter-response-datetime').css('display','inherit');
-                    }
-                    else if(typeValue == 'number') {
+                    } else if(typeValue == 'number') {
                         //hide unwanted
                         $('.filter-condition-dropdown-string').css('display','none');
                         $('.filter-condition-dropdown-datetime').css('display','none');
@@ -125,7 +123,6 @@
                     }
 
                     $('.apply-filter').on('click',function() {
-
                         params = (new URL(document.location)).search;
 
                         if(typeValue == 'number') {
@@ -390,45 +387,38 @@
             }
 
             //This is being used for validation of url params and making array of filters
-            function formURL(column, condition, response, urlparams,clabel) {
-
+            function formURL(column, condition, response, urlparams, clabel) {
                 /* validate the conditions here and do the replacements and
                 push here in the all filters array */
                 var obj1 = {};
 
-                console.log(allFilters.length);
-
                 if(column == "" || condition == "" || response == "") {
-                    alert("Some of the required field is null, please check column, condition and value properly.");
+                    // alert('Some of the required field is null, please check column, condition and value properly');
+                    alert('{{ __('ui::app.datagrid.filter-fields-missing') }}');
 
                     return false;
                 }
                 else {
                     if(allFilters.length>0) {
                         //case for repeated filter
-
                         if(column != "sort" && column != "search") {
-
                             filter_repeated = 0;
 
                             for(j=0; j<allFilters.length; j++) {
-
-                                if(allFilters[j].column == column && allFilters[j].cond == condition && allFilters[j].val == response)
-                                {
+                                if(allFilters[j].column == column && allFilters[j].cond == condition && allFilters[j].val == response) {
                                     filter_repeated = 1;
 
                                     return false;
                                 } else if(allFilters[j].column == column) {
                                     filter_repeated = 1;
-
                                     allFilters[j].cond = condition;
                                     allFilters[j].val = response;
 
                                     makeURL(true);
                                 }
                             }
-                            if(filter_repeated == 0) {
 
+                            if(filter_repeated == 0) {
                                 obj1.column = column;
                                 obj1.cond = condition;
                                 obj1.val = response;
@@ -440,6 +430,7 @@
                                 makeURL();
                             }
                         }
+
                         if(column == "sort") {
                             sort_exists = 0;
                             for(j=0;j<allFilters.length;j++) {
@@ -454,8 +445,7 @@
 
                                             makeURL();
 
-                                        }
-                                        else {
+                                        } else {
                                             allFilters[j].column = column;
                                             allFilters[j].cond = condition;
                                             allFilters[j].val = "asc";
@@ -463,8 +453,7 @@
 
                                             makeURL();
                                         }
-                                    }
-                                    else {
+                                    } else {
                                         allFilters[j].column = column;
                                         allFilters[j].cond = condition;
                                         allFilters[j].val = response;
@@ -483,14 +472,17 @@
                                     allFilters[j].cond = condition;
                                     allFilters[j].val = response;
                                     allFilters[j].label = clabel;
+
                                     makeURL();
                                 }
                             }
+
                             for(j=0;j<allFilters.length;j++) {
                                 if(allFilters[j].column == "search") {
                                     search_found = 1;
                                 }
                             }
+
                             if(search_found == 0) {
                                 obj1.column = column;
                                 obj1.cond = condition;
@@ -498,6 +490,7 @@
                                 obj1.label = clabel;
                                 allFilters.push(obj1);
                                 obj1 = {};
+
                                 makeURL();
                             }
                         }
@@ -524,5 +517,4 @@
             }
         </script>
     @endpush
-
 </div>

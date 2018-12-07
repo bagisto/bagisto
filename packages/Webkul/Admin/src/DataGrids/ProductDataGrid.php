@@ -15,11 +15,10 @@ use Webkul\Product\Repositories\ProductRepository;
  */
 class ProductDataGrid
 {
-    /**
-     * The Data Grid implementation @var ProductDataGrid
-     * for Products
-     */
 
+    /**
+     * The Data Grid implementation for Products
+     */
     public function createProductDataGrid()
     {
         return DataGrid::make([
@@ -195,4 +194,11 @@ class ProductDataGrid
     {
         return $this->createProductDataGrid()->render();
     }
+
+    public function export()
+    {
+        $paginate = false;
+        return $this->createProductDataGrid()->render($paginate);
+    }
+
 }

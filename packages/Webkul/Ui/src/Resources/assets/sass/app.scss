@@ -253,7 +253,7 @@ h2 {
             padding: 10px;
             border-bottom: solid 1px #d3d3d3;
             color: $font-color;
-            vertical-align: middle;
+            vertical-align: top;
 
             &.actions {
                 text-align: right;
@@ -477,6 +477,7 @@ h2 {
             vertical-align: middle;
             margin-left: -34px;
             margin-top: 2px;
+            pointer-events: none;
         }
     }
 

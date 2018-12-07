@@ -103,6 +103,7 @@
                                 <select class="control" id="validation" name="validation">
                                     <option value=""></option>
                                     <option value="numeric">{{ __('admin::app.catalog.attributes.number') }}</option>
+                                    <option value="decimal">{{ __('admin::app.catalog.attributes.decimal') }}</option>
                                     <option value="email">{{ __('admin::app.catalog.attributes.email') }}</option>
                                     <option value="url">{{ __('admin::app.catalog.attributes.url') }}</option>
                                 </select>
@@ -113,14 +114,6 @@
 
                     <accordian :title="'{{ __('admin::app.catalog.attributes.configuration') }}'" :active="true">
                         <div slot="body">
-
-                            <div class="control-group">
-                                <label for="status">{{ __('admin::app.catalog.attributes.status') }}</label>
-                                <select class="control" id="status" name="status">
-                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
-                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
-                                </select>
-                            </div>
 
                             <div class="control-group">
                                 <label for="value_per_locale">{{ __('admin::app.catalog.attributes.value_per_locale') }}</label>

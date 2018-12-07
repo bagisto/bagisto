@@ -8,6 +8,7 @@ return [
             'delete' => 'Do you really want to delete this :resource?',
             'edit' => 'Do you really want to edit this :resource?',
         ],
-        'no-records' => 'No Records Found'
+        'no-records' => 'No Records Found',
+        'filter-fields-missing' => 'Some of the required field is null, please check column, condition and value properly'
     ]
 ];

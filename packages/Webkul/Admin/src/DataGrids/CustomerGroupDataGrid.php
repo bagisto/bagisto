@@ -11,14 +11,11 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class CustomerGroupDataGrid
 {
+
     /**
-     * The Customer Group Data
-     * Grid implementation.
-     *
-     * @var CustomerGroupDataGrid
+     * The Customer Group Data Grid implementation.
      */
     public function createCustomerGroupDataGrid()
     {
@@ -56,8 +53,7 @@ class CustomerGroupDataGrid
                     'route' => 'admin.groups.edit',
                     'confirm_text' => 'Do you really want to edit this record?',
                     'icon' => 'icon pencil-lg-icon',
-                ],
-                [
+                ], [
                     'type' => 'Delete',
                     'route' => 'admin.groups.delete',
                     'confirm_text' => 'Do you really want to delete this record?',
@@ -117,6 +113,7 @@ class CustomerGroupDataGrid
                     'label' => 'Name'
                 ]
             ],
+
             'operators' => [
                 'eq' => "=",
                 'lt' => "<",
@@ -135,7 +132,6 @@ class CustomerGroupDataGrid
     }
 
     public function render() {
-
         return $this->createCustomerGroupDataGrid()->render();
     }
 }

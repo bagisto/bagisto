@@ -121,16 +121,12 @@
 
                             <div class="control-group">
                                 <label for="home_page_content">{{ __('admin::app.settings.channels.home_page_content') }}</label>
-                                <textarea class="control" id="home_page_content" name="home_page_content">
-                                    {{ old('home_page_content') }}
-                                </textarea>
+                                <textarea class="control" id="home_page_content" name="home_page_content">{{ old('home_page_content') }}</textarea>
                             </div>
 
                             <div class="control-group">
                                 <label for="footer_content">{{ __('admin::app.settings.channels.footer_content') }}</label>
-                                <textarea class="control" id="footer_content" name="footer_content">
-                                    {{ old('footer_content') }}
-                                </textarea>
+                                <textarea class="control" id="footer_content" name="footer_content">{{ old('footer_content') }}</textarea>
                             </div>
 
                             <div class="control-group">

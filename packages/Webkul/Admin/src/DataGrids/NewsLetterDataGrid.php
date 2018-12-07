@@ -11,14 +11,11 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class NewsLetterDataGrid
 {
+
     /**
-     * The Data Grid implementation.
-     *
-     * @var newsletterDataGrid
-     * for orders
+     * The Data Grid implementation for orders
      */
     public function newsLetterDataGrid()
     {

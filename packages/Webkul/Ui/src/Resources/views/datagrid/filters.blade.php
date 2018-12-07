@@ -103,13 +103,13 @@
     </div>
     <div class="filter-row-two">
         {{-- <span class="filter-one">
-                        <span class="filter-name">
-                            Stock
-                        </span>
-        <span class="filter-value">
-                            Available
-                            <span class="icon cross-icon"></span>
-        </span>
+            <span class="filter-name">
+                Stock
+            </span>
+            <span class="filter-value">
+                Available
+                <span class="icon cross-icon"></span>
+            </span>
         </span> --}}
     </div>
 </div>

@@ -50,13 +50,15 @@
                                         <div class="control-group" :class="[errors.has('target_currency') ? 'has-error' : '']">
                                             <select v-validate="'required'" class="control" name="target_currency" data-vv-as="&quot;{{ __('admin::app.settings.exchange_rates.target_currency') }}&quot;">
                                                 @foreach($currencies as $currency)
-                                                    <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                                    @if(is_null($currency->CurrencyExchangeRate))
+                                                        <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                                    @endif
                                                 @endforeach
-                                            </select> 
+                                            </select>
                                             <span class="control-error" v-if="errors.has('target_currency')">@{{ errors.first('target_currency') }}</span>
                                         </div>
                                     </td>
-                                    
+
                                     <td>
                                         <div class="control-group" :class="[errors.has('rate') ? 'has-error' : '']">
                                             <input v-validate="'required'" class="control" id="rate" name="rate" data-vv-as="&quot;{{ __('admin::app.settings.exchange_rates.rate') }}&quot;" value="{{ old('rate') }}"/>

@@ -9,10 +9,6 @@ use Webkul\Customer\Repositories\CustomerRepository as Customer;
 use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
 use Webkul\Core\Repositories\ChannelRepository as Channel;
 
-use Webkul\Admin\DataGrids\CustomerDataGrid as CustomerDataGrid;
-use Webkul\Admin\Exports\DataGridExport;
-use Excel;
-
 /**
  * Customer controlller
  *
@@ -50,22 +46,14 @@ class CustomerController extends Controller
     protected $channel;
 
      /**
-     * CustomerDataGrid object
-     *
-     * @var array
-     */
-    protected $customerDataGrid;
-
-     /**
      * Create a new controller instance.
      *
      * @param Webkul\Customer\Repositories\CustomerRepository as customer;
      * @param Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
      * @param Webkul\Core\Repositories\ChannelRepository as Channel;
-     * @param Webkul\Admin\DataGrids\CustomerDataGrid as customerDataGrid;
      * @return void
      */
-    public function __construct(Customer $customer, CustomerGroup $customerGroup, Channel $channel, CustomerDataGrid $customerDataGrid)
+    public function __construct(Customer $customer, CustomerGroup $customerGroup, Channel $channel)
     {
         $this->_config = request('_config');
 
@@ -76,8 +64,6 @@ class CustomerController extends Controller
         $this->customerGroup = $customerGroup;
 
         $this->channel = $channel;
-
-        $this->customerDataGrid = $customerDataGrid;
 
     }
 
@@ -189,16 +175,5 @@ class CustomerController extends Controller
         session()->flash('success', 'Customer deleted successfully.');
 
         return redirect()->back();
-    }
-
-    /**
-     * function to export datagrid
-     *
-    */
-    public function export()
-    {
-        $data = $this->customerDataGrid;
-
-        return Excel::download(new DataGridExport($data), 'customers.xlsx');
     }
 }

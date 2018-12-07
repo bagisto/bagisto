@@ -11,14 +11,11 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class TaxRateDataGrid
 {
+
     /**
-     * The Tax Category Data
-     * Grid implementation.
-     *
-     * @var TaxRateDataGrid
+     * The Tax Category Data Grid implementation.
      */
     public function createTaxRateDataGrid()
     {

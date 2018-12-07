@@ -4,6 +4,7 @@ namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Webkul\Admin\Facades\Configuration;
 use Webkul\Core\Repositories\CoreConfigRepository as CoreConfig;
 
 /**
@@ -51,5 +52,19 @@ class ConfigurationController extends Controller
     public function index()
     {
         return view($this->_config['view']);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store()
+    {
+        $data = request()->all();
+
+        session()->flash('success', 'Shipping Method is created successfully');
+
+        return redirect()->route($this->_config['redirect']);
     }
 }

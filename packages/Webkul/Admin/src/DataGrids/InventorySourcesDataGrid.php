@@ -11,16 +11,12 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class InventorySourcesDataGrid
 {
-    /**
-     * The Data Grid implementation.
-     *
-     * @var InventorySourcesDataGrid
-     * for Inventory Sources
-     */
 
+    /**
+     * The Data Grid implementation for Inventory Sources
+     */
     public function createInventorySourcesDataGrid()
     {
         return DataGrid::make([

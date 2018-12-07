@@ -11,14 +11,11 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class OrderInvoicesDataGrid
 {
+
     /**
-     * The Order invoices Data Grid implementation.
-     *
-     * @var OrderInvoicesDataGrid
-     * for invoices of orders
+     * The Order invoices Data Grid implementation for invoices of orders
      */
     public function createOrderInvoicesDataGrid()
     {
@@ -133,8 +130,8 @@ class OrderInvoicesDataGrid
         ]);
     }
 
-    public function render()
+    public function render($pagination = true)
     {
-        return $this->createOrderInvoicesDataGrid()->render();
+        return $this->createOrderInvoicesDataGrid()->render($pagination);
     }
 }

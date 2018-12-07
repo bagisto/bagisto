@@ -11,16 +11,12 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class UserDataGrid
 {
-    /**
-     * The Data Grid implementation.
-     *
-     * @var UserDataGrid
-     * for admin users
-     */
 
+    /**
+     * The Data Grid implementation for admin users
+     */
     public function createUserDataGrid()
     {
 

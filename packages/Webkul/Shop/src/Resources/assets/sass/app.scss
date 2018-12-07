@@ -367,6 +367,7 @@ input {
 
     .product-card {
         position: relative;
+        padding: 15px;
 
         .product-image {
             max-height: 350px;
@@ -2822,6 +2823,16 @@ section.review {
     }
 
     .menu-block {
+        margin-bottom: 30px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu-block-title {
+            padding-bottom: 10px;
+            font-size: 18px;
+        }
 
         .menubar {
             border: 1px solid $border-color;

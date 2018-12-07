@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Blade;
 use Webkul\Admin\Providers\EventServiceProvider;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Webkul\Admin\Exceptions\Handler;
+use Illuminate\Foundation\AliasLoader;
+use Webkul\Admin\Facades\Configuration as ConfigurationFacade;
+use Webkul\Admin\Configuration;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -36,15 +39,6 @@ class AdminServiceProvider extends ServiceProvider
             ExceptionHandler::class,
             Handler::class
         );
-    }
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
     }
 
     /**

@@ -62,6 +62,10 @@
                                             <span class="badge badge-md badge-info">Closed</span>
                                         @elseif($order->status == "pending")
                                             <span class="badge badge-md badge-warning">Pending</span>
+                                        @elseif($order->status == "pending_payment")
+                                            <span class="badge badge-md badge-warning">Pending Payment</span>
+                                        @elseif($order->status == "fraud")
+                                            <span class="badge badge-md badge-danger">Fraud</span>
                                         @endif
                                     </td>
                                 </tr>

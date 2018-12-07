@@ -12,16 +12,12 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class CategoryDataGrid
 {
-    /**
-     * The Data Grid implementation.
-     *
-     * @var AttributeDataGrid
-     * for countries
-     */
 
+    /**
+     * The Data Grid implementation for category
+     */
     public function createCategoryDataGrid()
     {
 

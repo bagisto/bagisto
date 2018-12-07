@@ -29,7 +29,10 @@ class ShippingServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerFacades();
+
+        $this->registerConfig();
     }
+
     /**
      * Register Bouncer as a singleton.
      *
@@ -43,5 +46,21 @@ class ShippingServiceProvider extends ServiceProvider
         $this->app->singleton('shipping', function () {
             return new Shipping();
         });
+    }
+    
+    /**
+     * Register package config.
+     *
+     * @return void
+     */
+    protected function registerConfig()
+    {
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/carriers.php', 'carriers'
+        );
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/fields.php', 'core'
+        );
     }
 }
