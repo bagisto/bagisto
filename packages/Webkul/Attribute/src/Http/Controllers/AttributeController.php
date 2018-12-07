@@ -152,7 +152,7 @@ class AttributeController extends Controller
     public function massDestroy() {
         $suppressFlash = false;
 
-        if(request()->isMethod('delete')) {
+        if(request()->isMethod('post')) {
             $indexes = explode(',', request()->input('indexes'));
 
             foreach($indexes as $key => $value) {

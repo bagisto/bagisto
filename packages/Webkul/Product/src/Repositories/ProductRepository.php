@@ -340,14 +340,37 @@ class ProductRepository extends Repository
                     ]);
             } else {
                 $this->attributeValue->update([
-                        ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
-                    ], $attributeValue->id);
+                    ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
+                ], $attributeValue->id);
             }
         }
 
         $this->productInventory->saveInventories($data, $variant);
 
         return $variant;
+    }
+
+    /**
+     * Change an attribute's value of the product
+     *
+     * @return boolean
+     */
+    public function updateAttribute($product, $attribute, $value) {
+        $attribute = $this->attribute->findOneByField('code', 'status');
+
+        $attributeValue = $this->attributeValue->findOneWhere([
+            'product_id' => $product->id,
+            'attribute_id' => $attribute->id,
+        ]);
+
+        $result = $this->attributeValue->update([
+            ProductAttributeValue::$attributeTypeFields[$attribute->type] => $value
+        ], $attributeValue->id);
+
+        if($result)
+            return true;
+        else
+            return false;
     }
 
     /**

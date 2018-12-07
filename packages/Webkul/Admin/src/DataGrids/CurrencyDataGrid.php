@@ -32,11 +32,10 @@ class CurrencyDataGrid
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.currencies.massdelete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
+                0 => [
+                    'type' => 'delete', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
+                    'action' => route('admin.currencies.massdelete'),
+                    'method' => 'DELETE'
                 ]
             ],
 

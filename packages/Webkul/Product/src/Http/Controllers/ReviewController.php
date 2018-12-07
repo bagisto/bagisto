@@ -106,4 +106,85 @@ class ReviewController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Mass delete the reviews on the products.
+     *
+     * @return response
+     */
+    public function massDestroy() {
+        $suppressFlash = false;
+
+        if (request()->isMethod('post')) {
+            $data = request()->all();
+
+            $indexes = explode(',', request()->input('indexes'));
+
+            foreach($indexes as $key => $value) {
+                try {
+                    $this->productReview->delete($value);
+                } catch(\Exception $e) {
+                    $suppressFlash = true;
+
+                    continue;
+                }
+            }
+
+            if(!$suppressFlash)
+                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Reviews']));
+            else
+                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));
+
+            return redirect()->route($this->_config['redirect']);
+
+        } else {
+            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Mass approve the reviews on the products.
+     *
+     * @return response
+     */
+    public function massUpdate() {
+        $suppressFlash = false;
+
+        if (request()->isMethod('post')) {
+            $data = request()->all();
+
+            $indexes = explode(',', request()->input('indexes'));
+
+            foreach($indexes as $key => $value) {
+                $review = $this->productReview->findOneByField('id', $value);
+
+                try {
+                    if($data['massaction-type'] == 1 && $data['update-options'] == 1 && $data['selected-option-text'] == 'Approve') {
+                        $review->update(['status' => 'approved']);
+                    } else if($data['massaction-type'] == 1 && $data['update-options'] == 0 && $data['selected-option-text'] == 'Disapprove') {
+                        $review->update(['status' => 'pending']);
+                    } else {
+                        continue;
+                    }
+                } catch(\Exception $e) {
+                    $suppressFlash = true;
+
+                    continue;
+                }
+            }
+
+            if(!$suppressFlash)
+                session()->flash('success', trans('admin::app.datagrid.mass-ops.update-success', ['resource' => 'Reviews']));
+            else
+                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));
+
+            return redirect()->route($this->_config['redirect']);
+        } else {
+            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+
+            return redirect()->back();
+        }
+    }
 }

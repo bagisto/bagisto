@@ -24,7 +24,18 @@
             let params;
 
             $(document).ready(function() {
+                var actions = [];
+
+                @if(isset($massoperations) && count($massoperations))
+                    const massactions = @json($massoperations);
+
+                    for(var key in massactions) {
+                        actions[key] = massactions[key].action;
+                        // actions.push(massactions[key].action);
+                    }
+                @endif
                 params = (new URL(document.location)).search;
+
                 if(params.length > 0) {
                     if(allFilters.length == 0) {
                         //call reverse url function
@@ -136,7 +147,6 @@
                             formURL(selectedColumn,conditionUsed,response,params,col_label);
                         }
                         if(typeValue == 'boolean') { //use select dropdown with two values true and false
-
                             console.log('boolean');
                         }
                     });
@@ -144,14 +154,12 @@
 
                 //remove the filter and from clicking on cross icon on tag
                 $('.remove-filter').on('click', function() {
-
                     var id = $(this).parents('.filter-one').attr('id');
                     if(allFilters.length ==  1) {
                         allFilters.pop();
                         var uri = window.location.href.toString();
                         if (uri.indexOf("?") > 0) {
                             var clean_uri = uri.substring(0, uri.indexOf("?"));
-                            // window.history.replaceState({}, document.title, clean_uri);
                             document.location = clean_uri;
                         }
                     }
@@ -161,84 +169,126 @@
                     }
                 });
 
-                //Enable Mass Action Subsequency
-                var id=[]; //for getting the id of the selected fields
-                var y = parseInt(0);
+                @if(isset($massoperations) && count($massoperations))
+                    //Enable Mass Action Subsequency
+                    var id=[]; //for getting the id of the selected fields
+                    var y = parseInt(0);
 
-                // master checkbox for selecting all entries
-                $("input[id=mastercheckbox]").change(function() {
-                    if($("input[id=mastercheckbox]").prop('checked') == true) {
-                        $('.indexers').each(function() {
-                            this.checked = true;
-                            if(this.checked){
-                                y = parseInt($(this).attr('id')); id.push(y);
-                            }
-                        });
+                    $(".massaction-type").change(function() {
+                        selectedType = $("#massaction-type").find(":selected").val();
+                        selectedTypeText = $("#massaction-type").find(":selected").text();
 
-                        $('.mass-action').css('display','');
-                        $('.table-grid-header').css('display','none');
-                        // $('.selected-items').html(id.toString());
-                        $('#indexes').val(id);
-                    }
-                    else if($("input[id=mastercheckbox]").prop('checked') == false) {
-                        $('.indexers').each(function(){ this.checked = false; });
+                        //remove the hardcoding by using configuration
+                        if(selectedType == 0 && selectedTypeText == 'delete') {
+                            $('#update-options').css('display', 'none');
 
-                        id = [];
+                            $('#mass-action-form').attr('action', actions[0]);
+                        } else if(selectedType == 1 && selectedTypeText == 'update') {
+                            $('#update-options').css('display', '');
 
-                        $('.mass-action').css('display','none');
-                        $('.table-grid-header').css('display','');
-                        $('#indexes').val('');
-                    }
-                });
+                            selectedOptionText = $("#option-type").find(":selected").text();
 
-                $('.massaction-remove').on('click', function() {
-
-                    id = [];
-
-                    $('.mass-action').css('display','none');
-
-                    if($('#mastercheckbox').prop('checked')) {
-                        $('#mastercheckbox').prop('checked',false);
-                    }
-
-                    $("input[class=indexers]").each(function() {
-                        if($(this).prop('checked')) {
-                            $(this).prop('checked',false);
+                            $("input[id=selected-option-text]").val(selectedOptionText);
+                            $('#mass-action-form').attr('action', actions[1]);
+                        } else {
+                            $('#update-options').css('display', 'none');
                         }
                     });
 
-                    $('.table-grid-header').css('display','');
-                });
+                    $("#option-type").click(function() {
+                        selectedOption = $("#option-type").find(":selected").val();
+                        selectedOptionText = $("#option-type").find(":selected").text();
 
-                $("input[class=indexers]").change(function() {
+                        $("input[id=selected-option-text]").val(selectedOptionText);
+                    });
 
-                    if(this.checked) {
-                        y = parseInt($(this).attr('id'));
-                        id.push(y);
-                    }
-                    else {
-                        y = parseInt($(this).attr('id'));
-                        var index = id.indexOf(y);
-                        id.splice(index,1);
-                    }
+                    // master checkbox for selecting all entries
+                    $("input[id=mastercheckbox]").change(function() {
+                        if($("input[id=mastercheckbox]").prop('checked') == true) {
+                            selectedOption = $("#massaction-type").find(":selected").val();
 
-                    if(id.length>0) {
-                        $('.mass-action').css('display','');
-                        $('.table-grid-header').css('display','none');
-                        $('#indexes').val(id);
+                            if(selectedOption == 0) {
+                                $('#mass-action-form').attr('action', actions[0]);
+                            } else if(selectedOption == 1) {
+                                $('#mass-action-form').attr('action', actions[1]);
+                            }
 
-                    }else if(id.length == 0) {
+                            $('.indexers').each(function() {
+                                this.checked = true;
+                                if(this.checked) {
+                                    y = parseInt($(this).attr('id'));
+                                    id.push(y);
+                                }
+                            });
 
-                        $('.mass-action').css('display','none');
-                        $('.table-grid-header').css('display','');
-                        $('#indexes').val('');
+                            $('.mass-action').css('display', '');
+                            $('.table-grid-header').css('display', 'none');
+                            $('#indexes').val(id);
+                        } else if($("input[id=mastercheckbox]").prop('checked') == false) {
+                            id = [];
+
+                            $('#mass-action-form').attr('action', ''); //set no actions when no index is there
+                            $('.indexers').each(function() { this.checked = false; });
+                            $('.mass-action').css('display', 'none');
+                            $('.table-grid-header').css('display', '');
+                            $('#indexes').val('');
+                        }
+                    });
+
+                    $('.massaction-remove').on('click', function() {
+                        id = [];
+
+                        $('#mass-action-form').attr('action', ''); //set no actions when no index is there
+                        $('.mass-action').css('display', 'none');
 
                         if($('#mastercheckbox').prop('checked')) {
-                            $('#mastercheckbox').prop('checked',false);
+                            $('#mastercheckbox').prop('checked', false);
                         }
-                    }
-                });
 
+                        $("input[class=indexers]").each(function() {
+                            if($(this).prop('checked')) {
+                                $(this).prop('checked',false);
+                            }
+                        });
+
+                        $('.table-grid-header').css('display', '');
+                    });
+
+                    $("input[class=indexers]").change(function() {
+                        if(this.checked) {
+                            selectedOption = $("#massaction-type").find(":selected").val();
+
+                            if(selectedOption == 0) {
+                                $('#mass-action-form').attr('action', actions[0]);
+                            } else if(selectedOption == 1) {
+                                $('#mass-action-form').attr('action', actions[1]);
+                            }
+
+                            y = parseInt($(this).attr('id'));
+                            id.push(y);
+                        }
+                        else {
+                            y = parseInt($(this).attr('id'));
+                            var index = id.indexOf(y);
+                            id.splice(index, 1);
+                        }
+
+                        if (id.length > 0) {
+                            $('.mass-action').css('display', '');
+                            $('.table-grid-header').css('display', 'none');
+                            $('#indexes').val(id);
+                        } else if (id.length == 0) {
+                            $('#mass-action-form').attr('action', ''); //set no actions when no index is there
+                            $('.mass-action').css('display', 'none');
+                            $('.table-grid-header').css('display', '');
+                            $('#indexes').val('');
+
+                            if ($('#mastercheckbox').prop('checked')) {
+                                $('#mastercheckbox').prop('checked', false);
+                            }
+                        }
+                    });
+                @endif
             });
 
             //make the url from the array and redirect
@@ -257,7 +307,6 @@
                 } else if(allFilters.length>0 && repetition == true) {
                     //this is the case when the filter is being repeated on a single column with different condition and value
                     for(i=0;i<allFilters.length;i++) {
-
                         if(i==0) {
                             url = '?' + allFilters[i].column + '[' + allFilters[i].cond + ']' + '=' + allFilters[i].val;
                         }
@@ -465,9 +514,10 @@
                     }
                 }
             }
+
             function confirm_click(message){
                 if (confirm(message)) {
-                    //do the action required
+                    return true;
                 } else {
                     return false;
                 }

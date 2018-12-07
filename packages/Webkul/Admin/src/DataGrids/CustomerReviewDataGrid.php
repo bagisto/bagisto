@@ -34,12 +34,19 @@ class CustomerReviewDataGrid
             'aliased' => true, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
+                0 => [
+                    'type' => 'delete', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
+                    'action' => route('admin.customer.review.massdelete'),
+                    'method' => 'DELETE'
+                ], 1 => [
+                    'type' => 'update', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
+                    'action' => route('admin.customer.review.massupdate'),
+                    'method' => 'PUT',
+                    'options' => [
+                        0 => 'Disapprove',
+                        1 => 'Approve',
+                    ]
+                ]
             ],
 
             'actions' => [

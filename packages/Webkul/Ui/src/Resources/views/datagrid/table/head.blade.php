@@ -1,85 +1,52 @@
 <thead>
     @if(count($massoperations))
-    <tr class="mass-action" style="display: none; height:63px;">
-        <th colspan="{{ count($columns)+1 }}" style="width: 100%;">
-            <div class="mass-action-wrapper">
+        <tr class="mass-action" style="display: none; height: 63px;">
+            <th colspan="10" style="width: 100%;">
+                <div class="mass-action-wrapper">
+                    <span class="massaction-remove">
+                        <span class="icon checkbox-dash-icon"></span>
+                    </span>
 
-                <span class="massaction-remove">
-                    <span class="icon checkbox-dash-icon"></span>
-                </span>
-
-                @foreach($massoperations as $massoperation)
-                    @if($massoperation['type'] == "button")
-
-                    <form onsubmit="return confirm('Are You Sure?');"
-                        @if(strtoupper($massoperation['method']) == "GET")
-                            method="GET"
-                        @else
-                            method="POST"
-                        @endif
-
-                        action="{{ $massoperation['route'] }}">
-
-                        {{ csrf_field() }}
-
-                        @if(strtoupper($massoperation['method'])!= "GET" && strtoupper($massoperation['method'])!= "POST")
-
-                        @method($massoperation['method'])
-
-                        @endif
-
-                        <input type="hidden" value="{{ $table }}" name="table_name">
-
+                    <form method="POST" style="display: inline-flex;" id="mass-action-form">
+                        @csrf()
                         <input type="hidden" id="indexes" name="indexes" value="">
 
-                        <input class="btn btn-primary btn-sm" type="submit" value="Delete">
-
-                    </form>
-
-                    @elseif($massoperation['type'] == "select")
-
-                        <form
-                            @if(strtoupper($massoperation[ 'method'])=="GET" || strtoupper($massoperation[ 'method'])=="POST" )
-
-                                method="{{ strtoupper($massoperation['method']) }}"
-
-                            @else
-                                method="POST"
-
-                                @endif
-
-                            action="{{ $massoperation['route'] }}">
-                                {{ csrf_field() }}
-                            @if(strtoupper($massoperation['method'])!= "GET" && strtoupper($massoperation['method'])!= "POST")
-
-                                @method($massoperation['method'])
-
-                            @endif
-
-                            <input type="hidden" id="indexes" name="indexes" value="">
-
-                            <select name="choices">
-                                @foreach($massoperation['options'] as $option)
-                                    <option>{{ $option }}</option>
+                        <div class="control-group">
+                            <select class="control massaction-type" name="massaction-type" id="massaction-type">
+                                @foreach($massoperations as $key => $massoperation)
+                                    <option @if($key == 0) selected @endif value="{{ $key }}">{{ $massoperation['type'] }}</option>
                                 @endforeach
                             </select>
+                        </div>
 
-                            <input class="btn btn-primary btn-sm" type="submit" value="Submit">
-                        </form>
-                    @endif
-                @endforeach
-            </div>
-        </th>
-    </tr>
+                        @foreach($massoperations as $key => $value)
+                            @if($value['type'] == 'update')
+                                <div class="control-group" style="display: none; margin-left: 10px;" id="update-options">
+                                    <select class="options control" name="update-options" id="option-type">
+                                        @foreach($value['options'] as $key => $value)
+                                            <option value="{{ $key }}" @if($key == 0) selected @endif>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <input type="hidden" name="selected-option-text" id="selected-option-text" value="">
+                                </div>
+                            @endif
+                        @endforeach
+
+                        <input type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px;">
+                    </form>
+                </div>
+            </th>
+        </tr>
     @endif
     <tr class="table-grid-header">
         @if(count($massoperations))
-        <th>
-            <span class="checkbox">
-                <input type="checkbox" id="mastercheckbox">
-                <label class="checkbox-view" for="checkbox"></label>
-            </span>
-        </th>
+            <th>
+                <span class="checkbox">
+                    <input type="checkbox" id="mastercheckbox">
+                    <label class="checkbox-view" for="checkbox"></label>
+                </span>
+            </th>
         @endif
         @foreach ($columns as $column)
             @if($column->sortable == "true")

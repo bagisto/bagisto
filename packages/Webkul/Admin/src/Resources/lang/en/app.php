@@ -34,7 +34,8 @@ return [
         'mass-ops' => [
             'method-error' => 'Error! Wrong method detected, please check mass action configuration',
             'delete-success' => 'Selected index of :resource were successfully deleted',
-            'partial-action' => 'Some actions were not performed due restricted system constraints on :resource'
+            'partial-action' => 'Some actions were not performed due restricted system constraints on :resource',
+            'update-success' => 'Selected index of :resource were successfully updated'
         ]
     ],
 
@@ -223,7 +224,8 @@ return [
             'disabled' => 'Disabled',
             'add-variant-title' => 'Add Variant',
             'variant-already-exist-message' => 'Variant with same attribute options already exists.',
-            'add-image-btn-title' => 'Add Image'
+            'add-image-btn-title' => 'Add Image',
+            'mass-delete-success' => 'All the selected index of products have been deleted successfully'
         ],
         'attributes' => [
             'title' => 'Attributes',

@@ -70,12 +70,10 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.review.index'
             ])->name('admin.customer.review.index');
 
-
             //Customers Management Routes
             Route::get('configuration/sales/general', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
                 'view' => 'admin::configuration.sales.general'
             ])->name('admin.configuration.sales.general');
-
 
             // Reviews Routes
             Route::get('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[
@@ -90,6 +88,15 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.review.index'
             ])->name('admin.customer.review.delete');
 
+            //mass destroy
+            Route::post('reviews/massdestroy', 'Webkul\Product\Http\Controllers\ReviewController@massDestroy')->defaults('_config', [
+                'redirect' => 'admin.customer.review.index'
+            ])->name('admin.customer.review.massdelete');
+
+            //mass update
+            Route::post('reviews/massupdate', 'Webkul\Product\Http\Controllers\ReviewController@massUpdate')->defaults('_config', [
+                'redirect' => 'admin.customer.review.index'
+            ])->name('admin.customer.review.massupdate');
 
             // Customer Groups Routes
             Route::get('groups', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@index')->defaults('_config',[
@@ -197,8 +204,21 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.products.index'
                 ])->name('admin.catalog.products.update');
 
+                //product delete
                 Route::get('/products/delete/{id}', 'Webkul\Product\Http\Controllers\ProductController@destroy')->name('admin.catalog.products.delete');
 
+                //product massaction
+                Route::post('products/massaction', 'Webkul\Product\Http\Controllers\ProductController@massActionHandler')->name('admin.catalog.products.massaction');
+
+                //product massdelete
+                Route::post('products/massdelete', 'Webkul\Product\Http\Controllers\ProductController@massDestroy')->defaults('_config', [
+                    'redirect' => 'admin.catalog.products.index'
+                ])->name('admin.catalog.products.massdelete');
+
+                //product massupdate
+                Route::post('products/massupdate', 'Webkul\Product\Http\Controllers\ProductController@massUpdate')->defaults('_config', [
+                    'redirect' => 'admin.catalog.products.index'
+                ])->name('admin.catalog.products.massupdate');
 
                 // Catalog Category Routes
                 Route::get('/categories', 'Webkul\Category\Http\Controllers\CategoryController@index')->defaults('_config', [
@@ -247,7 +267,7 @@ Route::group(['middleware' => ['web']], function () {
 
                 Route::get('/attributes/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@destroy')->name('admin.catalog.attributes.delete');
 
-                Route::delete('/attributes/massdelete', 'Webkul\Attribute\Http\Controllers\AttributeController@massDestroy')->name('admin.catalog.attributes.massdelete');
+                Route::post('/attributes/massdelete', 'Webkul\Attribute\Http\Controllers\AttributeController@massDestroy')->name('admin.catalog.attributes.massdelete');
 
                 // Catalog Family Routes
                 Route::get('/families', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@index')->defaults('_config', [
@@ -366,7 +386,7 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/currencies/delete/{id}', 'Webkul\Core\Http\Controllers\CurrencyController@destroy')->name('admin.currencies.delete');
 
-            Route::any('/currencies/massdelete', 'Webkul\Core\Http\Controllers\CurrencyController@massDestroy')->name('admin.currencies.massdelete');
+            Route::post('/currencies/massdelete', 'Webkul\Core\Http\Controllers\CurrencyController@massDestroy')->name('admin.currencies.massdelete');
 
 
             // Exchange Rates Routes

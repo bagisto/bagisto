@@ -74,20 +74,21 @@ class OrderInvoicesDataGrid
                     'type' => 'number',
                     'label' => 'Order ID',
                     'sortable' => true
-                ],
-                // [
-                //     'name' => 'inv.state',
-                //     'alias' => 'invstate',
-                //     'type' => 'string',
-                //     'label' => 'State',
-                //     'sortable' => false
-                // ],
-                [
+                ], [
+                    'name' => 'inv.state',
+                    'alias' => 'invstate',
+                    'type' => 'string',
+                    'label' => 'State',
+                    'sortable' => false
+                ], [
                     'name' => 'inv.grand_total',
                     'alias' => 'invgrandtotal',
                     'type' => 'number',
                     'label' => 'Amount',
-                    'sortable' => true
+                    'sortable' => true,
+                    'wrapper' => function ($value) {
+                        return core()->formatBasePrice($value);
+                    },
                 ], [
                     'name' => 'inv.created_at',
                     'alias' => 'invcreated_at',

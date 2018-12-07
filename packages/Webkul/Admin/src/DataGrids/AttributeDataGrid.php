@@ -32,11 +32,10 @@ class AttributeDataGrid
             'aliased' => true,
 
             'massoperations' => [
-                [
-                    'route' => route('admin.catalog.attributes.massdelete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
+                0 => [
+                    'type' => 'delete', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
+                    'action' => route('admin.catalog.attributes.massdelete'),
+                    'method' => 'DELETE'
                 ]
             ],
 
