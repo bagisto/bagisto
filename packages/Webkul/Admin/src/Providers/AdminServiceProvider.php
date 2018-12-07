@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Blade;
 use Webkul\Admin\Providers\EventServiceProvider;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Webkul\Admin\Exceptions\Handler;
+use Illuminate\Foundation\AliasLoader;
+use Webkul\Admin\Facades\Configuration as ConfigurationFacade;
+use Webkul\Admin\Configuration;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -45,6 +48,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerFacades();
     }
 
     /**
@@ -97,5 +101,20 @@ class AdminServiceProvider extends ServiceProvider
         $config = $this->app['config']->get($key, []);
 
         $this->app['config']->set($key, array_merge($config, require $path));
+    }
+
+    /**
+     * Register Bouncer as a singleton.
+     *
+     * @return void
+     */
+    protected function registerFacades()
+    {
+        $loader = AliasLoader::getInstance();
+        $loader->alias('configuration', ConfigurationFacade::class);
+
+        $this->app->singleton('configuration', function () {
+            return new Configuration();
+        });
     }
 }

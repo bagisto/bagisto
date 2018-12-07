@@ -348,9 +348,12 @@ return [
         ],
 
         'sales' => [
-            'general' => [
-                'title' => 'General',
-                'save-btn-title' => 'Save'
+            'shipping-method' => [
+                'title' => 'Shipping Methods',
+                'save-btn-title' => 'Save',
+                'description' => 'Description',
+                'active' => 'Active',
+                'status' => 'Status'
             ]
         ]
     ],

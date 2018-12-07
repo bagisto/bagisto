@@ -3,6 +3,7 @@
 namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Core\Models\CurrencyExchangeRate;
 
 class Currency extends Model
 {
@@ -14,4 +15,12 @@ class Currency extends Model
     protected $fillable = [
         'code', 'name'
     ];
+
+    /**
+     * Get the currency_exchange associated with the currency.
+     */
+    public function CurrencyExchangeRate()
+    {
+        return $this->hasOne(CurrencyExchangeRate::class, 'target_currency');
+    }
 }

@@ -25,10 +25,10 @@
                     @foreach($reviews as $review)
                         <div class="account-item-card mt-15 mb-15">
                             <div class="media-info">
-                                <?php $image = $productImageHelper->getGalleryImages($review->product); ?>
+                                <?php $image = $productImageHelper->getProductBaseImage($review->product); ?>
 
                                 <a href="{{ url()->to('/').'/products/'.$review->product->url_key }}" title="{{ $review->product->name }}">
-                                    <img class="media" src="{{ $image[0]['small_image_url'] }}"/>
+                                    <img class="media" src="{{ $image['small_image_url'] }}"/>
                                 </a>
 
                                 <div class="info">
