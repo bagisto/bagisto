@@ -1,5 +1,7 @@
 @inject ('productViewHelper', 'Webkul\Product\Helpers\View')
 
+{!! view_render_event('bagisto.shop.products.view.attributes.before', ['product' => $product]) !!}
+
 @if ($customAttributeValues = $productViewHelper->getAdditionalData($product))
     <accordian :title="'{{ __('shop::app.products.specification') }}'" :active="false">
         <div slot="header">
@@ -14,7 +16,7 @@
 
                     <tr>
                         <td>{{ $attribute['label'] }}</td>
-                        <td> - {{ $attribute['value'] }}</td>
+                        <td>{{ $attribute['value'] }}</td>
                     </tr>
 
                 @endforeach
@@ -23,3 +25,5 @@
         </div>
     </accordian>
 @endif
+
+{!! view_render_event('bagisto.shop.products.view.attributes.after', ['product' => $product]) !!}

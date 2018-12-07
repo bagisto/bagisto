@@ -903,7 +903,7 @@ h2 {
   padding: 10px;
   border-bottom: solid 1px #d3d3d3;
   color: #3a3a3a;
-  vertical-align: middle;
+  vertical-align: top;
 }
 
 .table table tbody td.actions {
@@ -1110,6 +1110,18 @@ h2 {
 
 .control-group .control[multiple] {
   height: 100px;
+}
+
+.control-group.date::after, .control-group.datetime::after {
+  background-image: url("../images/Icon-Calendar.svg");
+  width: 24px;
+  height: 24px;
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: -34px;
+  margin-top: 2px;
+  pointer-events: none;
 }
 
 .control-group .control-info {

@@ -72,7 +72,7 @@ class InventorySourceController extends Controller
             'code'           => ['required', 'unique:inventory_sources,code', new \Webkul\Core\Contracts\Validations\Code],
             'name'           => 'required',
             'contact_name'   => 'required',
-            'contact_email'  => 'required',
+            'contact_email'  => 'required|email',
             'contact_number' => 'required',
             'street'         => 'required',
             'country'        => 'required',
@@ -81,7 +81,11 @@ class InventorySourceController extends Controller
             'postcode'       => 'required'
         ]);
 
-        $this->inventorySource->create(request()->all());
+        $data = request()->all();
+
+        $data['status'] = !isset($data['status']) ? 0 : 1;
+
+        $this->inventorySource->create($data);
 
         session()->flash('success', 'Inventory source created successfully.');
 
@@ -114,7 +118,7 @@ class InventorySourceController extends Controller
             'code'           => ['required', 'unique:inventory_sources,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'name'           => 'required',
             'contact_name'   => 'required',
-            'contact_email'  => 'required',
+            'contact_email'  => 'required|email',
             'contact_number' => 'required',
             'street'         => 'required',
             'country'        => 'required',
@@ -123,7 +127,11 @@ class InventorySourceController extends Controller
             'postcode'       => 'required'
         ]);
 
-        $this->inventorySource->update(request()->all(), $id);
+        $data = request()->all();
+
+        $data['status'] = !isset($data['status']) ? 0 : 1;
+
+        $this->inventorySource->update($data, $id);
 
         session()->flash('success', 'Inventory source updated successfully.');
 

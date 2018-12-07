@@ -20,6 +20,8 @@
                 <div class="horizontal-rule"></div>
             </div>
 
+            {!! view_render_event('bagisto.shop.customers.account.orders.list.before', ['orders' => $orders]) !!}
+
             <div class="account-items-list">
 
                 <div class="table">
@@ -60,6 +62,10 @@
                                             <span class="badge badge-md badge-info">Closed</span>
                                         @elseif($order->status == "pending")
                                             <span class="badge badge-md badge-warning">Pending</span>
+                                        @elseif($order->status == "pending_payment")
+                                            <span class="badge badge-md badge-warning">Pending Payment</span>
+                                        @elseif($order->status == "fraud")
+                                            <span class="badge badge-md badge-danger">Fraud</span>
                                         @endif
                                     </td>
                                 </tr>
@@ -119,6 +125,8 @@
                 @endif
 
             </div>
+
+            {!! view_render_event('bagisto.shop.customers.account.orders.list.after', ['orders' => $orders]) !!}
 
         </div>
 

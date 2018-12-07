@@ -25,6 +25,8 @@
             <div class="horizontal-rule"></div>
         </div>
 
+         {!! view_render_event('bagisto.shop.customers.account.profile.view.before', ['customer' => $customer]) !!}
+
         <div class="account-table-content">
             <table>
                 <tbody>
@@ -65,6 +67,9 @@
                 </tbody>
             </table>
         </div>
+
+         {!! view_render_event('bagisto.shop.customers.account.profile.view.after', ['customer' => $customer]) !!}
+
     </div>
 </div>
 @endsection

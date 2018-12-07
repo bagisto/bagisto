@@ -82,7 +82,7 @@
 
                             <div class="control-group" :class="[errors.has('contact_email') ? 'has-error' : '']">
                                 <label for="contact_email" class="required">{{ __('admin::app.settings.inventory_sources.contact_email') }}</label>
-                                <input class="control" v-validate="'required'" class="required" id="contact_email" name="contact_email" data-vv-as="&quot;{{ __('admin::app.settings.inventory_sources.contact_email') }}&quot;" value="{{ old('contact_email') }}"/>
+                                <input class="control" v-validate="'required|email'" class="required" id="contact_email" name="contact_email" data-vv-as="&quot;{{ __('admin::app.settings.inventory_sources.contact_email') }}&quot;" value="{{ old('contact_email') }}"/>
                                 <span class="control-error" v-if="errors.has('contact_email')">@{{ errors.first('contact_email') }}</span>
                             </div>
 

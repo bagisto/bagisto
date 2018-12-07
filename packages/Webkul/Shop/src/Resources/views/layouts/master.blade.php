@@ -25,32 +25,51 @@
 
     @yield('css')
 
+    {!! view_render_event('bagisto.shop.layout.head') !!}
+
 </head>
 
 <body>
+
+    {!! view_render_event('bagisto.shop.layout.body.before') !!}
+
     <div id="app">
         <flash-wrapper ref='flashes'></flash-wrapper>
 
         <div class="main-container-wrapper">
 
+            {!! view_render_event('bagisto.shop.layout.header.before') !!}
+
             @include('shop::layouts.header.index')
+
+            {!! view_render_event('bagisto.shop.layout.header.after') !!}
 
             @yield('slider')
 
             <div class="content-container">
 
+                {!! view_render_event('bagisto.shop.layout.content.before') !!}
+
                 @yield('content-wrapper')
+
+                {!! view_render_event('bagisto.shop.layout.content.after') !!}
 
             </div>
 
         </div>
 
+        {!! view_render_event('bagisto.shop.layout.footer.before') !!}
+
         @include('shop::layouts.footer.footer')
+
+        {!! view_render_event('bagisto.shop.layout.footer.after') !!}
+
         <div class="footer-bottom">
             <p>
                 {{ __('shop::app.webkul.copy-right') }}
             </p>
         </div>
+
     </div>
     <script type="text/javascript">
         window.flashMessages = [];
@@ -79,6 +98,8 @@
     <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
 
     @stack('scripts')
+
+    {!! view_render_event('bagisto.shop.layout.body.after') !!}
 
 </body>
 

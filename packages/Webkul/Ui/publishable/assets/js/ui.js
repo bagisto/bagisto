@@ -177,8 +177,8 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);
-__webpack_require__(51);
-module.exports = __webpack_require__(52);
+__webpack_require__(57);
+module.exports = __webpack_require__(58);
 
 
 /***/ }),
@@ -201,6 +201,10 @@ Vue.component("image-item", __webpack_require__(42));
 Vue.directive("slugify", __webpack_require__(45));
 Vue.directive("code", __webpack_require__(47));
 Vue.directive("alert", __webpack_require__(49));
+Vue.component("datetime", __webpack_require__(51));
+Vue.component("date", __webpack_require__(54));
+
+__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"flatpickr/dist/flatpickr.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 /***/ }),
 /* 3 */
@@ -2928,6 +2932,252 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(52)
+/* template */
+var __vue_template__ = __webpack_require__(53)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/components/datetime.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4ff36e47", Component.options)
+  } else {
+    hotAPI.reload("data-v-4ff36e47", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+throw new Error("Cannot find module \"flatpickr\"");
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		name: String,
+		value: String
+	},
+
+	data: function data() {
+		return {
+			datepicker: null
+		};
+	},
+	mounted: function mounted() {
+		var this_this = this;
+
+		var element = this.$el.getElementsByTagName("input")[0];
+		this.datepicker = new __WEBPACK_IMPORTED_MODULE_0_flatpickr___default.a(element, {
+			allowInput: true,
+			altFormat: "Y-m-d H:i:s",
+			dateFormat: "Y-m-d H:i:s",
+			enableTime: true,
+			onChange: function onChange(selectedDates, dateStr, instance) {
+				this_this.$emit('onChange', dateStr);
+			}
+		});
+	}
+});
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "span",
+    [
+      _vm._t("default", [
+        _c("input", {
+          staticClass: "control",
+          attrs: { type: "text", name: _vm.name, "data-input": "" },
+          domProps: { value: _vm.value }
+        })
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4ff36e47", module.exports)
+  }
+}
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(55)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/Resources/assets/js/components/date.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2f144afa", Component.options)
+  } else {
+    hotAPI.reload("data-v-2f144afa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+throw new Error("Cannot find module \"flatpickr\"");
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		name: String,
+		value: String
+	},
+
+	data: function data() {
+		return {
+			datepicker: null
+		};
+	},
+	mounted: function mounted() {
+		var this_this = this;
+
+		var element = this.$el.getElementsByTagName('input')[0];
+		this.datepicker = new __WEBPACK_IMPORTED_MODULE_0_flatpickr___default.a(element, {
+			altFormat: 'Y-m-d',
+			dateFormat: 'Y-m-d',
+			onChange: function onChange(selectedDates, dateStr, instance) {
+				this_this.$emit('onChange', dateStr);
+			}
+		});
+	}
+});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "span",
+    [
+      _vm._t("default", [
+        _c("input", {
+          staticClass: "control",
+          attrs: { type: "text", name: _vm.name, "data-input": "" },
+          domProps: { value: _vm.value }
+        })
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2f144afa", module.exports)
+  }
+}
+
+/***/ }),
+/* 57 */
 /***/ (function(module, exports) {
 
 $(function () {
@@ -3018,7 +3268,7 @@ $(function () {
 });
 
 /***/ }),
-/* 52 */
+/* 58 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

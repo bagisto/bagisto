@@ -83,24 +83,28 @@ class ProductForm extends FormRequest
         $attributes = $product->attribute_family->custom_attributes;
 
         foreach ($attributes as $attribute) {
-            if($attribute->code == 'sku')
+            if ($attribute->code == 'sku')
                 continue;
 
-            if($product->type == 'configurable' && in_array($attribute->code, ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight']))
+            if ($product->type == 'configurable' && in_array($attribute->code, ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight']))
                 continue;
 
             $validations = [];
-            if($attribute->is_required) {
+            if ($attribute->is_required) {
                 array_push($validations, 'required');
             } else {
                 array_push($validations, 'nullable');
             }
 
-            if($attribute->type == 'text' && $attribute->validation) {
+            if ($attribute->type == 'text' && $attribute->validation) {
                 array_push($validations, $attribute->validation);
             }
 
-            if($attribute->is_unique) {
+            if ($attribute->type == 'price') {
+                array_push($validations, 'decimal');
+            }
+
+            if ($attribute->is_unique) {
                 array_push($validations, function ($field, $value, $fail) use ($inputs, $attribute) {
                     $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
 

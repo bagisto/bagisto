@@ -17,11 +17,15 @@
                 <span></span>
             </div>
 
+            {!! view_render_event('bagisto.shop.customers.account.address.edit.before', ['address' => $address]) !!}
+            
             <form method="post" action="{{ route('customer.address.edit', $address->id) }}" @submit.prevent="onSubmit">
 
                 <div class="account-table-content">
                     @method('PUT')
                     @csrf
+
+                    {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.before', ['address' => $address]) !!}
 
                     <div class="control-group" :class="[errors.has('address1') ? 'has-error' : '']">
                         <label for="first_name" class="required">{{ __('shop::app.customer.account.address.create.address1') }}</label>
@@ -55,6 +59,8 @@
                         <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
                     </div>
 
+                    {!! view_render_event('bagisto.shop.customers.account.address.edit_form_controls.after', ['address' => $address]) !!}
+
                     <div class="button-group">
                         <button class="btn btn-primary btn-lg" type="submit">
                             {{ __('shop::app.customer.account.address.create.submit') }}
@@ -63,6 +69,8 @@
                 </div>
 
             </form>
+
+            {!! view_render_event('bagisto.shop.customers.account.address.edit.after', ['address' => $address]) !!}
 
         </div>
     </div>

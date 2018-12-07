@@ -10,6 +10,9 @@
 @stop
 
 @section('content-wrapper')
+
+    {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
+
     <section class="product-detail">
 
         <div class="layouter">
@@ -33,9 +36,16 @@
 
                         @include ('shop::products.view.stock', ['product' => $product])
 
+                        {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
+                        
                         <div class="description">
                             {!! $product->short_description !!}
                         </div>
+
+                        {!! view_render_event('bagisto.shop.products.view.short_description.after', ['product' => $product]) !!}
+
+
+                        {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
                         <div class="quantity control-group" :class="[errors.has('quantity') ? 'has-error' : '']">
 
@@ -46,6 +56,8 @@
                             <span class="control-error" v-if="errors.has('quantity')">@{{ errors.first('quantity') }}</span>
                         </div>
 
+                        {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+
                         @if ($product->type == 'configurable')
                             <input type="hidden" value="true" name="is_configurable">
                         @else
@@ -53,6 +65,9 @@
                         @endif
 
                         @include ('shop::products.view.configurable-options')
+
+
+                        {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
                         <accordian :title="'{{ __('shop::app.products.description') }}'" :active="true">
                             <div slot="header">
@@ -67,6 +82,8 @@
                             </div>
                         </accordian>
 
+                        {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+
                         @include ('shop::products.view.attributes')
 
                         @include ('shop::products.view.reviews')
@@ -78,6 +95,8 @@
         @include ('shop::products.view.up-sells')
 
     </section>
+
+    {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 @endsection
 
 @push('scripts')
