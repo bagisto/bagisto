@@ -175,7 +175,8 @@ return [
                     'delete' => 'Delete',
                     'make-default' => 'Make Default',
                     'default' => 'Default',
-                    'contact' => 'Contact'
+                    'contact' => 'Contact',
+                    'confirm-delete' =>  'Do you really want to delete this address?'
                 ],
 
                 'create' => [
