@@ -91,9 +91,9 @@ class OrderShipmentsDataGrid
                 ], [
                     'name' => 'ship.created_at',
                     'alias' => 'shipdate',
-                    'type' => 'string',
+                    'type' => 'datetime',
                     'label' => 'Shipment Date',
-                    'sortable' => false
+                    'sortable' => true
                 ]
             ],
 
@@ -103,6 +103,11 @@ class OrderShipmentsDataGrid
                     'alias' => 'shipID',
                     'type' => 'number',
                     'label' => 'ID',
+                ], [
+                    'column' => 'ship.created_at',
+                    'alias' => 'shipdate',
+                    'type' => 'datetime',
+                    'label' => 'Shipment Date',
                 ]
             ],
             //don't use aliasing in case of searchables

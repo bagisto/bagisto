@@ -89,7 +89,7 @@ class InventorySourcesDataGrid
                 ], [
                     'name' => 'status',
                     'alias' => 'inventoryStatus',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Status',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -120,6 +120,11 @@ class InventorySourcesDataGrid
                     'alias' => 'inventoryName',
                     'type' => 'string',
                     'label' => 'Name',
+                ], [
+                    'name' => 'status',
+                    'alias' => 'inventoryStatus',
+                    'type' => 'boolean',
+                    'label' => 'Status',
                 ],
             ],
 

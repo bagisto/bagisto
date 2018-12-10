@@ -85,7 +85,7 @@ class CategoryDataGrid
                 ], [
                     'name' => 'cat.status',
                     'alias' => 'catstatus',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Visible in Menu',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -121,7 +121,7 @@ class CategoryDataGrid
                 ], [
                     'column' => 'cat.status',
                     'alias' => 'catstatus',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Visible in Menu',
                 ],
             ],

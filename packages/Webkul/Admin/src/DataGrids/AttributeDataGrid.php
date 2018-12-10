@@ -92,7 +92,7 @@ class AttributeDataGrid
                 ], [
                     'name' => 'is_unique',
                     'alias' => 'attributeIsUnique',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Unique',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -104,7 +104,7 @@ class AttributeDataGrid
                 ], [
                     'name' => 'value_per_locale',
                     'alias' => 'attributeValuePerLocale',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Locale based',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -116,7 +116,7 @@ class AttributeDataGrid
                 ], [
                     'name' => 'value_per_channel',
                     'alias' => 'attributeValuePerChannel',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Channel based',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -125,7 +125,7 @@ class AttributeDataGrid
                         else
                             return "True";
                     },
-                ],
+                ]
             ],
 
             'filterable' => [
@@ -154,7 +154,22 @@ class AttributeDataGrid
                     'alias' => 'attributeIsRequired',
                     'type' => 'boolean',
                     'label' => 'Required',
-                ],
+                ], [
+                    'name' => 'is_unique',
+                    'alias' => 'attributeIsUnique',
+                    'type' => 'boolean',
+                    'label' => 'Unique',
+                ], [
+                    'name' => 'value_per_locale',
+                    'alias' => 'attributeValuePerLocale',
+                    'type' => 'boolean',
+                    'label' => 'Locale based',
+                ], [
+                    'name' => 'value_per_channel',
+                    'alias' => 'attributeValuePerChannel',
+                    'type' => 'boolean',
+                    'label' => 'Channel based',
+                ]
             ],
 
             //don't use aliasing in case of searchables

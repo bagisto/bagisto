@@ -76,7 +76,7 @@ class OrderInvoicesDataGrid
                     'alias' => 'invstate',
                     'type' => 'string',
                     'label' => 'State',
-                    'sortable' => false
+                    'sortable' => true
                 ], [
                     'name' => 'inv.grand_total',
                     'alias' => 'invgrandtotal',
@@ -89,7 +89,7 @@ class OrderInvoicesDataGrid
                 ], [
                     'name' => 'inv.created_at',
                     'alias' => 'invcreated_at',
-                    'type' => 'date',
+                    'type' => 'datetime',
                     'label' => 'Invoice Date',
                     'sortable' => true
                 ]
@@ -101,6 +101,11 @@ class OrderInvoicesDataGrid
                     'alias' => 'invid',
                     'type' => 'number',
                     'label' => 'ID',
+                ], [
+                    'column' => 'inv.created_at',
+                    'alias' => 'invcreated_at',
+                    'type' => 'datetime',
+                    'label' => 'Invoice Date',
                 ]
             ],
             //don't use aliasing in case of searchables

@@ -93,7 +93,7 @@ class ProductDataGrid
                 ], [
                     'name' => 'prods.status',
                     'alias' => 'ProductStatus',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Status',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -148,6 +148,11 @@ class ProductDataGrid
                     'alias' => 'ProductType',
                     'type' => 'string',
                     'label' => 'Product Type',
+                ], [
+                    'name' => 'prods.status',
+                    'alias' => 'ProductStatus',
+                    'type' => 'boolean',
+                    'label' => 'Status'
                 ]
             ],
             //don't use aliasing in case of searchables
