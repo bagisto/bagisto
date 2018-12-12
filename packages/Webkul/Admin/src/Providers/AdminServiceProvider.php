@@ -68,22 +68,21 @@ class AdminServiceProvider extends ServiceProvider
             $menu = current(Event::fire('admin.menu.create'));
 
             $keys = explode('.', $menu->currentKey);
+
             $subMenus = $tabs = [];
             if (count($keys) > 1) {
                 $subMenus = [
                     'items' => $menu->sortItems(array_get($menu->items, current($keys) . '.children')),
-                    'current' => $menu->current,
-                    'currentKey' => $menu->currentKey
                 ];
 
                 if (count($keys) > 2) {
                     $tabs = [
                         'items' => $menu->sortItems(array_get($menu->items, implode('.children.', array_slice($keys, 0, 2)) . '.children')),
-                        'current' => $menu->current,
-                        'currentKey' => $menu->currentKey
                     ];
                 }
             }
+
+            $menu->items = $menu->sortItems($menu->items);
 
             $view->with('menu', $menu)->with('subMenus', $subMenus)->with('tabs', $tabs);
         });
