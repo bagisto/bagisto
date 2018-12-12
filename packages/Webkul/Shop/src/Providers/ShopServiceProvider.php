@@ -54,6 +54,8 @@ class ShopServiceProvider extends ServiceProvider
         if (!$themes->current() && \Config::get('themes.default')) {
             $themes->set(\Config::get('themes.default'));
         }
+        
+        $this->registerConfig();
     }
 
     /**
@@ -84,17 +86,21 @@ class ShopServiceProvider extends ServiceProvider
         });
 
         Event::listen('customer.menu.build', function ($menu) {
-            $menu->add('account', 'My Account', 'customer.profile.index', 1);
-
-            $menu->add('account.profile', 'Profile', 'customer.profile.index', 1);
-
-            $menu->add('account.orders', 'Orders', 'customer.orders.index', 2);
-
-            $menu->add('account.address', 'Address', 'customer.address.index', 3);
-
-            $menu->add('account.reviews', 'Reviews', 'customer.reviews.index', 4);
-
-            $menu->add('account.wishlist', 'Wishlist', 'customer.wishlist.index', 5);
+            foreach(config('menu.customer') as $item) {
+                $menu->add($item['key'], $item['name'], $item['route'], $item['sort']);
+            }
         });
+    }
+    
+    /**
+     * Register package config.
+     *
+     * @return void
+     */
+    protected function registerConfig()
+    {
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/menu.php', 'menu.customer'
+        );
     }
 }

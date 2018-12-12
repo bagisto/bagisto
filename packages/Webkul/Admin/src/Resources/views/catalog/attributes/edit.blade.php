@@ -128,7 +128,7 @@
                                 <label for="validation">{{ __('admin::app.catalog.attributes.input_validation') }}</label>
                                 <select class="control" id="validation" name="validation">
                                     <option value=""></option>
-                                    <option value="number" {{ $selectedValidation == 'number' ? 'selected' : '' }}>
+                                    <option value="numeric" {{ $selectedValidation == 'number' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.number') }}
                                     </option>
                                     <option value="decimal" {{ $selectedValidation == 'decimal' ? 'selected' : '' }}>

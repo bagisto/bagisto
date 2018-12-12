@@ -40,6 +40,16 @@ class AdminServiceProvider extends ServiceProvider
             Handler::class
         );
     }
+    
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerConfig();
+    }
 
     /**
      * Bind the the data to the views
@@ -78,18 +88,20 @@ class AdminServiceProvider extends ServiceProvider
             $view->with('menu', $menu)->with('subMenus', $subMenus)->with('tabs', $tabs);
         });
     }
-
+    
     /**
-     * Merge the given configuration with the existing configuration.
+     * Register package config.
      *
-     * @param  string  $path
-     * @param  string  $key
      * @return void
      */
-    protected function mergeConfigFrom($path, $key)
+    protected function registerConfig()
     {
-        $config = $this->app['config']->get($key, []);
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/menu.php', 'menu.admin'
+        );
 
-        $this->app['config']->set($key, array_merge($config, require $path));
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/acl.php', 'acl'
+        );
     }
 }
