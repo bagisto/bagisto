@@ -69,6 +69,10 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.customer.review.index');
 
 
+            Route::get('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
+                'view' => 'admin::configuration.index'
+            ])->name('admin.configuration.index');
+
             //Shipping Methods Routes
             Route::get('configuration/sales/shipping-methods', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
                 'view' => 'admin::configuration.sales.shipping-method'

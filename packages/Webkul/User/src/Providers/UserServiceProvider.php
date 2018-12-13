@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\User\Bouncer;
 use Webkul\User\Facades\Bouncer as BouncerFacade;
 use Webkul\User\Http\Middleware\Bouncer as BouncerMiddleware;
-use Webkul\User\ACLCreator;
+use Webkul\Core\Tree;
 
 class UserServiceProvider extends ServiceProvider
 {
@@ -37,7 +37,7 @@ class UserServiceProvider extends ServiceProvider
     public function createACL()
     {
         Event::listen('admin.acl.create', function () {
-            return ACLCreator::create(function ($acl) {
+            return Tree::create(function ($acl) {
                 Event::fire('admin.acl.build', $acl);
             });
         });
