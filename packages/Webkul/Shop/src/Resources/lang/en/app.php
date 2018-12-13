@@ -46,7 +46,8 @@ return [
         'not-subscribed' => 'You Cannot Be Subscribed To Subscription Emails, Try Again After Some time',
         'already' => 'You Are Already Subscribed To Our Subscription List',
         'unsubscribed' => 'You Are Unsubscribed From Bagisto Subscription Mails',
-        'already-unsub' => 'You Are Already Unsubscribed'
+        'already-unsub' => 'You Are Already Unsubscribed',
+        'not-subscribed' => 'Error! Mail Cannot Be Sent Currently, Please Try Again Later'
     ],
 
     'search' => [

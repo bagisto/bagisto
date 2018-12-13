@@ -11,7 +11,7 @@ use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Theme;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Providers\ComposerServiceProvider;
-use Webkul\Ui\Menu;
+use Webkul\Core\Tree;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -58,6 +58,8 @@ class ShopServiceProvider extends ServiceProvider
         if (!$themes->current() && \Config::get('themes.default')) {
             $themes->set(\Config::get('themes.default'));
         }
+        
+        $this->registerConfig();
     }
 
     /**
@@ -82,23 +84,27 @@ class ShopServiceProvider extends ServiceProvider
     public function createCustomerMenu()
     {
         Event::listen('customer.menu.create', function () {
-            return Menu::create(function ($menu) {
-                Event::fire('customer.menu.build', $menu);
+            return Tree::create(function ($tree) {
+                Event::fire('customer.menu.build', $tree);
             });
         });
 
-        Event::listen('customer.menu.build', function ($menu) {
-            $menu->add('account', 'My Account', 'customer.profile.index', 1);
-
-            $menu->add('account.profile', 'Profile', 'customer.profile.index', 1);
-
-            $menu->add('account.orders', 'Orders', 'customer.orders.index', 2);
-
-            $menu->add('account.address', 'Address', 'customer.address.index', 3);
-
-            $menu->add('account.reviews', 'Reviews', 'customer.reviews.index', 4);
-
-            $menu->add('account.wishlist', 'Wishlist', 'customer.wishlist.index', 5);
+        Event::listen('customer.menu.build', function ($tree) {
+            foreach(config('menu.customer') as $item) {
+                $tree->add($item, 'menu');
+            }
         });
+    }
+    
+    /**
+     * Register package config.
+     *
+     * @return void
+     */
+    protected function registerConfig()
+    {
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/menu.php', 'menu.customer'
+        );
     }
 }

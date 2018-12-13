@@ -60,7 +60,7 @@ class ShippingServiceProvider extends ServiceProvider
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/fields.php', 'core'
+            dirname(__DIR__) . '/Config/system.php', 'core'
         );
     }
 }

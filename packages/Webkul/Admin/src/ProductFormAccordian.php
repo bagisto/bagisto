@@ -16,7 +16,7 @@ class ProductFormAccordian {
 	public static function create($callback) {
 		$accordian = new ProductFormAccordian();
 		$callback($accordian);
-		$accordian->items = $accordian->sortItems($accordian->items);
+		$accordian->items = core()->sortItems($accordian->items);
 
 		return $accordian;
 	}
@@ -37,22 +37,5 @@ class ProductFormAccordian {
 			'view'		 => $view,
 			'sort'		 => $sort
         ]);
-	}
-
-	/**
-	 * Method to sort through the acl items and put them in order
-	 *
-	 * @return void
-	 */
-	public function sortItems($items) {
-		usort($items, function($a, $b) {
-			if ($a['sort'] == $b['sort']) {
-				return 0;
-			}
-
-			return ($a['sort'] < $b['sort']) ? -1 : 1;
-		});
-
-		return $items;
 	}
 }

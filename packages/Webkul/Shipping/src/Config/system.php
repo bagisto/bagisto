@@ -1,8 +1,19 @@
 <?php
 
 return [
-    'carriers' => [
-        'free' => [
+    [
+        'key' => 'sales',
+        'name' => 'Sales',
+        'sort' => 1
+    ], [
+        'key' => 'sales.carriers',
+        'name' => 'Shipping Methods',
+        'sort' => 1,
+    ], [
+        'key' => 'sales.carriers.free',
+        'name' => 'Free Shipping',
+        'sort' => 1,
+        'fields' => [
             [
                 'name' => 'title',
                 'title' => 'Title',
@@ -31,8 +42,12 @@ return [
                 ],
                 'validation' => 'required'
             ]
-        ],
-        'flatrate' => [
+        ]
+    ], [
+        'key' => 'sales.carriers.flatrate',
+        'name' => 'Flat Rate Shipping',
+        'sort' => 2,
+        'fields' => [
             [
                 'name' => 'title',
                 'title' => 'Title',

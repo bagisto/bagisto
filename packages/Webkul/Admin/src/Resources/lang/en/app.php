@@ -310,6 +310,9 @@ return [
     ],
 
     'configuration' => [
+        'title' => 'Configuration',
+        'save-btn-title' => 'Save',
+
         'tax-categories' => [
             'title' => 'Tax Categories',
             'add-title' => 'Add Tax Category',
@@ -552,14 +555,17 @@ return [
             'status' => 'Status',
             'comment' => 'Comment'
         ],
+
         'subscribers' => [
             'title' => 'News Letter Subscribers',
             'title-edit' => 'Edit News Letter Subscriber',
             'email' => 'Email',
             'is_subscribed' => 'Subscribed',
             'edit-btn-title' => 'Update Subscriber',
-            'update-success' => 'You updated subscriber',
-            'update-failed' => 'Error! You cannot unsubscribed the subscriber'
+            'update-success' => 'Subscriber was successfully updated',
+            'update-failed' => 'Error! You cannot unsubscribe the subscriber',
+            'delete-success' => 'Subscriber was successfully deleted',
+            'delete-failed' => 'Erorr! Subscriber cannot be deleted'
         ]
     ],
 

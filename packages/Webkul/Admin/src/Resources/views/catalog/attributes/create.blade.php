@@ -103,8 +103,8 @@
                                 <select class="control" id="validation" name="validation">
                                     <option value=""></option>
                                     <option value="numeric">{{ __('admin::app.catalog.attributes.number') }}</option>
-                                    <option value="decimal">{{ __('admin::app.catalog.attributes.decimal') }}</option>
                                     <option value="email">{{ __('admin::app.catalog.attributes.email') }}</option>
+                                    <option value="decimal">{{ __('admin::app.catalog.attributes.decimal') }}</option>
                                     <option value="url">{{ __('admin::app.catalog.attributes.url') }}</option>
                                 </select>
                             </div>

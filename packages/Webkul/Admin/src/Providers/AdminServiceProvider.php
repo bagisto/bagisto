@@ -40,6 +40,16 @@ class AdminServiceProvider extends ServiceProvider
             Handler::class
         );
     }
+    
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerConfig();
+    }
 
     /**
      * Bind the the data to the views
@@ -57,39 +67,33 @@ class AdminServiceProvider extends ServiceProvider
         view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $menu = current(Event::fire('admin.menu.create'));
 
-            $keys = explode('.', $menu->currentKey);
-            $subMenus = $tabs = [];
-            if (count($keys) > 1) {
-                $subMenus = [
-                    'items' => $menu->sortItems(array_get($menu->items, current($keys) . '.children')),
-                    'current' => $menu->current,
-                    'currentKey' => $menu->currentKey
-                ];
+            $menu->items = core()->sortItems($menu->items);
 
-                if (count($keys) > 2) {
-                    $tabs = [
-                        'items' => $menu->sortItems(array_get($menu->items, implode('.children.', array_slice($keys, 0, 2)) . '.children')),
-                        'current' => $menu->current,
-                        'currentKey' => $menu->currentKey
-                    ];
-                }
-            }
+            $view->with('menu', $menu);
+        });
 
-            $view->with('menu', $menu)->with('subMenus', $subMenus)->with('tabs', $tabs);
+        view()->composer(['admin::layouts.nav-aside', 'admin::layouts.tabs', 'admin::configuration.index'], function ($view) {
+            $tree = current(Event::fire('admin.config.create'));
+
+            $tree->items = core()->sortItems($tree->items);
+
+            $view->with('config', $tree);
         });
     }
-
+    
     /**
-     * Merge the given configuration with the existing configuration.
+     * Register package config.
      *
-     * @param  string  $path
-     * @param  string  $key
      * @return void
      */
-    protected function mergeConfigFrom($path, $key)
+    protected function registerConfig()
     {
-        $config = $this->app['config']->get($key, []);
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/menu.php', 'menu.admin'
+        );
 
-        $this->app['config']->set($key, array_merge($config, require $path));
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/acl.php', 'acl'
+        );
     }
 }
