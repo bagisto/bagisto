@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
 use Webkul\Ui\Menu;
+use Webkul\Core\Tree;
 use Webkul\Admin\ProductFormAccordian;
 
 class EventServiceProvider extends ServiceProvider
@@ -18,6 +19,8 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->createAdminMenu();
+
+        $this->createAdminConfig();
 
         $this->buildACL();
 
@@ -42,7 +45,7 @@ class EventServiceProvider extends ServiceProvider
     public function createAdminMenu()
     {
         Event::listen('admin.menu.create', function () {
-            return Menu::create(function ($menu) {
+            return Tree::create(function ($menu) {
                 Event::fire('admin.menu.build', $menu);
             });
         });
@@ -50,8 +53,28 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('admin.menu.build', function ($menu) {
             foreach(config('menu.admin') as $item) {
                 if (bouncer()->hasPermission($item['key'])) {
-                    $menu->add($item['key'], $item['name'], $item['route'], $item['sort'], $item['icon-class']);
+                    $menu->add($item, 'menu');
                 }
+            }
+        });
+    }
+
+    /**
+     * This method fires an event for config creation, any package can add their config item by listening to the admin.config.build event
+     *
+     * @return void
+     */
+    public function createAdminConfig()
+    {
+        Event::listen('admin.config.create', function () {
+            return Tree::create(function ($tree) {
+                Event::fire('admin.config.build', $tree);
+            });
+        });
+
+        Event::listen('admin.config.build', function ($config) {
+            foreach(config('core') as $item) {
+                $config->add($item);
             }
         });
     }
@@ -65,7 +88,7 @@ class EventServiceProvider extends ServiceProvider
     {
         Event::listen('admin.acl.build', function ($acl) {
             foreach(config('acl') as $item) {
-                $acl->add($item['key'], $item['name'], $item['route'], $item['sort']);
+                $acl->add($item);
             }
         });
     }

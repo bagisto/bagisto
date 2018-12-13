@@ -308,6 +308,9 @@ return [
     ],
 
     'configuration' => [
+        'title' => 'Configuration',
+        'save-btn-title' => 'Save',
+
         'tax-categories' => [
             'title' => 'Tax Categories',
             'add-title' => 'Add Tax Category',

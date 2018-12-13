@@ -10,7 +10,7 @@ use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Theme;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Providers\ComposerServiceProvider;
-use Webkul\Ui\Menu;
+use Webkul\Core\Tree;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -80,14 +80,14 @@ class ShopServiceProvider extends ServiceProvider
     public function createCustomerMenu()
     {
         Event::listen('customer.menu.create', function () {
-            return Menu::create(function ($menu) {
-                Event::fire('customer.menu.build', $menu);
+            return Tree::create(function ($tree) {
+                Event::fire('customer.menu.build', $tree);
             });
         });
 
-        Event::listen('customer.menu.build', function ($menu) {
+        Event::listen('customer.menu.build', function ($tree) {
             foreach(config('menu.customer') as $item) {
-                $menu->add($item['key'], $item['name'], $item['route'], $item['sort']);
+                $tree->add($item, 'menu');
             }
         });
     }

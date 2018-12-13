@@ -67,24 +67,17 @@ class AdminServiceProvider extends ServiceProvider
         view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $menu = current(Event::fire('admin.menu.create'));
 
-            $keys = explode('.', $menu->currentKey);
+            $menu->items = core()->sortItems($menu->items);
 
-            $subMenus = $tabs = [];
-            if (count($keys) > 1) {
-                $subMenus = [
-                    'items' => $menu->sortItems(array_get($menu->items, current($keys) . '.children')),
-                ];
+            $view->with('menu', $menu);
+        });
 
-                if (count($keys) > 2) {
-                    $tabs = [
-                        'items' => $menu->sortItems(array_get($menu->items, implode('.children.', array_slice($keys, 0, 2)) . '.children')),
-                    ];
-                }
-            }
+        view()->composer(['admin::layouts.nav-aside', 'admin::layouts.tabs', 'admin::configuration.index'], function ($view) {
+            $tree = current(Event::fire('admin.config.create'));
 
-            $menu->items = $menu->sortItems($menu->items);
+            $tree->items = core()->sortItems($tree->items);
 
-            $view->with('menu', $menu)->with('subMenus', $subMenus)->with('tabs', $tabs);
+            $view->with('config', $tree);
         });
     }
     

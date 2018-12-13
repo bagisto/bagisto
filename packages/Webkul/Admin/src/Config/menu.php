@@ -95,30 +95,10 @@ return [
     ], [
         'key' => 'configuration',
         'name' => 'Configure',
-        'route' => 'admin.account.edit',
+        'route' => 'admin.configuration.index',
         'sort' => 5,
         'icon-class' => 'configuration-icon',
     ], [
-        'key' => 'configuration.account',
-        'name' => 'My Account',
-        'route' => 'admin.account.edit',
-        'sort' => 1,
-        'icon-class' => '',
-    ],
-    [
-        'key' => 'configuration.sales',
-        'name' => 'Sales',
-        'route' => 'admin.configuration.sales.shipping_methods',
-        'sort' => 1,
-        'icon-class' => '',
-    ], [
-        'key' => 'configuration.sales.shipping_method',
-        'name' => 'Shipping Methods',
-        'route' => 'admin.configuration.sales.shipping_methods',
-        'sort' => 1,
-        'icon-class' => '',
-    ],
-    [
         'key' => 'settings',
         'name' => 'Settings',
         'route' => 'admin.locales.index',

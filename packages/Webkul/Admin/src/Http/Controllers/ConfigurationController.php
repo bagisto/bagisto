@@ -51,6 +51,9 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
+        // if(!request()->route('slug'))
+        //     return redirect()->route('admin.configuration.index', ['slug' => 'marketplace']);
+
         return view($this->_config['view']);
     }
 
