@@ -8,8 +8,6 @@
 
     $validations = implode('|', array_filter($validations));
 
-    $data = config('carriers.flatrate.title');
-
     $key = $item['key'];
     $key = explode(".", $key);
     array_shift($key);
@@ -46,23 +44,23 @@
 
     @if ($field['type'] == 'text')
 
-        <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;">
+        <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;">
 
     @elseif ($field['type'] == 'textarea')
 
-        <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;">{{ old($name) ?: core()->getConfigData($name) }}</textarea>
+        <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;">{{ old($name) ?: core()->getConfigData($name) }}</textarea>
 
     @elseif ($field['type'] == 'select')
 
-        <select v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;" >
+        <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;" >
 
             @foreach($field['options'] as $option)
 
                 <?php
-                    if($option['value']) {
-                        $value = 1;
-                    }else {
+                    if($option['value'] == false) {
                         $value = 0;
+                    }else {
+                        $value = $option['value'];
                     }
 
                     $selectedOption = core()->getConfigData($name) ?? '';
@@ -77,5 +75,5 @@
 
     @endif
 
-    <span class="control-error" v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]')">@{{ errors.first('{!! $name !!}') }}</span>
+    <span class="control-error" v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]')">@{{ errors.first('{!! $firstField !!}[{!! $secondField !!}][{!! $field['name'] !!}]') }}</span>
 </div>

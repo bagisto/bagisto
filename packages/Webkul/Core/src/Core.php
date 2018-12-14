@@ -525,7 +525,7 @@ class Core
             }
             else {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-                    'code' => $field,
+                    'code' => $field
                 ]);
             }
         }
