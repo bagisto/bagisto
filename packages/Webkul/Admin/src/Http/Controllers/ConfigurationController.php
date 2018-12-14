@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Admin\Facades\Configuration;
 use Webkul\Core\Repositories\CoreConfigRepository as CoreConfig;
+use Webkul\Core\Tree;
 
 /**
  * Configuration controller
@@ -30,6 +31,12 @@ class ConfigurationController extends Controller
     protected $coreConfig;
 
     /**
+     *
+     * @var array
+     */
+    protected $configTree;
+
+    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Core\Repositories\CoreConfigRepository  $coreConfig
@@ -41,7 +48,26 @@ class ConfigurationController extends Controller
 
         $this->_config = request('_config');
 
-        $this->coreConfig = $coreConfig;
+        $this->prepareConfigTree();
+
+    }
+
+    /**
+     * Prepares config tree
+     *
+     * @return void
+     */
+    public function prepareConfigTree()
+    {
+        $tree = Tree::create();
+
+        foreach(config('core') as $item) {
+            $tree->add($item);
+        }
+
+        $tree->items = core()->sortItems($tree->items);
+
+        $this->configTree = $tree;
     }
 
     /**
@@ -51,10 +77,26 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
-        // if(!request()->route('slug'))
-        //     return redirect()->route('admin.configuration.index', ['slug' => 'marketplace']);
+        if(!request()->route('slug') && !request()->route('slug2'))
+            return redirect()->route('admin.configuration.index', $this->getDefaultConfigSlugs());
 
-        return view($this->_config['view']);
+
+        return view($this->_config['view'], ['config' => $this->configTree]);
+    }
+
+    /**
+     * Returns slugs
+     *
+     * @return array
+     */
+    public function getDefaultConfigSlugs()
+    {
+        $firstItem = current($this->configTree->items);
+        $secondItem = current($firstItem['children']);
+
+        $slugs = explode('.', $secondItem['key']);
+
+        return ['slug' => current($slugs), 'slug2' => end($slugs)];
     }
 
     /**

@@ -86,18 +86,6 @@ class AdminServiceProvider extends ServiceProvider
             $view->with('menu', $tree);
         });
 
-        view()->composer(['admin::layouts.nav-aside', 'admin::layouts.tabs', 'admin::configuration.index'], function ($view) {
-            $tree = Tree::create();
-
-            foreach(config('core') as $item) {
-                $tree->add($item);
-            }
-
-            $tree->items = core()->sortItems($tree->items);
-
-            $view->with('config', $tree);
-        });
-
         view()->composer(['admin::users.roles.create', 'admin::users.roles.edit'], function ($view) {
             $tree = Tree::create();
 
