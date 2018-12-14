@@ -73,15 +73,19 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::configuration.index'
             ])->name('admin.configuration.index');
 
+            Route::post('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@store')->defaults('_config', [
+                'redirect' => 'admin.configuration.index'
+            ])->name('admin.configuration.index.store');
+
             //Shipping Methods Routes
-            Route::get('configuration/sales/shipping-methods', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
-                'view' => 'admin::configuration.sales.shipping-method'
-            ])->name('admin.configuration.sales.shipping_methods');
+            // Route::get('configuration/sales/shipping-methods', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
+            //     'view' => 'admin::configuration.sales.shipping-method'
+            // ])->name('admin.configuration.sales.shipping_methods');
 
 
-            Route::post('configuration/sales/shipping-methods', 'Webkul\Admin\Http\Controllers\ConfigurationController@store')->defaults('_config', [
-                'redirect' => 'admin.configuration.sales.shipping_methods'
-            ])->name('admin.configuration.sales.shipping_methods.store');
+            // Route::post('configuration/sales/shipping-methods', 'Webkul\Admin\Http\Controllers\ConfigurationController@store')->defaults('_config', [
+            //     'redirect' => 'admin.configuration.sales.shipping_methods'
+            // ])->name('admin.configuration.sales.shipping_methods.store');
 
 
             // Reviews Routes

@@ -490,9 +490,45 @@ class Core
             $locale = request()->get('locale') ?: app()->getLocale();
         }
 
-        $coreConfigValue = $this->coreConfigRepository->findOneWhere([
-            'code' => $field
-        ]);
+        $fields = $this->getConfigField($field);
+
+        $channel_based = false;
+        $locale_based = false;
+
+        if (isset($fields['channel_based']) && $fields['channel_based']) {
+            $channel_based = true;
+        }
+
+        if (isset($fields['locale_based']) && $fields['locale_based']) {
+            $locale_based = true;
+        }
+
+        if (isset($fields['channel_based']) && $fields['channel_based']) {
+            if (isset($fields['locale_based']) && $fields['locale_based']) {
+                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
+                    'code' => $field,
+                    'channel_code' => $channel,
+                    'locale_code' => $locale
+                ]);
+            } else {
+                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
+                    'code' => $field,
+                    'channel_code' => $channel,
+                ]);
+            }
+        } else {
+            if (isset($fields['locale_based']) && $fields['locale_based']) {
+                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
+                    'code' => $field,
+                    'locale_code' => $locale
+                ]);
+            }
+            else {
+                $coreConfigValue = $this->coreConfigRepository->findOneWhere([
+                    'code' => $field,
+                ]);
+            }
+        }
 
         if(!$coreConfigValue)
             return Config::get($field);
@@ -608,7 +644,7 @@ class Core
             return date('Y-m-d', $end);
         }
     }
-    
+
 	/**
 	 * Method to sort through the acl items and put them in order
 	 *
@@ -630,7 +666,31 @@ class Core
 		});
 
 		return $this->convertToAssociativeArray($items);
-	}
+    }
+
+    /**
+     * @param string $fieldName
+     * @return array
+     */
+    public function getConfigField($fieldName) {
+        foreach (config('core') as $coreData) {
+            if (isset($coreData['fields'])) {
+                foreach ($coreData['fields'] as $field) {
+
+                    $key = $coreData['key'];
+                    $key = explode(".", $key);
+                    array_shift($key);
+
+                    $key = implode(".", $key);
+                    $name = $key . '.' . $field['name'];
+
+                    if ($name == $fieldName ) {
+                        return $field;
+                    }
+                }
+            }
+        }
+    }
 
     public function convertToAssociativeArray($items)
     {

@@ -8,9 +8,19 @@
 
     $validations = implode('|', array_filter($validations));
 
-    $name = $field['title'];
+    $data = config('carriers.flatrate.title');
+
+    $key = $item['key'];
+    $key = explode(".", $key);
+    array_shift($key);
+    $firstField = current($key);
+    $secondField = next($key);
+    $key = implode(".", $key);
+
+    $name = $key . '.' . $field['name'];
 ?>
-<div class="control-group {{ $field['type'] }}" :class="[errors.has('{{ $name }}') ? 'has-error' : '']">
+
+<div class="control-group {{ $field['type'] }}" :class="[errors.has('{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]') ? 'has-error' : '']">
     <label for="{{ $name }}" {{ !isset($field['validation']) || strpos('required', $field['validation']) < 0 ? '' : 'class=required' }}>
 
         {{ $field['title'] }}
@@ -34,21 +44,17 @@
 
     </label>
 
-    <?php
-        $configData = core()->getConfigData($name, current($channel_locale),  next($channel_locale));
-    ?>
-
     @if ($field['type'] == 'text')
 
-        <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;">
+        <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;">
 
     @elseif ($field['type'] == 'textarea')
 
-        <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" data-vv-as="&quot;{{ $field['name'] }}&quot;">{{ old($name) ?: core()->getConfigData($name) }}</textarea>
+        <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;">{{ old($name) ?: core()->getConfigData($name) }}</textarea>
 
     @elseif ($field['type'] == 'select')
 
-        <select v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $name }}" data-vv-as="&quot;{{ $field['name'] }}&quot;" >
+        <select v-validate="'{{ $validations }}'" class="control" id="{{ $name }}" name="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;" >
 
             @foreach($field['options'] as $option)
 
@@ -71,5 +77,5 @@
 
     @endif
 
-    <span class="control-error" v-if="errors.has('{{ $name }}')">@{{ errors.first('{!! $name !!}') }}</span>
+    <span class="control-error" v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]')">@{{ errors.first('{!! $name !!}') }}</span>
 </div>
