@@ -16,6 +16,13 @@
                 <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
 
                 <span class="account-heading">{{ __('shop::app.customer.account.review.index.title') }}</span>
+
+                @if(count($reviews) > 1)
+                    <div class="account-action">
+                        <a href="{{ route('customer.review.deleteall') }}">{{ __('shop::app.wishlist.deleteall') }}</a>
+                    </div>
+                @endif
+
                 <span></span>
                 <div class="horizontal-rule"></div>
             </div>
