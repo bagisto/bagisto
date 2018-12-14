@@ -8,7 +8,7 @@
 
     $validations = implode('|', array_filter($validations));
 
-    $name = $field['title'];
+    $name = $field['name'];
 ?>
 <div class="control-group {{ $field['type'] }}" :class="[errors.has('{{ $name }}') ? 'has-error' : '']">
     <label for="{{ $name }}" {{ !isset($field['validation']) || strpos('required', $field['validation']) < 0 ? '' : 'class=required' }}>

@@ -5,11 +5,9 @@ namespace Webkul\User\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Event;
 use Webkul\User\Bouncer;
 use Webkul\User\Facades\Bouncer as BouncerFacade;
 use Webkul\User\Http\Middleware\Bouncer as BouncerMiddleware;
-use Webkul\Core\Tree;
 
 class UserServiceProvider extends ServiceProvider
 {
@@ -25,22 +23,6 @@ class UserServiceProvider extends ServiceProvider
         $router->aliasMiddleware('admin', BouncerMiddleware::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-
-        $this->createACL();
-    }
-
-    /**
-     * This method fires an event for acl creation, any package can add their acl item by listening to the admin.acl.build event
-     *
-     * @return void
-     */
-    public function createACL()
-    {
-        Event::listen('admin.acl.create', function () {
-            return Tree::create(function ($acl) {
-                Event::fire('admin.acl.build', $acl);
-            });
-        });
     }
 
     /**

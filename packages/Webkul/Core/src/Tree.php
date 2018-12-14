@@ -4,14 +4,40 @@ namespace Webkul\Core;
 
 use Illuminate\Support\Facades\Request;
 
+/**
+ * Tree class
+ *
+ * @author    Jitendra Singh <jitendra@webkul.com>
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 class Tree {
 
+    /**
+     * Contains tree item
+     *
+     * @var array
+     */
 	public $items = [];
 
+    /**
+     * Contains current item route
+     *
+     * @var string
+     */
 	public $current;
 
+    /**
+     * Contains current item key
+     *
+     * @var string
+     */
 	public $currentKey;
 
+    /**
+     * Create a new instance.
+     *
+     * @return void
+     */
 	public function __construct() {
 		$this->current = Request::url();
 	}
@@ -23,9 +49,12 @@ class Tree {
 	 * @param  callable $callback Callback to use after the Config creation
 	 * @return object
 	 */
-	public static function create($callback) {
+	public static function create($callback = null) {
 		$tree = new Tree();
-		$callback($tree);
+
+		if($callback) {
+			$callback($tree);
+		}
 
 		return $tree;
 	}
@@ -48,6 +77,7 @@ class Tree {
 		}
 
 		$children = str_replace('.', '.children.', $item['key']);
+
 		core()->array_set($this->items, $children, $item);
 	}
 
