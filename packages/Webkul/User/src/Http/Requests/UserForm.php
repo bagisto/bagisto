@@ -29,10 +29,11 @@ class UserForm extends FormRequest
             'name' => 'required',
             'email' => 'email|unique:admins,email',
             'password' => 'nullable|confirmed',
+            'status' => 'sometimes',
             'role_id' => 'required'
         ];
 
-        if($this->method() == 'PUT') {
+        if ($this->method() == 'PUT') {
             $this->rules['email'] = 'email|unique:admins,email,' . $this->route('id');
         }
 

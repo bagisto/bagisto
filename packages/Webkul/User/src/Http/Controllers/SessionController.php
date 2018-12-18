@@ -63,10 +63,19 @@ class SessionController extends Controller
         ]);
 
         $remember = request('remember');
-        if (! auth()->guard('admin')->attempt(request(['email', 'password']), $remember)) {
+
+        if (!auth()->guard('admin')->attempt(request(['email', 'password']), $remember)) {
             session()->flash('error', 'Please check your credentials and try again.');
 
             return back();
+        }
+
+        if (auth()->guard('admin')->user()->status == 0) {
+            session()->flash('warning', 'Your account is yet to be activated, please contact administrator.');
+
+            auth()->guard('admin')->logout();
+
+            return redirect()->route('admin.session.create');
         }
 
         return redirect()->intended(route($this->_config['redirect']));

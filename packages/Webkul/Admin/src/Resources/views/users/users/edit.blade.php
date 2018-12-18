@@ -72,6 +72,7 @@
                                 <label for="status">{{ __('admin::app.users.users.status') }}</label>
                                 <span class="checkbox">
                                     <input type="checkbox" id="status" name="status" value="{{ $user->status }}" {{ $user->status ? 'checked' : '' }}>
+
                                     <label class="checkbox-view" for="status"></label>
                                     {{ __('admin::app.users.users.account-is-active') }}
                                 </span>
