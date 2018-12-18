@@ -106,7 +106,7 @@ class ConfigurationController extends Controller
      */
     public function store()
     {
-        $data = request()->all();
+        $this->coreConfig->create(request()->all());
 
         session()->flash('success', 'Shipping Method is created successfully');
 

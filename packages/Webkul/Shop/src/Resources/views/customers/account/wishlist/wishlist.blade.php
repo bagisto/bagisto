@@ -14,7 +14,7 @@
 
             @if(count($items))
             <div class="account-action">
-                <a href="{{ route('customer.wishlist.removeall') }}" style="margin-right: 15px;">{{ __('shop::app.wishlist.deleteall') }}</a>
+                <a href="{{ route('customer.wishlist.removeall') }}">{{ __('shop::app.wishlist.deleteall') }}</a>
             </div>
             @endif
             <div class="horizontal-rule"></div>

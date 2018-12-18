@@ -255,7 +255,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
                 ])->name('customer.orders.print');
 
                 /* Reviews route */
-                //Customer reviews(listing) only approved
+                //Customer reviews
                 Route::get('reviews', 'Webkul\Customer\Http\Controllers\CustomerController@reviews')->defaults('_config', [
                     'view' => 'shop::customers.account.reviews.index'
                 ])->name('customer.reviews.index');
@@ -264,6 +264,11 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
                 Route::get('reviews/delete/{id}', 'Webkul\Shop\Http\Controllers\ReviewController@destroy')->defaults('_config', [
                     'redirect' => 'customer.reviews.index'
                 ])->name('customer.review.delete');
+
+                 //Customer all review delete
+                Route::get('reviews/all-delete', 'Webkul\Shop\Http\Controllers\ReviewController@deleteAll')->defaults('_config', [
+                    'redirect' => 'customer.reviews.index'
+                ])->name('customer.review.deleteall');
             });
         });
     });

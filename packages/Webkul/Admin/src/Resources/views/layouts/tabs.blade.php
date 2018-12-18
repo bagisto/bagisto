@@ -10,7 +10,9 @@
                     </a>
                 </li>
             @endforeach
+
         @else
+
             @if (array_get($config->items, request()->route('slug') . '.children'))
                 @foreach (array_get($config->items, request()->route('slug') . '.children') as $key => $item)
                     <li class="{{ $key == request()->route('slug2') ? 'active' : '' }}">
