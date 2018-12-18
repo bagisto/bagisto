@@ -20,7 +20,7 @@
                         </span>
 
                         <span class="role">
-                            Administrator
+                            {{ auth()->guard('admin')->user()->role['name'] }}
                         </span>
                     </div>
                     <i class="icon arrow-down-icon active"></i>

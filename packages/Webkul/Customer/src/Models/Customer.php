@@ -8,6 +8,7 @@ use Webkul\Customer\Models\CustomerGroup;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Sales\Models\Order;
 use Webkul\Customer\Models\Wishlist;
+use Webkul\Product\Models\ProductReview;
 use Webkul\Customer\Notifications\CustomerResetPassword;
 
 class Customer extends Authenticatable
@@ -88,5 +89,12 @@ class Customer extends Authenticatable
      */
     public function active_carts() {
         return $this->hasMany(Cart::class, 'customer_id')->where('is_active', 1);
+    }
+
+    /**
+     * get all reviews of a customer
+    */
+    public function all_reviews() {
+        return $this->hasMany(ProductReview::class, 'customer_id');
     }
 }

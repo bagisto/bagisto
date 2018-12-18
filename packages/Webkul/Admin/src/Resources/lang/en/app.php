@@ -544,7 +544,9 @@ return [
             'channel_name' => 'Channel Name',
             'state' => 'State',
             'select-state' => 'Select a region, state or province.',
-            'country' => 'Country'
+            'country' => 'Country',
+            'male' => 'Male',
+            'female' => 'Female'
         ],
         'reviews' => [
             'title' => 'Reviews',
