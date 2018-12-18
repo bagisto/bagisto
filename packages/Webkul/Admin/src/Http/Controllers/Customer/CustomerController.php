@@ -104,7 +104,8 @@ class CustomerController extends Controller
             'last_name' => 'string|required',
             'gender' => 'required',
             'phone' => 'nullable|numeric|unique:customers,phone',
-            'email' => 'required|unique:customers,email'
+            'email' => 'required|unique:customers,email',
+            'date_of_birth' => 'date|before:today'
         ]);
 
         $data=request()->all();
@@ -152,7 +153,8 @@ class CustomerController extends Controller
             'last_name' => 'string|required',
             'gender' => 'required',
             'phone' => 'nullable|numeric|unique:customers,phone,'. $id,
-            'email' => 'required|unique:customers,email,'. $id
+            'email' => 'required|unique:customers,email,'. $id,
+            'date_of_birth' => 'date|before:today'
         ]);
 
         $this->customer->update(request()->all(),$id);

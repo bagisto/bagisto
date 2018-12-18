@@ -136,7 +136,7 @@ class Toolbar extends AbstractProduct
 
         if(isset($params['mode']))
             return $params['mode'];
-        
+
         return 'grid';
     }
 }

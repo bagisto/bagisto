@@ -55,7 +55,7 @@
                     @csrf()
 
                     @if ($groups = array_get($config->items, request()->route('slug') . '.children.' . request()->route('slug2') . '.children'))
-                        
+
                         @foreach ($groups as $key => $item)
 
                             <accordian :title="'{{ __($item['name']) }}'" :active="true">
@@ -64,7 +64,7 @@
                                     @foreach ($item['fields'] as $field)
 
                                         @include ('admin::configuration.field-type', ['field' => $field])
-                                
+
                                     @endforeach
 
                                 </div>
@@ -88,7 +88,7 @@
                 $('#channel-switcher').val()
                 var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
 
-                window.location.href = "{{ route('admin.configuration.sales.shipping_methods')  }}" + query;
+                window.location.href = "{{ route('admin.configuration.index', [request()->route('slug'), request()->route('slug2')]) }}" + query;
             })
         });
     </script>

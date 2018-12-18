@@ -123,4 +123,23 @@ class ReviewController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Function to delete all reviews
+     *
+     * @return Mixed Response & Boolean
+    */
+    public function deleteAll() {
+        $reviews = auth()->guard('customer')->user()->all_reviews;
+
+        if($reviews->count() > 0) {
+            foreach($reviews as $review) {
+                $this->productReview->delete($review->id);
+            }
+        }
+
+        session()->flash('success', trans('shop::app.reviews.delete-all'));
+
+        return redirect()->back();
+    }
 }

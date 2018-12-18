@@ -15,11 +15,11 @@
                     </a>
                 </li>
             @endforeach
-        
+
         @else
 
             @foreach($config->items as $key => $item)
-                
+
                 <li class="{{ $item['key'] == request()->route('slug') ? 'active' : '' }}">
                     <a href="{{ route('admin.configuration.index', $item['key']) }}">
                         {{ isset($item['name']) ? $item['name'] : '' }}
