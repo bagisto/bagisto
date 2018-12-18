@@ -3,7 +3,6 @@
 namespace Webkul\Shop\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Pagination\Paginator;
@@ -13,6 +12,12 @@ use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Providers\ComposerServiceProvider;
 use Webkul\Core\Tree;
 
+/**
+ * Shop service provider
+ *
+ * @author    Jitendra Singh <jitendra@webkul.com>
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 class ShopServiceProvider extends ServiceProvider
 {
     /**
@@ -40,8 +45,6 @@ class ShopServiceProvider extends ServiceProvider
 
         $this->composeView();
 
-        $this->createCustomerMenu();
-
         Paginator::defaultView('shop::partials.pagination');
         Paginator::defaultSimpleView('shop::partials.pagination');
     }
@@ -58,7 +61,7 @@ class ShopServiceProvider extends ServiceProvider
         if (!$themes->current() && \Config::get('themes.default')) {
             $themes->set(\Config::get('themes.default'));
         }
-        
+
         $this->registerConfig();
     }
 
@@ -70,32 +73,18 @@ class ShopServiceProvider extends ServiceProvider
     protected function composeView()
     {
         view()->composer('shop::customers.account.partials.sidemenu', function ($view) {
-            $menu = current(Event::fire('customer.menu.create'));
+            $tree = Tree::create();
 
-            $view->with('menu', $menu);
-        });
-    }
-
-    /**
-     * This method fires an event for menu creation, any package can add their menu item by listening to the customer.menu.build event
-     *
-     * @return void
-     */
-    public function createCustomerMenu()
-    {
-        Event::listen('customer.menu.create', function () {
-            return Tree::create(function ($tree) {
-                Event::fire('customer.menu.build', $tree);
-            });
-        });
-
-        Event::listen('customer.menu.build', function ($tree) {
             foreach(config('menu.customer') as $item) {
                 $tree->add($item, 'menu');
             }
+
+            $tree->items = core()->sortItems($tree->items);
+
+            $view->with('menu', $tree);
         });
     }
-    
+
     /**
      * Register package config.
      *
