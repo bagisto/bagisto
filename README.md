@@ -100,7 +100,7 @@ php artisan storage:link
 ```
 
 ```
-composer dump-autload
+composer dump-autoload
 ```
 
 > That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
