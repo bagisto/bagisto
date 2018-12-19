@@ -156,11 +156,13 @@ class AttributeController extends Controller
             $indexes = explode(',', request()->input('indexes'));
 
             foreach($indexes as $key => $value) {
+                $attribute = $this->attribute->findOrFail($value);
+
                 try {
                     if(!$attribute->is_user_defined)
                         continue;
                     else
-                        $this->attribute->delete($id);
+                        $this->attribute->delete($value);
                 } catch(\Exception $e) {
                     $suppressFlash = true;
 
@@ -169,7 +171,7 @@ class AttributeController extends Controller
             }
 
             if(!$suppressFlash)
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success'));
+                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'attributes']));
             else
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'attributes']));
 
