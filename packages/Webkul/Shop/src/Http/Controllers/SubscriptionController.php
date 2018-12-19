@@ -124,6 +124,7 @@ class SubscriptionController extends Controller
     public function unsubscribe($token) {
         $subscriber = $this->subscription->findOneByField('token', $token);
 
+        if(isset($subscriber))
         if($subscriber->count() > 0 && $subscriber->is_subscribed == 1 &&$subscriber->update(['is_subscribed' => 0])) {
             session()->flash('info', trans('shop::app.subscription.unsubscribed'));
         } else {

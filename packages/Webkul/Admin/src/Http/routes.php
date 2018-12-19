@@ -296,28 +296,33 @@ Route::group(['middleware' => ['web']], function () {
             });
 
             // User Routes
+            //datagrid for backend users
             Route::get('/users', 'Webkul\User\Http\Controllers\UserController@index')->defaults('_config', [
                 'view' => 'admin::users.users.index'
             ])->name('admin.users.index');
 
+            //create backend user get
             Route::get('/users/create', 'Webkul\User\Http\Controllers\UserController@create')->defaults('_config', [
                 'view' => 'admin::users.users.create'
             ])->name('admin.users.create');
 
+            //create backend user post
             Route::post('/users/create', 'Webkul\User\Http\Controllers\UserController@store')->defaults('_config', [
                 'redirect' => 'admin.users.index'
             ])->name('admin.users.store');
 
+            //delete backend user view
             Route::get('/users/edit/{id}', 'Webkul\User\Http\Controllers\UserController@edit')->defaults('_config', [
                 'view' => 'admin::users.users.edit'
             ])->name('admin.users.edit');
 
+            //edit backend user submit
             Route::put('/users/edit/{id}', 'Webkul\User\Http\Controllers\UserController@update')->defaults('_config', [
                 'redirect' => 'admin.users.index'
             ])->name('admin.users.update');
 
+            //delete backend user
             Route::get('/users/delete/{id}', 'Webkul\User\Http\Controllers\UserController@destroy')->name('admin.users.delete');
-
 
             // User Role Routes
             Route::get('/roles', 'Webkul\User\Http\Controllers\RoleController@index')->defaults('_config', [
