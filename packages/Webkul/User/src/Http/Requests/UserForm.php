@@ -25,12 +25,11 @@ class UserForm extends FormRequest
      */
     public function rules()
     {
-        dd(request()->input());
         $this->rules = [
             'name' => 'required',
             'email' => 'email|unique:admins,email',
             'password' => 'nullable|confirmed',
-            'status' => 'present',
+            'status' => 'sometimes',
             'role_id' => 'required'
         ];
 

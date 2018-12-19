@@ -46,7 +46,9 @@ return [
         'name' => 'Name',
         'email' => 'Email',
         'password' => 'Password',
-        'confirm-password' => 'Confirm Password'
+        'confirm-password' => 'Confirm Password',
+        'change-password' => 'Change Account Password',
+        'current-password' => 'Current Password'
     ],
     'users' => [
         'forget-password' => [
@@ -566,7 +568,7 @@ return [
             'edit-btn-title' => 'Update Subscriber',
             'update-success' => 'Subscriber was successfully updated',
             'update-failed' => 'Error! You cannot unsubscribe the subscriber',
-            'delete-success' => 'Subscriber was successfully deleted',
+            'delete' => 'Subscriber was successfully deleted',
             'delete-failed' => 'Erorr! Subscriber cannot be deleted'
         ]
     ],

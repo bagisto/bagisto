@@ -2,6 +2,11 @@
 
 namespace Webkul\User\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Webkul\User\Http\Controllers\Controller;
+use Hash;
+
 /**
  * Admin user account controller
  *
@@ -53,10 +58,17 @@ class AccountController extends Controller
         $this->validate(request(), [
             'name' => 'required',
             'email' => 'email|unique:admins,email,' . $user->id,
-            'password' => 'nullable|confirmed'
+            'password' => 'nullable|min:6|confirmed',
+            'current_password' => 'required|min:6'
         ]);
 
-        $data = request()->all();
+        $data = request()->input();
+
+        if(!Hash::check($data['current_password'], auth()->guard('admin')->user()->password)) {
+            session()->flash('warning', 'Current password does not match.');
+
+            return redirect()->back();
+        }
 
         if(!$data['password'])
             unset($data['password']);
