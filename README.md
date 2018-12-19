@@ -106,35 +106,6 @@ composer dump-autoload
 > That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
 
 
-### 5. Migration from v0.1.0 to v0.1.1 (Only for git users, everyone have to download fresh copy or follow from step 1 and use the same database configuration)
-
-**Run commands below:**
-
-> **php artisan migrate**
-
-> **php artisan vendor:publish**
-
-
-### 6. Migration from v0.1.1 to v0.1.2
-
-**Run commands below:**
-
-> **php artisan migrate**
-
-> **php artisan vendor:publish**
-
-
-### 7. Migration from v0.1.2 to v0.1.3
-
-**Run commands below:**
-
-> **composer install**
-
-> **php artisan migrate**
-
-> **php artisan vendor:publish**
-
-
 ### 7. License
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://opensource.org/licenses/MIT).
 
