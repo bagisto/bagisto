@@ -55,6 +55,9 @@ Bagisto is using power of both of these frameworks and making best out of it out
 ### 3. Configuration:
 
 **Run this Command** to download the project on to your local machine or server:
+
+>> Note: If you have downloaded zip file then ignore this.
+
 ~~~
 composer create-project bagisto/bagisto
 ~~~
@@ -77,6 +80,10 @@ default.
 ### 4. Installation:
 
 **Run these Commands Below**
+>> Run this command below, if installing from the zip else skip:
+~~~
+composer install
+~~~
 ~~~
 php artisan migrate
 ~~~
@@ -90,6 +97,10 @@ php artisan vendor:publish
 ~~~
 ```
 php artisan storage:link
+```
+
+```
+composer dump-autload
 ```
 
 > That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
