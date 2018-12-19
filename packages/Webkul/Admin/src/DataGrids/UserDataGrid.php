@@ -11,16 +11,12 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class UserDataGrid
 {
-    /**
-     * The Data Grid implementation.
-     *
-     * @var UserDataGrid
-     * for admin users
-     */
 
+    /**
+     * The Data Grid implementation for admin users
+     */
     public function createUserDataGrid()
     {
 
@@ -97,6 +93,18 @@ class UserDataGrid
                     //     return '<a class="color-red">' . $object->Name . '</a>';
                     // },
                 ], [
+                    'name' => 'u.status',
+                    'alias' => 'Status',
+                    'type' => 'boolean',
+                    'label' => 'Status',
+                    'sortable' => true,
+                    'wrapper' => function ($value) {
+                        if($value == 1)
+                            return "Active";
+                        else
+                            return "Inactive";
+                    },
+                ], [
                     'name' => 'u.email',
                     'alias' => 'Email',
                     'type' => 'string',
@@ -110,6 +118,7 @@ class UserDataGrid
                     'sortable' => true,
                 ],
             ],
+
             //don't use aliasing in case of filters
             'filterable' => [
                 [
@@ -126,14 +135,20 @@ class UserDataGrid
                     'column' => 'u.email',
                     'alias' => 'Email',
                     'type' => 'string',
-                    'label' => 'Email',
+                    'label' => 'Email'
                 ], [
                     'column' => 'r.name',
                     'alias' => 'rolename',
                     'type' => 'string',
-                    'label' => 'Role Name',
+                    'label' => 'Role Name'
+                ], [
+                    'name' => 'u.status',
+                    'alias' => 'Status',
+                    'type' => 'boolean',
+                    'label' => 'Status'
                 ]
             ],
+
             //don't use aliasing in case of searchables
             'searchable' => [
                 [
@@ -154,6 +169,7 @@ class UserDataGrid
                     'label' => 'Role Name',
                 ]
             ],
+
             'operators' => [
                 'eq' => "=",
                 'lt' => "<",
@@ -165,15 +181,13 @@ class UserDataGrid
                 'like' => "like",
                 'nlike' => "not like",
             ],
-            // 'css' => []
 
+            // 'css' => []
         ]);
 
     }
 
     public function render() {
-
         return $this->createUserDataGrid()->render();
-
     }
 }

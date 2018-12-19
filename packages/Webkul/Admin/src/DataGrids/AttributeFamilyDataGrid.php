@@ -5,23 +5,18 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
-
 /**
  * Attributes Family DataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class AttributeFamilyDataGrid
 {
-    /**
-     * The Data Grid implementation.
-     *
-     * @var CountryComposer
-     * for countries
-     */
 
+    /**
+     * The Data Grid implementation for Attribute Families
+     */
     public function createAttributeFamilyDataGrid()
     {
 

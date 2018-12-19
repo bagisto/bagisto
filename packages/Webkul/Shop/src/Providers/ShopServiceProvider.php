@@ -4,6 +4,8 @@ namespace Webkul\Shop\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Pagination\Paginator;
 use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Theme;
 use Webkul\Shop\Http\Middleware\Currency;
@@ -42,6 +44,9 @@ class ShopServiceProvider extends ServiceProvider
         $this->app->register(ComposerServiceProvider::class);
 
         $this->composeView();
+
+        Paginator::defaultView('shop::partials.pagination');
+        Paginator::defaultSimpleView('shop::partials.pagination');
     }
 
     /**
@@ -56,7 +61,7 @@ class ShopServiceProvider extends ServiceProvider
         if (!$themes->current() && \Config::get('themes.default')) {
             $themes->set(\Config::get('themes.default'));
         }
-        
+
         $this->registerConfig();
     }
 
@@ -79,7 +84,7 @@ class ShopServiceProvider extends ServiceProvider
             $view->with('menu', $tree);
         });
     }
-    
+
     /**
      * Register package config.
      *

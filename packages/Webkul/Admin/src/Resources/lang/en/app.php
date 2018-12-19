@@ -34,7 +34,8 @@ return [
         'mass-ops' => [
             'method-error' => 'Error! Wrong method detected, please check mass action configuration',
             'delete-success' => 'Selected index of :resource were successfully deleted',
-            'partial-action' => 'Some actions were not performed due restricted system constraints on :resource'
+            'partial-action' => 'Some actions were not performed due restricted system constraints on :resource',
+            'update-success' => 'Selected index of :resource were successfully updated'
         ]
     ],
 
@@ -45,7 +46,9 @@ return [
         'name' => 'Name',
         'email' => 'Email',
         'password' => 'Password',
-        'confirm-password' => 'Confirm Password'
+        'confirm-password' => 'Confirm Password',
+        'change-password' => 'Change Account Password',
+        'current-password' => 'Current Password'
     ],
     'users' => [
         'forget-password' => [
@@ -223,7 +226,8 @@ return [
             'disabled' => 'Disabled',
             'add-variant-title' => 'Add Variant',
             'variant-already-exist-message' => 'Variant with same attribute options already exists.',
-            'add-image-btn-title' => 'Add Image'
+            'add-image-btn-title' => 'Add Image',
+            'mass-delete-success' => 'All the selected index of products have been deleted successfully'
         ],
         'attributes' => [
             'title' => 'Attributes',
@@ -555,14 +559,17 @@ return [
             'status' => 'Status',
             'comment' => 'Comment'
         ],
+
         'subscribers' => [
             'title' => 'News Letter Subscribers',
             'title-edit' => 'Edit News Letter Subscriber',
             'email' => 'Email',
             'is_subscribed' => 'Subscribed',
             'edit-btn-title' => 'Update Subscriber',
-            'update-success' => 'You updated subscriber',
-            'update-failed' => 'Error! You cannot unsubscribed the subscriber'
+            'update-success' => 'Subscriber was successfully updated',
+            'update-failed' => 'Error! You cannot unsubscribe the subscriber',
+            'delete' => 'Subscriber was successfully deleted',
+            'delete-failed' => 'Erorr! Subscriber cannot be deleted'
         ]
     ],
 

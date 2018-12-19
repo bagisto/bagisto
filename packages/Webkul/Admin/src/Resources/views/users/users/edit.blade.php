@@ -28,7 +28,7 @@
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.users.users.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="email" name="name" data-vv-as="&quot;{{ __('admin::app.users.users.name') }}&quot;" value="{{ $user->name }}"/>
+                                <input type="text" v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.users.users.name') }}&quot;" value="{{ $user->name }}"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
@@ -71,7 +71,15 @@
                             <div class="control-group">
                                 <label for="status">{{ __('admin::app.users.users.status') }}</label>
                                 <span class="checkbox">
-                                    <input type="checkbox" id="status" name="status" value="{{ $user->status }}" {{ $user->status ? 'checked' : '' }}>
+                                    <input type="checkbox" id="status" name="status"
+                                    {{-- @if($user->status == 0)
+                                        value="false"
+                                    @else
+                                        value="true"
+                                    @endif --}}
+
+                                    {{ $user->status ? 'checked' : '' }}>
+
                                     <label class="checkbox-view" for="status"></label>
                                     {{ __('admin::app.users.users.account-is-active') }}
                                 </span>

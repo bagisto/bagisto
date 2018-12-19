@@ -11,17 +11,12 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class ExchangeRatesDataGrid
 {
+
     /**
-     * The Data Grid implementation.
-     *
-     * @var ExchangeRatesDataGrid
-     * for Exchange Rates
+     * The Data Grid implementation for Exchange Rates
      */
-
-
     public function createExchangeRatesDataGrid()
     {
 

@@ -23,7 +23,7 @@
                 <div class="form-container">
                     <form action="{{ route('shop.subscribe') }}">
                         <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                            <input type="text" class="control subscribe-field" name="email" placeholder="Email Address" required><br/>
+                            <input type="email" class="control subscribe-field" name="email" placeholder="Email Address" required><br/>
 
                             <button class="btn btn-md btn-primary">{{ __('shop::app.subscription.subscribe') }}</button>
                         </div>

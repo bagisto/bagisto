@@ -91,7 +91,6 @@ class CustomerController extends Controller
      */
     public function edit()
     {
-
         $id = auth()->guard('customer')->user()->id;
 
         $this->validate(request(), [
@@ -100,7 +99,7 @@ class CustomerController extends Controller
             'gender' => 'required',
             'date_of_birth' => 'date',
             'email' => 'email|unique:customers,email,'.$id,
-            'password' => 'confirmed|required_if:oldpassword,!=,null'
+            'password' => 'confirmed'
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();

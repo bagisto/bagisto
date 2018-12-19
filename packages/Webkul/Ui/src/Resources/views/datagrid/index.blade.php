@@ -24,7 +24,19 @@
             let params;
 
             $(document).ready(function() {
+                var actions = [];
+
+                @if(isset($massoperations) && count($massoperations))
+                    const massactions = @json($massoperations);
+
+                    for(var key in massactions) {
+                        actions[key] = massactions[key].action;
+                        // actions.push(massactions[key].action);
+                    }
+                @endif
+
                 params = (new URL(document.location)).search;
+
                 if(params.length > 0) {
                     if(allFilters.length == 0) {
                         //call reverse url function
@@ -66,44 +78,45 @@
 
                     if(typeValue == 'string') {
                         //default behaviour for strings
-                        $('.filter-condition-dropdown-number').css('display','none');
-                        $('.filter-condition-dropdown-datetime').css('display','none');
-                        $('.filter-response-number').css('display','none');
-                        $('.filter-response-datetime').css('display','none');
-                        $('.filter-response-boolean').css('display','none');
+                        $('.filter-condition-dropdown-number').css('display', 'none');
+                        $('.filter-condition-dropdown-datetime').css('display', 'none');
+                        $('.filter-condition-dropdown-boolean').css('display', 'none');
+                        $('.filter-response-number').css('display', 'none');
+                        $('.filter-response-datetime').css('display', 'none');
+                        $('.filter-response-boolean').css('display', 'none');
 
                         //show the two wanted
-                        $('.filter-condition-dropdown-string').css('display','inherit');
-                        $('.filter-response-string').css('display','inherit');
-                    }
-                    else if(typeValue == 'boolean') {
+                        $('.filter-condition-dropdown-string').css('display', 'inherit');
+                        $('.filter-response-string').css('display', 'inherit');
+                    } else if(typeValue == 'boolean') {
                         //hide unwanted
-                        $('.filter-condition-dropdown-string').css('display','none');
-                        $('.filter-condition-dropdown-number').css('display','none');
-                        $('.filter-condition-dropdown-datetime').css('display','none');
-                        $('.filter-response-string').css('display','none');
-                        $('.filter-response-number').css('display','none');
-                        $('.filter-response-datetime').css('display','none');
+                        $('.filter-condition-dropdown-string').css('display', 'none');
+                        $('.filter-condition-dropdown-number').css('display', 'none');
+                        $('.filter-condition-dropdown-datetime').css('display', 'none');
+                        $('.filter-response-string').css('display', 'none');
+                        $('.filter-response-number').css('display', 'none');
+                        $('.filter-response-datetime').css('display', 'none');
 
                         //only true or false for that column is needed as input
-                        $('.filter-response-boolean').css('display','inherit');
-                    }
-                    else if(typeValue == 'datetime') {
+                        $('.filter-condition-dropdown-boolean').css('display', 'inherit');
+                        $('.filter-response-boolean').css('display', 'inherit');
+                    } else if(typeValue == 'datetime') {
                         //hide unwanted
                         $('.filter-condition-dropdown-string').css('display','none');
                         $('.filter-condition-dropdown-number').css('display','none');
+                        $('.filter-condition-dropdown-boolean').css('display','none');
                         $('.filter-response-string').css('display','none');
                         $('.filter-response-number').css('display','none');
                         $('.filter-response-boolean').css('display','none');
 
                         //show what is wanted
-                        $('.filter-condition-dropdown-datetime').css('display','inherit');
+                        $('.filter-condition-dropdown-datetime').css('display', 'inherit');
                         $('.filter-response-datetime').css('display','inherit');
-                    }
-                    else if(typeValue == 'number') {
+                    } else if(typeValue == 'number') {
                         //hide unwanted
                         $('.filter-condition-dropdown-string').css('display','none');
                         $('.filter-condition-dropdown-datetime').css('display','none');
+                        $('.filter-condition-dropdown-boolean').css('display','none');
                         $('.filter-response-string').css('display','none');
                         $('.filter-response-datetime').css('display','none');
                         $('.filter-response-boolean').css('display','none');
@@ -114,7 +127,6 @@
                     }
 
                     $('.apply-filter').on('click',function() {
-
                         params = (new URL(document.location)).search;
 
                         if(typeValue == 'number') {
@@ -136,109 +148,152 @@
                             formURL(selectedColumn,conditionUsed,response,params,col_label);
                         }
                         if(typeValue == 'boolean') { //use select dropdown with two values true and false
+                            // console.log('boolean');
+                            var conditionUsed = $('.filter-condition-dropdown-boolean').find(':selected').val();
+                            var response = $('.response-boolean').val();
 
-                            console.log('boolean');
+                            formURL(selectedColumn,conditionUsed,response,params,col_label);
                         }
                     });
                 });
 
                 //remove the filter and from clicking on cross icon on tag
                 $('.remove-filter').on('click', function() {
-
                     var id = $(this).parents('.filter-one').attr('id');
                     if(allFilters.length ==  1) {
                         allFilters.pop();
                         var uri = window.location.href.toString();
                         if (uri.indexOf("?") > 0) {
                             var clean_uri = uri.substring(0, uri.indexOf("?"));
-                            // window.history.replaceState({}, document.title, clean_uri);
                             document.location = clean_uri;
                         }
                     }
                     else {
-                        allFilters.splice(id,1);
+                        allFilters.splice(id, 1);
                         makeURL();
                     }
                 });
 
-                //Enable Mass Action Subsequency
-                var id=[]; //for getting the id of the selected fields
-                var y = parseInt(0);
+                @if(isset($massoperations) && count($massoperations))
+                    //Enable Mass Action Subsequency
+                    var id=[]; //for getting the id of the selected fields
+                    var y = parseInt(0);
 
-                // master checkbox for selecting all entries
-                $("input[id=mastercheckbox]").change(function() {
-                    if($("input[id=mastercheckbox]").prop('checked') == true) {
-                        $('.indexers').each(function() {
-                            this.checked = true;
-                            if(this.checked){
-                                y = parseInt($(this).attr('id')); id.push(y);
-                            }
-                        });
+                    $(".massaction-type").change(function() {
+                        selectedType = $("#massaction-type").find(":selected").val();
+                        selectedTypeText = $("#massaction-type").find(":selected").text();
 
-                        $('.mass-action').css('display','');
-                        $('.table-grid-header').css('display','none');
-                        // $('.selected-items').html(id.toString());
-                        $('#indexes').val(id);
-                    }
-                    else if($("input[id=mastercheckbox]").prop('checked') == false) {
-                        $('.indexers').each(function(){ this.checked = false; });
+                        //remove the hardcoding by using configuration
+                        if(selectedType == 0 && selectedTypeText == 'delete') {
+                            $('#update-options').css('display', 'none');
 
-                        id = [];
+                            $('#mass-action-form').attr('action', actions[0]);
+                        } else if(selectedType == 1 && selectedTypeText == 'update') {
+                            $('#update-options').css('display', '');
 
-                        $('.mass-action').css('display','none');
-                        $('.table-grid-header').css('display','');
-                        $('#indexes').val('');
-                    }
-                });
+                            selectedOptionText = $("#option-type").find(":selected").text();
 
-                $('.massaction-remove').on('click', function() {
-
-                    id = [];
-
-                    $('.mass-action').css('display','none');
-
-                    if($('#mastercheckbox').prop('checked')) {
-                        $('#mastercheckbox').prop('checked',false);
-                    }
-
-                    $("input[class=indexers]").each(function() {
-                        if($(this).prop('checked')) {
-                            $(this).prop('checked',false);
+                            $("input[id=selected-option-text]").val(selectedOptionText);
+                            $('#mass-action-form').attr('action', actions[1]);
+                        } else {
+                            $('#update-options').css('display', 'none');
                         }
                     });
 
-                    $('.table-grid-header').css('display','');
-                });
+                    $("#option-type").click(function() {
+                        selectedOption = $("#option-type").find(":selected").val();
+                        selectedOptionText = $("#option-type").find(":selected").text();
 
-                $("input[class=indexers]").change(function() {
+                        $("input[id=selected-option-text]").val(selectedOptionText);
+                    });
 
-                    if(this.checked) {
-                        y = parseInt($(this).attr('id'));
-                        id.push(y);
-                    }
-                    else {
-                        y = parseInt($(this).attr('id'));
-                        var index = id.indexOf(y);
-                        id.splice(index,1);
-                    }
+                    // master checkbox for selecting all entries
+                    $("input[id=mastercheckbox]").change(function() {
+                        if($("input[id=mastercheckbox]").prop('checked') == true) {
+                            selectedOption = $("#massaction-type").find(":selected").val();
 
-                    if(id.length>0) {
-                        $('.mass-action').css('display','');
-                        $('.table-grid-header').css('display','none');
-                        $('#indexes').val(id);
+                            if(selectedOption == 0) {
+                                $('#mass-action-form').attr('action', actions[0]);
+                            } else if(selectedOption == 1) {
+                                $('#mass-action-form').attr('action', actions[1]);
+                            }
 
-                    }else if(id.length == 0) {
+                            $('.indexers').each(function() {
+                                this.checked = true;
+                                if(this.checked) {
+                                    y = parseInt($(this).attr('id'));
+                                    id.push(y);
+                                }
+                            });
 
-                        $('.mass-action').css('display','none');
-                        $('.table-grid-header').css('display','');
-                        $('#indexes').val('');
+                            $('.mass-action').css('display', '');
+                            $('.table-grid-header').css('display', 'none');
+                            $('#indexes').val(id);
+                        } else if($("input[id=mastercheckbox]").prop('checked') == false) {
+                            id = [];
+
+                            $('#mass-action-form').attr('action', ''); //set no actions when no index is there
+                            $('.indexers').each(function() { this.checked = false; });
+                            $('.mass-action').css('display', 'none');
+                            $('.table-grid-header').css('display', '');
+                            $('#indexes').val('');
+                        }
+                    });
+
+                    $('.massaction-remove').on('click', function() {
+                        id = [];
+
+                        $('#mass-action-form').attr('action', ''); //set no actions when no index is there
+                        $('.mass-action').css('display', 'none');
 
                         if($('#mastercheckbox').prop('checked')) {
-                            $('#mastercheckbox').prop('checked',false);
+                            $('#mastercheckbox').prop('checked', false);
                         }
-                    }
-                });
 
+                        $("input[class=indexers]").each(function() {
+                            if($(this).prop('checked')) {
+                                $(this).prop('checked',false);
+                            }
+                        });
+
+                        $('.table-grid-header').css('display', '');
+                    });
+
+                    $("input[class=indexers]").change(function() {
+                        if(this.checked) {
+                            selectedOption = $("#massaction-type").find(":selected").val();
+
+                            if(selectedOption == 0) {
+                                $('#mass-action-form').attr('action', actions[0]);
+                            } else if(selectedOption == 1) {
+                                $('#mass-action-form').attr('action', actions[1]);
+                            }
+
+                            y = parseInt($(this).attr('id'));
+                            id.push(y);
+                        }
+                        else {
+                            y = parseInt($(this).attr('id'));
+                            var index = id.indexOf(y);
+                            id.splice(index, 1);
+                        }
+
+                        if (id.length > 0) {
+                            $('.mass-action').css('display', '');
+                            $('.table-grid-header').css('display', 'none');
+                            $('#indexes').val(id);
+                        } else if (id.length == 0) {
+                            $('#mass-action-form').attr('action', ''); //set no actions when no index is there
+                            $('.mass-action').css('display', 'none');
+                            $('.table-grid-header').css('display', '');
+                            $('#indexes').val('');
+
+                            if ($('#mastercheckbox').prop('checked')) {
+                                $('#mastercheckbox').prop('checked', false);
+                            }
+                        }
+                    });
+                @endif
             });
 
             //make the url from the array and redirect
@@ -246,25 +301,25 @@
                 if(allFilters.length>0 && repetition == false)
                 {
                     for(i=0;i<allFilters.length;i++) {
-                        if(i==0){
+                        if(i==0) {
                             url = '?' + allFilters[i].column + '[' + allFilters[i].cond + ']' + '=' + allFilters[i].val;
-                        }
-                        else
+                        } else {
                             url = url + '&' + allFilters[i].column + '[' + allFilters[i].cond + ']' + '=' + allFilters[i].val;
+                        }
                     }
+
                     document.location = url;
 
                 } else if(allFilters.length>0 && repetition == true) {
                     //this is the case when the filter is being repeated on a single column with different condition and value
                     for(i=0;i<allFilters.length;i++) {
-
                         if(i==0) {
                             url = '?' + allFilters[i].column + '[' + allFilters[i].cond + ']' + '=' + allFilters[i].val;
-                        }
-                        else {
+                        } else {
                             url = url + '&' + allFilters[i].column + '[' + allFilters[i].cond + ']' + '=' + allFilters[i].val;
                         }
                     }
+
                     document.location = url;
                 } else {
                     var uri = window.location.href.toString();
@@ -276,8 +331,8 @@
 
             //make the filter array from url after being redirected
             function arrayFromUrl(urlstring) {
-
                 var obj={};
+
                 t = urlstring.slice(0,urlstring.length);
                 splitted = [];
                 moreSplitted = [];
@@ -289,6 +344,7 @@
                     col = moreSplitted[i][0].replace(']','').split('[')[0];
                     cond = moreSplitted[i][0].replace(']','').split('[')[1]
                     val = moreSplitted[i][1];
+
                     obj.column = col;
                     obj.cond = cond;
                     obj.val = val;
@@ -328,58 +384,51 @@
                         col_label_tag = "Search";
 
                         var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+
                         $('.filter-row-two').append(filter_card);
 
                     } else {
                         col_label_tag = $('li[data-name="'+allFilters[i].column+'"]').text().trim();
 
                         var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+
                         $('.filter-row-two').append(filter_card);
                     }
-
                 }
             }
 
             //This is being used for validation of url params and making array of filters
-            function formURL(column, condition, response, urlparams,clabel) {
-
+            function formURL(column, condition, response, urlparams, clabel) {
                 /* validate the conditions here and do the replacements and
                 push here in the all filters array */
                 var obj1 = {};
 
-                console.log(allFilters.length);
-
                 if(column == "" || condition == "" || response == "") {
-                    alert("Some of the required field is null, please check column, condition and value properly.");
+                    // alert('Some of the required field is null, please check column, condition and value properly');
+                    alert('{{ __('ui::app.datagrid.filter-fields-missing') }}');
 
                     return false;
-                }
-                else {
-                    if(allFilters.length>0) {
+                } else {
+                    if(allFilters.length > 0) {
                         //case for repeated filter
-
                         if(column != "sort" && column != "search") {
-
                             filter_repeated = 0;
 
-                            for(j=0; j<allFilters.length; j++) {
-
-                                if(allFilters[j].column == column && allFilters[j].cond == condition && allFilters[j].val == response)
-                                {
+                            for(j = 0; j < allFilters.length; j++) {
+                                if(allFilters[j].column == column && allFilters[j].cond == condition && allFilters[j].val == response) {
                                     filter_repeated = 1;
 
                                     return false;
                                 } else if(allFilters[j].column == column) {
                                     filter_repeated = 1;
-
                                     allFilters[j].cond = condition;
                                     allFilters[j].val = response;
 
                                     makeURL(true);
                                 }
                             }
-                            if(filter_repeated == 0) {
 
+                            if(filter_repeated == 0) {
                                 obj1.column = column;
                                 obj1.cond = condition;
                                 obj1.val = response;
@@ -391,9 +440,10 @@
                                 makeURL();
                             }
                         }
+
                         if(column == "sort") {
                             sort_exists = 0;
-                            for(j=0;j<allFilters.length;j++) {
+                            for(j = 0; j<allFilters.length; j++) {
                                 if(allFilters[j].column == "sort") {
                                     if(allFilters[j].column==column && allFilters[j].cond==condition && allFilters[j].val==response) {
 
@@ -405,8 +455,7 @@
 
                                             makeURL();
 
-                                        }
-                                        else {
+                                        } else {
                                             allFilters[j].column = column;
                                             allFilters[j].cond = condition;
                                             allFilters[j].val = "asc";
@@ -414,8 +463,7 @@
 
                                             makeURL();
                                         }
-                                    }
-                                    else {
+                                    } else {
                                         allFilters[j].column = column;
                                         allFilters[j].cond = condition;
                                         allFilters[j].val = response;
@@ -426,22 +474,26 @@
                                 }
                             }
                         }
+
                         if(column == "search") {
                             search_found = 0;
-                            for(j=0;j<allFilters.length;j++) {
+                            for(j = 0;j < allFilters.length;j++) {
                                 if(allFilters[j].column == "search") {
                                     allFilters[j].column = column;
                                     allFilters[j].cond = condition;
                                     allFilters[j].val = response;
                                     allFilters[j].label = clabel;
+
                                     makeURL();
                                 }
                             }
-                            for(j=0;j<allFilters.length;j++) {
+
+                            for(j = 0;j < allFilters.length;j++) {
                                 if(allFilters[j].column == "search") {
                                     search_found = 1;
                                 }
                             }
+
                             if(search_found == 0) {
                                 obj1.column = column;
                                 obj1.cond = condition;
@@ -449,6 +501,7 @@
                                 obj1.label = clabel;
                                 allFilters.push(obj1);
                                 obj1 = {};
+
                                 makeURL();
                             }
                         }
@@ -465,14 +518,14 @@
                     }
                 }
             }
+
             function confirm_click(message){
                 if (confirm(message)) {
-                    //do the action required
+                    return true;
                 } else {
                     return false;
                 }
             }
         </script>
     @endpush
-
 </div>

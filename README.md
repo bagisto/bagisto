@@ -95,7 +95,7 @@ php artisan storage:link
 > That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
 
 
-### 5. Migration from v0.1.0 to v0.1.1
+### 5. Migration from v0.1.0 to v0.1.1 (Only for git users, everyone have to download fresh copy or follow from step 1 and use the same database configuration)
 
 **Run commands below:**
 

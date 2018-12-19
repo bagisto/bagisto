@@ -152,12 +152,15 @@ class AttributeController extends Controller
     public function massDestroy() {
         $suppressFlash = false;
 
-        if(request()->isMethod('delete')) {
+        if(request()->isMethod('post')) {
             $indexes = explode(',', request()->input('indexes'));
 
             foreach($indexes as $key => $value) {
                 try {
-                    $this->attribute->delete($value);
+                    if(!$attribute->is_user_defined)
+                        continue;
+                    else
+                        $this->attribute->delete($id);
                 } catch(\Exception $e) {
                     $suppressFlash = true;
 

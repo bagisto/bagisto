@@ -482,6 +482,21 @@ class DataGrid
     }
 
     /**
+     * To find the alias
+     * of the column and
+     * by taking the column
+     * name.
+     * @return string
+     */
+    public function findType($column_alias) {
+        foreach($this->columns as $column) {
+            if($column->alias == $column_alias) {
+                return $column->type;
+            }
+        }
+    }
+
+    /**
      * Parse the URL
      * and get it ready
      * to be used.
@@ -546,7 +561,6 @@ class DataGrid
      *
      * @return QueryBuilder object
      */
-
     private function getQueryWithFilters()
     {
         $parsed = $this->parse();
@@ -560,7 +574,7 @@ class DataGrid
 
                     //case that don't need any resolving
                     $count_keys = count(array_keys($value));
-                    if ($count_keys==1) {
+                    if ($count_keys == 1) {
                         $this->query->orderBy(
                             str_replace('_', '.', array_keys($value)[0]),
                             array_values($value)[0]
@@ -568,7 +582,7 @@ class DataGrid
                     } else {
                         throw new \Exception('Multiple Sort keys Found, Please Resolve the URL Manually');
                     }
-                } elseif ($key=="search") {
+                } elseif ($key == "search") {
 
                     $count_keys = count(array_keys($value));
                     if($count_keys==1)
@@ -631,6 +645,8 @@ class DataGrid
                 } else {
                     // $column_name = $key;
                     $column_name = $this->findAlias($key);
+                    $column_type = $this->findType($key);
+
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
                             $this->query->where(
@@ -641,11 +657,19 @@ class DataGrid
                         }
                     } else {
                         foreach ($value as $condition => $filter_value) {
-                            $this->query->where(
-                                $column_name,
-                                $this->operators[$condition],
-                                $filter_value
-                            );
+                            if($column_type == 'datetime') {
+                                $this->query->whereDate(
+                                    $column_name,
+                                    $this->operators[$condition],
+                                    $filter_value
+                                );
+                            } else {
+                                $this->query->where(
+                                    $column_name,
+                                    $this->operators[$condition],
+                                    $filter_value
+                                );
+                            }
                         }
                     }
                 }
@@ -749,11 +773,7 @@ class DataGrid
                 $this->getQueryWithFilters();
             }
 
-            $this->results = $this->query->get();
-
-            if($pagination == true) {
-                $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
-            }
+            $this->results = $this->query->orderBy($this->select, 'desc')->paginate($this->perpage)->appends(request()->except('page'));
 
             return $this->results;
 
@@ -769,11 +789,7 @@ class DataGrid
                 $this->getQueryWithFilters();
             }
 
-            $this->results = $this->query->get();
-
-            if($pagination == true) {
-                $this->results = $this->query->paginate($this->perpage)->appends(request()->except('page'));
-            }
+            $this->results = $this->query->orderBy($this->select, 'desc')->paginate($this->perpage)->appends(request()->except('page'));
 
             return $this->results;
         }
