@@ -341,7 +341,7 @@
                                         <td>{{ core()->formatBasePrice($invoice->base_grand_total) }}</td>
                                         <td class="action">
                                             <a href="{{ route('admin.sales.invoices.view', $invoice->id) }}">
-                                                <i class="icon pencil-lg-icon"></i>
+                                                <i class="icon eye-icon"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -385,7 +385,7 @@
                                         <td>{{ $shipment->total_qty }}</td>
                                         <td class="action">
                                             <a href="{{ route('admin.sales.shipments.view', $shipment->id) }}">
-                                                <i class="icon pencil-lg-icon"></i>
+                                                <i class="icon eye-icon"></i>
                                             </a>
                                         </td>
                                     </tr>
