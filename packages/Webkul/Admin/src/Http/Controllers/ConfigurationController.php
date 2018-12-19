@@ -46,6 +46,8 @@ class ConfigurationController extends Controller
     {
         $this->middleware('admin');
 
+        $this->coreConfig = $coreConfig;
+
         $this->_config = request('_config');
 
         $this->prepareConfigTree();
@@ -128,10 +130,10 @@ class ConfigurationController extends Controller
      */
     public function store()
     {
-        $data = request()->all();
+        $this->coreConfig->create(request()->all());
 
         session()->flash('success', 'Shipping Method is created successfully');
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->back();
     }
 }

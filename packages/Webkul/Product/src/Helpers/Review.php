@@ -63,10 +63,10 @@ class Review extends AbstractProduct
                     ->orderBy('rating','desc')
                     ->get();
 
-        for($i=5; $i >= 1; $i--) {
-            if(!$reviews->isEmpty()) {
+        for ($i=5; $i >= 1; $i--) {
+            if (!$reviews->isEmpty()) {
                 foreach ($reviews as $review) {
-                    if($review->rating == $i) {
+                    if ($review->rating == $i) {
                         $percentage[$i] = round(($review->total/$this->getTotalReviews($product))*100);
                         break;
                     } else {

@@ -68,21 +68,14 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.review.index'
             ])->name('admin.customer.review.index');
 
-
+            // Configuration routes
             Route::get('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
                 'view' => 'admin::configuration.index'
             ])->name('admin.configuration.index');
 
-            //Shipping Methods Routes
-            Route::get('configuration/sales/shipping-methods', 'Webkul\Admin\Http\Controllers\ConfigurationController@index')->defaults('_config', [
-                'view' => 'admin::configuration.sales.shipping-method'
-            ])->name('admin.configuration.sales.shipping_methods');
-
-
-            Route::post('configuration/sales/shipping-methods', 'Webkul\Admin\Http\Controllers\ConfigurationController@store')->defaults('_config', [
-                'redirect' => 'admin.configuration.sales.shipping_methods'
-            ])->name('admin.configuration.sales.shipping_methods.store');
-
+            Route::post('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@store')->defaults('_config', [
+                'redirect' => 'admin.configuration.index'
+            ])->name('admin.configuration.index.store');
 
             // Reviews Routes
             Route::get('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[
