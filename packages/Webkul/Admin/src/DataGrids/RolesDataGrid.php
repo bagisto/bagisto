@@ -11,17 +11,11 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class RolesDataGrid
 {
     /**
-     * The Data Grid implementation.
-     *
-     * @var RolesDataGrid
-     * for Roles
+     * The Data Grid implementation for Roles
      */
-
-
     public function createRolesDataGrid()
     {
 

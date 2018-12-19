@@ -214,6 +214,68 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Mass Delete the products
+     *
+     * @return response
+     */
+    public function massDestroy() {
+        $data = request()->all();
+        $productIds = explode(',', $data['indexes']);
+
+        if(count($productIds)) {
+            foreach($productIds as $productId) {
+                $product = $this->product->find($productId);
+
+                if(!is_null($product)) {
+                    $product->delete();
+                }
+            }
+        }
+
+        session()->flash('success', trans('admin::app.catalog.products.mass-delete-success'));
+
+        return redirect()->route($this->_config['redirect']);
+    }
+
+    /**
+     * Mass updates the products
+     *
+     * @return response
+     */
+    public function massUpdate() {
+        $data = request()->all();
+        $attribute = 'status';
+
+        $productIds = explode(',', $data['indexes']);
+
+        if(!isset($data['massaction-type'])) {
+            return redirect()->back();
+        }
+
+        if(count($productIds)) {
+            foreach($productIds as $productId) {
+                $product = $this->product->find($productId);
+
+                if($data['update-options'] == 0 && $data['selected-option-text'] == 'In Active') {
+                    $result = $this->product->updateAttribute($product, $attribute, $data['update-options']);
+
+                    if($result)
+                        Event::fire('product.update.after', $product);
+                } else if($data['update-options'] == 1 && $data['selected-option-text'] == 'Active') {
+                    $result = $this->product->updateAttribute($product, $attribute, $data['update-options']);
+
+                    if($result)
+                        Event::fire('product.update.after', $product);
+                }
+            }
+        }
+
+        session()->flash('success', trans('admin::app.catalog.products.mass-delete-success'));
+
+        return redirect()->route($this->_config['redirect']);
+    }
+
     /*
      * To be manually invoked when data is seeded into products
      */

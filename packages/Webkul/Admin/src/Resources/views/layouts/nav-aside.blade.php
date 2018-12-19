@@ -1,7 +1,6 @@
 <div class="aside-nav">
     <ul>
         @if (request()->route()->getName() != 'admin.configuration.index')
-
             <?php $keys = explode('.', $menu->currentKey);  ?>
 
             @foreach(array_get($menu->items, current($keys) . '.children') as $item)
@@ -15,11 +14,8 @@
                     </a>
                 </li>
             @endforeach
-
         @else
-
             @foreach($config->items as $key => $item)
-
                 <li class="{{ $item['key'] == request()->route('slug') ? 'active' : '' }}">
                     <a href="{{ route('admin.configuration.index', $item['key']) }}">
                         {{ isset($item['name']) ? $item['name'] : '' }}
@@ -29,9 +25,7 @@
                         @endif
                     </a>
                 </li>
-
             @endforeach
-
         @endif
     </ul>
 </div>

@@ -11,14 +11,11 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class OrderInvoicesDataGrid
 {
+
     /**
-     * The Order invoices Data Grid implementation.
-     *
-     * @var OrderInvoicesDataGrid
-     * for invoices of orders
+     * The Order invoices Data Grid implementation for invoices of orders
      */
     public function createOrderInvoicesDataGrid()
     {
@@ -74,24 +71,25 @@ class OrderInvoicesDataGrid
                     'type' => 'number',
                     'label' => 'Order ID',
                     'sortable' => true
-                ],
-                // [
-                //     'name' => 'inv.state',
-                //     'alias' => 'invstate',
-                //     'type' => 'string',
-                //     'label' => 'State',
-                //     'sortable' => false
-                // ],
-                [
+                ], [
+                    'name' => 'inv.state',
+                    'alias' => 'invstate',
+                    'type' => 'string',
+                    'label' => 'State',
+                    'sortable' => true
+                ], [
                     'name' => 'inv.grand_total',
                     'alias' => 'invgrandtotal',
                     'type' => 'number',
                     'label' => 'Amount',
-                    'sortable' => true
+                    'sortable' => true,
+                    'wrapper' => function ($value) {
+                        return core()->formatBasePrice($value);
+                    },
                 ], [
                     'name' => 'inv.created_at',
                     'alias' => 'invcreated_at',
-                    'type' => 'date',
+                    'type' => 'datetime',
                     'label' => 'Invoice Date',
                     'sortable' => true
                 ]
@@ -103,6 +101,11 @@ class OrderInvoicesDataGrid
                     'alias' => 'invid',
                     'type' => 'number',
                     'label' => 'ID',
+                ], [
+                    'column' => 'inv.created_at',
+                    'alias' => 'invcreated_at',
+                    'type' => 'datetime',
+                    'label' => 'Invoice Date',
                 ]
             ],
             //don't use aliasing in case of searchables

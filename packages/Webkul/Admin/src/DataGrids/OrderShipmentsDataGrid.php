@@ -12,14 +12,11 @@ use DB;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class OrderShipmentsDataGrid
 {
+
     /**
-     * The Order Shipments Data Grid implementation.
-     *
-     * @var OrderShipmentsDataGrid
-     * for shipments of orders
+     * The Order Shipments Data Grid implementation for shipments of orders
      */
     public function createOrderShipmentsDataGrid()
     {
@@ -94,9 +91,9 @@ class OrderShipmentsDataGrid
                 ], [
                     'name' => 'ship.created_at',
                     'alias' => 'shipdate',
-                    'type' => 'string',
+                    'type' => 'datetime',
                     'label' => 'Shipment Date',
-                    'sortable' => false
+                    'sortable' => true
                 ]
             ],
 
@@ -106,6 +103,11 @@ class OrderShipmentsDataGrid
                     'alias' => 'shipID',
                     'type' => 'number',
                     'label' => 'ID',
+                ], [
+                    'column' => 'ship.created_at',
+                    'alias' => 'shipdate',
+                    'type' => 'datetime',
+                    'label' => 'Shipment Date',
                 ]
             ],
             //don't use aliasing in case of searchables

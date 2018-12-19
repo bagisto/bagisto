@@ -6,30 +6,25 @@ use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 
 /**
- * orderDataGrid
+ * OrderDataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class OrderDataGrid
 {
+
     /**
-     * The Data Grid implementation.
-     *
-     * @var orderDataGrid
-     * for orders
+     * The Data Grid implementation for orders
      */
     public function createOrderDataGrid()
     {
-
-            return DataGrid::make([
+        return DataGrid::make([
             'name' => 'orders',
             'table' => 'orders as or',
             'select' => 'or.id',
             'perpage' => 10,
-            'aliased' => false,
-            //True in case of joins else aliasing key required on all cases
+            'aliased' => false, //True in case of joins else aliasing key required on all cases
 
             'massoperations' =>[
                 // [
@@ -47,19 +42,12 @@ class OrderDataGrid
                     // 'confirm_text' => 'Do you really want to view this record?',
                     'icon' => 'icon eye-icon',
                     'icon-alt' => 'View'
-                ],
-                // [
-                //     'type' => 'Delete',
-                //     'route' => route('admin.datagrid.delete'),
-                //     'confirm_text' => 'Do you really want to do this?',
-                //     'icon' => 'icon trash-icon',
-                // ],
+                ]
             ],
 
             'join' => [],
 
             //use aliasing on secodary columns if join is performed
-
             'columns' => [
                 [
                     'name' => 'or.id',
@@ -94,7 +82,7 @@ class OrderDataGrid
                 ], [
                     'name' => 'or.created_at',
                     'alias' => 'createdat',
-                    'type' => 'string',
+                    'type' => 'datetime',
                     'label' => 'Order Date',
                     'sortable' => true,
                 ], [
@@ -140,10 +128,15 @@ class OrderDataGrid
                     'alias' => 'orstatus',
                     'type' => 'string',
                     'label' => 'Status'
+                ], [
+                    'column' => 'or.created_at',
+                    'alias' => 'createdat',
+                    'type' => 'datetime',
+                    'label' => 'Order Date',
                 ],
             ],
-            //don't use aliasing in case of searchables
 
+            //don't use aliasing in case of searchables
             'searchable' => [
                 [
                     'column' => 'or.id',
@@ -168,6 +161,7 @@ class OrderDataGrid
                 'like' => "like",
                 'nlike' => "not like",
             ],
+
             // 'css' => []
         ]);
     }

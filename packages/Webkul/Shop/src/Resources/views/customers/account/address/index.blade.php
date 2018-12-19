@@ -54,7 +54,7 @@
                                     </span>
 
                                     <span>
-                                        <a href="{{ route('address.delete', $address->id) }}" onclick="deleteAddress('Do you really want to do this?')">
+                                        <a href="{{ route('address.delete', $address->id) }}" onclick="deleteAddress('{{ __('shop::app.customer.account.address.index.confirm-delete') }}')">
                                             {{ __('shop::app.customer.account.address.index.delete') }}
                                         </a>
                                     </span>

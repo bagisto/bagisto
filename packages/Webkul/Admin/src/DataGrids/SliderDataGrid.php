@@ -11,16 +11,12 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class SliderDataGrid
 {
-    /**
-     * The Data Grid implementation.
-     *
-     * @var SliderDataGrid
-     * for Sliders
-     */
 
+    /**
+     * The Data Grid implementation for Sliders
+     */
     public function createSliderDataGrid()
     {
 

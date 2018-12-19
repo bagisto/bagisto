@@ -13,13 +13,10 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  */
 class CustomerDataGrid
 {
-    /**
-     * The CustomerDataGrid
-     * implementation.
-     *
-     * @var CustomerDataGrid
-     */
 
+    /**
+     * The CustomerDataGrid implementation.
+     */
     public function createCustomerDataGrid()
     {
 

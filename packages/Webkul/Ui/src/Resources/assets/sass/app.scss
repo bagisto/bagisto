@@ -800,6 +800,7 @@ h2 {
     @include border-radius(50px);
     color: white;
     padding: 8px;
+    white-space: nowrap;
 
     &.badge-sm {
         padding: 5px;

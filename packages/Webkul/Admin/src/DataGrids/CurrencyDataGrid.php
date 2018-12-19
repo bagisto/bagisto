@@ -11,16 +11,12 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class CurrencyDataGrid
 {
-    /**
-     * The Data Grid implementation.
-     *
-     * @var CurrenciesDataGrid
-     * for countries
-     */
 
+    /**
+     * The Data Grid implementation for currencies
+     */
     public function createCurrencyDataGrid()
     {
 
@@ -32,11 +28,10 @@ class CurrencyDataGrid
             'aliased' => false, //use this with false as default and true in case of joins
 
             'massoperations' =>[
-                [
-                    'route' => route('admin.currencies.massdelete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
+                0 => [
+                    'type' => 'delete', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
+                    'action' => route('admin.currencies.massdelete'),
+                    'method' => 'DELETE'
                 ]
             ],
 

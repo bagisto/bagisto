@@ -11,16 +11,12 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class AttributeDataGrid
 {
-    /**
-     * The Data Grid implementation.
-     *
-     * @var AttributeDataGrid
-     * for countries
-     */
 
+    /**
+     * The Data Grid implementation for Attributes
+     */
     public function createAttributeDataGrid()
     {
 
@@ -32,11 +28,10 @@ class AttributeDataGrid
             'aliased' => true,
 
             'massoperations' => [
-                [
-                    'route' => route('admin.catalog.attributes.massdelete'),
-                    'method' => 'DELETE',
-                    'label' => 'Delete',
-                    'type' => 'button',
+                0 => [
+                    'type' => 'delete', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
+                    'action' => route('admin.catalog.attributes.massdelete'),
+                    'method' => 'DELETE'
                 ]
             ],
 
@@ -85,7 +80,7 @@ class AttributeDataGrid
                 ], [
                     'name' => 'is_required',
                     'alias' => 'attributeIsRequired',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Required',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -97,7 +92,7 @@ class AttributeDataGrid
                 ], [
                     'name' => 'is_unique',
                     'alias' => 'attributeIsUnique',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Unique',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -109,7 +104,7 @@ class AttributeDataGrid
                 ], [
                     'name' => 'value_per_locale',
                     'alias' => 'attributeValuePerLocale',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Locale based',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -121,7 +116,7 @@ class AttributeDataGrid
                 ], [
                     'name' => 'value_per_channel',
                     'alias' => 'attributeValuePerChannel',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Channel based',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -130,7 +125,7 @@ class AttributeDataGrid
                         else
                             return "True";
                     },
-                ],
+                ]
             ],
 
             'filterable' => [
@@ -154,7 +149,27 @@ class AttributeDataGrid
                     'alias' => 'attributeType',
                     'type' => 'string',
                     'label' => 'Type',
-                ],
+                ], [
+                    'name' => 'is_required',
+                    'alias' => 'attributeIsRequired',
+                    'type' => 'boolean',
+                    'label' => 'Required',
+                ], [
+                    'name' => 'is_unique',
+                    'alias' => 'attributeIsUnique',
+                    'type' => 'boolean',
+                    'label' => 'Unique',
+                ], [
+                    'name' => 'value_per_locale',
+                    'alias' => 'attributeValuePerLocale',
+                    'type' => 'boolean',
+                    'label' => 'Locale based',
+                ], [
+                    'name' => 'value_per_channel',
+                    'alias' => 'attributeValuePerChannel',
+                    'type' => 'boolean',
+                    'label' => 'Channel based',
+                ]
             ],
 
             //don't use aliasing in case of searchables

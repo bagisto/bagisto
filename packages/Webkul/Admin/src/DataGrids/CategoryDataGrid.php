@@ -12,16 +12,12 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class CategoryDataGrid
 {
-    /**
-     * The Data Grid implementation.
-     *
-     * @var AttributeDataGrid
-     * for countries
-     */
 
+    /**
+     * The Data Grid implementation for category
+     */
     public function createCategoryDataGrid()
     {
 
@@ -89,7 +85,7 @@ class CategoryDataGrid
                 ], [
                     'name' => 'cat.status',
                     'alias' => 'catstatus',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Visible in Menu',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -125,7 +121,7 @@ class CategoryDataGrid
                 ], [
                     'column' => 'cat.status',
                     'alias' => 'catstatus',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Visible in Menu',
                 ],
             ],

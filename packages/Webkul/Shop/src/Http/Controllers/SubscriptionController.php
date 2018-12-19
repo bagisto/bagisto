@@ -78,27 +78,37 @@ class SubscriptionController extends Controller
         if($unique()) {
             $token = uniqid();
 
-            $result = false;
-
-            $result = $this->subscription->create([
-                'email' => $email,
-                'channel_id' => core()->getCurrentChannel()->id,
-                'is_subscribed' => 1,
-                'token' => $token
-            ]);
-
-            if(!$result) {
-                session()->flash('error', trans('shop::app.subscription.not-subscribed'));
-
-                return redirect()->back();
-            }
-
             $subscriptionData['email'] = $email;
             $subscriptionData['token'] = $token;
 
-            Mail::send(new SubscriptionEmail($subscriptionData));
+            $mailSent = true;
 
-            session()->flash('success', trans('shop::app.subscription.subscribed'));
+            try {
+                session()->flash('success', trans('shop::app.subscription.subscribed'));
+
+                Mail::send(new SubscriptionEmail($subscriptionData));
+            } catch(\Exception $e) {
+                session()->flash('error', trans('shop::app.subscription.not-subscribed'));
+
+                $mailSent = false;
+            }
+
+            $result = false;
+
+            if($mailSent) {
+                $result = $this->subscription->create([
+                    'email' => $email,
+                    'channel_id' => core()->getCurrentChannel()->id,
+                    'is_subscribed' => 1,
+                    'token' => $token
+                ]);
+
+                if(!$result) {
+                    session()->flash('error', trans('shop::app.subscription.not-subscribed'));
+
+                    return redirect()->back();
+                }
+            }
         } else {
             session()->flash('error', trans('shop::app.subscription.already'));
         }
@@ -114,6 +124,7 @@ class SubscriptionController extends Controller
     public function unsubscribe($token) {
         $subscriber = $this->subscription->findOneByField('token', $token);
 
+        if(isset($subscriber))
         if($subscriber->count() > 0 && $subscriber->is_subscribed == 1 &&$subscriber->update(['is_subscribed' => 0])) {
             session()->flash('info', trans('shop::app.subscription.unsubscribed'));
         } else {
