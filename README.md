@@ -65,6 +65,7 @@ composer create-project bagisto/bagisto
 if the above command's process was successful, you will find directory **bagisto** and all of the code will be inside it.
 
 After it set your **.env** variable, especially the ones below:
+
 * **APP_URL**
 * **DB_CONNECTION**
 * **DB_HOST**
@@ -80,10 +81,12 @@ default.
 ### 4. Installation:
 
 **Run these Commands Below**
+
 >> Run this command below, if installing from the zip else skip:
 ~~~
 composer install
 ~~~
+
 ~~~
 php artisan migrate
 ~~~
@@ -106,7 +109,7 @@ composer dump-autoload
 > That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
 
 
-### 7. License
+### 5. License
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://opensource.org/licenses/MIT).
 
 ### Coming Soon:
