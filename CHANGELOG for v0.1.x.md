@@ -2,6 +2,112 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v0.1.3(19th of December, 2018)** - *Release*
+
+* [feature] Mass selection features had been implemented in datagrid for deletion and mass updation purposes
+
+* [feature] New filter for boolean values like active/inactive or true/false and date values native filters added in datagrid, can be seen in product grid and other data grids of admin section
+
+* [feature] Core configuration section had been implemented so that all the sytem's core settings can be managed from a single place inside admin panel
+
+* [critical fix] XSS vulnerability fix for datagrid thanks to anonymous user for informing
+
+* [fixes] Optimized exception handler (thanks to @AliN11)
+
+* #271 [fixed] Provide little space between line and text in review section(frontend)
+
+* #165 [fixed] If a Product is selected as disabled at time of creation,then also it is visible at store front
+
+* #187 [enhanced] We can add column "Group Name" instead of Group Id and also add this column in filter in Customers Grid
+
+* #285 [enahanced] Add export functionality for Orders, Invoice and Shipment
+
+* #283 [fixed] Unable to copy text from any grid
+
+* #155 [enhanced] If a customer writes any review for product then that review is not visible in review section of customer profile until it is approved by admin
+
+* #226 [fixed] Correct the spelling of "expensive" in Sort By
+
+* #199 [enhanced] Add button and filter dropdown should be aligned.Changes required in every grid
+
+* #204 [enhanced] A pop-up confirmation should display before deleting an address
+
+* #275 [enhanced] Recent Orders, Shipment and Invoice should display first in grid
+
+* #262 [fixed] System attributes are also getting deleted
+
+* #260 [fixed] Layout issue in Order Status
+
+* #269 [fixed] Weight of Product is displaying in negative
+
+* #268 [enhanced] Newly Created Product should display first in Product Grid
+
+* #267 [enhanced] Add Pagination for search page on frontend
+
+* #238 [enhanced] Provide a mass selection option to approve a review
+
+* #182 [fixed] Layout issue on Add Exchange Rate page
+
+* #279 [fixed] If Inventory source is not selected as active then also after saving it, its status changes to Active
+
+* #213 [fixed] View all link is not required on Rating and Review page
+
+* #276 [fixed] Description started from centre in Categories and Tax Category
+
+* #277 [fixed] No email and number validation in Inventory Source Grid
+
+* #183 [enhanced] In Target Currency dropdown , currencies for which rate has already been set should not display in dropdown
+
+* #128 [enhanced] Calender icon should also be clickable,and on click calender should display
+
+* #272 [fixed] Getting Exception when click on Save Invoice
+
+* #273 [fixed] Add a validation on price field that it should be numeric on Edit Product Page
+
+* #228 [enhanced] bagisto icon should be clickable and by clicking on it, it should redirect to dashboard
+
+* #287 [fixed] No Status for Order, in customer order grid if Order is placed using "Paypal Standard Payment" method
+
+* #284 [fixed] Issue with price field.Accepting string also, and if space is provided between two number(5 4) than the price of product is displaying as 5 on frontend
+
+* #264 [enhanced] Provide mass delete and mass update option in product grid
+
+* #209 [enhanced] Add filter according to date in order grid
+
+* #190 [fixed] Add a default group General in "Customer Group" grid and by default customer should lay in this group
+
+* #307 [fixed] Incorrect success message after updating the News Letter Subscribers
+
+* #306 [enhanced] Customers display randomly irrespective of their id
+
+* #263 [enhanced] Filter for visible in menu is not working in Category grid. #263
+Opened in bagisto/bagisto
+
+* #315 [fixed] Getting exception if time taken to subscribe for newsletter increases.Add email validation in newsletter field
+
+* #295 [fixed] Unable to change gender of customers from Edit Customer Page
+
+* #314 [fixed] No success message after deleting the News Letter Subscribers
+
+* #298 [enhanced] Provide an Option to delete all reviews in Review section of a customer
+
+* #308 [fixed] Accepting the future date of birth in Customer Grid
+
+* #305 [fixed] Displaying incorrect role name in account
+
+* #286 [fixed] Unable to update attribute
+
+* #278 [fixed] Images that are applied on Category doesn't display in Edit Category Page
+
+* #324 [enhanced] Change the Button title "Create Tax Rate" to "Save Tax Rate" on Tax Rate page
+
+* #332 [fixed] Unable to change the status of user
+
+* #301 [fixed] Only customer that are on first page get exported
+
+* #326 [enhanced] Only customer that are on first page get exported
+
+
 ## **v0.1.2(30th of November, 2018)** - *Release*
 
 * [feature] Paypal integration for online payments
