@@ -113,8 +113,19 @@ php artisan storage:link
 > **php artisan vendor:publish**
 
 
+### 7. Migration from v0.1.2 to v0.1.3
+
+**Run commands below:**
+
+> **composer install**
+
+> **php artisan migrate**
+
+> **php artisan vendor:publish**
+
+
 ### 7. License
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://opensource.org/licenses/MIT).
 
 ### Coming Soon:
--> API support for core and numerous fixes.
+-> API support for core packages and numerous fixes.
