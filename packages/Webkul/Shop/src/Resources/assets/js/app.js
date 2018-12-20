@@ -17,6 +17,10 @@ $(document).ready(function () {
     const app = new Vue({
         el: "#app",
 
+        data: {
+            modalIds: {}
+        },
+
         mounted: function () {
             this.addServerErrors();
             this.addFlashMessages();
@@ -79,7 +83,11 @@ $(document).ready(function () {
                 }, this);
             },
 
-            responsiveHeader: function () { }
+            responsiveHeader: function () { },
+
+            showModal(id) {
+                this.$set(this.modalIds, id, true);
+            }
         }
     });
 });

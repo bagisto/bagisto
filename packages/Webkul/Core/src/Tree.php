@@ -20,6 +20,13 @@ class Tree {
 	public $items = [];
 
     /**
+     * Contains acl roles
+     *
+     * @var array
+     */
+	public $roles = [];
+
+    /**
      * Contains current item route
      *
      * @var string
@@ -74,11 +81,14 @@ class Tree {
 			if (strpos($this->current, $item['url']) !== false) {
 				$this->currentKey = $item['key'];
 			}
+		} else if ($type == 'acl') {
+			$this->roles[$item['route']] = $item['key'];
 		}
 
 		$children = str_replace('.', '.children.', $item['key']);
 
 		core()->array_set($this->items, $children, $item);
+
 	}
 
 	/**
