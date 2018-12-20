@@ -39,11 +39,11 @@
 
                             <div class="control-group">
                                 <label for="name" >{{ __('admin::app.customers.reviews.rating') }}</label>
-                                @for($i = 1; $i <= $review->rating ; $i++)
-                                <span class="stars">
-                                    <span class="icon star-icon"></span>
-                                </span>
-                                @endfor
+                                <div class="stars">
+                                    @for($i = 1; $i <= $review->rating; $i++)
+                                        <span class="icon star-icon"></span>
+                                    @endfor
+                                </div>
                             </div>
 
                             <div class="control-group">

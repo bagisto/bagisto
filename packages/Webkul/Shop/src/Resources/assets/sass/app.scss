@@ -2545,7 +2545,7 @@ section.review {
 
         .review-form {
             margin-left: 20px;
-            width: 49%;
+            width: 55%;
 
             .heading {
                 color: $font-color;
@@ -2557,37 +2557,20 @@ section.review {
                 }
             }
 
-            .rating {
-                color: $bold-color;
-                font-size: 15px;
+            .star {
+                font-size: 23px;
+                color: $star-color;
+                transition: all .2s;
+            }
 
-                .rating-title::after {
-                    content: "*";
-                    color: $rating-color;
-                    font-weight: 700;
-                    display: inline-block;
-                }
-
-                label.star {
-                    font-size: 25px;
-                    color: $star-color;
-                    transition: all .2s;
-                }
-
-                label.star:before {
-                    content: '\2605';
-                }
+            .star:before {
+                content: '\2605';
             }
 
             .control-group {
                 .control {
-                    width: 90%;
+                    width: 100%;
                 }
-            }
-
-            .control-error {
-                color: $error-color;
-                font-size: 14px;
             }
 
             .review-detail{

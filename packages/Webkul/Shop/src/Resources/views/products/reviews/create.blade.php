@@ -8,14 +8,9 @@
 
     <section class="review">
 
-        {{-- <div class="category-breadcrumbs">
-            <span class="breadcrumb">Home</span> > <span class="breadcrumb">Men</span> > <span class="breadcrumb">Slit Open Jeans</span>
-        </div> --}}
-
         <div class="review-layouter mb-20">
 
             <div class="product-info">
-
                 @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
                 <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
@@ -44,41 +39,36 @@
                             <span class="pro-price">{{ core()->currency($product->price) }}</span>
                         @endif
                     @endif
-
-                    {{--  <span class="pro-price-not">
-                        <strike> $45.00 </strike>
-                    </span>
-
-                    <span class="offer"> 10% Off </span>  --}}
                 </div>
             </div>
 
             <div class="review-form">
                 <form method="POST" action="{{ route('shop.reviews.store', $product->id ) }}" @submit.prevent="onSubmit">
                     @csrf
+
                     <div class="heading mt-10">
                         <span>{{ __('shop::app.reviews.write-review') }}</span>
                     </div>
 
-                    <div class="rating mt-20">
-                        <div class="rating-title"> {{ __('admin::app.customers.reviews.rating') }} </div>
+                    <div class="control-group mt-25" :class="[errors.has('rating') ? 'has-error' : '']">
+                        <label for="title" class="required">
+                            {{ __('admin::app.customers.reviews.rating') }}
+                        </label>
 
-                        <label class="star star-5" for="star-5" onclick="calculateRating(id)" id="1"></label>
-
-                        <label class="star star-4" for="star-4" onclick="calculateRating(id)" id="2"></label>
-
-                        <label class="star star-3" for="star-3" onclick="calculateRating(id)" id="3"></label>
-
-                        <label class="star star-2" for="star-2" onclick="calculateRating(id)" id="4"></label>
-
-                        <label class="star star-1" for="star-1" onclick="calculateRating(id)" id="5"></label>
+                        <div class="stars">
+                            <span class="star star-5" for="star-5" onclick="calculateRating(id)" id="1"></span>
+                            <span class="star star-4" for="star-4" onclick="calculateRating(id)" id="2"></span>
+                            <span class="star star-3" for="star-3" onclick="calculateRating(id)" id="3"></span>
+                            <span class="star star-2" for="star-2" onclick="calculateRating(id)" id="4"></span>
+                            <span class="star star-1" for="star-1" onclick="calculateRating(id)" id="5"></span>
+                        </div>
 
                         <input type="hidden" id="rating" name="rating" v-validate="'required'">
 
                         <div class="control-error" v-if="errors.has('rating')">@{{ errors.first('rating') }}</div>
                     </div>
 
-                    <div class="control-group mt-20" :class="[errors.has('title') ? 'has-error' : '']">
+                    <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
                         <label for="title" class="required">
                             {{ __('shop::app.reviews.title') }}
                         </label>
@@ -103,8 +93,9 @@
             </div>
 
         </div>
+
     </section>
-    
+
 @endsection
 
 
@@ -112,13 +103,11 @@
 
     <script>
 
-        function calculateRating(id){
-
+        function calculateRating(id) {
             var a=document.getElementById(id);
             document.getElementById("rating").value = id;
 
-            for (let i=1 ; i <= 5 ; i++){
-
+            for (let i=1 ; i <= 5 ; i++) {
                 if(id >= i){
                     document.getElementById(i).style.color="#242424";
                 }else{

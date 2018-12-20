@@ -64,7 +64,11 @@ return [
         'product-review-page-title' => 'Product Review',
         'rating-reviews' => 'Rating & Reviews',
         'submit' => 'SUBMIT',
-        'delete-all' => 'All Reviews has deleted Succesfully'
+        'delete-all' => 'All Reviews has deleted Succesfully',
+        'ratingreviews' => ':rating Ratings & :review Reviews',
+        'star' => 'Star',
+        'percentage' => ':percentage %',
+        'id-star' => 'star'
     ],
 
     'customer' => [

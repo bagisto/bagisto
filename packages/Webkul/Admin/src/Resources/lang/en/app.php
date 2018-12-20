@@ -493,7 +493,7 @@ return [
             'title' => 'Tax Rates',
             'add-title' => 'Create Tax Rate',
             'edit-title' => 'Edit Tax Rate',
-            'save-btn-title' => 'Create Tax Rate',
+            'save-btn-title' => 'Save Tax Rate',
             'general' => 'Tax Rate',
             'identifier' => 'Identifier',
             'is_zip' => 'Enable Zip Range',

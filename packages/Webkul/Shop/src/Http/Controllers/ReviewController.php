@@ -78,7 +78,7 @@ class ReviewController extends Controller
     {
         $this->validate(request(), [
             'comment' => 'required',
-            'rating'  => 'required',
+            'rating'  => 'numeric|min:1|max:5',
             'title'   => 'required',
         ]);
 
