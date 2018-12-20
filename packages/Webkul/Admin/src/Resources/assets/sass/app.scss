@@ -184,6 +184,10 @@ body {
                 * {
                     display: inline-block;
                 }
+
+                a {
+                    margin-left: 25px;
+                }
             }
 
             .control-group {
@@ -501,6 +505,28 @@ body {
                 }
             }
         }
+    }
+}
+
+.stars {
+    margin-top: 5px;
+
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.export {
+    cursor: pointer;
+
+    .export-icon {
+        position: relative;
+        top: 10px;
+    }
+
+    span {
+        margin-left: 2px;
     }
 }
 // customer oder css for admin end here

@@ -12,9 +12,9 @@
             </div>
 
             <div class="page-action">
-                <div class="export" style="display: flex; cursor: pointer">
+                <div class="export" @click="showModal('downloadDataGrid')">
                     <i class="export-icon"></i>
-                    <span @click="showModal('downloadDataGrid')" style="margin-top: 8px;margin-right: 5px; margin-left: 5px">
+                    <span>
                         {{ __('admin::app.export.export') }}
                     </span>
                 </div>

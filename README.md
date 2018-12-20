@@ -55,6 +55,9 @@ Bagisto is using power of both of these frameworks and making best out of it out
 ### 3. Configuration:
 
 **Run this Command** to download the project on to your local machine or server:
+
+>> Note: If you have downloaded zip file then ignore this.
+
 ~~~
 composer create-project bagisto/bagisto
 ~~~
@@ -62,6 +65,7 @@ composer create-project bagisto/bagisto
 if the above command's process was successful, you will find directory **bagisto** and all of the code will be inside it.
 
 After it set your **.env** variable, especially the ones below:
+
 * **APP_URL**
 * **DB_CONNECTION**
 * **DB_HOST**
@@ -77,6 +81,12 @@ default.
 ### 4. Installation:
 
 **Run these Commands Below**
+
+>> Run this command below, if installing from the zip else skip:
+~~~
+composer install
+~~~
+
 ~~~
 php artisan migrate
 ~~~
@@ -92,29 +102,15 @@ php artisan vendor:publish
 php artisan storage:link
 ```
 
+```
+composer dump-autoload
+```
+
 > That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
 
 
-### 5. Migration from v0.1.0 to v0.1.1 (Only for git users, everyone have to download fresh copy or follow from step 1 and use the same database configuration)
-
-**Run commands below:**
-
-> **php artisan migrate**
-
-> **php artisan vendor:publish**
-
-
-### 6. Migration from v0.1.1 to v0.1.2
-
-**Run commands below:**
-
-> **php artisan migrate**
-
-> **php artisan vendor:publish**
-
-
-### 7. License
+### 5. License
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://opensource.org/licenses/MIT).
 
 ### Coming Soon:
--> API support for core and numerous fixes.
+-> API support for core packages and numerous fixes.

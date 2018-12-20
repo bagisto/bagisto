@@ -39,21 +39,21 @@
 
                             <div class="control-group">
                                 <label for="name" >{{ __('admin::app.customers.reviews.rating') }}</label>
-                                @for($i = 1; $i <= $review->rating ; $i++)
-                                <span class="stars">
-                                    <span class="icon star-icon"></span>
-                                </span>
-                                @endfor
+                                <div class="stars">
+                                    @for($i = 1; $i <= $review->rating; $i++)
+                                        <span class="icon star-icon"></span>
+                                    @endfor
+                                </div>
                             </div>
 
                             <div class="control-group">
                                 <label for="name" class="required">{{ __('admin::app.customers.reviews.status') }}</label>
                                 <select  class="control" name="status">
                                     <option value="pending" {{ $review->status == "pending" ? 'selected' : ''}}>
-                                        Pending
+                                        {{ __('admin::app.customers.reviews.pending') }}
                                     </option>
                                     <option value="approved" {{ $review->status == "approved" ? 'selected' : '' }}>
-                                        Approved
+                                        {{ __('admin::app.customers.reviews.approved') }}
                                     </option>
                                 </select>
                             </div>

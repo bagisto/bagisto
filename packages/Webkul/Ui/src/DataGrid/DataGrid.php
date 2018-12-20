@@ -773,7 +773,11 @@ class DataGrid
                 $this->getQueryWithFilters();
             }
 
-            $this->results = $this->query->orderBy($this->select, 'desc')->paginate($this->perpage)->appends(request()->except('page'));
+            if ($pagination == 'true') {
+                $this->results = $this->query->orderBy($this->select, 'desc')->paginate($this->perpage)->appends(request()->except('page'));
+            } else {
+                $this->results = $this->query->orderBy($this->select, 'desc')->get();
+            }
 
             return $this->results;
 
@@ -789,7 +793,11 @@ class DataGrid
                 $this->getQueryWithFilters();
             }
 
-            $this->results = $this->query->orderBy($this->select, 'desc')->paginate($this->perpage)->appends(request()->except('page'));
+            if ($pagination == 'true') {
+                $this->results = $this->query->orderBy($this->select, 'desc')->paginate($this->perpage)->appends(request()->except('page'));
+            } else {
+                $this->results = $this->query->orderBy($this->select, 'desc')->get();
+            }
 
             return $this->results;
         }
