@@ -62,6 +62,26 @@ return [
                 'channel_based' => true,
                 'locale_based' => false
             ], [
+                'name' => 'default_rate',
+                'title' => 'Rate',
+                'type' => 'text',
+                'channel_based' => true,
+                'locale_based' => false
+            ], [
+                'name' => 'type',
+                'title' => 'Type',
+                'type' => 'select',
+                'options' => [
+                    [
+                        'title' => 'Per Unit',
+                        'value' => 'Per Order'
+                    ], [
+                        'title' => 'Inactive',
+                        'value' => 'per_order'
+                    ]
+                ],
+                'validation' => 'required'
+            ], [
                 'name' => 'active',
                 'title' => 'Status',
                 'type' => 'select',
