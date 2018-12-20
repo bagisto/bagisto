@@ -83,7 +83,6 @@ class RegistrationController extends Controller
                 return redirect()->route($this->_config['redirect']);
             }
 
-
             return redirect()->route($this->_config['redirect']);
         } else {
             session()->flash('error', trans('shop::app.customer.signup-form.failed'));

@@ -88,7 +88,7 @@ class UserController extends Controller
     public function store(UserForm $request)
     {
         $data = request()->all();
-        
+
         if(isset($data['password']) && $data['password'])
             $data['password'] = bcrypt($data['password']);
 
@@ -125,10 +125,16 @@ class UserController extends Controller
     {
         $data = request()->all();
 
-        if(!$data['password'])
+        if (!$data['password'])
             unset($data['password']);
         else
             $data['password'] = bcrypt($data['password']);
+
+        if (isset($data['status'])) {
+            $data['status'] = 1;
+        } else {
+            $data['status'] = 0;
+        }
 
         $this->admin->update($data, $id);
 

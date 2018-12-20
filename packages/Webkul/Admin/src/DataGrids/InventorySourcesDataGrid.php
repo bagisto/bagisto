@@ -11,16 +11,12 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class InventorySourcesDataGrid
 {
-    /**
-     * The Data Grid implementation.
-     *
-     * @var InventorySourcesDataGrid
-     * for Inventory Sources
-     */
 
+    /**
+     * The Data Grid implementation for Inventory Sources
+     */
     public function createInventorySourcesDataGrid()
     {
         return DataGrid::make([
@@ -93,7 +89,7 @@ class InventorySourcesDataGrid
                 ], [
                     'name' => 'status',
                     'alias' => 'inventoryStatus',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Status',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -124,6 +120,11 @@ class InventorySourcesDataGrid
                     'alias' => 'inventoryName',
                     'type' => 'string',
                     'label' => 'Name',
+                ], [
+                    'name' => 'status',
+                    'alias' => 'inventoryStatus',
+                    'type' => 'boolean',
+                    'label' => 'Status',
                 ],
             ],
 

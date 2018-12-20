@@ -6,20 +6,19 @@ use Illuminate\View\View;
 use Webkul\Ui\DataGrid\Facades\DataGrid;
 use Webkul\Channel\Repositories\ChannelRepository;
 use Webkul\Product\Repositories\ProductRepository;
+
 /**
  * Product DataGrid
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class ProductDataGrid
 {
-    /**
-     * The Data Grid implementation @var ProductDataGrid
-     * for Products
-     */
 
+    /**
+     * The Data Grid implementation for Products
+     */
     public function createProductDataGrid()
     {
         return DataGrid::make([
@@ -27,31 +26,44 @@ class ProductDataGrid
             'table' => 'products_grid as prods',
             'select' => 'prods.product_id',
             'perpage' => 10,
-            'aliased' => true, //use this with false as default and true in case of joins
+            'aliased' => false, //use this with false as default and true in case of joins
 
-            'massoperations' =>[
-                //check other grid for configuration and make of your own
+            'massoperations' => [
+                0 => [
+                    'type' => 'delete', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
+                    'action' => route('admin.catalog.products.massdelete'),
+                    'method' => 'DELETE'
+                ],
+
+                1 => [
+                    'type' => 'update', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
+                    'action' => route('admin.catalog.products.massupdate'),
+                    'method' => 'PUT',
+                    'options' => [
+                        0 => 'In Active',
+                        1 => 'Active',
+                    ]
+                ]
             ],
 
             'actions' => [
                 [
                     'type' => 'Edit',
                     'route' => 'admin.catalog.products.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
+                    // 'confirm_text' => trans('ui::app.datagrid.massaction.edit', ['resource' => 'product']),
+                    'icon' => 'icon pencil-lg-icon'
                 ], [
                     'type' => 'Delete',
                     'route' => 'admin.catalog.products.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
+                    'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
+                    'icon' => 'icon trash-icon'
+                ]
             ],
 
             'join' => [
             ],
 
             //use aliasing on secodary columns if join is performed
-
             'columns' => [
                 //name, alias, type, label, sortable
                 [
@@ -81,7 +93,7 @@ class ProductDataGrid
                 ], [
                     'name' => 'prods.status',
                     'alias' => 'ProductStatus',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Status',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -136,6 +148,11 @@ class ProductDataGrid
                     'alias' => 'ProductType',
                     'type' => 'string',
                     'label' => 'Product Type',
+                ], [
+                    'name' => 'prods.status',
+                    'alias' => 'ProductStatus',
+                    'type' => 'boolean',
+                    'label' => 'Status'
                 ]
             ],
             //don't use aliasing in case of searchables
@@ -181,8 +198,6 @@ class ProductDataGrid
     public function render()
     {
         return $this->createProductDataGrid()->render();
-        // return $this->getProducts();
-
     }
 
     public function export()

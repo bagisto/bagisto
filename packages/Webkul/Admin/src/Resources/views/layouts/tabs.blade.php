@@ -1,23 +1,34 @@
 <div class="tabs">
-    <ul>
-        @if (request()->route()->getName() != 'admin.configuration.index')
+    @if (request()->route()->getName() != 'admin.configuration.index')
 
-            <?php $keys = explode('.', $menu->currentKey);  ?>
+        <?php $keys = explode('.', $menu->currentKey);  ?>
 
 
-            @foreach(array_get($menu->items, implode('.children.', array_slice($keys, 0, 2)) . '.children') as $item)
-                <li class="{{ $menu->getActive($item) }}">
-                    <a href="{{ $item['url'] }}">
-                        {{ $item['name'] }}
-                    </a>
-                </li>
-            @endforeach
+        @if ($items = array_get($menu->items, implode('.children.', array_slice($keys, 0, 2)) . '.children'))
+        
+            <ul>
 
-        @else
+                @foreach(array_get($menu->items, implode('.children.', array_slice($keys, 0, 2)) . '.children') as $item)
 
-            @if (array_get($config->items, request()->route('slug') . '.children'))
+                    <li class="{{ $menu->getActive($item) }}">
+                        <a href="{{ $item['url'] }}">
+                            {{ $item['name'] }}
+                        </a>
+                    </li>
 
-                @foreach (array_get($config->items, request()->route('slug') . '.children') as $key => $item)
+                @endforeach
+        
+            </ul>
+
+        @endif
+
+    @else
+
+        @if ($items = array_get($config->items, request()->route('slug') . '.children'))
+
+            <ul>
+
+                @foreach ($items as $key => $item)
 
                     <li class="{{ $key == request()->route('slug2') ? 'active' : '' }}">
                         <a href="{{ route('admin.configuration.index', (request()->route('slug') . '/' . $key)) }}">
@@ -27,8 +38,9 @@
 
                 @endforeach
 
-            @endif
+            </ul>
 
         @endif
-    </ul>
+
+    @endif
 </div>

@@ -14,11 +14,9 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
 
 class TaxCategoryDataGrid
 {
+
     /**
-     * The Tax Category Data
-     * Grid implementation.
-     *
-     * @var TaxCategoryDataGrid
+     * The Tax Category Data Grid implementation.
      */
     public function createTaxCategoryDataGrid()
     {

@@ -340,14 +340,37 @@ class ProductRepository extends Repository
                     ]);
             } else {
                 $this->attributeValue->update([
-                        ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
-                    ], $attributeValue->id);
+                    ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
+                ], $attributeValue->id);
             }
         }
 
         $this->productInventory->saveInventories($data, $variant);
 
         return $variant;
+    }
+
+    /**
+     * Change an attribute's value of the product
+     *
+     * @return boolean
+     */
+    public function updateAttribute($product, $attribute, $value) {
+        $attribute = $this->attribute->findOneByField('code', 'status');
+
+        $attributeValue = $this->attributeValue->findOneWhere([
+            'product_id' => $product->id,
+            'attribute_id' => $attribute->id,
+        ]);
+
+        $result = $this->attributeValue->update([
+            ProductAttributeValue::$attributeTypeFields[$attribute->type] => $value
+        ], $attributeValue->id);
+
+        if($result)
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -480,15 +503,12 @@ class ProductRepository extends Repository
      * @return Collection
      */
     public function searchProductByAttribute($term) {
-        // $findIn = $this->breakTheTerm($term);
-
+        $this->pushCriteria(app(ActiveProductCriteria::class));
         $this->pushCriteria(app(SearchByAttributeCriteria::class));
-        // $this->pushCriteria(app(SearchByCategoryCriteria::class));
 
         return $this->scopeQuery(function($query) use($term) {
             return $query->distinct()->addSelect('products.*')->where('pav.text_value', 'like', '%'.$term.'%');
-            // ->where('category_translations.name', 'like', '%'.'clothes'.'%');
-        })->get();
+        })->paginate(4);
     }
 
     /**

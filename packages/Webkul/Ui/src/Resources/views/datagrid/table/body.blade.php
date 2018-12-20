@@ -2,7 +2,7 @@
     @if(count($results) == 0)
     <tr>
         <td colspan="{{ count($columns)+1 }}" style="text-align: center;">
-            No Records Found.
+            {{ __('ui::app.datagrid.no-records') }}
         </td>
     </tr>
     @endif
@@ -26,24 +26,24 @@
             @endif
         @endforeach
         @if(count($actions))
-        <td class="action">
-            @foreach($actions as $action)
-                <a
-                    href="{{ route($action['route'], $result->id) }}"
-                    class="Action-{{ $action['type'] }}"
-                    id="{{ $result->id }}"
-                    @if(isset($action['confirm_text']))
-                        onclick="return confirm_click('{{ $action['confirm_text'] }}');"
-                    @endif
-                    >
-                    <i
-                    @if(isset($action['icon-alt']))
-                        title="{{ $action['icon-alt'] }}"
-                    @endif
-                    class="{{ $action['icon'] }}"></i>
-                </a>
-            @endforeach
-        </td>
+            <td class="action">
+                @foreach($actions as $action)
+                    <a
+                        href="{{ route($action['route'], $result->id) }}"
+                        class="Action-{{ $action['type'] }}"
+                        id="{{ $result->id }}"
+                        @if(isset($action['confirm_text']))
+                            onclick="return confirm_click('{{ $action['confirm_text'] }}');"
+                        @endif
+                        >
+                        <i
+                        @if(isset($action['icon-alt']))
+                            title="{{ $action['icon-alt'] }}"
+                        @endif
+                        class="{{ $action['icon'] }}"></i>
+                    </a>
+                @endforeach
+            </td>
         @endif
     </tr>
     @endforeach

@@ -46,6 +46,8 @@ class ConfigurationController extends Controller
     {
         $this->middleware('admin');
 
+        $this->coreConfig = $coreConfig;
+
         $this->_config = request('_config');
 
         $this->prepareConfigTree();
@@ -77,9 +79,11 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
-        if(!request()->route('slug') && !request()->route('slug2'))
-            return redirect()->route('admin.configuration.index', $this->getDefaultConfigSlugs());
+        $slugs = $this->getDefaultConfigSlugs();
 
+        if(count($slugs)) {
+            return redirect()->route('admin.configuration.index', $slugs); 
+        }
 
         return view($this->_config['view'], ['config' => $this->configTree]);
     }
@@ -91,12 +95,32 @@ class ConfigurationController extends Controller
      */
     public function getDefaultConfigSlugs()
     {
-        $firstItem = current($this->configTree->items);
-        $secondItem = current($firstItem['children']);
+        $slugs = [];
 
-        $slugs = explode('.', $secondItem['key']);
+        if(!request()->route('slug')) {
+            $firstItem = current($this->configTree->items);
+            $secondItem = current($firstItem['children']);
 
-        return ['slug' => current($slugs), 'slug2' => end($slugs)];
+            $temp = explode('.', $secondItem['key']);
+
+            $slugs = [
+                'slug' => current($temp),
+                'slug2' => end($temp)
+            ];
+        } else {
+            if(!request()->route('slug2')) {
+                $secondItem = current($this->configTree->items[request()->route('slug')]['children']);
+
+                $temp = explode('.', $secondItem['key']);
+
+                $slugs = [
+                    'slug' => current($temp),
+                    'slug2' => end($temp)
+                ];
+            }
+        }
+
+        return $slugs;
     }
 
     /**
@@ -110,6 +134,6 @@ class ConfigurationController extends Controller
 
         session()->flash('success', 'Shipping Method is created successfully');
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->back();
     }
 }

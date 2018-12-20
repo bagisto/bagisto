@@ -109,6 +109,11 @@ h2 {
         color: #ffffff;
     }
 
+    &.btn-black {
+        background: #000;
+        color: #ffffff;
+    }
+
     &:disabled,
     &[disabled="disabled"],
     &[disabled="disabled"]:hover,
@@ -795,6 +800,7 @@ h2 {
     @include border-radius(50px);
     color: white;
     padding: 8px;
+    white-space: nowrap;
 
     &.badge-sm {
         padding: 5px;
@@ -831,6 +837,7 @@ h2 {
 
 .image-wrapper {
     margin-bottom: 20px;
+    margin-top: 10px;
     display: inline-block;
     width: 100%;
 

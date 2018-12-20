@@ -29,8 +29,8 @@ input {
     font-family: 'Montserrat', sans-serif;
 }
 
-.btn.btn-primary{
-    border-radius: 0px;
+.btn {
+    border-radius: 0px !important;
 }
 
 //margin bottom classes
@@ -144,6 +144,13 @@ input {
     margin-top: 90px;
 }
 
+//pagination
+.pagination.shop{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
 
 //components
 .bold {

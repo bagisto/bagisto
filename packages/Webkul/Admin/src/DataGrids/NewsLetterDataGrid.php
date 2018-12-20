@@ -11,14 +11,11 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class NewsLetterDataGrid
 {
+
     /**
-     * The Data Grid implementation.
-     *
-     * @var newsletterDataGrid
-     * for orders
+     * The Data Grid implementation for orders
      */
     public function newsLetterDataGrid()
     {
@@ -67,7 +64,7 @@ class NewsLetterDataGrid
                 ], [
                     'name' => 'sublist.is_subscribed',
                     'alias' => 'issubs',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Subscribed',
                     'sortable' => true,
                     'wrapper' => function ($value) {
@@ -94,7 +91,7 @@ class NewsLetterDataGrid
                 ], [
                     'column' => 'sublist.is_subscribed',
                     'alias' => 'issubs',
-                    'type' => 'string',
+                    'type' => 'boolean',
                     'label' => 'Subscribed',
                 ], [
                     'column' => 'sublist.email',
