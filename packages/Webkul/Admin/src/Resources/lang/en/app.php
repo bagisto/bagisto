@@ -557,7 +557,9 @@ return [
             'edit-title' => 'Edit Review',
             'rating' => 'Rating',
             'status' => 'Status',
-            'comment' => 'Comment'
+            'comment' => 'Comment',
+            'pending' => 'Pending',
+            'approved' => 'Approved'
         ],
 
         'subscribers' => [

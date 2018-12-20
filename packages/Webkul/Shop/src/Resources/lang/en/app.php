@@ -305,7 +305,8 @@ return [
         'whoops' => 'Whoops!',
         'quantity' => 'Quantity',
         'in-stock' => 'In Stock',
-        'out-of-stock' => 'Out Of Stock'
+        'out-of-stock' => 'Out Of Stock',
+        'view-all' => 'View All'
     ],
 
     'wishlist' => [

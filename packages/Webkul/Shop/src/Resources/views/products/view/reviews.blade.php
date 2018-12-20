@@ -69,7 +69,9 @@
                 </div>
             @endforeach
 
-            <a href="{{ route('shop.reviews.index', $product->url_key) }}" class="view-all">View All</a>
+            <a href="{{ route('shop.reviews.index', $product->url_key) }}" class="view-all">
+                {{ __('shop::app.products.view-all') }}
+            </a>
 
         </div>
     </div>
