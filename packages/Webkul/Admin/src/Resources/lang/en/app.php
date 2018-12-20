@@ -497,7 +497,7 @@ return [
             'title' => 'Tax Rates',
             'add-title' => 'Create Tax Rate',
             'edit-title' => 'Edit Tax Rate',
-            'save-btn-title' => 'Create Tax Rate',
+            'save-btn-title' => 'Save Tax Rate',
             'general' => 'Tax Rate',
             'identifier' => 'Identifier',
             'is_zip' => 'Enable Zip Range',
@@ -557,7 +557,9 @@ return [
             'edit-title' => 'Edit Review',
             'rating' => 'Rating',
             'status' => 'Status',
-            'comment' => 'Comment'
+            'comment' => 'Comment',
+            'pending' => 'Pending',
+            'approved' => 'Approved'
         ],
 
         'subscribers' => [
@@ -605,6 +607,8 @@ return [
     'export' => [
        'export' => 'Export',
        'format' => 'Select Format',
-       'download' => 'Download'
+       'download' => 'Download',
+       'csv' => 'CSV',
+       'xls' => 'XLS'
     ]
 ];

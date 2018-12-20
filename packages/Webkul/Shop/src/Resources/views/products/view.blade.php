@@ -37,7 +37,7 @@
                         @include ('shop::products.view.stock', ['product' => $product])
 
                         {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
-                        
+
                         <div class="description">
                             {!! $product->short_description !!}
                         </div>

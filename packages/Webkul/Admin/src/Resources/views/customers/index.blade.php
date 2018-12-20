@@ -12,9 +12,9 @@
                 <h1>{{ __('admin::app.customers.customers.title') }}</h1>
             </div>
             <div class="page-action">
-                <div class="export" style="display: inline-flex; cursor: pointer; position: absolute; right: 13%">
+                <div class="export" @click="showModal('downloadDataGrid')">
                     <i class="export-icon"></i>
-                    <span @click="showModal('downloadDataGrid')" style="margin-top: 8px; margin-left: 5px">
+                    <span >
                         {{ __('admin::app.export.export') }}
                     </span>
                 </div>
@@ -57,8 +57,8 @@
                         {{ __('admin::app.export.format') }}
                     </label>
                     <select name="format" class="control" v-validate="'required'">
-                        <option value="xls">XLS</option>
-                        <option value="csv">CSV</option>
+                        <option value="xls">{{ __('admin::app.export.xls') }}</option>
+                        <option value="csv">{{ __('admin::app.export.csv') }}</option>
                     </select>
                 </div>
 
