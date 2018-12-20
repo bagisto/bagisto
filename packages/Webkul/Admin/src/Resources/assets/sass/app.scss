@@ -184,6 +184,10 @@ body {
                 * {
                     display: inline-block;
                 }
+
+                a {
+                    margin-left: 25px;
+                }
             }
 
             .control-group {
@@ -522,8 +526,7 @@ body {
     }
 
     span {
-        margin-left: 5px;
-        margin-right: 5px;
+        margin-left: 2px;
     }
 }
 // customer oder css for admin end here
