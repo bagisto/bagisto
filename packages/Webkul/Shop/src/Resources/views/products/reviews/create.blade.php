@@ -9,7 +9,6 @@
     <section class="review">
 
         <div class="review-layouter mb-20">
-
             <div class="product-info">
                 @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
@@ -91,7 +90,6 @@
 
                 </form>
             </div>
-
         </div>
 
     </section>
@@ -104,13 +102,13 @@
     <script>
 
         function calculateRating(id) {
-            var a=document.getElementById(id);
+            var a = document.getElementById(id);
             document.getElementById("rating").value = id;
 
             for (let i=1 ; i <= 5 ; i++) {
-                if(id >= i){
+                if (id >= i) {
                     document.getElementById(i).style.color="#242424";
-                }else{
+                } else {
                     document.getElementById(i).style.color="#d4d4d4";
                 }
             }
