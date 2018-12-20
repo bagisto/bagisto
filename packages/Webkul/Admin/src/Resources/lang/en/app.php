@@ -607,6 +607,8 @@ return [
     'export' => [
        'export' => 'Export',
        'format' => 'Select Format',
-       'download' => 'Download'
+       'download' => 'Download',
+       'csv' => 'CSV',
+       'xls' => 'XLS'
     ]
 ];

@@ -65,7 +65,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
             Route::get('reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
-                'view' => 'admin::customers.review.index'
+                'view' => 'admin::customers.reviews.index'
             ])->name('admin.customer.review.index');
 
             // Configuration routes
@@ -79,7 +79,7 @@ Route::group(['middleware' => ['web']], function () {
 
             // Reviews Routes
             Route::get('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[
-                'view' => 'admin::customers.review.edit'
+                'view' => 'admin::customers.reviews.edit'
             ])->name('admin.customer.review.edit');
 
             Route::put('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@update')->defaults('_config', [
@@ -102,11 +102,11 @@ Route::group(['middleware' => ['web']], function () {
 
             // Customer Groups Routes
             Route::get('groups', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@index')->defaults('_config',[
-                'view' => 'admin::customers.group.index'
+                'view' => 'admin::customers.groups.index'
             ])->name('admin.groups.index');
 
             Route::get('groups/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@create')->defaults('_config',[
-                'view' => 'admin::customers.group.create'
+                'view' => 'admin::customers.groups.create'
             ])->name('admin.groups.create');
 
             Route::post('groups/create', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@store')->defaults('_config',[
@@ -114,7 +114,7 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.groups.store');
 
             Route::get('groups/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@edit')->defaults('_config',[
-                'view' => 'admin::customers.group.edit'
+                'view' => 'admin::customers.groups.edit'
             ])->name('admin.groups.edit');
 
             Route::put('groups/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@update')->defaults('_config',[

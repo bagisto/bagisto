@@ -45,11 +45,11 @@
                 <form method="POST" action="{{ route('shop.reviews.store', $product->id ) }}" @submit.prevent="onSubmit">
                     @csrf
 
-                    <div class="heading mt-10">
+                    <div class="heading mt-10 mb-25">
                         <span>{{ __('shop::app.reviews.write-review') }}</span>
                     </div>
 
-                    <div class="control-group mt-25" :class="[errors.has('rating') ? 'has-error' : '']">
+                    <div class="control-group" :class="[errors.has('rating') ? 'has-error' : '']">
                         <label for="title" class="required">
                             {{ __('admin::app.customers.reviews.rating') }}
                         </label>

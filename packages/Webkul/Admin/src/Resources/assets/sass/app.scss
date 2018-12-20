@@ -512,6 +512,20 @@ body {
         height: 16px;
     }
 }
+
+.export {
+    cursor: pointer;
+
+    .export-icon {
+        position: relative;
+        top: 10px;
+    }
+
+    span {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
 // customer oder css for admin end here
 
 
