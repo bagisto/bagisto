@@ -1,11 +1,11 @@
 @extends('shop::layouts.master')
 
 @section('page_title')
-    {{ $product->meta_title ?? $product->name }}
+    {{ trim($product->meta_title) != "" ? $product->meta_title : $product->name }}
 @stop
 
 @section('seo')
-    <meta name="description" content="{{ $product->meta_description }}"/>
+    <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : str_limit(strip_tags($product->description), 120, '') }}"/>
     <meta name="description" content="{{ $product->meta_keywords }}"/>
 @stop
 
