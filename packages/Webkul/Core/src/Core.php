@@ -339,7 +339,7 @@ class Core
         if (null === $exchangeRate)
             return $amount;
 
-        return (float) round($amount * $exchangeRate->rate);
+        return (float) $amount * $exchangeRate->rate;
     }
 
     /**

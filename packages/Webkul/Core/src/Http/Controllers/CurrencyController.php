@@ -4,6 +4,7 @@ namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\CurrencyRepository as Currency;
 
 /**
@@ -76,7 +77,11 @@ class CurrencyController extends Controller
             'name' => 'required'
         ]);
 
-        $this->currency->create(request()->all());
+        Event::fire('core.channel.create.before');
+
+        $currency = $this->currency->create(request()->all());
+
+        Event::fire('core.currency.create.after', $currency);
 
         session()->flash('success', 'Currency created successfully.');
 
@@ -110,7 +115,11 @@ class CurrencyController extends Controller
             'name' => 'required'
         ]);
 
-        $this->currency->update(request()->all(), $id);
+        Event::fire('core.currency.update.before', $id);
+
+        $currency = $this->currency->update(request()->all(), $id);
+
+        Event::fire('core.currency.update.after', $currency);
 
         session()->flash('success', 'Currency updated successfully.');
 
@@ -126,7 +135,11 @@ class CurrencyController extends Controller
     public function destroy($id)
     {
         try {
+            Event::fire('core.currency.delete.before', $id);
+
             $result = $this->currency->delete($id);
+
+            Event::fire('core.currency.delete.after', $id);
 
             if($result)
                 session()->flash('success', 'Currency deleted successfully.');
@@ -152,7 +165,11 @@ class CurrencyController extends Controller
 
             foreach($indexes as $key => $value) {
                 try {
+                    Event::fire('core.currency.delete.before', $value);
+
                     $this->currency->delete($value);
+
+                    Event::fire('core.currency.delete.after', $value);
                 } catch(\Exception $e) {
                     $suppressFlash = true;
 

@@ -4,6 +4,7 @@ namespace Webkul\Tax\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Tax\Repositories\TaxRateRepository as TaxRate;
 
 
@@ -91,17 +92,15 @@ class TaxRateController extends Controller
             unset($data['zip_code']);
         }
 
-        if($this->taxRate->create($data)) {
-            session()->flash('success', trans('admin::app.settings.tax-rates.create-success'));
+        Event::fire('tax.tax_rate.create.before');
 
-            return redirect()->route($this->_config['redirect']);
-        } else {
-            session()->flash('error', trans('admin::app.settings.tax-rates.create-error'));
+        $taxRate = $this->taxRate->create($data);
 
-            return redirect()->back();
-        }
+        Event::fire('tax.tax_rate.create.after', $taxRate);
 
-        return redirect()->back();
+        session()->flash('success', trans('admin::app.settings.tax-rates.create-success'));
+
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
@@ -136,17 +135,15 @@ class TaxRateController extends Controller
             'tax_rate' => 'required|numeric'
         ]);
 
-        if($this->taxRate->update(request()->input(), $id)) {
-            session()->flash('success', trans('admin::app.settings.tax-rates.update-success'));
+        Event::fire('tax.tax_rate.update.before', $id);
 
-            return redirect()->route($this->_config['redirect']);
-        } else {
-            session()->flash('error', trans('admin::app.settings.tax-rates.update-error'));
+        $taxRate = $this->taxRate->update(request()->input(), $id);
 
-            return redirect()->back();
-        }
+        Event::fire('tax.tax_rate.update.after', $taxRate);
 
-        return redirect()->back();
+        session()->flash('success', trans('admin::app.settings.tax-rates.update-success'));
+
+        return redirect()->route($this->_config['redirect']);
     }
 
       /**
@@ -160,7 +157,11 @@ class TaxRateController extends Controller
         if($this->taxRate->count() == 1) {
             session()->flash('error', trans('admin::app.settings.tax-rates.atleast-one'));
         } else {
+            Event::fire('tax.tax_rate.delete.before', $id);
+
             $this->taxRate->delete($id);
+
+            Event::fire('tax.tax_rate.delete.after', $id);
 
             session()->flash('success', trans('admin::app.settings.tax-rates.delete'));
         }
