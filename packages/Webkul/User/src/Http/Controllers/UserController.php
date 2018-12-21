@@ -4,6 +4,7 @@ namespace Webkul\User\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\User\Repositories\AdminRepository as Admin;
 use Webkul\User\Repositories\RoleRepository as Role;
 use Webkul\User\Http\Requests\UserForm;
@@ -92,7 +93,11 @@ class UserController extends Controller
         if(isset($data['password']) && $data['password'])
             $data['password'] = bcrypt($data['password']);
 
-        $this->admin->create($data);
+        Event::fire('user.admin.create.before');
+        
+        $admin = $this->admin->create($data);
+
+        Event::fire('user.admin.delete.after', $admin);
 
         session()->flash('success', 'User created successfully.');
 
@@ -136,7 +141,11 @@ class UserController extends Controller
             $data['status'] = 0;
         }
 
-        $this->admin->update($data, $id);
+        Event::fire('user.admin.update.before', $id);
+
+        $admin = $this->admin->update($data, $id);
+
+        Event::fire('user.admin.update.after', $admin);
 
         session()->flash('success', 'User updated successfully.');
 
@@ -154,7 +163,11 @@ class UserController extends Controller
         if($this->admin->count() == 1) {
             session()->flash('error', 'At least one admin is required.');
         } else {
+            Event::fire('user.admin.delete.before', $id);
+
             $this->admin->delete($id);
+
+            Event::fire('user.admin.delete.after', $id);
 
             session()->flash('success', 'Admin source deleted successfully.');
         }

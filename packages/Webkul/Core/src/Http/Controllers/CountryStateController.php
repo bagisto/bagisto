@@ -56,7 +56,8 @@ class CountryStateController extends Controller
      *
      * @return array
      */
-    public function getCountries() {
+    public function getCountries()
+    {
         $countries = $this->country->all();
         $states = $this->state->all();
 
@@ -73,7 +74,8 @@ class CountryStateController extends Controller
         return view($this->_config['view'])->with('statesCountries', $nestedArray);
     }
 
-    public function getStates($country) {
+    public function getStates($country)
+    {
         $countries = $this->country->all();
         $states = $this->state->all();
 

@@ -38,10 +38,12 @@ class ProductImageRepository extends Repository
                 $dir = 'product/' . $product->id;
 
                 if (str_contains($imageId, 'image_')) {
-                    $this->create([
-                            'path' => request()->file($file)->store($dir),
-                            'product_id' => $product->id
-                        ]);
+                    if(request()->hasFile($file)) {
+                        $this->create([
+                                'path' => request()->file($file)->store($dir),
+                                'product_id' => $product->id
+                            ]);
+                    }
                 } else {
                     if(is_numeric($index = $previousImageIds->search($imageId))) {
                         $previousImageIds->forget($index);

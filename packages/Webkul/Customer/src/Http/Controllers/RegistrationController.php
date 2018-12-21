@@ -4,6 +4,7 @@ namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Customer\Mail\VerificationEmail;
 use Illuminate\Routing\Controller;
@@ -29,7 +30,8 @@ class RegistrationController extends Controller
     /**
      * @param CustomerRepository object $customer
      */
-    public function __construct(CustomerRepository $customer) {
+    public function __construct(CustomerRepository $customer)
+    {
         $this->_config = request('_config');
         $this->customer = $customer;
     }
@@ -39,7 +41,8 @@ class RegistrationController extends Controller
      *
      * @return view
      */
-    public function show() {
+    public function show()
+    {
         return view($this->_config['view']);
     }
 
@@ -48,7 +51,8 @@ class RegistrationController extends Controller
      *
      * @return Mixed
      */
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         $request->validate([
             'first_name' => 'string|required',
             'last_name' => 'string|required',
@@ -70,9 +74,14 @@ class RegistrationController extends Controller
         $verificationData['email'] = $data['email'];
         $verificationData['token'] = md5(uniqid(rand(), true));
         $data['token'] = $verificationData['token'];
-        $created = $this->customer->create($data);
 
-        if ($created) {
+        Event::fire('customer.registration.before');
+
+        $customer = $this->customer->create($data);
+
+        Event::fire('customer.registration.after', $customer);
+
+        if ($customer) {
             try {
                 session()->flash('success', trans('shop::app.customer.signup-form.success'));
 
@@ -96,7 +105,8 @@ class RegistrationController extends Controller
      *
      * @param string $token
      */
-    public function verifyAccount($token) {
+    public function verifyAccount($token)
+    {
         $customer = $this->customer->findOneByField('token', $token);
 
         if($customer) {
@@ -110,7 +120,8 @@ class RegistrationController extends Controller
         return redirect()->route('customer.session.index');
     }
 
-    public function resendVerificationEmail($email) {
+    public function resendVerificationEmail($email)
+    {
         $verificationData['email'] = $email;
         $verificationData['token'] = md5(uniqid(rand(), true));
 
