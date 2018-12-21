@@ -4,6 +4,7 @@ namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 
@@ -82,7 +83,11 @@ class AttributeFamilyController extends Controller
             'name' => 'required'
         ]);
 
-        $this->attributeFamily->create(request()->all());
+        Event::fire('catalog.attribute_family.create.before');
+
+        $attributeFamily = $this->attributeFamily->create(request()->all());
+
+        Event::fire('catalog.attribute_family.create.after', $attributeFamily);
 
         session()->flash('success', 'Family created successfully.');
 
@@ -119,8 +124,11 @@ class AttributeFamilyController extends Controller
             'name' => 'required'
         ]);
 
+        Event::fire('catalog.attribute_family.update.before', $id);
 
-        $this->attributeFamily->update(request()->all(), $id);
+        $attributeFamily = $this->attributeFamily->update(request()->all(), $id);
+
+        Event::fire('catalog.attribute_family.update.after', $attributeFamily);
 
         session()->flash('success', 'Family updated successfully.');
 
@@ -142,7 +150,11 @@ class AttributeFamilyController extends Controller
         } else if ($attributeFamily->products()->count()) {
             session()->flash('error', 'Attribute family is used in products.');
         } else {
+            Event::fire('catalog.attribute_family.delete.before', $id);
+
             $this->attributeFamily->delete($id);
+
+            Event::fire('catalog.attribute_family.delete.after', $id);
 
             session()->flash('success', 'Family deleted successfully.');
         }
@@ -163,7 +175,11 @@ class AttributeFamilyController extends Controller
 
             foreach($indexes as $key => $value) {
                 try {
+                    Event::fire('catalog.attribute_family.delete.before', $value);
+
                     $this->attributeFamily->delete($value);
+
+                    Event::fire('catalog.attribute_family.delete.after', $value);
                 } catch(\Exception $e) {
                     $suppressFlash = true;
 

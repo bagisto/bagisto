@@ -4,6 +4,7 @@ namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 
 
@@ -77,7 +78,11 @@ class AttributeController extends Controller
             'type' => 'required'
         ]);
 
-        $this->attribute->create(request()->all());
+        Event::fire('catalog.attribute.create.before');
+
+        $attribute = $this->attribute->create(request()->all());
+
+        Event::fire('catalog.attribute.create.after', $attribute);
 
         session()->flash('success', 'Attribute created successfully.');
 
@@ -112,7 +117,11 @@ class AttributeController extends Controller
             'type' => 'required'
         ]);
 
-        $this->attribute->update(request()->all(), $id);
+        Event::fire('catalog.attribute.update.before', $id);
+
+        $attribute = $this->attribute->update(request()->all(), $id);
+
+        Event::fire('catalog.attribute.update.after', $attribute);
 
         session()->flash('success', 'Attribute updated successfully.');
 
@@ -133,7 +142,11 @@ class AttributeController extends Controller
             session()->flash('error', 'Can not delete system attribute.');
         } else {
             try {
+                Event::fire('catalog.attribute.delete.before', $id);
+
                 $this->attribute->delete($id);
+
+                Event::fire('catalog.attribute.delete.after', $id);
 
                 session()->flash('success', 'Attribute deleted successfully.');
             } catch(\Exception $e) {
@@ -159,10 +172,15 @@ class AttributeController extends Controller
                 $attribute = $this->attribute->findOrFail($value);
 
                 try {
-                    if(!$attribute->is_user_defined)
+                    if(!$attribute->is_user_defined) {
                         continue;
-                    else
+                    } else {
+                        Event::fire('catalog.attribute.delete.before', $value);
+
                         $this->attribute->delete($value);
+
+                        Event::fire('catalog.attribute.delete.after', $value);
+                    }
                 } catch(\Exception $e) {
                     $suppressFlash = true;
 

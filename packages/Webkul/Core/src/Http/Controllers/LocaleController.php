@@ -4,6 +4,7 @@ namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\LocaleRepository as Locale;
 
 /**
@@ -76,7 +77,11 @@ class LocaleController extends Controller
             'name' => 'required'
         ]);
 
-        $this->locale->create(request()->all());
+        Event::fire('core.locale.create.before');
+
+        $locale = $this->locale->create(request()->all());
+
+        Event::fire('core.locale.create.after', $locale);
 
         session()->flash('success', 'Locale created successfully.');
 
@@ -110,7 +115,11 @@ class LocaleController extends Controller
             'name' => 'required'
         ]);
 
-        $this->locale->update(request()->all(), $id);
+        Event::fire('core.locale.update.before', $id);
+
+        $locale = $this->locale->update(request()->all(), $id);
+
+        Event::fire('core.locale.update.after', $locale);
 
         session()->flash('success', 'Locale updated successfully.');
 
@@ -128,7 +137,11 @@ class LocaleController extends Controller
         if($this->locale->count() == 1) {
             session()->flash('error', 'At least one locale is required.');
         } else {
+            Event::fire('core.locale.delete.before', $id);
+
             $this->locale->delete($id);
+
+            Event::fire('core.locale.delete.after', $id);
 
             session()->flash('success', 'Locale deleted successfully.');
         }

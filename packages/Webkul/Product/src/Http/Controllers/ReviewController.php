@@ -4,6 +4,7 @@ namespace Webkul\Product\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Repositories\ProductReviewRepository as ProductReview;
 
@@ -85,7 +86,11 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Event::fire('customer.review.update.before', $id);
+
         $this->productReview->update(request()->all(), $id);
+
+        Event::fire('customer.review.update.after', $id);
 
         session()->flash('success', 'Review updated successfully.');
 
@@ -100,7 +105,11 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
+        Event::fire('customer.review.delete.before', $id);
+
         $this->productReview->delete($id);
+
+        Event::fire('customer.review.delete.after', $id);
 
         session()->flash('success', 'Review Successfully Deleted');
 
@@ -122,7 +131,11 @@ class ReviewController extends Controller
 
             foreach($indexes as $key => $value) {
                 try {
+                    Event::fire('customer.review.delete.before', $value);
+
                     $this->productReview->delete($value);
+
+                    Event::fire('customer.review.delete.after', $value);
                 } catch(\Exception $e) {
                     $suppressFlash = true;
 
@@ -162,7 +175,11 @@ class ReviewController extends Controller
 
                 try {
                     if($data['massaction-type'] == 1 && $data['update-options'] == 1 && $data['selected-option-text'] == 'Approve') {
+                        Event::fire('customer.review.update.before', $value);
+
                         $review->update(['status' => 'approved']);
+
+                        Event::fire('customer.review.update.after', $review);
                     } else if($data['massaction-type'] == 1 && $data['update-options'] == 0 && $data['selected-option-text'] == 'Disapprove') {
                         $review->update(['status' => 'pending']);
                     } else {

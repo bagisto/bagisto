@@ -10,7 +10,6 @@ use Webkul\Core\Eloquent\Repository;
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class CustomerRepository extends Repository
 {
     /**
@@ -22,33 +21,5 @@ class CustomerRepository extends Repository
     function model()
     {
         return 'Webkul\Customer\Models\Customer';
-    }
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-
-    public function create(array $data)
-    {
-        $customer = $this->model->create($data);
-
-        return $customer;
-    }
-
-    /**
-     * @param array $data
-     * @param $id
-     * @param string $attribute
-     * @return mixed
-     */
-
-    public function update(array $data, $id, $attribute = "id")
-    {
-        $customer = $this->find($id);
-
-        $customer->update($data);
-
-        return $customer;
     }
 }

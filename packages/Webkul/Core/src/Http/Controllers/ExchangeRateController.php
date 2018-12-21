@@ -4,6 +4,7 @@ namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\ExchangeRateRepository as ExchangeRate;
 use Webkul\Core\Repositories\CurrencyRepository as Currency;
 
@@ -89,7 +90,11 @@ class ExchangeRateController extends Controller
             'rate' => 'required|numeric'
         ]);
 
-        $this->exchangeRate->create(request()->all());
+        Event::fire('core.exchange_rate.create.before');
+
+        $exchangeRate = $this->exchangeRate->create(request()->all());
+
+        Event::fire('core.exchange_rate.create.after', $exchangeRate);
 
         session()->flash('success', 'Exchange rate created successfully.');
 
@@ -125,7 +130,11 @@ class ExchangeRateController extends Controller
             'rate' => 'required|numeric'
         ]);
 
-        $this->exchangeRate->update(request()->all(), $id);
+        Event::fire('core.exchange_rate.update.before', $id);
+
+        $exchangeRate = $this->exchangeRate->update(request()->all(), $id);
+
+        Event::fire('core.exchange_rate.update.after', $exchangeRate);
 
         session()->flash('success', 'Exchange rate updated successfully.');
 
@@ -143,7 +152,11 @@ class ExchangeRateController extends Controller
         if($this->exchangeRate->count() == 1) {
             session()->flash('error', 'At least one Exchange rate is required.');
         } else {
+            Event::fire('core.exchange_rate.delete.before', $id);
+
             $this->exchangeRate->delete($id);
+
+            Event::fire('core.exchange_rate.delete.after', $id);
 
             session()->flash('success', 'Exchange rate deleted successfully.');
         }
