@@ -639,9 +639,16 @@ class Cart {
             }
         }
 
-        $cart->customer_email = $cart->billing_address->email;
-        $cart->customer_first_name = $cart->billing_address->first_name;
-        $cart->customer_last_name = $cart->billing_address->last_name;
+        if(auth()->guard('customer')->check()) {
+            $cart->customer_email = auth()->guard('customer')->user()->email;
+            $cart->customer_first_name = auth()->guard('customer')->user()->first_name;
+            $cart->customer_last_name = auth()->guard('customer')->user()->last_name;
+        } else {
+            $cart->customer_email = $cart->billing_address->email;
+            $cart->customer_first_name = $cart->billing_address->first_name;
+            $cart->customer_last_name = $cart->billing_address->last_name;
+        }
+
         $cart->save();
 
         return true;
