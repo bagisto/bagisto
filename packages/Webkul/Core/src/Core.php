@@ -359,6 +359,21 @@ class Core
     }
 
     /**
+    * Return currency symbol from currency code
+    *
+    * @param float $price
+    * @return string
+    */
+    public function currencySymbol($code)
+    {
+        try {
+            return currency()->symbol($code);
+        } catch (\Exception $e) {
+            return $code;
+        }
+    }
+
+    /**
     * Format and convert price with currency symbol
     *
     * @param float $price

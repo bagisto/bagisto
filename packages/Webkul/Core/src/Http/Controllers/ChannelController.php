@@ -77,7 +77,9 @@ class ChannelController extends Controller
             'locales' => 'required|array|min:1',
             'default_locale_id' => 'required',
             'currencies' => 'required|array|min:1',
-            'base_currency_id' => 'required'
+            'base_currency_id' => 'required',
+            'logo.*' => 'mimes:jpeg,jpg,bmp,png',
+            'favicon.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
         $this->channel->create(request()->all());
@@ -115,7 +117,9 @@ class ChannelController extends Controller
             'locales' => 'required|array|min:1',
             'default_locale_id' => 'required',
             'currencies' => 'required|array|min:1',
-            'base_currency_id' => 'required'
+            'base_currency_id' => 'required',
+            'logo.*' => 'mimes:jpeg,jpg,bmp,png',
+            'favicon.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
         $this->channel->update(request()->all(), $id);

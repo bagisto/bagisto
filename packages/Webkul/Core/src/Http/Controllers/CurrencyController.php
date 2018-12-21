@@ -125,12 +125,16 @@ class CurrencyController extends Controller
      */
     public function destroy($id)
     {
-        $result = $this->currency->delete($id);
+        try {
+            $result = $this->currency->delete($id);
 
-        if($result)
-            session()->flash('success', 'Currency deleted successfully.');
-        else
-            session()->flash('error', 'At least one currency is required.');
+            if($result)
+                session()->flash('success', 'Currency deleted successfully.');
+            else
+                session()->flash('error', 'At least one currency is required.');
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
 
         return redirect()->back();
     }
