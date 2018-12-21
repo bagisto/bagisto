@@ -9,33 +9,34 @@
         {{  __('shop::app.search.no-results') }}
     @endif
 
-    <div class="main mb-30" style="min-height: 27vh;">
-        @if($results->isEmpty())
-            <div class="search-result-status">
-                <h2>{{ __('shop::app.products.whoops') }}</h2>
-                <span>{{ __('shop::app.search.no-results') }}</span>
-            </div>
-        @else
-            @if($results->count() == 1)
-                <div class="search-result-status mb-20">
-                    <span><b>{{ $results->count() }} </b>{{ __('shop::app.search.found-result') }}</span>
+    @if($results)
+        <div class="main mb-30" style="min-height: 27vh;">
+            @if($results->isEmpty())
+                <div class="search-result-status">
+                    <h2>{{ __('shop::app.products.whoops') }}</h2>
+                    <span>{{ __('shop::app.search.no-results') }}</span>
                 </div>
             @else
-                <div class="search-result-status mb-20">
-                    <span><b>{{ $results->count() }} </b>{{ __('shop::app.search.found-results') }}</span>
+                @if($results->count() == 1)
+                    <div class="search-result-status mb-20">
+                        <span><b>{{ $results->count() }} </b>{{ __('shop::app.search.found-result') }}</span>
+                    </div>
+                @else
+                    <div class="search-result-status mb-20">
+                        <span><b>{{ $results->count() }} </b>{{ __('shop::app.search.found-results') }}</span>
+                    </div>
+                @endif
+                {{-- @include ('shop::products.list.toolbar')
+
+                @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar') --}}
+                <div class="product-grid-4">
+                    @foreach ($results as $product)
+                        @include('shop::products.list.card', ['product' => $product])
+                    @endforeach
                 </div>
+
+                @include('ui::datagrid.pagination')
             @endif
-            {{-- @include ('shop::products.list.toolbar')
-
-            @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar') --}}
-            <div class="product-grid-4">
-                @foreach ($results as $product)
-                    @include('shop::products.list.card', ['product' => $product])
-                @endforeach
-            </div>
-
-            @include('ui::datagrid.pagination')
-        @endif
-    </div>
-
+        </div>
+    @endif
 @endsection
