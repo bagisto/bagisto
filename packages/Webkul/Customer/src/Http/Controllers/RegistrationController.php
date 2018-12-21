@@ -103,6 +103,7 @@ class RegistrationController extends Controller
     /**
      * Method to verify account
      *
+     * @param string $token
      */
     public function verifyAccount($token)
     {

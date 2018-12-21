@@ -24,6 +24,10 @@ a:active {
     color: $brand-color;
 }
 
+textarea {
+    resize: none;
+}
+
 ul {
     margin: 0;
     padding: 0;

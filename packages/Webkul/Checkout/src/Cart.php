@@ -639,9 +639,9 @@ class Cart {
             }
         }
 
-        $cart->customer_email = $cart->shipping_address->email;
-        $cart->customer_first_name = $cart->shipping_address->first_name;
-        $cart->customer_last_name = $cart->shipping_address->last_name;
+        $cart->customer_email = $cart->billing_address->email;
+        $cart->customer_first_name = $cart->billing_address->first_name;
+        $cart->customer_last_name = $cart->billing_address->last_name;
         $cart->save();
 
         return true;

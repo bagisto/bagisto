@@ -117,7 +117,7 @@ class TaxCategoryController extends Controller
     /**
      * To show the edit form form the tax category
      *
-     * @param int $id 
+     * @param int $id
      * @return view
      */
     public function edit($id)
@@ -130,7 +130,7 @@ class TaxCategoryController extends Controller
     /**
      * To update the tax category
      *
-     * @param int $id 
+     * @param int $id
      * @return Response
      */
     public function update($id)
@@ -144,7 +144,7 @@ class TaxCategoryController extends Controller
         ]);
 
         $data = request()->input();
-        
+
         Event::fire('tax.tax_category.update.before', $id);
 
         $taxCategory = $this->taxCategory->update($data, $id);
@@ -153,10 +153,10 @@ class TaxCategoryController extends Controller
 
         if(!$taxCategory) {
             session()->flash('error', trans('admin::app.settings.tax-categories.update-error'));
-            
+
             return redirect()->back();
         }
-        
+
         $taxRates = $data['taxrates'];
 
         //attach the categories in the tax map table
@@ -175,16 +175,14 @@ class TaxCategoryController extends Controller
      */
     public function destroy($id)
     {
-        if($this->taxCategory->count() == 1) {
-            session()->flash('error', trans('admin::app.settings.tax-categories.atleast-one'));
-        } else {
+        try {
             Event::fire('tax.tax_category.delete.before', $id);
 
             $this->taxCategory->delete($id);
 
             Event::fire('tax.tax_category.delete.after', $id);
-
-            session()->flash('success', trans('admin::app.settings.tax-categories.delete'));
+        } catch(Exception $e) {
+            return redirect()->back();
         }
 
         return redirect()->back();
