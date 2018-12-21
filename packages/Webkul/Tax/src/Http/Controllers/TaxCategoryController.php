@@ -144,14 +144,14 @@ class TaxCategoryController extends Controller
         ]);
 
         $data = request()->input();
-        
+
         $taxCategory = $this->taxCategory->update($data, $id);
 
         if(!$taxCategory) {
             session()->flash('error', trans('admin::app.settings.tax-categories.update-error'));
             return redirect()->back();
         }
-        
+
         $taxRates = $data['taxrates'];
 
         //attach the categories in the tax map table
@@ -170,12 +170,10 @@ class TaxCategoryController extends Controller
      */
     public function destroy($id)
     {
-        if($this->taxCategory->count() == 1) {
-            session()->flash('error', trans('admin::app.settings.tax-categories.atleast-one'));
-        } else {
+        try {
             $this->taxCategory->delete($id);
-
-            session()->flash('success', trans('admin::app.settings.tax-categories.delete'));
+        } catch(Exception $e) {
+            return redirect()->back();
         }
 
         return redirect()->back();
