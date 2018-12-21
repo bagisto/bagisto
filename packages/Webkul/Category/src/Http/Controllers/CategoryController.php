@@ -74,7 +74,8 @@ class CategoryController extends Controller
     {
         $this->validate(request(), [
             'slug' => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
-            'name' => 'required'
+            'name' => 'required',
+            'image.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
         $this->category->create(request()->all());
@@ -116,6 +117,7 @@ class CategoryController extends Controller
                 }
             }],
             $locale . '.name' => 'required',
+            'image.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
         $this->category->update(request()->all(), $id);
