@@ -50,6 +50,7 @@ return [
         'change-password' => 'Change Account Password',
         'current-password' => 'Current Password'
     ],
+
     'users' => [
         'forget-password' => [
             'title' => 'Forget Password',
@@ -60,6 +61,7 @@ return [
             'back-link-title' => 'Back to Sign In',
             'submit-btn-title' => 'Email Password Reset Link'
         ],
+
         'reset-password' => [
             'title' => 'Reset Password',
             'title' => 'Reset Password',
@@ -69,6 +71,7 @@ return [
             'back-link-title' => 'Back to Sign In',
             'submit-btn-title' => 'Reset Password'
         ],
+
         'roles' => [
             'title' => 'Roles',
             'add-role-title' => 'Add Role',
@@ -82,6 +85,7 @@ return [
             'custom' => 'Custom',
             'all' => 'All'
         ],
+
         'users' => [
             'title' => 'User',
             'add-user-title' => 'Add User',
@@ -97,6 +101,7 @@ return [
             'status' => 'Status',
             'account-is-active' => 'Account is Active'
         ],
+
         'sessions' => [
             'title' => 'Sign In',
             'email' => 'Email',
@@ -106,6 +111,7 @@ return [
             'submit-btn-title' => 'Sign In'
         ]
     ],
+
     'sales' => [
         'orders' => [
             'title' => 'Orders',
@@ -157,6 +163,7 @@ return [
             'total-due' => 'Total Due',
             'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?'
         ],
+
         'invoices' => [
             'title' => 'Invoices',
             'id' => 'Id',
@@ -178,6 +185,7 @@ return [
             'print' => 'Print',
             'order-date' => 'Order Date'
         ],
+
         'shipments' => [
             'title' => 'Shipments',
             'id' => 'Id',
@@ -196,6 +204,7 @@ return [
             'view-title' => 'Shipment #:shipment_id',
         ]
     ],
+
     'catalog' => [
         'products' => [
             'title' => 'Products',
@@ -227,8 +236,10 @@ return [
             'add-variant-title' => 'Add Variant',
             'variant-already-exist-message' => 'Variant with same attribute options already exists.',
             'add-image-btn-title' => 'Add Image',
-            'mass-delete-success' => 'All the selected index of products have been deleted successfully'
+            'mass-delete-success' => 'All the selected index of products have been deleted successfully',
+            'mass-update-success' => 'All the selected index of products have been updated successfully'
         ],
+
         'attributes' => [
             'title' => 'Attributes',
             'add-title' => 'Add Attribute',

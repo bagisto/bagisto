@@ -268,6 +268,13 @@ class Product {
 
             $gridObject = [];
         }
+
+        $this->findRepeated();
+
         return true;
+    }
+
+    public function findRepeated() {
+
     }
 }
