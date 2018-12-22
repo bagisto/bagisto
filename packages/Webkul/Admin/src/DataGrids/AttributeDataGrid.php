@@ -150,22 +150,22 @@ class AttributeDataGrid
                     'type' => 'string',
                     'label' => 'Type',
                 ], [
-                    'name' => 'is_required',
+                    'column' => 'is_required',
                     'alias' => 'attributeIsRequired',
                     'type' => 'boolean',
                     'label' => 'Required',
                 ], [
-                    'name' => 'is_unique',
+                    'column' => 'is_unique',
                     'alias' => 'attributeIsUnique',
                     'type' => 'boolean',
                     'label' => 'Unique',
                 ], [
-                    'name' => 'value_per_locale',
+                    'column' => 'value_per_locale',
                     'alias' => 'attributeValuePerLocale',
                     'type' => 'boolean',
                     'label' => 'Locale based',
                 ], [
-                    'name' => 'value_per_channel',
+                    'column' => 'value_per_channel',
                     'alias' => 'attributeValuePerChannel',
                     'type' => 'boolean',
                     'label' => 'Channel based',

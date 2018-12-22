@@ -631,7 +631,6 @@ class DataGrid
                         throw new \Exception('Multiple Sort keys Found, Please Resolve the URL Manually.');
                     }
                 } elseif ($key=="search") {
-
                     $count_keys = count(array_keys($value));
                     if($count_keys==1)
                     $this->query->where(function ($query) use ($parsed) {
