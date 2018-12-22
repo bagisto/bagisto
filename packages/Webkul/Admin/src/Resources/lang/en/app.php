@@ -99,7 +99,13 @@ return [
             'status-and-role' => 'Status and Role',
             'role' => 'Role',
             'status' => 'Status',
-            'account-is-active' => 'Account is Active'
+            'account-is-active' => 'Account is Active',
+            'current-password' => 'Enter Current Password',
+            'confirm-delete' => 'Confirm Delete This Account',
+            'confirm-delete-title' => 'Confirm password before delete',
+            'delete-last' => 'At least one admin is required.',
+            'delete-success' => 'Success! User deleted',
+            'incorrect-password' => 'The password you entered is incorrect'
         ],
 
         'sessions' => [
