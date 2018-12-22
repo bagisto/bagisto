@@ -142,7 +142,6 @@ class ProductController extends Controller
             'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
         ]);
 
-
         //before store of the product
         Event::fire('catalog.product.create.before');
 
@@ -268,7 +267,7 @@ class ProductController extends Controller
                         Event::fire('catelog.product.update.after', $product);
                 } else if($data['update-options'] == 1 && $data['selected-option-text'] == 'Active') {
                     Event::fire('catelog.product.update.before', $productId);
-                    
+
                     $result = $this->product->updateAttribute($product, $attribute, $data['update-options']);
 
                     if($result)
@@ -277,7 +276,7 @@ class ProductController extends Controller
             }
         }
 
-        session()->flash('success', trans('admin::app.catalog.products.mass-delete-success'));
+        session()->flash('success', trans('admin::app.catalog.products.mass-update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }

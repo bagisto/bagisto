@@ -123,7 +123,7 @@ class ProductDataGrid
                     'type' => 'string',
                     'label' => 'Product Quantity',
                     'sortable' => true,
-                ],
+                ]
             ],
 
             'filterable' => [
@@ -149,7 +149,7 @@ class ProductDataGrid
                     'type' => 'string',
                     'label' => 'Product Type',
                 ], [
-                    'name' => 'prods.status',
+                    'column' => 'prods.status',
                     'alias' => 'ProductStatus',
                     'type' => 'boolean',
                     'label' => 'Status'
