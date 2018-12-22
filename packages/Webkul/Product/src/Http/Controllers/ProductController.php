@@ -142,7 +142,6 @@ class ProductController extends Controller
             'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
         ]);
 
-
         //before store of the product
         Event::fire('catalog.product.create.before');
 
