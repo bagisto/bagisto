@@ -38,83 +38,103 @@ class CoreConfigRepository extends Repository
            unset($data['channel']);
         }
 
-        foreach ($data as $method => $value)
-        {
-            foreach ($value as $key => $formData)
-            {
-                foreach (array_keys($formData) as $title)
+        foreach ($data as $method => $fieldData) {
+            $recurssiveData = $this->recuressiveArray($fieldData , $method);
+
+            foreach ($recurssiveData as $fieldName => $value) {
+                $field = core()->getConfigField($fieldName);
+
+                $channel_based = false;
+                $locale_based = false;
+
+                if (isset($field['channel_based']) && $field['channel_based']) {
+                    $channel_based = true;
+                }
+
+                if (isset($field['locale_based']) && $field['locale_based']) {
+                    $locale_based = true;
+                }
+
+                if (isset($field['channel_based']) && $field['channel_based'])
                 {
-                    $fieldName = $method . '.' . $key . '.' .$title;
-                    $value = $formData[$title];
-                    $field = core()->getConfigField($fieldName);
-
-                    $channel_based = false;
-                    $locale_based = false;
-
-                    if (isset($field['channel_based']) && $field['channel_based']) {
-                        $channel_based = true;
+                    if (isset($field['locale_based']) && $field['locale_based'])
+                    {
+                        $coreConfigValue = $this->model
+                            ->where('code', $fieldName)
+                            ->where('locale_code', $locale)
+                            ->where('channel_code', $channel)
+                            ->get();
                     }
-
-                    if (isset($field['locale_based']) && $field['locale_based']) {
-                        $locale_based = true;
+                    else
+                    {
+                        $coreConfigValue = $this->model
+                            ->where('code', $fieldName)
+                            ->where('channel_code', $channel)
+                            ->get();
                     }
-
-                    if (isset($field['channel_based']) && $field['channel_based'])
+                } else
+                {
+                    if (isset($field['locale_based']) && $field['locale_based'])
                     {
-                        if (isset($field['locale_based']) && $field['locale_based'])
-                        {
-                            $coreConfigValue = $this->model
-                                ->where('code', $fieldName)
-                                ->where('locale_code', $locale)
-                                ->where('channel_code', $channel)
-                                ->get();
-                        }
-                        else
-                        {
-                            $coreConfigValue = $this->model
-                                ->where('code', $fieldName)
-                                ->where('channel_code', $channel)
-                                ->get();
-                        }
-                    } else
-                    {
-                        if (isset($field['locale_based']) && $field['locale_based'])
-                        {
-                            $coreConfigValue = $this->model
-                                ->where('code', $fieldName)
-                                ->where('locale_code', $locale)
-                                ->get();
-                        }
-                        else
-                        {
-                            $coreConfigValue = $this->model
-                                ->where('code', $fieldName)
-                                ->get();
-                        }
+                        $coreConfigValue = $this->model
+                            ->where('code', $fieldName)
+                            ->where('locale_code', $locale)
+                            ->get();
                     }
-
-                    if (!count($coreConfigValue) > 0)
+                    else
                     {
-                        $this->model->create([
-                            'code' => $fieldName,
-                            'value' => $value,
-                            'locale_code' => $locale_based ? $locale : null,
-                            'channel_code' => $channel_based ? $channel : null
-                        ]);
-                    } else
-                    {
-                        $updataData['code'] = $fieldName;
-                        $updataData['value'] = $value;
-                        $updataData['locale_code'] = $locale_based ? $locale : null;
-                        $updataData['channel_code'] = $channel_based ? $channel : null;
+                        $coreConfigValue = $this->model
+                            ->where('code', $fieldName)
+                            ->get();
+                    }
+                }
 
-                        foreach ($coreConfigValue as $coreConfig)
-                        {
-                            $coreConfig->update($updataData);
-                        }
+                if (!count($coreConfigValue) > 0)
+                {
+                    $this->model->create([
+                        'code' => $fieldName,
+                        'value' => $value,
+                        'locale_code' => $locale_based ? $locale : null,
+                        'channel_code' => $channel_based ? $channel : null
+                    ]);
+                } else
+                {
+                    $updataData['code'] = $fieldName;
+                    $updataData['value'] = $value;
+                    $updataData['locale_code'] = $locale_based ? $locale : null;
+                    $updataData['channel_code'] = $channel_based ? $channel : null;
+
+                    foreach ($coreConfigValue as $coreConfig)
+                    {
+                        $coreConfig->update($updataData);
                     }
                 }
             }
         }
     }
+
+    /**
+     * @param array  $formData
+     * @param string $method
+     * @return array
+     */
+    public function recuressiveArray(array $formData, $method) {
+        static $data =[];
+        foreach ($formData as $form => $formValue) {
+            $value = $method . '.' . $form;
+            if (is_array($formValue)) {
+                $this->recuressiveArray($formValue, $value);
+            } else {
+                $data[$value] = $formValue;
+            }
+        }
+
+        return $data;
+    }
+
+
+
+
+
+
 }
