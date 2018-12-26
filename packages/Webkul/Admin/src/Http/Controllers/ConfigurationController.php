@@ -4,7 +4,6 @@ namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Facades\Configuration;
 use Webkul\Core\Repositories\CoreConfigRepository as CoreConfig;
 use Webkul\Core\Tree;
@@ -131,11 +130,7 @@ class ConfigurationController extends Controller
      */
     public function store()
     {
-        Event::fire('core.configuration.save.after');
-
         $this->coreConfig->create(request()->all());
-
-        Event::fire('core.configuration.save.after');
 
         session()->flash('success', 'Shipping Method is created successfully');
 
