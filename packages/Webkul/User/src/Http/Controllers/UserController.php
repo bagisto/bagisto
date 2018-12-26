@@ -4,9 +4,11 @@ namespace Webkul\User\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\User\Repositories\AdminRepository as Admin;
 use Webkul\User\Repositories\RoleRepository as Role;
 use Webkul\User\Http\Requests\UserForm;
+use Hash;
 
 /**
  * Admin user controller
@@ -92,7 +94,11 @@ class UserController extends Controller
         if(isset($data['password']) && $data['password'])
             $data['password'] = bcrypt($data['password']);
 
-        $this->admin->create($data);
+        Event::fire('user.admin.create.before');
+
+        $admin = $this->admin->create($data);
+
+        Event::fire('user.admin.delete.after', $admin);
 
         session()->flash('success', 'User created successfully.');
 
@@ -136,7 +142,11 @@ class UserController extends Controller
             $data['status'] = 0;
         }
 
-        $this->admin->update($data, $id);
+        Event::fire('user.admin.update.before', $id);
+
+        $admin = $this->admin->update($data, $id);
+
+        Event::fire('user.admin.update.after', $admin);
 
         session()->flash('success', 'User updated successfully.');
 
@@ -154,11 +164,51 @@ class UserController extends Controller
         if($this->admin->count() == 1) {
             session()->flash('error', 'At least one admin is required.');
         } else {
+            Event::fire('user.admin.delete.before', $id);
+
+            if (auth()->guard('admin')->user()->id == $id) {
+                return view('admin::customers.confirm-password');
+            }
+
             $this->admin->delete($id);
+
+            Event::fire('user.admin.delete.after', $id);
 
             session()->flash('success', 'Admin source deleted successfully.');
         }
 
         return redirect()->back();
+    }
+
+    /**
+     * destroy current after confirming
+     *
+     * @return mixed
+     */
+    public function destroySelf()
+    {
+        $password = request()->input('password');
+
+        if(Hash::check($password, auth()->guard('admin')->user()->password)) {
+            if($this->admin->count() == 1) {
+                session()->flash('error', trans('admin::app.users.users.delete-last'));
+            } else {
+                $id = auth()->guard('admin')->user()->id;
+
+                Event::fire('user.admin.delete.before', $id);
+
+                $this->admin->delete($id);
+
+                Event::fire('user.admin.delete.after', $id);
+
+                session()->flash('success', trans('admin::app.users.users.delete-success'));
+
+                return redirect()->route('admin.session.create');
+            }
+        } else {
+            session()->flash('warning', trans('admin::app.users.users.incorrect-password'));
+
+            return redirect()->route($this->_config['redirect']);
+        }
     }
 }

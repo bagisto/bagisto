@@ -4,6 +4,7 @@ namespace Webkul\Tax\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Channel as Channel;
 use Webkul\Tax\Repositories\TaxCategoryRepository as TaxCategory;
 use Webkul\Tax\Repositories\TaxRateRepository as TaxRate;
@@ -99,28 +100,26 @@ class TaxCategoryController extends Controller
             'taxrates' => 'array|required'
         ]);
 
-        if($taxCategory = $this->taxCategory->create(request()->input())) {
-            $allTaxCategories = $data['taxrates'];
+        Event::fire('tax.tax_category.create.before');
 
-            //attach the categories in the tax map table
-            $this->taxCategory->attachOrDetach($taxCategory, $allTaxCategories);
+        $taxCategory = $this->taxCategory->create($data);
 
-            session()->flash('success', trans('admin::app.settings.tax-categories.create-success'));
+        //attach the categories in the tax map table
+        $this->taxCategory->attachOrDetach($taxCategory, $data['taxrates']);
 
-            return redirect()->route($this->_config['redirect']);
-        } else {
-            session()->flash('error', trans('admin::app.settings.tax-categories.create-error'));
-        }
+        Event::fire('tax.tax_category.create.after', $taxCategory);
 
-        return view($this->_config['view']);
+        session()->flash('success', trans('admin::app.settings.tax-categories.create-success'));
+
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
      * To show the edit form form the tax category
      *
+     * @param int $id
      * @return view
      */
-
     public function edit($id)
     {
         $taxCategory = $this->taxCategory->findOrFail($id);
@@ -131,10 +130,11 @@ class TaxCategoryController extends Controller
     /**
      * To update the tax category
      *
-     * @return view
+     * @param int $id
+     * @return Response
      */
-
-    public function update($id) {
+    public function update($id)
+    {
         $this->validate(request(), [
             'channel_id' => 'required|numeric',
             'code' => 'required|string|unique:tax_categories,code,'.$id,
@@ -144,14 +144,19 @@ class TaxCategoryController extends Controller
         ]);
 
         $data = request()->input();
-        
+
+        Event::fire('tax.tax_category.update.before', $id);
+
         $taxCategory = $this->taxCategory->update($data, $id);
+
+        Event::fire('tax.tax_category.update.after', $taxCategory);
 
         if(!$taxCategory) {
             session()->flash('error', trans('admin::app.settings.tax-categories.update-error'));
+
             return redirect()->back();
         }
-        
+
         $taxRates = $data['taxrates'];
 
         //attach the categories in the tax map table
@@ -170,12 +175,14 @@ class TaxCategoryController extends Controller
      */
     public function destroy($id)
     {
-        if($this->taxCategory->count() == 1) {
-            session()->flash('error', trans('admin::app.settings.tax-categories.atleast-one'));
-        } else {
+        try {
+            Event::fire('tax.tax_category.delete.before', $id);
+
             $this->taxCategory->delete($id);
 
-            session()->flash('success', trans('admin::app.settings.tax-categories.delete'));
+            Event::fire('tax.tax_category.delete.after', $id);
+        } catch(Exception $e) {
+            return redirect()->back();
         }
 
         return redirect()->back();

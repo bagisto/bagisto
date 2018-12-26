@@ -92,7 +92,7 @@
                                                     {{ $attribute->admin_name }}
 
                                                     @if ($attribute->type == 'price')
-                                                        <span class="currency-code">({{ currency()->symbol(core()->getBaseCurrencyCode()) }})</span>
+                                                        <span class="currency-code">({{ core()->currencySymbol(core()->getBaseCurrencyCode()) }})</span>
                                                     @endif
 
                                                     <?php

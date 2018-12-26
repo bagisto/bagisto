@@ -2,7 +2,7 @@
     <label class="image-item" :for="_uid" v-bind:class="{ 'has-image': imageData.length > 0 }">
         <input type="hidden" :name="finalInputName"/>
 
-        <input type="file" accept="image/*" :name="finalInputName" ref="imageInput" :id="_uid" @change="addImageView($event)"/>
+        <input type="file" v-validate="'mimes:image/*'" accept="image/*" :name="finalInputName" ref="imageInput" :id="_uid" @change="addImageView($event)"/>
 
         <img class="preview" :src="imageData" v-if="imageData.length > 0">
 
@@ -53,13 +53,18 @@
                 var imageInput = this.$refs.imageInput;
 
                 if (imageInput.files && imageInput.files[0]) {
-                    var reader = new FileReader();
+                    if(imageInput.files[0].type.includes('image/')) {
+                        var reader = new FileReader();
 
-                    reader.onload = (e) => {
-                        this.imageData = e.target.result;
+                        reader.onload = (e) => {
+                            this.imageData = e.target.result;
+                        }
+
+                        reader.readAsDataURL(imageInput.files[0]);
+                    } else {
+                        imageInput.value = "";
+                        alert('Only images (.jpeg, .jpg, .png, ..) are allowed.');
                     }
-
-                    reader.readAsDataURL(imageInput.files[0]);
                 }
             },
 

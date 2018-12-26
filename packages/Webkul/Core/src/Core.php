@@ -339,7 +339,7 @@ class Core
         if (null === $exchangeRate)
             return $amount;
 
-        return (float) round($amount * $exchangeRate->rate);
+        return (float) $amount * $exchangeRate->rate;
     }
 
     /**
@@ -356,6 +356,21 @@ class Core
         $currencyCode = $this->getCurrentCurrency()->code;
 
         return currency($this->convertPrice($amount), $currencyCode);
+    }
+
+    /**
+    * Return currency symbol from currency code
+    *
+    * @param float $price
+    * @return string
+    */
+    public function currencySymbol($code)
+    {
+        try {
+            return currency()->symbol($code);
+        } catch (\Exception $e) {
+            return $code;
+        }
     }
 
     /**

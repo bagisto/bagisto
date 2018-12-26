@@ -60,16 +60,22 @@
             var this_this = this;
             
             if(this.multiple) {
-                this.images.forEach(function(image) {
-                    this_this.items.push(image)
+                if(this.images.length) {
+                    this.images.forEach(function(image) {
+                        this_this.items.push(image)
 
-                    this_this.imageCount++;
-                });
+                        this_this.imageCount++;
+                    });
+                } else {
+                    this.createFileType();
+                }
             } else {
                 if(this.images && this.images != '') {
                     this.items.push({'id': 'image_' + this.imageCount, 'url': this.images})
 
                     this.imageCount++;
+                } else {
+                    this.createFileType();
                 }
             }
         },

@@ -26,7 +26,13 @@ return [
         'name' => 'Wishlist',
         'route' =>'customer.wishlist.index',
         'sort' => 4
+    ], [
+        'key' => 'account.orders',
+        'name' => 'Orders',
+        'route' =>'customer.orders.index',
+        'sort' => 5
     ]
+
 ];
 
 ?>

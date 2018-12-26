@@ -4,13 +4,13 @@ namespace Webkul\Product\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
-use Event;
 
 /**
  * Product controller
@@ -126,9 +126,6 @@ class ProductController extends Controller
      */
     public function store()
     {
-        //before store of the product
-        // Event::fire('product.save.before', false);
-
         if(!request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
             return redirect(url()->current() . '?family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
         }
@@ -145,10 +142,13 @@ class ProductController extends Controller
             'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
         ]);
 
+        //before store of the product
+        Event::fire('catalog.product.create.before');
+
         $product = $this->product->create(request()->all());
 
         //after store of the product
-        Event::fire('product.save.after', $product);
+        Event::fire('catalog.product.create.after', $product);
 
         session()->flash('success', 'Product created successfully.');
 
@@ -181,13 +181,11 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
-        // before update of product
-        // Event::fire('product.update.before', $id);
+        Event::fire('catalog.product.update.before', $id);
 
         $product = $this->product->update(request()->all(), $id);
 
-        //after update of product
-        Event::fire('product.update.after', $product);
+        Event::fire('catalog.product.update.after', $product);
 
         session()->flash('success', 'Product updated successfully.');
 
@@ -202,12 +200,11 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Event::fire('product.delete.before', $id);
+        Event::fire('catalog.product.delete.before', $id);
 
         $this->product->delete($id);
 
-        //before update of product
-        // Event::fire('product.delete.after', $id);
+        Event::fire('catalog.product.delete.after', $id);
 
         session()->flash('success', 'Product deleted successfully.');
 
@@ -228,7 +225,11 @@ class ProductController extends Controller
                 $product = $this->product->find($productId);
 
                 if(!is_null($product)) {
+                    Event::fire('catalog.product.delete.before', $productId);
+
                     $product->delete();
+
+                    Event::fire('catalog.product.delete.after', $productId);
                 }
             }
         }
@@ -258,11 +259,15 @@ class ProductController extends Controller
                 $product = $this->product->find($productId);
 
                 if($data['update-options'] == 0 && $data['selected-option-text'] == 'In Active') {
+                    Event::fire('catelog.product.update.before', $productId);
+
                     $result = $this->product->updateAttribute($product, $attribute, $data['update-options']);
 
                     if($result)
-                        Event::fire('product.update.after', $product);
+                        Event::fire('catelog.product.update.after', $product);
                 } else if($data['update-options'] == 1 && $data['selected-option-text'] == 'Active') {
+                    Event::fire('catelog.product.update.before', $productId);
+
                     $result = $this->product->updateAttribute($product, $attribute, $data['update-options']);
 
                     if($result)
@@ -271,7 +276,7 @@ class ProductController extends Controller
             }
         }
 
-        session()->flash('success', trans('admin::app.catalog.products.mass-delete-success'));
+        session()->flash('success', trans('admin::app.catalog.products.mass-update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
