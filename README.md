@@ -117,7 +117,7 @@ composer dump-autoload
 
 
 ### 5. License
-Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://opensource.org/licenses/MIT).
+Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
 
 ### Coming Soon:
 -> API support for core packages and numerous fixes.
