@@ -51,11 +51,8 @@
         <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;">{{ old($name) ?: core()->getConfigData($name) }}</textarea>
 
     @elseif ($field['type'] == 'select')
-
         <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;" >
-
             @foreach($field['options'] as $option)
-
                 <?php
                     if($option['value'] == false) {
                         $value = 0;
@@ -70,9 +67,7 @@
                     {{ $option['title'] }}
                 </option>
             @endforeach
-
         </select>
-
     @endif
 
     <span class="control-error" v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $field['name'] }}]')">@{{ errors.first('{!! $firstField !!}[{!! $secondField !!}][{!! $field['name'] !!}]') }}</span>
