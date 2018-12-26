@@ -537,8 +537,7 @@ class Core
                     'code' => $field,
                     'locale_code' => $locale
                 ]);
-            }
-            else {
+            } else {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
                     'code' => $field
                 ]);
