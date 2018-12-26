@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Repositories\OrderItemRepository;
-use Webkul\Sales\Repositories\OrderItemInventoryRepository;
 
 /**
  * Order Reposotory
@@ -27,28 +26,17 @@ class OrderRepository extends Repository
     protected $orderItem;
 
     /**
-     * OrderItemInventoryRepository object
-     *
-     * @var Object
-     */
-    protected $orderItemInventory;
-
-    /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderItemRepository          $orderItem
-     * @param  Webkul\Sales\Repositories\OrderItemInventoryRepository $orderItemInventory
+     * @param  Webkul\Sales\Repositories\OrderItemRepository $orderItem
      * @return void
      */
     public function __construct(
         OrderItemRepository $orderItem,
-        OrderItemInventoryRepository $orderItemInventory,
         App $app
     )
     {
         $this->orderItem = $orderItem;
-
-        $this->orderItemInventory = $orderItemInventory;
 
         parent::__construct($app);
     }
@@ -107,7 +95,7 @@ class OrderRepository extends Repository
                     $orderItem->child = $this->orderItem->create(array_merge($item['child'], ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
                 }
 
-                $this->orderItemInventory->create(['orderItem' => $orderItem]);
+                $this->orderItem->manageStock($orderItem);
             }
 
             Event::fire('checkout.order.save.after', $order);

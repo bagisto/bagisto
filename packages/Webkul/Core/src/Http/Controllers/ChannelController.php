@@ -120,6 +120,7 @@ class ChannelController extends Controller
             'code' => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required',
             'locales' => 'required|array|min:1',
+            'inventory_sources' => 'required|array|min:1',
             'default_locale_id' => 'required',
             'currencies' => 'required|array|min:1',
             'base_currency_id' => 'required',

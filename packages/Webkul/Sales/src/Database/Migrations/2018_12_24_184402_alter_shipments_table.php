@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderItemInventories extends Migration
+class AlterShipmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateOrderItemInventories extends Migration
      */
     public function up()
     {
-        Schema::create('order_item_inventories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('qty')->default(0);
+        Schema::table('shipments', function (Blueprint $table) {
             $table->integer('inventory_source_id')->unsigned()->nullable();
-            $table->integer('order_item_id')->unsigned()->nullable();
-            $table->timestamps();
+            $table->foreign('inventory_source_id')->references('id')->on('inventory_sources')->onDelete('set null');
         });
     }
 
@@ -29,6 +26,6 @@ class CreateOrderItemInventories extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_item_inventories');
+        //
     }
 }

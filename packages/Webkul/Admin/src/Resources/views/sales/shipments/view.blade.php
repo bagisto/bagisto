@@ -191,6 +191,18 @@
                                     </span>
                                 </div>
 
+                                @if ($shipment->inventory_source)
+                                    <div class="row">
+                                        <span class="title"> 
+                                            {{ __('admin::app.sales.shipments.inventory-source') }}
+                                        </span>
+
+                                        <span class="value"> 
+                                            {{ $shipment->inventory_source->name }}
+                                        </span>
+                                    </div>
+                                @endif
+
                                 <div class="row">
                                     <span class="title"> 
                                         {{ __('admin::app.sales.shipments.carrier-title') }}

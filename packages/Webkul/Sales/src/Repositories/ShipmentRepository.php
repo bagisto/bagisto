@@ -88,31 +88,37 @@ class ShipmentRepository extends Repository
 
             $order = $this->order->find($data['order_id']);
 
-            $totalQty = array_sum($data['shipment']['items']);
-
             $shipment = $this->model->create([
                     'order_id' => $order->id,
-                    'total_qty' => $totalQty,
+                    'total_qty' => 0,
                     'carrier_title' => $data['shipment']['carrier_title'],
                     'track_number' => $data['shipment']['track_number'],
                     'customer_id' => $order->customer_id,
                     'customer_type' => $order->customer_type,
                     'order_address_id' => $order->shipping_address->id,
+                    'inventory_source_id' => $data['shipment']['source'],
                 ]);
 
-            foreach ($data['shipment']['items'] as $itemId => $qty) {
-                if(!$qty) continue;
+            $totalQty = 0;
+
+            foreach ($data['shipment']['items'] as $itemId => $inventorySource) {
+                $qty = $inventorySource[$data['shipment']['source']];
 
                 $orderItem = $this->orderItem->find($itemId);
 
-                if($qty > $orderItem->qty_to_ship)
-                    $qty = $orderItem->qty_to_ship;
+                $product = ($orderItem->type == 'configurable')
+                        ? $orderItem->child->product
+                        : $orderItem->product;
+
+                $totalQty += $qty;
 
                 $shipmentItem = $this->shipmentItem->create([
                         'shipment_id' => $shipment->id,
                         'order_item_id' => $orderItem->id,
                         'name' => $orderItem->name,
-                        'sku' => ($orderItem->type == 'configurable' ? $orderItem->child->sku : $orderItem->sku),
+                        'sku' => ($orderItem->type == 'configurable')
+                                ? $orderItem->child->sku
+                                : $orderItem->sku,
                         'qty' => $qty,
                         'weight' => $orderItem->weight * $qty,
                         'price' => $orderItem->price,
@@ -124,8 +130,19 @@ class ShipmentRepository extends Repository
                         'additional' => $orderItem->additional,
                     ]);
 
+                $this->shipmentItem->updateProductInventory([
+                        'shipment' => $shipment,
+                        'shipmentItem' => $shipmentItem,
+                        'product' => $product,
+                        'qty' => $qty
+                    ]);
+
                 $this->orderItem->update(['qty_shipped' => $orderItem->qty_shipped + $qty], $orderItem->id);
             }
+
+            $shipment->update([
+                    'total_qty' => $totalQty
+                ]);
 
             $this->order->updateOrderStatus($order);
 
@@ -139,5 +156,20 @@ class ShipmentRepository extends Repository
         DB::commit();
 
         return $shipment;
+    }
+
+    /**
+     * @param array $data
+     * @return integer
+     */
+    public function getTotalQty(array $data)
+    {
+        $qty = 0;
+
+        foreach ($data['shipment']['items'] as $itemId => $inventorySource) {
+            $qty += $inventorySource[$data['shipment']['source']];
+        }
+
+        return $qty;
     }
 }

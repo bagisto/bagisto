@@ -5,8 +5,9 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository as Order;
 use Webkul\Sales\Repositories\ShipmentRepository as Shipment;
+use Webkul\Sales\Repositories\OrderRepository as Order;
+use Webkul\Sales\Repositories\OrderItemRepository as OrderItem;
 
 /**
  * Sales Shipment controller
@@ -24,33 +25,47 @@ class ShipmentController extends Controller
     protected $_config;
 
     /**
-     * OrderRepository object
-     *
-     * @var array
-     */
-    protected $order;
-
-    /**
      * ShipmentRepository object
      *
-     * @var array
+     * @var mixed
      */
     protected $shipment;
 
     /**
+     * OrderRepository object
+     *
+     * @var mixed
+     */
+    protected $order;
+
+    /**
+     * OrderItemRepository object
+     *
+     * @var mixed
+     */
+    protected $orderItem;
+
+    /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderRepository     $order
      * @param  Webkul\Sales\Repositories\ShipmentRepository  $shipment
+     * @param  Webkul\Sales\Repositories\OrderRepository     $order
+     * @param  Webkul\Sales\Repositories\OrderitemRepository $orderItem
      * @return void
      */
-    public function __construct(Shipment $shipment, Order $order)
+    public function __construct(
+        Shipment $shipment,
+        Order $order,
+        OrderItem $orderItem
+    )
     {
         $this->middleware('admin');
 
         $this->_config = request('_config');
 
         $this->order = $order;
+
+        $this->orderItem = $orderItem;
 
         $this->shipment = $shipment;
 
@@ -76,6 +91,12 @@ class ShipmentController extends Controller
     {
         $order = $this->order->find($orderId);
 
+        if(!$order->channel || !$order->canShip()) {
+            session()->flash('error', 'Shipment can not be created for this order.');
+
+            return redirect()->back();
+        }
+
         return view($this->_config['view'], compact('order'));
     }
 
@@ -99,21 +120,14 @@ class ShipmentController extends Controller
         $this->validate(request(), [
             'shipment.carrier_title' => 'required',
             'shipment.track_number' => 'required',
-            'shipment.items.*' => 'required|numeric|min:0',
+            'shipment.source' => 'required',
+            'shipment.items.*.*' => 'required|numeric|min:0',
         ]);
 
         $data = request()->all();
-        
-        $haveProductToShip = false;
-        foreach ($data['shipment']['items'] as $itemId => $qty) {
-            if($qty) {
-                $haveProductToShip = true;
-                break;
-            }
-        }
 
-        if(!$haveProductToShip) {
-            session()->flash('error', 'Shipment can not be created without products.');
+        if(!$this->isInventoryValidate($data)) {
+            session()->flash('error', 'Requested quantity is invalid or not available.');
 
             return redirect()->back();
         }
@@ -123,6 +137,42 @@ class ShipmentController extends Controller
         session()->flash('success', 'Shipment created successfully.');
 
         return redirect()->route($this->_config['redirect'], $orderId);
+    }
+
+    /**
+     * Checks if requested quantity available or not
+     *
+     * @param array $data
+     * @return boolean
+     */
+    public function isInventoryValidate(&$data)
+    {
+        $valid = false;
+
+        foreach ($data['shipment']['items'] as $itemId => $inventorySource) {
+            if ($qty = $inventorySource[$data['shipment']['source']]) {
+                $orderItem = $this->orderItem->find($itemId);
+
+                $product = ($orderItem->type == 'configurable')
+                        ? $orderItem->child->product
+                        : $orderItem->product;
+
+                // Check if requested qty is available, if not ship available qty
+                $inventory = $product->inventories()
+                        ->where('inventory_source_id', $data['shipment']['source'])
+                        ->first();
+
+                if ($orderItem->qty_to_ship < $qty || $inventory->qty < $qty) {
+                    return false;
+                }
+
+                $valid = true;
+            } else {
+                unset($data['shipment']['items'][$itemId]);
+            }
+        }
+
+        return $valid;
     }
 
     /**

@@ -19,7 +19,6 @@ class OrderItemRepository extends Repository
      *
      * @return Mixed
      */
-
     function model()
     {
         return 'Webkul\Sales\Contracts\OrderItem';
@@ -77,5 +76,35 @@ class OrderItemRepository extends Repository
         $orderItem->save();
 
         return $orderItem;
+    }
+
+
+    /**
+     * @param mixed $orderItem
+     * @return void
+     */
+    public function manageStock($orderItem)
+    {
+        if(!$orderedQuantity = $orderItem->qty_ordered)
+            return;
+
+        $product = $orderItem->type == 'configurable' ? $orderItem->child->product : $orderItem->product;
+
+        if(!$product) {
+            return;
+        }
+
+        $salableInventory = $product->salable_inventories()
+            ->where('channel_id', $orderItem->order->channel->id)
+            ->first();
+        
+        if($salableInventory) {
+            $soldQty = $salableInventory->sold_qty + $orderItem->qty_ordered;
+
+            $salableInventory->update([
+                    'qty' => ($salableInventory->qty - $orderItem->qty_ordered),
+                    'sold_qty' => $soldQty
+                ]);
+        }
     }
 }

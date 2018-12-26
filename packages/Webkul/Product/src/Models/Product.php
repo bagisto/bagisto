@@ -77,6 +77,14 @@ class Product extends Model
     }
 
     /**
+     * The salable inventories that belong to the product.
+     */
+    public function salable_inventories()
+    {
+        return $this->hasMany(ProductSalableInventory::class, 'product_id');
+    }
+
+    /**
      * The inventory sources that belong to the product.
      */
     public function inventory_sources()
@@ -145,17 +153,26 @@ class Product extends Model
      *
      * @return bool
      */
+    public function inventory_source_qty($inventorySource)
+    {
+        return $this->inventories()->where('inventory_source_id', $inventorySource->id)->sum('qty');
+    }
+
+    /**
+     * @param integer $qty
+     *
+     * @return bool
+     */
     public function haveSufficientQuantity($qty)
     {
-        $inventories = $this->inventory_sources()->orderBy('priority', 'asc')->get();
+        $salableInventories = $this->salable_inventories()->get();
 
         $total = 0;
 
-        foreach($inventories as $inventorySource) {
-            if(!$inventorySource->status)
-                continue;
-
-            $total += $inventorySource->pivot->qty;
+        foreach($salableInventories as $inventory) {
+            if($inventory->channel->id == core()->getCurrentChannel()->id) {
+                $total += $inventory->qty;
+            }
         }
 
         return $qty <= $total ? true : false;
