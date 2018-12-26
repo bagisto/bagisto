@@ -97,5 +97,57 @@ return [
                 'validation' => 'required'
             ]
         ]
+    ], [
+        'key' => 'sales.shipping',
+        'name' => 'Shipping Origin',
+        'sort' => 0
+    ], [
+        'key' => 'sales.shipping.origin',
+        'name' => 'Origin',
+        'sort' => 0,
+        'fields' => [
+            [
+                'name' => 'country',
+                'title' => 'Country',
+                'type' => 'text',
+                'validation' => 'required',
+                'channel_based' => true,
+                'locale_based' => false
+            ], [
+                'name' => 'state',
+                'title' => 'State',
+                'type' => 'text',
+                'validation' => 'required',
+                'channel_based' => true,
+                'locale_based' => false
+            ], [
+                'name' => 'address1',
+                'title' => 'Address Line 1',
+                'type' => 'text',
+                'validation' => 'required',
+                'channel_based' => true,
+                'locale_based' => false
+            ], [
+                'name' => 'address2',
+                'title' => 'Address Line 2',
+                'type' => 'text',
+                'channel_based' => true,
+                'locale_based' => false
+            ], [
+                'name' => 'zipcode',
+                'title' => 'Zip',
+                'type' => 'text',
+                'validation' => 'required',
+                'channel_based' => true,
+                'locale_based' => false
+            ], [
+                'name' => 'city',
+                'title' => 'City',
+                'type' => 'text',
+                'validation' => 'required',
+                'channel_based' => true,
+                'locale_based' => false
+            ]
+        ]
     ]
 ];
