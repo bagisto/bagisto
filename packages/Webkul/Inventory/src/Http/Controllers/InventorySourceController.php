@@ -4,6 +4,7 @@ namespace Webkul\Inventory\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
 
 /**
@@ -85,7 +86,11 @@ class InventorySourceController extends Controller
 
         $data['status'] = !isset($data['status']) ? 0 : 1;
 
-        $this->inventorySource->create($data);
+        Event::fire('inventory.inventory_source.create.before');
+
+        $inventorySource = $this->inventorySource->create($data);
+
+        Event::fire('inventory.inventory_source.create.after', $inventorySource);
 
         session()->flash('success', 'Inventory source created successfully.');
 
@@ -131,7 +136,11 @@ class InventorySourceController extends Controller
 
         $data['status'] = !isset($data['status']) ? 0 : 1;
 
-        $this->inventorySource->update($data, $id);
+        Event::fire('inventory.inventory_source.update.before', $id);
+
+        $inventorySource = $this->inventorySource->update($data, $id);
+
+        Event::fire('inventory.inventory_source.update.after', $inventorySource);
 
         session()->flash('success', 'Inventory source updated successfully.');
 
@@ -149,7 +158,11 @@ class InventorySourceController extends Controller
         if($this->inventorySource->count() == 1) {
             session()->flash('error', 'At least one inventory source is required.');
         } else {
+            Event::fire('inventory.inventory_source.delete.before', $id);
+
             $this->inventorySource->delete($id);
+
+            Event::fire('inventory.inventory_source.delete.after', $id);
 
             session()->flash('success', 'Inventory source deleted successfully.');
         }

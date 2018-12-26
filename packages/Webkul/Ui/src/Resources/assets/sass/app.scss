@@ -24,6 +24,10 @@ a:active {
     color: $brand-color;
 }
 
+textarea {
+    resize: none;
+}
+
 ul {
     margin: 0;
     padding: 0;
@@ -707,6 +711,11 @@ h2 {
     .panel-content {
         padding: 20px;
     }
+}
+
+
+modal {
+    display: none;
 }
 
 .modal-open {

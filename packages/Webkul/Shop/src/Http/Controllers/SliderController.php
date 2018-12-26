@@ -57,7 +57,7 @@ class SliderController extends controller
         $this->validate(request(), [
             'title' => 'string|required',
             'channel_id' => 'required',
-            'image'  => 'required',
+            'image'  => 'required|mimes:jpeg,bmp,png'
         ]);
 
         $result = $this->slider->save(request()->all());
@@ -90,6 +90,7 @@ class SliderController extends controller
         $this->validate(request(), [
             'title' => 'string|required',
             'channel_id' => 'required',
+            'image'  => 'sometimes|mimes:jpeg,bmp,png'
         ]);
 
         $result = $this->slider->updateItem(request()->all(), $id);

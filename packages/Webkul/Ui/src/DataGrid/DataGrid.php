@@ -567,7 +567,10 @@ class DataGrid
 
         if ($this->aliased) {  //aliasing is expected in this case or it will be changed to presence of join bag
             foreach ($parsed as $key=>$value) {
-                if ($key=="sort") {
+                $column_name = $this->findAlias($key);
+                $column_type = $this->findType($key);
+
+                if ($key == "sort") {
                     //resolve the case with the column helper class
                     if(substr_count($key,'_') >= 1)
                         $column_name = $this->findAlias($key);
@@ -603,18 +606,26 @@ class DataGrid
                         }
                     } else {
                         foreach ($value as $condition => $filter_value) {
-                            $this->query->where(
-                                $column_name,
-                                $this->operators[$condition],
-                                $filter_value
-                            );
+                            if($column_type == 'datetime') {
+                                $this->query->whereDate(
+                                    $column_name,
+                                    $this->operators[$condition],
+                                    $filter_value
+                                );
+                            } else {
+                                $this->query->where(
+                                    $column_name,
+                                    $this->operators[$condition],
+                                    $filter_value
+                                );
+                            }
                         }
                     }
                 }
             }
         } else {
             //this is the case for the non aliasing.
-            foreach ($parsed as $key=>$value) {
+            foreach ($parsed as $key => $value) {
 
                 if ($key=="sort") {
 
@@ -631,7 +642,6 @@ class DataGrid
                         throw new \Exception('Multiple Sort keys Found, Please Resolve the URL Manually.');
                     }
                 } elseif ($key=="search") {
-
                     $count_keys = count(array_keys($value));
                     if($count_keys==1)
                     $this->query->where(function ($query) use ($parsed) {

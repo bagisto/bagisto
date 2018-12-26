@@ -73,24 +73,29 @@ class Product {
 
         $variants = [];
 
-        $this->productGrid->create($gridObject);
+        $found = $this->productGrid->findOneByField('product_id', $product->id);
 
-        if($product->type == 'configurable') {
-            $variants = $product->variants()->get();
+        //extra measure to stop duplicate entries
+        if($found == null) {
+            $this->productGrid->create($gridObject);
 
-            foreach($variants as $variant) {
-                $variantObj = [
-                    'product_id' => $variant->id,
-                    'sku' => $variant->sku,
-                    'type' => $variant->type,
-                    'attribute_family_name' => $variant->toArray()['attribute_family']['name'],
-                    'name' => $variant->name,
-                    'quantity' => 0,
-                    'status' => $variant->status,
-                    'price' => $variant->price,
-                ];
+            if($product->type == 'configurable') {
+                $variants = $product->variants()->get();
 
-                $this->productGrid->create($variantObj);
+                foreach($variants as $variant) {
+                    $variantObj = [
+                        'product_id' => $variant->id,
+                        'sku' => $variant->sku,
+                        'type' => $variant->type,
+                        'attribute_family_name' => $variant->toArray()['attribute_family']['name'],
+                        'name' => $variant->name,
+                        'quantity' => 0,
+                        'status' => $variant->status,
+                        'price' => $variant->price,
+                    ];
+
+                    $this->productGrid->create($variantObj);
+                }
             }
         }
 
@@ -214,6 +219,20 @@ class Product {
     }
 
     /**
+     * Updates the product quantity when the order is received
+     *
+     * @param $productId
+     * @param $itemQuantity
+     */
+    public function afterOrderRecieved($productId, $itemQuantity) {
+        $productGrid = $this->productGrid->findOneByField('product_id', $productId);
+
+        $productGrid->update(['quantity' => $productGrid->quantity - $itemQuantity]);
+
+        return true;
+    }
+
+    /**
      * Manually invoke this function when you have created the products by importing or seeding or factory.
      */
     public function sync() {
@@ -254,6 +273,13 @@ class Product {
 
             $gridObject = [];
         }
+
+        $this->findRepeated();
+
         return true;
+    }
+
+    public function findRepeated() {
+
     }
 }

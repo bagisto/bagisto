@@ -22,7 +22,7 @@
                 <div class="dropdown-header">
                     <p class="heading">
                         {{ __('shop::app.checkout.cart.cart-subtotal') }} -
-                        {{ core()->currency($cart->sub_total) }}
+                        {{ core()->currency($cart->base_sub_total) }}
                     </p>
                 </div>
 
@@ -53,7 +53,7 @@
                                         </div>
                                     @endif
 
-                                    <div class="item-price">{{ core()->currency($item->total) }}</div>
+                                    <div class="item-price">{{ core()->currency($item->base_total) }}</div>
 
                                     <div class="item-qty">Quantity - {{ $item->quantity }}</div>
                                 </div>

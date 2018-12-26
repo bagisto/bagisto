@@ -101,6 +101,8 @@
 
     {!! view_render_event('bagisto.shop.layout.body.after') !!}
 
+    <div class="modal-overlay"></div>
+
 </body>
 
 </html>

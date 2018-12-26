@@ -25,7 +25,7 @@ class Order {
         try {
             Mail::send(new NewOrderNotification($order));
         } catch (\Exception $e) {
-            
+
         }
     }
 
@@ -39,7 +39,7 @@ class Order {
         try {
             Mail::send(new NewInvoiceNotification($invoice));
         } catch (\Exception $e) {
-            
+
         }
     }
 
@@ -53,7 +53,7 @@ class Order {
         try {
             Mail::send(new NewShipmentNotification($shipment));
         } catch (\Exception $e) {
-            
+
         }
     }
 
@@ -67,7 +67,7 @@ class Order {
         $productListener = app(\Webkul\Admin\Listeners\Product::class);
 
         foreach ($order->items as $item) {
-            $productListener->afterProductCreated($item->product);
+            $productListener->afterOrderRecieved($item->product->id, $item->qty_ordered);
         }
     }
 }

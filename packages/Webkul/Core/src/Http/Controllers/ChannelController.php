@@ -4,6 +4,7 @@ namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\ChannelRepository as Channel;
 
 
@@ -77,10 +78,16 @@ class ChannelController extends Controller
             'locales' => 'required|array|min:1',
             'default_locale_id' => 'required',
             'currencies' => 'required|array|min:1',
-            'base_currency_id' => 'required'
+            'base_currency_id' => 'required',
+            'logo.*' => 'mimes:jpeg,jpg,bmp,png',
+            'favicon.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
-        $this->channel->create(request()->all());
+        Event::fire('core.channel.create.before');
+
+        $channel = $this->channel->create(request()->all());
+
+        Event::fire('core.channel.create.after', $channel);
 
         session()->flash('success', 'Channel created successfully.');
 
@@ -115,10 +122,16 @@ class ChannelController extends Controller
             'locales' => 'required|array|min:1',
             'default_locale_id' => 'required',
             'currencies' => 'required|array|min:1',
-            'base_currency_id' => 'required'
+            'base_currency_id' => 'required',
+            'logo.*' => 'mimes:jpeg,jpg,bmp,png',
+            'favicon.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
-        $this->channel->update(request()->all(), $id);
+        Event::fire('core.channel.update.before', $id);
+
+        $channel = $this->channel->update(request()->all(), $id);
+
+        Event::fire('core.channel.update.after', $channel);
 
         session()->flash('success', 'Channel updated successfully.');
 
@@ -136,7 +149,11 @@ class ChannelController extends Controller
         if($this->channel->count() == 1) {
             session()->flash('error', 'At least one channel is required.');
         } else {
+            Event::fire('core.channel.delete.before', $id);
+
             $this->channel->delete($id);
+
+            Event::fire('core.channel.delete.after', $id);
 
             session()->flash('success', 'Channel deleted successfully.');
         }

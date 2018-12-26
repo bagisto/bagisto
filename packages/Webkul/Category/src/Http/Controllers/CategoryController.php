@@ -4,6 +4,7 @@ namespace Webkul\Category\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 
 /**
@@ -74,10 +75,15 @@ class CategoryController extends Controller
     {
         $this->validate(request(), [
             'slug' => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
-            'name' => 'required'
+            'name' => 'required',
+            'image.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
-        $this->category->create(request()->all());
+        Event::fire('catalog.category.create.before');
+
+        $category = $this->category->create(request()->all());
+
+        Event::fire('catalog.category.create.after', $category);
 
         session()->flash('success', 'Category created successfully.');
 
@@ -109,6 +115,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $locale = request()->get('locale') ?: app()->getLocale();
+
         $this->validate(request(), [
             $locale . '.slug' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
                 if (!$this->category->isSlugUnique($id, $value)) {
@@ -116,9 +123,14 @@ class CategoryController extends Controller
                 }
             }],
             $locale . '.name' => 'required',
+            'image.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
+        Event::fire('catalog.category.update.before', $id);
+
         $this->category->update(request()->all(), $id);
+
+        Event::fire('catalog.category.update.after', $id);
 
         session()->flash('success', 'Category updated successfully.');
 
@@ -133,7 +145,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        Event::fire('catalog.category.delete.before', $id);
+
         $this->category->delete($id);
+
+        Event::fire('catalog.category.delete.after', $id);
 
         session()->flash('success', 'Category deleted successfully.');
 
@@ -153,7 +169,11 @@ class CategoryController extends Controller
 
             foreach($indexes as $key => $value) {
                 try {
+                    Event::fire('catalog.category.delete.before', $value);
+
                     $this->category->delete($value);
+
+                    Event::fire('catalog.category.delete.after', $value);
                 } catch(\Exception $e) {
                     $suppressFlash = true;
 

@@ -4,6 +4,7 @@ namespace Webkul\User\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\User\Repositories\RoleRepository as Role;
 
 /**
@@ -76,7 +77,11 @@ class RoleController extends Controller
             'permission_type' => 'required',
         ]);
 
-        $this->role->create(request()->all());
+        Event::fire('user.role.create.before');
+
+        $role = $this->role->create(request()->all());
+
+        Event::fire('user.role.create.after', $role);
 
         session()->flash('success', 'Role created successfully.');
 
@@ -110,7 +115,11 @@ class RoleController extends Controller
             'permission_type' => 'required',
         ]);
 
-        $this->role->update(request()->all(), $id);
+        Event::fire('user.role.update.before', $id);
+
+        $role = $this->role->update(request()->all(), $id);
+
+        Event::fire('user.role.update.after', $role);
 
         session()->flash('success', 'Role updated successfully.');
 
@@ -128,7 +137,11 @@ class RoleController extends Controller
         if($this->role->count() == 1) {
             session()->flash('error', 'At least one role is required.');
         } else {
+            Event::fire('user.role.delete.before', $id);
+
             $this->role->delete($id);
+
+            Event::fire('user.role.delete.after', $id);
 
             session()->flash('success', 'Role source deleted successfully.');
         }

@@ -35,6 +35,8 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->composeView();
 
+        $this->registerACL();
+
         $this->app->register(EventServiceProvider::class);
 
         $this->app->bind(
@@ -87,16 +89,43 @@ class AdminServiceProvider extends ServiceProvider
         });
 
         view()->composer(['admin::users.roles.create', 'admin::users.roles.edit'], function ($view) {
-            $tree = Tree::create();
-
-            foreach(config('acl') as $item) {
-                $tree->add($item);
-            }
-
-            $tree->items = core()->sortItems($tree->items);
-
-            $view->with('acl', $tree);
+            $view->with('acl', $this->createACL());
         });
+    }
+
+    /**
+     * Registers acl to entire application
+     *
+     * @return void
+     */
+    public function registerACL()
+    {
+        $this->app->singleton('acl', function () {
+            return $this->createACL();
+        });
+    }
+
+    /**
+     * Create acl tree
+     *
+     * @return mixed
+     */
+    public function createACL()
+    {
+        static $tree;
+
+        if($tree)
+            return $tree;
+
+        $tree = Tree::create();
+
+        foreach(config('acl') as $item) {
+            $tree->add($item, 'acl');
+        }
+
+        $tree->items = core()->sortItems($tree->items);
+
+        return $tree;
     }
     
     /**
