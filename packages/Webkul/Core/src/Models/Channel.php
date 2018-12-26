@@ -3,9 +3,10 @@
 namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Models\Locale;
 use Webkul\Core\Models\Currency;
-use Illuminate\Support\Facades\Storage;
+use Webkul\Inventory\Models\InventorySource;
 
 class Channel extends Model
 {
@@ -33,6 +34,14 @@ class Channel extends Model
     public function currencies()
     {
         return $this->belongsToMany(Currency::class, 'channel_currencies');
+    }
+
+    /**
+     * Get the channel inventory sources.
+     */
+    public function inventory_sources()
+    {
+        return $this->belongsToMany(InventorySource::class, 'channel_inventory_sources');
     }
 
 

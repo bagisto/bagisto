@@ -46,6 +46,19 @@
                                 <textarea class="control" id="description" name="description">{{ old('description') ?: $channel->description }}</textarea>
                             </div>
 
+                            <div class="control-group" :class="[errors.has('inventory_sources[]') ? 'has-error' : '']">
+                                <label for="inventory_sources" class="required">{{ __('admin::app.settings.channels.inventory_sources') }}</label>
+                                <?php $selectedOptionIds = old('inventory_sources') ?: $channel->inventory_sources->pluck('id')->toArray() ?>
+                                <select v-validate="'required'" class="control" id="inventory_sources" name="inventory_sources[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.inventory_sources') }}&quot;" multiple>
+                                    @foreach(app('Webkul\Inventory\Repositories\InventorySourceRepository')->all() as $inventorySource)
+                                        <option value="{{ $inventorySource->id }}" {{ in_array($inventorySource->id, $selectedOptionIds) ? 'selected' : '' }}>
+                                            {{ $inventorySource->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <span class="control-error" v-if="errors.has('inventory_sources[]')">@{{ errors.first('inventory_sources[]') }}</span>
+                            </div>
+
                             <div class="control-group">
                                 <label for="hostname">{{ __('admin::app.settings.channels.hostname') }}</label>
                                 <input type="text" class="control" id="hostname" name="hostname" value="{{ $channel->hostname }}" placeholder="https://www.example.com"/>

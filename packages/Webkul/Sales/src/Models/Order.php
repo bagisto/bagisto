@@ -22,7 +22,8 @@ class Order extends Model implements OrderContract
     /**
      * Get the order items record associated with the order.
      */
-    public function getCustomerFullNameAttribute() {
+    public function getCustomerFullNameAttribute()
+    {
         return $this->customer_first_name . ' ' . $this->customer_last_name;
     }
 
@@ -53,21 +54,24 @@ class Order extends Model implements OrderContract
     /**
      * Get the order items record associated with the order.
      */
-    public function items() {
+    public function items()
+    {
         return $this->hasMany(OrderItemProxy::modelClass())->whereNull('parent_id');
     }
 
     /**
      * Get the order shipments record associated with the order.
      */
-    public function shipments() {
+    public function shipments()
+    {
         return $this->hasMany(ShipmentProxy::modelClass());
     }
 
     /**
      * Get the order invoices record associated with the order.
      */
-    public function invoices() {
+    public function invoices()
+    {
         return $this->hasMany(InvoiceProxy::modelClass());
     }
     

@@ -219,20 +219,6 @@ class Product {
     }
 
     /**
-     * Updates the product quantity when the order is received
-     *
-     * @param $productId
-     * @param $itemQuantity
-     */
-    public function afterOrderRecieved($productId, $itemQuantity) {
-        $productGrid = $this->productGrid->findOneByField('product_id', $productId);
-
-        $productGrid->update(['quantity' => $productGrid->quantity - $itemQuantity]);
-
-        return true;
-    }
-
-    /**
      * Manually invoke this function when you have created the products by importing or seeding or factory.
      */
     public function sync() {

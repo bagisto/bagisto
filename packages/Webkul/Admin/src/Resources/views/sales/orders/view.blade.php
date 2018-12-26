@@ -27,7 +27,7 @@
                     </a>
                 @endif
 
-                @if($order->canShip())
+                @if($order->canShip() && $order->channel)
                     <a href="{{ route('admin.sales.shipments.create', $order->id) }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.sales.orders.shipment-btn-title') }}
                     </a>
@@ -368,6 +368,7 @@
                                     <th>{{ __('admin::app.sales.shipments.order-id') }}</th>
                                     <th>{{ __('admin::app.sales.shipments.order-date') }}</th>
                                     <th>{{ __('admin::app.sales.shipments.customer-name') }}</th>
+                                    <th>{{ __('admin::app.sales.shipments.inventory-source') }}</th>
                                     <th>{{ __('admin::app.sales.shipments.total-qty') }}</th>
                                     <th>{{ __('admin::app.sales.shipments.action') }}</th>
                                 </tr>
@@ -382,6 +383,9 @@
                                         <td>#{{ $shipment->order->id }}</td>
                                         <td>{{ $shipment->order->created_at }}</td>
                                         <td>{{ $shipment->address->name }}</td>
+                                        @if ($shipment->inventory_source)
+                                            <td>{{ $shipment->inventory_source->name }}</td>
+                                        @endif
                                         <td>{{ $shipment->total_qty }}</td>
                                         <td class="action">
                                             <a href="{{ route('admin.sales.shipments.view', $shipment->id) }}">

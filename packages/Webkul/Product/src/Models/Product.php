@@ -77,6 +77,14 @@ class Product extends Model
     }
 
     /**
+     * The ordered inventories that belong to the product.
+     */
+    public function ordered_inventories()
+    {
+        return $this->hasMany(ProductOrderedInventory::class, 'product_id');
+    }
+
+    /**
      * The inventory sources that belong to the product.
      */
     public function inventory_sources()
@@ -145,17 +153,39 @@ class Product extends Model
      *
      * @return bool
      */
+    public function inventory_source_qty($inventorySource)
+    {
+        return $this->inventories()
+                ->where('inventory_source_id', $inventorySource->id)
+                ->sum('qty');
+    }
+
+    /**
+     * @param integer $qty
+     *
+     * @return bool
+     */
     public function haveSufficientQuantity($qty)
     {
-        $inventories = $this->inventory_sources()->orderBy('priority', 'asc')->get();
-
         $total = 0;
 
-        foreach($inventories as $inventorySource) {
-            if(!$inventorySource->status)
-                continue;
+        $channelInventorySourceIds = core()->getCurrentChannel()
+                ->inventory_sources()
+                ->where('status', 1)
+                ->pluck('id');
 
-            $total += $inventorySource->pivot->qty;
+        foreach ($this->inventories as $inventory) {
+            if(is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
+                $total += $inventory->qty;
+            }
+        }
+
+        $orderedInventory = $this->ordered_inventories()
+                ->where('channel_id', core()->getCurrentChannel()->id)
+                ->first();
+
+        if ($orderedInventory) {
+            $total -= $orderedInventory->qty;
         }
 
         return $qty <= $total ? true : false;

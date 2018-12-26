@@ -205,9 +205,14 @@ return [
             'save-btn-title' => 'Save Shipment',
             'qty-ordered' => 'Qty Ordered',
             'qty-to-ship' => 'Qty to Ship',
+            'available-sources' => 'Available Sources',
+            'source' => 'Source',
+            'select-source' => 'Please Select Source',
+            'qty-available' => 'Qty Available',
+            'inventory-source' => 'Inventory Source',
             'carrier-title' => 'Carrier Title',
             'tracking-number' => 'Tracking Number',
-            'view-title' => 'Shipment #:shipment_id',
+            'view-title' => 'Shipment #:shipment_id'
         ]
     ],
 
@@ -462,6 +467,7 @@ return [
             'default-locale' => 'Default Locale',
             'currencies' => 'Currencies',
             'base-currency' => 'Base Currency',
+            'inventory_sources' => 'Inventory Sources',
             'design' => 'Design',
             'theme' => 'Theme',
             'home_page_content' => 'Home Page Content',

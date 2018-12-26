@@ -99,7 +99,7 @@ return [
         ]
     ], [
         'key' => 'sales.shipping',
-        'name' => 'Shipping Origin',
+        'name' => 'Shipping',
         'sort' => 0
     ], [
         'key' => 'sales.shipping.origin',
