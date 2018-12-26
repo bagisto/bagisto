@@ -69,7 +69,7 @@ abstract class AbstractShipping
      */
     public function getConfigData($field)
     {
-        return core()->getConfigData('carriers.' . $this->getCode() . '.' . $field);
+        return core()->getConfigData('sales.carriers.' . $this->getCode() . '.' . $field);
     }
 }
 ?>

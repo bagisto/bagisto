@@ -78,12 +78,11 @@ class OrderItemRepository extends Repository
         return $orderItem;
     }
 
-
     /**
      * @param mixed $orderItem
      * @return void
      */
-    public function manageStock($orderItem)
+    public function manageInventory($orderItem)
     {
         if(!$orderedQuantity = $orderItem->qty_ordered)
             return;
@@ -94,16 +93,45 @@ class OrderItemRepository extends Repository
             return;
         }
 
-        $salableInventory = $product->salable_inventories()
+        $orderedInventory = $product->ordered_inventories()
             ->where('channel_id', $orderItem->order->channel->id)
             ->first();
         
-        if($salableInventory) {
-            $soldQty = $salableInventory->sold_qty + $orderItem->qty_ordered;
+        if($orderedInventory) {
+            $orderedInventory->update([
+                    'qty' => $orderedInventory->qty + $orderItem->qty_ordered
+                ]);
+        } else {
+            $product->ordered_inventories()->create([
+                    'qty' => $orderItem->qty_ordered,
+                    'product_id' => $product->id,
+                    'channel_id' => $orderItem->order->channel->id,
+                ]);
+        }
+    }
 
-            $salableInventory->update([
-                    'qty' => ($salableInventory->qty - $orderItem->qty_ordered),
-                    'sold_qty' => $soldQty
+    /**
+     * Returns qty to product inventory after order cancelation
+     *
+     * @param mixed $orderItem
+     * @return void
+     */
+    public function returnQtyToProductInventory($orderItem)
+    {
+        if (!$product = $orderItem->product)
+            return;
+
+        $orderedInventory = $product->ordered_inventories()
+                ->where('channel_id', $orderItem->order->channel->id)
+                ->first();
+
+        if ($orderedInventory) {
+            if (($qty = $orderedInventory->qty - $orderItem->qty_to_cancel) < 0) {
+                $qty = 0;
+            }
+
+            $orderedInventory->update([
+                    'qty' => $qty
                 ]);
         }
     }

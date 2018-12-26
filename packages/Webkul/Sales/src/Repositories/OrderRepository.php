@@ -95,7 +95,7 @@ class OrderRepository extends Repository
                     $orderItem->child = $this->orderItem->create(array_merge($item['child'], ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
                 }
 
-                $this->orderItem->manageStock($orderItem);
+                $this->orderItem->manageInventory($orderItem);
             }
 
             Event::fire('checkout.order.save.after', $order);
@@ -123,6 +123,8 @@ class OrderRepository extends Repository
 
         foreach($order->items as $item) {
             if($item->qty_to_cancel) {
+                $this->orderItem->returnQtyToProductInventory($item);
+
                 $item->qty_canceled += $item->qty_to_cancel;
 
                 $item->save();

@@ -106,10 +106,6 @@ class ShipmentRepository extends Repository
 
                 $orderItem = $this->orderItem->find($itemId);
 
-                $product = ($orderItem->type == 'configurable')
-                        ? $orderItem->child->product
-                        : $orderItem->product;
-
                 $totalQty += $qty;
 
                 $shipmentItem = $this->shipmentItem->create([
@@ -129,6 +125,10 @@ class ShipmentRepository extends Repository
                         'product_type' => $orderItem->product_type,
                         'additional' => $orderItem->additional,
                     ]);
+
+                $product = ($orderItem->type == 'configurable')
+                        ? $orderItem->child->product
+                        : $orderItem->product;
 
                 $this->shipmentItem->updateProductInventory([
                         'shipment' => $shipment,
@@ -156,20 +156,5 @@ class ShipmentRepository extends Repository
         DB::commit();
 
         return $shipment;
-    }
-
-    /**
-     * @param array $data
-     * @return integer
-     */
-    public function getTotalQty(array $data)
-    {
-        $qty = 0;
-
-        foreach ($data['shipment']['items'] as $itemId => $inventorySource) {
-            $qty += $inventorySource[$data['shipment']['source']];
-        }
-
-        return $qty;
     }
 }

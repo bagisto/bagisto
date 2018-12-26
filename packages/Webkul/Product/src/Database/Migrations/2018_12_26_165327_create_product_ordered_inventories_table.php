@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductSalableInventoriesTable extends Migration
+class CreateProductOrderedInventoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateProductSalableInventoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_salable_inventories', function (Blueprint $table) {
+        Schema::create('product_ordered_inventories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('qty')->default(0);
-            $table->integer('sold_qty')->default(0);
             $table->integer('product_id')->unsigned();
             $table->integer('channel_id')->unsigned();
 
@@ -33,6 +32,6 @@ class CreateProductSalableInventoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_salable_inventories');
+        Schema::dropIfExists('product_ordered_inventories');
     }
 }

@@ -31,6 +31,9 @@
                         <label>Account</label>
                         <ul>
                             <li>
+                                <a href="{{ route('shop.home.index') }}" target="_blank">Visit Shop</a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.account.edit') }}">My Account</a>
                             </li>
                             <li>

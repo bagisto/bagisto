@@ -4,7 +4,6 @@ namespace Webkul\Product\Repositories;
  
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Product\Repositories\ProductSalableInventoryRepository as SalableInventoryRepository;
 
 /**
  * Product Inventory Reposotory
@@ -14,30 +13,6 @@ use Webkul\Product\Repositories\ProductSalableInventoryRepository as SalableInve
  */
 class ProductInventoryRepository extends Repository
 {    
-
-    /**
-     * ProductSalableInventoryRepository object
-     *
-     * @var mixed
-     */
-    protected $salableInventory;
-
-    /**
-     * Create a new repository instance.
-     *
-     * @param  Webkul\Product\Repositories\ProductSalableInventoryRepository $salableInventory
-     * @return void
-     */
-    public function __construct(
-        SalableInventoryRepository $salableInventory,
-        App $app
-    )
-    {
-        $this->salableInventory = $salableInventory;
-
-        parent::__construct($app);
-    }
-
     /**
      * Specify Model class name
      *
@@ -55,6 +30,9 @@ class ProductInventoryRepository extends Repository
      */
     public function saveInventories(array $data, $product)
     {
+        if ($product->type == 'configurable')
+            return;
+            
         $inventorySourceIds = $product->inventory_sources->pluck('id');
 
         if(isset($data['inventories'])) {
@@ -86,7 +64,5 @@ class ProductInventoryRepository extends Repository
         if($inventorySourceIds->count()) {
             $product->inventory_sources()->detach($inventorySourceIds);
         }
-
-        $this->salableInventory->saveInventories($product);
     }
 }

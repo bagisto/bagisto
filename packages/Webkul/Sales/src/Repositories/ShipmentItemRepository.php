@@ -29,28 +29,36 @@ class ShipmentItemRepository extends Repository
      */
     public function updateProductInventory($data)
     {
-        $salableInventory = $data['product']->salable_inventories()
+        $orderedInventory = $data['product']->ordered_inventories()
                 ->where('channel_id', $data['shipment']->order->channel->id)
                 ->first();
+                
+        if ($orderedInventory) {
+            if (($orderedQty = $orderedInventory->qty - $data['qty']) < 0) {
+                $orderedQty = 0;
+            }
+                
+            $orderedInventory->update([
+                    'qty' => $orderedQty
+                ]);
+        } else {
+            $data['product']->ordered_inventories()->create([
+                    'qty' => $data['qty'],
+                    'product_id' => $data['product']->id,
+                    'channel_id' => $data['shipment']->order->channel->id
+                ]);
+        }
 
         $inventory = $data['product']->inventories()
                 ->where('inventory_source_id', $data['shipment']->inventory_source_id)
                 ->first();
-
-        if (($salableQty = $salableInventory->sold_qty - $data['qty']) < 0) {
-            $salableQty = 0;
-        }
-            
-        $salableInventory->update([
-                'sold_qty' => $salableQty
-            ]);
 
         if (($qty = $inventory->qty - $data['qty']) < 0) {
             $qty = 0;
         }
 
         $inventory->update([
-                'qty' => $data['qty']
+                'qty' => $qty
             ]);
     }
 }

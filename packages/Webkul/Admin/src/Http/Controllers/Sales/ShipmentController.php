@@ -157,7 +157,6 @@ class ShipmentController extends Controller
                         ? $orderItem->child->product
                         : $orderItem->product;
 
-                // Check if requested qty is available, if not ship available qty
                 $inventory = $product->inventories()
                         ->where('inventory_source_id', $data['shipment']['source'])
                         ->first();
