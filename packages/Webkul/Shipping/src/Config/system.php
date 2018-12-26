@@ -74,9 +74,9 @@ return [
                 'options' => [
                     [
                         'title' => 'Per Unit',
-                        'value' => 'Per Order'
+                        'value' => 'per_unit'
                     ], [
-                        'title' => 'Inactive',
+                        'title' => 'Per Order',
                         'value' => 'per_order'
                     ]
                 ],
