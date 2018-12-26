@@ -55,6 +55,7 @@
         <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;" >
 
             @foreach($field['options'] as $option)
+
                 <?php
                     if($option['value'] == false) {
                         $value = 0;
@@ -69,7 +70,9 @@
                     {{ $option['title'] }}
                 </option>
             @endforeach
+
         </select>
+
     @endif
 
     <span class="control-error" v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]')">@{{ errors.first('{!! $firstField !!}[{!! $secondField !!}][{!! $thirdField !!}][{!! $field['name'] !!}]') }}</span>
