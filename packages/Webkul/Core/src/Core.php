@@ -530,8 +530,13 @@ class Core
             }
         }
 
-        if(!$coreConfigValue)
+        if (!$coreConfigValue) {
+            $fields = explode(".", $field);
+            array_shift($fields);
+            $field = implode(".", $fields);
+
             return Config::get($field);
+        }
 
         return $coreConfigValue->value;
     }
@@ -677,12 +682,7 @@ class Core
             if (isset($coreData['fields'])) {
                 foreach ($coreData['fields'] as $field) {
 
-                    $key = $coreData['key'];
-                    $key = explode(".", $key);
-                    array_shift($key);
-
-                    $key = implode(".", $key);
-                    $name = $key . '.' . $field['name'];
+                    $name = $coreData['key'] . '.' . $field['name'];
 
                     if ($name == $fieldName ) {
                         return $field;
