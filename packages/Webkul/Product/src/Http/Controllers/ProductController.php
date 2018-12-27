@@ -78,8 +78,6 @@ class ProductController extends Controller
         Product $product,
         ProductGrid $productGrid)
     {
-        $this->middleware('admin');
-
         $this->attributeFamily = $attributeFamily;
 
         $this->category = $category;

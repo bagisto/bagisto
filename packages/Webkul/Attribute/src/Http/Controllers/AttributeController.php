@@ -38,8 +38,6 @@ class AttributeController extends Controller
      */
     public function __construct(Attribute $attribute)
     {
-        $this->middleware('admin');
-
         $this->attribute = $attribute;
 
         $this->_config = request('_config');

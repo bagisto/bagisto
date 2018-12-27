@@ -39,8 +39,6 @@ class AttributeFamilyController extends Controller
      */
     public function __construct(AttributeFamily $attributeFamily)
     {
-        $this->middleware('admin');
-
         $this->attributeFamily = $attributeFamily;
 
         $this->_config = request('_config');
