@@ -45,13 +45,15 @@
                 }
 
                 $('.search-btn').click(function() {
-                    search_value = $(".search-field").val();
+                    search_value = $("#search-field").val();
+                    alert(search_value);
                     formURL('search', 'all', search_value, params);  //format for search
                 });
 
                 $(".search-field").on('keyup', function (e) {
                     if (e.keyCode == 13) {
-                        search_value = $(".search-field").val();
+                        search_value = $("#search-field").val();
+                        alert(search_value);
                         formURL('search', 'all', search_value, params);  //format for search
                     }
                 });
