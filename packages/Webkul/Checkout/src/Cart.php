@@ -229,6 +229,10 @@ class Cart {
         $product = $this->product->findOneByField('id', $id);
 
         if($product->type == 'configurable') {
+            if(!isset($data['selected_configurable_option'])) {
+                return false;
+            }
+
             $parentProduct = $this->product->findOneByField('id', $data['selected_configurable_option']);
 
             $canAdd = $parentProduct->haveSufficientQuantity($data['quantity']);
@@ -537,14 +541,22 @@ class Cart {
     {
         $cart = null;
 
-        if(auth()->guard('customer')->check()) {
+        if (auth()->guard('customer')->check()) {
             $cart = $this->cart->findOneWhere([
-                    'customer_id' => auth()->guard('customer')->user()->id,
-                    'is_active' => 1
-                ]);
+                'customer_id' => auth()->guard('customer')->user()->id,
+                'is_active' => 1
+            ]);
 
-        } elseif(session()->has('cart')) {
+        } elseif (session()->has('cart')) {
             $cart = $this->cart->find(session()->get('cart')->id);
+        }
+
+        if($cart != null) {
+            if($cart->items->count() == 0) {
+                $this->cart->delete($cart->id);
+
+                return false;
+            }
         }
 
         return $cart && $cart->is_active ? $cart : null;

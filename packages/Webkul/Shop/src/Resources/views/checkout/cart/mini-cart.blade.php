@@ -9,7 +9,7 @@
         <div style="display: inline-block; cursor: pointer;">
             <span class="name">
                 Cart
-                <span class="count"> ({{ intval($cart->items_qty) }})</span>
+                <span class="count"> ({{ $cart->items->count() }})</span>
             </span>
         </div>
 
