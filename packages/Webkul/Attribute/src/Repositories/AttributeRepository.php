@@ -3,6 +3,7 @@
 namespace Webkul\Attribute\Repositories;
  
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Illuminate\Container\Container as App;
 
@@ -50,6 +51,8 @@ class AttributeRepository extends Repository
      */
     public function create(array $data)
     {
+        Event::fire('catalog.attribute.create.before');
+
         $data = $this->validateUserInput($data);
 
         $options = isset($data['options']) ? $data['options'] : [];
@@ -61,6 +64,8 @@ class AttributeRepository extends Repository
                 $attribute->options()->create($option);
             }
         }
+
+        Event::fire('catalog.attribute.create.after', $attribute);
 
         return $attribute;
     }
@@ -76,6 +81,8 @@ class AttributeRepository extends Repository
         $data = $this->validateUserInput($data);
 
         $attribute = $this->find($id);
+
+        Event::fire('catalog.attribute.update.before', $id);
 
         $attribute->update($data);
 
@@ -101,7 +108,22 @@ class AttributeRepository extends Repository
             $this->attributeOption->delete($optionId);
         }
 
+        Event::fire('catalog.attribute.update.after', $attribute);
+
         return $attribute;
+    }
+
+    /**
+     * @param $id
+     * @return void
+     */
+    public function delete($id)
+    {
+        Event::fire('catalog.attribute.delete.before', $id);
+
+        parent::delete($id);
+
+        Event::fire('catalog.attribute.delete.after', $id);
     }
 
     /**
