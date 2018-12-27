@@ -53,6 +53,12 @@ class OrderShipmentsDataGrid
                     'primaryKey' => 'ship.order_id',
                     'condition' => '=',
                     'secondaryKey' => 'ors.id',
+                ], [
+                    'join' => 'leftjoin',
+                    'table' => 'inventory_sources as is',
+                    'primaryKey' => 'ship.inventory_source_id',
+                    'condition' => '=',
+                    'secondaryKey' => 'is.id',
                 ]
             ],
 
@@ -82,6 +88,12 @@ class OrderShipmentsDataGrid
                     'type' => 'string',
                     'label' => 'Customer Name',
                     'sortable' => false,
+                ], [
+                    'name' => 'is.name',
+                    'alias' => 'inventorySourceName',
+                    'type' => 'string',
+                    'label' => 'Inventory Source',
+                    'sortable' => true
                 ], [
                     'name' => 'ors.created_at',
                     'alias' => 'orscreated',

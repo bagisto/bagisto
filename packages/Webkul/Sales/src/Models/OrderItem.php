@@ -17,21 +17,24 @@ class OrderItem extends Model implements OrderItemContract
     /**
      * Get remaining qty for shipping.
      */
-    public function getQtyToShipAttribute() {
+    public function getQtyToShipAttribute()
+    {
         return $this->qty_ordered - $this->qty_shipped - $this->qty_refunded - $this->qty_canceled;
     }
 
     /**
      * Get remaining qty for invoice.
      */
-    public function getQtyToInvoiceAttribute() {
+    public function getQtyToInvoiceAttribute()
+    {
         return $this->qty_ordered - $this->qty_invoiced - $this->qty_canceled;
     }
 
     /**
      * Get remaining qty for cancel.
      */
-    public function getQtyToCancelAttribute() {
+    public function getQtyToCancelAttribute()
+    {
         return $this->qty_ordered - $this->qty_canceled - $this->qty_invoiced;
     }
 
@@ -60,23 +63,18 @@ class OrderItem extends Model implements OrderItemContract
     }
 
     /**
-     * Get the inventories record associated with the order item.
-     */
-    public function inventories() {
-        return $this->hasMany(CartItemInventoryProxy::modelClass());
-    }
-
-    /**
      * Get the invoice items record associated with the order item.
      */
-    public function invoice_items() {
+    public function invoice_items()
+    {
         return $this->hasMany(InvoiceItemProxy::modelClass());
     }
 
     /**
      * Get the shipment items record associated with the order item.
      */
-    public function shipment_items() {
+    public function shipment_items()
+    {
         return $this->hasMany(ShipmentItemProxy::modelClass());
     }
 
