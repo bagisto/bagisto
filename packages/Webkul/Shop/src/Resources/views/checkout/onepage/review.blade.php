@@ -122,7 +122,7 @@
                 </div>
 
                 <div class="text">
-                    {{ core()->getConfigData('paymentmethods.' . $cart->payment->method . '.title') }}
+                    {{ core()->getConfigData('sales.paymentmethods.' . $cart->payment->method . '.title') }}
                 </div>
             </div>
 

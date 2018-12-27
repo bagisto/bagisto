@@ -64,10 +64,5 @@ class Order {
      */
     public function updateProductInventory($order)
     {
-        $productListener = app(\Webkul\Admin\Listeners\Product::class);
-
-        foreach ($order->items as $item) {
-            $productListener->afterOrderRecieved($item->product->id, $item->qty_ordered);
-        }
     }
 }

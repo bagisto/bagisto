@@ -73,7 +73,9 @@
                 <span class="control-error" v-if="errors.has('agreement')">@{{ errors.first('agreement') }}</span>
             </div> --}}
 
-            <input class="btn btn-primary btn-lg" type="submit" value="{{ __('shop::app.customer.signup-form.button_title') }}">
+            <button class="btn btn-primary btn-lg" type="submit">
+                {{ __('shop::app.customer.signup-form.button_title') }}
+            </button>
 
         </div>
     </form>
