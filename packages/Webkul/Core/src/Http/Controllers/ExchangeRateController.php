@@ -46,8 +46,6 @@ class ExchangeRateController extends Controller
      */
     public function __construct(ExchangeRate $exchangeRate, Currency $currency)
     {
-        $this->middleware('admin');
-
         $this->exchangeRate = $exchangeRate;
 
         $this->currency = $currency;

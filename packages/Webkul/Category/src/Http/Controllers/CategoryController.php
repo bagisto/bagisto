@@ -37,8 +37,6 @@ class CategoryController extends Controller
      */
     public function __construct(Category $category)
     {
-        $this->middleware('admin');
-
         $this->category = $category;
 
         $this->_config = request('_config');

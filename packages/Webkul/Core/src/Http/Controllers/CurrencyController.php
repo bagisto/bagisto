@@ -37,8 +37,6 @@ class CurrencyController extends Controller
      */
     public function __construct(Currency $currency)
     {
-        $this->middleware('admin');
-
         $this->currency = $currency;
 
         $this->_config = request('_config');

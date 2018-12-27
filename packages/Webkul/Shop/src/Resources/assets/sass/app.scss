@@ -328,6 +328,10 @@ input {
 .account-items-list {
     display: block;
     width: 100%;
+
+    .grid-container {
+        margin-top: 40px;
+    }
 }
 //no search results
 .search-result-status {

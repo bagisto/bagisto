@@ -29,8 +29,6 @@ class SubscriptionController extends Controller
 
     public function __construct(Subscribers $subscribers)
     {
-        $this->middleware('admin');
-
         $this->subscribers = $subscribers;
 
         $this->_config = request('_config');
