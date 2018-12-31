@@ -44,7 +44,7 @@ class CategoryComposer
     {
         $categories = [];
 
-        foreach ($this->category->getVisibleCategoryTree() as $category) {
+        foreach ($this->category->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id) as $category) {
             if($category->slug)
                 array_push($categories, $category);
         }

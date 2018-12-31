@@ -56,6 +56,18 @@
                                 <span class="control-error" v-if="errors.has('inventory_sources[]')">@{{ errors.first('inventory_sources[]') }}</span>
                             </div>
 
+                            <div class="control-group" :class="[errors.has('root_category_id') ? 'has-error' : '']">
+                                <label for="root_category_id" class="required">{{ __('admin::app.settings.channels.root-category') }}</label>
+                                <select v-validate="'required'" class="control" id="root_category_id" name="root_category_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.root-category') }}&quot;">
+                                    @foreach(app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
+                                        <option value="{{ $category->id }}" {{ old('root_category_id') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <span class="control-error" v-if="errors.has('root_category_id')">@{{ errors.first('root_category_id') }}</span>
+                            </div>
+
                             <div class="control-group">
                                 <label for="hostname">{{ __('admin::app.settings.channels.hostname') }}</label>
                                 <input class="control" id="hostname" name="hostname" value="{{ old('hostname') }}" placeholder="https://www.example.com"/>
