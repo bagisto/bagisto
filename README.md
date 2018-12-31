@@ -1,5 +1,12 @@
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;![Bagisto Logo](https://bagisto.com/wp-content/themes/bagisto/images/logo.png)
+<p align="center">
+<a href="http://www.bagisto.com"><img src="https://bagisto.com/wp-content/themes/bagisto/images/logo.png" alt="Total Downloads"></a>
+</p>
 
+<p align="center">
+<a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/bagisto/bagisto"><img src="https://poser.pugx.org/bagisto/bagisto/license.svg" alt="License"></a>
+</p>
 
 # Topics
 1. ### Introduction
@@ -110,7 +117,7 @@ composer dump-autoload
 
 
 ### 5. License
-Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://opensource.org/licenses/MIT).
+Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
 
 ### Coming Soon:
 -> API support for core packages and numerous fixes.

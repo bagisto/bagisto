@@ -24,12 +24,15 @@ class ProductInventoryRepository extends Repository
     }
 
     /**
-     * @param array $inventories
+     * @param array $data
      * @param mixed $product
      * @return mixed
      */
     public function saveInventories(array $data, $product)
     {
+        if ($product->type == 'configurable')
+            return;
+            
         $inventorySourceIds = $product->inventory_sources->pluck('id');
 
         if(isset($data['inventories'])) {

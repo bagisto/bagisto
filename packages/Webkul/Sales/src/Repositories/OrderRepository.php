@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Repositories\OrderItemRepository;
-use Webkul\Sales\Repositories\OrderItemInventoryRepository;
 
 /**
  * Order Reposotory
@@ -27,28 +26,17 @@ class OrderRepository extends Repository
     protected $orderItem;
 
     /**
-     * OrderItemInventoryRepository object
-     *
-     * @var Object
-     */
-    protected $orderItemInventory;
-
-    /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderItemRepository          $orderItem
-     * @param  Webkul\Sales\Repositories\OrderItemInventoryRepository $orderItemInventory
+     * @param  Webkul\Sales\Repositories\OrderItemRepository $orderItem
      * @return void
      */
     public function __construct(
         OrderItemRepository $orderItem,
-        OrderItemInventoryRepository $orderItemInventory,
         App $app
     )
     {
         $this->orderItem = $orderItem;
-
-        $this->orderItemInventory = $orderItemInventory;
 
         parent::__construct($app);
     }
@@ -90,7 +78,7 @@ class OrderRepository extends Repository
                 unset($data['channel']);
             }
 
-            $data['status'] = core()->getConfigData('paymentmethods.' . $data['payment']['method'] . '.order_status') ?? 'pending';
+            $data['status'] = core()->getConfigData('sales.paymentmethods.' . $data['payment']['method'] . '.order_status') ?? 'pending';
 
             $order = $this->model->create(array_merge($data, ['increment_id' => $this->generateIncrementId()]));
 
@@ -107,7 +95,7 @@ class OrderRepository extends Repository
                     $orderItem->child = $this->orderItem->create(array_merge($item['child'], ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
                 }
 
-                $this->orderItemInventory->create(['orderItem' => $orderItem]);
+                $this->orderItem->manageInventory($orderItem);
             }
 
             Event::fire('checkout.order.save.after', $order);
@@ -135,6 +123,8 @@ class OrderRepository extends Repository
 
         foreach($order->items as $item) {
             if($item->qty_to_cancel) {
+                $this->orderItem->returnQtyToProductInventory($item);
+
                 $item->qty_canceled += $item->qty_to_cancel;
 
                 $item->save();

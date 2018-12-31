@@ -58,7 +58,7 @@ class RegistrationController extends Controller
             'last_name' => 'string|required',
             'email' => 'email|required|unique:customers,email',
             'password' => 'confirmed|min:6|required',
-            'agreement' => 'required'
+            // 'agreement' => 'required'
         ]);
 
         $data = request()->input();

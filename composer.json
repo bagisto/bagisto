@@ -1,6 +1,6 @@
 {
     "name": "bagisto/bagisto",
-    "description": "Bagisto Ecommerce",
+    "description": "Bagisto Laravel ECommerce",
     "keywords": [
         "framework",
         "laravel"

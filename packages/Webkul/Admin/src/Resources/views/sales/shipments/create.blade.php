@@ -153,7 +153,7 @@
                                         </span>
 
                                         <span class="value"> 
-                                            {{ core()->getConfigData('paymentmethods.' . $order->payment->method . '.title') }}
+                                            {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                                         </span>
                                     </div>
 
@@ -218,49 +218,7 @@
                     <accordian :title="'{{ __('admin::app.sales.orders.products-ordered') }}'" :active="true">
                         <div slot="body">
 
-                            <div class="table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>{{ __('admin::app.sales.orders.SKU') }}</th>
-                                            <th>{{ __('admin::app.sales.orders.product-name') }}</th>
-                                            <th>{{ __('admin::app.sales.shipments.qty-ordered') }}</th>
-                                            <th>{{ __('admin::app.sales.shipments.qty-to-ship') }}</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                        @foreach ($order->items as $item)
-                                            @if ($item->qty_to_ship > 0)
-                                                <tr>
-                                                    <td>{{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}</td>
-                                                    <td>
-                                                        {{ $item->name }}
-
-                                                        @if ($html = $item->getOptionDetailHtml())
-                                                            <p>{{ $html }}</p>
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $item->qty_ordered }}</td>
-                                                    <td>
-                                                        <div class="control-group" :class="[errors.has('shipment[items][{{ $item->id }}]') ? 'has-error' : '']">
-                                                            <input type="text" v-validate="'required|numeric|min:0'" class="control" id="shipment[items][{{ $item->id }}]" name="shipment[items][{{ $item->id }}]" value="{{ $item->qty_to_ship }}" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;"/>
-
-                                                            <span class="control-error" v-if="errors.has('shipment[items][{{ $item->id }}]')">
-                                                                @verbatim
-                                                                    {{ errors.first('shipment[items][<?php echo $item->id ?>]') }}
-                                                                @endverbatim
-                                                            </span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
-
-                                    </tbody>
-                                </table>
-                            </div>
+                            <order-item-list></order-item-list>
 
                         </div>
                     </accordian>
@@ -270,3 +228,128 @@
         </form>
     </div>
 @stop
+
+@push('scripts')
+
+    <script type="text/x-template" id="order-item-list-template">
+
+        <div>            
+        <div class="control-group" :class="[errors.has('shipment[source]') ? 'has-error' : '']">
+            <label for="shipment[source]" class="required">{{ __('admin::app.sales.shipments.source') }}</label>
+            
+            <select v-validate="'required'" class="control" name="shipment[source]" id="shipment[source]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.source') }}&quot;" v-model="source">
+                <option value="">{{ __('admin::app.sales.shipments.select-source') }}</option>
+
+                @foreach ($order->channel->inventory_sources as $key => $inventorySource)
+                    <option value="{{ $inventorySource->id }}">{{ $inventorySource->name }}</option>
+                @endforeach
+
+            </select>
+
+            <span class="control-error" v-if="errors.has('shipment[source]')">
+                @{{ errors.first('shipment[source]') }}
+            </span>
+        </div>
+
+        <div class="table">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{ __('admin::app.sales.orders.SKU') }}</th>
+                        <th>{{ __('admin::app.sales.orders.product-name') }}</th>
+                        <th>{{ __('admin::app.sales.shipments.qty-ordered') }}</th>
+                        <th>{{ __('admin::app.sales.shipments.qty-to-ship') }}</th>
+                        <th>{{ __('admin::app.sales.shipments.available-sources') }}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach ($order->items as $item)
+                        @if ($item->qty_to_ship > 0 && $item->product)
+                            <tr>
+                                <td>{{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}</td>
+                                <td>
+                                    {{ $item->name }}
+
+                                    @if ($html = $item->getOptionDetailHtml())
+                                        <p>{{ $html }}</p>
+                                    @endif
+                                </td>
+                                <td>{{ $item->qty_ordered }}</td>
+                                <td>{{ $item->qty_to_ship }}</td>
+                                <td>
+                                    
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>{{ __('admin::app.sales.shipments.source') }}</th>
+                                                <th>{{ __('admin::app.sales.shipments.qty-available') }}</th>
+                                                <th>{{ __('admin::app.sales.shipments.qty-to-ship') }}</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach ($order->channel->inventory_sources as $key => $inventorySource)
+                                                <tr>
+                                                    <td>
+                                                        {{ $inventorySource->name }}
+                                                    </td>
+
+                                                    <td>
+                                                        <?php 
+                                                            if($item->type == 'configurable') {
+                                                                $sourceQty = $item->child->product->inventory_source_qty($inventorySource);
+                                                            } else {
+                                                                $sourceQty = $item->product->inventory_source_qty($inventorySource);  
+                                                            }
+                                                        ?>
+
+                                                        {{ $sourceQty }}
+                                                    </td>
+
+                                                    <td>
+                                                        <?php $inputName = "shipment[items][$item->id][$inventorySource->id]"; ?>
+                                                        
+                                                        <div class="control-group" :class="[errors.has('{{ $inputName }}') ? 'has-error' : '']">
+
+                                                            <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$sourceQty}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="0" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}'"/>
+
+                                                            <span class="control-error" v-if="errors.has('{{ $inputName }}')">
+                                                                @verbatim
+                                                                    {{ errors.first('<?php echo $inputName; ?>') }}
+                                                                @endverbatim
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+    </script>
+
+    <script>
+        Vue.component('order-item-list', {
+
+            template: '#order-item-list-template',
+
+            inject: ['$validator'],
+
+            data: () => ({
+                source: ""
+            })
+        });
+    </script>
+
+@endpush

@@ -4,7 +4,6 @@ namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 
 
@@ -38,8 +37,6 @@ class AttributeController extends Controller
      */
     public function __construct(Attribute $attribute)
     {
-        $this->middleware('admin');
-
         $this->attribute = $attribute;
 
         $this->_config = request('_config');
@@ -78,11 +75,7 @@ class AttributeController extends Controller
             'type' => 'required'
         ]);
 
-        Event::fire('catalog.attribute.create.before');
-
         $attribute = $this->attribute->create(request()->all());
-
-        Event::fire('catalog.attribute.create.after', $attribute);
 
         session()->flash('success', 'Attribute created successfully.');
 
@@ -117,11 +110,7 @@ class AttributeController extends Controller
             'type' => 'required'
         ]);
 
-        Event::fire('catalog.attribute.update.before', $id);
-
         $attribute = $this->attribute->update(request()->all(), $id);
-
-        Event::fire('catalog.attribute.update.after', $attribute);
 
         session()->flash('success', 'Attribute updated successfully.');
 
@@ -142,11 +131,7 @@ class AttributeController extends Controller
             session()->flash('error', 'Can not delete system attribute.');
         } else {
             try {
-                Event::fire('catalog.attribute.delete.before', $id);
-
                 $this->attribute->delete($id);
-
-                Event::fire('catalog.attribute.delete.after', $id);
 
                 session()->flash('success', 'Attribute deleted successfully.');
             } catch(\Exception $e) {
@@ -162,33 +147,30 @@ class AttributeController extends Controller
      *
      * @return response \Illuminate\Http\Response
      */
-    public function massDestroy() {
+    public function massDestroy()
+    {
         $suppressFlash = false;
 
-        if(request()->isMethod('post')) {
+        if (request()->isMethod('post')) {
             $indexes = explode(',', request()->input('indexes'));
 
-            foreach($indexes as $key => $value) {
+            foreach ($indexes as $key => $value) {
                 $attribute = $this->attribute->findOrFail($value);
 
                 try {
-                    if(!$attribute->is_user_defined) {
+                    if (!$attribute->is_user_defined) {
                         continue;
                     } else {
-                        Event::fire('catalog.attribute.delete.before', $value);
-
                         $this->attribute->delete($value);
-
-                        Event::fire('catalog.attribute.delete.after', $value);
                     }
-                } catch(\Exception $e) {
+                } catch (\Exception $e) {
                     $suppressFlash = true;
 
                     continue;
                 }
             }
 
-            if(!$suppressFlash)
+            if (!$suppressFlash)
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'attributes']));
             else
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'attributes']));

@@ -537,8 +537,7 @@ class Core
                     'code' => $field,
                     'locale_code' => $locale
                 ]);
-            }
-            else {
+            } else {
                 $coreConfigValue = $this->coreConfigRepository->findOneWhere([
                     'code' => $field
                 ]);
@@ -585,8 +584,8 @@ class Core
     {
         $collection = [];
 
-        foreach ($this->countries() as $country) {
-            $collection[$country->code] = $this->states($country->code)->toArray();
+        foreach ($this->countryStateRepository->all() as $state) {
+            $collection[$state->country_code][] = $state->toArray();
         }
 
         return $collection;

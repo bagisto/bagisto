@@ -38,8 +38,6 @@ class ChannelController extends Controller
      */
     public function __construct(Channel $channel)
     {
-        $this->middleware('admin');
-
         $this->channel = $channel;
 
         $this->_config = request('_config');
@@ -79,6 +77,7 @@ class ChannelController extends Controller
             'default_locale_id' => 'required',
             'currencies' => 'required|array|min:1',
             'base_currency_id' => 'required',
+            'root_category_id' => 'required',
             'logo.*' => 'mimes:jpeg,jpg,bmp,png',
             'favicon.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
@@ -120,9 +119,11 @@ class ChannelController extends Controller
             'code' => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required',
             'locales' => 'required|array|min:1',
+            'inventory_sources' => 'required|array|min:1',
             'default_locale_id' => 'required',
             'currencies' => 'required|array|min:1',
             'base_currency_id' => 'required',
+            'root_category_id' => 'required',
             'logo.*' => 'mimes:jpeg,jpg,bmp,png',
             'favicon.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);

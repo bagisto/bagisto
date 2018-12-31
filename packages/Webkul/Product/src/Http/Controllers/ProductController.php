@@ -78,8 +78,6 @@ class ProductController extends Controller
         Product $product,
         ProductGrid $productGrid)
     {
-        $this->middleware('admin');
-
         $this->attributeFamily = $attributeFamily;
 
         $this->category = $category;
@@ -142,13 +140,7 @@ class ProductController extends Controller
             'sku' => ['required', 'unique:products,sku', new \Webkul\Core\Contracts\Validations\Slug]
         ]);
 
-        //before store of the product
-        Event::fire('catalog.product.create.before');
-
         $product = $this->product->create(request()->all());
-
-        //after store of the product
-        Event::fire('catalog.product.create.after', $product);
 
         session()->flash('success', 'Product created successfully.');
 
@@ -181,11 +173,7 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
-        Event::fire('catalog.product.update.before', $id);
-
         $product = $this->product->update(request()->all(), $id);
-
-        Event::fire('catalog.product.update.after', $product);
 
         session()->flash('success', 'Product updated successfully.');
 
@@ -200,11 +188,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Event::fire('catalog.product.delete.before', $id);
-
         $this->product->delete($id);
-
-        Event::fire('catalog.product.delete.after', $id);
 
         session()->flash('success', 'Product deleted successfully.');
 
@@ -216,22 +200,12 @@ class ProductController extends Controller
      *
      * @return response
      */
-    public function massDestroy() {
-        $data = request()->all();
-        $productIds = explode(',', $data['indexes']);
+    public function massDestroy()
+    {
+        $productIds = explode(',', request()->input('indexes'));
 
-        if(count($productIds)) {
-            foreach($productIds as $productId) {
-                $product = $this->product->find($productId);
-
-                if(!is_null($product)) {
-                    Event::fire('catalog.product.delete.before', $productId);
-
-                    $product->delete();
-
-                    Event::fire('catalog.product.delete.after', $productId);
-                }
-            }
+        foreach ($productIds as $productId) {
+            $this->product->delete($productId);
         }
 
         session()->flash('success', trans('admin::app.catalog.products.mass-delete-success'));
@@ -244,36 +218,22 @@ class ProductController extends Controller
      *
      * @return response
      */
-    public function massUpdate() {
+    public function massUpdate()
+    {
         $data = request()->all();
-        $attribute = 'status';
 
-        $productIds = explode(',', $data['indexes']);
-
-        if(!isset($data['massaction-type'])) {
+        if (!isset($data['massaction-type'])) {
             return redirect()->back();
         }
 
-        if(count($productIds)) {
-            foreach($productIds as $productId) {
-                $product = $this->product->find($productId);
+        $productIds = explode(',', $data['indexes']);
 
-                if($data['update-options'] == 0 && $data['selected-option-text'] == 'In Active') {
-                    Event::fire('catelog.product.update.before', $productId);
-
-                    $result = $this->product->updateAttribute($product, $attribute, $data['update-options']);
-
-                    if($result)
-                        Event::fire('catelog.product.update.after', $product);
-                } else if($data['update-options'] == 1 && $data['selected-option-text'] == 'Active') {
-                    Event::fire('catelog.product.update.before', $productId);
-
-                    $result = $this->product->updateAttribute($product, $attribute, $data['update-options']);
-
-                    if($result)
-                        Event::fire('product.update.after', $product);
-                }
-            }
+        foreach ($productIds as $productId) {
+            $this->product->update([
+                    'channel' => null,
+                    'locale' => null,
+                    'status' => $data['update-options']
+                ], $productId);
         }
 
         session()->flash('success', trans('admin::app.catalog.products.mass-update-success'));
@@ -284,7 +244,8 @@ class ProductController extends Controller
     /*
      * To be manually invoked when data is seeded into products
      */
-    public function sync() {
+    public function sync()
+    {
         Event::fire('products.datagrid.sync', true);
 
         return redirect()->route('admin.catalog.products.index');

@@ -2,10 +2,11 @@
 
 namespace Webkul\Category\Repositories;
 
-use Webkul\Category\Models\Category;
-use Webkul\Core\Eloquent\Repository;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Container\Container as App;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Event;
+use Webkul\Core\Eloquent\Repository;
+use Webkul\Category\Models\Category;
 use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -43,6 +44,8 @@ class CategoryRepository extends Repository
      */
     public function create(array $data)
     {
+        Event::fire('catalog.category.create.before');
+
         if (isset($data['locale']) && $data['locale'] == 'all') {
             $model = app()->make($this->model());
 
@@ -59,6 +62,8 @@ class CategoryRepository extends Repository
 
         $this->uploadImages($data, $category);
 
+        Event::fire('catalog.category.create.after', $category);
+
         return $category;
     }
 
@@ -73,6 +78,17 @@ class CategoryRepository extends Repository
         return $id
             ? Category::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
             : Category::orderBy('position', 'ASC')->get()->toTree();
+    }
+
+
+    /**
+     * Get root categories
+     *
+     * @return mixed
+     */
+    public function getRootCategories()
+    {
+        return Category::withDepth()->having('depth', '=', 0)->get();
     }
 
     /**
@@ -135,11 +151,28 @@ class CategoryRepository extends Repository
     {
         $category = $this->find($id);
 
+        Event::fire('catalog.category.update.before', $id);
+
         $category->update($data);
 
         $this->uploadImages($data, $category);
 
+        Event::fire('catalog.category.update.after', $id);
+
         return $category;
+    }
+
+    /**
+     * @param $id
+     * @return void
+     */
+    public function delete($id)
+    {
+        Event::fire('catalog.category.delete.before', $id);
+
+        parent::delete($id);
+
+        Event::fire('catalog.category.delete.after', $id);
     }
 
     /**

@@ -60,8 +60,6 @@ class TaxCategoryController extends Controller
         TaxMap $taxMap
     )
     {
-        $this->middleware('admin');
-
         $this->taxCategory = $taxCategory;
 
         $this->taxRate = $taxRate;

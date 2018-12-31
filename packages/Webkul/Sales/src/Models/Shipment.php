@@ -3,6 +3,7 @@
 namespace Webkul\Sales\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Inventory\Models\InventorySource;
 use Webkul\Sales\Contracts\Shipment as ShipmentContract;
 
 class Shipment extends Model implements ShipmentContract
@@ -20,8 +21,17 @@ class Shipment extends Model implements ShipmentContract
     /**
      * Get the shipment items record associated with the shipment.
      */
-    public function items() {
+    public function items()
+    {
         return $this->hasMany(ShipmentItemProxy::modelClass());
+    }
+
+    /**
+     * Get the inventory source associated with the shipment.
+     */
+    public function inventory_source()
+    {
+        return $this->belongsTo(InventorySource::class, 'inventory_source_id');
     }
 
     /**

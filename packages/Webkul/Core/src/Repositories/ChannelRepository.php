@@ -35,6 +35,8 @@ class ChannelRepository extends Repository
 
         $channel->currencies()->sync($data['currencies']);
 
+        $channel->inventory_sources()->sync($data['inventory_sources']);
+
         $this->uploadImages($data, $channel);
 
         $this->uploadImages($data, $channel, 'favicon');
@@ -57,6 +59,8 @@ class ChannelRepository extends Repository
         $channel->locales()->sync($data['locales']);
 
         $channel->currencies()->sync($data['currencies']);
+
+        $channel->inventory_sources()->sync($data['inventory_sources']);
 
         $this->uploadImages($data, $channel);
 
