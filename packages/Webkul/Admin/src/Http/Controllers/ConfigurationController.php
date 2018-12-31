@@ -4,9 +4,11 @@ namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Facades\Configuration;
 use Webkul\Core\Repositories\CoreConfigRepository as CoreConfig;
 use Webkul\Core\Tree;
+use Webkul\Admin\Http\Requests\ConfigurationForm;
 
 /**
  * Configuration controller
@@ -126,11 +128,16 @@ class ConfigurationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \Webkul\Admin\Http\Requests\ConfigurationForm $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(ConfigurationForm $request)
     {
+        Event::fire('core.configuration.save.after');
+
         $this->coreConfig->create(request()->all());
+
+        Event::fire('core.configuration.save.after');
 
         session()->flash('success', 'Shipping Method is created successfully');
 

@@ -131,10 +131,4 @@ class CoreConfigRepository extends Repository
 
         return $data;
     }
-
-
-
-
-
-
 }

@@ -63,7 +63,7 @@
             </div> --}}
 
             {!! view_render_event('bagisto.shop.customers.signup_form_controls.after') !!}
-            
+
             <div class="control-group" :class="[errors.has('agreement') ? 'has-error' : '']">
 
                 <input type="checkbox" id="checkbox2" name="agreement" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.agreement') }}&quot;">

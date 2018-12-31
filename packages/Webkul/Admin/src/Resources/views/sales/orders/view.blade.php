@@ -40,7 +40,7 @@
             <tabs>
                 <tab name="{{ __('admin::app.sales.orders.info') }}" :selected="true">
                     <div class="sale-container">
-                        
+
                         <accordian :title="'{{ __('admin::app.sales.orders.order-and-account') }}'" :active="true">
                             <div slot="body">
 
@@ -51,11 +51,11 @@
 
                                     <div class="section-content">
                                         <div class="row">
-                                            <span class="title"> 
+                                            <span class="title">
                                                 {{ __('admin::app.sales.orders.order-date') }}
                                             </span>
 
-                                            <span class="value"> 
+                                            <span class="value">
                                                 {{ $order->created_at }}
                                             </span>
                                         </div>
@@ -64,7 +64,7 @@
                                             <span class="title">
                                                 {{ __('admin::app.sales.orders.order-status') }}
                                             </span>
-                                            
+
                                             <span class="value">
                                                 {{ $order->status_label }}
                                             </span>
@@ -74,7 +74,7 @@
                                             <span class="title">
                                                 {{ __('admin::app.sales.orders.channel') }}
                                             </span>
-                                                
+
                                             <span class="value">
                                                 {{ $order->channel_name }}
                                             </span>
@@ -89,24 +89,36 @@
 
                                     <div class="section-content">
                                         <div class="row">
-                                            <span class="title"> 
+                                            <span class="title">
                                                 {{ __('admin::app.sales.orders.customer-name') }}
                                             </span>
 
-                                            <span class="value"> 
+                                            <span class="value">
                                                 {{ $order->customer_full_name }}
                                             </span>
                                         </div>
 
                                         <div class="row">
-                                            <span class="title"> 
+                                            <span class="title">
                                                 {{ __('admin::app.sales.orders.email') }}
                                             </span>
 
-                                            <span class="value"> 
+                                            <span class="value">
                                                 {{ $order->customer_email }}
                                             </span>
                                         </div>
+
+                                        @if(!is_null($order->customer))
+                                            <div class="row">
+                                                <span class="title">
+                                                    {{ __('admin::app.customers.customers.customer_group') }}
+                                                </span>
+
+                                                <span class="value">
+                                                    {{ $order->customer->customerGroup['name'] }}
+                                                </span>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -137,11 +149,11 @@
                                         <div class="section-content">
 
                                             @include ('admin::sales.address', ['address' => $order->shipping_address])
-                                            
+
                                         </div>
                                     </div>
                                 @endif
-                            
+
                             </div>
                         </accordian>
 
@@ -155,21 +167,21 @@
 
                                     <div class="section-content">
                                         <div class="row">
-                                            <span class="title"> 
+                                            <span class="title">
                                                 {{ __('admin::app.sales.orders.payment-method') }}
                                             </span>
 
-                                            <span class="value"> 
+                                            <span class="value">
                                                 {{ core()->getConfigData('paymentmethods.' . $order->payment->method . '.title') }}
                                             </span>
                                         </div>
 
                                         <div class="row">
-                                            <span class="title"> 
+                                            <span class="title">
                                                 {{ __('admin::app.sales.orders.currency') }}
                                             </span>
 
-                                            <span class="value"> 
+                                            <span class="value">
                                                 {{ $order->order_currency_code }}
                                             </span>
                                         </div>
@@ -183,21 +195,21 @@
 
                                     <div class="section-content">
                                         <div class="row">
-                                            <span class="title"> 
+                                            <span class="title">
                                                 {{ __('admin::app.sales.orders.shipping-method') }}
                                             </span>
 
-                                            <span class="value"> 
+                                            <span class="value">
                                                 {{ $order->shipping_title }}
                                             </span>
                                         </div>
 
                                         <div class="row">
-                                            <span class="title"> 
+                                            <span class="title">
                                                 {{ __('admin::app.sales.orders.shipping-price') }}
                                             </span>
 
-                                            <span class="value"> 
+                                            <span class="value">
                                                 {{ core()->formatBasePrice($order->base_shipping_amount) }}
                                             </span>
                                         </div>
@@ -402,6 +414,6 @@
                 </tab>
             </tabs>
         </div>
-    
+
     </div>
 @stop

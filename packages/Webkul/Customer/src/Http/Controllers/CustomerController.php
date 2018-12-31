@@ -97,7 +97,7 @@ class CustomerController extends Controller
             'first_name' => 'string',
             'last_name' => 'string',
             'gender' => 'required',
-            'date_of_birth' => 'date',
+            'date_of_birth' => 'date|before:today',
             'email' => 'email|unique:customers,email,'.$id,
             'password' => 'confirmed'
         ]);

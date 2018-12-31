@@ -2847,6 +2847,8 @@ section.review {
 
                 a {
                     color: $other-font-color;
+                    width: 100%;
+                    text-align: left;
                 }
 
                 .icon {
@@ -3146,6 +3148,7 @@ section.review {
 
                     .box-content {
                         color: $bold-color;
+                        padding-right: 10px;
                     }
                 }
             }
