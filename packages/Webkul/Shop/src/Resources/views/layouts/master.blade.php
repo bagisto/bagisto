@@ -23,7 +23,7 @@
         <meta name="description" content="{{ core()->getCurrentChannel()->description }}"/>
     @show
 
-    @yield('css')
+    @stack('css')
 
     {!! view_render_event('bagisto.shop.layout.head') !!}
 
