@@ -6,7 +6,7 @@
 
 @section('seo')
     <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : str_limit(strip_tags($product->description), 120, '') }}"/>
-    <meta name="description" content="{{ $product->meta_keywords }}"/>
+    <meta name="keywords" content="{{ $product->meta_keywords }}"/>
 @stop
 
 @section('content-wrapper')
