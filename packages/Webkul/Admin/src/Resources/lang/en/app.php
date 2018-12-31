@@ -467,6 +467,7 @@ return [
             'default-locale' => 'Default Locale',
             'currencies' => 'Currencies',
             'base-currency' => 'Base Currency',
+            'root-category' => 'Root Category',
             'inventory_sources' => 'Inventory Sources',
             'design' => 'Design',
             'theme' => 'Theme',

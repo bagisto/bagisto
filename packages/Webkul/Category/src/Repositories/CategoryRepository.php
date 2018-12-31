@@ -80,6 +80,17 @@ class CategoryRepository extends Repository
             : Category::orderBy('position', 'ASC')->get()->toTree();
     }
 
+
+    /**
+     * Get root categories
+     *
+     * @return mixed
+     */
+    public function getRootCategories()
+    {
+        return Category::withDepth()->having('depth', '=', 0)->get();
+    }
+
     /**
      * get visible category tree
      *

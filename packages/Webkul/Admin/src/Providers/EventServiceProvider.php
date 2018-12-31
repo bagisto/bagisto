@@ -27,7 +27,5 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('catalog.product.create.after', 'Webkul\Admin\Listeners\Product@afterProductCreated');
 
         Event::listen('catalog.product.update.after', 'Webkul\Admin\Listeners\Product@afterProductUpdate');
-
-        Event::listen('catalog.product.delete.after', 'Webkul\Admin\Listeners\Product@afterProductDelete');
     }
 }
