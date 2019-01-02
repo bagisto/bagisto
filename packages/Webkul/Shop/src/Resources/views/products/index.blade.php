@@ -6,7 +6,7 @@
 
 @section('seo')
     <meta name="description" content="{{ $category->meta_description }}"/>
-    <meta name="description" content="{{ $category->meta_keywords }}"/>
+    <meta name="keywords" content="{{ $category->meta_keywords }}"/>
 @stop
 
 @section('content-wrapper')
