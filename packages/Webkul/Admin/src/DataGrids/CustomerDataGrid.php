@@ -106,7 +106,12 @@ class CustomerDataGrid
                     'alias' => 'CustomerGroupName',
                     'type' => 'string',
                     'label' => 'Group Name',
-                ]
+                ], [
+                    'column' => 'CONCAT(first_name, " ", last_name)',
+                    'alias' => 'Name',
+                    'type' => 'string',
+                    'label' => 'Name',
+                ],
             ],
 
             //don't use aliasing in case of searchables
