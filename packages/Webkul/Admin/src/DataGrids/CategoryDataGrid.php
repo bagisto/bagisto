@@ -24,10 +24,9 @@ class CategoryDataGrid
             return DataGrid::make([
             'name' => 'Categories',
             'table' => 'categories as cat',
-            'select' => 'cat.id',
+            'select' => '',
             'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
-            'alias' => 'cat',
 
             'massoperations' =>[
                 // [

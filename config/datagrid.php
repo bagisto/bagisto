@@ -3,11 +3,16 @@
 return [
 
     /**
+     * Default Select Value
+     */
+    'select' => 'id',
+
+    /**
      * Default OrderBy
      *
      * * Accepted Values = Array
      */
-    'defaultOrder' => [
+    'order' => [
         'column' => 'id',
         'direction' => 'desc'
     ],

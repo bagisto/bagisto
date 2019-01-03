@@ -167,7 +167,7 @@ class DataGrid
     }
 
     //This assigns the private and public properties of the datagrid classes from make functions
-    public function build(
+    public function build (
         string $name = null,
         string $select = null,
         array $filterable = [],
@@ -185,12 +185,12 @@ class DataGrid
         $this->request = Request::capture();
         $this->setName($name);
         $this->setAlias($aliased);
+        $this->setTable($table);
         $this->setSelect($select);
         $this->setFilterable($filterable);
         $this->setSearchable($filterable);
         $this->setMassOperations($massoperations);
         $this->setPerPage($perpage);
-        $this->setTable($table);
         $this->setJoin($join);
         $this->addColumns($columns, true);
         $this->setCss($css);
@@ -219,7 +219,18 @@ class DataGrid
      */
     public function setSelect($select)
     {
-        $this->select = $select ? : false;
+        if (!$select) {
+            $select = config('datagrid.select');
+
+            if ($this->aliased) {
+                $alias = $this->findTableAlias();
+
+                $select = $alias.'.'.$select;
+            }
+        }
+
+        $this->select = $select;
+
         return $this;
     }
 
@@ -348,6 +359,21 @@ class DataGrid
     // }
 
     /**
+     * get alias of the leftmost table
+     *
+     * @return null|string
+     */
+    public function findTableAlias() {
+        if($this->aliased) {
+            $alias = trim(explode('as', $this->table)[1]);
+        } else {
+            $alias = null;
+        }
+
+        return $alias;
+    }
+
+    /**
      * Section actions bag here.
      *
      * @return $this
@@ -367,11 +393,13 @@ class DataGrid
         if ($reCreate) {
             $this->columns = new Collection();
         }
+
         if ($columns) {
             foreach ($columns as $column) {
                 $this->addColumn($column);
             }
         }
+
         return $this;
     }
 
@@ -440,27 +468,28 @@ class DataGrid
         } else {
             throw new \Exception("DataGrid: Pagination argument is not valid!");
         }
+
         return $this;
     }
 
     /**
-     * Used for selecting
-     * the columns got in
-     * make from controller.
+     * Used for selecting the columns got in make from controller.
+     *
      * @return $this
      */
     private function getSelect()
     {
         $select = [];
+
+        if ($this->select) {
+            $this->query->addselect($this->select);
+        }
+
         foreach ($this->columns as $column) {
             $this->query->addselect(DB::raw($column->name.' as '.$column->alias));
         }
 
         // $this->query->select(...$select);
-
-        if ($this->select) {
-            $this->query->addselect($this->select);
-        }
     }
 
     /**
@@ -470,7 +499,7 @@ class DataGrid
      * name.
      * @return string
      */
-    public function findAlias($column_alias) {
+    public function findColumnAlias($column_alias) {
         foreach($this->columns as $column) {
             if($column->alias == $column_alias) {
                 return $column->name;
@@ -485,7 +514,7 @@ class DataGrid
      * name.
      * @return string
      */
-    public function findType($column_alias) {
+    public function findColumnType($column_alias) {
         foreach($this->columns as $column) {
             if($column->alias == $column_alias) {
                 return $column->type;
@@ -564,13 +593,13 @@ class DataGrid
 
         if ($this->aliased) {  //aliasing is expected in this case or it will be changed to presence of join bag
             foreach ($parsed as $key=>$value) {
-                $column_name = $this->findAlias($key);
-                $column_type = $this->findType($key);
+                $column_name = $this->findColumnAlias($key);
+                $column_type = $this->findColumnType($key);
 
                 if ($key == "sort") {
                     //resolve the case with the column helper class
                     if(substr_count($key,'_') >= 1)
-                        $column_name = $this->findAlias($key);
+                        $column_name = $this->findColumnAlias($key);
 
                     //case that don't need any resolving
                     $count_keys = count(array_keys($value));
@@ -592,7 +621,7 @@ class DataGrid
                         }
                     });
                 } else {
-                    $column_name = $this->findAlias($key);
+                    $column_name = $this->findColumnAlias($key);
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
                             $this->query->where(
@@ -650,8 +679,8 @@ class DataGrid
 
                 } else {
                     // $column_name = $key;
-                    $column_name = $this->findAlias($key);
-                    $column_type = $this->findType($key);
+                    $column_name = $this->findColumnAlias($key);
+                    $column_type = $this->findColumnType($key);
 
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
