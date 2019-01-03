@@ -38,8 +38,6 @@ class TaxRateController extends Controller
      */
     public function __construct(TaxRate $taxRate)
     {
-        $this->middleware('admin');
-
         $this->taxRate = $taxRate;
 
         $this->_config = request('_config');

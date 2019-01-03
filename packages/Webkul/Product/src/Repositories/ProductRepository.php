@@ -3,6 +3,7 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container as App;
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
@@ -111,6 +112,9 @@ class ProductRepository extends Repository
      */
     public function create(array $data)
     {
+        //before store of the product
+        Event::fire('catalog.product.create.before');
+
         $product = $this->model->create($data);
 
         $nameAttribute = $this->attribute->findOneByField('code', 'status');
@@ -137,6 +141,10 @@ class ProductRepository extends Repository
             }
         }
 
+        //after store of the product
+        Event::fire('catalog.product.create.after', $product);
+
+
         return $product;
     }
 
@@ -148,6 +156,8 @@ class ProductRepository extends Repository
      */
     public function update(array $data, $id, $attribute = "id")
     {
+        Event::fire('catalog.product.update.before', $id);
+
         $product = $this->find($id);
 
         if($product->parent_id && $this->checkVariantOptionAvailabiliy($data, $product)) {
@@ -221,7 +231,22 @@ class ProductRepository extends Repository
 
         $this->productImage->uploadImages($data, $product);
 
+        Event::fire('catalog.product.update.after', $product);
+
         return $product;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        Event::fire('catalog.product.delete.before', $id);
+        
+        parent::delete($id);
+
+        Event::fire('catalog.product.delete.after', $id);
     }
 
     /**
@@ -348,29 +373,6 @@ class ProductRepository extends Repository
         $this->productInventory->saveInventories($data, $variant);
 
         return $variant;
-    }
-
-    /**
-     * Change an attribute's value of the product
-     *
-     * @return boolean
-     */
-    public function updateAttribute($product, $attribute, $value) {
-        $attribute = $this->attribute->findOneByField('code', 'status');
-
-        $attributeValue = $this->attributeValue->findOneWhere([
-            'product_id' => $product->id,
-            'attribute_id' => $attribute->id,
-        ]);
-
-        $result = $this->attributeValue->update([
-            ProductAttributeValue::$attributeTypeFields[$attribute->type] => $value
-        ], $attributeValue->id);
-
-        if($result)
-            return true;
-        else
-            return false;
     }
 
     /**

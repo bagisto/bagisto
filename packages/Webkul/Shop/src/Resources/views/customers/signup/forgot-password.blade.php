@@ -4,7 +4,7 @@
  {{ __('shop::app.customer.forgot-password.page_title') }}
 @stop
 
-@section('css')
+@push('css')
     <style>
         .button-group {
             margin-bottom: 25px;
@@ -13,7 +13,7 @@
             vertical-align: middle;
         }
     </style>
-@stop
+@endpush
 
 @section('content-wrapper')
 

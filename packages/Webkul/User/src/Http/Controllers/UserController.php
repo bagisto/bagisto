@@ -48,8 +48,6 @@ class UserController extends Controller
      */
     public function __construct(Admin $admin, Role $role)
     {
-        $this->middleware('admin');
-
         $this->admin = $admin;
 
         $this->role = $role;

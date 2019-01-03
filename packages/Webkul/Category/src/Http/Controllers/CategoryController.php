@@ -4,7 +4,6 @@ namespace Webkul\Category\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Event;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 
 /**
@@ -37,8 +36,6 @@ class CategoryController extends Controller
      */
     public function __construct(Category $category)
     {
-        $this->middleware('admin');
-
         $this->category = $category;
 
         $this->_config = request('_config');
@@ -79,11 +76,7 @@ class CategoryController extends Controller
             'image.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
-        Event::fire('catalog.category.create.before');
-
         $category = $this->category->create(request()->all());
-
-        Event::fire('catalog.category.create.after', $category);
 
         session()->flash('success', 'Category created successfully.');
 
@@ -126,11 +119,7 @@ class CategoryController extends Controller
             'image.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
-        Event::fire('catalog.category.update.before', $id);
-
         $this->category->update(request()->all(), $id);
-
-        Event::fire('catalog.category.update.after', $id);
 
         session()->flash('success', 'Category updated successfully.');
 
