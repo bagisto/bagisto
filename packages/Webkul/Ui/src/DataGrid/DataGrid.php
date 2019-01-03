@@ -1,4 +1,5 @@
 <?php
+
 namespace Webkul\Ui\DataGrid;
 
 use Illuminate\Http\Request;
@@ -28,7 +29,6 @@ class DataGrid
      *
      * @var string
      */
-
     protected $name;
 
 
@@ -37,7 +37,6 @@ class DataGrid
      *
      * @var string
      */
-
     protected $select;
 
 
@@ -45,7 +44,6 @@ class DataGrid
     * Table
     * @var Boolean for aliasing
     */
-
     protected $aliased;
 
 
@@ -86,15 +84,14 @@ class DataGrid
      protected $columns;
 
      /**
-     * array of columns
-     * to be filtered
+     * array of columns to be filtered
+     *
      * @var Array
      */
      protected $filterable;
 
      /**
-     * array of columns
-     * to be searched
+     * array of columns to be searched
      *
      * @var Array
      */
@@ -123,12 +120,14 @@ class DataGrid
 
      /**
      * Actions $action
+     *
      * @var action
      */
     protected $actions;
 
     /**
      * URL parse $parsed
+     *
      * @var parse
      */
      protected $parsed;
@@ -160,25 +159,26 @@ class DataGrid
         // list($name, $select, $table, $join, $columns) = array_values($args);
         $name = $select = $aliased = $table = false;
         $join = $columns = $filterable = $searchable =
-        $massoperations = $css = $operators = $actions = [];
+        $massoperations = $css = $actions = [];
+
         extract($args);
-        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $perpage, $table, $join, $columns, $css, $operators,$actions);
+
+        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $perpage, $table, $join, $columns, $css, $actions);
     }
 
     //This assigns the private and public properties of the datagrid classes from make functions
     public function build(
-        $name = null,
-        $select = false,
+        string $name = null,
+        string $select = null,
         array $filterable = [],
         array $searchable = [],
         array $massoperations = [],
         bool $aliased = false,
         int $perpage = 0,
-        $table = null,
+        string $table = null,
         array $join = [],
         array $columns = null,
         array $css = [],
-        array $operators = [],
         array $actions = [],
         Pagination $pagination = null
     ) {
@@ -194,9 +194,10 @@ class DataGrid
         $this->setJoin($join);
         $this->addColumns($columns, true);
         $this->setCss($css);
-        $this->setOperators($operators);
+        $this->setOperators();
         $this->setActions($actions);
         // $this->addPagination($pagination);
+
         return $this;
     }
 
@@ -205,10 +206,9 @@ class DataGrid
      *
      * @return $this
      */
-
     public function setName(string $name)
     {
-        $this->name = $name ?: 'Default' . time();
+        $this->name = $name ? : 'Default' . time();
         return $this;
     }
 
@@ -225,6 +225,7 @@ class DataGrid
 
     /**
      * Set Filterable
+     *
      * @return $this
      */
     public function setFilterable(array $filterable)
@@ -235,6 +236,7 @@ class DataGrid
 
     /**
      * Set Searchable columns
+     *
      * @return $this
      */
     public function setSearchable($searchable)
@@ -245,6 +247,7 @@ class DataGrid
 
     /**
      * Set mass operations
+     *
      * @return $this
      */
     public function setMassOperations($massops)
@@ -306,6 +309,31 @@ class DataGrid
     {
         $this->css = new Css($css);
         return $this->css;
+    }
+
+
+    /**
+     * Adds operands to be used for query condition
+     *
+     * @return $this
+     */
+    public function setOperators()
+    {
+        $operands = [
+            'eq' => "=",
+            'lt' => "<",
+            'gt' => ">",
+            'lte' => "<=",
+            'gte' => ">=",
+            'neqs' => "<>",
+            'neqn' => "!=",
+            'like' => "like",
+            'nlike' => "not like",
+        ];
+
+        $this->operators = $operands;
+
+        return $this;
     }
 
     /**
@@ -395,16 +423,6 @@ class DataGrid
         } else {
             throw new \Exception("DataGrid: Add Column argument is not valid!");
         }
-        return $this;
-    }
-
-    /**
-     * Adds expressional verbs to be used
-     * @return $this
-     */
-    public function setOperators(array $operators)
-    {
-        $this->operators = $operators ?: [];
         return $this;
     }
 

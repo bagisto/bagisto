@@ -152,16 +152,16 @@ return [
     'debug_blacklist' => [
         '_ENV' => [
             'APP_KEY',
-            'DB_PASSWORD',
+            'DB_PASSWORD'
         ],
 
         '_SERVER' => [
             'APP_KEY',
-            'DB_PASSWORD',
+            'DB_PASSWORD'
         ],
 
         '_POST' => [
-            'password',
+            'password'
         ],
     ],
 

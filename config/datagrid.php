@@ -4,6 +4,8 @@ return [
 
     /**
      * Default OrderBy
+     *
+     * * Accepted Values = Array
      */
     'defaultOrder' => [
         'column' => 'id',
@@ -13,7 +15,14 @@ return [
     /**
      * Select distinct records only
      *
-     * @type True || False
+     * Accepted Values = True || False
      */
-    'distinct' => true
+    'distinct' => true,
+
+    /**
+     * Default pagination
+     *
+     * Accepted Values = integer
+     */
+    'pagination' => 10
 ];
