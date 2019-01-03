@@ -27,6 +27,7 @@ class CategoryDataGrid
             'select' => 'cat.id',
             'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
+            'alias' => 'cat',
 
             'massoperations' =>[
                 // [
@@ -34,7 +35,7 @@ class CategoryDataGrid
                 //     'method' => 'DELETE',
                 //     'label' => 'Delete',
                 //     'type' => 'button',
-                // ],
+                // ]
             ],
 
             'actions' => [
@@ -48,7 +49,7 @@ class CategoryDataGrid
                     'route' => 'admin.catalog.categories.delete',
                     'confirm_text' => 'Do you really want to delete this record?',
                     'icon' => 'icon trash-icon',
-                ],
+                ]
             ],
 
             'join' => [
@@ -58,7 +59,20 @@ class CategoryDataGrid
                     'primaryKey' => 'cat.id',
                     'condition' => '=',
                     'secondaryKey' => 'ct.category_id',
-                ],
+                ], [
+                    'join' => 'leftjoin',
+                    'table' => 'product_categories as pc',
+                    'primaryKey' => 'cat.id',
+                    'condition' => '=',
+                    'secondaryKey' => 'pc.category_id',
+                    // 'conditions' => [
+                    //     [
+                    //         'columnFirst' => 'ct.',
+                    //         'condition' => '',
+                    //         'columnSecond' => ''
+                    //     ]
+                    // ]
+                ]
             ],
 
             //use aliasing on secodary columns if join is performed
