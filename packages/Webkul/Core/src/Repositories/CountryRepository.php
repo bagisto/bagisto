@@ -21,4 +21,13 @@ class CountryRepository extends Repository
     {
         return 'Webkul\Core\Models\Country';
     }
+
+    /**
+     * Function to get country
+     *
+     * @return array
+     */
+    public function getAllCountry() {
+        return $this->model->get()->toArray();
+    }
 }

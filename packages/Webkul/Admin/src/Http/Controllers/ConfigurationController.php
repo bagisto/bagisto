@@ -131,7 +131,7 @@ class ConfigurationController extends Controller
      * @param  \Webkul\Admin\Http\Requests\ConfigurationForm $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ConfigurationForm $request)
+    public function store()
     {
         Event::fire('core.configuration.save.after');
 

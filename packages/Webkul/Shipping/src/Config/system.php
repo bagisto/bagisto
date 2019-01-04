@@ -109,7 +109,8 @@ return [
             [
                 'name' => 'country',
                 'title' => 'Country',
-                'type' => 'text',
+                'type' => 'select',
+                'repository' => 'Webkul\Core\Repositories\CountryRepository@getAllCountry',
                 'validation' => 'required',
                 'channel_based' => true,
                 'locale_based' => false

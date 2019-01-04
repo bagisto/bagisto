@@ -16,6 +16,13 @@
 
     $name = $item['key'] . '.' . $field['name'];
 
+    if (isset($field['repository'])) {
+        $temp = explode("@", $field['repository']);
+        $class = app(current($temp));
+        $method = end($temp);
+        $value = $class->$method();
+        $selectedOption = core()->getConfigData($name) ?? '';
+    }
 ?>
 
 <div class="control-group {{ $field['type'] }}" :class="[errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]') ? 'has-error' : '']">
@@ -54,20 +61,39 @@
 
         <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;" >
 
-            @foreach($field['options'] as $option)
+            @if (isset($field['repository']))
+                @foreach($value as $option)
+                    <option value="{{  $option['name'] }}" {{ $option['name'] ==            $selectedOption ? 'selected' : ''}}  {{ in_array($option['name'], explode(',', $selectedOption)) ? 'selected' : ''}}>
+                        {{ $option['name'] }}
+                    </option>
+                @endforeach
+            @else
+                @foreach($field['options'] as $option)
 
-                <?php
-                    if($option['value'] == false) {
-                        $value = 0;
-                    }else {
-                        $value = $option['value'];
-                    }
+                    <?php
+                        if($option['value'] == false) {
+                            $value = 0;
+                        } else {
+                            $value = $option['value'];
+                        }
 
-                    $selectedOption = core()->getConfigData($name) ?? '';
-                ?>
+                        $selectedOption = core()->getConfigData($name) ?? '';
+                    ?>
 
-                <option value="{{ $value }}" {{ $value == $selectedOption ? 'selected' : ''}}>
-                    {{ $option['title'] }}
+                    <option value="{{ $value }}" {{ $value == $selectedOption ? 'selected' : ''}}>
+                        {{ $option['title'] }}
+                    </option>
+                @endforeach
+            @endif
+
+        </select>
+
+    @elseif ($field['type'] == 'multiselect')
+        <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]" data-vv-as="&quot;{{ $field['name'] }}&quot;"  multiple>
+
+            @foreach($value as $option)
+                <option value="{{  $option['name'] }}" {{ $option['name'] == $selectedOption ? 'selected' : ''}}  {{ in_array($option['name'], explode(',', $selectedOption)) ? 'selected' : ''}}>
+                    {{ $option['name'] }}
                 </option>
             @endforeach
 
@@ -76,4 +102,5 @@
     @endif
 
     <span class="control-error" v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]')">@{{ errors.first('{!! $firstField !!}[{!! $secondField !!}][{!! $thirdField !!}][{!! $field['name'] !!}]') }}</span>
+
 </div>
