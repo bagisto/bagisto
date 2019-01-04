@@ -109,6 +109,16 @@ class Product extends Model
     }
 
     /**
+     * The images that belong to the product.
+     */
+    public function getBaseImageUrlAttribute()
+    {
+        $image = $this->images()->first();
+
+        return $image ? $image->url : null;
+    }
+
+    /**
      * The related products that belong to the product.
      */
     public function related_products()
