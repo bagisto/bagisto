@@ -106,22 +106,16 @@ return [
         'name' => 'Origin',
         'sort' => 0,
         'fields' => [
+            // [
+            //     'name' => 'country',
+            //     'title' => 'Country',
+            //     'type' => 'country_state',
+            //     'stateName' => 'state'
+            //     'validation' => 'required',
+            //     'channel_based' => true,
+            //     'locale_based' => true
+            // ],
             [
-                'name' => 'country',
-                'title' => 'Country',
-                'type' => 'select',
-                'repository' => 'Webkul\Core\Repositories\CountryRepository@getAllCountry',
-                'validation' => 'required',
-                'channel_based' => true,
-                'locale_based' => false
-            ], [
-                'name' => 'state',
-                'title' => 'State',
-                'type' => 'text',
-                'validation' => 'required',
-                'channel_based' => true,
-                'locale_based' => false
-            ], [
                 'name' => 'address1',
                 'title' => 'Address Line 1',
                 'type' => 'text',
