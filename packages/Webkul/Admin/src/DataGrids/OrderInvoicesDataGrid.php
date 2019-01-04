@@ -102,6 +102,21 @@ class OrderInvoicesDataGrid
                     'type' => 'number',
                     'label' => 'ID',
                 ], [
+                    'column' => 'inv.order_id',
+                    'alias' => 'invorderid',
+                    'type' => 'number',
+                    'label' => 'Order ID',
+                ], [
+                    'column' => 'inv.state',
+                    'alias' => 'invstate',
+                    'type' => 'string',
+                    'label' => 'State',
+                ], [
+                    'column' => 'inv.grand_total',
+                    'alias' => 'invgrandtotal',
+                    'type' => 'number',
+                    'label' => 'Amount',
+                ], [
                     'column' => 'inv.created_at',
                     'alias' => 'invcreated_at',
                     'type' => 'datetime',

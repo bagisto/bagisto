@@ -591,18 +591,27 @@ class DataGrid
                     if($count_keys==1)
                     $this->query->where(function ($query) use ($parsed) {
                         foreach ($this->searchable as $search) {
-                            $query->orWhere($search['column'], 'like', '%'.$parsed['search']['all'].'%');
+                            if (strpos($search['column'], 'CONCAT') !== false) {
+                                $query->orWhere(DB::raw($search['column']), 'like', '%'.$parsed['search']['all'].'%');
+                            } else {
+                                $query->orWhere($search['column'], 'like', '%'.$parsed['search']['all'].'%');
+                            }
                         }
                     });
                 } else {
                     $column_name = $this->findAlias($key);
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
-                            $this->query->where(
-                                $column_name,
-                                $this->operators[$condition],
-                                '%'.$filter_value.'%'
-                            );
+                            if (strpos($column_name, 'CONCAT') !== false) {
+                                $this->query->orWhere(DB::raw($column_name), $this->operators[$condition],
+                                '%'.$filter_value.'%');
+                            } else {
+                                $this->query->where(
+                                    $column_name,
+                                    $this->operators[$condition],
+                                    '%'.$filter_value.'%'
+                                );
+                            }
                         }
                     } else {
                         foreach ($value as $condition => $filter_value) {
@@ -613,11 +622,16 @@ class DataGrid
                                     $filter_value
                                 );
                             } else {
-                                $this->query->where(
-                                    $column_name,
-                                    $this->operators[$condition],
-                                    $filter_value
-                                );
+                                if (strpos($column_name, 'CONCAT') !== false) {
+                                    $this->query->orWhere(DB::raw($column_name), $this->operators[$condition],
+                                    $filter_value);
+                                } else {
+                                    $this->query->where(
+                                        $column_name,
+                                        $this->operators[$condition],
+                                        $filter_value
+                                    );
+                                }
                             }
                         }
                     }
@@ -646,7 +660,11 @@ class DataGrid
                     if($count_keys==1)
                     $this->query->where(function ($query) use ($parsed) {
                         foreach ($this->searchable as $search) {
-                            $query->orWhere($search['column'], 'like', '%'.$parsed['search']['all'].'%');
+                            if (strpos($search['column'], 'CONCAT') !== false) {
+                                $query->orWhere(DB::raw($search['column']), 'like', '%'.$parsed['search']['all'].'%');
+                            } else {
+                                $query->orWhere($search['column'], 'like', '%'.$parsed['search']['all'].'%');
+                            }
                         }
                     });
                     else
@@ -659,11 +677,16 @@ class DataGrid
 
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
-                            $this->query->where(
-                                $column_name,
-                                $this->operators[$condition],
-                                '%'.$filter_value.'%'
-                            );
+                            if (strpos($column_name, 'CONCAT') !== false) {
+                                $this->query->orWhere(DB::raw($column_name), $this->operators[$condition],
+                                '%'.$filter_value.'%');
+                            } else {
+                                $this->query->where(
+                                    $column_name,
+                                    $this->operators[$condition],
+                                    '%'.$filter_value.'%'
+                                );
+                            }
                         }
                     } else {
                         foreach ($value as $condition => $filter_value) {
@@ -674,11 +697,16 @@ class DataGrid
                                     $filter_value
                                 );
                             } else {
-                                $this->query->where(
-                                    $column_name,
-                                    $this->operators[$condition],
-                                    $filter_value
-                                );
+                                if (strpos($column_name, 'CONCAT') !== false) {
+                                    $this->query->orWhere(DB::raw($column_name), $this->operators[$condition],
+                                    $filter_value);
+                                } else {
+                                    $this->query->where(
+                                        $column_name,
+                                        $this->operators[$condition],
+                                        $filter_value
+                                    );
+                                }
                             }
                         }
                     }

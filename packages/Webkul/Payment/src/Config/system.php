@@ -146,7 +146,13 @@ return [
                     ]
                 ],
                 'validation' => 'required'
-            ], [
+            ],  [
+                'name' => 'business_account',
+                'title' => 'Business Account',
+                'type' => 'select',
+                'type' => 'text',
+                'validation' => 'required'
+            ],  [
                 'name' => 'active',
                 'title' => 'Status',
                 'type' => 'select',
@@ -159,12 +165,6 @@ return [
                         'value' => false
                     ]
                 ],
-                'validation' => 'required'
-            ], [
-                'name' => 'business_account',
-                'title' => 'Business Account',
-                'type' => 'select',
-                'type' => 'text',
                 'validation' => 'required'
             ]
         ]

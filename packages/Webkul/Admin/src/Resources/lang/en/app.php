@@ -574,7 +574,14 @@ return [
             'select-state' => 'Select a region, state or province.',
             'country' => 'Country',
             'male' => 'Male',
-            'female' => 'Female'
+            'female' => 'Female',
+            'created' => 'Customer created successfully.',
+            'updated' => 'Customer updated successfully.',
+            'deleted' => 'Customer deleted successfully.',
+            'group-created' => 'Customer Group created successfully.',
+            'group-updated' => 'Customer Group updated successfully.',
+            'group-deleted' => 'Customer Group deleted successfully.',
+            'group-default' => 'Cannot delete the default group.',
         ],
         'reviews' => [
             'title' => 'Reviews',

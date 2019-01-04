@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Facades\Configuration;
 use Webkul\Core\Repositories\CoreConfigRepository as CoreConfig;
 use Webkul\Core\Tree;
+use Webkul\Admin\Http\Requests\ConfigurationForm;
 
 /**
  * Configuration controller
@@ -127,6 +128,7 @@ class ConfigurationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \Webkul\Admin\Http\Requests\ConfigurationForm $request
      * @return \Illuminate\Http\Response
      */
     public function store()
