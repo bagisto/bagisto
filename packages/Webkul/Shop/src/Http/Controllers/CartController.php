@@ -93,7 +93,7 @@ class CartController extends Controller
 
         $result = Cart::add($id, request()->except('_token'));
 
-        Event::fire('core.channel.add.after', $result);
+        Event::fire('checkout.cart.add.after', $result);
 
         if ($result) {
             session()->flash('success', trans('shop::app.checkout.cart.item.success'));
