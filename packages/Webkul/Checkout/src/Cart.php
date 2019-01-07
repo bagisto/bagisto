@@ -790,11 +790,12 @@ class Cart {
                         $item->update(['name' => $item->product->name]);
 
                     } else if($item->child->product->price != $item->price) {
+                        $price = $item->custom_price ? $item->custom_price : $item->child->product->price;
                         $item->update([
-                            'price' => $item->child->product->price,
-                            'base_price' => $item->child->product->price,
-                            'total' => core()->convertPrice($item->child->product->price * ($item->quantity)),
-                            'base_total' => $item->child->product->price * ($item->quantity),
+                            'price' => $price,
+                            'base_price' => $price,
+                            'total' => core()->convertPrice($price * ($item->quantity)),
+                            'base_total' => $price * ($item->quantity),
                         ]);
                     }
 
@@ -806,11 +807,12 @@ class Cart {
                         $item->update(['name' => $item->product->name]);
 
                     } else if($item->product->price != $item->price) {
+                        $price = $item->custom_price ? $item->custom_price : $item->product->price;
                         $item->update([
-                            'price' => $item->product->price,
-                            'base_price' => $item->product->price,
-                            'total' => core()->convertPrice($item->product->price * ($item->quantity)),
-                            'base_total' => $item->product->price * ($item->quantity),
+                            'price' => $price,
+                            'base_price' => $price,
+                            'total' => core()->convertPrice($price * ($item->quantity)),
+                            'base_total' => $price * ($item->quantity),
                         ]);
                     }
                 }
