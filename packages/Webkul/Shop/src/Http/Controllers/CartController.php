@@ -10,6 +10,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Helpers\View as ProductView;
+use Illuminate\Support\Facades\Event;
 use Cart;
 
 /**
@@ -76,7 +77,8 @@ class CartController extends Controller
      *
      * @return Mixed
      */
-    public function index() {
+    public function index()
+    {
         return view($this->_config['view'])->with('cart', Cart::getCart());
     }
 
@@ -85,10 +87,15 @@ class CartController extends Controller
      *
      * @return Mixed
      */
-    public function add($id) {
+    public function add($id)
+    {
+        Event::fire('checkout.cart.add.before', $id);
+
         $result = Cart::add($id, request()->except('_token'));
 
-        if($result) {
+        Event::fire('core.channel.add.after', $result);
+
+        if ($result) {
             session()->flash('success', trans('shop::app.checkout.cart.item.success'));
         } else {
             session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
@@ -104,8 +111,13 @@ class CartController extends Controller
      *
      * @param integer $itemId
      */
-    public function remove($itemId) {
+    public function remove($itemId)
+    {
+        Event::fire('checkout.cart.delete.before', $itemId);
+
         Cart::removeItem($itemId);
+
+        Event::fire('checkout.cart.delete.after', $itemId);
 
         Cart::collectTotals();
 
@@ -117,10 +129,11 @@ class CartController extends Controller
      *
      * @return response
      */
-    public function updateBeforeCheckout() {
+    public function updateBeforeCheckout()
+    {
         $request = request()->except('_token');
 
-        foreach($request['qty'] as $id => $quantity) {
+        foreach ($request['qty'] as $id => $quantity) {
             if($quantity <= 0) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.illegal'));
 
@@ -128,12 +141,17 @@ class CartController extends Controller
             }
         }
 
-        foreach($request['qty'] as $key => $value) {
+
+        foreach ($request['qty'] as $key => $value) {
             $item = $this->cartItem->findOneByField('id', $key);
 
             $data['quantity'] = $value;
 
+            Event::fire('checkout.cart.update.before', $key);
+
             Cart::updateItem($item->product_id, $data, $key);
+
+            Event::fire('checkout.cart.update.after', $item);
 
             unset($item);
             unset($data);
@@ -150,17 +168,19 @@ class CartController extends Controller
      *
      * @return response
      */
-    public function addConfigurable($slug) {
+    public function addConfigurable($slug)
+    {
         session()->flash('warning', trans('shop::app.checkout.cart.add-config-warning'));
         return redirect()->route('shop.products.index', $slug);
     }
 
-    public function buyNow($id) {
+    public function buyNow($id)
+    {
         $result = Cart::proceedToBuyNow($id);
 
         Cart::collectTotals();
 
-        if(!$result) {
+        if (!$result) {
             return redirect()->back();
         } else {
             return redirect()->route('shop.checkout.onepage.index');
@@ -173,10 +193,11 @@ class CartController extends Controller
      *
      * @param instance cartItem $id
      */
-    public function moveToWishlist($id) {
+    public function moveToWishlist($id)
+    {
         $result = Cart::moveToWishlist($id);
 
-        if(!$result) {
+        if (!$result) {
             Cart::collectTotals();
 
             session()->flash('success', trans('shop::app.wishlist.moved'));

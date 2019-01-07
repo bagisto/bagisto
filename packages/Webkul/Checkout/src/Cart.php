@@ -152,8 +152,8 @@ class Cart {
         $this->putCart($result);
 
         if($result) {
-            if($this->createItem($id, $data))
-                return true;
+            if($item = $this->createItem($id, $data))
+                return $item;
             else
                 return false;
         } else {
@@ -319,10 +319,7 @@ class Cart {
             $this->cartItem->create($childData);
         }
 
-        if($result)
-            return true;
-        else
-            return false;
+        return $result;
     }
 
     /**
@@ -369,7 +366,7 @@ class Cart {
         if($result) {
             session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
 
-            return true;
+            return $result;
         } else {
             session()->flash('warning', trans('shop::app.checkout.cart.quantity.error'));
 
