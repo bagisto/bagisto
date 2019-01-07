@@ -24,7 +24,7 @@ class CategoryDataGrid
             return DataGrid::make([
             'name' => 'Categories',
             'table' => 'categories as cat',
-            'select' => '',
+            'select' => 'cat.id',
             'perpage' => 10,
             'aliased' => true, //use this with false as default and true in case of joins
 
@@ -58,19 +58,15 @@ class CategoryDataGrid
                     'primaryKey' => 'cat.id',
                     'condition' => '=',
                     'secondaryKey' => 'ct.category_id',
+                    'conditions' => [
+                        'condition' => ['ct.locale', app()->getLocale()]
+                    ]
                 ], [
                     'join' => 'leftjoin',
                     'table' => 'product_categories as pc',
                     'primaryKey' => 'cat.id',
                     'condition' => '=',
-                    'secondaryKey' => 'pc.category_id',
-                    // 'conditions' => [
-                    //     [
-                    //         'columnFirst' => 'ct.',
-                    //         'condition' => '',
-                    //         'columnSecond' => ''
-                    //     ]
-                    // ]
+                    'secondaryKey' => 'pc.category_id'
                 ]
             ],
 
@@ -113,10 +109,10 @@ class CategoryDataGrid
                     'type' => 'string',
                     'label' => 'Locale',
                     'sortable' => true,
-                    'filter' => [
-                        'function' => 'orWhere',
-                        'condition' => ['ct.locale', app()->getLocale()]
-                    ],
+                    // 'filter' => [
+                    //     'function' => 'orWhere',
+                    //     'condition' => ['ct.locale', app()->getLocale()]
+                    // ],
                 ]
             ],
 

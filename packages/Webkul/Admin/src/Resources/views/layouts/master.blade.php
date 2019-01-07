@@ -17,7 +17,7 @@
 
     </head>
 
-    <body>
+    <body style="scroll-behavior: smooth;">
         <div id="app">
 
             <flash-wrapper ref='flashes'></flash-wrapper>

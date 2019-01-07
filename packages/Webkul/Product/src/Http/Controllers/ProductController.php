@@ -11,6 +11,7 @@ use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
+use Webkul\Admin\DataGrids\TestDataGrid;
 
 /**
  * Product controller

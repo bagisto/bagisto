@@ -417,6 +417,7 @@ class DataGrid
         } else {
             throw new \Exception("DataGrid: Add Column argument is not valid!");
         }
+
         return $this;
     }
 
@@ -523,14 +524,13 @@ class DataGrid
     }
 
     /**
-     * Parse the URL
-     * and get it ready
-     * to be used.
+     * Parse the URL and get it ready to be used.
      */
     private function parse()
     {
         $parsed = [];
         $unparsed = url()->full();
+
         if (count(explode('?', $unparsed)) > 1) {
             $to_be_parsed = explode('?', $unparsed)[1];
 
@@ -545,17 +545,24 @@ class DataGrid
 
     /**
      * ->join('contacts', 'users.id', '=', 'contacts.user_id')
+     *
      * @return $this->query
      */
     private function getQueryWithJoin()
     {
         foreach ($this->join as $join) {
             $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondaryKey']);
+
+            if(isset($join['conditions'])) {
+                // dd($join['conditions']['condition'][0], $join['conditions']['condition'][1]);
+                $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondaryKey'])->where($join['conditions']['condition'][0], $join['conditions']['condition'][1]);
+            }
         }
     }
 
     private function getQueryWithColumnFilters()
     {
+        // config()->set('key', $value);
         foreach ($this->columns as $column) {
             if ($column->filter) { // if the filter bag in array exists then these will be applied.
                 // if (count($column->filter['condition']) == count($column->filter['condition'], COUNT_RECURSIVE)) {
@@ -709,7 +716,6 @@ class DataGrid
                     }
                 }
             }
-
         }
     }
 
@@ -841,13 +847,10 @@ class DataGrid
     }
 
     /**
-     * Main Render Function,
-     * it renders views responsible
-     * for loading datagrid.
+     * Main Render Function, it renders views responsible for loading datagrid.
      *
      * @return view
      */
-
     public function render($pagination = true)
     {
         $this->getDbQueryResults($pagination);
