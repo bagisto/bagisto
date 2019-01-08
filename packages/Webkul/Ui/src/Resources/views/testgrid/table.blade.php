@@ -32,7 +32,7 @@
                                         <select class="filter-column-select" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
                                             <option selected disabled>Select Column</option>
                                             @foreach($results['columns'] as $column)
-                                                <option value="{{ $column['column'] }}">
+                                                <option value="{{ $column['alias'] }}">
                                                     {{ $column['label'] }}
                                                 </option>
                                             @endforeach
@@ -149,8 +149,8 @@
                 template: '#testgrid-filters',
 
                 data: () => ({
-                    url: new URL(document.location),
-                    sort: null,
+                    url: new URL(window.location.href),
+                    currentSort: null,
                     sortDesc: 'desc',
                     sortAsc: 'asc',
                     isActive: false,
@@ -183,7 +183,7 @@
                         this.columnOrAlias = columnOrAlias;
 
                         for(column in this.columns) {
-                            if (this.columns[column].column == this.columnOrAlias) {
+                            if (this.columns[column].alias == this.columnOrAlias) {
                                 this.type = this.columns[column].type;
 
                                 if(this.type == 'string') {
@@ -229,74 +229,81 @@
                     getResponse() {
                         if(this.type == 'string') {
                             console.log(this.columnOrAlias, this.stringCondition, this.stringValue);
+                            this.formURL(this.columnOrAlias, this.stringCondition, this.stringValue)
                         } else if(this.type == 'number') {
                             console.log(this.columnOrAlias, this.numberCondition, this.numberValue);
+                            this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue);
                         } else if(this.type == 'boolean') {
                             console.log(this.columnOrAlias, this.booleanCondition, this.booleanValue);
+                            this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue);
                         } else if(this.type == 'datetime') {
                             console.log(this.columnOrAlias, this.datetimeCondition, this.datetimeValue);
+                            this.formURL(this.columnOrAlias, this.datetimeCondition, this.datetimeValue);
                         }
                     },
 
                     sortCollection(alias) {
-                        this.formURL("sort", alias, this.sortDesc, params);
+                        this.formURL("sort", alias, this.sortAsc, params);
                     },
 
                     searchCollection(alias) {
                         this.formURL("search", alias, 'search', params);
                     },
 
+                    //function triggered to check whether the query exists or not and then call the make filters from the url
                     setParamsAndUrl() {
-                        params = (new URL(document.location)).search;
+                        params = (new URL(window.location.href)).search;
 
-                        if(params.length > 0) {
-                            if(this.filters.length == 0) {
-                                //call reverse url function
-                                this.arrayFromUrl(params.slice(1, params.length));
-                            }
+                        if(params.slice(1, params.length).length > 0) {
+                            this.arrayFromUrl();
                         }
 
-                        this.arrayFromUrl();
+                    },
+
+                    findCurrentSort() {
+                        for(i in this.filters) {
+                            if(this.filters[i].column == 'sort') {
+                                this.currentSort = this.filters[i].val;
+                            }
+                        }
                     },
 
                     //make array of filters, sort and search
-                    formURL(column, condition, response, urlparams) {
+                    formURL(column, condition, response) {
                         var obj = {};
 
-                        if(column == "" || condition == "" || response == "") {
+                        if(column == "" || condition == "" || response == "" || column == null || condition == null || response == null) {
                             alert('{{ __('ui::app.datagrid.filter-fields-missing') }}');
 
                             return false;
                         } else {
                             if(this.filters.length > 0) {
-
-                                //case for repeated filter
                                 if(column != "sort" && column != "search") {
                                     filter_repeated = 0;
 
                                     for(j = 0; j < this.filters.length; j++) {
-                                        if(this.filters[j].column == column && this.filters[j].cond == condition && this.filters[j].val == response) {
-                                            filter_repeated = 1;
+                                        if(this.filters[j].column == column) {
+                                            if(this.filters[j].cond == condition && this.filters[j].val == response) {
+                                                return false;
+                                            }
 
-                                            return false;
-                                        } else if(this.filters[j].column == column) {
                                             filter_repeated = 1;
 
                                             this.filters[j].cond = condition;
                                             this.filters[j].val = response;
 
-                                            this.makeURL(true);
+                                            this.makeURL();
                                         }
                                     }
 
                                     if(filter_repeated == 0) {
-                                        obj1.column = column;
-                                        obj1.cond = condition;
-                                        obj1.val = response;
+                                        obj.column = column;
+                                        obj.cond = condition;
+                                        obj.val = response;
 
 
-                                        this.filters.push(obj1);
-                                        obj1 = {};
+                                        this.filters.push(obj);
+                                        obj = {};
 
                                         this.makeURL();
                                     }
@@ -304,21 +311,26 @@
 
                                 if(column == "sort") {
                                     sort_exists = 0;
-                                    for(j = 0; j<this.filters.length; j++) {
-                                        if(this.filters[j].column == "sort") {
-                                            if(this.filters[j].column == column && this.filters[j].cond == condition && this.filters[j].val == response) {
 
-                                                if(response == "asc") {
+                                    console.log(column, condition, response);
+                                    console.log(this.filters);
+                                    for(j = 0; j < this.filters.length; j++) {
+                                        if(this.filters[j].column == "sort") {
+                                            if(this.filters[j].column == column && this.filters[j].cond == condition) {
+                                                this.findCurrentSort();
+
+                                                if(this.currentSort == "asc") {
                                                     this.filters[j].column = column;
                                                     this.filters[j].cond = condition;
-                                                    this.filters[j].val = "desc";
+                                                    this.filters[j].val = this.sortDesc;
 
                                                     this.makeURL();
-
                                                 } else {
                                                     this.filters[j].column = column;
                                                     this.filters[j].cond = condition;
-                                                    this.filters[j].val = "asc";
+                                                    this.filters[j].val = this.sortAsc;
+
+                                                    console.log(this.filters[j].val, 2);
 
                                                     this.makeURL();
                                                 }
@@ -329,7 +341,24 @@
 
                                                 this.makeURL();
                                             }
+
+                                            sort_exists = 1;
                                         }
+                                    }
+
+                                    if(sort_exists == 0) {
+                                        if(this.currentSort == null)
+                                            this.currentSort = this.sortAsc;
+
+                                        obj.column = column;
+                                        obj.cond = condition;
+                                        obj.val = this.currentSort;
+
+                                        this.filters.push(obj);
+
+                                        obj = {};
+
+                                        this.makeURL();
                                     }
                                 }
 
@@ -352,72 +381,58 @@
                                     }
 
                                     if(search_found == 0) {
-                                        obj1.column = column;
-                                        obj1.cond = condition;
-                                        obj1.val = response;
+                                        obj.column = column;
+                                        obj.cond = condition;
+                                        obj.val = response;
 
 
-                                        this.filters.push(obj1);
+                                        this.filters.push(obj);
 
-                                        obj1 = {};
+                                        obj = {};
 
                                         this.makeURL();
                                     }
                                 }
                             } else {
-                                obj1.column = column;
-                                obj1.cond = condition;
-                                obj1.val = response;
+                                obj.column = column;
+                                obj.cond = condition;
+                                obj.val = response;
 
+                                this.filters.push(obj);
 
-                                this.filters.push(obj1);
-
-                                obj1 = {};
+                                obj = {};
 
                                 this.makeURL();
                             }
-                        } //pend
+                        }
                     },
 
                     // make the url from the array and redirect
-                    makeURL(repetition = false) {
-                        if(this.filters.length > 0 && repetition == false)
-                        {
-                            for(i = 0; i < this.filters.length; i++) {
-                                if(i == 0) {
-                                    url = '?' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
-                                } else {
-                                    url = url + '&' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
-                                }
+                    makeURL() {
+                        newParams = '';
+
+                        for(i = 0; i < this.filters.length; i++) {
+                            if(i == 0) {
+                                newParams = '?' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
+                            } else {
+                                newParams = newParams + '&' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
                             }
-
-                            document.location = url;
-                        } else if(this.filters.length > 0 && repetition == true) {
-                            //this is the case when the filter is being repeated on a single column with different condition and value
-                            for(i=0;i<this.filters.length;i++) {
-                                if(i==0) {
-                                    url = '?' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
-                                } else {
-                                    url = url + '&' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
-                                }
-                            }
-
-                            document.location = url;
-                        } else {
-                            var uri = window.location.href.toString();
-                            var clean_uri = uri.substring(0, uri.indexOf("?"));
-
-                            document.location = clean_uri;
                         }
+
+                        var uri = window.location.href.toString();
+
+                        var clean_uri = uri.substring(0, uri.indexOf("?")).trim();
+
+                        window.location.href = clean_uri+newParams;
                     },
 
                     //make the filter array from url after being redirected
                     arrayFromUrl() {
-                        var allFilters;
                         var obj = {};
                         processedUrl = this.url.search.slice(1, this.url.length);
                         splitted = [];
                         moreSplitted = [];
+
                         splitted = processedUrl.split('&');
 
                         for(i = 0; i < splitted.length; i++) {
@@ -435,11 +450,9 @@
 
                             if(col != undefined && cond != undefined && val != undefined)
                                 this.filters.push(obj);
-                        }
 
-                        // console.log(this.filters);
-                        return false;
-                        // makeTags();
+                            obj = {};
+                        }
                     }
 
                     // //Use the label to prevent the display of column name on the body

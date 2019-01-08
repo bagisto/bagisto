@@ -162,6 +162,7 @@
                 //remove the filter and from clicking on cross icon on tag
                 $('.remove-filter').on('click', function() {
                     var id = $(this).parents('.filter-one').attr('id');
+
                     if(allFilters.length ==  1) {
                         allFilters.pop();
                         var uri = window.location.href.toString();

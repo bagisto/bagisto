@@ -91,9 +91,23 @@ abstract class AbsGrid
         }
     }
 
+    /**
+     * To find the alias of the column and by taking the column name.
+     *
+     * @return string
+     */
+    public function findColumnType($columnAlias) {
+        foreach($this->allColumns as $column) {
+            if($column['alias'] == $columnAlias) {
+                return [$column['type'], $column['column']];
+            }
+        }
+    }
+
     public function sortOrFilterCollection($collection, $parseInfo) {
         foreach($parseInfo as $key => $info)  {
-            // dd($key);
+            $columnType = $this->findColumnType($key)[0];
+            $columnName = $this->findColumnType($key)[1];
 
             if($key == "sort") {
                 //case that don't need any resolving
@@ -117,28 +131,26 @@ abstract class AbsGrid
                     throw new \Exception('Multiple Search keys Found, Please Resolve the URL Manually');
                 }
             } else {
-                $column_name = $this->findColumnAlias($key);
-
-                if (array_keys($value)[0] == "like" || array_keys($value)[0] == "nlike") {
-                    foreach ($value as $condition => $filter_value) {
+                if (array_keys($info)[0] == "like" || array_keys($info)[0] == "nlike") {
+                    foreach ($info as $condition => $filter_value) {
                         $collection->where(
-                            $column_name,
-                            $this->operators[$condition],
+                            $columnName,
+                            config("datagrid.operators.{$condition}"),
                             '%'.$filter_value.'%'
                         );
                     }
                 } else {
-                    foreach ($value as $condition => $filter_value) {
-                        if($column_type == 'datetime') {
+                    foreach ($info as $condition => $filter_value) {
+                        if($columnType == 'datetime') {
                             $collection->whereDate(
-                                $column_name,
-                                $this->operators[$condition],
+                                $columnName,
+                                config("datagrid.operators.{$condition}"),
                                 $filter_value
                             );
                         } else {
                             $collection->where(
-                                $column_name,
-                                $this->operators[$condition],
+                                $columnName,
+                                config("datagrid.operators.{$condition}"),
                                 $filter_value
                             );
                         }
