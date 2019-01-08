@@ -128,22 +128,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="filter-row-two" style="width: 100%; display: flex; flex-direction: row; justify-content: flex-start; align-items: center;">
-                    {{-- <span class="filter-one">
-                        <span class="filter-name">
-                            Stock
+                <div class="filter-row-two">
+                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters">
+                        <span v-if="filter.column == 'sort'">@{{ filter.cond }}</span>
+                        <span v-else-if="filter.column == 'search'">Search</span>
+                        <span v-else>@{{ filter.column }}</span>
+
+                        <span class="wrapper">
+                            @{{ filter.val }}
+                            <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
                         </span>
-                        <span class="filter-value">
-                            Available
-                            <span class="icon cross-icon"></span>
-                        </span>
-                    </span> --}}
-                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="height: 60px; width: 60px; background-color: red;">
-                        <span class="col" v-if="filter.column == 'sort'">@{{ filter.cond }}</span>
-                        <span class="col" v-else-if="filter.column == 'search'">Search</span>
-                        <span class="col" v-else>@{{ filter.colum }}</span>
-                        <span class="val">@{{ filter.val }}</span>
-                        <span class="icon cross-icon"></span>
+
                     </span>
                 </div>
 
@@ -152,7 +147,7 @@
                         <tr>
                             <th class="grid_head" id="mastercheckbox" style="width: 50px;">
                                 <span class="checkbox">
-                                    <input type="checkbox" id="mastercheckbox">
+                                    <input type="checkbox" id="mastercheckbox" v-model="massselection">
                                     <label class="checkbox-view" for="checkbox"></label>
                                 </span>
                             </th>
@@ -175,6 +170,7 @@
                 data: () => ({
                     url: new URL(window.location.href),
                     currentSort: null,
+                    massselection: [],
                     sortDesc: 'desc',
                     sortAsc: 'asc',
                     isActive: false,
@@ -442,7 +438,7 @@
 
                         var clean_uri = uri.substring(0, uri.indexOf("?")).trim();
 
-                        window.location.href = clean_uri+newParams;
+                        window.location.href = clean_uri + newParams;
                     },
 
                     //make the filter array from url after being redirected
@@ -474,48 +470,17 @@
                         }
 
                         console.log(this.filters);
+                    },
+
+                    removeFilter(filter) {
+                        for(i in this.filters) {
+                            if(this.filters[i].col == filter.col && this.filters[i].cond == filter.cond && this.filters[i].val == filter.val) {
+                                this.filters.splice(i, 1);
+
+                                this.makeURL();
+                            }
+                        }
                     }
-
-                    // //Use the label to prevent the display of column name on the body
-                    // function makeTags() {
-                    //     var filterRepeat = 0;
-
-                    //     if(this.filters.length > 0)
-                    //     for(var i = 0;i<this.filters.length;i++) {
-
-                    //         if(this.filters[i].column == "sort") {
-                    //             col_label_tag = $('li[data-name="'+this.filters[i].cond+'"]').text();
-
-                    //             var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ this.filters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
-
-                    //             sorted_col = this.filters[i].cond;
-
-                    //             var apply_on_column = $('th[data-column-name="'+sorted_col+'"]').children('.icon');
-
-                    //             if(this.filters[i].val == "asc") {
-                    //                 apply_on_column.addClass('sort-down-icon');
-                    //             } else {
-                    //                 apply_on_column.addClass('sort-up-icon');
-                    //             }
-
-                    //             $('.filter-row-two').append(filter_card);
-
-                    //         } else if(this.filters[i].column == "search") {
-                    //             col_label_tag = "Search";
-
-                    //             var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ this.filters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
-
-                    //             $('.filter-row-two').append(filter_card);
-
-                    //         } else {
-                    //             col_label_tag = $('li[data-name="'+this.filters[i].column+'"]').text().trim();
-
-                    //             var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ this.filters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
-
-                    //             $('.filter-row-two').append(filter_card);
-                    //         }
-                    //     }
-                    // }
                 }
             });
         </script>

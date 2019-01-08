@@ -67,7 +67,7 @@
     justify-content: space-between;
     align-items: center;
     height: 36px;
-    width: 100px;
+    width: 202px;
     border: 2px solid $control-border-color;
     border-radius: 3px;
     color: #8E8E8E;
@@ -75,5 +75,29 @@
 
     .arrow-icon-down {
         float: right;
+    }
+}
+
+.filter-tag {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    height: 28px;
+    width: 98px;
+    border-radius: 2px;
+
+    .wrapper {
+        margin-left: 10px;
+        padding: 0px 5px 0px 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background: #E7E7E7;
+        font-size: 14px;
+        height: 28px;
+        color: #000311;
+        letter-spacing: -0.22px;
     }
 }
