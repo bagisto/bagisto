@@ -128,16 +128,18 @@ abstract class AbsGrid
                     throw new \Exception('Multiple Search keys Found, Please Resolve the URL Manually');
                 }
 
-                $collection->where(function () use($collection, $info) {
-                    foreach ($this->allColumns as $column) {
-                        if($column['searchable'] == true)
-                            $collection->orWhere($column['column'], 'like', '%'.$info['all'].'%');
-                    }
-                });
+                if ($count_keys == 1) {
+                    return $collection->where(function () use($collection, $info) {
+                        foreach ($this->allColumns as $column) {
+                            if($column['searchable'] == true)
+                                $collection->orWhere($column['column'], 'like', '%'.$info['all'].'%');
+                        }
+                    });
+                }
             } else {
                 if (array_keys($info)[0] == "like" || array_keys($info)[0] == "nlike") {
                     foreach ($info as $condition => $filter_value) {
-                        $collection->where(
+                        return $collection->where(
                             $columnName,
                             config("datagrid.operators.{$condition}"),
                             '%'.$filter_value.'%'
@@ -146,13 +148,13 @@ abstract class AbsGrid
                 } else {
                     foreach ($info as $condition => $filter_value) {
                         if($columnType == 'datetime') {
-                            $collection->whereDate(
+                            return $collection->whereDate(
                                 $columnName,
                                 config("datagrid.operators.{$condition}"),
                                 $filter_value
                             );
                         } else {
-                            $collection->where(
+                            return $collection->where(
                                 $columnName,
                                 config("datagrid.operators.{$condition}"),
                                 $filter_value
