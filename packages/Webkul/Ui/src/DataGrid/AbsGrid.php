@@ -122,14 +122,18 @@ abstract class AbsGrid
                     throw new \Exception('Multiple Sort keys Found, Please Resolve the URL Manually');
                 }
             } else if($key == "search") {
-                if ($count_keys == 1) {
-                    $collection->orderBy(
-                        str_replace('_', '.', array_keys($info)[0]),
-                        array_values($info)[0]
-                    );
-                } else {
+                $count_keys = count(array_keys($info));
+
+                if($count_keys > 1) {
                     throw new \Exception('Multiple Search keys Found, Please Resolve the URL Manually');
                 }
+
+                $collection->where(function () use($collection, $info) {
+                    foreach ($this->allColumns as $column) {
+                        if($column['searchable'] == true)
+                            $collection->orWhere($column['column'], 'like', '%'.$info['all'].'%');
+                    }
+                });
             } else {
                 if (array_keys($info)[0] == "like" || array_keys($info)[0] == "nlike") {
                     foreach ($info as $condition => $filter_value) {

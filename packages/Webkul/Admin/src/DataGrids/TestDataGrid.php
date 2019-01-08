@@ -29,7 +29,7 @@ class TestDataGrid extends AbsGrid
             'alias' => 'productid',
             'label' => 'ID',
             'type' => 'number',
-            'searchable' => true,
+            'searchable' => false,
             'sortable' => true,
             'width' => '40px'
         ]);

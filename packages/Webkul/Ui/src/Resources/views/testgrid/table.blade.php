@@ -1,8 +1,6 @@
 <div class="table">
     <table>
-        <testgrid-filters>
-            {{-- @include('ui::testgrid.head', ['columns' => $results['columns']]) --}}
-        </testgrid-filters>
+        <testgrid-filters></testgrid-filters>
 
         @include('ui::testgrid.body', ['records' => $results['records']])
     </table>
@@ -11,9 +9,9 @@
         <script type="text/x-template" id="testgrid-filters">
             <div id="testgrid-filters" class="filter-row-one" style="width: 100%; display: flex; flex-direction: row; align-items:center; justify-content: space-between;">
                 <div class="search-filter" style="display: inline-flex; align-items: center;">
-                    <input type="search" id="search-field" class="control" placeholder="Search Here..." />
+                    <input type="search" id="search-field" class="control" placeholder="Search Here..." v-model="searchValue" />
                     <div class="ic-wrapper">
-                        <span class="icon search-icon search-btn"></span>
+                        <span class="icon search-icon search-btn" v-on:click="searchCollection(searchValue)"></span>
                     </div>
                 </div>
 
@@ -114,8 +112,8 @@
                     </div>
                 </div>
 
-                <div class="filter-row-two hide">
-                    <span class="filter-one">
+                <div class="filter-row-two" style="height: 100px; width: 100%">
+                    {{-- <span class="filter-one">
                         <span class="filter-name">
                             Stock
                         </span>
@@ -123,9 +121,15 @@
                             Available
                             <span class="icon cross-icon"></span>
                         </span>
+                    </span> --}}
+                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="height: 60px; width: 60px; background-color: red;">
+                        <span class="col" v-if="filter.column == 'sort'">@{{ filter.cond }}</span>
+                        <span class="col" v-else-if="filter.column == 'search'">Search</span>
+                        <span class="col" v-else>@{{ filter.colum }}</span>
+                        <span class="val">@{{ filter.val }}</span>
+                        <span class="icon cross-icon"></span>
                     </span>
                 </div>
-
                 <thead>
                     <tr>
                         <th class="grid_head" id="mastercheckbox" style="width: 50px;">
@@ -140,6 +144,7 @@
                         @endforeach
                     </tr>
                 </thead>
+                <slot></slot>
             </div>
         </script>
 
@@ -155,6 +160,7 @@
                     sortAsc: 'asc',
                     isActive: false,
                     isHidden: true,
+                    searchValue: '',
                     filterColumn: true,
                     filters: [],
                     columnOrAlias: '',
@@ -243,11 +249,11 @@
                     },
 
                     sortCollection(alias) {
-                        this.formURL("sort", alias, this.sortAsc, params);
+                        this.formURL("sort", alias, this.sortAsc);
                     },
 
-                    searchCollection(alias) {
-                        this.formURL("search", alias, 'search', params);
+                    searchCollection(searchValue) {
+                        this.formURL("search", 'all', searchValue);
                     },
 
                     //function triggered to check whether the query exists or not and then call the make filters from the url
@@ -312,8 +318,6 @@
                                 if(column == "sort") {
                                     sort_exists = 0;
 
-                                    console.log(column, condition, response);
-                                    console.log(this.filters);
                                     for(j = 0; j < this.filters.length; j++) {
                                         if(this.filters[j].column == "sort") {
                                             if(this.filters[j].column == column && this.filters[j].cond == condition) {
@@ -364,6 +368,7 @@
 
                                 if(column == "search") {
                                     search_found = 0;
+
                                     for(j = 0;j < this.filters.length;j++) {
                                         if(this.filters[j].column == "search") {
                                             this.filters[j].column = column;
@@ -384,7 +389,6 @@
                                         obj.column = column;
                                         obj.cond = condition;
                                         obj.val = response;
-
 
                                         this.filters.push(obj);
 
@@ -453,25 +457,27 @@
 
                             obj = {};
                         }
+
+                        console.log(this.filters);
                     }
 
                     // //Use the label to prevent the display of column name on the body
                     // function makeTags() {
                     //     var filterRepeat = 0;
 
-                    //     if(allFilters.length != 0)
-                    //     for(var i = 0;i<allFilters.length;i++) {
+                    //     if(this.filters.length > 0)
+                    //     for(var i = 0;i<this.filters.length;i++) {
 
-                    //         if(allFilters[i].column == "sort") {
-                    //             col_label_tag = $('li[data-name="'+allFilters[i].cond+'"]').text();
+                    //         if(this.filters[i].column == "sort") {
+                    //             col_label_tag = $('li[data-name="'+this.filters[i].cond+'"]').text();
 
-                    //             var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+                    //             var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ this.filters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
 
-                    //             sorted_col = allFilters[i].cond;
+                    //             sorted_col = this.filters[i].cond;
 
                     //             var apply_on_column = $('th[data-column-name="'+sorted_col+'"]').children('.icon');
 
-                    //             if(allFilters[i].val == "asc") {
+                    //             if(this.filters[i].val == "asc") {
                     //                 apply_on_column.addClass('sort-down-icon');
                     //             } else {
                     //                 apply_on_column.addClass('sort-up-icon');
@@ -479,17 +485,17 @@
 
                     //             $('.filter-row-two').append(filter_card);
 
-                    //         } else if(allFilters[i].column == "search") {
+                    //         } else if(this.filters[i].column == "search") {
                     //             col_label_tag = "Search";
 
-                    //             var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+                    //             var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ this.filters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
 
                     //             $('.filter-row-two').append(filter_card);
 
                     //         } else {
-                    //             col_label_tag = $('li[data-name="'+allFilters[i].column+'"]').text().trim();
+                    //             col_label_tag = $('li[data-name="'+this.filters[i].column+'"]').text().trim();
 
-                    //             var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ allFilters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
+                    //             var filter_card = '<span class="filter-one" id="'+ i +'"><span class="filter-name">'+ col_label_tag +'</span><span class="filter-value"><span class="f-value">'+ this.filters[i].val +'</span><span class="icon cross-icon remove-filter"></span></span></span>';
 
                     //             $('.filter-row-two').append(filter_card);
                     //         }
