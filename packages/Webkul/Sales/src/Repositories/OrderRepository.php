@@ -244,32 +244,23 @@ class OrderRepository extends Repository
      */
     public function collectTotals($order)
     {
-        $subTotalInvoiced = $baseSubTotalInvoiced = 0;
-        $shippingInvoiced = $baseShippingInvoiced = 0;
-        $taxInvoiced = $baseTaxInvoiced = 0;
+        $order->sub_total_invoiced = $order->base_sub_total_invoiced = 0;
+        $order->shipping_invoiced = $order->base_shipping_invoiced = 0;
+        $order->tax_amount_invoiced = $order->base_tax_amount_invoiced = 0;
 
         foreach($order->invoices as $invoice) {
-            $subTotalInvoiced += $invoice->sub_total;
-            $baseSubTotalInvoiced += $invoice->base_sub_total;
+            $order->sub_total_invoiced += $invoice->sub_total;
+            $order->base_sub_total_invoiced += $invoice->base_sub_total;
 
-            $shippingInvoiced += $invoice->shipping_amount;
-            $baseShippingInvoiced += $invoice->base_shipping_amount;
+            $order->shipping_invoiced += $invoice->shipping_amount;
+            $order->base_shipping_invoiced += $invoice->base_shipping_amount;
 
-            $taxInvoiced += $invoice->tax_amount;
-            $baseTaxInvoiced += $invoice->base_tax_amount;
+            $order->tax_amount_invoiced += $invoice->tax_amount;
+            $order->base_tax_amount_invoiced += $invoice->base_tax_amount;
         }
 
-        $order->sub_total_invoiced = $subTotalInvoiced;
-        $order->base_sub_total_invoiced = $baseSubTotalInvoiced;
-
-        $order->shipping_invoiced = $shippingInvoiced;
-        $order->base_shipping_invoiced = $baseShippingInvoiced;
-
-        $order->tax_amount_invoiced = $taxInvoiced;
-        $order->base_tax_amount_invoiced = $baseTaxInvoiced;
-
-        $order->grand_total_invoiced = $subTotalInvoiced + $shippingInvoiced + $taxInvoiced;
-        $order->base_grand_total_invoiced = $baseSubTotalInvoiced + $baseShippingInvoiced + $baseTaxInvoiced;
+        $order->grand_total_invoiced = $order->sub_total_invoiced + $order->shipping_invoiced + $order->tax_amount_invoiced;
+        $order->base_grand_total_invoiced = $order->base_sub_total_invoiced + $order->base_shipping_invoiced + $order->base_tax_amount_invoiced;
 
         $order->save();
 
