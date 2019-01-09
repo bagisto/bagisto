@@ -269,7 +269,7 @@ class OrderRepository extends Repository
         $order->base_tax_amount_invoiced = $baseTaxInvoiced;
 
         $order->grand_total_invoiced = $subTotalInvoiced + $shippingInvoiced + $taxInvoiced;
-        $order->base_grand_total_invoiced = $baseSubTotalInvoiced + $shippingInvoiced + $baseTaxInvoiced;
+        $order->base_grand_total_invoiced = $baseSubTotalInvoiced + $baseShippingInvoiced + $baseTaxInvoiced;
 
         $order->save();
 
