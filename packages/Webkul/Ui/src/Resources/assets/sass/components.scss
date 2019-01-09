@@ -85,11 +85,10 @@
     align-items: center;
     font-size: 14px;
     height: 28px;
-    width: 98px;
     border-radius: 2px;
 
     .wrapper {
-        margin-left: 10px;
+        margin-left: 5px;
         padding: 0px 5px 0px 5px;
         display: flex;
         flex-direction: row;
@@ -100,4 +99,8 @@
         color: #000311;
         letter-spacing: -0.22px;
     }
+}
+
+.filter-tag:not(first-child) {
+    margin-left: 10px;
 }

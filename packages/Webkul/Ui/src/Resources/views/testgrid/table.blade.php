@@ -21,6 +21,7 @@
                                     <i class="icon arrow-down-icon active"></i>
                                 </div>
                             </div>
+
                             <div class="dropdown-list bottom-right" style="display: none;">
                                 <div class="dropdown-container">
                                     <ul>
@@ -143,11 +144,46 @@
                 </div>
 
                 <table>
-                    <thead>
+                    <thead v-if="massActionsToggle">
+                        @if(isset($results['massactions']))
+                            <tr class="mass-action" style="height: 63px;" v-if="massActionsToggle">
+                                <th colspan="100" style="width: 100%;">
+                                    <div class="mass-action-wrapper" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
+
+                                        <span class="massaction-remove" v-on:click="removeMassActions" style="margin-right: 10px;">
+                                            <span class="icon checkbox-dash-icon"></span>
+                                        </span>
+
+                                        <form method="POST" id="mass-action-form" style="display: inline-flex;" action="">
+                                            @csrf()
+                                            <input type="hidden" id="indexes" name="indexes" v-model="dataIds">
+
+                                            <div class="control-group">
+                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type">
+                                                    <option v-for="(massAction, index) in massActions" :key="index">@{{ massAction.type }}</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="control-group" style="margin-left: 10px;" v-if="massActionType == 'update'">
+                                                <select class="control" v-model="massActionUpdateValue" name="update-options">
+                                                    <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ massActionValue }}</option>
+                                                </select>
+                                            </div>
+
+                                            <input type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px;">
+                                        </form>
+                                    </div>
+                                </th>
+                            </tr>
+                        @endif
+                    </thead>
+
+                    <thead v-if="massActionsToggle == false">
                         <tr>
                             <th class="grid_head" id="mastercheckbox" style="width: 50px;">
                                 <span class="checkbox">
-                                    <input type="checkbox" id="mastercheckbox" v-model="massselection">
+                                    <input type="checkbox" v-model="allSelected" v-on:change="selectAll">
+
                                     <label class="checkbox-view" for="checkbox"></label>
                                 </span>
                             </th>
@@ -155,9 +191,13 @@
                             @foreach($results['columns'] as $key => $column)
                                 <th class="grid_head" data-column-alias="{{ $column['alias'] }}" data-column-name="{{ $column['column'] }}" data-column-sortable="{{ $column['sortable'] }}" data-column-type="{{ $column['type'] }}" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['alias'] }}')">{{ $column['label'] }}</th>
                             @endforeach
+                            <th>
+                                Actions
+                            </th>
                         </tr>
                     </thead>
-                    @include('ui::testgrid.body', ['records' => $results['records']])
+
+                    @include('ui::testgrid.body', ['records' => $results['records'], 'actions' => $results['actions']])
                 </table>
             </div>
         </script>
@@ -168,9 +208,18 @@
                 template: '#testgrid-filters',
 
                 data: () => ({
+                    gridCurrentData: @json($results['records']),
+                    massActions: @json($results['massactions']),
+                    massActionsToggle: false,
+                    massActionTarget: null,
+                    massActionType: null,
+                    massActionValues: [],
+                    massActionTargets: [],
+                    massActionUpdateValue: null,
                     url: new URL(window.location.href),
                     currentSort: null,
-                    massselection: [],
+                    dataIds: [],
+                    allSelected: false,
                     sortDesc: 'desc',
                     sortAsc: 'asc',
                     isActive: false,
@@ -267,7 +316,7 @@
                         this.formURL("search", 'all', searchValue);
                     },
 
-                    //function triggered to check whether the query exists or not and then call the make filters from the url
+                    // function triggered to check whether the query exists or not and then call the make filters from the url
                     setParamsAndUrl() {
                         params = (new URL(window.location.href)).search;
 
@@ -275,6 +324,20 @@
                             this.arrayFromUrl();
                         }
 
+                        for(id in this.massActions) {
+                            targetObj = {
+                                'type': this.massActions[id].type,
+                                'action': this.massActions[id].action
+                            };
+
+                            this.massActionTargets.push(targetObj);
+
+                            targetObj = {};
+
+                            if(this.massActions[id].type == 'update') {
+                                this.massActionValues = this.massActions[id].options;
+                            }
+                        }
                     },
 
                     findCurrentSort() {
@@ -283,6 +346,30 @@
                                 this.currentSort = this.filters[i].val;
                             }
                         }
+                    },
+
+                    changeMassActionTarget() {
+                        if(this.massActionType == 'delete') {
+                            for(i in this.massActionTargets) {
+                                if(this.massActionTargets[i].type == 'delete') {
+                                    this.massActionTarget = this.massActionTargets[i].action;
+
+                                    break;
+                                }
+                            }
+                        }
+
+                        if(this.massActionType == 'update') {
+                            for(i in this.massActionTargets) {
+                                if(this.massActionTargets[i].type == 'update') {
+                                    this.massActionTarget = this.massActionTargets[i].action;
+
+                                    break;
+                                }
+                            }
+                        }
+
+                        document.getElementById('mass-action-form').action = this.massActionTarget;
                     },
 
                     //make array of filters, sort and search
@@ -296,7 +383,7 @@
                         } else {
                             if(this.filters.length > 0) {
                                 if(column != "sort" && column != "search") {
-                                    filter_repeated = 0;
+                                    filterRepeated = 0;
 
                                     for(j = 0; j < this.filters.length; j++) {
                                         if(this.filters[j].column == column) {
@@ -304,7 +391,7 @@
                                                 return false;
                                             }
 
-                                            filter_repeated = 1;
+                                            filterRepeated = 1;
 
                                             this.filters[j].cond = condition;
                                             this.filters[j].val = response;
@@ -313,7 +400,7 @@
                                         }
                                     }
 
-                                    if(filter_repeated == 0) {
+                                    if(filterRepeated == 0) {
                                         obj.column = column;
                                         obj.cond = condition;
                                         obj.val = response;
@@ -344,8 +431,6 @@
                                                     this.filters[j].column = column;
                                                     this.filters[j].cond = condition;
                                                     this.filters[j].val = this.sortAsc;
-
-                                                    console.log(this.filters[j].val, 2);
 
                                                     this.makeURL();
                                                 }
@@ -468,8 +553,6 @@
 
                             obj = {};
                         }
-
-                        console.log(this.filters);
                     },
 
                     removeFilter(filter) {
@@ -480,6 +563,46 @@
                                 this.makeURL();
                             }
                         }
+                    },
+
+                    //triggered when any select box is clicked in the datagrid
+                    select() {
+                        console.log(this.dataIds);
+
+                        this.allSelected = false;
+
+                        this.massActionsToggle = true;
+                    },
+
+                    //triggered when master checkbox is clicked
+                    selectAll() {
+                        this.dataIds = [];
+
+                        this.massActionsToggle = true;
+
+                        if (this.allSelected) {
+                            for (currentData in this.gridCurrentData) {
+                                i = 0;
+
+                                for(currentId in this.gridCurrentData[currentData]) {
+                                    if(i==0)
+                                        this.dataIds.push(this.gridCurrentData[currentData][currentId]);
+
+                                    i++;
+                                }
+
+                            }
+                        }
+
+                        console.log(this.dataIds);
+                    },
+
+                    removeMassActions() {
+                        this.dataIds = [];
+
+                        this.massActionsToggle = false;
+
+                        this.allSelected = false;
                     }
                 }
             });

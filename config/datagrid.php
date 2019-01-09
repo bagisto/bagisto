@@ -27,9 +27,9 @@ return [
     /**
      * Default pagination
      *
-     * Accepted Values = integer
+     * Accepted Value = integer
      */
-    // 'pagination' => 10,
+    'pagination' => 10,
 
     'operators' => [
         'eq' => "=",

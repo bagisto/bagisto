@@ -17,7 +17,7 @@ class TestDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('products_grid')->addSelect($this->columns)->leftJoin('products', 'products_grid.product_id', '=', 'products.id')->where('products.parent_id', '=', null);
+        $queryBuilder = DB::table('products_grid')->select('product_id as id')->addSelect($this->columns)->leftJoin('products', 'products_grid.product_id', '=', 'products.id')->where('products.parent_id', '=', null);
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -95,12 +95,49 @@ class TestDataGrid extends AbsGrid
         ]);
     }
 
+    public function prepareActions() {
+        $this->prepareAction([
+            'type' => 'Edit',
+            'route' => 'admin.catalog.products.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->prepareAction([
+            'type' => 'Delete',
+            'route' => 'admin.catalog.products.delete',
+            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        $this->prepareMassAction([
+            'type' => 'delete',
+            'action' => route('admin.catalog.products.massdelete'),
+            'method' => 'DELETE'
+        ]);
+
+        $this->prepareMassAction([
+            'type' => 'update',
+            'action' => route('admin.catalog.products.massupdate'),
+            'method' => 'PUT',
+            'options' => [
+                0 => true,
+                1 => false,
+            ]
+        ]);
+    }
+
     public function render()
     {
         $this->addColumns();
 
+        $this->prepareActions();
+
+        $this->prepareMassActions();
+
         $this->prepareQueryBuilder();
 
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns]);
+        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

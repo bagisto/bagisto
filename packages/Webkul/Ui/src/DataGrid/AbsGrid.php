@@ -19,9 +19,17 @@ abstract class AbsGrid
 
     protected $collection = [];
 
+    protected $actions = [];
+
+    protected $massActions = [];
+
     protected $request;
 
     protected $parse;
+
+    abstract public function prepareMassActions();
+
+    abstract public function prepareActions();
 
     abstract public function prepareQueryBuilder();
 
@@ -66,6 +74,14 @@ abstract class AbsGrid
     public function setQueryBuilder($queryBuilder)
     {
         $this->queryBuilder = $queryBuilder;
+    }
+
+    public function prepareAction($action) {
+        array_push($this->actions, $action);
+    }
+
+    public function prepareMassAction($massAction) {
+        array_push($this->massActions, $massAction);
     }
 
     public function getCollection()
