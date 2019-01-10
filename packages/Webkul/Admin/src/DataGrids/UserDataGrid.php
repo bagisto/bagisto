@@ -52,7 +52,7 @@ class UserDataGrid extends AbsGrid
             'index' => 'u.status',
             'alias' => 'adminStatus',
             'label' => 'Status',
-            'type' => 'string',
+            'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
             'width' => '100px',
@@ -69,16 +69,6 @@ class UserDataGrid extends AbsGrid
             'index' => 'u.email',
             'alias' => 'adminEmail',
             'label' => 'Email',
-            'type' => 'string',
-            'searchable' => true,
-            'sortable' => true,
-            'width' => '100px'
-        ]);
-
-        $this->addColumn([
-            'index' => 'ro.name',
-            'alias' => 'rolename',
-            'label' => 'Role',
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

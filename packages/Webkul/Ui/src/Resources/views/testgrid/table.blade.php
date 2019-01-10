@@ -355,11 +355,11 @@
                             if(this.filters[i].column == 'sort') {
                                 this.currentSort = this.filters[i].val;
 
-                                if(this.currentSort = 'asc') {
-                                    this.currentSortIcon = this.sortUpIcon;
-                                } else {
-                                    this.currentSortIcon = this.sortDownIcon;
-                                }
+                                // if(this.currentSort = 'asc') {
+                                //     this.currentSortIcon = this.sortUpIcon;
+                                // } else {
+                                //     this.currentSortIcon = this.sortDownIcon;
+                                // }
                             }
                         }
                     },
