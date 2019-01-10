@@ -17,15 +17,19 @@ class AttributeDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('attributes')->select('id')->addSelect($this->columns);
+        $queryBuilder = DB::table('attributes')->select('id')->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'id',
+            'index' => 'id',
             'alias' => 'attributeId',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +39,7 @@ class AttributeDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'code',
+            'index' => 'code',
             'alias' => 'attributeCode',
             'label' => 'Code',
             'type' => 'string',
@@ -45,7 +49,7 @@ class AttributeDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'admin_name',
+            'index' => 'admin_name',
             'alias' => 'attributeAdminName',
             'label' => 'Name',
             'type' => 'string',
@@ -55,7 +59,7 @@ class AttributeDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'type',
+            'index' => 'type',
             'alias' => 'attributeType',
             'label' => 'Type',
             'type' => 'string',
@@ -65,7 +69,7 @@ class AttributeDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'is_required',
+            'index' => 'is_required',
             'alias' => 'attributeRequired',
             'label' => 'Required',
             'type' => 'boolean',
@@ -75,7 +79,7 @@ class AttributeDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'is_unique',
+            'index' => 'is_unique',
             'alias' => 'attributeIsUnique',
             'label' => 'Unique',
             'type' => 'boolean',
@@ -85,7 +89,7 @@ class AttributeDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'value_per_locale',
+            'index' => 'value_per_locale',
             'alias' => 'attributeValuePerLocale',
             'label' => 'Locale Based',
             'type' => 'boolean',
@@ -95,7 +99,7 @@ class AttributeDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'value_per_channel',
+            'index' => 'value_per_channel',
             'alias' => 'attributeValuePerChannel',
             'label' => 'Channel Based',
             'type' => 'boolean',
@@ -106,13 +110,13 @@ class AttributeDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.catalog.attributes.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.catalog.attributes.delete',
             'icon' => 'icon trash-icon'
@@ -120,23 +124,10 @@ class AttributeDataGrid extends AbsGrid
     }
 
     public function prepareMassActions() {
-        $this->prepareMassAction([
+        $this->addMassAction([
             'type' => 'delete',
             'action' => route('admin.catalog.attributes.massdelete'),
             'method' => 'DELETE'
         ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

@@ -11,31 +11,22 @@ use Illuminate\Http\Request;
  */
 abstract class AbsGrid
 {
+    protected $index = null;
     protected $columns = [];
-
     protected $allColumns = [];
-
     protected $queryBuilder = [];
-
     protected $collection = [];
-
     protected $actions = [];
-
     protected $massActions = [];
-
     protected $request;
-
     protected $parse;
+    // protected $gridName = null;
 
     abstract public function prepareMassActions();
-
     abstract public function prepareActions();
-
     abstract public function prepareQueryBuilder();
-
     abstract public function addColumns();
-
-    abstract public function render();
+    abstract public function setIndex();
 
     /**
      * Parse the URL and get it ready to be used.
@@ -57,11 +48,7 @@ abstract class AbsGrid
 
     public function addColumn($column)
     {
-        if (isset($column['alias'])) {
-            array_push($this->columns, $column['column'].' as '. $column['alias']);
-        } else {
-            array_push($this->columns, $column['column']);
-        }
+        array_push($this->columns, $column);
 
         $this->setAllColumnDetails($column);
     }
@@ -76,11 +63,13 @@ abstract class AbsGrid
         $this->queryBuilder = $queryBuilder;
     }
 
-    public function prepareAction($action) {
+    public function addAction($action)
+    {
         array_push($this->actions, $action);
     }
 
-    public function prepareMassAction($massAction) {
+    public function addMassAction($massAction)
+    {
         array_push($this->massActions, $massAction);
     }
 
@@ -109,7 +98,7 @@ abstract class AbsGrid
         if ($this->collection) {
             return $this->collection;
         } else {
-            return $this->collection;
+            dd('no records found');
         }
     }
 
@@ -121,28 +110,30 @@ abstract class AbsGrid
     public function findColumnType($columnAlias) {
         foreach($this->allColumns as $column) {
             if($column['alias'] == $columnAlias) {
-                return [$column['type'], $column['column']];
+                return [$column['type'], $column['index']];
             }
         }
     }
 
     public function sortOrFilterCollection($collection, $parseInfo) {
+
         foreach($parseInfo as $key => $info)  {
             $columnType = $this->findColumnType($key)[0];
             $columnName = $this->findColumnType($key)[1];
 
             if($key == "sort") {
-                //case that don't need any resolving
                 $count_keys = count(array_keys($info));
 
-                if ($count_keys == 1) {
-                    return $collection->orderBy(
-                        str_replace('_', '.', array_keys($info)[0]),
-                        array_values($info)[0]
-                    );
-                } else {
-                    throw new \Exception('Multiple Sort keys Found, Please Resolve the URL Manually');
+                if ($count_keys > 1) {
+                    throw new \Exception('Fatal Error! Multiple Sort keys Found, Please Resolve the URL Manually');
                 }
+
+                $columnName = $this->findColumnType(array_keys($info)[0]);
+
+                return $collection->orderBy(
+                    $columnName[1],
+                    array_values($info)[0]
+                );
             } else if($key == "search") {
                 $count_keys = count(array_keys($info));
 
@@ -150,11 +141,11 @@ abstract class AbsGrid
                     throw new \Exception('Multiple Search keys Found, Please Resolve the URL Manually');
                 }
 
-                if ($count_keys == 1) {
-                    return $collection->where(function () use($collection, $info) {
+                if($count_keys == 1) {
+                    return $collection->where(function() use($collection, $info) {
                         foreach ($this->allColumns as $column) {
                             if($column['searchable'] == true)
-                                $collection->orWhere($column['column'], 'like', '%'.$info['all'].'%');
+                                $collection->orWhere($column['index'], 'like', '%'.$info['all'].'%');
                         }
                     });
                 }
@@ -186,5 +177,20 @@ abstract class AbsGrid
                 }
             }
         }
+    }
+
+    public function render()
+    {
+        $this->addColumns();
+
+        $this->setIndex();
+
+        $this->prepareActions();
+
+        $this->prepareMassActions();
+
+        $this->prepareQueryBuilder();
+
+        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions, 'index' => $this->index]);
     }
 }

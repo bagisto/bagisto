@@ -2,192 +2,113 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * Users DataGrid
+ * News Letter Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class UserDataGrid
+class UserDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Data Grid implementation for admin users
-     */
-    public function createUserDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('admins as u')->addSelect('u.id', 'u.name', 'u.status', 'u.email', 'ro.name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
 
-        return DataGrid::make([
-
-            'name' => 'Admins',
-            'table' => 'admins as u',
-            'select' => 'u.id',
-            'perpage' => 10,
-            'aliased' => true, //use this with false as default and true in case of joins
-
-            'massoperations' => [
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-                // [
-                //     'route' => route('admin.datagrid.index'),
-                //     'method' => 'POST',
-                //     'label' => 'View Grid',
-                //     'type' => 'select',
-                //     'options' =>[
-                //         1 => 'Edit',
-                //         2 => 'Set',
-                //         3 => 'Change Status'
-                //     ]
-                // ],
-            ],
-
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.users.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ],
-                [
-                    'type' => 'Delete',
-                    'route' => 'admin.users.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
-            'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'roles as r',
-                    'primaryKey' => 'u.role_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'r.id',
-                ]
-            ],
-
-            //use aliasing on secodary columns if join is performed
-            'columns' => [
-                [
-                    'name' => 'u.id',
-                    'alias' => 'ID',
-                    'type' => 'string',
-                    'label' => 'Admin ID',
-                    'sortable' => true,
-                    // 'wrapper' => function ($value, $object) {
-                    //     return '<a class="color-red">' . $object->ID . '</a>';
-                    // },
-                ], [
-                    'name' => 'u.name',
-                    'alias' => 'Name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
-                    // 'wrapper' => function ($value, $object) {
-                    //     return '<a class="color-red">' . $object->Name . '</a>';
-                    // },
-                ], [
-                    'name' => 'u.status',
-                    'alias' => 'Status',
-                    'type' => 'boolean',
-                    'label' => 'Status',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 1)
-                            return "Active";
-                        else
-                            return "Inactive";
-                    },
-                ], [
-                    'name' => 'u.email',
-                    'alias' => 'Email',
-                    'type' => 'string',
-                    'label' => 'Email',
-                    'sortable' => true,
-                ], [
-                    'name' => 'r.name',
-                    'alias' => 'rolename',
-                    'type' => 'string',
-                    'label' => 'Role Name',
-                    'sortable' => true,
-                ],
-            ],
-
-            //don't use aliasing in case of filters
-            'filterable' => [
-                [
-                    'column' => 'u.id',
-                    'alias' => 'ID',
-                    'type' => 'number',
-                    'label' => 'Admin ID'
-                ], [
-                    'column' => 'u.name',
-                    'alias' => 'Name',
-                    'type' => 'string',
-                    'label' => 'Name'
-                ], [
-                    'column' => 'u.email',
-                    'alias' => 'Email',
-                    'type' => 'string',
-                    'label' => 'Email'
-                ], [
-                    'column' => 'r.name',
-                    'alias' => 'rolename',
-                    'type' => 'string',
-                    'label' => 'Role Name'
-                ], [
-                    'name' => 'u.status',
-                    'alias' => 'Status',
-                    'type' => 'boolean',
-                    'label' => 'Status'
-                ]
-            ],
-
-            //don't use aliasing in case of searchables
-            'searchable' => [
-                [
-                    'column' => 'u.email',
-                    'type' => 'string',
-                    'label' => 'Email'
-                ], [
-                    'column' => 'u.name',
-                    'type' => 'string',
-                    'label' => 'Name'
-                ], [
-                    'column' => 'u.email',
-                    'type' => 'string',
-                    'label' => 'Email',
-                ], [
-                    'column' => 'r.name',
-                    'type' => 'string',
-                    'label' => 'Role Name',
-                ]
-            ],
-
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-
-            // 'css' => []
-        ]);
-
+        $this->setQueryBuilder($queryBuilder);
     }
 
-    public function render() {
-        return $this->createUserDataGrid()->render();
+    public function setIndex() {
+        $this->index = 'id';
+    }
+
+    public function addColumns()
+    {
+        $this->addColumn([
+            'index' => 'u.id',
+            'alias' => 'adminId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'u.name',
+            'alias' => 'adminName',
+            'label' => 'Name',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'u.status',
+            'alias' => 'adminStatus',
+            'label' => 'Status',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px',
+            'wrapper' => function($value) {
+                if($value == 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'u.email',
+            'alias' => 'adminEmail',
+            'label' => 'Email',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'ro.name',
+            'alias' => 'rolename',
+            'label' => 'Role',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'Edit',
+            'route' => 'admin.roles.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.products.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.products.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
     }
 }

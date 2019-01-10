@@ -17,15 +17,19 @@ class CurrencyDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('currencies')->select('id')->addSelect($this->columns);
+        $queryBuilder = DB::table('currencies')->addSelect('id', 'name', 'code');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'id',
+            'index' => 'id',
             'alias' => 'currencyId',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +39,7 @@ class CurrencyDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'name',
+            'index' => 'name',
             'alias' => 'currencyName',
             'label' => 'Name',
             'type' => 'string',
@@ -45,7 +49,7 @@ class CurrencyDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'code',
+            'index' => 'code',
             'alias' => 'currencyCode',
             'label' => 'Code',
             'type' => 'string',
@@ -56,13 +60,13 @@ class CurrencyDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.currencies.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.currencies.delete',
             'icon' => 'icon trash-icon'
@@ -85,18 +89,5 @@ class CurrencyDataGrid extends AbsGrid
         //         1 => false,
         //     ]
         // ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

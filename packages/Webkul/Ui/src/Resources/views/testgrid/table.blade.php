@@ -160,6 +160,7 @@
 
                                         <form method="POST" id="mass-action-form" style="display: inline-flex;" action="">
                                             @csrf()
+
                                             <input type="hidden" id="indexes" name="indexes" v-model="dataIds">
 
                                             <div class="control-group">
@@ -193,22 +194,24 @@
                             </th>
 
                             @foreach($results['columns'] as $key => $column)
-                                <th class="grid_head" data-column-alias="{{ $column['alias'] }}" data-column-name="{{ $column['column'] }}" data-column-sortable="{{ $column['sortable'] }}" data-column-type="{{ $column['type'] }}" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['alias'] }}')">{{ $column['label'] }}</th>
+                                <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['alias'] }}')">
+                                    {{ $column['label'] }}
+                                </th>
                             @endforeach
+
                             <th>
                                 Actions
                             </th>
                         </tr>
                     </thead>
 
-                    @include('ui::testgrid.body', ['records' => $results['records'], 'actions' => $results['actions']])
+                    @include('ui::testgrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns']])
                 </table>
             </div>
         </script>
 
         <script>
             Vue.component('testgrid-filters', {
-
                 template: '#testgrid-filters',
 
                 data: () => ({
@@ -226,6 +229,9 @@
                     allSelected: false,
                     sortDesc: 'desc',
                     sortAsc: 'asc',
+                    sortUpIcon: 'sort-up-icon',
+                    sortDownIcon: 'sort-down-icon',
+                    currentSortIcon: null,
                     isActive: false,
                     isHidden: true,
                     searchValue: '',
@@ -245,7 +251,7 @@
                     stringConditionSelect: false,
                     booleanConditionSelect: false,
                     numberConditionSelect: false,
-                    datetimeConditionSelect: false,
+                    datetimeConditionSelect: false
                 }),
 
                 mounted: function() {
@@ -348,6 +354,12 @@
                         for(i in this.filters) {
                             if(this.filters[i].column == 'sort') {
                                 this.currentSort = this.filters[i].val;
+
+                                if(this.currentSort = 'asc') {
+                                    this.currentSortIcon = this.sortUpIcon;
+                                } else {
+                                    this.currentSortIcon = this.sortDownIcon;
+                                }
                             }
                         }
                     },

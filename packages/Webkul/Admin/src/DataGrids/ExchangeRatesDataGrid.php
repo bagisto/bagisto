@@ -17,15 +17,19 @@ class ExchangeRatesDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('currency_exchange_rates as cer')->select('cer.id')->addSelect($this->columns)->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id');
+        $queryBuilder = DB::table('currency_exchange_rates as cer')->addSelect('cer.id', 'curr.name', 'cer.rate')->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id';
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'cer.id',
+            'index' => 'cer.id',
             'alias' => 'exchId',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +39,7 @@ class ExchangeRatesDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'curr.name',
+            'index' => 'curr.name',
             'alias' => 'exchName',
             'label' => 'Currency Name',
             'type' => 'string',
@@ -45,7 +49,7 @@ class ExchangeRatesDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'cer.rate',
+            'index' => 'cer.rate',
             'alias' => 'exchRate',
             'label' => 'Exchange Rate',
             'type' => 'string',
@@ -56,13 +60,13 @@ class ExchangeRatesDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.exchange_rates.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.exchange_rates.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
@@ -86,18 +90,5 @@ class ExchangeRatesDataGrid extends AbsGrid
         //         1 => false,
         //     ]
         // ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

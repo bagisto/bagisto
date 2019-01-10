@@ -17,15 +17,19 @@ class RolesDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('roles')->select('id')->addSelect($this->columns);
+        $queryBuilder = DB::table('roles')->addSelect('id', 'name', 'permission_type');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id';
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'id',
+            'index' => 'id',
             'alias' => 'roleId',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +39,7 @@ class RolesDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'name',
+            'index' => 'name',
             'alias' => 'roleName',
             'label' => 'Name',
             'type' => 'string',
@@ -45,7 +49,7 @@ class RolesDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'permission_type',
+            'index' => 'permission_type',
             'alias' => 'roleType',
             'label' => 'Permission Type',
             'type' => 'string',
@@ -56,7 +60,7 @@ class RolesDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.roles.edit',
             'icon' => 'icon pencil-lg-icon'
@@ -79,18 +83,5 @@ class RolesDataGrid extends AbsGrid
         //         1 => false,
         //     ]
         // ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

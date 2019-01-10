@@ -17,15 +17,23 @@ class TestDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('products_grid')->select('product_id as id')->addSelect($this->columns)->leftJoin('products', 'products_grid.product_id', '=', 'products.id')->where('products.parent_id', '=', null);
+        $queryBuilder = DB::table('products_grid')->addSelect('products_grid.product_id', 'products_grid.sku', 'products_grid.name', 'products.type', 'products_grid.status', 'products_grid.price', 'products_grid.quantity')->leftJoin('products', 'products_grid.product_id', '=', 'products.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
+    public function setIndex() {
+        $this->index = 'product_id'; //the column that needs to be treated as index column
+    }
+
+    // public function setGridName() {
+    //     $this->gridName = 'products_grid'; // should be the table name for getting proper index
+    // }
+
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'products_grid.product_id',
+            'index' => 'products_grid.product_id',
             'alias' => 'productid',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +43,7 @@ class TestDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'products_grid.sku',
+            'index' => 'products_grid.sku',
             'alias' => 'productsku',
             'label' => 'SKU',
             'type' => 'string',
@@ -45,7 +53,7 @@ class TestDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'products_grid.name',
+            'index' => 'products_grid.name',
             'alias' => 'productname',
             'label' => 'Name',
             'type' => 'string',
@@ -55,7 +63,7 @@ class TestDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'products.type',
+            'index' => 'products.type',
             'alias' => 'producttype',
             'label' => 'Type',
             'type' => 'string',
@@ -65,7 +73,7 @@ class TestDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'products_grid.status',
+            'index' => 'products_grid.status',
             'alias' => 'productstatus',
             'label' => 'Status',
             'type' => 'boolean',
@@ -75,7 +83,7 @@ class TestDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'products_grid.price',
+            'index' => 'products_grid.price',
             'alias' => 'productprice',
             'label' => 'Price',
             'type' => 'number',
@@ -85,7 +93,8 @@ class TestDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'products_grid.quantity',
+            // 'column' => 'products_grid.quantity',
+            'index' => 'products_grid.quantity',
             'alias' => 'productqty',
             'label' => 'Quantity',
             'type' => 'number',
@@ -96,13 +105,13 @@ class TestDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.catalog.products.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.catalog.products.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
@@ -111,13 +120,13 @@ class TestDataGrid extends AbsGrid
     }
 
     public function prepareMassActions() {
-        $this->prepareMassAction([
+        $this->addMassAction([
             'type' => 'delete',
             'action' => route('admin.catalog.products.massdelete'),
             'method' => 'DELETE'
         ]);
 
-        $this->prepareMassAction([
+        $this->addMassAction([
             'type' => 'update',
             'action' => route('admin.catalog.products.massupdate'),
             'method' => 'PUT',
@@ -126,18 +135,5 @@ class TestDataGrid extends AbsGrid
                 1 => false,
             ]
         ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

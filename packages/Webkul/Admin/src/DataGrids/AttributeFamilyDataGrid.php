@@ -17,15 +17,19 @@ class AttributeFamilyDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('attribute_families')->select('id')->addSelect($this->columns);
+        $queryBuilder = DB::table('attribute_families')->select('id')->addSelect('id', 'code', 'name');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'id',
+            'index' => 'id',
             'alias' => 'attributeFamilyId',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +39,7 @@ class AttributeFamilyDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'code',
+            'index' => 'code',
             'alias' => 'attributeFamilyCode',
             'label' => 'Code',
             'type' => 'string',
@@ -45,7 +49,7 @@ class AttributeFamilyDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'name',
+            'index' => 'name',
             'alias' => 'attributeFamilyName',
             'label' => 'Name',
             'type' => 'string',
@@ -56,13 +60,13 @@ class AttributeFamilyDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.catalog.families.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.catalog.families.delete',
             // 'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
@@ -86,18 +90,5 @@ class AttributeFamilyDataGrid extends AbsGrid
         //         1 => false,
         //     ]
         // ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

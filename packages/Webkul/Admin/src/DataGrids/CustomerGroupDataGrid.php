@@ -17,9 +17,13 @@ class CustomerGroupDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('customer_groups')->select('id')->addSelect($this->columns);
+        $queryBuilder = DB::table('customer_groups')->addSelect('id', 'name');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id';
     }
 
     public function addColumns()
@@ -47,13 +51,13 @@ class CustomerGroupDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.customer.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.customer.delete',
             'icon' => 'icon trash-icon'
@@ -76,18 +80,5 @@ class CustomerGroupDataGrid extends AbsGrid
         //         1 => false,
         //     ]
         // ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

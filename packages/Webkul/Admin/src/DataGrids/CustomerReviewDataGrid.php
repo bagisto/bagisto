@@ -17,15 +17,19 @@ class CustomerReviewDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('product_reviews as pr')->select('pr.id')->addSelect($this->columns)->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');
+        $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id', 'pr.title', 'pr.comment', 'pg.name', 'pr.status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id';
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'pr.id',
+            'index' => 'pr.id',
             'alias' => 'reviewId',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +39,7 @@ class CustomerReviewDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'pr.title',
+            'index' => 'pr.title',
             'alias' => 'reviewTitle',
             'label' => 'Title',
             'type' => 'string',
@@ -45,7 +49,7 @@ class CustomerReviewDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'pr.comment',
+            'index' => 'pr.comment',
             'alias' => 'reviewComment',
             'label' => 'Comment',
             'type' => 'string',
@@ -55,7 +59,7 @@ class CustomerReviewDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'pg.name',
+            'index' => 'pg.name',
             'alias' => 'productName',
             'label' => 'Product',
             'type' => 'string',
@@ -65,7 +69,7 @@ class CustomerReviewDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'pr.status',
+            'index' => 'pr.status',
             'alias' => 'reviewStatus',
             'label' => 'Status',
             'type' => 'boolean',
@@ -76,13 +80,13 @@ class CustomerReviewDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.customer.review.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.customer.review.delete',
             'icon' => 'icon trash-icon'
@@ -90,13 +94,13 @@ class CustomerReviewDataGrid extends AbsGrid
     }
 
     public function prepareMassActions() {
-        $this->prepareMassAction([
+        $this->addMassAction([
             'type' => 'delete',
             'action' => route('admin.catalog.products.massdelete'),
             'method' => 'DELETE'
         ]);
 
-        $this->prepareMassAction([
+        $this->addMassAction([
             'type' => 'update',
             'action' => route('admin.catalog.products.massupdate'),
             'method' => 'PUT',
@@ -105,18 +109,5 @@ class CustomerReviewDataGrid extends AbsGrid
                 1 => false,
             ]
         ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

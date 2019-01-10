@@ -17,9 +17,13 @@ class CustomerDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('customers as cus')->select('cus.id')->addSelect($this->columns)->leftJoin('customer_groups as cg', 'cus.customer_group_id', '=', 'cg.id');
+        $queryBuilder = DB::table('customers as cus')->addSelect('cus.id', 'cus.first_name', 'cus.email', 'cg.name')->leftJoin('customer_groups as cg', 'cus.customer_group_id', '=', 'cg.id');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()
@@ -67,13 +71,13 @@ class CustomerDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.customer.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.customer.delete',
             'icon' => 'icon trash-icon'
@@ -96,18 +100,5 @@ class CustomerDataGrid extends AbsGrid
         //         1 => false,
         //     ]
         // ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

@@ -17,15 +17,19 @@ class CategoryDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('categories as cat')->select('cat.id')->addSelect($this->columns)->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id');
+        $queryBuilder = DB::table('categories as cat')->select('cat.id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale')->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'cat.id',
+            'index' => 'cat.id',
             'alias' => 'catId',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +39,7 @@ class CategoryDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'ct.name',
+            'index' => 'ct.name',
             'alias' => 'catName',
             'label' => 'Name',
             'type' => 'string',
@@ -45,7 +49,7 @@ class CategoryDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'cat.position',
+            'index' => 'cat.position',
             'alias' => 'catPosition',
             'label' => 'Position',
             'type' => 'string',
@@ -55,7 +59,7 @@ class CategoryDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'cat.status',
+            'index' => 'cat.status',
             'alias' => 'catStatus',
             'label' => 'Type',
             'type' => 'boolean',
@@ -65,7 +69,7 @@ class CategoryDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'ct.locale',
+            'index' => 'ct.locale',
             'alias' => 'catLocale',
             'label' => 'Locale',
             'type' => 'boolean',
@@ -76,13 +80,13 @@ class CategoryDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.catalog.products.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.catalog.products.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
@@ -106,18 +110,5 @@ class CategoryDataGrid extends AbsGrid
         //         1 => false,
         //     ]
         // ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

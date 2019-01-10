@@ -17,15 +17,19 @@ class SliderDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('sliders as sl')->select('sl.id')->addSelect($this->columns)->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id');
+        $queryBuilder = DB::table('sliders as sl')->addSelect('sl.id', 'sl.title', 'ch.name')->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id';
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'sl.id',
+            'index' => 'sl.id',
             'alias' => 'sliderId',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +39,7 @@ class SliderDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'sl.title',
+            'index' => 'sl.title',
             'alias' => 'sliderTitle',
             'label' => 'Tile',
             'type' => 'string',
@@ -45,7 +49,7 @@ class SliderDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'ch.name',
+            'index' => 'ch.name',
             'alias' => 'channelName',
             'label' => 'Channel Name',
             'type' => 'string',
@@ -56,13 +60,13 @@ class SliderDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.sliders.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.sliders.delete',
             'icon' => 'icon trash-icon'
@@ -85,18 +89,5 @@ class SliderDataGrid extends AbsGrid
         //         1 => false,
         //     ]
         // ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

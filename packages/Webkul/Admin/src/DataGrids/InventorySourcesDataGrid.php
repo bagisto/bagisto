@@ -17,15 +17,19 @@ class InventorySourcesDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('inventory_sources')->select('id')->addSelect($this->columns);
+        $queryBuilder = DB::table('inventory_sources')->addSelect('id', 'code', 'name', 'priority', 'status');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id';
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'id',
+            'index' => 'id',
             'alias' => 'invId',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +39,7 @@ class InventorySourcesDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'code',
+            'index' => 'code',
             'alias' => 'invCode',
             'label' => 'Code',
             'type' => 'string',
@@ -45,7 +49,7 @@ class InventorySourcesDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'name',
+            'index' => 'name',
             'alias' => 'invName',
             'label' => 'Name',
             'type' => 'string',
@@ -55,7 +59,7 @@ class InventorySourcesDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'priority',
+            'index' => 'priority',
             'alias' => 'invPriority',
             'label' => 'Priority',
             'type' => 'string',
@@ -65,7 +69,7 @@ class InventorySourcesDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'status',
+            'index' => 'status',
             'alias' => 'invStatus',
             'label' => 'Status',
             'type' => 'boolean',
@@ -76,13 +80,13 @@ class InventorySourcesDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.inventory_sources.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.inventory_sources.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
@@ -106,18 +110,5 @@ class InventorySourcesDataGrid extends AbsGrid
         //         1 => false,
         //     ]
         // ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

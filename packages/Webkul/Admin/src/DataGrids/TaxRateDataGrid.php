@@ -17,15 +17,19 @@ class TaxRateDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('tax_rates as tr')->select('tr.id')->addSelect($this->columns);
+        $queryBuilder = DB::table('tax_rates')->addSelect('id', 'identifier', 'state', 'country', 'tax_rate');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id';
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'tr.id',
+            'index' => 'id',
             'alias' => 'taxRateId',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +39,7 @@ class TaxRateDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'tr.identifier',
+            'index' => 'identifier',
             'alias' => 'taxRateName',
             'label' => 'Identifier',
             'type' => 'string',
@@ -45,7 +49,7 @@ class TaxRateDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'tr.state',
+            'index' => 'state',
             'alias' => 'taxRateState',
             'label' => 'State',
             'type' => 'string',
@@ -55,7 +59,7 @@ class TaxRateDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'tr.country',
+            'index' => 'country',
             'alias' => 'taxRateCountry',
             'label' => 'Country',
             'type' => 'string',
@@ -65,7 +69,7 @@ class TaxRateDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'tr.tax_rate',
+            'index' => 'tax_rate',
             'alias' => 'taxRate',
             'label' => 'Rate',
             'type' => 'string',
@@ -76,13 +80,13 @@ class TaxRateDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.tax-categories.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.tax-categories.delete',
             'icon' => 'icon trash-icon'
@@ -105,18 +109,5 @@ class TaxRateDataGrid extends AbsGrid
         //         1 => false,
         //     ]
         // ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

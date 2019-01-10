@@ -17,15 +17,19 @@ class NewsLetterDataGrid extends AbsGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('subscribers_list')->select('id')->addSelect($this->columns);
+        $queryBuilder = DB::table('subscribers_list')->addSelect('id', 'is_subscribed', 'email');
 
         $this->setQueryBuilder($queryBuilder);
+    }
+
+    public function setIndex() {
+        $this->index = 'id';
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'id',
+            'index' => 'id',
             'alias' => 'subsId',
             'label' => 'ID',
             'type' => 'number',
@@ -35,7 +39,7 @@ class NewsLetterDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'is_subscribed',
+            'index' => 'is_subscribed',
             'alias' => 'subsCode',
             'label' => 'Subscribed',
             'type' => 'string',
@@ -45,7 +49,7 @@ class NewsLetterDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'email',
+            'index' => 'email',
             'alias' => 'subsEmail',
             'label' => 'Email',
             'type' => 'string',
@@ -56,13 +60,13 @@ class NewsLetterDataGrid extends AbsGrid
     }
 
     public function prepareActions() {
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.customers.subscribers.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        $this->prepareAction([
+        $this->addAction([
             'type' => 'Delete',
             'route' => 'admin.customers.subscribers.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
@@ -86,18 +90,5 @@ class NewsLetterDataGrid extends AbsGrid
         //         1 => false,
         //     ]
         // ]);
-    }
-
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }
