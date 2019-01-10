@@ -133,6 +133,11 @@ class OrderDataGrid
                     'alias' => 'createdat',
                     'type' => 'datetime',
                     'label' => 'Order Date',
+                ], [
+                    'column' => 'CONCAT(or.customer_first_name, " ", or.customer_last_name)',
+                    'alias' => 'oafirstname',
+                    'type' => 'string',
+                    'label' => 'Billed To',
                 ],
             ],
 

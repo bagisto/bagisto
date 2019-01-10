@@ -36,9 +36,9 @@ class ExportController extends Controller
 
         $file_name = class_basename($results);
 
-        if(request()->all()['format'] == 'csv') {
+        if (request()->all()['format'] == 'csv') {
             return Excel::download(new DataGridExport($results), $file_name.'.csv');
-        }else {
+        } else {
             return Excel::download(new DataGridExport($results), $file_name.'.xlsx');
         }
     }

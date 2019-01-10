@@ -292,6 +292,7 @@ return [
         'description' => 'Description',
         'specification' => 'Specification',
         'total-reviews' => ':total Reviews',
+        'total-rating' => ':total_rating Ratings & :total_reviews Reviews',
         'by' => 'By :name',
         'up-sell-title' => 'We found other products you might like!',
         'reviews-title' => 'Ratings & Reviews',

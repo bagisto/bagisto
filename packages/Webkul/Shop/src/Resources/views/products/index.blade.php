@@ -94,7 +94,7 @@
             function sortFilter() {
                 var className = document.getElementById(this.id).className;
 
-                if(className === 'icon sort-icon') {
+                if (className === 'icon sort-icon') {
                     sort.classList.remove("sort-icon");
                     sort.classList.add("icon-menu-close-adj");
 

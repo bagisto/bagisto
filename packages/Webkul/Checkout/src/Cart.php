@@ -152,8 +152,8 @@ class Cart {
         $this->putCart($result);
 
         if($result) {
-            if($this->createItem($id, $data))
-                return true;
+            if($item = $this->createItem($id, $data))
+                return $item;
             else
                 return false;
         } else {
@@ -284,26 +284,17 @@ class Cart {
             'weight' => $weight,
             'total_weight' => $weight * $data['quantity'],
             'base_total_weight' => $weight * $data['quantity'],
-            'additional' => $additional
+            'additional' => $additional,
+            'type' => $product['type'],
+            'product_id' => $product['id'],
+            'additional' => $data,
         ];
 
-        if($configurable){
-            $parentData['type'] = $product['type'];
-            $parentData['product_id'] = $product['id'];
-            $parentData['additional'] = $data;
-        } else {
-            $parentData['type'] = $product['type'];
-            $parentData['product_id'] = $product['id'];
-            $parentData['additional'] = $data;
-        }
-
         if($configurable) {
-            $additional = $this->getProductAttributeOptionDetails($parentProduct);
+            $attributeDetails = $this->getProductAttributeOptionDetails($parentProduct);
+            unset($attributeDetails['html']);
 
-            unset($additional['html']);
-
-            $additional['request'] = $data;
-            $additional['variant_id'] = $data['selected_configurable_option'];
+            $parentData['additional'] = array_merge($parentData['additional'], $attributeDetails);
 
             $childData['product_id'] = (int)$data['selected_configurable_option'];
             $childData['sku'] = $parentProduct->sku;
@@ -319,10 +310,7 @@ class Cart {
             $this->cartItem->create($childData);
         }
 
-        if($result)
-            return true;
-        else
-            return false;
+        return $result;
     }
 
     /**
@@ -336,6 +324,12 @@ class Cart {
     {
         $item = $this->cartItem->findOneByField('id', $itemId);
 
+        if (isset($data['product'])) {
+            $additional = $data;
+        } else {
+            $additional = $item->additional;
+        }
+
         if($item->type == 'configurable') {
             $product = $this->product->findOneByField('id', $item->child->product_id);
 
@@ -344,6 +338,11 @@ class Cart {
 
                 return false;
             }
+
+            $attributeDetails = $this->getProductAttributeOptionDetails($product);
+            unset($attributeDetails['html']);
+
+            $additional = array_merge($additional, $attributeDetails);
         } else {
             $product = $this->product->findOneByField('id', $item->product_id);
 
@@ -361,7 +360,8 @@ class Cart {
             'total' => core()->convertPrice($item->price * ($quantity)),
             'base_total' => $item->price * ($quantity),
             'total_weight' => $item->weight * ($quantity),
-            'base_total_weight' => $item->weight * ($quantity)
+            'base_total_weight' => $item->weight * ($quantity),
+            'additional' => $additional
         ]);
 
         $this->collectTotals();
@@ -369,7 +369,7 @@ class Cart {
         if($result) {
             session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
 
-            return true;
+            return $item;
         } else {
             session()->flash('warning', trans('shop::app.checkout.cart.quantity.error'));
 
@@ -793,11 +793,13 @@ class Cart {
                         $item->update(['name' => $item->product->name]);
 
                     } else if($item->child->product->price != $item->price) {
+                        $price = (float) $item->custom_price ? $item->custom_price : $item->child->product->price;
+
                         $item->update([
-                            'price' => $item->child->product->price,
-                            'base_price' => $item->child->product->price,
-                            'total' => core()->convertPrice($item->child->product->price * ($item->quantity)),
-                            'base_total' => $item->child->product->price * ($item->quantity),
+                            'price' => $price,
+                            'base_price' => $price,
+                            'total' => core()->convertPrice($price * ($item->quantity)),
+                            'base_total' => $price * ($item->quantity),
                         ]);
                     }
 
@@ -809,11 +811,13 @@ class Cart {
                         $item->update(['name' => $item->product->name]);
 
                     } else if($item->product->price != $item->price) {
+                        $price = (float) $item->custom_price ? $item->custom_price : $item->product->price;
+
                         $item->update([
-                            'price' => $item->product->price,
-                            'base_price' => $item->product->price,
-                            'total' => core()->convertPrice($item->product->price * ($item->quantity)),
-                            'base_total' => $item->product->price * ($item->quantity),
+                            'price' => $price,
+                            'base_price' => $price,
+                            'total' => core()->convertPrice($price * ($item->quantity)),
+                            'base_total' => $price * ($item->quantity),
                         ]);
                     }
                 }

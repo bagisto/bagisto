@@ -51,9 +51,10 @@
                         <span class="control-error" v-if="errors.has('gender')">@{{ errors.first('gender') }}</span>
                     </div>
 
-                    <div class="control-group">
+                    <div class="control-group"  :class="[errors.has('date_of_birth') ? 'has-error' : '']">
                         <label for="date_of_birth">{{ __('shop::app.customer.account.profile.dob') }}</label>
-                        <input type="date" class="control" name="date_of_birth" value="{{ old('date_of_birth') ?? $customer->date_of_birth }}">
+                        <input type="date" class="control" name="date_of_birth" value="{{ old('date_of_birth') ?? $customer->date_of_birth }}" v-validate="" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.dob') }}&quot;">
+                        <span class="control-error" v-if="errors.has('date_of_birth')">@{{ errors.first('date_of_birth') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
