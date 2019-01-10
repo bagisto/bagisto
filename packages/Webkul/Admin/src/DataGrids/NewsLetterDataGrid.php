@@ -2,140 +2,102 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * orderDataGrid
+ * News Letter Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class NewsLetterDataGrid
+class NewsLetterDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Data Grid implementation for orders
-     */
-    public function newsLetterDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('subscribers_list')->select('id')->addSelect($this->columns);
 
-            return DataGrid::make([
-            'name' => 'Subscriberslist',
-            'table' => 'subscribers_list as sublist',
-            'select' => 'sublist.id',
-            'perpage' => 10,
-            'aliased' => false,
-            //True in case of joins else aliasing key required on all cases
+        $this->setQueryBuilder($queryBuilder);
+    }
 
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-            ],
-
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.customers.subscribers.edit',
-                    // 'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
-                    'type' => 'Delete',
-                    'route' => 'admin.customers.subscribers.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
-
-            'join' => [],
-
-            //use aliasing on secodary columns if join is performed
-            'columns' => [
-                [
-                    'name' => 'sublist.id',
-                    'alias' => 'subid',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true
-                ], [
-                    'name' => 'sublist.is_subscribed',
-                    'alias' => 'issubs',
-                    'type' => 'boolean',
-                    'label' => 'Subscribed',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 0)
-                            return "False";
-                        else
-                            return "True";
-                    },
-                ], [
-                    'name' => 'sublist.email',
-                    'alias' => 'subsemail',
-                    'type' => 'string',
-                    'label' => 'Email',
-                    'sortable' => true
-                ]
-            ],
-
-            'filterable' => [
-                [
-                    'column' => 'sublist.id',
-                    'alias' => 'subid',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'sublist.is_subscribed',
-                    'alias' => 'issubs',
-                    'type' => 'boolean',
-                    'label' => 'Subscribed',
-                ], [
-                    'column' => 'sublist.email',
-                    'alias' => 'subsemail',
-                    'type' => 'string',
-                    'label' => 'Email',
-                ]
-            ],
-            //don't use aliasing in case of searchables
-
-            'searchable' => [
-                [
-                    'column' => 'sublist.id',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'sublist.is_subscribed',
-                    'type' => 'string',
-                    'label' => 'Subscribed',
-                ], [
-                    'column' => 'sublist.email',
-                    'type' => 'string',
-                    'label' => 'Email',
-                ]
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
+    public function addColumns()
+    {
+        $this->addColumn([
+            'column' => 'id',
+            'alias' => 'subsId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
         ]);
+
+        $this->addColumn([
+            'column' => 'is_subscribed',
+            'alias' => 'subsCode',
+            'label' => 'Subscribed',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'column' => 'email',
+            'alias' => 'subsEmail',
+            'label' => 'Email',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->prepareAction([
+            'type' => 'Edit',
+            'route' => 'admin.customers.subscribers.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->prepareAction([
+            'type' => 'Delete',
+            'route' => 'admin.customers.subscribers.delete',
+            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.products.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.products.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
     }
 
     public function render()
     {
-        return $this->newsLetterDataGrid()->render();
+        $this->addColumns();
+
+        $this->prepareActions();
+
+        $this->prepareMassActions();
+
+        $this->prepareQueryBuilder();
+
+        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

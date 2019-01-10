@@ -2,169 +2,122 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * Inventory Sources DataGrid
+ * Product Data Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class InventorySourcesDataGrid
+class InventorySourcesDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Data Grid implementation for Inventory Sources
-     */
-    public function createInventorySourcesDataGrid()
+    public function prepareQueryBuilder()
     {
-        return DataGrid::make([
-            'name' => 'Inventory Sources',
-            'table' => 'inventory_sources',
-            'select' => 'id',
-            'perpage' => 10,
-            'aliased' => false, //use this with false as default and true in case of joins
+        $queryBuilder = DB::table('inventory_sources')->select('id')->addSelect($this->columns);
 
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-            ],
+        $this->setQueryBuilder($queryBuilder);
+    }
 
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.inventory_sources.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
-                    'type' => 'Delete',
-                    'route' => 'admin.inventory_sources.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
-
-            'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
-            ],
-
-            //use aliasing on secodary columns if join is performed
-            'columns' => [
-
-                [
-                    'name' => 'id',
-                    'alias' => 'inventoryID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'code',
-                    'alias' => 'inventoryCode',
-                    'type' => 'string',
-                    'label' => 'Code',
-                    'sortable' => true,
-                ], [
-                    'name' => 'name',
-                    'alias' => 'inventoryName',
-                    'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
-                ], [
-                    'name' => 'priority',
-                    'alias' => 'inventoryPriority',
-                    'type' => 'string',
-                    'label' => 'Priority',
-                    'sortable' => true,
-                ], [
-                    'name' => 'status',
-                    'alias' => 'inventoryStatus',
-                    'type' => 'boolean',
-                    'label' => 'Status',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 0)
-                            return "In Active";
-                        else
-                            return "Active";
-                    },
-                ],
-
-            ],
-
-            //don't use aliasing in case of filters
-
-            'filterable' => [
-                [
-                    'column' => 'id',
-                    'alias' => 'inventoryID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'code',
-                    'alias' => 'inventoryCode',
-                    'type' => 'string',
-                    'label' => 'Code',
-                ], [
-                    'column' => 'name',
-                    'alias' => 'inventoryName',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ], [
-                    'name' => 'status',
-                    'alias' => 'inventoryStatus',
-                    'type' => 'boolean',
-                    'label' => 'Status',
-                ],
-            ],
-
-            //don't use aliasing in case of searchables
-
-            'searchable' => [
-                [
-                    'column' => 'name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ], [
-                    'column' => 'code',
-                    'type' => 'string',
-                    'label' => 'Code',
-                ], [
-                    'column' => 'name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ],
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
-
+    public function addColumns()
+    {
+        $this->addColumn([
+            'column' => 'id',
+            'alias' => 'invId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
         ]);
+
+        $this->addColumn([
+            'column' => 'code',
+            'alias' => 'invCode',
+            'label' => 'Code',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'column' => 'name',
+            'alias' => 'invName',
+            'label' => 'Name',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'column' => 'priority',
+            'alias' => 'invPriority',
+            'label' => 'Priority',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'column' => 'status',
+            'alias' => 'invStatus',
+            'label' => 'Status',
+            'type' => 'boolean',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->prepareAction([
+            'type' => 'Edit',
+            'route' => 'admin.inventory_sources.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->prepareAction([
+            'type' => 'Delete',
+            'route' => 'admin.inventory_sources.delete',
+            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.products.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.products.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
     }
 
     public function render()
     {
-        return $this->createInventorySourcesDataGrid()->render();
+        $this->addColumns();
+
+        $this->prepareActions();
+
+        $this->prepareMassActions();
+
+        $this->prepareQueryBuilder();
+
+        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

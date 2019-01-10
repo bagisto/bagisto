@@ -2,172 +2,121 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * Tax Rates DataGrid
+ * Tax Rate Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class TaxRateDataGrid
+class TaxRateDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Tax Category Data Grid implementation.
-     */
-    public function createTaxRateDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('tax_rates as tr')->select('tr.id')->addSelect($this->columns);
 
-        return DataGrid::make([
-            'name' => 'Tax Rates',
-            'table' => 'tax_rates as tr',
-            'select' => 'tr.id',
-            'perpage' => 10,
-            'aliased' => true, //use this with false as default and true in case of joins
-
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-                // [
-                //     'route' => route('admin.datagrid.index'),
-                //     'method' => 'POST',
-                //     'label' => 'View Grid',
-                //     'type' => 'select',
-                //     'options' =>[
-                //         1 => 'Edit',
-                //         2 => 'Set',
-                //         3 => 'Change Status'
-                //     ]
-                // ],
-            ],
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.tax-rates.store',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ],
-                [
-                    'type' => 'Delete',
-                    'route' => 'admin.tax-rates.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
-            'join' => [],
-
-            //use aliasing on secodary columns if join is performed
-            'columns' => [
-                [
-                    'name' => 'tr.id',
-                    'alias' => 'id',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'tr.identifier',
-                    'alias' => 'identifier',
-                    'type' => 'string',
-                    'label' => 'Identifier',
-                    'sortable' => true,
-                    // 'wrapper' => function ($value, $object) {
-                    //     return '<a class="color-red">' . $object->identifier . '</a>';
-                    // },
-                ], [
-                    'name' => 'tr.state',
-                    'alias' => 'state',
-                    'type' => 'string',
-                    'label' => 'State',
-                    'sortable' => true,
-                ], [
-                    'name' => 'tr.country',
-                    'alias' => 'country',
-                    'type' => 'string',
-                    'label' => 'Country',
-                    'sortable' => true,
-                ], [
-                    'name' => 'tr.tax_rate',
-                    'alias' => 'taxrate',
-                    'type' => 'number',
-                    'label' => 'Tax Rate',
-                    'sortable' => true,
-                ],
-            ],
-            //don't use aliasing in case of filters
-            'filterable' => [
-                [
-                    'column' => 'tr.id',
-                    'alias' => 'ID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'tr.identifier',
-                    'alias' => 'identifier',
-                    'type' => 'string',
-                    'label' => 'Identifier',
-                ], [
-                    'column' => 'tr.state',
-                    'alias' => 'state',
-                    'type' => 'string',
-                    'label' => 'State',
-                ], [
-                    'column' => 'tr.country',
-                    'alias' => 'country',
-                    'type' => 'string',
-                    'label' => 'Country',
-                ], [
-                    'column' => 'tr.tax_rate',
-                    'alias' => 'taxrate',
-                    'type' => 'number',
-                    'label' => 'Tax Rate',
-                ],
-            ],
-            //don't use aliasing in case of searchables
-            'searchable' => [
-                [
-                    'column' => 'tr.identifier',
-                    'type' => 'string',
-                    'label' => 'Identifier',
-                ], [
-                    'column' => 'tr.state',
-                    'type' => 'string',
-                    'label' => 'State',
-                ], [
-                    'column' => 'tr.country',
-                    'type' => 'string',
-                    'label' => 'Country',
-                ], [
-                    'column' => 'tr.tax_rate',
-                    'type' => 'number',
-                    'label' => 'Tax Rate',
-                ],
-            ],
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
-
-        ]);
-
+        $this->setQueryBuilder($queryBuilder);
     }
 
-    public function render() {
+    public function addColumns()
+    {
+        $this->addColumn([
+            'column' => 'tr.id',
+            'alias' => 'taxRateId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
 
-        return $this->createTaxRateDataGrid()->render();
+        $this->addColumn([
+            'column' => 'tr.identifier',
+            'alias' => 'taxRateName',
+            'label' => 'Identifier',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
 
+        $this->addColumn([
+            'column' => 'tr.state',
+            'alias' => 'taxRateState',
+            'label' => 'State',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'column' => 'tr.country',
+            'alias' => 'taxRateCountry',
+            'label' => 'Country',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'column' => 'tr.tax_rate',
+            'alias' => 'taxRate',
+            'label' => 'Rate',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->prepareAction([
+            'type' => 'Edit',
+            'route' => 'admin.tax-categories.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->prepareAction([
+            'type' => 'Delete',
+            'route' => 'admin.tax-categories.delete',
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.products.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.products.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
+    }
+
+    public function render()
+    {
+        $this->addColumns();
+
+        $this->prepareActions();
+
+        $this->prepareMassActions();
+
+        $this->prepareQueryBuilder();
+
+        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

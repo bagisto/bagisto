@@ -91,7 +91,13 @@ abstract class AbsGrid
         if(count($p)) {
             $filteredOrSortedCollection = $this->sortOrFilterCollection($this->collection = $this->queryBuilder, $p);
 
-            return $filteredOrSortedCollection->get();
+            // return $filteredOrSortedCollection->get();
+
+            if (config()->has('datagrid.pagination')) {
+                return $filteredOrSortedCollection->paginate(config('datagrid.pagination'));
+            } else {
+                return $filteredOrSortedCollection->get();
+            }
         }
 
         if (config()->has('datagrid.pagination')) {

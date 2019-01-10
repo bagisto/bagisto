@@ -1,6 +1,10 @@
 <div class="table">
     <testgrid-filters></testgrid-filters>
 
+    @if(config('datagrid.pagination'))
+        @include('ui::testgrid.pagination', ['results' => $results['records']])
+    @endif
+
     @push('scripts')
         <script type="text/x-template" id="testgrid-filters">
             {{-- start filter here --}}
@@ -581,16 +585,28 @@
                         this.massActionsToggle = true;
 
                         if (this.allSelected) {
-                            for (currentData in this.gridCurrentData) {
-                                i = 0;
+                            if(this.gridCurrentData.hasOwnProperty("data")) {
+                                for (currentData in this.gridCurrentData.data) {
 
-                                for(currentId in this.gridCurrentData[currentData]) {
-                                    if(i==0)
-                                        this.dataIds.push(this.gridCurrentData[currentData][currentId]);
+                                    i = 0;
+                                    for(currentId in this.gridCurrentData.data[currentData]) {
+                                        if(i==0)
+                                            this.dataIds.push(this.gridCurrentData.data[currentData][currentId]);
 
-                                    i++;
+                                        i++;
+                                    }
                                 }
+                            } else {
+                                for (currentData in this.gridCurrentData) {
 
+                                    i = 0;
+                                    for(currentId in this.gridCurrentData[currentData]) {
+                                        if(i==0)
+                                            this.dataIds.push(this.gridCurrentData[currentData][currentId]);
+
+                                        i++;
+                                    }
+                                }
                             }
                         }
 

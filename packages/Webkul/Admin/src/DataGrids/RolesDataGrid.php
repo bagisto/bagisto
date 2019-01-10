@@ -2,137 +2,95 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * User Roles DataGrid
+ * News Letter Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class RolesDataGrid
+class RolesDataGrid extends AbsGrid
 {
-    /**
-     * The Data Grid implementation for Roles
-     */
-    public function createRolesDataGrid()
+    public $allColumns = [];
+
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('roles')->select('id')->addSelect($this->columns);
 
-            return DataGrid::make([
-            'name' => 'Roles',
-            'table' => 'roles',
-            'select' => 'id',
-            'perpage' => 10,
-            'aliased' => false, //use this with false as default and true in case of joins
+        $this->setQueryBuilder($queryBuilder);
+    }
 
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-            ],
-
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.roles.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ]
-            ],
-
-            'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
-            ],
-
-            //use aliasing on secodary columns if join is performed
-
-            'columns' => [
-                [
-                    'name' => 'id',
-                    'alias' => 'roleId',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'name',
-                    'alias' => 'roleName',
-                    'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
-                ], [
-                    'name' => 'permission_type',
-                    'alias' => 'rolePermissionType',
-                    'type' => 'string',
-                    'label' => 'Permission Type',
-                    'sortable' => true,
-                ],
-            ],
-
-            //don't use aliasing in case of filters
-
-            'filterable' => [
-                [
-                    'column' => 'id',
-                    'alias' => 'roleId',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'name',
-                    'alias' => 'roleName',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ], [
-                    'column' => 'permission_type',
-                    'alias' => 'rolePermissionType',
-                    'type' => 'string',
-                    'label' => 'Permission Type',
-                ],
-            ],
-
-            //don't use aliasing in case of searchables
-
-            'searchable' => [
-                [
-                    'column' => 'name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ], [
-                    'column' => 'permission_type',
-                    'type' => 'string',
-                    'label' => 'Permission Type',
-                ],
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
-
+    public function addColumns()
+    {
+        $this->addColumn([
+            'column' => 'id',
+            'alias' => 'roleId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
         ]);
 
+        $this->addColumn([
+            'column' => 'name',
+            'alias' => 'roleName',
+            'label' => 'Name',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'column' => 'permission_type',
+            'alias' => 'roleType',
+            'label' => 'Permission Type',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->prepareAction([
+            'type' => 'Edit',
+            'route' => 'admin.roles.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.products.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.products.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
     }
 
     public function render()
     {
-        return $this->createRolesDataGrid()->render();
+        $this->addColumns();
+
+        $this->prepareActions();
+
+        $this->prepareMassActions();
+
+        $this->prepareQueryBuilder();
+
+        return view('ui::testgrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions]);
     }
 }

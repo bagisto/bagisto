@@ -70,7 +70,7 @@ class TestDataGrid extends AbsGrid
             'label' => 'Status',
             'type' => 'boolean',
             'sortable' => true,
-            'searchable' => true,
+            'searchable' => false,
             'width' => '100px'
         ]);
 
@@ -80,7 +80,7 @@ class TestDataGrid extends AbsGrid
             'label' => 'Price',
             'type' => 'number',
             'sortable' => true,
-            'searchable' => true,
+            'searchable' => false,
             'width' => '100px'
         ]);
 
@@ -90,7 +90,7 @@ class TestDataGrid extends AbsGrid
             'label' => 'Quantity',
             'type' => 'number',
             'sortable' => true,
-            'searchable' => true,
+            'searchable' => false,
             'width' => '100px'
         ]);
     }
