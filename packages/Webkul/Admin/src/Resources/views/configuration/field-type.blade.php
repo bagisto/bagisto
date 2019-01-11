@@ -62,7 +62,7 @@
 
                 @if (isset($field['repository']))
                     @foreach($value as $option)
-                        <option value="{{  $option['name'] }}" {{ $option['name'] ==            $selectedOption ? 'selected' : ''}}
+                        <option value="{{  $option['name'] }}" {{ $option['name'] == $selectedOption ? 'selected' : ''}}
                         {{ $option['name'] }}
                         </option>
                     @endforeach
@@ -112,35 +112,19 @@
 
         @elseif ($field['type'] == 'country')
 
-            <select type="text" v-validate="'{{ $validations }}'" class="control" id="country" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]"  data-vv-as="&quot;{{ __('admin::app.customers.customers.country') }}&quot;" onchange="selectStates()">
-                <option value=""></option>
+            <?php
+                $countryCode = core()->getConfigData($name) ?? '';
+            ?>
 
-                <?php
-                    $selectedOption = core()->getConfigData($name) ?? '';
-                ?>
-
-                @foreach (core()->countries() as $country)
-
-                    <option value="{{ $country->code }}" {{ $country->code == $selectedOption ? 'selected' : ''}}>
-                        {{ $country->name }}
-                    </option>
-
-                @endforeach
-
-            </select>
+            <country code = {{ $countryCode }}></country>
 
         @elseif ($field['type'] == 'state')
 
             <?php
-                $selectedOption = core()->getConfigData($name) ?? '';
+                $stateCode = core()->getConfigData($name) ?? '';
             ?>
 
-            <select type="text" class="control" id="state" onchange="stateCode()">
-            </select>
-
-            <input type="text" class="control" id="othstate"  value="{{ $selectedOption }}"  onkeyup="stateCode()">
-
-            <input type="hidden" v-validate="'{{ $validations }}'" class="control" id="stateValue" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]"  data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;" value="{{ $selectedOption }}">
+            <state code = {{ $stateCode }}></state>
 
         @endif
 
@@ -151,48 +135,105 @@
 
 @push('scripts')
 
-<script>
-    $('#othstate').show();
-    $('#state').hide();
+<script type="text/x-template" id="country-template">
 
-    var countryStates = <?php echo json_encode(core()->groupedStatesByCountries()) ;?>;
+    <div>
+        <select type="text" v-validate="'required'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" v-model="country" data-vv-as="&quot;{{ __('admin::app.customers.customers.country') }}&quot;" @change="someHandler">
+            <option value=""></option>
 
-    if (document.getElementById("othstate")) {
-        var stateName = document.getElementById("othstate").value;
-        selectStates();
-    }
+            @foreach (core()->countries() as $country)
 
-    function selectStates() {
-        var countryId = document.getElementById("country").value;
+                <option value="{{ $country->code }}">{{ $country->name }}</option>
 
-        for (var key in countryStates) {
-            if (countryStates[countryId]) {
-                $('#othstate').hide();
-                $('#state').show();
-
-                if (key == countryId){
-                    $('#state').empty();
-                    for (state in countryStates[key]) {
-                        $("#state").append('<option value="'+countryStates[key][state]['code']+'">'+countryStates[key][state]['default_name']+'</option>');
-
-                        if (stateName) {
-                            $("#state > [value=" + stateName + "]").attr("selected", "true");
-                        }
-                    }
-                }
-            } else {
-                $('#othstate').show();
-                $('#state').hide();
-            }
-        }
-    }
-
-    function stateCode() {
-        document.getElementById("stateValue").value = document.getElementById(event.target.id).value;
-    }
+            @endforeach
+        </select>
+    </div>
 
 </script>
 
+<script>
+    Vue.component('country', {
+
+        template: '#country-template',
+
+        inject: ['$validator'],
+
+        props: ['code'],
+
+        data: () => ({
+            country: "",
+        }),
+
+        mounted() {
+            this.country = this.code;
+            this.someHandler()
+        },
+
+        methods: {
+            someHandler() {
+                this.$root.$emit('sendCountryCode', this.country)
+            },
+        }
+    });
+</script>
+
+<script type="text/x-template" id="state-template">
+
+    <div>
+        <input type="text" v-validate="'required'" v-if="!haveStates()" class="control" v-model="state" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;"/>
+
+        <select v-validate="'required'" v-if="haveStates()" class="control" v-model="state" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;" >
+
+            <option value="">{{ __('admin::app.customers.customers.select-state') }}</option>
+
+            <option v-for='(state, index) in countryStates[country]' :value="state.code">
+                @{{ state.default_name }}
+            </option>
+
+        </select>
+
+    </div>
+
+</script>
+
+<script>
+    Vue.component('state', {
+
+        template: '#state-template',
+
+        inject: ['$validator'],
+
+        props: ['code'],
+
+        data: () => ({
+
+            state: "",
+
+            country: "",
+
+            countryStates: @json(core()->groupedStatesByCountries())
+        }),
+
+        mounted() {
+            this.state = this.code
+        },
+
+        methods: {
+            haveStates() {
+                this.$root.$on('sendCountryCode', (country) => {
+                    this.country = country;
+                })
+
+                if(this.countryStates[this.country] && this.countryStates[this.country].length)
+                    return true;
+
+                return false;
+            },
+        }
+    });
+</script>
+
 @endpush
+
 
 
