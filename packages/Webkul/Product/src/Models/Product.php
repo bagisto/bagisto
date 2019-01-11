@@ -163,10 +163,10 @@ class Product extends Model
      *
      * @return bool
      */
-    public function inventory_source_qty($inventorySource)
+    public function inventory_source_qty($inventorySourceId)
     {
         return $this->inventories()
-                ->where('inventory_source_id', $inventorySource->id)
+                ->where('inventory_source_id', $inventorySourceId)
                 ->sum('qty');
     }
 
