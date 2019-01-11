@@ -174,16 +174,18 @@ class ReviewController extends Controller
                 $review = $this->productReview->findOneByField('id', $value);
 
                 try {
-                    if($data['massaction-type'] == 1 && $data['update-options'] == 1 && $data['selected-option-text'] == 'Approve') {
-                        Event::fire('customer.review.update.before', $value);
+                    if($data['massaction-type'] == 'update') {
+                        if($data['update-options'] == 1) {
+                            Event::fire('customer.review.update.before', $value);
 
-                        $review->update(['status' => 'approved']);
+                            $review->update(['status' => 'approved']);
 
-                        Event::fire('customer.review.update.after', $review);
-                    } else if($data['massaction-type'] == 1 && $data['update-options'] == 0 && $data['selected-option-text'] == 'Disapprove') {
-                        $review->update(['status' => 'pending']);
-                    } else {
-                        continue;
+                            Event::fire('customer.review.update.after', $review);
+                        } else if($data['update-options'] == 0) {
+                            $review->update(['status' => 'pending']);
+                        } else {
+                            continue;
+                        }
                     }
                 } catch(\Exception $e) {
                     $suppressFlash = true;

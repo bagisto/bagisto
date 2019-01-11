@@ -12,6 +12,7 @@
                 <div class="filter-row-one" id="testgrid-filters">
                     <div class="search-filter">
                         <input type="search" id="search-field" class="control" placeholder="Search Here..." v-model="searchValue" />
+
                         <div class="icon-wrapper">
                             <span class="icon search-icon search-btn" v-on:click="searchCollection(searchValue)"></span>
                         </div>
@@ -171,7 +172,7 @@
 
                                             <div class="control-group" style="margin-left: 10px;" v-if="massActionType == 'update'">
                                                 <select class="control" v-model="massActionUpdateValue" name="update-options">
-                                                    <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ massActionValue }}</option>
+                                                    <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ id }}</option>
                                                 </select>
                                             </div>
 
