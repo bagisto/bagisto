@@ -2,7 +2,7 @@
     <testgrid-filters></testgrid-filters>
 
     @if(config('datagrid.pagination'))
-        @include('ui::testgrid.pagination', ['results' => $results['records']])
+        @include('ui::datagrid.pagination', ['results' => $results['records']])
     @endif
 
     @push('scripts')
@@ -185,13 +185,15 @@
 
                     <thead v-if="massActionsToggle == false">
                         <tr>
-                            <th class="grid_head" id="mastercheckbox" style="width: 50px;">
-                                <span class="checkbox">
-                                    <input type="checkbox" v-model="allSelected" v-on:change="selectAll">
+                            @if($results['enableMassActions'])
+                                <th class="grid_head" id="mastercheckbox" style="width: 50px;">
+                                    <span class="checkbox">
+                                        <input type="checkbox" v-model="allSelected" v-on:change="selectAll">
 
-                                    <label class="checkbox-view" for="checkbox"></label>
-                                </span>
-                            </th>
+                                        <label class="checkbox-view" for="checkbox"></label>
+                                    </span>
+                                </th>
+                            @endif
 
                             @foreach($results['columns'] as $key => $column)
                                 <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['alias'] }}')">
@@ -205,7 +207,7 @@
                         </tr>
                     </thead>
 
-                    @include('ui::datagrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns']])
+                    @include('ui::datagrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns'],'enableMassAction' => $results['enableMassActions']])
                 </table>
             </div>
         </script>

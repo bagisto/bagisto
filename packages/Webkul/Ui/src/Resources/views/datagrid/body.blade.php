@@ -1,29 +1,31 @@
 <tbody>
     @foreach($records as $key => $record)
         <tr>
-            <td>
-                <span class="checkbox">
-                    <input type="checkbox" v-model="dataIds" @change="select" value="{{ $record->{$index} }}">
+            @if($enableMassAction)
+                <td>
+                    <span class="checkbox">
+                        <input type="checkbox" v-model="dataIds" @change="select" value="{{ $record->{$index} }}">
 
-                    <label class="checkbox-view" for="checkbox1"></label>
-                </span>
-            </td>
+                        <label class="checkbox-view" for="checkbox"></label>
+                    </span>
+                </td>
+            @endif
 
             @foreach($columns as $column)
                 @php
-                    $tableIndex = explode('.', $column['index']);
+                    $columnIndex = explode('.', $column['index']);
 
-                    $tableIndex = end($tableIndex);
+                    $columnIndex = end($columnIndex);
                 @endphp
 
                 @if(isset($column['wrapper']))
                     @if(isset($column['closure']) && $column['closure'] == true)
-                        <td>{!! $column['wrapper']($record->{$tableIndex}) !!}</td>
+                        <td>{!! $column['wrapper']($record->{$columnIndex}) !!}</td>
                     @else
-                        <td>{{ $column['wrapper']($record->{$tableIndex}) }}</td>
+                        <td>{{ $column['wrapper']($record->{$columnIndex}) }}</td>
                     @endif
                 @else
-                    <td>{{ $record->{$tableIndex} }}</td>
+                    <td>{{ $record->{$columnIndex} }}</td>
                 @endif
             @endforeach
 

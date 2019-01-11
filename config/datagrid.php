@@ -13,8 +13,9 @@ return [
      * * Accepted Values = Array
      */
     'order' => [
-        'column' => 'id',
-        'direction' => 'desc'
+        'default' => 'descending',
+        'descending' => 'desc',
+        'ascending' => 'asc'
     ],
 
     /**
@@ -84,6 +85,6 @@ return [
         7 => "orders",
         8 => "limit",
         9 => "offset",
-        10 => "lock",
+        10 => "lock"
     ]
 ];

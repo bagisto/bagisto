@@ -3,6 +3,7 @@
 namespace Webkul\Ui\DataGrid;
 
 use Illuminate\Http\Request;
+
 /**
  * Product Data Grid class
  *
@@ -21,7 +22,7 @@ abstract class DataGrid
     protected $request;
     protected $parse;
     protected $enableMassAction = false;
-    // protected $gridName = null;
+    protected $itemsPerPage = 0;
 
     abstract public function prepareMassActions();
     abstract public function prepareActions();
@@ -32,19 +33,19 @@ abstract class DataGrid
     /**
      * Parse the URL and get it ready to be used.
      */
-    private function parse()
+    private function parseUrl()
     {
-        $parsed = [];
+        $parsedUrl = [];
         $unparsed = url()->full();
 
         if (count(explode('?', $unparsed)) > 1) {
             $to_be_parsed = explode('?', $unparsed)[1];
 
-            parse_str($to_be_parsed, $parsed);
-            unset($parsed['page']);
+            parse_str($to_be_parsed, $parsedUrl);
+            unset($parsedUrl['page']);
         }
 
-        return $parsed;
+        return $parsedUrl;
     }
 
     public function addColumn($column)
@@ -72,35 +73,31 @@ abstract class DataGrid
     public function addMassAction($massAction)
     {
         array_push($this->massActions, $massAction);
+
+        $this->enableMassAction = true;
     }
 
     public function getCollection()
     {
-        $p = $this->parse();
+        $parsedUrl = $this->parseUrl();
 
-        if(count($p)) {
-            $filteredOrSortedCollection = $this->sortOrFilterCollection($this->collection = $this->queryBuilder, $p);
+        if(count($parsedUrl)) {
+            $filteredOrSortedCollection = $this->sortOrFilterCollection($this->collection = $this->queryBuilder, $parsedUrl);
 
-            // return $filteredOrSortedCollection->get();
-
-            if (config()->has('datagrid.pagination')) {
-                return $filteredOrSortedCollection->paginate(config('datagrid.pagination'));
+            if($this->itemsPerPage > 0) {
+                return $filteredOrSortedCollection->paginate($this->itemsPerPage);
             } else {
                 return $filteredOrSortedCollection->get();
             }
         }
 
-        if (config()->has('datagrid.pagination')) {
-            $this->collection = $this->queryBuilder->paginate(config('datagrid.pagination'));
+        if ($this->itemsPerPage > 0) {
+            $this->collection = $this->queryBuilder->paginate($this->itemsPerPage);
         } else {
             $this->collection = $this->queryBuilder->get();
         }
 
-        if ($this->collection) {
-            return $this->collection;
-        } else {
-            dd('no records found');
-        }
+        return $this->collection;
     }
 
     /**
@@ -108,7 +105,8 @@ abstract class DataGrid
      *
      * @return string
      */
-    public function findColumnType($columnAlias) {
+    public function findColumnType($columnAlias)
+    {
         foreach($this->allColumns as $column) {
             if($column['alias'] == $columnAlias) {
                 return [$column['type'], $column['index']];
@@ -116,8 +114,8 @@ abstract class DataGrid
         }
     }
 
-    public function sortOrFilterCollection($collection, $parseInfo) {
-
+    public function sortOrFilterCollection($collection, $parseInfo)
+    {
         foreach($parseInfo as $key => $info)  {
             $columnType = $this->findColumnType($key)[0];
             $columnName = $this->findColumnType($key)[1];
@@ -192,6 +190,6 @@ abstract class DataGrid
 
         $this->prepareQueryBuilder();
 
-        return view('ui::datagrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions, 'index' => $this->index]);
+        return view('ui::datagrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions, 'index' => $this->index, 'enableMassActions' => $this->enableMassAction, 'norecords' => trans('ui::datagrid.no-records')]);
     }
 }

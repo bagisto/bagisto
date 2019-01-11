@@ -15,6 +15,10 @@ class AttributeDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('attributes')->select('id')->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel');
@@ -22,7 +26,8 @@ class AttributeDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
+    public function setIndex()
+    {
         $this->index = 'id'; //the column that needs to be treated as index column
     }
 
