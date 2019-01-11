@@ -134,7 +134,8 @@ class ShipmentRepository extends Repository
                         'shipment' => $shipment,
                         'shipmentItem' => $shipmentItem,
                         'product' => $product,
-                        'qty' => $qty
+                        'qty' => $qty,
+                        'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
                     ]);
 
                 $this->orderItem->update(['qty_shipped' => $orderItem->qty_shipped + $qty], $orderItem->id);

@@ -325,7 +325,7 @@
 
                 sourceInventoryQty (inventorySourceId) {
                     var inventories = this.variant.inventories.filter(function(inventory) {
-                        return inventorySourceId === inventory.inventory_source_id;
+                        return inventorySourceId === inventory.inventory_source_id && !inventory.vendor_id;
                     })
 
                     if(inventories.length)

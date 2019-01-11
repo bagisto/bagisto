@@ -306,6 +306,19 @@
                                                             }
                                                         ?>
 
+                                                        <?php 
+                                                            $sourceQty = 0;
+
+                                                            $product = $item->type == 'configurable' ? $item->child->product : $item->product;
+
+                                                            foreach ($product->inventories as $inventory) {
+                                                                if($inventory->inventory_source_id == $inventorySource->id && !$inventory->vendor_id) {
+                                                                    $sourceQty = $inventory->qty;
+                                                                    break;
+                                                                }
+                                                            }
+                                                        ?>
+
                                                         {{ $sourceQty }}
                                                     </td>
 

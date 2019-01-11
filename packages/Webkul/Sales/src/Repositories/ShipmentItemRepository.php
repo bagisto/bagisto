@@ -50,6 +50,7 @@ class ShipmentItemRepository extends Repository
         }
 
         $inventory = $data['product']->inventories()
+                ->where('vendor_id', $data['vendor_id'])
                 ->where('inventory_source_id', $data['shipment']->inventory_source_id)
                 ->first();
 
