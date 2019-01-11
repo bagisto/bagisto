@@ -159,7 +159,6 @@ class Column extends AbstractFillable
 
     public function render($obj)
     {
-
         if (property_exists($obj, ($this->aliasing = $this->alias))) {
             $this->value = $obj->{$this->aliasing};
             $this->wrap($obj);

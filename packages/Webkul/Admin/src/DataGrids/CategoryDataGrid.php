@@ -2,167 +2,119 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
-
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * Category DataGrid
+ * Product Data Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class CategoryDataGrid
+class CategoryDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Data Grid implementation for category
-     */
-    public function createCategoryDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('categories as cat')->select('cat.id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale')->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id');
 
-            return DataGrid::make([
-            'name' => 'Categories',
-            'table' => 'categories as cat',
-            'select' => 'cat.id',
-            'perpage' => 10,
-            'aliased' => true, //use this with false as default and true in case of joins
+        $this->setQueryBuilder($queryBuilder);
+    }
 
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-            ],
+    public function setIndex() {
+        $this->index = 'id'; //the column that needs to be treated as index column
+    }
 
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.catalog.categories.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
-                    'type' => 'Delete',
-                    'route' => 'admin.catalog.categories.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
+    public function addColumns()
+    {
+        $this->addColumn([
+            'index' => 'cat.id',
+            'alias' => 'catId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
 
-            'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'category_translations as ct',
-                    'primaryKey' => 'cat.id',
-                    'condition' => '=',
-                    'secondaryKey' => 'ct.category_id',
-                ],
-            ],
+        $this->addColumn([
+            'index' => 'ct.name',
+            'alias' => 'catName',
+            'label' => 'Name',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
 
-            //use aliasing on secodary columns if join is performed
+        $this->addColumn([
+            'index' => 'cat.position',
+            'alias' => 'catPosition',
+            'label' => 'Position',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
 
-            'columns' => [
-                [
-                    'name' => 'cat.id',
-                    'alias' => 'catid',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'ct.name',
-                    'alias' => 'catname',
-                    'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
-                ], [
-                    'name' => 'cat.position',
-                    'alias' => 'catposition',
-                    'type' => 'string',
-                    'label' => 'Position',
-                    'sortable' => true,
-                ], [
-                    'name' => 'cat.status',
-                    'alias' => 'catstatus',
-                    'type' => 'boolean',
-                    'label' => 'Visible in Menu',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 0)
-                            return "False";
-                        else
-                            return "True";
-                    },
-                ], [
-                    'name' => 'ct.locale',
-                    'alias' => 'catlocale',
-                    'type' => 'string',
-                    'label' => 'Locale',
-                    'sortable' => true,
-                    'filter' => [
-                        'function' => 'orWhere',
-                        'condition' => ['ct.locale', app()->getLocale()]
-                    ],
-                ]
-            ],
+        $this->addColumn([
+            'index' => 'cat.status',
+            'alias' => 'catStatus',
+            'label' => 'Status',
+            'type' => 'boolean',
+            'sortable' => true,
+            'searchable' => true,
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'Active';
+                else
+                    return 'Inactive';
+            }
+        ]);
 
-            'filterable' => [
-                [
-                    'column' => 'cat.id',
-                    'alias' => 'catid',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'ct.name',
-                    'alias' => 'catname',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ], [
-                    'column' => 'cat.status',
-                    'alias' => 'catstatus',
-                    'type' => 'boolean',
-                    'label' => 'Visible in Menu',
-                ],
-            ],
-
-            //don't use aliasing in case of searchables
-
-            'searchable' => [
-                [
-                    'column' => 'cat.id',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'ct.name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ], [
-                    'column' => 'cat.status',
-                    'type' => 'string',
-                    'label' => 'Visible in Menu',
-                ]
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
+        $this->addColumn([
+            'index' => 'ct.locale',
+            'alias' => 'catLocale',
+            'label' => 'Locale',
+            'type' => 'boolean',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px'
         ]);
     }
 
-    public function render()
-    {
-        return $this->createCategoryDataGrid()->render();
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'Edit',
+            'route' => 'admin.catalog.products.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
 
+        $this->addAction([
+            'type' => 'Delete',
+            'route' => 'admin.catalog.products.delete',
+            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.products.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.products.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
     }
 }

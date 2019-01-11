@@ -2,154 +2,103 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * Customer DataGrid
+ * Currency Data Grid class
  *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com> @rahul-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class CustomerDataGrid
+class CustomerDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The CustomerDataGrid implementation.
-     */
-    public function createCustomerDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('customers as cus')->addSelect('cus.id', 'cus.first_name', 'cus.email', 'cg.name')->leftJoin('customer_groups as cg', 'cus.customer_group_id', '=', 'cg.id');
 
-            return DataGrid::make([
-            'name' => 'Customer',
-            'table' => 'customers as cus',
-            'select' => 'cus.id',
-            'perpage' => 10,
-            'aliased' => true, //use this with false as default and true in case of joins
-
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button', //select || button only
-                // ],
-            ],
-
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.customer.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
-                    'type' => 'Delete',
-                    'route' => 'admin.customer.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
-
-            'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'customer_groups as cg',
-                    'primaryKey' => 'cus.customer_group_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'cg.id',
-                ]
-            ],
-
-            //use aliasing on secodary columns if join is performed
-            'columns' => [
-                [
-                    'name' => 'cus.id',
-                    'alias' => 'ID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'CONCAT(first_name, " ", last_name)',
-                    'alias' => 'Name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
-                ], [
-                    'name' => 'email',
-                    'alias' => 'Email',
-                    'type' => 'string',
-                    'label' => 'Email',
-                    'sortable' => false,
-                ], [
-                    'name' => 'cg.name',
-                    'alias' => 'CustomerGroupName',
-                    'type' => 'string',
-                    'label' => 'Group Name',
-                    'sortable' => false,
-                ],
-            ],
-
-            //don't use aliasing in case of filters
-            'filterable' => [
-                [
-                    'column' => 'cus.id',
-                    'alias' => 'ID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'email',
-                    'alias' => 'Email',
-                    'type' => 'string',
-                    'label' => 'Email',
-                ], [
-                    'column' => 'cg.name',
-                    'alias' => 'CustomerGroupName',
-                    'type' => 'string',
-                    'label' => 'Group Name',
-                ], [
-                    'column' => 'CONCAT(first_name, " ", last_name)',
-                    'alias' => 'Name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ],
-            ],
-
-            //don't use aliasing in case of searchables
-
-            'searchable' => [
-                [
-                    'column' => 'FirstName',
-                    'type' => 'string',
-                    'label' => 'First Name',
-                ], [
-                    'column' => 'email',
-                    'alias' => 'Email',
-                    'type' => 'string',
-                ],
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
-
-        ]);
-
+        $this->setQueryBuilder($queryBuilder);
     }
 
-    public function render($pagination = true)
+    public function setIndex() {
+        $this->index = 'id'; //the column that needs to be treated as index column
+    }
+
+    public function addColumns()
     {
+        $this->addColumn([
+            'index' => 'cus.id',
+            'alias' => 'customerId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
 
-        return $this->createCustomerDataGrid()->render($pagination);
+        $this->addColumn([
+            // 'column' => 'CONCAT(cus.first_name, " ", cus.last_name)',
+            'index' => 'cus.first_name',
+            'alias' => 'customerFullName',
+            'label' => 'Name',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
 
+        $this->addColumn([
+            'index' => 'cus.email',
+            'alias' => 'customerEmail',
+            'label' => 'Email',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'cg.name',
+            'alias' => 'customerGroupName',
+            'label' => 'Group',
+            'type' => 'string',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'Edit',
+            'route' => 'admin.customer.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->addAction([
+            'type' => 'Delete',
+            'route' => 'admin.customer.delete',
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.products.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.products.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
     }
 }

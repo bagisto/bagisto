@@ -2,143 +2,92 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * Sliders DataGrid
+ * News Letter Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class SliderDataGrid
+class SliderDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Data Grid implementation for Sliders
-     */
-    public function createSliderDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('sliders as sl')->addSelect('sl.id', 'sl.title', 'ch.name')->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id');
 
-            return DataGrid::make([
-            'name' => 'Sliders',
-            'table' => 'sliders as s',
-            'select' => 's.id',
-            'perpage' => 10,
-            'aliased' => true, //use this with false as default and true in case of joins
+        $this->setQueryBuilder($queryBuilder);
+    }
 
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-            ],
+    public function setIndex() {
+        $this->index = 'id';
+    }
 
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.sliders.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
-                    'type' => 'Delete',
-                    'route' => 'admin.sliders.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
+    public function addColumns()
+    {
+        $this->addColumn([
+            'index' => 'sl.id',
+            'alias' => 'sliderId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
 
-            'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'channels as c',
-                    'primaryKey' => 's.channel_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'c.id',
-                ]
-            ],
+        $this->addColumn([
+            'index' => 'sl.title',
+            'alias' => 'sliderTitle',
+            'label' => 'Tile',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
 
-            //use aliasing on secodary columns if join is performed
-
-            'columns' => [
-                [
-                    'name' => 's.id',
-                    'alias' => 'sliderId',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 's.title',
-                    'alias' => 'sliderTitle',
-                    'type' => 'string',
-                    'label' => 'title',
-                    'sortable' => true
-                ], [
-                    'name' => 'c.name',
-                    'alias' => 'channelName',
-                    'type' => 'string',
-                    'label' => 'Channel Name',
-                    'sortable' => true,
-                ],
-            ],
-
-            //don't use aliasing in case of filters
-            'filterable' => [
-                [
-                    'column' => 's.id',
-                    'alias' => 'sliderId',
-                    'type' => 'number',
-                    'label' => 'ID'
-                ], [
-                    'column' => 's.title',
-                    'alias' => 'sliderTitle',
-                    'type' => 'string',
-                    'label' => 'title'
-                ], [
-                    'column' => 'c.name',
-                    'alias' => 'channelName',
-                    'type' => 'string',
-                    'label' => 'Channel Name',
-                ]
-            ],
-
-            //don't use aliasing in case of searchables
-            'searchable' => [
-                [
-                    'column' => 's.id',
-                    'type' => 'number',
-                    'label' => 'ID'
-                ], [
-                    'column' => 's.title',
-                    'type' => 'string',
-                    'label' => 'Slider Title'
-                ], [
-                    'column' => 'c.name',
-                    'type' => 'string',
-                    'label' => 'Channel Name',
-                ]
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
+        $this->addColumn([
+            'index' => 'ch.name',
+            'alias' => 'channelName',
+            'label' => 'Channel Name',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
         ]);
     }
 
-    public function render()
-    {
-        return $this->createSliderDataGrid()->render();
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'Edit',
+            'route' => 'admin.sliders.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->addAction([
+            'type' => 'Delete',
+            'route' => 'admin.sliders.delete',
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.products.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.products.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
     }
 }

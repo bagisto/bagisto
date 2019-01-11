@@ -2,6 +2,7 @@
     <div class="filter-row-one">
         <div class="search-filter" style="display: inline-flex; align-items: center;">
             <input type="search" id="search-field" class="control" placeholder="Search Here..." value="" />
+
             <div class="ic-wrapper">
                 <span class="icon search-icon search-btn"></span>
             </div>

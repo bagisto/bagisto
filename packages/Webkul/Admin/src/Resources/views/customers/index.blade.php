@@ -12,12 +12,12 @@
                 <h1>{{ __('admin::app.customers.customers.title') }}</h1>
             </div>
             <div class="page-action">
-                <div class="export" @click="showModal('downloadDataGrid')">
+                {{-- <div class="export" @click="showModal('downloadDataGrid')">
                     <i class="export-icon"></i>
                     <span >
                         {{ __('admin::app.export.export') }}
                     </span>
-                </div>
+                </div> --}}
 
                 <a href="{{ route('admin.customer.create') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.customers.customers.add-title') }}
@@ -32,18 +32,18 @@
         </div>
     </div>
 
-    <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
+    {{-- <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
         <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
         <div slot="body">
             <export-form></export-form>
         </div>
-    </modal>
+    </modal> --}}
 
 @stop
 
 @push('scripts')
 
-<script type="text/x-template" id="export-form-template">
+{{-- <script type="text/x-template" id="export-form-template">
     <form method="POST" action="{{ route('admin.datagrid.export') }}">
 
         <div class="page-content">
@@ -81,7 +81,7 @@
             }
         }
     });
-</script>
+</script> --}}
 
 @endpush
 

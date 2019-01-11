@@ -133,26 +133,26 @@
                             var conditionUsed = $('.filter-condition-dropdown-number').find(':selected').val();
                             var response = $('.response-number').val();
 
-                            formURL(selectedColumn,conditionUsed,response,params,col_label);
+                            formURL(selectedColumn,conditionUsed,response,params, col_label);
                         }
                         if(typeValue == 'string') {
                             var conditionUsed = $('.filter-condition-dropdown-string').find(':selected').val();
                             var response = $('.response-string').val();
 
-                            formURL(selectedColumn,conditionUsed,response,params,col_label);
+                            formURL(selectedColumn,conditionUsed,response,params, col_label);
                         }
                         if(typeValue == 'datetime') {
                             var conditionUsed = $('.filter-condition-dropdown-datetime').find(':selected').val();
                             var response = $('.response-datetime').val();
 
-                            formURL(selectedColumn,conditionUsed,response,params,col_label);
+                            formURL(selectedColumn,conditionUsed,response,params, col_label);
                         }
                         if(typeValue == 'boolean') { //use select dropdown with two values true and false
                             // console.log('boolean');
                             var conditionUsed = $('.filter-condition-dropdown-boolean').find(':selected').val();
                             var response = $('.response-boolean').val();
 
-                            formURL(selectedColumn,conditionUsed,response,params,col_label);
+                            formURL(selectedColumn,conditionUsed,response,params, col_label);
                         }
                     });
                 });
@@ -160,6 +160,7 @@
                 //remove the filter and from clicking on cross icon on tag
                 $('.remove-filter').on('click', function() {
                     var id = $(this).parents('.filter-one').attr('id');
+
                     if(allFilters.length ==  1) {
                         allFilters.pop();
                         var uri = window.location.href.toString();
@@ -298,10 +299,10 @@
 
             //make the url from the array and redirect
             function makeURL(repetition = false) {
-                if(allFilters.length>0 && repetition == false)
+                if(allFilters.length > 0 && repetition == false)
                 {
-                    for(i=0;i<allFilters.length;i++) {
-                        if(i==0) {
+                    for(i = 0; i < allFilters.length; i++) {
+                        if(i == 0) {
                             url = '?' + allFilters[i].column + '[' + allFilters[i].cond + ']' + '=' + allFilters[i].val;
                         } else {
                             url = url + '&' + allFilters[i].column + '[' + allFilters[i].cond + ']' + '=' + allFilters[i].val;
@@ -445,9 +446,9 @@
                             sort_exists = 0;
                             for(j = 0; j<allFilters.length; j++) {
                                 if(allFilters[j].column == "sort") {
-                                    if(allFilters[j].column==column && allFilters[j].cond==condition && allFilters[j].val==response) {
+                                    if(allFilters[j].column == column && allFilters[j].cond == condition && allFilters[j].val == response) {
 
-                                        if(response=="asc") {
+                                        if(response == "asc") {
                                             allFilters[j].column = column;
                                             allFilters[j].cond = condition;
                                             allFilters[j].val = "desc";

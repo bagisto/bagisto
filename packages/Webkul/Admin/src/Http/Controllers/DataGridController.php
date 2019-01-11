@@ -4,11 +4,11 @@ namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\DataGrids\TestDataGrid;
 
 /**
- * DataGrid controller
+ * TestDataGrid controller
  *
  * @author    Nikhil Malik <nikhil@webkul.com> @ysmnikhil
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
@@ -16,11 +16,27 @@ use Webkul\Ui\DataGrid\Facades\DataGrid;
  */
 class DataGridController extends Controller
 {
+    protected $_config;
+    protected $testgrid;
+
+    public function __construct(TestDataGrid $testgrid)
+    {
+        $this->middleware('admin');
+
+        $this->_config = request('_config');
+
+        $this->testgrid = $testgrid;
+    }
+
     public function massDelete() {
         dd(request()->all());
     }
 
     public function massUpdate() {
         dd(request()->all());
+    }
+
+    public function testGrid() {
+        return $this->testgrid->render();
     }
 }

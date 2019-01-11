@@ -11,6 +11,7 @@ use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
+use Webkul\Admin\DataGrids\TestDataGrid;
 
 /**
  * Product controller
@@ -202,6 +203,7 @@ class ProductController extends Controller
      */
     public function massDestroy()
     {
+        dd(request()->input());
         $productIds = explode(',', request()->input('indexes'));
 
         foreach ($productIds as $productId) {
@@ -220,9 +222,14 @@ class ProductController extends Controller
      */
     public function massUpdate()
     {
+        dd(request()->input());
         $data = request()->all();
 
         if (!isset($data['massaction-type'])) {
+            return redirect()->back();
+        }
+
+        if(!$data['massaction-type'] == 'update') {
             return redirect()->back();
         }
 

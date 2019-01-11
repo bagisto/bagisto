@@ -2,213 +2,156 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * Attributes DataGrid
+ * Product Data Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class AttributeDataGrid
+class AttributeDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Data Grid implementation for Attributes
-     */
-    public function createAttributeDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('attributes')->select('id')->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel');
 
-            return DataGrid::make([
-            'name' => 'Attributes',
-            'table' => 'attributes',
-            'select' => 'id',
-            'perpage' => 10,
-            'aliased' => true,
-
-            'massoperations' => [
-                0 => [
-                    'type' => 'delete', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
-                    'action' => route('admin.catalog.attributes.massdelete'),
-                    'method' => 'DELETE'
-                ]
-            ],
-
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.catalog.attributes.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
-                    'type' => 'Delete',
-                    'route' => 'admin.catalog.attributes.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
-
-            'join' => [],
-
-            //use aliasing on secodary columns if join is performed
-            'columns' => [
-                [
-                    'name' => 'id',
-                    'alias' => 'attributeId',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'code',
-                    'alias' => 'attributeCode',
-                    'type' => 'string',
-                    'label' => 'Code',
-                    'sortable' => true,
-                ], [
-                    'name' => 'admin_name',
-                    'alias' => 'attributeAdminName',
-                    'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
-                ], [
-                    'name' => 'type',
-                    'alias' => 'attributeType',
-                    'type' => 'string',
-                    'label' => 'Type',
-                    'sortable' => true,
-                ], [
-                    'name' => 'is_required',
-                    'alias' => 'attributeIsRequired',
-                    'type' => 'boolean',
-                    'label' => 'Required',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 0)
-                            return "False";
-                        else
-                            return "True";
-                    },
-                ], [
-                    'name' => 'is_unique',
-                    'alias' => 'attributeIsUnique',
-                    'type' => 'boolean',
-                    'label' => 'Unique',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 0)
-                            return "False";
-                        else
-                            return "True";
-                    },
-                ], [
-                    'name' => 'value_per_locale',
-                    'alias' => 'attributeValuePerLocale',
-                    'type' => 'boolean',
-                    'label' => 'Locale based',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 0)
-                            return "False";
-                        else
-                            return "True";
-                    },
-                ], [
-                    'name' => 'value_per_channel',
-                    'alias' => 'attributeValuePerChannel',
-                    'type' => 'boolean',
-                    'label' => 'Channel based',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 0)
-                            return "False";
-                        else
-                            return "True";
-                    },
-                ]
-            ],
-
-            'filterable' => [
-                [
-                    'column' => 'id',
-                    'alias' => 'attributeId',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'code',
-                    'alias' => 'attributeCode',
-                    'type' => 'string',
-                    'label' => 'Code',
-                ], [
-                    'column' => 'admin_name',
-                    'alias' => 'attributeAdminName',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ], [
-                    'column' => 'type',
-                    'alias' => 'attributeType',
-                    'type' => 'string',
-                    'label' => 'Type',
-                ], [
-                    'column' => 'is_required',
-                    'alias' => 'attributeIsRequired',
-                    'type' => 'boolean',
-                    'label' => 'Required',
-                ], [
-                    'column' => 'is_unique',
-                    'alias' => 'attributeIsUnique',
-                    'type' => 'boolean',
-                    'label' => 'Unique',
-                ], [
-                    'column' => 'value_per_locale',
-                    'alias' => 'attributeValuePerLocale',
-                    'type' => 'boolean',
-                    'label' => 'Locale based',
-                ], [
-                    'column' => 'value_per_channel',
-                    'alias' => 'attributeValuePerChannel',
-                    'type' => 'boolean',
-                    'label' => 'Channel based',
-                ]
-            ],
-
-            //don't use aliasing in case of searchables
-            'searchable' => [
-                [
-                    'column' => 'code',
-                    'alias' => 'attributeCode',
-                    'type' => 'string',
-                ], [
-                    'column' => 'admin_name',
-                    'alias' => 'attributeAdminName',
-                    'type' => 'string',
-                ], [
-                    'column' => 'type',
-                    'alias' => 'attributeType',
-                    'type' => 'string',
-                ],
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-
-            // 'css' => []
-        ]);
-
+        $this->setQueryBuilder($queryBuilder);
     }
 
-    public function render()
+    public function setIndex() {
+        $this->index = 'id'; //the column that needs to be treated as index column
+    }
+
+    public function addColumns()
     {
-        return $this->createAttributeDataGrid()->render();
+        $this->addColumn([
+            'index' => 'id',
+            'alias' => 'attributeId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'code',
+            'alias' => 'attributeCode',
+            'label' => 'Code',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'admin_name',
+            'alias' => 'attributeAdminName',
+            'label' => 'Name',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'type',
+            'alias' => 'attributeType',
+            'label' => 'Type',
+            'type' => 'string',
+            'sortable' => true,
+            'searchable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'is_required',
+            'alias' => 'attributeRequired',
+            'label' => 'Required',
+            'type' => 'boolean',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'True';
+                else
+                    return 'False';
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'is_unique',
+            'alias' => 'attributeIsUnique',
+            'label' => 'Unique',
+            'type' => 'boolean',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'True';
+                else
+                    return 'False';
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'value_per_locale',
+            'alias' => 'attributeValuePerLocale',
+            'label' => 'Locale Based',
+            'type' => 'boolean',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'True';
+                else
+                    return 'False';
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'value_per_channel',
+            'alias' => 'attributeValuePerChannel',
+            'label' => 'Channel Based',
+            'type' => 'boolean',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'True';
+                else
+                    return 'False';
+            }
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'Edit',
+            'route' => 'admin.catalog.attributes.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->addAction([
+            'type' => 'Delete',
+            'route' => 'admin.catalog.attributes.delete',
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        $this->addMassAction([
+            'type' => 'delete',
+            'action' => route('admin.catalog.attributes.massdelete'),
+            'method' => 'DELETE'
+        ]);
     }
 }
