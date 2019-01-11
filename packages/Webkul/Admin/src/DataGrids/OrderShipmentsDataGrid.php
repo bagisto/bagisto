@@ -2,154 +2,116 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
 use DB;
 
 /**
- * OrderShipmentsDataGrid
+ * Product Data Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class OrderShipmentsDataGrid
+class OrderShipmentsDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Order Shipments Data Grid implementation for shipments of orders
-     */
-    public function createOrderShipmentsDataGrid()
+    public function prepareQueryBuilder()
     {
-        return DataGrid::make([
-            'name' => 'shipments',
-            'table' => 'shipments as ship',
-            'select' => 'ship.id',
-            'perpage' => 10,
-            'aliased' => true,
+        $queryBuilder = DB::table('shipments as ship')->select('ship.id', 'ship.order_id', 'ship.total_qty', 'is.name', 'ors.created_at as orderdate', 'ship.created_at')->addSelect(DB::raw('CONCAT(ors.customer_first_name, " ", ors.customer_last_name) as custname'))->leftJoin('orders as ors', 'ship.order_id', '=', 'ors.id')->leftJoin('inventory_sources as is', 'ship.inventory_source_id', '=', 'is.id');
 
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-            ],
+        $this->setQueryBuilder($queryBuilder);
+    }
 
-            'actions' => [
-                [
-                    'type' => 'View',
-                    'route' => 'admin.sales.shipments.view',
-                    // 'confirm_text' => 'Do you really want to view this record?',
-                    'icon' => 'icon eye-icon',
-                    'icon-alt' => 'View'
-                ],
-            ],
+    public function setIndex() {
+        $this->index = 'id'; //the column that needs to be treated as index column
+    }
 
-            'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'orders as ors',
-                    'primaryKey' => 'ship.order_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'ors.id',
-                ], [
-                    'join' => 'leftjoin',
-                    'table' => 'inventory_sources as is',
-                    'primaryKey' => 'ship.inventory_source_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'is.id',
-                ]
-            ],
+    public function addColumns()
+    {
+        $this->addColumn([
+            'index' => 'ship.id',
+            'alias' => 'shipId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
 
-            //use aliasing on secodary columns if join is performed
-            'columns' => [
-                [
-                    'name' => 'ship.id',
-                    'alias' => 'shipID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true
-                ], [
-                    'name' => 'ship.order_id',
-                    'alias' => 'orderid',
-                    'type' => 'number',
-                    'label' => 'Order ID',
-                    'sortable' => true
-                ], [
-                    'name' => 'ship.total_qty',
-                    'alias' => 'shiptotalqty',
-                    'type' => 'number',
-                    'label' => 'Total Quantity',
-                    'sortable' => true
-                ], [
-                    'name' => 'CONCAT(ors.customer_first_name, " ", ors.customer_last_name)',
-                    'alias' => 'ordercustomerfirstname',
-                    'type' => 'string',
-                    'label' => 'Customer Name',
-                    'sortable' => false,
-                ], [
-                    'name' => 'is.name',
-                    'alias' => 'inventorySourceName',
-                    'type' => 'string',
-                    'label' => 'Inventory Source',
-                    'sortable' => true
-                ], [
-                    'name' => 'ors.created_at',
-                    'alias' => 'orscreated',
-                    'type' => 'date',
-                    'label' => 'Order Date',
-                    'sortable' => true
-                ], [
-                    'name' => 'ship.created_at',
-                    'alias' => 'shipdate',
-                    'type' => 'datetime',
-                    'label' => 'Shipment Date',
-                    'sortable' => true
-                ]
-            ],
+        $this->addColumn([
+            'index' => 'ship.order_id',
+            'alias' => 'orderId',
+            'label' => 'Order ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
 
-            'filterable' => [
-                [
-                    'column' => 'ship.id',
-                    'alias' => 'shipID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'ship.created_at',
-                    'alias' => 'shipdate',
-                    'type' => 'datetime',
-                    'label' => 'Shipment Date',
-                ]
-            ],
-            //don't use aliasing in case of searchables
+        $this->addColumn([
+            'index' => 'ship.total_qty',
+            'alias' => 'shipTotalQty',
+            'label' => 'Total Qty',
+            'type' => 'number',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px',
+        ]);
 
-            'searchable' => [
-                // [
-                //     'column' => 'ors.customer_first_name',
-                //     'alias' => 'ordercustomerfirstname',
-                //     'type' => 'string',
-                // ]
-            ],
+        $this->addColumn([
+            'index' => 'is.name',
+            'alias' => 'shipInventoryName',
+            'label' => 'Inventory Source',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px',
+        ]);
 
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
+        $this->addColumn([
+            'index' => 'orderdate',
+            'alias' => 'shipOrderDate',
+            'label' => 'Order Date',
+            'type' => 'datetime',
+            'sortable' => true,
+            'searchable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'ship.created_at',
+            'alias' => 'shipDate',
+            'label' => 'Shipment Date',
+            'type' => 'datetime',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'custname',
+            'alias' => 'shipTO',
+            'label' => 'Shipping To',
+            'type' => 'string',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px'
         ]);
     }
 
-    public function render($pagination = true)
-    {
-        return $this->createOrderShipmentsDataGrid()->render($pagination);
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'View',
+            'route' => 'admin.sales.orders.view',
+            'icon' => 'icon eye-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->addMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.attributes.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
     }
 }

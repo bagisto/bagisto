@@ -2,177 +2,139 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * OrderDataGrid
+ * Product Data Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class OrderDataGrid
+class OrderDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Data Grid implementation for orders
-     */
-    public function createOrderDataGrid()
+    public function prepareQueryBuilder()
     {
-        return DataGrid::make([
-            'name' => 'orders',
-            'table' => 'orders as or',
-            'select' => 'or.id',
-            'perpage' => 10,
-            'aliased' => false, //True in case of joins else aliasing key required on all cases
+        $queryBuilder = DB::table('orders')->select('id', 'base_grand_total', 'grand_total', 'created_at', 'channel_name', 'status')->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as fullname'));
 
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-            ],
+        $this->setQueryBuilder($queryBuilder);
+    }
 
-            'actions' => [
-                [
-                    'type' => 'View',
-                    'route' => 'admin.sales.orders.view',
-                    // 'confirm_text' => 'Do you really want to view this record?',
-                    'icon' => 'icon eye-icon',
-                    'icon-alt' => 'View'
-                ]
-            ],
+    public function setIndex() {
+        $this->index = 'id'; //the column that needs to be treated as index column
+    }
 
-            'join' => [],
+    public function addColumns()
+    {
+        $this->addColumn([
+            'index' => 'id',
+            'alias' => 'orderId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
 
-            //use aliasing on secodary columns if join is performed
-            'columns' => [
-                [
-                    'name' => 'or.id',
-                    'alias' => 'orderid',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'CONCAT(or.customer_first_name, " ", or.customer_last_name)',
-                    'alias' => 'oafirstname',
-                    'type' => 'string',
-                    'label' => 'Billed To',
-                    'sortable' => false,
-                ], [
-                    'name' => 'or.base_grand_total',
-                    'alias' => 'orbasegrandtotal',
-                    'type' => 'string',
-                    'label' => 'Base Total',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        return core()->formatBasePrice($value);
-                    }
-                ], [
-                    'name' => 'or.grand_total',
-                    'alias' => 'oagrandtotal',
-                    'type' => 'string',
-                    'label' => 'Grand Total',
-                    'sortable' => false,
-                    'wrapper' => function ($value) {
-                        return core()->formatBasePrice($value);
-                    }
-                ], [
-                    'name' => 'or.created_at',
-                    'alias' => 'createdat',
-                    'type' => 'datetime',
-                    'label' => 'Order Date',
-                    'sortable' => true,
-                ], [
-                    'name' => 'or.channel_name',
-                    'alias' => 'channelname',
-                    'type' => 'string',
-                    'label' => 'Channel Name',
-                    'sortable' => true,
-                ], [
-                    'name' => 'or.status',
-                    'alias' => 'orstatus',
-                    'type' => 'string',
-                    'label' => 'Status',
-                    'sortable' => true,
-                    'closure' => true, //to be used when ever wrappers or callables are used
-                    'wrapper' => function ($value) {
-                        if($value == 'processing')
-                            return '<span class="badge badge-md badge-success">Processing</span>';
-                        else if($value == 'completed')
-                            return '<span class="badge badge-md badge-success">Completed</span>';
-                        else if($value == "canceled")
-                            return '<span class="badge badge-md badge-danger">Canceled</span>';
-                        else if($value == "closed")
-                            return '<span class="badge badge-md badge-info">Closed</span>';
-                        else if($value == "pending")
-                            return '<span class="badge badge-md badge-warning">Pending</span>';
-                        else if($value == "pending_payment")
-                            return '<span class="badge badge-md badge-warning">Pending Payment</span>';
-                        else if($value == "fraud")
-                            return '<span class="badge badge-md badge-danger">Fraud</span>';
-                    },
-                ],
-            ],
+        $this->addColumn([
+            'index' => 'base_grand_total',
+            'alias' => 'baseGrandTotal',
+            'label' => 'Base Total',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px',
+            'wrapper' => function ($value) {
+                return core()->formatBasePrice($value);
+            }
+        ]);
 
-            'filterable' => [
-                [
-                    'column' => 'or.id',
-                    'alias' => 'orderid',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'or.status',
-                    'alias' => 'orstatus',
-                    'type' => 'string',
-                    'label' => 'Status'
-                ], [
-                    'column' => 'or.created_at',
-                    'alias' => 'createdat',
-                    'type' => 'datetime',
-                    'label' => 'Order Date',
-                ], [
-                    'column' => 'CONCAT(or.customer_first_name, " ", or.customer_last_name)',
-                    'alias' => 'oafirstname',
-                    'type' => 'string',
-                    'label' => 'Billed To',
-                ],
-            ],
+        $this->addColumn([
+            'index' => 'grand_total',
+            'alias' => 'grandTotal',
+            'label' => 'Grand Total',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px',
+            'wrapper' => function ($value) {
+                return core()->formatBasePrice($value);
+            }
+        ]);
 
-            //don't use aliasing in case of searchables
-            'searchable' => [
-                [
-                    'column' => 'or.id',
-                    'alias' => 'orderid',
-                    'type' => 'number',
-                ], [
-                    'column' => 'or.status',
-                    'alias' => 'orstatus',
-                    'type' => 'string',
-                ]
-            ],
+        $this->addColumn([
+            'index' => 'created_at',
+            'alias' => 'orderDate',
+            'label' => 'Order Date',
+            'type' => 'string',
+            'sortable' => true,
+            'searchable' => true,
+            'width' => '100px',
+        ]);
 
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
+        $this->addColumn([
+            'index' => 'channel_name',
+            'alias' => 'channelName',
+            'label' => 'Channel Name',
+            'type' => 'string',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px'
+        ]);
 
-            // 'css' => []
+        $this->addColumn([
+            'index' => 'status',
+            'alias' => 'status',
+            'label' => 'Status',
+            'type' => 'string',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px',
+            'closure' => true,
+            'wrapper' => function ($value) {
+                if($value == 'processing')
+                    return '<span class="badge badge-md badge-success">Processing</span>';
+                else if($value == 'completed')
+                    return '<span class="badge badge-md badge-success">Completed</span>';
+                else if($value == "canceled")
+                    return '<span class="badge badge-md badge-danger">Canceled</span>';
+                else if($value == "closed")
+                    return '<span class="badge badge-md badge-info">Closed</span>';
+                else if($value == "pending")
+                    return '<span class="badge badge-md badge-warning">Pending</span>';
+                else if($value == "pending_payment")
+                    return '<span class="badge badge-md badge-warning">Pending Payment</span>';
+                else if($value == "fraud")
+                    return '<span class="badge badge-md badge-danger">Fraud</span>';
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'fullname',
+            'alias' => 'fullName',
+            'label' => 'Billed To',
+            'type' => 'string',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '100px'
         ]);
     }
 
-    public function render($pagination = true)
-    {
-        return $this->createOrderDataGrid()->render($pagination);
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'View',
+            'route' => 'admin.sales.orders.view',
+            'icon' => 'icon eye-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->addMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.attributes.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
     }
 }

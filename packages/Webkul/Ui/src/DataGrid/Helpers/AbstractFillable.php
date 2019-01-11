@@ -94,7 +94,7 @@ abstract class AbstractFillable
                 break;
         }
 
-        if($error) throw new \Exception($error);
+        if ($error) throw new \Exception($error);
         $this->{$key} = $value;
     }
 

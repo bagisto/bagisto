@@ -18,7 +18,7 @@ class Toolbar extends AbstractProduct
             'created_at-desc' => 'newest-first',
             'created_at-asc' => 'oldest-first',
             'price-asc' => 'cheapest-first',
-            'price-desc' => 'expansive-first'
+            'price-desc' => 'expensive-first'
         ];
     }
     /**

@@ -2,141 +2,93 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * Exchange Rates DataGrid
+ * Product Data Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class ExchangeRatesDataGrid
+class ExchangeRatesDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Data Grid implementation for Exchange Rates
-     */
-    public function createExchangeRatesDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('currency_exchange_rates as cer')->addSelect('cer.id', 'curr.name', 'cer.rate')->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id');
 
-            return DataGrid::make([
-            'name' => 'Exchange Rates',
-            'table' => 'currency_exchange_rates as cer',
-            'select' => 'cer.id',
-            'perpage' => 10,
-            'aliased' => true, //use this with false as default and true in case of joins
-
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-            ],
-
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.exchange_rates.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
-                    'type' => 'Delete',
-                    'route' => 'admin.exchange_rates.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
-
-            'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'currencies as curr',
-                    'primaryKey' => 'cer.target_currency',
-                    'condition' => '=',
-                    'secondaryKey' => 'curr.id',
-                ]
-            ],
-
-            //use aliasing on secodary columns if join is performed
-
-            'columns' => [
-                [
-                    'name' => 'cer.id',
-                    'alias' => 'exchid',
-                    'type' => 'number',
-                    'label' => 'Rate ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'curr.name',
-                    'alias' => 'exchcurrname',
-                    'type' => 'string',
-                    'label' => 'Currency Name',
-                    'sortable' => true,
-                ], [
-                    'name' => 'cer.rate',
-                    'alias' => 'exchrate',
-                    'type' => 'string',
-                    'label' => 'Exchange Rate',
-                    'sortable' => true
-                ],
-            ],
-
-            //don't use aliasing in case of filters
-            'filterable' => [
-                [
-                    'column' => 'cer.id',
-                    'alias' => 'exchid',
-                    'type' => 'number',
-                    'label' => 'Rate ID',
-                ], [
-                    'column' => 'curr.name',
-                    'alias' => 'exchcurrname',
-                    'type' => 'string',
-                    'label' => 'Currency Name',
-                ], [
-                    'column' => 'cer.rate',
-                    'alias' => 'exchrate',
-                    'type' => 'string',
-                    'label' => 'Exchange Rate',
-                ],
-            ],
-
-            //don't use aliasing in case of searchables
-            'searchable' => [
-                [
-                    'column' => 'exchcurrname',
-                    'type' => 'string',
-                    'label' => 'Currency Name',
-                ], [
-                    'column' => 'cer.rate',
-                    'type' => 'string',
-                    'label' => 'Exchange Rate',
-                ],
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
-
-        ]);
-
+        $this->setQueryBuilder($queryBuilder);
     }
 
-    public function render()
+    public function setIndex() {
+        $this->index = 'id';
+    }
+
+    public function addColumns()
     {
-        return $this->createExchangeRatesDataGrid()->render();
+        $this->addColumn([
+            'index' => 'cer.id',
+            'alias' => 'exchId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'curr.name',
+            'alias' => 'exchName',
+            'label' => 'Currency Name',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'cer.rate',
+            'alias' => 'exchRate',
+            'label' => 'Exchange Rate',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'Edit',
+            'route' => 'admin.exchange_rates.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->addAction([
+            'type' => 'Delete',
+            'route' => 'admin.exchange_rates.delete',
+            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.products.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.products.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
     }
 }

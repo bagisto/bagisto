@@ -1,4 +1,5 @@
 <?php
+
 namespace Webkul\Ui\DataGrid;
 
 use Illuminate\Http\Request;
@@ -20,8 +21,6 @@ use URL;
  *
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
-
 class DataGrid
 {
 
@@ -30,7 +29,6 @@ class DataGrid
      *
      * @var string
      */
-
     protected $name;
 
 
@@ -39,7 +37,6 @@ class DataGrid
      *
      * @var string
      */
-
     protected $select;
 
 
@@ -47,7 +44,6 @@ class DataGrid
     * Table
     * @var Boolean for aliasing
     */
-
     protected $aliased;
 
 
@@ -88,15 +84,14 @@ class DataGrid
      protected $columns;
 
      /**
-     * array of columns
-     * to be filtered
+     * array of columns to be filtered
+     *
      * @var Array
      */
      protected $filterable;
 
      /**
-     * array of columns
-     * to be searched
+     * array of columns to be searched
      *
      * @var Array
      */
@@ -125,24 +120,26 @@ class DataGrid
 
      /**
      * Actions $action
+     *
      * @var action
      */
     protected $actions;
 
     /**
      * URL parse $parsed
+     *
      * @var parse
      */
      protected $parsed;
 
-     /*
-    public function __construct(
+    /*
+    public function __construct (
         $name = null ,
         $table = null ,
         array $join = [],
         Collection $columns = null,
         Pagination $pagination = null
-    ){
+    ) {
         $this->make(
             $name,
             $table,
@@ -162,43 +159,45 @@ class DataGrid
         // list($name, $select, $table, $join, $columns) = array_values($args);
         $name = $select = $aliased = $table = false;
         $join = $columns = $filterable = $searchable =
-        $massoperations = $css = $operators = $actions = [];
+        $massoperations = $css = $actions = [];
+
         extract($args);
-        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $perpage, $table, $join, $columns, $css, $operators,$actions);
+
+        return $this->build($name, $select, $filterable, $searchable, $massoperations, $aliased, $perpage, $table, $join, $columns, $css, $actions);
     }
 
     //This assigns the private and public properties of the datagrid classes from make functions
-    public function build(
-        $name = null,
-        $select = false,
+    public function build (
+        string $name = null,
+        string $select = null,
         array $filterable = [],
         array $searchable = [],
         array $massoperations = [],
         bool $aliased = false,
-        $perpage = 0,
-        $table = null,
+        int $perpage = 0,
+        string $table = null,
         array $join = [],
         array $columns = null,
         array $css = [],
-        array $operators = [],
         array $actions = [],
         Pagination $pagination = null
     ) {
         $this->request = Request::capture();
         $this->setName($name);
+        $this->setAlias($aliased);
+        $this->setTable($table);
         $this->setSelect($select);
         $this->setFilterable($filterable);
         $this->setSearchable($filterable);
         $this->setMassOperations($massoperations);
-        $this->setAlias($aliased);
         $this->setPerPage($perpage);
-        $this->setTable($table);
         $this->setJoin($join);
         $this->addColumns($columns, true);
         $this->setCss($css);
-        $this->setOperators($operators);
+        $this->setOperators();
         $this->setActions($actions);
         // $this->addPagination($pagination);
+
         return $this;
     }
 
@@ -207,10 +206,9 @@ class DataGrid
      *
      * @return $this
      */
-
     public function setName(string $name)
     {
-        $this->name = $name ?: 'Default' . time();
+        $this->name = $name ? : 'Default' . time();
         return $this;
     }
 
@@ -219,18 +217,28 @@ class DataGrid
      *
      * @return $this
      */
-
     public function setSelect($select)
     {
-        $this->select = $select ? : false;
+        if (!$select) {
+            $select = config('datagrid.select');
+
+            if ($this->aliased) {
+                $alias = $this->findTableAlias();
+
+                $select = $alias.'.'.$select;
+            }
+        }
+
+        $this->select = $select;
+
         return $this;
     }
 
     /**
      * Set Filterable
+     *
      * @return $this
      */
-
     public function setFilterable(array $filterable)
     {
         $this->filterable = $filterable ? : [];
@@ -239,9 +247,9 @@ class DataGrid
 
     /**
      * Set Searchable columns
+     *
      * @return $this
      */
-
     public function setSearchable($searchable)
     {
         $this->searchable = $searchable ? : [];
@@ -250,9 +258,9 @@ class DataGrid
 
     /**
      * Set mass operations
+     *
      * @return $this
      */
-
     public function setMassOperations($massops)
     {
         $this->massoperations = $massops ? : [];
@@ -260,13 +268,10 @@ class DataGrid
     }
 
     /**
-     * Set alias parameter
-     * to know whether
-     * aliasing is true or not.
+     * Set alias parameter to know whether aliasing is true or not.
      *
      * @return $this.
      */
-
     public function setAlias(bool $aliased)
     {
         $this->aliased = $aliased ? : false;
@@ -274,13 +279,10 @@ class DataGrid
     }
 
     /**
-     * Set the default
-     * pagination for
-     * data grid.
+     * Set the default pagination for data grid.
      *
      * @return $this
      */
-
     public function setPerPage($perpage)
     {
         $this->perpage = $perpage ? : 5;
@@ -288,12 +290,10 @@ class DataGrid
     }
 
     /**
-     * Set table name in front
-     * of query scope.
+     * Set table name in front of query scope.
      *
      * @return $this
      */
-
     public function setTable(string $table)
     {
         $this->table = $table ?: false;
@@ -301,12 +301,10 @@ class DataGrid
     }
 
     /**
-     * Set join bag if
-     * present.
+     * Set join bag if present.
      *
      * @return $this
      */
-
     public function setJoin(array $join)
     {
         $this->join = $join ?: [];
@@ -315,20 +313,45 @@ class DataGrid
 
     /**
      * Adds the custom css rules
-     * @retun $this
+     *
+     * @return $this
      */
-
     private function setCss($css = [])
     {
         $this->css = new Css($css);
         return $this->css;
     }
 
+
     /**
-     * setFilterableColumns
+     * Adds operands to be used for query condition
+     *
      * @return $this
      */
+    public function setOperators()
+    {
+        $operands = [
+            'eq' => "=",
+            'lt' => "<",
+            'gt' => ">",
+            'lte' => "<=",
+            'gte' => ">=",
+            'neqs' => "<>",
+            'neqn' => "!=",
+            'like' => "like",
+            'nlike' => "not like",
+        ];
 
+        $this->operators = $operands;
+
+        return $this;
+    }
+
+    /**
+     * setFilterableColumns
+     *
+     * @return $this
+     */
     // public function setFilterableColumns($filterable_columns = [])
     // {
     //     $this->join = $filterable_columns ?: [];
@@ -336,11 +359,25 @@ class DataGrid
     // }
 
     /**
-     * Section actions bag
-     * here.
+     * get alias of the leftmost table
+     *
+     * @return null|string
+     */
+    public function findTableAlias() {
+        if($this->aliased) {
+            $alias = trim(explode('as', $this->table)[1]);
+        } else {
+            $alias = null;
+        }
+
+        return $alias;
+    }
+
+    /**
+     * Section actions bag here.
+     *
      * @return $this
      */
-
     public function setActions($actions = []) {
         $this->actions = $actions ?: [];
         return $this;
@@ -351,17 +388,18 @@ class DataGrid
      *
      * @return $this
      */
-
     public function addColumns($columns = [], $reCreate = false)
     {
         if ($reCreate) {
             $this->columns = new Collection();
         }
+
         if ($columns) {
             foreach ($columns as $column) {
                 $this->addColumn($column);
             }
         }
+
         return $this;
     }
 
@@ -370,7 +408,6 @@ class DataGrid
      *
      * @return $this
      */
-
     public function addColumn($column = [])
     {
         if ($column instanceof Column) {
@@ -380,16 +417,15 @@ class DataGrid
         } else {
             throw new \Exception("DataGrid: Add Column argument is not valid!");
         }
+
         return $this;
     }
 
     /**
-     * Add ColumnMultiple.
-     * Currently is not
-     * of any use.
+     * Add multiple columns, not being used currently
+     *
      * @return $this
      */
-
     private function addColumnMultiple($column = [], $multiple = false)
     {
         if ($column instanceof Column) {
@@ -420,16 +456,6 @@ class DataGrid
     }
 
     /**
-     * Adds expressional verbs to be used
-     * @return $this
-     */
-    public function setOperators(array $operators)
-    {
-        $this->operators = $operators ?: [];
-        return $this;
-    }
-
-    /**
      * Add Pagination.
      *
      * @return $this
@@ -443,27 +469,28 @@ class DataGrid
         } else {
             throw new \Exception("DataGrid: Pagination argument is not valid!");
         }
+
         return $this;
     }
 
     /**
-     * Used for selecting
-     * the columns got in
-     * make from controller.
+     * Used for selecting the columns got in make from controller.
+     *
      * @return $this
      */
     private function getSelect()
     {
         $select = [];
+
+        if ($this->select) {
+            $this->query->addselect($this->select);
+        }
+
         foreach ($this->columns as $column) {
             $this->query->addselect(DB::raw($column->name.' as '.$column->alias));
         }
 
         // $this->query->select(...$select);
-
-        if ($this->select) {
-            $this->query->addselect($this->select);
-        }
     }
 
     /**
@@ -473,7 +500,7 @@ class DataGrid
      * name.
      * @return string
      */
-    public function findAlias($column_alias) {
+    public function findColumnAlias($column_alias) {
         foreach($this->columns as $column) {
             if($column->alias == $column_alias) {
                 return $column->name;
@@ -488,7 +515,7 @@ class DataGrid
      * name.
      * @return string
      */
-    public function findType($column_alias) {
+    public function findColumnType($column_alias) {
         foreach($this->columns as $column) {
             if($column->alias == $column_alias) {
                 return $column->type;
@@ -497,14 +524,13 @@ class DataGrid
     }
 
     /**
-     * Parse the URL
-     * and get it ready
-     * to be used.
+     * Parse the URL and get it ready to be used.
      */
     private function parse()
     {
         $parsed = [];
         $unparsed = url()->full();
+
         if (count(explode('?', $unparsed)) > 1) {
             $to_be_parsed = explode('?', $unparsed)[1];
 
@@ -519,17 +545,24 @@ class DataGrid
 
     /**
      * ->join('contacts', 'users.id', '=', 'contacts.user_id')
+     *
      * @return $this->query
      */
     private function getQueryWithJoin()
     {
         foreach ($this->join as $join) {
             $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondaryKey']);
+
+            if(isset($join['conditions'])) {
+                // dd($join['conditions']['condition'][0], $join['conditions']['condition'][1]);
+                $this->query->{$join['join']}($join['table'], $join['primaryKey'], $join['condition'], $join['secondaryKey'])->where($join['conditions']['condition'][0], $join['conditions']['condition'][1]);
+            }
         }
     }
 
     private function getQueryWithColumnFilters()
     {
+        // config()->set('key', $value);
         foreach ($this->columns as $column) {
             if ($column->filter) { // if the filter bag in array exists then these will be applied.
                 // if (count($column->filter['condition']) == count($column->filter['condition'], COUNT_RECURSIVE)) {
@@ -567,13 +600,13 @@ class DataGrid
 
         if ($this->aliased) {  //aliasing is expected in this case or it will be changed to presence of join bag
             foreach ($parsed as $key=>$value) {
-                $column_name = $this->findAlias($key);
-                $column_type = $this->findType($key);
+                $column_name = $this->findColumnAlias($key);
+                $column_type = $this->findColumnType($key);
 
                 if ($key == "sort") {
                     //resolve the case with the column helper class
                     if(substr_count($key,'_') >= 1)
-                        $column_name = $this->findAlias($key);
+                        $column_name = $this->findColumnAlias($key);
 
                     //case that don't need any resolving
                     $count_keys = count(array_keys($value));
@@ -599,7 +632,7 @@ class DataGrid
                         }
                     });
                 } else {
-                    $column_name = $this->findAlias($key);
+                    $column_name = $this->findColumnAlias($key);
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
                             if (strpos($column_name, 'CONCAT') !== false) {
@@ -640,7 +673,6 @@ class DataGrid
         } else {
             //this is the case for the non aliasing.
             foreach ($parsed as $key => $value) {
-
                 if ($key=="sort") {
 
                     //case that don't need any resolving
@@ -672,8 +704,8 @@ class DataGrid
 
                 } else {
                     // $column_name = $key;
-                    $column_name = $this->findAlias($key);
-                    $column_type = $this->findType($key);
+                    $column_name = $this->findColumnAlias($key);
+                    $column_type = $this->findColumnType($key);
 
                     if (array_keys($value)[0]=="like" || array_keys($value)[0]=="nlike") {
                         foreach ($value as $condition => $filter_value) {
@@ -712,7 +744,6 @@ class DataGrid
                     }
                 }
             }
-
         }
     }
 
@@ -811,9 +842,11 @@ class DataGrid
                 $this->getQueryWithFilters();
             }
 
-            if ($pagination == 'true') {
+            if ($pagination == 'true' && config('datagrid.distinct')) {
+                $this->results = $this->query->orderBy($this->select, 'desc')->distinct()->paginate($this->perpage)->appends(request()->except('page'));
+            } else if($pagination == 'true' && !config('datagrid.distinct')) {
                 $this->results = $this->query->orderBy($this->select, 'desc')->paginate($this->perpage)->appends(request()->except('page'));
-            } else {
+            }else {
                 $this->results = $this->query->orderBy($this->select, 'desc')->get();
             }
 
@@ -842,13 +875,10 @@ class DataGrid
     }
 
     /**
-     * Main Render Function,
-     * it renders views responsible
-     * for loading datagrid.
+     * Main Render Function, it renders views responsible for loading datagrid.
      *
      * @return view
      */
-
     public function render($pagination = true)
     {
         $this->getDbQueryResults($pagination);
