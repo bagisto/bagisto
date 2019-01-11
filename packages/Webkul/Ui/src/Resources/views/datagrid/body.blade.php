@@ -11,19 +11,19 @@
 
             @foreach($columns as $column)
                 @php
-                    $indexName = explode('.', $column['index']);
+                    $tableIndex = explode('.', $column['index']);
 
-                    $indexName = end($indexName);
+                    $tableIndex = end($tableIndex);
                 @endphp
 
                 @if(isset($column['wrapper']))
                     @if(isset($column['closure']) && $column['closure'] == true)
-                        <td>{!! $column['wrapper']($record->{$index}) !!}</td>
+                        <td>{!! $column['wrapper']($record->{$tableIndex}) !!}</td>
                     @else
-                        <td>{{ $column['wrapper']($record->{$index}) }}</td>
+                        <td>{{ $column['wrapper']($record->{$tableIndex}) }}</td>
                     @endif
                 @else
-                    <td>{{ $record->{$index} }}</td>
+                    <td>{{ $record->{$tableIndex} }}</td>
                 @endif
             @endforeach
 

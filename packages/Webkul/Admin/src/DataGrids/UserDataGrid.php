@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\AbsGrid;
+use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
@@ -11,7 +11,7 @@ use DB;
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class UserDataGrid extends AbsGrid
+class UserDataGrid extends DataGrid
 {
     public $allColumns = [];
 

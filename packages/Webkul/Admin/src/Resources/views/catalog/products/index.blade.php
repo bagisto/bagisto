@@ -22,7 +22,7 @@
             {{-- @inject('product','Webkul\Admin\DataGrids\ProductDataGrid')
             {!! $product->render() !!} --}}
 
-            @inject('products', 'Webkul\Admin\DataGrids\TestDataGrid')
+            @inject('products', 'Webkul\Admin\DataGrids\ProductDataGrid')
             {!! $products->render() !!}
         </div>
     </div>
