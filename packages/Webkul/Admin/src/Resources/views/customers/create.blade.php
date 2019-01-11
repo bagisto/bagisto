@@ -62,6 +62,12 @@
                         <span class="control-error" v-if="errors.has('date_of_birth')">@{{ errors.first('date_of_birth') }}</span>
                     </div>
 
+                    <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
+                        <label for="phone">{{ __('admin::app.customers.customers.phone') }}</label>
+                        <input type="text" class="control" name="phone" v-validate="'numeric|max:10'" value="{{ old('phone') }}" data-vv-as="&quot;{{ __('admin::app.customers.customers.phone') }}&quot;">
+                        <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
+                    </div>
+
                     <div class="control-group">
                         <label for="customerGroup" >{{ __('admin::app.customers.customers.customer_group') }}</label>
                         <select  class="control" name="customer_group_id">

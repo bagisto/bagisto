@@ -17,7 +17,7 @@ use Illuminate\Pagination\Paginator;
 
 class Pagination extends Paginator
 {
-    const LIMIT = 20;
+    const LIMIT = 10;
     const OFFSET = 0;
     const VIEW = '';
 

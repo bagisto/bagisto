@@ -7,6 +7,10 @@ Route::group(['middleware' => ['web']], function () {
             'view' => 'admin::users.sessions.create'
         ])->name('admin.session.create');
 
+        Route::get('/testgrid', 'Webkul\Admin\Http\Controllers\DataGridController@testGrid')->defaults('_config', [
+            'view' => 'admin::catalog.categories.test'
+        ]);
+
         //login post route to admin auth controller
         Route::post('/login', 'Webkul\User\Http\Controllers\SessionController@store')->defaults('_config', [
             'redirect' => 'admin.dashboard.index'

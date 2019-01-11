@@ -2,143 +2,93 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * Attributes Family DataGrid
+ * Product Data Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class AttributeFamilyDataGrid
+class AttributeFamilyDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Data Grid implementation for Attribute Families
-     */
-    public function createAttributeFamilyDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('attribute_families')->select('id')->addSelect('id', 'code', 'name');
 
-            return DataGrid::make([
-            'name' => 'Attribute Family',
-            'table' => 'attribute_families',
-            'select' => 'id',
-            'perpage' => 10,
-            'aliased' => false, //use this with false as default and true in case of joins
-
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-            ],
-
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.catalog.families.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
-                    'type' => 'Delete',
-                    'route' => 'admin.catalog.families.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
-
-            'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
-            ],
-
-            //use aliasing on secodary columns if join is performed
-
-            'columns' => [
-                [
-                    'name' => 'id',
-                    'alias' => 'attributeFamilyId',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'code',
-                    'alias' => 'attributeFamilyCode',
-                    'type' => 'string',
-                    'label' => 'Code',
-                    'sortable' => true,
-                ], [
-                    'name' => 'name',
-                    'alias' => 'attributeFamilyName',
-                    'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
-                ],
-            ],
-
-            'filterable' => [
-                [
-                    'column' => 'id',
-                    'alias' => 'attributeFamilyId',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'code',
-                    'alias' => 'attributeFamilyCode',
-                    'type' => 'string',
-                    'label' => 'Code',
-                ], [
-                    'column' => 'name',
-                    'alias' => 'attributeFamilyName',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ],
-            ],
-
-            //don't use aliasing in case of searchables
-
-            'searchable' => [
-                [
-                    'column' => 'name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                ], [
-                    'column' => 'code',
-                    'type' => 'string',
-                    'label' => 'Code',
-                ],
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
-
-        ]);
-
+        $this->setQueryBuilder($queryBuilder);
     }
 
-    public function render()
+    public function setIndex() {
+        $this->index = 'id'; //the column that needs to be treated as index column
+    }
+
+    public function addColumns()
     {
+        $this->addColumn([
+            'index' => 'id',
+            'alias' => 'attributeFamilyId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
 
-        return $this->createAttributeFamilyDataGrid()->render();
+        $this->addColumn([
+            'index' => 'code',
+            'alias' => 'attributeFamilyCode',
+            'label' => 'Code',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
 
+        $this->addColumn([
+            'index' => 'name',
+            'alias' => 'attributeFamilyName',
+            'label' => 'Name',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'Edit',
+            'route' => 'admin.catalog.families.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->addAction([
+            'type' => 'Delete',
+            'route' => 'admin.catalog.families.delete',
+            // 'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.familites.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.familites.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
     }
 }

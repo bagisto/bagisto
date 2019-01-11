@@ -2,151 +2,92 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\AbsGrid;
+use DB;
 
 /**
- * Tax Category DataGrid
+ * Tax Category Grid class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
-class TaxCategoryDataGrid
+class TaxCategoryDataGrid extends AbsGrid
 {
+    public $allColumns = [];
 
-    /**
-     * The Tax Category Data Grid implementation.
-     */
-    public function createTaxCategoryDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('tax_categories')->addSelect('id', 'name', 'code');
 
-        return DataGrid::make([
-
-            'name' => 'Tax Category',
-            'table' => 'tax_categories as tr',
-            'select' => 'tr.id',
-            'perpage' => 10,
-            'aliased' => true, //use this with false as default and true in case of joins
-
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-                // [
-                //     'route' => route('admin.datagrid.index'),
-                //     'method' => 'POST',
-                //     'label' => 'View Grid',
-                //     'type' => 'select',
-                //     'options' =>[
-                //         1 => 'Edit',
-                //         2 => 'Set',
-                //         3 => 'Change Status'
-                //     ]
-                // ],
-            ],
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.tax-categories.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ],
-                [
-                    'type' => 'Delete',
-                    'route' => 'admin.tax-categories.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
-            'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'roles as r',
-                //     'primaryKey' => 'u.role_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'r.id',
-                // ]
-            ],
-
-            //use aliasing on secodary columns if join is performed
-            'columns' => [
-                [
-                    'name' => 'tr.id',
-                    'alias' => 'ID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'tr.name',
-                    'alias' => 'Name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
-                ], [
-                    'name' => 'tr.code',
-                    'alias' => 'code',
-                    'type' => 'string',
-                    'label' => 'Code',
-                    'sortable' => true,
-                ],
-            ],
-
-            //don't use aliasing in case of filters
-            'filterable' => [
-                [
-                    'column' => 'tr.id',
-                    'alias' => 'ID',
-                    'type' => 'number',
-                    'label' => 'ID'
-                ], [
-                    'column' => 'tr.name',
-                    'alias' => 'Name',
-                    'type' => 'string',
-                    'label' => 'Name'
-                ], [
-                    'column' => 'tr.code',
-                    'alias' => 'code',
-                    'type' => 'string',
-                    'label' => 'Code'
-                ]
-            ],
-
-            //don't use aliasing in case of searchables
-            'searchable' => [
-                [
-                    'column' => 'tr.code',
-                    'type' => 'string',
-                    'label' => 'Code'
-                ], [
-                    'column' => 'tr.name',
-                    'type' => 'string',
-                    'label' => 'Name'
-                ]
-            ],
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
-
-        ]);
-
+        $this->setQueryBuilder($queryBuilder);
     }
 
-    public function render() {
+    public function setIndex() {
+        $this->index = 'id';
+    }
 
-        return $this->createTaxCategoryDataGrid()->render();
+    public function addColumns()
+    {
+        $this->addColumn([
+            'index' => 'id',
+            'alias' => 'taxCatId',
+            'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
 
+        $this->addColumn([
+            'index' => 'name',
+            'alias' => 'taxCatName',
+            'label' => 'Name',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'code',
+            'alias' => 'taxCatCode',
+            'label' => 'Code',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'Edit',
+            'route' => 'admin.tax-categories.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->addAction([
+            'type' => 'Delete',
+            'route' => 'admin.tax-categories.delete',
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.products.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.products.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
     }
 }

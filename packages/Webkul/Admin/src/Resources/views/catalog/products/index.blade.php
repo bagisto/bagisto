@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-    <div class="content">
+    <div class="content" style="height: 100%;">
         <div class="page-header">
             <div class="page-title">
                 <h1>{{ __('admin::app.catalog.products.title') }}</h1>
@@ -19,8 +19,11 @@
         </div>
 
         <div class="page-content">
-            @inject('product','Webkul\Admin\DataGrids\ProductDataGrid')
-            {!! $product->render() !!}
+            {{-- @inject('product','Webkul\Admin\DataGrids\ProductDataGrid')
+            {!! $product->render() !!} --}}
+
+            @inject('products', 'Webkul\Admin\DataGrids\TestDataGrid')
+            {!! $products->render() !!}
         </div>
     </div>
 @stop
