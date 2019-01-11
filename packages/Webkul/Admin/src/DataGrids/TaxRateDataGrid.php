@@ -16,7 +16,7 @@ class TaxRateDataGrid extends DataGrid
     public $allColumns = [];
 
     public function __construct() {
-        $this->itemsPerPage = 5;
+        $this->itemsPerPage = 10;
     }
 
     public function prepareQueryBuilder()

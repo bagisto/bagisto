@@ -17,7 +17,7 @@ class AttributeDataGrid extends DataGrid
 
     public function __construct()
     {
-        $this->itemsPerPage = 5;
+        $this->itemsPerPage = 10;
     }
 
     public function prepareQueryBuilder()
