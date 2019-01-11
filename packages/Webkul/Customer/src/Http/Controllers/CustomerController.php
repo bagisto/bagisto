@@ -99,6 +99,7 @@ class CustomerController extends Controller
             'gender' => 'required',
             'date_of_birth' => 'date|before:today',
             'email' => 'email|unique:customers,email,'.$id,
+            'phone' => 'nullable|numeric|unique:customers,phone,'. $id,
             'password' => 'confirmed'
         ]);
 

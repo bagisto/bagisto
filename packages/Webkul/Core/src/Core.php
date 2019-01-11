@@ -695,7 +695,6 @@ class Core
         foreach (config('core') as $coreData) {
             if (isset($coreData['fields'])) {
                 foreach ($coreData['fields'] as $field) {
-
                     $name = $coreData['key'] . '.' . $field['name'];
 
                     if ($name == $fieldName ) {

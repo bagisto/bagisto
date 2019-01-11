@@ -106,16 +106,21 @@ return [
         'name' => 'Origin',
         'sort' => 0,
         'fields' => [
-            // [
-            //     'name' => 'country',
-            //     'title' => 'Country',
-            //     'type' => 'country_state',
-            //     'stateName' => 'state'
-            //     'validation' => 'required',
-            //     'channel_based' => true,
-            //     'locale_based' => true
-            // ],
             [
+                'name' => 'country',
+                'title' => 'Country',
+                'type' => 'country',
+                'validation' => 'required',
+                'channel_based' => true,
+                'locale_based' => true
+            ], [
+                'name' => 'state',
+                'title' => 'State',
+                'type' => 'state',
+                'validation' => 'required',
+                'channel_based' => true,
+                'locale_based' => true
+            ], [
                 'name' => 'address1',
                 'title' => 'Address Line 1',
                 'type' => 'text',

@@ -103,8 +103,8 @@ class CustomerController extends Controller
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',
-            'phone' => 'nullable|numeric|unique:customers,phone',
-            'email' => 'required|unique:customers,email',
+            'phone' => 'nullable|numeric|unique:customers,phone,',
+            'email' => 'required|unique:customers,email,',
             'date_of_birth' => 'date|before:today'
         ]);
 

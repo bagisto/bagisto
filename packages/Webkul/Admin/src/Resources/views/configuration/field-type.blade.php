@@ -90,48 +90,57 @@
 
             <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]" data-vv-as="&quot;{{ $field['name'] }}&quot;"  multiple>
 
-                @if (isset($field['repository']))
-                    @foreach($value as $option)
-                        <option value="{{  $option['name'] }}" {{ in_array($option['name'], explode(',', $selectedOption)) ? 'selected' : ''}}>
-                            {{ $option['name'] }}
-                        </option>
-                    @endforeach
-                @else
-                    @foreach($field['options'] as $option)
+                @foreach($field['options'] as $option)
 
-                        <?php
-                            if($option['value'] == false) {
-                                $value = 0;
-                            } else {
-                                $value = $option['value'];
-                            }
+                    <?php
+                        if($option['value'] == false) {
+                            $value = 0;
+                        } else {
+                            $value = $option['value'];
+                        }
 
-                            $selectedOption = core()->getConfigData($name) ?? '';
-                        ?>
+                        $selectedOption = core()->getConfigData($name) ?? '';
+                    ?>
 
-                        <option value="{{ $value }}" {{ $value == $selectedOption ? 'selected' : ''}}>
-                            {{ $option['title'] }}
-                        </option>
+                    <option value="{{ $value }}" {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}>
+                        {{ $option['title'] }}
+                    </option>
 
-                    @endforeach
-                @endif
+                @endforeach
 
             </select>
 
         @elseif ($field['type'] == 'country')
 
-            <select type="text" v-validate="'required'" class="control" id="country" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]"  data-vv-as="&quot;{{ __('admin::app.customers.customers.country') }}&quot;" onchange="myFunction()">
+            <select type="text" v-validate="'{{ $validations }}'" class="control" id="country" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]"  data-vv-as="&quot;{{ __('admin::app.customers.customers.country') }}&quot;" onchange="selectStates()">
                 <option value=""></option>
+
+                <?php
+                    $selectedOption = core()->getConfigData($name) ?? '';
+                ?>
 
                 @foreach (core()->countries() as $country)
 
-                    <option value="{{ $country->code }}">
+                    <option value="{{ $country->code }}" {{ $country->code == $selectedOption ? 'selected' : ''}}>
                         {{ $country->name }}
                     </option>
 
                 @endforeach
+
             </select>
 
+        @elseif ($field['type'] == 'state')
+
+            <?php
+                $selectedOption = core()->getConfigData($name) ?? '';
+            ?>
+
+            <select type="text" class="control" id="state" onchange="stateCode()">
+            </select>
+
+            <input type="text" class="control" id="othstate"  value="{{ $selectedOption }}"  onkeyup="stateCode()">
+
+            <input type="hidden" v-validate="'{{ $validations }}'" class="control" id="stateValue" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]"  data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;" value="{{ $selectedOption }}">
 
         @endif
 
@@ -140,26 +149,46 @@
     </div>
 
 
-
-
 @push('scripts')
 
 <script>
+    $('#othstate').show();
+    $('#state').hide();
 
-    function myFunction() {
+    var countryStates = <?php echo json_encode(core()->groupedStatesByCountries()) ;?>;
+
+    if (document.getElementById("othstate")) {
+        var stateName = document.getElementById("othstate").value;
+        selectStates();
+    }
+
+    function selectStates() {
         var countryId = document.getElementById("country").value;
-        var countryStates = <?php echo json_encode(core()->groupedStatesByCountries()) ;?>;
 
         for (var key in countryStates) {
-            if(key == countryId){
+            if (countryStates[countryId]) {
+                $('#othstate').hide();
+                $('#state').show();
 
+                if (key == countryId){
+                    $('#state').empty();
+                    for (state in countryStates[key]) {
+                        $("#state").append('<option value="'+countryStates[key][state]['code']+'">'+countryStates[key][state]['default_name']+'</option>');
 
-                for(state in countryStates[key]) {
-                    console.log(state);
+                        if (stateName) {
+                            $("#state > [value=" + stateName + "]").attr("selected", "true");
+                        }
+                    }
                 }
+            } else {
+                $('#othstate').show();
+                $('#state').hide();
             }
         }
+    }
 
+    function stateCode() {
+        document.getElementById("stateValue").value = document.getElementById(event.target.id).value;
     }
 
 </script>
