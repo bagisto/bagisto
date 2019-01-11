@@ -36,9 +36,6 @@ return [
                         'title' => 'Pending',
                         'value' => 'pending'
                     ], [
-                        'title' => 'Approved',
-                        'value' => 'Approved'
-                    ], [
                         'title' => 'Pending Payment',
                         'value' => 'pending_payment'
                     ]
@@ -87,9 +84,6 @@ return [
                         'title' => 'Pending',
                         'value' => 'pending'
                     ], [
-                        'title' => 'Approved',
-                        'value' => 'Approved'
-                    ], [
                         'title' => 'Pending Payment',
                         'value' => 'pending_payment'
                     ]
@@ -137,9 +131,6 @@ return [
                     [
                         'title' => 'Pending',
                         'value' => 'pending'
-                    ], [
-                        'title' => 'Approved',
-                        'value' => 'Approved'
                     ], [
                         'title' => 'Pending Payment',
                         'value' => 'pending_payment'

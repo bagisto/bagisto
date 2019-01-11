@@ -55,6 +55,11 @@
                         <td>{{ $customer->email }}</td>
                     </tr>
 
+                    <tr>
+                        <td>{{ __('shop::app.customer.account.profile.phone') }}</td>
+                        <td>{{ $customer->phone }}</td>
+                    </tr>
+
                     {{-- @if($customer->subscribed_to_news_letter == 1)
                         <tr>
                             <td> {{ __('shop::app.footer.subscribe-newsletter') }}</td>

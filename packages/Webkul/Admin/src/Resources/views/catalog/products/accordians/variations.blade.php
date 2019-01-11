@@ -14,7 +14,7 @@
         }
         .table td.actions .icon.pencil-lg-icon {
             margin-right: 10px;
-        }        
+        }
     </style>
 @stop
 
@@ -46,7 +46,7 @@
 
             <div class="page-content">
                 <div class="form-container">
-                        
+
                     <div v-for='(attribute, index) in super_attributes' class="control-group" :class="[errors.has('add-variant-form.' + attribute.code) ? 'has-error' : '']">
                         <label :for="attribute.code" class="required">@{{ attribute.admin_name }}</label>
                         <select v-validate="'required'" v-model="variant[attribute.code]" class="control" :id="attribute.code" :name="attribute.code" :data-vv-as="'&quot;' + attribute.admin_name + '&quot;'">
@@ -148,7 +148,7 @@
             </td>
 
             <td>
-                <div class="control-group" :class="[errors.has(variantInputName + '[price]') ? 'has-error' : '']">
+                <div class="control-group" :class="[errors.has(variantInputName + '[weight]') ? 'has-error' : '']">
                     <input type="text" v-validate="'required'" v-model="variant.weight"  :name="[variantInputName + '[weight]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.weight') }}&quot;"/>
                     <span class="control-error" v-if="errors.has(variantInputName + '[weight]')">@{{ errors.first(variantInputName + '[weight]') }}</span>
                 </div>
@@ -232,7 +232,7 @@
                                         weight: 0,
                                         status: 1
                                     }, this.variant));
-                                
+
                                 this.resetModel();
 
                                 this.$parent.closeModal();
@@ -252,7 +252,7 @@
         });
 
         Vue.component('variant-list', {
-            
+
             template: '#variant-list-template',
 
             inject: ['$validator'],
@@ -325,13 +325,13 @@
 
                 sourceInventoryQty (inventorySourceId) {
                     var inventories = this.variant.inventories.filter(function(inventory) {
-                        return inventorySourceId === inventory.inventory_source_id;
+                        return inventorySourceId === inventory.inventory_source_id && !inventory.vendor_id;
                     })
 
                     if(inventories.length)
                         return inventories[0]['qty'];
 
-                    return 0; 
+                    return 0;
                 },
 
                 updateTotalQty () {

@@ -159,6 +159,7 @@ class ShipmentController extends Controller
 
                 $inventory = $product->inventories()
                         ->where('inventory_source_id', $data['shipment']['source'])
+                        ->where('vendor_id', 0)
                         ->first();
 
                 if ($orderItem->qty_to_ship < $qty || $inventory->qty < $qty) {

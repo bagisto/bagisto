@@ -7,7 +7,7 @@
 
                 $qty = 0;
                 foreach ($product->inventories as $inventory) {
-                    if($inventory->inventory_source_id == $inventorySource->id) {
+                    if($inventory->inventory_source_id == $inventorySource->id && !$inventory->vendor_id) {
                         $qty = $inventory->qty;
                         break;
                     }
