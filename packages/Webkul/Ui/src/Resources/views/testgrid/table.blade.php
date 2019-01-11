@@ -583,8 +583,6 @@
 
                     //triggered when any select box is clicked in the datagrid
                     select() {
-                        console.log(this.dataIds);
-
                         this.allSelected = false;
 
                         this.massActionsToggle = true;

@@ -20,6 +20,7 @@ abstract class AbsGrid
     protected $massActions = [];
     protected $request;
     protected $parse;
+    // protected $enableMassAction = false;
     // protected $gridName = null;
 
     abstract public function prepareMassActions();

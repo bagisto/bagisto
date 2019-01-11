@@ -3,7 +3,7 @@
         <tr>
             <td>
                 <span class="checkbox">
-                    <input type="checkbox" v-model="dataIds" @change="select" :value="{{ $record->{$index} }}">
+                    <input type="checkbox" v-model="dataIds" @change="select" value="{{ $record->{$index} }}">
 
                     <label class="checkbox-view" for="checkbox1"></label>
                 </span>
@@ -11,9 +11,9 @@
 
             @foreach($columns as $column)
                 @php
-                    $index = explode('.', $column['index']);
+                    $indexName = explode('.', $column['index']);
 
-                    $index = end($index);
+                    $indexName = end($indexName);
                 @endphp
 
                 @if(isset($column['wrapper']))
