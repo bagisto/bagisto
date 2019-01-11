@@ -15,7 +15,8 @@ class AttributeDataGrid extends DataGrid
 {
     public $allColumns = [];
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->itemsPerPage = 5;
     }
 
@@ -138,7 +139,8 @@ class AttributeDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.catalog.attributes.edit',
@@ -152,7 +154,8 @@ class AttributeDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareMassActions() {
+    public function prepareMassActions()
+    {
         $this->addMassAction([
             'type' => 'delete',
             'action' => route('admin.catalog.attributes.massdelete'),

@@ -136,9 +136,9 @@
                 </div>
                 <div class="filter-row-two">
                     <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters">
-                        <span v-if="filter.column == 'sort'">@{{ filter.cond }}</span>
+                        <span v-if="filter.column == 'sort'">@{{ filter.label }}</span>
                         <span v-else-if="filter.column == 'search'">Search</span>
-                        <span v-else>@{{ filter.column }}</span>
+                        <span v-else>@{{ filter.label }}</span>
 
                         <span class="wrapper">
                             @{{ filter.val }}
@@ -309,23 +309,47 @@
                     },
 
                     getResponse() {
+                        label = '';
+
+                        for(colIndex in this.columns) {
+                            if(this.columns[colIndex].alias == this.columnOrAlias) {
+                                label = this.columns[colIndex].label;
+                            }
+                        }
+
                         if(this.type == 'string') {
-                            this.formURL(this.columnOrAlias, this.stringCondition, this.stringValue)
+                            this.formURL(this.columnOrAlias, this.stringCondition, this.stringValue, label)
                         } else if(this.type == 'number') {
-                            this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue);
+                            this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
                         } else if(this.type == 'boolean') {
-                            this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue);
+                            this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue, label);
                         } else if(this.type == 'datetime') {
-                            this.formURL(this.columnOrAlias, this.datetimeCondition, this.datetimeValue);
+                            this.formURL(this.columnOrAlias, this.datetimeCondition, this.datetimeValue, label);
                         }
                     },
 
                     sortCollection(alias) {
-                        this.formURL("sort", alias, this.sortAsc);
+                        label = '';
+
+                        for(colIndex in this.columns) {
+                            if(this.columns[colIndex].alias == this.columnOrAlias) {
+                                label = this.columns[colIndex].label;
+                            }
+                        }
+
+                        this.formURL("sort", alias, this.sortAsc, label);
                     },
 
                     searchCollection(searchValue) {
-                        this.formURL("search", 'all', searchValue);
+                        label = '';
+
+                        for(colIndex in this.columns) {
+                            if(this.columns[colIndex].alias == this.columnOrAlias) {
+                                label = this.columns[colIndex].label;
+                            }
+                        }
+
+                        this.formURL("search", 'all', searchValue, label);
                     },
 
                     // function triggered to check whether the query exists or not and then call the make filters from the url
@@ -391,7 +415,7 @@
                     },
 
                     //make array of filters, sort and search
-                    formURL(column, condition, response) {
+                    formURL(column, condition, response, label) {
                         var obj = {};
 
                         if(column == "" || condition == "" || response == "" || column == null || condition == null || response == null) {
@@ -406,15 +430,10 @@
                                     for(j = 0; j < this.filters.length; j++) {
                                         if(this.filters[j].column == column) {
                                             if(this.filters[j].cond == condition && this.filters[j].val == response) {
+                                                filterRepeated = 1;
+
                                                 return false;
                                             }
-
-                                            filterRepeated = 1;
-
-                                            this.filters[j].cond = condition;
-                                            this.filters[j].val = response;
-
-                                            this.makeURL();
                                         }
                                     }
 
@@ -422,7 +441,7 @@
                                         obj.column = column;
                                         obj.cond = condition;
                                         obj.val = response;
-
+                                        obj.label = label;
 
                                         this.filters.push(obj);
                                         obj = {};
@@ -456,6 +475,7 @@
                                                 this.filters[j].column = column;
                                                 this.filters[j].cond = condition;
                                                 this.filters[j].val = response;
+                                                this.filters[j].label = label;
 
                                                 this.makeURL();
                                             }
@@ -471,6 +491,7 @@
                                         obj.column = column;
                                         obj.cond = condition;
                                         obj.val = this.currentSort;
+                                        obj.label = label;
 
                                         this.filters.push(obj);
 
@@ -483,11 +504,12 @@
                                 if(column == "search") {
                                     search_found = 0;
 
-                                    for(j = 0;j < this.filters.length;j++) {
+                                    for(j = 0; j < this.filters.length; j++) {
                                         if(this.filters[j].column == "search") {
                                             this.filters[j].column = column;
                                             this.filters[j].cond = condition;
                                             this.filters[j].val = response;
+                                            this.filters[j].label = label;
 
                                             this.makeURL();
                                         }
@@ -503,6 +525,7 @@
                                         obj.column = column;
                                         obj.cond = condition;
                                         obj.val = response;
+                                        obj.label = label;
 
                                         this.filters.push(obj);
 
@@ -515,6 +538,7 @@
                                 obj.column = column;
                                 obj.cond = condition;
                                 obj.val = response;
+                                obj.label = label;
 
                                 this.filters.push(obj);
 
@@ -562,9 +586,37 @@
                             cond = moreSplitted[i][0].replace(']','').split('[')[1]
                             val = moreSplitted[i][1];
 
+                            label = 'cannotfindthislabel';
+
+                            // for(colIndex in this.columns) {
+                            //     if(this.columns[colIndex].alias == this.columnOrAlias) {
+                            //         label = this.columns[colIndex].label;
+                            //     }
+                            // }
+
                             obj.column = col;
                             obj.cond = cond;
                             obj.val = val;
+
+                            if(col == "sort") {
+                                label = '';
+
+                                for(colIndex in this.columns) {
+                                    if(this.columns[colIndex].alias == obj.cond) {
+                                        obj.label = this.columns[colIndex].label;
+                                    }
+                                }
+                            } else if(col == "search") {
+                                obj.label = 'Search';
+                            } else {
+                                obj.label = '';
+
+                                for(colIndex in this.columns) {
+                                    if(this.columns[colIndex].alias == obj.column) {
+                                        obj.label = this.columns[colIndex].label;
+                                    }
+                                }
+                            }
 
                             if(col != undefined && cond != undefined && val != undefined)
                                 this.filters.push(obj);
@@ -622,7 +674,7 @@
                             }
                         }
 
-                        console.log(this.dataIds);
+                        // console.log(this.dataIds);
                     },
 
                     removeMassActions() {
