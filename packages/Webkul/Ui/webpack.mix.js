@@ -4,6 +4,7 @@ require("laravel-mix-merge-manifest");
 var publicPath = 'publishable/assets';
 // var publicPath = "../../../public/vendor/webkul/ui/assets";
 
+
 mix.setPublicPath(publicPath).mergeManifest();
 mix.disableNotifications();
 
