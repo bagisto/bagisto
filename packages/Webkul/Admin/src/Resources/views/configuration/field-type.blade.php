@@ -62,7 +62,7 @@
 
                 @if (isset($field['repository']))
                     @foreach($value as $option)
-                        <option value="{{  $option['name'] }}" {{ $option['name'] ==            $selectedOption ? 'selected' : ''}}
+                        <option value="{{  $option['name'] }}" {{ $option['name'] == $selectedOption ? 'selected' : ''}}
                         {{ $option['name'] }}
                         </option>
                     @endforeach
@@ -90,48 +90,41 @@
 
             <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]" data-vv-as="&quot;{{ $field['name'] }}&quot;"  multiple>
 
-                @if (isset($field['repository']))
-                    @foreach($value as $option)
-                        <option value="{{  $option['name'] }}" {{ in_array($option['name'], explode(',', $selectedOption)) ? 'selected' : ''}}>
-                            {{ $option['name'] }}
-                        </option>
-                    @endforeach
-                @else
-                    @foreach($field['options'] as $option)
+                @foreach($field['options'] as $option)
 
-                        <?php
-                            if($option['value'] == false) {
-                                $value = 0;
-                            } else {
-                                $value = $option['value'];
-                            }
+                    <?php
+                        if($option['value'] == false) {
+                            $value = 0;
+                        } else {
+                            $value = $option['value'];
+                        }
 
-                            $selectedOption = core()->getConfigData($name) ?? '';
-                        ?>
+                        $selectedOption = core()->getConfigData($name) ?? '';
+                    ?>
 
-                        <option value="{{ $value }}" {{ $value == $selectedOption ? 'selected' : ''}}>
-                            {{ $option['title'] }}
-                        </option>
+                    <option value="{{ $value }}" {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}>
+                        {{ $option['title'] }}
+                    </option>
 
-                    @endforeach
-                @endif
+                @endforeach
 
             </select>
 
         @elseif ($field['type'] == 'country')
 
-            <select type="text" v-validate="'required'" class="control" id="country" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]"  data-vv-as="&quot;{{ __('admin::app.customers.customers.country') }}&quot;" onchange="myFunction()">
-                <option value=""></option>
+            <?php
+                $countryCode = core()->getConfigData($name) ?? '';
+            ?>
 
-                @foreach (core()->countries() as $country)
+            <country code = {{ $countryCode }}></country>
 
-                    <option value="{{ $country->code }}">
-                        {{ $country->name }}
-                    </option>
+        @elseif ($field['type'] == 'state')
 
-                @endforeach
-            </select>
+            <?php
+                $stateCode = core()->getConfigData($name) ?? '';
+            ?>
 
+            <state code = {{ $stateCode }}></state>
 
         @endif
 
@@ -140,30 +133,107 @@
     </div>
 
 
-
-
 @push('scripts')
 
-<script>
+<script type="text/x-template" id="country-template">
 
-    function myFunction() {
-        var countryId = document.getElementById("country").value;
-        var countryStates = <?php echo json_encode(core()->groupedStatesByCountries()) ;?>;
+    <div>
+        <select type="text" v-validate="'required'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" v-model="country" data-vv-as="&quot;{{ __('admin::app.customers.customers.country') }}&quot;" @change="someHandler">
+            <option value=""></option>
 
-        for (var key in countryStates) {
-            if(key == countryId){
+            @foreach (core()->countries() as $country)
 
+                <option value="{{ $country->code }}">{{ $country->name }}</option>
 
-                for(state in countryStates[key]) {
-                    console.log(state);
-                }
-            }
-        }
-
-    }
+            @endforeach
+        </select>
+    </div>
 
 </script>
 
+<script>
+    Vue.component('country', {
+
+        template: '#country-template',
+
+        inject: ['$validator'],
+
+        props: ['code'],
+
+        data: () => ({
+            country: "",
+        }),
+
+        mounted() {
+            this.country = this.code;
+            this.someHandler()
+        },
+
+        methods: {
+            someHandler() {
+                this.$root.$emit('sendCountryCode', this.country)
+            },
+        }
+    });
+</script>
+
+<script type="text/x-template" id="state-template">
+
+    <div>
+        <input type="text" v-validate="'required'" v-if="!haveStates()" class="control" v-model="state" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;"/>
+
+        <select v-validate="'required'" v-if="haveStates()" class="control" v-model="state" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;" >
+
+            <option value="">{{ __('admin::app.customers.customers.select-state') }}</option>
+
+            <option v-for='(state, index) in countryStates[country]' :value="state.code">
+                @{{ state.default_name }}
+            </option>
+
+        </select>
+
+    </div>
+
+</script>
+
+<script>
+    Vue.component('state', {
+
+        template: '#state-template',
+
+        inject: ['$validator'],
+
+        props: ['code'],
+
+        data: () => ({
+
+            state: "",
+
+            country: "",
+
+            countryStates: @json(core()->groupedStatesByCountries())
+        }),
+
+        mounted() {
+            this.state = this.code
+        },
+
+        methods: {
+            haveStates() {
+                this.$root.$on('sendCountryCode', (country) => {
+                    this.country = country;
+                })
+
+                if(this.countryStates[this.country] && this.countryStates[this.country].length)
+                    return true;
+
+                return false;
+            },
+        }
+    });
+</script>
+
 @endpush
+
 
 

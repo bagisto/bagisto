@@ -575,6 +575,7 @@ return [
             'country' => 'Country',
             'male' => 'Male',
             'female' => 'Female',
+            'phone' => 'Phone',
             'created' => 'Customer created successfully.',
             'updated' => 'Customer updated successfully.',
             'deleted' => 'Customer deleted successfully.',

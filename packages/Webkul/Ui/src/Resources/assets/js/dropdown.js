@@ -15,7 +15,7 @@ $(function() {
         var currentElement = $(e.currentTarget);
         if(currentElement.attr('disabled') == "disabled")
             return;
-        
+
         $('.dropdown-list').hide();
         if(currentElement.hasClass('active')) {
             currentElement.removeClass('active');
@@ -59,7 +59,7 @@ $(function() {
             height = dropdown.height() + 50;
             var topOffset = dropdown.offset().top - 70;
             var bottomOffset = $(window).height() - topOffset - dropdown.height();
-            
+
             if(bottomOffset > topOffset || height < bottomOffset) {
                 dropdown.removeClass("bottom");
                 if(dropdown.hasClass('top-right')) {
