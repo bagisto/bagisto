@@ -45,7 +45,13 @@ class NewsLetterDataGrid extends AbsGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'True';
+                else
+                    return 'False';
+            }
         ]);
 
         $this->addColumn([

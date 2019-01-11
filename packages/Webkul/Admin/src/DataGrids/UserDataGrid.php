@@ -57,10 +57,10 @@ class UserDataGrid extends AbsGrid
             'sortable' => true,
             'width' => '100px',
             'wrapper' => function($value) {
-                if($value == 0) {
-                    return false;
+                if($value == 1) {
+                    return 'Active';
                 } else {
-                    return true;
+                    return 'Inactive';
                 }
             }
         ]);

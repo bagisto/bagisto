@@ -61,11 +61,17 @@ class CategoryDataGrid extends AbsGrid
         $this->addColumn([
             'index' => 'cat.status',
             'alias' => 'catStatus',
-            'label' => 'Type',
+            'label' => 'Status',
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => true,
-            'width' => '100px'
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'Active';
+                else
+                    return 'Inactive';
+            }
         ]);
 
         $this->addColumn([

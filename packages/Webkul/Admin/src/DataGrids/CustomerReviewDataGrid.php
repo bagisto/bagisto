@@ -75,7 +75,14 @@ class CustomerReviewDataGrid extends AbsGrid
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
+            'width' => '100px',
+            'closure' => true,
+            'wrapper' => function ($value) {
+                if($value == 'approved')
+                    return '<span class="badge badge-md badge-success">Approved</span>';
+                else if($value == "pending")
+                    return '<span class="badge badge-md badge-warning">Pending</span>';
+            },
         ]);
     }
 

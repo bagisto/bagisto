@@ -75,7 +75,13 @@ class AttributeDataGrid extends AbsGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'True';
+                else
+                    return 'False';
+            }
         ]);
 
         $this->addColumn([
@@ -85,7 +91,13 @@ class AttributeDataGrid extends AbsGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'True';
+                else
+                    return 'False';
+            }
         ]);
 
         $this->addColumn([
@@ -95,7 +107,13 @@ class AttributeDataGrid extends AbsGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'True';
+                else
+                    return 'False';
+            }
         ]);
 
         $this->addColumn([
@@ -105,7 +123,13 @@ class AttributeDataGrid extends AbsGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'True';
+                else
+                    return 'False';
+            }
         ]);
     }
 

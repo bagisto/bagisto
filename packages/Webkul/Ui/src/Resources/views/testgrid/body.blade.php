@@ -8,24 +8,23 @@
                     <label class="checkbox-view" for="checkbox1"></label>
                 </span>
             </td>
-            <?php $i = 0; ?>
-            @foreach($record as $key1 => $column)
-                @if($columns[$i]['type'] == 'boolean' && $columns[$i]['label'] == 'Status')
-                    @if($column == 0)
-                        <td>Inactive</td>
+
+            @foreach($columns as $column)
+                @php
+                    $index = explode('.', $column['index']);
+
+                    $index = end($index);
+                @endphp
+
+                @if(isset($column['wrapper']))
+                    @if(isset($column['closure']) && $column['closure'] == true)
+                        <td>{!! $column['wrapper']($record->{$index}) !!}</td>
                     @else
-                        <td>Active</td>
-                    @endif
-                @elseif($columns[$i]['type'] == 'boolean' && $columns[$i]['label'] != 'Status')
-                    @if($column == 0)
-                        <td>False</td>
-                    @else
-                        <td>True</td>
+                        <td>{{ $column['wrapper']($record->{$index}) }}</td>
                     @endif
                 @else
-                    <td>{{ $column }}</td>
+                    <td>{{ $record->{$index} }}</td>
                 @endif
-                <?php $i++; ?>
             @endforeach
 
             <td style="width: 50px;">

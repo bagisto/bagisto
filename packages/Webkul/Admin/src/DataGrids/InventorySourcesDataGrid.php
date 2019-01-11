@@ -75,7 +75,13 @@ class InventorySourcesDataGrid extends AbsGrid
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
+            'width' => '100px',
+            'wrapper' => function($value){
+                if($value == 1)
+                    return 'Active';
+                else
+                    return 'Inactive';
+            }
         ]);
     }
 

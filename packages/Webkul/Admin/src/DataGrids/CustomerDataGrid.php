@@ -29,7 +29,7 @@ class CustomerDataGrid extends AbsGrid
     public function addColumns()
     {
         $this->addColumn([
-            'column' => 'cus.id',
+            'index' => 'cus.id',
             'alias' => 'customerId',
             'label' => 'ID',
             'type' => 'number',
@@ -40,7 +40,7 @@ class CustomerDataGrid extends AbsGrid
 
         $this->addColumn([
             // 'column' => 'CONCAT(cus.first_name, " ", cus.last_name)',
-            'column' => 'cus.first_name',
+            'index' => 'cus.first_name',
             'alias' => 'customerFullName',
             'label' => 'Name',
             'type' => 'string',
@@ -50,7 +50,7 @@ class CustomerDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'cus.email',
+            'index' => 'cus.email',
             'alias' => 'customerEmail',
             'label' => 'Email',
             'type' => 'string',
@@ -60,7 +60,7 @@ class CustomerDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'column' => 'cg.name',
+            'index' => 'cg.name',
             'alias' => 'customerGroupName',
             'label' => 'Group',
             'type' => 'string',

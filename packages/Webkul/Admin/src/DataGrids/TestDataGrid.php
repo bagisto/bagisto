@@ -79,7 +79,13 @@ class TestDataGrid extends AbsGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
+            'width' => '100px',
+            'wrapper' => function($value) {
+                if($value == 1)
+                    return 'Active';
+                else
+                    return 'Inactive';
+            }
         ]);
 
         $this->addColumn([
@@ -89,11 +95,13 @@ class TestDataGrid extends AbsGrid
             'type' => 'number',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
+            'width' => '100px',
+            'wrapper' => function($value) {
+                return core()->formatBasePrice($value);
+            }
         ]);
 
         $this->addColumn([
-            // 'column' => 'products_grid.quantity',
             'index' => 'products_grid.quantity',
             'alias' => 'productqty',
             'label' => 'Quantity',
