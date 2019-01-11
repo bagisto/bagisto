@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\AbsGrid;
+use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
@@ -11,9 +11,13 @@ use DB;
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class CustomerReviewDataGrid extends AbsGrid
+class CustomerReviewDataGrid extends DataGrid
 {
     public $allColumns = [];
+
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
 
     public function prepareQueryBuilder()
     {
@@ -103,17 +107,17 @@ class CustomerReviewDataGrid extends AbsGrid
     public function prepareMassActions() {
         $this->addMassAction([
             'type' => 'delete',
-            'action' => route('admin.catalog.products.massdelete'),
+            'action' => route('admin.customer.review.massdelete'),
             'method' => 'DELETE'
         ]);
 
         $this->addMassAction([
             'type' => 'update',
-            'action' => route('admin.catalog.products.massupdate'),
+            'action' => route('admin.customer.review.massupdate'),
             'method' => 'PUT',
             'options' => [
-                0 => true,
-                1 => false,
+                'Disapprove' => 0,
+                'Approve' => 1
             ]
         ]);
     }

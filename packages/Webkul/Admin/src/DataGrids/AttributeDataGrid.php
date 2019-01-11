@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\AbsGrid;
+use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
@@ -11,9 +11,14 @@ use DB;
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class AttributeDataGrid extends AbsGrid
+class AttributeDataGrid extends DataGrid
 {
     public $allColumns = [];
+
+    public function __construct()
+    {
+        $this->itemsPerPage = 5;
+    }
 
     public function prepareQueryBuilder()
     {
@@ -22,7 +27,8 @@ class AttributeDataGrid extends AbsGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
+    public function setIndex()
+    {
         $this->index = 'id'; //the column that needs to be treated as index column
     }
 
@@ -76,7 +82,7 @@ class AttributeDataGrid extends AbsGrid
             'sortable' => true,
             'searchable' => false,
             'width' => '100px',
-            'wrapper' => function($value){
+            'wrapper' => function($value) {
                 if($value == 1)
                     return 'True';
                 else
@@ -92,7 +98,7 @@ class AttributeDataGrid extends AbsGrid
             'sortable' => true,
             'searchable' => false,
             'width' => '100px',
-            'wrapper' => function($value){
+            'wrapper' => function($value) {
                 if($value == 1)
                     return 'True';
                 else
@@ -108,7 +114,7 @@ class AttributeDataGrid extends AbsGrid
             'sortable' => true,
             'searchable' => false,
             'width' => '100px',
-            'wrapper' => function($value){
+            'wrapper' => function($value) {
                 if($value == 1)
                     return 'True';
                 else
@@ -124,7 +130,7 @@ class AttributeDataGrid extends AbsGrid
             'sortable' => true,
             'searchable' => false,
             'width' => '100px',
-            'wrapper' => function($value){
+            'wrapper' => function($value) {
                 if($value == 1)
                     return 'True';
                 else
@@ -133,7 +139,8 @@ class AttributeDataGrid extends AbsGrid
         ]);
     }
 
-    public function prepareActions() {
+    public function prepareActions()
+    {
         $this->addAction([
             'type' => 'Edit',
             'route' => 'admin.catalog.attributes.edit',
@@ -147,7 +154,8 @@ class AttributeDataGrid extends AbsGrid
         ]);
     }
 
-    public function prepareMassActions() {
+    public function prepareMassActions()
+    {
         $this->addMassAction([
             'type' => 'delete',
             'action' => route('admin.catalog.attributes.massdelete'),
