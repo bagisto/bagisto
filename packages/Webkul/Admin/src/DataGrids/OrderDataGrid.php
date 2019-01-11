@@ -15,6 +15,10 @@ class OrderDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders')->select('id', 'base_grand_total', 'grand_total', 'created_at', 'channel_name', 'status')->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as fullname'));

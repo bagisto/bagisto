@@ -15,6 +15,10 @@ class CustomerReviewDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id', 'pr.title', 'pr.comment', 'pg.name', 'pr.status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');

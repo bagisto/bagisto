@@ -15,6 +15,10 @@ class SliderDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('sliders as sl')->addSelect('sl.id', 'sl.title', 'ch.name')->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id');

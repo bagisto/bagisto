@@ -15,6 +15,10 @@ class AttributeFamilyDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('attribute_families')->select('id')->addSelect('id', 'code', 'name');

@@ -85,14 +85,14 @@ abstract class DataGrid
             $filteredOrSortedCollection = $this->sortOrFilterCollection($this->collection = $this->queryBuilder, $parsedUrl);
 
             if($this->itemsPerPage > 0) {
-                return $filteredOrSortedCollection->paginate($this->itemsPerPage);
+                return $filteredOrSortedCollection->paginate($this->itemsPerPage)->appends(request()->except('page'));
             } else {
                 return $filteredOrSortedCollection->get();
             }
         }
 
         if ($this->itemsPerPage > 0) {
-            $this->collection = $this->queryBuilder->paginate($this->itemsPerPage);
+            $this->collection = $this->queryBuilder->paginate($this->itemsPerPage)->appends(request()->except('page'));
         } else {
             $this->collection = $this->queryBuilder->get();
         }

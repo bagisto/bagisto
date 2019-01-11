@@ -15,6 +15,10 @@ class OrderInvoicesDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('invoices')->select('id', 'order_id', 'state', 'grand_total', 'created_at');

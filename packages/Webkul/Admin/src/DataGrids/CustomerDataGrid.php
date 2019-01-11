@@ -15,6 +15,10 @@ class CustomerDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('customers as cus')->addSelect('cus.id', 'cus.first_name', 'cus.email', 'cg.name')->leftJoin('customer_groups as cg', 'cus.customer_group_id', '=', 'cg.id');

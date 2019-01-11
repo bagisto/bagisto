@@ -15,6 +15,10 @@ class UserDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('admins as u')->addSelect('u.id', 'u.name', 'u.status', 'u.email', 'ro.name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');

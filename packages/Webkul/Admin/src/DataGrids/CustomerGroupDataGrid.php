@@ -15,6 +15,10 @@ class CustomerGroupDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('customer_groups')->addSelect('id', 'name');

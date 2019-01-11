@@ -30,7 +30,7 @@ return [
      *
      * Accepted Value = integer
      */
-    // 'pagination' => 10,
+    'pagination' => 10,
 
     'operators' => [
         'eq' => "=",

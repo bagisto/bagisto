@@ -15,6 +15,10 @@ class RolesDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('roles')->addSelect('id', 'name', 'permission_type');

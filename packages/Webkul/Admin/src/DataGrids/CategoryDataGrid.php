@@ -15,6 +15,10 @@ class CategoryDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('categories as cat')->select('cat.id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale')->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id');

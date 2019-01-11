@@ -15,6 +15,10 @@ class ExchangeRatesDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('currency_exchange_rates as cer')->addSelect('cer.id', 'curr.name', 'cer.rate')->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id');

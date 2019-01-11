@@ -15,6 +15,10 @@ class TaxCategoryDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('tax_categories')->addSelect('id', 'name', 'code');

@@ -15,6 +15,10 @@ class ChannelDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('channels')->addSelect('id', 'code', 'name', 'hostname');

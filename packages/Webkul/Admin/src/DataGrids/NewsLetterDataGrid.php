@@ -15,6 +15,10 @@ class NewsLetterDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('subscribers_list')->addSelect('id', 'is_subscribed', 'email');

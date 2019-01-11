@@ -15,6 +15,10 @@ class ProductDataGrid extends DataGrid
 {
     public $allColumns = [];
 
+    public function __construct() {
+        $this->itemsPerPage = 5;
+    }
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('products_grid')->addSelect('products_grid.product_id', 'products_grid.sku', 'products_grid.name', 'products.type', 'products_grid.status', 'products_grid.price', 'products_grid.quantity')->leftJoin('products', 'products_grid.product_id', '=', 'products.id');
@@ -139,8 +143,8 @@ class ProductDataGrid extends DataGrid
             'action' => route('admin.catalog.products.massupdate'),
             'method' => 'PUT',
             'options' => [
-                0 => true,
-                1 => false,
+                'Active' => 1,
+                'Inactive' => 0
             ]
         ]);
     }

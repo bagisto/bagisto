@@ -144,7 +144,6 @@
                             @{{ filter.val }}
                             <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
                         </span>
-
                     </span>
                 </div>
 
