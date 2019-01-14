@@ -11,10 +11,10 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class LoginTest extends TestCase
+class GeneralTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Test for home page
      *
      * @return void
      */
@@ -27,6 +27,11 @@ class LoginTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * Test for customer login
+     *
+     * @return void
+     */
     public function testCustomerLoginPage()
     {
         config(['app.url' => 'http://127.0.0.1:8000']);
@@ -36,6 +41,11 @@ class LoginTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * Test for categories page
+     *
+     * @return void
+     */
     public function testCategoriesPage()
     {
         $categoryUrlSlug = 'marvel-figurines';
@@ -47,6 +57,11 @@ class LoginTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * Test for customer registration page
+     *
+     * @return void
+     */
     public function testCustomerRegistrationPage()
     {
         config(['app.url' => 'http://127.0.0.1:8000']);
@@ -56,6 +71,11 @@ class LoginTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * Test for checkout's cart page
+     *
+     * @return void
+     */
     public function testCartPage()
     {
         config(['app.url' => 'http://127.0.0.1:8000']);
