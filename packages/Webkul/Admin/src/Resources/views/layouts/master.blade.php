@@ -15,20 +15,38 @@
 
         @yield('css')
 
+        {!! view_render_event('bagisto.admin.layout.head') !!}
+
     </head>
 
     <body style="scroll-behavior: smooth;">
+        {!! view_render_event('bagisto.admin.layout.body.before') !!}
+
         <div id="app">
 
             <flash-wrapper ref='flashes'></flash-wrapper>
 
+            {!! view_render_event('bagisto.admin.layout.nav-top.before') !!}
+
             @include ('admin::layouts.nav-top')
+
+            {!! view_render_event('bagisto.admin.layout.nav-top.after') !!}
+
+
+            {!! view_render_event('bagisto.admin.layout.nav-left.before') !!}
 
             @include ('admin::layouts.nav-left')
 
+            {!! view_render_event('bagisto.admin.layout.nav-left.after') !!}
+
+
             <div class="content-container">
 
+                {!! view_render_event('bagisto.admin.layout.content.before') !!}
+
                 @yield('content-wrapper')
+
+                {!! view_render_event('bagisto.admin.layout.content.after') !!}
 
             </div>
 
@@ -58,6 +76,8 @@
         <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
 
         @stack('scripts')
+
+        {!! view_render_event('bagisto.admin.layout.body.after') !!}
 
         <div class="modal-overlay"></div>
     </body>

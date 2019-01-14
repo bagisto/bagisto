@@ -84,7 +84,7 @@ class AttributeFamilyRepository extends Repository
             }
         }
 
-        Event::fire('catalog.attribute_family.create.after', $attributeFamily);
+        Event::fire('catalog.attribute_family.create.after', $family);
 
         return $family;
     }
