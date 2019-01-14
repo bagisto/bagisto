@@ -89,11 +89,12 @@ default.
 
 **Run these Commands Below**
 
->> Run this command below, if installing from the zip else skip:
+>> Run this command, in case installing from the zip else skip this command (no need to run this command if you are creating project through composer):
 ~~~
 composer install
 ~~~
 
+>> Continue run these command below:
 ~~~
 php artisan migrate
 ~~~
@@ -115,6 +116,14 @@ composer dump-autoload
 
 > That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
 
+> **Note: you can fetch your admin panel by follow below url:**
+~~~
+http(s)://example.com/admin/login
+~~~
+~~~
+email:admin@example.com
+password:admin123
+~~~
 
 ### 5. License
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
