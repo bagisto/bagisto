@@ -13,15 +13,13 @@ use DB;
  */
 class TaxRateDataGrid extends DataGrid
 {
+    protected $index = 'id';
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('tax_rates')->addSelect('id', 'identifier', 'state', 'country', 'tax_rate');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id';
     }
 
     public function addColumns()
@@ -64,7 +62,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'tax_rate',
-            'label' => trans('admin::app.datagrid.rate'),
+            'label' => trans('admin::app.datagrid.tax-rate'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

@@ -15,15 +15,13 @@ class CustomerDataGrid extends DataGrid
 {
     protected $itemsPerPage = 5;
 
+    protected $index = 'customer_id'; //the column that needs to be treated as index column
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('customers as cus')->addSelect('cus.id as customer_id', 'cus.email as customer_email', 'cg.name as customer_group_name')->addSelect(DB::raw('CONCAT(cus.first_name, " ", cus.last_name) as customer_full_name'))->leftJoin('customer_groups as cg', 'cus.customer_group_id', '=', 'cg.id');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'customer_id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()

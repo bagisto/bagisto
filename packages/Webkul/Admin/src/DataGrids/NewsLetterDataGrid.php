@@ -13,15 +13,13 @@ use DB;
  */
 class NewsLetterDataGrid extends DataGrid
 {
+    protected $index = 'id';
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('subscribers_list')->addSelect('id', 'is_subscribed', 'email');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id';
     }
 
     public function addColumns()

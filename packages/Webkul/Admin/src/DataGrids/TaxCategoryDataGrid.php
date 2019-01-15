@@ -13,15 +13,13 @@ use DB;
  */
 class TaxCategoryDataGrid extends DataGrid
 {
+    protected $index = 'id';
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('tax_categories')->addSelect('id', 'name', 'code');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id';
     }
 
     public function addColumns()

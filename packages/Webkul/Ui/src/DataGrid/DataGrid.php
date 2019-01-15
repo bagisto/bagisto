@@ -27,7 +27,6 @@ abstract class DataGrid
 
     abstract public function prepareQueryBuilder();
     abstract public function addColumns();
-    abstract public function setIndex();
 
     /**
      * Parse the URL and get it ready to be used.
@@ -185,8 +184,6 @@ abstract class DataGrid
     public function render()
     {
         $this->addColumns();
-
-        $this->setIndex();
 
         $this->prepareActions();
 

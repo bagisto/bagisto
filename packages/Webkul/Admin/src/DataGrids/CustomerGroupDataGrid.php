@@ -13,15 +13,13 @@ use DB;
  */
 class CustomerGroupDataGrid extends DataGrid
 {
+    protected $index = 'id'; //the column that needs to be treated as index column
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('customer_groups')->addSelect('id', 'name');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id';
     }
 
     public function addColumns()

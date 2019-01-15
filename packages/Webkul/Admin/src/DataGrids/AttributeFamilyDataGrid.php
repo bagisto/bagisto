@@ -15,15 +15,13 @@ class AttributeFamilyDataGrid extends DataGrid
 {
     protected $itemsPerPage = 5;
 
+    protected $index = 'id'; //the column that needs to be treated as index column
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('attribute_families')->select('id')->addSelect('id', 'code', 'name');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()

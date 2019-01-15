@@ -151,7 +151,7 @@
                     <thead v-if="massActionsToggle">
                         @if(isset($results['massactions']))
                             <tr class="mass-action" style="height: 63px;" v-if="massActionsToggle">
-                                <th colspan="100" style="width: 100%;">
+                                <th colspan="10" style="width: 100%;">
                                     <div class="mass-action-wrapper" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
 
                                         <span class="massaction-remove" v-on:click="removeMassActions" style="margin-right: 10px;">

@@ -13,20 +13,14 @@ use DB;
  */
 class ProductDataGrid extends DataGrid
 {
+    protected $index = 'product_id';
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('products_grid')->addSelect('products_grid.product_id as product_id', 'products_grid.sku as product_sku', 'products_grid.name as product_name', 'products.type as product_type', 'products_grid.status as product_status', 'products_grid.price as product_price', 'products_grid.quantity as product_quantity')->leftJoin('products', 'products_grid.product_id', '=', 'products.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
-
-    public function setIndex() {
-        $this->index = 'product_id'; //the column that needs to be treated as index column
-    }
-
-    // public function setGridName() {
-    //     $this->gridName = 'products_grid'; // should be the table name for getting proper index
-    // }
 
     public function addColumns()
     {

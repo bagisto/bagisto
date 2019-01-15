@@ -13,15 +13,13 @@ use DB;
  */
 class ChannelDataGrid extends DataGrid
 {
+    protected $index = 'id'; //the column that needs to be treated as index column
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('channels')->addSelect('id', 'code', 'name', 'hostname');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()

@@ -13,15 +13,13 @@ use DB;
  */
 class UserDataGrid extends DataGrid
 {
+    protected $index = 'user_id';
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('admins as u')->addSelect('u.id as user_id', 'u.name as user_name', 'u.status as user_status', 'u.email as user_email', 'ro.name as role_name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'user_id';
     }
 
     public function addColumns()

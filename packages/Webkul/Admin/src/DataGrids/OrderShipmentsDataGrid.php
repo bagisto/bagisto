@@ -13,15 +13,13 @@ use DB;
  */
 class OrderShipmentsDataGrid extends DataGrid
 {
+    protected $index = 'shipment_id';
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('shipments as ship')->select('ship.id as shipment_id', 'ship.order_id as shipment_order_id', 'ship.total_qty as shipment_total_qty', 'is.name as inventory_source_name', 'ors.created_at as orderdate', 'ship.created_at as shipment_created_at')->addSelect(DB::raw('CONCAT(ors.customer_first_name, " ", ors.customer_last_name) as custname'))->leftJoin('orders as ors', 'ship.order_id', '=', 'ors.id')->leftJoin('inventory_sources as is', 'ship.inventory_source_id', '=', 'is.id');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'shipment_id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()

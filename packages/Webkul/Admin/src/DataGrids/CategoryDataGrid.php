@@ -13,15 +13,13 @@ use DB;
  */
 class CategoryDataGrid extends DataGrid
 {
+    protected $index = 'category_id'; //the column that needs to be treated as index column
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('categories as cat')->select('cat.id as category_id', 'ct.name as category_name', 'cat.position as category_position', 'cat.status as category_status', 'ct.locale as category_locale')->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'category_id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()

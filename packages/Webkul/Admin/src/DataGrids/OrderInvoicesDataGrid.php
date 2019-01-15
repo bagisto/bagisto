@@ -13,15 +13,13 @@ use DB;
  */
 class OrderInvoicesDataGrid extends DataGrid
 {
+    protected $index = 'id';
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('invoices')->select('id', 'order_id', 'state', 'grand_total', 'created_at');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()

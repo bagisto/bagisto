@@ -13,15 +13,13 @@ use DB;
  */
 class CustomerReviewDataGrid extends DataGrid
 {
+    protected $index = 'product_review_id'; //the column that needs to be treated as index column
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id as product_review_id', 'pr.title as product_review_title', 'pr.comment as product_review_comment', 'pg.name as product_review_name', 'pr.status as product_review_status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'product_review_id';
     }
 
     public function addColumns()

@@ -13,15 +13,13 @@ use DB;
  */
 class ExchangeRatesDataGrid extends DataGrid
 {
+    protected $index = 'currency_exch_id';
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('currency_exchange_rates as cer')->addSelect('cer.id as currency_exch_id', 'curr.name as currency_exch_name', 'cer.rate as currency_exch_rate')->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'currency_exch_id';
     }
 
     public function addColumns()

@@ -13,15 +13,13 @@ use DB;
  */
 class InventorySourcesDataGrid extends DataGrid
 {
+    protected $index = 'id';
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('inventory_sources')->addSelect('id', 'code', 'name', 'priority', 'status');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id';
     }
 
     public function addColumns()

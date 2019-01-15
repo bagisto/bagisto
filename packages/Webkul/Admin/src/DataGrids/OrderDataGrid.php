@@ -13,15 +13,13 @@ use DB;
  */
 class OrderDataGrid extends DataGrid
 {
+    protected $index = 'id';
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders')->select('id', 'base_grand_total', 'grand_total', 'created_at', 'channel_name', 'status')->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as full_name'));
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()

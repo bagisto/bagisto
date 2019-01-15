@@ -13,15 +13,13 @@ use DB;
  */
 class SliderDataGrid extends DataGrid
 {
+    protected $index = 'slider_id';
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('sliders as sl')->addSelect('sl.id as slider_id', 'sl.title as slider_title', 'ch.name as channel_name')->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'slider_id';
     }
 
     public function addColumns()

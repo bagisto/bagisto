@@ -13,15 +13,13 @@ use DB;
  */
 class CurrencyDataGrid extends DataGrid
 {
+    protected $index = 'id'; //the column that needs to be treated as index column
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('currencies')->addSelect('id', 'name', 'code');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()
