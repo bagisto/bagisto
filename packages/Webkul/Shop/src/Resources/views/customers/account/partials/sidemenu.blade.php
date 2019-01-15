@@ -30,12 +30,12 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         var sideMenuTitle = document.getElementById("responsive-side-menu");
         var downIcon = document.getElementById("down-icon");
         var accountSideMenu = document.getElementsByClassName("account-side-menu");
 
-        sideMenuTitle.addEventListener("click", function(){
+        sideMenuTitle.addEventListener("click", function() {
             if (downIcon.className == 'icon icon-arrow-down right') {
                 for(let i=0 ; i < accountSideMenu.length ; i++) {
                     accountSideMenu[i].style.display="block";

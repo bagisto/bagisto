@@ -133,7 +133,7 @@
 
 @push('scripts')
     <script>
-        function removeLink(message){
+        function removeLink(message) {
             if (!confirm(message))
             event.preventDefault();
         }

@@ -40,7 +40,7 @@ class NewsLetterDataGrid extends DataGrid
             'searchable' => true,
             'sortable' => true,
             'width' => '100px',
-            'wrapper' => function($value){
+            'wrapper' => function($value) {
                 if ($value == 1)
                     return 'True';
                 else

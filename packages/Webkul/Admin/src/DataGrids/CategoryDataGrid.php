@@ -58,7 +58,7 @@ class CategoryDataGrid extends DataGrid
             'sortable' => true,
             'searchable' => true,
             'width' => '100px',
-            'wrapper' => function($value){
+            'wrapper' => function($value) {
                 if ($value == 1)
                     return 'Active';
                 else

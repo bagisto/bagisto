@@ -82,7 +82,7 @@
 
 @push('scripts')
     <script>
-        function deleteAddress(message){
+        function deleteAddress(message) {
             if (!confirm(message))
             event.preventDefault();
         }

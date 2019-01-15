@@ -142,7 +142,7 @@
             var galleryTemplate = document.getElementById('product-gallery-template');
             var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
 
-            if (galleryTemplate){
+            if (galleryTemplate) {
                 if (state != 'interactive') {
                     document.getElementById('loader').style.display="none";
                     addTOButton.style.display="flex";
@@ -155,7 +155,7 @@
             var thumbFrame = document.getElementsByClassName('thumb-frame');
             var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
 
-            if (thumbList && productHeroImage){
+            if (thumbList && productHeroImage) {
 
                 for(let i=0; i < thumbFrame.length ; i++) {
                     thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
@@ -168,7 +168,7 @@
             }
 
             window.onresize = function() {
-                if (thumbList && productHeroImage){
+                if (thumbList && productHeroImage) {
 
                     for(let i=0; i < thumbFrame.length; i++) {
                         thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";

@@ -41,7 +41,7 @@ class Column extends AbstractFillable
      *           'data-attr' => 'whatever you want',
      *           'onlclick' => "window.alert('alert from datagrid column')"
      *       ],
-     *       wrapper => function($value){
+     *       wrapper => function($value) {
      *          return '<a href="'.$value.'">Nikhil</a>';
      *       },
      * ]
