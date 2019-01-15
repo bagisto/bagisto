@@ -6,19 +6,13 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Product Data Grid class
+ * OrderInvoicesDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class OrderInvoicesDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('invoices')->select('id', 'order_id', 'state', 'grand_total', 'created_at');

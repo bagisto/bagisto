@@ -67,7 +67,7 @@ class RegistrationController extends Controller
 
         $data['channel_id'] = core()->getCurrentChannel()->id;
 
-        $data['is_verified'] = 0;
+        $data['is_verified'] = 1;
 
         $data['customer_group_id'] = 1;
 

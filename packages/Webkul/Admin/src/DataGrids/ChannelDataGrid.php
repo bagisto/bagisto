@@ -6,19 +6,13 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Channel Data Grid class
+ * ChannelDataGrid class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ChannelDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('channels')->addSelect('id', 'code', 'name', 'hostname');

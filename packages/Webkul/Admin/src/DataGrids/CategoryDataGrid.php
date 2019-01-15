@@ -6,19 +6,13 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Product Data Grid class
+ * CategoryDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CategoryDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('categories as cat')->select('cat.id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale')->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id');

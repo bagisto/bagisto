@@ -6,19 +6,13 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Product Data Grid class
+ * ExchangeRateDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ExchangeRatesDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('currency_exchange_rates as cer')->addSelect('cer.id', 'curr.name', 'cer.rate')->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id');

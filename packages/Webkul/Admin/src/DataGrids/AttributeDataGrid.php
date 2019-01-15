@@ -6,7 +6,7 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Product Data Grid class
+ * AttributeDataGrid class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -15,10 +15,8 @@ class AttributeDataGrid extends DataGrid
 {
     public $allColumns = [];
 
-    public function __construct()
-    {
-        $this->itemsPerPage = 10;
-    }
+    protected $itemsPerPage = 5; //overriding the default items per page
+
 
     public function prepareQueryBuilder()
     {
@@ -36,7 +34,7 @@ class AttributeDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'attributeId',
+            // 'alias' => 'attributeId',
             'label' => 'ID',
             'type' => 'number',
             'searchable' => false,
@@ -46,7 +44,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'code',
-            'alias' => 'attributeCode',
+            // 'alias' => 'attributeCode',
             'label' => 'Code',
             'type' => 'string',
             'searchable' => true,
@@ -56,7 +54,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'admin_name',
-            'alias' => 'attributeAdminName',
+            // 'alias' => 'attributeAdminName',
             'label' => 'Name',
             'type' => 'string',
             'searchable' => true,
@@ -66,7 +64,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'type',
-            'alias' => 'attributeType',
+            // 'alias' => 'attributeType',
             'label' => 'Type',
             'type' => 'string',
             'sortable' => true,
@@ -76,7 +74,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'is_required',
-            'alias' => 'attributeRequired',
+            // 'alias' => 'attributeRequired',
             'label' => 'Required',
             'type' => 'boolean',
             'sortable' => true,
@@ -92,7 +90,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'is_unique',
-            'alias' => 'attributeIsUnique',
+            // 'alias' => 'attributeIsUnique',
             'label' => 'Unique',
             'type' => 'boolean',
             'sortable' => true,
@@ -108,7 +106,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'value_per_locale',
-            'alias' => 'attributeValuePerLocale',
+            // 'alias' => 'attributeValuePerLocale',
             'label' => 'Locale Based',
             'type' => 'boolean',
             'sortable' => true,
@@ -124,7 +122,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'value_per_channel',
-            'alias' => 'attributeValuePerChannel',
+            // 'alias' => 'attributeValuePerChannel',
             'label' => 'Channel Based',
             'type' => 'boolean',
             'sortable' => true,

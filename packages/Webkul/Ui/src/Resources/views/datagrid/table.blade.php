@@ -1,7 +1,7 @@
 <div class="table">
     <testgrid-filters></testgrid-filters>
 
-    @if(config('datagrid.pagination'))
+    @if(config('datagrid.paginate'))
         @include('ui::datagrid.pagination', ['results' => $results['records']])
     @endif
 
@@ -35,7 +35,7 @@
                                                 <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
                                                     <option selected disabled>Select Column</option>
                                                     @foreach($results['columns'] as $column)
-                                                        <option value="{{ $column['alias'] }}">
+                                                        <option value="{{ $column['index'] }}">
                                                             {{ $column['label'] }}
                                                         </option>
                                                     @endforeach
@@ -135,7 +135,7 @@
                     </div>
                 </div>
                 <div class="filter-row-two">
-                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters">
+                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: uppercase;">
                         <span v-if="filter.column == 'sort'">@{{ filter.label }}</span>
                         <span v-else-if="filter.column == 'search'">Search</span>
                         <span v-else>@{{ filter.label }}</span>
@@ -164,18 +164,19 @@
                                             <input type="hidden" id="indexes" name="indexes" v-model="dataIds">
 
                                             <div class="control-group">
-                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type">
+                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type" style="text-transform: uppercase;" required>
                                                     <option v-for="(massAction, index) in massActions" :key="index">@{{ massAction.type }}</option>
                                                 </select>
                                             </div>
 
                                             <div class="control-group" style="margin-left: 10px;" v-if="massActionType == 'update'">
-                                                <select class="control" v-model="massActionUpdateValue" name="update-options">
+                                                <select class="control" v-model="massActionUpdateValue" name="update-options" required style="text-transform: uppercase;">
                                                     <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ id }}</option>
                                                 </select>
                                             </div>
 
-                                            <input type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px;">
+                                            <input type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px; margin-top: 3px;
+                                            height: 30px;">
                                         </form>
                                     </div>
                                 </th>
@@ -196,18 +197,20 @@
                             @endif
 
                             @foreach($results['columns'] as $key => $column)
-                                <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['alias'] }}')">
+                                <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['index'] }}')">
                                     {{ $column['label'] }}
                                 </th>
                             @endforeach
 
-                            <th>
-                                Actions
-                            </th>
+                            @if($results['enableActions'])
+                                <th>
+                                    Actions
+                                </th>
+                            @endif
                         </tr>
                     </thead>
 
-                    @include('ui::datagrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns'],'enableMassAction' => $results['enableMassActions']])
+                    @include('ui::datagrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns'],'enableMassActions' => $results['enableMassActions'], 'enableActions' => $results['enableActions']])
                 </table>
             </div>
         </script>
@@ -265,7 +268,7 @@
                         this.columnOrAlias = columnOrAlias;
 
                         for(column in this.columns) {
-                            if (this.columns[column].alias == this.columnOrAlias) {
+                            if (this.columns[column].index == this.columnOrAlias) {
                                 this.type = this.columns[column].type;
 
                                 if(this.type == 'string') {

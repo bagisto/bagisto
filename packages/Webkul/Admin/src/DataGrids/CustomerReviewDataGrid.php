@@ -6,19 +6,13 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Currency Data Grid class
+ * CustomerReviewDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CustomerReviewDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id', 'pr.title', 'pr.comment', 'pg.name', 'pr.status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');

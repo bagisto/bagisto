@@ -5,16 +5,16 @@ namespace Webkul\Ui\DataGrid;
 use Illuminate\Http\Request;
 
 /**
- * Product Data Grid class
+ * DataGrid class
  *
- * @author    Jitendra Singh <jitendra@webkul.com>
+ * @author    Prashant Singh <jitendra@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 abstract class DataGrid
 {
     protected $index = null;
     protected $columns = [];
-    protected $allColumns = [];
+    protected $completeColumnDetails = [];
     protected $queryBuilder = [];
     protected $collection = [];
     protected $actions = [];
@@ -22,10 +22,9 @@ abstract class DataGrid
     protected $request;
     protected $parse;
     protected $enableMassAction = false;
-    protected $itemsPerPage = 0;
+    protected $enableAction = false;
+    protected $itemsPerPage = 10;
 
-    abstract public function prepareMassActions();
-    abstract public function prepareActions();
     abstract public function prepareQueryBuilder();
     abstract public function addColumns();
     abstract public function setIndex();
@@ -52,12 +51,12 @@ abstract class DataGrid
     {
         array_push($this->columns, $column);
 
-        $this->setAllColumnDetails($column);
+        $this->setCompleteColumnDetails($column);
     }
 
-    public function setAllColumnDetails($column)
+    public function setCompleteColumnDetails($column)
     {
-        array_push($this->allColumns, $column);
+        array_push($this->completeColumnDetails, $column);
     }
 
     public function setQueryBuilder($queryBuilder)
@@ -68,6 +67,8 @@ abstract class DataGrid
     public function addAction($action)
     {
         array_push($this->actions, $action);
+
+        $this->enableAction = true;
     }
 
     public function addMassAction($massAction)
@@ -84,15 +85,18 @@ abstract class DataGrid
         if(count($parsedUrl)) {
             $filteredOrSortedCollection = $this->sortOrFilterCollection($this->collection = $this->queryBuilder, $parsedUrl);
 
-            if($this->itemsPerPage > 0) {
-                return $filteredOrSortedCollection->paginate($this->itemsPerPage)->appends(request()->except('page'));
+            if(config('datagrid.paginate')) {
+                if($this->itemsPerPage > 0)
+                    return $filteredOrSortedCollection->paginate($this->itemsPerPage)->appends(request()->except('page'));
             } else {
                 return $filteredOrSortedCollection->get();
             }
         }
 
-        if ($this->itemsPerPage > 0) {
-            $this->collection = $this->queryBuilder->paginate($this->itemsPerPage)->appends(request()->except('page'));
+        if(config('datagrid.paginate')) {
+            if ($this->itemsPerPage > 0) {
+                $this->collection = $this->queryBuilder->paginate($this->itemsPerPage)->appends(request()->except('page'));
+            }
         } else {
             $this->collection = $this->queryBuilder->get();
         }
@@ -107,8 +111,8 @@ abstract class DataGrid
      */
     public function findColumnType($columnAlias)
     {
-        foreach($this->allColumns as $column) {
-            if($column['alias'] == $columnAlias) {
+        foreach($this->completeColumnDetails as $column) {
+            if($column['index'] == $columnAlias) {
                 return [$column['type'], $column['index']];
             }
         }
@@ -142,7 +146,7 @@ abstract class DataGrid
 
                 if($count_keys == 1) {
                     return $collection->where(function() use($collection, $info) {
-                        foreach ($this->allColumns as $column) {
+                        foreach ($this->completeColumnDetails as $column) {
                             if($column['searchable'] == true)
                                 $collection->orWhere($column['index'], 'like', '%'.$info['all'].'%');
                         }
@@ -190,6 +194,6 @@ abstract class DataGrid
 
         $this->prepareQueryBuilder();
 
-        return view('ui::datagrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->allColumns, 'actions' => $this->actions, 'massactions' => $this->massActions, 'index' => $this->index, 'enableMassActions' => $this->enableMassAction, 'norecords' => trans('ui::datagrid.no-records')]);
+        return view('ui::datagrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->completeColumnDetails, 'actions' => $this->actions, 'massactions' => $this->massActions, 'index' => $this->index, 'enableMassActions' => $this->enableMassAction, 'enableActions' => $this->enableAction, 'norecords' => trans('ui::datagrid.no-records')]);
     }
 }

@@ -6,18 +6,14 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Product Data Grid class
+ * AttributeFamilyDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class AttributeFamilyDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
+    protected $itemsPerPage = 5;
 
     public function prepareQueryBuilder()
     {

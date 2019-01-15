@@ -203,7 +203,6 @@ class ProductController extends Controller
      */
     public function massDestroy()
     {
-        dd(request()->input());
         $productIds = explode(',', request()->input('indexes'));
 
         foreach ($productIds as $productId) {
@@ -222,7 +221,6 @@ class ProductController extends Controller
      */
     public function massUpdate()
     {
-        dd(request()->input());
         $data = request()->all();
 
         if (!isset($data['massaction-type'])) {

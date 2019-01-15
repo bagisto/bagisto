@@ -6,19 +6,13 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Currency Data Grid class
+ * CustomerDataGrid class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CustomerDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('customers as cus')->addSelect('cus.id', 'cus.first_name', 'cus.email', 'cg.name')->leftJoin('customer_groups as cg', 'cus.customer_group_id', '=', 'cg.id');

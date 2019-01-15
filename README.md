@@ -63,7 +63,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 **Run this Command** to download the project on to your local machine or server:
 
->> Note: If you have downloaded zip file then ignore this.
+> Note: If you have downloaded zip file then ignore this.
 
 ~~~
 composer create-project bagisto/bagisto
@@ -89,12 +89,12 @@ default.
 
 **Run these Commands Below**
 
->> Run this command, in case installing from the zip else skip this command (no need to run this command if you are creating project through composer):
+> Run this command, in case installing from the zip else skip this command (no need to run this command if you are creating project through composer):
 ~~~
 composer install
 ~~~
 
->> Continue run these command below:
+> Continue run these command below:
 ~~~
 php artisan migrate
 ~~~

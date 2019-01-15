@@ -1,7 +1,7 @@
 <tbody>
     @foreach($records as $key => $record)
         <tr>
-            @if($enableMassAction)
+            @if($enableMassActions)
                 <td>
                     <span class="checkbox">
                         <input type="checkbox" v-model="dataIds" @change="select" value="{{ $record->{$index} }}">
@@ -29,15 +29,17 @@
                 @endif
             @endforeach
 
-            <td style="width: 50px;">
-                <div class="actions">
-                    @foreach($actions as $action)
-                        <a href="{{ route($action['route'], $record->{$index}) }}">
-                            <span class="{{ $action['icon'] }}"></span>
-                        </a>
-                    @endforeach
-                </div>
-            </td>
+            @if($enableActions)
+                <td style="width: 50px;">
+                    <div class="actions">
+                        @foreach($actions as $action)
+                            <a href="{{ route($action['route'], $record->{$index}) }}">
+                                <span class="{{ $action['icon'] }}"></span>
+                            </a>
+                        @endforeach
+                    </div>
+                </td>
+            @endif
         </tr>
     @endforeach
 </tbody>

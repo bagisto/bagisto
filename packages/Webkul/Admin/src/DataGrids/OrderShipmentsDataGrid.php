@@ -6,19 +6,13 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Product Data Grid class
+ * OrderShipmentsDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class OrderShipmentsDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('shipments as ship')->select('ship.id', 'ship.order_id', 'ship.total_qty', 'is.name', 'ors.created_at as orderdate', 'ship.created_at')->addSelect(DB::raw('CONCAT(ors.customer_first_name, " ", ors.customer_last_name) as custname'))->leftJoin('orders as ors', 'ship.order_id', '=', 'ors.id')->leftJoin('inventory_sources as is', 'ship.inventory_source_id', '=', 'is.id');
