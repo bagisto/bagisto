@@ -13,11 +13,11 @@ use DB;
  */
 class ExchangeRatesDataGrid extends DataGrid
 {
-    protected $index = 'currency_exch_id';
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('currency_exchange_rates as cer')->addSelect('cer.id as currency_exch_id', 'curr.name as currency_exch_name', 'cer.rate as currency_exch_rate')->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id');
+        $queryBuilder = DB::table('currency_exchange_rates as cer')->addSelect('cer.id', 'curr.name', 'cer.rate')->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -25,7 +25,8 @@ class ExchangeRatesDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'currency_exch_id',
+            'index' => 'cer.id',
+            'identifier' => 'currency_exch_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -34,7 +35,8 @@ class ExchangeRatesDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'currency_exch_name',
+            'index' => 'curr.name',
+            'identifier' => 'currency_exch_name',
             'label' => trans('admin::app.datagrid.currency-name'),
             'type' => 'string',
             'searchable' => true,
@@ -43,7 +45,8 @@ class ExchangeRatesDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'currency_exch_rate',
+            'index' => 'cer.rate',
+            'identifier' => 'currency_exch_rate',
             'label' => trans('admin::app.datagrid.exch-rate'),
             'type' => 'string',
             'searchable' => true,

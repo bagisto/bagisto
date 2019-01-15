@@ -26,6 +26,7 @@ class RolesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
+            'identifier' => 'id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -35,6 +36,7 @@ class RolesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
+            'identifier' => 'name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
@@ -44,6 +46,7 @@ class RolesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'permission_type',
+            'identifier' => 'permission_type',
             'label' => trans('admin::app.datagrid.permission-type'),
             'type' => 'string',
             'searchable' => true,

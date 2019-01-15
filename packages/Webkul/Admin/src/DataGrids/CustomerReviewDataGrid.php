@@ -13,11 +13,11 @@ use DB;
  */
 class CustomerReviewDataGrid extends DataGrid
 {
-    protected $index = 'product_review_id'; //the column that needs to be treated as index column
+    protected $index = 'id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id as product_review_id', 'pr.title as product_review_title', 'pr.comment as product_review_comment', 'pg.name as product_review_name', 'pr.status as product_review_status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');
+        $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id', 'pr.title', 'pr.comment', 'pg.name', 'pr.status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -25,7 +25,8 @@ class CustomerReviewDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'product_review_id',
+            'index' => 'pr.id',
+            'identifier' => 'product_review_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -34,7 +35,8 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'product_review_title',
+            'index' => 'pr.title',
+            'identifier' => 'product_review_title',
             'label' => trans('admin::app.datagrid.title'),
             'type' => 'string',
             'searchable' => true,
@@ -43,7 +45,8 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'product_review_comment',
+            'index' => 'pr.comment',
+            'identifier' => 'product_review_comment',
             'label' => trans('admin::app.datagrid.comment'),
             'type' => 'string',
             'searchable' => true,
@@ -52,7 +55,8 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'product_review_name',
+            'index' => 'pg.name',
+            'identifier' => 'product_name',
             'label' => trans('admin::app.datagrid.product-name'),
             'type' => 'string',
             'searchable' => true,
@@ -61,7 +65,8 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'product_review_status',
+            'index' => 'pr.status',
+            'identifier' => 'product_review_status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'searchable' => true,

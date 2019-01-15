@@ -15,11 +15,11 @@ class CustomerDataGrid extends DataGrid
 {
     protected $itemsPerPage = 5;
 
-    protected $index = 'customer_id'; //the column that needs to be treated as index column
+    protected $index = 'id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('customers')->addSelect('customers.id as customer_id', 'customers.email as customer_email', 'customer_groups.name as customer_group_name')->addSelect(DB::raw('CONCAT(customers.first_name, " ", customers.last_name) as customer_full_name'))->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id');
+        $queryBuilder = DB::table('customers as custs')->addSelect('custs.id', 'custs.email', 'cg.name')->leftJoin('customer_groups as cg', 'custs.customer_group_id', '=', 'cg.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -27,7 +27,8 @@ class CustomerDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'customer_id',
+            'index' => 'custs.id',
+            'identifier' => 'customer_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -35,17 +36,18 @@ class CustomerDataGrid extends DataGrid
             'width' => '40px'
         ]);
 
-        $this->addColumn([
-            'index' => 'customer_full_name',
-            'label' => trans('admin::app.datagrid.name'),
-            'type' => 'string',
-            'searchable' => true,
-            'sortable' => true,
-            'width' => '100px'
-        ]);
+        // $this->addColumn([
+        //     'index' => 'full_name',
+        //     'label' => trans('admin::app.datagrid.name'),
+        //     'type' => 'string',
+        //     'searchable' => true,
+        //     'sortable' => true,
+        //     'width' => '100px'
+        // ]);
 
         $this->addColumn([
-            'index' => 'customer_email',
+            'index' => 'custs.email',
+            'identifier' => 'customer_email',
             'label' => trans('admin::app.datagrid.email'),
             'type' => 'string',
             'searchable' => true,
@@ -54,7 +56,8 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'customer_group_name',
+            'index' => 'cg.name',
+            'identifier' => 'customer_group_name',
             'label' => trans('admin::app.datagrid.group'),
             'type' => 'string',
             'searchable' => false,

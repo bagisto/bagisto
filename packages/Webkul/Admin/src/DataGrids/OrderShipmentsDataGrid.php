@@ -13,11 +13,11 @@ use DB;
  */
 class OrderShipmentsDataGrid extends DataGrid
 {
-    protected $index = 'shipment_id';
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('shipments as ship')->select('ship.id as shipment_id', 'ship.order_id as shipment_order_id', 'ship.total_qty as shipment_total_qty', 'is.name as inventory_source_name', 'ors.created_at as orderdate', 'ship.created_at as shipment_created_at')->addSelect(DB::raw('CONCAT(ors.customer_first_name, " ", ors.customer_last_name) as custname'))->leftJoin('orders as ors', 'ship.order_id', '=', 'ors.id')->leftJoin('inventory_sources as is', 'ship.inventory_source_id', '=', 'is.id');
+        $queryBuilder = DB::table('shipments as ship')->select('ship.id', 'ship.order_id', 'ship.total_qty', 'is.name', 'ors.created_at', 'ship.created_at')->addSelect(DB::raw('CONCAT(ors.customer_first_name, " ", ors.customer_last_name) as custname'))->leftJoin('orders as ors', 'ship.order_id', '=', 'ors.id')->leftJoin('inventory_sources as is', 'ship.inventory_source_id', '=', 'is.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -25,7 +25,8 @@ class OrderShipmentsDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'shipment_id',
+            'index' => 'ship.id',
+            'identifier' => 'shipment_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -34,7 +35,8 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'shipment_order_id',
+            'index' => 'ship.order_id',
+            'identifier' => 'shipment_order_id',
             'label' => trans('admin::app.datagrid.order-id'),
             'type' => 'number',
             'searchable' => false,
@@ -43,7 +45,8 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'shipment_total_qty',
+            'index' => 'ship.total_qty',
+            'identifier' => 'shipment_total_qty',
             'label' => trans('admin::app.datagrid.total-qty'),
             'type' => 'number',
             'searchable' => true,
@@ -52,7 +55,8 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'inventory_source_name',
+            'index' => 'is.name',
+            'identifier' => 'inventory_source_name',
             'label' => trans('admin::app.datagrid.inventory-source'),
             'type' => 'string',
             'searchable' => true,
@@ -61,7 +65,8 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'orderdate',
+            'index' => 'ors.created_at',
+            'identifier' => 'orderdate',
             'label' => trans('admin::app.datagrid.order-date'),
             'type' => 'datetime',
             'sortable' => true,
@@ -70,7 +75,8 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'shipment_created_at',
+            'index' => 'ship.created_at',
+            'identifier' => 'shipment_created_at',
             'label' => trans('admin::app.datagrid.shipment-date'),
             'type' => 'datetime',
             'sortable' => true,
@@ -80,6 +86,7 @@ class OrderShipmentsDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'custname',
+            'identifier' => 'custname',
             'label' => trans('admin::app.datagrid.shipment-to'),
             'type' => 'string',
             'sortable' => true,

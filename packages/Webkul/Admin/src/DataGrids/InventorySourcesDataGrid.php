@@ -26,6 +26,7 @@ class InventorySourcesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
+            'identifier' => 'id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -35,6 +36,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'code',
+            'identifier' => 'code',
             'label' => trans('admin::app.datagrid.code'),
             'type' => 'string',
             'searchable' => true,
@@ -44,6 +46,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
+            'identifier' => 'name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
@@ -53,6 +56,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'priority',
+            'identifier' => 'priority',
             'label' => trans('admin::app.datagrid.priority'),
             'type' => 'string',
             'searchable' => true,
@@ -62,6 +66,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'status',
+            'identifier' => 'status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'searchable' => true,

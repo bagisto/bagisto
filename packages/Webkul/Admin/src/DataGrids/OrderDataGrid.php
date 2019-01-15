@@ -26,6 +26,7 @@ class OrderDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
+            'identifier' => 'id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -35,6 +36,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'base_grand_total',
+            'identifier' => 'base_grand_total',
             'label' => trans('admin::app.datagrid.base-total'),
             'type' => 'string',
             'searchable' => true,
@@ -47,6 +49,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'grand_total',
+            'identifier' => 'grand_total',
             'label' => trans('admin::app.datagrid.grand-total'),
             'type' => 'string',
             'searchable' => true,
@@ -59,6 +62,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'created_at',
+            'identifier' => 'created_at',
             'label' => trans('admin::app.datagrid.order-date'),
             'type' => 'string',
             'sortable' => true,
@@ -68,6 +72,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'channel_name',
+            'identifier' => 'channel_name',
             'label' => trans('admin::app.datagrid.channel-name'),
             'type' => 'string',
             'sortable' => true,
@@ -77,6 +82,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'status',
+            'identifier' => 'status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'string',
             'sortable' => true,
@@ -103,6 +109,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'full_name',
+            'identifier' => 'full_name',
             'label' => trans('admin::app.datagrid.billed-to'),
             'type' => 'string',
             'searchable' => false,

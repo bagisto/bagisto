@@ -26,6 +26,7 @@ class TaxRateDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
+            'identifier' => 'id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -35,6 +36,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'identifier',
+            'identifier' => 'identifier',
             'label' => trans('admin::app.datagrid.identifier'),
             'type' => 'string',
             'searchable' => true,
@@ -44,6 +46,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'state',
+            'identifier' => 'state',
             'label' => trans('admin::app.datagrid.state'),
             'type' => 'string',
             'searchable' => true,
@@ -53,6 +56,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'country',
+            'identifier' => 'country',
             'label' => trans('admin::app.datagrid.country'),
             'type' => 'string',
             'searchable' => true,
@@ -62,6 +66,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'tax_rate',
+            'identifier' => 'tax_rate',
             'label' => trans('admin::app.datagrid.tax-rate'),
             'type' => 'string',
             'searchable' => true,

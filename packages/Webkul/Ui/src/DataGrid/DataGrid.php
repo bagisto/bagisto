@@ -111,7 +111,7 @@ abstract class DataGrid
     public function findColumnType($columnAlias)
     {
         foreach($this->completeColumnDetails as $column) {
-            if($column['index'] == $columnAlias) {
+            if($column['identifier'] == $columnAlias) {
                 return [$column['type'], $column['index']];
             }
         }

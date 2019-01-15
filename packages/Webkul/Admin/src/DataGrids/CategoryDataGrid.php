@@ -13,11 +13,11 @@ use DB;
  */
 class CategoryDataGrid extends DataGrid
 {
-    protected $index = 'category_id'; //the column that needs to be treated as index column
+    protected $index = 'id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('categories as cat')->select('cat.id as category_id', 'ct.name as category_name', 'cat.position as category_position', 'cat.status as category_status', 'ct.locale as category_locale')->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id');
+        $queryBuilder = DB::table('categories as cat')->select('cat.id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale')->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -25,7 +25,8 @@ class CategoryDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'category_id',
+            'index' => 'cat.id',
+            'identifier' => 'category_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -34,7 +35,8 @@ class CategoryDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'category_name',
+            'index' => 'ct.name',
+            'identifier' => 'category_name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
@@ -43,7 +45,8 @@ class CategoryDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'category_position',
+            'index' => 'cat.position',
+            'identifier' => 'category_position',
             'label' => trans('admin::app.datagrid.position'),
             'type' => 'string',
             'searchable' => true,
@@ -52,7 +55,8 @@ class CategoryDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'category_status',
+            'index' => 'cat.status',
+            'identifier' => 'category_status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'sortable' => true,
@@ -67,7 +71,8 @@ class CategoryDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'category_locale',
+            'index' => 'ct.position',
+            'identifier' => 'category_locale',
             'label' => trans('admin::app.datagrid.locale'),
             'type' => 'boolean',
             'sortable' => true,

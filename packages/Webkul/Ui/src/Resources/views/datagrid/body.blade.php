@@ -17,6 +17,8 @@
                         $columnIndex = explode('.', $column['index']);
 
                         $columnIndex = end($columnIndex);
+
+                        // dd($columnIndex);
                     @endphp
 
                     @if(isset($column['wrapper']))
@@ -45,7 +47,7 @@
         @endforeach
     @else
         <tr>
-            <td colspan="10" style="text-align: center;">{{$norecords}}</td>
+            <td colspan="10" style="text-align: center;">{{ $norecords }}</td>
         </tr>
     @endif
 </tbody>

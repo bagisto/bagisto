@@ -13,11 +13,11 @@ use DB;
  */
 class UserDataGrid extends DataGrid
 {
-    protected $index = 'user_id';
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('admins as u')->addSelect('u.id as user_id', 'u.name as user_name', 'u.status as user_status', 'u.email as user_email', 'ro.name as role_name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
+        $queryBuilder = DB::table('admins as u')->addSelect('u.id', 'u.name', 'u.status', 'u.email', 'ro.name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -25,7 +25,8 @@ class UserDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'user_id',
+            'index' => 'u.id',
+            'identifier' => 'user_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -34,7 +35,8 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'user_name',
+            'index' => 'u.name',
+            'identifier' => 'user_name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
@@ -43,7 +45,8 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'user_status',
+            'index' => 'u.status',
+            'identifier' => 'user_status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'searchable' => true,
@@ -59,8 +62,19 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'user_email',
+            'index' => 'u.email',
+            'identifier' => 'user_email',
             'label' => trans('admin::app.datagrid.email'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'ro.name',
+            'identifier' => 'role_name',
+            'label' => trans('admin::app.datagrid.role'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

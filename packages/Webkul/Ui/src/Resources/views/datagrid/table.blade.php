@@ -35,7 +35,7 @@
                                                 <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
                                                     <option selected disabled>Select Column</option>
                                                     @foreach($results['columns'] as $column)
-                                                        <option value="{{ $column['index'] }}">
+                                                        <option value="{{ $column['identifier'] }}">
                                                             {{ $column['label'] }}
                                                         </option>
                                                     @endforeach
@@ -134,6 +134,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="filter-row-two">
                     <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: uppercase;">
                         <span v-if="filter.column == 'sort'">@{{ filter.label }}</span>
@@ -196,7 +197,7 @@
                             @endif
 
                             @foreach($results['columns'] as $key => $column)
-                                <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['index'] }}')">
+                                <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['identifier'] }}')">
                                     {{ $column['label'] }}
                                 </th>
                             @endforeach
@@ -267,7 +268,7 @@
                         this.columnOrAlias = columnOrAlias;
 
                         for(column in this.columns) {
-                            if (this.columns[column].index == this.columnOrAlias) {
+                            if (this.columns[column].identifier == this.columnOrAlias) {
                                 this.type = this.columns[column].type;
 
                                 if(this.type == 'string') {
@@ -314,7 +315,7 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if(this.columns[colIndex].index == this.columnOrAlias) {
+                            if(this.columns[colIndex].identifier == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -334,7 +335,8 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if(this.columns[colIndex].index == this.columnOrAlias) {
+                            if(this.columns[colIndex].identifier == alias) {
+                                matched = 0;
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -343,13 +345,7 @@
                     },
 
                     searchCollection(searchValue) {
-                        label = '';
-
-                        for(colIndex in this.columns) {
-                            if(this.columns[colIndex].index == this.columnOrAlias) {
-                                label = this.columns[colIndex].label;
-                            }
-                        }
+                        label = 'Search';
 
                         this.formURL("search", 'all', searchValue, label);
                     },
@@ -601,10 +597,12 @@
                             obj.val = val;
 
                             if(col == "sort") {
+                                // console.log('sort', obj.cond);
                                 label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].index == obj.cond) {
+                                    if(this.columns[colIndex].identifier == obj.cond) {
+
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }
@@ -614,7 +612,7 @@
                                 obj.label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].index == obj.column) {
+                                    if(this.columns[colIndex].identifier == obj.column) {
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }

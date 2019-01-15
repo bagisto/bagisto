@@ -29,6 +29,7 @@ class AttributeDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
+            'identifier' => 'attribute_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -38,6 +39,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'code',
+            'identifier' => 'attribute_code',
             'label' => trans('admin::app.datagrid.code'),
             'type' => 'string',
             'searchable' => true,
@@ -47,6 +49,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'admin_name',
+            'identifier' => 'attribute_name',
             'label' => trans('admin::app.datagrid.admin-name'),
             'type' => 'string',
             'searchable' => true,
@@ -56,6 +59,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'type',
+            'identifier' => 'attribute_type',
             'label' => trans('admin::app.datagrid.type'),
             'type' => 'string',
             'sortable' => true,
@@ -65,6 +69,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'is_required',
+            'identifier' => 'attribute_is_required',
             'label' => trans('admin::app.datagrid.required'),
             'type' => 'boolean',
             'sortable' => true,
@@ -80,6 +85,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'is_unique',
+            'identifier' => 'attribute_is_unique',
             'label' => trans('admin::app.datagrid.unique'),
             'type' => 'boolean',
             'sortable' => true,
@@ -95,6 +101,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'value_per_locale',
+            'identifier' => 'attribute_value_per_locale',
             'label' => trans('admin::app.datagrid.per-locale'),
             'type' => 'boolean',
             'sortable' => true,
@@ -110,6 +117,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'value_per_channel',
+            'identifier' => 'attribute_value_per_channel',
             'label' => trans('admin::app.datagrid.per-channel'),
             'type' => 'boolean',
             'sortable' => true,

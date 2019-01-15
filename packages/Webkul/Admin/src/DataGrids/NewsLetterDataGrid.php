@@ -26,6 +26,7 @@ class NewsLetterDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
+            'identifier' => 'id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -35,6 +36,7 @@ class NewsLetterDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'is_subscribed',
+            'identifier' => 'is_subscribed',
             'label' => trans('admin::app.datagrid.subscribed'),
             'type' => 'string',
             'searchable' => true,
@@ -50,6 +52,7 @@ class NewsLetterDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'email',
+            'identifier' => 'email',
             'label' => trans('admin::app.datagrid.email'),
             'type' => 'string',
             'searchable' => true,
