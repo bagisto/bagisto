@@ -6,18 +6,14 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Tax Rate Grid class
+ * TaxRateDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class TaxRateDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
@@ -26,16 +22,11 @@ class TaxRateDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
-        $this->index = 'id';
-    }
-
     public function addColumns()
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'taxRateId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -44,8 +35,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'identifier',
-            'alias' => 'taxRateName',
-            'label' => 'Identifier',
+            'label' => trans('admin::app.datagrid.identifier'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -54,8 +44,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'state',
-            'alias' => 'taxRateState',
-            'label' => 'State',
+            'label' => trans('admin::app.datagrid.state'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -64,8 +53,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'country',
-            'alias' => 'taxRateCountry',
-            'label' => 'Country',
+            'label' => trans('admin::app.datagrid.country'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -74,8 +62,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'tax_rate',
-            'alias' => 'taxRate',
-            'label' => 'Rate',
+            'label' => trans('admin::app.datagrid.tax-rate'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

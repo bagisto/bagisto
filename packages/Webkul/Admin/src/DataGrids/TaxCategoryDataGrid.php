@@ -6,18 +6,14 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Tax Category Grid class
+ * TaxCategoryDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class TaxCategoryDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
@@ -26,16 +22,11 @@ class TaxCategoryDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
-        $this->index = 'id';
-    }
-
     public function addColumns()
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'taxCatId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -44,8 +35,7 @@ class TaxCategoryDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
-            'alias' => 'taxCatName',
-            'label' => 'Name',
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -54,8 +44,7 @@ class TaxCategoryDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'code',
-            'alias' => 'taxCatCode',
-            'label' => 'Code',
+            'label' => trans('admin::app.datagrid.code'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

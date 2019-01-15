@@ -6,36 +6,27 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * News Letter Grid class
+ * UserDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class UserDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
+    protected $index = 'user_id';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('admins as u')->addSelect('u.id', 'u.name', 'u.status', 'u.email', 'ro.name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
+        $queryBuilder = DB::table('admins as u')->addSelect('u.id as user_id', 'u.name as user_name', 'u.status as user_status', 'u.email as user_email', 'ro.name as role_name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id';
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'u.id',
-            'alias' => 'adminId',
-            'label' => 'ID',
+            'index' => 'user_id',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -43,9 +34,8 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'u.name',
-            'alias' => 'adminName',
-            'label' => 'Name',
+            'index' => 'user_name',
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -53,9 +43,8 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'u.status',
-            'alias' => 'adminStatus',
-            'label' => 'Status',
+            'index' => 'user_status',
+            'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
@@ -70,9 +59,8 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'u.email',
-            'alias' => 'adminEmail',
-            'label' => 'Email',
+            'index' => 'user_email',
+            'label' => trans('admin::app.datagrid.email'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

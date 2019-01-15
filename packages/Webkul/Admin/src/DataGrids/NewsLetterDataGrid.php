@@ -6,18 +6,14 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * News Letter Grid class
+ * NewsLetterDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class NewsLetterDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
@@ -26,16 +22,11 @@ class NewsLetterDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
-        $this->index = 'id';
-    }
-
     public function addColumns()
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'subsId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -44,8 +35,7 @@ class NewsLetterDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'is_subscribed',
-            'alias' => 'subsCode',
-            'label' => 'Subscribed',
+            'label' => trans('admin::app.datagrid.subscribed'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -60,8 +50,7 @@ class NewsLetterDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'email',
-            'alias' => 'subsEmail',
-            'label' => 'Email',
+            'label' => trans('admin::app.datagrid.email'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

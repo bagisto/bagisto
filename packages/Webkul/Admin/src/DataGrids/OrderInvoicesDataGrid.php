@@ -6,18 +6,14 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Product Data Grid class
+ * OrderInvoicesDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class OrderInvoicesDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
@@ -26,16 +22,11 @@ class OrderInvoicesDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
-        $this->index = 'id'; //the column that needs to be treated as index column
-    }
-
     public function addColumns()
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'invid',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -44,8 +35,7 @@ class OrderInvoicesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'order_id',
-            'alias' => 'orderId',
-            'label' => 'Order ID',
+            'label' => trans('admin::app.datagrid.order-id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -54,8 +44,7 @@ class OrderInvoicesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'grand_total',
-            'alias' => 'invgrandtotal',
-            'label' => 'Grand Total',
+            'label' => trans('admin::app.datagrid.grand-total'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -64,8 +53,7 @@ class OrderInvoicesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'created_at',
-            'alias' => 'invcreatedat',
-            'label' => 'Invoice Date',
+            'label' => trans('admin::app.datagrid.invoice-date'),
             'type' => 'datetime',
             'searchable' => true,
             'sortable' => true,

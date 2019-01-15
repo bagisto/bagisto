@@ -6,36 +6,27 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Currency Data Grid class
+ * CustomerReviewDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CustomerReviewDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
+    protected $index = 'product_review_id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id', 'pr.title', 'pr.comment', 'pg.name', 'pr.status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');
+        $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id as product_review_id', 'pr.title as product_review_title', 'pr.comment as product_review_comment', 'pg.name as product_review_name', 'pr.status as product_review_status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id';
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'pr.id',
-            'alias' => 'reviewId',
-            'label' => 'ID',
+            'index' => 'product_review_id',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -43,9 +34,8 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'pr.title',
-            'alias' => 'reviewTitle',
-            'label' => 'Title',
+            'index' => 'product_review_title',
+            'label' => trans('admin::app.datagrid.title'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -53,9 +43,8 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'pr.comment',
-            'alias' => 'reviewComment',
-            'label' => 'Comment',
+            'index' => 'product_review_comment',
+            'label' => trans('admin::app.datagrid.comment'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -63,9 +52,8 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'pg.name',
-            'alias' => 'productName',
-            'label' => 'Product',
+            'index' => 'product_review_name',
+            'label' => trans('admin::app.datagrid.product-name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -73,9 +61,8 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'pr.status',
-            'alias' => 'reviewStatus',
-            'label' => 'Status',
+            'index' => 'product_review_status',
+            'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
@@ -107,12 +94,14 @@ class CustomerReviewDataGrid extends DataGrid
     public function prepareMassActions() {
         $this->addMassAction([
             'type' => 'delete',
+            'label' => 'Delete',
             'action' => route('admin.customer.review.massdelete'),
             'method' => 'DELETE'
         ]);
 
         $this->addMassAction([
             'type' => 'update',
+            'label' => 'Update Status',
             'action' => route('admin.customer.review.massupdate'),
             'method' => 'PUT',
             'options' => [

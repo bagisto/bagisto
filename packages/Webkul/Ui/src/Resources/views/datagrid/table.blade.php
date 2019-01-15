@@ -1,7 +1,7 @@
 <div class="table">
     <testgrid-filters></testgrid-filters>
 
-    @if(config('datagrid.pagination'))
+    @if(config('datagrid.paginate'))
         @include('ui::datagrid.pagination', ['results' => $results['records']])
     @endif
 
@@ -35,7 +35,7 @@
                                                 <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
                                                     <option selected disabled>Select Column</option>
                                                     @foreach($results['columns'] as $column)
-                                                        <option value="{{ $column['alias'] }}">
+                                                        <option value="{{ $column['index'] }}">
                                                             {{ $column['label'] }}
                                                         </option>
                                                     @endforeach
@@ -135,7 +135,7 @@
                     </div>
                 </div>
                 <div class="filter-row-two">
-                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters">
+                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: uppercase;">
                         <span v-if="filter.column == 'sort'">@{{ filter.label }}</span>
                         <span v-else-if="filter.column == 'search'">Search</span>
                         <span v-else>@{{ filter.label }}</span>
@@ -151,7 +151,7 @@
                     <thead v-if="massActionsToggle">
                         @if(isset($results['massactions']))
                             <tr class="mass-action" style="height: 63px;" v-if="massActionsToggle">
-                                <th colspan="100" style="width: 100%;">
+                                <th colspan="10" style="width: 100%;">
                                     <div class="mass-action-wrapper" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
 
                                         <span class="massaction-remove" v-on:click="removeMassActions" style="margin-right: 10px;">
@@ -165,7 +165,7 @@
 
                                             <div class="control-group">
                                                 <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type">
-                                                    <option v-for="(massAction, index) in massActions" :key="index">@{{ massAction.type }}</option>
+                                                    <option v-for="(massAction, index) in massActions" :key="index" :value="massAction.type">@{{ massAction.label }}</option>
                                                 </select>
                                             </div>
 
@@ -185,7 +185,7 @@
 
                     <thead v-if="massActionsToggle == false">
                         <tr>
-                            @if($results['enableMassActions'])
+                            @if(count($results['records']) && $results['enableMassActions'])
                                 <th class="grid_head" id="mastercheckbox" style="width: 50px;">
                                     <span class="checkbox">
                                         <input type="checkbox" v-model="allSelected" v-on:change="selectAll">
@@ -196,18 +196,20 @@
                             @endif
 
                             @foreach($results['columns'] as $key => $column)
-                                <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['alias'] }}')">
+                                <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['index'] }}')">
                                     {{ $column['label'] }}
                                 </th>
                             @endforeach
 
-                            <th>
-                                Actions
-                            </th>
+                            @if($results['enableActions'])
+                                <th>
+                                    {{ __('ui::app.datagrid.actions') }}
+                                </th>
+                            @endif
                         </tr>
                     </thead>
 
-                    @include('ui::datagrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns'],'enableMassAction' => $results['enableMassActions']])
+                    @include('ui::datagrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns'],'enableMassActions' => $results['enableMassActions'], 'enableActions' => $results['enableActions'], 'norecords' => $results['norecords']])
                 </table>
             </div>
         </script>
@@ -265,7 +267,7 @@
                         this.columnOrAlias = columnOrAlias;
 
                         for(column in this.columns) {
-                            if (this.columns[column].alias == this.columnOrAlias) {
+                            if (this.columns[column].index == this.columnOrAlias) {
                                 this.type = this.columns[column].type;
 
                                 if(this.type == 'string') {
@@ -312,7 +314,7 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if(this.columns[colIndex].alias == this.columnOrAlias) {
+                            if(this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -332,7 +334,7 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if(this.columns[colIndex].alias == this.columnOrAlias) {
+                            if(this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -344,7 +346,7 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if(this.columns[colIndex].alias == this.columnOrAlias) {
+                            if(this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -602,7 +604,7 @@
                                 label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].alias == obj.cond) {
+                                    if(this.columns[colIndex].index == obj.cond) {
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }
@@ -612,7 +614,7 @@
                                 obj.label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].alias == obj.column) {
+                                    if(this.columns[colIndex].index == obj.column) {
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }

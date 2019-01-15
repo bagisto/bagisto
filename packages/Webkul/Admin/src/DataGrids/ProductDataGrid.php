@@ -6,40 +6,27 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Product Data Grid class
+ * ProductDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ProductDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
+    protected $index = 'product_id';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('products_grid')->addSelect('products_grid.product_id', 'products_grid.sku', 'products_grid.name', 'products.type', 'products_grid.status', 'products_grid.price', 'products_grid.quantity')->leftJoin('products', 'products_grid.product_id', '=', 'products.id');
+        $queryBuilder = DB::table('products_grid')->addSelect('products_grid.product_id as product_id', 'products_grid.sku as product_sku', 'products_grid.name as product_name', 'products.type as product_type', 'products_grid.status as product_status', 'products_grid.price as product_price', 'products_grid.quantity as product_quantity')->leftJoin('products', 'products_grid.product_id', '=', 'products.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
-        $this->index = 'product_id'; //the column that needs to be treated as index column
-    }
-
-    // public function setGridName() {
-    //     $this->gridName = 'products_grid'; // should be the table name for getting proper index
-    // }
-
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'products_grid.product_id',
-            'alias' => 'productid',
-            'label' => 'ID',
+            'index' => 'product_id',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -47,9 +34,8 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'products_grid.sku',
-            'alias' => 'productsku',
-            'label' => 'SKU',
+            'index' => 'product_sku',
+            'label' => trans('admin::app.datagrid.sku'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -57,9 +43,8 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'products_grid.name',
-            'alias' => 'productname',
-            'label' => 'Name',
+            'index' => 'product_name',
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -67,9 +52,8 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'products.type',
-            'alias' => 'producttype',
-            'label' => 'Type',
+            'index' => 'product_type',
+            'label' => trans('admin::app.datagrid.type'),
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
@@ -77,9 +61,8 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'products_grid.status',
-            'alias' => 'productstatus',
-            'label' => 'Status',
+            'index' => 'product_status',
+            'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
@@ -93,9 +76,8 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'products_grid.price',
-            'alias' => 'productprice',
-            'label' => 'Price',
+            'index' => 'product_price',
+            'label' => trans('admin::app.datagrid.price'),
             'type' => 'number',
             'sortable' => true,
             'searchable' => false,
@@ -106,9 +88,8 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'products_grid.quantity',
-            'alias' => 'productqty',
-            'label' => 'Quantity',
+            'index' => 'product_quantity',
+            'label' => trans('admin::app.datagrid.qty'),
             'type' => 'number',
             'sortable' => true,
             'searchable' => false,
@@ -134,12 +115,14 @@ class ProductDataGrid extends DataGrid
     public function prepareMassActions() {
         $this->addMassAction([
             'type' => 'delete',
+            'label' => 'Delete',
             'action' => route('admin.catalog.products.massdelete'),
             'method' => 'DELETE'
         ]);
 
         $this->addMassAction([
             'type' => 'update',
+            'label' => 'Update Status',
             'action' => route('admin.catalog.products.massupdate'),
             'method' => 'PUT',
             'options' => [

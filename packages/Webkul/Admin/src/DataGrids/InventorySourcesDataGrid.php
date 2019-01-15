@@ -6,18 +6,14 @@ use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Product Data Grid class
+ * InventorySourcesDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class InventorySourcesDataGrid extends DataGrid
 {
-    public $allColumns = [];
-
-    public function __construct() {
-        $this->itemsPerPage = 10;
-    }
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
@@ -26,16 +22,11 @@ class InventorySourcesDataGrid extends DataGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
-        $this->index = 'id';
-    }
-
     public function addColumns()
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'invId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -44,8 +35,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'code',
-            'alias' => 'invCode',
-            'label' => 'Code',
+            'label' => trans('admin::app.datagrid.code'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -54,8 +44,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
-            'alias' => 'invName',
-            'label' => 'Name',
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -64,8 +53,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'priority',
-            'alias' => 'invPriority',
-            'label' => 'Priority',
+            'label' => trans('admin::app.datagrid.priority'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -74,8 +62,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'status',
-            'alias' => 'invStatus',
-            'label' => 'Status',
+            'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,

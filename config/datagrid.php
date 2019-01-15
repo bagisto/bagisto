@@ -5,7 +5,7 @@ return [
     /**
      * Default Select Value
      */
-    'select' => 'id',
+    'default_index' => 'id',
 
     /**
      * Default OrderBy
@@ -30,7 +30,7 @@ return [
      *
      * Accepted Value = integer
      */
-    'pagination' => 10,
+    'paginate' => false,
 
     'operators' => [
         'eq' => "=",
