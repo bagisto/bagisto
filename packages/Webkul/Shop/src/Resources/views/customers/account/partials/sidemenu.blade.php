@@ -8,7 +8,7 @@
     @foreach($menu->items as $menuItem)
         <div class="menu-block">
             <div class="menu-block-title">
-                {{ $menuItem['name'] }}
+                {{ trans($menuItem['name']) }}
             </div>
 
             <div class="menu-block-content">
@@ -16,7 +16,7 @@
                     @foreach($menuItem['children'] as $subMenuItem)
                         <li class="menu-item {{ $menu->getActive($subMenuItem) }}">
                             <a href="{{ $subMenuItem['url'] }}">
-                                {{ $subMenuItem['name'] }}
+                                {{ trans($subMenuItem['name']) }}
                             </a>
 
                             <i class="icon angle-right-icon"></i>

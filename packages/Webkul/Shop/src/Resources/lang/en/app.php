@@ -1,6 +1,15 @@
 <?php
 
 return [
+    'layouts' => [
+        'my-account' => 'My Account',
+        'profile' => 'Profile',
+        'address' => 'Address',
+        'reviews' => 'Reviews',
+        'wishlist' => 'Wishlist',
+        'orders' => 'Orders',
+    ],
+    
     'common' => [
         'error' => 'Something went wrong, please try again later.'
     ],
