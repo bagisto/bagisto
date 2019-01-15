@@ -144,7 +144,7 @@ class Order extends Model implements OrderContract
      */
     public function canShip()
     {
-        if($this->status == 'fraud')
+        if ($this->status == 'fraud')
             return false;
 
         foreach ($this->items as $item) {
@@ -161,7 +161,7 @@ class Order extends Model implements OrderContract
      */
     public function canInvoice()
     {
-        if($this->status == 'fraud')
+        if ($this->status == 'fraud')
             return false;
             
         foreach ($this->items as $item) {
@@ -178,10 +178,10 @@ class Order extends Model implements OrderContract
      */
     public function canCancel()
     {
-        if($this->status == 'fraud')
+        if ($this->status == 'fraud')
             return false;
             
-        foreach($this->items as $item) {
+        foreach ($this->items as $item) {
             if ($item->qty_to_cancel > 0) {
                 return true;
             }

@@ -15,19 +15,19 @@
             </div>
 
             <div class="page-action">
-                @if($order->canCancel())
+                @if ($order->canCancel())
                     <a href="{{ route('admin.sales.orders.cancel', $order->id) }}" class="btn btn-lg btn-primary" v-alert:message="'{{ __('admin::app.sales.orders.cancel-confirm-msg') }}'">
                         {{ __('admin::app.sales.orders.cancel-btn-title') }}
                     </a>
                 @endif
 
-                @if($order->canInvoice())
+                @if ($order->canInvoice())
                     <a href="{{ route('admin.sales.invoices.create', $order->id) }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.sales.orders.invoice-btn-title') }}
                     </a>
                 @endif
 
-                @if($order->canShip())
+                @if ($order->canShip())
                     <a href="{{ route('admin.sales.shipments.create', $order->id) }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.sales.orders.shipment-btn-title') }}
                     </a>
@@ -108,7 +108,7 @@
                                             </span>
                                         </div>
 
-                                        @if(!is_null($order->customer))
+                                        @if (! is_null($order->customer))
                                             <div class="row">
                                                 <span class="title">
                                                     {{ __('admin::app.customers.customers.customer_group') }}
@@ -140,7 +140,7 @@
                                     </div>
                                 </div>
 
-                                @if($order->shipping_address)
+                                @if ($order->shipping_address)
                                     <div class="sale-section">
                                         <div class="secton-title">
                                             <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
@@ -359,7 +359,7 @@
                                     </tr>
                                 @endforeach
 
-                                @if (!$order->invoices->count())
+                                @if (! $order->invoices->count())
                                     <tr>
                                         <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
                                     <tr>
@@ -403,7 +403,7 @@
                                     </tr>
                                 @endforeach
 
-                                @if (!$order->shipments->count())
+                                @if (! $order->shipments->count())
                                     <tr>
                                         <td class="empty" colspan="7">{{ __('admin::app.common.no-result-found') }}</td>
                                     <tr>

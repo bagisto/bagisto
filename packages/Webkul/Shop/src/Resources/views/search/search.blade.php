@@ -5,19 +5,19 @@
 @endsection
 
 @section('content-wrapper')
-    @if(!$results)
+    @if (! $results)
         {{  __('shop::app.search.no-results') }}
     @endif
 
-    @if($results)
+    @if ($results)
         <div class="main mb-30" style="min-height: 27vh;">
-            @if($results->isEmpty())
+            @if ($results->isEmpty())
                 <div class="search-result-status">
                     <h2>{{ __('shop::app.products.whoops') }}</h2>
                     <span>{{ __('shop::app.search.no-results') }}</span>
                 </div>
             @else
-                @if($results->count() == 1)
+                @if ($results->count() == 1)
                     <div class="search-result-status mb-20">
                         <span><b>{{ $results->count() }} </b>{{ __('shop::app.search.found-result') }}</span>
                     </div>

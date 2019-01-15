@@ -17,9 +17,9 @@ class ProductImage extends AbstractProduct
     {
         $images = [];
 
-        if($product) {
-            foreach($product->images as $image) {
-                if(!Storage::has($image->path))
+        if ($product) {
+            foreach ($product->images as $image) {
+                if (! Storage::has($image->path))
                     continue;
 
                 $images[] = [
@@ -31,7 +31,7 @@ class ProductImage extends AbstractProduct
             }
         }
 
-        if(!$product || (!$product->parent_id && !count($images))) {
+        if (! $product || (! $product->parent_id && !count($images))) {
             $images[] = [
                 'small_image_url' => bagisto_asset('images/product/small-product-placeholder.png'),
                 'medium_image_url' => bagisto_asset('images/product/meduim-product-placeholder.png'),
@@ -51,7 +51,7 @@ class ProductImage extends AbstractProduct
      */
     public function getProductBaseImage($product)
     {
-        if($product && $product->images->count()) {
+        if ($product && $product->images->count()) {
             $images = $product->images;
             $image = [
                 'small_image_url' => url('cache/small/' . $images[0]->path),

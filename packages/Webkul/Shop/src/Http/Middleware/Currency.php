@@ -29,12 +29,12 @@ class Currency
     */
     public function handle($request, Closure $next)
     {
-        if($currency = $request->get('currency')) {
-            if($this->currency->findOneByField('code', $currency)) {
+        if ($currency = $request->get('currency')) {
+            if ($this->currency->findOneByField('code', $currency)) {
                 session()->put('currency', $currency);
             }
         } else {
-            if(!session()->get('currency')) {
+            if (! session()->get('currency')) {
                 session()->put('currency', core()->getChannelBaseCurrencyCode());
             }
         }

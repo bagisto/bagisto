@@ -20,7 +20,7 @@
 
                     <div class="control-group">
                         <select class="control" id="channel-switcher" name="channel">
-                            @foreach(core()->getAllChannels() as $channelModel)
+                            @foreach (core()->getAllChannels() as $channelModel)
 
                                 <option value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
                                     {{ $channelModel->name }}
@@ -32,7 +32,7 @@
 
                     <div class="control-group">
                         <select class="control" id="locale-switcher" name="locale">
-                            @foreach(core()->getAllLocales() as $localeModel)
+                            @foreach (core()->getAllLocales() as $localeModel)
 
                                 <option value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                     {{ $localeModel->name }}

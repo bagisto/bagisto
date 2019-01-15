@@ -63,9 +63,9 @@ class CountryStateController extends Controller
 
         $nestedArray = [];
 
-        foreach($countries as $keyCountry => $country) {
-            foreach($states as $keyState => $state) {
-                if($country->code == $state->country_code) {
+        foreach ($countries as $keyCountry => $country) {
+            foreach ($states as $keyState => $state) {
+                if ($country->code == $state->country_code) {
                     $nestedArray[$country->name][$state->code] = $state->default_name;
                 }
             }
@@ -81,9 +81,9 @@ class CountryStateController extends Controller
 
         $nestedArray = [];
 
-        foreach($countries as $keyCountry => $country) {
-            foreach($states as $keyState => $state) {
-                if($country->code == $state->country_code) {
+        foreach ($countries as $keyCountry => $country) {
+            foreach ($states as $keyState => $state) {
+                if ($country->code == $state->country_code) {
                     $nestedArray[$country->name][$state->code] = $state->default_name;
                 }
             }

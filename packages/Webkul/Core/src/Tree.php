@@ -59,7 +59,7 @@ class Tree {
 	public static function create($callback = null) {
 		$tree = new Tree();
 
-		if($callback) {
+		if ($callback) {
 			$callback($tree);
 		}
 

@@ -19,18 +19,18 @@
                 }
 
                 if (empty($results)) {
-                    foreach($values as $value) {
+                    foreach ($values as $value) {
                         $results[] = [$key => $value];
                     }
                 } else {
                     $append = [];
 
-                    foreach($results as &$result) {
+                    foreach ($results as &$result) {
                         $result[$key] = array_shift($values);
 
                         $copy = $result;
 
-                        foreach($values as $item) {
+                        foreach ($values as $item) {
                             $copy[$key] = $item;
                             $append[] = $copy;
                         }

@@ -46,7 +46,7 @@
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
     <div class="cart-item-list">
-        @foreach($cart->items as $item)
+        @foreach ($cart->items as $item)
 
             <?php 
                 $product = $item->product; 

@@ -27,7 +27,7 @@ class ThemeViewFinder extends FileViewFinder
 
     public function addThemeNamespacePaths($namespace)
     {
-        if (!isset($this->hints[$namespace])) {
+        if (! isset($this->hints[$namespace])) {
             return [];
         }
 

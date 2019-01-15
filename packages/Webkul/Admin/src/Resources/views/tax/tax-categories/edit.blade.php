@@ -27,9 +27,9 @@
                         <label for="channel" class="required">{{ __('admin::app.settings.tax-categories.select-channel') }}</label>
 
                         <select class="control" name="channel_id">
-                            @foreach(core()->getAllChannels() as $channelModel)
+                            @foreach (core()->getAllChannels() as $channelModel)
 
-                                <option @if($taxCategory->channel_id == $channelModel->id) selected @endif value="{{ $channelModel->id }}">
+                                <option @if ($taxCategory->channel_id == $channelModel->id) selected @endif value="{{ $channelModel->id }}">
                                     {{ $channelModel->name }}
                                 </option>
 
@@ -57,7 +57,7 @@
 
                         @inject('taxRates', 'Webkul\Tax\Repositories\TaxRateRepository')
                         <select multiple="multiple" class="control" id="taxrates" name="taxrates[]" data-vv-as="&quot;{{ __('admin::app.settings.tax-categories.select-taxrates') }}&quot;" v-validate="'required'">
-                            @foreach($taxRates->all() as $taxRate)
+                            @foreach ($taxRates->all() as $taxRate)
                                 <option value="{{ $taxRate->id }}" {{ is_numeric($taxCategory->tax_rates->pluck('id')->search($taxRate->id)) ? 'selected' : '' }}>{{ $taxRate->identifier }}</option>
                             @endforeach
                         </select>

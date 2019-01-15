@@ -2,7 +2,7 @@
 
 <?php $cart = cart()->getCart(); ?>
 
-@if($cart)
+@if ($cart)
     <?php $items = $cart->items; ?>
 
     <div class="dropdown-toggle">
@@ -27,12 +27,12 @@
                 </div>
 
                 <div class="dropdown-content">
-                    @foreach($items as $item)
-                        {{-- @if($item->type == "configurable") --}}
+                    @foreach ($items as $item)
+                        {{-- @if ($item->type == "configurable") --}}
                             <div class="item">
                                 <div class="item-image" >
                                     <?php
-                                        if($item->type == "configurable")
+                                        if ($item->type == "configurable")
                                             $images = $productImageHelper->getProductBaseImage($item->child->product);
                                         else
                                             $images = $productImageHelper->getProductBaseImage($item->product);
@@ -41,13 +41,13 @@
                                 </div>
 
                                 <div class="item-details">
-                                    {{-- @if($item->type == "configurable")
+                                    {{-- @if ($item->type == "configurable")
                                         <div class="item-name">{{ $item->child->name }}</div>
                                     @else --}}
                                         <div class="item-name">{{ $item->name }}</div>
                                     {{-- @endif --}}
 
-                                    @if($item->type == "configurable")
+                                    @if ($item->type == "configurable")
                                         <div class="item-options">
                                             {{ trim(Cart::getProductAttributeOptionDetails($item->child->product)['html']) }}
                                         </div>

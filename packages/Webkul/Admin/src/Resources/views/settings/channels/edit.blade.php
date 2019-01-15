@@ -50,7 +50,7 @@
                                 <label for="inventory_sources" class="required">{{ __('admin::app.settings.channels.inventory_sources') }}</label>
                                 <?php $selectedOptionIds = old('inventory_sources') ?: $channel->inventory_sources->pluck('id')->toArray() ?>
                                 <select v-validate="'required'" class="control" id="inventory_sources" name="inventory_sources[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.inventory_sources') }}&quot;" multiple>
-                                    @foreach(app('Webkul\Inventory\Repositories\InventorySourceRepository')->all() as $inventorySource)
+                                    @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->all() as $inventorySource)
                                         <option value="{{ $inventorySource->id }}" {{ in_array($inventorySource->id, $selectedOptionIds) ? 'selected' : '' }}>
                                             {{ $inventorySource->name }}
                                         </option>
@@ -63,7 +63,7 @@
                                 <label for="root_category_id" class="required">{{ __('admin::app.settings.channels.root-category') }}</label>
                                 <?php $selectedOption = old('root_category_id') ?: $channel->root_category_id ?>
                                 <select v-validate="'required'" class="control" id="root_category_id" name="root_category_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.root-category') }}&quot;">
-                                    @foreach(app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
+                                    @foreach (app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
                                         <option value="{{ $category->id }}" {{ $selectedOption == $category->id ? 'selected' : '' }}>
                                             {{ $category->name }}
                                         </option>
@@ -87,7 +87,7 @@
                                 <label for="locales" class="required">{{ __('admin::app.settings.channels.locales') }}</label>
                                 <?php $selectedOptionIds = old('locales') ?: $channel->locales->pluck('id')->toArray() ?>
                                 <select v-validate="'required'" class="control" id="locales" name="locales[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.locales') }}&quot;" multiple>
-                                    @foreach(core()->getAllLocales() as $locale)
+                                    @foreach (core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->id }}" {{ in_array($locale->id, $selectedOptionIds) ? 'selected' : '' }}>
                                             {{ $locale->name }}
                                         </option>
@@ -100,7 +100,7 @@
                                 <label for="default_locale_id" class="required">{{ __('admin::app.settings.channels.default-locale') }}</label>
                                 <?php $selectedOption = old('default_locale_id') ?: $channel->default_locale_id ?>
                                 <select v-validate="'required'" class="control" id="default_locale_id" name="default_locale_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.default-locale') }}&quot;">
-                                    @foreach(core()->getAllLocales() as $locale)
+                                    @foreach (core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->id }}" {{ $selectedOption == $locale->id ? 'selected' : '' }}>
                                             {{ $locale->name }}
                                         </option>
@@ -113,7 +113,7 @@
                                 <label for="currencies" class="required">{{ __('admin::app.settings.channels.currencies') }}</label>
                                 <?php $selectedOptionIds = old('currencies') ?: $channel->currencies->pluck('id')->toArray() ?>
                                 <select v-validate="'required'" class="control" id="currencies" name="currencies[]" data-vv-as="&quot;{{ __('admin::app.settings.channels.currencies') }}&quot;" multiple>
-                                    @foreach(core()->getAllCurrencies() as $currency)
+                                    @foreach (core()->getAllCurrencies() as $currency)
                                         <option value="{{ $currency->id }}" {{ in_array($currency->id, $selectedOptionIds) ? 'selected' : '' }}>
                                             {{ $currency->name }}
                                         </option>
@@ -126,7 +126,7 @@
                                 <label for="base_currency_id" class="required">{{ __('admin::app.settings.channels.base-currency') }}</label>
                                 <?php $selectedOption = old('base_currency_id') ?: $channel->base_currency_id ?>
                                 <select v-validate="'required'" class="control" id="base_currency_id" name="base_currency_id" data-vv-as="&quot;{{ __('admin::app.settings.channels.base-currency') }}&quot;">
-                                    @foreach(core()->getAllCurrencies() as $currency)
+                                    @foreach (core()->getAllCurrencies() as $currency)
                                         <option value="{{ $currency->id }}" {{ $selectedOption == $currency->id ? 'selected' : '' }}>
                                             {{ $currency->name }}
                                         </option>
@@ -146,7 +146,7 @@
                                 <?php $selectedOption = old('theme') ?: $channel->theme ?>
 
                                 <select class="control" id="theme" name="theme">
-                                    @foreach(themes()->all() as $theme)
+                                    @foreach (themes()->all() as $theme)
                                         <option value="{{ $theme->code }}" {{ $selectedOption == $theme->code ? 'selected' : '' }}>
                                             {{ $theme->name }}
                                         </option>

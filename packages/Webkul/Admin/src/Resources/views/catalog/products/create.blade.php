@@ -51,7 +51,7 @@
                                 <option value="configurable" {{ $familyId ? 'selected' : '' }}>{{ __('admin::app.catalog.products.configurable') }}</option>
                             </select>
 
-                            @if($familyId)
+                            @if ($familyId)
                                 <input type="hidden" name="type" value="configurable"/>
                             @endif
                             <span class="control-error" v-if="errors.has('type')">@{{ errors.first('type') }}</span>
@@ -61,12 +61,12 @@
                             <label for="attribute_family_id" class="required">{{ __('admin::app.catalog.products.familiy') }}</label>
                             <select class="control" v-validate="'required'" id="attribute_family_id" name="attribute_family_id" {{ $familyId ? 'disabled' : '' }} data-vv-as="&quot;{{ __('admin::app.catalog.products.familiy') }}&quot;">
                                 <option value=""></option>
-                                @foreach($families as $family)
+                                @foreach ($families as $family)
                                     <option value="{{ $family->id }}" {{ ($familyId == $family->id || old('attribute_family_id') == $family->id) ? 'selected' : '' }}>{{ $family->name }}</option>
                                     @endforeach
                             </select>
 
-                            @if($familyId)
+                            @if ($familyId)
                                 <input type="hidden" name="attribute_family_id" value="{{ $familyId }}"/>
                             @endif
                             <span class="control-error" v-if="errors.has('attribute_family_id')">@{{ errors.first('attribute_family_id') }}</span>
@@ -81,7 +81,7 @@
                     </div>
                 </accordian>
 
-                @if($familyId)
+                @if ($familyId)
                     <accordian :title="'{{ __('admin::app.catalog.products.configurable-attributes') }}'" :active="true">
                         <div slot="body">
 
@@ -96,13 +96,13 @@
                                     </thead>
 
                                     <tbody>
-                                        @foreach($configurableFamily->configurable_attributes as $attribute)
+                                        @foreach ($configurableFamily->configurable_attributes as $attribute)
                                             <tr>
                                                 <td>
                                                     {{ $attribute->admin_name }}
                                                 </td>
                                                 <td>
-                                                    @foreach($attribute->options as $option)
+                                                    @foreach ($attribute->options as $option)
                                                         <span class="label">
                                                             <input type="hidden" name="super_attributes[{{$attribute->code}}][]" value="{{ $option->id }}"/>
                                                             {{ $option->admin_name }}

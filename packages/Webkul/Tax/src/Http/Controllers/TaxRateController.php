@@ -85,7 +85,7 @@ class TaxRateController extends Controller
 
         $data = request()->all();
 
-        if(isset($data['is_zip'])) {
+        if (isset($data['is_zip'])) {
             $data['is_zip'] = 1;
             unset($data['zip_code']);
         }
@@ -152,7 +152,7 @@ class TaxRateController extends Controller
      */
     public function destroy($id)
     {
-        // if($this->taxRate->count() == 1) {
+        // if ($this->taxRate->count() == 1) {
         //     session()->flash('error', trans('admin::app.settings.tax-rates.atleast-one'));
         // } else {
 

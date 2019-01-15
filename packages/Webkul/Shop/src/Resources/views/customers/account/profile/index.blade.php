@@ -60,7 +60,7 @@
                         <td>{{ $customer->phone }}</td>
                     </tr>
 
-                    {{-- @if($customer->subscribed_to_news_letter == 1)
+                    {{-- @if ($customer->subscribed_to_news_letter == 1)
                         <tr>
                             <td> {{ __('shop::app.footer.subscribe-newsletter') }}</td>
                             <td>

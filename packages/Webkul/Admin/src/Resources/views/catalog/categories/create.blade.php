@@ -75,7 +75,7 @@
                         </div>
                     </accordian>
 
-                    @if($categories->count())
+                    @if ($categories->count())
                     <accordian :title="'{{ __('admin::app.catalog.categories.parent-category') }}'" :active="true">
                         <div slot="body">
 

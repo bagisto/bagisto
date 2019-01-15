@@ -76,13 +76,13 @@ class WishlistController extends Controller
         $checked = $this->wishlist->findWhere(['channel_id' => core()->getCurrentChannel()->id, 'product_id' => $itemId, 'customer_id' => auth()->guard('customer')->user()->id]);
 
         //accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
-        if($product->parent_id != null) {
+        if ($product->parent_id != null) {
             $product = $this->product->findOneByField('id', $product->parent_id);
             $data['product_id'] = $product->parent_id;
         }
 
-        if($checked->isEmpty()) {
-            if($this->wishlist->create($data)) {
+        if ($checked->isEmpty()) {
+            if ($this->wishlist->create($data)) {
                 session()->flash('success', trans('customer::app.wishlist.success'));
 
                 return redirect()->back();
@@ -106,7 +106,7 @@ class WishlistController extends Controller
     public function remove($itemId) {
         $result = $this->wishlist->deleteWhere(['customer_id' => auth()->guard('customer')->user()->id, 'channel_id' => core()->getCurrentChannel()->id, 'id' => $itemId]);
 
-        if($result) {
+        if ($result) {
             session()->flash('success', trans('customer::app.wishlist.removed'));
 
             return redirect()->back();
@@ -126,8 +126,8 @@ class WishlistController extends Controller
         $wishlistItem = $this->wishlist->findOneByField('id', $itemId);
         $result = Cart::moveToCart($wishlistItem);
 
-        if($result == 1) {
-            if($wishlistItem->delete()) {
+        if ($result == 1) {
+            if ($wishlistItem->delete()) {
                 session()->flash('success', trans('shop::app.wishlist.moved'));
 
                 Cart::collectTotals();
@@ -138,12 +138,12 @@ class WishlistController extends Controller
 
                 return redirect()->back();
             }
-        } else if($result == 0) {
+        } else if ($result == 0) {
             Session('error', trans('shop::app.wishlist.error'));
 
             return redirect()->back();
-        } else if($result == -1) {
-            if(!$wishlistItem->delete()) {
+        } else if ($result == -1) {
+            if (! $wishlistItem->delete()) {
                 session()->flash('error', trans('shop::app.wishlist.move-error'));
 
                 return redirect()->back();
@@ -163,8 +163,8 @@ class WishlistController extends Controller
     public function removeAll() {
         $wishlistItems = auth()->guard('customer')->user()->wishlist_items;
 
-        if($wishlistItems->count() > 0) {
-            foreach($wishlistItems as $wishlistItem) {
+        if ($wishlistItems->count() > 0) {
+            foreach ($wishlistItems as $wishlistItem) {
                 $this->wishlist->delete($wishlistItem->id);
             }
         }

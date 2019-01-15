@@ -61,7 +61,7 @@
                             <div class="control-group" :class="[errors.has('role_id') ? 'has-error' : '']">
                                 <label for="role" class="required">{{ __('admin::app.users.users.role') }}</label>
                                 <select v-validate="'required'" class="control" name="role_id" data-vv-as="&quot;{{ __('admin::app.users.users.role') }}&quot;">
-                                    @foreach($roles as $role)
+                                    @foreach ($roles as $role)
                                         <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
                                     @endforeach
                                 </select>
@@ -72,7 +72,7 @@
                                 <label for="status">{{ __('admin::app.users.users.status') }}</label>
                                 <span class="checkbox">
                                     <input type="checkbox" id="status" name="status"
-                                    {{-- @if($user->status == 0)
+                                    {{-- @if ($user->status == 0)
                                         value="false"
                                     @else
                                         value="true"

@@ -89,7 +89,7 @@ class ReviewController extends Controller
 
         $result = $this->productReview->create($data);
 
-        if($result) {
+        if ($result) {
             return response()->json(['message' => 'success', 'status' => $result]);
         } else {
             return response()->json(['message' => 'failed', 'status' => $result]);

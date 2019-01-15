@@ -71,7 +71,7 @@ class AttributeDataGrid extends DataGrid
             'searchable' => false,
             'width' => '100px',
             'wrapper' => function($value) {
-                if($value == 1)
+                if ($value == 1)
                     return 'True';
                 else
                     return 'False';
@@ -86,7 +86,7 @@ class AttributeDataGrid extends DataGrid
             'searchable' => false,
             'width' => '100px',
             'wrapper' => function($value) {
-                if($value == 1)
+                if ($value == 1)
                     return 'True';
                 else
                     return 'False';
@@ -101,7 +101,7 @@ class AttributeDataGrid extends DataGrid
             'searchable' => false,
             'width' => '100px',
             'wrapper' => function($value) {
-                if($value == 1)
+                if ($value == 1)
                     return 'True';
                 else
                     return 'False';
@@ -116,7 +116,7 @@ class AttributeDataGrid extends DataGrid
             'searchable' => false,
             'width' => '100px',
             'wrapper' => function($value) {
-                if($value == 1)
+                if ($value == 1)
                     return 'True';
                 else
                     return 'False';

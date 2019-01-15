@@ -129,7 +129,7 @@ class ReviewController extends Controller
 
             $indexes = explode(',', request()->input('indexes'));
 
-            foreach($indexes as $key => $value) {
+            foreach ($indexes as $key => $value) {
                 try {
                     Event::fire('customer.review.delete.before', $value);
 
@@ -143,7 +143,7 @@ class ReviewController extends Controller
                 }
             }
 
-            if(!$suppressFlash)
+            if (! $suppressFlash)
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Reviews']));
             else
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));
@@ -170,18 +170,18 @@ class ReviewController extends Controller
 
             $indexes = explode(',', request()->input('indexes'));
 
-            foreach($indexes as $key => $value) {
+            foreach ($indexes as $key => $value) {
                 $review = $this->productReview->findOneByField('id', $value);
 
                 try {
-                    if($data['massaction-type'] == 'update') {
-                        if($data['update-options'] == 1) {
+                    if ($data['massaction-type'] == 'update') {
+                        if ($data['update-options'] == 1) {
                             Event::fire('customer.review.update.before', $value);
 
                             $review->update(['status' => 'approved']);
 
                             Event::fire('customer.review.update.after', $review);
-                        } else if($data['update-options'] == 0) {
+                        } else if ($data['update-options'] == 0) {
                             $review->update(['status' => 'pending']);
                         } else {
                             continue;
@@ -194,7 +194,7 @@ class ReviewController extends Controller
                 }
             }
 
-            if(!$suppressFlash)
+            if (! $suppressFlash)
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.update-success', ['resource' => 'Reviews']));
             else
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));

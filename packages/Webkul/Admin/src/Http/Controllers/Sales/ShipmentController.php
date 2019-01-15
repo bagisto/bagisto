@@ -91,7 +91,7 @@ class ShipmentController extends Controller
     {
         $order = $this->order->find($orderId);
 
-        if(!$order->channel || !$order->canShip()) {
+        if (! $order->channel || !$order->canShip()) {
             session()->flash('error', 'Shipment can not be created for this order.');
 
             return redirect()->back();
@@ -111,7 +111,7 @@ class ShipmentController extends Controller
     {
         $order = $this->order->find($orderId);
 
-        if(!$order->canShip()) {
+        if (! $order->canShip()) {
             session()->flash('error', 'Order shipment creation is not allowed.');
 
             return redirect()->back();
@@ -126,7 +126,7 @@ class ShipmentController extends Controller
 
         $data = request()->all();
 
-        if(!$this->isInventoryValidate($data)) {
+        if (! $this->isInventoryValidate($data)) {
             session()->flash('error', 'Requested quantity is invalid or not available.');
 
             return redirect()->back();

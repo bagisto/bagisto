@@ -134,7 +134,7 @@ class CartController extends Controller
         $request = request()->except('_token');
 
         foreach ($request['qty'] as $id => $quantity) {
-            if($quantity <= 0) {
+            if ($quantity <= 0) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.illegal'));
 
                 return redirect()->back();
@@ -180,7 +180,7 @@ class CartController extends Controller
 
         Cart::collectTotals();
 
-        if (!$result) {
+        if (! $result) {
             return redirect()->back();
         } else {
             return redirect()->route('shop.checkout.onepage.index');
@@ -197,7 +197,7 @@ class CartController extends Controller
     {
         $result = Cart::moveToWishlist($id);
 
-        if (!$result) {
+        if (! $result) {
             Cart::collectTotals();
 
             session()->flash('success', trans('shop::app.wishlist.moved'));

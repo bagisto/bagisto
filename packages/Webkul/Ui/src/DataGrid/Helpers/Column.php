@@ -111,7 +111,7 @@ class Column extends AbstractFillable
             return trim(end($as));
         }
 
-        if (!$tillDot) {
+        if (! $tillDot) {
             return $this->name;
         }
 
@@ -132,7 +132,7 @@ class Column extends AbstractFillable
         $query = ['sort' => $this->correct(false)];
 
         if (($sort = $this->request->offsetGet('sort')) && $sort == $this->correct(false)) {
-            if (!$order = $this->request->offsetGet('order')) {
+            if (! $order = $this->request->offsetGet('order')) {
                 $query['order'] = self::ORDER_DESC;
             } else {
                 $query['order'] = ($order == self::ORDER_DESC ? self::ORDER_ASC : self::ORDER_DESC);

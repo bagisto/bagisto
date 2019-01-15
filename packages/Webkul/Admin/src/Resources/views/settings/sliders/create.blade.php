@@ -32,8 +32,8 @@
                     <div class="control-group" :class="[errors.has('channel_id') ? 'has-error' : '']">
                         <label for="channel_id">{{ __('admin::app.settings.sliders.channels') }}</label>
                         <select class="control" id="channel_id" name="channel_id" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.channels') }}&quot;">
-                            @foreach($channels as $channel)
-                                <option value="{{ $channel->id }}" @if($channel->id == old('channel_id')) selected @endif>
+                            @foreach ($channels as $channel)
+                                <option value="{{ $channel->id }}" @if ($channel->id == old('channel_id')) selected @endif>
                                     {{ __($channel->name) }}
                                 </option>
                             @endforeach
