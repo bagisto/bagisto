@@ -15,21 +15,20 @@ class OrderShipmentsDataGrid extends DataGrid
 {
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('shipments as ship')->select('ship.id', 'ship.order_id', 'ship.total_qty', 'is.name', 'ors.created_at as orderdate', 'ship.created_at')->addSelect(DB::raw('CONCAT(ors.customer_first_name, " ", ors.customer_last_name) as custname'))->leftJoin('orders as ors', 'ship.order_id', '=', 'ors.id')->leftJoin('inventory_sources as is', 'ship.inventory_source_id', '=', 'is.id');
+        $queryBuilder = DB::table('shipments as ship')->select('ship.id as shipment_id', 'ship.order_id as shipment_order_id', 'ship.total_qty as shipment_total_qty', 'is.name as inventory_source_name', 'ors.created_at as orderdate', 'ship.created_at as shipment_created_at')->addSelect(DB::raw('CONCAT(ors.customer_first_name, " ", ors.customer_last_name) as custname'))->leftJoin('orders as ors', 'ship.order_id', '=', 'ors.id')->leftJoin('inventory_sources as is', 'ship.inventory_source_id', '=', 'is.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
     public function setIndex() {
-        $this->index = 'id'; //the column that needs to be treated as index column
+        $this->index = 'shipment_id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'ship.id',
-            'alias' => 'shipId',
-            'label' => 'ID',
+            'index' => 'shipment_id',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -37,9 +36,8 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'ship.order_id',
-            'alias' => 'orderId',
-            'label' => 'Order ID',
+            'index' => 'shipment_order_id',
+            'label' => trans('admin::app.datagrid.order-id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -47,9 +45,8 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'ship.total_qty',
-            'alias' => 'shipTotalQty',
-            'label' => 'Total Qty',
+            'index' => 'shipment_total_qty',
+            'label' => trans('admin::app.datagrid.total-qty'),
             'type' => 'number',
             'searchable' => true,
             'sortable' => true,
@@ -57,9 +54,8 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'is.name',
-            'alias' => 'shipInventoryName',
-            'label' => 'Inventory Source',
+            'index' => 'inventory_source_name',
+            'label' => trans('admin::app.datagrid.inventory-source'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -68,8 +64,7 @@ class OrderShipmentsDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'orderdate',
-            'alias' => 'shipOrderDate',
-            'label' => 'Order Date',
+            'label' => trans('admin::app.datagrid.order-date'),
             'type' => 'datetime',
             'sortable' => true,
             'searchable' => true,
@@ -77,9 +72,8 @@ class OrderShipmentsDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'ship.created_at',
-            'alias' => 'shipDate',
-            'label' => 'Shipment Date',
+            'index' => 'shipment_created_at',
+            'label' => trans('admin::app.datagrid.shipment-date'),
             'type' => 'datetime',
             'sortable' => true,
             'searchable' => false,
@@ -88,8 +82,7 @@ class OrderShipmentsDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'custname',
-            'alias' => 'shipTO',
-            'label' => 'Shipping To',
+            'label' => trans('admin::app.datagrid.shipment-to'),
             'type' => 'string',
             'sortable' => true,
             'searchable' => false,

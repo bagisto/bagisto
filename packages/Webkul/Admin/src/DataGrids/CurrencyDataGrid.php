@@ -28,8 +28,7 @@ class CurrencyDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'currencyId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -38,8 +37,7 @@ class CurrencyDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
-            'alias' => 'currencyName',
-            'label' => 'Name',
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -48,8 +46,7 @@ class CurrencyDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'code',
-            'alias' => 'currencyCode',
-            'label' => 'Code',
+            'label' => trans('admin::app.datagrid.code'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

@@ -28,8 +28,7 @@ class ChannelDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'channelId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -38,8 +37,7 @@ class ChannelDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'code',
-            'alias' => 'channelCode',
-            'label' => 'Code',
+            'label' => trans('admin::app.datagrid.code'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -48,8 +46,7 @@ class ChannelDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
-            'alias' => 'channelName',
-            'label' => 'Name',
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -58,8 +55,7 @@ class ChannelDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'hostname',
-            'alias' => 'channelHostname',
-            'label' => 'Hostname',
+            'label' => trans('admin::app.datagrid.hostname'),
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,

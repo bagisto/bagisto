@@ -34,8 +34,7 @@ class AttributeDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            // 'alias' => 'attributeId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -44,8 +43,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'code',
-            // 'alias' => 'attributeCode',
-            'label' => 'Code',
+            'label' => trans('admin::app.datagrid.code'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -54,8 +52,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'admin_name',
-            // 'alias' => 'attributeAdminName',
-            'label' => 'Name',
+            'label' => trans('admin::app.datagrid.admin-name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -64,8 +61,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'type',
-            // 'alias' => 'attributeType',
-            'label' => 'Type',
+            'label' => trans('admin::app.datagrid.type'),
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
@@ -74,8 +70,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'is_required',
-            // 'alias' => 'attributeRequired',
-            'label' => 'Required',
+            'label' => trans('admin::app.datagrid.required'),
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
@@ -90,8 +85,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'is_unique',
-            // 'alias' => 'attributeIsUnique',
-            'label' => 'Unique',
+            'label' => trans('admin::app.datagrid.unique'),
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
@@ -106,8 +100,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'value_per_locale',
-            // 'alias' => 'attributeValuePerLocale',
-            'label' => 'Locale Based',
+            'label' => trans('admin::app.datagrid.per-locale'),
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
@@ -122,8 +115,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'value_per_channel',
-            // 'alias' => 'attributeValuePerChannel',
-            'label' => 'Channel Based',
+            'label' => trans('admin::app.datagrid.per-channel'),
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
@@ -157,6 +149,7 @@ class AttributeDataGrid extends DataGrid
         $this->addMassAction([
             'type' => 'delete',
             'action' => route('admin.catalog.attributes.massdelete'),
+            'label' => 'Delete',
             'method' => 'DELETE'
         ]);
     }

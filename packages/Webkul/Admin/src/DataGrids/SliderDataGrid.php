@@ -15,21 +15,20 @@ class SliderDataGrid extends DataGrid
 {
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('sliders as sl')->addSelect('sl.id', 'sl.title', 'ch.name')->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id');
+        $queryBuilder = DB::table('sliders as sl')->addSelect('sl.id as slider_id', 'sl.title as slider_title', 'ch.name as channel_name')->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
 
     public function setIndex() {
-        $this->index = 'id';
+        $this->index = 'slider_id';
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'sl.id',
-            'alias' => 'sliderId',
-            'label' => 'ID',
+            'index' => 'slider_id',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -37,9 +36,8 @@ class SliderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'sl.title',
-            'alias' => 'sliderTitle',
-            'label' => 'Tile',
+            'index' => 'slider_title',
+            'label' => trans('admin::app.datagrid.title'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -47,9 +45,8 @@ class SliderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'ch.name',
-            'alias' => 'channelName',
-            'label' => 'Channel Name',
+            'index' => 'channel_name',
+            'label' => trans('admin::app.datagrid.channel-name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

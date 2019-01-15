@@ -164,19 +164,18 @@
                                             <input type="hidden" id="indexes" name="indexes" v-model="dataIds">
 
                                             <div class="control-group">
-                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type" style="text-transform: uppercase;" required>
-                                                    <option v-for="(massAction, index) in massActions" :key="index">@{{ massAction.type }}</option>
+                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type">
+                                                    <option v-for="(massAction, index) in massActions" :key="index" :value="massAction.type">@{{ massAction.label }}</option>
                                                 </select>
                                             </div>
 
                                             <div class="control-group" style="margin-left: 10px;" v-if="massActionType == 'update'">
-                                                <select class="control" v-model="massActionUpdateValue" name="update-options" required style="text-transform: uppercase;">
+                                                <select class="control" v-model="massActionUpdateValue" name="update-options">
                                                     <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ id }}</option>
                                                 </select>
                                             </div>
 
-                                            <input type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px; margin-top: 3px;
-                                            height: 30px;">
+                                            <input type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px;">
                                         </form>
                                     </div>
                                 </th>
@@ -186,7 +185,7 @@
 
                     <thead v-if="massActionsToggle == false">
                         <tr>
-                            @if($results['enableMassActions'])
+                            @if(count($results['records']) && $results['enableMassActions'])
                                 <th class="grid_head" id="mastercheckbox" style="width: 50px;">
                                     <span class="checkbox">
                                         <input type="checkbox" v-model="allSelected" v-on:change="selectAll">
@@ -204,13 +203,13 @@
 
                             @if($results['enableActions'])
                                 <th>
-                                    Actions
+                                    {{ __('ui::app.datagrid.actions') }}
                                 </th>
                             @endif
                         </tr>
                     </thead>
 
-                    @include('ui::datagrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns'],'enableMassActions' => $results['enableMassActions'], 'enableActions' => $results['enableActions']])
+                    @include('ui::datagrid.body', ['records' => $results['records'], 'actions' => $results['actions'], 'index' => $results['index'], 'columns' => $results['columns'],'enableMassActions' => $results['enableMassActions'], 'enableActions' => $results['enableActions'], 'norecords' => $results['norecords']])
                 </table>
             </div>
         </script>
@@ -315,7 +314,7 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if(this.columns[colIndex].alias == this.columnOrAlias) {
+                            if(this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -335,7 +334,7 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if(this.columns[colIndex].alias == this.columnOrAlias) {
+                            if(this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -347,7 +346,7 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if(this.columns[colIndex].alias == this.columnOrAlias) {
+                            if(this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -605,7 +604,7 @@
                                 label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].alias == obj.cond) {
+                                    if(this.columns[colIndex].index == obj.cond) {
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }
@@ -615,7 +614,7 @@
                                 obj.label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].alias == obj.column) {
+                                    if(this.columns[colIndex].index == obj.column) {
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }

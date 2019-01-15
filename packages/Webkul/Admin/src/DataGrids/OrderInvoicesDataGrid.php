@@ -28,8 +28,7 @@ class OrderInvoicesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'invid',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -38,8 +37,7 @@ class OrderInvoicesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'order_id',
-            'alias' => 'orderId',
-            'label' => 'Order ID',
+            'label' => trans('admin::app.datagrid.order-id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -48,8 +46,7 @@ class OrderInvoicesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'grand_total',
-            'alias' => 'invgrandtotal',
-            'label' => 'Grand Total',
+            'label' => trans('admin::app.datagrid.grand-total'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -58,8 +55,7 @@ class OrderInvoicesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'created_at',
-            'alias' => 'invcreatedat',
-            'label' => 'Invoice Date',
+            'label' => trans('admin::app.datagrid.invoice-date'),
             'type' => 'datetime',
             'searchable' => true,
             'sortable' => true,

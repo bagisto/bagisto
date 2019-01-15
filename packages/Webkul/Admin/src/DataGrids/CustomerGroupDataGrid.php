@@ -28,7 +28,6 @@ class CustomerGroupDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'groupId',
             'label' => 'ID',
             'type' => 'number',
             'searchable' => false,
@@ -37,9 +36,7 @@ class CustomerGroupDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            // 'column' => 'CONCAT(cus.first_name, " ", cus.last_name)',
             'index' => 'name',
-            'alias' => 'groupName',
             'label' => 'Name',
             'type' => 'string',
             'searchable' => true,
