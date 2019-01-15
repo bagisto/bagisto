@@ -5,7 +5,7 @@
                 <a href="{{ count($menuItem['children']) ? current($menuItem['children'])['url'] : $menuItem['url'] }}">
                     <span class="icon {{ $menuItem['icon-class'] }}">
                     </span>
-                    {{ $menuItem['name'] }}
+                    {{ trans($menuItem['name']) }}
                 </a>
             </li>
         @endforeach

@@ -3,147 +3,142 @@
 return [
     [
         'key' => 'dashboard',
-        'name' => 'Dashboard',
+        'name' => 'admin::app.acl.dashboard',
         'route' => 'admin.dashboard.index',
         'sort' => 1
     ], [
         'key' => 'sales',
-        'name' => 'Sales',
+        'name' => 'admin::app.acl.sales',
         'route' => 'admin.sales.orders.index',
         'sort' => 2
     ], [
         'key' => 'sales.orders',
-        'name' => 'Orders',
+        'name' => 'admin::app.acl.orders',
         'route' => 'admin.sales.orders.index',
         'sort' => 1
     ], [
         'key' => 'sales.invoices',
-        'name' => 'Invoices',
+        'name' => 'admin::app.acl.invoices',
         'route' => 'admin.sales.invoices.index',
         'sort' => 2
     ], [
         'key' => 'sales.shipments',
-        'name' => 'Shipments',
+        'name' => 'admin::app.acl.shipments',
         'route' => 'admin.sales.shipments.index',
         'sort' => 3
     ], [
         'key' => 'catalog',
-        'name' => 'Catalog',
+        'name' => 'admin::app.acl.catalog',
         'route' => 'admin.catalog.index',
         'sort' => 3
     ], [
         'key' => 'catalog.products',
-        'name' => 'Products',
+        'name' => 'admin::app.acl.products',
         'route' => 'admin.catalog.products.index',
         'sort' => 1
     ], [
         'key' => 'catalog.categories',
-        'name' => 'Categories',
+        'name' => 'admin::app.acl.categories',
         'route' => 'admin.catalog.categories.index',
         'sort' => 2
     ], [
         'key' => 'catalog.attributes',
-        'name' => 'Attributes',
+        'name' => 'admin::app.acl.attributes',
         'route' => 'admin.catalog.attributes.index',
         'sort' => 3
     ], [
         'key' => 'catalog.families',
-        'name' => 'Families',
+        'name' => 'admin::app.acl.attribute-families',
         'route' => 'admin.catalog.families.index',
         'sort' => 4
     ], [
         'key' => 'customers',
-        'name' => 'Customers',
+        'name' => 'admin::app.acl.customers',
         'route' => 'admin.customers.index',
         'sort' => 4
     ], [
         'key' => 'customers.customers',
-        'name' => 'Customers',
+        'name' => 'admin::app.acl.customers',
         'route' => 'admin.customers.index',
         'sort' => 1
     ], [
         'key' => 'customers.groups',
-        'name' => 'Groups',
+        'name' => 'admin::app.acl.groups',
         'route' => 'admin.groups.index',
         'sort' => 2
     ], [
         'key' => 'customers.reviews',
-        'name' => 'Reviews',
+        'name' => 'admin::app.acl.reviews',
         'route' => 'admin.customers.reviews.index',
         'sort' => 3
     ], [
         'key' => 'configuration',
-        'name' => 'Configure',
+        'name' => 'admin::app.acl.configure',
         'route' => 'admin.account.edit',
-        'sort' => 1
-    ], [
-        'key' => 'configuration',
-        'name' => 'Configure',
-        'route' => 'admin.account.edit',
-        'sort' => 1
+        'sort' => 5
     ], [
         'key' => 'settings',
-        'name' => 'Settings',
+        'name' => 'admin::app.acl.settings',
         'route' => 'admin.users.index',
         'sort' => 6
     ], [
         'key' => 'settings.locales',
-        'name' => 'Locales',
+        'name' => 'admin::app.acl.locales',
         'route' => 'admin.locales.index',
         'sort' => 1
     ], [
         'key' => 'settings.currencies',
-        'name' => 'Currencies',
+        'name' => 'admin::app.acl.currencies',
         'route' => 'admin.currencies.index',
         'sort' => 2
     ], [
         'key' => 'settings.exchange_rates',
-        'name' => 'Exchange Rates',
+        'name' => 'admin::app.acl.exchange-rates',
         'route' => 'admin.exchange_rates.index',
         'sort' => 3
     ], [
         'key' => 'settings.inventory_sources',
-        'name' => 'Inventory Sources',
+        'name' => 'admin::app.acl.inventory-sources',
         'route' => 'admin.inventory_sources.index',
         'sort' => 4
     ], [
         'key' => 'settings.channels',
-        'name' => 'Channels',
+        'name' => 'admin::app.acl.channels',
         'route' => 'admin.channels.index',
         'sort' => 5
     ], [
         'key' => 'settings.users',
-        'name' => 'Users',
+        'name' => 'admin::app.acl.users',
         'route' => 'admin.users.index',
         'sort' => 6
     ], [
         'key' => 'settings.users.users',
-        'name' => 'Users',
+        'name' => 'admin::app.acl.users',
         'route' => 'admin.users.index',
         'sort' => 1
     ], [
         'key' => 'settings.users.roles',
-        'name' => 'Roles',
+        'name' => 'admin::app.acl.roles',
         'route' => 'admin.roles.index',
         'sort' => 1
     ], [
         'key' => 'settings.sliders',
-        'name' => 'Sliders',
+        'name' => 'admin::app.acl.sliders',
         'route' => 'admin.sliders.index',
         'sort' => 7
     ], [
         'key' => 'settings.taxes',
-        'name' => 'Taxes',
+        'name' => 'admin::app.acl.taxes',
         'route' => 'admin.tax-categories.index',
         'sort' => 8
     ], [
         'key' => 'settings.taxes.tax-categories',
-        'name' => 'Tax Categories',
+        'name' => 'admin::app.acl.tax-categories',
         'route' => 'admin.tax-categories.index',
         'sort' => 1
     ], [
         'key' => 'settings.taxes.tax-rates',
-        'name' => 'Tax Rates',
+        'name' => 'admin::app.acl.tax-rates',
         'route' => 'admin.tax-rates.index',
         'sort' => 2
     ]

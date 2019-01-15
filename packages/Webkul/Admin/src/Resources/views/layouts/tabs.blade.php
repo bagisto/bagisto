@@ -12,7 +12,7 @@
 
                     <li class="{{ $menu->getActive($item) }}">
                         <a href="{{ $item['url'] }}">
-                            {{ $item['name'] }}
+                            {{ trans($item['name']) }}
                         </a>
                     </li>
 
@@ -32,7 +32,7 @@
 
                     <li class="{{ $key == request()->route('slug2') ? 'active' : '' }}">
                         <a href="{{ route('admin.configuration.index', (request()->route('slug') . '/' . $key)) }}">
-                            {{ $item['name'] }}
+                            {{ trans($item['name']) }}
                         </a>
                     </li>
 
