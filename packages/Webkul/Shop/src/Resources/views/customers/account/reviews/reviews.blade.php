@@ -17,8 +17,8 @@
             </div>
 
             <div class="account-items-list">
-                @if(count($reviews))
-                    @foreach($reviews as $review)
+                @if (count($reviews))
+                    @foreach ($reviews as $review)
                     <div class="account-item-card mt-15 mb-15">
                         <div class="media-info">
                             <?php $image = $productImageHelper->getGalleryImages($review->product); ?>

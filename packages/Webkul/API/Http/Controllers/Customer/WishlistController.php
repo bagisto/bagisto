@@ -24,7 +24,7 @@ class WishlistController extends Controller
 
     public function __construct(Product $product, Wishlist $wishlist)
     {
-        if(auth()->guard('customer')->check()) {
+        if (auth()->guard('customer')->check()) {
             $this->product = $product;
             $this->wishlist = $wishlist;
             $this->customer = auth()->guard('customer')->user();
@@ -43,7 +43,7 @@ class WishlistController extends Controller
     {
         $wishlist = $this->customer->wishlist_items;
 
-        if($wishlist->count() > 0) {
+        if ($wishlist->count() > 0) {
             return response()->json($wishlist, 200);
         } else {
             return response()->json(['message' => 'Wishlist Empty', 'Items' => null], 200);
@@ -67,14 +67,14 @@ class WishlistController extends Controller
         ];
 
         //accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
-        if($product->parent_id != null) {
+        if ($product->parent_id != null) {
             $data['product_id'] = $productId = $product->parent_id;
         }
 
         $checked = $this->wishlist->findWhere(['channel_id' => core()->getCurrentChannel()->id, 'product_id' => $productId, 'customer_id' => auth()->guard('customer')->user()->id]);
 
-        if($checked->isEmpty()) {
-            if($wishlistItem = $this->wishlist->create($data)) {
+        if ($checked->isEmpty()) {
+            if ($wishlistItem = $this->wishlist->create($data)) {
                 return response()->json(['message' => 'Successfully Added Item To Wishlist', 'items' => $wishlistItem], 200);
             } else {
                 return response()->json(['message' => 'Error! Cannot Add Item To Wishlist', 'items' => null], 401);
@@ -93,7 +93,7 @@ class WishlistController extends Controller
     {
         $result = $this->wishlist->deleteWhere(['customer_id' => auth()->guard('customer')->user()->id, 'channel_id' => core()->getCurrentChannel()->id, 'id' => $itemId]);
 
-        if($result) {
+        if ($result) {
             return response()->json(['message' => 'Item Successfully Removed From Wishlist', 'status' => $result]);
         } else {
             return response()->json(['message' => 'Error! While Removing Item From Wishlist', 'status' => $result]);

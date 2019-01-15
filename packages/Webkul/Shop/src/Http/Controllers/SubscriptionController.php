@@ -68,14 +68,14 @@ class SubscriptionController extends Controller
         $alreadySubscribed = $this->subscription->findWhere(['email' => $email]);
 
         $unique = function() use($alreadySubscribed){
-            if($alreadySubscribed->count() > 0 ) {
+            if ($alreadySubscribed->count() > 0 ) {
                 return 0;
             } else {
                 return 1;
             }
         };
 
-        if($unique()) {
+        if ($unique()) {
             $token = uniqid();
 
             $subscriptionData['email'] = $email;
@@ -95,7 +95,7 @@ class SubscriptionController extends Controller
 
             $result = false;
 
-            if($mailSent) {
+            if ($mailSent) {
                 $result = $this->subscription->create([
                     'email' => $email,
                     'channel_id' => core()->getCurrentChannel()->id,
@@ -103,7 +103,7 @@ class SubscriptionController extends Controller
                     'token' => $token
                 ]);
 
-                if(!$result) {
+                if (! $result) {
                     session()->flash('error', trans('shop::app.subscription.not-subscribed'));
 
                     return redirect()->back();
@@ -124,8 +124,8 @@ class SubscriptionController extends Controller
     public function unsubscribe($token) {
         $subscriber = $this->subscription->findOneByField('token', $token);
 
-        if(isset($subscriber))
-        if($subscriber->count() > 0 && $subscriber->is_subscribed == 1 &&$subscriber->update(['is_subscribed' => 0])) {
+        if (isset($subscriber))
+        if ($subscriber->count() > 0 && $subscriber->is_subscribed == 1 &&$subscriber->update(['is_subscribed' => 0])) {
             session()->flash('info', trans('shop::app.subscription.unsubscribed'));
         } else {
             session()->flash('info', trans('shop::app.subscription.already-unsub'));

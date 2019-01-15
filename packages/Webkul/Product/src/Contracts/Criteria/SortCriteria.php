@@ -41,8 +41,8 @@ class SortCriteria extends AbstractProduct implements CriteriaInterface
     {
         $params = request()->input();
 
-        if(isset($params['sort'])) {
-            if($params['sort'] == 'name' || $params['sort'] == 'price') {
+        if (isset($params['sort'])) {
+            if ($params['sort'] == 'name' || $params['sort'] == 'price') {
                 $attribute = $this->attribute->findOneByField('code', $params['sort']);
 
                 $alias = 'sort_' . $params['sort'];

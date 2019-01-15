@@ -29,7 +29,7 @@ class Bouncer
 
     public function checkIfAuthorized($request)
     {
-        if (!$role = auth()->guard('admin')->user()->role)
+        if (! $role = auth()->guard('admin')->user()->role)
             abort(401, 'This action is unauthorized.');
 
         if ($role->permission_type == 'all') {
@@ -37,7 +37,7 @@ class Bouncer
         } else {
             $acl = app('acl');
 
-            if($acl && isset($acl->roles[Route::currentRouteName()])) {
+            if ($acl && isset($acl->roles[Route::currentRouteName()])) {
                 bouncer()->allow($acl->roles[Route::currentRouteName()]);
             }
         }

@@ -30,7 +30,7 @@ class OrderItemRepository extends Repository
      */
     public function create(array $data)
     {
-        if(isset($data['product']) && $data['product']) {
+        if (isset($data['product']) && $data['product']) {
             $data['product_id'] = $data['product']->id;
             $data['product_type'] = get_class($data['product']);
 
@@ -50,7 +50,7 @@ class OrderItemRepository extends Repository
         $totalInvoiced = $baseTotalInvoiced = 0;
         $taxInvoiced = $baseTaxInvoiced = 0;
 
-        foreach($orderItem->invoice_items as $invoiceItem) {
+        foreach ($orderItem->invoice_items as $invoiceItem) {
             $qtyInvoiced += $invoiceItem->qty;
 
             $totalInvoiced += $invoiceItem->total;
@@ -60,7 +60,7 @@ class OrderItemRepository extends Repository
             $baseTaxInvoiced += $invoiceItem->base_tax_amount;
         }
 
-        foreach($orderItem->shipment_items as $shipmentItem) {
+        foreach ($orderItem->shipment_items as $shipmentItem) {
             $qtyShipped += $shipmentItem->qty;
         }
 
@@ -84,12 +84,12 @@ class OrderItemRepository extends Repository
      */
     public function manageInventory($orderItem)
     {
-        if(!$orderedQuantity = $orderItem->qty_ordered)
+        if (! $orderedQuantity = $orderItem->qty_ordered)
             return;
 
         $product = $orderItem->type == 'configurable' ? $orderItem->child->product : $orderItem->product;
 
-        if(!$product) {
+        if (! $product) {
             return;
         }
 
@@ -97,7 +97,7 @@ class OrderItemRepository extends Repository
             ->where('channel_id', $orderItem->order->channel->id)
             ->first();
         
-        if($orderedInventory) {
+        if ($orderedInventory) {
             $orderedInventory->update([
                     'qty' => $orderedInventory->qty + $orderItem->qty_ordered
                 ]);
@@ -118,7 +118,7 @@ class OrderItemRepository extends Repository
      */
     public function returnQtyToProductInventory($orderItem)
     {
-        if (!$product = $orderItem->product)
+        if (! $product = $orderItem->product)
             return;
 
         $orderedInventory = $product->ordered_inventories()

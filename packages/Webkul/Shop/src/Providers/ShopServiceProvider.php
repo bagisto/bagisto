@@ -58,7 +58,7 @@ class ShopServiceProvider extends ServiceProvider
     {
         $themes = $this->app->make('themes');
 
-        if (!$themes->current() && \Config::get('themes.default')) {
+        if (! $themes->current() && \Config::get('themes.default')) {
             $themes->set(\Config::get('themes.default'));
         }
 
@@ -75,7 +75,7 @@ class ShopServiceProvider extends ServiceProvider
         view()->composer('shop::customers.account.partials.sidemenu', function ($view) {
             $tree = Tree::create();
 
-            foreach(config('menu.customer') as $item) {
+            foreach (config('menu.customer') as $item) {
                 $tree->add($item, 'menu');
             }
 

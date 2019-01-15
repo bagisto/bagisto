@@ -121,7 +121,7 @@
                             </div>
                         </div>
 
-                        @if($order->shipping_address)
+                        @if ($order->shipping_address)
                             <div class="sale-section">
                                 <div class="secton-title">
                                     <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>

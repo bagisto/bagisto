@@ -105,18 +105,18 @@ class CustomerController extends Controller
 
         $data = collect(request()->input())->except('_token')->toArray();
 
-        if($data['date_of_birth'] == "") {
+        if ($data['date_of_birth'] == "") {
             unset($data['date_of_birth']);
         }
 
-        if($data['oldpassword'] == null) {
+        if ($data['oldpassword'] == null) {
             $data = collect(request()->input())->except(['_token','password','password_confirmation','oldpassword'])->toArray();
 
-            if($data['date_of_birth'] == "") {
+            if ($data['date_of_birth'] == "") {
                 unset($data['date_of_birth']);
             }
 
-            if($this->customer->update($data, $id)) {
+            if ($this->customer->update($data, $id)) {
                 Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
                 return redirect()->back();
@@ -126,12 +126,12 @@ class CustomerController extends Controller
                 return redirect()->back();
             }
         } else {
-            if(Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
+            if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
                 $data = collect(request()->input())->except(['_token','oldpassword'])->toArray();
 
                 $data['password'] = bcrypt($data['password']);
 
-                if($data['date_of_birth'] == "") {
+                if ($data['date_of_birth'] == "") {
                     unset($data['date_of_birth']);
                 }
             } else {
@@ -140,7 +140,7 @@ class CustomerController extends Controller
                 return redirect()->back();
             }
 
-            if($this->customer->update($data, $id)) {
+            if ($this->customer->update($data, $id)) {
                 Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
                 return redirect()->back();

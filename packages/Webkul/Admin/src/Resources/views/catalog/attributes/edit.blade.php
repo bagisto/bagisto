@@ -77,7 +77,7 @@
                                 <span class="control-error" v-if="errors.has('admin_name')">@{{ errors.first('admin_name') }}</span>
                             </div>
 
-                            @foreach(Webkul\Core\Models\Locale::all() as $locale)
+                            @foreach (Webkul\Core\Models\Locale::all() as $locale)
 
                                 <div class="control-group">
                                     <label for="locale-{{ $locale->code }}">{{ $locale->name . ' (' . $locale->code . ')' }}</label>
@@ -229,7 +229,7 @@
                         <tr>
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
                             
-                            @foreach(Webkul\Core\Models\Locale::all() as $locale)
+                            @foreach (Webkul\Core\Models\Locale::all() as $locale)
 
                                 <th>{{ $locale->name . ' (' . $locale->code . ')' }}</th>
                             
@@ -250,7 +250,7 @@
                                 </div>
                             </td>
 
-                            @foreach(Webkul\Core\Models\Locale::all() as $locale)
+                            @foreach (Webkul\Core\Models\Locale::all() as $locale)
                                 <td>
                                     <div class="control-group" :class="[errors.has(localeInputName(row, '{{ $locale->code }}')) ? 'has-error' : '']">
                                         <input type="text" v-validate="'required'" v-model="row['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
@@ -283,7 +283,7 @@
     <script>
         $(document).ready(function () {
             $('#type').on('change', function (e) {
-                if(['select', 'multiselect', 'checkbox'].indexOf($(e.target).val()) === -1) {
+                if (['select', 'multiselect', 'checkbox'].indexOf($(e.target).val()) === -1) {
                     $('#options').parent().addClass('hide')
                 } else {
                     $('#options').parent().removeClass('hide')
@@ -295,11 +295,11 @@
                 template: '#options-template', 
 
                 created () {
-                    @foreach($attribute->options as $option)
+                    @foreach ($attribute->options as $option)
                         this.optionRowCount++;
                         var row = {'id': '{{ $option->id }}', 'admin_name': '{{ $option->admin_name }}', 'sort_order': '{{ $option->sort_order }}'};
 
-                        @foreach(Webkul\Core\Models\Locale::all() as $locale)
+                        @foreach (Webkul\Core\Models\Locale::all() as $locale)
                             row['{{ $locale->code }}'] = "{{ $option->translate($locale->code)['label'] }}";
                         @endforeach
 
@@ -317,7 +317,7 @@
                         var rowCount = this.optionRowCount++;
                         var row = {'id': 'option_' + rowCount};
 
-                        @foreach(Webkul\Core\Models\Locale::all() as $locale)
+                        @foreach (Webkul\Core\Models\Locale::all() as $locale)
                             row['{{ $locale->code }}'] = '';
                         @endforeach
 

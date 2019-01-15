@@ -1,4 +1,4 @@
-@if($categories->count())
+@if ($categories->count())
 <accordian :title="'{{ __($accordian['name']) }}'" :active="true">
     <div slot="body">
         

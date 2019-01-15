@@ -1,7 +1,7 @@
 <div class="table">
     <testgrid-filters></testgrid-filters>
 
-    @if(config('datagrid.paginate'))
+    @if (config('datagrid.paginate'))
         @include('ui::datagrid.pagination', ['results' => $results['records']])
     @endif
 
@@ -34,7 +34,7 @@
                                             <div class="control-group">
                                                 <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
                                                     <option selected disabled>Select Column</option>
-                                                    @foreach($results['columns'] as $column)
+                                                    @foreach ($results['columns'] as $column)
                                                         <option value="{{ $column['index'] }}">
                                                             {{ $column['label'] }}
                                                         </option>
@@ -149,7 +149,7 @@
 
                 <table>
                     <thead v-if="massActionsToggle">
-                        @if(isset($results['massactions']))
+                        @if (isset($results['massactions']))
                             <tr class="mass-action" style="height: 63px;" v-if="massActionsToggle">
                                 <th colspan="10" style="width: 100%;">
                                     <div class="mass-action-wrapper" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
@@ -185,7 +185,7 @@
 
                     <thead v-if="massActionsToggle == false">
                         <tr>
-                            @if(count($results['records']) && $results['enableMassActions'])
+                            @if (count($results['records']) && $results['enableMassActions'])
                                 <th class="grid_head" id="mastercheckbox" style="width: 50px;">
                                     <span class="checkbox">
                                         <input type="checkbox" v-model="allSelected" v-on:change="selectAll">
@@ -195,13 +195,13 @@
                                 </th>
                             @endif
 
-                            @foreach($results['columns'] as $key => $column)
+                            @foreach ($results['columns'] as $key => $column)
                                 <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['index'] }}')">
                                     {{ $column['label'] }}
                                 </th>
                             @endforeach
 
-                            @if($results['enableActions'])
+                            @if ($results['enableActions'])
                                 <th>
                                     {{ __('ui::app.datagrid.actions') }}
                                 </th>
@@ -270,28 +270,28 @@
                             if (this.columns[column].index == this.columnOrAlias) {
                                 this.type = this.columns[column].type;
 
-                                if(this.type == 'string') {
+                                if (this.type == 'string') {
                                     this.stringConditionSelect = true;
                                     this.datetimeConditionSelect = false;
                                     this.booleanConditionSelect = false;
                                     this.numberConditionSelect = false;
 
                                     this.nullify();
-                                } else if(this.type == 'datetime') {
+                                } else if (this.type == 'datetime') {
                                     this.datetimeConditionSelect = true;
                                     this.stringConditionSelect = false;
                                     this.booleanConditionSelect = false;
                                     this.numberConditionSelect = false;
 
                                     this.nullify();
-                                } else if(this.type == 'boolean') {
+                                } else if (this.type == 'boolean') {
                                     this.booleanConditionSelect = true;
                                     this.datetimeConditionSelect = false;
                                     this.stringConditionSelect = false;
                                     this.numberConditionSelect = false;
 
                                     this.nullify();
-                                } else if(this.type == 'number') {
+                                } else if (this.type == 'number') {
                                     this.numberConditionSelect = true;
                                     this.booleanConditionSelect = false;
                                     this.datetimeConditionSelect = false;
@@ -314,18 +314,18 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if(this.columns[colIndex].index == this.columnOrAlias) {
+                            if (this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
 
-                        if(this.type == 'string') {
+                        if (this.type == 'string') {
                             this.formURL(this.columnOrAlias, this.stringCondition, this.stringValue, label)
-                        } else if(this.type == 'number') {
+                        } else if (this.type == 'number') {
                             this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
-                        } else if(this.type == 'boolean') {
+                        } else if (this.type == 'boolean') {
                             this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue, label);
-                        } else if(this.type == 'datetime') {
+                        } else if (this.type == 'datetime') {
                             this.formURL(this.columnOrAlias, this.datetimeCondition, this.datetimeValue, label);
                         }
                     },
@@ -334,7 +334,7 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if(this.columns[colIndex].index == this.columnOrAlias) {
+                            if (this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -346,7 +346,7 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if(this.columns[colIndex].index == this.columnOrAlias) {
+                            if (this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -358,7 +358,7 @@
                     setParamsAndUrl() {
                         params = (new URL(window.location.href)).search;
 
-                        if(params.slice(1, params.length).length > 0) {
+                        if (params.slice(1, params.length).length > 0) {
                             this.arrayFromUrl();
                         }
 
@@ -372,7 +372,7 @@
 
                             targetObj = {};
 
-                            if(this.massActions[id].type == 'update') {
+                            if (this.massActions[id].type == 'update') {
                                 this.massActionValues = this.massActions[id].options;
                             }
                         }
@@ -380,10 +380,10 @@
 
                     findCurrentSort() {
                         for(i in this.filters) {
-                            if(this.filters[i].column == 'sort') {
+                            if (this.filters[i].column == 'sort') {
                                 this.currentSort = this.filters[i].val;
 
-                                // if(this.currentSort = 'asc') {
+                                // if (this.currentSort = 'asc') {
                                 //     this.currentSortIcon = this.sortUpIcon;
                                 // } else {
                                 //     this.currentSortIcon = this.sortDownIcon;
@@ -393,9 +393,9 @@
                     },
 
                     changeMassActionTarget() {
-                        if(this.massActionType == 'delete') {
+                        if (this.massActionType == 'delete') {
                             for(i in this.massActionTargets) {
-                                if(this.massActionTargets[i].type == 'delete') {
+                                if (this.massActionTargets[i].type == 'delete') {
                                     this.massActionTarget = this.massActionTargets[i].action;
 
                                     break;
@@ -403,9 +403,9 @@
                             }
                         }
 
-                        if(this.massActionType == 'update') {
+                        if (this.massActionType == 'update') {
                             for(i in this.massActionTargets) {
-                                if(this.massActionTargets[i].type == 'update') {
+                                if (this.massActionTargets[i].type == 'update') {
                                     this.massActionTarget = this.massActionTargets[i].action;
 
                                     break;
@@ -420,18 +420,18 @@
                     formURL(column, condition, response, label) {
                         var obj = {};
 
-                        if(column == "" || condition == "" || response == "" || column == null || condition == null || response == null) {
+                        if (column == "" || condition == "" || response == "" || column == null || condition == null || response == null) {
                             alert('{{ __('ui::app.datagrid.filter-fields-missing') }}');
 
                             return false;
                         } else {
-                            if(this.filters.length > 0) {
-                                if(column != "sort" && column != "search") {
+                            if (this.filters.length > 0) {
+                                if (column != "sort" && column != "search") {
                                     filterRepeated = 0;
 
                                     for(j = 0; j < this.filters.length; j++) {
-                                        if(this.filters[j].column == column) {
-                                            if(this.filters[j].cond == condition && this.filters[j].val == response) {
+                                        if (this.filters[j].column == column) {
+                                            if (this.filters[j].cond == condition && this.filters[j].val == response) {
                                                 filterRepeated = 1;
 
                                                 return false;
@@ -439,7 +439,7 @@
                                         }
                                     }
 
-                                    if(filterRepeated == 0) {
+                                    if (filterRepeated == 0) {
                                         obj.column = column;
                                         obj.cond = condition;
                                         obj.val = response;
@@ -452,15 +452,15 @@
                                     }
                                 }
 
-                                if(column == "sort") {
+                                if (column == "sort") {
                                     sort_exists = 0;
 
-                                    for(j = 0; j < this.filters.length; j++) {
-                                        if(this.filters[j].column == "sort") {
-                                            if(this.filters[j].column == column && this.filters[j].cond == condition) {
+                                    for (j = 0; j < this.filters.length; j++) {
+                                        if (this.filters[j].column == "sort") {
+                                            if (this.filters[j].column == column && this.filters[j].cond == condition) {
                                                 this.findCurrentSort();
 
-                                                if(this.currentSort == "asc") {
+                                                if (this.currentSort == "asc") {
                                                     this.filters[j].column = column;
                                                     this.filters[j].cond = condition;
                                                     this.filters[j].val = this.sortDesc;
@@ -486,8 +486,8 @@
                                         }
                                     }
 
-                                    if(sort_exists == 0) {
-                                        if(this.currentSort == null)
+                                    if (sort_exists == 0) {
+                                        if (this.currentSort == null)
                                             this.currentSort = this.sortAsc;
 
                                         obj.column = column;
@@ -503,11 +503,11 @@
                                     }
                                 }
 
-                                if(column == "search") {
+                                if (column == "search") {
                                     search_found = 0;
 
                                     for(j = 0; j < this.filters.length; j++) {
-                                        if(this.filters[j].column == "search") {
+                                        if (this.filters[j].column == "search") {
                                             this.filters[j].column = column;
                                             this.filters[j].cond = condition;
                                             this.filters[j].val = response;
@@ -517,13 +517,13 @@
                                         }
                                     }
 
-                                    for(j = 0;j < this.filters.length;j++) {
-                                        if(this.filters[j].column == "search") {
+                                    for (j = 0;j < this.filters.length;j++) {
+                                        if (this.filters[j].column == "search") {
                                             search_found = 1;
                                         }
                                     }
 
-                                    if(search_found == 0) {
+                                    if (search_found == 0) {
                                         obj.column = column;
                                         obj.cond = condition;
                                         obj.val = response;
@@ -556,7 +556,7 @@
                         newParams = '';
 
                         for(i = 0; i < this.filters.length; i++) {
-                            if(i == 0) {
+                            if (i == 0) {
                                 newParams = '?' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
                             } else {
                                 newParams = newParams + '&' + this.filters[i].column + '[' + this.filters[i].cond + ']' + '=' + this.filters[i].val;
@@ -591,7 +591,7 @@
                             label = 'cannotfindthislabel';
 
                             // for(colIndex in this.columns) {
-                            //     if(this.columns[colIndex].alias == this.columnOrAlias) {
+                            //     if (this.columns[colIndex].alias == this.columnOrAlias) {
                             //         label = this.columns[colIndex].label;
                             //     }
                             // }
@@ -600,27 +600,27 @@
                             obj.cond = cond;
                             obj.val = val;
 
-                            if(col == "sort") {
+                            if (col == "sort") {
                                 label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].index == obj.cond) {
+                                    if (this.columns[colIndex].index == obj.cond) {
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }
-                            } else if(col == "search") {
+                            } else if (col == "search") {
                                 obj.label = 'Search';
                             } else {
                                 obj.label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].index == obj.column) {
+                                    if (this.columns[colIndex].index == obj.column) {
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }
                             }
 
-                            if(col != undefined && cond != undefined && val != undefined)
+                            if (col != undefined && cond != undefined && val != undefined)
                                 this.filters.push(obj);
 
                             obj = {};
@@ -629,7 +629,7 @@
 
                     removeFilter(filter) {
                         for(i in this.filters) {
-                            if(this.filters[i].col == filter.col && this.filters[i].cond == filter.cond && this.filters[i].val == filter.val) {
+                            if (this.filters[i].col == filter.col && this.filters[i].cond == filter.cond && this.filters[i].val == filter.val) {
                                 this.filters.splice(i, 1);
 
                                 this.makeURL();
@@ -651,12 +651,12 @@
                         this.massActionsToggle = true;
 
                         if (this.allSelected) {
-                            if(this.gridCurrentData.hasOwnProperty("data")) {
+                            if (this.gridCurrentData.hasOwnProperty("data")) {
                                 for (currentData in this.gridCurrentData.data) {
 
                                     i = 0;
                                     for(currentId in this.gridCurrentData.data[currentData]) {
-                                        if(i==0)
+                                        if (i==0)
                                             this.dataIds.push(this.gridCurrentData.data[currentData][currentId]);
 
                                         i++;
@@ -667,7 +667,7 @@
 
                                     i = 0;
                                     for(currentId in this.gridCurrentData[currentData]) {
-                                        if(i==0)
+                                        if (i==0)
                                             this.dataIds.push(this.gridCurrentData[currentData][currentId]);
 
                                         i++;

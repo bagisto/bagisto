@@ -1,7 +1,7 @@
 @if ($paginator->hasPages())
     <div class="pagination">
         {{-- Previous Page Link --}}
-        @if($paginator->onFirstPage())
+        @if ($paginator->onFirstPage())
             <a class="page-item previous">
                 <i class="icon angle-left-icon"></i>
             </a>

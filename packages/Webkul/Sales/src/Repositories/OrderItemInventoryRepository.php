@@ -37,19 +37,19 @@ class OrderItemInventoryRepository extends Repository
 
         $product = $orderItem->type == 'configurable' ? $orderItem->child->product : $orderItem->product;
 
-        if($product) {
+        if ($product) {
             $inventories = $product->inventory_sources()->orderBy('priority', 'asc')->get();
 
-            foreach($inventories as $inventorySource) {
-                if(!$orderedQuantity)
+            foreach ($inventories as $inventorySource) {
+                if (! $orderedQuantity)
                     break;
 
                 $sourceQuantity = $inventorySource->pivot->qty;
 
-                if(!$inventorySource->status || !$sourceQuantity)
+                if (! $inventorySource->status || !$sourceQuantity)
                     continue;
 
-                if($sourceQuantity >= $orderedQuantity) {
+                if ($sourceQuantity >= $orderedQuantity) {
                     $orderItemQuantity = $orderedQuantity;
 
                     $sourceQuantity -= $orderItemQuantity;

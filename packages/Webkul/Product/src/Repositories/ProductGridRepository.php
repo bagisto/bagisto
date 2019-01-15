@@ -43,7 +43,7 @@ class ProductGridRepository extends Repository
     }
 
     public function updateWhere($product) {
-        if($product->type == "simple") {
+        if ($product->type == "simple") {
             $gridObject = [
                 'sku' => $product->sku,
                 'name' => $product->name,
@@ -54,11 +54,11 @@ class ProductGridRepository extends Repository
 
             $qty = 0;
 
-            if($product->parent_id == 'null') {
+            if ($product->parent_id == 'null') {
                 $gridObject['type'] = $product->type;
             }
 
-            foreach($product->toArray()['inventories'] as $inventorySource) {
+            foreach ($product->toArray()['inventories'] as $inventorySource) {
                 $qty = $qty + $inventorySource['qty'];
             }
 
@@ -66,7 +66,7 @@ class ProductGridRepository extends Repository
 
             return $this->getModel()->where('product_id', $product->id)->update($gridObject);
 
-        } else if($product->type == "configurable") {
+        } else if ($product->type == "configurable") {
             $gridObject = [
                 'sku' => $product->sku,
                 'type' => $product->type,
@@ -83,7 +83,7 @@ class ProductGridRepository extends Repository
 
             $variants = $product->variants;
 
-            foreach($variants as $variant) {
+            foreach ($variants as $variant) {
                 $gridObject = [];
 
                 $gridObject = [
@@ -94,12 +94,12 @@ class ProductGridRepository extends Repository
                     'status' => $variant->status
                 ];
 
-                if($variant->type == 'configurable') {
+                if ($variant->type == 'configurable') {
                     $gridObject['quantity'] = 0;
                 } else {
                     $qty = 0;
 
-                    foreach($variant->toArray()['inventories'] as $inventorySource) {
+                    foreach ($variant->toArray()['inventories'] as $inventorySource) {
                         $qty = $qty + $inventorySource['qty'];
                     }
 
@@ -108,6 +108,7 @@ class ProductGridRepository extends Repository
                 return $this->getModel()->where('product_id', $variant->id)->update($gridObject);
             }
         }
+        
         return false;
     }
 }

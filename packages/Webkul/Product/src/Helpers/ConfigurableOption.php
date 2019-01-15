@@ -62,7 +62,7 @@ class ConfigurableOption extends AbstractProduct
     {
         static $variants = [];
 
-        if(count($variants))
+        if (count($variants))
             return $variants;
 
         foreach ($product->variants as $variant) {
@@ -186,7 +186,7 @@ class ConfigurableOption extends AbstractProduct
 
             $optionId = $attributeOption->id;
 
-            if(isset($options[$attribute->id][$optionId])) {
+            if (isset($options[$attribute->id][$optionId])) {
                 $attributeOptionsData[] = [
                     'id' => $optionId,
                     'label' => $attributeOption->label,

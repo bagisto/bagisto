@@ -109,7 +109,7 @@ class RegistrationController extends Controller
     {
         $customer = $this->customer->findOneByField('token', $token);
 
-        if($customer) {
+        if ($customer) {
             $customer->update(['is_verified' => 1, 'token' => 'NULL']);
 
             session()->flash('success', trans('shop::app.customer.signup-form.verified'));
@@ -132,11 +132,11 @@ class RegistrationController extends Controller
         try {
             Mail::send(new VerificationEmail($verificationData));
 
-            if(Cookie::has('enable-resend')) {
+            if (Cookie::has('enable-resend')) {
                 \Cookie::queue(\Cookie::forget('enable-resend'));
             }
 
-            if(Cookie::has('email-for-resend')) {
+            if (Cookie::has('email-for-resend')) {
                 \Cookie::queue(\Cookie::forget('email-for-resend'));
             }
         } catch(\Exception $e) {

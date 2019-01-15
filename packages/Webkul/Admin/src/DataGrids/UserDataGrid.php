@@ -50,7 +50,7 @@ class UserDataGrid extends DataGrid
             'sortable' => true,
             'width' => '100px',
             'wrapper' => function($value) {
-                if($value == 1) {
+                if ($value == 1) {
                     return 'Active';
                 } else {
                     return 'Inactive';

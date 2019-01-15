@@ -105,7 +105,7 @@
                             // @auth('customer')
                             //     var wishlistLink = $('#wishlist-changer').attr('data-href');
 
-                            //     if(this.selectedProductId != '') {
+                            //     if (this.selectedProductId != '') {
                             //         var splitted = wishlistLink.split("/");
 
                             //         var lastItem = splitted.pop();
@@ -123,7 +123,7 @@
                             //buy now anchor href changer with options
                             var buyNowLink = $('.btn.buynow').attr('data-href');
 
-                            if(this.selectedProductId != '') {
+                            if (this.selectedProductId != '') {
                                 var splitted = buyNowLink.split("/");
 
                                 var lastItem = splitted.pop();
@@ -152,7 +152,7 @@
                         var selectedIndex = 0;
 
                         attribute.options.forEach(function(option, index) {
-                            if(option.id == value) {
+                            if (option.id == value) {
                                 selectedIndex = index;
                             }
                         })
@@ -168,7 +168,7 @@
                             return option.id == value;
                         });
 
-                        if(matchedOptions[0] != undefined && matchedOptions[0].allowedProducts != undefined) {
+                        if (matchedOptions[0] != undefined && matchedOptions[0].allowedProducts != undefined) {
                             return matchedOptions[0].allowedProducts[0];
                         }
 
@@ -227,12 +227,12 @@
                     },
 
                     clearSelect: function (attribute) {
-                        if(!attribute)
+                        if (!attribute)
                             return;
 
                         var element = document.getElementById("attribute_" + attribute.id);
 
-                        if(element) {
+                        if (element) {
                             element.selectedIndex = "0";
                         }
                     },
@@ -254,7 +254,7 @@
                         var selectedOptionCount = 0;
 
                         this.childAttributes.forEach(function(attribute) {
-                            if(attribute.selectedIndex) {
+                            if (attribute.selectedIndex) {
                                 selectedOptionCount++;
                             }
                         });
@@ -262,7 +262,7 @@
                         var priceLabelElement = document.querySelector('.price-label');
                         var priceElement = document.querySelector('.final-price');
 
-                        if(this.childAttributes.length == selectedOptionCount) {
+                        if (this.childAttributes.length == selectedOptionCount) {
                             priceLabelElement.style.display = 'none';
 
                             priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
@@ -280,7 +280,7 @@
                             galleryImages.push(image)
                         });
 
-                        if(this.simpleProduct) {
+                        if (this.simpleProduct) {
                             this.config.variant_images[this.simpleProduct].forEach(function(image) {
                                 galleryImages.unshift(image)
                             });

@@ -1,4 +1,4 @@
-@if($products->count())
+@if ($products->count())
     <section class="featured-products">
 
         <div class="featured-heading">

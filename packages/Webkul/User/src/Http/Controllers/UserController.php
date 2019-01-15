@@ -89,7 +89,7 @@ class UserController extends Controller
     {
         $data = request()->all();
 
-        if(isset($data['password']) && $data['password'])
+        if (isset($data['password']) && $data['password'])
             $data['password'] = bcrypt($data['password']);
 
         Event::fire('user.admin.create.before');
@@ -129,7 +129,7 @@ class UserController extends Controller
     {
         $data = request()->all();
 
-        if (!$data['password'])
+        if (! $data['password'])
             unset($data['password']);
         else
             $data['password'] = bcrypt($data['password']);
@@ -159,7 +159,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if($this->admin->count() == 1) {
+        if ($this->admin->count() == 1) {
             session()->flash('error', 'At least one admin is required.');
         } else {
             Event::fire('user.admin.delete.before', $id);
@@ -187,8 +187,8 @@ class UserController extends Controller
     {
         $password = request()->input('password');
 
-        if(Hash::check($password, auth()->guard('admin')->user()->password)) {
-            if($this->admin->count() == 1) {
+        if (Hash::check($password, auth()->guard('admin')->user()->password)) {
+            if ($this->admin->count() == 1) {
                 session()->flash('error', trans('admin::app.users.users.delete-last'));
             } else {
                 $id = auth()->guard('admin')->user()->id;

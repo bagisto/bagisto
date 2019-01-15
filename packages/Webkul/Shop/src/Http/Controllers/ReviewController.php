@@ -132,8 +132,8 @@ class ReviewController extends Controller
     public function deleteAll() {
         $reviews = auth()->guard('customer')->user()->all_reviews;
 
-        if($reviews->count() > 0) {
-            foreach($reviews as $review) {
+        if ($reviews->count() > 0) {
+            foreach ($reviews as $review) {
                 $this->productReview->delete($review->id);
             }
         }

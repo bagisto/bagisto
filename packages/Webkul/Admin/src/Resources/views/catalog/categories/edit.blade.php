@@ -16,7 +16,7 @@
 
                     <div class="control-group">
                         <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
-                            @foreach(core()->getAllLocales() as $localeModel)
+                            @foreach (core()->getAllLocales() as $localeModel)
 
                                 <option value="{{ route('admin.catalog.categories.update', $category->id) . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                     {{ $localeModel->name }}
@@ -89,7 +89,7 @@
                         </div>
                     </accordian>
 
-                    @if($categories->count())
+                    @if ($categories->count())
                     <accordian :title="'{{ __('admin::app.catalog.categories.parent-category') }}'" :active="true">
                         <div slot="body">
 

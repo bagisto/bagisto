@@ -33,9 +33,9 @@ class ProductInventoryRepository extends Repository
         if ($product->type == 'configurable')
             return;
             
-        if(isset($data['inventories'])) {
-            foreach($data['inventories'] as $inventorySourceId => $qty) {
-                if(is_null($qty)) {
+        if (isset($data['inventories'])) {
+            foreach ($data['inventories'] as $inventorySourceId => $qty) {
+                if (is_null($qty)) {
                     $qty = 0;
                 }
 
@@ -46,7 +46,7 @@ class ProductInventoryRepository extends Repository
                     ]);
                 
                 
-                if($productInventory) {
+                if ($productInventory) {
                     $productInventory->qty = $qty;
 
                     $productInventory->save();

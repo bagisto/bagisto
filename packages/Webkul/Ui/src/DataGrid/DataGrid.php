@@ -81,18 +81,18 @@ abstract class DataGrid
     {
         $parsedUrl = $this->parseUrl();
 
-        if(count($parsedUrl)) {
+        if (count($parsedUrl)) {
             $filteredOrSortedCollection = $this->sortOrFilterCollection($this->collection = $this->queryBuilder, $parsedUrl);
 
-            if(config('datagrid.paginate')) {
-                if($this->itemsPerPage > 0)
+            if (config('datagrid.paginate')) {
+                if ($this->itemsPerPage > 0)
                     return $filteredOrSortedCollection->paginate($this->itemsPerPage)->appends(request()->except('page'));
             } else {
                 return $filteredOrSortedCollection->get();
             }
         }
 
-        if(config('datagrid.paginate')) {
+        if (config('datagrid.paginate')) {
             if ($this->itemsPerPage > 0) {
                 $this->collection = $this->queryBuilder->paginate($this->itemsPerPage)->appends(request()->except('page'));
             }
@@ -110,8 +110,8 @@ abstract class DataGrid
      */
     public function findColumnType($columnAlias)
     {
-        foreach($this->completeColumnDetails as $column) {
-            if($column['index'] == $columnAlias) {
+        foreach ($this->completeColumnDetails as $column) {
+            if ($column['index'] == $columnAlias) {
                 return [$column['type'], $column['index']];
             }
         }
@@ -119,11 +119,11 @@ abstract class DataGrid
 
     public function sortOrFilterCollection($collection, $parseInfo)
     {
-        foreach($parseInfo as $key => $info)  {
+        foreach ($parseInfo as $key => $info)  {
             $columnType = $this->findColumnType($key)[0];
             $columnName = $this->findColumnType($key)[1];
 
-            if($key == "sort") {
+            if ($key == "sort") {
                 $count_keys = count(array_keys($info));
 
                 if ($count_keys > 1) {
@@ -136,17 +136,17 @@ abstract class DataGrid
                     $columnName[1],
                     array_values($info)[0]
                 );
-            } else if($key == "search") {
+            } else if ($key == "search") {
                 $count_keys = count(array_keys($info));
 
-                if($count_keys > 1) {
+                if ($count_keys > 1) {
                     throw new \Exception('Multiple Search keys Found, Please Resolve the URL Manually');
                 }
 
-                if($count_keys == 1) {
+                if ($count_keys == 1) {
                     return $collection->where(function() use($collection, $info) {
                         foreach ($this->completeColumnDetails as $column) {
-                            if($column['searchable'] == true)
+                            if ($column['searchable'] == true)
                                 $collection->orWhere($column['index'], 'like', '%'.$info['all'].'%');
                         }
                     });
@@ -162,7 +162,7 @@ abstract class DataGrid
                     }
                 } else {
                     foreach ($info as $condition => $filter_value) {
-                        if($columnType == 'datetime') {
+                        if ($columnType == 'datetime') {
                             return $collection->whereDate(
                                 $columnName,
                                 config("datagrid.operators.{$condition}"),
