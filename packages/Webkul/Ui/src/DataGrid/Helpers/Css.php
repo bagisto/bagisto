@@ -19,11 +19,11 @@ class Css extends AbstractFillable
     protected $tbody = 'tbody';
     protected $tbody_td = 'tbody_td';
 
-    public function __construct($args){
+    public function __construct($args) {
         parent::__construct($args);
     }
 
-    protected function setFillable(){
+    protected function setFillable() {
         $this->fillable = [
             'datagrid',
             'table',

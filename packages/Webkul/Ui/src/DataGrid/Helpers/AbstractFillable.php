@@ -21,9 +21,9 @@ abstract class AbstractFillable
         $error = false;
         $this->setFillable();
 
-        foreach ($args as $key => $value){
+        foreach ($args as $key => $value) {
             $this->{$key} = $value;
-            // switch($value){
+            // switch($value) {
             //     case (in_array(gettype($value), ["array", "object", "function"])):
             //         $error = $this->fieldValidate(
             //             $key,
@@ -39,8 +39,8 @@ abstract class AbstractFillable
             // }
             // if ($error) throw new \Exception($error);
         }
-        // foreach ($this->fillable as $fill){
-        //     if (isset($args[$fill])){
+        // foreach ($this->fillable as $fill) {
+        //     if (isset($args[$fill])) {
         //         $this->{$fill} = [$args[$fill]];
         //     }
         // }
@@ -55,7 +55,7 @@ abstract class AbstractFillable
                     return gettype($value) === "string";
                 }
             )
-        ){
+        ) {
             if (in_array(gettype($value), $allowed)) {
                 // if ($merge) {
                 //     if (! $this->{$key}) $this->{$key} = [];
