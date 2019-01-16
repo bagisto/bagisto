@@ -204,7 +204,7 @@ abstract class DataGrid
                                 );
                             }
                         } else {
-                            if ($this->enableFilterMap && isset($this->filterMap[$column['index']])) {
+                            if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
                                 return $collection->where(
                                     $this->filterMap[$columnName],
                                     config("datagrid.operators.{$condition}"),

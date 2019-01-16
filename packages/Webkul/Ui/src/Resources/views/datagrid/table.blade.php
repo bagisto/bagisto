@@ -136,7 +136,7 @@
                 </div>
 
                 <div class="filter-row-two">
-                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: uppercase;">
+                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: capitalize;">
                         <span v-if="filter.column == 'sort'">@{{ filter.label }}</span>
                         <span v-else-if="filter.column == 'search'">Search</span>
                         <span v-else>@{{ filter.label }}</span>
@@ -299,6 +299,13 @@
                                     this.stringConditionSelect = false;
 
                                     this.nullify();
+                                } else if (this.type == 'price') {
+                                    this.numberConditionSelect = true;
+                                    this.booleanConditionSelect = false;
+                                    this.datetimeConditionSelect = false;
+                                    this.stringConditionSelect = false;
+
+                                    this.nullify();
                                 }
                             }
                         }
@@ -328,6 +335,8 @@
                             this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue, label);
                         } else if (this.type == 'datetime') {
                             this.formURL(this.columnOrAlias, this.datetimeCondition, this.datetimeValue, label);
+                        } else if (this.type == 'price') {
+                            this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
                         }
                     },
 
