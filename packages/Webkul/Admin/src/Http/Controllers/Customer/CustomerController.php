@@ -116,7 +116,7 @@ class CustomerController extends Controller
 
         $this->customer->create($data);
 
-        session()->flash('success', trans('admin::app.customers.customers.created'));
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -159,7 +159,7 @@ class CustomerController extends Controller
 
         $this->customer->update(request()->all(),$id);
 
-        session()->flash('success', trans('admin::app.customers.customers.updated'));
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -174,7 +174,7 @@ class CustomerController extends Controller
     {
         $this->customer->delete($id);
 
-        session()->flash('success', trans('admin::app.customers.customers.deleted'));
+        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
 
         return redirect()->back();
     }

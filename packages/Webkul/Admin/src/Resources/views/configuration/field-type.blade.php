@@ -21,7 +21,6 @@
         $class = app(current($temp));
         $method = end($temp);
         $value = $class->$method();
-        $selectedOption = core()->getConfigData($name) ?? '';
     }
 
     $channel_locale = [];

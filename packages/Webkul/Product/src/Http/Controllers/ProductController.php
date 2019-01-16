@@ -143,7 +143,7 @@ class ProductController extends Controller
 
         $product = $this->product->create(request()->all());
 
-        session()->flash('success', 'Product created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Product']));
 
         return redirect()->route($this->_config['redirect'], ['id' => $product->id]);
     }
@@ -176,7 +176,7 @@ class ProductController extends Controller
     {
         $product = $this->product->update(request()->all(), $id);
 
-        session()->flash('success', 'Product updated successfully.');
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -191,7 +191,7 @@ class ProductController extends Controller
     {
         $this->product->delete($id);
 
-        session()->flash('success', 'Product deleted successfully.');
+        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Product']));
 
         return redirect()->back();
     }

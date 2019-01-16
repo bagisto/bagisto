@@ -17,7 +17,7 @@
 
 		data () {
 			return {
-				datepicker: null              
+				datepicker: null
 			}
 		},
 

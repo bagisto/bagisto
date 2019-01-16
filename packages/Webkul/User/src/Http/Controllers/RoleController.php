@@ -83,7 +83,7 @@ class RoleController extends Controller
 
         Event::fire('user.role.create.after', $role);
 
-        session()->flash('success', 'Role created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Role']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -121,7 +121,7 @@ class RoleController extends Controller
 
         Event::fire('user.role.update.after', $role);
 
-        session()->flash('success', 'Role updated successfully.');
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Role']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -143,7 +143,7 @@ class RoleController extends Controller
 
             Event::fire('user.role.delete.after', $id);
 
-            session()->flash('success', 'Role source deleted successfully.');
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Role']));
         }
 
         return redirect()->back();

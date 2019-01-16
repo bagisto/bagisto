@@ -182,7 +182,8 @@ return [
                     'make-default' => 'Make Default',
                     'default' => 'Default',
                     'contact' => 'Contact',
-                    'confirm-delete' =>  'Do you really want to delete this address?'
+                    'confirm-delete' =>  'Do you really want to delete this address?',
+                    'default-delete' => 'Default Address Cannot Be Changed'
                 ],
 
                 'create' => [
@@ -196,13 +197,16 @@ return [
                     'city' => 'City',
                     'postcode' => 'Postal Code',
                     'phone' => 'Phone',
-                    'submit' => 'Save Address'
+                    'submit' => 'Save Address',
+                    'success' => 'Address have been successfully added.',
+                    'error' => 'Address cannot be added.'
                 ],
 
                 'edit' => [
                     'page-title' => 'Customer - Edit Address',
                     'title' => 'Edit Address',
-                    'submit' => 'Save Address'
+                    'submit' => 'Save Address',
+                    'success' => 'Address Updated Successfully.'
                 ],
                 'delete' => [
                     'success' => 'Address Successfully Deleted',
@@ -471,5 +475,12 @@ return [
 
     'webkul' => [
         'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved'
-    ]
+    ],
+
+    'response' => [
+        'create-success' => ':name created successfully.',
+        'update-success' => ':name updated successfully.',
+        'delete-success' => ':name deleted successfully.',
+        'submit-success' => ':name submitted successfully.'
+    ],
 ];

@@ -92,7 +92,7 @@ class ReviewController extends Controller
 
         $this->productReview->create($data);
 
-        session()->flash('success', 'Review submitted successfully.');
+        session()->flash('success', trans('shop::app.response.submit-success', ['name' => 'Product Review']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -119,7 +119,7 @@ class ReviewController extends Controller
     {
         $this->productReview->delete($id);
 
-        session()->flash('success', 'Product Review Successfully Deleted');
+        session()->flash('success', trans('shop::app.response.delete-success', ['name' => 'Product Review']));
 
         return redirect()->back();
     }

@@ -78,7 +78,7 @@ class CategoryController extends Controller
 
         $category = $this->category->create(request()->all());
 
-        session()->flash('success', 'Category created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Category']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -121,7 +121,7 @@ class CategoryController extends Controller
 
         $this->category->update(request()->all(), $id);
 
-        session()->flash('success', 'Category updated successfully.');
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -140,7 +140,7 @@ class CategoryController extends Controller
 
         Event::fire('catalog.category.delete.after', $id);
 
-        session()->flash('success', 'Category deleted successfully.');
+        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
         return redirect()->back();
     }
