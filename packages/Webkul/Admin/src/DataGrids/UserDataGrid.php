@@ -13,11 +13,17 @@ use DB;
  */
 class UserDataGrid extends DataGrid
 {
-    protected $index = 'id';
+    protected $index = 'user_id';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('admins as u')->addSelect('u.id', 'u.name', 'u.status', 'u.email', 'ro.name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
+        $queryBuilder = DB::table('admins as u')->addSelect('u.id as user_id', 'u.name as user_name', 'u.status as user_status', 'u.email as user_email', 'ro.name as role_name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
+
+        $this->addFilters('user_id', 'u.id');
+        $this->addFilters('user_name', 'u.name');
+        $this->addFilters('user_status', 'u.status');
+        $this->addFilters('user_email', 'u.email');
+        $this->addFilters('role_name', 'ro.name');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -25,8 +31,7 @@ class UserDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'u.id',
-            'identifier' => 'user_id',
+            'index' => 'user_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -35,8 +40,7 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'u.name',
-            'identifier' => 'user_name',
+            'index' => 'user_name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
@@ -45,8 +49,7 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'u.status',
-            'identifier' => 'user_status',
+            'index' => 'user_status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'searchable' => true,
@@ -62,8 +65,7 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'u.email',
-            'identifier' => 'user_email',
+            'index' => 'user_email',
             'label' => trans('admin::app.datagrid.email'),
             'type' => 'string',
             'searchable' => true,
@@ -72,8 +74,7 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'ro.name',
-            'identifier' => 'role_name',
+            'index' => 'role_name',
             'label' => trans('admin::app.datagrid.role'),
             'type' => 'string',
             'searchable' => true,

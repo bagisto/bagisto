@@ -19,6 +19,8 @@ class OrderDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('orders')->select('id', 'base_grand_total', 'grand_total', 'created_at', 'channel_name', 'status')->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as full_name'));
 
+        $this->addFilters('full_name', DB::raw('CONCAT(customer_first_name, " ", customer_last_name)'));
+
         $this->setQueryBuilder($queryBuilder);
     }
 
@@ -26,7 +28,6 @@ class OrderDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            'identifier' => 'id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -36,10 +37,9 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'base_grand_total',
-            'identifier' => 'base_grand_total',
             'label' => trans('admin::app.datagrid.base-total'),
             'type' => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'sortable' => true,
             'width' => '100px',
             'wrapper' => function ($value) {
@@ -49,10 +49,9 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'grand_total',
-            'identifier' => 'grand_total',
             'label' => trans('admin::app.datagrid.grand-total'),
             'type' => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'sortable' => true,
             'width' => '100px',
             'wrapper' => function ($value) {
@@ -62,31 +61,28 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'created_at',
-            'identifier' => 'created_at',
             'label' => trans('admin::app.datagrid.order-date'),
-            'type' => 'string',
+            'type' => 'datetime',
             'sortable' => true,
-            'searchable' => true,
+            'searchable' => false,
             'width' => '100px',
         ]);
 
         $this->addColumn([
             'index' => 'channel_name',
-            'identifier' => 'channel_name',
             'label' => trans('admin::app.datagrid.channel-name'),
             'type' => 'string',
             'sortable' => true,
-            'searchable' => false,
+            'searchable' => true,
             'width' => '100px'
         ]);
 
         $this->addColumn([
             'index' => 'status',
-            'identifier' => 'status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'string',
             'sortable' => true,
-            'searchable' => false,
+            'searchable' => true,
             'width' => '100px',
             'closure' => true,
             'wrapper' => function ($value) {
@@ -109,10 +105,9 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'full_name',
-            'identifier' => 'full_name',
             'label' => trans('admin::app.datagrid.billed-to'),
             'type' => 'string',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
             'width' => '100px'
         ]);

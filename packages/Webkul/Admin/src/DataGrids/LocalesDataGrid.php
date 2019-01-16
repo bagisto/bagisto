@@ -26,7 +26,6 @@ class LocalesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            'identifier' => 'id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -36,7 +35,6 @@ class LocalesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'code',
-            'identifier' => 'code',
             'label' => trans('admin::app.datagrid.code'),
             'type' => 'string',
             'searchable' => true,
@@ -46,7 +44,6 @@ class LocalesDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
-            'identifier' => 'name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,

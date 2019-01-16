@@ -26,7 +26,6 @@ class CustomerGroupDataGrid extends DataGrid
     {
         $this->addColumn([
             'index' => 'id',
-            'identifier' => 'id',
             'label' => 'ID',
             'type' => 'number',
             'searchable' => false,
@@ -36,7 +35,6 @@ class CustomerGroupDataGrid extends DataGrid
 
         $this->addColumn([
             'index' => 'name',
-            'identifier' => 'name',
             'label' => 'Name',
             'type' => 'string',
             'searchable' => true,

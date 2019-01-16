@@ -17,7 +17,15 @@ class ProductDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('products_grid as pg')->addSelect('pg.product_id', 'pg.sku', 'pg.name', 'pr.type', 'pg.status', 'pg.price', 'pg.quantity')->leftJoin('products as pr', 'pg.product_id', '=', 'pr.id');
+        $queryBuilder = DB::table('products_grid as pg')->addSelect('pg.product_id as product_id', 'pg.sku as product_sku', 'pg.name as product_name', 'pr.type as product_type', 'pg.status as product_status', 'pg.price as product_price', 'pg.quantity as product_qty')->leftJoin('products as pr', 'pg.product_id', '=', 'pr.id');
+
+        $this->addFilters('product_id', 'pg.product_id');
+        $this->addFilters('product_sku', 'pg.sku');
+        $this->addFilters('product_name', 'pg.name');
+        $this->addFilters('product_type', 'pr.type');
+        $this->addFilters('product_status', 'pg.status');
+        $this->addFilters('product_price', 'pg.price');
+        $this->addFilters('product_qty', 'pg.quantity');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -25,8 +33,7 @@ class ProductDataGrid extends DataGrid
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'pg.product_id',
-            'identifier' => 'product_id',
+            'index' => 'product_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
@@ -35,8 +42,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'pg.sku',
-            'identifier' => 'product_sku',
+            'index' => 'product_sku',
             'label' => trans('admin::app.datagrid.sku'),
             'type' => 'string',
             'searchable' => true,
@@ -45,8 +51,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'pg.name',
-            'identifier' => 'product_name',
+            'index' => 'product_name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
@@ -55,8 +60,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'pr.type',
-            'identifier' => 'product_type',
+            'index' => 'product_type',
             'label' => trans('admin::app.datagrid.type'),
             'type' => 'string',
             'sortable' => true,
@@ -65,8 +69,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'pg.status',
-            'identifier' => 'product_status',
+            'index' => 'product_status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'sortable' => true,
@@ -81,8 +84,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'pg.price',
-            'identifier' => 'product_price',
+            'index' => 'product_price',
             'label' => trans('admin::app.datagrid.price'),
             'type' => 'number',
             'sortable' => true,
@@ -94,8 +96,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'pg.quantity',
-            'identifier' => 'product_quantity',
+            'index' => 'product_qty',
             'label' => trans('admin::app.datagrid.qty'),
             'type' => 'number',
             'sortable' => true,
