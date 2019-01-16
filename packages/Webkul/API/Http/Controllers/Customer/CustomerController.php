@@ -23,7 +23,7 @@ class CustomerController extends Controller
 
     public function __construct()
     {
-        if(auth()->guard('customer')->check()) {
+        if (auth()->guard('customer')->check()) {
             $this->customer = auth()->guard('customer')->user();
         } else {
             $this->customer['message'] = 'unauthorized';
@@ -63,10 +63,10 @@ class CustomerController extends Controller
 
         $data = collect(request()->all())->toArray();
 
-        if($data['oldpassword'] == null) {
+        if ($data['oldpassword'] == null) {
             $data = collect(request()->input())->except([ 'oldpassword', 'password', 'password_confirmation'])->toArray();
         } else {
-            if(Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
+            if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
                 $data = collect(request()->input())->toArray();
 
                 $data['password'] = bcrypt($data['password']);
@@ -77,7 +77,7 @@ class CustomerController extends Controller
 
         $result = $this->customer->update($data);
 
-        if($result) {
+        if ($result) {
             return response()->json(true, 200);
         } else {
             return response()->json(false, 200);
@@ -92,7 +92,7 @@ class CustomerController extends Controller
     public function getAllCart() {
         $carts = $this->customer->carts;
 
-        if($cart->count() > 0) {
+        if ($cart->count() > 0) {
             return response()->json(['message' => 'successful','items' => $cart], 200);
         } else {
             return response()->json(['message' => 'empty', 'items' => null], 200);
@@ -102,11 +102,11 @@ class CustomerController extends Controller
     public function getActiveCart() {
         $cart = Cart::getCart();
 
-        if($cart == null) {
+        if ($cart == null) {
             return response()->json(['message' => 'empty', 'items' => 'null']);
         }
 
-        if($cart->count() > 0 ) {
+        if ($cart->count() > 0 ) {
             return response()->json(['message' => 'success', 'items' => $cart]);
         } else {
             return response()->json(['message' => 'empty', 'items' => 'null']);

@@ -2,36 +2,31 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\AbsGrid;
+use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Product Data Grid class
+ * OrderDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class OrderDataGrid extends AbsGrid
+class OrderDataGrid extends DataGrid
 {
-    public $allColumns = [];
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('orders')->select('id', 'base_grand_total', 'grand_total', 'created_at', 'channel_name', 'status')->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as fullname'));
+        $queryBuilder = DB::table('orders')->select('id', 'base_grand_total', 'grand_total', 'created_at', 'channel_name', 'status')->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as full_name'));
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'orderId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -40,8 +35,7 @@ class OrderDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'base_grand_total',
-            'alias' => 'baseGrandTotal',
-            'label' => 'Base Total',
+            'label' => trans('admin::app.datagrid.base-total'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -53,8 +47,7 @@ class OrderDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'grand_total',
-            'alias' => 'grandTotal',
-            'label' => 'Grand Total',
+            'label' => trans('admin::app.datagrid.grand-total'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -66,8 +59,7 @@ class OrderDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'created_at',
-            'alias' => 'orderDate',
-            'label' => 'Order Date',
+            'label' => trans('admin::app.datagrid.order-date'),
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
@@ -76,8 +68,7 @@ class OrderDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'channel_name',
-            'alias' => 'channelName',
-            'label' => 'Channel Name',
+            'label' => trans('admin::app.datagrid.channel-name'),
             'type' => 'string',
             'sortable' => true,
             'searchable' => false,
@@ -86,35 +77,33 @@ class OrderDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'status',
-            'alias' => 'status',
-            'label' => 'Status',
+            'label' => trans('admin::app.datagrid.status'),
             'type' => 'string',
             'sortable' => true,
             'searchable' => false,
             'width' => '100px',
             'closure' => true,
             'wrapper' => function ($value) {
-                if($value == 'processing')
+                if ($value == 'processing')
                     return '<span class="badge badge-md badge-success">Processing</span>';
-                else if($value == 'completed')
+                else if ($value == 'completed')
                     return '<span class="badge badge-md badge-success">Completed</span>';
-                else if($value == "canceled")
+                else if ($value == "canceled")
                     return '<span class="badge badge-md badge-danger">Canceled</span>';
-                else if($value == "closed")
+                else if ($value == "closed")
                     return '<span class="badge badge-md badge-info">Closed</span>';
-                else if($value == "pending")
+                else if ($value == "pending")
                     return '<span class="badge badge-md badge-warning">Pending</span>';
-                else if($value == "pending_payment")
+                else if ($value == "pending_payment")
                     return '<span class="badge badge-md badge-warning">Pending Payment</span>';
-                else if($value == "fraud")
+                else if ($value == "fraud")
                     return '<span class="badge badge-md badge-danger">Fraud</span>';
             }
         ]);
 
         $this->addColumn([
-            'index' => 'fullname',
-            'alias' => 'fullName',
-            'label' => 'Billed To',
+            'index' => 'full_name',
+            'label' => trans('admin::app.datagrid.billed-to'),
             'type' => 'string',
             'searchable' => false,
             'sortable' => true,

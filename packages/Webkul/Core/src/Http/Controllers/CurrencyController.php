@@ -158,10 +158,10 @@ class CurrencyController extends Controller
     public function massDestroy() {
         $suppressFlash = false;
 
-        if(request()->isMethod('post')) {
+        if (request()->isMethod('post')) {
             $indexes = explode(',', request()->input('indexes'));
 
-            foreach($indexes as $key => $value) {
+            foreach ($indexes as $key => $value) {
                 try {
                     Event::fire('core.currency.delete.before', $value);
 
@@ -175,7 +175,7 @@ class CurrencyController extends Controller
                 }
             }
 
-            if(!$suppressFlash)
+            if (! $suppressFlash)
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'currencies']));
             else
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'currencies']));

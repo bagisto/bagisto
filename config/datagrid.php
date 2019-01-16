@@ -5,7 +5,7 @@ return [
     /**
      * Default Select Value
      */
-    'select' => 'id',
+    'default_index' => 'id',
 
     /**
      * Default OrderBy
@@ -13,8 +13,9 @@ return [
      * * Accepted Values = Array
      */
     'order' => [
-        'column' => 'id',
-        'direction' => 'desc'
+        'default' => 'descending',
+        'descending' => 'desc',
+        'ascending' => 'asc'
     ],
 
     /**
@@ -29,7 +30,7 @@ return [
      *
      * Accepted Value = integer
      */
-    // 'pagination' => 10,
+    'paginate' => false,
 
     'operators' => [
         'eq' => "=",
@@ -84,6 +85,6 @@ return [
         7 => "orders",
         8 => "limit",
         9 => "offset",
-        10 => "lock",
+        10 => "lock"
     ]
 ];

@@ -33,36 +33,32 @@ class ProductInventoryRepository extends Repository
         if ($product->type == 'configurable')
             return;
             
-        $inventorySourceIds = $product->inventory_sources->pluck('id');
+        if (isset($data['inventories'])) {
+            foreach ($data['inventories'] as $inventorySourceId => $qty) {
+                if (is_null($qty)) {
+                    $qty = 0;
+                }
 
-        if(isset($data['inventories'])) {
-            foreach($data['inventories'] as $inventorySourceId => $qty) {
-                if(is_null($qty))
-                    continue;
-                    
                 $productInventory = $this->findOneWhere([
                         'product_id' => $product->id,
                         'inventory_source_id' => $inventorySourceId,
+                        'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
                     ]);
+                
+                
+                if ($productInventory) {
+                    $productInventory->qty = $qty;
 
-                if($productInventory) {
-                    if(is_numeric($index = $inventorySourceIds->search($inventorySourceId))) {
-                        $inventorySourceIds->forget($index);
-                    }
-
-                    $this->update(['qty' => $qty], $productInventory->id);
+                    $productInventory->save();
                 } else {
                     $this->create([
                             'qty' => $qty,
                             'product_id' => $product->id,
                             'inventory_source_id' => $inventorySourceId,
+                            'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
                         ]);
                 }
             }
-        }
-
-        if($inventorySourceIds->count()) {
-            $product->inventory_sources()->detach($inventorySourceIds);
         }
     }
 }

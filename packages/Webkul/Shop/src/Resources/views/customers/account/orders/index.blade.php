@@ -36,7 +36,7 @@
                         </thead>
 
                         <tbody>
-                            @foreach($orders as $order)
+                            @foreach ($orders as $order)
 
                                 <tr>
                                     <td data-value="{{  __('shop::app.customer.account.order.index.order_id') }}">
@@ -54,17 +54,17 @@
                                     <td data-value="{{  __('shop::app.customer.account.order.index.status') }}">
                                         @if($order->status == 'processing')
                                             <span class="badge badge-md badge-success">Processing</span>
-                                        @elseif($order->status == 'completed')
+                                        @elseif ($order->status == 'completed')
                                             <span class="badge badge-md badge-success">Completed</span>
-                                        @elseif($order->status == "canceled")
+                                        @elseif ($order->status == "canceled")
                                             <span class="badge badge-md badge-danger">Canceled</span>
-                                        @elseif($order->status == "closed")
+                                        @elseif ($order->status == "closed")
                                             <span class="badge badge-md badge-info">Closed</span>
-                                        @elseif($order->status == "pending")
+                                        @elseif ($order->status == "pending")
                                             <span class="badge badge-md badge-warning">Pending</span>
-                                        @elseif($order->status == "pending_payment")
+                                        @elseif ($order->status == "pending_payment")
                                             <span class="badge badge-md badge-warning">Pending Payment</span>
-                                        @elseif($order->status == "fraud")
+                                        @elseif ($order->status == "fraud")
                                             <span class="badge badge-md badge-danger">Fraud</span>
                                         @endif
                                     </td>
@@ -72,7 +72,7 @@
 
                             @endforeach
 
-                            @if (!$orders->count())
+                            @if (! $orders->count())
                                 <tr>
                                     <td class="empty" colspan="4">{{ __('admin::app.common.no-result-found') }}</td>
                                 <tr>

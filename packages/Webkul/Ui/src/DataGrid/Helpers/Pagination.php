@@ -25,7 +25,7 @@ class Pagination extends Paginator
         int $limit = null,
         int $offset = null,
         int $view = null
-    ){
+    ) {
         $this->limit = $limit ?: self::LIMIT;
         $this->offset = $offset ?: self::OFFSET;
         $this->view = $view ?: self::VIEW;

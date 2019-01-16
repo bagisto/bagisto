@@ -86,7 +86,7 @@ class CoreConfigRepository extends Repository
                     }
                 }
 
-                if (!count($coreConfigValue) > 0) {
+                if (! count($coreConfigValue) > 0) {
                     $this->model->create([
                         'code' => $fieldName,
                         'value' => $value,
@@ -122,19 +122,19 @@ class CoreConfigRepository extends Repository
                 $dim = $this->countDim($formValue);
                 if ($dim > 1) {
                     $this->recuressiveArray($formValue, $value);
-                } else if($dim == 1) {
+                } else if ($dim == 1) {
                     $data[$value] = $formValue;
                 }
             }
         }
 
-        foreach($data as $key => $value) {
+        foreach ($data as $key => $value) {
             $field = core()->getConfigField($key);
 
             if ($field) {
                 $recuressiveArrayData[$key] = $value;
             } else {
-                foreach($value as $key1 => $val) {
+                foreach ($value as $key1 => $val) {
                     $recuressiveArrayData[$key . '.' . $key1] = $val;
                 }
             }

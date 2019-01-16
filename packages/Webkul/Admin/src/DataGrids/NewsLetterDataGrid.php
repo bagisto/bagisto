@@ -2,18 +2,18 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\AbsGrid;
+use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * News Letter Grid class
+ * NewsLetterDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class NewsLetterDataGrid extends AbsGrid
+class NewsLetterDataGrid extends DataGrid
 {
-    public $allColumns = [];
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
@@ -22,16 +22,11 @@ class NewsLetterDataGrid extends AbsGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
-        $this->index = 'id';
-    }
-
     public function addColumns()
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'subsId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -40,14 +35,13 @@ class NewsLetterDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'is_subscribed',
-            'alias' => 'subsCode',
-            'label' => 'Subscribed',
+            'label' => trans('admin::app.datagrid.subscribed'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
             'width' => '100px',
-            'wrapper' => function($value){
-                if($value == 1)
+            'wrapper' => function($value) {
+                if ($value == 1)
                     return 'True';
                 else
                     return 'False';
@@ -56,8 +50,7 @@ class NewsLetterDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'email',
-            'alias' => 'subsEmail',
-            'label' => 'Email',
+            'label' => trans('admin::app.datagrid.email'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

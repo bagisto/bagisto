@@ -26,7 +26,7 @@ class Free extends AbstractShipping
      */
     public function calculate()
     {
-        if(!$this->isAvailable())
+        if (! $this->isAvailable())
             return false;
 
         $object = new CartShippingRate;

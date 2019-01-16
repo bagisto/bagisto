@@ -2,18 +2,20 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\AbsGrid;
+use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Product Data Grid class
+ * AttributeFamilyDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class AttributeFamilyDataGrid extends AbsGrid
+class AttributeFamilyDataGrid extends DataGrid
 {
-    public $allColumns = [];
+    protected $itemsPerPage = 5;
+
+    protected $index = 'id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
@@ -22,16 +24,11 @@ class AttributeFamilyDataGrid extends AbsGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
-        $this->index = 'id'; //the column that needs to be treated as index column
-    }
-
     public function addColumns()
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'attributeFamilyId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -40,8 +37,7 @@ class AttributeFamilyDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'code',
-            'alias' => 'attributeFamilyCode',
-            'label' => 'Code',
+            'label' => trans('admin::app.datagrid.code'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -50,8 +46,7 @@ class AttributeFamilyDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'name',
-            'alias' => 'attributeFamilyName',
-            'label' => 'Name',
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

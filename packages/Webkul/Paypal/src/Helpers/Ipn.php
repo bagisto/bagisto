@@ -68,7 +68,7 @@ class Ipn
     {
         $this->post = $post;
 
-        if(!$this->postBack())
+        if (! $this->postBack())
             return;
 
         try {
@@ -105,13 +105,13 @@ class Ipn
      */
     protected function processOrder()
     {
-        if($this->post['payment_status'] == 'completed') {
-            if($this->post['mc_gross'] != $this->order->grand_total) {
+        if ($this->post['payment_status'] == 'completed') {
+            if ($this->post['mc_gross'] != $this->order->grand_total) {
                 
             } else {
                 $this->orderRepository->update(['status' => 'processing'], $this->order->id);
 
-                if($this->order->canInvoice()) {
+                if ($this->order->canInvoice()) {
                     $this->invoiceRepository->create($this->prepareInvoiceData());
                 }
             }
@@ -144,7 +144,7 @@ class Ipn
      */
     protected function postBack()
     {
-        if(array_key_exists('test_ipn', $this->post) && 1 === (int) $this->post['test_ipn'])
+        if (array_key_exists('test_ipn', $this->post) && 1 === (int) $this->post['test_ipn'])
             $url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
         else
             $url = 'https://www.paypal.com/cgi-bin/webscr';
@@ -167,7 +167,7 @@ class Ipn
         // Close connection
         curl_close($request);
 
-        if($status == 200 && $response == 'VERIFIED') {
+        if ($status == 200 && $response == 'VERIFIED') {
             return true;
         }
 

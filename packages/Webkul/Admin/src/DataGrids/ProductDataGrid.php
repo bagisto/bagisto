@@ -2,208 +2,133 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
-use Webkul\Channel\Repositories\ChannelRepository;
-use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Ui\DataGrid\DataGrid;
+use DB;
 
 /**
- * Product DataGrid
+ * ProductDataGrid Class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class ProductDataGrid
+class ProductDataGrid extends DataGrid
 {
+    protected $index = 'product_id';
 
-    /**
-     * The Data Grid implementation for Products
-     */
-    public function createProductDataGrid()
+    public function prepareQueryBuilder()
     {
-        return DataGrid::make([
-            'name' => 'Products',
-            'table' => 'products_grid as prods',
-            'select' => 'prods.product_id',
-            'perpage' => 10,
-            'aliased' => false, //use this with false as default and true in case of joins
+        $queryBuilder = DB::table('products_grid')->addSelect('products_grid.product_id as product_id', 'products_grid.sku as product_sku', 'products_grid.name as product_name', 'products.type as product_type', 'products_grid.status as product_status', 'products_grid.price as product_price', 'products_grid.quantity as product_quantity')->leftJoin('products', 'products_grid.product_id', '=', 'products.id');
 
-            'massoperations' => [
-                0 => [
-                    'type' => 'delete', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
-                    'action' => route('admin.catalog.products.massdelete'),
-                    'method' => 'DELETE'
-                ],
+        $this->setQueryBuilder($queryBuilder);
+    }
 
-                1 => [
-                    'type' => 'update', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
-                    'action' => route('admin.catalog.products.massupdate'),
-                    'method' => 'PUT',
-                    'options' => [
-                        0 => 'In Active',
-                        1 => 'Active',
-                    ]
-                ]
-            ],
-
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.catalog.products.edit',
-                    // 'confirm_text' => trans('ui::app.datagrid.massaction.edit', ['resource' => 'product']),
-                    'icon' => 'icon pencil-lg-icon'
-                ], [
-                    'type' => 'Delete',
-                    'route' => 'admin.catalog.products.delete',
-                    'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
-                    'icon' => 'icon trash-icon'
-                ]
-            ],
-
-            'join' => [
-            ],
-
-            //use aliasing on secodary columns if join is performed
-            'columns' => [
-                //name, alias, type, label, sortable
-                [
-                    'name' => 'prods.product_id',
-                    'alias' => 'id',
-                    'type' => 'string',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'prods.sku',
-                    'alias' => 'productSku',
-                    'type' => 'string',
-                    'label' => 'SKU',
-                    'sortable' => true,
-                ], [
-                    'name' => 'prods.name',
-                    'alias' => 'ProductName',
-                    'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
-                ], [
-                    'name' => 'prods.type',
-                    'alias' => 'ProductType',
-                    'type' => 'string',
-                    'label' => 'Type',
-                    'sortable' => true,
-                ], [
-                    'name' => 'prods.status',
-                    'alias' => 'ProductStatus',
-                    'type' => 'boolean',
-                    'label' => 'Status',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 1)
-                            return 'Active';
-                        else
-                            return 'Inactive';
-                    },
-                ], [
-                    'name' => 'prods.price',
-                    'alias' => 'ProductPrice',
-                    'type' => 'string',
-                    'label' => 'Price',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        return core()->formatBasePrice($value);
-                    },
-                ], [
-                    'name' => 'prods.attribute_family_name',
-                    'alias' => 'productattributefamilyname',
-                    'type' => 'string',
-                    'label' => 'Attribute Family',
-                    'sortable' => true,
-                ], [
-                    'name' => 'prods.quantity',
-                    'alias' => 'ProductQuantity',
-                    'type' => 'string',
-                    'label' => 'Product Quantity',
-                    'sortable' => true,
-                ]
-            ],
-
-            'filterable' => [
-                //column, alias, type, and label
-                [
-                    'column' => 'prods.product_id',
-                    'alias' => 'productID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'prods.sku',
-                    'alias' => 'productSku',
-                    'type' => 'string',
-                    'label' => 'SKU',
-                ], [
-                    'column' => 'prods.name',
-                    'alias' => 'ProductName',
-                    'type' => 'string',
-                    'label' => 'Product Name',
-                ], [
-                    'column' => 'prods.type',
-                    'alias' => 'ProductType',
-                    'type' => 'string',
-                    'label' => 'Product Type',
-                ], [
-                    'column' => 'prods.status',
-                    'alias' => 'ProductStatus',
-                    'type' => 'boolean',
-                    'label' => 'Status'
-                ]
-            ],
-            //don't use aliasing in case of searchables
-
-            'searchable' => [
-                //column, type and label
-                [
-                    'column' => 'prods.product_id',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'prods.sku',
-                    'type' => 'string',
-                    'label' => 'SKU',
-                ], [
-                    'column' => 'prods.name',
-                    'type' => 'string',
-                    'label' => 'Product Name',
-                ], [
-                    'column' => 'prods.type',
-                    'type' => 'string',
-                    'label' => 'Product Type',
-                ]
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
+    public function addColumns()
+    {
+        $this->addColumn([
+            'index' => 'product_id',
+            'label' => trans('admin::app.datagrid.id'),
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
         ]);
 
+        $this->addColumn([
+            'index' => 'product_sku',
+            'label' => trans('admin::app.datagrid.sku'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'product_name',
+            'label' => trans('admin::app.datagrid.name'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'product_type',
+            'label' => trans('admin::app.datagrid.type'),
+            'type' => 'string',
+            'sortable' => true,
+            'searchable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'product_status',
+            'label' => trans('admin::app.datagrid.status'),
+            'type' => 'boolean',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px',
+            'wrapper' => function($value) {
+                if ($value == 1)
+                    return 'Active';
+                else
+                    return 'Inactive';
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'product_price',
+            'label' => trans('admin::app.datagrid.price'),
+            'type' => 'number',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px',
+            'wrapper' => function($value) {
+                return core()->formatBasePrice($value);
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'product_quantity',
+            'label' => trans('admin::app.datagrid.qty'),
+            'type' => 'number',
+            'sortable' => true,
+            'searchable' => false,
+            'width' => '100px'
+        ]);
     }
 
-    public function render()
-    {
-        return $this->createProductDataGrid()->render();
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'Edit',
+            'route' => 'admin.catalog.products.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->addAction([
+            'type' => 'Delete',
+            'route' => 'admin.catalog.products.delete',
+            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
+            'icon' => 'icon trash-icon'
+        ]);
     }
 
-    public function export()
-    {
-        $paginate = false;
-        return $this->createProductDataGrid()->render($paginate);
-    }
+    public function prepareMassActions() {
+        $this->addMassAction([
+            'type' => 'delete',
+            'label' => 'Delete',
+            'action' => route('admin.catalog.products.massdelete'),
+            'method' => 'DELETE'
+        ]);
 
+        $this->addMassAction([
+            'type' => 'update',
+            'label' => 'Update Status',
+            'action' => route('admin.catalog.products.massupdate'),
+            'method' => 'PUT',
+            'options' => [
+                'Active' => 1,
+                'Inactive' => 0
+            ]
+        ]);
+    }
 }

@@ -21,9 +21,9 @@ abstract class AbstractFillable
         $error = false;
         $this->setFillable();
 
-        foreach ($args as $key => $value){
+        foreach ($args as $key => $value) {
             $this->{$key} = $value;
-            // switch($value){
+            // switch($value) {
             //     case (in_array(gettype($value), ["array", "object", "function"])):
             //         $error = $this->fieldValidate(
             //             $key,
@@ -37,10 +37,10 @@ abstract class AbstractFillable
             //             $value
             //         );
             // }
-            // if($error) throw new \Exception($error);
+            // if ($error) throw new \Exception($error);
         }
-        // foreach($this->fillable as $fill){
-        //     if(isset($args[$fill])){
+        // foreach ($this->fillable as $fill) {
+        //     if (isset($args[$fill])) {
         //         $this->{$fill} = [$args[$fill]];
         //     }
         // }
@@ -49,25 +49,25 @@ abstract class AbstractFillable
     private function fieldValidate($key, $value, $allowed = ['string', 'integer', 'float', "boolean"], $merge = false)
     {
         $error = false;
-        if( in_array($key, $this->fillable) ||
+        if ( in_array($key, $this->fillable) ||
             array_filter(
-                array_keys($this->fillable) , function($value){
+                array_keys($this->fillable) , function($value) {
                     return gettype($value) === "string";
                 }
             )
-        ){
-            if(in_array(gettype($value), $allowed)){
-                // if($merge){
-                //     if(!$this->{$key}) $this->{$key} = [];
+        ) {
+            if (in_array(gettype($value), $allowed)) {
+                // if ($merge) {
+                //     if (! $this->{$key}) $this->{$key} = [];
                 //     $this->{$key}[] = $value;
-                // }else
+                // } else
                 // $this->{$key} = $value;
-            }else{
+            } else {
                 dump(gettype($value));
                 dump($value);
                 $error = 'Allowed params are not valid as per allowed condition! Key - ' . $key;
             }
-        }else{
+        } else {
             dump(in_array($key, $this->fillable));
             dump($value);
             $error = 'Not Allowed field! Key - ' . $key;
@@ -76,9 +76,10 @@ abstract class AbstractFillable
         return $error ?: false;
     }
 
-    public function __set($key, $value){
+    public function __set($key, $value)
+    {
         $error = false;
-        switch('$value'){ //no need to match this
+        switch('$value') { //no need to match this
             case (in_array(gettype($value), ["array", "object", "function"])):
                 $error = $this->fieldValidate(
                     $key,
@@ -98,10 +99,10 @@ abstract class AbstractFillable
         $this->{$key} = $value;
     }
 
-    public function __get($key){
-        if(in_array($key, $this->fillable)){
+    public function __get($key) {
+        if (in_array($key, $this->fillable)) {
             return property_exists($this, $key) ? $this->{$key} : false;
-        }else
+        } else
             return self::NO_RESULT;
     }
 }

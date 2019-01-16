@@ -2,18 +2,18 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\AbsGrid;
+use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Currency Data Grid class
+ * CustomerDataGrid class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class CustomerGroupDataGrid extends AbsGrid
+class CustomerGroupDataGrid extends DataGrid
 {
-    public $allColumns = [];
+    protected $index = 'id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
@@ -22,15 +22,10 @@ class CustomerGroupDataGrid extends AbsGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
-        $this->index = 'id';
-    }
-
     public function addColumns()
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'groupId',
             'label' => 'ID',
             'type' => 'number',
             'searchable' => false,
@@ -39,9 +34,7 @@ class CustomerGroupDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            // 'column' => 'CONCAT(cus.first_name, " ", cus.last_name)',
             'index' => 'name',
-            'alias' => 'groupName',
             'label' => 'Name',
             'type' => 'string',
             'searchable' => true,

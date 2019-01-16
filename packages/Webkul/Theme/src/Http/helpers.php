@@ -9,14 +9,14 @@ if (! function_exists('themes')) {
     }
 }
 
-if (!function_exists('bagisto_asset')) {
+if (! function_exists('bagisto_asset')) {
     function bagisto_asset($path, $secure = null)
     {
         return themes()->url($path, $secure);
     }
 }
 
-if (!function_exists('view_render_event')) {
+if (! function_exists('view_render_event')) {
     function view_render_event($eventName, $params = null)
     {
         app()->singleton(ViewRenderEventManager::class);

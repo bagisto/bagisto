@@ -25,12 +25,12 @@
 
     $channel_locale = [];
 
-    if(isset($field['channel_based']) && $field['channel_based'])
+    if (isset($field['channel_based']) && $field['channel_based'])
     {
         array_push($channel_locale, $channel);
     }
 
-    if(isset($field['locale_based']) && $field['locale_based']) {
+    if (isset($field['locale_based']) && $field['locale_based']) {
         array_push($channel_locale, $locale);
     }
 ?>
@@ -41,7 +41,7 @@
 
             {{ $field['title'] }}
 
-            @if(count($channel_locale))
+            @if (count($channel_locale))
                 <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
             @endif
 
@@ -60,15 +60,15 @@
             <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;" >
 
                 @if (isset($field['repository']))
-                    @foreach($value as $option)
+                    @foreach ($value as $option)
                         <option value="{{  $option['name'] }}" {{ $option['name'] == $selectedOption ? 'selected' : ''}}
                         {{ $option['name'] }}
                         </option>
                     @endforeach
                 @else
-                    @foreach($field['options'] as $option)
+                    @foreach ($field['options'] as $option)
                         <?php
-                            if($option['value'] == false) {
+                            if ($option['value'] == false) {
                                 $value = 0;
                             } else {
                                 $value = $option['value'];
@@ -89,10 +89,10 @@
 
             <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]" data-vv-as="&quot;{{ $field['name'] }}&quot;"  multiple>
 
-                @foreach($field['options'] as $option)
+                @foreach ($field['options'] as $option)
 
                     <?php
-                        if($option['value'] == false) {
+                        if ($option['value'] == false) {
                             $value = 0;
                         } else {
                             $value = $option['value'];
@@ -223,7 +223,7 @@
                     this.country = country;
                 })
 
-                if(this.countryStates[this.country] && this.countryStates[this.country].length)
+                if (this.countryStates[this.country] && this.countryStates[this.country].length)
                     return true;
 
                 return false;

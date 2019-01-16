@@ -50,22 +50,22 @@ class SliderRepository extends Repository
         $uploaded = false;
         $image = false;
 
-        if(isset($data['image'])) {
+        if (isset($data['image'])) {
             $image = $first = array_first($data['image'], function ($value, $key) {
-                if($value)
+                if ($value)
                     return $value;
                 else
                     return false;
             });
         }
 
-        if($image != false) {
+        if ($image != false) {
             $uploaded = $image->store($dir);
 
             unset($data['image'], $data['_token']);
         }
 
-        if($uploaded) {
+        if ($uploaded) {
             $data['path'] = $uploaded;
         } else {
             unset($data['image']);
@@ -87,22 +87,22 @@ class SliderRepository extends Repository
         $uploaded = false;
         $image = false;
 
-        if(isset($data['image'])) {
+        if (isset($data['image'])) {
             $image = $first = array_first($data['image'], function ($value, $key) {
-                if($value)
+                if ($value)
                     return $value;
                 else
                     return false;
             });
         }
 
-        if($image != false) {
+        if ($image != false) {
             $uploaded = $image->store($dir);
 
             unset($data['image'], $data['_token']);
         }
 
-        if($uploaded) {
+        if ($uploaded) {
             $sliderItem = $this->find($id);
 
             $deleted = Storage::delete($sliderItem->path);

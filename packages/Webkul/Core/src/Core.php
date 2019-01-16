@@ -109,7 +109,7 @@ class Core
     {
         static $channels;
 
-        if($channels)
+        if ($channels)
             return $channels;
 
         return $channels = $this->channelRepository->all();
@@ -124,7 +124,7 @@ class Core
     {
         static $channel;
 
-        if($channel)
+        if ($channel)
             return $channel;
 
         $channel = $this->channelRepository->findWhereIn('hostname', [
@@ -133,7 +133,7 @@ class Core
                 'https://' . request()->getHttpHost()
             ])->first();
 
-        if(!$channel)
+        if (! $channel)
             $channel = $this->channelRepository->first();
 
         return $channel;
@@ -148,7 +148,7 @@ class Core
     {
         static $channelCode;
 
-        if($channelCode)
+        if ($channelCode)
             return $channelCode;
 
         return ($channel = $this->getCurrentChannel()) ? $channelCode = $channel->code : '';
@@ -163,7 +163,7 @@ class Core
     {
         static $channel;
 
-        if($channel)
+        if ($channel)
             return $channel;
 
         return $channel = $this->channelRepository->first();
@@ -178,7 +178,7 @@ class Core
     {
         static $channelCode;
 
-        if($channelCode)
+        if ($channelCode)
             return $channelCode;
 
         return ($channel = $this->getDefaultChannel()) ? $channelCode = $channel->code : '';
@@ -193,7 +193,7 @@ class Core
     {
         static $locales;
 
-        if($locales)
+        if ($locales)
             return $locales;
 
         return $locales = $this->localeRepository->all();
@@ -208,7 +208,7 @@ class Core
     {
         static $currencies;
 
-        if($currencies)
+        if ($currencies)
             return $currencies;
 
         return $currencies = $this->currencyRepository->all();
@@ -223,12 +223,12 @@ class Core
     {
         static $currency;
 
-        if($currency)
+        if ($currency)
             return $currency;
 
         $baseCurrency = $this->currencyRepository->findOneByField('code', config('app.currency'));
 
-        if(!$baseCurrency)
+        if (! $baseCurrency)
             $baseCurrency = $this->currencyRepository->first();
 
         return $currency = $baseCurrency;
@@ -243,7 +243,7 @@ class Core
     {
         static $currencyCode;
 
-        if($currencyCode)
+        if ($currencyCode)
             return $currencyCode;
 
         return ($currency = $this->getBaseCurrency()) ? $currencyCode = $currency->code : '';
@@ -258,7 +258,7 @@ class Core
     {
         static $currency;
 
-        if($currency)
+        if ($currency)
             return $currency;
 
         $currenctChannel = $this->getCurrentChannel();
@@ -275,7 +275,7 @@ class Core
     {
         static $currencyCode;
 
-        if($currencyCode)
+        if ($currencyCode)
             return $currencyCode;
 
         return ($currency = $this->getChannelBaseCurrency()) ? $currencyCode = $currency->code : '';
@@ -290,11 +290,11 @@ class Core
     {
         static $currency;
 
-        if($currency)
+        if ($currency)
             return $currency;
 
-        if($currencyCode = session()->get('currency')) {
-            if($currency = $this->currencyRepository->findOneByField('code', $currencyCode))
+        if ($currencyCode = session()->get('currency')) {
+            if ($currency = $this->currencyRepository->findOneByField('code', $currencyCode))
                 return $currency;
         }
 
@@ -310,7 +310,7 @@ class Core
     {
         static $currencyCode;
 
-        if($currencyCode)
+        if ($currencyCode)
             return $currencyCode;
 
         return ($currency = $this->getCurrentCurrency()) ? $currencyCode = $currency->code : '';
@@ -329,7 +329,7 @@ class Core
                         ? $this->getCurrentCurrency()
                         : $this->currencyRepository->findByField('code', $targetCurrencyCode);
 
-        if(!$targetCurrency)
+        if (! $targetCurrency)
             return $amount;
 
         $exchangeRate = $this->exchangeRateRepository->findOneWhere([
@@ -350,7 +350,7 @@ class Core
     */
     public function currency($amount = 0)
     {
-        if(is_null($amount))
+        if (is_null($amount))
             $amount = 0;
 
         $currencyCode = $this->getCurrentCurrency()->code;
@@ -381,7 +381,7 @@ class Core
     */
     public function formatPrice($price, $currencyCode)
     {
-        if(is_null($price))
+        if (is_null($price))
             $price = 0;
 
         return currency($price, $currencyCode);
@@ -395,7 +395,7 @@ class Core
     */
     public function formatBasePrice($price)
     {
-        if(is_null($price))
+        if (is_null($price))
             $price = 0;
 
         return currency($price, $this->getBaseCurrencyCode());
@@ -425,8 +425,8 @@ class Core
 
         $result = false;
 
-        if (!$this->is_empty_date($dateFrom) && $channelTimeStamp < $fromTimeStamp) {
-        } elseif (!$this->is_empty_date($dateTo) && $channelTimeStamp > $toTimeStamp) {
+        if (! $this->is_empty_date($dateFrom) && $channelTimeStamp < $fromTimeStamp) {
+        } elseif (! $this->is_empty_date($dateTo) && $channelTimeStamp > $toTimeStamp) {
         } else {
             $result = true;
         }
@@ -544,7 +544,7 @@ class Core
             }
         }
 
-        if (!$coreConfigValue) {
+        if (! $coreConfigValue) {
             $fields = explode(".", $field);
             array_shift($fields);
             $field = implode(".", $fields);
@@ -606,7 +606,7 @@ class Core
         $endWeekDay = Carbon::createFromTimeString($this->xWeekRange($endDate, 1) . ' 23:59:59');
         $totalWeeks = $startWeekDay->diffInWeeks($endWeekDay);
 
-        if($totalMonths > 5) {
+        if ($totalMonths > 5) {
             for ($i = 0; $i < $totalMonths; $i++) {
                 $date = clone $startDate;
                 $date->addMonths($i);
@@ -618,7 +618,7 @@ class Core
 
                 $timeIntervals[] = ['start' => $start, 'end' => $end, 'formatedDate' => $date->format('M')];
             }
-        } elseif($totalWeeks > 6) {
+        } else if ($totalWeeks > 6) {
             for ($i = 0; $i < $totalWeeks; $i++) {
                 $date = clone $startDate;
                 $date->addWeeks($i);
@@ -653,7 +653,7 @@ class Core
     public function xWeekRange($date, $day) {
         $ts = strtotime($date);
 
-        if(!$day) {
+        if (! $day) {
             $start = (date('D', $ts) == 'Sun') ? $ts : strtotime('last sunday', $ts);
 
             return date('Y-m-d', $start);
@@ -671,7 +671,7 @@ class Core
 	 */
 	public function sortItems($items) {
 		foreach ($items as &$item) {
-			if(count($item['children'])) {
+			if (count($item['children'])) {
 				$item['children'] = $this->sortItems($item['children']);
 			}
 		}
@@ -711,14 +711,14 @@ class Core
             unset($items[$key1]);
             $items[$level1['key']] = $level1;
 
-			if(count($level1['children'])) {
+			if (count($level1['children'])) {
                 foreach ($level1['children'] as $key2 => $level2) {
                     $temp2 = explode('.', $level2['key']);
                     $finalKey2 = end($temp2);
                     unset($items[$level1['key']]['children'][$key2]);
                     $items[$level1['key']]['children'][$finalKey2] = $level2;
 
-                    if(count($level2['children'])) {
+                    if (count($level2['children'])) {
                         foreach ($level2['children'] as $key3 => $level3) {
                             $temp3 = explode('.', $level3['key']);
                             $finalKey3 = end($temp3);
@@ -754,7 +754,7 @@ class Core
         }
 
 		$finalKey = array_shift($keys);
-		if(isset($array[$finalKey])) {
+		if (isset($array[$finalKey])) {
 			$array[$finalKey] = $this->arrayMerge($array[$finalKey], $value);
 		} else {
 			$array[$finalKey] = $value;

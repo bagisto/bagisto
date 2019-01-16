@@ -176,7 +176,7 @@
 
                             </ul>
 
-                            @if (!count($statistics['top_selling_categories']))
+                            @if (! count($statistics['top_selling_categories']))
 
                                 <div class="no-result-found">
 
@@ -231,7 +231,7 @@
 
                         </ul>
 
-                        @if (!count($statistics['top_selling_products']))
+                        @if (! count($statistics['top_selling_products']))
 
                             <div class="no-result-found">
 
@@ -289,7 +289,7 @@
 
                         </ul>
 
-                        @if (!count($statistics['customer_with_most_sales']))
+                        @if (! count($statistics['customer_with_most_sales']))
 
                             <div class="no-result-found">
 
@@ -339,7 +339,7 @@
 
                         </ul>
 
-                        @if (!count($statistics['stock_threshold']))
+                        @if (! count($statistics['stock_threshold']))
 
                             <div class="no-result-found">
 

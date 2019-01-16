@@ -2,18 +2,18 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\AbsGrid;
+use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * News Letter Grid class
+ * RolesDataGrid Class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class RolesDataGrid extends AbsGrid
+class RolesDataGrid extends DataGrid
 {
-    public $allColumns = [];
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
@@ -22,16 +22,11 @@ class RolesDataGrid extends AbsGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
-        $this->index = 'id';
-    }
-
     public function addColumns()
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'roleId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -40,8 +35,7 @@ class RolesDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'name',
-            'alias' => 'roleName',
-            'label' => 'Name',
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -50,8 +44,7 @@ class RolesDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'permission_type',
-            'alias' => 'roleType',
-            'label' => 'Permission Type',
+            'label' => trans('admin::app.datagrid.permission-type'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

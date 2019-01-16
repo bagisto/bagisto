@@ -38,7 +38,7 @@ class ActiveProductCriteria extends AbstractProduct implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        foreach(['status', 'visible_individually'] as $code) {
+        foreach (['status', 'visible_individually'] as $code) {
             $attribute = $this->attribute->findOneByField('code', $code);
 
             $alias = 'filter_' . $attribute->code;

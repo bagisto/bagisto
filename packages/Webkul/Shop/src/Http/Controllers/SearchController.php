@@ -37,7 +37,7 @@ use Webkul\Product\Repositories\SearchRepository as Search;
 
         $results = $this->search->search(request()->all());
 
-        if($results->count()) {
+        if ($results->count()) {
             return view($this->_config['view'])->with('results', $results);
         } else {
             return view($this->_config['view'])->with('results', null);

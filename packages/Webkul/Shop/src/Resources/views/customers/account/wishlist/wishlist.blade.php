@@ -12,7 +12,7 @@
         <div class="account-head mb-15">
             <span class="account-heading">{{ __('shop::app.wishlist.title') }}</span>
 
-            @if(count($items))
+            @if (count($items))
             <div class="account-action">
                 <a href="{{ route('customer.wishlist.removeall') }}">{{ __('shop::app.wishlist.deleteall') }}</a>
             </div>
@@ -24,8 +24,8 @@
 
         <div class="account-items-list">
 
-            @if($items->count())
-            @foreach($items as $item)
+            @if ($items->count())
+            @foreach ($items as $item)
                 <div class="account-item-card mt-15 mb-15">
                     <div class="media-info">
                         @php

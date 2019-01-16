@@ -2,36 +2,33 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\AbsGrid;
+use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Currency Data Grid class
+ * CustomerDataGrid class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class CustomerDataGrid extends AbsGrid
+class CustomerDataGrid extends DataGrid
 {
-    public $allColumns = [];
+    protected $itemsPerPage = 5;
+
+    protected $index = 'customer_id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('customers as cus')->addSelect('cus.id', 'cus.first_name', 'cus.email', 'cg.name')->leftJoin('customer_groups as cg', 'cus.customer_group_id', '=', 'cg.id');
+        $queryBuilder = DB::table('customers')->addSelect('customers.id as customer_id', 'customers.email as customer_email', 'customer_groups.name as customer_group_name')->addSelect(DB::raw('CONCAT(customers.first_name, " ", customers.last_name) as customer_full_name'))->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id');
 
         $this->setQueryBuilder($queryBuilder);
-    }
-
-    public function setIndex() {
-        $this->index = 'id'; //the column that needs to be treated as index column
     }
 
     public function addColumns()
     {
         $this->addColumn([
-            'index' => 'cus.id',
-            'alias' => 'customerId',
-            'label' => 'ID',
+            'index' => 'customer_id',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -39,10 +36,8 @@ class CustomerDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            // 'column' => 'CONCAT(cus.first_name, " ", cus.last_name)',
-            'index' => 'cus.first_name',
-            'alias' => 'customerFullName',
-            'label' => 'Name',
+            'index' => 'customer_full_name',
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -50,9 +45,8 @@ class CustomerDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'index' => 'cus.email',
-            'alias' => 'customerEmail',
-            'label' => 'Email',
+            'index' => 'customer_email',
+            'label' => trans('admin::app.datagrid.email'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -60,9 +54,8 @@ class CustomerDataGrid extends AbsGrid
         ]);
 
         $this->addColumn([
-            'index' => 'cg.name',
-            'alias' => 'customerGroupName',
-            'label' => 'Group',
+            'index' => 'customer_group_name',
+            'label' => trans('admin::app.datagrid.group'),
             'type' => 'string',
             'searchable' => false,
             'sortable' => true,

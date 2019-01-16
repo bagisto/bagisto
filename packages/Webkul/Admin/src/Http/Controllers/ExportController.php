@@ -32,7 +32,11 @@ class ExportController extends Controller
     */
     public function export()
     {
-        $results = unserialize(request()->all()['gridData']);
+        $results = request()->all()['gridData'];
+
+        $data = json_decode($results, true);
+
+        $results = (object) $data;
 
         $file_name = class_basename($results);
 

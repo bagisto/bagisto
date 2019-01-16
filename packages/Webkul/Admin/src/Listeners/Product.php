@@ -47,7 +47,7 @@ class Product {
     public function afterProductCreated($product) {
         $result = $this->productCreated($product);
 
-        if($result) {
+        if ($result) {
             return true;
         } else {
             return false;
@@ -76,13 +76,13 @@ class Product {
         $found = $this->productGrid->findOneByField('product_id', $product->id);
 
         //extra measure to stop duplicate entries
-        if($found == null) {
+        if ($found == null) {
             $this->productGrid->create($gridObject);
 
-            if($product->type == 'configurable') {
+            if ($product->type == 'configurable') {
                 $variants = $product->variants()->get();
 
-                foreach($variants as $variant) {
+                foreach ($variants as $variant) {
                     $variantObj = [
                         'product_id' => $variant->id,
                         'sku' => $variant->sku,
@@ -130,7 +130,7 @@ class Product {
     public function productUpdated($product) {
         $productGridObject = $this->productGrid->findOneByField('product_id', $product->id);
 
-        if(!$productGridObject) {
+        if (! $productGridObject) {
             return false;
         }
 
@@ -143,13 +143,13 @@ class Product {
             'status' => $product->status,
         ];
 
-        if($product->type == 'configurable') {
+        if ($product->type == 'configurable') {
             $gridObject['quantity'] = 0;
             $gridObject['price'] = 0;
         } else {
             $qty = 0;
             //inventories and inventory sources relation for the variants return empty or null collection objects only
-            foreach($product->inventories()->get() as $inventory_source) {
+            foreach ($product->inventories()->get() as $inventory_source) {
                 $qty = $qty + $inventory_source->qty;
             }
 
@@ -162,7 +162,7 @@ class Product {
         if ($product->type == 'configurable') {
             $variants = $product->variants()->get();
 
-            foreach($variants as $variant) {
+            foreach ($variants as $variant) {
                 $variantObj = [
                     'product_id' => $variant->id,
                     'sku' => $variant->sku,
@@ -176,7 +176,7 @@ class Product {
                 $qty = 0;
 
                 //inventories and inventory sources relation for the variants return empty or null collection objects only
-                foreach($variant->inventories()->get() as $inventory_source) {
+                foreach ($variant->inventories()->get() as $inventory_source) {
                     $qty = $qty + $inventory_source->qty;
                 }
 
@@ -186,7 +186,7 @@ class Product {
 
                 $productGridVariant = $this->productGrid->findOneByField('product_id', $variant->id);
 
-                if(isset($productGridVariant)) {
+                if (isset($productGridVariant)) {
                     $this->productGrid->update($variantObj, $productGridVariant->id);
                 } else {
                     $variantObj = [
@@ -202,7 +202,7 @@ class Product {
                     $qty = 0;
 
                     //inventories and inventory sources relation for the variants return empty or null collection objects only
-                    foreach($variant->inventories()->get() as $inventory_source) {
+                    foreach ($variant->inventories()->get() as $inventory_source) {
                         $qty = $qty + $inventory_source->qty;
                     }
 
@@ -224,7 +224,7 @@ class Product {
     public function sync() {
         $gridObject = [];
 
-        foreach($this->product->all() as $product) {
+        foreach ($this->product->all() as $product) {
             $gridObject = [
                 'product_id' => $product->id,
                 'sku' => $product->sku,
@@ -235,12 +235,12 @@ class Product {
                 'status' => $product->status
             ];
 
-            if($product->type == 'configurable') {
+            if ($product->type == 'configurable') {
                 $gridObject['quantity'] = 0;
             } else {
                 $qty = 0;
 
-                foreach($product->toArray()['inventories'] as $inventorySource) {
+                foreach ($product->toArray()['inventories'] as $inventorySource) {
                     $qty = $qty + $inventorySource['qty'];
                 }
 
@@ -251,7 +251,7 @@ class Product {
 
             $oldGridObject = $this->productGrid->findOneByField('product_id', $product->id);
 
-            if($oldGridObject) {
+            if ($oldGridObject) {
                 $oldGridObject->update($gridObject);
             } else {
                 $this->productGrid->create($gridObject);

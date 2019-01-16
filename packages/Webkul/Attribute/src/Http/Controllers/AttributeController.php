@@ -158,7 +158,7 @@ class AttributeController extends Controller
                 $attribute = $this->attribute->findOrFail($value);
 
                 try {
-                    if (!$attribute->is_user_defined) {
+                    if (! $attribute->is_user_defined) {
                         continue;
                     } else {
                         $this->attribute->delete($value);
@@ -170,7 +170,7 @@ class AttributeController extends Controller
                 }
             }
 
-            if (!$suppressFlash)
+            if (! $suppressFlash)
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'attributes']));
             else
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'attributes']));

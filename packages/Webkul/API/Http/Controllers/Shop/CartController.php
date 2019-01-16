@@ -39,7 +39,7 @@ class CartController extends Controller
     public function get() {
         $cart = Cart::getCart();
 
-        if($cart == null || $cart == 'null') {
+        if ($cart == null || $cart == 'null') {
             return response()->json(['message' => 'empty', 'items' => null]);
         }
 
@@ -54,7 +54,7 @@ class CartController extends Controller
     public function add($id) {
         $result = Cart::add($id, request()->all());
 
-        if($result) {
+        if ($result) {
             Cart::collectTotals();
 
             return response()->json(['message' => 'successful', 'items' => Cart::getCart()->items]);
@@ -84,7 +84,7 @@ class CartController extends Controller
     public function onePage() {
         $cart = Cart::getCart();
 
-        if($cart == null || $cart == 'null') {
+        if ($cart == null || $cart == 'null') {
             return response()->json(['message' => 'empty', 'items' => null]);
         }
 
@@ -102,13 +102,13 @@ class CartController extends Controller
     public function updateOnePage() {
         $request = request()->except('_token');
 
-        foreach($request['qty'] as $id => $quantity) {
-            if($quantity <= 0) {
+        foreach ($request['qty'] as $id => $quantity) {
+            if ($quantity <= 0) {
                 return response()->json(['message' => 'Illegal Quantity', 'status' => 'error']);
             }
         }
 
-        foreach($request['qty'] as $key => $value) {
+        foreach ($request['qty'] as $key => $value) {
             $item = $this->cartItem->findOneByField('id', $key);
 
             $data['quantity'] = $value;

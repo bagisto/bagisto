@@ -53,7 +53,8 @@ class SliderController extends controller
      *
      * @return response
      */
-    public function store() {
+    public function store()
+    {
         $this->validate(request(), [
             'title' => 'string|required',
             'channel_id' => 'required',
@@ -62,7 +63,7 @@ class SliderController extends controller
 
         $result = $this->slider->save(request()->all());
 
-        if($result)
+        if ($result)
             session()->flash('success', trans('admin::app.settings.sliders.created-success'));
         else
             session()->flash('success', trans('admin::app.settings.sliders.created-fail'));
@@ -75,7 +76,8 @@ class SliderController extends controller
      *
      * @return mixed
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         $slider = $this->slider->find($id);
 
         return view($this->_config['view'])->with('slider', $slider);
@@ -86,7 +88,8 @@ class SliderController extends controller
      *
      * @return response
      */
-    public function update($id) {
+    public function update($id)
+    {
         $this->validate(request(), [
             'title' => 'string|required',
             'channel_id' => 'required',
@@ -95,7 +98,7 @@ class SliderController extends controller
 
         $result = $this->slider->updateItem(request()->all(), $id);
 
-        if($result) {
+        if ($result) {
             session()->flash('success', trans('admin::app.settings.sliders.update-success'));
         } else {
             session()->flash('error', trans('admin::app.settings.sliders.update-fail'));
@@ -109,8 +112,9 @@ class SliderController extends controller
      *
      * @return mixed
      */
-    public function destroy($id) {
-        if($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1) {
+    public function destroy($id)
+    {
+        if ($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1) {
             session()->flash('warning', trans('admin::app.settings.sliders.delete-success'));
         } else {
             $this->slider->destroy($id);

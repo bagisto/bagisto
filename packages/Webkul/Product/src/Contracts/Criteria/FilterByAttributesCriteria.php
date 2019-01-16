@@ -47,7 +47,7 @@ class FilterByAttributesCriteria extends AbstractProduct implements CriteriaInte
                     'variants' => 'variant_filter_'
                 ];
 
-            foreach($aliases as $table => $alias) {
+            foreach ($aliases as $table => $alias) {
                 $query1 = $query1->orWhere(function($query2) use($model, $table, $alias) {
 
                     foreach ($this->attribute->getProductDefaultAttributes(array_keys(request()->input())) as $code => $attribute) {
@@ -60,11 +60,11 @@ class FilterByAttributesCriteria extends AbstractProduct implements CriteriaInte
                         $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
                         
                         $temp = explode(',', request()->get($attribute->code));
-                        if($attribute->type != 'price') {
+                        if ($attribute->type != 'price') {
                             $query2 = $query2->where($aliasTemp . '.attribute_id', $attribute->id);
 
                             $query2 = $query2->where(function($query3) use($aliasTemp, $column, $temp) {
-                                foreach($temp as $code => $filterValue) {
+                                foreach ($temp as $code => $filterValue) {
                                     $query3 = $query3->orWhere($aliasTemp . '.' . $column, $filterValue);
                                 }
                             });

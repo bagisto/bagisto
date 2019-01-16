@@ -18,8 +18,8 @@ class Theme
         $theme = app('themes');
         $channel = core()->getCurrentChannel();
 
-        if($channel && $channelThemeCode = $channel->theme) {
-            if($theme->exists($channelThemeCode)) {
+        if ($channel && $channelThemeCode = $channel->theme) {
+            if ($theme->exists($channelThemeCode)) {
                 $theme->set($channelThemeCode);
             }
         }

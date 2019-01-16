@@ -69,7 +69,7 @@ class Channel extends Model
      */
     public function logo_url()
     {
-        if(!$this->logo)
+        if (! $this->logo)
             return;
 
         return Storage::url($this->logo);
@@ -88,7 +88,7 @@ class Channel extends Model
      */
     public function favicon_url()
     {
-        if(!$this->favicon)
+        if (! $this->favicon)
             return;
 
         return Storage::url($this->favicon);

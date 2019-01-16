@@ -205,7 +205,7 @@
                                 var matchCount = 0;
 
                                 for (var key in this_this.variant) {
-                                    if(variant[key] == this_this.variant[key]) {
+                                    if (variant[key] == this_this.variant[key]) {
                                         matchCount++;
                                     }
                                 }
@@ -213,7 +213,7 @@
                                 return matchCount == this_this.super_attributes.length;
                             })
 
-                            if(filteredVariants.length) {
+                            if (filteredVariants.length) {
                                 this.$parent.closeModal();
 
                                 window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.catalog.products.variant-already-exist-message') }}" }];
@@ -297,7 +297,7 @@
 
             computed: {
                 variantInputName () {
-                    if(this.variant.id)
+                    if (this.variant.id)
                         return "variants[" + this.variant.id + "]";
 
                     return "variants[variant_" + this.index + "]";
@@ -314,7 +314,7 @@
 
                     this.superAttributes.forEach(function(attribute) {
                         attribute.options.forEach(function(option) {
-                            if(optionId == option.id) {
+                            if (optionId == option.id) {
                                 optionName = option.admin_name;
                             }
                         });
@@ -325,10 +325,10 @@
 
                 sourceInventoryQty (inventorySourceId) {
                     var inventories = this.variant.inventories.filter(function(inventory) {
-                        return inventorySourceId === inventory.inventory_source_id;
+                        return inventorySourceId === inventory.inventory_source_id && !inventory.vendor_id;
                     })
 
-                    if(inventories.length)
+                    if (inventories.length)
                         return inventories[0]['qty'];
 
                     return 0;

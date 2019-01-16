@@ -149,7 +149,7 @@ class TaxCategoryController extends Controller
 
         Event::fire('tax.tax_category.update.after', $taxCategory);
 
-        if(!$taxCategory) {
+        if (! $taxCategory) {
             session()->flash('error', trans('admin::app.settings.tax-categories.update-error'));
 
             return redirect()->back();

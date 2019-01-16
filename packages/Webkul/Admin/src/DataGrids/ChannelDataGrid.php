@@ -2,18 +2,18 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\AbsGrid;
+use Webkul\Ui\DataGrid\DataGrid;
 use DB;
 
 /**
- * Channel Data Grid class
+ * ChannelDataGrid class
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class ChannelDataGrid extends AbsGrid
+class ChannelDataGrid extends DataGrid
 {
-    public $allColumns = [];
+    protected $index = 'id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
@@ -22,16 +22,11 @@ class ChannelDataGrid extends AbsGrid
         $this->setQueryBuilder($queryBuilder);
     }
 
-    public function setIndex() {
-        $this->index = 'id'; //the column that needs to be treated as index column
-    }
-
     public function addColumns()
     {
         $this->addColumn([
             'index' => 'id',
-            'alias' => 'channelId',
-            'label' => 'ID',
+            'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
@@ -40,8 +35,7 @@ class ChannelDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'code',
-            'alias' => 'channelCode',
-            'label' => 'Code',
+            'label' => trans('admin::app.datagrid.code'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -50,8 +44,7 @@ class ChannelDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'name',
-            'alias' => 'channelName',
-            'label' => 'Name',
+            'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
@@ -60,8 +53,7 @@ class ChannelDataGrid extends AbsGrid
 
         $this->addColumn([
             'index' => 'hostname',
-            'alias' => 'channelHostname',
-            'label' => 'Hostname',
+            'label' => trans('admin::app.datagrid.hostname'),
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,

@@ -18,9 +18,9 @@
 
                         <div class="cart-item-list" style="margin-top: 0">
                             @csrf
-                            @foreach($cart->items as $item)
+                            @foreach ($cart->items as $item)
                                 <?php
-                                    if($item->type == "configurable")
+                                    if ($item->type == "configurable")
                                         $productBaseImage = $productImageHelper->getProductBaseImage($item->child->product);
                                     else
                                         $productBaseImage = $productImageHelper->getProductBaseImage($item->product);
@@ -67,7 +67,7 @@
 
                                             @auth('customer')
                                                 <span class="towishlist">
-                                                    @if($item->parent_id != 'null' ||$item->parent_id != null)
+                                                    @if ($item->parent_id != 'null' ||$item->parent_id != null)
                                                         <a href="{{ route('shop.movetowishlist', $item->id) }}" onclick="removeLink('Do you really want to do this?')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
                                                     @else
                                                         <a href="{{ route('shop.movetowishlist', $item->child->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
@@ -76,7 +76,7 @@
                                             @endauth
                                         </div>
 
-                                        @if (!cart()->isItemHaveQuantity($item))
+                                        @if (! cart()->isItemHaveQuantity($item))
                                             <div class="error-message mt-15">
                                                 * {{ __('shop::app.checkout.cart.quantity-error') }}
                                             </div>
@@ -95,7 +95,7 @@
                                     {{ __('shop::app.checkout.cart.update-cart') }}
                                 </button>
 
-                                @if (!cart()->hasError())
+                                @if (! cart()->hasError())
                                     <a href="{{ route('shop.checkout.onepage.index') }}" class="btn btn-lg btn-primary">
                                         {{ __('shop::app.checkout.cart.proceed-to-checkout') }}
                                     </a>
@@ -133,8 +133,8 @@
 
 @push('scripts')
     <script>
-        function removeLink(message){
-            if(!confirm(message))
+        function removeLink(message) {
+            if (!confirm(message))
             event.preventDefault();
         }
     </script>

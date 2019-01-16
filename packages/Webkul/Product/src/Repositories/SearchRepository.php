@@ -37,7 +37,7 @@ class SearchRepository extends Repository
         return 'Webkul\Product\Models\Product';
     }
 
-    public function searchAttributes(){
+    public function searchAttributes() {
         // $this->pushCriteria(app(searchByAttributeCriteria::class));
     }
 

@@ -75,14 +75,14 @@
                             <div class="control-group">
                                 <label for="customerGroup" >{{ __('admin::app.customers.customers.customer_group') }}</label>
 
-                                @if(!is_null($customer->customer_group_id))
+                                @if (! is_null($customer->customer_group_id))
                                     <?php $selectedCustomerOption = $customer->customerGroup->id ?>
                                 @else
                                     <?php $selectedCustomerOption = '' ?>
                                 @endif
 
                                 <select  class="control" name="customer_group_id">
-                                    @foreach($customerGroup as $group)
+                                    @foreach ($customerGroup as $group)
                                     <option value="{{ $group->id }}" {{ $selectedCustomerOption == $group->id ? 'selected' : '' }}>
                                         {{ $group->name}}
                                     </option>
@@ -93,14 +93,14 @@
                             <div class="control-group" :class="[errors.has('channel_id') ? 'has-error' : '']">
                                 <label for="channel" >{{ __('admin::app.customers.customers.channel_name') }}</label>
 
-                                @if(!is_null($customer->channel_id))
+                                @if (! is_null($customer->channel_id))
                                     <?php $selectedChannelOption = $customer->channel_id ?>
                                 @else
                                     <?php $selectedChannelOption = $customer->channel_id ?>
                                 @endif
 
                                 <select  class="control" name="channel_id" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customers.customers.channel_name') }}&quot;">
-                                    @foreach($channelName as $channel)
+                                    @foreach ($channelName as $channel)
                                     <option value="{{ $channel->id }}" {{ $selectedChannelOption == $channel->id ? 'selected' : '' }}>
                                         {{ $channel->name}}
                                     </option>

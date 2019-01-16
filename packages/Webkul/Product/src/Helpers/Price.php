@@ -34,10 +34,10 @@ class Price extends AbstractProduct
      */
     public function getMinimalPrice($product)
     {
-        if($product->type == 'configurable') {
+        if ($product->type == 'configurable') {
             return $this->getVariantMinPrice($product);
         } else {
-            if($this->haveSpecialPrice($product)) {
+            if ($this->haveSpecialPrice($product)) {
                 return $product->special_price;
             } else {
                 return $product->price;
@@ -55,7 +55,7 @@ class Price extends AbstractProduct
     {
         static $attribute;
 
-        if(!$attribute)
+        if (! $attribute)
             $attribute = $this->attribute->findOneByField('code', 'price');
 
         $qb = ProductAttributeValue::join('products', 'product_attribute_values.product_id', '=', 'products.id')
@@ -77,7 +77,7 @@ class Price extends AbstractProduct
      */
     public function getSpecialPrice($product)
     {
-        if($this->haveSpecialPrice($product)) {
+        if ($this->haveSpecialPrice($product)) {
             return $product->special_price;
         } else {
             return $product->price;
@@ -90,7 +90,7 @@ class Price extends AbstractProduct
      */
     public function haveSpecialPrice($product)
     {
-        if(is_null($product->special_price) || !$product->special_price)
+        if (is_null($product->special_price) || !$product->special_price)
             return false;
 
         if (core()->isChannelDateInInterval($product->special_price_from, $product->special_price_to)) {

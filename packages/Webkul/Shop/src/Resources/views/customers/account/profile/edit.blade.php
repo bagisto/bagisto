@@ -43,10 +43,10 @@
                     <div class="control-group" :class="[errors.has('gender') ? 'has-error' : '']">
                         <label for="email" class="required">{{ __('shop::app.customer.account.profile.gender') }}</label>
                         <select name="gender" class="control" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customer.account.profile.gender') }}&quot;">
-                            <option value=""  @if($customer->gender == "") selected @endif></option>
-                            <option value="Other"  @if($customer->gender == "Other") selected @endif>Other</option>
-                            <option value="Male"  @if($customer->gender == "Male") selected @endif>Male</option>
-                            <option value="Female" @if($customer->gender == "Female") selected @endif>Female</option>
+                            <option value=""  @if ($customer->gender == "") selected @endif></option>
+                            <option value="Other"  @if ($customer->gender == "Other") selected @endif>Other</option>
+                            <option value="Male"  @if ($customer->gender == "Male") selected @endif>Male</option>
+                            <option value="Female" @if ($customer->gender == "Female") selected @endif>Female</option>
                         </select>
                         <span class="control-error" v-if="errors.has('gender')">@{{ errors.first('gender') }}</span>
                     </div>

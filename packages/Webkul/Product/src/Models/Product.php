@@ -149,10 +149,10 @@ class Product extends Model
      */
     public function isSaleable()
     {
-        if(!$this->status)
+        if (! $this->status)
             return false;
 
-        if($this->haveSufficientQuantity(1))
+        if ($this->haveSufficientQuantity(1))
             return true;
 
         return false;
@@ -163,10 +163,10 @@ class Product extends Model
      *
      * @return bool
      */
-    public function inventory_source_qty($inventorySource)
+    public function inventory_source_qty($inventorySourceId)
     {
         return $this->inventories()
-                ->where('inventory_source_id', $inventorySource->id)
+                ->where('inventory_source_id', $inventorySourceId)
                 ->sum('qty');
     }
 
@@ -185,7 +185,7 @@ class Product extends Model
                 ->pluck('id');
 
         foreach ($this->inventories as $inventory) {
-            if(is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
+            if (is_numeric($index = $channelInventorySourceIds->search($inventory->inventory_source_id))) {
                 $total += $inventory->qty;
             }
         }
@@ -209,7 +209,7 @@ class Product extends Model
      */
     public function getAttribute($key)
     {
-        if (!method_exists(self::class, $key) && !in_array($key, ['parent_id', 'attribute_family_id']) && !isset($this->attributes[$key])) {
+        if (! method_exists(self::class, $key) && !in_array($key, ['parent_id', 'attribute_family_id']) && !isset($this->attributes[$key])) {
             if (isset($this->id)) {
                 $this->attributes[$key] = '';
 
@@ -233,7 +233,7 @@ class Product extends Model
 
         $hiddenAttributes = $this->getHidden();
 
-        if(isset($this->id)) {
+        if (isset($this->id)) {
             foreach ($this->attribute_family->custom_attributes as $attribute) {
                 if (in_array($attribute->code, $hiddenAttributes)) {
                     continue;
@@ -253,21 +253,21 @@ class Product extends Model
      */
     public function getCustomAttributeValue($attribute)
     {
-        if(!$attribute)
+        if (! $attribute)
             return;
 
         $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
         $locale = request()->get('locale') ?: app()->getLocale();
 
-        if($attribute->value_per_channel) {
-            if($attribute->value_per_locale) {
+        if ($attribute->value_per_channel) {
+            if ($attribute->value_per_locale) {
                 $attributeValue = $this->attribute_values()->where('channel', $channel)->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
             } else {
                 $attributeValue = $this->attribute_values()->where('channel', $channel)->where('attribute_id', $attribute->id)->first();
             }
         } else {
-            if($attribute->value_per_locale) {
+            if ($attribute->value_per_locale) {
                 $attributeValue = $this->attribute_values()->where('locale', $locale)->where('attribute_id', $attribute->id)->first();
             } else {
                 $attributeValue = $this->attribute_values()->where('attribute_id', $attribute->id)->first();

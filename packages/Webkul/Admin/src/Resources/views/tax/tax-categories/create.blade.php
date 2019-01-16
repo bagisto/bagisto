@@ -26,7 +26,7 @@
                         <label for="channel" class="required">{{ __('admin::app.configuration.tax-categories.select-channel') }}</label>
 
                         <select class="control" name="channel_id">
-                            @foreach(core()->getAllChannels() as $channelModel)
+                            @foreach (core()->getAllChannels() as $channelModel)
 
                                 <option value="{{ $channelModel->id }}">
                                     {{ $channelModel->name }}
@@ -66,7 +66,7 @@
                         <label for="taxrates" class="required">{{ __('admin::app.configuration.tax-categories.select-taxrates') }}</label>
 
                         <select multiple="multiple" v-validate="'required'" class="control" id="taxrates" name="taxrates[]" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.select-taxrates') }}&quot;" value="{{ old('taxrates') }}">
-                            @foreach($taxRates as $taxRate)
+                            @foreach ($taxRates as $taxRate)
                                 <option value="{{ $taxRate['id'] }}">{{ $taxRate['identifier'] }}</option>
                             @endforeach
                         </select>

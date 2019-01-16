@@ -84,7 +84,7 @@ class AddressController extends Controller
         $cust_id['customer_id'] = $this->customer->id;
         $data = array_merge($cust_id, $data);
 
-        if($this->customer->addresses->count() == 0) {
+        if ($this->customer->addresses->count() == 0) {
             $data['default_address'] = 1;
         }
 
@@ -143,11 +143,11 @@ class AddressController extends Controller
      */
     public function makeDefault($id)
     {
-        if($default = $this->customer->default_address) {
+        if ($default = $this->customer->default_address) {
             $this->address->find($default->id)->update(['default_address' => 0]);
         }
 
-        if($address = $this->address->find($id)) {
+        if ($address = $this->address->find($id)) {
             $address->update(['default_address' => 1]);
         } else {
             session()->flash('success', trans('shop::app.customer.account.address.index.default-delete'));

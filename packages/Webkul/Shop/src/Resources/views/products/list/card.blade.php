@@ -6,7 +6,7 @@
 
     <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
 
-    @if($product->new)
+    @if ($product->new)
         <div class="sticker new">
             {{ __('shop::app.products.new') }}
         </div>
@@ -34,10 +34,10 @@
 
         @include ('shop::products.price', ['product' => $product])
 
-        @if(Route::currentRouteName() == "shop.products.index")
+        @if (Route::currentRouteName() == "shop.products.index")
             @include ('shop::products.add-to', ['product' => $product])
         @else
-            @if($product->type == "configurable")
+            @if ($product->type == "configurable")
                 <div class="cart-wish-wrap">
                     <a href="{{ route('cart.add.configurable', $product->url_key) }}" class="btn btn-lg btn-primary addtocart">
                         {{ __('shop::app.products.add-to-cart') }}

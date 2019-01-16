@@ -32,8 +32,8 @@
                 <label for="title">{{ __('admin::app.customers.subscribers.is_subscribed') }}</label>
 
                 <select class="control" name="is_subscribed" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.customers.subscribers.is_subscribed') }}&quot;">
-                    <option value="1" @if($subscriber->is_subscribed == 1) selected @endif>{{ __('admin::app.common.true') }}</option>
-                    <option value="0" @if($subscriber->is_subscribed == 0) selected @endif>{{ __('admin::app.common.false') }}</option>
+                    <option value="1" @if ($subscriber->is_subscribed == 1) selected @endif>{{ __('admin::app.common.true') }}</option>
+                    <option value="0" @if ($subscriber->is_subscribed == 0) selected @endif>{{ __('admin::app.common.false') }}</option>
                 </select>
 
                 <span class="control-error" v-if="errors.has('is_subscribed')">@{{ errors.first('is_subscribed') }}</span>

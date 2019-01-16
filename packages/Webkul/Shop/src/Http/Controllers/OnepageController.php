@@ -54,7 +54,7 @@ class OnepageController extends Controller
     */
     public function index()
     {
-        if(Cart::hasError())
+        if (Cart::hasError())
             return redirect()->route('shop.checkout.cart.index');
 
         return view($this->_config['view'])->with('cart', Cart::getCart());
@@ -68,7 +68,7 @@ class OnepageController extends Controller
     */
     public function saveAddress(CustomerAddressForm $request)
     {
-        if(Cart::hasError() || !Cart::saveCustomerAddress(request()->all()) || !$rates = Shipping::collectRates())
+        if (Cart::hasError() || !Cart::saveCustomerAddress(request()->all()) || !$rates = Shipping::collectRates())
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         Cart::collectTotals();
@@ -85,7 +85,7 @@ class OnepageController extends Controller
     {
         $shippingMethod = request()->get('shipping_method');
 
-        if(Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
+        if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         Cart::collectTotals();
@@ -102,7 +102,7 @@ class OnepageController extends Controller
     {
         $payment = request()->get('payment');
 
-        if(Cart::hasError() || !$payment || !Cart::savePaymentMethod($payment))
+        if (Cart::hasError() || !$payment || !Cart::savePaymentMethod($payment))
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         $cart = Cart::getCart();
@@ -120,7 +120,7 @@ class OnepageController extends Controller
     */
     public function saveOrder()
     {
-        if(Cart::hasError())
+        if (Cart::hasError())
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         Cart::collectTotals();
@@ -129,7 +129,7 @@ class OnepageController extends Controller
 
         $cart = Cart::getCart();
 
-        if($redirectUrl = Payment::getRedirectUrl($cart)) {
+        if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return response()->json([
                     'success' => true,
                     'redirect_url' => $redirectUrl
@@ -154,7 +154,7 @@ class OnepageController extends Controller
     */
     public function success()
     {
-        if(!$order = session('order'))
+        if (! $order = session('order'))
             return redirect()->route('shop.checkout.cart.index');
 
         return view($this->_config['view'], compact('order'));
@@ -169,19 +169,19 @@ class OnepageController extends Controller
     {
         $cart = Cart::getCart();
 
-        if(!$cart->shipping_address) {
+        if (! $cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));
         }
 
-        if(!$cart->billing_address) {
+        if (! $cart->billing_address) {
             throw new \Exception(trans('Please check billing address.'));
         }
 
-        if(!$cart->selected_shipping_rate) {
+        if (! $cart->selected_shipping_rate) {
             throw new \Exception(trans('Please specify shipping method.'));
         }
 
-        if(!$cart->payment) {
+        if (! $cart->payment) {
             throw new \Exception(trans('Please specify payment method.'));
         }
     }

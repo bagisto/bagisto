@@ -103,7 +103,6 @@ class CustomerController extends Controller
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',
-            'phone' => 'nullable|numeric|unique:customers,phone',
             'email' => 'required|unique:customers,email',
             'date_of_birth' => 'date|before:today'
         ]);
@@ -112,7 +111,9 @@ class CustomerController extends Controller
 
         $password = bcrypt(rand(100000,10000000));
 
-        $data['password']=$password;
+        $data['password'] = $password;
+
+        $data['is_verified'] = 1;
 
         $this->customer->create($data);
 
