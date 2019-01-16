@@ -28,7 +28,15 @@
                             <td>{{ $column['wrapper']($record->{$columnIndex}) }}</td>
                         @endif
                     @else
-                        <td>{{ $record->{$columnIndex} }}</td>
+                        @if($column['type'] == 'price')
+                            @if(isset($column['currencyCode']))
+                                <td>{{ core()->formatPrice($record->{$columnIndex}, $column['currencyCode']) }}</td>
+                            @else
+                                <td>{{ core()->formatBasePrice($record->{$columnIndex}) }}</td>
+                            @endif
+                        @else
+                            <td>{{ $record->{$columnIndex} }}</td>
+                        @endif
                     @endif
                 @endforeach
 

@@ -86,13 +86,10 @@ class ProductDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'product_price',
             'label' => trans('admin::app.datagrid.price'),
-            'type' => 'number',
+            'type' => 'price',
             'sortable' => true,
             'searchable' => false,
             'width' => '100px',
-            'wrapper' => function($value) {
-                return core()->formatBasePrice($value);
-            }
         ]);
 
         $this->addColumn([

@@ -42,21 +42,22 @@ class OrderDataGrid extends DataGrid
             'searchable' => false,
             'sortable' => true,
             'width' => '100px',
-            'wrapper' => function ($value) {
-                return core()->formatBasePrice($value);
-            }
+            // 'wrapper' => function ($value) {
+            //     return core()->formatBasePrice($value);
+            // }
         ]);
 
         $this->addColumn([
             'index' => 'grand_total',
             'label' => trans('admin::app.datagrid.grand-total'),
-            'type' => 'string',
+            'type' => 'price',
+            'currencyCode' => 'JOD',
             'searchable' => false,
             'sortable' => true,
             'width' => '100px',
-            'wrapper' => function ($value) {
-                return core()->formatBasePrice($value);
-            }
+            // 'wrapper' => function ($value) {
+            //     return core()->formatBasePrice($value);
+            // }
         ]);
 
         $this->addColumn([
