@@ -91,7 +91,7 @@ class InvoiceController extends Controller
     {
         $order = $this->order->find($orderId);
 
-        if(!$order->canInvoice()) {
+        if (! $order->canInvoice()) {
             session()->flash('error', 'Order invoice creation is not allowed.');
 
             return redirect()->back();
@@ -105,13 +105,13 @@ class InvoiceController extends Controller
         
         $haveProductToInvoice = false;
         foreach ($data['invoice']['items'] as $itemId => $qty) {
-            if($qty) {
+            if ($qty) {
                 $haveProductToInvoice = true;
                 break;
             }
         }
 
-        if(!$haveProductToInvoice) {
+        if (! $haveProductToInvoice) {
             session()->flash('error', 'Invoice can not be created without products.');
 
             return redirect()->back();

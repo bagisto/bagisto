@@ -16,7 +16,7 @@
             <span class="back-icon"><a href="{{ route('customer.account.index') }}"><i class="icon icon-menu-back"></i></a></span>
             <span class="account-heading">{{ __('shop::app.customer.account.address.index.title') }}</span>
 
-            @if(!$addresses->isEmpty())
+            @if (! $addresses->isEmpty())
                 <span class="account-action">
                     <a href="{{ route('customer.address.create') }}">{{ __('shop::app.customer.account.address.index.add') }}</a>
                 </span>
@@ -29,15 +29,15 @@
         {!! view_render_event('bagisto.shop.customers.account.address.list.before', ['addresses' => $addresses]) !!}
 
         <div class="account-table-content">
-            @if($addresses->isEmpty())
+            @if ($addresses->isEmpty())
                 <div>{{ __('shop::app.customer.account.address.index.empty') }}</div>
                 <br/>
                 <a href="{{ route('customer.address.create') }}">{{ __('shop::app.customer.account.address.index.add') }}</a>
             @else
                 <div class="address-holder">
-                    @foreach($addresses as $address)
+                    @foreach ($addresses as $address)
                         <div class="address-card-1">
-                            <div class="details @if($address->default_address) mt-20 @endif">
+                            <div class="details @if ($address->default_address) mt-20 @endif">
                                 <span class="bold">{{ auth()->guard('customer')->user()->name }}</span>
                                 {{ $address->name }}</br>
                                 {{ $address->address1 }}, {{ $address->address2 ? $address->address2 . ',' : '' }}</br>
@@ -60,7 +60,7 @@
                                     </span>
                                 </div>
 
-                                @if($address->default_address)
+                                @if ($address->default_address)
                                     <span class="default-address badge badge-md badge-success">{{ __('shop::app.customer.account.address.index.default') }}</span>
                                 @else
                                     <div class="make-default mt-20">
@@ -82,8 +82,8 @@
 
 @push('scripts')
     <script>
-        function deleteAddress(message){
-            if(!confirm(message))
+        function deleteAddress(message) {
+            if (!confirm(message))
             event.preventDefault();
         }
     </script>

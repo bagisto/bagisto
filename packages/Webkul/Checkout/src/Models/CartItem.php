@@ -16,8 +16,14 @@ class CartItem extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function product() {
+    public function product()
+    {
         return $this->hasOne(Product::class, 'id', 'product_id');
+    }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class, 'id', 'cart_id');
     }
 
     /**

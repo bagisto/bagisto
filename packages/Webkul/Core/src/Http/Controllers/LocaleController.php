@@ -132,7 +132,7 @@ class LocaleController extends Controller
      */
     public function destroy($id)
     {
-        if($this->locale->count() == 1) {
+        if ($this->locale->count() == 1) {
             session()->flash('error', 'At least one locale is required.');
         } else {
             Event::fire('core.locale.delete.before', $id);

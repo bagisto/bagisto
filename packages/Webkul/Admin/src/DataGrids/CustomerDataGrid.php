@@ -2,149 +2,96 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\DataGrid;
+use DB;
 
 /**
- * Customer DataGrid
+ * CustomerDataGrid class
  *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com> @rahul-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class CustomerDataGrid
+class CustomerDataGrid extends DataGrid
 {
+    protected $itemsPerPage = 5;
 
-    /**
-     * The CustomerDataGrid implementation.
-     */
-    public function createCustomerDataGrid()
+    protected $index = 'customer_id'; //the column that needs to be treated as index column
+
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('customers')->addSelect('customers.id as customer_id', 'customers.email as customer_email', 'customer_groups.name as customer_group_name')->addSelect(DB::raw('CONCAT(customers.first_name, " ", customers.last_name) as customer_full_name'))->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id');
 
-            return DataGrid::make([
-            'name' => 'Customer',
-            'table' => 'customers as cus',
-            'select' => 'cus.id',
-            'perpage' => 10,
-            'aliased' => true, //use this with false as default and true in case of joins
-
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button', //select || button only
-                // ],
-            ],
-
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.customer.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
-                    'type' => 'Delete',
-                    'route' => 'admin.customer.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
-
-            'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'customer_groups as cg',
-                    'primaryKey' => 'cus.customer_group_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'cg.id',
-                ]
-            ],
-
-            //use aliasing on secodary columns if join is performed
-            'columns' => [
-                [
-                    'name' => 'cus.id',
-                    'alias' => 'ID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'CONCAT(first_name, " ", last_name)',
-                    'alias' => 'Name',
-                    'type' => 'string',
-                    'label' => 'Name',
-                    'sortable' => true,
-                ], [
-                    'name' => 'email',
-                    'alias' => 'Email',
-                    'type' => 'string',
-                    'label' => 'Email',
-                    'sortable' => false,
-                ], [
-                    'name' => 'cg.name',
-                    'alias' => 'CustomerGroupName',
-                    'type' => 'string',
-                    'label' => 'Group Name',
-                    'sortable' => false,
-                ],
-            ],
-
-            //don't use aliasing in case of filters
-            'filterable' => [
-                [
-                    'column' => 'cus.id',
-                    'alias' => 'ID',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'email',
-                    'alias' => 'Email',
-                    'type' => 'string',
-                    'label' => 'Email',
-                ], [
-                    'column' => 'cg.name',
-                    'alias' => 'CustomerGroupName',
-                    'type' => 'string',
-                    'label' => 'Group Name',
-                ]
-            ],
-
-            //don't use aliasing in case of searchables
-
-            'searchable' => [
-                [
-                    'column' => 'FirstName',
-                    'type' => 'string',
-                    'label' => 'First Name',
-                ], [
-                    'column' => 'email',
-                    'alias' => 'Email',
-                    'type' => 'string',
-                ],
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
-
-        ]);
-
+        $this->setQueryBuilder($queryBuilder);
     }
 
-    public function render($pagination = true)
+    public function addColumns()
     {
+        $this->addColumn([
+            'index' => 'customer_id',
+            'label' => trans('admin::app.datagrid.id'),
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
 
-        return $this->createCustomerDataGrid()->render($pagination);
+        $this->addColumn([
+            'index' => 'customer_full_name',
+            'label' => trans('admin::app.datagrid.name'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
 
+        $this->addColumn([
+            'index' => 'customer_email',
+            'label' => trans('admin::app.datagrid.email'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'customer_group_name',
+            'label' => trans('admin::app.datagrid.group'),
+            'type' => 'string',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'Edit',
+            'route' => 'admin.customer.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->addAction([
+            'type' => 'Delete',
+            'route' => 'admin.customer.delete',
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->prepareMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.products.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
+
+        // $this->prepareMassAction([
+        //     'type' => 'update',
+        //     'action' => route('admin.catalog.products.massupdate'),
+        //     'method' => 'PUT',
+        //     'options' => [
+        //         0 => true,
+        //         1 => false,
+        //     ]
+        // ]);
     }
 }

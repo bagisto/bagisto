@@ -19,7 +19,7 @@ class Payment
         foreach (Config::get('paymentmethods') as $paymentMethod) {
             $object = app($paymentMethod['class']);
 
-            if($object->isAvailable()) {
+            if ($object->isAvailable()) {
                 $paymentMethods[] = [
                     'method' => $object->getCode(),
                     'method_title' => $object->getTitle(),

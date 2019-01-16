@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Facades\Configuration;
 use Webkul\Core\Repositories\CoreConfigRepository as CoreConfig;
 use Webkul\Core\Tree;
+use Webkul\Admin\Http\Requests\ConfigurationForm;
 
 /**
  * Configuration controller
@@ -64,7 +65,7 @@ class ConfigurationController extends Controller
     {
         $tree = Tree::create();
 
-        foreach(config('core') as $item) {
+        foreach (config('core') as $item) {
             $tree->add($item);
         }
 
@@ -82,7 +83,7 @@ class ConfigurationController extends Controller
     {
         $slugs = $this->getDefaultConfigSlugs();
 
-        if(count($slugs)) {
+        if (count($slugs)) {
             return redirect()->route('admin.configuration.index', $slugs);
         }
 
@@ -98,7 +99,7 @@ class ConfigurationController extends Controller
     {
         $slugs = [];
 
-        if(!request()->route('slug')) {
+        if (! request()->route('slug')) {
             $firstItem = current($this->configTree->items);
             $secondItem = current($firstItem['children']);
 
@@ -109,7 +110,7 @@ class ConfigurationController extends Controller
                 'slug2' => end($temp)
             ];
         } else {
-            if(!request()->route('slug2')) {
+            if (! request()->route('slug2')) {
                 $secondItem = current($this->configTree->items[request()->route('slug')]['children']);
 
                 $temp = explode('.', $secondItem['key']);
@@ -127,6 +128,7 @@ class ConfigurationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \Webkul\Admin\Http\Requests\ConfigurationForm $request
      * @return \Illuminate\Http\Response
      */
     public function store()

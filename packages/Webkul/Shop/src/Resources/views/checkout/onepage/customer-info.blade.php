@@ -41,7 +41,7 @@
                 {{ __('shop::app.checkout.onepage.email') }}
             </label>
 
-            <input type="text" v-validate="'required'" class="control" id="billing[email]" name="billing[email]" v-model="address.billing.email" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"/>
+            <input type="text" v-validate="'required|email'" class="control" id="billing[email]" name="billing[email]" v-model="address.billing.email" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"/>
 
             <span class="control-error" v-if="errors.has('address-form.billing[email]')">
                 @{{ errors.first('address-form.billing[email]') }}
@@ -192,7 +192,7 @@
                 {{ __('shop::app.checkout.onepage.email') }}
             </label>
 
-            <input type="text" v-validate="'required'" class="control" id="shipping[email]" name="shipping[email]" v-model="address.shipping.email" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"/>
+            <input type="text" v-validate="'required|email'" class="control" id="shipping[email]" name="shipping[email]" v-model="address.shipping.email" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"/>
 
             <span class="control-error" v-if="errors.has('address-form.shipping[email]')">
                 @{{ errors.first('address-form.shipping[email]') }}

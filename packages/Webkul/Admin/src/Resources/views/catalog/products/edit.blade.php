@@ -18,7 +18,7 @@
 
                     <div class="control-group">
                         <select class="control" id="channel-switcher" name="channel">
-                            @foreach(core()->getAllChannels() as $channelModel)
+                            @foreach (core()->getAllChannels() as $channelModel)
 
                                 <option value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
                                     {{ $channelModel->name }}
@@ -30,7 +30,7 @@
 
                     <div class="control-group">
                         <select class="control" id="locale-switcher" name="locale">
-                            @foreach(core()->getAllLocales() as $localeModel)
+                            @foreach (core()->getAllLocales() as $localeModel)
 
                                 <option value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                     {{ $localeModel->name }}
@@ -54,19 +54,19 @@
                 <input name="_method" type="hidden" value="PUT">
 
                 @foreach ($product->attribute_family->attribute_groups as $attributeGroup)
-                    @if(count($attributeGroup->custom_attributes))
+                    @if (count($attributeGroup->custom_attributes))
                         <accordian :title="'{{ __($attributeGroup->name) }}'" :active="true">
                             <div slot="body">
 
-                                @foreach($attributeGroup->custom_attributes as $attribute)
+                                @foreach ($attributeGroup->custom_attributes as $attribute)
 
-                                    @if(!$product->super_attributes->contains($attribute))
+                                    @if (! $product->super_attributes->contains($attribute))
 
                                         <?php
                                             $validations = [];
                                             $disabled = false;
-                                            if($product->type == 'configurable' && in_array($attribute->code, ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'])) {
-                                                if(!$attribute->is_required)
+                                            if ($product->type == 'configurable' && in_array($attribute->code, ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'])) {
+                                                if (! $attribute->is_required)
                                                     continue;
 
                                                 $disabled = true;
@@ -85,7 +85,7 @@
                                             $validations = implode('|', array_filter($validations));
                                         ?>
 
-                                        @if(view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
+                                        @if (view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
 
                                             <div class="control-group {{ $attribute->type }}" :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']">
                                                 <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
@@ -97,16 +97,16 @@
 
                                                     <?php
                                                         $channel_locale = [];
-                                                        if($attribute->value_per_channel) {
+                                                        if ($attribute->value_per_channel) {
                                                             array_push($channel_locale, $channel);
                                                         }
 
-                                                        if($attribute->value_per_locale) {
+                                                        if ($attribute->value_per_locale) {
                                                             array_push($channel_locale, $locale);
                                                         }
                                                     ?>
 
-                                                    @if(count($channel_locale))
+                                                    @if (count($channel_locale))
                                                         <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
                                                     @endif
                                                 </label>

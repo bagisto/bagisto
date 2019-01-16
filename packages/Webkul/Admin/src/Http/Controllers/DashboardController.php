@@ -114,7 +114,7 @@ class DashboardController extends Controller
 
     public function getPercentageChange($previous, $current)
     {
-        if(!$previous)
+        if (! $previous)
             return $current ? 100 : 0;
 
         return ($current - $previous) / $previous * 100;
@@ -291,7 +291,7 @@ class DashboardController extends Controller
             ? Carbon::createFromTimeString(request()->get('end') . " 23:59:59")
             : Carbon::now();
 
-        if($this->endDate > Carbon::now())
+        if ($this->endDate > Carbon::now())
             $this->endDate = Carbon::now();
 
         $this->lastStartDate = clone $this->startDate;

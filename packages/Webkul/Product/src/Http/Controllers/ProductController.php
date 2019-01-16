@@ -11,6 +11,7 @@ use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
+use Webkul\Admin\DataGrids\TestDataGrid;
 
 /**
  * Product controller
@@ -110,7 +111,7 @@ class ProductController extends Controller
     {
         $families = $this->attributeFamily->all();
 
-        if($familyId = request()->get('family')) {
+        if ($familyId = request()->get('family')) {
             $configurableFamily = $this->attributeFamily->find($familyId);
         }
 
@@ -124,11 +125,11 @@ class ProductController extends Controller
      */
     public function store()
     {
-        if(!request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
+        if (! request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
             return redirect(url()->current() . '?family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
         }
 
-        if(request()->input('type') == 'configurable' && (!request()->has('super_attributes') || !count(request()->get('super_attributes')))) {
+        if (request()->input('type') == 'configurable' && (! request()->has('super_attributes') || ! count(request()->get('super_attributes')))) {
             session()->flash('error', 'Please select atleast one configurable attribute.');
 
             return back();
@@ -222,7 +223,11 @@ class ProductController extends Controller
     {
         $data = request()->all();
 
-        if (!isset($data['massaction-type'])) {
+        if (! isset($data['massaction-type'])) {
+            return redirect()->back();
+        }
+
+        if (! $data['massaction-type'] == 'update') {
             return redirect()->back();
         }
 

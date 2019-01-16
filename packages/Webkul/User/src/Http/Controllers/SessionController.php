@@ -64,7 +64,7 @@ class SessionController extends Controller
 
         $remember = request('remember');
 
-        if (!auth()->guard('admin')->attempt(request(['email', 'password']), $remember)) {
+        if (! auth()->guard('admin')->attempt(request(['email', 'password']), $remember)) {
             session()->flash('error', 'Please check your credentials and try again.');
 
             return back();

@@ -21,7 +21,7 @@
 
             <div class="category-block">
                 <div class="hero-image mb-35">
-                    @if(!is_null($category->image))
+                    @if (! is_null($category->image))
 
                         <img class="logo" src="{{ $category->image_url }}" />
 
@@ -86,7 +86,7 @@
 
             layerFilter.style.display ="none";
 
-            if(sort && filter) {
+            if (sort && filter) {
                 sort.addEventListener("click", sortFilter);
                 filter.addEventListener("click", sortFilter);
             }
@@ -94,7 +94,7 @@
             function sortFilter() {
                 var className = document.getElementById(this.id).className;
 
-                if(className === 'icon sort-icon') {
+                if (className === 'icon sort-icon') {
                     sort.classList.remove("sort-icon");
                     sort.classList.add("icon-menu-close-adj");
 
@@ -104,7 +104,7 @@
                     sortLimit.style.display = "flex";
                     sortLimit.style.justifyContent = "space-between";
                     layerFilter.style.display ="none";
-                } else if(className === 'icon filter-icon') {
+                } else if (className === 'icon filter-icon') {
                     filter.classList.remove("filter-icon");
                     filter.classList.add("icon-menu-close-adj");
 

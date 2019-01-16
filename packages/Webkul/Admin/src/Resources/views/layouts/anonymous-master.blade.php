@@ -94,11 +94,11 @@
 
         <script type="text/javascript">
             window.flashMessages = [];
-            @if($success = session('success'))
+            @if ($success = session('success'))
                 window.flashMessages = [{'type': 'alert-success', 'message': "{{ $success }}" }];
-            @elseif($warning = session('warning'))
+            @elseif ($warning = session('warning'))
                 window.flashMessages = [{'type': 'alert-warning', 'message': "{{ $warning }}" }];
-            @elseif($error = session('error'))
+            @elseif ($error = session('error'))
                 window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }];
             @endif
 

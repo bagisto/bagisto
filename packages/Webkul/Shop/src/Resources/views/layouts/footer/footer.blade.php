@@ -2,12 +2,12 @@
     <div class="footer-content">
         <div class="footer-list-container">
 
-            @if(count($categories))
+            @if (count($categories))
                 <div class="list-container">
                     <span class="list-heading">Categories</span>
 
                     <ul class="list-group">
-                        @foreach($categories as $key => $category)
+                        @foreach ($categories as $key => $category)
                             <li>
                                 <a href="{{ route('shop.categories.index', $category->slug) }}">{{ $category->name }}</a>
                             </li>

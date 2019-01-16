@@ -36,9 +36,6 @@ return [
                         'title' => 'Pending',
                         'value' => 'pending'
                     ], [
-                        'title' => 'Approved',
-                        'value' => 'Approved'
-                    ], [
                         'title' => 'Pending Payment',
                         'value' => 'pending_payment'
                     ]
@@ -86,9 +83,6 @@ return [
                     [
                         'title' => 'Pending',
                         'value' => 'pending'
-                    ], [
-                        'title' => 'Approved',
-                        'value' => 'Approved'
                     ], [
                         'title' => 'Pending Payment',
                         'value' => 'pending_payment'
@@ -138,15 +132,18 @@ return [
                         'title' => 'Pending',
                         'value' => 'pending'
                     ], [
-                        'title' => 'Approved',
-                        'value' => 'Approved'
-                    ], [
                         'title' => 'Pending Payment',
                         'value' => 'pending_payment'
                     ]
                 ],
                 'validation' => 'required'
-            ], [
+            ],  [
+                'name' => 'business_account',
+                'title' => 'Business Account',
+                'type' => 'select',
+                'type' => 'text',
+                'validation' => 'required'
+            ],  [
                 'name' => 'active',
                 'title' => 'Status',
                 'type' => 'select',
@@ -159,12 +156,6 @@ return [
                         'value' => false
                     ]
                 ],
-                'validation' => 'required'
-            ], [
-                'name' => 'business_account',
-                'title' => 'Business Account',
-                'type' => 'select',
-                'type' => 'text',
                 'validation' => 'required'
             ]
         ]

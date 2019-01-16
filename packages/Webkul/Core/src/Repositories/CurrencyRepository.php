@@ -23,10 +23,10 @@ class CurrencyRepository extends Repository
     }
 
     public function delete($id) {
-        if($this->model->count() == 1) {
+        if ($this->model->count() == 1) {
             return false;
         } else {
-            if($this->model->destroy($id)) {
+            if ($this->model->destroy($id)) {
                 return true;
             } else {
                 return false;

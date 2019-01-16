@@ -2,182 +2,112 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
-
+use Webkul\Ui\DataGrid\DataGrid;
+use DB;
 
 /**
- * CustomerReview DataGrid
+ * CustomerReviewDataGrid Class
  *
- * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com> @rahul-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class CustomerReviewDataGrid
+class CustomerReviewDataGrid extends DataGrid
 {
+    protected $index = 'product_review_id'; //the column that needs to be treated as index column
 
-    /**
-     * The ProductReviewDataGrid implementation for Product Reviews
-     */
-    public function createCustomerReviewDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id as product_review_id', 'pr.title as product_review_title', 'pr.comment as product_review_comment', 'pg.name as product_review_name', 'pr.status as product_review_status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');
 
-            return DataGrid::make([
-            'name' => 'Review',
-            'table' => 'product_reviews as pr',
-            'select' => 'pr.id',
-            'perpage' => 10,
-            'aliased' => true, //use this with false as default and true in case of joins
-
-            'massoperations' =>[
-                0 => [
-                    'type' => 'delete', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
-                    'action' => route('admin.customer.review.massdelete'),
-                    'method' => 'DELETE'
-                ], 1 => [
-                    'type' => 'update', //all lower case will be shifted in the configuration file for better control and increased fault tolerance
-                    'action' => route('admin.customer.review.massupdate'),
-                    'method' => 'PUT',
-                    'options' => [
-                        0 => 'Disapprove',
-                        1 => 'Approve',
-                    ]
-                ]
-            ],
-
-            'actions' => [
-                [
-                    'type' => 'Edit',
-                    'route' => 'admin.customer.review.edit',
-                    'confirm_text' => 'Do you really want to edit this record?',
-                    'icon' => 'icon pencil-lg-icon',
-                ], [
-                    'type' => 'Delete',
-                    'route' => 'admin.customer.review.delete',
-                    'confirm_text' => 'Do you really want to delete this record?',
-                    'icon' => 'icon trash-icon',
-                ],
-            ],
-
-            'join' => [
-                [
-                    'join' => 'leftjoin',
-                    'table' => 'products_grid as pt',
-                    'primaryKey' => 'pr.product_id',
-                    'condition' => '=',
-                    'secondaryKey' => 'pt.product_id',
-                ]
-            ],
-
-            //use aliasing on secodary columns if join is performed
-
-            'columns' => [
-                [
-                    'name' => 'pr.id',
-                    'alias' => 'reviewId',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true,
-                ], [
-                    'name' => 'pr.title',
-                    'alias' => 'titleName',
-                    'type' => 'string',
-                    'label' => 'Title',
-                    'sortable' => true,
-                ], [
-                    'name' => 'pr.comment',
-                    'alias' => 'productComment',
-                    'type' => 'string',
-                    'label' => 'Comment',
-                    'sortable' => true,
-                ], [
-                    'name' => 'pt.name',
-                    'alias' => 'productName',
-                    'type' => 'string',
-                    'label' => 'Product Name',
-                    'sortable' => true,
-                ], [
-                    'name' => 'pr.status',
-                    'alias' => 'reviewStatus',
-                    'type' => 'number',
-                    'label' => 'Status',
-                    'sortable' => true,
-                    'closure' => true,
-                    'wrapper' => function ($value) {
-                        if($value == 'approved')
-                            return '<span class="badge badge-md badge-success">Approved</span>';
-                        else if($value == "pending")
-                            return '<span class="badge badge-md badge-warning">Pending</span>';
-                    },
-                ],
-            ],
-
-            //don't use aliasing in case of filters
-            'filterable' => [
-                [
-                    'column' => 'pr.id',
-                    'alias' => 'reviewId',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'pr.title',
-                    'alias' => 'titleName',
-                    'type' => 'string',
-                    'label' => 'Title',
-                ], [
-                    'column' => 'pr.comment',
-                    'alias' => 'productComment',
-                    'type' => 'string',
-                    'label' => 'Comment',
-                ], [
-                    'column' => 'pt.name',
-                    'alias' => 'productName',
-                    'type' => 'string',
-                    'label' => 'Product Name',
-                ], [
-                    'column' => 'pr.status',
-                    'alias' => 'reviewStatus',
-                    'type' => 'string',
-                    'label' => 'Status',
-                ],
-            ],
-
-            //don't use aliasing in case of searchables
-            'searchable' => [
-                [
-                    'column' => 'title',
-                    'type' => 'string',
-                    'label' => 'Title',
-                ], [
-                    'column' => 'rating',
-                    'type' => 'number',
-                    'label' => 'Rating',
-                ], [
-                    'column' => 'pt.name',
-                    'alias' => 'productName',
-                    'type' => 'string',
-                ],
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
-
-        ]);
-
+        $this->setQueryBuilder($queryBuilder);
     }
 
-    public function render()
+    public function addColumns()
     {
-        return $this->createCustomerReviewDataGrid()->render();
+        $this->addColumn([
+            'index' => 'product_review_id',
+            'label' => trans('admin::app.datagrid.id'),
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'product_review_title',
+            'label' => trans('admin::app.datagrid.title'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'product_review_comment',
+            'label' => trans('admin::app.datagrid.comment'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'product_review_name',
+            'label' => trans('admin::app.datagrid.product-name'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'product_review_status',
+            'label' => trans('admin::app.datagrid.status'),
+            'type' => 'boolean',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px',
+            'closure' => true,
+            'wrapper' => function ($value) {
+                if ($value == 'approved')
+                    return '<span class="badge badge-md badge-success">Approved</span>';
+                else if ($value == "pending")
+                    return '<span class="badge badge-md badge-warning">Pending</span>';
+            },
+        ]);
+    }
+
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'Edit',
+            'route' => 'admin.customer.review.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->addAction([
+            'type' => 'Delete',
+            'route' => 'admin.customer.review.delete',
+            'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        $this->addMassAction([
+            'type' => 'delete',
+            'label' => 'Delete',
+            'action' => route('admin.customer.review.massdelete'),
+            'method' => 'DELETE'
+        ]);
+
+        $this->addMassAction([
+            'type' => 'update',
+            'label' => 'Update Status',
+            'action' => route('admin.customer.review.massupdate'),
+            'method' => 'PUT',
+            'options' => [
+                'Disapprove' => 0,
+                'Approve' => 1
+            ]
+        ]);
     }
 }

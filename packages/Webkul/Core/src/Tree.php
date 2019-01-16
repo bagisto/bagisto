@@ -59,7 +59,7 @@ class Tree {
 	public static function create($callback = null) {
 		$tree = new Tree();
 
-		if($callback) {
+		if ($callback) {
 			$callback($tree);
 		}
 
@@ -82,6 +82,7 @@ class Tree {
 				$this->currentKey = $item['key'];
 			}
 		} else if ($type == 'acl') {
+			$item['name'] = trans($item['name']);
 			$this->roles[$item['route']] = $item['key'];
 		}
 

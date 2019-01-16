@@ -41,7 +41,7 @@ class Column extends AbstractFillable
      *           'data-attr' => 'whatever you want',
      *           'onlclick' => "window.alert('alert from datagrid column')"
      *       ],
-     *       wrapper => function($value){
+     *       wrapper => function($value) {
      *          return '<a href="'.$value.'">Nikhil</a>';
      *       },
      * ]
@@ -111,7 +111,7 @@ class Column extends AbstractFillable
             return trim(end($as));
         }
 
-        if (!$tillDot) {
+        if (! $tillDot) {
             return $this->name;
         }
 
@@ -132,7 +132,7 @@ class Column extends AbstractFillable
         $query = ['sort' => $this->correct(false)];
 
         if (($sort = $this->request->offsetGet('sort')) && $sort == $this->correct(false)) {
-            if (!$order = $this->request->offsetGet('order')) {
+            if (! $order = $this->request->offsetGet('order')) {
                 $query['order'] = self::ORDER_DESC;
             } else {
                 $query['order'] = ($order == self::ORDER_DESC ? self::ORDER_ASC : self::ORDER_DESC);
@@ -159,7 +159,6 @@ class Column extends AbstractFillable
 
     public function render($obj)
     {
-
         if (property_exists($obj, ($this->aliasing = $this->alias))) {
             $this->value = $obj->{$this->aliasing};
             $this->wrap($obj);

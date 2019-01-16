@@ -31,13 +31,13 @@
                         <label>Account</label>
                         <ul>
                             <li>
-                                <a href="{{ route('shop.home.index') }}" target="_blank">Visit Shop</a>
+                                <a href="{{ route('shop.home.index') }}" target="_blank">{{ trans('admin::app.layouts.visit-shop') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.account.edit') }}">My Account</a>
+                                <a href="{{ route('admin.account.edit') }}">{{ trans('admin::app.layouts.my-account') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.session.destroy') }}">Logout</a>
+                                <a href="{{ route('admin.session.destroy') }}">{{ trans('admin::app.layouts.logout') }}</a>
                             </li>
                         </ul>
                     </div>

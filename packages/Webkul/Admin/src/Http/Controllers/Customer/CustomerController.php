@@ -103,7 +103,6 @@ class CustomerController extends Controller
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',
-            'phone' => 'nullable|numeric|unique:customers,phone',
             'email' => 'required|unique:customers,email',
             'date_of_birth' => 'date|before:today'
         ]);
@@ -112,11 +111,13 @@ class CustomerController extends Controller
 
         $password = bcrypt(rand(100000,10000000));
 
-        $data['password']=$password;
+        $data['password'] = $password;
+
+        $data['is_verified'] = 1;
 
         $this->customer->create($data);
 
-        session()->flash('success', 'Customer created successfully.');
+        session()->flash('success', trans('admin::app.customers.customers.created'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -159,7 +160,7 @@ class CustomerController extends Controller
 
         $this->customer->update(request()->all(),$id);
 
-        session()->flash('success', 'Customer updated successfully.');
+        session()->flash('success', trans('admin::app.customers.customers.updated'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -174,7 +175,7 @@ class CustomerController extends Controller
     {
         $this->customer->delete($id);
 
-        session()->flash('success', 'Customer deleted successfully.');
+        session()->flash('success', trans('admin::app.customers.customers.deleted'));
 
         return redirect()->back();
     }

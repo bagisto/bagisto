@@ -2,141 +2,78 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Illuminate\View\View;
-use Webkul\Ui\DataGrid\Facades\DataGrid;
+use Webkul\Ui\DataGrid\DataGrid;
+use DB;
 
 /**
- * OrderInvoicesDataGrid
+ * OrderInvoicesDataGrid Class
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class OrderInvoicesDataGrid
+class OrderInvoicesDataGrid extends DataGrid
 {
+    protected $index = 'id';
 
-    /**
-     * The Order invoices Data Grid implementation for invoices of orders
-     */
-    public function createOrderInvoicesDataGrid()
+    public function prepareQueryBuilder()
     {
+        $queryBuilder = DB::table('invoices')->select('id', 'order_id', 'state', 'grand_total', 'created_at');
 
-        return DataGrid::make([
-            'name' => 'invoices',
-            'table' => 'invoices as inv',
-            'select' => 'inv.id',
-            'perpage' => 10,
-            'aliased' => false,
+        $this->setQueryBuilder($queryBuilder);
+    }
 
-            'massoperations' =>[
-                // [
-                //     'route' => route('admin.datagrid.delete'),
-                //     'method' => 'DELETE',
-                //     'label' => 'Delete',
-                //     'type' => 'button',
-                // ],
-            ],
+    public function addColumns()
+    {
+        $this->addColumn([
+            'index' => 'id',
+            'label' => trans('admin::app.datagrid.id'),
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '40px'
+        ]);
 
-            'actions' => [
-                [
-                    'type' => 'View',
-                    'route' => 'admin.sales.invoices.view',
-                    // 'confirm_text' => 'Do you really want to view this record?',
-                    'icon' => 'icon eye-icon',
-                    'icon-alt' => 'View'
-                ],
-            ],
+        $this->addColumn([
+            'index' => 'order_id',
+            'label' => trans('admin::app.datagrid.order-id'),
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
 
-            'join' => [
-                // [
-                //     'join' => 'leftjoin',
-                //     'table' => 'orders as ors',
-                //     'primaryKey' => 'inv.order_id',
-                //     'condition' => '=',
-                //     'secondaryKey' => 'ors.id',
-                // ]
-            ],
+        $this->addColumn([
+            'index' => 'grand_total',
+            'label' => trans('admin::app.datagrid.grand-total'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px',
+        ]);
 
-            //use aliasing on secodary columns if join is performed
-
-            'columns' => [
-                [
-                    'name' => 'inv.id',
-                    'alias' => 'invid',
-                    'type' => 'number',
-                    'label' => 'ID',
-                    'sortable' => true
-                ], [
-                    'name' => 'inv.order_id',
-                    'alias' => 'invorderid',
-                    'type' => 'number',
-                    'label' => 'Order ID',
-                    'sortable' => true
-                ], [
-                    'name' => 'inv.state',
-                    'alias' => 'invstate',
-                    'type' => 'string',
-                    'label' => 'State',
-                    'sortable' => true
-                ], [
-                    'name' => 'inv.grand_total',
-                    'alias' => 'invgrandtotal',
-                    'type' => 'number',
-                    'label' => 'Amount',
-                    'sortable' => true,
-                    'wrapper' => function ($value) {
-                        return core()->formatBasePrice($value);
-                    },
-                ], [
-                    'name' => 'inv.created_at',
-                    'alias' => 'invcreated_at',
-                    'type' => 'datetime',
-                    'label' => 'Invoice Date',
-                    'sortable' => true
-                ]
-            ],
-
-            'filterable' => [
-                [
-                    'column' => 'inv.id',
-                    'alias' => 'invid',
-                    'type' => 'number',
-                    'label' => 'ID',
-                ], [
-                    'column' => 'inv.created_at',
-                    'alias' => 'invcreated_at',
-                    'type' => 'datetime',
-                    'label' => 'Invoice Date',
-                ]
-            ],
-            //don't use aliasing in case of searchables
-
-            'searchable' => [
-                // [
-                //     'column' => 'or.id',
-                //     'alias' => 'orderid',
-                //     'type' => 'number',
-                //     'label' => 'ID',
-                // ]
-            ],
-
-            //list of viable operators that will be used
-            'operators' => [
-                'eq' => "=",
-                'lt' => "<",
-                'gt' => ">",
-                'lte' => "<=",
-                'gte' => ">=",
-                'neqs' => "<>",
-                'neqn' => "!=",
-                'like' => "like",
-                'nlike' => "not like",
-            ],
-            // 'css' => []
+        $this->addColumn([
+            'index' => 'created_at',
+            'label' => trans('admin::app.datagrid.invoice-date'),
+            'type' => 'datetime',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px',
         ]);
     }
 
-    public function render($pagination = true)
-    {
-        return $this->createOrderInvoicesDataGrid()->render($pagination);
+    public function prepareActions() {
+        $this->addAction([
+            'type' => 'View',
+            'route' => 'admin.sales.invoices.view',
+            'icon' => 'icon eye-icon'
+        ]);
+    }
+
+    public function prepareMassActions() {
+        // $this->addMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.attributes.massdelete'),
+        //     'method' => 'DELETE'
+        // ]);
     }
 }

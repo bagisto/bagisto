@@ -29,14 +29,14 @@ class Locale
     */
     public function handle($request, Closure $next)
     {
-        if($locale = $request->get('locale')) {
-            if($this->locale->findOneByField('code', $locale)) {
+        if ($locale = $request->get('locale')) {
+            if ($this->locale->findOneByField('code', $locale)) {
                 app()->setLocale($locale);
 
                 session()->put('locale', $locale);
             }
         } else {
-            if($locale = session()->get('locale')) {
+            if ($locale = session()->get('locale')) {
                 app()->setLocale($locale);
             }
         }

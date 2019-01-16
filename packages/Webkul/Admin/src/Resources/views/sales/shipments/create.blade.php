@@ -121,7 +121,7 @@
                                 </div>
                             </div>
 
-                            @if($order->shipping_address)
+                            @if ($order->shipping_address)
                                 <div class="sale-section">
                                     <div class="secton-title">
                                         <span>{{ __('admin::app.sales.orders.shipping-address') }}</span>
@@ -299,10 +299,23 @@
 
                                                     <td>
                                                         <?php 
-                                                            if($item->type == 'configurable') {
+                                                            if ($item->type == 'configurable') {
                                                                 $sourceQty = $item->child->product->inventory_source_qty($inventorySource);
                                                             } else {
                                                                 $sourceQty = $item->product->inventory_source_qty($inventorySource);  
+                                                            }
+                                                        ?>
+
+                                                        <?php 
+                                                            $sourceQty = 0;
+
+                                                            $product = $item->type == 'configurable' ? $item->child->product : $item->product;
+
+                                                            foreach ($product->inventories as $inventory) {
+                                                                if ($inventory->inventory_source_id == $inventorySource->id && !$inventory->vendor_id) {
+                                                                    $sourceQty = $inventory->qty;
+                                                                    break;
+                                                                }
                                                             }
                                                         ?>
 

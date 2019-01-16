@@ -74,7 +74,7 @@ class ResetPasswordController extends Controller
             }
         );
 
-        if($response == Password::PASSWORD_RESET) {
+        if ($response == Password::PASSWORD_RESET) {
             return redirect()->route($this->_config['redirect']);
         }
 

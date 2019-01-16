@@ -63,14 +63,14 @@ class OrderRepository extends Repository
         try {
             Event::fire('checkout.order.save.before', $data);
 
-            if(isset($data['customer']) && $data['customer']) {
+            if (isset($data['customer']) && $data['customer']) {
                 $data['customer_id'] = $data['customer']->id;
                 $data['customer_type'] = get_class($data['customer']);
             } else {
                 unset($data['customer']);
             }
 
-            if(isset($data['channel']) && $data['channel']) {
+            if (isset($data['channel']) && $data['channel']) {
                 $data['channel_id'] = $data['channel']->id;
                 $data['channel_type'] = get_class($data['channel']);
                 $data['channel_name'] = $data['channel']->name;
@@ -88,10 +88,10 @@ class OrderRepository extends Repository
 
             $order->addresses()->create($data['billing_address']);
 
-            foreach($data['items'] as $item) {
+            foreach ($data['items'] as $item) {
                 $orderItem = $this->orderItem->create(array_merge($item, ['order_id' => $order->id]));
 
-                if(isset($item['child']) && $item['child']) {
+                if (isset($item['child']) && $item['child']) {
                     $orderItem->child = $this->orderItem->create(array_merge($item['child'], ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
                 }
 
@@ -118,11 +118,11 @@ class OrderRepository extends Repository
     {
         $order = $this->findOrFail($orderId);
 
-        if(!$order->canCancel())
+        if (! $order->canCancel())
             return false;
 
-        foreach($order->items as $item) {
-            if($item->qty_to_cancel) {
+        foreach ($order->items as $item) {
+            if ($item->qty_to_cancel) {
                 $this->orderItem->returnQtyToProductInventory($item);
 
                 $item->qty_canceled += $item->qty_to_cancel;
@@ -160,7 +160,7 @@ class OrderRepository extends Repository
         $totalQtyRefunded = 0;
         $totalQtyCanceled = 0;
 
-        foreach($order->items  as $item) {
+        foreach ($order->items  as $item) {
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyInvoiced += $item->qty_invoiced;
             $totalQtyShipped += $item->qty_shipped;
@@ -168,7 +168,7 @@ class OrderRepository extends Repository
             $totalQtyCanceled += $item->qty_canceled;
         }
 
-        if($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled) && 
+        if ($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled) && 
             $totalQtyOrdered == $totalQtyInvoiced + $totalQtyRefunded + $totalQtyCanceled &&
             $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled)
             return true;
@@ -185,12 +185,12 @@ class OrderRepository extends Repository
         $totalQtyOrdered = 0;
         $totalQtyCanceled = 0;
 
-        foreach($order->items as $item) {
+        foreach ($order->items as $item) {
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyCanceled += $item->qty_canceled;
         }
 
-        if($totalQtyOrdered == $totalQtyCanceled)
+        if ($totalQtyOrdered == $totalQtyCanceled)
             return true;
 
         return false;
@@ -206,13 +206,13 @@ class OrderRepository extends Repository
         $totalQtyRefunded = 0;
         $totalQtyCanceled = 0;
 
-        foreach($order->items  as $item) {
+        foreach ($order->items  as $item) {
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyRefunded += $item->qty_refunded;
             $totalQtyCanceled += $item->qty_canceled;
         }
 
-        if($totalQtyOrdered == $totalQtyRefunded + $totalQtyCanceled)
+        if ($totalQtyOrdered == $totalQtyRefunded + $totalQtyCanceled)
             return true;
 
         return false;
@@ -226,12 +226,12 @@ class OrderRepository extends Repository
     {
         $status = 'processing';
 
-        if($this->isInCompletedState($order))
+        if ($this->isInCompletedState($order))
             $status = 'completed';
 
-        if($this->isInCanceledState($order))
+        if ($this->isInCanceledState($order))
             $status = 'canceled';
-        elseif($this->isInClosedState($order))
+        else if ($this->isInClosedState($order))
             $status = 'closed';
 
         $order->status = $status;
@@ -244,32 +244,23 @@ class OrderRepository extends Repository
      */
     public function collectTotals($order)
     {
-        $subTotalInvoiced = $baseSubTotalInvoiced = 0;
-        $shippingInvoiced = $baseShippingInvoiced = 0;
-        $taxInvoiced = $baseTaxInvoiced = 0;
+        $order->sub_total_invoiced = $order->base_sub_total_invoiced = 0;
+        $order->shipping_invoiced = $order->base_shipping_invoiced = 0;
+        $order->tax_amount_invoiced = $order->base_tax_amount_invoiced = 0;
 
-        foreach($order->invoices as $invoice) {
-            $subTotalInvoiced += $invoice->sub_total;
-            $baseSubTotalInvoiced += $invoice->base_sub_total;
+        foreach ($order->invoices as $invoice) {
+            $order->sub_total_invoiced += $invoice->sub_total;
+            $order->base_sub_total_invoiced += $invoice->base_sub_total;
 
-            $shippingInvoiced += $invoice->shipping_amount;
-            $baseShippingInvoiced += $invoice->base_shipping_amount;
+            $order->shipping_invoiced += $invoice->shipping_amount;
+            $order->base_shipping_invoiced += $invoice->base_shipping_amount;
 
-            $taxInvoiced += $invoice->tax_amount;
-            $baseTaxInvoiced += $invoice->base_tax_amount;
+            $order->tax_amount_invoiced += $invoice->tax_amount;
+            $order->base_tax_amount_invoiced += $invoice->base_tax_amount;
         }
 
-        $order->sub_total_invoiced = $subTotalInvoiced;
-        $order->base_sub_total_invoiced = $baseSubTotalInvoiced;
-
-        $order->shipping_invoiced = $shippingInvoiced;
-        $order->base_shipping_invoiced = $baseShippingInvoiced;
-
-        $order->tax_amount_invoiced = $taxInvoiced;
-        $order->base_tax_amount_invoiced = $baseTaxInvoiced;
-
-        $order->grand_total_invoiced = $subTotalInvoiced + $shippingInvoiced + $taxInvoiced;
-        $order->base_grand_total_invoiced = $baseSubTotalInvoiced + $shippingInvoiced + $baseTaxInvoiced;
+        $order->grand_total_invoiced = $order->sub_total_invoiced + $order->shipping_invoiced + $order->tax_amount_invoiced;
+        $order->base_grand_total_invoiced = $order->base_sub_total_invoiced + $order->base_shipping_invoiced + $order->base_tax_amount_invoiced;
 
         $order->save();
 

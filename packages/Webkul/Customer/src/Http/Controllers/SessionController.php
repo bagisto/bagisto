@@ -38,7 +38,7 @@ class SessionController extends Controller
 
     public function show()
     {
-        if(auth()->guard('customer')->check()) {
+        if (auth()->guard('customer')->check()) {
             return redirect()->route('customer.session.index');
         } else {
             return view($this->_config['view']);
@@ -52,13 +52,13 @@ class SessionController extends Controller
             'password' => 'required'
         ]);
 
-        if (!auth()->guard('customer')->attempt(request(['email', 'password']))) {
+        if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
             session()->flash('error', trans('shop::app.customer.login-form.invalid-creds'));
 
             return redirect()->back();
         }
 
-        if(auth()->guard('customer')->user()->is_verified == 0) {
+        if (auth()->guard('customer')->user()->is_verified == 0) {
             session()->flash('info', trans('shop::app.customer.login-form.verify-first'));
 
             Cookie::queue(Cookie::make('enable-resend', 'true', 1));

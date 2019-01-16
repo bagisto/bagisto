@@ -1,6 +1,15 @@
 <?php
 
 return [
+    'layouts' => [
+        'my-account' => 'My Account',
+        'profile' => 'Profile',
+        'address' => 'Address',
+        'reviews' => 'Reviews',
+        'wishlist' => 'Wishlist',
+        'orders' => 'Orders',
+    ],
+    
     'common' => [
         'error' => 'Something went wrong, please try again later.'
     ],
@@ -292,6 +301,7 @@ return [
         'description' => 'Description',
         'specification' => 'Specification',
         'total-reviews' => ':total Reviews',
+        'total-rating' => ':total_rating Ratings & :total_reviews Reviews',
         'by' => 'By :name',
         'up-sell-title' => 'We found other products you might like!',
         'reviews-title' => 'Ratings & Reviews',

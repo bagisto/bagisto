@@ -28,7 +28,7 @@ class AddressController extends Controller
 
         $this->customerAddress = $customerAddress;
 
-        if(auth()->guard('customer')->check()) {
+        if (auth()->guard('customer')->check()) {
             $this->customer = auth()->guard('customer')->user();
         } else {
             $this->customer['message'] = 'unauthorized';
@@ -46,7 +46,7 @@ class AddressController extends Controller
      * @return response JSON
      */
     public function get() {
-        if($this->customer == false) {
+        if ($this->customer == false) {
             return response()->json($this->customer, 401);
         } else {
             $addresses = $this->customer->addresses;
@@ -56,7 +56,7 @@ class AddressController extends Controller
     }
 
     public function getDefault() {
-        if($this->customer == false) {
+        if ($this->customer == false) {
             return response()->json($this->customer, 401);
         } else {
             $defaultAddress = $this->customer->default_address;
@@ -89,13 +89,13 @@ class AddressController extends Controller
         $cust_id['customer_id'] = $this->customer->id;
         $data = array_merge($cust_id, $data);
 
-        if($this->customer->addresses->count() == 0) {
+        if ($this->customer->addresses->count() == 0) {
             $data['default_address'] = 1;
         }
 
         $result = $this->customerAddress->create($data);
 
-        if($result) {
+        if ($result) {
             return response()->json(true, 200);
         } else {
             return response()->json(false, 200);
@@ -111,11 +111,11 @@ class AddressController extends Controller
     public function makeDefault($id) {
         $defaultAddress = $this->customer->default_address;
 
-        if($defaultAddress != null && $defaultAddress->count() > 0) {
+        if ($defaultAddress != null && $defaultAddress->count() > 0) {
             $defaultAddress->update(['default_address' => 0]);
         }
 
-        if($this->customerAddress->find($id)->default_address == 1) {
+        if ($this->customerAddress->find($id)->default_address == 1) {
             return response()->json(false, 200);
         }
 

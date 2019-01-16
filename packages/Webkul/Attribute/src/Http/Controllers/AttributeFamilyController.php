@@ -168,8 +168,8 @@ class AttributeFamilyController extends Controller
                 }
             }
 
-            if (!$suppressFlash)
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success'));
+            if (! $suppressFlash)
+                session()->flash('success', ('admin::app.datagrid.mass-ops.delete-success'));
             else
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Attribute Family']));
 

@@ -78,7 +78,7 @@ class OrderController extends Controller
     {
         $result = $this->order->cancel($id);
         
-        if($result) {
+        if ($result) {
             session()->flash('success', trans('Order canceled successfully.'));
         } else {
             session()->flash('error', trans('Order can not be canceled.'));

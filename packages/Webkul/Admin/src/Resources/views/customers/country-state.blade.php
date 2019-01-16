@@ -65,9 +65,9 @@
 
             methods: {
                 haveStates() {
-                    if(this.countryStates[this.country] && this.countryStates[this.country].length)
+                    if (this.countryStates[this.country] && this.countryStates[this.country].length)
                         return true;
-                    
+
                     return false;
                 },
             }

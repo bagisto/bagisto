@@ -131,7 +131,7 @@ class Themes
         $paths = $theme->getViewPaths();
 
         foreach ($this->laravelViewsPath as $path) {
-            if (!in_array($path, $paths)) {
+            if (! in_array($path, $paths)) {
                 $paths[] = $path;
             }
         }
@@ -198,7 +198,7 @@ class Themes
      */
     public function url($filename, $secure = null)
     {
-        if (!$this->current()) {
+        if (! $this->current()) {
             return asset($filename, $secure);
         }
 
