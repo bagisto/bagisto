@@ -19,6 +19,12 @@ class UserDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('admins as u')->addSelect('u.id as user_id', 'u.name as user_name', 'u.status as user_status', 'u.email as user_email', 'ro.name as role_name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
 
+        $this->addFilters('user_id', 'u.id');
+        $this->addFilters('user_name', 'u.name');
+        $this->addFilters('user_status', 'u.status');
+        $this->addFilters('user_email', 'u.email');
+        $this->addFilters('role_name', 'ro.name');
+
         $this->setQueryBuilder($queryBuilder);
     }
 
@@ -61,6 +67,15 @@ class UserDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'user_email',
             'label' => trans('admin::app.datagrid.email'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
+
+        $this->addColumn([
+            'index' => 'role_name',
+            'label' => trans('admin::app.datagrid.role'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,

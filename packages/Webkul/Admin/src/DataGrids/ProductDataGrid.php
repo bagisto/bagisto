@@ -17,7 +17,15 @@ class ProductDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('products_grid')->addSelect('products_grid.product_id as product_id', 'products_grid.sku as product_sku', 'products_grid.name as product_name', 'products.type as product_type', 'products_grid.status as product_status', 'products_grid.price as product_price', 'products_grid.quantity as product_quantity')->leftJoin('products', 'products_grid.product_id', '=', 'products.id');
+        $queryBuilder = DB::table('products_grid as pg')->addSelect('pg.product_id as product_id', 'pg.sku as product_sku', 'pg.name as product_name', 'pr.type as product_type', 'pg.status as product_status', 'pg.price as product_price', 'pg.quantity as product_qty')->leftJoin('products as pr', 'pg.product_id', '=', 'pr.id');
+
+        $this->addFilters('product_id', 'pg.product_id');
+        $this->addFilters('product_sku', 'pg.sku');
+        $this->addFilters('product_name', 'pg.name');
+        $this->addFilters('product_type', 'pr.type');
+        $this->addFilters('product_status', 'pg.status');
+        $this->addFilters('product_price', 'pg.price');
+        $this->addFilters('product_qty', 'pg.quantity');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -78,17 +86,14 @@ class ProductDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'product_price',
             'label' => trans('admin::app.datagrid.price'),
-            'type' => 'number',
+            'type' => 'price',
             'sortable' => true,
             'searchable' => false,
             'width' => '100px',
-            'wrapper' => function($value) {
-                return core()->formatBasePrice($value);
-            }
         ]);
 
         $this->addColumn([
-            'index' => 'product_quantity',
+            'index' => 'product_qty',
             'label' => trans('admin::app.datagrid.qty'),
             'type' => 'number',
             'sortable' => true,

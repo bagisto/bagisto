@@ -17,6 +17,8 @@
                         $columnIndex = explode('.', $column['index']);
 
                         $columnIndex = end($columnIndex);
+
+                        // dd($columnIndex);
                     @endphp
 
                     @if (isset($column['wrapper']))
@@ -26,7 +28,15 @@
                             <td>{{ $column['wrapper']($record->{$columnIndex}) }}</td>
                         @endif
                     @else
-                        <td>{{ $record->{$columnIndex} }}</td>
+                        @if($column['type'] == 'price')
+                            @if(isset($column['currencyCode']))
+                                <td>{{ core()->formatPrice($record->{$columnIndex}, $column['currencyCode']) }}</td>
+                            @else
+                                <td>{{ core()->formatBasePrice($record->{$columnIndex}) }}</td>
+                            @endif
+                        @else
+                            <td>{{ $record->{$columnIndex} }}</td>
+                        @endif
                     @endif
                 @endforeach
 
@@ -45,7 +55,7 @@
         @endforeach
     @else
         <tr>
-            <td colspan="10" style="text-align: center;">{{$norecords}}</td>
+            <td colspan="10" style="text-align: center;">{{ $norecords }}</td>
         </tr>
     @endif
 </tbody>

@@ -45,7 +45,8 @@ class OrderInvoicesDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'grand_total',
             'label' => trans('admin::app.datagrid.grand-total'),
-            'type' => 'string',
+            'type' => 'price',
+            // 'currencyCode' => 'JOD',
             'searchable' => true,
             'sortable' => true,
             'width' => '100px',

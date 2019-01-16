@@ -34,7 +34,7 @@
                                             <div class="control-group">
                                                 <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
                                                     <option selected disabled>Select Column</option>
-                                                    @foreach ($results['columns'] as $column)
+                                                    @foreach($results['columns'] as $column)
                                                         <option value="{{ $column['index'] }}">
                                                             {{ $column['label'] }}
                                                         </option>
@@ -134,8 +134,9 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="filter-row-two">
-                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: uppercase;">
+                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: capitalize;">
                         <span v-if="filter.column == 'sort'">@{{ filter.label }}</span>
                         <span v-else-if="filter.column == 'search'">Search</span>
                         <span v-else>@{{ filter.label }}</span>
@@ -195,8 +196,8 @@
                                 </th>
                             @endif
 
-                            @foreach ($results['columns'] as $key => $column)
-                                <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['index'] }}')">
+                            @foreach($results['columns'] as $key => $column)
+                                <th class="grid_head" @if(isset($column['width'])) style="width: {{ $column['width'] }}" @endif v-on:click="sortCollection('{{ $column['index'] }}')">
                                     {{ $column['label'] }}
                                 </th>
                             @endforeach
@@ -298,6 +299,13 @@
                                     this.stringConditionSelect = false;
 
                                     this.nullify();
+                                } else if (this.type == 'price') {
+                                    this.numberConditionSelect = true;
+                                    this.booleanConditionSelect = false;
+                                    this.datetimeConditionSelect = false;
+                                    this.stringConditionSelect = false;
+
+                                    this.nullify();
                                 }
                             }
                         }
@@ -314,7 +322,7 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if (this.columns[colIndex].index == this.columnOrAlias) {
+                            if(this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -327,6 +335,8 @@
                             this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue, label);
                         } else if (this.type == 'datetime') {
                             this.formURL(this.columnOrAlias, this.datetimeCondition, this.datetimeValue, label);
+                        } else if (this.type == 'price') {
+                            this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
                         }
                     },
 
@@ -334,7 +344,8 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if (this.columns[colIndex].index == this.columnOrAlias) {
+                            if(this.columns[colIndex].index == alias) {
+                                matched = 0;
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -343,13 +354,7 @@
                     },
 
                     searchCollection(searchValue) {
-                        label = '';
-
-                        for(colIndex in this.columns) {
-                            if (this.columns[colIndex].index == this.columnOrAlias) {
-                                label = this.columns[colIndex].label;
-                            }
-                        }
+                        label = 'Search';
 
                         this.formURL("search", 'all', searchValue, label);
                     },
@@ -600,11 +605,13 @@
                             obj.cond = cond;
                             obj.val = val;
 
-                            if (col == "sort") {
+                            if(col == "sort") {
+                                // console.log('sort', obj.cond);
                                 label = '';
 
                                 for(colIndex in this.columns) {
-                                    if (this.columns[colIndex].index == obj.cond) {
+                                    if(this.columns[colIndex].index == obj.cond) {
+
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }
@@ -614,7 +621,7 @@
                                 obj.label = '';
 
                                 for(colIndex in this.columns) {
-                                    if (this.columns[colIndex].index == obj.column) {
+                                    if(this.columns[colIndex].index == obj.column) {
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }

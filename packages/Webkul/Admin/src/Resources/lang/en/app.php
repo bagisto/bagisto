@@ -69,7 +69,7 @@ return [
         'sliders' => 'Sliders',
         'taxes' => 'Taxes',
         'tax-categories' => 'Tax Categories',
-        'tax-rates' => 'Tax Rates'
+        'tax-rates' => 'Tax Rates',
     ],
 
     'dashboard' => [
@@ -143,7 +143,8 @@ return [
         'identifier' => 'Identifier',
         'state' => 'State',
         'country' => 'Country',
-        'tax-rate' => 'Rate'
+        'tax-rate' => 'Rate',
+        'role' => 'Role'
     ],
 
     'account' => [
