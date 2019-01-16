@@ -100,7 +100,7 @@ class Theme
                 $path = $theme->viewsPath;
             }
 
-            if (!in_array($path, $paths)) {
+            if (! in_array($path, $paths)) {
                 $paths[] = $path;
             }
         } while ($theme = $theme->parent);

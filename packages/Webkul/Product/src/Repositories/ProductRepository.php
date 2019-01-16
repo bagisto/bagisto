@@ -124,7 +124,7 @@ class ProductRepository extends Repository
                 'value' => 1
             ]);
 
-        if(isset($data['super_attributes'])) {
+        if (isset($data['super_attributes'])) {
 
             $super_attributes = [];
 
@@ -160,20 +160,20 @@ class ProductRepository extends Repository
 
         $product = $this->find($id);
 
-        if($product->parent_id && $this->checkVariantOptionAvailabiliy($data, $product)) {
+        if ($product->parent_id && $this->checkVariantOptionAvailabiliy($data, $product)) {
             $data['parent_id'] = NULL;
         }
 
         $product->update($data);
 
-        if(isset($data['categories'])) {
+        if  (isset($data['categories'])) {
             $product->categories()->sync($data['categories']);
         }
 
         $attributes = $product->attribute_family->custom_attributes;
 
         foreach ($attributes as $attribute) {
-            if(!isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && !$data[$attribute->code]))
+            if (! isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && ! $data[$attribute->code]))
                 continue;
 
             $attributeValue = $this->attributeValue->findOneWhere([
@@ -183,7 +183,7 @@ class ProductRepository extends Repository
                     'locale' => $attribute->value_per_locale ? $data['locale'] : null
                 ]);
 
-            if(!$attributeValue) {
+            if (! $attributeValue) {
                 $this->attributeValue->create([
                     'product_id' => $product->id,
                     'attribute_id' => $attribute->id,
@@ -201,7 +201,7 @@ class ProductRepository extends Repository
 
         $previousVariantIds = $product->variants->pluck('id');
 
-        if(isset($data['variants'])) {
+        if (isset($data['variants'])) {
             foreach ($data['variants'] as $variantId => $variantData) {
                 if (str_contains($variantId, 'variant_')) {
                     $permutation = [];
@@ -211,7 +211,7 @@ class ProductRepository extends Repository
 
                     $this->createVariant($product, $permutation, $variantData);
                 } else {
-                    if(is_numeric($index = $previousVariantIds->search($variantId))) {
+                    if (is_numeric($index = $previousVariantIds->search($variantId))) {
                         $previousVariantIds->forget($index);
                     }
 
@@ -257,7 +257,7 @@ class ProductRepository extends Repository
      */
     public function createVariant($product, $permutation, $data = [])
     {
-        if(!count($data)) {
+        if (! count($data)) {
             $data = [
                     "sku" => $product->sku . '-variant-' . implode('-', $permutation),
                     "name" => "",
@@ -278,10 +278,10 @@ class ProductRepository extends Repository
         foreach (['sku', 'name', 'price', 'weight', 'status'] as $attributeCode) {
             $attribute = $this->attribute->findOneByField('code', $attributeCode);
 
-            if($attribute->value_per_channel) {
-                if($attribute->value_per_locale) {
-                    foreach(core()->getAllChannels() as $channel) {
-                        foreach(core()->getAllLocales() as $locale) {
+            if ($attribute->value_per_channel) {
+                if ($attribute->value_per_locale) {
+                    foreach (core()->getAllChannels() as $channel) {
+                        foreach (core()->getAllLocales() as $locale) {
                             $this->attributeValue->create([
                                     'product_id' => $variant->id,
                                     'attribute_id' => $attribute->id,
@@ -292,7 +292,7 @@ class ProductRepository extends Repository
                         }
                     }
                 } else {
-                    foreach(core()->getAllChannels() as $channel) {
+                    foreach (core()->getAllChannels() as $channel) {
                         $this->attributeValue->create([
                                 'product_id' => $variant->id,
                                 'attribute_id' => $attribute->id,
@@ -302,8 +302,8 @@ class ProductRepository extends Repository
                     }
                 }
             } else {
-                if($attribute->value_per_locale) {
-                    foreach(core()->getAllLocales() as $locale) {
+                if ($attribute->value_per_locale) {
+                    foreach (core()->getAllLocales() as $locale) {
                         $this->attributeValue->create([
                                 'product_id' => $variant->id,
                                 'attribute_id' => $attribute->id,
@@ -321,7 +321,7 @@ class ProductRepository extends Repository
             }
         }
 
-        foreach($permutation as $attributeId => $optionId) {
+        foreach ($permutation as $attributeId => $optionId) {
             $this->attributeValue->create([
                     'product_id' => $variant->id,
                     'attribute_id' => $attributeId,
@@ -355,7 +355,7 @@ class ProductRepository extends Repository
                     'locale' => $attribute->value_per_locale ? $data['locale'] : null
                 ]);
 
-            if(!$attributeValue) {
+            if (! $attributeValue) {
                 $this->attributeValue->create([
                         'product_id' => $id,
                         'attribute_id' => $attribute->id,
@@ -389,17 +389,17 @@ class ProductRepository extends Repository
         $isAlreadyExist = false;
 
         foreach ($parent->variants as $variant) {
-            if($variant->id == $product->id)
+            if ($variant->id == $product->id)
                 continue;
 
             $matchCount = 0;
 
             foreach ($superAttributeCodes as $attributeCode) {
-                if($data[$attributeCode] == $variant->{$attributeCode})
+                if ($data[$attributeCode] == $variant->{$attributeCode})
                     $matchCount++;
             }
 
-            if($matchCount == $superAttributeCodes->count()) {
+            if ($matchCount == $superAttributeCodes->count()) {
                 return true;
             }
         }
@@ -429,7 +429,7 @@ class ProductRepository extends Repository
 
         $params = request()->input();
 
-        return $this->scopeQuery(function($query){
+        return $this->scopeQuery(function($query) {
                 return $query->distinct()->addSelect('products.*');
             })->paginate(isset($params['limit']) ? $params['limit'] : 9, ['products.id']);
     }
@@ -449,7 +449,7 @@ class ProductRepository extends Repository
             ProductAttributeValue::$attributeTypeFields[$attribute->type] => $slug
         ], ['product_id']);
 
-        if($attributeValue && $attributeValue->product_id) {
+        if ($attributeValue && $attributeValue->product_id) {
             $this->pushCriteria(app(ActiveProductCriteria::class));
             $this->pushCriteria(app(AttributeToSelectCriteria::class)->addAttribueToSelect($columns));
 

@@ -51,13 +51,13 @@ class ProductAttributeValueRepository extends Repository
      */
     public function create(array $data)
     {
-        if(isset($data['attribute_id'])) {
+        if (isset($data['attribute_id'])) {
             $attribute = $this->attribute->find($data['attribute_id']);
         } else {
             $attribute = $this->attribute->findOneByField('code', $data['attribute_code']);
         }
 
-        if(!$attribute)
+        if (! $attribute)
             return;
 
         $data[ProductAttributeValue::$attributeTypeFields[$attribute->type]] = $data['value'];

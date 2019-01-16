@@ -25,16 +25,16 @@ class Shipping
      */
     public function collectRates()
     {
-        if(!$cart = Cart::getCart())
+        if (! $cart = Cart::getCart())
             return false;
 
         $this->removeAllShippingRates();
 
-        foreach(Config::get('carriers') as $shippingMethod) {
+        foreach (Config::get('carriers') as $shippingMethod) {
             $object = new $shippingMethod['class'];
 
-            if($rates = $object->calculate()) {
-                if(is_array($rates)) {
+            if ($rates = $object->calculate()) {
+                if (is_array($rates)) {
                     $this->rates = array_merge($this->rates, $rates);
                 } else {
                     $this->rates[] = $rates;
@@ -57,10 +57,10 @@ class Shipping
      */
     public function removeAllShippingRates()
     {
-        if(!$cart = Cart::getCart())
+        if (! $cart = Cart::getCart())
             return;
 
-        foreach($cart->shipping_rates()->get() as $rate) {
+        foreach ($cart->shipping_rates()->get() as $rate) {
             $rate->delete();
         }
     }
@@ -72,12 +72,12 @@ class Shipping
      */
     public function saveAllShippingRates()
     {
-        if(!$cart = Cart::getCart())
+        if (! $cart = Cart::getCart())
             return;
 
         $shippingAddress = $cart->shipping_address;
 
-        foreach($this->rates as $rate) {
+        foreach ($this->rates as $rate) {
             $rate->cart_address_id = $shippingAddress->id;
 
             $rate->save();
@@ -94,7 +94,7 @@ class Shipping
         $rates = [];
 
         foreach ($this->rates as $rate) {
-            if (!isset($rates[$rate->carrier])) {
+            if (! isset($rates[$rate->carrier])) {
                 $rates[$rate->carrier] = [
                     'carrier_title' => $rate->carrier_title,
                     'rates' => []

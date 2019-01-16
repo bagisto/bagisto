@@ -50,7 +50,7 @@
                                     <td>
                                         <div class="control-group" :class="[errors.has('target_currency') ? 'has-error' : '']">
                                             <select v-validate="'required'" class="control" name="target_currency" data-vv-as="&quot;{{ __('admin::app.settings.exchange_rates.target_currency') }}&quot;">
-                                                @foreach($currencies as $currency)
+                                                @foreach ($currencies as $currency)
                                                     <option value="{{ $currency->id }}" {{ $exchangeRate->target_currency == $currency->id ? 'selected' : '' }}>
                                                         {{ $currency->name }}
                                                     </option>

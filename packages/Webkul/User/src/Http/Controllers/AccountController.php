@@ -62,13 +62,13 @@ class AccountController extends Controller
 
         $data = request()->input();
 
-        if(!Hash::check($data['current_password'], auth()->guard('admin')->user()->password)) {
+        if (! Hash::check($data['current_password'], auth()->guard('admin')->user()->password)) {
             session()->flash('warning', 'Current password does not match.');
 
             return redirect()->back();
         }
 
-        if(!$data['password'])
+        if (! $data['password'])
             unset($data['password']);
         else
             $data['password'] = bcrypt($data['password']);

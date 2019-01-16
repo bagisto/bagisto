@@ -101,11 +101,11 @@ class InvoiceRepository extends Repository
                 ]);
 
             foreach ($data['invoice']['items'] as $itemId => $qty) {
-                if(!$qty) continue;
+                if (! $qty) continue;
 
                 $orderItem = $this->orderItem->find($itemId);
 
-                if($qty > $orderItem->qty_to_invoice)
+                if ($qty > $orderItem->qty_to_invoice)
                     $qty = $orderItem->qty_to_invoice;
 
                 $invoiceItem = $this->invoiceItem->create([
@@ -125,7 +125,7 @@ class InvoiceRepository extends Repository
                         'additional' => $orderItem->additional,
                     ]);
                 
-                if($orderItem->type == 'configurable' && $orderItem->child) {
+                if ($orderItem->type == 'configurable' && $orderItem->child) {
                     $childOrderItem = $orderItem->child;
 
                     $invoiceItem->child = $this->invoiceItem->create([
@@ -177,7 +177,7 @@ class InvoiceRepository extends Repository
         $subTotal = $baseSubTotal = 0;
         $taxAmount = $baseTaxAmount = 0;
 
-        foreach($invoice->items as $invoiceItem) {
+        foreach ($invoice->items as $invoiceItem) {
             $subTotal += $invoiceItem->total;
             $baseSubTotal += $invoiceItem->base_total;
 
@@ -189,8 +189,8 @@ class InvoiceRepository extends Repository
         $baseShippingAmount = $invoice->order->base_shipping_amount;
 
         if ($invoice->order->shipping_amount) {
-            foreach($invoice->order->invoices as $prevInvoice) {
-                if((float) $prevInvoice->shipping_amount) {
+            foreach ($invoice->order->invoices as $prevInvoice) {
+                if ((float) $prevInvoice->shipping_amount) {
                     $shippingAmount = 0;
                     $baseShippingAmount = 0;
                 }

@@ -72,8 +72,8 @@ class InventorySourcesDataGrid extends DataGrid
             'searchable' => true,
             'sortable' => true,
             'width' => '100px',
-            'wrapper' => function($value){
-                if($value == 1)
+            'wrapper' => function($value) {
+                if ($value == 1)
                     return 'Active';
                 else
                     return 'Inactive';

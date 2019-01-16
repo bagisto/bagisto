@@ -60,7 +60,7 @@ class ForgetPasswordController extends Controller
             request(['email'])
         );
 
-        if($response == Password::RESET_LINK_SENT) {
+        if ($response == Password::RESET_LINK_SENT) {
             session()->flash('success', trans($response));
 
             return back();

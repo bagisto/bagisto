@@ -20,15 +20,15 @@ abstract class AbstractProduct
 
         $locale = request()->get('locale') ?: app()->getLocale();
 
-        if($attribute->value_per_channel) {
-            if($attribute->value_per_locale) {
+        if ($attribute->value_per_channel) {
+            if ($attribute->value_per_locale) {
                 $qb->where($alias . '.channel', $channel)
                     ->where($alias . '.locale', $locale);
             } else {
                 $qb->where($alias . '.channel', $channel);
             }
         } else {
-            if($attribute->value_per_locale) {
+            if ($attribute->value_per_locale) {
                 $qb->where($alias . '.locale', $locale);
             }
         }

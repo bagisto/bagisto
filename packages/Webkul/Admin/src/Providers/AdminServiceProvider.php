@@ -65,7 +65,7 @@ class AdminServiceProvider extends ServiceProvider
         view()->composer(['admin::catalog.products.create', 'admin::catalog.products.edit'], function ($view) {
             $accordian = Tree::create();
 
-            foreach(config('product_form_accordians') as $item) {
+            foreach (config('product_form_accordians') as $item) {
                 $accordian->add($item);
             }
 
@@ -77,7 +77,7 @@ class AdminServiceProvider extends ServiceProvider
         view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $tree = Tree::create();
 
-            foreach(config('menu.admin') as $item) {
+            foreach (config('menu.admin') as $item) {
                 if (bouncer()->hasPermission($item['key'])) {
                     $tree->add($item, 'menu');
                 }
@@ -114,12 +114,12 @@ class AdminServiceProvider extends ServiceProvider
     {
         static $tree;
 
-        if($tree)
+        if ($tree)
             return $tree;
 
         $tree = Tree::create();
 
-        foreach(config('acl') as $item) {
+        foreach (config('acl') as $item) {
             $tree->add($item, 'acl');
         }
 

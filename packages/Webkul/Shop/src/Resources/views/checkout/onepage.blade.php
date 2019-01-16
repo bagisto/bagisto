@@ -119,7 +119,7 @@
         var summaryHtml = Vue.compile(`<?php echo view('shop::checkout.total.summary', ['cart' => $cart])->render(); ?>`);
         var customerAddress = null;
         @auth('customer')
-            @if(auth('customer')->user()->default_address)
+            @if (auth('customer')->user()->default_address)
                 customerAddress = @json(auth('customer')->user()->default_address);
             @else
                 customerAddress = {};
@@ -158,7 +158,7 @@
             }),
 
             created() {
-                if(customerAddress) {
+                if (customerAddress) {
                     this.address.billing = customerAddress;
                     this.address.use_for_shipping = true;
                 }
@@ -166,14 +166,14 @@
 
             methods: {
                 navigateToStep (step) {
-                    if(step <= this.completedStep) {
+                    if (step <= this.completedStep) {
                         this.currentStep = step
                         this.completedStep = step - 1;
                     }
                 },
 
                 haveStates(addressType) {
-                    if(this.countryStates[this.address[addressType].country] && this.countryStates[this.address[addressType].country].length)
+                    if (this.countryStates[this.address[addressType].country] && this.countryStates[this.address[addressType].country].length)
                         return true;
                     
                     return false;
@@ -181,12 +181,12 @@
 
                 validateForm: function (scope) {
                     this.$validator.validateAll(scope).then((result) => {
-                        if(result) {
-                            if(scope == 'address-form') {
+                        if (result) {
+                            if (scope == 'address-form') {
                                 this.saveAddress()
-                            } else if(scope == 'shipping-form') {
+                            } else if (scope == 'shipping-form') {
                                 this.saveShipping()
-                            } else if(scope == 'payment-form') {
+                            } else if (scope == 'payment-form') {
                                 this.savePayment()
                             }
                         }
@@ -202,7 +202,7 @@
                         .then(function(response) {
                             this_this.disable_button = false;
 
-                            if(response.data.jump_to_section == 'shipping') {
+                            if (response.data.jump_to_section == 'shipping') {
                                 shippingHtml = Vue.compile(response.data.html)
                                 this_this.completedStep = 1;
                                 this_this.currentStep = 2;
@@ -224,7 +224,7 @@
                         .then(function(response) {
                             this_this.disable_button = false;
 
-                            if(response.data.jump_to_section == 'payment') {
+                            if (response.data.jump_to_section == 'payment') {
                                 paymentHtml = Vue.compile(response.data.html)
                                 this_this.completedStep = 2;
                                 this_this.currentStep = 3;
@@ -246,7 +246,7 @@
                         .then(function(response) {
                             this_this.disable_button = false;
 
-                            if(response.data.jump_to_section == 'review') {
+                            if (response.data.jump_to_section == 'review') {
                                 reviewHtml = Vue.compile(response.data.html)
                                 this_this.completedStep = 3;
                                 this_this.currentStep = 4;
@@ -266,8 +266,8 @@
 
                     this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
                         .then(function(response) {
-                            if(response.data.success) {
-                                if(response.data.redirect_url) {
+                            if (response.data.success) {
+                                if (response.data.redirect_url) {
                                     window.location.href = response.data.redirect_url;
                                 } else {
                                     window.location.href = "{{ route('shop.checkout.success') }}";
@@ -284,11 +284,11 @@
                 },
 
                 handleErrorResponse (response, scope) {
-                    if(response.status == 422) {
+                    if (response.status == 422) {
                         serverErrors = response.data.errors;
                         this.$root.addServerErrors(scope)
-                    } else if(response.status == 403) {
-                        if(response.data.redirect_url) {
+                    } else if (response.status == 403) {
+                        if (response.data.redirect_url) {
                             window.location.href = response.data.redirect_url;
                         }
                     }

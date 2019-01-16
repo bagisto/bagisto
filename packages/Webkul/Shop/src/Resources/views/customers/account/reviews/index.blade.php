@@ -17,7 +17,7 @@
 
                 <span class="account-heading">{{ __('shop::app.customer.account.review.index.title') }}</span>
 
-                @if(count($reviews) > 1)
+                @if (count($reviews) > 1)
                     <div class="account-action">
                         <a href="{{ route('customer.review.deleteall') }}">{{ __('shop::app.wishlist.deleteall') }}</a>
                     </div>
@@ -30,8 +30,8 @@
             {!! view_render_event('bagisto.shop.customers.account.reviews.list.before', ['reviews' => $reviews]) !!}
 
             <div class="account-items-list">
-                @if(!$reviews->isEmpty())
-                    @foreach($reviews as $review)
+                @if (! $reviews->isEmpty())
+                    @foreach ($reviews as $review)
                         <div class="account-item-card mt-15 mb-15">
                             <div class="media-info">
                                 <?php $image = $productImageHelper->getProductBaseImage($review->product); ?>

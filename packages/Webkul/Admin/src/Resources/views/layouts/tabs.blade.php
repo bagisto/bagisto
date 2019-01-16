@@ -8,7 +8,7 @@
         
             <ul>
 
-                @foreach(array_get($menu->items, implode('.children.', array_slice($keys, 0, 2)) . '.children') as $item)
+                @foreach (array_get($menu->items, implode('.children.', array_slice($keys, 0, 2)) . '.children') as $item)
 
                     <li class="{{ $menu->getActive($item) }}">
                         <a href="{{ $item['url'] }}">

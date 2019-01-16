@@ -129,7 +129,7 @@ class CustomerGroupController extends Controller
     {
         $group = $this->customerGroup->findOneByField('id', $id);
 
-        if($group->is_user_defined == 0) {
+        if ($group->is_user_defined == 0) {
             session()->flash('warning', trans('admin::app.customers.customers.group-default'));
         } else {
             session()->flash('success', trans('admin::app.customers.customers.group-deleted'));

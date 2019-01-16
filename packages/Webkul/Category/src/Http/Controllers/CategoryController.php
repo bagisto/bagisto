@@ -111,7 +111,7 @@ class CategoryController extends Controller
 
         $this->validate(request(), [
             $locale . '.slug' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
-                if (!$this->category->isSlugUnique($id, $value)) {
+                if (! $this->category->isSlugUnique($id, $value)) {
                     $fail('The :attribute has already been taken.');
                 }
             }],
@@ -153,10 +153,10 @@ class CategoryController extends Controller
     public function massDestroy() {
         $suppressFlash = false;
 
-        if(request()->isMethod('delete')) {
+        if (request()->isMethod('delete')) {
             $indexes = explode(',', request()->input('indexes'));
 
-            foreach($indexes as $key => $value) {
+            foreach ($indexes as $key => $value) {
                 try {
                     Event::fire('catalog.category.delete.before', $value);
 
@@ -170,7 +170,7 @@ class CategoryController extends Controller
                 }
             }
 
-            if(!$suppressFlash)
+            if (! $suppressFlash)
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success'));
             else
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Attribute Family']));

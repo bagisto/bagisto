@@ -98,7 +98,7 @@
 
             methods: {
                 addFilters (attributeCode, filters) {
-                    if(filters.length) {
+                    if (filters.length) {
                         this.appliedFilters[attributeCode] = filters;
                     } else {
                         delete this.appliedFilters[attributeCode];
@@ -148,13 +148,13 @@
             }),
 
             created () {
-                if(!this.index)
+                if (!this.index)
                     this.active = true;
 
-                if(this.appliedFilterValues && this.appliedFilterValues.length) {
+                if (this.appliedFilterValues && this.appliedFilterValues.length) {
                     this.appliedFilters = this.appliedFilterValues;
 
-                    if(this.attribute.type == 'price') {
+                    if (this.attribute.type == 'price') {
                         this.sliderConfig.value = this.appliedFilterValues;
                     }
 
@@ -174,7 +174,7 @@
                 },
 
                 clearFilters () {
-                    if(this.attribute.type == 'price') {
+                    if (this.attribute.type == 'price') {
                         this.sliderConfig.value = [0, 0];
                     }
 

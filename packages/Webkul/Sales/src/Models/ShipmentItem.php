@@ -51,10 +51,10 @@ class ShipmentItem extends Model implements ShipmentItemContract
     public function getOptionDetailHtml()
     {
 
-        if($this->type == 'configurable' && isset($this->additional['attributes'])) {
+        if ($this->type == 'configurable' && isset($this->additional['attributes'])) {
             $labels = [];
 
-            foreach($this->additional['attributes'] as $attribute) {
+            foreach ($this->additional['attributes'] as $attribute) {
                 $labels[] = $attribute['attribute_name'] . ' : ' . $attribute['option_label'];
             }
 

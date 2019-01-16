@@ -19,7 +19,7 @@ class CustomerDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('customers as custs')->addSelect('custs.id', 'custs.email', 'cg.name')->leftJoin('customer_groups as cg', 'custs.customer_group_id', '=', 'cg.id');
+        $queryBuilder = DB::table('customers as custs')->addSelect('custs.id', 'custs.email', 'cg.name')->addSelect(DB::raw('CONCAT(custs.first_name, " ", custs.last_name) as full_name'))->leftJoin('customer_groups as cg', 'custs.customer_group_id', '=', 'cg.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -31,19 +31,21 @@ class CustomerDataGrid extends DataGrid
             'identifier' => 'customer_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
             'width' => '40px'
         ]);
 
-        // $this->addColumn([
-        //     'index' => 'full_name',
-        //     'label' => trans('admin::app.datagrid.name'),
-        //     'type' => 'string',
-        //     'searchable' => true,
-        //     'sortable' => true,
-        //     'width' => '100px'
-        // ]);
+        $this->addColumn([
+            'index' => 'full_name',
+            'identifier' => 'customer_full_name',
+            'label' => trans('admin::app.datagrid.name'),
+            'override' => 'having',
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'width' => '100px'
+        ]);
 
         $this->addColumn([
             'index' => 'custs.email',

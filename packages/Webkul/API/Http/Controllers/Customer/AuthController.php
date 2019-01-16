@@ -26,8 +26,8 @@ class AuthController extends Controller
     public function create() {
         $data = request()->except('_token');
 
-        if(!auth()->guard('customer')->check()) {
-            if(!auth()->guard('customer')->attempt($data)) {
+        if (! auth()->guard('customer')->check()) {
+            if (! auth()->guard('customer')->attempt($data)) {
                 return response()->json(['message' => 'unauthenticated', 'details' => 'invalid creds'], 401);
             } else {
                 return response()->json(['message' => 'authenticated', 'user' => auth()->guard('customer')->user()], 200);

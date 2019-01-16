@@ -151,7 +151,7 @@
                     <li class="cart-dropdown">
                         <?php $cart = cart()->getCart(); ?>
 
-                        @if(isset($cart))
+                        @if (isset($cart))
                             <div>
                                 <a href="{{ route('shop.checkout.cart.index') }}">
                                     <span class="icon cart-icon"></span>
@@ -206,14 +206,14 @@
 
             function header() {
                 var className = document.getElementById(this.id).className;
-                if(className === 'icon icon-search' ) {
+                if (className === 'icon icon-search' ) {
                     search.classList.remove("icon-search");
                     search.classList.add("icon-menu-close");
                     hamMenu.classList.remove("icon-menu-close");
                     hamMenu.classList.add("icon-menu");
                     searchResponsive.style.display = 'block';
                     navResponsive.style.display = 'none';
-                } else if(className === 'icon icon-menu') {
+                } else if (className === 'icon icon-menu') {
                     hamMenu.classList.remove("icon-menu");
                     hamMenu.classList.add("icon-menu-close");
                     search.classList.remove("icon-menu-close");

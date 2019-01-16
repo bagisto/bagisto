@@ -18,10 +18,10 @@ class TranslatableModel extends Model
     protected function isKeyALocale($key)
     {
         $chunks = explode('-', $key);
-        if(count($chunks) > 1) {
-            if(Locale::where('code', '=', end($chunks))->first())
+        if (count($chunks) > 1) {
+            if (Locale::where('code', '=', end($chunks))->first())
                 return true;
-        } elseif(Locale::where('code', '=', $key)->first()) {
+        } else if (Locale::where('code', '=', $key)->first()) {
             return true;
         }
 
@@ -33,7 +33,7 @@ class TranslatableModel extends Model
      */
     protected function locale()
     {
-        if($this->isChannelBased()) {
+        if ($this->isChannelBased()) {
             return core()->getDefaultChannelLocaleCode();
         } else {
             if ($this->defaultLocale) {

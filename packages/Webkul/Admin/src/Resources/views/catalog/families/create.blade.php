@@ -202,7 +202,7 @@
                                 return this_this.group.groupName.trim() === (group.name ? group.name.trim() : group.groupName.trim())
                             })
 
-                            if(filteredGroups.length) {
+                            if (filteredGroups.length) {
                                 const field = this.$validator.fields.find({ name: 'groupName', scope: 'add-group-form' });
 
                                 if (field) {
@@ -248,7 +248,7 @@
                     group.custom_attributes.forEach(function(attribute) {
                         var attribute = this.custom_attributes.filter(attributeTemp => attributeTemp.id == attribute.id)
 
-                        if(attribute.length) {
+                        if (attribute.length) {
                             let index = this.custom_attributes.indexOf(attribute[0])
 
                             this.custom_attributes.splice(index, 1)
@@ -323,7 +323,7 @@
                     $(e.target).prev().find('li input').each(function() {
                         var attributeId = $(this).val();
 
-                        if($(this).is(':checked')) {
+                        if ($(this).is(':checked')) {
                             attributeIds.push(attributeId);
 
                             $(this).prop('checked', false);
