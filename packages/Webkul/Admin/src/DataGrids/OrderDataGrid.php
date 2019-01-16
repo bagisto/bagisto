@@ -38,7 +38,7 @@ class OrderDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'base_grand_total',
             'label' => trans('admin::app.datagrid.base-total'),
-            'type' => 'string',
+            'type' => 'price',
             'searchable' => false,
             'sortable' => true,
             'width' => '100px',

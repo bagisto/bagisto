@@ -197,7 +197,7 @@
                             @endif
 
                             @foreach($results['columns'] as $key => $column)
-                                <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['index'] }}')">
+                                <th class="grid_head" @if(isset($column['width'])) style="width: {{ $column['width'] }}" @endif v-on:click="sortCollection('{{ $column['index'] }}')">
                                     {{ $column['label'] }}
                                 </th>
                             @endforeach
