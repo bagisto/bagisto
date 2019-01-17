@@ -17,13 +17,11 @@ class UserDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('admins as u')->addSelect('u.id as user_id', 'u.name as user_name', 'u.status as user_status', 'u.email as user_email', 'ro.name as role_name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
+        $queryBuilder = DB::table('admins as u')->addSelect('u.id as user_id', 'u.name as user_name', 'u.status', 'u.email', 'ro.name as role_name')->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id');
 
-        $this->addFilters('user_id', 'u.id');
-        $this->addFilters('user_name', 'u.name');
-        $this->addFilters('user_status', 'u.status');
-        $this->addFilters('user_email', 'u.email');
-        $this->addFilters('role_name', 'ro.name');
+        $this->addFilter('user_id', 'u.id');
+        $this->addFilter('user_name', 'u.name');
+        $this->addFilter('role_name', 'ro.name');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -49,14 +47,14 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'user_status',
+            'index' => 'status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
             'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1) {
+                if ($value->status == 1) {
                     return 'Active';
                 } else {
                     return 'Inactive';
@@ -65,7 +63,7 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'user_email',
+            'index' => 'email',
             'label' => trans('admin::app.datagrid.email'),
             'type' => 'string',
             'searchable' => true,
@@ -89,23 +87,5 @@ class UserDataGrid extends DataGrid
             'route' => 'admin.roles.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->prepareMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.products.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
-
-        // $this->prepareMassAction([
-        //     'type' => 'update',
-        //     'action' => route('admin.catalog.products.massupdate'),
-        //     'method' => 'PUT',
-        //     'options' => [
-        //         0 => true,
-        //         1 => false,
-        //     ]
-        // ]);
     }
 }

@@ -37,7 +37,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'index' => 'order_id',
             'label' => trans('admin::app.datagrid.order-id'),
             'type' => 'number',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
             'width' => '100px'
         ]);
@@ -46,7 +46,6 @@ class OrderInvoicesDataGrid extends DataGrid
             'index' => 'grand_total',
             'label' => trans('admin::app.datagrid.grand-total'),
             'type' => 'price',
-            // 'currencyCode' => 'JOD',
             'searchable' => true,
             'sortable' => true,
             'width' => '100px',
@@ -68,13 +67,5 @@ class OrderInvoicesDataGrid extends DataGrid
             'route' => 'admin.sales.invoices.view',
             'icon' => 'icon eye-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->addMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.attributes.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
     }
 }

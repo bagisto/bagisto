@@ -19,7 +19,7 @@ class OrderDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('orders')->select('id', 'base_grand_total', 'grand_total', 'created_at', 'channel_name', 'status')->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as full_name'));
 
-        $this->addFilters('full_name', DB::raw('CONCAT(customer_first_name, " ", customer_last_name)'));
+        $this->addFilter('full_name', DB::raw('CONCAT(customer_first_name, " ", customer_last_name)'));
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -42,22 +42,15 @@ class OrderDataGrid extends DataGrid
             'searchable' => false,
             'sortable' => true,
             'width' => '100px',
-            // 'wrapper' => function ($value) {
-            //     return core()->formatBasePrice($value);
-            // }
         ]);
 
         $this->addColumn([
             'index' => 'grand_total',
             'label' => trans('admin::app.datagrid.grand-total'),
             'type' => 'price',
-            'currencyCode' => 'JOD',
             'searchable' => false,
             'sortable' => true,
             'width' => '100px',
-            // 'wrapper' => function ($value) {
-            //     return core()->formatBasePrice($value);
-            // }
         ]);
 
         $this->addColumn([
@@ -87,19 +80,19 @@ class OrderDataGrid extends DataGrid
             'width' => '100px',
             'closure' => true,
             'wrapper' => function ($value) {
-                if ($value == 'processing')
+                if ($value->status == 'processing')
                     return '<span class="badge badge-md badge-success">Processing</span>';
-                else if ($value == 'completed')
+                else if ($value->status == 'completed')
                     return '<span class="badge badge-md badge-success">Completed</span>';
-                else if ($value == "canceled")
+                else if ($value->status == "canceled")
                     return '<span class="badge badge-md badge-danger">Canceled</span>';
-                else if ($value == "closed")
+                else if ($value->status == "closed")
                     return '<span class="badge badge-md badge-info">Closed</span>';
-                else if ($value == "pending")
+                else if ($value->status == "pending")
                     return '<span class="badge badge-md badge-warning">Pending</span>';
-                else if ($value == "pending_payment")
+                else if ($value->status == "pending_payment")
                     return '<span class="badge badge-md badge-warning">Pending Payment</span>';
-                else if ($value == "fraud")
+                else if ($value->status == "fraud")
                     return '<span class="badge badge-md badge-danger">Fraud</span>';
             }
         ]);
@@ -120,13 +113,5 @@ class OrderDataGrid extends DataGrid
             'route' => 'admin.sales.orders.view',
             'icon' => 'icon eye-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->addMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.attributes.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
     }
 }

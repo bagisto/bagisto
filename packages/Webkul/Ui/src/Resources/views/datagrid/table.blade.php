@@ -1,15 +1,15 @@
 <div class="table">
-    <testgrid-filters></testgrid-filters>
+    <datagrid-filters></datagrid-filters>
 
     @if (config('datagrid.paginate'))
         @include('ui::datagrid.pagination', ['results' => $results['records']])
     @endif
 
     @push('scripts')
-        <script type="text/x-template" id="testgrid-filters">
+        <script type="text/x-template" id="datagrid-filters">
             {{-- start filter here --}}
             <div class="grid-container">
-                <div class="filter-row-one" id="testgrid-filters">
+                <div class="filter-row-one" id="datagrid-filters">
                     <div class="search-filter">
                         <input type="search" id="search-field" class="control" placeholder="Search Here..." v-model="searchValue" />
 
@@ -216,8 +216,8 @@
         </script>
 
         <script>
-            Vue.component('testgrid-filters', {
-                template: '#testgrid-filters',
+            Vue.component('datagrid-filters', {
+                template: '#datagrid-filters',
 
                 data: () => ({
                     gridCurrentData: @json($results['records']),
@@ -440,6 +440,12 @@
                                                 filterRepeated = 1;
 
                                                 return false;
+                                            } else if(this.filters[j].cond == condition && this.filters[j].val != response) {
+                                                filterRepeated = 1;
+
+                                                this.filters[j].val = response;
+
+                                                this.makeURL();
                                             }
                                         }
                                     }
@@ -648,7 +654,10 @@
                     select() {
                         this.allSelected = false;
 
-                        this.massActionsToggle = true;
+                        if(this.dataIds.length == 0)
+                            this.massActionsToggle = false;
+                        else
+                            this.massActionsToggle = true;
                     },
 
                     //triggered when master checkbox is clicked
@@ -682,8 +691,6 @@
                                 }
                             }
                         }
-
-                        // console.log(this.dataIds);
                     },
 
                     removeMassActions() {
