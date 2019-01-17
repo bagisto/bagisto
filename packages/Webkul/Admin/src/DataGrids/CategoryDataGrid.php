@@ -13,7 +13,7 @@ use DB;
  */
 class CategoryDataGrid extends DataGrid
 {
-    protected $index = 'id'; //the column that needs to be treated as index column
+    protected $index = 'category_id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {

@@ -13,7 +13,7 @@ use DB;
  */
 class SliderDataGrid extends DataGrid
 {
-    protected $index = 'id';
+    protected $index = 'slider_id';
 
     public function prepareQueryBuilder()
     {

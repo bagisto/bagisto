@@ -13,7 +13,7 @@ use DB;
  */
 class CustomerReviewDataGrid extends DataGrid
 {
-    protected $index = 'id'; //the column that needs to be treated as index column
+    protected $index = 'product_review_id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {

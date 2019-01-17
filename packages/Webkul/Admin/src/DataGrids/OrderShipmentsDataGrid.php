@@ -13,7 +13,7 @@ use DB;
  */
 class OrderShipmentsDataGrid extends DataGrid
 {
-    protected $index = 'id';
+    protected $index = 'shipment_id';
 
     public function prepareQueryBuilder()
     {
