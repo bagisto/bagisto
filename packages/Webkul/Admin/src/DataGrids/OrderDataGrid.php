@@ -17,7 +17,7 @@ class OrderDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('orders')->select('id', 'base_grand_total', 'grand_total', 'created_at', 'channel_name', 'status')->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as full_name'));
+        $queryBuilder = DB::table('orders')->select('id', 'base_sub_total', 'base_grand_total', 'created_at', 'channel_name', 'status')->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as full_name'));
 
         $this->addFilter('full_name', DB::raw('CONCAT(customer_first_name, " ", customer_last_name)'));
 
@@ -36,8 +36,8 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'base_grand_total',
-            'label' => trans('admin::app.datagrid.base-total'),
+            'index' => 'base_sub_total',
+            'label' => trans('admin::app.datagrid.sub-total'),
             'type' => 'price',
             'searchable' => false,
             'sortable' => true,
@@ -45,7 +45,7 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'grand_total',
+            'index' => 'base_grand_total',
             'label' => trans('admin::app.datagrid.grand-total'),
             'type' => 'price',
             'searchable' => false,
