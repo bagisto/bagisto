@@ -11,7 +11,7 @@
 </p>
 
 # Topics
-1. ### [Introduction](#introduction)
+1. ### [Introduction](##1-introduction-)
 2. ### Requirements
 3. ### Installation
 4. ### Configuration
@@ -19,7 +19,7 @@
 6. ### License
 
 
-### 1. Introduction <a name="introduction"></a>:
+### 1. Introduction <a name="#1-introduction-"></a>:
 
 [Bagisto](https://www.bagisto.com) is a hand tailored E-Commerce framework designed on some of the hottest opensource technologies
 such as [Laravel](https://laravel.com) a [PHP](https://secure.php.net/) framework, [Vue.js](https://vuejs.org)
