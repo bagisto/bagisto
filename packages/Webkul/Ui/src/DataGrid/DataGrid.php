@@ -132,7 +132,6 @@ abstract class DataGrid
 
     public function sortOrFilterCollection($collection, $parseInfo)
     {
-        // dd('initially', $collection->toSql());
         foreach ($parseInfo as $key => $info)  {
             $columnType = $this->findColumnType($key)[0];
             $columnName = $this->findColumnType($key)[1];
