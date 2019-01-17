@@ -19,7 +19,7 @@
 6. ### License
 
 
-### 1. [link](#intro)Introduction:
+### 1. [Introduction](#intro):
 
 [Bagisto](https://www.bagisto.com) is a hand tailored E-Commerce framework designed on some of the hottest opensource technologies
 such as [Laravel](https://laravel.com) a [PHP](https://secure.php.net/) framework, [Vue.js](https://vuejs.org)
