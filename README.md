@@ -11,12 +11,12 @@
 </p>
 
 # Topics
-1. ### [Introduction](##1-introduction-)
-2. ### [Requirements](##requirements)
-3. ### [Configuration](##configuration)
-4. ### [Installation](##4-installation-)
-5. ### [License](##licence)
-6. ### [Miscellaneous](##miscellaneous)
+1. ### [Introduction](#1-introduction-)
+2. ### [Requirements](#2-requirements-)
+3. ### [Configuration](#3-configuration-)
+4. ### [Installation](#4-installation-)
+5. ### [License](#5-license-)
+6. ### [Miscellaneous](#6-miscellaneous-)
 
 ### 1. Introduction <a name="#1-introduction-"></a>:
 
