@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 abstract class DataGrid
 {
     protected $index = null;
+    protected $enableFilterMap = false;
+    protected $filterMap = [];
     protected $columns = [];
     protected $completeColumnDetails = [];
     protected $queryBuilder = [];
@@ -44,6 +46,17 @@ abstract class DataGrid
         }
 
         return $parsedUrl;
+    }
+
+    /**
+     * Add the index as alias of the column and use the column to make things happen
+     *
+     * @return void
+     */
+    public function addFilters($alias, $column) {
+        $this->filterMap[$alias] = $column;
+
+        $this->enableFilterMap = true;
     }
 
     public function addColumn($column)
@@ -110,8 +123,8 @@ abstract class DataGrid
      */
     public function findColumnType($columnAlias)
     {
-        foreach ($this->completeColumnDetails as $column) {
-            if ($column['index'] == $columnAlias) {
+        foreach($this->completeColumnDetails as $column) {
+            if($column['index'] == $columnAlias) {
                 return [$column['type'], $column['index']];
             }
         }
@@ -146,34 +159,64 @@ abstract class DataGrid
                 if ($count_keys == 1) {
                     return $collection->where(function() use($collection, $info) {
                         foreach ($this->completeColumnDetails as $column) {
-                            if ($column['searchable'] == true)
-                                $collection->orWhere($column['index'], 'like', '%'.$info['all'].'%');
+
+                            if ($column['searchable'] == true) {
+                                if($this->enableFilterMap && isset($this->filterMap[$column['index']])) {
+                                    $collection->orWhere($this->filterMap[$column['index']], 'like', '%'.$info['all'].'%');
+                                } else {
+                                    $collection->orWhere($column['index'], 'like', '%'.$info['all'].'%');
+                                }
+                            }
                         }
                     });
                 }
             } else {
                 if (array_keys($info)[0] == "like" || array_keys($info)[0] == "nlike") {
                     foreach ($info as $condition => $filter_value) {
-                        return $collection->where(
-                            $columnName,
-                            config("datagrid.operators.{$condition}"),
-                            '%'.$filter_value.'%'
-                        );
-                    }
-                } else {
-                    foreach ($info as $condition => $filter_value) {
-                        if ($columnType == 'datetime') {
-                            return $collection->whereDate(
-                                $columnName,
+                        if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
+                            return $collection->where(
+                                $this->filterMap[$columnName],
                                 config("datagrid.operators.{$condition}"),
-                                $filter_value
+                                '%'.$filter_value.'%'
                             );
                         } else {
                             return $collection->where(
                                 $columnName,
                                 config("datagrid.operators.{$condition}"),
-                                $filter_value
+                                '%'.$filter_value.'%'
                             );
+                        }
+                    }
+                } else {
+                    foreach ($info as $condition => $filter_value) {
+                        if ($columnType == 'datetime') {
+                            if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
+                                return $collection->whereDate(
+                                    $this->filterMap[$columnname],
+                                    config("datagrid.operators.{$condition}"),
+                                    $filter_value
+                                );
+                            } else {
+                                return $collection->whereDate(
+                                    $columnName,
+                                    config("datagrid.operators.{$condition}"),
+                                    $filter_value
+                                );
+                            }
+                        } else {
+                            if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
+                                return $collection->where(
+                                    $this->filterMap[$columnName],
+                                    config("datagrid.operators.{$condition}"),
+                                    $filter_value
+                                );
+                            } else {
+                                return $collection->where(
+                                    $columnName,
+                                    config("datagrid.operators.{$condition}"),
+                                    $filter_value
+                                );
+                            }
                         }
                     }
                 }
@@ -185,9 +228,11 @@ abstract class DataGrid
     {
         $this->addColumns();
 
-        $this->prepareActions();
+        if($this->enableAction)
+            $this->prepareActions();
 
-        $this->prepareMassActions();
+        if($this->enableMassAction)
+            $this->prepareMassActions();
 
         $this->prepareQueryBuilder();
 

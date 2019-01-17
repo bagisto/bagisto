@@ -13,11 +13,16 @@ use DB;
  */
 class SliderDataGrid extends DataGrid
 {
-    protected $index = 'slider_id';
+    protected $index = 'id';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('sliders as sl')->addSelect('sl.id as slider_id', 'sl.title as slider_title', 'ch.name as channel_name')->leftJoin('channels as ch', 'sl.channel_id', '=', 'ch.id');
+        $queryBuilder = DB::table('sliders as sl')->addSelect('sl.id as slider_id', 'sl.title as slider_title', 'ch.name as channel_name')->leftJoin('channels as ch', 'sl.channel_id', '=',
+        'ch.id');
+
+        $this->addFilters('slider_id', 'sl.id');
+        $this->addFilters('slider_title', 'sl.title');
+        $this->addFilters('channel_name', 'ch.name');
 
         $this->setQueryBuilder($queryBuilder);
     }

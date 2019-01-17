@@ -19,6 +19,10 @@ class ExchangeRatesDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('currency_exchange_rates as cer')->addSelect('cer.id as currency_exch_id', 'curr.name as currency_exch_name', 'cer.rate as currency_exch_rate')->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id');
 
+        $this->addFilters('currency_exch_id', 'cer.id');
+        $this->addFilters('currency_exch_name', 'curr.name');
+        $this->addFilters('currency_exch_rate', 'cer.rate');
+
         $this->setQueryBuilder($queryBuilder);
     }
 

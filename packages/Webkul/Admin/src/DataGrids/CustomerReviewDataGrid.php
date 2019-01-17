@@ -13,11 +13,17 @@ use DB;
  */
 class CustomerReviewDataGrid extends DataGrid
 {
-    protected $index = 'product_review_id'; //the column that needs to be treated as index column
+    protected $index = 'id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id as product_review_id', 'pr.title as product_review_title', 'pr.comment as product_review_comment', 'pg.name as product_review_name', 'pr.status as product_review_status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');
+        $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id as product_review_id', 'pr.title as product_review_title', 'pr.comment as product_review_comment', 'pg.name as product_name', 'pr.status as product_review_status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');
+
+        $this->addFilters('product_review_id', 'pr.id');
+        $this->addFilters('product_review_title', 'pr.title');
+        $this->addFilters('product_review_comment', 'pr.comment');
+        $this->addFilters('product_name', 'pg.name');
+        $this->addFilters('product_review_status', 'pr.status');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -52,7 +58,7 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'product_review_name',
+            'index' => 'product_name',
             'label' => trans('admin::app.datagrid.product-name'),
             'type' => 'string',
             'searchable' => true,

@@ -39,7 +39,7 @@
 
         <label for="{{ $name }}" {{ !isset($field['validation']) || strpos('required', $field['validation']) < 0 ? '' : 'class=required' }}>
 
-            {{ $field['title'] }}
+            {{ trans($field['title']) }}
 
             @if (count($channel_locale))
                 <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
@@ -62,7 +62,7 @@
                 @if (isset($field['repository']))
                     @foreach ($value as $option)
                         <option value="{{  $option['name'] }}" {{ $option['name'] == $selectedOption ? 'selected' : ''}}
-                        {{ $option['name'] }}
+                        {{ trans($option['name']) }}
                         </option>
                     @endforeach
                 @else
@@ -78,7 +78,7 @@
                         ?>
 
                         <option value="{{ $value }}" {{ $value == $selectedOption ? 'selected' : ''}}>
-                            {{ $option['title'] }}
+                            {{ trans($option['title']) }}
                         </option>
                     @endforeach
                 @endif

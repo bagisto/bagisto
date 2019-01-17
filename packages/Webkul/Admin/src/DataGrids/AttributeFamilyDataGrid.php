@@ -69,21 +69,21 @@ class AttributeFamilyDataGrid extends DataGrid
         ]);
     }
 
-    public function prepareMassActions() {
-        // $this->prepareMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.familites.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
+    // public function prepareMassActions() {
+    //     // $this->prepareMassAction([
+    //     //     'type' => 'delete',
+    //     //     'action' => route('admin.catalog.familites.massdelete'),
+    //     //     'method' => 'DELETE'
+    //     // ]);
 
-        // $this->prepareMassAction([
-        //     'type' => 'update',
-        //     'action' => route('admin.catalog.familites.massupdate'),
-        //     'method' => 'PUT',
-        //     'options' => [
-        //         0 => true,
-        //         1 => false,
-        //     ]
-        // ]);
-    }
+    //     // $this->prepareMassAction([
+    //     //     'type' => 'update',
+    //     //     'action' => route('admin.catalog.familites.massupdate'),
+    //     //     'method' => 'PUT',
+    //     //     'options' => [
+    //     //         0 => true,
+    //     //         1 => false,
+    //     //     ]
+    //     // ]);
+    // }
 }
