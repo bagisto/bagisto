@@ -53,7 +53,7 @@ abstract class DataGrid
      *
      * @return void
      */
-    public function addFilters($alias, $column) {
+    public function addFilter($alias, $column) {
         $this->filterMap[$alias] = $column;
 
         $this->enableFilterMap = true;

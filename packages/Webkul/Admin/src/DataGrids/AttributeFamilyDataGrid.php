@@ -68,22 +68,4 @@ class AttributeFamilyDataGrid extends DataGrid
             'icon' => 'icon trash-icon'
         ]);
     }
-
-    // public function prepareMassActions() {
-    //     // $this->prepareMassAction([
-    //     //     'type' => 'delete',
-    //     //     'action' => route('admin.catalog.familites.massdelete'),
-    //     //     'method' => 'DELETE'
-    //     // ]);
-
-    //     // $this->prepareMassAction([
-    //     //     'type' => 'update',
-    //     //     'action' => route('admin.catalog.familites.massupdate'),
-    //     //     'method' => 'PUT',
-    //     //     'options' => [
-    //     //         0 => true,
-    //     //         1 => false,
-    //     //     ]
-    //     // ]);
-    // }
 }

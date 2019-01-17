@@ -132,20 +132,20 @@ Bagisto is a truly opensource E-Commerce framework which will always be free und
 
 ### 6. Miscellaneous <a name="#miscellaneous"></a>:
 
-## Contributors
+#### Contributors
 
 This project exists thanks to all the people who contribute.
 <a href="https://github.com/bagisto/bagisto/graphs/contributors"><img src="https://opencollective.com/bagisto/contributors.svg?width=890&button=false" /></a>
 
 
-## Backers
+#### Backers
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/bagisto#backer)]
 
 <a href="https://opencollective.com/bagisto#backers" target="_blank"><img src="https://opencollective.com/bagisto/backers.svg?width=890"></a>
 
 
-## Sponsors
+#### Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/bagisto#sponsor)]
 
@@ -159,7 +159,3 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/bagisto/sponsor/7/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/7/avatar.svg"></a>
 <a href="https://opencollective.com/bagisto/sponsor/8/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/bagisto/sponsor/9/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/9/avatar.svg"></a>
-
-
-### Coming Soon:
--> API support for core packages and numerous fixes.

@@ -17,12 +17,11 @@ class SliderDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('sliders as sl')->addSelect('sl.id as slider_id', 'sl.title as slider_title', 'ch.name as channel_name')->leftJoin('channels as ch', 'sl.channel_id', '=',
+        $queryBuilder = DB::table('sliders as sl')->addSelect('sl.id as slider_id', 'sl.title', 'ch.name')->leftJoin('channels as ch', 'sl.channel_id', '=',
         'ch.id');
 
-        $this->addFilters('slider_id', 'sl.id');
-        $this->addFilters('slider_title', 'sl.title');
-        $this->addFilters('channel_name', 'ch.name');
+        $this->addFilter('slider_id', 'sl.id');
+        $this->addFilter('channel_name', 'ch.name');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -39,7 +38,7 @@ class SliderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'slider_title',
+            'index' => 'title',
             'label' => trans('admin::app.datagrid.title'),
             'type' => 'string',
             'searchable' => true,
@@ -48,7 +47,7 @@ class SliderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'channel_name',
+            'index' => 'name',
             'label' => trans('admin::app.datagrid.channel-name'),
             'type' => 'string',
             'searchable' => true,
@@ -69,23 +68,5 @@ class SliderDataGrid extends DataGrid
             'route' => 'admin.sliders.delete',
             'icon' => 'icon trash-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->prepareMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.products.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
-
-        // $this->prepareMassAction([
-        //     'type' => 'update',
-        //     'action' => route('admin.catalog.products.massupdate'),
-        //     'method' => 'PUT',
-        //     'options' => [
-        //         0 => true,
-        //         1 => false,
-        //     ]
-        // ]);
     }
 }

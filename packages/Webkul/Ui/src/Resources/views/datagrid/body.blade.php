@@ -17,15 +17,13 @@
                         $columnIndex = explode('.', $column['index']);
 
                         $columnIndex = end($columnIndex);
-
-                        // dd($columnIndex);
                     @endphp
 
                     @if (isset($column['wrapper']))
                         @if (isset($column['closure']) && $column['closure'] == true)
-                            <td>{!! $column['wrapper']($record->{$columnIndex}) !!}</td>
+                            <td>{!! $column['wrapper']($record) !!}</td>
                         @else
-                            <td>{{ $column['wrapper']($record->{$columnIndex}) }}</td>
+                            <td>{{ $column['wrapper']($record) }}</td>
                         @endif
                     @else
                         @if($column['type'] == 'price')

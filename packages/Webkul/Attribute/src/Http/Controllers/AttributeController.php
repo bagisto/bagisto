@@ -112,7 +112,7 @@ class AttributeController extends Controller
 
         $attribute = $this->attribute->update(request()->all(), $id);
 
-        Event::fire('after.attribute.update', $attribute);
+        // Event::fire('after.attribute.update', $attribute);
 
         session()->flash('success', 'Attribute updated successfully.');
 

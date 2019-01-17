@@ -19,12 +19,12 @@ class CustomerDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('customers as custs')->addSelect('custs.id as customer_id', 'custs.email as customer_email', 'cg.name as cust_grp_name')->addSelect(DB::raw('CONCAT(custs.first_name, " ", custs.last_name) as full_name'))->leftJoin('customer_groups as cg', 'custs.customer_group_id', '=', 'cg.id');
+        $queryBuilder = DB::table('customers as custs')
+                ->addSelect('custs.id as customer_id', 'custs.email', 'cg.name')
+                ->addSelect(DB::raw('CONCAT(custs.first_name, " ", custs.last_name) as full_name'))->leftJoin('customer_groups as cg', 'custs.customer_group_id', '=', 'cg.id');
 
-        $this->addFilters('customer_id', 'custs.id');
-        $this->addFilters('customer_email', 'custs.email');
-        $this->addFilters('cust_grp_name', 'cg.name');
-        $this->addFilters('full_name', DB::raw('CONCAT(custs.first_name, " ", custs.last_name)'));
+        $this->addFilter('customer_id', 'custs.id');
+        $this->addFilter('full_name', DB::raw('CONCAT(custs.first_name, " ", custs.last_name)'));
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -35,7 +35,7 @@ class CustomerDataGrid extends DataGrid
             'index' => 'customer_id',
             'label' => trans('admin::app.datagrid.id'),
             'type' => 'number',
-            'searchable' => true,
+            'searchable' => false,
             'sortable' => true,
             'width' => '40px'
         ]);
@@ -50,7 +50,7 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'customer_email',
+            'index' => 'email',
             'label' => trans('admin::app.datagrid.email'),
             'type' => 'string',
             'searchable' => true,
@@ -59,7 +59,7 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'cust_grp_name',
+            'index' => 'name',
             'label' => trans('admin::app.datagrid.group'),
             'type' => 'string',
             'searchable' => false,
@@ -80,23 +80,5 @@ class CustomerDataGrid extends DataGrid
             'route' => 'admin.customer.delete',
             'icon' => 'icon trash-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->prepareMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.products.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
-
-        // $this->prepareMassAction([
-        //     'type' => 'update',
-        //     'action' => route('admin.catalog.products.massupdate'),
-        //     'method' => 'PUT',
-        //     'options' => [
-        //         0 => true,
-        //         1 => false,
-        //     ]
-        // ]);
     }
 }

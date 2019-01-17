@@ -37,11 +37,11 @@ class NewsLetterDataGrid extends DataGrid
             'index' => 'is_subscribed',
             'label' => trans('admin::app.datagrid.subscribed'),
             'type' => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'sortable' => true,
             'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->is_subscribed == 1)
                     return 'True';
                 else
                     return 'False';
