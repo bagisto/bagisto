@@ -14,7 +14,7 @@
 1. ### [Introduction](##1-introduction-)
 2. ### [Requirements](##requirements)
 3. ### [Configuration](##configuration)
-4. ### [Installation](##installation)
+4. ### [Installation](##4-installation-)
 5. ### [License](##licence)
 6. ### [Miscellaneous](##miscellaneous)
 
