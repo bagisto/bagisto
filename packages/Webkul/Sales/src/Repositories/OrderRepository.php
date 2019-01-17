@@ -116,9 +116,9 @@ class OrderRepository extends Repository
      */
     public function cancel($orderId)
     {
-        Event::fire('checkout.order.cancel.before', $orderId);
-
         $order = $this->findOrFail($orderId);
+
+        Event::fire('sales.order.cancel.before', $order);
 
         if (! $order->canCancel())
             return false;
@@ -135,7 +135,7 @@ class OrderRepository extends Repository
 
         $this->updateOrderStatus($order);
 
-        Event::fire('checkout.order.cancel.after', $order);
+        Event::fire('sales.order.cancel.after', $order);
 
         return true;
     }
