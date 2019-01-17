@@ -118,6 +118,8 @@ class OrderRepository extends Repository
     {
         $order = $this->findOrFail($orderId);
 
+        Event::fire('sales.order.cancel.before', $order);
+
         if (! $order->canCancel())
             return false;
 
@@ -132,6 +134,8 @@ class OrderRepository extends Repository
         }
 
         $this->updateOrderStatus($order);
+
+        Event::fire('sales.order.cancel.after', $order);
 
         return true;
     }
