@@ -222,7 +222,7 @@ abstract class DataGrid
                 }
             }
         }
-        dd($collection->toSql());
+
         return $collection;
     }
 

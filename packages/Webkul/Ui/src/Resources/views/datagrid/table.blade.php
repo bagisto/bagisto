@@ -654,7 +654,10 @@
                     select() {
                         this.allSelected = false;
 
-                        this.massActionsToggle = true;
+                        if(this.dataIds.length == 0)
+                            this.massActionsToggle = false;
+                        else
+                            this.massActionsToggle = true;
                     },
 
                     //triggered when master checkbox is clicked
