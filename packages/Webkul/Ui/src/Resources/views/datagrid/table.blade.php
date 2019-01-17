@@ -165,13 +165,13 @@
                                             <input type="hidden" id="indexes" name="indexes" v-model="dataIds">
 
                                             <div class="control-group">
-                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type">
+                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type" required>
                                                     <option v-for="(massAction, index) in massActions" :key="index" :value="massAction.type">@{{ massAction.label }}</option>
                                                 </select>
                                             </div>
 
                                             <div class="control-group" style="margin-left: 10px;" v-if="massActionType == 'update'">
-                                                <select class="control" v-model="massActionUpdateValue" name="update-options">
+                                                <select class="control" v-model="massActionUpdateValue" name="update-options" required>
                                                     <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ id }}</option>
                                                 </select>
                                             </div>
@@ -197,7 +197,15 @@
                             @endif
 
                             @foreach($results['columns'] as $key => $column)
-                                <th class="grid_head" @if(isset($column['width'])) style="width: {{ $column['width'] }}" @endif v-on:click="sortCollection('{{ $column['index'] }}')">
+                                <th class="grid_head"
+                                    @if(isset($column['width']))
+                                        style="width: {{ $column['width'] }}"
+                                    @endif
+
+                                    @if(isset($column['sortable']) && $column['sortable'])
+                                        v-on:click="sortCollection('{{ $column['index'] }}')"
+                                    @endif
+                                >
                                     {{ $column['label'] }}
                                 </th>
                             @endforeach
