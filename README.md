@@ -12,12 +12,11 @@
 
 # Topics
 1. ### [Introduction](##1-introduction-)
-2. ### Requirements
-3. ### Installation
-4. ### Configuration
-5. ### Migration Guides
-6. ### License
-
+2. ### [Requirements](##requirements)
+3. ### [Configuration](##configuration)
+4. ### [Installation](##installation)
+5. ### [License](##licence)
+6. ### [Miscellaneous](##miscellaneous)
 
 ### 1. Introduction <a name="#1-introduction-"></a>:
 
@@ -50,7 +49,7 @@ It packs in lots of demanding features that allows your business to scale in no 
 Dev guys can take advantage of two of the hottest frameworks used in this project Laravel and Vue.js, both of these frameworks have been used in Bagisto.
 Bagisto is using power of both of these frameworks and making best out of it out of the box.
 
-### 2. Requirements:
+### 2. Requirements <a name="#requirements"></a>:
 
 * **OS**: Ubuntu 16.04 LTS or higher.
 * **SERVER**: Apache 2 or NGINX
@@ -61,7 +60,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 * **Node**: 8.11.3 LTS or higher.
 * **Composer**: 1.6.5 or higher.
 
-### 3. Configuration:
+### 3. Configuration <a name="#configuration"></a>:
 
 **Run this Command** to download the project on to your local machine or server:
 
@@ -87,7 +86,7 @@ Although you have to set the mailer variables also for full functioning of your 
 default.
 
 
-### 4. Installation:
+### 4. Installation <a name="#installation"></a>:
 
 **Run these Commands Below**
 
@@ -127,6 +126,12 @@ email:admin@example.com
 password:admin123
 ~~~
 
+### 5. License <a name="#license"></a>:
+Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
+
+
+### 6. Miscellaneous <a name="#miscellaneous"></a>:
+
 ## Contributors
 
 This project exists thanks to all the people who contribute.
@@ -155,10 +160,6 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/bagisto/sponsor/8/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/bagisto/sponsor/9/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/9/avatar.svg"></a>
 
-
-
-### 5. License
-Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
 
 ### Coming Soon:
 -> API support for core packages and numerous fixes.
