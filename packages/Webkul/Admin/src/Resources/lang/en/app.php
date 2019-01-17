@@ -144,7 +144,8 @@ return [
         'state' => 'State',
         'country' => 'Country',
         'tax-rate' => 'Rate',
-        'role' => 'Role'
+        'role' => 'Role',
+        'sub-total' => 'Sub Total'
     ],
 
     'account' => [
