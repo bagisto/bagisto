@@ -20,7 +20,9 @@ class AttributeDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('attributes')->select('id')->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel');
+        $queryBuilder = DB::table('attributes')
+                ->select('id')
+                ->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -71,7 +73,7 @@ class AttributeDataGrid extends DataGrid
             'searchable' => false,
             'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->is_required == 1)
                     return 'True';
                 else
                     return 'False';
@@ -86,7 +88,7 @@ class AttributeDataGrid extends DataGrid
             'searchable' => false,
             'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->is_unique == 1)
                     return 'True';
                 else
                     return 'False';
@@ -101,7 +103,7 @@ class AttributeDataGrid extends DataGrid
             'searchable' => false,
             'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->value_per_locale == 1)
                     return 'True';
                 else
                     return 'False';
@@ -116,7 +118,7 @@ class AttributeDataGrid extends DataGrid
             'searchable' => false,
             'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->value_per_channel == 1)
                     return 'True';
                 else
                     return 'False';

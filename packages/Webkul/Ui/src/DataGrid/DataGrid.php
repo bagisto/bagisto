@@ -53,7 +53,7 @@ abstract class DataGrid
      *
      * @return void
      */
-    public function addFilters($alias, $column) {
+    public function addFilter($alias, $column) {
         $this->filterMap[$alias] = $column;
 
         $this->enableFilterMap = true;
@@ -174,13 +174,13 @@ abstract class DataGrid
                 if (array_keys($info)[0] == "like" || array_keys($info)[0] == "nlike") {
                     foreach ($info as $condition => $filter_value) {
                         if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
-                            return $collection->where(
+                            $collection->where(
                                 $this->filterMap[$columnName],
                                 config("datagrid.operators.{$condition}"),
                                 '%'.$filter_value.'%'
                             );
                         } else {
-                            return $collection->where(
+                            $collection->where(
                                 $columnName,
                                 config("datagrid.operators.{$condition}"),
                                 '%'.$filter_value.'%'
@@ -191,13 +191,13 @@ abstract class DataGrid
                     foreach ($info as $condition => $filter_value) {
                         if ($columnType == 'datetime') {
                             if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
-                                return $collection->whereDate(
-                                    $this->filterMap[$columnname],
+                                $collection->whereDate(
+                                    $this->filterMap[$columnName],
                                     config("datagrid.operators.{$condition}"),
                                     $filter_value
                                 );
                             } else {
-                                return $collection->whereDate(
+                                $collection->whereDate(
                                     $columnName,
                                     config("datagrid.operators.{$condition}"),
                                     $filter_value
@@ -205,13 +205,13 @@ abstract class DataGrid
                             }
                         } else {
                             if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
-                                return $collection->where(
+                                $collection->where(
                                     $this->filterMap[$columnName],
                                     config("datagrid.operators.{$condition}"),
                                     $filter_value
                                 );
                             } else {
-                                return $collection->where(
+                                $collection->where(
                                     $columnName,
                                     config("datagrid.operators.{$condition}"),
                                     $filter_value
@@ -222,17 +222,23 @@ abstract class DataGrid
                 }
             }
         }
+
+        return $collection;
+    }
+
+    public function prepareMassActions() {
+    }
+
+    public function prepareActions() {
     }
 
     public function render()
     {
         $this->addColumns();
 
-        if($this->enableAction)
-            $this->prepareActions();
+        $this->prepareActions();
 
-        if($this->enableMassAction)
-            $this->prepareMassActions();
+        $this->prepareMassActions();
 
         $this->prepareQueryBuilder();
 

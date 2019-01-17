@@ -444,6 +444,7 @@ return [
     'configuration' => [
         'title' => 'Configuration',
         'save-btn-title' => 'Save',
+        'save-message' => 'Configuration saved successfully',
 
         'tax-categories' => [
             'title' => 'Tax Categories',

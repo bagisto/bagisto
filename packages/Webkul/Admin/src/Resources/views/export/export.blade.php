@@ -9,8 +9,8 @@
     <tbody>
         @foreach ($results as $result)
         <tr>
-            @foreach ($result as $value)
-                <td class="">{{ $value }}</td>
+            @foreach ($columns as $column)
+                <td class="">{{ $result[$column['index']] }} </td>
             @endforeach
         </tr>
         @endforeach
