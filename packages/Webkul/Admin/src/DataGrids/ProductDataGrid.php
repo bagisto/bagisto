@@ -115,6 +115,8 @@ class ProductDataGrid extends DataGrid
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon' => 'icon trash-icon'
         ]);
+
+        $this->enableAction = true;
     }
 
     public function prepareMassActions() {
@@ -135,5 +137,7 @@ class ProductDataGrid extends DataGrid
                 'Inactive' => 0
             ]
         ]);
+
+        $this->enableMassAction = true;
     }
 }

@@ -224,15 +224,19 @@ abstract class DataGrid
         }
     }
 
+    public function prepareMassActions() {
+    }
+
+    public function prepareActions() {
+    }
+
     public function render()
     {
         $this->addColumns();
 
-        if($this->enableAction)
-            $this->prepareActions();
+        $this->prepareActions();
 
-        if($this->enableMassAction)
-            $this->prepareMassActions();
+        $this->prepareMassActions();
 
         $this->prepareQueryBuilder();
 
