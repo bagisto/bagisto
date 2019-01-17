@@ -440,6 +440,12 @@
                                                 filterRepeated = 1;
 
                                                 return false;
+                                            } else if(this.filters[j].cond == condition && this.filters[j].val != response) {
+                                                filterRepeated = 1;
+
+                                                this.filters[j].val = response;
+
+                                                this.makeURL();
                                             }
                                         }
                                     }
