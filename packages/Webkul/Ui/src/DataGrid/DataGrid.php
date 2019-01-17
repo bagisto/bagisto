@@ -132,6 +132,7 @@ abstract class DataGrid
 
     public function sortOrFilterCollection($collection, $parseInfo)
     {
+        // dd('initially', $collection->toSql());
         foreach ($parseInfo as $key => $info)  {
             $columnType = $this->findColumnType($key)[0];
             $columnName = $this->findColumnType($key)[1];
@@ -145,7 +146,7 @@ abstract class DataGrid
 
                 $columnName = $this->findColumnType(array_keys($info)[0]);
 
-                return $collection->orderBy(
+                $collection->orderBy(
                     $columnName[1],
                     array_values($info)[0]
                 );
@@ -157,7 +158,7 @@ abstract class DataGrid
                 }
 
                 if ($count_keys == 1) {
-                    return $collection->where(function() use($collection, $info) {
+                    $collection->where(function($collection) use($info) {
                         foreach ($this->completeColumnDetails as $column) {
 
                             if ($column['searchable'] == true) {
@@ -222,7 +223,7 @@ abstract class DataGrid
                 }
             }
         }
-
+        // dd($collection->toSql());
         return $collection;
     }
 
