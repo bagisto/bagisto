@@ -1,6 +1,7 @@
 <?php
     // getting env file
-    $currentLocation = explode("/", getcwd());
+    $location = str_replace('\\', '/', getcwd());
+    $currentLocation = explode("/", $location);
     array_pop($currentLocation);
     array_pop($currentLocation);
     $desiredLocation = implode("/", $currentLocation);
@@ -39,7 +40,7 @@
         $connection = $databaseData['DB_CONNECTION'];
 
         if ($connection == 'mysql') {
-            $conn = new mysqli($servername, $username, $password, $dbname);
+            @$conn = new mysqli($servername, $username, $password, $dbname);
 
             if (!$conn->connect_error) {
                 // retrieving admin entry

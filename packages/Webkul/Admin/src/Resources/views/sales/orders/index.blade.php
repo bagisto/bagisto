@@ -11,14 +11,14 @@
                 <h1>{{ __('admin::app.sales.orders.title') }}</h1>
             </div>
 
-            {{-- <div class="page-action">
+            <div class="page-action">
                 <div class="export" @click="showModal('downloadDataGrid')">
                     <i class="export-icon"></i>
                     <span>
                         {{ __('admin::app.export.export') }}
                     </span>
                 </div>
-            </div> --}}
+            </div>
         </div>
 
         <div class="page-content">
@@ -27,25 +27,30 @@
         </div>
     </div>
 
-    {{-- <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
+    <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
         <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
         <div slot="body">
             <export-form></export-form>
         </div>
-    </modal> --}}
+    </modal>
 
 @stop
 
 @push('scripts')
 
-{{-- <script type="text/x-template" id="export-form-template">
+<script type="text/x-template" id="export-form-template">
     <form method="POST" action="{{ route('admin.datagrid.export') }}">
 
         <div class="page-content">
             <div class="form-container">
                 @csrf()
 
-                <input type="hidden" name="gridData" value="{{serialize($orderGrid)}}">
+                <?php
+                    $data = json_encode((array) $orderGrid);
+                ?>
+
+                <input type="hidden" name="gridData" value="{{ $data }}">
+                <input type="hidden" name="file_name" value="Order">
 
                 <div class="control-group">
                     <label for="format" class="required">
@@ -65,7 +70,7 @@
         </button>
 
     </form>
-</script> --}}
+</script>
 
 <script>
     Vue.component('export-form', {

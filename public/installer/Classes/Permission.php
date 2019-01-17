@@ -57,13 +57,11 @@ class Permission {
      */
     private function getPermission($folder)
     {
-        $currentLocation = explode("/", getcwd());
-
+        $location = str_replace('\\', '/', getcwd());
+        $currentLocation = explode("/", $location);
         array_pop($currentLocation);
         array_pop($currentLocation);
-
         $desiredLocation = implode("/", $currentLocation);
-
         $fileLocation = $desiredLocation . '/' .$folder;
 
         return substr(sprintf('%o', fileperms($fileLocation)), -4);
