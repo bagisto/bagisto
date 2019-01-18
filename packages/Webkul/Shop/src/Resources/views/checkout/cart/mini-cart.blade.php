@@ -22,42 +22,63 @@
                 <div class="dropdown-header">
                     <p class="heading">
                         {{ __('shop::app.checkout.cart.cart-subtotal') }} -
+
+                        {!! view_render_event('bagisto.shop.checkout.cart-mini.subtotal.before', ['cart' => $cart]) !!}
+
                         {{ core()->currency($cart->base_sub_total) }}
+
+                        {!! view_render_event('bagisto.shop.checkout.cart-mini.subtotal.after', ['cart' => $cart]) !!}
                     </p>
                 </div>
 
                 <div class="dropdown-content">
                     @foreach ($items as $item)
-                        {{-- @if ($item->type == "configurable") --}}
-                            <div class="item">
-                                <div class="item-image" >
-                                    <?php
-                                        if ($item->type == "configurable")
-                                            $images = $productImageHelper->getProductBaseImage($item->child->product);
-                                        else
-                                            $images = $productImageHelper->getProductBaseImage($item->product);
-                                    ?>
-                                    <img src="{{ $images['small_image_url'] }}" />
-                                </div>
 
-                                <div class="item-details">
-                                    {{-- @if ($item->type == "configurable")
-                                        <div class="item-name">{{ $item->child->name }}</div>
-                                    @else --}}
-                                        <div class="item-name">{{ $item->name }}</div>
-                                    {{-- @endif --}}
-
-                                    @if ($item->type == "configurable")
-                                        <div class="item-options">
-                                            {{ trim(Cart::getProductAttributeOptionDetails($item->child->product)['html']) }}
-                                        </div>
-                                    @endif
-
-                                    <div class="item-price">{{ core()->currency($item->base_total) }}</div>
-
-                                    <div class="item-qty">Quantity - {{ $item->quantity }}</div>
-                                </div>
+                        <div class="item">
+                            <div class="item-image" >
+                                <?php
+                                    if ($item->type == "configurable")
+                                        $images = $productImageHelper->getProductBaseImage($item->child->product);
+                                    else
+                                        $images = $productImageHelper->getProductBaseImage($item->product);
+                                ?>
+                                <img src="{{ $images['small_image_url'] }}" />
                             </div>
+
+                            <div class="item-details">
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.name.before', ['item' => $item]) !!}
+
+                                <div class="item-name">{{ $item->name }}</div>
+
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.name.after', ['item' => $item]) !!}
+
+
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.options.before', ['item' => $item]) !!}
+
+                                @if ($item->type == "configurable")
+                                    <div class="item-options">
+                                        {{ trim(Cart::getProductAttributeOptionDetails($item->child->product)['html']) }}
+                                    </div>
+                                @endif
+
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.options.after', ['item' => $item]) !!}
+
+
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.price.before', ['item' => $item]) !!}
+
+                                <div class="item-price">{{ core()->currency($item->base_total) }}</div>
+
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.price.after', ['item' => $item]) !!}
+
+
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.quantity.before', ['item' => $item]) !!}
+
+                                <div class="item-qty">Quantity - {{ $item->quantity }}</div>
+
+                                {!! view_render_event('bagisto.shop.checkout.cart-mini.item.quantity.after', ['item' => $item]) !!}
+                            </div>
+                        </div>
+
                     @endforeach
                 </div>
 

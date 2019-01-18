@@ -61,9 +61,16 @@
 
                 <div class="item-details">
 
+                    {!! view_render_event('bagisto.shop.checkout.name.before', ['item' => $item]) !!}
+
                     <div class="item-title">
                         {{ $product->name }}
                     </div>
+
+                    {!! view_render_event('bagisto.shop.checkout.name.after', ['item' => $item]) !!}
+
+
+                    {!! view_render_event('bagisto.shop.checkout.price.before', ['item' => $item]) !!}
 
                     <div class="row">
                         <span class="title">
@@ -74,6 +81,11 @@
                         </span>
                     </div>
 
+                    {!! view_render_event('bagisto.shop.checkout.price.after', ['item' => $item]) !!}
+
+
+                    {!! view_render_event('bagisto.shop.checkout.quantity.before', ['item' => $item]) !!}
+
                     <div class="row">
                         <span class="title">
                             {{ __('shop::app.checkout.onepage.quantity') }}
@@ -83,13 +95,19 @@
                         </span>
                     </div>
 
+                    {!! view_render_event('bagisto.shop.checkout.quantity.after', ['item' => $item]) !!}
+
+
                     @if ($product->type == 'configurable')
-                        
+                        {!! view_render_event('bagisto.shop.checkout.options.after', ['item' => $item]) !!}
+
                         <div class="summary" >
 
                             {{ Cart::getProductAttributeOptionDetails($item->child->product)['html'] }}
                             
                         </div>
+
+                        {!! view_render_event('bagisto.shop.checkout.options.after', ['item' => $item]) !!}
                     @endif
                 </div>
 
