@@ -5,7 +5,7 @@ namespace Webkul\Attribute\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-
+// use Event;
 
 /**
  * Catalog attribute controller
