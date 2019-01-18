@@ -111,6 +111,8 @@ class ProductController extends Controller
     {
         $families = $this->attributeFamily->all();
 
+        $configurableFamily = null;
+
         if ($familyId = request()->get('family')) {
             $configurableFamily = $this->attributeFamily->find($familyId);
         }

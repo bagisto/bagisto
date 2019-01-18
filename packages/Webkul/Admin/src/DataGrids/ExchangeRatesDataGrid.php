@@ -13,6 +13,10 @@ use DB;
  */
 class ExchangeRatesDataGrid extends DataGrid
 {
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
     protected $index = 'currency_exch_id';
 
     public function prepareQueryBuilder()

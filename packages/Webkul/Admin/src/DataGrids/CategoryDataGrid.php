@@ -13,6 +13,10 @@ use DB;
  */
 class CategoryDataGrid extends DataGrid
 {
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
     protected $index = 'category_id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()

@@ -13,7 +13,9 @@ use DB;
  */
 class CustomerDataGrid extends DataGrid
 {
-    protected $itemsPerPage = 5;
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
 
     protected $index = 'customer_id'; //the column that needs to be treated as index column
 

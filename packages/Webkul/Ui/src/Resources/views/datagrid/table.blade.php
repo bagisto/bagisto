@@ -1,7 +1,7 @@
 <div class="table">
     <datagrid-filters></datagrid-filters>
 
-    @if (config('datagrid.paginate'))
+    @if (isset($results['paginated']) && $results['paginated'])
         @include('ui::datagrid.pagination', ['results' => $results['records']])
     @endif
 
