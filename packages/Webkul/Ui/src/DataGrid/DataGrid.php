@@ -25,7 +25,63 @@ abstract class DataGrid
     protected $parse;
     protected $enableMassAction = false;
     protected $enableAction = false;
+    protected $paginate = false;
     protected $itemsPerPage = 10;
+    protected $operators = [
+        'eq' => "=",
+        'lt' => "<",
+        'gt' => ">",
+        'lte' => "<=",
+        'gte' => ">=",
+        'neqs' => "<>",
+        'neqn' => "!=",
+        'eqo' => "<=>",
+        'like' => "like",
+        'blike' => "like binary",
+        'nlike' => "not like",
+        'ilike' => "ilike",
+        'and' => "&",
+        'bor' => "|",
+        'regex' => "regexp",
+        'notregex' => "not regexp",
+        // 14 => "^",
+        // 15 => "<<",
+        // 16 => ">>",
+        // 17 => "rlike",
+        // 20 => "~",
+        // 21 => "~*",
+        // 22 => "!~",
+        // 23 => "!~*",
+        // 24 => "similar to",
+        // 25 => "not similar to",
+        // 26 => "not ilike",
+        // 27 => "~~*",
+        // 28 => "!~~*"
+    ];
+
+    protected $bindings = [
+        0 => "select",
+        1 => "from",
+        2 => "join",
+        3 => "where",
+        4 => "having",
+        5 => "order",
+        6 => "union"
+    ];
+
+    protected $selectcomponents = [
+        0 => "aggregate",
+        1 => "columns",
+        2 => "from",
+        3 => "joins",
+        4 => "wheres",
+        5 => "groups",
+        6 => "havings",
+        7 => "orders",
+        8 => "limit",
+        9 => "offset",
+        10 => "lock"
+    ];
 
     abstract public function prepareQueryBuilder();
     abstract public function addColumns();
@@ -97,7 +153,7 @@ abstract class DataGrid
         if (count($parsedUrl)) {
             $filteredOrSortedCollection = $this->sortOrFilterCollection($this->collection = $this->queryBuilder, $parsedUrl);
 
-            if (config('datagrid.paginate')) {
+            if ($this->paginate) {
                 if ($this->itemsPerPage > 0)
                     return $filteredOrSortedCollection->paginate($this->itemsPerPage)->appends(request()->except('page'));
             } else {
@@ -105,7 +161,7 @@ abstract class DataGrid
             }
         }
 
-        if (config('datagrid.paginate')) {
+        if ($this->paginate) {
             if ($this->itemsPerPage > 0) {
                 $this->collection = $this->queryBuilder->paginate($this->itemsPerPage)->appends(request()->except('page'));
             }
@@ -176,13 +232,13 @@ abstract class DataGrid
                         if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
                             $collection->where(
                                 $this->filterMap[$columnName],
-                                config("datagrid.operators.{$condition}"),
+                                $this->operators[$condition],
                                 '%'.$filter_value.'%'
                             );
                         } else {
                             $collection->where(
                                 $columnName,
-                                config("datagrid.operators.{$condition}"),
+                                $this->operators[$condition],
                                 '%'.$filter_value.'%'
                             );
                         }
@@ -193,13 +249,13 @@ abstract class DataGrid
                             if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
                                 $collection->whereDate(
                                     $this->filterMap[$columnName],
-                                    config("datagrid.operators.{$condition}"),
+                                    $this->operators[$condition],
                                     $filter_value
                                 );
                             } else {
                                 $collection->whereDate(
                                     $columnName,
-                                    config("datagrid.operators.{$condition}"),
+                                    $this->operators[$condition],
                                     $filter_value
                                 );
                             }
@@ -207,13 +263,13 @@ abstract class DataGrid
                             if ($this->enableFilterMap && isset($this->filterMap[$columnName])) {
                                 $collection->where(
                                     $this->filterMap[$columnName],
-                                    config("datagrid.operators.{$condition}"),
+                                    $this->operators[$condition],
                                     $filter_value
                                 );
                             } else {
                                 $collection->where(
                                     $columnName,
-                                    config("datagrid.operators.{$condition}"),
+                                    $this->operators[$condition],
                                     $filter_value
                                 );
                             }
@@ -222,7 +278,7 @@ abstract class DataGrid
                 }
             }
         }
-        // dd($collection->toSql());
+
         return $collection;
     }
 
@@ -242,6 +298,8 @@ abstract class DataGrid
 
         $this->prepareQueryBuilder();
 
-        return view('ui::datagrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->completeColumnDetails, 'actions' => $this->actions, 'massactions' => $this->massActions, 'index' => $this->index, 'enableMassActions' => $this->enableMassAction, 'enableActions' => $this->enableAction, 'norecords' => trans('ui::app.datagrid.no-records')]);
+        // dd($this->paginate, $this->itemsPerPage);
+
+        return view('ui::datagrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->completeColumnDetails, 'actions' => $this->actions, 'massactions' => $this->massActions, 'index' => $this->index, 'enableMassActions' => $this->enableMassAction, 'enableActions' => $this->enableAction, 'paginated' => $this->paginate, 'norecords' => trans('ui::app.datagrid.no-records')]);
     }
 }

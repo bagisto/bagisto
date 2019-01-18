@@ -13,7 +13,11 @@ use DB;
  */
 class CustomerReviewDataGrid extends DataGrid
 {
-    protected $index = 'product_review_id'; //the column that needs to be treated as index column
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
+    protected $index = 'product_review_id'; //column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
