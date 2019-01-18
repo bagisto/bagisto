@@ -21,20 +21,20 @@
             </div>
 
             <div class="page-content">
-                
+
                 <div class="form-container">
                     @csrf()
                     <input name="_method" type="hidden" value="PUT">
 
                     <accordian :title="'{{ __('admin::app.catalog.families.general') }}'" :active="true">
                         <div slot="body">
-                        
+
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <input type="text" v-validate="'required'" name="code" class="control" id="code" value="{{ $attributeFamily->code }}" disabled="disabled" data-vv-as="&quot;{{ __('admin::app.catalog.families.code') }}&quot;" v-code/>
                                 <input type="hidden" name="code" value="{{ $attributeFamily->code }}"/>
                                 <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                             </div>
-                        
+
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.catalog.families.name') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') ?: $attributeFamily->name }}" data-vv-as="&quot;{{ __('admin::app.catalog.families.name') }}&quot;"/>
@@ -173,7 +173,7 @@
             </div>
         </accordian>
     </script>
-    
+
     <script>
         var groups = @json($attributeFamily->attribute_groups);
         var custom_attributes = @json($custom_attributes);
@@ -215,7 +215,7 @@
                                 groups.push(this.group);
 
                                 groups = this.sortGroups();
-                                
+
                                 this.group = {'groupName': '', 'position': '', 'custom_attributes': []};
 
                                 this.$parent.closeModal();
@@ -272,7 +272,7 @@
                 addAttributes (groupIndex, attributeIds) {
                     attributeIds.forEach(function(attributeId) {
                         var attribute = this.custom_attributes.filter(attribute => attribute.id == attributeId)
-                        
+
                         this.groups[groupIndex].custom_attributes.push(attribute[0]);
 
                         let index = this.custom_attributes.indexOf(attribute[0])
@@ -323,7 +323,7 @@
 
                     $(e.target).prev().find('li input').each(function() {
                         var attributeId = $(this).val();
-                        
+
                         if ($(this).is(':checked')) {
                             attributeIds.push(attributeId);
 
@@ -342,4 +342,4 @@
             }
         });
     </script>
-@endpush 
+@endpush

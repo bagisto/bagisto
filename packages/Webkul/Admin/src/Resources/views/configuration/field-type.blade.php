@@ -21,7 +21,6 @@
         $class = app(current($temp));
         $method = end($temp);
         $value = $class->$method();
-        $selectedOption = core()->getConfigData($name) ?? '';
     }
 
     $channel_locale = [];
@@ -60,11 +59,17 @@
 
             <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;" >
 
+                <?php
+                    $selectedOption = core()->getConfigData($name) ?? '';
+                ?>
+
                 @if (isset($field['repository']))
-                    @foreach ($value as $option)
-                        <option value="{{  $option['name'] }}" {{ $option['name'] == $selectedOption ? 'selected' : ''}}
-                        {{ trans($option['name']) }}
+                    @foreach ($value as $key => $option)
+
+                        <option value="{{  $value[$key] }}" {{ $value[$key] == $selectedOption ? 'selected' : ''}}>
+                           {{ trans($value[$key]) }}
                         </option>
+
                     @endforeach
                 @else
                     @foreach ($field['options'] as $option)
@@ -74,8 +79,6 @@
                             } else {
                                 $value = $option['value'];
                             }
-
-                            $selectedOption = core()->getConfigData($name) ?? '';
                         ?>
 
                         <option value="{{ $value }}" {{ $value == $selectedOption ? 'selected' : ''}}>
@@ -90,23 +93,33 @@
 
             <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]" data-vv-as="&quot;{{ $field['name'] }}&quot;"  multiple>
 
-                @foreach ($field['options'] as $option)
+                <?php
+                    $selectedOption = core()->getConfigData($name) ?? '';
+                ?>
 
-                    <?php
-                        if ($option['value'] == false) {
-                            $value = 0;
-                        } else {
-                            $value = $option['value'];
-                        }
+                @if (isset($field['repository']))
+                    @foreach ($value as $key => $option)
 
-                        $selectedOption = core()->getConfigData($name) ?? '';
-                    ?>
+                        <option value="{{  $value[$key] }}" {{ in_array($value[$key], explode(',', $selectedOption)) ? 'selected' : ''}}>
+                            {{ trans($value[$key]) }}
+                        </option>
 
-                    <option value="{{ $value }}" {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}>
-                        {{ $option['title'] }}
-                    </option>
+                    @endforeach
+                @else
+                    @foreach ($field['options'] as $option)
+                        <?php
+                            if ($option['value'] == false) {
+                                $value = 0;
+                            } else {
+                                $value = $option['value'];
+                            }
+                        ?>
 
-                @endforeach
+                        <option value="{{ $value }}" {{ in_array($option['value'], explode(',', $selectedOption)) ? 'selected' : ''}}>
+                            {{ $option['title'] }}
+                        </option>
+                    @endforeach
+                @endif
 
             </select>
 

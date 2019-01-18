@@ -3068,36 +3068,9 @@ section.review {
         .account-items-list , .edit-form {
             margin-top: 20px;
 
-            .table {
-                display: none;
-            }
-
             .responsive-empty {
                 display: block;
             }
-
-            .responsive-table {
-                border: 1px solid $border-color;
-                margin-top: 5px;
-                width: 100%;
-                display: block;
-
-                tbody td {
-                    padding: 8px 5px;
-
-                    &:first-child {
-                        width: 25%;
-                    }
-
-                    &:last-child {
-                        padding-left: 10px;
-                    }
-                }
-            }
-        }
-
-        .account-items-list.table {
-            display: none;
         }
 
         .control-group .control {
@@ -3214,29 +3187,6 @@ section.review {
 
                     .title {
                         line-height: 20px;
-                    }
-                }
-
-                .table{
-                    display: none;
-                }
-
-                .responsive-table {
-                    border: 1px solid $border-color;
-                    margin-top: 5px;
-                    width: 100%;
-                    display: block;
-
-                    tbody td {
-                        padding: 8px 5px;
-
-                        &:first-child {
-                            width: 35%;
-                        }
-
-                        &:last-child {
-                            padding-left: 10px;
-                        }
                     }
                 }
 

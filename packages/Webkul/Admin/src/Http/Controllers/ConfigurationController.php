@@ -139,7 +139,7 @@ class ConfigurationController extends Controller
 
         Event::fire('core.configuration.save.after');
 
-        session()->flash('success', 'Shipping Method is created successfully');
+        session()->flash('success', trans('admin::app.configuration.save-message'));
 
         return redirect()->back();
     }

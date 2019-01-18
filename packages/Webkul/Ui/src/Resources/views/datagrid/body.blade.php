@@ -39,7 +39,7 @@
                 @endforeach
 
                 @if ($enableActions)
-                    <td style="width: 50px;">
+                    <td>
                         <div class="actions">
                             @foreach ($actions as $action)
                                 <a href="{{ route($action['route'], $record->{$index}) }}">

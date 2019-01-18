@@ -214,7 +214,7 @@ return [
             'confirm-delete-title' => 'Confirm password before delete',
             'delete-last' => 'At least one admin is required.',
             'delete-success' => 'Success! User deleted',
-            'incorrect-password' => 'The password you entered is incorrect'
+            'incorrect-password' => 'The password you entered is incorrect',
         ],
 
         'sessions' => [
@@ -445,6 +445,7 @@ return [
     'configuration' => [
         'title' => 'Configuration',
         'save-btn-title' => 'Save',
+        'save-message' => 'Configuration saved successfully',
 
         'tax-categories' => [
             'title' => 'Tax Categories',
@@ -685,12 +686,6 @@ return [
             'male' => 'Male',
             'female' => 'Female',
             'phone' => 'Phone',
-            'created' => 'Customer created successfully.',
-            'updated' => 'Customer updated successfully.',
-            'deleted' => 'Customer deleted successfully.',
-            'group-created' => 'Customer Group created successfully.',
-            'group-updated' => 'Customer Group updated successfully.',
-            'group-deleted' => 'Customer Group deleted successfully.',
             'group-default' => 'Cannot delete the default group.',
         ],
         'reviews' => [
@@ -751,5 +746,15 @@ return [
        'download' => 'Download',
        'csv' => 'CSV',
        'xls' => 'XLS'
-    ]
+    ],
+
+    'response' => [
+        'create-success' => ':name created successfully.',
+        'update-success' => ':name updated successfully.',
+        'delete-success' => ':name deleted successfully.',
+        'last-delete-error' => 'At least one :name is required.',
+        'user-define-error' => 'Can not delete system :name',
+        'attribute-error' => ':name is used in configurable products.',
+        'attribute-product-error' => ':name is used in products.'
+    ],
 ];
