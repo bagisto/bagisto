@@ -276,6 +276,13 @@ h2 {
             &.empty {
                 text-align: center;
             }
+
+            tr {
+
+                td {
+                    border: 1px solid red;
+                }
+            }
         }
 
         tbody tr:last-child td {

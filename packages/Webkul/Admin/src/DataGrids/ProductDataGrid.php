@@ -40,7 +40,7 @@ class ProductDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
+            // 'width' => '40px'
         ]);
 
         $this->addColumn([
@@ -49,7 +49,7 @@ class ProductDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
+            // 'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -58,7 +58,7 @@ class ProductDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
+            // 'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -67,7 +67,7 @@ class ProductDataGrid extends DataGrid
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
-            'width' => '100px'
+            // 'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -76,7 +76,7 @@ class ProductDataGrid extends DataGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px',
+            // 'width' => '100px',
             'wrapper' => function($value) {
                 if ($value->status == 1)
                     return 'Active';
@@ -91,7 +91,7 @@ class ProductDataGrid extends DataGrid
             'type' => 'price',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
+            // 'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -100,7 +100,7 @@ class ProductDataGrid extends DataGrid
             'type' => 'number',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
+            // 'width' => '100px'
         ]);
     }
 
