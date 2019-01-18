@@ -135,11 +135,12 @@ class AttributeController extends Controller
             session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'attribute']));
         } else {
             try {
+                Event::fire('after.attribute.deleted', $attribute);
+
                 $this->attribute->delete($id);
 
                 session()->flash('success', 'Attribute deleted successfully.');
 
-                Event::fire(after.attribute.deleted, $attribute);
             } catch(\Exception $e) {
                 session()->flash('error', trans('admin::app.response.attribute-error', ['name' => 'Attribute']));
             }

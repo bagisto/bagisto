@@ -35,6 +35,8 @@ Route::group(['middleware' => ['web']], function () {
 
         // Admin Routes
         Route::group(['middleware' => ['admin']], function () {
+            Route::get('/testev', 'Webkul\Product\Http\Controllers\ProductController@testEvent');
+
             Route::get('/logout', 'Webkul\User\Http\Controllers\SessionController@destroy')->defaults('_config', [
                 'redirect' => 'admin.session.create'
             ])->name('admin.session.destroy');

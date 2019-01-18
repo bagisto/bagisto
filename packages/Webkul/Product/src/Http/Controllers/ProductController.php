@@ -9,10 +9,11 @@ use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
+use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
 use Webkul\Admin\DataGrids\TestDataGrid;
-
+use Webkul\Product\Listeners\ProductsFlat as PF;
 /**
  * Product controller
  *
@@ -62,6 +63,7 @@ class ProductController extends Controller
      * @var array
      */
     protected $productGrid;
+    protected $attribute;
 
     /**
      * Create a new controller instance.
@@ -77,7 +79,8 @@ class ProductController extends Controller
         Category $category,
         InventorySource $inventorySource,
         Product $product,
-        ProductGrid $productGrid)
+        ProductGrid $productGrid,
+        Attribute $attribute)
     {
         $this->attributeFamily = $attributeFamily;
 
@@ -88,6 +91,8 @@ class ProductController extends Controller
         $this->product = $product;
 
         $this->productGrid = $productGrid;
+
+        $this->attribute = $attribute;
 
         $this->_config = request('_config');
     }
@@ -127,7 +132,7 @@ class ProductController extends Controller
      */
     public function store()
     {
-        if (! request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
+        if (!request()->get('family') && request()->input('type') == 'configurable' && request()->input('sku') != '') {
             return redirect(url()->current() . '?family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
         }
 
@@ -256,5 +261,11 @@ class ProductController extends Controller
         Event::fire('products.datagrid.sync', true);
 
         return redirect()->route('admin.catalog.products.index');
+    }
+
+    public function testEvent() {
+        $productFlat = new PF();
+
+        $productFlat->afterAttributeCreated($this->attribute->find(27));
     }
 }
