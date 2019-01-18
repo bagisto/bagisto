@@ -312,9 +312,8 @@
                                                             $product = $item->type == 'configurable' ? $item->child->product : $item->product;
 
                                                             foreach ($product->inventories as $inventory) {
-                                                                if ($inventory->inventory_source_id == $inventorySource->id && !$inventory->vendor_id) {
-                                                                    $sourceQty = $inventory->qty;
-                                                                    break;
+                                                                if ($inventory->inventory_source_id == $inventorySource->id) {
+                                                                    $sourceQty += $inventory->qty;
                                                                 }
                                                             }
                                                         ?>

@@ -89,21 +89,28 @@ class CartController extends Controller
      */
     public function add($id)
     {
-        Event::fire('checkout.cart.add.before', $id);
+        try {
+            Event::fire('checkout.cart.add.before', $id);
 
-        $result = Cart::add($id, request()->except('_token'));
+            $result = Cart::add($id, request()->except('_token'));
 
-        Event::fire('checkout.cart.add.after', $result);
+            Event::fire('checkout.cart.add.after', $result);
 
-        if ($result) {
-            session()->flash('success', trans('shop::app.checkout.cart.item.success'));
-        } else {
-            session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
+            if ($result) {
+                session()->flash('success', trans('shop::app.checkout.cart.item.success'));
+            } else {
+                session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
+            }
+
+            Cart::collectTotals();
+
+            return redirect()->route($this->_config['redirect']);
+
+        } catch(\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
+            
+            return redirect()->back();
         }
-
-        Cart::collectTotals();
-
-        return redirect()->back();
     }
 
     /**
@@ -176,9 +183,14 @@ class CartController extends Controller
 
     public function buyNow($id)
     {
+        Event::fire('checkout.cart.add.before', $id);
+
         $result = Cart::proceedToBuyNow($id);
 
+        Event::fire('checkout.cart.add.after', $result);
+
         Cart::collectTotals();
+
 
         if (! $result) {
             return redirect()->back();

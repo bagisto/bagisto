@@ -41,7 +41,9 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
     ])->name('shop.checkout.cart.index');
 
     //Cart Items Add
-    Route::post('checkout/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->name('cart.add');
+    Route::post('checkout/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->defaults('_config',[
+        'redirect' => 'shop.checkout.cart.index'
+    ])->name('cart.add');
 
     //Cart Items Add Configurable for more
     Route::get('checkout/cart/addconfigurable/{slug}', 'Webkul\Shop\Http\Controllers\CartController@addConfigurable')->name('cart.add.configurable');
