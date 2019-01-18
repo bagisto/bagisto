@@ -13,7 +13,7 @@
         <script type="text/x-template" id="product-options-template">
             <div class="attributes">
 
-                <input type="hidden" name="selected_configurable_option" :value="selectedProductId">
+                <input type="hidden" id="selected_configurable_option" name="selected_configurable_option" :value="selectedProductId">
 
                 <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
                     <label class="required">@{{ attribute.label }}</label>
@@ -101,25 +101,6 @@
                                 this.selectedProductId = attribute.options[attribute.selectedIndex].allowedProducts[0];
                             }
 
-                            //wishlist anchor href changer with options
-                            // @auth('customer')
-                            //     var wishlistLink = $('#wishlist-changer').attr('data-href');
-
-                            //     if (this.selectedProductId != '') {
-                            //         var splitted = wishlistLink.split("/");
-
-                            //         var lastItem = splitted.pop();
-
-                            //         lastItem = this.selectedProductId;
-
-                            //         var joined = splitted.join('/');
-
-                            //         var newWishlistUrl = joined + '/' + lastItem;
-
-                            //         $('#wishlist-changer').attr('data-href', newWishlistUrl);
-                            //     }
-                            // @endauth
-
                             //buy now anchor href changer with options
                             var buyNowLink = $('.btn.buynow').attr('data-href');
 
@@ -156,7 +137,6 @@
                                 selectedIndex = index;
                             }
                         })
-
                         return selectedIndex;
                     },
 
@@ -266,10 +246,14 @@
                             priceLabelElement.style.display = 'none';
 
                             priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formated_price;
+
+                            eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                         } else {
                             priceLabelElement.style.display = 'inline-block';
 
                             priceElement.innerHTML = this.config.regular_price.formated_price;
+
+                            eventBus.$emit('configurable-variant-selected-event', 0)
                         }
                     },
 
