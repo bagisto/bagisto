@@ -268,18 +268,4 @@ class Product {
     public function findRepeated() {
         //find if there is duplicacy in the products grid here
     }
-
-    /**
-     * Take action for attribute creation
-     */
-    public function createColumnBasedOnAttribute($attribute) {
-        dd($attribute);
-    }
-
-    /**
-     * Take action for attribute updatation
-     */
-    public function updateColumnBasedOnAttribute($attribute) {
-        dd($attribute);
-    }
 }

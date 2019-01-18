@@ -5,7 +5,7 @@ namespace Webkul\Attribute\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-// use Event;
+use Event;
 
 /**
  * Catalog attribute controller
@@ -77,6 +77,8 @@ class AttributeController extends Controller
 
         $attribute = $this->attribute->create(request()->all());
 
+        Event::fire('after.attribute.created', $attribute);
+
         session()->flash('success', 'Attribute created successfully.');
 
         return redirect()->route($this->_config['redirect']);
@@ -112,7 +114,7 @@ class AttributeController extends Controller
 
         $attribute = $this->attribute->update(request()->all(), $id);
 
-        // Event::fire('after.attribute.update', $attribute);
+        Event::fire('after.attribute.updated', $attribute);
 
         session()->flash('success', 'Attribute updated successfully.');
 
@@ -136,6 +138,8 @@ class AttributeController extends Controller
                 $this->attribute->delete($id);
 
                 session()->flash('success', 'Attribute deleted successfully.');
+
+                Event::fire(after.attribute.deleted, $attribute);
             } catch(\Exception $e) {
                 session()->flash('error', 'Attribute is used in configurable products.');
             }

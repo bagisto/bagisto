@@ -151,8 +151,8 @@
                 <table>
                     <thead v-if="massActionsToggle">
                         @if (isset($results['massactions']))
-                            <tr class="mass-action" style="height: 63px;" v-if="massActionsToggle">
-                                <th colspan="10" style="width: 100%;">
+                            <tr class="mass-action" v-if="massActionsToggle">
+                                <th>
                                     <div class="mass-action-wrapper" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
 
                                         <span class="massaction-remove" v-on:click="removeMassActions" style="margin-right: 10px;">
@@ -165,18 +165,18 @@
                                             <input type="hidden" id="indexes" name="indexes" v-model="dataIds">
 
                                             <div class="control-group">
-                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type" required>
+                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type" required style="height: 30px;">
                                                     <option v-for="(massAction, index) in massActions" :key="index" :value="massAction.type">@{{ massAction.label }}</option>
                                                 </select>
                                             </div>
 
                                             <div class="control-group" style="margin-left: 10px;" v-if="massActionType == 'update'">
-                                                <select class="control" v-model="massActionUpdateValue" name="update-options" required>
+                                                <select class="control" v-model="massActionUpdateValue" name="update-options" required style="height: 30px;">
                                                     <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ id }}</option>
                                                 </select>
                                             </div>
 
-                                            <input type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px;">
+                                            <input type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px; height: 28px;">
                                         </form>
                                     </div>
                                 </th>
