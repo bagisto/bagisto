@@ -75,7 +75,11 @@ class AttributeController extends Controller
             'type' => 'required'
         ]);
 
-        $attribute = $this->attribute->create(request()->all());
+        $data = request()->all();
+
+        $data['is_user_defined'] = 1;
+
+        $attribute = $this->attribute->create($data);
 
         Event::fire('after.attribute.created', $attribute);
 

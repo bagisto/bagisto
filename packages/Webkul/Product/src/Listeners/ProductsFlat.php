@@ -49,8 +49,12 @@ class ProductsFlat
 
         if (Schema::hasTable('product_flat')) {
             if (!Schema::hasColumn('product_flat', strtolower($attribute->code))) {
-                Schema::table('product_flat', function (Blueprint $table) use($columnType, $attributeCode) {
+                Schema::table('product_flat', function (Blueprint $table) use($columnType, $attributeCode, $attributeType) {
                     $table->{$columnType}(strtolower($attributeCode))->nullable();
+
+                    if($attributeType == 'select' || $attributeType == 'multiselect') {
+                        $table->string(strtolower($attributeCode).'_label')->nullable();
+                    }
                 });
 
                 return true;
@@ -76,6 +80,10 @@ class ProductsFlat
             if (Schema::hasColumn('product_flat', strtolower($attribute->code))) {
                 Schema::table('product_flat', function (Blueprint $table) use($attribute){
                     $table->dropColumn(strtolower($attribute->code));
+
+                    if ($attribute->type == 'select' || $attribute->type == 'multiselect') {
+                        $table->dropColumn(strtolower($attribute->code).'_label');
+                    }
                 });
 
                 return true;
