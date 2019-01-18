@@ -47,7 +47,7 @@
                             <img src="<?php echo $src ?>">
                         <?php endif; ?>
                         <span style="margin-left: 10px"><b>Composer</b></span>
-                        <span>(1.6.5 or higher)</span>
+
                     </div>
 
                     <div style="margin-left: 30%;">
@@ -56,18 +56,6 @@
                         <?php endif; ?>
                     </div>
 
-                    <div class="check" style="margin-left: 25%;">
-                        <?php if(($nodeInstall == 0) ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
-                            <img src="<?php echo $src ?>">
-                        <?php endif; ?>
-                        <span style="margin-left: 10px"><b>Node</b></span>
-                        <span>(8.11.3 LTS or higher)</span>
-                    </div>
-                    <div style="margin-left: 30%;">
-                        <?php if(!($nodeInstall == 0)): ?>
-                            <a href="https://nodejs.org/en/" style="color: #0041FF; font-size: 16px">https://nodejs.org/en/</a>
-                        <?php endif; ?>
-                    </div>
                 </div>
 
                 <?php if(!isset($requirements['errors']) && $phpVersion['supported'] && ($nodeInstall == 0) && ($composerInstall == 0) ): ?>

@@ -81,7 +81,7 @@ class LocaleController extends Controller
 
         Event::fire('core.locale.create.after', $locale);
 
-        session()->flash('success', 'Locale created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Locale']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -119,7 +119,7 @@ class LocaleController extends Controller
 
         Event::fire('core.locale.update.after', $locale);
 
-        session()->flash('success', 'Locale updated successfully.');
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Locale']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -132,8 +132,8 @@ class LocaleController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->locale->count() == 1) {
-            session()->flash('error', 'At least one locale is required.');
+        if($this->locale->count() == 1) {
+            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Locale']));
         } else {
             Event::fire('core.locale.delete.before', $id);
 
@@ -141,7 +141,7 @@ class LocaleController extends Controller
 
             Event::fire('core.locale.delete.after', $id);
 
-            session()->flash('success', 'Locale deleted successfully.');
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Locale']));
         }
 
         return redirect()->back();

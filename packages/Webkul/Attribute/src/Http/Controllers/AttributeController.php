@@ -77,7 +77,7 @@ class AttributeController extends Controller
 
         $attribute = $this->attribute->create(request()->all());
 
-        session()->flash('success', 'Attribute created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Attribute']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -112,9 +112,7 @@ class AttributeController extends Controller
 
         $attribute = $this->attribute->update(request()->all(), $id);
 
-        // Event::fire('after.attribute.update', $attribute);
-
-        session()->flash('success', 'Attribute updated successfully.');
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Attribute']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -129,15 +127,15 @@ class AttributeController extends Controller
     {
         $attribute = $this->attribute->findOrFail($id);
 
-        if (!$attribute->is_user_defined) {
-            session()->flash('error', 'Can not delete system attribute.');
+        if(!$attribute->is_user_defined) {
+            session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'attribute']));
         } else {
             try {
                 $this->attribute->delete($id);
 
-                session()->flash('success', 'Attribute deleted successfully.');
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Attribute']));
             } catch(\Exception $e) {
-                session()->flash('error', 'Attribute is used in configurable products.');
+                session()->flash('error', trans('admin::app.response.attribute-error', ['name' => 'Attribute']));
             }
         }
 

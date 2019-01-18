@@ -61,7 +61,8 @@ $data    = array();      // array to pass back data
         // if there are no errors process our form, then return a message
 
         // getting env file location
-        $currentLocation = explode("/", getcwd());
+        $location = str_replace('\\', '/', getcwd());
+        $currentLocation = explode("/", $location);
         array_pop($currentLocation);
         array_pop($currentLocation);
         $desiredLocation = implode("/", $currentLocation);
@@ -119,7 +120,7 @@ $data    = array();      // array to pass back data
         // checking database connection(mysql only)
         if ($_POST["database_connection"] == 'mysql') {
             // Create connection
-            $conn = new mysqli($_POST["host_name"], $_POST["user_name"], $_POST["user_password"], $_POST["database_name"]);
+            @$conn = new mysqli($_POST["host_name"], $_POST["user_name"], $_POST["user_password"], $_POST["database_name"]);
 
             // check connection
             if ($conn->connect_error) {

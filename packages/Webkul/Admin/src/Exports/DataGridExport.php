@@ -41,10 +41,21 @@ class DataGridExport implements FromView, ShouldAutoSize
     public function view(): View
     {
         $pagination = false;
+        $results = [];
+        $columns = [];
+
+        foreach($this->gridData as $key => $data) {
+            if ($key == 'collection') {
+                $results = $data['data'];
+            }
+            if ($key == 'columns') {
+               $columns = $data;
+            }
+        }
 
         return view('admin::export.export', [
-            'results' => $this->gridData->render($pagination)->results,
-            'columns' => $this->gridData->render($pagination)->columns,
+            'results' => $results,
+            'columns' => $columns,
         ]);
     }
 }

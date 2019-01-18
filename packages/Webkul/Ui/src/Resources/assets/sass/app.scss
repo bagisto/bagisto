@@ -294,6 +294,32 @@ h2 {
     }
 }
 
+@media only screen and (max-width: 770px) {
+    .table {
+        table thead {
+            display: none;
+        }
+
+        table tbody {
+            tr td:before {
+                content: attr(data-value);
+                    font-size: 15px;
+                    font-weight: 600;
+                    margin-right: 20px;
+            }
+
+            td {
+                border-bottom: none;
+                display: block;
+            }
+
+            tr {
+                border: 1px solid #C7C7C7;
+            }
+        }
+    }
+}
+
 .dropdown-btn {
     min-width: 150px;
     text-align: left;
