@@ -118,10 +118,10 @@ class OrderRepository extends Repository
     {
         $order = $this->findOrFail($orderId);
 
-        Event::fire('sales.order.cancel.before', $order);
-
         if (! $order->canCancel())
             return false;
+
+        Event::fire('sales.order.cancel.before', $order);
 
         foreach ($order->items as $item) {
             if ($item->qty_to_cancel) {
