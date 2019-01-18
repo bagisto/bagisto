@@ -71,7 +71,7 @@ class ProductsFlat
      */
     public function afterAttributeUpdated($attribute)
     {
-        dd($attribute);
+        return true;
     }
 
     public function afterAttributeDeleted($attribute)

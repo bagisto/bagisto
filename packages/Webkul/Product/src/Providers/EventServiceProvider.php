@@ -14,7 +14,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Event::listen('after.attribute.updated', 'Webkul\Product\Listeners\ProductsFlat@afterAttributeUpdated');
+        // Event::listen('after.attribute.updated', 'Webkul\Product\Listeners\ProductsFlat@afterAttributeUpdated');
 
         Event::listen('after.attribute.created', 'Webkul\Product\Listeners\ProductsFlat@afterAttributeCreated');
 
