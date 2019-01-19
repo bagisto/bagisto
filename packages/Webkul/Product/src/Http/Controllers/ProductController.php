@@ -8,12 +8,11 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
+use Webkul\Product\Repositories\ProductFlatRepository as ProductFlat;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
-use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
-use Webkul\Admin\DataGrids\TestDataGrid;
-use Webkul\Product\Listeners\ProductsFlat as PF;
+
 /**
  * Product controller
  *
@@ -63,7 +62,13 @@ class ProductController extends Controller
      * @var array
      */
     protected $productGrid;
-    protected $attribute;
+
+    /**
+     * ProductFlat Repository Object
+     *
+     * @vatr array
+     */
+    protected $productFlat;
 
     /**
      * Create a new controller instance.
@@ -80,7 +85,7 @@ class ProductController extends Controller
         InventorySource $inventorySource,
         Product $product,
         ProductGrid $productGrid,
-        Attribute $attribute)
+        ProductFlat $productFlat)
     {
         $this->attributeFamily = $attributeFamily;
 
@@ -92,7 +97,7 @@ class ProductController extends Controller
 
         $this->productGrid = $productGrid;
 
-        $this->attribute = $attribute;
+        $this->productFlat = $productFlat;
 
         $this->_config = request('_config');
     }
@@ -263,9 +268,31 @@ class ProductController extends Controller
         return redirect()->route('admin.catalog.products.index');
     }
 
-    public function testEvent() {
-        $productFlat = new PF();
+    public function testProductFlat() {
+        $allChannels = [];
+        $allLocales = [];
+        $productFlatAtttributes = [];
 
-        $productFlat->afterAttributeCreated($this->attribute->find(27));
+        $product = $this->product->find(4);
+
+        foreach($product->attribute_values as $attributeValue) {
+            array_push($productFlatAtttributes, strtolower($attributeValue->attribute->code));
+        }
+
+        foreach(core()->getAllChannels() as $channel) {
+            array_push($allChannels, ['name' => $channel->name, 'code' => $channel->code]);
+        }
+
+        foreach(core()->getAllLocales() as $locale) {
+            array_push($allLocales, ['name' => $locale->name, 'code' => $locale->code]);
+        }
+
+        foreach($allChannels as $allChannel) {
+            foreach($allLocales as $allLocale) {
+
+            }
+        }
+
+        die;
     }
 }
