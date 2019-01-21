@@ -83,7 +83,7 @@ class UserDataGrid extends DataGrid
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
-            'route' => 'admin.roles.edit',
+            'route' => 'admin.users.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
     }

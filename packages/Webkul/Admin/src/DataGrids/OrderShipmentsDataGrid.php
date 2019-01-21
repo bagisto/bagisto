@@ -100,7 +100,7 @@ class OrderShipmentsDataGrid extends DataGrid
     public function prepareActions() {
         $this->addAction([
             'type' => 'View',
-            'route' => 'admin.sales.orders.view',
+            'route' => 'admin.sales.shipments.view',
             'icon' => 'icon eye-icon'
         ]);
     }

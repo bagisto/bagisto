@@ -10,7 +10,6 @@ use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
 use Webkul\Product\Repositories\ProductFlatRepository as ProductFlat;
 use Webkul\Product\Repositories\ProductAttributeValueRepository as ProductAttributeValue;
-use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
@@ -90,8 +89,7 @@ class ProductController extends Controller
         Product $product,
         ProductGrid $productGrid,
         ProductFlat $productFlat,
-        ProductAttributeValue $productAttributeValue,
-        Attribute $attribute)
+        ProductAttributeValue $productAttributeValue)
     {
         $this->attributeFamily = $attributeFamily;
 
@@ -105,9 +103,7 @@ class ProductController extends Controller
 
         $this->productFlat = $productFlat;
 
-        $this->productAttributeValue = $productAttibuteValue;
-
-        $this->attribute = $attribute;
+        $this->productAttributeValue = $productAttributeValue;
 
         $this->_config = request('_config');
     }
@@ -336,27 +332,53 @@ class ProductController extends Controller
         $attributes = $product->attribute_family->custom_attributes;
 
         foreach($attributes as $key => $attribute) {
-            dd($this->productAttributeValue->findWhere(['attribute_id' => $attribute->id, 'value_per_locale' => 1, 'value_per_channel' => 1]));
-            if($attribute->type == 'select') {
-                if($attribute->value_per_channel && $attribute->value_per_locale) {
-                    dd($this->productAttributeValue->findWhere(['attribute_id' => $attribute->id, 'value_per_locale' => 1, 'value_per_channel' => 1]));
-
-                    // $this->pushCorrect($attribute->channel);
-                } else if($attribute->value_per_channel && !$attribute->value_per_locale) {
-                    // $this->pushCorrect();
-                } else if($attribute->value_per_locale) {
-                    // $this->pushCorrect();
-                } else {
-                    // $this->pushCorrect();
+            if($attribute->value_per_channel && $attribute->value_per_locale) {
+                $values = $this->productAttributeValue->findWhere(['attribute_id' => $attribute->id, 'product_id' => $product->id]);
+                dd($values);
+                foreach($values as $key => $value) {
+                    dd($value->channel, $value->locale);
+                    // $this->pushCorrect($attribute->channel, );
                 }
-            } else if($attribute->type == 'multiselect') {
+
+
+            } else if($attribute->value_per_channel && !$attribute->value_per_locale) {
+                // $this->pushCorrect();
+            } else if($attribute->value_per_locale) {
                 // $this->pushCorrect();
             } else {
                 // $this->pushCorrect();
             }
+
+            // if($attribute->type == 'select') {
+            //     if($attribute->value_per_channel && $attribute->value_per_locale) {
+            //         dd($this->productAttributeValue->findWhere(['attribute_id' => $attribute->id]));
+
+            //         // $this->pushCorrect($attribute->channel);
+            //     } else if($attribute->value_per_channel && !$attribute->value_per_locale) {
+            //         // $this->pushCorrect();
+            //     } else if($attribute->value_per_locale) {
+            //         // $this->pushCorrect();
+            //     } else {
+            //         // $this->pushCorrect();
+            //     }
+            // } else if($attribute->type == 'multiselect') {
+            //     // $this->pushCorrect();
+            // } else {
+            //     if($attribute->value_per_channel && $attribute->value_per_locale) {
+            //         dd($this->productAttributeValue->findWhere(['attribute_id' => $attribute->id]));
+
+            //         // $this->pushCorrect($attribute->channel);
+            //     } else if($attribute->value_per_channel && !$attribute->value_per_locale) {
+            //         // $this->pushCorrect();
+            //     } else if($attribute->value_per_locale) {
+            //         // $this->pushCorrect();
+            //     } else {
+            //         // $this->pushCorrect();
+            //     }
+            // }
         }
 
-        // dd($productMapped);
+        dd($productMapped);
     }
 
     public function pushCorrect($channelCode = null, $localeCode = null, $productMapped) {
