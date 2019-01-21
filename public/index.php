@@ -2,7 +2,7 @@
 
 $install = require __DIR__.'/installer/install.php';
 
-if (!is_null($install)) {
+if (0 && !is_null($install)) {
 
     header("Location: $install");
 
