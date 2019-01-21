@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(CategorySeeder::class);
         $this->call(CoreSeeder::class);
         $this->call(InventorySeeder::class);
         $this->call(AttributeSeeder::class);
-        $this->call(CategorySeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CustomerSeeder::class);
     }
