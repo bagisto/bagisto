@@ -10,6 +10,7 @@ use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
 use Webkul\Product\Repositories\ProductFlatRepository as ProductFlat;
 use Webkul\Product\Repositories\ProductAttributeValueRepository as ProductAttributeValue;
+use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
@@ -71,6 +72,7 @@ class ProductController extends Controller
      */
     protected $productFlat;
     protected $productAttributeValue;
+    protected $attribute;
 
     /**
      * Create a new controller instance.
@@ -88,7 +90,8 @@ class ProductController extends Controller
         Product $product,
         ProductGrid $productGrid,
         ProductFlat $productFlat,
-        ProductAttributeValue $productAttributeValue)
+        ProductAttributeValue $productAttributeValue,
+        Attribute $attribute)
     {
         $this->attributeFamily = $attributeFamily;
 
@@ -102,7 +105,9 @@ class ProductController extends Controller
 
         $this->productFlat = $productFlat;
 
-        $this->productAttributeValue = $productAttributeValue;
+        $this->productAttributeValue = $productAttibuteValue;
+
+        $this->attribute = $attribute;
 
         $this->_config = request('_config');
     }
@@ -277,54 +282,84 @@ class ProductController extends Controller
      * Testing for the product flat sync method on product creation and updation
      */
     public function testProductFlat() {
-        $allChannels = [];
-        $allLocales = [];
-        $productFlatAtttributes = [];
-
-        //hero variable to map the product and the attribute values on the basis of channels and locales
-        $productMapped = [];
-
         $product = $this->product->find(4);
+        $allChannelAndLocales = [];
+        $productMapped = [];
+        $channelLocaleMap = [];
 
         foreach(core()->getAllChannels() as $channel) {
-            array_push($allChannels, ['id' => $channel->id, 'name' => $channel->name, 'code' => $channel->code]);
-        }
+            array_push($productMapped, [
+                'product_id' => $product->id,
+                'type' => $product->type,
+                'channel_code' => $channel->code,
+                'locale_code' => 'null',
+            ]);
 
-        foreach(core()->getAllLocales() as $locale) {
-            array_push($allLocales, ['id' => $locale->id,'name' => $locale->name, 'code' => $locale->code]);
-        }
+            array_push($channelLocaleMap, [
+                'product_id' => $product->id,
+                'type' => $product->type,
+                'channel_code' => $channel->code,
+                'locale_code' => 'null',
+            ]);
 
-        /**
-         * Setting up the hero variable for the direct use on the model itself to make entries in product flat.
-         */
-        foreach($allChannels as $allChannel) {
-            foreach($allLocales as $allLocale) {
-                $productMapped[$allChannel['code']][$allLocale['code']] = [];
+            foreach($channel->locales as $locale) {
+                array_push($productMapped, [
+                    'product_id' => $product->id,
+                    'type' => $product->type,
+                    'channel_code' => $channel->code,
+                    'locale_code' => $locale->code
+                ]);
+
+                array_push($channelLocaleMap, [
+                    'product_id' => $product->id,
+                    'type' => $product->type,
+                    'channel_code' => $channel->code,
+                    'locale_code' => $locale->code,
+                ]);
+
+                array_push($productMapped, [
+                    'product_id' => $product->id,
+                    'type' => $product->type,
+                    'channel_code' => 'null',
+                    'locale_code' => $locale->code,
+                ]);
+
+                array_push($channelLocaleMap, [
+                    'product_id' => $product->id,
+                    'type' => $product->type,
+                    'channel_code' => 'null',
+                    'locale_code' => $locale->code,
+                ]);
             }
         }
 
-        /**
-         * 1. use null when the attribute value is empty string
-         * 2. make use of all the nullable columns present in the product flat table
-         */
-        foreach($product->attribute_values as $attribute_value) {
-            // array_push($productFlatAtttributes, ['code' => $attribute_value->attribute->code,  'channel_based' => $attribute_value->attribute->value_per_channel, 'locale_based' => $attribute_value->attribute->value_per_locale]);
+        $attributes = $product->attribute_family->custom_attributes;
 
-            if($attribute_value->attribute->value_per_locale) {
-                if($attribute_value->attribute->value_per_locale) {
+        foreach($attributes as $key => $attribute) {
+            dd($this->productAttributeValue->findWhere(['attribute_id' => $attribute->id, 'value_per_locale' => 1, 'value_per_channel' => 1]));
+            if($attribute->type == 'select') {
+                if($attribute->value_per_channel && $attribute->value_per_locale) {
+                    dd($this->productAttributeValue->findWhere(['attribute_id' => $attribute->id, 'value_per_locale' => 1, 'value_per_channel' => 1]));
 
+                    // $this->pushCorrect($attribute->channel);
+                } else if($attribute->value_per_channel && !$attribute->value_per_locale) {
+                    // $this->pushCorrect();
+                } else if($attribute->value_per_locale) {
+                    // $this->pushCorrect();
                 } else {
-                    dd('this attributes value is only channel dependent');
+                    // $this->pushCorrect();
                 }
-            } else if($attribute_value->attribute->value_per_locale) {
-                dd('this attributes value is only locale dependent');
+            } else if($attribute->type == 'multiselect') {
+                // $this->pushCorrect();
             } else {
-                //use this for non locale and non channel based values
+                // $this->pushCorrect();
             }
         }
 
-        dd($productFlatAtttributes);
+        // dd($productMapped);
+    }
 
-        die;
+    public function pushCorrect($channelCode = null, $localeCode = null, $productMapped) {
+        dd($channelCode, $localeCode, $productMapped);
     }
 }
