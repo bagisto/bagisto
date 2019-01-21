@@ -33,15 +33,27 @@
 
                                     <div class="item-details">
 
+                                        {!! view_render_event('bagisto.shop.checkout.cart.item.name.before', ['item' => $item]) !!}
+
                                         <div class="item-title">
                                             <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}">
                                                 {{ $item->product->name }}
                                             </a>
                                         </div>
 
+                                        {!! view_render_event('bagisto.shop.checkout.cart.item.name.after', ['item' => $item]) !!}
+
+
+                                        {!! view_render_event('bagisto.shop.checkout.cart.item.price.before', ['item' => $item]) !!}
+
                                         <div class="price">
                                             {{ core()->currency($item->base_price) }}
                                         </div>
+
+                                        {!! view_render_event('bagisto.shop.checkout.cart.item.price.after', ['item' => $item]) !!}
+
+
+                                        {!! view_render_event('bagisto.shop.checkout.cart.item.options.before', ['item' => $item]) !!}
 
                                         @if ($item->type == 'configurable')
 
@@ -51,6 +63,12 @@
 
                                             </div>
                                         @endif
+
+                                        {!! view_render_event('bagisto.shop.checkout.cart.item.options.after', ['item' => $item]) !!}
+
+
+                                        {!! view_render_event('bagisto.shop.checkout.cart.item.quantity.before', ['item' => $item]) !!}
+
                                         <div class="misc">
                                             <div class="control-group" :class="[errors.has('qty[{{$item->id}}]') ? 'has-error' : '']">
                                                 <div class="wrap">
@@ -76,6 +94,8 @@
                                             @endauth
                                         </div>
 
+                                        {!! view_render_event('bagisto.shop.checkout.cart.item.quantity.after', ['item' => $item]) !!}
+
                                         @if (! cart()->isItemHaveQuantity($item))
                                             <div class="error-message mt-15">
                                                 * {{ __('shop::app.checkout.cart.quantity-error') }}
@@ -86,6 +106,8 @@
                                 </div>
                             @endforeach
                         </div>
+
+                        {!! view_render_event('bagisto.shop.checkout.cart.controls.after', ['cart' => $cart]) !!}
 
                         <div class="misc-controls">
                             <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
@@ -102,11 +124,17 @@
                                 @endif
                             </div>
                         </div>
+
+                        {!! view_render_event('bagisto.shop.checkout.cart.controls.after', ['cart' => $cart]) !!}
                     </form>
                 </div>
 
                 <div class="right-side">
+                    {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
+
                     @include('shop::checkout.total.summary', ['cart' => $cart])
+
+                    {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
                 </div>
             </div>
 
