@@ -155,7 +155,7 @@
                                 <th colspan="100%">
                                     <div class="mass-action-wrapper" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
 
-                                        <span class="massaction-remove" v-on:click="removeMassActions" style="margin-right: 10px;">
+                                        <span class="massaction-remove" v-on:click="removeMassActions" style="margin-right: 10px; margin-top: 3px;">
                                             <span class="icon checkbox-dash-icon"></span>
                                         </span>
 

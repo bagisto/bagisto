@@ -78,10 +78,4 @@ class ProductAttributeValueRepository extends Repository
 
         return $result->count() ? false : true;
     }
-
-    // public function getAttributesByChannelAndLocale($product, $channel = 0, $locale = null) {
-    //     $productByChannelAndLocale = [];
-
-
-    // }
 }

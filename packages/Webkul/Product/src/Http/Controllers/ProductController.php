@@ -9,6 +9,7 @@ use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
 use Webkul\Product\Repositories\ProductFlatRepository as ProductFlat;
+use Webkul\Product\Repositories\ProductAttributeValueRepository as ProductAttributeValue;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
@@ -69,6 +70,7 @@ class ProductController extends Controller
      * @vatr array
      */
     protected $productFlat;
+    protected $productAttributeValue;
 
     /**
      * Create a new controller instance.
@@ -85,7 +87,8 @@ class ProductController extends Controller
         InventorySource $inventorySource,
         Product $product,
         ProductGrid $productGrid,
-        ProductFlat $productFlat)
+        ProductFlat $productFlat,
+        ProductAttributeValue $productAttributeValue)
     {
         $this->attributeFamily = $attributeFamily;
 
@@ -98,6 +101,8 @@ class ProductController extends Controller
         $this->productGrid = $productGrid;
 
         $this->productFlat = $productFlat;
+
+        $this->productAttributeValue = $productAttributeValue;
 
         $this->_config = request('_config');
     }
@@ -268,30 +273,57 @@ class ProductController extends Controller
         return redirect()->route('admin.catalog.products.index');
     }
 
+    /**
+     * Testing for the product flat sync method on product creation and updation
+     */
     public function testProductFlat() {
         $allChannels = [];
         $allLocales = [];
         $productFlatAtttributes = [];
 
+        //hero variable to map the product and the attribute values on the basis of channels and locales
+        $productMapped = [];
+
         $product = $this->product->find(4);
 
-        foreach($product->attribute_values as $attributeValue) {
-            array_push($productFlatAtttributes, strtolower($attributeValue->attribute->code));
-        }
-
         foreach(core()->getAllChannels() as $channel) {
-            array_push($allChannels, ['name' => $channel->name, 'code' => $channel->code]);
+            array_push($allChannels, ['id' => $channel->id, 'name' => $channel->name, 'code' => $channel->code]);
         }
 
         foreach(core()->getAllLocales() as $locale) {
-            array_push($allLocales, ['name' => $locale->name, 'code' => $locale->code]);
+            array_push($allLocales, ['id' => $locale->id,'name' => $locale->name, 'code' => $locale->code]);
         }
 
+        /**
+         * Setting up the hero variable for the direct use on the model itself to make entries in product flat.
+         */
         foreach($allChannels as $allChannel) {
             foreach($allLocales as $allLocale) {
-
+                $productMapped[$allChannel['code']][$allLocale['code']] = [];
             }
         }
+
+        /**
+         * 1. use null when the attribute value is empty string
+         * 2. make use of all the nullable columns present in the product flat table
+         */
+        foreach($product->attribute_values as $attribute_value) {
+            // array_push($productFlatAtttributes, ['code' => $attribute_value->attribute->code,  'channel_based' => $attribute_value->attribute->value_per_channel, 'locale_based' => $attribute_value->attribute->value_per_locale]);
+
+            if($attribute_value->attribute->value_per_locale) {
+                if($attribute_value->attribute->value_per_locale) {
+
+                } else {
+                    dd('this attributes value is only channel dependent');
+                }
+            } else if($attribute_value->attribute->value_per_locale) {
+                dd('this attributes value is only locale dependent');
+            } else {
+                //use this for non locale and non channel based values
+            }
+        }
+
+        dd($productFlatAtttributes);
 
         die;
     }
