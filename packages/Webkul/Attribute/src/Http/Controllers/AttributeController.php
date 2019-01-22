@@ -81,7 +81,7 @@ class AttributeController extends Controller
 
         $attribute = $this->attribute->create($data);
 
-        // Event::fire('after.attribute.created', $attribute);
+        Event::fire('after.attribute.created', $attribute);
 
         session()->flash('success', 'Attribute created successfully.');
 
@@ -139,7 +139,7 @@ class AttributeController extends Controller
             session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'attribute']));
         } else {
             try {
-                // Event::fire('after.attribute.deleted', $attribute);
+                Event::fire('after.attribute.deleted', $attribute);
 
                 $this->attribute->delete($id);
 

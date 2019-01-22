@@ -375,13 +375,16 @@ class ProductController extends Controller
                             'attribute_id' => $productAttribute->id
                         ]);
 
-                        $productAttributeColumn = $this->productAttributeValue->model()::$attributeTypeFields[$productAttribute->type];
+                        if($valueOf != null) {
+                            $productAttributeColumn = $this->productAttributeValue->model()::$attributeTypeFields[$productAttribute->type];
 
-                        dump($productAttributeColumn);
+                            $valueOf = $valueOf->{$productAttributeColumn};
 
-                        $valueOf = $valueOf->{$productAttributeColumn};
+                            $productFlatObjects[$flatKey][$productAttribute->code] = $valueOf;
+                        } else {
+                            $productFlatObjects[$flatKey][$productAttribute->code] = 'null';
+                        }
 
-                        $productFlatObjects[$flatKey][$productAttribute->code] = $valueOf;
                     }
                 }
             }
