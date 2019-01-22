@@ -3257,6 +3257,49 @@ section.review {
 }
 
 
+.right-content {
+    .currency-account li {
+        display: inline;
+        border-right: 2px solid #C7C7C7;
+        cursor: pointer;
+
+        .account-icon {
+           position: relative;
+           top: 8px;
+           margin-left: 12px;
+        }
+
+        .cart-icon {
+            position: relative;
+            top: 7px;
+            margin-left: 12px;
+        }
+
+        .arrow-down-icon {
+            margin-right: 15px;
+        }
+
+        ul.dropdown-list {
+            display: block;
+            margin-top: 14px;
+            width: 100px;
+
+            .currency {
+                color: red;
+            }
+
+            li {
+                border-right: none;
+                padding: 5px 10px 5px 10px;
+                display: block;
+            }
+        }
+    }
+
+
+}
+
+
 /// rtl css start here
 .rtl {
     direction: rtl;

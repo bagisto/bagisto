@@ -123,8 +123,7 @@ class Requirement {
     */
     private static function composerInstall()
     {
-        putenv('COMPOSER_HOME=' . __DIR__ . '/vendor/bin/composer');
-        $command = 'composer --version 2>&1';
+        $command = 'cd ../.. ; export HOME=/root && export COMPOSER_HOME=/root && /usr/bin/composer.phar self-update; composer --version';
         exec($command, $data['composer'], $data['composer_install']);
 
         return $data['composer_install'];

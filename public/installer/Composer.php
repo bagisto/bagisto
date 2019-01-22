@@ -4,12 +4,9 @@ $data    = array(); // array to pass back data
 
 // run command on terminal ===========================================================
 
-    // composer home for run
-    putenv('COMPOSER_HOME=' . __DIR__ . '/vendor/bin/composer');
+$command = 'cd ../.. ; export HOME=/root && export COMPOSER_HOME=/root && /usr/bin/composer.phar self-update; composer install 2>&1';
 
-    $command = 'cd ../.. && composer install 2>&1';
-
-    $last_line = exec($command, $data['composer'], $data['install']);
+$last_line = exec($command, $data['composer'], $data['install']);
 
 // return a response ===========================================================
 

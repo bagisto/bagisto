@@ -29,6 +29,40 @@
         </div>
 
         <div class="right-content">
+            <ul class="currency-account">
+
+                <li>
+                    <span>
+                        {{ core()->getCurrentCurrencyCode() }}
+                        <i class="icon arrow-down-icon active"></i>
+                    </span>
+
+                    <ul class="dropdown-list currency">
+                        @foreach (core()->getCurrentChannel()->currencies as $currency)
+                            <li>
+                                <a href="?currency={{ $currency->code }}">{{ $currency->code }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+
+                <li>
+                    <i class="icon account-icon"></i>
+                    <i class="icon arrow-down-icon active"></i>
+
+
+
+                </li>
+                <li>
+                    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+
+                    <span class="icon cart-icon"></span>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="right-content">
             @if (core()->getCurrentChannel()->currencies->count() > 1)
                 <ul class="currency-switcher">
                     <div class="dropdown-toggle">
@@ -192,6 +226,7 @@
         </div>  --}}
     </div>
 </div>
+
 
 @push('scripts')
     <script>
