@@ -279,106 +279,114 @@ class ProductController extends Controller
      */
     public function testProductFlat() {
         $product = $this->product->find(4);
-        $allChannelAndLocales = [];
-        $productMapped = [];
-        $channelLocaleMap = [];
+        $productAttributes = $product->attribute_family->custom_attributes;
+        $allLocales = core()->getAllLocales();
+        $productsFlat = array();
+        $attributeNames = array();
+        $channelLocaleMap = array();
+        $nonDependentAttributes = array();
+        $localeDependentAttributes = array();
+        $channelDependentAttributes = array();
+        $channelLocaleDependentAttributes = array();
+
+        foreach($productAttributes as $key => $productAttribute) {
+            $attributeNames[$key] = [
+                'id' => $productAttribute->id,
+                'code' => $productAttribute->code,
+                'value_per_locale' => $productAttribute->value_per_locale,
+                'value_per_channel' => $productAttribute->value_per_channel,
+            ];
+        }
+
+        foreach($productAttributes as $productAttribute) {
+            if($productAttribute->value_per_channel) {
+                if($productAttribute->value_per_locale) {
+                    array_push($channelLocaleDependentAttributes, ['id' => $productAttribute->id, 'code' => $productAttribute->code]);
+                } else {
+                    array_push($channelDependentAttributes, ['id' => $productAttribute->id, 'code' => $productAttribute->code]);
+                }
+            } else if($productAttribute->value_per_locale && !$productAttribute->value_per_channel) {
+                array_push($localeDependentAttributes, ['id' => $productAttribute->id, 'code' => $productAttribute->code]);
+            } else {
+                array_push($nonDependentAttributes, ['id' => $productAttribute->id, 'code' => $productAttribute->code]);
+            }
+        }
 
         foreach(core()->getAllChannels() as $channel) {
-            array_push($productMapped, [
+            $dummy = [
                 'product_id' => $product->id,
-                'type' => $product->type,
-                'channel_code' => $channel->code,
-                'locale_code' => 'null',
-            ]);
+                'channel' => $channel->code,
+                'locale' => null,
+                'data' => $channelDependentAttributes
+            ];
 
-            array_push($channelLocaleMap, [
-                'product_id' => $product->id,
-                'type' => $product->type,
-                'channel_code' => $channel->code,
-                'locale_code' => 'null',
-            ]);
+            array_push($channelLocaleMap, $dummy);
+
+            $dummy = [];
 
             foreach($channel->locales as $locale) {
-                array_push($productMapped, [
+                $dummy = [
                     'product_id' => $product->id,
-                    'type' => $product->type,
-                    'channel_code' => $channel->code,
-                    'locale_code' => $locale->code
-                ]);
+                    'channel' => $channel->code,
+                    'locale' => $locale->code,
+                    'data' => $channelLocaleDependentAttributes
+                ];
 
-                array_push($channelLocaleMap, [
-                    'product_id' => $product->id,
-                    'type' => $product->type,
-                    'channel_code' => $channel->code,
-                    'locale_code' => $locale->code,
-                ]);
+                array_push($channelLocaleMap, $dummy);
 
-                array_push($productMapped, [
-                    'product_id' => $product->id,
-                    'type' => $product->type,
-                    'channel_code' => 'null',
-                    'locale_code' => $locale->code,
-                ]);
-
-                array_push($channelLocaleMap, [
-                    'product_id' => $product->id,
-                    'type' => $product->type,
-                    'channel_code' => 'null',
-                    'locale_code' => $locale->code,
-                ]);
+                $dummy = [];
             }
         }
 
-        $attributes = $product->attribute_family->custom_attributes;
+        $dummy = [
+            'product_id' => $product->id,
+            'channel' => null,
+            'locale' => null,
+            'data' => $nonDependentAttributes
+        ];
 
-        foreach($attributes as $key => $attribute) {
-            if($attribute->value_per_channel && $attribute->value_per_locale) {
-                $values = $this->productAttributeValue->findWhere(['attribute_id' => $attribute->id, 'product_id' => $product->id]);
+        array_push($channelLocaleMap, $dummy);
 
-                foreach($values as $key => $value) {
-                    $this->pushCorrect($value->channel, $value->locale, $productMapped);
+        $dummy = [];
+
+        foreach($allLocales as $key => $allLocale) {
+            $dummy = [
+                'product_id' => $product->id,
+                'channel' => null,
+                'locale' => $allLocale->code,
+                'data' => $localeDependentAttributes
+            ];
+
+            array_push($channelLocaleMap, $dummy);
+
+            $dummy = [];
+        }
+
+        $productFlatObjects = $channelLocaleMap;
+
+        foreach($productAttributes as $productAttribute) {
+            foreach($productFlatObjects as $flatKey => $productFlatObject) {
+                foreach($productFlatObject['data'] as $key => $value) {
+                    if($productAttribute->code == $value['code']) {
+                        $valueOf = $this->productAttributeValue->findOneWhere([
+                            'product_id' => $product->id,
+                            'channel' => $productFlatObject['channel'],
+                            'locale' => $productFlatObject['locale'],
+                            'attribute_id' => $productAttribute->id
+                        ]);
+
+                        $productAttributeColumn = $this->productAttributeValue->model()::$attributeTypeFields[$productAttribute->type];
+
+                        dump($productAttributeColumn);
+
+                        $valueOf = $valueOf->{$productAttributeColumn};
+
+                        $productFlatObjects[$flatKey][$productAttribute->code] = $valueOf;
+                    }
                 }
-            } else if($attribute->value_per_channel && !$attribute->value_per_locale) {
-                $this->pushCorrect($value->channel, $value->locale, $productMapped);
-            } else if($attribute->value_per_locale) {
-                $this->pushCorrect($value->channel, $value->locale, $productMapped);
-            } else {
-                $this->pushCorrect($value->channel, $value->locale, $productMapped);
             }
-
-            // if($attribute->type == 'select') {
-            //     if($attribute->value_per_channel && $attribute->value_per_locale) {
-            //         dd($this->productAttributeValue->findWhere(['attribute_id' => $attribute->id]));
-
-            //         // $this->pushCorrect($attribute->channel);
-            //     } else if($attribute->value_per_channel && !$attribute->value_per_locale) {
-            //         // $this->pushCorrect();
-            //     } else if($attribute->value_per_locale) {
-            //         // $this->pushCorrect();
-            //     } else {
-            //         // $this->pushCorrect();
-            //     }
-            // } else if($attribute->type == 'multiselect') {
-            //     // $this->pushCorrect();
-            // } else {
-            //     if($attribute->value_per_channel && $attribute->value_per_locale) {
-            //         dd($this->productAttributeValue->findWhere(['attribute_id' => $attribute->id]));
-
-            //         // $this->pushCorrect($attribute->channel);
-            //     } else if($attribute->value_per_channel && !$attribute->value_per_locale) {
-            //         // $this->pushCorrect();
-            //     } else if($attribute->value_per_locale) {
-            //         // $this->pushCorrect();
-            //     } else {
-            //         // $this->pushCorrect();
-            //     }
-            // }
         }
 
-        dd($productMapped);
-    }
-
-    public function pushCorrect($channelCode = null, $localeCode = null, $productMapped) {
-        dd($channelCode, $localeCode, $productMapped);
+        dd($productFlatObjects);
     }
 }

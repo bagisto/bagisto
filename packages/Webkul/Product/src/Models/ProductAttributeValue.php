@@ -28,19 +28,19 @@ class ProductAttributeValue extends Model
     ];
 
     protected $fillable = [
-            'product_id',
-            'attribute_id',
-            'channel_id',
-            'locale',
-            'channel',
-            'text_value',
-            'boolean_value',
-            'integer_value',
-            'float_value',
-            'datetime_value',
-            'date_value',
-            'json_value'
-        ];
+        'product_id',
+        'attribute_id',
+        'channel_id',
+        'locale',
+        'channel',
+        'text_value',
+        'boolean_value',
+        'integer_value',
+        'float_value',
+        'datetime_value',
+        'date_value',
+        'json_value'
+    ];
 
     /**
      * Get the attribute that owns the attribute value.
