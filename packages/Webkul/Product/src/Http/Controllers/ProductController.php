@@ -241,11 +241,11 @@ class ProductController extends Controller
     {
         $data = request()->all();
 
-        if (! isset($data['massaction-type'])) {
+        if (!isset($data['massaction-type'])) {
             return redirect()->back();
         }
 
-        if (! $data['massaction-type'] == 'update') {
+        if (!$data['massaction-type'] == 'update') {
             return redirect()->back();
         }
 
@@ -253,10 +253,10 @@ class ProductController extends Controller
 
         foreach ($productIds as $productId) {
             $this->product->update([
-                    'channel' => null,
-                    'locale' => null,
-                    'status' => $data['update-options']
-                ], $productId);
+                'channel' => null,
+                'locale' => null,
+                'status' => $data['update-options']
+            ], $productId);
         }
 
         session()->flash('success', trans('admin::app.catalog.products.mass-update-success'));
@@ -334,19 +334,16 @@ class ProductController extends Controller
         foreach($attributes as $key => $attribute) {
             if($attribute->value_per_channel && $attribute->value_per_locale) {
                 $values = $this->productAttributeValue->findWhere(['attribute_id' => $attribute->id, 'product_id' => $product->id]);
-                dd($values);
+
                 foreach($values as $key => $value) {
-                    dd($value->channel, $value->locale);
-                    // $this->pushCorrect($attribute->channel, );
+                    $this->pushCorrect($value->channel, $value->locale, $productMapped);
                 }
-
-
             } else if($attribute->value_per_channel && !$attribute->value_per_locale) {
-                // $this->pushCorrect();
+                $this->pushCorrect($value->channel, $value->locale, $productMapped);
             } else if($attribute->value_per_locale) {
-                // $this->pushCorrect();
+                $this->pushCorrect($value->channel, $value->locale, $productMapped);
             } else {
-                // $this->pushCorrect();
+                $this->pushCorrect($value->channel, $value->locale, $productMapped);
             }
 
             // if($attribute->type == 'select') {

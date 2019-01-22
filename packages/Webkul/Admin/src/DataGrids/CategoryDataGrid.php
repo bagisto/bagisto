@@ -82,13 +82,13 @@ class CategoryDataGrid extends DataGrid
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
-            'route' => 'admin.catalog.products.edit',
+            'route' => 'admin.catalog.categories.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
-            'route' => 'admin.catalog.products.delete',
+            'route' => 'admin.catalog.categories.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon' => 'icon trash-icon'
         ]);
