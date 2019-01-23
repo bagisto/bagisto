@@ -255,11 +255,14 @@ class ProductsFlat
             ]);
 
             if($exists->count() == 0) {
-                $result = $this->productFlat->create($tempFlatObject);
+                dd('this does not exists');
+                // $result = $this->productFlat->create($tempFlatObject);
             } else {
                 //perform update
+                dd('product already exists');
             }
 
+            dd($productFlatObjects);
             unset($tempFlatObject);
         }
 
