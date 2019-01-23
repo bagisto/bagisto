@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Repositories\ProductGridRepository as ProductGrid;
-use Webkul\Product\Repositories\ProductFlatRepository as ProductFlat;
-use Webkul\Product\Repositories\ProductAttributeValueRepository as ProductAttributeValue;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
@@ -65,15 +63,6 @@ class ProductController extends Controller
     protected $productGrid;
 
     /**
-     * ProductFlat Repository Object
-     *
-     * @vatr array
-     */
-    protected $productFlat;
-    protected $productAttributeValue;
-    protected $attribute;
-
-    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
@@ -87,9 +76,7 @@ class ProductController extends Controller
         Category $category,
         InventorySource $inventorySource,
         Product $product,
-        ProductGrid $productGrid,
-        ProductFlat $productFlat,
-        ProductAttributeValue $productAttributeValue)
+        ProductGrid $productGrid)
     {
         $this->attributeFamily = $attributeFamily;
 
@@ -100,10 +87,6 @@ class ProductController extends Controller
         $this->product = $product;
 
         $this->productGrid = $productGrid;
-
-        $this->productFlat = $productFlat;
-
-        $this->productAttributeValue = $productAttributeValue;
 
         $this->_config = request('_config');
     }
@@ -272,124 +255,5 @@ class ProductController extends Controller
         Event::fire('products.datagrid.sync', true);
 
         return redirect()->route('admin.catalog.products.index');
-    }
-
-    /**
-     * Testing for the product flat sync method on product creation and updation
-     */
-    public function testProductFlat() {
-        $product = $this->product->find(4);
-        $productAttributes = $product->attribute_family->custom_attributes;
-        $allLocales = core()->getAllLocales();
-        $productsFlat = array();
-        $attributeNames = array();
-        $channelLocaleMap = array();
-        $nonDependentAttributes = array();
-        $localeDependentAttributes = array();
-        $channelDependentAttributes = array();
-        $channelLocaleDependentAttributes = array();
-
-        foreach($productAttributes as $key => $productAttribute) {
-            $attributeNames[$key] = [
-                'id' => $productAttribute->id,
-                'code' => $productAttribute->code,
-                'value_per_locale' => $productAttribute->value_per_locale,
-                'value_per_channel' => $productAttribute->value_per_channel,
-            ];
-        }
-
-        foreach($productAttributes as $productAttribute) {
-            if($productAttribute->value_per_channel) {
-                if($productAttribute->value_per_locale) {
-                    array_push($channelLocaleDependentAttributes, ['id' => $productAttribute->id, 'code' => $productAttribute->code]);
-                } else {
-                    array_push($channelDependentAttributes, ['id' => $productAttribute->id, 'code' => $productAttribute->code]);
-                }
-            } else if($productAttribute->value_per_locale && !$productAttribute->value_per_channel) {
-                array_push($localeDependentAttributes, ['id' => $productAttribute->id, 'code' => $productAttribute->code]);
-            } else {
-                array_push($nonDependentAttributes, ['id' => $productAttribute->id, 'code' => $productAttribute->code]);
-            }
-        }
-
-        foreach(core()->getAllChannels() as $channel) {
-            $dummy = [
-                'product_id' => $product->id,
-                'channel' => $channel->code,
-                'locale' => null,
-                'data' => $channelDependentAttributes
-            ];
-
-            array_push($channelLocaleMap, $dummy);
-
-            $dummy = [];
-
-            foreach($channel->locales as $locale) {
-                $dummy = [
-                    'product_id' => $product->id,
-                    'channel' => $channel->code,
-                    'locale' => $locale->code,
-                    'data' => $channelLocaleDependentAttributes
-                ];
-
-                array_push($channelLocaleMap, $dummy);
-
-                $dummy = [];
-            }
-        }
-
-        $dummy = [
-            'product_id' => $product->id,
-            'channel' => null,
-            'locale' => null,
-            'data' => $nonDependentAttributes
-        ];
-
-        array_push($channelLocaleMap, $dummy);
-
-        $dummy = [];
-
-        foreach($allLocales as $key => $allLocale) {
-            $dummy = [
-                'product_id' => $product->id,
-                'channel' => null,
-                'locale' => $allLocale->code,
-                'data' => $localeDependentAttributes
-            ];
-
-            array_push($channelLocaleMap, $dummy);
-
-            $dummy = [];
-        }
-
-        $productFlatObjects = $channelLocaleMap;
-
-        foreach($productAttributes as $productAttribute) {
-            foreach($productFlatObjects as $flatKey => $productFlatObject) {
-                foreach($productFlatObject['data'] as $key => $value) {
-                    if($productAttribute->code == $value['code']) {
-                        $valueOf = $this->productAttributeValue->findOneWhere([
-                            'product_id' => $product->id,
-                            'channel' => $productFlatObject['channel'],
-                            'locale' => $productFlatObject['locale'],
-                            'attribute_id' => $productAttribute->id
-                        ]);
-
-                        if($valueOf != null) {
-                            $productAttributeColumn = $this->productAttributeValue->model()::$attributeTypeFields[$productAttribute->type];
-
-                            $valueOf = $valueOf->{$productAttributeColumn};
-
-                            $productFlatObjects[$flatKey][$productAttribute->code] = $valueOf;
-                        } else {
-                            $productFlatObjects[$flatKey][$productAttribute->code] = 'null';
-                        }
-
-                    }
-                }
-            }
-        }
-
-        dd($productFlatObjects);
     }
 }

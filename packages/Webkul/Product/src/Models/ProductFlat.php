@@ -17,4 +17,6 @@ class ProductFlat extends Model
     protected $table = 'product_flat';
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public $timestamps = false;
 }

@@ -775,5 +775,15 @@ class Core
 		}
 
 		return $merged;
-	}
+    }
+
+    public function convertEmptyStringsToNull($array) {
+        foreach($array as $key => $value) {
+            if($value == "" || $value == "null") {
+                $array[$key] = null;
+            }
+        }
+
+        return $array;
+    }
 }
