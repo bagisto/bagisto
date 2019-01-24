@@ -37,11 +37,9 @@ class Permission {
 
         foreach($folders as $folder => $permission)
         {
-            if (!($this->getPermission($folder) >= $permission))
-            {
+            if (!($this->getPermission($folder) >= $permission)) {
                 $this->addFileAndSetErrors($folder, $permission, false);
-            }
-            else {
+            } else {
                 $this->addFile($folder, $permission, true);
             }
         }

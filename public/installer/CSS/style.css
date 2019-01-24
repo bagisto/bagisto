@@ -58,7 +58,7 @@ body {
     border-radius: 3px;
     width: 600px;
     height: 392px;
-    margin-left: 30%;
+    margin-left: calc(50% - 300px);
     text-align: left;
     overflow-x: scroll;
 }
@@ -150,8 +150,12 @@ pre.bash {
     border-bottom: solid 6px #bababa;
     border-left: solid 6px #bababa;
     position: absolute;
-    top: 350;
-    left: 730;
+    top: calc(50% - 24px);
+    left: calc(50% - 24px);
+}
+
+.check {
+    line-height: 40px;
 }
 
 .cp-round:after {
@@ -166,8 +170,8 @@ pre.bash {
     border-bottom: solid 6px #bababa;
     border-left: solid 6px #bababa;
     position: absolute;
-    top: 350;
-    left: 730;
+    top: calc(50% - 24px);
+    left: calc(50% - 24px);
     animation: spin 1s ease-in-out infinite;
 }
 
@@ -178,6 +182,7 @@ pre.bash {
 
 .composer {
     position: absolute;
+    top: calc(50% + 24px);
     display: none;
 }
 

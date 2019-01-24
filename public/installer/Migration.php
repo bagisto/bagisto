@@ -49,8 +49,8 @@
             animation: write-command 5s both;
 
             &:before {
-            content: '$ ';
-            color: #22da26;
+                content: '$ ';
+                color: #22da26;
             }
         }
 
@@ -99,9 +99,9 @@
                         </div>
                     </div>
 
-                    <span class="composer" id="comp" style="left: 620; top: 420;">Installing Composer Dependency</span>
-                    <span class="composer"  id="composer-migrate" style="left: 670; top: 420;">Migrating Database</span>
-                    <span class="composer"  id="composer-seed" style="left: 695; top: 420;">Seeding Data</span>
+                    <span class="composer" id="comp" style="left: calc(50% - 135px);">Installing Composer Dependency</span>
+                    <span class="composer"  id="composer-migrate" style="left: calc(50% - 85px);">Migrating Database</span>
+                    <span class="composer"  id="composer-seed" style="left: calc(50% - 55px);">Seeding Data</span>
                 </div>
 
                 <form method="POST" id="migration-form">
@@ -136,7 +136,7 @@
             $('#loader').show();
             $('#comp').show();
             $('#instructions').hide();
-
+            $('#migrate-seed').hide();
             $('#migrate').hide();
             $('#seed').hide();
             $('#publish').hide();
@@ -145,10 +145,10 @@
 
             // process form
             $.ajax({
-                type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                url         : 'Composer.php', // the url where we want to POST
-                dataType    : 'json', // what type of data do we expect back from the server
-                            encode          : true
+                type        : 'POST',
+                url         : 'Composer.php',
+                dataType    : 'json',
+                encode      : true
             })
 
             .done(function(data) {
@@ -164,10 +164,10 @@
 
                         // post the request again
                         $.ajax({
-                            type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                            url         : 'MigrationRun.php', // the url where we want to POST
-                            dataType    : 'json', // what type of data do we expect back from the server
-                                        encode          : true
+                            type        : 'POST',
+                            url         : 'MigrationRun.php',
+                            dataType    : 'json',
+                            encode      : true
                         })
                             // using the done promise callback
                         .done(function(data) {
@@ -188,25 +188,27 @@
                                         $('#composer-seed').hide();
 
                                         if (data['seeder']) {
-                                            $('#seed').append('<div class="terminal">' + data['seeder'] + '</div>'); // add the actual output
+                                            $('#seed').append('<div class="terminal">' + data['seeder'] + '</div>');
                                         }
                                         if (data['publish']) {
-                                            $('#publish').append('<div class="terminal">' + data['publish'] + '</div>'); // add the actual output
+                                            $('#publish').append('<div class="terminal">' + data['publish'] + '</div>');
                                         }
                                         if (data['storage']) {
-                                            $('#storage').append('<div class="terminal">' + data['storage'] + '</div>'); // add the actual output
+                                            $('#storage').append('<div class="terminal">' + data['storage'] + '</div>');
                                         }
 
                                         if ((data['key_results'] == 0) && (data['seeder_results'] == 0) && (data['publish_results'] == 0) && (data['storage_results'] == 0)) {
                                             $('#continue').show();
                                             $('#migrate-seed').hide();
+                                            $('#loader').hide();
                                         };
                                     });
 
                                 } else {
                                     $('#migrate').show();
+                                    $('#migrate-seed').show();
                                     if (data['migrate']) {
-                                        $('#migrate').append('<div class="terminal">' + data['migrate'] + '</div>'); // add the actual output
+                                        $('#migrate').append('<div class="terminal">' + data['migrate'] + '</div>');
                                     }
                                 }
                             }
@@ -215,6 +217,7 @@
                     } else {
                         $('#loader').hide();
                         $('#composer-migrate').hide();
+                        $('#migrate-seed').show();
                         $('#composer').append('<div class="terminal">' + data['composer'] +'</div>');
                     }
                 }

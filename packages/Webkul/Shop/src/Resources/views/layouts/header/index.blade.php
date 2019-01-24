@@ -29,88 +29,54 @@
         </div>
 
         <div class="right-content">
-            <ul class="currency-account">
+            <ul class="account-cart-currency">
 
-                <li>
-                    <span>
-                        {{ core()->getCurrentCurrencyCode() }}
+                @if (core()->getCurrentChannel()->currencies->count() > 1)
+                    <li style="border-right: 2px solid #C7C7C7;">
+                        <span class="dropdown-toggle">
+                            {{ core()->getCurrentCurrencyCode() }}
+                            <i class="icon arrow-down-icon active"></i>
+                        </span>
+
+                        <ul class="dropdown-list currency">
+                            @foreach (core()->getCurrentChannel()->currencies as $currency)
+                                <li>
+                                    <a href="?currency={{ $currency->code }}">{{ $currency->code }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @endif
+
+                <li style="border-right: 2px solid #C7C7C7;">
+                    <span class="dropdown-toggle">
+                        <i class="icon account-icon"></i>
                         <i class="icon arrow-down-icon active"></i>
                     </span>
 
-                    <ul class="dropdown-list currency">
-                        @foreach (core()->getCurrentChannel()->currencies as $currency)
-                            <li>
-                                <a href="?currency={{ $currency->code }}">{{ $currency->code }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </li>
-
-                <li>
-                    <i class="icon account-icon"></i>
-                    <i class="icon arrow-down-icon active"></i>
-
-
-
-                </li>
-                <li>
-                    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
-                    <span class="icon cart-icon"></span>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="right-content">
-            @if (core()->getCurrentChannel()->currencies->count() > 1)
-                <ul class="currency-switcher">
-                    <div class="dropdown-toggle">
-                        {{ core()->getCurrentCurrencyCode() }}
-                        <i class="icon arrow-down-icon active"></i>
-                    </div>
-
-                    <div class="dropdown-list bottom-right">
-                        <div class="dropdown-container">
-                            <ul>
-                                @foreach (core()->getCurrentChannel()->currencies as $currency)
-                                    <li>
-                                        <a href="?currency={{ $currency->code }}">{{ $currency->code }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </ul>
-            @endif
-
-            <ul class="account-dropdown-container">
-                <li class="account-dropdown">
-                    <div class="dropdown-toggle account">
-                        <span class="icon account-icon"></span>
-                        <i class="icon arrow-down-icon active"></i>
-                    </div>
-
                     @guest('customer')
-                        <div class="dropdown-list bottom-right" style="display: none;">
-                            <div class="dropdown-container">
-                                <label>{{ __('shop::app.header.title') }}</label><br/>
-                                <span style="font-size: 12px;">{{ __('shop::app.header.dropdown-text') }}</span>
-                                <ul class="account-dropdown-list">
-                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.session.index') }}">{{ __('shop::app.header.sign-in') }}</a></li>
-
-                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.register.index') }}">{{ __('shop::app.header.sign-up') }}</a></li>
-                                </ul>
-
-                            </div>
-
-                        </div>
+                        <ul class="dropdown-list account guest">
+                            <li>
+                                <div>
+                                    <label style="color: #9e9e9e; font-weight: 700; text-transform: uppercase; font-size: 15px;">{{ __('shop::app.header.title') }}</label>
+                                </div>
+                                <div style="margin-top: 5px;">
+                                    <span style="font-size: 12px;">{{ __('shop::app.header.dropdown-text') }}</span>
+                                </div>
+                                <div style="margin-top: 15px;">
+                                    <a class="btn btn-primary btn-sm" href="{{ route('customer.session.index') }}" style="color: #ffffff">{{ __('shop::app.header.sign-in') }}</a>
+                                    <a class="btn btn-primary btn-sm" href="{{ route('customer.register.index') }}" style="float: right; color: #ffffff">{{ __('shop::app.header.sign-up') }}</a>
+                                </div>
+                            </li>
+                        </ul>
                     @endguest
 
                     @auth('customer')
-                        <div class="dropdown-list bottom-right" style="display: none; max-width: 230px;">
-                            <div class="dropdown-container">
-                                <label>{{ auth()->guard('customer')->user()->first_name }}</label>
+                        <ul class="dropdown-list account customer">
+                            <li>
+                                <div>
+                                    <label style="color: #9e9e9e; font-weight: 700; text-transform: uppercase; font-size: 15px;">{{ auth()->guard('customer')->user()->first_name }}</label>
+                                </div>
                                 <ul>
                                     <li><a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a></li>
 
@@ -120,85 +86,21 @@
 
                                     <li><a href="{{ route('customer.session.destroy') }}">{{ __('shop::app.header.logout') }}</a></li>
                                 </ul>
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     @endauth
                 </li>
-            </ul>
 
-            <ul class="cart-dropdown-container">
-                @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+                <li>
+                    <ul class="cart-dropdown-container">
+                        @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
-                <li class="cart-dropdown">
-                    <span class="icon cart-icon"></span>
-                    @include('shop::checkout.cart.mini-cart')
+                        <li class="cart-dropdown">
+                            <span class="icon cart-icon"></span>
+                            @include('shop::checkout.cart.mini-cart')
+                        </li>
+                    </ul>
                 </li>
-            </ul>
-
-            <ul class="right-responsive">
-                <li class="search-box"><span class="icon icon-search" id="search"></span></li>
-                <ul class="resp-account-dropdown-container">
-
-                    <li class="account-dropdown">
-                        <div class="dropdown-toggle">
-                            <span class="icon account-icon"></span>
-                        </div>
-
-                        @guest
-                            <div class="dropdown-list bottom-right" style="display: none;">
-                                <div class="dropdown-container">
-                                    <label>{{ __('shop::app.header.title') }}</label>
-
-                                    <ul>
-                                        <li><a href="{{ route('customer.session.index') }}">{{ __('shop::app.header.sign-in') }}</a></li>
-                                        <li><a href="{{ route('customer.register.index') }}">{{ __('shop::app.header.sign-up') }}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        @endguest
-
-                        @auth('customer')
-                            <div class="dropdown-list bottom-right" style="display: none;">
-                                <div class="dropdown-container">
-
-                                    <label>{{ auth()->guard('customer')->user()->first_name }}</label>
-
-                                    <ul>
-                                        <li><a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a></li>
-
-                                        <li><a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a></li>
-
-                                        <li><a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.header.cart') }}</a></li>
-
-                                        <li><a href="{{ route('customer.session.destroy') }}">{{ __('shop::app.header.logout') }}</a></li>
-                                    </ul>
-
-                                </div>
-
-                            </div>
-                        @endauth
-                    </li>
-                </ul>
-
-                <ul class="resp-cart-dropdown-container">
-
-                    <li class="cart-dropdown">
-                        <?php $cart = cart()->getCart(); ?>
-
-                        @if (isset($cart))
-                            <div>
-                                <a href="{{ route('shop.checkout.cart.index') }}">
-                                    <span class="icon cart-icon"></span>
-                                </a>
-                            </div>
-                        @else
-                            <div style="display: inline-block; cursor: pointer;">
-                                <span class="icon cart-icon"></span>
-                            </div>
-                        @endif
-                    </li>
-                </ul>
-                <li class="menu-box" ><span class="icon icon-menu" id="hammenu"></span></li>
             </ul>
         </div>
     </div>

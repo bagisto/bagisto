@@ -20,16 +20,6 @@
 
                     <?php foreach($requirements['requirements'] as $type => $require): ?>
 
-                        <?php if($type == 'php'): ?>
-                            <div class="check" style="margin-left: 25%">
-                                <?php if($phpVersion['supported'] ? $src = 'Images/green-check.svg' : $src = 'images/red-check.svg' ): ?>
-                                    <img src="<?php echo $src ?>">
-                                <?php endif; ?>
-                                <span style="margin-left: 10px"><b>PHP</b></span>
-                                <span>(Minimum <?php echo $phpVersion['minimum'] ?> Required)</span>
-                            </div>
-                        <?php endif; ?>
-
                         <?php foreach($requirements['requirements'][$type] as $extention => $enabled) : ?>
                             <div class="check" style="margin-left: 25%">
                                 <?php if($enabled ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
@@ -42,12 +32,27 @@
 
                     <?php endforeach; ?>
 
+                    <div class="check" style="margin-left: 25%">
+                        <?php if($phpVersion['supported'] ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
+                            <img src="<?php echo $src ?>">
+                        <?php endif; ?>
+                        <span style="margin-left: 10px"><b>PHP</b></span>
+                        <span>(<?php echo $phpVersion['minimum'] ?> or Higher)</span>
+                    </div>
+
+                    <div class="check" style="margin-left: 25%">
+                        <?php if($sqlInstall['supported'] ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
+                            <img src="<?php echo $src ?>">
+                        <?php endif; ?>
+                        <span style="margin-left: 11px"><b>Mysql</b></span>
+                        <span>(<?php echo $sqlInstall['minimum'] ?> or Higher)</span>
+                    </div>
+
                     <div class="check" style="margin-left: 25%;">
                         <?php if(($composerInstall == 0) ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
                             <img src="<?php echo $src ?>">
                         <?php endif; ?>
                         <span style="margin-left: 10px"><b>Composer</b></span>
-
                     </div>
 
                     <div style="margin-left: 30%;">
@@ -58,7 +63,7 @@
 
                 </div>
 
-                <?php if(!isset($requirements['errors']) && $phpVersion['supported'] && ($nodeInstall == 0) && ($composerInstall == 0) ): ?>
+                <?php if(!isset($requirements['errors']) && $phpVersion['supported'] && $sqlInstall['supported'] && ($composerInstall == 0) ): ?>
 
                     <div>
                         <button type="button" class="prepare-btn" id="requirement-check">Continue</button>

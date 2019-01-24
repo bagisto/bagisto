@@ -53,6 +53,8 @@
             }
 
             $conn->close();
+        } else {
+            $installed = true;
         }
     }
 
