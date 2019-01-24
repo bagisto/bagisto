@@ -19,5 +19,10 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('after.attribute.created', 'Webkul\Product\Listeners\ProductsFlat@afterAttributeCreated');
 
         Event::listen('after.attribute.deleted', 'Webkul\Product\Listeners\ProductsFlat@afterAttributeDeleted');
+
+        Event::listen('after.product.created', 'Webkul\Product\Listeners\ProductsFlat@afterProductCreatedOrUpdated');
+
+        Event::listen('after.product.updated', 'Webkul\Product\Listeners\ProductsFlat@afterProductCreatedOrUpdated');
+
     }
 }

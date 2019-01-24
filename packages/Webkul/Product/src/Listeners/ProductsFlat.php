@@ -112,8 +112,8 @@ class ProductsFlat
         }
     }
 
-    public function afterProductCreated($Product) {
-        $product = $Product;
+    public function afterProductCreatedOrUpdated($ProductFlat) {
+        $product = $ProductFlat;
         $productAttributes = $product->attribute_family->custom_attributes;
         $allLocales = core()->getAllLocales();
         $productsFlat = array();
@@ -221,7 +221,7 @@ class ProductsFlat
 
         $nonDependentAttributes = $productFlatObjects[$keyOfNonDependentAttributes];
 
-        array_forget($nonDependentAttributes, ['product_id', 'channel', 'locale', 'data', 'visible_individually', 'width', 'height', 'depth']);
+        array_forget($nonDependentAttributes, ['product_id', 'channel', 'locale', 'data', 'visible_individually', 'width', 'height', 'depth', 'tax_category_id']);
 
         unset($productFlatObjects[$keyOfNonDependentAttributes]);
 
@@ -255,17 +255,16 @@ class ProductsFlat
             ]);
 
             if($exists->count() == 0) {
-                dd('this does not exists');
-                // $result = $this->productFlat->create($tempFlatObject);
+                $result = $this->productFlat->create($tempFlatObject);
             } else {
-                //perform update
-                dd('product already exists');
+                $result = $exists->first();
+
+                $result->update($tempFlatObject);
             }
 
-            dd($productFlatObjects);
             unset($tempFlatObject);
         }
 
-        return true;
+        return 'true';
     }
 }

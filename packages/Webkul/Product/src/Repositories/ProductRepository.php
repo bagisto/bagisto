@@ -144,7 +144,6 @@ class ProductRepository extends Repository
         //after store of the product
         Event::fire('catalog.product.create.after', $product);
 
-
         return $product;
     }
 
@@ -232,6 +231,9 @@ class ProductRepository extends Repository
         $this->productImage->uploadImages($data, $product);
 
         Event::fire('catalog.product.update.after', $product);
+
+        //correct it after making sure which event to use.
+        Event::fire('after.product.updated', $product);
 
         return $product;
     }

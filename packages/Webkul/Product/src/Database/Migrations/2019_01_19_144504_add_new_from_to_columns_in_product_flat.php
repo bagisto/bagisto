@@ -15,7 +15,6 @@ class AddNewFromToColumnsInProductFlat extends Migration
     {
         if (Schema::hasTable('product_flat')) {
             Schema::table('product_flat', function (Blueprint $table) {
-                $table->integer('tax_category_id')->unsigned()->nullable()->after('size_label');
                 $table->date('new_to')->after('new');
                 $table->date('new_from')->after('new');
                 $table->unique(['product_id', 'channel', 'locale'], 'product_flat_unique_index');
@@ -32,7 +31,6 @@ class AddNewFromToColumnsInProductFlat extends Migration
     {
         if (Schema::hasTable('product_flat')) {
             Schema::table('product_flat', function (Blueprint $table) {
-                $table->dropColumn('tax_category_id')->unsigned();
                 $table->dropColumn('new_from');
                 $table->dropColumn('new_to');
                 $table->dropIndex('product_flat_unique_index');
