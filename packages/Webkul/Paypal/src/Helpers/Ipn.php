@@ -131,7 +131,7 @@ class Ipn
         ];
 
         foreach ($this->order->items as $item) {
-            $invoiceData['invoice']['items'][$item] = $item->qty_to_invoice;
+            $invoiceData['invoice']['items'][$item->id] = $item->qty_to_invoice;
         }
 
         return $invoiceData;
