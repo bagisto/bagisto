@@ -9,6 +9,8 @@ class CurrencyTableSeeder extends Seeder
 {
     public function run()
     {
+        DB::table('channels')->delete();
+
         DB::table('currencies')->delete();
 
         DB::table('currencies')->insert([
