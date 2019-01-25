@@ -299,7 +299,7 @@ return [
         'newest-first' => 'Newest First',
         'oldest-first' => 'Oldest First',
         'cheapest-first' => 'Cheapest First',
-        'expansive-first' => 'Expensive First',
+        'expensive-first' => 'Expensive First',
         'show' => 'Show',
         'pager-info' => 'Showing :showing of :total Items',
         'description' => 'Description',

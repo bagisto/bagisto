@@ -3,12 +3,8 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container as App;
-
 use Webkul\Core\Eloquent\Repository;
-
 use Webkul\Product\Repositories\ProductRepository as Product;
-
-// use Webkul\Product\Contracts\Criteria\searchByAttributeCriteria;
 
 /**
  * Search Reposotory
@@ -38,7 +34,6 @@ class SearchRepository extends Repository
     }
 
     public function searchAttributes() {
-        // $this->pushCriteria(app(searchByAttributeCriteria::class));
     }
 
     public function search($data) {

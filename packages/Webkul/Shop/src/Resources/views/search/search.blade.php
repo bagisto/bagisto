@@ -26,12 +26,12 @@
                         <span><b>{{ $results->count() }} </b>{{ __('shop::app.search.found-results') }}</span>
                     </div>
                 @endif
-                {{-- @include ('shop::products.list.toolbar')
-
-                @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar') --}}
+                
                 <div class="product-grid-4">
-                    @foreach ($results as $product)
-                        @include('shop::products.list.card', ['product' => $product])
+                    @foreach ($results as $productFlat)
+
+                        @include('shop::products.list.card', ['product' => $productFlat->product])
+
                     @endforeach
                 </div>
 
