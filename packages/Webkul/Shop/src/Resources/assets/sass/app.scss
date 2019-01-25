@@ -867,17 +867,6 @@ section.slider-block {
                     border-left: 2px solid #c7c7c7;
                 }
 
-                .list:after {
-                    content: "";
-                    border-right: 2px solid #c7c7c7;
-                    color: red;
-                    background: red;
-                    position: absolute;
-                    height: 100px;
-                    top: 0px;
-                    right: 0px;
-                }
-
                 .list:first-child {
                     border: none;
                 }
