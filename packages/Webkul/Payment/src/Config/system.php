@@ -27,20 +27,6 @@ return [
                 'type' => 'textarea',
                 'channel_based' => false,
                 'locale_based' => true
-            ],  [
-                'name' => 'order_status',
-                'title' => 'Order Status',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => 'Pending',
-                        'value' => 'pending'
-                    ], [
-                        'title' => 'Pending Payment',
-                        'value' => 'pending_payment'
-                    ]
-                ],
-                'validation' => 'required'
             ], [
                 'name' => 'active',
                 'title' => 'Status',
@@ -75,20 +61,6 @@ return [
                 'type' => 'textarea',
                 'channel_based' => false,
                 'locale_based' => true
-            ],  [
-                'name' => 'order_status',
-                'title' => 'Order Status',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => 'Pending',
-                        'value' => 'pending'
-                    ], [
-                        'title' => 'Pending Payment',
-                        'value' => 'pending_payment'
-                    ]
-                ],
-                'validation' => 'required'
             ], [
                 'name' => 'active',
                 'title' => 'Status',
@@ -123,20 +95,6 @@ return [
                 'type' => 'textarea',
                 'channel_based' => false,
                 'locale_based' => true
-            ],  [
-                'name' => 'order_status',
-                'title' => 'Order Status',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => 'Pending',
-                        'value' => 'pending'
-                    ], [
-                        'title' => 'Pending Payment',
-                        'value' => 'pending_payment'
-                    ]
-                ],
-                'validation' => 'required'
             ],  [
                 'name' => 'business_account',
                 'title' => 'Business Account',
