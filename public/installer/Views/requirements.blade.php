@@ -18,20 +18,6 @@
                         Please wait while we are checking the requirements
                     </div>
 
-                    <?php foreach($requirements['requirements'] as $type => $require): ?>
-
-                        <?php foreach($requirements['requirements'][$type] as $extention => $enabled) : ?>
-                            <div class="check" style="margin-left: 25%">
-                                <?php if($enabled ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
-                                    <img src="<?php echo $src ?>">
-                                <?php endif; ?>
-                                <span style="margin-left: 10px"><b><?php echo $extention ?></b></span>
-                                <span>(<?php echo $extention ?> Required)</span>
-                            </div>
-                        <?php endforeach; ?>
-
-                    <?php endforeach; ?>
-
                     <div class="check" style="margin-left: 25%">
                         <?php if($phpVersion['supported'] ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
                             <img src="<?php echo $src ?>">
@@ -39,31 +25,9 @@
                         <span style="margin-left: 10px"><b>PHP</b></span>
                         <span>(<?php echo $phpVersion['minimum'] ?> or Higher)</span>
                     </div>
-
-                    <div class="check" style="margin-left: 25%">
-                        <?php if($sqlInstall['supported'] ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
-                            <img src="<?php echo $src ?>">
-                        <?php endif; ?>
-                        <span style="margin-left: 11px"><b>Mysql</b></span>
-                        <span>(<?php echo $sqlInstall['minimum'] ?> or Higher)</span>
-                    </div>
-
-                    <div class="check" style="margin-left: 25%;">
-                        <?php if(($composerInstall == 0) ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
-                            <img src="<?php echo $src ?>">
-                        <?php endif; ?>
-                        <span style="margin-left: 10px"><b>Composer</b></span>
-                    </div>
-
-                    <div style="margin-left: 30%;">
-                        <?php if(!($composerInstall == 0)): ?>
-                            <a href="https://getcomposer.org/" style="color: #0041FF; font-size: 16px">https://getcomposer.org/</a>
-                        <?php endif; ?>
-                    </div>
-
                 </div>
 
-                <?php if(!isset($requirements['errors']) && $phpVersion['supported'] && $sqlInstall['supported'] && ($composerInstall == 0) ): ?>
+                <?php if($phpVersion['supported']): ?>
 
                     <div>
                         <button type="button" class="prepare-btn" id="requirement-check">Continue</button>
@@ -83,16 +47,4 @@
         </div>
 
     </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
