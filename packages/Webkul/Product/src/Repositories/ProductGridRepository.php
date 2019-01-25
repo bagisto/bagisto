@@ -108,7 +108,7 @@ class ProductGridRepository extends Repository
                 return $this->getModel()->where('product_id', $variant->id)->update($gridObject);
             }
         }
-        
+
         return false;
     }
 }

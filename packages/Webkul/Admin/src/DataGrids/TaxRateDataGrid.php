@@ -72,13 +72,13 @@ class TaxRateDataGrid extends DataGrid
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
-            'route' => 'admin.tax-categories.edit',
+            'route' => 'admin.tax-rates.store',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
-            'route' => 'admin.tax-categories.delete',
+            'route' => 'admin.tax-rates.delete',
             'icon' => 'icon trash-icon'
         ]);
     }
