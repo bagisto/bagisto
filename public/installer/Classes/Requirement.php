@@ -12,19 +12,17 @@ class Requirement {
     {
         // Server Requirements
         $requirements =  [
-            // 'requirements' => [
-                'php' => [
-                    // 'openssl',
-                    // 'pdo',
-                    // 'mbstring',
-                    // 'tokenizer',
-                    // 'JSON',
-                    // 'cURL',
-                ],
-                'apache' => [
-                    // 'mod_rewrite',
-                ]
-            // ]
+            'php' => [
+                'openssl',
+                'pdo',
+                'mbstring',
+                'tokenizer',
+                'JSON',
+                'cURL',
+            ],
+            'apache' => [
+                'mod_rewrite',
+            ]
         ];
 
         $results = [];
@@ -180,7 +178,7 @@ class Requirement {
      */
     public function render()
     {
-        // $requirements = $this->checkRequirements();
+        $requirements = $this->checkRequirements();
 
         $phpVersion = $this->checkPHPversion();
 

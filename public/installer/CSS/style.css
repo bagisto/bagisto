@@ -78,7 +78,7 @@ span {
     line-height: 30px;
 }
 
-.requirement, .environment, .migration, .permission, .admin, .finish {
+.welcome, .environment, .migration, .permission, .admin, .finish {
     display : none;
 }
 

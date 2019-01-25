@@ -38,15 +38,25 @@
                             <a href="https://getcomposer.org/" style="color: #0041FF; font-size: 16px">https://getcomposer.org/</a>
                         <?php endif; ?>
                     </div>
+
+                    <?php foreach($requirements['requirements'] as $type => $require): ?>
+
+                        <?php foreach($requirements['requirements'][$type] as $extention => $enabled) : ?>
+                            <div class="check" style="margin-left: 25%">
+                                <?php if($enabled ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
+                                    <img src="<?php echo $src ?>">
+                                <?php endif; ?>
+                                <span style="margin-left: 10px"><b><?php echo $extention ?></b></span>
+                                <span>(<?php echo $extention ?> Required)</span>
+                            </div>
+                        <?php endforeach; ?>
+
+                    <?php endforeach; ?>
                 </div>
 
-                <?php if($phpVersion['supported'] && ($composerInstall == 0)): ?>
-
+                <?php if(!isset($requirements['errors']) && $phpVersion['supported'] && ($composerInstall == 0) ): ?>
                     <div>
                         <button type="button" class="prepare-btn" id="requirement-check">Continue</button>
-                    </div>
-                    <div style="cursor: pointer; margin-top:10px">
-                        <span id="requirement-back">back</span>
                     </div>
 
                 <?php endif; ?>
@@ -60,4 +70,5 @@
         </div>
 
     </body>
+
 </html>
