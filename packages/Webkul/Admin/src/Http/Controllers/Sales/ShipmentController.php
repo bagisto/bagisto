@@ -157,12 +157,11 @@ class ShipmentController extends Controller
                         ? $orderItem->child->product
                         : $orderItem->product;
 
-                $inventory = $product->inventories()
+                $availableQty = $product->inventories()
                         ->where('inventory_source_id', $data['shipment']['source'])
-                        ->where('vendor_id', 0)
-                        ->first();
+                        ->sum('qty');
 
-                if ($orderItem->qty_to_ship < $qty || $inventory->qty < $qty) {
+                if ($orderItem->qty_to_ship < $qty || $availableQty < $qty) {
                     return false;
                 }
 

@@ -34,7 +34,6 @@ class TaxRateDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
@@ -43,7 +42,6 @@ class TaxRateDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -52,7 +50,6 @@ class TaxRateDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -61,7 +58,6 @@ class TaxRateDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -70,20 +66,19 @@ class TaxRateDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
-            'route' => 'admin.tax-categories.edit',
+            'route' => 'admin.tax-rates.store',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
-            'route' => 'admin.tax-categories.delete',
+            'route' => 'admin.tax-rates.delete',
             'icon' => 'icon trash-icon'
         ]);
     }

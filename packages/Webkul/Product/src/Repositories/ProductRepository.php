@@ -144,7 +144,6 @@ class ProductRepository extends Repository
         //after store of the product
         Event::fire('catalog.product.create.after', $product);
 
-
         return $product;
     }
 
@@ -233,6 +232,9 @@ class ProductRepository extends Repository
 
         Event::fire('catalog.product.update.after', $product);
 
+        //correct it after making sure which event to use.
+        Event::fire('after.product.updated', $product);
+
         return $product;
     }
 
@@ -243,7 +245,7 @@ class ProductRepository extends Repository
     public function delete($id)
     {
         Event::fire('catalog.product.delete.before', $id);
-        
+
         parent::delete($id);
 
         Event::fire('catalog.product.delete.after', $id);
@@ -511,15 +513,5 @@ class ProductRepository extends Repository
         return $this->scopeQuery(function($query) use($term) {
             return $query->distinct()->addSelect('products.*')->where('pav.text_value', 'like', '%'.$term.'%');
         })->paginate(4);
-    }
-
-    /**
-     * break the search term into explode by using space and tell which exploded item is attribute
-     * , category, super attribute or combination of them.
-     */
-    public function breakTheTerm($term) {
-        $explodedTerm = (explode(" ", $term));
-
-        dd($term);
     }
 }

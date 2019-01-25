@@ -46,7 +46,6 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
@@ -55,7 +54,6 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -64,7 +62,6 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '100px',
         ]);
 
         $this->addColumn([
@@ -73,7 +70,6 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px',
         ]);
 
         $this->addColumn([
@@ -82,7 +78,6 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'datetime',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -91,7 +86,6 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'datetime',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -100,14 +94,13 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
-            'width' => '100px'
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'View',
-            'route' => 'admin.sales.orders.view',
+            'route' => 'admin.sales.shipments.view',
             'icon' => 'icon eye-icon'
         ]);
     }

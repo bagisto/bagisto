@@ -38,7 +38,6 @@ class UserDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
@@ -47,7 +46,6 @@ class UserDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -56,7 +54,6 @@ class UserDataGrid extends DataGrid
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px',
             'wrapper' => function($value) {
                 if ($value->status == 1) {
                     return 'Active';
@@ -72,7 +69,6 @@ class UserDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -81,14 +77,13 @@ class UserDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
-            'route' => 'admin.roles.edit',
+            'route' => 'admin.users.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
     }

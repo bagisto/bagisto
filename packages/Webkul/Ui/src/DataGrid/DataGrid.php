@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 abstract class DataGrid
 {
     protected $index = null;
+    protected $sortOrder = 'asc';
     protected $enableFilterMap = false;
     protected $filterMap = [];
     protected $columns = [];
@@ -43,20 +44,7 @@ abstract class DataGrid
         'and' => "&",
         'bor' => "|",
         'regex' => "regexp",
-        'notregex' => "not regexp",
-        // 14 => "^",
-        // 15 => "<<",
-        // 16 => ">>",
-        // 17 => "rlike",
-        // 20 => "~",
-        // 21 => "~*",
-        // 22 => "!~",
-        // 23 => "!~*",
-        // 24 => "similar to",
-        // 25 => "not similar to",
-        // 26 => "not ilike",
-        // 27 => "~~*",
-        // 28 => "!~~*"
+        'notregex' => "not regexp"
     ];
 
     protected $bindings = [
@@ -155,18 +143,18 @@ abstract class DataGrid
 
             if ($this->paginate) {
                 if ($this->itemsPerPage > 0)
-                    return $filteredOrSortedCollection->paginate($this->itemsPerPage)->appends(request()->except('page'));
+                    return $filteredOrSortedCollection->orderBy($this->index, $this->sortOrder)->paginate($this->itemsPerPage)->appends(request()->except('page'));
             } else {
-                return $filteredOrSortedCollection->get();
+                return $filteredOrSortedCollection->orderBy($this->index, $this->sortOrder)->get();
             }
         }
 
         if ($this->paginate) {
             if ($this->itemsPerPage > 0) {
-                $this->collection = $this->queryBuilder->paginate($this->itemsPerPage)->appends(request()->except('page'));
+                $this->collection = $this->queryBuilder->orderBy($this->index, $this->sortOrder)->paginate($this->itemsPerPage)->appends(request()->except('page'));
             }
         } else {
-            $this->collection = $this->queryBuilder->get();
+            $this->collection = $this->queryBuilder->orderBy($this->index, $this->sortOrder)->get();
         }
 
         return $this->collection;
@@ -297,8 +285,6 @@ abstract class DataGrid
         $this->prepareMassActions();
 
         $this->prepareQueryBuilder();
-
-        // dd($this->paginate, $this->itemsPerPage);
 
         return view('ui::datagrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->completeColumnDetails, 'actions' => $this->actions, 'massactions' => $this->massActions, 'index' => $this->index, 'enableMassActions' => $this->enableMassAction, 'enableActions' => $this->enableAction, 'paginated' => $this->paginate, 'norecords' => trans('ui::app.datagrid.no-records')]);
     }

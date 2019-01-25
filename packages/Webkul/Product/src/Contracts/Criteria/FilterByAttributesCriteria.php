@@ -40,12 +40,12 @@ class FilterByAttributesCriteria extends AbstractProduct implements CriteriaInte
     public function apply($model, RepositoryInterface $repository)
     {
         $model = $model->leftJoin('products as variants', 'products.id', '=', 'variants.parent_id');
-        
+
         $model = $model->where(function($query1) use($model) {
             $aliases = [
-                    'products' => 'filter_',
-                    'variants' => 'variant_filter_'
-                ];
+                'products' => 'filter_',
+                'variants' => 'variant_filter_'
+            ];
 
             foreach ($aliases as $table => $alias) {
                 $query1 = $query1->orWhere(function($query2) use($model, $table, $alias) {
@@ -58,8 +58,9 @@ class FilterByAttributesCriteria extends AbstractProduct implements CriteriaInte
                         $query2 = $this->applyChannelLocaleFilter($attribute, $query2, $aliasTemp);
 
                         $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
-                        
+
                         $temp = explode(',', request()->get($attribute->code));
+
                         if ($attribute->type != 'price') {
                             $query2 = $query2->where($aliasTemp . '.attribute_id', $attribute->id);
 

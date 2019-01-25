@@ -38,7 +38,6 @@ class CategoryDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
@@ -47,7 +46,6 @@ class CategoryDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -56,7 +54,6 @@ class CategoryDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => false,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -65,7 +62,6 @@ class CategoryDataGrid extends DataGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => true,
-            'width' => '100px',
             'wrapper' => function($value) {
                 if ($value->status == 1)
                     return 'Active';
@@ -80,20 +76,19 @@ class CategoryDataGrid extends DataGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => true,
-            'width' => '100px'
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
-            'route' => 'admin.catalog.products.edit',
+            'route' => 'admin.catalog.categories.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
-            'route' => 'admin.catalog.products.delete',
+            'route' => 'admin.catalog.categories.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon' => 'icon trash-icon'
         ]);

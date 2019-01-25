@@ -36,7 +36,6 @@ class OrderDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
@@ -45,7 +44,6 @@ class OrderDataGrid extends DataGrid
             'type' => 'price',
             'searchable' => false,
             'sortable' => true,
-            'width' => '100px',
         ]);
 
         $this->addColumn([
@@ -54,7 +52,6 @@ class OrderDataGrid extends DataGrid
             'type' => 'price',
             'searchable' => false,
             'sortable' => true,
-            'width' => '100px',
         ]);
 
         $this->addColumn([
@@ -63,7 +60,6 @@ class OrderDataGrid extends DataGrid
             'type' => 'datetime',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px',
         ]);
 
         $this->addColumn([
@@ -72,7 +68,6 @@ class OrderDataGrid extends DataGrid
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -81,7 +76,6 @@ class OrderDataGrid extends DataGrid
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
-            'width' => '100px',
             'closure' => true,
             'wrapper' => function ($value) {
                 if ($value->status == 'processing')
@@ -107,7 +101,6 @@ class OrderDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
     }
 

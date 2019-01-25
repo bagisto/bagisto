@@ -147,7 +147,7 @@ return [
     'editor' =>'vscode',
 
     /**
-     * Debug blacklisting
+     * Blacklisting attributes while debugging
      */
     'debug_blacklist' => [
         '_ENV' => [

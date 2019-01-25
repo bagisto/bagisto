@@ -106,6 +106,9 @@ class ShipmentRepository extends Repository
 
                 $orderItem = $this->orderItem->find($itemId);
 
+                if ($qty > $orderItem->qty_to_ship)
+                    $qty = $orderItem->qty_to_ship;
+
                 $totalQty += $qty;
 
                 $shipmentItem = $this->shipmentItem->create([

@@ -34,7 +34,6 @@ class CustomerGroupDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
@@ -43,20 +42,19 @@ class CustomerGroupDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
-            'route' => 'admin.customer.edit',
+            'route' => 'admin.groups.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
-            'route' => 'admin.customer.delete',
+            'route' => 'admin.groups.delete',
             'icon' => 'icon trash-icon'
         ]);
     }

@@ -4,6 +4,7 @@ namespace Webkul\Admin\Listeners;
 
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductGridRepository;
+use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Helpers\Price;
 
 /**
@@ -23,18 +24,27 @@ class Product {
      *
      * @var array
      */
-    Protected $price;
+    protected $price;
+
+    /**
+     * Product Flat Object
+     *
+     * Repository Object
+     */
+    protected $productFlat;
 
     /**
      * Product Grid Repository Object
      */
     protected $productGrid;
 
-    public function __construct(ProductRepository $product, ProductGridRepository $productGrid, Price $price)
+    public function __construct(ProductRepository $product, ProductGridRepository $productGrid, ProductFlatRepository $productFlat, Price $price)
     {
         $this->product = $product;
 
         $this->productGrid = $productGrid;
+
+        $this->productFlat = $productFlat;
 
         $this->price = $price;
     }
@@ -91,7 +101,7 @@ class Product {
                         'name' => $variant->name,
                         'quantity' => 0,
                         'status' => $variant->status,
-                        'price' => $variant->price,
+                        'price' => $variant->price
                     ];
 
                     $this->productGrid->create($variantObj);
@@ -269,17 +279,5 @@ class Product {
         //find if there is duplicacy in the products grid here
     }
 
-    /**
-     * Take action for attribute creation
-     */
-    public function createColumnBasedOnAttribute($attribute) {
-        dd($attribute);
-    }
-
-    /**
-     * Take action for attribute updatation
-     */
-    public function updateColumnBasedOnAttribute($attribute) {
-        dd($attribute);
-    }
+    public function syncFlat() {}
 }
