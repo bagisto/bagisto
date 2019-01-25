@@ -21,17 +21,25 @@
 
                     @if (isset($column['wrapper']))
                         @if (isset($column['closure']) && $column['closure'] == true)
-                            <td>{!! $column['wrapper']($record->{$columnIndex}) !!}</td>
+                            <td>{!! $column['wrapper']($record) !!}</td>
                         @else
-                            <td>{{ $column['wrapper']($record->{$columnIndex}) }}</td>
+                            <td>{{ $column['wrapper']($record) }}</td>
                         @endif
                     @else
-                        <td>{{ $record->{$columnIndex} }}</td>
+                        @if($column['type'] == 'price')
+                            @if(isset($column['currencyCode']))
+                                <td>{{ core()->formatPrice($record->{$columnIndex}, $column['currencyCode']) }}</td>
+                            @else
+                                <td>{{ core()->formatBasePrice($record->{$columnIndex}) }}</td>
+                            @endif
+                        @else
+                            <td>{{ $record->{$columnIndex} }}</td>
+                        @endif
                     @endif
                 @endforeach
 
                 @if ($enableActions)
-                    <td style="width: 50px;">
+                    <td>
                         <div class="actions">
                             @foreach ($actions as $action)
                                 <a href="{{ route($action['route'], $record->{$index}) }}">
@@ -45,7 +53,7 @@
         @endforeach
     @else
         <tr>
-            <td colspan="10" style="text-align: center;">{{$norecords}}</td>
+            <td colspan="10" style="text-align: center;">{{ $norecords }}</td>
         </tr>
     @endif
 </tbody>

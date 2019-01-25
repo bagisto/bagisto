@@ -13,11 +13,27 @@ use DB;
  */
 class OrderShipmentsDataGrid extends DataGrid
 {
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
     protected $index = 'shipment_id';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('shipments as ship')->select('ship.id as shipment_id', 'ship.order_id as shipment_order_id', 'ship.total_qty as shipment_total_qty', 'is.name as inventory_source_name', 'ors.created_at as orderdate', 'ship.created_at as shipment_created_at')->addSelect(DB::raw('CONCAT(ors.customer_first_name, " ", ors.customer_last_name) as custname'))->leftJoin('orders as ors', 'ship.order_id', '=', 'ors.id')->leftJoin('inventory_sources as is', 'ship.inventory_source_id', '=', 'is.id');
+        $queryBuilder = DB::table('shipments as ship')
+                ->leftJoin('orders as ors', 'ship.order_id', '=', 'ors.id')
+                ->leftJoin('inventory_sources as is', 'ship.inventory_source_id', '=', 'is.id')
+                ->select('ship.id as shipment_id', 'ship.order_id as shipment_order_id', 'ship.total_qty as shipment_total_qty', 'is.name as inventory_source_name', 'ors.created_at as orderdate', 'ship.created_at as shipment_created_at')
+                ->addSelect(DB::raw('CONCAT(ors.customer_first_name, " ", ors.customer_last_name) as custname'));
+
+        $this->addFilter('shipment_id', 'ship.id');
+        $this->addFilter('shipment_order_id', 'ship.order_id');
+        $this->addFilter('shipment_total_qty', 'ship.total_qty');
+        $this->addFilter('inventory_source_name', 'is.name');
+        $this->addFilter('orderdate', 'ors.created_at');
+        $this->addFilter('shipment_created_at', 'ship.created_at');
+        $this->addFilter('custname', DB::raw('CONCAT(ors.customer_first_name, " ", ors.customer_last_name)'));
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -30,25 +46,22 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
             'index' => 'shipment_order_id',
             'label' => trans('admin::app.datagrid.order-id'),
             'type' => 'number',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
             'index' => 'shipment_total_qty',
             'label' => trans('admin::app.datagrid.total-qty'),
             'type' => 'number',
-            'searchable' => true,
+            'searchable' => false,
             'sortable' => true,
-            'width' => '100px',
         ]);
 
         $this->addColumn([
@@ -57,7 +70,6 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px',
         ]);
 
         $this->addColumn([
@@ -65,8 +77,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'label' => trans('admin::app.datagrid.order-date'),
             'type' => 'datetime',
             'sortable' => true,
-            'searchable' => true,
-            'width' => '100px'
+            'searchable' => false,
         ]);
 
         $this->addColumn([
@@ -75,7 +86,6 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'datetime',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -83,8 +93,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'label' => trans('admin::app.datagrid.shipment-to'),
             'type' => 'string',
             'sortable' => true,
-            'searchable' => false,
-            'width' => '100px'
+            'searchable' => true,
         ]);
     }
 

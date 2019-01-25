@@ -13,6 +13,10 @@ use DB;
  */
 class NewsLetterDataGrid extends DataGrid
 {
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
     protected $index = 'id';
 
     public function prepareQueryBuilder()
@@ -30,18 +34,16 @@ class NewsLetterDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
             'index' => 'is_subscribed',
             'label' => trans('admin::app.datagrid.subscribed'),
             'type' => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'sortable' => true,
-            'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->is_subscribed == 1)
                     return 'True';
                 else
                     return 'False';
@@ -54,7 +56,6 @@ class NewsLetterDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
     }
 

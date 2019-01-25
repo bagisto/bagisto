@@ -13,14 +13,17 @@ use DB;
  */
 class AttributeDataGrid extends DataGrid
 {
-    protected $itemsPerPage = 5; //overriding the default items per page
+    protected $paginate = true;
+
+    protected $itemsPerPage = 10; //overriding the default items per page
 
     protected $index = 'id'; //the column that needs to be treated as index column
 
-
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('attributes')->select('id')->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel');
+        $queryBuilder = DB::table('attributes')
+                ->select('id')
+                ->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -33,7 +36,6 @@ class AttributeDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
@@ -42,7 +44,6 @@ class AttributeDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -51,7 +52,6 @@ class AttributeDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -60,7 +60,6 @@ class AttributeDataGrid extends DataGrid
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -69,9 +68,8 @@ class AttributeDataGrid extends DataGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->is_required == 1)
                     return 'True';
                 else
                     return 'False';
@@ -84,9 +82,8 @@ class AttributeDataGrid extends DataGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->is_unique == 1)
                     return 'True';
                 else
                     return 'False';
@@ -99,9 +96,8 @@ class AttributeDataGrid extends DataGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->value_per_locale == 1)
                     return 'True';
                 else
                     return 'False';
@@ -114,9 +110,8 @@ class AttributeDataGrid extends DataGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->value_per_channel == 1)
                     return 'True';
                 else
                     return 'False';

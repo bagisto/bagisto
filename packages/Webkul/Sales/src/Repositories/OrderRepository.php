@@ -121,6 +121,8 @@ class OrderRepository extends Repository
         if (! $order->canCancel())
             return false;
 
+        Event::fire('sales.order.cancel.before', $order);
+
         foreach ($order->items as $item) {
             if ($item->qty_to_cancel) {
                 $this->orderItem->returnQtyToProductInventory($item);
@@ -132,6 +134,8 @@ class OrderRepository extends Repository
         }
 
         $this->updateOrderStatus($order);
+
+        Event::fire('sales.order.cancel.after', $order);
 
         return true;
     }

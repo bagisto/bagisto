@@ -13,6 +13,10 @@ use DB;
  */
 class TaxCategoryDataGrid extends DataGrid
 {
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
     protected $index = 'id';
 
     public function prepareQueryBuilder()
@@ -30,7 +34,6 @@ class TaxCategoryDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
@@ -39,7 +42,6 @@ class TaxCategoryDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -48,7 +50,6 @@ class TaxCategoryDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
     }
 

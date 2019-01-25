@@ -13,6 +13,10 @@ use DB;
  */
 class RolesDataGrid extends DataGrid
 {
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
     protected $index = 'id';
 
     public function prepareQueryBuilder()
@@ -39,7 +43,6 @@ class RolesDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -48,7 +51,6 @@ class RolesDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
     }
 

@@ -5,6 +5,8 @@ require("./bootstrap");
 
 Vue.use(VeeValidate);
 
+window.eventBus = new Vue();
+
 $(document).ready(function () {
     Vue.config.ignoredElements = [
         'option-wrapper',

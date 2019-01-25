@@ -88,12 +88,12 @@ class AddressController extends Controller
             $data['default_address'] = 1;
         }
 
-        if ($this->address->create($data)) {
-            session()->flash('success', 'Address have been successfully added.');
+        if($this->address->create($data)) {
+            session()->flash('success', trans('shop::app.customer.account.address.create.success'));
 
             return redirect()->route($this->_config['redirect']);
         } else {
-            session()->flash('error', 'Address cannot be added.');
+            session()->flash('error', trans('shop::app.customer.account.address.create.error'));
 
             return redirect()->back();
         }
@@ -131,7 +131,7 @@ class AddressController extends Controller
 
         $this->address->update($data, $id);
 
-        Session()->flash('success','Address Updated Successfully.');
+        session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
 
         return redirect()->route('customer.address.index');
     }
@@ -150,7 +150,7 @@ class AddressController extends Controller
         if ($address = $this->address->find($id)) {
             $address->update(['default_address' => 1]);
         } else {
-            session()->flash('success', 'Default Cannot Be Address Changed');
+            session()->flash('success', trans('shop::app.customer.account.address.index.default-delete'));
         }
 
         return redirect()->back();
@@ -167,7 +167,7 @@ class AddressController extends Controller
     {
         $this->address->delete($id);
 
-        session()->flash('success', trans('shop::app.address.delete.success'));
+        session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
 
         return redirect()->back();
     }

@@ -1,15 +1,15 @@
 <div class="table">
-    <testgrid-filters></testgrid-filters>
+    <datagrid-filters></datagrid-filters>
 
-    @if (config('datagrid.paginate'))
+    @if (isset($results['paginated']) && $results['paginated'])
         @include('ui::datagrid.pagination', ['results' => $results['records']])
     @endif
 
     @push('scripts')
-        <script type="text/x-template" id="testgrid-filters">
+        <script type="text/x-template" id="datagrid-filters">
             {{-- start filter here --}}
             <div class="grid-container">
-                <div class="filter-row-one" id="testgrid-filters">
+                <div class="filter-row-one" id="datagrid-filters">
                     <div class="search-filter">
                         <input type="search" id="search-field" class="control" placeholder="Search Here..." v-model="searchValue" />
 
@@ -34,7 +34,7 @@
                                             <div class="control-group">
                                                 <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
                                                     <option selected disabled>Select Column</option>
-                                                    @foreach ($results['columns'] as $column)
+                                                    @foreach($results['columns'] as $column)
                                                         <option value="{{ $column['index'] }}">
                                                             {{ $column['label'] }}
                                                         </option>
@@ -134,8 +134,9 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="filter-row-two">
-                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: uppercase;">
+                    <span class="filter-tag" v-if="filters.length > 0" v-for="filter in filters" style="text-transform: capitalize;">
                         <span v-if="filter.column == 'sort'">@{{ filter.label }}</span>
                         <span v-else-if="filter.column == 'search'">Search</span>
                         <span v-else>@{{ filter.label }}</span>
@@ -147,11 +148,11 @@
                     </span>
                 </div>
 
-                <table>
+                <table class="table">
                     <thead v-if="massActionsToggle">
                         @if (isset($results['massactions']))
-                            <tr class="mass-action" style="height: 63px;" v-if="massActionsToggle">
-                                <th colspan="10" style="width: 100%;">
+                            <tr class="mass-action" v-if="massActionsToggle" style="height: 65px;">
+                                <th colspan="100%">
                                     <div class="mass-action-wrapper" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
 
                                         <span class="massaction-remove" v-on:click="removeMassActions" style="margin-right: 10px;">
@@ -164,13 +165,13 @@
                                             <input type="hidden" id="indexes" name="indexes" v-model="dataIds">
 
                                             <div class="control-group">
-                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type">
+                                                <select class="control" v-model="massActionType" @change="changeMassActionTarget" name="massaction-type" required>
                                                     <option v-for="(massAction, index) in massActions" :key="index" :value="massAction.type">@{{ massAction.label }}</option>
                                                 </select>
                                             </div>
 
                                             <div class="control-group" style="margin-left: 10px;" v-if="massActionType == 'update'">
-                                                <select class="control" v-model="massActionUpdateValue" name="update-options">
+                                                <select class="control" v-model="massActionUpdateValue" name="update-options" required>
                                                     <option v-for="(massActionValue, id) in massActionValues" :value="massActionValue">@{{ id }}</option>
                                                 </select>
                                             </div>
@@ -184,7 +185,7 @@
                     </thead>
 
                     <thead v-if="massActionsToggle == false">
-                        <tr>
+                        <tr style="height: 65px;">
                             @if (count($results['records']) && $results['enableMassActions'])
                                 <th class="grid_head" id="mastercheckbox" style="width: 50px;">
                                     <span class="checkbox">
@@ -195,8 +196,16 @@
                                 </th>
                             @endif
 
-                            @foreach ($results['columns'] as $key => $column)
-                                <th class="grid_head" style="width: {{ $column['width'] }}" v-on:click="sortCollection('{{ $column['index'] }}')">
+                            @foreach($results['columns'] as $key => $column)
+                                <th class="grid_head"
+                                    @if(isset($column['width']))
+                                        style="width: {{ $column['width'] }}"
+                                    @endif
+
+                                    @if(isset($column['sortable']) && $column['sortable'])
+                                        v-on:click="sortCollection('{{ $column['index'] }}')"
+                                    @endif
+                                >
                                     {{ $column['label'] }}
                                 </th>
                             @endforeach
@@ -215,8 +224,8 @@
         </script>
 
         <script>
-            Vue.component('testgrid-filters', {
-                template: '#testgrid-filters',
+            Vue.component('datagrid-filters', {
+                template: '#datagrid-filters',
 
                 data: () => ({
                     gridCurrentData: @json($results['records']),
@@ -298,6 +307,13 @@
                                     this.stringConditionSelect = false;
 
                                     this.nullify();
+                                } else if (this.type == 'price') {
+                                    this.numberConditionSelect = true;
+                                    this.booleanConditionSelect = false;
+                                    this.datetimeConditionSelect = false;
+                                    this.stringConditionSelect = false;
+
+                                    this.nullify();
                                 }
                             }
                         }
@@ -314,7 +330,7 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if (this.columns[colIndex].index == this.columnOrAlias) {
+                            if(this.columns[colIndex].index == this.columnOrAlias) {
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -327,6 +343,8 @@
                             this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue, label);
                         } else if (this.type == 'datetime') {
                             this.formURL(this.columnOrAlias, this.datetimeCondition, this.datetimeValue, label);
+                        } else if (this.type == 'price') {
+                            this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
                         }
                     },
 
@@ -334,7 +352,8 @@
                         label = '';
 
                         for(colIndex in this.columns) {
-                            if (this.columns[colIndex].index == this.columnOrAlias) {
+                            if(this.columns[colIndex].index == alias) {
+                                matched = 0;
                                 label = this.columns[colIndex].label;
                             }
                         }
@@ -343,13 +362,7 @@
                     },
 
                     searchCollection(searchValue) {
-                        label = '';
-
-                        for(colIndex in this.columns) {
-                            if (this.columns[colIndex].index == this.columnOrAlias) {
-                                label = this.columns[colIndex].label;
-                            }
-                        }
+                        label = 'Search';
 
                         this.formURL("search", 'all', searchValue, label);
                     },
@@ -435,6 +448,12 @@
                                                 filterRepeated = 1;
 
                                                 return false;
+                                            } else if(this.filters[j].cond == condition && this.filters[j].val != response) {
+                                                filterRepeated = 1;
+
+                                                this.filters[j].val = response;
+
+                                                this.makeURL();
                                             }
                                         }
                                     }
@@ -600,11 +619,13 @@
                             obj.cond = cond;
                             obj.val = val;
 
-                            if (col == "sort") {
+                            if(col == "sort") {
+                                // console.log('sort', obj.cond);
                                 label = '';
 
                                 for(colIndex in this.columns) {
-                                    if (this.columns[colIndex].index == obj.cond) {
+                                    if(this.columns[colIndex].index == obj.cond) {
+
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }
@@ -614,7 +635,7 @@
                                 obj.label = '';
 
                                 for(colIndex in this.columns) {
-                                    if (this.columns[colIndex].index == obj.column) {
+                                    if(this.columns[colIndex].index == obj.column) {
                                         obj.label = this.columns[colIndex].label;
                                     }
                                 }
@@ -641,7 +662,10 @@
                     select() {
                         this.allSelected = false;
 
-                        this.massActionsToggle = true;
+                        if(this.dataIds.length == 0)
+                            this.massActionsToggle = false;
+                        else
+                            this.massActionsToggle = true;
                     },
 
                     //triggered when master checkbox is clicked
@@ -675,8 +699,6 @@
                                 }
                             }
                         }
-
-                        // console.log(this.dataIds);
                     },
 
                     removeMassActions() {

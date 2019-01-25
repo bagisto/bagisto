@@ -5,7 +5,7 @@ namespace Webkul\Attribute\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-
+use Event;
 
 /**
  * Catalog attribute controller
@@ -77,6 +77,8 @@ class AttributeController extends Controller
 
         $attribute = $this->attribute->create(request()->all());
 
+        Event::fire('after.attribute.created', $attribute);
+
         session()->flash('success', 'Attribute created successfully.');
 
         return redirect()->route($this->_config['redirect']);
@@ -112,6 +114,8 @@ class AttributeController extends Controller
 
         $attribute = $this->attribute->update(request()->all(), $id);
 
+        Event::fire('after.attribute.updated', $attribute);
+
         session()->flash('success', 'Attribute updated successfully.');
 
         return redirect()->route($this->_config['redirect']);
@@ -127,15 +131,17 @@ class AttributeController extends Controller
     {
         $attribute = $this->attribute->findOrFail($id);
 
-        if (!$attribute->is_user_defined) {
-            session()->flash('error', 'Can not delete system attribute.');
+        if(!$attribute->is_user_defined) {
+            session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'attribute']));
         } else {
             try {
                 $this->attribute->delete($id);
 
                 session()->flash('success', 'Attribute deleted successfully.');
+
+                Event::fire(after.attribute.deleted, $attribute);
             } catch(\Exception $e) {
-                session()->flash('error', 'Attribute is used in configurable products.');
+                session()->flash('error', trans('admin::app.response.attribute-error', ['name' => 'Attribute']));
             }
         }
 

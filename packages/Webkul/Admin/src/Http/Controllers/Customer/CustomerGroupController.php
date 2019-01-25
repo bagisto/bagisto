@@ -81,7 +81,7 @@ class CustomerGroupController extends Controller
 
         $this->customerGroup->create($data);
 
-        session()->flash('success', trans('admin::app.customers.customers.group-created'));
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer Group']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -114,7 +114,7 @@ class CustomerGroupController extends Controller
 
         $this->customerGroup->update(request()->all(),$id);
 
-        session()->flash('success', trans('admin::app.customers.customers.group-updated'));
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer Group']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -132,7 +132,7 @@ class CustomerGroupController extends Controller
         if ($group->is_user_defined == 0) {
             session()->flash('warning', trans('admin::app.customers.customers.group-default'));
         } else {
-            session()->flash('success', trans('admin::app.customers.customers.group-deleted'));
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer Group']));
 
             $this->customerGroup->delete($id);
         }

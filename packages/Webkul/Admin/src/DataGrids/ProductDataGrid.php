@@ -13,11 +13,21 @@ use DB;
  */
 class ProductDataGrid extends DataGrid
 {
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
     protected $index = 'product_id';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('products_grid')->addSelect('products_grid.product_id as product_id', 'products_grid.sku as product_sku', 'products_grid.name as product_name', 'products.type as product_type', 'products_grid.status as product_status', 'products_grid.price as product_price', 'products_grid.quantity as product_quantity')->leftJoin('products', 'products_grid.product_id', '=', 'products.id');
+        $queryBuilder = DB::table('products_grid as pg')
+                ->leftJoin('products as pr', 'pg.product_id', '=', 'pr.id')
+                ->addSelect('pg.product_id as product_id', 'pg.sku as product_sku', 'pg.name', 'pr.type as product_type', 'pg.status', 'pg.price', 'pg.quantity');
+
+        $this->addFilter('product_id', 'pg.product_id');
+        $this->addFilter('product_sku', 'pg.sku');
+        $this->addFilter('product_type', 'pr.type');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -30,7 +40,7 @@ class ProductDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
+            // 'width' => '40px'
         ]);
 
         $this->addColumn([
@@ -39,16 +49,16 @@ class ProductDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
+            // 'width' => '100px'
         ]);
 
         $this->addColumn([
-            'index' => 'product_name',
+            'index' => 'name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
+            // 'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -57,18 +67,18 @@ class ProductDataGrid extends DataGrid
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
-            'width' => '100px'
+            // 'width' => '100px'
         ]);
 
         $this->addColumn([
-            'index' => 'product_status',
+            'index' => 'status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px',
+            // 'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->status == 1)
                     return 'Active';
                 else
                     return 'Inactive';
@@ -76,24 +86,21 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'product_price',
+            'index' => 'price',
             'label' => trans('admin::app.datagrid.price'),
-            'type' => 'number',
+            'type' => 'price',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px',
-            'wrapper' => function($value) {
-                return core()->formatBasePrice($value);
-            }
+            // 'width' => '100px'
         ]);
 
         $this->addColumn([
-            'index' => 'product_quantity',
+            'index' => 'quantity',
             'label' => trans('admin::app.datagrid.qty'),
             'type' => 'number',
             'sortable' => true,
             'searchable' => false,
-            'width' => '100px'
+            // 'width' => '100px'
         ]);
     }
 
@@ -110,6 +117,8 @@ class ProductDataGrid extends DataGrid
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon' => 'icon trash-icon'
         ]);
+
+        $this->enableAction = true;
     }
 
     public function prepareMassActions() {
@@ -130,5 +139,7 @@ class ProductDataGrid extends DataGrid
                 'Inactive' => 0
             ]
         ]);
+
+        $this->enableMassAction = true;
     }
 }

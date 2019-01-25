@@ -13,11 +13,19 @@ use DB;
  */
 class CategoryDataGrid extends DataGrid
 {
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
     protected $index = 'category_id'; //the column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('categories as cat')->select('cat.id as category_id', 'ct.name as category_name', 'cat.position as category_position', 'cat.status as category_status', 'ct.locale as category_locale')->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id');
+        $queryBuilder = DB::table('categories as cat')
+                ->select('cat.id as category_id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale')
+                ->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id');
+
+        $this->addFilter('category_id', 'cat.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -30,36 +38,32 @@ class CategoryDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
-            'index' => 'category_name',
+            'index' => 'name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
-            'index' => 'category_position',
+            'index' => 'position',
             'label' => trans('admin::app.datagrid.position'),
             'type' => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
-            'index' => 'category_status',
+            'index' => 'status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => true,
-            'width' => '100px',
             'wrapper' => function($value) {
-                if ($value == 1)
+                if ($value->status == 1)
                     return 'Active';
                 else
                     return 'Inactive';
@@ -67,25 +71,24 @@ class CategoryDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'category_locale',
+            'index' => 'locale',
             'label' => trans('admin::app.datagrid.locale'),
             'type' => 'boolean',
             'sortable' => true,
-            'searchable' => false,
-            'width' => '100px'
+            'searchable' => true,
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
-            'route' => 'admin.catalog.products.edit',
+            'route' => 'admin.catalog.categories.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
-            'route' => 'admin.catalog.products.delete',
+            'route' => 'admin.catalog.categories.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon' => 'icon trash-icon'
         ]);

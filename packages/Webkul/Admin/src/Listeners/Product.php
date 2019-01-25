@@ -266,6 +266,6 @@ class Product {
     }
 
     public function findRepeated() {
-
+        //find if there is duplicacy in the products grid here
     }
 }

@@ -88,7 +88,7 @@ class ChannelController extends Controller
 
         Event::fire('core.channel.create.after', $channel);
 
-        session()->flash('success', 'Channel created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Channel']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -134,7 +134,7 @@ class ChannelController extends Controller
 
         Event::fire('core.channel.update.after', $channel);
 
-        session()->flash('success', 'Channel updated successfully.');
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Channel']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -156,7 +156,7 @@ class ChannelController extends Controller
 
             Event::fire('core.channel.delete.after', $id);
 
-            session()->flash('success', 'Channel deleted successfully.');
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Channel']));
         }
 
         return redirect()->back();

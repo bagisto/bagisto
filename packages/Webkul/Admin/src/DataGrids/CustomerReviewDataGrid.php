@@ -13,11 +13,20 @@ use DB;
  */
 class CustomerReviewDataGrid extends DataGrid
 {
-    protected $index = 'product_review_id'; //the column that needs to be treated as index column
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
+    protected $index = 'product_review_id'; //column that needs to be treated as index column
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('product_reviews as pr')->addSelect('pr.id as product_review_id', 'pr.title as product_review_title', 'pr.comment as product_review_comment', 'pg.name as product_review_name', 'pr.status as product_review_status')->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id');
+        $queryBuilder = DB::table('product_reviews as pr')
+                ->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id')
+                ->addSelect('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pg.name', 'pr.status as product_review_status');
+
+        $this->addFilter('product_review_id', 'pr.id');
+        $this->addFilter('product_review_status', 'pr.status');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -30,46 +39,42 @@ class CustomerReviewDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
-            'index' => 'product_review_title',
+            'index' => 'title',
             'label' => trans('admin::app.datagrid.title'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
-            'index' => 'product_review_comment',
+            'index' => 'comment',
             'label' => trans('admin::app.datagrid.comment'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
-            'index' => 'product_review_name',
+            'index' => 'name',
             'label' => trans('admin::app.datagrid.product-name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
             'index' => 'product_review_status',
             'label' => trans('admin::app.datagrid.status'),
-            'type' => 'boolean',
+            'type' => 'string',
             'searchable' => true,
             'sortable' => true,
             'width' => '100px',
             'closure' => true,
             'wrapper' => function ($value) {
-                if ($value == 'approved')
+                if ($value->product_review_status == 'approved')
                     return '<span class="badge badge-md badge-success">Approved</span>';
                 else if ($value == "pending")
                     return '<span class="badge badge-md badge-warning">Pending</span>';

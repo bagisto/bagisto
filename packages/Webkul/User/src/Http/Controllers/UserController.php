@@ -98,7 +98,7 @@ class UserController extends Controller
 
         Event::fire('user.admin.delete.after', $admin);
 
-        session()->flash('success', 'User created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'User']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -146,7 +146,7 @@ class UserController extends Controller
 
         Event::fire('user.admin.update.after', $admin);
 
-        session()->flash('success', 'User updated successfully.');
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'User']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -172,7 +172,7 @@ class UserController extends Controller
 
             Event::fire('user.admin.delete.after', $id);
 
-            session()->flash('success', 'Admin source deleted successfully.');
+            session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Admin source']));
         }
 
         return redirect()->back();

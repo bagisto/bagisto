@@ -124,23 +124,23 @@ class Requirement {
     private static function composerInstall()
     {
         putenv('COMPOSER_HOME=' . __DIR__ . '/vendor/bin/composer');
-        $command = 'composer -v 2>&1';
+        $command = 'composer --version 2>&1';
         exec($command, $data['composer'], $data['composer_install']);
 
         return $data['composer_install'];
     }
 
-    /**
-     * check installation for composer
-     * @return boolean
-    */
-    private static function nodeInstall()
-    {
-        $command = 'npm -v 2>&1';
-        exec($command, $data['npm'], $data['npm_install']);
+    // /**
+    //  * check installation for composer
+    //  * @return boolean
+    // */
+    // private static function nodeInstall()
+    // {
+    //     $command = 'npm -v 2>&1';
+    //     exec($command, $data['npm'], $data['npm_install']);
 
-        return $data['npm_install'];
-    }
+    //     return $data['npm_install'];
+    // }
 
     /**
      * Render view for class.
@@ -154,7 +154,7 @@ class Requirement {
 
         $composerInstall = $this->composerInstall();
 
-        $nodeInstall = $this->nodeInstall();
+        // $nodeInstall = $this->nodeInstall();
 
         ob_start();
 

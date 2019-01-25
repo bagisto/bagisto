@@ -81,7 +81,7 @@ class CurrencyController extends Controller
 
         Event::fire('core.currency.create.after', $currency);
 
-        session()->flash('success', 'Currency created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Currency']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -119,7 +119,7 @@ class CurrencyController extends Controller
 
         Event::fire('core.currency.update.after', $currency);
 
-        session()->flash('success', 'Currency updated successfully.');
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Currency']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -139,10 +139,10 @@ class CurrencyController extends Controller
 
             Event::fire('core.currency.delete.after', $id);
 
-            if ($result)
-                session()->flash('success', 'Currency deleted successfully.');
+            if($result)
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Currency']));
             else
-                session()->flash('error', 'At least one currency is required.');
+                session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Currency']));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }

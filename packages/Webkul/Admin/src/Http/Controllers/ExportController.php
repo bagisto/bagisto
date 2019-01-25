@@ -32,9 +32,13 @@ class ExportController extends Controller
     */
     public function export()
     {
-        $results = unserialize(request()->all()['gridData']);
+        $results = request()->all()['gridData'];
 
-        $file_name = class_basename($results);
+        $data = json_decode($results, true);
+
+        $results = (object) $data;
+
+        $file_name = request()->all()['file_name'];
 
         if (request()->all()['format'] == 'csv') {
             return Excel::download(new DataGridExport($results), $file_name.'.csv');

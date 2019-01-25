@@ -13,6 +13,10 @@ use DB;
  */
 class OrderInvoicesDataGrid extends DataGrid
 {
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
     protected $index = 'id';
 
     public function prepareQueryBuilder()
@@ -30,25 +34,22 @@ class OrderInvoicesDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
             'index' => 'order_id',
             'label' => trans('admin::app.datagrid.order-id'),
             'type' => 'number',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
             'index' => 'grand_total',
             'label' => trans('admin::app.datagrid.grand-total'),
-            'type' => 'string',
+            'type' => 'price',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px',
         ]);
 
         $this->addColumn([
@@ -57,7 +58,6 @@ class OrderInvoicesDataGrid extends DataGrid
             'type' => 'datetime',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px',
         ]);
     }
 
@@ -67,13 +67,5 @@ class OrderInvoicesDataGrid extends DataGrid
             'route' => 'admin.sales.invoices.view',
             'icon' => 'icon eye-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->addMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.attributes.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
     }
 }

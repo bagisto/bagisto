@@ -30,7 +30,8 @@ $data    = array();      // array to pass back data
         $data['errors']  = $errors;
 
     } else {
-        $currentLocation = explode("/", getcwd());
+        $location = str_replace('\\', '/', getcwd());
+        $currentLocation = explode("/", $location);
         array_pop($currentLocation);
         array_pop($currentLocation);
         $desiredLocation = implode("/", $currentLocation);
@@ -66,7 +67,7 @@ $data    = array();      // array to pass back data
 
         if ($connection == 'mysql' ) {
             // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
+            @$conn = new mysqli($servername, $username, $password, $dbname);
 
             // check connection
             if ($conn->connect_error) {

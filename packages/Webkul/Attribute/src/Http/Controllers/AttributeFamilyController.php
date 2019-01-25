@@ -82,7 +82,7 @@ class AttributeFamilyController extends Controller
 
         $attributeFamily = $this->attributeFamily->create(request()->all());
 
-        session()->flash('success', 'Family created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Family']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -119,7 +119,7 @@ class AttributeFamilyController extends Controller
 
         $attributeFamily = $this->attributeFamily->update(request()->all(), $id);
 
-        session()->flash('success', 'Family updated successfully.');
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Family']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -135,13 +135,13 @@ class AttributeFamilyController extends Controller
         $attributeFamily = $this->attributeFamily->find($id);
 
         if ($this->attributeFamily->count() == 1) {
-            session()->flash('error', 'At least one family is required.');
+            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Family']));
         } else if ($attributeFamily->products()->count()) {
-            session()->flash('error', 'Attribute family is used in products.');
+            session()->flash('error', trans('admin::app.response.attribute-product-error', ['name' => 'Attribute family']));
         } else {
             $this->attributeFamily->delete($id);
 
-            session()->flash('success', 'Family deleted successfully.');
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Family']));
         }
 
         return redirect()->back();

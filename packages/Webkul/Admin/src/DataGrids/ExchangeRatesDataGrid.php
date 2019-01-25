@@ -13,11 +13,17 @@ use DB;
  */
 class ExchangeRatesDataGrid extends DataGrid
 {
+    protected $paginate = true;
+
+    protected $itemsPerPage = 5; //overriding the default items per page
+
     protected $index = 'currency_exch_id';
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('currency_exchange_rates as cer')->addSelect('cer.id as currency_exch_id', 'curr.name as currency_exch_name', 'cer.rate as currency_exch_rate')->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id');
+        $queryBuilder = DB::table('currency_exchange_rates as cer')->addSelect('cer.id as currency_exch_id', 'curr.name', 'cer.rate')->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id');
+
+        $this->addFilter('currency_exch_id', 'cer.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -30,25 +36,22 @@ class ExchangeRatesDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
         ]);
 
         $this->addColumn([
-            'index' => 'currency_exch_name',
+            'index' => 'name',
             'label' => trans('admin::app.datagrid.currency-name'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
 
         $this->addColumn([
-            'index' => 'currency_exch_rate',
+            'index' => 'rate',
             'label' => trans('admin::app.datagrid.exch-rate'),
-            'type' => 'string',
+            'type' => 'number',
             'searchable' => true,
             'sortable' => true,
-            'width' => '100px'
         ]);
     }
 
@@ -65,23 +68,5 @@ class ExchangeRatesDataGrid extends DataGrid
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
             'icon' => 'icon trash-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->prepareMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.products.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
-
-        // $this->prepareMassAction([
-        //     'type' => 'update',
-        //     'action' => route('admin.catalog.products.massupdate'),
-        //     'method' => 'PUT',
-        //     'options' => [
-        //         0 => true,
-        //         1 => false,
-        //     ]
-        // ]);
     }
 }
