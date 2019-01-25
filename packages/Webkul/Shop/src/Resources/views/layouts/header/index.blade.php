@@ -28,11 +28,11 @@
             </ul>
         </div>
 
-        {{--  <div class="right-content">
+        <div class="right-content">
             <ul class="account-cart-currency">
 
                 @if (core()->getCurrentChannel()->currencies->count() > 1)
-                    <li style="border-right: 2px solid #C7C7C7;">
+                    <li>
                         <span class="dropdown-toggle">
                             {{ core()->getCurrentCurrencyCode() }}
                             <i class="icon arrow-down-icon active"></i>
@@ -45,10 +45,12 @@
                                 </li>
                             @endforeach
                         </ul>
+
+                        <div style="position: absolute; height: 25px; margin-left: 70px; margin-top: -23px;border-right: 2px solid #C7C7C7;"></div>
                     </li>
                 @endif
 
-                <li style="border-right: 2px solid #C7C7C7;">
+                <li>
                     <span class="dropdown-toggle">
                         <i class="icon account-icon"></i>
                         <i class="icon arrow-down-icon active"></i>
@@ -89,6 +91,8 @@
                             </li>
                         </ul>
                     @endauth
+
+                    <div style="position: absolute; height: 25px; margin-left: 142px; margin-top: -23px;border-right: 2px solid #C7C7C7;"></div>
                 </li>
 
                 <li>
@@ -102,9 +106,9 @@
                     </ul>
                 </li>
             </ul>
-        </div>  --}}
+        </div>
 
-        <div class="right-content">
+        {{-- <div class="right-content">
             @if (core()->getCurrentChannel()->currencies->count() > 1)
                 <ul class="currency-switcher">
                     <div class="dropdown-toggle">
@@ -176,7 +180,7 @@
                     @include('shop::checkout.cart.mini-cart')
                 </li>
             </ul>
-        </div>
+        </div> --}}
 
     </div>
 
