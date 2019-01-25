@@ -15,7 +15,7 @@ class ProductDataGrid extends DataGrid
 {
     protected $paginate = true;
 
-    protected $itemsPerPage = 5; //overriding the default items per page
+    protected $itemsPerPage = 10; //overriding the default items per page
 
     protected $index = 'product_id';
 

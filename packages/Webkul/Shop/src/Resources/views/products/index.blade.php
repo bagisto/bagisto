@@ -38,14 +38,18 @@
 
                     @if ($toolbarHelper->getCurrentMode() == 'grid')
                         <div class="product-grid-3">
-                            @foreach ($products as $product)
-                                @include ('shop::products.list.card', ['product' => $product])
+                            @foreach ($products as $productFlat)
+
+                                @include ('shop::products.list.card', ['product' => $productFlat->product])
+
                             @endforeach
                         </div>
                     @else
                         <div class="product-list">
                             @foreach ($products as $product)
-                                @include ('shop::products.list.card', ['product' => $product])
+
+                                @include ('shop::products.list.card', ['product' => $productFlat->product])
+                                
                             @endforeach
                         </div>
                     @endif
