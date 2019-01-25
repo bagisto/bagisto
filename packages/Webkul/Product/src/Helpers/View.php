@@ -16,13 +16,25 @@ class View extends AbstractProduct
 
         $attributes = $product->attribute_family->custom_attributes;
 
+        $attributeOptionReposotory = app('Webkul\Attribute\Repositories\AttributeOptionRepository');
+
         foreach ($attributes as $attribute) {
             if ($attribute->is_visible_on_front && $product->{$attribute->code}) {
+                $value = $product->{$attribute->code};
+
+                if ($attribute->type == 'select') {
+                    $attributeOption = $attributeOptionReposotory->find($value);
+
+                    if ($attributeOption) {
+                        $value = $attributeOption->translate(app()->getLocale())->label;
+                    }
+                }
+
                 $data[] = [
                     'code' => $attribute->code,
                     'label' => $attribute->name,
-                    'value' => $product->{$attribute->code},
-                ];
+                    'value' => $value,
+                    ];
             }
         }
 

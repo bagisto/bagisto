@@ -30,7 +30,6 @@
 
         <div class="right-content">
             <ul class="right-content-menu">
-
                 @if (core()->getCurrentChannel()->currencies->count() > 1)
                     <li class="list">
                         <span class="dropdown-toggle">
@@ -101,81 +100,6 @@
                 </li>
             </ul>
         </div>
-
-        {{-- <div class="right-content">
-            @if (core()->getCurrentChannel()->currencies->count() > 1)
-                <ul class="currency-switcher">
-                    <div class="dropdown-toggle">
-                        {{ core()->getCurrentCurrencyCode() }}
-                        <i class="icon arrow-down-icon active"></i>
-                    </div>
-
-                    <div class="dropdown-list bottom-right">
-                        <div class="dropdown-container">
-                            <ul>
-                                @foreach (core()->getCurrentChannel()->currencies as $currency)
-                                    <li>
-                                        <a href="?currency={{ $currency->code }}">{{ $currency->code }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </ul>
-            @endif
-
-            <ul class="account-dropdown-container">
-                <li class="account-dropdown">
-                    <div class="dropdown-toggle account">
-                        <span class="icon account-icon"></span>
-                        <i class="icon arrow-down-icon active"></i>
-                    </div>
-
-                    @guest('customer')
-                        <div class="dropdown-list bottom-right" style="display: none;">
-                            <div class="dropdown-container">
-                                <label>{{ __('shop::app.header.title') }}</label><br/>
-                                <span style="font-size: 12px;">{{ __('shop::app.header.dropdown-text') }}</span>
-                                <ul class="account-dropdown-list">
-                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.session.index') }}">{{ __('shop::app.header.sign-in') }}</a></li>
-
-                                    <li><a class="btn btn-primary btn-sm" href="{{ route('customer.register.index') }}">{{ __('shop::app.header.sign-up') }}</a></li>
-                                </ul>
-
-                            </div>
-
-                        </div>
-                    @endguest
-
-                    @auth('customer')
-                        <div class="dropdown-list bottom-right" style="display: none; max-width: 230px;">
-                            <div class="dropdown-container">
-                                <label>{{ auth()->guard('customer')->user()->first_name }}</label>
-                                <ul>
-                                    <li><a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a></li>
-
-                                    <li><a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a></li>
-
-                                    <li><a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.header.cart') }}</a></li>
-
-                                    <li><a href="{{ route('customer.session.destroy') }}">{{ __('shop::app.header.logout') }}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    @endauth
-                </li>
-            </ul>
-
-            <ul class="cart-dropdown-container">
-                @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
-
-                <li class="cart-dropdown">
-                    <span class="icon cart-icon"></span>
-                    @include('shop::checkout.cart.mini-cart')
-                </li>
-            </ul>
-        </div> --}}
-
     </div>
 
     <div class="header-bottom" id="header-bottom">
@@ -202,7 +126,6 @@
     </div>
 </div>
 
-
 @push('scripts')
     <script>
         $(document).ready(function() {
@@ -211,8 +134,10 @@
             var searchResponsive = document.getElementsByClassName('search-responsive')[0];
             var navResponsive = document.getElementsByClassName('header-bottom')[0];
 
-            search.addEventListener("click", header);
-            hamMenu.addEventListener("click", header);
+            if (search && hamMenu) {
+                search.addEventListener("click", header);
+                hamMenu.addEventListener("click", header);
+            }
 
             function header() {
                 var className = document.getElementById(this.id).className;
