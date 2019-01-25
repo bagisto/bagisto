@@ -117,17 +117,21 @@ class Requirement {
         ];
     }
 
-    // /**
-    //  * check installation for composer
-    //  * @return boolean
-    // */
-    // private static function composerInstall()
-    // {
-    //     $command = 'cd ../.. ; export HOME=/root && export COMPOSER_HOME=/root && /usr/bin/composer.phar self-update; composer --version';
-    //     exec($command, $data['composer'], $data['composer_install']);
+    /**
+     * check installation for composer
+     * @return boolean
+    */
+    private static function composerInstall()
+    {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $command = 'cd ../.. && composer --version';
+        } else {
+            $command = 'cd ../.. ; export HOME=/root && export COMPOSER_HOME=/root && /usr/bin/composer.phar self-update; composer --version';
+        }
+        exec($command, $data['composer'], $data['composer_install']);
 
-    //     return $data['composer_install'];
-    // }
+        return $data['composer_install'];
+    }
 
     // /**
     //  * check installation for mysql
@@ -180,7 +184,7 @@ class Requirement {
 
         $phpVersion = $this->checkPHPversion();
 
-        // $composerInstall = $this->composerInstall();
+        $composerInstall = $this->composerInstall();
 
         // $sqlInstall = $this->mysqlInstall();
 
