@@ -14,15 +14,15 @@ class Requirement {
         $requirements =  [
             // 'requirements' => [
                 'php' => [
-                    'openssl',
-                    'pdo',
-                    'mbstring',
-                    'tokenizer',
-                    'JSON',
-                    'cURL',
+                    // 'openssl',
+                    // 'pdo',
+                    // 'mbstring',
+                    // 'tokenizer',
+                    // 'JSON',
+                    // 'cURL',
                 ],
                 'apache' => [
-                    'mod_rewrite',
+                    // 'mod_rewrite',
                 ]
             // ]
         ];
@@ -123,12 +123,40 @@ class Requirement {
     */
     private static function composerInstall()
     {
-        putenv('COMPOSER_HOME=' . __DIR__ . '/vendor/bin/composer');
-        $command = 'composer --version 2>&1';
+        $command = 'cd ../.. ; export HOME=/root && export COMPOSER_HOME=/root && /usr/bin/composer.phar self-update; composer --version';
         exec($command, $data['composer'], $data['composer_install']);
 
         return $data['composer_install'];
     }
+
+    /**
+     * check installation for mysql
+     * @return boolean
+    */
+    private static function mysqlInstall()
+    {
+        $command = 'mysql --version';
+        exec($command, $data['mysql'], $data['mysql_install']);
+        $mysqlVersion = explode(",", $data['mysql'][0]);
+        $mysqlVersion = explode(" ", $mysqlVersion[0]);
+        $supported = false;
+        $minMysqlVersion = '5.7.23';
+
+        if ($data['mysql_install'] == 0) {
+            if (version_compare(end($mysqlVersion), $minMysqlVersion, '>=')) {
+                $supported = true;
+            }
+        }
+
+        $mysqlStatus = [
+            'current' => end($mysqlVersion),
+            'minimum' => $minMysqlVersion,
+            'supported' => $supported
+        ];
+
+        return $mysqlStatus;
+    }
+
 
     // /**
     //  * check installation for composer
@@ -148,11 +176,13 @@ class Requirement {
      */
     public function render()
     {
-        $requirements = $this->checkRequirements();
+        // $requirements = $this->checkRequirements();
 
         $phpVersion = $this->checkPHPversion();
 
         $composerInstall = $this->composerInstall();
+
+        $sqlInstall = $this->mysqlInstall();
 
         // $nodeInstall = $this->nodeInstall();
 

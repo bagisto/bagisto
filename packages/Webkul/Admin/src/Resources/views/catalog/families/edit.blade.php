@@ -138,7 +138,7 @@
                                 <td>@{{ attribute.admin_name }}</td>
                                 <td>@{{ attribute.type }}</td>
                                 <td class="actions">
-                                    <i class="icon trash-icon" @click="removeAttribute(attribute)" v-if="attribute.is_user_defined"></i>
+                                    <i class="icon trash-icon" @click="removeAttribute(attribute)" v-if="attribute.is_user_defined || attribute.removable"></i>
                                 </td>
                             </tr>
                         </tbody>
@@ -273,6 +273,8 @@
                     attributeIds.forEach(function(attributeId) {
                         var attribute = this.custom_attributes.filter(attribute => attribute.id == attributeId)
 
+                        attribute[0].removable = true;
+
                         this.groups[groupIndex].custom_attributes.push(attribute[0]);
 
                         let index = this.custom_attributes.indexOf(attribute[0])
@@ -337,7 +339,11 @@
                 },
 
                 removeAttribute (attribute) {
-                    this.$emit('onAttributeRemove', attribute)
+                    var confirmDelete = confirm('Are u sure to do this?')
+
+                    if (confirmDelete) {
+                        this.$emit('onAttributeRemove', attribute)
+                    }
                 }
             }
         });

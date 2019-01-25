@@ -62,23 +62,17 @@
                 requirement.style.display = "block";
                 welcome.style.display = "none";
             } else if (this.id == 'requirement-check') {
-                permission.style.display = "block";
+                environment.style.display = "block";
                 requirement.style.display = "none";
-            } else if (this.id == 'permission-check') {
-                permission.style.display = "none";
-                environment.style.display ="block";
             } else if (this.id == 'continue') {
                 migration.style.display = "none";
                 admin.style.display ="block";
             } else if (this.id == 'requirement-back') {
                 welcome.style.display = "block";
                 requirement.style.display = "none";
-            } else if (this.id == 'permission-back') {
-                requirement.style.display = "block";
-                permission.style.display = "none";
             } else if (this.id == 'envronment-back') {
                 environment.style.display ="none";
-                permission.style.display = "block";
+                requirement.style.display = "block";
             } else if (this.id == 'migration-back') {
                 migration.style.display = "none";
                 environment.style.display ="block";

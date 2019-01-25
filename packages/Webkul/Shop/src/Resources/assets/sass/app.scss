@@ -977,6 +977,89 @@ section.slider-block {
                     }
                 }
             }
+
+            // new css
+            .account-cart-currency {
+                li {
+                    display: inline;
+                }
+
+                span {
+                    cursor: pointer;
+                }
+
+                .account-icon {
+                   position: relative;
+                   top: 6px;
+                   margin-left: 12px;
+                }
+
+                .cart-icon {
+                    position: relative;
+                    top: 7px;
+                    margin-left: 12px;
+                }
+
+                .arrow-down-icon {
+                    margin-right: 15px;
+                }
+
+                ul.dropdown-list {
+                    display: none;
+                    margin-top: 14px;
+
+                    li {
+                        border-right: none;
+                        padding: 5px 10px 5px 10px;
+                        display: block;
+
+                        a {
+                            color: #333333;
+                        }
+                    }
+                }
+
+                .currency {
+                    margin-left: -27px;
+                    width: 100px;
+                }
+
+                .account {
+                    li {
+                        padding: 25px !important;
+
+                        ul {
+                            margin-top: 5px;
+                        }
+
+                        ul > li  {
+                            padding: 5px 10px 5px 0px !important;
+                        }
+                    }
+                }
+
+                .guest {
+                    width: 300px;
+                    margin-left: -150px;
+                }
+
+                .customer {
+                    margin-left: -50px;
+                }
+
+                .cart-dropdown-container {
+                    margin-top: 5px;
+                    margin-left: 0px !important;
+
+                    .arrow-down-icon {
+                        margin-right: 0px !important;
+                    }
+                }
+
+                .cart-icon {
+                    margin-top: -10px;
+                }
+            }
         }
 
         ul.right-responsive {
@@ -3255,6 +3338,7 @@ section.review {
         height: 100% !important;
     }
 }
+
 
 
 /// rtl css start here
