@@ -13,8 +13,7 @@ $(function() {
 
     function toggleDropdown(e) {
         var currentElement = $(e.currentTarget);
-        if(currentElement.attr('disabled') == "disabled")
-            return;
+
 
         $('.dropdown-list').hide();
         if(currentElement.hasClass('active')) {

@@ -29,10 +29,10 @@
         </div>
 
         <div class="right-content">
-            <ul class="account-cart-currency">
+            <ul class="right-content-menu">
 
                 @if (core()->getCurrentChannel()->currencies->count() > 1)
-                    <li>
+                    <li class="list">
                         <span class="dropdown-toggle">
                             {{ core()->getCurrentCurrencyCode() }}
                             <i class="icon arrow-down-icon active"></i>
@@ -45,12 +45,10 @@
                                 </li>
                             @endforeach
                         </ul>
-
-                        <div style="position: absolute; height: 25px; margin-left: 70px; margin-top: -23px;border-right: 2px solid #C7C7C7;"></div>
                     </li>
                 @endif
 
-                <li>
+                <li class="list">
                     <span class="dropdown-toggle">
                         <i class="icon account-icon"></i>
                         <i class="icon arrow-down-icon active"></i>
@@ -91,18 +89,14 @@
                             </li>
                         </ul>
                     @endauth
-
-                    <div style="position: absolute; height: 25px; margin-left: 142px; margin-top: -23px;border-right: 2px solid #C7C7C7;"></div>
                 </li>
 
-                <li>
-                    <ul class="cart-dropdown-container">
-                        @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+                <li class="cart-dropdown-container list">
+                    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
-                        <li class="cart-dropdown">
-                            <span class="icon cart-icon"></span>
-                            @include('shop::checkout.cart.mini-cart')
-                        </li>
+                    <ul class="cart-dropdown">
+                        <span class="icon cart-icon"></span>
+                        @include('shop::checkout.cart.mini-cart')
                     </ul>
                 </li>
             </ul>

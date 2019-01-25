@@ -4,7 +4,11 @@
 $data    = array();
 
 // run command on terminal
-$command = 'cd ../.. ; export HOME=/root && export COMPOSER_HOME=/root && /usr/bin/composer.phar self-update; composer install 2>&1';
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+    $command = 'cd ../.. && composer install 2>&1';
+} else {
+    $command = 'cd ../.. ; export HOME=/root && export COMPOSER_HOME=/root && /usr/bin/composer.phar self-update; composer install 2>&1';
+}
 
 $last_line = exec($command, $data['composer'], $data['install']);
 
