@@ -117,45 +117,45 @@ class Requirement {
         ];
     }
 
-    /**
-     * check installation for composer
-     * @return boolean
-    */
-    private static function composerInstall()
-    {
-        $command = 'cd ../.. ; export HOME=/root && export COMPOSER_HOME=/root && /usr/bin/composer.phar self-update; composer --version';
-        exec($command, $data['composer'], $data['composer_install']);
+    // /**
+    //  * check installation for composer
+    //  * @return boolean
+    // */
+    // private static function composerInstall()
+    // {
+    //     $command = 'cd ../.. ; export HOME=/root && export COMPOSER_HOME=/root && /usr/bin/composer.phar self-update; composer --version';
+    //     exec($command, $data['composer'], $data['composer_install']);
 
-        return $data['composer_install'];
-    }
+    //     return $data['composer_install'];
+    // }
 
-    /**
-     * check installation for mysql
-     * @return boolean
-    */
-    private static function mysqlInstall()
-    {
-        $command = 'mysql --version';
-        exec($command, $data['mysql'], $data['mysql_install']);
-        $mysqlVersion = explode(",", $data['mysql'][0]);
-        $mysqlVersion = explode(" ", $mysqlVersion[0]);
-        $supported = false;
-        $minMysqlVersion = '5.7.23';
+    // /**
+    //  * check installation for mysql
+    //  * @return boolean
+    // */
+    // private static function mysqlInstall()
+    // {
+    //     $command = 'mysql --version';
+    //     exec($command, $data['mysql'], $data['mysql_install']);
+    //     $mysqlVersion = explode(",", $data['mysql'][0]);
+    //     $mysqlVersion = explode(" ", $mysqlVersion[0]);
+    //     $supported = false;
+    //     $minMysqlVersion = '5.7.23';
 
-        if ($data['mysql_install'] == 0) {
-            if (version_compare(end($mysqlVersion), $minMysqlVersion, '>=')) {
-                $supported = true;
-            }
-        }
+    //     if ($data['mysql_install'] == 0) {
+    //         if (version_compare(end($mysqlVersion), $minMysqlVersion, '>=')) {
+    //             $supported = true;
+    //         }
+    //     }
 
-        $mysqlStatus = [
-            'current' => end($mysqlVersion),
-            'minimum' => $minMysqlVersion,
-            'supported' => $supported
-        ];
+    //     $mysqlStatus = [
+    //         'current' => end($mysqlVersion),
+    //         'minimum' => $minMysqlVersion,
+    //         'supported' => $supported
+    //     ];
 
-        return $mysqlStatus;
-    }
+    //     return $mysqlStatus;
+    // }
 
 
     // /**
@@ -180,9 +180,9 @@ class Requirement {
 
         $phpVersion = $this->checkPHPversion();
 
-        $composerInstall = $this->composerInstall();
+        // $composerInstall = $this->composerInstall();
 
-        $sqlInstall = $this->mysqlInstall();
+        // $sqlInstall = $this->mysqlInstall();
 
         // $nodeInstall = $this->nodeInstall();
 
