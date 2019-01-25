@@ -78,7 +78,7 @@ class OrderRepository extends Repository
                 unset($data['channel']);
             }
 
-            $data['status'] = core()->getConfigData('sales.paymentmethods.' . $data['payment']['method'] . '.order_status') ?? 'pending';
+            $data['status'] = 'pending';
 
             $order = $this->model->create(array_merge($data, ['increment_id' => $this->generateIncrementId()]));
 
