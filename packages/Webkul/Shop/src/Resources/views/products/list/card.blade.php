@@ -28,10 +28,6 @@
             </a>
         </div>
 
-        <div class="product-description">
-            {{ $product->short_description }}
-        </div>
-
         @include ('shop::products.price', ['product' => $product])
 
         @if (Route::currentRouteName() == "shop.products.index")

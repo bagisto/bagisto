@@ -21,7 +21,6 @@ class CreateProductFlatTable extends Migration
             $table->string('url_key')->nullable();
             $table->boolean('new')->nullable();
             $table->boolean('featured')->nullable();
-            $table->boolean('visibility')->nullable();
             $table->boolean('status')->nullable();
             $table->string('thumbnail')->nullable();
 

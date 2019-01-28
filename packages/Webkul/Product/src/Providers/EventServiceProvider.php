@@ -14,10 +14,14 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Event::listen('after.attribute.updated', 'Webkul\Product\Listeners\ProductsFlat@afterAttributeUpdated');
+        Event::listen('catalog.attribute.create.after', 'Webkul\Product\Listeners\ProductFlat@afterAttributeCreatedUpdated');
 
-        Event::listen('after.attribute.created', 'Webkul\Product\Listeners\ProductsFlat@afterAttributeCreated');
+        Event::listen('catalog.attribute.update.after', 'Webkul\Product\Listeners\ProductFlat@afterAttributeCreatedUpdated');
 
-        Event::listen('after.attribute.deleted', 'Webkul\Product\Listeners\ProductsFlat@afterAttributeDeleted');
+        Event::listen('catalog.attribute.delete.before', 'Webkul\Product\Listeners\ProductFlat@afterAttributeDeleted');
+
+        Event::listen('catalog.product.create.after', 'Webkul\Product\Listeners\ProductFlat@afterProductCreatedUpdated');
+
+        Event::listen('catalog.product.update.after', 'Webkul\Product\Listeners\ProductFlat@afterProductCreatedUpdated');
     }
 }

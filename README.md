@@ -53,7 +53,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 * **OS**: Ubuntu 16.04 LTS or higher.
 * **SERVER**: Apache 2 or NGINX
-* **RAM**: 2 GB or higer.
+* **RAM**: 2 GB or higher.
 * **PHP**: 7.1.17 or higher.
 * **Processor**: Clock Cycle 1Ghz or higher.
 * **Mysql**: 5.7.23 or higher.

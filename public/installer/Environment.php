@@ -105,7 +105,6 @@
 
         // process the form
         $('#environment-form').submit(function(event) {
-
             $('.control-group').removeClass('has-error'); // remove the error class
             $('.form-error').remove(); // remove the error text
 
@@ -124,79 +123,78 @@
 
             // process the form
             $.ajax({
-                type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                url         : 'EnvConfig.php', // the url where we want to POST
-                data        : formData, // our data object
-                dataType    : 'json', // what type of data do we expect back from the server
-                            encode          : true
+                type        : 'POST',
+                url         : 'EnvConfig.php',
+                data        : formData,
+                dataType    : 'json',
+                encode      : true
             })
-                // using the done promise callback
+            // using the done promise callback
             .done(function(data) {
 
                 if (!data.success) {
 
                     // handle errors
                     if (data.errors.app_name) {
-                        $('#app_name').addClass('has-error'); // add the error class to show red input
-                        $('#app_name').append('<div class="form-error">' + data.errors.app_name + '</div>'); // add the actual error message under our input
+                        $('#app_name').addClass('has-error');
+                        $('#app_name').append('<div class="form-error">' + data.errors.app_name + '</div>');
                     }
                     if (data.errors.app_url) {
-                        $('#app_url').addClass('has-error'); // add the error class to show red input
-                        $('#app_url').append('<div class="form-error">' + data.errors.app_url + '</div>'); // add the actual error message under our input
+                        $('#app_url').addClass('has-error');
+                        $('#app_url').append('<div class="form-error">' + data.errors.app_url + '</div>');
                     }
                     if (data.errors.host_name) {
-                        $('#host_name').addClass('has-error'); // add the error class to show red input
-                        $('#host_name').append('<div class="form-error">' + data.errors.host_name + '</div>'); // add the actual error message under our input
+                        $('#host_name').addClass('has-error');
+                        $('#host_name').append('<div class="form-error">' + data.errors.host_name + '</div>');
                     }
                     if (data.errors.port_name) {
-                        $('#port_name').addClass('has-error'); // add the error class to show red input
-                        $('#port_name').append('<div class="form-error">' + data.errors.port_name + '</div>'); // add the actual error message under our input
+                        $('#port_name').addClass('has-error');
+                        $('#port_name').append('<div class="form-error">' + data.errors.port_name + '</div>');
                     }
                     if (data.errors.user_name) {
-                        $('#user_name').addClass('has-error'); // add the error class to show red input
-                        $('#user_name').append('<div class="form-error">' + data.errors.user_name + '</div>'); // add the actual error message under our input
+                        $('#user_name').addClass('has-error');
+                        $('#user_name').append('<div class="form-error">' + data.errors.user_name + '</div>');
                     }
                     if (data.errors.database_name) {
-                        $('#database_name').addClass('has-error'); // add the error class to show red input
-                        $('#database_name').append('<div class="form-error">' + data.errors.database_name + '</div>'); // add the actual error message under our input
+                        $('#database_name').addClass('has-error');
+                        $('#database_name').append('<div class="form-error">' + data.errors.database_name + '</div>');
                     }
                     if (data.errors.user_password) {
-                        $('#user_password').addClass('has-error'); // add the error class to show red input
-                        $('#user_password').append('<div class="form-error">' + data.errors.user_password + '</div>'); // add the actual error message under our input
+                        $('#user_password').addClass('has-error');
+                        $('#user_password').append('<div class="form-error">' + data.errors.user_password + '</div>');
                     }
                     if (data.errors.app_url_space) {
-                        $('#app_url').addClass('has-error'); // add the error class to show red input
-                        $('#app_url').append('<div class="form-error">' + data.errors.app_url_space + '</div>'); // add the actual error message under our input
+                        $('#app_url').addClass('has-error');
+                        $('#app_url').append('<div class="form-error">' + data.errors.app_url_space + '</div>');
                     }
                     if (data.errors.app_name_space) {
-                        $('#app_name').addClass('has-error'); // add the error class to show red input
-                        $('#app_name').append('<div class="form-error">' + data.errors.app_name_space + '</div>'); // add the actual error message under our input
+                        $('#app_name').addClass('has-error');
+                        $('#app_name').append('<div class="form-error">' + data.errors.app_name_space + '</div>');
                     }
                     if (data.errors.host_name_space) {
-                        $('#host_name').addClass('has-error'); // add the error class to show red input
-                        $('#host_name').append('<div class="form-error">' + data.errors.host_name_space + '</div>'); // add the actual error message under our input
+                        $('#host_name').addClass('has-error');
+                        $('#host_name').append('<div class="form-error">' + data.errors.host_name_space + '</div>');
                     }
                     if (data.errors.port_name_space) {
-                        $('#port_name').addClass('has-error'); // add the error class to show red input
-                        $('#port_name').append('<div class="form-error">' + data.errors.port_name_space + '</div>'); // add the actual error message under our input
+                        $('#port_name').addClass('has-error');
+                        $('#port_name').append('<div class="form-error">' + data.errors.port_name_space + '</div>');
                     }
                     if (data.errors.user_name_space) {
-                        $('#user_name').addClass('has-error'); // add the error class to show red input
-                        $('#user_name').append('<div class="form-error">' + data.errors.user_name_space + '</div>'); // add the actual error message under our input
+                        $('#user_name').addClass('has-error');
+                        $('#user_name').append('<div class="form-error">' + data.errors.user_name_space + '</div>');
                     }
                     if (data.errors.database_name_space) {
-                        $('#database_name').addClass('has-error'); // add the error class to show red input
-                        $('#database_name').append('<div class="form-error">' + data.errors.database_name_space + '</div>'); // add the actual error message under our input
+                        $('#database_name').addClass('has-error');
+                        $('#database_name').append('<div class="form-error">' + data.errors.database_name_space + '</div>');
                     }
                     if (data.errors.user_password_space) {
-                        $('#user_password').addClass('has-error'); // add the error class to show red input
-                        $('#user_password').append('<div class="form-error">' + data.errors.user_password_space + '</div>'); // add the actual error message under our input
+                        $('#user_password').addClass('has-error');
+                        $('#user_password').append('<div class="form-error">' + data.errors.user_password_space + '</div>');
                     }
                     if (data.errors.database_error) {
-                        $('#database_error').append('<div class="form-error">' + data.errors.database_error + '</div>'); // add the actual error message under our input
+                        $('#database_error').append('<div class="form-error">' + data.errors.database_error + '</div>');
                     }
                 } else {
-
                     $('#environment').hide();
                     $('#migration').show();
                 }

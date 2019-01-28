@@ -48,13 +48,13 @@ class CustomerGroupDataGrid extends DataGrid
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
-            'route' => 'admin.customer.edit',
+            'route' => 'admin.groups.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
-            'route' => 'admin.customer.delete',
+            'route' => 'admin.groups.delete',
             'icon' => 'icon trash-icon'
         ]);
     }

@@ -5,7 +5,6 @@ return [
         'title' => 'Cash On Delivery',
         'description' => 'Cash On Delivery',
         'class' => 'Webkul\Payment\Payment\CashOnDelivery',
-        'order_status' => 'pending',
         'active' => true
     ],
 
@@ -14,7 +13,6 @@ return [
         'title' => 'Money Transfer',
         'description' => 'Money Transfer',
         'class' => 'Webkul\Payment\Payment\MoneyTransfer',
-        'order_status' => 'pending',
         'active' => true
     ],
 
@@ -23,7 +21,6 @@ return [
         'title' => 'Paypal Standard',
         'description' => 'Paypal Standard',
         'class' => 'Webkul\Paypal\Payment\Standard',
-        'order_status' => 'pending_payment',
         'sandbox' => true,
         'active' => true,
         'business_account' => 'test@webkul.com'

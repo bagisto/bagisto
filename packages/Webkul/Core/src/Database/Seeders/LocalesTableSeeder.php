@@ -9,6 +9,8 @@ class LocalesTableSeeder extends Seeder
 {
     public function run()
     {
+        DB::table('channels')->delete();
+
         DB::table('locales')->delete();
 
         DB::table('locales')->insert([

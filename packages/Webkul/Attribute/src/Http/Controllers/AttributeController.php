@@ -75,9 +75,11 @@ class AttributeController extends Controller
             'type' => 'required'
         ]);
 
-        $attribute = $this->attribute->create(request()->all());
+        $data = request()->all();
 
-        Event::fire('after.attribute.created', $attribute);
+        $data['is_user_defined'] = 1;
+
+        $attribute = $this->attribute->create($data);
 
         session()->flash('success', 'Attribute created successfully.');
 
@@ -114,8 +116,6 @@ class AttributeController extends Controller
 
         $attribute = $this->attribute->update(request()->all(), $id);
 
-        Event::fire('after.attribute.updated', $attribute);
-
         session()->flash('success', 'Attribute updated successfully.');
 
         return redirect()->route($this->_config['redirect']);
@@ -139,7 +139,6 @@ class AttributeController extends Controller
 
                 session()->flash('success', 'Attribute deleted successfully.');
 
-                Event::fire(after.attribute.deleted, $attribute);
             } catch(\Exception $e) {
                 session()->flash('error', trans('admin::app.response.attribute-error', ['name' => 'Attribute']));
             }

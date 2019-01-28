@@ -1,10 +1,13 @@
 <?php
 
-$errors  = array();      // array to hold validation errors
-$data    = array();      // array to pass back data
+// array to hold validation errors
+$errors  = array();
 
-// validate the variables ======================================================
-    // if any of these variables don't exist, add an error to our $errors array
+// array to pass back data
+$data    = array();
+
+// validate the variables
+// if any of these variables don't exist, add an error to our $errors array
 
     if (empty($_POST['app_url']))
         $errors['app_url'] = 'App Url is required.';
@@ -47,9 +50,10 @@ $data    = array();      // array to pass back data
 
     if (preg_match('/\s/', $_POST['port_name']))
         $errors['port_name_space'] = 'There should be no space in Port Name.';
-// return a response ===========================================================
 
-    // if there are any errors in our errors array, return a success boolean of false
+//return a response
+// if there are any errors in our errors array, return a success boolean of false
+
     if ( ! empty($errors)) {
 
         // if there are items in our errors array, return those errors
@@ -137,7 +141,6 @@ $data    = array();      // array to pass back data
         }
 
         // show a message of success and provide a true success variable
-
     }
 
     // return all our data to an AJAX call

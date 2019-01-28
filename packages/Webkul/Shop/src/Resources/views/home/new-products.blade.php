@@ -9,9 +9,9 @@
 
         <div class="product-grid-4">
         
-            @foreach ($products as $product)
+            @foreach ($products as $productFlat)
 
-                @include ('shop::products.list.card', ['product' => $product])
+                @include ('shop::products.list.card', ['product' => $productFlat->product])
 
             @endforeach
 
