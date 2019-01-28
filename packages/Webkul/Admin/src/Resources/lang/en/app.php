@@ -145,7 +145,8 @@ return [
         'country' => 'Country',
         'tax-rate' => 'Rate',
         'role' => 'Role',
-        'sub-total' => 'Sub Total'
+        'sub-total' => 'Sub Total',
+        'no-of-products' => 'Number of Products',
     ],
 
     'account' => [

@@ -49,7 +49,7 @@
                             @foreach ($products as $product)
 
                                 @include ('shop::products.list.card', ['product' => $productFlat->product])
-                                
+
                             @endforeach
                         </div>
                     @endif
