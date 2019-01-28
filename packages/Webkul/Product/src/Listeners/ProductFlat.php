@@ -13,6 +13,7 @@ use Webkul\Product\Models\ProductAttributeValue;
  * Product Flat Event handler
  *
  * @author    Jitendra Singh <jitendra@webkul.com>
+ * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ProductFlat
@@ -148,10 +149,10 @@ class ProductFlat
         foreach (core()->getAllChannels() as $channel) {
             foreach ($channel->locales as $locale) {
                 $productFlat = $this->productFlatRepository->findOneWhere([
-                        'product_id' => $product->id,
-                        'channel' => $channel->code,
-                        'locale' => $locale->code
-                    ]);
+                    'product_id' => $product->id,
+                    'channel' => $channel->code,
+                    'locale' => $locale->code
+                ]);
 
                 if (!$productFlat) {
                     $productFlat = $this->productFlatRepository->create([
@@ -160,7 +161,7 @@ class ProductFlat
                         'locale' => $locale->code
                     ]);
                 }
-                
+
                 foreach ($product->attribute_family->custom_attributes as $attribute) {
                     if (!Schema::hasTable('product_flat') || !Schema::hasColumn('product_flat', $attribute->code))
                         continue;
@@ -211,7 +212,6 @@ class ProductFlat
                 }
 
                 $productFlat->save();
-
             }
         }
     }
