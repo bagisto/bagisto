@@ -34,7 +34,7 @@
         <div class="filter-attributes-item" :class="[active ? 'active' : '']">
 
             <div class="filter-attributes-title" @click="active = !active">
-                @{{ attribute.name }}
+                @{{ attribute.name ? attribute.name : attribute.admin_name }}
 
                 <div class="pull-right">
                     <span class="remove-filter-link" v-if="appliedFilters.length" @click.stop="clearFilters()">

@@ -185,6 +185,15 @@ body {
             .page-title {
                 float: left;
 
+                .back-link {
+                    float: left;
+                    margin-right: 10px;
+                    width: 24px;
+                    height: 24px;
+                    cursor: pointer;
+                    margin-top: 5px;
+                }
+
                 h1 {
                     margin-bottom: 0;
                     vertical-align: middle;
