@@ -19,6 +19,8 @@ class AttributeDataGrid extends DataGrid
 
     protected $index = 'id'; //the column that needs to be treated as index column
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('attributes')

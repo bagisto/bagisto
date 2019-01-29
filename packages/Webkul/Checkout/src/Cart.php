@@ -13,7 +13,7 @@ use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
 
 /**
- * Facade for all the methods to be implemented in Cart.
+ * Facades handler for all the methods to be implemented in Cart.
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @author    Jitendra Singh <jitendra@webkul.com>

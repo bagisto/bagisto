@@ -10,7 +10,11 @@
         <form method="POST" action="{{ route('admin.channels.update', $channel->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('admin::app.settings.channels.edit-title') }}</h1>
+                    <h1>
+                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+
+                        {{ __('admin::app.settings.channels.edit-title') }}
+                    </h1>
                 </div>
 
                 <div class="page-action">
@@ -197,11 +201,7 @@
                 plugins: 'image imagetools media wordcount save fullscreen code',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code',
                 image_advtab: true,
-                valid_elements : '*[*]',
-                templates: [
-                    { title: 'Test template 1', content: 'Test 1' },
-                    { title: 'Test template 2', content: 'Test 2' }
-                ],
+                valid_elements : '*[*]'
             });
         });
     </script>

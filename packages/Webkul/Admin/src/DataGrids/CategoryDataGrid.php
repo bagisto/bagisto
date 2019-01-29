@@ -19,11 +19,17 @@ class CategoryDataGrid extends DataGrid
 
     protected $index = 'category_id'; //the column that needs to be treated as index column
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('categories as cat')
-                ->select('cat.id as category_id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale')
-                ->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id');
+                ->select('cat.id as category_id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale',
+                DB::raw('COUNT(DISTINCT pc.product_id) as count'))
+                ->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id')
+                ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
+                ->groupBy('cat.id');
+
 
         $this->addFilter('category_id', 'cat.id');
 
@@ -74,6 +80,14 @@ class CategoryDataGrid extends DataGrid
             'index' => 'locale',
             'label' => trans('admin::app.datagrid.locale'),
             'type' => 'boolean',
+            'sortable' => true,
+            'searchable' => true,
+        ]);
+
+        $this->addColumn([
+            'index' => 'count',
+            'label' => trans('admin::app.datagrid.no-of-products'),
+            'type' => 'number',
             'sortable' => true,
             'searchable' => true,
         ]);

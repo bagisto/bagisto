@@ -25,6 +25,10 @@
 
                         {!! view_render_event('bagisto.shop.checkout.cart-mini.subtotal.before', ['cart' => $cart]) !!}
 
+                        @php
+                            Cart::collectTotals();
+                        @endphp
+
                         {{ core()->currency($cart->base_sub_total) }}
 
                         {!! view_render_event('bagisto.shop.checkout.cart-mini.subtotal.after', ['cart' => $cart]) !!}

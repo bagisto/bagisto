@@ -39,8 +39,8 @@
                 @endforeach
 
                 @if ($enableActions)
-                    <td>
-                        <div class="actions">
+                    <td class="actions" style="width: 100px;">
+                        <div>
                             @foreach ($actions as $action)
                                 <a href="{{ route($action['route'], $record->{$index}) }}">
                                     <span class="{{ $action['icon'] }}"></span>
