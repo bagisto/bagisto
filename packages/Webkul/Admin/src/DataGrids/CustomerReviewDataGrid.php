@@ -19,6 +19,8 @@ class CustomerReviewDataGrid extends DataGrid
 
     protected $index = 'product_review_id'; //column that needs to be treated as index column
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('product_reviews as pr')

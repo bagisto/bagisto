@@ -19,6 +19,8 @@ class TaxRateDataGrid extends DataGrid
 
     protected $index = 'id';
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('tax_rates')->addSelect('id', 'identifier', 'state', 'country', 'tax_rate');

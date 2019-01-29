@@ -19,6 +19,8 @@ class CategoryDataGrid extends DataGrid
 
     protected $index = 'category_id'; //the column that needs to be treated as index column
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('categories as cat')

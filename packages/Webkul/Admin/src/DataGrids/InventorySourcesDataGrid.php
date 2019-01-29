@@ -19,6 +19,8 @@ class InventorySourcesDataGrid extends DataGrid
 
     protected $index = 'id';
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('inventory_sources')->addSelect('id', 'code', 'name', 'priority', 'status');

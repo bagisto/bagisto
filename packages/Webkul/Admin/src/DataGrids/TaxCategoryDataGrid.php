@@ -19,6 +19,8 @@ class TaxCategoryDataGrid extends DataGrid
 
     protected $index = 'id';
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('tax_categories')->addSelect('id', 'name', 'code');

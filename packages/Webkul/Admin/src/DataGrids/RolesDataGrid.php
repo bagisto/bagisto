@@ -19,6 +19,8 @@ class RolesDataGrid extends DataGrid
 
     protected $index = 'id';
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('roles')->addSelect('id', 'name', 'permission_type');

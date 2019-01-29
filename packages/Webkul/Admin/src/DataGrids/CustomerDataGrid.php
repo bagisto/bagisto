@@ -19,6 +19,8 @@ class CustomerDataGrid extends DataGrid
 
     protected $index = 'customer_id'; //the column that needs to be treated as index column
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('customers as custs')

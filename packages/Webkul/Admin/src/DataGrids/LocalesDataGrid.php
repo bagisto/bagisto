@@ -19,6 +19,8 @@ class LocalesDataGrid extends DataGrid
 
     protected $index = 'id';
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('locales')->addSelect('id', 'code', 'name');
