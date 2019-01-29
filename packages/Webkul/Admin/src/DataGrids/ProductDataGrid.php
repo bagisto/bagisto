@@ -17,6 +17,8 @@ class ProductDataGrid extends DataGrid
 
     protected $itemsPerPage = 10; //overriding the default items per page
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     protected $index = 'product_id';
 
     public function prepareQueryBuilder()

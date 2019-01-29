@@ -21,10 +21,8 @@
 
             <div class="category-block">
                 <div class="hero-image mb-35">
-                    @if (! is_null($category->image))
-
+                    @if (!is_null($category->image))
                         <img class="logo" src="{{ $category->image_url }}" />
-
                     @endif
                 </div>
 

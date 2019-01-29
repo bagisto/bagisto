@@ -19,6 +19,8 @@ class OrderShipmentsDataGrid extends DataGrid
 
     protected $index = 'shipment_id';
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('shipments as ship')

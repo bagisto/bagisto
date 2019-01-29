@@ -108,7 +108,7 @@ class CartController extends Controller
 
         } catch(\Exception $e) {
             session()->flash('error', trans($e->getMessage()));
-            
+
             return redirect()->back();
         }
     }
@@ -190,7 +190,6 @@ class CartController extends Controller
         Event::fire('checkout.cart.add.after', $result);
 
         Cart::collectTotals();
-
 
         if (! $result) {
             return redirect()->back();

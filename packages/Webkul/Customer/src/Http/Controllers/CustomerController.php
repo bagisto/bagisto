@@ -99,8 +99,8 @@ class CustomerController extends Controller
             'gender' => 'required',
             'date_of_birth' => 'date|before:today',
             'email' => 'email|unique:customers,email,'.$id,
-            'phone' => 'nullable|numeric|unique:customers,phone,'. $id,
-            'password' => 'confirmed'
+            'oldpassword' => 'required_with:password',
+            'password' => 'confirmed|min:6'
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();
@@ -109,46 +109,26 @@ class CustomerController extends Controller
             unset($data['date_of_birth']);
         }
 
-        if ($data['oldpassword'] == null) {
-            $data = collect(request()->input())->except(['_token','password','password_confirmation','oldpassword'])->toArray();
-
-            if ($data['date_of_birth'] == "") {
-                unset($data['date_of_birth']);
-            }
-
-            if ($this->customer->update($data, $id)) {
-                Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
-
-                return redirect()->back();
-            } else {
-                Session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
-
-                return redirect()->back();
-            }
-        } else {
-            if (Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
-                $data = collect(request()->input())->except(['_token','oldpassword'])->toArray();
-
+        if ($data['oldpassword'] != "" || $data['oldpassword'] != null) {
+            if(Hash::check($data['oldpassword'], auth()->guard('customer')->user()->password)) {
                 $data['password'] = bcrypt($data['password']);
-
-                if ($data['date_of_birth'] == "") {
-                    unset($data['date_of_birth']);
-                }
             } else {
                 session()->flash('warning', trans('shop::app.customer.account.profile.unmatch'));
 
                 return redirect()->back();
             }
+        } else {
+            unset($data['password']);
+        }
 
-            if ($this->customer->update($data, $id)) {
-                Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
+        if ($this->customer->update($data, $id)) {
+            Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
-                return redirect()->back();
-            } else {
-                Session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
+            return redirect()->back();
+        } else {
+            Session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
 
-                return redirect()->back();
-            }
+            return redirect()->back();
         }
     }
 

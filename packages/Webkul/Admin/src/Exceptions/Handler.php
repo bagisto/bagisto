@@ -26,7 +26,7 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof HttpException) {
             $statusCode = $exception->getStatusCode();
-            $statusCode = in_array($statusCode, [401, 403, 404]) ? $statusCode : 500;
+            $statusCode = in_array($statusCode, [401, 403, 404, 503]) ? $statusCode : 500;
             return $this->response($path, $statusCode);
         } else if ($exception instanceof ModelNotFoundException) {
             return $this->response($path, 404);
