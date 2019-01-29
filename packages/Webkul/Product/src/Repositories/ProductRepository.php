@@ -401,11 +401,11 @@ class ProductRepository extends Repository
      * @param integer $categoryId
      * @return Collection
      */
-    public function findAllByCategoryQueryBuilder($categoryId = null)
+    public function findAllByCategory($categoryId = null)
     {
         $params = request()->input();
 
-        return app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($params, $categoryId) {
+        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($params, $categoryId) {
                 $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
                 $locale = request()->get('locale') ?: app()->getLocale();
@@ -466,18 +466,7 @@ class ProductRepository extends Repository
                 });
 
                 return $qb;
-            });
-    }
-
-    /**
-     * @param integer $categoryId
-     * @return Collection
-     */
-    public function findAllByCategory($categoryId = null)
-    {
-        $params = request()->input();
-
-        $results = $this->findAllByCategoryQueryBuilder($categoryId)->paginate(isset($params['limit']) ? $params['limit'] : 9);
+            })->paginate(isset($params['limit']) ? $params['limit'] : 9);
 
         return $results;
     }
