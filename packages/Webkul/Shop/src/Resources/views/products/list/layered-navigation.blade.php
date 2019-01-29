@@ -53,7 +53,7 @@
                         <span class="checkbox">
                             <input type="checkbox" :id="option.id" v-bind:value="option.id" v-model="appliedFilters" @change="addFilter($event)"/>
                             <label class="checkbox-view" :for="option.id"></label>
-                            @{{ option.label }}
+                            @{{ option.label ? option.label : option.admin_name }}
                         </span>
 
                     </li>
