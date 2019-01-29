@@ -1741,6 +1741,10 @@ section.product-detail {
 
                 .product-price {
                     margin-bottom: 14px;
+
+                    .sticker {
+                        display: none;
+                    }
                 }
 
                 .product-ratings {
@@ -1765,7 +1769,6 @@ section.product-detail {
 
                 .product-price {
                     margin-bottom: 15px;
-                    font-size: 24px;
 
                     .special-price {
                         font-size: 24px;
@@ -3747,3 +3750,68 @@ section.review {
     }
 }
 /// rtl css end here
+
+
+.banner-container {
+    width: 100%;
+    float: left;
+    padding: 0 18px;
+    margin-bottom: 40px;
+
+    .left-banner {
+        padding-right: 20px;
+        width: 60%;
+        float: left;
+        
+        img {
+            width: 100%;
+        }
+    }
+
+    .right-banner {
+        padding-left: 20px;
+        width: 40%;
+        float: left;
+
+        img {
+            width: 100%;
+
+            &:first-child {
+                padding-bottom: 20px;
+                height: 50%;
+                display: block;
+            }
+
+            &:last-child {
+                padding-top: 20px;
+                height: 50%;
+                display: block;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 720px) {
+    .banner-container {
+        .left-banner {
+            padding-right: 0;
+            width: 100%;
+        }
+
+        .right-banner {
+            padding-left: 0;
+            width: 100%;
+
+            img {
+                &:first-child {
+                    padding-bottom: 0;
+                    padding-top: 25px;
+                }
+
+                &:last-child {
+                    padding-top: 25px;
+                }
+            }
+        }
+    }
+}
