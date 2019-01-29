@@ -14,7 +14,11 @@
             <div class="page-header">
 
                 <div class="page-title">
-                    <h1>{{ __('admin::app.catalog.products.edit-title') }}</h1>
+                    <h1>
+                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+
+                        {{ __('admin::app.catalog.products.edit-title') }}
+                    </h1>
 
                     <div class="control-group">
                         <select class="control" id="channel-switcher" name="channel">

@@ -142,7 +142,7 @@
                         <span v-else>@{{ filter.label }}</span>
 
                         <span class="wrapper">
-                            @{{ filter.val }}
+                            @{{ decodeURIComponent(filter.val) }}
                             <span class="icon cross-icon" v-on:click="removeFilter(filter)"></span>
                         </span>
                     </span>
