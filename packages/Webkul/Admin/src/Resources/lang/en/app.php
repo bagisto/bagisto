@@ -145,7 +145,8 @@ return [
         'country' => 'Country',
         'tax-rate' => 'Rate',
         'role' => 'Role',
-        'sub-total' => 'Sub Total'
+        'sub-total' => 'Sub Total',
+        'no-of-products' => 'Number of Products',
     ],
 
     'account' => [
@@ -755,6 +756,7 @@ return [
         'last-delete-error' => 'At least one :name is required.',
         'user-define-error' => 'Can not delete system :name',
         'attribute-error' => ':name is used in configurable products.',
-        'attribute-product-error' => ':name is used in products.'
+        'attribute-product-error' => ':name is used in products.',
+        'customer-associate' => ':name can not be deleted because customer is associated with this group.'
     ],
 ];

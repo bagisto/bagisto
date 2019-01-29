@@ -3,6 +3,7 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container as App;
+use DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -400,17 +401,21 @@ class ProductRepository extends Repository
      * @param integer $categoryId
      * @return Collection
      */
-    public function findAllByCategory($categoryId = null)
+    public function findAllByCategoryQueryBuilder($categoryId = null)
     {
         $params = request()->input();
 
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($params, $categoryId) {
+        return app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($params, $categoryId) {
                 $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
                 $locale = request()->get('locale') ?: app()->getLocale();
 
                 $qb = $query->distinct()
                         ->addSelect('product_flat.*')
+                        ->addSelect(DB::raw('IF( product_flat.special_price_from IS NOT NULL 
+                            AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
+                            AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS price'))
+                            
                         ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                         ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
                         ->where('product_flat.visible_individually', 1)
@@ -461,7 +466,18 @@ class ProductRepository extends Repository
                 });
 
                 return $qb;
-            })->paginate(isset($params['limit']) ? $params['limit'] : 9);
+            });
+    }
+
+    /**
+     * @param integer $categoryId
+     * @return Collection
+     */
+    public function findAllByCategory($categoryId = null)
+    {
+        $params = request()->input();
+
+        $results = $this->findAllByCategoryQueryBuilder($categoryId)->paginate(isset($params['limit']) ? $params['limit'] : 9);
 
         return $results;
     }

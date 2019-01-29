@@ -180,7 +180,11 @@ class ProductFlat
                         }
                     }
 
-                    $productFlat->{$attribute->code} = $productAttributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]];
+                    if ($product->type == 'configurable' && $attribute->code == 'price') {
+                        $productFlat->{$attribute->code} = app('Webkul\Product\Helpers\Price')->getVariantMinPrice($product);
+                    } else {
+                        $productFlat->{$attribute->code} = $productAttributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]];
+                    }
 
                     if ($attribute->type == 'select') {
                         $attributeOption = $this->attributeOptionRepository->find($product->{$attribute->code});

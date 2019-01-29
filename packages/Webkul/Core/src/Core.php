@@ -423,10 +423,10 @@ class Core
             $toTimeStamp += 86400;
         }
 
-        $result = false;
-
         if (! $this->is_empty_date($dateFrom) && $channelTimeStamp < $fromTimeStamp) {
+            $result = false;
         } elseif (! $this->is_empty_date($dateTo) && $channelTimeStamp > $toTimeStamp) {
+            $result = false;
         } else {
             $result = true;
         }
