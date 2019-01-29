@@ -9,7 +9,7 @@ return [
         'wishlist' => 'Wishlist',
         'orders' => 'Orders',
     ],
-    
+
     'common' => [
         'error' => 'Something went wrong, please try again later.'
     ],
@@ -169,8 +169,8 @@ return [
                 'phone' => 'Phone',
                 'email' => 'Email',
                 'opassword' => 'Old Password',
-                'password' => 'Password',
-                'cpassword' => 'Confirm Password',
+                'password' => 'New Password',
+                'cpassword' => 'Confirm New Password',
                 'submit' => 'Update Profile',
 
                 'edit-profile' => [
