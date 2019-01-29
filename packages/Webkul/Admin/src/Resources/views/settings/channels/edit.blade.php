@@ -201,11 +201,7 @@
                 plugins: 'image imagetools media wordcount save fullscreen code',
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code',
                 image_advtab: true,
-                valid_elements : '*[*]',
-                templates: [
-                    { title: 'Test template 1', content: 'Test 1' },
-                    { title: 'Test template 2', content: 'Test 2' }
-                ],
+                valid_elements : '*[*]'
             });
         });
     </script>

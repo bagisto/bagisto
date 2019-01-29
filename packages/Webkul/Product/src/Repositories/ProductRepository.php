@@ -401,16 +401,11 @@ class ProductRepository extends Repository
      * @param integer $categoryId
      * @return Collection
      */
-    public function findAllByCategory($categoryId = null)
+    public function findAllByCategoryQueryBuilder($categoryId = null)
     {
-        // IF( special_price_from IS NOT NULL 
-        // AND special_price_to IS NOT NULL , IF( NOW( ) >= special_price_from
-        // AND NOW( ) <= special_price_to, IF( special_price IS NULL OR special_price = 0 , price, LEAST( special_price, price ) ) , price ) , IF( special_price_from IS NULL , IF( special_price_to IS NULL , IF( special_price IS NULL OR special_price = 0 , price, LEAST( special_price, price ) ) , IF( NOW( ) <= special_price_to, IF( special_price IS NULL OR special_price = 0 , price, LEAST( special_price, price ) ) , price ) ) , IF( special_price_to IS NULL , IF( NOW( ) >= special_price_from, IF( special_price IS NULL OR special_price = 0 , price, LEAST( special_price, price ) ) , price ) , price ) ) ) AS min_price
-
-
         $params = request()->input();
 
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($params, $categoryId) {
+        return app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($params, $categoryId) {
                 $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
                 $locale = request()->get('locale') ?: app()->getLocale();
@@ -471,7 +466,18 @@ class ProductRepository extends Repository
                 });
 
                 return $qb;
-            })->paginate(isset($params['limit']) ? $params['limit'] : 9);
+            });
+    }
+
+    /**
+     * @param integer $categoryId
+     * @return Collection
+     */
+    public function findAllByCategory($categoryId = null)
+    {
+        $params = request()->input();
+
+        $results = $this->findAllByCategoryQueryBuilder($categoryId)->paginate(isset($params['limit']) ? $params['limit'] : 9);
 
         return $results;
     }
