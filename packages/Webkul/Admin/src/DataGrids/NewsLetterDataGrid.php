@@ -19,6 +19,8 @@ class NewsLetterDataGrid extends DataGrid
 
     protected $index = 'id';
 
+    protected $sortOrder = 'desc'; //asc or desc
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('subscribers_list')->addSelect('id', 'is_subscribed', 'email');

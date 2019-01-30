@@ -9,7 +9,11 @@
         <form method="POST" action="{{ route('admin.sliders.update', $slider->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
             <div class="page-header">
                 <div class="page-title">
-                    <h1>{{ __('admin::app.settings.sliders.edit-title') }}</h1>
+                    <h1>
+                        <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+
+                        {{ __('admin::app.settings.sliders.edit-title') }}
+                    </h1>
                 </div>
 
                 <div class="page-action">

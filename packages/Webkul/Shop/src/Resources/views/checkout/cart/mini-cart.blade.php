@@ -6,14 +6,14 @@
     <?php $items = $cart->items; ?>
 
     <div class="dropdown-toggle">
-        <div style="display: inline-block; cursor: pointer;">
-            <span class="name">
-                Cart
-                <span class="count"> ({{ $cart->items->count() }})</span>
-            </span>
-        </div>
+        <span class="icon cart-icon"></span>
 
-        <i class="icon arrow-down-icon active"></i>
+        <span class="name">
+            {{ __('shop::app.header.cart') }}
+            <span class="count"> ({{ $cart->items->count() }})</span>
+        </span>
+
+        <i class="icon arrow-down-icon"></i>
     </div>
 
     <div class="dropdown-list" style="display: none; top: 50px; right: 0px">

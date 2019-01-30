@@ -11,7 +11,11 @@
         <div class="page-header">
 
             <div class="page-title">
-                <h1>{{ __('admin::app.sales.orders.view-title', ['order_id' => $order->id]) }}</h1>
+                <h1>
+                    <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
+
+                    {{ __('admin::app.sales.orders.view-title', ['order_id' => $order->id]) }}
+                </h1>
             </div>
 
             <div class="page-action">
@@ -228,7 +232,6 @@
                                                 <th>{{ __('admin::app.sales.orders.SKU') }}</th>
                                                 <th>{{ __('admin::app.sales.orders.product-name') }}</th>
                                                 <th>{{ __('admin::app.sales.orders.price') }}</th>
-                                                <th>{{ __('admin::app.sales.orders.qty') }}</th>
                                                 <th>{{ __('admin::app.sales.orders.item-status') }}</th>
                                                 <th>{{ __('admin::app.sales.orders.subtotal') }}</th>
                                                 <th>{{ __('admin::app.sales.orders.tax-percent') }}</th>
@@ -252,8 +255,11 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ core()->formatBasePrice($item->base_price) }}</td>
-                                                    <td>{{ $item->qty_ordered }}</td>
                                                     <td>
+                                                        <span class="qty-row">
+                                                            {{ $item->qty_ordered ? __('admin::app.sales.orders.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
+                                                        </span>
+
                                                         <span class="qty-row">
                                                             {{ $item->qty_invoiced ? __('admin::app.sales.orders.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
                                                         </span>

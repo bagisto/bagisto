@@ -27,6 +27,8 @@ return [
         'dropdown-text' => 'Manage Cart, Orders & Wishlist',
         'sign-in' => 'Sign In',
         'sign-up' => 'Sign Up',
+        'account' => 'Account',
+        'cart' => 'Cart',
         'profile' => 'Profile',
         'wishlist' => 'Wishlist',
         'cart' => 'Cart',
