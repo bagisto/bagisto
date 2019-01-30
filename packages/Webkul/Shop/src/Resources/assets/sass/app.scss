@@ -1853,7 +1853,7 @@ section.product-detail {
                 flex-direction: column-reverse;
 
                 .thumb-list {
-                    height: 120px;
+                    height: 120px !important;
                     margin-top: 5px;
                     flex-direction: row;
                     overflow-x: scroll;
