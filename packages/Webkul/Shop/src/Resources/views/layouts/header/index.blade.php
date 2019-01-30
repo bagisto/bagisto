@@ -33,10 +33,11 @@
                 {!! view_render_event('bagisto.shop.layout.header.currency-item.before') !!}
 
                 @if (core()->getCurrentChannel()->currencies->count() > 1)
-                    <li class="list">
+                    <li class="dropdown-toggle">
                         <span class="dropdown-toggle">
                             {{ core()->getCurrentCurrencyCode() }}
-                            <i class="icon arrow-down-icon active"></i>
+
+                            <i class="icon arrow-down-icon"></i>
                         </span>
 
                         <ul class="dropdown-list currency">
@@ -51,12 +52,16 @@
 
                 {!! view_render_event('bagisto.shop.layout.header.currency-item.after') !!}
 
+
                 {!! view_render_event('bagisto.shop.layout.header.account-item.before') !!}
 
-                <li class="list">
+                <li>
                     <span class="dropdown-toggle">
                         <i class="icon account-icon"></i>
-                        <i class="icon arrow-down-icon active"></i>
+
+                        {{ __('shop::app.header.account') }}
+
+                        <i class="icon arrow-down-icon"></i>
                     </span>
 
                     @guest('customer')
@@ -118,15 +123,13 @@
 
                 {!! view_render_event('bagisto.shop.layout.header.account-item.after') !!}
 
+
                 {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
 
-                <li class="cart-dropdown-container list">
-                    @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+                <li class="cart-dropdown-container">
 
-                    <ul class="cart-dropdown">
-                        <span class="icon cart-icon"></span>
-                        @include('shop::checkout.cart.mini-cart')
-                    </ul>
+                    @include('shop::checkout.cart.mini-cart')
+
                 </li>
 
                 {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
