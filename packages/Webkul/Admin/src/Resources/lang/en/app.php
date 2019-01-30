@@ -262,6 +262,7 @@ return [
             'product-name' => 'Product Name',
             'qty' => 'Qty',
             'item-status' => 'Item Status',
+            'item-ordered' => 'Ordered (:qty_ordered)',
             'item-invoice' => 'Invoiced (:qty_invoiced)',
             'item-shipped' => 'shipped (:qty_shipped)',
             'item-canceled' => 'Canceled (:qty_canceled)',
