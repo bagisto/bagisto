@@ -30,6 +30,8 @@
 
         <div class="right-content">
             <ul class="right-content-menu">
+                {!! view_render_event('bagisto.shop.layout.header.currency-item.before') !!}
+
                 @if (core()->getCurrentChannel()->currencies->count() > 1)
                     <li class="list">
                         <span class="dropdown-toggle">
@@ -47,6 +49,10 @@
                     </li>
                 @endif
 
+                {!! view_render_event('bagisto.shop.layout.header.currency-item.after') !!}
+
+                {!! view_render_event('bagisto.shop.layout.header.account-item.before') !!}
+
                 <li class="list">
                     <span class="dropdown-toggle">
                         <i class="icon account-icon"></i>
@@ -57,14 +63,23 @@
                         <ul class="dropdown-list account guest">
                             <li>
                                 <div>
-                                    <label style="color: #9e9e9e; font-weight: 700; text-transform: uppercase; font-size: 15px;">{{ __('shop::app.header.title') }}</label>
+                                    <label style="color: #9e9e9e; font-weight: 700; text-transform: uppercase; font-size: 15px;">
+                                        {{ __('shop::app.header.title') }}
+                                    </label>
                                 </div>
+
                                 <div style="margin-top: 5px;">
                                     <span style="font-size: 12px;">{{ __('shop::app.header.dropdown-text') }}</span>
                                 </div>
+
                                 <div style="margin-top: 15px;">
-                                    <a class="btn btn-primary btn-sm" href="{{ route('customer.session.index') }}" style="color: #ffffff">{{ __('shop::app.header.sign-in') }}</a>
-                                    <a class="btn btn-primary btn-sm" href="{{ route('customer.register.index') }}" style="float: right; color: #ffffff">{{ __('shop::app.header.sign-up') }}</a>
+                                    <a class="btn btn-primary btn-sm" href="{{ route('customer.session.index') }}" style="color: #ffffff">
+                                        {{ __('shop::app.header.sign-in') }}
+                                    </a>
+
+                                    <a class="btn btn-primary btn-sm" href="{{ route('customer.register.index') }}" style="float: right; color: #ffffff">
+                                        {{ __('shop::app.header.sign-up') }}
+                                    </a>
                                 </div>
                             </li>
                         </ul>
@@ -74,21 +89,36 @@
                         <ul class="dropdown-list account customer">
                             <li>
                                 <div>
-                                    <label style="color: #9e9e9e; font-weight: 700; text-transform: uppercase; font-size: 15px;">{{ auth()->guard('customer')->user()->first_name }}</label>
+                                    <label style="color: #9e9e9e; font-weight: 700; text-transform: uppercase; font-size: 15px;">
+                                        {{ auth()->guard('customer')->user()->first_name }}
+                                    </label>
                                 </div>
+
                                 <ul>
-                                    <li><a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a></li>
+                                    <li>
+                                        <a href="{{ route('customer.profile.index') }}">{{ __('shop::app.header.profile') }}</a>
+                                    </li>
 
-                                    <li><a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a></li>
+                                    <li>
+                                        <a href="{{ route('customer.wishlist.index') }}">{{ __('shop::app.header.wishlist') }}</a>
+                                    </li>
 
-                                    <li><a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.header.cart') }}</a></li>
+                                    <li>
+                                        <a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.header.cart') }}</a>
+                                    </li>
 
-                                    <li><a href="{{ route('customer.session.destroy') }}">{{ __('shop::app.header.logout') }}</a></li>
+                                    <li>
+                                        <a href="{{ route('customer.session.destroy') }}">{{ __('shop::app.header.logout') }}</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
                     @endauth
                 </li>
+
+                {!! view_render_event('bagisto.shop.layout.header.account-item.after') !!}
+
+                {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
 
                 <li class="cart-dropdown-container list">
                     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
@@ -98,6 +128,8 @@
                         @include('shop::checkout.cart.mini-cart')
                     </ul>
                 </li>
+
+                {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
             </ul>
         </div>
     </div>
