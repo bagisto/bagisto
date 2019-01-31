@@ -448,6 +448,9 @@ return [
         'title' => 'Configuration',
         'save-btn-title' => 'Save',
         'save-message' => 'Configuration saved successfully',
+        'yes' => 'Yes',
+        'no' => 'No',
+        'delete' => 'Delete',
 
         'tax-categories' => [
             'title' => 'Tax Categories',
