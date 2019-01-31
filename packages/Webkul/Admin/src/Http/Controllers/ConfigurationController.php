@@ -9,6 +9,7 @@ use Webkul\Admin\Facades\Configuration;
 use Webkul\Core\Repositories\CoreConfigRepository as CoreConfig;
 use Webkul\Core\Tree;
 use Webkul\Admin\Http\Requests\ConfigurationForm;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Configuration controller
@@ -142,5 +143,19 @@ class ConfigurationController extends Controller
         session()->flash('success', trans('admin::app.configuration.save-message'));
 
         return redirect()->back();
+    }
+
+    /**
+     * download the file for the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function download(Request $request)
+    {
+        $id = request()->route()->parameters()['id'];
+
+        $config = $this->coreConfig->findOneByField('id', $id);
+
+        return Storage::download($config['value']);
     }
 }
