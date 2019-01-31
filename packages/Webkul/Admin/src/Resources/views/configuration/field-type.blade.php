@@ -139,6 +139,67 @@
 
             <state code = {{ $stateCode }}></state>
 
+        @elseif ($field['type'] == 'boolean')
+
+            <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;">
+
+                <?php
+                    $selectedOption = core()->getConfigData($name) ?? '';
+                ?>
+
+                <option value="0" {{ $selectedOption ? '' : 'selected'}}>
+                    {{ __('admin::app.configuration.no') }}
+                </option>
+
+                <option value="1" {{ $selectedOption ? 'selected' : ''}}>
+                    {{ __('admin::app.configuration.yes') }}
+                </option>
+
+            </select>
+
+        @elseif ($field['type'] == 'image')
+
+            <?php
+                $src = Storage::url(core()->getConfigData($name));
+                $result = core()->getConfigData($name);
+            ?>
+
+            @if ($result)
+                <img src="{{ $src }}" style="position: relative; top: 15px" />
+            @endif
+
+            <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;" style="padding-top: 5px;">
+
+            @if ($result)
+                <div class="control-group" style="margin-top: 5px;">
+                    <span class="checkbox">
+                        <input type="checkbox" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][delete]"  name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][delete]" value="1">
+
+                        <label class="checkbox-view" for="delete"></label>
+                            {{ __('admin::app.configuration.delete') }}
+                    </span>
+                </div>
+            @endif
+
+        @elseif ($field['type'] == 'file')
+
+            <?php
+                $result = core()->getConfigData($name);
+            ?>
+
+            <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;" style="padding-top: 5px;">
+
+            @if ($result)
+                <div class="control-group" style="margin-top: 5px;">
+                    <span class="checkbox">
+                        <input type="checkbox" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][delete]"  name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][delete]" value="1">
+
+                        <label class="checkbox-view" for="delete"></label>
+                            {{ __('admin::app.configuration.delete') }}
+                    </span>
+                </div>
+            @endif
+
         @endif
 
         <span class="control-error" v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]')">@{{ errors.first('{!! $firstField !!}[{!! $secondField !!}][{!! $thirdField !!}][{!! $field['name'] !!}]') }}</span>

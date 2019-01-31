@@ -9,7 +9,7 @@ return [
         'wishlist' => 'Wishlist',
         'orders' => 'Orders',
     ],
-
+    
     'common' => [
         'error' => 'Something went wrong, please try again later.'
     ],
@@ -27,6 +27,8 @@ return [
         'dropdown-text' => 'Manage Cart, Orders & Wishlist',
         'sign-in' => 'Sign In',
         'sign-up' => 'Sign Up',
+        'account' => 'Account',
+        'cart' => 'Cart',
         'profile' => 'Profile',
         'wishlist' => 'Wishlist',
         'cart' => 'Cart',
@@ -169,8 +171,8 @@ return [
                 'phone' => 'Phone',
                 'email' => 'Email',
                 'opassword' => 'Old Password',
-                'password' => 'New Password',
-                'cpassword' => 'Confirm New Password',
+                'password' => 'Password',
+                'cpassword' => 'Confirm Password',
                 'submit' => 'Update Profile',
 
                 'edit-profile' => [
