@@ -15,8 +15,6 @@ class AttributeDataGrid extends DataGrid
 {
     protected $paginate = true;
 
-    protected $itemsPerPage = 10; //overriding the default items per page
-
     protected $index = 'id'; //the column that needs to be treated as index column
 
     protected $sortOrder = 'desc'; //asc or desc
