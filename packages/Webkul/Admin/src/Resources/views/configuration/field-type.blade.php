@@ -165,7 +165,7 @@
             ?>
 
             @if ($result)
-                <img src="{{ $src }}" style="position: relative; top: 15px" />
+                <img src="{{ $src }}" class="configuration-image"/>
             @endif
 
             <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;" style="padding-top: 5px;">
@@ -185,6 +185,8 @@
 
             <?php
                 $result = core()->getConfigData($name);
+                $src = explode("/", $result);
+                $path = end($src);
             ?>
 
             <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;" style="padding-top: 5px;">

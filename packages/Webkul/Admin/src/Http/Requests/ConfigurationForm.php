@@ -28,8 +28,7 @@ class ConfigurationForm extends FormRequest
             'sales.*.*.title'  => 'required',
             'sales.*.*.active'  => 'required',
             'sales.*.*.order_status' => 'required',
-            // 'sales.*.*.Image' => 'image|mimes:jpg,png',
-            // 'sales.*.*.File' => 'mimes:doc,pdf,docx,zip',
+            'sales.*.*.file' => 'max:2048',
         ];
 
         return $this->rules;
@@ -46,8 +45,6 @@ class ConfigurationForm extends FormRequest
             'sales.*.*.title.required' => 'The title field is required.',
             'sales.*.*.active.required' => 'The status field is required.',
             'sales.*.*.order_status.required' => 'Order Status field is required',
-            // 'sales.*.*.Image.image' => 'Image field must be an image',
-            // 'sales.*.*.Image.mimes' => 'Image must be a file of type: jpg, png',
         ];
     }
 }
