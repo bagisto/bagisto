@@ -33,7 +33,7 @@
                 {!! view_render_event('bagisto.shop.layout.header.currency-item.before') !!}
 
                 @if (core()->getCurrentChannel()->currencies->count() > 1)
-                    <li class="dropdown-toggle">
+                    <li>
                         <span class="dropdown-toggle">
                             {{ core()->getCurrentCurrencyCode() }}
 

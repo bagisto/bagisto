@@ -29,7 +29,7 @@
 
 </head>
 
-<body>
+<body @if (app()->getLocale() == 'ar')class="rtl"@endif>
 
     {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
