@@ -13,8 +13,6 @@ use DB;
  */
 class CustomerReviewDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
     protected $index = 'product_review_id'; //column that needs to be treated as index column
 
     protected $sortOrder = 'desc'; //asc or desc

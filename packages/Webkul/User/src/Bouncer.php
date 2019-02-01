@@ -18,6 +18,7 @@ class Bouncer
             if (! auth()->guard('admin')->check() || ! auth()->guard('admin')->user()->hasPermission($permission))
                 return false;
         }
+        
         return true;
     }
 
