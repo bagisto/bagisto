@@ -165,7 +165,9 @@
             ?>
 
             @if ($result)
-                <img src="{{ $src }}" class="configuration-image"/>
+                <a href="{{ $src }}" target="_blank">
+                    <img src="{{ $src }}" class="configuration-image"/>
+                </a>
             @endif
 
             <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;" style="padding-top: 5px;">
@@ -188,6 +190,12 @@
                 $src = explode("/", $result);
                 $path = end($src);
             ?>
+
+            @if ($result)
+                <a href="{{ route('admin.configuration.download', [request()->route('slug'), request()->route('slug2'), $path]) }}">
+                    <i class="icon sort-down-icon download"></i>
+                </a>
+            @endif
 
             <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;" style="padding-top: 5px;">
 

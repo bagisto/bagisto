@@ -568,7 +568,13 @@ body {
     margin-right: 5px;
 }
 
-
+.download {
+    position: relative;
+    height: 24px !important;
+    width: 24px !important;
+    top: 12px;
+    margin-right: 10px;
+}
 
 // css for rtl start here
 .rtl {
