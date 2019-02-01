@@ -13,8 +13,6 @@ use DB;
  */
 class SliderDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
     protected $index = 'slider_id';
 
     protected $sortOrder = 'desc'; //asc or desc

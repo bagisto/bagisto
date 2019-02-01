@@ -13,8 +13,6 @@ use DB;
  */
 class UserDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
     protected $index = 'user_id';
 
     protected $sortOrder = 'desc'; //asc or desc

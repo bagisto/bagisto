@@ -13,8 +13,6 @@ use DB;
  */
 class OrderDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
     protected $index = 'id';
 
     protected $sortOrder = 'desc'; //asc or desc
