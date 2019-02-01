@@ -28,10 +28,12 @@
             </ul>
         </div>
 
-        <div class="right-content">
-            <ul class="right-content-menu">
 
-                <li class="search-box"><span class="icon icon-search" id="search"></span></li>
+        <div class="right-content">
+
+            <span class="search-box"><span class="icon icon-search" id="search"></span></span>
+
+            <ul class="right-content-menu">
 
                 {!! view_render_event('bagisto.shop.layout.header.currency-item.before') !!}
 
@@ -62,7 +64,7 @@
                     <span class="dropdown-toggle">
                         <i class="icon account-icon"></i>
 
-                        <span class="account-text">{{ __('shop::app.header.account') }}</span>
+                        <span class="name">{{ __('shop::app.header.account') }}</span>
 
                         <i class="icon arrow-down-icon"></i>
                     </span>
@@ -137,8 +139,9 @@
 
                 {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
 
-                <li class="menu-box" ><span class="icon icon-menu" id="hammenu"></span></li>
             </ul>
+
+            <span class="menu-box" ><span class="icon icon-menu" id="hammenu"></span>
         </div>
     </div>
 

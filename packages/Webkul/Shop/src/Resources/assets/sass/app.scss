@@ -823,12 +823,13 @@ section.slider-block {
                     }
                 }
 
-                .cart-link {
-                    pointer-events: none;
+                .cart-dropdown-container {
+                    border-right: 0;
+                    padding-right: 0;
                 }
 
-                .search-box, .menu-box {
-                    display: none;
+                .cart-link {
+                    pointer-events: none;
                 }
 
                 ul.dropdown-list {
@@ -966,6 +967,10 @@ section.slider-block {
                         }
                     }
                 }
+            }
+
+            .search-box, .menu-box {
+                display: none;
             }
         }
     }
@@ -1128,6 +1133,18 @@ section.slider-block {
 
         .header-top {
             div.right-content {
+                display: inherit;
+
+                .menu-box {
+                    display: inline-block;
+                    margin-left:10px;
+                }
+
+                .search-box {
+                    display: inline-block;
+                    margin-right: 10px;
+                }
+
                 .right-content-menu {
                     > li {
                         border-right: none;
@@ -1142,12 +1159,8 @@ section.slider-block {
                         pointer-events: all;
                     }
 
-                    .arrow-down-icon, .name, .account-text {
+                    .arrow-down-icon, .name {
                         display: none;
-                    }
-
-                    .search-box, .menu-box {
-                        display: inline-block;
                     }
 
                     .cart-dropdown-container {
