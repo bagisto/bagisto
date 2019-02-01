@@ -2,6 +2,9 @@
 
 Route::group(['middleware' => ['web']], function () {
     Route::prefix('admin')->group(function () {
+
+        Route::get('/', 'Webkul\Admin\Http\Controllers\Controller@redirectToLogin');
+
         // Login Routes
         Route::get('/login', 'Webkul\User\Http\Controllers\SessionController@create')->defaults('_config', [
             'view' => 'admin::users.sessions.create'

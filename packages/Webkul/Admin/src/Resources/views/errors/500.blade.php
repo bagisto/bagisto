@@ -1,10 +1,10 @@
-@extends('admin::layouts.content')
+@extends(auth()->guard('admin')->check() ? 'admin::layouts.master' : 'shop::layouts.master')
 
 @section('page_title')
     {{ __('admin::app.error.500.page-title') }}
 @stop
 
-@section('content')
+@section('content-wrapper')
 
     <div class="error-container" style="width: 100%; display: flex; justify-content: center;">
 
