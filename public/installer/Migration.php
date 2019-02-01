@@ -137,6 +137,7 @@
             $('#comp').show();
             $('#instructions').hide();
             $('#migrate-seed').hide();
+            $('#migration-back').hide();
             $('#migrate').hide();
             $('#seed').hide();
             $('#publish').hide();
@@ -207,6 +208,7 @@
                                 } else {
                                     $('#migrate').show();
                                     $('#migrate-seed').show();
+                                    $('#migration-back').show();
                                     if (data['migrate']) {
                                         $('#migrate').append('<div class="terminal">' + data['migrate'] + '</div>');
                                     }
@@ -218,6 +220,7 @@
                         $('#loader').hide();
                         $('#composer-migrate').hide();
                         $('#migrate-seed').show();
+                        $('#migration-back').show();
                         $('#composer').append('<div class="terminal">' + data['composer'] +'</div>');
                     }
                 }

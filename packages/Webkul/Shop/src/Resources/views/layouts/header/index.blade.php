@@ -30,10 +30,13 @@
 
         <div class="right-content">
             <ul class="right-content-menu">
+
+                <li class="search-box"><span class="icon icon-search" id="search"></span></li>
+
                 {!! view_render_event('bagisto.shop.layout.header.currency-item.before') !!}
 
                 @if (core()->getCurrentChannel()->currencies->count() > 1)
-                    <li>
+                    <li class="currency-switcher">
                         <span class="dropdown-toggle">
                             {{ core()->getCurrentCurrencyCode() }}
 
@@ -59,7 +62,7 @@
                     <span class="dropdown-toggle">
                         <i class="icon account-icon"></i>
 
-                        {{ __('shop::app.header.account') }}
+                        <span class="account-text">{{ __('shop::app.header.account') }}</span>
 
                         <i class="icon arrow-down-icon"></i>
                     </span>
@@ -133,6 +136,8 @@
                 </li>
 
                 {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
+
+                <li class="menu-box" ><span class="icon icon-menu" id="hammenu"></span></li>
             </ul>
         </div>
     </div>
@@ -141,7 +146,7 @@
         @include('shop::layouts.header.nav-menu.navmenu')
     </div>
 
-    <div class="search-responsive mt-10">
+    <div class="search-responsive mt-10" id="search-responsive">
         <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
             <div class="search-content">
                 <button class="" style="background: none; border: none; padding: 0px;">
@@ -164,39 +169,37 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            var hamMenu = document.getElementById("hammenu");
-            var search = document.getElementById("search");
-            var searchResponsive = document.getElementsByClassName('search-responsive')[0];
-            var navResponsive = document.getElementsByClassName('header-bottom')[0];
 
-            if (search && hamMenu) {
-                search.addEventListener("click", header);
-                hamMenu.addEventListener("click", header);
-            }
+            $('body').delegate('.icon.icon-search, .icon-menu-close, .icon.icon-menu', 'click', function(e) {
+                toggleDropdown(e);
+            });
 
-            function header() {
-                var className = document.getElementById(this.id).className;
-                if (className === 'icon icon-search' ) {
-                    search.classList.remove("icon-search");
-                    search.classList.add("icon-menu-close");
-                    hamMenu.classList.remove("icon-menu-close");
-                    hamMenu.classList.add("icon-menu");
-                    searchResponsive.style.display = 'block';
-                    navResponsive.style.display = 'none';
-                } else if (className === 'icon icon-menu') {
-                    hamMenu.classList.remove("icon-menu");
-                    hamMenu.classList.add("icon-menu-close");
-                    search.classList.remove("icon-menu-close");
-                    search.classList.add("icon-search");
-                    searchResponsive.style.display = 'none';
-                    navResponsive.style.display = 'block';
+            function toggleDropdown(e) {
+                var currentElement = $(e.currentTarget);
+
+                if (currentElement.hasClass('icon-search')) {
+                    currentElement.removeClass('icon-search');
+                    currentElement.addClass('icon-menu-close');
+                    $('#hammenu').removeClass('icon-menu-close');
+                    $('#hammenu').addClass('icon-menu');
+                    $("#search-responsive").css("display", "block");
+                    $("#header-bottom").css("display", "none");
+                } else if (currentElement.hasClass('icon-menu')) {
+                    currentElement.removeClass('icon-menu');
+                    currentElement.addClass('icon-menu-close');
+                    $('#search').removeClass('icon-menu-close');
+                    $('#search').addClass('icon-search');
+                    $("#search-responsive").css("display", "none");
+                    $("#header-bottom").css("display", "block");
                 } else {
-                    search.classList.remove("icon-menu-close");
-                    search.classList.add("icon-search");
-                    hamMenu.classList.remove("icon-menu-close");
-                    hamMenu.classList.add("icon-menu");
-                    searchResponsive.style.display = 'none';
-                    navResponsive.style.display = 'none';
+                    currentElement.removeClass('icon-menu-close');
+                    $("#search-responsive").css("display", "none");
+                    $("#header-bottom").css("display", "none");
+                    if (currentElement.attr("id") == 'search') {
+                        currentElement.addClass('icon-search');
+                    } else {
+                        currentElement.addClass('icon-menu');
+                    }
                 }
             }
         });
