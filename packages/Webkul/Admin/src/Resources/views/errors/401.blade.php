@@ -1,4 +1,4 @@
-@extends(auth()->guard('admin')->check() ? 'admin::layouts.master' : 'shop::layouts.master')
+@extends('admin::layouts.master')
 
 @section('page_title')
     {{ __('admin::app.error.401.page-title') }}

@@ -23,6 +23,7 @@
                                 <div class="control-group" id="app_name">
                                     <label for="app_name" class="required">App Name</label>
                                     <input type="text" name="app_name" class="control"
+                                    placeholder="Laravel"
                                     data-validation="required length" data-validation-length="max50"
                                     >
                                 </div>
@@ -30,6 +31,7 @@
                                 <div class="control-group" id="app_url">
                                     <label for="app_url" class="required">App URL</label>
                                     <input type="text" name="app_url" class="control"
+                                    placeholder="http://localhost"
                                     data-validation="required length" data-validation-length="max50">
                                 </div>
 
@@ -46,32 +48,37 @@
                                 </div>
 
                                 <div class="control-group" id="port_name">
-                                    <label for="port_name" class="required">Port</label>
+                                    <label for="port_name" class="required">Database Port</label>
                                     <input type="text" name="port_name" class="control"
+                                    placeholder="3306"
                                     data-validation="required alphanumeric number length" data-validation-length="max4">
                                 </div>
 
                                 <div class="control-group" id="host_name">
-                                    <label for="host_name" class="required">Host</label>
+                                    <label for="host_name" class="required">Databse Host</label>
                                     <input type="text" name="host_name" class="control"
+                                    placeholder="127.0.0.1"
                                     data-validation="required length" data-validation-length="max50">
                                 </div>
 
                                 <div class="control-group" id="database_name">
                                     <label for="database_name" class="required">Database Name</label>
                                     <input type="text" name="database_name" class="control"
+                                    placeholder="database name"
                                     data-validation="length required" data-validation-length="max50">
                                 </div>
 
                                 <div class="control-group" id="user_name">
                                     <label for="user_name" class="required">User Name</label>
                                     <input type="text" name="user_name" class="control"
+                                    placeholder="database user name"
                                     data-validation="length required" data-validation-length="max50">
                                 </div>
 
                                 <div class="control-group" id="user_password">
                                     <label for="user_password" class="required">User Password</label>
                                     <input type="text" name="user_password" class="control"
+                                    placeholder="database password"
                                     data-validation="length required" data-validation-length="max50">
                                 </div>
                             </div>
