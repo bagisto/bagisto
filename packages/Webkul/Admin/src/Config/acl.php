@@ -74,7 +74,7 @@ return [
     ], [
         'key' => 'configuration',
         'name' => 'admin::app.acl.configure',
-        'route' => 'admin.account.edit',
+        'route' => 'admin.configuration.index',
         'sort' => 5
     ], [
         'key' => 'settings',
