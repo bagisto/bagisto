@@ -13,8 +13,6 @@ use DB;
  */
 class RolesDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
     protected $index = 'id';
 
     protected $sortOrder = 'desc'; //asc or desc
@@ -60,23 +58,5 @@ class RolesDataGrid extends DataGrid
             'route' => 'admin.roles.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->prepareMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.products.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
-
-        // $this->prepareMassAction([
-        //     'type' => 'update',
-        //     'action' => route('admin.catalog.products.massupdate'),
-        //     'method' => 'PUT',
-        //     'options' => [
-        //         0 => true,
-        //         1 => false,
-        //     ]
-        // ]);
     }
 }

@@ -13,8 +13,6 @@ use DB;
  */
 class CategoryDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
     protected $index = 'category_id'; //the column that needs to be treated as index column
 
     protected $sortOrder = 'desc'; //asc or desc
@@ -104,23 +102,5 @@ class CategoryDataGrid extends DataGrid
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon' => 'icon trash-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->prepareMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.products.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
-
-        // $this->prepareMassAction([
-        //     'type' => 'update',
-        //     'action' => route('admin.catalog.products.massupdate'),
-        //     'method' => 'PUT',
-        //     'options' => [
-        //         0 => true,
-        //         1 => false,
-        //     ]
-        // ]);
     }
 }
