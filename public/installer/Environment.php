@@ -23,7 +23,7 @@
                                 <div class="control-group" id="app_name">
                                     <label for="app_name" class="required">App Name</label>
                                     <input type="text" name="app_name" class="control"
-                                    placeholder="Laravel"
+                                    value="Bagisto"
                                     data-validation="required length" data-validation-length="max50"
                                     >
                                 </div>
@@ -64,7 +64,7 @@
                                 <div class="control-group" id="database_name">
                                     <label for="database_name" class="required">Database Name</label>
                                     <input type="text" name="database_name" class="control"
-                                    placeholder="database name"
+                                    value="bagisto_"
                                     data-validation="length required" data-validation-length="max50">
                                 </div>
 
