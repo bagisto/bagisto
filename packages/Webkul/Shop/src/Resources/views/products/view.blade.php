@@ -162,9 +162,11 @@
                     thumbFrame[i].style.width = (productHeroImage.offsetHeight/4)+ "px";
                 }
 
-                thumbList.style.width = (productHeroImage.offsetHeight/4) + "px";
-                thumbList.style.minWidth = (productHeroImage.offsetHeight/4) + "px";
-                thumbList.style.height = productHeroImage.offsetHeight + "px";
+                if (screen.width > 720) {
+                    thumbList.style.width = (productHeroImage.offsetHeight/4) + "px";
+                    thumbList.style.minWidth = (productHeroImage.offsetHeight/4) + "px";
+                    thumbList.style.height = productHeroImage.offsetHeight + "px";
+                }
             }
 
             window.onresize = function() {
@@ -175,9 +177,11 @@
                         thumbFrame[i].style.width = (productHeroImage.offsetHeight/4)+ "px";
                     }
 
-                    thumbList.style.width = (productHeroImage.offsetHeight/4) + "px";
-                    thumbList.style.minWidth = (productHeroImage.offsetHeight/4) + "px";
-                    thumbList.style.height = productHeroImage.offsetHeight + "px";
+                    if (screen.width > 720) {
+                        thumbList.style.width = (productHeroImage.offsetHeight/4) + "px";
+                        thumbList.style.minWidth = (productHeroImage.offsetHeight/4) + "px";
+                        thumbList.style.height = productHeroImage.offsetHeight + "px";
+                    }
                 }
             }
         };

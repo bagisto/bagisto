@@ -28,10 +28,12 @@
             </ul>
         </div>
 
-        <div class="right-content">
-            <ul class="right-content-menu">
 
-                <li class="search-box"><span class="icon icon-search" id="search"></span></li>
+        <div class="right-content">
+
+            <span class="search-box"><span class="icon icon-search" id="search"></span></span>
+
+            <ul class="right-content-menu">
 
                 {!! view_render_event('bagisto.shop.layout.header.currency-item.before') !!}
 
@@ -62,7 +64,7 @@
                     <span class="dropdown-toggle">
                         <i class="icon account-icon"></i>
 
-                        <span class="account-text">{{ __('shop::app.header.account') }}</span>
+                        <span class="name">{{ __('shop::app.header.account') }}</span>
 
                         <i class="icon arrow-down-icon"></i>
                     </span>
@@ -137,8 +139,9 @@
 
                 {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
 
-                <li class="menu-box" ><span class="icon icon-menu" id="hammenu"></span></li>
             </ul>
+
+            <span class="menu-box" ><span class="icon icon-menu" id="hammenu"></span>
         </div>
     </div>
 
@@ -149,20 +152,13 @@
     <div class="search-responsive mt-10" id="search-responsive">
         <form role="search" action="{{ route('shop.search.index') }}" method="GET" style="display: inherit;">
             <div class="search-content">
-                <button class="" style="background: none; border: none; padding: 0px;">
-                    <i class="icon icon-search mt-10"></i>
+                <button style="background: none; border: none; padding: 0px;">
+                    <i class="icon icon-search"></i>
                 </button>
-                <input type="search" name="term" class="search mt-5">
-                <button class="" style="background: none; float: right; border: none; padding: 0px;">
-                    <i class="icon icon-menu-back right mt-10"></i>
-                </button>
+                <input type="search" name="term" class="search">
+                <i class="icon icon-menu-back right"></i>
             </div>
         </form>
-
-        {{--  <div class="search-content">
-            <i class="icon icon-search mt-10"></i>
-            <span class="suggestion mt-15">Designer sarees</span>
-        </div>  --}}
     </div>
 </div>
 
@@ -170,7 +166,7 @@
     <script>
         $(document).ready(function() {
 
-            $('body').delegate('.icon.icon-search, .icon-menu-close, .icon.icon-menu', 'click', function(e) {
+            $('body').delegate('#search, .icon-menu-close, .icon.icon-menu', 'click', function(e) {
                 toggleDropdown(e);
             });
 

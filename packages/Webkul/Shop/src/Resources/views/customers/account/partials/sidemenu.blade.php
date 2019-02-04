@@ -1,14 +1,10 @@
-<div class="responsive-side-menu" id="responsive-side-menu" style="display: none">
-    {{ __('shop::app.customer.account.menu') }}
-    <i class="icon icon-arrow-down right" id="down-icon"></i>
-</div>
-
-
 <div class="sidebar">
     @foreach ($menu->items as $menuItem)
         <div class="menu-block">
             <div class="menu-block-title">
                 {{ trans($menuItem['name']) }}
+
+                <i class="icon icon-arrow-down right" id="down-icon"></i>
             </div>
 
             <div class="menu-block-content">
@@ -31,11 +27,10 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        var sideMenuTitle = document.getElementById("responsive-side-menu");
         var downIcon = document.getElementById("down-icon");
-        var accountSideMenu = document.getElementsByClassName("account-side-menu");
+        var accountSideMenu = document.getElementsByClassName("menubar");
 
-        sideMenuTitle.addEventListener("click", function() {
+        downIcon.addEventListener("click", function() {
             if (downIcon.className == 'icon icon-arrow-down right') {
                 for(let i=0 ; i < accountSideMenu.length ; i++) {
                     accountSideMenu[i].style.display="block";
