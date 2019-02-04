@@ -238,7 +238,7 @@ class Cart {
             $canAdd = $parentProduct->haveSufficientQuantity($data['quantity']);
 
             if (! $canAdd) {
-                session()->flash('warning', 'insuff qty');
+                session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
             }
@@ -248,7 +248,7 @@ class Cart {
             $canAdd = $product->haveSufficientQuantity($data['quantity']);
 
             if (! $canAdd) {
-                session()->flash('warning', 'insuff qty');
+                session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
             }
@@ -551,14 +551,6 @@ class Cart {
             $cart = $this->cart->find(session()->get('cart')->id);
         }
 
-        // if ($cart != null) {
-        //     if ($cart->items->count() == 0) {
-        //         $this->cart->delete($cart->id);
-
-        //         return false;
-        //     }
-        // }
-
         return $cart && $cart->is_active ? $cart : null;
     }
 
@@ -822,6 +814,7 @@ class Cart {
                     }
                 }
             }
+            
             return true;
         }
     }
@@ -833,7 +826,8 @@ class Cart {
     */
     public function calculateItemsTax()
     {
-        $cart = $this->getCart();
+        if (! $cart = $this->getCart())
+            return false;
 
         if (! $shippingAddress = $cart->shipping_address)
             return;

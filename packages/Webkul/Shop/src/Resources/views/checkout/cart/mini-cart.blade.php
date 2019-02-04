@@ -3,6 +3,10 @@
 <?php $cart = cart()->getCart(); ?>
 
 @if ($cart)
+    @php
+        Cart::collectTotals();
+    @endphp
+
     <?php $items = $cart->items; ?>
 
     <div class="dropdown-toggle">
