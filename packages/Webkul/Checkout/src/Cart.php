@@ -238,7 +238,7 @@ class Cart {
             $canAdd = $parentProduct->haveSufficientQuantity($data['quantity']);
 
             if (! $canAdd) {
-                session()->flash('warning', 'insuff qty');
+                session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
             }
@@ -248,7 +248,7 @@ class Cart {
             $canAdd = $product->haveSufficientQuantity($data['quantity']);
 
             if (! $canAdd) {
-                session()->flash('warning', 'insuff qty');
+                session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
             }
