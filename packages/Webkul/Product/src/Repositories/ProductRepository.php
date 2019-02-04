@@ -156,10 +156,6 @@ class ProductRepository extends Repository
 
         $product->update($data);
 
-        if  (isset($data['categories'])) {
-            $product->categories()->sync($data['categories']);
-        }
-
         $attributes = $product->attribute_family->custom_attributes;
 
         foreach ($attributes as $attribute) {
@@ -189,37 +185,43 @@ class ProductRepository extends Repository
             }
         }
 
-        $previousVariantIds = $product->variants->pluck('id');
+        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
+            if  (isset($data['categories'])) {
+                $product->categories()->sync($data['categories']);
+            }
+            
+            $previousVariantIds = $product->variants->pluck('id');
 
-        if (isset($data['variants'])) {
-            foreach ($data['variants'] as $variantId => $variantData) {
-                if (str_contains($variantId, 'variant_')) {
-                    $permutation = [];
-                    foreach ($product->super_attributes as $superAttribute) {
-                        $permutation[$superAttribute->id] = $variantData[$superAttribute->code];
+            if (isset($data['variants'])) {
+                foreach ($data['variants'] as $variantId => $variantData) {
+                    if (str_contains($variantId, 'variant_')) {
+                        $permutation = [];
+                        foreach ($product->super_attributes as $superAttribute) {
+                            $permutation[$superAttribute->id] = $variantData[$superAttribute->code];
+                        }
+
+                        $this->createVariant($product, $permutation, $variantData);
+                    } else {
+                        if (is_numeric($index = $previousVariantIds->search($variantId))) {
+                            $previousVariantIds->forget($index);
+                        }
+
+                        $variantData['channel'] = $data['channel'];
+                        $variantData['locale'] = $data['locale'];
+
+                        $this->updateVariant($variantData, $variantId);
                     }
-
-                    $this->createVariant($product, $permutation, $variantData);
-                } else {
-                    if (is_numeric($index = $previousVariantIds->search($variantId))) {
-                        $previousVariantIds->forget($index);
-                    }
-
-                    $variantData['channel'] = $data['channel'];
-                    $variantData['locale'] = $data['locale'];
-
-                    $this->updateVariant($variantData, $variantId);
                 }
             }
+
+            foreach ($previousVariantIds as $variantId) {
+                $this->delete($variantId);
+            }
+
+            $this->productInventory->saveInventories($data, $product);
+
+            $this->productImage->uploadImages($data, $product);
         }
-
-        foreach ($previousVariantIds as $variantId) {
-            $this->delete($variantId);
-        }
-
-        $this->productInventory->saveInventories($data, $product);
-
-        $this->productImage->uploadImages($data, $product);
 
         Event::fire('catalog.product.update.after', $product);
 
@@ -385,6 +387,9 @@ class ProductRepository extends Repository
             $matchCount = 0;
 
             foreach ($superAttributeCodes as $attributeCode) {
+                if (! isset($data[$attributeCode]))
+                    return false;
+                    
                 if ($data[$attributeCode] == $variant->{$attributeCode})
                     $matchCount++;
             }

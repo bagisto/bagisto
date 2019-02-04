@@ -19,7 +19,9 @@ class OrderDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('orders')->select('id', 'base_sub_total', 'base_grand_total', 'created_at', 'channel_name', 'status')->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as full_name'));
+        $queryBuilder = DB::table('orders')
+                ->select('id', 'base_sub_total', 'base_grand_total', 'created_at', 'channel_name', 'status')
+                ->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as full_name'));
 
         $this->addFilter('full_name', DB::raw('CONCAT(customer_first_name, " ", customer_last_name)'));
 
