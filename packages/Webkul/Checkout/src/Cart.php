@@ -822,6 +822,7 @@ class Cart {
                     }
                 }
             }
+            
             return true;
         }
     }
@@ -833,7 +834,8 @@ class Cart {
     */
     public function calculateItemsTax()
     {
-        $cart = $this->getCart();
+        if (! $cart = $this->getCart())
+            return false;
 
         if (! $shippingAddress = $cart->shipping_address)
             return;
