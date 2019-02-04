@@ -2,6 +2,74 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v0.1.4-BETA4(4th of Febuary, 2019)** - *Release*
+
+* [feature] - Product flat, a product subsystem for faster product search, filter & sort on the storefront.
+
+* [feature] - Configurations loaded up in admin panel for almost all necessary things such as payments, shipments, etc.
+
+* [feature] - Faster and efficiently refactored datagrids for showing listing data.
+
+* #191 [fixed] - Add a column Shipped to in Order Grid ,to display the name for whom order has been shipped.
+
+* #368 [fixed] - If products are added in shopping cart and those product get deleted from admin section then it still displays in cart.
+
+* #353 [fixed] - Getting exception in deleting currency.
+
+* #143 [fixed] - If user login from checkout page, then it should redirect to checkout page.
+
+* #402 [fixed] - Change the validation message on moving product from wish-list to cart if product added in wish-list is out of stock.
+
+* #530 [fixed] - Unable to delete any of the created attributes.Getting validation message that attribute is used in configurable product while attribute is not used for creating any product.
+
+* #514 [fixed] - Getting Exception on changing the status of Product(On mass update).
+
+* #532 [fixed] - Pagination should not display if there is no product on other page.If 9 products are selected to show on a single page then until the limit reach pagination should not occur.
+
+* #506 [fixed] - While Installing the framework through Installer if at any stage user click on back button and then click on continue to install, then in this case unable to install.
+
+* #513 [fixed] - Getting Exception in deleting categories.
+
+* #531 [fixed] - Do not use short form of any words for notification.
+
+* #524 [fixed] - Getting Exception when login with user having custom role(ACL issue).
+
+* #453 [fixed] - Installation of Master Branch.
+
+* #426 [fixed] - php artisan down does not work.
+
+* #396 [fixed] - Layout issue on changing locale.
+
+* #334 [fixed] - My Account Grid displays blank after the bagisto 0.1.2 installation.
+
+* #457 [fixed] - Admin add product "Undefined variable: configurableFamily".
+
+* #508 [fixed] - Correct the required php version in installer.
+
+* #519 [fixed] - Status column of Review remains blank if review is in Pending state.
+
+* #523 [fixed] - Status column of review page remains blank if Status is change to disapprove(Mass update).
+
+* #438 [fixed] - Simple Select Attribute Issue
+
+* #381 [fixed] - On front-end currency symbol display only for Indian Rupee and USD. If code is selected other than these two in currency then code displays before price.
+
+* #301 [fixed] - Only customer that are on first page get exported.
+
+* #399 [fixed] - Accepting future date of birth for customer.
+
+* #369 [fixed] - Displaying incorrect response message on updating the status of products.
+
+* #363 [fixed] - Unable to delete last tax rate.
+
+* #347 [fixed] - Pricing Issue.
+
+* #378 [fixed] - Images that are applied on Category doesn't display in Edit Category Page.
+
+* #304 [fixed] - If a current user want to delete his account then in this case a password verification should be required before deleting the user.
+
+#### This changelog consists the bug & security fixes and new features being included in the releases listed below.
+
 ## **v0.1.3(19th of December, 2018)** - *Release*
 
 * [feature] Mass selection features had been implemented in datagrid for deletion and mass updation purposes
