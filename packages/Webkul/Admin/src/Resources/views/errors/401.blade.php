@@ -1,11 +1,11 @@
-@extends('admin::layouts.content')
+@extends(auth()->guard('admin')->check() ? 'admin::layouts.master' : 'shop::layouts.master')
 
 @section('page_title')
     {{ __('admin::app.error.401.page-title') }}
 @stop
 
-@section('content')
-    <div class="error-container" style="width: 100%; display: flex; justify-content: center;">
+@section('content-wrapper')
+    <div class="error-container" style="padding: 40px; width: 100%; display: flex; justify-content: center;">
 
         <div class="wrapper" style="display: flex; height: 60vh; width: 100%;
             justify-content: start; align-items: center;">

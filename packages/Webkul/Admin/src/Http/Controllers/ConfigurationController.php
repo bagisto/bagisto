@@ -150,11 +150,13 @@ class ConfigurationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function download(Request $request)
+    public function download()
     {
-        $id = request()->route()->parameters()['id'];
+        $path = request()->route()->parameters()['path'];
 
-        $config = $this->coreConfig->findOneByField('id', $id);
+        $fileName = 'configuration/'. $path;
+
+        $config = $this->coreConfig->findOneByField('value', $fileName);
 
         return Storage::download($config['value']);
     }

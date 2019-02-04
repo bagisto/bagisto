@@ -13,8 +13,6 @@ use DB;
  */
 class ExchangeRatesDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
     protected $index = 'currency_exch_id';
 
     protected $sortOrder = 'desc'; //asc or desc

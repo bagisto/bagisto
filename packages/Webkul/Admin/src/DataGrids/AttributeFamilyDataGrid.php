@@ -13,8 +13,6 @@ use DB;
  */
 class AttributeFamilyDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
     protected $index = 'id'; //the column that needs to be treated as index column
 
     protected $sortOrder = 'desc'; //asc or desc
