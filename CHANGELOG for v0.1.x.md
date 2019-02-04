@@ -2,6 +2,13 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v0.1.4(4th of Febuary, 2019)** - *Release*
+
+* [fixed] - Customer account menu issue fixed.
+
+* [fixed] - Channel's homepage content updated.
+
+
 ## **v0.1.4-BETA4(4th of Febuary, 2019)** - *Release*
 
 * [feature] - Product flat, a product subsystem for faster product search, filter & sort on the storefront.
