@@ -32,7 +32,8 @@ class OrderDataGrid extends DataGrid
                 ->addSelect(DB::raw('CONCAT(order_address_billing.first_name, " ", order_address_billing.last_name) as billed_to'))
                 ->addSelect(DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name) as shipped_to'));
 
-        $this->addFilter('full_name', DB::raw('CONCAT(customer_first_name, " ", customer_last_name)'));
+        $this->addFilter('billed_to', DB::raw('CONCAT(order_address_billing.first_name, " ", order_address_billing.last_name)'));
+        $this->addFilter('shipped_to', DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name)'));
 
         $this->setQueryBuilder($queryBuilder);
     }
