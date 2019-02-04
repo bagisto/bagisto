@@ -130,6 +130,7 @@ return [
         'order-date' => 'Order Date',
         'channel-name' => 'Channel Name',
         'billed-to' => 'Billed To',
+        'shipped-to' => 'Shipped To',
         'order-id' => 'Order Id',
         'invoice-date' => 'Invoice Date',
         'total-qty' => 'Total Qty',
