@@ -27,24 +27,16 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        var downIcon = document.getElementById("down-icon");
-        var accountSideMenu = document.getElementsByClassName("menubar");
-
-        downIcon.addEventListener("click", function() {
-            if (downIcon.className == 'icon icon-arrow-down right') {
-                for(let i=0 ; i < accountSideMenu.length ; i++) {
-                    accountSideMenu[i].style.display="block";
-                }
-
-                downIcon.classList.remove("icon","icon-arrow-down","right");
-                downIcon.classList.add("icon","icon-arrow-up","right");
-            }else {
-                for(let i=0 ; i < accountSideMenu.length ; i++) {
-                    accountSideMenu[i].style.display="none";
-                }
-
-                downIcon.classList.remove("icon","icon-arrow-up","right");
-                downIcon.classList.add("icon","icon-arrow-down","right");
+        $(".icon.icon-arrow-down.right").on('click', function(e){
+            var currentElement = $(e.currentTarget);
+            if (currentElement.hasClass('icon-arrow-down')) {
+                $(this).parents('.menu-block').find('.menubar').show();
+                currentElement.removeClass('icon-arrow-down');
+                currentElement.addClass('icon-arrow-up');
+            } else {
+                $(this).parents('.menu-block').find('.menubar').hide();
+                currentElement.removeClass('icon-arrow-up');
+                currentElement.addClass('icon-arrow-down');
             }
         });
     });
