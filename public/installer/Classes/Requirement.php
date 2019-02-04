@@ -79,7 +79,7 @@ class Requirement {
          *
          * @var _minPhpVersion
          */
-        $_minPhpVersion = '7.0.0';
+        $_minPhpVersion = '7.1.17';
 
         $currentPhpVersion = $this->getPhpVersionInfo();
         $supported = false;

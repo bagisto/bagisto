@@ -559,7 +559,7 @@ h2 {
     top: 10px;
     right: 10px;
     position: fixed;
-    z-index: 6;
+    z-index: 100;
     text-align: left;
 
     .alert {
@@ -970,4 +970,7 @@ modal {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+.pull-right {
+    float:right;
 }

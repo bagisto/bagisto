@@ -13,10 +13,6 @@ use DB;
  */
 class TaxCategoryDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
-    protected $itemsPerPage = 5; //overriding the default items per page
-
     protected $index = 'id';
 
     protected $sortOrder = 'desc'; //asc or desc
@@ -67,23 +63,5 @@ class TaxCategoryDataGrid extends DataGrid
             'route' => 'admin.tax-categories.delete',
             'icon' => 'icon trash-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->prepareMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.products.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
-
-        // $this->prepareMassAction([
-        //     'type' => 'update',
-        //     'action' => route('admin.catalog.products.massupdate'),
-        //     'method' => 'PUT',
-        //     'options' => [
-        //         0 => true,
-        //         1 => false,
-        //     ]
-        // ]);
     }
 }

@@ -2,6 +2,9 @@
 
 Route::group(['middleware' => ['web']], function () {
     Route::prefix('admin')->group(function () {
+
+        Route::get('/', 'Webkul\Admin\Http\Controllers\Controller@redirectToLogin');
+
         // Login Routes
         Route::get('/login', 'Webkul\User\Http\Controllers\SessionController@create')->defaults('_config', [
             'view' => 'admin::users.sessions.create'
@@ -69,7 +72,6 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('customers/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@destroy')->name('admin.customer.delete');
 
-
             Route::get('reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
                 'view' => 'admin::customers.reviews.index'
             ])->name('admin.customer.review.index');
@@ -82,6 +84,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('configuration/{slug?}/{slug2?}', 'Webkul\Admin\Http\Controllers\ConfigurationController@store')->defaults('_config', [
                 'redirect' => 'admin.configuration.index'
             ])->name('admin.configuration.index.store');
+
+            Route::get('configuration/{slug?}/{slug2?}/{path}', 'Webkul\Admin\Http\Controllers\ConfigurationController@download')->defaults('_config', [
+                'redirect' => 'admin.configuration.index'
+            ])->name('admin.configuration.download');
 
             // Reviews Routes
             Route::get('reviews/edit/{id}', 'Webkul\Product\Http\Controllers\ReviewController@edit')->defaults('_config',[

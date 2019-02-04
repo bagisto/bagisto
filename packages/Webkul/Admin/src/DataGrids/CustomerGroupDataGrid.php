@@ -13,10 +13,6 @@ use DB;
  */
 class CustomerGroupDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
-    protected $itemsPerPage = 5; //overriding the default items per page
-
     protected $index = 'id'; //the column that needs to be treated as index column
 
     protected $sortOrder = 'desc'; //asc or desc
@@ -59,23 +55,5 @@ class CustomerGroupDataGrid extends DataGrid
             'route' => 'admin.groups.delete',
             'icon' => 'icon trash-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->prepareMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.products.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
-
-        // $this->prepareMassAction([
-        //     'type' => 'update',
-        //     'action' => route('admin.catalog.products.massupdate'),
-        //     'method' => 'PUT',
-        //     'options' => [
-        //         0 => true,
-        //         1 => false,
-        //     ]
-        // ]);
     }
 }

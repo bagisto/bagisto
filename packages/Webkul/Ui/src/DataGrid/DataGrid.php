@@ -26,7 +26,7 @@ abstract class DataGrid
     protected $parse;
     protected $enableMassAction = false;
     protected $enableAction = false;
-    protected $paginate = false;
+    protected $paginate = true;
     protected $itemsPerPage = 10;
     protected $operators = [
         'eq' => "=",

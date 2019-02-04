@@ -13,10 +13,6 @@ use DB;
  */
 class OrderShipmentsDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
-    protected $itemsPerPage = 5; //overriding the default items per page
-
     protected $index = 'shipment_id';
 
     protected $sortOrder = 'desc'; //asc or desc
@@ -105,13 +101,5 @@ class OrderShipmentsDataGrid extends DataGrid
             'route' => 'admin.sales.shipments.view',
             'icon' => 'icon eye-icon'
         ]);
-    }
-
-    public function prepareMassActions() {
-        // $this->addMassAction([
-        //     'type' => 'delete',
-        //     'action' => route('admin.catalog.attributes.massdelete'),
-        //     'method' => 'DELETE'
-        // ]);
     }
 }

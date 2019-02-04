@@ -28,6 +28,7 @@ class ConfigurationForm extends FormRequest
             'sales.*.*.title'  => 'required',
             'sales.*.*.active'  => 'required',
             'sales.*.*.order_status' => 'required',
+            'sales.*.*.file' => 'max:2048',
         ];
 
         return $this->rules;

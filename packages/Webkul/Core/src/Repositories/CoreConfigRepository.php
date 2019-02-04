@@ -3,6 +3,7 @@
 namespace Webkul\Core\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Core Config Reposotory
@@ -56,7 +57,9 @@ class CoreConfigRepository extends Repository
                 }
 
                 if (getType($value) == 'array') {
-                    $value = implode("," , $value);
+                    if (!$value['delete']) {
+                        $value = implode(",", $value);
+                    }
                 }
 
                 if (isset($field['channel_based']) && $field['channel_based']) {
@@ -86,6 +89,11 @@ class CoreConfigRepository extends Repository
                     }
                 }
 
+                if (request()->hasFile($fieldName)) {
+                    $dir = 'configuration';
+                    $value = request()->file($fieldName)->store($dir);
+                }
+
                 if (! count($coreConfigValue) > 0) {
                     $this->model->create([
                         'code' => $fieldName,
@@ -100,7 +108,13 @@ class CoreConfigRepository extends Repository
                     $updataData['channel_code'] = $channel_based ? $channel : null;
 
                     foreach ($coreConfigValue as $coreConfig) {
-                        $coreConfig->update($updataData);
+                        Storage::delete($coreConfig['value']);
+
+                        if(isset($value['delete'])) {
+                            $this->model->destroy($coreConfig['id']);
+                        } else {
+                            $coreConfig->update($updataData);
+                        }
                     }
                 }
             }

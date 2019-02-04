@@ -5,6 +5,7 @@ namespace Webkul\Category\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Category\Repositories\CategoryRepository as Category;
+use Illuminate\Support\Facades\Event;
 
 /**
  * Catalog category controller

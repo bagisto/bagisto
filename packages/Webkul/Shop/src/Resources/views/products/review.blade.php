@@ -11,8 +11,6 @@
         </span>
 
         <div class="total-reviews">
-            {{ __('shop::app.products.total-reviews', ['total' => $total]) }}
-
             {{ 
                 __('shop::app.products.total-rating', [
                         'total_rating' => $reviewHelper->getTotalRating($product),

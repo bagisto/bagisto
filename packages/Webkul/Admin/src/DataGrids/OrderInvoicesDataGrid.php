@@ -13,10 +13,6 @@ use DB;
  */
 class OrderInvoicesDataGrid extends DataGrid
 {
-    protected $paginate = true;
-
-    protected $itemsPerPage = 5; //overriding the default items per page
-
     protected $index = 'id';
 
     protected $sortOrder = 'desc'; //asc or desc

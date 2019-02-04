@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    <div class="error-container" style="width: 100%; display: flex; justify-content: center;">
+    <div class="error-container" style="padding: 40px; width: 100%; display: flex; justify-content: center;">
 
         <div class="wrapper" style="display: flex; height: 60vh; width: 100%;
             justify-content: start; align-items: center;">
