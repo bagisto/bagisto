@@ -20,10 +20,20 @@ class OrderDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders')
-                ->select('id', 'base_sub_total', 'base_grand_total', 'created_at', 'channel_name', 'status')
-                ->addSelect(DB::raw('CONCAT(customer_first_name, " ", customer_last_name) as full_name'));
+                ->leftJoin('order_address as order_address_shipping', function($leftJoin) {
+                    $leftJoin->on('order_address_shipping.order_id', '=', 'orders.id')
+                        ->where('order_address_shipping.address_type', 'shipping');
+                })
+                ->leftJoin('order_address as order_address_billing', function($leftJoin) {
+                    $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
+                        ->where('order_address_billing.address_type', 'billing');
+                })
+                ->addSelect('orders.id', 'base_sub_total', 'base_grand_total', 'orders.created_at', 'channel_name', 'status')
+                ->addSelect(DB::raw('CONCAT(order_address_billing.first_name, " ", order_address_billing.last_name) as billed_to'))
+                ->addSelect(DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name) as shipped_to'));
 
-        $this->addFilter('full_name', DB::raw('CONCAT(customer_first_name, " ", customer_last_name)'));
+        $this->addFilter('billed_to', DB::raw('CONCAT(order_address_billing.first_name, " ", order_address_billing.last_name)'));
+        $this->addFilter('shipped_to', DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name)'));
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -96,8 +106,16 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'full_name',
+            'index' => 'billed_to',
             'label' => trans('admin::app.datagrid.billed-to'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
+            'index' => 'shipped_to',
+            'label' => trans('admin::app.datagrid.shipped-to'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
