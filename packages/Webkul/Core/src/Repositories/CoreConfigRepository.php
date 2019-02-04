@@ -57,7 +57,7 @@ class CoreConfigRepository extends Repository
                 }
 
                 if (getType($value) == 'array') {
-                    if (!$value['delete']) {
+                    if(! isset($value['delete'])) {
                         $value = implode(",", $value);
                     }
                 }
@@ -94,7 +94,7 @@ class CoreConfigRepository extends Repository
                     $value = request()->file($fieldName)->store($dir);
                 }
 
-                if (! count($coreConfigValue) > 0) {
+                if (! count($coreConfigValue)) {
                     $this->model->create([
                         'code' => $fieldName,
                         'value' => $value,
