@@ -19,6 +19,9 @@ class Category extends TranslatableModel
      */
     public function image_url()
     {
+        if (! $this->image)
+            return;
+
         return Storage::url($this->image);
     }
 

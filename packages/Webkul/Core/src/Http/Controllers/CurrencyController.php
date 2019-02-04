@@ -145,6 +145,8 @@ class CurrencyController extends Controller
                 session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Currency']));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
+
+            session()->flash('error', trans('admin::app.response.currency-delete-error', ['name' => 'Currency']));
         }
 
         return redirect()->back();

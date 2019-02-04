@@ -4,6 +4,7 @@ namespace Webkul\Product\Listeners;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -18,6 +19,13 @@ use Webkul\Product\Models\ProductAttributeValue;
  */
 class ProductFlat
 {
+    /**
+     * AttributeRepository Repository Object
+     *
+     * @var object
+     */
+    protected $attributeRepository;
+
     /**
      * AttributeOptionRepository Repository Object
      *
@@ -63,17 +71,21 @@ class ProductFlat
     /**
      * Create a new listener instance.
      *
+     * @param  Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
      * @param  Webkul\Attribute\Repositories\AttributeOptionRepository     $attributeOptionRepository
      * @param  Webkul\Product\Repositories\ProductFlatRepository           $productFlatRepository
      * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $productAttributeValueRepository
      * @return void
      */
     public function __construct(
+        AttributeRepository $attributeRepository,
         AttributeOptionRepository $attributeOptionRepository,
         ProductFlatRepository $productFlatRepository,
         ProductAttributeValueRepository $productAttributeValueRepository
     )
     {
+        $this->attributeRepository = $attributeRepository;
+
         $this->attributeOptionRepository = $attributeOptionRepository;
 
         $this->productAttributeValueRepository = $productAttributeValueRepository;
@@ -105,8 +117,10 @@ class ProductFlat
         }
     }
 
-    public function afterAttributeDeleted($attribute)
+    public function afterAttributeDeleted($attributeId)
     {
+        $attribute = $this->attributeRepository->find($attributeId);
+        
         if (Schema::hasTable('product_flat')) {
             if (Schema::hasColumn('product_flat', strtolower($attribute->code))) {
                 Schema::table('product_flat', function (Blueprint $table) use($attribute) {
