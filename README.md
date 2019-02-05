@@ -13,10 +13,10 @@
 # Topics
 1. ### [Introduction](#1-introduction-)
 2. ### [Requirements](#2-requirements-)
-3. ### [Configuration](#3-configuration-)
-4. ### [Installation](#4-installation-)
-5. ### [License](#5-license-)
-6. ### [Miscellaneous](#6-miscellaneous-)
+3. ### [Installation & Configuration](#3-configuration-)
+<!-- 4. ### [Installation](#4-installation-) -->
+4. ### [License](#4-license-)
+5. ### [Miscellaneous](#5-miscellaneous-)
 
 ### 1. Introduction <a name="#1-introduction-"></a>:
 
@@ -55,22 +55,54 @@ Bagisto is using power of both of these frameworks and making best out of it out
 * **SERVER**: Apache 2 or NGINX
 * **RAM**: 2 GB or higher.
 * **PHP**: 7.1.17 or higher.
-* **Processor**: Clock Cycle 1Ghz or higher.
+* **Processor**: Clock Cycle 1 Ghz or higher.
 * **Mysql**: 5.7.23 or higher.
 * **Node**: 8.11.3 LTS or higher.
 * **Composer**: 1.6.5 or higher.
 
-### 3. Configuration <a name="#configuration"></a>:
+### 3. Installation & Configuration <a name="#configuration"></a>:
 
-**Run this Command** to download the project on to your local machine or server:
+**Execute these Commands Below As In Their Order** to download the project on to your local machine or server:
 
 > Note: If you have downloaded zip file then ignore this.
 
 ~~~
-composer create-project bagisto/bagisto
+1. composer create-project bagisto/bagisto
 ~~~
 
-if the above command's process was successful, you will find directory **bagisto** and all of the code will be inside it.
+~~~
+2. php artisan migrate
+~~~
+
+~~~
+3. php artisan db:seed
+~~~
+
+~~~
+4. php artisan vendor:publish
+-> Press 0 and then press enter to publish all assets and configurations.
+~~~
+
+~~~
+5. php artisan storage:link
+~~~
+
+~~~
+6. composer dump-autoload
+~~~
+
+> That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
+
+> **Note: you can fetch your admin panel by follow below url:**
+~~~
+http(s)://example.com/admin/login
+~~~
+~~~
+email:admin@example.com
+password:admin123
+~~~
+
+<!-- if the above command's process was successful, you will find directory **bagisto** and all of the code will be inside it.
 
 After it set your **.env** variable, especially the ones below:
 
@@ -83,48 +115,7 @@ After it set your **.env** variable, especially the ones below:
 * **DB_PASSWORD**
 
 Although you have to set the mailer variables also for full functioning of your store for sending emails at various events by
-default.
-
-
-### 4. Installation <a name="#installation"></a>:
-
-**Run these Commands Below**
-
-> Run this command, in case installing from the zip else skip this command (no need to run this command if you are creating project through composer):
-~~~
-composer install
-~~~
-
-> Continue run these command below:
-~~~
-php artisan migrate
-~~~
-~~~
-php artisan db:seed
-~~~
-~~~
-php artisan vendor:publish
-
--> Press 0 and then press enter to publish all assets and configurations.
-~~~
-```
-php artisan storage:link
-```
-
-```
-composer dump-autoload
-```
-
-> That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
-
-> **Note: you can fetch your admin panel by follow below url:**
-~~~
-http(s)://example.com/admin/login
-~~~
-~~~
-email:admin@example.com
-password:admin123
-~~~
+default. -->
 
 ### 5. License <a name="#license"></a>:
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
