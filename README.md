@@ -64,15 +64,15 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 **Execute these Commands Below As In Their Order**
 
-This downloads the code to your local machine or server:
 ~~~
 1. composer create-project bagisto/bagisto
 ~~~
 
-##### Now configure your database:
-if the above command's process was successful, you will find directory **bagisto** and all of the code will be inside it.
+**Now configure your database**
 
-After it set your **.env** variable, especially the ones below:
+If the above command was completed successfully, then you'll find directory **bagisto** and all of the code will be inside it.
+
+Find file **.env** inside **bagisto** directory and set the environment variables listed below:
 
 * **APP_URL**
 * **DB_CONNECTION**
@@ -82,45 +82,54 @@ After it set your **.env** variable, especially the ones below:
 * **DB_USERNAME**
 * **DB_PASSWORD**
 
-Although you have to set the mailer variables also for full functioning of your store for sending emails at various events by
-default.
+Although, mailer environment variables are also required to be set up as **Bagisto** requires emails to send to customers and admins for various functionalities that are built in.
 
-This command is responsible for creating all necessary tables in your database:
 ~~~
 2. php artisan migrate
 ~~~
 
-This command is responsible for inserting demo data in your database tables:
 ~~~
 3. php artisan db:seed
 ~~~
 
-This command will publish all the media, frontend scripts, styles and configurations:
 ~~~
 4. php artisan vendor:publish
 -> Press 0 and then press enter to publish all assets and configurations.
 ~~~
 
-This command is necessary to make symlink between your public folder and storage folder:
 ~~~
 5. php artisan storage:link
 ~~~
 
-It regenerates the autoloading class map, in case some package doesn't get discovered:
 ~~~
 6. composer dump-autoload
 ~~~
 
-> That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
+To execute **Bagisto**:
 
-> **Note: you can fetch your admin panel by follow below url:**
+On server:
+
 ~~~
-http(s)://example.com/admin/login
+Open the specified entry point in your hosts file in browser or make entry in hosts file if not done.
 ~~~
+
+On local:
+
+~~~
+php artisan serve
+~~~
+
+*How to log in as admin*
+
+> *http(s)://example.com/admin/login:*
+
 ~~~
 email:admin@example.com
 password:admin123
 ~~~
+
+> *http(s)://example.com/customer/register*
+
 
 ### 5. License <a name="#license"></a>:
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
