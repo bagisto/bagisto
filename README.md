@@ -64,11 +64,11 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 **1. Try our new GUI installer to install the Bagisto**
 
-#### 1. Download zip from the link below:
+##### 1. Download zip from the link below:
 
 [Bagisto](https://github.com/bagisto/bagisto/archive/v0.1.4.zip)
 
-#### 2. Extract the contents of zip and execute the project in browser:
+##### 2. Extract the contents of zip and execute the project in browser:
 
 ~~~
 http(s)://localhost/bagisto/public
