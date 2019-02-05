@@ -62,7 +62,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 ### 3. Installation & Configuration <a name="#configuration"></a>:
 
-**1. Try our new GUI installer to install the Bagisto:**
+**1. Try our new GUI installer to install Bagisto:**
 
 ##### 1. Download zip from the link below:
 
@@ -82,13 +82,13 @@ http(s)://example.com/public
 
 **2. Try our old fashioned way to install Bagisto:**
 
-#### Execute these commands below as in their order
+##### Execute these commands below as in their order
 
 ~~~
 1. composer create-project bagisto/bagisto
 ~~~
 
-**Now configure your database**
+**Now configure your database:**
 
 If the above command was completed successfully, then you'll find directory **bagisto** and all of the code will be inside it.
 
@@ -128,13 +128,13 @@ Although, mailer environment variables are also required to be set up as **Bagis
 
 **To execute Bagisto**:
 
-**On server:**
+#####On server:
 
 ~~~
 Open the specified entry point in your hosts file in browser or make entry in hosts file if not done.
 ~~~
 
-**On local:**
+#####On local:
 
 ~~~
 php artisan serve
