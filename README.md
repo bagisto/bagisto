@@ -62,7 +62,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 ### 3. Installation & Configuration <a name="#configuration"></a>:
 
-**1. Try our new GUI installer to install the Bagisto**
+**1. Try our new GUI installer to install the Bagisto:**
 
 ##### 1. Download zip from the link below:
 
@@ -80,7 +80,7 @@ or
 http(s)://example.com/public
 ~~~
 
-**2. Try our old fashioned way to install Bagisto**
+**2. Try our old fashioned way to install Bagisto:**
 
 ***Execute these commands below as in their order***
 
@@ -125,19 +125,21 @@ Although, mailer environment variables are also required to be set up as **Bagis
 6. composer dump-autoload
 ~~~
 
-To execute **Bagisto**:
 
-On server:
+**To execute Bagisto**:
+
+**On server:**
 
 ~~~
 Open the specified entry point in your hosts file in browser or make entry in hosts file if not done.
 ~~~
 
-On local:
+**On local:**
 
 ~~~
 php artisan serve
 ~~~
+
 
 **How to log in as admin:**
 
