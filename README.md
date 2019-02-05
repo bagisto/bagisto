@@ -62,7 +62,27 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 ### 3. Installation & Configuration <a name="#configuration"></a>:
 
-**Execute these Commands Below As In Their Order**
+**1. Try our new GUI installer to install the Bagisto**
+
+#### 1. Download zip from the link below:
+
+[Bagisto](https://github.com/bagisto/bagisto/archive/v0.1.4.zip)
+
+#### 2. Extract the contents of zip and execute the project in browser:
+
+~~~
+http(s)://localhost/bagisto/public
+~~~
+
+or
+
+~~~
+http(s)://example.com/public
+~~~
+
+**2. Try our old fashioned way to install Bagisto**
+
+***Execute these commands below as in their order***
 
 ~~~
 1. composer create-project bagisto/bagisto
@@ -119,14 +139,18 @@ On local:
 php artisan serve
 ~~~
 
-*How to log in as admin*
+**How to log in as admin:**
 
-> *http(s)://example.com/admin/login:*
+> *http(s)://example.com/admin/login*
 
 ~~~
 email:admin@example.com
 password:admin123
 ~~~
+
+**How to log in as customer:**
+
+*You can directly register as customer and then login.*
 
 > *http(s)://example.com/customer/register*
 
