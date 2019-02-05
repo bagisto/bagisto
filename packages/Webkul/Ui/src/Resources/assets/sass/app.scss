@@ -292,6 +292,7 @@ h2 {
     .control-group {
         width: 100%;
         margin-bottom: 0;
+        min-width: 140px;
 
         .control {
             width: 100%;
@@ -320,7 +321,7 @@ h2 {
             }
 
             tr {
-                border: 1px solid #C7C7C7;
+                border: 1px solid $control-border-color;
             }
         }
     }

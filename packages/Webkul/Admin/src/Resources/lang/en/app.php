@@ -130,6 +130,7 @@ return [
         'order-date' => 'Order Date',
         'channel-name' => 'Channel Name',
         'billed-to' => 'Billed To',
+        'shipped-to' => 'Shipped To',
         'order-id' => 'Order Id',
         'invoice-date' => 'Invoice Date',
         'total-qty' => 'Total Qty',
@@ -761,6 +762,7 @@ return [
         'user-define-error' => 'Can not delete system :name',
         'attribute-error' => ':name is used in configurable products.',
         'attribute-product-error' => ':name is used in products.',
-        'customer-associate' => ':name can not be deleted because customer is associated with this group.'
+        'customer-associate' => ':name can not be deleted because customer is associated with this group.',
+        'currency-delete-error' => 'This currency is set as channel base currency so it can not be deleted.'
     ],
 ];

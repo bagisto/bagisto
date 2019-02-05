@@ -74,7 +74,7 @@ class CustomerReviewDataGrid extends DataGrid
             'wrapper' => function ($value) {
                 if ($value->product_review_status == 'approved')
                     return '<span class="badge badge-md badge-success">Approved</span>';
-                else if ($value == "pending")
+                else if ($value->product_review_status == "pending")
                     return '<span class="badge badge-md badge-warning">Pending</span>';
             },
         ]);
