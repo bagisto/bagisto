@@ -128,13 +128,13 @@ Although, mailer environment variables are also required to be set up as **Bagis
 
 **To execute Bagisto**:
 
-#####On server:
+##### On server:
 
 ~~~
 Open the specified entry point in your hosts file in browser or make entry in hosts file if not done.
 ~~~
 
-#####On local:
+##### On local:
 
 ~~~
 php artisan serve
