@@ -82,7 +82,7 @@ http(s)://example.com/public
 
 **2. Try our old fashioned way to install Bagisto:**
 
-***Execute these commands below as in their order***
+#### Execute these commands below as in their order
 
 ~~~
 1. composer create-project bagisto/bagisto
