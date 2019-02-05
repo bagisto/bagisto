@@ -13,7 +13,7 @@
 # Topics
 1. ### [Introduction](#1-introduction-)
 2. ### [Requirements](#2-requirements-)
-3. ### [Installation & Configuration](#3-configuration-)
+3. ### [Installation & Configuration](#3-installation--configuration-)
 <!-- 4. ### [Installation](#4-installation-) -->
 4. ### [License](#4-license-)
 5. ### [Miscellaneous](#5-miscellaneous-)
@@ -62,31 +62,51 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 ### 3. Installation & Configuration <a name="#configuration"></a>:
 
-**Execute these Commands Below As In Their Order** to download the project on to your local machine or server:
+**Execute these Commands Below As In Their Order**
 
-> Note: If you have downloaded zip file then ignore this.
-
+This downloads the code to your local machine or server:
 ~~~
 1. composer create-project bagisto/bagisto
 ~~~
 
+##### Now configure your database:
+if the above command's process was successful, you will find directory **bagisto** and all of the code will be inside it.
+
+After it set your **.env** variable, especially the ones below:
+
+* **APP_URL**
+* **DB_CONNECTION**
+* **DB_HOST**
+* **DB_PORT**
+* **DB_DATABASE**
+* **DB_USERNAME**
+* **DB_PASSWORD**
+
+Although you have to set the mailer variables also for full functioning of your store for sending emails at various events by
+default.
+
+This command is responsible for creating all necessary tables in your database:
 ~~~
 2. php artisan migrate
 ~~~
 
+This command is responsible for inserting demo data in your database tables:
 ~~~
 3. php artisan db:seed
 ~~~
 
+This command will publish all the media, frontend scripts, styles and configurations:
 ~~~
 4. php artisan vendor:publish
 -> Press 0 and then press enter to publish all assets and configurations.
 ~~~
 
+This command is necessary to make symlink between your public folder and storage folder:
 ~~~
 5. php artisan storage:link
 ~~~
 
+It regenerates the autoloading class map, in case some package doesn't get discovered:
 ~~~
 6. composer dump-autoload
 ~~~
@@ -101,21 +121,6 @@ http(s)://example.com/admin/login
 email:admin@example.com
 password:admin123
 ~~~
-
-<!-- if the above command's process was successful, you will find directory **bagisto** and all of the code will be inside it.
-
-After it set your **.env** variable, especially the ones below:
-
-* **APP_URL**
-* **DB_CONNECTION**
-* **DB_HOST**
-* **DB_PORT**
-* **DB_DATABASE**
-* **DB_USERNAME**
-* **DB_PASSWORD**
-
-Although you have to set the mailer variables also for full functioning of your store for sending emails at various events by
-default. -->
 
 ### 5. License <a name="#license"></a>:
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
