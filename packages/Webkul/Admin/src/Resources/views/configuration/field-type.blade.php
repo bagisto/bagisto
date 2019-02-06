@@ -49,15 +49,15 @@
 
         @if ($field['type'] == 'text')
 
-            <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="{{ $field['name'] }}">
+            <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;">
 
         @elseif ($field['type'] == 'textarea')
 
-            <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="{{ $field['name'] }}">{{ old($name) ?: core()->getConfigData($name) }}</textarea>
+            <textarea v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;">{{ old($name) ?: core()->getConfigData($name) }}</textarea>
 
         @elseif ($field['type'] == 'select')
 
-            <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="{{ $field['name'] }}" >
+            <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;" >
 
                 <?php
                     $selectedOption = core()->getConfigData($name) ?? '';
@@ -91,7 +91,7 @@
 
         @elseif ($field['type'] == 'multiselect')
 
-            <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]" data-vv-as="{{ $field['name'] }}"  multiple>
+            <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]" data-vv-as="&quot;{{ $field['name'] }}&quot;"  multiple>
 
                 <?php
                     $selectedOption = core()->getConfigData($name) ?? '';
@@ -141,7 +141,7 @@
 
         @elseif ($field['type'] == 'boolean')
 
-            <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="{{ $field['name'] }}">
+            <select v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" data-vv-as="&quot;{{ $field['name'] }}&quot;">
 
                 <?php
                     $selectedOption = core()->getConfigData($name) ?? '';
@@ -170,7 +170,7 @@
                 </a>
             @endif
 
-            <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="{{ $field['name'] }}" style="padding-top: 5px;">
+            <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;" style="padding-top: 5px;">
 
             @if ($result)
                 <div class="control-group" style="margin-top: 5px;">
@@ -197,7 +197,7 @@
                 </a>
             @endif
 
-            <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="{{ $field['name'] }}" style="padding-top: 5px;">
+            <input type="file" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;" style="padding-top: 5px;">
 
             @if ($result)
                 <div class="control-group" style="margin-top: 5px;">
@@ -222,7 +222,7 @@
 <script type="text/x-template" id="country-template">
 
     <div>
-        <select type="text" v-validate="'required'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][country]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][country]" v-model="country" data-vv-as="{{ __('admin::app.customers.customers.country') }}" @change="someHandler">
+        <select type="text" v-validate="'required'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][country]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][country]" v-model="country" data-vv-as="&quot;{{ __('admin::app.customers.customers.country') }}&quot;" @change="someHandler">
             <option value=""></option>
 
             @foreach (core()->countries() as $country)
@@ -264,9 +264,9 @@
 <script type="text/x-template" id="state-template">
 
     <div>
-        <input type="text" v-validate="'required'" v-if="!haveStates()" class="control" v-model="state" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" data-vv-as="{{ __('admin::app.customers.customers.state') }}"/>
+        <input type="text" v-validate="'required'" v-if="!haveStates()" class="control" v-model="state" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;"/>
 
-        <select v-validate="'required'" v-if="haveStates()" class="control" v-model="state" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" data-vv-as="{{ __('admin::app.customers.customers.state') }}" >
+        <select v-validate="'required'" v-if="haveStates()" class="control" v-model="state" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][state]" data-vv-as="&quot;{{ __('admin::app.customers.customers.state') }}&quot;" >
 
             <option value="">{{ __('admin::app.customers.customers.select-state') }}</option>
 
