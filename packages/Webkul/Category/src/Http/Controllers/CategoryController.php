@@ -137,11 +137,15 @@ class CategoryController extends Controller
     {
         Event::fire('catalog.category.delete.before', $id);
 
-        $this->category->delete($id);
+        if(strtolower($this->category->find($id)->name) == "root") {
+            session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
+        } else {
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
-        Event::fire('catalog.category.delete.after', $id);
+            $this->category->delete($id);
 
-        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
+            Event::fire('catalog.category.delete.after', $id);
+        }
 
         return redirect()->back();
     }
@@ -154,7 +158,7 @@ class CategoryController extends Controller
     public function massDestroy() {
         $suppressFlash = false;
 
-        if (request()->isMethod('delete')) {
+        if (request()->isMethod('delete') || request()->isMethod('post')) {
             $indexes = explode(',', request()->input('indexes'));
 
             foreach ($indexes as $key => $value) {
