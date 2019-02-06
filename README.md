@@ -14,7 +14,6 @@
 1. ### [Introduction](#1-introduction-)
 2. ### [Requirements](#2-requirements-)
 3. ### [Installation & Configuration](#3-installation--configuration-)
-<!-- 4. ### [Installation](#4-installation-) -->
 4. ### [License](#4-license-)
 5. ### [Miscellaneous](#5-miscellaneous-)
 
@@ -56,7 +55,8 @@ Bagisto is using power of both of these frameworks and making best out of it out
 * **RAM**: 2 GB or higher.
 * **PHP**: 7.1.17 or higher.
 * **Processor**: Clock Cycle 1 Ghz or higher.
-* **Mysql**: 5.7.23 or higher.
+* **For MySQL users**: 5.7.23 or higher.
+* **For MariaDB users**: 10.2.7 or Higher.
 * **Node**: 8.11.3 LTS or higher.
 * **Composer**: 1.6.5 or higher.
 
