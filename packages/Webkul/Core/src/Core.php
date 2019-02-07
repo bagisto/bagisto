@@ -592,6 +592,24 @@ class Core
     }
 
     /**
+     * Retrieve all grouped states by country code
+     *
+     * @return Collection
+     */
+    public function findStateByCountryCode($countryCode = null, $stateCode = null)
+    {
+        $collection = array();
+
+        $collection = $this->countryStateRepository->findByField(['country_code' => $countryCode, 'code' => $stateCode]);
+
+        if(count($collection)) {
+            return $collection->first();
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Returns time intervals
      *
      * @return array
