@@ -66,7 +66,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 ##### a. Download zip from the link below:
 
-[Bagisto](https://github.com/bagisto/bagisto/archive/v0.1.4.zip)
+[Download](https://github.com/bagisto/bagisto/archive/v0.1.4.zip)
 
 ##### b. Extract the contents of zip and execute the project in browser:
 
