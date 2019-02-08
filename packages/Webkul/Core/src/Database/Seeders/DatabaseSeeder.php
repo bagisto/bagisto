@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(LocalesTableSeeder::class);
         $this->call(CurrencyTableSeeder::class);
+        $this->call(CurrenySymbolTableSeeder::class);
         $this->call(CountriesTableSeeder::class);
         $this->call(StatesTableSeeder::class);
         $this->call(ChannelTableSeeder::class);

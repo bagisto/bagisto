@@ -5,6 +5,7 @@ namespace Webkul\Category\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Category\Repositories\CategoryRepository as Category;
+use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Support\Facades\Event;
 
 /**
@@ -74,8 +75,20 @@ class CategoryController extends Controller
         $this->validate(request(), [
             'slug' => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
             'name' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,bmp,png'
+            'image.*' => 'mimes:jpeg, jpg, bmp, png'
         ]);
+
+        if (strtolower(request()->input('name')) == 'root') {
+            $categoryTransalation = new CategoryTranslation();
+
+            $result = $categoryTransalation->where('name', request()->input('name'))->get();
+
+            if(count($result) > 0) {
+                session()->flash('error', trans('admin::app.response.create-root-failure'));
+
+                return redirect()->back();
+            }
+        }
 
         $category = $this->category->create(request()->all());
 
