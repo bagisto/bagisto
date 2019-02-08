@@ -110,8 +110,9 @@ class CustomerReviewDataGrid extends DataGrid
             'action' => route('admin.customer.review.massupdate'),
             'method' => 'PUT',
             'options' => [
-                'Disapprove' => 0,
-                'Approve' => 1
+                'Pending' => 0,
+                'Approve' => 1,
+                'Disapprove' => 2
             ]
         ]);
     }
