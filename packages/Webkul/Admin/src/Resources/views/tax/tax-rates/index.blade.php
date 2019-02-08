@@ -50,10 +50,10 @@
 
             <form method="POST" action="{{ route('admin.tax-rates.import') }}" enctype="multipart/form-data" @submit.prevent="onSubmit">
                 @csrf()
-                <div class="control-group" :class="[errors.has('tax_rate') ? 'has-error' : '']">
-                    <label for="tax_rate" class="required">{{ __('admin::app.export.file') }}</label>
-                    <input v-validate="'required|mimes:doc,csv,xlsx,xls'" type="file" class="control" id="tax_rate" name="tax_rate" data-vv-as="&quot;{{ __('admin::app.export.file') }}&quot;" value="{{ old('tax_rate') }}"/ style="padding-top: 5px">
-                    <span class="control-error" v-if="errors.has('tax_rate')">@{{ errors.first('tax_rate') }}</span>
+                <div class="control-group" :class="[errors.has('file') ? 'has-error' : '']">
+                    <label for="file" class="required">{{ __('admin::app.export.file') }}</label>
+                    <input v-validate="'required'" type="file" class="control" id="file" name="file" data-vv-as="&quot;{{ __('admin::app.export.file') }}&quot;" value="{{ old('file') }}"/ style="padding-top: 5px">
+                    <span class="control-error" v-if="errors.has('file')">@{{ errors.first('file') }}</span>
                 </div>
 
                 <button type="submit" class="btn btn-lg btn-primary">

@@ -177,85 +177,94 @@ class TaxRateController extends Controller
      */
     public function import() {
 
-        $excelData = (new DataGridImport)->toArray(request()->file('tax_rate'));
+        $fileType = Validator::make(request()->all(), [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
 
-        foreach ($excelData as $data) {
-            foreach ($data as $column => $uploadData) {
-                $validator = Validator::make($uploadData, [
-                    'identifier' => 'required|string',
-                    'state' => 'required|string',
-                    'country' => 'required|string',
-                    'tax_rate' => 'required|numeric'
-                ]);
-
-                if ($validator->fails()) {
-                    $failedRules[$column+1] = $validator->errors();
-                }
-
-                $identiFier[$column+1] = $uploadData['identifier'];
-            }
-
-            $identiFierCount = array_count_values($identiFier);
-
-            $filtered = array_filter($identiFier, function ($value) use ($identiFierCount) {
-                return $identiFierCount[$value] > 1;
-            });
-        }
-
-        if ($filtered) {
-            foreach ($filtered as $position => $identifier) {
-                $message[] = 'Identifier must be unique, duplicate identifier' . ' ' . $identifier. ' at row' . ' ' . $position. '.';
-            }
-            $finalMsg = implode(" ", $message);
-
-            session()->flash('error', $finalMsg);
+        if ($fileType->fails()) {
+            $fileErrorMsg = $fileType->errors()->first('file');
+            session()->flash('error', $fileErrorMsg);
         } else {
-            $errorMsg = [];
+            $excelData = (new DataGridImport)->toArray(request()->file('tax_rate'));
 
-            if (isset($failedRules)) {
-                foreach ($failedRules as $coulmn => $fail) {
-                    if ($fail->first('identifier')){
-                        $errorMsg[$coulmn] = $fail->first('identifier');
-                    } else if ($fail->first('tax_rate')) {
-                        $errorMsg[$coulmn] = $fail->first('tax_rate');
-                    } else if ($fail->first('country')) {
-                        $errorMsg[$coulmn] = $fail->first('country');
-                    } else if ($fail->first('state')) {
-                        $errorMsg[$coulmn] = $fail->first('state');
+            foreach ($excelData as $data) {
+                foreach ($data as $column => $uploadData) {
+                    $validator = Validator::make($uploadData, [
+                        'identifier' => 'required|string',
+                        'state' => 'required|string',
+                        'country' => 'required|string',
+                        'tax_rate' => 'required|numeric'
+                    ]);
+
+                    if ($validator->fails()) {
+                        $failedRules[$column+1] = $validator->errors();
                     }
+
+                    $identiFier[$column+1] = $uploadData['identifier'];
                 }
 
-                foreach ($errorMsg as $key => $msg) {
-                    $msg = str_replace(".", "", $msg);
-                    $message[] = $msg. ' at Row '  .$key . '.';
-                }
+                $identiFierCount = array_count_values($identiFier);
 
+                $filtered = array_filter($identiFier, function ($value) use ($identiFierCount) {
+                    return $identiFierCount[$value] > 1;
+                });
+            }
+
+            if ($filtered) {
+                foreach ($filtered as $position => $identifier) {
+                    $message[] = 'Identifier must be unique, duplicate identifier' . ' ' . $identifier. ' at row' . ' ' . $position. '.';
+                }
                 $finalMsg = implode(" ", $message);
 
                 session()->flash('error', $finalMsg);
             } else {
-                $taxRate = $this->taxRate->get()->toArray();
+                $errorMsg = [];
 
-                foreach ($taxRate as $rate) {
-                    $rateIdentifier[$rate['id']] = $rate['identifier'];
-                }
+                if (isset($failedRules)) {
+                    foreach ($failedRules as $coulmn => $fail) {
+                        if ($fail->first('identifier')){
+                            $errorMsg[$coulmn] = $fail->first('identifier');
+                        } else if ($fail->first('tax_rate')) {
+                            $errorMsg[$coulmn] = $fail->first('tax_rate');
+                        } else if ($fail->first('country')) {
+                            $errorMsg[$coulmn] = $fail->first('country');
+                        } else if ($fail->first('state')) {
+                            $errorMsg[$coulmn] = $fail->first('state');
+                        }
+                    }
 
-                foreach ($excelData as $data) {
-                    foreach ($data as $column => $uploadData) {
-                        if (isset($rateIdentifier)) {
-                            $id = array_search($uploadData['identifier'], $rateIdentifier);
-                            if ($id) {
-                                $this->taxRate->update($uploadData, $id);
+                    foreach ($errorMsg as $key => $msg) {
+                        $msg = str_replace(".", "", $msg);
+                        $message[] = $msg. ' at Row '  .$key . '.';
+                    }
+
+                    $finalMsg = implode(" ", $message);
+
+                    session()->flash('error', $finalMsg);
+                } else {
+                    $taxRate = $this->taxRate->get()->toArray();
+
+                    foreach ($taxRate as $rate) {
+                        $rateIdentifier[$rate['id']] = $rate['identifier'];
+                    }
+
+                    foreach ($excelData as $data) {
+                        foreach ($data as $column => $uploadData) {
+                            if (isset($rateIdentifier)) {
+                                $id = array_search($uploadData['identifier'], $rateIdentifier);
+                                if ($id) {
+                                    $this->taxRate->update($uploadData, $id);
+                                } else {
+                                    $this->taxRate->create($uploadData);
+                                }
                             } else {
                                 $this->taxRate->create($uploadData);
                             }
-                        } else {
-                            $this->taxRate->create($uploadData);
                         }
                     }
-                }
 
-                session()->flash('success', trans('admin::app.response.upload-success', ['name' => 'Tax Rate']));
+                    session()->flash('success', trans('admin::app.response.upload-success', ['name' => 'Tax Rate']));
+                }
             }
         }
 
