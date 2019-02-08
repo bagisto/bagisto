@@ -701,7 +701,8 @@ return [
             'status' => 'Status',
             'comment' => 'Comment',
             'pending' => 'Pending',
-            'approved' => 'Approved'
+            'approved' => 'Approve',
+            'disapproved' => 'Disapprove'
         ],
 
         'subscribers' => [
