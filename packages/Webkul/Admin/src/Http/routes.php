@@ -599,6 +599,10 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.tax-rates.update');
 
             Route::get('/tax-rates/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@destroy')->name('admin.tax-rates.delete');
+
+            Route::post('/tax-rates/import', 'Webkul\Tax\Http\Controllers\TaxRateController@import')->defaults('_config', [
+                'redirect' => 'admin.tax-rates.index'
+            ])->name('admin.tax-rates.import');
             //tax rate ends
 
             //DataGrid Export
