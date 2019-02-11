@@ -177,15 +177,12 @@ class TaxRateController extends Controller
      */
     public function import() {
 
-        $fileType = Validator::make(request()->all(), [
-            'file' => 'required|mimes:csv,xls,xlsx'
-        ]);
+        $valid_extension = ['xlsx', 'csv', 'xls'];
 
-        if ($fileType->fails()) {
-            $fileErrorMsg = $fileType->errors()->first('file');
-            session()->flash('error', $fileErrorMsg);
+        if (!in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
+            session()->flash('error', trans('admin::app.export.upload-error'));
         } else {
-            $excelData = (new DataGridImport)->toArray(request()->file('tax_rate'));
+            $excelData = (new DataGridImport)->toArray(request()->file('file'));
 
             foreach ($excelData as $data) {
                 foreach ($data as $column => $uploadData) {
@@ -212,7 +209,7 @@ class TaxRateController extends Controller
 
             if ($filtered) {
                 foreach ($filtered as $position => $identifier) {
-                    $message[] = 'Identifier must be unique, duplicate identifier' . ' ' . $identifier. ' at row' . ' ' . $position. '.';
+                    $message[] = trans('admin::app.export.duplicate-error', ['identifier' => $identifier, 'position' => $position]);
                 }
                 $finalMsg = implode(" ", $message);
 

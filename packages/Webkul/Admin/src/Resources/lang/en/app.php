@@ -754,7 +754,9 @@ return [
         'upload' => 'Upload',
         'csv' => 'CSV',
         'xls' => 'XLS',
-        'file' => 'File'
+        'file' => 'File',
+        'upload-error' => 'The file must be a file of type: xls, xlsx, csv.',
+        'duplicate-error' => 'Identifier must be unique, duplicate identifier :identifier at row :position.'
     ],
 
     'response' => [
