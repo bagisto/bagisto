@@ -76,6 +76,8 @@ class CustomerReviewDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-success">Approved</span>';
                 else if ($value->product_review_status == "pending")
                     return '<span class="badge badge-md badge-warning">Pending</span>';
+                else if ($value->product_review_status == "disapproved")
+                    return '<span class="badge badge-md badge-danger">Disapproved</span>';
             },
         ]);
     }
@@ -108,8 +110,9 @@ class CustomerReviewDataGrid extends DataGrid
             'action' => route('admin.customer.review.massupdate'),
             'method' => 'PUT',
             'options' => [
-                'Disapprove' => 0,
-                'Approve' => 1
+                'Pending' => 0,
+                'Approve' => 1,
+                'Disapprove' => 2
             ]
         ]);
     }

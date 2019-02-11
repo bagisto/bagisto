@@ -183,6 +183,8 @@ class ReviewController extends Controller
                             Event::fire('customer.review.update.after', $review);
                         } else if ($data['update-options'] == 0) {
                             $review->update(['status' => 'pending']);
+                        } else if ($data['update-options'] == 2) {
+                            $review->update(['status' => 'disapproved']);
                         } else {
                             continue;
                         }
