@@ -4,7 +4,6 @@ namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Models\CurrencyExchangeRate;
-use Webkul\Core\Models\CurrencyCodeSymbol;
 
 class Currency extends Model
 {
@@ -23,9 +22,5 @@ class Currency extends Model
     public function CurrencyExchangeRate()
     {
         return $this->hasOne(CurrencyExchangeRate::class, 'target_currency');
-    }
-
-    public function getCurrencySymbol() {
-        return $this->hasOne(CurrencyCodeSymbol::class, 'code', 'code');
     }
 }
