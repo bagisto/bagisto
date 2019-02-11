@@ -215,7 +215,7 @@ class DashboardController extends Controller
             ->addSelect(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
             ->addSelect(DB::raw('COUNT(products.id) as total_products'))
             ->addSelect('order_items.id', 'categories.id as category_id', 'category_translations.name')
-            ->groupBy('category_id')
+            ->groupBy('categories.id')
             ->orderBy('total_qty_ordered', 'DESC')
             ->limit(5)
             ->get();

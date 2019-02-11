@@ -228,6 +228,7 @@
                 template: '#datagrid-filters',
 
                 data: () => ({
+                    filterIndex: @json($results['index']),
                     gridCurrentData: @json($results['records']),
                     massActions: @json($results['massactions']),
                     massActionsToggle: false,
@@ -338,7 +339,15 @@
                         if (this.type == 'string') {
                             this.formURL(this.columnOrAlias, this.stringCondition, this.stringValue, label)
                         } else if (this.type == 'number') {
-                            this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
+                            indexConditions = true;
+                            if (this.filterIndex == this.columnOrAlias && (this.numberValue == 0 || this.numberValue < 0)) {
+                                    indexConditions = false;
+
+                                    alert('index columns can have values greater than zero only');
+                            }
+
+                            if(indexConditions)
+                                this.formURL(this.columnOrAlias, this.numberCondition, this.numberValue, label);
                         } else if (this.type == 'boolean') {
                             this.formURL(this.columnOrAlias, this.booleanCondition, this.booleanValue, label);
                         } else if (this.type == 'datetime') {

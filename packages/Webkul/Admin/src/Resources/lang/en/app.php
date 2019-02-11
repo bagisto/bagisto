@@ -701,7 +701,8 @@ return [
             'status' => 'Status',
             'comment' => 'Comment',
             'pending' => 'Pending',
-            'approved' => 'Approved'
+            'approved' => 'Approve',
+            'disapproved' => 'Disapprove'
         ],
 
         'subscribers' => [
@@ -769,6 +770,8 @@ return [
         'attribute-product-error' => ':name is used in products.',
         'customer-associate' => ':name can not be deleted because customer is associated with this group.',
         'currency-delete-error' => 'This currency is set as channel base currency so it can not be deleted.',
-        'upload-success' => ':name uploaded successfully.'
+        'upload-success' => ':name uploaded successfully.',
+        'delete-category-root' => 'Cannot delete the root category',
+        'create-root-failure' => 'Category with name root already exists'
     ],
 ];

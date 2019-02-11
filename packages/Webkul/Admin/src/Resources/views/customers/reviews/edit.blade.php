@@ -12,7 +12,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
-                        
+
                         {{ __('admin::app.customers.reviews.edit-title') }}
                     </h1>
                 </div>
@@ -51,11 +51,16 @@
                             <div class="control-group">
                                 <label for="name" class="required">{{ __('admin::app.customers.reviews.status') }}</label>
                                 <select  class="control" name="status">
-                                    <option value="pending" {{ $review->status == "pending" ? 'selected' : ''}}>
-                                        {{ __('admin::app.customers.reviews.pending') }}
-                                    </option>
                                     <option value="approved" {{ $review->status == "approved" ? 'selected' : '' }}>
                                         {{ __('admin::app.customers.reviews.approved') }}
+                                    </option>
+
+                                    <option value="disapproved" {{ $review->status == "disapproved" ? 'selected' : ''}}>
+                                        {{ __('admin::app.customers.reviews.disapproved') }}
+                                    </option>
+
+                                    <option value="pending" {{ $review->status == "pending" ? 'selected' : ''}}>
+                                        {{ __('admin::app.customers.reviews.pending') }}
                                     </option>
                                 </select>
                             </div>

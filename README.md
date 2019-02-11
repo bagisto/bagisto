@@ -13,10 +13,9 @@
 # Topics
 1. ### [Introduction](#1-introduction-)
 2. ### [Requirements](#2-requirements-)
-3. ### [Configuration](#3-configuration-)
-4. ### [Installation](#4-installation-)
-5. ### [License](#5-license-)
-6. ### [Miscellaneous](#6-miscellaneous-)
+3. ### [Installation & Configuration](#3-installation--configuration-)
+4. ### [License](#4-license-)
+5. ### [Miscellaneous](#5-miscellaneous-)
 
 ### 1. Introduction <a name="#1-introduction-"></a>:
 
@@ -55,24 +54,45 @@ Bagisto is using power of both of these frameworks and making best out of it out
 * **SERVER**: Apache 2 or NGINX
 * **RAM**: 2 GB or higher.
 * **PHP**: 7.1.17 or higher.
-* **Processor**: Clock Cycle 1Ghz or higher.
-* **Mysql**: 5.7.23 or higher.
+* **Processor**: Clock Cycle 1 Ghz or higher.
+* **For MySQL users**: 5.7.23 or higher.
+* **For MariaDB users**: 10.2.7 or Higher.
 * **Node**: 8.11.3 LTS or higher.
 * **Composer**: 1.6.5 or higher.
 
-### 3. Configuration <a name="#configuration"></a>:
+### 3. Installation & Configuration <a name="#configuration"></a>:
 
-**Run this Command** to download the project on to your local machine or server:
+**1. Try our new GUI installer to install Bagisto:**
 
-> Note: If you have downloaded zip file then ignore this.
+##### a. Download zip from the link below:
+
+[Download](https://github.com/bagisto/bagisto/archive/v0.1.4.zip)
+
+##### b. Extract the contents of zip and execute the project in browser:
 
 ~~~
-composer create-project bagisto/bagisto
+http(s)://localhost/bagisto/public
 ~~~
 
-if the above command's process was successful, you will find directory **bagisto** and all of the code will be inside it.
+or
 
-After it set your **.env** variable, especially the ones below:
+~~~
+http(s)://example.com/public
+~~~
+
+**2. Try our old fashioned way to install Bagisto:**
+
+##### Execute these commands below as in their order
+
+~~~
+1. composer create-project bagisto/bagisto
+~~~
+
+**Now configure your database:**
+
+If the above command was completed successfully, then you'll find directory **bagisto** and all of the code will be inside it.
+
+Find file **.env** inside **bagisto** directory and set the environment variables listed below:
 
 * **APP_URL**
 * **DB_CONNECTION**
@@ -82,49 +102,60 @@ After it set your **.env** variable, especially the ones below:
 * **DB_USERNAME**
 * **DB_PASSWORD**
 
-Although you have to set the mailer variables also for full functioning of your store for sending emails at various events by
-default.
+Although, mailer environment variables are also required to be set up as **Bagisto** requires emails to send to customers and admins for various functionalities that are built in.
 
-
-### 4. Installation <a name="#installation"></a>:
-
-**Run these Commands Below**
-
-> Run this command, in case installing from the zip else skip this command (no need to run this command if you are creating project through composer):
 ~~~
-composer install
+2. php artisan migrate
 ~~~
 
-> Continue run these command below:
 ~~~
-php artisan migrate
+3. php artisan db:seed
 ~~~
-~~~
-php artisan db:seed
-~~~
-~~~
-php artisan vendor:publish
 
+~~~
+4. php artisan vendor:publish
 -> Press 0 and then press enter to publish all assets and configurations.
 ~~~
-```
-php artisan storage:link
-```
 
-```
-composer dump-autoload
-```
-
-> That's it, now just execute the project on your specified domain entry point pointing to public folder inside installation directory.
-
-> **Note: you can fetch your admin panel by follow below url:**
 ~~~
-http(s)://example.com/admin/login
+5. php artisan storage:link
 ~~~
+
+~~~
+6. composer dump-autoload
+~~~
+
+
+**To execute Bagisto**:
+
+##### On server:
+
+~~~
+Open the specified entry point in your hosts file in browser or make entry in hosts file if not done.
+~~~
+
+##### On local:
+
+~~~
+php artisan serve
+~~~
+
+
+**How to log in as admin:**
+
+> *http(s)://example.com/admin/login*
+
 ~~~
 email:admin@example.com
 password:admin123
 ~~~
+
+**How to log in as customer:**
+
+*You can directly register as customer and then login.*
+
+> *http(s)://example.com/customer/register*
+
 
 ### 5. License <a name="#license"></a>:
 Bagisto is a truly opensource E-Commerce framework which will always be free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).

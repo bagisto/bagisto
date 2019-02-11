@@ -46,10 +46,8 @@ class SessionController extends Controller
             return redirect()->route('admin.dashboard.index');
         } else {
             session()->put('url.intended', url()->previous());
-
             return view($this->_config['view']);
         }
-
     }
 
     /**
