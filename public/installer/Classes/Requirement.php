@@ -20,9 +20,9 @@ class Requirement {
                 'JSON',
                 'cURL',
             ],
-            'apache' => [
-                'mod_rewrite',
-            ]
+            // 'apache' => [
+            //     'mod_rewrite',
+            // ]
         ];
 
         $results = [];
@@ -43,24 +43,25 @@ class Requirement {
                             $results['errors'] = true;
                         }
                     }
-                    break;
+                break;
+
                 // check apache requirements
-                case 'apache':
-                    foreach ($requirements[$type] as $requirement) {
-                        // if function doesn't exist we can't check apache modules
-                        if(function_exists('apache_get_modules'))
-                        {
-                            $results['requirements'][$type][$requirement] = true;
+                // case 'apache':
+                //     foreach ($requirements[$type] as $requirement) {
+                //         // if function doesn't exist we can't check apache modules
+                //         if(function_exists('apache_get_modules'))
+                //         {
+                //             $results['requirements'][$type][$requirement] = true;
 
-                            if(!in_array($requirement,apache_get_modules()))
-                            {
-                                $results['requirements'][$type][$requirement] = false;
+                //             if(!in_array($requirement,apache_get_modules()))
+                //             {
+                //                 $results['requirements'][$type][$requirement] = false;
 
-                                $results['errors'] = true;
-                            }
-                        }
-                    }
-                    break;
+                //                 $results['errors'] = true;
+                //             }
+                //         }
+                //     }
+                //break;
             }
         }
 

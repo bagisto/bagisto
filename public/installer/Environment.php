@@ -22,8 +22,8 @@
                             <div class="form-container" style="padding: 10%; padding-top: 35px">
                                 <div class="control-group" id="app_name">
                                     <label for="app_name" class="required">App Name</label>
-                                    <input type="text" name="app_name" class="control"
-                                    placeholder="Laravel"
+                                    <input type = "text" name = "app_name" class = "control"
+                                    value = "Bagisto_"
                                     data-validation="required length" data-validation-length="max50"
                                     >
                                 </div>
@@ -71,7 +71,7 @@
                                 <div class="control-group" id="user_name">
                                     <label for="user_name" class="required">User Name</label>
                                     <input type="text" name="user_name" class="control"
-                                    placeholder="database user name"
+                                    value = "bagisto_"
                                     data-validation="length required" data-validation-length="max50">
                                 </div>
 

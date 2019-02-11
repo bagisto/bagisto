@@ -2,6 +2,7 @@
 return [
     'datagrid' => [
         'actions' => 'Actions',
+        'id' => 'Index columns have value greater than zero only',
 
         'massaction' => [
             'mass-delete-confirm' => 'Do you really want to delete these selected :resource?',

@@ -97,7 +97,7 @@ $data    = array();
 
             $conn->close();
         } else {
-            $data['support_error'] = 'It only support mysql Database Connection.If You still want to continue, press OK otherwise change your database connection';
+            $data['support_error'] = 'Bagisto currently support MySQL only. Press OK to still continue or change you DB connection to MySQL';
         }
 
         // if there are no errors process our form, then return a message
