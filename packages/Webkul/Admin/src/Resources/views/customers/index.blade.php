@@ -12,7 +12,7 @@
                 <h1>{{ __('admin::app.customers.customers.title') }}</h1>
             </div>
             <div class="page-action">
-                <div class="export" @click="showModal('downloadDataGrid')">
+                <div class="export-import" @click="showModal('downloadDataGrid')">
                     <i class="export-icon"></i>
                     <span >
                         {{ __('admin::app.export.export') }}

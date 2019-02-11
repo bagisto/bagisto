@@ -55,7 +55,7 @@
                                 </div>
 
                                 <div class="control-group" id="host_name">
-                                    <label for="host_name" class="required">Databse Host</label>
+                                    <label for="host_name" class="required">Database Host</label>
                                     <input type="text" name="host_name" class="control"
                                     placeholder="127.0.0.1"
                                     data-validation="required length" data-validation-length="max50">

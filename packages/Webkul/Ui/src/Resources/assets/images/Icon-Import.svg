@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Import</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Import" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="translate(2.000000, 6.000000)" stroke="#979797" stroke-width="2">
+            <path d="M29,5.5 C29,2.78076172 29,0.947428385 29,0 L10,0 L10,20 L29,20 L29,14.5" id="Path-2" transform="translate(19.500000, 10.000000) scale(-1, 1) translate(-19.500000, -10.000000) "></path>
+            <path d="M0,10 L20.068125,10" id="Path-3"></path>
+            <polyline id="Path-4" points="17 5.21679688 22 10.1761378 17 15"></polyline>
+        </g>
+    </g>
+</svg>

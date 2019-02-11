@@ -45,6 +45,7 @@ class SessionController extends Controller
         if (auth()->guard('admin')->check()) {
             return redirect()->route('admin.dashboard.index');
         } else {
+            session()->put('url.intended', url()->previous());
             return view($this->_config['view']);
         }
     }
