@@ -69,11 +69,11 @@
                 <div class="content" id="migration-result">
                     <div class="window" id="migrate">
                     </div>
+                    <div class="window" id="key">
+                    </div>
                     <div class="window" id="seed">
                     </div>
                     <div class="window" id="publish">
-                    </div>
-                    <div class="window" id="storage">
                     </div>
                     <div class="window" id="composer">
                     </div>
@@ -194,11 +194,11 @@
                                         if (data['publish']) {
                                             $('#publish').append('<div class="terminal">' + data['publish'] + '</div>');
                                         }
-                                        if (data['storage']) {
-                                            $('#storage').append('<div class="terminal">' + data['storage'] + '</div>');
+                                        if (data['key']) {
+                                            $('#key').append('<div class="terminal">' + data['key'] + '</div>');
                                         }
 
-                                        if ((data['key_results'] == 0) && (data['seeder_results'] == 0) && (data['publish_results'] == 0) && (data['storage_results'] == 0)) {
+                                        if ((data['key_results'] == 0) && (data['seeder_results'] == 0) && (data['publish_results'] == 0)) {
                                             $('#continue').show();
                                             $('#migrate-seed').hide();
                                             $('#loader').hide();
@@ -207,6 +207,7 @@
 
                                 } else {
                                     $('#migrate').show();
+                                    $('#loader').hide();
                                     $('#migrate-seed').show();
                                     $('#migration-back').show();
                                     if (data['migrate']) {
@@ -232,10 +233,3 @@
 
     });
 </script>
-
-
-
-
-
-
-

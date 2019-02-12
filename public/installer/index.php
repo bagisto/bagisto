@@ -18,6 +18,7 @@
         $data = explode(PHP_EOL,$str);
         $databaseArray = ['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'DB_CONNECTION'];
 
+        $key = $value = [];
         if ($data) {
             foreach ($data as $line) {
                 $rowValues = explode('=', $line);
@@ -82,6 +83,8 @@
         echo $requirement->render();
         echo $permission->render();
         echo $welcome->render();
+
+        $storage_output = exec('cd ../.. && php artisan storage:link 2>&1');
     } else {
         // getting url
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
