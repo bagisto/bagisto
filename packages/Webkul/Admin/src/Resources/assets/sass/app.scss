@@ -544,10 +544,10 @@ body {
     }
 }
 
-.export {
+.export-import {
     cursor: pointer;
 
-    .export-icon {
+    .export-icon, .import-icon {
         position: relative;
         top: 10px;
     }

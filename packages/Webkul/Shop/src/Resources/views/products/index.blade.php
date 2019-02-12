@@ -81,53 +81,36 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            var sort = document.getElementById("sort");
-            var filter = document.getElementById("filter");
-            var sortLimit = document.getElementsByClassName('pager')[0];
-            var layerFilter = document.getElementsByClassName('responsive-layred-filter')[0];
-
-            layerFilter.style.display ="none";
-
-            if (sort && filter) {
-                sort.addEventListener("click", sortFilter);
-                filter.addEventListener("click", sortFilter);
-            }
-
-            function sortFilter() {
-                var className = document.getElementById(this.id).className;
-
-                if (className === 'icon sort-icon') {
-                    sort.classList.remove("sort-icon");
-                    sort.classList.add("icon-menu-close-adj");
-
-                    filter.classList.remove("icon-menu-close-adj");
-                    filter.classList.add("filter-icon");
-
-                    sortLimit.style.display = "flex";
-                    sortLimit.style.justifyContent = "space-between";
-                    layerFilter.style.display ="none";
-                } else if (className === 'icon filter-icon') {
-                    filter.classList.remove("filter-icon");
-                    filter.classList.add("icon-menu-close-adj");
-
-                    sort.classList.remove("icon-menu-close-adj");
-                    sort.classList.add("sort-icon");
-
-                    layerFilter.style.display = "block";
-                    layerFilter.style.marginTop = "10px";
-
-                    sortLimit.style.display = "none";
+            $('.responsive-layred-filter').css('display','none');
+            $(".sort-icon, .filter-icon").on('click', function(e){
+                var currentElement = $(e.currentTarget);
+                if (currentElement.hasClass('sort-icon')) {
+                    currentElement.removeClass('sort-icon');
+                    currentElement.addClass('icon-menu-close-adj');
+                    currentElement.next().removeClass();
+                    currentElement.next().addClass('icon filter-icon');
+                    $('.responsive-layred-filter').css('display','none');
+                    $('.pager').css('display','flex');
+                    $('.pager').css('justify-content','space-between');
+                } else if (currentElement.hasClass('filter-icon')) {
+                    currentElement.removeClass('filter-icon');
+                    currentElement.addClass('icon-menu-close-adj');
+                    currentElement.prev().removeClass();
+                    currentElement.prev().addClass('icon sort-icon');
+                    $('.pager').css('display','none');
+                    $('.responsive-layred-filter').css('display','block');
+                    $('.responsive-layred-filter').css('margin-top','10px');
                 } else {
-                    sort.classList.remove("icon-menu-close-adj");
-                    sort.classList.add("sort-icon");
-
-                    filter.classList.remove("icon-menu-close-adj");
-                    filter.classList.add("filter-icon");
-
-                    sortLimit.style.display = "none";
-                    layerFilter.style.display = "none";
+                    currentElement.removeClass('icon-menu-close-adj');
+                    $('.responsive-layred-filter').css('display','none');
+                    $('.pager').css('display','none');
+                    if ($(this).index() == 0) {
+                        currentElement.addClass('sort-icon');
+                    } else {
+                        currentElement.addClass('filter-icon');
+                    }
                 }
-            }
+            });
         });
     </script>
 @endpush

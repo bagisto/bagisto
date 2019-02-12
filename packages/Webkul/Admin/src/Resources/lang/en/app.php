@@ -748,11 +748,16 @@ return [
     ],
 
     'export' => [
-       'export' => 'Export',
-       'format' => 'Select Format',
-       'download' => 'Download',
-       'csv' => 'CSV',
-       'xls' => 'XLS'
+        'export' => 'Export',
+        'import' => 'Import',
+        'format' => 'Select Format',
+        'download' => 'Download',
+        'upload' => 'Upload',
+        'csv' => 'CSV',
+        'xls' => 'XLS',
+        'file' => 'File',
+        'upload-error' => 'The file must be a file of type: xls, xlsx, csv.',
+        'duplicate-error' => 'Identifier must be unique, duplicate identifier :identifier at row :position.'
     ],
 
     'response' => [
@@ -765,6 +770,7 @@ return [
         'attribute-product-error' => ':name is used in products.',
         'customer-associate' => ':name can not be deleted because customer is associated with this group.',
         'currency-delete-error' => 'This currency is set as channel base currency so it can not be deleted.',
+        'upload-success' => ':name uploaded successfully.',
         'delete-category-root' => 'Cannot delete the root category',
         'create-root-failure' => 'Category with name root already exists'
     ],
