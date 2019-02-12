@@ -18,6 +18,7 @@
         $data = explode(PHP_EOL,$str);
         $databaseArray = ['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'DB_CONNECTION'];
 
+        $key = $value = [];
         if ($data) {
             foreach ($data as $line) {
                 $rowValues = explode('=', $line);

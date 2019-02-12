@@ -812,6 +812,15 @@ modal {
     }
 }
 
+// responsive css for model
+@media only screen and (max-width: 770px){
+    .modal-container {
+        max-width: 80%;
+        left: 10%;
+        margin-left: 0px;
+    }
+}
+
 .label {
     background: #E7E7E7;
     @include border-radius(2px);
