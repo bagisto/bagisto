@@ -642,6 +642,7 @@ h2 {
         display: inline-block;
         font-size: 18px;
         color: $font-color;
+        border-top: solid 1px $border-color;
         border-bottom: solid 1px $border-color;
         padding: 20px 15px;
         cursor: pointer;
