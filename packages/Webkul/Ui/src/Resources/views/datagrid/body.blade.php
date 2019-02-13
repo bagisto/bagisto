@@ -21,25 +21,25 @@
 
                     @if (isset($column['wrapper']))
                         @if (isset($column['closure']) && $column['closure'] == true)
-                            <td>{!! $column['wrapper']($record) !!}</td>
+                            <td data-value="{{ $column['label'] }}">{!! $column['wrapper']($record) !!}</td>
                         @else
-                            <td>{{ $column['wrapper']($record) }}</td>
+                            <td data-value="{{ $column['label'] }}">{{ $column['wrapper']($record) }}</td>
                         @endif
                     @else
                         @if($column['type'] == 'price')
                             @if(isset($column['currencyCode']))
-                                <td>{{ core()->formatPrice($record->{$columnIndex}, $column['currencyCode']) }}</td>
+                                <td data-value="{{ $column['label'] }}">{{ core()->formatPrice($record->{$columnIndex}, $column['currencyCode']) }}</td>
                             @else
-                                <td>{{ core()->formatBasePrice($record->{$columnIndex}) }}</td>
+                                <td data-value="{{ $column['label'] }}">{{ core()->formatBasePrice($record->{$columnIndex}) }}</td>
                             @endif
                         @else
-                            <td>{{ $record->{$columnIndex} }}</td>
+                            <td data-value="{{ $column['label'] }}">{{ $record->{$columnIndex} }}</td>
                         @endif
                     @endif
                 @endforeach
 
                 @if ($enableActions)
-                    <td class="actions" style="width: 100px;">
+                    <td class="actions" style="width: 100px;" data-value=" {{ __('ui::app.datagrid.actions') }}">
                         <div>
                             @foreach ($actions as $action)
                                 <a href="{{ route($action['route'], $record->{$index}) }}">

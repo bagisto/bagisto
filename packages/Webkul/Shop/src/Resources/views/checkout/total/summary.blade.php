@@ -13,7 +13,7 @@
     @if ($cart->selected_shipping_rate)
         <div class="item-detail">
             <label>{{ __('shop::app.checkout.total.delivery-charges') }}</label>
-            <label class="right">{{ core()->currency($cart->selected_shipping_rate->price) }}</label>
+            <label class="right">{{ core()->currency($cart->selected_shipping_rate->base_price) }}</label>
         </div>
     @endif
 

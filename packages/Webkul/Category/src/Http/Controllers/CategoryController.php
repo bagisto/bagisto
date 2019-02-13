@@ -5,6 +5,7 @@ namespace Webkul\Category\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Category\Repositories\CategoryRepository as Category;
+use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Support\Facades\Event;
 
 /**
@@ -74,8 +75,20 @@ class CategoryController extends Controller
         $this->validate(request(), [
             'slug' => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
             'name' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,bmp,png'
+            'image.*' => 'mimes:jpeg, jpg, bmp, png'
         ]);
+
+        if (strtolower(request()->input('name')) == 'root') {
+            $categoryTransalation = new CategoryTranslation();
+
+            $result = $categoryTransalation->where('name', request()->input('name'))->get();
+
+            if(count($result) > 0) {
+                session()->flash('error', trans('admin::app.response.create-root-failure'));
+
+                return redirect()->back();
+            }
+        }
 
         $category = $this->category->create(request()->all());
 
@@ -137,11 +150,15 @@ class CategoryController extends Controller
     {
         Event::fire('catalog.category.delete.before', $id);
 
-        $this->category->delete($id);
+        if(strtolower($this->category->find($id)->name) == "root") {
+            session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
+        } else {
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
-        Event::fire('catalog.category.delete.after', $id);
+            $this->category->delete($id);
 
-        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
+            Event::fire('catalog.category.delete.after', $id);
+        }
 
         return redirect()->back();
     }
@@ -154,7 +171,7 @@ class CategoryController extends Controller
     public function massDestroy() {
         $suppressFlash = false;
 
-        if (request()->isMethod('delete')) {
+        if (request()->isMethod('delete') || request()->isMethod('post')) {
             $indexes = explode(',', request()->input('indexes'));
 
             foreach ($indexes as $key => $value) {
