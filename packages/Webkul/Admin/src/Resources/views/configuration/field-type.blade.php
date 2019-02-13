@@ -212,6 +212,10 @@
 
         @endif
 
+        @if (isset($field['info']))
+            <span class="control-info">{{ trans($field['info']) }}</span>
+        @endif
+
         <span class="control-error" v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]')">@{{ errors.first('{!! $firstField !!}[{!! $secondField !!}][{!! $thirdField !!}][{!! $field['name'] !!}]') }}</span>
 
     </div>
