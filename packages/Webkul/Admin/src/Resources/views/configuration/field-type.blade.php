@@ -66,8 +66,8 @@
                 @if (isset($field['repository']))
                     @foreach ($value as $key => $option)
 
-                        <option value="{{  $value[$key] }}" {{ $value[$key] == $selectedOption ? 'selected' : ''}}>
-                           {{ trans($value[$key]) }}
+                        <option value="{{  $key }}" {{ $option == $selectedOption ? 'selected' : ''}}>
+                           {{ trans($option) }}
                         </option>
 
                     @endforeach
