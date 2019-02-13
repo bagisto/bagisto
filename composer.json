@@ -31,6 +31,7 @@
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
+        "phploc/phploc": "^5.0@dev",
         "phpunit/phpunit": "^7.0"
     },
     "replace": {

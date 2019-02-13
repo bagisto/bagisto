@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
     <link rel="stylesheet" href="{{ bagisto_asset('css/shop.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
 
@@ -29,7 +30,7 @@
 
 </head>
 
-<body @if (app()->getLocale() == 'ar')class="rtl"@endif>
+<body @if (app()->getLocale() == 'ar') class="rtl" @endif>
 
     {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
