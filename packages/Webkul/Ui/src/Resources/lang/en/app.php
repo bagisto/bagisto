@@ -12,6 +12,7 @@ return [
         ],
 
         'no-records' => 'No Records Found',
-        'filter-fields-missing' => 'Some of the required field is null, please check column, condition and value properly'
+        'filter-fields-missing' => 'Some of the required field is null, please check column, condition and value properly',
+        'click_on_action' => 'Do you really want to perform this action?'
     ]
 ];
