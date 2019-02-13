@@ -141,7 +141,7 @@ class ProductController extends Controller
         }
 
         if (request()->input('type') == 'configurable' && (! request()->has('super_attributes') || ! count(request()->get('super_attributes')))) {
-            session()->flash('error', 'Please select atleast one configurable attribute.');
+            session()->flash('error', trans('admin::app.catalog.products.configurable-error'));
 
             return back();
         }

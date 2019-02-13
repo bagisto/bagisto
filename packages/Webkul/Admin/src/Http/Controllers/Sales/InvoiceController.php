@@ -92,7 +92,7 @@ class InvoiceController extends Controller
         $order = $this->order->find($orderId);
 
         if (! $order->canInvoice()) {
-            session()->flash('error', 'Order invoice creation is not allowed.');
+            session()->flash('error', trans('admin::app.sales.invoices.creation-error'));
 
             return redirect()->back();
         }
@@ -102,7 +102,7 @@ class InvoiceController extends Controller
         ]);
 
         $data = request()->all();
-        
+
         $haveProductToInvoice = false;
         foreach ($data['invoice']['items'] as $itemId => $qty) {
             if ($qty) {
@@ -112,14 +112,14 @@ class InvoiceController extends Controller
         }
 
         if (! $haveProductToInvoice) {
-            session()->flash('error', 'Invoice can not be created without products.');
+            session()->flash('error', trans('admin::app.sales.invoices.product-error'));
 
             return redirect()->back();
         }
 
         $this->invoice->create(array_merge($data, ['order_id' => $orderId]));
 
-        session()->flash('success', 'Invoice created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Invoice']));
 
         return redirect()->route($this->_config['redirect'], $orderId);
     }

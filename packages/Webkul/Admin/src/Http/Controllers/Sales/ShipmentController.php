@@ -92,7 +92,7 @@ class ShipmentController extends Controller
         $order = $this->order->find($orderId);
 
         if (! $order->channel || !$order->canShip()) {
-            session()->flash('error', 'Shipment can not be created for this order.');
+            session()->flash('error', trans('admin::app.sales.shipments.creation-error'));
 
             return redirect()->back();
         }
@@ -112,7 +112,7 @@ class ShipmentController extends Controller
         $order = $this->order->find($orderId);
 
         if (! $order->canShip()) {
-            session()->flash('error', 'Order shipment creation is not allowed.');
+            session()->flash('error', trans('admin::app.sales.shipments.order-error'));
 
             return redirect()->back();
         }
@@ -127,14 +127,14 @@ class ShipmentController extends Controller
         $data = request()->all();
 
         if (! $this->isInventoryValidate($data)) {
-            session()->flash('error', 'Requested quantity is invalid or not available.');
+            session()->flash('error', trans('admin::app.sales.shipments.quantity-invalid'));
 
             return redirect()->back();
         }
 
         $this->shipment->create(array_merge($data, ['order_id' => $orderId]));
 
-        session()->flash('success', 'Shipment created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Shipment']));
 
         return redirect()->route($this->_config['redirect'], $orderId);
     }

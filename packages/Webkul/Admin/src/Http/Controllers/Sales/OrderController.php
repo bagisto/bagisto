@@ -77,11 +77,11 @@ class OrderController extends Controller
     public function cancel($id)
     {
         $result = $this->order->cancel($id);
-        
+
         if ($result) {
-            session()->flash('success', trans('Order canceled successfully.'));
+            session()->flash('success', trans('admin::app.response.cancel-success', ['name' => 'Order']));
         } else {
-            session()->flash('error', trans('Order can not be canceled.'));
+            session()->flash('error', trans('admin::app.response.cancel-error', ['name' => 'Order']));
         }
 
         return redirect()->back();

@@ -96,7 +96,7 @@ class CustomerGroupController extends Controller
     {
         $group = $this->customerGroup->findOneWhere(['id'=>$id]);
 
-        return view($this->_config['view'],compact('group'));
+        return view($this->_config['view'], compact('group'));
     }
 
      /**
@@ -112,7 +112,7 @@ class CustomerGroupController extends Controller
             'name' => 'string|required',
         ]);
 
-        $this->customerGroup->update(request()->all(),$id);
+        $this->customerGroup->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer Group']));
 

@@ -72,13 +72,13 @@ class SessionController extends Controller
         $remember = request('remember');
 
         if (! auth()->guard('admin')->attempt(request(['email', 'password']), $remember)) {
-            session()->flash('error', 'Please check your credentials and try again.');
+            session()->flash('error', trans('admin::app.users.users.login-error'));
 
             return back();
         }
 
         if (auth()->guard('admin')->user()->status == 0) {
-            session()->flash('warning', 'Your account is yet to be activated, please contact administrator.');
+            session()->flash('warning', trans('admin::app.users.users.activate-warning'));
 
             auth()->guard('admin')->logout();
 
