@@ -71,7 +71,7 @@
             <flash-wrapper ref='flashes'></flash-wrapper>
 
             <div class="center-box">
-            
+
                 <div class="adjacent-center">
 
                     <div class="brand-logo">
@@ -82,7 +82,7 @@
 
                     <div class="footer">
                         <p>
-                            © Copyright 2018 Webkul Software, All rights reserved.
+                            {{ trans('admin::app.footer.copy-right') }}
                         </p>
                     </div>
 
@@ -112,6 +112,6 @@
         <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
 
         @yield('javascript')
-        
+
     </body>
 </html>

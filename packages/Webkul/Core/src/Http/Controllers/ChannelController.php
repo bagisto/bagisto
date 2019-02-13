@@ -148,7 +148,7 @@ class ChannelController extends Controller
     public function destroy($id)
     {
         if ($this->channel->count() == 1) {
-            session()->flash('error', 'At least one channel is required.');
+            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Channel']));
         } else {
             Event::fire('core.channel.delete.before', $id);
 

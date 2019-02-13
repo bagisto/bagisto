@@ -81,7 +81,7 @@ class AttributeController extends Controller
 
         $attribute = $this->attribute->create($data);
 
-        session()->flash('success', 'Attribute created successfully.');
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Attribute']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -116,7 +116,7 @@ class AttributeController extends Controller
 
         $attribute = $this->attribute->update(request()->all(), $id);
 
-        session()->flash('success', 'Attribute updated successfully.');
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Attribute']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -132,12 +132,12 @@ class AttributeController extends Controller
         $attribute = $this->attribute->findOrFail($id);
 
         if(!$attribute->is_user_defined) {
-            session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'attribute']));
+            session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
         } else {
             try {
                 $this->attribute->delete($id);
 
-                session()->flash('success', 'Attribute deleted successfully.');
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Attribute']));
 
             } catch(\Exception $e) {
                 session()->flash('error', trans('admin::app.response.attribute-error', ['name' => 'Attribute']));

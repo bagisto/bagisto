@@ -88,7 +88,7 @@ class CustomerController extends Controller
 
         $channelName = $this->channel->all();
 
-        return view($this->_config['view'],compact('customerGroup','channelName'));
+        return view($this->_config['view'], compact('customerGroup','channelName'));
     }
 
      /**
@@ -107,7 +107,7 @@ class CustomerController extends Controller
             'date_of_birth' => 'date|before:today'
         ]);
 
-        $data=request()->all();
+        $data = request()->all();
 
         $password = bcrypt(rand(100000,10000000));
 
@@ -136,7 +136,7 @@ class CustomerController extends Controller
 
         $channelName = $this->channel->all();
 
-        return view($this->_config['view'],compact('customer', 'customerGroup', 'channelName'));
+        return view($this->_config['view'], compact('customer', 'customerGroup', 'channelName'));
     }
 
      /**
@@ -158,7 +158,7 @@ class CustomerController extends Controller
             'date_of_birth' => 'date|before:today'
         ]);
 
-        $this->customer->update(request()->all(),$id);
+        $this->customer->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer']));
 
