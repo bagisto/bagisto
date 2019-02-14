@@ -1,6 +1,7 @@
 @import "variables";
 @import "icons";
 @import "mixins";
+@import "animations";
 
 //override UA
 body {
@@ -212,6 +213,52 @@ input {
 /* Show the indicator (dot/circle) when checked */
 .radio-container input:checked ~ .checkmark:after {
     display: block;
+}
+
+//CSS for loader
+.cp-spinner {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+//Spinner style
+.cp-round:before {
+    border-radius: 50%;
+    content: " ";
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-top: solid 6px #bababa;
+    border-right: solid 6px #bababa;
+    border-bottom: solid 6px #bababa;
+    border-left: solid 6px #bababa;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.cp-round:after {
+    border-radius: 50%;
+    content: " ";
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-top: solid 6px $brand-color;
+    border-right: solid 6px transparent;
+    border-bottom: solid 6px transparent;
+    border-left: solid 6px transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: spin 1s ease-in-out infinite;
+}
+
+.pull-right {
+    float:right;
 }
 
 //wishlist icon hover properties
@@ -2508,8 +2555,8 @@ section.cart {
         }
     }
 }
-// checkout responsive end here
 
+// checkout responsive
 .attached-products-wrapper {
     margin-bottom: 80px;
 
@@ -2924,6 +2971,8 @@ section.review {
     margin-top: 1.4%;
 
     table {
+        width: 100%;
+
         tbody {
             tr {
                 height: 45px;
