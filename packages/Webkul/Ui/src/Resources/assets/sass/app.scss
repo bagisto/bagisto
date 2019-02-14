@@ -45,31 +45,6 @@ h2 {
     color: $font-color;
 }
 
-//tool tip
-.tooltip {
-    position: relative;
-    border-bottom: 1px solid black;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-}
-//tooltip ends here
-
 .hide {
     display: none !important;
 }
@@ -129,9 +104,36 @@ h2 {
     }
 }
 
+.dropdown-btn {
+    min-width: 150px;
+    text-align: left;
+    background: #ffffff;
+    border: 2px solid $control-border-color;
+    @include border-radius(3px);
+    font-size: 14px;
+    padding: 8px 35px 8px 10px;
+    cursor: pointer;
+    position: relative;
+
+    &:hover,
+    &:active,
+    &:focus {
+        opacity: 0.75;
+        border: 2px solid $control-border-color;
+    }
+
+    .icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        margin-top: -4px;
+    }
+}
+
 .dropdown-open {
     position: relative;
 }
+
 .dropdown-list {
     width: 200px;
     margin-bottom: 20px;
@@ -155,12 +157,12 @@ h2 {
         right: 0px;
     }
     &.top-left {
-        bottom: 42px;
-        left: 0px;
+        bottom: 0px;
+        left: 42px;
     }
     &.top-right {
-        bottom: 42px;
-        right: 0px;
+        bottom: 0px;
+        right: 42px;
     }
 
     .search-box {
@@ -188,7 +190,6 @@ h2 {
     .dropdown-container {
         padding: 20px;
         overflow-y: auto;
-        max-height: 280px;
 
         label {
             font-size: 15px;
@@ -206,9 +207,6 @@ h2 {
 
             li {
                 padding: 5px 0px;
-                // &:hover {
-                //     color: $brand-color;
-                // }
 
                 a:link,
                 a:active,
@@ -244,10 +242,8 @@ h2 {
 
 .table {
     width: 100%;
-    overflow-x: auto;
 
     table {
-        width: 100%;
         border-collapse: collapse;
         text-align: left;
 
@@ -275,13 +271,6 @@ h2 {
             &.empty {
                 text-align: center;
             }
-
-            tr {
-
-                td {
-                    // border: 1px solid red;
-                }
-            }
         }
 
         tbody tr:last-child td {
@@ -298,58 +287,6 @@ h2 {
             width: 100%;
             margin: 0;
         }
-    }
-}
-
-@media only screen and (max-width: 770px) {
-    .table {
-        table thead {
-            display: none;
-        }
-
-        table tbody {
-            tr td:before {
-                content: attr(data-value);
-                    font-size: 15px;
-                    font-weight: 600;
-                    margin-right: 20px;
-            }
-
-            td {
-                border-bottom: none;
-                display: block;
-            }
-
-            tr {
-                border: 1px solid $control-border-color;
-            }
-        }
-    }
-}
-
-.dropdown-btn {
-    min-width: 150px;
-    text-align: left;
-    background: #ffffff;
-    border: 2px solid $control-border-color;
-    @include border-radius(3px);
-    font-size: 14px;
-    padding: 8px 35px 8px 10px;
-    cursor: pointer;
-    position: relative;
-
-    &:hover,
-    &:active,
-    &:focus {
-        opacity: 0.75;
-        border: 2px solid $control-border-color;
-    }
-
-    .icon {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        margin-top: -4px;
     }
 }
 
@@ -814,8 +751,8 @@ modal {
     }
 }
 
-// responsive css for model
-@media only screen and (max-width: 770px){
+// responsive css for modal
+@media only screen and (max-width: 770px) {
     .modal-container {
         max-width: 80%;
         left: 10%;
@@ -886,6 +823,7 @@ modal {
     }
 }
 
+//Image wrapper
 .image-wrapper {
     margin-bottom: 20px;
     margin-top: 10px;
@@ -936,53 +874,4 @@ modal {
             background-image: none;
         }
     }
-}
-
-//css for loader
-.cp-spinner {
-    width: 48px;
-    height: 48px;
-    display: inline-block;
-    box-sizing: border-box;
-}
-
-.cp-round:before {
-    border-radius: 50%;
-    content: " ";
-    width: 48px;
-    height: 48px;
-    display: inline-block;
-    box-sizing: border-box;
-    border-top: solid 6px #bababa;
-    border-right: solid 6px #bababa;
-    border-bottom: solid 6px #bababa;
-    border-left: solid 6px #bababa;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.cp-round:after {
-    border-radius: 50%;
-    content: " ";
-    width: 48px;
-    height: 48px;
-    display: inline-block;
-    box-sizing: border-box;
-    border-top: solid 6px $brand-color;
-    border-right: solid 6px transparent;
-    border-bottom: solid 6px transparent;
-    border-left: solid 6px transparent;
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-.pull-right {
-    float:right;
 }
