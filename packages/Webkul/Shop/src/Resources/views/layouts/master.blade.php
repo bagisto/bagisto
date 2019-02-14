@@ -30,7 +30,7 @@
 
 </head>
 
-<body @if (app()->getLocale() == 'ar') class="rtl" @endif>
+<body @if (app()->getLocale() == 'ar') class="rtl" @endif style="scroll-behavior: smooth;">
 
     {!! view_render_event('bagisto.shop.layout.body.before') !!}
 

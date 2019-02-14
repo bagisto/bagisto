@@ -7,7 +7,6 @@
 
     @push('scripts')
         <script type="text/x-template" id="datagrid-filters">
-            {{-- start filter here --}}
             <div class="grid-container">
                 <div class="filter-row-one" id="datagrid-filters">
                     <div class="search-filter">
@@ -19,118 +18,114 @@
                     </div>
 
                     <div class="dropdown-filters">
-                        <div class="more-filters">
-                            <div class="dropdown-toggle">
-                                <div class="dropdown-header">
-                                    <span class="name">Filter</span>
-                                    <i class="icon arrow-down-icon active"></i>
-                                </div>
+                        <div class="dropdown-toggle">
+                            <div class="dropdown-header">
+                                <span class="name">Filter</span>
+                                <i class="icon arrow-down-icon active"></i>
                             </div>
+                        </div>
 
-                            <div class="dropdown-list bottom-right" style="display: none;">
-                                <div class="dropdown-container">
-                                    <ul>
-                                        <li class="filter-column-dropdown">
-                                            <div class="control-group">
-                                                <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
-                                                    <option selected disabled>Select Column</option>
-                                                    @foreach($results['columns'] as $column)
-                                                        <option value="{{ $column['index'] }}">
-                                                            {{ $column['label'] }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </li>
+                        <div class="dropdown-list dropdown-container" style="display: none;">
+                            <ul>
+                                <li>
+                                    <div class="control-group">
+                                        <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
+                                            <option selected disabled>Select Column</option>
+                                            @foreach($results['columns'] as $column)
+                                                <option value="{{ $column['index'] }}">
+                                                    {{ $column['label'] }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </li>
 
-                                        {{-- suitable for string columns --}}
-                                        <li class="filter-condition-dropdown-string" v-if='stringConditionSelect'>
-                                            <div class="control-group">
-                                                <select class="control" v-model="stringCondition">
-                                                    <option selected disabled>Select Condition</option>
-                                                    <option value="like">Contains</option>
-                                                    <option value="nlike">Does not contains</option>
-                                                    <option value="eq">Is equal to</option>
-                                                    <option value="neqs">Is not equal to</option>
-                                                </select>
-                                            </div>
-                                        </li>
+                                {{-- suitable for string columns --}}
+                                <li v-if='stringConditionSelect'>
+                                    <div class="control-group">
+                                        <select class="control" v-model="stringCondition">
+                                            <option selected disabled>Select Condition</option>
+                                            <option value="like">Contains</option>
+                                            <option value="nlike">Does not contains</option>
+                                            <option value="eq">Is equal to</option>
+                                            <option value="neqs">Is not equal to</option>
+                                        </select>
+                                    </div>
+                                </li>
 
-                                        {{-- Response fields based on the type of columns to be filtered --}}
-                                        <li class="filter-condition-dropdown-string" v-if='stringCondition != null'>
-                                            <div class="control-group">
-                                                <input type="text" class="control response-string" placeholder="String Value here" v-model="stringValue" />
-                                            </div>
-                                        </li>
+                                {{-- Response fields based on the type of columns to be filtered --}}
+                                <li v-if='stringCondition != null'>
+                                    <div class="control-group">
+                                        <input type="text" class="control response-string" placeholder="String Value here" v-model="stringValue" />
+                                    </div>
+                                </li>
 
-                                        {{-- suitable for numeric columns --}}
-                                        <li class="filter-condition-dropdown-number" v-if='numberConditionSelect'>
-                                            <div class="control-group">
-                                                <select class="control" v-model="numberCondition">
-                                                    <option selected disabled>Select Condition</option>
-                                                    <option value="eq">Is equal to</option>
-                                                    <option value="neqs">Is not equal to</option>
-                                                    <option value="gt">Greater than</option>
-                                                    <option value="lt">Less than</option>
-                                                    <option value="gte">Greater than equals to</option>
-                                                    <option value="lte">Less than equals to</option>
-                                                </select>
-                                            </div>
-                                        </li>
+                                {{-- suitable for numeric columns --}}
+                                <li v-if='numberConditionSelect'>
+                                    <div class="control-group">
+                                        <select class="control" v-model="numberCondition">
+                                            <option selected disabled>Select Condition</option>
+                                            <option value="eq">Is equal to</option>
+                                            <option value="neqs">Is not equal to</option>
+                                            <option value="gt">Greater than</option>
+                                            <option value="lt">Less than</option>
+                                            <option value="gte">Greater than equals to</option>
+                                            <option value="lte">Less than equals to</option>
+                                        </select>
+                                    </div>
+                                </li>
 
-                                        <li class="filter-response-number" v-if='numberCondition != null'>
-                                            <div class="control-group">
-                                                <input type="number" class="control response-number" placeholder="Numeric Value here"  v-model="numberValue"/>
-                                            </div>
-                                        </li>
+                                <li v-if='numberCondition != null'>
+                                    <div class="control-group">
+                                        <input type="number" class="control response-number" placeholder="Numeric Value here"  v-model="numberValue"/>
+                                    </div>
+                                </li>
 
-                                        {{-- suitable for boolean columns --}}
-                                        <li class="filter-condition-dropdown-boolean" v-if='booleanConditionSelect'>
-                                            <div class="control-group">
-                                                <select class="control" v-model="booleanCondition">
-                                                    <option selected disabled>Select Condition</option>
-                                                    <option value="eq">Is equal to</option>
-                                                    <option value="neqs">Is no equal to</option>
-                                                </select>
-                                            </div>
-                                        </li>
+                                {{-- suitable for boolean columns --}}
+                                <li v-if='booleanConditionSelect'>
+                                    <div class="control-group">
+                                        <select class="control" v-model="booleanCondition">
+                                            <option selected disabled>Select Condition</option>
+                                            <option value="eq">Is equal to</option>
+                                            <option value="neqs">Is no equal to</option>
+                                        </select>
+                                    </div>
+                                </li>
 
-                                        <li class="filter-condition-dropdown-boolean" v-if='booleanCondition != null'>
-                                            <div class="control-group">
-                                                <select class="control" v-model="booleanValue">
-                                                    <option selected disabled>Select Value</option>
-                                                    <option value="1">True / Active</option>
-                                                    <option value="0">False / Inactive</option>
-                                                </select>
-                                            </div>
-                                        </li>
+                                <li v-if='booleanCondition != null'>
+                                    <div class="control-group">
+                                        <select class="control" v-model="booleanValue">
+                                            <option selected disabled>Select Value</option>
+                                            <option value="1">True / Active</option>
+                                            <option value="0">False / Inactive</option>
+                                        </select>
+                                    </div>
+                                </li>
 
-                                        {{-- suitable for date/time columns --}}
-                                        <li class="filter-condition-dropdown-datetime" v-if='datetimeConditionSelect'>
-                                            <div class="control-group">
-                                                <select class="control" v-model="datetimeCondition">
-                                                    <option selected disabled>Select Condition</option>
-                                                    <option value="eq">Is equal to</option>
-                                                    <option value="neqs">Is not equal to</option>
-                                                    <option value="gt">Greater than</option>
-                                                    <option value="lt">Less than</option>
-                                                    <option value="gte">Greater than equals to</option>
-                                                    <option value="lte">Less than equals to</option>
-                                                    {{-- <option value="btw">Is Between</option> --}}
-                                                </select>
-                                            </div>
-                                        </li>
+                                {{-- suitable for date/time columns --}}
+                                <li v-if='datetimeConditionSelect'>
+                                    <div class="control-group">
+                                        <select class="control" v-model="datetimeCondition">
+                                            <option selected disabled>Select Condition</option>
+                                            <option value="eq">Is equal to</option>
+                                            <option value="neqs">Is not equal to</option>
+                                            <option value="gt">Greater than</option>
+                                            <option value="lt">Less than</option>
+                                            <option value="gte">Greater than equals to</option>
+                                            <option value="lte">Less than equals to</option>
+                                            {{-- <option value="btw">Is Between</option> --}}
+                                        </select>
+                                    </div>
+                                </li>
 
-                                        <li class="filter-condition-dropdown-boolean" v-if='datetimeCondition != null'>
-                                            <div class="control-group">
-                                                <input class="control" v-model="datetimeValue" type="date">
-                                            </div>
-                                        </li>
+                                <li v-if='datetimeCondition != null'>
+                                    <div class="control-group">
+                                        <input class="control" v-model="datetimeValue" type="date">
+                                    </div>
+                                </li>
 
-                                        <button class="btn btn-sm btn-primary apply-filter" v-on:click="getResponse">Apply</button>
-                                    </ul>
-                                </div>
-                            </div>
+                                <button class="btn btn-sm btn-primary apply-filter" v-on:click="getResponse">Apply</button>
+                            </ul>
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,7 @@
 
             <div class="account-items-list">
 
-                <div class="table">
+                <div class="account-table-content">
                     <table>
                         <thead>
                             <tr>
@@ -74,7 +74,7 @@
 
                             @if (! $orders->count())
                                 <tr>
-                                    <td class="empty" colspan="4">{{ __('admin::app.common.no-result-found') }}</td>
+                                    <td class="empty" colspan="10" style="text-align: center;">{{ __('admin::app.common.no-result-found') }}</td>
                                 <tr>
                             @endif
                         </tbody>
