@@ -117,17 +117,6 @@
         var paymentHtml = '';
         var reviewHtml = '';
         var summaryHtml = Vue.compile(`<?php echo view('shop::checkout.total.summary', ['cart' => $cart])->render(); ?>`);
-        var customerAddress = null;
-        @auth('customer')
-            @if (auth('customer')->user()->default_address)
-                customerAddress = @json(auth('customer')->user()->default_address);
-            @else
-                customerAddress = {};
-            @endif
-            customerAddress.email = "{{ auth('customer')->user()->email }}";
-            customerAddress.first_name = "{{ auth('customer')->user()->first_name }}";
-            customerAddress.last_name = "{{ auth('customer')->user()->last_name }}";
-        @endauth
 
         Vue.component('checkout', {
 
@@ -142,7 +131,7 @@
 
                 address: {
                     billing: {
-                        use_for_shipping: true
+                        use_for_shipping: true,
                     },
 
                     shipping: {},
@@ -154,15 +143,12 @@
 
                 disable_button: false,
 
+                new_shipping_address: false,
+
+                new_billing_address: false,
+
                 countryStates: @json(core()->groupedStatesByCountries())
             }),
-
-            created() {
-                if (customerAddress) {
-                    this.address.billing = customerAddress;
-                    this.address.use_for_shipping = true;
-                }
-            },
 
             methods: {
                 navigateToStep (step) {
@@ -175,7 +161,7 @@
                 haveStates(addressType) {
                     if (this.countryStates[this.address[addressType].country] && this.countryStates[this.address[addressType].country].length)
                         return true;
-                    
+
                     return false;
                 },
 
@@ -300,6 +286,14 @@
 
                 paymentMethodSelected (paymentMethod) {
                     this.selected_payment_method = paymentMethod;
+                },
+
+                newBillingAddress() {
+                    this.new_billing_address = true;
+                },
+
+                newShippingAddress() {
+                    this.new_shipping_address = true;
                 }
             }
         })
