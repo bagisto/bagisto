@@ -100,16 +100,4 @@ class ChannelRepository extends Repository
             $channel->save();
         }
     }
-
-    public function getAllChannel() {
-        $data = $this->model->get()->toArray();
-
-        $channel = [];
-
-        foreach($data as $key => $value) {
-            $channel[$value['id']] = $value['code'];
-        }
-
-        return $channel;
-    }
 }
