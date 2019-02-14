@@ -10,7 +10,7 @@
             <div class="grid-container">
                 <div class="filter-row-one" id="datagrid-filters">
                     <div class="search-filter">
-                        <input type="search" id="search-field" class="control" placeholder="Search Here..." v-model="searchValue" />
+                        <input type="search" id="search-field" class="control" placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue" />
 
                         <div class="icon-wrapper">
                             <span class="icon search-icon search-btn" v-on:click="searchCollection(searchValue)"></span>
@@ -20,7 +20,7 @@
                     <div class="dropdown-filters">
                         <div class="dropdown-toggle">
                             <div class="dropdown-header">
-                                <span class="name">Filter</span>
+                                <span class="name">{{ __('ui::app.datagrid.filter') }}</span>
                                 <i class="icon arrow-down-icon active"></i>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                                 <li>
                                     <div class="control-group">
                                         <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
-                                            <option selected disabled>Select Column</option>
+                                            <option selected disabled>{{ __('ui::app.datagrid.column') }}</option>
                                             @foreach($results['columns'] as $column)
                                                 <option value="{{ $column['index'] }}">
                                                     {{ $column['label'] }}
@@ -44,11 +44,11 @@
                                 <li v-if='stringConditionSelect'>
                                     <div class="control-group">
                                         <select class="control" v-model="stringCondition">
-                                            <option selected disabled>Select Condition</option>
-                                            <option value="like">Contains</option>
-                                            <option value="nlike">Does not contains</option>
-                                            <option value="eq">Is equal to</option>
-                                            <option value="neqs">Is not equal to</option>
+                                            <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
+                                            <option value="like">{{ __('ui::app.datagrid.contains') }}</option>
+                                            <option value="nlike">{{ __('ui::app.datagrid.ncontains') }}</option>
+                                            <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
+                                            <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
                                         </select>
                                     </div>
                                 </li>
@@ -64,13 +64,13 @@
                                 <li v-if='numberConditionSelect'>
                                     <div class="control-group">
                                         <select class="control" v-model="numberCondition">
-                                            <option selected disabled>Select Condition</option>
-                                            <option value="eq">Is equal to</option>
-                                            <option value="neqs">Is not equal to</option>
-                                            <option value="gt">Greater than</option>
-                                            <option value="lt">Less than</option>
-                                            <option value="gte">Greater than equals to</option>
-                                            <option value="lte">Less than equals to</option>
+                                            <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
+                                            <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
+                                            <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
+                                            <option value="gt">{{ __('ui::app.datagrid.greater') }}</option>
+                                            <option value="lt">{{ __('ui::app.datagrid.less') }}</option>
+                                            <option value="gte">{{ __('ui::app.datagrid.greatere') }}</option>
+                                            <option value="lte">{{ __('ui::app.datagrid.lesse') }}</option>
                                         </select>
                                     </div>
                                 </li>
@@ -85,9 +85,9 @@
                                 <li v-if='booleanConditionSelect'>
                                     <div class="control-group">
                                         <select class="control" v-model="booleanCondition">
-                                            <option selected disabled>Select Condition</option>
-                                            <option value="eq">Is equal to</option>
-                                            <option value="neqs">Is no equal to</option>
+                                            <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
+                                            <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
+                                            <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
                                         </select>
                                     </div>
                                 </li>
@@ -95,9 +95,9 @@
                                 <li v-if='booleanCondition != null'>
                                     <div class="control-group">
                                         <select class="control" v-model="booleanValue">
-                                            <option selected disabled>Select Value</option>
-                                            <option value="1">True / Active</option>
-                                            <option value="0">False / Inactive</option>
+                                            <option selected disabled>{{ __('ui::app.datagrid.value') }}</option>
+                                            <option value="1">{{ __('ui::app.datagrid.true') }}</option>
+                                            <option value="0">{{ __('ui::app.datagrid.false') }}</option>
                                         </select>
                                     </div>
                                 </li>
@@ -106,14 +106,14 @@
                                 <li v-if='datetimeConditionSelect'>
                                     <div class="control-group">
                                         <select class="control" v-model="datetimeCondition">
-                                            <option selected disabled>Select Condition</option>
-                                            <option value="eq">Is equal to</option>
-                                            <option value="neqs">Is not equal to</option>
-                                            <option value="gt">Greater than</option>
-                                            <option value="lt">Less than</option>
-                                            <option value="gte">Greater than equals to</option>
-                                            <option value="lte">Less than equals to</option>
-                                            {{-- <option value="btw">Is Between</option> --}}
+                                            <option selected disabled>{{ __('ui::app.datagrid.condition') }}</option>
+                                            <option value="eq">{{ __('ui::app.datagrid.equals') }}</option>
+                                            <option value="neqs">{{ __('ui::app.datagrid.nequals') }}</option>
+                                            <option value="gt">{{ __('ui::app.datagrid.greater') }}</option>
+                                            <option value="lt">{{ __('ui::app.datagrid.less') }}</option>
+                                            <option value="gte">{{ __('ui::app.datagrid.greatere') }}</option>
+                                            <option value="lte">{{ __('ui::app.datagrid.equalse') }}</option>
+                                            {{-- <option value="btw">{{ __('ui::app.datagrid.between') }}</option> --}}
                                         </select>
                                     </div>
                                 </li>
@@ -124,7 +124,7 @@
                                     </div>
                                 </li>
 
-                                <button class="btn btn-sm btn-primary apply-filter" v-on:click="getResponse">Apply</button>
+                                <button class="btn btn-sm btn-primary apply-filter" v-on:click="getResponse">{{ __('ui::app.datagrid.apply') }}</button>
                             </ul>
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                                             <span class="icon checkbox-dash-icon"></span>
                                         </span>
 
-                                        <form method="POST" id="mass-action-form" style="display: inline-flex;" action="">
+                                        <form method="POST" id="mass-action-form" style="display: inline-flex;" action="" onsubmit="return confirm('{{ __('ui::app.datagrid.click_on_action') }}')">
                                             @csrf()
 
                                             <input type="hidden" id="indexes" name="indexes" v-model="dataIds">

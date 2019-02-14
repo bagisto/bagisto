@@ -73,7 +73,8 @@ class TaxRateController extends Controller
      *
      * @return mixed
      */
-    public function create() {
+    public function create()
+    {
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier',
             'is_zip' => 'sometimes',
