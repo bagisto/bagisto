@@ -241,7 +241,7 @@ class Cart {
         $product = $this->product->findOneByField('id', $id);
 
         if ($product->type == 'configurable') {
-            if (! isset($data['selected_configurable_option'])) {
+            if (! isset($data['selected_configurable_option']) || ! $data['selected_configurable_option']) {
                 return false;
             }
 
