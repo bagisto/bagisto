@@ -370,7 +370,11 @@ return [
             'add-image-btn-title' => 'Add Image',
             'mass-delete-success' => 'All the selected index of products have been deleted successfully',
             'mass-update-success' => 'All the selected index of products have been updated successfully',
-            'configurable-error' => 'Please select atleast one configurable attribute.'
+            'configurable-error' => 'Please select atleast one configurable attribute.',
+            'categories' => 'Categories',
+            'images' => 'Images',
+            'inventories' => 'Inventories',
+            'variations' => 'Variations'
         ],
 
         'attributes' => [

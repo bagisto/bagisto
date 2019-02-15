@@ -1,6 +1,8 @@
 @if ($product->type != 'configurable')
-<accordian :title="'{{ __($accordian['name']) }}'" :active="true">
+<accordian :title="'{{ __('admin::app.catalog.products.inventories') }}'" :active="true">
     <div slot="body">
+
+        {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.inventories.controls.before', ['product' => $product]) !!}
 
         @foreach ($inventorySources as $inventorySource)
             <?php
@@ -25,6 +27,8 @@
             </div>
         
         @endforeach
+
+        {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.inventories.controls.after', ['product' => $product]) !!}
 
     </div>
 </accordian>

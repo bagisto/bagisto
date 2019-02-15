@@ -45,6 +45,8 @@
                 <?php $familyId = app('request')->input('family') ?>
                 <?php $sku = app('request')->input('sku') ?>
 
+                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.general.before') !!}
+
                 <accordian :title="'{{ __('admin::app.catalog.products.general') }}'" :active="true">
                     <div slot="body">
 
@@ -85,7 +87,12 @@
                     </div>
                 </accordian>
 
+                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.general.after') !!}
+
                 @if ($familyId)
+
+                    {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.configurable_attributes.before') !!}
+
                     <accordian :title="'{{ __('admin::app.catalog.products.configurable-attributes') }}'" :active="true">
                         <div slot="body">
 
@@ -127,6 +134,8 @@
 
                         </div>
                     </accordian>
+
+                    {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.configurable_attributes.after') !!}
                 @endif
 
             </div>

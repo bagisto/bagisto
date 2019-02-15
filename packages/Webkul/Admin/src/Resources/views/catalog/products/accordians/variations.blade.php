@@ -18,14 +18,18 @@
     </style>
 @stop
 
-<accordian :title="'{{ __($accordian['name']) }}'" :active="true">
+<accordian :title="'{{ __('admin::app.catalog.products.variations') }}'" :active="true">
     <div slot="body">
+
+        {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.controls.before', ['product' => $product]) !!}
 
         <button type="button" class="btn btn-md btn-primary" @click="showModal('addVariant')">
             {{ __('admin::app.catalog.products.add-variant-btn-title') }}
         </button>
 
         <variant-list></variant-list>
+
+        {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.controls.after', ['product' => $product]) !!}
 
     </div>
 </accordian>

@@ -1,4 +1,4 @@
-<accordian :title="'{{ __($accordian['name']) }}'" :active="true">
+<accordian :title="'{{ __('admin::app.catalog.products.product-link') }}'" :active="true">
     <div slot="body">
         
 
