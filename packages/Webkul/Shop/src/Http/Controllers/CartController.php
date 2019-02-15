@@ -53,7 +53,8 @@ class CartController extends Controller
         ProductRepository $product,
         ProductImage $productImage,
         ProductView $productView
-    ) {
+    )
+    {
 
         $this->middleware('customer')->only(['moveToWishlist']);
 

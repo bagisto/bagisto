@@ -718,12 +718,6 @@ class Cart {
         $cart->shipping_method = $shippingMethodCode;
         $cart->save();
 
-        // foreach ($cart->shipping_rates as $rate) {
-        //     if ($rate->method != $shippingMethodCode) {
-        //         $rate->delete();
-        //     }
-        // }
-
         return true;
     }
 
