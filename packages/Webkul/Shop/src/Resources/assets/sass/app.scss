@@ -919,6 +919,10 @@ section.slider-block {
 
                 .guest {
                     width: 300px;
+
+                    .btn.btn-sm {
+                        padding: 9px 30px;
+                    }
                 }
 
                 .cart-dropdown-container {
@@ -1277,6 +1281,10 @@ section.slider-block {
             div.right-content {
                 .right-content-menu .guest {
                     width: 240px;
+
+                    .btn.btn-sm {
+                        padding: 7px 14px;
+                    }
                 }
             }
         }
