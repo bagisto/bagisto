@@ -9,6 +9,9 @@
             <div class="control-group" :class="[errors.has('shipping-form.shipping_method') ? 'has-error' : '']">
 
                 @foreach ($shippingRateGroups as $rateGroup)
+
+                    {!! view_render_event('bagisto.shop.checkout.shipping-method.before', ['rateGroup' => $rateGroup]) !!}
+
                     <h4 for="">{{ $rateGroup['carrier_title'] }}</h4>
 
                     @foreach ($rateGroup['rates'] as $rate)
@@ -19,6 +22,8 @@
                             <b>{{ core()->currency($rate->base_price) }}</b>
                         </span>
                     @endforeach
+
+                    {!! view_render_event('bagisto.shop.checkout.shipping-method.after', ['rateGroup' => $rateGroup]) !!}
 
                 @endforeach
 
