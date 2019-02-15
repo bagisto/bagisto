@@ -18,9 +18,14 @@
             </div>
         </div>
 
+        {!! view_render_event('bagisto.admin.catalog.attributes.list.before') !!}
+
         <div class="page-content">
-            @inject('attributes','Webkul\Admin\DataGrids\AttributeDataGrid')
-            {!! $attributes->render() !!}
+
+            {!! app('Webkul\Admin\DataGrids\AttributeDataGrid')->render() !!}
+            
         </div>
+
+        {!! view_render_event('bagisto.admin.catalog.attributes.list.after') !!}
     </div>
 @stop

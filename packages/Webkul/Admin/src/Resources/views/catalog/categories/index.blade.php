@@ -18,9 +18,15 @@
             </div>
         </div>
 
+        {!! view_render_event('bagisto.admin.catalog.categories.list.before') !!}
+
         <div class="page-content">
-            @inject('categories','Webkul\Admin\DataGrids\CategoryDataGrid')
-            {!! $categories->render() !!}
+
+            {!! app('Webkul\Admin\DataGrids\CategoryDataGrid')->render() !!}
+
         </div>
+
+        {!! view_render_event('bagisto.admin.catalog.categories.list.after') !!}
+
     </div>
 @stop
