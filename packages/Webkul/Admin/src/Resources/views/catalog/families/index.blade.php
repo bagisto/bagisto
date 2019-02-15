@@ -26,7 +26,7 @@
 
         </div>
 
-        {!! view_render_event('bagisto.admin.catalog.families.list.before') !!}
+        {!! view_render_event('bagisto.admin.catalog.families.list.after') !!}
         
     </div>
 @stop

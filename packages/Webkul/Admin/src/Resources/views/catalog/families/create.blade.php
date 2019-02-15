@@ -53,7 +53,10 @@
                         </div>
                     </accordian>
 
-                    {!! view_render_event('bagisto.admin.catalog.family.create_form_accordian.general.before') !!}
+                    {!! view_render_event('bagisto.admin.catalog.family.create_form_accordian.general.after') !!}
+
+
+                    {!! view_render_event('bagisto.admin.catalog.family.create_form_accordian.groups.before') !!}
 
                     <accordian :title="'{{ __('admin::app.catalog.families.groups') }}'" :active="true">
                         <div slot="body">
@@ -69,6 +72,9 @@
                             {!! view_render_event('bagisto.admin.catalog.family.create_form_accordian.groups.controls.after') !!}
                         </div>
                     </accordian>
+
+                    {!! view_render_event('bagisto.admin.catalog.family.create_form_accordian.groups.after') !!}
+
                 </div>
             </div>
 

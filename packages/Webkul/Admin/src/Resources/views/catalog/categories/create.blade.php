@@ -151,6 +151,8 @@
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.seo.after') !!}
+
                 </div>
             </div>
 
