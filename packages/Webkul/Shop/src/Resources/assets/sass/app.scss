@@ -2493,6 +2493,24 @@ section.cart {
                     }
                 }
             }
+
+            .address-holder {
+                justify-content: space-between;
+
+                .address-card-1 {
+                    margin-right: 0px !important;
+                    width: 253px !important;
+
+                    .details {
+                        margin-left: 30px;
+
+                        .checkmark {
+                            left: -30px;
+                            top: 12px;
+                        }
+                    }
+                }
+            }
             // complete page end here
         }
     }

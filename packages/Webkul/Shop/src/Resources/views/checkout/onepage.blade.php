@@ -117,6 +117,16 @@
         var paymentHtml = '';
         var reviewHtml = '';
         var summaryHtml = Vue.compile(`<?php echo view('shop::checkout.total.summary', ['cart' => $cart])->render(); ?>`);
+        var customerAddress = null;
+
+        @auth('customer')
+            @if(auth('customer')->user()->addresses)
+                customerAddress = @json(auth('customer')->user()->addresses);
+                customerAddress.email = "{{ auth('customer')->user()->email }}";
+                customerAddress.first_name = "{{ auth('customer')->user()->first_name }}";
+                customerAddress.last_name = "{{ auth('customer')->user()->last_name }}";
+            @endif
+        @endauth
 
         Vue.component('checkout', {
 
@@ -147,8 +157,36 @@
 
                 new_billing_address: false,
 
-                countryStates: @json(core()->groupedStatesByCountries())
+                allAddress: {},
+
+                countryStates: @json(core()->groupedStatesByCountries()),
+
+                country: @json(core()->countries())
             }),
+
+            created() {
+                if(!customerAddress) {
+                    this.new_shipping_address = true;
+                    this.new_billing_address = true;
+                } else {
+                    if (customerAddress.length < 1) {
+                        this.new_shipping_address = true;
+                        this.new_billing_address = true;
+                    } else {
+                        this.allAddress = customerAddress;
+
+                        for (var country in this.country) {
+                            for (var code in this.allAddress) {
+                                if (this.allAddress[code].country) {
+                                    if (this.allAddress[code].country == this.country[country].code) {
+                                        this.allAddress[code]['country'] = this.country[country].name;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
 
             methods: {
                 navigateToStep (step) {

@@ -629,7 +629,7 @@ class Cart {
         $shippingAddress = $data['shipping'];
         $billingAddress['cart_id'] = $shippingAddress['cart_id'] = $cart->id;
 
-        if (isset($data['billing']['address_id'])) {
+        if (isset($data['billing']['address_id']) && $data['billing']['address_id']) {
             $address = $this->customerAddress->findOneWhere(['id'=> $data['billing']['address_id']])->toArray();
             $billingAddress['first_name'] = auth()->guard('customer')->user()->first_name;
             $billingAddress['last_name'] = auth()->guard('customer')->user()->last_name;
@@ -643,7 +643,7 @@ class Cart {
             $billingAddress['phone'] = $address['phone'];
         }
 
-        if (isset($data['shipping']['address_id'])) {
+        if (isset($data['shipping']['address_id']) && $data['shipping']['address_id']) {
             $address = $this->customerAddress->findOneWhere(['id'=> $data['shipping']['address_id']])->toArray();
             $shippingAddress['first_name'] = auth()->guard('customer')->user()->first_name;
             $shippingAddress['last_name'] = auth()->guard('customer')->user()->last_name;
@@ -657,11 +657,15 @@ class Cart {
             $shippingAddress['phone'] = $address['phone'];
         }
 
-        // if (auth()->guard('customer')->check()) {
-        //     if ($data['billing']['use_for_shipping'] == true) {
-        //         $shippingAddress = $billingAddress;
-        //     }
-        // }
+        if (isset($data['billing']['save_as_address']) && $data['billing']['save_as_address']) {
+            $billingAddress['customer_id']  = auth()->guard('customer')->user()->id;
+            $this->customerAddress->create($billingAddress);
+        }
+
+        if (isset($data['shipping']['save_as_address']) && $data['shipping']['save_as_address']) {
+            $shippingAddress['customer_id']  = auth()->guard('customer')->user()->id;
+            $this->customerAddress->create($shippingAddress);
+        }
 
         if ($billingAddressModel = $cart->billing_address) {
             $this->cartAddress->update($billingAddress, $billingAddressModel->id);
