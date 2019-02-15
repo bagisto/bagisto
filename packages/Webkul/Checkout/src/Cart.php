@@ -11,6 +11,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
 
 /**
  * Facades handler for all the methods to be implemented in Cart.
@@ -71,6 +72,13 @@ class Cart {
     protected $wishlist;
 
     /**
+     * CustomerAddressRepository model
+     *
+     * @var mixed
+     */
+     protected $customerAddress;
+
+    /**
      * Suppress the session flash messages
      */
     protected $suppressFlash;
@@ -78,12 +86,13 @@ class Cart {
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Checkout\Repositories\CartRepository        $cart
-     * @param  Webkul\Checkout\Repositories\CartItemRepository    $cartItem
-     * @param  Webkul\Checkout\Repositories\CartAddressRepository $cartAddress
-     * @param  Webkul\Customer\Repositories\CustomerRepository    $customer
-     * @param  Webkul\Product\Repositories\ProductRepository      $product
-     * @param  Webkul\Product\Repositories\TaxCategoryRepository  $taxCategory
+     * @param  Webkul\Checkout\Repositories\CartRepository            $cart
+     * @param  Webkul\Checkout\Repositories\CartItemRepository        $cartItem
+     * @param  Webkul\Checkout\Repositories\CartAddressRepository     $cartAddress
+     * @param  Webkul\Customer\Repositories\CustomerRepository        $customer
+     * @param  Webkul\Product\Repositories\ProductRepository          $product
+     * @param  Webkul\Product\Repositories\TaxCategoryRepository      $taxCategory
+     * @param  Webkul\Product\Repositories\CustomerAddressRepository  $customerAddress
      * @return void
      */
     public function __construct(
@@ -93,7 +102,8 @@ class Cart {
         CustomerRepository $customer,
         ProductRepository $product,
         TaxCategoryRepository $taxCategory,
-        WishlistRepository $wishlist
+        WishlistRepository $wishlist,
+        CustomerAddressRepository $customerAddress
     )
     {
         $this->customer = $customer;
@@ -109,6 +119,8 @@ class Cart {
         $this->taxCategory = $taxCategory;
 
         $this->wishlist = $wishlist;
+
+        $this->customerAddress = $customerAddress;
 
         $this->suppressFlash = false;
     }
@@ -616,6 +628,40 @@ class Cart {
         $billingAddress = $data['billing'];
         $shippingAddress = $data['shipping'];
         $billingAddress['cart_id'] = $shippingAddress['cart_id'] = $cart->id;
+
+        if (isset($data['billing']['address_id'])) {
+            $address = $this->customerAddress->findOneWhere(['id'=> $data['billing']['address_id']])->toArray();
+            $billingAddress['first_name'] = auth()->guard('customer')->user()->first_name;
+            $billingAddress['last_name'] = auth()->guard('customer')->user()->last_name;
+            $billingAddress['email'] = auth()->guard('customer')->user()->email;
+            $billingAddress['address1'] = $address['address1'];
+            $billingAddress['address2'] = $address['address2'];
+            $billingAddress['country'] = $address['country'];
+            $billingAddress['state'] = $address['state'];
+            $billingAddress['city'] = $address['city'];
+            $billingAddress['postcode'] = $address['postcode'];
+            $billingAddress['phone'] = $address['phone'];
+        }
+
+        if (isset($data['shipping']['address_id'])) {
+            $address = $this->customerAddress->findOneWhere(['id'=> $data['shipping']['address_id']])->toArray();
+            $shippingAddress['first_name'] = auth()->guard('customer')->user()->first_name;
+            $shippingAddress['last_name'] = auth()->guard('customer')->user()->last_name;
+            $shippingAddress['email'] = auth()->guard('customer')->user()->email;
+            $shippingAddress['address1'] = $address['address1'];
+            $shippingAddress['address2'] = $address['address2'];
+            $shippingAddress['country'] = $address['country'];
+            $shippingAddress['state'] = $address['state'];
+            $shippingAddress['city'] = $address['city'];
+            $shippingAddress['postcode'] = $address['postcode'];
+            $shippingAddress['phone'] = $address['phone'];
+        }
+
+        // if (auth()->guard('customer')->check()) {
+        //     if ($data['billing']['use_for_shipping'] == true) {
+        //         $shippingAddress = $billingAddress;
+        //     }
+        // }
 
         if ($billingAddressModel = $cart->billing_address) {
             $this->cartAddress->update($billingAddress, $billingAddressModel->id);

@@ -9,7 +9,7 @@ return [
         'wishlist' => 'Wishlist',
         'orders' => 'Orders',
     ],
-    
+
     'common' => [
         'error' => 'Something went wrong, please try again later.'
     ],
@@ -421,7 +421,8 @@ return [
             'billing-address' => 'Billing Address',
             'shipping-address' => 'Shipping Address',
             'contact' => 'Contact',
-            'place-order' => 'Place Order'
+            'place-order' => 'Place Order',
+            'new-address' => 'Add New Address'
         ],
 
         'total' => [
