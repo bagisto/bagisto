@@ -37,7 +37,7 @@
                 <div class="address-holder">
                     @foreach ($addresses as $address)
                         <div class="address-card-1">
-                            <div class="details @if ($address->default_address) mt-20 @endif">
+                            <div class="details">
                                 <span class="bold">{{ auth()->guard('customer')->user()->name }}</span>
                                 {{ $address->name }}</br>
                                 {{ $address->address1 }}, {{ $address->address2 ? $address->address2 . ',' : '' }}</br>
@@ -59,15 +59,6 @@
                                         </a>
                                     </span>
                                 </div>
-
-                                @if ($address->default_address)
-                                    <span class="default-address badge badge-md badge-success">{{ __('shop::app.customer.account.address.index.default') }}</span>
-                                @else
-                                    <div class="make-default mt-20">
-                                        <a href="{{ route('make.default.address', $address->id) }}" class="btn btn-md btn-primary">{{ __('shop::app.customer.account.address.index.make-default') }}</a>
-                                    </div>
-                                @endif
-
                             </div>
                         </div>
                     @endforeach

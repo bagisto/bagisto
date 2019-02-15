@@ -919,6 +919,10 @@ section.slider-block {
 
                 .guest {
                     width: 300px;
+
+                    .btn.btn-sm {
+                        padding: 9px 30px;
+                    }
                 }
 
                 .cart-dropdown-container {
@@ -1277,6 +1281,10 @@ section.slider-block {
             div.right-content {
                 .right-content-menu .guest {
                     width: 240px;
+
+                    .btn.btn-sm {
+                        padding: 7px 14px;
+                    }
                 }
             }
         }
@@ -2482,6 +2490,24 @@ section.cart {
                     .info {
                         font-weight: 500;
                         margin-top: 2px;
+                    }
+                }
+            }
+
+            .address-holder {
+                justify-content: space-between;
+
+                .address-card-1 {
+                    margin-right: 0px !important;
+                    width: 253px !important;
+
+                    .details {
+                        margin-left: 30px;
+
+                        .checkmark {
+                            left: -30px;
+                            top: 12px;
+                        }
                     }
                 }
             }
