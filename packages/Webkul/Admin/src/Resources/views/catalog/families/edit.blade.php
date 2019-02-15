@@ -30,8 +30,12 @@
                     @csrf()
                     <input name="_method" type="hidden" value="PUT">
 
+                    {!! view_render_event('bagisto.admin.catalog.family.edit_form_accordian.general.before', ['attributeFamily' => $attributeFamily]) !!}
+
                     <accordian :title="'{{ __('admin::app.catalog.families.general') }}'" :active="true">
                         <div slot="body">
+
+                            {!! view_render_event('bagisto.admin.catalog.family.edit_form_accordian.general.controls.before', ['attributeFamily' => $attributeFamily]) !!}
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <input type="text" v-validate="'required'" name="code" class="control" id="code" value="{{ $attributeFamily->code }}" disabled="disabled" data-vv-as="&quot;{{ __('admin::app.catalog.families.code') }}&quot;" v-code/>
@@ -45,19 +49,33 @@
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                             </div>
 
+                            {!! view_render_event('bagisto.admin.catalog.family.edit_form_accordian.general.controls.after', ['attributeFamily' => $attributeFamily]) !!}
+
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.catalog.family.edit_form_accordian.general.after', ['attributeFamily' => $attributeFamily]) !!}
+
+
+                    {!! view_render_event('bagisto.admin.catalog.family.edit_form_accordian.groups.before', ['attributeFamily' => $attributeFamily]) !!}
+
                     <accordian :title="'{{ __('admin::app.catalog.families.groups') }}'" :active="true">
                         <div slot="body">
+
+                            {!! view_render_event('bagisto.admin.catalog.family.edit_form_accordian.groups.controls.before', ['attributeFamily' => $attributeFamily]) !!}
 
                             <button type="button" class="btn btn-md btn-primary" @click="showModal('addGroup')">
                                 {{ __('admin::app.catalog.families.add-group-title') }}
                             </button>
 
                             <group-list></group-list>
+
+                            {!! view_render_event('bagisto.admin.catalog.family.edit_form_accordian.groups.controls.before', ['attributeFamily' => $attributeFamily]) !!}
+
                         </div>
                     </accordian>
+
+                    {!! view_render_event('bagisto.admin.catalog.family.edit_form_accordian.groups.after', ['attributeFamily' => $attributeFamily]) !!}
                 </div>
             </div>
 

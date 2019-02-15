@@ -13,7 +13,7 @@
 
     @if ($enableMultiAddress)
         <div class="form-container" v-if="!this.new_billing_address">
-            <div class="form-header">
+            <div class="form-header mb-20">
                 <h1>{{ __('shop::app.checkout.onepage.billing-address') }}</h1>
 
                 <a class="btn btn-lg btn-primary" @click = newBillingAddress()>
