@@ -97,13 +97,17 @@ class CartController extends Controller
 
             Event::fire('checkout.cart.add.after', $result);
 
+            Cart::collectTotals();
+
             if ($result) {
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
+
+                return redirect()->route($this->_config['redirect']);
             } else {
                 session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
-            }
 
-            Cart::collectTotals();
+                return redirect()->back();
+            }
 
             return redirect()->route($this->_config['redirect']);
 
