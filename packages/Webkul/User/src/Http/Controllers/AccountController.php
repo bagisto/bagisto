@@ -63,7 +63,7 @@ class AccountController extends Controller
         $data = request()->input();
 
         if (! Hash::check($data['current_password'], auth()->guard('admin')->user()->password)) {
-            session()->flash('warning', 'Current password does not match.');
+            session()->flash('warning', trans('admin::app.users.users.password-match'));
 
             return redirect()->back();
         }
@@ -75,7 +75,7 @@ class AccountController extends Controller
 
         $user->update($data);
 
-        session()->flash('success', 'Account changes saved successfully.');
+        session()->flash('success', trans('admin::app.users.users.account-save'));
 
         return back();
     }

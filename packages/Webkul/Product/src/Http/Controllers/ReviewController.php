@@ -92,7 +92,7 @@ class ReviewController extends Controller
 
         Event::fire('customer.review.update.after', $id);
 
-        session()->flash('success', 'Review updated successfully.');
+        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Review']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -111,7 +111,7 @@ class ReviewController extends Controller
 
         Event::fire('customer.review.delete.after', $id);
 
-        session()->flash('success', 'Review Successfully Deleted');
+        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Review']));
 
         return redirect()->back();
     }

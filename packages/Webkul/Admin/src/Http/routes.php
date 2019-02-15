@@ -10,10 +10,6 @@ Route::group(['middleware' => ['web']], function () {
             'view' => 'admin::users.sessions.create'
         ])->name('admin.session.create');
 
-        Route::get('/testgrid', 'Webkul\Admin\Http\Controllers\DataGridController@testGrid')->defaults('_config', [
-            'view' => 'admin::catalog.categories.test'
-        ]);
-
         //login post route to admin auth controller
         Route::post('/login', 'Webkul\User\Http\Controllers\SessionController@store')->defaults('_config', [
             'redirect' => 'admin.dashboard.index'
@@ -38,8 +34,6 @@ Route::group(['middleware' => ['web']], function () {
 
         // Admin Routes
         Route::group(['middleware' => ['admin']], function () {
-            Route::get('testev', 'Webkul\Product\Http\Controllers\ProductController@testProductFlat');
-
             Route::get('/logout', 'Webkul\User\Http\Controllers\SessionController@destroy')->defaults('_config', [
                 'redirect' => 'admin.session.create'
             ])->name('admin.session.destroy');
