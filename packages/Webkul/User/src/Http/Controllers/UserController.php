@@ -159,10 +159,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->admin->count() == 1) {
-            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Admin']));
-        } else {
-            Event::fire('user.admin.delete.before', $id);
+        Event::fire('user.admin.delete.before', $id);
 
             if (auth()->guard('admin')->user()->id == $id) {
                 return view('admin::customers.confirm-password');
@@ -173,7 +170,21 @@ class UserController extends Controller
             Event::fire('user.admin.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Admin source']));
-        }
+        // if ($this->admin->count() == 1) {
+        //     session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Admin']));
+        // } else {
+        //     Event::fire('user.admin.delete.before', $id);
+
+        //     if (auth()->guard('admin')->user()->id == $id) {
+        //         return view('admin::customers.confirm-password');
+        //     }
+
+        //     $this->admin->delete($id);
+
+        //     Event::fire('user.admin.delete.after', $id);
+
+        //     session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Admin source']));
+        // }
 
         return redirect()->back();
     }
@@ -208,5 +219,7 @@ class UserController extends Controller
 
             return redirect()->route($this->_config['redirect']);
         }
+
+        return redirect()->route($this->_config['redirect']);
     }
 }
