@@ -2495,11 +2495,9 @@ section.cart {
             }
 
             .address-holder {
-                justify-content: space-between;
-
                 .address-card-1 {
-                    margin-right: 0px !important;
                     width: 253px !important;
+                    margin-right: 13px !important;
 
                     .details {
                         margin-left: 30px;
@@ -2509,6 +2507,10 @@ section.cart {
                             top: 12px;
                         }
                     }
+                }
+
+                .address-card-1:nth-child(3n+0) {
+                    margin-right: 0px !important;
                 }
             }
             // complete page end here
@@ -2985,7 +2987,7 @@ section.review {
             }
         }
 
-        .responsive-table, .responsive-empty {
+        .responsive-empty {
             display: none;
         }
     }
@@ -3236,10 +3238,6 @@ section.review {
             .qty-row {
                 display: block;
             }
-
-            .responsive-table {
-                display: none;
-            }
         }
     }
 
@@ -3362,6 +3360,45 @@ section.review {
         margin: 10px 0px 20px 0px !important;
         align-items: start !important;
         height: 100% !important;
+    }
+}
+
+// responsive table
+@media only screen and (max-width: 770px) {
+    .table {
+        table {
+            width: 100%;
+        }
+
+        table thead {
+            display: none;
+        }
+
+        table tbody {
+            tr td:before {
+                content: attr(data-value);
+                    font-size: 15px;
+                    font-weight: 600;
+                    display: inline-block;
+                    width: 120px;
+            }
+
+            td {
+                border-bottom: none !important;
+                display: block;
+                width: 100% !important;
+
+                div {
+                    position: relative;
+                    left: 100px;
+                    top: -20px;
+                }
+            }
+
+            tr {
+                border: 1px solid #C7C7C7;
+            }
+        }
     }
 }
 
