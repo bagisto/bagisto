@@ -19,6 +19,6 @@ class CountryRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Core\Models\Country';
+        return 'Webkul\Core\Contracts\Country';
     }
 }

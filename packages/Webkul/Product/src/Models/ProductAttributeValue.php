@@ -3,11 +3,11 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Attribute\Models\Attribute;
-use Webkul\Product\Models\Product;
-use Webkul\Channel\Models\Channel;
+use Webkul\Attribute\Models\AttributeProxy;
+use Webkul\Channel\Models\ChannelProxy;
+use Webkul\Product\Contracts\ProductAttributeValue as ProductAttributeValueContract;
 
-class ProductAttributeValue extends Model
+class ProductAttributeValue extends Model implements ProductAttributeValueContract
 {
     public $timestamps = false;
 
@@ -47,7 +47,7 @@ class ProductAttributeValue extends Model
      */
     public function attribute()
     {
-        return $this->belongsTo(Attribute::class);
+        return $this->belongsTo(AttributeProxy::modelClass());
     }
 
     /**
@@ -55,7 +55,7 @@ class ProductAttributeValue extends Model
      */
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(ProductProxy::modelClass());
     }
 
     /**
@@ -63,6 +63,6 @@ class ProductAttributeValue extends Model
      */
     public function channel()
     {
-        return $this->belongsTo(Channel::class);
+        return $this->belongsTo(ChannelProxy::modelClass());
     }
 }

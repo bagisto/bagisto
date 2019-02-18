@@ -21,7 +21,7 @@ class CartRepository extends Repository
 
     function model()
     {
-        return 'Webkul\Checkout\Models\Cart';
+        return 'Webkul\Checkout\Contracts\Cart';
     }
 
     /**

@@ -30,7 +30,7 @@ class SearchRepository extends Repository
 
     function model()
     {
-        return 'Webkul\Product\Models\Product';
+        return 'Webkul\Product\Contracts\Product';
     }
 
     public function searchAttributes() {

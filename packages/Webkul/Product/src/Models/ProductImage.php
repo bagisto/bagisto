@@ -3,10 +3,10 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\Product;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Contracts\ProductImage as ProductImageContract;
 
-class ProductImage extends Model
+class ProductImage extends Model implements ProductImageContract
 {
     public $timestamps = false;
 
@@ -17,7 +17,7 @@ class ProductImage extends Model
      */
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(ProductProxy::modelClass());
     }
 
     /**
@@ -35,7 +35,7 @@ class ProductImage extends Model
     {
         return $this->url();
     }
-    
+
     /**
      * @param string $key
      *

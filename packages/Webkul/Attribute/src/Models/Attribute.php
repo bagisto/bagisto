@@ -5,8 +5,9 @@ namespace Webkul\Attribute\Models;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Attribute\Models\AttributeOption;
 use Webkul\Attribute\Models\AttributeGroup;
+use Webkul\Attribute\Contracts\Attribute as AttributeContract;
 
-class Attribute extends TranslatableModel
+class Attribute extends TranslatableModel implements AttributeContract
 {
     public $translatedAttributes = ['name'];
 
@@ -19,7 +20,7 @@ class Attribute extends TranslatableModel
      */
     public function options()
     {
-        return $this->hasMany(AttributeOption::class);
+        return $this->hasMany(AttributeOptionProxy::modelClass());
     }
 
     /**

@@ -18,6 +18,8 @@ class CheckoutServiceProvider extends ServiceProvider
         include __DIR__ . '/../Http/helpers.php';
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        $this->app->register(ModuleServiceProvider::class);
     }
 
     /**

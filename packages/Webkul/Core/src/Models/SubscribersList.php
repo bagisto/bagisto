@@ -3,8 +3,9 @@
 namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Core\Contracts\SubscribersList as SubscribersListContract;
 
-class SubscribersList extends Model
+class SubscribersList extends Model implements SubscribersListContract
 {
     /**
      * The attributes that are mass assignable.

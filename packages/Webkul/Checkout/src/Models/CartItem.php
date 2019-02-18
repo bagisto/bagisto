@@ -3,10 +3,11 @@
 namespace Webkul\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductProxy;
+use Webkul\Checkout\Contracts\CartItem as CartItemContract;
 
 
-class CartItem extends Model
+class CartItem extends Model implements CartItemContract
 {
     protected $table = 'cart_items';
 
@@ -18,12 +19,12 @@ class CartItem extends Model
 
     public function product()
     {
-        return $this->hasOne(Product::class, 'id', 'product_id');
+        return $this->hasOne(ProductProxy::modelClass(), 'id', 'product_id');
     }
 
     public function cart()
     {
-        return $this->hasOne(Cart::class, 'id', 'cart_id');
+        return $this->hasOne(CartProxy::modelClass(), 'id', 'cart_id');
     }
 
     /**

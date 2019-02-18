@@ -20,7 +20,7 @@ class CoreConfigRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Core\Models\CoreConfig';
+        return 'Webkul\Core\Contracts\CoreConfig';
     }
 
     /**

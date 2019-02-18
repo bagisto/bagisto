@@ -23,6 +23,8 @@ class UserServiceProvider extends ServiceProvider
         $router->aliasMiddleware('admin', BouncerMiddleware::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        $this->app->register(ModuleServiceProvider::class);
     }
 
     /**

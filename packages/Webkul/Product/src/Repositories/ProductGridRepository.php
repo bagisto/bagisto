@@ -39,7 +39,7 @@ class ProductGridRepository extends Repository
     }
 
     public function model() {
-        return 'Webkul\Product\Models\ProductGrid';
+        return 'Webkul\Product\Contracts\ProductGrid';
     }
 
     public function updateWhere($product) {

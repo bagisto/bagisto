@@ -20,7 +20,7 @@ class SubscribersListRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Core\Models\SubscribersList';
+        return 'Webkul\Core\Contracts\SubscribersList';
     }
 
 

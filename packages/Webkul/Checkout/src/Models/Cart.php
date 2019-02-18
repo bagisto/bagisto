@@ -3,13 +3,10 @@
 namespace Webkul\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\Product;
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Checkout\Models\CartAddress;
-use Webkul\Checkout\Models\CartPayment;
-use Webkul\Checkout\Models\CartShippingRate;
+use Webkul\Product\Models\ProductProxy;
+use Webkul\Checkout\Contracts\Cart as CartContract;
 
-class Cart extends Model
+class Cart extends Model implements CartContract
 {
     protected $table = 'cart';
 
@@ -23,14 +20,14 @@ class Cart extends Model
      * To get relevant associated items with the cart instance
      */
     public function items() {
-        return $this->hasMany(CartItem::class)->whereNull('parent_id');
+        return $this->hasMany(CartItemProxy::modelClass())->whereNull('parent_id');
     }
 
     /**
      * To get all the associated items with the cart instance even the parent and child items of configurable products
      */
     public function all_items() {
-        return $this->hasMany(CartItem::class);
+        return $this->hasMany(CartItemProxy::modelClass());
     }
 
     /**
@@ -38,7 +35,7 @@ class Cart extends Model
      */
     public function addresses()
     {
-        return $this->hasMany(CartAddress::class);
+        return $this->hasMany(CartAddressProxy::modelClass());
     }
 
     /**
@@ -78,7 +75,7 @@ class Cart extends Model
      */
     public function shipping_rates()
     {
-        return $this->hasManyThrough(CartShippingRate::class, CartAddress::class, 'cart_id', 'cart_address_id');
+        return $this->hasManyThrough(CartShippingRateProxy::modelClass(), CartAddressProxy::modelClass(), 'cart_id', 'cart_address_id');
     }
 
     /**
@@ -102,6 +99,6 @@ class Cart extends Model
      */
     public function payment()
     {
-        return $this->hasOne(CartPayment::class);
+        return $this->hasOne(CartPaymentProxy::modelClass());
     }
 }

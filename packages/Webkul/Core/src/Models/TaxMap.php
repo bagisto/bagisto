@@ -5,8 +5,9 @@ namespace Webkul\Core\Models;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Models\TaxCategory;
 use Webkul\Core\Models\TaxRate;
+use Webkul\Core\Contracts\TaxMap as TaxMapContract;
 
-class TaxMap extends Model
+class TaxMap extends Model implements TaxMapContract
 {
     /**
      * The attributes that are mass assignable.

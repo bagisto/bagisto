@@ -34,7 +34,7 @@ class SliderRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Core\Models\Slider';
+        return 'Webkul\Core\Contracts\Slider';
     }
 
     /**

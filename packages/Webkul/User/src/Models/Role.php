@@ -4,8 +4,9 @@ namespace Webkul\User\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\User\Models\Admin;
+use Webkul\User\Contracts\Role as RoleContract;
 
-class Role extends Model
+class Role extends Model implements RoleContract
 {
 
     /**
@@ -26,6 +27,6 @@ class Role extends Model
      */
     public function admins()
     {
-        return $this->hasMany(Admin::class);
+        return $this->hasMany(AdminProxy::modelClass());
     }
 }

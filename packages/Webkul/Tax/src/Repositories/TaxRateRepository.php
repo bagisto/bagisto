@@ -19,6 +19,6 @@ class TaxRateRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Tax\Models\TaxRate';
+        return 'Webkul\Tax\Contracts\TaxRate';
     }
 }

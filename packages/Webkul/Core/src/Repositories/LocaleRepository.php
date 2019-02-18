@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Core\Repositories;
- 
+
 use Webkul\Core\Eloquent\Repository;
 
 /**
@@ -19,6 +19,6 @@ class LocaleRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Core\Models\Locale';
+        return 'Webkul\Core\Contracts\Locale';
     }
 }

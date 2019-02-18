@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Attribute\Repositories;
- 
+
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
@@ -42,7 +42,7 @@ class AttributeRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Attribute\Models\Attribute';
+        return 'Webkul\Attribute\Contracts\Attribute';
     }
 
     /**
@@ -170,7 +170,7 @@ class AttributeRepository extends Repository
                 'special_price_to',
                 'status'
             ], $attributeColumns);
-        
+
         if (in_array('*', $codes))
             return $this->all($attributeColumns);
 

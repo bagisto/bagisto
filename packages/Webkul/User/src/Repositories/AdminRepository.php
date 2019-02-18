@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\User\Repositories;
- 
+
 use Webkul\Core\Eloquent\Repository;
 
 /**
@@ -19,6 +19,6 @@ class AdminRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\User\Models\Admin';
+        return 'Webkul\User\Contracts\Admin';
     }
 }
