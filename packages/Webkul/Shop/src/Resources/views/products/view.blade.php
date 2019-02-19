@@ -185,5 +185,8 @@
                 }
             }
         };
+
+
+
     </script>
 @endpush

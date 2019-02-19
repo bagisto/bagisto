@@ -5,12 +5,14 @@
 
 <div class="product-image-group">
 
-    <div class="cp-spinner cp-round" id="loader">
-    </div>
 
-    <product-gallery></product-gallery>
+        <div class="cp-spinner cp-round" id="loader">
+        </div>
 
-    @include ('shop::products.view.product-add')
+        <product-gallery></product-gallery>
+
+        @include ('shop::products.view.product-add')
+
 
 </div>
 

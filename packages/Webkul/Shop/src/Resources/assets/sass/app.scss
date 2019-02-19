@@ -1669,6 +1669,8 @@ section.product-detail {
                 width: 604px;
                 height: 650px;
                 max-width: 604px;
+                position: sticky;
+                top: 10px;
 
                 div {
                     display: flex;
@@ -1907,6 +1909,7 @@ section.product-detail {
             width: auto;
             min-height: 400px;
             height: auto;
+            position: unset;
 
             .loader {
                 margin-left: 47%;
@@ -3340,8 +3343,8 @@ section.review {
 // css for loader
 .cp-spinner {
     position: absolute;
-    left: 26%;
-    margin-top: calc(20% - 80px);
+    left: calc(50% - 24px);
+    margin-top: calc(40% - 24px);
 }
 
 @media only screen and (max-width: 720px) {
@@ -3401,6 +3404,11 @@ section.review {
         }
     }
 }
+
+// .sticky {
+//     position: fixed;
+//     top: 10px;
+// }
 
 
 
