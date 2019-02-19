@@ -422,7 +422,8 @@ return [
             'shipping-address' => 'Shipping Address',
             'contact' => 'Contact',
             'place-order' => 'Place Order',
-            'new-address' => 'Add New Address'
+            'new-address' => 'Add New Address',
+            'save_as_address' => 'Save as Address'
         ],
 
         'total' => [
