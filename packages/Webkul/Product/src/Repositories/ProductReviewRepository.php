@@ -43,7 +43,7 @@ class ProductReviewRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Product\Models\ProductReview';
+        return 'Webkul\Product\Contracts\ProductReview';
     }
 
     /**

@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Product\Repositories;
- 
+
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 
@@ -12,7 +12,7 @@ use Webkul\Core\Eloquent\Repository;
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ProductInventoryRepository extends Repository
-{    
+{
     /**
      * Specify Model class name
      *
@@ -20,7 +20,7 @@ class ProductInventoryRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Product\Models\ProductInventory';
+        return 'Webkul\Product\Contracts\ProductInventory';
     }
 
     /**
@@ -32,7 +32,7 @@ class ProductInventoryRepository extends Repository
     {
         if ($product->type == 'configurable')
             return;
-            
+
         if (isset($data['inventories'])) {
             foreach ($data['inventories'] as $inventorySourceId => $qty) {
                 if (is_null($qty)) {
@@ -44,8 +44,8 @@ class ProductInventoryRepository extends Repository
                         'inventory_source_id' => $inventorySourceId,
                         'vendor_id' => isset($data['vendor_id']) ? $data['vendor_id'] : 0
                     ]);
-                
-                
+
+
                 if ($productInventory) {
                     $productInventory->qty = $qty;
 

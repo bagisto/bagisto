@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Product\Repositories;
- 
+
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
 
@@ -12,7 +12,7 @@ use Webkul\Core\Eloquent\Repository;
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ProductImageRepository extends Repository
-{    
+{
     /**
      * Specify Model class name
      *
@@ -20,7 +20,7 @@ class ProductImageRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Product\Models\ProductImage';
+        return 'Webkul\Product\Contracts\ProductImage';
     }
 
     /**

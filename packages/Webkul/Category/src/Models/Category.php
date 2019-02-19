@@ -5,8 +5,9 @@ namespace Webkul\Category\Models;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Kalnoy\Nestedset\NodeTrait;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Category\Contracts\Category as CategoryContract;
 
-class Category extends TranslatableModel
+class Category extends TranslatableModel implements CategoryContract
 {
     use NodeTrait;
 

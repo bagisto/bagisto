@@ -3,20 +3,21 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Inventory\Models\InventorySource;
+use Webkul\Inventory\Models\InventorySourceProxy;
+use Webkul\Product\Contracts\ProductInventory as ProductInventoryContract;
 
-class ProductInventory extends Model
+class ProductInventory extends Model implements ProductInventoryContract
 {
     public $timestamps = false;
 
     protected $fillable = ['qty', 'product_id', 'inventory_source_id', 'vendor_id'];
-    
+
     /**
      * Get the product attribute family that owns the product.
      */
     public function inventory_source()
     {
-        return $this->belongsTo(InventorySource::class);
+        return $this->belongsTo(InventorySourceProxy::modelClass());
     }
 
     /**
@@ -24,6 +25,6 @@ class ProductInventory extends Model
      */
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(ProductProxy::modelClass());
     }
 }

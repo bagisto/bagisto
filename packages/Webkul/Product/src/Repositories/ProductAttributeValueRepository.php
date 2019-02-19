@@ -42,7 +42,7 @@ class ProductAttributeValueRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Product\Models\ProductAttributeValue';
+        return 'Webkul\Product\Contracts\ProductAttributeValue';
     }
 
     /**

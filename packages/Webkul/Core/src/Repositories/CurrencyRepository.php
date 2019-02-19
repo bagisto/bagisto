@@ -19,7 +19,7 @@ class CurrencyRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Core\Models\Currency';
+        return 'Webkul\Core\Contracts\Currency';
     }
 
     public function delete($id) {

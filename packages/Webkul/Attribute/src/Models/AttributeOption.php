@@ -5,8 +5,9 @@ namespace Webkul\Attribute\Models;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Dimsav\Translatable\Translatable;
 use Webkul\Attribute\Models\Attribute;
+use Webkul\Attribute\Contracts\AttributeOption as AttributeOptionContract;
 
-class AttributeOption extends TranslatableModel
+class AttributeOption extends TranslatableModel implements AttributeOptionContract
 {
     public $timestamps = false;
 

@@ -4,12 +4,11 @@ namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Core\Models\Locale;
-use Webkul\Core\Models\Currency;
-use Webkul\Category\Models\Category;
-use Webkul\Inventory\Models\InventorySource;
+use Webkul\Category\Models\CategoryProxy;
+use Webkul\Inventory\Models\InventorySourceProxy;
+use Webkul\Core\Contracts\Channel as ChannelContract;
 
-class Channel extends Model
+class Channel extends Model implements ChannelContract
 {
     protected $fillable = ['code', 'name', 'description', 'theme', 'home_page_content', 'footer_content', 'hostname', 'default_locale_id', 'base_currency_id', 'root_category_id'];
 
@@ -18,7 +17,7 @@ class Channel extends Model
      */
     public function locales()
     {
-        return $this->belongsToMany(Locale::class, 'channel_locales');
+        return $this->belongsToMany(LocaleProxy::modelClass(), 'channel_locales');
     }
 
     /**
@@ -26,7 +25,7 @@ class Channel extends Model
      */
     public function default_locale()
     {
-        return $this->belongsTo(Locale::class);
+        return $this->belongsTo(LocaleProxy::modelClass());
     }
 
     /**
@@ -34,7 +33,7 @@ class Channel extends Model
      */
     public function currencies()
     {
-        return $this->belongsToMany(Currency::class, 'channel_currencies');
+        return $this->belongsToMany(CurrencyProxy::modelClass(), 'channel_currencies');
     }
 
     /**
@@ -42,7 +41,7 @@ class Channel extends Model
      */
     public function inventory_sources()
     {
-        return $this->belongsToMany(InventorySource::class, 'channel_inventory_sources');
+        return $this->belongsToMany(InventorySourceProxy::modelClass(), 'channel_inventory_sources');
     }
 
 
@@ -53,7 +52,7 @@ class Channel extends Model
      */
     public function base_currency()
     {
-        return $this->belongsTo(Currency::class);
+        return $this->belongsTo(CurrencyProxy::modelClass());
     }
 
     /**
@@ -61,7 +60,7 @@ class Channel extends Model
      */
     public function root_category()
     {
-        return $this->belongsTo(Category::class, 'root_category_id');
+        return $this->belongsTo(CategoryProxy::modelClass(), 'root_category_id');
     }
 
     /**

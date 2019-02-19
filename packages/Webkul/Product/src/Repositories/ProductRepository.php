@@ -94,7 +94,7 @@ class ProductRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Product\Models\Product';
+        return 'Webkul\Product\Contracts\Product';
     }
 
     /**
@@ -189,7 +189,7 @@ class ProductRepository extends Repository
             if  (isset($data['categories'])) {
                 $product->categories()->sync($data['categories']);
             }
-            
+
             $previousVariantIds = $product->variants->pluck('id');
 
             if (isset($data['variants'])) {
@@ -389,7 +389,7 @@ class ProductRepository extends Repository
             foreach ($superAttributeCodes as $attributeCode) {
                 if (! isset($data[$attributeCode]))
                     return false;
-                    
+
                 if ($data[$attributeCode] == $variant->{$attributeCode})
                     $matchCount++;
             }
@@ -417,10 +417,10 @@ class ProductRepository extends Repository
 
                 $qb = $query->distinct()
                         ->addSelect('product_flat.*')
-                        ->addSelect(DB::raw('IF( product_flat.special_price_from IS NOT NULL 
+                        ->addSelect(DB::raw('IF( product_flat.special_price_from IS NOT NULL
                             AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
                             AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS price'))
-                            
+
                         ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                         ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
                         ->where('product_flat.visible_individually', 1)

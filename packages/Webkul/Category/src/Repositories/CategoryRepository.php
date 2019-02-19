@@ -35,7 +35,7 @@ class CategoryRepository extends Repository
      */
     public function model()
     {
-        return 'Webkul\Category\Models\Category';
+        return 'Webkul\Category\Contracts\Category';
     }
 
     /**

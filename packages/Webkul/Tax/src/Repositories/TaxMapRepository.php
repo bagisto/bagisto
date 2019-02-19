@@ -19,7 +19,7 @@ class TaxMapRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Tax\Models\TaxMap';
+        return 'Webkul\Tax\Contracts\TaxMap';
     }
 
     /**

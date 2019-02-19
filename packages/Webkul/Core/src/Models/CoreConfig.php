@@ -3,8 +3,9 @@
 namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Core\Contracts\CoreConfig as CoreConfigContract;
 
-class CoreConfig extends Model
+class CoreConfig extends Model implements CoreConfigContract
 {
     /**
      * The attributes that are mass assignable.

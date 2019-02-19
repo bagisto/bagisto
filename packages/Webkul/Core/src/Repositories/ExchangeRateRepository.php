@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Core\Repositories;
- 
+
 use Webkul\Core\Eloquent\Repository;
 
 /**
@@ -19,6 +19,6 @@ class ExchangeRateRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Core\Models\CurrencyExchangeRate';
+        return 'Webkul\Core\Contracts\CurrencyExchangeRate';
     }
 }

@@ -3,9 +3,9 @@
 namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Core\Models\CurrencyExchangeRate;
+use Webkul\Core\Contracts\Currency as CurrencyContract;
 
-class Currency extends Model
+class Currency extends Model implements CurrencyContract
 {
     /**
      * The attributes that are mass assignable.
@@ -21,6 +21,6 @@ class Currency extends Model
      */
     public function CurrencyExchangeRate()
     {
-        return $this->hasOne(CurrencyExchangeRate::class, 'target_currency');
+        return $this->hasOne(CurrencyExchangeRateProxy::modelClass(), 'target_currency');
     }
 }
