@@ -53,7 +53,7 @@ class AttributeFamilyRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Attribute\Models\AttributeFamily';
+        return 'Webkul\Attribute\Contracts\AttributeFamily';
     }
 
     /**
@@ -79,7 +79,7 @@ class AttributeFamilyRepository extends Repository
                 } else {
                     $attributeModel = $this->attribute->findOneByField('code', $attribute['code']);
                 }
-                
+
                 $attributeGroup->custom_attributes()->save($attributeModel, ['position' => $key + 1]);
             }
         }

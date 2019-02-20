@@ -4,14 +4,13 @@ namespace Webkul\Customer\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Webkul\Customer\Models\CustomerGroup;
-use Webkul\Checkout\Models\Cart;
-use Webkul\Sales\Models\Order;
-use Webkul\Customer\Models\Wishlist;
-use Webkul\Product\Models\ProductReview;
+use Webkul\Checkout\Models\CartProxy;
+use Webkul\Sales\Models\OrderProxy;
+use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Customer\Notifications\CustomerResetPassword;
+use Webkul\Customer\Contracts\Customer as CustomerContract;
 
-class Customer extends Authenticatable
+class Customer extends Authenticatable implements CustomerContract
 {
     use Notifiable;
 
@@ -33,7 +32,7 @@ class Customer extends Authenticatable
      */
     public function customerGroup()
     {
-        return $this->belongsTo(CustomerGroup::class);
+        return $this->belongsTo(CustomerGroupProxy::modelClass());
     }
 
     /**
@@ -52,7 +51,7 @@ class Customer extends Authenticatable
      */
     public function addresses()
     {
-        return $this->hasMany(CustomerAddress::class, 'customer_id');
+        return $this->hasMany(CustomerAddressProxy::modelClass(), 'customer_id');
     }
 
     /**
@@ -60,41 +59,41 @@ class Customer extends Authenticatable
      */
     public function default_address()
     {
-        return $this->hasOne(CustomerAddress::class, 'customer_id')->where('default_address', 1);
+        return $this->hasOne(CustomerAddressProxy::modelClass(), 'customer_id')->where('default_address', 1);
     }
 
     /**
      * Customer's relation with wishlist items
      */
     public function wishlist_items() {
-        return $this->hasMany(Wishlist::class, 'customer_id');
+        return $this->hasMany(WishlistProxy::modelClass(), 'customer_id');
     }
 
     /**
      * get all cart inactive cart instance of a customer
      */
     public function all_carts() {
-        return $this->hasMany(Cart::class, 'customer_id');
+        return $this->hasMany(CartProxy::modelClass(), 'customer_id');
     }
 
     /**
      * get inactive cart inactive cart instance of a customer
      */
     public function inactive_carts() {
-        return $this->hasMany(Cart::class, 'customer_id')->where('is_active', 0);
+        return $this->hasMany(CartProxy::modelClass(), 'customer_id')->where('is_active', 0);
     }
 
     /**
      * get active cart inactive cart instance of a customer
      */
     public function active_carts() {
-        return $this->hasMany(Cart::class, 'customer_id')->where('is_active', 1);
+        return $this->hasMany(CartProxy::modelClass(), 'customer_id')->where('is_active', 1);
     }
 
     /**
      * get all reviews of a customer
     */
     public function all_reviews() {
-        return $this->hasMany(ProductReview::class, 'customer_id');
+        return $this->hasMany(ProductReviewProxy::modelClass(), 'customer_id');
     }
 }

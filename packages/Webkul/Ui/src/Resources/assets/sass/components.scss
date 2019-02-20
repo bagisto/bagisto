@@ -1,3 +1,5 @@
+@import "mixins";
+
 .grid-container {
     display: block;
     width: 100%;
@@ -8,7 +10,7 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .filter-row-two {
@@ -70,23 +72,21 @@
 }
 
 .dropdown-list.dropdown-container {
-    padding: 5px;
+    padding: 15px;
     width: 100%;
     top: 43px;
 
     ul {
         li {
             .control-group {
-                padding: 15px;
+                margin-bottom: 15px;
             }
         }
     }
 
     .apply-filter {
         padding: 10px;
-        width: 80%;
-        margin-left: 10%;
-        margin-bottom: 5%;
+        width: 100%;
     }
 }
 
@@ -98,10 +98,11 @@
     font-size: 14px;
     height: 28px;
     border-radius: 2px;
+    margin-right: 20px;
 
     .wrapper {
-        margin-left: 5px;
-        padding: 0px 5px 0px 5px;
+        margin-left: 10px;
+        padding: 5px 10px 5px 10px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -110,9 +111,11 @@
         height: 28px;
         color: #000311;
         letter-spacing: -0.22px;
-    }
-}
+        @include border-radius(2px);
 
-.filter-tag:not(first-child) {
-    margin-left: 10px;
+        .icon.cross-icon {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    }
 }

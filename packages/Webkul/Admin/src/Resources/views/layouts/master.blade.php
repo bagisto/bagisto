@@ -19,7 +19,7 @@
 
     </head>
 
-    <body style="scroll-behavior: smooth;">
+    <body @if (app()->getLocale() == 'ar') class="rtl" @endif style="scroll-behavior: smooth;">
         {!! view_render_event('bagisto.admin.layout.body.before') !!}
 
         <div id="app">

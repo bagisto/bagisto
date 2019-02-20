@@ -4,8 +4,9 @@ namespace Webkul\Tax\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Tax\Models\TaxCategory;
+use Webkul\Tax\Contracts\TaxRate as TaxRateContract;
 
-class TaxRate extends Model
+class TaxRate extends Model implements TaxRateContract
 {
     /**
      * The attributes that are mass assignable.
@@ -20,6 +21,6 @@ class TaxRate extends Model
     ];
 
     public function tax_categories() {
-        return $this->belongsToMany(TaxCategory::class, 'tax_categories_tax_rates', 'tax_rate_id', 'id');
+        return $this->belongsToMany(TaxCategoryProxy::modelClass(), 'tax_categories_tax_rates', 'tax_rate_id', 'id');
     }
 }

@@ -21,7 +21,7 @@ class CustomerGroupRepository extends Repository
 
     function model()
     {
-        return 'Webkul\Customer\Models\CustomerGroup';
+        return 'Webkul\Customer\Contracts\CustomerGroup';
     }
 
     /**

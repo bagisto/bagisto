@@ -3,8 +3,9 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Product\Contracts\ProductFlat as ProductFlatContract;
 
-class ProductFlat extends Model
+class ProductFlat extends Model implements ProductFlatContract
 {
     protected $table = 'product_flat';
 
@@ -17,6 +18,6 @@ class ProductFlat extends Model
      */
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(ProductProxy::modelClass());
     }
 }

@@ -4,9 +4,10 @@ namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Inventory\Models\InventorySource;
-use Webkul\Core\Models\Channel;
+use Webkul\Core\Models\ChannelProxy;
+use Webkul\Product\Contracts\ProductSalableInventory as ProductSalableInventoryContract;
 
-class ProductSalableInventory extends Model
+class ProductSalableInventory extends Model implements ProductSalableInventoryContract
 {
     public $timestamps = false;
 
@@ -17,9 +18,9 @@ class ProductSalableInventory extends Model
      */
     public function channel()
     {
-        return $this->belongsTo(Channel::class);
+        return $this->belongsTo(ChannelProxy::modelClass());
     }
-    
+
     // /**
     //  * Get the inventory source owns the product.
     //  */
@@ -33,6 +34,6 @@ class ProductSalableInventory extends Model
      */
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(ProductProxy::modelClass());
     }
 }

@@ -25,60 +25,63 @@
             <div class="account-items-list">
 
                 <div class="account-table-content">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th> {{ __('shop::app.customer.account.order.index.order_id') }}</th>
-                                <th> {{ __('shop::app.customer.account.order.index.date')  }} </th>
-                                <th> {{ __('shop::app.customer.account.order.index.total') }} </th>
-                                <th> {{ __('shop::app.customer.account.order.index.status')}} </th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($orders as $order)
-
+                    <div class="table">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td data-value="{{  __('shop::app.customer.account.order.index.order_id') }}">
-                                        <a href="{{ route('customer.orders.view', $order->id) }}">
-                                            #{{ $order->id }}
-                                        </a>
-                                    </td>
-
-                                    <td data-value="{{ __('shop::app.customer.account.order.index.date') }}">{{ core()->formatDate($order->created_at, 'd M Y') }}</td>
-
-                                    <td data-value="{{ __('shop::app.customer.account.order.index.total') }}">
-                                        {{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}
-                                    </td>
-
-                                    <td data-value="{{  __('shop::app.customer.account.order.index.status') }}">
-                                        @if($order->status == 'processing')
-                                            <span class="badge badge-md badge-success">Processing</span>
-                                        @elseif ($order->status == 'completed')
-                                            <span class="badge badge-md badge-success">Completed</span>
-                                        @elseif ($order->status == "canceled")
-                                            <span class="badge badge-md badge-danger">Canceled</span>
-                                        @elseif ($order->status == "closed")
-                                            <span class="badge badge-md badge-info">Closed</span>
-                                        @elseif ($order->status == "pending")
-                                            <span class="badge badge-md badge-warning">Pending</span>
-                                        @elseif ($order->status == "pending_payment")
-                                            <span class="badge badge-md badge-warning">Pending Payment</span>
-                                        @elseif ($order->status == "fraud")
-                                            <span class="badge badge-md badge-danger">Fraud</span>
-                                        @endif
-                                    </td>
+                                    <th> {{ __('shop::app.customer.account.order.index.order_id') }}</th>
+                                    <th> {{ __('shop::app.customer.account.order.index.date')  }} </th>
+                                    <th> {{ __('shop::app.customer.account.order.index.total') }} </th>
+                                    <th> {{ __('shop::app.customer.account.order.index.status')}} </th>
                                 </tr>
+                            </thead>
 
-                            @endforeach
+                            <tbody>
+                                @foreach ($orders as $order)
 
-                            @if (! $orders->count())
-                                <tr>
-                                    <td class="empty" colspan="10" style="text-align: center;">{{ __('admin::app.common.no-result-found') }}</td>
-                                <tr>
-                            @endif
-                        </tbody>
-                    </table>
+                                    <tr>
+                                        <td data-value="{{  __('shop::app.customer.account.order.index.order_id') }}">
+                                            <a href="{{ route('customer.orders.view', $order->id) }}">
+                                                #{{ $order->id }}
+                                            </a>
+                                        </td>
+
+                                        <td data-value="{{ __('shop::app.customer.account.order.index.date') }}">{{ core()->formatDate($order->created_at, 'd M Y') }}</td>
+
+                                        <td data-value="{{ __('shop::app.customer.account.order.index.total') }}">
+                                            {{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}
+                                        </td>
+
+                                        <td data-value="{{  __('shop::app.customer.account.order.index.status') }}">
+                                            @if($order->status == 'processing')
+                                                <span class="badge badge-md badge-success">Processing</span>
+                                            @elseif ($order->status == 'completed')
+                                                <span class="badge badge-md badge-success">Completed</span>
+                                            @elseif ($order->status == "canceled")
+                                                <span class="badge badge-md badge-danger">Canceled</span>
+                                            @elseif ($order->status == "closed")
+                                                <span class="badge badge-md badge-info">Closed</span>
+                                            @elseif ($order->status == "pending")
+                                                <span class="badge badge-md badge-warning">Pending</span>
+                                            @elseif ($order->status == "pending_payment")
+                                                <span class="badge badge-md badge-warning">Pending Payment</span>
+                                            @elseif ($order->status == "fraud")
+                                                <span class="badge badge-md badge-danger">Fraud</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+
+                                @endforeach
+
+                                @if (! $orders->count())
+                                    <tr>
+                                        <td class="empty" colspan="10" style="text-align: center;">{{ __('admin::app.common.no-result-found') }}</td>
+                                    <tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
 
                 @if (!$orders->count())
