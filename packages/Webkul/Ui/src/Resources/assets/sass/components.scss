@@ -70,23 +70,21 @@
 }
 
 .dropdown-list.dropdown-container {
-    padding: 5px;
+    padding: 15px;
     width: 100%;
     top: 43px;
 
     ul {
         li {
             .control-group {
-                padding: 15px;
+                margin-bottom: 15px;
             }
         }
     }
 
     .apply-filter {
         padding: 10px;
-        width: 80%;
-        margin-left: 10%;
-        margin-bottom: 5%;
+        width: 100%;
     }
 }
 
