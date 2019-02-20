@@ -22,7 +22,7 @@ class View extends AbstractProduct
             if ($attribute->is_visible_on_front && $product->{$attribute->code}) {
                 $value = $product->{$attribute->code};
 
-                if ($attribute->type == 'select') {
+                if (($attribute->type == 'select') || ($attribute->type == 'multiselect')) {
                     $attributeOption = $attributeOptionReposotory->find($value);
 
                     if ($attributeOption) {
