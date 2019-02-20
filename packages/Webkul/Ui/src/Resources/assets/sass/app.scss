@@ -242,10 +242,12 @@ h2 {
 
 .table {
     width: 100%;
+    overflow-x: auto !important;
 
     table {
         border-collapse: collapse;
         text-align: left;
+        width: 100%;
 
         thead th {
             font-weight: 700;
