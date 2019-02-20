@@ -19,22 +19,22 @@ class OrderShipmentsDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('shipments as ship')
+        $queryBuilder = DB::table('shipments')
                 ->leftJoin('order_address as order_address_shipping', function($leftJoin) {
-                    $leftJoin->on('order_address_shipping.order_id', '=', 'ship.order_address_id')
+                    $leftJoin->on('order_address_shipping.order_id', '=', 'shipments.order_id')
                         ->where('order_address_shipping.address_type', 'shipping');
                 })
-                ->leftJoin('orders as ors', 'ship.order_id', '=', 'ors.id')
-                ->leftJoin('inventory_sources as is', 'ship.inventory_source_id', '=', 'is.id')
-                ->select('ship.id as shipment_id', 'ship.order_id as shipment_order_id', 'ship.total_qty as shipment_total_qty', 'is.name as inventory_source_name', 'ors.created_at as orderdate', 'ship.created_at as shipment_created_at')
+                ->leftJoin('orders as ors', 'shipments.order_id', '=', 'ors.id')
+                ->leftJoin('inventory_sources as is', 'shipments.inventory_source_id', '=', 'is.id')
+                ->select('shipments.id as shipment_id', 'shipments.order_id as shipment_order_id', 'shipments.total_qty as shipment_total_qty', 'is.name as inventory_source_name', 'ors.created_at as orderdate', 'shipments.created_at as shipment_created_at')
                 ->addSelect(DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name) as shipped_to'));
 
-        $this->addFilter('shipment_id', 'ship.id');
-        $this->addFilter('shipment_order_id', 'ship.order_id');
-        $this->addFilter('shipment_total_qty', 'ship.total_qty');
+        $this->addFilter('shipment_id', 'shipments.id');
+        $this->addFilter('shipment_order_id', 'shipments.order_id');
+        $this->addFilter('shipment_total_qty', 'shipments.total_qty');
         $this->addFilter('inventory_source_name', 'is.name');
         $this->addFilter('orderdate', 'ors.created_at');
-        $this->addFilter('shipment_created_at', 'ship.created_at');
+        $this->addFilter('shipment_created_at', 'shipments.created_at');
         $this->addFilter('shipped_to', DB::raw('CONCAT(ors.customer_first_name, " ", ors.customer_last_name)'));
 
         $this->setQueryBuilder($queryBuilder);
