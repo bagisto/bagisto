@@ -162,6 +162,10 @@ class ProductRepository extends Repository
             if (! isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && ! $data[$attribute->code]))
                 continue;
 
+            if ($attribute->type == 'multiselect') {
+                $data[$attribute->code] = implode(",", $data[$attribute->code]);
+            }
+
             $attributeValue = $this->attributeValue->findOneWhere([
                     'product_id' => $product->id,
                     'attribute_id' => $attribute->id,
