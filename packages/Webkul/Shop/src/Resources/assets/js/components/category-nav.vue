@@ -19,13 +19,16 @@ export default {
             required: false,
             default: () => ([])
         },
+
         url: String
     },
+
     data(){
         return {
             items_count:0
         };
     },
+    
     computed: {
         items () {
             return JSON.parse(this.categories)
