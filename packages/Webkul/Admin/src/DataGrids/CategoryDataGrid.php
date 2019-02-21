@@ -73,14 +73,6 @@ class CategoryDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'locale',
-            'label' => trans('admin::app.datagrid.locale'),
-            'type' => 'boolean',
-            'sortable' => true,
-            'searchable' => true,
-        ]);
-
-        $this->addColumn([
             'index' => 'count',
             'label' => trans('admin::app.datagrid.no-of-products'),
             'type' => 'number',
