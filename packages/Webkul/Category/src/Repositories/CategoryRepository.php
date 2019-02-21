@@ -76,7 +76,7 @@ class CategoryRepository extends Repository
     public function getCategoryTree($id = null)
     {
         return $id
-            ? Category::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
+            ? Category::orderBy('position', 'ASC')->descendantsOf($id)->toTree()
             : Category::orderBy('position', 'ASC')->get()->toTree();
     }
 
@@ -100,7 +100,7 @@ class CategoryRepository extends Repository
     public function getVisibleCategoryTree($id = null)
     {
         return $id
-            ? Category::orderBy('position', 'ASC')->where('id', '!=', $id)->where('status', 1)->get()->toTree()
+            ? Category::orderBy('position', 'ASC')->where('status', 1)->descendantsOf($id)->toTree()
             : Category::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
     }
 

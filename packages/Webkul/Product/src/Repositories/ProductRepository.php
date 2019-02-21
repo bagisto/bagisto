@@ -59,11 +59,11 @@ class ProductRepository extends Repository
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository           $attribute
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository     $attributeOption
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository     $attributeOption
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValue
-     * @param  Webkul\Product\Repositories\ProductImageRepository          $productImage
+     * @param  Webkul\Attribute\Repositories\AttributeRepository             $attribute
+     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository       $attributeOption
+     * @param  Webkul\Attribute\Repositories\ProductAttributeValueRepository $attributeValue
+     * @param  Webkul\Product\Repositories\ProductInventoryRepository        $productInventory
+     * @param  Webkul\Product\Repositories\ProductImageRepository            $productImage
      * @return void
      */
     public function __construct(
