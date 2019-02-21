@@ -30,7 +30,7 @@ return [
             ], [
                 'name' => 'active',
                 'title' => 'Status',
-                'type' => 'select',
+                'type' => 'multiselect',
                 'options' => [
                     [
                         'title' => 'Active',

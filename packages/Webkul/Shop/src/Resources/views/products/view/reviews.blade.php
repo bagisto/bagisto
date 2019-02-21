@@ -29,11 +29,11 @@
 
             </div>
 
-            @auth('customer')
-            <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
-                {{ __('shop::app.products.write-review-btn') }}
-            </a>
-            @endauth
+            @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
+                <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
+                    {{ __('shop::app.products.write-review-btn') }}
+                </a>
+            @endif
 
         </div>
 
@@ -59,7 +59,7 @@
 
                     <div class="reviewer-details">
                         <span class="by">
-                            {{ __('shop::app.products.by', ['name' => $review->customer->name]) }},
+                            {{ __('shop::app.products.by', ['name' => $review->name]) }},
                         </span>
 
                         <span class="when">
@@ -76,7 +76,7 @@
         </div>
     </div>
 @else
-    @auth('customer')
+    @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
         <div class="rating-reviews">
             <div class="rating-header">
                 <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary">
@@ -84,7 +84,7 @@
                 </a>
             </div>
         </div>
-    @endauth
+    @endif
 @endif
 
 {!! view_render_event('bagisto.shop.products.view.reviews.after', ['product' => $product]) !!}
