@@ -9,7 +9,7 @@ use Webkul\Product\Contracts\ProductReview as ProductReviewContract;
 
 class ProductReview extends Model implements ProductReviewContract
 {
-    protected $fillable = ['comment', 'title', 'rating', 'status', 'product_id', 'customer_id'];
+    protected $fillable = ['comment', 'title', 'rating', 'status', 'product_id', 'customer_id', 'name'];
 
     /**
      * Get the product attribute family that owns the product.
