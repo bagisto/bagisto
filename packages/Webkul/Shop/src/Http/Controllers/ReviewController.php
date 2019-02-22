@@ -46,8 +46,6 @@ class ReviewController extends Controller
      */
     public function __construct(Product $product, ProductReview $productReview)
     {
-        $this->middleware('customer')->only(['create', 'store', 'destroy']);
-
         $this->product = $product;
 
         $this->productReview = $productReview;
@@ -65,7 +63,9 @@ class ReviewController extends Controller
     {
         $product = $this->product->findBySlugOrFail($slug);
 
-        return view($this->_config['view'], compact('product'));
+        $guest_review = core()->getConfigData('catalog.products.review.guest_review');
+
+        return view($this->_config['view'], compact('product', 'guest_review'));
     }
 
     /**
@@ -84,11 +84,13 @@ class ReviewController extends Controller
 
         $data = request()->all();
 
-        $customer_id = auth()->guard('customer')->user()->id;
+        if (auth()->guard('customer')->user()) {
+            $data['customer_id'] = auth()->guard('customer')->user()->id;
+            $data['name'] = auth()->guard('customer')->user()->first_name .' ' . auth()->guard('customer')->user()->last_name;
+        }
 
         $data['status'] = 'pending';
         $data['product_id'] = $id;
-        $data['customer_id'] = $customer_id;
 
         $this->productReview->create($data);
 

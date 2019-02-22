@@ -80,7 +80,8 @@ return [
         'ratingreviews' => ':rating Ratings & :review Reviews',
         'star' => 'Star',
         'percentage' => ':percentage %',
-        'id-star' => 'star'
+        'id-star' => 'star',
+        'name' => 'Name'
     ],
 
     'customer' => [

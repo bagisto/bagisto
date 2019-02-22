@@ -771,7 +771,8 @@ return [
         'xls' => 'XLS',
         'file' => 'File',
         'upload-error' => 'The file must be a file of type: xls, xlsx, csv.',
-        'duplicate-error' => 'Identifier must be unique, duplicate identifier :identifier at row :position.'
+        'duplicate-error' => 'Identifier must be unique, duplicate identifier :identifier at row :position.',
+        'enough-row-error' => 'file has not enough rows'
     ],
 
     'response' => [
