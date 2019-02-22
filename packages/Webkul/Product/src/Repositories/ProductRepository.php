@@ -59,11 +59,11 @@ class ProductRepository extends Repository
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository           $attribute
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository     $attributeOption
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository     $attributeOption
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValue
-     * @param  Webkul\Product\Repositories\ProductImageRepository          $productImage
+     * @param  Webkul\Attribute\Repositories\AttributeRepository             $attribute
+     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository       $attributeOption
+     * @param  Webkul\Attribute\Repositories\ProductAttributeValueRepository $attributeValue
+     * @param  Webkul\Product\Repositories\ProductInventoryRepository        $productInventory
+     * @param  Webkul\Product\Repositories\ProductImageRepository            $productImage
      * @return void
      */
     public function __construct(
@@ -161,6 +161,10 @@ class ProductRepository extends Repository
         foreach ($attributes as $attribute) {
             if (! isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && ! $data[$attribute->code]))
                 continue;
+
+            if ($attribute->type == 'multiselect') {
+                $data[$attribute->code] = implode(",", $data[$attribute->code]);
+            }
 
             $attributeValue = $this->attributeValue->findOneWhere([
                     'product_id' => $product->id,
