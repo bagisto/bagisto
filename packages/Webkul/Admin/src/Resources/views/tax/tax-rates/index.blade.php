@@ -53,6 +53,8 @@
                 <div class="control-group" :class="[errors.has('file') ? 'has-error' : '']">
                     <label for="file" class="required">{{ __('admin::app.export.file') }}</label>
                     <input v-validate="'required'" type="file" class="control" id="file" name="file" data-vv-as="&quot;{{ __('admin::app.export.file') }}&quot;" value="{{ old('file') }}"/ style="padding-top: 5px">
+                    <span>{{ __('admin::app.export.allowed-type') }}</span>
+                    <span><b>{{ __('admin::app.export.file-type') }}</b></span>
                     <span class="control-error" v-if="errors.has('file')">@{{ errors.first('file') }}</span>
                 </div>
 
