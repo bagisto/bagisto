@@ -15,8 +15,12 @@
                 @foreach ($customAttributeValues as $attribute)
 
                     <tr>
-                        <td>{{ $attribute['label'] }}</td>
-                        <td>{{ $attribute['value'] }}</td>
+                        @if ($attribute['label'])
+                            <td>{{ $attribute['label'] }}</td>
+                        @else
+                            <td>{{ $attribute['admin_name'] }}</td>
+                        @endif
+                            <td>{{ $attribute['value'] }}</>
                     </tr>
 
                 @endforeach
