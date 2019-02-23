@@ -77,8 +77,49 @@ class AuthTest extends TestCase
         ]);
 
         $response->assertRedirect('/customer/account/profile');
-
-        $this->assertEquals(count([auth()->guard('customer')->user()]), 1);
-
     }
+
+        /**
+         * Test that customer cannot login with the wrong credentials.
+         */
+        public function willNotLoginWithWrongCredentials()
+        {
+            $customers = app(Customer::class);
+            $customer = $customers->findOneByField('email', 'prashant@webkul.com');
+
+            $response = $this->from(route('login'))->post(route('customer.session.create'),
+                        [
+                            'email' => $customer->email,
+                            'password' => 'wrongpassword3428903mlndvsnljkvsd',
+                        ]);
+
+            $this->assertGuest();
+        }
+
+        /**
+         * Test to confirm that customer cannot login if user does not exist.
+         */
+        public function willNotLoginWithNonexistingCustomer()
+        {
+            $response = $this->post(route('customer.session.create'), [
+                            'email' => 'fiaiia9q2943jklq34h203qtb3o2@something.com',
+                            'password' => 'wrong-password',
+                        ]);
+
+            $this->assertGuest();
+        }
+
+        /**
+         * To test that customer can logout
+         */
+        public function allowsCustomerToLogout()
+        {
+            $customer = auth()->guard('customer')->user();
+
+            dd('logout test', $customer);
+
+            $this->get(route('customer.session.destroy'));
+
+            $this->assertGuest();
+        }
 }
