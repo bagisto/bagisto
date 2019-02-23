@@ -33,7 +33,6 @@ class SessionController extends Controller
         $subscriber = new CustomerEventsHandler;
 
         Event::subscribe($subscriber);
-
     }
 
     public function show()

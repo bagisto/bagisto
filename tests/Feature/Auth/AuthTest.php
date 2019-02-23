@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 
 use Auth;
+use Crypt;
 
 use App;
 use Faker\Generator as Faker;
@@ -50,8 +51,8 @@ class AuthTest extends TestCase
         $customers = app(Customer::class);
 
         $created = $customers->create([
-            'first_name' => explode(' ',$faker->name)[0],
-            'last_name' => explode(' ',$faker->name)[0],
+            'first_name' => explode(' ', $faker->name)[0],
+            'last_name' => explode(' ', $faker->name)[0],
             'channel_id' => core()->getCurrentChannel()->id,
             'gender' => $faker->randomElement($array = array ('Male','Female', 'Other')),
             'date_of_birth' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -64,12 +65,20 @@ class AuthTest extends TestCase
     }
 
     public function testCustomerLogin() {
+        config(['app.url' => 'http://127.0.0.1:8000']);
+
         $customers = app(Customer::class);
 
-        $customer = $customers->find(1);
+        $customer = $customers->findOneByField('email', 'prashant@webkul.com');
 
-        $user = ['email' => $customer->email, 'password' => $customer->password];
+        $response = $this->post('/customer/login', [
+            'email' => $customer->email,
+            'password' => '12345678'
+        ]);
 
-        $this->assertAuthenticatedAs($user);
+        $response->assertRedirect('/customer/account/profile');
+
+        $this->assertEquals(count([auth()->guard('customer')->user()]), 1);
+
     }
 }
