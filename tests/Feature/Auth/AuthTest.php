@@ -68,7 +68,6 @@ class AuthTest extends TestCase
         config(['app.url' => 'http://127.0.0.1:8000']);
 
         $customers = app(Customer::class);
-
         $customer = $customers->findOneByField('email', 'prashant@webkul.com');
 
         $response = $this->post('/customer/login', [
@@ -116,7 +115,7 @@ class AuthTest extends TestCase
         {
             $customer = auth()->guard('customer')->user();
 
-            dd('logout test', $customer);
+            // dd('logout test', $customer);
 
             $this->get(route('customer.session.destroy'));
 
