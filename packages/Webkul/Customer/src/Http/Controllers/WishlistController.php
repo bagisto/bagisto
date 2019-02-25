@@ -104,15 +104,27 @@ class WishlistController extends Controller
      * @param integer $itemId
      */
     public function remove($itemId) {
-        $result = $this->wishlist->deleteWhere(['customer_id' => auth()->guard('customer')->user()->id, 'channel_id' => core()->getCurrentChannel()->id, 'id' => $itemId]);
+        $found = $this->wishlist->find($itemId);
 
-        if ($result) {
-            session()->flash('success', trans('customer::app.wishlist.removed'));
-
-            return redirect()->back();
+        if(isset($found)) {
+            $found = true;
         } else {
-            session()->flash('error', trans('customer::app.wishlist.remove-fail'));
+            $found = false;
+        }
 
+        if($found) {
+            $result = $this->wishlist->deleteWhere(['customer_id' => auth()->guard('customer')->user()->id, 'channel_id' => core()->getCurrentChannel()->id, 'id' => $itemId]);
+
+            if ($result) {
+                session()->flash('success', trans('customer::app.wishlist.removed'));
+
+                return redirect()->back();
+            } else {
+                session()->flash('error', trans('customer::app.wishlist.remove-fail'));
+
+                return redirect()->back();
+            }
+        } else {
             return redirect()->back();
         }
     }
