@@ -42,7 +42,10 @@ class View extends AbstractProduct
                     $attributeOption = $attributeOptionReposotory->find($value);
 
                     if ($attributeOption) {
-                        $value = $attributeOption->translate(app()->getLocale())->label;
+                        $value = $attributeOption->translate(app()->getLocale());
+                        if ($value) {
+                            $value = $value->label;
+                        }
                     }
                 }
 
@@ -54,8 +57,11 @@ class View extends AbstractProduct
                         $attributeOption = $attributeOptionReposotory->find($value);
 
                         if ($attributeOption) {
-                            $value = $attributeOption->translate(app()->getLocale())->label;
-                            $result[] = $value;
+                            $value = $attributeOption->translate(app()->getLocale());
+                            if ($value) {
+                                $value = $value->label;
+                                $result[] = $value;
+                            }
                         }
                     }
 
