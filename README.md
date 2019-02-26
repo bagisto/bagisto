@@ -42,7 +42,7 @@ It packs in lots of demanding features that allows your business to scale in no 
 * Orders Management System.
 * Customer Cart, Wishlist, Product Reviews.
 * Simple and Configurable Products.
-* Check out [more....](https://bagisto.com/features/).
+* Check out [click here...](https://bagisto.com/features/).
 
 **For Developers**:
 Dev guys can take advantage of two of the hottest frameworks used in this project Laravel and Vue.js, both of these frameworks have been used in Bagisto.
