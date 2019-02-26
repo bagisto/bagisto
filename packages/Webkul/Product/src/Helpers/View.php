@@ -32,6 +32,7 @@ class View extends AbstractProduct
                         'code' => $attribute->code,
                         'label' => $attribute->name,
                         'value' => $value,
+                        'admin_name' => $attribute->admin_name,
                         ];
                 }
             } else if ($attribute->is_visible_on_front && $product->{$attribute->code}) {
@@ -41,7 +42,10 @@ class View extends AbstractProduct
                     $attributeOption = $attributeOptionReposotory->find($value);
 
                     if ($attributeOption) {
-                        $value = $attributeOption->translate(app()->getLocale())->label;
+                        $value = $attributeOption->translate(app()->getLocale());
+                        if ($value) {
+                            $value = $value->label;
+                        }
                     }
                 }
 
@@ -53,18 +57,22 @@ class View extends AbstractProduct
                         $attributeOption = $attributeOptionReposotory->find($value);
 
                         if ($attributeOption) {
-                            $value = $attributeOption->translate(app()->getLocale())->label;
-                            $result[] = $value;
+                            $value = $attributeOption->translate(app()->getLocale());
+                            if ($value) {
+                                $value = $value->label;
+                                $result[] = $value;
+                            }
                         }
                     }
 
-                    $value = implode(",", $result);
+                    $value = implode(", ", $result);
                 }
 
                 $data[] = [
                     'code' => $attribute->code,
                     'label' => $attribute->name,
                     'value' => $value,
+                    'admin_name' => $attribute->admin_name,
                     ];
             }
         }
