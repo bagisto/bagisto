@@ -274,7 +274,7 @@
     <script type="text/x-template" id="options-template">
         <div>
 
-            <div class="control-group">
+            <div class="control-group" v-if="show_swatch">
                 <label for="swatch_type">{{ __('admin::app.catalog.attributes.swatch_type') }}</label>
                 <select class="control" id="swatch_type" name="swatch_type" v-model="swatch_type">
                     <option value="dropdown">
@@ -299,7 +299,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th v-if="swatch_type == 'color' || swatch_type == 'image'">{{ __('admin::app.catalog.attributes.swatch') }}</th>
+                            <th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">{{ __('admin::app.catalog.attributes.swatch') }}</th>
 
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
                             
@@ -317,11 +317,11 @@
                         
                     <tbody>
                         <tr v-for="(row, index) in optionRows">
-                            <td v-if="swatch_type == 'color'">
+                            <td v-if="show_swatch && swatch_type == 'color'">
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
                             </td>
 
-                            <td v-if="swatch_type == 'image'">
+                            <td v-if="show_swatch && swatch_type == 'image'">
                                 <img style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;" v-if="row.swatch_value_url" :src="row.swatch_value_url"/>
                                 <input type="file" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
                             </td>
@@ -364,14 +364,6 @@
     </script>
 
     <script>
-        $('#type').on('change', function (e) {
-            if (['select', 'multiselect', 'checkbox'].indexOf($(e.target).val()) === -1) {
-                $('#options').parent().addClass('hide')
-            } else {
-                $('#options').parent().removeClass('hide')
-            }
-        })
-
         Vue.component('option-wrapper', {
 
             template: '#options-template', 
@@ -379,6 +371,7 @@
             data: () => ({
                 optionRowCount: 0,
                 optionRows: [],
+                show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
                 swatch_type: "{{ $attribute->swatch_type }}"
             }),
 
@@ -400,6 +393,16 @@
 
                     this.optionRows.push(row);
                 @endforeach
+
+                var this_this = this;
+
+                $('#type').on('change', function (e) {
+                    if (['select'].indexOf($(e.target).val()) === -1) {
+                        this_this.show_swatch = false;
+                    } else {
+                        this_this.show_swatch = true;
+                    }
+                });
             },
 
             methods: {
