@@ -9,8 +9,6 @@
             {{ __('shop::app.products.pager-info', ['showing' => $products->firstItem() . '-' . $products->lastItem(), 'total' => $products->total()]) }}
         </span>
 
-        <span> Men </span>
-
         <span class="sort-filter">
             <i class="icon sort-icon" id="sort" ></i>
             <i class="icon filter-icon" id="filter"></i>

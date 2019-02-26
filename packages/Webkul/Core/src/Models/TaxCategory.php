@@ -5,8 +5,9 @@ namespace Webkul\Core\Models;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Models\TaxRate;
 use Webkul\Core\Models\TaxMap;
+use Webkul\Core\Contracts\TaxCategory as TaxCategoryContract;
 
-class TaxCategory extends Model
+class TaxCategory extends Model implements TaxCategoryContract
 {
     /**
      * The attributes that are mass assignable.
@@ -22,6 +23,6 @@ class TaxCategory extends Model
 
     //for joining the two way pivot table
     public function tax_rates() {
-        return $this->belongsToMany(TaxRate::class, 'tax_categories_tax_rates', 'tax_category_id')->withPivot('id');
+        return $this->belongsToMany(TaxRateProxy::modelClass(), 'tax_categories_tax_rates', 'tax_category_id')->withPivot('id');
     }
 }

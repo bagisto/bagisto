@@ -9,7 +9,7 @@ return [
         'wishlist' => 'Wishlist',
         'orders' => 'Orders',
     ],
-    
+
     'common' => [
         'error' => 'Something went wrong, please try again later.'
     ],
@@ -80,7 +80,8 @@ return [
         'ratingreviews' => ':rating Ratings & :review Reviews',
         'star' => 'Star',
         'percentage' => ':percentage %',
-        'id-star' => 'star'
+        'id-star' => 'star',
+        'name' => 'Name'
     ],
 
     'customer' => [
@@ -322,7 +323,8 @@ return [
         'quantity' => 'Quantity',
         'in-stock' => 'In Stock',
         'out-of-stock' => 'Out Of Stock',
-        'view-all' => 'View All'
+        'view-all' => 'View All',
+        'select-above-options' => 'Please select above options first.'
     ],
 
     'wishlist' => [
@@ -421,7 +423,9 @@ return [
             'billing-address' => 'Billing Address',
             'shipping-address' => 'Shipping Address',
             'contact' => 'Contact',
-            'place-order' => 'Place Order'
+            'place-order' => 'Place Order',
+            'new-address' => 'Add New Address',
+            'save_as_address' => 'Save as Address'
         ],
 
         'total' => [

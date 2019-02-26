@@ -44,7 +44,7 @@ class AdminServiceProvider extends ServiceProvider
             Handler::class
         );
     }
-    
+
     /**
      * Register services.
      *
@@ -62,18 +62,6 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function composeView()
     {
-        view()->composer(['admin::catalog.products.create', 'admin::catalog.products.edit'], function ($view) {
-            $accordian = Tree::create();
-
-            foreach (config('product_form_accordians') as $item) {
-                $accordian->add($item);
-            }
-
-            $accordian->items = core()->sortItems($accordian->items);
-
-            $view->with('form_accordians', $accordian);
-        });
-
         view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $tree = Tree::create();
 
@@ -127,7 +115,7 @@ class AdminServiceProvider extends ServiceProvider
 
         return $tree;
     }
-    
+
     /**
      * Register package config.
      *
@@ -144,7 +132,7 @@ class AdminServiceProvider extends ServiceProvider
         );
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/product_form_accordians.php', 'product_form_accordians'
+            dirname(__DIR__) . '/Config/system.php', 'core'
         );
     }
 }

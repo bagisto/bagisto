@@ -25,12 +25,14 @@ class CoreServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
 
         Validator::extend('slug', 'Webkul\Core\Contracts\Validations\Slug@passes');
-        
+
         Validator::extend('code', 'Webkul\Core\Contracts\Validations\Code@passes');
 
         Validator::extend('decimal', 'Webkul\Core\Contracts\Validations\Decimal@passes');
+
+        $this->app->register(ModuleServiceProvider::class);
     }
-    
+
     /**
      * Register services.
      *

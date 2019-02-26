@@ -15,10 +15,10 @@
                     {{ $billingAddress->name }}</br>
                     {{ $billingAddress->address1 }}, {{ $billingAddress->address2 ? $billingAddress->address2 . ',' : '' }} {{ $billingAddress->state }}</br>
                     {{ country()->name($billingAddress->country) }} {{ $billingAddress->postcode }}</br>
-                    
+
                     <span class="horizontal-rule"></span>
 
-                    {{ __('shop::app.checkout.onepage.contact') }} : {{ $billingAddress->phone }} 
+                    {{ __('shop::app.checkout.onepage.contact') }} : {{ $billingAddress->phone }}
                 </div>
             </div>
         @endif
@@ -33,10 +33,10 @@
                     {{ $shippingAddress->name }}</br>
                     {{ $shippingAddress->address1 }}, {{ $shippingAddress->address2 ? $shippingAddress->address2 . ',' : '' }} , {{ $shippingAddress->state }}</br>
                     {{ country()->name($shippingAddress->country) }} {{ $shippingAddress->postcode }}</br>
-                    
+
                     <span class="horizontal-rule"></span>
 
-                    {{ __('shop::app.checkout.onepage.contact') }} : {{ $shippingAddress->phone }} 
+                    {{ __('shop::app.checkout.onepage.contact') }} : {{ $shippingAddress->phone }}
                 </div>
             </div>
         @endif
@@ -48,8 +48,8 @@
     <div class="cart-item-list">
         @foreach ($cart->items as $item)
 
-            <?php 
-                $product = $item->product; 
+            <?php
+                $product = $item->product;
 
                 $productBaseImage = $productImageHelper->getProductBaseImage($product);
             ?>
@@ -104,7 +104,7 @@
                         <div class="summary" >
 
                             {{ Cart::getProductAttributeOptionDetails($item->child->product)['html'] }}
-                            
+
                         </div>
 
                         {!! view_render_event('bagisto.shop.checkout.options.after', ['item' => $item]) !!}
@@ -119,7 +119,7 @@
     <div class="order-description">
 
         <div class="pull-left" style="width: 50%;float: left;">
-            
+
             <div class="shipping">
                 <div class="decorator">
                     <i class="icon shipping-icon"></i>
@@ -146,7 +146,7 @@
 
         </div>
 
-        <div class="pull-right" style="width: 50%;float: left;">
+        <div class="pull-right" style="width: 50%; float: left;">
 
             @include('shop::checkout.total.summary', ['cart' => $cart])
 

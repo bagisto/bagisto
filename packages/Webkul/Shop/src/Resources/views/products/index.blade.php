@@ -44,7 +44,7 @@
                         </div>
                     @else
                         <div class="product-list">
-                            @foreach ($products as $product)
+                            @foreach ($products as $productFlat)
 
                                 @include ('shop::products.list.card', ['product' => $productFlat->product])
 

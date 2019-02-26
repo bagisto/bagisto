@@ -46,7 +46,11 @@
                 <div class="heading mt-10">
                     <span> {{ __('shop::app.reviews.rating-reviews') }} </span>
 
-                    <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary right"> {{ __('shop::app.products.write-review-btn') }}</a>
+                    @if (core()->getConfigData('catalog.products.review.guest_review') || auth()->guard('customer')->check())
+                        <a href="{{ route('shop.reviews.create', $product->url_key) }}" class="btn btn-lg btn-primary right">
+                            {{ __('shop::app.products.write-review-btn') }}
+                        </a>
+                    @endif
                 </div>
 
                 <div class="ratings-reviews mt-35">
@@ -112,7 +116,7 @@
 
                                 <div class="reviewer-details">
                                     <span class="by">
-                                        {{ __('shop::app.products.by', ['name' => $review->customer->name]) }},
+                                        {{ __('shop::app.products.by', ['name' => $review->name]) }},
                                     </span>
 
                                     <span class="when">

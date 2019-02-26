@@ -3,9 +3,9 @@
 namespace Webkul\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Checkout\Models\CartShippingRate;
+use Webkul\Checkout\Contracts\CartAddress as CartAddressContract;
 
-class CartAddress extends Model
+class CartAddress extends Model implements CartAddressContract
 {
     protected $table = 'cart_address';
 
@@ -16,7 +16,7 @@ class CartAddress extends Model
      */
     public function shipping_rates()
     {
-        return $this->hasMany(CartShippingRate::class);
+        return $this->hasMany(CartShippingRateProxy::modelClass());
     }
 
     /**

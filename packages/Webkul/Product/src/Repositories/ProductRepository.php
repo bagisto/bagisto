@@ -59,11 +59,11 @@ class ProductRepository extends Repository
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository           $attribute
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository     $attributeOption
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository     $attributeOption
-     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValue
-     * @param  Webkul\Product\Repositories\ProductImageRepository          $productImage
+     * @param  Webkul\Attribute\Repositories\AttributeRepository             $attribute
+     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository       $attributeOption
+     * @param  Webkul\Attribute\Repositories\ProductAttributeValueRepository $attributeValue
+     * @param  Webkul\Product\Repositories\ProductInventoryRepository        $productInventory
+     * @param  Webkul\Product\Repositories\ProductImageRepository            $productImage
      * @return void
      */
     public function __construct(
@@ -87,14 +87,14 @@ class ProductRepository extends Repository
         parent::__construct($app);
     }
 
-    /**
+    /**->where('product_flat.visible_individually', 1)
      * Specify Model class name
      *
      * @return mixed
      */
     function model()
     {
-        return 'Webkul\Product\Models\Product';
+        return 'Webkul\Product\Contracts\Product';
     }
 
     /**
@@ -162,6 +162,10 @@ class ProductRepository extends Repository
             if (! isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && ! $data[$attribute->code]))
                 continue;
 
+            if ($attribute->type == 'multiselect') {
+                $data[$attribute->code] = implode(",", $data[$attribute->code]);
+            }
+
             $attributeValue = $this->attributeValue->findOneWhere([
                     'product_id' => $product->id,
                     'attribute_id' => $attribute->id,
@@ -189,7 +193,7 @@ class ProductRepository extends Repository
             if  (isset($data['categories'])) {
                 $product->categories()->sync($data['categories']);
             }
-            
+
             $previousVariantIds = $product->variants->pluck('id');
 
             if (isset($data['variants'])) {
@@ -389,7 +393,7 @@ class ProductRepository extends Repository
             foreach ($superAttributeCodes as $attributeCode) {
                 if (! isset($data[$attributeCode]))
                     return false;
-                    
+
                 if ($data[$attributeCode] == $variant->{$attributeCode})
                     $matchCount++;
             }
@@ -417,10 +421,10 @@ class ProductRepository extends Repository
 
                 $qb = $query->distinct()
                         ->addSelect('product_flat.*')
-                        ->addSelect(DB::raw('IF( product_flat.special_price_from IS NOT NULL 
+                        ->addSelect(DB::raw('IF( product_flat.special_price_from IS NOT NULL
                             AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
                             AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS price'))
-                            
+
                         ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                         ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
                         ->where('product_flat.visible_individually', 1)
@@ -520,6 +524,7 @@ class ProductRepository extends Repository
                 return $query->distinct()
                         ->addSelect('product_flat.*')
                         ->where('product_flat.status', 1)
+                        ->where('product_flat.visible_individually', 1)
                         ->where('product_flat.new', 1)
                         ->where('product_flat.channel', $channel)
                         ->where('product_flat.locale', $locale)
@@ -544,6 +549,7 @@ class ProductRepository extends Repository
                 return $query->distinct()
                         ->addSelect('product_flat.*')
                         ->where('product_flat.status', 1)
+                        ->where('product_flat.visible_individually', 1)
                         ->where('product_flat.featured', 1)
                         ->where('product_flat.channel', $channel)
                         ->where('product_flat.locale', $locale)
@@ -567,6 +573,7 @@ class ProductRepository extends Repository
                 return $query->distinct()
                         ->addSelect('product_flat.*')
                         ->where('product_flat.status', 1)
+                        ->where('product_flat.visible_individually', 1)
                         ->where('product_flat.channel', $channel)
                         ->where('product_flat.locale', $locale)
                         ->whereNotNull('product_flat.url_key')

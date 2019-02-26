@@ -3,14 +3,13 @@
 namespace Webkul\Attribute\Models;
 
 use Webkul\Core\Eloquent\TranslatableModel;
-use Webkul\Attribute\Models\AttributeOption;
-use Webkul\Attribute\Models\AttributeGroup;
+use Webkul\Attribute\Contracts\Attribute as AttributeContract;
 
-class Attribute extends TranslatableModel
+class Attribute extends TranslatableModel implements AttributeContract
 {
     public $translatedAttributes = ['name'];
 
-    protected $fillable = ['code', 'admin_name', 'type', 'position', 'is_required', 'is_unique', 'validation', 'value_per_locale', 'value_per_channel', 'is_filterable', 'is_configurable', 'is_visible_on_front', 'is_user_defined'];
+    protected $fillable = ['code', 'admin_name', 'type', 'position', 'is_required', 'is_unique', 'validation', 'value_per_locale', 'value_per_channel', 'is_filterable', 'is_configurable', 'is_visible_on_front', 'is_user_defined', 'swatch_type'];
 
     protected $with = ['options'];
 
@@ -19,7 +18,7 @@ class Attribute extends TranslatableModel
      */
     public function options()
     {
-        return $this->hasMany(AttributeOption::class);
+        return $this->hasMany(AttributeOptionProxy::modelClass());
     }
 
     /**

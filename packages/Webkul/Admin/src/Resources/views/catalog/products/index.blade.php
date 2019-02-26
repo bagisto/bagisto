@@ -18,6 +18,8 @@
             </div>
         </div>
 
+        {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
+
         <div class="page-content">
             {{-- @inject('product','Webkul\Admin\DataGrids\ProductDataGrid')
             {!! $product->render() !!} --}}
@@ -25,5 +27,8 @@
             @inject('products', 'Webkul\Admin\DataGrids\ProductDataGrid')
             {!! $products->render() !!}
         </div>
+
+        {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
+
     </div>
 @stop

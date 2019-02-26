@@ -19,7 +19,7 @@ class TaxCategoryRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Tax\Models\TaxCategory';
+        return 'Webkul\Tax\Contracts\TaxCategory';
     }
 
     public function attachOrDetach($taxCategory, $data) {

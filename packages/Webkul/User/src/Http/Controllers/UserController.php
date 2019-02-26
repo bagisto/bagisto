@@ -160,7 +160,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         if ($this->admin->count() == 1) {
-            session()->flash('error', 'At least one admin is required.');
+            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Admin']));
         } else {
             Event::fire('user.admin.delete.before', $id);
 

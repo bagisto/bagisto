@@ -4,8 +4,9 @@ namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Product\Models\Product;
+use Webkul\Product\Contracts\ProductGrid as ProductGridContract;
 
-class ProductGrid extends Model
+class ProductGrid extends Model implements ProductGridContract
 {
     protected $table = 'products_grid';
 
@@ -14,6 +15,6 @@ class ProductGrid extends Model
     public $timestamps = false;
 
     public function product() {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsTo(ProductProxy::modelClass(), 'product_id');
     }
 }

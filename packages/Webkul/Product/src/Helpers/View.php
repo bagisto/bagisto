@@ -19,7 +19,22 @@ class View extends AbstractProduct
         $attributeOptionReposotory = app('Webkul\Attribute\Repositories\AttributeOptionRepository');
 
         foreach ($attributes as $attribute) {
-            if ($attribute->is_visible_on_front && $product->{$attribute->code}) {
+            if ($attribute->type == 'boolean') {
+                $value = $product->{$attribute->code};
+                if ($attribute->is_visible_on_front ) {
+                    if ($value == 1) {
+                        $value = 'Yes';
+                    } else {
+                        $value = 'No';
+                    }
+
+                    $data[] = [
+                        'code' => $attribute->code,
+                        'label' => $attribute->name,
+                        'value' => $value,
+                        ];
+                }
+            } else if ($attribute->is_visible_on_front && $product->{$attribute->code}) {
                 $value = $product->{$attribute->code};
 
                 if ($attribute->type == 'select') {
@@ -28,6 +43,22 @@ class View extends AbstractProduct
                     if ($attributeOption) {
                         $value = $attributeOption->translate(app()->getLocale())->label;
                     }
+                }
+
+                if ($attribute->type == 'multiselect') {
+                    $values = explode(",", $value);
+
+                    $result = [];
+                    foreach ($values as $value) {
+                        $attributeOption = $attributeOptionReposotory->find($value);
+
+                        if ($attributeOption) {
+                            $value = $attributeOption->translate(app()->getLocale())->label;
+                            $result[] = $value;
+                        }
+                    }
+
+                    $value = implode(",", $result);
                 }
 
                 $data[] = [

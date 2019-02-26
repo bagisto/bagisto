@@ -3,16 +3,13 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Attribute\Models\AttributeFamily;
-use Webkul\Category\Models\Category;
-use Webkul\Attribute\Models\Attribute;
-use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Models\ProductInventory;
-use Webkul\Product\Models\ProductImage;
-use Webkul\Inventory\Models\InventorySource;
-use Webkul\Product\Models\ProductReview;
+use Webkul\Attribute\Models\AttributeFamilyProxy;
+use Webkul\Category\Models\CategoryProxy;
+use Webkul\Attribute\Models\AttributeProxy;
+use Webkul\Inventory\Models\InventorySourceProxy;
+use Webkul\Product\Contracts\Product as ProductContract;
 
-class Product extends Model
+class Product extends Model implements ProductContract
 {
     protected $fillable = ['type', 'attribute_family_id', 'sku', 'parent_id'];
 
@@ -25,7 +22,7 @@ class Product extends Model
      */
     public function attribute_family()
     {
-        return $this->belongsTo(AttributeFamily::class);
+        return $this->belongsTo(AttributeFamilyProxy::modelClass());
     }
 
     /**
@@ -33,7 +30,7 @@ class Product extends Model
      */
     public function attribute_values()
     {
-        return $this->hasMany(ProductAttributeValue::class);
+        return $this->hasMany(ProductAttributeValueProxy::modelClass());
     }
 
     /**
@@ -49,7 +46,7 @@ class Product extends Model
      */
     public function reviews()
     {
-        return $this->hasMany(ProductReview::class);
+        return $this->hasMany(ProductReviewProxy::modelClass());
     }
 
     /**
@@ -65,7 +62,7 @@ class Product extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'product_categories');
+        return $this->belongsToMany(CategoryProxy::modelClass(), 'product_categories');
     }
 
     /**
@@ -73,7 +70,7 @@ class Product extends Model
      */
     public function inventories()
     {
-        return $this->hasMany(ProductInventory::class, 'product_id');
+        return $this->hasMany(ProductInventoryProxy::modelClass(), 'product_id');
     }
 
     /**
@@ -81,7 +78,7 @@ class Product extends Model
      */
     public function ordered_inventories()
     {
-        return $this->hasMany(ProductOrderedInventory::class, 'product_id');
+        return $this->hasMany(ProductOrderedInventoryProxy::modelClass(), 'product_id');
     }
 
     /**
@@ -89,7 +86,7 @@ class Product extends Model
      */
     public function inventory_sources()
     {
-        return $this->belongsToMany(InventorySource::class, 'product_inventories')->withPivot('id', 'qty');
+        return $this->belongsToMany(InventorySourceProxy::modelClass(), 'product_inventories')->withPivot('id', 'qty');
     }
 
     /**
@@ -97,7 +94,7 @@ class Product extends Model
      */
     public function super_attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'product_super_attributes');
+        return $this->belongsToMany(AttributeProxy::modelClass(), 'product_super_attributes');
     }
 
     /**
@@ -105,7 +102,7 @@ class Product extends Model
      */
     public function images()
     {
-        return $this->hasMany(ProductImage::class, 'product_id');
+        return $this->hasMany(ProductImageProxy::modelClass(), 'product_id');
     }
 
     /**

@@ -20,7 +20,7 @@ class ChannelRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Core\Models\Channel';
+        return 'Webkul\Core\Contracts\Channel';
     }
 
     /**

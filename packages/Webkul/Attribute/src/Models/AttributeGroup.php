@@ -3,12 +3,12 @@
 namespace Webkul\Attribute\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Attribute\Models\Attribute;
+use Webkul\Attribute\Contracts\AttributeGroup as AttributeGroupContract;
 
-class AttributeGroup extends Model
+class AttributeGroup extends Model implements AttributeGroupContract
 {
     public $timestamps = false;
-    
+
     protected $fillable = ['name', 'position', 'is_user_defined'];
 
     /**
@@ -16,7 +16,7 @@ class AttributeGroup extends Model
      */
     public function custom_attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'attribute_group_mappings')
+        return $this->belongsToMany(AttributeProxy::modelClass(), 'attribute_group_mappings')
             ->withPivot('position')
             ->orderBy('pivot_position', 'asc');
     }

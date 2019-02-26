@@ -18,11 +18,48 @@
                 <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
                     <label class="required">@{{ attribute.label }}</label>
 
-                    <select v-validate="'required'" class="control" :name="['super_attribute[' + attribute.id + ']']" :disabled="attribute.disabled" @change="configure(attribute, $event.target.value)" :id="['attribute_' + attribute.id]" :data-vv-as="'&quot;' + attribute.label + '&quot;'">
+                    <span v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
+                        <select 
+                            class="control"
+                            v-validate="'required'"
+                            :name="['super_attribute[' + attribute.id + ']']"
+                            :disabled="attribute.disabled"
+                            @change="configure(attribute, $event.target.value)"
+                            :id="['attribute_' + attribute.id]"
+                            :data-vv-as="'&quot;' + attribute.label + '&quot;'">
 
-                        <option v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
+                            <option v-for='(option, index) in attribute.options' :value="option.id">@{{ option.label }}</option>
 
-                    </select>
+                        </select>
+                    </span>
+
+                    <span class="swatch-container" v-else>
+                        <label class="swatch" 
+                            v-for='(option, index) in attribute.options'
+                            v-if="option.id"
+                            :data-id="option.id"
+                            :for="['attribute_' + attribute.id + '_option_' + option.id]">
+
+                            <input type="radio" 
+                                v-validate="'required'"
+                                :name="['super_attribute[' + attribute.id + ']']"
+                                :id="['attribute_' + attribute.id + '_option_' + option.id]"
+                                :value="option.id"
+                                :data-vv-as="'&quot;' + attribute.label + '&quot;'"
+                                @change="configure(attribute, $event.target.value)"/>
+
+                            <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
+
+                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" />
+
+                            <span v-if="attribute.swatch_type == 'text'">
+                                @{{ option.label }}
+                            </span>
+
+                        </label>
+
+                        <span v-if="! attribute.options.length" class="no-options">{{ __('shop::app.products.select-above-options') }}</span>
+                    </span>
 
                     <span class="control-error" v-if="errors.has('super_attribute[' + attribute.id + ']')">
                         @{{ errors.first('super_attribute[' + attribute.id + ']') }}
@@ -96,6 +133,7 @@
                                 attribute.nextAttribute.disabled = false;
 
                                 this.fillSelect(attribute.nextAttribute);
+                                
                                 this.resetChildren(attribute.nextAttribute);
                             } else {
                                 this.selectedProductId = attribute.options[attribute.selectedIndex].allowedProducts[0];
@@ -137,6 +175,7 @@
                                 selectedIndex = index;
                             }
                         })
+
                         return selectedIndex;
                     },
 
@@ -165,8 +204,7 @@
 
                         this.clearSelect(attribute)
 
-                        attribute.options = [];
-                        attribute.options[0] = {'id': '', 'label': this.config.chooseText, 'products': []};
+                        attribute.options = [{'id': '', 'label': this.config.chooseText, 'products': []}];
 
                         if (attribute.prevAttribute) {
                             prevOption = attribute.prevAttribute.options[attribute.prevAttribute.selectedIndex];
@@ -207,13 +245,23 @@
                     },
 
                     clearSelect: function (attribute) {
-                        if (!attribute)
+                        if (! attribute)
                             return;
 
-                        var element = document.getElementById("attribute_" + attribute.id);
+                        if (! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown') {
+                            var element = document.getElementById("attribute_" + attribute.id);
 
-                        if (element) {
-                            element.selectedIndex = "0";
+                            if (element) {
+                                element.selectedIndex = "0";
+                            }
+                        } else {
+                            var elements = document.getElementsByName('super_attribute[' + attribute.id + ']');
+
+                            var this_this = this;
+
+                            elements.forEach(function(element) {
+                                element.checked = false;
+                            })
                         }
                     },
 

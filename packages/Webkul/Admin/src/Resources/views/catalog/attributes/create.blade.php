@@ -28,8 +28,13 @@
                 <div class="form-container">
                     @csrf()
 
+                    {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.general.before') !!}
+
                     <accordian :title="'{{ __('admin::app.catalog.attributes.general') }}'" :active="true">
                         <div slot="body">
+
+                            {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.general.controls.before') !!}
+
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code">{{ __('admin::app.catalog.attributes.code') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ old('code') }}"  data-vv-as="&quot;{{ __('admin::app.catalog.attributes.code') }}&quot;" v-code/>
@@ -49,11 +54,21 @@
                                     <option value="date">{{ __('admin::app.catalog.attributes.date') }}</option>
                                 </select>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.general.controls.after') !!}
+
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.general.after') !!}
+
+
+                    {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.label.before') !!}
+
                     <accordian :title="'{{ __('admin::app.catalog.attributes.label') }}'" :active="true">
                         <div slot="body">
+
+                            {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.label.controls.before') !!}
 
                             <div class="control-group" :class="[errors.has('admin_name') ? 'has-error' : '']">
                                 <label for="admin_name" class="required">{{ __('admin::app.catalog.attributes.admin') }}</label>
@@ -70,22 +85,41 @@
 
                             @endforeach
 
+                            {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.label.controls.after') !!}
+
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.label.after') !!}
+
+
+
                     <div class="hide">
+                        {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.options.before') !!}
+
                         <accordian :title="'{{ __('admin::app.catalog.attributes.options') }}'" :active="true" :id="'options'">
                             <div slot="body">
+                                
+                                {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.options.controls.before') !!}
 
                                 <option-wrapper></option-wrapper>
 
+                                {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.options.controls.after') !!}
+
                             </div>
                         </accordian>
+
+                        {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.options.after') !!}
                     </div>
+
+
+                    {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.validations.before') !!}
 
                     <accordian :title="'{{ __('admin::app.catalog.attributes.validations') }}'" :active="true">
                         <div slot="body">
 
+                            {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.options.controls.before') !!}
+                            
                             <div class="control-group">
                                 <label for="is_required">{{ __('admin::app.catalog.attributes.is_required') }}</label>
                                 <select class="control" id="is_required" name="is_required">
@@ -113,11 +147,20 @@
                                 </select>
                             </div>
 
+                            {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.options.controls.after') !!}
+
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.validations.after') !!}
+
+
+                    {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.configuration.before') !!}
+
                     <accordian :title="'{{ __('admin::app.catalog.attributes.configuration') }}'" :active="true">
                         <div slot="body">
+
+                            {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.configuration.controls.before') !!}
 
                             <div class="control-group">
                                 <label for="value_per_locale">{{ __('admin::app.catalog.attributes.value_per_locale') }}</label>
@@ -159,8 +202,13 @@
                                 </select>
                             </div>
 
+                            {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.configuration.controls.after') !!}
+
                         </div>
                     </accordian>
+
+                    {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.configuration.after') !!}
+
                 </div>
             </div>
 
@@ -171,10 +219,34 @@
 @push('scripts')
     <script type="text/x-template" id="options-template">
         <div>
+
+            <div class="control-group">
+                <label for="swatch_type">{{ __('admin::app.catalog.attributes.swatch_type') }}</label>
+                <select class="control" id="swatch_type" name="swatch_type" v-model="swatch_type">
+                    <option value="dropdown">
+                        {{ __('admin::app.catalog.attributes.dropdown') }}
+                    </option>
+
+                    <option value="color">
+                        {{ __('admin::app.catalog.attributes.color-swatch') }}
+                    </option>
+
+                    <option value="image">
+                        {{ __('admin::app.catalog.attributes.image-swatch') }}
+                    </option>
+
+                    <option value="text">
+                        {{ __('admin::app.catalog.attributes.text-swatch') }}
+                    </option>
+                </select>
+            </div>
+
             <div class="table">
                 <table>
                     <thead>
                         <tr>
+                            <th v-if="swatch_type == 'color' || swatch_type == 'image'">{{ __('admin::app.catalog.attributes.swatch') }}</th>
+                            
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
 
                             @foreach (Webkul\Core\Models\Locale::all() as $locale)
@@ -191,6 +263,14 @@
 
                     <tbody>
                         <tr v-for="row in optionRows">
+                            <td v-if="swatch_type == 'color'">
+                                <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
+                            </td>
+
+                            <td v-if="swatch_type == 'image'">
+                                <input type="file" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
+                            </td>
+
                             <td>
                                 <div class="control-group" :class="[errors.has(adminName(row)) ? 'has-error' : '']">
                                     <input type="text" v-validate="'required'" v-model="row['admin_name']" :name="adminName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"/>
@@ -244,7 +324,8 @@
 
                 data: () => ({
                     optionRowCount: 0,
-                    optionRows: []
+                    optionRows: [],
+                    swatch_type: ''
                 }),
 
                 methods: {
@@ -253,7 +334,7 @@
                         var row = {'id': 'option_' + rowCount};
 
                         @foreach (Webkul\Core\Models\Locale::all() as $locale)
-                        row['{{ $locale->code }}'] = '';
+                            row['{{ $locale->code }}'] = '';
                         @endforeach
 
                         this.optionRows.push(row);

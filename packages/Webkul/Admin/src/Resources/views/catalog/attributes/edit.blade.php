@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.catalog.attributes.update', $attribute->id) }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.catalog.attributes.update', $attribute->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
             <div class="page-header">
                 <div class="page-title">
@@ -29,8 +29,13 @@
                     @csrf()
                     <input name="_method" type="hidden" value="PUT">
 
+                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.before', ['attribute' => $attribute]) !!}
+
                     <accordian :title="'{{ __('admin::app.catalog.attributes.general') }}'" :active="true">
                         <div slot="body">
+
+                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.controls.before', ['attribute' => $attribute]) !!}
+
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                 <label for="code" class="required">{{ __('admin::app.catalog.attributes.code') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="code" name="code" value="{{ $attribute->code }}" disabled="disabled" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.code') }}&quot;" v-code/>
@@ -69,11 +74,20 @@
                                 </select>
                                 <input type="hidden" name="type" value="{{ $attribute->type }}"/>
                             </div>
+
+                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.controls.after', ['attribute' => $attribute]) !!}
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.general.after', ['attribute' => $attribute]) !!}
+
+
+                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.before', ['attribute' => $attribute]) !!}
+
                     <accordian :title="'{{ __('admin::app.catalog.attributes.label') }}'" :active="true">
                         <div slot="body">
+
+                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.controls.before', ['attribute' => $attribute]) !!}
 
                             <div class="control-group" :class="[errors.has('admin_name') ? 'has-error' : '']">
                                 <label for="admin_name" class="required">{{ __('admin::app.catalog.attributes.admin') }}</label>
@@ -90,21 +104,40 @@
 
                             @endforeach
 
+                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.controls.after', ['attribute' => $attribute]) !!}
+
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.attributes.after', ['attribute' => $attribute]) !!}
+
+
                     <div class="{{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hide' }}">
+
+                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.before', ['attribute' => $attribute]) !!}
+
                         <accordian :title="'{{ __('admin::app.catalog.attributes.options') }}'" :active="true" :id="'options'">
                             <div slot="body">
                             
+                                {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.before', ['attribute' => $attribute]) !!}
+
                                 <option-wrapper></option-wrapper>
+
+                                {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.after', ['attribute' => $attribute]) !!}
                                 
                             </div>
                         </accordian>
+                        
+                        {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.after', ['attribute' => $attribute]) !!}
+
                     </div>
 
+                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.before', ['attribute' => $attribute]) !!}
+                    
                     <accordian :title="'{{ __('admin::app.catalog.attributes.validations') }}'" :active="true">
                         <div slot="body">
+
+                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.before', ['attribute' => $attribute]) !!}
 
                             <div class="control-group">
                                 <label for="is_required">{{ __('admin::app.catalog.attributes.is_required') }}</label>
@@ -147,12 +180,21 @@
                                 </select>
                             </div>
 
+                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.controls.after', ['attribute' => $attribute]) !!}
+
                         </div>
                     </accordian>
 
+                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.after', ['attribute' => $attribute]) !!}
+
+
+                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.before', ['attribute' => $attribute]) !!}
+
                     <accordian :title="'{{ __('admin::app.catalog.attributes.configuration') }}'" :active="true">
                         <div slot="body">
-                        
+
+                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.before', ['attribute' => $attribute]) !!}
+
                             <div class="control-group">
                                 <label for="value_per_locale">{{ __('admin::app.catalog.attributes.value_per_locale') }}</label>
                                 <select class="control" id="value_per_locale" name="value_per_locale" disabled>
@@ -215,8 +257,12 @@
                                 </select>
                             </div>
 
+                            {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.controls.after', ['attribute' => $attribute]) !!}
+
                         </div>
                     </accordian>
+
+                    {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.configuration.after', ['attribute' => $attribute]) !!}
                 </div>
             </div>
 
@@ -227,10 +273,34 @@
 @push('scripts')
     <script type="text/x-template" id="options-template">
         <div>
+
+            <div class="control-group">
+                <label for="swatch_type">{{ __('admin::app.catalog.attributes.swatch_type') }}</label>
+                <select class="control" id="swatch_type" name="swatch_type" v-model="swatch_type">
+                    <option value="dropdown">
+                        {{ __('admin::app.catalog.attributes.dropdown') }}
+                    </option>
+
+                    <option value="color">
+                        {{ __('admin::app.catalog.attributes.color-swatch') }}
+                    </option>
+
+                    <option value="image">
+                        {{ __('admin::app.catalog.attributes.image-swatch') }}
+                    </option>
+
+                    <option value="text">
+                        {{ __('admin::app.catalog.attributes.text-swatch') }}
+                    </option>
+                </select>
+            </div>
+
             <div class="table">
                 <table>
                     <thead>
                         <tr>
+                            <th v-if="swatch_type == 'color' || swatch_type == 'image'">{{ __('admin::app.catalog.attributes.swatch') }}</th>
+
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
                             
                             @foreach (Webkul\Core\Models\Locale::all() as $locale)
@@ -246,7 +316,16 @@
                     </thead>
                         
                     <tbody>
-                        <tr v-for="row in optionRows">
+                        <tr v-for="(row, index) in optionRows">
+                            <td v-if="swatch_type == 'color'">
+                                <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
+                            </td>
+
+                            <td v-if="swatch_type == 'image'">
+                                <img style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;" v-if="row.swatch_value_url" :src="row.swatch_value_url"/>
+                                <input type="file" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
+                            </td>
+
                             <td>
                                 <div class="control-group" :class="[errors.has(adminName(row)) ? 'has-error' : '']">
                                     <input type="text" v-validate="'required'" v-model="row['admin_name']" :name="adminName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"/>
@@ -285,75 +364,73 @@
     </script>
 
     <script>
-        $(document).ready(function () {
-            $('#type').on('change', function (e) {
-                if (['select', 'multiselect', 'checkbox'].indexOf($(e.target).val()) === -1) {
-                    $('#options').parent().addClass('hide')
-                } else {
-                    $('#options').parent().removeClass('hide')
-                }
-            })
+        $('#type').on('change', function (e) {
+            if (['select', 'multiselect', 'checkbox'].indexOf($(e.target).val()) === -1) {
+                $('#options').parent().addClass('hide')
+            } else {
+                $('#options').parent().removeClass('hide')
+            }
+        })
 
-            var optionWrapper = Vue.component('option-wrapper', {
+        Vue.component('option-wrapper', {
 
-                template: '#options-template', 
+            template: '#options-template', 
 
-                created () {
-                    @foreach ($attribute->options as $option)
-                        this.optionRowCount++;
-                        var row = {'id': '{{ $option->id }}', 'admin_name': '{{ $option->admin_name }}', 'sort_order': '{{ $option->sort_order }}'};
+            data: () => ({
+                optionRowCount: 0,
+                optionRows: [],
+                swatch_type: "{{ $attribute->swatch_type }}"
+            }),
 
-                        @foreach (Webkul\Core\Models\Locale::all() as $locale)
-                            row['{{ $locale->code }}'] = "{{ $option->translate($locale->code)['label'] }}";
-                        @endforeach
+            created () {
+                @foreach ($attribute->options as $option)
+                    this.optionRowCount++;
+                    var row = {
+                            'id': '{{ $option->id }}',
+                            'admin_name': '{{ $option->admin_name }}',
+                            'sort_order': '{{ $option->sort_order }}',
+                            'sort_order': '{{ $option->sort_order }}',
+                            'swatch_value': '{{ $option->swatch_value }}',
+                            'swatch_value_url': '{{ $option->swatch_value_url }}'
+                        };
 
-                        this.optionRows.push(row);
+                    @foreach (Webkul\Core\Models\Locale::all() as $locale)
+                        row['{{ $locale->code }}'] = "{{ $option->translate($locale->code)['label'] }}";
                     @endforeach
+
+                    this.optionRows.push(row);
+                @endforeach
+            },
+
+            methods: {
+                addOptionRow () {
+                    var rowCount = this.optionRowCount++;
+                    var row = {'id': 'option_' + rowCount};
+
+                    @foreach (Webkul\Core\Models\Locale::all() as $locale)
+                        row['{{ $locale->code }}'] = '';
+                    @endforeach
+
+                    this.optionRows.push(row);
                 },
 
-                data: () => ({
-                    optionRowCount: 0,
-                    optionRows: []
-                }),
+                removeRow (row) {
+                    var index = this.optionRows.indexOf(row)
+                    Vue.delete(this.optionRows, index);
+                },
 
-                methods: {
-                    addOptionRow () {
-                        var rowCount = this.optionRowCount++;
-                        var row = {'id': 'option_' + rowCount};
+                adminName (row) {
+                    return 'options[' + row.id + '][admin_name]';
+                },
 
-                        @foreach (Webkul\Core\Models\Locale::all() as $locale)
-                            row['{{ $locale->code }}'] = '';
-                        @endforeach
+                localeInputName (row, locale) {
+                    return 'options[' + row.id + '][' + locale + '][label]';
+                },
 
-                        this.optionRows.push(row);
-                    },
-
-                    removeRow (row) {
-                        var index = this.optionRows.indexOf(row)
-                        Vue.delete(this.optionRows, index);
-                    },
-
-                    adminName (row) {
-                        return 'options[' + row.id + '][admin_name]';
-                    },
-
-                    localeInputName (row, locale) {
-                        return 'options[' + row.id + '][' + locale + '][label]';
-                    },
-
-                    sortOrderName (row) {
-                        return 'options[' + row.id + '][sort_order]';
-                    }
+                sortOrderName (row) {
+                    return 'options[' + row.id + '][sort_order]';
                 }
-            })
-
-            new Vue({
-                el: '#options',
-
-                components: {
-                    optionWrapper: optionWrapper
-                },
-            })
+            }
         });
     </script>
 @endpush

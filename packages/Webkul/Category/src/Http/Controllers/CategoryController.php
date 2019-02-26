@@ -126,7 +126,7 @@ class CategoryController extends Controller
         $this->validate(request(), [
             $locale . '.slug' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
                 if (! $this->category->isSlugUnique($id, $value)) {
-                    $fail('The :attribute has already been taken.');
+                    $fail(trans('admin::app.response.already-taken', ['name' => 'Category']));
                 }
             }],
             $locale . '.name' => 'required',

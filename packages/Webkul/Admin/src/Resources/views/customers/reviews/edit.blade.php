@@ -42,7 +42,7 @@
                             <div class="control-group">
                                 <label for="name" >{{ __('admin::app.customers.reviews.rating') }}</label>
                                 <div class="stars">
-                                    @for($i = 1; $i <= $review->rating; $i++)
+                                    @for ($i = 1; $i <= $review->rating; $i++)
                                         <span class="icon star-icon"></span>
                                     @endfor
                                 </div>
@@ -67,7 +67,7 @@
 
                             <div class="control-group">
                                 <label for="name" >{{ __('admin::app.customers.reviews.comment') }}</label>
-                                <textarea  class="control" disabled> {{$review->comment}}</textarea>
+                                <textarea  class="control" disabled> {{ $review->comment }}</textarea>
                             </div>
 
                         </div>

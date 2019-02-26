@@ -17,5 +17,8 @@
     "jquery": "^3.2",
     "vue": "^2.1.10",
     "flatpickr": "^4.4.6"
+  },
+  "dependencies": {
+    "vue-swatches": "^1.0.3"
   }
 }

@@ -6,9 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Webkul\User\Models\Role;
 use Webkul\User\Notifications\AdminResetPassword;
+use Webkul\User\Contracts\Admin as AdminContract;
 
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements AdminContract
 {
     use Notifiable;
 
@@ -35,7 +36,7 @@ class Admin extends Authenticatable
      */
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(RoleProxy::modelClass());
     }
 
     /**

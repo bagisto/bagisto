@@ -20,6 +20,6 @@ class CartAddressRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Checkout\Models\CartAddress';
+        return 'Webkul\Checkout\Contracts\CartAddress';
     }
 }

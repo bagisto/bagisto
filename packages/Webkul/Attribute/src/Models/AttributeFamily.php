@@ -3,13 +3,13 @@
 namespace Webkul\Attribute\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Attribute\Models\AttributeGroup;
-use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductProxy;
+use Webkul\Attribute\Contracts\AttributeFamily as AttributeFamilyContract;
 
-class AttributeFamily extends Model
+class AttributeFamily extends Model implements AttributeFamilyContract
 {
     public $timestamps = false;
-    
+
     protected $fillable = ['code', 'name'];
 
     /**
@@ -17,7 +17,7 @@ class AttributeFamily extends Model
      */
     public function custom_attributes()
     {
-        return Attribute::join('attribute_group_mappings', 'attributes.id', '=', 'attribute_group_mappings.attribute_id')
+        return (AttributeProxy::modelClass())::join('attribute_group_mappings', 'attributes.id', '=', 'attribute_group_mappings.attribute_id')
             ->join('attribute_groups', 'attribute_group_mappings.attribute_group_id', '=', 'attribute_groups.id')
             ->join('attribute_families', 'attribute_groups.attribute_family_id', '=', 'attribute_families.id')
             ->where('attribute_families.id', $this->id)
@@ -37,7 +37,7 @@ class AttributeFamily extends Model
      */
     public function attribute_groups()
     {
-        return $this->hasMany(AttributeGroup::class)->orderBy('position');
+        return $this->hasMany(AttributeGroupProxy::modelClass())->orderBy('position');
     }
 
     /**
@@ -53,6 +53,6 @@ class AttributeFamily extends Model
      */
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(ProductProxy::modelClass());
     }
 }

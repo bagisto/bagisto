@@ -75,6 +75,16 @@
                         <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
                     </div>
 
+                    @if ($guest_review && !auth()->guard('customer')->user())
+                        <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
+                            <label for="title" class="required">
+                                {{ __('shop::app.reviews.name') }}
+                            </label>
+                            <input  type="text" class="control" name="name" v-validate="'required'" value="{{ old('name') }}">
+                            <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+                        </div>
+                    @endif
+
                     <div class="control-group" :class="[errors.has('comment') ? 'has-error' : '']">
                         <label for="comment" class="required">
                             {{ __('admin::app.customers.reviews.comment') }}

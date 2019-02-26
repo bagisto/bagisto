@@ -106,7 +106,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
 
     // Show Product Review Form Store
     Route::post('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
-        'redirect' => 'customer.reviews.index'
+        'redirect' => 'shop.home.index'
     ])->name('shop.reviews.store');
 
     //customer routes starts here

@@ -53,7 +53,8 @@ class CartController extends Controller
         ProductRepository $product,
         ProductImage $productImage,
         ProductView $productView
-    ) {
+    )
+    {
 
         $this->middleware('customer')->only(['moveToWishlist']);
 
@@ -92,17 +93,23 @@ class CartController extends Controller
         try {
             Event::fire('checkout.cart.add.before', $id);
 
+            dd(request()->except('_token'));
+
             $result = Cart::add($id, request()->except('_token'));
 
             Event::fire('checkout.cart.add.after', $result);
 
+            Cart::collectTotals();
+
             if ($result) {
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
+
+                return redirect()->route($this->_config['redirect']);
             } else {
                 session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
-            }
 
-            Cart::collectTotals();
+                return redirect()->back();
+            }
 
             return redirect()->route($this->_config['redirect']);
 

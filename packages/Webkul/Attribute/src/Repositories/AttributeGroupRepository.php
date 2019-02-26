@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 namespace Webkul\Attribute\Repositories;
- 
+
 use Webkul\Core\Eloquent\Repository;
 
 /**
@@ -12,7 +12,7 @@ use Webkul\Core\Eloquent\Repository;
  */
 class AttributeGroupRepository extends Repository
 {
- 
+
     /**
      * Specify Model class name
      *
@@ -20,6 +20,6 @@ class AttributeGroupRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Attribute\Models\AttributeGroup';
+        return 'Webkul\Attribute\Contracts\AttributeGroup';
     }
 }

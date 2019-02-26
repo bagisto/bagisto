@@ -2,9 +2,9 @@
 namespace Webkul\Customer\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Contracts\CustomerGroup as CustomerGroupContract;
 
-class CustomerGroup extends Model
+class CustomerGroup extends Model implements CustomerGroupContract
 {
     protected $table = 'customer_groups';
 
@@ -15,6 +15,6 @@ class CustomerGroup extends Model
     */
     public function customer()
     {
-        return $this->hasMany(Customer::class);
+        return $this->hasMany(CustomerProxy::modelClass());
     }
 }

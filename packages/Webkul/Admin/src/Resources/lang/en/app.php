@@ -80,8 +80,8 @@ return [
         'total-orders' => 'Total Orders',
         'total-sale' => 'Total Sale',
         'average-sale' => 'Average Order Sale',
-        'increased' => ':progress% Increased',
-        'decreased' => ':progress% Decreased',
+        'increased' => ':progress%',
+        'decreased' => ':progress%',
         'sales' => 'Sales',
         'top-performing-categories' => 'Top Performing Categories',
         'product-count' => ':count Products',
@@ -217,6 +217,10 @@ return [
             'delete-last' => 'At least one admin is required.',
             'delete-success' => 'Success! User deleted',
             'incorrect-password' => 'The password you entered is incorrect',
+            'password-match' => 'Current password does not match.',
+            'account-save' => 'Account changes saved successfully.',
+            'login-error' => 'Please check your credentials and try again.',
+            'activate-warning' => 'Your account is yet to be activated, please contact administrator.'
         ],
 
         'sessions' => [
@@ -301,7 +305,9 @@ return [
             'bill-to' => 'Bill to',
             'ship-to' => 'Ship to',
             'print' => 'Print',
-            'order-date' => 'Order Date'
+            'order-date' => 'Order Date',
+            'creation-error' => 'Order invoice creation is not allowed.',
+            'product-error' => 'Invoice can not be created without products.'
         ],
 
         'shipments' => [
@@ -324,7 +330,10 @@ return [
             'inventory-source' => 'Inventory Source',
             'carrier-title' => 'Carrier Title',
             'tracking-number' => 'Tracking Number',
-            'view-title' => 'Shipment #:shipment_id'
+            'view-title' => 'Shipment #:shipment_id',
+            'creation-error' => 'Shipment can not be created for this order.',
+            'order-error' => 'Order shipment creation is not allowed.',
+            'quantity-invalid' => 'Requested quantity is invalid or not available.',
         ]
     ],
 
@@ -360,7 +369,12 @@ return [
             'variant-already-exist-message' => 'Variant with same attribute options already exists.',
             'add-image-btn-title' => 'Add Image',
             'mass-delete-success' => 'All the selected index of products have been deleted successfully',
-            'mass-update-success' => 'All the selected index of products have been updated successfully'
+            'mass-update-success' => 'All the selected index of products have been updated successfully',
+            'configurable-error' => 'Please select atleast one configurable attribute.',
+            'categories' => 'Categories',
+            'images' => 'Images',
+            'inventories' => 'Inventories',
+            'variations' => 'Variations'
         ],
 
         'attributes' => [
@@ -402,7 +416,13 @@ return [
             'is_filterable' => 'Use in Layered Navigation',
             'is_configurable' => 'Use To Create Configurable Product',
             'admin_name' => 'Admin Name',
-            'is_visible_on_front' => 'Visible on Product View Page on Front-end'
+            'is_visible_on_front' => 'Visible on Product View Page on Front-end',
+            'swatch_type' => 'Swatch Type',
+            'dropdown' => 'Dropdown',
+            'color-swatch' => 'Color Swatch',
+            'image-swatch' => 'Image Swatch',
+            'text-swatch' => 'Text Swatch',
+            'swatch' => 'Swatch'
         ],
         'families' => [
             'title' => 'Families',
@@ -757,7 +777,8 @@ return [
         'xls' => 'XLS',
         'file' => 'File',
         'upload-error' => 'The file must be a file of type: xls, xlsx, csv.',
-        'duplicate-error' => 'Identifier must be unique, duplicate identifier :identifier at row :position.'
+        'duplicate-error' => 'Identifier must be unique, duplicate identifier :identifier at row :position.',
+        'enough-row-error' => 'file has not enough rows'
     ],
 
     'response' => [
@@ -772,6 +793,13 @@ return [
         'currency-delete-error' => 'This currency is set as channel base currency so it can not be deleted.',
         'upload-success' => ':name uploaded successfully.',
         'delete-category-root' => 'Cannot delete the root category',
-        'create-root-failure' => 'Category with name root already exists'
+        'create-root-failure' => 'Category with name root already exists',
+        'cancel-success' => ':name canceled successfully.',
+        'cancel-error' => ':name can not be canceled.',
+        'already-taken' => 'The :name has already been taken.'
+    ],
+
+    'footer' => [
+        'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved.'
     ],
 ];

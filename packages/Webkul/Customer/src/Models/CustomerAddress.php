@@ -2,8 +2,9 @@
 namespace Webkul\Customer\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Customer\Contracts\CustomerAddress as CustomerAddressContract;
 
-class CustomerAddress extends Model
+class CustomerAddress extends Model implements CustomerAddressContract
 {
     protected $table = 'customer_addresses';
 

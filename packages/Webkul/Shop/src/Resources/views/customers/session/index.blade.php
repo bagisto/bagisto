@@ -26,7 +26,7 @@
 
                 <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                     <label for="password" class="required">{{ __('shop::app.customer.login-form.password') }}</label>
-                    <input type="password" class="control" name="password" v-validate="'required|min:6'" value="{{ old('password') }}" data-vv-as="&quot;{{ __('shop::app.customer.login-form.password') }}&quot;">
+                    <input type="password" class="control" name="password" v-validate="'required'" value="{{ old('password') }}" data-vv-as="&quot;{{ __('shop::app.customer.login-form.password') }}&quot;">
                     <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                 </div>
 

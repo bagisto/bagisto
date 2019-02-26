@@ -26,8 +26,8 @@
                             <td data-value="{{ $column['label'] }}">{{ $column['wrapper']($record) }}</td>
                         @endif
                     @else
-                        @if($column['type'] == 'price')
-                            @if(isset($column['currencyCode']))
+                        @if ($column['type'] == 'price')
+                            @if (isset($column['currencyCode']))
                                 <td data-value="{{ $column['label'] }}">{{ core()->formatPrice($record->{$columnIndex}, $column['currencyCode']) }}</td>
                             @else
                                 <td data-value="{{ $column['label'] }}">{{ core()->formatBasePrice($record->{$columnIndex}) }}</td>
@@ -43,7 +43,7 @@
                         <div>
                             @foreach ($actions as $action)
                                 <a href="{{ route($action['route'], $record->{$index}) }}">
-                                    <span class="{{ $action['icon'] }}"></span>
+                                    <span class="{{ $action['icon'] }}" onclick="return confirm('{{ __('ui::app.datagrid.click_on_action') }}')"></span>
                                 </a>
                             @endforeach
                         </div>

@@ -18,9 +18,15 @@
             </div>
         </div>
 
+        {!! view_render_event('bagisto.admin.catalog.families.list.before') !!}
+
         <div class="page-content">
-            @inject('attributefamily','Webkul\Admin\DataGrids\AttributeFamilyDataGrid')
-            {!! $attributefamily->render() !!}
+
+            {!! app('Webkul\Admin\DataGrids\AttributeFamilyDataGrid')->render() !!}
+
         </div>
+
+        {!! view_render_event('bagisto.admin.catalog.families.list.after') !!}
+        
     </div>
 @stop

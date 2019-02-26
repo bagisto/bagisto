@@ -9,6 +9,7 @@ use Webkul\Tax\Repositories\TaxRateRepository as TaxRate;
 use Webkul\Admin\Imports\DataGridImport;
 use Illuminate\Support\Facades\Validator;
 use Excel;
+use Maatwebsite\Excel\Validators\Failure;
 
 /**
  * Tax controller
@@ -73,7 +74,8 @@ class TaxRateController extends Controller
      *
      * @return mixed
      */
-    public function create() {
+    public function create()
+    {
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier',
             'is_zip' => 'sometimes',
@@ -182,86 +184,92 @@ class TaxRateController extends Controller
         if (!in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
             session()->flash('error', trans('admin::app.export.upload-error'));
         } else {
-            $excelData = (new DataGridImport)->toArray(request()->file('file'));
+            try {
+                $excelData = (new DataGridImport)->toArray(request()->file('file'));
 
-            foreach ($excelData as $data) {
-                foreach ($data as $column => $uploadData) {
-                    $validator = Validator::make($uploadData, [
-                        'identifier' => 'required|string',
-                        'state' => 'required|string',
-                        'country' => 'required|string',
-                        'tax_rate' => 'required|numeric'
-                    ]);
+                foreach ($excelData as $data) {
+                    foreach ($data as $column => $uploadData) {
+                        $validator = Validator::make($uploadData, [
+                            'identifier' => 'required|string',
+                            'state' => 'required|string',
+                            'country' => 'required|string',
+                            'tax_rate' => 'required|numeric'
+                        ]);
 
-                    if ($validator->fails()) {
-                        $failedRules[$column+1] = $validator->errors();
-                    }
-
-                    $identiFier[$column+1] = $uploadData['identifier'];
-                }
-
-                $identiFierCount = array_count_values($identiFier);
-
-                $filtered = array_filter($identiFier, function ($value) use ($identiFierCount) {
-                    return $identiFierCount[$value] > 1;
-                });
-            }
-
-            if ($filtered) {
-                foreach ($filtered as $position => $identifier) {
-                    $message[] = trans('admin::app.export.duplicate-error', ['identifier' => $identifier, 'position' => $position]);
-                }
-                $finalMsg = implode(" ", $message);
-
-                session()->flash('error', $finalMsg);
-            } else {
-                $errorMsg = [];
-
-                if (isset($failedRules)) {
-                    foreach ($failedRules as $coulmn => $fail) {
-                        if ($fail->first('identifier')){
-                            $errorMsg[$coulmn] = $fail->first('identifier');
-                        } else if ($fail->first('tax_rate')) {
-                            $errorMsg[$coulmn] = $fail->first('tax_rate');
-                        } else if ($fail->first('country')) {
-                            $errorMsg[$coulmn] = $fail->first('country');
-                        } else if ($fail->first('state')) {
-                            $errorMsg[$coulmn] = $fail->first('state');
+                        if ($validator->fails()) {
+                            $failedRules[$column+1] = $validator->errors();
                         }
+
+                        $identiFier[$column+1] = $uploadData['identifier'];
                     }
 
-                    foreach ($errorMsg as $key => $msg) {
-                        $msg = str_replace(".", "", $msg);
-                        $message[] = $msg. ' at Row '  .$key . '.';
-                    }
+                    $identiFierCount = array_count_values($identiFier);
 
+                    $filtered = array_filter($identiFier, function ($value) use ($identiFierCount) {
+                        return $identiFierCount[$value] > 1;
+                    });
+                }
+
+                if ($filtered) {
+                    foreach ($filtered as $position => $identifier) {
+                        $message[] = trans('admin::app.export.duplicate-error', ['identifier' => $identifier, 'position' => $position]);
+                    }
                     $finalMsg = implode(" ", $message);
 
                     session()->flash('error', $finalMsg);
                 } else {
-                    $taxRate = $this->taxRate->get()->toArray();
+                    $errorMsg = [];
 
-                    foreach ($taxRate as $rate) {
-                        $rateIdentifier[$rate['id']] = $rate['identifier'];
-                    }
+                    if (isset($failedRules)) {
+                        foreach ($failedRules as $coulmn => $fail) {
+                            if ($fail->first('identifier')){
+                                $errorMsg[$coulmn] = $fail->first('identifier');
+                            } else if ($fail->first('tax_rate')) {
+                                $errorMsg[$coulmn] = $fail->first('tax_rate');
+                            } else if ($fail->first('country')) {
+                                $errorMsg[$coulmn] = $fail->first('country');
+                            } else if ($fail->first('state')) {
+                                $errorMsg[$coulmn] = $fail->first('state');
+                            }
+                        }
 
-                    foreach ($excelData as $data) {
-                        foreach ($data as $column => $uploadData) {
-                            if (isset($rateIdentifier)) {
-                                $id = array_search($uploadData['identifier'], $rateIdentifier);
-                                if ($id) {
-                                    $this->taxRate->update($uploadData, $id);
+                        foreach ($errorMsg as $key => $msg) {
+                            $msg = str_replace(".", "", $msg);
+                            $message[] = $msg. ' at Row '  .$key . '.';
+                        }
+
+                        $finalMsg = implode(" ", $message);
+
+                        session()->flash('error', $finalMsg);
+                    } else {
+                        $taxRate = $this->taxRate->get()->toArray();
+
+                        foreach ($taxRate as $rate) {
+                            $rateIdentifier[$rate['id']] = $rate['identifier'];
+                        }
+
+                        foreach ($excelData as $data) {
+                            foreach ($data as $column => $uploadData) {
+                                if (isset($rateIdentifier)) {
+                                    $id = array_search($uploadData['identifier'], $rateIdentifier);
+                                    if ($id) {
+                                        $this->taxRate->update($uploadData, $id);
+                                    } else {
+                                        $this->taxRate->create($uploadData);
+                                    }
                                 } else {
                                     $this->taxRate->create($uploadData);
                                 }
-                            } else {
-                                $this->taxRate->create($uploadData);
                             }
                         }
-                    }
 
-                    session()->flash('success', trans('admin::app.response.upload-success', ['name' => 'Tax Rate']));
+                        session()->flash('success', trans('admin::app.response.upload-success', ['name' => 'Tax Rate']));
+                    }
                 }
+            } catch (\Exception $e) {
+                $failure = new Failure(1, 'rows', [0 => trans('admin::app.export.enough-row-error')]);
+
+                session()->flash('error', $failure->errors()[0]);
             }
         }
 

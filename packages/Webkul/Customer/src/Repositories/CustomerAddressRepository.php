@@ -21,6 +21,6 @@ class CustomerAddressRepository extends Repository
 
     function model()
     {
-        return 'Webkul\Customer\Models\CustomerAddress';
+        return 'Webkul\Customer\Contracts\CustomerAddress';
     }
 }

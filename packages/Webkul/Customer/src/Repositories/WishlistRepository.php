@@ -21,7 +21,7 @@ class WishlistRepository extends Repository
 
     function model()
     {
-        return 'Webkul\Customer\Models\Wishlist';
+        return 'Webkul\Customer\Contracts\Wishlist';
     }
 
     /**
