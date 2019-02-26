@@ -382,6 +382,8 @@
                 for (var i in shippingHtml.staticRenderFns) {
                     shippingTemplateRenderFns.unshift(shippingHtml.staticRenderFns[i]);
                 }
+
+                eventBus.$emit('after-checkout-shipping-section-added', 0);
             },
 
             render(h) {
@@ -420,6 +422,8 @@
                 for (var i in paymentHtml.staticRenderFns) {
                     paymentTemplateRenderFns.unshift(paymentHtml.staticRenderFns[i]);
                 }
+
+                eventBus.$emit('after-checkout-payment-section-added', 0);
             },
 
             render(h) {
