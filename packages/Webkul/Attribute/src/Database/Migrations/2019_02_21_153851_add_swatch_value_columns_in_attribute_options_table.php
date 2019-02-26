@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterCustomerIdNullableInProductReviewsTable extends Migration
+class AddSwatchValueColumnsInAttributeOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AlterCustomerIdNullableInProductReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::table('product_reviews', function (Blueprint $table) {
-            $table->integer('customer_id')->nullable()->change();
+        Schema::table('attribute_options', function (Blueprint $table) {
+            $table->string('swatch_value')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AlterCustomerIdNullableInProductReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::table('product_reviews', function (Blueprint $table) {
+        Schema::table('attribute_options', function (Blueprint $table) {
             //
         });
     }

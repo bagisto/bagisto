@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 
 use Auth;
+use Crypt;
 
 use App;
 use Faker\Generator as Faker;
@@ -50,8 +51,8 @@ class AuthTest extends TestCase
         $customers = app(Customer::class);
 
         $created = $customers->create([
-            'first_name' => explode(' ',$faker->name)[0],
-            'last_name' => explode(' ',$faker->name)[0],
+            'first_name' => explode(' ', $faker->name)[0],
+            'last_name' => explode(' ', $faker->name)[0],
             'channel_id' => core()->getCurrentChannel()->id,
             'gender' => $faker->randomElement($array = array ('Male','Female', 'Other')),
             'date_of_birth' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -64,12 +65,60 @@ class AuthTest extends TestCase
     }
 
     public function testCustomerLogin() {
+        config(['app.url' => 'http://127.0.0.1:8000']);
+
         $customers = app(Customer::class);
+        $customer = $customers->findOneByField('email', 'prashant@webkul.com');
 
-        $customer = $customers->find(1);
+        $response = $this->post('/customer/login', [
+            'email' => $customer->email,
+            'password' => '12345678'
+        ]);
 
-        $user = ['email' => $customer->email, 'password' => $customer->password];
-
-        $this->assertAuthenticatedAs($user);
+        $response->assertRedirect('/customer/account/profile');
     }
+
+        /**
+         * Test that customer cannot login with the wrong credentials.
+         */
+        public function willNotLoginWithWrongCredentials()
+        {
+            $customers = app(Customer::class);
+            $customer = $customers->findOneByField('email', 'prashant@webkul.com');
+
+            $response = $this->from(route('login'))->post(route('customer.session.create'),
+                        [
+                            'email' => $customer->email,
+                            'password' => 'wrongpassword3428903mlndvsnljkvsd',
+                        ]);
+
+            $this->assertGuest();
+        }
+
+        /**
+         * Test to confirm that customer cannot login if user does not exist.
+         */
+        public function willNotLoginWithNonexistingCustomer()
+        {
+            $response = $this->post(route('customer.session.create'), [
+                            'email' => 'fiaiia9q2943jklq34h203qtb3o2@something.com',
+                            'password' => 'wrong-password',
+                        ]);
+
+            $this->assertGuest();
+        }
+
+        /**
+         * To test that customer can logout
+         */
+        public function allowsCustomerToLogout()
+        {
+            $customer = auth()->guard('customer')->user();
+
+            // dd('logout test', $customer);
+
+            $this->get(route('customer.session.destroy'));
+
+            $this->assertGuest();
+        }
 }

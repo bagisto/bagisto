@@ -219,10 +219,34 @@
 @push('scripts')
     <script type="text/x-template" id="options-template">
         <div>
+
+            <div class="control-group">
+                <label for="swatch_type">{{ __('admin::app.catalog.attributes.swatch_type') }}</label>
+                <select class="control" id="swatch_type" name="swatch_type" v-model="swatch_type">
+                    <option value="dropdown">
+                        {{ __('admin::app.catalog.attributes.dropdown') }}
+                    </option>
+
+                    <option value="color">
+                        {{ __('admin::app.catalog.attributes.color-swatch') }}
+                    </option>
+
+                    <option value="image">
+                        {{ __('admin::app.catalog.attributes.image-swatch') }}
+                    </option>
+
+                    <option value="text">
+                        {{ __('admin::app.catalog.attributes.text-swatch') }}
+                    </option>
+                </select>
+            </div>
+
             <div class="table">
                 <table>
                     <thead>
                         <tr>
+                            <th v-if="swatch_type == 'color' || swatch_type == 'image'">{{ __('admin::app.catalog.attributes.swatch') }}</th>
+                            
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
 
                             @foreach (Webkul\Core\Models\Locale::all() as $locale)
@@ -239,6 +263,14 @@
 
                     <tbody>
                         <tr v-for="row in optionRows">
+                            <td v-if="swatch_type == 'color'">
+                                <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
+                            </td>
+
+                            <td v-if="swatch_type == 'image'">
+                                <input type="file" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
+                            </td>
+
                             <td>
                                 <div class="control-group" :class="[errors.has(adminName(row)) ? 'has-error' : '']">
                                     <input type="text" v-validate="'required'" v-model="row['admin_name']" :name="adminName(row)" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.attributes.admin_name') }}&quot;"/>
@@ -292,7 +324,8 @@
 
                 data: () => ({
                     optionRowCount: 0,
-                    optionRows: []
+                    optionRows: [],
+                    swatch_type: ''
                 }),
 
                 methods: {
@@ -301,7 +334,7 @@
                         var row = {'id': 'option_' + rowCount};
 
                         @foreach (Webkul\Core\Models\Locale::all() as $locale)
-                        row['{{ $locale->code }}'] = '';
+                            row['{{ $locale->code }}'] = '';
                         @endforeach
 
                         this.optionRows.push(row);
