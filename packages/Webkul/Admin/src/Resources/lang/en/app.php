@@ -148,6 +148,7 @@ return [
         'role' => 'Role',
         'sub-total' => 'Sub Total',
         'no-of-products' => 'Number of Products',
+        'attribute-family' => 'Attribute Family'
     ],
 
     'account' => [

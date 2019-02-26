@@ -19,13 +19,15 @@ class ProductDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('products_grid as pg')
-                ->leftJoin('products as pr', 'pg.product_id', '=', 'pr.id')
-                ->addSelect('pg.product_id as product_id', 'pg.sku as product_sku', 'pg.name', 'pr.type as product_type', 'pg.status', 'pg.price', 'pg.quantity');
+        $queryBuilder = DB::table('products_grid')
+                ->leftJoin('products', 'products_grid.product_id', '=', 'products.id')
+                ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
+                ->addSelect('products_grid.product_id as product_id', 'products_grid.sku as product_sku', 'products_grid.name', 'products.type as product_type', 'products_grid.status', 'products_grid.price', 'products_grid.quantity', 'attribute_families.name as attribute_family');
 
-        $this->addFilter('product_id', 'pg.product_id');
-        $this->addFilter('product_sku', 'pg.sku');
-        $this->addFilter('product_type', 'pr.type');
+        $this->addFilter('product_id', 'products_grid.product_id');
+        $this->addFilter('product_sku', 'products_grid.sku');
+        $this->addFilter('product_type', 'products.type');
+        $this->addFilter('attribute_family', 'attribute_families.name');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -52,6 +54,14 @@ class ProductDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'name',
             'label' => trans('admin::app.datagrid.name'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'attribute_family',
+            'label' => trans('admin::app.datagrid.attribute-family'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true
