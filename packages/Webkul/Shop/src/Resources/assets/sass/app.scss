@@ -3476,40 +3476,60 @@ section.review {
 
                 ul.search-container li.search-group {
                     .search-field {
-                        border-left: none;
-                        border-right: 2px solid $border-color;
+                        border: 2px solid $border-color;
                         padding-right: 12px;
                         padding-left: 0px;
+                        border-radius: 2px;
+                        border-top-left-radius: 0px;
+                        border-bottom-left-radius: 0px;
                     }
+
                     .search-icon-wrapper {
                         border: 2px solid $border-color;
+                        border-right: none;
+                        border-radius: 2px;
+                        border-top-right-radius: 0px;
+                        border-bottom-right-radius: 0px;
                     }
                 }
             }
 
             div.right-content {
-                .currency-switcher .dropdown-list {
-                    left: 0px;
-                    right: auto;
-                }
+                .right-content-menu {
+                    > li {
+                        border-right: 2px solid #c7c7c7;
+                        padding: 0 15px 0 15px;
 
-                ul.cart-dropdown-container {
-                    float: left;
-                    margin-left: 0px;
-
-                    li.cart-dropdown {
-                        .cart-icon {
-                            margin-right: 0px;
-                            margin-left: 8px;
+                        &:last-child {
+                            padding-left: 0;
                         }
 
+                        &:first-child {
+                            border-right: 0;
+                            padding-right: 0;
+                        }
+                    }
+
+                    .cart-dropdown-container {
                         .dropdown-list {
-                            left: 0px !important;
-                            right: auto !important;
+                            left: 0px;
+                            right: unset !important;
                         }
 
-                        .dropdown-container .dropdown-content .item img {
-                            margin-right: 0px;
+                        .count {
+                            display: inline-block;
+                        }
+                    }
+
+                    .account, .currency {
+                        right: unset;
+                        left: 0px;
+                    }
+
+                    .guest {
+                        div {
+                            display: flex;
+                            justify-content: space-between;
                         }
                     }
                 }
@@ -3553,6 +3573,30 @@ section.review {
 
     @media only screen and (max-width: 720px) {
         .header{
+            .header-top div.right-content {
+                .menu-box {
+                   margin-left: 0px;
+                   margin-right: 5px;
+                }
+
+                .right-content-menu {
+                    .account {
+                        position: absolute;
+                        left: 0px;
+                        right: auto;
+                    }
+
+                    > li {
+                        padding: 0;
+                        border: 0;
+                    }
+                }
+
+                .search-box {
+                    margin-left: 5px;
+                }
+            }
+
             .header-bottom {
                 .nav > li {
                     float: none;
@@ -3600,6 +3644,10 @@ section.review {
         div.product-image-group {
             margin-right: 0px;
             margin-left: 30px;
+
+            .add-to-buttons {
+                float: left !important;
+            }
         }
 
         div .thumb-list {
@@ -3607,9 +3655,32 @@ section.review {
             margin-right: 0px;
         }
 
-        .details .product-ratings .total-reviews {
-            margin-left: 0px;
-            margin-right: 15px;
+        .details {
+            .accordian .accordian-header {
+                padding: 20px 0px 20px 15px;
+
+                .icon {
+                    float: left;
+                }
+
+                .expand-icon {
+                    margin-left: 10px;
+                }
+            }
+
+            .full-specifications {
+                td {
+                    &:first-child {
+                        padding-right: 0px;
+                        padding-left: 40px;
+                    }
+                }
+            }
+
+            .product-ratings .total-reviews {
+                margin-left: 0px;
+                margin-right: 15px;
+            }
         }
     }
 
@@ -3723,6 +3794,11 @@ section.review {
             margin-left: 30px;
             margin-right: 0px;
         }
+
+        .control-group label {
+            margin-left: 15px;
+            margin-right: 0px;
+        }
     }
 
     @media only screen and (max-width: 770px) {
@@ -3730,6 +3806,10 @@ section.review {
             .left-side {
                 width: 100%;
                 float: none;
+
+                .misc-controls div button {
+                    margin-right: 0px;
+                }
             }
 
             .right-side {
@@ -3818,13 +3898,17 @@ section.review {
             margin-right: 40px;
         }
 
-        .account-side-menu li {
-            margin-right: 5%;
+        .menu-block .menubar li {
             margin-left: 0%;
+            margin-right: 5%;
+
+            a {
+                text-align: right;
+            }
 
             .icon {
+                right: unset;
                 left: 12px;
-                right: auto;
                 transform: rotate(180deg);
             }
         }
@@ -3858,6 +3942,32 @@ section.review {
             display: flex;
         }
     }
+
+    @media all and (max-width: 770px) {
+        .account-content {
+            .account-layout {
+                margin-right: 0px;
+
+                .account-head .account-action {
+                    margin-left: 0px;
+                }
+            }
+
+            .sidebar .menu-block  {
+                .menu-block-title {
+                    .right {
+                        float: left;
+                    }
+                }
+
+                .menubar {
+                    > li {
+                        margin-right: 0%;
+                    }
+                }
+            }
+        }
+    }
     //customer page end here
 
     // footer start
@@ -3881,9 +3991,8 @@ section.review {
     // css for loader
     .cp-spinner {
         position: absolute;
-        left: auto;
-        right: 26%;
-        margin-top: calc(20% - 80px);
+        right: calc(50% - 24px);
+        margin-top: calc(40% - 24px);
     }
 
     @media only screen and (max-width: 720px) {

@@ -148,6 +148,7 @@ return [
         'role' => 'Role',
         'sub-total' => 'Sub Total',
         'no-of-products' => 'Number of Products',
+        'attribute-family' => 'Attribute Family'
     ],
 
     'account' => [
@@ -778,7 +779,9 @@ return [
         'file' => 'File',
         'upload-error' => 'The file must be a file of type: xls, xlsx, csv.',
         'duplicate-error' => 'Identifier must be unique, duplicate identifier :identifier at row :position.',
-        'enough-row-error' => 'file has not enough rows'
+        'enough-row-error' => 'file has not enough rows',
+        'allowed-type' => 'Allowed Type :',
+        'file-type' => 'csv, xls, xlsx.'
     ],
 
     'response' => [

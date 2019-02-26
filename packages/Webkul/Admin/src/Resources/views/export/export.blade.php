@@ -2,7 +2,7 @@
     <thead>
         <tr>
             @foreach ($columns as $column)
-                <th>{{ $column['label'] }}</th>
+                <th>{{ $column['index'] }}</th>
             @endforeach
         </tr>
     </thead>
