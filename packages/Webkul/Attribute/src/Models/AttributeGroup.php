@@ -3,7 +3,6 @@
 namespace Webkul\Attribute\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Contracts\AttributeGroup as AttributeGroupContract;
 
 class AttributeGroup extends Model implements AttributeGroupContract

@@ -322,7 +322,8 @@ return [
         'quantity' => 'Quantity',
         'in-stock' => 'In Stock',
         'out-of-stock' => 'Out Of Stock',
-        'view-all' => 'View All'
+        'view-all' => 'View All',
+        'select-above-options' => 'Please select above options first.'
     ],
 
     'wishlist' => [

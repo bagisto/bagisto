@@ -416,7 +416,13 @@ return [
             'is_filterable' => 'Use in Layered Navigation',
             'is_configurable' => 'Use To Create Configurable Product',
             'admin_name' => 'Admin Name',
-            'is_visible_on_front' => 'Visible on Product View Page on Front-end'
+            'is_visible_on_front' => 'Visible on Product View Page on Front-end',
+            'swatch_type' => 'Swatch Type',
+            'dropdown' => 'Dropdown',
+            'color-swatch' => 'Color Swatch',
+            'image-swatch' => 'Image Swatch',
+            'text-swatch' => 'Text Swatch',
+            'swatch' => 'Swatch'
         ],
         'families' => [
             'title' => 'Families',

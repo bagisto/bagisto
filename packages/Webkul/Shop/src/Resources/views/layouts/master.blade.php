@@ -72,6 +72,7 @@
         </div>
 
     </div>
+    
     <script type="text/javascript">
         window.flashMessages = [];
 
