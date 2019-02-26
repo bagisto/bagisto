@@ -327,7 +327,7 @@ class Core
     {
         $targetCurrency = !$targetCurrencyCode
                         ? $this->getCurrentCurrency()
-                        : $this->currencyRepository->findByField('code', $targetCurrencyCode);
+                        : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
 
         if (! $targetCurrency)
             return $amount;
