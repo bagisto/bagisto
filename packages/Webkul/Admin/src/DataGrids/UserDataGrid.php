@@ -84,5 +84,11 @@ class UserDataGrid extends DataGrid
             'route' => 'admin.users.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
+
+        $this->addAction([
+            'type' => 'Delete',
+            'route' => 'admin.users.delete',
+            'icon' => 'icon trash-icon'
+        ]);
     }
 }
