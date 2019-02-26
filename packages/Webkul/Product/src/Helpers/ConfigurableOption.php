@@ -165,6 +165,7 @@ class ConfigurableOption extends AbstractProduct
                     'id' => $attributeId,
                     'code' => $attribute->code,
                     'label' => $attribute->name,
+                    'swatch_type' => $attribute->swatch_type,
                     'options' => $attributeOptionsData
                 ];
             }
@@ -190,6 +191,7 @@ class ConfigurableOption extends AbstractProduct
                 $attributeOptionsData[] = [
                     'id' => $optionId,
                     'label' => $attributeOption->label,
+                    'swatch_value' => $attribute->swatch_type == 'image' ? $attributeOption->swatch_value_url : $attributeOption->swatch_value,
                     'products' => $options[$attribute->id][$optionId]
                 ];
             }

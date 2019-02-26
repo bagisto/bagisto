@@ -64,7 +64,7 @@
 
                             {!! view_render_event('bagisto.admin.catalog.family.edit_form_accordian.groups.controls.before', ['attributeFamily' => $attributeFamily]) !!}
 
-                            <button type="button" class="btn btn-md btn-primary" @click="showModal('addGroup')">
+                            <button type="button" style="margin-bottom : 20px" class="btn btn-md btn-primary" @click="showModal('addGroup')">
                                 {{ __('admin::app.catalog.families.add-group-title') }}
                             </button>
 

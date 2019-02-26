@@ -16,5 +16,6 @@ Vue.directive("code", require("./directives/code"));
 Vue.directive("alert", require("./directives/alert"));
 Vue.component("datetime", require("./components/datetime"));
 Vue.component("date", require("./components/date"));
+Vue.component("swatch-picker", require("./components/swatch-picker"));
 
 require('flatpickr/dist/flatpickr.css');
