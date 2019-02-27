@@ -63,7 +63,7 @@
                         </span>
 
                         <span class="when">
-                            {{ core()->formatDate($review->created_at) }}
+                            {{ core()->formatDate($review->created_at, 'F d, Y') }}
                         </span>
                     </div>
                 </div>
