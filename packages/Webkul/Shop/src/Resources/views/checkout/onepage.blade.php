@@ -383,7 +383,7 @@
                     shippingTemplateRenderFns.unshift(shippingHtml.staticRenderFns[i]);
                 }
 
-                eventBus.$emit('after-checkout-shipping-section-added', 0);
+                eventBus.$emit('after-checkout-shipping-section-added');
             },
 
             render(h) {
@@ -423,7 +423,7 @@
                     paymentTemplateRenderFns.unshift(paymentHtml.staticRenderFns[i]);
                 }
 
-                eventBus.$emit('after-checkout-payment-section-added', 0);
+                eventBus.$emit('after-checkout-payment-section-added');
             },
 
             render(h) {
