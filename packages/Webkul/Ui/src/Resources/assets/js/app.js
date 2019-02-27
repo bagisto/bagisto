@@ -19,3 +19,4 @@ Vue.component("date", require("./components/date"));
 Vue.component("swatch-picker", require("./components/swatch-picker"));
 
 require('flatpickr/dist/flatpickr.css');
+require('vue-swatches/dist/vue-swatches.min.css');
