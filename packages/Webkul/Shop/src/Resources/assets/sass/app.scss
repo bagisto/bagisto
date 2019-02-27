@@ -1861,6 +1861,10 @@ section.product-detail {
                 }
 
                 .full-description {
+                    * {
+                        max-width: 100%;
+                    }
+
                     ul {
                         padding-left: 40px;
                         list-style: disc;
