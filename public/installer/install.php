@@ -15,7 +15,7 @@
 
         // converting env content to key/value pair
         $data = explode(PHP_EOL,$str);
-        $databaseArray = ['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'DB_CONNECTION'];
+        $databaseArray = ['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'DB_CONNECTION','DB_PORT'];
 
         $key = $value = [];
         if ($data) {
@@ -38,9 +38,10 @@
         $password   = $databaseData['DB_PASSWORD'];
         $dbname     = $databaseData['DB_DATABASE'];
         $connection = $databaseData['DB_CONNECTION'];
+        $port       = $databaseData['DB_PORT'];
 
         if ($connection == 'mysql') {
-            @$conn = new mysqli($servername, $username, $password, $dbname);
+            @$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
             if (!$conn->connect_error) {
                 // retrieving admin entry
