@@ -2550,7 +2550,7 @@ section.cart {
             }
 
             .address-holder {
-                .address-card-1 {
+                .address-card {
                     width: 253px !important;
                     margin-right: 13px !important;
 
@@ -2561,10 +2561,14 @@ section.cart {
                             left: -30px;
                             top: 12px;
                         }
+
+                        .address-card-list {
+                            list-style: none;
+                        }
                     }
                 }
 
-                .address-card-1:nth-child(3n+0) {
+                .address-card:nth-child(3n+0) {
                     margin-right: 0px !important;
                 }
             }
@@ -3078,7 +3082,7 @@ section.review {
     width: 100%;
 }
 
-.address-card-1 {
+.address-card {
     width: 260px;
     border: 1px solid $border-color;
     display: flex;
