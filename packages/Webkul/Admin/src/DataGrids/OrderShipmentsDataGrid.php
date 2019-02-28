@@ -35,7 +35,7 @@ class OrderShipmentsDataGrid extends DataGrid
         $this->addFilter('inventory_source_name', 'is.name');
         $this->addFilter('orderdate', 'ors.created_at');
         $this->addFilter('shipment_created_at', 'shipments.created_at');
-        $this->addFilter('shipped_to', DDB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name) as shipped_to'));
+        $this->addFilter('shipped_to', DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name) as shipped_to'));
 
         $this->setQueryBuilder($queryBuilder);
     }

@@ -6,8 +6,7 @@
 </template>
 
 <script>
-	import "vue-swatches/dist/vue-swatches.min.css"
-	import Swatches from 'vue-swatches'
+	import Swatches from 'vue-swatches';
 
 	export default {
 		components: { Swatches },
