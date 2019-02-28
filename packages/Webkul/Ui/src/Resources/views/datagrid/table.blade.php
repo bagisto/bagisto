@@ -6,9 +6,6 @@
     @endif
 
     @push('scripts')
-    <!-- use capture mode when adding the event listener -->
-<!-- i.e. an event targeting an inner element is handled here before being handled by that element -->
-<div v-on:click.capture="doThis">...</div>
         <script type="text/x-template" id="datagrid-filters">
             <div class="grid-container">
                 <div class="filter-row-one" id="datagrid-filters">
