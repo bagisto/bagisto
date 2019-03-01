@@ -403,7 +403,6 @@
 
         var paymentTemplateRenderFns = [];
         Vue.component('payment-section', {
-
             inject: ['$validator'],
 
             data: () => ({
@@ -420,7 +419,7 @@
                 this.templateRender = paymentHtml.render;
 
                 for (var i in paymentHtml.staticRenderFns) {
-                    paymentTemplateRenderFns.unshift(paymentHtml.staticRenderFns[i]);
+                    paymentTemplateRenderFns.push(paymentHtml.staticRenderFns[i]);
                 }
 
                 eventBus.$emit('after-checkout-payment-section-added');
@@ -437,6 +436,8 @@
             methods: {
                 methodSelected () {
                     this.$emit('onPaymentMethodSelected', this.payment)
+
+                    eventBus.$emit('after-checkout-payment-method-selected');
                 }
             }
         })
