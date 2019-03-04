@@ -15,15 +15,15 @@ body {
 }
 
 * {
-    font-family: "Montserrat", sans-serif;
+    font-family: $font-montserrat;
 }
 
 *::-webkit-input-placeholder {
-    font-family: "Montserrat", sans-serif;
+    font-family: $font-montserrat;
 }
 
 *::-webkit-input-placeholder {
-    font-family: "Montserrat", sans-serif;
+    font-family: $font-montserrat;
 }
 
 textarea {
@@ -31,7 +31,7 @@ textarea {
 }
 
 input {
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font-montserrat;
 }
 
 .btn {
@@ -90,7 +90,6 @@ input {
 .mb-90 {
     margin-bottom: 90px;
 }
-
 
 //margin-top
 .mt-5 {
@@ -231,10 +230,10 @@ input {
     height: 48px;
     display: inline-block;
     box-sizing: border-box;
-    border-top: solid 6px #bababa;
-    border-right: solid 6px #bababa;
-    border-bottom: solid 6px #bababa;
-    border-left: solid 6px #bababa;
+    border-top: solid 6px $spnr-color;
+    border-right: solid 6px $spnr-color;
+    border-bottom: solid 6px $spnr-color;
+    border-left: solid 6px $spnr-color;
     position: absolute;
     top: 0;
     left: 0;
@@ -473,7 +472,7 @@ input {
                 margin-right: 10px;
                 text-transform: uppercase;
                 text-align: left;
-                box-shadow: 1px 1px 0px #ccc;
+                box-shadow: 1px 1px 0px $shadow-color;
             }
 
             .add-to-wishlist {
@@ -488,13 +487,13 @@ input {
         .sticker {
             border-radius: 100px;
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 20px;
+            left: 20px;
             text-transform: uppercase;
             padding: 4px 13px;
             font-size: 14px;
             color: $btn-background-color;
-            box-shadow: 1px 1px 1px #cccccc;
+            box-shadow: 1px 1px 1px $shadow-color1;
 
             &.sale {
                 background: $disc-price;
@@ -507,7 +506,7 @@ input {
     }
 
     .product-card:hover {
-        outline: 1px solid #eaeaec;
+        outline: 1px solid $outline-hvr;
         box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         -webkit-box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
         -moz-box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
@@ -606,7 +605,7 @@ input {
             margin-bottom: 20px;
 
             .featured-separator {
-                color: lightgray;
+                color: $ltgray;
             }
         }
     }
@@ -841,7 +840,7 @@ section.slider-block {
             .right-content-menu {
                 > li {
                     display: inline-block;
-                    border-right: 2px solid #c7c7c7;
+                    border-right: 2px solid $border-color;
                     cursor: pointer;
                     padding: 0 15px;
                     min-height: 26px;
@@ -889,7 +888,7 @@ section.slider-block {
                         display: block;
 
                         a {
-                            color: #333333;
+                            color: $listcolor;
                         }
                     }
                 }
@@ -1861,6 +1860,10 @@ section.product-detail {
                 }
 
                 .full-description {
+                    * {
+                        max-width: 100%;
+                    }
+
                     ul {
                         padding-left: 40px;
                         list-style: disc;
@@ -1898,7 +1901,7 @@ section.product-detail {
                         .swatch-container {
                             margin-top: 10px;
                             display: inline-block;
-                            
+
                             .swatch {
                                 display: inline-block;
                                 margin-right: 5px;
@@ -1909,7 +1912,7 @@ section.product-detail {
                                     min-width: 38px;
                                     height: 38px;
                                     float: left;
-                                    border: 1px solid #C7C7C7;
+                                    border: 1px solid $border-color;
                                     border-radius: 3px;
                                     line-height: 36px;
                                     text-align: center;
@@ -1920,14 +1923,14 @@ section.product-detail {
                                 img {
                                     width: 38px;
                                     height: 38px;
-                                    border: 1px solid #C7C7C7;
+                                    border: 1px solid $border-color;
                                     border-radius: 3px;
                                     cursor: pointer;
                                     background: rgb(242, 242, 242);
                                 }
 
                                 input:checked + span, input:checked + img {
-                                    border: 1px solid #242424;
+                                    border: 1px solid $font-color;
                                 }
 
                                 input {
@@ -2078,7 +2081,7 @@ section.product-detail {
             }
 
             .reviewer-details {
-                color: $font-color-light;
+                color: $review-details;
             }
         }
 
@@ -2547,7 +2550,7 @@ section.cart {
             }
 
             .address-holder {
-                .address-card-1 {
+                .address-card {
                     width: 253px !important;
                     margin-right: 13px !important;
 
@@ -2558,10 +2561,14 @@ section.cart {
                             left: -30px;
                             top: 12px;
                         }
+
+                        .address-card-list {
+                            list-style: none;
+                        }
                     }
                 }
 
-                .address-card-1:nth-child(3n+0) {
+                .address-card:nth-child(3n+0) {
                     margin-right: 0px !important;
                 }
             }
@@ -3075,7 +3082,7 @@ section.review {
     width: 100%;
 }
 
-.address-card-1 {
+.address-card {
     width: 260px;
     border: 1px solid $border-color;
     display: flex;
@@ -3448,7 +3455,7 @@ section.review {
             }
 
             tr {
-                border: 1px solid #C7C7C7;
+                border: 1px solid $border-color;
             }
         }
     }
@@ -3497,7 +3504,7 @@ section.review {
             div.right-content {
                 .right-content-menu {
                     > li {
-                        border-right: 2px solid #c7c7c7;
+                        border-right: 2px solid $border-color;
                         padding: 0 15px 0 15px;
 
                         &:last-child {

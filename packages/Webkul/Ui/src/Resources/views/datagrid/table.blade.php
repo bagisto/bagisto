@@ -10,7 +10,7 @@
             <div class="grid-container">
                 <div class="filter-row-one" id="datagrid-filters">
                     <div class="search-filter">
-                        <input type="search" id="search-field" class="control" placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue" />
+                        <input type="search" id="search-field" class="control" placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue" v-on:keyup.enter="searchCollection(searchValue)" />
 
                         <div class="icon-wrapper">
                             <span class="icon search-icon search-btn" v-on:click="searchCollection(searchValue)"></span>

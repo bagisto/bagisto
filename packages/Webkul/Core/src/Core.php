@@ -319,7 +319,7 @@ class Core
     /**
     * Converts price
     *
-    * @param float  $price
+    * @param float  $amount
     * @param string $targetCurrencyCode
     * @return string
     */
@@ -327,7 +327,7 @@ class Core
     {
         $targetCurrency = !$targetCurrencyCode
                         ? $this->getCurrentCurrency()
-                        : $this->currencyRepository->findByField('code', $targetCurrencyCode);
+                        : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
 
         if (! $targetCurrency)
             return $amount;
@@ -336,10 +336,36 @@ class Core
             'target_currency' => $targetCurrency->id,
         ]);
 
-        if (null === $exchangeRate)
+        if (null === $exchangeRate || ! $exchangeRate->rate)
             return $amount;
 
         return (float) $amount * $exchangeRate->rate;
+    }
+
+    /**
+    * Converts to base price
+    *
+    * @param float  $amount
+    * @param string $targetCurrencyCode
+    * @return string
+    */
+    public function convertToBasePrice($amount, $targetCurrencyCode = null)
+    {
+        $targetCurrency = !$targetCurrencyCode
+                        ? $this->getCurrentCurrency()
+                        : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
+
+        if (! $targetCurrency)
+            return $amount;
+
+        $exchangeRate = $this->exchangeRateRepository->findOneWhere([
+            'target_currency' => $targetCurrency->id,
+        ]);
+
+        if (null === $exchangeRate || ! $exchangeRate->rate)
+            return $amount;
+
+        return (float) $amount / $exchangeRate->rate;
     }
 
     /**

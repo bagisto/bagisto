@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.catalog.attributes.store') }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.catalog.attributes.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
             <div class="page-header">
                 <div class="page-title">
@@ -220,7 +220,7 @@
     <script type="text/x-template" id="options-template">
         <div>
 
-            <div class="control-group">
+            <div class="control-group" v-if="show_swatch">
                 <label for="swatch_type">{{ __('admin::app.catalog.attributes.swatch_type') }}</label>
                 <select class="control" id="swatch_type" name="swatch_type" v-model="swatch_type">
                     <option value="dropdown">
@@ -245,7 +245,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th v-if="swatch_type == 'color' || swatch_type == 'image'">{{ __('admin::app.catalog.attributes.swatch') }}</th>
+                            <th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">{{ __('admin::app.catalog.attributes.swatch') }}</th>
                             
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
 
@@ -263,11 +263,11 @@
 
                     <tbody>
                         <tr v-for="row in optionRows">
-                            <td v-if="swatch_type == 'color'">
+                            <td v-if="show_swatch && swatch_type == 'color'">
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
                             </td>
 
-                            <td v-if="swatch_type == 'image'">
+                            <td v-if="show_swatch && swatch_type == 'image'">
                                 <input type="file" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
                             </td>
 
@@ -325,8 +325,21 @@
                 data: () => ({
                     optionRowCount: 0,
                     optionRows: [],
+                    show_swatch: false,
                     swatch_type: ''
                 }),
+
+                created () {
+                    var this_this = this;
+
+                    $('#type').on('change', function (e) {
+                        if (['select'].indexOf($(e.target).val()) === -1) {
+                            this_this.show_swatch = false;
+                        } else {
+                            this_this.show_swatch = true;
+                        }
+                    });
+                },
 
                 methods: {
                     addOptionRow () {

@@ -93,8 +93,6 @@ class CartController extends Controller
         try {
             Event::fire('checkout.cart.add.before', $id);
 
-            dd(request()->except('_token'));
-
             $result = Cart::add($id, request()->except('_token'));
 
             Event::fire('checkout.cart.add.after', $result);
