@@ -198,6 +198,14 @@ class ProductRepository extends Repository
                 $product->up_sells()->sync($data['up_sell']);
             }
 
+            if (isset($data['cross_sell'])) {
+                $product->cross_sells()->sync($data['cross_sell']);
+            }
+
+            if (isset($data['related_products'])) {
+                $product->related_products()->sync($data['related_products']);
+            }
+
             $previousVariantIds = $product->variants->pluck('id');
 
             if (isset($data['variants'])) {
