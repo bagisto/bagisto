@@ -12,6 +12,7 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Product\Helpers\Price;
 
 /**
  * Facades handler for all the methods to be implemented in Cart.
@@ -84,6 +85,11 @@ class Cart {
     protected $suppressFlash;
 
     /**
+     * Product price helper instance
+     */
+    protected $price;
+
+    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Checkout\Repositories\CartRepository            $cart
@@ -103,7 +109,8 @@ class Cart {
         ProductRepository $product,
         TaxCategoryRepository $taxCategory,
         WishlistRepository $wishlist,
-        CustomerAddressRepository $customerAddress
+        CustomerAddressRepository $customerAddress,
+        Price $price
     )
     {
         $this->customer = $customer;
@@ -121,6 +128,8 @@ class Cart {
         $this->wishlist = $wishlist;
 
         $this->customerAddress = $customerAddress;
+
+        $this->price = $price;
 
         $this->suppressFlash = false;
     }
@@ -281,7 +290,13 @@ class Cart {
 
         $child = $childData = null;
         $additional = [];
-        $price = ($product->type == 'configurable' ? $parentProduct->price : $product->price);
+
+        if ($product->type == 'configurable') {
+            $price = $this->price->getMinimalPrice($parentProduct);
+        } else {
+            $price = $this->price->getMinimalPrice($product);
+        }
+
         $weight = ($product->type == 'configurable' ? $parentProduct->weight : $product->weight);
 
         $parentData = [
@@ -828,8 +843,14 @@ class Cart {
                     } else if ($item->product->name != $item->name) {
                         $item->update(['name' => $item->product->name]);
 
-                    } else if ($item->child->product->price != $item->price) {
-                        $price = (float) $item->custom_price ? $item->custom_price : $item->child->product->price;
+                    } else if($this->price->getMinimalPrice($item->child->product) != $item->price) {
+                        // $price = (float) $item->custom_price ? $item->custom_price : $item->child->product->price;
+
+                        if((float)$item->custom_price) {
+                            $price = $item->custom_price;
+                        } else {
+                            $price = $this->price->getMinimalPrice($item->child->product);
+                        }
 
                         $item->update([
                             'price' => $price,
@@ -846,8 +867,14 @@ class Cart {
                     } else if ($item->product->name != $item->name) {
                         $item->update(['name' => $item->product->name]);
 
-                    } else if ($item->product->price != $item->price) {
-                        $price = (float) $item->custom_price ? $item->custom_price : $item->product->price;
+                    } else if ($this->price->getMinimalPrice($item->product) != $item->price) {
+                        // $price = (float) $item->custom_price ? $item->custom_price : $item->product->price;
+
+                        if((float)$item->custom_price) {
+                            $price = $item->custom_price;
+                        } else {
+                            $price = $this->price->getMinimalPrice($item->child->product);
+                        }
 
                         $item->update([
                             'price' => $price,

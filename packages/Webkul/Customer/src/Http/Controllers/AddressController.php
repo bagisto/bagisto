@@ -121,10 +121,12 @@ class AddressController extends Controller
     {
         $this->validate(request(), [
             'address1' => 'string|required',
+            'address2' => 'string',
             'country' => 'string|required',
             'state' => 'string|required',
             'city' => 'string|required',
-            'postcode' => 'required'
+            'postcode' => 'required',
+            'phone' => 'required'
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();

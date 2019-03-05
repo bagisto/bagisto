@@ -65,8 +65,6 @@
                                     </li>
                                 </ul>
 
-
-
                                 <div class="control-links mt-20">
                                     <span>
                                         <a href="{{ route('customer.address.edit', $address->id) }}">
