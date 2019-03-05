@@ -24,9 +24,10 @@ class ProductDataGrid extends DataGrid
         $queryBuilder = DB::table('products_grid')
                 ->leftJoin('products', 'products_grid.product_id', '=', 'products.id')
                 ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
-                ->addSelect('products_grid.product_id as product_id', 'products_grid.sku as product_sku', 'products_grid.name', 'products.type as product_type', 'products_grid.status', 'products_grid.price', 'products_grid.quantity', 'attribute_families.name as attribute_family');
+                ->select('products_grid.product_id as product_id', 'products_grid.sku as product_sku', 'products_grid.name as productname', 'products.type as product_type', 'products_grid.status', 'products_grid.price', 'products_grid.quantity', 'attribute_families.name as attribute_family');
 
         $this->addFilter('product_id', 'products_grid.product_id');
+        $this->addFilter('productname', 'products_grid.name');
         $this->addFilter('product_sku', 'products_grid.sku');
         $this->addFilter('product_type', 'products.type');
         $this->addFilter('attribute_family', 'attribute_families.name');
@@ -54,7 +55,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'name',
+            'index' => 'productname',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
             'searchable' => true,

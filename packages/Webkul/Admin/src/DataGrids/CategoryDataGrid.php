@@ -80,7 +80,7 @@ class CategoryDataGrid extends DataGrid
             'label' => trans('admin::app.datagrid.no-of-products'),
             'type' => 'number',
             'sortable' => true,
-            'searchable' => true,
+            'searchable' => false,
         ]);
     }
 

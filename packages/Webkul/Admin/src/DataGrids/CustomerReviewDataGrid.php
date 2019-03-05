@@ -20,11 +20,12 @@ class CustomerReviewDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('product_reviews as pr')
-                ->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id')
-                ->addSelect('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pg.name', 'pr.status as product_review_status');
+            ->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id')
+            ->select('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pg.name as product_name', 'pr.status as product_review_status');
 
         $this->addFilter('product_review_id', 'pr.id');
         $this->addFilter('product_review_status', 'pr.status');
+        $this->addFilter('product_name', 'pg.name');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -37,6 +38,7 @@ class CustomerReviewDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => false
         ]);
 
         $this->addColumn([
@@ -56,7 +58,7 @@ class CustomerReviewDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'name',
+            'index' => 'product_name',
             'label' => trans('admin::app.datagrid.product-name'),
             'type' => 'string',
             'searchable' => true,

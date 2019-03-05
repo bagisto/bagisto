@@ -9,7 +9,7 @@
             </a>
         </div>
         <div class="address-holder">
-            <div class="address-card-1" v-for='(addresses, index) in this.allAddress'>
+            <div class="address-card" v-for='(addresses, index) in this.allAddress'>
                 <div class="details">
 
                     <label class="radio-container">
