@@ -1679,6 +1679,7 @@ section.product-detail {
                 div {
                     display: flex;
                     flex-direction: row;
+                    cursor: pointer;
 
                     .thumb-list {
                         display: flex;
@@ -3460,13 +3461,6 @@ section.review {
         }
     }
 }
-
-// .sticky {
-//     position: fixed;
-//     top: 10px;
-// }
-
-
 
 /// rtl css start here
 .rtl {

@@ -92,6 +92,8 @@
             </product-view>
         </div>
 
+        @include ('shop::products.view.related-products')
+
         @include ('shop::products.view.up-sells')
 
     </section>

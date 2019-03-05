@@ -375,7 +375,12 @@ return [
             'categories' => 'Categories',
             'images' => 'Images',
             'inventories' => 'Inventories',
-            'variations' => 'Variations'
+            'variations' => 'Variations',
+            'product-link' => 'Linked Products',
+            'cross-selling' => 'Cross Selling',
+            'up-selling' => 'Up Selling',
+            'related-products' => 'Related Products',
+            'product-search-hint' => 'Start typing product name'
         ],
 
         'attributes' => [

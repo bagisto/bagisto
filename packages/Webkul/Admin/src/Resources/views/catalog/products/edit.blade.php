@@ -62,7 +62,7 @@
                 @foreach ($product->attribute_family->attribute_groups as $attributeGroup)
 
                     @if (count($attributeGroup->custom_attributes))
-                        
+
                         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.before', ['product' => $product]) !!}
 
                         <accordian :title="'{{ __($attributeGroup->name) }}'" :active="true">
@@ -154,23 +154,25 @@
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.before', ['product' => $product]) !!}
 
                 @include ('admin::catalog.products.accordians.images')
-                
+
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.after', ['product' => $product]) !!}
 
 
-                
+
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.categories.before', ['product' => $product]) !!}
 
                 @include ('admin::catalog.products.accordians.categories')
 
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.categories.after', ['product' => $product]) !!}
-                
+
 
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.before', ['product' => $product]) !!}
 
                 @include ('admin::catalog.products.accordians.variations')
-                
+
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.after', ['product' => $product]) !!}
+
+                @include ('admin::catalog.products.accordians.product-links')
 
             </div>
 

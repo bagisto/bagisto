@@ -120,7 +120,7 @@ class Product extends Model implements ProductContract
      */
     public function related_products()
     {
-        return $this->belongsToMany(self::class, 'product_relations');
+        return $this->belongsToMany(self::class, 'product_relations', 'parent_id', 'child_id');
     }
 
     /**
@@ -136,7 +136,7 @@ class Product extends Model implements ProductContract
      */
     public function cross_sells()
     {
-        return $this->belongsToMany(self::class, 'product_cross_sells');
+        return $this->belongsToMany(self::class, 'product_cross_sells', 'parent_id', 'child_id');
     }
 
     /**

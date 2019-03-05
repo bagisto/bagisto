@@ -138,6 +138,8 @@
                 </div>
             </div>
 
+            @include ('shop::products.view.cross-sells')
+
         @else
 
             <div class="title">
