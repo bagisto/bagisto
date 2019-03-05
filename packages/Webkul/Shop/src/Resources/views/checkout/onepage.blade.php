@@ -45,13 +45,13 @@
                     </li>
                 </ul>
 
-                <div class="step-content information" v-show="currentStep == 1">
+                <div class="step-content information" v-show="currentStep == 1" id="address-section">
 
                     @include('shop::checkout.onepage.customer-info')
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('address-form')" :disabled="disable_button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('address-form')" :disabled="disable_button" id="checkout-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
@@ -59,13 +59,13 @@
 
                 </div>
 
-                <div class="step-content shipping" v-show="currentStep == 2">
+                <div class="step-content shipping" v-show="currentStep == 2" id="shipping-section">
 
                     <shipping-section v-if="currentStep == 2" @onShippingMethodSelected="shippingMethodSelected($event)"></shipping-section>
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('shipping-form')" :disabled="disable_button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('shipping-form')" :disabled="disable_button" id="checkout-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
@@ -73,13 +73,13 @@
 
                 </div>
 
-                <div class="step-content payment" v-show="currentStep == 3">
+                <div class="step-content payment" v-show="currentStep == 3" id="payment-section">
 
                     <payment-section v-if="currentStep == 3" @onPaymentMethodSelected="paymentMethodSelected($event)"></payment-section>
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('payment-form')" :disabled="disable_button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('payment-form')" :disabled="disable_button" id="checkout-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
@@ -87,13 +87,13 @@
 
                 </div>
 
-                <div class="step-content review" v-show="currentStep == 4">
+                <div class="step-content review" v-show="currentStep == 4" id="summary-section">
 
                     <review-section v-if="currentStep == 4"></review-section>
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button">
                             {{ __('shop::app.checkout.onepage.place-order') }}
                         </button>
 
@@ -129,32 +129,22 @@
         @endauth
 
         Vue.component('checkout', {
-
             template: '#checkout-template',
-
             inject: ['$validator'],
 
             data: () => ({
                 currentStep: 1,
-
                 completedStep: 0,
-
                 address: {
                     billing: {
                         use_for_shipping: true,
                     },
-
                     shipping: {},
                 },
-
                 selected_shipping_method: '',
-
                 selected_payment_method: '',
-
                 disable_button: false,
-
                 new_shipping_address: false,
-
                 new_billing_address: false,
 
                 allAddress: {},
@@ -338,7 +328,6 @@
 
         var summaryTemplateRenderFns = [];
         Vue.component('summary-section', {
-
             inject: ['$validator'],
 
             data: () => ({
@@ -366,12 +355,10 @@
 
         var shippingTemplateRenderFns = [];
         Vue.component('shipping-section', {
-
             inject: ['$validator'],
 
             data: () => ({
                 templateRender: null,
-
                 selected_shipping_method: '',
             }),
 
@@ -403,7 +390,6 @@
 
         var paymentTemplateRenderFns = [];
         Vue.component('payment-section', {
-
             inject: ['$validator'],
 
             data: () => ({
@@ -420,7 +406,7 @@
                 this.templateRender = paymentHtml.render;
 
                 for (var i in paymentHtml.staticRenderFns) {
-                    paymentTemplateRenderFns.unshift(paymentHtml.staticRenderFns[i]);
+                    paymentTemplateRenderFns.push(paymentHtml.staticRenderFns[i]);
                 }
 
                 eventBus.$emit('after-checkout-payment-section-added');
@@ -437,13 +423,14 @@
             methods: {
                 methodSelected () {
                     this.$emit('onPaymentMethodSelected', this.payment)
+
+                    eventBus.$emit('after-payment-method-selected');
                 }
             }
         })
 
         var reviewTemplateRenderFns = [];
         Vue.component('review-section', {
-
             data: () => ({
                 templateRender: null
             }),
