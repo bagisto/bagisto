@@ -29,6 +29,6 @@ class Attribute extends TranslatableModel implements AttributeContract
      */
     public function scopeFilterableAttributes($query)
     {
-        return $query->where('is_filterable', 1)->orderBy('position');
+        return $query->where('is_filterable', 1)->where('swatch_type', '<>', 'image')->orderBy('position');
     }
 }
