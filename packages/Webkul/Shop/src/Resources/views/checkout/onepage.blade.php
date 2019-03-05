@@ -367,7 +367,7 @@
             mounted() {
                 this.templateRender = shippingHtml.render;
                 for (var i in shippingHtml.staticRenderFns) {
-                    shippingTemplateRenderFns.unshift(shippingHtml.staticRenderFns[i]);
+                    shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
                 }
 
                 eventBus.$emit('after-checkout-shipping-section-added');
@@ -384,6 +384,8 @@
             methods: {
                 methodSelected () {
                     this.$emit('onShippingMethodSelected', this.selected_shipping_method)
+
+                    eventBus.$emit('after-shipping-method-selected');
                 }
             }
         })
@@ -441,7 +443,7 @@
                 this.templateRender = reviewHtml.render;
 
                 for (var i in reviewHtml.staticRenderFns) {
-                    reviewTemplateRenderFns.unshift(reviewHtml.staticRenderFns[i]);
+                    reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
                 }
             },
 

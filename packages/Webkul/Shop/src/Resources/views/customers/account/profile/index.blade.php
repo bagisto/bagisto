@@ -27,8 +27,8 @@
 
          {!! view_render_event('bagisto.shop.customers.account.profile.view.before', ['customer' => $customer]) !!}
 
-        <div class="account-table-content">
-            <table>
+        <div class="account-table-content" style="width: 50%;">
+            <table style="color: #5E5E5E;">
                 <tbody>
                     <tr>
                         <td>{{ __('shop::app.customer.account.profile.fname') }}</td>
@@ -63,13 +63,11 @@
                             </td>
                         </tr>
                     @endif --}}
-
                 </tbody>
             </table>
         </div>
 
          {!! view_render_event('bagisto.shop.customers.account.profile.view.after', ['customer' => $customer]) !!}
-
     </div>
 </div>
 @endsection
