@@ -1,7 +1,7 @@
 <form data-vv-scope="payment-form">
     <div class="form-container">
-        <div class="form-header">
-            <h1>{{ __('shop::app.checkout.onepage.payment-information') }}</h1>
+        <div class="form-header mb-30">
+            <span class="checkout-step-heading">{{ __('shop::app.checkout.onepage.payment-methods') }}</span>
         </div>
 
         <div class="payment-methods">
@@ -12,13 +12,25 @@
 
                     {!! view_render_event('bagisto.shop.checkout.payment-method.before', ['payment' => $payment]) !!}
 
-                    <span class="radio">
-                        <input v-validate="'required'" type="radio" id="{{ $payment['method'] }}" name="payment[method]" value="{{ $payment['method'] }}" v-model="payment.method" @change="methodSelected()" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.payment-method') }}&quot;">
-                        <label class="radio-view" for="{{ $payment['method'] }}"></label>
-                        {{ $payment['method_title'] }}
-                    </span>
+                    <div class="checkout-method-group mb-25">
+                        <div class="line-one">
+                            <label class="radio-container">
+                                <input v-validate="'required'" type="radio" id="{{ $payment['method'] }}" name="payment[method]" value="{{ $payment['method'] }}" v-model="payment.method" @change="methodSelected()" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.payment-method') }}&quot;">
 
-                    <span class="control-info">{{ $payment['description'] }}</span>
+                                <span class="checkmark"></span>
+
+                                {{-- <label class="radio-view" for="{{ $payment['method'] }}"></label> --}}
+                            </label>
+
+                            <span class="payment-method method-label">
+                                <b>{{ $payment['method_title'] }}</b>
+                            </span>
+                        </div>
+
+                        <div class="line-two mt-5">
+                            <span class="method-summary">{{ $payment['description'] }}</span>
+                        </div>
+                    </div>
 
                     {!! view_render_event('bagisto.shop.checkout.payment-method.after', ['payment' => $payment]) !!}
 

@@ -19,7 +19,7 @@
 
                     <div class="dropdown-filters">
                         <div class="dropdown-toggle">
-                            <div class="dropdown-header">
+                            <div class="grid-dropdown-header">
                                 <span class="name">{{ __('ui::app.datagrid.filter') }}</span>
                                 <i class="icon arrow-down-icon active"></i>
                             </div>

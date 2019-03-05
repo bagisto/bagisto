@@ -179,6 +179,8 @@ input {
         position: absolute;
         opacity: 0;
         cursor: pointer;
+        top: 0px;
+        left: 0px;
     }
 
     /* Create a custom radio button */
@@ -293,6 +295,7 @@ input {
 
 //horizontal rule
 .horizontal-rule {
+    display: block;
     width: 100%;
     height: 1px;
     background: $border-color;
@@ -937,6 +940,7 @@ section.slider-block {
                         .dropdown-cart {
                             color: $font-color;
                         }
+
                         .dropdown-cart > .dropdown-header {
                             width: 100%;
                         }
@@ -959,6 +963,7 @@ section.slider-block {
                         .dropdown-content {
                             padding-top: 8px;
                             padding-bottom: 10px;
+                            width: 100%;
                         }
 
                         .dropdown-content .item {
@@ -976,7 +981,7 @@ section.slider-block {
                         }
 
                         .dropdown-content .item-details {
-                            max-height: 125px;
+                            height: auto;
                         }
 
                         .item-details .item-name {
@@ -2142,27 +2147,26 @@ section.cart {
 }
 
 .cart-item-list {
-    margin-top: 21px;
-    padding: 1px;
-
     .item {
         padding: 10px;
-        margin-bottom: 20px;
         display: flex;
         flex-direction: row;
         border: 1px solid $border-color;
-        border-radius: 3px;
+        border-radius: 2px;
 
         .item-image {
-            height: 160px;
-            width: 160px;
-            box-shadow: 1px 1px 1px $border-color;
+            margin-right: 15px;
+
+            img {
+                height: 160px;
+                width: 160px;
+            }
         }
 
         .item-details {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             width: 100%;
 
             .item-title {
@@ -2355,6 +2359,24 @@ section.cart {
     }
 }
 //cart pages responsive css end
+.checkout-method-group {
+    .line-one {
+        display: inline-flex;
+        align-items: center;
+
+        .radio-container {
+            padding-left: 28px;
+        }
+
+        .method-label {
+            margin-top: 4px;
+        }
+    }
+
+    .line-two {
+        margin-left: 30px;
+    }
+}
 
 // checkout starts here
 .checkout-process {
@@ -2363,10 +2385,12 @@ section.cart {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
+    font-size: 16px;
+    color: $font-color;
 
     .col-main {
-        width: 65%;
-        padding-right: 40px;
+        width: 70%;
+        margin-right: 5%;
 
         ul.checkout-steps {
             width: 100%;
@@ -2438,12 +2462,15 @@ section.cart {
                 width: 100%;
                 display: inline-block;
 
-                h1 {
+                .checkout-step-heading {
+                    font-size: 24px;
+                    font-weight: bold;
                     float: left;
                 }
 
                 .btn {
                     float: right;
+                    font-size: 14px;
                 }
             }
 
@@ -2454,14 +2481,17 @@ section.cart {
             }
 
             .shipping-methods {
-                h4 {
-                    margin: 0;
+                font-size: 16px;
+
+                .ship-method-carrier {
+                    margin-bottom: 15px;
+                    font-weight: bold;
                 }
             }
 
             .payment-methods {
-                .radio {
-                    font-weight: 600;
+                .radio-container {
+                    padding-left: 28px;
                 }
 
                 .control-info {
@@ -2469,30 +2499,30 @@ section.cart {
                 }
             }
 
-            .address {
-                display: inline-block;
+            .address-summary {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
                 width: 100%;
 
-                .address-card {
-                    width: 50%;
-                    float: left;
+                div.billing-address {
+                    margin-right: 25%;
+                }
 
-                    .card-title span {
-                        font-weight: 600;
+                div.billing-address, div.shipping-address {
+                    .horizontal-rule {
+                        width: 40px;
+                        background: #242424;
                     }
+                }
 
-                    .card-content {
-                        margin-top: 15px;
-                        color: $font-color;
-                        line-height: 25px;
+                .label {
+                    width: 10%;
+                }
 
-                        .horizontal-rule {
-                            margin: 12px 0;
-                            display: block;
-                            width: 25px;
-                            background: $dark-background;
-                        }
-                    }
+                .address-card-list {
+                    width: 85%;
                 }
             }
 
@@ -2548,36 +2578,11 @@ section.cart {
                     }
                 }
             }
-
-            .address-holder {
-                .address-card {
-                    width: 253px !important;
-                    margin-right: 13px !important;
-
-                    .details {
-                        margin-left: 30px;
-
-                        .checkmark {
-                            left: -30px;
-                            top: 12px;
-                        }
-
-                        .address-card-list {
-                            list-style: none;
-                        }
-                    }
-                }
-
-                .address-card:nth-child(3n+0) {
-                    margin-right: 0px !important;
-                }
-            }
-            // complete page end here
         }
     }
 
     .col-right {
-        width: 35%;
+        width: 25%;
         padding-left: 40px;
     }
 }
@@ -3085,12 +3090,7 @@ section.review {
 .address-card {
     width: 260px;
     border: 1px solid $border-color;
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 20px;
+    padding: 15px;
     margin-right: 15px;
     margin-bottom: 15px;
 
@@ -3120,11 +3120,11 @@ section.review {
             }
         }
 
-        .default-address {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
+        // .default-address {
+        //     position: absolute;
+        //     top: 10px;
+        //     right: 10px;
+        // }
     }
 }
 

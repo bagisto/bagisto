@@ -22,16 +22,16 @@
         <i class="icon arrow-down-icon"></i>
     </div>
 
-    <div class="dropdown-list" style="display: none; top: 50px; right: 0px">
+    <div class="dropdown-list" style="display: none; top: 50px; right: 0px;">
         <div class="dropdown-container">
             <div class="dropdown-cart">
-                <div class="dropdown-header">
+                <div class="dropdown-header mt-5">
                     <p class="heading">
                         {{ __('shop::app.checkout.cart.cart-subtotal') }} -
 
                         {!! view_render_event('bagisto.shop.checkout.cart-mini.subtotal.before', ['cart' => $cart]) !!}
 
-                        {{ core()->currency($cart->base_sub_total) }}
+                        <b>{{ core()->currency($cart->base_sub_total) }}</b>
 
                         {!! view_render_event('bagisto.shop.checkout.cart-mini.subtotal.after', ['cart' => $cart]) !!}
                     </p>
@@ -72,7 +72,7 @@
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.price.before', ['item' => $item]) !!}
 
-                                <div class="item-price">{{ core()->currency($item->base_total) }}</div>
+                                <div class="item-price"><b>{{ core()->currency($item->base_total) }}</b></div>
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.price.after', ['item' => $item]) !!}
 

@@ -1,42 +1,61 @@
 <div class="form-container">
-    <div class="form-header">
-        <h1>{{ __('shop::app.checkout.onepage.summary') }}</h1>
+    <div class="form-header mb-30">
+        <span class="checkout-step-heading">{{ __('shop::app.checkout.onepage.summary') }}</span>
     </div>
 
-    <div class="address">
-
+    <div class="address-summary">
         @if ($billingAddress = $cart->billing_address)
-            <div class="address-card billing-address">
-                <div class="card-title">
-                    <span>{{ __('shop::app.checkout.onepage.billing-address') }}</span>
+            <div class="billing-address">
+                <div class="card-title mb-20">
+                    <b>{{ __('shop::app.checkout.onepage.billing-address') }}</b>
                 </div>
 
                 <div class="card-content">
-                    {{ $billingAddress->name }}</br>
-                    {{ $billingAddress->address1 }}, {{ $billingAddress->address2 ? $billingAddress->address2 . ',' : '' }} {{ $billingAddress->state }}</br>
-                    {{ country()->name($billingAddress->country) }} {{ $billingAddress->postcode }}</br>
+                    <ul>
+                        <li class="mb-10">
+                            {{ $billingAddress->name }}
+                        </li>
+                        <li class="mb-10">
+                            {{ $billingAddress->address1 }}, <br/>{{ $billingAddress->address2 ? $billingAddress->address2 . ',' : '' }} {{ $billingAddress->state }}
+                        </li>
+                        <li class="mb-10">
+                            {{ country()->name($billingAddress->country) }} {{ $billingAddress->postcode }}
+                        </li>
 
-                    <span class="horizontal-rule"></span>
+                        <span class="horizontal-rule mb-15 mt-15"></span>
 
-                    {{ __('shop::app.checkout.onepage.contact') }} : {{ $billingAddress->phone }}
+                        <li class="mb-10">
+                            {{ __('shop::app.checkout.onepage.contact') }} : {{ $billingAddress->phone }}
+                        </li>
+                    </ul>
                 </div>
             </div>
         @endif
 
         @if ($shippingAddress = $cart->shipping_address)
-            <div class="address-card shipping-address">
-                <div class="card-title">
-                    <span>{{ __('shop::app.checkout.onepage.shipping-address') }}</span>
+            <div class="shipping-address">
+                <div class="card-title mb-20">
+                    <b>{{ __('shop::app.checkout.onepage.shipping-address') }}</b>
                 </div>
 
                 <div class="card-content">
-                    {{ $shippingAddress->name }}</br>
-                    {{ $shippingAddress->address1 }}, {{ $shippingAddress->address2 ? $shippingAddress->address2 . ',' : '' }} , {{ $shippingAddress->state }}</br>
-                    {{ country()->name($shippingAddress->country) }} {{ $shippingAddress->postcode }}</br>
+                    <ul>
+                        <li class="mb-10">
+                            {{ $shippingAddress->name }}
+                        </li>
+                        <li class="mb-10">
+                            {{ $shippingAddress->address1 }}, <br/>{{ $shippingAddress->address2 ? $shippingAddress->address2 . ',' : '' }} , {{ $shippingAddress->state }}
+                        </li>
+                        <li class="mb-10">
+                            {{ country()->name($shippingAddress->country) }} {{ $shippingAddress->postcode }}
+                        </li>
 
-                    <span class="horizontal-rule"></span>
+                        <span class="horizontal-rule mb-15 mt-15"></span>
 
-                    {{ __('shop::app.checkout.onepage.contact') }} : {{ $shippingAddress->phone }}
+                        <li class="mb-10">
+                            {{ __('shop::app.checkout.onepage.contact') }} : {{ $shippingAddress->phone }}
+                        </li>
+                    </ul>
                 </div>
             </div>
         @endif
@@ -45,7 +64,7 @@
 
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
-    <div class="cart-item-list">
+    <div class="cart-item-list mt-20">
         @foreach ($cart->items as $item)
 
             <?php
@@ -54,9 +73,9 @@
                 $productBaseImage = $productImageHelper->getProductBaseImage($product);
             ?>
 
-            <div class="item">
-                <div style="margin-right: 15px;">
-                    <img class="item-image" src="{{ $productBaseImage['medium_image_url'] }}" />
+            <div class="item mb-5">
+                <div class="item-image">
+                    <img src="{{ $productBaseImage['medium_image_url'] }}" />
                 </div>
 
                 <div class="item-details">
@@ -116,10 +135,9 @@
 
     </div>
 
-    <div class="order-description">
+    <div class="order-description mt-20">
 
-        <div class="pull-left" style="width: 50%;float: left;">
-
+        <div class="pull-left" style="width: 60%; float: left;">
             <div class="shipping">
                 <div class="decorator">
                     <i class="icon shipping-icon"></i>
@@ -146,7 +164,7 @@
 
         </div>
 
-        <div class="pull-right" style="width: 50%; float: left;">
+        <div class="pull-right" style="width: 40%; float: left;">
 
             @include('shop::checkout.total.summary', ['cart' => $cart])
 
