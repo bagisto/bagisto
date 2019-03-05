@@ -194,6 +194,10 @@ class ProductRepository extends Repository
                 $product->categories()->sync($data['categories']);
             }
 
+            if (isset($data['up_sell'])) {
+                $product->up_sells()->sync($data['up_sell']);
+            }
+
             $previousVariantIds = $product->variants->pluck('id');
 
             if (isset($data['variants'])) {

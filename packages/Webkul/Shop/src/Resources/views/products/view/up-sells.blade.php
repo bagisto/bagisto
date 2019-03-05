@@ -8,7 +8,7 @@
             <span class="border-bottom"></span>
         </div>
 
-        <div class="product-grid max-4-col">
+        <div class="product-grid-4">
 
             @foreach ($product->up_sells()->paginate(4) as $up_sell_product)
 
