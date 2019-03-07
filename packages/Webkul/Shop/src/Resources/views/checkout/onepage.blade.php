@@ -51,7 +51,7 @@
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('address-form')" :disabled="disable_button" id="checkout-continue-button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('address-form')" :disabled="disable_button" id="checkout-address-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
@@ -65,7 +65,7 @@
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('shipping-form')" :disabled="disable_button" id="checkout-continue-button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('shipping-form')" :disabled="disable_button" id="checkout-shipping-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
@@ -79,7 +79,7 @@
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('payment-form')" :disabled="disable_button" id="checkout-continue-button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('payment-form')" :disabled="disable_button" id="checkout-payment-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
