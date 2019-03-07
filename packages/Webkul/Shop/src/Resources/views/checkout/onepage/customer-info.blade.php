@@ -22,7 +22,10 @@
                         </li>
 
                         <li class="mb-5">
-                            @{{ addresses.address1 }}, <br v-if="addresses.address2.length > 0" /> @{{ addresses.address2 }}<i v-if="addresses.address2.length > 0">,</i>
+                            @{{ addresses.address1 }}
+                            <span v-if="addresses.hasOwnProperty('address2') && addresses.address2">
+                                ,<br/> @{{ addresses.address2 }},
+                            </span>
                         </li>
 
                         <li class="mb-5">
@@ -250,7 +253,10 @@
                         </li>
 
                         <li class="mb-5">
-                            @{{ addresses.address1 }}, <br v-if="addresses.address2.length > 0" /> @{{ addresses.address2 }}<i v-if="addresses.address2.length > 0">,</i>
+                            @{{ addresses.address1 }}
+                            <span v-if="addresses.hasOwnProperty('address2') && addresses.address2">
+                                ,<br/> @{{ addresses.address2 }},
+                            </span>
                         </li>
 
                         <li class="mb-5">

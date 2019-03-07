@@ -31,30 +31,26 @@
             @endforeach
         @endif
     </ul>
+
+    <div class="aside-nav-toggle">
+        <i class="angle-left-icon close-icon"></i>
+    </div>
 </div>
-{{-- @push('scripts')
-    <script type="text/javascript">
-        var turned = false;
+
+@push('scripts')
+    <script>
         $(document).ready(function() {
-            if(turned == false) {
-                $('.slider-aside').on('click', function() {
-                    $('.aside-nav').css('display', 'none');
+            $(".close-icon").on('click', function(e){
+                $('.content-wrapper').css("margin-left", "0px");
+                $('.aside-nav').hide();
+                $('.open').show();
+            });
 
-                    $('.content-wrapper').css('margin-left', '0px');
-
-                    turned = true;
-                });
-            } else {
-                $('.slider-aside').on('click', function() {
-                    $('.aside-nav').css('display', '');
-
-                    $('.content-wrapper').css('margin-left', '305px');
-
-                    turned = false;
-                });
-            }
-
+            $(".open-icon").on('click', function(e){
+                $('.content-wrapper').css("margin-left", "305px");
+                $('.aside-nav').show();
+                $('.open').hide();
+            });
         });
-
     </script>
-@endpush --}}
+@endpush
