@@ -27,7 +27,7 @@
                     <i class="icon arrow-up-white-icon"></i>
                 </li>
 
-                <li class="thumb-frame" v-for='(thumb, index) in thumbs' @click="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']">
+                <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']">
                     <img :src="thumb.small_image_url" />
                 </li>
 
@@ -111,5 +111,4 @@
         });
 
     </script>
-
 @endpush

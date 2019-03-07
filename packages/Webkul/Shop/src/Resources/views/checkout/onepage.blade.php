@@ -155,7 +155,7 @@
             }),
 
             created() {
-                if(!customerAddress) {
+                if(! customerAddress) {
                     this.new_shipping_address = true;
                     this.new_billing_address = true;
                 } else {

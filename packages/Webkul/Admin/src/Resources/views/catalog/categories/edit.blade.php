@@ -14,7 +14,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
-                        
+
                         {{ __('admin::app.catalog.categories.edit-title') }}
                     </h1>
 
@@ -79,7 +79,7 @@
 
                         </div>
                     </accordian>
-                    
+
                     {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.general.after', ['category' => $category]) !!}
 
 
@@ -87,7 +87,7 @@
 
                     <accordian :title="'{{ __('admin::app.catalog.categories.description-and-images') }}'" :active="true">
                         <div slot="body">
-                            
+
                             {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.controls.before', ['category' => $category]) !!}
 
                             <div class="control-group" :class="[errors.has('{{$locale}}[description]') ? 'has-error' : '']">
@@ -111,12 +111,12 @@
                     {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.after', ['category' => $category]) !!}
 
                     @if ($categories->count())
-                        
+
                         {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.parent_category.before', ['category' => $category]) !!}
 
                         <accordian :title="'{{ __('admin::app.catalog.categories.parent-category') }}'" :active="true">
                             <div slot="body">
-                                
+
                                 {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.parent_category.controls.before', ['category' => $category]) !!}
 
                                 <tree-view value-field="id" name-field="parent_id" input-type="radio" items='@json($categories)' value='@json($category->parent_id)'></tree-view>

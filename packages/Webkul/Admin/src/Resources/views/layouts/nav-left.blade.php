@@ -10,4 +10,8 @@
             </li>
         @endforeach
     </ul>
+
+    <div class="aside-nav-toggle open">
+        <i class="angle-right-icon open-icon"></i>
+    </div>
 </div>

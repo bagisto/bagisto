@@ -5,27 +5,32 @@
 @endforeach
 
 @if ($products)
-    <div class="attached-products-wrapper mt-50">
 
-        <div class="title">
-            {{ __('shop::app.products.cross-sell-title') }}
-            <span class="border-bottom"></span>
-        </div>
+    @foreach ($products as $product)
 
-        <div class="product-grid-4">
+        @if ($product->cross_sells()->count())
 
-            @foreach ($products as $product)
+            <div class="attached-products-wrapper mt-50">
 
-                @foreach ($product->cross_sells()->paginate(4) as $cross_sell_product)
+                <div class="title">
+                    {{ __('shop::app.products.cross-sell-title') }}
+                    <span class="border-bottom"></span>
+                </div>
 
-                    @include ('shop::products.list.card', ['product' => $cross_sell_product])
+                <div class="product-grid-4">
 
-                @endforeach
+                    @foreach ($product->cross_sells()->paginate(4) as $cross_sell_product)
 
-            @endforeach
+                        @include ('shop::products.list.card', ['product' => $cross_sell_product])
 
-        </div>
+                    @endforeach
 
-    </div>
+                </div>
+
+            </div>
+        @endif
+
+    @endforeach
+
 @endif
 

@@ -26,6 +26,8 @@
 
                     <div class="details">
 
+                        <div class="img-zoom-result" id="img-zoom-result"></div>
+
                         <div class="product-heading">
                             <span>{{ $product->name }}</span>
                         </div>

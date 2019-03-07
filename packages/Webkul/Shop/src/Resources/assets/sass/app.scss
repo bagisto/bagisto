@@ -2692,6 +2692,7 @@ section.review {
 
         .product-info {
             font-size: 24px;
+            max-width: 25%;
 
             .product-image {
                 img {
@@ -2857,6 +2858,8 @@ section.review {
             flex-direction: column;
 
             .product-info {
+                max-width: 100%;
+
                 .product-image, .product-name, .product-price {
                     max-width: 280px;
                     margin-left: auto;
@@ -2881,7 +2884,7 @@ section.review {
                     .left-side {
                         width: 100%;
                         padding: 0px 0px 40px 0px;
-                        margin-top: -50px;
+                        margin-top: -30px;
                     }
 
                     .right-side {
