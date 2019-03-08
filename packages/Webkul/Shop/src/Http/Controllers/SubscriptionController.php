@@ -58,10 +58,10 @@ class SubscriptionController extends Controller
     public function subscribe()
     {
         $this->validate(request(), [
-            'email' => 'email|required'
+            'subscriber_email' => 'email|required'
         ]);
 
-        $email = request()->input('email');
+        $email = request()->input('subscriber_email');
 
         $unique = 0;
 
