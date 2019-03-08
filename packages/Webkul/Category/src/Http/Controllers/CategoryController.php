@@ -75,7 +75,7 @@ class CategoryController extends Controller
         $this->validate(request(), [
             'slug' => ['required', 'unique:category_translations,slug', new \Webkul\Core\Contracts\Validations\Slug],
             'name' => 'required',
-            'image.*' => 'mimes:jpeg, jpg, bmp, png'
+            'image.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
         if (strtolower(request()->input('name')) == 'root') {
