@@ -13,7 +13,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
-                        
+
                         {{ __('admin::app.catalog.categories.add-title') }}
                     </h1>
                 </div>
@@ -103,7 +103,7 @@
 
                         <accordian :title="'{{ __('admin::app.catalog.categories.parent-category') }}'" :active="true">
                             <div slot="body">
-                                
+
                                 {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.parent_category.controls.before') !!}
 
                                 <tree-view value-field="id" name-field="parent_id" input-type="radio" items='@json($categories)'></tree-view>
