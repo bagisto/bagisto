@@ -4,7 +4,7 @@
 $data    = array();
 
 // run command on terminal
-$command = 'cd ../.. && php artisan migrate';
+$command = 'cd ../.. && php artisan migrate --force';
 $last_line = exec($command, $data['migrate'], $data['results']);
 
 // return a response
