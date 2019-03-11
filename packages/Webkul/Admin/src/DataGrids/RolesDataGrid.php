@@ -32,7 +32,8 @@ class RolesDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
+            'width' => '40px',
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -41,6 +42,7 @@ class RolesDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -49,6 +51,7 @@ class RolesDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 

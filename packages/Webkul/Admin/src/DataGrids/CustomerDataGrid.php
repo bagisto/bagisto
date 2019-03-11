@@ -37,6 +37,7 @@ class CustomerDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -45,6 +46,7 @@ class CustomerDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -53,6 +55,7 @@ class CustomerDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -61,6 +64,7 @@ class CustomerDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 

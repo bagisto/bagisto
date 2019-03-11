@@ -32,6 +32,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -40,6 +41,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -48,6 +50,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'type' => 'price',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -56,6 +59,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'type' => 'datetime',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 

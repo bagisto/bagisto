@@ -32,9 +32,11 @@
                                         <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
                                             <option selected disabled>{{ __('ui::app.datagrid.column') }}</option>
                                             @foreach($results['columns'] as $column)
-                                                <option value="{{ $column['index'] }}">
-                                                    {{ $column['label'] }}
-                                                </option>
+                                                @if(isset($column['filterable']) && $column['filterable'])
+                                                    <option value="{{ $column['index'] }}">
+                                                        {{ $column['label'] }}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
