@@ -673,6 +673,9 @@ body {
                     margin-left: 0px;
                 }
             }
+            .control:focus {
+                border-color: #0041ff;
+            }
         }
 
         .content-wrapper {
