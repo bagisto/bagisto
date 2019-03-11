@@ -27,7 +27,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
-                        
+
                         {{ __('admin::app.catalog.products.add-title') }}
                     </h1>
                 </div>
@@ -44,7 +44,6 @@
 
                 <?php $familyId = app('request')->input('family') ?>
                 <?php $sku = app('request')->input('sku') ?>
-
                 {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.general.before') !!}
 
                 <accordian :title="'{{ __('admin::app.catalog.products.general') }}'" :active="true">
@@ -55,8 +54,9 @@
                         <div class="control-group" :class="[errors.has('type') ? 'has-error' : '']">
                             <label for="type" class="required">{{ __('admin::app.catalog.products.product-type') }}</label>
                             <select class="control" v-validate="'required'" id="type" name="type" {{ $familyId ? 'disabled' : '' }} data-vv-as="&quot;{{ __('admin::app.catalog.products.product-type') }}&quot;">
-                                <option value="simple">{{ __('admin::app.catalog.products.simple') }}</option>
-                                <option value="configurable" {{ $familyId ? 'selected' : '' }}>{{ __('admin::app.catalog.products.configurable') }}</option>
+                                @foreach($productTypes as $key => $productType)
+                                    <option value="{{ $key }}">{{ $productType['name'] }}</option>
+                                @endforeach
                             </select>
 
                             @if ($familyId)

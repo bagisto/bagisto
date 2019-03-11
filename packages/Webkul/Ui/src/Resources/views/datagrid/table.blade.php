@@ -338,7 +338,7 @@
                             if (this.filterIndex == this.columnOrAlias && (this.numberValue == 0 || this.numberValue < 0)) {
                                     indexConditions = false;
 
-                                    alert('index columns can have values greater than zero only');
+                                    alert('{{__('ui::app.datagrid.zero-index')}}');
                             }
 
                             if(indexConditions)
