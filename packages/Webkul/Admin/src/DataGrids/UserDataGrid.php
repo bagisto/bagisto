@@ -54,7 +54,7 @@ class UserDataGrid extends DataGrid
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
-            'filterable' => true
+            'filterable' => true,
             'wrapper' => function($value) {
                 if ($value->status == 1) {
                     return 'Active';
