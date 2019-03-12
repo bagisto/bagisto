@@ -37,28 +37,43 @@ class ExportController extends Controller
     public function export()
     {
         $criteria = request()->all();
+        $format = $criteria['format'];
 
         $gridName = explode('\\', $criteria['gridName']);
-
         $path = '\Webkul\Admin\DataGrids'.'\\'.last($gridName);
 
-        $gridInstance = new $path;
+        $proceed = false;
 
-        dd($gridInstance->export());
+        foreach($this->exportableGrids as $exportableGrid) {
+            if(last($gridName) == $exportableGrid) {
+                $proceed = true;
+            }
+        }
 
-        die;
-        // $results = request()->input('gridData');
+        if($proceed) {
+            $gridInstance = new $path;
 
-        // $data = json_decode($results, true);
+            $records = array();
+            $records = $gridInstance->export();
 
-        // $results = (object) $data;
+            if(count($records) == 0) {
+                session()->flash('warning', trans('admin::app.export.no-records'));
 
-        // $file_name = request()->all('file_name');
+                return redirect()->back();
+            }
 
-        // if (request()->all()['format'] == 'csv') {
-        //     return Excel::download(new DataGridExport($results), $file_name.'.csv');
-        // } else {
-        //     return Excel::download(new DataGridExport($results), $file_name.'.xlsx');
-        // }
+            if ($format == 'csv') {
+                return Excel::download(new DataGridExport($records), last($gridName).'.csv');
+            } else if($format == 'xls') {
+                return Excel::download(new DataGridExport($records), last($gridName).'.xlsx');
+            } else {
+                session()->flash('warning', trans('admin::app.export.illegal-format'));
+
+                return redirect()->back();
+            }
+        } else {
+            return redirect()->back();
+        }
+
     }
 }
