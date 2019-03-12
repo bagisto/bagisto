@@ -49,8 +49,7 @@
                     $data = json_encode((array) $orderGrid);
                 ?>
 
-                <input type="hidden" name="gridData" value="{{ $data }}">
-                <input type="hidden" name="file_name" value="Order">
+                <input type="hidden" name="gridName" value="{{ get_class($orderGrid) }}">
 
                 <div class="control-group">
                     <label for="format" class="required">

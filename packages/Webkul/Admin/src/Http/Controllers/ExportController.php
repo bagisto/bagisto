@@ -16,6 +16,10 @@ use Excel;
  */
 class ExportController extends Controller
 {
+    protected $exportableGrids = [
+        'OrderDataGrid', 'OrderInvoicesDataGrid', 'OrderShipmentsDatagrid', 'CustomerDataGrid', 'TaxRateDataGrid'
+    ];
+
     /**
      * Create a new controller instance.
      *
@@ -32,18 +36,29 @@ class ExportController extends Controller
     */
     public function export()
     {
-        $results = request()->all()['gridData'];
+        $criteria = request()->all();
 
-        $data = json_decode($results, true);
+        $gridName = explode('\\', $criteria['gridName']);
 
-        $results = (object) $data;
+        $path = '\Webkul\Admin\DataGrids'.'\\'.last($gridName);
 
-        $file_name = request()->all()['file_name'];
+        $gridInstance = new $path;
 
-        if (request()->all()['format'] == 'csv') {
-            return Excel::download(new DataGridExport($results), $file_name.'.csv');
-        } else {
-            return Excel::download(new DataGridExport($results), $file_name.'.xlsx');
-        }
+        dd($gridInstance->export());
+
+        die;
+        // $results = request()->input('gridData');
+
+        // $data = json_decode($results, true);
+
+        // $results = (object) $data;
+
+        // $file_name = request()->all('file_name');
+
+        // if (request()->all()['format'] == 'csv') {
+        //     return Excel::download(new DataGridExport($results), $file_name.'.csv');
+        // } else {
+        //     return Excel::download(new DataGridExport($results), $file_name.'.xlsx');
+        // }
     }
 }

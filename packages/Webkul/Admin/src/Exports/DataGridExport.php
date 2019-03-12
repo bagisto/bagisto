@@ -48,6 +48,7 @@ class DataGridExport implements FromView, ShouldAutoSize
             if ($key == 'collection') {
                 $results = $data['data'];
             }
+
             if ($key == 'columns') {
                $columns = $data;
             }
