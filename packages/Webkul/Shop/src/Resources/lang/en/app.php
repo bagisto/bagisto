@@ -128,7 +128,7 @@ return [
             'forgot_pass' => 'Forgot Password?',
             'button_title' => 'Sign In',
             'remember' => 'Remember Me',
-            'footer' => '© Copyright 2018 Webkul Software, All rights reserved',
+            'footer' => '© Copyright :year Webkul Software, All rights reserved',
             'invalid-creds' => 'Please Check Your Credentials And Try Again',
             'verify-first' => 'Verify Your Email Account First',
             'resend-verification' => 'Resend Verification Mail Again'
@@ -465,7 +465,7 @@ return [
             'shipping-handling' => 'Shipping & Handling',
             'tax' => 'Tax',
             'grand-total' => 'Grand Total',
-            'final-summary' => 'Thanks for showing your intrest in our store we will send you track number once it shiped',
+            'final-summary' => 'Thanks for showing your interest in our store we will send you tracking number once it shipped',
             'help' => 'If you need any kind of help please contact us at :support_email',
             'thanks' => 'Thanks!'
         ],
@@ -491,7 +491,7 @@ return [
     ],
 
     'webkul' => [
-        'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved'
+        'copy-right' => '© Copyright :year Webkul Software, All rights reserved',
     ],
 
     'response' => [
