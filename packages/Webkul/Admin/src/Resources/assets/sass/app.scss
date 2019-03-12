@@ -95,9 +95,9 @@ body {
 }
 
 .navbar-left {
-    position: sticky;
-    top: 0;
-    // bottom: 0;
+    position: absolute;
+    top: 60px;
+    bottom: 0;
     width: 90px;
     padding-top: 20px;
     height: auto;
@@ -150,7 +150,7 @@ body {
     right: 0;
     left: 0;
     bottom: 0px;
-    min-height: calc(100% - 60px);
+    height: calc(100% - 60px);
     width: 100%;
 
     .inner-section {

@@ -8,6 +8,24 @@ Vue.use(VeeValidate);
 window.eventBus = new Vue();
 
 $(document).ready(function () {
+    var lastScrollTop = 0;
+
+    $(document).on('scroll', function() {
+        var st = $(this).scrollTop();
+        if (st > lastScrollTop) {
+            $('.navbar-left').css('top', st+'px');
+        } else if (st == lastScrollTop) {
+            //do nothing
+            //In IE this is an important condition because there seems to be some instances where the last scrollTop is equal to the new one
+        } else {
+            // console.log("up");
+            // console.log(st);
+            $('.navbar-left').css('top', st+'px');
+        }
+
+        lastScrollTop = st;
+    });
+
     Vue.config.ignoredElements = [
         'option-wrapper',
         'group-form',
