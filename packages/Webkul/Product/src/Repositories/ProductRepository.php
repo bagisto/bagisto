@@ -196,22 +196,13 @@ class ProductRepository extends Repository
 
             if (isset($data['up_sell'])) {
                 $product->up_sells()->sync($data['up_sell']);
-            } else {
-                $data['up_sell'] = [];
-                $product->up_sells()->sync($data['up_sell']);
             }
 
             if (isset($data['cross_sell'])) {
                 $product->cross_sells()->sync($data['cross_sell']);
-            } else {
-                $data['cross_sell'] = [];
-                $product->cross_sells()->sync($data['cross_sell']);
             }
 
             if (isset($data['related_products'])) {
-                $product->related_products()->sync($data['related_products']);
-            } else {
-                $data['related_products'] = [];
                 $product->related_products()->sync($data['related_products']);
             }
 
@@ -431,7 +422,7 @@ class ProductRepository extends Repository
      * @param integer $categoryId
      * @return Collection
      */
-    public function findAllByCategory($categoryId = null)
+    public function getAll($categoryId = null)
     {
         $params = request()->input();
 
@@ -452,8 +443,11 @@ class ProductRepository extends Repository
                         ->where('product_flat.status', 1)
                         ->where('product_flat.channel', $channel)
                         ->where('product_flat.locale', $locale)
-                        ->whereNotNull('product_flat.url_key')
-                        ->where('product_categories.category_id', $categoryId);
+                        ->whereNotNull('product_flat.url_key');
+
+                    if ($categoryId) {
+                        $qb->where('product_categories.category_id', $categoryId);
+                    }
 
                 $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
                     $qb->on('product_flat.id', '=', 'flat_variants.parent_id')

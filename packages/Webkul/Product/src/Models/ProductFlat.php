@@ -20,4 +20,12 @@ class ProductFlat extends Model implements ProductFlatContract
     {
         return $this->belongsTo(ProductProxy::modelClass());
     }
+
+    /**
+     * Get the product variants that owns the product.
+     */
+    public function variants()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
 }
