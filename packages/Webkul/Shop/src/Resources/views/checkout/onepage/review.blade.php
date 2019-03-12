@@ -16,7 +16,7 @@
                             {{ $billingAddress->name }}
                         </li>
                         <li class="mb-10">
-                            {{ $billingAddress->address1 }}, <br/>{{ $billingAddress->address2 ? $billingAddress->address2 . ',' : '' }} {{ $billingAddress->state }}
+                            {{ $billingAddress->address1 }},<br/> {{ $billingAddress->state }}
                         </li>
                         <li class="mb-10">
                             {{ country()->name($billingAddress->country) }} {{ $billingAddress->postcode }}
@@ -44,7 +44,7 @@
                             {{ $shippingAddress->name }}
                         </li>
                         <li class="mb-10">
-                            {{ $shippingAddress->address1 }}, <br/>{{ $shippingAddress->address2 ? $shippingAddress->address2 . ',' : '' }} , {{ $shippingAddress->state }}
+                            {{ $shippingAddress->address1 }},<br/> {{ $shippingAddress->state }}
                         </li>
                         <li class="mb-10">
                             {{ country()->name($shippingAddress->country) }} {{ $shippingAddress->postcode }}
