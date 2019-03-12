@@ -650,7 +650,6 @@ class Cart {
             $billingAddress['last_name'] = auth()->guard('customer')->user()->last_name;
             $billingAddress['email'] = auth()->guard('customer')->user()->email;
             $billingAddress['address1'] = $address['address1'];
-            $billingAddress['address2'] = $address['address2'];
             $billingAddress['country'] = $address['country'];
             $billingAddress['state'] = $address['state'];
             $billingAddress['city'] = $address['city'];
@@ -664,7 +663,6 @@ class Cart {
             $shippingAddress['last_name'] = auth()->guard('customer')->user()->last_name;
             $shippingAddress['email'] = auth()->guard('customer')->user()->email;
             $shippingAddress['address1'] = $address['address1'];
-            $shippingAddress['address2'] = $address['address2'];
             $shippingAddress['country'] = $address['country'];
             $shippingAddress['state'] = $address['state'];
             $shippingAddress['city'] = $address['city'];

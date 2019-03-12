@@ -812,4 +812,18 @@ return [
     'footer' => [
         'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved.'
     ],
+
+    'admin' => [
+        'system' => [
+            'catalog' => 'Catalog',
+            'products' => 'Products',
+            'review' => 'Review',
+            'allow-guest-review' => 'Allow Guest Review',
+            'customer' => 'Customer',
+            'settings' => 'Settings',
+            'address' => 'Address',
+            'address' => 'Address',
+            'street-lines' => 'Lines in a Street Address'
+        ]
+    ]
 ];
