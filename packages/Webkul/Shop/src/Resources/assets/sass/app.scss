@@ -1436,10 +1436,6 @@ section.slider-block {
                     border-bottom: 1px solid $border-color;
                     padding-bottom: 10px;
 
-                    &:last-child {
-                        border-bottom: 0;
-                    }
-
                     .filter-attributes-title {
                         padding: 10px 40px 0 10px;
                         color: $other-font-color;
@@ -1533,14 +1529,18 @@ section.slider-block {
             display: block;
 
             .hero-image {
-                display:block;
+                display: inline-block;
                 visibility: visible;
-                width: auto;
+                width: 100%;
 
                 img {
                     height: 400px;
                     width:100%;
                 }
+            }
+
+            .category-description {
+                margin-bottom: 35px;
             }
         }
     }
