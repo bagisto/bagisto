@@ -17,7 +17,7 @@ use Excel;
 class ExportController extends Controller
 {
     protected $exportableGrids = [
-        'OrderDataGrid', 'OrderInvoicesDataGrid', 'OrderShipmentsDatagrid', 'CustomerDataGrid', 'TaxRateDataGrid'
+        'OrderDataGrid', 'OrderInvoicesDataGrid', 'OrderShipmentsDataGrid', 'CustomerDataGrid', 'TaxRateDataGrid'
     ];
 
     /**
