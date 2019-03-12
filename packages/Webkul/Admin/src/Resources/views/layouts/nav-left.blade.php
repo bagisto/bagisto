@@ -11,7 +11,7 @@
         @endforeach
     </ul>
 
-    <div class="open-nav-aside">
+    {{-- <div class="open-nav-aside">
         <i class="icon angle-right-icon open-icon"></i>
-    </div>
+    </div> --}}
 </div>
