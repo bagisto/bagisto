@@ -32,6 +32,7 @@ class AttributeFamilyDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -40,6 +41,7 @@ class AttributeFamilyDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -48,6 +50,7 @@ class AttributeFamilyDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 

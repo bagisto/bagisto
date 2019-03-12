@@ -36,6 +36,7 @@ class UserDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -44,6 +45,7 @@ class UserDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -52,6 +54,7 @@ class UserDataGrid extends DataGrid
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true,
             'wrapper' => function($value) {
                 if ($value->status == 1) {
                     return 'Active';
@@ -67,6 +70,7 @@ class UserDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -75,6 +79,7 @@ class UserDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 

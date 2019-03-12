@@ -93,8 +93,42 @@ body {
     }
 }
 
+.open-nav-aside {
+    display: none;
+    width: 100%;
+    height: 8%;
+    margin-top: 2%;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid $border-color;
+    cursor: pointer;
+}
+
+.close-nav-aside {
+    display: block;
+    width: 100%;
+    height: 8%;
+    margin-top: 3%;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid $border-color;
+    cursor: pointer;
+}
+
+.close-nav-aside:hover, .open-nav-aside:hover {
+    background: $brand-color;
+}
+
+.open-nav-aside, .close-nav-aside {
+    .icon {
+        height: 28px;
+        width: 28px;
+    }
+}
+
 .navbar-left {
-    position: absolute;
+    display: block;
+    position: fixed;
     top: 60px;
     bottom: 0;
     width: 90px;
@@ -104,6 +138,8 @@ body {
     z-index: 2;
 
     ul.menubar {
+        height: 93%;
+
         li.menu-item {
             height: 90px;
             padding: 10px 5px;
@@ -143,8 +179,12 @@ body {
         border-right: 1px solid $border-color;
         background: #f8f9fa;
         padding-top: 10px;
-        overflow-y: auto;
         z-index: 4;
+
+        ul {
+            height: 93%;
+            overflow-y: auto;
+        }
 
         a {
             padding: 15px;
@@ -574,6 +614,40 @@ body {
     width: 24px !important;
     top: 12px;
     margin-right: 10px;
+}
+
+.aside-nav-toggle {
+    height: 48px;
+    width: 100%;
+    padding-top: 15px;
+    border-top: 1px solid rgba(162, 162, 162, 0.2);
+
+    .close-icon, .open-icon {
+        position: absolute;
+        cursor: pointer;
+        left: 45%;
+    }
+}
+
+.aside-nav-toggle.open {
+    display: none;
+}
+
+.linked-product-search-result {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 0 9px 0 rgba(0, 0, 0, 0.16);
+    z-index: 10;
+    text-align: left;
+    border-radius: 3px;
+    background-color: #ffffff;
+    width: 70%;
+    max-height: 200px;
+    overflow-y: auto;
+
+    li {
+        padding: 10px;
+        border-bottom: 1px solid #e8e8e8;
+        cursor: pointer;
+    }
 }
 
 // css for rtl start here

@@ -22,8 +22,8 @@
                 <span class="list-heading">{{ __('shop::app.footer.subscribe-newsletter') }}</span>
                 <div class="form-container">
                     <form action="{{ route('shop.subscribe') }}">
-                        <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                            <input type="email" class="control subscribe-field" name="email" placeholder="Email Address" required><br/>
+                        <div class="control-group" :class="[errors.has('subscriber_email') ? 'has-error' : '']">
+                            <input type="email" class="control subscribe-field" name="subscriber_email" placeholder="Email Address" required><br/>
 
                             <button class="btn btn-md btn-primary">{{ __('shop::app.subscription.subscribe') }}</button>
                         </div>

@@ -34,6 +34,7 @@ class AttributeDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -42,6 +43,7 @@ class AttributeDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -50,6 +52,7 @@ class AttributeDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -58,6 +61,7 @@ class AttributeDataGrid extends DataGrid
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -80,6 +84,7 @@ class AttributeDataGrid extends DataGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
+            'filterable' => true,
             'wrapper' => function($value) {
                 if ($value->is_unique == 1)
                     return 'True';
@@ -94,6 +99,7 @@ class AttributeDataGrid extends DataGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
+            'filterable' => true,
             'wrapper' => function($value) {
                 if ($value->value_per_locale == 1)
                     return 'True';
@@ -108,6 +114,7 @@ class AttributeDataGrid extends DataGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => false,
+            'filterable' => true,
             'wrapper' => function($value) {
                 if ($value->value_per_channel == 1)
                     return 'True';

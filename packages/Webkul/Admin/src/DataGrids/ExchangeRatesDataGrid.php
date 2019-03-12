@@ -34,6 +34,7 @@ class ExchangeRatesDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -42,6 +43,7 @@ class ExchangeRatesDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -50,6 +52,7 @@ class ExchangeRatesDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 

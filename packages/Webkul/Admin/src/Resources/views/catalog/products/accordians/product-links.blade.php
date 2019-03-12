@@ -19,20 +19,23 @@
             <label for="up-selling">{{ __('admin::app.catalog.products.up-selling') }}</label>
             <input type="text" class="control" autocomplete="off" v-model="search_term" placeholder="{{ __('admin::app.catalog.products.product-search-hint') }}">
 
+            <div class="linked-product-search-result">
+                <ul>
+                    <li v-for='(product, index) in products'@click="addProduct(product)">
+                        @{{ product.name }}
+                    </li>
+                </ul>
+            </div>
+
             <input type="hidden" name="up_sell[]" v-for='(product, index) in this.addedProduct' :value="product.id"/>
 
-            <span class="filter-tag" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start">
+            <span class="filter-tag" v-if="this.addedProduct.length" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start">
                 <span class="wrapper" style="margin-left: 0px; margin-right: 10px;" v-for='(product, index) in this.addedProduct'>
                         @{{ product.name }}
                 <span class="icon cross-icon" @click="removeProduct(product)"></span>
                 </span>
             </span>
 
-            <ul>
-                <li v-for='(product, index) in products' style="padding: 10px; border-bottom: 1px solid #e8e8e8; width: 70%; cursor: pointer;" @click="addProduct(product)">
-                    @{{ product.name }}
-                </li>
-            </ul>
         </div>
     </div>
 </script>
@@ -108,20 +111,22 @@
             <label for="up-selling">{{ __('admin::app.catalog.products.cross-selling') }}</label>
             <input type="text" class="control" autocomplete="off" v-model="search_term" placeholder="{{ __('admin::app.catalog.products.product-search-hint') }}">
 
+            <div class="linked-product-search-result">
+                <ul>
+                    <li v-for='(product, index) in products'@click="addProduct(product)">
+                        @{{ product.name }}
+                    </li>
+                </ul>
+            </div>
+
             <input type="hidden" name="cross_sell[]" v-for='(product, index) in this.addedProduct' :value="product.id"/>
 
-            <span class="filter-tag" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start">
+            <span class="filter-tag" v-if="this.addedProduct.length" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start">
                 <span class="wrapper" style="margin-left: 0px; margin-right: 10px;" v-for='(product, index) in this.addedProduct'>
                         @{{ product.name }}
                 <span class="icon cross-icon" @click="removeProduct(product)"></span>
                 </span>
             </span>
-
-            <ul>
-                <li v-for='(product, index) in products' style="padding: 10px; border-bottom: 1px solid #e8e8e8; width: 70%; cursor: pointer;" @click="addProduct(product)">
-                    @{{ product.name }}
-                </li>
-            </ul>
         </div>
     </div>
 </script>
@@ -197,20 +202,22 @@
             <label for="up-selling">{{ __('admin::app.catalog.products.related-products') }}</label>
             <input type="text" class="control" autocomplete="off" v-model="search_term" placeholder="{{ __('admin::app.catalog.products.product-search-hint') }}">
 
+            <div class="linked-product-search-result">
+                <ul>
+                    <li v-for='(product, index) in products'@click="addProduct(product)">
+                        @{{ product.name }}
+                    </li>
+                </ul>
+            </div>
+
             <input type="hidden" name="related_products[]" v-for='(product, index) in this.addedProduct' :value="product.id"/>
 
-            <span class="filter-tag" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start">
+            <span class="filter-tag" v-if="this.addedProduct.length" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start">
                 <span class="wrapper" style="margin-left: 0px; margin-right: 10px;" v-for='(product, index) in this.addedProduct'>
                         @{{ product.name }}
                 <span class="icon cross-icon" @click="removeProduct(product)"></span>
                 </span>
             </span>
-
-            <ul>
-                <li v-for='(product, index) in products' style="padding: 10px; border-bottom: 1px solid #e8e8e8; width: 70%; cursor: pointer;" @click="addProduct(product)">
-                    @{{ product.name }}
-                </li>
-            </ul>
         </div>
     </div>
 </script>
