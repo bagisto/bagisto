@@ -1,11 +1,7 @@
 <accordian :title="'{{ __('admin::app.catalog.products.product-link') }}'" :active="true">
     <div slot="body">
 
-        <up-selling></up-selling>
-
-        <cross-selling></cross-selling>
-
-        <related-product></related-product>
+        <linked-products></linked-products>
 
     </div>
 </accordian>
@@ -13,275 +9,148 @@
 
 @push('scripts')
 
-<script type="text/x-template" id="up-selling-template">
+<script type="text/x-template" id="linked-products-template">
     <div>
-        <div class="control-group">
-            <label for="up-selling">{{ __('admin::app.catalog.products.up-selling') }}</label>
-            <input type="text" class="control" autocomplete="off" v-model="search_term" placeholder="{{ __('admin::app.catalog.products.product-search-hint') }}">
+
+        <div class="control-group" v-for='(key) in linkedProducts'>
+            <label for="up-selling">
+                {{
+                    __('admin::app.catalog.products.related-products', ['name' => 'cross_selling'])
+                }}
+            </label>
+
+            <input type="text" class="control" autocomplete="off"  v-model="search_term[key]" placeholder="{{ __('admin::app.catalog.products.product-search-hint') }}" v-on:keyup="search(key)">
 
             <div class="linked-product-search-result">
                 <ul>
-                    <li v-for='(product, index) in products'@click="addProduct(product)">
+                    <li v-for='(product, index) in products[key]' v-if='products[key].length' @click="addProduct(product, key)">
                         @{{ product.name }}
+                    </li>
+
+                    <li v-if='!products[key].length && search_term[key].length && !is_searching[key]'>
+                        {{ __('admin::app.catalog.products.no-result-found') }}
+                    </li>
+
+                    <li v-if="is_searching[key] && search_term[key].length">
+                        {{ __('admin::app.catalog.products.searching') }}
                     </li>
                 </ul>
             </div>
 
-            <input type="hidden" name="up_sell[]" v-for='(product, index) in this.addedProduct' :value="product.id"/>
+            <input type="hidden" name="up_sell[]" v-for='(product, index) in addedProducts.up_sells' v-if="(key == 'up_sells') && addedProducts.up_sells.length" :value="product.id"/>
 
-            <span class="filter-tag" v-if="this.addedProduct.length" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start">
-                <span class="wrapper" style="margin-left: 0px; margin-right: 10px;" v-for='(product, index) in this.addedProduct'>
-                        @{{ product.name }}
-                <span class="icon cross-icon" @click="removeProduct(product)"></span>
+            <input type="hidden" name="cross_sell[]" v-for='(product, index) in addedProducts.cross_sells' v-if="(key == 'cross_sells') && addedProducts.cross_sells.length" :value="product.id"/>
+
+            <input type="hidden" name="related_products[]" v-for='(product, index) in addedProducts.related_products' v-if="(key == 'related_products') && addedProducts.related_products.length" :value="product.id"/>
+
+            <span class="filter-tag" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start" v-if="addedProducts[key].length">
+                <span class="wrapper" style="margin-left: 0px; margin-right: 10px;" v-for='(product, index) in addedProducts[key]'>
+                    @{{ product.name }}
+                <span class="icon cross-icon" @click="removeProduct(product, key)"></span>
                 </span>
             </span>
 
         </div>
+
     </div>
 </script>
 
 <script>
 
-    Vue.component('up-selling', {
+    Vue.component('linked-products', {
 
-        template: '#up-selling-template',
+        template: '#linked-products-template',
 
         data: () => ({
-            allProduct: @json($allProducts),
+            products: {
+                'cross_sells': [],
+                'up_sells': [],
+                'related_products': []
+            },
 
-            search_term: '',
+            search_term: {
+                'cross_sells': '',
+                'up_sells': '',
+                'related_products': ''
+            },
 
-            addedProduct: [],
+            addedProducts: {
+                'cross_sells': [],
+                'up_sells': [],
+                'related_products': []
+            },
 
-            upSellingProduct: @json($product->up_sells()->get()),
+            is_searching: {
+                'cross_sells': false,
+                'up_sells': false,
+                'related_products': false
+            },
+
+            linkedProducts: ['up_sells', 'cross_sells', 'related_products'],
+
+            upSellingProducts: @json($product->up_sells()->get()),
+
+            crossSellingProducts: @json($product->cross_sells()->get()),
+
+            relatedProducts: @json($product->related_products()->get()),
         }),
 
         created () {
-            if (this.upSellingProduct.length >= 1) {
-                for (var index in this.upSellingProduct) {
-                    this.addedProduct.push(this.upSellingProduct[index]);
-
-                    for (var index1 in this.allProduct) {
-                        if (this.allProduct[index1].id == this.upSellingProduct[index].id) {
-                            this.allProduct.splice(index1, 1);
-                        }
-                    }
+            if (this.upSellingProducts.length >= 1) {
+                for (var index in this.upSellingProducts) {
+                    this.addedProducts.up_sells.push(this.upSellingProducts[index]);
                 }
             }
-        },
 
-        computed: {
-            products () {
-                if (this.search_term.length >= 1) {
-                    return this.allProduct.filter(product => {
-                        return product.name.toLowerCase().includes(this.search_term.toLowerCase())
-                    })
+            if (this.crossSellingProducts.length >= 1) {
+                for (var index in this.crossSellingProducts) {
+                    this.addedProducts.cross_sells.push(this.crossSellingProducts[index]);
+                }
+            }
+
+            if (this.relatedProducts.length >= 1) {
+                for (var index in this.relatedProducts) {
+                    this.addedProducts.related_products.push(this.relatedProducts[index]);
                 }
             }
         },
 
         methods: {
-            addProduct(product) {
-                this.addedProduct.push(product);
-                this.search_term = '';
+            addProduct (product, key) {
+                this.addedProducts[key].push(product);
+                this.search_term[key] = '';
+                this.products[key] = []
+            },
 
-                for (var index in this.allProduct) {
-                    if (this.allProduct[index].id == product.id) {
-                        this.allProduct.splice(index, 1);
+            removeProduct (product, key) {
+                for (var index in this.addedProducts[key]) {
+                    if (this.addedProducts[key][index].id == product.id ) {
+                        this.addedProducts[key].splice(index, 1);
                     }
                 }
             },
 
-            removeProduct(product) {
-                for (var index in this.addedProduct) {
-                    if (this.addedProduct[index].id == product.id ) {
-                        this.allProduct.push(product);
-                        this.addedProduct.splice(index, 1);
-                    }
-                }
-            },
-        }
-    });
+            search (key) {
+                this_this = this;
 
-</script>
+                this.is_searching[key] = true;
 
-<script type="text/x-template" id="cross-selling-template">
-    <div>
-        <div class="control-group">
-            <label for="up-selling">{{ __('admin::app.catalog.products.cross-selling') }}</label>
-            <input type="text" class="control" autocomplete="off" v-model="search_term" placeholder="{{ __('admin::app.catalog.products.product-search-hint') }}">
+                if (this.search_term[key].length >= 1) {
+                    this.$http.get ("{{ route('admin.catalog.products.productlinksearch') }}", {params: {query: this.search_term[key]}})
+                        .then (function(response) {
+                            this_this.products[key] = response.data;
 
-            <div class="linked-product-search-result">
-                <ul>
-                    <li v-for='(product, index) in products'@click="addProduct(product)">
-                        @{{ product.name }}
-                    </li>
-                </ul>
-            </div>
+                            this_this.is_searching[key] = false;
+                        })
 
-            <input type="hidden" name="cross_sell[]" v-for='(product, index) in this.addedProduct' :value="product.id"/>
-
-            <span class="filter-tag" v-if="this.addedProduct.length" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start">
-                <span class="wrapper" style="margin-left: 0px; margin-right: 10px;" v-for='(product, index) in this.addedProduct'>
-                        @{{ product.name }}
-                <span class="icon cross-icon" @click="removeProduct(product)"></span>
-                </span>
-            </span>
-        </div>
-    </div>
-</script>
-
-<script>
-
-    Vue.component('cross-selling', {
-
-        template: '#cross-selling-template',
-
-        data: () => ({
-            allProduct: @json($allProducts),
-
-            search_term: '',
-
-            addedProduct: [],
-
-            crossSellingProduct: @json($product->cross_sells()->get()),
-        }),
-
-        created () {
-            if (this.crossSellingProduct.length >= 1) {
-                for (var index in this.crossSellingProduct) {
-                    this.addedProduct.push(this.crossSellingProduct[index]);
-
-                    for (var index1 in this.allProduct) {
-                        if (this.allProduct[index1].id == this.crossSellingProduct[index].id) {
-                            this.allProduct.splice(index1, 1);
-                        }
-                    }
+                        .catch (function (error) {
+                            this_this.is_searching[key] = false;
+                        })
+                } else {
+                    this_this.products[key] = [];
+                    this_this.is_searching[key] = false;
                 }
             }
-        },
-
-        computed: {
-            products () {
-                if (this.search_term.length >= 1) {
-                    return this.allProduct.filter(product => {
-                        return product.name.toLowerCase().includes(this.search_term.toLowerCase())
-                    })
-                }
-            }
-        },
-
-        methods: {
-            addProduct(product) {
-                this.addedProduct.push(product);
-                this.search_term = '';
-
-                for (var index in this.allProduct) {
-                    if (this.allProduct[index].id == product.id) {
-                        this.allProduct.splice(index, 1);
-                    }
-                }
-            },
-
-            removeProduct(product) {
-                for (var index in this.addedProduct) {
-                    if (this.addedProduct[index].id == product.id ) {
-                        this.allProduct.push(product);
-                        this.addedProduct.splice(index, 1);
-                    }
-                }
-            },
-        }
-    });
-
-</script>
-
-<script type="text/x-template" id="related-product-template">
-    <div>
-        <div class="control-group">
-            <label for="up-selling">{{ __('admin::app.catalog.products.related-products') }}</label>
-            <input type="text" class="control" autocomplete="off" v-model="search_term" placeholder="{{ __('admin::app.catalog.products.product-search-hint') }}">
-
-            <div class="linked-product-search-result">
-                <ul>
-                    <li v-for='(product, index) in products'@click="addProduct(product)">
-                        @{{ product.name }}
-                    </li>
-                </ul>
-            </div>
-
-            <input type="hidden" name="related_products[]" v-for='(product, index) in this.addedProduct' :value="product.id"/>
-
-            <span class="filter-tag" v-if="this.addedProduct.length" style="text-transform: capitalize; margin-top: 10px; margin-right: 0px; justify-content: flex-start">
-                <span class="wrapper" style="margin-left: 0px; margin-right: 10px;" v-for='(product, index) in this.addedProduct'>
-                        @{{ product.name }}
-                <span class="icon cross-icon" @click="removeProduct(product)"></span>
-                </span>
-            </span>
-        </div>
-    </div>
-</script>
-
-<script>
-
-    Vue.component('related-product', {
-
-        template: '#related-product-template',
-
-        data: () => ({
-            allProduct: @json($allProducts),
-
-            search_term: '',
-
-            addedProduct: [],
-
-            relatedProduct: @json($product->related_products()->get()),
-        }),
-
-        created () {
-            if (this.relatedProduct.length >= 1) {
-                for (var index in this.relatedProduct) {
-                    this.addedProduct.push(this.relatedProduct[index]);
-
-                    for (var index1 in this.allProduct) {
-                        if (this.allProduct[index1].id == this.relatedProduct[index].id) {
-                            this.allProduct.splice(index1, 1);
-                        }
-                    }
-                }
-            }
-        },
-
-        computed: {
-            products () {
-                if (this.search_term.length >= 1) {
-                    return this.allProduct.filter(product => {
-                        return product.name.toLowerCase().includes(this.search_term.toLowerCase())
-                    })
-                }
-            }
-        },
-
-        methods: {
-            addProduct(product) {
-                this.addedProduct.push(product);
-                this.search_term = '';
-
-                for (var index in this.allProduct) {
-                    if (this.allProduct[index].id == product.id) {
-                        this.allProduct.splice(index, 1);
-                    }
-                }
-            },
-
-            removeProduct(product) {
-                for (var index in this.addedProduct) {
-                    if (this.addedProduct[index].id == product.id ) {
-                        this.allProduct.push(product);
-                        this.addedProduct.splice(index, 1);
-                    }
-                }
-            },
         }
     });
 

@@ -228,6 +228,11 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.products.index'
                 ])->name('admin.catalog.products.massupdate');
 
+                Route::get('products/search', 'Webkul\Product\Http\Controllers\ProductController@productLinkSearch')->defaults('_config', [
+                    'view' => 'admin::catalog.products.edit'
+                ])->name('admin.catalog.products.productlinksearch');
+
+
                 // Catalog Category Routes
                 Route::get('/categories', 'Webkul\Category\Http\Controllers\CategoryController@index')->defaults('_config', [
                     'view' => 'admin::catalog.categories.index'

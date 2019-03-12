@@ -380,7 +380,10 @@ return [
             'cross-selling' => 'Cross Selling',
             'up-selling' => 'Up Selling',
             'related-products' => 'Related Products',
-            'product-search-hint' => 'Start typing product name'
+            'product-search-hint' => 'Start typing product name',
+            'no-result-found' => 'Products not found with same name.',
+            'searching' => 'Searching ...',
+            'related-products' => ':name'
         ],
 
         'attributes' => [
