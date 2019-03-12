@@ -32,6 +32,7 @@ class InventorySourcesDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -40,6 +41,7 @@ class InventorySourcesDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -48,6 +50,7 @@ class InventorySourcesDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -56,6 +59,7 @@ class InventorySourcesDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -64,6 +68,7 @@ class InventorySourcesDataGrid extends DataGrid
             'type' => 'boolean',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true,
             'wrapper' => function($value) {
                 if ($value->status == 1)
                     return 'Active';

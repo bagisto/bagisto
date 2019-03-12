@@ -38,7 +38,7 @@ class CustomerReviewDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'filterable' => false
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -47,6 +47,7 @@ class CustomerReviewDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -55,6 +56,7 @@ class CustomerReviewDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -63,6 +65,7 @@ class CustomerReviewDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => false
         ]);
 
         $this->addColumn([
@@ -72,6 +75,7 @@ class CustomerReviewDataGrid extends DataGrid
             'searchable' => true,
             'sortable' => true,
             'width' => '100px',
+            'filterable' => true,
             'closure' => true,
             'wrapper' => function ($value) {
                 if ($value->product_review_status == 'approved')

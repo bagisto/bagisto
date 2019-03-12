@@ -11,7 +11,7 @@
         @endforeach
     </ul>
 
-    <div class="aside-nav-toggle open">
-        <i class="angle-right-icon open-icon"></i>
+    <div class="open-nav-aside">
+        <i class="icon angle-right-icon open-icon"></i>
     </div>
 </div>

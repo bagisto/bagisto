@@ -48,6 +48,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -56,6 +57,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -64,6 +66,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -72,6 +75,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -80,6 +84,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'datetime',
             'sortable' => true,
             'searchable' => false,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -88,6 +93,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'datetime',
             'sortable' => true,
             'searchable' => false,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -96,6 +102,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
+            'filterable' => true
         ]);
     }
 
