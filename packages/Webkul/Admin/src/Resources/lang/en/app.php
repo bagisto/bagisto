@@ -542,8 +542,8 @@ return [
         ],
         'countries' => [
             'title' => 'Countries',
-            'add-title' => 'Add Counrty',
-            'save-btn-title' => 'Save Counrty',
+            'add-title' => 'Add Country',
+            'save-btn-title' => 'Save Country',
             'general' => 'General',
             'code' => 'Code',
             'name' => 'Name'
@@ -740,7 +740,7 @@ return [
             'update-success' => 'Subscriber was successfully updated',
             'update-failed' => 'Error! You cannot unsubscribe the subscriber',
             'delete' => 'Subscriber was successfully deleted',
-            'delete-failed' => 'Erorr! Subscriber cannot be deleted'
+            'delete-failed' => 'Error! Subscriber cannot be deleted'
         ]
     ],
 

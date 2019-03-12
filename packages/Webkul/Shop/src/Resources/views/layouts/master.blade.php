@@ -67,7 +67,7 @@
 
         <div class="footer-bottom">
             <p>
-                {{ __('shop::app.webkul.copy-right') }}
+                {{ __('shop::app.webkul.copy-right', ['year' => date('Y')]) }}
             </p>
         </div>
 
