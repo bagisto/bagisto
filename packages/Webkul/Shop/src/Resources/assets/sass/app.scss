@@ -406,6 +406,7 @@ input {
 
     .content-container {
         display: block;
+        margin-bottom: 40px;
     }
 
     // product card, requires no changes for responsiveness.
@@ -907,7 +908,7 @@ section.slider-block {
                     right: 0px;
 
                     li {
-                        padding: 25px !important;
+                        padding: 20px !important;
 
                         ul {
                             margin-top: 5px;
@@ -1483,6 +1484,16 @@ section.slider-block {
                                         background-image: url("../images/checkbox-checked.svg");
                                     }
                                 }
+
+                                .color-swatch {
+                                    display: inline-block;
+                                    margin-right: 5px;
+                                    min-width: 20px;
+                                    height: 20px;
+                                    border: 1px solid #c7c7c7;
+                                    border-radius: 3px;
+                                    float: right;
+                                }
                             }
                         }
 
@@ -1518,9 +1529,9 @@ section.slider-block {
             display: block;
 
             .hero-image {
-                display:block;
+                display: inline-block;
                 visibility: visible;
-                width: auto;
+                width: 100%;
 
                 img {
                     height: 400px;
