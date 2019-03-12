@@ -74,7 +74,6 @@ class AddressController extends Controller
 
         $validator = Validator::make(request()->all(), [
             'address1' => 'string|required',
-            'address2' => 'string',
             'country' => 'string|required',
             'state' => 'string|required',
             'city' => 'string|required',

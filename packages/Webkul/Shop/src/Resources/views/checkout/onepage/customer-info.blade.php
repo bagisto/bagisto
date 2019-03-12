@@ -22,7 +22,7 @@
                         </li>
 
                         <li class="mb-5">
-                            @{{ addresses.address1 }}, <br v-if="addresses.address2.length > 0" /> @{{ addresses.address2 }}<i v-if="addresses.address2.length > 0">,</i>
+                            @{{ addresses.address1 }},
                         </li>
 
                         <li class="mb-5">
@@ -107,25 +107,25 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.billing[address1]') ? 'has-error' : '']">
-            <label for="billing[address1]" class="required">
+        <div class="control-group" :class="[errors.has('address-form.billing[address1][]') ? 'has-error' : '']">
+            <label for="billing[address1][]" class="required">
                 {{ __('shop::app.checkout.onepage.address1') }}
             </label>
 
-            <input type="text" v-validate="'required'" class="control" id="billing[address1]" name="billing[address1]" v-model="address.billing.address1" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;"/>
+            <input type="text" v-validate="'required'" class="control" id="billing[address1][]" name="billing[address1][]" v-model="address.billing.address1[0]" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;"/>
 
-            <span class="control-error" v-if="errors.has('address-form.billing[address1]')">
-                @{{ errors.first('address-form.billing[address1]') }}
+            <span class="control-error" v-if="errors.has('address-form.billing[address1][]')">
+                @{{ errors.first('address-form.billing[address1][]') }}
             </span>
         </div>
 
-        <div class="control-group">
-            <label for="billing[address2]">
-                {{ __('shop::app.checkout.onepage.address2') }}
-            </label>
-
-            <input type="text" class="control" id="billing[address2]" name="billing[address2]" v-model="address.billing.address2"/>
-        </div>
+        @if (core()->getConfigData('customer.settings.address.street_lines') && core()->getConfigData('customer.settings.address.street_lines') > 1)
+            <div class="control-group" style="margin-top: -25px;">
+                @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                    <input type="text" class="control" name="address1[]" v-model="address.billing.address1[{{$i}}]">
+                @endfor
+            </div>
+        @endif
 
         <div class="control-group" :class="[errors.has('address-form.billing[city]') ? 'has-error' : '']">
             <label for="billing[city]" class="required">
@@ -250,7 +250,7 @@
                         </li>
 
                         <li class="mb-5">
-                            @{{ addresses.address1 }}, <br v-if="addresses.address2.length > 0" /> @{{ addresses.address2 }}<i v-if="addresses.address2.length > 0">,</i>
+                            @{{ addresses.address1 }},
                         </li>
 
                         <li class="mb-5">
@@ -323,25 +323,25 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.shipping[address1]') ? 'has-error' : '']">
-            <label for="shipping[address1]" class="required">
+        <div class="control-group" :class="[errors.has('address-form.shipping[address1][]') ? 'has-error' : '']">
+            <label for="shipping[address1][]" class="required">
                 {{ __('shop::app.checkout.onepage.address1') }}
             </label>
 
-            <input type="text" v-validate="'required'" class="control" id="shipping[address1]" name="shipping[address1]" v-model="address.shipping.address1" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;"/>
+            <input type="text" v-validate="'required'" class="control" id="shipping[address1][]" name="shipping[address1][]" v-model="address.shipping.address1[0]" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;"/>
 
-            <span class="control-error" v-if="errors.has('address-form.shipping[address1]')">
-                @{{ errors.first('address-form.shipping[address1]') }}
+            <span class="control-error" v-if="errors.has('address-form.shipping[address1][]')">
+                @{{ errors.first('address-form.shipping[address1][]') }}
             </span>
         </div>
 
-        <div class="control-group">
-            <label for="shipping[address2]">
-                {{ __('shop::app.checkout.onepage.address2') }}
-            </label>
-
-            <input type="text" class="control" id="shipping[address2]" name="shipping[address2]" v-model="address.shipping.address2"/>
-        </div>
+        @if (core()->getConfigData('customer.settings.address.street_lines') && core()->getConfigData('customer.settings.address.street_lines') > 1)
+            <div class="control-group" style="margin-top: -25px;">
+                @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                    <input type="text" class="control" name="address1[]" v-model="address.shipping.address1[{{$i}}]">
+                @endfor
+            </div>
+        @endif
 
         <div class="control-group" :class="[errors.has('address-form.shipping[city]') ? 'has-error' : '']">
             <label for="shipping[city]" class="required">

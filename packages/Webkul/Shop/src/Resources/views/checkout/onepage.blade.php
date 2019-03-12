@@ -137,9 +137,12 @@
                 completedStep: 0,
                 address: {
                     billing: {
+                        address1: [''],
                         use_for_shipping: true,
                     },
-                    shipping: {},
+                    shipping: {
+                        address1: ['']
+                    },
                 },
                 selected_shipping_method: '',
                 selected_payment_method: '',
