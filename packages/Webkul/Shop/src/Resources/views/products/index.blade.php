@@ -32,7 +32,7 @@
                     </div>
                 @endif
 
-                <?php $products = $productRepository->findAllByCategory($category->id); ?>
+                <?php $products = $productRepository->getAll($category->id); ?>
 
                 @if ($products->count())
 
