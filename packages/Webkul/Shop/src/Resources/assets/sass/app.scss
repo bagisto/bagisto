@@ -406,6 +406,7 @@ input {
 
     .content-container {
         display: block;
+        margin-bottom: 40px;
     }
 
     // product card, requires no changes for responsiveness.
@@ -1435,6 +1436,10 @@ section.slider-block {
                     border-bottom: 1px solid $border-color;
                     padding-bottom: 10px;
 
+                    &:last-child {
+                        border-bottom: 0;
+                    }
+
                     .filter-attributes-title {
                         padding: 10px 40px 0 10px;
                         color: $other-font-color;
@@ -1482,6 +1487,16 @@ section.slider-block {
                                     input:checked + .checkbox-view {
                                         background-image: url("../images/checkbox-checked.svg");
                                     }
+                                }
+
+                                .color-swatch {
+                                    display: inline-block;
+                                    margin-right: 5px;
+                                    min-width: 20px;
+                                    height: 20px;
+                                    border: 1px solid #c7c7c7;
+                                    border-radius: 3px;
+                                    float: right;
                                 }
                             }
                         }
