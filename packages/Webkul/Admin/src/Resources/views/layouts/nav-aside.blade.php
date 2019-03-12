@@ -29,25 +29,31 @@
         @endif
     </ul>
 
-    {{-- <div class="close-nav-aside">
+    <div class="close-nav-aside">
         <i class="icon angle-left-icon close-icon"></i>
-    </div> --}}
+    </div>
+
+    <div class="open-nav-aside">
+        <i class="icon angle-left-icon close-icon"></i>
+    </div>
 </div>
 
-{{-- @push('scripts')
+@push('scripts')
     <script>
         $(document).ready(function() {
             $(".close-nav-aside").on('click', function(e) {
                 $('.content-wrapper').css("margin-left", "0px");
                 $('.aside-nav').css('display', 'none');
                 $('.open-nav-aside').css('display', 'block');
+                $('.close-nav-aside').css('display', 'none');
             });
 
             $(".open-nav-aside").on('click', function(e) {
                 $('.content-wrapper').css("margin-left", "305px");
                 $('.aside-nav').css('display', '');
                 $('.open-nav-aside').css('display', 'none');
+                $('.close-nav-aside').css('display', 'block');
             });
         });
     </script>
-@endpush --}}
+@endpush

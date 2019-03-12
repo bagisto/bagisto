@@ -93,25 +93,31 @@ body {
     }
 }
 
-.open-nav-aside {
-    display: none;
-    width: 100%;
-    height: 8%;
-    margin-top: 2%;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid $border-color;
-    cursor: pointer;
-}
-
 .close-nav-aside {
     display: block;
-    width: 100%;
-    height: 8%;
-    margin-top: 3%;
+    position: absolute;
+    top: 36px;
+    left: 260px;
+    height: 45px;
+    width: 45px;
     padding: 10px;
     text-align: center;
     border: 1px solid $border-color;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.open-nav-aside {
+    display: none;
+    position: absolute;
+    top: 36px;
+    left: 68px;
+    height: 45px;
+    width: 45px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid $border-color;
+    border-radius: 50%;
     cursor: pointer;
 }
 
@@ -121,14 +127,13 @@ body {
 
 .open-nav-aside, .close-nav-aside {
     .icon {
-        height: 28px;
-        width: 28px;
+        height: 24px;
+        width: 24px;
     }
 }
 
 .navbar-left {
-    display: block;
-    position: fixed;
+    position: absolute;
     top: 60px;
     bottom: 0;
     width: 90px;
@@ -138,8 +143,6 @@ body {
     z-index: 2;
 
     ul.menubar {
-        height: 93%;
-
         li.menu-item {
             height: 90px;
             padding: 10px 5px;
@@ -168,7 +171,6 @@ body {
     right: 0;
     left: 0;
     bottom: 0px;
-    overflow-x: hidden;
     overflow-y: auto;
 
     .aside-nav {
@@ -182,7 +184,6 @@ body {
         z-index: 4;
 
         ul {
-            height: 93%;
             overflow-y: auto;
         }
 
