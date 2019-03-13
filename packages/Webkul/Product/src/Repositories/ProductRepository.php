@@ -196,13 +196,22 @@ class ProductRepository extends Repository
 
             if (isset($data['up_sell'])) {
                 $product->up_sells()->sync($data['up_sell']);
+            } else {
+                $data['up_sell'] = [];
+                $product->up_sells()->sync($data['up_sell']);
             }
 
             if (isset($data['cross_sell'])) {
                 $product->cross_sells()->sync($data['cross_sell']);
+            } else {
+                $data['cross_sell'] = [];
+                $product->cross_sells()->sync($data['cross_sell']);
             }
 
             if (isset($data['related_products'])) {
+                $product->related_products()->sync($data['related_products']);
+            } else {
+                $data['related_products'] = [];
                 $product->related_products()->sync($data['related_products']);
             }
 

@@ -9,7 +9,6 @@
     @foreach ($products as $product)
 
         @if ($product->cross_sells()->count())
-
             <div class="attached-products-wrapper mt-50">
 
                 <div class="title">
@@ -19,7 +18,7 @@
 
                 <div class="product-grid-4">
 
-                    @foreach ($product->cross_sells()->paginate(4) as $cross_sell_product)
+                    @foreach ($product->cross_sells()->paginate(1) as $cross_sell_product)
 
                         @include ('shop::products.list.card', ['product' => $cross_sell_product])
 
@@ -28,6 +27,7 @@
                 </div>
 
             </div>
+
         @endif
 
     @endforeach
