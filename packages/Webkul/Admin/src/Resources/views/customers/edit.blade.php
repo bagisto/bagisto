@@ -78,7 +78,7 @@
                                 <label for="customerGroup" >{{ __('admin::app.customers.customers.customer_group') }}</label>
 
                                 @if (! is_null($customer->customer_group_id))
-                                    <?php $selectedCustomerOption = $customer->customerGroup->id ?>
+                                    <?php $selectedCustomerOption = $customer->group->id ?>
                                 @else
                                     <?php $selectedCustomerOption = '' ?>
                                 @endif
