@@ -176,5 +176,41 @@ return [
         'route' => 'admin.tax-rates.index',
         'sort' => 2,
         'icon-class' => '',
+    ], [
+        'key' => 'configuration1',
+        'name' => 'admin::app.layouts.configure',
+        'route' => 'admin.configuration.index',
+        'sort' => 7,
+        'icon-class' => 'configuration-icon',
+    ], [
+        'key' => 'configuration2',
+        'name' => 'admin::app.layouts.configure',
+        'route' => 'admin.configuration.index',
+        'sort' => 8,
+        'icon-class' => 'configuration-icon',
+    ], [
+        'key' => 'configuration3',
+        'name' => 'admin::app.layouts.configure',
+        'route' => 'admin.configuration.index',
+        'sort' => 9,
+        'icon-class' => 'configuration-icon',
+    ], [
+        'key' => 'configuration4',
+        'name' => 'admin::app.layouts.configure',
+        'route' => 'admin.configuration.index',
+        'sort' => 10,
+        'icon-class' => 'configuration-icon',
+    ], [
+        'key' => 'configuration5',
+        'name' => 'admin::app.layouts.configure',
+        'route' => 'admin.configuration.index',
+        'sort' => 11,
+        'icon-class' => 'configuration-icon',
+    ], [
+        'key' => 'configuration6',
+        'name' => 'admin::app.layouts.configure',
+        'route' => 'admin.configuration.index',
+        'sort' => 12,
+        'icon-class' => 'configuration-icon',
     ]
 ];
