@@ -29,13 +29,35 @@
         @endif
     </ul>
 
-    <div class="close-nav-aside">
+    {{-- <div class="close-nav-aside">
         <i class="icon angle-left-icon close-icon"></i>
-    </div>
+    </div> --}}
 </div>
 
 @push('scripts')
     <script>
+        window.onload = function () {
+            st = $(document).scrollTop();
+            windowHeight = $(window).height();
+            documentHeight = $(document).height();
+            menubarHeight = $('ul.menubar').height();
 
+            if(menubarHeight > windowHeight) {
+                remainent = documentHeight - menubarHeight;
+                travelRatio = remainent / (documentHeight - windowHeight);
+            }
+
+            console.log(travelRatio);
+
+            $(document).scroll(function() {
+                st = $(document).scrollTop();
+
+                if(menubarHeight > windowHeight && st < menubarHeight / 2) {
+                    marginTopForMenubar = travelRatio * st;
+
+                    $('.navbar-left').css('top', + 60 - marginTopForMenubar);
+                }
+            });
+        }
     </script>
 @endpush

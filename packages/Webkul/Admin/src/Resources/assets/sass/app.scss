@@ -95,20 +95,21 @@ body {
 }
 
 .navbar-left {
-    position: absolute;
+    position: fixed;
+    left: 0px;
     top: 60px;
-    bottom: 0;
     width: 90px;
     padding-top: 20px;
+    border-right: 1px solid rgba(162, 162, 162, 0.2);
     height: auto;
-    border-right: 1px solid $border-color;
+    bottom: 0px;
     z-index: 2;
 
     ul.menubar {
         // padding-bottom: 60px;
 
         li.menu-item {
-            height: 90px;
+            // height: 90px;
             padding: 10px 5px;
             font-size: 11px;
             text-align: center;
