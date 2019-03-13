@@ -522,32 +522,32 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.customers.subscribers.update');
 
             //slider index
-            Route::get('/slider','Webkul\Shop\Http\Controllers\SliderController@index')->defaults('_config',[
+            Route::get('/slider','Webkul\Core\Http\Controllers\SliderController@index')->defaults('_config',[
                 'view' => 'admin::settings.sliders.index'
             ])->name('admin.sliders.index');
 
             //slider create show
-            Route::get('slider/create','Webkul\Shop\Http\Controllers\SliderController@create')->defaults('_config',[
+            Route::get('slider/create','Webkul\Core\Http\Controllers\SliderController@create')->defaults('_config',[
                 'view' => 'admin::settings.sliders.create'
             ])->name('admin.sliders.create');
 
             //slider create show
-            Route::post('slider/create','Webkul\Shop\Http\Controllers\SliderController@store')->defaults('_config',[
+            Route::post('slider/create','Webkul\Core\Http\Controllers\SliderController@store')->defaults('_config',[
                 'redirect' => 'admin.sliders.index'
             ])->name('admin.sliders.store');
 
             //slider edit show
-            Route::get('slider/edit/{id}','Webkul\Shop\Http\Controllers\SliderController@edit')->defaults('_config',[
+            Route::get('slider/edit/{id}','Webkul\Core\Http\Controllers\SliderController@edit')->defaults('_config',[
                 'view' => 'admin::settings.sliders.edit'
             ])->name('admin.sliders.edit');
 
             //slider edit update
-            Route::post('slider/edit/{id}','Webkul\Shop\Http\Controllers\SliderController@update')->defaults('_config',[
+            Route::post('slider/edit/{id}','Webkul\Core\Http\Controllers\SliderController@update')->defaults('_config',[
                 'redirect' => 'admin.sliders.index'
             ])->name('admin.sliders.update');
 
             //destroy a slider item
-            Route::get('slider/delete/{id}', 'Webkul\Shop\Http\Controllers\SliderController@destroy')->name('admin.sliders.delete');
+            Route::get('slider/delete/{id}', 'Webkul\Core\Http\Controllers\SliderController@destroy')->name('admin.sliders.delete');
 
             //tax routes
             Route::get('/tax-categories', 'Webkul\Tax\Http\Controllers\TaxController@index')->defaults('_config', [

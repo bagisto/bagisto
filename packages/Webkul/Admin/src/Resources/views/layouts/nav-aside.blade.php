@@ -1,8 +1,5 @@
 <div class="aside-nav">
     <ul>
-        {{-- <li class="slider-aside">
-            <span class="icon cross-icon" style="height: 64px; width: 64px; background: red;"></span>
-        </li> --}}
         @if (request()->route()->getName() != 'admin.configuration.index')
             <?php $keys = explode('.', $menu->currentKey);  ?>
 
@@ -32,25 +29,25 @@
         @endif
     </ul>
 
-    <div class="aside-nav-toggle">
-        <i class="angle-left-icon close-icon"></i>
-    </div>
+    {{-- <div class="close-nav-aside">
+        <i class="icon angle-left-icon close-icon"></i>
+    </div> --}}
 </div>
 
-@push('scripts')
+{{-- @push('scripts')
     <script>
         $(document).ready(function() {
-            $(".close-icon").on('click', function(e){
+            $(".close-nav-aside").on('click', function(e) {
                 $('.content-wrapper').css("margin-left", "0px");
-                $('.aside-nav').hide();
-                $('.open').show();
+                $('.aside-nav').css('display', 'none');
+                $('.open-nav-aside').css('display', 'block');
             });
 
-            $(".open-icon").on('click', function(e){
+            $(".open-nav-aside").on('click', function(e) {
                 $('.content-wrapper').css("margin-left", "305px");
-                $('.aside-nav').show();
-                $('.open').hide();
+                $('.aside-nav').css('display', '');
+                $('.open-nav-aside').css('display', 'none');
             });
         });
     </script>
-@endpush
+@endpush --}}

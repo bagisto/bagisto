@@ -45,7 +45,7 @@
                                     </li>
 
                                     <li class="mt-5">
-                                        {{ $address->address1 }}, {{ $address->address2 ? $address->address2 . ',' : '' }}
+                                        {{ $address->address1 }},
                                     </li>
 
                                     <li class="mt-5">

@@ -47,6 +47,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -55,6 +56,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'price',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -63,6 +65,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'price',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -71,6 +74,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'datetime',
             'sortable' => true,
             'searchable' => false,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -79,6 +83,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -88,6 +93,7 @@ class OrderDataGrid extends DataGrid
             'sortable' => true,
             'searchable' => true,
             'closure' => true,
+            'filterable' => true,
             'wrapper' => function ($value) {
                 if ($value->status == 'processing')
                     return '<span class="badge badge-md badge-success">Processing</span>';
@@ -112,6 +118,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -120,6 +127,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 

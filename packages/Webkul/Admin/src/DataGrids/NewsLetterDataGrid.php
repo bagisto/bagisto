@@ -32,6 +32,7 @@ class NewsLetterDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -40,6 +41,7 @@ class NewsLetterDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true,
             'wrapper' => function($value) {
                 if ($value->is_subscribed == 1)
                     return 'True';
@@ -54,6 +56,7 @@ class NewsLetterDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 

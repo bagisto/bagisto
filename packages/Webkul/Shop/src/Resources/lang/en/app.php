@@ -128,7 +128,7 @@ return [
             'forgot_pass' => 'Forgot Password?',
             'button_title' => 'Sign In',
             'remember' => 'Remember Me',
-            'footer' => '© Copyright 2018 Webkul Software, All rights reserved',
+            'footer' => '© Copyright :year Webkul Software, All rights reserved',
             'invalid-creds' => 'Please Check Your Credentials And Try Again',
             'verify-first' => 'Verify Your Email Account First',
             'resend-verification' => 'Resend Verification Mail Again'
@@ -201,8 +201,7 @@ return [
                 'create' => [
                     'page-title' => 'Customer - Add Address Form',
                     'title' => 'Add Address',
-                    'address1' => 'Address Line 1',
-                    'address2' => 'Address Line 2',
+                    'street-address' => 'Street Address',
                     'country' => 'Country',
                     'state' => 'State',
                     'select-state' => 'Select a region, state or province',
@@ -404,8 +403,7 @@ return [
             'first-name' => 'First Name',
             'last-name' => 'Last Name',
             'email' => 'Email',
-            'address1' => 'Address',
-            'address2' => 'Address 2',
+            'address1' => 'Street Address',
             'city' => 'City',
             'state' => 'State',
             'select-state' => 'Select a region, state or province',
@@ -465,7 +463,7 @@ return [
             'shipping-handling' => 'Shipping & Handling',
             'tax' => 'Tax',
             'grand-total' => 'Grand Total',
-            'final-summary' => 'Thanks for showing your intrest in our store we will send you track number once it shiped',
+            'final-summary' => 'Thanks for showing your interest in our store we will send you tracking number once it shipped',
             'help' => 'If you need any kind of help please contact us at :support_email',
             'thanks' => 'Thanks!'
         ],
@@ -491,7 +489,7 @@ return [
     ],
 
     'webkul' => [
-        'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved'
+        'copy-right' => '© Copyright :year Webkul Software, All rights reserved',
     ],
 
     'response' => [

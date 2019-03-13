@@ -545,8 +545,8 @@ return [
         ],
         'countries' => [
             'title' => 'Countries',
-            'add-title' => 'Add Counrty',
-            'save-btn-title' => 'Save Counrty',
+            'add-title' => 'Add Country',
+            'save-btn-title' => 'Save Country',
             'general' => 'General',
             'code' => 'Code',
             'name' => 'Name'
@@ -743,7 +743,7 @@ return [
             'update-success' => 'Subscriber was successfully updated',
             'update-failed' => 'Error! You cannot unsubscribe the subscriber',
             'delete' => 'Subscriber was successfully deleted',
-            'delete-failed' => 'Erorr! Subscriber cannot be deleted'
+            'delete-failed' => 'Error! Subscriber cannot be deleted'
         ]
     ],
 
@@ -813,4 +813,18 @@ return [
     'footer' => [
         'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved.'
     ],
+
+    'admin' => [
+        'system' => [
+            'catalog' => 'Catalog',
+            'products' => 'Products',
+            'review' => 'Review',
+            'allow-guest-review' => 'Allow Guest Review',
+            'customer' => 'Customer',
+            'settings' => 'Settings',
+            'address' => 'Address',
+            'address' => 'Address',
+            'street-lines' => 'Lines in a Street Address'
+        ]
+    ]
 ];

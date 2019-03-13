@@ -69,11 +69,12 @@ class AddressController extends Controller
      */
     public function store()
     {
+        request()->merge(['address1' => implode(PHP_EOL, array_filter(request()->input('address1')))]);
+        
         $data = collect(request()->input())->except('_token')->toArray();
 
         $this->validate(request(), [
             'address1' => 'string|required',
-            'address2' => 'string',
             'country' => 'string|required',
             'state' => 'string|required',
             'city' => 'string|required',
@@ -119,9 +120,10 @@ class AddressController extends Controller
      */
     public function update($id)
     {
+        request()->merge(['address1' => implode(PHP_EOL, array_filter(request()->input('address1')))]);
+
         $this->validate(request(), [
             'address1' => 'string|required',
-            'address2' => 'string',
             'country' => 'string|required',
             'state' => 'string|required',
             'city' => 'string|required',

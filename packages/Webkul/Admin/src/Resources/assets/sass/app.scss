@@ -93,8 +93,42 @@ body {
     }
 }
 
+.open-nav-aside {
+    display: none;
+    width: 100%;
+    height: 8%;
+    margin-top: 2%;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid $border-color;
+    cursor: pointer;
+}
+
+.close-nav-aside {
+    display: block;
+    width: 100%;
+    height: 8%;
+    margin-top: 3%;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid $border-color;
+    cursor: pointer;
+}
+
+.close-nav-aside:hover, .open-nav-aside:hover {
+    background: $brand-color;
+}
+
+.open-nav-aside, .close-nav-aside {
+    .icon {
+        height: 28px;
+        width: 28px;
+    }
+}
+
 .navbar-left {
-    position: absolute;
+    display: block;
+    position: fixed;
     top: 60px;
     bottom: 0;
     width: 90px;

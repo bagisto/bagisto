@@ -111,7 +111,7 @@
                             <tr>
                                 <td>
                                     <p>{{ $invoice->order->billing_address->name }}</p>
-                                    <p>{{ $invoice->order->billing_address->address1 }}, {{ $invoice->order->billing_address->address2 ? $invoice->order->billing_address->address2 . ',' : '' }}</p>
+                                    <p>{{ $invoice->order->billing_address->address1 }}</p>
                                     <p>{{ $invoice->order->billing_address->city }}</p>
                                     <p>{{ $invoice->order->billing_address->state }}</p>
                                     <p>{{ country()->name($invoice->order->billing_address->country) }} {{ $invoice->order->billing_address->postcode }}</p>
@@ -119,7 +119,7 @@
                                 </td>
                                 <td>
                                     <p>{{ $invoice->order->shipping_address->name }}</p>
-                                    <p>{{ $invoice->order->shipping_address->address1 }}, {{ $invoice->order->shipping_address->address2 ? $invoice->order->shipping_address->address2 . ',' : '' }}</p>
+                                    <p>{{ $invoice->order->shipping_address->address1 }}</p>
                                     <p>{{ $invoice->order->shipping_address->city }}</p>
                                     <p>{{ $invoice->order->shipping_address->state }}</p>
                                     <p>{{ country()->name($invoice->order->shipping_address->country) }} {{ $invoice->order->shipping_address->postcode }}</p>

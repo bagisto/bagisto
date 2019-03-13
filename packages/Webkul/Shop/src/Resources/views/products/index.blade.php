@@ -26,7 +26,13 @@
                     @endif
                 </div>
 
-                <?php $products = $productRepository->findAllByCategory($category->id); ?>
+                @if ($category->description)
+                    <div class="category-description">
+                        {!! $category->description !!}
+                    </div>
+                @endif
+
+                <?php $products = $productRepository->getAll($category->id); ?>
 
                 @if ($products->count())
 

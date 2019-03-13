@@ -7,7 +7,6 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\ChannelRepository as Channel;
 
-
 /**
  * Channel controller
  *
@@ -26,14 +25,14 @@ class ChannelController extends Controller
     /**
      * ChannelRepository object
      *
-     * @var array
+     * @var Object
      */
     protected $channel;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\ChannelRepository  $channel
+     * @param  Webkul\Core\Repositories\ChannelRepository $channel
      * @return void
      */
     public function __construct(Channel $channel)

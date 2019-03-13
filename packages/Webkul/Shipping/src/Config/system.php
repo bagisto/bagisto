@@ -122,15 +122,9 @@ return [
                 'locale_based' => true
             ], [
                 'name' => 'address1',
-                'title' => 'Address Line 1',
+                'title' => 'Street Address',
                 'type' => 'text',
                 'validation' => 'required',
-                'channel_based' => true,
-                'locale_based' => false
-            ], [
-                'name' => 'address2',
-                'title' => 'Address Line 2',
-                'type' => 'text',
                 'channel_based' => true,
                 'locale_based' => false
             ], [
