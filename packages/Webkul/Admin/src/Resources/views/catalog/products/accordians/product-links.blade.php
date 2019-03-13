@@ -6,17 +6,20 @@
     </div>
 </accordian>
 
-
 @push('scripts')
 
 <script type="text/x-template" id="linked-products-template">
     <div>
 
         <div class="control-group" v-for='(key) in linkedProducts'>
-            <label for="up-selling">
-                {{
-                    __('admin::app.catalog.products.related-products', ['name' => 'cross_selling'])
-                }}
+            <label for="up-selling" v-if="(key == 'up_sells')">
+                {{ __('admin::app.catalog.products.up-selling') }}
+            </label>
+            <label for="cross_sells" v-if="(key == 'cross_sells')">
+                {{ __('admin::app.catalog.products.cross-selling') }}
+            </label>
+            <label for="related_products" v-if="(key == 'related_products')">
+                {{ __('admin::app.catalog.products.related-products') }}
             </label>
 
             <input type="text" class="control" autocomplete="off"  v-model="search_term[key]" placeholder="{{ __('admin::app.catalog.products.product-search-hint') }}" v-on:keyup="search(key)">
@@ -49,7 +52,6 @@
                 <span class="icon cross-icon" @click="removeProduct(product, key)"></span>
                 </span>
             </span>
-
         </div>
 
     </div>
@@ -85,6 +87,8 @@
                 'up_sells': false,
                 'related_products': false
             },
+
+            productId: {{ $product->id }},
 
             linkedProducts: ['up_sells', 'cross_sells', 'related_products'],
 
@@ -138,6 +142,13 @@
                 if (this.search_term[key].length >= 1) {
                     this.$http.get ("{{ route('admin.catalog.products.productlinksearch') }}", {params: {query: this.search_term[key]}})
                         .then (function(response) {
+
+                            for (var index in response.data) {
+                                if (response.data[index].id == this_this.productId) {
+                                    response.data.splice(index, 1);
+                                }
+                            }
+
                             this_this.products[key] = response.data;
 
                             this_this.is_searching[key] = false;

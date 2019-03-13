@@ -6,18 +6,17 @@
 
 @if ($products)
 
-    <div class="attached-products-wrapper mt-50">
+    @foreach ($products as $product)
 
-        <div class="title">
-            {{ __('shop::app.products.cross-sell-title') }}
-            <span class="border-bottom"></span>
-        </div>
+        @if ($product->cross_sells()->count())
+            <div class="attached-products-wrapper mt-50">
 
-        <div class="product-grid-4">
+                <div class="title">
+                    {{ __('shop::app.products.cross-sell-title') }}
+                    <span class="border-bottom"></span>
+                </div>
 
-            @foreach ($products as $product)
-
-                @if ($product->cross_sells()->count())
+                <div class="product-grid-4">
 
                     @foreach ($product->cross_sells()->paginate(1) as $cross_sell_product)
 
@@ -25,13 +24,13 @@
 
                     @endforeach
 
-                @endif
+                </div>
 
-            @endforeach
+            </div>
 
-        </div>
+        @endif
 
-    </div>
+    @endforeach
 
 @endif
 
