@@ -47,8 +47,6 @@
                 travelRatio = remainent / (documentHeight - windowHeight);
             }
 
-            console.log(travelRatio);
-
             $(document).scroll(function() {
                 st = $(document).scrollTop();
 
