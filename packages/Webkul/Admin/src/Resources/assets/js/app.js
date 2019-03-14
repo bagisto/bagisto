@@ -1,9 +1,11 @@
 window.jQuery = window.$ = $ = require("jquery");
 window.Vue = require("vue");
 window.VeeValidate = require("vee-validate");
+window.axios = require("axios");
 require("./bootstrap");
 
 Vue.use(VeeValidate);
+Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
 

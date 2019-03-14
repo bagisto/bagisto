@@ -380,7 +380,9 @@ return [
             'cross-selling' => 'Cross Selling',
             'up-selling' => 'Up Selling',
             'related-products' => 'Related Products',
-            'product-search-hint' => 'Start typing product name'
+            'product-search-hint' => 'Start typing product name',
+            'no-result-found' => 'Products not found with same name.',
+            'searching' => 'Searching ...'
         ],
 
         'attributes' => [
@@ -823,7 +825,28 @@ return [
             'settings' => 'Settings',
             'address' => 'Address',
             'address' => 'Address',
-            'street-lines' => 'Lines in a Street Address'
+            'street-lines' => 'Lines in a Street Address',
+            'sales' => 'Sales',
+            'shipping-methods' => 'Shipping Methods',
+            'free-shipping' => 'Free Shipping',
+            'flate-rate-shipping' => 'Flat Rate Shipping',
+            'shipping' => 'Shipping',
+            'origin' => 'Origin',
+            'country' => 'Country',
+            'state' => 'State',
+            'zip' => 'Zip',
+            'city' => 'City',
+            'street-address' => 'Street Address',
+            'title' => 'Title',
+            'description' => 'Description',
+            'rate' => 'Rate',
+            'status' => 'Status',
+            'type' => 'Type',
+            'payment-methods' => 'Payment Methods',
+            'cash-on-delivery' => 'Cash On Delivery',
+            'money-transfer' => 'Money Transfer',
+            'paypal-standard' => 'Paypal Standard',
+            'business-account' => 'Business Account'
         ]
     ]
 ];

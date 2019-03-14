@@ -268,4 +268,28 @@ class ProductController extends Controller
 
         return redirect()->route('admin.catalog.products.index');
     }
+
+    /**
+     * Result of search product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function productLinkSearch()
+    {
+        if (request()->ajax()) {
+            $results = [];
+
+            foreach ($this->product->searchProductByAttribute(request()->input('query')) as $row) {
+                $results[] = [
+                        'id' => $row->product_id,
+                        'sku' => $row->sku,
+                        'name' => $row->name,
+                    ];
+            }
+
+            return response()->json($results);
+        } else {
+            return view($this->_config['view']);
+        }
+    }
 }

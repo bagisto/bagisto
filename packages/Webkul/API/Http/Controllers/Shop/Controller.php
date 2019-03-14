@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\API\Http\Controllers;
+namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

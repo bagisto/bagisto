@@ -30,9 +30,9 @@ class Customer extends Authenticatable implements CustomerContract
     /**
      * Get the customer group that owns the customer.
      */
-    public function customerGroup()
+    public function group()
     {
-        return $this->belongsTo(CustomerGroupProxy::modelClass());
+        return $this->belongsTo(CustomerGroupProxy::modelClass(), 'customer_group_id');
     }
 
     /**
