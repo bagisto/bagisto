@@ -33,29 +33,3 @@
         <i class="icon angle-left-icon close-icon"></i>
     </div> --}}
 </div>
-
-@push('scripts')
-    <script>
-        window.onload = function () {
-            st = $(document).scrollTop();
-            windowHeight = $(window).height();
-            documentHeight = $(document).height();
-            menubarHeight = $('ul.menubar').height();
-
-            if (menubarHeight > windowHeight) {
-                remainent = documentHeight - menubarHeight;
-                travelRatio = remainent / (documentHeight - windowHeight);
-            }
-
-            $(document).scroll(function() {
-                st = $(document).scrollTop();
-
-                if (menubarHeight > windowHeight && st < (windowHeight - 60)) {
-                    marginTopForMenubar = travelRatio * st;
-
-                    $('.navbar-left').css('top', + 60 - marginTopForMenubar);
-                }
-            });
-        }
-    </script>
-@endpush

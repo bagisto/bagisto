@@ -9,6 +9,47 @@ Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
 
+window.onload = function () {
+    st = $(document).scrollTop();
+    initialScroll = st;
+    windowHeight = $(window).height();
+    documentHeight = $(document).height();
+    menubarHeight = $('ul.menubar').height();
+
+    // console.log(windowHeight, menubarHeight);
+
+    if (menubarHeight > windowHeight ) {
+        remainent = documentHeight - menubarHeight;
+        travelRatio = remainent / (documentHeight - windowHeight);
+    }
+
+    // if(initialScroll > windowHeight) {
+    //     fold =
+    // }
+
+    marginTopForMenubar = travelRatio * initialScroll;
+
+    console.log(initialScroll, travelRatio, marginTopForMenubar);
+
+    // if(menubarHeight > windowHeight && initialScroll > 0) {
+    //     marginTopForMenubar = travelRatio * initialScroll;
+    //     console.log(marginTopForMenubar);
+    //     // $('.navbar-left').css('top', + 60 - marginTopForMenubar);
+    // }
+
+    // $(document).scroll(function() {
+    //     st = $(document).scrollTop();
+
+    //     if (menubarHeight > windowHeight) {
+    //         if (initialScroll == 0 && st < (windowHeight - 60)) {
+    //             marginTopForMenubar = travelRatio * st;
+
+    //             $('.navbar-left').css('top', + 60 - marginTopForMenubar);
+    //         }
+    //     }
+    // });
+}
+
 $(document).ready(function () {
     var lastScrollTop = 0;
 
