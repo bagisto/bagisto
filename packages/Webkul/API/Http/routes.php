@@ -10,6 +10,8 @@ Route::group(['prefix' => 'api'], function ($router) {
             'resource' => 'Webkul\API\Http\Resources\Catalog\Category'
         ]);
 
+        Route::get('descendants-categories', 'CategoryController@index');
+
         Route::get('categories/{id}', 'ResourceController@get')->defaults('_config', [
             'repository' => 'Webkul\Category\Repositories\CategoryRepository',
             'resource' => 'Webkul\API\Http\Resources\Catalog\Category'
