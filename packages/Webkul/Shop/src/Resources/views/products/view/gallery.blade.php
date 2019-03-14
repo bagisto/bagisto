@@ -22,16 +22,16 @@
         <div>
 
             <ul class="thumb-list">
-                <li class="gallery-control top" @click="moveThumbs('top')" v-if="thumbs.length > 4">
+                <li class="gallery-control top" @click="moveThumbs('top')" v-if="(thumbs.length > 4) && this.is_move.up">
                     <span class="overlay"></span>
                     <i class="icon arrow-up-white-icon"></i>
                 </li>
 
                 <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']">
-                    <img :src="thumb.small_image_url" />
+                    <img :src="thumb.small_image_url"/>
                 </li>
 
-                <li class="gallery-control bottom" @click="moveThumbs('bottom')" v-if="thumbs.length > 4">
+                <li class="gallery-control bottom" @click="moveThumbs('bottom')" v-if="(thumbs.length > 4) && this.is_move.down">
                     <span class="overlay"></span>
                     <i class="icon arrow-down-white-icon"></i>
                 </li>
@@ -62,7 +62,17 @@
 
                 thumbs: [],
 
-                currentLargeImageUrl: ''
+                currentLargeImageUrl: '',
+
+                counter: {
+                    up: 0,
+                    down: 0,
+                },
+
+                is_move: {
+                    up: true,
+                    down: true,
+                }
             }),
 
             watch: {
@@ -101,14 +111,36 @@
                         const moveThumb = this.thumbs.splice(len - 1, 1);
 
                         this.thumbs = [moveThumb[0], ...this.thumbs];
+
+                        this.counter.up = this.counter.up+1;
+
+                        this.counter.down = this.counter.down-1;
+
                     } else {
                         const moveThumb = this.thumbs.splice(0, 1);
 
                         this.thumbs = [...this.thumbs, moveThumb[0]];
+
+                        this.counter.down = this.counter.down+1;
+
+                        this.counter.up = this.counter.up-1;
+                    }
+
+                    if ((len-4) == this.counter.down) {
+                        this.is_move.down = false;
+                    } else {
+                        this.is_move.down = true;
+                    }
+
+                    if ((len-4) == this.counter.up) {
+                        this.is_move.up = false;
+                    } else {
+                        this.is_move.up = true;
                     }
                 },
             }
         });
 
     </script>
+
 @endpush

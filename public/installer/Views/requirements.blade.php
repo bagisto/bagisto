@@ -26,19 +26,6 @@
                         <span>(<?php echo $phpVersion['minimum'] ?> or Higher)</span>
                     </div>
 
-                    <div class="check" style="margin-left: 25%;">
-                        <?php if(($composerInstall == 0) ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
-                            <img src="<?php echo $src ?>">
-                        <?php endif; ?>
-                        <span style="margin-left: 10px"><b>Composer</b></span>
-                    </div>
-
-                    <div style="margin-left: 30%;">
-                        <?php if(!($composerInstall == 0)): ?>
-                            <a href="https://getcomposer.org/" style="color: #0041FF; font-size: 16px">https://getcomposer.org/</a>
-                        <?php endif; ?>
-                    </div>
-
                     <?php foreach($requirements['requirements'] as $type => $require): ?>
 
                         <?php foreach($requirements['requirements'][$type] as $extention => $enabled) : ?>
@@ -54,7 +41,7 @@
                     <?php endforeach; ?>
                 </div>
 
-                <?php if(!isset($requirements['errors']) && $phpVersion['supported'] && ($composerInstall == 0) ): ?>
+                <?php if(!isset($requirements['errors']) && $phpVersion['supported']): ?>
                     <div>
                         <button type="button" class="prepare-btn" id="requirement-check">Continue</button>
                     </div>
