@@ -12,6 +12,12 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
+    protected $jsonErrorMessages = [
+        404 => 'Resource not found',
+        403 => '403 forbidden Error',
+        401 => 'Unauthenticated',
+        500 => '500 Internal Server Error',
+    ];
 
     /**
      * Render an exception into an HTTP response.
@@ -25,8 +31,8 @@ class Handler extends ExceptionHandler
         $path = $this->isAdminUri() ? 'admin' : 'shop';
 
         if ($exception instanceof HttpException) {
-            $statusCode = $exception->getStatusCode();
-            $statusCode = in_array($statusCode, [401, 403, 404, 503]) ? $statusCode : 500;
+            $statusCode = in_array($exception->getStatusCode(), [401, 403, 404, 503]) ? $exception->getStatusCode() : 500;
+
             return $this->response($path, $statusCode);
         } else if ($exception instanceof ModelNotFoundException) {
             return $this->response($path, 404);
@@ -37,6 +43,22 @@ class Handler extends ExceptionHandler
         return parent::render($request, $exception);
     }
 
+    /**
+     * Convert an authentication exception into a response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @return \Illuminate\Http\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => $this->jsonErrorMessages[401]], 401);
+        }
+
+        return redirect()->guest(route('auth.login'));
+    }
+
     private function isAdminUri()
     {
         return strpos($_SERVER['REQUEST_URI'], 'admin') !== false ? true : false;
@@ -44,7 +66,14 @@ class Handler extends ExceptionHandler
 
     private function response($path, $statusCode)
     {
+        if (request()->expectsJson()) {
+            return response()->json([
+                    'error' => isset($this->jsonErrorMessages[$statusCode])
+                        ? $this->jsonErrorMessages[$statusCode]
+                        : 'Something went wrong, please try again later.'
+                ], $statusCode);
+        }
+
         return response()->view("{$path}::errors.{$statusCode}", [], $statusCode);
     }
-
 }

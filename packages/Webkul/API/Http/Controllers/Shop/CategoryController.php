@@ -2,48 +2,46 @@
 
 namespace Webkul\API\Http\Controllers\Shop;
 
-use Webkul\API\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Collection;
-use Webkul\Category\Repositories\CategoryRepository as Category;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\API\Http\Resources\Catalog\Category as CategoryResource;
 
 /**
- * Category controller for getting the categories
+ * Category controller
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CategoryController extends Controller
 {
     /**
-     * The category implementation.
+     * CategoryRepository object
      *
-     * for shop bundle's navigation
-     * menu
+     * @var array
      */
-    protected $category;
+    protected $categoryRepository;
 
     /**
-     * Category Repository DI.
+     * Create a new controller instance.
      *
-     * @param  $category Category Instance
+     * @param  Webkul\Category\Repositories\CategoryRepository $categoryRepository
      * @return void
      */
-    public function __construct(Category $category)
+    public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->category = $category;
+        $this->categoryRepository = $categoryRepository;
     }
 
-    public function get() {
-        $categories = [];
-
-        foreach ($this->category->getVisibleCategoryTree() as $category) {
-            array_push($categories, collect($category));
-        }
-
-        return $categories;
+    /**
+     * Returns a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return CategoryResource::collection(
+                $this->categoryRepository->getVisibleCategoryTree(request()->input('parent_id'))
+            );
     }
-
 }
