@@ -53,6 +53,10 @@ class ResourceController extends Controller
                 $query = $query->where($input, $value);
             }
 
+            if ($sort = request()->input('sort')) {
+                $query = $query->orderBy($sort, request()->input('order') ?? 'desc');
+            }
+
             return $query;
         });
 
