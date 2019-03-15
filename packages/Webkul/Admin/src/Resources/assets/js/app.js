@@ -16,43 +16,37 @@ window.onload = function () {
     documentHeight = $(document).height();
     menubarHeight = $('ul.menubar').height();
 
-    // console.log(windowHeight, menubarHeight);
-
     if (menubarHeight > windowHeight ) {
         remainent = documentHeight - menubarHeight;
         travelRatio = remainent / (documentHeight - windowHeight);
     }
 
-    // if(initialScroll > windowHeight) {
-    //     fold =
-    // }
+    console.log(menubarHeight, documentHeight, windowHeight);
 
-    marginTopForMenubar = travelRatio * initialScroll;
+    if (menubarHeight > documentHeight) {
+        console.log('menu greater than document');
 
-    console.log(initialScroll, travelRatio, marginTopForMenubar);
+        $('.navbar-left').css('position', 'absolute');
+    } else if (menubarHeight > windowHeight && menubarHeight < documentHeight) {
+        console.log('menu bar height is greater than window but lesser than document');
+    }
 
-    // if(menubarHeight > windowHeight && initialScroll > 0) {
-    //     marginTopForMenubar = travelRatio * initialScroll;
-    //     console.log(marginTopForMenubar);
-    //     // $('.navbar-left').css('top', + 60 - marginTopForMenubar);
-    // }
+    $(document).scroll(function() {
+        st = $(document).scrollTop();
 
-    // $(document).scroll(function() {
-    //     st = $(document).scrollTop();
+        if (menubarHeight > windowHeight && menubarHeight < documentHeight) {
+            console.log('case true');
 
-    //     if (menubarHeight > windowHeight) {
-    //         if (initialScroll == 0 && st < (windowHeight - 60)) {
-    //             marginTopForMenubar = travelRatio * st;
+            if (initialScroll == 0) {
+                marginTopForMenubar = travelRatio * st;
 
-    //             $('.navbar-left').css('top', + 60 - marginTopForMenubar);
-    //         }
-    //     }
-    // });
+                $('.navbar-left').css('top', + 60 - marginTopForMenubar);
+            }
+        }
+    });
 }
 
 $(document).ready(function () {
-    var lastScrollTop = 0;
-
     Vue.config.ignoredElements = [
         'option-wrapper',
         'group-form',
