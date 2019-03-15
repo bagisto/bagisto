@@ -637,6 +637,7 @@ body {
     .navbar-left {
         border-left: 1px solid rgba(162, 162, 162, 0.2);
         border-right: none;
+        left: calc(100% - 90px);
     }
 
     .content-container {
@@ -751,6 +752,11 @@ body {
                 margin-right: 10px;
                 margin-left: 0px;
             }
+        }
+
+        .filter-row-one .dropdown-filters {
+            right: unset;
+            left: 25px;
         }
     }
 
