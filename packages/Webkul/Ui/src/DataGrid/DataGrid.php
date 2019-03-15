@@ -314,4 +314,19 @@ abstract class DataGrid
 
         return view('ui::datagrid.table')->with('results', ['records' => $this->getCollection(), 'columns' => $this->completeColumnDetails, 'actions' => $this->actions, 'massactions' => $this->massActions, 'index' => $this->index, 'enableMassActions' => $this->enableMassAction, 'enableActions' => $this->enableAction, 'paginated' => $this->paginate, 'norecords' => trans('ui::app.datagrid.no-records')]);
     }
+
+    public function export()
+    {
+        $this->paginate = false;
+
+        $this->addColumns();
+
+        $this->prepareActions();
+
+        $this->prepareMassActions();
+
+        $this->prepareQueryBuilder();
+
+        return $this->getCollection();
+    }
 }

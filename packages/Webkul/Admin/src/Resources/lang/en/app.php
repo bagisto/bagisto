@@ -792,7 +792,9 @@ return [
         'duplicate-error' => 'Identifier must be unique, duplicate identifier :identifier at row :position.',
         'enough-row-error' => 'file has not enough rows',
         'allowed-type' => 'Allowed Type :',
-        'file-type' => 'csv, xls, xlsx.'
+        'file-type' => 'csv, xls, xlsx.',
+        'no-records' => 'Nothing to export',
+        'illegal-format' => 'Error! This type of format is either not supported or its illegal format'
     ],
 
     'response' => [

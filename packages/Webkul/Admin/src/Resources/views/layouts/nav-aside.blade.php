@@ -33,21 +33,3 @@
         <i class="icon angle-left-icon close-icon"></i>
     </div> --}}
 </div>
-
-{{-- @push('scripts')
-    <script>
-        $(document).ready(function() {
-            $(".close-nav-aside").on('click', function(e) {
-                $('.content-wrapper').css("margin-left", "0px");
-                $('.aside-nav').css('display', 'none');
-                $('.open-nav-aside').css('display', 'block');
-            });
-
-            $(".open-nav-aside").on('click', function(e) {
-                $('.content-wrapper').css("margin-left", "305px");
-                $('.aside-nav').css('display', '');
-                $('.open-nav-aside').css('display', 'none');
-            });
-        });
-    </script>
-@endpush --}}

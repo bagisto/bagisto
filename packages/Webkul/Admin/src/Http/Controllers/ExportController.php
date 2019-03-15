@@ -16,6 +16,10 @@ use Excel;
  */
 class ExportController extends Controller
 {
+    protected $exportableGrids = [
+        'OrderDataGrid', 'OrderInvoicesDataGrid', 'OrderShipmentsDataGrid', 'CustomerDataGrid', 'TaxRateDataGrid'
+    ];
+
     /**
      * Create a new controller instance.
      *
@@ -32,18 +36,44 @@ class ExportController extends Controller
     */
     public function export()
     {
-        $results = request()->all()['gridData'];
+        $criteria = request()->all();
+        $format = $criteria['format'];
 
-        $data = json_decode($results, true);
+        $gridName = explode('\\', $criteria['gridName']);
+        $path = '\Webkul\Admin\DataGrids'.'\\'.last($gridName);
 
-        $results = (object) $data;
+        $proceed = false;
 
-        $file_name = request()->all()['file_name'];
-
-        if (request()->all()['format'] == 'csv') {
-            return Excel::download(new DataGridExport($results), $file_name.'.csv');
-        } else {
-            return Excel::download(new DataGridExport($results), $file_name.'.xlsx');
+        foreach($this->exportableGrids as $exportableGrid) {
+            if(last($gridName) == $exportableGrid) {
+                $proceed = true;
+            }
         }
+
+        if($proceed) {
+            $gridInstance = new $path;
+
+            $records = array();
+            $records = $gridInstance->export();
+
+            if(count($records) == 0) {
+                session()->flash('warning', trans('admin::app.export.no-records'));
+
+                return redirect()->back();
+            }
+
+            if ($format == 'csv') {
+                return Excel::download(new DataGridExport($records), last($gridName).'.csv');
+            } else if($format == 'xls') {
+                return Excel::download(new DataGridExport($records), last($gridName).'.xlsx');
+            } else {
+                session()->flash('warning', trans('admin::app.export.illegal-format'));
+
+                return redirect()->back();
+            }
+        } else {
+            return redirect()->back();
+        }
+
     }
 }

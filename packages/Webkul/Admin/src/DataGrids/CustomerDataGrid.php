@@ -17,6 +17,8 @@ class CustomerDataGrid extends DataGrid
 
     protected $sortOrder = 'desc'; //asc or desc
 
+    protected $itemsPerPage = 10;
+
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('customers as custs')
