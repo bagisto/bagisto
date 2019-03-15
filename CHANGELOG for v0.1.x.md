@@ -2,7 +2,7 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
-## **v0.1.4(4th of Febuary, 2019)** - *Release*
+## **v0.1.5(15th of March, 2019)** - *Release*
 
 * [feature] - Category display mode.
 
