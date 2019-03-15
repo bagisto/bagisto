@@ -35,6 +35,7 @@ class Product extends JsonResource
             'type' => $product->type,
             'name' => $this->name,
             'price' => $this->price,
+            'formated_price' => core()->currency($this->price),
             'description' => $this->description,
             'sku' => $this->sku,
             'images' => ProductImage::collection($product->images),
@@ -47,6 +48,10 @@ class Product extends JsonResource
             'special_price' => $this->when(
                     $this->productPriceHelper->haveSpecialPrice($product),
                     $this->productPriceHelper->getSpecialPrice($product)
+                ),
+            'formated_special_price' => $this->when(
+                    $this->productPriceHelper->haveSpecialPrice($product),
+                    core()->currency($this->productPriceHelper->getSpecialPrice($product))
                 ),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
