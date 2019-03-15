@@ -15,6 +15,8 @@ class Product extends JsonResource
     {
         $this->productPriceHelper = app('Webkul\Product\Helpers\Price');
 
+        $this->productImageHelper = app('Webkul\Product\Helpers\ProductImage');
+
         parent::__construct($resource);
     }
 
@@ -36,6 +38,7 @@ class Product extends JsonResource
             'description' => $this->description,
             'sku' => $this->sku,
             'images' => ProductImage::collection($product->images),
+            'base_image' => $this->productImageHelper->getProductBaseImage($product),
             'variants' => Self::collection($this->variants),
             'in_stock' => $product->haveSufficientQuantity(1),
             $this->mergeWhen($product->type == 'configurable', [
