@@ -2,8 +2,13 @@
 
 Route::group(['prefix' => 'api'], function ($router) {
     
-    Route::group(['namespace' => 'Webkul\API\Http\Controllers\Shop'], function ($router) {
+    Route::group(['namespace' => 'Webkul\API\Http\Controllers\Shop', 'middleware' => ['locale', 'currency']], function ($router) {
+        //Currency and Locale switcher
+        Route::get('switch-currency', 'CoreController@switchCurrency');
 
+        Route::get('switch-locale', 'CoreController@switchLocale');
+        
+        
         //Category routes
         Route::get('categories', 'ResourceController@index')->defaults('_config', [
             'repository' => 'Webkul\Category\Repositories\CategoryRepository',
