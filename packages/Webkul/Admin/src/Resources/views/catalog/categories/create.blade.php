@@ -77,6 +77,22 @@
 
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.description_images.controls.before') !!}
 
+                            <div class="control-group" :class="[errors.has('display_mode') ? 'has-error' : '']">
+                                <label for="display_mode" class="required">{{ __('admin::app.catalog.categories.display-mode') }}</label>
+                                <select class="control" v-validate="'required'" id="display_mode" name="display_mode" data-vv-as="&quot;{{ __('admin::app.catalog.categories.display-mode') }}&quot;">
+                                    <option value="products_and_description">
+                                        {{ __('admin::app.catalog.categories.products-and-description') }}
+                                    </option>
+                                    <option value="products_only">
+                                        {{ __('admin::app.catalog.categories.products-only') }}
+                                    </option>
+                                    <option value="description_only">
+                                        {{ __('admin::app.catalog.categories.description-only') }}
+                                    </option>
+                                </select>
+                                <span class="control-error" v-if="errors.has('display_mode')">@{{ errors.first('display_mode') }}</span>
+                            </div>
+
                             <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
                                 <label for="description" class="required">{{ __('admin::app.catalog.categories.description') }}</label>
                                 <textarea v-validate="'required'" class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old('description') }}</textarea>
