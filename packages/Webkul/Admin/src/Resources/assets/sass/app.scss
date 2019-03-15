@@ -96,7 +96,7 @@ body {
 
 .navbar-left {
     position: fixed;
-    left: 0px;
+    left: 0;
     top: 60px;
     width: 90px;
     padding-top: 20px;
@@ -109,7 +109,6 @@ body {
         // padding-bottom: 60px;
 
         li.menu-item {
-            // height: 90px;
             padding: 10px 5px;
             font-size: 11px;
             text-align: center;
@@ -127,20 +126,20 @@ body {
         }
     }
 
-    .open-nav-aside {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 90px;
-        padding: 18px;
-        text-align: center;
-        border: 1px solid $border-color;
+    // .open-nav-aside {
+    //     position: fixed;
+    //     bottom: 0;
+    //     left: 0;
+    //     width: 90px;
+    //     padding: 18px;
+    //     text-align: center;
+    //     border: 1px solid $border-color;
 
-        .icon {
-            height: 24px;
-            width: 24px;
-        }
-    }
+    //     .icon {
+    //         height: 24px;
+    //         width: 24px;
+    //     }
+    // }
 }
 
 .content-container {
@@ -174,22 +173,22 @@ body {
             height: 90%;
         }
 
-        .close-nav-aside {
-            width: 100%;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid $border-color;
+        // .close-nav-aside {
+        //     width: 100%;
+        //     padding: 20px;
+        //     text-align: center;
+        //     border: 1px solid $border-color;
 
-            .icon {
-                height: 24px;
-                width: 24px;
-            }
-        }
+        //     .icon {
+        //         height: 24px;
+        //         width: 24px;
+        //     }
+        // }
 
-        .close-nav-aside:hover {
-            background: white;
-            cursor: pointer;
-        }
+        // .close-nav-aside:hover {
+        //     background: white;
+        //     cursor: pointer;
+        // }
 
         a {
             padding: 15px;
@@ -294,47 +293,8 @@ body {
     }
 }
 
-//style for dummy datagrid
-// .page-content {
-//     .table-container {
-//         .search-filter-wrapper {
-//             display: inline-block;
-//             box-sizing: border-box;
-
-//             width: 100%;
-//             padding-top: 7px;
-//             padding-bottom: 7px;
-
-//             .search-products {
-//                 width: 300px;
-//                 border: 2px solid $border-color;
-//                 border-radius: 3px;
-//                 height: 30px;
-//                 padding-left: 5px;
-//             }
-
-//             .icon-wrapper {
-//                 margin: 0px;
-//                 display: inline-block;
-//                 vertical-align: middle;
-//                 border: 1px solid #c7c7c7;
-//                 border-radius: 4px;
-//                 padding-left: 5px;
-//                 padding-right: 5px;
-
-//                 .search-icon {
-//                     height: 24px;
-//                     width: 24px;
-//                 }
-//             }
-//         }
-//     }
-// }
-
-
 
 // admin dashboard css
-
 .dashboard {
 
     .page-header {

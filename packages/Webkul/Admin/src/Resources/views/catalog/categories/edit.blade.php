@@ -90,6 +90,22 @@
 
                             {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.controls.before', ['category' => $category]) !!}
 
+                            <div class="control-group" :class="[errors.has('display_mode') ? 'has-error' : '']">
+                                <label for="display_mode" class="required">{{ __('admin::app.catalog.categories.display-mode') }}</label>
+                                <select class="control" v-validate="'required'" id="display_mode" name="display_mode" data-vv-as="&quot;{{ __('admin::app.catalog.categories.display-mode') }}&quot;">
+                                    <option value="products_and_description" {{ $category->display_mode == 'products_and_description' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.categories.products-and-description') }}
+                                    </option>
+                                    <option value="products_only" {{ $category->display_mode == 'products_only' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.categories.products-only') }}
+                                    </option>
+                                    <option value="description_only" {{ $category->display_mode == 'description_only' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.categories.description-only') }}
+                                    </option>
+                                </select>
+                                <span class="control-error" v-if="errors.has('display_mode')">@{{ errors.first('display_mode') }}</span>
+                            </div>
+
                             <div class="control-group" :class="[errors.has('{{$locale}}[description]') ? 'has-error' : '']">
                                 <label for="description" class="required">{{ __('admin::app.catalog.categories.description') }}</label>
                                 <textarea v-validate="'required'" class="control" id="description" name="{{$locale}}[description]" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old($locale)['description'] ?: $category->translate($locale)['description'] }}</textarea>

@@ -83,7 +83,7 @@
                             <span> Click the below button to run following : </span>
                         </div>
                         <div class="message" style="margin-top: 20px">
-                            <span> Composer Dependency Installment </span>
+                            <span> Check Composer dependency </span>
                         </div>
                         <div class="message">
                             <span>Database Migartion </span>
@@ -99,7 +99,7 @@
                         </div>
                     </div>
 
-                    <span class="composer" id="comp" style="left: calc(50% - 135px);">Installing Composer Dependency</span>
+                    <span class="composer" id="comp" style="left: calc(50% - 135px);">Checking Composer Dependency</span>
                     <span class="composer"  id="composer-migrate" style="left: calc(50% - 85px);">Migrating Database</span>
                     <span class="composer"  id="composer-seed" style="left: calc(50% - 55px);">Seeding Data</span>
                 </div>
@@ -208,8 +208,8 @@
                                 } else {
                                     $('#migrate').show();
                                     $('#loader').hide();
-                                    $('#migrate-seed').show();
-                                    $('#migration-back').show();
+                                    $('#migrate-seed').hide();
+                                    $('#migration-back').hide();
                                     if (data['migrate']) {
                                         $('#migrate').append('<div class="terminal">' + data['migrate'] + '</div>');
                                     }
@@ -220,8 +220,8 @@
                     } else {
                         $('#loader').hide();
                         $('#composer-migrate').hide();
-                        $('#migrate-seed').show();
-                        $('#migration-back').show();
+                        $('#migrate-seed').hide();
+                        $('#migration-back').hide();
                         $('#composer').append('<div class="terminal">' + data['composer'] +'</div>');
                     }
                 }

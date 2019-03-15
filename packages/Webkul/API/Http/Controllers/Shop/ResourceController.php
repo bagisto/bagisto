@@ -48,13 +48,23 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        $results = $this->repository->scopeQuery(function($query) {
-            foreach (request()->except(['page', 'limit']) as $input => $value) {
+        $query = $this->repository->scopeQuery(function($query) {
+            foreach (request()->except(['page', 'limit', 'pagination', 'sort', 'order']) as $input => $value) {
                 $query = $query->where($input, $value);
             }
 
+            if ($sort = request()->input('sort')) {
+                $query = $query->orderBy($sort, request()->input('order') ?? 'desc');
+            }
+
             return $query;
-        })->paginate(request()->input('limit') ?? 10);
+        });
+
+        if (! is_null(request()->input('pagination')) && request()->input('pagination')) {
+            $results = $query->paginate(request()->input('limit') ?? 10);
+        } else {
+            $results = $query->get();
+        }
 
         return $this->_config['resource']::collection($results);
     }

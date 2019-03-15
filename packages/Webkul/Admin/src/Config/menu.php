@@ -176,35 +176,5 @@ return [
         'route' => 'admin.tax-rates.index',
         'sort' => 2,
         'icon-class' => '',
-    ], [
-        'key' => 'settings1',
-        'name' => 'admin::app.layouts.settings',
-        'route' => 'admin.locales.index',
-        'sort' => 7,
-        'icon-class' => 'settings-icon',
-    ], [
-        'key' => 'settings2',
-        'name' => 'admin::app.layouts.settings',
-        'route' => 'admin.locales.index',
-        'sort' => 8,
-        'icon-class' => 'settings-icon',
-    ], [
-        'key' => 'settings3',
-        'name' => 'admin::app.layouts.settings',
-        'route' => 'admin.locales.index',
-        'sort' => 9,
-        'icon-class' => 'settings-icon',
-    ], [
-        'key' => 'settings4',
-        'name' => 'admin::app.layouts.settings',
-        'route' => 'admin.locales.index',
-        'sort' => 10,
-        'icon-class' => 'settings-icon',
-    ], [
-        'key' => 'settings5',
-        'name' => 'admin::app.layouts.settings',
-        'route' => 'admin.locales.index',
-        'sort' => 11,
-        'icon-class' => 'settings-icon',
     ]
 ];

@@ -200,6 +200,21 @@ class Core
     }
 
     /**
+    * Returns current locale
+    *
+    *  @return Object
+    */
+    public function getCurrentLocale()
+    {
+        static $locale;
+
+        if ($locale)
+            return $locale;
+
+        return $locale = $this->localeRepository->findOneByField('code', app()->getLocale());
+    }
+
+    /**
     * Returns all currencies
     *
     *  @return Collection

@@ -9,43 +9,6 @@ Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
 
-window.onload = function () {
-    st = $(document).scrollTop();
-    initialScroll = st;
-    windowHeight = $(window).height();
-    documentHeight = $(document).height();
-    menubarHeight = $('ul.menubar').height();
-
-    if (menubarHeight > windowHeight ) {
-        remainent = documentHeight - menubarHeight;
-        travelRatio = remainent / (documentHeight - windowHeight);
-    }
-
-    console.log(menubarHeight, documentHeight, windowHeight);
-
-    if (menubarHeight > documentHeight) {
-        console.log('menu greater than document');
-
-        $('.navbar-left').css('position', 'absolute');
-    } else if (menubarHeight > windowHeight && menubarHeight < documentHeight) {
-        console.log('menu bar height is greater than window but lesser than document');
-    }
-
-    $(document).scroll(function() {
-        st = $(document).scrollTop();
-
-        if (menubarHeight > windowHeight && menubarHeight < documentHeight) {
-            console.log('case true');
-
-            if (initialScroll == 0) {
-                marginTopForMenubar = travelRatio * st;
-
-                $('.navbar-left').css('top', + 60 - marginTopForMenubar);
-            }
-        }
-    });
-}
-
 $(document).ready(function () {
     Vue.config.ignoredElements = [
         'option-wrapper',
