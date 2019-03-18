@@ -2,6 +2,98 @@
 
 #### This changelog consists the bug & security fixes and new features being included in the releases listed below.
 
+## **v0.1.5(15th of March, 2019)** - *Release*
+
+* [feature] - Category display mode.
+
+* [feature] - Color swatches for product.
+
+* [feature] - Cross sell and Up sell suggestions.
+
+* [feature] - Faster search, faster product load on storefront, Product API for fetching with numerous attributes filter.
+
+* [feature] - Added translations for Arabic and Brazilian languages(thanks to @cgartner-redstage).
+
+* #633 [fixed] - Fixed database custom port issue in installer issue (thanks to @abdulhamid-alattar)
+
+* #652 [fixed] - Removed black bar in admin panel.
+
+* #676 [fixed] - Can't filter by ID.
+
+* #671 [fixed] - Having these errors Undefined variable: key/value.
+
+* #669 [fixed] - Product list view not working in demo.
+
+* #664 [fixed] - CSS issues
+
+* #646 [fixed] - Warning: array_combine() expects parameter 1 to be array, null given ( install.php on line 32 )
+
+* #639 [fixed] - Broken link of image, on edit page of attribute in case of Swatch Type "Image" when editing first time.
+
+* #642 [fixed] - Getting exception on search in Products, Categories, Shipments & Product Reviews datagrids.
+
+* #636 [fixed] - Getting exception in shipment grid.
+
+* #621 [Added] - Add a column in product grid to identify the attribute family used for creating that product.
+
+* #620 [fixed] - "Enter Key" is not working while searching the product.
+
+* #619 [fixed] - Getting Exception when clicking on Product for which data is set according to locale.
+
+* #618 [fixed] - Layout issue on Changing Locale.
+
+* #617 [fixed] - Getting Exception in case of Guest Review on frontend.
+
+* #616 [fixed] - Getting error message that tax rate field is required when importing tax rate even when value is provided in that field.
+
+* #615 [Added] - Add a hint of allowed extension type on Import Tax rate pop-up.
+
+* #612 [fixed] - Layout issue on create Shipment Page.
+
+* #611 [fixed] - Attribute field name is not displaying on product page for all attribute type except multiselect.
+
+* #608 [fixed] - Root Category issue while root setting from channel.
+
+* #597 [Done] - "Boolean" Attribute type issue , when we select yes then 1 is showing on front end.
+
+* #596 [Fixed] - "Multiselect" Attribute type issue, when we select multiple option then numeric value is showing on the front end.
+
+* #594 [Added] - Latest order should display on top and add pagination on order page.(For Customer Account).
+
+* #592 [Added] - "Shipping to" column of Shipment remain blank if shipment for order is generated first and then invoice is created.
+
+* #589 [Fixed] - Getting exception when product added in wishlist is deleted from admin and user try to add that product to cart from wishlist.
+
+* #588 [Fixed] - For filter priority placeholder text should be numeric In Inventory Source grid.
+
+* #587 [Fixed] - Layout issue in order grid of customer.
+
+* #586 [Fixed] - Getting Exception in importing tax rates.
+
+* #585 [Fixed] - Getting Exception when using filter according to Id in Order grid.
+
+* #581 [Fixed] - Translation issues when switching between any two languages, specifically categories in nav does not revert back.
+
+* #575 [Fixed] - TestDataGrid does not exist
+
+* #560 [Fixed] - Buy Now Issue on Demo.
+
+* #556 [Fixed] - Getting Incorrect Grandtotal and delivery charge at checkout page if currency use is other than default.
+
+* #555 [Fixed] - Negative numbers and zero is not required in filter for Id.
+
+* #553 [Fixed] - Showing error on wrong field while using country type field in case of required.
+
+* #551 [Fixed] - Able to delete root category.
+
+* #545 [Fixed] - Installer doesn't launch admin panel of framework.
+
+* #546 [Fixed] - Getting Exception while uploading category image after installing project using installer.
+
+* #534 [Fixed] - Product is displaying as out of stock if default Inventory is zero, while other Inventory sources have products.
+
+* #533 [Fixed] - Displaying incorrect number of product on front-end.
+
 ## **v0.1.4(4th of Febuary, 2019)** - *Release*
 
 * [fixed] - Customer account menu issue fixed.

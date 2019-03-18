@@ -194,6 +194,7 @@ input {
         border: 2px solid $disc-price;
         border-radius: 50%;
     }
+
     /* Create the indicator (the dot/circle - hidden when not checked) */
     .checkmark:after {
         content: "";
@@ -214,6 +215,12 @@ input {
 /* Show the indicator (dot/circle) when checked */
 .radio-container input:checked ~ .checkmark:after {
     display: block;
+}
+
+/* Show the indic */
+.radio-container input:disabled ~ .checkmark {
+    display: block;
+    border: 2px solid $radio-button-disabled;
 }
 
 //CSS for loader

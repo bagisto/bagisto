@@ -64,8 +64,10 @@
         </style>
 
         @yield('css')
+
+        {!! view_render_event('bagisto.admin.layout.head') !!}
     </head>
-    <body>
+    <body @if (app()->getLocale() == 'ar') class="rtl" @endif style="scroll-behavior: smooth;">
         <div id="app" class="container">
 
             <flash-wrapper ref='flashes'></flash-wrapper>
@@ -78,7 +80,11 @@
                         <img src="{{ asset('vendor/webkul/ui/assets/images/logo.png') }}" alt="Bagisto"/>
                     </div>
 
+                    {!! view_render_event('bagisto.admin.layout.content.before') !!}
+
                     @yield('content')
+
+                    {!! view_render_event('bagisto.admin.layout.content.after') !!}
 
                     <div class="footer">
                         <p>
@@ -111,7 +117,10 @@
         <script type="text/javascript" src="{{ asset('vendor/webkul/admin/assets/js/admin.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
 
-        @yield('javascript')
+        @stack('javascript')
 
+        {!! view_render_event('bagisto.admin.layout.body.after') !!}
+
+        <div class="modal-overlay"></div>
     </body>
 </html>

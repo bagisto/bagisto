@@ -13,6 +13,7 @@ body {
     font-weight: 500;
     position: static;
     min-height: 100%;
+    width: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -93,55 +94,21 @@ body {
     }
 }
 
-.open-nav-aside {
-    display: none;
-    width: 100%;
-    height: 8%;
-    margin-top: 2%;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid $border-color;
-    cursor: pointer;
-}
-
-.close-nav-aside {
-    display: block;
-    width: 100%;
-    height: 8%;
-    margin-top: 3%;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid $border-color;
-    cursor: pointer;
-}
-
-.close-nav-aside:hover, .open-nav-aside:hover {
-    background: $brand-color;
-}
-
-.open-nav-aside, .close-nav-aside {
-    .icon {
-        height: 28px;
-        width: 28px;
-    }
-}
-
 .navbar-left {
-    display: block;
     position: fixed;
+    left: 0;
     top: 60px;
-    bottom: 0;
     width: 90px;
     padding-top: 20px;
+    border-right: 1px solid rgba(162, 162, 162, 0.2);
     height: auto;
-    border-right: 1px solid $border-color;
+    bottom: 0;
     z-index: 2;
 
     ul.menubar {
-        height: 93%;
+        // padding-bottom: 60px;
 
         li.menu-item {
-            height: 90px;
             padding: 10px 5px;
             font-size: 11px;
             text-align: center;
@@ -158,6 +125,21 @@ body {
             }
         }
     }
+
+    // .open-nav-aside {
+    //     position: fixed;
+    //     bottom: 0;
+    //     left: 0;
+    //     width: 90px;
+    //     padding: 18px;
+    //     text-align: center;
+    //     border: 1px solid $border-color;
+
+    //     .icon {
+    //         height: 24px;
+    //         width: 24px;
+    //     }
+    // }
 }
 
 .content-container {
@@ -168,8 +150,12 @@ body {
     right: 0;
     left: 0;
     bottom: 0px;
-    overflow-x: hidden;
-    overflow-y: auto;
+    height: calc(100% - 60px);
+    width: 100%;
+
+    .inner-section {
+        height: 100%;
+    }
 
     .aside-nav {
         width: 280px;
@@ -177,14 +163,32 @@ body {
         top: 60px;
         bottom: 0;
         border-right: 1px solid $border-color;
-        background: #f8f9fa;
+        background: $background-color;
         padding-top: 10px;
+        padding-bottom: 10px;
         z-index: 4;
 
         ul {
-            height: 93%;
             overflow-y: auto;
+            height: 90%;
         }
+
+        // .close-nav-aside {
+        //     width: 100%;
+        //     padding: 20px;
+        //     text-align: center;
+        //     border: 1px solid $border-color;
+
+        //     .icon {
+        //         height: 24px;
+        //         width: 24px;
+        //     }
+        // }
+
+        // .close-nav-aside:hover {
+        //     background: white;
+        //     cursor: pointer;
+        // }
 
         a {
             padding: 15px;
@@ -289,47 +293,8 @@ body {
     }
 }
 
-//style for dummy datagrid
-// .page-content {
-//     .table-container {
-//         .search-filter-wrapper {
-//             display: inline-block;
-//             box-sizing: border-box;
-
-//             width: 100%;
-//             padding-top: 7px;
-//             padding-bottom: 7px;
-
-//             .search-products {
-//                 width: 300px;
-//                 border: 2px solid $border-color;
-//                 border-radius: 3px;
-//                 height: 30px;
-//                 padding-left: 5px;
-//             }
-
-//             .icon-wrapper {
-//                 margin: 0px;
-//                 display: inline-block;
-//                 vertical-align: middle;
-//                 border: 1px solid #c7c7c7;
-//                 border-radius: 4px;
-//                 padding-left: 5px;
-//                 padding-right: 5px;
-
-//                 .search-icon {
-//                     height: 24px;
-//                     width: 24px;
-//                 }
-//             }
-//         }
-//     }
-// }
-
-
 
 // admin dashboard css
-
 .dashboard {
 
     .page-header {
@@ -672,6 +637,7 @@ body {
     .navbar-left {
         border-left: 1px solid rgba(162, 162, 162, 0.2);
         border-right: none;
+        left: calc(100% - 90px);
     }
 
     .content-container {
@@ -786,6 +752,11 @@ body {
                 margin-right: 10px;
                 margin-left: 0px;
             }
+        }
+
+        .filter-row-one .dropdown-filters {
+            right: unset;
+            left: 25px;
         }
     }
 

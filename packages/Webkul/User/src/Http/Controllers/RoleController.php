@@ -61,7 +61,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view'], compact('roleItems'));
+        return view($this->_config['view']);
     }
 
     /**
