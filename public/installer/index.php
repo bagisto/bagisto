@@ -31,6 +31,8 @@
             }
         }
 
+        $databaseData['DB_HOST'] = $databaseData['DB_USERNAME'] = $databaseData['DB_PASSWORD'] =  $databaseData['DB_DATABASE'] = $databaseData['DB_CONNECTION'] = $databaseData['DB_PORT'] = '';
+
         $databaseData = array_combine($key, $value);
 
         // getting database info
