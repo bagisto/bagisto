@@ -754,6 +754,7 @@ return [
     ],
 
     'response' => [
+        'cannot-delete-default' => 'Cannot delete the default channel',
         'create-success' => ':name criado com sucesso.',
         'update-success' => ':name atualizaco com sucesso.',
         'delete-success' => ':name excluído com sucesso.',
