@@ -1,36 +1,36 @@
 @foreach ($cart->items as $item)
     <?php
-        $products[] = $item->product;
+        $product = $item->product;
+
+        if ($product->cross_sells()->count()) {
+            $products[] = $product;
+            $products = array_unique($products);
+        }
     ?>
 @endforeach
 
-@if ($products)
+@if (isset($products))
 
-    @foreach ($products as $product)
+    <div class="attached-products-wrapper mt-50">
 
-        @if ($product->cross_sells()->count())
-            <div class="attached-products-wrapper mt-50">
+        <div class="title">
+            {{ __('shop::app.products.cross-sell-title') }}
+             <span class="border-bottom"></span>
+        </div>
 
-                <div class="title">
-                    {{ __('shop::app.products.cross-sell-title') }}
-                    <span class="border-bottom"></span>
-                </div>
+        <div class="product-grid-4">
+            @foreach($products as $product)
 
-                <div class="product-grid-4">
+                @foreach ($product->cross_sells()->paginate(2) as $cross_sell_product)
 
-                    @foreach ($product->cross_sells()->paginate(1) as $cross_sell_product)
+                    @include ('shop::products.list.card', ['product' => $cross_sell_product])
 
-                        @include ('shop::products.list.card', ['product' => $cross_sell_product])
+                @endforeach
 
-                    @endforeach
+            @endforeach
 
-                </div>
+        </div>
 
-            </div>
-
-        @endif
-
-    @endforeach
+    </div>
 
 @endif
-
