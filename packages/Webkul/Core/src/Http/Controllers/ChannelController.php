@@ -153,7 +153,11 @@ class ChannelController extends Controller
         } else {
             Event::fire('core.channel.delete.before', $id);
 
-            $this->channel->delete($id);
+            try {
+                $this->channel->delete($id);
+            } catch(\Exception $e) {
+                session()->flash('warning', trans($e->getMessage()));
+            }
 
             Event::fire('core.channel.delete.after', $id);
 
