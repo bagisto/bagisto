@@ -54,7 +54,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 * **OS**: Ubuntu 16.04 LTS or higher.
 * **SERVER**: Apache 2 or NGINX
-* **RAM**: 2 GB or higher.
+* **RAM**: 3 GB or higher.
 * **PHP**: 7.1.17 or higher.
 * **Processor**: Clock Cycle 1 Ghz or higher.
 * **For MySQL users**: 5.7.23 or higher.
@@ -68,7 +68,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 ##### a. Download zip from the link below:
 
-[Download](https://github.com/bagisto/bagisto/archive/v0.1.4.zip)
+[Download](https://github.com/bagisto/bagisto/archive/v0.1.5.zip)
 
 ##### b. Extract the contents of zip and execute the project in browser:
 
