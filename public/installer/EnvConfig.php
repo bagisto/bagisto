@@ -24,9 +24,6 @@ $data    = array();
     if (empty($_POST['user_name']))
         $errors['user_name'] = 'User Name is required.';
 
-    if (empty($_POST['user_password']))
-        $errors['user_password'] = 'User Password is required.';
-
     if (empty($_POST['port_name']))
         $errors['port_name'] = 'Port Name is required.';
 
@@ -82,6 +79,21 @@ $data    = array();
             }
         }
 
+        // reading env content
+        $data = file($envFile);
+        $keyValueData = [];
+
+        if ($data) {
+            foreach ($data as $line) {
+                $line = preg_replace('/\s+/', '', $line);
+                $rowValues = explode('=', $line);
+
+                if (strlen($line) !== 0) {
+                    $keyValueData[$rowValues[0]] = $rowValues[1];
+                }
+            }
+        }
+
         // inserting form data to empty array
         $keyValueData['DB_HOST'] = $_POST["host_name"];
         $keyValueData['DB_DATABASE'] = $_POST["database_name"];
@@ -91,33 +103,6 @@ $data    = array();
         $keyValueData['APP_URL'] = $_POST["app_url"];
         $keyValueData['DB_CONNECTION'] = $_POST["database_connection"];
         $keyValueData['DB_PORT'] = $_POST["port_name"];
-
-        $keyValueData['APP_ENV'] = $_POST["app_env"];
-        $keyValueData['APP_KEY'] = $_POST["app_key"];
-        $keyValueData['APP_DEBUG'] = $_POST["app_debug"];
-        $keyValueData['LOG_CHANNEL'] = $_POST["log_channel"];
-
-        $keyValueData['BROADCAST_DRIVER'] = $_POST["broadcast_driver"];
-        $keyValueData['CACHE_DRIVER'] = $_POST["cache_driver"];
-        $keyValueData['SESSION_DRIVER'] = $_POST["session_driver"];
-        $keyValueData['SESSION_LIFETIME'] = $_POST["session_lifetime"];
-        $keyValueData['QUEUE_DRIVER'] = $_POST["queue_driver"];
-
-        $keyValueData['REDIS_HOST'] = $_POST["redis_host"];
-        $keyValueData['REDIS_PASSWORD'] = $_POST["redis_password"];
-        $keyValueData['REDIS_PORT'] = $_POST["redis_port"];
-
-        $keyValueData['MAIL_DRIVER'] = $_POST["mail_driver"];
-        $keyValueData['MAIL_HOST'] = $_POST["mail_host"];
-        $keyValueData['MAIL_PORT'] = $_POST["mail_port"];
-        $keyValueData['MAIL_USERNAME'] = $_POST["mail_username"];
-        $keyValueData['MAIL_PASSWORD'] = $_POST["mail_password"];
-        $keyValueData['MAIL_ENCRYPTION'] = $_POST["mail_encryption"];
-
-        $keyValueData['PUSHER_APP_ID'] = $_POST["pusher_app_id"];
-        $keyValueData['PUSHER_APP_KEY'] = $_POST["pusher_app_key"];
-        $keyValueData['PUSHER_APP_SECRET'] = $_POST["pusher_app_secret"];
-        $keyValueData['PUSHER_APP_CLUSTER'] = $_POST["pusher_app_cluster"];
 
         // making key/value pair with form-data for env
         $changedData = [];

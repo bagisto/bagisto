@@ -69,37 +69,8 @@
                             <div class="control-group" id="user_password">
                                 <label for="user_password" class="required">User Password</label>
                                 <input type="text" name="user_password" class="control"
-                                placeholder="database password"
-                                data-validation="length required" data-validation-length="max50">
+                                placeholder="database password">
                             </div>
-
-                            <input type="hidden" name="app_env" value="local">
-                            <input type="hidden" name="app_key" value="">
-                            <input type="hidden" name="app_debug" value="true">
-                            <input type="hidden" name="log_channel" value="stack">
-
-                            <input type="hidden" name="broadcast_driver" value="log">
-                            <input type="hidden" name="cache_driver" value="file">
-                            <input type="hidden" name="session_driver" value="file">
-                            <input type="hidden" name="session_lefetime" value="120">
-                            <input type="hidden" name="queue_driver" value="sync">
-
-                            <input type="hidden" name="redis_host" value="127.0.0.1">
-                            <input type="hidden" name="redis_password" value="">
-                            <input type="hidden" name="redis_port" value="6379">
-
-                            <input type="hidden" name="mail_driver" value="smtp">
-                            <input type="hidden" name="mail_host" value="smtp.mailtrap.io">
-                            <input type="hidden" name="mail_port" value="2525">
-                            <input type="hidden" name="mail_username" value="">
-                            <input type="hidden" name="mail_password" value="">
-                            <input type="hidden" name="mail_encryption" value="">
-
-                            <input type="hidden" name="pusher_app_id" value="">
-                            <input type="hidden" name="pusher_app_key" value="">
-                            <input type="hidden" name="pusher_app_secret" value="">
-                            <input type="hidden" name="pusher_app_cluster" vallue="mt1">
-
                         </div>
                     </div>
                     <div>
@@ -139,34 +110,6 @@
                 'user_name'           : $('input[name=user_name]').val(),
                 'user_password'       : $('input[name=user_password]').val(),
                 'database_connection' : $("#database_connection" ).val(),
-
-
-                'app_env' : $('input[name=app_env]').val(),
-                'app_key' : $('input[name=app_key]').val(),
-                'app_debug' : $('input[name=app_debug]').val(),
-                'log_channel' : $('input[name=log_channel]').val(),
-
-                'broadcast_driver' : $('input[name=broadcast_driver]').val(),
-                'cache_driver' : $('input[name=cache_driver]').val(),
-                'session_driver' : $('input[name=session_driver]').val(),
-                'session_lifetime' : $('input[name=session_lifetime]').val(),
-                'queue_driver' : $('input[name=queue_driver]').val(),
-
-                'redis_host' : $('input[name=redis_host]').val(),
-                'redis_password' : $('input[name=redis_password]').val(),
-                'redis_port' : $('input[name=redis_port]').val(),
-
-                'mail_driver' : $('input[name=mail_driver]').val(),
-                'mail_host' : $('input[name=mail_host]').val(),
-                'mail_port' : $('input[name=mail_port]').val(),
-                'mail_username' : $('input[name=mail_username]').val(),
-                'mail_password' : $('input[name=mail_password]').val(),
-                'mail_encryption' : $('input[name=mail_encryption]').val(),
-
-                'pusher_app_id' : $('input[name=pusher_app_id]').val(),
-                'pusher_app_key' : $('input[name=pusher_app_key]').val(),
-                'pusher_app_secret' : $('input[name=pusher_app_secret]').val(),
-                'pusher_app_cluster' : $('input[name=pusher_app_cluster]').val(),
             };
 
             var target = window.location.href.concat('/EnvConfig.php');
