@@ -841,10 +841,10 @@ class Cart {
                     } else if ($item->product->name != $item->name) {
                         $item->update(['name' => $item->product->name]);
 
-                    } else if($this->price->getMinimalPrice($item->child->product) != $item->price) {
+                    } else if ($this->price->getMinimalPrice($item->child->product) != $item->price) {
                         // $price = (float) $item->custom_price ? $item->custom_price : $item->child->product->price;
 
-                        if((float)$item->custom_price) {
+                        if ((float)$item->custom_price) {
                             $price = $item->custom_price;
                         } else {
                             $price = $this->price->getMinimalPrice($item->child->product);
@@ -868,10 +868,10 @@ class Cart {
                     } else if ($this->price->getMinimalPrice($item->product) != $item->price) {
                         // $price = (float) $item->custom_price ? $item->custom_price : $item->product->price;
 
-                        if((float)$item->custom_price) {
+                        if ((float)$item->custom_price) {
                             $price = $item->custom_price;
                         } else {
-                            $price = $this->price->getMinimalPrice($item->child->product);
+                            $price = $this->price->getMinimalPrice($item->product);
                         }
 
                         $item->update([
