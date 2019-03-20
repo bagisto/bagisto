@@ -43,7 +43,7 @@
                         <div>
                             @foreach ($actions as $action)
                                 <a href="{{ route($action['route'], $record->{$index}) }}">
-                                    <span class="{{ $action['icon'] }}" onclick="return confirm('{{ __('ui::app.datagrid.click_on_action') }}')"></span>
+                                    <span class="{{ $action['icon'] }}" @if(strtolower($action['type']) == "delete") onclick="return confirm('{{ __('ui::app.datagrid.click_on_action') }}')" @endif></span>
                                 </a>
                             @endforeach
                         </div>
