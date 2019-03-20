@@ -13,7 +13,7 @@ use Webkul\Core\Repositories\SliderRepository as Sliders;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
- class HomeController extends controller
+ class HomeController extends Controller
 {
     protected $_config;
     protected $sliders;

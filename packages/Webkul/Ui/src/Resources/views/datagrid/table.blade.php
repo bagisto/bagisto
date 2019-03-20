@@ -114,7 +114,7 @@
                                             <option value="gt">{{ __('ui::app.datagrid.greater') }}</option>
                                             <option value="lt">{{ __('ui::app.datagrid.less') }}</option>
                                             <option value="gte">{{ __('ui::app.datagrid.greatere') }}</option>
-                                            <option value="lte">{{ __('ui::app.datagrid.equalse') }}</option>
+                                            <option value="lte">{{ __('ui::app.datagrid.lesse') }}</option>
                                             {{-- <option value="btw">{{ __('ui::app.datagrid.between') }}</option> --}}
                                         </select>
                                     </div>
