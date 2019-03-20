@@ -1,18 +1,9 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500">
-        <title>Bagisto Installer</title>
-        <link rel="icon" sizes="16x16" href="Images/favicon.ico">
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-    </head>
 
     <body>
 
         <div class="container admin" id="admin">
-            <div class="initial-display" style="padding-top: 100px;">
-                <img class="logo" src="Images/logo.svg">
+            <div class="initial-display">
                 <p>Admin Details</p>
 
                 <form action="AdminConfig.php"  method= "POST" id="admin-form">
@@ -49,10 +40,6 @@
                 </form>
 
             </div>
-            <div class="footer">
-                <img class="left-patern" src="Images/left-side.svg">
-                <img class="right-patern" src="Images/right-side.svg">
-            </div>
         </div>
 
     </body>
@@ -62,7 +49,6 @@
 <script>
     $.validate({});
 </script>
-
 
 <script>
     $(document).ready(function() {
@@ -77,10 +63,12 @@
                 'admin_password'     : $('input[name=admin_password]').val(),
                 'admin_re_password'  : $('input[name=admin_re_password]').val(),
             };
+
+            var adminTarget = window.location.href.concat('/AdminConfig.php');
             // process the form
             $.ajax({
                 type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                url         : 'AdminConfig.php', // the url where we want to POST
+                url         :  adminTarget, // the url where we want to POST
                 data        : formData, // our data object
                 dataType    : 'json', // what type of data do we expect back from the server
                             encode          : true

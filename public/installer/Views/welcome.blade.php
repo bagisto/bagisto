@@ -1,14 +1,9 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500">
-        <title>Bagisto Installer</title>
-        <link rel="icon" sizes="16x16" href="Images/favicon.ico">
-        <link rel="stylesheet" type="text/css" href="CSS/style.css">
+
     <body>
 
         <div class="container welcome" id="welcome">
-            <div class="initial-display" style="padding-top: 100px;">
-                <img class="logo" src="Images/logo.svg">
+            <div class="initial-display">
                 <p>Welcome to Bagisto</p>
 
                 <div class="content">
@@ -30,11 +25,6 @@
                 <div>
                     <button type="button" class="prepare-btn" id="welcome-check">Accept</button>
                 </div>
-            </div>
-
-            <div class="footer">
-                <img class="left-patern" src="Images/left-side.svg">
-                <img class="right-patern" src="Images/right-side.svg">
             </div>
         </div>
 
