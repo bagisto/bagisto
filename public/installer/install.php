@@ -21,7 +21,6 @@
         if ($data) {
             foreach ($data as $line) {
                 $rowValues = explode('=', $line);
-
                 if (count($rowValues) === 2) {
                     if (in_array($rowValues[0], $databaseArray)) {
                         $key[] = $rowValues[0];
@@ -76,3 +75,6 @@
         return null;
     }
 ?>
+
+
+

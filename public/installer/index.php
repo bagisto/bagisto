@@ -85,7 +85,7 @@
                         $result = $conn->query($sql);
 
                         if ($result) {
-                        $installed = true;
+                            $installed = true;
                         }
                     }
 
