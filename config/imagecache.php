@@ -16,7 +16,7 @@ return array(
     |
     */
    
-    'route' => 'cache',
+    'route' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -31,8 +31,8 @@ return array(
     */
     
     'paths' => array(
-        storage_path('app/public'),
-        public_path('storage')
+        public_path('upload'),
+        public_path('images')
     ),
 
     /*
@@ -52,9 +52,9 @@ return array(
     */
    
     'templates' => array(
-        'small' => 'Webkul\Product\CacheFilters\Small',
-        'medium' => 'Webkul\Product\CacheFilters\Medium',
-        'large' => 'Webkul\Product\CacheFilters\Large',
+        'small' => 'Intervention\Image\Templates\Small',
+        'medium' => 'Intervention\Image\Templates\Medium',
+        'large' => 'Intervention\Image\Templates\Large',
     ),
 
     /*

@@ -24,13 +24,13 @@
                             <div class="control-group" id="admin_password">
                                 <label for="admin_password" class="required">Password</label>
                                 <input type="password" name="admin_password" class="control"
-                                data-validation="length required" data-validation-length="max50">
+                                data-validation="length required" data-validation-length="min6">
                             </div>
 
                             <div class="control-group" id="admin_re_password">
                                 <label for="admin_re_password" class="required">Re-Password</label>
                                 <input type="password" name="admin_re_password" class="control"
-                                data-validation="length required" data-validation-length="max50">
+                                data-validation="length required" data-validation-length="min6">
                             </div>
                         </div>
                     </div>
