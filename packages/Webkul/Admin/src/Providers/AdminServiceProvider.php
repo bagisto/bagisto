@@ -71,8 +71,56 @@ class AdminServiceProvider extends ServiceProvider
                 }
             }
 
-            $tree->items = core()->sortItems($tree->items);
+            $allowedPermissions = auth()->guard('admin')->user()->role->permissions;
+            $withoutDots = array();
 
+            foreach ($allowedPermissions as $key => $allowedPermission) {
+                if (!str_contains($allowedPermission, '.')) {
+                    array_push($withoutDots, $allowedPermission);
+                }
+            }
+
+            $levelThreeKey = function() use($allowedPermissions, $withoutDots) {
+                $collectSimilar = array();
+
+                foreach ($withoutDots as $key => $withoutDot) {
+                    $group = array();
+
+                    foreach ($allowedPermissions as $key1 => $allowedPermission) {
+                        //pluck a level 3 group & match the dots
+                        if (str_contains($allowedPermission, $withoutDot.'.')) {
+                            array_push($group, $allowedPermission);
+                        }
+                    }
+
+                    $collectSimilar[$key] = $group;
+                    unset($group);
+                }
+
+                foreach ($collectSimilar as $collected)  {
+                    if (count($collected) > 1) {
+                        $first = $collected[0];
+                        $second = $collected[1];
+
+
+                        //confirmed, level three key exists
+                        if (str_contains($second, $first.'.')) {
+                            //find the missing key
+                            foreach (config('menu.admin') as $key => $menuItem) {
+                                if ($menuItem['key'] == $first) {
+                                    if(bouncer()->hasPermission(config('menu.admin')[$key+1]['key'])) {
+                                        //condition met and now just alter the tree
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            $levelThreeKey();
+
+            $tree->items = core()->sortItems($tree->items);
             $view->with('menu', $tree);
         });
 
