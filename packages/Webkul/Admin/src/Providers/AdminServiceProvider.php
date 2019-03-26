@@ -65,60 +65,71 @@ class AdminServiceProvider extends ServiceProvider
         view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $tree = Tree::create();
 
-            foreach (config('menu.admin') as $item) {
-                if (bouncer()->hasPermission($item['key'])) {
-                    $tree->add($item, 'menu');
-                }
-            }
+            $replaceRoutes = array();
 
             $allowedPermissions = auth()->guard('admin')->user()->role->permissions;
-            $withoutDots = array();
 
-            foreach ($allowedPermissions as $key => $allowedPermission) {
-                if (!str_contains($allowedPermission, '.')) {
-                    array_push($withoutDots, $allowedPermission);
+            if ($allowedPermissions != 'all') {
+                $withoutDots = array();
+
+                foreach ($allowedPermissions as $key => $allowedPermission) {
+                    if (!str_contains($allowedPermission, '.')) {
+                        array_push($withoutDots, $allowedPermission);
+                    }
                 }
-            }
 
-            $levelThreeKey = function() use($allowedPermissions, $withoutDots) {
-                $collectSimilar = array();
+                $levelThreeKey = function() use($allowedPermissions, $withoutDots, $replaceRoutes) {
+                    $collectSimilar = array();
 
-                foreach ($withoutDots as $key => $withoutDot) {
-                    $group = array();
+                    foreach ($withoutDots as $key => $withoutDot) {
+                        $group = array();
 
-                    foreach ($allowedPermissions as $key1 => $allowedPermission) {
-                        //pluck a level 3 group & match the dots
-                        if (str_contains($allowedPermission, $withoutDot.'.')) {
-                            array_push($group, $allowedPermission);
+                        foreach ($allowedPermissions as $key1 => $allowedPermission) {
+                            //pluck a level 3 group & match the dots
+                            if (str_contains($allowedPermission, $withoutDot.'.')) {
+                                array_push($group, $allowedPermission);
+                            }
                         }
+
+                        $collectSimilar[$key] = $group;
+                        unset($group);
                     }
 
-                    $collectSimilar[$key] = $group;
-                    unset($group);
-                }
+                    foreach ($collectSimilar as $collected)  {
+                        if (count($collected) > 1) {
+                            $first = $collected[0];
+                            $second = $collected[1];
 
-                foreach ($collectSimilar as $collected)  {
-                    if (count($collected) > 1) {
-                        $first = $collected[0];
-                        $second = $collected[1];
+                            //level three detection
+                            if (str_contains($second, $first.'.')) {
+                                //find the missing key
+                                foreach (config('menu.admin') as $key => $menuItem) {
+                                    if ($menuItem['key'] == $first && $second != bouncer()->hasPermission(config('menu.admin')[$key+1]['key']) && !bouncer()->hasPermission(config('menu.admin')[$key+1]['key'])) {
+                                        array_push($replaceRoutes, [$first, $second]);
 
+                                        // config('menu.admin')[$key]['route']->set(['route' => 'cjj']);
 
-                        //confirmed, level three key exists
-                        if (str_contains($second, $first.'.')) {
-                            //find the missing key
-                            foreach (config('menu.admin') as $key => $menuItem) {
-                                if ($menuItem['key'] == $first) {
-                                    if(bouncer()->hasPermission(config('menu.admin')[$key+1]['key'])) {
-                                        //condition met and now just alter the tree
+                                        dd(config('menu.admin')[$key]['route']);
+
+                                        break;
                                     }
                                 }
                             }
                         }
                     }
-                }
-            };
 
-            $levelThreeKey();
+                    return $replaceRoutes;
+                };
+
+                $x = $levelThreeKey();
+                // dd($x);
+            }
+
+            foreach (config('menu.admin') as $item) {
+                if (bouncer()->hasPermission($item['key'])) {
+                    $tree->add($item, 'menu');
+                }
+            }
 
             $tree->items = core()->sortItems($tree->items);
             $view->with('menu', $tree);
