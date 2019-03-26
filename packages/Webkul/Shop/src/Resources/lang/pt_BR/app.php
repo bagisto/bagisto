@@ -58,7 +58,7 @@ return [
         'already' => 'Você já está inscrito em nossa lista de assinaturas',
         'unsubscribed' => 'Você não está inscrito em nossa lista de assinaturas',
         'already-unsub' => 'Você não está mais inscrito em nossa lista de assinaturas',
-        'not-subscribed' => 'Erro! Emai lnão pode ser enviado, por favor, tente novamente mais tarde'
+        'not-subscribed' => 'Erro! Email não pode ser enviado, por favor, tente novamente mais tarde'
     ],
 
     'search' => [
