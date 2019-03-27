@@ -85,7 +85,7 @@
                 }
 
                 if (isset($connection) && $connection == 'mysql') {
-                    @$conn = new mysqli($servername, $username, $password, $dbname, $port);
+                    @$conn = new mysqli($servername, $username, $password, $dbname, (int)$port);
 
                     if (!$conn->connect_error) {
                         // retrieving admin entry
