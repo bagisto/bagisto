@@ -39,8 +39,6 @@ return [
     | As a default locale, Translatable takes the locale of Laravel's
     | translator. If for some reason you want to override this,
     | you can specify what default should be used here.
-    | If you set a value here it will only use the current config value
-    | and never fallback to the translator one.
     |
     */
     'locale' => null,
@@ -56,7 +54,7 @@ return [
     | $useTranslationFallback when defined
     |
     */
-    'use_fallback' => false,
+    'use_fallback' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -81,18 +79,6 @@ return [
     |
     */
     'fallback_locale' => 'en',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Translation Model Namespace
-    |--------------------------------------------------------------------------
-    |
-    | Defines the default 'Translation' class namespace. For example, if
-    | you want to use App\Translations\CountryTranslation instead of App\CountryTranslation
-    | set this to 'App\Translations'.
-    |
-    */
-    'translation_model_namespace' => null,
 
     /*
     |--------------------------------------------------------------------------
