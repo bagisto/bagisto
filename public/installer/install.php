@@ -29,20 +29,29 @@
             }
         }
 
-        $databaseData['DB_HOST'] = $databaseData['DB_USERNAME'] = $databaseData['DB_PASSWORD'] =  $databaseData['DB_DATABASE'] = $databaseData['DB_CONNECTION'] = $databaseData['DB_PORT'] = '';
-
         $databaseData = array_combine($key, $value);
 
-        // getting database info
-        $servername = $databaseData['DB_HOST'];
-        $username   = $databaseData['DB_USERNAME'];
-        $password   = $databaseData['DB_PASSWORD'];
-        $dbname     = $databaseData['DB_DATABASE'];
-        $connection = $databaseData['DB_CONNECTION'];
-        $port       = $databaseData['DB_PORT'];
+        if (isset($databaseData['DB_HOST'])) {
+            $servername = $databaseData['DB_HOST'];
+        }
+        if (isset($databaseData['DB_USERNAME'])) {
+            $username   = $databaseData['DB_USERNAME'];
+        }
+        if (isset($databaseData['DB_PASSWORD'])) {
+            $password = $databaseData['DB_PASSWORD'];
+        }
+        if (isset($databaseData['DB_DATABASE'])) {
+            $dbname = $databaseData['DB_DATABASE'];
+        }
+        if (isset($databaseData['DB_CONNECTION'])) {
+            $connection = $databaseData['DB_CONNECTION'];
+        }
+        if (isset($databaseData['DB_PORT'])) {
+            $port = $databaseData['DB_PORT'];
+        }
 
-        if ($connection == 'mysql') {
-            @$conn = new mysqli($servername, $username, $password, $dbname, $port);
+        if (isset($connection) && $connection == 'mysql') {
+            @$conn = new mysqli($servername, $username, $password, $dbname, (int)$port);
 
             if (!$conn->connect_error) {
                 // retrieving admin entry
