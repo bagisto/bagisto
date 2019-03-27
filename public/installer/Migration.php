@@ -1,10 +1,4 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500">
-        <title>Bagisto Installer</title>
-        <link rel="icon" sizes="16x16" href="Images/favicon.ico">
-        <link rel="stylesheet" type="text/css" href="CSS/style.css">
-    </head>
 
     <style>
         .window {
@@ -59,8 +53,7 @@
     <body>
 
         <div class="container migration" id="migration">
-            <div class="initial-display" style="padding-top: 100px;">
-                <img class="logo" src="Images/logo.svg">
+            <div class="initial-display">
                 <p>Migration & Seed</p>
 
                 <div class="cp-spinner cp-round" id="loader">
@@ -115,10 +108,6 @@
                 </form>
 
             </div>
-            <div class="footer">
-                <img class="left-patern" src="Images/left-side.svg">
-                <img class="right-patern" src="Images/right-side.svg">
-            </div>
         </div>
 
     </body>
@@ -144,10 +133,12 @@
             $('#storage').hide();
             $('#composer').hide();
 
+            var composerTarget = window.location.href.concat('/Composer.php');
+
             // process form
             $.ajax({
                 type        : 'POST',
-                url         : 'Composer.php',
+                url         : composerTarget,
                 dataType    : 'json',
                 encode      : true
             })
@@ -163,10 +154,12 @@
                     if (data['install'] == 0) {
                         $('#composer-migrate').show();
 
+                        var migrationTarget = window.location.href.concat('/MigrationRun.php');
+
                         // post the request again
                         $.ajax({
                             type        : 'POST',
-                            url         : 'MigrationRun.php',
+                            url         : migrationTarget,
                             dataType    : 'json',
                             encode      : true
                         })
@@ -178,9 +171,11 @@
                                 if (data['results'] == 0) {
                                     $('#composer-seed').show();
 
+                                    var seederTarget = window.location.href.concat('/Seeder.php');
+
                                     $.ajax({
                                         type        : 'POST',
-                                        url         : 'Seeder.php',
+                                        url         :  seederTarget,
                                         dataType    : 'json',
                                         encode      : true
                                     })

@@ -931,7 +931,7 @@ section.slider-block {
                     width: 300px;
 
                     .btn.btn-sm {
-                        padding: 9px 30px;
+                        padding: 9px 25px;
                     }
                 }
 
@@ -1120,7 +1120,7 @@ section.slider-block {
             white-space: nowrap;
             border: 1px solid $border-color;
             background-color:white;
-            z-index: 1;
+            z-index: 10000;
             left: -99999em;
         }
 
@@ -1822,6 +1822,7 @@ section.product-detail {
 
             .details {
                 width: 50%;
+                overflow-wrap: break-word;
 
                 .product-price {
                     margin-bottom: 14px;
@@ -3482,7 +3483,6 @@ section.review {
         }
     }
 }
-
 
 /// rtl css start here
 .rtl {
