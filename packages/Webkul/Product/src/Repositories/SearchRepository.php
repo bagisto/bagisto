@@ -38,10 +38,10 @@ class SearchRepository extends Repository
 
     public function search($data) {
         $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-        $localeTerm = explode("?", $query);
+        $searchTerm = explode("?", $query);
         $serachQuery = '';
 
-        foreach($localeTerm as $term){
+        foreach($searchTerm as $term){
             if (strpos($term, 'term') !== false) {
                 $serachQuery = last(explode("=", $term));
             }
