@@ -29,7 +29,17 @@ class Locale
     */
     public function handle($request, Closure $next)
     {
-        if ($locale = $request->get('locale')) {
+        $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+        $localeTerm = explode("?", $query);
+        $localCode = '';
+
+        foreach($localeTerm as $term){
+            if (strpos($term, 'locale') !== false) {
+                $localCode = last(explode("=", $term));
+            }
+        }
+
+        if ($locale = $localCode) {
             if ($this->locale->findOneByField('code', $locale)) {
                 app()->setLocale($locale);
 
