@@ -189,11 +189,20 @@ class TaxRateController extends Controller
 
                 foreach ($excelData as $data) {
                     foreach ($data as $column => $uploadData) {
+
+                        if (!is_null($uploadData['zip_from']) && !is_null($uploadData['zip_to'])) {
+                            $uploadData['is_zip'] = 1;
+                        }
+
                         $validator = Validator::make($uploadData, [
                             'identifier' => 'required|string',
                             'state' => 'required|string',
                             'country' => 'required|string',
-                            'tax_rate' => 'required|numeric'
+                            'tax_rate' => 'required|numeric',
+                            'is_zip' => 'sometimes',
+                            'zip_code' => 'sometimes|required_without:is_zip',
+                            'zip_from' => 'nullable|required_with:is_zip',
+                            'zip_to' => 'nullable|required_with:is_zip,zip_from',
                         ]);
 
                         if ($validator->fails()) {
@@ -230,6 +239,12 @@ class TaxRateController extends Controller
                                 $errorMsg[$coulmn] = $fail->first('country');
                             } else if ($fail->first('state')) {
                                 $errorMsg[$coulmn] = $fail->first('state');
+                            } else if ($fail->first('zip_code')) {
+                                $errorMsg[$coulmn] = $fail->first('zip_code');
+                            } else if ($fail->first('zip_from')) {
+                                $errorMsg[$coulmn] = $fail->first('zip_from');
+                            } else if ($fail->first('zip_to')) {
+                                $errorMsg[$coulmn] = $fail->first('zip_to');
                             }
                         }
 
@@ -250,6 +265,11 @@ class TaxRateController extends Controller
 
                         foreach ($excelData as $data) {
                             foreach ($data as $column => $uploadData) {
+                                if (!is_null($uploadData['zip_from']) && !is_null($uploadData['zip_to'])) {
+                                    $uploadData['is_zip'] = 1;
+                                    $uploadData['zip_code'] = NULL;
+                                }
+
                                 if (isset($rateIdentifier)) {
                                     $id = array_search($uploadData['identifier'], $rateIdentifier);
                                     if ($id) {
