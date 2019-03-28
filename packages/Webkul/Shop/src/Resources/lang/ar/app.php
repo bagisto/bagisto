@@ -9,7 +9,7 @@ return [
         'wishlist' => 'قائمة الأماني',
         'orders' => 'الأوامر',
     ],
-    
+
     'common' => [
         'error' => 'حدث شيء خاطئ ، رجاء حاول ثانية لاحقا.'
     ],
@@ -385,7 +385,8 @@ return [
             ],
             'quantity-error' => 'الكمية المطلوبة غير متوفرة',
             'cart-subtotal' => 'المجموع الفرعي للعربات',
-            'cart-remove-action' => 'هل تريد حقا أن تفعل هذا ؟'
+            'cart-remove-action' => 'هل تريد حقا أن تفعل هذا ؟',
+            'partial-cart-update' => 'Only some of the product(s) were updated'
         ],
 
         'onepage' => [
