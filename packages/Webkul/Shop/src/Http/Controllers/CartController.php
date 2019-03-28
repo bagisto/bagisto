@@ -102,7 +102,7 @@ class CartController extends Controller
             if ($result) {
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
-                return redirect()->route($this->_config['redirect']);
+                return redirect()->back();
             } else {
                 session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
 
