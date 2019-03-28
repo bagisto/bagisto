@@ -24,9 +24,6 @@ $data    = array();
     if (empty($_POST['user_name']))
         $errors['user_name'] = 'User Name is required.';
 
-    if (empty($_POST['user_password']))
-        $errors['user_password'] = 'User Password is required.';
-
     if (empty($_POST['port_name']))
         $errors['port_name'] = 'Port Name is required.';
 
@@ -83,20 +80,16 @@ $data    = array();
         }
 
         // reading env content
-        $str= file_get_contents($envFile);
-
-        // converting env content to key/value pair
-        $data = explode(PHP_EOL,$str);
+        $data = file($envFile);
         $keyValueData = [];
 
         if ($data) {
             foreach ($data as $line) {
+                $line = preg_replace('/\s+/', '', $line);
                 $rowValues = explode('=', $line);
-                if (count($rowValues) === 2) {
+
+                if (strlen($line) !== 0) {
                     $keyValueData[$rowValues[0]] = $rowValues[1];
-                } else if (count($rowValues) > 2) {
-                    $eqPos = strpos($line, '=');
-                    $keyValueData[substr($line, 0, $eqPos)] = substr($line,$eqPos+1);
                 }
             }
         }

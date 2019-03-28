@@ -27,8 +27,8 @@
                     <i class="icon arrow-up-white-icon"></i>
                 </li>
 
-                <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']">
-                    <img :src="thumb.small_image_url"/>
+                <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']" id="thumb-frame">
+                    <img :src="thumb.small_image_url" :data-image="thumb.original_image_url" :data-zoom-image="thumb.original_image_url"/>
                 </li>
 
                 <li class="gallery-control bottom" @click="moveThumbs('bottom')" v-if="(thumbs.length > 4) && this.is_move.down">
@@ -141,6 +141,23 @@
             }
         });
 
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var image = $('#thumb-frame img');
+            var zoomImage = $('img#pro-img');
+
+            zoomImage.ezPlus();
+
+            image.mouseover( function(){
+                $('.zoomContainer').remove();
+                zoomImage.removeData('elevateZoom');
+                zoomImage.attr('src', $(this).data('image'));
+                zoomImage.data('zoom-image', $(this).data('zoom-image'));
+                zoomImage.ezPlus();
+            });
+        })
     </script>
 
 @endpush
