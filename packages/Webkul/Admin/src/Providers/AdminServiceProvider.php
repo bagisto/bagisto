@@ -69,61 +69,19 @@ class AdminServiceProvider extends ServiceProvider
 
             $allowedPermissions = auth()->guard('admin')->user()->role->permissions;
 
-            if ($allowedPermissions != 'all') {
-                $withoutDots = array();
+            $threeLevelGroups = array();
 
-                foreach ($allowedPermissions as $key => $allowedPermission) {
-                    if (!str_contains($allowedPermission, '.')) {
-                        array_push($withoutDots, $allowedPermission);
-                    }
+            //find three level groups
+            foreach ($allowedPermissions as $index => $allowedPermission) {
+                if (substr_count($allowedPermission, '.') == 2) {
+                    $culprit = $allowedPermissions[$index - 1];
+
+                    if (str_contains($allowedPermission, $culprit))
+                        array_push($threeLevelGroups, $allowedPermission);
                 }
-
-                $levelThreeKey = function() use($allowedPermissions, $withoutDots, $replaceRoutes) {
-                    $collectSimilar = array();
-
-                    foreach ($withoutDots as $key => $withoutDot) {
-                        $group = array();
-
-                        foreach ($allowedPermissions as $key1 => $allowedPermission) {
-                            //pluck a level 3 group & match the dots
-                            if (str_contains($allowedPermission, $withoutDot.'.')) {
-                                array_push($group, $allowedPermission);
-                            }
-                        }
-
-                        $collectSimilar[$key] = $group;
-                        unset($group);
-                    }
-
-                    foreach ($collectSimilar as $collected)  {
-                        if (count($collected) > 1) {
-                            $first = $collected[0];
-                            $second = $collected[1];
-
-                            //level three detection
-                            if (str_contains($second, $first.'.')) {
-                                //find the missing key
-                                foreach (config('menu.admin') as $key => $menuItem) {
-                                    if ($menuItem['key'] == $first && $second != bouncer()->hasPermission(config('menu.admin')[$key+1]['key']) && !bouncer()->hasPermission(config('menu.admin')[$key+1]['key'])) {
-                                        array_push($replaceRoutes, [$first, $second]);
-
-                                        // config('menu.admin')[$key]['route']->set(['route' => 'cjj']);
-
-                                        dd(config('menu.admin')[$key]['route']);
-
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    return $replaceRoutes;
-                };
-
-                $x = $levelThreeKey();
-                // dd($x);
             }
+
+            dd($threeLevelGroups);
 
             foreach (config('menu.admin') as $item) {
                 if (bouncer()->hasPermission($item['key'])) {
