@@ -1083,7 +1083,6 @@ section.slider-block {
 
         .nav li {
             position: relative;
-            height:45px;
         }
 
         .nav > li {
@@ -1101,6 +1100,9 @@ section.slider-block {
 
         .nav li li a {
             margin-top: 1px;
+            white-space: initial;
+            word-break: break-word;
+            width: 200px;
         }
 
         .nav li a:first-child:nth-last-child(2):before {
