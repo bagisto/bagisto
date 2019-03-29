@@ -30,7 +30,7 @@ class Currency
     public function handle($request, Closure $next)
     {
         $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-        $currencyTerm = explode("?", $query);
+        $currencyTerm = preg_split('/(\?|&)/', $query);
         $currencyCode = '';
 
         foreach($currencyTerm as $term){

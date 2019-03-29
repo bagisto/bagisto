@@ -17,6 +17,17 @@ class Currency extends Model implements CurrencyContract
     ];
 
     /**
+     * Set currency code in capital
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setCodeAttribute($code)
+    {
+        $this->attributes['code'] = strtoupper($code);
+    }
+
+    /**
      * Get the currency_exchange associated with the currency.
      */
     public function CurrencyExchangeRate()
