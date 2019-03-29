@@ -3655,7 +3655,7 @@ section.review {
     // product card
     .main-container-wrapper .product-card .sticker {
         left: auto;
-        right: 10px;
+        right: 20px;
     }
 
     .main-container-wrapper .product-card .cart-wish-wrap .addtocart {
@@ -4025,6 +4025,14 @@ section.review {
             right: 50%;
             margin-right: -24px;
             left: auto;
+        }
+    }
+
+    .product-list {
+        .product-card .product-information {
+            padding-left: 0px;
+            padding-right: 30px;
+            float: left;
         }
     }
 }
