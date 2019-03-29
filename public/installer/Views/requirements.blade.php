@@ -39,9 +39,23 @@
                         <?php endforeach; ?>
 
                     <?php endforeach; ?>
+
+                    <php class="check" style="margin-left: 25%">
+                        <?php if(($composerInstall['composer_install'] == 0) ? $src = $greenCheck : $src = $redCheck ): ?>
+                            <img src="<?php echo $src ?>">
+                            <span style="margin-left: 10px"><b>Composer</b></span>
+                        <?php endif; ?>
+                    </php>
+
+                    <div style="margin-left: 30%;">
+                        <?php if(!($composerInstall['composer_install'] == 0)): ?>
+                            <span style="margin-left: 10px; color: red;"><?php echo $composerInstall['composer'] ?></span>
+                        <?php endif; ?>
+                    </div>
+
                 </div>
 
-                <?php if(!isset($requirements['errors']) && $phpVersion['supported']): ?>
+                <?php if(!isset($requirements['errors']) && ($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
                     <div>
                         <button type="button" class="prepare-btn" id="requirement-check">Continue</button>
                     </div>
