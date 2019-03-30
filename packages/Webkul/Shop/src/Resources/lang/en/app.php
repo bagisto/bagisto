@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'security-warning' => 'Suspicious Activity Found!!!',
+
     'layouts' => [
         'my-account' => 'My Account',
         'profile' => 'Profile',

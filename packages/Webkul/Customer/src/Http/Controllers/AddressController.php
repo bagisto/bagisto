@@ -70,7 +70,7 @@ class AddressController extends Controller
     public function store()
     {
         request()->merge(['address1' => implode(PHP_EOL, array_filter(request()->input('address1')))]);
-        
+
         $data = collect(request()->input())->except('_token')->toArray();
 
         $this->validate(request(), [
@@ -107,9 +107,15 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
-        $address = $this->address->find($id);
+        $addresses = $this->customer->addresses;
 
-        return view($this->_config['view'], compact('address'));
+        foreach($addresses as $address) {
+            if($id == $address->id) {
+                return view($this->_config['view'], compact('address'));
+            }
+        }
+
+        return redirect()->route('customer.address.index');
     }
 
     /**
@@ -133,9 +139,19 @@ class AddressController extends Controller
 
         $data = collect(request()->input())->except('_token')->toArray();
 
-        $this->address->update($data, $id);
+        $addresses = $this->customer->addresses;
 
-        session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
+        foreach($addresses as $address) {
+            if($id == $address->id) {
+                session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
+
+                $this->address->update($data, $id);
+
+                return redirect()->route('customer.address.index');
+            }
+        }
+
+        session()->flash('success', trans('shop::app.security-warning'));
 
         return redirect()->route('customer.address.index');
     }
@@ -169,10 +185,16 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        $this->address->delete($id);
+        if (request()->is('customer/*') || request()->is('admin/*')) {
+            $this->address->delete($id);
 
-        session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
+            session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
 
-        return redirect()->back();
+            return redirect()->back();
+        } else {
+            session()->flash('warning', trans('shop::app.security-warning'));
+
+            return redirect()->route('customer.address.index');
+        }
     }
 }
