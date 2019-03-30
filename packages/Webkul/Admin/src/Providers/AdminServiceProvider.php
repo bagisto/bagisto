@@ -65,26 +65,32 @@ class AdminServiceProvider extends ServiceProvider
         view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $tree = Tree::create();
 
-            $replaceRoutes = array();
-
             $allowedPermissions = auth()->guard('admin')->user()->role->permissions;
 
-            $threeLevelGroups = array();
-
-            //find three level groups
-            foreach ($allowedPermissions as $index => $allowedPermission) {
-                if (substr_count($allowedPermission, '.') == 2) {
-                    $culprit = $allowedPermissions[$index - 1];
-
-                    if (str_contains($allowedPermission, $culprit))
-                        array_push($threeLevelGroups, $allowedPermission);
-                }
-            }
-
-            dd($threeLevelGroups);
-
-            foreach (config('menu.admin') as $item) {
+            foreach (config('menu.admin') as $index => $item) {
                 if (bouncer()->hasPermission($item['key'])) {
+                    if($index+1 < count(config('menu.admin'))) {
+                        $permission = config('menu.admin')[$index + 1];
+
+                        if (substr_count($permission['key'], '.') == 2) {
+                            if (substr_count($item['key'], '.') == 1) {
+
+                                foreach($allowedPermissions as $key => $value) {
+                                    if ($item['key'] == $value) {
+                                        // dd($item['key'], $value); --> setting.users, settings.users
+                                        $neededItem = $allowedPermissions[$key + 1];
+
+                                        foreach(config('menu.admin') as $key1 => $findMatced) {
+                                            if ($findMatced['key'] == $neededItem) {
+                                                $item['route'] = $findMatced['route'];
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     $tree->add($item, 'menu');
                 }
             }
