@@ -69,21 +69,18 @@ class AdminServiceProvider extends ServiceProvider
 
             foreach (config('menu.admin') as $index => $item) {
                 if (bouncer()->hasPermission($item['key'])) {
-                    if($index+1 < count(config('menu.admin'))) {
+                    if($index+1 < count(config('menu.admin')) && $allowedPermissions != 'all') {
                         $permission = config('menu.admin')[$index + 1];
 
-                        if (substr_count($permission['key'], '.') == 2) {
-                            if (substr_count($item['key'], '.') == 1) {
+                        if (substr_count($permission['key'], '.') == 2 && substr_count($item['key'], '.') == 1) {
+                            foreach($allowedPermissions as $key => $value) {
+                                if ($item['key'] == $value) {
+                                    // dd($item['key'], $value); --> setting.users, settings.users
+                                    $neededItem = $allowedPermissions[$key + 1];
 
-                                foreach($allowedPermissions as $key => $value) {
-                                    if ($item['key'] == $value) {
-                                        // dd($item['key'], $value); --> setting.users, settings.users
-                                        $neededItem = $allowedPermissions[$key + 1];
-
-                                        foreach(config('menu.admin') as $key1 => $findMatced) {
-                                            if ($findMatced['key'] == $neededItem) {
-                                                $item['route'] = $findMatced['route'];
-                                            }
+                                    foreach(config('menu.admin') as $key1 => $findMatced) {
+                                        if ($findMatced['key'] == $neededItem) {
+                                            $item['route'] = $findMatced['route'];
                                         }
                                     }
                                 }
