@@ -75,7 +75,6 @@ class AdminServiceProvider extends ServiceProvider
                         if (substr_count($permission['key'], '.') == 2 && substr_count($item['key'], '.') == 1) {
                             foreach($allowedPermissions as $key => $value) {
                                 if ($item['key'] == $value) {
-                                    // dd($item['key'], $value); --> setting.users, settings.users
                                     $neededItem = $allowedPermissions[$key + 1];
 
                                     foreach(config('menu.admin') as $key1 => $findMatced) {
