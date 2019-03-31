@@ -115,6 +115,8 @@ class AddressController extends Controller
             }
         }
 
+        session()->flash('warning', trans('shop::app.security-warning'));
+
         return redirect()->route('customer.address.index');
     }
 
@@ -151,7 +153,7 @@ class AddressController extends Controller
             }
         }
 
-        session()->flash('success', trans('shop::app.security-warning'));
+        session()->flash('warning', trans('shop::app.security-warning'));
 
         return redirect()->route('customer.address.index');
     }
@@ -185,16 +187,18 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        if (request()->is('customer/*') || request()->is('admin/*')) {
-            $this->address->delete($id);
+        $addresses = $this->customer->addresses;
 
-            session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
+        foreach($addresses as $address) {
+            if($id == $address->id) {
+                $this->address->delete($id);
 
-            return redirect()->back();
-        } else {
-            session()->flash('warning', trans('shop::app.security-warning'));
+                session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
 
-            return redirect()->route('customer.address.index');
+                return redirect()->route('customer.address.index');
+            }
         }
+
+        return redirect()->route('customer.address.index');
     }
 }

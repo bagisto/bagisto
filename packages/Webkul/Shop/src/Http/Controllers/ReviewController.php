@@ -84,6 +84,7 @@ class ReviewController extends Controller
 
         $data = request()->all();
 
+
         if (auth()->guard('customer')->user()) {
             $data['customer_id'] = auth()->guard('customer')->user()->id;
             $data['name'] = auth()->guard('customer')->user()->first_name .' ' . auth()->guard('customer')->user()->last_name;
@@ -96,7 +97,7 @@ class ReviewController extends Controller
 
         session()->flash('success', trans('shop::app.response.submit-success', ['name' => 'Product Review']));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->back();
     }
 
     /**

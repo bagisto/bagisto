@@ -21,6 +21,6 @@
     "vee-validate": "2.0.0-rc.26",
     "vue-flatpickr": "^2.3.0",
     "vue-slider-component": "^2.7.5",
-    "ez-plus":"^1.2.1"
+    "ez-plus": "^1.2.1"
   }
 }
