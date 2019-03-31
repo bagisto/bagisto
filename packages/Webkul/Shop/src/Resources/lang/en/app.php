@@ -216,8 +216,9 @@ return [
                 'edit' => [
                     'page-title' => 'Customer - Edit Address',
                     'title' => 'Edit Address',
+                    'street-address' => 'Street Address',
                     'submit' => 'Save Address',
-                    'success' => 'Address Updated Successfully.'
+                    'success' => 'Address Updated Successfully.',
                 ],
                 'delete' => [
                     'success' => 'Address Successfully Deleted',
