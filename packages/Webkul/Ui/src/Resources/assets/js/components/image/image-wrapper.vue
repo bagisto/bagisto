@@ -1,11 +1,12 @@
 <template>
     <div>
         <div class="image-wrapper">
-            <image-item 
-                v-for='(image, index) in items' 
-                :key='image.id' 
-                :image="image" 
-                :input-name="inputName" 
+            <image-item
+                v-for='(image, index) in items'
+                :key='image.id'
+                :image="image"
+                :input-name="inputName"
+                :required="required"
                 :remove-button-label="removeButtonLabel"
                 @onRemoveImage="removeImage($event)"
             ></image-item>
@@ -46,6 +47,12 @@
                 type: Boolean,
                 required: false,
                 default: true
+            },
+
+            required: {
+                type: Boolean,
+                required: false,
+                default: false
             }
         },
 
@@ -58,7 +65,7 @@
 
         created () {
             var this_this = this;
-            
+
             if(this.multiple) {
                 if(this.images.length) {
                     this.images.forEach(function(image) {

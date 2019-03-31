@@ -2,7 +2,7 @@
     <label class="image-item" :for="_uid" v-bind:class="{ 'has-image': imageData.length > 0 }">
         <input type="hidden" :name="finalInputName"/>
 
-        <input type="file" v-validate="'mimes:image/*'" accept="image/*" :name="finalInputName" ref="imageInput" :id="_uid" @change="addImageView($event)"/>
+        <input type="file" v-validate="'mimes:image/*'" accept="image/*" :name="finalInputName" ref="imageInput" :id="_uid" @change="addImageView($event)" :required="required ? true : false" />
 
         <img class="preview" :src="imageData" v-if="imageData.length > 0">
 
@@ -27,6 +27,12 @@
                 type: Object,
                 required: false,
                 default: null
+            },
+
+            required: {
+                type: Boolean,
+                required: false,
+                default: false
             }
         },
 
