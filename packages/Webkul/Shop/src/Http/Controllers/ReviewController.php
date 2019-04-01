@@ -84,7 +84,6 @@ class ReviewController extends Controller
 
         $data = request()->all();
 
-
         if (auth()->guard('customer')->user()) {
             $data['customer_id'] = auth()->guard('customer')->user()->id;
             $data['name'] = auth()->guard('customer')->user()->first_name .' ' . auth()->guard('customer')->user()->last_name;
@@ -97,11 +96,11 @@ class ReviewController extends Controller
 
         session()->flash('success', trans('shop::app.response.submit-success', ['name' => 'Product Review']));
 
-        return redirect()->back();
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
-     * Display reviews accroding to product.
+     * Display reviews of particular product.
      *
      * @param  string $slug
      * @return \Illuminate\Http\Response
@@ -114,21 +113,31 @@ class ReviewController extends Controller
     }
 
     /**
-     * Delete the review of the current product
+     * Customer delete a reviews from their account
      *
      * @return response
      */
     public function destroy($id)
     {
-        $this->productReview->delete($id);
+        $reviews = auth()->guard('customer')->user()->all_reviews;
 
-        session()->flash('success', trans('shop::app.response.delete-success', ['name' => 'Product Review']));
+        if ($reviews->count() > 0) {
+            foreach ($reviews as $review) {
+                if($review->id == $id) {
+                    $this->productReview->delete($id);
 
-        return redirect()->back();
+                    session()->flash('success', trans('shop::app.response.delete-success', ['name' => 'Product Review']));
+
+                    return redirect()->route($this->_config['redirect']);
+                }
+            }
+        }
+
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
-     * Function to delete all reviews
+     * Customer delete all reviews from their account
      *
      * @return Mixed Response & Boolean
     */
@@ -143,6 +152,6 @@ class ReviewController extends Controller
 
         session()->flash('success', trans('shop::app.reviews.delete-all'));
 
-        return redirect()->back();
+        return redirect()->route($this->_config['redirect']);
     }
 }

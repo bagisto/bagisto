@@ -11,8 +11,7 @@ use Cart;
 use Auth;
 
 /**
- * Customer controlller for the customer basically for the tasks of customers which will be done
- *  after customer authenticastion.
+ * Customer controller
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -64,6 +63,10 @@ class WishlistController extends Controller
      */
     public function add($itemId) {
         $product = $this->product->findOneByField('id', $itemId);
+
+        if(!$product->status) {
+            return redirect()->back();
+        }
 
         $data = [
             'channel_id' => core()->getCurrentChannel()->id,
