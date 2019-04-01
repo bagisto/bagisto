@@ -53,7 +53,6 @@ class ExportController extends Controller
         if($proceed) {
             $gridInstance = new $path;
 
-            $records = array();
             $records = $gridInstance->export();
 
             if(count($records) == 0) {
