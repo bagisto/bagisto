@@ -146,14 +146,14 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(variantInputName + '[price]') ? 'has-error' : '']">
-                    <input type="text" v-validate="'required'" v-model="variant.price" :name="[variantInputName + '[price]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.price') }}&quot;"/>
+                    <input type="number" v-validate="'required|min_value:0.0001'" v-model="variant.price" :name="[variantInputName + '[price]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.price') }}&quot;"/>
                     <span class="control-error" v-if="errors.has(variantInputName + '[price]')">@{{ errors.first(variantInputName + '[price]') }}</span>
                 </div>
             </td>
 
             <td>
                 <div class="control-group" :class="[errors.has(variantInputName + '[weight]') ? 'has-error' : '']">
-                    <input type="text" v-validate="'required'" v-model="variant.weight"  :name="[variantInputName + '[weight]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.weight') }}&quot;"/>
+                    <input type="number" v-validate="'required|min_value:0.0001'" v-model="variant.weight"  :name="[variantInputName + '[weight]']" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.weight') }}&quot;"/>
                     <span class="control-error" v-if="errors.has(variantInputName + '[weight]')">@{{ errors.first(variantInputName + '[weight]') }}</span>
                 </div>
             </td>

@@ -198,7 +198,7 @@ class TaxRateController extends Controller
                             'identifier' => 'required|string',
                             'state' => 'required|string',
                             'country' => 'required|string',
-                            'tax_rate' => 'required|numeric',
+                            'tax_rate' => 'required|numeric|min:0.0001',
                             'is_zip' => 'sometimes',
                             'zip_code' => 'sometimes|required_without:is_zip',
                             'zip_from' => 'nullable|required_with:is_zip',
