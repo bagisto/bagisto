@@ -202,7 +202,7 @@ return [
                     'page-title' => 'Cliente - Adicionar Endereço',
                     'title' => 'Novo Endereço',
                     'address1' => 'Endereço Linha 1',
-                    'address2' => 'Endereço Linha 2',
+                    'street-address' => 'Endereço',
                     'country' => 'País',
                     'state' => 'Estado',
                     'select-state' => 'Select a region, state or province',
