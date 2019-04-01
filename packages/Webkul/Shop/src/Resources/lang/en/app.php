@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'security-warning' => 'Suspicious Activity Found!!!',
+    'nothing-to-delete' => 'Nothing to delete',
+
     'layouts' => [
         'my-account' => 'My Account',
         'profile' => 'Profile',

@@ -191,13 +191,13 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
                 ])->name('customer.profile.index');
 
                 //Customer Profile Edit Form Show
-                Route::get('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@editIndex')->defaults('_config', [
+                Route::get('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@edit')->defaults('_config', [
                     'view' => 'shop::customers.account.profile.edit'
                 ])->name('customer.profile.edit');
 
                 //Customer Profile Edit Form Store
-                Route::post('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@edit')->defaults('_config', [
-                    'view' => 'shop::customers.account.profile.edit'
+                Route::post('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@update')->defaults('_config', [
+                    'redirect' => 'shop::customers.account.index'
                 ])->name('customer.profile.edit');
                 /*  Profile Routes Ends Here  */
 
@@ -242,17 +242,17 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
 
                 /* Orders route */
                 //Customer orders(listing)
-                Route::get('orders', 'Webkul\Shop\Http\Controllers\OrderController@index')->defaults('_config', [
+                Route::get('orders', 'Webkul\Customer\Http\Controllers\OrderController@index')->defaults('_config', [
                     'view' => 'shop::customers.account.orders.index'
                 ])->name('customer.orders.index');
 
                 //Customer orders view summary and status
-                Route::get('orders/view/{id}', 'Webkul\Shop\Http\Controllers\OrderController@view')->defaults('_config', [
+                Route::get('orders/view/{id}', 'Webkul\Customer\Http\Controllers\OrderController@view')->defaults('_config', [
                     'view' => 'shop::customers.account.orders.view'
                 ])->name('customer.orders.view');
 
                 //Prints invoice
-                Route::get('orders/print/{id}', 'Webkul\Shop\Http\Controllers\OrderController@print')->defaults('_config', [
+                Route::get('orders/print/{id}', 'Webkul\Customer\Http\Controllers\OrderController@print')->defaults('_config', [
                     'view' => 'shop::customers.account.orders.print'
                 ])->name('customer.orders.print');
 

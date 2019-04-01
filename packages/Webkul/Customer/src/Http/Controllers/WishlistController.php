@@ -11,8 +11,7 @@ use Cart;
 use Auth;
 
 /**
- * Customer controlller for the customer basically for the tasks of customers which will be done
- *  after customer authenticastion.
+ * Customer controller
  *
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -40,8 +39,6 @@ class WishlistController extends Controller
 
         $this->_config = request('_config');
 
-        $this->customer = $customer;
-
         $this->wishlist = $wishlist;
 
         $this->product = $product;
@@ -66,6 +63,10 @@ class WishlistController extends Controller
      */
     public function add($itemId) {
         $product = $this->product->findOneByField('id', $itemId);
+
+        if(!$product->status) {
+            return redirect()->back();
+        }
 
         $data = [
             'channel_id' => core()->getCurrentChannel()->id,
@@ -104,29 +105,22 @@ class WishlistController extends Controller
      * @param integer $itemId
      */
     public function remove($itemId) {
-        $found = $this->wishlist->find($itemId);
 
-        if(isset($found)) {
-            $found = true;
-        } else {
-            $found = false;
-        }
+        $customerWishlistItems = auth()->guard('customer')->user()->wishlist_items;
 
-        if($found) {
-            $result = $this->wishlist->deleteWhere(['customer_id' => auth()->guard('customer')->user()->id, 'channel_id' => core()->getCurrentChannel()->id, 'id' => $itemId]);
+        foreach($customerWishlistItems as $customerWishlistItem) {
+            if($itemId == $customerWishlistItem->id) {
+                $this->wishlist->delete($itemId);
 
-            if ($result) {
                 session()->flash('success', trans('customer::app.wishlist.removed'));
 
                 return redirect()->back();
-            } else {
-                session()->flash('error', trans('customer::app.wishlist.remove-fail'));
-
-                return redirect()->back();
             }
-        } else {
-            return redirect()->back();
         }
+
+        session()->flash('error', trans('customer::app.wishlist.remove-fail'));
+
+        return redirect()->back();
     }
 
     /**
@@ -136,6 +130,13 @@ class WishlistController extends Controller
      */
     public function move($itemId) {
         $wishlistItem = $this->wishlist->findOneByField('id', $itemId);
+
+        if(!isset($wishlistItem) || $wishlistItem->customer_id != auth()->guard('customer')->user()->id) {
+            session()->flash('warning', trans('shop::app.security-warning'));
+
+            return redirect()->route( 'customer.wishlist.index');
+        }
+
         $result = Cart::moveToCart($wishlistItem);
 
         if ($result == 1) {
@@ -151,7 +152,7 @@ class WishlistController extends Controller
                 return redirect()->back();
             }
         } else if ($result == 0) {
-            Session('error', trans('shop::app.wishlist.error'));
+            session()->flash('error', trans('shop::app.wishlist.error'));
 
             return redirect()->back();
         } else if ($result == -1) {

@@ -62,7 +62,7 @@
 
                     <div class="control-group" :class="[errors.has('tax_rate') ? 'has-error' : '']">
                         <label for="tax_rate" class="required">{{ __('admin::app.configuration.tax-rates.tax_rate') }}</label>
-                        <input v-validate="'required'" class="control" id="tax_rate" name="tax_rate" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.tax_rate') }}&quot;" value="{{ $taxRate->tax_rate }}" />
+                        <input v-validate="'required|min_value:0.0001'" class="control" id="tax_rate" name="tax_rate" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.tax_rate') }}&quot;" value="{{ $taxRate->tax_rate }}" />
                         <span class="control-error" v-if="errors.has('tax_rate')">@{{ errors.first('tax_rate') }}</span>
                     </div>
 

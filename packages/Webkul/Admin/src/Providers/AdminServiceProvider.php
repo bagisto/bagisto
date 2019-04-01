@@ -65,14 +65,33 @@ class AdminServiceProvider extends ServiceProvider
         view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $tree = Tree::create();
 
-            foreach (config('menu.admin') as $item) {
+            $allowedPermissions = auth()->guard('admin')->user()->role->permission_type;
+
+            foreach (config('menu.admin') as $index => $item) {
                 if (bouncer()->hasPermission($item['key'])) {
+                    if($index+1 < count(config('menu.admin')) && $allowedPermissions != 'all') {
+                        $permission = config('menu.admin')[$index + 1];
+
+                        if (substr_count($permission['key'], '.') == 2 && substr_count($item['key'], '.') == 1) {
+                            foreach($allowedPermissions as $key => $value) {
+                                if ($item['key'] == $value) {
+                                    $neededItem = $allowedPermissions[$key + 1];
+
+                                    foreach(config('menu.admin') as $key1 => $findMatced) {
+                                        if ($findMatced['key'] == $neededItem) {
+                                            $item['route'] = $findMatced['route'];
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     $tree->add($item, 'menu');
                 }
             }
 
             $tree->items = core()->sortItems($tree->items);
-
             $view->with('menu', $tree);
         });
 
