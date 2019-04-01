@@ -75,9 +75,6 @@
                         <div style="text-align: center;">
                             <span> Click the below button to run following : </span>
                         </div>
-                        <div class="message" style="margin-top: 20px">
-                            <span> Check Composer dependency </span>
-                        </div>
                         <div class="message">
                             <span>Database Migartion </span>
                         </div>

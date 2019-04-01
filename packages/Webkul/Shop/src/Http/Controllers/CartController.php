@@ -104,7 +104,7 @@ class CartController extends Controller
             if ($result) {
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
-                return redirect()->route($this->_config['redirect']);
+                return redirect()->back();
             } else {
                 session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
 
@@ -177,7 +177,9 @@ class CartController extends Controller
         Cart::collectTotals();
 
         if ($this->suppressFlash) {
-            session()->flash('success', trans('shop::app.checkout.cart.partial-cart-update'));
+            session()->forget('success');
+            session()->forget('warning');
+            session()->flash('info', trans('shop::app.checkout.cart.partial-cart-update'));
         }
 
         return redirect()->back();

@@ -107,8 +107,8 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('{{$locale}}[description]') ? 'has-error' : '']">
-                                <label for="description" class="required">{{ __('admin::app.catalog.categories.description') }}</label>
-                                <textarea v-validate="'required'" class="control" id="description" name="{{$locale}}[description]" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old($locale)['description'] ?: $category->translate($locale)['description'] }}</textarea>
+                                <label for="description">{{ __('admin::app.catalog.categories.description') }}</label>
+                                <textarea class="control" id="description" name="{{$locale}}[description]" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old($locale)['description'] ?: $category->translate($locale)['description'] }}</textarea>
                                 <span class="control-error" v-if="errors.has('{{$locale}}[description]')">@{{ errors.first('{!!$locale!!}[description]') }}</span>
                             </div>
 

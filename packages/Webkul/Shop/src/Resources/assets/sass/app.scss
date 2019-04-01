@@ -1083,7 +1083,6 @@ section.slider-block {
 
         .nav li {
             position: relative;
-            height:45px;
         }
 
         .nav > li {
@@ -1101,6 +1100,9 @@ section.slider-block {
 
         .nav li li a {
             margin-top: 1px;
+            white-space: initial;
+            word-break: break-word;
+            width: 200px;
         }
 
         .nav li a:first-child:nth-last-child(2):before {
@@ -3653,7 +3655,7 @@ section.review {
     // product card
     .main-container-wrapper .product-card .sticker {
         left: auto;
-        right: 10px;
+        right: 20px;
     }
 
     .main-container-wrapper .product-card .cart-wish-wrap .addtocart {
@@ -4023,6 +4025,14 @@ section.review {
             right: 50%;
             margin-right: -24px;
             left: auto;
+        }
+    }
+
+    .product-list {
+        .product-card .product-information {
+            padding-left: 0px;
+            padding-right: 30px;
+            float: left;
         }
     }
 }
