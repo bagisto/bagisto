@@ -12,7 +12,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
-                        
+
                         {{ __('admin::app.catalog.attributes.edit-title') }}
                     </h1>
                 </div>
@@ -118,22 +118,22 @@
 
                         <accordian :title="'{{ __('admin::app.catalog.attributes.options') }}'" :active="true" :id="'options'">
                             <div slot="body">
-                            
+
                                 {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.before', ['attribute' => $attribute]) !!}
 
                                 <option-wrapper></option-wrapper>
 
                                 {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.after', ['attribute' => $attribute]) !!}
-                                
+
                             </div>
                         </accordian>
-                        
+
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.after', ['attribute' => $attribute]) !!}
 
                     </div>
 
                     {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.before', ['attribute' => $attribute]) !!}
-                    
+
                     <accordian :title="'{{ __('admin::app.catalog.attributes.validations') }}'" :active="true">
                         <div slot="body">
 
@@ -207,7 +207,7 @@
                                 </select>
                                 <input type="hidden" name="value_per_locale" value="{{ $attribute->value_per_locale }}"/>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="value_per_channel">{{ __('admin::app.catalog.attributes.value_per_channel') }}</label>
                                 <select class="control" id="value_per_channel" name="value_per_channel" disabled>
@@ -220,7 +220,7 @@
                                 </select>
                                 <input type="hidden" name="value_per_channel" value="{{ $attribute->value_per_channel }}"/>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="is_filterable">{{ __('admin::app.catalog.attributes.is_filterable') }}</label>
                                 <select class="control" id="is_filterable" name="is_filterable">
@@ -232,7 +232,7 @@
                                     </option>
                                 </select>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="is_configurable">{{ __('admin::app.catalog.attributes.is_configurable') }}</label>
                                 <select class="control" id="is_configurable" name="is_configurable">
@@ -244,7 +244,7 @@
                                     </option>
                                 </select>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="is_visible_on_front">{{ __('admin::app.catalog.attributes.is_visible_on_front') }}</label>
                                 <select class="control" id="is_visible_on_front" name="is_visible_on_front">
@@ -302,11 +302,11 @@
                             <th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">{{ __('admin::app.catalog.attributes.swatch') }}</th>
 
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
-                            
+
                             @foreach (Webkul\Core\Models\Locale::all() as $locale)
 
                                 <th>{{ $locale->name . ' (' . $locale->code . ')' }}</th>
-                            
+
                             @endforeach
 
                             <th>{{ __('admin::app.catalog.attributes.position') }}</th>
@@ -314,7 +314,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                        
+
                     <tbody>
                         <tr v-for="(row, index) in optionRows">
                             <td v-if="show_swatch && swatch_type == 'color'">
@@ -366,7 +366,9 @@
     <script>
         Vue.component('option-wrapper', {
 
-            template: '#options-template', 
+            template: '#options-template',
+
+            inject: ['$validator'],
 
             data: () => ({
                 optionRowCount: 0,
