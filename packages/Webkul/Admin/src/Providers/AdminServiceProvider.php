@@ -65,11 +65,12 @@ class AdminServiceProvider extends ServiceProvider
         view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $tree = Tree::create();
 
-            $allowedPermissions = auth()->guard('admin')->user()->role->permission_type;
+            $permissionType = auth()->guard('admin')->user()->role->permission_type;
+            $allowedPermissions = auth()->guard('admin')->user()->role->permissions;
 
             foreach (config('menu.admin') as $index => $item) {
                 if (bouncer()->hasPermission($item['key'])) {
-                    if($index+1 < count(config('menu.admin')) && $allowedPermissions != 'all') {
+                    if($index+1 < count(config('menu.admin')) && $permissionType != 'all') {
                         $permission = config('menu.admin')[$index + 1];
 
                         if (substr_count($permission['key'], '.') == 2 && substr_count($item['key'], '.') == 1) {
