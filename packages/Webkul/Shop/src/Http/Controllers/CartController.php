@@ -8,6 +8,7 @@ use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Product\Helpers\View as ProductView;
 use Illuminate\Support\Facades\Event;
@@ -48,13 +49,21 @@ class CartController extends Controller
 
     protected $suppressFlash = false;
 
+    /**
+     * WishlistRepository Repository object
+     *
+     * @var array
+     */
+    protected $wishlist;
+
     public function __construct(
         CartRepository $cart,
         CartItemRepository $cartItem,
         CustomerRepository $customer,
         ProductRepository $product,
         ProductImage $productImage,
-        ProductView $productView
+        ProductView $productView,
+        WishlistRepository $wishlist
     )
     {
 
@@ -71,6 +80,8 @@ class CartController extends Controller
         $this->productImage = $productImage;
 
         $this->productView = $productView;
+
+        $this->wishlist = $wishlist;
 
         $this->_config = request('_config');
     }
@@ -103,6 +114,18 @@ class CartController extends Controller
 
             if ($result) {
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
+
+                if (auth()->guard('customer')->user()) {
+                    $customer = auth()->guard('customer')->user();
+
+                    if (count($customer->wishlist_items)) {
+                        foreach ($customer->wishlist_items as $wishlist) {
+                            if ($wishlist->product_id == $id) {
+                                $this->wishlist->delete($wishlist->id);
+                            }
+                        }
+                    }
+                }
 
                 return redirect()->back();
             } else {
