@@ -50,30 +50,31 @@ class ExportController extends Controller
             }
         }
 
-        if($proceed) {
-            $gridInstance = new $path;
+        if(! $proceed) {
+            return redirect()->back();
+        }
+        $gridInstance = new $path;
 
-            $records = array();
-            $records = $gridInstance->export();
+        $records = $gridInstance->export();
 
-            if(count($records) == 0) {
-                session()->flash('warning', trans('admin::app.export.no-records'));
+        if (count($records) == 0) {
+            session()->flash('warning', trans('admin::app.export.no-records'));
 
-                return redirect()->back();
-            }
+            return redirect()->back();
+        }
 
-            if ($format == 'csv') {
-                return Excel::download(new DataGridExport($records), last($gridName).'.csv');
-            } else if($format == 'xls') {
+        if ($format == 'csv') {
+            return Excel::download(new DataGridExport($records), last($gridName).'.csv');
+        } else {
+            if ($format == 'xls') {
                 return Excel::download(new DataGridExport($records), last($gridName).'.xlsx');
             } else {
                 session()->flash('warning', trans('admin::app.export.illegal-format'));
 
                 return redirect()->back();
             }
-        } else {
-            return redirect()->back();
         }
+
 
     }
 }
