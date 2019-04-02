@@ -156,12 +156,6 @@ class WishlistController extends Controller
 
             return redirect()->back();
         } else if ($result == -1) {
-            if (! $wishlistItem->delete()) {
-                session()->flash('error', trans('shop::app.wishlist.move-error'));
-
-                return redirect()->back();
-            }
-
             session()->flash('info', trans('shop::app.checkout.cart.add-config-warning'));
 
             return redirect()->route('shop.products.index', $wishlistItem->product->url_key);
