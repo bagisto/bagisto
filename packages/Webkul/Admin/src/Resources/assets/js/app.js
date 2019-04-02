@@ -8,39 +8,33 @@ Vue.use(VeeValidate);
 Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
-//
+
 window.onload = function () {
     moveDistance = 30;
     navbarLeftCssTop = parseInt($('.navbar-left').css("top"));
-    currentTop = parseInt(navbarLeftCssTop);
     windowHeight = $(window).height();
     menubarHeight = $('ul.menubar').height();
     documentHeight = $(document).height();
     differenceInHeight = menubarHeight - windowHeight;
     scrollTopWhenWindowLoaded = $(document).scrollTop();
 
-    $('.navbar-left').css('top',-scrollTopWhenWindowLoaded+60+'px');
+    $('.navbar-left').css('top', -scrollTopWhenWindowLoaded + 60 + 'px');
 
     $(document).ready(function() {
-        if(menubarHeight > documentHeight && menubarHeight > windowHeight) {
+        if (menubarHeight > documentHeight && menubarHeight > windowHeight) {
             $('.inner-section').css("position","fixed");
             $('.navbar-left').css("position","absolute");
-        }else {
-
-            if(scrollTopWhenWindowLoaded > differenceInHeight) {  //on load shows scrollbar at navbar-left top position
-                $('.navbar-left').css('top',-differenceInHeight+'px');
+        } else {
+            if (scrollTopWhenWindowLoaded > differenceInHeight) {
+                $('.navbar-left').css('top', -differenceInHeight + 'px');
             }
 
-            if(menubarHeight > windowHeight) {
-                $(document).scroll(function(){
+            if (menubarHeight > windowHeight) {
+                $(document).scroll(function() {
                     documentScrollWhenScrolled = $(document).scrollTop();
-                    // currentTop = currentTop - moveDistance;
-                    if(documentScrollWhenScrolled <= differenceInHeight + 70) {
-                        $('.navbar-left').css('top', -documentScrollWhenScrolled+60 +'px');
+                    if (documentScrollWhenScrolled <= differenceInHeight + 70) {
+                        $('.navbar-left').css('top', -documentScrollWhenScrolled + 60 + 'px');
                         scrollTopValueWhenNavBarFixed = $(document).scrollTop();
-                        console.log("scrollTopValueWhenNavBarFixed"+scrollTopValueWhenNavBarFixed);
-                    }else {
-
                     }
                 });
             }
