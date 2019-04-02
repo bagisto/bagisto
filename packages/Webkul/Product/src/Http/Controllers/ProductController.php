@@ -219,7 +219,11 @@ class ProductController extends Controller
         $productIds = explode(',', request()->input('indexes'));
 
         foreach ($productIds as $productId) {
-            $this->product->delete($productId);
+            $product = $this->product->find($productId);
+
+            if(isset($product)) {
+                $this->product->delete($productId);
+            }
         }
 
         session()->flash('success', trans('admin::app.catalog.products.mass-delete-success'));
