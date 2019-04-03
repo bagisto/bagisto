@@ -43,10 +43,10 @@ class InvoiceRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderRepository       $order
-     * @param  Webkul\Sales\Repositories\OrderItemRepository   $orderItem
-     * @param  Webkul\Sales\Repositories\InvoiceItemRepository $orderItem
-     * @return void
+     * @param \Webkul\Sales\Repositories\OrderRepository $order
+     * @param \Webkul\Sales\Repositories\OrderItemRepository $orderItem
+     * @param \Webkul\Sales\Repositories\InvoiceItemRepository $invoiceItem
+     * @param \Illuminate\Container\Container $app
      */
     public function __construct(
         Order $order,
