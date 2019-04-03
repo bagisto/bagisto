@@ -52,7 +52,6 @@ window.onload = function () {
                     }
                 });
             }
-
         }
     });
 };

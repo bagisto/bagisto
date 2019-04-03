@@ -58,7 +58,7 @@ return [
         'already' => 'Você já está inscrito em nossa lista de assinaturas',
         'unsubscribed' => 'Você não está inscrito em nossa lista de assinaturas',
         'already-unsub' => 'Você não está mais inscrito em nossa lista de assinaturas',
-        'not-subscribed' => 'Erro! Emai lnão pode ser enviado, por favor, tente novamente mais tarde'
+        'not-subscribed' => 'Erro! Email não pode ser enviado, por favor, tente novamente mais tarde'
     ],
 
     'search' => [
@@ -202,7 +202,7 @@ return [
                     'page-title' => 'Cliente - Adicionar Endereço',
                     'title' => 'Novo Endereço',
                     'address1' => 'Endereço Linha 1',
-                    'address2' => 'Endereço Linha 2',
+                    'street-address' => 'Endereço',
                     'country' => 'País',
                     'state' => 'Estado',
                     'select-state' => 'Select a region, state or province',
@@ -390,7 +390,8 @@ return [
             ],
             'quantity-error' => 'Quantidade solicitada não está disponível',
             'cart-subtotal' => 'Subtotal do carrinho',
-            'cart-remove-action' => 'Você realmente quer fazer isso ?'
+            'cart-remove-action' => 'Você realmente quer fazer isso ?',
+            'partial-cart-update' => 'Only some of the product(s) were updated'
         ],
 
         'onepage' => [

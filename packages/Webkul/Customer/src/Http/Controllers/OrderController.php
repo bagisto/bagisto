@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers;
+namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -67,9 +67,7 @@ class OrderController extends Controller
     */
     public function index()
     {
-        $orders = $this->order->findWhere([
-            'customer_id' => auth()->guard('customer')->user()->id
-        ]);
+        $orders = auth()->guard('customer')->user()->all_orders;
 
         return view($this->_config['view'], compact('orders'));
     }
@@ -82,9 +80,15 @@ class OrderController extends Controller
      */
     public function view($id)
     {
-        $order = $this->order->find($id);
+        $orders = auth()->guard('customer')->user()->all_orders;
 
-        return view($this->_config['view'], compact('order'));
+        if(isset($orders) && count($orders)) {
+            $order = $orders->first();
+
+            return view($this->_config['view'], compact('order'));
+        } else {
+            return redirect()->route( 'customer.orders.index');
+        }
     }
 
     /**

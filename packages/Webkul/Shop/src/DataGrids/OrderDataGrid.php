@@ -34,6 +34,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -42,6 +43,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'datetime',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -50,6 +52,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'price',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -74,7 +77,8 @@ class OrderDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-warning">Pending Payment</span>';
                 else if ($value->status == "fraud")
                     return '<span class="badge badge-md badge-danger">Fraud</span>';
-            }
+            },
+            'filterable' => true
         ]);
     }
 

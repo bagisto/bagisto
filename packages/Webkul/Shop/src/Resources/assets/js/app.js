@@ -3,6 +3,7 @@ window.Vue = require("vue");
 window.VeeValidate = require("vee-validate");
 window.axios = require("axios");
 require("./bootstrap");
+require("ez-plus/src/jquery.ez-plus.js");
 
 Vue.use(VeeValidate);
 Vue.prototype.$http = axios

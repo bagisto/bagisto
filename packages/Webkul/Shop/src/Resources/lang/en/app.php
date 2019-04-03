@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'security-warning' => 'Suspicious Activity Found!!!',
+    'nothing-to-delete' => 'Nothing to delete',
+
     'layouts' => [
         'my-account' => 'My Account',
         'profile' => 'Profile',
@@ -216,8 +219,9 @@ return [
                 'edit' => [
                     'page-title' => 'Customer - Edit Address',
                     'title' => 'Edit Address',
+                    'street-address' => 'Street Address',
                     'submit' => 'Save Address',
-                    'success' => 'Address Updated Successfully.'
+                    'success' => 'Address Updated Successfully.',
                 ],
                 'delete' => [
                     'success' => 'Address Successfully Deleted',
@@ -389,7 +393,8 @@ return [
             ],
             'quantity-error' => 'Requested Quantity Is Not Available',
             'cart-subtotal' => 'Cart Subtotal',
-            'cart-remove-action' => 'Do you really want to do this ?'
+            'cart-remove-action' => 'Do you really want to do this ?',
+            'partial-cart-update' => 'Only some of the product(s) were updated'
         ],
 
         'onepage' => [

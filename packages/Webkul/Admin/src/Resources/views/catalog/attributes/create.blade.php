@@ -12,7 +12,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
-                        
+
                         {{ __('admin::app.catalog.attributes.add-title') }}
                     </h1>
                 </div>
@@ -99,7 +99,7 @@
 
                         <accordian :title="'{{ __('admin::app.catalog.attributes.options') }}'" :active="true" :id="'options'">
                             <div slot="body">
-                                
+
                                 {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.options.controls.before') !!}
 
                                 <option-wrapper></option-wrapper>
@@ -119,7 +119,7 @@
                         <div slot="body">
 
                             {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.options.controls.before') !!}
-                            
+
                             <div class="control-group">
                                 <label for="is_required">{{ __('admin::app.catalog.attributes.is_required') }}</label>
                                 <select class="control" id="is_required" name="is_required">
@@ -246,7 +246,7 @@
                     <thead>
                         <tr>
                             <th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">{{ __('admin::app.catalog.attributes.swatch') }}</th>
-                            
+
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
 
                             @foreach (Webkul\Core\Models\Locale::all() as $locale)
@@ -317,21 +317,26 @@
                     $('#options').parent().removeClass('hide')
                 }
             })
+        });
 
-            var optionWrapper = Vue.component('option-wrapper', {
 
-                template: '#options-template',
+        Vue.component('option-wrapper', {
 
-                data: () => ({
-                    optionRowCount: 0,
-                    optionRows: [],
-                    show_swatch: false,
-                    swatch_type: ''
-                }),
+            template: '#options-template',
 
-                created () {
-                    var this_this = this;
+            inject: ['$validator'],
 
+            data: () => ({
+                optionRowCount: 0,
+                optionRows: [],
+                show_swatch: false,
+                swatch_type: ''
+            }),
+
+            created () {
+                var this_this = this;
+
+                $(document).ready(function () {
                     $('#type').on('change', function (e) {
                         if (['select'].indexOf($(e.target).val()) === -1) {
                             this_this.show_swatch = false;
@@ -339,46 +344,38 @@
                             this_this.show_swatch = true;
                         }
                     });
+                });
+            },
+
+            methods: {
+                addOptionRow () {
+                    var rowCount = this.optionRowCount++;
+                    var row = {'id': 'option_' + rowCount};
+
+                    @foreach (Webkul\Core\Models\Locale::all() as $locale)
+                        row['{{ $locale->code }}'] = '';
+                    @endforeach
+
+                    this.optionRows.push(row);
                 },
 
-                methods: {
-                    addOptionRow () {
-                        var rowCount = this.optionRowCount++;
-                        var row = {'id': 'option_' + rowCount};
+                removeRow (row) {
+                    var index = this.optionRows.indexOf(row)
+                    Vue.delete(this.optionRows, index);
+                },
 
-                        @foreach (Webkul\Core\Models\Locale::all() as $locale)
-                            row['{{ $locale->code }}'] = '';
-                        @endforeach
+                adminName (row) {
+                    return 'options[' + row.id + '][admin_name]';
+                },
 
-                        this.optionRows.push(row);
-                    },
+                localeInputName (row, locale) {
+                    return 'options[' + row.id + '][' + locale + '][label]';
+                },
 
-                    removeRow (row) {
-                        var index = this.optionRows.indexOf(row)
-                        Vue.delete(this.optionRows, index);
-                    },
-
-                    adminName (row) {
-                        return 'options[' + row.id + '][admin_name]';
-                    },
-
-                    localeInputName (row, locale) {
-                        return 'options[' + row.id + '][' + locale + '][label]';
-                    },
-
-                    sortOrderName (row) {
-                        return 'options[' + row.id + '][sort_order]';
-                    }
+                sortOrderName (row) {
+                    return 'options[' + row.id + '][sort_order]';
                 }
-            })
-
-            new Vue({
-                el: '#options',
-
-                components: {
-                    optionWrapper: optionWrapper
-                },
-            })
-        });
+            }
+        })
     </script>
 @endpush

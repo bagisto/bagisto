@@ -1,5 +1,7 @@
 <?php
 
+ini_set('max_execution_time', 300);
+
 // array to pass back data
 $data    = array();
 

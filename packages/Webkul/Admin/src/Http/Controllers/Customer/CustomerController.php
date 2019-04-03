@@ -45,13 +45,12 @@ class CustomerController extends Controller
      */
     protected $channel;
 
-     /**
+    /**
      * Create a new controller instance.
      *
-     * @param Webkul\Customer\Repositories\CustomerRepository as customer;
-     * @param Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
-     * @param Webkul\Core\Repositories\ChannelRepository as Channel;
-     * @return void
+     * @param \Webkul\Customer\Repositories\CustomerRepository $customer
+     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroup
+     * @param \Webkul\Core\Repositories\ChannelRepository $channel
      */
     public function __construct(Customer $customer, CustomerGroup $customerGroup, Channel $channel)
     {

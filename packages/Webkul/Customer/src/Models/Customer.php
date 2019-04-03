@@ -96,4 +96,11 @@ class Customer extends Authenticatable implements CustomerContract
     public function all_reviews() {
         return $this->hasMany(ProductReviewProxy::modelClass(), 'customer_id');
     }
+
+    /**
+     * get all orders of a customer
+     */
+    public function all_orders() {
+        return $this->hasMany(OrderProxy::modelClass(), 'customer_id');
+    }
 }

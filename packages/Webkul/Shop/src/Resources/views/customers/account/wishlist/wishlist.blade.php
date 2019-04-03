@@ -31,18 +31,16 @@
                         @php
                             $image = $productImageHelper->getProductBaseImage($item->product);
                         @endphp
-                            <img class="media" src="{{ $image['small_image_url'] }}" />
-                        {{-- <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}" title="{{ $item->product->name }}">
 
-                        </a> --}}
+                        <img class="media" src="{{ $image['small_image_url'] }}" />
+
                         <div class="info">
                             <div class="product-name">
                                 {{$item->product->name}}
-                                {{-- <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}" title="{{ $item->product->name }}">
-
-                                </a> --}}
                             </div>
+
                             @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
+
                             <span class="stars" style="display: inline">
                                 @for($i=1;$i<=$reviewHelper->getAverageRating($item->product);$i++)
                                     <span class="icon star-icon"></span>
@@ -59,6 +57,7 @@
                 </div>
                 <div class="horizontal-rule mb-10 mt-10"></div>
             @endforeach
+
             @else
                 <div class="empty">
                     {{ __('customer::app.wishlist.empty') }}

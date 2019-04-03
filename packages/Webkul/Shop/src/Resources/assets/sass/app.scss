@@ -443,6 +443,8 @@ input {
             max-width: 280px;
             margin-bottom: 10px;
             background: $background-color;
+            min-height: 300px;
+            min-width: 250px;
 
             img {
                 display: block;
@@ -931,7 +933,7 @@ section.slider-block {
                     width: 300px;
 
                     .btn.btn-sm {
-                        padding: 9px 30px;
+                        padding: 9px 25px;
                     }
                 }
 
@@ -1067,7 +1069,7 @@ section.slider-block {
             color: $font-color;
             text-decoration: none;
             padding: 0.8em 0.3em 0.8em 0.5em;
-            text-transform: uppercase;
+            text-transform: capitalize;
             letter-spacing: -0.38px;
             position: relative;
         }
@@ -1083,7 +1085,6 @@ section.slider-block {
 
         .nav li {
             position: relative;
-            height:45px;
         }
 
         .nav > li {
@@ -1101,6 +1102,9 @@ section.slider-block {
 
         .nav li li a {
             margin-top: 1px;
+            white-space: initial;
+            word-break: break-word;
+            width: 200px;
         }
 
         .nav li a:first-child:nth-last-child(2):before {
@@ -1120,7 +1124,7 @@ section.slider-block {
             white-space: nowrap;
             border: 1px solid $border-color;
             background-color:white;
-            z-index: 1;
+            z-index: 10000;
             left: -99999em;
         }
 
@@ -1808,7 +1812,7 @@ section.product-detail {
                     .addtocart {
                         width: 49%;
                         background: black;
-                        white-space: nowrap;
+                        white-space: normal;
                         text-transform: uppercase;
                     }
 
@@ -1822,6 +1826,7 @@ section.product-detail {
 
             .details {
                 width: 50%;
+                overflow-wrap: break-word;
 
                 .product-price {
                     margin-bottom: 14px;
@@ -3483,7 +3488,6 @@ section.review {
     }
 }
 
-
 /// rtl css start here
 .rtl {
     direction: rtl;
@@ -3653,7 +3657,7 @@ section.review {
     // product card
     .main-container-wrapper .product-card .sticker {
         left: auto;
-        right: 10px;
+        right: 20px;
     }
 
     .main-container-wrapper .product-card .cart-wish-wrap .addtocart {
@@ -4023,6 +4027,14 @@ section.review {
             right: 50%;
             margin-right: -24px;
             left: auto;
+        }
+    }
+
+    .product-list {
+        .product-card .product-information {
+            padding-left: 0px;
+            padding-right: 30px;
+            float: left;
         }
     }
 }

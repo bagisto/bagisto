@@ -626,7 +626,7 @@ return [
         ],
 
         'sliders' => [
-            'title' => 'Sliders',
+            'title' => 'Title',
             'add-title' => 'Create Slider',
             'edit-title' => 'Edit Slider',
             'save-btn-title' => 'Save Slider',
