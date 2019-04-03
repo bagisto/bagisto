@@ -2,6 +2,15 @@
     <div class="footer-content">
         <div class="footer-list-container">
 
+            <?php
+                $categories = [];
+
+                foreach (app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id) as $category){
+                    if ($category->slug)
+                        array_push($categories, $category);
+                }
+            ?>
+
             @if (count($categories))
                 <div class="list-container">
                     <span class="list-heading">Categories</span>
