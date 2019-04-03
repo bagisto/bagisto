@@ -30,6 +30,8 @@ window.onload = function () {
         if (menubarHeight > documentHeight && menubarHeight > windowHeight) {
             $('.inner-section').css("position", "fixed");
             $('.navbar-left').css("position", "absolute");
+        } else if (menubarHeight < windowHeight) {
+            $('.navbar-left').css("position", "fixed");
         } else {
             if (scrollTopWhenWindowLoaded > differenceInHeight) {
                 $('.navbar-left').css('top', -differenceInHeight + 'px');
@@ -43,7 +45,7 @@ window.onload = function () {
                         scrollTopValueWhenNavBarFixed = $(document).scrollTop();
                     }
                 });
-            } else if(menubarHeight < windowHeight) {
+            } else if (menubarHeight < windowHeight) {
                 $(document).scroll(function() {
                     documentScrollWhenScrolled = $(document).scrollTop();
                     if (documentScrollWhenScrolled <= differenceInHeight + 70) {
