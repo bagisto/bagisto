@@ -443,6 +443,8 @@ input {
             max-width: 280px;
             margin-bottom: 10px;
             background: $background-color;
+            min-height: 300px;
+            min-width: 250px;
 
             img {
                 display: block;
