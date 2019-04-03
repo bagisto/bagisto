@@ -399,14 +399,13 @@ body {
         grid-row-gap: 15px;
 
         .dashboard-card {
-            height: 100px;
+            min-height: 100px;
             background: #FFFFFF;
             border: 1px solid #E7E7E7;
             box-shadow: 0 5px 10px 2px rgba(0,0,0,0.08);
             border-radius: 5px;
             position: relative;
             padding: 15px;
-
 
             .title {
                 font-size: 14px;
@@ -418,12 +417,16 @@ body {
                 padding-top: 3px;
                 font-size: 32px;
                 color: #0041FF;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
 
                 .progress {
                     font-size: 14px;
                     color: #8E8E8E;
                     float: right;
                     margin-top: 9px;
+                    margin-left: auto;
 
                     .icon {
                         vertical-align: middle;
