@@ -37,42 +37,44 @@ class OrderItemInventoryRepository extends Repository
 
         $product = $orderItem->type == 'configurable' ? $orderItem->child->product : $orderItem->product;
 
-        if ($product) {
-            $inventories = $product->inventory_sources()->orderBy('priority', 'asc')->get();
-
-            foreach ($inventories as $inventorySource) {
-                if (! $orderedQuantity)
-                    break;
-
-                $sourceQuantity = $inventorySource->pivot->qty;
-
-                if (! $inventorySource->status || !$sourceQuantity)
-                    continue;
-
-                if ($sourceQuantity >= $orderedQuantity) {
-                    $orderItemQuantity = $orderedQuantity;
-
-                    $sourceQuantity -= $orderItemQuantity;
-
-                    $orderedQuantity = 0;
-                } else {
-                    $orderItemQuantity = $sourceQuantity;
-
-                    $sourceQuantity = 0;
-
-                    $orderedQuantity -= $orderItemQuantity;
-                }
-
-                $this->model->create([
-                        'qty' => $orderItemQuantity,
-                        'order_item_id' => $orderItem->id,
-                        'inventory_source_id' => $inventorySource->id,
-                    ]);
-
-                $inventorySource->pivot->update([
-                        'qty' => $sourceQuantity
-                    ]);
-            }
+        if (!$product) {
+            return ;
         }
+        $inventories = $product->inventory_sources()->orderBy('priority', 'asc')->get();
+
+        foreach ($inventories as $inventorySource) {
+            if (! $orderedQuantity)
+                break;
+
+            $sourceQuantity = $inventorySource->pivot->qty;
+
+            if (! $inventorySource->status || !$sourceQuantity)
+                continue;
+
+            if ($sourceQuantity >= $orderedQuantity) {
+                $orderItemQuantity = $orderedQuantity;
+
+                $sourceQuantity -= $orderItemQuantity;
+
+                $orderedQuantity = 0;
+            } else {
+                $orderItemQuantity = $sourceQuantity;
+
+                $sourceQuantity = 0;
+
+                $orderedQuantity -= $orderItemQuantity;
+            }
+
+            $this->model->create([
+                    'qty' => $orderItemQuantity,
+                    'order_item_id' => $orderItem->id,
+                    'inventory_source_id' => $inventorySource->id,
+                ]);
+
+            $inventorySource->pivot->update([
+                    'qty' => $sourceQuantity
+                ]);
+        }
+
     }
 }

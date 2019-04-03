@@ -89,9 +89,9 @@ class OrderItemRepository extends Repository
 
         $product = $orderItem->type == 'configurable' ? $orderItem->child->product : $orderItem->product;
 
-        if (! $product) {
+        if (! $product)
             return;
-        }
+
 
         $orderedInventory = $product->ordered_inventories()
             ->where('channel_id', $orderItem->order->channel->id)
