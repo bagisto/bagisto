@@ -4,6 +4,7 @@ namespace Webkul\Sales\Repositories;
 
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Contracts\OrderItem;
 
 /**
  * OrderItem Reposotory
@@ -21,7 +22,7 @@ class OrderItemRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Sales\Contracts\OrderItem';
+        return OrderItem::class;
     }
 
     /**

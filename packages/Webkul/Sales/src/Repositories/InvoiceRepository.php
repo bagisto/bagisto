@@ -6,6 +6,7 @@ use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Contracts\Invoice;
 use Webkul\Sales\Repositories\OrderRepository as Order;
 use Webkul\Sales\Repositories\OrderItemRepository as OrderItem;
 use Webkul\Sales\Repositories\InvoiceItemRepository as InvoiceItem;
@@ -72,7 +73,7 @@ class InvoiceRepository extends Repository
 
     function model()
     {
-        return 'Webkul\Sales\Contracts\Invoice';
+        return Invoice::class;
     }
 
     /**
