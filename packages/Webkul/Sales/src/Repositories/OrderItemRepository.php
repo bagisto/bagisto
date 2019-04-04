@@ -125,14 +125,15 @@ class OrderItemRepository extends Repository
                 ->where('channel_id', $orderItem->order->channel->id)
                 ->first();
 
-        if ($orderedInventory) {
-            if (($qty = $orderedInventory->qty - $orderItem->qty_to_cancel) < 0) {
-                $qty = 0;
-            }
-
-            $orderedInventory->update([
-                    'qty' => $qty
-                ]);
+        if (! $orderedInventory)
+            return ;
+        
+        if (($qty = $orderedInventory->qty - $orderItem->qty_to_cancel) < 0) {
+            $qty = 0;
         }
+
+        $orderedInventory->update([
+                'qty' => $qty
+            ]);
     }
 }
