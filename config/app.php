@@ -131,20 +131,14 @@ return [
     'cipher' => 'AES-256-CBC',
 
     /*
-    |--------------------------------------------------------------------------
-    | Autoloaded Service Providers
-    |--------------------------------------------------------------------------
-    |
-    | The service providers listed here will be automatically loaded on the
-    | request to your application. Feel free to add your own services to
-    | this array to grant expanded functionality to your applications.
-    |
-    */
-
-    /*
         Code Editor
     */
     'editor' =>'vscode',
+
+    /*
+        Application Version
+    */
+    'version' => env('APP_VERSION', '0.1.5'),
 
     /**
      * Blacklisting attributes while debugging
@@ -164,6 +158,17 @@ return [
             'password'
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Autoloaded Service Providers
+    |--------------------------------------------------------------------------
+    |
+    | The service providers listed here will be automatically loaded on the
+    | request to your application. Feel free to add your own services to
+    | this array to grant expanded functionality to your applications.
+    |
+    */
 
     'providers' => [
 
