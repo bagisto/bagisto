@@ -65,15 +65,14 @@ class ExportController extends Controller
 
         if ($format == 'csv') {
             return Excel::download(new DataGridExport($records), last($gridName).'.csv');
-        } else {
-            if ($format == 'xls') {
-                return Excel::download(new DataGridExport($records), last($gridName).'.xlsx');
-            } else {
-                session()->flash('warning', trans('admin::app.export.illegal-format'));
-
-                return redirect()->back();
-            }
         }
+        if ($format == 'xls') {
+            return Excel::download(new DataGridExport($records), last($gridName).'.xlsx');
+        }
+        session()->flash('warning', trans('admin::app.export.illegal-format'));
+
+        return redirect()->back();
+
 
 
     }

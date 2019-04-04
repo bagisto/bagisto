@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Repositories\OrderItemRepository;
 
 /**
@@ -49,7 +50,7 @@ class OrderRepository extends Repository
 
     function model()
     {
-        return 'Webkul\Sales\Contracts\Order';
+        return Order::class;
     }
 
     /**

@@ -9,7 +9,6 @@ use Illuminate\Pagination\Paginator;
 use Webkul\Shop\Http\Middleware\Locale;
 use Webkul\Shop\Http\Middleware\Theme;
 use Webkul\Shop\Http\Middleware\Currency;
-use Webkul\Shop\Providers\ComposerServiceProvider;
 use Webkul\Core\Tree;
 
 /**
@@ -40,8 +39,6 @@ class ShopServiceProvider extends ServiceProvider
         $router->aliasMiddleware('locale', Locale::class);
         $router->aliasMiddleware('theme', Theme::class);
         $router->aliasMiddleware('currency', Currency::class);
-
-        $this->app->register(ComposerServiceProvider::class);
 
         $this->composeView();
 

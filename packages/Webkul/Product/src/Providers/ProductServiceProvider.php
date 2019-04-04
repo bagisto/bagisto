@@ -23,6 +23,10 @@ class ProductServiceProvider extends ServiceProvider
         $this->app->register(ModuleServiceProvider::class);
 
         $this->composeView();
+
+        $this->publishes([
+            dirname(__DIR__) . '/Config/imagecache.php' => config_path('imagecache.php'),
+        ]);
     }
 
     /**

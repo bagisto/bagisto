@@ -109,13 +109,11 @@ class AddressController extends Controller
     {
         $addresses = $this->customer->addresses;
 
-        foreach($addresses as $address) {
-            if($id == $address->id) {
+        foreach ($addresses as $address) {
+            if ($id == $address->id) {
                 return view($this->_config['view'], compact('address'));
             }
         }
-
-        session()->flash('warning', trans('shop::app.security-warning'));
 
         return redirect()->route('customer.address.index');
     }

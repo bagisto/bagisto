@@ -5,6 +5,7 @@ namespace Webkul\Sales\Repositories;
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Facades\Event;
+use Webkul\Sales\Contracts\ShipmentItem;
 
 /**
  * ShipmentItem Reposotory
@@ -21,7 +22,7 @@ class ShipmentItemRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Sales\Contracts\ShipmentItem';
+        return ShipmentItem::class;
     }
 
     /**
