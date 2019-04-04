@@ -37,6 +37,6 @@ class BagistoVersion extends Command
      */
     public function handle()
     {
-        $this->comment('v'.config('app.version'));
+        $this->comment('v' . config('app.version'));
     }
 }
