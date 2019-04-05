@@ -493,7 +493,7 @@ class ProductRepository extends Repository
                                 if ($attribute->type != 'price') {
                                     $query2 = $query2->where(function($query3) use($column, $queryParams) {
                                         foreach ($queryParams as $filterValue) {
-                                            $query3 = $query3->orWhere($column, $filterValue);
+                                            $query3 = $query3->orwhereRaw("find_in_set($filterValue, $column)");
                                         }
                                     });
                                 } else {

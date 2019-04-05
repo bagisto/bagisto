@@ -851,7 +851,11 @@ return [
             'cash-on-delivery' => 'Cash On Delivery',
             'money-transfer' => 'Money Transfer',
             'paypal-standard' => 'Paypal Standard',
-            'business-account' => 'Business Account'
+            'business-account' => 'Business Account',
+            'newsletter' => 'NewsLetter Subscription',
+            'newsletter-subscription' => 'Allow NewsLetter Subscription',
+            'email' => 'Email Verification',
+            'email-verification' => 'Allow Email Verification'
         ]
     ]
 ];
