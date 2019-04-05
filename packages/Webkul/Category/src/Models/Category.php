@@ -15,6 +15,8 @@ class Category extends TranslatableModel implements CategoryContract
 
     protected $fillable = ['position', 'status', 'display_mode', 'parent_id'];
 
+    protected $with = ['translations'];
+
     /**
      * Get image url for the category image.
      */
