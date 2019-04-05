@@ -41,5 +41,27 @@ return [
                 'channel_based' => true
             ]
         ]
+    ], [
+        'key' => 'customer.settings.newsletter',
+        'name' => 'admin::app.admin.system.newsletter',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'subscription',
+                'title' => 'admin::app.admin.system.newsletter-subscription',
+                'type' => 'boolean'
+            ]
+        ],
+    ], [
+        'key' => 'customer.settings.email',
+        'name' => 'admin::app.admin.system.email',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'verification',
+                'title' => 'admin::app.admin.system.email-verification',
+                'type' => 'boolean'
+            ]
+        ],
     ]
 ];
