@@ -72,6 +72,7 @@ class AdminServiceProvider extends ServiceProvider
                 if (! bouncer()->hasPermission($item['key'])) {
                     continue;
                 }
+
                 if ($index + 1 < count(config('menu.admin')) && $permissionType != 'all') {
                     $permission = config('menu.admin')[$index + 1];
 
