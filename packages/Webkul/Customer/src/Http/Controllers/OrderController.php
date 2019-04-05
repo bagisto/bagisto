@@ -82,13 +82,15 @@ class OrderController extends Controller
     {
         $orders = auth()->guard('customer')->user()->all_orders;
 
-        if(isset($orders) && count($orders)) {
-            $order = $orders->first();
-
-            return view($this->_config['view'], compact('order'));
-        } else {
-            return redirect()->route( 'customer.orders.index');
+        if (isset($orders) && count($orders)) {
+            foreach ($orders as $order) {
+                if ($order->id  == $id) {
+                    return view($this->_config['view'], compact('order'));
+                }
+            }
         }
+
+        return redirect()->route( 'customer.orders.index');
     }
 
     /**
