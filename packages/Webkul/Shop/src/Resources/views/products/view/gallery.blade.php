@@ -42,11 +42,13 @@
 
                 {{-- Uncomment the line below for activating share links --}}
                 {{-- @include('shop::products.sharelinks') --}}
+
                 @auth('customer')
                     <a class="add-to-wishlist" href="{{ route('customer.wishlist.add', $product->id) }}">
                     </a>
                 @endauth
             </div>
+
         </div>
     </script>
 
@@ -156,6 +158,17 @@
                 zoomImage.attr('src', $(this).data('image'));
                 zoomImage.data('zoom-image', $(this).data('zoom-image'));
                 zoomImage.ezPlus();
+            });
+
+            $(document).mousemove(function(event) {
+                if ( (event.pageX - $('.product-hero-image').offset().left > 440 ) && (event.pageX - $('.product-hero-image').offset().left < 465) && (event.pageY - $('.product-hero-image').offset().top > 16) && (event.pageY - $('.product-hero-image').offset().top < 38))  {
+
+                    $('.zoomContainer').attr('style', 'z-index: -1 !important');
+
+                } else {
+                    $('.zoomContainer').css({"position": "absolute", "top": "143px", "left"
+                    : "249px", "height": "480px", "width": "480px", "z-index": "999" });
+                }
             });
         })
     </script>
