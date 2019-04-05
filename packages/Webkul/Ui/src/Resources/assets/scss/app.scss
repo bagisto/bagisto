@@ -41,7 +41,22 @@ h1 {
 }
 
 h2 {
-    font-size: 18px;
+    font-size: 24px;
+    color: $font-color;
+}
+
+h3 {
+    font-size: 20px;
+    color: $font-color;
+}
+
+h4 {
+    font-size: 16px;
+    color: $font-color;
+}
+
+h5 {
+    font-size: 12px;
     color: $font-color;
 }
 
