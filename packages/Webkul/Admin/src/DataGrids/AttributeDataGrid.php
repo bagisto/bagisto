@@ -128,12 +128,14 @@ class AttributeDataGrid extends DataGrid
     {
         $this->addAction([
             'type' => 'Edit',
+            'method' => strtoupper('get'), // use get request for only redirect purposes
             'route' => 'admin.catalog.attributes.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
+            'method' => strtoupper('delete'), //upper case string
             'route' => 'admin.catalog.attributes.delete',
             'icon' => 'icon trash-icon'
         ]);

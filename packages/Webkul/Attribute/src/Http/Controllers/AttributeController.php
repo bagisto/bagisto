@@ -129,6 +129,8 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
+        dd(request()->all());
+
         $attribute = $this->attribute->findOrFail($id);
 
         if(!$attribute->is_user_defined) {

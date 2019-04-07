@@ -278,7 +278,7 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.attributes.index'
                 ])->name('admin.catalog.attributes.update');
 
-                Route::get('/attributes/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@destroy')->name('admin.catalog.attributes.delete');
+                Route::post('/attributes/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@destroy')->name('admin.catalog.attributes.delete');
 
                 Route::post('/attributes/massdelete', 'Webkul\Attribute\Http\Controllers\AttributeController@massDestroy')->name('admin.catalog.attributes.massdelete');
 

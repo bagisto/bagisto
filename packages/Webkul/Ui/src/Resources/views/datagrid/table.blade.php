@@ -615,18 +615,11 @@
 
                             label = 'cannotfindthislabel';
 
-                            // for(colIndex in this.columns) {
-                            //     if (this.columns[colIndex].alias == this.columnOrAlias) {
-                            //         label = this.columns[colIndex].label;
-                            //     }
-                            // }
-
                             obj.column = col;
                             obj.cond = cond;
                             obj.val = val;
 
                             if(col == "sort") {
-                                // console.log('sort', obj.cond);
                                 label = '';
 
                                 for(colIndex in this.columns) {
@@ -705,6 +698,14 @@
                                 }
                             }
                         }
+                    },
+
+                    doAction(e) {
+                        var element = e.currentTarget;
+
+                        axios.post(element.getAttribute('data-action'), { '_method': element.getAttribute('data-method'), '_token': data-token }).then(response => (this.info = response));
+
+                        e.preventDefault();
                     },
 
                     removeMassActions() {

@@ -95,6 +95,7 @@ class AdminServiceProvider extends ServiceProvider
             }
 
             $tree->items = core()->sortItems($tree->items);
+
             $view->with('menu', $tree);
         });
 

@@ -42,8 +42,14 @@
                     <td class="actions" style="width: 100px;" data-value=" {{ __('ui::app.datagrid.actions') }}">
                         <div>
                             @foreach ($actions as $action)
-                                <a href="{{ route($action['route'], $record->{$index}) }}">
-                                    <span class="{{ $action['icon'] }}" @if(strtolower($action['type']) == "delete") onclick="return confirm('{{ __('ui::app.datagrid.click_on_action') }}')" @endif></span>
+                                <a
+                                @if($action['method'] != 'GET')
+                                    v-on:click="doAction($event)"
+                                @endif
+                                data-method="{{ $action['method'] }}"
+                                data-action="{{ route($action['route'], $record->{$index}) }}"
+                                data-token="{{ csrf_token() }}">
+                                    <span class="{{ $action['icon'] }}"></span>
                                 </a>
                             @endforeach
                         </div>
