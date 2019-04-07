@@ -138,6 +138,16 @@ abstract class DataGrid
     {
         $parsedUrl = $this->parseUrl();
 
+        foreach ($parsedUrl as $key => $value) {
+            if ( $key == 'locale') {
+                if ( ! is_array($value)) {
+                    unset($parsedUrl[$key]);
+                }
+            } else if ( ! is_array($value)) {
+                unset($parsedUrl[$key]);
+            }
+        }
+
         if (count($parsedUrl)) {
             $filteredOrSortedCollection = $this->sortOrFilterCollection($this->collection = $this->queryBuilder, $parsedUrl);
 

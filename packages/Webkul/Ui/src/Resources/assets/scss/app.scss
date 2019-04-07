@@ -720,27 +720,27 @@ modal {
     left: 0px;
     position: fixed;
     background: #000;
-    opacity: 0.75;
+    opacity: 0.7;
 }
+
 .modal-open .modal-overlay {
     display: block;
 }
 
 .modal-container {
-    animation: fade-in-white 0.3s ease-in-out;
-    z-index: 11;
-    margin-left: -350px;
+    background: #ffffff;
+    top: 200px;
     width: 600px;
     max-width: 80%;
-    background: #ffffff;
-    position: fixed;
-    left: 50%;
-    top: 100px;
-    margin-bottom: 100px;
+    left: auto;
+    right: auto;
+    position: absolute;
+    z-index: 11;
     @include box-shadow(
         0px 15px 25px 0px rgba(0, 0, 0, 0.03),
         0px 20px 45px 5px rgba(0, 0, 0, 0.2)
     );
+    animation: fade-in-white 0.3s ease-in-out;
     animation: jelly 0.5s ease-in-out;
     @include border-radius(5px);
 
