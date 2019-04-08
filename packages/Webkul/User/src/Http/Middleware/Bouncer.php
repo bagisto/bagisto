@@ -29,11 +29,6 @@ class Bouncer
 
     public function checkIfAuthorized($request)
     {
-        $routeCollection = Route::getRoutes();
-
-        // dd($routeCollection->get()[0]);
-        //find the current route's aside parent and compare with role of current user
-
         if (! $role = auth()->guard('admin')->user()->role)
             abort(401, 'This action is unauthorized.');
 
@@ -41,7 +36,7 @@ class Bouncer
             return;
         } else {
             $acl = app('acl');
-            // dd($acl);
+
             if ($acl && isset($acl->roles[Route::currentRouteName()])) {
                 bouncer()->allow($acl->roles[Route::currentRouteName()]);
             }

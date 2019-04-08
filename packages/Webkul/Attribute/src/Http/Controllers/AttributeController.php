@@ -129,7 +129,7 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
-        dd(request()->all());
+        return request()->all();
 
         $attribute = $this->attribute->findOrFail($id);
 
