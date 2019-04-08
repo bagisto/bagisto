@@ -70,6 +70,7 @@ return [
         'taxes' => 'Impostos',
         'tax-categories' => 'Categorias de Impostos',
         'tax-rates' => 'Impostos de Impostos',
+        'edit' => 'Edit',
     ],
 
     'dashboard' => [
