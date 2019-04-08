@@ -49,9 +49,9 @@ class TaxCategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Tax\Repositories\TaxCategoryRepository $taxCategory
-     * @param  Webkul\Tax\Repositories\TaxRateRepository     $taxRate
-     * @param  Webkul\Tax\Repositories\TaxMapRepository      $taxMap
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository $taxCategory
+     * @param  \Webkul\Tax\Repositories\TaxRateRepository     $taxRate
+     * @param  \Webkul\Tax\Repositories\TaxMapRepository      $taxMap
      * @return void
      */
     public function __construct(
@@ -176,7 +176,7 @@ class TaxCategoryController extends Controller
         try {
             Event::fire('tax.tax_category.delete.before', $id);
 
-            $this->taxCategory->delete($id);
+            $this->taxCategory->findOrFail($id)->delete();
 
             Event::fire('tax.tax_category.delete.after', $id);
         } catch(Exception $e) {

@@ -39,7 +39,7 @@ class CountryStateController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\CountryRepository  $country
+     * @param  \Webkul\Core\Repositories\CountryRepository  $country
      * @return void
      */
     public function __construct(Country $country, State $state)

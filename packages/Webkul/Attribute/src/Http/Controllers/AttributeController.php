@@ -32,7 +32,7 @@ class AttributeController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository  $attribute
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attribute
      * @return void
      */
     public function __construct(Attribute $attribute)
@@ -94,7 +94,7 @@ class AttributeController extends Controller
      */
     public function edit($id)
     {
-        $attribute = $this->attribute->find($id);
+        $attribute = $this->attribute->findOrFail($id);
 
         return view($this->_config['view'], compact('attribute'));
     }
@@ -131,7 +131,7 @@ class AttributeController extends Controller
     {
         $attribute = $this->attribute->findOrFail($id);
 
-        if(!$attribute->is_user_defined) {
+        if (!$attribute->is_user_defined) {
             session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
         } else {
             try {

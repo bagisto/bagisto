@@ -32,7 +32,7 @@ class RoleController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\User\Repositories\RoleRepository $role
+     * @param  \Webkul\User\Repositories\RoleRepository $role
      * @return void
      */
     public function __construct(Role $role)
@@ -96,7 +96,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = $this->role->find($id);
+        $role = $this->role->findOrFail($id);
 
         return view($this->_config['view'], compact('role'));
     }
@@ -139,7 +139,7 @@ class RoleController extends Controller
         } else {
             Event::fire('user.role.delete.before', $id);
 
-            $this->role->delete($id);
+            $this->role->findOrFail($id)->delete();
 
             Event::fire('user.role.delete.after', $id);
 

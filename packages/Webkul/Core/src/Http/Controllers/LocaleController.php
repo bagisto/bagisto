@@ -32,7 +32,7 @@ class LocaleController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\LocaleRepository $locale
+     * @param  \Webkul\Core\Repositories\LocaleRepository $locale
      * @return void
      */
     public function __construct(Locale $locale)
@@ -94,7 +94,7 @@ class LocaleController extends Controller
      */
     public function edit($id)
     {
-        $locale = $this->locale->find($id);
+        $locale = $this->locale->findOrFail($id);
 
         return view($this->_config['view'], compact('locale'));
     }
@@ -132,12 +132,12 @@ class LocaleController extends Controller
      */
     public function destroy($id)
     {
-        if($this->locale->count() == 1) {
+        if ($this->locale->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Locale']));
         } else {
             Event::fire('core.locale.delete.before', $id);
 
-            $this->locale->delete($id);
+            $this->locale->findOrFail($id)->delete();
 
             Event::fire('core.locale.delete.after', $id);
 

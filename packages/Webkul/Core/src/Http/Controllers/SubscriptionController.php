@@ -52,7 +52,7 @@ class SubscriptionController extends Controller
      * @return mixed
      */
     public function edit($id) {
-        $subscriber = $this->subscribers->findOneByField('id', $id);
+        $subscriber = $this->subscribers->findOrFail($id);
 
         return view($this->_config['view'])->with('subscriber', $subscriber);
     }
@@ -67,7 +67,7 @@ class SubscriptionController extends Controller
     public function update($id) {
         $data = request()->all();
 
-        $subscriber = $this->subscribers->findOneByField('id', $id);
+        $subscriber = $this->subscribers->findOrFail($id);
 
         $result = $subscriber->update($data);
 

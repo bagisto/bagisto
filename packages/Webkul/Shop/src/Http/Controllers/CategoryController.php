@@ -42,8 +42,8 @@ class CategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Category\Repositories\CategoryRepository $category
-     * @param  Webkul\Product\Repositories\ProductRepository $product
+     * @param  \Webkul\Category\Repositories\CategoryRepository $category
+     * @param  \Webkul\Product\Repositories\ProductRepository $product
      * @return void
      */
     public function __construct(Category $category, Product $product)

@@ -17,6 +17,10 @@ class AlterProductReviewsTable extends Migration
             $table->string('name')->default('');
             $table->dropForeign('product_reviews_customer_id_foreign');
         });
+
+        Schema::table('product_reviews', function (Blueprint $table) {
+            $table->integer('customer_id')->nullable()->change();
+        });
     }
 
     /**

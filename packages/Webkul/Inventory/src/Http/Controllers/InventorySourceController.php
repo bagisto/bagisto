@@ -32,7 +32,7 @@ class InventorySourceController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySource
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySource
      * @return void
      */
     public function __construct(InventorySource $inventorySource)
@@ -105,7 +105,7 @@ class InventorySourceController extends Controller
      */
     public function edit($id)
     {
-        $inventorySource = $this->inventorySource->find($id);
+        $inventorySource = $this->inventorySource->findOrFail($id);
 
         return view($this->_config['view'], compact('inventorySource'));
     }
@@ -155,12 +155,12 @@ class InventorySourceController extends Controller
      */
     public function destroy($id)
     {
-        if($this->inventorySource->count() == 1) {
+        if ($this->inventorySource->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Inventory source']));
         } else {
             Event::fire('inventory.inventory_source.delete.before', $id);
 
-            $this->inventorySource->delete($id);
+            $this->inventorySource->findOrFail($id)->delete();
 
             Event::fire('inventory.inventory_source.delete.after', $id);
 

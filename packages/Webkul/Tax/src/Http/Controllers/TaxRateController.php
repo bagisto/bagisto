@@ -36,7 +36,7 @@ class TaxRateController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Tax\Repositories\TaxRateRepository  $taxRate
+     * @param  \Webkul\Tax\Repositories\TaxRateRepository  $taxRate
      * @return void
      */
     public function __construct(TaxRate $taxRate)
@@ -114,7 +114,7 @@ class TaxRateController extends Controller
      */
     public function edit($id)
     {
-        $taxRate = $this->taxRate->find($id);
+        $taxRate = $this->taxRate->findOrFail($id);
 
         return view($this->_config['view'])->with('taxRate', $taxRate);
     }
@@ -165,7 +165,7 @@ class TaxRateController extends Controller
         // }
         Event::fire('tax.tax_rate.delete.before', $id);
 
-        $this->taxRate->delete($id);
+        $this->taxRate->findOrFail($id)->delete();
 
         Event::fire('tax.tax_rate.delete.after', $id);
 

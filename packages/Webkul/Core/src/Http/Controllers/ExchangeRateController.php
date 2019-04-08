@@ -40,8 +40,8 @@ class ExchangeRateController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRate
-     * @param  Webkul\Core\Repositories\CurrencyRepository      $currency
+     * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRate
+     * @param  \Webkul\Core\Repositories\CurrencyRepository      $currency
      * @return void
      */
     public function __construct(ExchangeRate $exchangeRate, Currency $currency)
@@ -109,7 +109,7 @@ class ExchangeRateController extends Controller
     {
         $currencies = $this->currency->all();
 
-        $exchangeRate = $this->exchangeRate->find($id);
+        $exchangeRate = $this->exchangeRate->findOrFail($id);
 
         return view($this->_config['view'], compact('currencies', 'exchangeRate'));
     }
@@ -147,12 +147,12 @@ class ExchangeRateController extends Controller
      */
     public function destroy($id)
     {
-        if($this->exchangeRate->count() == 1) {
+        if ($this->exchangeRate->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Exchange rate']));
         } else {
             Event::fire('core.exchange_rate.delete.before', $id);
 
-            $this->exchangeRate->delete($id);
+            $this->exchangeRate->findOrFail($id)->delete();
 
             Event::fire('core.exchange_rate.delete.after', $id);
 

@@ -89,7 +89,7 @@ class AddressController extends Controller
             $data['default_address'] = 1;
         }
 
-        if($this->address->create($data)) {
+        if ($this->address->create($data)) {
             session()->flash('success', trans('shop::app.customer.account.address.create.success'));
 
             return redirect()->route($this->_config['redirect']);
