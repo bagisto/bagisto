@@ -3487,6 +3487,10 @@ section.review {
     }
 }
 
+.show-wishlist {
+    z-index: -1 !important;
+}
+
 /// rtl css start here
 .rtl {
     direction: rtl;

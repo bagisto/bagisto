@@ -161,12 +161,12 @@
             });
 
             $(document).mousemove(function(event) {
-                if ( (event.pageX - $('.product-hero-image').offset().left > 440 ) && (event.pageX - $('.product-hero-image').offset().left < 465) && (event.pageY - $('.product-hero-image').offset().top > 16) && (event.pageY - $('.product-hero-image').offset().top < 38))  {
+                if (event.pageX > $('.add-to-wishlist').offset().left && event.pageX < $('.add-to-wishlist').offset().left+32 && event.pageY > $('.add-to-wishlist').offset().top && event.pageY < $('.add-to-wishlist').offset().top+32) {
 
-                    $('.zoomContainer').attr('style', 'z-index: -1 !important');
+                    $(".zoomContainer").addClass("show-wishlist");
 
                 } else {
-                    $('.zoomContainer').css({"position": "absolute", "z-index": "999" });
+                    $(".zoomContainer").removeClass("show-wishlist");
                 }
             });
         })
