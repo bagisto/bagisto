@@ -105,15 +105,23 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        Event::fire('customer.review.delete.before', $id);
+        $productReview = $this->productReview->findOrFail($id);
 
-        $this->productReview->delete($id);
+        try {
+            Event::fire('customer.review.delete.before', $id);
 
-        Event::fire('customer.review.delete.after', $id);
+            $productReview->delete();
 
-        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Review']));
+            Event::fire('customer.review.delete.after', $id);
 
-        return redirect()->back();
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Review']));
+
+            return 'true';
+        } catch (\Exception $e) {
+            session()->flash('success', trans('admin::app.response.delete-failed', ['name' => 'Review']));
+        }
+
+        return 'false';
     }
 
     /**

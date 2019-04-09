@@ -704,12 +704,12 @@
                         var element = e.currentTarget;
 
                         axios.post(element.getAttribute('data-action'), {
-                            // _token : element.getAttribute('data-token'),
-                            // method : element.getAttribute('data-method')
+                            _token : element.getAttribute('data-token'),
+                            _method : element.getAttribute('data-method')
                         }).then(function(response) {
                             this.result = response;
-                            console.log(this.result);
-                            // location.reload(true);
+                            // console.log(this.result);
+                            location.reload();
                         });
 
                         e.preventDefault();

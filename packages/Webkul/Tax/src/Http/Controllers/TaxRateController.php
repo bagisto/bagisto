@@ -156,20 +156,23 @@ class TaxRateController extends Controller
      */
     public function destroy($id)
     {
-        // if ($this->taxRate->count() == 1) {
-        //     session()->flash('error', trans('admin::app.settings.tax-rates.atleast-one'));
-        // } else {
+        $taxRate = $this->taxRate->findOrFail($id);
 
+        try {
+            Event::fire('tax.tax_rate.delete.before', $id);
 
-        //     session()->flash('success', trans('admin::app.settings.tax-rates.delete'));
-        // }
-        Event::fire('tax.tax_rate.delete.before', $id);
+            $taxRate->delete($id);
 
-        $this->taxRate->delete($id);
+            Event::fire('tax.tax_rate.delete.after', $id);
 
-        Event::fire('tax.tax_rate.delete.after', $id);
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Tax Rate']));
 
-        return redirect()->back();
+            return 'true';
+        } catch(\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Tax Rate']));
+        }
+
+        return 'false';
     }
 
     /**

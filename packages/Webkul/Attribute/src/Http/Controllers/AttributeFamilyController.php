@@ -136,15 +136,22 @@ class AttributeFamilyController extends Controller
 
         if ($this->attributeFamily->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Family']));
+
         } else if ($attributeFamily->products()->count()) {
             session()->flash('error', trans('admin::app.response.attribute-product-error', ['name' => 'Attribute family']));
         } else {
-            $this->attributeFamily->delete($id);
+            try {
+                $attributeFamily->delete($id);
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Family']));
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Family']));
+
+                return 'true';
+            } catch (\Exception $e) {
+                session()->flash('error', trans( 'admin::app.response.delete-failed', ['name' => 'Family']));
+            }
         }
 
-        return redirect()->back();
+        return 'false';
     }
 
     /**

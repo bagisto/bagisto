@@ -129,8 +129,6 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
-        return request()->all();
-
         $attribute = $this->attribute->findOrFail($id);
 
         if (! $attribute->is_user_defined) {
@@ -141,12 +139,13 @@ class AttributeController extends Controller
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Attribute']));
 
+                return 'true';
             } catch(\Exception $e) {
-                session()->flash('error', trans('admin::app.response.attribute-error', ['name' => 'Attribute']));
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Attribute']));
             }
         }
 
-        return redirect()->back();
+        return 'false';
     }
 
     /**
@@ -162,7 +161,7 @@ class AttributeController extends Controller
             $indexes = explode(',', request()->input('indexes'));
 
             foreach ($indexes as $key => $value) {
-                $attribute = $this->attribute->findOrFail($value);
+                $attribute = $this->attribute->find($value);
 
                 try {
                     if (! $attribute->is_user_defined) {

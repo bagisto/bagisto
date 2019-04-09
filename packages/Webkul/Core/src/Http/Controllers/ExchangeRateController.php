@@ -11,7 +11,7 @@ use Webkul\Core\Repositories\CurrencyRepository as Currency;
 /**
  * ExchangeRate controller
  *
- * @author    Jitendra Singh <jitendra@webkul.com>
+ * @author Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ExchangeRateController extends Controller
@@ -147,18 +147,26 @@ class ExchangeRateController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->exchangeRate->count() == 1) {
+        $exchangeRate = $this->exchangeRate->findOrFail($id);
+
+        if($this->exchangeRate->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Exchange rate']));
         } else {
-            Event::fire('core.exchange_rate.delete.before', $id);
+            try {
+                Event::fire('core.exchange_rate.delete.before', $id);
 
-            $this->exchangeRate->delete($id);
+                $exchangeRate->delete();
 
-            Event::fire('core.exchange_rate.delete.after', $id);
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Exchange rate']));
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Exchange rate']));
+                Event::fire('core.exchange_rate.delete.after', $id);
+
+                return 'true';
+            } catch (\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-error', ['name' => 'Exchange rate']));
+            }
         }
 
-        return redirect()->back();
+        return 'false';
     }
 }

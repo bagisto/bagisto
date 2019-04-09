@@ -28,16 +28,18 @@
             {!! DbView::make(core()->getCurrentChannel())->field('footer_content')->render() !!}
 
             <div class="list-container">
-                <span class="list-heading">{{ __('shop::app.footer.subscribe-newsletter') }}</span>
-                <div class="form-container">
-                    <form action="{{ route('shop.subscribe') }}">
-                        <div class="control-group" :class="[errors.has('subscriber_email') ? 'has-error' : '']">
-                            <input type="email" class="control subscribe-field" name="subscriber_email" placeholder="Email Address" required><br/>
+                @if(core()->getConfigData('customer.settings.newsletter.subscription'))
+                    <span class="list-heading">{{ __('shop::app.footer.subscribe-newsletter') }}</span>
+                    <div class="form-container">
+                        <form action="{{ route('shop.subscribe') }}">
+                            <div class="control-group" :class="[errors.has('subscriber_email') ? 'has-error' : '']">
+                                <input type="email" class="control subscribe-field" name="subscriber_email" placeholder="Email Address" required><br/>
 
-                            <button class="btn btn-md btn-primary">{{ __('shop::app.subscription.subscribe') }}</button>
-                        </div>
-                    </form>
-                </div>
+                                <button class="btn btn-md btn-primary">{{ __('shop::app.subscription.subscribe') }}</button>
+                            </div>
+                        </form>
+                    </div>
+                @endif
 
                 <?php
                     $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);

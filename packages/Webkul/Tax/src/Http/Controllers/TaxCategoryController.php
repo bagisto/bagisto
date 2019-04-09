@@ -173,16 +173,22 @@ class TaxCategoryController extends Controller
      */
     public function destroy($id)
     {
+        $taxCategory = $this->taxCategory->findOrFail($id);
+
         try {
             Event::fire('tax.tax_category.delete.before', $id);
 
-            $this->taxCategory->delete($id);
+            $taxCategory->delete($id);
 
             Event::fire('tax.tax_category.delete.after', $id);
+
+            session()->flash('success', trans('admin::app.response.delete-failed', ['name' => 'Tax Category']));
+
+            return 'true';
         } catch(Exception $e) {
-            return redirect()->back();
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Tax Category']));
         }
 
-        return redirect()->back();
+        return 'false';
     }
 }
