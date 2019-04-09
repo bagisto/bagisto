@@ -134,18 +134,28 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->role->count() == 1) {
-            session()->flash('error', 'At least one role is required.');
+        $role = $this->role->findOrFail($id);
+
+        if ($role->admins->count() >= 1) {
+            session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin']));
+        } else if($this->role->count() == 1) {
+            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Role']));
         } else {
-            Event::fire('user.role.delete.before', $id);
+            try {
+                Event::fire('user.role.delete.before', $id);
 
-            $this->role->delete($id);
+                $role->delete($id);
 
-            Event::fire('user.role.delete.after', $id);
+                Event::fire('user.role.delete.after', $id);
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Role']));
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Role']));
+
+                return 'true';
+            } catch(\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Role']));
+            }
         }
 
-        return redirect()->back();
+        return 'false';
     }
 }

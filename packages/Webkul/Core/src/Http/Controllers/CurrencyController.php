@@ -132,24 +132,27 @@ class CurrencyController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            Event::fire('core.currency.delete.before', $id);
+        $currency = $this->currency->findOrFail($id);
 
-            $result = $this->currency->delete($id);
+        if ($this->currency()->count == 1) {
+            sesssion()->flash('warning', trans( 'admin::app.response.last-delete-error', ['name' => 'Currency']));
+        } else {
+            try {
+                Event::fire('core.currency.delete.before', $id);
 
-            Event::fire('core.currency.delete.after', $id);
+                $currency->delete();
 
-            if($result)
+                Event::fire('core.currency.delete.after', $id);
+
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Currency']));
-            else
-                session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Currency']));
-        } catch (\Exception $e) {
-            session()->flash('error', $e->getMessage());
 
-            session()->flash('error', trans('admin::app.response.currency-delete-error', ['name' => 'Currency']));
+                return 'true';
+            } catch (\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Currency']));
+            }
         }
 
-        return redirect()->back();
+        return 'false';
     }
 
     /**

@@ -149,19 +149,27 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Event::fire('catalog.category.delete.before', $id);
+        $category = $this->category->findOrFail($id);
 
-        if(strtolower($this->category->find($id)->name) == "root") {
+        if(strtolower($category->name) == "root") {
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
         } else {
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
+            try {
+                Event:: fire('catalog.category.delete.before', $id);
 
-            $this->category->delete($id);
+                $category->delete($id);
 
-            Event::fire('catalog.category.delete.after', $id);
+                Event::fire('catalog.category.delete.after', $id);
+
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
+
+                return 'true';
+            } catch(\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
+            }
         }
 
-        return redirect()->back();
+        return 'false';
     }
 
     /**

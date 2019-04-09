@@ -798,10 +798,12 @@ return [
     ],
 
     'response' => [
+        'being-used' => 'This resource :name is getting used in :source',
         'cannot-delete-default' => 'Cannot delete the default channel',
         'create-success' => ':name created successfully.',
         'update-success' => ':name updated successfully.',
         'delete-success' => ':name deleted successfully.',
+        'delete-failed' => 'Error encountered while deleting :name.',
         'last-delete-error' => 'At least one :name is required.',
         'user-define-error' => 'Can not delete system :name',
         'attribute-error' => ':name is used in configurable products.',

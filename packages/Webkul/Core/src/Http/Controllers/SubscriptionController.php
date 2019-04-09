@@ -88,11 +88,18 @@ class SubscriptionController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->subscribers->delete($id))
-            session()->flash('success', trans('admin::app.customers.subscribers.delete'));
-        else
-            session()->flash('error', trans('admin::app.customers.subscribers.delete-failed'));
+        $subscriber = $this->subscribers->findOrFail($id);
 
-        return redirect()->back();
+        try {
+            $subscriber->delete();
+
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Subscriber']));
+
+            return 'true';
+        } catch (\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Subscriber']));
+        }
+
+        return 'false';
     }
 }

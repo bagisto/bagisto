@@ -8,7 +8,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
 
 /**
- * CustomerGroup controlller
+ * Customer Group controlller
  *
  * @author    Rahul Shukla <rahulshukla.symfony517@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -32,7 +32,7 @@ class CustomerGroupController extends Controller
      /**
      * Create a new controller instance.
      *
-     * @param Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
+     * @param \Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
      * @return void
      */
     public function __construct(CustomerGroup $customerGroup)
@@ -127,18 +127,24 @@ class CustomerGroupController extends Controller
      */
     public function destroy($id)
     {
-        $group = $this->customerGroup->findOneByField('id', $id);
+        $customerGroup = $this->customerGroup->findorFail($id);
 
-        if ($group->is_user_defined == 0) {
+        if ($customerGroup->is_user_defined == 0) {
             session()->flash('warning', trans('admin::app.customers.customers.group-default'));
-        } else if (count($group->customer) > 0) {
+        } else if (count($customerGroup->customer) > 0) {
             session()->flash('warning', trans('admin::app.response.customer-associate', ['name' => 'Customer Group']));
         } else {
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer Group']));
+            try {
+                $customerGroup->delete($id);
 
-            $this->customerGroup->delete($id);
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer Group']));
+
+                return 'true';
+            } catch(\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer Group']));
+            }
         }
 
-        return redirect()->back();
+        return 'false';
     }
 }
