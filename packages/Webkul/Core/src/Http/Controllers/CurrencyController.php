@@ -134,7 +134,7 @@ class CurrencyController extends Controller
     {
         $currency = $this->currency->findOrFail($id);
 
-        if ($this->currency()->count == 1) {
+        if ($this->currency->count() == 1) {
             sesssion()->flash('warning', trans( 'admin::app.response.last-delete-error', ['name' => 'Currency']));
         } else {
             try {

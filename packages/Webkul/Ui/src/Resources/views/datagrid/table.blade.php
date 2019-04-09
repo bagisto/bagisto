@@ -708,7 +708,8 @@
                             _method : element.getAttribute('data-method')
                         }).then(function(response) {
                             this.result = response;
-                            // console.log(this.result);
+                            location.reload();
+                        }).catch(function (error) {
                             location.reload();
                         });
 

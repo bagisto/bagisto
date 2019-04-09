@@ -171,7 +171,7 @@ class UserController extends Controller
             }
 
             try {
-                $this->user->delete($id);
+                $this->admin->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Admin']));
 
