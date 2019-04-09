@@ -202,11 +202,19 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $this->product->findOrFail($id)->delete();
+        $product = $this->product->findOrFail($id);
 
-        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Product']));
+        try {
+            $this->product->delete($id);
 
-        return redirect()->back();
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Product']));
+
+            return response()->json(['message' => true], 200);
+        } catch (\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Product']));
+        }
+
+        return response()->json(['message' => false], 400);
     }
 
     /**

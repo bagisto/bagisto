@@ -133,14 +133,22 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
+        $slider = $this->slider->findOrFail($id);
+
         if ($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1) {
             session()->flash('warning', trans('admin::app.settings.sliders.delete-success'));
         } else {
-            $this->slider->delete($id);
+            try {
+                $this->slider->delete($id);
 
-            session()->flash('success', trans('admin::app.settings.sliders.delete-fail'));
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Slider']));
+
+                return response()->json(['message' => true], 200);
+            } catch(\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Slider']));
+            }
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 }
