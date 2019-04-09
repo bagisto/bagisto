@@ -54,7 +54,7 @@
                     {{ __('shop::app.mail.order.contact') }} : {{ $order->shipping_address->phone }}
                 </div>
 
-                <div style="font-size: 16px;color: #242424;">
+                <div style="font-weight: bold;font-size: 16px;color: #242424;">
                     {{ __('shop::app.mail.order.shipping') }}
                 </div>
 
@@ -96,7 +96,7 @@
                     {{ __('shop::app.mail.order.contact') }} : {{ $order->billing_address->phone }}
                 </div>
 
-                <div style="font-size: 16px; color: #242424;">
+                <div style="font-weight: bold;font-size: 16px; color: #242424;">
                     {{ __('shop::app.mail.order.payment') }}
                 </div>
 
