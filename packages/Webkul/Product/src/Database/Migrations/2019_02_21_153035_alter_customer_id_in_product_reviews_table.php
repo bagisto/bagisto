@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterProductReviewsTable extends Migration
+class AlterCustomerIdInProductReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AlterProductReviewsTable extends Migration
     public function up()
     {
         Schema::table('product_reviews', function (Blueprint $table) {
-            $table->string('name')->default('');
-            $table->dropForeign('product_reviews_customer_id_foreign');
+            $table->integer('customer_id')->nullable()->change();
         });
     }
 
@@ -26,6 +25,8 @@ class AlterProductReviewsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('product_reviews', function (Blueprint $table) {
+            //
+        });
     }
 }
