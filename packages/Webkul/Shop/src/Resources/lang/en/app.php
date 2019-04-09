@@ -480,6 +480,7 @@ return [
         ],
         'shipment' => [
             'heading' => 'Shipment #:shipment_id  has been generated for Order #:order_id',
+            'inventory-heading' => 'New Shipment #:shipment_id had been generated for Order #:order_id',
             'subject' => 'Shipment for your order #:order_id',
             'summary' => 'Summary of Shipment',
             'carrier' => 'Carrier',
