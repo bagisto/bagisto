@@ -85,6 +85,7 @@ class OrderDataGrid extends DataGrid
     public function prepareActions() {
         $this->addAction([
             'type' => 'View',
+            'method' => 'GET',
             'route' => 'customer.orders.view',
             'icon' => 'icon eye-icon'
         ]);

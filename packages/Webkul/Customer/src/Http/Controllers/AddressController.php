@@ -107,15 +107,15 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
-        $addresses = $this->customer->addresses;
+        $address = $this->address->findOneWhere([
+            'id' => $id,
+            'customer_id' => auth()->guard('customer')->user()->id
+        ]);
 
-        foreach ($addresses as $address) {
-            if ($id == $address->id) {
-                return view($this->_config['view'], compact('address'));
-            }
-        }
+        if (! $address)
+            abort(404);
 
-        return redirect()->route('customer.address.index');
+        return view($this->_config['view'], compact('address'));
     }
 
     /**
@@ -142,7 +142,7 @@ class AddressController extends Controller
         $addresses = $this->customer->addresses;
 
         foreach($addresses as $address) {
-            if($id == $address->id) {
+            if ($id == $address->id) {
                 session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
 
                 $this->address->update($data, $id);
@@ -185,17 +185,17 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        $addresses = $this->customer->addresses;
+        $address = $this->address->findOneWhere([
+            'id' => $id,
+            'customer_id' => auth()->guard('customer')->user()->id
+        ]);
 
-        foreach($addresses as $address) {
-            if($id == $address->id) {
-                $this->address->delete($id);
+        if (! $address)
+            abort(404);
 
-                session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
+        $this->address->delete($id);
 
-                return redirect()->route('customer.address.index');
-            }
-        }
+        session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
 
         return redirect()->route('customer.address.index');
     }
