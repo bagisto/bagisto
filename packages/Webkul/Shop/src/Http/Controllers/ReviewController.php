@@ -119,19 +119,17 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        $reviews = auth()->guard('customer')->user()->all_reviews;
+        $reviews = $this->productReview->findOneWhere([
+            'id' => $id,
+            'customer_id' => auth()->guard('customer')->user()->id
+        ]);
 
-        if ($reviews->count() > 0) {
-            foreach ($reviews as $review) {
-                if ($review->id == $id) {
-                    $this->productReview->delete($id);
+        if (! $reviews)
+            abort(404);
 
-                    session()->flash('success', trans('shop::app.response.delete-success', ['name' => 'Product Review']));
+        $this->productReview->delete($id);
 
-                    return redirect()->route($this->_config['redirect']);
-                }
-            }
-        }
+        session()->flash('success', trans('shop::app.response.delete-success', ['name' => 'Product Review']));
 
         return redirect()->route($this->_config['redirect']);
     }

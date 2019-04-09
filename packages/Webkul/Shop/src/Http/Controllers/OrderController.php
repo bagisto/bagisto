@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Customer\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -42,8 +42,8 @@ class OrderController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Order\Repositories\OrderRepository   $order
-     * @param  \Webkul\Order\Repositories\InvoiceRepository $invoice
+     * @param  Webkul\Order\Repositories\OrderRepository   $order
+     * @param  Webkul\Order\Repositories\InvoiceRepository $invoice
      * @return void
      */
     public function __construct(
@@ -65,9 +65,10 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
     */
-    public function index()
-    {
-        $orders = auth()->guard('customer')->user()->all_orders;
+    public function index() {
+        $orders = $this->order->findWhere([
+            'customer_id' => auth()->guard('customer')->user()->id
+        ]);
 
         return view($this->_config['view'], compact('orders'));
     }
@@ -80,15 +81,15 @@ class OrderController extends Controller
      */
     public function view($id)
     {
-        $orders = auth()->guard('customer')->user()->all_orders;
+        $order = $this->order->findOneWhere([
+            'customer_id' => auth()->guard('customer')->user()->id,
+            'id' => $id
+        ]);
 
-        if(isset($orders) && count($orders)) {
-            $order = $orders->first();
+        if (! $order)
+            abort(404);
 
-            return view($this->_config['view'], compact('order'));
-        } else {
-            return redirect()->route( 'customer.orders.index');
-        }
+        return view($this->_config['view'], compact('order'));
     }
 
     /**
@@ -99,7 +100,7 @@ class OrderController extends Controller
      */
     public function print($id)
     {
-        $invoice = $this->invoice->find($id);
+        $invoice = $this->invoice->findOrFail($id);
 
         $pdf = PDF::loadView('shop::customers.account.orders.pdf', compact('invoice'))->setPaper('a4');
 
