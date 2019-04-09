@@ -6,6 +6,7 @@
     </div>
 
     <?php $order = $shipment->order; ?>
+    <?php $inventory = $shipment->inventory_source; ?>
 
     <div style="padding: 30px;">
         <div style="font-size: 20px;color: #242424;line-height: 30px;margin-bottom: 34px;">
@@ -14,11 +15,11 @@
             </span> <br>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                {{ __('shop::app.mail.order.dear', ['customer_name' => $order->customer_full_name]) }},
+                {{ __('shop::app.mail.order.dear', ['customer_name' => $inventory->name]) }},
             </p>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                {!! __('shop::app.mail.order.greeting', [
+                {!! __('shop::app.mail.shipment.greeting', [
                     'order_id' => '<a href="' . route('customer.orders.view', $order->id) . '" style="color: #0041FF; font-weight: bold;">#' . $order->id . '</a>',
                     'created_at' => $order->created_at
                     ])
@@ -26,9 +27,7 @@
             </p>
         </div>
 
-        <div style="font-weight: bold;font-size: 20px;color: #242424;line-height: 30px;margin-bottom: 20px !important;">
-            {{ __('shop::app.mail.shipment.summary') }}
-        </div>
+
 
         <div style="display: flex;flex-direction: row;margin-top: 20px;justify-content: space-between;margin-bottom: 40px;">
             <div style="line-height: 25px;">
@@ -133,7 +132,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 20px;font-size: 16px;color: #5E5E5E;line-height: 24px;display: inline-block;width: 100%">
+        {{-- <div style="margin-top: 20px;font-size: 16px;color: #5E5E5E;line-height: 24px;display: inline-block;width: 100%">
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
                 {!!
                     __('shop::app.mail.order.help', [
@@ -141,10 +140,6 @@
                         ])
                 !!}
             </p>
-
-            <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                {{ __('shop::app.mail.order.thanks') }}
-            </p>
-        </div>
+        </div> --}}
     </div>
 @endcomponent
