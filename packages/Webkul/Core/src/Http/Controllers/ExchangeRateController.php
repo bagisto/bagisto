@@ -152,7 +152,7 @@ class ExchangeRateController extends Controller
         } else {
             Event::fire('core.exchange_rate.delete.before', $id);
 
-            $this->exchangeRate->findOrFail($id)->delete();
+            $this->exchangeRate->delete($id);
 
             Event::fire('core.exchange_rate.delete.after', $id);
 

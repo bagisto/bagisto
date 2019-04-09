@@ -135,7 +135,7 @@ class CurrencyController extends Controller
         try {
             Event::fire('core.currency.delete.before', $id);
 
-            $result = $this->currency->findOrFail($id)->delete();
+            $result = $this->currency->delete($id);
 
             Event::fire('core.currency.delete.after', $id);
 

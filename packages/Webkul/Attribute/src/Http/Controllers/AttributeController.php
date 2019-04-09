@@ -131,7 +131,7 @@ class AttributeController extends Controller
     {
         $attribute = $this->attribute->findOrFail($id);
 
-        if (!$attribute->is_user_defined) {
+        if (! $attribute->is_user_defined) {
             session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
         } else {
             try {

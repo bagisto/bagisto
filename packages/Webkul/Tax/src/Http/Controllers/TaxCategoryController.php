@@ -176,7 +176,7 @@ class TaxCategoryController extends Controller
         try {
             Event::fire('tax.tax_category.delete.before', $id);
 
-            $this->taxCategory->findOrFail($id)->delete();
+            $this->taxCategory->delete($id);
 
             Event::fire('tax.tax_category.delete.after', $id);
         } catch(Exception $e) {

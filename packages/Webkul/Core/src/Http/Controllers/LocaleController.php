@@ -137,7 +137,7 @@ class LocaleController extends Controller
         } else {
             Event::fire('core.locale.delete.before', $id);
 
-            $this->locale->findOrFail($id)->delete();
+            $this->locale->delete($id);
 
             Event::fire('core.locale.delete.after', $id);
 

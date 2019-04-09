@@ -168,7 +168,7 @@ class UserController extends Controller
                 return view('admin::customers.confirm-password');
             }
 
-            $this->admin->findOrFail($id)->delete();
+            $this->admin->delete($id);
 
             Event::fire('user.admin.delete.after', $id);
 

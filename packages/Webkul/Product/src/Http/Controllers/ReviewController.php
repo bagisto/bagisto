@@ -107,7 +107,7 @@ class ReviewController extends Controller
     {
         Event::fire('customer.review.delete.before', $id);
 
-        $this->productReview->findOrFail($id)->delete();
+        $this->productReview->delete($id);
 
         Event::fire('customer.review.delete.after', $id);
 

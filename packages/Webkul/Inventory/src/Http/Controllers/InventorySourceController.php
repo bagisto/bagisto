@@ -160,7 +160,7 @@ class InventorySourceController extends Controller
         } else {
             Event::fire('inventory.inventory_source.delete.before', $id);
 
-            $this->inventorySource->findOrFail($id)->delete();
+            $this->inventorySource->delete($id);
 
             Event::fire('inventory.inventory_source.delete.after', $id);
 

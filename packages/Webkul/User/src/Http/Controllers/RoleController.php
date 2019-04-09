@@ -139,7 +139,7 @@ class RoleController extends Controller
         } else {
             Event::fire('user.role.delete.before', $id);
 
-            $this->role->findOrFail($id)->delete();
+            $this->role->delete($id);
 
             Event::fire('user.role.delete.after', $id);
 

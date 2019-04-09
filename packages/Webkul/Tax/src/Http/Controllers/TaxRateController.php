@@ -165,7 +165,7 @@ class TaxRateController extends Controller
         // }
         Event::fire('tax.tax_rate.delete.before', $id);
 
-        $this->taxRate->findOrFail($id)->delete();
+        $this->taxRate->delete($id);
 
         Event::fire('tax.tax_rate.delete.after', $id);
 

@@ -154,7 +154,7 @@ class ChannelController extends Controller
             Event::fire('core.channel.delete.before', $id);
 
             try {
-                $this->channel->findOrFail($id)->delete();
+                $this->channel->delete($id);
             } catch(\Exception $e) {
                 session()->flash('warning', trans($e->getMessage()));
             }
