@@ -32,7 +32,7 @@ class ProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Product\Repositories\ProductRepository $product
+     * @param  \Webkul\Product\Repositories\ProductRepository $product
      * @return void
      */
     public function __construct( Product $product)

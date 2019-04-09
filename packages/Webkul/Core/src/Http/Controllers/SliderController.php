@@ -35,7 +35,7 @@ class SliderController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\SliderRepository $slider
+     * @param  \Webkul\Core\Repositories\SliderRepository $slider
      * @return void
      */
     public function __construct(Slider $slider)
@@ -97,7 +97,7 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        $slider = $this->slider->find($id);
+        $slider = $this->slider->findOrFail($id);
 
         return view($this->_config['view'])->with('slider', $slider);
     }
@@ -136,7 +136,7 @@ class SliderController extends Controller
         if ($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1) {
             session()->flash('warning', trans('admin::app.settings.sliders.delete-success'));
         } else {
-            $this->slider->destroy($id);
+            $this->slider->delete($id);
 
             session()->flash('success', trans('admin::app.settings.sliders.delete-fail'));
         }

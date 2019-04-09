@@ -32,7 +32,7 @@ class ChannelController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\ChannelRepository $channel
+     * @param  \Webkul\Core\Repositories\ChannelRepository $channel
      * @return void
      */
     public function __construct(Channel $channel)
@@ -100,7 +100,7 @@ class ChannelController extends Controller
      */
     public function edit($id)
     {
-        $channel = $this->channel->with(['locales', 'currencies'])->find($id);
+        $channel = $this->channel->with(['locales', 'currencies'])->findOrFail($id);
 
         return view($this->_config['view'], compact('channel'));
     }
@@ -146,7 +146,7 @@ class ChannelController extends Controller
      */
     public function destroy($id)
     {
-        $channel = $this->channel->find($id);
+        $channel = $this->channel->findOrFail($id);
 
         if ($channel->code == config('app.channel')) {
             session()->flash('error', trans('admin::app.response.cannot-delete-default', ['name' => 'Channel']));

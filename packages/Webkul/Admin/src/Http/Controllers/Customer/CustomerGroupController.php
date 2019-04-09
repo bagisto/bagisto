@@ -32,7 +32,7 @@ class CustomerGroupController extends Controller
      /**
      * Create a new controller instance.
      *
-     * @param Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
+     * @param \Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
      * @return void
      */
     public function __construct(CustomerGroup $customerGroup)
@@ -94,7 +94,7 @@ class CustomerGroupController extends Controller
      */
     public function edit($id)
     {
-        $group = $this->customerGroup->findOneWhere(['id'=>$id]);
+        $group = $this->customerGroup->findOrFail($id);
 
         return view($this->_config['view'], compact('group'));
     }
@@ -127,7 +127,7 @@ class CustomerGroupController extends Controller
      */
     public function destroy($id)
     {
-        $group = $this->customerGroup->findOneByField('id', $id);
+        $group = $this->customerGroup->findOrFail($id);
 
         if ($group->is_user_defined == 0) {
             session()->flash('warning', trans('admin::app.customers.customers.group-default'));

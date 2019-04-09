@@ -33,7 +33,7 @@ class AttributeFamilyController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
      * @return void
      */
     public function __construct(AttributeFamily $attributeFamily)
@@ -96,7 +96,7 @@ class AttributeFamilyController extends Controller
      */
     public function edit(Attribute $attribute, $id)
     {
-        $attributeFamily = $this->attributeFamily->with(['attribute_groups.custom_attributes'])->find($id, ['*']);
+        $attributeFamily = $this->attributeFamily->with(['attribute_groups.custom_attributes'])->findOrFail($id, ['*']);
 
         $custom_attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
 
@@ -132,7 +132,7 @@ class AttributeFamilyController extends Controller
      */
     public function destroy($id)
     {
-        $attributeFamily = $this->attributeFamily->find($id);
+        $attributeFamily = $this->attributeFamily->findOrFail($id);
 
         if ($this->attributeFamily->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Family']));

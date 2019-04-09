@@ -41,8 +41,8 @@ class ReviewController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Product\Repositories\ProductRepository        $product
-     * @param  Webkul\Product\Repositories\ProductReviewRepository  $productReview
+     * @param  \Webkul\Product\Repositories\ProductRepository        $product
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
      */
     public function __construct(Product $product, ProductReview $productReview)
@@ -72,7 +72,7 @@ class ReviewController extends Controller
      */
     public function edit($id)
     {
-        $review = $this->productReview->find($id);
+        $review = $this->productReview->findOrFail($id);
 
         return view($this->_config['view'],compact('review'));
     }

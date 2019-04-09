@@ -32,7 +32,7 @@ class OrderController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderRepository  $order
+     * @param  \Webkul\Sales\Repositories\OrderRepository  $order
      * @return void
      */
     public function __construct(Order $order)
@@ -63,7 +63,7 @@ class OrderController extends Controller
      */
     public function view($id)
     {
-        $order = $this->order->find($id);
+        $order = $this->order->findOrFail($id);
 
         return view($this->_config['view'], compact('order'));
     }

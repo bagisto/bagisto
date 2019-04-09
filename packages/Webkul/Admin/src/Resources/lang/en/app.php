@@ -70,6 +70,7 @@ return [
         'taxes' => 'Taxes',
         'tax-categories' => 'Tax Categories',
         'tax-rates' => 'Tax Rates',
+        'edit' => 'Edit',
     ],
 
     'dashboard' => [
