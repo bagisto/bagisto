@@ -28,8 +28,6 @@ return [
     |
     */
 
-    'dont_alias' => [
-        'App\Nova',
-    ],
+    'dont_alias' => [],
 
 ];
