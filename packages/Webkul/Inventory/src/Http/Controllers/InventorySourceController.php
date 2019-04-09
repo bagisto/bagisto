@@ -163,18 +163,18 @@ class InventorySourceController extends Controller
             try {
                 Event::fire('inventory.inventory_source.delete.before', $id);
 
-                $inventorySource->delete();
+                $this->inventorySource->delete($id);
 
                 Event::fire('inventory.inventory_source.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Inventory source']));
 
-                return 'true';
+                return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Inventory source']));
             }
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 }

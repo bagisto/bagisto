@@ -171,19 +171,19 @@ class UserController extends Controller
             }
 
             try {
-                $user->delete();
+                $this->user->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Admin']));
 
                 Event::fire('user.admin.delete.after', $id);
 
-                return 'true';
+                return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Admin']));
             }
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 
     /**

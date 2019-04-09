@@ -135,16 +135,16 @@ class CustomerGroupController extends Controller
             session()->flash('warning', trans('admin::app.response.customer-associate', ['name' => 'Customer Group']));
         } else {
             try {
-                $customerGroup->delete($id);
+                $this->customerGroup->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer Group']));
 
-                return 'true';
+                return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer Group']));
             }
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 }

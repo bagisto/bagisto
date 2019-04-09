@@ -140,19 +140,19 @@ class CurrencyController extends Controller
             try {
                 Event::fire('core.currency.delete.before', $id);
 
-                $currency->delete();
+                $this->currency->delete($id);
 
                 Event::fire('core.currency.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Currency']));
 
-                return 'true';
+                return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Currency']));
             }
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 
     /**

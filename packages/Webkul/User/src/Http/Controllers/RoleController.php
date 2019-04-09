@@ -144,18 +144,18 @@ class RoleController extends Controller
             try {
                 Event::fire('user.role.delete.before', $id);
 
-                $role->delete($id);
+                $this->role->delete($id);
 
                 Event::fire('user.role.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Role']));
 
-                return 'true';
+                return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Role']));
             }
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 }

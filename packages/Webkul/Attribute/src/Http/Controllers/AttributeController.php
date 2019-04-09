@@ -139,13 +139,13 @@ class AttributeController extends Controller
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Attribute']));
 
-                return 'true';
+                return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Attribute']));
             }
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 
     /**

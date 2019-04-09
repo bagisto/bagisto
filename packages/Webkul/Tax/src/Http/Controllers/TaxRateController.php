@@ -161,18 +161,18 @@ class TaxRateController extends Controller
         try {
             Event::fire('tax.tax_rate.delete.before', $id);
 
-            $taxRate->delete($id);
+            $this->taxRate->delete($id);
 
             Event::fire('tax.tax_rate.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Tax Rate']));
 
-            return 'true';
+            return response()->json(['message' => true], 200);
         } catch(\Exception $e) {
             session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Tax Rate']));
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 
     /**

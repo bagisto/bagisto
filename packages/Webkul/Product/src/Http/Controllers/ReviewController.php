@@ -110,18 +110,18 @@ class ReviewController extends Controller
         try {
             Event::fire('customer.review.delete.before', $id);
 
-            $productReview->delete();
+            $this->productReview->delete($id);
 
             Event::fire('customer.review.delete.after', $id);
 
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Review']));
 
-            return 'true';
+            return response()->json(['message' => true], 200);
         } catch (\Exception $e) {
             session()->flash('success', trans('admin::app.response.delete-failed', ['name' => 'Review']));
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 
     /**

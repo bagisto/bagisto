@@ -155,18 +155,18 @@ class ExchangeRateController extends Controller
             try {
                 Event::fire('core.exchange_rate.delete.before', $id);
 
-                $exchangeRate->delete();
+                $this->exchangeRate->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Exchange rate']));
 
                 Event::fire('core.exchange_rate.delete.after', $id);
 
-                return 'true';
+                return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-error', ['name' => 'Exchange rate']));
             }
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 }

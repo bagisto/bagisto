@@ -154,19 +154,19 @@ class ChannelController extends Controller
             try {
                 Event::fire('core.channel.delete.before', $id);
 
-                $channel->delete($id);
+                $this->channel->delete($id);
 
                 Event::fire('core.channel.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Channel']));
 
-                return 'true';
+                return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
                 // session()->flash('warning', trans($e->getMessage()));
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Channel']));
             }
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 }

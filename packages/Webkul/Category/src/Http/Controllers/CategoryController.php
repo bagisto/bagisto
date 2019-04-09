@@ -157,19 +157,19 @@ class CategoryController extends Controller
             try {
                 Event:: fire('catalog.category.delete.before', $id);
 
-                $category->delete($id);
+                $this->category->delete($id);
 
                 Event::fire('catalog.category.delete.after', $id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));
 
-                return 'true';
+                return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
             }
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 
     /**

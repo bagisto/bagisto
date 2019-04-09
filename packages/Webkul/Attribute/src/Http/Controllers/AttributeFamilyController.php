@@ -141,17 +141,17 @@ class AttributeFamilyController extends Controller
             session()->flash('error', trans('admin::app.response.attribute-product-error', ['name' => 'Attribute family']));
         } else {
             try {
-                $attributeFamily->delete($id);
+                $this->attributeFamily->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Family']));
 
-                return 'true';
+                return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
                 session()->flash('error', trans( 'admin::app.response.delete-failed', ['name' => 'Family']));
             }
         }
 
-        return 'false';
+        return response()->json(['message' => false], 400);
     }
 
     /**
