@@ -33,7 +33,7 @@ class CategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Category\Repositories\CategoryRepository  $category
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $category
      * @return void
      */
     public function __construct(Category $category)
@@ -108,7 +108,7 @@ class CategoryController extends Controller
     {
         $categories = $this->category->getCategoryTree($id);
 
-        $category = $this->category->find($id);
+        $category = $this->category->findOrFail($id);
 
         return view($this->_config['view'], compact('category', 'categories'));
     }
@@ -151,7 +151,9 @@ class CategoryController extends Controller
     {
         Event::fire('catalog.category.delete.before', $id);
 
-        if(strtolower($this->category->find($id)->name) == "root") {
+        $category = $this->category->findOrFail($id);
+
+        if (strtolower($this->category->find($id)->name) == "root") {
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
         } else {
             session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Category']));

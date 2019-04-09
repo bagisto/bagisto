@@ -32,7 +32,7 @@ class CurrencyController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\CurrencyRepository $currency
+     * @param  \Webkul\Core\Repositories\CurrencyRepository $currency
      * @return void
      */
     public function __construct(Currency $currency)
@@ -94,7 +94,7 @@ class CurrencyController extends Controller
      */
     public function edit($id)
     {
-        $currency = $this->currency->find($id);
+        $currency = $this->currency->findOrFail($id);
 
         return view($this->_config['view'], compact('currency'));
     }
@@ -139,7 +139,7 @@ class CurrencyController extends Controller
 
             Event::fire('core.currency.delete.after', $id);
 
-            if($result)
+            if ($result)
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Currency']));
             else
                 session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Currency']));

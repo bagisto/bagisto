@@ -129,7 +129,7 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $customer = $this->customer->findOneWhere(['id'=>$id]);
+        $customer = $this->customer->findOrFail($id);
 
         $customerGroup = $this->customerGroup->all();
 
@@ -172,7 +172,7 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $this->customer->delete($id);
+        $this->customer->findOrFail($id)->delete();
 
         session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
 

@@ -69,10 +69,10 @@ class ProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
-     * @param  Webkul\Category\Repositories\CategoryRepository          $category
-     * @param  Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySource
-     * @param  Webkul\Product\Repositories\ProductRepository            $product
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
+     * @param  \Webkul\Category\Repositories\CategoryRepository          $category
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySource
+     * @param  \Webkul\Product\Repositories\ProductRepository            $product
      * @return void
      */
     public function __construct(
@@ -167,7 +167,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->product->with(['variants'])->find($id);
+        $product = $this->product->with(['variants'])->findOrFail($id);
 
         $categories = $this->category->getCategoryTree();
 
@@ -202,7 +202,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $this->product->delete($id);
+        $this->product->findOrFail($id)->delete();
 
         session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Product']));
 
@@ -221,7 +221,7 @@ class ProductController extends Controller
         foreach ($productIds as $productId) {
             $product = $this->product->find($productId);
 
-            if(isset($product)) {
+            if (isset($product)) {
                 $this->product->delete($productId);
             }
         }

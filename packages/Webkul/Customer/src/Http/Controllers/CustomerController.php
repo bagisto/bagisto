@@ -42,8 +42,8 @@ class CustomerController extends Controller
     /**
      * Create a new Repository instance.
      *
-     * @param  Webkul\Customer\Repositories\CustomerRepository     $customer
-     * @param  Webkul\Product\Repositories\ProductReviewRepository $productReview
+     * @param  \Webkul\Customer\Repositories\CustomerRepository     $customer
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository $productReview
      * @return void
     */
     public function __construct(

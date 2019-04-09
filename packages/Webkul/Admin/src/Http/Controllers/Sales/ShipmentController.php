@@ -48,9 +48,9 @@ class ShipmentController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Sales\Repositories\ShipmentRepository  $shipment
-     * @param  Webkul\Sales\Repositories\OrderRepository     $order
-     * @param  Webkul\Sales\Repositories\OrderitemRepository $orderItem
+     * @param  \Webkul\Sales\Repositories\ShipmentRepository  $shipment
+     * @param  \Webkul\Sales\Repositories\OrderRepository     $order
+     * @param  \Webkul\Sales\Repositories\OrderitemRepository $orderItem
      * @return void
      */
     public function __construct(
@@ -89,7 +89,7 @@ class ShipmentController extends Controller
      */
     public function create($orderId)
     {
-        $order = $this->order->find($orderId);
+        $order = $this->order->findOrFail($orderId);
 
         if (! $order->channel || !$order->canShip()) {
             session()->flash('error', trans('admin::app.sales.shipments.creation-error'));
@@ -109,7 +109,7 @@ class ShipmentController extends Controller
      */
     public function store(Request $request, $orderId)
     {
-        $order = $this->order->find($orderId);
+        $order = $this->order->findOrFail($orderId);
 
         if (! $order->canShip()) {
             session()->flash('error', trans('admin::app.sales.shipments.order-error'));
@@ -182,7 +182,7 @@ class ShipmentController extends Controller
      */
     public function view($id)
     {
-        $shipment = $this->shipment->find($id);
+        $shipment = $this->shipment->findOrFail($id);
 
         return view($this->_config['view'], compact('shipment'));
     }

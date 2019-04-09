@@ -42,8 +42,8 @@ class UserController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\User\Repositories\AdminRepository $admin
-     * @param  Webkul\User\Repositories\RoleRepository $role
+     * @param  \Webkul\User\Repositories\AdminRepository $admin
+     * @param  \Webkul\User\Repositories\RoleRepository $role
      * @return void
      */
     public function __construct(Admin $admin, Role $role)
@@ -111,7 +111,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->admin->find($id);
+        $user = $this->admin->findOrFail($id);
 
         $roles = $this->role->all();
 

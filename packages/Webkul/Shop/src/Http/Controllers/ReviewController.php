@@ -40,8 +40,8 @@ class ReviewController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Product\Repositories\ProductRepository        $product
-     * @param  Webkul\Product\Repositories\ProductReviewRepository  $productReview
+     * @param  \Webkul\Product\Repositories\ProductRepository        $product
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
      */
     public function __construct(Product $product, ProductReview $productReview)
@@ -123,7 +123,7 @@ class ReviewController extends Controller
 
         if ($reviews->count() > 0) {
             foreach ($reviews as $review) {
-                if($review->id == $id) {
+                if ($review->id == $id) {
                     $this->productReview->delete($id);
 
                     session()->flash('success', trans('shop::app.response.delete-success', ['name' => 'Product Review']));
