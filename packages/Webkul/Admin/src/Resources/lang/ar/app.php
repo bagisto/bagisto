@@ -69,6 +69,8 @@ return [
         'tax-categories' => 'فئات الضرائب',
         'tax-rates' => 'المعدلات الضريبية',
         'edit' => 'Edit',
+        'create' => 'Add',
+        'delete' => 'Delete',
     ],
     'dashboard' => [
         'title' => 'لوحة العدادات',
