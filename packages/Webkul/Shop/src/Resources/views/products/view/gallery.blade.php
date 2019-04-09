@@ -166,8 +166,7 @@
                     $('.zoomContainer').attr('style', 'z-index: -1 !important');
 
                 } else {
-                    $('.zoomContainer').css({"position": "absolute", "top": "143px", "left"
-                    : "249px", "height": "480px", "width": "480px", "z-index": "999" });
+                    $('.zoomContainer').css({"position": "absolute", "z-index": "999" });
                 }
             });
         })
