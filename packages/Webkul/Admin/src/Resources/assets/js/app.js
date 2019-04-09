@@ -1,8 +1,7 @@
-window.jQuery = window.$ = $ = require("jquery");
+require("./bootstrap");
+
 window.Vue = require("vue");
 window.VeeValidate = require("vee-validate");
-window.axios = require("axios");
-require("./bootstrap");
 
 Vue.use(VeeValidate);
 Vue.prototype.$http = axios
@@ -42,6 +41,7 @@ window.onload = function () {
                     documentScrollWhenScrolled = $(document).scrollTop();
                     if (documentScrollWhenScrolled <= differenceInHeight + 70) {
                         $('.navbar-left').css('top', -documentScrollWhenScrolled + 60 + 'px');
+
                         scrollTopValueWhenNavBarFixed = $(document).scrollTop();
                     }
                 });
@@ -50,6 +50,7 @@ window.onload = function () {
                     documentScrollWhenScrolled = $(document).scrollTop();
                     if (documentScrollWhenScrolled <= differenceInHeight + 70) {
                         $('.navbar-left').css('top', -documentScrollWhenScrolled + 60 + 'px');
+
                         scrollTopValueWhenNavBarFixed = $(document).scrollTop();
                     }
                 });

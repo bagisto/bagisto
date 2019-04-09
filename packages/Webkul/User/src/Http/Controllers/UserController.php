@@ -159,6 +159,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $user = $this->admin->findOrFail($id);
+
         if ($this->admin->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Admin']));
         } else {
@@ -168,14 +170,20 @@ class UserController extends Controller
                 return view('admin::customers.confirm-password');
             }
 
-            $this->admin->delete($id);
+            try {
+                $this->admin->delete($id);
 
-            Event::fire('user.admin.delete.after', $id);
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Admin']));
 
-            session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Admin source']));
+                Event::fire('user.admin.delete.after', $id);
+
+                return response()->json(['message' => true], 200);
+            } catch (\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Admin']));
+            }
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 
     /**

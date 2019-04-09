@@ -172,10 +172,18 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $this->customer->findOrFail($id)->delete();
+        $customer = $this->customer->findorFail($id);
 
-        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+        try {
+            $this->customer->delete($id);
 
-        return redirect()->back();
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+
+            return response()->json(['message' => true], 200);
+        } catch(\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
+        }
+
+        return response()->json(['message' => false], 400);
     }
 }

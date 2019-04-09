@@ -132,18 +132,26 @@ class LocaleController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->locale->count() == 1) {
+        $locale = $this->locale->findOrFail($id);
+
+        if($this->locale->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Locale']));
         } else {
-            Event::fire('core.locale.delete.before', $id);
+            try {
+                Event::fire('core.locale.delete.before', $id);
 
-            $this->locale->delete($id);
+                $this->locale->delete($id);
 
-            Event::fire('core.locale.delete.after', $id);
+                Event::fire('core.locale.delete.after', $id);
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Locale']));
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Locale']));
+
+                return response()->json(['message' => true], 200);
+            } catch(\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Locale']));
+            }
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 }

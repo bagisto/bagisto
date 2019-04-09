@@ -155,18 +155,26 @@ class InventorySourceController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->inventorySource->count() == 1) {
+        $inventorySource = $this->inventorySource->findOrFail($id);
+
+        if($this->inventorySource->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Inventory source']));
         } else {
-            Event::fire('inventory.inventory_source.delete.before', $id);
+            try {
+                Event::fire('inventory.inventory_source.delete.before', $id);
 
-            $this->inventorySource->delete($id);
+                $this->inventorySource->delete($id);
 
-            Event::fire('inventory.inventory_source.delete.after', $id);
+                Event::fire('inventory.inventory_source.delete.after', $id);
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Inventory source']));
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Inventory source']));
+
+                return response()->json(['message' => true], 200);
+            } catch (\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Inventory source']));
+            }
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 }

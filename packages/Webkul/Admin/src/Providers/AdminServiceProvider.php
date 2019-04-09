@@ -23,7 +23,8 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        include __DIR__ . '/../Http/routes.php';
+        // include __DIR__ . '/../Http/routes.php';
+        $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'admin');
 
@@ -72,6 +73,7 @@ class AdminServiceProvider extends ServiceProvider
                 if (! bouncer()->hasPermission($item['key'])) {
                     continue;
                 }
+
                 if ($index + 1 < count(config('menu.admin')) && $permissionType != 'all') {
                     $permission = config('menu.admin')[$index + 1];
 
@@ -94,6 +96,7 @@ class AdminServiceProvider extends ServiceProvider
             }
 
             $tree->items = core()->sortItems($tree->items);
+
             $view->with('menu', $tree);
         });
 
