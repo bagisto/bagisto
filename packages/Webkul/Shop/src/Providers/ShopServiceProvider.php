@@ -53,12 +53,6 @@ class ShopServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $themes = $this->app->make('themes');
-
-        if (! $themes->current() && \Config::get('themes.default')) {
-            $themes->set(\Config::get('themes.default'));
-        }
-
         $this->registerConfig();
     }
 
