@@ -99,9 +99,18 @@ class CategoryRepository extends Repository
      */
     public function getVisibleCategoryTree($id = null)
     {
-        return $id
-            ? Category::orderBy('position', 'ASC')->where('status', 1)->descendantsOf($id)->toTree()
-            : Category::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
+        static $categories;
+
+        if ($categories[$id])
+            return $categories[$id];
+
+        if ($id) {
+            $categories[$id] = Category::orderBy('position', 'ASC')->where('status', 1)->descendantsOf($id)->toTree();
+        } else {
+            $categories[$id] = Category::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
+        }
+
+        return $categories[$id];
     }
 
     /**
