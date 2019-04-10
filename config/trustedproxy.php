@@ -31,15 +31,15 @@ return [
 
     /*
      * Which headers to use to detect proxy related data (For, Host, Proto, Port)
-     * 
+     *
      * Options include:
-     * 
+     *
      * - Illuminate\Http\Request::HEADER_X_FORWARDED_ALL (use all x-forwarded-* headers to establish trust)
      * - Illuminate\Http\Request::HEADER_FORWARDED (use the FORWARDED header to establish trust)
-     * 
+     *
      * @link https://symfony.com/doc/current/deployment/proxies.html
      */
     'headers' => Illuminate\Http\Request::HEADER_X_FORWARDED_ALL,
 
-    
+
 ];

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\Mail\NewOrderNotification;
 use Webkul\Admin\Mail\NewInvoiceNotification;
 use Webkul\Admin\Mail\NewShipmentNotification;
+use Webkul\Admin\Mail\NewInventorySourceNotification;
 
 /**
  * Order event handler
@@ -18,7 +19,7 @@ class Order {
     /**
      * @param mixed $order
      *
-     * Send new order confirmation mail to the customer
+     * Send new shipment mail to the customer and inventory source
      */
     public function sendNewOrderMail($order)
     {
@@ -52,6 +53,8 @@ class Order {
     {
         try {
             Mail::send(new NewShipmentNotification($shipment));
+
+            Mail::send(new NewInventorySourceNotification($shipment));
         } catch (\Exception $e) {
 
         }
