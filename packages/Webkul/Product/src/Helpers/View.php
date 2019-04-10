@@ -14,58 +14,43 @@ class View extends AbstractProduct
     {
         $data = [];
 
-        $attributes = $product->attribute_family->custom_attributes;
+        $attributes = $product->attribute_family->custom_attributes()->where('attributes.is_visible_on_front', 1)->get();
 
         $attributeOptionReposotory = app('Webkul\Attribute\Repositories\AttributeOptionRepository');
 
         foreach ($attributes as $attribute) {
             if ($attribute->type == 'boolean') {
-                $value = $product->{$attribute->code};
-                if ($attribute->is_visible_on_front ) {
-                    if ($value == 1) {
-                        $value = 'Yes';
-                    } else {
-                        $value = 'No';
-                    }
+                $value = $product->{$attribute->code} ? 'Yes' : 'No';
 
-                    $data[] = [
-                        'code' => $attribute->code,
-                        'label' => $attribute->name,
-                        'value' => $value,
-                        'admin_name' => $attribute->admin_name,
-                        ];
-                }
-            } else if ($attribute->is_visible_on_front && $product->{$attribute->code}) {
+                $data[] = [
+                    'code' => $attribute->code,
+                    'label' => $attribute->name,
+                    'value' => $value,
+                    'admin_name' => $attribute->admin_name,
+                ];
+            } else if ($product->{$attribute->code}) {
                 $value = $product->{$attribute->code};
 
                 if ($attribute->type == 'select') {
                     $attributeOption = $attributeOptionReposotory->find($value);
 
                     if ($attributeOption) {
-                        $value = $attributeOption->translate(app()->getLocale());
-                        if ($value) {
-                            $value = $value->label;
-                        }
+                        $value = $attributeOption->label;
                     }
-                }
+                } else if ($attribute->type == 'multiselect') {
+                    $optionIds = explode(",", $value);
 
-                if ($attribute->type == 'multiselect') {
-                    $values = explode(",", $value);
+                    if (count($optionIds)) {
+                        $attributeOptions = $attributeOptionReposotory->findWhereIn('id', $optionIds);
 
-                    $result = [];
-                    foreach ($values as $value) {
-                        $attributeOption = $attributeOptionReposotory->find($value);
-
-                        if ($attributeOption) {
-                            $value = $attributeOption->translate(app()->getLocale());
-                            if ($value) {
-                                $value = $value->label;
-                                $result[] = $value;
+                        foreach ($attributeOptions as $attributeOption) {
+                            if ($attributeOption && $attributeOption->label) {
+                                $result[] = $attributeOption->label;
                             }
                         }
-                    }
 
-                    $value = implode(", ", $result);
+                        $value = implode(", ", $result);
+                    }
                 }
 
                 $data[] = [
@@ -73,7 +58,7 @@ class View extends AbstractProduct
                     'label' => $attribute->name,
                     'value' => $value,
                     'admin_name' => $attribute->admin_name,
-                    ];
+                ];
             }
         }
 

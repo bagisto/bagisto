@@ -144,6 +144,10 @@ class AttributeRepository extends Repository
             $data['is_filterable'] = 0;
         }
 
+        if (in_array($data['type'], ['select', 'multiselect', 'boolean'])) {
+            unset($data['value_per_locale']);
+        }
+
         return $data;
     }
 
