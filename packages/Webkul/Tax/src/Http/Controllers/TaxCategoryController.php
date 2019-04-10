@@ -182,7 +182,7 @@ class TaxCategoryController extends Controller
 
             Event::fire('tax.tax_category.delete.after', $id);
 
-            session()->flash('success', trans('admin::app.response.delete-failed', ['name' => 'Tax Category']));
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Tax Category']));
 
             return response()->json(['message' => true], 200);
         } catch(Exception $e) {
