@@ -33,10 +33,10 @@ class ProductImage extends AbstractProduct
 
         if (! $product || (! $product->parent_id && !count($images))) {
             $images[] = [
-                'small_image_url' => bagisto_asset('images/product/small-product-placeholder.png'),
-                'medium_image_url' => bagisto_asset('images/product/meduim-product-placeholder.png'),
-                'large_image_url' => bagisto_asset('images/product/large-product-placeholder.png'),
-                'original_image_url' => bagisto_asset('images/product/large-product-placeholder.png'),
+                'small_image_url' => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.png'),
+                'medium_image_url' => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png'),
+                'large_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png'),
+                'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png')
             ];
         }
 
@@ -61,10 +61,10 @@ class ProductImage extends AbstractProduct
             ];
         } else {
             $image = [
-                'small_image_url' => bagisto_asset('images/product/small-product-placeholder.png'),
-                'medium_image_url' => bagisto_asset('images/product/meduim-product-placeholder.png'),
-                'large_image_url' => bagisto_asset('images/product/large-product-placeholder.png'),
-                'original_image_url' => bagisto_asset('images/product/large-product-placeholder.png'),
+                'small_image_url' => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.png'),
+                'medium_image_url' => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png'),
+                'large_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png'),
+                'original_image_url' => asset('vendor/webkul/ui/assets/images/product/large-product-placeholder.png'),
             ];
         }
 
