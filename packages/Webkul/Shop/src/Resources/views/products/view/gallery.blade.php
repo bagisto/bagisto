@@ -161,13 +161,15 @@
             });
 
             $(document).mousemove(function(event) {
-                if (event.pageX > $('.add-to-wishlist').offset().left && event.pageX < $('.add-to-wishlist').offset().left+32 && event.pageY > $('.add-to-wishlist').offset().top && event.pageY < $('.add-to-wishlist').offset().top+32) {
+                if ($('.add-to-wishlist').length) {
+                    if (event.pageX > $('.add-to-wishlist').offset().left && event.pageX < $('.add-to-wishlist').offset().left+32 && event.pageY > $('.add-to-wishlist').offset().top && event.pageY < $('.add-to-wishlist').offset().top+32) {
 
-                    $(".zoomContainer").addClass("show-wishlist");
+                        $(".zoomContainer").addClass("show-wishlist");
 
-                } else {
-                    $(".zoomContainer").removeClass("show-wishlist");
-                }
+                    } else {
+                        $(".zoomContainer").removeClass("show-wishlist");
+                    }
+                };
             });
         })
     </script>
