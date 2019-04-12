@@ -28,7 +28,7 @@
                 </li>
 
                 <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']" id="thumb-frame">
-                    <img :src="thumb.small_image_url" :data-image="thumb.large_image_url" :data-zoom-image="thumb.original_image_url"/>
+                    <img :src="thumb.small_image_url"/>
                 </li>
 
                 <li class="gallery-control bottom" @click="moveThumbs('bottom')" v-if="(thumbs.length > 4) && this.is_move.down">
@@ -38,7 +38,7 @@
             </ul>
 
             <div class="product-hero-image" id="product-hero-image">
-                <img :src="currentLargeImageUrl" id="pro-img"/>
+                <img :src="currentLargeImageUrl" id="pro-img" :data-image="currentOriginalImageUrl"/>
 
                 {{-- Uncomment the line below for activating share links --}}
                 {{-- @include('shop::products.sharelinks') --}}
@@ -65,6 +65,8 @@
                 thumbs: [],
 
                 currentLargeImageUrl: '',
+
+                currentOriginalImageUrl: '',
 
                 counter: {
                     up: 0,
@@ -104,6 +106,10 @@
 
                 changeImage (image) {
                     this.currentLargeImageUrl = image.large_image_url;
+
+                    this.currentOriginalImageUrl = image.original_image_url;
+
+                    $('img#pro-img').data('zoom-image', image.original_image_url).ezPlus();
                 },
 
                 moveThumbs(direction) {
@@ -147,18 +153,7 @@
 
     <script>
         $(document).ready(function() {
-            var image = $('#thumb-frame img');
-            var zoomImage = $('img#pro-img');
-
-            zoomImage.ezPlus();
-
-            image.mouseover( function(){
-                $('.zoomContainer').remove();
-                zoomImage.removeData('elevateZoom');
-                zoomImage.attr('src', $(this).data('image'));
-                zoomImage.data('zoom-image', $(this).data('zoom-image'));
-                zoomImage.ezPlus();
-            });
+            $('img#pro-img').data('zoom-image', $('img#pro-img').data('image')).ezPlus();
 
             $(document).mousemove(function(event) {
                 if ($('.add-to-wishlist').length) {
