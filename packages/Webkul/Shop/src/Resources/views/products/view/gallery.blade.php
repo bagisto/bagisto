@@ -170,6 +170,12 @@
                         $(".zoomContainer").removeClass("show-wishlist");
                     }
                 };
+
+                if ($("body").hasClass("rtl")) {
+                    $(".zoomWindow").addClass("zoom-image-direction");
+                } else {
+                    $(".zoomWindow").removeClass("zoom-image-direction");
+                }
             });
         })
     </script>
