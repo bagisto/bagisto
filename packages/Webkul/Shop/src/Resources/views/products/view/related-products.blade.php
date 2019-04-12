@@ -1,4 +1,8 @@
-@if ($product->related_products()->count())
+<?php
+    $relatedProducts = $product->related_products()->get();
+?>
+
+@if ($relatedProducts->count())
     <div class="attached-products-wrapper">
 
         <div class="title">
@@ -8,7 +12,7 @@
 
         <div class="product-grid-4">
 
-            @foreach ($product->related_products()->paginate(4) as $related_product)
+            @foreach ($relatedProducts as $related_product)
 
                 @include ('shop::products.list.card', ['product' => $related_product])
 
