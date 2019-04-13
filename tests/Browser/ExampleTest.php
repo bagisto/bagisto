@@ -17,7 +17,10 @@ class ExampleTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/customer/login')
-                    ->assertSee('login');
+                    ->type('email', 'prashant@webkul.com')
+                    ->type('password', '12345678')
+                    ->click('input[type="submit"]')
+                    ->screenshot('error');
         });
     }
 }
