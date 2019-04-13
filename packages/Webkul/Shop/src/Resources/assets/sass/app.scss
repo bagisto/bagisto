@@ -1090,6 +1090,7 @@ section.slider-block {
         .nav > li {
             float: left;
             margin-right: 1px;
+            height: 45px;
         }
 
         .nav > li > a {
@@ -3485,6 +3486,10 @@ section.review {
             }
         }
     }
+}
+
+.show-wishlist {
+    z-index: -1 !important;
 }
 
 /// rtl css start here

@@ -6,19 +6,20 @@
     </div>
 
     <?php $order = $shipment->order; ?>
+    <?php $inventory = $shipment->inventory_source; ?>
 
     <div style="padding: 30px;">
         <div style="font-size: 20px;color: #242424;line-height: 30px;margin-bottom: 34px;">
             <span style="font-weight: bold;">
-                {{ __('shop::app.mail.shipment.heading', ['order_id' => $order->id, 'shipment_id' => $shipment->id]) }}
+                {{ __('shop::app.mail.shipment.inventory-heading', ['order_id' => $order->id, 'shipment_id' => $shipment->id]) }}
             </span> <br>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                {{ __('shop::app.mail.order.dear', ['customer_name' => $order->customer_full_name]) }},
+                {{ __('shop::app.mail.order.dear', ['customer_name' => $inventory->name]) }},
             </p>
 
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                {!! __('shop::app.mail.order.greeting', [
+                {!! __('shop::app.mail.shipment.greeting', [
                     'order_id' => '<a href="' . route('customer.orders.view', $order->id) . '" style="color: #0041FF; font-weight: bold;">#' . $order->id . '</a>',
                     'created_at' => $order->created_at
                     ])
@@ -26,9 +27,7 @@
             </p>
         </div>
 
-        <div style="font-weight: bold;font-size: 20px;color: #242424;line-height: 30px;margin-bottom: 20px !important;">
-            {{ __('shop::app.mail.shipment.summary') }}
-        </div>
+
 
         <div style="display: flex;flex-direction: row;margin-top: 20px;justify-content: space-between;margin-bottom: 40px;">
             <div style="line-height: 25px;">
@@ -100,7 +99,7 @@
                     {{ __('shop::app.mail.order.payment') }}
                 </div>
 
-                <div style="font-weight: bold;font-size: 16px; color: #242424;">
+                <div style="font-size: 16px; color: #242424;">
                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                 </div>
             </div>
@@ -126,23 +125,22 @@
                                 <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">{{ $item->name }}</td>
                                 <td data-value="{{ __('shop::app.customer.account.order.view.price') }}" style="text-align: left;padding: 8px">{{ core()->formatPrice($item->price, $order->order_currency_code) }}</td>
                                 <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}" style="text-align: left;padding: 8px">{{ $item->qty }}</td>
+                            </tr>
 
-                                @if ($html = $item->getOptionDetailHtml())
+                            @if ($html = $item->getOptionDetailHtml())
                                 <div style="">
                                     <label style="margin-top: 10px; font-size: 16px;color: #5E5E5E; display: block;">
                                         {{ $html }}
                                     </label>
                                 </div>
                             @endif
-                            </tr>
-
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div style="margin-top: 20px;font-size: 16px;color: #5E5E5E;line-height: 24px;display: inline-block;width: 100%">
+        {{-- <div style="margin-top: 20px;font-size: 16px;color: #5E5E5E;line-height: 24px;display: inline-block;width: 100%">
             <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
                 {!!
                     __('shop::app.mail.order.help', [
@@ -150,10 +148,6 @@
                         ])
                 !!}
             </p>
-
-            <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                {{ __('shop::app.mail.order.thanks') }}
-            </p>
-        </div>
+        </div> --}}
     </div>
 @endcomponent

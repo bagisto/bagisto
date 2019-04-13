@@ -49,7 +49,7 @@
                             <div class="product-grid-3">
                                 @foreach ($products as $productFlat)
 
-                                    @include ('shop::products.list.card', ['product' => $productFlat->product])
+                                    @include ('shop::products.list.card', ['productFlat' => $productFlat])
 
                                 @endforeach
                             </div>
@@ -57,7 +57,7 @@
                             <div class="product-list">
                                 @foreach ($products as $productFlat)
 
-                                    @include ('shop::products.list.card', ['product' => $productFlat->product])
+                                    @include ('shop::products.list.card', ['productFlat' => $productFlat])
 
                                 @endforeach
                             </div>

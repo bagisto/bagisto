@@ -71,6 +71,8 @@ return [
         'tax-categories' => 'Tax Categories',
         'tax-rates' => 'Tax Rates',
         'edit' => 'Edit',
+        'create' => 'Add',
+        'delete' => 'Delete',
     ],
 
     'dashboard' => [

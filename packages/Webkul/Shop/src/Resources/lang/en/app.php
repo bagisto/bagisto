@@ -461,8 +461,8 @@ return [
             'shipping-address' => 'Shipping Address',
             'billing-address' => 'Billing Address',
             'contact' => 'Contact',
-            'shipping' => 'Shipping',
-            'payment' => 'Payment',
+            'shipping' => 'Shipping Method',
+            'payment' => 'Payment Method',
             'price' => 'Price',
             'quantity' => 'Quantity',
             'subtotal' => 'Subtotal',
@@ -479,11 +479,14 @@ return [
             'summary' => 'Summary of Invoice',
         ],
         'shipment' => [
-            'heading' => 'Your Shipment #:shipment_id for Order #:order_id',
+            'heading' => 'Shipment #:shipment_id  has been generated for Order #:order_id',
+            'inventory-heading' => 'New Shipment #:shipment_id had been generated for Order #:order_id',
             'subject' => 'Shipment for your order #:order_id',
+            'inventory-subject' => 'New Shipment had been generated for Order #:order_id',
             'summary' => 'Summary of Shipment',
             'carrier' => 'Carrier',
-            'tracking-number' => 'Tracking Number'
+            'tracking-number' => 'Tracking Number',
+            'greeting' => 'An Order :order_id has been placed on :created_at',
         ],
         'forget-password' => [
             'dear' => 'Dear :name',
