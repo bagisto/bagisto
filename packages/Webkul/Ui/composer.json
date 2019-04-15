@@ -16,7 +16,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\Ui\\UiServiceProvider"
+                "Webkul\\Ui\\Providers\\UiServiceProvider"
             ],
             "aliases": {}
         }

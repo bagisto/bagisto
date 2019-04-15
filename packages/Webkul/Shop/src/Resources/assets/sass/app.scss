@@ -421,7 +421,7 @@ input {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
         grid-auto-rows: auto;
-        grid-column-gap: 48px;
+        grid-column-gap: 30px;
         grid-row-gap: 15px;
         justify-items: end;
     }
@@ -827,7 +827,6 @@ section.slider-block {
                         border-top-right-radius: 0px;
                         border-bottom-right-radius: 0px;
                         padding-left: 12px;
-                        font-family: "Montserrat", sans-serif;
                         font-size: 14px;
                     }
 
@@ -854,9 +853,8 @@ section.slider-block {
                 > li {
                     display: inline-block;
                     border-right: 2px solid $border-color;
-                    cursor: pointer;
                     padding: 0 15px;
-                    min-height: 26px;
+                    min-height: 15px;
                     padding-top: 3px;
 
                     &:first-child {
@@ -1362,14 +1360,6 @@ section.slider-block {
                     .control-group {
                         .subscribe-field {
                             width: 100%;
-
-                            &::-webkit-input-placeholder {
-                                font-family: "montserrat", sans-serif;
-                            }
-
-                            &::-moz-placeholder {
-                                font-family: "montserrat", sans-serif;
-                            }
                         }
 
                         .btn-primary {
@@ -2483,8 +2473,11 @@ section.cart {
             padding-top: 20px;
 
             .form-header {
+                display: inline-flex;
+                align-items: center;
+                justify-content: space-between;
                 width: 100%;
-                display: inline-block;
+                height: 30px;
 
                 .checkout-step-heading {
                     font-size: 24px;
