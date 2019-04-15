@@ -20,8 +20,6 @@ class ProductServiceProvider extends ServiceProvider
 
         $this->app->register(EventServiceProvider::class);
 
-        $this->app->register(ModuleServiceProvider::class);
-
         $this->composeView();
 
         $this->publishes([
