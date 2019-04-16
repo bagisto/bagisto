@@ -68,7 +68,10 @@
                         </span>
 
                         <div class="total-reviews mt-5">
-                            {{ __('shop::app.reviews.ratingreviews', ['rating' => $reviewHelper->getTotalRating($product), 'review' => $reviewHelper->getTotalReviews($product)]) }}
+                            {{ __('shop::app.reviews.ratingreviews', [
+                                'rating' => $reviewHelper->getTotalRating($product),
+                                'review' => $reviewHelper->getTotalReviews($product)])
+                            }}
                         </div>
                     </div>
 

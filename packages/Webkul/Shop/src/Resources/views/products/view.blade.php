@@ -66,7 +66,6 @@
 
                         @include ('shop::products.view.configurable-options')
 
-
                         {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
                         <accordian :title="'{{ __('shop::app.products.description') }}'" :active="true">
@@ -92,9 +91,9 @@
             </product-view>
         </div>
 
-        @include ('shop::products.view.related-products')
+        {{--@include ('shop::products.view.related-products')--}}
 
-        @include ('shop::products.view.up-sells')
+        {{--@include ('shop::products.view.up-sells')--}}
 
     </section>
 
@@ -104,7 +103,7 @@
 @push('scripts')
 
     <script type="text/x-template" id="product-view-template">
-        <form method="POST" id="product-form" action="{{ route('cart.add', $product->id) }}" @click="onSubmit($event)">
+        <form method="POST" id="product-form" action="{{ route('cart.add', $product->product_id) }}" @click="onSubmit($event)">
 
             <slot></slot>
 

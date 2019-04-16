@@ -13,7 +13,7 @@ class Product extends Model implements ProductContract
 {
     protected $fillable = ['type', 'attribute_family_id', 'sku', 'parent_id'];
 
-    protected $with = ['attribute_family', 'inventories'];
+    // protected $with = ['attribute_family', 'inventories'];
 
     // protected $table = 'products';
 
@@ -206,7 +206,7 @@ class Product extends Model implements ProductContract
      */
     public function getAttribute($key)
     {
-        if (! method_exists(self::class, $key) && !in_array($key, ['parent_id', 'attribute_family_id']) && !isset($this->attributes[$key])) {
+        if (! method_exists(self::class, $key) && ! in_array($key, ['parent_id', 'attribute_family_id']) && ! isset($this->attributes[$key])) {
             if (isset($this->id)) {
                 $this->attributes[$key] = '';
 

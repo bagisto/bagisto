@@ -11,7 +11,7 @@ class Attribute extends TranslatableModel implements AttributeContract
 
     protected $fillable = ['code', 'admin_name', 'type', 'position', 'is_required', 'is_unique', 'validation', 'value_per_locale', 'value_per_channel', 'is_filterable', 'is_configurable', 'is_visible_on_front', 'is_user_defined', 'swatch_type'];
 
-    protected $with = ['options', 'translations'];
+    // protected $with = ['options'];
 
     /**
      * Get the options.
