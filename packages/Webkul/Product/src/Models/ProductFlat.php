@@ -98,4 +98,28 @@ class ProductFlat extends Model implements ProductFlatContract
     {
         return $this->images()->get();
     }
+
+    /**
+     * The related products that belong to the product.
+     */
+    public function related_products()
+    {
+        return $this->product->related_products();
+    }
+
+    /**
+     * The up sells that belong to the product.
+     */
+    public function up_sells()
+    {
+        return $this->product->up_sells();
+    }
+
+    /**
+     * The cross sells that belong to the product.
+     */
+    public function cross_sells()
+    {
+        return $this->product->cross_sells();
+    }
 }

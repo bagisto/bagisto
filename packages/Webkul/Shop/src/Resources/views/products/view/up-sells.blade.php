@@ -12,7 +12,7 @@
 
             @foreach ($product->up_sells()->paginate(4) as $up_sell_product)
 
-                @include ('shop::products.list.card', ['product' => $up_sell_product])
+                @include ('shop::products.list.card', ['productFlat' => $up_sell_product])
 
             @endforeach
 
