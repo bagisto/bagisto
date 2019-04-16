@@ -39,15 +39,19 @@ window.onload = function () {
             if (menubarHeight > windowHeight) {
                 $(document).scroll(function() {
                     documentScrollWhenScrolled = $(document).scrollTop();
+
                     if (documentScrollWhenScrolled <= differenceInHeight + 70) {
                         $('.navbar-left').css('top', -documentScrollWhenScrolled + 60 + 'px');
 
                         scrollTopValueWhenNavBarFixed = $(document).scrollTop();
+                    } else {
+                        $('.navbar-left').css('top', -(differenceInHeight + moveDistance) + 'px');
                     }
                 });
             } else if (menubarHeight < windowHeight) {
                 $(document).scroll(function() {
                     documentScrollWhenScrolled = $(document).scrollTop();
+
                     if (documentScrollWhenScrolled <= differenceInHeight + 70) {
                         $('.navbar-left').css('top', -documentScrollWhenScrolled + 60 + 'px');
 
