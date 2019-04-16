@@ -14,7 +14,7 @@
 
             @foreach ($relatedProducts as $related_product)
 
-                @include ('shop::products.list.card', ['product' => $related_product])
+                @include ('shop::products.list.card', ['productFlat' => $related_product])
 
             @endforeach
 
