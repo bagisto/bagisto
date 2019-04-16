@@ -107,7 +107,7 @@ class ConfigurableOption extends AbstractProduct
      */
     public function getAllowAttributes($product)
     {
-        return $product->super_attributes;
+        return $product->product->super_attributes;
     }
 
     /**
@@ -124,8 +124,11 @@ class ConfigurableOption extends AbstractProduct
         $allowAttributes = $this->getAllowAttributes($currentProduct);
 
         foreach ($allowedProducts as $product) {
-
-            $productId = $product->id;
+            if ($product instanceof \Webkul\Product\Models\ProductFlat) {
+                $productId = $product->product_id;
+            } else {
+                $productId = $product->id;
+            }
 
             foreach ($allowAttributes as $productAttribute) {
                 $productAttributeId = $productAttribute->id;
@@ -154,7 +157,9 @@ class ConfigurableOption extends AbstractProduct
 
         $attributes = [];
 
-        foreach ($product->super_attributes as $attribute) {
+        $allowAttributes = $this->getAllowAttributes($product);
+
+        foreach ($allowAttributes as $attribute) {
 
             $attributeOptionsData = $this->getAttributeOptionsData($attribute, $options);
 
@@ -211,7 +216,13 @@ class ConfigurableOption extends AbstractProduct
         $prices = [];
 
         foreach ($this->getAllowedProducts($product) as $variant) {
-            $prices[$variant->id] = [
+            if ($variant instanceof \Webkul\Product\Models\ProductFlat) {
+                $variantId = $variant->product_id;
+            } else {
+                $variantId = $variant->id;
+            }
+            
+            $prices[$variantId] = [
                 'regular_price' => [
                     'formated_price' => core()->currency($variant->price),
                     'price' => $variant->price
@@ -237,7 +248,13 @@ class ConfigurableOption extends AbstractProduct
         $images = [];
 
         foreach ($this->getAllowedProducts($product) as $variant) {
-            $images[$variant->id] = $this->productImage->getGalleryImages($variant);
+            if ($variant instanceof \Webkul\Product\Models\ProductFlat) {
+                $variantId = $variant->product_id;
+            } else {
+                $variantId = $variant->id;
+            }
+
+            $images[$variantId] = $this->productImage->getGalleryImages($variant);
         }
 
         return $images;

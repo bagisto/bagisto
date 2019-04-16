@@ -40,11 +40,8 @@
             <div class="product-hero-image" id="product-hero-image">
                 <img :src="currentLargeImageUrl" id="pro-img" :data-image="currentOriginalImageUrl"/>
 
-                {{-- Uncomment the line below for activating share links --}}
-                {{-- @include('shop::products.sharelinks') --}}
-
                 @auth('customer')
-                    <a class="add-to-wishlist" href="{{ route('customer.wishlist.add', $product->id) }}">
+                    <a class="add-to-wishlist" href="{{ route('customer.wishlist.add', $product->product_id) }}">
                     </a>
                 @endauth
             </div>

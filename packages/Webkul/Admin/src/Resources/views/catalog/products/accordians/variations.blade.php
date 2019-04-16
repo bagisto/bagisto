@@ -183,7 +183,7 @@
             ];
         });
 
-        var super_attributes = @json($product->super_attributes);
+        var super_attributes = @json($product->super_attributes()->with('options')->get());
         var variants = @json($product->variants);
 
         Vue.component('variant-form', {

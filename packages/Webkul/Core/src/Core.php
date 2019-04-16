@@ -340,7 +340,7 @@ class Core
     */
     public function convertPrice($amount, $targetCurrencyCode = null)
     {
-        $targetCurrency = !$targetCurrencyCode
+        $targetCurrency = ! $targetCurrencyCode
                         ? $this->getCurrentCurrency()
                         : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
 

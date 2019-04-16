@@ -566,7 +566,10 @@ class Cart {
      */
     public function getCart()
     {
-        $cart = null;
+        static $cart;
+
+        if ($cart)
+            return $cart;
 
         if (auth()->guard('customer')->check()) {
             $cart = $this->cart->findOneWhere([
@@ -592,11 +595,15 @@ class Cart {
 
         $data = $cart->toArray();
 
-        $data['shipping_address'] = current($data['shipping_address']);
+        $data['shipping_address'] = $cart->shipping_address->toArray();
 
-        $data['billing_address'] = current($data['billing_address']);
+        $data['billing_address'] = $cart->billing_address->toArray();
 
         $data['selected_shipping_rate'] = $cart->selected_shipping_rate->toArray();
+
+        $data['payment'] = $cart->payment->toArray();
+
+        $data['items'] = $cart->items->toArray();
 
         return $data;
     }
@@ -612,7 +619,6 @@ class Cart {
 
         $labels = [];
 
-        $attribute = $product->parent->super_attributes;
         foreach ($product->parent->super_attributes as $attribute) {
             $option = $attribute->options()->where('id', $product->{$attribute->code})->first();
 
@@ -834,20 +840,22 @@ class Cart {
             $items = $cart->items;
 
             foreach ($items as $item) {
-                if ($item->product->type == 'configurable') {
-                    if ($item->product->sku != $item->sku) {
-                        $item->update(['sku' => $item->product->sku]);
+                $productFlat = $item->product_flat;
 
-                    } else if ($item->product->name != $item->name) {
-                        $item->update(['name' => $item->product->name]);
+                if ($productFlat->type == 'configurable') {
+                    if ($productFlat->sku != $item->sku) {
+                        $item->update(['sku' => $productFlat->sku]);
 
-                    } else if ($this->price->getMinimalPrice($item->child->product) != $item->price) {
+                    } else if ($productFlat->name != $item->name) {
+                        $item->update(['name' => $productFlat->name]);
+
+                    } else if ($this->price->getMinimalPrice($item->child->product_flat) != $item->price) {
                         // $price = (float) $item->custom_price ? $item->custom_price : $item->child->product->price;
 
                         if ((float)$item->custom_price) {
                             $price = $item->custom_price;
                         } else {
-                            $price = $this->price->getMinimalPrice($item->child->product);
+                            $price = $this->price->getMinimalPrice($item->child->product_flat);
                         }
 
                         $item->update([
@@ -858,20 +866,20 @@ class Cart {
                         ]);
                     }
 
-                } else if ($item->product->type == 'simple') {
-                    if ($item->product->sku != $item->sku) {
-                        $item->update(['sku' => $item->product->sku]);
+                } else if ($productFlat->type == 'simple') {
+                    if ($productFlat->sku != $item->sku) {
+                        $item->update(['sku' => $productFlat->sku]);
 
-                    } else if ($item->product->name != $item->name) {
-                        $item->update(['name' => $item->product->name]);
+                    } else if ($productFlat->name != $item->name) {
+                        $item->update(['name' => $productFlat->name]);
 
-                    } else if ($this->price->getMinimalPrice($item->product) != $item->price) {
+                    } else if ($this->price->getMinimalPrice($productFlat) != $item->price) {
                         // $price = (float) $item->custom_price ? $item->custom_price : $item->product->price;
 
                         if ((float)$item->custom_price) {
                             $price = $item->custom_price;
                         } else {
-                            $price = $this->price->getMinimalPrice($item->product);
+                            $price = $this->price->getMinimalPrice($productFlat);
                         }
 
                         $item->update([
@@ -1092,7 +1100,7 @@ class Cart {
 
         if ($product->type == 'simple') {
             $data['quantity'] = 1;
-            $data['product'] = $wishlistItem->product->id;
+            $data['product'] = $product->id;
 
             $result = $this->add($product->id, $data);
 

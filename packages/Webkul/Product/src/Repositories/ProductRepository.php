@@ -9,8 +9,6 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Contracts\Criteria\ActiveProductCriteria;
-use Webkul\Product\Contracts\Criteria\AttributeToSelectCriteria;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
@@ -518,25 +516,19 @@ class ProductRepository extends Repository
      */
     public function findBySlugOrFail($slug, $columns = null)
     {
-        $attribute = $this->attribute->findOneByField('code', 'url_key');
+        $product = app('Webkul\Product\Repositories\ProductFlatRepository')->findOneWhere([
+                'url_key' => $slug,
+                'locale' => app()->getLocale(),
+                'channel' => core()->getCurrentChannelCode(),
+            ]);
 
-        $attributeValue = $this->attributeValue->findOneWhere([
-            'attribute_id' => $attribute->id,
-            ProductAttributeValue::$attributeTypeFields[$attribute->type] => $slug
-        ], ['product_id']);
-
-        if ($attributeValue && $attributeValue->product_id) {
-            $this->pushCriteria(app(ActiveProductCriteria::class));
-            $this->pushCriteria(app(AttributeToSelectCriteria::class)->addAttribueToSelect($columns));
-
-            $product = $this->findOrFail($attributeValue->product_id);
-
-            return $product;
+        if (! $product) {
+            throw (new ModelNotFoundException)->setModel(
+                get_class($this->model), $slug
+            );
         }
 
-        throw (new ModelNotFoundException)->setModel(
-            get_class($this->model), $slug
-        );
+        return $product;
     }
 
     /**
