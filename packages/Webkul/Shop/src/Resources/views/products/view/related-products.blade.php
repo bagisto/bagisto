@@ -10,7 +10,7 @@
 
             @foreach ($product->related_products()->paginate(4) as $related_product)
 
-                @include ('shop::products.list.card', ['productFlat' => $related_product])
+                @include ('shop::products.list.card', ['product' => $related_product])
 
             @endforeach
 
