@@ -566,10 +566,7 @@ class Cart {
      */
     public function getCart()
     {
-        static $cart;
-
-        if ($cart)
-            return $cart;
+        $cart = null;
 
         if (auth()->guard('customer')->check()) {
             $cart = $this->cart->findOneWhere([
