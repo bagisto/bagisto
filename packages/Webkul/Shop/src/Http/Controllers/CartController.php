@@ -9,8 +9,6 @@ use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
-use Webkul\Product\Helpers\ProductImage;
-use Webkul\Product\Helpers\View as ProductView;
 use Illuminate\Support\Facades\Event;
 use Cart;
 
@@ -32,7 +30,6 @@ class CartController extends Controller
      * @param $cartItem
      * @param $customer
      * @param $product
-     * @param $productImage
      * @param $productView
      */
     protected $_config;
@@ -44,8 +41,6 @@ class CartController extends Controller
     protected $customer;
 
     protected $product;
-
-    protected $productView;
 
     protected $suppressFlash = false;
 
@@ -61,8 +56,6 @@ class CartController extends Controller
         CartItemRepository $cartItem,
         CustomerRepository $customer,
         ProductRepository $product,
-        ProductImage $productImage,
-        ProductView $productView,
         WishlistRepository $wishlist
     )
     {
@@ -76,10 +69,6 @@ class CartController extends Controller
         $this->cartItem = $cartItem;
 
         $this->product = $product;
-
-        $this->productImage = $productImage;
-
-        $this->productView = $productView;
 
         $this->wishlist = $wishlist;
 

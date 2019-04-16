@@ -1,10 +1,10 @@
-{!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $productFlat->product]) !!}
+{!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $productFlat]) !!}
 
 <div class="product-card">
 
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
-    <?php $productBaseImage = $productImageHelper->getProductBaseImage($productFlat->product); ?>
+    <?php $productBaseImage = $productImageHelper->getProductBaseImage($productFlat); ?>
 
     @if ($productFlat->new)
         <div class="sticker new">
@@ -28,11 +28,11 @@
             </a>
         </div>
 
-        @include ('shop::products.price', ['product' => $productFlat->product])
+        @include ('shop::products.price', ['product' => $productFlat])
 
-        @include('shop::products.add-buttons', ['product' => $productFlat->product])
+        @include('shop::products.add-buttons', ['product' => $productFlat])
     </div>
 
 </div>
 
-{!! view_render_event('bagisto.shop.products.list.card.after', ['product' => $productFlat->product]) !!}
+{!! view_render_event('bagisto.shop.products.list.card.after', ['product' => $productFlat]) !!}

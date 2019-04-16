@@ -167,7 +167,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->product->with(['variants'])->findOrFail($id);
+        $product = $this->product->with(['variants', 'variants.inventories'])->findOrFail($id);
 
         $categories = $this->category->getCategoryTree();
 

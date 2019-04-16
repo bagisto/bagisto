@@ -5,7 +5,6 @@ namespace Webkul\Product\Repositories;
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductRepository as Product;
-use Webkul\Product\Helpers\Price;
 
 /**
  * Product Repository
@@ -26,13 +25,9 @@ class ProductFlatRepository extends Repository
 
     public function __construct(
         Product $product,
-        Price $price,
         App $app
     ) {
         $this->product = $product;
-
-        $this->price = $price;
-
         parent::__construct($app);
     }
 

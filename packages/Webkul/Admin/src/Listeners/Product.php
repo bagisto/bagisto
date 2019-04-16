@@ -38,7 +38,12 @@ class Product {
      */
     protected $productGrid;
 
-    public function __construct(ProductRepository $product, ProductGridRepository $productGrid, ProductFlatRepository $productFlat, Price $price)
+    public function __construct(
+        ProductRepository $product,
+        ProductGridRepository $productGrid,
+        ProductFlatRepository $productFlat,
+        Price $price
+    )
     {
         $this->product = $product;
 

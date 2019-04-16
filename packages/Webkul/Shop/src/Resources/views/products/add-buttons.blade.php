@@ -11,9 +11,9 @@
         </div>
     @else
         <div class="cart-wish-wrap">
-            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+            <form action="{{ route('cart.add', $product->product_id) }}" method="POST">
                 @csrf
-                <input type="hidden" name="product" value="{{ $product->id }}">
+                <input type="hidden" name="product" value="{{ $product->product_id }}">
                 <input type="hidden" name="quantity" value="1">
                 <input type="hidden" value="false" name="is_configurable">
                 <button class="btn btn-lg btn-primary addtocart" {{ $product->haveSufficientQuantity(1) ? '' : 'disabled' }}>{{ __('shop::app.products.add-to-cart') }}</button>
