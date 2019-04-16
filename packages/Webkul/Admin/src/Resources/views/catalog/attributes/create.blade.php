@@ -302,7 +302,7 @@
                 </table>
             </div>
 
-            <button type="button" class="btn btn-lg btn-primary" id="add-option-btn" style="margin-top: 20px" @click="addOptionRow()">
+            <button type="button" class="btn btn-lg btn-primary mt-20" id="add-option-btn" @click="addOptionRow()">
                 {{ __('admin::app.catalog.attributes.add-option-btn-title') }}
             </button>
         </div>

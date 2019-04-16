@@ -29,8 +29,6 @@ class CoreServiceProvider extends ServiceProvider
         Validator::extend('code', 'Webkul\Core\Contracts\Validations\Code@passes');
 
         Validator::extend('decimal', 'Webkul\Core\Contracts\Validations\Decimal@passes');
-
-        $this->app->register(ModuleServiceProvider::class);
     }
 
     /**

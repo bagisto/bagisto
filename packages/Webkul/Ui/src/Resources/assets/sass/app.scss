@@ -15,6 +15,11 @@
     outline: none;
 }
 
+body {
+    letter-spacing: -0.26px;
+    line-height: 19px;
+}
+
 a:link,
 a:hover,
 a:visited,
@@ -23,6 +28,11 @@ a:active {
     text-decoration: none;
     color: $brand-color;
 }
+
+::selection {
+    background-color: $selection-color;
+    color: $color-white;
+  }
 
 textarea {
     resize: none;
@@ -143,6 +153,10 @@ h5 {
         top: 50%;
         margin-top: -4px;
     }
+}
+
+.dropdown-toggle {
+    cursor: pointer;
 }
 
 .dropdown-open {

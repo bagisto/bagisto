@@ -19,6 +19,7 @@
     "flatpickr": "^4.4.6"
   },
   "dependencies": {
+    "tooltip.js": "^1.3.1",
     "vue-swatches": "^1.0.3"
   }
 }
