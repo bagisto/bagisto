@@ -285,4 +285,12 @@ class Product extends Model implements ProductContract
         return new \Webkul\Product\Database\Eloquent\Builder($query);
     }
 
+    /**
+     * Return the product id attribute.
+     */
+    public function getProductIdAttribute()
+    {
+        return $image = $this->id;
+    }
+
 }

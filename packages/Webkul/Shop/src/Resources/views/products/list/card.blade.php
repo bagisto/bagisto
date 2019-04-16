@@ -1,19 +1,19 @@
-{!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $productFlat]) !!}
+{!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $product]) !!}
 
 <div class="product-card">
 
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
-    <?php $productBaseImage = $productImageHelper->getProductBaseImage($productFlat); ?>
+    <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
 
-    @if ($productFlat->new)
+    @if ($product->new)
         <div class="sticker new">
             {{ __('shop::app.products.new') }}
         </div>
     @endif
 
     <div class="product-image">
-        <a href="{{ route('shop.products.index', $productFlat->url_key) }}" title="{{ $productFlat->name }}">
+        <a href="{{ route('shop.products.index', $product->url_key) }}" title="{{ $product->name }}">
             <img src="{{ $productBaseImage['medium_image_url'] }}" />
         </a>
     </div>
@@ -21,18 +21,18 @@
     <div class="product-information">
 
         <div class="product-name">
-            <a href="{{ url()->to('/').'/products/' . $productFlat->url_key }}" title="{{ $productFlat->name }}">
+            <a href="{{ url()->to('/').'/products/' . $product->url_key }}" title="{{ $product->name }}">
                 <span>
-                    {{ $productFlat->name }}
+                    {{ $product->name }}
                 </span>
             </a>
         </div>
 
-        @include ('shop::products.price', ['product' => $productFlat])
+        @include ('shop::products.price', ['product' => $product])
 
-        @include('shop::products.add-buttons', ['product' => $productFlat])
+        @include('shop::products.add-buttons', ['product' => $product])
     </div>
 
 </div>
 
-{!! view_render_event('bagisto.shop.products.list.card.after', ['product' => $productFlat]) !!}
+{!! view_render_event('bagisto.shop.products.list.card.after', ['product' => $product]) !!}
