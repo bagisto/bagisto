@@ -149,6 +149,16 @@
                                 }
                             }
 
+                            if (this_this.addedProducts[key].length) {
+                                for (var product in this_this.addedProducts[key]) {
+                                    for (var productId in response.data) {
+                                        if (response.data[productId].id == this_this.addedProducts[key][product].id) {
+                                            response.data.splice(productId, 1);
+                                        }
+                                    }
+                                }
+                            }
+
                             this_this.products[key] = response.data;
 
                             this_this.is_searching[key] = false;
