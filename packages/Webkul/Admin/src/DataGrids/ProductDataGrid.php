@@ -58,7 +58,6 @@ class ProductDataGrid extends DataGrid
             'searchable' => true,
             'sortable' => true,
             'filterable' => true
-            // 'width' => '100px'
         ]);
 
         $this->addColumn([
