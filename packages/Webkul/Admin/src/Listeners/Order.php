@@ -26,8 +26,6 @@ class Order {
     {
         try {
             Mail::send(new NewOrderNotification($order));
-
-            Mail::send(new NewAdminNotification($order));
         } catch (\Exception $e) {
 
         }

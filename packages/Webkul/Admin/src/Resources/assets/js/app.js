@@ -8,61 +8,6 @@ Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
 
-window.onload = function () {
-    moveDistance = 30;
-    navbarLeftCssTop = parseInt($('.navbar-left').css("top"));
-    windowHeight = $(window).height();
-    menubarHeight = $('ul.menubar').height();
-    documentHeight = $(document).height();
-
-    if (menubarHeight < windowHeight) {
-        differenceInHeight = windowHeight - menubarHeight;
-    } else {
-        differenceInHeight = menubarHeight - windowHeight;
-    }
-
-    scrollTopWhenWindowLoaded = $(document).scrollTop();
-
-    $('.navbar-left').css('top', -scrollTopWhenWindowLoaded + 60 + 'px');
-
-    $(document).ready(function() {
-        if (menubarHeight > documentHeight && menubarHeight > windowHeight) {
-            $('.inner-section').css("position", "fixed");
-            $('.navbar-left').css("position", "absolute");
-        } else if (menubarHeight < windowHeight) {
-            $('.navbar-left').css("position", "fixed");
-        } else {
-            if (scrollTopWhenWindowLoaded > differenceInHeight) {
-                $('.navbar-left').css('top', -differenceInHeight + 'px');
-            }
-
-            if (menubarHeight > windowHeight) {
-                $(document).scroll(function() {
-                    documentScrollWhenScrolled = $(document).scrollTop();
-
-                    if (documentScrollWhenScrolled <= differenceInHeight + 70) {
-                        $('.navbar-left').css('top', -documentScrollWhenScrolled + 60 + 'px');
-
-                        scrollTopValueWhenNavBarFixed = $(document).scrollTop();
-                    } else {
-                        $('.navbar-left').css('top', -(differenceInHeight + moveDistance) + 'px');
-                    }
-                });
-            } else if (menubarHeight < windowHeight) {
-                $(document).scroll(function() {
-                    documentScrollWhenScrolled = $(document).scrollTop();
-
-                    if (documentScrollWhenScrolled <= differenceInHeight + 70) {
-                        $('.navbar-left').css('top', -documentScrollWhenScrolled + 60 + 'px');
-
-                        scrollTopValueWhenNavBarFixed = $(document).scrollTop();
-                    }
-                });
-            }
-        }
-    });
-};
-
 $(document).ready(function () {
     Vue.config.ignoredElements = [
         'option-wrapper',
