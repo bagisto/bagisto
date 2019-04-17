@@ -8,31 +8,30 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 /**
- * New Shipment Mail class
+ * New Order to Admin Mail class
  *
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class NewShipmentNotification extends Mailable
+class NewAdminNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * The shipment instance.
+     * The order instance.
      *
-     * @var Shipment
+     * @var Order
      */
-    public $shipment;
+    public $order;
 
     /**
      * Create a new message instance.
      *
-     * @param mixed $shipment
      * @return void
      */
-    public function __construct($shipment)
+    public function __construct($order)
     {
-        $this->shipment = $shipment;
+        $this->order = $order;
     }
 
     /**
@@ -42,10 +41,8 @@ class NewShipmentNotification extends Mailable
      */
     public function build()
     {
-        $order = $this->shipment->order;
-
-        return $this->to($order->customer_email, $order->customer_full_name)
-                ->subject(trans('shop::app.mail.shipment.subject', ['order_id' => $order->id]))
-                ->view('shop::emails.sales.new-shipment');
+        return $this->to($this->order->customer_email, $this->order->customer_full_name)
+                ->subject(trans('shop::app.mail.order.subject'))
+                ->view('shop::emails.sales.new-order-admin');
     }
 }
