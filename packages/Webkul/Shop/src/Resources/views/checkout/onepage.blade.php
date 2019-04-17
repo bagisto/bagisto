@@ -132,30 +132,32 @@
             template: '#checkout-template',
             inject: ['$validator'],
 
-            data: () => ({
-                currentStep: 1,
-                completedStep: 0,
-                address: {
-                    billing: {
-                        address1: [''],
-                        use_for_shipping: true,
+            data() {
+                return {
+                    currentStep: 1,
+                    completedStep: 0,
+                    address: {
+                        billing: {
+                            address1: [''],
+                            use_for_shipping: true,
+                        },
+                        shipping: {
+                            address1: ['']
+                        },
                     },
-                    shipping: {
-                        address1: ['']
-                    },
-                },
-                selected_shipping_method: '',
-                selected_payment_method: '',
-                disable_button: false,
-                new_shipping_address: false,
-                new_billing_address: false,
+                    selected_shipping_method: '',
+                    selected_payment_method: '',
+                    disable_button: false,
+                    new_shipping_address: false,
+                    new_billing_address: false,
 
-                allAddress: {},
+                    allAddress: {},
 
-                countryStates: @json(core()->groupedStatesByCountries()),
+                    countryStates: @json(core()->groupedStatesByCountries()),
 
-                country: @json(core()->countries())
-            }),
+                    country: @json(core()->countries())
+                }
+            },
 
             created() {
                 if(! customerAddress) {
@@ -333,9 +335,11 @@
         Vue.component('summary-section', {
             inject: ['$validator'],
 
-            data: () => ({
-                templateRender: null
-            }),
+            data() {
+                return {
+                    templateRender: null
+                }
+            },
 
             staticRenderFns: summaryTemplateRenderFns,
 
@@ -360,10 +364,12 @@
         Vue.component('shipping-section', {
             inject: ['$validator'],
 
-            data: () => ({
-                templateRender: null,
-                selected_shipping_method: '',
-            }),
+            data() {
+                return {
+                    templateRender: null,
+                    selected_shipping_method: '',
+                }
+            },
 
             staticRenderFns: shippingTemplateRenderFns,
 
@@ -397,13 +403,15 @@
         Vue.component('payment-section', {
             inject: ['$validator'],
 
-            data: () => ({
-                templateRender: null,
+            data() {
+                return {
+                    templateRender: null,
 
-                payment: {
-                    method: ""
-                },
-            }),
+                    payment: {
+                        method: ""
+                    },
+                }
+            },
 
             staticRenderFns: paymentTemplateRenderFns,
 
@@ -436,9 +444,11 @@
 
         var reviewTemplateRenderFns = [];
         Vue.component('review-section', {
-            data: () => ({
-                templateRender: null
-            }),
+            data() {
+                return {
+                    templateRender: null
+                }
+            },
 
             staticRenderFns: reviewTemplateRenderFns,
 

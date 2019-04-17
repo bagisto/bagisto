@@ -370,12 +370,14 @@
 
             inject: ['$validator'],
 
-            data: () => ({
-                optionRowCount: 0,
-                optionRows: [],
-                show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
-                swatch_type: "{{ $attribute->swatch_type }}"
-            }),
+            data() {
+                return {
+                    optionRowCount: 0,
+                    optionRows: [],
+                    show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
+                    swatch_type: "{{ $attribute->swatch_type }}"
+                }
+            },
 
             created () {
                 @foreach ($attribute->options as $option)

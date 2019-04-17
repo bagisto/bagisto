@@ -81,10 +81,12 @@
 
             template: '#layered-navigation-template',
 
-            data: () => ({
-                attributes: @json($attributeRepository->getFilterAttributes()),
-                appliedFilters: {}
-            }),
+            data() {
+                return {
+                    attributes: @json($attributeRepository->getFilterAttributes()),
+                    appliedFilters: {}
+                }
+            },
 
             created () {
                 var urlParams = new URLSearchParams(window.location.search);

@@ -326,12 +326,14 @@
 
             inject: ['$validator'],
 
-            data: () => ({
-                optionRowCount: 0,
-                optionRows: [],
-                show_swatch: false,
-                swatch_type: ''
-            }),
+            data() {
+                return {
+                    optionRowCount: 0,
+                    optionRows: [],
+                    show_swatch: false,
+                    swatch_type: ''
+                }
+            },
 
             created () {
                 var this_this = this;
