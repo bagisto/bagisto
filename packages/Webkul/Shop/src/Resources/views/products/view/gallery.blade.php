@@ -4,14 +4,12 @@
 {!! view_render_event('bagisto.shop.products.view.gallery.before', ['product' => $product]) !!}
 
 <div class="product-image-group">
-
     <div class="cp-spinner cp-round" id="loader">
     </div>
 
     <product-gallery></product-gallery>
 
     @include ('shop::products.view.product-add')
-
 </div>
 
 {!! view_render_event('bagisto.shop.products.view.gallery.after', ['product' => $product]) !!}
@@ -20,7 +18,6 @@
 
     <script type="text/x-template" id="product-gallery-template">
         <div>
-
             <ul class="thumb-list">
                 <li class="gallery-control top" @click="moveThumbs('top')" v-if="(thumbs.length > 4) && this.is_move.up">
                     <span class="overlay"></span>
@@ -58,18 +55,13 @@
 
             data: () => ({
                 images: galleryImages,
-
                 thumbs: [],
-
                 currentLargeImageUrl: '',
-
                 currentOriginalImageUrl: '',
-
                 counter: {
                     up: 0,
                     down: 0,
                 },
-
                 is_move: {
                     up: true,
                     down: true,
@@ -93,7 +85,6 @@
             methods: {
                 prepareThumbs () {
                     var this_this = this;
-
                     this_this.thumbs = [];
 
                     this.images.forEach(function(image) {
@@ -103,7 +94,6 @@
 
                 changeImage (image) {
                     this.currentLargeImageUrl = image.large_image_url;
-
                     this.currentOriginalImageUrl = image.original_image_url;
 
                     $('img#pro-img').data('zoom-image', image.original_image_url).ezPlus();
@@ -116,18 +106,14 @@
                         const moveThumb = this.thumbs.splice(len - 1, 1);
 
                         this.thumbs = [moveThumb[0], ...this.thumbs];
-
                         this.counter.up = this.counter.up+1;
-
                         this.counter.down = this.counter.down-1;
 
                     } else {
                         const moveThumb = this.thumbs.splice(0, 1);
 
                         this.thumbs = [...this.thumbs, moveThumb[0]];
-
                         this.counter.down = this.counter.down+1;
-
                         this.counter.up = this.counter.up-1;
                     }
 
