@@ -31,9 +31,10 @@ use Webkul\Core\Repositories\SliderRepository as Sliders;
      */
     public function index()
     {
-        if (request()->route('any'))
+        if (request()->route('any')) {
             abort(404);
-            
+        }
+
         $current_channel = core()->getCurrentChannel();
 
         $all_sliders = $this->sliders->findWhere(['channel_id' => $current_channel['id']]);
