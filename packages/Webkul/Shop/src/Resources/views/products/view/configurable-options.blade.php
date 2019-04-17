@@ -91,7 +91,7 @@
 
                         galleryImages: []
                     }
-                }
+                },
 
                 created () {
                     this.galleryImages = galleryImages.slice(0)

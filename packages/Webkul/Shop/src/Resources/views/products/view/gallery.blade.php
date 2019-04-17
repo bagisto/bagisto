@@ -56,25 +56,27 @@
 
             template: '#product-gallery-template',
 
-            data: () => ({
-                images: galleryImages,
+            data() {
+                return {
+                    images: galleryImages,
 
-                thumbs: [],
+                    thumbs: [],
 
-                currentLargeImageUrl: '',
+                    currentLargeImageUrl: '',
 
-                currentOriginalImageUrl: '',
+                    currentOriginalImageUrl: '',
 
-                counter: {
-                    up: 0,
-                    down: 0,
-                },
+                    counter: {
+                        up: 0,
+                        down: 0,
+                    },
 
-                is_move: {
-                    up: true,
-                    down: true,
+                    is_move: {
+                        up: true,
+                        down: true,
+                    }
                 }
-            }),
+            },
 
             watch: {
                 'images': function(newVal, oldVal) {
