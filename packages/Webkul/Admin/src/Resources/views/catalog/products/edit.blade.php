@@ -98,7 +98,8 @@
 
                                         @if (view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
 
-                                            <div class="control-group {{ $attribute->type }}" :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']">
+                                            <div class="control-group {{ $attribute->type }}" @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']" @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
+
                                                 <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
                                                     {{ $attribute->admin_name }}
 
@@ -124,7 +125,13 @@
 
                                                 @include ($typeView)
 
-                                                <span class="control-error" v-if="errors.has('{{ $attribute->code }}')">@{{ errors.first('{!! $attribute->code !!}') }}</span>
+                                                <span class="control-error"  @if ($attribute->type == 'multiselect') v-if="errors.has('{{ $attribute->code }}[]')" @else  v-if="errors.has('{{ $attribute->code }}')"  @endif>
+                                                    @if ($attribute->type == 'multiselect')
+                                                        @{{ errors.first('{!! $attribute->code !!}[]') }}
+                                                    @else
+                                                        @{{ errors.first('{!! $attribute->code !!}') }}
+                                                    @endif
+                                                </span>
                                             </div>
 
                                         @endif
