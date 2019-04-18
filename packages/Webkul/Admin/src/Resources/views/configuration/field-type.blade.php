@@ -248,9 +248,11 @@
 
         props: ['code'],
 
-        data: () => ({
-            country: "",
-        }),
+        data() {
+            return {
+                country: "",
+            }
+        },
 
         mounted() {
             this.country = this.code;
@@ -293,14 +295,15 @@
 
         props: ['code'],
 
-        data: () => ({
+        data() {
+            return {
+                state: "",
 
-            state: "",
+                country: "",
 
-            country: "",
-
-            countryStates: @json(core()->groupedStatesByCountries())
-        }),
+                countryStates: @json(core()->groupedStatesByCountries())
+            }
+        },
 
         mounted() {
             this.state = this.code
@@ -322,6 +325,3 @@
 </script>
 
 @endpush
-
-
-

@@ -8,7 +8,7 @@
     <div class="content full-page">
         <form method="POST" action="{{ route('admin.sales.shipments.store', $order->id) }}" @submit.prevent="onSubmit">
             @csrf()
-            
+
             <div class="page-header">
                 <div class="page-title">
                     <h1>
@@ -38,7 +38,7 @@
 
                                 <div class="section-content">
                                     <div class="row">
-                                        <span class="title"> 
+                                        <span class="title">
                                             {{ __('admin::app.sales.shipments.order-id') }}
                                         </span>
 
@@ -48,11 +48,11 @@
                                     </div>
 
                                     <div class="row">
-                                        <span class="title"> 
+                                        <span class="title">
                                             {{ __('admin::app.sales.orders.order-date') }}
                                         </span>
 
-                                        <span class="value"> 
+                                        <span class="value">
                                             {{ $order->created_at }}
                                         </span>
                                     </div>
@@ -61,7 +61,7 @@
                                         <span class="title">
                                             {{ __('admin::app.sales.orders.order-status') }}
                                         </span>
-                                        
+
                                         <span class="value">
                                             {{ $order->status_label }}
                                         </span>
@@ -71,7 +71,7 @@
                                         <span class="title">
                                             {{ __('admin::app.sales.orders.channel') }}
                                         </span>
-                                            
+
                                         <span class="value">
                                             {{ $order->channel_name }}
                                         </span>
@@ -86,21 +86,21 @@
 
                                 <div class="section-content">
                                     <div class="row">
-                                        <span class="title"> 
+                                        <span class="title">
                                             {{ __('admin::app.sales.orders.customer-name') }}
                                         </span>
 
-                                        <span class="value"> 
+                                        <span class="value">
                                             {{ $order->customer_full_name }}
                                         </span>
                                     </div>
 
                                     <div class="row">
-                                        <span class="title"> 
+                                        <span class="title">
                                             {{ __('admin::app.sales.orders.email') }}
                                         </span>
 
-                                        <span class="value"> 
+                                        <span class="value">
                                             {{ $order->customer_email }}
                                         </span>
                                     </div>
@@ -119,9 +119,9 @@
                                 </div>
 
                                 <div class="section-content">
-                                    
+
                                     @include ('admin::sales.address', ['address' => $order->billing_address])
-                                    
+
                                 </div>
                             </div>
 
@@ -132,13 +132,13 @@
                                     </div>
 
                                     <div class="section-content">
-                                        
+
                                         @include ('admin::sales.address', ['address' => $order->shipping_address])
-                                        
+
                                     </div>
                                 </div>
                             @endif
-                        
+
                         </div>
                     </accordian>
 
@@ -152,21 +152,21 @@
 
                                 <div class="section-content">
                                     <div class="row">
-                                        <span class="title"> 
+                                        <span class="title">
                                             {{ __('admin::app.sales.orders.payment-method') }}
                                         </span>
 
-                                        <span class="value"> 
+                                        <span class="value">
                                             {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                                         </span>
                                     </div>
 
                                     <div class="row">
-                                        <span class="title"> 
+                                        <span class="title">
                                             {{ __('admin::app.sales.orders.currency') }}
                                         </span>
 
-                                        <span class="value"> 
+                                        <span class="value">
                                             {{ $order->order_currency_code }}
                                         </span>
                                     </div>
@@ -180,21 +180,21 @@
 
                                 <div class="section-content">
                                     <div class="row">
-                                        <span class="title"> 
+                                        <span class="title">
                                             {{ __('admin::app.sales.orders.shipping-method') }}
                                         </span>
 
-                                        <span class="value"> 
+                                        <span class="value">
                                             {{ $order->shipping_title }}
                                         </span>
                                     </div>
 
                                     <div class="row">
-                                        <span class="title"> 
+                                        <span class="title">
                                             {{ __('admin::app.sales.orders.shipping-price') }}
                                         </span>
 
-                                        <span class="value"> 
+                                        <span class="value">
                                             {{ core()->formatBasePrice($order->base_shipping_amount) }}
                                         </span>
                                     </div>
@@ -237,10 +237,10 @@
 
     <script type="text/x-template" id="order-item-list-template">
 
-        <div>            
+        <div>
         <div class="control-group" :class="[errors.has('shipment[source]') ? 'has-error' : '']">
             <label for="shipment[source]" class="required">{{ __('admin::app.sales.shipments.source') }}</label>
-            
+
             <select v-validate="'required'" class="control" name="shipment[source]" id="shipment[source]" data-vv-as="&quot;{{ __('admin::app.sales.shipments.source') }}&quot;" v-model="source">
                 <option value="">{{ __('admin::app.sales.shipments.select-source') }}</option>
 
@@ -284,7 +284,7 @@
                                 <td>{{ $item->qty_ordered }}</td>
                                 <td>{{ $item->qty_to_ship }}</td>
                                 <td>
-                                    
+
                                     <table>
                                         <thead>
                                             <tr>
@@ -302,15 +302,15 @@
                                                     </td>
 
                                                     <td>
-                                                        <?php 
+                                                        <?php
                                                             if ($item->type == 'configurable') {
                                                                 $sourceQty = $item->child->product->inventory_source_qty($inventorySource);
                                                             } else {
-                                                                $sourceQty = $item->product->inventory_source_qty($inventorySource);  
+                                                                $sourceQty = $item->product->inventory_source_qty($inventorySource);
                                                             }
                                                         ?>
 
-                                                        <?php 
+                                                        <?php
                                                             $sourceQty = 0;
 
                                                             $product = $item->type == 'configurable' ? $item->child->product : $item->product;
@@ -327,7 +327,7 @@
 
                                                     <td>
                                                         <?php $inputName = "shipment[items][$item->id][$inventorySource->id]"; ?>
-                                                        
+
                                                         <div class="control-group" :class="[errors.has('{{ $inputName }}') ? 'has-error' : '']">
 
                                                             <input type="text" v-validate="'required|numeric|min_value:0|max_value:{{$sourceQty}}'" class="control" id="{{ $inputName }}" name="{{ $inputName }}" value="0" data-vv-as="&quot;{{ __('admin::app.sales.shipments.qty-to-ship') }}&quot;" :disabled="source != '{{ $inventorySource->id }}'"/>
@@ -362,9 +362,11 @@
 
             inject: ['$validator'],
 
-            data: () => ({
-                source: ""
-            })
+            data() {
+                return {
+                    source: ""
+                }
+            }
         });
     </script>
 

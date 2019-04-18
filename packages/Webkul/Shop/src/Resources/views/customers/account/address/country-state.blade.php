@@ -51,13 +51,15 @@
 
             inject: ['$validator'],
 
-            data: () => ({
-                country: "{{ $countryCode  }}",
+            data() {
+                return {
+                    country: "{{ $countryCode  }}",
 
-                state: "{{ $stateCode  }}",
+                    state: "{{ $stateCode  }}",
 
-                countryStates: @json(core()->groupedStatesByCountries())
-            }),
+                    countryStates: @json(core()->groupedStatesByCountries())
+                }
+            },
 
             methods: {
                 haveStates() {

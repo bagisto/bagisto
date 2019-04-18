@@ -28,7 +28,7 @@
                 </li>
 
                 <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']" id="thumb-frame">
-                    <img :src="thumb.small_image_url" :data-image="thumb.large_image_url" :data-zoom-image="thumb.original_image_url"/>
+                    <img :src="thumb.small_image_url"/>
                 </li>
 
                 <li class="gallery-control bottom" @click="moveThumbs('bottom')" v-if="(thumbs.length > 4) && this.is_move.down">
@@ -38,7 +38,7 @@
             </ul>
 
             <div class="product-hero-image" id="product-hero-image">
-                <img :src="currentLargeImageUrl" id="pro-img"/>
+                <img :src="currentLargeImageUrl" id="pro-img" :data-image="currentOriginalImageUrl"/>
 
                 @auth('customer')
                     <a class="add-to-wishlist" href="{{ route('customer.wishlist.add', $product->product_id) }}">
@@ -56,23 +56,27 @@
 
             template: '#product-gallery-template',
 
-            data: () => ({
-                images: galleryImages,
+            data() {
+                return {
+                    images: galleryImages,
 
-                thumbs: [],
+                    thumbs: [],
 
-                currentLargeImageUrl: '',
+                    currentLargeImageUrl: '',
 
-                counter: {
-                    up: 0,
-                    down: 0,
-                },
+                    currentOriginalImageUrl: '',
 
-                is_move: {
-                    up: true,
-                    down: true,
+                    counter: {
+                        up: 0,
+                        down: 0,
+                    },
+
+                    is_move: {
+                        up: true,
+                        down: true,
+                    }
                 }
-            }),
+            },
 
             watch: {
                 'images': function(newVal, oldVal) {
@@ -101,6 +105,10 @@
 
                 changeImage (image) {
                     this.currentLargeImageUrl = image.large_image_url;
+
+                    this.currentOriginalImageUrl = image.original_image_url;
+
+                    $('img#pro-img').data('zoom-image', image.original_image_url).ezPlus();
                 },
 
                 moveThumbs(direction) {
@@ -144,18 +152,7 @@
 
     <script>
         $(document).ready(function() {
-            var image = $('#thumb-frame img');
-            var zoomImage = $('img#pro-img');
-
-            zoomImage.ezPlus();
-
-            image.mouseover( function(){
-                $('.zoomContainer').remove();
-                zoomImage.removeData('elevateZoom');
-                zoomImage.attr('src', $(this).data('image'));
-                zoomImage.data('zoom-image', $(this).data('zoom-image'));
-                zoomImage.ezPlus();
-            });
+            $('img#pro-img').data('zoom-image', $('img#pro-img').data('image')).ezPlus();
 
             $(document).mousemove(function(event) {
                 if ($('.add-to-wishlist').length) {
@@ -167,6 +164,12 @@
                         $(".zoomContainer").removeClass("show-wishlist");
                     }
                 };
+
+                if ($("body").hasClass("rtl")) {
+                    $(".zoomWindow").addClass("zoom-image-direction");
+                } else {
+                    $(".zoomWindow").removeClass("zoom-image-direction");
+                }
             });
         })
     </script>
