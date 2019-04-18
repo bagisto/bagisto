@@ -586,7 +586,8 @@ class ProductRepository extends Repository
      *
      * @return Collection
      */
-    public function searchProductByAttribute($term) {
+    public function searchProductByAttribute($term)
+    {
         $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($term) {
                 $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
@@ -599,7 +600,7 @@ class ProductRepository extends Repository
                         ->where('product_flat.channel', $channel)
                         ->where('product_flat.locale', $locale)
                         ->whereNotNull('product_flat.url_key')
-                        ->where('product_flat.name', 'like', '%' . $term . '%')
+                        ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
                         ->orderBy('product_id', 'desc');
             })->paginate(16);
 
