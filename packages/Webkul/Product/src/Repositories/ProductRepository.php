@@ -605,4 +605,30 @@ class ProductRepository extends Repository
 
         return $results;
     }
+
+    /**
+     * Returns product's super attribute with options
+     *
+     * @param Product $product
+     * @return Collection
+     */
+    public function getSuperAttributes($product)
+    {
+        $superAttrbutes = [];
+
+        foreach ($product->super_attributes as $key => $attribute) {
+            $superAttrbutes[$key] = $attribute->toArray();
+
+            foreach ($attribute->options as $option) {
+                $superAttrbutes[$key]['options'][] = [
+                    'id' => $option->id,
+                    'admin_name' => $option->admin_name,
+                    'sort_order' => $option->sort_order,
+                    'swatch_value' => $option->swatch_value,
+                ];
+            }
+        }
+
+        return $superAttrbutes;
+    }
 }
