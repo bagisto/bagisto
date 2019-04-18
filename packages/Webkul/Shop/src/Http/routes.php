@@ -4,7 +4,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     //Store front home
     Route::get('/{any?}', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
         'view' => 'shop::home.index'
-    ])->name('shop.home.index');
+    ])->where('any', '<>', 'mobile')->name('shop.home.index');
 
     //subscription
     //subscribe
