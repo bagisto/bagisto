@@ -104,16 +104,14 @@ class ProductFlat
             return false;
         }
 
-        if (Schema::hasTable('product_flat')) {
-            if (!Schema::hasColumn('product_flat', $attribute->code)) {
-                Schema::table('product_flat', function (Blueprint $table) use($attribute) {
-                    $table->{$this->attributeTypeFields[$attribute->type]}($attribute->code)->nullable();
+        if (! Schema::hasColumn('product_flat', $attribute->code)) {
+            Schema::table('product_flat', function (Blueprint $table) use($attribute) {
+                $table->{$this->attributeTypeFields[$attribute->type]}($attribute->code)->nullable();
 
-                    if ($attribute->type == 'select' || $attribute->type == 'multiselect') {
-                        $table->string($attribute->code . '_label')->nullable();
-                    }
-                });
-            }
+                if ($attribute->type == 'select' || $attribute->type == 'multiselect') {
+                    $table->string($attribute->code . '_label')->nullable();
+                }
+            });
         }
     }
 
@@ -121,16 +119,14 @@ class ProductFlat
     {
         $attribute = $this->attributeRepository->find($attributeId);
         
-        if (Schema::hasTable('product_flat')) {
-            if (Schema::hasColumn('product_flat', strtolower($attribute->code))) {
-                Schema::table('product_flat', function (Blueprint $table) use($attribute) {
-                    $table->dropColumn($attribute->code);
+        if (Schema::hasColumn('product_flat', strtolower($attribute->code))) {
+            Schema::table('product_flat', function (Blueprint $table) use($attribute) {
+                $table->dropColumn($attribute->code);
 
-                    if ($attribute->type == 'select' || $attribute->type == 'multiselect') {
-                        $table->dropColumn($attribute->code . '_label');
-                    }
-                });
-            }
+                if ($attribute->type == 'select' || $attribute->type == 'multiselect') {
+                    $table->dropColumn($attribute->code . '_label');
+                }
+            });
         }
     }
 
@@ -160,6 +156,11 @@ class ProductFlat
      */
     public function createFlat($product, $parentProduct = null)
     {
+        static $familyAttributes = [];
+
+        if (! array_key_exists($product->attribute_family->id, $familyAttributes))
+            $familyAttributes[$product->attribute_family->id] = $product->attribute_family->custom_attributes;
+
         foreach (core()->getAllChannels() as $channel) {
             foreach ($channel->locales as $locale) {
                 $productFlat = $this->productFlatRepository->findOneWhere([
@@ -168,7 +169,7 @@ class ProductFlat
                     'locale' => $locale->code
                 ]);
 
-                if (!$productFlat) {
+                if (! $productFlat) {
                     $productFlat = $this->productFlatRepository->create([
                         'product_id' => $product->id,
                         'channel' => $channel->code,
@@ -176,10 +177,16 @@ class ProductFlat
                     ]);
                 }
 
-                foreach ($product->attribute_family->custom_attributes as $attribute) {
-                    if (!Schema::hasTable('product_flat') || !Schema::hasColumn('product_flat', $attribute->code))
+                foreach ($familyAttributes[$product->attribute_family->id] as $attribute) {
+                    if ($parentProduct && ! in_array($attribute->code, ['sku', 'name', 'price', 'weight', 'status']))
+                        continue;
+                    
+                    if (in_array($attribute->code, ['short_description', 'tax_category_id', 'meta_title', 'meta_keywords', 'meta_description', 'width', 'height']))
                         continue;
 
+                    // if (! Schema::hasColumn('product_flat', $attribute->code))
+                    //     continue;
+                    
                     if ($attribute->value_per_channel) {
                         if ($attribute->value_per_locale) {
                             $productAttributeValue = $product->attribute_values()->where('channel', $channel->code)->where('locale', $locale->code)->where('attribute_id', $attribute->id)->first();

@@ -19,7 +19,7 @@
                     <label class="required">@{{ attribute.label }}</label>
 
                     <span v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
-                        <select 
+                        <select
                             class="control"
                             v-validate="'required'"
                             :name="['super_attribute[' + attribute.id + ']']"
@@ -34,13 +34,13 @@
                     </span>
 
                     <span class="swatch-container" v-else>
-                        <label class="swatch" 
+                        <label class="swatch"
                             v-for='(option, index) in attribute.options'
                             v-if="option.id"
                             :data-id="option.id"
                             :for="['attribute_' + attribute.id + '_option_' + option.id]">
 
-                            <input type="radio" 
+                            <input type="radio"
                                 v-validate="'required'"
                                 :name="['super_attribute[' + attribute.id + ']']"
                                 :id="['attribute_' + attribute.id + '_option_' + option.id]"
@@ -79,17 +79,19 @@
 
                 inject: ['$validator'],
 
-                data: () => ({
-                    config: @json($config),
+                data() {
+                    return {
+                        config: @json($config),
 
-                    childAttributes: [],
+                        childAttributes: [],
 
-                    selectedProductId: '',
+                        selectedProductId: '',
 
-                    simpleProduct: null,
+                        simpleProduct: null,
 
-                    galleryImages: []
-                }),
+                        galleryImages: []
+                    }
+                },
 
                 created () {
                     this.galleryImages = galleryImages.slice(0)
@@ -133,7 +135,7 @@
                                 attribute.nextAttribute.disabled = false;
 
                                 this.fillSelect(attribute.nextAttribute);
-                                
+
                                 this.resetChildren(attribute.nextAttribute);
                             } else {
                                 this.selectedProductId = attribute.options[attribute.selectedIndex].allowedProducts[0];

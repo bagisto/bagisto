@@ -120,7 +120,7 @@ class Product extends Model implements ProductContract
      */
     public function related_products()
     {
-        return $this->belongsToMany(self::class, 'product_relations', 'parent_id', 'child_id');
+        return $this->belongsToMany(self::class, 'product_relations', 'parent_id', 'child_id')->limit(4);
     }
 
     /**
@@ -128,7 +128,7 @@ class Product extends Model implements ProductContract
      */
     public function up_sells()
     {
-        return $this->belongsToMany(self::class, 'product_up_sells', 'parent_id', 'child_id');
+        return $this->belongsToMany(self::class, 'product_up_sells', 'parent_id', 'child_id')->limit(4);
     }
 
     /**
@@ -136,7 +136,7 @@ class Product extends Model implements ProductContract
      */
     public function cross_sells()
     {
-        return $this->belongsToMany(self::class, 'product_cross_sells', 'parent_id', 'child_id');
+        return $this->belongsToMany(self::class, 'product_cross_sells', 'parent_id', 'child_id')->limit(4);
     }
 
     /**
@@ -210,7 +210,8 @@ class Product extends Model implements ProductContract
             if (isset($this->id)) {
                 $this->attributes[$key] = '';
 
-                $attribute = app(\Webkul\Attribute\Repositories\AttributeRepository::class)->findOneByField('code', $key);
+                $attribute = core()->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
+                        ->getAttributeByCode($key);
 
                 $this->attributes[$key] = $this->getCustomAttributeValue($attribute);
 
@@ -231,7 +232,10 @@ class Product extends Model implements ProductContract
         $hiddenAttributes = $this->getHidden();
 
         if (isset($this->id)) {
-            foreach ($this->attribute_family->custom_attributes as $attribute) {
+            $familyAttributes = core()->getSingletonInstance(\Webkul\Attribute\Repositories\AttributeRepository::class)
+                    ->getFamilyAttributes($this->attribute_family);
+
+            foreach ($familyAttributes as $attribute) {
                 if (in_array($attribute->code, $hiddenAttributes)) {
                     continue;
                 }
@@ -290,7 +294,14 @@ class Product extends Model implements ProductContract
      */
     public function getProductIdAttribute()
     {
-        return $image = $this->id;
+        return $this->id;
     }
 
+    /**
+     * Return the product attribute.
+     */
+    public function getProductAttribute()
+    {
+        return $this;
+    }
 }
