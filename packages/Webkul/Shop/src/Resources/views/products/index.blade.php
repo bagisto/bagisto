@@ -70,9 +70,7 @@
                         </div>
 
                         {!! view_render_event('bagisto.shop.products.index.pagination.after') !!}
-
                     @else
-
                         <div class="product-list empty">
                             <h2>{{ __('shop::app.products.whoops') }}</h2>
 
@@ -80,7 +78,6 @@
                                 {{ __('shop::app.products.empty') }}
                             </p>
                         </div>
-
                     @endif
                 @endif
             </div>
@@ -94,13 +91,16 @@
     <script>
         $(document).ready(function() {
             $('.responsive-layred-filter').css('display','none');
+
             $(".sort-icon, .filter-icon").on('click', function(e){
                 var currentElement = $(e.currentTarget);
+
                 if (currentElement.hasClass('sort-icon')) {
                     currentElement.removeClass('sort-icon');
                     currentElement.addClass('icon-menu-close-adj');
                     currentElement.next().removeClass();
                     currentElement.next().addClass('icon filter-icon');
+
                     $('.responsive-layred-filter').css('display','none');
                     $('.pager').css('display','flex');
                     $('.pager').css('justify-content','space-between');
@@ -109,6 +109,7 @@
                     currentElement.addClass('icon-menu-close-adj');
                     currentElement.prev().removeClass();
                     currentElement.prev().addClass('icon sort-icon');
+
                     $('.pager').css('display','none');
                     $('.responsive-layred-filter').css('display','block');
                     $('.responsive-layred-filter').css('margin-top','10px');
@@ -116,6 +117,7 @@
                     currentElement.removeClass('icon-menu-close-adj');
                     $('.responsive-layred-filter').css('display','none');
                     $('.pager').css('display','none');
+
                     if ($(this).index() == 0) {
                         currentElement.addClass('sort-icon');
                     } else {
