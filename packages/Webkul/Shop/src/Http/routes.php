@@ -2,7 +2,7 @@
 
 Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function () {
     //Store front home
-    Route::get('/{any?}', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
+    Route::get('/', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
         'view' => 'shop::home.index'
     ])->name('shop.home.index');
 
@@ -274,4 +274,6 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         });
     });
     //customer routes end here
+
+    Route::get('/{any?}', 'Webkul\Shop\Http\Controllers\HomeController@index');
 });

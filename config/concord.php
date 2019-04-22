@@ -1,5 +1,4 @@
 <?php
-
 return [
     'modules' => [
         /**
@@ -8,7 +7,6 @@ return [
          * VendorB\ModuleY\Providers\ModuleServiceProvider::class
          *
          */
-
         \Webkul\Attribute\Providers\ModuleServiceProvider::class,
         \Webkul\Category\Providers\ModuleServiceProvider::class,
         \Webkul\Checkout\Providers\ModuleServiceProvider::class,

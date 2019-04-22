@@ -183,7 +183,7 @@
             ];
         });
 
-        var super_attributes = @json($product->super_attributes()->with('options')->get());
+        var super_attributes = @json(app('\Webkul\Product\Repositories\ProductRepository')->getSuperAttributes($product));
         var variants = @json($product->variants);
 
         Vue.component('variant-form', {

@@ -4,6 +4,7 @@ namespace Webkul\Admin\Listeners;
 
 use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\Mail\NewOrderNotification;
+use Webkul\Admin\Mail\NewAdminNotification;
 use Webkul\Admin\Mail\NewInvoiceNotification;
 use Webkul\Admin\Mail\NewShipmentNotification;
 use Webkul\Admin\Mail\NewInventorySourceNotification;
@@ -29,6 +30,7 @@ class Order {
 
         }
     }
+
 
     /**
      * @param mixed $invoice
