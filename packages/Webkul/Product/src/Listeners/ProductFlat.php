@@ -184,8 +184,8 @@ class ProductFlat
                     if (in_array($attribute->code, ['short_description', 'tax_category_id', 'meta_title', 'meta_keywords', 'meta_description', 'width', 'height']))
                         continue;
 
-                    // if (! Schema::hasColumn('product_flat', $attribute->code))
-                    //     continue;
+                    if (! Schema::hasColumn('product_flat', $attribute->code))
+                        continue;
                     
                     if ($attribute->value_per_channel) {
                         if ($attribute->value_per_locale) {
@@ -216,6 +216,24 @@ class ProductFlat
                             } else {
                                 $productFlat->{$attribute->code . '_label'} = $attributeOption->admin_name;
                             }
+                        }
+                    } elseif ($attribute->type == 'multiselect') {
+                        $attributeOptionIds = explode(',', $product->{$attribute->code});
+
+                        if (count($attributeOptionIds)) {
+                            $attributeOptions = $this->attributeOptionRepository->findWhereIn('id', $attributeOptionIds);
+
+                            $optionLabels = [];
+
+                            foreach ($attributeOptions as $attributeOption) {
+                                if ($attributeOptionTranslation = $attributeOption->translate($locale->code)) {
+                                    $optionLabels[] = $attributeOptionTranslation->label;
+                                } else {
+                                    $optionLabels[] = $attributeOption->admin_name;
+                                }
+                            }
+
+                            $productFlat->{$attribute->code . '_label'} = implode(', ', $optionLabels);
                         }
                     }
                 }
