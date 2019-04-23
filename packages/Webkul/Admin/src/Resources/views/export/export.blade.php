@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-lg btn-primary" @click="closeModal">
+        <button type="submit" class="btn btn-lg btn-primary">
             {{ __('admin::app.export.export') }}
         </button>
 
@@ -29,11 +29,8 @@
 
 <script>
     Vue.component('export-form', {
+
         template: '#export-form-template',
-        methods: {
-            closeModal () {
-                this.$parent.closeModal();
-            }
-        }
+
     });
 </script>
