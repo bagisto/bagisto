@@ -721,6 +721,8 @@ return [
 
     'error' => [
         'go-to-home' => 'IR PARA PÁGINA INICIAL',
+        'in-maitainace' => 'In Maintenance',
+        'right-back' => 'Be Right Back',
 
         '404' => [
             'page-title' => '404 Página não Encontrada',

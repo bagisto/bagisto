@@ -706,6 +706,9 @@ return [
     ],
     'error' => [
         'go-to-home' => 'إذهب إلى البيت',
+        'in-maitainace' => 'In Maintenance',
+        'right-back' => 'Be Right Back',
+
         '404' => [
             'page-title' => '404 صفحة غير موجودة',
             'name' => '404',
