@@ -33,7 +33,7 @@ use Webkul\Core\Repositories\SliderRepository;
      */
     public function index()
     {
-        if (request()->route('any'))
+        if (request()->route()->getName() != 'shop.home.index')
             abort(404);
             
         $currentChannel = core()->getCurrentChannel();
