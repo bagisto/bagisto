@@ -746,8 +746,8 @@ modal {
     top: 100px;
     width: 600px;
     max-width: 80%;
-    left: auto;
-    right: auto;
+    left: 50%;
+    margin-left: -300px;
     position: fixed;
     z-index: 11;
     @include box-shadow(
