@@ -217,6 +217,24 @@ class ProductFlat
                                 $productFlat->{$attribute->code . '_label'} = $attributeOption->admin_name;
                             }
                         }
+                    } elseif ($attribute->type == 'multiselect') {
+                        $attributeOptionIds = explode(',', $product->{$attribute->code});
+
+                        if (count($attributeOptionIds)) {
+                            $attributeOptions = $this->attributeOptionRepository->findWhereIn('id', $attributeOptionIds);
+
+                            $optionLabels = [];
+
+                            foreach ($attributeOptions as $attributeOption) {
+                                if ($attributeOptionTranslation = $attributeOption->translate($locale->code)) {
+                                    $optionLabels[] = $attributeOptionTranslation->label;
+                                } else {
+                                    $optionLabels[] = $attributeOption->admin_name;
+                                }
+                            }
+
+                            $productFlat->{$attribute->code . '_label'} = implode(', ', $optionLabels);
+                        }
                     }
                 }
 
