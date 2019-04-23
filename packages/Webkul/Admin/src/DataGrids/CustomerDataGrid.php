@@ -21,12 +21,13 @@ class CustomerDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('customers as custs')
-                ->addSelect('custs.id as customer_id', 'custs.email', 'cg.name')
-                ->addSelect(DB::raw('CONCAT(custs.first_name, " ", custs.last_name) as full_name'))->leftJoin('customer_groups as cg', 'custs.customer_group_id', '=', 'cg.id');
+        $queryBuilder = DB::table('customers')
+                ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
+                ->addSelect('customers.id as customer_id', 'customers.email', 'customer_groups.name')
+                ->addSelect(DB::raw('CONCAT(customers.first_name, " ", customers.last_name) as full_name'));
 
-        $this->addFilter('customer_id', 'custs.id');
-        $this->addFilter('full_name', DB::raw('CONCAT(custs.first_name, " ", custs.last_name)'));
+        $this->addFilter('customer_id', 'customers.id');
+        $this->addFilter('full_name', DB::raw('CONCAT(customers.first_name, " ", customers.last_name)'));
 
         $this->setQueryBuilder($queryBuilder);
     }
