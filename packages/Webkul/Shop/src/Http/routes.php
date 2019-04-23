@@ -275,7 +275,5 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     });
     //customer routes end here
 
-    // Route::get('/{any?}', 'Webkul\Shop\Http\Controllers\HomeController@index');
-
-    Route::fallback('Webkul\Shop\Http\Controllers\HomeController@index');
+    Route::fallback('Webkul\Shop\Http\Controllers\HomeController@notFound');
 });
