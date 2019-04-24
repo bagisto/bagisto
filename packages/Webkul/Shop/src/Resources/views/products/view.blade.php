@@ -20,7 +20,7 @@
                 <div class="form-container">
                     @csrf()
 
-                    <input type="hidden" name="product" value="{{ $product->id }}">
+                    <input type="hidden" name="product" value="{{ $product->product_id }}">
 
                     @include ('shop::products.view.gallery')
 

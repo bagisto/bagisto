@@ -92,6 +92,7 @@ class CartController extends Controller
      */
     public function add($id)
     {
+        dd(request()->all());
         try {
             Event::fire('checkout.cart.add.before', $id);
 
