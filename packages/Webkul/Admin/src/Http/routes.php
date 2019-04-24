@@ -613,9 +613,17 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::promotions.catalog-rule.index'
                 ])->name('admin.catalog-rule.index');
 
+                Route::get('/catalog-rule/create', 'Webkul\Discount\Http\Controllers\CatalogRuleController@create')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rule.create'
+                ])->name('admin.catalog-rule.create');
+
                 Route::get('/cart-rules', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [
                     'view' => 'admin::promotions.cart-rule.index'
                 ])->name('admin.cart-rule.index');
+
+                Route::get('/cart-rule/create', 'Webkul\Discount\Http\Controllers\CartRuleController@create')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rule.create'
+                ])->name('admin.cart-rule.create');
             });
         });
     });

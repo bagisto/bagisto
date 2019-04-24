@@ -25,4 +25,9 @@ class CatalogRuleController extends Controller
     {
         return view($this->_config['view']);
     }
+
+    public function create()
+    {
+        return view($this->_config['view']);
+    }
 }
