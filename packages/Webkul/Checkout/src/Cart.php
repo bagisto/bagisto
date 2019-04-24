@@ -259,7 +259,8 @@ class Cart {
      */
     public function createItem($id, $data)
     {
-        $product = $parentProduct = $configurable = false;
+        $childProduct = $configurable = false;
+
         $product = $this->product->findOneByField('id', $id);
 
         if ($product->type == 'configurable') {
@@ -267,17 +268,15 @@ class Cart {
                 return false;
             }
 
-            $parentProduct = $this->product->findOneByField('id', $data['selected_configurable_option']);
+            $childProduct = $this->product->findOneByField('id', $data['selected_configurable_option']);
 
-            $canAdd = $parentProduct->haveSufficientQuantity($data['quantity']);
+            $canAdd = $childProduct->haveSufficientQuantity($data['quantity']);
 
             if (! $canAdd) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
             }
-
-            $configurable = true;
         } else {
             $canAdd = $product->haveSufficientQuantity($data['quantity']);
 
@@ -289,12 +288,12 @@ class Cart {
         }
 
         //Check if the product's information is proper or not
-        if (! isset($data['product']) || !isset($data['quantity'])) {
+        if (! isset($data['product']) || ! isset($data['quantity'])) {
             session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_fields'));
 
             return false;
         } else {
-            if ($product->type == 'configurable' && !isset($data['super_attribute'])) {
+            if ($product->type == 'configurable' && ! isset($data['super_attribute'])) {
                 session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_options'));
 
                 return false;
@@ -305,12 +304,12 @@ class Cart {
         $additional = [];
 
         if ($product->type == 'configurable') {
-            $price = $this->price->getMinimalPrice($parentProduct);
+            $price = $this->price->getMinimalPrice($childProduct);
         } else {
             $price = $this->price->getMinimalPrice($product);
         }
 
-        $weight = ($product->type == 'configurable' ? $parentProduct->weight : $product->weight);
+        $weight = ($product->type == 'configurable' ? $childProduct->weight : $product->weight);
 
         $parentData = [
             'sku' => $product->sku,
@@ -330,27 +329,28 @@ class Cart {
             'additional' => $data,
         ];
 
-        if ($configurable) {
-            $attributeDetails = $this->getProductAttributeOptionDetails($parentProduct);
+        if ($product->type == 'configurable') {
+            $attributeDetails = $this->getProductAttributeOptionDetails($childProduct);
             unset($attributeDetails['html']);
 
             $parentData['additional'] = array_merge($parentData['additional'], $attributeDetails);
 
             $childData['product_id'] = (int)$data['selected_configurable_option'];
-            $childData['sku'] = $parentProduct->sku;
-            $childData['name'] = $parentProduct->name;
+            $childData['sku'] = $childProduct->sku;
+            $childData['name'] = $childProduct->name;
             $childData['type'] = 'simple';
             $childData['cart_id'] = $this->getCart()->id;
         }
 
-        $result = $this->cartItem->create($parentData);
+        $item = $this->cartItem->create($parentData);
 
         if ($childData != null) {
-            $childData['parent_id'] = $result->id;
+            $childData['parent_id'] = $item->id;
+            
             $this->cartItem->create($childData);
         }
 
-        return $result;
+        return $item;
     }
 
     /**
