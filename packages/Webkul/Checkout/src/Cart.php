@@ -142,9 +142,9 @@ class Cart {
      */
     public function getCurrentCustomer()
     {
-        $gurad = request()->has('token') ? 'api' : 'customer';
+        $guard = request()->has('token') ? 'api' : 'customer';
 
-        return auth()->guard($gurad);
+        return auth()->guard($guard);
     }
 
     /**
