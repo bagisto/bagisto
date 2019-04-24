@@ -149,6 +149,9 @@ class ShipmentController extends Controller
     {
         $valid = false;
 
+        if (! isset($data['shipment']['items']))
+            return ;
+
         foreach ($data['shipment']['items'] as $itemId => $inventorySource) {
             if ($qty = $inventorySource[$data['shipment']['source']]) {
                 $orderItem = $this->orderItem->find($itemId);
