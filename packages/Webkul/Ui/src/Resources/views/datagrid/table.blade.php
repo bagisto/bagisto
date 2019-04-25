@@ -703,17 +703,21 @@
                     doAction(e) {
                         var element = e.currentTarget;
 
-                        axios.post(element.getAttribute('data-action'), {
-                            _token : element.getAttribute('data-token'),
-                            _method : element.getAttribute('data-method')
-                        }).then(function(response) {
-                            this.result = response;
-                            location.reload();
-                        }).catch(function (error) {
-                            location.reload();
-                        });
+                        if (confirm('{{__('ui::app.datagrid.massaction.delete') }}')) {
+                            axios.post(element.getAttribute('data-action'), {
+                                _token : element.getAttribute('data-token'),
+                                _method : element.getAttribute('data-method')
+                            }).then(function(response) {
+                                this.result = response;
+                                location.reload();
+                            }).catch(function (error) {
+                                location.reload();
+                            });
 
-                        e.preventDefault();
+                            e.preventDefault();
+                        } else {
+                            e.preventDefault();
+                        }
                     },
 
                     removeMassActions() {
