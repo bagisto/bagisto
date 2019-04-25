@@ -28,8 +28,8 @@ window.onload = function () {
 
         if(pageContentHeight <= innerSectionHeight - 60) {
             $('.navbar-left').css("position","absolute");
-            $('.content').css({"position": "fixed", "width": "65%"});
-            $('.content-wrapper').css({"position": "sticky", "top": "60px"});
+            // $('.content').css({"position": "fixed", "width": "65%"});
+            // $('.content-wrapper').css({"position": "sticky", "top": "60px"});
         }
         else {
             $('.accordian-header').on('click',function(event) {
