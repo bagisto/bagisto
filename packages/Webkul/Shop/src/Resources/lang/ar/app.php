@@ -321,7 +321,8 @@ return [
         'quantity' => 'الكمية',
         'in-stock' => 'في الأسهم',
         'out-of-stock' => 'خارج الأسهم',
-        'view-all' => 'عرض الكل'
+        'view-all' => 'عرض الكل',
+        'less-quantity' => 'Quantity can not be less than one.'
     ],
 
     'wishlist' => [
