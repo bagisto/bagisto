@@ -158,8 +158,13 @@ class ProductFlat
     {
         static $familyAttributes = [];
 
+        static $superAttributes = [];
+
         if (! array_key_exists($product->attribute_family->id, $familyAttributes))
             $familyAttributes[$product->attribute_family->id] = $product->attribute_family->custom_attributes;
+
+        if ($parentProduct && ! array_key_exists($parentProduct->id, $superAttributes))
+            $superAttributes[$parentProduct->id] = $parentProduct->super_attributes()->pluck('code')->toArray();
 
         foreach (core()->getAllChannels() as $channel) {
             foreach ($channel->locales as $locale) {
@@ -178,7 +183,7 @@ class ProductFlat
                 }
 
                 foreach ($familyAttributes[$product->attribute_family->id] as $attribute) {
-                    if ($parentProduct && ! in_array($attribute->code, ['sku', 'name', 'price', 'weight', 'status']))
+                    if ($parentProduct && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], ['sku', 'name', 'price', 'weight', 'status'])))
                         continue;
 
                     if (in_array($attribute->code, ['short_description', 'tax_category_id', 'meta_title', 'meta_keywords', 'meta_description', 'width', 'height']))
