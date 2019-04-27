@@ -11,7 +11,7 @@ class ProductAttributeValue extends Model implements ProductAttributeValueContra
 {
     public $timestamps = false;
 
-    protected $with = ['attribute'];
+    // protected $with = ['attribute'];
 
     /**
      * @var array

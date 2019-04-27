@@ -203,14 +203,16 @@
 
         Vue.component('group-form', {
 
-            data: () => ({
-                group: {
-                    'groupName': '',
-                    'position': '',
-                    'is_user_defined': 1,
-                    'custom_attributes': []
+            data() {
+                return {
+                    group: {
+                        'groupName': '',
+                        'position': '',
+                        'is_user_defined': 1,
+                        'custom_attributes': []
+                    }
                 }
-            }),
+            },
 
             template: '#group-form-template',
 
@@ -260,10 +262,12 @@
 
             template: '#group-list-template',
 
-            data: () => ({
-                groups: groups,
-                custom_attributes: custom_attributes
-            }),
+            data() {
+                return {
+                    groups: groups,
+                    custom_attributes: custom_attributes
+                }
+            },
 
             created () {
                 this.groups.forEach(function(group) {

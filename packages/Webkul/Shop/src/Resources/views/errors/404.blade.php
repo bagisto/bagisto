@@ -17,7 +17,7 @@
                     {{ __('admin::app.error.404.name') }}
                 </div>
 
-                <div class="error-messgae" style="font-size: 24px;color: #5E5E5E">
+                <div class="error-messgae" style="font-size: 24px;color: #5E5E5E; margin-top: 40px">
                     {{ __('admin::app.error.404.title') }}
                 </div>
 

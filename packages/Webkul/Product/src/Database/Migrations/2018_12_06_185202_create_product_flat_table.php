@@ -37,7 +37,7 @@ class CreateProductFlatTable extends Migration
             $table->integer('size_label')->nullable();
 
             $table->date('created_at')->nullable();
-            
+
             $table->string('locale')->nullable();
             $table->string('channel')->nullable();
 

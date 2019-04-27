@@ -9,29 +9,54 @@ Vue.prototype.$http = axios
 window.eventBus = new Vue();
 
 window.onload = function () {
-    moveDistance = 30;
-    navbarLeftCssTop = parseInt($('.navbar-left').css("top"));
-    windowHeight = $(window).height();
-    menubarHeight = $('ul.menubar').height();
-    documentHeight = $(document).height();
-
-    if (menubarHeight < windowHeight) {
-        differenceInHeight = windowHeight - menubarHeight;
-    } else {
-        differenceInHeight = menubarHeight - windowHeight;
-    }
-
-    scrollTopWhenWindowLoaded = $(document).scrollTop();
-
-    $('.navbar-left').css('top', -scrollTopWhenWindowLoaded + 60 + 'px');
-
     $(document).ready(function() {
+        navbarLeftCssTop = parseInt($('.navbar-left').css("top"));
+        windowHeight = $(window).height();
+        menubarHeight = $('ul.menubar').height();
+        documentHeight = $(document).height();
+        contentHeight = $('.content').height();
+        innerSectionHeight = $('.inner-section').height();
+        asideNavHeight = $('.aside-nav').height();
+        pageContentHeight = $('.page-content').height();
+        accordianHeight = $('.accordian').height();
+
+        if (menubarHeight < windowHeight) {
+            differenceInHeight = windowHeight - menubarHeight;
+        } else {
+            differenceInHeight = menubarHeight - windowHeight;
+        }
+
+        if(pageContentHeight <= innerSectionHeight - 60) {
+            $('.navbar-left').css("position","absolute");
+            // $('.content').css({"position": "fixed", "width": "65%"});
+            // $('.content-wrapper').css({"position": "sticky", "top": "60px"});
+        }
+        else {
+            $('.accordian-header').on('click',function(event) {
+                pageContentHeightOnAccordianClick = $('.page-content').height();
+
+                if(pageContentHeightOnAccordianClick <= innerSectionHeight) {
+                    $('.navbar-left').css("position","absolute");
+                    $('.content').css("position","fixed");
+                    $('.content-wrapper').css({"position": "sticky", "top": "60px"});
+                }
+            });
+        }
+
+        scrollTopWhenWindowLoaded = $(document).scrollTop();
+
         if (menubarHeight > documentHeight && menubarHeight > windowHeight) {
-            $('.inner-section').css("position", "fixed");
-            $('.navbar-left').css("position", "absolute");
+            $(document).scroll(function() {
+                documentScrollWhenScrolled = $(document).scrollTop();
+                if (documentScrollWhenScrolled <= differenceInHeight + 200) {
+                    $('.navbar-left').css('top', documentScrollWhenScrolled + 60 + 'px');
+
+                    scrollTopValueWhenNavBarFixed = $(document).scrollTop();
+                }
+            });
         } else if (menubarHeight < windowHeight) {
             $('.navbar-left').css("position", "fixed");
-        } else {
+        } else if (menubarHeight < documentHeight) {
             if (scrollTopWhenWindowLoaded > differenceInHeight) {
                 $('.navbar-left').css('top', -differenceInHeight + 'px');
             }
@@ -39,7 +64,8 @@ window.onload = function () {
             if (menubarHeight > windowHeight) {
                 $(document).scroll(function() {
                     documentScrollWhenScrolled = $(document).scrollTop();
-                    if (documentScrollWhenScrolled <= differenceInHeight + 70) {
+
+                    if (documentScrollWhenScrolled <= differenceInHeight + 200) {
                         $('.navbar-left').css('top', -documentScrollWhenScrolled + 60 + 'px');
 
                         scrollTopValueWhenNavBarFixed = $(document).scrollTop();
@@ -54,10 +80,11 @@ window.onload = function () {
                         scrollTopValueWhenNavBarFixed = $(document).scrollTop();
                     }
                 });
+
             }
         }
     });
-};
+}
 
 $(document).ready(function () {
     Vue.config.ignoredElements = [

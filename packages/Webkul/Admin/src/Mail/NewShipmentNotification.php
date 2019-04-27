@@ -16,7 +16,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class NewShipmentNotification extends Mailable
 {
     use Queueable, SerializesModels;
-    
+
     /**
      * The shipment instance.
      *

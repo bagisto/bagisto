@@ -33,7 +33,8 @@ class SearchRepository extends Repository
         return 'Webkul\Product\Contracts\Product';
     }
 
-    public function searchAttributes() {
+    public function searchAttributes()
+    {
     }
 
     public function search($data) {

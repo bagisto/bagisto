@@ -743,12 +743,12 @@ modal {
 
 .modal-container {
     background: #ffffff;
-    top: 200px;
+    top: 100px;
     width: 600px;
     max-width: 80%;
-    left: auto;
-    right: auto;
-    position: absolute;
+    left: 50%;
+    margin-left: -300px;
+    position: fixed;
     z-index: 11;
     @include box-shadow(
         0px 15px 25px 0px rgba(0, 0, 0, 0.03),

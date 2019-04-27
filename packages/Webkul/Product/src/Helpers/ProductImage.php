@@ -52,12 +52,9 @@ class ProductImage extends AbstractProduct
      */
     public function getProductBaseImage($product)
     {
-        if (! $product) 
-            return [];
-        
-        $images = $product->images;
+        $images = $product ? $product->images : null;
 
-        if ($images->count()) {
+        if ($images && $images->count()) {
             $image = [
                 'small_image_url' => url('cache/small/' . $images[0]->path),
                 'medium_image_url' => url('cache/medium/' . $images[0]->path),
