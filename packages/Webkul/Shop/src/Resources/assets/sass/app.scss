@@ -1963,6 +1963,14 @@ section.product-detail {
                         }
                     }
                 }
+
+                .quantity-change {
+                    cursor: pointer;
+
+                    &:focus {
+                        border-color: $border-color !important;
+                    }
+                }
             }
         }
     }
@@ -3139,12 +3147,6 @@ section.review {
                 height: 30px;
             }
         }
-
-        // .default-address {
-        //     position: absolute;
-        //     top: 10px;
-        //     right: 10px;
-        // }
     }
 }
 

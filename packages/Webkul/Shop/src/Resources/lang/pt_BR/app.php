@@ -326,7 +326,8 @@ return [
         'in-stock' => 'Em Estoque',
         'out-of-stock' => 'Fora de Estoque',
         'view-all' => 'Ver Tudo',
-        'select-above-options' => 'Por favor, selecione as opções acima primeiro.'
+        'select-above-options' => 'Por favor, selecione as opções acima primeiro.',
+        'less-quantity' => 'Quantity can not be less than one.'
     ],
 
     'wishlist' => [
