@@ -72,11 +72,9 @@ class RegistrationController extends Controller
             $data['is_verified'] = 1;
         }
 
-        $customerGroup = $this->customerGroup->findOneWhere(['name' => 'default']);
+        $customerGroup = $this->customerGroup->findOneWhere(['name' => 'General', 'is_user_defined' => 0]);
 
-        dd($customerGroup);
-
-        $data['customer_group_id'] = 1;
+        $data['customer_group_id'] = $this->customerGroup->id;
 
         $verificationData['email'] = $data['email'];
         $verificationData['token'] = md5(uniqid(rand(), true));

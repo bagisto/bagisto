@@ -186,7 +186,6 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('admin.sales.shipments.view');
             });
 
-
             // Catalog Routes
             Route::prefix('catalog')->group(function () {
                 Route::get('/sync', 'Webkul\Product\Http\Controllers\ProductController@sync');
@@ -609,6 +608,23 @@ Route::group(['middleware' => ['web']], function () {
             //DataGrid Export
             Route::post('admin/export', 'Webkul\Admin\Http\Controllers\ExportController@export')->name('admin.datagrid.export');
 
+            Route::prefix('promotion')->group(function () {
+                Route::get('/catalog-rules', 'Webkul\Discount\Http\Controllers\CatalogRuleController@index')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rule.index'
+                ])->name('admin.catalog-rule.index');
+
+                Route::get('/catalog-rule/create', 'Webkul\Discount\Http\Controllers\CatalogRuleController@create')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rule.create'
+                ])->name('admin.catalog-rule.create');
+
+                Route::get('/cart-rules', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rule.index'
+                ])->name('admin.cart-rule.index');
+
+                Route::get('/cart-rule/create', 'Webkul\Discount\Http\Controllers\CartRuleController@create')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rule.create'
+                ])->name('admin.cart-rule.create');
+            });
         });
     });
 });

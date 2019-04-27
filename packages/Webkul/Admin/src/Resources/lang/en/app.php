@@ -39,7 +39,9 @@ return [
         'sliders' => 'Sliders',
         'taxes' => 'Taxes',
         'tax-categories' => 'Tax Categories',
-        'tax-rates' => 'Tax Rates'
+        'tax-rates' => 'Tax Rates',
+        'promotion' => 'Promotions',
+        'discount' => 'Discount'
     ],
 
     'acl' => [
@@ -708,6 +710,7 @@ return [
             'is_user_defined' => 'User Defined',
             'yes' => 'Yes'
         ],
+
         'customers' => [
             'add-title' => 'Add Customer',
             'edit-title' => 'Edit Customer',
@@ -729,6 +732,7 @@ return [
             'phone' => 'Phone',
             'group-default' => 'Cannot delete the default group.',
         ],
+
         'reviews' => [
             'title' => 'Reviews',
             'edit-title' => 'Edit Review',
@@ -751,6 +755,13 @@ return [
             'delete' => 'Subscriber was successfully deleted',
             'delete-failed' => 'Error! Subscriber cannot be deleted'
         ]
+    ],
+
+    'promotion' => [
+        'catalog-rule' => 'Catalog Rule',
+        'cart-rule' => 'Cart Rule',
+        'add-catalog-rule' => 'Add Catalog Rule',
+        'add-cart-rule' => 'Add Cart Rule'
     ],
 
     'error' => [
