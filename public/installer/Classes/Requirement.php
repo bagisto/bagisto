@@ -117,61 +117,28 @@ class Requirement {
     }
 
     /**
-     * check installation for composer
-     * @return boolean
-    */
-    private static function composerInstall()
+     * Check composer installation.
+     *
+     * @return array
+     */
+    public function composerInstall()
     {
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $command = 'cd ../.. && composer --version';
+        $location = str_replace('\\', '/', getcwd());
+        $currentLocation = explode("/", $location);
+        array_pop($currentLocation);
+        array_pop($currentLocation);
+        $desiredLocation = implode("/", $currentLocation);
+        $autoLoadFile = $desiredLocation . '/' . 'vendor' . '/' . 'autoload.php';
+
+        if (file_exists($autoLoadFile)) {
+            $data['composer_install'] = 0;
         } else {
-            $command = 'cd ../.. ; export HOME=/root && export COMPOSER_HOME=/root && /usr/bin/composer.phar self-update; composer --version';
+            $data['composer_install'] = 1;
+            $data['composer'] = 'Composer dependencies is not Installed.Go to root of project, run "composer install" command to install composer dependencies & refresh page again.';
         }
-        exec($command, $data['composer'], $data['composer_install']);
 
-        return $data['composer_install'];
+        return $data;
     }
-
-    // /**
-    //  * check installation for mysql
-    //  * @return boolean
-    // */
-    // private static function mysqlInstall()
-    // {
-    //     $command = 'mysql --version';
-    //     exec($command, $data['mysql'], $data['mysql_install']);
-    //     $mysqlVersion = explode(",", $data['mysql'][0]);
-    //     $mysqlVersion = explode(" ", $mysqlVersion[0]);
-    //     $supported = false;
-    //     $minMysqlVersion = '5.7.23';
-
-    //     if ($data['mysql_install'] == 0) {
-    //         if (version_compare(end($mysqlVersion), $minMysqlVersion, '>=')) {
-    //             $supported = true;
-    //         }
-    //     }
-
-    //     $mysqlStatus = [
-    //         'current' => end($mysqlVersion),
-    //         'minimum' => $minMysqlVersion,
-    //         'supported' => $supported
-    //     ];
-
-    //     return $mysqlStatus;
-    // }
-
-
-    // /**
-    //  * check installation for composer
-    //  * @return boolean
-    // */
-    // private static function nodeInstall()
-    // {
-    //     $command = 'npm -v 2>&1';
-    //     exec($command, $data['npm'], $data['npm_install']);
-
-    //     return $data['npm_install'];
-    // }
 
     /**
      * Render view for class.
@@ -184,10 +151,6 @@ class Requirement {
         $phpVersion = $this->checkPHPversion();
 
         $composerInstall = $this->composerInstall();
-
-        // $sqlInstall = $this->mysqlInstall();
-
-        // $nodeInstall = $this->nodeInstall();
 
         ob_start();
 

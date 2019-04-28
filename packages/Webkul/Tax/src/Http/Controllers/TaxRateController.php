@@ -36,7 +36,7 @@ class TaxRateController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Tax\Repositories\TaxRateRepository  $taxRate
+     * @param  \Webkul\Tax\Repositories\TaxRateRepository  $taxRate
      * @return void
      */
     public function __construct(TaxRate $taxRate)
@@ -84,7 +84,7 @@ class TaxRateController extends Controller
             'zip_to' => 'nullable|required_with:is_zip,zip_from',
             'state' => 'required|string',
             'country' => 'required|string',
-            'tax_rate' => 'required|numeric'
+            'tax_rate' => 'required|numeric|min:0.0001'
         ]);
 
         $data = request()->all();
@@ -114,7 +114,7 @@ class TaxRateController extends Controller
      */
     public function edit($id)
     {
-        $taxRate = $this->taxRate->find($id);
+        $taxRate = $this->taxRate->findOrFail($id);
 
         return view($this->_config['view'])->with('taxRate', $taxRate);
     }
@@ -134,7 +134,7 @@ class TaxRateController extends Controller
             'zip_to' => 'nullable|required_with:is_zip,zip_from',
             'state' => 'required|string',
             'country' => 'required|string',
-            'tax_rate' => 'required|numeric'
+            'tax_rate' => 'required|numeric|min:0.0001'
         ]);
 
         Event::fire('tax.tax_rate.update.before', $id);
@@ -156,20 +156,23 @@ class TaxRateController extends Controller
      */
     public function destroy($id)
     {
-        // if ($this->taxRate->count() == 1) {
-        //     session()->flash('error', trans('admin::app.settings.tax-rates.atleast-one'));
-        // } else {
+        $taxRate = $this->taxRate->findOrFail($id);
 
+        try {
+            Event::fire('tax.tax_rate.delete.before', $id);
 
-        //     session()->flash('success', trans('admin::app.settings.tax-rates.delete'));
-        // }
-        Event::fire('tax.tax_rate.delete.before', $id);
+            $this->taxRate->delete($id);
 
-        $this->taxRate->delete($id);
+            Event::fire('tax.tax_rate.delete.after', $id);
 
-        Event::fire('tax.tax_rate.delete.after', $id);
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Tax Rate']));
 
-        return redirect()->back();
+            return response()->json(['message' => true], 200);
+        } catch(\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Tax Rate']));
+        }
+
+        return response()->json(['message' => false], 400);
     }
 
     /**
@@ -189,11 +192,20 @@ class TaxRateController extends Controller
 
                 foreach ($excelData as $data) {
                     foreach ($data as $column => $uploadData) {
+
+                        if (!is_null($uploadData['zip_from']) && !is_null($uploadData['zip_to'])) {
+                            $uploadData['is_zip'] = 1;
+                        }
+
                         $validator = Validator::make($uploadData, [
                             'identifier' => 'required|string',
                             'state' => 'required|string',
                             'country' => 'required|string',
-                            'tax_rate' => 'required|numeric'
+                            'tax_rate' => 'required|numeric|min:0.0001',
+                            'is_zip' => 'sometimes',
+                            'zip_code' => 'sometimes|required_without:is_zip',
+                            'zip_from' => 'nullable|required_with:is_zip',
+                            'zip_to' => 'nullable|required_with:is_zip,zip_from',
                         ]);
 
                         if ($validator->fails()) {
@@ -230,6 +242,12 @@ class TaxRateController extends Controller
                                 $errorMsg[$coulmn] = $fail->first('country');
                             } else if ($fail->first('state')) {
                                 $errorMsg[$coulmn] = $fail->first('state');
+                            } else if ($fail->first('zip_code')) {
+                                $errorMsg[$coulmn] = $fail->first('zip_code');
+                            } else if ($fail->first('zip_from')) {
+                                $errorMsg[$coulmn] = $fail->first('zip_from');
+                            } else if ($fail->first('zip_to')) {
+                                $errorMsg[$coulmn] = $fail->first('zip_to');
                             }
                         }
 
@@ -250,6 +268,11 @@ class TaxRateController extends Controller
 
                         foreach ($excelData as $data) {
                             foreach ($data as $column => $uploadData) {
+                                if (!is_null($uploadData['zip_from']) && !is_null($uploadData['zip_to'])) {
+                                    $uploadData['is_zip'] = 1;
+                                    $uploadData['zip_code'] = NULL;
+                                }
+
                                 if (isset($rateIdentifier)) {
                                     $id = array_search($uploadData['identifier'], $rateIdentifier);
                                     if ($id) {

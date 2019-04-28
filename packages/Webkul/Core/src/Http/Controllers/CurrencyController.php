@@ -32,7 +32,7 @@ class CurrencyController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\CurrencyRepository $currency
+     * @param  \Webkul\Core\Repositories\CurrencyRepository $currency
      * @return void
      */
     public function __construct(Currency $currency)
@@ -94,7 +94,7 @@ class CurrencyController extends Controller
      */
     public function edit($id)
     {
-        $currency = $this->currency->find($id);
+        $currency = $this->currency->findOrFail($id);
 
         return view($this->_config['view'], compact('currency'));
     }
@@ -132,24 +132,27 @@ class CurrencyController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            Event::fire('core.currency.delete.before', $id);
+        $currency = $this->currency->findOrFail($id);
 
-            $result = $this->currency->delete($id);
+        if ($this->currency->count() == 1) {
+            sesssion()->flash('warning', trans( 'admin::app.response.last-delete-error', ['name' => 'Currency']));
+        } else {
+            try {
+                Event::fire('core.currency.delete.before', $id);
 
-            Event::fire('core.currency.delete.after', $id);
+                $this->currency->delete($id);
 
-            if($result)
+                Event::fire('core.currency.delete.after', $id);
+
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Currency']));
-            else
-                session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Currency']));
-        } catch (\Exception $e) {
-            session()->flash('error', $e->getMessage());
 
-            session()->flash('error', trans('admin::app.response.currency-delete-error', ['name' => 'Currency']));
+                return response()->json(['message' => true], 200);
+            } catch (\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Currency']));
+            }
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 
     /**

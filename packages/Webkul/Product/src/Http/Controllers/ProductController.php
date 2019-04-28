@@ -69,10 +69,10 @@ class ProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
-     * @param  Webkul\Category\Repositories\CategoryRepository          $category
-     * @param  Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySource
-     * @param  Webkul\Product\Repositories\ProductRepository            $product
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
+     * @param  \Webkul\Category\Repositories\CategoryRepository          $category
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySource
+     * @param  \Webkul\Product\Repositories\ProductRepository            $product
      * @return void
      */
     public function __construct(
@@ -167,13 +167,15 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->product->with(['variants'])->find($id);
+        $product = $this->product->with(['variants', 'variants.inventories'])->findOrFail($id);
 
         $categories = $this->category->getCategoryTree();
 
         $inventorySources = $this->inventorySource->all();
 
-        return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
+        $allProducts = $this->productGrid->all();
+
+        return view($this->_config['view'], compact('product', 'categories', 'inventorySources', 'allProducts'));
     }
 
     /**
@@ -200,11 +202,19 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $this->product->delete($id);
+        $product = $this->product->findOrFail($id);
 
-        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Product']));
+        try {
+            $this->product->delete($id);
 
-        return redirect()->back();
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Product']));
+
+            return response()->json(['message' => true], 200);
+        } catch (\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Product']));
+        }
+
+        return response()->json(['message' => false], 400);
     }
 
     /**
@@ -217,7 +227,11 @@ class ProductController extends Controller
         $productIds = explode(',', request()->input('indexes'));
 
         foreach ($productIds as $productId) {
-            $this->product->delete($productId);
+            $product = $this->product->find($productId);
+
+            if (isset($product)) {
+                $this->product->delete($productId);
+            }
         }
 
         session()->flash('success', trans('admin::app.catalog.products.mass-delete-success'));
@@ -265,5 +279,29 @@ class ProductController extends Controller
         Event::fire('products.datagrid.sync', true);
 
         return redirect()->route('admin.catalog.products.index');
+    }
+
+    /**
+     * Result of search product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function productLinkSearch()
+    {
+        if (request()->ajax()) {
+            $results = [];
+
+            foreach ($this->product->searchProductByAttribute(request()->input('query')) as $row) {
+                $results[] = [
+                        'id' => $row->product_id,
+                        'sku' => $row->sku,
+                        'name' => $row->name,
+                    ];
+            }
+
+            return response()->json($results);
+        } else {
+            return view($this->_config['view']);
+        }
     }
 }

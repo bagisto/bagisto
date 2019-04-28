@@ -40,8 +40,8 @@ class ReviewController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Product\Repositories\ProductRepository        $product
-     * @param  Webkul\Product\Repositories\ProductReviewRepository  $productReview
+     * @param  \Webkul\Product\Repositories\ProductRepository        $product
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReview
      * @return void
      */
     public function __construct(Product $product, ProductReview $productReview)
@@ -100,7 +100,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Display reviews accroding to product.
+     * Display reviews of particular product.
      *
      * @param  string $slug
      * @return \Illuminate\Http\Response
@@ -113,21 +113,29 @@ class ReviewController extends Controller
     }
 
     /**
-     * Delete the review of the current product
+     * Customer delete a reviews from their account
      *
      * @return response
      */
     public function destroy($id)
     {
+        $review = $this->productReview->findOneWhere([
+            'id' => $id,
+            'customer_id' => auth()->guard('customer')->user()->id
+        ]);
+
+        if (! $review)
+            abort(404);
+
         $this->productReview->delete($id);
 
         session()->flash('success', trans('shop::app.response.delete-success', ['name' => 'Product Review']));
 
-        return redirect()->back();
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
-     * Function to delete all reviews
+     * Customer delete all reviews from their account
      *
      * @return Mixed Response & Boolean
     */
@@ -142,6 +150,6 @@ class ReviewController extends Controller
 
         session()->flash('success', trans('shop::app.reviews.delete-all'));
 
-        return redirect()->back();
+        return redirect()->route($this->_config['redirect']);
     }
 }

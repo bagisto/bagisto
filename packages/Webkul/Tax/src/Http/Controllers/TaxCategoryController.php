@@ -49,9 +49,9 @@ class TaxCategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Tax\Repositories\TaxCategoryRepository $taxCategory
-     * @param  Webkul\Tax\Repositories\TaxRateRepository     $taxRate
-     * @param  Webkul\Tax\Repositories\TaxMapRepository      $taxMap
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository $taxCategory
+     * @param  \Webkul\Tax\Repositories\TaxRateRepository     $taxRate
+     * @param  \Webkul\Tax\Repositories\TaxMapRepository      $taxMap
      * @return void
      */
     public function __construct(
@@ -173,16 +173,22 @@ class TaxCategoryController extends Controller
      */
     public function destroy($id)
     {
+        $taxCategory = $this->taxCategory->findOrFail($id);
+
         try {
             Event::fire('tax.tax_category.delete.before', $id);
 
             $this->taxCategory->delete($id);
 
             Event::fire('tax.tax_category.delete.after', $id);
+
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Tax Category']));
+
+            return response()->json(['message' => true], 200);
         } catch(Exception $e) {
-            return redirect()->back();
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Tax Category']));
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 }

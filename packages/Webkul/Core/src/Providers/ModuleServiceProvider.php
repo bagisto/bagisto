@@ -15,9 +15,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Core\Models\CurrencyExchangeRate::class,
         \Webkul\Core\Models\Locale::class,
         \Webkul\Core\Models\Slider::class,
-        \Webkul\Core\Models\SubscribersList::class,
-        \Webkul\Core\Models\TaxCategory::class,
-        \Webkul\Core\Models\TaxMap::class,
-        \Webkul\Core\Models\TaxRate::class,
+        \Webkul\Core\Models\SubscribersList::class
     ];
 }

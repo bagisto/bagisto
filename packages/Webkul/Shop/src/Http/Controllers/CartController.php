@@ -8,8 +8,7 @@ use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Helpers\ProductImage;
-use Webkul\Product\Helpers\View as ProductView;
+use Webkul\Customer\Repositories\WishlistRepository;
 use Illuminate\Support\Facades\Event;
 use Cart;
 
@@ -31,7 +30,6 @@ class CartController extends Controller
      * @param $cartItem
      * @param $customer
      * @param $product
-     * @param $productImage
      * @param $productView
      */
     protected $_config;
@@ -44,15 +42,21 @@ class CartController extends Controller
 
     protected $product;
 
-    protected $productView;
+    protected $suppressFlash = false;
+
+    /**
+     * WishlistRepository Repository object
+     *
+     * @var array
+     */
+    protected $wishlist;
 
     public function __construct(
         CartRepository $cart,
         CartItemRepository $cartItem,
         CustomerRepository $customer,
         ProductRepository $product,
-        ProductImage $productImage,
-        ProductView $productView
+        WishlistRepository $wishlist
     )
     {
 
@@ -66,9 +70,7 @@ class CartController extends Controller
 
         $this->product = $product;
 
-        $this->productImage = $productImage;
-
-        $this->productView = $productView;
+        $this->wishlist = $wishlist;
 
         $this->_config = request('_config');
     }
@@ -93,8 +95,6 @@ class CartController extends Controller
         try {
             Event::fire('checkout.cart.add.before', $id);
 
-            dd(request()->except('_token'));
-
             $result = Cart::add($id, request()->except('_token'));
 
             Event::fire('checkout.cart.add.after', $result);
@@ -104,7 +104,19 @@ class CartController extends Controller
             if ($result) {
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
-                return redirect()->route($this->_config['redirect']);
+                if (auth()->guard('customer')->user()) {
+                    $customer = auth()->guard('customer')->user();
+
+                    if (count($customer->wishlist_items)) {
+                        foreach ($customer->wishlist_items as $wishlist) {
+                            if ($wishlist->product_id == $id) {
+                                $this->wishlist->delete($wishlist->id);
+                            }
+                        }
+                    }
+                }
+
+                return redirect()->back();
             } else {
                 session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
 
@@ -155,7 +167,6 @@ class CartController extends Controller
             }
         }
 
-
         foreach ($request['qty'] as $key => $value) {
             $item = $this->cartItem->findOneByField('id', $key);
 
@@ -163,7 +174,11 @@ class CartController extends Controller
 
             Event::fire('checkout.cart.update.before', $key);
 
-            Cart::updateItem($item->product_id, $data, $key);
+            $result = Cart::updateItem($item->product_id, $data, $key);
+
+            if ($result == false) {
+                $this->suppressFlash = true;
+            }
 
             Event::fire('checkout.cart.update.after', $item);
 
@@ -172,6 +187,12 @@ class CartController extends Controller
         }
 
         Cart::collectTotals();
+
+        if ($this->suppressFlash) {
+            session()->forget('success');
+            session()->forget('warning');
+            session()->flash('info', trans('shop::app.checkout.cart.partial-cart-update'));
+        }
 
         return redirect()->back();
     }

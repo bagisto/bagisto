@@ -21,7 +21,7 @@ class DataGridExport implements FromView, ShouldAutoSize
      *
      * @var mixed
      */
-    public $gridData;
+    protected $gridData = array();
 
     /**
      * Create a new instance.
@@ -40,22 +40,17 @@ class DataGridExport implements FromView, ShouldAutoSize
      */
     public function view(): View
     {
-        $pagination = false;
-        $results = [];
-        $columns = [];
+        $columns = array();
 
-        foreach($this->gridData as $key => $data) {
-            if ($key == 'collection') {
-                $results = $data['data'];
-            }
-            if ($key == 'columns') {
-               $columns = $data;
-            }
+        foreach($this->gridData as $key => $gridData) {
+            $columns = array_keys((array) $gridData);
+
+            break;
         }
 
-        return view('admin::export.export', [
-            'results' => $results,
+        return view('admin::export.temp', [
             'columns' => $columns,
+            'records' => $this->gridData,
         ]);
     }
 }

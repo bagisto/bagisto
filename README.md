@@ -28,6 +28,8 @@ to the ever demanding online world. Your business whether small or huge it suits
 
 **We are also having a forum for any type of your concern, feature request discussions. Please visit: [Bagisto Forums](https://forums.bagisto.com/)**
 
+# Visit our live [Demo](https://demo.bagisto.com)
+
 It packs in lots of demanding features that allows your business to scale in no time:
 
 * Multiple Channels, Locale, Currencies.
@@ -42,7 +44,7 @@ It packs in lots of demanding features that allows your business to scale in no 
 * Orders Management System.
 * Customer Cart, Wishlist, Product Reviews.
 * Simple and Configurable Products.
-* Check out [more....](https://bagisto.com/features/).
+* Check out [click here](https://bagisto.com/features/).
 
 **For Developers**:
 Dev guys can take advantage of two of the hottest frameworks used in this project Laravel and Vue.js, both of these frameworks have been used in Bagisto.
@@ -52,7 +54,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 * **OS**: Ubuntu 16.04 LTS or higher.
 * **SERVER**: Apache 2 or NGINX
-* **RAM**: 2 GB or higher.
+* **RAM**: 3 GB or higher.
 * **PHP**: 7.1.17 or higher.
 * **Processor**: Clock Cycle 1 Ghz or higher.
 * **For MySQL users**: 5.7.23 or higher.
@@ -66,7 +68,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 ##### a. Download zip from the link below:
 
-[Download](https://github.com/bagisto/bagisto/archive/v0.1.4.zip)
+[Download](https://github.com/bagisto/bagisto/archive/v0.1.5.zip)
 
 ##### b. Extract the contents of zip and execute the project in browser:
 

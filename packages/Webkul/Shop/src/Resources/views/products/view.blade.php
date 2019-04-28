@@ -20,12 +20,11 @@
                 <div class="form-container">
                     @csrf()
 
-                    <input type="hidden" name="product" value="{{ $product->id }}">
+                    <input type="hidden" name="product" value="{{ $product->product_id }}">
 
                     @include ('shop::products.view.gallery')
 
                     <div class="details">
-
                         <div class="product-heading">
                             <span>{{ $product->name }}</span>
                         </div>
@@ -51,7 +50,11 @@
 
                             <label class="required">{{ __('shop::app.products.quantity') }}</label>
 
-                            <input name="quantity" class="control" value="1" v-validate="'required|numeric|min_value:1'" style="width: 60px;" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;">
+                            <input class="control quantity-change" value="-" style="width: 35px; border-radius: 3px 0px 0px 3px;" onclick="updateQunatity('remove')" readonly>
+
+                            <input name="quantity" id="quantity" class="control quantity-change" value="1" v-validate="'required|numeric|min_value:1'" style="width: 60px; position: relative; margin-left: -4px; margin-right: -4px; border-right: none;border-left: none; border-radius: 0px;" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
+
+                            <input class="control quantity-change" value="+" style="width: 35px; padding: 0 12px; border-radius: 0px 3px 3px 0px;" onclick=updateQunatity('add') readonly>
 
                             <span class="control-error" v-if="errors.has('quantity')">@{{ errors.first('quantity') }}</span>
                         </div>
@@ -65,7 +68,6 @@
                         @endif
 
                         @include ('shop::products.view.configurable-options')
-
 
                         {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
@@ -92,6 +94,8 @@
             </product-view>
         </div>
 
+        @include ('shop::products.view.related-products')
+
         @include ('shop::products.view.up-sells')
 
     </section>
@@ -102,7 +106,7 @@
 @push('scripts')
 
     <script type="text/x-template" id="product-view-template">
-        <form method="POST" id="product-form" action="{{ route('cart.add', $product->id) }}" @click="onSubmit($event)">
+        <form method="POST" id="product-form" action="{{ route('cart.add', $product->product_id) }}" @click="onSubmit($event)">
 
             <slot></slot>
 
@@ -112,7 +116,6 @@
     <script>
 
         Vue.component('product-view', {
-
             template: '#product-view-template',
 
             inject: ['$validator'],
@@ -185,5 +188,21 @@
                 }
             }
         };
+
+        function updateQunatity(operation) {
+            var quantity = document.getElementById('quantity').value;
+
+            if (operation == 'add') {
+                quantity = parseInt(quantity) + 1;
+            } else if (operation == 'remove') {
+                if (quantity > 1) {
+                    quantity = parseInt(quantity) - 1;
+                } else {
+                    alert('{{ __('shop::app.products.less-quantity') }}');
+                }
+            }
+            document.getElementById("quantity").value = quantity;
+            event.preventDefault();
+        }
     </script>
 @endpush

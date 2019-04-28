@@ -6,13 +6,13 @@
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.catalog.attributes.store') }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.catalog.attributes.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
             <div class="page-header">
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
-                        
+
                         {{ __('admin::app.catalog.attributes.add-title') }}
                     </h1>
                 </div>
@@ -99,7 +99,7 @@
 
                         <accordian :title="'{{ __('admin::app.catalog.attributes.options') }}'" :active="true" :id="'options'">
                             <div slot="body">
-                                
+
                                 {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.options.controls.before') !!}
 
                                 <option-wrapper></option-wrapper>
@@ -119,7 +119,7 @@
                         <div slot="body">
 
                             {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.options.controls.before') !!}
-                            
+
                             <div class="control-group">
                                 <label for="is_required">{{ __('admin::app.catalog.attributes.is_required') }}</label>
                                 <select class="control" id="is_required" name="is_required">
@@ -220,7 +220,7 @@
     <script type="text/x-template" id="options-template">
         <div>
 
-            <div class="control-group">
+            <div class="control-group" v-if="show_swatch">
                 <label for="swatch_type">{{ __('admin::app.catalog.attributes.swatch_type') }}</label>
                 <select class="control" id="swatch_type" name="swatch_type" v-model="swatch_type">
                     <option value="dropdown">
@@ -245,8 +245,8 @@
                 <table>
                     <thead>
                         <tr>
-                            <th v-if="swatch_type == 'color' || swatch_type == 'image'">{{ __('admin::app.catalog.attributes.swatch') }}</th>
-                            
+                            <th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">{{ __('admin::app.catalog.attributes.swatch') }}</th>
+
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
 
                             @foreach (Webkul\Core\Models\Locale::all() as $locale)
@@ -263,11 +263,11 @@
 
                     <tbody>
                         <tr v-for="row in optionRows">
-                            <td v-if="swatch_type == 'color'">
+                            <td v-if="show_swatch && swatch_type == 'color'">
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
                             </td>
 
-                            <td v-if="swatch_type == 'image'">
+                            <td v-if="show_swatch && swatch_type == 'image'">
                                 <input type="file" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
                             </td>
 
@@ -281,7 +281,7 @@
                             @foreach (Webkul\Core\Models\Locale::all() as $locale)
                                 <td>
                                     <div class="control-group" :class="[errors.has(localeInputName(row, '{{ $locale->code }}')) ? 'has-error' : '']">
-                                        <input type="text" v-validate="'required'" v-model="row['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
+                                        <input type="text" v-validate="'{{ app()->getLocale() }}' == '{{ $locale->code }}' ? 'required': ''"  v-model="row['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
                                         <span class="control-error" v-if="errors.has(localeInputName(row, '{{ $locale->code }}'))">@{{ errors.first(localeInputName(row, '{!! $locale->code !!}')) }}</span>
                                     </div>
                                 </td>
@@ -302,7 +302,7 @@
                 </table>
             </div>
 
-            <button type="button" class="btn btn-lg btn-primary" id="add-option-btn" style="margin-top: 20px" @click="addOptionRow()">
+            <button type="button" class="btn btn-lg btn-primary mt-20" id="add-option-btn" @click="addOptionRow()">
                 {{ __('admin::app.catalog.attributes.add-option-btn-title') }}
             </button>
         </div>
@@ -317,55 +317,67 @@
                     $('#options').parent().removeClass('hide')
                 }
             })
+        });
 
-            var optionWrapper = Vue.component('option-wrapper', {
 
-                template: '#options-template',
+        Vue.component('option-wrapper', {
 
-                data: () => ({
+            template: '#options-template',
+
+            inject: ['$validator'],
+
+            data() {
+                return {
                     optionRowCount: 0,
                     optionRows: [],
+                    show_swatch: false,
                     swatch_type: ''
-                }),
-
-                methods: {
-                    addOptionRow () {
-                        var rowCount = this.optionRowCount++;
-                        var row = {'id': 'option_' + rowCount};
-
-                        @foreach (Webkul\Core\Models\Locale::all() as $locale)
-                            row['{{ $locale->code }}'] = '';
-                        @endforeach
-
-                        this.optionRows.push(row);
-                    },
-
-                    removeRow (row) {
-                        var index = this.optionRows.indexOf(row)
-                        Vue.delete(this.optionRows, index);
-                    },
-
-                    adminName (row) {
-                        return 'options[' + row.id + '][admin_name]';
-                    },
-
-                    localeInputName (row, locale) {
-                        return 'options[' + row.id + '][' + locale + '][label]';
-                    },
-
-                    sortOrderName (row) {
-                        return 'options[' + row.id + '][sort_order]';
-                    }
                 }
-            })
+            },
 
-            new Vue({
-                el: '#options',
+            created () {
+                var this_this = this;
 
-                components: {
-                    optionWrapper: optionWrapper
+                $(document).ready(function () {
+                    $('#type').on('change', function (e) {
+                        if (['select'].indexOf($(e.target).val()) === -1) {
+                            this_this.show_swatch = false;
+                        } else {
+                            this_this.show_swatch = true;
+                        }
+                    });
+                });
+            },
+
+            methods: {
+                addOptionRow () {
+                    var rowCount = this.optionRowCount++;
+                    var row = {'id': 'option_' + rowCount};
+
+                    @foreach (Webkul\Core\Models\Locale::all() as $locale)
+                        row['{{ $locale->code }}'] = '';
+                    @endforeach
+
+                    this.optionRows.push(row);
                 },
-            })
-        });
+
+                removeRow (row) {
+                    var index = this.optionRows.indexOf(row)
+                    Vue.delete(this.optionRows, index);
+                },
+
+                adminName (row) {
+                    return 'options[' + row.id + '][admin_name]';
+                },
+
+                localeInputName (row, locale) {
+                    return 'options[' + row.id + '][' + locale + '][label]';
+                },
+
+                sortOrderName (row) {
+                    return 'options[' + row.id + '][sort_order]';
+                }
+            }
+        })
     </script>
 @endpush

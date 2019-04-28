@@ -45,7 +45,7 @@ class Channel extends Model implements ChannelContract
     }
 
 
-    protected $with = ['base_currency'];
+    // protected $with = ['base_currency'];
 
     /**
      * Get the base currency

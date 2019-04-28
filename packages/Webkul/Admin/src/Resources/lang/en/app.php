@@ -39,7 +39,9 @@ return [
         'sliders' => 'Sliders',
         'taxes' => 'Taxes',
         'tax-categories' => 'Tax Categories',
-        'tax-rates' => 'Tax Rates'
+        'tax-rates' => 'Tax Rates',
+        'promotion' => 'Promotions',
+        'discount' => 'Discount'
     ],
 
     'acl' => [
@@ -70,6 +72,9 @@ return [
         'taxes' => 'Taxes',
         'tax-categories' => 'Tax Categories',
         'tax-rates' => 'Tax Rates',
+        'edit' => 'Edit',
+        'create' => 'Add',
+        'delete' => 'Delete',
     ],
 
     'dashboard' => [
@@ -148,6 +153,7 @@ return [
         'role' => 'Role',
         'sub-total' => 'Sub Total',
         'no-of-products' => 'Number of Products',
+        'attribute-family' => 'Attribute Family'
     ],
 
     'account' => [
@@ -374,7 +380,14 @@ return [
             'categories' => 'Categories',
             'images' => 'Images',
             'inventories' => 'Inventories',
-            'variations' => 'Variations'
+            'variations' => 'Variations',
+            'product-link' => 'Linked Products',
+            'cross-selling' => 'Cross Selling',
+            'up-selling' => 'Up Selling',
+            'related-products' => 'Related Products',
+            'product-search-hint' => 'Start typing product name',
+            'no-result-found' => 'Products not found with same name.',
+            'searching' => 'Searching ...'
         ],
 
         'attributes' => [
@@ -453,6 +466,10 @@ return [
             'yes' => 'Yes',
             'no' => 'No',
             'position' => 'Position',
+            'display-mode' => 'Display Mode',
+            'products-and-description' => 'Products and Description',
+            'products-only' => 'Products Only',
+            'description-only' => 'Description Only',
             'description-and-images' => 'Description and Images',
             'description' => 'Description',
             'parent-category' => 'Parent Category',
@@ -536,8 +553,8 @@ return [
         ],
         'countries' => [
             'title' => 'Countries',
-            'add-title' => 'Add Counrty',
-            'save-btn-title' => 'Save Counrty',
+            'add-title' => 'Add Country',
+            'save-btn-title' => 'Save Country',
             'general' => 'General',
             'code' => 'Code',
             'name' => 'Name'
@@ -614,7 +631,7 @@ return [
         ],
 
         'sliders' => [
-            'title' => 'Sliders',
+            'title' => 'Title',
             'add-title' => 'Create Slider',
             'edit-title' => 'Edit Slider',
             'save-btn-title' => 'Save Slider',
@@ -693,6 +710,7 @@ return [
             'is_user_defined' => 'User Defined',
             'yes' => 'Yes'
         ],
+
         'customers' => [
             'add-title' => 'Add Customer',
             'edit-title' => 'Edit Customer',
@@ -714,6 +732,7 @@ return [
             'phone' => 'Phone',
             'group-default' => 'Cannot delete the default group.',
         ],
+
         'reviews' => [
             'title' => 'Reviews',
             'edit-title' => 'Edit Review',
@@ -734,12 +753,21 @@ return [
             'update-success' => 'Subscriber was successfully updated',
             'update-failed' => 'Error! You cannot unsubscribe the subscriber',
             'delete' => 'Subscriber was successfully deleted',
-            'delete-failed' => 'Erorr! Subscriber cannot be deleted'
+            'delete-failed' => 'Error! Subscriber cannot be deleted'
         ]
+    ],
+
+    'promotion' => [
+        'catalog-rule' => 'Catalog Rule',
+        'cart-rule' => 'Cart Rule',
+        'add-catalog-rule' => 'Add Catalog Rule',
+        'add-cart-rule' => 'Add Cart Rule'
     ],
 
     'error' => [
         'go-to-home' => 'GO TO HOME',
+        'in-maitainace' => 'In Maintenance',
+        'right-back' => 'Be Right Back',
 
         '404' => [
             'page-title' => '404 Page not found',
@@ -778,13 +806,20 @@ return [
         'file' => 'File',
         'upload-error' => 'The file must be a file of type: xls, xlsx, csv.',
         'duplicate-error' => 'Identifier must be unique, duplicate identifier :identifier at row :position.',
-        'enough-row-error' => 'file has not enough rows'
+        'enough-row-error' => 'file has not enough rows',
+        'allowed-type' => 'Allowed Type :',
+        'file-type' => 'csv, xls, xlsx.',
+        'no-records' => 'Nothing to export',
+        'illegal-format' => 'Error! This type of format is either not supported or its illegal format'
     ],
 
     'response' => [
+        'being-used' => 'This resource :name is getting used in :source',
+        'cannot-delete-default' => 'Cannot delete the default channel',
         'create-success' => ':name created successfully.',
         'update-success' => ':name updated successfully.',
         'delete-success' => ':name deleted successfully.',
+        'delete-failed' => 'Error encountered while deleting :name.',
         'last-delete-error' => 'At least one :name is required.',
         'user-define-error' => 'Can not delete system :name',
         'attribute-error' => ':name is used in configurable products.',
@@ -802,4 +837,43 @@ return [
     'footer' => [
         'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved.'
     ],
+
+    'admin' => [
+        'system' => [
+            'catalog' => 'Catalog',
+            'products' => 'Products',
+            'review' => 'Review',
+            'allow-guest-review' => 'Allow Guest Review',
+            'customer' => 'Customer',
+            'settings' => 'Settings',
+            'address' => 'Address',
+            'address' => 'Address',
+            'street-lines' => 'Lines in a Street Address',
+            'sales' => 'Sales',
+            'shipping-methods' => 'Shipping Methods',
+            'free-shipping' => 'Free Shipping',
+            'flate-rate-shipping' => 'Flat Rate Shipping',
+            'shipping' => 'Shipping',
+            'origin' => 'Origin',
+            'country' => 'Country',
+            'state' => 'State',
+            'zip' => 'Zip',
+            'city' => 'City',
+            'street-address' => 'Street Address',
+            'title' => 'Title',
+            'description' => 'Description',
+            'rate' => 'Rate',
+            'status' => 'Status',
+            'type' => 'Type',
+            'payment-methods' => 'Payment Methods',
+            'cash-on-delivery' => 'Cash On Delivery',
+            'money-transfer' => 'Money Transfer',
+            'paypal-standard' => 'Paypal Standard',
+            'business-account' => 'Business Account',
+            'newsletter' => 'NewsLetter Subscription',
+            'newsletter-subscription' => 'Allow NewsLetter Subscription',
+            'email' => 'Email Verification',
+            'email-verification' => 'Allow Email Verification'
+        ]
+    ]
 ];

@@ -45,13 +45,12 @@ class CustomerController extends Controller
      */
     protected $channel;
 
-     /**
+    /**
      * Create a new controller instance.
      *
-     * @param Webkul\Customer\Repositories\CustomerRepository as customer;
-     * @param Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
-     * @param Webkul\Core\Repositories\ChannelRepository as Channel;
-     * @return void
+     * @param \Webkul\Customer\Repositories\CustomerRepository $customer
+     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroup
+     * @param \Webkul\Core\Repositories\ChannelRepository $channel
      */
     public function __construct(Customer $customer, CustomerGroup $customerGroup, Channel $channel)
     {
@@ -130,7 +129,7 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $customer = $this->customer->findOneWhere(['id'=>$id]);
+        $customer = $this->customer->findOrFail($id);
 
         $customerGroup = $this->customerGroup->all();
 
@@ -173,10 +172,18 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $this->customer->delete($id);
+        $customer = $this->customer->findorFail($id);
 
-        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+        try {
+            $this->customer->delete($id);
 
-        return redirect()->back();
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+
+            return response()->json(['message' => true], 200);
+        } catch(\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
+        }
+
+        return response()->json(['message' => false], 400);
     }
 }

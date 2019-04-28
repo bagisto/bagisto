@@ -41,7 +41,7 @@
                 </div>
 
                 <div>
-                    {{ $order->shipping_address->address1 }}, {{ $order->shipping_address->address2 ? $order->shipping_address->address2 . ',' : '' }} {{ $order->shipping_address->state }}
+                    {{ $order->shipping_address->address1 }}, {{ $order->shipping_address->state }}
                 </div>
 
                 <div>
@@ -73,7 +73,7 @@
                 </div>
 
                 <div>
-                    {{ $order->billing_address->address1 }}, {{ $order->billing_address->address2 ? $order->billing_address->address2 . ',' : '' }} {{ $order->billing_address->state }}
+                    {{ $order->billing_address->address1 }}, {{ $order->billing_address->state }}
                 </div>
 
                 <div>

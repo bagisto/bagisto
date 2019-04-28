@@ -45,13 +45,13 @@
                     </li>
                 </ul>
 
-                <div class="step-content information" v-show="currentStep == 1">
+                <div class="step-content information" v-show="currentStep == 1" id="address-section">
 
                     @include('shop::checkout.onepage.customer-info')
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('address-form')" :disabled="disable_button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('address-form')" :disabled="disable_button" id="checkout-address-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
@@ -59,13 +59,13 @@
 
                 </div>
 
-                <div class="step-content shipping" v-show="currentStep == 2">
+                <div class="step-content shipping" v-show="currentStep == 2" id="shipping-section">
 
                     <shipping-section v-if="currentStep == 2" @onShippingMethodSelected="shippingMethodSelected($event)"></shipping-section>
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('shipping-form')" :disabled="disable_button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('shipping-form')" :disabled="disable_button" id="checkout-shipping-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
@@ -73,13 +73,13 @@
 
                 </div>
 
-                <div class="step-content payment" v-show="currentStep == 3">
+                <div class="step-content payment" v-show="currentStep == 3" id="payment-section">
 
                     <payment-section v-if="currentStep == 3" @onPaymentMethodSelected="paymentMethodSelected($event)"></payment-section>
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('payment-form')" :disabled="disable_button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('payment-form')" :disabled="disable_button" id="checkout-payment-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
@@ -87,13 +87,13 @@
 
                 </div>
 
-                <div class="step-content review" v-show="currentStep == 4">
+                <div class="step-content review" v-show="currentStep == 4" id="summary-section">
 
                     <review-section v-if="currentStep == 4"></review-section>
 
                     <div class="button-group">
 
-                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button">
+                        <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button">
                             {{ __('shop::app.checkout.onepage.place-order') }}
                         </button>
 
@@ -129,43 +129,38 @@
         @endauth
 
         Vue.component('checkout', {
-
             template: '#checkout-template',
-
             inject: ['$validator'],
 
-            data: () => ({
-                currentStep: 1,
-
-                completedStep: 0,
-
-                address: {
-                    billing: {
-                        use_for_shipping: true,
+            data() {
+                return {
+                    currentStep: 1,
+                    completedStep: 0,
+                    address: {
+                        billing: {
+                            address1: [''],
+                            use_for_shipping: true,
+                        },
+                        shipping: {
+                            address1: ['']
+                        },
                     },
+                    selected_shipping_method: '',
+                    selected_payment_method: '',
+                    disable_button: false,
+                    new_shipping_address: false,
+                    new_billing_address: false,
 
-                    shipping: {},
-                },
+                    allAddress: {},
 
-                selected_shipping_method: '',
+                    countryStates: @json(core()->groupedStatesByCountries()),
 
-                selected_payment_method: '',
-
-                disable_button: false,
-
-                new_shipping_address: false,
-
-                new_billing_address: false,
-
-                allAddress: {},
-
-                countryStates: @json(core()->groupedStatesByCountries()),
-
-                country: @json(core()->countries())
-            }),
+                    country: @json(core()->countries())
+                }
+            },
 
             created() {
-                if(!customerAddress) {
+                if(! customerAddress) {
                     this.new_shipping_address = true;
                     this.new_billing_address = true;
                 } else {
@@ -338,12 +333,13 @@
 
         var summaryTemplateRenderFns = [];
         Vue.component('summary-section', {
-
             inject: ['$validator'],
 
-            data: () => ({
-                templateRender: null
-            }),
+            data() {
+                return {
+                    templateRender: null
+                }
+            },
 
             staticRenderFns: summaryTemplateRenderFns,
 
@@ -366,22 +362,24 @@
 
         var shippingTemplateRenderFns = [];
         Vue.component('shipping-section', {
-
             inject: ['$validator'],
 
-            data: () => ({
-                templateRender: null,
-
-                selected_shipping_method: '',
-            }),
+            data() {
+                return {
+                    templateRender: null,
+                    selected_shipping_method: '',
+                }
+            },
 
             staticRenderFns: shippingTemplateRenderFns,
 
             mounted() {
                 this.templateRender = shippingHtml.render;
                 for (var i in shippingHtml.staticRenderFns) {
-                    shippingTemplateRenderFns.unshift(shippingHtml.staticRenderFns[i]);
+                    shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
                 }
+
+                eventBus.$emit('after-checkout-shipping-section-added');
             },
 
             render(h) {
@@ -395,22 +393,25 @@
             methods: {
                 methodSelected () {
                     this.$emit('onShippingMethodSelected', this.selected_shipping_method)
+
+                    eventBus.$emit('after-shipping-method-selected');
                 }
             }
         })
 
         var paymentTemplateRenderFns = [];
         Vue.component('payment-section', {
-
             inject: ['$validator'],
 
-            data: () => ({
-                templateRender: null,
+            data() {
+                return {
+                    templateRender: null,
 
-                payment: {
-                    method: ""
-                },
-            }),
+                    payment: {
+                        method: ""
+                    },
+                }
+            },
 
             staticRenderFns: paymentTemplateRenderFns,
 
@@ -418,8 +419,10 @@
                 this.templateRender = paymentHtml.render;
 
                 for (var i in paymentHtml.staticRenderFns) {
-                    paymentTemplateRenderFns.unshift(paymentHtml.staticRenderFns[i]);
+                    paymentTemplateRenderFns.push(paymentHtml.staticRenderFns[i]);
                 }
+
+                eventBus.$emit('after-checkout-payment-section-added');
             },
 
             render(h) {
@@ -433,16 +436,19 @@
             methods: {
                 methodSelected () {
                     this.$emit('onPaymentMethodSelected', this.payment)
+
+                    eventBus.$emit('after-payment-method-selected');
                 }
             }
         })
 
         var reviewTemplateRenderFns = [];
         Vue.component('review-section', {
-
-            data: () => ({
-                templateRender: null
-            }),
+            data() {
+                return {
+                    templateRender: null
+                }
+            },
 
             staticRenderFns: reviewTemplateRenderFns,
 
@@ -450,7 +456,7 @@
                 this.templateRender = reviewHtml.render;
 
                 for (var i in reviewHtml.staticRenderFns) {
-                    reviewTemplateRenderFns.unshift(reviewHtml.staticRenderFns[i]);
+                    reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
                 }
             },
 

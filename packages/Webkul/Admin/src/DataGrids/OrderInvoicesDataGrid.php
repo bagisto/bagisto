@@ -32,6 +32,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -40,6 +41,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -48,6 +50,7 @@ class OrderInvoicesDataGrid extends DataGrid
             'type' => 'price',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -56,12 +59,14 @@ class OrderInvoicesDataGrid extends DataGrid
             'type' => 'datetime',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'View',
+            'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.sales.invoices.view',
             'icon' => 'icon eye-icon'
         ]);

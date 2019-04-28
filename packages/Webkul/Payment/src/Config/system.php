@@ -3,33 +3,33 @@
 return [
     [
         'key' => 'sales',
-        'name' => 'Sales',
+        'name' => 'admin::app.admin.system.sales',
         'sort' => 1
     ], [
         'key' => 'sales.paymentmethods',
-        'name' => 'Payment Methods',
+        'name' => 'admin::app.admin.system.payment-methods',
         'sort' => 2,
     ], [
         'key' => 'sales.paymentmethods.cashondelivery',
-        'name' => 'Cash On Delivery',
+        'name' => 'admin::app.admin.system.cash-on-delivery',
         'sort' => 1,
         'fields' => [
             [
                 'name' => 'title',
-                'title' => 'Title',
+                'title' => 'admin::app.admin.system.title',
                 'type' => 'text',
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => true
             ], [
                 'name' => 'description',
-                'title' => 'Description',
+                'title' => 'admin::app.admin.system.description',
                 'type' => 'textarea',
                 'channel_based' => false,
                 'locale_based' => true
             ], [
                 'name' => 'active',
-                'title' => 'Status',
+                'title' => 'admin::app.admin.system.status',
                 'type' => 'select',
                 'options' => [
                     [
@@ -45,25 +45,25 @@ return [
         ]
     ], [
         'key' => 'sales.paymentmethods.moneytransfer',
-        'name' => 'Money Transfer',
+        'name' => 'admin::app.admin.system.money-transfer',
         'sort' => 2,
         'fields' => [
             [
                 'name' => 'title',
-                'title' => 'Title',
+                'title' => 'admin::app.admin.system.title',
                 'type' => 'text',
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => true
             ], [
                 'name' => 'description',
-                'title' => 'Description',
+                'title' => 'admin::app.admin.system.description',
                 'type' => 'textarea',
                 'channel_based' => false,
                 'locale_based' => true
             ], [
                 'name' => 'active',
-                'title' => 'Status',
+                'title' => 'admin::app.admin.system.status',
                 'type' => 'select',
                 'options' => [
                     [
@@ -79,31 +79,31 @@ return [
         ]
     ], [
         'key' => 'sales.paymentmethods.paypal_standard',
-        'name' => 'Paypal Standard',
+        'name' => 'admin::app.admin.system.paypal-standard',
         'sort' => 3,
         'fields' => [
             [
                 'name' => 'title',
-                'title' => 'Title',
+                'title' => 'admin::app.admin.system.title',
                 'type' => 'text',
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => true
             ], [
                 'name' => 'description',
-                'title' => 'Description',
+                'title' => 'admin::app.admin.system.description',
                 'type' => 'textarea',
                 'channel_based' => false,
                 'locale_based' => true
             ],  [
                 'name' => 'business_account',
-                'title' => 'Business Account',
+                'title' => 'admin::app.admin.system.business-account',
                 'type' => 'select',
                 'type' => 'text',
                 'validation' => 'required'
             ],  [
                 'name' => 'active',
-                'title' => 'Status',
+                'title' => 'admin::app.admin.system.status',
                 'type' => 'select',
                 'options' => [
                     [

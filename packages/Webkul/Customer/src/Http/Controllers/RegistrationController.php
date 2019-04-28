@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Customer\Mail\VerificationEmail;
 use Illuminate\Routing\Controller;
-use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
 use Cookie;
 
 /**
@@ -25,15 +25,15 @@ class RegistrationController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $_config;
-    protected $customer;
+    protected $customerGroup;
 
     /**
      * @param CustomerRepository object $customer
      */
-    public function __construct(CustomerRepository $customer)
+    public function __construct(CustomerGroup $customerGroup)
     {
         $this->_config = request('_config');
-        $this->customer = $customer;
+        $this->customerGroup = $customerGroup;
     }
 
     /**
@@ -58,7 +58,6 @@ class RegistrationController extends Controller
             'last_name' => 'string|required',
             'email' => 'email|required|unique:customers,email',
             'password' => 'confirmed|min:6|required',
-            // 'agreement' => 'required'
         ]);
 
         $data = request()->input();
@@ -67,9 +66,15 @@ class RegistrationController extends Controller
 
         $data['channel_id'] = core()->getCurrentChannel()->id;
 
-        $data['is_verified'] = 1;
+        if(core()->getConfigData( 'customer.settings.email.verification')) {
+            $data['is_verified'] = 0;
+        } else {
+            $data['is_verified'] = 1;
+        }
 
-        $data['customer_group_id'] = 1;
+        $customerGroup = $this->customerGroup->findOneWhere(['name' => 'General', 'is_user_defined' => 0]);
+
+        $data['customer_group_id'] = $this->customerGroup->id;
 
         $verificationData['email'] = $data['email'];
         $verificationData['token'] = md5(uniqid(rand(), true));
@@ -82,14 +87,16 @@ class RegistrationController extends Controller
         Event::fire('customer.registration.after', $customer);
 
         if ($customer) {
-            try {
+            if (core()->getConfigData( 'customer.settings.email.verification')) {
+                try {
+                    Mail::send(new VerificationEmail($verificationData));
+
+                    session()->flash('success', trans('shop::app.customer.signup-form.success-verify'));
+                } catch (\Exception $e) {
+                    session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
+                }
+            } else {
                 session()->flash('success', trans('shop::app.customer.signup-form.success'));
-
-                Mail::send(new VerificationEmail($verificationData));
-            } catch(\Exception $e) {
-                session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-not-sent'));
-
-                return redirect()->route($this->_config['redirect']);
             }
 
             return redirect()->route($this->_config['redirect']);
@@ -140,7 +147,7 @@ class RegistrationController extends Controller
                 \Cookie::queue(\Cookie::forget('email-for-resend'));
             }
         } catch(\Exception $e) {
-            session()->flash('success', trans('shop::app.customer.signup-form.verification-not-sent'));
+            session()->flash('error', trans('shop::app.customer.signup-form.verification-not-sent'));
 
             return redirect()->back();
         }

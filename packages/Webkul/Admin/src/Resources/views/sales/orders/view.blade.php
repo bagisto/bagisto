@@ -119,7 +119,7 @@
                                                 </span>
 
                                                 <span class="value">
-                                                    {{ $order->customer->customerGroup['name'] }}
+                                                    {{ $order->customer->group['name'] }}
                                                 </span>
                                             </div>
                                         @endif

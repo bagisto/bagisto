@@ -40,10 +40,21 @@
 
                 @if ($enableActions)
                     <td class="actions" style="width: 100px;" data-value=" {{ __('ui::app.datagrid.actions') }}">
-                        <div>
+                        <div class="action">
                             @foreach ($actions as $action)
-                                <a href="{{ route($action['route'], $record->{$index}) }}">
-                                    <span class="{{ $action['icon'] }}" onclick="return confirm('{{ __('ui::app.datagrid.click_on_action') }}')"></span>
+                                <a
+                                @if ($action['method'] == 'GET')
+                                    href="{{ route($action['route'], $record->{$index}) }}"
+                                @endif
+
+                                @if ($action['method'] != 'GET')
+                                    v-on:click="doAction($event)"
+                                @endif
+
+                                data-method="{{ $action['method'] }}"
+                                data-action="{{ route($action['route'], $record->{$index}) }}"
+                                data-token="{{ csrf_token() }}">
+                                    <span class="{{ $action['icon'] }}"></span>
                                 </a>
                             @endforeach
                         </div>

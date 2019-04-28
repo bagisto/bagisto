@@ -13,6 +13,7 @@ body {
     font-weight: 500;
     position: static;
     min-height: 100%;
+    width: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -94,18 +95,20 @@ body {
 }
 
 .navbar-left {
-    position: absolute;
+    position: fixed;
+    left: 0;
     top: 60px;
-    bottom: 0;
     width: 90px;
     padding-top: 20px;
+    border-right: 1px solid rgba(162, 162, 162, 0.2);
     height: auto;
-    border-right: 1px solid $border-color;
+    bottom: 0;
     z-index: 2;
 
     ul.menubar {
+        // padding-bottom: 60px;
+
         li.menu-item {
-            height: 90px;
             padding: 10px 5px;
             font-size: 11px;
             text-align: center;
@@ -122,6 +125,21 @@ body {
             }
         }
     }
+
+    // .open-nav-aside {
+    //     position: fixed;
+    //     bottom: 0;
+    //     left: 0;
+    //     width: 90px;
+    //     padding: 18px;
+    //     text-align: center;
+    //     border: 1px solid $border-color;
+
+    //     .icon {
+    //         height: 24px;
+    //         width: 24px;
+    //     }
+    // }
 }
 
 .content-container {
@@ -132,8 +150,12 @@ body {
     right: 0;
     left: 0;
     bottom: 0px;
-    overflow-x: hidden;
-    overflow-y: auto;
+    height: calc(100% - 60px);
+    width: 100%;
+
+    .inner-section {
+        height: 100%;
+    }
 
     .aside-nav {
         width: 280px;
@@ -141,10 +163,32 @@ body {
         top: 60px;
         bottom: 0;
         border-right: 1px solid $border-color;
-        background: #f8f9fa;
+        background: $background-color;
         padding-top: 10px;
-        overflow-y: auto;
+        padding-bottom: 10px;
         z-index: 4;
+
+        ul {
+            overflow-y: auto;
+            height: 90%;
+        }
+
+        // .close-nav-aside {
+        //     width: 100%;
+        //     padding: 20px;
+        //     text-align: center;
+        //     border: 1px solid $border-color;
+
+        //     .icon {
+        //         height: 24px;
+        //         width: 24px;
+        //     }
+        // }
+
+        // .close-nav-aside:hover {
+        //     background: white;
+        //     cursor: pointer;
+        // }
 
         a {
             padding: 15px;
@@ -249,47 +293,8 @@ body {
     }
 }
 
-//style for dummy datagrid
-// .page-content {
-//     .table-container {
-//         .search-filter-wrapper {
-//             display: inline-block;
-//             box-sizing: border-box;
-
-//             width: 100%;
-//             padding-top: 7px;
-//             padding-bottom: 7px;
-
-//             .search-products {
-//                 width: 300px;
-//                 border: 2px solid $border-color;
-//                 border-radius: 3px;
-//                 height: 30px;
-//                 padding-left: 5px;
-//             }
-
-//             .icon-wrapper {
-//                 margin: 0px;
-//                 display: inline-block;
-//                 vertical-align: middle;
-//                 border: 1px solid #c7c7c7;
-//                 border-radius: 4px;
-//                 padding-left: 5px;
-//                 padding-right: 5px;
-
-//                 .search-icon {
-//                     height: 24px;
-//                     width: 24px;
-//                 }
-//             }
-//         }
-//     }
-// }
-
-
 
 // admin dashboard css
-
 .dashboard {
 
     .page-header {
@@ -410,7 +415,7 @@ body {
             }
 
             .data {
-                padding-top: 3px;
+                padding-top: 13px;
                 font-size: 32px;
                 color: #0041FF;
 
@@ -576,6 +581,40 @@ body {
     margin-right: 10px;
 }
 
+.aside-nav-toggle {
+    height: 48px;
+    width: 100%;
+    padding-top: 15px;
+    border-top: 1px solid rgba(162, 162, 162, 0.2);
+
+    .close-icon, .open-icon {
+        position: absolute;
+        cursor: pointer;
+        left: 45%;
+    }
+}
+
+.aside-nav-toggle.open {
+    display: none;
+}
+
+.linked-product-search-result {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 0 9px 0 rgba(0, 0, 0, 0.16);
+    z-index: 10;
+    text-align: left;
+    border-radius: 3px;
+    background-color: #ffffff;
+    width: 70%;
+    max-height: 200px;
+    overflow-y: auto;
+
+    li {
+        padding: 10px;
+        border-bottom: 1px solid #e8e8e8;
+        cursor: pointer;
+    }
+}
+
 // css for rtl start here
 .rtl {
     direction: rtl;
@@ -598,6 +637,7 @@ body {
     .navbar-left {
         border-left: 1px solid rgba(162, 162, 162, 0.2);
         border-right: none;
+        left: calc(100% - 90px);
     }
 
     .content-container {
@@ -611,6 +651,10 @@ body {
 
             .page-action {
                 float: left;
+
+                a {
+                    margin-left: 0px;
+                }
             }
 
             .control-group {
@@ -633,6 +677,7 @@ body {
 
         .content-wrapper {
             padding: 25px 305px 25px 25px;
+            margin-left: 0px;
         }
 
         .aside-nav .active i {
@@ -683,34 +728,35 @@ body {
     }
 
     // ui
-    .grid-container .filter-wrapper {
+    .grid-container {
         .filter-row-one .search-filter {
             border: 2px solid #C7C7C7;
+            border-radius: 2px;
 
             .control {
                 border: none;
                 padding-right: 10px;
             }
 
-            .ic-wrapper {
+            .icon-wrapper {
                 border: none;
                 padding-top: 2px;
                 padding-right: 5px;
+                border-right: 2px solid #C7C7C7;
+                border-radius: 0px;
             }
         }
 
-        .filter-row-two .filter-one {
-            margin-right: 0px;
-
-            .filter-name {
-                margin-right: 0px;
-                margin-left: 5px;
+        .filter-row-two .filter-tag {
+            .wrapper, .icon.cross-icon {
+                margin-right: 10px;
+                margin-left: 0px;
             }
+        }
 
-            .filter-value {
-                padding-right: 5px;
-                padding-left: 0px;
-            }
+        .filter-row-one .dropdown-filters {
+            right: unset;
+            left: 25px;
         }
     }
 
@@ -725,6 +771,15 @@ body {
 
     .table table {
         text-align: right;
+
+        .massaction-remove {
+            margin-right: 5px !important;
+            margin-left: 10px;
+        }
+
+        .btn.btn-primary {
+            margin-right: 10px !important;
+        }
     }
 
     .dropdown-list.bottom-right {
@@ -793,3 +848,7 @@ body {
     }
 }
 // css for rtl end here
+
+.pagination {
+    margin-top: 30px;
+}

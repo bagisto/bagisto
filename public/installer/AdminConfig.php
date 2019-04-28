@@ -41,17 +41,16 @@ $data    = array();
         $envFile = $desiredLocation . '/' . '.env';
 
         // reading env content
-        $str= file_get_contents($envFile);
-
-        // converting env content to key/value pair
-        $data = explode(PHP_EOL,$str);
+        $data = file($envFile);
         $databaseArray = ['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'DB_CONNECTION'];
-
         $key = $value = [];
+
         if ($data) {
             foreach ($data as $line) {
+                $line = preg_replace('/\s+/', '', $line);
                 $rowValues = explode('=', $line);
-                if (count($rowValues) === 2) {
+
+                if (strlen($line) !== 0) {
                     if (in_array($rowValues[0], $databaseArray)) {
                         $key[] = $rowValues[0];
                         $value[] = $rowValues[1];

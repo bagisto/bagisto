@@ -200,6 +200,21 @@ class Core
     }
 
     /**
+    * Returns current locale
+    *
+    *  @return Object
+    */
+    public function getCurrentLocale()
+    {
+        static $locale;
+
+        if ($locale)
+            return $locale;
+
+        return $locale = $this->localeRepository->findOneByField('code', app()->getLocale());
+    }
+
+    /**
     * Returns all currencies
     *
     *  @return Collection
@@ -319,15 +334,15 @@ class Core
     /**
     * Converts price
     *
-    * @param float  $price
+    * @param float  $amount
     * @param string $targetCurrencyCode
     * @return string
     */
     public function convertPrice($amount, $targetCurrencyCode = null)
     {
-        $targetCurrency = !$targetCurrencyCode
+        $targetCurrency = ! $targetCurrencyCode
                         ? $this->getCurrentCurrency()
-                        : $this->currencyRepository->findByField('code', $targetCurrencyCode);
+                        : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
 
         if (! $targetCurrency)
             return $amount;
@@ -336,10 +351,36 @@ class Core
             'target_currency' => $targetCurrency->id,
         ]);
 
-        if (null === $exchangeRate)
+        if (null === $exchangeRate || ! $exchangeRate->rate)
             return $amount;
 
         return (float) $amount * $exchangeRate->rate;
+    }
+
+    /**
+    * Converts to base price
+    *
+    * @param float  $amount
+    * @param string $targetCurrencyCode
+    * @return string
+    */
+    public function convertToBasePrice($amount, $targetCurrencyCode = null)
+    {
+        $targetCurrency = !$targetCurrencyCode
+                        ? $this->getCurrentCurrency()
+                        : $this->currencyRepository->findOneByField('code', $targetCurrencyCode);
+
+        if (! $targetCurrency)
+            return $amount;
+
+        $exchangeRate = $this->exchangeRateRepository->findOneWhere([
+            'target_currency' => $targetCurrency->id,
+        ]);
+
+        if (null === $exchangeRate || ! $exchangeRate->rate)
+            return $amount;
+
+        return (float) $amount / $exchangeRate->rate;
     }
 
     /**
@@ -795,7 +836,8 @@ class Core
 		return $merged;
     }
 
-    public function convertEmptyStringsToNull($array) {
+    public function convertEmptyStringsToNull($array)
+    {
         foreach($array as $key => $value) {
             if($value == "" || $value == "null") {
                 $array[$key] = null;
@@ -803,5 +845,21 @@ class Core
         }
 
         return $array;
+    }
+
+    /**
+     * Create singletom object through single facade
+     *
+     * @param string $className
+     * @return object
+     */
+    public function getSingletonInstance($className)
+    {
+        static $instance = [];
+
+        if (array_key_exists($className, $instance))
+            return $instance[$className];
+
+        return $instance[$className] = app($className);
     }
 }

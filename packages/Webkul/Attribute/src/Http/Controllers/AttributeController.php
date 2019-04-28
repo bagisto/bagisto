@@ -32,7 +32,7 @@ class AttributeController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository  $attribute
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attribute
      * @return void
      */
     public function __construct(Attribute $attribute)
@@ -94,7 +94,7 @@ class AttributeController extends Controller
      */
     public function edit($id)
     {
-        $attribute = $this->attribute->find($id);
+        $attribute = $this->attribute->findOrFail($id);
 
         return view($this->_config['view'], compact('attribute'));
     }
@@ -131,7 +131,7 @@ class AttributeController extends Controller
     {
         $attribute = $this->attribute->findOrFail($id);
 
-        if(!$attribute->is_user_defined) {
+        if (! $attribute->is_user_defined) {
             session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
         } else {
             try {
@@ -139,12 +139,13 @@ class AttributeController extends Controller
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Attribute']));
 
+                return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
-                session()->flash('error', trans('admin::app.response.attribute-error', ['name' => 'Attribute']));
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Attribute']));
             }
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 
     /**
@@ -160,7 +161,7 @@ class AttributeController extends Controller
             $indexes = explode(',', request()->input('indexes'));
 
             foreach ($indexes as $key => $value) {
-                $attribute = $this->attribute->findOrFail($value);
+                $attribute = $this->attribute->find($value);
 
                 try {
                     if (! $attribute->is_user_defined) {

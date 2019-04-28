@@ -5,7 +5,7 @@ namespace Webkul\Shop\Http\Controllers;
 use Webkul\Shop\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Core\Repositories\SliderRepository as Sliders;
+use Webkul\Core\Repositories\SliderRepository;
 
 /**
  * Home page controller
@@ -13,17 +13,19 @@ use Webkul\Core\Repositories\SliderRepository as Sliders;
  * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
- class HomeController extends controller
+ class HomeController extends Controller
 {
     protected $_config;
-    protected $sliders;
+
+    protected $sliderRepository;
+
     protected $current_channel;
 
-    public function __construct(Sliders $s)
+    public function __construct(SliderRepository $sliderRepository)
     {
         $this->_config = request('_config');
-        $this->sliders = $s;
 
+        $this->sliderRepository = $sliderRepository;
     }
 
     /**
@@ -31,10 +33,18 @@ use Webkul\Core\Repositories\SliderRepository as Sliders;
      */
     public function index()
     {
-        $current_channel = core()->getCurrentChannel();
+        $currentChannel = core()->getCurrentChannel();
 
-        $all_sliders = $this->sliders->findWhere(['channel_id' => $current_channel['id']]);
+        $sliderData = $this->sliderRepository->findByField('channel_id', $currentChannel->id)->toArray();
 
-        return view($this->_config['view'])->with('sliderData', $all_sliders->toArray());
+        return view($this->_config['view'], compact('sliderData'));
+    }
+
+    /**
+     * loads the home page for the storefront
+     */
+    public function notFound()
+    {
+        abort(404);
     }
 }

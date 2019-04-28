@@ -47,7 +47,7 @@
 
                     <div class="control-group" :class="[errors.has('image') ? 'has-error' : '']">
                         <label for="new_image">{{ __('admin::app.settings.sliders.image') }}</label>
-                        <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false"></image-wrapper>
+                        <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false" :required="true"></image-wrapper>
                     </div>
 
                     <div class="control-group" :class="[errors.has('content') ? 'has-error' : '']">

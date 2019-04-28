@@ -11,17 +11,16 @@
     if (file_exists($envFile)) {
 
         // reading env content
-        $str = file_get_contents($envFile);
-
-        // converting env content to key/value pair
-        $data = explode(PHP_EOL,$str);
-        $databaseArray = ['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'DB_CONNECTION'];
-
+        $data = file($envFile);
+        $databaseArray = ['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'DB_CONNECTION','DB_PORT'];
         $key = $value = [];
+
         if ($data) {
             foreach ($data as $line) {
+                $line = preg_replace('/\s+/', '', $line);
                 $rowValues = explode('=', $line);
-                if (count($rowValues) === 2) {
+
+                if (strlen($line) !== 0) {
                     if (in_array($rowValues[0], $databaseArray)) {
                         $key[] = $rowValues[0];
                         $value[] = $rowValues[1];
@@ -32,15 +31,27 @@
 
         $databaseData = array_combine($key, $value);
 
-        // getting database info
-        $servername = $databaseData['DB_HOST'];
-        $username   = $databaseData['DB_USERNAME'];
-        $password   = $databaseData['DB_PASSWORD'];
-        $dbname     = $databaseData['DB_DATABASE'];
-        $connection = $databaseData['DB_CONNECTION'];
+        if (isset($databaseData['DB_HOST'])) {
+            $servername = $databaseData['DB_HOST'];
+        }
+        if (isset($databaseData['DB_USERNAME'])) {
+            $username   = $databaseData['DB_USERNAME'];
+        }
+        if (isset($databaseData['DB_PASSWORD'])) {
+            $password = $databaseData['DB_PASSWORD'];
+        }
+        if (isset($databaseData['DB_DATABASE'])) {
+            $dbname = $databaseData['DB_DATABASE'];
+        }
+        if (isset($databaseData['DB_CONNECTION'])) {
+            $connection = $databaseData['DB_CONNECTION'];
+        }
+        if (isset($databaseData['DB_PORT'])) {
+            $port = $databaseData['DB_PORT'];
+        }
 
-        if ($connection == 'mysql') {
-            @$conn = new mysqli($servername, $username, $password, $dbname);
+        if (isset($connection) && $connection == 'mysql') {
+            @$conn = new mysqli($servername, $username, $password, $dbname, (int)$port);
 
             if (!$conn->connect_error) {
                 // retrieving admin entry

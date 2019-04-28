@@ -4,14 +4,12 @@
 {!! view_render_event('bagisto.shop.products.view.gallery.before', ['product' => $product]) !!}
 
 <div class="product-image-group">
-
     <div class="cp-spinner cp-round" id="loader">
     </div>
 
     <product-gallery></product-gallery>
 
     @include ('shop::products.view.product-add')
-
 </div>
 
 {!! view_render_event('bagisto.shop.products.view.gallery.after', ['product' => $product]) !!}
@@ -20,33 +18,31 @@
 
     <script type="text/x-template" id="product-gallery-template">
         <div>
-
             <ul class="thumb-list">
-                <li class="gallery-control top" @click="moveThumbs('top')" v-if="thumbs.length > 4">
+                <li class="gallery-control top" @click="moveThumbs('top')" v-if="(thumbs.length > 4) && this.is_move.up">
                     <span class="overlay"></span>
                     <i class="icon arrow-up-white-icon"></i>
                 </li>
 
-                <li class="thumb-frame" v-for='(thumb, index) in thumbs' @click="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']">
-                    <img :src="thumb.small_image_url" />
+                <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']" id="thumb-frame">
+                    <img :src="thumb.small_image_url"/>
                 </li>
 
-                <li class="gallery-control bottom" @click="moveThumbs('bottom')" v-if="thumbs.length > 4">
+                <li class="gallery-control bottom" @click="moveThumbs('bottom')" v-if="(thumbs.length > 4) && this.is_move.down">
                     <span class="overlay"></span>
                     <i class="icon arrow-down-white-icon"></i>
                 </li>
             </ul>
 
             <div class="product-hero-image" id="product-hero-image">
-                <img :src="currentLargeImageUrl" id="pro-img"/>
+                <img :src="currentLargeImageUrl" id="pro-img" :data-image="currentOriginalImageUrl"/>
 
-                {{-- Uncomment the line below for activating share links --}}
-                {{-- @include('shop::products.sharelinks') --}}
                 @auth('customer')
-                    <a class="add-to-wishlist" href="{{ route('customer.wishlist.add', $product->id) }}">
+                    <a class="add-to-wishlist" href="{{ route('customer.wishlist.add', $product->product_id) }}">
                     </a>
                 @endauth
             </div>
+
         </div>
     </script>
 
@@ -59,11 +55,18 @@
 
             data: () => ({
                 images: galleryImages,
-
                 thumbs: [],
-
-                currentLargeImageUrl: ''
-            }),
+                currentLargeImageUrl: '',
+                currentOriginalImageUrl: '',
+                counter: {
+                    up: 0,
+                    down: 0,
+                },
+                is_move: {
+                    up: true,
+                    down: true,
+                }
+            },
 
             watch: {
                 'images': function(newVal, oldVal) {
@@ -82,7 +85,6 @@
             methods: {
                 prepareThumbs () {
                     var this_this = this;
-
                     this_this.thumbs = [];
 
                     this.images.forEach(function(image) {
@@ -92,6 +94,9 @@
 
                 changeImage (image) {
                     this.currentLargeImageUrl = image.large_image_url;
+                    this.currentOriginalImageUrl = image.original_image_url;
+
+                    $('img#pro-img').data('zoom-image', image.original_image_url).ezPlus();
                 },
 
                 moveThumbs(direction) {
@@ -101,15 +106,56 @@
                         const moveThumb = this.thumbs.splice(len - 1, 1);
 
                         this.thumbs = [moveThumb[0], ...this.thumbs];
+                        this.counter.up = this.counter.up+1;
+                        this.counter.down = this.counter.down-1;
+
                     } else {
                         const moveThumb = this.thumbs.splice(0, 1);
 
                         this.thumbs = [...this.thumbs, moveThumb[0]];
+                        this.counter.down = this.counter.down+1;
+                        this.counter.up = this.counter.up-1;
+                    }
+
+                    if ((len-4) == this.counter.down) {
+                        this.is_move.down = false;
+                    } else {
+                        this.is_move.down = true;
+                    }
+
+                    if ((len-4) == this.counter.up) {
+                        this.is_move.up = false;
+                    } else {
+                        this.is_move.up = true;
                     }
                 },
             }
         });
 
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('img#pro-img').data('zoom-image', $('img#pro-img').data('image')).ezPlus();
+
+            $(document).mousemove(function(event) {
+                if ($('.add-to-wishlist').length) {
+                    if (event.pageX > $('.add-to-wishlist').offset().left && event.pageX < $('.add-to-wishlist').offset().left+32 && event.pageY > $('.add-to-wishlist').offset().top && event.pageY < $('.add-to-wishlist').offset().top+32) {
+
+                        $(".zoomContainer").addClass("show-wishlist");
+
+                    } else {
+                        $(".zoomContainer").removeClass("show-wishlist");
+                    }
+                };
+
+                if ($("body").hasClass("rtl")) {
+                    $(".zoomWindow").addClass("zoom-image-direction");
+                } else {
+                    $(".zoomWindow").removeClass("zoom-image-direction");
+                }
+            });
+        })
     </script>
 
 @endpush

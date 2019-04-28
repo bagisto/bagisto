@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'security-warning' => 'Suspicious Activity Found!!!',
+    'nothing-to-delete' => 'Nothing to delete',
+
     'layouts' => [
         'my-account' => 'My Account',
         'profile' => 'Profile',
@@ -104,8 +107,9 @@ return [
             'conditions' => 'Conditions',
             'using' => 'by using this website',
             'agreement' => 'Agreement',
-            'success' => 'Account Created Successfully, An Email Has Been Sent To Your For Account Verification',
-            'success-verify-email-not-sent' => 'Account Created Successfully, But Verification Email Is Not Sent',
+            'success' => 'Account Created Successfully',
+            'success-verify' => 'Account Created Successfully, an e-mail has been sent for verification.',
+            'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent',
             'failed' => 'Error! Cannot Create Your Account, Try Again Later',
             'already-verified' => 'Your Account is already verified Or Please Try Sending A New Verification Email Again',
             'verification-not-sent' => 'Error! Problem In Sending Verification Email, Try Again Later',
@@ -128,7 +132,7 @@ return [
             'forgot_pass' => 'Forgot Password?',
             'button_title' => 'Sign In',
             'remember' => 'Remember Me',
-            'footer' => '© Copyright 2018 Webkul Software, All rights reserved',
+            'footer' => '© Copyright :year Webkul Software, All rights reserved',
             'invalid-creds' => 'Please Check Your Credentials And Try Again',
             'verify-first' => 'Verify Your Email Account First',
             'resend-verification' => 'Resend Verification Mail Again'
@@ -201,8 +205,7 @@ return [
                 'create' => [
                     'page-title' => 'Customer - Add Address Form',
                     'title' => 'Add Address',
-                    'address1' => 'Address Line 1',
-                    'address2' => 'Address Line 2',
+                    'street-address' => 'Street Address',
                     'country' => 'Country',
                     'state' => 'State',
                     'select-state' => 'Select a region, state or province',
@@ -217,8 +220,9 @@ return [
                 'edit' => [
                     'page-title' => 'Customer - Edit Address',
                     'title' => 'Edit Address',
+                    'street-address' => 'Street Address',
                     'submit' => 'Save Address',
-                    'success' => 'Address Updated Successfully.'
+                    'success' => 'Address Updated Successfully.',
                 ],
                 'delete' => [
                     'success' => 'Address Successfully Deleted',
@@ -311,6 +315,8 @@ return [
         'total-rating' => ':total_rating Ratings & :total_reviews Reviews',
         'by' => 'By :name',
         'up-sell-title' => 'We found other products you might like!',
+        'related-product-title' => 'Related Products',
+        'cross-sell-title' => 'More choices',
         'reviews-title' => 'Ratings & Reviews',
         'write-review-btn' => 'Write Review',
         'choose-option' => 'Choose an option',
@@ -324,7 +330,8 @@ return [
         'in-stock' => 'In Stock',
         'out-of-stock' => 'Out Of Stock',
         'view-all' => 'View All',
-        'select-above-options' => 'Please select above options first.'
+        'select-above-options' => 'Please select above options first.',
+        'less-quantity' => 'Quantity can not be less than one.'
     ],
 
     'wishlist' => [
@@ -388,7 +395,8 @@ return [
             ],
             'quantity-error' => 'Requested Quantity Is Not Available',
             'cart-subtotal' => 'Cart Subtotal',
-            'cart-remove-action' => 'Do you really want to do this ?'
+            'cart-remove-action' => 'Do you really want to do this ?',
+            'partial-cart-update' => 'Only some of the product(s) were updated'
         ],
 
         'onepage' => [
@@ -402,8 +410,7 @@ return [
             'first-name' => 'First Name',
             'last-name' => 'Last Name',
             'email' => 'Email',
-            'address1' => 'Address',
-            'address2' => 'Address 2',
+            'address1' => 'Street Address',
             'city' => 'City',
             'state' => 'State',
             'select-state' => 'Select a region, state or province',
@@ -414,10 +421,10 @@ return [
             'shipping-address' => 'Shipping Address',
             'use_for_shipping' => 'Ship to this address',
             'continue' => 'Continue',
-            'shipping-method' => 'Shipping Method',
-            'payment-information' => 'Payment Information',
+            'shipping-method' => 'Select Shipping Method',
+            'payment-methods' => 'Select Payment Method',
             'payment-method' => 'Payment Method',
-            'summary' => 'Summary of Order',
+            'summary' => 'Order Summary',
             'price' => 'Price',
             'quantity' => 'Quantity',
             'billing-address' => 'Billing Address',
@@ -455,15 +462,15 @@ return [
             'shipping-address' => 'Shipping Address',
             'billing-address' => 'Billing Address',
             'contact' => 'Contact',
-            'shipping' => 'Shipping',
-            'payment' => 'Payment',
+            'shipping' => 'Shipping Method',
+            'payment' => 'Payment Method',
             'price' => 'Price',
             'quantity' => 'Quantity',
             'subtotal' => 'Subtotal',
             'shipping-handling' => 'Shipping & Handling',
             'tax' => 'Tax',
             'grand-total' => 'Grand Total',
-            'final-summary' => 'Thanks for showing your intrest in our store we will send you track number once it shiped',
+            'final-summary' => 'Thanks for showing your interest in our store we will send you tracking number once it shipped',
             'help' => 'If you need any kind of help please contact us at :support_email',
             'thanks' => 'Thanks!'
         ],
@@ -473,11 +480,14 @@ return [
             'summary' => 'Summary of Invoice',
         ],
         'shipment' => [
-            'heading' => 'Your Shipment #:shipment_id for Order #:order_id',
+            'heading' => 'Shipment #:shipment_id  has been generated for Order #:order_id',
+            'inventory-heading' => 'New Shipment #:shipment_id had been generated for Order #:order_id',
             'subject' => 'Shipment for your order #:order_id',
+            'inventory-subject' => 'New Shipment had been generated for Order #:order_id',
             'summary' => 'Summary of Shipment',
             'carrier' => 'Carrier',
-            'tracking-number' => 'Tracking Number'
+            'tracking-number' => 'Tracking Number',
+            'greeting' => 'An Order :order_id has been placed on :created_at',
         ],
         'forget-password' => [
             'dear' => 'Dear :name',
@@ -489,7 +499,7 @@ return [
     ],
 
     'webkul' => [
-        'copy-right' => '© Copyright 2018 Webkul Software, All rights reserved'
+        'copy-right' => '© Copyright :year Webkul Software, All rights reserved',
     ],
 
     'response' => [

@@ -52,7 +52,7 @@ class SubscriptionController extends Controller
      * @return mixed
      */
     public function edit($id) {
-        $subscriber = $this->subscribers->findOneByField('id', $id);
+        $subscriber = $this->subscribers->findOrFail($id);
 
         return view($this->_config['view'])->with('subscriber', $subscriber);
     }
@@ -67,7 +67,7 @@ class SubscriptionController extends Controller
     public function update($id) {
         $data = request()->all();
 
-        $subscriber = $this->subscribers->findOneByField('id', $id);
+        $subscriber = $this->subscribers->findOrFail($id);
 
         $result = $subscriber->update($data);
 
@@ -88,11 +88,18 @@ class SubscriptionController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->subscribers->delete($id))
-            session()->flash('success', trans('admin::app.customers.subscribers.delete'));
-        else
-            session()->flash('error', trans('admin::app.customers.subscribers.delete-failed'));
+        $subscriber = $this->subscribers->findOrFail($id);
 
-        return redirect()->back();
+        try {
+            $this->subscriber->delete($id);
+
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Subscriber']));
+
+            return response()->json(['message' => true], 200);
+        } catch (\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Subscriber']));
+        }
+
+        return response()->json(['message' => false], 400);
     }
 }

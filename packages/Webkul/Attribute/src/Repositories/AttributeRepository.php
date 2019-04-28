@@ -144,6 +144,10 @@ class AttributeRepository extends Repository
             $data['is_filterable'] = 0;
         }
 
+        if (in_array($data['type'], ['select', 'multiselect', 'boolean'])) {
+            unset($data['value_per_locale']);
+        }
+
         return $data;
     }
 
@@ -152,7 +156,7 @@ class AttributeRepository extends Repository
      */
     public function getFilterAttributes()
     {
-        return $this->model->filterableAttributes()->get();
+        return $this->model->where('is_filterable', 1)->with('options')->get();
     }
 
     /**
@@ -179,5 +183,31 @@ class AttributeRepository extends Repository
             return $this->all($attributeColumns);
 
         return $this->findWhereIn('code', $codes, $attributeColumns);
+    }
+
+    /**
+     * @return Object
+     */
+    public function getAttributeByCode($code)
+    {
+        static $attributes = [];
+
+        if (array_key_exists($code, $attributes))
+            return $attributes[$code];
+
+        return $attributes[$code] = $this->findOneByField('code', $code);
+    }
+
+    /**
+     * @return Object
+     */
+    public function getFamilyAttributes($attributeFamily)
+    {
+        static $attributes = [];
+
+        if (array_key_exists($attributeFamily->id, $attributes))
+            return $attributes[$attributeFamily->id];
+
+        return $attributes[$attributeFamily->id] = $attributeFamily->custom_attributes;
     }
 }

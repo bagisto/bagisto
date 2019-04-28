@@ -32,7 +32,7 @@ class RoleController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\User\Repositories\RoleRepository $role
+     * @param  \Webkul\User\Repositories\RoleRepository $role
      * @return void
      */
     public function __construct(Role $role)
@@ -61,7 +61,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view'], compact('roleItems'));
+        return view($this->_config['view']);
     }
 
     /**
@@ -96,7 +96,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = $this->role->find($id);
+        $role = $this->role->findOrFail($id);
 
         return view($this->_config['view'], compact('role'));
     }
@@ -134,18 +134,28 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->role->count() == 1) {
-            session()->flash('error', 'At least one role is required.');
+        $role = $this->role->findOrFail($id);
+
+        if ($role->admins->count() >= 1) {
+            session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
+        } else if($this->role->count() == 1) {
+            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Role']));
         } else {
-            Event::fire('user.role.delete.before', $id);
+            try {
+                Event::fire('user.role.delete.before', $id);
 
-            $this->role->delete($id);
+                $this->role->delete($id);
 
-            Event::fire('user.role.delete.after', $id);
+                Event::fire('user.role.delete.after', $id);
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Role']));
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Role']));
+
+                return response()->json(['message' => true], 200);
+            } catch(\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Role']));
+            }
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 }

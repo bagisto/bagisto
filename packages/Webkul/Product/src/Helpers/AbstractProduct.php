@@ -3,9 +3,18 @@
 namespace Webkul\Product\Helpers;
 
 use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Models\ProductFlatProxy;
+use Webkul\Product\Models\ProductFlat;
 
 abstract class AbstractProduct
 {
+    /**
+     * array
+     *
+     * @var array
+     */
+    protected $productFlat = [];
+
     /**
      * Add Channle and Locale filter
      *
@@ -34,5 +43,28 @@ abstract class AbstractProduct
         }
 
         return $qb;
+    }
+
+    /**
+     * Sets product flat variable
+     *
+     * @param Product $product
+     * @return void
+     */
+    public function setProductFlat($product)
+    {
+        if (array_key_exists($product->id, $this->productFlat))
+            return;
+
+        if (! $product instanceof ProductFlat) {
+            $this->productFlat[$product->id] = ProductFlatProxy::modelClass()
+                ::where('product_flat.product_id', $product->id)
+                ->where('product_flat.locale', app()->getLocale())
+                ->where('product_flat.channel', core()->getCurrentChannelCode())
+                ->select('product_flat.*')
+                ->first();
+        } else {
+            $this->productFlat[$product->id] = $product;
+        }
     }
 }

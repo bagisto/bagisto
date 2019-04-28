@@ -22,7 +22,10 @@ class CategoryDataGrid extends DataGrid
         $queryBuilder = DB::table('categories as cat')
                 ->select('cat.id as category_id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale',
                 DB::raw('COUNT(DISTINCT pc.product_id) as count'))
-                ->leftJoin('category_translations as ct', 'cat.id', '=', 'ct.category_id')
+                ->leftJoin('category_translations as ct', function($leftJoin) {
+                    $leftJoin->on('cat.id', '=', 'ct.category_id')
+                        ->where('ct.locale', app()->getLocale());
+                })
                 ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
                 ->groupBy('cat.id');
 
@@ -40,6 +43,7 @@ class CategoryDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -48,6 +52,7 @@ class CategoryDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -56,6 +61,7 @@ class CategoryDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -64,6 +70,7 @@ class CategoryDataGrid extends DataGrid
             'type' => 'boolean',
             'sortable' => true,
             'searchable' => true,
+            'filterable' => true,
             'wrapper' => function($value) {
                 if ($value->status == 1)
                     return 'Active';
@@ -77,19 +84,22 @@ class CategoryDataGrid extends DataGrid
             'label' => trans('admin::app.datagrid.no-of-products'),
             'type' => 'number',
             'sortable' => true,
-            'searchable' => true,
+            'searchable' => false,
+            'filterable' => false
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
+            'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.catalog.categories.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
+            'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.catalog.categories.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon' => 'icon trash-icon'

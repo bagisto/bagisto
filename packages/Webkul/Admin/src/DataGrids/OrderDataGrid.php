@@ -28,13 +28,14 @@ class OrderDataGrid extends DataGrid
                     $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
                         ->where('order_address_billing.address_type', 'billing');
                 })
-                ->addSelect('orders.id', 'base_sub_total', 'base_grand_total', 'orders.created_at', 'channel_name', 'status')
+                ->addSelect('orders.id', 'orders.base_sub_total', 'orders.base_grand_total', 'orders.created_at', 'channel_name', 'status')
                 ->addSelect(DB::raw('CONCAT(order_address_billing.first_name, " ", order_address_billing.last_name) as billed_to'))
                 ->addSelect(DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name) as shipped_to'));
 
         $this->addFilter('billed_to', DB::raw('CONCAT(order_address_billing.first_name, " ", order_address_billing.last_name)'));
         $this->addFilter('shipped_to', DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name)'));
         $this->addFilter('id', 'orders.id');
+        $this->addFilter('created_at', 'orders.created_at');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -47,6 +48,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -55,6 +57,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'price',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -63,6 +66,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'price',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -71,6 +75,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'datetime',
             'sortable' => true,
             'searchable' => false,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -79,6 +84,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'string',
             'sortable' => true,
             'searchable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -88,6 +94,7 @@ class OrderDataGrid extends DataGrid
             'sortable' => true,
             'searchable' => true,
             'closure' => true,
+            'filterable' => true,
             'wrapper' => function ($value) {
                 if ($value->status == 'processing')
                     return '<span class="badge badge-md badge-success">Processing</span>';
@@ -112,6 +119,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -120,12 +128,14 @@ class OrderDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'View',
+            'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.sales.orders.view',
             'icon' => 'icon eye-icon'
         ]);

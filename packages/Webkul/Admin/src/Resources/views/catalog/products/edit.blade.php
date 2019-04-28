@@ -62,7 +62,7 @@
                 @foreach ($product->attribute_family->attribute_groups as $attributeGroup)
 
                     @if (count($attributeGroup->custom_attributes))
-                        
+
                         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.before', ['product' => $product]) !!}
 
                         <accordian :title="'{{ __($attributeGroup->name) }}'" :active="true">
@@ -98,7 +98,8 @@
 
                                         @if (view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
 
-                                            <div class="control-group {{ $attribute->type }}" :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']">
+                                            <div class="control-group {{ $attribute->type }}" @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']" @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
+
                                                 <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
                                                     {{ $attribute->admin_name }}
 
@@ -124,7 +125,13 @@
 
                                                 @include ($typeView)
 
-                                                <span class="control-error" v-if="errors.has('{{ $attribute->code }}')">@{{ errors.first('{!! $attribute->code !!}') }}</span>
+                                                <span class="control-error"  @if ($attribute->type == 'multiselect') v-if="errors.has('{{ $attribute->code }}[]')" @else  v-if="errors.has('{{ $attribute->code }}')"  @endif>
+                                                    @if ($attribute->type == 'multiselect')
+                                                        @{{ errors.first('{!! $attribute->code !!}[]') }}
+                                                    @else
+                                                        @{{ errors.first('{!! $attribute->code !!}') }}
+                                                    @endif
+                                                </span>
                                             </div>
 
                                         @endif
@@ -154,23 +161,25 @@
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.before', ['product' => $product]) !!}
 
                 @include ('admin::catalog.products.accordians.images')
-                
+
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.after', ['product' => $product]) !!}
 
 
-                
+
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.categories.before', ['product' => $product]) !!}
 
                 @include ('admin::catalog.products.accordians.categories')
 
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.categories.after', ['product' => $product]) !!}
-                
+
 
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.before', ['product' => $product]) !!}
 
                 @include ('admin::catalog.products.accordians.variations')
-                
+
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.after', ['product' => $product]) !!}
+
+                @include ('admin::catalog.products.accordians.product-links')
 
             </div>
 

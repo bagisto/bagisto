@@ -9,7 +9,7 @@ return [
         'wishlist' => 'قائمة الأماني',
         'orders' => 'الأوامر',
     ],
-    
+
     'common' => [
         'error' => 'حدث شيء خاطئ ، رجاء حاول ثانية لاحقا.'
     ],
@@ -201,7 +201,6 @@ return [
                     'page-title' => 'زبون اضف استمارة',
                     'title' => 'أضف العنوان',
                     'address1' => 'العنوان سطر 1',
-                    'address2' => 'العنوان خط 2',
                     'country' => 'البلد',
                     'state' => 'الحالة',
                     'select-state' => 'انتق a منطقة أو ولاية أو مقاطعة',
@@ -322,7 +321,8 @@ return [
         'quantity' => 'الكمية',
         'in-stock' => 'في الأسهم',
         'out-of-stock' => 'خارج الأسهم',
-        'view-all' => 'عرض الكل'
+        'view-all' => 'عرض الكل',
+        'less-quantity' => 'Quantity can not be less than one.'
     ],
 
     'wishlist' => [
@@ -386,7 +386,8 @@ return [
             ],
             'quantity-error' => 'الكمية المطلوبة غير متوفرة',
             'cart-subtotal' => 'المجموع الفرعي للعربات',
-            'cart-remove-action' => 'هل تريد حقا أن تفعل هذا ؟'
+            'cart-remove-action' => 'هل تريد حقا أن تفعل هذا ؟',
+            'partial-cart-update' => 'Only some of the product(s) were updated'
         ],
 
         'onepage' => [
@@ -401,7 +402,6 @@ return [
             'last-name' => 'الاسم الأخير',
             'email' => 'البريد الإلكتروني',
             'address1' => 'العنوان',
-            'address2' => 'العنوان 2',
             'city' => 'مدينة',
             'state' => 'الحالة',
             'select-state' => 'انتق a منطقة أو ولاية أو مقاطعة',

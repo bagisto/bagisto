@@ -16,7 +16,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class NewOrderNotification extends Mailable
 {
     use Queueable, SerializesModels;
-    
+
     /**
      * The order instance.
      *

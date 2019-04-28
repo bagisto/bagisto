@@ -15,6 +15,11 @@
     outline: none;
 }
 
+body {
+    letter-spacing: -0.26px;
+    line-height: 19px;
+}
+
 a:link,
 a:hover,
 a:visited,
@@ -23,6 +28,11 @@ a:active {
     text-decoration: none;
     color: $brand-color;
 }
+
+::selection {
+    background-color: $selection-color;
+    color: $color-white;
+  }
 
 textarea {
     resize: none;
@@ -41,7 +51,22 @@ h1 {
 }
 
 h2 {
-    font-size: 18px;
+    font-size: 24px;
+    color: $font-color;
+}
+
+h3 {
+    font-size: 20px;
+    color: $font-color;
+}
+
+h4 {
+    font-size: 16px;
+    color: $font-color;
+}
+
+h5 {
+    font-size: 12px;
     color: $font-color;
 }
 
@@ -128,6 +153,10 @@ h2 {
         top: 50%;
         margin-top: -4px;
     }
+}
+
+.dropdown-toggle {
+    cursor: pointer;
 }
 
 .dropdown-open {
@@ -463,8 +492,9 @@ h2 {
 
     .control-info {
         display: block;
+        font-size: 14px;
+        color: #6F6F6F;
         font-style: italic;
-        color: #6f6f6f;
     }
 
     .control-error {
@@ -704,27 +734,27 @@ modal {
     left: 0px;
     position: fixed;
     background: #000;
-    opacity: 0.75;
+    opacity: 0.7;
 }
+
 .modal-open .modal-overlay {
     display: block;
 }
 
 .modal-container {
-    animation: fade-in-white 0.3s ease-in-out;
-    z-index: 11;
-    margin-left: -350px;
+    background: #ffffff;
+    top: 100px;
     width: 600px;
     max-width: 80%;
-    background: #ffffff;
-    position: fixed;
     left: 50%;
-    top: 100px;
-    margin-bottom: 100px;
+    margin-left: -300px;
+    position: fixed;
+    z-index: 11;
     @include box-shadow(
         0px 15px 25px 0px rgba(0, 0, 0, 0.03),
         0px 20px 45px 5px rgba(0, 0, 0, 0.2)
     );
+    animation: fade-in-white 0.3s ease-in-out;
     animation: jelly 0.5s ease-in-out;
     @include border-radius(5px);
 

@@ -3,34 +3,34 @@
 return [
     [
         'key' => 'sales',
-        'name' => 'Sales',
+        'name' => 'admin::app.admin.system.sales',
         'sort' => 1
     ], [
         'key' => 'sales.carriers',
-        'name' => 'Shipping Methods',
+        'name' => 'admin::app.admin.system.shipping-methods',
         'sort' => 1,
     ], [
         'key' => 'sales.carriers.free',
-        'name' => 'Free Shipping',
+        'name' => 'admin::app.admin.system.free-shipping',
         'sort' => 1,
         'fields' => [
             [
                 'name' => 'title',
-                'title' => 'Title',
+                'title' => 'admin::app.admin.system.title',
                 'type' => 'text',
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => true
             ], [
                 'name' => 'description',
-                'title' => 'Description',
+                'title' => 'admin::app.admin.system.description',
                 'type' => 'textarea',
                 'channel_based' => false,
                 'locale_based' => true
             ], [
                 'name' => 'active',
-                'title' => 'Status',
-                'type' => 'multiselect',
+                'title' => 'admin::app.admin.system.status',
+                'type' => 'select',
                 'options' => [
                     [
                         'title' => 'Active',
@@ -45,31 +45,31 @@ return [
         ]
     ], [
         'key' => 'sales.carriers.flatrate',
-        'name' => 'Flat Rate Shipping',
+        'name' => 'admin::app.admin.system.flate-rate-shipping',
         'sort' => 2,
         'fields' => [
             [
                 'name' => 'title',
-                'title' => 'Title',
+                'title' => 'admin::app.admin.system.title',
                 'type' => 'text',
                 'validation' => 'required',
                 'channel_based' => true,
                 'locale_based' => true
             ], [
                 'name' => 'description',
-                'title' => 'Description',
+                'title' => 'admin::app.admin.system.description',
                 'type' => 'textarea',
                 'channel_based' => true,
                 'locale_based' => false
             ], [
                 'name' => 'default_rate',
-                'title' => 'Rate',
+                'title' => 'admin::app.admin.system.rate',
                 'type' => 'text',
                 'channel_based' => true,
                 'locale_based' => false
             ], [
                 'name' => 'type',
-                'title' => 'Type',
+                'title' => 'admin::app.admin.system.type',
                 'type' => 'select',
                 'options' => [
                     [
@@ -83,7 +83,7 @@ return [
                 'validation' => 'required'
             ], [
                 'name' => 'active',
-                'title' => 'Status',
+                'title' => 'admin::app.admin.system.status',
                 'type' => 'select',
                 'options' => [
                     [
@@ -99,50 +99,44 @@ return [
         ]
     ], [
         'key' => 'sales.shipping',
-        'name' => 'Shipping',
+        'name' => 'admin::app.admin.system.shipping',
         'sort' => 0
     ], [
         'key' => 'sales.shipping.origin',
-        'name' => 'Origin',
+        'name' => 'admin::app.admin.system.origin',
         'sort' => 0,
         'fields' => [
             [
                 'name' => 'country',
-                'title' => 'Country',
+                'title' => 'admin::app.admin.system.country',
                 'type' => 'country',
                 'validation' => 'required',
                 'channel_based' => true,
                 'locale_based' => true
             ], [
                 'name' => 'state',
-                'title' => 'State',
+                'title' => 'admin::app.admin.system.state',
                 'type' => 'state',
                 'validation' => 'required',
                 'channel_based' => true,
                 'locale_based' => true
             ], [
                 'name' => 'address1',
-                'title' => 'Address Line 1',
+                'title' => 'admin::app.admin.system.street-address',
                 'type' => 'text',
                 'validation' => 'required',
                 'channel_based' => true,
                 'locale_based' => false
             ], [
-                'name' => 'address2',
-                'title' => 'Address Line 2',
-                'type' => 'text',
-                'channel_based' => true,
-                'locale_based' => false
-            ], [
                 'name' => 'zipcode',
-                'title' => 'Zip',
+                'title' => 'admin::app.admin.system.zip',
                 'type' => 'text',
                 'validation' => 'required',
                 'channel_based' => true,
                 'locale_based' => false
             ], [
                 'name' => 'city',
-                'title' => 'City',
+                'title' => 'admin::app.admin.system.city',
                 'type' => 'text',
                 'validation' => 'required',
                 'channel_based' => true,

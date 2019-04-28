@@ -69,11 +69,12 @@ class AddressController extends Controller
      */
     public function store()
     {
+        request()->merge(['address1' => implode(PHP_EOL, array_filter(request()->input('address1')))]);
+
         $data = collect(request()->input())->except('_token')->toArray();
 
         $this->validate(request(), [
             'address1' => 'string|required',
-            'address2' => 'string',
             'country' => 'string|required',
             'state' => 'string|required',
             'city' => 'string|required',
@@ -88,7 +89,7 @@ class AddressController extends Controller
             $data['default_address'] = 1;
         }
 
-        if($this->address->create($data)) {
+        if ($this->address->create($data)) {
             session()->flash('success', trans('shop::app.customer.account.address.create.success'));
 
             return redirect()->route($this->_config['redirect']);
@@ -106,7 +107,13 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
-        $address = $this->address->find($id);
+        $address = $this->address->findOneWhere([
+            'id' => $id,
+            'customer_id' => auth()->guard('customer')->user()->id
+        ]);
+
+        if (! $address)
+            abort(404);
 
         return view($this->_config['view'], compact('address'));
     }
@@ -119,19 +126,32 @@ class AddressController extends Controller
      */
     public function update($id)
     {
+        request()->merge(['address1' => implode(PHP_EOL, array_filter(request()->input('address1')))]);
+
         $this->validate(request(), [
             'address1' => 'string|required',
             'country' => 'string|required',
             'state' => 'string|required',
             'city' => 'string|required',
-            'postcode' => 'required'
+            'postcode' => 'required',
+            'phone' => 'required'
         ]);
 
         $data = collect(request()->input())->except('_token')->toArray();
 
-        $this->address->update($data, $id);
+        $addresses = $this->customer->addresses;
 
-        session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
+        foreach($addresses as $address) {
+            if ($id == $address->id) {
+                session()->flash('success', trans('shop::app.customer.account.address.edit.success'));
+
+                $this->address->update($data, $id);
+
+                return redirect()->route('customer.address.index');
+            }
+        }
+
+        session()->flash('warning', trans('shop::app.security-warning'));
 
         return redirect()->route('customer.address.index');
     }
@@ -165,10 +185,18 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
+        $address = $this->address->findOneWhere([
+            'id' => $id,
+            'customer_id' => auth()->guard('customer')->user()->id
+        ]);
+
+        if (! $address)
+            abort(404);
+
         $this->address->delete($id);
 
         session()->flash('success', trans('shop::app.customer.account.address.delete.success'));
 
-        return redirect()->back();
+        return redirect()->route('customer.address.index');
     }
 }

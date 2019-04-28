@@ -19,7 +19,7 @@ class TaxRateDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('tax_rates')->addSelect('id', 'identifier', 'state', 'country', 'tax_rate');
+        $queryBuilder = DB::table('tax_rates')->addSelect('id', 'identifier', 'state', 'country', 'zip_code', 'zip_from', 'zip_to', 'tax_rate');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -32,6 +32,7 @@ class TaxRateDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -40,6 +41,7 @@ class TaxRateDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -48,6 +50,7 @@ class TaxRateDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -56,6 +59,34 @@ class TaxRateDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'zip_code',
+            'label' => trans('admin::app.configuration.tax-rates.zip_code'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'zip_from',
+            'label' => trans('admin::app.configuration.tax-rates.zip_from'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'zip_to',
+            'label' => trans('admin::app.configuration.tax-rates.zip_to'),
+            'type' => 'string',
+            'searchable' => true,
+            'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -64,18 +95,21 @@ class TaxRateDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
+            'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.tax-rates.store',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
+            'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.tax-rates.delete',
             'icon' => 'icon trash-icon'
         ]);

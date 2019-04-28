@@ -13,7 +13,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
-                        
+
                         {{ __('admin::app.catalog.categories.add-title') }}
                     </h1>
                 </div>
@@ -77,9 +77,25 @@
 
                             {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.description_images.controls.before') !!}
 
+                            <div class="control-group" :class="[errors.has('display_mode') ? 'has-error' : '']">
+                                <label for="display_mode" class="required">{{ __('admin::app.catalog.categories.display-mode') }}</label>
+                                <select class="control" v-validate="'required'" id="display_mode" name="display_mode" data-vv-as="&quot;{{ __('admin::app.catalog.categories.display-mode') }}&quot;">
+                                    <option value="products_and_description">
+                                        {{ __('admin::app.catalog.categories.products-and-description') }}
+                                    </option>
+                                    <option value="products_only">
+                                        {{ __('admin::app.catalog.categories.products-only') }}
+                                    </option>
+                                    <option value="description_only">
+                                        {{ __('admin::app.catalog.categories.description-only') }}
+                                    </option>
+                                </select>
+                                <span class="control-error" v-if="errors.has('display_mode')">@{{ errors.first('display_mode') }}</span>
+                            </div>
+
                             <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
-                                <label for="description" class="required">{{ __('admin::app.catalog.categories.description') }}</label>
-                                <textarea v-validate="'required'" class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old('description') }}</textarea>
+                                <label for="description" id="descript-label" class="required">{{ __('admin::app.catalog.categories.description') }}</label>
+                                <textarea v-validate="''"  class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old('description') }}</textarea>
                                 <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                             </div>
 
@@ -103,7 +119,7 @@
 
                         <accordian :title="'{{ __('admin::app.catalog.categories.parent-category') }}'" :active="true">
                             <div slot="body">
-                                
+
                                 {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.parent_category.controls.before') !!}
 
                                 <tree-view value-field="id" name-field="parent_id" input-type="radio" items='@json($categories)'></tree-view>
@@ -159,3 +175,28 @@
         </form>
     </div>
 @stop
+
+@push('scripts')
+    <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            tinymce.init({
+                selector: 'textarea#description',
+                height: 200,
+                width: "100%",
+                plugins: 'image imagetools media wordcount save fullscreen code',
+                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code',
+                image_advtab: true
+            });
+
+            $('#display_mode').on('change', function (e) {
+                if ($('#display_mode').val() != 'products_only') {
+                    $("#descript-label").addClass("required");
+                } else {
+                    $("#descript-label").removeClass("required");
+                }
+            })
+        });
+    </script>
+@endpush

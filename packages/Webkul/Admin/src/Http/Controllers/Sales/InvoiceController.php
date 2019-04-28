@@ -41,8 +41,8 @@ class InvoiceController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderRepository   $order
-     * @param  Webkul\Sales\Repositories\InvoiceRepository $invoice
+     * @param  \Webkul\Sales\Repositories\OrderRepository   $order
+     * @param  \Webkul\Sales\Repositories\InvoiceRepository $invoice
      * @return void
      */
     public function __construct(Invoice $invoice, Order $order)
@@ -75,7 +75,7 @@ class InvoiceController extends Controller
      */
     public function create($orderId)
     {
-        $order = $this->order->find($orderId);
+        $order = $this->order->findOrFail($orderId);
 
         return view($this->_config['view'], compact('order'));
     }
@@ -89,7 +89,7 @@ class InvoiceController extends Controller
      */
     public function store(Request $request, $orderId)
     {
-        $order = $this->order->find($orderId);
+        $order = $this->order->findOrFail($orderId);
 
         if (! $order->canInvoice()) {
             session()->flash('error', trans('admin::app.sales.invoices.creation-error'));
@@ -132,7 +132,7 @@ class InvoiceController extends Controller
      */
     public function view($id)
     {
-        $invoice = $this->invoice->find($id);
+        $invoice = $this->invoice->findOrFail($id);
 
         return view($this->_config['view'], compact('invoice'));
     }
@@ -145,7 +145,7 @@ class InvoiceController extends Controller
      */
     public function print($id)
     {
-        $invoice = $this->invoice->find($id);
+        $invoice = $this->invoice->findOrFail($id);
 
         $pdf = PDF::loadView('admin::sales.invoices.pdf', compact('invoice'))->setPaper('a4');
 

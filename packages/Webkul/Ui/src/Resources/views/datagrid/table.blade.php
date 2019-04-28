@@ -10,7 +10,7 @@
             <div class="grid-container">
                 <div class="filter-row-one" id="datagrid-filters">
                     <div class="search-filter">
-                        <input type="search" id="search-field" class="control" placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue" />
+                        <input type="search" id="search-field" class="control" placeholder="{{ __('ui::app.datagrid.search') }}" v-model="searchValue" v-on:keyup.enter="searchCollection(searchValue)" />
 
                         <div class="icon-wrapper">
                             <span class="icon search-icon search-btn" v-on:click="searchCollection(searchValue)"></span>
@@ -19,7 +19,7 @@
 
                     <div class="dropdown-filters">
                         <div class="dropdown-toggle">
-                            <div class="dropdown-header">
+                            <div class="grid-dropdown-header">
                                 <span class="name">{{ __('ui::app.datagrid.filter') }}</span>
                                 <i class="icon arrow-down-icon active"></i>
                             </div>
@@ -32,9 +32,11 @@
                                         <select class="filter-column-select control" v-model="filterColumn" v-on:click="getColumnOrAlias(filterColumn)">
                                             <option selected disabled>{{ __('ui::app.datagrid.column') }}</option>
                                             @foreach($results['columns'] as $column)
-                                                <option value="{{ $column['index'] }}">
-                                                    {{ $column['label'] }}
-                                                </option>
+                                                @if(isset($column['filterable']) && $column['filterable'])
+                                                    <option value="{{ $column['index'] }}">
+                                                        {{ $column['label'] }}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -56,7 +58,7 @@
                                 {{-- Response fields based on the type of columns to be filtered --}}
                                 <li v-if='stringCondition != null'>
                                     <div class="control-group">
-                                        <input type="text" class="control response-string" placeholder="String Value here" v-model="stringValue" />
+                                        <input type="text" class="control response-string" placeholder="Value here" v-model="stringValue" />
                                     </div>
                                 </li>
 
@@ -112,7 +114,7 @@
                                             <option value="gt">{{ __('ui::app.datagrid.greater') }}</option>
                                             <option value="lt">{{ __('ui::app.datagrid.less') }}</option>
                                             <option value="gte">{{ __('ui::app.datagrid.greatere') }}</option>
-                                            <option value="lte">{{ __('ui::app.datagrid.equalse') }}</option>
+                                            <option value="lte">{{ __('ui::app.datagrid.lesse') }}</option>
                                             {{-- <option value="btw">{{ __('ui::app.datagrid.between') }}</option> --}}
                                         </select>
                                     </div>
@@ -338,7 +340,7 @@
                             if (this.filterIndex == this.columnOrAlias && (this.numberValue == 0 || this.numberValue < 0)) {
                                     indexConditions = false;
 
-                                    alert('index columns can have values greater than zero only');
+                                    alert('{{__('ui::app.datagrid.zero-index')}}');
                             }
 
                             if(indexConditions)
@@ -613,18 +615,11 @@
 
                             label = 'cannotfindthislabel';
 
-                            // for(colIndex in this.columns) {
-                            //     if (this.columns[colIndex].alias == this.columnOrAlias) {
-                            //         label = this.columns[colIndex].label;
-                            //     }
-                            // }
-
                             obj.column = col;
                             obj.cond = cond;
                             obj.val = val;
 
                             if(col == "sort") {
-                                // console.log('sort', obj.cond);
                                 label = '';
 
                                 for(colIndex in this.columns) {
@@ -702,6 +697,26 @@
                                     }
                                 }
                             }
+                        }
+                    },
+
+                    doAction(e) {
+                        var element = e.currentTarget;
+
+                        if (confirm('{{__('ui::app.datagrid.massaction.delete') }}')) {
+                            axios.post(element.getAttribute('data-action'), {
+                                _token : element.getAttribute('data-token'),
+                                _method : element.getAttribute('data-method')
+                            }).then(function(response) {
+                                this.result = response;
+                                location.reload();
+                            }).catch(function (error) {
+                                location.reload();
+                            });
+
+                            e.preventDefault();
+                        } else {
+                            e.preventDefault();
                         }
                     },
 

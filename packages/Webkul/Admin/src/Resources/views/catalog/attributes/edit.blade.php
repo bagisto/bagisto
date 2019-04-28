@@ -12,7 +12,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
-                        
+
                         {{ __('admin::app.catalog.attributes.edit-title') }}
                     </h1>
                 </div>
@@ -118,22 +118,22 @@
 
                         <accordian :title="'{{ __('admin::app.catalog.attributes.options') }}'" :active="true" :id="'options'">
                             <div slot="body">
-                            
+
                                 {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.before', ['attribute' => $attribute]) !!}
 
                                 <option-wrapper></option-wrapper>
 
                                 {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.controls.after', ['attribute' => $attribute]) !!}
-                                
+
                             </div>
                         </accordian>
-                        
+
                         {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.options.after', ['attribute' => $attribute]) !!}
 
                     </div>
 
                     {!! view_render_event('bagisto.admin.catalog.attribute.edit_form_accordian.validations.before', ['attribute' => $attribute]) !!}
-                    
+
                     <accordian :title="'{{ __('admin::app.catalog.attributes.validations') }}'" :active="true">
                         <div slot="body">
 
@@ -207,7 +207,7 @@
                                 </select>
                                 <input type="hidden" name="value_per_locale" value="{{ $attribute->value_per_locale }}"/>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="value_per_channel">{{ __('admin::app.catalog.attributes.value_per_channel') }}</label>
                                 <select class="control" id="value_per_channel" name="value_per_channel" disabled>
@@ -220,7 +220,7 @@
                                 </select>
                                 <input type="hidden" name="value_per_channel" value="{{ $attribute->value_per_channel }}"/>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="is_filterable">{{ __('admin::app.catalog.attributes.is_filterable') }}</label>
                                 <select class="control" id="is_filterable" name="is_filterable">
@@ -232,7 +232,7 @@
                                     </option>
                                 </select>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="is_configurable">{{ __('admin::app.catalog.attributes.is_configurable') }}</label>
                                 <select class="control" id="is_configurable" name="is_configurable">
@@ -244,7 +244,7 @@
                                     </option>
                                 </select>
                             </div>
-                        
+
                             <div class="control-group">
                                 <label for="is_visible_on_front">{{ __('admin::app.catalog.attributes.is_visible_on_front') }}</label>
                                 <select class="control" id="is_visible_on_front" name="is_visible_on_front">
@@ -274,7 +274,7 @@
     <script type="text/x-template" id="options-template">
         <div>
 
-            <div class="control-group">
+            <div class="control-group" v-if="show_swatch">
                 <label for="swatch_type">{{ __('admin::app.catalog.attributes.swatch_type') }}</label>
                 <select class="control" id="swatch_type" name="swatch_type" v-model="swatch_type">
                     <option value="dropdown">
@@ -299,14 +299,14 @@
                 <table>
                     <thead>
                         <tr>
-                            <th v-if="swatch_type == 'color' || swatch_type == 'image'">{{ __('admin::app.catalog.attributes.swatch') }}</th>
+                            <th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">{{ __('admin::app.catalog.attributes.swatch') }}</th>
 
                             <th>{{ __('admin::app.catalog.attributes.admin_name') }}</th>
-                            
+
                             @foreach (Webkul\Core\Models\Locale::all() as $locale)
 
                                 <th>{{ $locale->name . ' (' . $locale->code . ')' }}</th>
-                            
+
                             @endforeach
 
                             <th>{{ __('admin::app.catalog.attributes.position') }}</th>
@@ -314,14 +314,14 @@
                             <th></th>
                         </tr>
                     </thead>
-                        
+
                     <tbody>
                         <tr v-for="(row, index) in optionRows">
-                            <td v-if="swatch_type == 'color'">
+                            <td v-if="show_swatch && swatch_type == 'color'">
                                 <swatch-picker :input-name="'options[' + row.id + '][swatch_value]'" :color="row.swatch_value" colors="text-advanced" show-fallback />
                             </td>
 
-                            <td v-if="swatch_type == 'image'">
+                            <td style="white-space: nowrap;" v-if="show_swatch && swatch_type == 'image'">
                                 <img style="width: 36px;height: 36px;vertical-align: middle;background: #F2F2F2;border-radius: 2px;margin-right: 10px;" v-if="row.swatch_value_url" :src="row.swatch_value_url"/>
                                 <input type="file" accept="image/*" :name="'options[' + row.id + '][swatch_value]'"/>
                             </td>
@@ -336,7 +336,7 @@
                             @foreach (Webkul\Core\Models\Locale::all() as $locale)
                                 <td>
                                     <div class="control-group" :class="[errors.has(localeInputName(row, '{{ $locale->code }}')) ? 'has-error' : '']">
-                                        <input type="text" v-validate="'required'" v-model="row['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
+                                        <input type="text" v-validate="'{{ app()->getLocale() }}' == '{{ $locale->code }}' ? 'required': ''" v-model="row['{{ $locale->code }}']" :name="localeInputName(row, '{{ $locale->code }}')" class="control" data-vv-as="&quot;{{ $locale->name . ' (' . $locale->code . ')' }}&quot;"/>
                                         <span class="control-error" v-if="errors.has(localeInputName(row, '{{ $locale->code }}'))">@{{ errors.first(localeInputName(row, '{!! $locale->code !!}')) }}</span>
                                     </div>
                                 </td>
@@ -364,23 +364,20 @@
     </script>
 
     <script>
-        $('#type').on('change', function (e) {
-            if (['select', 'multiselect', 'checkbox'].indexOf($(e.target).val()) === -1) {
-                $('#options').parent().addClass('hide')
-            } else {
-                $('#options').parent().removeClass('hide')
-            }
-        })
-
         Vue.component('option-wrapper', {
 
-            template: '#options-template', 
+            template: '#options-template',
 
-            data: () => ({
-                optionRowCount: 0,
-                optionRows: [],
-                swatch_type: "{{ $attribute->swatch_type }}"
-            }),
+            inject: ['$validator'],
+
+            data() {
+                return {
+                    optionRowCount: 0,
+                    optionRows: [],
+                    show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
+                    swatch_type: "{{ $attribute->swatch_type }}"
+                }
+            },
 
             created () {
                 @foreach ($attribute->options as $option)
@@ -400,6 +397,16 @@
 
                     this.optionRows.push(row);
                 @endforeach
+
+                var this_this = this;
+
+                $('#type').on('change', function (e) {
+                    if (['select'].indexOf($(e.target).val()) === -1) {
+                        this_this.show_swatch = false;
+                    } else {
+                        this_this.show_swatch = true;
+                    }
+                });
             },
 
             methods: {

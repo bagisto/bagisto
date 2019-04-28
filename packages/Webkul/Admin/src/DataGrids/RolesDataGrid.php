@@ -32,7 +32,8 @@ class RolesDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'width' => '40px'
+            'width' => '40px',
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -41,6 +42,7 @@ class RolesDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -49,14 +51,23 @@ class RolesDataGrid extends DataGrid
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
+            'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.roles.edit',
             'icon' => 'icon pencil-lg-icon'
+        ]);
+
+        $this->addAction([
+            'type' => 'Delete',
+            'method' => 'POST', // use GET request only for redirect purposes
+            'route' => 'admin.roles.delete',
+            'icon' => 'icon trash-icon'
         ]);
     }
 }

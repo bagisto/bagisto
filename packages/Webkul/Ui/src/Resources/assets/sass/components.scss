@@ -11,6 +11,11 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+
+    .dropdown-filters {
+        position: absolute;
+        right: 25px;
+    }
 }
 
 .filter-row-two {
@@ -55,7 +60,7 @@
     }
 }
 
-.dropdown-header {
+.grid-dropdown-header {
     display: inline-flex;
     justify-content: space-between;
     align-items: center;

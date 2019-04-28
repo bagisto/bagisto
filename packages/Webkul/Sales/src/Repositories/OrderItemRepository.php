@@ -4,6 +4,7 @@ namespace Webkul\Sales\Repositories;
 
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Contracts\OrderItem;
 
 /**
  * OrderItem Reposotory
@@ -21,7 +22,7 @@ class OrderItemRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Sales\Contracts\OrderItem';
+        return OrderItem::class;
     }
 
     /**
@@ -55,7 +56,7 @@ class OrderItemRepository extends Repository
 
             $totalInvoiced += $invoiceItem->total;
             $baseTotalInvoiced += $invoiceItem->base_total;
-            
+
             $taxInvoiced += $invoiceItem->tax_amount;
             $baseTaxInvoiced += $invoiceItem->base_tax_amount;
         }
@@ -69,7 +70,7 @@ class OrderItemRepository extends Repository
 
         $orderItem->total_invoiced = $totalInvoiced;
         $orderItem->base_total_invoiced = $baseTotalInvoiced;
-        
+
         $orderItem->tax_amount_invoiced = $taxInvoiced;
         $orderItem->base_tax_amount_invoiced = $baseTaxInvoiced;
 
@@ -89,14 +90,14 @@ class OrderItemRepository extends Repository
 
         $product = $orderItem->type == 'configurable' ? $orderItem->child->product : $orderItem->product;
 
-        if (! $product) {
+        if (! $product)
             return;
-        }
+
 
         $orderedInventory = $product->ordered_inventories()
             ->where('channel_id', $orderItem->order->channel->id)
             ->first();
-        
+
         if ($orderedInventory) {
             $orderedInventory->update([
                     'qty' => $orderedInventory->qty + $orderItem->qty_ordered
@@ -125,14 +126,15 @@ class OrderItemRepository extends Repository
                 ->where('channel_id', $orderItem->order->channel->id)
                 ->first();
 
-        if ($orderedInventory) {
-            if (($qty = $orderedInventory->qty - $orderItem->qty_to_cancel) < 0) {
-                $qty = 0;
-            }
+        if (! $orderedInventory)
+            return ;
 
-            $orderedInventory->update([
-                    'qty' => $qty
-                ]);
+        if (($qty = $orderedInventory->qty - $orderItem->qty_to_cancel) < 0) {
+            $qty = 0;
         }
+
+        $orderedInventory->update([
+                'qty' => $qty
+            ]);
     }
 }

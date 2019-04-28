@@ -30,7 +30,9 @@ class CoreServiceProvider extends ServiceProvider
 
         Validator::extend('decimal', 'Webkul\Core\Contracts\Validations\Decimal@passes');
 
-        $this->app->register(ModuleServiceProvider::class);
+        $this->publishes([
+            dirname(__DIR__) . '/Config/concord.php' => config_path('concord.php'),
+        ]);
     }
 
     /**

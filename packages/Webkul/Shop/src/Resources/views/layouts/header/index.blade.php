@@ -28,6 +28,16 @@
             </ul>
         </div>
 
+        <?php
+            $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+            $searchTerm = explode("?", $query);
+
+            foreach($searchTerm as $term){
+                if (strpos($term, 'term') !== false) {
+                    $serachQuery = $term;
+                }
+            }
+        ?>
 
         <div class="right-content">
 
@@ -48,7 +58,11 @@
                         <ul class="dropdown-list currency">
                             @foreach (core()->getCurrentChannel()->currencies as $currency)
                                 <li>
-                                    <a href="?currency={{ $currency->code }}">{{ $currency->code }}</a>
+                                    @if(isset($serachQuery))
+                                        <a href="?{{ $serachQuery }}?currency={{ $currency->code }}">{{ $currency->code }}</a>
+                                    @else
+                                        <a href="?currency={{ $currency->code }}">{{ $currency->code }}</a>
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>
@@ -83,11 +97,11 @@
                                 </div>
 
                                 <div style="margin-top: 15px;">
-                                    <a class="btn btn-primary btn-sm" href="{{ route('customer.session.index') }}" style="color: #ffffff">
+                                    <a class="btn btn-primary btn-md" href="{{ route('customer.session.index') }}" style="color: #ffffff">
                                         {{ __('shop::app.header.sign-in') }}
                                     </a>
 
-                                    <a class="btn btn-primary btn-sm" href="{{ route('customer.register.index') }}" style="float: right; color: #ffffff">
+                                    <a class="btn btn-primary btn-md" href="{{ route('customer.register.index') }}" style="float: right; color: #ffffff">
                                         {{ __('shop::app.header.sign-up') }}
                                     </a>
                                 </div>

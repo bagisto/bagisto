@@ -1,16 +1,16 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500">
-        <title>Bagisto Installer</title>
-        <link rel="icon" sizes="16x16" href="Images/favicon.ico">
-        <link rel="stylesheet" type="text/css" href="CSS/style.css">
-    </head>
+
+    <?php
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+        $greenCheck = $actual_link .'/'. 'Images/green-check.svg';
+        $redCheck = $actual_link .'/'. 'Images/red-check.svg';
+    ?>
 
     <body>
 
         <div class="container requirement" id="requirement">
-            <div class="initial-display" style="padding-top: 100px;">
-                <img class="logo" src="Images/logo.svg">
+            <div class="initial-display">
                 <p>Requirement</p>
 
                 <div class="content">
@@ -19,31 +19,18 @@
                     </div>
 
                     <div class="check" style="margin-left: 25%">
-                        <?php if($phpVersion['supported'] ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
+                        <?php if($phpVersion['supported'] ? $src = $greenCheck : $src = $redCheck): ?>
                             <img src="<?php echo $src ?>">
                         <?php endif; ?>
                         <span style="margin-left: 10px"><b>PHP</b></span>
                         <span>(<?php echo $phpVersion['minimum'] ?> or Higher)</span>
                     </div>
 
-                    <div class="check" style="margin-left: 25%;">
-                        <?php if(($composerInstall == 0) ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
-                            <img src="<?php echo $src ?>">
-                        <?php endif; ?>
-                        <span style="margin-left: 10px"><b>Composer</b></span>
-                    </div>
-
-                    <div style="margin-left: 30%;">
-                        <?php if(!($composerInstall == 0)): ?>
-                            <a href="https://getcomposer.org/" style="color: #0041FF; font-size: 16px">https://getcomposer.org/</a>
-                        <?php endif; ?>
-                    </div>
-
                     <?php foreach($requirements['requirements'] as $type => $require): ?>
 
                         <?php foreach($requirements['requirements'][$type] as $extention => $enabled) : ?>
                             <div class="check" style="margin-left: 25%">
-                                <?php if($enabled ? $src = 'Images/green-check.svg' : $src = 'Images/red-check.svg' ): ?>
+                                <?php if($enabled ? $src = $greenCheck : $src = $redCheck ): ?>
                                     <img src="<?php echo $src ?>">
                                 <?php endif; ?>
                                 <span style="margin-left: 10px"><b><?php echo $extention ?></b></span>
@@ -52,20 +39,29 @@
                         <?php endforeach; ?>
 
                     <?php endforeach; ?>
+
+                    <php class="check" style="margin-left: 25%">
+                        <?php if(($composerInstall['composer_install'] == 0) ? $src = $greenCheck : $src = $redCheck ): ?>
+                            <img src="<?php echo $src ?>">
+                            <span style="margin-left: 10px"><b>Composer</b></span>
+                        <?php endif; ?>
+                    </php>
+
+                    <div style="margin-left: 30%;">
+                        <?php if(!($composerInstall['composer_install'] == 0)): ?>
+                            <span style="margin-left: 10px; color: red;"><?php echo $composerInstall['composer'] ?></span>
+                        <?php endif; ?>
+                    </div>
+
                 </div>
 
-                <?php if(!isset($requirements['errors']) && $phpVersion['supported'] && ($composerInstall == 0) ): ?>
+                <?php if(!isset($requirements['errors']) && ($phpVersion['supported'] && $composerInstall['composer_install'] == 0)): ?>
                     <div>
                         <button type="button" class="prepare-btn" id="requirement-check">Continue</button>
                     </div>
 
                 <?php endif; ?>
 
-            </div>
-
-            <div class="footer">
-                <img class="left-patern" src="Images/left-side.svg">
-                <img class="right-patern" src="Images/right-side.svg">
             </div>
         </div>
 

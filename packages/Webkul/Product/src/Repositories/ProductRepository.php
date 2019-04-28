@@ -9,8 +9,6 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Contracts\Criteria\ActiveProductCriteria;
-use Webkul\Product\Contracts\Criteria\AttributeToSelectCriteria;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
@@ -192,6 +190,27 @@ class ProductRepository extends Repository
         if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
             if  (isset($data['categories'])) {
                 $product->categories()->sync($data['categories']);
+            }
+
+            if (isset($data['up_sell'])) {
+                $product->up_sells()->sync($data['up_sell']);
+            } else {
+                $data['up_sell'] = [];
+                $product->up_sells()->sync($data['up_sell']);
+            }
+
+            if (isset($data['cross_sell'])) {
+                $product->cross_sells()->sync($data['cross_sell']);
+            } else {
+                $data['cross_sell'] = [];
+                $product->cross_sells()->sync($data['cross_sell']);
+            }
+
+            if (isset($data['related_products'])) {
+                $product->related_products()->sync($data['related_products']);
+            } else {
+                $data['related_products'] = [];
+                $product->related_products()->sync($data['related_products']);
             }
 
             $previousVariantIds = $product->variants->pluck('id');
@@ -410,7 +429,7 @@ class ProductRepository extends Repository
      * @param integer $categoryId
      * @return Collection
      */
-    public function findAllByCategory($categoryId = null)
+    public function getAll($categoryId = null)
     {
         $params = request()->input();
 
@@ -427,12 +446,21 @@ class ProductRepository extends Repository
 
                         ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                         ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-                        ->where('product_flat.visible_individually', 1)
-                        ->where('product_flat.status', 1)
                         ->where('product_flat.channel', $channel)
                         ->where('product_flat.locale', $locale)
-                        ->whereNotNull('product_flat.url_key')
-                        ->where('product_categories.category_id', $categoryId);
+                        ->whereNotNull('product_flat.url_key');
+
+                if ($categoryId) {
+                    $qb->where('product_categories.category_id', $categoryId);
+                }
+
+                if (is_null(request()->input('status'))) {
+                    $qb->where('product_flat.status', 1);
+                }
+
+                if (is_null(request()->input('visible_individually'))) {
+                    $qb->where('product_flat.visible_individually', 1);
+                }
 
                 $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
                     $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
@@ -463,7 +491,7 @@ class ProductRepository extends Repository
                                 if ($attribute->type != 'price') {
                                     $query2 = $query2->where(function($query3) use($column, $queryParams) {
                                         foreach ($queryParams as $filterValue) {
-                                            $query3 = $query3->orWhere($column, $filterValue);
+                                            $query3 = $query3->orwhereRaw("find_in_set($filterValue, $column)");
                                         }
                                     });
                                 } else {
@@ -488,25 +516,19 @@ class ProductRepository extends Repository
      */
     public function findBySlugOrFail($slug, $columns = null)
     {
-        $attribute = $this->attribute->findOneByField('code', 'url_key');
+        $product = app('Webkul\Product\Repositories\ProductFlatRepository')->findOneWhere([
+                'url_key' => $slug,
+                'locale' => app()->getLocale(),
+                'channel' => core()->getCurrentChannelCode(),
+            ]);
 
-        $attributeValue = $this->attributeValue->findOneWhere([
-            'attribute_id' => $attribute->id,
-            ProductAttributeValue::$attributeTypeFields[$attribute->type] => $slug
-        ], ['product_id']);
-
-        if ($attributeValue && $attributeValue->product_id) {
-            $this->pushCriteria(app(ActiveProductCriteria::class));
-            $this->pushCriteria(app(AttributeToSelectCriteria::class)->addAttribueToSelect($columns));
-
-            $product = $this->findOrFail($attributeValue->product_id);
-
-            return $product;
+        if (! $product) {
+            throw (new ModelNotFoundException)->setModel(
+                get_class($this->model), $slug
+            );
         }
 
-        throw (new ModelNotFoundException)->setModel(
-            get_class($this->model), $slug
-        );
+        return $product;
     }
 
     /**
@@ -564,7 +586,8 @@ class ProductRepository extends Repository
      *
      * @return Collection
      */
-    public function searchProductByAttribute($term) {
+    public function searchProductByAttribute($term)
+    {
         $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($term) {
                 $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
@@ -577,10 +600,36 @@ class ProductRepository extends Repository
                         ->where('product_flat.channel', $channel)
                         ->where('product_flat.locale', $locale)
                         ->whereNotNull('product_flat.url_key')
-                        ->where('product_flat.name', 'like', '%' . $term . '%')
+                        ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
                         ->orderBy('product_id', 'desc');
             })->paginate(16);
 
         return $results;
+    }
+
+    /**
+     * Returns product's super attribute with options
+     *
+     * @param Product $product
+     * @return Collection
+     */
+    public function getSuperAttributes($product)
+    {
+        $superAttrbutes = [];
+
+        foreach ($product->super_attributes as $key => $attribute) {
+            $superAttrbutes[$key] = $attribute->toArray();
+
+            foreach ($attribute->options as $option) {
+                $superAttrbutes[$key]['options'][] = [
+                    'id' => $option->id,
+                    'admin_name' => $option->admin_name,
+                    'sort_order' => $option->sort_order,
+                    'swatch_value' => $option->swatch_value,
+                ];
+            }
+        }
+
+        return $superAttrbutes;
     }
 }

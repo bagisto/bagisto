@@ -68,7 +68,10 @@
                         </span>
 
                         <div class="total-reviews mt-5">
-                            {{ __('shop::app.reviews.ratingreviews', ['rating' => $reviewHelper->getTotalRating($product), 'review' => $reviewHelper->getTotalReviews($product)]) }}
+                            {{ __('shop::app.reviews.ratingreviews', [
+                                'rating' => $reviewHelper->getTotalRating($product),
+                                'review' => $reviewHelper->getTotalReviews($product)])
+                            }}
                         </div>
                     </div>
 
@@ -120,7 +123,7 @@
                                     </span>
 
                                     <span class="when">
-                                        {{ core()->formatDate($review->created_at) }}
+                                        {{ core()->formatDate($review->created_at, 'F d, Y') }}
                                     </span>
                                 </div>
                             </div>

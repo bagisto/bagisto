@@ -14,59 +14,23 @@ class View extends AbstractProduct
     {
         $data = [];
 
-        $attributes = $product->attribute_family->custom_attributes;
-
-        $attributeOptionReposotory = app('Webkul\Attribute\Repositories\AttributeOptionRepository');
+        $attributes = $product->product->attribute_family->custom_attributes()->where('attributes.is_visible_on_front', 1)->get();
 
         foreach ($attributes as $attribute) {
+            $value = $product->{$attribute->code};
+
             if ($attribute->type == 'boolean') {
-                $value = $product->{$attribute->code};
-                if ($attribute->is_visible_on_front ) {
-                    if ($value == 1) {
-                        $value = 'Yes';
-                    } else {
-                        $value = 'No';
-                    }
-
-                    $data[] = [
-                        'code' => $attribute->code,
-                        'label' => $attribute->name,
-                        'value' => $value,
-                        ];
-                }
-            } else if ($attribute->is_visible_on_front && $product->{$attribute->code}) {
-                $value = $product->{$attribute->code};
-
-                if ($attribute->type == 'select') {
-                    $attributeOption = $attributeOptionReposotory->find($value);
-
-                    if ($attributeOption) {
-                        $value = $attributeOption->translate(app()->getLocale())->label;
-                    }
-                }
-
-                if ($attribute->type == 'multiselect') {
-                    $values = explode(",", $value);
-
-                    $result = [];
-                    foreach ($values as $value) {
-                        $attributeOption = $attributeOptionReposotory->find($value);
-
-                        if ($attributeOption) {
-                            $value = $attributeOption->translate(app()->getLocale())->label;
-                            $result[] = $value;
-                        }
-                    }
-
-                    $value = implode(",", $result);
-                }
-
-                $data[] = [
-                    'code' => $attribute->code,
-                    'label' => $attribute->name,
-                    'value' => $value,
-                    ];
+                $value = $value ? 'Yes' : 'No';
+            } else if ($attribute->type == 'select' || $attribute->type == 'multiselect') {
+                $value = $product->{$attribute->code . '_label'};
             }
+
+            $data[] = [
+                'code' => $attribute->code,
+                'label' => $attribute->name,
+                'value' => $value,
+                'admin_name' => $attribute->admin_name,
+            ];
         }
 
         return $data;

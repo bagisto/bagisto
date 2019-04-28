@@ -12,6 +12,7 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Product\Helpers\Price;
 
 /**
  * Facades handler for all the methods to be implemented in Cart.
@@ -84,6 +85,11 @@ class Cart {
     protected $suppressFlash;
 
     /**
+     * Product price helper instance
+     */
+    protected $price;
+
+    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Checkout\Repositories\CartRepository            $cart
@@ -103,7 +109,8 @@ class Cart {
         ProductRepository $product,
         TaxCategoryRepository $taxCategory,
         WishlistRepository $wishlist,
-        CustomerAddressRepository $customerAddress
+        CustomerAddressRepository $customerAddress,
+        Price $price
     )
     {
         $this->customer = $customer;
@@ -122,7 +129,22 @@ class Cart {
 
         $this->customerAddress = $customerAddress;
 
+        $this->price = $price;
+
         $this->suppressFlash = false;
+    }
+
+
+    /**
+     * Return current logged in customer
+     *
+     * @return Customer | Boolean
+     */
+    public function getCurrentCustomer()
+    {
+        $guard = request()->has('token') ? 'api' : 'customer';
+
+        return auth()->guard($guard);
     }
 
     /**
@@ -149,12 +171,12 @@ class Cart {
         ];
 
         //Authentication details
-        if (auth()->guard('customer')->check()) {
-            $cartData['customer_id'] = auth()->guard('customer')->user()->id;
+        if ($this->getCurrentCustomer()->check()) {
+            $cartData['customer_id'] = $this->getCurrentCustomer()->user()->id;
             $cartData['is_guest'] = 0;
-            $cartData['customer_first_name'] = auth()->guard('customer')->user()->first_name;
-            $cartData['customer_last_name'] = auth()->guard('customer')->user()->last_name;
-            $cartData['customer_email'] = auth()->guard('customer')->user()->email;
+            $cartData['customer_first_name'] = $this->getCurrentCustomer()->user()->first_name;
+            $cartData['customer_last_name'] = $this->getCurrentCustomer()->user()->last_name;
+            $cartData['customer_email'] = $this->getCurrentCustomer()->user()->email;
         } else {
             $cartData['is_guest'] = 1;
         }
@@ -237,7 +259,8 @@ class Cart {
      */
     public function createItem($id, $data)
     {
-        $product = $parentProduct = $configurable = false;
+        $childProduct = $configurable = false;
+
         $product = $this->product->findOneByField('id', $id);
 
         if ($product->type == 'configurable') {
@@ -245,17 +268,15 @@ class Cart {
                 return false;
             }
 
-            $parentProduct = $this->product->findOneByField('id', $data['selected_configurable_option']);
+            $childProduct = $this->product->findOneByField('id', $data['selected_configurable_option']);
 
-            $canAdd = $parentProduct->haveSufficientQuantity($data['quantity']);
+            $canAdd = $childProduct->haveSufficientQuantity($data['quantity']);
 
             if (! $canAdd) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
             }
-
-            $configurable = true;
         } else {
             $canAdd = $product->haveSufficientQuantity($data['quantity']);
 
@@ -267,12 +288,12 @@ class Cart {
         }
 
         //Check if the product's information is proper or not
-        if (! isset($data['product']) || !isset($data['quantity'])) {
+        if (! isset($data['product']) || ! isset($data['quantity'])) {
             session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_fields'));
 
             return false;
         } else {
-            if ($product->type == 'configurable' && !isset($data['super_attribute'])) {
+            if ($product->type == 'configurable' && ! isset($data['super_attribute'])) {
                 session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_options'));
 
                 return false;
@@ -281,8 +302,14 @@ class Cart {
 
         $child = $childData = null;
         $additional = [];
-        $price = ($product->type == 'configurable' ? $parentProduct->price : $product->price);
-        $weight = ($product->type == 'configurable' ? $parentProduct->weight : $product->weight);
+
+        if ($product->type == 'configurable') {
+            $price = $this->price->getMinimalPrice($childProduct);
+        } else {
+            $price = $this->price->getMinimalPrice($product);
+        }
+
+        $weight = ($product->type == 'configurable' ? $childProduct->weight : $product->weight);
 
         $parentData = [
             'sku' => $product->sku,
@@ -302,27 +329,28 @@ class Cart {
             'additional' => $data,
         ];
 
-        if ($configurable) {
-            $attributeDetails = $this->getProductAttributeOptionDetails($parentProduct);
+        if ($product->type == 'configurable') {
+            $attributeDetails = $this->getProductAttributeOptionDetails($childProduct);
             unset($attributeDetails['html']);
 
             $parentData['additional'] = array_merge($parentData['additional'], $attributeDetails);
 
             $childData['product_id'] = (int)$data['selected_configurable_option'];
-            $childData['sku'] = $parentProduct->sku;
-            $childData['name'] = $parentProduct->name;
+            $childData['sku'] = $childProduct->sku;
+            $childData['name'] = $childProduct->name;
             $childData['type'] = 'simple';
             $childData['cart_id'] = $this->getCart()->id;
         }
 
-        $result = $this->cartItem->create($parentData);
+        $item = $this->cartItem->create($parentData);
 
         if ($childData != null) {
-            $childData['parent_id'] = $result->id;
+            $childData['parent_id'] = $item->id;
+            
             $this->cartItem->create($childData);
         }
 
-        return $result;
+        return $item;
     }
 
     /**
@@ -425,7 +453,7 @@ class Cart {
     public function mergeCart()
     {
         if (session()->has('cart')) {
-            $cart = $this->cart->findWhere(['customer_id' => auth()->guard('customer')->user()->id, 'is_active' => 1]);
+            $cart = $this->cart->findWhere(['customer_id' => $this->getCurrentCustomer()->user()->id, 'is_active' => 1]);
 
             if ($cart->count()) {
                 $cart = $cart->first();
@@ -438,11 +466,11 @@ class Cart {
             //when the logged in customer is not having any of the cart instance previously and are active.
             if (! $cart) {
                 $guestCart->update([
-                    'customer_id' => auth()->guard('customer')->user()->id,
+                    'customer_id' => $this->getCurrentCustomer()->user()->id,
                     'is_guest' => 0,
-                    'customer_first_name' => auth()->guard('customer')->user()->first_name,
-                    'customer_last_name' => auth()->guard('customer')->user()->last_name,
-                    'customer_email' => auth()->guard('customer')->user()->email
+                    'customer_first_name' => $this->getCurrentCustomer()->user()->first_name,
+                    'customer_last_name' => $this->getCurrentCustomer()->user()->last_name,
+                    'customer_email' => $this->getCurrentCustomer()->user()->email
                 ]);
 
                 session()->forget('cart');
@@ -539,7 +567,7 @@ class Cart {
      */
     public function putCart($cart)
     {
-        if (! auth()->guard('customer')->check()) {
+        if (! $this->getCurrentCustomer()->check()) {
             session()->put('cart', $cart);
         }
     }
@@ -553,9 +581,9 @@ class Cart {
     {
         $cart = null;
 
-        if (auth()->guard('customer')->check()) {
+        if ($this->getCurrentCustomer()->check()) {
             $cart = $this->cart->findOneWhere([
-                'customer_id' => auth()->guard('customer')->user()->id,
+                'customer_id' => $this->getCurrentCustomer()->user()->id,
                 'is_active' => 1
             ]);
 
@@ -577,11 +605,15 @@ class Cart {
 
         $data = $cart->toArray();
 
-        $data['shipping_address'] = current($data['shipping_address']);
+        $data['shipping_address'] = $cart->shipping_address->toArray();
 
-        $data['billing_address'] = current($data['billing_address']);
+        $data['billing_address'] = $cart->billing_address->toArray();
 
         $data['selected_shipping_rate'] = $cart->selected_shipping_rate->toArray();
+
+        $data['payment'] = $cart->payment->toArray();
+
+        $data['items'] = $cart->items->toArray();
 
         return $data;
     }
@@ -597,7 +629,6 @@ class Cart {
 
         $labels = [];
 
-        $attribute = $product->parent->super_attributes;
         foreach ($product->parent->super_attributes as $attribute) {
             $option = $attribute->options()->where('id', $product->{$attribute->code})->first();
 
@@ -631,11 +662,10 @@ class Cart {
 
         if (isset($data['billing']['address_id']) && $data['billing']['address_id']) {
             $address = $this->customerAddress->findOneWhere(['id'=> $data['billing']['address_id']])->toArray();
-            $billingAddress['first_name'] = auth()->guard('customer')->user()->first_name;
-            $billingAddress['last_name'] = auth()->guard('customer')->user()->last_name;
-            $billingAddress['email'] = auth()->guard('customer')->user()->email;
+            $billingAddress['first_name'] = $this->getCurrentCustomer()->user()->first_name;
+            $billingAddress['last_name'] = $this->getCurrentCustomer()->user()->last_name;
+            $billingAddress['email'] = $this->getCurrentCustomer()->user()->email;
             $billingAddress['address1'] = $address['address1'];
-            $billingAddress['address2'] = $address['address2'];
             $billingAddress['country'] = $address['country'];
             $billingAddress['state'] = $address['state'];
             $billingAddress['city'] = $address['city'];
@@ -645,11 +675,10 @@ class Cart {
 
         if (isset($data['shipping']['address_id']) && $data['shipping']['address_id']) {
             $address = $this->customerAddress->findOneWhere(['id'=> $data['shipping']['address_id']])->toArray();
-            $shippingAddress['first_name'] = auth()->guard('customer')->user()->first_name;
-            $shippingAddress['last_name'] = auth()->guard('customer')->user()->last_name;
-            $shippingAddress['email'] = auth()->guard('customer')->user()->email;
+            $shippingAddress['first_name'] = $this->getCurrentCustomer()->user()->first_name;
+            $shippingAddress['last_name'] = $this->getCurrentCustomer()->user()->last_name;
+            $shippingAddress['email'] = $this->getCurrentCustomer()->user()->email;
             $shippingAddress['address1'] = $address['address1'];
-            $shippingAddress['address2'] = $address['address2'];
             $shippingAddress['country'] = $address['country'];
             $shippingAddress['state'] = $address['state'];
             $shippingAddress['city'] = $address['city'];
@@ -658,12 +687,12 @@ class Cart {
         }
 
         if (isset($data['billing']['save_as_address']) && $data['billing']['save_as_address']) {
-            $billingAddress['customer_id']  = auth()->guard('customer')->user()->id;
+            $billingAddress['customer_id']  = $this->getCurrentCustomer()->user()->id;
             $this->customerAddress->create($billingAddress);
         }
 
         if (isset($data['shipping']['save_as_address']) && $data['shipping']['save_as_address']) {
-            $shippingAddress['customer_id']  = auth()->guard('customer')->user()->id;
+            $shippingAddress['customer_id']  = $this->getCurrentCustomer()->user()->id;
             $this->customerAddress->create($shippingAddress);
         }
 
@@ -693,10 +722,10 @@ class Cart {
             }
         }
 
-        if (auth()->guard('customer')->check()) {
-            $cart->customer_email = auth()->guard('customer')->user()->email;
-            $cart->customer_first_name = auth()->guard('customer')->user()->first_name;
-            $cart->customer_last_name = auth()->guard('customer')->user()->last_name;
+        if ($this->getCurrentCustomer()->check()) {
+            $cart->customer_email = $this->getCurrentCustomer()->user()->email;
+            $cart->customer_first_name = $this->getCurrentCustomer()->user()->first_name;
+            $cart->customer_last_name = $this->getCurrentCustomer()->user()->last_name;
         } else {
             $cart->customer_email = $cart->billing_address->email;
             $cart->customer_first_name = $cart->billing_address->first_name;
@@ -821,15 +850,23 @@ class Cart {
             $items = $cart->items;
 
             foreach ($items as $item) {
-                if ($item->product->type == 'configurable') {
-                    if ($item->product->sku != $item->sku) {
-                        $item->update(['sku' => $item->product->sku]);
+                $productFlat = $item->product_flat;
 
-                    } else if ($item->product->name != $item->name) {
-                        $item->update(['name' => $item->product->name]);
+                if ($productFlat->type == 'configurable') {
+                    if ($productFlat->sku != $item->sku) {
+                        $item->update(['sku' => $productFlat->sku]);
 
-                    } else if ($item->child->product->price != $item->price) {
-                        $price = (float) $item->custom_price ? $item->custom_price : $item->child->product->price;
+                    } else if ($productFlat->name != $item->name) {
+                        $item->update(['name' => $productFlat->name]);
+
+                    } else if ($this->price->getMinimalPrice($item->child->product_flat) != $item->price) {
+                        // $price = (float) $item->custom_price ? $item->custom_price : $item->child->product->price;
+
+                        if ((float)$item->custom_price) {
+                            $price = $item->custom_price;
+                        } else {
+                            $price = $this->price->getMinimalPrice($item->child->product_flat);
+                        }
 
                         $item->update([
                             'price' => $price,
@@ -839,15 +876,21 @@ class Cart {
                         ]);
                     }
 
-                } else if ($item->product->type == 'simple') {
-                    if ($item->product->sku != $item->sku) {
-                        $item->update(['sku' => $item->product->sku]);
+                } else if ($productFlat->type == 'simple') {
+                    if ($productFlat->sku != $item->sku) {
+                        $item->update(['sku' => $productFlat->sku]);
 
-                    } else if ($item->product->name != $item->name) {
-                        $item->update(['name' => $item->product->name]);
+                    } else if ($productFlat->name != $item->name) {
+                        $item->update(['name' => $productFlat->name]);
 
-                    } else if ($item->product->price != $item->price) {
-                        $price = (float) $item->custom_price ? $item->custom_price : $item->product->price;
+                    } else if ($this->price->getMinimalPrice($productFlat) != $item->price) {
+                        // $price = (float) $item->custom_price ? $item->custom_price : $item->product->price;
+
+                        if ((float)$item->custom_price) {
+                            $price = $item->custom_price;
+                        } else {
+                            $price = $this->price->getMinimalPrice($productFlat);
+                        }
 
                         $item->update([
                             'price' => $price,
@@ -991,7 +1034,7 @@ class Cart {
             'customer_email' => $data['customer_email'],
             'customer_first_name' => $data['customer_first_name'],
             'customer_last_name' => $data['customer_last_name'],
-            'customer' => auth()->guard('customer')->check() ? auth()->guard('customer')->user() : null,
+            'customer' => $this->getCurrentCustomer()->check() ? $this->getCurrentCustomer()->user() : null,
 
             'shipping_method' => $data['selected_shipping_rate']['method'],
             'shipping_title' => $data['selected_shipping_rate']['carrier_title'] . ' - ' . $data['selected_shipping_rate']['method_title'],
@@ -1067,7 +1110,7 @@ class Cart {
 
         if ($product->type == 'simple') {
             $data['quantity'] = 1;
-            $data['product'] = $wishlistItem->product->id;
+            $data['product'] = $product->id;
 
             $result = $this->add($product->id, $data);
 
@@ -1092,7 +1135,7 @@ class Cart {
         $wishlist = [];
         $wishlist = [
             'channel_id' => $cart->channel_id,
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => $this->getCurrentCustomer()->user()->id,
         ];
 
         foreach ($items as $item) {
@@ -1104,7 +1147,7 @@ class Cart {
                     $wishtlist['options'] = $item->additional;
                 }
 
-                $shouldBe = $this->wishlist->findWhere(['customer_id' => auth()->guard('customer')->user()->id, 'product_id' => $wishlist['product_id']]);
+                $shouldBe = $this->wishlist->findWhere(['customer_id' => $this->getCurrentCustomer()->user()->id, 'product_id' => $wishlist['product_id']]);
 
                 if ($shouldBe->isEmpty()) {
                     $wishlist = $this->wishlist->create($wishlist);

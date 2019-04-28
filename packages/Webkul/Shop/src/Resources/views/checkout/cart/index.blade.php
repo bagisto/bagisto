@@ -26,9 +26,9 @@
                                         $productBaseImage = $productImageHelper->getProductBaseImage($item->product);
                                 ?>
 
-                                <div class="item">
-                                    <div style="margin-right: 15px;">
-                                        <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}"><img class="item-image" src="{{ $productBaseImage['medium_image_url'] }}" /></a>
+                                <div class="item mt-5">
+                                    <div class="item-image" style="margin-right: 15px;">
+                                        <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}"><img src="{{ $productBaseImage['medium_image_url'] }}" /></a>
                                     </div>
 
                                     <div class="item-details">
@@ -137,6 +137,8 @@
                     {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
                 </div>
             </div>
+
+            @include ('shop::products.view.cross-sells')
 
         @else
 

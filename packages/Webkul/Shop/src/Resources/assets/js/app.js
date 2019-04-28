@@ -3,14 +3,13 @@ window.Vue = require("vue");
 window.VeeValidate = require("vee-validate");
 window.axios = require("axios");
 require("./bootstrap");
+require("ez-plus/src/jquery.ez-plus.js");
 
 Vue.use(VeeValidate);
 Vue.prototype.$http = axios
 
 window.eventBus = new Vue();
 
-Vue.component("category-nav", require("./components/category-nav.vue"));
-Vue.component("category-item", require("./components/category-item.vue"));
 Vue.component("image-slider", require("./components/image-slider.vue"));
 Vue.component("vue-slider", require("vue-slider-component"));
 
