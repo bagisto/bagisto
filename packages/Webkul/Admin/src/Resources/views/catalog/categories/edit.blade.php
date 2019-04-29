@@ -106,11 +106,7 @@
                                 <span class="control-error" v-if="errors.has('display_mode')">@{{ errors.first('display_mode') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('{{$locale}}[description]') ? 'has-error' : '']">
-                                <label for="description">{{ __('admin::app.catalog.categories.description') }}</label>
-                                <textarea class="control" id="description" name="{{$locale}}[description]" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old($locale)['description'] ?: $category->translate($locale)['description'] }}</textarea>
-                                <span class="control-error" v-if="errors.has('{{$locale}}[description]')">@{{ errors.first('{!!$locale!!}[description]') }}</span>
-                            </div>
+                            <description></description>
 
                             <div class="control-group">
                                 <label>{{ __('admin::app.catalog.categories.image') }} </label>
@@ -192,6 +188,16 @@
 @push('scripts')
     <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
 
+    <script type="text/x-template" id="description-template">
+
+        <div class="control-group" :class="[errors.has('{{$locale}}[description]') ? 'has-error' : '']">
+            <label for="description" :class="isRequired ? 'required' : ''">{{ __('admin::app.catalog.categories.description') }}</label>
+            <textarea v-validate="isRequired ? 'required' : ''" class="control" id="description" name="{{$locale}}[description]" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old($locale)['description'] ?: $category->translate($locale)['description'] }}</textarea>
+            <span class="control-error" v-if="errors.has('{{$locale}}[description]')">@{{ errors.first('{!!$locale!!}[description]') }}</span>
+        </div>
+
+    </script>
+
     <script>
         $(document).ready(function () {
             tinymce.init({
@@ -203,5 +209,38 @@
                 image_advtab: true
             });
         });
+
+        Vue.component('description', {
+
+            template: '#description-template',
+
+            inject: ['$validator'],
+
+            data() {
+                return {
+                    isRequired: true,
+                }
+            },
+
+            created () {
+                var this_this = this;
+
+                $(document).ready(function () {
+                    $('#display_mode').on('change', function (e) {
+                        if ($('#display_mode').val() != 'products_only') {
+                            this_this.isRequired = true;
+                        } else {
+                            this_this.isRequired = false;
+                        }
+                    })
+
+                    if ($('#display_mode').val() != 'products_only') {
+                        this_this.isRequired = true;
+                    } else {
+                        this_this.isRequired = false;
+                    }
+                });
+            }
+        })
     </script>
 @endpush
