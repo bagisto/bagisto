@@ -93,11 +93,7 @@
                                 <span class="control-error" v-if="errors.has('display_mode')">@{{ errors.first('display_mode') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
-                                <label for="description" id="descript-label" class="required">{{ __('admin::app.catalog.categories.description') }}</label>
-                                <textarea v-validate="''"  class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old('description') }}</textarea>
-                                <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
-                            </div>
+                            <description></description>
 
                             <div class="control-group">
                                 <label>{{ __('admin::app.catalog.categories.image') }}
@@ -179,6 +175,16 @@
 @push('scripts')
     <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
 
+    <script type="text/x-template" id="description-template">
+
+        <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
+            <label for="description" :class="isRequired ? 'required' : ''">{{ __('admin::app.catalog.categories.description') }}</label>
+            <textarea v-validate="isRequired ? 'required' : ''"  class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old('description') }}</textarea>
+            <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
+        </div>
+
+    </script>
+
     <script>
         $(document).ready(function () {
             tinymce.init({
@@ -189,14 +195,33 @@
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code',
                 image_advtab: true
             });
-
-            $('#display_mode').on('change', function (e) {
-                if ($('#display_mode').val() != 'products_only') {
-                    $("#descript-label").addClass("required");
-                } else {
-                    $("#descript-label").removeClass("required");
-                }
-            })
         });
+
+        Vue.component('description', {
+
+            template: '#description-template',
+
+            inject: ['$validator'],
+
+            data() {
+                return {
+                    isRequired: true,
+                }
+            },
+
+            created () {
+                var this_this = this;
+
+                $(document).ready(function () {
+                    $('#display_mode').on('change', function (e) {
+                        if ($('#display_mode').val() != 'products_only') {
+                            this_this.isRequired = true;
+                        } else {
+                            this_this.isRequired = false;
+                        }
+                    })
+                });
+            }
+        })
     </script>
 @endpush
