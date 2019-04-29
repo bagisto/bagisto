@@ -761,7 +761,9 @@ return [
         'catalog-rule' => 'Catalog Rule',
         'cart-rule' => 'Cart Rule',
         'add-catalog-rule' => 'Add Catalog Rule',
-        'add-cart-rule' => 'Add Cart Rule'
+        'add-cart-rule' => 'Add Cart Rule',
+        'create-catalog-rule' => 'Create Catalog Rule',
+        'create-cart-rule' => 'Create Cart Rule'
     ],
 
     'error' => [
