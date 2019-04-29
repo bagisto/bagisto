@@ -33,13 +33,18 @@ use Webkul\Core\Repositories\SliderRepository;
      */
     public function index()
     {
-        if (request()->route('any'))
-            abort(404);
-            
         $currentChannel = core()->getCurrentChannel();
 
         $sliderData = $this->sliderRepository->findByField('channel_id', $currentChannel->id)->toArray();
 
         return view($this->_config['view'], compact('sliderData'));
+    }
+
+    /**
+     * loads the home page for the storefront
+     */
+    public function notFound()
+    {
+        abort(404);
     }
 }

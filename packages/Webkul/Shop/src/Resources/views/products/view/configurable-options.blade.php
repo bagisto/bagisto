@@ -167,6 +167,7 @@
 
                         this.reloadPrice();
                         this.changeProductImages();
+                        this.changeStock(this.simpleProduct);
                     },
 
                     getSelectedIndex (attribute, value) {
@@ -318,6 +319,16 @@
                             this.config.variant_images[this.simpleProduct].forEach(function(image) {
                                 galleryImages.unshift(image)
                             });
+                        }
+                    },
+
+                    changeStock(productId) {
+                        var inStockElement = document.getElementById('in-stock');
+
+                        if (productId) {
+                            inStockElement.style.display= "block";
+                        } else {
+                            inStockElement.style.display= "none";
                         }
                     },
                 }
