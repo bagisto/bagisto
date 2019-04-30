@@ -862,7 +862,8 @@ return [
             'newsletter' => 'NewsLetter Subscription',
             'newsletter-subscription' => 'Allow NewsLetter Subscription',
             'email' => 'Email Verification',
-            'email-verification' => 'Allow Email Verification'
+            'email-verification' => 'Allow Email Verification',
+            'sort_order' => 'Sort Order'
         ]
     ]
 ];
