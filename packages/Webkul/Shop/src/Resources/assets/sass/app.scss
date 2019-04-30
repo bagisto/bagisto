@@ -3581,6 +3581,10 @@ section.review {
                 left: unset !important;
                 right: 100% !important;
             }
+
+            .nav ul {
+                left: 99999em;
+            }
         }
 
         .search-responsive .search-content .right {
