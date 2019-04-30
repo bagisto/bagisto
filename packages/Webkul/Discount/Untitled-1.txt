@@ -1,0 +1,8 @@
+Discount Condition:
+Attribute Family is all the attributes
+Cart Attribute such as
+base_total,
+grand_total,
+shipping_free,
+shipping_not_free,
+
