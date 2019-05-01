@@ -25,7 +25,7 @@ class Order {
     public function sendNewOrderMail($order)
     {
         try {
-            Mail::send(new NewOrderNotification($order));
+            Mail::queue(new NewOrderNotification($order));
         } catch (\Exception $e) {
 
         }
@@ -40,7 +40,7 @@ class Order {
     public function sendNewInvoiceMail($invoice)
     {
         try {
-            Mail::send(new NewInvoiceNotification($invoice));
+            Mail::queue(new NewInvoiceNotification($invoice));
         } catch (\Exception $e) {
 
         }
@@ -54,9 +54,9 @@ class Order {
     public function sendNewShipmentMail($shipment)
     {
         try {
-            Mail::send(new NewShipmentNotification($shipment));
+            Mail::queue(new NewShipmentNotification($shipment));
 
-            Mail::send(new NewInventorySourceNotification($shipment));
+            Mail::queue(new NewInventorySourceNotification($shipment));
         } catch (\Exception $e) {
 
         }
