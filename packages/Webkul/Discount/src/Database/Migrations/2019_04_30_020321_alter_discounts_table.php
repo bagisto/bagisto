@@ -32,7 +32,7 @@ class AlterDiscountsTable extends Migration
         });
 
         Schema::table('discount_customer_group', function (Blueprint $table) {
-            $table->integer('discount_id')->nullable();
+            $table->integer('discount_id')->unsigned();
             $table->foreign('discount_id')->references('id')->on('discounts')->onDelete('cascade');
             $table->integer('customer_group_id')->unsigned();
             $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');

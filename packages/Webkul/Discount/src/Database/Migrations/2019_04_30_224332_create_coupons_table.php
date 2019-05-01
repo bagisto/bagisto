@@ -19,8 +19,8 @@ class CreateCouponsTable extends Migration
             $table->string('prefix')->nullable();
             $table->string('suffix')->nullable();
             $table->integer('spaces_per_characters')->default(4);
-            $table->integer('discount_id');
-            $table->foreign('discount_id')->references('id')->on('discount')->onDelete('cascade');
+            $table->integer('discount_id')->unsigned();
+            $table->foreign('discount_id')->references('id')->on('discounts')->onDelete('cascade');
             $table->integer('allowed_uses')->unsigned();
             $table->integer('allowed_uses_per_customer')->unsigned();
             $table->timestamps();
@@ -30,7 +30,7 @@ class CreateCouponsTable extends Migration
             $table->increments('id');
             $table->string('code');
             $table->boolean('status')->default(0);
-            $table->integer('coupon_id');
+            $table->integer('coupon_id')->unsigned();
             $table->foreign('coupon_id')->references('id')->on('coupons')->onDelete('cascade');
             $table->timestamps();
         });

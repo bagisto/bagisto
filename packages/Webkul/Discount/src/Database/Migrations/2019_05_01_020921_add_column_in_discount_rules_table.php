@@ -18,7 +18,7 @@ class AddColumnInDiscountRulesTable extends Migration
                 $table->json('conditions');
                 $table->json('actions');
                 $table->integer('discount_id')->unsigned();
-                $table->foreign('discount_id')->references('id')->on('dicounts');
+                $table->foreign('discount_id')->references('id')->on('discounts');
                 $table->integer('coupon_id')->unsigned()->nullable();
                 $table->foreign('coupon_id')->references('id')->on('coupons');
                 $table->json('label')->nullable();
