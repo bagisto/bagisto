@@ -14,6 +14,21 @@ class Payment
      */
     public function getSupportedPaymentMethods()
     {
+        $paymentMethods = $this->getPaymentMethods();
+
+        return [
+                'jump_to_section' => 'payment',
+                'html' => view('shop::checkout.onepage.payment', compact('paymentMethods'))->render()
+            ];
+    }
+
+    /**
+     * Returns all supported payment methods
+     *
+     * @return array
+     */
+    public function getPaymentMethods()
+    {
         $paymentMethods = [];
 
         foreach (Config::get('paymentmethods') as $paymentMethod) {
@@ -28,10 +43,7 @@ class Payment
             }
         }
 
-        return [
-                'jump_to_section' => 'payment',
-                'html' => view('shop::checkout.onepage.payment', compact('paymentMethods'))->render()
-            ];
+        return $paymentMethods;
     }
 
     /**
