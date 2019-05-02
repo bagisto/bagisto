@@ -66,7 +66,7 @@ class RegistrationController extends Controller
 
         $data['channel_id'] = core()->getCurrentChannel()->id;
 
-        if(core()->getConfigData( 'customer.settings.email.verification')) {
+        if (core()->getConfigData('customer.settings.email.verification')) {
             $data['is_verified'] = 0;
         } else {
             $data['is_verified'] = 1;
@@ -85,9 +85,9 @@ class RegistrationController extends Controller
         Event::fire('customer.registration.after', $customer);
 
         if ($customer) {
-            if (core()->getConfigData( 'customer.settings.email.verification')) {
+            if (core()->getConfigData('customer.settings.email.verification')) {
                 try {
-                    Mail::send(new VerificationEmail($verificationData));
+                    Mail::queue(new VerificationEmail($verificationData));
 
                     session()->flash('success', trans('shop::app.customer.signup-form.success-verify'));
                 } catch (\Exception $e) {
@@ -135,7 +135,7 @@ class RegistrationController extends Controller
         $this->customer->update(['token' => $verificationData['token']], $customer->id);
 
         try {
-            Mail::send(new VerificationEmail($verificationData));
+            Mail::queue(new VerificationEmail($verificationData));
 
             if (Cookie::has('enable-resend')) {
                 \Cookie::queue(\Cookie::forget('enable-resend'));
@@ -144,7 +144,7 @@ class RegistrationController extends Controller
             if (Cookie::has('email-for-resend')) {
                 \Cookie::queue(\Cookie::forget('email-for-resend'));
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             session()->flash('error', trans('shop::app.customer.signup-form.verification-not-sent'));
 
             return redirect()->back();
