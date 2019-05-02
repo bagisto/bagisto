@@ -755,6 +755,8 @@ return [
 
     'error' => [
         'go-to-home' => 'GO TO HOME',
+        'in-maitainace' => 'In Maintenance',
+        'right-back' => 'Be Right Back',
 
         '404' => [
             'page-title' => '404 Page not found',
@@ -860,7 +862,8 @@ return [
             'newsletter' => 'NewsLetter Subscription',
             'newsletter-subscription' => 'Allow NewsLetter Subscription',
             'email' => 'Email Verification',
-            'email-verification' => 'Allow Email Verification'
+            'email-verification' => 'Allow Email Verification',
+            'sort_order' => 'Sort Order'
         ]
     ]
 ];

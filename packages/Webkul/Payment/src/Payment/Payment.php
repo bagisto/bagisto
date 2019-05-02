@@ -13,7 +13,7 @@ abstract class Payment
      * @var Cart
      */
     protected $cart;
-    
+
     /**
      * Checks if payment method is available
      *
@@ -108,5 +108,15 @@ abstract class Payment
             $this->setCart();
 
         return $this->cart->items;
+    }
+
+    /**
+     * Returns payment method sort order
+     *
+     * @return array
+     */
+    public function getSortOrder()
+    {
+        return $this->getConfigData('sort');
     }
 }

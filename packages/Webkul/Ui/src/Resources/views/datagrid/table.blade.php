@@ -634,8 +634,16 @@
                                 obj.label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].index == obj.column) {
+                                    if (this.columns[colIndex].index == obj.column) {
                                         obj.label = this.columns[colIndex].label;
+
+                                        if (this.columns[colIndex].type == 'boolean') {
+                                            if (obj.val == 1) {
+                                                obj.val = '{{ __('ui::app.datagrid.true') }}';
+                                            } else {
+                                                obj.val = '{{ __('ui::app.datagrid.false') }}';
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -703,17 +711,21 @@
                     doAction(e) {
                         var element = e.currentTarget;
 
-                        axios.post(element.getAttribute('data-action'), {
-                            _token : element.getAttribute('data-token'),
-                            _method : element.getAttribute('data-method')
-                        }).then(function(response) {
-                            this.result = response;
-                            location.reload();
-                        }).catch(function (error) {
-                            location.reload();
-                        });
+                        if (confirm('{{__('ui::app.datagrid.massaction.delete') }}')) {
+                            axios.post(element.getAttribute('data-action'), {
+                                _token : element.getAttribute('data-token'),
+                                _method : element.getAttribute('data-method')
+                            }).then(function(response) {
+                                this.result = response;
+                                location.reload();
+                            }).catch(function (error) {
+                                location.reload();
+                            });
 
-                        e.preventDefault();
+                            e.preventDefault();
+                        } else {
+                            e.preventDefault();
+                        }
                     },
 
                     removeMassActions() {

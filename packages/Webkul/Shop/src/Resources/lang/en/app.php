@@ -330,7 +330,8 @@ return [
         'in-stock' => 'In Stock',
         'out-of-stock' => 'Out Of Stock',
         'view-all' => 'View All',
-        'select-above-options' => 'Please select above options first.'
+        'select-above-options' => 'Please select above options first.',
+        'less-quantity' => 'Quantity can not be less than one.'
     ],
 
     'wishlist' => [
@@ -456,7 +457,9 @@ return [
             'subject' => 'New Order Confirmation',
             'heading' => 'Order Confirmation!',
             'dear' => 'Dear :customer_name',
+            'dear-admin' => 'Dear :admin_name',
             'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+            'greeting-admin' => 'Order Id :order_id placed on :created_at',
             'summary' => 'Summary of Order',
             'shipping-address' => 'Shipping Address',
             'billing-address' => 'Billing Address',
