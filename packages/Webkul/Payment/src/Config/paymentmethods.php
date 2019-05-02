@@ -5,7 +5,8 @@ return [
         'title' => 'Cash On Delivery',
         'description' => 'Cash On Delivery',
         'class' => 'Webkul\Payment\Payment\CashOnDelivery',
-        'active' => true
+        'active' => true,
+        'sort' => 1
     ],
 
     'moneytransfer' => [
@@ -13,7 +14,8 @@ return [
         'title' => 'Money Transfer',
         'description' => 'Money Transfer',
         'class' => 'Webkul\Payment\Payment\MoneyTransfer',
-        'active' => true
+        'active' => true,
+        'sort' => 2
     ],
 
     'paypal_standard' => [
@@ -23,6 +25,7 @@ return [
         'class' => 'Webkul\Paypal\Payment\Standard',
         'sandbox' => true,
         'active' => true,
-        'business_account' => 'test@webkul.com'
+        'business_account' => 'test@webkul.com',
+        'sort' => 3
     ]
 ];

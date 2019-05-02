@@ -24,9 +24,18 @@ class Payment
                     'method' => $object->getCode(),
                     'method_title' => $object->getTitle(),
                     'description' => $object->getDescription(),
+                    'sort' => $object->getSortOrder(),
                 ];
             }
         }
+
+        usort ($paymentMethods, function($a, $b) {
+            if ($a['sort'] == $b['sort']) {
+                return 0;
+            }
+
+            return ($a['sort'] < $b['sort']) ? -1 : 1;
+        });
 
         return [
                 'jump_to_section' => 'payment',

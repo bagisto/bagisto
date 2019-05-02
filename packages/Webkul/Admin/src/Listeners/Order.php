@@ -20,12 +20,13 @@ class Order {
     /**
      * @param mixed $order
      *
-     * Send new shipment mail to the customer and inventory source
+     * Send new order Mail to the customer and admin
      */
     public function sendNewOrderMail($order)
     {
         try {
             Mail::send(new NewOrderNotification($order));
+            Mail::send(new NewAdminNotification($order));
         } catch (\Exception $e) {
 
         }

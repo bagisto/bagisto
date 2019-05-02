@@ -120,8 +120,6 @@
                 // object creation
                 $requirement = new Requirement();
                 echo $requirement->render();
-
-                $storage_output = exec('cd ../.. && php artisan storage:link 2>&1');
             } else {
                 // getting url
                 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";

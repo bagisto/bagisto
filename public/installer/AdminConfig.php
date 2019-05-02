@@ -100,6 +100,8 @@ $data    = array();
             $data['support_error'] = 'Bagisto currently support MySQL only. Press OK to still continue or change you DB connection to MySQL';
         }
 
+        $storage_output = exec('cd ../.. && php artisan storage:link 2>&1');
+
         // if there are no errors process our form, then return a message
         // show a message of success and provide a true success variable
         $data['success'] = true;

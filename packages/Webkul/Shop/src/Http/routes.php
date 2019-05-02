@@ -196,7 +196,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
                 //Customer Profile Edit Form Store
                 Route::post('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@update')->defaults('_config', [
-                    'redirect' => 'customer.profile.index'
+                    'redirect' => 'customers.profile.index'
                 ])->name('customer.profile.edit');
                 /*  Profile Routes Ends Here  */
 

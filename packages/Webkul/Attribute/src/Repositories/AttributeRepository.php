@@ -210,4 +210,24 @@ class AttributeRepository extends Repository
 
         return $attributes[$attributeFamily->id] = $attributeFamily->custom_attributes;
     }
+
+    /**
+     * @return Object
+     */
+    public function getNameAndId()
+    {
+        $static = [];
+
+        $attributes = $this->model->all();
+        $trimmed = array();
+
+        foreach($attributes as $key => $attribute) {
+            $trimmed[$key] = [
+                'id' => $attribute->id,
+                'name' => $attribute->name
+            ];
+        }
+
+        return $trimmed;
+    }
 }

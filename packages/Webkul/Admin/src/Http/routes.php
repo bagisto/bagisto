@@ -617,6 +617,10 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::promotions.catalog-rule.create'
                 ])->name('admin.catalog-rule.create');
 
+                Route::post('/catalog-rule/create', 'Webkul\Discount\Http\Controllers\CatalogRuleController@store')->defaults('_config', [
+                    'redirect' => 'admin.catalog-rule.create'
+                ])->name('admin.catalog-rule.store');
+
                 Route::get('/cart-rule', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [
                     'view' => 'admin::promotions.cart-rule.index'
                 ])->name('admin.cart-rule.index');
