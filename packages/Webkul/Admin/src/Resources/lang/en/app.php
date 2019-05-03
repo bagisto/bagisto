@@ -764,8 +764,10 @@ return [
         'add-cart-rule' => 'Add Cart Rule',
         'create-catalog-rule' => 'Create Catalog Rule',
         'create-cart-rule' => 'Create Cart Rule',
-        'create' => 'Create',
         'save-btn-title' => 'Create',
+        'select-attr' => 'Select Attribute',
+        'select-attr-fam' => 'Select Attribute Family',
+        'select-cart-attr' => 'Select Cart Attribute',
         'general-info' => [
             'name' => 'Rule Name',
             'description' => 'Description',

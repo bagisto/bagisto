@@ -222,10 +222,12 @@ class AttributeRepository extends Repository
         $trimmed = array();
 
         foreach($attributes as $key => $attribute) {
-            $trimmed[$key] = [
-                'id' => $attribute->id,
-                'name' => $attribute->name
-            ];
+            if ($attribute->name != null || $attribute->name != "") {
+                $trimmed[$key] = [
+                    'id' => $attribute->id,
+                    'name' => $attribute->name
+                ];
+            }
         }
 
         return $trimmed;

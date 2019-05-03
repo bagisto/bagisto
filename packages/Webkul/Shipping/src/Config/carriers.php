@@ -16,6 +16,7 @@ return [
         'title' => 'Free Shipping',
         'description' => 'This is a free shipping',
         'active' => true,
+        'default_rate' => '0',
         'class' => 'Webkul\Shipping\Carriers\Free',
     ]
 ];
