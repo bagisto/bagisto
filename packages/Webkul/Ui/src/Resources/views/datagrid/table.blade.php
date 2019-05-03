@@ -634,8 +634,16 @@
                                 obj.label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].index == obj.column) {
+                                    if (this.columns[colIndex].index == obj.column) {
                                         obj.label = this.columns[colIndex].label;
+
+                                        if (this.columns[colIndex].type == 'boolean') {
+                                            if (obj.val == 1) {
+                                                obj.val = '{{ __('ui::app.datagrid.true') }}';
+                                            } else {
+                                                obj.val = '{{ __('ui::app.datagrid.false') }}';
+                                            }
+                                        }
                                     }
                                 }
                             }
