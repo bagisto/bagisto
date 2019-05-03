@@ -758,10 +758,28 @@ return [
     ],
 
     'promotion' => [
-        'catalog-rule' => 'Catalog Rule',
+        'catalog-rule' => 'Catalog Rules',
         'cart-rule' => 'Cart Rule',
         'add-catalog-rule' => 'Add Catalog Rule',
-        'add-cart-rule' => 'Add Cart Rule'
+        'add-cart-rule' => 'Add Cart Rule',
+        'create-catalog-rule' => 'Create Catalog Rule',
+        'create-cart-rule' => 'Create Cart Rule',
+        'create' => 'Create',
+        'save-btn-title' => 'Create',
+        'general-info' => [
+            'name' => 'Rule Name',
+            'description' => 'Description',
+            'starts-from' => 'Start',
+            'ends-till' => 'End',
+            'channels' => 'Channels',
+            'cust-groups' => 'Customer Groups',
+            'priority' => 'Priority',
+            'add-condition' => 'Add Conditions'
+        ],
+        'catalog' => [
+            'name' => 'Name',
+            'description' => 'Description',
+        ]
     ],
 
     'error' => [

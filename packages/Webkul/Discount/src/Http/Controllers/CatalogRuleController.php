@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
+use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
+
 /**
  * Catalog Rule controller
  *
@@ -15,10 +17,12 @@ use Illuminate\Routing\Controller;
 class CatalogRuleController extends Controller
 {
     protected $_config;
+    protected $attribute;
 
-    public function __construct()
+    public function __construct(Attribute $attribute)
     {
         $this->_config = request('_config');
+        $this->attribute = $attribute;
     }
 
     public function index()
@@ -28,6 +32,25 @@ class CatalogRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view']);
+        $ruleCriterias = [
+            'cart' => [
+                0 => 'sub_total',
+                1 => 'shipping_total',
+                2 => 'grand_total'
+            ],
+
+            'product' => [
+                0 => 'attribute',
+                1 => 'attribute_groups',
+                2 => 'attribute_familes'
+            ]
+        ];
+
+        return view($this->_config['view'])->with('criteria', [$ruleCriterias, $this->attribute->getNameAndId()]);
+    }
+
+    public function store()
+    {
+        dd(request()->all());
     }
 }
