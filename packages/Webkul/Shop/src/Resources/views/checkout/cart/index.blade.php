@@ -74,7 +74,11 @@
                                                 <div class="wrap">
                                                     <label for="qty[{{$item->id}}]">{{ __('shop::app.checkout.cart.quantity.quantity') }}</label>
 
-                                                    <input type="text" class="control" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}" data-vv-as="&quot;{{ __('shop::app.checkout.cart.quantity.quantity') }}&quot;">
+                                                    <input class="control quantity-change" value="-" style="width: 35px; border-radius: 3px 0px 0px 3px;" onclick="updateCartQunatity('remove')" readonly>
+
+                                                    <input type="text" class="control quantity-change" id="cart-quantity" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}" data-vv-as="&quot;{{ __('shop::app.checkout.cart.quantity.quantity') }}&quot;" style="border-right: none; border-left: none; border-radius: 0px;" readonly>
+
+                                                    <input class="control quantity-change" value="+" style="width: 35px; padding: 0 12px; border-radius: 0px 3px 3px 0px;" onclick=updateCartQunatity('add') readonly>
                                                 </div>
 
                                                 <span class="control-error" v-if="errors.has('qty[{{$item->id}}]')">@{{ errors.first('qty[{!!$item->id!!}]') }}</span>
@@ -165,6 +169,22 @@
     <script>
         function removeLink(message) {
             if (!confirm(message))
+            event.preventDefault();
+        }
+
+        function updateCartQunatity(operation) {
+            var quantity = document.getElementById('cart-quantity').value;
+
+            if (operation == 'add') {
+                quantity = parseInt(quantity) + 1;
+            } else if (operation == 'remove') {
+                if (quantity > 1) {
+                    quantity = parseInt(quantity) - 1;
+                } else {
+                    alert('{{ __('shop::app.products.less-quantity') }}');
+                }
+            }
+            document.getElementById("cart-quantity").value = quantity;
             event.preventDefault();
         }
     </script>
