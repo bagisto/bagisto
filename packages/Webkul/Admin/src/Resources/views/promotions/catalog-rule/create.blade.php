@@ -7,6 +7,7 @@
 @section('content')
     <div class="content">
         <form method="POST" action="{{ route('admin.catalog-rule.store') }}" @submit.prevent="onSubmit">
+            @csrf
 
             <div class="page-header">
                 <div class="page-title">
@@ -98,6 +99,7 @@
 
                         <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
                             <option value="attribute">Attribute</option>
+                            <option value="category">Category</option>
                         </select>
 
                         <span class="control-error" v-if="errors.has('criteria')">@{{ errors.first('criteria') }}</span>
@@ -107,21 +109,21 @@
                 </div>
 
                 <div class="condition-set">
-                    <div v-for="(attr, index) in attrs">
+                    <div v-for="(attr, index) in attrs" :key="index">
                         <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: flex-start;">
                             <span style="padding-top: 18px; margin-right: 15px;">Attribute is </span>
 
-                            <select class="control" name="attributes[][attribute]" v-validate="'required'" style="width: 120px; margin-right: 15px;">
+                            <select class="control" name="attributes[][attribute]" v-model="attrs[index].attribute" v-validate="'required'" style="width: 120px; margin-right: 15px;">
                                 <option disabled="disabled">Select attribute</option>
                                 <option v-for="attribute in attributes" :value="attribute.id">@{{ attribute.name }}</option>
                             </select>
 
-                            <select class="control" name="attributes[][condition]" v-validate="'required'" style="width: 120px; margin-right: 15px;">
-                                <option>Contains</option>
-                                <option>Is Any Of</option>
+                            <select class="control" name="attributes[][condition]" v-model="attrs[index].condition" v-validate="'required'" style="width: 120px; margin-right: 15px;">
+                                <option>contains</option>
+                                <option>is any of</option>
                             </select>
 
-                            <input type="text" class="control" name="attributes[][value]" placeholder="Enter Value(s)" title="Use comma for multiple values" style="width: 180px;">
+                            <input type="text" class="control" name="attributes[][value]" v-model="attrs[index].value" placeholder="Enter Value(s)" title="Use comma for multiple values" style="width: 180px;">
 
                             <span class="icon cross-icon" style="margin-top: 12px; height: 32px; width: 32px;" v-on:click="removeAttr(index)"></span>
                         </div>
@@ -129,19 +131,17 @@
 
                     <div v-for="(cat, index) in cats">
                         <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: flex-start;">
-                            <span style="padding-top: 18px; margin-right: 15px;">Category is </span>
+                            <span style="padding-top: 18px; margin-right: 15px;">Category </span>
 
-                            <select class="control" name="categories[][category]" v-validate="'required'" value="{{ old('category') }}" data-vv-as="&quot;{{ __('admin::app.promotion.category') }}&quot;" style="width: 120px;">
+                            <select class="control" name="attributes[][condition]" v-model="cats[index].condition" v-validate="'required'" style="width: 120px; margin-right: 15px;"">
+                                <option>is</option>
+                                <option>is any of</option>
+                            </select>
+
+                            <select class="control" name="categories[][category]" v-model="cats[index].category" v-validate="'required'" value="{{ old('category') }}" data-vv-as="&quot;{{ __('admin::app.promotion.category') }}&quot;" style="width: 120px; margin-right: 15px;">
                                 <option disabled="disabled">Select Category</option>
                                 <option v-for="category in categories" :value="category.id">@{{ category.name }}</option>
                             </select>
-
-                            <select class="control" name="attributes[][condition]" v-validate="'required'" style="width: 120px;">
-                                <option>Contains</option>
-                                <option>Is Any Of</option>
-                            </select>
-
-                            <input type="text" class="control" name="attributes[][value]" style="width: 180px;">
 
                             <span class="icon cross-icon" style="margin-top: 12px; height: 32px; width: 32px;" v-on:click="removeCat(index)"></span>
                         </div>
@@ -179,7 +179,6 @@
                         cat: {
                             category: null,
                             condition: null,
-                            value: null
                         },
                         attrs: [],
                         cats: []
@@ -201,8 +200,19 @@
 
                         if (this.condition_on == 'attribute') {
                             this.attrs.push(this.attr);
+
+                            this.attr = {
+                                attribute: null,
+                                condition: null,
+                                value: null
+                            };
                         } else if (this.condition_on == 'category') {
                             this.cats.push(this.cat);
+
+                            this.cat = {
+                                category: null,
+                                condition: null
+                            };
                         }
                     },
 
