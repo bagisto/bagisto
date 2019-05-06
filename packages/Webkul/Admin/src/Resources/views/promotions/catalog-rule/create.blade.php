@@ -108,7 +108,7 @@
 
                 <div class="condition-set">
                     <div v-for="(attr, index) in attrs">
-                        <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: flex-start;">
+                        <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: space-between;">
                             <span style="padding-top: 18px; margin-right: 15px;">Attribute is </span>
 
                             <select class="control" name="attributes[][attribute]" v-validate="'required'" style="width: 220px;">
@@ -123,12 +123,12 @@
 
                             <input type="text" class="control" name="attributes[][value]">
 
-                            <span class="icon cross-icon" style="margin-top: 12px; height: 32px; width: 32px;" v-on:click="removeAttr(index)"></span>
+                            <span class="icon cross-icon" style="margin-top: 12px; height: 32px; width: 48px;" v-on:click="removeAttr(index)"></span>
                         </div>
                     </div>
 
                     <div v-for="(cat, index) in cats">
-                        <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: flex-start;">
+                        <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: space-between;">
                             <span style="padding-top: 18px; margin-right: 15px;">Category is </span>
 
                             <select class="control" name="categories[][category]" v-validate="'required'" value="{{ old('category') }}" data-vv-as="&quot;{{ __('admin::app.promotion.category') }}&quot;" style="width: 220px;">

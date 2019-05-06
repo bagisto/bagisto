@@ -103,11 +103,15 @@ class ProductForm extends FormRequest
                 }
 
                 if ($attribute->type == 'text' && $attribute->validation) {
-                    array_push($validations, $attribute->validation);
+                    if ($attribute->validation == 'decimal') {
+                        array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
+                    } else {
+                        array_push($validations, $attribute->validation);
+                    }
                 }
 
                 if ($attribute->type == 'price') {
-                    array_push($validations, 'decimal');
+                    array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
                 }
 
                 if ($attribute->is_unique) {
