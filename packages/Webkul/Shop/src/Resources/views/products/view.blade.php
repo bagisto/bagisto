@@ -123,19 +123,19 @@
             inject: ['$validator'],
 
             methods: {
-                onSubmit (e) {
+                onSubmit: function(e) {
                     if (e.target.getAttribute('type') != 'submit')
                         return;
 
                     e.preventDefault();
 
-                    this.$validator.validateAll().then(result => {
+                    this.$validator.validateAll().then(function (result) {
                         if (result) {
-                            if (e.target.getAttribute('data-href')) {
-                                window.location.href = e.target.getAttribute('data-href');
-                            } else {
-                                document.getElementById('product-form').submit();
-                            }
+                          if (e.target.getAttribute('data-href')) {
+                            window.location.href = e.target.getAttribute('data-href');
+                          } else {
+                            document.getElementById('product-form').submit();
+                          }
                         }
                     });
                 }

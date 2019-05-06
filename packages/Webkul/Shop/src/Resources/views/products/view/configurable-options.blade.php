@@ -79,7 +79,7 @@
 
                 inject: ['$validator'],
 
-                data() {
+                data: function() {
                     return {
                         config: @json($config),
 
@@ -93,7 +93,7 @@
                     }
                 },
 
-                created () {
+                created: function() {
                     this.galleryImages = galleryImages.slice(0)
 
                     var config = @json($config);
@@ -125,7 +125,7 @@
                 },
 
                 methods: {
-                    configure (attribute, value) {
+                    configure: function(attribute, value) {
                         this.simpleProduct = this.getSelectedProductId(attribute, value);
 
                         if (value) {
@@ -170,7 +170,7 @@
                         this.changeStock(this.simpleProduct);
                     },
 
-                    getSelectedIndex (attribute, value) {
+                    getSelectedIndex: function(attribute, value) {
                         var selectedIndex = 0;
 
                         attribute.options.forEach(function(option, index) {
@@ -182,7 +182,7 @@
                         return selectedIndex;
                     },
 
-                    getSelectedProductId (attribute, value) {
+                    getSelectedProductId: function(attribute, value) {
                         var options = attribute.options,
                             matchedOptions;
 
@@ -197,7 +197,7 @@
                         return undefined;
                     },
 
-                    fillSelect (attribute) {
+                    fillSelect: function(attribute) {
                         var options = this.getAttributeOptions(attribute.id),
                             prevOption,
                             index = 1,
@@ -238,7 +238,7 @@
                         }
                     },
 
-                    resetChildren (attribute) {
+                    resetChildren: function(attribute) {
                         if (attribute.childAttributes) {
                             attribute.childAttributes.forEach(function (set) {
                                 set.selectedIndex = 0;
@@ -268,7 +268,7 @@
                         }
                     },
 
-                    getAttributeOptions (attributeId) {
+                    getAttributeOptions: function (attributeId) {
                         var this_this = this,
                             options;
 
@@ -281,7 +281,7 @@
                         return options;
                     },
 
-                    reloadPrice () {
+                    reloadPrice: function () {
                         var selectedOptionCount = 0;
 
                         this.childAttributes.forEach(function(attribute) {
@@ -308,7 +308,7 @@
                         }
                     },
 
-                    changeProductImages () {
+                    changeProductImages: function () {
                         galleryImages.splice(0, galleryImages.length)
 
                         this.galleryImages.forEach(function(image) {
@@ -322,7 +322,7 @@
                         }
                     },
 
-                    changeStock(productId) {
+                    changeStock: function (productId) {
                         var inStockElement = document.getElementById('in-stock');
 
                         if (productId) {
