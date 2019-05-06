@@ -18,7 +18,7 @@
 
                         <div class="cart-item-list" style="margin-top: 0">
                             @csrf
-                            @foreach ($cart->items as $item)
+                            @foreach ($cart->items as $key => $item)
                                 <?php
                                     if ($item->type == "configurable")
                                         $productBaseImage = $productImageHelper->getProductBaseImage($item->child->product);
@@ -74,11 +74,12 @@
                                                 <div class="wrap">
                                                     <label for="qty[{{$item->id}}]">{{ __('shop::app.checkout.cart.quantity.quantity') }}</label>
 
-                                                    <input class="control quantity-change" value="-" style="width: 35px; border-radius: 3px 0px 0px 3px;" onclick="updateCartQunatity('remove')" readonly>
+                                                    <input class="control quantity-change" value="-" style="width: 35px; border-radius: 3px 0px 0px 3px;" onclick="updateCartQunatity('remove', {{$key}})" readonly>
 
-                                                    <input type="text" class="control quantity-change" id="cart-quantity" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}" data-vv-as="&quot;{{ __('shop::app.checkout.cart.quantity.quantity') }}&quot;" style="border-right: none; border-left: none; border-radius: 0px;" readonly>
+                                                    <input type="text" class="control quantity-change" id="cart-quantity{{ $key
+                                                    }}" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}" data-vv-as="&quot;{{ __('shop::app.checkout.cart.quantity.quantity') }}&quot;" style="border-right: none; border-left: none; border-radius: 0px;" readonly>
 
-                                                    <input class="control quantity-change" value="+" style="width: 35px; padding: 0 12px; border-radius: 0px 3px 3px 0px;" onclick=updateCartQunatity('add') readonly>
+                                                    <input class="control quantity-change" value="+" style="width: 35px; padding: 0 12px; border-radius: 0px 3px 3px 0px;" onclick="updateCartQunatity('add', {{$key}})" readonly>
                                                 </div>
 
                                                 <span class="control-error" v-if="errors.has('qty[{{$item->id}}]')">@{{ errors.first('qty[{!!$item->id!!}]') }}</span>
@@ -172,8 +173,8 @@
             event.preventDefault();
         }
 
-        function updateCartQunatity(operation) {
-            var quantity = document.getElementById('cart-quantity').value;
+        function updateCartQunatity(operation, index) {
+            var quantity = document.getElementById('cart-quantity'+index).value;
 
             if (operation == 'add') {
                 quantity = parseInt(quantity) + 1;
@@ -184,7 +185,7 @@
                     alert('{{ __('shop::app.products.less-quantity') }}');
                 }
             }
-            document.getElementById("cart-quantity").value = quantity;
+            document.getElementById('cart-quantity'+index).value = quantity;
             event.preventDefault();
         }
     </script>
