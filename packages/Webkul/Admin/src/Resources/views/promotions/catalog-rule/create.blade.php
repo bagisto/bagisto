@@ -103,45 +103,45 @@
                         <span class="control-error" v-if="errors.has('criteria')">@{{ errors.first('criteria') }}</span>
                     </div>
 
-                    <span class="btn btn-primary btn-lg" v-on:click="addCondition">Select Condition</span>
+                    <span class="btn btn-primary btn-lg" v-on:click="addCondition">Add Condition</span>
                 </div>
 
                 <div class="condition-set">
                     <div v-for="(attr, index) in attrs">
-                        <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: space-between;">
+                        <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: flex-start;">
                             <span style="padding-top: 18px; margin-right: 15px;">Attribute is </span>
 
-                            <select class="control" name="attributes[][attribute]" v-validate="'required'" style="width: 220px;">
+                            <select class="control" name="attributes[][attribute]" v-validate="'required'" style="width: 120px; margin-right: 15px;">
                                 <option disabled="disabled">Select attribute</option>
                                 <option v-for="attribute in attributes" :value="attribute.id">@{{ attribute.name }}</option>
                             </select>
 
-                            <select class="control" name="attributes[][condition]" v-validate="'required'" style="width: 220px;">
+                            <select class="control" name="attributes[][condition]" v-validate="'required'" style="width: 120px; margin-right: 15px;">
                                 <option>Contains</option>
                                 <option>Is Any Of</option>
                             </select>
 
-                            <input type="text" class="control" name="attributes[][value]">
+                            <input type="text" class="control" name="attributes[][value]" placeholder="Enter Value(s)" title="Use comma for multiple values" style="width: 180px;">
 
-                            <span class="icon cross-icon" style="margin-top: 12px; height: 32px; width: 48px;" v-on:click="removeAttr(index)"></span>
+                            <span class="icon cross-icon" style="margin-top: 12px; height: 32px; width: 32px;" v-on:click="removeAttr(index)"></span>
                         </div>
                     </div>
 
                     <div v-for="(cat, index) in cats">
-                        <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: space-between;">
+                        <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: flex-start;">
                             <span style="padding-top: 18px; margin-right: 15px;">Category is </span>
 
-                            <select class="control" name="categories[][category]" v-validate="'required'" value="{{ old('category') }}" data-vv-as="&quot;{{ __('admin::app.promotion.category') }}&quot;" style="width: 220px;">
+                            <select class="control" name="categories[][category]" v-validate="'required'" value="{{ old('category') }}" data-vv-as="&quot;{{ __('admin::app.promotion.category') }}&quot;" style="width: 120px;">
                                 <option disabled="disabled">Select Category</option>
                                 <option v-for="category in categories" :value="category.id">@{{ category.name }}</option>
                             </select>
 
-                            <select class="control" name="attributes[][condition]" v-validate="'required'" style="width: 220px;">
+                            <select class="control" name="attributes[][condition]" v-validate="'required'" style="width: 120px;">
                                 <option>Contains</option>
                                 <option>Is Any Of</option>
                             </select>
 
-                            <input type="text" class="control" name="attributes[][value]">
+                            <input type="text" class="control" name="attributes[][value]" style="width: 180px;">
 
                             <span class="icon cross-icon" style="margin-top: 12px; height: 32px; width: 32px;" v-on:click="removeCat(index)"></span>
                         </div>

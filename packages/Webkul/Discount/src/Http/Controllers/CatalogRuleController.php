@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
+use Webkul\Product\Repositories\ProductFlatRepository as Product;
 
 /**
  * Catalog Rule controller
@@ -22,13 +23,15 @@ class CatalogRuleController extends Controller
     protected $attribute;
     protected $attributeFamily;
     protected $category;
+    protected $product;
 
-    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category)
+    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product)
     {
         $this->_config = request('_config');
         $this->attribute = $attribute;
         $this->attributeFamily = $attributeFamily;
         $this->category = $category;
+        $this->product = $product;
     }
 
     public function index()
@@ -46,7 +49,8 @@ class CatalogRuleController extends Controller
         dd(request()->all());
     }
 
-    public function fetchAttribute() {
+    public function fetchAttribute()
+    {
         return request()->all();
     }
 }
