@@ -621,6 +621,8 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog-rule.create'
                 ])->name('admin.catalog-rule.store');
 
+                Route::post('/fetch/attribute', 'Webkul\Discount\Controllers\CatalogRuleController@fetchAttribute');
+
                 Route::get('/cart-rule', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [
                     'view' => 'admin::promotions.cart-rule.index'
                 ])->name('admin.cart-rule.index');

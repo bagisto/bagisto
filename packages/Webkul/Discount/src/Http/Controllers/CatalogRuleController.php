@@ -45,4 +45,8 @@ class CatalogRuleController extends Controller
     {
         dd(request()->all());
     }
+
+    public function fetchAttribute() {
+        return request()->all();
+    }
 }

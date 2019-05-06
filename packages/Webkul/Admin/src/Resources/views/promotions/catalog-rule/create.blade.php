@@ -95,11 +95,11 @@
                 <div class="add-condition">
                     <div class="control-group" :class="[errors.has('criteria') ? 'has-error' : '']">
                         <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
+
                         <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
-                            <option disabled="disabled">Select Criteria</option>
-                            <option value="attribute">Attribute Is</option>
-                            <option value="category">Category Is</option>
+                            <option value="attribute">Attribute</option>
                         </select>
+
                         <span class="control-error" v-if="errors.has('criteria')">@{{ errors.first('criteria') }}</span>
                     </div>
 
@@ -108,22 +108,42 @@
 
                 <div class="condition-set">
                     <div v-for="(attr, index) in attrs">
-                        <div class="control-group" style="display: flex; flex-direction: row;">
-                            <span>Attribute is </span>
-                            <select type="text" class="control" name="attribute" v-model="attr.attribute" v-validate="'required'" value="{{ old('attribute') }}" data-vv-as="&quot;{{ __('admin::app.promotion.attribute') }}&quot;">
+                        <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: flex-start;">
+                            <span style="padding-top: 18px; margin-right: 15px;">Attribute is </span>
+
+                            <select class="control" name="attributes[][attribute]" v-validate="'required'" style="width: 220px;">
                                 <option disabled="disabled">Select attribute</option>
-                                <option v-for="attribute in attributes" value="attribute.id">@{{ attribute.name }}</option>
+                                <option v-for="attribute in attributes" :value="attribute.id">@{{ attribute.name }}</option>
                             </select>
+
+                            <select class="control" name="attributes[][condition]" v-validate="'required'" style="width: 220px;">
+                                <option>Contains</option>
+                                <option>Is Any Of</option>
+                            </select>
+
+                            <input type="text" class="control" name="attributes[][value]">
+
+                            <span class="icon cross-icon" style="margin-top: 12px; height: 32px; width: 32px;" v-on:click="removeAttr(index)"></span>
                         </div>
                     </div>
 
-                    <div v-for="(category, index) in categories">
-                        <div class="control-group" style="display: flex; flex-direction: row;">
-                            <span>Category is </span>
-                            <select type="text" class="control" name="category" v-model="attr.category" v-validate="'required'" value="{{ old('category') }}" data-vv-as="&quot;{{ __('admin::app.promotion.category') }}&quot;">
+                    <div v-for="(cat, index) in cats">
+                        <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: flex-start;">
+                            <span style="padding-top: 18px; margin-right: 15px;">Category is </span>
+
+                            <select class="control" name="categories[][category]" v-validate="'required'" value="{{ old('category') }}" data-vv-as="&quot;{{ __('admin::app.promotion.category') }}&quot;" style="width: 220px;">
                                 <option disabled="disabled">Select Category</option>
-                                <option v-for="category in categories" value="category.id">@{{ category.name }}</option>
+                                <option v-for="category in categories" :value="category.id">@{{ category.name }}</option>
                             </select>
+
+                            <select class="control" name="attributes[][condition]" v-validate="'required'" style="width: 220px;">
+                                <option>Contains</option>
+                                <option>Is Any Of</option>
+                            </select>
+
+                            <input type="text" class="control" name="attributes[][value]">
+
+                            <span class="icon cross-icon" style="margin-top: 12px; height: 32px; width: 32px;" v-on:click="removeCat(index)"></span>
                         </div>
                     </div>
                 </div>
@@ -143,9 +163,26 @@
                         channels: [],
                         conditions: [],
                         attrs_count: 0,
+                        cats_count: 0,
                         name: null,
                         priority: 0,
-                        starts_from: null
+                        starts_from: null,
+                        ends_till: null,
+                        description: null,
+                        customer_groups: [],
+                        criteria: null,
+                        attr: {
+                            attribute: null,
+                            condition: null,
+                            value: null
+                        },
+                        cat: {
+                            category: null,
+                            condition: null,
+                            value: null
+                        },
+                        attrs: [],
+                        cats: []
                     }
                 },
 
@@ -154,20 +191,27 @@
 
                 methods: {
                     addCondition () {
-                        if (this.criteria == "attribute" || this.criteria == "attribute_family" || this.criteria == "cart_attribute") {
+                        if (this.criteria == 'attribute' || this.criteria == 'category') {
                             this.condition_on = this.criteria;
                         } else {
                             alert('please try again');
+
+                            return false;
                         }
 
-                        if (this.condition_on == "attribute") {
-                            if (this.attrs_count == 0) {
-                                // this.enableAttrLine = true;
-                            }
-
-                            this.attrs_count++;
+                        if (this.condition_on == 'attribute') {
                             this.attrs.push(this.attr);
+                        } else if (this.condition_on == 'category') {
+                            this.cats.push(this.cat);
                         }
+                    },
+
+                    removeAttr(index) {
+                        this.attrs.splice(index, 1);
+                    },
+
+                    removeCat(index) {
+                        this.cats.splice(index, 1);
                     }
                 }
             });
