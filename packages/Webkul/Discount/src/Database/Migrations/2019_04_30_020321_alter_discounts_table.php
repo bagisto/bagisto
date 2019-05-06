@@ -22,6 +22,7 @@ class AlterDiscountsTable extends Migration
             $table->dateTime('ends_till');
             $table->integer( 'priority')->unsigned();
             $table->boolean('ends_subsequent')->default(false);
+            $table->boolean('is_all')->default(1);
         });
 
         Schema::table('discount_channels', function (Blueprint $table) {

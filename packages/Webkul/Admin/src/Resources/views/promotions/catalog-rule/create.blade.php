@@ -97,9 +97,8 @@
                         <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
                         <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
                             <option disabled="disabled">Select Criteria</option>
-                            <option value="attribute">Attribute</option>
-                            <option value="attribute_family">Attribute Family</option>
-                            <option value="cart_attribute">Cart Attribute</option>
+                            <option value="attribute">Attribute Is</option>
+                            <option value="category">Category Is</option>
                         </select>
                         <span class="control-error" v-if="errors.has('criteria')">@{{ errors.first('criteria') }}</span>
                     </div>
@@ -107,64 +106,25 @@
                     <span class="btn btn-primary btn-lg" v-on:click="addCondition">Select Condition</span>
                 </div>
 
-                <div class="selectors-set">
-                    <div class="control-group" :class="[errors.has('attribute') ? 'has-error' : '']" v-if="enableAttribute">
-                        <label for="attribute" class="required">{{ __('admin::app.promotion.select-attr') }}</label>
-                        <select type="text" class="control" name="attribute" v-model="attribute" v-validate="'required'" value="{{ old('attribute') }}" data-vv-as="&quot;{{ __('admin::app.promotion.attribute') }}&quot;">
-                            <option disabled="disabled">Select attribute</option>
-                            <option v-for="attribute in attributes" value="attribute.id">@{{ attribute.name }}</option>
-                        </select>
-                        <span class="control-error" v-if="errors.has('attribute')">@{{ errors.first('attribute') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('attribute_family') ? 'has-error' : '']" v-if="enableAttributeFamily">
-                        <label for="attribute_family" class="required">{{ __('admin::app.promotion.select-attr-fam') }}</label>
-                        <select type="text" class="control" v-model="attribute_family" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.attribute') }}&quot;">
-                            <option disabled="disabled">Select Attribute Family</option>
-                            <option v-for="attribute_family in attribute_families" value="attribute_family.id">@{{ attribute_family.name }}</option>
-                        </select>
-                        <span class="control-error" v-if="errors.has('attribute_family')">@{{ errors.first('attribute_family') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('cart_attribute') ? 'has-error' : '']" v-if="enableCartAttribute">
-                        <label for="cart_attribute" class="required">{{ __('admin::app.promotion.select-cart-attr') }}</label>
-                        <select type="text" class="control" name="cart_attribute" v-model="cart_attribute" v-validate="'required'" value="{{ old('cart_attribute') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
-                            <option disabled="disabled">Select Cart Attribute</option>
-                            <option v-for="(cartAttribute, index) in this.criteria.cart" value="cartAttribute[index]">@{{ cartAttribute[index] }}</option>
-                        </select>
-                        <span class="control-error" v-if="errors.has('cart_attribute')">@{{ errors.first('cart_attribute') }}</span>
-                    </div>
-                </div>
-
                 <div class="condition-set">
-                    <div class="control-group" :class="[errors.has('cart_attr') ? 'has-error' : '']" v-if="enableCartAttrLine">
-                        <label for="cart_attr" class="required">{{ __('admin::app.promotion.select-cart-attr') }}</label>
-                        <input type="text" class="control" v-model="cart_attr.cart_attribute">
-                        <input type="text" class="control" v-model="cart_attr.condition_one">
-                        <input type="text" class="control" v-model="cart_attr.value_one">
-                        <input type="text" class="control" v-model="cart_attr.condition_two">
-                        <input type="text" class="control" v-model="cart_attr.value_two">
-                        <span class="control-error" v-if="errors.has('cart_attr')">@{{ errors.first('cart_attr') }}</span>
+                    <div v-for="(attr, index) in attrs">
+                        <div class="control-group" style="display: flex; flex-direction: row;">
+                            <span>Attribute is </span>
+                            <select type="text" class="control" name="attribute" v-model="attr.attribute" v-validate="'required'" value="{{ old('attribute') }}" data-vv-as="&quot;{{ __('admin::app.promotion.attribute') }}&quot;">
+                                <option disabled="disabled">Select attribute</option>
+                                <option v-for="attribute in attributes" value="attribute.id">@{{ attribute.name }}</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="control-group" :class="[errors.has('attr') ? 'has-error' : '']" v-if="enableAttrLine">
-                        <label for="attr" class="required">{{ __('admin::app.promotion.select-attr') }}</label>
-                        <input type="text" class="control" v-model="attr.attribute">
-                        <input type="text" class="control" v-model="attr.condition_one">
-                        <input type="text" class="control" v-model="attr.value_one">
-                        <input type="text" class="control" v-model="attr.condition_two">
-                        <input type="text" class="control" v-model="attr.value_two">
-                        <span class="control-error" v-if="errors.has('attr')">@{{ errors.first('attr') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('attr_fam') ? 'has-error' : '']" v-if="enableAttrFamLine">
-                        <label for="attr_fam" class="required">{{ __('admin::app.promotion.select-attr') }}</label>
-                        <input type="text" class="control" v-model="attr_fam.attribute">
-                        <input type="text" class="control" v-model="attr_fam.condition_one">
-                        <input type="text" class="control" v-model="attr_fam.value_one">
-                        <input type="text" class="control" v-model="attr_fam.condition_two">
-                        <input type="text" class="control" v-model="attr_fam.value_two">
-                        <span class="control-error" v-if="errors.has('attr_fam')">@{{ errors.first('attr_fam') }}</span>
+                    <div v-for="(category, index) in categories">
+                        <div class="control-group" style="display: flex; flex-direction: row;">
+                            <span>Category is </span>
+                            <select type="text" class="control" name="category" v-model="attr.category" v-validate="'required'" value="{{ old('category') }}" data-vv-as="&quot;{{ __('admin::app.promotion.category') }}&quot;">
+                                <option disabled="disabled">Select Category</option>
+                                <option v-for="category in categories" value="category.id">@{{ category.name }}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -178,44 +138,11 @@
 
                 data () {
                     return {
-                        attributes: @json($criteria[1]),
-                        attribute: null,
-                        attribute_families: @json($criteria[2]),
-                        attribute_family: null,
-                        cart_attribute: null,
+                        attributes: @json($criteria[0]),
+                        categories: @json($criteria[1]),
                         channels: [],
-                        criteria: @json($criteria[0]),
                         conditions: [],
-                        cart_attr: {
-                            cart_attribute : null,
-                            condition_one: null,
-                            value_one: null,
-                            condition_two: null,
-                            value_two: null
-                        },
-                        attr_family: {
-                            attribute_family : null,
-                            condition_one: null,
-                            value_one: null,
-                            condition_two: null,
-                            value_two: null
-                        },
-                        attr: {
-                            attribute : null,
-                            condition_one: null,
-                            value_one: null,
-                            condition_two: null,
-                            value_two: null
-                        },
-                        customer_groups: [],
-                        description: null,
-                        ends_till: null,
-                        enableAttribute: false,
-                        enableCartAttribute: false,
-                        enableAttributeFamily: false,
-                        enableCartAttrLine: false,
-                        enableAttrLine: false,
-                        enableAttrFamLine: false,
+                        attrs_count: 0,
                         name: null,
                         priority: 0,
                         starts_from: null
@@ -223,11 +150,6 @@
                 },
 
                 mounted () {
-                    console.log(this.criteria.cart);
-
-                    for(index in this.criteria.cart) {
-                        console.log(this.criteria.cart[index]);
-                    }
                 },
 
                 methods: {
@@ -239,19 +161,12 @@
                         }
 
                         if (this.condition_on == "attribute") {
-                            this.attr.push();
+                            if (this.attrs_count == 0) {
+                                // this.enableAttrLine = true;
+                            }
 
-                            this.enableAttribute = true;
-                            this.enableCartAttribute = false;
-                            this.enableAttributeFamily = false;
-                        } else if (this.condition_on == "attribute_family") {
-                            this.enableAttributeFamily = true;
-                            this.enableAttribute = false;
-                            this.enableCartAttribute = false;
-                        } else {
-                            this.enableCartAttribute = true;
-                            this.enableAttributeFamily = false;
-                            this.enableAttribute = false;
+                            this.attrs_count++;
+                            this.attrs.push(this.attr);
                         }
                     }
                 }

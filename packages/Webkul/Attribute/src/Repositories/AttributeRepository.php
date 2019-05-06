@@ -216,8 +216,6 @@ class AttributeRepository extends Repository
      */
     public function getNameAndId()
     {
-        $static = [];
-
         $attributes = $this->model->all();
         $trimmed = array();
 

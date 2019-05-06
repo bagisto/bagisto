@@ -212,4 +212,21 @@ class CategoryRepository extends Repository
             $category->save();
         }
     }
+
+    public function getNameAndId()
+    {
+        $categories = $this->model->all();
+        $trimmed = array();
+
+        foreach ($categories as $key => $category) {
+            if ($category->name != null || $category->name != "") {
+                $trimmed[$key] = [
+                    'id' => $category->id,
+                    'name' => $category->name
+                ];
+            }
+        }
+
+        return $trimmed;
+    }
 }

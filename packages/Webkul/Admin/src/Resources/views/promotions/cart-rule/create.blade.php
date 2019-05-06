@@ -31,10 +31,20 @@
                 <div class="form-container">
                     @csrf()
 
-                    <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
-                        <label for="first_name" class="required">{{ __('shop::app.customer.signup-form.firstname') }}</label>
-                        <input type="text" class="control" name="first_name" v-validate="'required'" value="{{ old('first_name') }}" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.firstname') }}&quot;">
-                        <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
+                    <div v-for="(cart_attr, index) in cart_attrs">
+                        <div class="control-group" style="display: flex; flex-direction: row;">
+                            <label for="cart_attr" class="required">{{ __('admin::app.promotion.select-cart-attr') }}</label>
+
+                            <select type="text" class="control" name="cart_attribute" v-model="cart_attr.cart_attribute" v-validate="'required'" value="{{ old('cart_attribute') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
+                                <option disabled="disabled">Select Cart Attribute</option>
+                                <option v-for="(cartAttribute, index) in cart_attrs" value="cartAttribute[index]">@{{ cartAttribute[index] }}</option>
+                            </select>
+
+                            <input type="text" class="control" v-model="cart_attr.condition_one" placeholder="select condition">
+                            <input type="text" class="control" v-model="cart_attr.value_one" placeholder="enter value for condtion">
+                            <input type="text" class="control" v-model="cart_attr.condition_two" placeholder="enter condition two">
+                            <input type="text" class="control" v-model="cart_attr.value_two" placeholder="enter condition value">
+                        </div>
                     </div>
                 </div>
             </div>
