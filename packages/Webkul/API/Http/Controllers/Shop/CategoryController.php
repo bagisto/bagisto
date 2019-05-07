@@ -3,7 +3,6 @@
 namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\API\Http\Resources\Catalog\Category as CategoryResource;
 

@@ -468,6 +468,10 @@ class ProductRepository extends Repository
                         ->where('flat_variants.locale', $locale);
                 });
 
+                if (isset($params['search'])) {
+                    $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
+                }
+
                 if (isset($params['sort'])) {
                     $attribute = $this->attribute->findOneByField('code', $params['sort']);
 
