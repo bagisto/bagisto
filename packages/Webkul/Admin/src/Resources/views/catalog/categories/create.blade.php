@@ -208,13 +208,13 @@
 
             inject: ['$validator'],
 
-            data() {
+            data: function() {
                 return {
                     isRequired: true,
                 }
             },
 
-            created () {
+            created: function () {
                 var this_this = this;
 
                 $(document).ready(function () {

@@ -91,11 +91,15 @@
             created: function () {
                 var urlParams = new URLSearchParams(window.location.search);
 
-                var entries = urlParams.entries();
+                //var entries = urlParams.entries();
 
-                for (pair of entries) {
-                    this.appliedFilters[pair[0]] = pair[1].split(',');
-                }
+                //for (let pair of entries) {
+                    //this.appliedFilters[pair[0]] = pair[1].split(',');
+                //}
+
+                urlParams.forEach((v, i) =>
+                    this.appliedFilters[i] = v.split(',')
+                );
             },
 
             methods: {
@@ -119,7 +123,6 @@
                     window.location.href = "?" + params.join('&');
                 }
             }
-
         });
 
         Vue.component('filter-attribute-item', {

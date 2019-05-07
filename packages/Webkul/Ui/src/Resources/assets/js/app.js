@@ -26,3 +26,5 @@ require('vue-swatches/dist/vue-swatches.min.css');
 require("@babel/polyfill");
 
 require('url-search-params-polyfill');
+
+require('url-polyfill');

@@ -116,7 +116,7 @@
         var shippingHtml = '';
         var paymentHtml = '';
         var reviewHtml = '';
-        var summaryHtml = '';
+        var summaryHtml = Vue.compile(`<?php echo view('shop::checkout.total.summary', ['cart' => $cart])->render(); ?>`);
         var customerAddress = null;
 
         @auth('customer')

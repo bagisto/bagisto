@@ -255,19 +255,19 @@
 
         props: ['code'],
 
-        data() {
+        data: function () {
             return {
                 country: "",
             }
         },
 
-        mounted() {
+        mounted: function () {
             this.country = this.code;
             this.someHandler()
         },
 
         methods: {
-            someHandler() {
+            someHandler: function () {
                 this.$root.$emit('sendCountryCode', this.country)
             },
         }
@@ -302,7 +302,7 @@
 
         props: ['code'],
 
-        data() {
+        data: function () {
             return {
                 state: "",
 
@@ -312,15 +312,17 @@
             }
         },
 
-        mounted() {
+        mounted: function () {
             this.state = this.code
         },
 
         methods: {
-            haveStates() {
-                this.$root.$on('sendCountryCode', (country) => {
-                    this.country = country;
-                })
+            haveStates: function () {
+                var this_this = this;
+
+                this_this.$root.$on('sendCountryCode', function (country) {
+                    this_this.country = country;
+                });
 
                 if (this.countryStates[this.country] && this.countryStates[this.country].length)
                     return true;
