@@ -1,10 +1,10 @@
 <?php
 
-namespace Webkul\API\Http\Resources\Customer;
+namespace Webkul\API\Http\Resources\Checkout;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CustomerAddress extends JsonResource
+class CartAddress extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,6 +16,10 @@ class CustomerAddress extends JsonResource
     {
         return [
             'id' => $this->id,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'name' => $this->name,
+            'email' => $this->email,
             'address1' => explode(PHP_EOL, $this->address1),
             'country' => $this->country,
             'country_name' => country()->name($this->country),

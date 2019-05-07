@@ -30,8 +30,6 @@ class ProductController extends Controller
      */
     public function __construct(ProductRepository $productRepository)
     {
-        // $this->middleware('auth:api');
-        
         $this->productRepository = $productRepository;
     }
 
@@ -42,7 +40,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ProductResource::collection($this->productRepository->getAll());
+        return ProductResource::collection($this->productRepository->getAll(request()->input('category_id')));
     }
 
     /**
@@ -55,5 +53,29 @@ class ProductController extends Controller
         return new ProductResource(
                 $this->productRepository->findOrFail($id)
             );
+    }
+
+    /**
+     * Returns product's additional information.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function additionalInformation($id)
+    {
+        return response()->json([
+                'data' => app('Webkul\Product\Helpers\View')->getAdditionalData($this->productRepository->findOrFail($id))
+            ]);
+    }
+
+    /**
+     * Returns product's additional information.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function configurableConfig($id)
+    {
+        return response()->json([
+                'data' => app('Webkul\Product\Helpers\ConfigurableOption')->getConfigurationConfig($this->productRepository->findOrFail($id))
+            ]);
     }
 }
