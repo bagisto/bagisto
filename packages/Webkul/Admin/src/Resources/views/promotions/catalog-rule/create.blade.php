@@ -113,7 +113,7 @@
                         <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: flex-start;">
                             <span style="padding-top: 18px; margin-right: 15px;">Attribute is </span>
 
-                            <select class="control" name="attributes[][attribute]" v-model="attrs[index].attribute" v-validate="'required'" style="width: 120px; margin-right: 15px;">
+                            <select class="control" name="attributes[][attribute]" v-model="attrs[index].attribute" v-validate="'required'" style="width: 120px; height: 60px; margin-right: 15px;" title="You Can Make Multiple Selections Here" multiple>
                                 <option disabled="disabled">Select attribute</option>
                                 <option v-for="attribute in attributes" :value="attribute.id">@{{ attribute.name }}</option>
                             </select>
@@ -131,9 +131,9 @@
 
                     <div v-for="(cat, index) in cats">
                         <div class="control-group" :key="index" style="display: flex; flex-direction: row; align-content: center; justify-content: flex-start;">
-                            <span style="padding-top: 18px; margin-right: 15px;">Category </span>
+                            <span style="padding-top: 18px; height: 60px; margin-right: 15px;">Category </span>
 
-                            <select class="control" name="attributes[][condition]" v-model="cats[index].condition" v-validate="'required'" style="width: 120px; margin-right: 15px;"">
+                            <select class="control" name="attributes[][condition]" v-model="cats[index].condition" v-validate="'required'" style="width: 120px; margin-right: 15px;" title="You Can Make Multiple Selections Here" multiple>
                                 <option>is</option>
                                 <option>is any of</option>
                             </select>

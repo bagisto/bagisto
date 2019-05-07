@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDiscountCustomerGroupsTable extends Migration
+class DropAllDiscountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDiscountCustomerGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('discount_customer_group', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+        Schema::dropIfExists('discount_customer_group');
+        Schema::dropIfExists('discount_channels');
+        Schema::dropIfExists('discount_rules');
+        Schema::dropIfExists('discounts');
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateDiscountCustomerGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discount_customer_group');
+        //
     }
 }

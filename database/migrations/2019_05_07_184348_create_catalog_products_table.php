@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDiscountRulesTable extends Migration
+class CreateCatalogProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDiscountRulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('discount_rules', function (Blueprint $table) {
+        Schema::create('catalog_products', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateDiscountRulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discount_rules');
+        Schema::dropIfExists('catalog_products');
     }
 }
