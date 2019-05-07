@@ -17,6 +17,7 @@ class Attribute extends JsonResource
         return [
             'id' => $this->id,
             'code' => $this->code,
+            'type' => $this->type,
             'name' => $this->name,
             'swatch_type' => $this->swatch_type,
             'options' => AttributeOption::collection($this->options),

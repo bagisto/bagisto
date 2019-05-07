@@ -469,6 +469,10 @@ class ProductRepository extends Repository
                 });
 
                 if (isset($params['sort'])) {
+                    $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
+                }
+
+                if (isset($params['sort'])) {
                     $attribute = $this->attribute->findOneByField('code', $params['sort']);
 
                     if ($params['sort'] == 'price') {
