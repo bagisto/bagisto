@@ -97,9 +97,11 @@
                     //this.appliedFilters[pair[0]] = pair[1].split(',');
                 //}
 
-                urlParams.forEach((v, i) =>
-                    this.appliedFilters[i] = v.split(',')
-                );
+                var this_this = this;
+
+                urlParams.forEach(function (value, index) {
+                    this_this.appliedFilters[index] = value.split(',');
+                });
             },
 
             methods: {
