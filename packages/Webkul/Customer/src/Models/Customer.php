@@ -17,7 +17,7 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
 
     protected $table = 'customers';
 
-    protected $fillable = ['first_name', 'channel_id', 'last_name', 'gender', 'date_of_birth', 'email', 'password', 'customer_group_id', 'subscribed_to_news_letter', 'is_verified', 'token'];
+    protected $fillable = ['first_name', 'channel_id', 'last_name', 'gender', 'date_of_birth', 'email', 'password', 'customer_group_id', 'subscribed_to_news_letter', 'is_verified', 'token', 'notes'];
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -104,7 +104,7 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
     public function all_orders() {
         return $this->hasMany(OrderProxy::modelClass(), 'customer_id');
     }
-    
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -114,7 +114,7 @@ class Customer extends Authenticatable implements CustomerContract, JWTSubject
     {
         return $this->getKey();
     }
- 
+
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *

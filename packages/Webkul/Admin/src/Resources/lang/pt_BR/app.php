@@ -675,6 +675,14 @@ return [
             'is_user_defined' => 'Usuário Definido',
             'yes' => 'Sim'
         ],
+
+        'note' => [
+            'title' => 'Add Note',
+            'save-note' => 'Save Note',
+            'enter-note' => 'Enter Note',
+            'help-title' => 'Add Note On This Customer'
+        ],
+
         'customers' => [
             'add-title' => 'Add Cliente',
             'edit-title' => 'Editar Cliente',

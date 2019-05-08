@@ -181,7 +181,7 @@ return [
         'name' => 'admin::app.layouts.promotion',
         'route' => 'admin.catalog-rule.index',
         'sort' => 7,
-        'icon-class' => 'settings-icon',
+        'icon-class' => 'promotion-icon',
     ], [
         'key' => 'promotion.cart-rule',
         'name' => 'admin::app.promotion.cart-rule',

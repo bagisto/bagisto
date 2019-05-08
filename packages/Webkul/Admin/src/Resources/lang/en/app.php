@@ -711,6 +711,13 @@ return [
             'yes' => 'Yes'
         ],
 
+        'note' => [
+            'title' => 'Add Note',
+            'save-note' => 'Save Note',
+            'enter-note' => 'Enter Note',
+            'help-title' => 'Add Note On This Customer'
+        ],
+
         'customers' => [
             'add-title' => 'Add Customer',
             'edit-title' => 'Edit Customer',
@@ -731,6 +738,8 @@ return [
             'female' => 'Female',
             'phone' => 'Phone',
             'group-default' => 'Cannot delete the default group.',
+            'edit-help-title' => 'Edit Customer',
+            'delete-help-title' => 'Delete Customer'
         ],
 
         'reviews' => [

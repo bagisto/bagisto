@@ -76,14 +76,24 @@ class CustomerDataGrid extends DataGrid
             'type' => 'Edit',
             'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.customer.edit',
-            'icon' => 'icon pencil-lg-icon'
+            'icon' => 'icon pencil-lg-icon',
+            'title' => trans('admin::app.customers.customers.edit-help-title')
         ]);
 
         $this->addAction([
             'type' => 'Delete',
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.customer.delete',
-            'icon' => 'icon trash-icon'
+            'icon' => 'icon trash-icon',
+            'title' => trans('admin::app.customers.customers.delete-help-title')
+        ]);
+
+        $this->addAction([
+            'type' => 'Add Note',
+            'method' => 'GET',
+            'route' => 'admin.customer.note.create',
+            'icon' => 'icon note-icon',
+            'title' => trans('admin::app.customers.note.help-title')
         ]);
     }
 }

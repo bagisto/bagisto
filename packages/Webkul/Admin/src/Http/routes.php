@@ -60,6 +60,14 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.edit'
             ])->name('admin.customer.edit');
 
+            Route::get('customers/note/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@createNote')->defaults('_config',[
+                'view' => 'admin::customers.note'
+            ])->name('admin.customer.note.create');
+
+            Route::put('customers/note/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@storeNote')->defaults('_config',[
+                'redirect' => 'admin.customer.index'
+            ])->name('admin.customer.note.store');
+
             Route::put('customers/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@update')->defaults('_config', [
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.update');
