@@ -90,7 +90,7 @@
 
             inject: ['$validator'],
 
-            data() {
+            data: function () {
                 return {
                     is_zip: false
                 }

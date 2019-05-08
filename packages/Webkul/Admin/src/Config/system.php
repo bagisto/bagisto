@@ -63,5 +63,26 @@ return [
                 'type' => 'boolean'
             ]
         ],
-    ]
+    ], [
+        'key' => 'general',
+        'name' => 'admin::app.admin.system.general',
+        'sort' => 4,
+    ], [
+        'key' => 'general.content',
+        'name' => 'admin::app.admin.system.content',
+        'sort' => 1,
+    ], [
+        'key' => 'general.content.footer',
+        'name' => 'admin::app.admin.system.footer',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'footer_content',
+                'title' => 'admin::app.admin.system.footer-content',
+                'type' => 'text',
+                'channel_based' => true,
+                'locale_based' => true
+            ]
+        ]
+    ],
 ];

@@ -379,13 +379,15 @@
 
             template: '#date-filter-template',
 
-            data: () => ({
-                start: "{{ $startDate->format('Y-m-d') }}",
-                end: "{{ $endDate->format('Y-m-d') }}",
-            }),
+            data: function() {
+                return {
+                    start: "{{ $startDate->format('Y-m-d') }}",
+                    end: "{{ $endDate->format('Y-m-d') }}",
+                }
+            },
 
             methods: {
-                applyFilter(field, date) {
+                applyFilter: function(field, date) {
                     this[field] = date;
 
                     window.location.href = "?start=" + this.start + '&end=' + this.end;

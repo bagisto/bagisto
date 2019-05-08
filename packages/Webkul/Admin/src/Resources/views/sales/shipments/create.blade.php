@@ -362,7 +362,7 @@
 
             inject: ['$validator'],
 
-            data() {
+            data: function() {
                 return {
                     source: ""
                 }

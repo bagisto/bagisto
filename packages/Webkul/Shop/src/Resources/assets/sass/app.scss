@@ -2245,6 +2245,14 @@ section.cart {
                     margin-top: 18px;
                     margin-right: 15px;
                 }
+
+                .quantity-change {
+                    cursor: pointer;
+
+                    &:focus {
+                        border-color: $border-color !important;
+                    }
+                }
             }
         }
 
