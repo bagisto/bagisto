@@ -262,8 +262,23 @@ body {
 
 .control-container {
     border: 1px solid #c7c7c7;
-    padding: 20px;
+    padding: 10px;
     width: 50%;
+
+    .title-bar {
+        display: inline-flex;
+        justify-content: space-between;
+        width: 100%;
+
+        .icon {
+            cursor: pointer;
+        }
+
+        .icon.cross-icon {
+            height: 24px;
+            width: 24px;
+        }
+    }
 
     .control-group {
         display: flex;
@@ -274,6 +289,7 @@ body {
         border: 1px solid #c7c7c7;
         border-radius: 2px;
         margin-right: 15px;
+        margin-bottom: 0px;
     }
 
     .control-group::last-child {
