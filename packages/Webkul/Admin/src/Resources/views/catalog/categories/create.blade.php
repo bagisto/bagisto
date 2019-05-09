@@ -101,7 +101,9 @@
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false"></image-wrapper>
 
                                 <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
-                                    {{ $errors->first('image.*') }}
+                                    @foreach ($errors->get('image.*') as $key => $message)
+                                        @php echo str_replace($key, 'Image', $message[0]); @endphp
+                                    @endforeach
                                 </span>
 
                             </div>
