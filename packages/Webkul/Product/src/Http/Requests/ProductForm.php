@@ -74,6 +74,7 @@ class ProductForm extends FormRequest
             'variants.*.sku' => 'required',
             'variants.*.price' => 'required',
             'variants.*.weight' => 'required',
+            'images.*' => 'mimes:jpeg,jpg,bmp,png',
         ];
 
         $inputs = $this->all();
