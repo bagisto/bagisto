@@ -20,6 +20,3 @@
 
     </div>
 </accordian>
-
-
-
