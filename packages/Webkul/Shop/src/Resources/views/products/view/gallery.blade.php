@@ -76,14 +76,14 @@
                 }
             },
 
-            created () {
+            created: function() {
                 this.changeImage(this.images[0])
 
                 this.prepareThumbs()
             },
 
             methods: {
-                prepareThumbs () {
+                prepareThumbs: function() {
                     var this_this = this;
                     this_this.thumbs = [];
 
@@ -92,29 +92,29 @@
                     });
                 },
 
-                changeImage (image) {
+                changeImage: function(image) {
                     this.currentLargeImageUrl = image.large_image_url;
                     this.currentOriginalImageUrl = image.original_image_url;
 
                     $('img#pro-img').data('zoom-image', image.original_image_url).ezPlus();
                 },
 
-                moveThumbs(direction) {
+                moveThumbs: function(direction) {
                     let len = this.thumbs.length;
 
                     if (direction === "top") {
                         const moveThumb = this.thumbs.splice(len - 1, 1);
 
-                        this.thumbs = [moveThumb[0], ...this.thumbs];
-                        this.counter.up = this.counter.up+1;
-                        this.counter.down = this.counter.down-1;
+                        this.thumbs = [moveThumb[0]].concat((this.thumbs));
+                        this.counter.up = this.counter.up + 1;
+                        this.counter.down = this.counter.down - 1;
 
                     } else {
                         const moveThumb = this.thumbs.splice(0, 1);
 
-                        this.thumbs = [...this.thumbs, moveThumb[0]];
-                        this.counter.down = this.counter.down+1;
-                        this.counter.up = this.counter.up-1;
+                        this.thumbs = [].concat((this.thumbs), [moveThumb[0]]);
+                        this.counter.down = this.counter.down + 1;
+                        this.counter.up = this.counter.up - 1;
                     }
 
                     if ((len-4) == this.counter.down) {
@@ -141,7 +141,6 @@
             $(document).mousemove(function(event) {
                 if ($('.add-to-wishlist').length) {
                     if (event.pageX > $('.add-to-wishlist').offset().left && event.pageX < $('.add-to-wishlist').offset().left+32 && event.pageY > $('.add-to-wishlist').offset().top && event.pageY < $('.add-to-wishlist').offset().top+32) {
-
                         $(".zoomContainer").addClass("show-wishlist");
 
                     } else {
@@ -157,5 +156,4 @@
             });
         })
     </script>
-
 @endpush

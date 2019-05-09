@@ -15,6 +15,8 @@ class CreateCatalogRuleCustomerGroupsTable extends Migration
     {
         Schema::create('catalog_rule_customer_groups', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('catalog_rule_id')->unsigned();
+            $table->foreign('catalog_rule_id')->references('id')->on('catalog_rules')->onDelete('cascade');
             $table->integer('customer_group_id')->unsigned();
             $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
             $table->timestamps();

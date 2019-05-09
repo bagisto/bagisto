@@ -188,19 +188,21 @@
 
         Vue.component('variant-form', {
 
-            data: () => ({
-                variant: {},
-                super_attributes: super_attributes
-            }),
+            data: function() {
+                return {
+                    variant: {},
+                    super_attributes: super_attributes
+                }
+            },
 
             template: '#variant-form-template',
 
-            created () {
+            created: function () {
                 this.resetModel();
             },
 
             methods: {
-                addVariant (formScope) {
+                addVariant: function (formScope) {
                     this.$validator.validateAll(formScope).then((result) => {
                         if (result) {
                             var this_this = this;
@@ -245,7 +247,7 @@
                     });
                 },
 
-                resetModel () {
+                resetModel: function () {
                     var this_this = this;
 
                     this.super_attributes.forEach(function(attribute) {
@@ -261,13 +263,15 @@
 
             inject: ['$validator'],
 
-            data: () => ({
-                variants: variants,
-                superAttributes: super_attributes
-            }),
+            data: function() {
+                return {
+                    variants: variants,
+                    superAttributes: super_attributes
+                }
+            },
 
             methods: {
-                removeVariant(variant) {
+                removeVariant: function(variant) {
                     let index = this.variants.indexOf(variant)
 
                     this.variants.splice(index, 1)
@@ -284,14 +288,16 @@
 
             inject: ['$validator'],
 
-            data: () => ({
-                inventorySources: @json($inventorySources),
-                inventories: {},
-                totalQty: 0,
-                superAttributes: super_attributes
-            }),
+            data: function() {
+                return {
+                    inventorySources: @json($inventorySources),
+                    inventories: {},
+                    totalQty: 0,
+                    superAttributes: super_attributes
+                }
+            },
 
-            created () {
+            created: function () {
                 var this_this = this;
                 this.inventorySources.forEach(function(inventorySource) {
                     this_this.inventories[inventorySource.id] = this_this.sourceInventoryQty(inventorySource.id)
@@ -300,7 +306,7 @@
             },
 
             computed: {
-                variantInputName () {
+                variantInputName: function () {
                     if (this.variant.id)
                         return "variants[" + this.variant.id + "]";
 
@@ -309,11 +315,11 @@
             },
 
             methods: {
-                removeVariant () {
+                removeVariant: function () {
                     this.$emit('onRemoveVariant', this.variant)
                 },
 
-                optionName (optionId) {
+                optionName: function (optionId) {
                     var optionName = '';
 
                     this.superAttributes.forEach(function(attribute) {
@@ -327,7 +333,7 @@
                     return optionName;
                 },
 
-                sourceInventoryQty (inventorySourceId) {
+                sourceInventoryQty: function (inventorySourceId) {
                     var inventories = this.variant.inventories.filter(function(inventory) {
                         return inventorySourceId === inventory.inventory_source_id;
                     })
@@ -338,7 +344,7 @@
                     return 0;
                 },
 
-                updateTotalQty () {
+                updateTotalQty: function () {
                     this.totalQty = 0;
                     for (var key in this.inventories) {
                         this.totalQty += parseInt(this.inventories[key]);

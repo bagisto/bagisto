@@ -15,6 +15,8 @@ class CreateCatalogRuleChannelsTable extends Migration
     {
         Schema::create('catalog_rule_channels', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('catalog_rule_id')->unsigned();
+            $table->foreign('catalog_rule_id')->references('id')->on('catalog_rules')->onDelete('cascade');
             $table->integer('channel_id')->unsigned();
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
             $table->timestamps();

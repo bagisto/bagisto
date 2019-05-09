@@ -88,7 +88,7 @@
 
                     <div class="footer">
                         <p>
-                            {{ trans('admin::app.footer.copy-right') }}
+                            {{ core()->getConfigData('general.content.footer.footer_content') }}
                         </p>
                     </div>
 

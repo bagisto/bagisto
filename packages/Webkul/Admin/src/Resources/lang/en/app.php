@@ -40,7 +40,7 @@ return [
         'taxes' => 'Taxes',
         'tax-categories' => 'Tax Categories',
         'tax-rates' => 'Tax Rates',
-        'promotion' => 'Promotions',
+        'promotion' => 'Propaganda',
         'discount' => 'Discount'
     ],
 
@@ -905,7 +905,11 @@ return [
             'newsletter-subscription' => 'Allow NewsLetter Subscription',
             'email' => 'Email Verification',
             'email-verification' => 'Allow Email Verification',
-            'sort_order' => 'Sort Order'
+            'sort_order' => 'Sort Order',
+            'general' => 'General',
+            'footer' => 'Footer',
+            'content' => 'Content',
+            'footer-content' => 'Text Value'
         ]
     ]
 ];

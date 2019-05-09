@@ -20,7 +20,7 @@
                         @else
                             <td>{{ $attribute['admin_name'] }}</td>
                         @endif
-                            <td>{{ $attribute['value'] }}</>
+                            <td>{{ $attribute['value'] }}</td>
                     </tr>
 
                 @endforeach

@@ -114,7 +114,9 @@
                                 <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false"  :images='"{{ $category->image_url }}"'></image-wrapper>
 
                                 <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
-                                    {{ $errors->first('image.*') }}
+                                    @foreach ($errors->get('image.*') as $key => $message)
+                                        @php echo str_replace($key, 'Image', $message[0]); @endphp
+                                    @endforeach
                                 </span>
 
                             </div>
@@ -220,13 +222,13 @@
 
             inject: ['$validator'],
 
-            data() {
+            data: function() {
                 return {
                     isRequired: true,
                 }
             },
 
-            created () {
+            created: function () {
                 var this_this = this;
 
                 $(document).ready(function () {
