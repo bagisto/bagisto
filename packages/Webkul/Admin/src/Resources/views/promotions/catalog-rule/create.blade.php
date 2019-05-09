@@ -191,23 +191,23 @@
                         <div class="control-group" :class="[errors.has('apply') ? 'has-error' : '']">
                             <label for="apply" class="required">Apply</label>
 
-                            <select class="control" name="apply" v-model="apply" v-validate="'required'" value="{{ old('apply') }}" data-vv-as="&quot;Apply As&quot;">
-                                <option value="1">Apply as percentage</option>
-                                <option value="2">Apply as fixed Amount</option>
-                                <option value="3">Adjust to percentage's value</option>
-                                <option value="4">Adjust to discount value</option>
+                            <select class="control" name="apply" v-model="apply" v-validate="'required'" value="{{ old('apply') }}" data-vv-as="&quot;Apply As&quot;" v-on:change="detectApply">
+                                <option value="1">{{ __('admin::app.promotion.catalog.apply-percent') }}</option>
+                                <option value="2">{{ __('admin::app.promotion.catalog.apply-fixed') }}</option>
+                                <option value="3">{{ __('admin::app.promotion.catalog.adjust-to-percent') }}</option>
+                                <option value="4">{{ __('admin::app.promotion.catalog.adjust-to-value') }}</option>
                             </select>
 
                             <span class="control-error" v-if="errors.has('apply')">@{{ errors.first('apply') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('disc_amt') ? 'has-error' : '']">
+                        <div class="control-group" :class="[errors.has('disc_amt') ? 'has-error' : '']" v-if="apply_amt">
                             <label for="disc_amt" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
                             <input type="text" class="control" name="disc_amt" v-model="disc_amt" v-validate="'required|numeric'" value="{{ old('disc_amt') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
                             <span class="control-error" v-if="errors.has('disc_amt')">@{{ errors.first('disc_amt') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('disc_percent') ? 'has-error' : '']">
+                        <div class="control-group" :class="[errors.has('disc_percent') ? 'has-error' : '']" v-if="apply_prct">
                             <label for="disc_percent" class="required">{{ __('admin::app.promotion.general-info.disc_percent') }}</label>
                             <input type="text" class="control" name="disc_percent" v-model="disc_percent" v-validate="'required|numeric|max:2'" value="{{ old('disc_percent') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_percent') }}&quot;">
                             <span class="control-error" v-if="errors.has('disc_percent')">@{{ errors.first('disc_percent') }}</span>
@@ -238,6 +238,10 @@
                         description: 'something',
                         customer_groups: [],
                         criteria: null,
+                        apply: null,
+                        apply_amt: false,
+                        apply_prct: false,
+                        end_other_rules: null,
                         attr: {
                             attribute: null,
                             condition: null,
@@ -280,6 +284,16 @@
                                 category: null,
                                 condition: null
                             };
+                        }
+                    },
+
+                    detectApply() {
+                        if (this.apply == 1 || this.apply == 3) {
+                            this.apply_prct = true;
+                            this.apply_amt = false;
+                        } else if (this.apply == 2 || this.apply == 4) {
+                            this.apply_prct = false;
+                            this.apply_amt = true;
                         }
                     },
 

@@ -3,9 +3,11 @@
 namespace Webkul\Discount\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Inventory\Contracts\InventorySource as InventorySourceContract;
+use Webkul\Discount\Contracts\CatalogRule as CatalogRuleContract;
 
-class CatalogRule extends Model implements InventorySourceContract
+class CatalogRule extends Model implements CatalogRuleContract
 {
+    protected $table = 'catalog_rules';
+
     protected $guarded = ['created_at', 'updated_at'];
 }

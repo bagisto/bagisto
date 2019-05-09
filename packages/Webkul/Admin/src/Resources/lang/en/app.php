@@ -40,7 +40,7 @@ return [
         'taxes' => 'Taxes',
         'tax-categories' => 'Tax Categories',
         'tax-rates' => 'Tax Rates',
-        'promotion' => 'Propaganda',
+        'promotion' => 'Promotions',
         'discount' => 'Discount'
     ],
 
@@ -792,6 +792,10 @@ return [
         'catalog' => [
             'name' => 'Name',
             'description' => 'Description',
+            'apply-percent' => 'Apply as percentage',
+            'apply-fixed' => 'Apply as fixed Amount',
+            'adjust-to-percent' => 'Adjust to percentage',
+            'adjust-to-value' => 'Adjust to discount value'
         ]
     ],
 
