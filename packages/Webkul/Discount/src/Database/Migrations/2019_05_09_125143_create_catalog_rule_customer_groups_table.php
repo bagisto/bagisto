@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCheckoutRulesTable extends Migration
+class CreateCatalogRuleCustomerGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateCheckoutRulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('checkout_rules', function (Blueprint $table) {
+        Schema::create('catalog_rule_customer_groups', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('customer_group_id')->unsigned();
+            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateCheckoutRulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('checkout_rules');
+        Schema::dropIfExists('catalog_rule_customer_groups');
     }
 }

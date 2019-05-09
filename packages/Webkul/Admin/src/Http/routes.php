@@ -638,6 +638,10 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/cart-rule/create', 'Webkul\Discount\Http\Controllers\CartRuleController@create')->defaults('_config', [
                     'view' => 'admin::promotions.cart-rule.create'
                 ])->name('admin.cart-rule.create');
+
+                Route::post('/cart-rule/store', 'Webkul\Discount\Http\Controllers\CartRuleController@store')->defaults('_config', [
+                    'view' => 'admin.cart-rule.index'
+                ])->name('admin.cart-rule.store');
             });
         });
     });
