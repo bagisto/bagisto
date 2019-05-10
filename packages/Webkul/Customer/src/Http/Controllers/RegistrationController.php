@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Customer\Mail\VerificationEmail;
 use Illuminate\Routing\Controller;
+use Webkul\Customer\Repositories\CustomerRepository as Customer;
 use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
 use Cookie;
 
@@ -25,14 +26,16 @@ class RegistrationController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $_config;
+    protected $customer;
     protected $customerGroup;
 
     /**
      * @param CustomerRepository object $customer
      */
-    public function __construct(CustomerGroup $customerGroup)
+    public function __construct(CustomerGroup $customerGroup, Customer $customer)
     {
         $this->_config = request('_config');
+        $this->customer = $customer;
         $this->customerGroup = $customerGroup;
     }
 
