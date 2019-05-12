@@ -785,7 +785,9 @@ return [
             'channels' => 'Channels',
             'cust-groups' => 'Customer Groups',
             'priority' => 'Priority',
-            'add-condition' => 'Add Conditions'
+            'add-condition' => 'Add Conditions',
+            'disc_amt' => 'Discount Amount',
+            'disc_percent' => 'Discount Percentage'
         ],
         'catalog' => [
             'name' => 'Name',
