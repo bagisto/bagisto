@@ -10,7 +10,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Product\Models\Product::class,
         \Webkul\Product\Models\ProductAttributeValue::class,
         \Webkul\Product\Models\ProductFlat::class,
-        \Webkul\Product\Models\ProductGrid::class,
         \Webkul\Product\Models\ProductImage::class,
         \Webkul\Product\Models\ProductInventory::class,
         \Webkul\Product\Models\ProductOrderedInventory::class,

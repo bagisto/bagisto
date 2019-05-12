@@ -43,7 +43,7 @@
                         <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                             <label for="name" class="required">{{ __('admin::app.promotion.general-info.name') }}</label>
 
-                            <input type="text" class="control" name="name" v-model="name" v-validate="'required'" value="{{ old('name') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.firstname') }}&quot;">
+                            <input type="text" class="control" name="name" v-model="name" v-validate="'required'" value="{{ old('name') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.name') }}&quot;">
                             <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                         </div>
 
@@ -67,7 +67,7 @@
                             <span class="control-error" v-if="errors.has('customer_groups[]')">@{{ errors.first('customer_groups') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('channels') ? 'has-error' : '']">
+                        <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                             <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
                             <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
                                 <option disabled="disabled">Select Channels</option>
@@ -75,44 +75,34 @@
                                     <option value="{{ $channel->id }}">{{ $channel->name }}</option>
                                 @endforeach
                             </select>
-                            <span class="control-error" v-if="errors.has('channels')">@{{ errors.first('channels') }}</span>
+                            <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels') }}</span>
                         </div>
 
                         <datetime :name="starts_from">
-                            <label for="starts_from" class="required">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
+                            <div class="control-group" :class="[errors.has('starts_from') ? 'has-error' : '']">
+                                <label for="starts_from" class="required">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
 
-                            <div class="control-group">
-                                <input type="text" class="control" name="starts_from" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.starts-from') }}&quot;">
+                                <input type="text" class="control" v-model="starts_from" name="starts_from" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.starts-from') }}&quot;">
+
+                                <span class="control-error" v-if="errors.has('starts_from')">@{{ errors.first('starts_from') }}</span>
                             </div>
-
-                            <span class="control-error" v-if="errors.has('starts_from')">@{{ errors.first('starts_from') }}</span>
                         </datetime>
 
                         <datetime :name="starts_from">
-                            <div class="control-group">
+                            <div class="control-group" :class="[errors.has('ends_till') ? 'has-error' : '']">
                                 <label for="ends_till" class="required">{{ __('admin::app.promotion.general-info.ends-till') }}</label>
 
-                                <input type="text" class="control" name="ends_till" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends_till') }}&quot;">
+                                <input type="text" class="control" v-model="ends_till" name="ends_till" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends-till') }}&quot;">
 
                                 <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
                             </div>
                         </datetime>
 
-                        {{-- <div class="control-group" :class="[errors.has('starts_from') ? 'has-error' : '']">
-                            <label for="starts_from" class="required">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
-                            <input type="datetime" class="control" name="starts_from" v-model="starts_from" v-validate="'required'" value="{{ old('starts_from') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.starts-from') }}&quot;">
-                            <span class="control-error" v-if="errors.has('starts_from')">@{{ errors.first('starts_from') }}</span>
-                        </div>
-
-                        <div class="control-group" :class="[errors.has('ends_till') ? 'has-error' : '']">
-                            <label for="ends_till" class="required">{{ __('admin::app.promotion.general-info.ends-till') }}</label>
-                            <input type="datetime" class="control" name="ends_till" v-model="ends_till" v-validate="'required'" value="{{ old('ends_till') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends_till') }}&quot;">
-                            <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
-                        </div> --}}
-
                         <div class="control-group" :class="[errors.has('priority') ? 'has-error' : '']">
                             <label for="priority" class="required">{{ __('admin::app.promotion.general-info.priority') }}</label>
+
                             <input type="text" class="control" name="priority" v-model="priority" v-validate="'required|numeric|max:1'" value="{{ old('priority') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.priority') }}&quot;">
+
                             <span class="control-error" v-if="errors.has('priority')">@{{ errors.first('priority') }}</span>
                         </div>
                     </div>
@@ -209,7 +199,7 @@
 
                         <div class="control-group" :class="[errors.has('disc_percent') ? 'has-error' : '']" v-if="apply_prct">
                             <label for="disc_percent" class="required">{{ __('admin::app.promotion.general-info.disc_percent') }}</label>
-                            <input type="text" class="control" name="disc_percent" v-model="disc_percent" v-validate="'required|numeric|max:2'" value="{{ old('disc_percent') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_percent') }}&quot;">
+                            <input type="text" class="control" name="disc_percent" v-model="disc_percent" v-validate="'required|numeric'" value="{{ old('disc_percent') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_percent') }}&quot;">
                             <span class="control-error" v-if="errors.has('disc_percent')">@{{ errors.first('disc_percent') }}</span>
                         </div>
                     </div>
@@ -225,34 +215,36 @@
 
                 data () {
                     return {
-                        attributes: @json($criteria[0]),
-                        categories: @json($criteria[1]),
-                        channels: [],
-                        conditions: [],
-                        attrs_count: 0,
-                        cats_count: 0,
-                        name: '10% OFF',
-                        priority: 1,
-                        starts_from: null,
-                        ends_till: null,
-                        description: 'something',
-                        customer_groups: [],
-                        criteria: null,
                         apply: null,
                         apply_amt: false,
                         apply_prct: false,
-                        end_other_rules: null,
+                        attributes: @json($criteria[0]),
                         attr: {
                             attribute: null,
                             condition: null,
                             value: null
                         },
+                        attrs: [],
+                        attrs_count: 0,
                         cat: {
                             category: null,
                             condition: null,
                         },
-                        attrs: [],
-                        cats: []
+                        categories: @json($criteria[1]),
+                        cats: [],
+                        cats_count: 0,
+                        channels: [],
+                        conditions: [],
+                        criteria: null,
+                        customer_groups: [],
+                        description: null,
+                        disc_amount: 0.0,
+                        disc_percent: 0.0,
+                        ends_till: null,
+                        end_other_rules: null,
+                        name: null,
+                        priority: 0,
+                        starts_from: null
                     }
                 },
 
