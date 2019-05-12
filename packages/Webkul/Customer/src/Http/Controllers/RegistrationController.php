@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Customer\Mail\VerificationEmail;
 use Illuminate\Routing\Controller;
+use Webkul\Customer\Repositories\CustomerRepository as Customer;
 use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
 use Cookie;
 
@@ -25,14 +26,16 @@ class RegistrationController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $_config;
+    protected $customer;
     protected $customerGroup;
 
     /**
      * @param CustomerRepository object $customer
      */
-    public function __construct(CustomerGroup $customerGroup)
+    public function __construct(CustomerGroup $customerGroup, Customer $customer)
     {
         $this->_config = request('_config');
+        $this->customer = $customer;
         $this->customerGroup = $customerGroup;
     }
 
@@ -72,9 +75,13 @@ class RegistrationController extends Controller
             $data['is_verified'] = 1;
         }
 
-        $customerGroup = $this->customerGroup->findOneWhere(['name' => 'General', 'is_user_defined' => 0]);
+        $customerGroup = $this->customerGroup->findOneWhere([
+            'name' => 'General',
+            'is_user_defined' => 0
+        ]);
 
-        $data['customer_group_id'] = $this->customerGroup->id;
+        if (isset($customerGroup))
+            $data['customer_group_id'] = $customerGroup->id;
 
         $verificationData['email'] = $data['email'];
         $verificationData['token'] = md5(uniqid(rand(), true));

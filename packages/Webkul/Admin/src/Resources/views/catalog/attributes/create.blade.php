@@ -326,7 +326,7 @@
 
             inject: ['$validator'],
 
-            data() {
+            data: function() {
                 return {
                     optionRowCount: 0,
                     optionRows: [],
@@ -335,7 +335,7 @@
                 }
             },
 
-            created () {
+            created: function () {
                 var this_this = this;
 
                 $(document).ready(function () {
@@ -350,7 +350,7 @@
             },
 
             methods: {
-                addOptionRow () {
+                addOptionRow: function () {
                     var rowCount = this.optionRowCount++;
                     var row = {'id': 'option_' + rowCount};
 
@@ -361,20 +361,20 @@
                     this.optionRows.push(row);
                 },
 
-                removeRow (row) {
+                removeRow: function (row) {
                     var index = this.optionRows.indexOf(row)
                     Vue.delete(this.optionRows, index);
                 },
 
-                adminName (row) {
+                adminName: function (row) {
                     return 'options[' + row.id + '][admin_name]';
                 },
 
-                localeInputName (row, locale) {
+                localeInputName: function (row, locale) {
                     return 'options[' + row.id + '][' + locale + '][label]';
                 },
 
-                sortOrderName (row) {
+                sortOrderName: function (row) {
                     return 'options[' + row.id + '][sort_order]';
                 }
             }

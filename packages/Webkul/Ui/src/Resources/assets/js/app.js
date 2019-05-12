@@ -1,3 +1,4 @@
+
 Vue.component("flash-wrapper", require("./components/flash-wrapper"));
 Vue.component("flash", require("./components/flash"));
 Vue.component("tabs", require("./components/tabs/tabs"));
@@ -21,3 +22,9 @@ Vue.component("swatch-picker", require("./components/swatch-picker"));
 require('flatpickr/dist/flatpickr.css');
 
 require('vue-swatches/dist/vue-swatches.min.css');
+
+require("@babel/polyfill");
+
+require('url-search-params-polyfill');
+
+require('url-polyfill');

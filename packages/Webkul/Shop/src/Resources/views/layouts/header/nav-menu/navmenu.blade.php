@@ -42,20 +42,22 @@ foreach (app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCateg
             categories: {
                 type: [Array, String, Object],
                 required: false,
-                default: () => ([])
+                default: (function () {
+                    return [];
+                })
             },
 
             url: String
         },
 
-        data(){
+        data: function(){
             return {
                 items_count:0
             };
         },
 
         computed: {
-            items () {
+            items: function() {
                 return JSON.parse(this.categories)
             }
         },
@@ -93,7 +95,7 @@ foreach (app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCateg
             url: String,
         },
 
-        data() {
+        data: function() {
             return {
                 items_count:0,
                 show: false,
@@ -107,11 +109,11 @@ foreach (app('Webkul\Category\Repositories\CategoryRepository')->getVisibleCateg
         },
 
         computed: {
-            haveChildren() {
+            haveChildren: function() {
                 return this.item.children.length ? true : false;
             },
 
-            name() {
+            name: function() {
                 if (this.item.translations && this.item.translations.length) {
                     this.item.translations.forEach(function(translation) {
                         if (translation.locale == document.documentElement.lang)

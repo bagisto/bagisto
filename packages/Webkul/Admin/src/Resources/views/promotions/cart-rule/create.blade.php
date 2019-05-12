@@ -1,12 +1,12 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.promotion.add-catalog-rule') }}
+    {{ __('admin::app.promotion.add-cart-rule') }}
 @stop
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.catalog-rule.store') }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.cart-rule.store') }}" @submit.prevent="onSubmit">
             @csrf
 
             <div class="page-header">
@@ -14,7 +14,7 @@
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
 
-                        {{ __('admin::app.promotion.add-catalog-rule') }}
+                        {{ __('admin::app.promotion.add-cart-rule') }}
                     </h1>
                 </div>
 
@@ -27,14 +27,14 @@
 
             <div class="page-content">
                 <div class="form-container">
-                    <catalog-rule></catalog-rule>
+                    <cart-rule></cart-rule>
                 </div>
             </div>
         </form>
     </div>
 
     @push('scripts')
-        <script type="text/x-template" id="catalog-rule-form-template">
+        <script type="text/x-template" id="cart-rule-form-template">
             <div>
                 @csrf()
 
@@ -181,19 +181,6 @@
                             <span class="control-error" v-if="errors.has('apply')">@{{ errors.first('apply') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('apply') ? 'has-error' : '']">
-                            <label for="apply" class="required">Apply</label>
-
-                            <select class="control" name="apply" v-model="apply" v-validate="'required'" value="{{ old('apply') }}" data-vv-as="&quot;Apply As&quot;">
-                                <option value="1">Apply as percentage</option>
-                                <option value="2">Apply as fixed Amount</option>
-                                <option value="3">Adjust to percentage's value</option>
-                                <option value="4">Adjust to discount value</option>
-                            </select>
-
-                            <span class="control-error" v-if="errors.has('apply')">@{{ errors.first('apply') }}</span>
-                        </div>
-
                         <div class="control-group" :class="[errors.has('disc_amt') ? 'has-error' : '']">
                             <label for="disc_amt" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
                             <input type="text" class="control" name="disc_amt" v-model="disc_amt" v-validate="'required|numeric|max:1'" value="{{ old('disc_amt') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
@@ -211,8 +198,8 @@
         </script>
 
         <script>
-            Vue.component('catalog-rule', {
-                template: '#catalog-rule-form-template',
+            Vue.component('cart-rule', {
+                template: '#cart-rule-form-template',
 
                 inject: ['$validator'],
 

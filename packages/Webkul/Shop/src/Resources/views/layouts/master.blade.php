@@ -67,7 +67,7 @@
 
         <div class="footer-bottom">
             <p>
-                {{ __('shop::app.webkul.copy-right', ['year' => date('Y')]) }}
+                {{ core()->getConfigData('general.content.footer.footer_content') }}
             </p>
         </div>
 

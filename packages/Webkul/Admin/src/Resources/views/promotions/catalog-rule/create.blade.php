@@ -78,17 +78,37 @@
                             <span class="control-error" v-if="errors.has('channels')">@{{ errors.first('channels') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('starts_from') ? 'has-error' : '']">
+                        <datetime :name="starts_from">
                             <label for="starts_from" class="required">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
-                            <input type="text" class="control" name="starts_from" v-model="starts_from" v-validate="'required'" value="{{ old('starts_from') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.starts-from') }}&quot;">
+
+                            <div class="control-group">
+                                <input type="text" class="control" name="starts_from" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.starts-from') }}&quot;">
+                            </div>
+
+                            <span class="control-error" v-if="errors.has('starts_from')">@{{ errors.first('starts_from') }}</span>
+                        </datetime>
+
+                        <datetime :name="starts_from">
+                            <div class="control-group">
+                                <label for="ends_till" class="required">{{ __('admin::app.promotion.general-info.ends-till') }}</label>
+
+                                <input type="text" class="control" name="ends_till" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends_till') }}&quot;">
+
+                                <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
+                            </div>
+                        </datetime>
+
+                        {{-- <div class="control-group" :class="[errors.has('starts_from') ? 'has-error' : '']">
+                            <label for="starts_from" class="required">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
+                            <input type="datetime" class="control" name="starts_from" v-model="starts_from" v-validate="'required'" value="{{ old('starts_from') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.starts-from') }}&quot;">
                             <span class="control-error" v-if="errors.has('starts_from')">@{{ errors.first('starts_from') }}</span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('ends_till') ? 'has-error' : '']">
                             <label for="ends_till" class="required">{{ __('admin::app.promotion.general-info.ends-till') }}</label>
-                            <input type="text" class="control" name="ends_till" v-model="ends_till" v-validate="'required'" value="{{ old('ends_till') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends_till') }}&quot;">
+                            <input type="datetime" class="control" name="ends_till" v-model="ends_till" v-validate="'required'" value="{{ old('ends_till') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends_till') }}&quot;">
                             <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
-                        </div>
+                        </div> --}}
 
                         <div class="control-group" :class="[errors.has('priority') ? 'has-error' : '']">
                             <label for="priority" class="required">{{ __('admin::app.promotion.general-info.priority') }}</label>
@@ -171,38 +191,25 @@
                         <div class="control-group" :class="[errors.has('apply') ? 'has-error' : '']">
                             <label for="apply" class="required">Apply</label>
 
-                            <select class="control" name="apply" v-model="apply" v-validate="'required'" value="{{ old('apply') }}" data-vv-as="&quot;Apply As&quot;">
-                                <option value="1">Apply as percentage</option>
-                                <option value="2">Apply as fixed Amount</option>
-                                <option value="3">Adjust to percentage's value</option>
-                                <option value="4">Adjust to discount value</option>
+                            <select class="control" name="apply" v-model="apply" v-validate="'required'" value="{{ old('apply') }}" data-vv-as="&quot;Apply As&quot;" v-on:change="detectApply">
+                                <option value="1">{{ __('admin::app.promotion.catalog.apply-percent') }}</option>
+                                <option value="2">{{ __('admin::app.promotion.catalog.apply-fixed') }}</option>
+                                <option value="3">{{ __('admin::app.promotion.catalog.adjust-to-percent') }}</option>
+                                <option value="4">{{ __('admin::app.promotion.catalog.adjust-to-value') }}</option>
                             </select>
 
                             <span class="control-error" v-if="errors.has('apply')">@{{ errors.first('apply') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('apply') ? 'has-error' : '']">
-                            <label for="apply" class="required">Apply</label>
-
-                            <select class="control" name="apply" v-model="apply" v-validate="'required'" value="{{ old('apply') }}" data-vv-as="&quot;Apply As&quot;">
-                                <option value="1">Apply as percentage</option>
-                                <option value="2">Apply as fixed Amount</option>
-                                <option value="3">Adjust to percentage's value</option>
-                                <option value="4">Adjust to discount value</option>
-                            </select>
-
-                            <span class="control-error" v-if="errors.has('apply')">@{{ errors.first('apply') }}</span>
-                        </div>
-
-                        <div class="control-group" :class="[errors.has('disc_amt') ? 'has-error' : '']">
+                        <div class="control-group" :class="[errors.has('disc_amt') ? 'has-error' : '']" v-if="apply_amt">
                             <label for="disc_amt" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
-                            <input type="text" class="control" name="disc_amt" v-model="disc_amt" v-validate="'required|numeric|max:1'" value="{{ old('disc_amt') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
+                            <input type="text" class="control" name="disc_amt" v-model="disc_amt" v-validate="'required|numeric'" value="{{ old('disc_amt') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
                             <span class="control-error" v-if="errors.has('disc_amt')">@{{ errors.first('disc_amt') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('disc_percent') ? 'has-error' : '']">
+                        <div class="control-group" :class="[errors.has('disc_percent') ? 'has-error' : '']" v-if="apply_prct">
                             <label for="disc_percent" class="required">{{ __('admin::app.promotion.general-info.disc_percent') }}</label>
-                            <input type="text" class="control" name="disc_percent" v-model="disc_percent" v-validate="'required|numeric|max:1'" value="{{ old('disc_percent') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_percent') }}&quot;">
+                            <input type="text" class="control" name="disc_percent" v-model="disc_percent" v-validate="'required|numeric|max:2'" value="{{ old('disc_percent') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_percent') }}&quot;">
                             <span class="control-error" v-if="errors.has('disc_percent')">@{{ errors.first('disc_percent') }}</span>
                         </div>
                     </div>
@@ -226,11 +233,15 @@
                         cats_count: 0,
                         name: '10% OFF',
                         priority: 1,
-                        starts_from: 'a',
-                        ends_till: 'b',
+                        starts_from: null,
+                        ends_till: null,
                         description: 'something',
                         customer_groups: [],
                         criteria: null,
+                        apply: null,
+                        apply_amt: false,
+                        apply_prct: false,
+                        end_other_rules: null,
                         attr: {
                             attribute: null,
                             condition: null,
@@ -273,6 +284,16 @@
                                 category: null,
                                 condition: null
                             };
+                        }
+                    },
+
+                    detectApply() {
+                        if (this.apply == 1 || this.apply == 3) {
+                            this.apply_prct = true;
+                            this.apply_amt = false;
+                        } else if (this.apply == 2 || this.apply == 4) {
+                            this.apply_prct = false;
+                            this.apply_amt = true;
                         }
                     },
 

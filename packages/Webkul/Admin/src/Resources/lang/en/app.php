@@ -792,6 +792,10 @@ return [
         'catalog' => [
             'name' => 'Name',
             'description' => 'Description',
+            'apply-percent' => 'Apply as percentage',
+            'apply-fixed' => 'Apply as fixed Amount',
+            'adjust-to-percent' => 'Adjust to percentage',
+            'adjust-to-value' => 'Adjust to discount value'
         ]
     ],
 
@@ -905,7 +909,11 @@ return [
             'newsletter-subscription' => 'Allow NewsLetter Subscription',
             'email' => 'Email Verification',
             'email-verification' => 'Allow Email Verification',
-            'sort_order' => 'Sort Order'
+            'sort_order' => 'Sort Order',
+            'general' => 'General',
+            'footer' => 'Footer',
+            'content' => 'Content',
+            'footer-content' => 'Text Value'
         ]
     ]
 ];

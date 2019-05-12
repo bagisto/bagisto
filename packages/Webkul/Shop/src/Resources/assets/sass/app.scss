@@ -1340,7 +1340,7 @@ section.slider-block {
                         }
 
                         .icon {
-                            background-image: url('../images/arrow-down.svg') !important;
+                            background-image: url('../images/icon-dropdown.svg') !important;
                             width: 10px;
                             height: 10px;
                             position: absolute;
@@ -2134,6 +2134,14 @@ section.cart {
                 .remove, .towishlist {
                     margin-top: 18px;
                     margin-right: 15px;
+                }
+
+                .quantity-change {
+                    cursor: pointer;
+
+                    &:focus {
+                        border-color: $border-color !important;
+                    }
                 }
             }
         }

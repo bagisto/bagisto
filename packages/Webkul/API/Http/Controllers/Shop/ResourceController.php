@@ -3,7 +3,6 @@
 namespace Webkul\API\Http\Controllers\Shop;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 /**
  * Resource Controller
@@ -13,6 +12,13 @@ use Illuminate\Http\Response;
  */
 class ResourceController extends Controller
 {
+    /**
+     * Contains current guard
+     *
+     * @var array
+     */
+    protected $guard;
+    
     /**
      * Contains route related configuration
      *
@@ -34,9 +40,16 @@ class ResourceController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth:api');
+        $this->guard = request()->has('token') ? 'api' : 'customer';
 
         $this->_config = request('_config');
+
+        if (isset($this->_config['authorization_required']) && $this->_config['authorization_required']) {
+
+            auth()->setDefaultDriver($this->guard);
+
+            $this->middleware('auth:' . $this->guard);
+        }
 
         $this->repository = app($this->_config['repository']);
     }
@@ -49,12 +62,14 @@ class ResourceController extends Controller
     public function index()
     {
         $query = $this->repository->scopeQuery(function($query) {
-            foreach (request()->except(['page', 'limit', 'pagination', 'sort', 'order']) as $input => $value) {
-                $query = $query->where($input, $value);
+            foreach (request()->except(['page', 'limit', 'pagination', 'sort', 'order', 'token']) as $input => $value) {
+                $query = $query->whereIn($input, array_map('trim', explode(',', $value)));
             }
 
             if ($sort = request()->input('sort')) {
                 $query = $query->orderBy($sort, request()->input('order') ?? 'desc');
+            } else {
+                $query = $query->orderBy('id', 'desc');
             }
 
             return $query;
@@ -79,5 +94,21 @@ class ResourceController extends Controller
         return new $this->_config['resource'](
                 $this->repository->findOrFail($id)
             );
+    }
+
+    /**
+     * Delete's a individual resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $wishlistProduct = $this->repository->findOrFail($id);
+
+        $this->repository->delete($id);
+        
+        return response()->json([
+                'message' => 'Item removed successfully.'
+            ]);
     }
 }

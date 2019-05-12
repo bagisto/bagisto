@@ -63,43 +63,45 @@
 
         template: '#linked-products-template',
 
-        data: () => ({
-            products: {
-                'cross_sells': [],
-                'up_sells': [],
-                'related_products': []
-            },
+        data: function() {
+            return {
+                products: {
+                    'cross_sells': [],
+                    'up_sells': [],
+                    'related_products': []
+                },
 
-            search_term: {
-                'cross_sells': '',
-                'up_sells': '',
-                'related_products': ''
-            },
+                search_term: {
+                    'cross_sells': '',
+                    'up_sells': '',
+                    'related_products': ''
+                },
 
-            addedProducts: {
-                'cross_sells': [],
-                'up_sells': [],
-                'related_products': []
-            },
+                addedProducts: {
+                    'cross_sells': [],
+                    'up_sells': [],
+                    'related_products': []
+                },
 
-            is_searching: {
-                'cross_sells': false,
-                'up_sells': false,
-                'related_products': false
-            },
+                is_searching: {
+                    'cross_sells': false,
+                    'up_sells': false,
+                    'related_products': false
+                },
 
-            productId: {{ $product->id }},
+                productId: {{ $product->id }},
 
-            linkedProducts: ['up_sells', 'cross_sells', 'related_products'],
+                linkedProducts: ['up_sells', 'cross_sells', 'related_products'],
 
-            upSellingProducts: @json($product->up_sells()->get()),
+                upSellingProducts: @json($product->up_sells()->get()),
 
-            crossSellingProducts: @json($product->cross_sells()->get()),
+                crossSellingProducts: @json($product->cross_sells()->get()),
 
-            relatedProducts: @json($product->related_products()->get()),
-        }),
+                relatedProducts: @json($product->related_products()->get()),
+            }
+        },
 
-        created () {
+        created: function () {
             if (this.upSellingProducts.length >= 1) {
                 for (var index in this.upSellingProducts) {
                     this.addedProducts.up_sells.push(this.upSellingProducts[index]);
@@ -120,13 +122,13 @@
         },
 
         methods: {
-            addProduct (product, key) {
+            addProduct: function (product, key) {
                 this.addedProducts[key].push(product);
                 this.search_term[key] = '';
                 this.products[key] = []
             },
 
-            removeProduct (product, key) {
+            removeProduct: function (product, key) {
                 for (var index in this.addedProducts[key]) {
                     if (this.addedProducts[key][index].id == product.id ) {
                         this.addedProducts[key].splice(index, 1);
@@ -134,7 +136,7 @@
                 }
             },
 
-            search (key) {
+            search: function (key) {
                 this_this = this;
 
                 this.is_searching[key] = true;
