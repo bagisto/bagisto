@@ -24,6 +24,16 @@ class DiscountServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerConfig();
+    }
 
+    /**
+     * To merge the price rule configuration in price rule configuration
+     */
+    protected function registerConfig()
+    {
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/cart-attributes.php', 'pricerules'
+        );
     }
 }

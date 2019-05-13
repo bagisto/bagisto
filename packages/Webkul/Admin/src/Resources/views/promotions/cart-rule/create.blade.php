@@ -82,6 +82,25 @@
                             <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels') }}</span>
                         </div>
 
+                        <div class="control-group" :class="[errors.has('is_coupon') ? 'has-error' : '']">
+                            <label for="customer_groups" class="required">{{ __('admin::app.promotion.general-info.is-coupon') }}</label>
+
+                            <select type="text" class="control" name="is_coupon" v-model="is_coupon" v-validate="'required'" value="{{ old('is_coupon') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-coupon') }}&quot;">
+                                <option value="0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+                                <option value="1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                            </select>
+
+                            <span class="control-error" v-if="errors.has('is_coupon')">@{{ errors.first('is_coupon') }}</span>
+                        </div>
+
+                        <div class="control-group" :class="[errors.has('uses_per_cust') ? 'has-error' : '']">
+                            <label for="uses_per_cust" class="required">{{ __('admin::app.promotion.general-info.uses-per-cust') }}</label>
+
+                            <input type="number" step="1" class="control" name="uses_per_cust" v-model="uses_per_cust" v-validate="'required|numeric|min_value:1'" value="{{ old('uses_per_cust') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
+
+                            <span class="control-error" v-if="errors.has('uses_per_cust')">@{{ errors.first('uses_per_cust') }}</span>
+                        </div>
+
                         <datetime :name="starts_from">
                             <div class="control-group" :class="[errors.has('starts_from') ? 'has-error' : '']">
                                 <label for="starts_from" class="required">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
@@ -119,8 +138,7 @@
                                 <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
 
                                 <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
-                                    <option value="attribute">Attribute</option>
-                                    <option value="category">Category</option>
+                                    <option value="cart_attr">Cart Attribute</option>
                                 </select>
 
                                 <span class="control-error" v-if="errors.has('criteria')">@{{ errors.first('criteria') }}</span>
@@ -156,7 +174,7 @@
                             </div>
 
                             <!-- category -->
-                            <div v-for="(cat, index) in cats">
+                            {{-- <div v-for="(cat, index) in cats">
                                 <div class="control-container mt-20">
                                     <div class="title-bar">
                                         <span>Category </span>
@@ -176,7 +194,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </accordian>
@@ -187,10 +205,10 @@
                             <label for="apply" class="required">Apply</label>
 
                             <select class="control" name="apply" v-model="apply" v-validate="'required'" value="{{ old('apply') }}" data-vv-as="&quot;Apply As&quot;" v-on:change="detectApply">
-                                <option value="1">{{ __('admin::app.promotion.cart.apply-percent') }}</option>
-                                <option value="2">{{ __('admin::app.promotion.cart.apply-fixed') }}</option>
-                                <option value="3">{{ __('admin::app.promotion.cart.adjust-to-percent') }}</option>
-                                <option value="4">{{ __('admin::app.promotion.cart.adjust-to-value') }}</option>
+                                <option value="1">{{ __('admin::app.promotion.catalog.apply-percent') }}</option>
+                                <option value="2">{{ __('admin::app.promotion.catalog.apply-fixed') }}</option>
+                                <option value="3">{{ __('admin::app.promotion.catalog.adjust-to-percent') }}</option>
+                                <option value="4">{{ __('admin::app.promotion.catalog.adjust-to-value') }}</option>
                             </select>
 
                             <span class="control-error" v-if="errors.has('apply')">@{{ errors.first('apply') }}</span>
@@ -211,6 +229,25 @@
 
                             <span class="control-error" v-if="errors.has('disc_percent')">@{{ errors.first('disc_percent') }}</span>
                         </div>
+
+                        <div class="control-group" :class="[errors.has('buy_atleast') ? 'has-error' : '']">
+                            <label for="buy_atleast" class="required">{{ __('admin::app.promotion.cart.buy-atleast') }}</label>
+
+                            <input type="number" step="1" class="control" name="buy_atleast" v-model="buy_atleast" v-validate="'required|numeric|min_value:1'" value="{{ old('buy_atleast') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.buy-atleast') }}&quot;">
+
+                            <span class="control-error" v-if="errors.has('buy_atleast')">@{{ errors.first('buy_atleast') }}</span>
+                        </div>
+
+                        <div class="control-group" :class="[errors.has('apply_to_shipping') ? 'has-error' : '']">
+                            <label for="customer_groups" class="required">{{ __('admin::app.promotion.cart.apply-to-shipping') }}</label>
+
+                            <select type="text" class="control" name="apply_to_shipping" v-model="apply_to_shipping" v-validate="'required'" value="{{ old('apply_to_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.apply-to-shipping') }}&quot;">
+                                <option value="0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+                                <option value="1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                            </select>
+
+                            <span class="control-error" v-if="errors.has('apply_to_shipping')">@{{ errors.first('apply_to_shipping') }}</span>
+                        </div>
                     </div>
                 </accordian>
             </div>
@@ -227,21 +264,21 @@
                         apply: null,
                         apply_amt: false,
                         apply_prct: false,
-                        attributes: @json($criteria[0]),
-                        attr: {
+                        cart_attributes: @json($criteria[0]),
+                        cart_attr: {
                             attribute: null,
                             condition: null,
                             value: null
                         },
-                        attrs: [],
-                        attrs_count: 0,
-                        cat: {
-                            category: null,
-                            condition: null,
-                        },
-                        categories: @json($criteria[1]),
-                        cats: [],
-                        cats_count: 0,
+                        cart_attrs: [],
+                        cart_attrs_count: 0,
+                        // cat: {
+                        //     category: null,
+                        //     condition: null,
+                        // },
+                        // categories: @json($criteria[1]),
+                        // cats: [],
+                        // cats_count: 0,
                         channels: [],
                         conditions: [],
                         criteria: null,
@@ -253,7 +290,11 @@
                         end_other_rules: null,
                         name: null,
                         priority: 0,
-                        starts_from: null
+                        starts_from: null,
+                        uses_per_cust: 0,
+                        is_coupon: null,
+                        buy_atleast: null,
+                        apply_to_shipping: null
                     }
                 },
 

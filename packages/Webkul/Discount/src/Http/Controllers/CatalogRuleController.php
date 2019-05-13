@@ -60,21 +60,10 @@ class CatalogRuleController extends Controller
         $this->_config = request('_config');
 
         $this->attribute = $attribute;
-
         $this->attributeFamily = $attributeFamily;
-
         $this->category = $category;
-
         $this->product = $product;
-
         $this->catalogRule = $catalogRule;
-
-        $this->appliedConfig = [
-            0 => trans('admin::app.promotion.catalog.apply-percent'),
-            1 => trans('admin::app.promotion.catalog.apply-fixed'),
-            2 => trans('admin::app.promotion.catalog.adjust-to-percent'),
-            3 => trans('admin::app.promotion.catalog.adjust-to-value')
-        ];
     }
 
     public function index()
@@ -84,7 +73,7 @@ class CatalogRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('criteria', [$this->attribute->getNameAndId(), $this->category->getNameAndId()]);
+        return view($this->_config['view'])->with('criteria', ['cart_attribute' => config('pricerules')]);
     }
 
     public function store()
