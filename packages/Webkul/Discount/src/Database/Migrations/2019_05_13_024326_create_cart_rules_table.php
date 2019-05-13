@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveCostColumnFromDatagrid extends Migration
+class CreateCartRuleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class RemoveCostColumnFromDatagrid extends Migration
      */
     public function up()
     {
-        Schema::table('products_grid', function (Blueprint $table) {
-            $table->dropColumn('cost');
+        Schema::create('cart_rules', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +26,6 @@ class RemoveCostColumnFromDatagrid extends Migration
      */
     public function down()
     {
-        Schema::table('products_grid', function (Blueprint $table) {
-            $table->string('cost')->nullable();
-        });
+        Schema::dropIfExists('cart_rule');
     }
 }

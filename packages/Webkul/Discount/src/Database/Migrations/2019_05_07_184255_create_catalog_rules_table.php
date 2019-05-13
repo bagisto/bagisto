@@ -17,6 +17,7 @@ class CreateCatalogRulesTable extends Migration
         Schema::dropIfExists('discount_channels');
         Schema::dropIfExists('discount_rules');
         Schema::dropIfExists('discounts');
+        Schema::dropIfExists('products_grid');
 
         Schema::create('catalog_rules', function (Blueprint $table) {
             $table->increments('id');
