@@ -27,7 +27,7 @@ class CreateCatalogRulesTable extends Migration
             $table->datetime('ends_till');
             $table->json('conditions');
             $table->json('actions');
-            $table->boolean('ends_other_rules');
+            $table->boolean('end_other_rules');
             $table->integer('sort_order')->unsigned();
             $table->string('action_type');
             $table->string('discount_amount');

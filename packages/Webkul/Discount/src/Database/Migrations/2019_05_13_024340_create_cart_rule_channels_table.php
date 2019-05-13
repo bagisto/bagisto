@@ -15,6 +15,8 @@ class CreateCartRuleChannelsTable extends Migration
     {
         Schema::create('cart_rule_channels', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('cart_rule_id')->unsigned();
+            $table->foreign('cart_rule_id')->references('id')->on('cart_rules');
             $table->timestamps();
         });
     }
