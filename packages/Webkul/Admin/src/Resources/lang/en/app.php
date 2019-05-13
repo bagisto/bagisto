@@ -787,15 +787,23 @@ return [
             'priority' => 'Priority',
             'add-condition' => 'Add Conditions',
             'disc_amt' => 'Discount Amount',
-            'disc_percent' => 'Discount Percentage'
+            'disc_percent' => 'Discount Percentage',
+            'is-coupon' => 'Use Coupon',
+            'is-coupon-yes' => 'Yes',
+            'is-coupon-no' => 'No',
+            'uses-per-cust' => 'Uses per customer',
         ],
         'catalog' => [
             'name' => 'Name',
             'description' => 'Description',
             'apply-percent' => 'Apply as percentage',
-            'apply-fixed' => 'Apply as fixed Amount',
+            'apply-fixed' => 'Apply as fixed amount',
             'adjust-to-percent' => 'Adjust to percentage',
             'adjust-to-value' => 'Adjust to discount value'
+        ],
+        'cart' => [
+            'buy-atleast' => 'Buy Atleast (N)',
+            'apply-to-shipping' => 'Apply to shipping'
         ]
     ],
 

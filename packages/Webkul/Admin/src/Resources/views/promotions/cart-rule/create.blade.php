@@ -1,12 +1,12 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.promotion.add-catalog-rule') }}
+    {{ __('admin::app.promotion.add-cart-rule') }}
 @stop
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.catalog-rule.store') }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.cart-rule.store') }}" @submit.prevent="onSubmit">
             @csrf
 
             <div class="page-header">
@@ -14,7 +14,7 @@
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
 
-                        {{ __('admin::app.promotion.add-catalog-rule') }}
+                        {{ __('admin::app.promotion.add-cart-rule') }}
                     </h1>
                 </div>
 
@@ -27,14 +27,14 @@
 
             <div class="page-content">
                 <div class="form-container">
-                    <catalog-rule></catalog-rule>
+                    <cart-rule></cart-rule>
                 </div>
             </div>
         </form>
     </div>
 
     @push('scripts')
-        <script type="text/x-template" id="catalog-rule-form-template">
+        <script type="text/x-template" id="cart-rule-form-template">
             <div>
                 @csrf()
 
@@ -44,6 +44,7 @@
                             <label for="name" class="required">{{ __('admin::app.promotion.general-info.name') }}</label>
 
                             <input type="text" class="control" name="name" v-model="name" v-validate="'required'" value="{{ old('name') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.name') }}&quot;">
+
                             <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                         </div>
 
@@ -51,6 +52,7 @@
                             <label for="description">{{ __('admin::app.promotion.general-info.description') }}</label>
 
                             <textarea class="control" name="description" v-model="description" v-validate="'required'" value="{{ old('description') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.description') }}&quot;"></textarea>
+
                             <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                         </div>
 
@@ -69,13 +71,34 @@
 
                         <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                             <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
+
                             <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
                                 <option disabled="disabled">Select Channels</option>
                                 @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                     <option value="{{ $channel->id }}">{{ $channel->name }}</option>
                                 @endforeach
                             </select>
+
                             <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels') }}</span>
+                        </div>
+
+                        <div class="control-group" :class="[errors.has('is_coupon') ? 'has-error' : '']">
+                            <label for="customer_groups" class="required">{{ __('admin::app.promotion.general-info.is-coupon') }}</label>
+
+                            <select type="text" class="control" name="is_coupon" v-model="is_coupon" v-validate="'required'" value="{{ old('is_coupon') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-coupon') }}&quot;">
+                                <option value="0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+                                <option value="1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                            </select>
+
+                            <span class="control-error" v-if="errors.has('is_coupon')">@{{ errors.first('is_coupon') }}</span>
+                        </div>
+
+                        <div class="control-group" :class="[errors.has('uses_per_cust') ? 'has-error' : '']">
+                            <label for="uses_per_cust" class="required">{{ __('admin::app.promotion.general-info.uses-per-cust') }}</label>
+
+                            <input type="number" step="1" class="control" name="uses_per_cust" v-model="uses_per_cust" v-validate="'required|numeric|min_value:1'" value="{{ old('uses_per_cust') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
+
+                            <span class="control-error" v-if="errors.has('uses_per_cust')">@{{ errors.first('uses_per_cust') }}</span>
                         </div>
 
                         <datetime :name="starts_from">
@@ -101,7 +124,7 @@
                         <div class="control-group" :class="[errors.has('priority') ? 'has-error' : '']">
                             <label for="priority" class="required">{{ __('admin::app.promotion.general-info.priority') }}</label>
 
-                            <input type="text" class="control" name="priority" v-model="priority" v-validate="'required|numeric|max:1'" value="{{ old('priority') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.priority') }}&quot;">
+                            <input type="number" class="control" step="1" name="priority" v-model="priority" v-validate="'required|numeric|min_value:1'" value="{{ old('priority') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.priority') }}&quot;">
 
                             <span class="control-error" v-if="errors.has('priority')">@{{ errors.first('priority') }}</span>
                         </div>
@@ -115,8 +138,8 @@
                                 <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
 
                                 <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
-                                    <option value="attribute">Attribute</option>
-                                    <option value="category">Category</option>
+                                    <option value="cart">Cart Attribute</option>
+                                    <option value="product_subselection">Product's subselection</option>
                                 </select>
 
                                 <span class="control-error" v-if="errors.has('criteria')">@{{ errors.first('criteria') }}</span>
@@ -126,49 +149,37 @@
                         </div>
 
                         <div class="condition-set">
-                            <!-- Attribute -->
-                            <div v-for="(attr, index) in attrs" :key="index">
+
+                            <!-- Cart Attribute -->
+                            <div v-for="(cart_attr, index) in cart_attrs" :key="index">
                                 <div class="control-container mt-20">
                                     <div class="title-bar">
-                                        <span>Attribute is </span>
-                                        <span class="icon cross-icon" v-on:click="removeAttr(index)"></span>
+                                        <span>Cart Attribute is </span>
+                                        <span class="icon cross-icon" v-on:click="removeCartAttr(index)"></span>
                                     </div>
+
                                     <div class="control-group mt-10" :key="index">
-                                        <select class="control" name="attributes[]" v-model="attrs[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;">
+                                        <select class="control" name="cart_attributes[]" v-model="cart_attrs[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;">
                                             <option disabled="disabled">Select attribute</option>
-                                            <option v-for="attribute in attributes" :value="attribute.id">@{{ attribute.name }}</option>
+
+                                            <option v-for="(cart_attribute, index) in cart_attributes" :value="cart_attribute.id" :key="index">@{{ cart_attribute.name }}</option>
                                         </select>
 
-                                        <select class="control" name="attributes[]" v-model="attrs[index].condition" v-validate="'required'" style="margin-right: 15px;">
-                                            <option>is</option>
-                                            <option>is any of</option>
-                                            <option>contains</option>
-                                        </select>
+                                        <div v-if='cart_attrs[index].type == "string"'>
+                                            <select class="control" name="cart_attributes[]" v-model="cart_attrs[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                <option v-for="(cart_attribute, index) in cart_attributes.conditions.text" value="cart_attribute" :key="index">@{{ cart_attribute }}</option>
+                                            </select>
 
-                                        <input type="text" class="control" name="attributes[]" v-model="attrs[index].value" placeholder="Enter Value(s)" title="Use comma for multiple values">
-                                    </div>
-                                </div>
-                            </div>
+                                            <input type="text" class="control" name="cart_attributes[]" v-model="cart_attrs[index].value" placeholder="Enter Value">
+                                        </div>
 
-                            <!-- category -->
-                            <div v-for="(cat, index) in cats">
-                                <div class="control-container mt-20">
-                                    <div class="title-bar">
-                                        <span>Category </span>
-                                        <span class="icon cross-icon" v-on:click="removeCat(index)"></span>
-                                    </div>
+                                        <div v-if='cart_attrs[index].type == "numeric"'>
+                                            <select class="control" name="attributes[]" v-model="cart_attrs[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                <option v-for="(cart_attribute, index) in cart_attributes.conditions.numeric" value="cart_attribute" :key="index">@{{ cart_attribute }}</option>
+                                            </select>
 
-                                    <div class="control-group mt-15" :key="index">
-                                        <select class="control" name="categories[]" v-model="cats[index].condition" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;">
-                                            <option>is</option>
-                                            <option>is any of</option>
-                                            <option>contains</option>
-                                        </select>
-
-                                        <select class="control" name="categories[]" v-model="cats[index].category" v-validate="'required'" value="{{ old('category') }}" data-vv-as="&quot;{{ __('admin::app.promotion.category') }}&quot;" multiple>
-                                            <option disabled="disabled">Select Category</option>
-                                            <option v-for="category in categories" :value="category.id">@{{ category.name }}</option>
-                                        </select>
+                                            <input type="number" step="0.1000" class="control" name="cart_attributes[]" v-model="cart_attrs[index].value" placeholder="Enter Value">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -191,16 +202,40 @@
                             <span class="control-error" v-if="errors.has('apply')">@{{ errors.first('apply') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('disc_amt') ? 'has-error' : '']" v-if="apply_amt">
-                            <label for="disc_amt" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
-                            <input type="text" class="control" name="disc_amt" v-model="disc_amt" v-validate="'required|numeric'" value="{{ old('disc_amt') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
-                            <span class="control-error" v-if="errors.has('disc_amt')">@{{ errors.first('disc_amt') }}</span>
+                        <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']" v-if="apply_amt">
+                            <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
+
+                            <input type="number" step="1.0000" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|decimal|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
+
+                            <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('disc_percent') ? 'has-error' : '']" v-if="apply_prct">
                             <label for="disc_percent" class="required">{{ __('admin::app.promotion.general-info.disc_percent') }}</label>
-                            <input type="text" class="control" name="disc_percent" v-model="disc_percent" v-validate="'required|numeric'" value="{{ old('disc_percent') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_percent') }}&quot;">
+
+                            <input type="number" step="0.5000" class="control" name="disc_percent" v-model="disc_percent" v-validate="'required|decimal|min_value:0.0001'" value="{{ old('disc_percent') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_percent') }}&quot;">
+
                             <span class="control-error" v-if="errors.has('disc_percent')">@{{ errors.first('disc_percent') }}</span>
+                        </div>
+
+                        <div class="control-group" :class="[errors.has('buy_atleast') ? 'has-error' : '']">
+                            <label for="buy_atleast" class="required">{{ __('admin::app.promotion.cart.buy-atleast') }}</label>
+
+                            <input type="number" step="1" class="control" name="buy_atleast" v-model="buy_atleast" v-validate="'required|numeric|min_value:1'" value="{{ old('buy_atleast') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.buy-atleast') }}&quot;">
+
+                            <span class="control-error" v-if="errors.has('buy_atleast')">@{{ errors.first('buy_atleast') }}</span>
+                        </div>
+
+                        <div class="control-group" :class="[errors.has('apply_to_shipping') ? 'has-error' : '']">
+                            <label for="customer_groups" class="required">{{ __('admin::app.promotion.cart.apply-to-shipping') }}</label>
+
+                            <select type="text" class="control" name="apply_to_shipping" v-model="apply_to_shipping" v-validate="'required'" value="{{ old('apply_to_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.apply-to-shipping') }}&quot;">
+                                <option value="0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+
+                                <option value="1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                            </select>
+
+                            <span class="control-error" v-if="errors.has('apply_to_shipping')">@{{ errors.first('apply_to_shipping') }}</span>
                         </div>
                     </div>
                 </accordian>
@@ -208,8 +243,8 @@
         </script>
 
         <script>
-            Vue.component('catalog-rule', {
-                template: '#catalog-rule-form-template',
+            Vue.component('cart-rule', {
+                template: '#cart-rule-form-template',
 
                 inject: ['$validator'],
 
@@ -218,21 +253,16 @@
                         apply: null,
                         apply_amt: false,
                         apply_prct: false,
-                        attributes: @json($criteria[0]),
-                        attr: {
+                        apply_to_shipping: null,
+                        buy_atleast: null,
+                        cart_attributes: @json($criteria[0]).cart,
+                        cart_attr: {
                             attribute: null,
                             condition: null,
                             value: null
                         },
-                        attrs: [],
-                        attrs_count: 0,
-                        cat: {
-                            category: null,
-                            condition: null,
-                        },
-                        categories: @json($criteria[1]),
-                        cats: [],
-                        cats_count: 0,
+                        cart_attrs: [],
+                        cart_attrs_count: 0,
                         channels: [],
                         conditions: [],
                         criteria: null,
@@ -242,9 +272,11 @@
                         disc_percent: 0.0,
                         ends_till: null,
                         end_other_rules: null,
+                        is_coupon: null,
                         name: null,
                         priority: 0,
-                        starts_from: null
+                        starts_from: null,
+                        uses_per_cust: 0,
                     }
                 },
 
@@ -253,7 +285,9 @@
 
                 methods: {
                     addCondition () {
-                        if (this.criteria == 'attribute' || this.criteria == 'category') {
+                        console.log(this.criteria);
+
+                        if (this.criteria == 'product_subselection' || this.criteria == 'cart') {
                             this.condition_on = this.criteria;
                         } else {
                             alert('please try again');
@@ -261,21 +295,21 @@
                             return false;
                         }
 
-                        if (this.condition_on == 'attribute') {
-                            this.attrs.push(this.attr);
+                        if (this.condition_on == 'cart') {
+                            this.cart_attrs.push(this.cart_attr);
 
-                            this.attr = {
+                            this.cart_attr = {
                                 attribute: null,
                                 condition: null,
                                 value: null
                             };
-                        } else if (this.condition_on == 'category') {
-                            this.cats.push(this.cat);
+                        } else if (this.condition_on == 'product_subselection') {
+                            // this.cats.push(this.cat);
 
-                            this.cat = {
-                                category: null,
-                                condition: null
-                            };
+                            // this.cat = {
+                            //     category: null,
+                            //     condition: null
+                            // };
                         }
                     },
 
@@ -289,8 +323,8 @@
                         }
                     },
 
-                    removeAttr(index) {
-                        this.attrs.splice(index, 1);
+                    removeCartAttr(index) {
+                        this.cart_attrs.splice(index, 1);
                     },
 
                     removeCat(index) {
