@@ -58,7 +58,6 @@ class CatalogRuleController extends Controller
     public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CatalogRule $catalogRule)
     {
         $this->_config = request('_config');
-
         $this->attribute = $attribute;
         $this->attributeFamily = $attributeFamily;
         $this->category = $category;
@@ -73,7 +72,7 @@ class CatalogRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('criteria', ['cart_attribute' => config('pricerules')]);
+        return view($this->_config['view'])->with('criteria', [$this->attribute->getNameAndId(), $this->category->getNameAndId()]);
     }
 
     public function store()

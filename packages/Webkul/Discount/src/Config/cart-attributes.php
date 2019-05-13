@@ -9,22 +9,43 @@ return [
     ],
 
     'cart' => [
-        0 => 'Sub-total',
-        1 => 'Total Items Quantity',
-        2 => 'Total Weight',
-        3 => 'Payment Method',
-        4 => 'Shipping Postcode',
-        5 => 'Shipping State',
-        6 => 'Shipping Country',
-        7 => 'Shipping Postcode'
+        0 => [
+                'name' => 'Sub-total',
+                'type' =>  'numeric'
+            ],
+        1 => [
+                'name' => 'Total Items Quantity',
+                'type' => 'numeric'
+            ],
+        2 => [
+                'name' => 'Total Weight',
+                'type' => 'numeric'
+            ],
+        3 => [
+                'name' => 'Payment Method',
+                'type' => 'string'
+            ],
+        4 => [
+                'name' => 'Shipping Postcode',
+                'type' => 'string'
+            ],
+        5 => [
+                'name' => 'Shipping State',
+                'type' => 'string'
+            ],
+        6 => [
+                'name' => 'Shipping Country',
+                'type' => 'string'
+            ]
     ],
 
     'conditions' => [
         'numeric' => [
             0 => 'Greater than',
             1 => 'Lesser than',
-            2 => 'Equals',
+            2 => 'Equals'
         ],
+
         'text' => [
             0 => 'is',
             1 => 'is any of',

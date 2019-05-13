@@ -138,7 +138,8 @@
                                 <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
 
                                 <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
-                                    <option value="cart_attr">Cart Attribute</option>
+                                    <option value="cart">Cart Attribute</option>
+                                    <option value="product_subselection">Product's subselection</option>
                                 </select>
 
                                 <span class="control-error" v-if="errors.has('criteria')">@{{ errors.first('criteria') }}</span>
@@ -148,53 +149,40 @@
                         </div>
 
                         <div class="condition-set">
-                            <!-- Attribute -->
-                            <div v-for="(attr, index) in attrs" :key="index">
+
+                            <!-- Cart Attribute -->
+                            <div v-for="(cart_attr, index) in cart_attrs" :key="index">
                                 <div class="control-container mt-20">
                                     <div class="title-bar">
-                                        <span>Attribute is </span>
-                                        <span class="icon cross-icon" v-on:click="removeAttr(index)"></span>
+                                        <span>Cart Attribute is </span>
+                                        <span class="icon cross-icon" v-on:click="removeCartAttr(index)"></span>
                                     </div>
 
                                     <div class="control-group mt-10" :key="index">
-                                        <select class="control" name="attributes[]" v-model="attrs[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;">
+                                        <select class="control" name="cart_attributes[]" v-model="cart_attrs[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;">
                                             <option disabled="disabled">Select attribute</option>
-                                            <option v-for="attribute in attributes" :value="attribute.id">@{{ attribute.name }}</option>
+
+                                            <option v-for="(cart_attribute, index) in cart_attributes" :value="cart_attribute.id" :key="index">@{{ cart_attribute.name }}</option>
                                         </select>
 
-                                        <select class="control" name="attributes[]" v-model="attrs[index].condition" v-validate="'required'" style="margin-right: 15px;">
-                                            <option>is</option>
-                                            <option>is any of</option>
-                                            <option>contains</option>
-                                        </select>
+                                        <div v-if='cart_attrs[index].type == "string"'>
+                                            <select class="control" name="cart_attributes[]" v-model="cart_attrs[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                <option v-for="(cart_attribute, index) in cart_attributes.conditions.text" value="cart_attribute" :key="index">@{{ cart_attribute }}</option>
+                                            </select>
 
-                                        <input type="text" class="control" name="attributes[]" v-model="attrs[index].value" placeholder="Enter Value(s)" title="Use comma for multiple values">
+                                            <input type="text" class="control" name="cart_attributes[]" v-model="cart_attrs[index].value" placeholder="Enter Value">
+                                        </div>
+
+                                        <div v-if='cart_attrs[index].type == "numeric"'>
+                                            <select class="control" name="attributes[]" v-model="cart_attrs[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                <option v-for="(cart_attribute, index) in cart_attributes.conditions.numeric" value="cart_attribute" :key="index">@{{ cart_attribute }}</option>
+                                            </select>
+
+                                            <input type="number" step="0.1000" class="control" name="cart_attributes[]" v-model="cart_attrs[index].value" placeholder="Enter Value">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- category -->
-                            {{-- <div v-for="(cat, index) in cats">
-                                <div class="control-container mt-20">
-                                    <div class="title-bar">
-                                        <span>Category </span>
-                                        <span class="icon cross-icon" v-on:click="removeCat(index)"></span>
-                                    </div>
-
-                                    <div class="control-group mt-15" :key="index">
-                                        <select class="control" name="categories[]" v-model="cats[index].condition" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;">
-                                            <option>is</option>
-                                            <option>is any of</option>
-                                            <option>contains</option>
-                                        </select>
-
-                                        <select class="control" name="categories[]" v-model="cats[index].category" v-validate="'required'" value="{{ old('category') }}" data-vv-as="&quot;{{ __('admin::app.promotion.category') }}&quot;" multiple>
-                                            <option disabled="disabled">Select Category</option>
-                                            <option v-for="category in categories" :value="category.id">@{{ category.name }}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </accordian>
@@ -243,6 +231,7 @@
 
                             <select type="text" class="control" name="apply_to_shipping" v-model="apply_to_shipping" v-validate="'required'" value="{{ old('apply_to_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.apply-to-shipping') }}&quot;">
                                 <option value="0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+
                                 <option value="1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
                             </select>
 
@@ -264,7 +253,9 @@
                         apply: null,
                         apply_amt: false,
                         apply_prct: false,
-                        cart_attributes: @json($criteria[0]),
+                        apply_to_shipping: null,
+                        buy_atleast: null,
+                        cart_attributes: @json($criteria[0]).cart,
                         cart_attr: {
                             attribute: null,
                             condition: null,
@@ -272,13 +263,6 @@
                         },
                         cart_attrs: [],
                         cart_attrs_count: 0,
-                        // cat: {
-                        //     category: null,
-                        //     condition: null,
-                        // },
-                        // categories: @json($criteria[1]),
-                        // cats: [],
-                        // cats_count: 0,
                         channels: [],
                         conditions: [],
                         criteria: null,
@@ -288,13 +272,11 @@
                         disc_percent: 0.0,
                         ends_till: null,
                         end_other_rules: null,
+                        is_coupon: null,
                         name: null,
                         priority: 0,
                         starts_from: null,
                         uses_per_cust: 0,
-                        is_coupon: null,
-                        buy_atleast: null,
-                        apply_to_shipping: null
                     }
                 },
 
@@ -303,7 +285,9 @@
 
                 methods: {
                     addCondition () {
-                        if (this.criteria == 'attribute' || this.criteria == 'category') {
+                        console.log(this.criteria);
+
+                        if (this.criteria == 'product_subselection' || this.criteria == 'cart') {
                             this.condition_on = this.criteria;
                         } else {
                             alert('please try again');
@@ -311,21 +295,21 @@
                             return false;
                         }
 
-                        if (this.condition_on == 'attribute') {
-                            this.attrs.push(this.attr);
+                        if (this.condition_on == 'cart') {
+                            this.cart_attrs.push(this.cart_attr);
 
-                            this.attr = {
+                            this.cart_attr = {
                                 attribute: null,
                                 condition: null,
                                 value: null
                             };
-                        } else if (this.condition_on == 'category') {
-                            this.cats.push(this.cat);
+                        } else if (this.condition_on == 'product_subselection') {
+                            // this.cats.push(this.cat);
 
-                            this.cat = {
-                                category: null,
-                                condition: null
-                            };
+                            // this.cat = {
+                            //     category: null,
+                            //     condition: null
+                            // };
                         }
                     },
 
@@ -339,8 +323,8 @@
                         }
                     },
 
-                    removeAttr(index) {
-                        this.attrs.splice(index, 1);
+                    removeCartAttr(index) {
+                        this.cart_attrs.splice(index, 1);
                     },
 
                     removeCat(index) {

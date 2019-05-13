@@ -84,9 +84,7 @@ class CartRuleController extends Controller
 
     public function create()
     {
-        dd(config('pricerules'));
-
-        return view($this->_config['view'])->with('criteria', [$this->attribute->getNameAndId(), $this->category->getNameAndId()]);
+        return view($this->_config['view'])->with('criteria', [config('pricerules')]);
     }
 
     public function store()
