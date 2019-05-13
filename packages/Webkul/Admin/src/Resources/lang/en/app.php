@@ -793,7 +793,7 @@ return [
             'name' => 'Name',
             'description' => 'Description',
             'apply-percent' => 'Apply as percentage',
-            'apply-fixed' => 'Apply as fixed Amount',
+            'apply-fixed' => 'Apply as fixed amount',
             'adjust-to-percent' => 'Adjust to percentage',
             'adjust-to-value' => 'Adjust to discount value'
         ]

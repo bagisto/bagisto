@@ -1,12 +1,12 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.promotion.add-catalog-rule') }}
+    {{ __('admin::app.promotion.add-cart-rule') }}
 @stop
 
 @section('content')
     <div class="content">
-        <form method="POST" action="{{ route('admin.catalog-rule.store') }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.cart-rule.store') }}" @submit.prevent="onSubmit">
             @csrf
 
             <div class="page-header">
@@ -14,7 +14,7 @@
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
 
-                        {{ __('admin::app.promotion.add-catalog-rule') }}
+                        {{ __('admin::app.promotion.add-cart-rule') }}
                     </h1>
                 </div>
 
@@ -27,14 +27,14 @@
 
             <div class="page-content">
                 <div class="form-container">
-                    <catalog-rule></catalog-rule>
+                    <cart-rule></cart-rule>
                 </div>
             </div>
         </form>
     </div>
 
     @push('scripts')
-        <script type="text/x-template" id="catalog-rule-form-template">
+        <script type="text/x-template" id="cart-rule-form-template">
             <div>
                 @csrf()
 
@@ -44,6 +44,7 @@
                             <label for="name" class="required">{{ __('admin::app.promotion.general-info.name') }}</label>
 
                             <input type="text" class="control" name="name" v-model="name" v-validate="'required'" value="{{ old('name') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.name') }}&quot;">
+
                             <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                         </div>
 
@@ -51,6 +52,7 @@
                             <label for="description">{{ __('admin::app.promotion.general-info.description') }}</label>
 
                             <textarea class="control" name="description" v-model="description" v-validate="'required'" value="{{ old('description') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.description') }}&quot;"></textarea>
+
                             <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                         </div>
 
@@ -69,12 +71,14 @@
 
                         <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                             <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
+
                             <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
                                 <option disabled="disabled">Select Channels</option>
                                 @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                     <option value="{{ $channel->id }}">{{ $channel->name }}</option>
                                 @endforeach
                             </select>
+
                             <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels') }}</span>
                         </div>
 
@@ -101,7 +105,7 @@
                         <div class="control-group" :class="[errors.has('priority') ? 'has-error' : '']">
                             <label for="priority" class="required">{{ __('admin::app.promotion.general-info.priority') }}</label>
 
-                            <input type="text" class="control" name="priority" v-model="priority" v-validate="'required|numeric|max:1'" value="{{ old('priority') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.priority') }}&quot;">
+                            <input type="number" class="control" step="1" name="priority" v-model="priority" v-validate="'required|numeric|min_value:1'" value="{{ old('priority') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.priority') }}&quot;">
 
                             <span class="control-error" v-if="errors.has('priority')">@{{ errors.first('priority') }}</span>
                         </div>
@@ -133,6 +137,7 @@
                                         <span>Attribute is </span>
                                         <span class="icon cross-icon" v-on:click="removeAttr(index)"></span>
                                     </div>
+
                                     <div class="control-group mt-10" :key="index">
                                         <select class="control" name="attributes[]" v-model="attrs[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;">
                                             <option disabled="disabled">Select attribute</option>
@@ -182,24 +187,28 @@
                             <label for="apply" class="required">Apply</label>
 
                             <select class="control" name="apply" v-model="apply" v-validate="'required'" value="{{ old('apply') }}" data-vv-as="&quot;Apply As&quot;" v-on:change="detectApply">
-                                <option value="1">{{ __('admin::app.promotion.catalog.apply-percent') }}</option>
-                                <option value="2">{{ __('admin::app.promotion.catalog.apply-fixed') }}</option>
-                                <option value="3">{{ __('admin::app.promotion.catalog.adjust-to-percent') }}</option>
-                                <option value="4">{{ __('admin::app.promotion.catalog.adjust-to-value') }}</option>
+                                <option value="1">{{ __('admin::app.promotion.cart.apply-percent') }}</option>
+                                <option value="2">{{ __('admin::app.promotion.cart.apply-fixed') }}</option>
+                                <option value="3">{{ __('admin::app.promotion.cart.adjust-to-percent') }}</option>
+                                <option value="4">{{ __('admin::app.promotion.cart.adjust-to-value') }}</option>
                             </select>
 
                             <span class="control-error" v-if="errors.has('apply')">@{{ errors.first('apply') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('disc_amt') ? 'has-error' : '']" v-if="apply_amt">
-                            <label for="disc_amt" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
-                            <input type="text" class="control" name="disc_amt" v-model="disc_amt" v-validate="'required|numeric'" value="{{ old('disc_amt') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
-                            <span class="control-error" v-if="errors.has('disc_amt')">@{{ errors.first('disc_amt') }}</span>
+                        <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']" v-if="apply_amt">
+                            <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
+
+                            <input type="number" step="1.0000" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|decimal|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
+
+                            <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('disc_percent') ? 'has-error' : '']" v-if="apply_prct">
                             <label for="disc_percent" class="required">{{ __('admin::app.promotion.general-info.disc_percent') }}</label>
-                            <input type="text" class="control" name="disc_percent" v-model="disc_percent" v-validate="'required|numeric'" value="{{ old('disc_percent') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_percent') }}&quot;">
+
+                            <input type="number" step="0.5000" class="control" name="disc_percent" v-model="disc_percent" v-validate="'required|decimal|min_value:0.0001'" value="{{ old('disc_percent') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_percent') }}&quot;">
+
                             <span class="control-error" v-if="errors.has('disc_percent')">@{{ errors.first('disc_percent') }}</span>
                         </div>
                     </div>
@@ -208,8 +217,8 @@
         </script>
 
         <script>
-            Vue.component('catalog-rule', {
-                template: '#catalog-rule-form-template',
+            Vue.component('cart-rule', {
+                template: '#cart-rule-form-template',
 
                 inject: ['$validator'],
 
