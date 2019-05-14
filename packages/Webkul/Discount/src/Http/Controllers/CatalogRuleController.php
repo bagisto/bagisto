@@ -4,7 +4,6 @@ namespace Webkul\Discount\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
@@ -84,8 +83,12 @@ class CatalogRuleController extends Controller
             'channels' => 'required|array',
             'starts_from' => 'required|date_format:Y-m-d H:i:s',
             'ends_till' => 'required|date_format:Y-m-d H:i:s',
-            'apply' => 'numeric|min:1|max:4'
+            'priority' => 'required|numeric',
+            'criteria' => 'required',
+            'apply' => 'required|numeric|min:1|max:4'
         ]);
+
+        dd(request()->all());
 
         $catalogRule = $this->catalogRule->create(request()->all());
     }

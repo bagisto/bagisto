@@ -41,15 +41,16 @@ return [
 
     'conditions' => [
         'numeric' => [
-            0 => 'Greater than',
-            1 => 'Lesser than',
-            2 => 'Equals'
+            0 => 'Equals',
+            1 => 'Equals or greater',
+            2 => 'Equals or lesser',
+            3 => 'Greater than',
+            4 => 'Lesser than',
         ],
 
         'text' => [
             0 => 'is',
-            1 => 'is any of',
-            2 => 'contains'
+            1 => 'is not'
         ],
     ]
 ];

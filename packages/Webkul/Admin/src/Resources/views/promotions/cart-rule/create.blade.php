@@ -162,7 +162,7 @@
                                         <select class="control" name="cart_attributes[]" v-model="cart_attrs[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;" v-on:change="enableCondition($event, index)">
                                             <option disabled="disabled">Select attribute</option>
 
-                                            <option v-for="(cart_attribute, index1) in cart_attributes" :value="cart_attribute.id" :key="index1">@{{ cart_attribute.name }}</option>
+                                            <option v-for="(cart_attribute, index1) in cart_attributes" :value="cart_attribute.name" :key="index1">@{{ cart_attribute.name }}</option>
                                         </select>
 
                                         <div v-if='cart_attrs[index].type == "string"'>
@@ -256,11 +256,13 @@
                         apply_prct: false,
                         apply_to_shipping: null,
                         buy_atleast: null,
+                        attribute_options: @json($criteria[1]),
                         cart_attributes: @json($criteria[0]).cart,
                         cart_attr: {
                             attribute: null,
                             condition: null,
-                            value: null
+                            value: null,
+                            type: null
                         },
                         cart_attrs: [],
                         cart_attrs_count: 0,
@@ -334,8 +336,6 @@
                                 this.cart_attrs[pushedIndex].type = this.cart_attributes[i].type;
                             }
                         }
-
-
                     },
 
                     removeCartAttr(index) {

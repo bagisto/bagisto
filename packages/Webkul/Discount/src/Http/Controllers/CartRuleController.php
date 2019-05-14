@@ -11,6 +11,7 @@ use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Product\Repositories\ProductFlatRepository as Product;
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
+use Webkul\Checkout\Repositories\CartRepository as Cart;
 
 /**
  * Cart Rule controller
@@ -53,22 +54,22 @@ class CartRuleController extends Controller
     /**
      * To hold the Cart repository instance
      */
-    protected $CartRule;
+    protected $cartRule;
 
-    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CartRule $CartRule)
+    /**
+     * To hold the cart repository instance
+     */
+    protected $cart;
+
+    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CartRule $cartRule, Cart $cart)
     {
         $this->_config = request('_config');
-
         $this->attribute = $attribute;
-
         $this->attributeFamily = $attributeFamily;
-
         $this->category = $category;
-
         $this->product = $product;
-
-        $this->CartRule = $CartRule;
-
+        $this->CartRule = $cartRule;
+        $this->cart = $cart;
         $this->appliedConfig = [
             0 => trans('admin::app.promotion.Cart.apply-percent'),
             1 => trans('admin::app.promotion.Cart.apply-fixed'),
@@ -84,9 +85,11 @@ class CartRuleController extends Controller
 
     public function create()
     {
-        // dd(config('pricerules'));
+        $countries = core()->getAllCountries();
 
-        return view($this->_config['view'])->with('criteria', [config('pricerules')]);
+        $attributesWithOptions = $this->fetchOptionableAttributes();
+
+        return view($this->_config['view'])->with('criteria', [config('pricerules'), $attributesWithOptions]);
     }
 
     public function store()
@@ -101,11 +104,19 @@ class CartRuleController extends Controller
             'apply' => 'numeric|min:1|max:4'
         ]);
 
-        $CartRule = $this->CartRule->create(request()->all());
+        $cartRule = $this->cartRule->create(request()->all());
     }
 
-    public function fetchAttribute()
+    public function fetchOptionableAttributes()
     {
-        return request()->all();
+        $attributesWithOptions = array();
+
+        foreach($this->attribute->all() as $attribute) {
+            if (($attribute->type == 'select' || $attribute->type == 'multiselect')  && $attribute->code != 'tax_category_id') {
+                $attributesWithOptions[$attribute->admin_name] = $attribute->options->toArray();
+            }
+        }
+
+        return $attributesWithOptions;
     }
 }
