@@ -52,42 +52,45 @@
                     }
                 ?>
 
-                <span class="list-heading">{{ __('shop::app.footer.locale') }}</span>
-                <div class="form-container">
-                    <div class="control-group">
-                        <select class="control locale-switcher" onchange="window.location.href = this.value">
-
-                            @foreach (core()->getCurrentChannel()->locales as $locale)
-                                @if(isset($serachQuery))
-                                    <option value="?{{ $serachQuery }}?locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
-                                @else
-                                    <option value="?locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
-                                @endif
-                            @endforeach
-
-                        </select>
-                    </div>
-                </div>
-
-                <div class="currency">
-                    <span class="list-heading">{{ __('shop::app.footer.currency') }}</span>
+                @if(count(core()->getCurrentChannel()->locales) > 1)
+                    <span class="list-heading">{{ __('shop::app.footer.locale') }}</span>
                     <div class="form-container">
                         <div class="control-group">
                             <select class="control locale-switcher" onchange="window.location.href = this.value">
 
-                                @foreach (core()->getCurrentChannel()->currencies as $currency)
+                                @foreach (core()->getCurrentChannel()->locales as $locale)
                                     @if(isset($serachQuery))
-                                        <option value="?{{ $serachQuery }}?currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
+                                        <option value="?{{ $serachQuery }}?locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
                                     @else
-                                        <option value="?currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
+                                        <option value="?locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
                                     @endif
                                 @endforeach
 
                             </select>
                         </div>
                     </div>
-                </div>
+                @endif
 
+                @if(count(core()->getCurrentChannel()->currencies) > 1)
+                    <div class="currency">
+                        <span class="list-heading">{{ __('shop::app.footer.currency') }}</span>
+                        <div class="form-container">
+                            <div class="control-group">
+                                <select class="control locale-switcher" onchange="window.location.href = this.value">
+
+                                    @foreach (core()->getCurrentChannel()->currencies as $currency)
+                                        @if(isset($serachQuery))
+                                            <option value="?{{ $serachQuery }}?currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
+                                        @else
+                                            <option value="?currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
+                                        @endif
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
