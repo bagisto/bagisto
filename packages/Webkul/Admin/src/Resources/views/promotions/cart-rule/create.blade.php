@@ -159,15 +159,15 @@
                                     </div>
 
                                     <div class="control-group mt-10" :key="index">
-                                        <select class="control" name="cart_attributes[]" v-model="cart_attrs[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;">
+                                        <select class="control" name="cart_attributes[]" v-model="cart_attrs[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;" v-on:change="enableCondition($event, index)">
                                             <option disabled="disabled">Select attribute</option>
 
-                                            <option v-for="(cart_attribute, index) in cart_attributes" :value="cart_attribute.id" :key="index">@{{ cart_attribute.name }}</option>
+                                            <option v-for="(cart_attribute, index1) in cart_attributes" :value="cart_attribute.id" :key="index1">@{{ cart_attribute.name }}</option>
                                         </select>
 
                                         <div v-if='cart_attrs[index].type == "string"'>
                                             <select class="control" name="cart_attributes[]" v-model="cart_attrs[index].condition" v-validate="'required'" style="margin-right: 15px;">
-                                                <option v-for="(cart_attribute, index) in cart_attributes.conditions.text" value="cart_attribute" :key="index">@{{ cart_attribute }}</option>
+                                                <option v-for="(config_param, index) in config_params.text" :value="config_param" :key="index">@{{ config_param }}</option>
                                             </select>
 
                                             <input type="text" class="control" name="cart_attributes[]" v-model="cart_attrs[index].value" placeholder="Enter Value">
@@ -175,7 +175,7 @@
 
                                         <div v-if='cart_attrs[index].type == "numeric"'>
                                             <select class="control" name="attributes[]" v-model="cart_attrs[index].condition" v-validate="'required'" style="margin-right: 15px;">
-                                                <option v-for="(cart_attribute, index) in cart_attributes.conditions.numeric" value="cart_attribute" :key="index">@{{ cart_attribute }}</option>
+                                                <option v-for="(config_param, index) in config_params.numeric" :value="config_param" :key="index">@{{ config_param }}</option>
                                             </select>
 
                                             <input type="number" step="0.1000" class="control" name="cart_attributes[]" v-model="cart_attrs[index].value" placeholder="Enter Value">
@@ -250,6 +250,7 @@
 
                 data () {
                     return {
+                        type: [],
                         apply: null,
                         apply_amt: false,
                         apply_prct: false,
@@ -265,6 +266,7 @@
                         cart_attrs_count: 0,
                         channels: [],
                         conditions: [],
+                        config_params: @json($criteria[0]).conditions,
                         criteria: null,
                         customer_groups: [],
                         description: null,
@@ -301,7 +303,8 @@
                             this.cart_attr = {
                                 attribute: null,
                                 condition: null,
-                                value: null
+                                value: null,
+                                type: null
                             };
                         } else if (this.condition_on == 'product_subselection') {
                             // this.cats.push(this.cat);
@@ -321,6 +324,18 @@
                             this.apply_prct = false;
                             this.apply_amt = true;
                         }
+                    },
+
+                    enableCondition(event, pushedIndex) {
+                        selectedIndex = event.target.selectedIndex - 1;
+
+                        for (i in this.cart_attributes) {
+                            if (i == selectedIndex) {
+                                this.cart_attrs[pushedIndex].type = this.cart_attributes[i].type;
+                            }
+                        }
+
+
                     },
 
                     removeCartAttr(index) {
