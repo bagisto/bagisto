@@ -139,7 +139,6 @@
 
                                 <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
                                     <option value="cart">Cart Attribute</option>
-                                    <option value="product_subselection">Product's subselection</option>
                                 </select>
 
                                 <span class="control-error" v-if="errors.has('criteria')">@{{ errors.first('criteria') }}</span>
@@ -170,7 +169,23 @@
                                                 <option v-for="(config_param, index) in config_params.text" :value="config_param" :key="index">@{{ config_param }}</option>
                                             </select>
 
-                                            <input type="text" class="control" name="cart_attributes[]" v-model="cart_attrs[index].value" placeholder="Enter Value">
+                                            <div v-if='cart_attrs[index].attribute == "Shipping State"'>
+                                                <select class="control" v-validate="'required'" v-model="cart_attrs[index].value">
+                                                    <option disabled="disabled">Select State</option>
+                                                    <optgroup v-for='(state, code) in states' :label="code">
+                                                        <option v-for="(stateObj, index) in state" :value="stateObj.code">@{{ stateObj.default_name }}</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+
+                                            <div v-if='cart_attrs[index].attribute == "Shipping Country"'>
+                                                <select class="control" v-validate="'required'" v-model="cart_attrs[index].value">
+                                                    <option disabled="disabled">Select Country</option>
+                                                    <option v-for="(country, index) in countries" :value="country.code">@{{ country.name }}</option>
+                                                </select>
+                                            </div>
+
+                                            <input type="text" class="control" name="cart_attributes[]" v-model="cart_attrs[index].value" placeholder="Enter Value" v-if='cart_attrs[index].attribute != "Shipping State" && cart_attrs[index].attribute != "Shipping Country"'>
                                         </div>
 
                                         <div v-if='cart_attrs[index].type == "numeric"'>
@@ -268,6 +283,8 @@
                         cart_attrs_count: 0,
                         channels: [],
                         conditions: [],
+                        countries: @json($criteria[2]['countries']),
+                        states: @json($criteria[2]['states']),
                         config_params: @json($criteria[0]).conditions,
                         criteria: null,
                         customer_groups: [],
@@ -289,8 +306,6 @@
 
                 methods: {
                     addCondition () {
-                        console.log(this.criteria);
-
                         if (this.criteria == 'product_subselection' || this.criteria == 'cart') {
                             this.condition_on = this.criteria;
                         } else {
@@ -309,12 +324,6 @@
                                 type: null
                             };
                         } else if (this.condition_on == 'product_subselection') {
-                            // this.cats.push(this.cat);
-
-                            // this.cat = {
-                            //     category: null,
-                            //     condition: null
-                            // };
                         }
                     },
 
@@ -333,6 +342,7 @@
 
                         for (i in this.cart_attributes) {
                             if (i == selectedIndex) {
+                                console.log(this.cart_attributes[i].name);
                                 this.cart_attrs[pushedIndex].type = this.cart_attributes[i].type;
                             }
                         }

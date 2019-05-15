@@ -21,13 +21,14 @@ class CreateCatalogRulesTable extends Migration
 
         Schema::create('catalog_rules', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('description')->nullable();
-            $table->datetime('starts_from');
-            $table->datetime('ends_till');
-            $table->json('conditions');
-            $table->json('actions');
-            $table->boolean('ends_other_rules');
+            $table->datetime('starts_from')->nullable();
+            $table->datetime('ends_till')->nullable();
+            $table->json('conditions')->nullable();
+            $table->json('actions')->nullable();
+            $table->boolean('status')->default(1);
+            $table->boolean('end_other_rules')->default(1);
             $table->integer('sort_order')->unsigned();
             $table->string('action_type');
             $table->string('discount_amount');

@@ -16,7 +16,9 @@ class CreateCartRuleCustomerGroupsTable extends Migration
         Schema::create('cart_rule_customer_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cart_rule_id')->unsigned();
-            $table->foreign('cart_rule_id')->references('id')->on('cart_rules');
+            $table->foreign('cart_rule_id')->references('id')->on('cart_rules')->onDelete('cascade');
+            $table->integer('customer_group_id')->unsigned();
+            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
             $table->timestamps();
         });
     }

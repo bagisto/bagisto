@@ -85,11 +85,7 @@ class CartRuleController extends Controller
 
     public function create()
     {
-        $countries = core()->getAllCountries();
-
-        $attributesWithOptions = $this->fetchOptionableAttributes();
-
-        return view($this->_config['view'])->with('criteria', [config('pricerules'), $attributesWithOptions]);
+        return view($this->_config['view'])->with('criteria', [config('pricerules'), $this->fetchOptionableAttributes(), $this->getStatesAndCountries()]);
     }
 
     public function store()
@@ -105,6 +101,18 @@ class CartRuleController extends Controller
         ]);
 
         $cartRule = $this->cartRule->create(request()->all());
+    }
+
+    public function getStatesAndCountries()
+    {
+        $countries = core()->countries()->toArray();
+
+        $states = core()->groupedStatesByCountries();
+
+        return [
+            'countries' => $countries,
+            'states' => $states
+        ];
     }
 
     public function fetchOptionableAttributes()
