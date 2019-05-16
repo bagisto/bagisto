@@ -71,7 +71,7 @@ class CatalogRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('criteria', [$this->attribute->getNameAndId(), $this->category->getNameAndId()]);
+        return view($this->_config['view'])->with('criteria', [$this->attribute->getPartial(), $this->category->getPartial()]);
     }
 
     public function store()
@@ -93,8 +93,8 @@ class CatalogRuleController extends Controller
         $catalogRule = $this->catalogRule->create(request()->all());
     }
 
-    public function fetchAttribute()
+    public function fetchAttributeOptions()
     {
-        return request()->all();
+        return [request()->all()];
     }
 }

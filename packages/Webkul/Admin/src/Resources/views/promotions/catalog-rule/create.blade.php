@@ -66,20 +66,20 @@
                                 @endforeach
                             </select>
 
-                            <span class="control-error" v-if="errors.has('customer_groups[]')">@{{ errors.first('customer_groups') }}</span>
+                            <span class="control-error" v-if="errors.has('customer_groups[]')">@{{ errors.first('customer_groups[]') }}</span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                             <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
 
-                            <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
+                            <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels') }}&quot;" multiple="multiple">
                                 <option disabled="disabled">Select Channels</option>
                                 @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                     <option value="{{ $channel->id }}">{{ $channel->name }}</option>
                                 @endforeach
                             </select>
 
-                            <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels') }}</span>
+                            <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels[]') }}</span>
                         </div>
 
                         <datetime :name="starts_from">
@@ -119,8 +119,9 @@
                                 <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
 
                                 <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
-                                    <option value="attribute">Attribute</option>
-                                    <option value="category">Category</option>
+                                        <option value="condition_combination">Condition Combination</option>
+                                        <option value="attribute">Attribute</option>
+                                    {{-- <option value="category">Category</option> --}}
                                 </select>
 
                                 <span class="control-error" v-if="errors.has('criteria')">@{{ errors.first('criteria') }}</span>
@@ -129,9 +130,23 @@
                             <span class="btn btn-primary btn-lg" v-on:click="addCondition">Add Condition</span>
                         </div>
 
-                        <div class="condition-set">
+                        <div class="condition-set" v-if="attributes_list.length">
+                            <!-- <span class="label mt-20">Assume all conditions are true:</span>
+                            <span class="label mt-20">Assume
+                                <select>
+                                    <option>All</option>
+                                    <option>Any</option>
+                                </select>
+                                 are
+                                <select>
+                                    <option>True</option>
+                                    <option>False</option>
+                                </select>
+                                 .
+                            </span> -->
+
                             <!-- Attribute -->
-                            <div v-for="(attr, index) in attrs" :key="index">
+                            <div v-for="(attrs, index) in attributes_list" :key="index">
                                 <div class="control-container mt-20">
                                     <div class="title-bar">
                                         <span>Attribute is </span>
@@ -139,18 +154,71 @@
                                     </div>
 
                                     <div class="control-group mt-10" :key="index">
-                                        <select class="control" name="attributes[]" v-model="attrs[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;">
+                                        <select class="control" name="attributes[]" v-model="attributes_list[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;" v-on:change="enableCondition($event, index)">
                                             <option disabled="disabled">Select attribute</option>
-                                            <option v-for="attribute in attributes" :value="attribute.id">@{{ attribute.name }}</option>
+                                            <option v-for="attr_ip in attrs_input" :value="attr_ip.id">@{{ attr_ip.name }}</option>
                                         </select>
 
-                                        <select class="control" name="attributes[]" v-model="attrs[index].condition" v-validate="'required'" style="margin-right: 15px;">
-                                            <option>is</option>
-                                            <option>is any of</option>
-                                            <option>contains</option>
-                                        </select>
+                                        <div v-if='attributes_list[index].type == "text" || attributes_list[index].type == "textarea"'>
+                                            <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                <option>is</option>
+                                                <option>is any of</option>
+                                                <option>contains</option>
+                                            </select>
 
-                                        <input type="text" class="control" name="attributes[]" v-model="attrs[index].value" placeholder="Enter Value(s)" title="Use comma for multiple values">
+                                            <input type="text" class="control" name="attributes[]" v-model="attributes_list[index].value" placeholder="Enter Value">
+                                        </div>
+
+                                        <div v-if='attributes_list[index].type == "price"'>
+                                            <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                <option>is</option>
+                                                <option>is any of</option>
+                                                <option>contains</option>
+                                            </select>
+
+                                            <input type="number" step="0.1000" class="control" name="attributes[]" v-model="attributes_list[index].value" placeholder="Enter Value">
+                                        </div>
+
+                                        <div v-else-if='attributes_list[index].type == "boolean"'>
+                                            <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                <option selected="selected">is</option>
+                                            </select>
+
+                                            <select class="control" name="attributes[]" v-model="attributes_list[index].value">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+
+                                        <div v-else-if='attributes_list[index].type == "date"'>
+                                            <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                <option :selected="true">is</option>
+                                            </select>
+
+                                            <date>
+                                                <input type="text" class="control" v-model="attributes_list[index].value" name="attributes[]" v-validate="'required'" value="Enter Value">
+                                            </date>
+                                        </div>
+
+                                        <div v-else-if='attributes_list[index].type == "datetime"'>
+                                            <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                <option selected="selected">is</option>
+                                            </select>
+
+                                            <datetime>
+                                                <input type="text" class="control" v-model="attributes_list[index].value" name="attributes[]" v-validate="'required'" value="Enter Value">
+                                            </datetime>
+                                        </div>
+
+                                        <div v-else-if='attributes_list[index].type == "select" || attributes_list[index].type == "multiselect"'>
+                                            <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                <option selected="selected">is</option>
+                                            </select>
+
+                                            <datetime>
+                                                <input type="text" class="control" v-model="attributes_list[index].value" name="attributes[]" v-validate="'required'" value="Enter Select Values">
+                                            </datetime>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -227,14 +295,15 @@
                         apply: null,
                         apply_amt: false,
                         apply_prct: false,
-                        attributes: @json($criteria[0]),
-                        attr: {
+                        attributes_list: [],
+                        attrs_input: @json($criteria[0]),
+                        attr_object: {
                             attribute: null,
                             condition: null,
+                            type: null,
                             value: null
                         },
-                        attrs: [],
-                        attrs_count: 0,
+                        attr_obj_count: 0,
                         cat: {
                             category: null,
                             condition: null,
@@ -243,7 +312,8 @@
                         cats: [],
                         cats_count: 0,
                         channels: [],
-                        conditions: [],
+                        conditions: [
+                        ],
                         criteria: null,
                         customer_groups: [],
                         description: null,
@@ -271,20 +341,43 @@
                         }
 
                         if (this.condition_on == 'attribute') {
-                            this.attrs.push(this.attr);
+                            this.attributes_list.push(this.attr_object);
 
-                            this.attr = {
+                            this.attr_object = {
                                 attribute: null,
                                 condition: null,
-                                value: null
+                                value: null,
+                                type: null,
+                                options: null
                             };
                         } else if (this.condition_on == 'category') {
                             this.cats.push(this.cat);
+                            this.conditions.push(this.cat);
 
                             this.cat = {
                                 category: null,
                                 condition: null
                             };
+                        }
+                    },
+
+                    enableCondition(event, index) {
+                        this.attributes_list[index].type = this.attrs_input[event.target.selectedIndex - 1].type;
+
+                        var this_this = this;
+
+                        if (this.attrs_input[event.target.selectedIndex - 1].type == 'select' || this.attrs_input[event.target.selectedIndex - 1].type == 'multiselect') {
+                            axios.post('{{ route('admin.catalog-rule.options') }}', {
+                                'attribute' : this.attrs_input[event.target.selectedIndex - 1].attribute
+                            })
+                            .then(function (response) {
+                                console.log(response);
+
+                                this.attributes_list[index].value = null;
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
                         }
                     },
 

@@ -66,20 +66,20 @@
                                 @endforeach
                             </select>
 
-                            <span class="control-error" v-if="errors.has('customer_groups[]')">@{{ errors.first('customer_groups') }}</span>
+                            <span class="control-error" v-if="errors.has('customer_groups[]')">@{{ errors.first('customer_groups[]') }}</span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                             <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
 
-                            <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
+                            <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels') }}&quot;" multiple="multiple">
                                 <option disabled="disabled">Select Channels</option>
                                 @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                     <option value="{{ $channel->id }}">{{ $channel->name }}</option>
                                 @endforeach
                             </select>
 
-                            <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels') }}</span>
+                            <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels[]') }}</span>
                         </div>
 
                         <div class="control-group" :class="[errors.has('is_coupon') ? 'has-error' : '']">

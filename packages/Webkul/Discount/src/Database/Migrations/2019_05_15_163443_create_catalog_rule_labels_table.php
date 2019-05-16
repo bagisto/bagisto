@@ -17,6 +17,8 @@ class CreateCatalogRuleLabelsTable extends Migration
             $table->increments('id');
             $table->integer('locale_id')->unsigned();
             $table->foreign('locale_id')->references('id')->on('locales');
+            $table->integer('catalog_rule_id')->unsigned();
+            $table->foreign('catalog_rule_id')->references('id')->on('catalog_rules')->onDelete('cascade');
             $table->text('label');
             $table->timestamps();
         });

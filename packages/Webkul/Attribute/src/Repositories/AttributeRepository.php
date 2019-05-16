@@ -214,7 +214,7 @@ class AttributeRepository extends Repository
     /**
      * @return Object
      */
-    public function getNameAndId()
+    public function getPartial()
     {
         $attributes = $this->model->all();
         $trimmed = array();
@@ -223,7 +223,8 @@ class AttributeRepository extends Repository
             if ($attribute->name != null || $attribute->name != "") {
                 $trimmed[$key] = [
                     'id' => $attribute->id,
-                    'name' => $attribute->name
+                    'name' => $attribute->name,
+                    'type' => $attribute->type
                 ];
             }
         }

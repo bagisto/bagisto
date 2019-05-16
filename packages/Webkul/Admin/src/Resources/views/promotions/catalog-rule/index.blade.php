@@ -13,6 +13,10 @@
             </div>
 
             <div class="page-action">
+                <button class="btn btn-lg btn-primary">
+                    {{ __('Apply Rules') }}
+                </button>
+
                 <a href="{{ route('admin.catalog-rule.create') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.promotion.add-catalog-rule') }}
                 </a>

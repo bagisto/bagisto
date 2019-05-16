@@ -15,11 +15,13 @@ class CreateCatalogProductsTable extends Migration
     {
         Schema::create('catalog_products', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('catalog_rule_id')->unsigned();
+            $table->integer('catalog_rule_id')->unsigned()->unique();
             $table->foreign('catalog_rule_id')->references('id')->on('catalog_rules')->onDelete('cascade');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->decimal('price', 12, 4);
+            $table->string('act_operator')->default('fixed');
+            $table->decimal('act_amount', 12, 4)->default(0.0000);
+            $table->unsignedSmallInteger('act_stop')->default(0);
             $table->timestamps();
         });
     }
