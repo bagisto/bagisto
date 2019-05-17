@@ -42,6 +42,9 @@ class Order {
     public function sendNewInvoiceMail($invoice)
     {
         try {
+            if ($invoice->email_sent)
+                return;
+
             Mail::queue(new NewInvoiceNotification($invoice));
         } catch (\Exception $e) {
 
@@ -56,6 +59,9 @@ class Order {
     public function sendNewShipmentMail($shipment)
     {
         try {
+            if (! $shipment->email_sent)
+                return;
+
             Mail::queue(new NewShipmentNotification($shipment));
 
             Mail::queue(new NewInventorySourceNotification($shipment));
