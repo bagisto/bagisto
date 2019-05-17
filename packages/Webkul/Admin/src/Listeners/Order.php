@@ -59,7 +59,7 @@ class Order {
     public function sendNewShipmentMail($shipment)
     {
         try {
-            if (! $shipment->email_sent)
+            if ($shipment->email_sent)
                 return;
 
             Mail::queue(new NewShipmentNotification($shipment));
