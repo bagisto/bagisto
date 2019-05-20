@@ -4,7 +4,6 @@ namespace Webkul\Discount\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
@@ -72,26 +71,31 @@ class CatalogRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('criteria', [$this->attribute->getNameAndId(), $this->category->getNameAndId()]);
+        return view($this->_config['view'])->with('criteria', [$this->attribute->getPartial(), $this->category->getPartial()]);
     }
 
     public function store()
     {
+        // dd(request()->all());
+
         $this->validate(request(), [
             'name' => 'required|string',
             'description' => 'string',
-            'customer_groups' => 'required|array',
-            'channels' => 'required|array',
-            'starts_from' => 'required|date_format:Y-m-d H:i:s',
-            'ends_till' => 'required|date_format:Y-m-d H:i:s',
-            'apply' => 'numeric|min:1|max:4'
+            'customer_groups' => 'required',
+            'channels' => 'required',
+            'starts_from' => 'required|date',
+            'ends_till' => 'required|date',
+            'priority' => 'required|numeric',
+            'criteria' => 'required',
+            'apply' => 'required|numeric|min:1|max:4'
         ]);
 
+        dd(request()->all());
         $catalogRule = $this->catalogRule->create(request()->all());
     }
 
-    public function fetchAttribute()
+    public function fetchAttributeOptions()
     {
-        return request()->all();
+        return [request()->all()];
     }
 }

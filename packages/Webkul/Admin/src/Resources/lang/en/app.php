@@ -792,6 +792,8 @@ return [
             'is-coupon-yes' => 'Yes',
             'is-coupon-no' => 'No',
             'uses-per-cust' => 'Uses per customer',
+            'all' => 'All',
+            'any' => 'Any'
         ],
         'catalog' => [
             'name' => 'Name',

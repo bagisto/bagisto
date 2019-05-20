@@ -213,7 +213,7 @@ class CategoryRepository extends Repository
         }
     }
 
-    public function getNameAndId()
+    public function getPartial()
     {
         $categories = $this->model->all();
         $trimmed = array();
