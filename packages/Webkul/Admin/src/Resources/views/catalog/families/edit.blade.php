@@ -216,9 +216,10 @@
 
             methods: {
                 addGroup: function (formScope) {
-                    this.$validator.validateAll(formScope).then(function(result)  {
+                    var this_this = this;
+
+                    this.$validator.validateAll(formScope).then(function (result) {
                         if (result) {
-                            var this_this = this;
 
                             var filteredGroups = groups.filter(function(group) {
                                 return this_this.group.groupName.trim() === (group.name ? group.name.trim() : group.groupName.trim())
@@ -236,13 +237,13 @@
                                     });
                                 }
                             } else {
-                                groups.push(this.group);
+                                groups.push(this_this.group);
 
-                                groups = this.sortGroups();
+                                groups = this_this.sortGroups();
 
-                                this.group = {'groupName': '', 'position': '', 'custom_attributes': []};
+                                this.group = {'groupName': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
 
-                                this.$parent.closeModal();
+                                this_this.$parent.closeModal();
                             }
                         }
                     });
