@@ -168,6 +168,12 @@ Route::group(['prefix' => 'api'], function ($router) {
             'authorization_required' => true
         ]);
 
+        Route::delete('addresses/{id}', 'ResourceController@destroy')->defaults('_config', [
+            'repository' => 'Webkul\Customer\Repositories\CustomerAddressRepository',
+            'resource' => 'Webkul\API\Http\Resources\Customer\CustomerAddress',
+            'authorization_required' => true
+        ]);
+
         Route::put('addresses/{id}', 'AddressController@update')->defaults('_config', [
             'authorization_required' => true
         ]);
