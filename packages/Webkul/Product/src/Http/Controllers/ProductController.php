@@ -165,7 +165,7 @@ class ProductController extends Controller
 
         $inventorySources = $this->inventorySource->all();
 
-        return view($this->_config['view'], compact('product', 'categories', 'inventorySources', 'allProducts'));
+        return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
     }
 
     /**
