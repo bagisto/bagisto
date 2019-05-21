@@ -62,7 +62,7 @@
             @elseif ($error = session('error'))
                 window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }];
             @elseif ($info = session('info'))
-                window.flashMessages = [{'type': 'alert-error', 'message': "{{ $info }}" }];
+                window.flashMessages = [{'type': 'alert-info', 'message': "{{ $info }}" }];
             @endif
 
             window.serverErrors = [];

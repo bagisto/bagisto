@@ -50,6 +50,11 @@ class CatalogRuleController extends Controller
     protected $appliedConfig;
 
     /**
+     * Property for catalog rule application
+     */
+    protected $appliedConditions;
+
+    /**
      * To hold the catalog repository instance
      */
     protected $catalogRule;
@@ -62,6 +67,8 @@ class CatalogRuleController extends Controller
         $this->category = $category;
         $this->product = $product;
         $this->catalogRule = $catalogRule;
+        $this->appliedConfig = config('pricerules.catalog');
+        $this->appliedConditions = config('pricerules.conditions');
     }
 
     public function index()
@@ -71,7 +78,7 @@ class CatalogRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('criteria', [$this->attribute->getPartial(), $this->category->getPartial()]);
+        return view($this->_config['view'])->with('criteria', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions]);
     }
 
     public function store()
@@ -87,15 +94,28 @@ class CatalogRuleController extends Controller
             'ends_till' => 'required|date',
             'priority' => 'required|numeric',
             'criteria' => 'required',
-            'apply' => 'required|numeric|min:1|max:4'
+            'all_conditions' => 'required|array',
+            'apply' => 'required|numeric|min:0|max:3'
         ]);
 
-        dd(request()->all());
-        $catalogRule = $this->catalogRule->create(request()->all());
+        $data = request()->all();
+        $data['status'] = 1;
+
+        dd($data);
+
+        $catalogRule = $this->catalogRule->create($data);
     }
 
-    public function fetchAttributeOptions()
+    public function fetchOptionableAttributes()
     {
-        return [request()->all()];
+        $attributesWithOptions = array();
+
+        foreach($this->attribute->all() as $attribute) {
+            if (($attribute->type == 'select' || $attribute->type == 'multiselect')  && $attribute->code != 'tax_category_id') {
+                $attributesWithOptions[$attribute->admin_name] = $attribute->options->toArray();
+            }
+        }
+
+        return $attributesWithOptions;
     }
 }

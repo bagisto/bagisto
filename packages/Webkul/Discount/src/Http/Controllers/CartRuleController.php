@@ -70,12 +70,7 @@ class CartRuleController extends Controller
         $this->product = $product;
         $this->CartRule = $cartRule;
         $this->cart = $cart;
-        $this->appliedConfig = [
-            0 => trans('admin::app.promotion.Cart.apply-percent'),
-            1 => trans('admin::app.promotion.Cart.apply-fixed'),
-            2 => trans('admin::app.promotion.Cart.adjust-to-percent'),
-            3 => trans('admin::app.promotion.Cart.adjust-to-value')
-        ];
+        $this->appliedConfig = config('pricerules.catalog');
     }
 
     public function index()
@@ -85,7 +80,7 @@ class CartRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('criteria', [config('pricerules'), $this->fetchOptionableAttributes(), $this->getStatesAndCountries()]);
+        return view($this->_config['view'])->with('criteria', [$this->appliedConfig, $this->fetchOptionableAttributes(), $this->getStatesAndCountries()]);
     }
 
     public function store()
