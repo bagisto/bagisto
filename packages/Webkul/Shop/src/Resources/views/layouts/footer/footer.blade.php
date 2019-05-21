@@ -55,7 +55,7 @@
                 <span class="list-heading">{{ __('shop::app.footer.locale') }}</span>
                 <div class="form-container">
                     <div class="control-group">
-                        <select class="control locale-switcher" onchange="window.location.href = this.value">
+                        <select class="control locale-switcher" onchange="window.location.href = this.value" @if (count(core()->getCurrentChannel()->locales) == 1) disabled="disabled" @endif>
 
                             @foreach (core()->getCurrentChannel()->locales as $locale)
                                 @if(isset($serachQuery))
