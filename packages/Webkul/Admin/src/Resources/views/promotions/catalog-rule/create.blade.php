@@ -79,6 +79,30 @@
                                         <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels[]') }}</span>
                                     </div>
 
+                                    <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
+                                        <label for="status" class="required">{{ __('admin::app.promotion.general-info.status') }}</label>
+
+                                        <select type="text" class="control" name="status" v-model="status" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.status') }}&quot;">
+                                            <option disabled="disabled">Select status</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+
+                                        <span class="control-error" v-if="errors.has('status')">@{{ errors.first('status') }}</span>
+                                    </div>
+
+                                    <div class="control-group" :class="[errors.has('end_other_rules') ? 'has-error' : '']">
+                                        <label for="end_other_rules" class="required">{{ __('admin::app.promotion.general-info.end_other_rules') }}</label>
+
+                                        <select type="text" class="control" name="end_other_rules" v-model="end_other_rules" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.end_other_rules') }}&quot;">
+                                            <option disabled="disabled">Select option</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+
+                                        <span class="control-error" v-if="errors.has('end_other_rules')">@{{ errors.first('end_other_rules') }}</span>
+                                    </div>
+
                                     <datetime :name="starts_from">
                                         <div class="control-group" :class="[errors.has('starts_from') ? 'has-error' : '']">
                                             <label for="starts_from" class="required">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
@@ -262,6 +286,7 @@
 
                 data () {
                     return {
+                        all_conditions: [],
                         apply: null,
                         apply_amt: false,
                         apply_prct: false,
@@ -296,7 +321,7 @@
                         name: null,
                         priority: 0,
                         starts_from: null,
-                        all_conditions: []
+                        status: null,
                     }
                 },
 

@@ -629,6 +629,14 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog-rule.create'
                 ])->name('admin.catalog-rule.store');
 
+                Route::get('/catalog-rule/edit/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@edit')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rule.edit'
+                ])->name('admin.catalog-rule.edit');
+
+                Route::post('/catalog-rule/edit/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@update')->defaults('_config', [
+                    'redirect' => 'admin.catalog-rule.edit'
+                ])->name('admin.catalog-rule.update');
+
                 Route::post('fetch/options', 'Webkul\Discount\Http\Controllers\CatalogRuleController@fetchAttributeOptions')->name('admin.catalog-rule.options');
 
                 Route::get('/cart-rule', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [

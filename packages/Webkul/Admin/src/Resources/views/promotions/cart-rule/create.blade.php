@@ -298,6 +298,7 @@
                         priority: 0,
                         starts_from: null,
                         uses_per_cust: 0,
+                        status: null
                     }
                 },
 

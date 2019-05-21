@@ -771,6 +771,8 @@ return [
         'cart-rule' => 'Cart Rule',
         'add-catalog-rule' => 'Add Catalog Rule',
         'add-cart-rule' => 'Add Cart Rule',
+        'edit-cart-rule' => 'Edit Cart Rule',
+        'edit-catalog-rule' => 'Edit Catalog Rule',
         'create-catalog-rule' => 'Create Catalog Rule',
         'create-cart-rule' => 'Create Cart Rule',
         'save-btn-title' => 'Create',
@@ -793,8 +795,16 @@ return [
             'is-coupon-no' => 'No',
             'uses-per-cust' => 'Uses per customer',
             'all' => 'All',
-            'any' => 'Any'
+            'any' => 'Any',
+            'end_other_rules' => 'End other rules',
+            'status' => 'Is Active',
         ],
+
+        'status' => [
+            'success' => 'Success! rule created',
+            'failed' => 'Error! failed to create rule'
+        ],
+
         'catalog' => [
             'name' => 'Name',
             'description' => 'Description',
