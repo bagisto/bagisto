@@ -90,6 +90,7 @@ class CartRuleController extends Controller
 
     public function store()
     {
+        dd(request()->all());
         $this->validate(request(), [
             'name' => 'required|string',
             'description' => 'string',

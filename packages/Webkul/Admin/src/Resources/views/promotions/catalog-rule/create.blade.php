@@ -59,7 +59,7 @@
                         <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
                             <label for="customer_groups" class="required">{{ __('admin::app.promotion.general-info.cust-groups') }}</label>
 
-                            <select type="text" class="control" name="customer_groups[]" v-model="customer_groups" v-validate="'required'" value="{{ old('customer_groups') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
+                            <select type="text" class="control" name="customer_groups[]" v-model="customer_groups" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
                                 <option disabled="disabled">Select Customer Groups</option>
                                 @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $channel)
                                     <option value="{{ $channel->id }}">{{ $channel->name }}</option>
@@ -72,7 +72,7 @@
                         <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                             <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
 
-                            <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels') }}&quot;" multiple="multiple">
+                            <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels') }}&quot;" multiple="multiple">
                                 <option disabled="disabled">Select Channels</option>
                                 @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                     <option value="{{ $channel->id }}">{{ $channel->name }}</option>
@@ -118,7 +118,7 @@
                             <div class="control-group" :class="[errors.has('criteria') ? 'has-error' : '']">
                                 <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
 
-                                <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
+                                <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
                                         <option value="condition_combination">Condition Combination</option>
                                         <option value="attribute">Attribute</option>
                                     {{-- <option value="category">Category</option> --}}
@@ -245,6 +245,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <input type="hidden" name="all_conditions[]" v-model="all_conditions">
                         </div>
                     </div>
                 </accordian>
@@ -323,7 +325,8 @@
                         end_other_rules: null,
                         name: null,
                         priority: 0,
-                        starts_from: null
+                        starts_from: null,
+                        all_conditions: []
                     }
                 },
 
@@ -397,6 +400,10 @@
 
                     removeCat(index) {
                         this.cats.splice(index, 1);
+                    },
+
+                    beforeOnSubmit() {
+                        this.all_conditions = JSON.stringify(this.attributes_list);
                     }
                 }
             });

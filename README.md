@@ -44,6 +44,7 @@ It packs in lots of demanding features that allows your business to scale in no 
 * Orders Management System.
 * Customer Cart, Wishlist, Product Reviews.
 * Simple and Configurable Products.
+* Price rules (Discount) inbuilt.
 * Check out [click here](https://bagisto.com/features/).
 
 **For Developers**:

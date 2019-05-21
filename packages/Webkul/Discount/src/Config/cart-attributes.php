@@ -45,12 +45,14 @@ return [
             1 => 'Equals or greater',
             2 => 'Equals or lesser',
             3 => 'Greater than',
-            4 => 'Lesser than',
+            4 => 'Lesser than'
         ],
 
         'text' => [
             0 => 'is',
-            1 => 'is not'
+            1 => 'is not',
+            2 => 'contains',
+            3 => 'does not contains'
         ],
     ]
 ];
