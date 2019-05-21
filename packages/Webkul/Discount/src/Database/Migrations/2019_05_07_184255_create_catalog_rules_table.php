@@ -26,12 +26,14 @@ class CreateCatalogRulesTable extends Migration
             $table->datetime('starts_from')->nullable();
             $table->datetime('ends_till')->nullable();
             $table->boolean('status')->default(1);
+            $table->integer('priority')->unsigned();
             $table->json('conditions')->nullable();
             $table->json('actions')->nullable();
             $table->boolean('end_other_rules')->default(1);
             $table->integer('sort_order')->unsigned()->default(0);
             $table->string('action_type')->nullable();
-            $table->decimal('discount_amount', 12, 4)->default(0.0000);
+            $table->decimal('dis_amt', 12, 4)->default(0.0000);
+            $table->decimal('dis_qty', 12, 4)->nullable();
             $table->timestamps();
         });
     }

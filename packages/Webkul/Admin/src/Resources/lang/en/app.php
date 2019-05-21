@@ -801,7 +801,8 @@ return [
             'apply-percent' => 'Apply as percentage',
             'apply-fixed' => 'Apply as fixed amount',
             'adjust-to-percent' => 'Adjust to percentage',
-            'adjust-to-value' => 'Adjust to discount value'
+            'adjust-to-value' => 'Adjust to discount value',
+            'condition-missing' => 'Please check conditons, some values might be missing'
         ],
         'cart' => [
             'buy-atleast' => 'Buy Atleast (N)',

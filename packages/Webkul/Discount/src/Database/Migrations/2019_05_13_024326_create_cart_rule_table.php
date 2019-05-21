@@ -21,6 +21,7 @@ class CreateCartRuleTable extends Migration
             $table->datetime('ends_till')->nullable();
             $table->json('conditions')->nullable();
             $table->json('actions')->nullable();
+            $table->integer('priority')->unsigned()->default(0);
             $table->longtext('product_ids')->nullable();
             $table->boolean('status')->default(1);
             $table->boolean('end_other_rules')->default(1);
