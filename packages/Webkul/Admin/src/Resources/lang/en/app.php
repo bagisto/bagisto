@@ -776,6 +776,7 @@ return [
         'create-catalog-rule' => 'Create Catalog Rule',
         'create-cart-rule' => 'Create Cart Rule',
         'save-btn-title' => 'Create',
+        'edit-btn-title' => 'Edit',
         'select-attr' => 'Select Attribute',
         'select-attr-fam' => 'Select Attribute Family',
         'select-cart-attr' => 'Select Cart Attribute',

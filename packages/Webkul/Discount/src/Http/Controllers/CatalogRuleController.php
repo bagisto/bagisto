@@ -97,8 +97,6 @@ class CatalogRuleController extends Controller
 
     public function store()
     {
-        // dd(request()->all());
-
         $this->validate(request(), [
             'name' => 'required|string',
             'description' => 'string',
@@ -130,11 +128,11 @@ class CatalogRuleController extends Controller
         $catalog_rule['conditions'] = $catalog_rule['all_conditions'];
         unset($catalog_rule['all_conditions']);
 
-        if (isset($catalog_rule['disc_amt'])) {
+        if (isset($catalog_rule['disc_amount'])) {
             $catalog_rule['action_type'] = $catalog_rule['apply'];
             $catalog_rule['actions'] = [
                 'action_type' => $catalog_rule['apply'],
-                'disc_amt' => $catalog_rule['disc_amt']
+                'disc_amount' => $catalog_rule['disc_amount']
             ];
         } else if (isset($catalog_rule['disc_percent'])) {
             $catalog_rule['action_type'] = $catalog_rule['apply'];
@@ -155,7 +153,7 @@ class CatalogRuleController extends Controller
         $catalogRule = $this->catalogRule->create($catalog_rule);
 
         foreach($catalog_rule_channels as $catalog_rule_channel) {
-            $catalog_rule_channels['catalog_rule_id'] = $catalog_rule_channel;
+            $catalog_rule_channels['catalog_rule_id'] = $catalogRule['id'];
             $catalog_rule_channels['channel_id'] = $catalog_rule_channel;
             $catalogRuleChannels = $this->catalogRuleChannels->create($catalog_rule_channels);
         }
@@ -168,11 +166,13 @@ class CatalogRuleController extends Controller
 
         if($catalogRule && $catalogRuleChannels && $catalogRuleCustomerGroups) {
             session()->flash('success', trans('admin::app.promotion.status.success'));
+
+            return redirect()->route('admin.catalog-rule.index');
         } else {
             session()->flash('error', trans('admin::app.promotion.status.failed'));
-        }
 
-        return redirect()->back();
+            return redirect()->back();
+        }
     }
 
     public function edit($id)
@@ -181,7 +181,7 @@ class CatalogRuleController extends Controller
         $catalog_rule_channels = $this->catalogRuleChannels->findByField('catalog_rule_id', $id);
         $catalog_rule_customer_groups = $this->catalogRuleCustomerGroups->findByField('catalog_rule_id', $id);
 
-        dd($catalog_rule, $catalog_rule_channels, $catalog_rule_customer_groups);
+        return view($this->_config['view'])->with('catalog_rule', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions, $catalog_rule, $catalog_rule_channels, $catalog_rule_customer_groups]);
     }
 
     public function fetchOptionableAttributes()

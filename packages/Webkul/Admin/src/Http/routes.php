@@ -626,7 +626,7 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('admin.catalog-rule.create');
 
                 Route::post('/catalog-rule/create', 'Webkul\Discount\Http\Controllers\CatalogRuleController@store')->defaults('_config', [
-                    'redirect' => 'admin.catalog-rule.create'
+                    'redirect' => 'admin.catalog-rule.index'
                 ])->name('admin.catalog-rule.store');
 
                 Route::get('/catalog-rule/edit/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@edit')->defaults('_config', [
