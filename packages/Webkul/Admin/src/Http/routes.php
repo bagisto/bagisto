@@ -634,7 +634,7 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('admin.catalog-rule.edit');
 
                 Route::post('/catalog-rule/edit/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@update')->defaults('_config', [
-                    'redirect' => 'admin.catalog-rule.edit'
+                    'redirect' => 'admin.catalog-rule.index'
                 ])->name('admin.catalog-rule.update');
 
                 Route::post('fetch/options', 'Webkul\Discount\Http\Controllers\CatalogRuleController@fetchAttributeOptions')->name('admin.catalog-rule.options');

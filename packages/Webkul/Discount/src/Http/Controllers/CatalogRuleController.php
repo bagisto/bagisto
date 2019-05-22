@@ -153,13 +153,13 @@ class CatalogRuleController extends Controller
         $catalogRule = $this->catalogRule->create($catalog_rule);
 
         foreach($catalog_rule_channels as $catalog_rule_channel) {
-            $catalog_rule_channels['catalog_rule_id'] = $catalogRule['id'];
+            $catalog_rule_channels['catalog_rule_id'] = $catalogRule->id;
             $catalog_rule_channels['channel_id'] = $catalog_rule_channel;
             $catalogRuleChannels = $this->catalogRuleChannels->create($catalog_rule_channels);
         }
 
         foreach ($catalog_rule_customer_groups as $catalog_rule_channel) {
-            $catalog_rule_customer_groups['catalog_rule_id'] = $catalogRule['id'];
+            $catalog_rule_customer_groups['catalog_rule_id'] = $catalogRule->id;
             $catalog_rule_customer_groups['customer_group_id'] = $catalog_rule_channel;
             $catalogRuleCustomerGroups = $this->catalogRuleCustomerGroups->create($catalog_rule_customer_groups);
         }
@@ -182,6 +182,77 @@ class CatalogRuleController extends Controller
         $catalog_rule_customer_groups = $this->catalogRuleCustomerGroups->findByField('catalog_rule_id', $id);
 
         return view($this->_config['view'])->with('catalog_rule', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions, $catalog_rule, $catalog_rule_channels, $catalog_rule_customer_groups]);
+    }
+
+    public function update($id)
+    {
+        $this->validate(request(), [
+            'name' => 'required|string',
+            'description' => 'string',
+            'customer_groups' => 'required',
+            'channels' => 'required',
+            'starts_from' => 'required|date',
+            'ends_till' => 'required|date',
+            'status' => 'required|boolean',
+            'end_other_rules' => 'required|boolean',
+            'priority' => 'required|numeric',
+            'criteria' => 'required',
+            'all_conditions' => 'required|array',
+            'apply' => 'required|numeric|min:0|max:3',
+            'disc_amount' => 'sometimes',
+            'disc_percent' => 'sometimes',
+        ]);
+
+        $catalog_rule = request()->all();
+
+        $catalog_rule_channels = array();
+        $catalog_rule_customer_groups = array();
+
+        $catalog_rule_channels = $catalog_rule['channels'];
+        $catalog_rule_customer_groups = $catalog_rule['customer_groups'];
+        unset($catalog_rule['channels']); unset($catalog_rule['customer_groups']);
+
+        unset($catalog_rule['criteria']);
+
+        $catalog_rule['conditions'] = $catalog_rule['all_conditions'];
+        unset($catalog_rule['all_conditions']);
+
+        if (isset($catalog_rule['disc_amount'])) {
+            $catalog_rule['action_type'] = $catalog_rule['apply'];
+            $catalog_rule['actions'] = [
+                'action_type' => $catalog_rule['apply'],
+                'disc_amount' => $catalog_rule['disc_amount']
+            ];
+        } else if (isset($catalog_rule['disc_percent'])) {
+            $catalog_rule['action_type'] = $catalog_rule['apply'];
+            $catalog_rule['actions'] = [
+                'action_type' => $catalog_rule['apply'],
+                'disc_percent' => $catalog_rule['disc_percent'],
+            ];
+        }
+
+        unset($catalog_rule['apply']);
+        unset($catalog_rule['attributes']);
+        unset($catalog_rule['_token']);
+        unset($catalog_rule['all_actions']);
+
+        $catalog_rule['actions'] = json_encode($catalog_rule['actions']);
+        $catalog_rule['conditions'] = json_encode($catalog_rule['conditions']);
+
+        $catalogRule = $this->catalogRule->update($catalog_rule, $id);
+
+        $catalogRuleChannels = $this->catalogRule->ChannelSync($catalog_rule_channels, $catalogRule);
+        $catalogRuleCustomerGroups = $this->catalogRule->CustomerGroupSync($catalog_rule_customer_groups, $catalogRule);
+
+        if($catalogRule && $catalogRuleChannels && $catalogRuleCustomerGroups) {
+            session()->flash('info', trans('admin::app.promotion.status.update-success'));
+
+            return redirect()->route($this->_config['redirect']);
+        } else {
+            session()->flash('error', trans('admin::app.promotion.status.update-failed'));
+
+            return redirect()->back();
+        }
     }
 
     public function fetchOptionableAttributes()

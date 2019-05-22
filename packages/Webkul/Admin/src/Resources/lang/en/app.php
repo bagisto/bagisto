@@ -153,7 +153,9 @@ return [
         'role' => 'Role',
         'sub-total' => 'Sub Total',
         'no-of-products' => 'Number of Products',
-        'attribute-family' => 'Attribute Family'
+        'attribute-family' => 'Attribute Family',
+        'starts-from' => 'Starts From',
+        'ends-till' => 'Ends Till',
     ],
 
     'account' => [
@@ -803,7 +805,9 @@ return [
 
         'status' => [
             'success' => 'Success! rule created',
-            'failed' => 'Error! failed to create rule'
+            'failed' => 'Error! failed to create rule',
+            'update-success' => 'Success! rule updated',
+            'update-failed' => 'Error! cannot update'
         ],
 
         'catalog' => [
