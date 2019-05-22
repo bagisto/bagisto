@@ -11,6 +11,10 @@
                 @foreach ($shippingRateGroups as $rateGroup)
                     {!! view_render_event('bagisto.shop.checkout.shipping-method.before', ['rateGroup' => $rateGroup]) !!}
 
+                    <span class="carrier-title" id="carrier-title" style="font-size:18px; font-weight: bold;">
+                        {{ $rateGroup['carrier_title'] }}
+                    </span>
+
                     @foreach ($rateGroup['rates'] as $rate)
                         <div class="checkout-method-group mb-20">
                             <div class="line-one">

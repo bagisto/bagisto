@@ -867,7 +867,7 @@ return [
             'general' => 'General',
             'footer' => 'Footer',
             'content' => 'Content',
-            'footer-content' => 'Text Value'
+            'footer-content' => 'Footer Text'
         ]
     ]
 ];
