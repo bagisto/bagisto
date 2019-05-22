@@ -1966,6 +1966,7 @@ section.product-detail {
 
                 .quantity-change {
                     cursor: pointer;
+                    text-align: center;
 
                     &:focus {
                         border-color: $border-color !important;

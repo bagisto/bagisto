@@ -37,7 +37,7 @@
 
     <div class="control-group {{ $field['type'] }}" @if ($field['type'] == 'multiselect') :class="[errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]') ? 'has-error' : '']" @else :class="[errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]') ? 'has-error' : '']" @endif>
 
-        <label for="{{ $name }}" {{ !isset($field['validation']) || strpos('required', $field['validation']) < 0 ? '' : 'class=required' }}>
+        <label for="{{ $name }}" {{ !isset($field['validation']) || strpos('required', $field['validation']) === false ? '' : 'class=required' }}>
 
             {{ trans($field['title']) }}
 
