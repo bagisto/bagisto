@@ -129,12 +129,12 @@ class CatalogRuleDataGrid extends DataGrid
             'icon' => 'icon pencil-lg-icon'
         ]);
 
-        // $this->addAction([
-        //     'type' => 'Delete',
-        //     'method' => 'POST', //use post only for requests other than redirects
-        //     'route' => 'admin.catalog-rule.delete',
-        //     'icon' => 'icon trash-icon'
-        // ]);
+        $this->addAction([
+            'type' => 'Delete',
+            'method' => 'POST', //use post only for requests other than redirects
+            'route' => 'admin.catalog-rule.delete',
+            'icon' => 'icon trash-icon'
+        ]);
     }
 
     public function prepareMassActions()

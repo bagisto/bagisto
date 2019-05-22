@@ -153,15 +153,18 @@ class CatalogRuleController extends Controller
         $catalogRule = $this->catalogRule->create($catalog_rule);
 
         foreach($catalog_rule_channels as $catalog_rule_channel) {
-            $catalog_rule_channels['catalog_rule_id'] = $catalogRule->id;
-            $catalog_rule_channels['channel_id'] = $catalog_rule_channel;
-            $catalogRuleChannels = $this->catalogRuleChannels->create($catalog_rule_channels);
+            $data['catalog_rule_id'] = $catalogRule->id;
+            $data['channel_id'] = $catalog_rule_channel;
+
+            $catalogRuleChannels = $this->catalogRuleChannels->create($data);
         }
 
-        foreach ($catalog_rule_customer_groups as $catalog_rule_channel) {
-            $catalog_rule_customer_groups['catalog_rule_id'] = $catalogRule->id;
-            $catalog_rule_customer_groups['customer_group_id'] = $catalog_rule_channel;
-            $catalogRuleCustomerGroups = $this->catalogRuleCustomerGroups->create($catalog_rule_customer_groups);
+        unset($data);
+        foreach ($catalog_rule_customer_groups as $catalog_rule_customer_group) {
+            $data['catalog_rule_id'] = $catalogRule->id;
+            $data['customer_group_id'] = $catalog_rule_customer_group;
+
+            $catalogRuleCustomerGroups = $this->catalogRuleCustomerGroups->create($data);
         }
 
         if($catalogRule && $catalogRuleChannels && $catalogRuleCustomerGroups) {
@@ -255,6 +258,19 @@ class CatalogRuleController extends Controller
         }
     }
 
+    public function applyRules()
+    {
+        $catalogRules = $this->catalogRule->all();
+        $decoded = json_decode($catalogRules->first()->conditions);
+        $conditions = json_decode($decoded[0]);
+        $optionableAttributes = $this->fetchOptionableAttributes();
+
+        foreach($conditions as $condition) {
+            $attributeName = $this->attribute->find($condition->attribute)->name;
+            $attributeType = $this->attribute->find($condition->attribute)->type;
+        }
+    }
+
     public function fetchOptionableAttributes()
     {
         $attributesWithOptions = array();
@@ -266,5 +282,20 @@ class CatalogRuleController extends Controller
         }
 
         return $attributesWithOptions;
+    }
+
+    public function destroy($id)
+    {
+        $catalogRule = $this->catalogRule->findOrFail($id);
+
+        if ($catalogRule->delete()) {
+            session()->flash('success', trans('admin::app.promotion.delete-success'));
+
+            return response()->json(['message' => true], 200);
+        } else {
+            session()->flash('success', trans('admin::app.promotion.delete-failed'));
+
+            return response()->json(['message' => false], 400);
+        }
     }
 }

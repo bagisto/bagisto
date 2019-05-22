@@ -637,6 +637,12 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog-rule.index'
                 ])->name('admin.catalog-rule.update');
 
+                Route::get('/catalog-rule/apply', 'Webkul\Discount\Http\Controllers\CatalogRuleController@applyRules')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rule.index'
+                ])->name('admin.catalog-rule.apply');
+
+                Route::post('/catalog-rule/delete/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@destroy')->name('admin.catalog-rule.delete');
+
                 Route::post('fetch/options', 'Webkul\Discount\Http\Controllers\CatalogRuleController@fetchAttributeOptions')->name('admin.catalog-rule.options');
 
                 Route::get('/cart-rule', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [

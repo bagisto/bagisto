@@ -807,7 +807,9 @@ return [
             'success' => 'Success! rule created',
             'failed' => 'Error! failed to create rule',
             'update-success' => 'Success! rule updated',
-            'update-failed' => 'Error! cannot update'
+            'update-failed' => 'Error! cannot update',
+            'delete-success' => 'Sucess! rule deleted',
+            'delete-failed' => 'Error! cannot delete'
         ],
 
         'catalog' => [

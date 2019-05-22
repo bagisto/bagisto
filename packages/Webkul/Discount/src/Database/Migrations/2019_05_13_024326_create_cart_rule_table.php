@@ -23,7 +23,7 @@ class CreateCartRuleTable extends Migration
             $table->json('actions')->nullable();
             $table->integer('priority')->unsigned()->default(0);
             $table->longtext('product_ids')->nullable();
-            $table->boolean('status')->default(1);
+            $table->boolean('status')->default(0);
             $table->boolean('end_other_rules')->default(1);
             $table->integer('sort_order')->unsigned()->default(0);
             $table->string('action_type')->nullable();
