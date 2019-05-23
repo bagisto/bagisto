@@ -169,7 +169,7 @@ class ConfigurableOption extends AbstractProduct
                 $attributes[] = [
                     'id' => $attributeId,
                     'code' => $attribute->code,
-                    'label' => $attribute->name,
+                    'label' => $attribute->name ? $attribute->name : $attribute->admin_name,
                     'swatch_type' => $attribute->swatch_type,
                     'options' => $attributeOptionsData
                 ];
@@ -221,7 +221,7 @@ class ConfigurableOption extends AbstractProduct
             } else {
                 $variantId = $variant->id;
             }
-            
+
             $prices[$variantId] = [
                 'regular_price' => [
                     'formated_price' => core()->currency($variant->price),

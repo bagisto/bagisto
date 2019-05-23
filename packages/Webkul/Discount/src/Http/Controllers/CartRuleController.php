@@ -70,7 +70,7 @@ class CartRuleController extends Controller
         $this->product = $product;
         $this->CartRule = $cartRule;
         $this->cart = $cart;
-        $this->appliedConfig = config('pricerules.catalog');
+        $this->appliedConfig = config('pricerules.cart');
     }
 
     public function index()
@@ -80,7 +80,8 @@ class CartRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('criteria', [$this->appliedConfig, $this->fetchOptionableAttributes(), $this->getStatesAndCountries()]);
+        // dd($this->appliedConfig);
+        return view($this->_config['view'])->with('cart_rule', [$this->appliedConfig, $this->fetchOptionableAttributes(), $this->getStatesAndCountries()]);
     }
 
     public function store()
@@ -102,7 +103,6 @@ class CartRuleController extends Controller
     public function getStatesAndCountries()
     {
         $countries = core()->countries()->toArray();
-
         $states = core()->groupedStatesByCountries();
 
         return [

@@ -153,7 +153,7 @@ class AttributeFamilyRepository extends Repository
         return $family;
     }
 
-    public function getNameAndId()
+    public function getPartial()
     {
         $attributeFamilies = $this->model->all();
         $trimmed = array();
@@ -162,6 +162,7 @@ class AttributeFamilyRepository extends Repository
             if ($attributeFamily->name != null || $attributeFamily->name != "") {
                 $trimmed[$key] = [
                     'id' => $attributeFamily->id,
+                    'code' => $attributeFamily->code,
                     'name' => $attributeFamily->name
                 ];
             }

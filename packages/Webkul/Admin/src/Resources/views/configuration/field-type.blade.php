@@ -37,7 +37,7 @@
 
     <div class="control-group {{ $field['type'] }}" @if ($field['type'] == 'multiselect') :class="[errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]') ? 'has-error' : '']" @else :class="[errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]') ? 'has-error' : '']" @endif>
 
-        <label for="{{ $name }}" {{ !isset($field['validation']) || strpos('required', $field['validation']) < 0 ? '' : 'class=required' }}>
+        <label for="{{ $name }}" {{ !isset($field['validation']) || strpos('required', $field['validation']) === false ? '' : 'class=required' }}>
 
             {{ trans($field['title']) }}
 
@@ -50,6 +50,10 @@
         @if ($field['type'] == 'text')
 
             <input type="text" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;">
+
+        @elseif ($field['type'] == 'password')
+
+            <input type="password" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ $field['name'] }}&quot;">
 
         @elseif ($field['type'] == 'textarea')
 

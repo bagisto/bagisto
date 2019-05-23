@@ -76,7 +76,7 @@
                                             @endforeach
                                         </select>
 
-                                        <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels[]') }}</span>
+                                        <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('status') }}</span>
                                     </div>
 
                                     <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
@@ -133,15 +133,18 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="true" title="Conditions">
+                            <accordian :active="false" title="Conditions">
                                 <div slot="body">
                                     <div class="add-condition">
+                                        <input type="hidden" v-model="global_condition.allorany">
+                                        <input type="hidden" v-model="global_condition.alltrueorfalse">
                                         <div class="control-group" :class="[errors.has('criteria') ? 'has-error' : '']">
                                             <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
 
                                             <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
-                                                    <option value="condition_combination">Condition Combination</option>
-                                                    <option value="attribute">Attribute</option>
+                                                <option value="attribute">Attribute</option>
+                                                <option value="category">Category</option>
+                                                <option value="attribute_family">Attribute Family</option>
                                             </select>
 
                                             <span class="control-error" v-if="errors.has('criteria')">@{{ errors.first('criteria') }}</span>
@@ -150,88 +153,160 @@
                                         <span class="btn btn-primary btn-lg" v-on:click="addCondition">Add Condition</span>
                                     </div>
 
-                                    <div class="condition-set" v-if="attributes_list.length">
-                                        <!-- Attribute -->
-                                        <div v-for="(attrs, index) in attributes_list" :key="index">
-                                            <div class="control-container mt-20">
+
+
+                                    <div class="condition-set" v-if="conditions_list.length">
+                                        {{-- <span class="control-group" v-on:click="genericGroupCondition" v-if="generic_condition">
+                                            {{ __('admin::app.promotion.general-info.all-conditions-true') }}
+                                        </span>
+
+                                        <span class="control-group" v-on:click="genericGroupCondition" v-if="! generic_condition">
+                                                {{ __('admin::app.promotion.general-info.assuming') }}
+                                                <select>
+                                                    <option selected="selected">All</option>
+                                                    <option>Any</option>
+                                                </select>
+                                                {{ __('admin::app.promotion.general-info.are') }}
+                                                <select>
+                                                    <option selected="selected">True</option>
+                                                    <option>False</option>
+                                                </select>
+                                        </span> --}}
+
+                                        <!-- Conditions -->
+                                        <div v-for="(condition, index) in conditions_list" :key="index">
+                                            <div class="control-container mt-20" v-if='conditions_list[index].criteria == "attribute"'>
                                                 <div class="title-bar">
+                                                    {{-- <span>Group </span>
+                                                    <input type="checkbox" v-model="condition_groups" v-on:click="groupSelected(index)" /> --}}
+
                                                     <span>Attribute is </span>
                                                     <span class="icon cross-icon" v-on:click="removeAttr(index)"></span>
                                                 </div>
 
                                                 <div class="control-group mt-10" :key="index">
-                                                    <select class="control" name="attributes[]" v-model="attributes_list[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;" v-on:change="enableCondition($event, index)">
+                                                    <select class="control" name="attributes[]" v-model="conditions_list[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;" v-on:change="enableCondition($event, index)">
                                                         <option disabled="disabled">Select attribute</option>
-                                                        <option v-for="attr_ip in attrs_input" :value="attr_ip.id">@{{ attr_ip.name }}</option>
+                                                        <option v-for="(attr_ip, i) in attrs_input" :value="attr_ip.code">@{{ attr_ip.name }}</option>
                                                     </select>
 
-                                                    <div v-if='attributes_list[index].type == "text" || attributes_list[index].type == "textarea"'>
-                                                        <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
-                                                            @foreach($criteria[4]['text'] as $key => $value)
+                                                    <div v-if='conditions_list[index].type == "text" || conditions_list[index].type == "textarea"'>
+                                                        <select class="control" name="attributes[]" v-model="conditions_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                            @foreach($catalog_rule[4]['text'] as $key => $value)
                                                                 <option value="{{ $key }}">{{ __($value) }}</option>
                                                             @endforeach
                                                         </select>
 
-                                                        <input type="text" class="control" name="attributes[]" v-model="attributes_list[index].value" placeholder="Enter Value">
+                                                        <input type="text" class="control" name="attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value">
                                                     </div>
 
-                                                    <div v-if='attributes_list[index].type == "price"'>
-                                                        <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
-                                                            @foreach($criteria[4]['numeric'] as $key => $value)
+                                                    <div v-if='conditions_list[index].type == "price"'>
+                                                        <select class="control" name="attributes[]" v-model="conditions_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                            @foreach($catalog_rule[4]['numeric'] as $key => $value)
                                                                 <option value="{{ $key }}">{{ __($value) }}</option>
                                                             @endforeach
                                                         </select>
 
-                                                        <input type="number" step="0.1000" class="control" name="attributes[]" v-model="attributes_list[index].value" placeholder="Enter Value">
+                                                        <input type="number" step="0.1000" class="control" name="attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value">
                                                     </div>
 
-                                                    <div v-else-if='attributes_list[index].type == "boolean"'>
-                                                        <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                    <div v-else-if='conditions_list[index].type == "boolean"'>
+                                                        <select class="control" name="attributes[]" v-model="conditions_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
                                                             <option selected="selected">is</option>
                                                         </select>
 
-                                                        <select class="control" name="attributes[]" v-model="attributes_list[index].value">
-                                                            @foreach($criteria[4]['boolean'] as $key => $value)
+                                                        <select class="control" name="attributes[]" v-model="conditions_list[index].value">
+                                                            @foreach($catalog_rule[4]['boolean'] as $key => $value)
                                                                 <option value="{{ $key }}">{{ __($value) }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
 
-                                                    <div v-else-if='attributes_list[index].type == "date"'>
-                                                        <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
-                                                            @foreach($criteria[4]['numeric'] as $key => $value)
+                                                    <div v-else-if='conditions_list[index].type == "date"'>
+                                                        <select class="control" name="attributes[]" v-model="conditions_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                            @foreach($catalog_rule[4]['numeric'] as $key => $value)
                                                                 <option value="{{ $key }}">{{ __($value) }}</option>
                                                             @endforeach
                                                         </select>
 
                                                         <date>
-                                                            <input type="text" class="control" v-model="attributes_list[index].value" name="attributes[]" v-validate="'required'" value="Enter Value">
+                                                            <input type="text" class="control" v-model="conditions_list[index].value" name="attributes[]" v-validate="'required'" value="Enter Value">
                                                         </date>
                                                     </div>
 
-                                                    <div v-else-if='attributes_list[index].type == "datetime"'>
-                                                        <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
-                                                            @foreach($criteria[4]['numeric'] as $key => $value)
+                                                    <div v-else-if='conditions_list[index].type == "datetime"'>
+                                                        <select class="control" name="attributes[]" v-model="conditions_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                            @foreach($catalog_rule[4]['numeric'] as $key => $value)
                                                                 <option value="{{ $key }}">{{ __($value) }}</option>
                                                             @endforeach
                                                         </select>
 
                                                         <datetime>
-                                                            <input type="text" class="control" v-model="attributes_list[index].value" name="attributes[]" v-validate="'required'" value="Enter Value">
+                                                            <input type="text" class="control" v-model="conditions_list[index].value" name="attributes[]" v-validate="'required'" value="Enter Value">
                                                         </datetime>
                                                     </div>
 
-                                                    <div v-else-if='attributes_list[index].type == "select" || attributes_list[index].type == "multiselect"'>
-                                                        <select class="control" name="attributes[]" v-model="attributes_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
-                                                            @foreach($criteria[4]['text'] as $key => $value)
+                                                    <div v-else-if='conditions_list[index].type == "select" || conditions_list[index].type == "multiselect"'>
+                                                        <select class="control" name="attributes[]" v-model="conditions_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                            @foreach($catalog_rule[4]['text'] as $key => $value)
                                                                 <option value="{{ $key }}">{{ __($value) }}</option>
                                                             @endforeach
                                                         </select>
 
-                                                        <select class="control" v-model="attributes_list[index].value" name="attributes[]" v-validate="'required'" multiple>
-                                                            <option v-for="option in attributes_list[index].options" :value="option.id">@{{ option.admin_name }}</option>
+                                                        <select class="control" v-model="conditions_list[index].value" name="attributes[]" v-validate="'required'" multiple>
+                                                            <option v-for="option in conditions_list[index].options" :value="option.id">@{{ option.admin_name }}</option>
                                                         </select>
                                                     </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-container mt-20" v-if='conditions_list[index].criteria == "category"'>
+                                                <div class="title-bar">
+                                                    <span>Category </span>
+
+                                                    {{-- <span>Group </span>
+                                                    <input type="checkbox" v-model="condition_groups" v-on:click="groupSelected(index)" /> --}}
+
+                                                    <span class="icon cross-icon" v-on:click="removeAttr(index)"></span>
+                                                </div>
+
+                                                <div class="control-group mt-10" :key="index">
+                                                    <input type="hidden" class="control" name="attributes[]" v-model="conditions_list[index].category" v-validate="'required'" style="margin-right: 15px;" v-on:change="enableCondition($event, index)">
+
+                                                    <select class="control" name="attributes[]" v-model="conditions_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                        @foreach($catalog_rule[4]['text'] as $key => $value)
+                                                            <option value="{{ $key }}">{{ __($value) }}</option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    <select class="control" name="attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value" multiple>
+                                                        <option v-for="(category, index) in categories" :value="category.id">@{{ category.name }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="control-container mt-20" v-if='conditions_list[index].criteria == "attribute_family"'>
+                                                <div class="title-bar">
+                                                    <span>Attribute Family </span>
+
+                                                    {{-- <span>Group </span>
+                                                    <input type="checkbox" v-model="condition_groups" v-on:click="groupSelected(index)" /> --}}
+
+                                                    <span class="icon cross-icon" v-on:click="removeAttr(index)"></span>
+                                                </div>
+
+                                                <div class="control-group mt-10" :key="index">
+                                                    <input type="hidden" class="control" name="attributes[]" v-model="conditions_list[index].family" v-validate="'required'" style="margin-right: 15px;" v-on:change="enableCondition($event, index)">
+
+                                                    <select class="control" name="attributes[]" v-model="conditions_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                        @foreach($catalog_rule[4]['boolean'] as $key => $value)
+                                                            <option value="{{ $key }}">{{ __($value) }}</option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    <select class="control" name="attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value">
+                                                        <option v-for="(attr_family, index) in attr_families" :value="attr_family.id">@{{ attr_family.name }}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -241,13 +316,13 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="true" title="Actions">
+                            <accordian :active="false" title="Actions">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('apply') ? 'has-error' : '']">
                                         <label for="apply" class="required">Apply</label>
 
                                         <select class="control" name="apply" v-model="apply" v-validate="'required'" value="{{ old('apply') }}" data-vv-as="&quot;Apply As&quot;" v-on:change="detectApply">
-                                            @foreach($criteria[3]['actions'] as $key => $value)
+                                            @foreach($catalog_rule[3]['actions'] as $key => $value)
                                                 <option value="{{ $key }}">{{ __($value) }}</option>
                                             @endforeach
                                         </select>
@@ -290,27 +365,39 @@
                         apply: null,
                         apply_amt: false,
                         apply_prct: false,
-                        applied_config: @json($criteria[3]),
-                        attributes_list: [],
-                        attrs_input: @json($criteria[0]),
-                        attrs_options: @json($criteria[2]),
+                        applied_config: @json($catalog_rule[3]),
+                        conditions_list: [],
+                        attr_families: @json($catalog_rule[5]),
+                        attrs_input: @json($catalog_rule[0]),
+                        attrs_options: @json($catalog_rule[2]),
+                        global_condition: {
+                            allorany: false,
+                            alltrueorfalse: true
+                        },
                         attr_object: {
+                            criteria: 'attribute',
                             attribute: null,
                             condition: null,
                             type: null,
                             value: null
                         },
-                        attr_obj_count: 0,
-                        cat: {
-                            category: null,
+                        cat_object: {
+                            criteria: 'category',
+                            category: 'category',
                             condition: null,
+                            value: []
                         },
-                        categories: @json($criteria[1]),
-                        cats: [],
+                        fam_object: {
+                            criteria: 'attribute_family',
+                            family: 'attribute_family',
+                            condition: null,
+                            value: null
+                        },
+                        categories: @json($catalog_rule[1]),
                         cats_count: 0,
                         channels: [],
-                        conditions: [
-                        ],
+                        conditions: [],
+                        condition_groups: [],
                         criteria: null,
                         customer_groups: [],
                         description: null,
@@ -318,20 +405,20 @@
                         disc_percent: 0.0,
                         ends_till: null,
                         end_other_rules: null,
+                        generic_condition: true,
                         name: null,
                         priority: 0,
                         starts_from: null,
-                        status: null,
+                        status: null
                     }
                 },
 
                 mounted () {
-                    console.log(this.attrs_options);
                 },
 
                 methods: {
                     addCondition () {
-                        if (this.criteria == 'attribute' || this.criteria == 'category') {
+                        if (this.criteria == 'attribute' || this.criteria == 'attribute_family' || this.criteria == 'category') {
                             this.condition_on = this.criteria;
                         } else {
                             alert('please try again');
@@ -340,9 +427,10 @@
                         }
 
                         if (this.condition_on == 'attribute') {
-                            this.attributes_list.push(this.attr_object);
+                            this.conditions_list.push(this.attr_object);
 
                             this.attr_object = {
+                                criteria: this.condition_on,
                                 attribute: null,
                                 condition: null,
                                 value: null,
@@ -350,27 +438,34 @@
                                 options: null
                             };
                         } else if (this.condition_on == 'category') {
-                            this.cats.push(this.cat);
-                            this.conditions.push(this.cat);
+                            this.conditions_list.push(this.cat_object);
 
-                            this.cat = {
-                                category: null,
-                                condition: null
+                            this.cat_object = {
+                                criteria: this.condition_on,
+                                category: 'category',
+                                condition: null,
+                                value: []
+                            };
+                        } else if (this.condition_on == 'attribute_family') {
+                            this.conditions_list.push(this.fam_object);
+
+                            this.fam_object = {
+                                criteria: this.condition_on,
+                                family: 'attribute_family',
+                                condition: null,
+                                value: null
                             };
                         }
                     },
 
                     enableCondition(event, index) {
-                        this.attributes_list[index].type = this.attrs_input[event.target.selectedIndex - 1].type;
-
+                        this.conditions_list[index].type = this.attrs_input[event.target.selectedIndex - 1].type;
                         var this_this = this;
 
                         if (this.attrs_input[event.target.selectedIndex - 1].type == 'select' || this.attrs_input[event.target.selectedIndex - 1].type == 'multiselect') {
-                            console.log(this.attrs_input[event.target.selectedIndex - 1].name);
 
-                            this.attributes_list[index].options = this.attrs_options[this.attrs_input[event.target.selectedIndex - 1].name];
-
-                            this.attributes_list[index].value = [];
+                            this.conditions_list[index].options = this.attrs_options[this.attrs_input[event.target.selectedIndex - 1].code];
+                            this.conditions_list[index].value = [];
                         }
                     },
 
@@ -385,7 +480,7 @@
                     },
 
                     removeAttr(index) {
-                        this.attrs.splice(index, 1);
+                        this.conditions_list.splice(index, 1);
                     },
 
                     removeCat(index) {
@@ -393,14 +488,20 @@
                     },
 
                     onSubmit: function (e) {
-                        for (index in this.attributes_list) {
-                            if (this.attributes_list[index].condition == null || this.attributes_list[index].condition == "" || this.attributes_list[index].condition == undefined) {
+                        this.$validator.validateAll().then(result => {
+                            if (result) {
+                                e.target.submit();
+                            }
+                        });
+
+                        for (index in this.conditions_list) {
+                            if (this.conditions_list[index].condition == null || this.conditions_list[index].condition == "" || this.conditions_list[index].condition == undefined) {
                                 window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
 
                                 this.$root.addFlashMessages();
 
                                 return false;
-                            } else if (this.attributes_list[index].value == null || this.attributes_list[index].value == "" || this.attributes_list[index].value == undefined) {
+                            } else if (this.conditions_list[index].value == null || this.conditions_list[index].value == "" || this.conditions_list[index].value == undefined) {
                                 window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
 
                                 this.$root.addFlashMessages();
@@ -409,13 +510,19 @@
                             }
                         }
 
-                        this.all_conditions = JSON.stringify(this.attributes_list);
+                        if (this.conditions_list.length == 0) {
+                            window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
 
-                        this.$validator.validateAll().then(result => {
-                            if (result) {
-                                e.target.submit();
-                            }
-                        });
+                            this.$root.addFlashMessages();
+
+                            return false;
+                        }
+
+                        this.all_conditions = JSON.stringify(this.conditions_list);
+                    },
+
+                    genericGroupCondition() {
+                        this.generic_condition = false;
                     },
 
                     addFlashMessages() {

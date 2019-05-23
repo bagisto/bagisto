@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCartRuleLabelsTable extends Migration
+class CreateCartruleCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateCartRuleLabelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cart_rule_labels', function (Blueprint $table) {
+        Schema::create('cartrule_customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('locale_id')->unsigned();
-            $table->foreign('locale_id')->references('id')->on('locales');
             $table->integer('cart_rule_id')->unsigned();
             $table->foreign('cart_rule_id')->references('id')->on('cart_rules')->onDelete('cascade');
-            $table->text('label')->nullable();
+            $table->integer('customer_id')->unsigned();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->integer('usage_throttle')->unsigned()->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateCartRuleLabelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cart_rule_labels');
+        Schema::dropIfExists('cartrule_customers');
     }
 }

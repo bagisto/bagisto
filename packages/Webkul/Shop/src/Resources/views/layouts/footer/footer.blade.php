@@ -52,8 +52,25 @@
                     }
                 ?>
 
-                @if(count(core()->getCurrentChannel()->locales) > 1)
-                    <span class="list-heading">{{ __('shop::app.footer.locale') }}</span>
+                <span class="list-heading">{{ __('shop::app.footer.locale') }}</span>
+                <div class="form-container">
+                    <div class="control-group">
+                        <select class="control locale-switcher" onchange="window.location.href = this.value" @if (count(core()->getCurrentChannel()->locales) == 1) disabled="disabled" @endif>
+
+                            @foreach (core()->getCurrentChannel()->locales as $locale)
+                                @if(isset($serachQuery))
+                                    <option value="?{{ $serachQuery }}?locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
+                                @else
+                                    <option value="?locale={{ $locale->code }}" {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>{{ $locale->name }}</option>
+                                @endif
+                            @endforeach
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="currency">
+                    <span class="list-heading">{{ __('shop::app.footer.currency') }}</span>
                     <div class="form-container">
                         <div class="control-group">
                             <select class="control locale-switcher" onchange="window.location.href = this.value">
@@ -69,7 +86,6 @@
                             </select>
                         </div>
                     </div>
-                @endif
 
                 @if(count(core()->getCurrentChannel()->currencies) > 1)
                     <div class="currency">

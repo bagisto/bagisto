@@ -12,6 +12,7 @@ use Webkul\Product\Repositories\ProductFlatRepository as Product;
 use Webkul\Discount\Repositories\CatalogRuleRepository as CatalogRule;
 use Webkul\Discount\Repositories\CatalogRuleChannelsRepository as CatalogRuleChannels;
 use Webkul\Discount\Repositories\CatalogRuleCustomerGroupsRepository as CatalogRuleCustomerGroups;
+use Webkul\Discount\Helpers\FindProducts;
 
 /**
  * Catalog Rule controller
@@ -71,7 +72,12 @@ class CatalogRuleController extends Controller
      */
     protected $catalogRule;
 
-    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CatalogRule $catalogRule, CatalogRuleChannels $catalogRuleChannels, CatalogRuleCustomerGroups $catalogRuleCustomerGroups)
+    /**
+     * Find products using conditions helper instance
+     */
+    protected $findProducts;
+
+    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CatalogRule $catalogRule, CatalogRuleChannels $catalogRuleChannels, CatalogRuleCustomerGroups $catalogRuleCustomerGroups, FindProducts $findProducts)
     {
         $this->_config = request('_config');
         $this->attribute = $attribute;
@@ -83,6 +89,7 @@ class CatalogRuleController extends Controller
         $this->catalogRuleCustomerGroups = $catalogRuleCustomerGroups;
         $this->appliedConfig = config('pricerules.catalog');
         $this->appliedConditions = config('pricerules.conditions');
+        $this->findProducts = $findProducts;
     }
 
     public function index()
@@ -92,7 +99,7 @@ class CatalogRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('criteria', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions]);
+        return view($this->_config['view'])->with('catalog_rule', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions, $this->attributeFamily->getPartial()]);
     }
 
     public function store()
@@ -184,7 +191,7 @@ class CatalogRuleController extends Controller
         $catalog_rule_channels = $this->catalogRuleChannels->findByField('catalog_rule_id', $id);
         $catalog_rule_customer_groups = $this->catalogRuleCustomerGroups->findByField('catalog_rule_id', $id);
 
-        return view($this->_config['view'])->with('catalog_rule', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions, $catalog_rule, $catalog_rule_channels, $catalog_rule_customer_groups]);
+        return view($this->_config['view'])->with('catalog_rule', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions, $catalog_rule, $catalog_rule_channels, $catalog_rule_customer_groups, $this->attributeFamily->getPartial()]);
     }
 
     public function update($id)
@@ -265,10 +272,9 @@ class CatalogRuleController extends Controller
         $conditions = json_decode($decoded[0]);
         $optionableAttributes = $this->fetchOptionableAttributes();
 
-        foreach($conditions as $condition) {
-            $attributeName = $this->attribute->find($condition->attribute)->name;
-            $attributeType = $this->attribute->find($condition->attribute)->type;
-        }
+        $results = $this->findProducts->findByConditions($conditions);
+
+        dd($results);
     }
 
     public function fetchOptionableAttributes()
@@ -277,7 +283,7 @@ class CatalogRuleController extends Controller
 
         foreach($this->attribute->all() as $attribute) {
             if (($attribute->type == 'select' || $attribute->type == 'multiselect')  && $attribute->code != 'tax_category_id') {
-                $attributesWithOptions[$attribute->admin_name] = $attribute->options->toArray();
+                $attributesWithOptions[$attribute->code] = $attribute->options->toArray();
             }
         }
 

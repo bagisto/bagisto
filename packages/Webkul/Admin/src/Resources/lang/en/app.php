@@ -801,6 +801,14 @@ return [
             'any' => 'Any',
             'end_other_rules' => 'End other rules',
             'status' => 'Is Active',
+            'all-conditions-true' => 'Assuming all conditions are true',
+            'assuming' => 'Assuming',
+            'any' => 'Any',
+            'all' => 'All',
+            'conditions' => 'Conditions',
+            'are' => 'are',
+            'true' => 'true',
+            'false' => 'false'
         ],
 
         'status' => [
