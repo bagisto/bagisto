@@ -14,13 +14,27 @@ class AddRemainingColumnInProductFlatTable extends Migration
     public function up()
     {
         Schema::table('product_flat', function (Blueprint $table) {
-            $table->text('short_description')->nullable();
-            $table->text('meta_title')->nullable();
-            $table->text('meta_keywords')->nullable();
-            $table->text('meta_description')->nullable();
-            $table->decimal('width', 12, 4)->nullable();
-            $table->decimal('height', 12, 4)->nullable();
-            $table->decimal('depth', 12, 4)->nullable();
+            if (! Schema::hasColumn('short_description'))
+                $table->text('short_description')->nullable();
+            }
+            if (! Schema::hasColumn('meta_title'))
+                $table->text('meta_title')->nullable();
+            }
+            if (! Schema::hasColumn('meta_keywords'))
+                $table->text('meta_keywords')->nullable();
+            }
+            if (! Schema::hasColumn('meta_description'))
+                $table->text('meta_description')->nullable();
+            }
+            if (! Schema::hasColumn('width'))
+                $table->decimal('width', 12, 4)->nullable();
+            }
+            if (! Schema::hasColumn('height'))
+                $table->decimal('height', 12, 4)->nullable();
+            }
+            if (! Schema::hasColumn('depth'))
+                $table->decimal('depth', 12, 4)->nullable();
+            }
         });
     }
 
@@ -32,13 +46,7 @@ class AddRemainingColumnInProductFlatTable extends Migration
     public function down()
     {
         Schema::table('product_flat', function (Blueprint $table) {
-            $table->dropColumn('short_description');
-            $table->dropColumn('meta_title');
-            $table->dropColumn('meta_keywords');
-            $table->dropColumn('meta_description');
-            $table->dropColumn('width', 12, 4);
-            $table->dropColumn('height', 12, 4);
-            $table->dropColumn('depth', 12, 4);
+
         });
     }
 }
