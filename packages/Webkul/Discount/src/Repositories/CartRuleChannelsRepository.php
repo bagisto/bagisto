@@ -19,6 +19,6 @@ class CartRuleChannelsRepository extends Repository
      */
     function model()
     {
-        return 'Webkul\Discount\Contracts\CartRule';
+        return 'Webkul\Discount\Contracts\CartRuleChannels';
     }
 }

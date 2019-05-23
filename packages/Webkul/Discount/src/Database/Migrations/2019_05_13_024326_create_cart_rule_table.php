@@ -21,6 +21,7 @@ class CreateCartRuleTable extends Migration
             $table->datetime('ends_till')->nullable();
             $table->boolean('status')->default(0);
             $table->integer('per_customer')->unsigned()->default(0);
+            $table->boolean('use_coupon')->default(0);
             $table->integer('usage_throttle')->unsigned()->default(0);
             $table->json('conditions')->nullable();
             $table->json('actions')->nullable();

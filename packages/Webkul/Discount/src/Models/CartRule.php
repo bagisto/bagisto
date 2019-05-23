@@ -15,11 +15,11 @@ class CartRule extends Model implements CartRuleContract
 
     public function channels()
     {
-        return $this->belongsTo(CartRuleChannels::modelClass());
+        return $this->hasMany(CartRuleChannels::modelClass());
     }
 
     public function customer_groups()
     {
-        return $this->belongsTo(CartRuleCustomerGroups::modelClass());
+        return $this->hasMany(CartRuleCustomerGroups::modelClass());
     }
 }

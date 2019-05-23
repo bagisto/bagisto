@@ -2,15 +2,13 @@
 
 namespace Webkul\Discount\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Product\Repositories\ProductFlatRepository as Product;
-use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
+use Webkul\Discount\Repositories\CatalogRuleRepository;
 use Webkul\Checkout\Repositories\CartRepository as Cart;
 
 /**
@@ -61,7 +59,7 @@ class CartRuleController extends Controller
      */
     protected $cart;
 
-    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CartRule $cartRule, Cart $cart)
+    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CatalogRuleRepository $cartRule, Cart $cart)
     {
         $this->_config = request('_config');
         $this->attribute = $attribute;
@@ -80,24 +78,52 @@ class CartRuleController extends Controller
 
     public function create()
     {
-        // dd($this->appliedConfig);
         return view($this->_config['view'])->with('cart_rule', [$this->appliedConfig, $this->fetchOptionableAttributes(), $this->getStatesAndCountries()]);
     }
 
     public function store()
     {
-        dd(request()->all());
-        $this->validate(request(), [
-            'name' => 'required|string',
-            'description' => 'string',
-            'customer_groups' => 'required|array',
-            'channels' => 'required|array',
-            'starts_from' => 'required|date_format:Y-m-d H:i:s',
-            'ends_till' => 'required|date_format:Y-m-d H:i:s',
-            'apply' => 'numeric|min:1|max:4'
-        ]);
+        $data = request()->all();
+        unset($data['_token']);
 
-        $cartRule = $this->cartRule->create(request()->all());
+        $channels = $data['channels'];
+        unset($data['channels']);
+
+        $customer_groups = $data['customer_groups'];
+        unset($data['customer_groups']);
+        unset($data['criteria']);
+
+        $labels = $data['label'];
+        unset($data['label']);
+        unset($data['cart_attributes']);
+        unset($data['attributes']);
+
+        $data['conditions'] = $data['all_conditions'];
+        unset($data['all_conditions']);
+
+        $data['disc_amount'] = 1;
+
+        if (isset($data['disc_amount'])) {
+            $data['actions'] = [
+                'action_type' => $data['action_type'],
+                'disc_amount' => $data['disc_amount'],
+                'disc_thresold' => $data['disc_threshold']
+            ];
+        }
+
+        $data['actions'] = json_encode($data['actions']);
+        $data['conditions'] = json_encode($data['conditions']);
+
+        // dd($data);
+
+        $r = $this->cartRule->create($data);
+
+        if ($r) {
+            dd('true');
+        } else {
+            dd('false');
+        }
+        // $cartRule = $this->cartRule->create(request()->all());
     }
 
     public function getStatesAndCountries()
