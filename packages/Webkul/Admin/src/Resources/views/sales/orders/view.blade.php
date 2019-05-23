@@ -236,6 +236,9 @@
                                                 <th>{{ __('admin::app.sales.orders.subtotal') }}</th>
                                                 <th>{{ __('admin::app.sales.orders.tax-percent') }}</th>
                                                 <th>{{ __('admin::app.sales.orders.tax-amount') }}</th>
+                                                @if ($order->base_discount_amount > 0)
+                                                    <th>{{ __('admin::app.sales.orders.discount-amount') }}</th>
+                                                @endif
                                                 <th>{{ __('admin::app.sales.orders.grand-total') }}</th>
                                             </tr>
                                         </thead>
@@ -247,6 +250,7 @@
                                                     <td>
                                                         {{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}
                                                     </td>
+                                                    
                                                     <td>
                                                         {{ $item->name }}
 
@@ -254,7 +258,9 @@
                                                             <p>{{ $html }}</p>
                                                         @endif
                                                     </td>
+
                                                     <td>{{ core()->formatBasePrice($item->base_price) }}</td>
+
                                                     <td>
                                                         <span class="qty-row">
                                                             {{ $item->qty_ordered ? __('admin::app.sales.orders.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
@@ -272,9 +278,17 @@
                                                             {{ $item->qty_canceled ? __('admin::app.sales.orders.item-canceled', ['qty_canceled' => $item->qty_canceled]) : '' }}
                                                         </span>
                                                     </td>
+
                                                     <td>{{ core()->formatBasePrice($item->base_total) }}</td>
+
                                                     <td>{{ $item->tax_percent }}%</td>
+
                                                     <td>{{ core()->formatBasePrice($item->base_tax_amount) }}</td>
+
+                                                    @if ($order->base_discount_amount > 0)
+                                                        <td>{{ core()->formatBasePrice($item->base_discount_amount) }}</td>
+                                                    @endif
+
                                                     <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount) }}</td>
                                                 </tr>
                                             @endforeach
@@ -293,6 +307,14 @@
                                         <td>-</td>
                                         <td>{{ core()->formatBasePrice($order->base_shipping_amount) }}</td>
                                     </tr>
+
+                                    @if ($order->base_discount_amount > 0)
+                                        <tr>
+                                            <td>{{ __('admin::app.sales.orders.discount') }}</td>
+                                            <td>-</td>
+                                            <td>-{{ core()->formatBasePrice($order->base_discount_amount) }}</td>
+                                        </tr>
+                                    @endif
 
                                     <tr class="border">
                                         <td>{{ __('admin::app.sales.orders.tax') }}</td>
