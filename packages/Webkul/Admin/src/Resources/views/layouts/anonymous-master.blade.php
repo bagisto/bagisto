@@ -88,7 +88,11 @@
 
                     <div class="footer">
                         <p>
-                            {{ core()->getConfigData('general.content.footer.footer_content') }}
+                            @if (core()->getConfigData('general.content.footer.footer_content'))
+                                {{ core()->getConfigData('general.content.footer.footer_content') }}
+                            @else
+                                {{ trans('admin::app.footer.copy-right') }}
+                            @endif
                         </p>
                     </div>
 

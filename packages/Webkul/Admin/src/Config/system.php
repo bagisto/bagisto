@@ -68,9 +68,34 @@ return [
         'name' => 'admin::app.admin.system.general',
         'sort' => 4,
     ], [
+        'key' => 'general.general',
+        'name' => 'admin::app.admin.system.general',
+        'sort' => 1,
+    ], [
+        'key' => 'general.general.locale_options',
+        'name' => 'admin::app.admin.system.locale-options',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'weight_unit',
+                'title' => 'admin::app.admin.system.weight-unit',
+                'type' => 'select',
+                'options' => [
+                    [
+                        'title' => 'lbs',
+                        'value' => 'lbs'
+                    ], [
+                        'title' => 'kgs',
+                        'value' => 'kgs'
+                    ]
+                ],
+                'channel_based' => true,
+            ]
+        ]
+    ],[
         'key' => 'general.content',
         'name' => 'admin::app.admin.system.content',
-        'sort' => 1,
+        'sort' => 2,
     ], [
         'key' => 'general.content.footer',
         'name' => 'admin::app.admin.system.footer',

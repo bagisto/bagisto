@@ -867,7 +867,9 @@ return [
             'general' => 'General',
             'footer' => 'Footer',
             'content' => 'Content',
-            'footer-content' => 'Text Value'
+            'footer-content' => 'Footer Text',
+            'locale-options' => 'Locale Options',
+            'weight-unit' => 'Weight Unit'
         ]
     ]
 ];
