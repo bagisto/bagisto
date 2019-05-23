@@ -152,6 +152,15 @@
                 </span>
             </div>
 
+            @if ($invoice->discount_amount > 0)
+                <div>
+                    <span>{{ __('shop::app.mail.order.discount') }}</span>
+                    <span style="float: right;">
+                        {{ core()->formatPrice($invoice->discount_amount, $invoice->order_currency_code) }}
+                    </span>
+                </div>
+            @endif
+
             <div style="font-weight: bold">
                 <span>{{ __('shop::app.mail.order.grand-total') }}</span>
                 <span style="float: right;">
