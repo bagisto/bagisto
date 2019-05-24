@@ -260,6 +260,7 @@ return [
                     'subtotal' => 'Subtotal',
                     'shipping-handling' => 'Shipping & Handling',
                     'tax' => 'Tax',
+                    'discount' => 'Discount',
                     'tax-percent' => 'Tax Percent',
                     'tax-amount' => 'Tax Amount',
                     'discount-amount' => 'Discount Amount',
@@ -441,6 +442,7 @@ return [
             'grand-total' => 'Grand Total',
             'delivery-charges' => 'Delivery Charges',
             'tax' => 'Tax',
+            'discount' => 'Discount',
             'price' => 'price'
         ],
 
@@ -471,6 +473,7 @@ return [
             'subtotal' => 'Subtotal',
             'shipping-handling' => 'Shipping & Handling',
             'tax' => 'Tax',
+            'discount' => 'Discount',
             'grand-total' => 'Grand Total',
             'final-summary' => 'Thanks for showing your interest in our store we will send you tracking number once it shipped',
             'help' => 'If you need any kind of help please contact us at :support_email',

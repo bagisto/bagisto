@@ -254,6 +254,7 @@ return [
                     'subtotal' => 'المجموع الفرعي',
                     'shipping-handling' => 'الشحن والمناولة',
                     'tax' => 'الضرائب',
+                    'discount' => 'Discount',
                     'tax-percent' => 'نسبة الضرائب',
                     'tax-amount' => 'المبلغ الضريبي',
                     'discount-amount' => 'مبلغ الخصم',
@@ -430,6 +431,7 @@ return [
             'grand-total' => 'المجموع الكلي',
             'delivery-charges' => 'رسوم التسليم',
             'tax' => 'الضرائب',
+            'discount' => 'Discount',
             'price' => 'السعر            '
         ],
 
@@ -458,6 +460,7 @@ return [
             'subtotal' => 'المجموع الفرعي',
             'shipping-handling' => 'الشحن والمناولة',
             'tax' => 'الضرائب',
+            'discount' => 'Discount',
             'grand-total' => 'المجموع الكلي',
             'final-summary' => 'شكرا لإظهارك إهتمامك بمتجرنا سنرسل لك رقم التتبع بمجرد شحنه',
             'help' => 'إذا كنت بحاجة إلى أي نوع من المساعدة يرجى الاتصال بنا على: support_email',

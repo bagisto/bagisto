@@ -105,7 +105,7 @@
                         {{ __('shop::app.mail.order.price') }}
                     </label>
                     <span style="font-size: 18px;color: #242424;margin-left: 40px;font-weight: bold;">
-                        {{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                        {{ core()->formatBasePrice($item->base_price) }}
                     </span>
                 </div>
 
@@ -132,28 +132,37 @@
             <div>
                 <span>{{ __('shop::app.mail.order.subtotal') }}</span>
                 <span style="float: right;">
-                    {{ core()->formatPrice($order->sub_total, $order->order_currency_code) }}
+                    {{ core()->formatBasePrice($order->base_sub_total) }}
                 </span>
             </div>
 
             <div>
                 <span>{{ __('shop::app.mail.order.shipping-handling') }}</span>
                 <span style="float: right;">
-                    {{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}
+                    {{ core()->formatBasePrice($order->base_shipping_amount) }}
                 </span>
             </div>
 
             <div>
                 <span>{{ __('shop::app.mail.order.tax') }}</span>
                 <span style="float: right;">
-                    {{ core()->formatPrice($order->tax_amount, $order->order_currency_code) }}
+                    {{ core()->formatBasePrice($order->base_tax_amount) }}
                 </span>
             </div>
+
+            @if ($order->discount_amount > 0)
+                <div>
+                    <span>{{ __('shop::app.mail.order.discount') }}</span>
+                    <span style="float: right;">
+                        {{ core()->formatBasePrice($order->base_discount_amount) }}
+                    </span>
+                </div>
+            @endif
 
             <div style="font-weight: bold">
                 <span>{{ __('shop::app.mail.order.grand-total') }}</span>
                 <span style="float: right;">
-                    {{ core()->formatPrice($order->grand_total, $order->order_currency_code) }}
+                    {{ core()->formatBasePrice($order->base_grand_total) }}
                 </span>
             </div>
         </div>

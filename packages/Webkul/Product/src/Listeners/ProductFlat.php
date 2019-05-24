@@ -186,7 +186,7 @@ class ProductFlat
                     if ($parentProduct && ! in_array($attribute->code, array_merge($superAttributes[$parentProduct->id], ['sku', 'name', 'price', 'weight', 'status'])))
                         continue;
 
-                    if (in_array($attribute->code, ['short_description', 'tax_category_id', 'meta_title', 'meta_keywords', 'meta_description', 'width', 'height']))
+                    if (in_array($attribute->code, ['tax_category_id']))
                         continue;
 
                     if (! Schema::hasColumn('product_flat', $attribute->code))

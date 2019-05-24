@@ -285,9 +285,11 @@ return [
             'total' => 'Total',
             'subtotal' => 'Subtotal',
             'shipping-handling' => 'Shipping & Handling',
+            'discount' => 'Discount',
             'tax' => 'Tax',
             'tax-percent' => 'Tax Percent',
             'tax-amount' => 'Tax Amount',
+            'discount-amount' => 'Discount Amount',
             'discount-amount' => 'Discount Amount',
             'grand-total' => 'Grand Total',
             'total-paid' => 'Total Paid',
@@ -956,7 +958,9 @@ return [
             'general' => 'General',
             'footer' => 'Footer',
             'content' => 'Content',
-            'footer-content' => 'Text Value'
+            'footer-content' => 'Footer Text',
+            'locale-options' => 'Locale Options',
+            'weight-unit' => 'Weight Unit'
         ]
     ]
 ];

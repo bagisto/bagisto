@@ -798,10 +798,14 @@ class Cart {
         $cart->grand_total = $cart->base_grand_total = 0;
         $cart->sub_total = $cart->base_sub_total = 0;
         $cart->tax_total = $cart->base_tax_total = 0;
+        $cart->discount_amount = $cart->base_discount_amount = 0;
 
         foreach ($cart->items()->get() as $item) {
-            $cart->grand_total = (float) $cart->grand_total + $item->total + $item->tax_amount;
-            $cart->base_grand_total = (float) $cart->base_grand_total + $item->base_total + $item->base_tax_amount;
+            $cart->discount_amount += $item->discount_amount;
+            $cart->base_discount_amount += $item->base_discount_amount;
+
+            $cart->grand_total = (float) $cart->grand_total + $item->total + $item->tax_amount - $item->discount_amount;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $item->base_total + $item->base_tax_amount - $item->base_discount_amount;
 
             $cart->sub_total = (float) $cart->sub_total + $item->total;
             $cart->base_sub_total = (float) $cart->base_sub_total + $item->base_total;

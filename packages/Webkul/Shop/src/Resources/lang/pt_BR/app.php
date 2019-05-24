@@ -256,6 +256,7 @@ return [
                     'subtotal' => 'Subtotal',
                     'shipping-handling' => 'Entrega & Manuseio',
                     'tax' => 'Imposto',
+                    'discount' => 'Discount',
                     'tax-percent' => 'Percentagem de imposto',
                     'tax-amount' => 'Valor de Imposto',
                     'discount-amount' => 'Valor de Desconto',
@@ -438,6 +439,7 @@ return [
             'grand-total' => 'Total',
             'delivery-charges' => 'Taxas de Entrega',
             'tax' => 'Imposto',
+            'discount' => 'Discount',
             'price' => 'preço'
         ],
 
@@ -466,6 +468,7 @@ return [
             'subtotal' => 'Subtotal',
             'shipping-handling' => 'Envio & Manuseio',
             'tax' => 'Imposto',
+            'discount' => 'Discount',
             'grand-total' => 'Total',
             'final-summary' => 'Obrigado por mostrar o seu interesse em nossa loja nós lhe enviaremos o número de rastreamento assim que for despachado',
             'help' => 'Se você precisar de algum tipo de ajuda, por favor entre em contato conosco :support_email',
