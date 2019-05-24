@@ -25,6 +25,7 @@
                     @include ('shop::products.view.gallery')
 
                     <div class="details">
+
                         <div class="product-heading">
                             <span>{{ $product->name }}</span>
                         </div>
@@ -116,6 +117,7 @@
     <script>
 
         Vue.component('product-view', {
+
             template: '#product-view-template',
 
             inject: ['$validator'],

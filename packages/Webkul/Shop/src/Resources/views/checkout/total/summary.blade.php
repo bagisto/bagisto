@@ -28,4 +28,12 @@
         <label>{{ __('shop::app.checkout.total.grand-total') }}</label>
         <label class="right">{{ core()->currency($cart->base_grand_total) }}</label>
     </div>
+
+    <div class="discount">
+        <div class="dicount-group">
+            @inject('cart_rule', 'Webkul\Discount\Helpers\Discount')
+
+            {{ $cart_rule->findAllRules() }}
+        </div>
+    </div>
 </div>

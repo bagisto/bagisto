@@ -124,6 +124,11 @@ class CartRuleController extends Controller
 
         $data = request()->all();
 
+        if ($data['starts_from'] == "" || $data['ends_till'] == "") {
+            $data['starts_from'] = null;
+            $data['ends_till'] = null;
+        }
+
         unset($data['_token']);
 
         $channels = $data['channels'];

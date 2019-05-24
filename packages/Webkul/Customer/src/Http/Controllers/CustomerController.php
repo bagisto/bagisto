@@ -67,7 +67,6 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        dd(auth()->guard('customer')->user()->group);
         $customer = $this->customer->find(auth()->guard('customer')->user()->id);
 
         return view($this->_config['view'], compact('customer'));
