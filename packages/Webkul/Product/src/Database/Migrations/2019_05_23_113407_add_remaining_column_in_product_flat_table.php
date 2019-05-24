@@ -14,13 +14,27 @@ class AddRemainingColumnInProductFlatTable extends Migration
     public function up()
     {
         Schema::table('product_flat', function (Blueprint $table) {
-            $table->text('short_description')->nullable();
-            $table->text('meta_title')->nullable();
-            $table->text('meta_keywords')->nullable();
-            $table->text('meta_description')->nullable();
-            $table->decimal('width', 12, 4)->nullable();
-            $table->decimal('height', 12, 4)->nullable();
-            $table->decimal('depth', 12, 4)->nullable();
+            if (! Schema::hasColumn('product_flat', 'short_description')) {
+                $table->text('short_description')->nullable();
+            }
+            if (! Schema::hasColumn('product_flat', 'meta_title')) {
+                $table->text('meta_title')->nullable();
+            }
+            if (! Schema::hasColumn('product_flat', 'meta_keywords')) {
+                $table->text('meta_keywords')->nullable();
+            }
+            if (! Schema::hasColumn('product_flat', 'meta_description')) {
+                $table->text('meta_description')->nullable();
+            }
+            if (! Schema::hasColumn('product_flat', 'width')) {
+                $table->decimal('width', 12, 4)->nullable();
+            }
+            if (! Schema::hasColumn('product_flat', 'height')) {
+                $table->decimal('height', 12, 4)->nullable();
+            }
+            if (! Schema::hasColumn('product_flat', 'depth')) {
+                $table->decimal('depth', 12, 4)->nullable();
+            }
         });
     }
 
@@ -32,13 +46,7 @@ class AddRemainingColumnInProductFlatTable extends Migration
     public function down()
     {
         Schema::table('product_flat', function (Blueprint $table) {
-            $table->dropColumn('short_description');
-            $table->dropColumn('meta_title');
-            $table->dropColumn('meta_keywords');
-            $table->dropColumn('meta_description');
-            $table->dropColumn('width', 12, 4);
-            $table->dropColumn('height', 12, 4);
-            $table->dropColumn('depth', 12, 4);
+
         });
     }
 }
