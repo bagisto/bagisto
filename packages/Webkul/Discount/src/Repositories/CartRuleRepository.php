@@ -80,9 +80,9 @@ class CartRuleRepository extends Repository
         //create the left ones
         foreach ($newCustomerGroups as $newCustomerGroup) {
             $data['customer_group_id'] = $newCustomerGroup;
-            $data['catalog_rule_id'] = $cartRule->id;
+            $data['cart_rule_id'] = $cartRule->id;
 
-            $this->catalogRuleCustomerGroups->create($data);
+            $this->cartRuleCustomerGroups->create($data);
         }
 
         return true;
@@ -128,8 +128,8 @@ class CartRuleRepository extends Repository
         //create the left ones
         foreach ($newChannels as $newChannel) {
             $data['channel_id'] = $newChannel;
-            $data['catalog_rule_id'] = $cartRule->id;
-            $this->catalogRuleChannels->create($data);
+            $data['cart_rule_id'] = $cartRule->id;
+            $this->cartRuleChannels->create($data);
         }
 
         return true;

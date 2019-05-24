@@ -8,7 +8,6 @@
 
     <div class="content">
         <cart-rule></cart-rule>
-
     </div>
 
     @push('scripts')

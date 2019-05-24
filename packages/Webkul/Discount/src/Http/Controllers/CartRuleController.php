@@ -8,8 +8,11 @@ use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Product\Repositories\ProductFlatRepository as Product;
-use Webkul\Discount\Repositories\CatalogRuleRepository;
+use Webkul\Discount\Repositories\CatalogRuleRepository as CatalogRule;
+use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
 use Webkul\Checkout\Repositories\CartRepository as Cart;
+use Webkul\Discount\Repositories\CartRuleLabelsRepository as CartRuleLabels;
+use Webkul\Discount\Repositories\CartRuleCouponsRepository as CartRuleCoupons;
 
 /**
  * Cart Rule controller
@@ -50,24 +53,35 @@ class CartRuleController extends Controller
     protected $appliedConfig;
 
     /**
-     * To hold the Cart repository instance
+     * To hold Cart repository instance
      */
     protected $cartRule;
+
+    /**
+     * To hold Rule Label repository instance
+     */
+    protected $cartRuleLabel;
+
+    /**
+     * To hold Coupons Repository instance
+     */
+    protected $cartRuleCoupon;
 
     /**
      * To hold the cart repository instance
      */
     protected $cart;
 
-    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CatalogRuleRepository $cartRule, Cart $cart)
+    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CatalogRule $catalogRule, CartRule $cartRule, CartRuleCoupons $cartRuleCoupon, CartRuleLabels $cartRuleLabel)
     {
         $this->_config = request('_config');
         $this->attribute = $attribute;
         $this->attributeFamily = $attributeFamily;
         $this->category = $category;
         $this->product = $product;
-        $this->CartRule = $cartRule;
-        $this->cart = $cart;
+        $this->cartRule = $cartRule;
+        $this->cartRuleCoupon = $cartRuleCoupon;
+        $this->cartRuleLabel = $cartRuleLabel;
         $this->appliedConfig = config('pricerules.cart');
     }
 
@@ -84,6 +98,10 @@ class CartRuleController extends Controller
     public function store()
     {
         $data = request()->all();
+
+        //assumed default
+        $data['limit'] = 10;
+
         unset($data['_token']);
 
         $channels = $data['channels'];
@@ -114,16 +132,62 @@ class CartRuleController extends Controller
         $data['actions'] = json_encode($data['actions']);
         $data['conditions'] = json_encode($data['conditions']);
 
-        // dd($data);
+        $data['coupon_usage'] = $data['use_coupon'];
+        unset($data['use_coupon']);
 
-        $r = $this->cartRule->create($data);
-
-        if ($r) {
-            dd('true');
-        } else {
-            dd('false');
+        $coupons['code'] = $data['code'];
+        unset($data['code']);
+        if (isset($data['prefix'])) {
+            $coupons['prefix'] = $data['prefix'];
+            unset($data['prefix']);
         }
-        // $cartRule = $this->cartRule->create(request()->all());
+
+        if(isset($data['suffix'])) {
+            $coupons['suffix'] = $data['suffix'];
+            unset($data['suffix']);
+        }
+
+        if(isset($data['limit'])) {
+            $coupons['limit'] = $data['limit'];
+            unset($data['limit']);
+        }
+
+        $ruleCreated = $this->cartRule->create($data);
+
+        $ruleGroupCreated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleCreated);
+        $ruleChannelCreated = $this->cartRule->ChannelSync($channels, $ruleCreated);
+
+        if (isset($labels['global'])) {
+            foreach (core()->getAllChannels() as $channel) {
+                $label1['channel_id'] = $channel->id;
+                foreach($channel->locales as $locale) {
+                    $label1['locale_id'] = $locale->id;
+                    $label1['label'] = $labels['global'];
+
+                    $ruleLabelCreated = $this->cartRuleLabel->create($label1);
+                }
+            }
+        } else {
+            $label2['label'] = $labels['global'];
+            $ruleLabelCreated = $this->cartRuleLabel->create($label2);
+        }
+
+        if(isset($coupons)) {
+            $coupons['cart_rule_id'] = $ruleCreated->id;
+            $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
+
+            $couponCreated = $this->cartRuleCoupon->create($coupons);
+        }
+
+        if ($ruleCreated && $ruleGroupCreated && $ruleChannelCreated) {
+            if ($couponCreated) {
+                dd('created with a coupon or coupons');
+            }
+            dd('created');
+        } else {
+            dd('error');
+        }
+
     }
 
     public function getStatesAndCountries()
