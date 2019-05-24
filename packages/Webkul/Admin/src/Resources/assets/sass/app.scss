@@ -298,6 +298,17 @@ body {
     }
 }
 
+.boolean-control-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 750px;
+
+    .control-group {
+        width: 200px;
+    }
+}
+
 .control-group {
     label {
         width: 70%;

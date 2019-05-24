@@ -21,7 +21,7 @@ class CartRuleDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('cart_rules')
                 ->select('id')
-                ->addSelect('id', 'name', 'description', 'status', 'end_other_rules', 'action_type');
+                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'usage_throttle', 'per_customer', 'status', 'end_other_rules', 'action_type');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -47,8 +47,17 @@ class CartRuleDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'description',
-            'label' => trans('admin::app.datagrid.desc'),
+            'index' => 'per_customer',
+            'label' => trans('admin::app.datagrid.per-cust'),
+            'type' => 'string',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'usage_throttle',
+            'label' => trans('admin::app.datagrid.usage-throttle'),
             'type' => 'string',
             'searchable' => false,
             'sortable' => true,
@@ -61,7 +70,13 @@ class CartRuleDataGrid extends DataGrid
             'type' => 'boolean',
             'searchable' => false,
             'sortable' => true,
-            'filterable' => true
+            'filterable' => true,
+            'wrapper' => function($value) {
+                if ($value->end_other_rules == 1)
+                    return 'true';
+                else
+                    return 'false';
+            }
         ]);
 
         $this->addColumn([
@@ -70,7 +85,13 @@ class CartRuleDataGrid extends DataGrid
             'type' => 'boolean',
             'searchable' => false,
             'sortable' => true,
-            'filterable' => true
+            'filterable' => true,
+            'wrapper' => function($value) {
+                if ($value->end_other_rules == 1)
+                    return 'true';
+                else
+                    return 'false';
+            }
         ]);
 
         $this->addColumn([
@@ -85,28 +106,28 @@ class CartRuleDataGrid extends DataGrid
 
     public function prepareActions()
     {
-        // $this->addAction([
-        //     'type' => 'Edit',
-        //     'method' => 'GET', //use post only for redirects only
-        //     'route' => 'admin.catalog.attributes.edit',
-        //     'icon' => 'icon pencil-lg-icon'
-        // ]);
+        $this->addAction([
+            'type' => 'Edit',
+            'method' => 'GET', //use post only for redirects only
+            'route' => 'admin.cart-rule.edit',
+            'icon' => 'icon pencil-lg-icon'
+        ]);
 
-        // $this->addAction([
-        //     'type' => 'Delete',
-        //     'method' => 'POST', //use post only for requests other than redirects
-        //     'route' => 'admin.catalog.attributes.delete',
-        //     'icon' => 'icon trash-icon'
-        // ]);
+        $this->addAction([
+            'type' => 'Delete',
+            'method' => 'POST', //use post only for requests other than redirects
+            'route' => 'admin.cart-rule.delete',
+            'icon' => 'icon trash-icon'
+        ]);
     }
 
     public function prepareMassActions()
     {
-        $this->addMassAction([
-            'type' => 'delete',
-            'action' => route('admin.catalog.attributes.massdelete'),
-            'label' => 'Delete',
-            'method' => 'DELETE'
-        ]);
+        // $this->addMassAction([
+        //     'type' => 'delete',
+        //     'action' => route('admin.catalog.attributes.massdelete'),
+        //     'label' => 'Delete',
+        //     'method' => 'DELETE'
+        // ]);
     }
 }

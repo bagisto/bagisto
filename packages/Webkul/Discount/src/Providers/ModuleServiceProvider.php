@@ -15,6 +15,8 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Discount\Models\CartRuleChannels::class,
         \Webkul\Discount\Models\CartRuleCustomerGroups::class,
         \Webkul\Discount\Models\CartRuleCoupons::class,
-        \Webkul\Discount\Models\CartRuleLabels::class
+        \Webkul\Discount\Models\CartRuleLabels::class,
+        \Webkul\Discount\Models\CartRuleCouponsUsage::class,
+        \Webkul\Discount\Models\CartRuleCustomers::class
     ];
 }

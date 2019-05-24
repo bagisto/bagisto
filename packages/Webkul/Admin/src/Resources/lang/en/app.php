@@ -156,6 +156,8 @@ return [
         'attribute-family' => 'Attribute Family',
         'starts-from' => 'Starts From',
         'ends-till' => 'Ends Till',
+        'per-cust' => 'Per Customer',
+        'usage-throttle' => 'Usage Times'
     ],
 
     'account' => [
@@ -808,13 +810,18 @@ return [
             'conditions' => 'Conditions',
             'are' => 'are',
             'true' => 'true',
-            'false' => 'false'
+            'false' => 'false',
+            'limit' => 'Usage Limit',
+            'specific-coupon' => 'Specific Coupon(Check) / Auto Generated(Unheck)',
+            'free-shipping' => 'Free Shipping'
         ],
 
         'status' => [
             'success' => 'Success! rule created',
+            'success-coupon' => 'Success! rule created along with coupon',
             'failed' => 'Error! failed to create rule',
             'update-success' => 'Success! rule updated',
+            'update-coupon-success' => 'Success! rule updated along with coupon',
             'update-failed' => 'Error! cannot update',
             'delete-success' => 'Sucess! rule deleted',
             'delete-failed' => 'Error! cannot delete'

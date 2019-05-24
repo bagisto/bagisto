@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCartruleCouponsTable extends Migration
+class CreateCartruleCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateCartruleCouponsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cartrule_coupons', function (Blueprint $table) {
+        Schema::create('cart_rule_customers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cart_rule_id')->unsigned();
             $table->foreign('cart_rule_id')->references('id')->on('cart_rules')->onDelete('cascade');
-            $table->string('code')->nullable();
-            $table->integer('limit')->unsigned()->default(0);
-            $table->integer('usage_per_customer')->unsigned()->default(0);
-            $table->integer('usage_throttle')->unsigned()->default(0);
-            $table->integer('type')->unsigned()->default(0);
+            $table->integer('customer_id')->unsigned();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->bigInteger('usage_throttle')->unsigned()->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class CreateCartruleCouponsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cartrule_coupons');
+        Schema::dropIfExists('cartrule_customers');
     }
 }

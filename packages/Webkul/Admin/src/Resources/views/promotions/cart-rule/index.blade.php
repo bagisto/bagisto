@@ -20,8 +20,8 @@
         </div>
 
         <div class="page-content">
-            @inject('customerGrid','Webkul\Admin\DataGrids\CustomerDataGrid')
-            {!! $customerGrid->render() !!}
+            @inject('cartRuleGrid','Webkul\Admin\DataGrids\CartRuleDataGrid')
+            {!! $cartRuleGrid->render() !!}
         </div>
     </div>
 @endsection

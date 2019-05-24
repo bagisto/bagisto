@@ -125,7 +125,7 @@
                                     </div>
 
                                     <div class="control-group" :class="[errors.has('auto_generation') ? 'has-error' : '']" v-if="use_coupon == 1">
-                                        <label for="auto_generation" class="required">Specific Coupon</label>
+                                        <label for="auto_generation" class="required">{{ __('admin::app.promotion.general-info.specific-coupon') }}</label>
 
                                         <input type="checkbox" class="control" name="auto_generation" v-model="auto_generation" value="{{ old('auto_generation') }}" data-vv-as="&quot;Specific Coupon&quot;" v-on:change="checkAutogen">
 
@@ -138,6 +138,14 @@
                                         <input type="number" step="1" class="control" name="per_customer" v-model="per_customer" v-validate="'required|numeric|min_value:0'" value="{{ old('per_customer') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('per_customer')">@{{ errors.first('per_customer') }}</span>
+                                    </div>
+
+                                    <div class="control-group" :class="[errors.has('limit') ? 'has-error' : '']">
+                                        <label for="limit" class="required">{{ __('admin::app.promotion.general-info.limit') }}</label>
+
+                                        <input type="number" step="1" class="control" name="limit" v-model="limit" v-validate="'required|numeric|min_value:0'" value="{{ old('limit') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
+
+                                        <span class="control-error" v-if="errors.has('limit')">@{{ errors.first('limit') }}</span>
                                     </div>
 
                                     <div class="control-group" :class="[errors.has('priority') ? 'has-error' : '']">
@@ -232,10 +240,10 @@
                                         <span class="control-error" v-if="errors.has('action_type')">@{{ errors.first('action_type') }}</span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']" v-if="apply_amt">
+                                    <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']">
                                         <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_amt') }}</label>
 
-                                        <input type="number" step="1.0000" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|decimal|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
+                                        <input type="number" step="0.5000" class="control" name="disc_amount" v-model="disc_amount" v-validate="'required|decimal|min_value:0.0001'" value="{{ old('disc_amount') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_amt') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
@@ -248,60 +256,63 @@
                                         <span class="control-error" v-if="errors.has('disc_threshold')">@{{ errors.first('disc_threshold') }}</span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('free_shipping') ? 'has-error' : '']" v-if="apply_prct">
-                                        <label for="free_shipping" class="required">{{ __('admin::app.promotion.general-info.free_shipping') }}</label>
+                                    <div class="boolean-control-container">
+                                        <div class="control-group" :class="[errors.has('free_shipping') ? 'has-error' : '']">
+                                            <label for="free_shipping" class="required">{{ __('admin::app.promotion.general-info.free-shipping') }}</label>
 
-                                        <input type="number" step="0.5000" class="control" name="free_shipping" v-model="free_shipping" v-validate="'required|decimal|min_value:0.0001'" value="{{ old('free_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.free_shipping') }}&quot;">
+                                            <select type="text" class="control" name="free_shipping" v-model="free_shipping" v-validate="'required'" value="{{ old('free_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.free-shipping') }}&quot;">
+                                                <option value="0" :selected="free_shipping == 0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
 
-                                        <span class="control-error" v-if="errors.has('free_shipping')">@{{ errors.first('free_shipping') }}</span>
-                                    </div>
+                                                <option value="1" :selected="free_shipping == 1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                                            </select>
 
-                                    <div class="control-group" :class="[errors.has('apply_to_shipping') ? 'has-error' : '']">
-                                        <label for="customer_groups" class="required">{{ __('admin::app.promotion.cart.apply-to-shipping') }}</label>
+                                            <span class="control-error" v-if="errors.has('free_shipping')">@{{ errors.first('free_shipping') }}</span>
+                                        </div>
 
-                                        <select type="text" class="control" name="apply_to_shipping" v-model="apply_to_shipping" v-validate="'required'" value="{{ old('apply_to_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.apply-to-shipping') }}&quot;">
-                                            <option value="0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+                                        <div class="control-group" :class="[errors.has('apply_to_shipping') ? 'has-error' : '']">
+                                            <label for="customer_groups" class="required">{{ __('admin::app.promotion.cart.apply-to-shipping') }}</label>
 
-                                            <option value="1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
-                                        </select>
+                                            <select type="text" class="control" name="apply_to_shipping" v-model="apply_to_shipping" v-validate="'required'" value="{{ old('apply_to_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.apply-to-shipping') }}&quot;">
+                                                <option value="0" :selected="apply_to_shipping == 0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
 
-                                        <span class="control-error" v-if="errors.has('apply_to_shipping')">@{{ errors.first('apply_to_shipping') }}</span>
+                                                <option value="1" :selected="apply_to_shipping == 1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                                            </select>
+
+                                            <span class="control-error" v-if="errors.has('apply_to_shipping')">@{{ errors.first('apply_to_shipping') }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </accordian>
 
                             <accordian :active="false" title="Coupons" v-if="auto_generation != null">
                                 <div slot="body">
-                                    <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']" v-if="!auto_generation">
-                                        <label for="code" class="required">Code</label>
 
-                                        <input type="text" class="control" name="code" v-model="code" v-validate="'required'" value="{{ old('code') }}" data-vv-as="&quot;Code&quot;">
+                                    <div v-if="!auto_generation">
+                                        <div class="control-group" :class="[errors.has('prefix') ? 'has-error' : '']">
+                                            <label for="code" class="required">Prefix</label>
 
-                                        <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
+                                            <input type="text" class="control" name="prefix" v-model="prefix" v-validate="'required'" value="{{ old('prefix') }}" data-vv-as="&quot;Prefix&quot;">
+
+                                            <span class="control-error" v-if="errors.has('prefix')">@{{ errors.first('prefix') }}</span>
+                                        </div>
+
+                                        <div class="control-group" :class="[errors.has('suffix') ? 'has-error' : '']"">
+                                            <label for="code" class="required">Suffix</label>
+
+                                            <input type="text" class="control" name="suffix" v-model="suffix" v-validate="'required'" value="{{ old('suffix') }}" data-vv-as="&quot;suffix&quot;">
+
+                                            <span class="control-error" v-if="errors.has('suffix')">@{{ errors.first('suffix') }}</span>
+                                        </div>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('prefix') ? 'has-error' : '']" v-if="!auto_generation">
-                                        <label for="code" class="required">Prefix</label>
+                                    <div v-if="auto_generation">
+                                        <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
+                                            <label for="code" class="required">Code</label>
 
-                                        <input type="text" class="control" name="prefix" v-model="prefix" v-validate="'required'" value="{{ old('prefix') }}" data-vv-as="&quot;Prefix&quot;">
+                                            <input type="text" class="control" name="code" v-model="code" v-validate="'required'" value="{{ old('code') }}" data-vv-as="&quot;Code&quot;">
 
-                                        <span class="control-error" v-if="errors.has('prefix')">@{{ errors.first('prefix') }}</span>
-                                    </div>
-
-                                    <div class="control-group" :class="[errors.has('suffix') ? 'has-error' : '']" v-if="!auto_generation">
-                                        <label for="code" class="required">Suffix</label>
-
-                                        <input type="text" class="control" name="suffix" v-model="suffix" v-validate="'required'" value="{{ old('suffix') }}" data-vv-as="&quot;suffix&quot;">
-
-                                        <span class="control-error" v-if="errors.has('suffix')">@{{ errors.first('suffix') }}</span>
-                                    </div>
-
-                                    <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']" v-if="auto_generation">
-                                        <label for="code" class="required">Code</label>
-
-                                        <input type="text" class="control" name="code" v-model="code" v-validate="'required'" value="{{ old('code') }}" data-vv-as="&quot;Code&quot;">
-
-                                        <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
+                                            <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </accordian>
@@ -371,7 +382,7 @@
                         disc_quantity: 0,
                         end_other_rules: null,
                         coupon_type: null,
-                        free_shipping: false,
+                        free_shipping: null,
                         auto_generated: null,
 
                         all_conditions: null,
@@ -380,6 +391,7 @@
                         suffix: null,
                         prefix: null,
                         dedicated_label: true,
+                        limit: null,
 
                         global_label: null,
                         label: {
@@ -435,7 +447,6 @@
                     },
 
                     checkAutogen() {
-                        console.log(this.auto_generation);
                     },
 
                     detectApply() {
@@ -461,7 +472,7 @@
 
                     useCoupon() {
                         if (this.use_coupon == 1) {
-                            this.auto_generation = 0;
+                            this.auto_generation = 1;
                         }
                     },
 
@@ -474,7 +485,6 @@
                     },
 
                     onSubmit: function (e) {
-                        debugger
                         this.$validator.validateAll().then(result => {
                             if (result) {
                                 e.target.submit();

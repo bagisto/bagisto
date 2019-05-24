@@ -99,6 +99,107 @@ class CartRuleController extends Controller
     {
         $data = request()->all();
 
+        unset($data['_token']);
+
+        $channels = $data['channels'];
+        unset($data['channels']);
+
+        $customer_groups = $data['customer_groups'];
+        unset($data['customer_groups']);
+        unset($data['criteria']);
+
+        $labels = $data['label'];
+        unset($data['label']);
+        unset($data['cart_attributes']);
+        unset($data['attributes']);
+
+        $data['conditions'] = $data['all_conditions'];
+        unset($data['all_conditions']);
+
+        if (isset($data['disc_amount'])) {
+            $data['actions'] = [
+                'action_type' => $data['action_type'],
+                'disc_amount' => $data['disc_amount'],
+                'disc_thresold' => $data['disc_threshold']
+            ];
+        }
+
+        $data['actions'] = json_encode($data['actions']);
+        $data['conditions'] = json_encode($data['conditions']);
+
+        $data['coupon_usage'] = $data['use_coupon'];
+        unset($data['use_coupon']);
+
+        $coupons['code'] = $data['code'];
+        unset($data['code']);
+        if (isset($data['prefix'])) {
+            $coupons['prefix'] = $data['prefix'];
+            unset($data['prefix']);
+        }
+
+        if(isset($data['suffix'])) {
+            $coupons['suffix'] = $data['suffix'];
+            unset($data['suffix']);
+        }
+
+        if(isset($data['limit'])) {
+            $coupons['limit'] = $data['limit'];
+            unset($data['limit']);
+        }
+
+        $ruleCreated = $this->cartRule->create($data);
+
+        $ruleGroupCreated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleCreated);
+        $ruleChannelCreated = $this->cartRule->ChannelSync($channels, $ruleCreated);
+
+        if (isset($labels['global'])) {
+            foreach (core()->getAllChannels() as $channel) {
+                $label1['channel_id'] = $channel->id;
+                foreach($channel->locales as $locale) {
+                    $label1['locale_id'] = $locale->id;
+                    $label1['label'] = $labels['global'];
+
+                    $ruleLabelCreated = $this->cartRuleLabel->create($label1);
+                }
+            }
+        } else {
+            $label2['label'] = $labels['global'];
+            $ruleLabelCreated = $this->cartRuleLabel->create($label2);
+        }
+
+        if(isset($coupons)) {
+            $coupons['cart_rule_id'] = $ruleCreated->id;
+            $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
+
+            $couponCreated = $this->cartRuleCoupon->create($coupons);
+        }
+
+        if ($ruleCreated && $ruleGroupCreated && $ruleChannelCreated) {
+            if ($couponCreated) {
+                session()->flash('success', trans('admin::app.promotion.status.success-coupon'));
+            }
+
+            session()->flash('success', trans('admin::app.promotion.status.success'));
+        } else {
+            session()->flash('success', trans('admin::app.promotion.status.success'));
+
+            return redirect()->back();
+        }
+
+        return redirect()->route($this->_config['route']);
+    }
+
+    public function edit($id)
+    {
+        $cart_rule = $this->cartRule->find($id);
+
+        return view($this->_config['view'])->with('cart_rule', [$this->appliedConfig, $this->fetchOptionableAttributes(), $this->getStatesAndCountries(), $cart_rule]);
+    }
+
+    public function update()
+    {
+        $data = request()->all();
+
         //assumed default
         $data['limit'] = 10;
 
@@ -181,13 +282,32 @@ class CartRuleController extends Controller
 
         if ($ruleCreated && $ruleGroupCreated && $ruleChannelCreated) {
             if ($couponCreated) {
-                dd('created with a coupon or coupons');
+                session()->flash('success', trans('admin::app.promotion.status.success-coupon'));
             }
-            dd('created');
+
+            session()->flash('success', trans('admin::app.promotion.status.success'));
         } else {
-            dd('error');
+            session()->flash('success', trans('admin::app.promotion.status.success'));
+
+            return redirect()->back();
         }
 
+        return redirect()->route($this->_config['route']);
+    }
+
+    public function destroy($id)
+    {
+        $cartRule = $this->cartRule->findOrFail($id);
+
+        if ($cartRule->delete()) {
+            session()->flash('success', trans('admin::app.promotion.status.delete-success'));
+
+            return response()->json(['message' => true], 200);
+        } else {
+            session()->flash('success', trans('admin::app.promotion.status.delete-failed'));
+
+            return response()->json(['message' => false], 400);
+        }
     }
 
     public function getStatesAndCountries()
