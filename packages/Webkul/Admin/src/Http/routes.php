@@ -654,14 +654,14 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('admin.cart-rule.create');
 
                 Route::post('/cart-rule/store', 'Webkul\Discount\Http\Controllers\CartRuleController@store')->defaults('_config', [
-                    'route' => 'admin.cart-rule.index'
+                    'redirect' => 'admin.cart-rule.index'
                 ])->name('admin.cart-rule.store');
 
-                Route::get('/cart-rule/edit/{$id}', 'Webkul\Discount\Http\Controllers\CartRuleController@edit')->defaults('_config', [
+                Route::get('/cart-rule/edit/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@edit')->defaults('_config', [
                     'view' => 'admin::promotions.cart-rule.edit'
                 ])->name('admin.cart-rule.edit');
 
-                Route::post('/cart-rule/update/{$id}', 'Webkul\Discount\Http\Controllers\CartRuleController@update')->defaults('_config', [
+                Route::post('/cart-rule/update/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@update')->defaults('_config', [
                     'redirect' => 'admin.cart-rule.index'
                 ])->name('admin.cart-rule.update');
 

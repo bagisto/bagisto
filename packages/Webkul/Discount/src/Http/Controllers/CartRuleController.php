@@ -2,8 +2,6 @@
 
 namespace Webkul\Discount\Http\Controllers;
 
-use Illuminate\Routing\Controller;
-
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
@@ -13,6 +11,7 @@ use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
 use Webkul\Checkout\Repositories\CartRepository as Cart;
 use Webkul\Discount\Repositories\CartRuleLabelsRepository as CartRuleLabels;
 use Webkul\Discount\Repositories\CartRuleCouponsRepository as CartRuleCoupons;
+use Validator;
 
 /**
  * Cart Rule controller
@@ -97,6 +96,32 @@ class CartRuleController extends Controller
 
     public function store()
     {
+        $validated = Validator::make(request()->all(), [
+            'name' => 'required|string',
+            'description' => 'string',
+            'customer_groups' => 'required|array',
+            'channels' => 'required|array',
+            'status' => 'required|numeric',
+            'use_coupon' => 'numeric',
+            'auto_generation' => 'numeric',
+            'usage_limit' => 'numeric',
+            'per_customer' => 'numeric',
+            'action_type' => 'required|string',
+            'disc_amount' => 'required|numeric',
+            'disc_threshold' => 'required|numeric',
+            'free_shipping' => 'required|numeric',
+            'apply_to_shipping' => 'required|numeric',
+            'code' => 'string',
+            'all_conditions' => 'array',
+            'label' => 'array'
+        ]);
+
+        if ($validated->fails()) {
+            return redirect('admin.cart-rule.create')
+                    ->withErrors($validated)
+                    ->withInput();
+        }
+
         $data = request()->all();
 
         unset($data['_token']);
@@ -128,10 +153,13 @@ class CartRuleController extends Controller
         $data['conditions'] = json_encode($data['conditions']);
 
         $data['coupon_usage'] = $data['use_coupon'];
-        unset($data['use_coupon']);
+        unset($data['coupon_usage']);
 
-        $coupons['code'] = $data['code'];
-        unset($data['code']);
+        if (isset($data['auto_generation'])) {
+            $coupons['code'] = $data['code'];
+            unset($data['code']);
+        }
+
         if (isset($data['prefix'])) {
             $coupons['prefix'] = $data['prefix'];
             unset($data['prefix']);
@@ -143,8 +171,8 @@ class CartRuleController extends Controller
         }
 
         if(isset($data['limit'])) {
-            $coupons['limit'] = $data['limit'];
-            unset($data['limit']);
+            $coupons['limit'] = $data['usage_limit'];
+            // unset($data['limit']);
         }
 
         $ruleCreated = $this->cartRule->create($data);
@@ -186,7 +214,7 @@ class CartRuleController extends Controller
             return redirect()->back();
         }
 
-        return redirect()->route($this->_config['route']);
+        return redirect()->route($this->_config['redirect']);
     }
 
     public function edit($id)

@@ -17,6 +17,8 @@ class CreateCartruleCouponsTable extends Migration
             $table->increments('id');
             $table->integer('cart_rule_id')->unsigned();
             $table->foreign('cart_rule_id')->references('id')->on('cart_rules')->onDelete('cascade');
+            $table->string('prefix')->nullable();
+            $table->string('suffix')->nullable();
             $table->string('code')->nullable();
             $table->integer('limit')->unsigned()->default(0);
             $table->integer('usage_per_customer')->unsigned()->default(0);

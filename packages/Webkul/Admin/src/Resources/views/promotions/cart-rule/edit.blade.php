@@ -358,30 +358,30 @@
 
                 data () {
                     return {
-                        name: @json($cart_rule->name),
-                        description: @json($cart_rule->name),
+                        name: '{{ $cart_rule[3]->name }}',
+                        description: '{{ $cart_rule[3]->description }}',
                         conditions_list: [],
                         channels: [],
                         customer_groups: [],
-                        ends_till: @json($cart_rule->ends_till),
-                        starts_from: @json($cart_rule->starts_from),
-                        priority: @json($cart_rule->priority),
-                        per_customer: @json($cart_rule->per_customer),
-                        status: @json($cart_rule->status),
-                        use_coupon: @json($cart_rule->coupon_usage),
-                        auto_generation: @json($cart_rule->auto_generation),
+                        ends_till: '{{ $cart_rule[3]->ends_till }}',
+                        starts_from: '{{ $cart_rule[3]->starts_from }}',
+                        priority: '{{ $cart_rule[3]->priority }}',
+                        per_customer: '{{ $cart_rule[3]->per_customer }}',
+                        status: '{{ $cart_rule[3]->status }}',
+                        use_coupon: '{{ $cart_rule[3]->use_coupon }}',
+                        auto_generation: '{{ $cart_rule[3]->auto_generation }}',
 
-                        action_type: @json($cart_rule->action_type),
+                        action_type: '{{ $cart_rule[3]->action_type }}',
                         apply: null,
                         apply_amt: false,
                         apply_prct: false,
-                        apply_to_shipping: @json($cart_rule->apply_to_shipping),
-                        disc_amount: @json($cart_rule->disc_amount),
-                        disc_threshold: @json($cart_rule->disc_threshold),
-                        disc_quantity: @json($cart_rule->disc_quantity),
-                        end_other_rules: null,
-                        coupon_type: @json($cart_rule->coupon_type),
-                        free_shipping: @json($cart_rule->free_shipping),
+                        apply_to_shipping: '{{ $cart_rule[3]->apply_to_shipping }}',
+                        disc_amount: {{ $cart_rule[3]->disc_amount }},
+                        disc_threshold: {{ $cart_rule[3]->disc_threshold }},
+                        disc_quantity: null,
+                        end_other_rules: {{ $cart_rule[3]->end_other_rules }},
+                        coupon_type: null,
+                        free_shipping: {{ $cart_rule[3]->free_shipping }},
                         auto_generated: null,
 
                         all_conditions: null,
@@ -420,7 +420,19 @@
                 },
 
                 mounted () {
-                    this.use_coupon = 0;
+                    all = @json($cart_rule[3]->conditions);
+                    console.log(JSON.parse(JSON.parse(all)));
+                    channels = @json($cart_rule[3]->channels);
+                    for (i in channels) {
+                        this.channels.push(channels[i].channel_id);
+                    }
+
+                    customer_groups = @json($cart_rule[3]->customer_groups);
+                    for (i in customer_groups) {
+                        this.customer_groups.push(customer_groups[i].customer_group_id);
+                    }
+
+                    this.conditions_list = JSON.parse(JSON.parse(all)[0]);
                 },
 
                 methods: {

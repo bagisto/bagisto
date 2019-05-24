@@ -21,7 +21,7 @@ class CartRuleDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('cart_rules')
                 ->select('id')
-                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'usage_throttle', 'per_customer', 'status', 'end_other_rules', 'action_type');
+                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'usage_limit', 'per_customer', 'status', 'end_other_rules', 'action_type');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -56,7 +56,7 @@ class CartRuleDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'usage_throttle',
+            'index' => 'usage_limit',
             'label' => trans('admin::app.datagrid.usage-throttle'),
             'type' => 'string',
             'searchable' => false,

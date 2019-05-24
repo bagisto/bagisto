@@ -140,12 +140,12 @@
                                         <span class="control-error" v-if="errors.has('per_customer')">@{{ errors.first('per_customer') }}</span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('limit') ? 'has-error' : '']">
-                                        <label for="limit" class="required">{{ __('admin::app.promotion.general-info.limit') }}</label>
+                                    <div class="control-group" :class="[errors.has('usage_limit') ? 'has-error' : '']">
+                                        <label for="usage_limit" class="required">{{ __('admin::app.promotion.general-info.limit') }}</label>
 
-                                        <input type="number" step="1" class="control" name="limit" v-model="limit" v-validate="'required|numeric|min_value:0'" value="{{ old('limit') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
+                                        <input type="number" step="1" class="control" name="usage_limit" v-model="usage_limit" v-validate="'required|numeric|min_value:0'" value="{{ old('usage_limit') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
 
-                                        <span class="control-error" v-if="errors.has('limit')">@{{ errors.first('limit') }}</span>
+                                        <span class="control-error" v-if="errors.has('usage_limit')">@{{ errors.first('usage_limit') }}</span>
                                     </div>
 
                                     <div class="control-group" :class="[errors.has('priority') ? 'has-error' : '']">
@@ -291,7 +291,7 @@
                                         <div class="control-group" :class="[errors.has('prefix') ? 'has-error' : '']">
                                             <label for="code" class="required">Prefix</label>
 
-                                            <input type="text" class="control" name="prefix" v-model="prefix" v-validate="'required'" value="{{ old('prefix') }}" data-vv-as="&quot;Prefix&quot;">
+                                            <input type="text" class="control" name="prefix" v-model="prefix" v-validate="'alpha'" value="{{ old('prefix') }}" data-vv-as="&quot;Prefix&quot;">
 
                                             <span class="control-error" v-if="errors.has('prefix')">@{{ errors.first('prefix') }}</span>
                                         </div>
@@ -299,7 +299,7 @@
                                         <div class="control-group" :class="[errors.has('suffix') ? 'has-error' : '']"">
                                             <label for="code" class="required">Suffix</label>
 
-                                            <input type="text" class="control" name="suffix" v-model="suffix" v-validate="'required'" value="{{ old('suffix') }}" data-vv-as="&quot;suffix&quot;">
+                                            <input type="text" class="control" name="suffix" v-model="suffix" v-validate="'alpha'" value="{{ old('suffix') }}" data-vv-as="&quot;suffix&quot;">
 
                                             <span class="control-error" v-if="errors.has('suffix')">@{{ errors.first('suffix') }}</span>
                                         </div>
@@ -391,7 +391,7 @@
                         suffix: null,
                         prefix: null,
                         dedicated_label: true,
-                        limit: null,
+                        usage_limit: null,
 
                         global_label: null,
                         label: {
