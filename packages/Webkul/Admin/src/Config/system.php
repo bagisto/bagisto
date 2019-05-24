@@ -21,6 +21,22 @@ return [
             ]
         ]
     ], [
+        'key' => 'catalog.inventory',
+        'name' => 'admin::app.admin.system.inventory',
+        'sort' => 1,
+    ], [
+        'key' => 'catalog.inventory.stock_options',
+        'name' => 'admin::app.admin.system.stock-options',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'backorders',
+                'title' => 'admin::app.admin.system.allow-backorders',
+                'type' => 'boolean',
+                'channel_based' => true
+            ]
+        ]
+    ], [
         'key' => 'customer',
         'name' => 'admin::app.admin.system.customer',
         'sort' => 3,
