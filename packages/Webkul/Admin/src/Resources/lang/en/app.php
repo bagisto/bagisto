@@ -815,7 +815,8 @@ return [
             'false' => 'false',
             'limit' => 'Usage Limit',
             'specific-coupon' => 'Specific Coupon(Check) / Auto Generated(Unheck)',
-            'free-shipping' => 'Free Shipping'
+            'free-shipping' => 'Free Shipping',
+            'is-guest' => 'For Guests'
         ],
 
         'status' => [

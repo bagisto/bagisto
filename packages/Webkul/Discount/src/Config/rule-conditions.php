@@ -71,6 +71,13 @@ return [
             'fixed_amount_cart' => 'Fixed amount for whole cart'
         ],
 
+        'validation' => [
+            0 => 'percent_of_product',
+            1 => 'fixed_amount',
+            2 => 'buy_a_get_b',
+            3 => 'fixed_amount_cart'
+        ],
+
         'conditions' => [
             'numeric' => [
                 '=' => 'Equals',

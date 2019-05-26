@@ -6,5 +6,4 @@ use Konekt\Concord\Proxies\ModelProxy;
 
 class CartRuleCouponsUsageProxy extends ModelProxy
 {
-
 }

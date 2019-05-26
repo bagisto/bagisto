@@ -23,17 +23,18 @@ class CreateCatalogRulesTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('description')->nullable();
+            $table->boolean('is_guest')->default(0);
             $table->datetime('starts_from')->nullable();
             $table->datetime('ends_till')->nullable();
             $table->boolean('status')->default(0);
-            $table->integer('priority')->unsigned()->default(0.0000);
+            $table->integer('priority')->unsigned()->default(0);
             $table->json('conditions')->nullable();
             $table->json('actions')->nullable();
-            $table->boolean('end_other_rules')->default(1);
+            $table->boolean('end_other_rules')->default(0);
             $table->integer('sort_order')->unsigned()->default(0);
             $table->string('action_type')->nullable();
-            $table->decimal('disc_amount', 12, 4)->default(0.0000);
-            $table->decimal('disc_percent', 12, 4)->default(0.0000);
+            $table->decimal('disc_amount', 12, 4)->default(0);
+            $table->decimal('disc_percent', 12, 4)->default(0);
             $table->timestamps();
         });
     }

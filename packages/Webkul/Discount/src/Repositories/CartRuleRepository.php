@@ -134,4 +134,9 @@ class CartRuleRepository extends Repository
 
         return true;
     }
+
+    public function LabelsSync($labels, $cartRule)
+    {
+
+    }
 }

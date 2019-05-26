@@ -16,4 +16,9 @@ class CartRuleCoupons extends Model implements CartRuleCouponsContract
     {
         return $this->belongsTo(CartRule::modelClass(), 'cart_rule_id');
     }
+
+    public function coupons_usage()
+    {
+        return $this->hasOne(CartRuleCouponsUsage::modelClass());
+    }
 }

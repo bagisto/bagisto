@@ -77,7 +77,7 @@
                                     <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
                                         <label for="customer_groups" class="required">{{ __('admin::app.promotion.general-info.cust-groups') }}</label>
 
-                                        <select type="text" class="control" name="customer_groups[]" v-model="customer_groups" v-validate="'required'" value="{{ old('customer_groups') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
+                                        <select type="text" class="control" name="customer_groups[]" v-model="customer_groups" v-validate="'required'" value="{{ old('customer_groups[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
                                             <option disabled="disabled">Select Customer Groups</option>
                                             @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $channel)
                                                 <option value="{{ $channel->id }}">{{ $channel->name }}</option>
@@ -90,7 +90,7 @@
                                     <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                         <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
 
-                                        <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels') }}&quot;" multiple="multiple">
+                                        <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels') }}&quot;" multiple="multiple">
                                             <option disabled="disabled">Select Channels</option>
                                             @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                                 <option value="{{ $channel->id }}">{{ $channel->name }}</option>
@@ -140,6 +140,17 @@
                                         <span class="control-error" v-if="errors.has('per_customer')">@{{ errors.first('per_customer') }}</span>
                                     </div>
 
+                                    <div class="control-group" :class="[errors.has('is_guest') ? 'has-error' : '']">
+                                        <label for="is_guest" class="required">{{ __('admin::app.promotion.general-info.is-guest') }}</label>
+
+                                        <select type="text" class="control" name="is_guest" v-model="is_guest" v-validate="'required'" value="{{ old('is_guest')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-guest') }}&quot;">
+                                            <option value="1" :selected="is_guest == 1">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+                                            <option value="0" :selected="is_guest == 0">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                                        </select>
+
+                                        <span class="control-error" v-if="errors.has('is_guest')">@{{ errors.first('is_guest') }}</span>
+                                    </div>
+
                                     <div class="control-group" :class="[errors.has('usage_limit') ? 'has-error' : '']">
                                         <label for="usage_limit" class="required">{{ __('admin::app.promotion.general-info.limit') }}</label>
 
@@ -161,14 +172,12 @@
                             <accordian :active="false" title="Conditions">
                                 <div slot="body">
                                     <div class="add-condition">
-                                        <div class="control-group" :class="[errors.has('criteria') ? 'has-error' : '']">
+                                        <div class="control-group">
                                             <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
 
-                                            <select type="text" class="control" name="criteria" v-model="criteria" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;">
+                                            <select type="text" class="control" name="criteria" v-model="criteria">
                                                 <option value="cart">Cart Properties</option>
                                             </select>
-
-                                            <span class="control-error" v-if="errors.has('criteria')">@{{ errors.first('criteria') }}</span>
                                         </div>
 
                                         <span class="btn btn-primary btn-lg" v-on:click="addCondition">Add Condition</span>
@@ -185,18 +194,18 @@
                                                 </div>
 
                                                 <div class="control-group mt-10" :key="index">
-                                                    <select class="control" name="cart_attributes[]" v-model="conditions_list[index].attribute" v-validate="'required'" title="You Can Make Multiple Selections Here" style="margin-right: 15px;" v-on:change="enableCondition($event, index)">
+                                                    <select class="control" name="cart_attributes[]" v-model="conditions_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px;" v-on:change="enableCondition($event, index)">
                                                         <option disabled="disabled">Select Option</option>
                                                         <option v-for="(cart_ip, index1) in cart_input" :value="cart_ip.code" :key="index1">@{{ cart_ip.name }}</option>
                                                     </select>
 
                                                     <div v-if='conditions_list[index].type == "string"'>
-                                                        <select class="control" name="cart_attributes[]" v-model="conditions_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                        <select class="control" name="cart_attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
                                                             <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
                                                         </select>
 
                                                         <div v-if='conditions_list[index].attribute == "shipping_state"'>
-                                                            <select class="control" v-validate="'required'" v-model="conditions_list[index].value">
+                                                            <select class="control" v-model="conditions_list[index].value">
                                                                 <option disabled="disabled">Select State</option>
                                                                 <optgroup v-for='(state, code) in country_and_states.states' :label="code">
                                                                     <option v-for="(stateObj, index) in state" :value="stateObj.code">@{{ stateObj.default_name }}</option>
@@ -205,7 +214,7 @@
                                                         </div>
 
                                                         <div v-if='conditions_list[index].attribute == "shipping_country"'>
-                                                            <select class="control" v-validate="'required'" v-model="conditions_list[index].value">
+                                                            <select class="control" v-model="conditions_list[index].value">
                                                                 <option disabled="disabled">Select Country</option>
                                                                 <option v-for="(country, index) in country_and_states.countries" :value="country.code">@{{ country.name }}</option>
                                                             </select>
@@ -215,7 +224,7 @@
                                                     </div>
 
                                                     <div v-if='conditions_list[index].type == "numeric"'>
-                                                        <select class="control" name="attributes[]" v-model="conditions_list[index].condition" v-validate="'required'" style="margin-right: 15px;">
+                                                        <select class="control" name="attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
                                                             <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
                                                         </select>
 
@@ -289,7 +298,7 @@
 
                                     <div v-if="!auto_generation">
                                         <div class="control-group" :class="[errors.has('prefix') ? 'has-error' : '']">
-                                            <label for="code" class="required">Prefix</label>
+                                            <label for="prefix" class="required">Prefix</label>
 
                                             <input type="text" class="control" name="prefix" v-model="prefix" v-validate="'alpha'" value="{{ old('prefix') }}" data-vv-as="&quot;Prefix&quot;">
 
@@ -297,7 +306,7 @@
                                         </div>
 
                                         <div class="control-group" :class="[errors.has('suffix') ? 'has-error' : '']"">
-                                            <label for="code" class="required">Suffix</label>
+                                            <label for="suffix" class="required">Suffix</label>
 
                                             <input type="text" class="control" name="suffix" v-model="suffix" v-validate="'alpha'" value="{{ old('suffix') }}" data-vv-as="&quot;suffix&quot;">
 
@@ -305,7 +314,7 @@
                                         </div>
                                     </div>
 
-                                    <div v-if="auto_generation">
+                                    <div v-if="auto_generation != 0">
                                         <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                             <label for="code" class="required">Code</label>
 
@@ -323,7 +332,7 @@
                                     <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']" v-if="dedicated_label">
                                         <label for="label" class="required">Global Label</label>
 
-                                        <input type="text" class="control" name="label[global]" v-model="label.global" v-validate="'required'" value="{{ old('label') }}" data-vv-as="&quot;label&quot;">
+                                        <input type="text" class="control" name="label[global]" v-model="label.global" v-validate="'required'" data-vv-as="&quot;label&quot;">
 
                                         <span class="control-error" v-if="errors.has('label')">@{{ errors.first('label') }}</span>
                                     </div>
@@ -335,7 +344,7 @@
                                             <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
                                                 <label for="code">{{ $locale->code }}</label>
 
-                                            <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" v-validate="'alpha'" value="{{ old('label') }}" data-vv-as="&quot;Label&quot;">
+                                                <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" v-validate="'alpha'" data-vv-as="&quot;Label&quot;">
 
                                                 <span class="control-error" v-if="errors.has('label')">@{{ errors.first('label') }}</span>
                                             </div>
@@ -358,8 +367,8 @@
 
                 data () {
                     return {
-                        name: 'somethign',
-                        description: 'Enter Some Description',
+                        name: null,
+                        description: null,
                         conditions_list: [],
                         channels: [],
                         customer_groups: [],
@@ -369,7 +378,9 @@
                         per_customer: 0,
                         status: null,
                         use_coupon: null,
-                        auto_generation: null,
+                        auto_generation: 1,
+                        usage_limit: 0,
+                        is_guest: 0,
 
                         action_type: null,
                         apply: null,
@@ -383,7 +394,6 @@
                         end_other_rules: null,
                         coupon_type: null,
                         free_shipping: null,
-                        auto_generated: null,
 
                         all_conditions: null,
 
@@ -391,9 +401,7 @@
                         suffix: null,
                         prefix: null,
                         dedicated_label: true,
-                        usage_limit: null,
 
-                        global_label: null,
                         label: {
                             global: null,
                             @foreach(core()->getAllChannels() as $channel)
@@ -421,7 +429,6 @@
                 },
 
                 mounted () {
-                    this.use_coupon = 0;
                 },
 
                 methods: {
@@ -471,9 +478,9 @@
                     },
 
                     useCoupon() {
-                        if (this.use_coupon == 1) {
-                            this.auto_generation = 1;
-                        }
+                        // if (this.use_coupon == 1) {
+                        //     this.auto_generation = 1;
+                        // }
                     },
 
                     removeCartAttr(index) {
@@ -491,29 +498,29 @@
                             }
                         });
 
-                        for (index in this.conditions_list) {
-                            if (this.conditions_list[index].condition == null || this.conditions_list[index].condition == "" || this.conditions_list[index].condition == undefined) {
-                                window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
+                        // for (index in this.conditions_list) {
+                        //     if (this.conditions_list[index].condition == null || this.conditions_list[index].condition == "" || this.conditions_list[index].condition == undefined) {
+                        //         window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
 
-                                this.$root.addFlashMessages();
+                        //         this.$root.addFlashMessages();
 
-                                return false;
-                            } else if (this.conditions_list[index].value == null || this.conditions_list[index].value == "" || this.conditions_list[index].value == undefined) {
-                                window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
+                        //         return false;
+                        //     } else if (this.conditions_list[index].value == null || this.conditions_list[index].value == "" || this.conditions_list[index].value == undefined) {
+                        //         window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
 
-                                this.$root.addFlashMessages();
+                        //         this.$root.addFlashMessages();
 
-                                return false;
-                            }
-                        }
+                        //         return false;
+                        //     }
+                        // }
 
-                        if (this.conditions_list.length == 0) {
-                            window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
+                        // if (this.conditions_list.length == 0) {
+                        //     window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
 
-                            this.$root.addFlashMessages();
+                        //     this.$root.addFlashMessages();
 
-                            return false;
-                        }
+                        //     return false;
+                        // }
 
                         this.all_conditions = JSON.stringify(this.conditions_list);
                     },
