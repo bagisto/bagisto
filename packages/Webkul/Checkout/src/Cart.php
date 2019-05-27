@@ -12,6 +12,8 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
+use Webkul\Discount\Helpers\Discount;
 use Webkul\Product\Helpers\Price;
 
 /**
@@ -24,81 +26,94 @@ use Webkul\Product\Helpers\Price;
 class Cart {
 
     /**
-     * CartRepository model
+     * CartRepository instance
      *
      * @var mixed
      */
     protected $cart;
 
     /**
-     * CartItemRepository model
+     * CartItemRepository instance
      *
      * @var mixed
      */
     protected $cartItem;
 
     /**
-     * CustomerRepository model
+     * CustomerRepository instance
      *
      * @var mixed
      */
     protected $customer;
 
     /**
-     * CartAddressRepository model
+     * CartAddressRepository instance
      *
      * @var mixed
      */
     protected $cartAddress;
 
     /**
-     * ProductRepository model
+     * ProductRepository instance
      *
      * @var mixed
      */
     protected $product;
 
     /**
-     * TaxCategoryRepository model
+     * TaxCategoryRepository instance
      *
      * @var mixed
      */
     protected $taxCategory;
 
     /**
-     * WishlistRepository model
+     * WishlistRepository instance
      *
      * @var mixed
      */
     protected $wishlist;
 
     /**
-     * CustomerAddressRepository model
+     * CustomerAddressRepository instance
      *
      * @var mixed
      */
-     protected $customerAddress;
+    protected $customerAddress;
+
+    /**
+     * CartRule Repository instance
+    */
+    protected $cartRule;
+
+    /**
+     * Discount helper instance
+    */
+    protected $discount;
 
     /**
      * Suppress the session flash messages
-     */
+    */
     protected $suppressFlash;
 
     /**
      * Product price helper instance
-     */
+    */
     protected $price;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Checkout\Repositories\CartRepository            $cart
-     * @param  Webkul\Checkout\Repositories\CartItemRepository        $cartItem
-     * @param  Webkul\Checkout\Repositories\CartAddressRepository     $cartAddress
-     * @param  Webkul\Customer\Repositories\CustomerRepository        $customer
-     * @param  Webkul\Product\Repositories\ProductRepository          $product
-     * @param  Webkul\Product\Repositories\TaxCategoryRepository      $taxCategory
+     * @param  Webkul\Checkout\Repositories\CartRepository  $cart
+     * @param  Webkul\Checkout\Repositories\CartItemRepository  $cartItem
+     * @param  Webkul\Checkout\Repositories\CartAddressRepository  $cartAddress
+     * @param  Webkul\Customer\Repositories\CustomerRepository  $customer
+     * @param  Webkul\Product\Repositories\ProductRepository  $product
+     * @param  Webkul\Product\Repositories\TaxCategoryRepository  $taxCategory
      * @param  Webkul\Product\Repositories\CustomerAddressRepository  $customerAddress
+     * @param  Webkul\Product\Repositories\CustomerAddressRepository  $customerAddress
+     * @param  Webkul\Discount\Repositories\CartRuleRepository  $cartRule
+     * @param  Webkul\Helpers\Discount  $discount
      * @return void
      */
     public function __construct(
@@ -110,6 +125,8 @@ class Cart {
         TaxCategoryRepository $taxCategory,
         WishlistRepository $wishlist,
         CustomerAddressRepository $customerAddress,
+        CartRule $cartRule,
+        Discount $discount,
         Price $price
     )
     {
@@ -129,11 +146,14 @@ class Cart {
 
         $this->customerAddress = $customerAddress;
 
+        $this->cartRule = $cartRule;
+
+        $this->discount = $discount;
+
         $this->price = $price;
 
         $this->suppressFlash = false;
     }
-
 
     /**
      * Return current logged in customer
@@ -346,7 +366,7 @@ class Cart {
 
         if ($childData != null) {
             $childData['parent_id'] = $item->id;
-            
+
             $this->cartItem->create($childData);
         }
 
@@ -1211,5 +1231,13 @@ class Cart {
                 return $result;
             }
         }
+    }
+
+    public function setNonCouponAble() {
+        return $this->discount->checkNonCouponConditions($this->getCart());
+    }
+
+    public function setCouponAble() {
+        return $this->discount->checkCouponConditions($this->getCart());
     }
 }

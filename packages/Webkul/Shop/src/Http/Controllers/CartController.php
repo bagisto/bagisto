@@ -82,6 +82,8 @@ class CartController extends Controller
      */
     public function index()
     {
+        dd(Cart::setNonCouponAble(), Cart::setCouponAble());
+
         return view($this->_config['view'])->with('cart', Cart::getCart());
     }
 

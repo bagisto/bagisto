@@ -23,6 +23,57 @@ class Discount
         }
     }
 
+    public function getGuestEndRules()
+    {
+        $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 1, 'is_guest' => 1]);
+        $currentChannel = core()->getCurrentChannel();
+
+        $guestRules = array();
+        foreach ($rules as $rule) {
+            foreach ($rule->channels as $channel) {
+                if ($channel->channel_id == $currentChannel->id) {
+                    array_push($guestRules, $rule);
+                }
+            }
+        }
+
+        if (count($guestRules) > 1) {
+            $leastPriority = 999999999999;
+            $leastId = 999999999999;
+
+            foreach ($guestRules as $guestRule) {
+                if ($leastPriority >= $guestRule->priority) {
+                    $leastPriority = $guestRule->priority;
+
+                    if ($leastId > $guestRule->id) {
+                        $leastId = $guestRule->id;
+                    }
+                }
+            }
+
+            return [$this->cartRule->find($leastId)];
+        }
+
+        return $guestRules;
+    }
+
+    public function getGuestBestRules()
+    {
+        $rules = $this->cartRule->findWhere(['status' => 1, 'is_guest' => 1]);
+        $currentChannel = core()->getCurrentChannel();
+
+        $guestRules = array();
+        foreach ($rules as $rule) {
+            foreach ($rule->channels as $channel) {
+                if ($channel->channel_id == $currentChannel->id) {
+                    array_push($guestRules, $rule);
+                }
+            }
+        }
+
+        return $guestRules;
+    }
+
     public function getBestRules()
     {
         $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 0]);
@@ -86,29 +137,213 @@ class Discount
 
     public function toApply()
     {
-        $endRules = $this->getEndRules();
+        if (auth()->guard('customer')->check()) {
+            $endRules = $this->getEndRules();
 
-        if (isset($endRules)) {
-            return [
-                'end_rule' => true,
-                'rule' => $endRules
-            ];
+            if (isset($endRules) && count($endRules)) {
+                return [
+                    'end_rule' => true,
+                    'rule' => $endRules,
+                    'count' => count($endRules)
+                ];
+            } else {
+                $bestRules = $this->getBestRules();
+
+                return [
+                    'end_rule' => false,
+                    'rule' => $bestRules,
+                    'count' => count($bestRules)
+                ];
+            }
         } else {
-            $bestRules = $this->getBestRules();
+            $endRules = $this->getGuestEndRules();
 
-            return [
-                'end_rule' => false,
-                'rule' => $bestRules
-            ];
+            if (isset($endRules) && count($endRules)) {
+                return [
+                    'end_rule' => true,
+                    'rule' => $endRules,
+                    'count' => count($endRules)
+                ];
+            } else {
+                $bestRules = $this->getGuestBestRules();
+
+                return [
+                    'end_rule' => false,
+                    'rule' => $bestRules,
+                    'count' => count( $bestRules)
+                ];
+            }
         }
     }
 
-    public function isCouponAble($rule)
+    public function applyCouponAble()
     {
-        if ($rule->use_coupon) {
-            return true;
+        $rules = $this->toApply();
+
+        if ($rules['end_rule']) {
+            $rules = $rules['rule'];
+            $id = array();
+
+            foreach($rules as $rule) {
+                if ($rule->use_coupon) {
+                    array_push($id, $rule);
+                }
+            }
+
+            if (count($id)) {
+                return [
+                    'couponable' => true,
+                    'id' => $id
+                ];
+            } else {
+                return [
+                    'couponable' => false,
+                    'id' => null
+                ];
+            }
         } else {
-            return false;
+            $rules = $rules['rule'];
+            $id = array();
+
+            foreach ($rules as $rule) {
+                if ($rule->use_coupon) {
+                    array_push($id, $rule);
+                }
+            }
+
+            if (count($id)) {
+                return [
+                    'couponable' => true,
+                    'id' => $id
+                ];
+            } else {
+                return [
+                    'couponable' => false,
+                    'id' => null
+                ];
+            }
         }
+    }
+
+    public function applyNonCouponAble()
+    {
+        $rules = $this->toApply();
+
+        if (! $rules['end_rule']) {
+            $rules = $rules['rule'];
+            $id = array();
+
+            foreach ($rules as $rule) {
+                if (! $rule->use_coupon) {
+                    array_push($id, $rule);
+                }
+            }
+
+            if (count($id)) {
+                return [
+                    'noncouponable' => true,
+                    'id' => $id
+                ];
+            } else {
+                return [
+                    'noncouponable' => false,
+                    'id' => null
+                ];
+            }
+        } else {
+            $rules = $rules['rule'];
+
+            $id = array();
+
+            foreach ($rules as $rule) {
+                if ($rule->use_coupon) {
+                    array_push($id, $rule);
+                }
+            }
+
+            if (!$rule->use_coupon) {
+                return [
+                    'noncouponable' => true,
+                    'id' => $id
+                ];
+            } else {
+                return [
+                    'noncouponable' => false,
+                    'id' => null
+                ];
+            }
+        }
+    }
+
+    public function checkCouponConditions($cart)
+    {
+        $rules = $this->applyCouponAble();
+
+        return $rules;
+        //non or null condtion based
+
+        // condition based rules
+
+    }
+
+    public function checkNonCouponConditions($cart)
+    {
+        $rules = $this->applyNonCouponAble();
+
+        return $rules;
+        foreach($rules['id'] as $rule) {
+            $action_type = $rule->action_type;
+            $disc_amount = $rule->disc_amount;
+            $disc_quantity = $rule->disc_quantity;
+            $disc_threshold = $rule->disc_threshold;
+
+            if($rule->conditions == null) {
+                // non or null condition based
+                if ($cart->items_qty >= $disc_threshold) {
+                    if ($action_type == config('pricerules.cart.validations.0')) {
+                        $itemBaseSubTotal = $cart->base_sub_total * ($disc_amount / 100);
+                        //CART
+                        // update disc amount
+
+                        //CART Item
+                        //update disc percentage
+                        //update disc amount
+                        //update base disc amount
+                    } else if ($action_type == config('pricerules.cart.validations.1')) {
+                        $baseSubTotal = $disc_amount;
+                        //CART
+                        // update disc amount
+
+                        //CART Item
+                        //update disc amount
+                        //update base disc amount
+                    } else if ($action_type == config('pricerules.cart.validations.2')) {
+                        //CART
+                        $quantity = $cart->items()->first()->quantity + 1;
+                        // update disc amount
+
+                        //CART Item
+                        //update disc percentage
+                        //update disc amount
+                        //update base disc amount
+
+                    } else if ($action_type == config('pricerules.cart.validations.3')) {
+                        //CART
+                        $cartBaseSubTotal = $disc_amount ;
+                        // update disc amount
+
+                        //CART Item
+                        //update disc percentage
+                        //update disc amount
+                        //update base disc amount
+                    }
+                }
+            } else {
+                // condition based rules
+                dd('conditions found');
+
+            }
+        }
+
     }
 }

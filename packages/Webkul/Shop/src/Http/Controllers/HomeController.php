@@ -4,7 +4,6 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SliderRepository;
-use Webkul\Discount\Helpers\Discount;
 
 /**
  * Home page controller
@@ -17,12 +16,9 @@ use Webkul\Discount\Helpers\Discount;
     protected $_config;
     protected $sliderRepository;
     protected $current_channel;
-    protected $discount;
 
-    public function __construct(SliderRepository $sliderRepository, Discount $discount)
+    public function __construct(SliderRepository $sliderRepository)
     {
-        $this->discount = $discount;
-
         $this->_config = request('_config');
 
         $this->sliderRepository = $sliderRepository;
@@ -33,8 +29,6 @@ use Webkul\Discount\Helpers\Discount;
      */
     public function index()
     {
-        dd($this->discount->toApply());
-
         $currentChannel = core()->getCurrentChannel();
         $sliderData = $this->sliderRepository->findByField('channel_id', $currentChannel->id)->toArray();
 
