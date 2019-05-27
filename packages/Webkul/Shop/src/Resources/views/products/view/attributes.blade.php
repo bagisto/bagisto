@@ -19,21 +19,17 @@
                         @else
                             <td>{{ $attribute['admin_name'] }}</td>
                         @endif
-                            @if ($attribute['type'] == 'file')
+                            @if ($attribute['type'] == 'file' && $attribute['value'])
                                 <td>
-                                    @if ($attribute['value'])
-                                        <a href="{{ Storage::url($attribute['value']) }}" target="_blank">
-                                            <i class="icon sort-down-icon download"></i>
-                                        </a>
-                                    @endif
+                                    <a href="{{ Storage::url($attribute['value']) }}" target="_blank">
+                                        <i class="icon sort-down-icon download"></i>
+                                    </a>
                                 </td>
-                            @elseif ($attribute['type'] == 'image')
+                            @elseif ($attribute['type'] == 'image' && $attribute['value'])
                                 <td>
-                                    @if ($attribute['value'])
-                                        <a href="{{ Storage::url($attribute['value']) }}" target="_blank">
-                                            <img src="{{ Storage::url($attribute['value']) }}" style="height: 20px; width: 20px;"/>
-                                        </a>
-                                    @endif
+                                    <a href="{{ Storage::url($attribute['value']) }}" target="_blank">
+                                        <img src="{{ Storage::url($attribute['value']) }}" style="height: 20px; width: 20px;"/>
+                                    </a>
                                 </td>
                             @else
                                 <td>{{ $attribute['value'] }}</td>
