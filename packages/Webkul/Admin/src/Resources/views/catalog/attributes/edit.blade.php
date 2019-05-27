@@ -71,6 +71,12 @@
                                     <option value="date" {{ $selectedOption == 'date' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.date') }}
                                     </option>
+                                    <option value="image" {{ $selectedOption == 'image' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.image') }}
+                                    </option>
+                                    <option value="file" {{ $selectedOption == 'file' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.file') }}
+                                    </option>
                                 </select>
                                 <input type="hidden" name="type" value="{{ $attribute->type }}"/>
                             </div>

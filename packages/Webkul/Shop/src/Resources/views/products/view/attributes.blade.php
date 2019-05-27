@@ -13,14 +13,31 @@
             <table class="full-specifications">
 
                 @foreach ($customAttributeValues as $attribute)
-
                     <tr>
                         @if ($attribute['label'])
                             <td>{{ $attribute['label'] }}</td>
                         @else
                             <td>{{ $attribute['admin_name'] }}</td>
                         @endif
-                            <td>{{ $attribute['value'] }}</td>
+                            @if ($attribute['type'] == 'file')
+                                <td>
+                                    @if ($attribute['value'])
+                                        <a href="{{ Storage::url($attribute['value']) }}" target="_blank">
+                                            <i class="icon sort-down-icon download"></i>
+                                        </a>
+                                    @endif
+                                </td>
+                            @elseif ($attribute['type'] == 'image')
+                                <td>
+                                    @if ($attribute['value'])
+                                        <a href="{{ Storage::url($attribute['value']) }}" target="_blank">
+                                            <img src="{{ Storage::url($attribute['value']) }}" style="height: 20px; width: 20px;"/>
+                                        </a>
+                                    @endif
+                                </td>
+                            @else
+                                <td>{{ $attribute['value'] }}</td>
+                            @endif
                     </tr>
 
                 @endforeach

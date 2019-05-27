@@ -52,6 +52,8 @@
                                     <option value="multiselect">{{ __('admin::app.catalog.attributes.multiselect') }}</option>
                                     <option value="datetime">{{ __('admin::app.catalog.attributes.datetime') }}</option>
                                     <option value="date">{{ __('admin::app.catalog.attributes.date') }}</option>
+                                    <option value="image">{{ __('admin::app.catalog.attributes.image') }}</option>
+                                    <option value="file">{{ __('admin::app.catalog.attributes.file') }}</option>
                                 </select>
                             </div>
 

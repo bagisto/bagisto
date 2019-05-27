@@ -433,7 +433,9 @@ return [
             'color-swatch' => 'Color Swatch',
             'image-swatch' => 'Image Swatch',
             'text-swatch' => 'Text Swatch',
-            'swatch' => 'Swatch'
+            'swatch' => 'Swatch',
+            'image' => 'Image',
+            'file' => 'File'
         ],
         'families' => [
             'title' => 'Families',
