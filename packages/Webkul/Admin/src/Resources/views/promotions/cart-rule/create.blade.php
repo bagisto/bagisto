@@ -132,6 +132,8 @@
                                         <span class="control-error" v-if="errors.has('auto_generation')">@{{ errors.first('auto_generation') }}</span>
                                     </div>
 
+                                    <input type="hidden" name="auto_generation" v-model="auto_generation">
+
                                     <div class="control-group" :class="[errors.has('per_customer') ? 'has-error' : '']">
                                         <label for="per_customer" class="required">{{ __('admin::app.promotion.general-info.uses-per-cust') }}</label>
 
@@ -257,6 +259,14 @@
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
 
+                                    <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']">
+                                        <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
+
+                                        <input type="number" step="1" class="control" name="disc_quantity" v-model="disc_quantity" v-validate="'required|decimal'" value="{{ old('disc_quantity') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_qty') }}&quot;">
+
+                                        <span class="control-error" v-if="errors.has('disc_quantity')">@{{ errors.first('disc_quantity') }}</span>
+                                    </div>
+
                                     <div class="control-group" :class="[errors.has('disc_threshold') ? 'has-error' : '']">
                                         <label for="disc_threshold" class="required">{{ __('admin::app.promotion.cart.buy-atleast') }}</label>
 
@@ -378,7 +388,7 @@
                         per_customer: 0,
                         status: null,
                         use_coupon: null,
-                        auto_generation: 1,
+                        auto_generation: null,
                         usage_limit: 0,
                         is_guest: 0,
 
@@ -478,9 +488,11 @@
                     },
 
                     useCoupon() {
-                        // if (this.use_coupon == 1) {
-                        //     this.auto_generation = 1;
-                        // }
+                        if (this.use_coupon == 0) {
+                            this.auto_generation = null;
+                        } else {
+                            this.auto_generation = true;
+                        }
                     },
 
                     removeCartAttr(index) {

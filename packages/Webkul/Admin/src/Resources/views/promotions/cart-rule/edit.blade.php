@@ -267,6 +267,14 @@
                                         <span class="control-error" v-if="errors.has('disc_threshold')">@{{ errors.first('disc_threshold') }}</span>
                                     </div>
 
+                                    <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']">
+                                        <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
+
+                                        <input type="number" step="1" class="control" name="disc_quantity" v-model="disc_quantity" v-validate="'required|decimal'" value="{{ old('disc_quantity') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_qty') }}&quot;">
+
+                                        <span class="control-error" v-if="errors.has('disc_quantity')">@{{ errors.first('disc_quantity') }}</span>
+                                    </div>
+
                                     <div class="boolean-control-container">
                                         <div class="control-group" :class="[errors.has('free_shipping') ? 'has-error' : '']">
                                             <label for="free_shipping" class="required">{{ __('admin::app.promotion.general-info.free-shipping') }}</label>
@@ -394,7 +402,6 @@
                         end_other_rules: null,
                         coupon_type: null,
                         free_shipping: null,
-                        auto_generated: null,
 
                         all_conditions: null,
 
@@ -456,6 +463,7 @@
                         this.use_coupon = 0;
                     } else {
                         this.use_coupon = 1;
+                        this.auto_generation = data.auto_generation;
                         this.code = data.coupons.code;
                         this.suffix = data.coupons.suffix;
                         this.prefix = data.coupons.prefix;
@@ -481,7 +489,6 @@
                     this.end_other_rules = data.end_other_rules;
                     this.coupon_type = data.coupon_type;
                     this.free_shipping = data.free_shipping;
-                    this.auto_generated = data.auto_generation;
 
                     this.all_conditions = null;
 
@@ -546,8 +553,10 @@
                     },
 
                     useCoupon() {
-                        if (this.use_coupon == 1) {
-                            this.auto_generation = 1;
+                        if (this.use_coupon == 0) {
+                            this.auto_generation = null;
+                        } else {
+                            this.auto_generation = true;
                         }
                     },
 

@@ -98,8 +98,12 @@ class CartRuleController extends Controller
     {
         // dd(request()->all()); required_if:use_coupon,1
         $types = config('price_rules.cart.validations');
+        $data = request()->all();
+        if (isset($data['auto_generation'])) {
+            $data['auto_generation'] = (boolean) $data['auto_generation'];
+        }
 
-        $validated = Validator::make(request()->all(), [
+        $validated = Validator::make($data, [
             'name' => 'required|string',
             'description' => 'string',
             'customer_groups' => 'required|array',
@@ -128,8 +132,7 @@ class CartRuleController extends Controller
                     ->withInput();
         }
 
-        $data = request()->all();
-
+        // dd($data);
         if ($data['starts_from'] == "" || $data['ends_till'] == "") {
             $data['starts_from'] = null;
             $data['ends_till'] = null;
@@ -164,6 +167,7 @@ class CartRuleController extends Controller
             $data['actions'] = [
                 'action_type' => $data['action_type'],
                 'disc_amount' => $data['disc_amount'],
+                'disc_quantity' => $data['disc_quantity']
             ];
         }
 
@@ -171,9 +175,12 @@ class CartRuleController extends Controller
         $data['conditions'] = json_encode($data['conditions']);
 
         if ($data['use_coupon']) {
-            if (! $data['auto_generation']) {
+            if (isset($data['auto_generation']) && $data['auto_generation']) {
+                $data['auto_generation'] = 0;
                 $coupons['code'] = $data['code'];
                 unset($data['code']);
+            } else {
+                $data['auto_generation'] = 1;
             }
 
             if (isset($data['prefix'])) {
@@ -268,7 +275,6 @@ class CartRuleController extends Controller
 
         if ($validated->fails()) {
             session()->flash('error', 'Validation failed');
-            dd($validated);
             return redirect()->route('admin.cart-rule.create')
                 ->withErrors($validated)
                 ->withInput();
@@ -313,6 +319,7 @@ class CartRuleController extends Controller
             $data['actions'] = [
                 'action_type' => $data['action_type'],
                 'disc_amount' => $data['disc_amount'],
+                'disc_quantity' => $data['disc_quantity']
             ];
         }
 

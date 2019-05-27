@@ -59,7 +59,7 @@ class CartRuleRepository extends Repository
             }
 
             if ($found == 0) {
-                $this->catalogRuleCustomerGroups->find($oldCustomerGroup['id'])->delete();
+                $this->cartRuleCustomerGroups->find($oldCustomerGroup['id'])->delete();
             } else {
                 $found = 0;
             }
@@ -107,7 +107,7 @@ class CartRuleRepository extends Repository
             }
 
             if ($found == 0) {
-                $this->catalogRuleChannels->find($oldChannel['id'])->delete();
+                $this->cartRuleChannels->find($oldChannel['id'])->delete();
             } else {
                 $found = 0;
             }

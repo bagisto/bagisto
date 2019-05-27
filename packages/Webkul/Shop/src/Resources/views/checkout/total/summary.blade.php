@@ -33,7 +33,13 @@
         <div class="dicount-group">
             @inject('cart_rule', 'Webkul\Discount\Helpers\Discount')
 
-            {{ $cart_rule->findAllRules() }}
+            <form class="coupon-form" method="post" @submit.prevent="onSubmit">
+                <div class="control-group mt-20">
+                    <input type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-model="code">
+
+                    <button class="btn btn-lg btn-primary">Apply Coupon</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

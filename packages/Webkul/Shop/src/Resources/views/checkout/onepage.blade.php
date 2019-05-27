@@ -468,7 +468,8 @@
         Vue.component('review-section', {
             data: function() {
                 return {
-                    templateRender: null
+                    templateRender: null,
+                    code: null
                 }
             },
 
@@ -488,6 +489,20 @@
                         this.templateRender() :
                         '')
                     ]);
+            },
+
+            methods: {
+                onSubmit: function() {
+                    console.log(this.code);
+
+                    axios.post('{{ route('shop.checkout.check.coupons') }}', {
+                        code: this.code
+                    }).then(function(response) {
+                        console.log(response);
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
             }
         })
     </script>

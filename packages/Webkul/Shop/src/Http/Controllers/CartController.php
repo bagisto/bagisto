@@ -82,8 +82,6 @@ class CartController extends Controller
      */
     public function index()
     {
-        dd(Cart::setNonCouponAble(), Cart::setCouponAble());
-
         return view($this->_config['view'])->with('cart', Cart::getCart());
     }
 
@@ -249,5 +247,34 @@ class CartController extends Controller
 
             return redirect()->back();
         }
+    }
+
+    /**
+     * To apply coupon rules
+     */
+    public function applyCoupons()
+    {
+        $this->validate(request(), [
+            'code' => 'string|required'
+        ]);
+
+        $code = request()->input('code');
+
+        $rules = Cart::setCoupon();
+        $impacts = array();
+
+        foreach($rules['id'] as $rule) {
+            if ($rule->use_coupon && $rule->auto_generation == 0) {
+                // dump($rule->coupons->code, $rule->id);
+
+                if ($rule->coupons->code == $code) {
+                    return $rule->id;
+                }
+            } else {
+                dump($rule->coupons->prefix, $rule->coupons->suffix, $rule->id);
+            }
+        }
+
+        die;
     }
 }
