@@ -16,13 +16,6 @@ class Discount
         $this->cartRule = $cartRule;
     }
 
-    public function checkCoupon()
-    {
-        foreach($this->cartRule->all() as $rule) {
-            return $rule->name;
-        }
-    }
-
     public function getGuestEndRules()
     {
         $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 1, 'is_guest' => 1]);

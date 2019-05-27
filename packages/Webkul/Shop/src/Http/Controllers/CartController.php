@@ -261,20 +261,79 @@ class CartController extends Controller
         $code = request()->input('code');
 
         $rules = Cart::setCoupon();
+
         $impacts = array();
+        $appliedRule;
 
         foreach($rules['id'] as $rule) {
             if ($rule->use_coupon && $rule->auto_generation == 0) {
-                // dump($rule->coupons->code, $rule->id);
-
                 if ($rule->coupons->code == $code) {
-                    return $rule->id;
+                    $appliedRule = $rule;
+
+                    break;
                 }
             } else {
-                dump($rule->coupons->prefix, $rule->coupons->suffix, $rule->id);
+                dd('auto_generation in next version');
             }
         }
 
-        die;
+        $cart = Cart::getCart();
+        // check all the conditions associated with the rule
+        if ($appliedRule->starts_from == null) {
+            $action_type = $appliedRule->action_type;
+            $disc_threshold = $appliedRule->disc_threshold;
+            $disc_amount = $appliedRule->disc_amount;
+            $disc_quantity = $appliedRule->disc_quantity;
+
+            $newBaseSubTotal = 0;
+            $newQuantity = 0;
+            if ($cart->items_qty >= $disc_threshold) {
+                if ($action_type == config('pricerules.cart.validation.0')) {
+                    //CART
+                    $newBaseSubTotal = ($cart->base_sub_total * $disc_amount) / 100;
+                } else if ($action_type == config('pricerules.cart.validation.1')) {
+                    $newBaseSubTotal = $cart->base_sub_total - $disc_amount;
+                } else if ($action_type == config('pricerules.cart.validation.2')) {
+                    //CART
+                    $newQuantity = $cart->items()->first()->quantity + $disc_amount;
+                } else if ($action_type == config('pricerules.cart.validation.3')) {
+                    $newBaseSubTotal = $disc_amount ;
+                }
+
+                if ($action_type == config('pricerules.cart.validation.2')) {
+                    dd($newQuantity);
+                } else {
+                    dd($newBaseSubTotal);
+                }
+            }
+        } else {
+            //time based rules
+            $action_type = $appliedRule->action_type;
+            $disc_threshold = $appliedRule->disc_threshold;
+            $disc_amount = $appliedRule->disc_amount;
+            $disc_quantity = $appliedRule->disc_quantity;
+
+            $newBaseSubTotal = 0;
+            $newQuantity = 0;
+            if ($cart->items_qty >= $disc_threshold) {
+                if ($action_type == config('pricerules.cart.validation.0')) {
+                    //CART
+                    $newBaseSubTotal = ($cart->base_sub_total * $disc_amount) / 100;
+                } else if ($action_type == config('pricerules.cart.validation.1')) {
+                    $newBaseSubTotal = $cart->base_sub_total - $disc_amount;
+                } else if ($action_type == config('pricerules.cart.validation.2')) {
+                    //CART
+                    $newQuantity = $cart->items()->first()->quantity + $disc_amount;
+                } else if ($action_type == config('pricerules.cart.validation.3')) {
+                    $newBaseSubTotal = $disc_amount ;
+                }
+
+                if ($action_type == config('pricerules.cart.validation.2')) {
+                    dd($newQuantity);
+                } else {
+                    dd($newBaseSubTotal);
+                }
+            }
+        }
     }
 }

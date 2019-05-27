@@ -1240,9 +1240,4 @@ class Cart {
     public function setCouponAble() {
         return $this->discount->checkCouponConditions($this->getCart());
     }
-
-    public function setCoupon() {
-        $couponRules = $this->setCouponAble();
-        return $couponRules;
-    }
 }
