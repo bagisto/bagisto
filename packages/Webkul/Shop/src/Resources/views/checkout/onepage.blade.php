@@ -471,7 +471,16 @@
                     templateRender: null,
                     code: null,
                     message: null,
-                    qtyRevealed: false
+                    qtyRevealed: false,
+                    amount_given: null,
+                    amount: null,
+                    discounted: false,
+                    discount: {
+                        amount: null,
+                        action: null,
+                        amount_given: null,
+                        message: null
+                    }
                 }
             },
 
@@ -501,6 +510,12 @@
                         code: this_this.code
                     }).then(function(response) {
                         this_this.message = response.data.message;
+
+                        this_this.discounted = true;
+                        this_this.discount.amount = response.data.amount;
+                        this_this.discount.amount_given = response.data.amount_given;
+                    }).catch(function(error) {
+                        this_this.discounted = false;
                     });
                 },
 

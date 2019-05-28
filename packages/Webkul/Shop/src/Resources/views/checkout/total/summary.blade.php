@@ -3,12 +3,7 @@
 
     <div class="item-detail">
         <label>
-            @if (! request()->is('checkout/cart'))
-                <div v-if="! qtyRevealed">{{ intval($cart->items_qty) }}</div>
-                <div v-if="qtyRevealed">{{ intval($cart->items_qty) }} @{{ + amount_given (free) }}</div>
-            @else
-                {{ intval($cart->items_qty) }}
-            @endif
+            <span id="total_qty">{{ intval($cart->items_qty) }}</span>
             {{ __('shop::app.checkout.total.sub-total') }}
             {{ __('shop::app.checkout.total.price') }}
         </label>
@@ -39,7 +34,7 @@
             @inject('cart_rule', 'Webkul\Discount\Helpers\Discount')
 
             @if (! request()->is('checkout/cart'))
-                <form class="coupon-form" method="post" @submit.prevent="onSubmit">
+                <form class="coupon-form" method="post" @submit.prevent="onSubmit" v-if="discounted == false">
                     <div class="control-group mt-20">
                         <input v-model="code" type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-on:change="codeChange" style="width: 100%">
 
@@ -47,9 +42,26 @@
 
                         <span class="coupon-message mt-5" style="display: block; margin-bottom: 5px;" v-if="message == 'Success' || message == 'success'">@{{ message }}</span>
 
-                        <button class="btn btn-lg btn-primary">Apply Coupon</button>
+                        <button class="btn btn-lg btn-black">Apply Coupon</button>
                     </div>
                 </form>
+
+                <div class="discounted" v-if="discounted">
+                    <div class="mt-10 mb-10">
+                        <b>Coupon used</b>
+                    </div>
+
+                    <span class="mt-10 mb-10" style="display: block; margin-bottom: 5px; width: 100%">
+                        <label style="float: left;">@{{ code }}</label>
+                        <label style="float: right;">@{{ discount.amount }}</label>
+                    </span>
+
+                    <span class="horizontal-rule"></span>
+                    <span class="mt-10 mb-10" style="display: block; margin-bottom: 5px; width: 100%">
+                        <label style="float: left;">Amount Payable</label>
+                        <label style="float: right;">@{{ discount.amount }}</label>
+                    </span>
+                </div>
             @endif
         </div>
     </div>

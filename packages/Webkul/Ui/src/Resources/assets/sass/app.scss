@@ -16,6 +16,10 @@
 }
 
 //margin bottom classes
+.mb-5 {
+    margin-bottom: 5px;
+}
+
 .mb-10 {
     margin-bottom: 10px;
 }
@@ -226,6 +230,11 @@ h5 {
     &.btn-black {
         background: #000;
         color: #ffffff;
+    }
+
+    &.btn-white {
+        background: #ffffff;
+        color: #000;
     }
 
     &:disabled,

@@ -1233,13 +1233,11 @@ class Cart {
         }
     }
 
-    public function setNonCoupon() {
-        return $this->discount->checkNonCouponConditions($this->getCart());
-    }
-
-    public function setCoupon()
+    public function applyCoupon($code)
     {
-        return $this->discount->checkCouponConditions($this->getCart());
+        $result = $this->discount->ruleCheck($code);
+
+        return $result;
     }
 
     public function leastWorthItem()
@@ -1259,5 +1257,24 @@ class Cart {
         }
 
         return $leastSubTotal;
+    }
+
+    public function maxWorthItem()
+    {
+        $cart = $this->getCart();
+        $maxValue = 0;
+        $maxSubTotal = [];
+
+        foreach ($cart->items as $item) {
+            if ($item->base_total > $maxValue) {
+                $maxValue = $item->total;
+                $maxSubTotal = [
+                    'id' => $item->id,
+                    'base_total' => $maxValue
+                ];
+            }
+        }
+
+        return $maxSubTotal;
     }
 }

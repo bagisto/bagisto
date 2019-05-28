@@ -829,10 +829,9 @@ return [
             'update-failed' => 'Error! cannot update',
             'delete-success' => 'Sucess! rule deleted',
             'delete-failed' => 'Error! cannot delete',
-            'coupon-applied' => 'Coupon Applied',
+            'coupon-applied' => 'Coupon used',
+            'coupon-failed' => 'Coupon failed to apply',
             'no-coupon' => '* Coupon not applicable',
-            'coupon-expired' => 'Coupon expired',
-            'coupon-failed' => 'Invalid coupon'
         ],
 
         'catalog' => [
