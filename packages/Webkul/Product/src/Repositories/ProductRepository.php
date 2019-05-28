@@ -166,7 +166,7 @@ class ProductRepository extends Repository
             }
 
             if ($attribute->type == 'image' || $attribute->type == 'file') {
-                $dir = 'test';
+                $dir = 'product';
                 if (gettype($data[$attribute->code]) == 'object') {
                     $data[$attribute->code] = request()->file($attribute->code)->store($dir);
                 } else {
