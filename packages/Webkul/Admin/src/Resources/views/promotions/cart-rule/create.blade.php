@@ -405,7 +405,7 @@
                         coupon_type: null,
                         free_shipping: null,
 
-                        all_conditions: null,
+                        all_conditions: [],
 
                         code: null,
                         suffix: null,

@@ -1240,4 +1240,21 @@ class Cart {
     public function setCouponAble() {
         return $this->discount->checkCouponConditions($this->getCart());
     }
+
+    public function setCoupon()
+    {
+        return $this->setCouponAble();
+    }
+
+    public function leastWorthItem()
+    {
+        $cart = $this->getCart();
+        $leastSubTotal = 0;
+
+        foreach ($cart->items as $item) {
+            if ($item->sub_total > $leastSubTotal) {
+                $leastSubTotal = $item->sub_total;
+            }
+        }
+    }
 }

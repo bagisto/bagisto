@@ -377,7 +377,6 @@
                     return {
                         name: 'Name of rule',
                         description: 'Enter Some Description',
-                        conditions_list: [],
                         channels: [],
                         customer_groups: [],
                         ends_till: null,
@@ -439,7 +438,6 @@
 
                 mounted () {
                     data = @json($cart_rule[3]);
-                    console.log(data);
                     this.name = data.name;
                     this.description = data.description;
                     this.conditions_list = [];
@@ -491,6 +489,7 @@
                     this.free_shipping = data.free_shipping;
 
                     this.all_conditions = null;
+                    this.conditions_list = JSON.parse(JSON.parse(data.conditions));
 
                     this.dedicated_label = false;
                     global_label = null;
@@ -569,7 +568,6 @@
                     },
 
                     onSubmit: function (e) {
-                        console.log(this.$validator);
                         this.$validator.validateAll().then(result => {
                             if (result) {
                                 e.target.submit();

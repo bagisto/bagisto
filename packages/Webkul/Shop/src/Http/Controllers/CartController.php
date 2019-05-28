@@ -254,6 +254,7 @@ class CartController extends Controller
      */
     public function applyCoupons()
     {
+        // dd(request()->all());
         $this->validate(request(), [
             'code' => 'string|required'
         ]);
@@ -262,24 +263,29 @@ class CartController extends Controller
 
         $rules = Cart::setCoupon();
 
-        $impacts = array();
-        $appliedRule;
-
+        $appliedRule = null;
+        $coupons = [];
         foreach($rules['id'] as $rule) {
+            array_push($coupons, $rule->coupons->code);
             if ($rule->use_coupon && $rule->auto_generation == 0) {
                 if ($rule->coupons->code == $code) {
                     $appliedRule = $rule;
 
                     break;
+                } else {
+                    continue;
                 }
-            } else {
-                dd('auto_generation in next version');
             }
+        }
+
+        if(! isset($appliedRule)) {
+            return response()->json(['message' => trans('admin::app.promotion.status.no-coupon'), 'coupons' => $coupons], 200);
         }
 
         $cart = Cart::getCart();
         // check all the conditions associated with the rule
-        if ($appliedRule->starts_from == null) {
+        if (isset($appliedRule->starts_from) && $appliedRule->starts_from == null) {
+
             $action_type = $appliedRule->action_type;
             $disc_threshold = $appliedRule->disc_threshold;
             $disc_amount = $appliedRule->disc_amount;
@@ -329,10 +335,25 @@ class CartController extends Controller
                 }
 
                 if ($action_type == config('pricerules.cart.validation.2')) {
-                    dd($newQuantity);
+                    return response()->json([
+                        'message' => 'Success',
+                        'amount_given' => false,
+                        'amount' => $newQuantity
+                    ]);
                 } else {
-                    dd($newBaseSubTotal);
+                    return response()->json([
+                        'message' => 'Success',
+                        'amount_given' => true,
+                        'amount' => $newBaseSubTotal
+                    ]);
                 }
+            } else {
+                return response()->json([
+                    'message' => 'failed',
+                    'amount_given' => null,
+                    'amount' => null,
+                    'least_value_item' => Cart::leastWorthItem()
+                ]);
             }
         }
     }

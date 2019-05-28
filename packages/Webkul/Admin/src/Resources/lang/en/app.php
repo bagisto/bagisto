@@ -817,7 +817,7 @@ return [
             'specific-coupon' => 'Specific Coupon(Check) / Auto Generated(Unheck)',
             'free-shipping' => 'Free Shipping',
             'is-guest' => 'For Guests',
-            'disc_qty' => 'Max. Quantity Allowed To Be Discounted'
+            'disc_qty' => 'Max. Quantity Allowed To Be Discounted',
         ],
 
         'status' => [
@@ -828,7 +828,11 @@ return [
             'update-coupon-success' => 'Success! rule updated along with coupon',
             'update-failed' => 'Error! cannot update',
             'delete-success' => 'Sucess! rule deleted',
-            'delete-failed' => 'Error! cannot delete'
+            'delete-failed' => 'Error! cannot delete',
+            'coupon-applied' => 'Coupon Applied',
+            'no-coupon' => '* Coupon not applicable',
+            'coupon-expired' => 'Coupon expired',
+            'coupon-failed' => 'Invalid coupon'
         ],
 
         'catalog' => [

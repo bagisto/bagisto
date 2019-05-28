@@ -469,7 +469,8 @@
             data: function() {
                 return {
                     templateRender: null,
-                    code: null
+                    code: null,
+                    message: null
                 }
             },
 
@@ -493,15 +494,21 @@
 
             methods: {
                 onSubmit: function() {
-                    console.log(this.code);
+                    var this_this = this;
 
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {
-                        code: this.code
+                        code: this_this.code
                     }).then(function(response) {
-                        console.log(response);
-                    }).catch(function (error) {
-                        console.log(error);
+                        console.log(response.data.message);
+                        this_this.message = response.data.message;
                     });
+                },
+
+                codeChange: function() {
+                    if (this.code.length == 0 || this.code.length == 1)
+                    {
+                        this.message = null;
+                    }
                 }
             }
         })

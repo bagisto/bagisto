@@ -35,7 +35,11 @@
 
             <form class="coupon-form" method="post" @submit.prevent="onSubmit">
                 <div class="control-group mt-20">
-                    <input type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-model="code">
+                    <input v-model="code" type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-on:change="codeChange">
+
+                    <span class="coupon-message mt-5" style="display: block; color: #ff5656; margin-bottom: 5px;" v-if="message != 'success'">@{{ message }}</span>
+
+                    <span class="coupon-message mt-5" style="display: block; margin-bottom: 5px;" v-if="message == 'success'">@{{ message }}</span>
 
                     <button class="btn btn-lg btn-primary">Apply Coupon</button>
                 </div>
