@@ -66,6 +66,8 @@ class ProductFlat
         'multiselect' => 'text',
         'datetime' => 'datetime',
         'date' => 'date',
+        'file' => 'text',
+        'image' => 'text',
     ];
 
     /**

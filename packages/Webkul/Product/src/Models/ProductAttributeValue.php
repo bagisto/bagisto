@@ -25,6 +25,8 @@ class ProductAttributeValue extends Model implements ProductAttributeValueContra
         'multiselect' => 'text_value',
         'datetime' => 'datetime_value',
         'date' => 'date_value',
+        'file' => 'text_value',
+        'image' => 'text_value',
     ];
 
     protected $fillable = [

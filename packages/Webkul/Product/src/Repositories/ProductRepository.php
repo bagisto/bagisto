@@ -10,6 +10,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Models\ProductAttributeValue;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Storage;
 
 /**
  * Product Repository
@@ -164,6 +165,15 @@ class ProductRepository extends Repository
                 $data[$attribute->code] = implode(",", $data[$attribute->code]);
             }
 
+            if ($attribute->type == 'image' || $attribute->type == 'file') {
+                $dir = 'product';
+                if (gettype($data[$attribute->code]) == 'object') {
+                    $data[$attribute->code] = request()->file($attribute->code)->store($dir);
+                } else {
+                    $data[$attribute->code] = NULL;
+                }
+            }
+
             $attributeValue = $this->attributeValue->findOneWhere([
                     'product_id' => $product->id,
                     'attribute_id' => $attribute->id,
@@ -184,6 +194,10 @@ class ProductRepository extends Repository
                     ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
                     ], $attributeValue->id
                 );
+
+                if ($attribute->type == 'image' || $attribute->type == 'file') {
+                    Storage::delete($attributeValue->text_value);
+                }
             }
         }
 

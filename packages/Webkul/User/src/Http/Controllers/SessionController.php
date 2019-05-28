@@ -5,7 +5,6 @@ namespace Webkul\User\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
-use File;
 
 /**
  * Admin user session controller
@@ -43,10 +42,6 @@ class SessionController extends Controller
      */
     public function create()
     {
-        if (File::exists(public_path('installer'))) {
-            File::deleteDirectory(public_path('installer'));
-        }
-
         if (auth()->guard('admin')->check()) {
             return redirect()->route('admin.dashboard.index');
         } else {

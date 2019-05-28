@@ -30,6 +30,7 @@ class View extends AbstractProduct
                 'label' => $attribute->name,
                 'value' => $value,
                 'admin_name' => $attribute->admin_name,
+                'type' => $attribute->type,
             ];
         }
 
