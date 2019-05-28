@@ -267,10 +267,10 @@
                                         <span class="control-error" v-if="errors.has('disc_threshold')">@{{ errors.first('disc_threshold') }}</span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']">
+                                    <div class="control-group" :class="[errors.has('disc_quantity') ? 'has-error' : '']">
                                         <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
 
-                                        <input type="number" step="1" class="control" name="disc_quantity" v-model="disc_quantity" v-validate="'required|decimal'" value="{{ old('disc_quantity') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_qty') }}&quot;">
+                                        <input type="number" step="1" class="control" name="disc_quantity" v-model="disc_quantity" v-validate="'required|decimal|min_value:1'" value="{{ old('disc_quantity') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_qty') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_quantity')">@{{ errors.first('disc_quantity') }}</span>
                                     </div>
@@ -338,7 +338,7 @@
 
                             <accordian :active="false" title="labels">
                                 <div slot="body">
-                                    <input type="hidden" name="all_conditions[]" v-model="all_conditions">
+                                    <input type="hidden" name="all_conditions" v-model="all_conditions">
                                     <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']" v-if="dedicated_label">
                                         <label for="label" class="required">Global Label</label>
 
@@ -395,9 +395,9 @@
                         apply_prct: false,
                         apply_to_shipping: null,
                         buy_atleast: null,
-                        disc_amount: 0.0,
-                        disc_threshold: 0,
-                        disc_quantity: 0,
+                        disc_amount: null,
+                        disc_threshold: null,
+                        disc_quantity: null,
                         end_other_rules: null,
                         coupon_type: null,
                         free_shipping: null,
@@ -489,7 +489,10 @@
                     this.free_shipping = data.free_shipping;
 
                     this.all_conditions = null;
-                    this.conditions_list = JSON.parse(JSON.parse(data.conditions));
+
+                    if (data.conditions != null) {
+                        this.conditions_list = JSON.parse(JSON.parse(data.conditions));
+                    }
 
                     this.dedicated_label = false;
                     global_label = null;
@@ -517,6 +520,7 @@
                         }
 
                         if (this.condition_on == 'cart') {
+                            console.log(this.conditions_list);
                             this.conditions_list.push(this.cart_object);
 
                             this.cart_object = {

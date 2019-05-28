@@ -3,7 +3,8 @@
 
     <div class="item-detail">
         <label>
-            {{ intval($cart->items_qty) }}
+            <div v-if="! qtyRevealed">{{ intval($cart->items_qty) }}</div>
+        <div v-if="qtyRevealed">{{ intval($cart->items_qty) }} @{{ + amount_given (free) }}</div>
             {{ __('shop::app.checkout.total.sub-total') }}
             {{ __('shop::app.checkout.total.price') }}
         </label>
@@ -35,11 +36,11 @@
 
             <form class="coupon-form" method="post" @submit.prevent="onSubmit">
                 <div class="control-group mt-20">
-                    <input v-model="code" type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-on:change="codeChange">
+                    <input v-model="code" type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-on:change="codeChange" style="width: 100%">
 
-                    <span class="coupon-message mt-5" style="display: block; color: #ff5656; margin-bottom: 5px;" v-if="message != 'success'">@{{ message }}</span>
+                    <span class="coupon-message mt-5" style="display: block; color: #ff5656; margin-bottom: 5px;" v-if="message != 'Success' && message != 'success'">@{{ message }}</span>
 
-                    <span class="coupon-message mt-5" style="display: block; margin-bottom: 5px;" v-if="message == 'success'">@{{ message }}</span>
+                    <span class="coupon-message mt-5" style="display: block; margin-bottom: 5px;" v-if="message == 'Success' || message == 'success'">@{{ message }}</span>
 
                     <button class="btn btn-lg btn-primary">Apply Coupon</button>
                 </div>

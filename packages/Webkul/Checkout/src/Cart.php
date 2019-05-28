@@ -1233,28 +1233,31 @@ class Cart {
         }
     }
 
-    public function setNonCouponAble() {
+    public function setNonCoupon() {
         return $this->discount->checkNonCouponConditions($this->getCart());
-    }
-
-    public function setCouponAble() {
-        return $this->discount->checkCouponConditions($this->getCart());
     }
 
     public function setCoupon()
     {
-        return $this->setCouponAble();
+        return $this->discount->checkCouponConditions($this->getCart());
     }
 
     public function leastWorthItem()
     {
         $cart = $this->getCart();
-        $leastSubTotal = 0;
+        $leastValue = 999999999999;
+        $leastSubTotal = [];
 
         foreach ($cart->items as $item) {
-            if ($item->sub_total > $leastSubTotal) {
-                $leastSubTotal = $item->sub_total;
+            if ($item->base_total < $leastValue) {
+                $leastValue = $item->total;
+                $leastSubTotal = [
+                    'id' => $item->id,
+                    'base_total' => $leastValue
+                ];
             }
         }
+
+        return $leastSubTotal;
     }
 }

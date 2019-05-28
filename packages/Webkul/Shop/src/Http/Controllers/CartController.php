@@ -254,17 +254,15 @@ class CartController extends Controller
      */
     public function applyCoupons()
     {
-        // dd(request()->all());
         $this->validate(request(), [
             'code' => 'string|required'
         ]);
 
         $code = request()->input('code');
-
         $rules = Cart::setCoupon();
-
         $appliedRule = null;
         $coupons = [];
+
         foreach($rules['id'] as $rule) {
             array_push($coupons, $rule->coupons->code);
             if ($rule->use_coupon && $rule->auto_generation == 0) {
@@ -278,14 +276,18 @@ class CartController extends Controller
             }
         }
 
-        if(! isset($appliedRule)) {
+        if (! isset($appliedRule)) {
             return response()->json(['message' => trans('admin::app.promotion.status.no-coupon'), 'coupons' => $coupons], 200);
         }
 
         $cart = Cart::getCart();
-        // check all the conditions associated with the rule
-        if (isset($appliedRule->starts_from) && $appliedRule->starts_from == null) {
 
+        if ($appliedRule->condititions != null) {
+            $conditions = json_decode($appliedRule->condtions);
+        }
+
+        // check all the conditions associated with the rule
+        if (isset($appliedRule) && $appliedRule->starts_from == null) {
             $action_type = $appliedRule->action_type;
             $disc_threshold = $appliedRule->disc_threshold;
             $disc_amount = $appliedRule->disc_amount;
@@ -294,25 +296,43 @@ class CartController extends Controller
             $newBaseSubTotal = 0;
             $newQuantity = 0;
             if ($cart->items_qty >= $disc_threshold) {
+                $leastWorthItem = Cart::leastWorthItem();
+
                 if ($action_type == config('pricerules.cart.validation.0')) {
-                    //CART
-                    $newBaseSubTotal = ($cart->base_sub_total * $disc_amount) / 100;
+                    $newBaseSubTotal = ($leastWorthItem['base_total'] * $disc_amount) / 100;
                 } else if ($action_type == config('pricerules.cart.validation.1')) {
-                    $newBaseSubTotal = $cart->base_sub_total - $disc_amount;
+                    $newBaseSubTotal = $leastWorthItem['base_total'] - $disc_amount;
                 } else if ($action_type == config('pricerules.cart.validation.2')) {
-                    //CART
-                    $newQuantity = $cart->items()->first()->quantity + $disc_amount;
+                    $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
                 } else if ($action_type == config('pricerules.cart.validation.3')) {
-                    $newBaseSubTotal = $disc_amount ;
+                    $base_total = $disc_amount;
                 }
 
                 if ($action_type == config('pricerules.cart.validation.2')) {
-                    dd($newQuantity);
+                    return response()->json([
+                        'message' => 'Success',
+                        'action' => $action_type,
+                        'amount_given' => false,
+                        'amount' => $newQuantity
+                    ]);
                 } else {
-                    dd($newBaseSubTotal);
+                    return response()->json([
+                        'message' => 'Success',
+                        'action' => $action_type,
+                        'amount_given' => true,
+                        'amount' => $newBaseSubTotal
+                    ]);
                 }
+            } else {
+                return response()->json([
+                    'message' => 'failed',
+                    'action' => $action_type,
+                    'amount_given' => null,
+                    'amount' => null,
+                    'least_value_item' => null
+                ]);
             }
-        } else {
+        } else if (isset($appliedRule) && $appliedRule->start_from != null) {
             //time based rules
             $action_type = $appliedRule->action_type;
             $disc_threshold = $appliedRule->disc_threshold;
@@ -322,6 +342,8 @@ class CartController extends Controller
             $newBaseSubTotal = 0;
             $newQuantity = 0;
             if ($cart->items_qty >= $disc_threshold) {
+                $leastWorthItem = Cart::leastWorthItem();
+                dd($leastWorthItem);
                 if ($action_type == config('pricerules.cart.validation.0')) {
                     //CART
                     $newBaseSubTotal = ($cart->base_sub_total * $disc_amount) / 100;
@@ -337,12 +359,14 @@ class CartController extends Controller
                 if ($action_type == config('pricerules.cart.validation.2')) {
                     return response()->json([
                         'message' => 'Success',
+                        'action' => $action_type,
                         'amount_given' => false,
                         'amount' => $newQuantity
                     ]);
                 } else {
                     return response()->json([
                         'message' => 'Success',
+                        'action' => $action_type,
                         'amount_given' => true,
                         'amount' => $newBaseSubTotal
                     ]);
@@ -350,6 +374,7 @@ class CartController extends Controller
             } else {
                 return response()->json([
                     'message' => 'failed',
+                    'action' => $action_type,
                     'amount_given' => null,
                     'amount' => null,
                     'least_value_item' => Cart::leastWorthItem()

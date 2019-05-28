@@ -259,20 +259,20 @@
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('disc_amount') ? 'has-error' : '']">
-                                        <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
-
-                                        <input type="number" step="1" class="control" name="disc_quantity" v-model="disc_quantity" v-validate="'required|decimal'" value="{{ old('disc_quantity') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_qty') }}&quot;">
-
-                                        <span class="control-error" v-if="errors.has('disc_quantity')">@{{ errors.first('disc_quantity') }}</span>
-                                    </div>
-
                                     <div class="control-group" :class="[errors.has('disc_threshold') ? 'has-error' : '']">
                                         <label for="disc_threshold" class="required">{{ __('admin::app.promotion.cart.buy-atleast') }}</label>
 
                                         <input type="number" step="1" class="control" name="disc_threshold" v-model="disc_threshold" v-validate="'required|numeric|min_value:1'" value="{{ old('disc_threshold') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.buy-atleast') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_threshold')">@{{ errors.first('disc_threshold') }}</span>
+                                    </div>
+
+                                    <div class="control-group" :class="[errors.has('disc_quantity') ? 'has-error' : '']">
+                                        <label for="disc_quantity" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
+
+                                        <input type="number" step="1" class="control" name="disc_quantity" v-model="disc_quantity" v-validate="'required|decimal|min_value:1'" value="{{ old('disc_quantity') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_qty') }}&quot;">
+
+                                        <span class="control-error" v-if="errors.has('disc_quantity')">@{{ errors.first('disc_quantity') }}</span>
                                     </div>
 
                                     <div class="boolean-control-container">
@@ -338,7 +338,7 @@
 
                             <accordian :active="false" title="labels">
                                 <div slot="body">
-                                    <input type="hidden" name="all_conditions[]" v-model="all_conditions">
+                                    <input type="hidden" name="all_conditions" v-model="all_conditions">
                                     <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']" v-if="dedicated_label">
                                         <label for="label" class="required">Global Label</label>
 
@@ -398,9 +398,9 @@
                         apply_prct: false,
                         apply_to_shipping: null,
                         buy_atleast: null,
-                        disc_amount: 0.0,
-                        disc_threshold: 0,
-                        disc_quantity: 0,
+                        disc_amount: null,
+                        disc_threshold: null,
+                        disc_quantity: null,
                         end_other_rules: null,
                         coupon_type: null,
                         free_shipping: null,
@@ -510,36 +510,8 @@
                             }
                         });
 
-                        // for (index in this.conditions_list) {
-                        //     if (this.conditions_list[index].condition == null || this.conditions_list[index].condition == "" || this.conditions_list[index].condition == undefined) {
-                        //         window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
-
-                        //         this.$root.addFlashMessages();
-
-                        //         return false;
-                        //     } else if (this.conditions_list[index].value == null || this.conditions_list[index].value == "" || this.conditions_list[index].value == undefined) {
-                        //         window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
-
-                        //         this.$root.addFlashMessages();
-
-                        //         return false;
-                        //     }
-                        // }
-
-                        // if (this.conditions_list.length == 0) {
-                        //     window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('admin::app.promotion.catalog.condition-missing') }}" }];
-
-                        //     this.$root.addFlashMessages();
-
-                        //     return false;
-                        // }
-
                         this.all_conditions = JSON.stringify(this.conditions_list);
                     },
-
-                    // genericGroupCondition() {
-                    //     this.generic_condition = false;
-                    // },
 
                     addFlashMessages() {
                         const flashes = this.$refs.flashes;

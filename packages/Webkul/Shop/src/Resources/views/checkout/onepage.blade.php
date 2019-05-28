@@ -470,7 +470,8 @@
                 return {
                     templateRender: null,
                     code: null,
-                    message: null
+                    message: null,
+                    qtyRevealed: false
                 }
             },
 
@@ -499,7 +500,6 @@
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {
                         code: this_this.code
                     }).then(function(response) {
-                        console.log(response.data.message);
                         this_this.message = response.data.message;
                     });
                 },

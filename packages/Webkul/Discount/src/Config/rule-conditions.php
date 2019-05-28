@@ -126,21 +126,26 @@ return [
                 'type' => 'numeric'
             ],
             3 => [
+                'code' => 'shipping_method',
+                'name' => 'Shipping Method',
+                'type' => 'string'
+            ],
+            4 => [
                 'code' => 'payement_method',
                 'name' => 'Payment Method',
                 'type' => 'string'
             ],
-            4 => [
+            5 => [
                 'code' => 'shipping_postcode',
                 'name' => 'Shipping Postcode',
                 'type' => 'string'
             ],
-            5 => [
+            6 => [
                 'code' => 'shipping_state',
                 'name' => 'Shipping State',
                 'type' => 'string'
             ],
-            6 => [
+            7 => [
                 'code' => 'shipping_country',
                 'name' => 'Shipping Country',
                 'type' => 'string'

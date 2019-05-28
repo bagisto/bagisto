@@ -115,12 +115,12 @@ class CartRuleController extends Controller
             'per_customer' => 'numeric|min:0',
             'action_type' => 'required|string',
             'disc_amount' => 'required|numeric',
-            'discount_quantity' => 'numeric|required_if:action_type,buy_a_get_b',
-            'disc_threshold' => 'numeric|required_if:action_type,buy_a_get_b',
+            'disc_quantity' => 'numeric',
+            'disc_threshold' => 'numeric',
             'free_shipping' => 'required|boolean',
             'apply_to_shipping' => 'required|boolean',
             'code' => 'string|required_if:auto_generation,0',
-            'all_conditions' => 'array',
+            'all_conditions' => 'required',
             'label' => 'array|nullable'
         ]);
 
@@ -152,7 +152,11 @@ class CartRuleController extends Controller
         unset($data['cart_attributes']);
         unset($data['attributes']);
 
-        $data['conditions'] = $data['all_conditions'];
+        if (count(json_decode($data['all_conditions'])) == 0) {
+            $data['conditions'] = null;
+        } else {
+            $data['conditions'] = $data['all_conditions'];
+        }
         unset($data['all_conditions']);
 
         if (isset($data['disc_amount']) && $data['action_type'] == config('pricerules.cart.validations.2')) {
@@ -264,12 +268,12 @@ class CartRuleController extends Controller
             'per_customer' => 'numeric|min:0',
             'action_type' => 'required|string',
             'disc_amount' => 'required|numeric',
-            'discount_quantity' => 'numeric|required_if:action_type,buy_a_get_b',
-            'disc_threshold' => 'numeric|required_if:action_type,buy_a_get_b',
+            'disc_quantity' => 'required|numeric',
+            'disc_threshold' => 'required|numeric',
             'free_shipping' => 'required|boolean',
             'apply_to_shipping' => 'required|boolean',
             'code' => 'string|required_if:auto_generation,0',
-            'all_conditions' => 'array',
+            'all_conditions' => 'required',
             'label' => 'array|nullable'
         ]);
 
@@ -304,7 +308,11 @@ class CartRuleController extends Controller
         unset($data['cart_attributes']);
         unset($data['attributes']);
 
-        $data['conditions'] = $data['all_conditions'];
+        if (count(json_decode($data['all_conditions'])) == 0) {
+            $data['conditions'] = null;
+        } else {
+            $data['conditions'] = $data['all_conditions'];
+        }
         unset($data['all_conditions']);
 
         if (isset($data['disc_amount']) && $data['action_type'] == config('pricerules.cart.validations.2')) {

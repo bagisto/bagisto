@@ -52,7 +52,7 @@ class Discount
 
     public function getGuestBestRules()
     {
-        $rules = $this->cartRule->findWhere(['status' => 1, 'is_guest' => 1]);
+        $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 0, 'is_guest' => 1]);
         $currentChannel = core()->getCurrentChannel();
 
         $guestRules = array();
@@ -234,11 +234,13 @@ class Discount
 
             if (count($id)) {
                 return [
+                    'end_rule' => false,
                     'noncouponable' => true,
                     'id' => $id
                 ];
             } else {
                 return [
+                    'end_rule' => false,
                     'noncouponable' => false,
                     'id' => null
                 ];
@@ -256,11 +258,13 @@ class Discount
 
             if (!$rule->use_coupon) {
                 return [
+                    'end_rule' => true,
                     'noncouponable' => true,
                     'id' => $id
                 ];
             } else {
                 return [
+                    'end_rule' => true,
                     'noncouponable' => false,
                     'id' => null
                 ];
