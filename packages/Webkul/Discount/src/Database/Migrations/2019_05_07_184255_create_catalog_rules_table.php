@@ -29,6 +29,7 @@ class CreateCatalogRulesTable extends Migration
             $table->boolean('status')->default(0);
             $table->integer('priority')->unsigned()->default(0);
             $table->json('conditions')->nullable();
+            $table->string('test_mode')->nullable();
             $table->json('actions')->nullable();
             $table->boolean('end_other_rules')->default(0);
             $table->integer('sort_order')->unsigned()->default(0);

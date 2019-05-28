@@ -272,75 +272,19 @@ class Discount
         }
     }
 
+    // works on then basis of input from the coupon field
     public function checkCouponConditions($cart)
     {
         $rules = $this->applyCouponAble();
 
         return $rules;
-        //non or null condtion based
-
-        // condition based rules
-
     }
 
+    // works automatically on the basis of no conditions
     public function checkNonCouponConditions($cart)
     {
         $rules = $this->applyNonCouponAble();
 
         return $rules;
-        foreach($rules['id'] as $rule) {
-            $action_type = $rule->action_type;
-            $disc_amount = $rule->disc_amount;
-            $disc_quantity = $rule->disc_quantity;
-            $disc_threshold = $rule->disc_threshold;
-
-            if($rule->conditions == null) {
-                // non or null condition based
-                if ($cart->items_qty >= $disc_threshold) {
-                    if ($action_type == config('pricerules.cart.validations.0')) {
-                        $itemBaseSubTotal = $cart->base_sub_total * ($disc_amount / 100);
-                        //CART
-                        // update disc amount
-
-                        //CART Item
-                        //update disc percentage
-                        //update disc amount
-                        //update base disc amount
-                    } else if ($action_type == config('pricerules.cart.validations.1')) {
-                        $baseSubTotal = $disc_amount;
-                        //CART
-                        // update disc amount
-
-                        //CART Item
-                        //update disc amount
-                        //update base disc amount
-                    } else if ($action_type == config('pricerules.cart.validations.2')) {
-                        //CART
-                        $quantity = $cart->items()->first()->quantity + 1;
-                        // update disc amount
-
-                        //CART Item
-                        //update disc percentage
-                        //update disc amount
-                        //update base disc amount
-
-                    } else if ($action_type == config('pricerules.cart.validations.3')) {
-                        //CART
-                        $cartBaseSubTotal = $disc_amount ;
-                        // update disc amount
-
-                        //CART Item
-                        //update disc percentage
-                        //update disc amount
-                        //update base disc amount
-                    }
-                }
-            } else {
-                // condition based rules
-                dd('conditions found');
-
-            }
-        }
-
     }
 }

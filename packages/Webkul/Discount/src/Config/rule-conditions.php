@@ -103,6 +103,18 @@ return [
                 '!()' => 'Not is one of'
             ],
 
+            'string' => [
+                '=' => 'Equals',
+                '>=' => 'Greater or equals',
+                '<=' => 'Lesser or equals',
+                '>' => 'Greater than',
+                '<' => 'Lesser than',
+                '{}' => 'Contains',
+                '!{}' => 'Does not contains',
+                '()' => 'Is one of',
+                '!()' => 'Not is one of'
+            ],
+
             'boolean' => [
                 0 => 'True/Yes',
                 1 => 'False/No',
@@ -112,7 +124,7 @@ return [
         'attributes' => [
             0 => [
                 'code' => 'sub_total',
-                'name' => 'Sub-total',
+                'name' => 'Sub Total',
                 'type' =>  'numeric'
             ],
             1 => [
@@ -131,7 +143,7 @@ return [
                 'type' => 'string'
             ],
             4 => [
-                'code' => 'payement_method',
+                'code' => 'payment_method',
                 'name' => 'Payment Method',
                 'type' => 'string'
             ],
@@ -149,7 +161,19 @@ return [
                 'code' => 'shipping_country',
                 'name' => 'Shipping Country',
                 'type' => 'string'
+            ],
+            8 => [
+                'code' => 'shipping_city',
+                'name' => 'Shipping City',
+                'type' => 'string'
             ]
         ]
     ],
+
+    'test_mode' => [
+        0 => 'all_are_true',
+        1 => 'all_are_false',
+        2 => 'any_of_true',
+        3 => 'all_of_false'
+    ]
 ];
