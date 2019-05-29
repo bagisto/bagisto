@@ -1242,7 +1242,7 @@ class Cart {
 
     public function applyNonCoupon()
     {
-        $result = $this->discount->nonCouponCheck();
+        $result = $this->discount->nonRuleCheck();
 
         return $result;
     }

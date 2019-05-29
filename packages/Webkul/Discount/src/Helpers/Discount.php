@@ -23,6 +23,10 @@ class Discount
         $this->endRuleActive = false;
     }
 
+    /**
+     * Gets the end rules applicable for guests
+     * autocheck for customer group and channels
+     */
     public function getGuestEndRules()
     {
         $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 1, 'is_guest' => 1]);
@@ -57,6 +61,11 @@ class Discount
         return $guestRules;
     }
 
+    /**
+     * Get the non ending rules for the guest
+     * and completed auto check for guests and
+     * channels
+     */
     public function getGuestBestRules()
     {
         $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 0, 'is_guest' => 1]);
@@ -74,6 +83,10 @@ class Discount
         return $guestRules;
     }
 
+
+    /**
+     * Gets the best rules for auth customers
+     */
     public function getBestRules()
     {
         $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 0]);
@@ -97,6 +110,9 @@ class Discount
         return $suitableRules;
     }
 
+    /**
+     * Gets the end rules for the auth customers
+     */
     public function getEndRules()
     {
         $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 1]);
@@ -137,6 +153,10 @@ class Discount
         return $suitableRules;
     }
 
+    /**
+     * Get the rules to applied automatically
+     * depending on user state
+     */
     public function toApply()
     {
         if (auth()->guard('customer')->check()) {
@@ -182,6 +202,9 @@ class Discount
         }
     }
 
+    /**
+     * To apply the coupon code based rules
+     */
     public function applyCouponAble()
     {
         $rules = $this->toApply();
@@ -231,6 +254,9 @@ class Discount
         }
     }
 
+    /**
+     * To apply the non coupon based rules
+     */
     public function applyNonCouponAble()
     {
         $rules = $this->toApply();
@@ -285,7 +311,7 @@ class Discount
         }
     }
 
-    public function nonCouponCheck()
+    public function nonRuleCheck()
     {
         $result = $this->applyNonCouponAble();
         $cart = \Cart::getCart();
