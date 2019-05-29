@@ -40,7 +40,9 @@ return [
                         'value' => false
                     ]
                 ],
-                'validation' => 'required'
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => true
             ],  [
                 'name' => 'sort',
                 'title' => 'admin::app.admin.system.sort_order',
@@ -93,7 +95,9 @@ return [
                         'value' => false
                     ]
                 ],
-                'validation' => 'required'
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => true
             ],  [
                 'name' => 'sort',
                 'title' => 'admin::app.admin.system.sort_order',
@@ -152,7 +156,9 @@ return [
                         'value' => false
                     ]
                 ],
-                'validation' => 'required'
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => true
             ],  [
                 'name' => 'sort',
                 'title' => 'admin::app.admin.system.sort_order',
