@@ -114,7 +114,8 @@ class OnepageController extends Controller
 
         $cart = Cart::getCart();
 
-        $rules = Cart::applyNonCoupon($cart);
+        $rules = Cart::applyNonCoupon();
+        dd($rules);
 
         return response()->json([
                 'jump_to_section' => 'review',

@@ -296,7 +296,7 @@ class Discount
             $this->endRuleActive = false;
         }
 
-        $maxImpact = array();
+        $maxImpacts = array();
 
         if (isset($result['id']) && count($result['id'])) {
             $rules = array();
@@ -330,6 +330,26 @@ class Discount
                                 $result = $this->testAbyConditionIsFalse($conditions, $cart);
                             }
                         }
+                    } else {
+                        $conditions = json_decode(json_decode($rule->conditions));
+                        $test_mode = config('pricerules.test_mode.0');
+
+                        if ($test_mode == config('pricerules.test_mode.0')) {
+                            $result = $this->testAllConditionAreTrue($conditions, $cart);
+                        } else if ($test_mode == config('pricerules.test_mode.1')) {
+                            $result = $this->testAllConditionAreFalse($conditions, $cart);
+                        } else if ($test_mode == config('pricerules.test_mode.2')) {
+                            $result = $this->testAnyConditionIsTrue($conditions, $cart);
+                        } else if ($test_mode == config('pricerules.test_mode.3')) {
+                            $result = $this->testAbyConditionIsFalse($conditions, $cart);
+                        }
+                    }
+                } else {
+                    if ($rule->starts_from != null && $rule->ends_till != null) {
+                        if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
+                        } else {
+                            $result = 0;
+                        }
                     }
                 }
 
@@ -344,32 +364,31 @@ class Discount
                     $newBaseSubTotal = 0;
                     $newQuantity = 0;
 
-                    if ($cart->items_qty >= $disc_threshold) {
+                    if ($cart->items_qty >= $disc_threshold && $disc_quantity > 0) {
+                        if ($disc_quantity > 1) {
+                            $disc_amount = $disc_amount * $disc_quantity;
+                        }
                         // add the time conditions if rule is expired and active then make it in active
                         $leastWorthItem = \Cart::leastWorthItem();
                         $realQty = $leastWorthItem['quantity'];
 
                         if ($action_type == config('pricerules.cart.validation.0')) {
-                            if ($realQty >= $disc_quantity) {
-                                $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * ($disc_quantity * $disc_amount)) / 100;
-                            } else {
-                                $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * $disc_amount) / 100;
-                            }
+                            $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * $disc_amount) / 100;
                         } else if ($action_type == config('pricerules.cart.validation.1')) {
-                            $newBaseSubTotal = $leastWorthItem['base_total'] - $disc_amount;
-                        } else if ($action_type == config('pricerules.cart.validation.2')) {
-                            if ($realQty >= $disc_quantity) {
-                                $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + ($disc_quantity * $disc_amount);
+                            if ($disc_amount > ($disc_quantity * $leastWorthItem['base_total'])) {
+                                $newBaseSubTotal = 0;
                             } else {
-                                $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
+                                $newBaseSubTotal = $cart->grand_total - $disc_amount;
                             }
+                        } else if ($action_type == config('pricerules.cart.validation.2')) {
+                            $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
                         } else if ($action_type == config('pricerules.cart.validation.3')) {
                             $newBaseSubTotal = $disc_amount;
                         }
 
                         //standard returns
                         if ($action_type == config('pricerules.cart.validation.2')) {
-                            array_push($maxImpact, [
+                            array_push($maxImpacts, [
                                 'id' => $rule->id,
                                 'item_id' => $leastWorthItem['id'],
                                 'amount_given' => false,
@@ -377,7 +396,7 @@ class Discount
                                 'action_type' => $action_type
                             ]);
                         } else {
-                            array_push($maxImpact, [
+                            array_push($maxImpacts, [
                                 'id' => $rule->id,
                                 'item_id' => $leastWorthItem['id'],
                                 'amount_given' => true,
@@ -390,9 +409,29 @@ class Discount
             }
         }
 
-        dd($maxImpact);
+        $leastItemAvg = 999999999999;
+        $leastId = 0;
+        foreach($maxImpacts as $maxImpact) {
+            $minItemPrice = array();
 
-        return $result;
+            if ($maxImpact['action_type'] == config('pricerules.cart.validation.2')) {
+                $amount = $cart->base_grand_total / $maxImpact['amount'];
+
+                if ($amount < $leastItemAvg) {
+                    $leastItemAvg = $amount;
+                    $leastId = $maxImpact['id'];
+                }
+            } else {
+                $amount = $maxImpact['amount'] / $cart->items_qty;
+
+                if ($amount < $leastItemAvg) {
+                    $leastItemAvg = $amount;
+                    $leastId = $maxImpact['id'];
+                }
+            }
+        }
+
+        return $leastId;
     }
 
     public function ruleCheck($code)
