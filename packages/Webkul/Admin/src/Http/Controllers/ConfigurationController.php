@@ -134,7 +134,7 @@ class ConfigurationController extends Controller
      */
     public function store()
     {
-        Event::fire('core.configuration.save.after');
+        Event::fire('core.configuration.save.before');
 
         $this->coreConfig->create(request()->all());
 
