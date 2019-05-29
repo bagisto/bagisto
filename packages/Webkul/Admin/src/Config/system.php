@@ -125,5 +125,21 @@ return [
                 'locale_based' => true
             ]
         ]
+    ], [
+        'key' => 'general.design',
+        'name' => 'admin::app.admin.system.design',
+        'sort' => 3,
+    ], [
+        'key' => 'general.design.admin_logo',
+        'name' => 'admin::app.admin.system.admin-logo',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'logo_image',
+                'title' => 'admin::app.admin.system.logo-image',
+                'type' => 'image',
+                'channel_based' => true,
+            ]
+        ]
     ],
 ];

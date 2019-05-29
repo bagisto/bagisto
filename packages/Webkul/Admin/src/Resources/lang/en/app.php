@@ -876,7 +876,10 @@ return [
             'content' => 'Content',
             'footer-content' => 'Footer Text',
             'locale-options' => 'Locale Options',
-            'weight-unit' => 'Weight Unit'
+            'weight-unit' => 'Weight Unit',
+            'design' => 'Design',
+            'admin-logo' => 'Admin Logo',
+            'logo-image' => 'Logo Image'
         ]
     ]
 ];
