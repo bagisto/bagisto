@@ -443,8 +443,6 @@ input {
             max-width: 280px;
             margin-bottom: 10px;
             background: $background-color;
-            min-height: 300px;
-            min-width: 250px;
 
             img {
                 display: block;
@@ -1629,6 +1627,7 @@ section.slider-block {
                 .page-info {
                     border-bottom: 1px solid $border-color;
                     line-height: 15px;
+                    margin-top: 10px;
 
                     span {
                         display: inline;
@@ -2315,7 +2314,7 @@ section.cart {
                 width: 100%;
                 padding-left: 0px;
                 position: relative;
-                top: -40px;
+                top: -20px;
             }
         }
     }
@@ -2327,14 +2326,17 @@ section.cart {
             .left-side {
                 .cart-item-list {
                     .item {
-                        .item-image {
-                            height: 120px;
-                            width: 120px;
-                        }
-                        .item-details .misc {
-                            display: flex;
-                            flex-wrap: wrap;
-                            line-height: 40px;
+                        display: flex;
+                        flex-direction: column;
+
+                        .item-details {
+                            margin-top: 10px;
+
+                            .misc {
+                                display: flex;
+                                flex-wrap: wrap;
+                                line-height: 40px;
+                            }
                         }
                     }
                 }
@@ -2367,28 +2369,12 @@ section.cart {
             }
 
             .right-side {
-                top: -120px;
+                top: -100px;
             }
         }
     }
 }
 
-@media only screen and (max-width: 400px) {
-    section.cart {
-        .cart-content {
-            .left-side {
-                .cart-item-list {
-                    .item {
-                        .item-image {
-                            height: 85px;
-                            width: 85px;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 //cart pages responsive css end
 .checkout-method-group {
     .line-one {
