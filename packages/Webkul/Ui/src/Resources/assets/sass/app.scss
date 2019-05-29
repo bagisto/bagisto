@@ -188,6 +188,13 @@ h5 {
     display: none !important;
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .btn {
     @include box-shadow(
         0 1px 4px 0 rgba(0, 0, 0, 0.2),

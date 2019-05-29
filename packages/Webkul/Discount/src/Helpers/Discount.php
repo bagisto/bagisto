@@ -78,8 +78,9 @@ class Discount
                 if ($channel->channel_id == $currentChannel->id) {
                     if (auth()->guard('customer')->check()) {
                         foreach ($rule->customer_groups as $customerGroup) {
-                            if (auth()->guard('customer')->user()->customer_group_id == $customerGroup->customer_group_id)
+                            if (auth()->guard('customer')->user()->customer_group_id == $customerGroup->customer_group_id) {
                                 array_push($suitableRules, $rule);
+                            }
                         }
                     }
                 }
@@ -100,8 +101,9 @@ class Discount
                 if ($channel->channel_id == $currentChannel->id) {
                     if (auth()->guard('customer')->check()) {
                         foreach ($rule->customer_groups as $customerGroup) {
-                            if (auth()->guard('customer')->user()->customer_group_id == $customerGroup->customer_group_id)
+                            if (auth()->guard('customer')->user()->customer_group_id == $customerGroup->customer_group_id) {
                                 array_push($suitableRules, $rule);
+                            }
                         }
                     }
                 }
@@ -272,14 +274,6 @@ class Discount
         }
     }
 
-    // works automatically on the basis of no conditions
-    public function checkNonCouponConditions()
-    {
-        $rules = $this->applyNonCouponAble();
-
-        return $rules;
-    }
-
     public function ruleCheck($code)
     {
         $rules = $this->applyCouponAble();
@@ -306,33 +300,14 @@ class Discount
         $cart = \Cart::getCart();
 
         //all of conditions is/are true
-        $result = null;
-        if ($appliedRule->conditions) {
+        $result = 1;
+        if ($appliedRule->conditions && $appliedRule->conditions != "null") {
             $conditions = json_decode(json_decode($appliedRule->conditions));
-
-            $shipping_address = $cart->getShippingAddressAttribute();
-
-            $shipping_method = $cart->shipping_method;
-            $shipping_country = $shipping_address->country;
-            $shipping_state = $shipping_address->state;
-            $shipping_postcode = $shipping_address->postcode;
-            $shipping_city = $shipping_address->city;
-
-            $payment_method = $cart->payment->method;
-            $sub_total = $cart->base_sub_total;
-
-            $total_items = $cart->items_qty;
-            $total_weight = 0;
-
-            foreach($cart->items as $item) {
-                $total_weight = $total_weight + $item->base_total_weight;
-            }
-
             $test_mode = config('pricerules.test_mode.0');
-            $test_conditions = config('pricerules.cart.conditions');
-
+            // dd($conditions);
             if ($test_mode == config('pricerules.test_mode.0')) {
                 $result = $this->testAllConditionAreTrue($conditions, $cart);
+                // dd($result);
             } else if ($test_mode == config('pricerules.test_mode.1')) {
                 $result = $this->testAllConditionAreFalse($conditions, $cart);
             } else if ($test_mode == config('pricerules.test_mode.2')) {
@@ -358,7 +333,7 @@ class Discount
                 $leastWorthItem = \Cart::leastWorthItem();
 
                 if ($action_type == config('pricerules.cart.validation.0')) {
-                    $newBaseSubTotal = ($leastWorthItem['base_total'] * $disc_amount) / 100;
+                    $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * $disc_amount) / 100;
                 } else if ($action_type == config('pricerules.cart.validation.1')) {
                     $newBaseSubTotal = $leastWorthItem['base_total'] - $disc_amount;
                 } else if ($action_type == config('pricerules.cart.validation.2')) {
@@ -372,14 +347,16 @@ class Discount
                         'message' => trans('admin::app.promotion.status.coupon-applied'),
                         'action' => $action_type,
                         'amount_given' => false,
-                        'amount' => $newQuantity
+                        'amount_payable' => $newQuantity,
+                        'amount' => null
                     ]);
                 } else {
                     return response()->json([
                         'message' => trans('admin::app.promotion.status.coupon-applied'),
                         'action' => $action_type,
                         'amount_given' => true,
-                        'amount' => core()->currency($newBaseSubTotal)
+                        'amount_payable' => core()->currency($newBaseSubTotal),
+                        'amount' => core()->currency($cart->grand_total - $newBaseSubTotal)
                     ]);
                 }
             } else {
@@ -489,11 +466,10 @@ class Discount
                 // }
                 // }
         }
-
         return $result;
     }
 
-    protected function testAllConditionAreFalse($condition, $cart) {
+    protected function testAllConditionAreFalse($conditions, $cart) {
         $shipping_address = $cart->getShippingAddressAttribute();
 
         $shipping_method = $cart->shipping_method;
@@ -514,8 +490,8 @@ class Discount
 
         $test_mode = config('pricerules.test_mode.0');
         $test_conditions = config('pricerules.cart.conditions');
-        $result = 1;
 
+        $result = 1;
         foreach ($conditions as $condition) {
             $actual_value = ${$condition->attribute};
             $test_value = $condition->value;
@@ -584,7 +560,7 @@ class Discount
         return $result;
     }
 
-    protected function testAnyConditionIsTrue($condition, $cart) {
+    protected function testAnyConditionIsTrue($conditions, $cart) {
         $shipping_address = $cart->getShippingAddressAttribute();
 
         $shipping_method = $cart->shipping_method;
@@ -654,7 +630,7 @@ class Discount
         return $result;
     }
 
-    protected function testAnyConditionIsFalse($condition, $cart) {
+    protected function testAnyConditionIsFalse($conditions, $cart) {
         $shipping_address = $cart->getShippingAddressAttribute();
 
         $shipping_method = $cart->shipping_method;

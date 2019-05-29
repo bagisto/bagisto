@@ -15,7 +15,7 @@ use Webkul\Sales\Repositories\OrderRepository;
 /**
  * Chekout controller for the customer and guest for placing order
  *
- * @author    Jitendra Singh <jitendra@webkul.com>
+ * @author  Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class OnepageController extends Controller
@@ -113,6 +113,10 @@ class OnepageController extends Controller
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         $cart = Cart::getCart();
+
+        $rules = Cart::applyNonCoupon($cart);
+
+        dd($rules);
 
         return response()->json([
                 'jump_to_section' => 'review',

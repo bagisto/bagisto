@@ -47,17 +47,18 @@
                 </form>
 
                 <div class="discounted" v-if="discounted">
-                    <div class="mt-10 mb-10">
+                    <div class="mt-15 mb-10">
                         <b>Coupon used</b>
                     </div>
 
-                    <span class="mt-10 mb-10" style="display: block; margin-bottom: 5px; width: 100%">
+                    <span class="row mb-10">
                         <label style="float: left;">@{{ code }}</label>
-                        <label style="float: right;">@{{ discount.amount }}</label>
+                        <label style="float: right;">@{{ discount.amount_given }}</label>
                     </span>
 
                     <span class="horizontal-rule"></span>
-                    <span class="mt-10 mb-10" style="display: block; margin-bottom: 5px; width: 100%">
+
+                    <span class="row mt-10">
                         <label style="float: left;">Amount Payable</label>
                         <label style="float: right;">@{{ discount.amount }}</label>
                     </span>

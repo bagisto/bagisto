@@ -1240,6 +1240,13 @@ class Cart {
         return $result;
     }
 
+    public function applyNonCoupon()
+    {
+        $result = $this->discount->applyNonCouponAble();
+
+        return $result;
+    }
+
     public function leastWorthItem()
     {
         $cart = $this->getCart();
@@ -1247,8 +1254,8 @@ class Cart {
         $leastSubTotal = [];
 
         foreach ($cart->items as $item) {
-            if ($item->base_total < $leastValue) {
-                $leastValue = $item->total;
+            if ($item->price < $leastValue) {
+                $leastValue = $item->price;
                 $leastSubTotal = [
                     'id' => $item->id,
                     'base_total' => $leastValue
