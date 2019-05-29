@@ -3,6 +3,7 @@
 namespace Webkul\Discount\Helpers;
 
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
+use Carbon\Carbon;
 
 class Discount
 {
@@ -11,9 +12,15 @@ class Discount
      */
     protected $cartRule;
 
+    /**
+     * To hold if end rules are present or not.
+     */
+    protected $endRuleActive;
+
     public function __construct(CartRule $cartRule)
     {
         $this->cartRule = $cartRule;
+        $this->endRuleActive = false;
     }
 
     public function getGuestEndRules()
@@ -136,6 +143,8 @@ class Discount
             $endRules = $this->getEndRules();
 
             if (isset($endRules) && count($endRules)) {
+                $this->endRuleActive = true;
+
                 return [
                     'end_rule' => true,
                     'rule' => $endRules,
@@ -154,6 +163,8 @@ class Discount
             $endRules = $this->getGuestEndRules();
 
             if (isset($endRules) && count($endRules)) {
+                $this->endRuleActive = true;
+
                 return [
                     'end_rule' => true,
                     'rule' => $endRules,
@@ -253,12 +264,12 @@ class Discount
             $id = array();
 
             foreach ($rules as $rule) {
-                if ($rule->use_coupon) {
+                if (! $rule->use_coupon) {
                     array_push($id, $rule);
                 }
             }
 
-            if (!$rule->use_coupon) {
+            if (count($id)) {
                 return [
                     'end_rule' => true,
                     'noncouponable' => true,
@@ -272,6 +283,116 @@ class Discount
                 ];
             }
         }
+    }
+
+    public function nonCouponCheck()
+    {
+        $result = $this->applyNonCouponAble();
+        $cart = \Cart::getCart();
+
+        if ($result['end_rule']) {
+            $this->endRuleActive = true;
+        } else {
+            $this->endRuleActive = false;
+        }
+
+        $maxImpact = array();
+
+        if (isset($result['id']) && count($result['id'])) {
+            $rules = array();
+
+            if (count($result['id']) > 1) {
+                $leastPriority = 999999999999;
+
+                foreach($result['id'] as $rule) {
+                    if ($rule->priority < $leastPriority) {
+                        array_push($rules, $rule);
+                    }
+                }
+            }
+
+            foreach ($rules as $rule) {
+                // All of conditions is/are true
+                $result = 1;
+                if ($rule->conditions && $rule->conditions != "null") {
+                    if ($rule->starts_from != null && $rule->ends_till != null) {
+                        if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
+                            $conditions = json_decode(json_decode($rule->conditions));
+                            $test_mode = config('pricerules.test_mode.0');
+
+                            if ($test_mode == config('pricerules.test_mode.0')) {
+                                $result = $this->testAllConditionAreTrue($conditions, $cart);
+                            } else if ($test_mode == config('pricerules.test_mode.1')) {
+                                $result = $this->testAllConditionAreFalse($conditions, $cart);
+                            } else if ($test_mode == config('pricerules.test_mode.2')) {
+                                $result = $this->testAnyConditionIsTrue($conditions, $cart);
+                            } else if ($test_mode == config('pricerules.test_mode.3')) {
+                                $result = $this->testAbyConditionIsFalse($conditions, $cart);
+                            }
+                        }
+                    }
+                }
+
+                // check all the conditions associated with the rule
+                if ($result) {
+                    // if (isset($appliedRule) && $appliedRule->starts_from == null) {
+                    $action_type = $rule->action_type;
+                    $disc_threshold = $rule->disc_threshold;
+                    $disc_amount = $rule->disc_amount;
+                    $disc_quantity = $rule->disc_quantity;
+
+                    $newBaseSubTotal = 0;
+                    $newQuantity = 0;
+
+                    if ($cart->items_qty >= $disc_threshold) {
+                        // add the time conditions if rule is expired and active then make it in active
+                        $leastWorthItem = \Cart::leastWorthItem();
+                        $realQty = $leastWorthItem['quantity'];
+
+                        if ($action_type == config('pricerules.cart.validation.0')) {
+                            if ($realQty >= $disc_quantity) {
+                                $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * ($disc_quantity * $disc_amount)) / 100;
+                            } else {
+                                $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * $disc_amount) / 100;
+                            }
+                        } else if ($action_type == config('pricerules.cart.validation.1')) {
+                            $newBaseSubTotal = $leastWorthItem['base_total'] - $disc_amount;
+                        } else if ($action_type == config('pricerules.cart.validation.2')) {
+                            if ($realQty >= $disc_quantity) {
+                                $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + ($disc_quantity * $disc_amount);
+                            } else {
+                                $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
+                            }
+                        } else if ($action_type == config('pricerules.cart.validation.3')) {
+                            $newBaseSubTotal = $disc_amount;
+                        }
+
+                        //standard returns
+                        if ($action_type == config('pricerules.cart.validation.2')) {
+                            array_push($maxImpact, [
+                                'id' => $rule->id,
+                                'item_id' => $leastWorthItem['id'],
+                                'amount_given' => false,
+                                'amount' => $newQuantity,
+                                'action_type' => $action_type
+                            ]);
+                        } else {
+                            array_push($maxImpact, [
+                                'id' => $rule->id,
+                                'item_id' => $leastWorthItem['id'],
+                                'amount_given' => true,
+                                'amount' => $newBaseSubTotal,
+                                'action_type' => $action_type
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+
+        dd($maxImpact);
+
+        return $result;
     }
 
     public function ruleCheck($code)

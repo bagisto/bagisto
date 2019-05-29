@@ -1242,7 +1242,7 @@ class Cart {
 
     public function applyNonCoupon()
     {
-        $result = $this->discount->applyNonCouponAble();
+        $result = $this->discount->nonCouponCheck();
 
         return $result;
     }
@@ -1258,7 +1258,8 @@ class Cart {
                 $leastValue = $item->price;
                 $leastSubTotal = [
                     'id' => $item->id,
-                    'base_total' => $leastValue
+                    'base_total' => $leastValue,
+                    'quantity' => $item->quantity
                 ];
             }
         }
@@ -1277,7 +1278,8 @@ class Cart {
                 $maxValue = $item->total;
                 $maxSubTotal = [
                     'id' => $item->id,
-                    'base_total' => $maxValue
+                    'base_total' => $maxValue,
+                    'quantity' => $item->quantity
                 ];
             }
         }
