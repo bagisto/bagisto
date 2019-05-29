@@ -21,6 +21,22 @@ return [
             ]
         ]
     ], [
+        'key' => 'catalog.inventory',
+        'name' => 'admin::app.admin.system.inventory',
+        'sort' => 1,
+    ], [
+        'key' => 'catalog.inventory.stock_options',
+        'name' => 'admin::app.admin.system.stock-options',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'backorders',
+                'title' => 'admin::app.admin.system.allow-backorders',
+                'type' => 'boolean',
+                'channel_based' => true
+            ]
+        ]
+    ], [
         'key' => 'customer',
         'name' => 'admin::app.admin.system.customer',
         'sort' => 3,
@@ -107,6 +123,22 @@ return [
                 'type' => 'text',
                 'channel_based' => true,
                 'locale_based' => true
+            ]
+        ]
+    ], [
+        'key' => 'general.design',
+        'name' => 'admin::app.admin.system.design',
+        'sort' => 3,
+    ], [
+        'key' => 'general.design.admin_logo',
+        'name' => 'admin::app.admin.system.admin-logo',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'logo_image',
+                'title' => 'admin::app.admin.system.logo-image',
+                'type' => 'image',
+                'channel_based' => true,
             ]
         ]
     ],

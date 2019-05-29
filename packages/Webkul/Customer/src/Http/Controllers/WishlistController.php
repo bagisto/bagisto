@@ -79,7 +79,7 @@ class WishlistController extends Controller
         //accidental case if some one adds id of the product in the anchor tag amd gives id of a variant.
         if ($product->parent_id != null) {
             $product = $this->product->findOneByField('id', $product->parent_id);
-            $data['product_id'] = $product->parent_id;
+            $data['product_id'] = $product->id;
         }
 
         if ($checked->isEmpty()) {

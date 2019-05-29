@@ -40,7 +40,9 @@ return [
                         'value' => false
                     ]
                 ],
-                'validation' => 'required'
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => true
             ]
         ]
     ], [
@@ -94,7 +96,9 @@ return [
                         'value' => false
                     ]
                 ],
-                'validation' => 'required'
+                'validation' => 'required',
+                'channel_based' => false,
+                'locale_based' => true
             ]
         ]
     ], [

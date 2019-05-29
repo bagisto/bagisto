@@ -18,7 +18,10 @@ window.addEventListener('DOMContentLoaded', function() {
     scroll = 0;
 
     listLastElement = $('.menubar li:last-child').offset();
-    lastElementOfNavBar = listLastElement.top;
+
+    if (listLastElement) {
+        lastElementOfNavBar = listLastElement.top;
+    }
 
     navbarTop = $('.navbar-left').css("top");
     menuTopValue = $('.navbar-left').css('top');

@@ -441,7 +441,9 @@ return [
             'color-swatch' => 'Color Swatch',
             'image-swatch' => 'Image Swatch',
             'text-swatch' => 'Text Swatch',
-            'swatch' => 'Swatch'
+            'swatch' => 'Swatch',
+            'image' => 'Image',
+            'file' => 'File'
         ],
         'families' => [
             'title' => 'Families',
@@ -929,6 +931,9 @@ return [
             'products' => 'Products',
             'review' => 'Review',
             'allow-guest-review' => 'Allow Guest Review',
+            'inventory' => 'Inventory',
+            'stock-options' => 'Stock Options',
+            'allow-backorders' => 'Allow Backorders',
             'customer' => 'Customer',
             'settings' => 'Settings',
             'address' => 'Address',
@@ -965,7 +970,10 @@ return [
             'content' => 'Content',
             'footer-content' => 'Footer Text',
             'locale-options' => 'Locale Options',
-            'weight-unit' => 'Weight Unit'
+            'weight-unit' => 'Weight Unit',
+            'design' => 'Design',
+            'admin-logo' => 'Admin Logo',
+            'logo-image' => 'Logo Image'
         ]
     ]
 ];

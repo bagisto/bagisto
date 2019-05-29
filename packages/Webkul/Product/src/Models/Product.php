@@ -195,7 +195,7 @@ class Product extends Model implements ProductContract
             $total -= $orderedInventory->qty;
         }
 
-        return $qty <= $total ? true : false;
+        return $qty <= $total ? true : (core()->getConfigData('catalog.inventory.stock_options.backorders') ? true : false);
     }
 
     /**
