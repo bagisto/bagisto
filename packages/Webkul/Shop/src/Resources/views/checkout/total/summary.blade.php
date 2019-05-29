@@ -34,35 +34,60 @@
             @inject('cart_rule', 'Webkul\Discount\Helpers\Discount')
 
             @if (! request()->is('checkout/cart'))
-                <form class="coupon-form" method="post" @submit.prevent="onSubmit" v-if="discounted == false">
-                    <div class="control-group mt-20">
-                        <input v-model="code" type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-on:change="codeChange" style="width: 100%">
+                @if (isset($rule['rule']) && ! $rule['rule']->end_other_rules)
+                    <form class="coupon-form" method="post" @submit.prevent="onSubmit" v-if="discounted == false">
+                        <div class="control-group mt-20">
+                            <input v-model="code" type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-on:change="codeChange" style="width: 100%">
 
-                        <span class="coupon-message mt-5" style="display: block; color: #ff5656; margin-bottom: 5px;" v-if="message != 'Success' && message != 'success'">@{{ message }}</span>
+                            <span class="coupon-message mt-5" style="display: block; color: #ff5656; margin-bottom: 5px;" v-if="message != 'Success' && message != 'success'">@{{ message }}</span>
 
-                        <span class="coupon-message mt-5" style="display: block; margin-bottom: 5px;" v-if="message == 'Success' || message == 'success'">@{{ message }}</span>
+                            <span class="coupon-message mt-5" style="display: block; margin-bottom: 5px;" v-if="message == 'Success' || message == 'success'">@{{ message }}</span>
 
-                        <button class="btn btn-lg btn-black">Apply Coupon</button>
+                            <button class="btn btn-lg btn-black">Apply Coupon</button>
+                        </div>
+                    </form>
+                @endif
+
+                @if($rule)
+                    <div class="discounted" v-if="! discounted">
+                        <div class="mt-15 mb-10">
+                            {{ $rule['rule']->name }} applied
+                        </div>
+
+                        <span class="horizontal-rule"></span>
+
+                        <span class="row mt-10">
+                            @if ($rule['amount_given'])
+                                <label style="float: left;">Amount Payable</label>
+
+                                <label style="float: right;">{{ core()->currency($cart->tax_total + $rule['amount']) }}</label>
+                            @else
+                                <label style="float: left;">Got</label>
+                                <label style="float: right;">{{ $rule['amount'] }} Free</label>
+                            @endif
+                        </span>
                     </div>
-                </form>
+                @endif
 
-                <div class="discounted" v-if="discounted">
-                    <div class="mt-15 mb-10">
-                        <b>Coupon used</b>
+                @if (! $rule['rule']->end_other_rules)
+                    <div class="discounted" v-if="discounted">
+                        <div class="mt-15 mb-10">
+                            <b>Coupon used</b>
+                        </div>
+
+                        <span class="row mb-10">
+                            <label style="float: left;">@{{ code }}</label>
+                            <label style="float: right;">@{{ discount.amount_given }}</label>
+                        </span>
+
+                        <span class="horizontal-rule"></span>
+
+                        <span class="row mt-10">
+                            <label style="float: left;">Amount Payable</label>
+                            <label style="float: right;">@{{ discount.amount }}</label>
+                        </span>
                     </div>
-
-                    <span class="row mb-10">
-                        <label style="float: left;">@{{ code }}</label>
-                        <label style="float: right;">@{{ discount.amount_given }}</label>
-                    </span>
-
-                    <span class="horizontal-rule"></span>
-
-                    <span class="row mt-10">
-                        <label style="float: left;">Amount Payable</label>
-                        <label style="float: right;">@{{ discount.amount }}</label>
-                    </span>
-                </div>
+                @endif
             @endif
         </div>
     </div>

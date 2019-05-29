@@ -167,7 +167,5 @@
         <div class="pull-right" style="width: 40%; float: left;">
             @include('shop::checkout.total.summary', ['cart' => $cart])
         </div>
-
     </div>
-
 </div>

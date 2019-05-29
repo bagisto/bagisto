@@ -415,6 +415,7 @@ class Discount
                         if ($action_type == config('pricerules.cart.validation.2')) {
                             array_push($maxImpacts, [
                                 'id' => $rule->id,
+                                'rule' => $rule,
                                 'item_id' => $leastWorthItem['id'],
                                 'amount_given' => false,
                                 'amount' => $newQuantity,
@@ -423,6 +424,7 @@ class Discount
                         } else {
                             array_push($maxImpacts, [
                                 'id' => $rule->id,
+                                'rule' => $rule,
                                 'item_id' => $leastWorthItem['id'],
                                 'amount_given' => true,
                                 'amount' => $newBaseSubTotal,
@@ -435,8 +437,8 @@ class Discount
         }
 
         $leastItemAvg = 999999999999;
-        $leastId = 0;
-        foreach($maxImpacts as $maxImpact) {
+        $leastId = -1;
+        foreach ($maxImpacts as $key => $maxImpact) {
             $minItemPrice = array();
 
             if ($maxImpact['action_type'] == config('pricerules.cart.validation.2')) {
@@ -444,20 +446,21 @@ class Discount
 
                 if ($amount < $leastItemAvg) {
                     $leastItemAvg = $amount;
-                    $leastId = $maxImpact['id'];
+                    $leastId = $key;
                 }
             } else {
                 $amount = $maxImpact['amount'] / $cart->items_qty;
 
                 if ($amount < $leastItemAvg) {
                     $leastItemAvg = $amount;
-                    $leastId = $maxImpact['id'];
+                    $leastId = $key;
                 }
             }
         }
 
-        if ($leastId != 0)
-            return $this->cartRule->find($leastId);
+        if ($leastId != -1) {
+            return $maxImpacts[$leastId];
+        }
     }
 
     public function ruleCheck($code)

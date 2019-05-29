@@ -114,13 +114,12 @@ class OnepageController extends Controller
 
         $cart = Cart::getCart();
 
-        $rules = Cart::applyNonCoupon();
-        dd($rules);
+        $rule = Cart::applyNonCoupon();
 
         return response()->json([
-                'jump_to_section' => 'review',
-                'html' => view('shop::checkout.onepage.review', compact('cart'))->render()
-            ]);
+            'jump_to_section' => 'review',
+            'html' => view('shop::checkout.onepage.review', compact('cart', 'rule'))->render()
+        ]);
     }
 
     /**
@@ -141,9 +140,9 @@ class OnepageController extends Controller
 
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return response()->json([
-                    'success' => true,
-                    'redirect_url' => $redirectUrl
-                ]);
+                'success' => true,
+                'redirect_url' => $redirectUrl
+            ]);
         }
 
         $order = $this->orderRepository->create(Cart::prepareDataForOrder());
@@ -153,8 +152,8 @@ class OnepageController extends Controller
         session()->flash('order', $order);
 
         return response()->json([
-                'success' => true,
-            ]);
+            'success' => true,
+        ]);
     }
 
     /**
