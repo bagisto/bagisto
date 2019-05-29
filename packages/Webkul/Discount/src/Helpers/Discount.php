@@ -355,7 +355,6 @@ class Discount
 
                 // check all the conditions associated with the rule
                 if ($result) {
-                    // if (isset($appliedRule) && $appliedRule->starts_from == null) {
                     $action_type = $rule->action_type;
                     $disc_threshold = $rule->disc_threshold;
                     $disc_amount = $rule->disc_amount;
@@ -431,7 +430,8 @@ class Discount
             }
         }
 
-        return $leastId;
+        if ($leastId != 0)
+            return $this->cartRule->find($leastId);
     }
 
     public function ruleCheck($code)
@@ -459,47 +459,77 @@ class Discount
 
         $cart = \Cart::getCart();
 
-        //all of conditions is/are true
+        // All of conditions is/are true
         $result = 1;
         if ($appliedRule->conditions && $appliedRule->conditions != "null") {
-            $conditions = json_decode(json_decode($appliedRule->conditions));
-            $test_mode = config('pricerules.test_mode.0');
-            // dd($conditions);
-            if ($test_mode == config('pricerules.test_mode.0')) {
-                $result = $this->testAllConditionAreTrue($conditions, $cart);
-                // dd($result);
-            } else if ($test_mode == config('pricerules.test_mode.1')) {
-                $result = $this->testAllConditionAreFalse($conditions, $cart);
-            } else if ($test_mode == config('pricerules.test_mode.2')) {
-                $result = $this->testAnyConditionIsTrue($conditions, $cart);
-            } else if ($test_mode == config('pricerules.test_mode.3')) {
-                $result = $this->testAbyConditionIsFalse($conditions, $cart);
+            if ($appliedRule->starts_from != null && $appliedRule->ends_till != null) {
+                if (Carbon::parse($appliedRule->starts_from) < now() && now() < Carbon::parse($appliedRule->ends_till)) {
+                    $conditions = json_decode(json_decode($appliedRule->conditions));
+                    $test_mode = config('pricerules.test_mode.0');
+
+                    if ($test_mode == config('pricerules.test_mode.0')) {
+                        $result = $this->testAllConditionAreTrue($conditions, $cart);
+                    } else if ($test_mode == config('pricerules.test_mode.1')) {
+                        $result = $this->testAllConditionAreFalse($conditions, $cart);
+                    } else if ($test_mode == config('pricerules.test_mode.2')) {
+                        $result = $this->testAnyConditionIsTrue($conditions, $cart);
+                    } else if ($test_mode == config('pricerules.test_mode.3')) {
+                        $result = $this->testAbyConditionIsFalse($conditions, $cart);
+                    }
+                }
+            } else {
+                $conditions = json_decode(json_decode($rule->conditions));
+                $test_mode = config('pricerules.test_mode.0');
+
+                if ($test_mode == config('pricerules.test_mode.0')) {
+                    $result = $this->testAllConditionAreTrue($conditions, $cart);
+                } else if ($test_mode == config('pricerules.test_mode.1')) {
+                    $result = $this->testAllConditionAreFalse($conditions, $cart);
+                } else if ($test_mode == config('pricerules.test_mode.2')) {
+                    $result = $this->testAnyConditionIsTrue($conditions, $cart);
+                } else if ($test_mode == config('pricerules.test_mode.3')) {
+                    $result = $this->testAbyConditionIsFalse($conditions, $cart);
+                }
+            }
+        } else {
+            if ($appliedRule->starts_from != null && $appliedRule->ends_till != null) {
+                if (Carbon::parse($appliedRule->starts_from) < now() && now() < Carbon::parse($appliedRule->ends_till)) {
+                } else {
+                    $result = 0;
+                }
             }
         }
 
         // check all the conditions associated with the rule
         if ($result) {
-            // if (isset($appliedRule) && $appliedRule->starts_from == null) {
-            $action_type = $appliedRule->action_type;
-            $disc_threshold = $appliedRule->disc_threshold;
-            $disc_amount = $appliedRule->disc_amount;
-            $disc_quantity = $appliedRule->disc_quantity;
+            $action_type = $rule->action_type;
+            $disc_threshold = $rule->disc_threshold;
+            $disc_amount = $rule->disc_amount;
+            $disc_quantity = $rule->disc_quantity;
 
             $newBaseSubTotal = 0;
             $newQuantity = 0;
 
-            if ($cart->items_qty >= $disc_threshold) {
+            if ($cart->items_qty >= $disc_threshold && $disc_quantity > 0) {
+                if ($disc_quantity > 1) {
+                    $disc_amount = $disc_amount * $disc_quantity;
+                }
                 // add the time conditions if rule is expired and active then make it in active
                 $leastWorthItem = \Cart::leastWorthItem();
+                $realQty = $leastWorthItem['quantity'];
 
                 if ($action_type == config('pricerules.cart.validation.0')) {
                     $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * $disc_amount) / 100;
                 } else if ($action_type == config('pricerules.cart.validation.1')) {
-                    $newBaseSubTotal = $leastWorthItem['base_total'] - $disc_amount;
+                    if ($disc_amount > ($disc_quantity * $leastWorthItem['base_total'])) {
+                        $newBaseSubTotal = 0;
+                    } else {
+                        $newBaseSubTotal = $cart->grand_total - $disc_amount;
+                    }
                 } else if ($action_type == config('pricerules.cart.validation.2')) {
                     $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
                 } else if ($action_type == config('pricerules.cart.validation.3')) {
-                    $base_total = $disc_amount;
+                    $newBaseSubTotal = $disc_amount;
                 }
 
                 if ($action_type == config('pricerules.cart.validation.2')) {
