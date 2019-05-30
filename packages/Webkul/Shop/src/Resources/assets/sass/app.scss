@@ -3198,6 +3198,7 @@ section.review {
         .account-layout {
             margin-left: 0%;
             margin-top: 20px;
+            width: 100%;
 
             .account-head  {
                 display: flex;
@@ -3482,6 +3483,26 @@ section.review {
     z-index: -1 !important;
 }
 
+.filter-row-one .dropdown-filters {
+    position: relative !important;
+    right: 1px !important;
+}
+
+@media only screen and (max-width: 770px) {
+    .table {
+        .grid-container {
+            margin-top: 10px;
+
+            .filter-row-one {
+                display: block;
+
+                .dropdown-filters {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}
 /// rtl css start here
 .rtl {
     direction: rtl;
