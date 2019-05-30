@@ -103,7 +103,7 @@
 
             </div>
 
-            <div class="col-right" v-show="currentStep != 4">
+            <div class="col-right" v-if="resetSummary" v-show="currentStep != 4">
 
                 <summary-section></summary-section>
 
@@ -116,27 +116,7 @@
         var shippingHtml = '';
         var paymentHtml = '';
         var reviewHtml = '';
-        var summaryHtml = Vue.compile(
-            "<div class='order-summary'><h3>"
-                + '{{ __('shop::app.checkout.total.order-summary') }}'  +
-            "</h3><div class='item-detail'><label>"
-                +  '{{ intval($cart->items_qty) }}  {{ __('shop::app.checkout.total.sub-total') }}  {{ __('shop::app.checkout.total.price') }}' +
-            "</label><label class='right'>"
-                + '{{ core()->currency($cart->base_sub_total) }}' +
-            "</label></div><?php if($cart->base_tax_total): ?><div class='item-detail'><label>"
-                + '{{ __('shop::app.checkout.total.tax') }}' +
-            "</label><label class='right'>"
-                + '{{ core()->currency($cart->base_tax_total) }}' +
-            "</label></div><?php endif; ?><?php if($cart->selected_shipping_rate): ?><div class='item-detail'><label>"
-                + '{{ __('shop::app.checkout.total.delivery-charges') }}' +
-            "</label><label class='right'>"
-                + '{{ core()->currency($cart->selected_shipping_rate->base_price) }}' +
-            "</label></div><?php endif; ?><div class='payble-amount'><label>"
-                    + '{{ __('shop::app.checkout.total.grand-total') }}' +
-            "</label><label class='right'>"
-                + '{{ core()->currency($cart->base_grand_total) }}' +
-            "</label></div></div>"
-        );
+        var summaryHtml = '';
         var customerAddress = null;
 
         @auth('customer')
@@ -155,31 +135,44 @@
             data: function() {
                 return {
                     currentStep: 1,
+
                     completedStep: 0,
+
                     address: {
                         billing: {
                             address1: [''],
+
                             use_for_shipping: true,
                         },
+
                         shipping: {
                             address1: ['']
                         },
                     },
+
                     selected_shipping_method: '',
+
                     selected_payment_method: '',
+
                     disable_button: false,
+
                     new_shipping_address: false,
+
                     new_billing_address: false,
 
                     allAddress: {},
 
                     countryStates: @json(core()->groupedStatesByCountries()),
 
-                    country: @json(core()->countries())
+                    country: @json(core()->countries()),
+
+                    resetSummary: true
                 }
             },
 
             created: function() {
+                this.getOrderSummary();
+
                 if(! customerAddress) {
                     this.new_shipping_address = true;
                     this.new_billing_address = true;
@@ -234,6 +227,22 @@
                     });
                 },
 
+                getOrderSummary () {
+                    var this_this = this;
+
+                    this.$http.get("{{ route('shop.checkout.summary') }}")
+                        .then(function(response) {
+                            this_this.resetSummary = false;
+
+                            summaryHtml = Vue.compile(response.data.html)
+
+                            setTimeout(function() {
+                                this_this.resetSummary = true;
+                            }, 0);
+                        })
+                        .catch(function (error) {})
+                },
+
                 saveAddress: function() {
                     var this_this = this;
 
@@ -247,6 +256,8 @@
                                 shippingHtml = Vue.compile(response.data.html)
                                 this_this.completedStep = 1;
                                 this_this.currentStep = 2;
+
+                                this_this.getOrderSummary();
                             }
                         })
                         .catch(function (error) {
@@ -269,6 +280,8 @@
                                 paymentHtml = Vue.compile(response.data.html)
                                 this_this.completedStep = 2;
                                 this_this.currentStep = 3;
+
+                                this_this.getOrderSummary();
                             }
                         })
                         .catch(function (error) {
@@ -291,6 +304,8 @@
                                 reviewHtml = Vue.compile(response.data.html)
                                 this_this.completedStep = 3;
                                 this_this.currentStep = 4;
+
+                                this_this.getOrderSummary();
                             }
                         })
                         .catch(function (error) {
@@ -369,7 +384,7 @@
                 this.templateRender = summaryHtml.render;
 
                 for (var i in summaryHtml.staticRenderFns) {
-                    summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
+                    summaryTemplateRenderFns.unshift(summaryHtml.staticRenderFns[i]);
                 }
             },
 
