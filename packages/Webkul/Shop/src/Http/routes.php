@@ -65,6 +65,9 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'view' => 'shop::checkout.onepage'
     ])->name('shop.checkout.onepage.index');
 
+    //Checkout Save Order
+    Route::get('/checkout/summary', 'Webkul\Shop\Http\Controllers\OnepageController@summary')->name('shop.checkout.summary');
+
     //Checkout Save Address Form Store
     Route::post('/checkout/save-address', 'Webkul\Shop\Http\Controllers\OnepageController@saveAddress')->name('shop.checkout.save-address');
 
