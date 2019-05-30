@@ -35,7 +35,7 @@
 
             @if (! request()->is('checkout/cart'))
                 @if (isset($rule['rule']) && ! $rule['rule']->end_other_rules)
-                    <form class="coupon-form" method="post" @submit.prevent="onSubmit" v-if="discounted == false">
+                    <form class="coupon-form" method="post" @submit.prevent="onSubmit" v-if="!discounted">
                         <div class="control-group mt-20">
                             <input v-model="code" type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-on:change="codeChange" style="width: 100%">
 
@@ -43,27 +43,25 @@
 
                             <span class="coupon-message mt-5" style="display: block; margin-bottom: 5px;" v-if="message == 'Success' || message == 'success'">@{{ message }}</span>
 
-                            <button class="btn btn-lg btn-black">Apply Coupon</button>
+                            <button class="btn btn-lg btn-black">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
                         </div>
                     </form>
                 @endif
 
                 @if($rule)
-                    <div class="discounted" v-if="! discounted">
+                    <div class="discounted" v-if="!discounted">
                         <div class="mt-15 mb-10">
-                            {{ $rule['rule']->name }} applied
+                            {{ $rule['rule']->name }} {{ __('shop::app.checkout.onepage.applied') }}
                         </div>
 
-                        <span class="horizontal-rule"></span>
+                        <span class="payble-amount row mt-10">
+                            @if ($rule['impact']['amount_given'])
+                                <label style="float: left;">{{ __('shop::app.checkout.onepage.amt-payable') }}</label>
 
-                        <span class="row mt-10">
-                            @if ($rule['amount_given'])
-                                <label style="float: left;">Amount Payable</label>
-
-                                <label style="float: right;">{{ core()->currency($cart->tax_total + $rule['amount']) }}</label>
+                                <label style="float: right;">{{ core()->currency($cart->tax_total + $rule['impact']['amount']) }}</label>
                             @else
-                                <label style="float: left;">Got</label>
-                                <label style="float: right;">{{ $rule['amount'] }} Free</label>
+                                <label style="float: left;">{{ __('shop::app.checkout.onepage.got') }}</label>
+                                <label style="float: right;">{{ $rule['impact']['amount'] }} {{ __('shop::app.checkout.onepage.got') }}</label>
                             @endif
                         </span>
                     </div>
@@ -72,7 +70,7 @@
                 @if (! $rule['rule']->end_other_rules)
                     <div class="discounted" v-if="discounted">
                         <div class="mt-15 mb-10">
-                            <b>Coupon used</b>
+                            <b>{{ __('shop::app.checkout.onepage.coupon-used') }}</b>
                         </div>
 
                         <span class="row mb-10">
@@ -80,10 +78,8 @@
                             <label style="float: right;">@{{ discount.amount_given }}</label>
                         </span>
 
-                        <span class="horizontal-rule"></span>
-
-                        <span class="row mt-10">
-                            <label style="float: left;">Amount Payable</label>
+                        <span class="payble-amount row mt-10">
+                            <label style="float: left;">{{ __('shop::app.checkout.onepage.amt-payable') }}</label>
                             <label style="float: right;">@{{ discount.amount }}</label>
                         </span>
                     </div>

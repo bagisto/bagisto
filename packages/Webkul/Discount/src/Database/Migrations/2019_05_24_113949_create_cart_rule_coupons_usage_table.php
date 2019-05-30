@@ -19,6 +19,8 @@ class CreateCartRuleCouponsUsageTable extends Migration
             $table->foreign('coupon_id')->references('id')->on('cart_rules')->onDelete('cascade');
             $table->integer('channel_id')->unsigned();
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
+            $table->integer('customer_id')->unsigned();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->bigInteger('usage')->unsigned()->default(0);
             $table->date('expired_on');
             $table->timestamps();

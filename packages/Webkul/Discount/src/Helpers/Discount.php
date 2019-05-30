@@ -3,7 +3,9 @@
 namespace Webkul\Discount\Helpers;
 
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
+use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
 use Carbon\Carbon;
+
 
 class Discount
 {
@@ -13,14 +15,25 @@ class Discount
     protected $cartRule;
 
     /**
+     * To hold the cart rule cart repository instance
+     */
+    protected $cartRuleCart;
+
+    /**
      * To hold if end rules are present or not.
      */
-    protected $endRuleActive;
+    protected $endRuleActive = false;
 
-    public function __construct(CartRule $cartRule)
+    /**
+     * disable coupon
+     */
+    protected $disableCoupon = false;
+
+    public function __construct(CartRule $cartRule, CartRuleCart $cartRuleCart)
     {
         $this->cartRule = $cartRule;
         $this->endRuleActive = false;
+        $this->cartRuleCart = $cartRuleCart;
     }
 
     /**
@@ -222,12 +235,14 @@ class Discount
             if (count($id)) {
                 return [
                     'couponable' => true,
-                    'id' => $id
+                    'id' => $id,
+                    'end_rule' => true
                 ];
             } else {
                 return [
                     'couponable' => false,
-                    'id' => null
+                    'id' => null,
+                    'end_rule' => null
                 ];
             }
         } else {
@@ -243,12 +258,14 @@ class Discount
             if (count($id)) {
                 return [
                     'couponable' => true,
-                    'id' => $id
+                    'id' => $id,
+                    'end_rule' => false
                 ];
             } else {
                 return [
                     'couponable' => false,
-                    'id' => null
+                    'id' => null,
+                    'end_rule' => false
                 ];
             }
         }
@@ -275,13 +292,15 @@ class Discount
                 return [
                     'end_rule' => false,
                     'noncouponable' => true,
-                    'id' => $id
+                    'id' => $id,
+                    'end_rule' => false
                 ];
             } else {
                 return [
                     'end_rule' => false,
                     'noncouponable' => false,
-                    'id' => null
+                    'id' => null,
+                    'end_rule' => false
                 ];
             }
         } else {
@@ -299,13 +318,15 @@ class Discount
                 return [
                     'end_rule' => true,
                     'noncouponable' => true,
-                    'id' => $id
+                    'id' => $id,
+                    'end_rule' => true
                 ];
             } else {
                 return [
                     'end_rule' => true,
                     'noncouponable' => false,
-                    'id' => null
+                    'id' => null,
+                    'end_rule' => null
                 ];
             }
         }
@@ -315,13 +336,6 @@ class Discount
     {
         $result = $this->applyNonCouponAble();
         $cart = \Cart::getCart();
-
-        if ($result['end_rule']) {
-            $this->endRuleActive = true;
-        } else {
-            $this->endRuleActive = false;
-        }
-
         $maxImpacts = array();
 
         if (isset($result['id']) && count($result['id'])) {
@@ -398,15 +412,31 @@ class Discount
                         $realQty = $leastWorthItem['quantity'];
 
                         if ($action_type == config('pricerules.cart.validation.0')) {
-                            $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * $disc_amount) / 100;
-                        } else if ($action_type == config('pricerules.cart.validation.1')) {
-                            if ($disc_amount > ($disc_quantity * $leastWorthItem['base_total'])) {
-                                $newBaseSubTotal = 0;
+                            if ($realQty <= $disc_quantity) {
+                                $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * ($disc_amount * $disc_quantity)) / 100;
                             } else {
-                                $newBaseSubTotal = $cart->grand_total - $disc_amount;
+                                $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * $disc_amount) / 100;
+                            }
+                        } else if ($action_type == config('pricerules.cart.validation.1')) {
+                            if ($realQty <= $disc_quantity) {
+                                if ($disc_amount > ($disc_quantity * $leastWorthItem['base_total'])) {
+                                    $newBaseSubTotal = 0;
+                                } else {
+                                    $newBaseSubTotal = $cart->grand_total - $disc_amount;
+                                }
+                            } else {
+                                if ($disc_amount > $leastWorthItem['base_total']) {
+                                    $newBaseSubTotal = 0;
+                                } else {
+                                    $newBaseSubTotal = $cart->grand_total - $disc_amount;
+                                }
                             }
                         } else if ($action_type == config('pricerules.cart.validation.2')) {
-                            $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
+                            if ($realQty <= $disc_quantity) {
+                                $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
+                            } else {
+                                $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_quantity;
+                            }
                         } else if ($action_type == config('pricerules.cart.validation.3')) {
                             $newBaseSubTotal = $disc_amount;
                         }
@@ -459,7 +489,23 @@ class Discount
         }
 
         if ($leastId != -1) {
-            return $maxImpacts[$leastId];
+            $cartRuleCart = $this->cartRuleCart->findWhere([
+                'cart_id' => $cart->id,
+            ]);
+
+            if (count($cartRuleCart)) {
+                $this->cartRuleCart->update([
+                    'cart_id' => $cart->id,
+                    'cart_rule_id' => $maxImpacts[$leastId]['rule']->id
+                ], $cartRuleCart->first()->id);
+            } else {
+                $this->cartRuleCart->create([
+                    'cart_id' => $cart->id,
+                    'cart_rule_id' => $maxImpacts[$leastId]['rule']->id
+                ]);
+            }
+
+            return ['rule' => $maxImpacts[$leastId]['rule'], 'impact' => $maxImpacts[$leastId], 'endRuleActive' => $this->endRuleActive];
         }
     }
 
@@ -467,11 +513,9 @@ class Discount
     {
         $rules = $this->applyCouponAble();
         $appliedRule = null;
-        $coupons = [];
 
         foreach($rules['id'] as $rule) {
-            array_push($coupons, $rule->coupons->code);
-            if ($rule->use_coupon && $rule->auto_generation == 0) {
+            if ($rule->auto_generation == 0) {
                 if ($rule->coupons->code == $code) {
                     $appliedRule = $rule;
 
@@ -517,7 +561,7 @@ class Discount
                 } else if ($test_mode == config('pricerules.test_mode.2')) {
                     $result = $this->testAnyConditionIsTrue($conditions, $cart);
                 } else if ($test_mode == config('pricerules.test_mode.3')) {
-                    $result = $this->testAbyConditionIsFalse($conditions, $cart);
+                    $result = $this->testAnyConditionIsFalse($conditions, $cart);
                 }
             }
         } else {
@@ -548,34 +592,84 @@ class Discount
                 $realQty = $leastWorthItem['quantity'];
 
                 if ($action_type == config('pricerules.cart.validation.0')) {
-                    $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * $disc_amount) / 100;
-                } else if ($action_type == config('pricerules.cart.validation.1')) {
-                    if ($disc_amount > ($disc_quantity * $leastWorthItem['base_total'])) {
-                        $newBaseSubTotal = 0;
+                    if ($realQty <= $disc_quantity) {
+                        $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * ($disc_amount * $disc_quantity)) / 100;
                     } else {
-                        $newBaseSubTotal = $cart->grand_total - $disc_amount;
+                        $newBaseSubTotal = $cart->grand_total - ($leastWorthItem['base_total'] * $disc_amount) / 100;
+                    }
+                } else if ($action_type == config('pricerules.cart.validation.1')) {
+                    if ($realQty <= $disc_quantity) {
+                        if ($disc_amount > ($disc_quantity * $leastWorthItem['base_total'])) {
+                            $newBaseSubTotal = 0;
+                        } else {
+                            $newBaseSubTotal = $cart->grand_total - $disc_amount;
+                        }
+                    } else {
+                        if ($disc_amount > $leastWorthItem['base_total']) {
+                            $newBaseSubTotal = 0;
+                        } else {
+                            $newBaseSubTotal = $cart->grand_total - $disc_amount;
+                        }
                     }
                 } else if ($action_type == config('pricerules.cart.validation.2')) {
-                    $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
+                    if ($realQty <= $disc_quantity) {
+                        $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
+                    } else {
+                        $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_quantity;
+                    }
                 } else if ($action_type == config('pricerules.cart.validation.3')) {
                     $newBaseSubTotal = $disc_amount;
                 }
 
                 if ($action_type == config('pricerules.cart.validation.2')) {
+                    $cartRuleCart = $this->cartRuleCart->findWhere([
+                        'cart_id' => $cart->id,
+                    ]);
+
+                    if (count($cartRuleCart)) {
+                        $this->cartRuleCart->update([
+                            'cart_id' => $cart->id,
+                            'cart_rule_id' => $appliedRule->id
+                        ], $cartRuleCart->first()->id);
+                    } else {
+                        $this->cartRuleCart->create([
+                            'cart_id' => $cart->id,
+                            'cart_rule_id' => $appliedRule->id
+                        ]);
+                    }
+
                     return response()->json([
                         'message' => trans('admin::app.promotion.status.coupon-applied'),
                         'action' => $action_type,
                         'amount_given' => false,
                         'amount_payable' => $newQuantity,
-                        'amount' => null
+                        'amount' => null,
+                        'success' => true
                     ]);
                 } else {
+                    $cartRuleCart = $this->cartRuleCart->findWhere([
+                        'cart_id' => $cart->id,
+                    ]);
+
+                    if (count($cartRuleCart)) {
+                        $this->cartRuleCart->update([
+                            'cart_id' => $cart->id,
+                            'cart_rule_id' => $appliedRule->id
+                        ], $cartRuleCart->first()->id);
+                    } else {
+                        $this->cartRuleCart->create([
+                            'cart_id' => $cart->id,
+                            'cart_rule_id' => $appliedRule->id
+                        ]);
+                    }
+
                     return response()->json([
                         'message' => trans('admin::app.promotion.status.coupon-applied'),
                         'action' => $action_type,
                         'amount_given' => true,
-                        'amount_payable' => core()->currency($newBaseSubTotal),
-                        'amount' => core()->currency($cart->grand_total - $newBaseSubTotal)
+                        'amount_payable' => core()->currency($newBaseSubTotal + $cart->tax_total),
+                        'amount' => core()->currency($cart->grand_total - $newBaseSubTotal),
+                        'success' => true
                     ]);
                 }
             } else {
@@ -584,7 +678,8 @@ class Discount
                     'action' => $action_type,
                     'amount_given' => null,
                     'amount' => null,
-                    'least_value_item' => null
+                    'least_value_item' => null,
+                    'success' => false
                 ]);
             }
         } else {
@@ -593,7 +688,8 @@ class Discount
                 'action' => null,
                 'amount_given' => null,
                 'amount' => null,
-                'least_value_item' => null
+                'least_value_item' => null,
+                'success' => false
             ]);
         }
     }

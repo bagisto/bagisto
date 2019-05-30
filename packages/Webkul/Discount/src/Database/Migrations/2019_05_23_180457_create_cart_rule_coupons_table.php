@@ -20,7 +20,7 @@ class CreateCartruleCouponsTable extends Migration
             $table->string('prefix')->nullable();
             $table->string('suffix')->nullable();
             $table->string('code')->nullable();
-            $table->integer('limit')->unsigned()->default(0);
+            $table->integer('usage_limit')->unsigned()->default(0);
             $table->integer('usage_per_customer')->unsigned()->default(0);
             $table->integer('usage_throttle')->unsigned()->default(0);
             $table->integer('type')->unsigned()->default(0);

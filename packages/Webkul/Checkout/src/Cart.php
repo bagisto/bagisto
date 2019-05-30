@@ -1093,6 +1093,59 @@ class Cart {
     }
 
     /**
+     * Save discount data for cart
+     */
+    public function saveDiscount()
+    {
+        $rule = $impact['rule'];
+
+        $cart = $this->getCart();
+
+        //update the cart items
+        foreach($cart->items as $item) {
+            if ($rule->use_coupon) {
+                if ($rule->action_type != config('pricerules.cart.validation.0')) {
+                    $item->update([
+                        'coupon_code' => $rule->coupon->code,
+                        'discount_amount' => core()->convertPrice($impact['amount'], $cart->channel_currency_code),
+                        'base_discount_amount' => $impact['amount']
+                    ]);
+                } else {
+                    $item->update([
+                        'coupon_code' => $rule->coupon->code,
+                        'discount_percent' => $rule->disc_amount
+                    ]);
+                }
+            } else {
+                if ($rule->action_type != config('pricerules.cart.validation.0')) {
+                    $item->update([
+                        'discount_amount' => core()->convertPrice($impact['amount'], $cart->channel_currency_code),
+                        'base_discount_amount' => $impact['amount']
+                    ]);
+                } else {
+                    $item->update([
+                        'discount_percent' => $rule->disc_amount
+                    ]);
+                }
+            }
+        }
+
+        // update the cart
+        if ($rule->use_coupon) {
+            $cart->update([
+                'coupon_code' => $rule->coupons->code,
+                'discount_amount' => core()->convertPrice($impact['amount'], $cart->channel_currency_code),
+                'base_discount_amount' => $impact['amount']
+            ]);
+        } else {
+            $cart->update([
+                'discount_amount' => core()->convertPrice($impact['amount'], $cart->channel_currency_code),
+                'base_discount_amount' => $impact['amount']
+            ]);
+        }
+    }
+
+    /**
      * Prepares data for order item
      *
      * @return array

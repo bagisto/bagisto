@@ -511,8 +511,8 @@
                     }).then(function(response) {
                         this_this.message = response.data.message;
 
-                        this_this.discounted = true;
-                        this_this.discount.amount = response.data.amount_payable;
+                        this_this.discounted = response.data.success;
+                        this_this.discount.amount = response.data.amount_payable,
                         this_this.discount.amount_given = response.data.amount;
                     }).catch(function(error) {
                         this_this.discounted = false;
@@ -526,7 +526,7 @@
                     }
                 }
             }
-        })
+        });
     </script>
 
 @endpush

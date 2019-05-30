@@ -70,8 +70,6 @@ class OnepageController extends Controller
     {
         $data = request()->all();
 
-        // dd($data);
-
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
         $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
 

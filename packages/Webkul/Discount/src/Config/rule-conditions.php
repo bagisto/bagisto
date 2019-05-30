@@ -85,10 +85,10 @@ return [
                 '<=' => 'Lesser or equals',
                 '>' => 'Greater than',
                 '<' => 'Lesser than',
-                '{}' => 'Contains',
-                '!{}' => 'Does not contains',
-                '()' => 'Is one of',
-                '!()' => 'Not is one of'
+                '{}' => 'Contains'
+                // '!{}' => 'Does not contains',
+                // '()' => 'Is one of',
+                // '!()' => 'Not is one of'
             ],
 
             'text' => [
@@ -98,9 +98,9 @@ return [
                 '>' => 'Greater than',
                 '<' => 'Lesser than',
                 '{}' => 'Contains',
-                '!{}' => 'Does not contains',
-                '()' => 'Is one of',
-                '!()' => 'Not is one of'
+                '!{}' => 'Does not contains'
+                // '()' => 'Is one of',
+                // '!()' => 'Not is one of'
             ],
 
             'string' => [
@@ -110,14 +110,14 @@ return [
                 '>' => 'Greater than',
                 '<' => 'Lesser than',
                 '{}' => 'Contains',
-                '!{}' => 'Does not contains',
-                '()' => 'Is one of',
-                '!()' => 'Not is one of'
+                '!{}' => 'Does not contains'
+                // '()' => 'Is one of',
+                // '!()' => 'Not is one of'
             ],
 
             'boolean' => [
                 0 => 'True/Yes',
-                1 => 'False/No',
+                1 => 'False/No'
             ]
         ],
 

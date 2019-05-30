@@ -15,7 +15,7 @@
 2. ### [Requirements](#2-requirements-)
 3. ### [Installation & Configuration](#3-installation--configuration-)
 4. ### [License](#4-license-)
-5. ### [Miscellaneous](#5-miscellaneous-)
+5. ### [Miscellaneous](#user-content-6-miscellaneous--)
 
 ### 1. Introduction <a name="#1-introduction-"></a>:
 
@@ -25,6 +25,8 @@ a progressive Javascript framework.
 
 **Bagisto is viable attempt to cut down your time, cost and workforce for building online stores or migrating from physical stores
 to the ever demanding online world. Your business whether small or huge it suits all and very simple to set it up.**
+
+**Read our documentation: [Bagisto Docs](https://devdocs.bagisto.com/)**
 
 **We are also having a forum for any type of your concern, feature request discussions. Please visit: [Bagisto Forums](https://forums.bagisto.com/)**
 
