@@ -12,10 +12,11 @@
 
 # Topics
 1. ### [Introduction](#1-introduction-)
-2. ### [Requirements](#2-requirements-)
-3. ### [Installation & Configuration](#3-installation--configuration-)
-4. ### [License](#4-license-)
-5. ### [Miscellaneous](#5-miscellaneous-)
+2. ### [Documentation] (#2-documentation-)
+3. ### [Requirements](#2-requirements-)
+4. ### [Installation & Configuration](#3-installation--configuration-)
+5. ### [License](#4-license-)
+6. ### [Miscellaneous](#5-miscellaneous-)
 
 ### 1. Introduction <a name="#1-introduction-"></a>:
 
@@ -50,7 +51,11 @@ It packs in lots of demanding features that allows your business to scale in no 
 Dev guys can take advantage of two of the hottest frameworks used in this project Laravel and Vue.js, both of these frameworks have been used in Bagisto.
 Bagisto is using power of both of these frameworks and making best out of it out of the box.
 
-### 2. Requirements <a name="#requirements"></a>:
+### 2. Documentation <a name="#2-documentation-"></a>:
+
+# Visit our documentation(https://devdocs.bagisto.com)
+
+### 3. Requirements <a name="#requirements"></a>:
 
 * **OS**: Ubuntu 16.04 LTS or higher.
 * **SERVER**: Apache 2 or NGINX
@@ -62,7 +67,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 * **Node**: 8.11.3 LTS or higher.
 * **Composer**: 1.6.5 or higher.
 
-### 3. Installation & Configuration <a name="#configuration"></a>:
+### 4. Installation & Configuration <a name="#configuration"></a>:
 
 **1. Try our new GUI installer to install Bagisto:**
 
