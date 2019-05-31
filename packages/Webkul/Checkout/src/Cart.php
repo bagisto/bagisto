@@ -346,7 +346,7 @@ class Cart {
 
         if ($childData != null) {
             $childData['parent_id'] = $item->id;
-            
+
             $this->cartItem->create($childData);
         }
 
@@ -869,7 +869,7 @@ class Cart {
                         }
 
                         $item->update([
-                            'price' => $price,
+                            'price' => core()->convertPrice($price),
                             'base_price' => $price,
                             'total' => core()->convertPrice($price * ($item->quantity)),
                             'base_total' => $price * ($item->quantity),
@@ -893,7 +893,7 @@ class Cart {
                         }
 
                         $item->update([
-                            'price' => $price,
+                            'price' => core()->convertPrice($price),
                             'base_price' => $price,
                             'total' => core()->convertPrice($price * ($item->quantity)),
                             'base_total' => $price * ($item->quantity),
