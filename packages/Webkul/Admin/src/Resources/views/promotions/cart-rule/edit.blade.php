@@ -301,9 +301,9 @@
                                         </div>
 
                                         <div class="control-group" :class="[errors.has('end_other_rules') ? 'has-error' : '']">
-                                            <label for="end_other_rules" class="required">{{ __('admin::app.promotion.general-info.is-guest') }}</label>
+                                            <label for="end_other_rules" class="required">{{ __('admin::app.promotion.general-info.end-other-rules') }}</label>
 
-                                            <select type="text" class="control" name="end_other_rules" v-model="end_other_rules" v-validate="'required'" value="{{ old('end_other_rules')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-guest') }}&quot;">
+                                            <select type="text" class="control" name="end_other_rules" v-model="end_other_rules" v-validate="'required'" value="{{ old('end_other_rules')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.end-other-rules') }}&quot;">
                                                 <option value="1" :selected="end_other_rules == 1">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
                                                 <option value="0" :selected="end_other_rules == 0">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
                                             </select>

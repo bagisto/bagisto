@@ -5,6 +5,8 @@ namespace Webkul\Discount\Repositories;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Discount\Repositories\CartRuleChannelsRepository as CartRuleChannels;
 use Webkul\Discount\Repositories\CartRuleCustomerGroupsRepository as CartRuleCustomerGroups;
+use Webkul\Discount\Repositories\CartRuleCouponsRepository as CartRuleCoupons;
+use Webkul\Discount\Repositories\CartRuleLabelsRepository as CartRuleLabels;
 use Illuminate\Container\Container as App;
 
 /**
@@ -19,13 +21,19 @@ class CartRuleRepository extends Repository
 
     protected $cartRuleCustomerGroups;
 
+    protected $cartRuleCoupons;
+
+    protected $cartRuleLabels;
+
     /**
      *
      */
-    public function __construct(CartRuleChannels $cartRuleChannels, CartRuleCustomerGroups $cartRuleCustomerGroups, App $app)
+    public function __construct(CartRuleChannels $cartRuleChannels, CartRuleCustomerGroups $cartRuleCustomerGroups, CartRuleCoupons $cartRuleCoupons, CartRuleLabels $cartRuleLabels, App $app)
     {
         $this->cartRuleChannels = $cartRuleChannels;
         $this->cartRuleCustomerGroups = $cartRuleCustomerGroups;
+        $this->cartRuleCoupons = $cartRuleCoupons;
+        $this->cartRuleLabels = $cartRuleLabels;
 
         parent::__construct($app);
     }
@@ -135,7 +143,18 @@ class CartRuleRepository extends Repository
         return true;
     }
 
+    /**
+     * To sync the labels associated with the cart rule
+     */
     public function LabelsSync($labels, $cartRule)
+    {
+
+    }
+
+    /**
+     * To sync the coupons associated with the cart rule
+     */
+    public function CouponsSync($coupon, $cartRule)
     {
 
     }

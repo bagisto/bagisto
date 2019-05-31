@@ -49,7 +49,7 @@
                 </form>
 
                 @if(isset($rule))
-                    {{-- <div class="discounted">
+                    <div class="discounted">
                         <div class="mt-15 mb-10">
                             {{ $rule['rule']->name }} {{ __('shop::app.checkout.onepage.applied') }}
                         </div>
@@ -58,44 +58,22 @@
                             @if ($rule['impact']['amount_given'])
                                 <label style="float: left;">{{ __('shop::app.checkout.onepage.amt-payable') }}</label>
 
-                                <label style="float: right;">{{ core()->currency($cart->tax_total + $rule['impact']['amount']) }}</label>
+                                <label style="float: right;">{{ core()->currency($cart->grand_total - $rule['impact']['amount']) }}</label>
                             @else
                                 <label style="float: left;">{{ __('shop::app.checkout.onepage.got') }}</label>
                                 <label style="float: right;">{{ $rule['impact']['amount'] }} {{ __('shop::app.checkout.onepage.got') }}</label>
                             @endif
                         </span>
-                    </div> --}}
-                @else
-                    {{-- {{dd('2')}} --}}
-                    {{-- <div class="discounted" v-if="discounted">
-                        <div class="mt-15 mb-10">
-                            @{{ code }} {{ __('shop::app.checkout.onepage.applied') }}
-                        </div>
-
-                        <span class="payble-amount row mt-10">
-                            <label style="float: left;">{{ __('shop::app.checkout.onepage.amt-payable') }}</label>
-
-                            <label style="float: right;">@{{ discount.amount }}</label>
-                        </span>
                     </div>
-
-                    <div class="discounted" v-if="!discounted">
-                        <div class="mt-15 mb-10">
-                            <b>{{ __('shop::app.checkout.onepage.coupon-used') }}</b>
-                        </div>
-
-                        <span class="row mb-10">
-                            <label style="float: left;">@{{ code }}</label>
-                            <label style="float: right;">@{{ discount.amount_given }}</label>
-                        </span>
-
-                        <span class="payble-amount row mt-10">
-                            <label style="float: left;">{{ __('shop::app.checkout.onepage.amt-payable') }}</label>
-                            <label style="float: right;">@{{ discount.amount }}</label>
-                        </span>
-                    </div> --}}
                 @endif
             @endif
         </div>
     </div>
 </div>
+@push('scripts')
+    <script type="text/x-template" id="discount-template">
+        <div id="discount">
+
+        </div>
+    </script>
+@endpush

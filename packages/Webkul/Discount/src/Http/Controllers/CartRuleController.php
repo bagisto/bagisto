@@ -96,8 +96,6 @@ class CartRuleController extends Controller
 
     public function store()
     {
-        // dd(request()->all()); // required_if:use_coupon,1
-        $types = config('price_rules.cart.validations');
         $data = request()->all();
 
         $validated = Validator::make($data, [
@@ -171,6 +169,7 @@ class CartRuleController extends Controller
             $data['conditions'] = null;
         } else {
             $data['conditions'] = json_encode($data['all_conditions']);
+            unset($data['all_conditions']);
         }
 
         if ($data['use_coupon']) {
@@ -378,12 +377,12 @@ class CartRuleController extends Controller
             $coupons['cart_rule_id'] = $ruleUpdated->id;
             $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
 
-            $couponUpdated = $this->cartRuleCoupon->create($coupons);
+            $couponUpdated = $ruleUpdated->coupons->update($coupons);
         }
 
         if ($ruleUpdated && $ruleGroupUpdated && $ruleChannelUpdated) {
             if (isset($couponUpdated) && $couponUpdated) {
-                session()->flash('success', trans('admin::app.promotion.status.success-coupon'));
+                session()->flash('info', trans('admin::app.promotion.status.success-coupon'));
             }
 
             session()->flash('info', trans('admin::app.promotion.status.update-success'));

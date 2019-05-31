@@ -805,7 +805,7 @@ return [
             'uses-per-cust' => 'Uses per customer',
             'all' => 'All',
             'any' => 'Any',
-            'end_other_rules' => 'End other rules',
+            'end-other-rules' => 'End other rules',
             'status' => 'Is Active',
             'all-conditions-true' => 'Assuming all conditions are true',
             'assuming' => 'Assuming',

@@ -893,7 +893,7 @@ class Cart {
                         }
 
                         $item->update([
-                            'price' => $price,
+                            'price' => core()->convertPrice($price),
                             'base_price' => $price,
                             'total' => core()->convertPrice($price * ($item->quantity)),
                             'base_total' => $price * ($item->quantity),
@@ -917,7 +917,7 @@ class Cart {
                         }
 
                         $item->update([
-                            'price' => $price,
+                            'price' => core()->convertPrice($price),
                             'base_price' => $price,
                             'total' => core()->convertPrice($price * ($item->quantity)),
                             'base_total' => $price * ($item->quantity),
@@ -1311,6 +1311,7 @@ class Cart {
                 $leastValue = $item->price;
                 $leastSubTotal = [
                     'id' => $item->id,
+                    'total' => $item->total,
                     'base_total' => $leastValue,
                     'quantity' => $item->quantity
                 ];
@@ -1331,6 +1332,7 @@ class Cart {
                 $maxValue = $item->total;
                 $maxSubTotal = [
                     'id' => $item->id,
+                    'total' => $item->total,
                     'base_total' => $maxValue,
                     'quantity' => $item->quantity
                 ];
