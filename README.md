@@ -12,7 +12,7 @@
 
 # Topics
 1. ### [Introduction](#1-introduction-)
-2. ### [Documentation] (#2-documentation-)
+2. ### [Documentation](#2-documentation-)
 3. ### [Requirements](#2-requirements-)
 4. ### [Installation & Configuration](#3-installation--configuration-)
 5. ### [License](#4-license-)
