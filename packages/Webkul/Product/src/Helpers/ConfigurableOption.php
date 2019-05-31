@@ -135,6 +135,9 @@ class ConfigurableOption extends AbstractProduct
 
                 $attributeValue = $product->{$productAttribute->code};
 
+                if ($attributeValue == '' && $product instanceof \Webkul\Product\Models\ProductFlat)
+                    $attributeValue = $product->product->{$productAttribute->code};
+
                 $options[$productAttributeId][$attributeValue][] = $productId;
 
                 $options['index'][$productId][$productAttributeId] = $attributeValue;

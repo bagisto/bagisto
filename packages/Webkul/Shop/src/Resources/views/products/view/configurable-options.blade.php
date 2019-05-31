@@ -138,7 +138,7 @@
 
                                 this.resetChildren(attribute.nextAttribute);
                             } else {
-                                this.selectedProductId = attribute.options[attribute.selectedIndex].allowedProducts[0];
+                                this.selectedProductId = this.simpleProduct;
                             }
 
                             //buy now anchor href changer with options
@@ -219,7 +219,7 @@
 
                                 if (prevOption) {
                                     for (j = 0; j < options[i].products.length; j++) {
-                                        if (prevOption.products && prevOption.products.indexOf(options[i].products[j]) > -1) {
+                                        if (prevOption.allowedProducts && prevOption.allowedProducts.indexOf(options[i].products[j]) > -1) {
                                             allowedProducts.push(options[i].products[j]);
                                         }
                                     }
