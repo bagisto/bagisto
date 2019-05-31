@@ -51,9 +51,9 @@ It packs in lots of demanding features that allows your business to scale in no 
 Dev guys can take advantage of two of the hottest frameworks used in this project Laravel and Vue.js, both of these frameworks have been used in Bagisto.
 Bagisto is using power of both of these frameworks and making best out of it out of the box.
 
-### 2. Documentation <a name="#2-documentation-"></a>:
+### 2. Documentation <a name="#-documentation-"></a>:
 
-# Visit our documentation(https://devdocs.bagisto.com)
+# Visit our [Documentation](https://devdocs.bagisto.com)
 
 ### 3. Requirements <a name="#requirements"></a>:
 
