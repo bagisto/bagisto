@@ -124,15 +124,15 @@
                                         <span class="control-error" v-if="errors.has('use_coupon')">@{{ errors.first('use_coupon') }}</span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('auto_generation') ? 'has-error' : '']" v-if="use_coupon == 1">
+                                    {{-- <div class="control-group" :class="[errors.has('auto_generation') ? 'has-error' : '']" v-if="use_coupon == 1">
                                         <label for="auto_generation" class="required">{{ __('admin::app.promotion.general-info.specific-coupon') }}</label>
 
                                         <input type="checkbox" class="control" name="auto_generation" v-model="auto_generation" value="{{ old('auto_generation') }}" data-vv-as="&quot;Specific Coupon&quot;" v-on:change="checkAutogen">
 
                                         <span class="control-error" v-if="errors.has('auto_generation')">@{{ errors.first('auto_generation') }}</span>
-                                    </div>
+                                    </div> --}}
 
-                                    <input type="hidden" name="auto_generation" v-model="auto_generation">
+                                    {{-- <input type="hidden" name="auto_generation" v-model="auto_generation"> --}}
 
                                     <div class="control-group" :class="[errors.has('per_customer') ? 'has-error' : '']">
                                         <label for="per_customer" class="required">{{ __('admin::app.promotion.general-info.uses-per-cust') }}</label>
@@ -173,6 +173,8 @@
 
                             <accordian :active="false" title="Conditions">
                                 <div slot="body">
+                                    <input type="hidden" name="all_conditions" v-model="all_conditions">
+
                                     <div class="add-condition">
                                         <div class="control-group">
                                             <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
@@ -270,7 +272,7 @@
                                     <div class="control-group" :class="[errors.has('disc_quantity') ? 'has-error' : '']">
                                         <label for="disc_quantity" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
 
-                                        <input type="number" step="1" class="control" name="disc_quantity" v-model="disc_quantity" v-validate="'required|decimal|min_value:1'" value="{{ old('disc_quantity') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_qty') }}&quot;">
+                                        <input type="number" step="1" class="control" name="disc_quantity" v-model="disc_quantity" v-validate="'required|decimal|min_value:0'" value="{{ old('disc_quantity') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_qty') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_quantity')">@{{ errors.first('disc_quantity') }}</span>
                                     </div>
@@ -299,14 +301,25 @@
 
                                             <span class="control-error" v-if="errors.has('apply_to_shipping')">@{{ errors.first('apply_to_shipping') }}</span>
                                         </div>
+
+                                        <div class="control-group" :class="[errors.has('end_other_rules') ? 'has-error' : '']">
+                                            <label for="end_other_rules" class="required">{{ __('admin::app.promotion.general-info.end-other-rules') }}</label>
+
+                                            <select type="text" class="control" name="end_other_rules" v-model="end_other_rules" v-validate="'required'" value="{{ old('end_other_rules')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.end-other-rules') }}&quot;">
+                                                <option value="1" :selected="end_other_rules == 1">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+                                                <option value="0" :selected="end_other_rules == 0">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                                            </select>
+
+                                            <span class="control-error" v-if="errors.has('end_other_rules')">@{{ errors.first('end_other_rules') }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="Coupons" v-if="auto_generation != null">
+                            <accordian :active="false" title="Coupons" v-if="use_coupon">
                                 <div slot="body">
 
-                                    <div v-if="!auto_generation">
+                                    {{-- <div v-if="!auto_generation">
                                         <div class="control-group" :class="[errors.has('prefix') ? 'has-error' : '']">
                                             <label for="prefix" class="required">Prefix</label>
 
@@ -322,9 +335,9 @@
 
                                             <span class="control-error" v-if="errors.has('suffix')">@{{ errors.first('suffix') }}</span>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
-                                    <div v-if="auto_generation != 0">
+                                    <div>
                                         <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                             <label for="code" class="required">Code</label>
 
@@ -338,7 +351,6 @@
 
                             <accordian :active="false" title="labels">
                                 <div slot="body">
-                                    <input type="hidden" name="all_conditions" v-model="all_conditions">
                                     <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']" v-if="dedicated_label">
                                         <label for="label" class="required">Global Label</label>
 
@@ -388,7 +400,7 @@
                         per_customer: 0,
                         status: null,
                         use_coupon: null,
-                        auto_generation: null,
+                        auto_generation: false,
                         usage_limit: 0,
                         is_guest: 0,
 
@@ -397,7 +409,6 @@
                         apply_amt: false,
                         apply_prct: false,
                         apply_to_shipping: null,
-                        buy_atleast: null,
                         disc_amount: null,
                         disc_threshold: null,
                         disc_quantity: null,
@@ -487,13 +498,13 @@
                         }
                     },
 
-                    useCoupon() {
-                        if (this.use_coupon == 0) {
-                            this.auto_generation = null;
-                        } else {
-                            this.auto_generation = true;
-                        }
-                    },
+                    // useCoupon() {
+                    //     if (this.use_coupon == 0) {
+                    //         this.auto_generation = null;
+                    //     } else {
+                    //         this.auto_generation = true;
+                    //     }
+                    // },
 
                     removeCartAttr(index) {
                         this.conditions_list.splice(index, 1);

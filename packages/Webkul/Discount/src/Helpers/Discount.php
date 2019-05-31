@@ -305,7 +305,6 @@ class Discount
             }
         } else {
             $rules = $rules['rule'];
-
             $id = array();
 
             foreach ($rules as $rule) {
@@ -337,10 +336,10 @@ class Discount
         $result = $this->applyNonCouponAble();
         $cart = \Cart::getCart();
         $maxImpacts = array();
-
+        // dd($result);
         if (isset($result['id']) && count($result['id'])) {
             $rules = array();
-
+            // dd(2);
             if (count($result['id']) > 1) {
                 $leastPriority = 999999999999;
 
@@ -349,12 +348,14 @@ class Discount
                         array_push($rules, $rule);
                     }
                 }
+            } else if (count($result['id'])) {
+                array_push($rules, $result['id'][0]);
             }
 
             foreach ($rules as $rule) {
                 // All of conditions is/are true
                 $result = 1;
-                if ($rule->conditions && $rule->conditions != "null") {
+                if ($rule->conditions && ($rule->conditions != "null" || $rule->conditions != "")) {
                     if ($rule->starts_from != null && $rule->ends_till != null) {
                         if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
                             $conditions = json_decode(json_decode($rule->conditions));
@@ -505,7 +506,7 @@ class Discount
                 ]);
             }
 
-            return ['rule' => $maxImpacts[$leastId]['rule'], 'impact' => $maxImpacts[$leastId], 'endRuleActive' => $this->endRuleActive];
+            return ['rule' => $maxImpacts[$leastId]['rule'], 'impact' => $maxImpacts[$leastId], 'endRuleActive' => $this->endRuleActive, 'success' => true];
         }
     }
 
@@ -513,6 +514,10 @@ class Discount
     {
         $rules = $this->applyCouponAble();
         $appliedRule = null;
+
+        if (! isset($rules['id'])) {
+            return response()->json(['message' => trans('admin::app.promotion.status.no-coupon')], 200);
+        }
 
         foreach($rules['id'] as $rule) {
             if ($rule->auto_generation == 0) {

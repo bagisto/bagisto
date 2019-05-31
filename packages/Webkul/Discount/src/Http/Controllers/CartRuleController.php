@@ -96,12 +96,9 @@ class CartRuleController extends Controller
 
     public function store()
     {
-        // dd(request()->all()); required_if:use_coupon,1
+        // dd(request()->all()); // required_if:use_coupon,1
         $types = config('price_rules.cart.validations');
         $data = request()->all();
-        if (isset($data['auto_generation'])) {
-            $data['auto_generation'] = (boolean) $data['auto_generation'];
-        }
 
         $validated = Validator::make($data, [
             'name' => 'required|string',
@@ -110,7 +107,7 @@ class CartRuleController extends Controller
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
-            'auto_generation' => 'boolean|sometimes',
+            // 'auto_generation' => 'boolean|sometimes',
             'usage_limit' => 'numeric|min:0',
             'per_customer' => 'numeric|min:0',
             'action_type' => 'required|string',
@@ -120,19 +117,17 @@ class CartRuleController extends Controller
             'free_shipping' => 'required|boolean',
             'apply_to_shipping' => 'required|boolean',
             'code' => 'string|required_if:auto_generation,0',
-            'all_conditions' => 'required',
+            'all_conditions' => 'sometimes|nullable',
             'label' => 'array|nullable'
         ]);
 
         if ($validated->fails()) {
             session()->flash('error', 'Validation failed');
-            dd($validated);
             return redirect()->route('admin.cart-rule.create')
                     ->withErrors($validated)
                     ->withInput();
         }
 
-        // dd($data);
         if ($data['starts_from'] == "" || $data['ends_till'] == "") {
             $data['starts_from'] = null;
             $data['ends_till'] = null;
@@ -152,12 +147,7 @@ class CartRuleController extends Controller
         unset($data['cart_attributes']);
         unset($data['attributes']);
 
-        if (count(json_decode($data['all_conditions'])) == 0) {
-            $data['conditions'] = null;
-        } else {
-            $data['conditions'] = $data['all_conditions'];
-        }
-        unset($data['all_conditions']);
+        // unset($data['all_conditions']);
 
         if (isset($data['disc_amount']) && $data['action_type'] == config('pricerules.cart.validations.2')) {
                 $data['actions'] = [
@@ -176,26 +166,32 @@ class CartRuleController extends Controller
         }
 
         $data['actions'] = json_encode($data['actions']);
-        $data['conditions'] = json_encode($data['conditions']);
+
+        if (! isset($data['all_conditions'])) {
+            $data['conditions'] = null;
+        } else {
+            $data['conditions'] = json_encode($data['all_conditions']);
+        }
 
         if ($data['use_coupon']) {
-            if (isset($data['auto_generation']) && $data['auto_generation']) {
-                $data['auto_generation'] = 0;
-                $coupons['code'] = $data['code'];
-                unset($data['code']);
-            } else {
-                $data['auto_generation'] = 1;
-            }
+            // if (isset($data['auto_generation']) && $data['auto_generation']) {
+            $data['auto_generation'] = 0;
 
-            if (isset($data['prefix'])) {
-                $coupons['prefix'] = $data['prefix'];
-                unset($data['prefix']);
-            }
+            $coupons['code'] = $data['code'];
+            unset($data['code']);
+            // } else {
+            //     $data['auto_generation'] = 1;
+            // }
 
-            if (isset($data['suffix'])) {
-                $coupons['suffix'] = $data['suffix'];
-                unset($data['suffix']);
-            }
+            // if (isset($data['prefix'])) {
+            //     $coupons['prefix'] = $data['prefix'];
+            //     unset($data['prefix']);
+            // }
+
+            // if (isset($data['suffix'])) {
+            //     $coupons['suffix'] = $data['suffix'];
+            //     unset($data['suffix']);
+            // }
         }
 
         if(isset($data['limit'])) {
@@ -263,7 +259,6 @@ class CartRuleController extends Controller
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
-            'auto_generation' => 'sometimes',
             'usage_limit' => 'numeric|min:0',
             'per_customer' => 'numeric|min:0',
             'action_type' => 'required|string',
@@ -272,8 +267,8 @@ class CartRuleController extends Controller
             'disc_threshold' => 'required|numeric',
             'free_shipping' => 'required|boolean',
             'apply_to_shipping' => 'required|boolean',
-            'code' => 'string|required_if:auto_generation,0',
-            'all_conditions' => 'required',
+            'code' => 'string|required_if:user_coupon,1',
+            'all_conditions' => 'present',
             'label' => 'array|nullable'
         ]);
 
@@ -308,13 +303,6 @@ class CartRuleController extends Controller
         unset($data['cart_attributes']);
         unset($data['attributes']);
 
-        if (count(json_decode($data['all_conditions'])) == 0) {
-            $data['conditions'] = null;
-        } else {
-            $data['conditions'] = $data['all_conditions'];
-        }
-        unset($data['all_conditions']);
-
         if (isset($data['disc_amount']) && $data['action_type'] == config('pricerules.cart.validations.2')) {
             $data['actions'] = [
                 'action_type' => $data['action_type'],
@@ -332,33 +320,33 @@ class CartRuleController extends Controller
         }
 
         $data['actions'] = json_encode($data['actions']);
-        $data['conditions'] = json_encode($data['conditions']);
+        if (! isset($data['all_conditions'])) {
+            $data['conditions'] = null;
+        } else {
+            $data['conditions'] = json_encode($data['all_conditions']);
+        }
+
+        unset($data['all_conditions']);
 
         if ($data['use_coupon']) {
-            if (isset($data['auto_generation'])) {
-                if ($data['auto_generation'] == "true") {
-                    $data['auto_generation'] = 0;
-                } else {
-                    $data['auto_generation'] = 1;
-                }
+            // if (isset($data['auto_generation']) && $data['auto_generation']) {
+            $data['auto_generation'] = 0;
 
-                if(! $data['auto_generation']) {
-                    $coupons['code'] = $data['code'];
-                    unset($data['code']);
-                }
-            } else {
+            $coupons['code'] = $data['code'];
+            unset($data['code']);
+            // } else {
+            //     $data['auto_generation'] = 1;
+            // }
 
-            }
+            // if (isset($data['prefix'])) {
+            //     $coupons['prefix'] = $data['prefix'];
+            //     unset($data['prefix']);
+            // }
 
-            if (isset($data['prefix'])) {
-                $coupons['prefix'] = $data['prefix'];
-                unset($data['prefix']);
-            }
-
-            if (isset($data['suffix'])) {
-                $coupons['suffix'] = $data['suffix'];
-                unset($data['suffix']);
-            }
+            // if (isset($data['suffix'])) {
+            //     $coupons['suffix'] = $data['suffix'];
+            //     unset($data['suffix']);
+            // }
         }
 
         if (isset($data['limit'])) {

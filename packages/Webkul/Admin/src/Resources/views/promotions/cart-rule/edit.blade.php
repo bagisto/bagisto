@@ -124,15 +124,15 @@
                                         <span class="control-error" v-if="errors.has('use_coupon')">@{{ errors.first('use_coupon') }}</span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('auto_generation') ? 'has-error' : '']" v-if="use_coupon == 1">
+                                    {{-- <div class="control-group" :class="[errors.has('auto_generation') ? 'has-error' : '']" v-if="use_coupon == 1">
                                         <label for="auto_generation" class="required">{{ __('admin::app.promotion.general-info.specific-coupon') }}</label>
 
                                         <input type="checkbox" class="control" name="auto_generation" v-model="auto_generation" value="{{ old('auto_generation') }}" data-vv-as="&quot;Specific Coupon&quot;" v-on:change="checkAutogen">
 
                                         <span class="control-error" v-if="errors.has('auto_generation')">@{{ errors.first('auto_generation') }}</span>
-                                    </div>
+                                    </div> --}}
 
-                                    <input type="hidden" name="auto_generation" v-model="auto_generation">
+                                    {{-- <input type="hidden" name="auto_generation" v-model="auto_generation"> --}}
 
                                     <div class="control-group" :class="[errors.has('per_customer') ? 'has-error' : '']">
                                         <label for="per_customer" class="required">{{ __('admin::app.promotion.general-info.uses-per-cust') }}</label>
@@ -299,14 +299,24 @@
 
                                             <span class="control-error" v-if="errors.has('apply_to_shipping')">@{{ errors.first('apply_to_shipping') }}</span>
                                         </div>
+
+                                        <div class="control-group" :class="[errors.has('end_other_rules') ? 'has-error' : '']">
+                                            <label for="end_other_rules" class="required">{{ __('admin::app.promotion.general-info.is-guest') }}</label>
+
+                                            <select type="text" class="control" name="end_other_rules" v-model="end_other_rules" v-validate="'required'" value="{{ old('end_other_rules')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-guest') }}&quot;">
+                                                <option value="1" :selected="end_other_rules == 1">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+                                                <option value="0" :selected="end_other_rules == 0">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                                            </select>
+
+                                            <span class="control-error" v-if="errors.has('end_other_rules')">@{{ errors.first('end_other_rules') }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="Coupons" v-if="auto_generation != null">
+                            <accordian :active="false" title="Coupons" v-if="use_coupon == 1">
                                 <div slot="body">
-
-                                    <div v-if="!auto_generation">
+                                    {{-- <div v-if="!auto_generation">
                                         <div class="control-group" :class="[errors.has('prefix') ? 'has-error' : '']">
                                             <label for="prefix" class="required">Prefix</label>
 
@@ -322,17 +332,17 @@
 
                                             <span class="control-error" v-if="errors.has('suffix')">@{{ errors.first('suffix') }}</span>
                                         </div>
+                                    </div> --}}
+
+                                    {{-- <div v-if="auto_generation != 0"> --}}
+                                    <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
+                                        <label for="code" class="required">Code</label>
+
+                                        <input type="text" class="control" name="code" v-model="code" v-validate="'required'" value="{{ old('code') }}" data-vv-as="&quot;Code&quot;">
+
+                                        <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                                     </div>
-
-                                    <div v-if="auto_generation != 0">
-                                        <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                            <label for="code" class="required">Code</label>
-
-                                            <input type="text" class="control" name="code" v-model="code" v-validate="'required'" value="{{ old('code') }}" data-vv-as="&quot;Code&quot;">
-
-                                            <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
-                                        </div>
-                                    </div>
+                                    {{-- </div> --}}
                                 </div>
                             </accordian>
 
@@ -385,7 +395,7 @@
                         per_customer: 0,
                         status: null,
                         use_coupon: null,
-                        auto_generation: 0,
+                        // auto_generation: 0,
                         usage_limit: 0,
                         is_guest: 0,
 
@@ -457,19 +467,19 @@
                     this.per_customer = data.per_customer;
                     this.status = data.status;
                     if (data.use_coupon == 0) {
-                        this.auto_generation = null;
+                        // this.auto_generation = null;
                         this.use_coupon = 0;
                     } else {
                         this.use_coupon = 1;
-                        this.auto_generation = data.auto_generation;
+                        // this.auto_generation = data.auto_generation;
                         this.code = data.coupons.code;
-                        this.suffix = data.coupons.suffix;
-                        this.prefix = data.coupons.prefix;
+                        // this.suffix = data.coupons.suffix;
+                        // this.prefix = data.coupons.prefix;
 
-                        if (data.auto_generation == 0)
-                            this.auto_generation = true;
-                        else
-                            this.auto_generation = false;
+                        // if (data.auto_generation == 0)
+                        //     this.auto_generation = true;
+                        // else
+                        //     this.auto_generation = false;
                     }
 
                     this.usage_limit = data.usage_limit;
@@ -520,7 +530,6 @@
                         }
 
                         if (this.condition_on == 'cart') {
-                            console.log(this.conditions_list);
                             this.conditions_list.push(this.cart_object);
 
                             this.cart_object = {

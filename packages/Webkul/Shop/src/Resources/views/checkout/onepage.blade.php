@@ -489,7 +489,7 @@
                     qtyRevealed: false,
                     amount_given: null,
                     amount: null,
-                    discounted: false,
+                    discounted: null,
                     discount: {
                         amount: null,
                         action: null,
