@@ -834,6 +834,8 @@ return [
             'coupon-applied' => 'Coupon used',
             'coupon-failed' => 'Coupon failed to apply',
             'no-coupon' => '* Coupon not applicable',
+            'coupon-removed' => 'Coupon removed successfully',
+            'coupon-remove-failed' => 'Coupon removal failed'
         ],
 
         'catalog' => [

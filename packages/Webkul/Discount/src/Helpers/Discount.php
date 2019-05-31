@@ -535,6 +535,12 @@ class Discount
             return response()->json(['message' => trans('admin::app.promotion.status.no-coupon')], 200);
         }
 
+        $race = $this->endRace($appliedRule);
+
+        if (! $race) {
+            return response()->json(['message' => trans('admin::app.promotion.status.no-coupon')], 200);
+        }
+
         $cart = \Cart::getCart();
 
         // All of conditions is/are true
@@ -674,7 +680,7 @@ class Discount
                         'item_id' => $leastWorthItem['id'],
                         'message' => trans('admin::app.promotion.status.coupon-applied'),
                         'amount_given' => true,
-                        'amount' => $amountDiscounted,
+                        'amount' => core()->currency($amountDiscounted + $cart->tax_total),
                         'action_type' => $action_type,
                         'success' => true
                     ]);
@@ -704,6 +710,152 @@ class Discount
                 'least_value_item' => null,
                 'success' => false
             ]);
+        }
+    }
+
+    /**
+     * To remove the couponable rule
+     */
+    public function removeCoupon()
+    {
+        $rule = $this->cartRuleCart->findWhere([
+            'cart_id' => \Cart::getCart()->id
+        ])->first();
+
+        if ($rule->cart_rule->use_coupon) {
+            if ($rule->delete()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * End race between two rules i.e the one already
+     * applied and one trying to be used
+     */
+    protected function endRace($newRule)
+    {
+        $appliedRule = $this->cartRuleCart->findWhere([
+            'cart_id' => \Cart::getCart()->id
+        ]);
+
+        if (! count($appliedRule)) {
+            return true;
+        }
+
+        $appliedRule = $appliedRule->first()->cart_rule;
+
+        if ($appliedRule->end_other_rules) {
+            return false;
+        } else {
+            if ($newRule->priority > $appliedRule->priority) {
+                return false;
+            } else if ($appliedRule->priority == $newRule->priority) {
+                $appliedRuleImpact = $this->analyzeImpact($appliedRule);
+                $newRuleImpact = $this->analyzeImpact($newRule);
+
+                if ($newRuleImpact > $appliedRuleImpact) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public function analyzeImpact($rule)
+    {
+        $cart = \Cart::getCart();
+
+        $action_type = $rule->action_type;
+        $disc_threshold = $rule->disc_threshold;
+        $disc_amount = $rule->disc_amount;
+        $disc_quantity = $rule->disc_quantity;
+
+        $amountDiscounted = 0;
+        $newQuantity = 0;
+
+        $leastWorthItem = \Cart::leastWorthItem();
+        $realQty = $leastWorthItem['quantity'];
+
+        if ($cart->items_qty >= $disc_threshold && $disc_quantity > 0) {
+            if ($disc_quantity > 1) {
+                $disc_amount = $disc_amount * $disc_quantity;
+            }
+
+            if ($action_type == config('pricerules.cart.validation.0')) {
+                if ($realQty <= $disc_quantity) {
+                    $amountDiscounted = (($leastWorthItem['total'] / $realQty) * ($disc_amount / 100)) * $disc_quantity;
+                } else {
+                    $amountDiscounted = ($leastWorthItem['total'] / $realQty) * ($disc_amount / 100);
+                }
+            } else if ($action_type == config('pricerules.cart.validation.1')) {
+                if ($realQty <= $disc_quantity) {
+                    if ($disc_amount > ($disc_quantity * $leastWorthItem['total'])) {
+                        $amountDiscounted = 0;
+                    } else {
+                        $amountDiscounted = $cart->sub_total - $disc_amount;
+                    }
+                } else {
+                    if ($disc_amount > $leastWorthItem['total']) {
+                        $amountDiscounted = 0;
+                    } else {
+                        $amountDiscounted = $cart->sub_total - $disc_amount;
+                    }
+                }
+            } else if ($action_type == config('pricerules.cart.validation.2')) {
+                if ($realQty <= $disc_quantity) {
+                    $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
+                } else {
+                    $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_quantity;
+                }
+            } else if ($action_type == config('pricerules.cart.validation.3')) {
+                $amountDiscounted = $disc_amount;
+            }
+
+            if ($action_type == config('pricerules.cart.validation.2')) {
+                // $cartRuleCart = $this->cartRuleCart->findWhere([
+                //     'cart_id' => $cart->id,
+                // ]);
+
+                // if (count($cartRuleCart)) {
+                //     $this->cartRuleCart->update([
+                //         'cart_id' => $cart->id,
+                //         'cart_rule_id' => $rule->id
+                //     ], $cartRuleCart->first()->id);
+                // } else {
+                //     $this->cartRuleCart->create([
+                //         'cart_id' => $cart->id,
+                //         'cart_rule_id' => $rule->id
+                //     ]);
+                // }
+
+                return $newQuantity;
+            } else {
+                // $cartRuleCart = $this->cartRuleCart->findWhere([
+                //     'cart_id' => $cart->id,
+                // ]);
+
+                // if (count($cartRuleCart)) {
+                //     $this->cartRuleCart->update([
+                //         'cart_id' => $cart->id,
+                //         'cart_rule_id' => $rule->id
+                //     ], $cartRuleCart->first()->id);
+                // } else {
+                //     $this->cartRuleCart->create([
+                //         'cart_id' => $cart->id,
+                //         'cart_rule_id' => $rule->id
+                //     ]);
+                // }
+
+                return $amountDiscounted;
+            }
         }
     }
 

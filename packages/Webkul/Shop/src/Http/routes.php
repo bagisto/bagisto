@@ -41,6 +41,8 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
         Route::post('checkout/check/coupons', 'Webkul\Shop\Http\Controllers\CartController@applyCoupon')->name('shop.checkout.check.coupons');
 
+        Route::post('checkout/remove/coupon', 'Webkul\Shop\Http\Controllers\CartController@removeCoupon')->name('shop.checkout.remove.coupon');
+
     //Cart Items Add
     Route::post('checkout/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index'

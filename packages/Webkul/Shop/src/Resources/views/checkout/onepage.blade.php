@@ -527,8 +527,8 @@
                         this_this.message = response.data.message;
 
                         this_this.discounted = response.data.success;
-                        this_this.discount.amount = response.data.amount_payable,
-                        this_this.discount.amount_given = response.data.amount;
+                        this_this.discount.amount = response.data.amount;
+                        this_this.discount.amount_given = response.data.amount_given;
                     }).catch(function(error) {
                         this_this.discounted = false;
                     });
@@ -539,6 +539,20 @@
                     {
                         this.message = null;
                     }
+                },
+
+                removeCoupon: function() {
+                    var this_this = this;
+
+                    axios.post('{{ route('shop.checkout.remove.coupon') }}', {
+                        code: this_this.code
+                    }).then(function(response) {
+                        this.discounted = null;
+                    }).catch(function(error) {
+                        this_this.discounted = false;
+                    });
+
+
                 }
             }
         });

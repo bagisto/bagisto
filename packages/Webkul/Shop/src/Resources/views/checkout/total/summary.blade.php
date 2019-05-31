@@ -37,9 +37,11 @@
                 <form class="coupon-form" method="post" @submit.prevent="onSubmit" v-if="!discounted">
                     <div class="control-group mt-20" :class="[errors.has('code') ? 'has-error' : '']">
                         <input v-model="code" type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-on:change="codeChange" style="width: 100%">
+
                         <span class="control-error" v-if="errors.has('code')">
                             @{{ errors.first('code') }}
                         </span>
+
                         <span class="coupon-message mt-5" style="display: block; color: #ff5656; margin-bottom: 5px;" v-if="message != 'Success' && message != 'success'">@{{ message }}</span>
 
                         <span class="coupon-message mt-5" style="display: block; margin-bottom: 5px;" v-if="message == 'Success' || message == 'success'">@{{ message }}</span>
@@ -49,31 +51,45 @@
                 </form>
 
                 @if(isset($rule))
-                    <div class="discounted">
+                    <div class="discounted" v-if="!discounted">
                         <div class="mt-15 mb-10">
                             {{ $rule['rule']->name }} {{ __('shop::app.checkout.onepage.applied') }}
                         </div>
 
                         <span class="payble-amount row mt-10">
                             @if ($rule['impact']['amount_given'])
-                                <label style="float: left;">{{ __('shop::app.checkout.onepage.amt-payable') }}</label>
+                                <label style="float: left;">
+                                    {{ __('shop::app.checkout.onepage.amt-payable') }}
+                                </label>
 
-                                <label style="float: right;">{{ core()->currency($cart->grand_total - $rule['impact']['amount']) }}</label>
+                                <label style="float: right;">
+                                    {{ core()->currency($cart->grand_total - $rule['impact']['amount']) }}
+                                </label>
                             @else
-                                <label style="float: left;">{{ __('shop::app.checkout.onepage.got') }}</label>
-                                <label style="float: right;">{{ $rule['impact']['amount'] }} {{ __('shop::app.checkout.onepage.got') }}</label>
+                                <label style="float: left;">
+                                    {{ __('shop::app.checkout.onepage.got') }}
+                                </label>
+
+                                <label style="float: right;">
+                                    {{ $rule['impact']['amount'] }} {{ __('shop::app.checkout.onepage.got') }}
+                                </label>
                             @endif
                         </span>
                     </div>
                 @endif
+
+                <div class="discounted" v-if="discounted">
+                    <div class="mt-15 mb-10">
+                        @{{ message }} <span class="icon cross-icon" v-on:click="removeCoupon"></span>
+                    </div>
+
+                    <span class="payble-amount row mt-10">
+                        <label style="float: left;">{{ __('shop::app.checkout.onepage.amt-payable') }}</label>
+
+                        <label style="float: right;">@{{ discount.amount }}</label>
+                    </span>
+                </div>
             @endif
         </div>
     </div>
 </div>
-@push('scripts')
-    <script type="text/x-template" id="discount-template">
-        <div id="discount">
-
-        </div>
-    </script>
-@endpush

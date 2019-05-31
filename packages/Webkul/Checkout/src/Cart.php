@@ -1300,6 +1300,13 @@ class Cart {
         return $result;
     }
 
+    public function removeCoupon()
+    {
+        $result = $this->discount->removeCoupon();
+
+        return $result;
+    }
+
     public function leastWorthItem()
     {
         $cart = $this->getCart();

@@ -259,4 +259,26 @@ class CartController extends Controller
 
         return $result;
     }
+
+    /**
+     * To remove the currently active
+     * couponable rule
+     */
+    public function removeCoupon()
+    {
+        dd('removing coupon');
+        $result = Cart::removeCoupon();
+
+        if ($result) {
+            return response()->json([
+                'success' => true,
+                'message' => trans('admin::app.promotion.status.coupon-removed')
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => trans('admin::app.promotion.status.coupon-remove-failed')
+            ]);
+        }
+    }
 }
