@@ -266,7 +266,6 @@ class CartController extends Controller
      */
     public function removeCoupon()
     {
-        dd('removing coupon');
         $result = Cart::removeCoupon();
 
         if ($result) {

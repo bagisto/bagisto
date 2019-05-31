@@ -80,7 +80,7 @@
 
                 <div class="discounted" v-if="discounted">
                     <div class="mt-15 mb-10">
-                        @{{ message }} <span class="icon cross-icon" v-on:click="removeCoupon"></span>
+                        @{{ message }} <span class="icon cross-icon right" v-on:click="removeCoupon"></span>
                     </div>
 
                     <span class="payble-amount row mt-10">

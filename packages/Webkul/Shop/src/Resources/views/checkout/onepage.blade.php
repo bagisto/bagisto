@@ -547,12 +547,16 @@
                     axios.post('{{ route('shop.checkout.remove.coupon') }}', {
                         code: this_this.code
                     }).then(function(response) {
-                        this.discounted = null;
+                        if (response.data.message == true) {
+                            this_this.discounted = null;
+                            this_this.discount.amount = null;
+                            this_this.discount.action = null;
+                            this_this.discount.amount_given = null;
+                            this_this.discount.message = null;
+                        }
                     }).catch(function(error) {
                         this_this.discounted = false;
                     });
-
-
                 }
             }
         });
