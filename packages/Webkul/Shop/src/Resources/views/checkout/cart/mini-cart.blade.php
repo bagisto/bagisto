@@ -22,10 +22,10 @@
         <i class="icon arrow-down-icon"></i>
     </div>
 
-    <div class="dropdown-list" style="display: none; top: 50px; right: 0px;">
+    <div class="dropdown-list" style="display: none; top: 52px; right: 0px;">
         <div class="dropdown-container">
             <div class="dropdown-cart">
-                <div class="dropdown-header mt-5">
+                <div class="dropdown-header">
                     <p class="heading">
                         {{ __('shop::app.checkout.cart.cart-subtotal') }} -
 
