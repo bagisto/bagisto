@@ -140,6 +140,11 @@ Although, mailer environment variables are also required to be set up as **Bagis
 
 ##### On server:
 
+Warning: Before going full on production mode we recommend you to install developer dependencies.
+In order to do that, run the command below:
+
+> composer install --no-dev
+
 ~~~
 Open the specified entry point in your hosts file in browser or make entry in hosts file if not done.
 ~~~

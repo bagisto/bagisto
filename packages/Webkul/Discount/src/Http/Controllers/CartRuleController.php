@@ -209,12 +209,14 @@ class CartRuleController extends Controller
                 foreach($channel->locales as $locale) {
                     $label1['locale_id'] = $locale->id;
                     $label1['label'] = $labels['global'];
+                    $label1['cart_rule_id'] = $ruleCreated->id;
 
                     $ruleLabelCreated = $this->cartRuleLabel->create($label1);
                 }
             }
         } else {
             $label2['label'] = $labels['global'];
+            $label2['cart_rule_id'] = $ruleCreated->id;
             $ruleLabelCreated = $this->cartRuleLabel->create($label2);
         }
 
@@ -279,6 +281,8 @@ class CartRuleController extends Controller
         }
 
         $data = request()->all();
+
+        dd($data);
 
         if ($data['starts_from'] == "" || $data['ends_till'] == "") {
             $data['starts_from'] = null;

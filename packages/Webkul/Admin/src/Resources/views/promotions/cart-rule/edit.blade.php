@@ -232,6 +232,9 @@
 
                                                         <input type="number" step="0.1000" class="control" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value">
                                                     </div>
+
+                                                    <input type="hidden" name="all_conditions" v-model="all_conditions">
+
                                                 </div>
                                             </div>
                                         </div>
@@ -348,27 +351,9 @@
 
                             <accordian :active="false" title="labels">
                                 <div slot="body">
-                                    <input type="hidden" name="all_conditions" v-model="all_conditions">
-                                    <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']" v-if="dedicated_label">
-                                        <label for="label" class="required">Global Label</label>
-
-                                        <input type="text" class="control" name="label[global]" v-model="label.global" data-vv-as="&quot;label&quot;">
-
-                                        <span class="control-error" v-if="errors.has('label')">@{{ errors.first('label') }}</span>
-                                    </div>
-
-                                    <div v-if="label.global == null || label.global == ''">
                                     @foreach($cart_rule[3]->labels as $label)
-                                        <span>[{{ $label->channel->code }}]</span>
-                                        <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
-                                            <label for="id">{{ $label->locale->code }}</label>
 
-                                            <input type="text" class="control" name="label[{{ $label->channel->code }}][{{ $label->locale->code }}]" v-model="label.{{ $label->channel->code }}.{{ $label->locale->code }}" data-vv-as="&quot;Label&quot;" value="{{ old('label') }}">
-
-                                            <span class="control-error" v-if="errors.has('label')">@{{ errors.first('label') }}</span>
-                                        </div>
                                     @endforeach
-                                    </div>
                                 </div>
                             </accordian>
                         </div>
@@ -421,11 +406,10 @@
 
                         global_label: null,
                         label: {
-                            global: null,
                             @foreach(core()->getAllChannels() as $channel)
                                 @foreach($channel->locales as $locale)
-                                    '{{ trim($channel->code) }}' : {
-                                       '{{ trim($locale->code) }}': null
+                                    {{ trim($channel->code) }} : {
+                                        {{ trim($locale->code) }}: ''
                                     },
                                 @endforeach
                             @endforeach
@@ -502,18 +486,6 @@
 
                     if (data.conditions != null) {
                         this.conditions_list = JSON.parse(JSON.parse(data.conditions));
-                    }
-
-                    this.dedicated_label = false;
-                    global_label = null;
-
-                    this.label = {
-                        @foreach($cart_rule[3]->labels as $label)
-                            '{{ $label->channel->code }}': {
-                                '{{ $label->locale->code }}':
-                                '{{ $label->label }}'
-                            },
-                        @endforeach
                     }
 
                     criteria = null;

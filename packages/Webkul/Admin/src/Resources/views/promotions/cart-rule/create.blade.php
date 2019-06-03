@@ -116,7 +116,7 @@
                                     '']">
                                         <label for="customer_groups" class="required">{{ __('admin::app.promotion.general-info.is-coupon') }}</label>
 
-                                        <select type="text" class="control" name="use_coupon" v-model="use_coupon" v-validate="'required'" value="{{ old('use_coupon')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-coupon') }}&quot;" v-on:change="useCoupon">
+                                        <select type="text" class="control" name="use_coupon" v-model="use_coupon" v-validate="'required'" value="{{ old('use_coupon')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-coupon') }}&quot;">
                                             <option value="1" :selected="use_coupon == 1">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
                                             <option value="0" :selected="use_coupon == 0">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
                                         </select>
