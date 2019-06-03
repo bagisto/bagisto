@@ -4,6 +4,7 @@ namespace Webkul\Customer\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Webkul\Core\Helpers\Session;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
@@ -88,7 +89,7 @@ class WishlistController extends Controller
 
                 return redirect()->back();
             } else {
-                session()->flash('error', trans('customer::app.wishlist.failure'));
+                Session::flashError('customer::app.wishlist.failure');
 
                 return redirect()->back();
             }
@@ -118,7 +119,7 @@ class WishlistController extends Controller
             }
         }
 
-        session()->flash('error', trans('customer::app.wishlist.remove-fail'));
+        Session::flashError('customer::app.wishlist.remove-fail');
 
         return redirect()->back();
     }
@@ -147,12 +148,12 @@ class WishlistController extends Controller
 
                 return redirect()->back();
             } else {
-                session()->flash('error', trans('shop::app.wishlist.move-error'));
+                Session::flashError('shop::app.wishlist.move-error');
 
                 return redirect()->back();
             }
         } else if ($result == 0) {
-            session()->flash('error', trans('shop::app.wishlist.error'));
+            Session::flashError('shop::app.wishlist.error');
 
             return redirect()->back();
         } else if ($result == -1) {

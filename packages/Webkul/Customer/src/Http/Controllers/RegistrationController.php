@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Webkul\Core\Helpers\Session;
 use Webkul\Customer\Mail\VerificationEmail;
 use Illuminate\Routing\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -102,7 +103,7 @@ class RegistrationController extends Controller
 
             return redirect()->route($this->_config['redirect']);
         } else {
-            session()->flash('error', trans('shop::app.customer.signup-form.failed'));
+            Session::flashError('shop::app.customer.signup-form.failed');
 
             return redirect()->back();
         }
@@ -148,7 +149,7 @@ class RegistrationController extends Controller
                 \Cookie::queue(\Cookie::forget('email-for-resend'));
             }
         } catch (\Exception $e) {
-            session()->flash('error', trans('shop::app.customer.signup-form.verification-not-sent'));
+            Session::flashError('shop::app.customer.signup-form.verification-not-sent');
 
             return redirect()->back();
         }

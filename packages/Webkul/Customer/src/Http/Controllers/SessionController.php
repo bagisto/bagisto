@@ -5,6 +5,7 @@ namespace Webkul\Customer\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Webkul\Core\Helpers\Session;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Http\Listeners\CustomerEventsHandler;
 use Cart;
@@ -52,7 +53,7 @@ class SessionController extends Controller
         ]);
 
         if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
-            session()->flash('error', trans('shop::app.customer.login-form.invalid-creds'));
+            Session::flashError('shop::app.customer.login-form.invalid-creds');
 
             return redirect()->back();
         }

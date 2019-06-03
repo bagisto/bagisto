@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-
+use Webkul\Core\Helpers\Session;
 
 /**
  * Catalog family controller
@@ -135,10 +135,10 @@ class AttributeFamilyController extends Controller
         $attributeFamily = $this->attributeFamily->findOrFail($id);
 
         if ($this->attributeFamily->count() == 1) {
-            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Family']));
+            Session::flashError('admin::app.response.last-delete-error', ['name' => 'Family']);
 
         } else if ($attributeFamily->products()->count()) {
-            session()->flash('error', trans('admin::app.response.attribute-product-error', ['name' => 'Attribute family']));
+            Session::flashError('admin::app.response.attribute-product-error', ['name' => 'Attribute family']);
         } else {
             try {
                 $this->attributeFamily->delete($id);
@@ -147,7 +147,7 @@ class AttributeFamilyController extends Controller
 
                 return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
-                session()->flash('error', trans( 'admin::app.response.delete-failed', ['name' => 'Family']));
+                Session::flashError( 'admin::app.response.delete-failed', ['name' => 'Family']);
             }
         }
 
@@ -182,7 +182,7 @@ class AttributeFamilyController extends Controller
 
             return redirect()->back();
         } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+            Session::flashError('admin::app.datagrid.mass-ops.method-error');
 
             return redirect()->back();
         }

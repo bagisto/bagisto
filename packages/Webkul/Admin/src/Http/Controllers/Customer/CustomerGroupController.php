@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Helpers\Session;
 use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
 
 /**
@@ -141,7 +142,7 @@ class CustomerGroupController extends Controller
 
                 return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer Group']));
+                Session::flashError('admin::app.response.delete-failed', ['name' => 'Customer Group']);
             }
         }
 

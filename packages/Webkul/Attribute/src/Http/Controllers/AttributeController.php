@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Event;
+use Webkul\Core\Helpers\Session;
 
 /**
  * Catalog attribute controller
@@ -132,7 +133,7 @@ class AttributeController extends Controller
         $attribute = $this->attribute->findOrFail($id);
 
         if (! $attribute->is_user_defined) {
-            session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
+            Session::flashError('admin::app.response.user-define-error', ['name' => 'Attribute']);
         } else {
             try {
                 $this->attribute->delete($id);
@@ -141,7 +142,7 @@ class AttributeController extends Controller
 
                 return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Attribute']));
+                Session::flashError('admin::app.response.delete-failed', ['name' => 'Attribute']);
             }
         }
 
@@ -183,7 +184,7 @@ class AttributeController extends Controller
 
             return redirect()->back();
         } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+            Session::flashError('admin::app.datagrid.mass-ops.method-error');
 
             return redirect()->back();
         }

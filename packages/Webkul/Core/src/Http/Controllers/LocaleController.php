@@ -5,6 +5,7 @@ namespace Webkul\Core\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Webkul\Core\Helpers\Session;
 use Webkul\Core\Repositories\LocaleRepository as Locale;
 
 /**
@@ -135,7 +136,7 @@ class LocaleController extends Controller
         $locale = $this->locale->findOrFail($id);
 
         if($this->locale->count() == 1) {
-            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Locale']));
+            Session::flashError('admin::app.response.last-delete-error', ['name' => 'Locale']);
         } else {
             try {
                 Event::fire('core.locale.delete.before', $id);
@@ -148,7 +149,7 @@ class LocaleController extends Controller
 
                 return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Locale']));
+                Session::flashError('admin::app.response.delete-failed', ['name' => 'Locale']);
             }
         }
 

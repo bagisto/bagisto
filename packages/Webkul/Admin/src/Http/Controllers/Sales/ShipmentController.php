@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Helpers\Session;
 use Webkul\Sales\Repositories\ShipmentRepository as Shipment;
 use Webkul\Sales\Repositories\OrderRepository as Order;
 use Webkul\Sales\Repositories\OrderItemRepository as OrderItem;
@@ -92,7 +93,7 @@ class ShipmentController extends Controller
         $order = $this->order->findOrFail($orderId);
 
         if (! $order->channel || !$order->canShip()) {
-            session()->flash('error', trans('admin::app.sales.shipments.creation-error'));
+            Session::flashError('admin::app.sales.shipments.creation-error');
 
             return redirect()->back();
         }
@@ -112,7 +113,7 @@ class ShipmentController extends Controller
         $order = $this->order->findOrFail($orderId);
 
         if (! $order->canShip()) {
-            session()->flash('error', trans('admin::app.sales.shipments.order-error'));
+            Session::flashError('admin::app.sales.shipments.order-error');
 
             return redirect()->back();
         }
@@ -127,7 +128,7 @@ class ShipmentController extends Controller
         $data = request()->all();
 
         if (! $this->isInventoryValidate($data)) {
-            session()->flash('error', trans('admin::app.sales.shipments.quantity-invalid'));
+            Session::flashError('admin::app.sales.shipments.quantity-invalid');
 
             return redirect()->back();
         }

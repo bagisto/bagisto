@@ -5,6 +5,7 @@ namespace Webkul\Core\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Webkul\Core\Helpers\Session;
 use Webkul\Core\Repositories\ExchangeRateRepository as ExchangeRate;
 use Webkul\Core\Repositories\CurrencyRepository as Currency;
 
@@ -150,7 +151,7 @@ class ExchangeRateController extends Controller
         $exchangeRate = $this->exchangeRate->findOrFail($id);
 
         if($this->exchangeRate->count() == 1) {
-            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Exchange rate']));
+            Session::flashError('admin::app.response.last-delete-error', ['name' => 'Exchange rate']);
         } else {
             try {
                 Event::fire('core.exchange_rate.delete.before', $id);
@@ -163,7 +164,7 @@ class ExchangeRateController extends Controller
 
                 return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-error', ['name' => 'Exchange rate']));
+                Session::flashError('admin::app.response.delete-error', ['name' => 'Exchange rate']);
             }
         }
 

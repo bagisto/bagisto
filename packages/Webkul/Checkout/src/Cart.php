@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Checkout\Repositories\CartAddressRepository;
+use Webkul\Core\Helpers\Session;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
@@ -191,7 +192,7 @@ class Cart {
             else
                 return false;
         } else {
-            session()->flash('error', trans('shop::app.checkout.cart.create-error'));
+            Session::flashError('shop::app.checkout.cart.create-error');
         }
     }
 
@@ -289,12 +290,12 @@ class Cart {
 
         //Check if the product's information is proper or not
         if (! isset($data['product']) || ! isset($data['quantity'])) {
-            session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_fields'));
+            Session::flashError('shop::app.checkout.cart.integrity.missing_fields');
 
             return false;
         } else {
             if ($product->type == 'configurable' && ! isset($data['super_attribute'])) {
-                session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_options'));
+                Session::flashError('shop::app.checkout.cart.integrity.missing_options');
 
                 return false;
             }

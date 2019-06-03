@@ -5,6 +5,7 @@ namespace Webkul\Product\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Webkul\Core\Helpers\Session;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Repositories\ProductReviewRepository as ProductReview;
 
@@ -159,7 +160,7 @@ class ReviewController extends Controller
             return redirect()->route($this->_config['redirect']);
 
         } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+            Session::flashError('admin::app.datagrid.mass-ops.method-error');
 
             return redirect()->back();
         }
@@ -211,7 +212,7 @@ class ReviewController extends Controller
 
             return redirect()->route($this->_config['redirect']);
         } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+            Session::flashError('admin::app.datagrid.mass-ops.method-error');
 
             return redirect()->back();
         }

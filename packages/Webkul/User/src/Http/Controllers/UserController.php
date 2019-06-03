@@ -5,6 +5,7 @@ namespace Webkul\User\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Webkul\Core\Helpers\Session;
 use Webkul\User\Repositories\AdminRepository as Admin;
 use Webkul\User\Repositories\RoleRepository as Role;
 use Webkul\User\Http\Requests\UserForm;
@@ -162,7 +163,7 @@ class UserController extends Controller
         $user = $this->admin->findOrFail($id);
 
         if ($this->admin->count() == 1) {
-            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Admin']));
+            Session::flashError('admin::app.response.last-delete-error', ['name' => 'Admin']);
         } else {
             Event::fire('user.admin.delete.before', $id);
 
@@ -179,7 +180,7 @@ class UserController extends Controller
 
                 return response()->json(['message' => true], 200);
             } catch (\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Admin']));
+                Session::flashError('admin::app.response.delete-failed', ['name' => 'Admin']);
             }
         }
 
@@ -197,7 +198,7 @@ class UserController extends Controller
 
         if (Hash::check($password, auth()->guard('admin')->user()->password)) {
             if ($this->admin->count() == 1) {
-                session()->flash('error', trans('admin::app.users.users.delete-last'));
+                Session::flashError('admin::app.users.users.delete-last');
             } else {
                 $id = auth()->guard('admin')->user()->id;
 

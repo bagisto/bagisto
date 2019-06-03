@@ -5,6 +5,7 @@ namespace Webkul\Product\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Webkul\Core\Helpers\Session;
 use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Repositories\ProductAttributeValueRepository as ProductAttributeValue;
@@ -133,7 +134,7 @@ class ProductController extends Controller
         }
 
         if (request()->input('type') == 'configurable' && (! request()->has('super_attributes') || ! count(request()->get('super_attributes')))) {
-            session()->flash('error', trans('admin::app.catalog.products.configurable-error'));
+            Session::flashError('admin::app.catalog.products.configurable-error');
 
             return back();
         }
@@ -201,7 +202,7 @@ class ProductController extends Controller
 
             return response()->json(['message' => true], 200);
         } catch (\Exception $e) {
-            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Product']));
+            Session::flashError('admin::app.response.delete-failed', ['name' => 'Product']);
         }
 
         return response()->json(['message' => false], 400);

@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Webkul\Core\Helpers\Session;
 use Webkul\Shop\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -88,7 +89,7 @@ class SubscriptionController extends Controller
 
                 session()->flash('success', trans('shop::app.subscription.subscribed'));
             } catch (\Exception $e) {
-                session()->flash('error', trans('shop::app.subscription.not-subscribed'));
+                Session::flashError('shop::app.subscription.not-subscribed');
 
                 $mailSent = false;
             }
@@ -104,13 +105,13 @@ class SubscriptionController extends Controller
                 ]);
 
                 if (!$result) {
-                    session()->flash('error', trans('shop::app.subscription.not-subscribed'));
+                    Session::flashError('shop::app.subscription.not-subscribed');
 
                     return redirect()->back();
                 }
             }
         } else {
-            session()->flash('error', trans('shop::app.subscription.already'));
+            Session::flashError('shop::app.subscription.already');
         }
 
         return redirect()->back();

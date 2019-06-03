@@ -5,6 +5,7 @@ namespace Webkul\Core\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Webkul\Core\Helpers\Session;
 use Webkul\Core\Repositories\ChannelRepository as Channel;
 
 /**
@@ -149,7 +150,7 @@ class ChannelController extends Controller
         $channel = $this->channel->findOrFail($id);
 
         if ($channel->code == config('app.channel')) {
-            session()->flash('error', trans('admin::app.response.cannot-delete-default', ['name' => 'Channel']));
+            Session::flashError('admin::app.response.cannot-delete-default', ['name' => 'Channel']);
         } else {
             try {
                 Event::fire('core.channel.delete.before', $id);
@@ -163,7 +164,7 @@ class ChannelController extends Controller
                 return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
                 // session()->flash('warning', trans($e->getMessage()));
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Channel']));
+                Session::flashError('admin::app.response.delete-failed', ['name' => 'Channel']);
             }
         }
 

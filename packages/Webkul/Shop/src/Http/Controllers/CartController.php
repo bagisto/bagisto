@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Core\Helpers\Session;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
@@ -126,7 +127,7 @@ class CartController extends Controller
             return redirect()->route($this->_config['redirect']);
 
         } catch(\Exception $e) {
-            session()->flash('error', trans($e->getMessage()));
+            Session::flashError($e->getMessage());
 
             return redirect()->back();
         }

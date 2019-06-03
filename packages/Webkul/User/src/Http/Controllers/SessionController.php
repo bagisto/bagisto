@@ -5,6 +5,7 @@ namespace Webkul\User\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
+use Webkul\Core\Helpers\Session;
 
 /**
  * Admin user session controller
@@ -72,7 +73,7 @@ class SessionController extends Controller
         $remember = request('remember');
 
         if (! auth()->guard('admin')->attempt(request(['email', 'password']), $remember)) {
-            session()->flash('error', trans('admin::app.users.users.login-error'));
+            Session::flashError('admin::app.users.users.login-error');
 
             return redirect()->back();
         }

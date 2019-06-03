@@ -5,6 +5,7 @@ namespace Webkul\Tax\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Webkul\Core\Helpers\Session;
 use Webkul\Tax\Repositories\TaxRateRepository as TaxRate;
 use Webkul\Admin\Imports\DataGridImport;
 use Illuminate\Support\Facades\Validator;
@@ -169,7 +170,7 @@ class TaxRateController extends Controller
 
             return response()->json(['message' => true], 200);
         } catch(\Exception $e) {
-            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Tax Rate']));
+            Session::flashError('admin::app.response.delete-failed', ['name' => 'Tax Rate']);
         }
 
         return response()->json(['message' => false], 400);
@@ -185,7 +186,7 @@ class TaxRateController extends Controller
         $valid_extension = ['xlsx', 'csv', 'xls'];
 
         if (!in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
-            session()->flash('error', trans('admin::app.export.upload-error'));
+            Session::flashError('admin::app.export.upload-error');
         } else {
             try {
                 $excelData = (new DataGridImport)->toArray(request()->file('file'));
