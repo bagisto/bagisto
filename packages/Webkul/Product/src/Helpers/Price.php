@@ -46,7 +46,7 @@ class Price extends AbstractProduct
             if ($this->haveSpecialPrice($product)) {
                 return $price[$product->id] = $product->special_price;
             }
-            
+
             return $price[$product->id] = $product->price;
         }
     }
@@ -61,10 +61,8 @@ class Price extends AbstractProduct
     {
         static $price = [];
 
-        if(array_key_exists($product->id, $price))
+        if (array_key_exists($product->id, $price))
             return $price[$product->id];
-
-        $attribute = $this->attribute->findOneByField('code', 'price');
 
         if ($product instanceof ProductFlat) {
             $productId = $product->product_id;
@@ -72,17 +70,22 @@ class Price extends AbstractProduct
             $productId = $product->id;
         }
 
+        $variantSpecialPrice = $variantRegularPrice = [];
 
-        //Todo => can be optimized
-        $qb = ProductAttributeValue::join('products', 'product_attribute_values.product_id', '=', 'products.id')
-            ->join('attributes', 'product_attribute_values.attribute_id', '=', 'attributes.id')
-            ->where('products.parent_id', $productId)
-            ->where('attributes.code', 'price')
-            ->addSelect('product_attribute_values.*');
+        foreach ($product->variants as $productVariant) {
+            if ($this->haveSpecialPrice($productVariant)) {
+                $variantSpecialPrice[] = $this->getSpecialPrice($productVariant);
+            }
+            $variantRegularPrice[] = $productVariant->price;
+        }
 
-        $this->applyChannelLocaleFilter($attribute, $qb);
+        if (count($variantSpecialPrice) > 1)
+            if (min($variantSpecialPrice) < min($variantRegularPrice))
+                return $price[$product->id] = min($variantSpecialPrice);
 
-        return $price[$product->id] = $qb->min('product_attribute_values.' . ProductAttributeValue::$attributeTypeFields['price']);
+            return $price[$product->id] = min($variantRegularPrice);
+
+        return $price[$product->id] = min($variantRegularPrice);
     }
 
     /**
