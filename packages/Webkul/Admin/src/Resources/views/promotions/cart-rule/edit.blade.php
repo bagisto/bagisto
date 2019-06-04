@@ -187,8 +187,9 @@
                                         <span class="btn btn-primary btn-lg" v-on:click="addCondition">Add Condition</span>
                                     </div>
 
-                                    <div class="condition-set">
+                                    <div class="mt-10 mb-10"><b>Any of the condition is true</b></div>
 
+                                    <div class="condition-set">
                                         <!-- Cart Attributes -->
                                         <div v-for="(condition, index) in conditions_list" :key="index">
                                             <div class="control-container mt-20">

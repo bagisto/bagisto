@@ -138,22 +138,24 @@
 
                                 this.resetChildren(attribute.nextAttribute);
                             } else {
-                                this.selectedProductId = attribute.options[attribute.selectedIndex].allowedProducts[0];
+                                this.selectedProductId = this.simpleProduct;
                             }
 
                             //buy now anchor href changer with options
                             var buyNowLink = $('.btn.buynow').attr('data-href');
+                            var quantity = document.getElementById('quantity').value;
 
                             if (this.selectedProductId != '') {
                                 var splitted = buyNowLink.split("/");
 
-                                var lastItem = splitted.pop();
+                                splitted.pop();
+                                splitted.pop();
 
                                 lastItem = this.selectedProductId;
 
                                 var joined = splitted.join('/');
 
-                                var newBuyNowUrl = joined + '/' + lastItem;
+                                var newBuyNowUrl = joined + '/' + lastItem + '/' + quantity;
 
                                 $('.btn.buynow').attr('data-href', newBuyNowUrl);
                             }
@@ -219,7 +221,7 @@
 
                                 if (prevOption) {
                                     for (j = 0; j < options[i].products.length; j++) {
-                                        if (prevOption.products && prevOption.products.indexOf(options[i].products[j]) > -1) {
+                                        if (prevOption.allowedProducts && prevOption.allowedProducts.indexOf(options[i].products[j]) > -1) {
                                             allowedProducts.push(options[i].products[j]);
                                         }
                                     }

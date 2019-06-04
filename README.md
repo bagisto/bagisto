@@ -56,7 +56,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 
 ### 2. Documentation <a name="#-documentation-"></a>:
 
-# Visit our [Documentation](https://devdocs.bagisto.com)
+#### Bagisto Documentation [https://devdocs.bagisto.com](https://devdocs.bagisto.com)
 
 ### 3. Requirements <a name="#requirements"></a>:
 
