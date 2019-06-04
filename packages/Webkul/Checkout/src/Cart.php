@@ -1180,7 +1180,7 @@ class Cart {
      *
      * @return response mixed
      */
-    public function proceedToBuyNow($id) {
+    public function proceedToBuyNow($id, $quantity) {
         $product = $this->product->findOneByField('id', $id);
 
         if ($product->type == 'configurable') {
@@ -1195,7 +1195,7 @@ class Cart {
 
                 $data['product'] = $parent->id;
                 $data['selected_configurable_option'] = $simpleOrVariant->id;
-                $data['quantity'] = 1;
+                $data['quantity'] = $quantity;
                 $data['super_attribute'] = 'From Buy Now';
 
                 $result = $this->add($parent->id, $data);
@@ -1204,7 +1204,7 @@ class Cart {
             } else {
                 $data['product'] = $id;
                 $data['is_configurable'] = false;
-                $data['quantity'] = 1;
+                $data['quantity'] = $quantity;
 
                 $result = $this->add($id, $data);
 
