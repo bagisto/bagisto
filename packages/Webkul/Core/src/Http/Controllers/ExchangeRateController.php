@@ -94,7 +94,7 @@ class ExchangeRateController extends Controller
 
         Event::fire('core.exchange_rate.create.after', $exchangeRate);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Exchange rate']));
+        session()->flash('success', trans('admin::app.settings.exchange_rates.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -134,7 +134,7 @@ class ExchangeRateController extends Controller
 
         Event::fire('core.exchange_rate.update.after', $exchangeRate);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Exchange rate']));
+        session()->flash('success', trans('admin::app.settings.exchange_rates.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -149,15 +149,15 @@ class ExchangeRateController extends Controller
     {
         $exchangeRate = $this->exchangeRate->findOrFail($id);
 
-        if($this->exchangeRate->count() == 1) {
-            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Exchange rate']));
+        if ($this->exchangeRate->count() == 1) {
+            session()->flash('error', trans('admin::app.settings.exchange_rates.last-delete-error'));
         } else {
             try {
                 Event::fire('core.exchange_rate.delete.before', $id);
 
                 $this->exchangeRate->delete($id);
 
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Exchange rate']));
+                session()->flash('success', trans('admin::app.settings.exchange_rates.delete-success'));
 
                 Event::fire('core.exchange_rate.delete.after', $id);
 

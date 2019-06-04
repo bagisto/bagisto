@@ -551,7 +551,11 @@ return [
             'save-btn-title' => 'Save Locale',
             'general' => 'General',
             'code' => 'Code',
-            'name' => 'Name'
+            'name' => 'Name',
+            'create-success' => 'Locale created successfully.',
+            'update-success' => 'Locale updated successfully.',
+            'delete-success' => 'Locale deleted successfully.',
+            'last-delete-error' => 'At least one Locale is required.',
         ],
         'countries' => [
             'title' => 'Countries',
@@ -569,7 +573,11 @@ return [
             'general' => 'General',
             'code' => 'Code',
             'name' => 'Name',
-            'symbol' => 'Symbol'
+            'symbol' => 'Symbol',
+            'create-success' => 'Currency created successfully.',
+            'update-success' => 'Currency updated successfully.',
+            'delete-success' => 'Currency deleted successfully.',
+            'last-delete-error' => 'At least one Currency is required.',
         ],
         'exchange_rates' => [
             'title' => 'Exchange Rates',
@@ -579,7 +587,11 @@ return [
             'general' => 'General',
             'source_currency' => 'Source Currency',
             'target_currency' => 'Target Currency',
-            'rate' => 'Rate'
+            'rate' => 'Rate',
+            'create-success' => 'Exchange Rate created successfully.',
+            'update-success' => 'Exchange Rate updated successfully.',
+            'delete-success' => 'Exchange Rate deleted successfully.',
+            'last-delete-error' => 'At least one Exchange Rate is required.',
         ],
         'inventory_sources' => [
             'title' => 'Inventory Sources',
@@ -605,7 +617,11 @@ return [
             'priority' => 'Priority',
             'latitude' => 'Latitude',
             'longitude' => 'Longitude',
-            'status' => 'Status'
+            'status' => 'Status',
+            'create-success' => 'Inventory source created successfully.',
+            'update-success' => 'Inventory source updated successfully.',
+            'delete-success' => 'Inventory source deleted successfully.',
+            'last-delete-error' => 'At least one Inventory source is required.',
         ],
         'channels' => [
             'title' => 'Channels',
@@ -629,7 +645,11 @@ return [
             'home_page_content' => 'Home Page Content',
             'footer_content' => 'Footer Content',
             'logo' => 'Logo',
-            'favicon' => 'Favicon'
+            'favicon' => 'Favicon',
+            'create-success' => 'Channel created successfully.',
+            'update-success' => 'Channel updated successfully.',
+            'delete-success' => 'Channel deleted successfully.',
+            'last-delete-error' => 'At least one Channel is required.',
         ],
 
         'sliders' => [

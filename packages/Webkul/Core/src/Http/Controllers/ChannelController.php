@@ -87,7 +87,7 @@ class ChannelController extends Controller
 
         Event::fire('core.channel.create.after', $channel);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Channel']));
+        session()->flash('success', trans('admin::app.settings.channels.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -133,7 +133,7 @@ class ChannelController extends Controller
 
         Event::fire('core.channel.update.after', $channel);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Channel']));
+        session()->flash('success', trans('admin::app.settings.channels.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -149,7 +149,7 @@ class ChannelController extends Controller
         $channel = $this->channel->findOrFail($id);
 
         if ($channel->code == config('app.channel')) {
-            session()->flash('error', trans('admin::app.response.cannot-delete-default', ['name' => 'Channel']));
+            session()->flash('error', trans('admin::app.settings.channels.last-delete-error'));
         } else {
             try {
                 Event::fire('core.channel.delete.before', $id);
@@ -158,7 +158,7 @@ class ChannelController extends Controller
 
                 Event::fire('core.channel.delete.after', $id);
 
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Channel']));
+                session()->flash('success', trans('admin::app.settings.channels.delete-success'));
 
                 return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
