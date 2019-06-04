@@ -316,7 +316,7 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="Coupons" v-if="use_coupon">
+                            <accordian :active="false" title="Coupons" v-if="use_coupon == 1">
                                 <div slot="body">
 
                                     {{-- <div v-if="!auto_generation">
@@ -366,7 +366,7 @@
                                             <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
                                                 <label for="code">{{ $locale->code }}</label>
 
-                                                <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" v-validate="'alpha'" data-vv-as="&quot;Label&quot;">
+                                                <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" v-validate="'alpha_spaces'" data-vv-as="&quot;Label&quot;">
 
                                                 <span class="control-error" v-if="errors.has('label')">@{{ errors.first('label') }}</span>
                                             </div>

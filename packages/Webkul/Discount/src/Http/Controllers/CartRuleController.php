@@ -105,7 +105,6 @@ class CartRuleController extends Controller
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
-            // 'auto_generation' => 'boolean|sometimes',
             'usage_limit' => 'numeric|min:0',
             'per_customer' => 'numeric|min:0',
             'action_type' => 'required|string',
@@ -282,8 +281,6 @@ class CartRuleController extends Controller
 
         $data = request()->all();
 
-        dd($data);
-
         if ($data['starts_from'] == "" || $data['ends_till'] == "") {
             $data['starts_from'] = null;
             $data['ends_till'] = null;
@@ -362,20 +359,7 @@ class CartRuleController extends Controller
         $ruleGroupUpdated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleUpdated);
         $ruleChannelUpdated = $this->cartRule->ChannelSync($channels, $ruleUpdated);
 
-        // if (isset($labels['global'])) {
-        //     foreach (core()->getAllChannels() as $channel) {
-        //         $label1['channel_id'] = $channel->id;
-        //         foreach ($channel->locales as $locale) {
-        //             $label1['locale_id'] = $locale->id;
-        //             $label1['label'] = $labels['global'];
-
-        //             $ruleLabelUpdated = $this->cartRuleLabel->create($label1);
-        //         }
-        //     }
-        // } else {
-        //     $label2['label'] = $labels['global'];
-        //     $ruleLabelUpdated = $this->cartRuleLabel->create($label2);
-        // }
+        $labelsUpdated = $this->cartRule->LabelSync($labels, $ruleUpdated);
 
         if (isset($coupons)) {
             $coupons['cart_rule_id'] = $ruleUpdated->id;

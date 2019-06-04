@@ -38,6 +38,8 @@
 
                             <accordian :active="true" title="Information">
                                 <div slot="body">
+                                    <input type="hidden" name="all_conditions" v-model="all_conditions">
+
                                     <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                         <label for="name" class="required">{{ __('admin::app.promotion.general-info.name') }}</label>
 
@@ -232,9 +234,6 @@
 
                                                         <input type="number" step="0.1000" class="control" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value">
                                                     </div>
-
-                                                    <input type="hidden" name="all_conditions" v-model="all_conditions">
-
                                                 </div>
                                             </div>
                                         </div>
@@ -352,7 +351,14 @@
                             <accordian :active="false" title="labels">
                                 <div slot="body">
                                     @foreach($cart_rule[3]->labels as $label)
+                                        <span>[{{ $label->channel->code }}]</span>
+                                        <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
+                                            <label for="code">{{ $label->locale->code }}</label>
 
+                                            <input type="text" class="control" name="label[{{ $label->channel->code }}][{{ $label->locale->code }}]" value="{{ $label->label }}" v-validate="'required'" data-vv-as="&quot;Label&quot;">
+
+                                            <span class="control-error" v-if="errors.has('label')">@{{ errors.first('label') }}</span>
+                                        </div>
                                     @endforeach
                                 </div>
                             </accordian>
@@ -405,15 +411,14 @@
                         dedicated_label: true,
 
                         global_label: null,
-                        label: {
-                            @foreach(core()->getAllChannels() as $channel)
-                                @foreach($channel->locales as $locale)
-                                    {{ trim($channel->code) }} : {
-                                        {{ trim($locale->code) }}: ''
-                                    },
-                                @endforeach
-                            @endforeach
-                        },
+                        labels: [],
+                        // label: {
+                        //     @foreach(core()->getAllChannels() as $channel)
+                        //         @foreach($channel->locales as $locale)
+                        //             {{ trim($channel->code) }} : null,
+                        //         @endforeach
+                        //     @endforeach
+                        // },
 
                         criteria: null,
                         conditions: @json($cart_rule[0]).conditions,

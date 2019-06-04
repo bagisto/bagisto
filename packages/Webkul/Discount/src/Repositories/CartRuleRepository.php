@@ -33,7 +33,7 @@ class CartRuleRepository extends Repository
         $this->cartRuleChannels = $cartRuleChannels;
         $this->cartRuleCustomerGroups = $cartRuleCustomerGroups;
         $this->cartRuleCoupons = $cartRuleCoupons;
-        $this->cartRuleLabels = $cartRuleLabels;
+        $this->cartRuleLabel = $cartRuleLabels;
 
         parent::__construct($app);
     }
@@ -146,15 +146,51 @@ class CartRuleRepository extends Repository
     /**
      * To sync the labels associated with the cart rule
      */
-    public function LabelsSync($labels, $cartRule)
+    public function LabelSync($labels, $cartRule)
     {
+        foreach ($labels as $channelCode => $value) {
+            $localeCode = array_keys($value)[0];
+            $localeValue = array_values($value)[0];
 
+            $updated = 0;
+            foreach ($cartRule->labels as $label) {
+                if ($label->channel->code == $channelCode && $label->locale->code == $localeCode) {
+                    $label->update([
+                        'label' => $localeValue
+                    ]);
+
+                    $updated = 1;
+                }
+            }
+
+            if ($updated == 0) {
+                foreach (core()->getAllChannels() as $channel) {
+                    if ($channel->code == $channelCode) {
+                        $newLabel['channel_id'] = $channel->id;
+                    }
+
+                    foreach($channel->locales as $locale) {
+                        if ($localeCode == $locale->code) {
+                            $newLabel['locale_id'] = $locale->id;
+                            $newLabel['label'] = $localeValue;
+                            $newLabel['cart_rule_id'] = $cartRule->id;
+
+                            $ruleLabelCreated = $this->CartRuleLabels->create($newLabel);
+                        }
+                    }
+                }
+            }
+
+            $updated = 0;
+        }
+
+        return true;
     }
 
     /**
      * To sync the coupons associated with the cart rule
      */
-    public function CouponsSync($coupon, $cartRule)
+    public function CouponSync($coupon, $cartRule)
     {
 
     }
