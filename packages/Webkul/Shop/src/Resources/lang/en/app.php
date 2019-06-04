@@ -433,7 +433,8 @@ return [
             'contact' => 'Contact',
             'place-order' => 'Place Order',
             'new-address' => 'Add New Address',
-            'save_as_address' => 'Save as Address'
+            'save_as_address' => 'Save as Address',
+            'back' => 'Back'
         ],
 
         'total' => [

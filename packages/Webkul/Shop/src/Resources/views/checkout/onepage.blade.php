@@ -364,7 +364,15 @@
 
                 newShippingAddress: function() {
                     this.new_shipping_address = true;
-                }
+                },
+
+                backToSavedBillingAddress: function() {
+                    this.new_billing_address = false;
+                },
+
+                backToSavedShippingAddress: function() {
+                    this.new_shipping_address = false;
+                },
             }
         })
 
