@@ -107,6 +107,8 @@ class ConfigurationController extends Controller
 
             return $this->getSlugs($secondItem);
         }
+
+        return [];
     }
 
     /**
