@@ -144,8 +144,6 @@ class CartRuleController extends Controller
         unset($data['cart_attributes']);
         unset($data['attributes']);
 
-        // unset($data['all_conditions']);
-
         if (isset($data['disc_amount']) && $data['action_type'] == config('pricerules.cart.validations.2')) {
                 $data['actions'] = [
                     'action_type' => $data['action_type'],
