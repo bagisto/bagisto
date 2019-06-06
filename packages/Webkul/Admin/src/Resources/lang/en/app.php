@@ -157,7 +157,8 @@ return [
         'starts-from' => 'Starts From',
         'ends-till' => 'Ends Till',
         'per-cust' => 'Per Customer',
-        'usage-throttle' => 'Usage Times'
+        'usage-throttle' => 'Usage Times',
+        'for-guest' => 'For Guest'
     ],
 
     'account' => [

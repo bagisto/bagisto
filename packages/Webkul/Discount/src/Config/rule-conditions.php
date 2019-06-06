@@ -67,8 +67,7 @@ return [
         'actions' => [
             'percent_of_product' => 'Percentage of product',
             'fixed_amount' => 'Apply as fixed amount',
-            'buy_a_get_b' => 'Get B units free',
-            'fixed_amount_cart' => 'Fixed amount for whole cart'
+            'buy_a_get_b' => 'Get B amount back',
         ],
 
         'validation' => [

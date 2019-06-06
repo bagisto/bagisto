@@ -256,7 +256,7 @@ class CartController extends Controller
         $code = request()->input('code');
 
         $result = Cart::applyCoupon($code);
-
+        dd($result);
         return $result;
     }
 

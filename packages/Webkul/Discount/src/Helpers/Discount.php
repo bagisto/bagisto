@@ -516,7 +516,7 @@ class Discount
         $appliedRule = null;
 
         if (! isset($rules['id'])) {
-            return response()->json(['message' => trans('admin::app.promotion.status.no-coupon')], 200);
+            return ['message' => trans('admin::app.promotion.status.no-coupon'), 'success' => false];
         }
 
         foreach($rules['id'] as $rule) {
@@ -532,13 +532,13 @@ class Discount
         }
 
         if (! isset($appliedRule)) {
-            return response()->json(['message' => trans('admin::app.promotion.status.no-coupon')], 200);
+            return ['message' => trans('admin::app.promotion.status.no-coupon'), 'success' => false];
         }
 
         $race = $this->endRace($appliedRule);
 
         if (! $race) {
-            return response()->json(['message' => trans('admin::app.promotion.status.no-coupon')], 200);
+            return ['message' => trans('admin::app.promotion.status.no-coupon'), 'success' => false];
         }
 
         $cart = \Cart::getCart();
@@ -578,6 +578,7 @@ class Discount
         } else {
             if ($appliedRule->starts_from != null && $appliedRule->ends_till != null) {
                 if (Carbon::parse($appliedRule->starts_from) < now() && now() < Carbon::parse($appliedRule->ends_till)) {
+                    $result = 1;
                 } else {
                     $result = 0;
                 }
@@ -595,12 +596,13 @@ class Discount
             $newQuantity = 0;
 
             if ($cart->items_qty >= $disc_threshold && $disc_quantity > 0) {
-                if ($disc_quantity > 1) {
-                    $disc_amount = $disc_amount * $disc_quantity;
-                }
                 // add the time conditions if rule is expired and active then make it in active
                 $leastWorthItem = \Cart::leastWorthItem();
                 $realQty = $leastWorthItem['quantity'];
+
+                if ($disc_quantity > 1) {
+                    $disc_amount = $disc_amount * $disc_quantity;
+                }
 
                 if ($action_type == config('pricerules.cart.validation.0')) {
                     if ($realQty <= $disc_quantity) {
@@ -624,92 +626,36 @@ class Discount
                     }
                 } else if ($action_type == config('pricerules.cart.validation.2')) {
                     if ($realQty <= $disc_quantity) {
-                        $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
+                        $amountDiscounted = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
                     } else {
-                        $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_quantity;
+                        $amountDiscounted = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_quantity;
                     }
-                } else if ($action_type == config('pricerules.cart.validation.3')) {
-                    $amountDiscounted = $disc_amount;
-                }
-
-                if ($action_type == config('pricerules.cart.validation.2')) {
-                    $cartRuleCart = $this->cartRuleCart->findWhere([
-                        'cart_id' => $cart->id,
-                    ]);
-
-                    if (count($cartRuleCart)) {
-                        $this->cartRuleCart->update([
-                            'cart_id' => $cart->id,
-                            'cart_rule_id' => $appliedRule->id
-                        ], $cartRuleCart->first()->id);
-                    } else {
-                        $this->cartRuleCart->create([
-                            'cart_id' => $cart->id,
-                            'cart_rule_id' => $appliedRule->id
-                        ]);
-                    }
-
-                    return response()->json([
-                        'message' => trans('admin::app.promotion.status.coupon-applied'),
-                        'action' => $action_type,
-                        'amount_given' => false,
-                        'amount_payable' => $newQuantity,
-                        'amount' => null,
-                        'success' => true
-                    ]);
                 } else {
-                    $cartRuleCart = $this->cartRuleCart->findWhere([
+                    $amountDiscounted = 0;
+                }
+
+                $cartRuleCart = $this->cartRuleCart->findWhere([
+                    'cart_id' => $cart->id,
+                ]);
+
+                if (count($cartRuleCart)) {
+                    $this->cartRuleCart->update([
                         'cart_id' => $cart->id,
-                    ]);
-
-                    if (count($cartRuleCart)) {
-                        $this->cartRuleCart->update([
-                            'cart_id' => $cart->id,
-                            'cart_rule_id' => $appliedRule->id
-                        ], $cartRuleCart->first()->id);
-                    } else {
-                        $this->cartRuleCart->create([
-                            'cart_id' => $cart->id,
-                            'cart_rule_id' => $appliedRule->id
-                        ]);
-                    }
-
-                    return response()->json([
-                        'id' => $appliedRule->id,
-                        'rule' => $appliedRule,
-                        'item_id' => $leastWorthItem['id'],
-                        'message' => trans('admin::app.promotion.status.coupon-applied'),
-                        'amount_given' => true,
-                        'amount' => core()->currency($amountDiscounted + $cart->tax_total),
-                        'action_type' => $action_type,
-                        'success' => true
+                        'cart_rule_id' => $appliedRule->id
+                    ], $cartRuleCart->first()->id);
+                } else {
+                    $this->cartRuleCart->create([
+                        'cart_id' => $cart->id,
+                        'cart_rule_id' => $appliedRule->id
                     ]);
                 }
+                dd($amountDiscounted);
+                return ['message' => trans('admin::app.promotion.status.coupon-applied'), 'success' => true, 'amount' => $amountDiscounted];
             } else {
-                return response()->json([
-                    'id' => null,
-                    'rule' => null,
-                    'item_id' => null,
-                    'message' => trans('admin::app.promotion.status.coupon-failed'),
-                    'action' => $action_type,
-                    'amount_given' => null,
-                    'amount' => null,
-                    'least_value_item' => null,
-                    'success' => false
-                ]);
+                return ['message' => trans('admin::app.promotion.status.coupon-failed'), 'success' => false, 'amount' => $amountDiscounted];
             }
         } else {
-            return response()->json([
-                'id' => null,
-                'rule' => null,
-                'item_id' => null,
-                'message' => trans('admin::app.promotion.status.coupon-failed'),
-                'action' => null,
-                'amount_given' => null,
-                'amount' => null,
-                'least_value_item' => null,
-                'success' => false
-            ]);
+            return ['message' => trans('admin::app.promotion.status.coupon-failed'), 'success' => false, 'amount' => $amountDiscounted];
         }
     }
 
@@ -769,6 +715,11 @@ class Discount
         }
     }
 
+    /**
+     * Used when race condition occurs between
+     * any two rules possibly a discounted and
+     * a non discounted rule
+     */
     public function analyzeImpact($rule)
     {
         $cart = \Cart::getCart();
@@ -947,7 +898,6 @@ class Discount
 
     protected function testAllConditionAreFalse($conditions, $cart) {
         $shipping_address = $cart->getShippingAddressAttribute();
-
         $shipping_method = $cart->shipping_method;
         $shipping_country = $shipping_address->country;
         $shipping_state = $shipping_address->state;

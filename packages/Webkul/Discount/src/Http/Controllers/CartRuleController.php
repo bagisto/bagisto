@@ -162,12 +162,12 @@ class CartRuleController extends Controller
 
         $data['actions'] = json_encode($data['actions']);
 
-        if (! isset($data['all_conditions'])) {
+        if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]") {
             $data['conditions'] = null;
         } else {
             $data['conditions'] = json_encode($data['all_conditions']);
-            unset($data['all_conditions']);
         }
+        unset($data['all_conditions']);
 
         if ($data['use_coupon']) {
             // if (isset($data['auto_generation']) && $data['auto_generation']) {
@@ -318,7 +318,7 @@ class CartRuleController extends Controller
         }
 
         $data['actions'] = json_encode($data['actions']);
-        if (! isset($data['all_conditions'])) {
+        if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]") {
             $data['conditions'] = null;
         } else {
             $data['conditions'] = json_encode($data['all_conditions']);

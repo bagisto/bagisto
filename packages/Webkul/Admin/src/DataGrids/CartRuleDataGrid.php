@@ -21,7 +21,7 @@ class CartRuleDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('cart_rules')
                 ->select('id')
-                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'usage_limit', 'per_customer', 'status', 'end_other_rules', 'action_type');
+                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'priority', 'usage_limit', 'per_customer', 'status', 'end_other_rules', 'is_guest', 'action_type');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -47,21 +47,12 @@ class CartRuleDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'per_customer',
-            'label' => trans('admin::app.datagrid.per-cust'),
-            'type' => 'string',
+            'index' => 'priority',
+            'label' => trans('admin::app.datagrid.priority'),
+            'type' => 'number',
             'searchable' => false,
             'sortable' => true,
-            'filterable' => true
-        ]);
-
-        $this->addColumn([
-            'index' => 'usage_limit',
-            'label' => trans('admin::app.datagrid.usage-throttle'),
-            'type' => 'string',
-            'searchable' => false,
-            'sortable' => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -72,10 +63,25 @@ class CartRuleDataGrid extends DataGrid
             'sortable' => true,
             'filterable' => true,
             'wrapper' => function($value) {
-                if ($value->end_other_rules == 1)
-                    return 'true';
+                if ($value->status == 1)
+                    return 'True';
                 else
-                    return 'false';
+                    return 'False';
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'is_guest',
+            'label' => trans('admin::app.datagrid.for-guest'),
+            'type' => 'boolean',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true,
+            'wrapper' => function($value) {
+                if ($value->is_guest == 1)
+                    return 'True';
+                else
+                    return 'False';
             }
         ]);
 
@@ -88,9 +94,9 @@ class CartRuleDataGrid extends DataGrid
             'filterable' => true,
             'wrapper' => function($value) {
                 if ($value->end_other_rules == 1)
-                    return 'true';
+                    return 'True';
                 else
-                    return 'false';
+                    return 'False';
             }
         ]);
 

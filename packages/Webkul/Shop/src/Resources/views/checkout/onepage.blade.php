@@ -5,18 +5,35 @@
 @stop
 
 @section('content-wrapper')
-
     <checkout></checkout>
-
 @endsection
 
 @push('scripts')
+    <script type="text/x-template" id="discount-template">
+        <div class="discount">
+            <div class="discount-group">
+                <form class="coupon-form" method="post" @submit.prevent="onSubmit" v-if="!discounted">
+                    <div class="control-group mt-20" :class="[errors.has('code') ? 'has-error' : '']">
+                        <input v-model="code" type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-on:change="codeChange" style="width: 100%">
+
+                        <span class="control-error" v-if="errors.has('code')">
+                            @{{ errors.first('code') }}
+                        </span>
+
+                        <span class="coupon-message mt-5" style="display: block; color: #ff5656; margin-bottom: 5px;" v-if="message != 'Success' && message != 'success'">@{{ message }}</span>
+
+                        <span class="coupon-message mt-5" style="display: block; margin-bottom: 5px;" v-if="message == 'Success' || message == 'success'">@{{ message }}</span>
+
+                        <button class="btn btn-lg btn-black">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </script>
 
     <script type="text/x-template" id="checkout-template">
         <div id="checkout" class="checkout-process">
-
             <div class="col-main">
-
                 <ul class="checkout-steps">
                     <li class="active" :class="[completedStep >= 0 ? 'active' : '', completedStep > 0 ? 'completed' : '']" @click="navigateToStep(1)">
                         <div class="decorator address-info"></div>
@@ -46,69 +63,50 @@
                 </ul>
 
                 <div class="step-content information" v-show="currentStep == 1" id="address-section">
-
                     @include('shop::checkout.onepage.customer-info')
 
                     <div class="button-group">
-
                         <button type="button" class="btn btn-lg btn-primary" @click="validateForm('address-form')" :disabled="disable_button" id="checkout-address-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
-
                     </div>
-
                 </div>
 
                 <div class="step-content shipping" v-show="currentStep == 2" id="shipping-section">
-
                     <shipping-section v-if="currentStep == 2" @onShippingMethodSelected="shippingMethodSelected($event)"></shipping-section>
 
                     <div class="button-group">
-
                         <button type="button" class="btn btn-lg btn-primary" @click="validateForm('shipping-form')" :disabled="disable_button" id="checkout-shipping-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
 
                     </div>
-
                 </div>
 
                 <div class="step-content payment" v-show="currentStep == 3" id="payment-section">
-
                     <payment-section v-if="currentStep == 3" @onPaymentMethodSelected="paymentMethodSelected($event)"></payment-section>
 
                     <div class="button-group">
-
                         <button type="button" class="btn btn-lg btn-primary" @click="validateForm('payment-form')" :disabled="disable_button" id="checkout-payment-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
-
                     </div>
-
                 </div>
 
                 <div class="step-content review" v-show="currentStep == 4" id="summary-section">
-
                     <review-section v-if="currentStep == 4"></review-section>
 
                     <div class="button-group">
-
                         <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button">
                             {{ __('shop::app.checkout.onepage.place-order') }}
                         </button>
-
                     </div>
-
                 </div>
-
             </div>
 
             <div class="col-right" v-if="resetSummary" v-show="currentStep != 4">
-
                 <summary-section></summary-section>
-
             </div>
-
         </div>
     </script>
 
@@ -135,9 +133,7 @@
             data: function() {
                 return {
                     currentStep: 1,
-
                     completedStep: 0,
-
                     address: {
                         billing: {
                             address1: [''],
@@ -149,23 +145,14 @@
                             address1: ['']
                         },
                     },
-
                     selected_shipping_method: '',
-
                     selected_payment_method: '',
-
                     disable_button: false,
-
                     new_shipping_address: false,
-
                     new_billing_address: false,
-
                     allAddress: {},
-
                     countryStates: @json(core()->groupedStatesByCountries()),
-
                     country: @json(core()->countries()),
-
                     resetSummary: true
                 }
             },
@@ -483,7 +470,31 @@
         Vue.component('review-section', {
             data: function() {
                 return {
-                    templateRender: null,
+                    templateRender: null
+                }
+            },
+            staticRenderFns: reviewTemplateRenderFns,
+            mounted: function() {
+                this.templateRender = reviewHtml.render;
+                for (var i in reviewHtml.staticRenderFns) {
+                    reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
+                }
+            },
+            render: function(h) {
+                return h('div', [
+                    (this.templateRender ?
+                        this.templateRender() :
+                        '')
+                    ]);
+            }
+        });
+
+        Vue.component('discount', {
+            template: '#discount-template',
+            inject: ['$validator'],
+
+            data: function() {
+                return {
                     code: null,
                     message: null,
                     qtyRevealed: false,
@@ -499,22 +510,7 @@
                 }
             },
 
-            staticRenderFns: reviewTemplateRenderFns,
-
             mounted: function() {
-                this.templateRender = reviewHtml.render;
-
-                for (var i in reviewHtml.staticRenderFns) {
-                    reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
-                }
-            },
-
-            render: function(h) {
-                return h('div', [
-                    (this.templateRender ?
-                        this.templateRender() :
-                        '')
-                    ]);
             },
 
             methods: {
@@ -560,6 +556,7 @@
                 }
             }
         });
+
     </script>
 
 @endpush
