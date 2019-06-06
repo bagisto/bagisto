@@ -69,6 +69,12 @@
                     {{ __('shop::app.checkout.onepage.sign-in') }}
                 </a>
             @endguest
+
+            @auth('customer')
+                <a class="btn btn-lg btn-primary" @click = backToSavedBillingAddress()>
+                    {{ __('shop::app.checkout.onepage.back') }}
+                </a>
+            @endauth
         </div>
 
         <div class="control-group" :class="[errors.has('address-form.billing[first_name]') ? 'has-error' : '']">
@@ -285,6 +291,12 @@
 
         <div class="form-header">
             <h1>{{ __('shop::app.checkout.onepage.shipping-address') }}</h1>
+
+            @auth('customer')
+                <a class="btn btn-lg btn-primary" @click = backToSavedShippingAddress()>
+                    {{ __('shop::app.checkout.onepage.back') }}
+                </a>
+            @endauth
         </div>
 
         <div class="control-group" :class="[errors.has('address-form.shipping[first_name]') ? 'has-error' : '']">
