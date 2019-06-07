@@ -11,8 +11,8 @@
 @push('scripts')
     <script type="text/x-template" id="discount-template">
         <div class="discount">
-            <div class="discount-group">
-                <form class="coupon-form" method="post" @submit.prevent="onSubmit" v-if="!discounted">
+            <div class="discount-group" v-if="!end_rule_present">
+                <form class="coupon-form" method="post" @submit.prevent="onSubmit">
                     <div class="control-group mt-20" :class="[errors.has('code') ? 'has-error' : '']">
                         <input v-model="code" type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-on:change="codeChange" style="width: 100%">
 
@@ -27,6 +27,44 @@
                         <button class="btn btn-lg btn-black">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
                     </div>
                 </form>
+            </div>
+
+            <div class="discount-details-group" v-if="non_coupon_able">
+                <div class="item-detail" v-if="free_shipping">
+                    <label>Free Shipping</label>
+                    <label class="right">Yes</label>
+                </div>
+
+                <div class="item-detail">
+                    <label>{{ __('shop::app.checkout.total.disc-amount') }}</label>
+                    <label class="right">@{{ discount_amount }}</label>
+                </div>
+
+                <div class="item-detail" style="font-weight: bold;">
+                    <label>{{ __('shop::app.checkout.total.new-grand-total') }}</label>
+                    <label class="right">@{{ new_grand_total }}</label>
+                </div>
+            </div>
+
+            <div class="discount-details-group" v-if="coupon_able">
+                <div class="item-detail">
+                    <label>{{ __('shop::app.checkout.total.coupon-applied') }}</label>
+                    <label class="right">@{{ discount_code }}</label>
+                </div>
+                <div class="item-detail" v-if="free_shipping">
+                    <label>Free Shipping</label>
+                    <label class="right">Yes</label>
+                </div>
+
+                <div class="item-detail">
+                    <label>{{ __('shop::app.checkout.total.disc-amount') }}</label>
+                    <label class="right">@{{ discount_amount }}</label>
+                </div>
+
+                <div class="item-detail" style="font-weight: bold;">
+                    <label>{{ __('shop::app.checkout.total.new-grand-total') }}</label>
+                    <label class="right">@{{ new_grand_total }}</label>
+                </div>
             </div>
         </div>
     </script>
@@ -497,16 +535,14 @@
                 return {
                     code: null,
                     message: null,
-                    qtyRevealed: false,
-                    amount_given: null,
-                    amount: null,
-                    discounted: null,
-                    discount: {
-                        amount: null,
-                        action: null,
-                        amount_given: null,
-                        message: null
-                    }
+                    end_rule_present: false,
+                    discount_amount: 0,
+                    rule_name: null,
+                    free_shipping: null,
+                    new_grand_total: null,
+                    non_coupon_able: false,
+                    coupon_able: false,
+                    discount_code: null
                 }
             },
 
@@ -522,13 +558,16 @@
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {
                         code: this_this.code
                     }).then(function(response) {
-                        this_this.message = response.data.message;
-
-                        this_this.discounted = response.data.success;
-                        this_this.discount.amount = response.data.amount;
-                        this_this.discount.amount_given = response.data.amount_given;
+                        this_this.end_rule_present = response.data.end_other_rules;
+                        this_this.discount_amount = response.data.formatted_discount;
+                        this_this.rule_name = response.data.rule.name;
+                        this_this.free_shipping = response.data.rule.free_shipping;
+                        this_this.new_grand_total = response.data.formatted_new_grand_total;
+                        this_this.non_coupon_able = false;
+                        this_this.coupon_able = true;
+                        this_this.discount_code = this_this.code;
                     }).catch(function(error) {
-                        this_this.discounted = false;
+                        // this_this.discounted = false;
                     });
                 },
 
@@ -536,7 +575,12 @@
                     var this_this = this;
 
                     axios.post('{{ route('shop.checkout.fetch.non-coupon') }}').then(function(response) {
-                        console.log(response.data);
+                        this_this.end_rule_present = response.data.end_other_rules;
+                        this_this.discount_amount = response.data.formatted_discount;
+                        this_this.rule_name = response.data.rule.name;
+                        this_this.free_shipping = response.data.rule.free_shipping;
+                        this_this.new_grand_total = response.data.formatted_new_grand_total;
+                        this_this.non_coupon_able = true;
                     }).catch(function (error) {
                         console.log(error);
                     });

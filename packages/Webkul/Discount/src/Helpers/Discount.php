@@ -76,6 +76,7 @@ class Discount
             }
 
             if ($passed) {
+                $report['used_coupon'] = false;
                 array_push($canBeApplied, $report);
             }
         }
@@ -93,49 +94,148 @@ class Discount
             $leastId = 999999999999;
             if (count($canBeApplied) > 1) {
                 foreach($canBeApplied as $rule) {
-                    if ($rule['rule'] < $leastId) {
+                    if ($rule['rule']->id < $leastId) {
                         $leastId = $rule['rule']->id;
+                    }
+                }
+
+                // fighting the edge case for non couponable discount rule
+                foreach($canBeApplied as $rule) {
+                    if ($rule['rule']->id == $leastId) {
+                        $rule['used_coupon'] = false;
+                        return $rule;
                     }
                 }
             }
         }
+
         //find end rule
-        return $canBeApplied;
+        return $canBeApplied[0];
     }
 
-    public function applyCouponAbleRule()
+    public function applyCouponAbleRule($code)
     {
         if (auth()->guard('customer')->check()) {
             $couponAbleRules = $this->cartRule->findWhere([
-                'use_coupon' => 1
+                'use_coupon' => 1,
+                'status' => 1
             ]);
         } else {
             $couponAbleRules = $this->cartRule->findWhere([
                 'use_coupon' => 1,
-                'is_guest' => 1
+                'is_guest' => 1,
+                'status' => 1
             ]);
         }
 
-        // time based filter
-        foreach($couponAbleRules as $rule) {
+        $rule;
+        foreach ($couponAbleRules as $couponAbleRule) {
+            if ($couponAbleRule->coupons->code == $code) {
+                $rule = $couponAbleRule;
+            }
+        }
+
+        $useCouponable = false;
+        if (isset($rule)) {
+            $canBeApplied = array();
+
+            // time based filter
+            $report = $this->checkApplicability($rule);
+            $report['rule'] = $rule;
+
+            $passed = 0;
             if ($rule->starts_from != null && $rule->ends_till == null) {
                 if (Carbon::parse($rule->starts_from) < now()) {
-
+                    $passed = 1;
                 }
             } else if ($rule->starts_from == null && $rule->ends_till != null) {
-                if (Carbon::parse($rule->ends_till) < now()) {
-
+                if (Carbon::parse($rule->ends_till) > now()) {
+                    $passed = 1;
                 }
             } else if ($rule->starts_from != null && $rule->ends_till != null) {
                 if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
+                    $passed = 1;
+                }
+            } else {
+                $passed = 1;
+            }
+
+            if ($passed) {
+                array_push($canBeApplied, $report);
+
+                $useCouponable = true;
+                $alreadyAppliedRule = $this->cartRuleCart->findWhere([
+                    'cart_id' => \Cart::getCart()->id
+                ]);
+
+                if ($alreadyAppliedRule->count() && ! ($alreadyAppliedRule->first()->cart_rule->priority < $canBeApplied[0]['rule']->priority)) {
+                    unset($report);
+
+                    $alreadyAppliedRule = $alreadyAppliedRule->first()->cart_rule;
+
+                    // analyze impact
+                    $report = $this->checkApplicability($alreadyAppliedRule);
+                    $report['rule'] = $alreadyAppliedRule;
+
+                    array_push($canBeApplied, $report);
+
+                    //min priority
+                    $minPriority = collect($canBeApplied)->min('priority');
+                    //min priority rule
+                    $canBeApplied = collect($canBeApplied)->where('priority', $minPriority);
+
+                    if (count($canBeApplied) > 1) {
+                        $maxDiscount = collect($canBeApplied)->max('discount');
+
+                        $canBeApplied = collect($canBeApplied)->where('discount', $maxDiscount);
+
+                        $leastId = 999999999999;
+                        if (count($canBeApplied) > 1) {
+                            foreach($canBeApplied as $rule) {
+                                if ($rule['rule']->id < $leastId) {
+                                    $leastId = $rule['rule']->id;
+                                }
+                            }
+
+                            // fighting the edge case for  couponable discount rule
+                            foreach($canBeApplied as $rule) {
+                                if ($rule['rule']->id == $leastId) {
+                                    if($rule->use_coupon) {
+                                        $useCouponable = true;
+                                    }
+                                }
+                            }
+                        } else {
+                            if ($canBeApplied[0]['rule']->use_coupon) {
+                                $useCouponable = true;
+                            }
+                        }
+                    } else if (count($canBeApplied)) {
+                        if ($canBeApplied[0]['rule']->use_coupon) {
+                            $useCouponable = true;
+                        }
+                    }
+                }
+
+                if ($alreadyAppliedRule->end_other_rules) {
+                    $useCouponable = false;
                 }
             }
         }
 
-        return $couponAbleRules;
+        $canBeApplied = array();
+        if ($useCouponable) {
+            $report = $this->checkApplicability($rule);
+            $report['rule'] = $rule;
+            $report['used_coupon'] = $useCouponable;
+
+            return $report;
+        } else {
+            return false;
+        }
     }
 
-    public function checkApplicability($rule)
+    public function checkApplicability($rule = null)
     {
         $cart = \Cart::getCart();
         $report = array();
@@ -178,7 +278,7 @@ class Discount
         $disc_amount = $rule->disc_amount; // value of discount
         $disc_quantity = $rule->disc_quantity; //max quantity allowed to be discounted
 
-        $amountDiscounted;
+        $amountDiscounted = 0;
         $leastWorthItem = \Cart::leastWorthItem();
         $realQty = $leastWorthItem['quantity'];
 
@@ -197,6 +297,9 @@ class Discount
         }
 
         $report['discount'] = $amountDiscounted;
+        $report['formatted_discount'] = core()->formatPrice($amountDiscounted, $cart->cart_currency_code);
+        $report['new_grand_total'] = $cart->grand_total - $amountDiscounted;
+        $report['formatted_new_grand_total'] = core()->formatPrice($cart->grand_total - $amountDiscounted, $cart->cart_currency_code);
         $report['priority'] = $rule->priority;
 
         return $report;

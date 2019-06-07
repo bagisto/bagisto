@@ -397,7 +397,7 @@ return [
             'quantity-error' => 'Requested Quantity Is Not Available',
             'cart-subtotal' => 'Cart Subtotal',
             'cart-remove-action' => 'Do you really want to do this ?',
-            'partial-cart-update' => 'Only some of the product(s) were updated'
+            'partial-cart-update' => 'Only some of the product(s) were updated',
         ],
 
         'onepage' => [
@@ -449,7 +449,11 @@ return [
             'delivery-charges' => 'Delivery Charges',
             'tax' => 'Tax',
             'discount' => 'Discount',
-            'price' => 'price'
+            'price' => 'price',
+            'disc-amount' => 'Amount discounted',
+            'new-grand-total' => 'New Grand Total',
+            'coupon' => 'Coupon',
+            'coupon-applied' => 'Coupon Applied'
         ],
 
         'success' => [
