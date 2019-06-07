@@ -63,13 +63,13 @@
                             </div>
                         @endif
 
-                        {!! view_render_event('bagisto.shop.products.index.pagination.before') !!}
+                        {!! view_render_event('bagisto.shop.products.index.pagination.before', ['category' => $category]) !!}
 
                         <div class="bottom-toolbar">
                             {{ $products->appends(request()->input())->links() }}
                         </div>
 
-                        {!! view_render_event('bagisto.shop.products.index.pagination.after') !!}
+                        {!! view_render_event('bagisto.shop.products.index.pagination.after', ['category' => $category]) !!}
 
                     @else
 
