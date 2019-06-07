@@ -1288,14 +1288,14 @@ class Cart {
 
     public function applyCoupon($code)
     {
-        $result = $this->discount->ruleCheck($code);
+        $result = $this->discount->applyCouponAbleRule($code);
 
         return $result;
     }
 
     public function applyNonCoupon()
     {
-        $result = $this->discount->nonRuleCheck();
+        $result = $this->discount->applyNonCouponAbleRule();
 
         return $result;
     }

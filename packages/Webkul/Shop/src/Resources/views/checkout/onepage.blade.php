@@ -284,22 +284,22 @@
                     this.disable_button = true;
 
                     this.$http.post("{{ route('shop.checkout.save-payment') }}", {'payment': this.selected_payment_method})
-                        .then(function(response) {
-                            this_this.disable_button = false;
+                    .then(function(response) {
+                        this_this.disable_button = false;
 
-                            if (response.data.jump_to_section == 'review') {
-                                reviewHtml = Vue.compile(response.data.html)
-                                this_this.completedStep = 3;
-                                this_this.currentStep = 4;
+                        if (response.data.jump_to_section == 'review') {
+                            reviewHtml = Vue.compile(response.data.html)
+                            this_this.completedStep = 3;
+                            this_this.currentStep = 4;
 
-                                this_this.getOrderSummary();
-                            }
-                        })
-                        .catch(function (error) {
-                            this_this.disable_button = false;
+                            this_this.getOrderSummary();
+                        }
+                    })
+                    .catch(function (error) {
+                        this_this.disable_button = false;
 
-                            this_this.handleErrorResponse(error.response, 'payment-form')
-                        })
+                        this_this.handleErrorResponse(error.response, 'payment-form')
+                    });
                 },
 
                 placeOrder: function() {
@@ -511,6 +511,8 @@
             },
 
             mounted: function() {
+                // shop.checkout.fetch.non-coupon
+                this.checkNonCouponAble();
             },
 
             methods: {
@@ -527,6 +529,16 @@
                         this_this.discount.amount_given = response.data.amount_given;
                     }).catch(function(error) {
                         this_this.discounted = false;
+                    });
+                },
+
+                checkNonCouponAble: function () {
+                    var this_this = this;
+
+                    axios.post('{{ route('shop.checkout.fetch.non-coupon') }}').then(function(response) {
+                        console.log(response.data);
+                    }).catch(function (error) {
+                        console.log(error);
                     });
                 },
 

@@ -9,6 +9,7 @@ use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
 use Illuminate\Support\Facades\Event;
 use Cart;
 
@@ -37,6 +38,7 @@ class CartController extends Controller
     protected $cartItem;
     protected $customer;
     protected $product;
+    protected $cartRuleCart;
     protected $suppressFlash = false;
 
     /**
@@ -51,7 +53,8 @@ class CartController extends Controller
         CartItemRepository $cartItem,
         CustomerRepository $customer,
         ProductRepository $product,
-        WishlistRepository $wishlist
+        WishlistRepository $wishlist,
+        CartRuleCart $cartRuleCart
     )
     {
 
@@ -66,6 +69,8 @@ class CartController extends Controller
         $this->product = $product;
 
         $this->wishlist = $wishlist;
+
+        $this->cartRuleCart = $cartRuleCart;
 
         $this->_config = request('_config');
     }
@@ -258,6 +263,17 @@ class CartController extends Controller
         $result = Cart::applyCoupon($code);
         dd($result);
         return $result;
+    }
+
+    /**
+     * Fetch the non couponable rule
+     */
+    public function getNonCouponAbleRule()
+    {
+        $cart = Cart::getCart();
+        $nonCouponAbleRules = Cart::applyNonCoupon();
+
+        return $nonCouponAbleRules;
     }
 
     /**

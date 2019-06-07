@@ -68,6 +68,7 @@ return [
             'percent_of_product' => 'Percentage of product',
             'fixed_amount' => 'Apply as fixed amount',
             'buy_a_get_b' => 'Get B amount back',
+            // 'fixed_amount_cart' => 'Fixed amount for whole cart'
         ],
 
         'validation' => [

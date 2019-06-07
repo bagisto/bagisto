@@ -36,781 +36,173 @@ class Discount
         $this->cartRuleCart = $cartRuleCart;
     }
 
-    /**
-     * Gets the end rules applicable for guests
-     * autocheck for customer group and channels
-     */
-    public function getGuestEndRules()
-    {
-        $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 1, 'is_guest' => 1]);
-        $currentChannel = core()->getCurrentChannel();
-
-        $guestRules = array();
-        foreach ($rules as $rule) {
-            foreach ($rule->channels as $channel) {
-                if ($channel->channel_id == $currentChannel->id) {
-                    array_push($guestRules, $rule);
-                }
-            }
-        }
-
-        if (count($guestRules) > 1) {
-            $leastPriority = 999999999999;
-            $leastId = 999999999999;
-
-            foreach ($guestRules as $guestRule) {
-                if ($leastPriority >= $guestRule->priority) {
-                    $leastPriority = $guestRule->priority;
-
-                    if ($leastId > $guestRule->id) {
-                        $leastId = $guestRule->id;
-                    }
-                }
-            }
-
-            return [$this->cartRule->find($leastId)];
-        }
-
-        return $guestRules;
-    }
-
-    /**
-     * Get the non ending rules for the guest
-     * and completed auto check for guests and
-     * channels
-     */
-    public function getGuestBestRules()
-    {
-        $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 0, 'is_guest' => 1]);
-        $currentChannel = core()->getCurrentChannel();
-
-        $guestRules = array();
-        foreach ($rules as $rule) {
-            foreach ($rule->channels as $channel) {
-                if ($channel->channel_id == $currentChannel->id) {
-                    array_push($guestRules, $rule);
-                }
-            }
-        }
-
-        return $guestRules;
-    }
-
-
-    /**
-     * Gets the best rules for auth customers
-     */
-    public function getBestRules()
-    {
-        $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 0]);
-        $currentChannel = core()->getCurrentChannel();
-
-        $suitableRules = array();
-        foreach ($rules as $rule) {
-            foreach ($rule->channels as $channel) {
-                if ($channel->channel_id == $currentChannel->id) {
-                    if (auth()->guard('customer')->check()) {
-                        foreach ($rule->customer_groups as $customerGroup) {
-                            if (auth()->guard('customer')->user()->customer_group_id == $customerGroup->customer_group_id) {
-                                array_push($suitableRules, $rule);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return $suitableRules;
-    }
-
-    /**
-     * Gets the end rules for the auth customers
-     */
-    public function getEndRules()
-    {
-        $rules = $this->cartRule->findWhere(['status' => 1, 'end_other_rules' => 1]);
-        $currentChannel = core()->getCurrentChannel();
-
-        $suitableRules = array();
-        foreach ($rules as $rule) {
-            foreach ($rule->channels as $channel) {
-                if ($channel->channel_id == $currentChannel->id) {
-                    if (auth()->guard('customer')->check()) {
-                        foreach ($rule->customer_groups as $customerGroup) {
-                            if (auth()->guard('customer')->user()->customer_group_id == $customerGroup->customer_group_id) {
-                                array_push($suitableRules, $rule);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if (count($suitableRules) > 1) {
-            $leastPriority = 999999999999;
-            $leastId = 999999999999;
-
-            foreach($suitableRules as $suitableRule) {
-                if ($leastPriority >= $suitableRule->priority) {
-                    $leastPriority = $suitableRule->priority;
-
-                    if ($leastId > $suitableRule->id) {
-                        $leastId = $suitableRule->id;
-                    }
-                }
-            }
-
-            return [$this->cartRule->find($leastId)];
-        }
-
-        return $suitableRules;
-    }
-
-    /**
-     * Get the rules to applied automatically
-     * depending on user state
-     */
-    public function toApply()
+    public function applyNonCouponAbleRule()
     {
         if (auth()->guard('customer')->check()) {
-            $endRules = $this->getEndRules();
-
-            if (isset($endRules) && count($endRules)) {
-                $this->endRuleActive = true;
-
-                return [
-                    'end_rule' => true,
-                    'rule' => $endRules,
-                    'count' => count($endRules)
-                ];
-            } else {
-                $bestRules = $this->getBestRules();
-
-                return [
-                    'end_rule' => false,
-                    'rule' => $bestRules,
-                    'count' => count($bestRules)
-                ];
-            }
-        } else {
-            $endRules = $this->getGuestEndRules();
-
-            if (isset($endRules) && count($endRules)) {
-                $this->endRuleActive = true;
-
-                return [
-                    'end_rule' => true,
-                    'rule' => $endRules,
-                    'count' => count($endRules)
-                ];
-            } else {
-                $bestRules = $this->getGuestBestRules();
-
-                return [
-                    'end_rule' => false,
-                    'rule' => $bestRules,
-                    'count' => count( $bestRules)
-                ];
-            }
-        }
-    }
-
-    /**
-     * To apply the coupon code based rules
-     */
-    public function applyCouponAble()
-    {
-        $rules = $this->toApply();
-
-        if ($rules['end_rule']) {
-            $rules = $rules['rule'];
-            $id = array();
-
-            foreach($rules as $rule) {
-                if ($rule->use_coupon) {
-                    array_push($id, $rule);
-                }
-            }
-
-            if (count($id)) {
-                return [
-                    'couponable' => true,
-                    'id' => $id,
-                    'end_rule' => true
-                ];
-            } else {
-                return [
-                    'couponable' => false,
-                    'id' => null,
-                    'end_rule' => null
-                ];
-            }
-        } else {
-            $rules = $rules['rule'];
-            $id = array();
-
-            foreach ($rules as $rule) {
-                if ($rule->use_coupon) {
-                    array_push($id, $rule);
-                }
-            }
-
-            if (count($id)) {
-                return [
-                    'couponable' => true,
-                    'id' => $id,
-                    'end_rule' => false
-                ];
-            } else {
-                return [
-                    'couponable' => false,
-                    'id' => null,
-                    'end_rule' => false
-                ];
-            }
-        }
-    }
-
-    /**
-     * To apply the non coupon based rules
-     */
-    public function applyNonCouponAble()
-    {
-        $rules = $this->toApply();
-
-        if (! $rules['end_rule']) {
-            $rules = $rules['rule'];
-            $id = array();
-
-            foreach ($rules as $rule) {
-                if (! $rule->use_coupon) {
-                    array_push($id, $rule);
-                }
-            }
-
-            if (count($id)) {
-                return [
-                    'end_rule' => false,
-                    'noncouponable' => true,
-                    'id' => $id,
-                    'end_rule' => false
-                ];
-            } else {
-                return [
-                    'end_rule' => false,
-                    'noncouponable' => false,
-                    'id' => null,
-                    'end_rule' => false
-                ];
-            }
-        } else {
-            $rules = $rules['rule'];
-            $id = array();
-
-            foreach ($rules as $rule) {
-                if (! $rule->use_coupon) {
-                    array_push($id, $rule);
-                }
-            }
-
-            if (count($id)) {
-                return [
-                    'end_rule' => true,
-                    'noncouponable' => true,
-                    'id' => $id,
-                    'end_rule' => true
-                ];
-            } else {
-                return [
-                    'end_rule' => true,
-                    'noncouponable' => false,
-                    'id' => null,
-                    'end_rule' => null
-                ];
-            }
-        }
-    }
-
-    public function nonRuleCheck()
-    {
-        $result = $this->applyNonCouponAble();
-        $cart = \Cart::getCart();
-        $maxImpacts = array();
-
-        if (isset($result['id']) && count($result['id'])) {
-            $rules = array();
-
-            if (count($result['id']) > 1) {
-                $leastPriority = 999999999999;
-
-                foreach($result['id'] as $rule) {
-                    if ($rule->priority < $leastPriority) {
-                        array_push($rules, $rule);
-                    }
-                }
-            } else if (count($result['id'])) {
-                array_push($rules, $result['id'][0]);
-            }
-
-            foreach ($rules as $rule) {
-                // All of conditions is/are true
-                $result = 1;
-                if ($rule->conditions && ($rule->conditions != "null" || $rule->conditions != "")) {
-                    if ($rule->starts_from != null && $rule->ends_till != null) {
-                        if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
-                            $conditions = json_decode(json_decode($rule->conditions));
-                            $test_mode = config('pricerules.test_mode.0');
-
-                            if ($test_mode == config('pricerules.test_mode.0')) {
-                                $result = $this->testAllConditionAreTrue($conditions, $cart);
-                            } else if ($test_mode == config('pricerules.test_mode.1')) {
-                                $result = $this->testAllConditionAreFalse($conditions, $cart);
-                            } else if ($test_mode == config('pricerules.test_mode.2')) {
-                                $result = $this->testAnyConditionIsTrue($conditions, $cart);
-                            } else if ($test_mode == config('pricerules.test_mode.3')) {
-                                $result = $this->testAbyConditionIsFalse($conditions, $cart);
-                            }
-                        }
-                    } else {
-                        $conditions = json_decode(json_decode($rule->conditions));
-                        $test_mode = config('pricerules.test_mode.0');
-
-                        if ($test_mode == config('pricerules.test_mode.0')) {
-                            $result = $this->testAllConditionAreTrue($conditions, $cart);
-                        } else if ($test_mode == config('pricerules.test_mode.1')) {
-                            $result = $this->testAllConditionAreFalse($conditions, $cart);
-                        } else if ($test_mode == config('pricerules.test_mode.2')) {
-                            $result = $this->testAnyConditionIsTrue($conditions, $cart);
-                        } else if ($test_mode == config('pricerules.test_mode.3')) {
-                            $result = $this->testAbyConditionIsFalse($conditions, $cart);
-                        }
-                    }
-                } else {
-                    if ($rule->starts_from != null && $rule->ends_till != null) {
-                        if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
-                        } else {
-                            $result = 0;
-                        }
-                    }
-                }
-
-                // check all the conditions associated with the rule
-                if ($result) {
-                    $action_type = $rule->action_type;
-                    $disc_threshold = $rule->disc_threshold;
-                    $disc_amount = $rule->disc_amount;
-                    $disc_quantity = $rule->disc_quantity;
-
-                    $amountDiscounted = 0;
-                    $newQuantity = 0;
-
-                    if ($cart->items_qty >= $disc_threshold && $disc_quantity > 0) {
-                        if ($disc_quantity > 1) {
-                            $disc_amount = $disc_amount * $disc_quantity;
-                        }
-                        // add the time conditions if rule is expired and active then make it in active
-                        $leastWorthItem = \Cart::leastWorthItem();
-                        $realQty = $leastWorthItem['quantity'];
-
-                        if ($action_type == config('pricerules.cart.validation.0')) {
-                            if ($realQty <= $disc_quantity) {
-                                $amountDiscounted = (($leastWorthItem['total'] / $realQty) * ($disc_amount / 100)) * $disc_quantity;
-                            } else {
-                                $amountDiscounted = ($leastWorthItem['total'] / $realQty) * ($disc_amount / 100);
-                            }
-                        } else if ($action_type == config('pricerules.cart.validation.1')) {
-                            if ($realQty <= $disc_quantity) {
-                                if ($disc_amount > ($disc_quantity * $leastWorthItem['total'])) {
-                                    $amountDiscounted = 0;
-                                } else {
-                                    $amountDiscounted = $cart->sub_total - $disc_amount;
-                                }
-                            } else {
-                                if ($disc_amount > $leastWorthItem['total']) {
-                                    $amountDiscounted = 0;
-                                } else {
-                                    $amountDiscounted = $cart->sub_total - $disc_amount;
-                                }
-                            }
-                        } else if ($action_type == config('pricerules.cart.validation.2')) {
-                            if ($realQty <= $disc_quantity) {
-                                $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
-                            } else {
-                                $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_quantity;
-                            }
-                        } else if ($action_type == config('pricerules.cart.validation.3')) {
-                            $amountDiscounted = $disc_amount;
-                        }
-
-                        //standard returns
-                        if ($action_type == config('pricerules.cart.validation.2')) {
-                            array_push($maxImpacts, [
-                                'id' => $rule->id,
-                                'rule' => $rule,
-                                'item_id' => $leastWorthItem['id'],
-                                'amount_given' => false,
-                                'amount' => $newQuantity,
-                                'action_type' => $action_type
-                            ]);
-                        } else {
-                            array_push($maxImpacts, [
-                                'id' => $rule->id,
-                                'rule' => $rule,
-                                'item_id' => $leastWorthItem['id'],
-                                'amount_given' => true,
-                                'amount' => $amountDiscounted,
-                                'action_type' => $action_type
-                            ]);
-                        }
-                    }
-                }
-            }
-        }
-
-        $leastItemAvg = 999999999999;
-        $leastId = -1;
-        foreach ($maxImpacts as $key => $maxImpact) {
-            $minItemPrice = array();
-
-            if ($maxImpact['action_type'] == config('pricerules.cart.validation.2')) {
-                $amount = $cart->base_grand_total / $maxImpact['amount'];
-
-                if ($amount < $leastItemAvg) {
-                    $leastItemAvg = $amount;
-                    $leastId = $key;
-                }
-            } else {
-                $amount = $maxImpact['amount'] / $cart->items_qty;
-
-                if ($amount < $leastItemAvg) {
-                    $leastItemAvg = $amount;
-                    $leastId = $key;
-                }
-            }
-        }
-
-        if ($leastId != -1) {
-            $cartRuleCart = $this->cartRuleCart->findWhere([
-                'cart_id' => $cart->id,
+            $nonCouponAbleRules = $this->cartRule->findWhere([
+                'use_coupon' => 0,
+                'status' => 1
             ]);
-
-            if (count($cartRuleCart)) {
-                $this->cartRuleCart->update([
-                    'cart_id' => $cart->id,
-                    'cart_rule_id' => $maxImpacts[$leastId]['rule']->id
-                ], $cartRuleCart->first()->id);
-            } else {
-                $this->cartRuleCart->create([
-                    'cart_id' => $cart->id,
-                    'cart_rule_id' => $maxImpacts[$leastId]['rule']->id
-                ]);
-            }
-
-            return ['rule' => $maxImpacts[$leastId]['rule'], 'impact' => $maxImpacts[$leastId], 'success' => true];
-        }
-    }
-
-    public function ruleCheck($code)
-    {
-        $rules = $this->applyCouponAble();
-        $appliedRule = null;
-
-        if (! isset($rules['id'])) {
-            return ['message' => trans('admin::app.promotion.status.no-coupon'), 'success' => false];
+        } else {
+            $nonCouponAbleRules = $this->cartRule->findWhere([
+                'use_coupon' => 0,
+                'is_guest' => 1,
+                'status' => 1
+            ]);
         }
 
-        foreach($rules['id'] as $rule) {
-            if ($rule->auto_generation == 0) {
-                if ($rule->coupons->code == $code) {
-                    $appliedRule = $rule;
+        $canBeApplied = array();
 
-                    break;
-                } else {
-                    continue;
+        // time based filter
+        foreach($nonCouponAbleRules as $rule) {
+            $report = $this->checkApplicability($rule);
+            $report['rule'] = $rule;
+
+            $passed = 0;
+            if ($rule->starts_from != null && $rule->ends_till == null) {
+                if (Carbon::parse($rule->starts_from) < now()) {
+                    $passed = 1;
                 }
+            } else if ($rule->starts_from == null && $rule->ends_till != null) {
+                if (Carbon::parse($rule->ends_till) > now()) {
+                    $passed = 1;
+                }
+            } else if ($rule->starts_from != null && $rule->ends_till != null) {
+                if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
+                    $passed = 1;
+                }
+            } else {
+                $passed = 1;
+            }
+
+            if ($passed) {
+                array_push($canBeApplied, $report);
             }
         }
 
-        if (! isset($appliedRule)) {
-            return ['message' => trans('admin::app.promotion.status.no-coupon'), 'success' => false];
-        }
+        //min priority
+        $minPriority = collect($canBeApplied)->min('priority');
 
-        $race = $this->endRace($appliedRule);
+        $canBeApplied = collect($canBeApplied)->where('priority', $minPriority);
 
-        if (! $race) {
-            return ['message' => trans('admin::app.promotion.status.no-coupon'), 'success' => false];
-        }
+        if (count($canBeApplied) > 1) {
+            $maxDiscount = collect($canBeApplied)->max('discount');
 
-        $cart = \Cart::getCart();
+            $canBeApplied = collect($canBeApplied)->where('discount', $maxDiscount);
 
-        // All of conditions is/are true
-        $result = 1;
-        if ($appliedRule->conditions && $appliedRule->conditions != "null") {
-            if ($appliedRule->starts_from != null && $appliedRule->ends_till != null) {
-                if (Carbon::parse($appliedRule->starts_from) < now() && now() < Carbon::parse($appliedRule->ends_till)) {
-                    $conditions = json_decode(json_decode($appliedRule->conditions));
-                    $test_mode = config('pricerules.test_mode.0');
-
-                    if ($test_mode == config('pricerules.test_mode.0')) {
-                        $result = $this->testAllConditionAreTrue($conditions, $cart);
-                    } else if ($test_mode == config('pricerules.test_mode.1')) {
-                        $result = $this->testAllConditionAreFalse($conditions, $cart);
-                    } else if ($test_mode == config('pricerules.test_mode.2')) {
-                        $result = $this->testAnyConditionIsTrue($conditions, $cart);
-                    } else if ($test_mode == config('pricerules.test_mode.3')) {
-                        $result = $this->testAbyConditionIsFalse($conditions, $cart);
+            $leastId = 999999999999;
+            if (count($canBeApplied) > 1) {
+                foreach($canBeApplied as $rule) {
+                    if ($rule['rule'] < $leastId) {
+                        $leastId = $rule['rule']->id;
                     }
                 }
-            } else {
-                $conditions = json_decode(json_decode($rule->conditions));
-                $test_mode = config('pricerules.test_mode.0');
-
-                if ($test_mode == config('pricerules.test_mode.0')) {
-                    $result = $this->testAllConditionAreTrue($conditions, $cart);
-                } else if ($test_mode == config('pricerules.test_mode.1')) {
-                    $result = $this->testAllConditionAreFalse($conditions, $cart);
-                } else if ($test_mode == config('pricerules.test_mode.2')) {
-                    $result = $this->testAnyConditionIsTrue($conditions, $cart);
-                } else if ($test_mode == config('pricerules.test_mode.3')) {
-                    $result = $this->testAnyConditionIsFalse($conditions, $cart);
-                }
             }
+        }
+        //find end rule
+        return $canBeApplied;
+    }
+
+    public function applyCouponAbleRule()
+    {
+        if (auth()->guard('customer')->check()) {
+            $couponAbleRules = $this->cartRule->findWhere([
+                'use_coupon' => 1
+            ]);
         } else {
-            if ($appliedRule->starts_from != null && $appliedRule->ends_till != null) {
-                if (Carbon::parse($appliedRule->starts_from) < now() && now() < Carbon::parse($appliedRule->ends_till)) {
-                    $result = 1;
-                } else {
-                    $result = 0;
+            $couponAbleRules = $this->cartRule->findWhere([
+                'use_coupon' => 1,
+                'is_guest' => 1
+            ]);
+        }
+
+        // time based filter
+        foreach($couponAbleRules as $rule) {
+            if ($rule->starts_from != null && $rule->ends_till == null) {
+                if (Carbon::parse($rule->starts_from) < now()) {
+
+                }
+            } else if ($rule->starts_from == null && $rule->ends_till != null) {
+                if (Carbon::parse($rule->ends_till) < now()) {
+
+                }
+            } else if ($rule->starts_from != null && $rule->ends_till != null) {
+                if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
                 }
             }
         }
 
-        // check all the conditions associated with the rule
+        return $couponAbleRules;
+    }
+
+    public function checkApplicability($rule)
+    {
+        $cart = \Cart::getCart();
+        $report = array();
+        $result = 0;
+        //check conditions
+        if ($rule->conditions != null) {
+            $conditions = json_decode(json_decode($rule->conditions));
+            $test_mode = config('pricerules.test_mode.0');
+
+            if ($test_mode == config('pricerules.test_mode.0')) {
+                $result = $this->testIfAllConditionAreTrue($conditions, $cart);
+            } else if ($test_mode == config('pricerules.test_mode.1')) {
+                $result = $this->testIfAllConditionAreFalse($conditions, $cart);
+            } else if ($test_mode == config('pricerules.test_mode.2')) {
+                $result = $this->testIfAnyConditionIsTrue($conditions, $cart);
+            } else if ($test_mode == config('pricerules.test_mode.3')) {
+                $result = $this->testIfAnyConditionIsFalse($conditions, $cart);
+            }
+        }
+
         if ($result) {
-            $action_type = $rule->action_type;
-            $disc_threshold = $rule->disc_threshold;
-            $disc_amount = $rule->disc_amount;
-            $disc_quantity = $rule->disc_quantity;
-
-            $amountDiscounted = 0;
-            $newQuantity = 0;
-
-            if ($cart->items_qty >= $disc_threshold && $disc_quantity > 0) {
-                // add the time conditions if rule is expired and active then make it in active
-                $leastWorthItem = \Cart::leastWorthItem();
-                $realQty = $leastWorthItem['quantity'];
-
-                if ($disc_quantity > 1) {
-                    $disc_amount = $disc_amount * $disc_quantity;
-                }
-
-                if ($action_type == config('pricerules.cart.validation.0')) {
-                    if ($realQty <= $disc_quantity) {
-                        $amountDiscounted = (($leastWorthItem['total'] / $realQty) * ($disc_amount / 100)) * $disc_quantity;
-                    } else {
-                        $amountDiscounted = ($leastWorthItem['total'] / $realQty) * ($disc_amount / 100);
-                    }
-                } else if ($action_type == config('pricerules.cart.validation.1')) {
-                    if ($realQty <= $disc_quantity) {
-                        if ($disc_amount > ($disc_quantity * $leastWorthItem['total'])) {
-                            $amountDiscounted = 0;
-                        } else {
-                            $amountDiscounted = $cart->sub_total - $disc_amount;
-                        }
-                    } else {
-                        if ($disc_amount > $leastWorthItem['total']) {
-                            $amountDiscounted = 0;
-                        } else {
-                            $amountDiscounted = $cart->sub_total - $disc_amount;
-                        }
-                    }
-                } else if ($action_type == config('pricerules.cart.validation.2')) {
-                    if ($realQty <= $disc_quantity) {
-                        $amountDiscounted = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
-                    } else {
-                        $amountDiscounted = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_quantity;
-                    }
-                } else {
-                    $amountDiscounted = 0;
-                }
-
-                $cartRuleCart = $this->cartRuleCart->findWhere([
-                    'cart_id' => $cart->id,
-                ]);
-
-                if (count($cartRuleCart)) {
-                    $this->cartRuleCart->update([
-                        'cart_id' => $cart->id,
-                        'cart_rule_id' => $appliedRule->id
-                    ], $cartRuleCart->first()->id);
-                } else {
-                    $this->cartRuleCart->create([
-                        'cart_id' => $cart->id,
-                        'cart_rule_id' => $appliedRule->id
-                    ]);
-                }
-                dd($amountDiscounted);
-                return ['message' => trans('admin::app.promotion.status.coupon-applied'), 'success' => true, 'amount' => $amountDiscounted];
-            } else {
-                return ['message' => trans('admin::app.promotion.status.coupon-failed'), 'success' => false, 'amount' => $amountDiscounted];
-            }
+            $report['conditions'] = true;
         } else {
-            return ['message' => trans('admin::app.promotion.status.coupon-failed'), 'success' => false, 'amount' => $amountDiscounted];
+            if ($rule->conditions == null)
+                $report['conditions'] = true;
+            else
+                $report['conditions'] = false;
         }
-    }
 
-    /**
-     * To remove the couponable rule
-     */
-    public function removeCoupon()
-    {
-        $rule = $this->cartRuleCart->findWhere([
-            'cart_id' => \Cart::getCart()->id
-        ])->first();
-
-        if ($rule->cart_rule->use_coupon) {
-            if ($rule->delete()) {
-                return true;
-            } else {
-                return false;
-            }
+        //check endrule
+        if ($rule->end_other_rules) {
+            $report['end_other_rules'] = true;
         } else {
-            return false;
-        }
-    }
-
-    /**
-     * End race between two rules i.e the one already
-     * applied and one trying to be used
-     */
-    protected function endRace($newRule)
-    {
-        $appliedRule = $this->cartRuleCart->findWhere([
-            'cart_id' => \Cart::getCart()->id
-        ]);
-
-        if (! count($appliedRule)) {
-            return true;
+            $report['end_other_rules'] = false;
         }
 
-        $appliedRule = $appliedRule->first()->cart_rule;
+        //calculate discount amount
+        $action_type = $rule->action_type; // action type used
+        $disc_threshold = $rule->disc_threshold; // atleast quantity by default 1 --> may be omitted in near future
+        $disc_amount = $rule->disc_amount; // value of discount
+        $disc_quantity = $rule->disc_quantity; //max quantity allowed to be discounted
 
-        if ($appliedRule->end_other_rules) {
-            return false;
-        } else {
-            if ($newRule->priority > $appliedRule->priority) {
-                return false;
-            } else if ($appliedRule->priority == $newRule->priority) {
-                $appliedRuleImpact = $this->analyzeImpact($appliedRule);
-                $newRuleImpact = $this->analyzeImpact($newRule);
-
-                if ($newRuleImpact > $appliedRuleImpact) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return true;
-            }
-        }
-    }
-
-    /**
-     * Used when race condition occurs between
-     * any two rules possibly a discounted and
-     * a non discounted rule
-     */
-    public function analyzeImpact($rule)
-    {
-        $cart = \Cart::getCart();
-
-        $action_type = $rule->action_type;
-        $disc_threshold = $rule->disc_threshold;
-        $disc_amount = $rule->disc_amount;
-        $disc_quantity = $rule->disc_quantity;
-
-        $amountDiscounted = 0;
-        $newQuantity = 0;
-
+        $amountDiscounted;
         $leastWorthItem = \Cart::leastWorthItem();
         $realQty = $leastWorthItem['quantity'];
 
-        if ($cart->items_qty >= $disc_threshold && $disc_quantity > 0) {
-            if ($disc_quantity > 1) {
-                $disc_amount = $disc_amount * $disc_quantity;
-            }
-
+        if ($cart->items_qty >= $disc_threshold && $realQty >= $disc_quantity) {
             if ($action_type == config('pricerules.cart.validation.0')) {
-                if ($realQty <= $disc_quantity) {
-                    $amountDiscounted = (($leastWorthItem['total'] / $realQty) * ($disc_amount / 100)) * $disc_quantity;
-                } else {
-                    $amountDiscounted = ($leastWorthItem['total'] / $realQty) * ($disc_amount / 100);
-                }
+                $amountDiscounted = $leastWorthItem['total'] * ($disc_amount / 100);
             } else if ($action_type == config('pricerules.cart.validation.1')) {
-                if ($realQty <= $disc_quantity) {
-                    if ($disc_amount > ($disc_quantity * $leastWorthItem['total'])) {
-                        $amountDiscounted = 0;
-                    } else {
-                        $amountDiscounted = $cart->sub_total - $disc_amount;
-                    }
-                } else {
-                    if ($disc_amount > $leastWorthItem['total']) {
-                        $amountDiscounted = 0;
-                    } else {
-                        $amountDiscounted = $cart->sub_total - $disc_amount;
-                    }
+                $amountDiscounted = $leastWorthItem['total'] - $disc_amount;
+
+                if ($amountDiscounted < 0) {
+                    $amountDiscounted = $leastWorthItem['total'];
                 }
             } else if ($action_type == config('pricerules.cart.validation.2')) {
-                if ($realQty <= $disc_quantity) {
-                    $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_amount;
-                } else {
-                    $newQuantity = $this->cartItem->find($leastWorthItem['id'])->quantity + $disc_quantity;
-                }
-            } else if ($action_type == config('pricerules.cart.validation.3')) {
                 $amountDiscounted = $disc_amount;
             }
-
-            if ($action_type == config('pricerules.cart.validation.2')) {
-                // $cartRuleCart = $this->cartRuleCart->findWhere([
-                //     'cart_id' => $cart->id,
-                // ]);
-
-                // if (count($cartRuleCart)) {
-                //     $this->cartRuleCart->update([
-                //         'cart_id' => $cart->id,
-                //         'cart_rule_id' => $rule->id
-                //     ], $cartRuleCart->first()->id);
-                // } else {
-                //     $this->cartRuleCart->create([
-                //         'cart_id' => $cart->id,
-                //         'cart_rule_id' => $rule->id
-                //     ]);
-                // }
-
-                return $newQuantity;
-            } else {
-                // $cartRuleCart = $this->cartRuleCart->findWhere([
-                //     'cart_id' => $cart->id,
-                // ]);
-
-                // if (count($cartRuleCart)) {
-                //     $this->cartRuleCart->update([
-                //         'cart_id' => $cart->id,
-                //         'cart_rule_id' => $rule->id
-                //     ], $cartRuleCart->first()->id);
-                // } else {
-                //     $this->cartRuleCart->create([
-                //         'cart_id' => $cart->id,
-                //         'cart_rule_id' => $rule->id
-                //     ]);
-                // }
-
-                return $amountDiscounted;
-            }
         }
+
+        $report['discount'] = $amountDiscounted;
+        $report['priority'] = $rule->priority;
+
+        return $report;
     }
 
-    protected function testAllConditionAreTrue($conditions, $cart) {
+    protected function testIfAllConditionAreTrue($conditions, $cart) {
         $shipping_address = $cart->getShippingAddressAttribute();
 
         $shipping_method = $cart->shipping_method;
@@ -881,258 +273,6 @@ class Discount
 
                         break;
                     }
-                } else if ($test_condition == '()') {
-                } else if ($test_condition == '!()') {
-                }
-            }
-            // else if ($condition->type == 'boolean') {
-            // if ($test_conditions[$condition->type][$test_condition]) {
-            //     if ($test_condition == 0) {
-            //     } else if ($test_condition == 1) {
-            //     }
-            // }
-            // }
-        }
-        return $result;
-    }
-
-    protected function testAllConditionAreFalse($conditions, $cart) {
-        $shipping_address = $cart->getShippingAddressAttribute();
-        $shipping_method = $cart->shipping_method;
-        $shipping_country = $shipping_address->country;
-        $shipping_state = $shipping_address->state;
-        $shipping_postcode = $shipping_address->postcode;
-        $shipping_city = $shipping_address->city;
-
-        $payment_method = $cart->payment->method;
-        $sub_total = $cart->base_sub_total;
-
-        $total_items = $cart->items_qty;
-        $total_weight = 0;
-
-        foreach($cart->items as $item) {
-            $total_weight = $total_weight + $item->base_total_weight;
-        }
-
-        $test_mode = config('pricerules.test_mode.0');
-        $test_conditions = config('pricerules.cart.conditions');
-
-        $result = 1;
-        foreach ($conditions as $condition) {
-            $actual_value = ${$condition->attribute};
-            $test_value = $condition->value;
-            $test_condition = $condition->condition;
-
-            if ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text') {
-                if ($test_condition == '=') {
-                    if (! ($actual_value != $test_value)) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '>=') {
-                    if (($actual_value >= $test_value)) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '<=') {
-                    if (($actual_value <= $test_value)) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '>') {
-                    if (($actual_value > $test_value)) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '<') {
-                    if (($actual_value < $test_value)) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '{}') {
-                    if (str_contains($actual_value, $test_value)) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '!{}') {
-                    if (! str_contains($actual_value, $test_value)) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '()') {
-                    // dd($test_condition);
-                } else if ($test_condition == '!()') {
-                    // dd($test_condition);
-                }
-            }
-                // else if ($condition->type == 'boolean') {
-                // if ($test_conditions[$condition->type][$test_condition]) {
-                //     if ($test_condition == 0) {
-                //         dd($test_condition);
-                //     } else if ($test_condition == 1) {
-                //         dd($test_condition);
-                //     }
-                // }
-                // }
-        }
-
-        return $result;
-    }
-
-    protected function testAnyConditionIsTrue($conditions, $cart) {
-        $shipping_address = $cart->getShippingAddressAttribute();
-
-        $shipping_method = $cart->shipping_method;
-        $shipping_country = $shipping_address->country;
-        $shipping_state = $shipping_address->state;
-        $shipping_postcode = $shipping_address->postcode;
-        $shipping_city = $shipping_address->city;
-
-        $payment_method = $cart->payment->method;
-        $sub_total = $cart->base_sub_total;
-
-        $total_items = $cart->items_qty;
-        $total_weight = 0;
-
-        foreach($cart->items as $item) {
-            $total_weight = $total_weight + $item->base_total_weight;
-        }
-
-        $test_mode = config('pricerules.test_mode.0');
-        $test_conditions = config('pricerules.cart.conditions');
-        $result = 1;
-
-        foreach ($conditions as $condition) {
-            $actual_value = ${$condition->attribute};
-            $test_value = $condition->value;
-            $test_condition = $condition->condition;
-
-            if ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text'){
-                if ($test_condition == '=') {
-                    if ($actual_value == $test_value) {
-                        break;
-                    }
-                } else if ($test_condition == '>=') {
-                    if ($actual_value >= $test_value) {
-                        break;
-                    }
-                } else if ($test_condition == '<=') {
-                    if ($actual_value <= $test_value) {
-                        break;
-                    }
-                } else if ($test_condition == '>') {
-                    if ($actual_value > $test_value) {
-                        break;
-                    }
-                } else if ($test_condition == '<') {
-                    if ($actual_value < $test_value) {
-                        break;
-                    }
-                } else if ($test_condition == '{}') {
-                    if (str_contains($actual_value, $test_value)) {
-                        break;
-                    }
-                } else if ($test_condition == '!{}') {
-                    if (! (! str_contains($actual_value, $test_value))) {
-                        break;
-                    }
-                } else if ($test_condition == '()') {
-                    // dd($test_condition);
-                } else if ($test_condition == '!()') {
-                    // dd($test_condition);
-                } else {
-                    $result = 0;
-                }
-            }
-        }
-
-        return $result;
-    }
-
-    protected function testAnyConditionIsFalse($conditions, $cart) {
-        $shipping_address = $cart->getShippingAddressAttribute();
-
-        $shipping_method = $cart->shipping_method;
-        $shipping_country = $shipping_address->country;
-        $shipping_state = $shipping_address->state;
-        $shipping_postcode = $shipping_address->postcode;
-        $shipping_city = $shipping_address->city;
-
-        $payment_method = $cart->payment->method;
-        $sub_total = $cart->base_sub_total;
-
-        $total_items = $cart->items_qty;
-        $total_weight = 0;
-
-        foreach($cart->items as $item) {
-            $total_weight = $total_weight + $item->base_total_weight;
-        }
-
-        $test_mode = config('pricerules.test_mode.0');
-        $test_conditions = config('pricerules.cart.conditions');
-        $result = 1;
-
-        foreach ($conditions as $condition) {
-            $actual_value = ${$condition->attribute};
-            $test_value = $condition->value;
-            $test_condition = $condition->condition;
-
-            if ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text'){
-                if ($test_condition == '=') {
-                    if ($actual_value != $test_value) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '>=') {
-                    if (! ($actual_value >= $test_value)) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '<=') {
-                    if (! ($actual_value <= $test_value)) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '>') {
-                    if (! ($actual_value > $test_value)) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '<') {
-                    if ((! $actual_value < $test_value)) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '{}') {
-                    if (! (str_contains($actual_value, $test_value))) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '!{}') {
-                    if (! (! str_contains($actual_value, $test_value))) {
-                        $result = 0;
-
-                        break;
-                    }
-                } else if ($test_condition == '()') {
-                    // dd($test_condition);
-                } else if ($test_condition == '!()') {
-                    // dd($test_condition);
-                } else {
-                    $result = 0;
                 }
             }
         }
