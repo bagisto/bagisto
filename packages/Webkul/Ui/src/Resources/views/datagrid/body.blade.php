@@ -44,7 +44,7 @@
                             @foreach ($actions as $action)
                                 <a
                                 @if ($action['method'] == 'GET')
-                                    href="{{ route($action['route'], $record->{$index}) }}"
+                                    href="{{ route($action['route'], $record->{$action['index'] ?? $index}) }}"
                                 @endif
 
                                 @if ($action['method'] != 'GET')
