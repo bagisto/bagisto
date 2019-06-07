@@ -13,6 +13,12 @@ class CreateCartRuleTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('discount_customer_group');
+        Schema::dropIfExists('discount_channels');
+        Schema::dropIfExists('discount_rules');
+        Schema::dropIfExists('discounts');
+        Schema::dropIfExists('products_grid');
+
         Schema::create('cart_rules', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();

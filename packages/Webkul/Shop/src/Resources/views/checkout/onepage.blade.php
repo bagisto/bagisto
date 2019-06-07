@@ -567,7 +567,6 @@
                         this_this.coupon_able = true;
                         this_this.discount_code = this_this.code;
                     }).catch(function(error) {
-                        // this_this.discounted = false;
                     });
                 },
 
@@ -582,7 +581,6 @@
                         this_this.new_grand_total = response.data.formatted_new_grand_total;
                         this_this.non_coupon_able = true;
                     }).catch(function (error) {
-                        console.log(error);
                     });
                 },
 
