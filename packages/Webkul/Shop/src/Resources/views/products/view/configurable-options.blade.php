@@ -145,7 +145,7 @@
                             var buyNowLink = $('.btn.buynow').attr('data-href');
                             var quantity = document.getElementById('quantity').value;
 
-                            if (this.selectedProductId != '') {
+                            if (this.selectedProductId != '' && buyNowLink) {
                                 var splitted = buyNowLink.split("/");
 
                                 splitted.pop();
