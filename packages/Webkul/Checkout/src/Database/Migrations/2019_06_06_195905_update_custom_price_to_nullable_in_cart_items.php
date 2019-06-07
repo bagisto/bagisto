@@ -14,7 +14,11 @@ class UpdateCustomPriceToNullableInCartItems extends Migration
     public function up()
     {
         Schema::table('cart_items', function (Blueprint $table) {
-            $table->decimal('custom_price', 12,4)->nullable()->change();
+            $table->dropColumn('custom_price');
+        });
+
+        Schema::table('cart_items', function (Blueprint $table) {
+            $table->decimal('custom_price', 12,4)->nullable();
         });
     }
 
