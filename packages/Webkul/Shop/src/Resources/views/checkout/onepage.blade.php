@@ -149,10 +149,10 @@
     </script>
 
     <script>
-        var shippingHtml = '';
-        var paymentHtml = '';
-        var reviewHtml = '';
-        var summaryHtml = '';
+        var shippingHtml = null;
+        var paymentHtml = null;
+        var reviewHtml = null;
+        var summaryHtml = null;
         var customerAddress = null;
 
         @auth('customer')
@@ -562,7 +562,7 @@
             },
 
             mounted: function() {
-                if (reviewHtml != '') {
+                if (reviewHtml != null) {
                     this.discountVisible = true;
                     this.checkNonCouponAble();
                 }
