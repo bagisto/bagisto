@@ -2,13 +2,10 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Facades\Configuration;
 use Webkul\Core\Repositories\CoreConfigRepository as CoreConfig;
 use Webkul\Core\Tree;
-use Webkul\Admin\Http\Requests\ConfigurationForm;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -98,32 +95,20 @@ class ConfigurationController extends Controller
      */
     public function getDefaultConfigSlugs()
     {
-        $slugs = [];
-
         if (! request()->route('slug')) {
             $firstItem = current($this->configTree->items);
             $secondItem = current($firstItem['children']);
 
-            $temp = explode('.', $secondItem['key']);
-
-            $slugs = [
-                'slug' => current($temp),
-                'slug2' => end($temp)
-            ];
-        } else {
-            if (! request()->route('slug2')) {
-                $secondItem = current($this->configTree->items[request()->route('slug')]['children']);
-
-                $temp = explode('.', $secondItem['key']);
-
-                $slugs = [
-                    'slug' => current($temp),
-                    'slug2' => end($temp)
-                ];
-            }
+            return $this->getSlugs($secondItem);
         }
 
-        return $slugs;
+        if (! request()->route('slug2')) {
+            $secondItem = current($this->configTree->items[request()->route('slug')]['children']);
+
+            return $this->getSlugs($secondItem);
+        }
+
+        return [];
     }
 
     /**
@@ -159,5 +144,17 @@ class ConfigurationController extends Controller
         $config = $this->coreConfig->findOneByField('value', $fileName);
 
         return Storage::download($config['value']);
+    }
+
+    /**
+     * @param $secondItem
+     *
+     * @return array
+     */
+    private function getSlugs($secondItem): array
+    {
+        $temp = explode('.', $secondItem['key']);
+
+        return ['slug' => current($temp), 'slug2' => end($temp)];
     }
 }

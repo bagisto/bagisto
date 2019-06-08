@@ -92,7 +92,7 @@ class InventorySourceController extends Controller
 
         Event::fire('inventory.inventory_source.create.after', $inventorySource);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Inventory source']));
+        session()->flash('success', trans('admin::app.settings.inventory_sources.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -142,7 +142,7 @@ class InventorySourceController extends Controller
 
         Event::fire('inventory.inventory_source.update.after', $inventorySource);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Inventory source']));
+        session()->flash('success', trans('admin::app.settings.inventory_sources.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -157,8 +157,8 @@ class InventorySourceController extends Controller
     {
         $inventorySource = $this->inventorySource->findOrFail($id);
 
-        if($this->inventorySource->count() == 1) {
-            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Inventory source']));
+        if ($this->inventorySource->count() == 1) {
+            session()->flash('error', trans('admin::app.settings.inventory_sources.last-delete-error'));
         } else {
             try {
                 Event::fire('inventory.inventory_source.delete.before', $id);
@@ -167,7 +167,7 @@ class InventorySourceController extends Controller
 
                 Event::fire('inventory.inventory_source.delete.after', $id);
 
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Inventory source']));
+                session()->flash('success', trans('admin::app.settings.inventory_sources.delete-success'));
 
                 return response()->json(['message' => true], 200);
             } catch (\Exception $e) {

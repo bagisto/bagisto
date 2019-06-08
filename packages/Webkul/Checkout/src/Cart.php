@@ -886,7 +886,7 @@ class Cart {
                     } else if ($this->price->getMinimalPrice($item->child->product_flat) != $item->price) {
                         // $price = (float) $item->custom_price ? $item->custom_price : $item->child->product->price;
 
-                        if ((float)$item->custom_price) {
+                        if (! is_null($item->custom_price)) {
                             $price = $item->custom_price;
                         } else {
                             $price = $this->price->getMinimalPrice($item->child->product_flat);
@@ -910,7 +910,7 @@ class Cart {
                     } else if ($this->price->getMinimalPrice($productFlat) != $item->price) {
                         // $price = (float) $item->custom_price ? $item->custom_price : $item->product->price;
 
-                        if ((float)$item->custom_price) {
+                        if (! is_null($item->custom_price)) {
                             $price = $item->custom_price;
                         } else {
                             $price = $this->price->getMinimalPrice($productFlat);

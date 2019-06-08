@@ -439,7 +439,8 @@ return [
             'got' => 'Got',
             'free' => 'Free',
             'coupon-used' => 'Coupon Used',
-            'applied' => 'Applied'
+            'applied' => 'Applied',
+            'back' => 'Back'
         ],
 
         'total' => [

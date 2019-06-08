@@ -54,6 +54,14 @@ class ProductFlat extends Model implements ProductFlatContract
     }
 
     /**
+     * @return integer
+     */
+    public function totalQuantity()
+    {
+        return $this->product->totalQuantity();
+    }
+
+    /**
      * @param integer $qty
      *
      * @return bool
