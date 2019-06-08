@@ -103,13 +103,17 @@ class Discount
                 foreach($canBeApplied as $rule) {
                     if ($rule['rule']->id == $leastId) {
                         $rule['used_coupon'] = false;
+
+                        $this->save($rule['rule']);
+
                         return $rule;
                     }
                 }
             }
         }
 
-        //find end rule
+        $this->save($canBeApplied[0]['rule']);
+
         return $canBeApplied[0];
     }
 
@@ -197,10 +201,10 @@ class Discount
                                 }
                             }
 
-                            // fighting the edge case for  couponable discount rule
+                            // fighting the edge case for couponable discount rule
                             foreach($canBeApplied as $rule) {
                                 if ($rule['rule']->id == $leastId) {
-                                    if($rule->use_coupon) {
+                                    if($rule['rule']->use_coupon) {
                                         $useCouponable = true;
                                     }
                                 }
@@ -215,10 +219,10 @@ class Discount
                             $useCouponable = true;
                         }
                     }
-                }
 
-                if ($alreadyAppliedRule->end_other_rules) {
-                    $useCouponable = false;
+                    if ($alreadyAppliedRule->end_other_rules) {
+                        $useCouponable = false;
+                    }
                 }
             }
         }
@@ -228,6 +232,8 @@ class Discount
             $report = $this->checkApplicability($rule);
             $report['rule'] = $rule;
             $report['used_coupon'] = $useCouponable;
+
+            $this->save($rule);
 
             return $report;
         } else {
@@ -306,39 +312,45 @@ class Discount
         return $report;
     }
 
-    public function removeNonCoupon()
+    public function save($rule)
     {
         $cart = \Cart::getCart();
 
-        $nonCouponAbleRule = $this->cartRuleCart->findWhere([
+        // create or update
+        $existingRule = $this->cartRuleCart->findWhere([
             'cart_id' => $cart->id
         ]);
 
-        if (count($couponAbleRule)  && ! $couponAbleRule->first()->cart_rule->use_coupon) {
-            $result = $nonCouponAbleRule->delete();
+        if (count($existingRule)) {
+            if ($existingRule->first()->cart_rule_id != $rule->id) {
+                $existingRule->first()->update([
+                    'cart_rule_id' => $rule->id
+                ]);
 
-            if ($result) {
                 return true;
-            } else {
-                return false;
             }
         } else {
-            return false;
+            $this->cartRuleCart->create([
+                'cart_id' => $cart->id,
+                'cart_rule_id' => $rule->id
+            ]);
+
+            return true;
         }
+
+        return false;
     }
 
     public function removeCoupon()
     {
         $cart = \Cart::getCart();
 
-        $couponAbleRule = $this->cartRuleCart->findWhere([
+        $existingRule = $this->cartRuleCart->findWhere([
             'cart_id' => $cart->id
         ]);
 
-        if (count($couponAbleRule)  && $couponAbleRule->first()->cart_rule->use_coupon) {
-            $result = $couponAbleRule->delete();
-
-            if ($result) {
+        if ($existingRule->count()) {
+            if ($existingRule->first()->delete()) {
                 return true;
             } else {
                 return false;

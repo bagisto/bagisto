@@ -10,7 +10,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="discount-template">
-        <div class="discount">
+        <div class="discount" v-if='discountVisible'>
             <div class="discount-group" v-if="!end_rule_present">
                 <form class="coupon-form" method="post" @submit.prevent="onSubmit">
                     <div class="control-group mt-20" :class="[errors.has('code') ? 'has-error' : '']">
@@ -40,7 +40,7 @@
                     <label class="right">@{{ discount_amount }}</label>
                 </div>
 
-                <div class="item-detail" style="font-weight: bold;">
+                <div class="item-detail" style="font-weight: bold; border-top: 1px solid #c7c7c7; padding-top: 5px">
                     <label>{{ __('shop::app.checkout.total.new-grand-total') }}</label>
                     <label class="right">@{{ new_grand_total }}</label>
                 </div>
@@ -49,7 +49,7 @@
             <div class="discount-details-group" v-if="coupon_able">
                 <div class="item-detail">
                     <label>{{ __('shop::app.checkout.total.coupon-applied') }}</label>
-                    <label class="right">@{{ discount_code }}</label>
+                    <label class="right" style="display: inline-flex; align-items: center;">@{{ discount_code }} <span class="icon cross-icon" v-on:click="removeCoupon" title="{{ __('shop::app.checkout.total.remove-coupon') }}"></span></label>
                 </div>
                 <div class="item-detail" v-if="free_shipping">
                     <label>Free Shipping</label>
@@ -58,10 +58,10 @@
 
                 <div class="item-detail">
                     <label>{{ __('shop::app.checkout.total.disc-amount') }}</label>
-                    <label class="right">@{{ discount_amount }} <span class="icon cross-icon" v-on:click="removeCoupon"></span></label>
+                    <label class="right">@{{ discount_amount }}</label>
                 </div>
 
-                <div class="item-detail" style="font-weight: bold;">
+                <div class="item-detail" style="font-weight: bold; border-top: 1px solid #c7c7c7; padding-top: 5px">
                     <label>{{ __('shop::app.checkout.total.new-grand-total') }}</label>
                     <label class="right">@{{ new_grand_total }}</label>
                 </div>
@@ -548,13 +548,16 @@
                     new_grand_total: null,
                     non_coupon_able: false,
                     coupon_able: false,
-                    discount_code: null
+                    discount_code: null,
+                    discountVisible: false
                 }
             },
 
             mounted: function() {
-                // shop.checkout.fetch.non-coupon
-                this.checkNonCouponAble();
+                if (reviewHtml != '') {
+                    this.discountVisible = true;
+                    this.checkNonCouponAble();
+                }
             },
 
             methods: {
@@ -600,10 +603,17 @@
                 removeCoupon: function() {
                     var this_this = this;
 
-                    axios.post('{{ route('shop.checkout.remove.coupon') }}', {
-                        code: this_this.code
-                    }).then(function(response) {
-                        console.log(response.data);
+                    axios.post('{{ route('shop.checkout.remove.coupon') }}').then(function(response) {
+                        this_this.code = null;
+                        this_this.message = null;
+                        this_this.end_rule_present = false;
+                        this_this.discount_amount = 0;
+                        this_this.rule_name = null;
+                        this_this.free_shipping = null;
+                        this_this.new_grand_total = null;
+                        this_this.non_coupon_able = false;
+                        this_this.coupon_able = false;
+                        this_this.discount_code = null;
                     }).catch(function(error) {
                         console.log(error.data);
                     });

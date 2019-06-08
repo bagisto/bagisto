@@ -453,7 +453,8 @@ return [
             'disc-amount' => 'Amount discounted',
             'new-grand-total' => 'New Grand Total',
             'coupon' => 'Coupon',
-            'coupon-applied' => 'Coupon Applied'
+            'coupon-applied' => 'Coupon Applied',
+            'remove-coupon' => 'Remove Coupon'
         ],
 
         'success' => [
