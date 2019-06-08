@@ -240,6 +240,7 @@ class Discount
         $cart = \Cart::getCart();
         $report = array();
         $result = 0;
+
         //check conditions
         if ($rule->conditions != null) {
             $conditions = json_decode(json_decode($rule->conditions));
@@ -303,6 +304,48 @@ class Discount
         $report['priority'] = $rule->priority;
 
         return $report;
+    }
+
+    public function removeNonCoupon()
+    {
+        $cart = \Cart::getCart();
+
+        $nonCouponAbleRule = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id
+        ]);
+
+        if (count($couponAbleRule)  && ! $couponAbleRule->first()->cart_rule->use_coupon) {
+            $result = $nonCouponAbleRule->delete();
+
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function removeCoupon()
+    {
+        $cart = \Cart::getCart();
+
+        $couponAbleRule = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id
+        ]);
+
+        if (count($couponAbleRule)  && $couponAbleRule->first()->cart_rule->use_coupon) {
+            $result = $couponAbleRule->delete();
+
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     protected function testIfAllConditionAreTrue($conditions, $cart) {

@@ -58,7 +58,7 @@
 
                 <div class="item-detail">
                     <label>{{ __('shop::app.checkout.total.disc-amount') }}</label>
-                    <label class="right">@{{ discount_amount }}</label>
+                    <label class="right">@{{ discount_amount }} <span class="icon cross-icon" v-on:click="removeCoupon"></span></label>
                 </div>
 
                 <div class="item-detail" style="font-weight: bold;">
@@ -343,6 +343,12 @@
                 placeOrder: function() {
                     var this_this = this;
 
+                    axios.post('{{ route('shop.checkout.save.discount') }}').then(function (response) {
+                        console.log(response.data);
+                    }).catch(function (error) {
+                        console.log('error in saving discount');
+                    });
+
                     this.disable_button = true;
 
                     this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
@@ -597,15 +603,9 @@
                     axios.post('{{ route('shop.checkout.remove.coupon') }}', {
                         code: this_this.code
                     }).then(function(response) {
-                        if (response.data.message == true) {
-                            this_this.discounted = null;
-                            this_this.discount.amount = null;
-                            this_this.discount.action = null;
-                            this_this.discount.amount_given = null;
-                            this_this.discount.message = null;
-                        }
+                        console.log(response.data);
                     }).catch(function(error) {
-                        this_this.discounted = false;
+                        console.log(error.data);
                     });
                 }
             }

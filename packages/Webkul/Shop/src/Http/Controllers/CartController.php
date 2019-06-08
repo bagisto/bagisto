@@ -277,6 +277,14 @@ class CartController extends Controller
     }
 
     /**
+     * To save the discount values inside the tables of orders and cart
+     */
+    public function saveDiscount()
+    {
+        return ['hellow'];
+    }
+
+    /**
      * To remove the currently active
      * couponable rule
      */
