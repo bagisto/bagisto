@@ -43,7 +43,7 @@
                                     <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                         <label for="name" class="required">{{ __('admin::app.promotion.general-info.name') }}</label>
 
-                                        <input type="text" class="control" name="name" v-model="name" v-validate="'required|alpha_spaces'" value="{{ old('name') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.name') }}&quot;">
+                                        <input type="text" class="control" name="name" v-model="name" v-validate="'required'" value="{{ old('name') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.name') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
                                     </div>
@@ -51,7 +51,7 @@
                                     <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
                                         <label for="description">{{ __('admin::app.promotion.general-info.description') }}</label>
 
-                                        <textarea class="control" name="description" v-model="description" v-validate="'alpha_spaces'" value="{{ old('description') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.description') }}&quot;"></textarea>
+                                        <textarea class="control" name="description" v-model="description" value="{{ old('description') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.description') }}&quot;"></textarea>
 
                                         <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                                     </div>
