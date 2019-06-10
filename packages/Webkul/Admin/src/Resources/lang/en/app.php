@@ -39,7 +39,9 @@ return [
         'sliders' => 'Sliders',
         'taxes' => 'Taxes',
         'tax-categories' => 'Tax Categories',
-        'tax-rates' => 'Tax Rates'
+        'tax-rates' => 'Tax Rates',
+        'promotion' => 'Promotions',
+        'discount' => 'Discount'
     ],
 
     'acl' => [
@@ -151,7 +153,12 @@ return [
         'role' => 'Role',
         'sub-total' => 'Sub Total',
         'no-of-products' => 'Number of Products',
-        'attribute-family' => 'Attribute Family'
+        'attribute-family' => 'Attribute Family',
+        'starts-from' => 'Starts From',
+        'ends-till' => 'Ends Till',
+        'per-cust' => 'Per Customer',
+        'usage-throttle' => 'Usage Times',
+        'for-guest' => 'For Guest'
     ],
 
     'account' => [
@@ -732,6 +739,14 @@ return [
             'is_user_defined' => 'User Defined',
             'yes' => 'Yes'
         ],
+
+        'note' => [
+            'title' => 'Add Note',
+            'save-note' => 'Save Note',
+            'enter-note' => 'Enter Note',
+            'help-title' => 'Add Note On This Customer'
+        ],
+
         'customers' => [
             'add-title' => 'Add Customer',
             'edit-title' => 'Edit Customer',
@@ -752,7 +767,10 @@ return [
             'female' => 'Female',
             'phone' => 'Phone',
             'group-default' => 'Cannot delete the default group.',
+            'edit-help-title' => 'Edit Customer',
+            'delete-help-title' => 'Delete Customer'
         ],
+
         'reviews' => [
             'title' => 'Reviews',
             'edit-title' => 'Edit Review',
@@ -774,6 +792,85 @@ return [
             'update-failed' => 'Error! You cannot unsubscribe the subscriber',
             'delete' => 'Subscriber was successfully deleted',
             'delete-failed' => 'Error! Subscriber cannot be deleted'
+        ]
+    ],
+
+    'promotion' => [
+        'catalog-rule' => 'Catalog Rules',
+        'cart-rule' => 'Cart Rule',
+        'add-catalog-rule' => 'Add Catalog Rule',
+        'add-cart-rule' => 'Add Cart Rule',
+        'edit-cart-rule' => 'Edit Cart Rule',
+        'edit-catalog-rule' => 'Edit Catalog Rule',
+        'create-catalog-rule' => 'Create Catalog Rule',
+        'create-cart-rule' => 'Create Cart Rule',
+        'save-btn-title' => 'Create',
+        'edit-btn-title' => 'Edit',
+        'select-attr' => 'Select Attribute',
+        'select-attr-fam' => 'Select Attribute Family',
+        'select-cart-attr' => 'Select Cart Attribute',
+        'general-info' => [
+            'name' => 'Rule Name',
+            'description' => 'Description',
+            'starts-from' => 'Start',
+            'ends-till' => 'End',
+            'channels' => 'Channels',
+            'cust-groups' => 'Customer Groups',
+            'priority' => 'Priority',
+            'add-condition' => 'Add Conditions',
+            'disc_amt' => 'Discount Amount',
+            'disc_percent' => 'Discount Percentage',
+            'is-coupon' => 'Use Coupon',
+            'is-coupon-yes' => 'Yes',
+            'is-coupon-no' => 'No',
+            'uses-per-cust' => 'Uses per customer',
+            'all' => 'All',
+            'any' => 'Any',
+            'end-other-rules' => 'End other rules',
+            'status' => 'Is Active',
+            'all-conditions-true' => 'Assuming all conditions are true',
+            'assuming' => 'Assuming',
+            'any' => 'Any',
+            'all' => 'All',
+            'conditions' => 'Conditions',
+            'are' => 'are',
+            'true' => 'true',
+            'false' => 'false',
+            'limit' => 'Usage Limit',
+            'specific-coupon' => 'Specific Coupon(Check) / Auto Generated(Unheck)',
+            'free-shipping' => 'Free Shipping',
+            'is-guest' => 'For Guests',
+            'disc_qty' => 'Max. Quantity Allowed To Be Discounted',
+        ],
+
+        'status' => [
+            'success' => 'Success! rule created',
+            'success-coupon' => 'Success! rule created along with coupon',
+            'failed' => 'Error! failed to create rule',
+            'update-success' => 'Success! rule updated',
+            'update-coupon-success' => 'Success! rule updated along with coupon',
+            'update-failed' => 'Error! cannot update',
+            'delete-success' => 'Sucess! rule deleted',
+            'delete-failed' => 'Error! cannot delete',
+            'coupon-applied' => 'Coupon used',
+            'coupon-failed' => 'Coupon failed to apply',
+            'no-coupon' => '* Coupon not applicable',
+            'coupon-removed' => 'Coupon removed successfully',
+            'coupon-remove-failed' => 'Coupon removal failed'
+        ],
+
+        'catalog' => [
+            'name' => 'Name',
+            'description' => 'Description',
+            'apply-percent' => 'Apply as percentage',
+            'apply-fixed' => 'Apply as fixed amount',
+            'adjust-to-percent' => 'Adjust to percentage',
+            'adjust-to-value' => 'Adjust to discount value',
+            'condition-missing' => 'Please check conditons, some values might be missing'
+        ],
+        'cart' => [
+            'buy-atleast' => 'Buy Atleast (N)',
+            'apply-to-shipping' => 'Apply to shipping'
         ]
     ],
 

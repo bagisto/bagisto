@@ -176,5 +176,24 @@ return [
         'route' => 'admin.tax-rates.index',
         'sort' => 2,
         'icon-class' => '',
+    ], [
+        'key' => 'promotion',
+        'name' => 'admin::app.layouts.promotion',
+        'route' => 'admin.cart-rule.index',
+        'sort' => 7,
+        'icon-class' => 'promotion-icon',
+    ], [
+        'key' => 'promotion.cart-rule',
+        'name' => 'admin::app.promotion.cart-rule',
+        'route' => 'admin.cart-rule.index',
+        'sort' => 1,
+        'icon-class' => '',
     ]
+    // , [
+    //     'key' => 'promotion.catalog-rule',
+    //     'name' => 'admin::app.promotion.catalog-rule',
+    //     'route' => 'admin.catalog-rule.index',
+    //     'sort' => 1,
+    //     'icon-class' => '',
+    // ]
 ];

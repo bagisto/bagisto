@@ -24,8 +24,10 @@
         </div>
     @endif
 
-    <div class="payble-amount">
+    <div class="payable-amount">
         <label>{{ __('shop::app.checkout.total.grand-total') }}</label>
         <label class="right">{{ core()->currency($cart->base_grand_total) }}</label>
     </div>
+
+    <discount></discount>
 </div>

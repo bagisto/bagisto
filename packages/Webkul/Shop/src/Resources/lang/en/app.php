@@ -397,7 +397,7 @@ return [
             'quantity-error' => 'Requested Quantity Is Not Available',
             'cart-subtotal' => 'Cart Subtotal',
             'cart-remove-action' => 'Do you really want to do this ?',
-            'partial-cart-update' => 'Only some of the product(s) were updated'
+            'partial-cart-update' => 'Only some of the product(s) were updated',
         ],
 
         'onepage' => [
@@ -434,6 +434,12 @@ return [
             'place-order' => 'Place Order',
             'new-address' => 'Add New Address',
             'save_as_address' => 'Save as Address',
+            'apply-coupon' => 'Apply Coupon',
+            'amt-payable' => 'Amount Payable',
+            'got' => 'Got',
+            'free' => 'Free',
+            'coupon-used' => 'Coupon Used',
+            'applied' => 'Applied',
             'back' => 'Back'
         ],
 
@@ -444,7 +450,12 @@ return [
             'delivery-charges' => 'Delivery Charges',
             'tax' => 'Tax',
             'discount' => 'Discount',
-            'price' => 'price'
+            'price' => 'price',
+            'disc-amount' => 'Amount discounted',
+            'new-grand-total' => 'New Grand Total',
+            'coupon' => 'Coupon',
+            'coupon-applied' => 'Coupon Applied',
+            'remove-coupon' => 'Remove Coupon'
         ],
 
         'success' => [

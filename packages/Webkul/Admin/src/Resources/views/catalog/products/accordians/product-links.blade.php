@@ -22,7 +22,7 @@
                 {{ __('admin::app.catalog.products.related-products') }}
             </label>
 
-            <input type="text" class="control" autocomplete="off"  v-model="search_term[key]" placeholder="{{ __('admin::app.catalog.products.product-search-hint') }}" v-on:keyup="search(key)">
+            <input type="text" class="control" autocomplete="off" v-model="search_term[key]" placeholder="{{ __('admin::app.catalog.products.product-search-hint') }}" v-on:keyup="search(key)">
 
             <div class="linked-product-search-result">
                 <ul>

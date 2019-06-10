@@ -53,7 +53,11 @@
 
                                 data-method="{{ $action['method'] }}"
                                 data-action="{{ route($action['route'], $record->{$index}) }}"
-                                data-token="{{ csrf_token() }}">
+                                data-token="{{ csrf_token() }}"
+
+                                @if (isset($action['title']))
+                                    title="{{ $action['title'] }}"
+                                @endif>
                                     <span class="{{ $action['icon'] }}"></span>
                                 </a>
                             @endforeach

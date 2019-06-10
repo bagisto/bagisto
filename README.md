@@ -27,6 +27,8 @@ a progressive Javascript framework.
 **Bagisto is viable attempt to cut down your time, cost and workforce for building online stores or migrating from physical stores
 to the ever demanding online world. Your business whether small or huge it suits all and very simple to set it up.**
 
+**Read our documentation: [Bagisto Docs](https://devdocs.bagisto.com/)**
+
 **We are also having a forum for any type of your concern, feature request discussions. Please visit: [Bagisto Forums](https://forums.bagisto.com/)**
 
 # Visit our live [Demo](https://demo.bagisto.com)
@@ -45,6 +47,7 @@ It packs in lots of demanding features that allows your business to scale in no 
 * Orders Management System.
 * Customer Cart, Wishlist, Product Reviews.
 * Simple and Configurable Products.
+* Price rules (Discount) inbuilt.
 * Check out [click here](https://bagisto.com/features/).
 
 **For Developers**:
@@ -136,6 +139,11 @@ Although, mailer environment variables are also required to be set up as **Bagis
 **To execute Bagisto**:
 
 ##### On server:
+
+Warning: Before going full on production mode we recommend you to install developer dependencies.
+In order to do that, run the command below:
+
+> composer install --no-dev
 
 ~~~
 Open the specified entry point in your hosts file in browser or make entry in hosts file if not done.

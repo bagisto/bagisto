@@ -138,7 +138,7 @@ return [
     /*
         Application Version
     */
-    'version' => env('APP_VERSION', '0.1.5'),
+    'version' => env('APP_VERSION', '0.1.6'),
 
     /**
      * Blacklisting attributes while debugging
@@ -245,6 +245,7 @@ return [
         Webkul\Sales\Providers\SalesServiceProvider::class,
         Webkul\Tax\Providers\TaxServiceProvider::class,
         Webkul\API\Providers\APIServiceProvider::class,
+        Webkul\Discount\Providers\DiscountServiceProvider::class
     ],
 
     /*
