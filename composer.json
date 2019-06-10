@@ -84,7 +84,8 @@
             "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
             "Webkul\\Sales\\": "packages/Webkul/Sales/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
-            "Webkul\\API\\": "packages/Webkul/API"
+            "Webkul\\API\\": "packages/Webkul/API",
+            "Webkul\\CustomerDocument\\": "packages/Webkul/CustomerDocument/src"
         }
     },
     "autoload-dev": {
