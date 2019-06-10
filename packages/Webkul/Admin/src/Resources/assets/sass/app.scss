@@ -173,23 +173,6 @@ body {
             height: 90%;
         }
 
-        // .close-nav-aside {
-        //     width: 100%;
-        //     padding: 20px;
-        //     text-align: center;
-        //     border: 1px solid $border-color;
-
-        //     .icon {
-        //         height: 24px;
-        //         width: 24px;
-        //     }
-        // }
-
-        // .close-nav-aside:hover {
-        //     background: white;
-        //     cursor: pointer;
-        // }
-
         a {
             padding: 15px;
             display: block;
@@ -235,7 +218,7 @@ body {
                     width: 24px;
                     height: 24px;
                     cursor: pointer;
-                    margin-top: 5px;
+                    margin-top: -2px;
                 }
 
                 h1 {
@@ -275,6 +258,54 @@ body {
             width: 100%;
             display: inline-block;
         }
+    }
+}
+
+.control-container {
+    border: 1px solid #c7c7c7;
+    padding: 10px;
+    width: 63%;
+
+    .title-bar {
+        display: inline-flex;
+        justify-content: space-between;
+        width: 100%;
+
+        .icon {
+            cursor: pointer;
+        }
+
+        .icon.cross-icon {
+            height: 24px;
+            width: 24px;
+        }
+    }
+
+    .control-group {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: flex-start;
+        padding: 10px;
+        border: 1px solid #c7c7c7;
+        border-radius: 2px;
+        margin-right: 15px;
+        margin-bottom: 0px;
+    }
+
+    .control-group::last-child {
+        margin-right: 0px;
+    }
+}
+
+.boolean-control-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 750px;
+
+    .control-group {
+        width: 200px;
     }
 }
 

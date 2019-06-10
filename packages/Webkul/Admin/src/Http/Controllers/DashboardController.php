@@ -131,47 +131,23 @@ class DashboardController extends Controller
 
         $statistics = [
             'total_customers' => [
-                'previous' => $previous = $this->customer->scopeQuery(function($query) {
-                        return $query->where('customers.created_at', '>=', $this->lastStartDate)
-                            ->where('customers.created_at', '<=', $this->lastEndDate);
-                    })->count(),
-                'current' => $current = $this->customer->scopeQuery(function($query) {
-                        return $query->where('customers.created_at', '>=', $this->startDate)
-                            ->where('customers.created_at', '<=', $this->endDate);
-                    })->count(),
+                'previous' => $previous = $this->getCustomersBetweenDates($this->lastStartDate, $this->lastEndDate)->count(),
+                'current' => $current = $this->getCustomersBetweenDates($this->startDate, $this->endDate)->count(),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'total_orders' =>  [
-                'previous' => $previous = $this->order->scopeQuery(function($query) {
-                        return $query->where('orders.created_at', '>=', $this->lastStartDate)
-                            ->where('orders.created_at', '<=', $this->lastEndDate);
-                    })->count(),
-                'current' => $current = $this->order->scopeQuery(function($query) {
-                        return $query->where('orders.created_at', '>=', $this->startDate)
-                            ->where('orders.created_at', '<=', $this->endDate);
-                    })->count(),
+                'previous' => $previous = $this->previousOrders()->count(),
+                'current' => $current = $this->currentOrders()->count(),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'total_sales' =>  [
-                'previous' => $previous = $this->order->scopeQuery(function($query) {
-                        return $query->where('orders.created_at', '>=', $this->lastStartDate)
-                            ->where('orders.created_at', '<=', $this->lastEndDate);
-                    })->sum('base_grand_total'),
-                'current' => $current = $this->order->scopeQuery(function($query) {
-                        return $query->where('orders.created_at', '>=', $this->startDate)
-                            ->where('orders.created_at', '<=', $this->endDate);
-                    })->sum('base_grand_total'),
+                'previous' => $previous = $this->previousOrders()->sum('base_grand_total'),
+                'current' => $current = $this->currentOrders()->sum('base_grand_total'),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'avg_sales' =>  [
-                'previous' => $previous = $this->order->scopeQuery(function($query) {
-                        return $query->where('orders.created_at', '>=', $this->lastStartDate)
-                            ->where('orders.created_at', '<=', $this->lastEndDate);
-                    })->avg('base_grand_total'),
-                'current' => $current = $this->order->scopeQuery(function($query) {
-                        return $query->where('orders.created_at', '>=', $this->startDate)
-                            ->where('orders.created_at', '<=', $this->endDate);
-                    })->avg('base_grand_total'),
+                'previous' => $previous = $this->previousOrders()->avg('base_grand_total'),
+                'current' => $current = $this->currentOrders()->avg('base_grand_total'),
                 'progress' => $this->getPercentageChange($previous, $current)
             ],
             'top_selling_categories' => $this->getTopSellingCategories(),
@@ -180,14 +156,10 @@ class DashboardController extends Controller
             'stock_threshold' => $this->getStockThreshold(),
         ];
 
-
         foreach (core()->getTimeInterval($this->startDate, $this->endDate) as $interval) {
             $statistics['sale_graph']['label'][] = $interval['start']->format('d M');
 
-            $total = $this->order->scopeQuery(function($query) use($interval) {
-                        return $query->where('orders.created_at', '>=', $interval['start'])
-                            ->where('orders.created_at', '<=', $interval['end']);
-                    })->sum('base_grand_total');
+            $total = $this->getOrdersBetweenDate($interval['start'], $interval['end'])->sum('base_grand_total');
 
             $statistics['sale_graph']['total'][] = $total;
             $statistics['sale_graph']['formated_total'][] = core()->formatBasePrice($total);
@@ -299,5 +271,29 @@ class DashboardController extends Controller
 
         $this->lastStartDate->subDays($this->startDate->diffInDays($this->endDate));
         // $this->lastEndDate->subDays($this->lastStartDate->diffInDays($this->lastEndDate));
+    }
+
+    private function previousOrders()
+    {
+        return $this->getOrdersBetweenDate($this->lastStartDate, $this->lastEndDate);
+    }
+
+    private function currentOrders()
+    {
+        return $this->getOrdersBetweenDate($this->startDate, $this->endDate);
+    }
+
+    private function getOrdersBetweenDate($start, $end)
+    {
+        return $this->order->scopeQuery(function ($query) use ($start, $end) {
+            return $query->where('orders.created_at', '>=', $start)->where('orders.created_at', '<=', $end);
+        });
+    }
+
+    private function getCustomersBetweenDates($start, $end)
+    {
+        return $this->customer->scopeQuery(function ($query) use ($start, $end) {
+            return $query->where('customers.created_at', '>=', $start)->where('customers.created_at', '<=', $end);
+        });
     }
 }

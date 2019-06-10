@@ -12,6 +12,8 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
+use Webkul\Discount\Helpers\Discount;
 use Webkul\Product\Helpers\Price;
 
 /**
@@ -24,81 +26,94 @@ use Webkul\Product\Helpers\Price;
 class Cart {
 
     /**
-     * CartRepository model
+     * CartRepository instance
      *
      * @var mixed
      */
     protected $cart;
 
     /**
-     * CartItemRepository model
+     * CartItemRepository instance
      *
      * @var mixed
      */
     protected $cartItem;
 
     /**
-     * CustomerRepository model
+     * CustomerRepository instance
      *
      * @var mixed
      */
     protected $customer;
 
     /**
-     * CartAddressRepository model
+     * CartAddressRepository instance
      *
      * @var mixed
      */
     protected $cartAddress;
 
     /**
-     * ProductRepository model
+     * ProductRepository instance
      *
      * @var mixed
      */
     protected $product;
 
     /**
-     * TaxCategoryRepository model
+     * TaxCategoryRepository instance
      *
      * @var mixed
      */
     protected $taxCategory;
 
     /**
-     * WishlistRepository model
+     * WishlistRepository instance
      *
      * @var mixed
      */
     protected $wishlist;
 
     /**
-     * CustomerAddressRepository model
+     * CustomerAddressRepository instance
      *
      * @var mixed
      */
-     protected $customerAddress;
+    protected $customerAddress;
+
+    /**
+     * CartRule Repository instance
+    */
+    protected $cartRule;
+
+    /**
+     * Discount helper instance
+    */
+    protected $discount;
 
     /**
      * Suppress the session flash messages
-     */
+    */
     protected $suppressFlash;
 
     /**
      * Product price helper instance
-     */
+    */
     protected $price;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Checkout\Repositories\CartRepository            $cart
-     * @param  Webkul\Checkout\Repositories\CartItemRepository        $cartItem
-     * @param  Webkul\Checkout\Repositories\CartAddressRepository     $cartAddress
-     * @param  Webkul\Customer\Repositories\CustomerRepository        $customer
-     * @param  Webkul\Product\Repositories\ProductRepository          $product
-     * @param  Webkul\Product\Repositories\TaxCategoryRepository      $taxCategory
+     * @param  Webkul\Checkout\Repositories\CartRepository  $cart
+     * @param  Webkul\Checkout\Repositories\CartItemRepository  $cartItem
+     * @param  Webkul\Checkout\Repositories\CartAddressRepository  $cartAddress
+     * @param  Webkul\Customer\Repositories\CustomerRepository  $customer
+     * @param  Webkul\Product\Repositories\ProductRepository  $product
+     * @param  Webkul\Product\Repositories\TaxCategoryRepository  $taxCategory
      * @param  Webkul\Product\Repositories\CustomerAddressRepository  $customerAddress
+     * @param  Webkul\Product\Repositories\CustomerAddressRepository  $customerAddress
+     * @param  Webkul\Discount\Repositories\CartRuleRepository  $cartRule
+     * @param  Webkul\Helpers\Discount  $discount
      * @return void
      */
     public function __construct(
@@ -110,6 +125,8 @@ class Cart {
         TaxCategoryRepository $taxCategory,
         WishlistRepository $wishlist,
         CustomerAddressRepository $customerAddress,
+        CartRule $cartRule,
+        Discount $discount,
         Price $price
     )
     {
@@ -129,11 +146,14 @@ class Cart {
 
         $this->customerAddress = $customerAddress;
 
+        $this->cartRule = $cartRule;
+
+        $this->discount = $discount;
+
         $this->price = $price;
 
         $this->suppressFlash = false;
     }
-
 
     /**
      * Return current logged in customer
@@ -866,7 +886,7 @@ class Cart {
                     } else if ($this->price->getMinimalPrice($item->child->product_flat) != $item->price) {
                         // $price = (float) $item->custom_price ? $item->custom_price : $item->child->product->price;
 
-                        if ((float)$item->custom_price) {
+                        if (! is_null($item->custom_price)) {
                             $price = $item->custom_price;
                         } else {
                             $price = $this->price->getMinimalPrice($item->child->product_flat);
@@ -890,7 +910,7 @@ class Cart {
                     } else if ($this->price->getMinimalPrice($productFlat) != $item->price) {
                         // $price = (float) $item->custom_price ? $item->custom_price : $item->product->price;
 
-                        if ((float)$item->custom_price) {
+                        if (! is_null($item->custom_price)) {
                             $price = $item->custom_price;
                         } else {
                             $price = $this->price->getMinimalPrice($productFlat);
@@ -1073,6 +1093,59 @@ class Cart {
     }
 
     /**
+     * Save discount data for cart
+     */
+    public function saveDiscount()
+    {
+        $rule = $impact['rule'];
+
+        $cart = $this->getCart();
+
+        //update the cart items
+        foreach($cart->items as $item) {
+            if ($rule->use_coupon) {
+                if ($rule->action_type != config('pricerules.cart.validation.0')) {
+                    $item->update([
+                        'coupon_code' => $rule->coupon->code,
+                        'discount_amount' => core()->convertPrice($impact['amount'], $cart->channel_currency_code),
+                        'base_discount_amount' => $impact['amount']
+                    ]);
+                } else {
+                    $item->update([
+                        'coupon_code' => $rule->coupon->code,
+                        'discount_percent' => $rule->disc_amount
+                    ]);
+                }
+            } else {
+                if ($rule->action_type != config('pricerules.cart.validation.0')) {
+                    $item->update([
+                        'discount_amount' => core()->convertPrice($impact['amount'], $cart->channel_currency_code),
+                        'base_discount_amount' => $impact['amount']
+                    ]);
+                } else {
+                    $item->update([
+                        'discount_percent' => $rule->disc_amount
+                    ]);
+                }
+            }
+        }
+
+        // update the cart
+        if ($rule->use_coupon) {
+            $cart->update([
+                'coupon_code' => $rule->coupons->code,
+                'discount_amount' => core()->convertPrice($impact['amount'], $cart->channel_currency_code),
+                'base_discount_amount' => $impact['amount']
+            ]);
+        } else {
+            $cart->update([
+                'discount_amount' => core()->convertPrice($impact['amount'], $cart->channel_currency_code),
+                'base_discount_amount' => $impact['amount']
+            ]);
+        }
+    }
+
+    /**
      * Prepares data for order item
      *
      * @return array
@@ -1211,5 +1284,68 @@ class Cart {
                 return $result;
             }
         }
+    }
+
+    public function applyCoupon($code)
+    {
+        $result = $this->discount->applyCouponAbleRule($code);
+
+        return $result;
+    }
+
+    public function applyNonCoupon()
+    {
+        $result = $this->discount->applyNonCouponAbleRule();
+
+        return $result;
+    }
+
+    public function removeCoupon()
+    {
+        $result = $this->discount->removeCoupon();
+
+        return $result;
+    }
+
+    public function leastWorthItem()
+    {
+        $cart = $this->getCart();
+        $leastValue = 999999999999;
+        $leastSubTotal = [];
+
+        foreach ($cart->items as $item) {
+            if ($item->price < $leastValue) {
+                $leastValue = $item->price;
+                $leastSubTotal = [
+                    'id' => $item->id,
+                    'total' => $item->total,
+                    'base_total' => $leastValue,
+                    'quantity' => $item->quantity
+                ];
+            }
+        }
+
+        return $leastSubTotal;
+    }
+
+    public function maxWorthItem()
+    {
+        $cart = $this->getCart();
+        $maxValue = 0;
+        $maxSubTotal = [];
+
+        foreach ($cart->items as $item) {
+            if ($item->base_total > $maxValue) {
+                $maxValue = $item->total;
+                $maxSubTotal = [
+                    'id' => $item->id,
+                    'total' => $item->total,
+                    'base_total' => $maxValue,
+                    'quantity' => $item->quantity
+                ];
+            }
+        }
+
+        return $maxSubTotal;
     }
 }

@@ -186,4 +186,42 @@ class CustomerController extends Controller
 
         return response()->json(['message' => false], 400);
     }
+
+    /**
+     * To load the note taking screen for the customers
+     *
+     * @return View
+     */
+    public function createNote($id)
+    {
+        $customer = $this->customer->find($id);
+
+        return view($this->_config['view'])->with('customer', $customer);
+    }
+
+    /**
+     * To store the response of the note in storage
+     *
+     * @return Redirect
+     */
+    public function storeNote()
+    {
+        $this->validate(request(), [
+            'notes' => 'required|string'
+        ]);
+
+        $customer = $this->customer->find(request()->input('_customer'));
+
+        $noteTaken = $customer->update([
+            'notes' => request()->input('notes')
+        ]);
+
+        if ($noteTaken) {
+            session()->flash('success', 'Note taken');
+        } else {
+            session()->flash('error', 'Note cannot be taken');
+        }
+
+        return redirect()->route($this->_config['redirect']);
+    }
 }

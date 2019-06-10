@@ -19,6 +19,10 @@ class CustomerGroupTableSeeder extends Seeder
             'id' => 2,
             'name' => 'Wholesale',
             'is_user_defined' => 0,
+        ], [
+            'id' => 3,
+            'name' => 'Not Logged In',
+            'is_user_defined' => 0,
         ]);
     }
 }

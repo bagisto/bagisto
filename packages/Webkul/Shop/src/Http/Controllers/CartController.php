@@ -9,6 +9,7 @@ use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
 use Illuminate\Support\Facades\Event;
 use Cart;
 
@@ -33,15 +34,11 @@ class CartController extends Controller
      * @param $productView
      */
     protected $_config;
-
     protected $cart;
-
     protected $cartItem;
-
     protected $customer;
-
     protected $product;
-
+    protected $cartRuleCart;
     protected $suppressFlash = false;
 
     /**
@@ -56,7 +53,8 @@ class CartController extends Controller
         CartItemRepository $cartItem,
         CustomerRepository $customer,
         ProductRepository $product,
-        WishlistRepository $wishlist
+        WishlistRepository $wishlist,
+        CartRuleCart $cartRuleCart
     )
     {
 
@@ -71,6 +69,8 @@ class CartController extends Controller
         $this->product = $product;
 
         $this->wishlist = $wishlist;
+
+        $this->cartRuleCart = $cartRuleCart;
 
         $this->_config = request('_config');
     }
@@ -157,41 +157,45 @@ class CartController extends Controller
      */
     public function updateBeforeCheckout()
     {
-        $request = request()->except('_token');
+        try {
+            $request = request()->except('_token');
 
-        foreach ($request['qty'] as $id => $quantity) {
-            if ($quantity <= 0) {
-                session()->flash('warning', trans('shop::app.checkout.cart.quantity.illegal'));
+            foreach ($request['qty'] as $id => $quantity) {
+                if ($quantity <= 0) {
+                    session()->flash('warning', trans('shop::app.checkout.cart.quantity.illegal'));
 
-                return redirect()->back();
-            }
-        }
-
-        foreach ($request['qty'] as $key => $value) {
-            $item = $this->cartItem->findOneByField('id', $key);
-
-            $data['quantity'] = $value;
-
-            Event::fire('checkout.cart.update.before', $key);
-
-            $result = Cart::updateItem($item->product_id, $data, $key);
-
-            if ($result == false) {
-                $this->suppressFlash = true;
+                    return redirect()->back();
+                }
             }
 
-            Event::fire('checkout.cart.update.after', $item);
+            foreach ($request['qty'] as $key => $value) {
+                $item = $this->cartItem->findOneByField('id', $key);
 
-            unset($item);
-            unset($data);
-        }
+                $data['quantity'] = $value;
 
-        Cart::collectTotals();
+                Event::fire('checkout.cart.update.before', $item);
 
-        if ($this->suppressFlash) {
-            session()->forget('success');
-            session()->forget('warning');
-            session()->flash('info', trans('shop::app.checkout.cart.partial-cart-update'));
+                $result = Cart::updateItem($item->product_id, $data, $key);
+
+                if ($result == false) {
+                    $this->suppressFlash = true;
+                }
+
+                Event::fire('checkout.cart.update.after', $item);
+
+                unset($item);
+                unset($data);
+            }
+
+            Cart::collectTotals();
+
+            if ($this->suppressFlash) {
+                session()->forget('success');
+                session()->forget('warning');
+                session()->flash('info', trans('shop::app.checkout.cart.partial-cart-update'));
+            }
+        } catch(\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
         }
 
         return redirect()->back();
@@ -246,6 +250,62 @@ class CartController extends Controller
             session()->flash('warning', trans('shop::app.wishlist.move-error'));
 
             return redirect()->back();
+        }
+    }
+
+    /**
+     * To apply coupon rules
+     */
+    public function applyCoupon()
+    {
+        $this->validate(request(), [
+            'code' => 'string|required'
+        ]);
+
+        $code = request()->input('code');
+
+        $result = Cart::applyCoupon($code);
+
+        return $result;
+    }
+
+    /**
+     * Fetch the non couponable rule
+     */
+    public function getNonCouponAbleRule()
+    {
+        $cart = Cart::getCart();
+        $nonCouponAbleRules = Cart::applyNonCoupon();
+
+        return $nonCouponAbleRules;
+    }
+
+    /**
+     * To save the discount values inside the tables of orders and cart
+     */
+    public function saveDiscount()
+    {
+        return ['hellow'];
+    }
+
+    /**
+     * To remove the currently active
+     * couponable rule
+     */
+    public function removeCoupon()
+    {
+        $result = Cart::removeCoupon();
+
+        if ($result) {
+            return response()->json([
+                'success' => true,
+                'message' => trans('admin::app.promotion.status.coupon-removed')
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => trans('admin::app.promotion.status.coupon-remove-failed')
+            ]);
         }
     }
 }

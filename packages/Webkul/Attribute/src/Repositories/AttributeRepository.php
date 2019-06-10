@@ -210,4 +210,26 @@ class AttributeRepository extends Repository
 
         return $attributes[$attributeFamily->id] = $attributeFamily->custom_attributes;
     }
+
+    /**
+     * @return Object
+     */
+    public function getPartial()
+    {
+        $attributes = $this->model->all();
+        $trimmed = array();
+
+        foreach($attributes as $key => $attribute) {
+            if ($attribute->code != 'tax_category_id' && ($attribute->type == 'select' || $attribute->type == 'multiselect' || $attribute->code == 'sku')) {
+                array_push($trimmed, [
+                    'id' => $attribute->id,
+                    'name' => $attribute->name,
+                    'type' => $attribute->type,
+                    'code' => $attribute->code
+                ]);
+            }
+        }
+
+        return $trimmed;
+    }
 }

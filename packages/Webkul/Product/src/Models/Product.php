@@ -168,11 +168,9 @@ class Product extends Model implements ProductContract
     }
 
     /**
-     * @param integer $qty
-     *
-     * @return bool
+     * @return integer
      */
-    public function haveSufficientQuantity($qty)
+    public function totalQuantity()
     {
         $total = 0;
 
@@ -195,7 +193,17 @@ class Product extends Model implements ProductContract
             $total -= $orderedInventory->qty;
         }
 
-        return $qty <= $total ? true : (core()->getConfigData('catalog.inventory.stock_options.backorders') ? true : false);
+        return $total;
+    }
+
+    /**
+     * @param integer $qty
+     *
+     * @return bool
+     */
+    public function haveSufficientQuantity($qty)
+    {
+        return $qty <= $this->totalQuantity() ? true : (core()->getConfigData('catalog.inventory.stock_options.backorders') ? true : false);
     }
 
     /**

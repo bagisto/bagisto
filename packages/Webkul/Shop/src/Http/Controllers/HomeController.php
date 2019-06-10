@@ -3,8 +3,6 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Shop\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Webkul\Core\Repositories\SliderRepository;
 
 /**
@@ -16,9 +14,7 @@ use Webkul\Core\Repositories\SliderRepository;
  class HomeController extends Controller
 {
     protected $_config;
-
     protected $sliderRepository;
-
     protected $current_channel;
 
     public function __construct(SliderRepository $sliderRepository)
@@ -34,7 +30,6 @@ use Webkul\Core\Repositories\SliderRepository;
     public function index()
     {
         $currentChannel = core()->getCurrentChannel();
-
         $sliderData = $this->sliderRepository->findByField('channel_id', $currentChannel->id)->toArray();
 
         return view($this->_config['view'], compact('sliderData'));
