@@ -194,7 +194,7 @@ class CartRuleController extends Controller
         }
 
         if(isset($data['usage_limit'])) {
-            $coupons['usage_limit'] = $data['usage_limit'];
+            $coupons['limit'] = $data['usage_limit'];
         }
 
         $ruleCreated = $this->cartRule->create($data);
@@ -226,7 +226,7 @@ class CartRuleController extends Controller
             $couponCreated = $this->cartRuleCoupon->create($coupons);
         }
 
-        if ($ruleCreated && $ruleGroupCreated && $ruleChannelCreated) {
+        if ($ruleCreated && $ruleChannelCreated) {
             if (isset($couponCreated) && $couponCreated) {
                 session()->flash('success', trans('admin::app.promotion.status.success-coupon'));
             }
@@ -353,7 +353,7 @@ class CartRuleController extends Controller
         }
 
         if (isset($data['usage_limit'])) {
-            $coupons['usage_limit'] = $data['usage_limit'];
+            $coupons['limit'] = $data['usage_limit'];
         }
 
         $ruleUpdated = $this->cartRule->update($data, $id);
