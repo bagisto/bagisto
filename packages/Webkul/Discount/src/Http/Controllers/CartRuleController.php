@@ -138,8 +138,8 @@ class CartRuleController extends Controller
         $channels = $data['channels'];
         unset($data['channels']);
 
-        $customer_groups = $data['customer_groups'];
-        unset($data['customer_groups']);
+        // $customer_groups = $data['customer_groups'];
+        // unset($data['customer_groups']);
         unset($data['criteria']);
 
         $labels = $data['label'];
