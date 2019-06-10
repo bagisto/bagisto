@@ -101,12 +101,12 @@ class CartRuleController extends Controller
         $validated = Validator::make($data, [
             'name' => 'required|string',
             'description' => 'string',
-            'customer_groups' => 'required|array',
+            // 'customer_groups' => 'required|array',
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
-            'usage_limit' => 'numeric|min:0',
-            'per_customer' => 'numeric|min:0',
+            // 'usage_limit' => 'numeric|min:0',
+            // 'per_customer' => 'numeric|min:0',
             'action_type' => 'required|string',
             'disc_amount' => 'required|numeric',
             'disc_quantity' => 'numeric',
@@ -117,6 +117,9 @@ class CartRuleController extends Controller
             'all_conditions' => 'sometimes|nullable',
             'label' => 'array|nullable'
         ]);
+
+        $data['usage_limit'] = 0;
+        $data['per_customer'] = 0;
 
         if ($validated->fails()) {
             session()->flash('error', 'Validation failed');
@@ -190,9 +193,8 @@ class CartRuleController extends Controller
             // }
         }
 
-        if(isset($data['limit'])) {
-            $coupons['usage_limit'] = $data['limit'];
-            unset($data['limit']);
+        if(isset($data['usage_limit'])) {
+            $coupons['usage_limit'] = $data['usage_limit'];
         }
 
         $ruleCreated = $this->cartRule->create($data);
@@ -253,12 +255,12 @@ class CartRuleController extends Controller
         $validated = Validator::make(request()->all(), [
             'name' => 'required|string',
             'description' => 'string',
-            'customer_groups' => 'required|array',
+            // 'customer_groups' => 'required|array',
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
-            'usage_limit' => 'numeric|min:0',
-            'per_customer' => 'numeric|min:0',
+            // 'usage_limit' => 'numeric|min:0',
+            // 'per_customer' => 'numeric|min:0',
             'action_type' => 'required|string',
             'disc_amount' => 'required|numeric',
             'disc_quantity' => 'required|numeric',
@@ -269,6 +271,9 @@ class CartRuleController extends Controller
             'all_conditions' => 'present',
             'label' => 'array|nullable'
         ]);
+
+        $data['usage_limit'] = 0;
+        $data['per_customer'] = 0;
 
         if ($validated->fails()) {
             session()->flash('error', 'Validation failed');
@@ -289,9 +294,9 @@ class CartRuleController extends Controller
         $channels = $data['channels'];
         unset($data['channels']);
 
-        $customer_groups = $data['customer_groups'];
-        unset($data['customer_groups']);
-        unset($data['criteria']);
+        // $customer_groups = $data['customer_groups'];
+        // unset($data['customer_groups']);
+        // unset($data['criteria']);
 
         if (isset($data['label'])) {
             $labels = $data['label'];
@@ -347,14 +352,13 @@ class CartRuleController extends Controller
             // }
         }
 
-        if (isset($data['limit'])) {
-            $coupons['usage_limit'] = $data['limit'];
-            unset($data['limit']);
+        if (isset($data['usage_limit'])) {
+            $coupons['usage_limit'] = $data['usage_limit'];
         }
 
         $ruleUpdated = $this->cartRule->update($data, $id);
 
-        $ruleGroupUpdated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleUpdated);
+        // $ruleGroupUpdated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleUpdated);
         $ruleChannelUpdated = $this->cartRule->ChannelSync($channels, $ruleUpdated);
 
         $labelsUpdated = $this->cartRule->LabelSync($labels, $ruleUpdated);
@@ -366,7 +370,7 @@ class CartRuleController extends Controller
             $couponUpdated = $ruleUpdated->coupons->update($coupons);
         }
 
-        if ($ruleUpdated && $ruleGroupUpdated && $ruleChannelUpdated) {
+        if ($ruleUpdated && $ruleChannelUpdated) {
             if (isset($couponUpdated) && $couponUpdated) {
                 session()->flash('info', trans('admin::app.promotion.status.success-coupon'));
             }

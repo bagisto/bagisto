@@ -74,7 +74,7 @@
                                         </div>
                                     </datetime>
 
-                                    <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
+                                    {{-- <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
                                         <label for="customer_groups" class="required">{{ __('admin::app.promotion.general-info.cust-groups') }}</label>
 
                                         <select type="text" class="control" name="customer_groups[]" v-model="customer_groups" v-validate="'required'" value="{{ old('customer_groups[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
@@ -85,7 +85,7 @@
                                         </select>
 
                                         <span class="control-error" v-if="errors.has('customer_groups')">@{{ errors.first('customer_groups') }}</span>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                         <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
@@ -134,13 +134,13 @@
 
                                     {{-- <input type="hidden" name="auto_generation" v-model="auto_generation"> --}}
 
-                                    <div class="control-group" :class="[errors.has('per_customer') ? 'has-error' : '']">
+                                    {{-- <div class="control-group" :class="[errors.has('per_customer') ? 'has-error' : '']">
                                         <label for="per_customer" class="required">{{ __('admin::app.promotion.general-info.uses-per-cust') }}</label>
 
                                         <input type="number" step="1" class="control" name="per_customer" v-model="per_customer" v-validate="'required|numeric|min_value:0'" value="{{ old('per_customer') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('per_customer')">@{{ errors.first('per_customer') }}</span>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="control-group" :class="[errors.has('is_guest') ? 'has-error' : '']">
                                         <label for="is_guest" class="required">{{ __('admin::app.promotion.general-info.is-guest') }}</label>
@@ -153,13 +153,13 @@
                                         <span class="control-error" v-if="errors.has('is_guest')">@{{ errors.first('is_guest') }}</span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('usage_limit') ? 'has-error' : '']">
+                                    {{-- <div class="control-group" :class="[errors.has('usage_limit') ? 'has-error' : '']">
                                         <label for="usage_limit" class="required">{{ __('admin::app.promotion.general-info.limit') }}</label>
 
                                         <input type="number" step="1" class="control" name="usage_limit" v-model="usage_limit" v-validate="'required|numeric|min_value:0'" value="{{ old('usage_limit') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('usage_limit')">@{{ errors.first('usage_limit') }}</span>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="control-group" :class="[errors.has('priority') ? 'has-error' : '']">
                                         <label for="priority" class="required">{{ __('admin::app.promotion.general-info.priority') }}</label>
