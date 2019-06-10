@@ -199,7 +199,7 @@ class CartRuleController extends Controller
 
         $ruleCreated = $this->cartRule->create($data);
 
-        $ruleGroupCreated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleCreated);
+        // $ruleGroupCreated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleCreated);
         $ruleChannelCreated = $this->cartRule->ChannelSync($channels, $ruleCreated);
 
         if (isset($labels['global'])) {
