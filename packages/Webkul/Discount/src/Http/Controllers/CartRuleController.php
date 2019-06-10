@@ -191,6 +191,8 @@ class CartRuleController extends Controller
             //     $coupons['suffix'] = $data['suffix'];
             //     unset($data['suffix']);
             // }
+
+            $coupons['limit'] = 0;
         }
 
         // if(isset($data['usage_limit'])) {
@@ -350,6 +352,7 @@ class CartRuleController extends Controller
             //     $coupons['suffix'] = $data['suffix'];
             //     unset($data['suffix']);
             // }
+            $coupons['limit'] = 0;
         }
 
         // if (isset($data['usage_limit'])) {
