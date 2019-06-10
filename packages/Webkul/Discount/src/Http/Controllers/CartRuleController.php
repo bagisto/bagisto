@@ -193,9 +193,9 @@ class CartRuleController extends Controller
             // }
         }
 
-        if(isset($data['usage_limit'])) {
-            $coupons['limit'] = $data['usage_limit'];
-        }
+        // if(isset($data['usage_limit'])) {
+        //     $coupons['limit'] = $data['usage_limit'];
+        // }
 
         $ruleCreated = $this->cartRule->create($data);
 
@@ -352,9 +352,9 @@ class CartRuleController extends Controller
             // }
         }
 
-        if (isset($data['usage_limit'])) {
-            $coupons['limit'] = $data['usage_limit'];
-        }
+        // if (isset($data['usage_limit'])) {
+        //     $coupons['limit'] = $data['usage_limit'];
+        // }
 
         $ruleUpdated = $this->cartRule->update($data, $id);
 

@@ -112,9 +112,13 @@ class Discount
             }
         }
 
-        $this->save($canBeApplied[0]['rule']);
+        if ($canBeApplied->count()) {
+            $this->save($canBeApplied[0]['rule']);
 
-        return $canBeApplied[0];
+            return $canBeApplied[0];
+        } else {
+            return false;
+        }
     }
 
     public function applyCouponAbleRule($code)
