@@ -90,14 +90,14 @@
                                     <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                         <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
 
-                                        <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels') }}&quot;" multiple="multiple">
+                                        <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels-req') }}&quot;" multiple="multiple">
                                             <option disabled="disabled">Select Channels</option>
                                             @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                                 <option value="{{ $channel->id }}">{{ $channel->name }}</option>
                                             @endforeach
                                         </select>
 
-                                        <span class="control-error" v-if="errors.has('channels')">@{{ errors.first('channels') }}</span>
+                                        <span class="control-error" v-if="errors.first('channels[]')">@{{ errors.first('channels[]') }}</span>
                                     </div>
 
                                     <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
@@ -355,7 +355,7 @@
                                     <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']" v-if="dedicated_label">
                                         <label for="label" class="required">Global Label</label>
 
-                                        <input type="text" class="control" name="label[global]" v-model="label.global" v-validate="'required'" data-vv-as="&quot;label&quot;">
+                                        <input type="text" class="control" name="label[global]" v-model="label.global" data-vv-as="&quot;label&quot;">
 
                                         <span class="control-error" v-if="errors.has('label')">@{{ errors.first('label') }}</span>
                                     </div>
@@ -367,7 +367,7 @@
                                             <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
                                                 <label for="code">{{ $locale->code }}</label>
 
-                                                <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" v-validate="'alpha_spaces'" data-vv-as="&quot;Label&quot;">
+                                                <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" data-vv-as="&quot;Label&quot;">
 
                                                 <span class="control-error" v-if="errors.has('label')">@{{ errors.first('label') }}</span>
                                             </div>

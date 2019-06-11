@@ -815,6 +815,7 @@ return [
             'starts-from' => 'Start',
             'ends-till' => 'End',
             'channels' => 'Channels',
+            'channels-req' => 'Channels',
             'cust-groups' => 'Customer Groups',
             'priority' => 'Priority',
             'add-condition' => 'Add Conditions',
