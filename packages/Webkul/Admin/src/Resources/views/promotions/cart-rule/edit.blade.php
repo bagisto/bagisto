@@ -183,8 +183,6 @@
                                                 <option value="cart">Cart Properties</option>
                                             </select>
                                         </div>
-
-                                        <span class="btn btn-primary btn-lg" v-on:click="addCondition">Add Condition</span>
                                     </div>
 
                                     <div class="mt-10 mb-10"><b>Any of the condition is true</b></div>
@@ -239,6 +237,8 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addCondition">Add Condition</span>
                                 </div>
                             </accordian>
 
