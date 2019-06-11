@@ -368,7 +368,7 @@ class CartRuleController extends Controller
 
         if (isset($coupons)) {
             $coupons['cart_rule_id'] = $ruleUpdated->id;
-            $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
+            // $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
 
             $couponUpdated = $ruleUpdated->coupons->update($coupons);
         }
