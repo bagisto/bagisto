@@ -5,7 +5,7 @@ namespace Webkul\Discount\Helpers;
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
 use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
 use Carbon\Carbon;
-
+use Arr;
 
 class Discount
 {
@@ -113,9 +113,9 @@ class Discount
         }
 
         if ($canBeApplied->count()) {
-            $this->save($canBeApplied[0]['rule']);
+            $this->save(array_first($canBeApplied)['rule']);
 
-            return $canBeApplied[0];
+            return array_first($canBeApplied);
         } else {
             return false;
         }
@@ -214,12 +214,12 @@ class Discount
                                 }
                             }
                         } else {
-                            if ($canBeApplied[0]['rule']->use_coupon) {
+                            if (array_first($canBeApplied)['rule']->use_coupon) {
                                 $useCouponable = true;
                             }
                         }
                     } else if (count($canBeApplied)) {
-                        if ($canBeApplied[0]['rule']->use_coupon) {
+                        if (array_first($canBeApplied)['rule']->use_coupon) {
                             $useCouponable = true;
                         }
                     }
