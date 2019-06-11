@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Promition</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Promition" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" transform="translate(8.000000, 10.000000)" stroke="#979797" stroke-width="2">
+            <polygon id="Rectangle-15" points="5 8.96186626 22 1.91619318 22 26.0838068 5 19.0381337"></polygon>
+            <path d="M22,0 L22,28" id="Path-17"></path>
+            <path d="M3.5,9 L5,9 L5,19 L3.5,19 C1.56700338,19 2.36723813e-16,17.4329966 0,15.5 L0,12.5 C-2.36723813e-16,10.5670034 1.56700338,9 3.5,9 Z" id="Rectangle-15"></path>
+            <path d="M8,21 L8,22.5494015 C8,24.2446714 9.1212786,25.7355564 10.75,26.2058824 L10.75,26.2058824 C12.3703103,26.6737794 14.1023615,25.9901587 14.9663265,24.5417467 L15.5,23.6470588" id="Path-18"></path>
+            <path d="M26,14.25 L32,14.25" id="Path-19"></path>
+            <path d="M26,9.24264069 L30.2426407,5" id="Path-19"></path>
+            <path d="M26,23.1213203 L30.2426407,18.8786797" id="Path-19" transform="translate(28.121320, 21.000000) scale(-1, 1) translate(-28.121320, -21.000000) "></path>
+        </g>
+    </g>
+</svg>
