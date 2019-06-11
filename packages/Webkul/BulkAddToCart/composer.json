@@ -1,5 +1,5 @@
 {
-    "name": "bagisto/laravel-customer-document",
+    "name": "bagisto/laravel-bulk-add-to-cart",
     "license": "MIT",
     "authors": [
         {
@@ -9,13 +9,13 @@
     ],
     "autoload": {
         "psr-4": {
-            "Webkul\\CustomerDocument\\": "src/"
+            "Webkul\\BulkAddToCart\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Webkul\\CustomerDocument\\CustomerDocumentServiceProvider"
+                "Webkul\\BulkAddToCart\\BulkAddToCartServiceProvider"
             ],
             "aliases": {}
         }
