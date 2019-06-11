@@ -215,7 +215,9 @@
 
                                         <div class="description">
                                             <div class="name">
-                                                {{ $item->name }}
+                                                @if (isset($item->name))
+                                                    {{ $item->name }}
+                                                @endif
                                             </div>
 
                                             <div class="info">
@@ -323,7 +325,9 @@
 
                                         <div class="description">
                                             <div class="name">
-                                                {{ $item->product->name }}
+                                                @if (isset($item->product->name))
+                                                    {{ $item->product->name }}
+                                                @endif
                                             </div>
 
                                             <div class="info">
