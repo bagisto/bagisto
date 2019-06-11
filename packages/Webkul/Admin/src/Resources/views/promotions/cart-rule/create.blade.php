@@ -90,14 +90,14 @@
                                     <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                         <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
 
-                                        <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels') }}&quot;" multiple="multiple">
+                                        <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels-req') }}&quot;" multiple="multiple">
                                             <option disabled="disabled">Select Channels</option>
                                             @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                                 <option value="{{ $channel->id }}">{{ $channel->name }}</option>
                                             @endforeach
                                         </select>
 
-                                        <span class="control-error" v-if="errors.has('channels')">@{{ errors.first('channels') }}</span>
+                                        <span class="control-error" v-if="errors.first('channels[]')">@{{ errors.first('channels[]') }}</span>
                                     </div>
 
                                     <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
@@ -183,8 +183,6 @@
                                                 <option value="cart">Cart Properties</option>
                                             </select>
                                         </div>
-
-                                        <span class="btn btn-primary btn-lg" v-on:click="addCondition">Add Condition</span>
                                     </div>
 
                                     <div class="mt-10 mb-10"><b>Any of the condition is true</b></div>
@@ -239,6 +237,8 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addCondition">Add Condition</span>
                                 </div>
                             </accordian>
 
@@ -273,7 +273,7 @@
                                     <div class="control-group" :class="[errors.has('disc_quantity') ? 'has-error' : '']">
                                         <label for="disc_quantity" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
 
-                                        <input type="number" step="1" class="control" name="disc_quantity" v-model="disc_quantity" v-validate="'required|decimal|min_value:0'" value="{{ old('disc_quantity') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_qty') }}&quot;">
+                                        <input type="number" step="1" class="control" name="disc_quantity" v-model="disc_quantity" v-validate="'required|decimal|min_value:1'" value="{{ old('disc_quantity') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.disc_qty') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_quantity')">@{{ errors.first('disc_quantity') }}</span>
                                     </div>
@@ -355,7 +355,7 @@
                                     <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']" v-if="dedicated_label">
                                         <label for="label" class="required">Global Label</label>
 
-                                        <input type="text" class="control" name="label[global]" v-model="label.global" v-validate="'required'" data-vv-as="&quot;label&quot;">
+                                        <input type="text" class="control" name="label[global]" v-model="label.global" data-vv-as="&quot;label&quot;">
 
                                         <span class="control-error" v-if="errors.has('label')">@{{ errors.first('label') }}</span>
                                     </div>
@@ -367,7 +367,7 @@
                                             <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
                                                 <label for="code">{{ $locale->code }}</label>
 
-                                                <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" v-validate="'alpha_spaces'" data-vv-as="&quot;Label&quot;">
+                                                <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" data-vv-as="&quot;Label&quot;">
 
                                                 <span class="control-error" v-if="errors.has('label')">@{{ errors.first('label') }}</span>
                                             </div>
