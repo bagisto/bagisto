@@ -353,7 +353,7 @@
                             <accordian :active="false" title="labels">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']" v-if="dedicated_label">
-                                        <label for="label" class="required">Global Label</label>
+                                        <label for="label">Global Label</label>
 
                                         <input type="text" class="control" name="label[global]" v-model="label.global" data-vv-as="&quot;label&quot;">
 

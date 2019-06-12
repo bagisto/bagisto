@@ -997,7 +997,10 @@ return [
             'weight-unit' => 'Weight Unit',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',
-            'logo-image' => 'Logo Image'
+            'logo-image' => 'Logo Image',
+            'credit-max' => 'Customer Credit Max',
+            'credit-max-value' => 'Credit Max Value',
+            'use-credit-max' => 'Use Credit Max'
         ]
     ]
 ];
