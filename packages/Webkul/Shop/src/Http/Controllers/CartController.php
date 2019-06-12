@@ -213,7 +213,7 @@ class CartController extends Controller
         return redirect()->route('shop.products.index', $slug);
     }
 
-    public function buyNow($id, $quantity)
+    public function buyNow($id, $quantity = 1)
     {
         Event::fire('checkout.cart.add.before', $id);
 
