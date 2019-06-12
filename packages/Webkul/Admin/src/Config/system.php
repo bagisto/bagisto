@@ -65,18 +65,36 @@ return [
             [
                 'name' => 'subscription',
                 'title' => 'admin::app.admin.system.newsletter-subscription',
-                'type' => 'boolean'
+                'type' => 'boolean',
             ]
         ],
     ], [
         'key' => 'customer.settings.email',
         'name' => 'admin::app.admin.system.email',
-        'sort' => 2,
+        'sort' => 3,
         'fields' => [
             [
                 'name' => 'verification',
                 'title' => 'admin::app.admin.system.email-verification',
                 'type' => 'boolean'
+            ]
+        ],
+    ], [
+        'key' => 'customer.settings.credit-max',
+        'name' => 'admin::app.admin.system.credit-max',
+        'sort' => 4,
+        'fields' => [
+            [
+                'name' => 'Use Credit Max',
+                'title' => 'admin::app.admin.system.use-credit-max',
+                'type' => 'boolean',
+                'channel_based' => true
+            ], [
+                'name' => 'Credit Max Value',
+                'title' => 'admin::app.admin.system.credit-max-value',
+                'type' => 'text',
+                'validation' => 'decimal',
+                'channel_based' => true
             ]
         ],
     ], [
