@@ -71,16 +71,33 @@ class CartRuleController extends Controller
      */
     protected $cart;
 
-    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CatalogRule $catalogRule, CartRule $cartRule, CartRuleCoupons $cartRuleCoupon, CartRuleLabels $cartRuleLabel)
+    public function __construct(
+        Attribute $attribute,
+        AttributeFamily $attributeFamily,
+        Category $category,
+        Product $product,
+        CatalogRule $catalogRule,
+        CartRule $cartRule,
+        CartRuleCoupons $cartRuleCoupon,
+        CartRuleLabels $cartRuleLabel
+    )
     {
         $this->_config = request('_config');
+
         $this->attribute = $attribute;
+
         $this->attributeFamily = $attributeFamily;
+
         $this->category = $category;
+
         $this->product = $product;
+
         $this->cartRule = $cartRule;
+
         $this->cartRuleCoupon = $cartRuleCoupon;
+        
         $this->cartRuleLabel = $cartRuleLabel;
+
         $this->appliedConfig = config('pricerules.cart');
     }
 
@@ -91,7 +108,11 @@ class CartRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('cart_rule', [$this->appliedConfig, $this->fetchOptionableAttributes(), $this->getStatesAndCountries()]);
+        return view($this->_config['view'])->with('cart_rule', [
+                $this->appliedConfig,
+                $this->fetchOptionableAttributes(),
+                $this->getStatesAndCountries()
+            ]);
     }
 
     public function store()
@@ -170,6 +191,7 @@ class CartRuleController extends Controller
         } else {
             $data['conditions'] = json_encode($data['all_conditions']);
         }
+
         unset($data['all_conditions']);
 
         if ($data['use_coupon']) {
@@ -207,7 +229,8 @@ class CartRuleController extends Controller
         if (isset($labels['global'])) {
             foreach (core()->getAllChannels() as $channel) {
                 $label1['channel_id'] = $channel->id;
-                foreach($channel->locales as $locale) {
+
+                foreach ($channel->locales as $locale) {
                     $label1['locale_id'] = $locale->id;
                     $label1['label'] = $labels['global'];
                     $label1['cart_rule_id'] = $ruleCreated->id;
@@ -221,7 +244,7 @@ class CartRuleController extends Controller
             $ruleLabelCreated = $this->cartRuleLabel->create($label2);
         }
 
-        if(isset($coupons)) {
+        if (isset($coupons)) {
             $coupons['cart_rule_id'] = $ruleCreated->id;
             $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
 
@@ -247,7 +270,12 @@ class CartRuleController extends Controller
     {
         $cart_rule = $this->cartRule->find($id);
 
-        return view($this->_config['view'])->with('cart_rule', [$this->appliedConfig, $this->fetchOptionableAttributes(), $this->getStatesAndCountries(), $cart_rule]);
+        return view($this->_config['view'])->with('cart_rule', [
+                $this->appliedConfig,
+                $this->fetchOptionableAttributes(),
+                $this->getStatesAndCountries(),
+                $cart_rule
+            ]);
     }
 
     public function update($id)
@@ -274,8 +302,10 @@ class CartRuleController extends Controller
             'label' => 'array|nullable'
         ]);
 
-        $data['usage_limit'] = 0;
-        $data['per_customer'] = 0;
+        $data = [
+            'usage_limit' => 0,
+            'per_customer' => 0,
+        ];
 
         if ($validated->fails()) {
             session()->flash('error', 'Validation failed');
@@ -294,6 +324,7 @@ class CartRuleController extends Controller
         unset($data['_token']);
 
         $channels = $data['channels'];
+
         unset($data['channels']);
 
         // $customer_groups = $data['customer_groups'];
@@ -302,6 +333,7 @@ class CartRuleController extends Controller
 
         if (isset($data['label'])) {
             $labels = $data['label'];
+
             unset($data['label']);
         }
 
@@ -325,6 +357,7 @@ class CartRuleController extends Controller
         }
 
         $data['actions'] = json_encode($data['actions']);
+
         if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]") {
             $data['conditions'] = null;
         } else {
@@ -416,9 +449,9 @@ class CartRuleController extends Controller
 
     public function fetchOptionableAttributes()
     {
-        $attributesWithOptions = array();
+        return $attributesWithOptions = [];
 
-        foreach($this->attribute->all() as $attribute) {
+        foreach ($this->attribute->all() as $attribute) {
             if (($attribute->type == 'select' || $attribute->type == 'multiselect')  && $attribute->code != 'tax_category_id') {
                 $attributesWithOptions[$attribute->admin_name] = $attribute->options->toArray();
             }
