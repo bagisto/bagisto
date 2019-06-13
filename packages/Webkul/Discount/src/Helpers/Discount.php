@@ -150,7 +150,7 @@ class Discount
 
         $rule;
         foreach ($couponAbleRules as $couponAbleRule) {
-            if ($couponAbleRule->coupons->code == $code) {
+            if ($couponAbleRule->coupons->code === $code) {
                 $rule = $couponAbleRule;
             }
         }
@@ -320,7 +320,9 @@ class Discount
         }
 
         $report['item_id'] = $leastWorthItem['id'];
+        $report['item_price'] = $leastWorthItem['total'];
         $report['discount'] = $amountDiscounted;
+        $report['action'] = $action_type;
         $report['formatted_discount'] = core()->formatPrice($amountDiscounted, $cart->cart_currency_code);
         $report['new_grand_total'] = $cart->grand_total - $amountDiscounted;
         $report['formatted_new_grand_total'] = core()->formatPrice($cart->grand_total - $amountDiscounted, $cart->cart_currency_code);
@@ -378,15 +380,15 @@ class Discount
     }
 
     protected function testIfAllConditionAreTrue($conditions, $cart) {
-        $shipping_address = $cart->getShippingAddressAttribute();
+        $shipping_address = $cart->getShippingAddressAttribute() ?? '';
 
-        $shipping_method = $cart->shipping_method;
-        $shipping_country = $shipping_address->country;
-        $shipping_state = $shipping_address->state;
-        $shipping_postcode = $shipping_address->postcode;
-        $shipping_city = $shipping_address->city;
+        $shipping_method = $cart->shipping_method ?? '';
+        $shipping_country = $shipping_address->country ?? '';
+        $shipping_state = $shipping_address->state ?? '';
+        $shipping_postcode = $shipping_address->postcode ?? '';
+        $shipping_city = $shipping_address->city ?? '';
 
-        $payment_method = $cart->payment->method;
+        $payment_method = $cart->payment->method ?? '';
         $sub_total = $cart->base_sub_total;
 
         $total_items = $cart->items_qty;

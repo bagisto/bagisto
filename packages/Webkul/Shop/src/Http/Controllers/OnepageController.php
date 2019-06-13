@@ -90,7 +90,7 @@ class OnepageController extends Controller
         if (Cart::hasError() || !Cart::saveCustomerAddress($data) || ! $rates = Shipping::collectRates())
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
-        $rule = Cart::applyNonCoupon();
+        // $rule = Cart::applyNonCoupon();
 
         Cart::collectTotals();
 
@@ -109,7 +109,7 @@ class OnepageController extends Controller
         if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
-        $rule = Cart::applyNonCoupon();
+        // $rule = Cart::applyNonCoupon();
 
         Cart::collectTotals();
 
@@ -130,7 +130,7 @@ class OnepageController extends Controller
 
         $cart = Cart::getCart();
 
-        $rule = Cart::applyNonCoupon();
+        Cart::collectTotals();
 
         return response()->json([
             'jump_to_section' => 'review',

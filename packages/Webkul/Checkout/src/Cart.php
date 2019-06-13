@@ -814,6 +814,7 @@ class Cart {
             return false;
 
         $this->calculateItemsTax();
+        $this->applyNonCoupon();
 
         $cart->grand_total = $cart->base_grand_total = 0;
         $cart->sub_total = $cart->base_sub_total = 0;
