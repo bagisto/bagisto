@@ -245,9 +245,7 @@ return [
         Webkul\Sales\Providers\SalesServiceProvider::class,
         Webkul\Tax\Providers\TaxServiceProvider::class,
         Webkul\API\Providers\APIServiceProvider::class,
-        Webkul\CustomerDocument\Providers\CustomerDocumentServiceProvider::class,
         Webkul\Discount\Providers\DiscountServiceProvider::class,
-        Webkul\BulkAddToCart\Providers\BulkAddToCartServiceProvider::class,
     ],
 
     /*
