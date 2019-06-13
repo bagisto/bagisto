@@ -437,7 +437,6 @@
                         actions: @json($cart_rule[0]).actions,
                         conditions_list:[],
                         cart_object: {
-                            criteria: null,
                             attribute: null,
                             condition: null,
                             value: []
@@ -569,11 +568,12 @@
 
                     onSubmit: function (e) {
 
-                        if (this.conditions_list.length != 0) {
-                            this.conditions_list.test_mode = this.match_criteria;
-                        }
-                        console.log(this.conditions_list);
-                        return false;
+                        // if (this.conditions_list.length != 0) {
+                        //     this.conditions_list.push(this.match_criteria);
+                        // }
+
+                        console.log(JSON.stringify(this.conditions_list));
+
                         this.all_conditions = JSON.stringify(this.conditions_list);
 
                         this.$validator.validateAll().then(result => {
