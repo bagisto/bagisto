@@ -114,6 +114,18 @@ class Discount
 
         if ($canBeApplied->count()) {
             $this->save(array_first($canBeApplied)['rule']);
+            $itemId = array_first($canBeApplied);
+
+            foreach (\Cart::getCart()->items as $item) {
+                if ($item->id == $itemId['item_id']) {
+                    $item->update([
+                        'discount_amount' => array_first($canBeApplied)['discount'],
+                        'base_discount_amount' => array_first($canBeApplied)['discount']
+                    ]);
+
+                    break;
+                }
+            }
 
             return array_first($canBeApplied);
         } else {
@@ -307,6 +319,7 @@ class Discount
             }
         }
 
+        $report['item_id'] = $leastWorthItem['id'];
         $report['discount'] = $amountDiscounted;
         $report['formatted_discount'] = core()->formatPrice($amountDiscounted, $cart->cart_currency_code);
         $report['new_grand_total'] = $cart->grand_total - $amountDiscounted;
