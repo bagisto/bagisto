@@ -821,7 +821,7 @@ return [
             'cust-groups' => 'Customer Groups',
             'priority' => 'Priority',
             'add-condition' => 'Add Conditions',
-            'disc_amt' => 'Discount Amount',
+            'disc_amt' => 'Discount Amount(B)',
             'disc_percent' => 'Discount Percentage',
             'is-coupon' => 'Use Coupon',
             'is-coupon-yes' => 'Yes',
@@ -844,6 +844,7 @@ return [
             'free-shipping' => 'Free Shipping',
             'is-guest' => 'For Guests',
             'disc_qty' => 'Max. Quantity Allowed To Be Discounted',
+            'test-mode' => 'Choose how to test conditions'
         ],
 
         'status' => [
