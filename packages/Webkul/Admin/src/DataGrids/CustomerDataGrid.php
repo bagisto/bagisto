@@ -23,7 +23,7 @@ class CustomerDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('customers')
                 ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
-                ->addSelect('customers.id as customer_id', 'customers.email', 'customer_groups.name')
+                ->addSelect('customers.id as customer_id', 'customers.email', 'customer_groups.name', 'status')
                 ->addSelect(DB::raw('CONCAT(customers.first_name, " ", customers.last_name) as full_name'));
 
         $this->addFilter('customer_id', 'customers.id');
@@ -69,6 +69,22 @@ class CustomerDataGrid extends DataGrid
             'sortable' => true,
             'filterable' => true
         ]);
+
+        $this->addColumn([
+            'index' => 'status',
+            'label' => trans('admin::app.datagrid.status'),
+            'type' => 'boolean',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true,
+            'wrapper' => function ($row) {
+                if ($row->status == 1) {
+                    return 'Activated';
+                } else {
+                    return 'Blocked';
+                }
+            }
+        ]);
     }
 
     public function prepareActions() {
@@ -95,5 +111,31 @@ class CustomerDataGrid extends DataGrid
             'icon' => 'icon note-icon',
             'title' => trans('admin::app.customers.note.help-title')
         ]);
+    }
+
+    /**
+     * Customer Mass Action To Delete And Change Their
+     */
+    public function prepareMassActions()
+    {
+        $this->addMassAction([
+            'type' => 'delete',
+            'label' => 'Delete',
+            'action' => route('admin.customer.mass-delete'),
+            'method' => 'PUT',
+        ]);
+
+        $this->addMassAction([
+            'type' => 'update',
+            'label' => 'Update Status',
+            'action' => route('admin.customer.mass-update'),
+            'method' => 'PUT',
+            'options' => [
+                'Active' => 1,
+                'Inactive' => 0
+            ]
+        ]);
+
+        $this->enableMassAction = true;
     }
 }

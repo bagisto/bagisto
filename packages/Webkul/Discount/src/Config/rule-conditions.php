@@ -28,7 +28,7 @@ return [
             0 => 'admin::app.promotion.catalog.apply-percent',
             1 => 'admin::app.promotion.catalog.apply-fixed',
             2 => 'admin::app.promotion.catalog.adjust-to-percent',
-            3 => 'admin::app.promotion.catalog.adjust-to-value'
+            // 3 => 'admin::app.promotion.catalog.adjust-to-value'
         ],
 
         'attributes' => [
@@ -85,10 +85,6 @@ return [
                 '<=' => 'Lesser or equals',
                 '>' => 'Greater than',
                 '<' => 'Lesser than',
-                '{}' => 'Contains'
-                // '!{}' => 'Does not contains',
-                // '()' => 'Is one of',
-                // '!()' => 'Not is one of'
             ],
 
             'text' => [
@@ -99,8 +95,6 @@ return [
                 '<' => 'Lesser than',
                 '{}' => 'Contains',
                 '!{}' => 'Does not contains'
-                // '()' => 'Is one of',
-                // '!()' => 'Not is one of'
             ],
 
             'string' => [
@@ -111,8 +105,6 @@ return [
                 '<' => 'Lesser than',
                 '{}' => 'Contains',
                 '!{}' => 'Does not contains'
-                // '()' => 'Is one of',
-                // '!()' => 'Not is one of'
             ],
 
             'boolean' => [
@@ -171,9 +163,9 @@ return [
     ],
 
     'test_mode' => [
-        0 => 'all_are_true',
-        1 => 'all_are_false',
-        2 => 'any_of_true',
-        3 => 'all_of_false'
+        'all_are_true' => 'All conditions are true',
+        'all_are_false' => 'All conditions are false',
+        'any_is_true' => 'Any condition is true',
+        'any_is_false' => 'Any condition is false'
     ]
 ];

@@ -768,7 +768,9 @@ return [
             'phone' => 'Phone',
             'group-default' => 'Cannot delete the default group.',
             'edit-help-title' => 'Edit Customer',
-            'delete-help-title' => 'Delete Customer'
+            'delete-help-title' => 'Delete Customer',
+            'mass-destroy-success' => 'Customers deleted successfully',
+            'mass-update-success' => 'Customers updated successfully'
         ],
 
         'reviews' => [
@@ -819,7 +821,7 @@ return [
             'cust-groups' => 'Customer Groups',
             'priority' => 'Priority',
             'add-condition' => 'Add Conditions',
-            'disc_amt' => 'Discount Amount',
+            'disc_amt' => 'Discount Amount(B)',
             'disc_percent' => 'Discount Percentage',
             'is-coupon' => 'Use Coupon',
             'is-coupon-yes' => 'Yes',
@@ -842,6 +844,7 @@ return [
             'free-shipping' => 'Free Shipping',
             'is-guest' => 'For Guests',
             'disc_qty' => 'Max. Quantity Allowed To Be Discounted',
+            'test-mode' => 'Choose how to test conditions'
         ],
 
         'status' => [
