@@ -60,6 +60,8 @@ class SessionController extends Controller
         if (auth()->guard('customer')->user()->status == 0) {
             auth()->guard('customer')->logout();
 
+            session()->flash('warning', trans('shop::app.customer.login-form.not-activated'));
+
             return redirect()->back();
         }
 

@@ -135,6 +135,7 @@ return [
             'footer' => '© Copyright :year Webkul Software, All rights reserved',
             'invalid-creds' => 'Please Check Your Credentials And Try Again',
             'verify-first' => 'Verify Your Email Account First',
+            'not-activated' => 'Your activation seeks admin approval',
             'resend-verification' => 'Resend Verification Mail Again'
         ],
 
