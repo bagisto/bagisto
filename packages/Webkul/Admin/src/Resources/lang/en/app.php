@@ -768,7 +768,9 @@ return [
             'phone' => 'Phone',
             'group-default' => 'Cannot delete the default group.',
             'edit-help-title' => 'Edit Customer',
-            'delete-help-title' => 'Delete Customer'
+            'delete-help-title' => 'Delete Customer',
+            'mass-destroy-success' => 'Customers deleted successfully',
+            'mass-update-success' => 'Customers updated successfully'
         ],
 
         'reviews' => [

@@ -43,7 +43,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::dashboard.index'
             ])->name('admin.dashboard.index');
 
-            //Customers Management Routes
+            //Customer Management Routes
             Route::get('customers', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config', [
                 'view' => 'admin::customers.index'
             ])->name('admin.customer.index');
@@ -73,6 +73,10 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.customer.update');
 
             Route::post('customers/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@destroy')->name('admin.customer.delete');
+
+            Route::post('customers/masssdelete', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@massDestroy')->name('admin.customer.mass-delete');
+
+            Route::post('customers/masssupdate', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@massUpdate')->name('admin.customer.mass-update');
 
             Route::get('reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
                 'view' => 'admin::customers.reviews.index'

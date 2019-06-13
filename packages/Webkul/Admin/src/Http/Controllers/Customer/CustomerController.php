@@ -224,4 +224,43 @@ class CustomerController extends Controller
 
         return redirect()->route($this->_config['redirect']);
     }
+
+    /**
+     * To mass update the customer
+     */
+    public function massUpdate()
+    {
+        $customerIds = explode(',', request()->input('indexes'));
+        $updateOption = request()->input('update-options');
+
+        foreach ($customerIds as $customerId) {
+            $customer = $this->customer->find($customerId);
+
+            $customer->update([
+                'status' => $updateOption
+            ]);
+        }
+
+        session()->flash('info', trans('admin::app.customers.customers.mass-update-success'));
+
+        return redirect()->back();
+    }
+
+    /**
+     * To mass delete the customer
+     */
+    public function massDestroy()
+    {
+        $customerIds = explode(',', request()->input('indexes'));
+
+        foreach ($customerIds as $customerId) {
+            $this->customer->deleteWhere([
+                'id' => $customerId
+            ]);
+        }
+
+        session()->flash('info', trans('admin::app.customers.customers.mass-destroy-success'));
+
+        return redirect()->back();
+    }
 }
