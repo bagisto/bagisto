@@ -57,6 +57,12 @@ class SessionController extends Controller
             return redirect()->back();
         }
 
+        if (auth()->guard('customer')->user()->status == 0) {
+            auth()->guard('customer')->logout();
+
+            return redirect()->back();
+        }
+
         if (auth()->guard('customer')->user()->is_verified == 0) {
             session()->flash('info', trans('shop::app.customer.login-form.verify-first'));
 
