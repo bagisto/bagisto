@@ -451,7 +451,6 @@
                         actions: @json($cart_rule[0]).actions,
                         conditions_list:[],
                         cart_object: {
-                            criteria: null,
                             attribute: null,
                             condition: null,
                             value: []

@@ -521,7 +521,6 @@
                             this.conditions_list.push(this.cart_object);
 
                             this.cart_object = {
-                                criteria: null,
                                 attribute: null,
                                 condition: null,
                                 value: []
@@ -569,12 +568,12 @@
                     },
 
                     onSubmit: function (e) {
-                        console.log(this.match_criteria);
-                        return false;
+
                         if (this.conditions_list.length != 0) {
                             this.conditions_list.test_mode = this.match_criteria;
                         }
-
+                        console.log(this.conditions_list);
+                        return false;
                         this.all_conditions = JSON.stringify(this.conditions_list);
 
                         this.$validator.validateAll().then(result => {
