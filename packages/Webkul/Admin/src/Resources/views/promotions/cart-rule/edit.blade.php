@@ -179,13 +179,22 @@
                                         <div class="control-group">
                                             <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
 
-                                            <select type="text" class="control" name="criteria" v-model="criteria">
+                                            <select type="text" class="control" v-model="criteria">
                                                 <option value="cart">Cart Properties</option>
                                             </select>
                                         </div>
                                     </div>
 
-                                    <div class="mt-10 mb-10"><b>Any of the condition is true</b></div>
+                                    <div class="control-group">
+                                        {{ __('admin::app.promotion.general-info.test-mode') }}
+                                        <select class="control" v-model="match_criteria" style="margin-right: 15px;">
+                                            {{ $i = 0 }}
+                                            @foreach(config('pricerules.test_mode') as $key => $value)
+                                                <option value="{{ $key }}">{{ $value }}</option>
+                                                {{ $i++ }}
+                                            @endforeach
+                                        </select>
+                                    </div>
 
                                     <div class="condition-set">
                                         <!-- Cart Attributes -->
@@ -405,6 +414,7 @@
                         free_shipping: null,
 
                         all_conditions: null,
+                        match_criteria: 'all_are_true',
 
                         code: null,
                         suffix: null,
@@ -427,7 +437,6 @@
                         actions: @json($cart_rule[0]).actions,
                         conditions_list:[],
                         cart_object: {
-                            criteria: null,
                             attribute: null,
                             condition: null,
                             value: []
@@ -511,7 +520,6 @@
                             this.conditions_list.push(this.cart_object);
 
                             this.cart_object = {
-                                criteria: null,
                                 attribute: null,
                                 condition: null,
                                 value: []
@@ -559,13 +567,20 @@
                     },
 
                     onSubmit: function (e) {
+
+                        // if (this.conditions_list.length != 0) {
+                        //     this.conditions_list.push(this.match_criteria);
+                        // }
+
+                        console.log(JSON.stringify(this.conditions_list));
+
+                        this.all_conditions = JSON.stringify(this.conditions_list);
+
                         this.$validator.validateAll().then(result => {
                             if (result) {
                                 e.target.submit();
                             }
                         });
-
-                        this.all_conditions = JSON.stringify(this.conditions_list);
                     },
 
                     addFlashMessages() {

@@ -2,16 +2,10 @@
 
 namespace Webkul\Discount\Http\Controllers;
 
-use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
-use Webkul\Category\Repositories\CategoryRepository as Category;
-use Webkul\Product\Repositories\ProductFlatRepository as Product;
-use Webkul\Discount\Repositories\CatalogRuleRepository as CatalogRule;
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
 use Webkul\Checkout\Repositories\CartRepository as Cart;
 use Webkul\Discount\Repositories\CartRuleLabelsRepository as CartRuleLabels;
 use Webkul\Discount\Repositories\CartRuleCouponsRepository as CartRuleCoupons;
-use Validator;
 
 /**
  * Cart Rule controller
@@ -25,26 +19,6 @@ class CartRuleController extends Controller
      * Initialize _config, a default request parameter with route
      */
     protected $_config;
-
-    /**
-     * Attribute $attribute
-     */
-    protected $attribute;
-
-    /**
-     * AttributeFamily $attributeFamily
-     */
-    protected $attributeFamily;
-
-    /**
-     * Category $category
-     */
-    protected $category;
-
-    /**
-     * Product $product
-     */
-    protected $product;
 
     /**
      * Property for Cart rule application
@@ -72,11 +46,6 @@ class CartRuleController extends Controller
     protected $cart;
 
     public function __construct(
-        Attribute $attribute,
-        AttributeFamily $attributeFamily,
-        Category $category,
-        Product $product,
-        CatalogRule $catalogRule,
         CartRule $cartRule,
         CartRuleCoupons $cartRuleCoupon,
         CartRuleLabels $cartRuleLabel
@@ -84,42 +53,39 @@ class CartRuleController extends Controller
     {
         $this->_config = request('_config');
 
-        $this->attribute = $attribute;
-
-        $this->attributeFamily = $attributeFamily;
-
-        $this->category = $category;
-
-        $this->product = $product;
-
         $this->cartRule = $cartRule;
 
         $this->cartRuleCoupon = $cartRuleCoupon;
-        
+
         $this->cartRuleLabel = $cartRuleLabel;
 
         $this->appliedConfig = config('pricerules.cart');
     }
 
+    /**
+     * @return view
+     */
     public function index()
     {
         return view($this->_config['view']);
     }
 
+    /**
+     * @return view
+     */
     public function create()
     {
-        return view($this->_config['view'])->with('cart_rule', [
-                $this->appliedConfig,
-                $this->fetchOptionableAttributes(),
-                $this->getStatesAndCountries()
-            ]);
+        return view($this->_config['view'])->with('cart_rule', [$this->appliedConfig, [], $this->getStatesAndCountries()]);
     }
 
+    /**
+     * @return Redirect
+     */
     public function store()
     {
         $data = request()->all();
 
-        $validated = Validator::make($data, [
+        $validated = $this->validate($data, [
             'name' => 'required|string',
             'description' => 'string',
             // 'customer_groups' => 'required|array',
@@ -139,15 +105,10 @@ class CartRuleController extends Controller
             'label' => 'array|nullable'
         ]);
 
-        $data['usage_limit'] = 0;
-        $data['per_customer'] = 0;
-
-        if ($validated->fails()) {
-            session()->flash('error', 'Validation failed');
-            return redirect()->route('admin.cart-rule.create')
-                    ->withErrors($validated)
-                    ->withInput();
-        }
+        $data = [
+            'usage_limit' => 0,
+            'per_customer' => 0
+        ];
 
         if ($data['starts_from'] == "" || $data['ends_till'] == "") {
             $data['starts_from'] = null;
@@ -157,6 +118,7 @@ class CartRuleController extends Controller
         unset($data['_token']);
 
         $channels = $data['channels'];
+
         unset($data['channels']);
 
         // $customer_groups = $data['customer_groups'];
@@ -164,6 +126,7 @@ class CartRuleController extends Controller
         unset($data['criteria']);
 
         $labels = $data['label'];
+
         unset($data['label']);
         unset($data['cart_attributes']);
         unset($data['attributes']);
@@ -199,6 +162,7 @@ class CartRuleController extends Controller
             $data['auto_generation'] = 0;
 
             $coupons['code'] = $data['code'];
+
             unset($data['code']);
             // } else {
             //     $data['auto_generation'] = 1;
@@ -230,7 +194,7 @@ class CartRuleController extends Controller
             foreach (core()->getAllChannels() as $channel) {
                 $label1['channel_id'] = $channel->id;
 
-                foreach ($channel->locales as $locale) {
+                foreach($channel->locales as $locale) {
                     $label1['locale_id'] = $locale->id;
                     $label1['label'] = $labels['global'];
                     $label1['cart_rule_id'] = $ruleCreated->id;
@@ -241,6 +205,7 @@ class CartRuleController extends Controller
         } else {
             $label2['label'] = $labels['global'];
             $label2['cart_rule_id'] = $ruleCreated->id;
+
             $ruleLabelCreated = $this->cartRuleLabel->create($label2);
         }
 
@@ -266,23 +231,29 @@ class CartRuleController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
+    /**
+     * @return view
+     */
     public function edit($id)
     {
         $cart_rule = $this->cartRule->find($id);
 
         return view($this->_config['view'])->with('cart_rule', [
-                $this->appliedConfig,
-                $this->fetchOptionableAttributes(),
-                $this->getStatesAndCountries(),
-                $cart_rule
-            ]);
+            $this->appliedConfig,
+            [],
+            $this->getStatesAndCountries(),
+            $cart_rule
+        ]);
     }
 
+    /**
+     * @return redirect
+     */
     public function update($id)
     {
         $types = config('price_rules.cart.validations');
 
-        $validated = Validator::make(request()->all(), [
+        $this->validate(request(), [
             'name' => 'required|string',
             'description' => 'string',
             // 'customer_groups' => 'required|array',
@@ -304,18 +275,11 @@ class CartRuleController extends Controller
 
         $data = [
             'usage_limit' => 0,
-            'per_customer' => 0,
+            'per_customer' => 0
         ];
 
-        if ($validated->fails()) {
-            session()->flash('error', 'Validation failed');
-            return redirect()->route('admin.cart-rule.create')
-                ->withErrors($validated)
-                ->withInput();
-        }
-
         $data = request()->all();
-
+        dd($data);
         if ($data['starts_from'] == "" || $data['ends_till'] == "") {
             $data['starts_from'] = null;
             $data['ends_till'] = null;
@@ -371,6 +335,7 @@ class CartRuleController extends Controller
             $data['auto_generation'] = 0;
 
             $coupons['code'] = $data['code'];
+
             unset($data['code']);
             // } else {
             //     $data['auto_generation'] = 1;
@@ -445,18 +410,5 @@ class CartRuleController extends Controller
             'countries' => $countries,
             'states' => $states
         ];
-    }
-
-    public function fetchOptionableAttributes()
-    {
-        return $attributesWithOptions = [];
-
-        foreach ($this->attribute->all() as $attribute) {
-            if (($attribute->type == 'select' || $attribute->type == 'multiselect')  && $attribute->code != 'tax_category_id') {
-                $attributesWithOptions[$attribute->admin_name] = $attribute->options->toArray();
-            }
-        }
-
-        return $attributesWithOptions;
     }
 }
