@@ -83,17 +83,17 @@
             </div>
 
             <div class="col-right" v-if="resetSummary" v-show="currentStep != 4">
-                <summary-section></summary-section>
+                <summary-section hide-discount="1"></summary-section>
             </div>
         </div>
     </script>
 
     <script>
-        var shippingHtml = null;
-        var paymentHtml = null;
-        var reviewHtml = null;
-        var summaryHtml = null;
-        var customerAddress = null;
+        var shippingHtml = '';
+        var paymentHtml = '';
+        var reviewHtml = '';
+        var summaryHtml = '';
+        var customerAddress = '';
 
         @auth('customer')
             @if(auth('customer')->user()->addresses)
@@ -349,8 +349,12 @@
             data: function() {
                 return {
                     templateRender: null,
+
                     code: null,
-                    coupon_used: false
+
+                    coupon_used: false,
+
+                    hide_discount: 0
                 }
             },
 
@@ -395,6 +399,7 @@
             data: function() {
                 return {
                     templateRender: null,
+
                     selected_shipping_method: '',
                 }
             },
@@ -478,7 +483,9 @@
                 return {
                     templateRender: null,
 
-                    code: ''
+                    code: '',
+
+                    hide_discount: 1
                 }
             },
 
