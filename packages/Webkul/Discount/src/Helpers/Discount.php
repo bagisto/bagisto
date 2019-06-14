@@ -36,6 +36,11 @@ class Discount
         $this->cartRuleCart = $cartRuleCart;
     }
 
+    /**
+     * Applies the non couponable rule on the current cart
+     *
+     * @return mixed
+     */
     public function applyNonCouponAbleRule()
     {
         $cart = \Cart::getCart();
@@ -162,6 +167,11 @@ class Discount
         }
     }
 
+    /**
+     * Applies the couponable rule on the current cart
+     *
+     * @return mixed
+     */
     public function applyCouponAbleRule($code)
     {
         $cart = \Cart::getCart();
@@ -314,7 +324,7 @@ class Discount
     }
 
     /**
-     * This function checks whether the rule is getting applied on the current cart or noy
+     * This function checks whether the rule is getting applied on the current cart or not
      *
      * @return mixed
      */

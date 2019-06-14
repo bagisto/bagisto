@@ -266,6 +266,19 @@ class CartController extends Controller
 
         $result = Cart::applyCoupon($code);
 
+        if ($result != null) {
+            return response()->json([
+                'success' => true,
+                'message' => trans('shop::app.onepage.total.coupon-applied'),
+                'result' => $result
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.onepage.total.cannot-apply-coupon'),
+                'result' => null
+            ]);
+        }
         return $result;
     }
 
