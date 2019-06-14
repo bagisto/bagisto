@@ -435,25 +435,10 @@ class Discount
     }
 
     /**
-     * Removes the cart rule from the cart
+     * Removes the couponable rule from the current cart and cart rule cart
+     *
+     * @return boolean
      */
-    public function removeRule()
-    {
-        $cart = Cart::getCart();
-
-        $appliedRule = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
-        ]);
-
-        if ($appliedRule->count() == 0) {
-            Cart::clearDiscount();
-
-            Cart::collectTotals();
-        }
-
-        return true;
-    }
-
     public function removeCoupon()
     {
         $cart = \Cart::getCart();
@@ -464,6 +449,24 @@ class Discount
 
         if ($existingRule->count()) {
             if ($existingRule->first()->delete()) {
+
+                foreach ($cart->items as $item) {
+                    if ($item->discount_amount > 0) {
+                        $item->update([
+                            'discount_amount' => 0,
+                            'base_discount_amount' => 0,
+                            'discount_percent' => 0,
+                            'coupon_code' => NULL
+                        ]);
+                    }
+                }
+
+                $cart->update([
+                    'coupon_code' => NULL,
+                    'discount_amount' => 0,
+                    'base_discount_amount' => 0
+                ]);
+
                 return true;
             } else {
                 return false;

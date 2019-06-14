@@ -496,7 +496,9 @@
 
                     code: '',
 
-                    hide_discount: 1
+                    hide_discount: 1,
+
+                    coupon_used: false
                 }
             },
 
@@ -507,6 +509,11 @@
                 for (var i in reviewHtml.staticRenderFns) {
                     reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
                 }
+
+                @if ($cart->coupon_code != null)
+                    this.code = '{{ $cart->coupon_code }}';
+                    this.coupon_used = true;
+                @endif
             },
 
             render: function(h) {
@@ -524,7 +531,8 @@
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {
                         code: this_this.code
                     }).then(function(response) {
-                        console.log(response.data);
+                        this_this.coupon_used = true;
+                        this_this.code = '';
                     }).catch(function(error) {
                         console.log(error.data);
                     });
@@ -535,7 +543,7 @@
 
                     axios.post('{{ route('shop.checkout.remove.coupon') }}')
                     .then(function(response) {
-                        console.log(response.data);
+                        this_this.coupon_used = false;
                     }).catch(function(error) {
                         console.log(error.data);
                     });

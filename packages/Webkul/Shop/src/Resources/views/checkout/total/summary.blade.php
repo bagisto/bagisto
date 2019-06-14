@@ -37,9 +37,9 @@
     </div>
 
     <div v-if="hide_discount">
-        @if (! request()->is('checkout/cart') && ! $cart->coupon_code)
+        @if (! request()->is('checkout/cart'))
             <div class="discount">
-                <div class="discount-group">
+                <div class="discount-group" v-if="! coupon_used">
                     <form class="coupon-form" method="post" @submit.prevent="onSubmit">
                         <div class="control-group mt-20" :class="[errors.has('code') ? 'has-error' : '']">
                             <input type="text" class="control" value="" v-model="code" name="code" placeholder="Enter Coupon Code" v-validate="'required'" style="width: 100%">
@@ -49,8 +49,8 @@
                     </form>
                 </div>
             </div>
-        @else
-            <div class="discount-details-group">
+
+            <div class="discount-details-group" v-if="coupon_used">
                 <div class="item-detail">
                     <label>{{ __('shop::app.checkout.total.coupon-applied') }}</label>
                     <label class="right" style="display: inline-flex; align-items: center;">{{ $cart->coupon_code }} <span class="icon cross-icon" title="{{ __('shop::app.checkout.total.remove-coupon') }}" v-on:click="removeCoupon"></span></label>
