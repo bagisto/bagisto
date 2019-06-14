@@ -41,8 +41,6 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
         Route::post('checkout/check/coupons', 'Webkul\Shop\Http\Controllers\CartController@applyCoupon')->name('shop.checkout.check.coupons');
 
-        Route::post('checkout/save/discounts', 'Webkul\Shop\Http\Controllers\CartController@saveDiscount')->name('shop.checkout.save.discount');
-
         Route::post('checkout/fetch/noncoupon', 'Webkul\Shop\Http\Controllers\CartController@getNonCouponAbleRule')->name('shop.checkout.fetch.non-coupon');
 
         Route::post('checkout/remove/coupon', 'Webkul\Shop\Http\Controllers\CartController@removeCoupon')->name('shop.checkout.remove.coupon');
