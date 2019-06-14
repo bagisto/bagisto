@@ -9,66 +9,6 @@
 @endsection
 
 @push('scripts')
-    <script type="text/x-template" id="discount-template">
-        <div class="discount" v-if='discountVisible'>
-            <div class="discount-group" v-if="!end_rule_present">
-                <form class="coupon-form" method="post" @submit.prevent="onSubmit">
-                    <div class="control-group mt-20" :class="[errors.has('code') ? 'has-error' : '']">
-                        <input v-model="code" type="text" class="control" value="" name="code" placeholder="Enter Coupon Code" v-on:change="codeChange" style="width: 100%">
-
-                        <span class="control-error" v-if="errors.has('code')">
-                            @{{ errors.first('code') }}
-                        </span>
-
-                        <span class="coupon-message mt-5" style="display: block; color: #ff5656; margin-bottom: 5px;" v-if="message != 'Success' && message != 'success'">@{{ message }}</span>
-
-                        <span class="coupon-message mt-5" style="display: block; margin-bottom: 5px;" v-if="message == 'Success' || message == 'success'">@{{ message }}</span>
-
-                        <button class="btn btn-lg btn-black">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="discount-details-group" v-if="non_coupon_able">
-                <div class="item-detail" v-if="free_shipping">
-                    <label>Free Shipping</label>
-                    <label class="right">Yes</label>
-                </div>
-
-                <div class="item-detail">
-                    <label>{{ __('shop::app.checkout.total.disc-amount') }}</label>
-                    <label class="right">@{{ discount_amount }}</label>
-                </div>
-
-                <div class="item-detail" style="font-weight: bold; border-top: 1px solid #c7c7c7; padding-top: 5px">
-                    <label>{{ __('shop::app.checkout.total.new-grand-total') }}</label>
-                    <label class="right">@{{ new_grand_total }}</label>
-                </div>
-            </div>
-
-            <div class="discount-details-group" v-if="coupon_able">
-                <div class="item-detail">
-                    <label>{{ __('shop::app.checkout.total.coupon-applied') }}</label>
-                    <label class="right" style="display: inline-flex; align-items: center;">@{{ discount_code }} <span class="icon cross-icon" v-on:click="removeCoupon" title="{{ __('shop::app.checkout.total.remove-coupon') }}"></span></label>
-                </div>
-                <div class="item-detail" v-if="free_shipping">
-                    <label>Free Shipping</label>
-                    <label class="right">Yes</label>
-                </div>
-
-                <div class="item-detail">
-                    <label>{{ __('shop::app.checkout.total.disc-amount') }}</label>
-                    <label class="right">@{{ discount_amount }}</label>
-                </div>
-
-                <div class="item-detail" style="font-weight: bold; border-top: 1px solid #c7c7c7; padding-top: 5px">
-                    <label>{{ __('shop::app.checkout.total.new-grand-total') }}</label>
-                    <label class="right">@{{ new_grand_total }}</label>
-                </div>
-            </div>
-        </div>
-    </script>
-
     <script type="text/x-template" id="checkout-template">
         <div id="checkout" class="checkout-process">
             <div class="col-main">
@@ -343,31 +283,25 @@
                 placeOrder: function() {
                     var this_this = this;
 
-                    axios.post('{{ route('shop.checkout.save.discount') }}').then(function (response) {
-                        console.log(response.data);
-                    }).catch(function (error) {
-                        console.log('error in saving discount');
-                    });
-
                     this.disable_button = true;
 
                     this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
-                        .then(function(response) {
-                            if (response.data.success) {
-                                if (response.data.redirect_url) {
-                                    window.location.href = response.data.redirect_url;
-                                } else {
-                                    window.location.href = "{{ route('shop.checkout.success') }}";
-                                }
+                    .then(function(response) {
+                        if (response.data.success) {
+                            if (response.data.redirect_url) {
+                                window.location.href = response.data.redirect_url;
+                            } else {
+                                window.location.href = "{{ route('shop.checkout.success') }}";
                             }
-                        })
-                        .catch(function (error) {
-                            this_this.disable_button = true;
+                        }
+                    })
+                    .catch(function (error) {
+                        this_this.disable_button = true;
 
-                            window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
+                        window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
 
-                            this_this.$root.addFlashMessages()
-                        })
+                        this_this.$root.addFlashMessages()
+                    })
                 },
 
                 handleErrorResponse: function(response, scope) {
@@ -408,12 +342,15 @@
         })
 
         var summaryTemplateRenderFns = [];
+        
         Vue.component('summary-section', {
             inject: ['$validator'],
 
             data: function() {
                 return {
-                    templateRender: null
+                    templateRender: null,
+                    code: null,
+                    coupon_used: false
                 }
             },
 
@@ -423,7 +360,7 @@
                 this.templateRender = summaryHtml.render;
 
                 for (var i in summaryHtml.staticRenderFns) {
-                    summaryTemplateRenderFns.unshift(summaryHtml.staticRenderFns[i]);
+                    summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
                 }
             },
 
@@ -433,10 +370,25 @@
                         this.templateRender() :
                         '')
                     ]);
+            },
+
+            methods: {
+                onSubmit: function() {
+                    var this_this = this;
+
+                    axios.post('{{ route('shop.checkout.check.coupons') }}', {
+                        code: this_this.code
+                    }).then(function(response) {
+                        console.log(response.data);
+                    }).catch(function(error) {
+                        console.log(error.data);
+                    });
+                },
             }
         })
 
         var shippingTemplateRenderFns = [];
+
         Vue.component('shipping-section', {
             inject: ['$validator'],
 
@@ -476,6 +428,7 @@
         })
 
         var paymentTemplateRenderFns = [];
+
         Vue.component('payment-section', {
             inject: ['$validator'],
 
@@ -519,19 +472,25 @@
         })
 
         var reviewTemplateRenderFns = [];
+
         Vue.component('review-section', {
             data: function() {
                 return {
-                    templateRender: null
+                    templateRender: null,
+
+                    code: ''
                 }
             },
+
             staticRenderFns: reviewTemplateRenderFns,
+
             mounted: function() {
                 this.templateRender = reviewHtml.render;
                 for (var i in reviewHtml.staticRenderFns) {
                     reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
                 }
             },
+
             render: function(h) {
                 return h('div', [
                     (this.templateRender ?
@@ -540,95 +499,6 @@
                     ]);
             }
         });
-
-        Vue.component('discount', {
-            template: '#discount-template',
-            inject: ['$validator'],
-
-            data: function() {
-                return {
-                    code: null,
-                    message: null,
-                    end_rule_present: false,
-                    discount_amount: 0,
-                    rule_name: null,
-                    free_shipping: null,
-                    new_grand_total: null,
-                    non_coupon_able: false,
-                    coupon_able: false,
-                    discount_code: null,
-                    discountVisible: false
-                }
-            },
-
-            mounted: function() {
-                if (reviewHtml != null) {
-                    this.discountVisible = true;
-                    this.checkNonCouponAble();
-                }
-            },
-
-            methods: {
-                onSubmit: function() {
-                    var this_this = this;
-
-                    axios.post('{{ route('shop.checkout.check.coupons') }}', {
-                        code: this_this.code
-                    }).then(function(response) {
-                        this_this.end_rule_present = response.data.end_other_rules;
-                        this_this.discount_amount = response.data.formatted_discount;
-                        this_this.rule_name = response.data.rule.name;
-                        this_this.free_shipping = response.data.rule.free_shipping;
-                        this_this.new_grand_total = response.data.formatted_new_grand_total;
-                        this_this.non_coupon_able = false;
-                        this_this.coupon_able = true;
-                        this_this.discount_code = this_this.code;
-                    }).catch(function(error) {
-                    });
-                },
-
-                checkNonCouponAble: function () {
-                    var this_this = this;
-
-                    axios.post('{{ route('shop.checkout.fetch.non-coupon') }}').then(function(response) {
-                        this_this.end_rule_present = response.data.end_other_rules;
-                        this_this.discount_amount = response.data.formatted_discount;
-                        this_this.rule_name = response.data.rule.name;
-                        this_this.free_shipping = response.data.rule.free_shipping;
-                        this_this.new_grand_total = response.data.formatted_new_grand_total;
-                        this_this.non_coupon_able = true;
-                    }).catch(function (error) {
-                    });
-                },
-
-                codeChange: function() {
-                    if (this.code.length == 0 || this.code.length == 1)
-                    {
-                        this.message = null;
-                    }
-                },
-
-                removeCoupon: function() {
-                    var this_this = this;
-
-                    axios.post('{{ route('shop.checkout.remove.coupon') }}').then(function(response) {
-                        this_this.code = null;
-                        this_this.message = null;
-                        this_this.end_rule_present = false;
-                        this_this.discount_amount = 0;
-                        this_this.rule_name = null;
-                        this_this.free_shipping = null;
-                        this_this.new_grand_total = null;
-                        this_this.non_coupon_able = false;
-                        this_this.coupon_able = false;
-                        this_this.discount_code = null;
-                    }).catch(function(error) {
-                        console.log(error.data);
-                    });
-                }
-            }
-        });
-
     </script>
 
 @endpush
