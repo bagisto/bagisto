@@ -87,6 +87,9 @@ class Price extends AbstractProduct
             $finalPrice[] = $price->final_price;
         }
 
+        if (empty($finalPrice))
+            return $price[$product->id] = 0;
+
         return $price[$product->id] = min($finalPrice);
     }
 
