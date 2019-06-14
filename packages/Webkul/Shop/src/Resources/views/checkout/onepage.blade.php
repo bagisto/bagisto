@@ -348,9 +348,8 @@
             data: function() {
                 return {
                     templateRender: null,
-                    non_coupon: null,
-                    coupon: null,
-                    code: null
+                    code: null,
+                    coupon_used: false
                 }
             },
 
@@ -375,17 +374,10 @@
             methods: {
                 onSubmit: function() {
                     var this_this = this;
+
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {
                         code: this_this.code
                     }).then(function(response) {
-                        this_this.end_rule_present = response.data.end_other_rules;
-                        this_this.discount_amount = response.data.formatted_discount;
-                        this_this.rule_name = response.data.rule.name;
-                        this_this.free_shipping = response.data.rule.free_shipping;
-                        this_this.new_grand_total = response.data.formatted_new_grand_total;
-                        this_this.non_coupon_able = false;
-                        this_this.coupon_able = true;
-                        this_this.discount_code = this_this.code;
                     }).catch(function(error) {
                     });
                 },

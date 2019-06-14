@@ -273,13 +273,11 @@ class CartRuleController extends Controller
             'label' => 'array|nullable'
         ]);
 
-        $data = [
-            'usage_limit' => 0,
-            'per_customer' => 0
-        ];
+        $data['usage_limit'] = 0;
+        $data['per_customer'] = 0;
 
         $data = request()->all();
-        dd($data);
+
         if ($data['starts_from'] == "" || $data['ends_till'] == "") {
             $data['starts_from'] = null;
             $data['ends_till'] = null;

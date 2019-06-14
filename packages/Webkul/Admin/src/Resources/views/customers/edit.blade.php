@@ -6,6 +6,8 @@
 
 @section('content')
     <div class="content">
+        {!! view_render_event('bagisto.admin.customer.edit.before', ['customer' => $customer]) !!}
+
         <form method="POST" action="{{ route('admin.customer.update', $customer->id) }}">
 
             <div class="page-header">
@@ -117,5 +119,7 @@
                 </div>
             </div>
         </form>
+
+        {!! view_render_event('bagisto.admin.customer.edit.after', ['customer' => $customer]) !!}
     </div>
 @stop

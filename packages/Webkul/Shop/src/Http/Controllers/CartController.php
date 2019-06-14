@@ -82,7 +82,21 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view($this->_config['view'])->with('cart', Cart::getCart());
+        $cart = Cart::getCart();
+
+        $appliedRule = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id
+        ]);
+
+        if ($appliedRule->count() == 0) {
+            Cart::removeDiscount();
+
+            Cart::collectTotals();
+        }
+
+        Cart::applyNonCoupon();
+
+        return view($this->_config['view'])->with('cart', $cart);
     }
 
     /**

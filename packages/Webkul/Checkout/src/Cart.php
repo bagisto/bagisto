@@ -814,7 +814,6 @@ class Cart {
             return false;
 
         $this->calculateItemsTax();
-        $this->applyNonCoupon();
 
         $cart->grand_total = $cart->base_grand_total = 0;
         $cart->sub_total = $cart->base_sub_total = 0;
@@ -1299,6 +1298,33 @@ class Cart {
         $result = $this->discount->applyNonCouponAbleRule();
 
         return $result;
+    }
+
+    /**
+     * Removes discount from the cart and calls collect totals
+     *
+     * @return void
+     */
+    public function removeDiscount()
+    {
+        $cartItems = $this->getCart()->items;
+
+        foreach($cartItems as $item) {
+            $item->update([
+                'coupon_code' => null,
+                'discount_percent' => 0,
+                'discount_amount' => 0,
+                'base_discount_amount' => 0
+            ]);
+        }
+
+        $this->getCart()->update([
+            'coupon_code' => null,
+            'discount_amount' => 0,
+            'base_discount_amount' => 0
+        ]);
+
+        return true;
     }
 
     public function removeCoupon()
