@@ -80,24 +80,6 @@ return [
             ]
         ],
     ], [
-        'key' => 'customer.settings.credit-max',
-        'name' => 'admin::app.admin.system.credit-max',
-        'sort' => 4,
-        'fields' => [
-            [
-                'name' => 'Use Credit Max',
-                'title' => 'admin::app.admin.system.use-credit-max',
-                'type' => 'boolean',
-                'channel_based' => true
-            ], [
-                'name' => 'Credit Max Value',
-                'title' => 'admin::app.admin.system.credit-max-value',
-                'type' => 'text',
-                'validation' => 'decimal',
-                'channel_based' => true
-            ]
-        ],
-    ], [
         'key' => 'general',
         'name' => 'admin::app.admin.system.general',
         'sort' => 4,

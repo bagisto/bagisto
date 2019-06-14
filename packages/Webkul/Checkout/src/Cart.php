@@ -1303,12 +1303,39 @@ class Cart {
         return $result;
     }
 
-    public function removeCoupon()
+    /**
+     * Removes discount from the cart and calls collect totals
+     *
+     * @return void
+     */
+    public function clearDiscount()
     {
-        $result = $this->discount->removeCoupon();
+        $cartItems = $this->getCart()->items;
 
-        return $result;
+        foreach($cartItems as $item) {
+            $item->update([
+                'coupon_code' => NULL,
+                'discount_percent' => 0,
+                'discount_amount' => 0,
+                'base_discount_amount' => 0
+            ]);
+        }
+
+        $this->getCart()->update([
+            'coupon_code' => NULL,
+            'discount_amount' => 0,
+            'base_discount_amount' => 0
+        ]);
+
+        return true;
     }
+
+    // public function removeCoupon()
+    // {
+    //     $result = $this->discount->removeCoupon();
+
+    //     return $result;
+    // }
 
     public function leastWorthItem()
     {

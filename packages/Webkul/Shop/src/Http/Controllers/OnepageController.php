@@ -9,6 +9,7 @@ use Auth;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Payment\Facades\Payment;
+use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
 use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 use Webkul\Sales\Repositories\OrderRepository;
 
@@ -28,6 +29,13 @@ class OnepageController extends Controller
     protected $orderRepository;
 
     /**
+     * CartRuleCartRepository object
+     *
+     * @var array
+     */
+    protected $cartRuleCart;
+
+    /**
      * Contains route related configuration
      *
      * @var array
@@ -40,9 +48,11 @@ class OnepageController extends Controller
      * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
      * @return void
      */
-    public function __construct(OrderRepository $orderRepository)
+    public function __construct(OrderRepository $orderRepository, CartRuleCart $cartRuleCart)
     {
         $this->orderRepository = $orderRepository;
+
+        $this->cartRuleCart = $cartRuleCart;
 
         $this->_config = request('_config');
     }
@@ -56,6 +66,8 @@ class OnepageController extends Controller
     {
         if (Cart::hasError())
             return redirect()->route('shop.checkout.cart.index');
+
+        Cart::applyNonCoupon();
 
         return view($this->_config['view'])->with('cart', Cart::getCart());
     }
@@ -90,7 +102,7 @@ class OnepageController extends Controller
         if (Cart::hasError() || !Cart::saveCustomerAddress($data) || ! $rates = Shipping::collectRates())
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
-        $rule = Cart::applyNonCoupon();
+        Cart::applyNonCoupon();
 
         Cart::collectTotals();
 
@@ -109,7 +121,7 @@ class OnepageController extends Controller
         if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
-        $rule = Cart::applyNonCoupon();
+        Cart::applyNonCoupon();
 
         Cart::collectTotals();
 
@@ -130,7 +142,9 @@ class OnepageController extends Controller
 
         $cart = Cart::getCart();
 
-        $rule = Cart::applyNonCoupon();
+        Cart::applyNonCoupon();
+
+        Cart::collectTotals();
 
         return response()->json([
             'jump_to_section' => 'review',
