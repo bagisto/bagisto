@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="step-content review" v-show="currentStep == 4" id="summary-section">
-                    <review-section v-if="currentStep == 4"></review-section>
+                    <review-section v-if="currentStep == 4" hide-discount="1"></review-section>
 
                     <div class="button-group">
                         <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button">
@@ -534,7 +534,11 @@
                         code: this_this.code
                     }).then(function(response) {
                         this_this.coupon_used = true;
-                        this_this.code = '';
+
+                        document.getElementById("discount-detail").style.display = "block";
+                        document.getElementById("discount-detail-discount-amount").innerHTML = response.data.result.formatted_discount;
+
+                        document.getElementById("discount-detail-discount-amount").innerHTML = response.data.result.formatted_discount;
                     }).catch(function(error) {
                         console.log(error.data);
                     });
@@ -546,6 +550,8 @@
                     axios.post('{{ route('shop.checkout.remove.coupon') }}')
                     .then(function(response) {
                         this_this.coupon_used = false;
+                        this_this.code = '';
+                        document.getElementById("discount-detail").style.display = "none";
                     }).catch(function(error) {
                         console.log(error.data);
 

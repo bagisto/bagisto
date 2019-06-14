@@ -403,8 +403,8 @@ class Discount
         $report['discount'] = $amountDiscounted;
         $report['action'] = $action_type;
         $report['formatted_discount'] = core()->formatPrice($amountDiscounted, $cart->cart_currency_code);
-        $report['new_grand_total'] = $cart->grand_total - $amountDiscounted;
-        $report['formatted_new_grand_total'] = core()->formatPrice($cart->grand_total - $amountDiscounted, $cart->cart_currency_code);
+        $report['grand_total'] = $cart->grand_total - $amountDiscounted;
+        $report['formatted_grand_total'] = core()->formatPrice($cart->grand_total - $amountDiscounted, $cart->cart_currency_code);
         $report['priority'] = $rule->priority;
 
         return $report;

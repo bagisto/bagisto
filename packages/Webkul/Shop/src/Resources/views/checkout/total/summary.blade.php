@@ -24,16 +24,24 @@
         </div>
     @endif
 
-    @if ($cart->discount_amount && $cart->discount_amount > 0)
-        <div class="item-detail">
-            <label><b>{{ __('shop::app.checkout.total.disc-amount') }}</b></label>
-            <label class="right"><b>{{ core()->currency($cart->discount_amount) }}</b></label>
-        </div>
-    @endif
 
-    <div class="payable-amount">
+    <div class="item-detail" id="discount-detail" @if ($cart->discount_amount && $cart->discount_amount > 0) style="display: block;" @else style="display: none;" @endif>
+        <label>
+            <b>{{ __('shop::app.checkout.total.disc-amount') }}</b>
+        </label>
+        <label class="right">
+            <b id="discount-detail-discount-amount">
+                {{ core()->currency($cart->discount_amount) }}
+            </b>
+        </label>
+    </div>
+
+
+    <div class="payable-amount" id="grand-total-detail">
         <label>{{ __('shop::app.checkout.total.grand-total') }}</label>
-        <label class="right">{{ core()->currency($cart->base_grand_total) }}</label>
+        <label class="right" id="grand-total-amount-detail">
+            {{ core()->currency($cart->base_grand_total) }}
+        </label>
     </div>
 
     <div v-if="hide_discount">
@@ -55,7 +63,7 @@
             <div class="discount-details-group" v-if="coupon_used">
                 <div class="item-detail">
                     <label>{{ __('shop::app.checkout.total.coupon-applied') }}</label>
-                    <label class="right" style="display: inline-flex; align-items: center;">{{ $cart->coupon_code }} <span class="icon cross-icon" title="{{ __('shop::app.checkout.total.remove-coupon') }}" v-on:click="removeCoupon"></span></label>
+                    <label class="right" style="display: inline-flex; align-items: center;"><b>@{{ code }}</b><span class="icon cross-icon" title="{{ __('shop::app.checkout.total.remove-coupon') }}" v-on:click="removeCoupon"></span></label>
                 </div>
             </div>
         @endif
