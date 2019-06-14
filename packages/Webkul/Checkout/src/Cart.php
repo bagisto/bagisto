@@ -1277,12 +1277,12 @@ class Cart {
         return true;
     }
 
-    // public function removeCoupon()
-    // {
-    //     $result = $this->discount->removeCoupon();
+    public function removeCoupon()
+    {
+        $result = $this->discount->removeCoupon();
 
-    //     return $result;
-    // }
+        return $result;
+    }
 
     public function leastWorthItem()
     {

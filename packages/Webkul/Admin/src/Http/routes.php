@@ -649,7 +649,7 @@ Route::group(['middleware' => ['web']], function () {
 
                 // Route::post('fetch/options', 'Webkul\Discount\Http\Controllers\CatalogRuleController@fetchAttributeOptions')->name('admin.catalog-rule.options');
 
-                Route::get('/cart-rule', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [
+                Route::get('/cart-rules', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [
                     'view' => 'admin::promotions.cart-rule.index'
                 ])->name('admin.cart-rule.index');
 

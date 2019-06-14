@@ -388,6 +388,17 @@
                         console.log(error.data);
                     });
                 },
+
+                removeCoupon: function () {
+                    var this_this = this;
+
+                    axios.post('{{ route('shop.checkout.remove.coupon') }}')
+                    .then(function(response) {
+                        console.log(response.data);
+                    }).catch(function(error) {
+                        console.log(error.data);
+                    });
+                }
             }
         })
 
@@ -507,12 +518,23 @@
             },
 
             methods: {
-                onSubmit: function() {
+                onSubmit: function () {
                     var this_this = this;
 
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {
                         code: this_this.code
                     }).then(function(response) {
+                        console.log(response.data);
+                    }).catch(function(error) {
+                        console.log(error.data);
+                    });
+                },
+
+                removeCoupon: function () {
+                    var this_this = this;
+
+                    axios.post('{{ route('shop.checkout.remove.coupon') }}')
+                    .then(function(response) {
                         console.log(response.data);
                     }).catch(function(error) {
                         console.log(error.data);

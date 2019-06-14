@@ -369,10 +369,22 @@ class Discount
         if ($cart->items_qty >= $disc_threshold && $realQty >= $disc_quantity) {
             if ($action_type == config('pricerules.cart.validation.0')) {
                 $amountDiscounted = $leastWorthItem['total'] * ($disc_amount / 100);
+
+                if ($amountDiscounted > $leastWorthItem['total']) {
+                    $amountDiscounted = $leastWorthItem['total'];
+                }
             } else if ($action_type == config('pricerules.cart.validation.1')) {
                 $amountDiscounted = $disc_amount;
+
+                if ($amountDiscounted > $leastWorthItem['total']) {
+                    $amountDiscounted = $leastWorthItem['total'];
+                }
             } else if ($action_type == config('pricerules.cart.validation.2')) {
                 $amountDiscounted = $disc_amount;
+
+                if ($amountDiscounted > $leastWorthItem['total']) {
+                    $amountDiscounted = $leastWorthItem['total'];
+                }
             }
         }
 

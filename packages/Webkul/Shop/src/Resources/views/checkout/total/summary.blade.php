@@ -53,7 +53,7 @@
             <div class="discount-details-group">
                 <div class="item-detail">
                     <label>{{ __('shop::app.checkout.total.coupon-applied') }}</label>
-                    <label class="right" style="display: inline-flex; align-items: center;">{{ $cart->coupon_code }} <span class="icon cross-icon" title="{{ __('shop::app.checkout.total.remove-coupon') }}"></span></label>
+                    <label class="right" style="display: inline-flex; align-items: center;">{{ $cart->coupon_code }} <span class="icon cross-icon" title="{{ __('shop::app.checkout.total.remove-coupon') }}" v-on:click="removeCoupon"></span></label>
                 </div>
             </div>
         @endif

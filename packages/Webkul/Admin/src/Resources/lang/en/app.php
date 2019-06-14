@@ -799,7 +799,7 @@ return [
 
     'promotion' => [
         'catalog-rule' => 'Catalog Rules',
-        'cart-rule' => 'Cart Rule',
+        'cart-rule' => 'Cart Rules',
         'add-catalog-rule' => 'Add Catalog Rule',
         'add-cart-rule' => 'Add Cart Rule',
         'edit-cart-rule' => 'Edit Cart Rule',
