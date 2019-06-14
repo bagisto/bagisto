@@ -60,6 +60,7 @@ class Price extends AbstractProduct
     public function getVariantMinPrice($product)
     {
         static $price = [];
+        $finalPrice = [];
 
         if (array_key_exists($product->id, $price))
             return $price[$product->id];
@@ -70,22 +71,23 @@ class Price extends AbstractProduct
             $productId = $product->id;
         }
 
-        $variantSpecialPrice = $variantRegularPrice = [];
+        $qb = ProductFlat::join('products', 'product_flat.product_id', '=', 'products.id')
+            ->where('products.parent_id', $productId);
 
-        foreach ($product->variants as $productVariant) {
-            if ($this->haveSpecialPrice($productVariant)) {
-                $variantSpecialPrice[] = $this->getSpecialPrice($productVariant);
-            }
-            $variantRegularPrice[] = $productVariant->price;
+        $result = $qb
+            ->distinct()
+            ->selectRaw('IF( product_flat.special_price_from IS NOT NULL
+            AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
+            AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS final_price')
+            ->where('product_flat.channel', core()->getCurrentChannelCode())
+            ->where('product_flat.locale', app()->getLocale())
+            ->get();
+
+        foreach ($result as $price) {
+            $finalPrice[] = $price->final_price;
         }
 
-        if (count($variantSpecialPrice) > 1)
-            if (min($variantSpecialPrice) < min($variantRegularPrice))
-                return $price[$product->id] = min($variantSpecialPrice);
-
-            return $price[$product->id] = min($variantRegularPrice);
-
-        return $price[$product->id] = min($variantRegularPrice);
+        return $price[$product->id] = min($finalPrice);
     }
 
     /**

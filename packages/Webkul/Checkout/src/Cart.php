@@ -1167,6 +1167,9 @@ class Cart {
             'tax_percent' => $data['tax_percent'],
             'tax_amount' => $data['tax_amount'],
             'base_tax_amount' => $data['base_tax_amount'],
+            'discount_percent' => $data['discount_percent'],
+            'discount_amount' => $data['discount_amount'],
+            'base_discount_amount' => $data['base_discount_amount'],
             'additional' => $data['additional'],
         ];
 
