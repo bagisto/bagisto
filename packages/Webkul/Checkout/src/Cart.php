@@ -1305,13 +1305,13 @@ class Cart {
      *
      * @return void
      */
-    public function removeDiscount()
+    public function clearDiscount()
     {
         $cartItems = $this->getCart()->items;
 
         foreach($cartItems as $item) {
             $item->update([
-                'coupon_code' => null,
+                'coupon_code' => NULL,
                 'discount_percent' => 0,
                 'discount_amount' => 0,
                 'base_discount_amount' => 0
@@ -1319,7 +1319,7 @@ class Cart {
         }
 
         $this->getCart()->update([
-            'coupon_code' => null,
+            'coupon_code' => NULL,
             'discount_amount' => 0,
             'base_discount_amount' => 0
         ]);
@@ -1327,12 +1327,12 @@ class Cart {
         return true;
     }
 
-    public function removeCoupon()
-    {
-        $result = $this->discount->removeCoupon();
+    // public function removeCoupon()
+    // {
+    //     $result = $this->discount->removeCoupon();
 
-        return $result;
-    }
+    //     return $result;
+    // }
 
     public function leastWorthItem()
     {

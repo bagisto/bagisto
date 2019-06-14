@@ -378,7 +378,9 @@
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {
                         code: this_this.code
                     }).then(function(response) {
+                        console.log(response.data);
                     }).catch(function(error) {
+                        console.log(error.data);
                     });
                 },
             }

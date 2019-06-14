@@ -67,18 +67,6 @@ class OnepageController extends Controller
         if (Cart::hasError())
             return redirect()->route('shop.checkout.cart.index');
 
-        $cart = Cart::getCart();
-
-        $appliedRule = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
-        ]);
-
-        if ($appliedRule->count() == 0) {
-            Cart::removeDiscount();
-
-            Cart::collectTotals();
-        }
-
         Cart::applyNonCoupon();
 
         return view($this->_config['view'])->with('cart', Cart::getCart());
@@ -133,7 +121,7 @@ class OnepageController extends Controller
         if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
-            Cart::applyNonCoupon();
+        Cart::applyNonCoupon();
 
         Cart::collectTotals();
 
