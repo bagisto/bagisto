@@ -498,7 +498,9 @@
 
                     hide_discount: 1,
 
-                    coupon_used: false
+                    coupon_used: false,
+
+                    error_message = ''
                 }
             },
 
@@ -532,9 +534,8 @@
                         code: this_this.code
                     }).then(function(response) {
                         this_this.coupon_used = true;
-                        this_this.code = '';
                     }).catch(function(error) {
-                        console.log(error.data);
+                        this_this.error_message = '{{ __('shop::app.onepage.total.cannot-apply-coupon') }}'
                     });
                 },
 
@@ -544,6 +545,7 @@
                     axios.post('{{ route('shop.checkout.remove.coupon') }}')
                     .then(function(response) {
                         this_this.coupon_used = false;
+                        this_this.code = '';
                     }).catch(function(error) {
                         console.log(error.data);
                     });

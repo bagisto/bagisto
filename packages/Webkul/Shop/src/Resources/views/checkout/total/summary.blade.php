@@ -45,6 +45,8 @@
                             <input type="text" class="control" value="" v-model="code" name="code" placeholder="Enter Coupon Code" v-validate="'required'" style="width: 100%">
                         </div>
 
+                        <span class="control-error" v-if="error_message.length > 0">@{{ error_message }}</span>
+
                         <button class="btn btn-lg btn-black">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
                     </form>
                 </div>
