@@ -12,16 +12,16 @@ class CustomerGroupTableSeeder extends Seeder
         DB::table('customer_groups')->delete();
 
         DB::table('customer_groups')->insert([
+            'id' => 0,
+            'name' => 'Guest',
+            'is_user_defined' => 0,
+        ], [
             'id' => 1,
             'name' => 'General',
             'is_user_defined' => 0,
         ], [
             'id' => 2,
             'name' => 'Wholesale',
-            'is_user_defined' => 0,
-        ], [
-            'id' => 3,
-            'name' => 'Not Logged In',
             'is_user_defined' => 0,
         ]);
     }
