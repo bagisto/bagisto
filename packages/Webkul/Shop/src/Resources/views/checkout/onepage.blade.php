@@ -500,7 +500,7 @@
 
                     coupon_used: false,
 
-                    error_message = ''
+                    error_message: ''
                 }
             },
 
@@ -534,8 +534,9 @@
                         code: this_this.code
                     }).then(function(response) {
                         this_this.coupon_used = true;
+                        this_this.code = '';
                     }).catch(function(error) {
-                        this_this.error_message = '{{ __('shop::app.onepage.total.cannot-apply-coupon') }}'
+                        console.log(error.data);
                     });
                 },
 
@@ -545,9 +546,10 @@
                     axios.post('{{ route('shop.checkout.remove.coupon') }}')
                     .then(function(response) {
                         this_this.coupon_used = false;
-                        this_this.code = '';
                     }).catch(function(error) {
                         console.log(error.data);
+
+                        this_this.error_message = '{{ __('shop::app.checkout.onepage.total.cannot-apply-coupon') }}'
                     });
                 }
             }
