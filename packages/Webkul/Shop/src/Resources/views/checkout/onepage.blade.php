@@ -342,6 +342,7 @@
         })
 
         var summaryTemplateRenderFns = [];
+        
         Vue.component('summary-section', {
             inject: ['$validator'],
 
@@ -387,6 +388,7 @@
         })
 
         var shippingTemplateRenderFns = [];
+
         Vue.component('shipping-section', {
             inject: ['$validator'],
 
@@ -426,6 +428,7 @@
         })
 
         var paymentTemplateRenderFns = [];
+
         Vue.component('payment-section', {
             inject: ['$validator'],
 
@@ -469,19 +472,25 @@
         })
 
         var reviewTemplateRenderFns = [];
+
         Vue.component('review-section', {
             data: function() {
                 return {
-                    templateRender: null
+                    templateRender: null,
+
+                    code: ''
                 }
             },
+
             staticRenderFns: reviewTemplateRenderFns,
+
             mounted: function() {
                 this.templateRender = reviewHtml.render;
                 for (var i in reviewHtml.staticRenderFns) {
                     reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
                 }
             },
+
             render: function(h) {
                 return h('div', [
                     (this.templateRender ?
