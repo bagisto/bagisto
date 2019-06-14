@@ -1,16 +1,16 @@
-<div class="form-container">
-    <div class="form-header mb-30">
+<div class="form-container" id="">
+    <div class="form-header mb-30" id="">
         <span class="checkout-step-heading">{{ __('shop::app.checkout.onepage.summary') }}</span>
     </div>
 
-    <div class="address-summary">
+    <div class="address-summary" id="">
         @if ($billingAddress = $cart->billing_address)
-            <div class="billing-address">
-                <div class="card-title mb-20">
+            <div class="billing-address" id="">
+                <div class="card-title mb-20" id="">
                     <b>{{ __('shop::app.checkout.onepage.billing-address') }}</b>
                 </div>
 
-                <div class="card-content">
+                <div class="card-content" id="">
                     <ul>
                         <li class="mb-10">
                             {{ $billingAddress->name }}
@@ -33,12 +33,12 @@
         @endif
 
         @if ($shippingAddress = $cart->shipping_address)
-            <div class="shipping-address">
-                <div class="card-title mb-20">
+            <div class="shipping-address" id="">
+                <div class="card-title mb-20" id="">
                     <b>{{ __('shop::app.checkout.onepage.shipping-address') }}</b>
                 </div>
 
-                <div class="card-content">
+                <div class="card-content" id="">
                     <ul>
                         <li class="mb-10">
                             {{ $shippingAddress->name }}
@@ -64,7 +64,7 @@
 
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
-    <div class="cart-item-list mt-20">
+    <div class="cart-item-list mt-20" id="">
         @foreach ($cart->items as $item)
 
             <?php
@@ -73,24 +73,24 @@
                 $productBaseImage = $productImageHelper->getProductBaseImage($product);
             ?>
 
-            <div class="item mb-5" style="margin-bottom: 5px;">
-                <div class="item-image">
+            <div class="item mb-5" style="margin-bottom: 5px;" id="">
+                <div class="item-image" id="">
                     <img src="{{ $productBaseImage['medium_image_url'] }}" />
                 </div>
 
-                <div class="item-details">
+                <div class="item-details" id="">
 
                     {!! view_render_event('bagisto.shop.checkout.name.before', ['item' => $item]) !!}
 
-                    <div class="item-title">
+                    <div class="item-title" id="">
                         {{ $product->name }}
                     </div>
 
                     {!! view_render_event('bagisto.shop.checkout.name.after', ['item' => $item]) !!}
                     {!! view_render_event('bagisto.shop.checkout.price.before', ['item' => $item]) !!}
 
-                    <div class="row">
-                        <span class="title">
+                    <div class="row" id="">
+                        <span class="title" id="">
                             {{ __('shop::app.checkout.onepage.price') }}
                         </span>
                         <span class="value">
@@ -101,7 +101,7 @@
                     {!! view_render_event('bagisto.shop.checkout.price.after', ['item' => $item]) !!}
                     {!! view_render_event('bagisto.shop.checkout.quantity.before', ['item' => $item]) !!}
 
-                    <div class="row">
+                    <div class="row" id="">
                         <span class="title">
                             {{ __('shop::app.checkout.onepage.quantity') }}
                         </span>
@@ -115,7 +115,7 @@
                     @if ($product->type == 'configurable')
                         {!! view_render_event('bagisto.shop.checkout.options.after', ['item' => $item]) !!}
 
-                        <div class="summary" >
+                        <div class="summary" id="">
                             {{ Cart::getProductAttributeOptionDetails($item->child->product)['html'] }}
                         </div>
 
@@ -126,35 +126,35 @@
         @endforeach
     </div>
 
-    <div class="order-description mt-20">
-        <div class="pull-left" style="width: 60%; float: left;">
-            <div class="shipping">
-                <div class="decorator">
+    <div class="order-description mt-20" id="">
+        <div class="pull-left" style="width: 60%; float: left;" id="">
+            <div class="shipping" id="">
+                <div class="decorator" id="">
                     <i class="icon shipping-icon"></i>
                 </div>
 
-                <div class="text">
+                <div class="text" id="">
                     {{ core()->currency($cart->selected_shipping_rate->base_price) }}
 
-                    <div class="info">
+                    <div class="info" id="">
                         {{ $cart->selected_shipping_rate->method_title }}
                     </div>
                 </div>
             </div>
 
-            <div class="payment">
-                <div class="decorator">
+            <div class="payment" id="">
+                <div class="decorator" id="">
                     <i class="icon payment-icon"></i>
                 </div>
 
-                <div class="text">
+                <div class="text" id="">
                     {{ core()->getConfigData('sales.paymentmethods.' . $cart->payment->method . '.title') }}
                 </div>
             </div>
 
         </div>
 
-        <div class="pull-right" style="width: 40%; float: left;">
+        <div class="pull-right" style="width: 40%; float: left;" id="">
             @include('shop::checkout.total.summary', ['cart' => $cart])
         </div>
     </div>

@@ -8,15 +8,15 @@
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
     <section class="cart">
         @if ($cart)
-            <div class="title">
+            <div class="title"  id="">
                 {{ __('shop::app.checkout.cart.title') }}
             </div>
 
-            <div class="cart-content">
-                <div class="left-side">
+            <div class="cart-content" id="">
+                <div class="left-side" id="">
                     <form action="{{ route('shop.checkout.cart.update') }}" method="POST" @submit.prevent="onSubmit">
 
-                        <div class="cart-item-list" style="margin-top: 0">
+                        <div class="cart-item-list" style="margin-top: 0" id="">
                             @csrf
                             @foreach ($cart->items as $key => $item)
                                 <?php
@@ -26,16 +26,16 @@
                                         $productBaseImage = $productImageHelper->getProductBaseImage($item->product);
                                 ?>
 
-                                <div class="item mt-5">
-                                    <div class="item-image" style="margin-right: 15px;">
+                                <div class="item mt-5" id="">
+                                    <div class="item-image" style="margin-right: 15px;" id="">
                                         <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}"><img src="{{ $productBaseImage['medium_image_url'] }}" /></a>
                                     </div>
 
-                                    <div class="item-details">
+                                    <div class="item-details" id="">
 
                                         {!! view_render_event('bagisto.shop.checkout.cart.item.name.before', ['item' => $item]) !!}
 
-                                        <div class="item-title">
+                                        <div class="item-title" id="">
                                             <a href="{{ url()->to('/').'/products/'.$item->product->url_key }}">
                                                 {{ $item->product->name }}
                                             </a>
@@ -46,7 +46,7 @@
 
                                         {!! view_render_event('bagisto.shop.checkout.cart.item.price.before', ['item' => $item]) !!}
 
-                                        <div class="price">
+                                        <div class="price" id="">
                                             {{ core()->currency($item->base_price) }}
                                         </div>
 
@@ -57,7 +57,7 @@
 
                                         @if ($item->type == 'configurable')
 
-                                            <div class="summary">
+                                            <div class="summary" id="">
 
                                                 {{ Cart::getProductAttributeOptionDetails($item->child->product)['html'] }}
 
@@ -69,9 +69,9 @@
 
                                         {!! view_render_event('bagisto.shop.checkout.cart.item.quantity.before', ['item' => $item]) !!}
 
-                                        <div class="misc">
-                                            <div class="control-group" :class="[errors.has('qty[{{$item->id}}]') ? 'has-error' : '']">
-                                                <div class="wrap">
+                                        <div class="misc" id="">
+                                            <div class="control-group" :class="[errors.has('qty[{{$item->id}}]') ? 'has-error' : '']" id="">
+                                                <div class="wrap" id="">
                                                     <label for="qty[{{$item->id}}]">{{ __('shop::app.checkout.cart.quantity.quantity') }}</label>
 
                                                     <input class="control quantity-change" value="-" style="width: 35px; border-radius: 3px 0px 0px 3px;" onclick="updateCartQunatity('remove', {{$key}})" readonly>
@@ -102,7 +102,7 @@
                                         {!! view_render_event('bagisto.shop.checkout.cart.item.quantity.after', ['item' => $item]) !!}
 
                                         @if (! cart()->isItemHaveQuantity($item))
-                                            <div class="error-message mt-15">
+                                            <div class="error-message mt-15" id="">
                                                 * {{ __('shop::app.checkout.cart.quantity-error') }}
                                             </div>
                                         @endif
@@ -114,10 +114,10 @@
 
                         {!! view_render_event('bagisto.shop.checkout.cart.controls.after', ['cart' => $cart]) !!}
 
-                        <div class="misc-controls">
+                        <div class="misc-controls" id="">
                             <a href="{{ route('shop.home.index') }}" class="link">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
 
-                            <div>
+                            <div id="">
                                 <button type="submit" class="btn btn-lg btn-primary">
                                     {{ __('shop::app.checkout.cart.update-cart') }}
                                 </button>
@@ -134,7 +134,7 @@
                     </form>
                 </div>
 
-                <div class="right-side">
+                <div class="right-side" id="">
                     {!! view_render_event('bagisto.shop.checkout.cart.summary.after', ['cart' => $cart]) !!}
 
                     @include('shop::checkout.total.summary', ['cart' => $cart])
@@ -147,11 +147,11 @@
 
         @else
 
-            <div class="title">
+            <div class="title" id="">
                 {{ __('shop::app.checkout.cart.title') }}
             </div>
 
-            <div class="cart-content">
+            <div class="cart-content" id="">
                 <p>
                     {{ __('shop::app.checkout.cart.empty') }}
                 </p>

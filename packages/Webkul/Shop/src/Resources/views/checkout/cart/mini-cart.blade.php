@@ -9,7 +9,7 @@
 
     <?php $items = $cart->items; ?>
 
-    <div class="dropdown-toggle">
+    <div class="dropdown-toggle" id="">
         <a class="cart-link" href="{{ route('shop.checkout.cart.index') }}">
             <span class="icon cart-icon"></span>
         </a>
@@ -22,10 +22,10 @@
         <i class="icon arrow-down-icon"></i>
     </div>
 
-    <div class="dropdown-list" style="display: none; top: 52px; right: 0px;">
-        <div class="dropdown-container">
-            <div class="dropdown-cart">
-                <div class="dropdown-header">
+    <div class="dropdown-list" style="display: none; top: 52px; right: 0px;" id="">
+        <div class="dropdown-container" id="">
+            <div class="dropdown-cart" id="">
+                <div class="dropdown-header" id="">
                     <p class="heading">
                         {{ __('shop::app.checkout.cart.cart-subtotal') }} -
 
@@ -37,11 +37,11 @@
                     </p>
                 </div>
 
-                <div class="dropdown-content">
+                <div class="dropdown-content" id="">
                     @foreach ($items as $item)
 
-                        <div class="item">
-                            <div class="item-image" >
+                        <div class="item" id="">
+                            <div class="item-image" id="">
                                 <?php
                                     if ($item->type == "configurable")
                                         $images = $productImageHelper->getProductBaseImage($item->child->product);
@@ -51,10 +51,10 @@
                                 <img src="{{ $images['small_image_url'] }}" />
                             </div>
 
-                            <div class="item-details">
+                            <div class="item-details" id="">
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.name.before', ['item' => $item]) !!}
 
-                                <div class="item-name">{{ $item->name }}</div>
+                                <div class="item-name" id="">{{ $item->name }}</div>
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.name.after', ['item' => $item]) !!}
 
@@ -62,7 +62,7 @@
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.options.before', ['item' => $item]) !!}
 
                                 @if ($item->type == "configurable")
-                                    <div class="item-options">
+                                    <div class="item-options" id="">
                                         {{ trim(Cart::getProductAttributeOptionDetails($item->child->product)['html']) }}
                                     </div>
                                 @endif
@@ -72,14 +72,14 @@
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.price.before', ['item' => $item]) !!}
 
-                                <div class="item-price"><b>{{ core()->currency($item->base_total) }}</b></div>
+                                <div class="item-price" id=""><b>{{ core()->currency($item->base_total) }}</b></div>
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.price.after', ['item' => $item]) !!}
 
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.quantity.before', ['item' => $item]) !!}
 
-                                <div class="item-qty">Quantity - {{ $item->quantity }}</div>
+                                <div class="item-qty" id="">Quantity - {{ $item->quantity }}</div>
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.quantity.after', ['item' => $item]) !!}
                             </div>
@@ -88,7 +88,7 @@
                     @endforeach
                 </div>
 
-                <div class="dropdown-footer">
+                <div class="dropdown-footer" id="">
                     <a href="{{ route('shop.checkout.cart.index') }}">{{ __('shop::app.minicart.view-cart') }}</a>
 
                     <a class="btn btn-primary btn-lg" style="color: white;" href="{{ route('shop.checkout.onepage.index') }}">{{ __('shop::app.minicart.checkout') }}</a>
@@ -99,8 +99,8 @@
 
 @else
 
-    <div class="dropdown-toggle">
-        <div style="display: inline-block; cursor: pointer;">
+    <div class="dropdown-toggle" id="">
+        <div style="display: inline-block; cursor: pointer;" id="">
             <span class="icon cart-icon"></span>
             <span class="name">{{ __('shop::app.minicart.cart') }}<span class="count"> ({{ __('shop::app.minicart.zero') }}) </span></span>
         </div>

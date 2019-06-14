@@ -1,16 +1,16 @@
 <form data-vv-scope="address-form">
 
-    <div class="form-container" v-if="!this.new_billing_address">
-        <div class="form-header mb-30">
+    <div class="form-container" v-if="!this.new_billing_address" id="">
+        <div class="form-header mb-30" id="">
             <span class="checkout-step-heading">{{ __('shop::app.checkout.onepage.billing-address') }}</span>
 
             <a class="btn btn-lg btn-primary" @click = newBillingAddress()>
                 {{ __('shop::app.checkout.onepage.new-address') }}
             </a>
         </div>
-        <div class="address-holder">
-            <div class="address-card" v-for='(addresses, index) in this.allAddress'>
-                <div class="checkout-address-content" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+        <div class="address-holder" id="">
+            <div class="address-card" v-for='(addresses, index) in this.allAddress' id="">
+                <div class="checkout-address-content" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;" id="">
                     <label class="radio-container" style="float: right; width: 10%;">
                         <input type="radio" v-validate="'required'" id="billing[address_id]" name="billing[address_id]" :value="addresses.id" v-model="address.billing.address_id" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.billing-address') }}&quot;">
                         <span class="checkmark"></span>
@@ -43,13 +43,13 @@
                     </ul>
                 </div>
             </div>
-            <div class="control-group" :class="[errors.has('address-form.billing[address_id]') ? 'has-error' : '']">
+            <div class="control-group" :class="[errors.has('address-form.billing[address_id]') ? 'has-error' : '']" id="">
                 <span class="control-error" v-if="errors.has('address-form.billing[address_id]')">
                     @{{ errors.first('address-form.billing[address_id]') }}
                 </span>
             </div>
         </div>
-        <div class="control-group mt-5">
+        <div class="control-group mt-5" id="">
             <span class="checkbox">
                 <input type="checkbox" id="billing[use_for_shipping]" name="billing[use_for_shipping]" v-model="address.billing.use_for_shipping"/>
                     <label class="checkbox-view" for="billing[use_for_shipping]"></label>
@@ -59,9 +59,9 @@
         </div>
     </div>
 
-    <div class="form-container" v-if="this.new_billing_address">
+    <div class="form-container" v-if="this.new_billing_address" id="">
 
-        <div class="form-header">
+        <div class="form-header" id="">
             <h1>{{ __('shop::app.checkout.onepage.billing-address') }}</h1>
 
             @guest('customer')
@@ -77,7 +77,7 @@
             @endauth
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.billing[first_name]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.billing[first_name]') ? 'has-error' : '']" id="">
             <label for="billing[first_name]" class="required">
                 {{ __('shop::app.checkout.onepage.first-name') }}
             </label>
@@ -89,7 +89,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.billing[last_name]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.billing[last_name]') ? 'has-error' : '']" id="">
             <label for="billing[last_name]" class="required">
                 {{ __('shop::app.checkout.onepage.last-name') }}
             </label>
@@ -101,7 +101,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.billing[email]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.billing[email]') ? 'has-error' : '']" id="">
             <label for="billing[email]" class="required">
                 {{ __('shop::app.checkout.onepage.email') }}
             </label>
@@ -113,7 +113,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.billing[address1][]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.billing[address1][]') ? 'has-error' : '']" id="">
             <label for="billing_address_0" class="required">
                 {{ __('shop::app.checkout.onepage.address1') }}
             </label>
@@ -126,14 +126,14 @@
         </div>
 
         @if (core()->getConfigData('customer.settings.address.street_lines') && core()->getConfigData('customer.settings.address.street_lines') > 1)
-            <div class="control-group" style="margin-top: -25px;">
+            <div class="control-group" style="margin-top: -25px;" id="">
                 @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
                     <input type="text" class="control" name="billing[address1][{{ $i }}]" id="billing_address_{{ $i }}" v-model="address.billing.address1[{{$i}}]">
                 @endfor
             </div>
         @endif
 
-        <div class="control-group" :class="[errors.has('address-form.billing[city]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.billing[city]') ? 'has-error' : '']" id="">
             <label for="billing[city]" class="required">
                 {{ __('shop::app.checkout.onepage.city') }}
             </label>
@@ -145,7 +145,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.billing[state]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.billing[state]') ? 'has-error' : '']" id="">
             <label for="billing[state]" class="required">
                 {{ __('shop::app.checkout.onepage.state') }}
             </label>
@@ -167,7 +167,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.billing[postcode]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.billing[postcode]') ? 'has-error' : '']" id="">
             <label for="billing[postcode]" class="required">
                 {{ __('shop::app.checkout.onepage.postcode') }}
             </label>
@@ -179,7 +179,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.billing[country]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.billing[country]') ? 'has-error' : '']" id="">
             <label for="billing[country]" class="required">
                 {{ __('shop::app.checkout.onepage.country') }}
             </label>
@@ -199,7 +199,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.billing[phone]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.billing[phone]') ? 'has-error' : '']" id="">
             <label for="billing[phone]" class="required">
                 {{ __('shop::app.checkout.onepage.phone') }}
             </label>
@@ -211,7 +211,7 @@
             </span>
         </div>
 
-        <div class="control-group">
+        <div class="control-group" id="">
             <span class="checkbox">
                 <input type="checkbox" id="billing[use_for_shipping]" name="billing[use_for_shipping]" v-model="address.billing.use_for_shipping"/>
                 <label class="checkbox-view" for="billing[use_for_shipping]"></label>
@@ -221,7 +221,7 @@
         </div>
 
         @auth('customer')
-            <div class="control-group">
+            <div class="control-group" id="">
                 <span class="checkbox">
                     <input type="checkbox" id="billing[save_as_address]" name="billing[save_as_address]" v-model="address.billing.save_as_address"/>
                     <label class="checkbox-view" for="billing[save_as_address]"></label>
@@ -232,8 +232,8 @@
 
     </div>
 
-    <div class="form-container" v-if="!address.billing.use_for_shipping && !this.new_shipping_address">
-        <div class="form-header mb-30">
+    <div class="form-container" v-if="!address.billing.use_for_shipping && !this.new_shipping_address" id="">
+        <div class="form-header mb-30" id="">
             <span class="checkout-step-heading">{{ __('shop::app.checkout.onepage.shipping-address') }}</span>
 
             <a class="btn btn-lg btn-primary" @click=newShippingAddress()>
@@ -241,9 +241,9 @@
             </a>
         </div>
 
-        <div class="address-holder">
-            <div class="address-card" v-for='(addresses, index) in this.allAddress'>
-                <div class="checkout-address-content" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+        <div class="address-holder" id="">
+            <div class="address-card" v-for='(addresses, index) in this.allAddress' id="">
+                <div class="checkout-address-content" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;" id="">
                     <label class="radio-container" style="float: right; width: 10%;">
                         <input v-validate="'required'" type="radio" id="shipping[address_id]" name="shipping[address_id]" v-model="address.shipping.address_id" :value="addresses.id"
                         data-vv-as="&quot;{{ __('shop::app.checkout.onepage.shipping-address') }}&quot;">
@@ -278,7 +278,7 @@
                 </div>
             </div>
 
-            <div class="control-group" :class="[errors.has('address-form.shipping[address_id]') ? 'has-error' : '']">
+            <div class="control-group" :class="[errors.has('address-form.shipping[address_id]') ? 'has-error' : '']" id="">
                 <span class="control-error" v-if="errors.has('address-form.shipping[address_id]')">
                     @{{ errors.first('address-form.shipping[address_id]') }}
                 </span>
@@ -287,9 +287,9 @@
         </div>
     </div>
 
-    <div class="form-container" v-if="!address.billing.use_for_shipping && this.new_shipping_address">
+    <div class="form-container" v-if="!address.billing.use_for_shipping && this.new_shipping_address" id="">
 
-        <div class="form-header">
+        <div class="form-header" id="">
             <h1>{{ __('shop::app.checkout.onepage.shipping-address') }}</h1>
 
             @auth('customer')
@@ -299,7 +299,7 @@
             @endauth
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.shipping[first_name]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.shipping[first_name]') ? 'has-error' : '']" id="">
             <label for="shipping[first_name]" class="required">
                 {{ __('shop::app.checkout.onepage.first-name') }}
             </label>
@@ -311,7 +311,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.shipping[last_name]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.shipping[last_name]') ? 'has-error' : '']" id="">
             <label for="shipping[last_name]" class="required">
                 {{ __('shop::app.checkout.onepage.last-name') }}
             </label>
@@ -323,7 +323,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.shipping[email]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.shipping[email]') ? 'has-error' : '']" id="">
             <label for="shipping[email]" class="required">
                 {{ __('shop::app.checkout.onepage.email') }}
             </label>
@@ -335,7 +335,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.shipping[address1][]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.shipping[address1][]') ? 'has-error' : '']" id="">
             <label for="shipping_address_0" class="required">
                 {{ __('shop::app.checkout.onepage.address1') }}
             </label>
@@ -348,14 +348,14 @@
         </div>
 
         @if (core()->getConfigData('customer.settings.address.street_lines') && core()->getConfigData('customer.settings.address.street_lines') > 1)
-            <div class="control-group" style="margin-top: -25px;">
+            <div class="control-group" style="margin-top: -25px;" id="">
                 @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
                     <input type="text" class="control" name="shipping[address1][{{ $i }}]" id="shipping_address_{{ $i }}" v-model="address.shipping.address1[{{$i}}]">
                 @endfor
             </div>
         @endif
 
-        <div class="control-group" :class="[errors.has('address-form.shipping[city]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.shipping[city]') ? 'has-error' : '']" id="">
             <label for="shipping[city]" class="required">
                 {{ __('shop::app.checkout.onepage.city') }}
             </label>
@@ -367,7 +367,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.shipping[state]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.shipping[state]') ? 'has-error' : '']" id="">
             <label for="shipping[state]" class="required">
                 {{ __('shop::app.checkout.onepage.state') }}
             </label>
@@ -390,7 +390,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.shipping[postcode]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.shipping[postcode]') ? 'has-error' : '']" id="">
             <label for="shipping[postcode]" class="required">
                 {{ __('shop::app.checkout.onepage.postcode') }}
             </label>
@@ -402,7 +402,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.shipping[country]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.shipping[country]') ? 'has-error' : '']" id="">
             <label for="shipping[country]" class="required">
                 {{ __('shop::app.checkout.onepage.country') }}
             </label>
@@ -420,7 +420,7 @@
             </span>
         </div>
 
-        <div class="control-group" :class="[errors.has('address-form.shipping[phone]') ? 'has-error' : '']">
+        <div class="control-group" :class="[errors.has('address-form.shipping[phone]') ? 'has-error' : '']" id="">
             <label for="shipping[phone]" class="required">
                 {{ __('shop::app.checkout.onepage.phone') }}
             </label>
@@ -433,7 +433,7 @@
         </div>
 
         @auth('customer')
-            <div class="control-group">
+            <div class="control-group" id="">
                 <span class="checkbox">
                     <input type="checkbox" id="shipping[save_as_address]" name="shipping[save_as_address]" v-model="address.shipping.save_as_address"/>
                     <label class="checkbox-view" for="shipping[save_as_address]"></label>
