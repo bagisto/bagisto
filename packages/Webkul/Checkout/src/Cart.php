@@ -1297,7 +1297,8 @@ class Cart {
                     'id' => $item->id,
                     'total' => $item->total,
                     'base_total' => $leastValue,
-                    'quantity' => $item->quantity
+                    'quantity' => $item->quantity,
+                    'price' => $item->price
                 ];
             }
         }

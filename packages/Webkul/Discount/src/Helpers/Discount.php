@@ -310,6 +310,8 @@ class Discount
 
                     \Cart::collectTotals();
 
+                    $report['grand_total'] = core()->currency(\Cart::getCart()->grand_total);
+
                     break;
                 }
             }
@@ -376,24 +378,36 @@ class Discount
         $leastWorthItem = \Cart::leastWorthItem();
         $realQty = $leastWorthItem['quantity'];
 
-        if ($cart->items_qty >= $disc_threshold && $realQty >= $disc_quantity) {
+        if ($cart->items_qty >= $disc_threshold) {
             if ($action_type == config('pricerules.cart.validation.0')) {
-                $amountDiscounted = $leastWorthItem['total'] * ($disc_amount / 100);
+                $amountDiscounted = $leastWorthItem['price'] * ($disc_amount / 100);
 
-                if ($amountDiscounted > $leastWorthItem['total']) {
-                    $amountDiscounted = $leastWorthItem['total'];
+                if ($realQty > $disc_quantity) {
+                    $amountDiscounted = $amountDiscounted * $disc_quantity;
+                }
+
+                if ($amountDiscounted > $leastWorthItem['price']) {
+                    $amountDiscounted = $leastWorthItem['price'];
                 }
             } else if ($action_type == config('pricerules.cart.validation.1')) {
                 $amountDiscounted = $disc_amount;
 
-                if ($amountDiscounted > $leastWorthItem['total']) {
-                    $amountDiscounted = $leastWorthItem['total'];
+                if ($realQty > $disc_quantity) {
+                    $amountDiscounted = $amountDiscounted * $disc_quantity;
+                }
+
+                if ($amountDiscounted > $leastWorthItem['price']) {
+                    $amountDiscounted = $leastWorthItem['price'];
                 }
             } else if ($action_type == config('pricerules.cart.validation.2')) {
                 $amountDiscounted = $disc_amount;
 
-                if ($amountDiscounted > $leastWorthItem['total']) {
-                    $amountDiscounted = $leastWorthItem['total'];
+                if ($realQty > $disc_quantity) {
+                    $amountDiscounted = $amountDiscounted * $disc_quantity;
+                }
+
+                if ($amountDiscounted > $leastWorthItem['price']) {
+                    $amountDiscounted = $leastWorthItem['price'];
                 }
             }
         }
@@ -459,7 +473,6 @@ class Discount
 
         if ($existingRule->count()) {
             if ($existingRule->first()->delete()) {
-
                 foreach ($cart->items as $item) {
                     if ($item->discount_amount > 0) {
                         $item->update([
@@ -476,6 +489,8 @@ class Discount
                     'discount_amount' => 0,
                     'base_discount_amount' => 0
                 ]);
+
+                \Cart::collectTotals();
 
                 return true;
             } else {
