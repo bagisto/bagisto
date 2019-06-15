@@ -72,7 +72,11 @@
                 </div>
 
                 <div class="step-content review" v-show="currentStep == 4" id="summary-section">
-                    <review-section v-if="currentStep == 4" hide-discount="1"></review-section>
+                    <review-section v-if="currentStep == 4">
+                        <div slot="summary-section" v-if="resetSummary">
+                            <summary-section discount="1" @onApplyCoupon="getOrderSummary" @onRemoveCoupon="getOrderSummary"></summary-section>
+                        </div>
+                    </review-section>
 
                     <div class="button-group">
                         <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button">
@@ -83,7 +87,7 @@
             </div>
 
             <div class="col-right" v-if="resetSummary" v-show="currentStep != 4">
-                <summary-section hide-discount="1"></summary-section>
+                <summary-section></summary-section>
             </div>
         </div>
     </script>
@@ -203,7 +207,7 @@
 
                             setTimeout(function() {
                                 this_this.resetSummary = true;
-                            }, 0);
+                            }, 500);
                         })
                         .catch(function (error) {})
                 },
@@ -341,67 +345,6 @@
             }
         })
 
-        var summaryTemplateRenderFns = [];
-
-        Vue.component('summary-section', {
-            inject: ['$validator'],
-
-            data: function() {
-                return {
-                    templateRender: null,
-
-                    code: null,
-
-                    coupon_used: false,
-
-                    hide_discount: 0
-                }
-            },
-
-            staticRenderFns: summaryTemplateRenderFns,
-
-            mounted: function() {
-                this.templateRender = summaryHtml.render;
-
-                for (var i in summaryHtml.staticRenderFns) {
-                    summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
-                }
-            },
-
-            render: function(h) {
-                return h('div', [
-                    (this.templateRender ?
-                        this.templateRender() :
-                        '')
-                    ]);
-            },
-
-            methods: {
-                onSubmit: function() {
-                    var this_this = this;
-
-                    axios.post('{{ route('shop.checkout.check.coupons') }}', {
-                        code: this_this.code
-                    }).then(function(response) {
-                        console.log(response.data);
-                    }).catch(function(error) {
-                        console.log(error.data);
-                    });
-                },
-
-                removeCoupon: function () {
-                    var this_this = this;
-
-                    axios.post('{{ route('shop.checkout.remove.coupon') }}')
-                    .then(function(response) {
-                        console.log(response.data);
-                    }).catch(function(error) {
-                        console.log(error.data);
-                    });
-                }
-            }
-        })
-
         var shippingTemplateRenderFns = [];
 
         Vue.component('shipping-section', {
@@ -490,15 +433,11 @@
         var reviewTemplateRenderFns = [];
 
         Vue.component('review-section', {
+            props: ['resetSummary'],
+
             data: function() {
                 return {
                     templateRender: null,
-
-                    code: '',
-
-                    hide_discount: 1,
-
-                    coupon_used: false,
 
                     error_message: ''
                 }
@@ -506,16 +445,53 @@
 
             staticRenderFns: reviewTemplateRenderFns,
 
+            render: function(h) {
+                return h('div', [
+                    (this.templateRender ?
+                        this.templateRender() :
+                        '')
+                    ]);
+            },
+
             mounted: function() {
                 this.templateRender = reviewHtml.render;
+
                 for (var i in reviewHtml.staticRenderFns) {
                     reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
                 }
+            }
+        });
 
-                @if ($cart->coupon_code != null)
-                    this.code = '{{ $cart->coupon_code }}';
-                    this.coupon_used = true;
-                @endif
+
+        var summaryTemplateRenderFns = [];
+
+        Vue.component('summary-section', {
+            inject: ['$validator'],
+
+            props: {
+                discount: {
+                    type: [String, Number],
+
+                    default: 0,
+                }
+            },
+
+            data: function() {
+                return {
+                    templateRender: null,
+
+                    error_message: ''
+                }
+            },
+
+            staticRenderFns: summaryTemplateRenderFns,
+
+            mounted: function() {
+                this.templateRender = summaryHtml.render;
+
+                for (var i in summaryHtml.staticRenderFns) {
+                    summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
+                }
             },
 
             render: function(h) {
@@ -527,45 +503,27 @@
             },
 
             methods: {
-                onSubmit: function () {
+                onSubmit: function() {
                     var this_this = this;
 
-                    axios.post('{{ route('shop.checkout.check.coupons') }}', {
-                        code: this_this.code
-                    }).then(function(response) {
-                        this_this.coupon_used = true;
-
-                        document.getElementById("discount-detail").style.display = "block";
-                        document.getElementById("discount-detail-discount-amount").innerHTML = response.data.result.formatted_discount;
-
-                        document.getElementById("grand-total-amount-detail").innerHTML = response.data.result.grand_total;
-                    }).catch(function(error) {
-                        console.log(error.data);
-                    });
+                    axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.code})
+                        .then(function(response) {
+                            this_this.$emit('onApplyCoupon')
+                        })
+                        .catch(function(error) {});
                 },
 
                 removeCoupon: function () {
                     var this_this = this;
 
                     axios.post('{{ route('shop.checkout.remove.coupon') }}')
-                    .then(function(response) {
-                        this_this.coupon_used = false;
-
-                        this_this.code = '';
-
-                        console.log(response.data.data.grand_total);
-
-                        document.getElementById("discount-detail").style.display = "none";
-
-                        document.getElementById("grand-total-amount-detail").innerHTML = response.data.data.grand_total;
-                    }).catch(function(error) {
-                        console.log(error.data);
-
-                        this_this.error_message = '{{ __('shop::app.checkout.onepage.total.cannot-apply-coupon') }}'
-                    });
+                        .then(function(response) {
+                            this_this.$emit('onRemoveCoupon')
+                        })
+                        .catch(function(error) {});
                 }
             }
-        });
+        })
     </script>
 
 @endpush
