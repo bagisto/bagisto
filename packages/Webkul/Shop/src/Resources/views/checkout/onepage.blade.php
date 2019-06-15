@@ -480,6 +480,8 @@
                 return {
                     templateRender: null,
 
+                    coupon_code: null,
+
                     error_message: ''
                 }
             },
@@ -506,7 +508,7 @@
                 onSubmit: function() {
                     var this_this = this;
 
-                    axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.code})
+                    axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.coupon_code})
                         .then(function(response) {
                             this_this.$emit('onApplyCoupon')
                         })
