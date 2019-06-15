@@ -538,7 +538,7 @@
                         document.getElementById("discount-detail").style.display = "block";
                         document.getElementById("discount-detail-discount-amount").innerHTML = response.data.result.formatted_discount;
 
-                        document.getElementById("grand-total-amount-detail").innerHTML = response.data.result.grand_total;
+                        document.getElementById("discount-detail-discount-amount").innerHTML = response.data.result.formatted_discount;
                     }).catch(function(error) {
                         console.log(error.data);
                     });
@@ -550,14 +550,8 @@
                     axios.post('{{ route('shop.checkout.remove.coupon') }}')
                     .then(function(response) {
                         this_this.coupon_used = false;
-
                         this_this.code = '';
-
-                        console.log(response.data.data.grand_total);
-
                         document.getElementById("discount-detail").style.display = "none";
-
-                        document.getElementById("grand-total-amount-detail").innerHTML = response.data.data.grand_total;
                     }).catch(function(error) {
                         console.log(error.data);
 
