@@ -149,12 +149,13 @@
                                 var splitted = buyNowLink.split("/");
 
                                 splitted.pop();
+                                splitted.pop();
 
                                 lastItem = this.selectedProductId;
 
                                 var joined = splitted.join('/');
 
-                                var newBuyNowUrl = joined + '/' + lastItem;
+                                var newBuyNowUrl = joined + '/' + lastItem + '/' + quantity;
 
                                 $('.btn.buynow').attr('data-href', newBuyNowUrl);
                             }
