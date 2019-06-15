@@ -83,7 +83,7 @@ class CartRuleController extends Controller
      */
     public function store()
     {
-        $validated = $this->validate($data, [
+        $validated = $this->validate(request(), [
             'name' => 'required|string',
             'description' => 'string',
             'customer_groups' => 'required|array',
