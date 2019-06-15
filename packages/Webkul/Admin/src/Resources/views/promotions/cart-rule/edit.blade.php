@@ -76,7 +76,7 @@
                                         </div>
                                     </datetime>
 
-                                    {{-- <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
+                                    <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
                                         <label for="customer_groups" class="required">{{ __('admin::app.promotion.general-info.cust-groups') }}</label>
 
                                         <select type="text" class="control" name="customer_groups[]" v-model="customer_groups" v-validate="'required'" value="{{ old('customer_groups[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
@@ -86,8 +86,8 @@
                                             @endforeach
                                         </select>
 
-                                        <span class="control-error" v-if="errors.has('customer_groups')">@{{ errors.first('customer_groups') }}</span>
-                                    </div> --}}
+                                        <span class="control-error" v-if="errors.has('customer_groups[]')">@{{ errors.first('customer_groups[]') }}</span>
+                                    </div>
 
                                     <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                         <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>

@@ -83,7 +83,7 @@ class CartRuleController extends Controller
      */
     public function store()
     {
-        $validated = $this->validate($data, [
+        $validated = $this->validate(request(), [
             'name' => 'required|string',
             'description' => 'string',
             'customer_groups' => 'required|array',
@@ -114,9 +114,13 @@ class CartRuleController extends Controller
         // set per customer usage limit
         $data['per_customer'] = 0;
 
-        // check starts from and ends till
-        if ($data['starts_from'] == "" || $data['ends_till'] == "") {
+        // check if starts_from is null
+        if ($data['starts_from'] == "") {
             $data['starts_from'] = null;
+        }
+
+        // check if end_till is null
+        if ($data['ends_till'] == "") {
             $data['ends_till'] = null;
         }
 
@@ -282,12 +286,10 @@ class CartRuleController extends Controller
      */
     public function update($id)
     {
-        $types = config('price_rules.cart.validations');
-
         $this->validate(request(), [
             'name' => 'required|string',
             'description' => 'string',
-            // 'customer_groups' => 'required|array',
+            'customer_groups' => 'required|array',
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
@@ -304,35 +306,58 @@ class CartRuleController extends Controller
             'label' => 'array|nullable'
         ]);
 
-        $data['usage_limit'] = 0;
-        $data['per_customer'] = 0;
-
+        // collecting request in $data
         $data = request()->all();
 
-        if ($data['starts_from'] == "" || $data['ends_till'] == "") {
+        // unset request token from $data
+        unset($data['_token']);
+
+        // condition validation rules from config
+        $types = config('price_rules.cart.validations');
+
+        // set rule uasge limit
+        $data['usage_limit'] = 0;
+
+        // set rule usage per customer
+        $data['per_customer'] = 0;
+
+        // check if starts_from is null
+        if ($data['starts_from'] == "") {
             $data['starts_from'] = null;
+        }
+
+        // check if end_till is null
+        if ($data['ends_till'] == "") {
             $data['ends_till'] = null;
         }
 
-        unset($data['_token']);
-
+        // set channels
         $channels = $data['channels'];
 
+        // unset the channels from $data
         unset($data['channels']);
 
-        // $customer_groups = $data['customer_groups'];
-        // unset($data['customer_groups']);
-        // unset($data['criteria']);
+        // set customer_groups
+        $customer_groups = $data['customer_groups'];
 
+        // unset customer groups
+        unset($data['customer_groups']);
+
+        // unset criteria from conditions
+        unset($data['criteria']);
+
+        // set labels and unset them from $data
         if (isset($data['label'])) {
             $labels = $data['label'];
 
             unset($data['label']);
         }
 
+        // unset cart_attributes and attributes from $data
         unset($data['cart_attributes']);
         unset($data['attributes']);
 
+        // prepare actions from data for json action
         if (isset($data['disc_amount']) && $data['action_type'] == config('pricerules.cart.validations.2')) {
             $data['actions'] = [
                 'action_type' => $data['action_type'],
@@ -349,16 +374,20 @@ class CartRuleController extends Controller
             ];
         }
 
+        // encode php array to json for actions
         $data['actions'] = json_encode($data['actions']);
 
+        // prepare conditions from data for json conditions
         if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]") {
             $data['conditions'] = null;
         } else {
             $data['conditions'] = json_encode($data['all_conditions']);
         }
 
+        // unset all_conditions from conditions
         unset($data['all_conditions']);
 
+        // set coupons from $data
         if ($data['use_coupon']) {
             // if (isset($data['auto_generation']) && $data['auto_generation']) {
             $data['auto_generation'] = 0;
@@ -386,13 +415,19 @@ class CartRuleController extends Controller
         //     $coupons['limit'] = $data['usage_limit'];
         // }
 
+        // update cart rule
         $ruleUpdated = $this->cartRule->update($data, $id);
 
-        // $ruleGroupUpdated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleUpdated);
+        // update customer groups for cart rule
+        $ruleGroupUpdated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleUpdated);
+
+        // update customer groups for cart rule
         $ruleChannelUpdated = $this->cartRule->ChannelSync($channels, $ruleUpdated);
 
+        // update labels
         $labelsUpdated = $this->cartRule->LabelSync($labels, $ruleUpdated);
 
+        // check coupons set conditions
         if (isset($coupons)) {
             $coupons['cart_rule_id'] = $ruleUpdated->id;
             // $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
@@ -400,7 +435,7 @@ class CartRuleController extends Controller
             $couponUpdated = $ruleUpdated->coupons->update($coupons);
         }
 
-        if ($ruleUpdated && $ruleChannelUpdated) {
+        if ($ruleUpdated && $ruleGroupUpdated && $ruleChannelUpdated) {
             if (isset($couponUpdated) && $couponUpdated) {
                 session()->flash('info', trans('admin::app.promotion.status.success-coupon'));
             }
@@ -415,6 +450,9 @@ class CartRuleController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
+    /**
+     * Delete
+     */
     public function destroy($id)
     {
         $cartRule = $this->cartRule->findOrFail($id);
@@ -430,6 +468,11 @@ class CartRuleController extends Controller
         }
     }
 
+    /**
+     * Get Countries and states list from core helpers
+     *
+     * @return Array
+     */
     public function getStatesAndCountries()
     {
         $countries = core()->countries()->toArray();
