@@ -75,7 +75,7 @@ return [
             0 => 'percent_of_product',
             1 => 'fixed_amount',
             2 => 'buy_a_get_b',
-            3 => 'fixed_amount_cart'
+            // 3 => 'fixed_amount_cart'
         ],
 
         'conditions' => [

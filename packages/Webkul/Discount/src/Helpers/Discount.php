@@ -36,6 +36,11 @@ class Discount
         $this->cartRuleCart = $cartRuleCart;
     }
 
+    /**
+     * Applies the non couponable rule on the current cart
+     *
+     * @return mixed
+     */
     public function applyNonCouponAbleRule()
     {
         $cart = \Cart::getCart();
@@ -162,6 +167,11 @@ class Discount
         }
     }
 
+    /**
+     * Applies the couponable rule on the current cart
+     *
+     * @return mixed
+     */
     public function applyCouponAbleRule($code)
     {
         $cart = \Cart::getCart();
@@ -314,7 +324,7 @@ class Discount
     }
 
     /**
-     * This function checks whether the rule is getting applied on the current cart or noy
+     * This function checks whether the rule is getting applied on the current cart or not
      *
      * @return mixed
      */
@@ -369,10 +379,22 @@ class Discount
         if ($cart->items_qty >= $disc_threshold && $realQty >= $disc_quantity) {
             if ($action_type == config('pricerules.cart.validation.0')) {
                 $amountDiscounted = $leastWorthItem['total'] * ($disc_amount / 100);
+
+                if ($amountDiscounted > $leastWorthItem['total']) {
+                    $amountDiscounted = $leastWorthItem['total'];
+                }
             } else if ($action_type == config('pricerules.cart.validation.1')) {
                 $amountDiscounted = $disc_amount;
+
+                if ($amountDiscounted > $leastWorthItem['total']) {
+                    $amountDiscounted = $leastWorthItem['total'];
+                }
             } else if ($action_type == config('pricerules.cart.validation.2')) {
                 $amountDiscounted = $disc_amount;
+
+                if ($amountDiscounted > $leastWorthItem['total']) {
+                    $amountDiscounted = $leastWorthItem['total'];
+                }
             }
         }
 
@@ -381,8 +403,8 @@ class Discount
         $report['discount'] = $amountDiscounted;
         $report['action'] = $action_type;
         $report['formatted_discount'] = core()->formatPrice($amountDiscounted, $cart->cart_currency_code);
-        $report['new_grand_total'] = $cart->grand_total - $amountDiscounted;
-        $report['formatted_new_grand_total'] = core()->formatPrice($cart->grand_total - $amountDiscounted, $cart->cart_currency_code);
+        $report['grand_total'] = $cart->grand_total - $amountDiscounted;
+        $report['formatted_grand_total'] = core()->formatPrice($cart->grand_total - $amountDiscounted, $cart->cart_currency_code);
         $report['priority'] = $rule->priority;
 
         return $report;
@@ -423,25 +445,10 @@ class Discount
     }
 
     /**
-     * Removes the cart rule from the cart
+     * Removes the couponable rule from the current cart and cart rule cart
+     *
+     * @return boolean
      */
-    public function removeRule()
-    {
-        $cart = Cart::getCart();
-
-        $appliedRule = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
-        ]);
-
-        if ($appliedRule->count() == 0) {
-            Cart::clearDiscount();
-
-            Cart::collectTotals();
-        }
-
-        return true;
-    }
-
     public function removeCoupon()
     {
         $cart = \Cart::getCart();
@@ -452,6 +459,24 @@ class Discount
 
         if ($existingRule->count()) {
             if ($existingRule->first()->delete()) {
+
+                foreach ($cart->items as $item) {
+                    if ($item->discount_amount > 0) {
+                        $item->update([
+                            'discount_amount' => 0,
+                            'base_discount_amount' => 0,
+                            'discount_percent' => 0,
+                            'coupon_code' => NULL
+                        ]);
+                    }
+                }
+
+                $cart->update([
+                    'coupon_code' => NULL,
+                    'discount_amount' => 0,
+                    'base_discount_amount' => 0
+                ]);
+
                 return true;
             } else {
                 return false;

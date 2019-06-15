@@ -266,6 +266,20 @@ class CartController extends Controller
 
         $result = Cart::applyCoupon($code);
 
+        if ($result != null) {
+            return response()->json([
+                'success' => true,
+                'message' => trans('shop::app.checkout.onepage.total.coupon-applied'),
+                'result' => $result
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.checkout.onepage.total.cannot-apply-coupon'),
+                'result' => null
+            ]);
+        }
+
         return $result;
     }
 
@@ -278,14 +292,6 @@ class CartController extends Controller
         $nonCouponAbleRules = Cart::applyNonCoupon();
 
         return $nonCouponAbleRules;
-    }
-
-    /**
-     * To save the discount values inside the tables of orders and cart
-     */
-    public function saveDiscount()
-    {
-        return ['hellow'];
     }
 
     /**
