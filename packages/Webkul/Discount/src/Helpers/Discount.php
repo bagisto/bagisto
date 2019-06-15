@@ -376,24 +376,36 @@ class Discount
         $leastWorthItem = \Cart::leastWorthItem();
         $realQty = $leastWorthItem['quantity'];
 
-        if ($cart->items_qty >= $disc_threshold && $realQty >= $disc_quantity) {
+        if ($cart->items_qty >= $disc_threshold) {
             if ($action_type == config('pricerules.cart.validation.0')) {
-                $amountDiscounted = $leastWorthItem['total'] * ($disc_amount / 100);
+                $amountDiscounted = $leastWorthItem['price'] * ($disc_amount / 100);
 
-                if ($amountDiscounted > $leastWorthItem['total']) {
-                    $amountDiscounted = $leastWorthItem['total'];
+                if ($realQty > $disc_quantity) {
+                    $amountDiscounted = $amountDiscounted * $disc_quantity;
+                }
+
+                if ($amountDiscounted > $leastWorthItem['price']) {
+                    $amountDiscounted = $leastWorthItem['price'];
                 }
             } else if ($action_type == config('pricerules.cart.validation.1')) {
                 $amountDiscounted = $disc_amount;
 
-                if ($amountDiscounted > $leastWorthItem['total']) {
-                    $amountDiscounted = $leastWorthItem['total'];
+                if ($realQty > $disc_quantity) {
+                    $amountDiscounted = $amountDiscounted * $disc_quantity;
+                }
+
+                if ($amountDiscounted > $leastWorthItem['price']) {
+                    $amountDiscounted = $leastWorthItem['price'];
                 }
             } else if ($action_type == config('pricerules.cart.validation.2')) {
                 $amountDiscounted = $disc_amount;
 
-                if ($amountDiscounted > $leastWorthItem['total']) {
-                    $amountDiscounted = $leastWorthItem['total'];
+                if ($realQty > $disc_quantity) {
+                    $amountDiscounted = $amountDiscounted * $disc_quantity;
+                }
+
+                if ($amountDiscounted > $leastWorthItem['price']) {
+                    $amountDiscounted = $leastWorthItem['price'];
                 }
             }
         }
