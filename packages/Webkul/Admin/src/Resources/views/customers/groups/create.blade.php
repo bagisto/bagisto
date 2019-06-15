@@ -28,6 +28,13 @@
                 <div class="form-container">
                     @csrf()
 
+
+                    <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
+                        <label for="code" class="required">{{ __('admin::app.customers.groups.code') }}</label>
+                        <input v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.customers.groups.code') }}&quot;" v-code/>
+                        <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
+                    </div>
+
                     <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                         <label for="name" class="required">
                             {{ __('admin::app.customers.groups.name') }}
