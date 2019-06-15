@@ -310,6 +310,8 @@ class Discount
 
                     \Cart::collectTotals();
 
+                    $report['grand_total'] = core()->currency(\Cart::getCart()->grand_total);
+
                     break;
                 }
             }
@@ -471,7 +473,6 @@ class Discount
 
         if ($existingRule->count()) {
             if ($existingRule->first()->delete()) {
-
                 foreach ($cart->items as $item) {
                     if ($item->discount_amount > 0) {
                         $item->update([
@@ -488,6 +489,8 @@ class Discount
                     'discount_amount' => 0,
                     'base_discount_amount' => 0
                 ]);
+
+                \Cart::collectTotals();
 
                 return true;
             } else {
