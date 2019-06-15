@@ -44,7 +44,7 @@
         </label>
     </div>
 
-    <div v-if="hide_discount">
+    <div @if (! request()->is('checkout/cart')) v-if="hide_discount" @endif>
         @if (! request()->is('checkout/cart'))
             <div class="discount">
                 <div class="discount-group" v-if="! coupon_used">
