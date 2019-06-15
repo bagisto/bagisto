@@ -83,7 +83,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $customerGroup = $this->customerGroup->all();
+        $customerGroup = $this->customerGroup->findWhere([['id', '<>', 0]]);
 
         $channelName = $this->channel->all();
 
@@ -131,7 +131,7 @@ class CustomerController extends Controller
     {
         $customer = $this->customer->findOrFail($id);
 
-        $customerGroup = $this->customerGroup->all();
+        $customerGroup = $this->customerGroup->findWhere([['id', '<>', 0]]);
 
         $channelName = $this->channel->all();
 
