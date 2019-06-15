@@ -305,16 +305,12 @@ class CartController extends Controller
         if ($result) {
             return response()->json([
                 'success' => true,
-                'message' => trans('admin::app.promotion.status.coupon-removed'),
-                'data' => [
-                    'grand_total' => core()->currency(Cart::getCart()->grand_total)
-                ]
+                'message' => trans('admin::app.promotion.status.coupon-removed')
             ]);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => trans('admin::app.promotion.status.coupon-remove-failed'),
-                'data' => null
+                'message' => trans('admin::app.promotion.status.coupon-remove-failed')
             ]);
         }
     }
