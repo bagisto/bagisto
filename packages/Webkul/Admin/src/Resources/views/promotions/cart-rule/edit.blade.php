@@ -187,7 +187,7 @@
 
                                     <div class="control-group">
                                         {{ __('admin::app.promotion.general-info.test-mode') }}
-                                        <select class="control" v-model="match_criteria" style="margin-right: 15px;">
+                                        <select class="control" v-model="match_criteria" name="match_criteria" style="margin-right: 15px;">
                                             {{ $i = 0 }}
                                             @foreach(config('pricerules.test_mode') as $key => $value)
                                                 <option value="{{ $key }}">{{ $value }}</option>
@@ -213,7 +213,7 @@
 
                                                     <div v-if='conditions_list[index].type == "string"'>
                                                         <select class="control" name="cart_attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
-                                                            <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
+                                                            <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
                                                         </select>
 
                                                         <div v-if='conditions_list[index].attribute == "shipping_state"'>
@@ -501,6 +501,7 @@
 
                     if (data.conditions != null) {
                         this.conditions_list = JSON.parse(JSON.parse(data.conditions));
+                        this.match_criteria = this.conditions_list.pop().criteria;
                     }
 
                     criteria = null;
@@ -511,7 +512,7 @@
                         if (this.criteria == 'product_subselection' || this.criteria == 'cart') {
                             this.condition_on = this.criteria;
                         } else {
-                            alert('please try again');
+                            alert('please select type of condition');
 
                             return false;
                         }
@@ -568,33 +569,8 @@
 
                     onSubmit: function (e) {
                         if (this.conditions_list.length != 0) {
-
-                            indexes = [];
-
-                            for (i in this.conditions_list) {
-                                if (this.conditions_list[i].hasOwnProperty('criteria') && ! this.conditions_list[i].hasOwnProperty('attribute')) {
-                                    indexes.push(i);
-                                }
-                            }
-
-                            if (indexes.length > 1) {
-                                for (i in indexes) {
-                                    console.log(indexes[i]);
-                                    if (this.conditions_list.length )
-                                    this.conditions_list.splice(indexes[i], 1);
-                                }
-                            } else {
-
-                            }
-
-                            return false;
-
-                            this.conditions_list.push({'criteria': this.match_criteria});
+                            this.all_conditions = JSON.stringify(this.conditions_list);
                         }
-
-                        return false;
-
-                        this.all_conditions = JSON.stringify(this.conditions_list);
 
                         this.$validator.validateAll().then(result => {
                             if (result) {

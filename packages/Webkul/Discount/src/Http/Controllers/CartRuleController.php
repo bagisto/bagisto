@@ -166,7 +166,7 @@ class CartRuleController extends Controller
         $data['actions'] = json_encode($data['actions']);
 
         // check if all
-        if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]") {
+        if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]" || $data['all_conditions'] == "") {
             $data['conditions'] = null;
         } else {
             $data['conditions'] = json_encode($data['all_conditions']);
@@ -343,9 +343,6 @@ class CartRuleController extends Controller
         // unset customer groups
         unset($data['customer_groups']);
 
-        // unset criteria from conditions
-        unset($data['criteria']);
-
         // set labels and unset them from $data
         if (isset($data['label'])) {
             $labels = $data['label'];
@@ -378,10 +375,22 @@ class CartRuleController extends Controller
         $data['actions'] = json_encode($data['actions']);
 
         // prepare conditions from data for json conditions
-        if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]") {
+        if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]" || $data['all_conditions'] == "") {
             $data['conditions'] = null;
         } else {
-            $data['conditions'] = json_encode($data['all_conditions']);
+            if (count(json_decode($data['all_conditions']))) {
+                $conditions = json_decode($data['all_conditions']);
+
+                foreach($conditions as $condition) {
+                    if (isset($condition->criteria)) {
+                        $condition->criteria = $data['match_criteria'];
+                    }
+                }
+
+                $data['conditions'] = json_encode($conditions);
+
+                unset($data['match_criteria']);
+            }
         }
 
         // unset all_conditions from conditions

@@ -31,7 +31,7 @@
         @endif
     </ul>
 
-    {{-- <div class="close-nav-aside">
+    <!-- <div class="close-nav-aside">
         <i class="icon angle-left-icon close-icon"></i>
-    </div> --}}
+    </div> -->
 </div>

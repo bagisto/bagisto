@@ -213,7 +213,7 @@
 
                                                     <div v-if='conditions_list[index].type == "string"'>
                                                         <select class="control" name="cart_attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
-                                                            <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
+                                                            <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
                                                         </select>
 
                                                         <div v-if='conditions_list[index].attribute == "shipping_state"'>
@@ -459,15 +459,13 @@
                     }
                 },
 
-                mounted () {
-                },
 
                 methods: {
                     addCondition () {
                         if (this.criteria == 'product_subselection' || this.criteria == 'cart') {
                             this.condition_on = this.criteria;
                         } else {
-                            alert('please try again');
+                            alert('Please select type of condition');
 
                             return false;
                         }
@@ -502,7 +500,6 @@
                         for (i in this.cart_input) {
                             if (i == selectedIndex) {
                                 this.conditions_list[index].type = this.cart_input[i].type;
-                                console.log(this.conditions_list[index]);
                             }
                         }
                     },
@@ -526,9 +523,9 @@
                     onSubmit: function (e) {
                         if (this.conditions_list.length != 0) {
                             this.conditions_list.push({'criteria': this.match_criteria});
-                        }
 
-                        this.all_conditions = JSON.stringify(this.conditions_list);
+                            this.all_conditions = JSON.stringify(this.conditions_list);
+                        }
 
                         this.$validator.validateAll().then(result => {
                             if (result) {

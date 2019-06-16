@@ -74,7 +74,7 @@
                 <div class="step-content review" v-show="currentStep == 4" id="summary-section" @applyDiscount="getOrderSummary" @removeDiscount="getOrderSummary">
                     <review-section v-if="currentStep == 4">
                         <div slot="body">
-                            <summary-section :active="true" @onCouponApply="getOrderSummary"></summary-section>
+                            <summary-section :active="true" @onCouponApply="getOrderSummary" v-if="currentStep == 4"></summary-section>
                         </div>
                     </review-section>
 
@@ -482,8 +482,6 @@
                     hide_discount: null,
 
                     error_message: '',
-
-                    call_count: 0,
                 }
             },
 
@@ -493,6 +491,12 @@
                 this.hide_discount = this.active;
 
                 this.templateRender = summaryHtml.render;
+
+                @if ($cart->coupon_code)
+                    this.code = '{{ $cart->coupon_code }}';
+
+                    this.coupon_used = true;
+                @endif
 
                 for (var i in summaryHtml.staticRenderFns) {
                     summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
@@ -516,7 +520,8 @@
                     }).then(function(response) {
                         this_this.coupon_used = true;
 
-                        this_this.getOrderSummary();
+                        r = this_this.getOrderSummary();
+                        console.log(summaryHtml);
                     }).catch(function(error) {
                     });
                 },
@@ -529,6 +534,9 @@
                         this_this.coupon_used = false;
 
                         this_this.code = '';
+
+                        r = this_this.getOrderSummary();
+                        console.log(summaryHtml);
                     }).catch(function(error) {});
                 },
 
@@ -539,7 +547,7 @@
                         .then(function(response) {
                             this_this.resetSummary = false;
 
-                            summaryHtml = Vue.compile(response.data.html)
+                            return summaryHtml = Vue.compile(response.data.html)
                             setTimeout(function() {
                                 this_this.resetSummary = true;
                             }, 0);

@@ -1,4 +1,4 @@
-<div class="order-summary" id="summary-template">
+<div class="order-summary">
     <h3>{{ __('shop::app.checkout.total.order-summary') }}</h3>
 
     <div class="item-detail">
@@ -45,7 +45,6 @@
     <div @if (! request()->is('checkout/cart')) v-if="hide_discount" @endif>
         @if (! request()->is('checkout/cart'))
             <div class="discount">
-                @{{ coupon_used }}
                 <div class="discount-group" v-if="! coupon_used">
                     <form class="coupon-form" method="post" @submit.prevent="onSubmit">
                         <div class="control-group mt-20" :class="[errors.has('code') ? 'has-error' : '']">

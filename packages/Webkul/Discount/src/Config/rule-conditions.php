@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'test_mode' => [
+        'all_are_true' => 'All conditions are true',
+        // 'all_are_false' => 'All conditions are false',
+        'any_is_true' => 'Any condition is true',
+        // 'any_is_false' => 'Any condition is false'
+    ],
+
     'conditions' => [
         'numeric' => [
             0 => 'Equals',
@@ -20,46 +27,6 @@ return [
         'boolean' => [
             0 => 'True/Yes',
             1 => 'False/No',
-        ]
-    ],
-
-    'catalog' => [
-        'actions' => [
-            0 => 'admin::app.promotion.catalog.apply-percent',
-            1 => 'admin::app.promotion.catalog.apply-fixed',
-            2 => 'admin::app.promotion.catalog.adjust-to-percent',
-            // 3 => 'admin::app.promotion.catalog.adjust-to-value'
-        ],
-
-        'attributes' => [
-            0 => [
-                    'name' => 'Sub-total',
-                    'type' =>  'numeric'
-                ],
-            1 => [
-                    'name' => 'Total Items Quantity',
-                    'type' => 'numeric'
-                ],
-            2 => [
-                    'name' => 'Total Weight',
-                    'type' => 'numeric'
-                ],
-            3 => [
-                    'name' => 'Payment Method',
-                    'type' => 'string'
-                ],
-            4 => [
-                    'name' => 'Shipping Postcode',
-                    'type' => 'string'
-                ],
-            5 => [
-                    'name' => 'Shipping State',
-                    'type' => 'string'
-                ],
-            6 => [
-                    'name' => 'Shipping Country',
-                    'type' => 'string'
-                ]
         ]
     ],
 
@@ -87,22 +54,12 @@ return [
                 '<' => 'Lesser than',
             ],
 
-            'text' => [
-                '=' => 'Equals',
-                '>=' => 'Greater or equals',
-                '<=' => 'Lesser or equals',
-                '>' => 'Greater than',
-                '<' => 'Lesser than',
-                '{}' => 'Contains',
-                '!{}' => 'Does not contains'
-            ],
-
             'string' => [
                 '=' => 'Equals',
-                '>=' => 'Greater or equals',
-                '<=' => 'Lesser or equals',
-                '>' => 'Greater than',
-                '<' => 'Lesser than',
+                // '>=' => 'Greater or equals',
+                // '<=' => 'Lesser or equals',
+                // '>' => 'Greater than',
+                // '<' => 'Lesser than',
                 '{}' => 'Contains',
                 '!{}' => 'Does not contains'
             ],
@@ -162,10 +119,43 @@ return [
         ]
     ],
 
-    'test_mode' => [
-        'all_are_true' => 'All conditions are true',
-        'all_are_false' => 'All conditions are false',
-        'any_is_true' => 'Any condition is true',
-        'any_is_false' => 'Any condition is false'
-    ]
+    'catalog' => [
+        'actions' => [
+            0 => 'admin::app.promotion.catalog.apply-percent',
+            1 => 'admin::app.promotion.catalog.apply-fixed',
+            2 => 'admin::app.promotion.catalog.adjust-to-percent',
+            // 3 => 'admin::app.promotion.catalog.adjust-to-value'
+        ],
+
+        'attributes' => [
+            0 => [
+                    'name' => 'Sub-total',
+                    'type' =>  'numeric'
+                ],
+            1 => [
+                    'name' => 'Total Items Quantity',
+                    'type' => 'numeric'
+                ],
+            2 => [
+                    'name' => 'Total Weight',
+                    'type' => 'numeric'
+                ],
+            3 => [
+                    'name' => 'Payment Method',
+                    'type' => 'string'
+                ],
+            4 => [
+                    'name' => 'Shipping Postcode',
+                    'type' => 'string'
+                ],
+            5 => [
+                    'name' => 'Shipping State',
+                    'type' => 'string'
+                ],
+            6 => [
+                    'name' => 'Shipping Country',
+                    'type' => 'string'
+                ]
+        ]
+    ],
 ];
