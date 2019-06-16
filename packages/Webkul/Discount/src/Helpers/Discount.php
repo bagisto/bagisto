@@ -121,7 +121,7 @@ class Discount
                     }
                 }
 
-                // fighting the edge case for non couponable discount rule
+                // fighting the edge case for non couponable discount rule with least id or older rule
                 foreach($canBeApplied as $rule) {
                     if ($rule['rule']->id == $leastId) {
                         $rule['used_coupon'] = false;
@@ -137,9 +137,22 @@ class Discount
                             }
                         }
 
-                        $this->save($rule['rule']);
+                        // check customer_groups
+                        if (auth()->guard('customer')->check()) {
+                            foreach($rule['rule']->customer_groups as $customer_group) {
+                                if (auth()->guard('customer')->user()->group->id == $customer_group->id) {
+                                    $this->save($rule['rule']);
 
-                        return $rule;
+                                    return $rule;
+                                }
+                            }
+                        } else if ($rule['rule']->is_guest) {
+                            $this->save($rule['rule']);
+
+                            return $rule;
+                        } else {
+                            return 'false';
+                        }
                     }
                 }
             }
@@ -148,20 +161,43 @@ class Discount
         if ($canBeApplied->count()) {
             $itemId = array_first($canBeApplied);
 
-            foreach (\Cart::getCart()->items as $item) {
-                if ($item->id == $itemId['item_id']) {
-                    $item->update([
-                        'discount_amount' => array_first($canBeApplied)['discount'],
-                        'base_discount_amount' => array_first($canBeApplied)['discount']
-                    ]);
+            if (auth()->guard('customer')->check()) {
+                foreach(array_first($canBeApplied)['rule']->customer_groups as $customer_group) {
+                    if (auth()->guard('customer')->user()->group->id == $customer_group->id) {
+                        $this->save($rule['rule']);
 
-                    break;
+                        foreach (\Cart::getCart()->items as $item) {
+                            if ($item->id == $itemId['item_id']) {
+                                $item->update([
+                                    'discount_amount' => array_first($canBeApplied)['discount'],
+                                    'base_discount_amount' => array_first($canBeApplied)['discount']
+                                ]);
+
+                                break;
+                            }
+                        }
+
+                        $this->save(array_first($canBeApplied)['rule']);
+
+                        return array_first($canBeApplied);
+                    }
                 }
+            } else if (array_first($canBeApplied)['rule']->is_guest) {
+                foreach (\Cart::getCart()->items as $item) {
+                    if ($item->id == $itemId['item_id']) {
+                        $item->update([
+                            'discount_amount' => array_first($canBeApplied)['discount'],
+                            'base_discount_amount' => array_first($canBeApplied)['discount']
+                        ]);
+
+                        break;
+                    }
+                }
+
+                $this->save(array_first($canBeApplied)['rule']);
+
+                return array_first($canBeApplied);
             }
-
-            $this->save(array_first($canBeApplied)['rule']);
-
-            return array_first($canBeApplied);
         } else {
             return 'false';
         }
@@ -524,7 +560,6 @@ class Discount
 
         $test_mode = config('pricerules.test_mode.0');
         $test_conditions = config('pricerules.cart.conditions');
-
         $result = 1;
 
         foreach ($conditions as $condition) {
