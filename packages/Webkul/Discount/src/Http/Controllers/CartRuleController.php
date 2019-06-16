@@ -79,7 +79,7 @@ class CartRuleController extends Controller
     }
 
     /**
-     * @return Redirect
+     * @return redirect
      */
     public function store()
     {
@@ -451,7 +451,9 @@ class CartRuleController extends Controller
     }
 
     /**
-     * Delete
+     * Deletes the cart rule
+     *
+     * @return JSON
      */
     public function destroy($id)
     {

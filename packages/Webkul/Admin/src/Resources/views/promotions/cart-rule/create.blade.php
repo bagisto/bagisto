@@ -476,7 +476,6 @@
                             this.conditions_list.push(this.cart_object);
 
                             this.cart_object = {
-                                criteria: null,
                                 attribute: null,
                                 condition: null,
                                 value: []
@@ -526,7 +525,7 @@
 
                     onSubmit: function (e) {
                         if (this.conditions_list.length != 0) {
-                            this.conditions_list.test_mode = this.match_criteria;
+                            this.conditions_list.push({'criteria': this.match_criteria});
                         }
 
                         this.all_conditions = JSON.stringify(this.conditions_list);

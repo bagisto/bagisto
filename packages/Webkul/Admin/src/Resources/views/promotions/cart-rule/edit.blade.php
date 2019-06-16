@@ -567,12 +567,32 @@
                     },
 
                     onSubmit: function (e) {
+                        if (this.conditions_list.length != 0) {
 
-                        // if (this.conditions_list.length != 0) {
-                        //     this.conditions_list.push(this.match_criteria);
-                        // }
+                            indexes = [];
 
-                        console.log(JSON.stringify(this.conditions_list));
+                            for (i in this.conditions_list) {
+                                if (this.conditions_list[i].hasOwnProperty('criteria') && ! this.conditions_list[i].hasOwnProperty('attribute')) {
+                                    indexes.push(i);
+                                }
+                            }
+
+                            if (indexes.length > 1) {
+                                for (i in indexes) {
+                                    console.log(indexes[i]);
+                                    if (this.conditions_list.length )
+                                    this.conditions_list.splice(indexes[i], 1);
+                                }
+                            } else {
+
+                            }
+
+                            return false;
+
+                            this.conditions_list.push({'criteria': this.match_criteria});
+                        }
+
+                        return false;
 
                         this.all_conditions = JSON.stringify(this.conditions_list);
 

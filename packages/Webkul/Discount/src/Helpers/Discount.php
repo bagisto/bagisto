@@ -502,6 +502,8 @@ class Discount
     }
 
     protected function testIfAllConditionAreTrue($conditions, $cart) {
+        array_pop($conditions);
+
         $shipping_address = $cart->getShippingAddressAttribute() ?? '';
 
         $shipping_method = $cart->shipping_method ?? '';
@@ -524,6 +526,7 @@ class Discount
         $test_conditions = config('pricerules.cart.conditions');
 
         $result = 1;
+
         foreach ($conditions as $condition) {
             $actual_value = ${$condition->attribute};
             $test_value = $condition->value;
