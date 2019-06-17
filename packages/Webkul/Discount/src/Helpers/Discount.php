@@ -139,6 +139,8 @@ abstract class Discount
         ]);
 
         if (count($existingRule)) {
+            $this->clearDiscount();
+
             if ($existingRule->first()->cart_rule_id != $rule->id) {
                 $existingRule->first()->update([
                     'cart_rule_id' => $rule->id
@@ -149,6 +151,8 @@ abstract class Discount
                 return true;
             }
         } else {
+            $this->clearDiscount();
+
             $this->cartRuleCart->create([
                 'cart_id' => $cart->id,
                 'cart_rule_id' => $rule->id
