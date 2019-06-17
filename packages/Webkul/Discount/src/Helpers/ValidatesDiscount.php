@@ -4,7 +4,7 @@ namespace Webkul\Discount\Helpers;
 
 use Webkul\Discount\Helpers\Discount;
 
-class ValidatesDiscount extends Discount
+class ValidatesDiscount
 {
     /**
      * Validates the currently applied cart rule on the current cart
@@ -19,8 +19,6 @@ class ValidatesDiscount extends Discount
             $appliedRule = $appliedRule->first()->cart_rule;
 
             $applicability = $this->checkApplicability($appliedRule);
-
-            dd($applicability);
         }
     }
 }
