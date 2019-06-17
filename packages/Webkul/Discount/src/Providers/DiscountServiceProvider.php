@@ -35,5 +35,9 @@ class DiscountServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/rule-conditions.php', 'pricerules'
         );
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/discount-rules.php', 'discount-rules'
+        );
     }
 }

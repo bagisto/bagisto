@@ -12,8 +12,6 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
-use Webkul\Discount\Helpers\Discount;
 use Webkul\Product\Helpers\Price;
 
 /**
@@ -82,16 +80,6 @@ class Cart {
     protected $customerAddress;
 
     /**
-     * CartRule Repository instance
-    */
-    protected $cartRule;
-
-    /**
-     * Discount helper instance
-    */
-    protected $discount;
-
-    /**
      * Suppress the session flash messages
     */
     protected $suppressFlash;
@@ -125,8 +113,6 @@ class Cart {
         TaxCategoryRepository $taxCategory,
         WishlistRepository $wishlist,
         CustomerAddressRepository $customerAddress,
-        CartRule $cartRule,
-        Discount $discount,
         Price $price
     )
     {
@@ -145,10 +131,6 @@ class Cart {
         $this->wishlist = $wishlist;
 
         $this->customerAddress = $customerAddress;
-
-        $this->cartRule = $cartRule;
-
-        $this->discount = $discount;
 
         $this->price = $price;
 
@@ -1234,96 +1216,5 @@ class Cart {
                 return $result;
             }
         }
-    }
-
-    public function applyCoupon($code)
-    {
-        $result = $this->discount->applyCouponAbleRule($code);
-
-        return $result;
-    }
-
-    public function applyNonCoupon()
-    {
-        $result = $this->discount->applyNonCouponAbleRule();
-
-        return $result;
-    }
-
-    /**
-     * Removes discount from the cart and calls collect totals
-     *
-     * @return void
-     */
-    public function clearDiscount()
-    {
-        $cartItems = $this->getCart()->items;
-
-        foreach($cartItems as $item) {
-            $item->update([
-                'coupon_code' => NULL,
-                'discount_percent' => 0,
-                'discount_amount' => 0,
-                'base_discount_amount' => 0
-            ]);
-        }
-
-        $this->getCart()->update([
-            'coupon_code' => NULL,
-            'discount_amount' => 0,
-            'base_discount_amount' => 0
-        ]);
-
-        return true;
-    }
-
-    public function removeCoupon()
-    {
-        $result = $this->discount->removeCoupon();
-
-        return $result;
-    }
-
-    public function leastWorthItem()
-    {
-        $cart = $this->getCart();
-        $leastValue = 999999999999;
-        $leastSubTotal = [];
-
-        foreach ($cart->items as $item) {
-            if ($item->price < $leastValue) {
-                $leastValue = $item->price;
-                $leastSubTotal = [
-                    'id' => $item->id,
-                    'total' => $item->total,
-                    'base_total' => $leastValue,
-                    'quantity' => $item->quantity,
-                    'price' => $item->price
-                ];
-            }
-        }
-
-        return $leastSubTotal;
-    }
-
-    public function maxWorthItem()
-    {
-        $cart = $this->getCart();
-        $maxValue = 0;
-        $maxSubTotal = [];
-
-        foreach ($cart->items as $item) {
-            if ($item->base_total > $maxValue) {
-                $maxValue = $item->total;
-                $maxSubTotal = [
-                    'id' => $item->id,
-                    'total' => $item->total,
-                    'base_total' => $maxValue,
-                    'quantity' => $item->quantity
-                ];
-            }
-        }
-
-        return $maxSubTotal;
     }
 }

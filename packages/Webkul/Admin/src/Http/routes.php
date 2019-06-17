@@ -649,27 +649,27 @@ Route::group(['middleware' => ['web']], function () {
 
                 // Route::post('fetch/options', 'Webkul\Discount\Http\Controllers\CatalogRuleController@fetchAttributeOptions')->name('admin.catalog-rule.options');
 
-                Route::get('/cart-rules', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [
+                Route::get('cart-rules', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [
                     'view' => 'admin::promotions.cart-rule.index'
                 ])->name('admin.cart-rule.index');
 
-                Route::get('/cart-rule/create', 'Webkul\Discount\Http\Controllers\CartRuleController@create')->defaults('_config', [
+                Route::get('cart-rules/create', 'Webkul\Discount\Http\Controllers\CartRuleController@create')->defaults('_config', [
                     'view' => 'admin::promotions.cart-rule.create'
                 ])->name('admin.cart-rule.create');
 
-                Route::post('/cart-rule/store', 'Webkul\Discount\Http\Controllers\CartRuleController@store')->defaults('_config', [
+                Route::post('cart-rules/store', 'Webkul\Discount\Http\Controllers\CartRuleController@store')->defaults('_config', [
                     'redirect' => 'admin.cart-rule.index'
                 ])->name('admin.cart-rule.store');
 
-                Route::get('/cart-rule/edit/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@edit')->defaults('_config', [
+                Route::get('cart-rules/edit/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@edit')->defaults('_config', [
                     'view' => 'admin::promotions.cart-rule.edit'
                 ])->name('admin.cart-rule.edit');
 
-                Route::post('/cart-rule/update/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@update')->defaults('_config', [
+                Route::post('cart-rules/update/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@update')->defaults('_config', [
                     'redirect' => 'admin.cart-rule.index'
                 ])->name('admin.cart-rule.update');
 
-                Route::post('/cart-rule/delete/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@destroy')->name('admin.cart-rule.delete');
+                Route::post('cart-rules/delete/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@destroy')->name('admin.cart-rule.delete');
             });
         });
     });
