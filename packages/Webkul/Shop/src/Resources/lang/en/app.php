@@ -456,7 +456,8 @@ return [
             'new-grand-total' => 'New Grand Total',
             'coupon' => 'Coupon',
             'coupon-applied' => 'Coupon Applied',
-            'remove-coupon' => 'Remove Coupon'
+            'remove-coupon' => 'Remove Coupon',
+            'cannot-apply-coupon' => 'Cannot Apply Coupon'
         ],
 
         'success' => [

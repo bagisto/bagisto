@@ -155,7 +155,7 @@
         </div>
 
         <div class="pull-right" style="width: 40%; float: left;">
-            @include('shop::checkout.total.summary', ['cart' => $cart])
+            <slot name="summary-section"></slot>
         </div>
     </div>
 </div>

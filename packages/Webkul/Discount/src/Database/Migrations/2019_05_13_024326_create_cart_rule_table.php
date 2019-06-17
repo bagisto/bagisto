@@ -39,8 +39,8 @@ class CreateCartRuleTable extends Migration
             $table->integer('sort_order')->unsigned()->default(0);
             $table->string('action_type')->nullable();
             $table->decimal('disc_amount', 12, 4)->default(0);
-            $table->decimal('disc_quantity', 12, 4)->default(0);
-            $table->string('disc_threshold')->default(0);
+            $table->decimal('disc_quantity', 12, 4)->default(1);
+            $table->string('disc_threshold')->default(1);
             $table->integer('coupon_type')->default(1);
             $table->boolean('auto_generation')->default(0);
             $table->boolean('apply_to_shipping')->default(0);

@@ -74,7 +74,7 @@
                                         </div>
                                     </datetime>
 
-                                    {{-- <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
+                                    <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
                                         <label for="customer_groups" class="required">{{ __('admin::app.promotion.general-info.cust-groups') }}</label>
 
                                         <select type="text" class="control" name="customer_groups[]" v-model="customer_groups" v-validate="'required'" value="{{ old('customer_groups[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
@@ -85,7 +85,7 @@
                                         </select>
 
                                         <span class="control-error" v-if="errors.has('customer_groups')">@{{ errors.first('customer_groups') }}</span>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                         <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
@@ -213,7 +213,7 @@
 
                                                     <div v-if='conditions_list[index].type == "string"'>
                                                         <select class="control" name="cart_attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
-                                                            <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
+                                                            <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
                                                         </select>
 
                                                         <div v-if='conditions_list[index].attribute == "shipping_state"'>
@@ -459,15 +459,13 @@
                     }
                 },
 
-                mounted () {
-                },
 
                 methods: {
                     addCondition () {
                         if (this.criteria == 'product_subselection' || this.criteria == 'cart') {
                             this.condition_on = this.criteria;
                         } else {
-                            alert('please try again');
+                            alert('Please select type of condition');
 
                             return false;
                         }
@@ -476,7 +474,6 @@
                             this.conditions_list.push(this.cart_object);
 
                             this.cart_object = {
-                                criteria: null,
                                 attribute: null,
                                 condition: null,
                                 value: []
@@ -503,7 +500,6 @@
                         for (i in this.cart_input) {
                             if (i == selectedIndex) {
                                 this.conditions_list[index].type = this.cart_input[i].type;
-                                console.log(this.conditions_list[index]);
                             }
                         }
                     },
@@ -526,10 +522,10 @@
 
                     onSubmit: function (e) {
                         if (this.conditions_list.length != 0) {
-                            this.conditions_list.test_mode = this.match_criteria;
-                        }
+                            this.conditions_list.push({'criteria': this.match_criteria});
 
-                        this.all_conditions = JSON.stringify(this.conditions_list);
+                            this.all_conditions = JSON.stringify(this.conditions_list);
+                        }
 
                         this.$validator.validateAll().then(result => {
                             if (result) {

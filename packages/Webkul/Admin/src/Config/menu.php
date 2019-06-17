@@ -96,7 +96,7 @@ return [
         'key' => 'configuration',
         'name' => 'admin::app.layouts.configure',
         'route' => 'admin.configuration.index',
-        'sort' => 5,
+        'sort' => 7,
         'icon-class' => 'configuration-icon',
     ], [
         'key' => 'settings',
@@ -177,23 +177,16 @@ return [
         'sort' => 2,
         'icon-class' => '',
     ], [
-        'key' => 'promotion',
+        'key' => 'promotions',
         'name' => 'admin::app.layouts.promotion',
         'route' => 'admin.cart-rule.index',
-        'sort' => 7,
+        'sort' => 5,
         'icon-class' => 'promotion-icon',
     ], [
-        'key' => 'promotion.cart-rule',
+        'key' => 'promotions.cart-rule',
         'name' => 'admin::app.promotion.cart-rule',
         'route' => 'admin.cart-rule.index',
         'sort' => 1,
         'icon-class' => '',
     ]
-    // , [
-    //     'key' => 'promotion.catalog-rule',
-    //     'name' => 'admin::app.promotion.catalog-rule',
-    //     'route' => 'admin.catalog-rule.index',
-    //     'sort' => 1,
-    //     'icon-class' => '',
-    // ]
 ];

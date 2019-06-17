@@ -3,20 +3,22 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Shop\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Auth;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Payment\Facades\Payment;
-use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
 use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Discount\Helpers\CouponAbleRule as Coupon;
+use Webkul\Discount\Helpers\NonCouponAbleRule as NonCoupon;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Auth;
 
 /**
  * Chekout controller for the customer and guest for placing order
  *
- * @author  Jitendra Singh <jitendra@webkul.com>
+ * @author  Jitendra Singh <jitendra@webkul.com> @jitendra-webkul
+ * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class OnepageController extends Controller
@@ -29,13 +31,6 @@ class OnepageController extends Controller
     protected $orderRepository;
 
     /**
-     * CartRuleCartRepository object
-     *
-     * @var array
-     */
-    protected $cartRuleCart;
-
-    /**
      * Contains route related configuration
      *
      * @var array
@@ -43,16 +38,30 @@ class OnepageController extends Controller
     protected $_config;
 
     /**
+     *
+     * CouponAbleRule instance
+     */
+    protected $coupon;
+
+    /**
+     *
+     * NoncouponAbleRule instance
+     */
+    protected $nonCoupon;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
      * @return void
      */
-    public function __construct(OrderRepository $orderRepository, CartRuleCart $cartRuleCart)
+    public function __construct(OrderRepository $orderRepository, Coupon $coupon, NonCoupon $nonCoupon)
     {
-        $this->orderRepository = $orderRepository;
+        $this->coupon = $coupon;
 
-        $this->cartRuleCart = $cartRuleCart;
+        $this->nonCoupon = $nonCoupon;
+
+        $this->orderRepository = $orderRepository;
 
         $this->_config = request('_config');
     }
@@ -67,7 +76,9 @@ class OnepageController extends Controller
         if (Cart::hasError())
             return redirect()->route('shop.checkout.cart.index');
 
-        Cart::applyNonCoupon();
+        $this->nonCoupon->apply();
+
+        Cart::collectTotals();
 
         return view($this->_config['view'])->with('cart', Cart::getCart());
     }
@@ -99,12 +110,12 @@ class OnepageController extends Controller
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
         $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
 
-        if (Cart::hasError() || !Cart::saveCustomerAddress($data) || ! $rates = Shipping::collectRates())
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
-
-        Cart::applyNonCoupon();
+        $this->nonCoupon->apply();
 
         Cart::collectTotals();
+
+        if (Cart::hasError() || !Cart::saveCustomerAddress($data) || ! $rates = Shipping::collectRates())
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         return response()->json($rates);
     }
@@ -118,12 +129,12 @@ class OnepageController extends Controller
     {
         $shippingMethod = request()->get('shipping_method');
 
-        if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
-
-        Cart::applyNonCoupon();
+        $this->nonCoupon->apply();
 
         Cart::collectTotals();
+
+        if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         return response()->json(Payment::getSupportedPaymentMethods());
     }
@@ -137,14 +148,14 @@ class OnepageController extends Controller
     {
         $payment = request()->get('payment');
 
+        $this->nonCoupon->apply();
+
+        Cart::collectTotals();
+
         if (Cart::hasError() || !$payment || !Cart::savePaymentMethod($payment))
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         $cart = Cart::getCart();
-
-        Cart::applyNonCoupon();
-
-        Cart::collectTotals();
 
         return response()->json([
             'jump_to_section' => 'review',
@@ -208,6 +219,9 @@ class OnepageController extends Controller
     {
         $cart = Cart::getCart();
 
+        // extra validation check if some the conditions is changed for the coupons but not using it now
+        // $this->nonCoupon->apply();
+
         if (! $cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));
         }
@@ -222,6 +236,81 @@ class OnepageController extends Controller
 
         if (! $cart->payment) {
             throw new \Exception(trans('Please specify payment method.'));
+        }
+    }
+
+    /**
+     * To apply couponable rule requested
+     *
+     * @return JSON
+     */
+    public function applyCoupon()
+    {
+        $this->validate(request(), [
+            'code' => 'string|required'
+        ]);
+
+        $code = request()->input('code');
+
+        $result = $this->coupon->apply($code);
+
+        if ($result) {
+            Cart::collectTotals();
+
+            return response()->json([
+                'success' => true,
+                'message' => trans('shop::app.checkout.onepage.total.coupon-applied'),
+                'result' => $result
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => trans('shop::app.checkout.onepage.total.cannot-apply-coupon'),
+                'result' => null
+            ], 422);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Applies non couponable rule if present
+     *
+     * @return Void
+     */
+    public function applyNonCouponAbleRule()
+    {
+        $cart = Cart::getCart();
+        $nonCouponAbleRules = Cart::applyNonCoupon();
+
+        return $nonCouponAbleRules;
+    }
+
+    /**
+     * Initiates the removal of couponable cart rule
+     *
+     * @return Void
+     */
+    public function removeCoupon()
+    {
+        $result = $this->coupon->remove();
+
+        if ($result) {
+            Cart::collectTotals();
+
+            return response()->json([
+                    'success' => true,
+                    'message' => trans('admin::app.promotion.status.coupon-removed'),
+                    'data' => [
+                        'grand_total' => core()->currency(Cart::getCart()->grand_total)
+                    ]
+                ], 200);
+        } else {
+            return response()->json([
+                    'success' => false,
+                    'message' => trans('admin::app.promotion.status.coupon-remove-failed'),
+                    'data' => null
+                ], 422);
         }
     }
 }

@@ -72,7 +72,11 @@
                 </div>
 
                 <div class="step-content review" v-show="currentStep == 4" id="summary-section">
-                    <review-section v-if="currentStep == 4"></review-section>
+                    <review-section v-if="currentStep == 4">
+                        <div slot="summary-section" v-if="resetSummary">
+                            <summary-section discount="1" @onApplyCoupon="getOrderSummary" @onRemoveCoupon="getOrderSummary"></summary-section>
+                        </div>
+                    </review-section>
 
                     <div class="button-group">
                         <button type="button" class="btn btn-lg btn-primary" @click="placeOrder()" :disabled="disable_button" id="checkout-place-order-button">
@@ -83,7 +87,7 @@
             </div>
 
             <div class="col-right" v-if="resetSummary" v-show="currentStep != 4">
-                <summary-section hide-discount="1"></summary-section>
+                <summary-section></summary-section>
             </div>
         </div>
     </script>
@@ -203,7 +207,7 @@
 
                             setTimeout(function() {
                                 this_this.resetSummary = true;
-                            }, 0);
+                            }, 500);
                         })
                         .catch(function (error) {})
                 },
@@ -341,56 +345,6 @@
             }
         })
 
-        var summaryTemplateRenderFns = [];
-        
-        Vue.component('summary-section', {
-            inject: ['$validator'],
-
-            data: function() {
-                return {
-                    templateRender: null,
-
-                    code: null,
-
-                    coupon_used: false,
-
-                    hide_discount: 0
-                }
-            },
-
-            staticRenderFns: summaryTemplateRenderFns,
-
-            mounted: function() {
-                this.templateRender = summaryHtml.render;
-
-                for (var i in summaryHtml.staticRenderFns) {
-                    summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
-                }
-            },
-
-            render: function(h) {
-                return h('div', [
-                    (this.templateRender ?
-                        this.templateRender() :
-                        '')
-                    ]);
-            },
-
-            methods: {
-                onSubmit: function() {
-                    var this_this = this;
-
-                    axios.post('{{ route('shop.checkout.check.coupons') }}', {
-                        code: this_this.code
-                    }).then(function(response) {
-                        console.log(response.data);
-                    }).catch(function(error) {
-                        console.log(error.data);
-                    });
-                },
-            }
-        })
-
         var shippingTemplateRenderFns = [];
 
         Vue.component('shipping-section', {
@@ -479,22 +433,66 @@
         var reviewTemplateRenderFns = [];
 
         Vue.component('review-section', {
+            props: ['resetSummary'],
+
             data: function() {
                 return {
                     templateRender: null,
 
-                    code: '',
-
-                    hide_discount: 1
+                    error_message: ''
                 }
             },
 
             staticRenderFns: reviewTemplateRenderFns,
 
+            render: function(h) {
+                return h('div', [
+                    (this.templateRender ?
+                        this.templateRender() :
+                        '')
+                    ]);
+            },
+
             mounted: function() {
                 this.templateRender = reviewHtml.render;
+
                 for (var i in reviewHtml.staticRenderFns) {
                     reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
+                }
+            }
+        });
+
+
+        var summaryTemplateRenderFns = [];
+
+        Vue.component('summary-section', {
+            inject: ['$validator'],
+
+            props: {
+                discount: {
+                    type: [String, Number],
+
+                    default: 0,
+                }
+            },
+
+            data: function() {
+                return {
+                    templateRender: null,
+
+                    coupon_code: null,
+
+                    error_message: ''
+                }
+            },
+
+            staticRenderFns: summaryTemplateRenderFns,
+
+            mounted: function() {
+                this.templateRender = summaryHtml.render;
+
+                for (var i in summaryHtml.staticRenderFns) {
+                    summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
                 }
             },
 
@@ -504,8 +502,30 @@
                         this.templateRender() :
                         '')
                     ]);
+            },
+
+            methods: {
+                onSubmit: function() {
+                    var this_this = this;
+
+                    axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.coupon_code})
+                        .then(function(response) {
+                            this_this.$emit('onApplyCoupon')
+                        })
+                        .catch(function(error) {});
+                },
+
+                removeCoupon: function () {
+                    var this_this = this;
+
+                    axios.post('{{ route('shop.checkout.remove.coupon') }}')
+                        .then(function(response) {
+                            this_this.$emit('onRemoveCoupon')
+                        })
+                        .catch(function(error) {});
+                }
             }
-        });
+        })
     </script>
 
 @endpush

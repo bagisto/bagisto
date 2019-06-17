@@ -673,6 +673,7 @@ return [
             'save-btn-title' => 'Salvar Grupo',
             'title' => 'Grupos',
             'save-btn-title' => 'Salvar Grupo',
+            'code' => 'Code',
             'name' => 'Nome',
             'is_user_defined' => 'Usuário Definido',
             'yes' => 'Sim'

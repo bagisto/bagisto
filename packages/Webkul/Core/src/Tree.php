@@ -69,17 +69,17 @@ class Tree {
 	/**
 	 * Add a Config item to the item stack
 	 *
-	 * @param string  $item   Dot seperated heirarchy
+	 * @param string  $item Dot seperated heirarchy
 	 */
 	public function add($item, $type = '')
 	{
         $item['children'] = [];
 
 		if ($type == 'menu') {
-			$item['url'] = route($item['route']);
+            $item['url'] = route($item['route']);
 
 			if (strpos($this->current, $item['url']) !== false) {
-				$this->currentKey = $item['key'];
+                $this->currentKey = $item['key'];
 			}
 		} else if ($type == 'acl') {
 			$item['name'] = trans($item['name']);

@@ -659,6 +659,7 @@ return [
             'save-btn-title' => 'احفظ المجموعة',
             'title' => 'المجموعات',
             'save-btn-title' => 'احفظ المجموعة',
+            'code' => 'Code',
             'name' => 'Name',
             'is_user_defined' => 'تعريف المستخدم',
             'yes' => 'نعم.'

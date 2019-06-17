@@ -79,16 +79,14 @@ class CartRuleController extends Controller
     }
 
     /**
-     * @return Redirect
+     * @return redirect
      */
     public function store()
     {
-        $data = request()->all();
-
-        $validated = $this->validate($data, [
+        $validated = $this->validate(request(), [
             'name' => 'required|string',
             'description' => 'string',
-            // 'customer_groups' => 'required|array',
+            'customer_groups' => 'required|array',
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
@@ -105,32 +103,49 @@ class CartRuleController extends Controller
             'label' => 'array|nullable'
         ]);
 
-        $data = [
-            'usage_limit' => 0,
-            'per_customer' => 0
-        ];
+        $data = request()->all();
 
-        if ($data['starts_from'] == "" || $data['ends_till'] == "") {
+        // unset token
+        unset($data['_token']);
+
+        // set usage limit
+        $data['usage_limit'] = 0;
+
+        // set per customer usage limit
+        $data['per_customer'] = 0;
+
+        // check if starts_from is null
+        if ($data['starts_from'] == "") {
             $data['starts_from'] = null;
+        }
+
+        // check if end_till is null
+        if ($data['ends_till'] == "") {
             $data['ends_till'] = null;
         }
 
-        unset($data['_token']);
+        // customer groups
+        $customer_groups = $data['customer_groups'];
 
-        $channels = $data['channels'];
+        // unset customer groups
+        unset($data['customer_groups']);
 
-        unset($data['channels']);
-
-        // $customer_groups = $data['customer_groups'];
-        // unset($data['customer_groups']);
+        // unset criteria
         unset($data['criteria']);
 
+        // channels
+        $channels = $data['channels'];
+
+        // unset channels
+        unset($data['channels']);
+
+        // make labels
         $labels = $data['label'];
 
+        // unset labels
         unset($data['label']);
-        unset($data['cart_attributes']);
-        unset($data['attributes']);
 
+        // prepare json object from actions
         if (isset($data['disc_amount']) && $data['action_type'] == config('pricerules.cart.validations.2')) {
                 $data['actions'] = [
                     'action_type' => $data['action_type'],
@@ -147,22 +162,37 @@ class CartRuleController extends Controller
             ];
         }
 
+        // prepare json object from conditions
         $data['actions'] = json_encode($data['actions']);
 
-        if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]") {
+        // check if all
+        if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]" || $data['all_conditions'] == "") {
             $data['conditions'] = null;
         } else {
             $data['conditions'] = json_encode($data['all_conditions']);
         }
 
+        // unset cart_attributes from conditions
+        unset($data['cart_attributes']);
+
+        // unset attributes from conditions
+        unset($data['attributes']);
+
+        // unset all_conditions from conditions
         unset($data['all_conditions']);
 
+        // prepare coupons if coupons are used
         if ($data['use_coupon']) {
             // if (isset($data['auto_generation']) && $data['auto_generation']) {
+            // auto generation is off for now
             $data['auto_generation'] = 0;
 
+            // save the coupon used in coupon section
             $coupons['code'] = $data['code'];
 
+            // set coupon usage per customer same as per_customer limit which is disabled for now
+            $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
+            // unset coupon code from coupon section
             unset($data['code']);
             // } else {
             //     $data['auto_generation'] = 1;
@@ -181,15 +211,21 @@ class CartRuleController extends Controller
             // $coupons['limit'] = 0;
         }
 
+        // per coupon usage limit
         // if(isset($data['usage_limit'])) {
         //     $coupons['limit'] = $data['usage_limit'];
         // }
 
+        // create a cart rule
         $ruleCreated = $this->cartRule->create($data);
 
-        // $ruleGroupCreated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleCreated);
+        // create customer groups for cart rule
+        $ruleGroupCreated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleCreated);
+
+        // create customer groups for channels
         $ruleChannelCreated = $this->cartRule->ChannelSync($channels, $ruleCreated);
 
+        // prepare labels
         if (isset($labels['global'])) {
             foreach (core()->getAllChannels() as $channel) {
                 $label1['channel_id'] = $channel->id;
@@ -209,14 +245,13 @@ class CartRuleController extends Controller
             $ruleLabelCreated = $this->cartRuleLabel->create($label2);
         }
 
+        // create coupon if present
         if (isset($coupons)) {
             $coupons['cart_rule_id'] = $ruleCreated->id;
-            $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
-
             $couponCreated = $this->cartRuleCoupon->create($coupons);
         }
 
-        if ($ruleCreated && $ruleChannelCreated) {
+        if ($ruleCreated && $ruleChannelCreated && $ruleGroupCreated) {
             if (isset($couponCreated) && $couponCreated) {
                 session()->flash('success', trans('admin::app.promotion.status.success-coupon'));
             }
@@ -251,12 +286,10 @@ class CartRuleController extends Controller
      */
     public function update($id)
     {
-        $types = config('price_rules.cart.validations');
-
         $this->validate(request(), [
             'name' => 'required|string',
             'description' => 'string',
-            // 'customer_groups' => 'required|array',
+            'customer_groups' => 'required|array',
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
@@ -273,35 +306,52 @@ class CartRuleController extends Controller
             'label' => 'array|nullable'
         ]);
 
-        $data['usage_limit'] = 0;
-        $data['per_customer'] = 0;
-
+        // collecting request in $data
         $data = request()->all();
 
-        if ($data['starts_from'] == "" || $data['ends_till'] == "") {
+        // unset request token from $data
+        unset($data['_token']);
+
+        // set rule uasge limit
+        $data['usage_limit'] = 0;
+
+        // set rule usage per customer
+        $data['per_customer'] = 0;
+
+        // check if starts_from is null
+        if ($data['starts_from'] == "") {
             $data['starts_from'] = null;
+        }
+
+        // check if end_till is null
+        if ($data['ends_till'] == "") {
             $data['ends_till'] = null;
         }
 
-        unset($data['_token']);
-
+        // set channels
         $channels = $data['channels'];
 
+        // unset the channels from $data
         unset($data['channels']);
 
-        // $customer_groups = $data['customer_groups'];
-        // unset($data['customer_groups']);
-        // unset($data['criteria']);
+        // set customer_groups
+        $customer_groups = $data['customer_groups'];
 
+        // unset customer groups
+        unset($data['customer_groups']);
+
+        // set labels and unset them from $data
         if (isset($data['label'])) {
             $labels = $data['label'];
 
             unset($data['label']);
         }
 
+        // unset cart_attributes and attributes from $data
         unset($data['cart_attributes']);
         unset($data['attributes']);
 
+        // prepare actions from data for json action
         if (isset($data['disc_amount']) && $data['action_type'] == config('pricerules.cart.validations.2')) {
             $data['actions'] = [
                 'action_type' => $data['action_type'],
@@ -318,16 +368,22 @@ class CartRuleController extends Controller
             ];
         }
 
+        // encode php array to json for actions
         $data['actions'] = json_encode($data['actions']);
 
-        if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]") {
+        // Prepares conditions from all conditions
+        if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]" || $data['all_conditions'] == "") {
             $data['conditions'] = null;
         } else {
             $data['conditions'] = json_encode($data['all_conditions']);
         }
 
+        unset($data['match_criteria']);
+
+        // unset all_conditions from conditions
         unset($data['all_conditions']);
 
+        // set coupons from $data
         if ($data['use_coupon']) {
             // if (isset($data['auto_generation']) && $data['auto_generation']) {
             $data['auto_generation'] = 0;
@@ -355,13 +411,19 @@ class CartRuleController extends Controller
         //     $coupons['limit'] = $data['usage_limit'];
         // }
 
+        // update cart rule
         $ruleUpdated = $this->cartRule->update($data, $id);
 
-        // $ruleGroupUpdated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleUpdated);
+        // update customer groups for cart rule
+        $ruleGroupUpdated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleUpdated);
+
+        // update customer groups for cart rule
         $ruleChannelUpdated = $this->cartRule->ChannelSync($channels, $ruleUpdated);
 
+        // update labels
         $labelsUpdated = $this->cartRule->LabelSync($labels, $ruleUpdated);
 
+        // check coupons set conditions
         if (isset($coupons)) {
             $coupons['cart_rule_id'] = $ruleUpdated->id;
             // $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
@@ -369,7 +431,7 @@ class CartRuleController extends Controller
             $couponUpdated = $ruleUpdated->coupons->update($coupons);
         }
 
-        if ($ruleUpdated && $ruleChannelUpdated) {
+        if ($ruleUpdated && $ruleGroupUpdated && $ruleChannelUpdated) {
             if (isset($couponUpdated) && $couponUpdated) {
                 session()->flash('info', trans('admin::app.promotion.status.success-coupon'));
             }
@@ -384,6 +446,11 @@ class CartRuleController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
+    /**
+     * Deletes the cart rule
+     *
+     * @return JSON
+     */
     public function destroy($id)
     {
         $cartRule = $this->cartRule->findOrFail($id);
@@ -399,6 +466,11 @@ class CartRuleController extends Controller
         }
     }
 
+    /**
+     * Get Countries and states list from core helpers
+     *
+     * @return Array
+     */
     public function getStatesAndCountries()
     {
         $countries = core()->countries()->toArray();

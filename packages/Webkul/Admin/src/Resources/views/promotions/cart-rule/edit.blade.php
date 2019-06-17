@@ -76,7 +76,7 @@
                                         </div>
                                     </datetime>
 
-                                    {{-- <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
+                                    <div class="control-group" :class="[errors.has('customer_groups[]') ? 'has-error' : '']">
                                         <label for="customer_groups" class="required">{{ __('admin::app.promotion.general-info.cust-groups') }}</label>
 
                                         <select type="text" class="control" name="customer_groups[]" v-model="customer_groups" v-validate="'required'" value="{{ old('customer_groups[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
@@ -86,8 +86,8 @@
                                             @endforeach
                                         </select>
 
-                                        <span class="control-error" v-if="errors.has('customer_groups')">@{{ errors.first('customer_groups') }}</span>
-                                    </div> --}}
+                                        <span class="control-error" v-if="errors.has('customer_groups[]')">@{{ errors.first('customer_groups[]') }}</span>
+                                    </div>
 
                                     <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
                                         <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
@@ -187,7 +187,7 @@
 
                                     <div class="control-group">
                                         {{ __('admin::app.promotion.general-info.test-mode') }}
-                                        <select class="control" v-model="match_criteria" style="margin-right: 15px;">
+                                        <select class="control" v-model="match_criteria" name="match_criteria" style="margin-right: 15px;">
                                             {{ $i = 0 }}
                                             @foreach(config('pricerules.test_mode') as $key => $value)
                                                 <option value="{{ $key }}">{{ $value }}</option>
@@ -213,7 +213,7 @@
 
                                                     <div v-if='conditions_list[index].type == "string"'>
                                                         <select class="control" name="cart_attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
-                                                            <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
+                                                            <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
                                                         </select>
 
                                                         <div v-if='conditions_list[index].attribute == "shipping_state"'>
@@ -501,6 +501,7 @@
 
                     if (data.conditions != null) {
                         this.conditions_list = JSON.parse(JSON.parse(data.conditions));
+                        this.match_criteria = this.conditions_list.pop().criteria;
                     }
 
                     criteria = null;
@@ -511,7 +512,7 @@
                         if (this.criteria == 'product_subselection' || this.criteria == 'cart') {
                             this.condition_on = this.criteria;
                         } else {
-                            alert('please try again');
+                            alert('please select type of condition');
 
                             return false;
                         }
@@ -567,14 +568,11 @@
                     },
 
                     onSubmit: function (e) {
+                        if (this.conditions_list.length != 0) {
+                            this.conditions_list.push({'criteria': this.match_criteria});
 
-                        // if (this.conditions_list.length != 0) {
-                        //     this.conditions_list.push(this.match_criteria);
-                        // }
-
-                        console.log(JSON.stringify(this.conditions_list));
-
-                        this.all_conditions = JSON.stringify(this.conditions_list);
+                            this.all_conditions = JSON.stringify(this.conditions_list);
+                        }
 
                         this.$validator.validateAll().then(result => {
                             if (result) {
