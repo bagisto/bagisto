@@ -25,13 +25,13 @@ class FixedAmount extends Action
                 $amountDiscounted = $amountDiscounted * $disc_quantity;
             }
 
-            if ($amountDiscounted > $item['price']) {
-                $amountDiscounted = $item['price'];
+            if ($amountDiscounted > $item['base_price']) {
+                $amountDiscounted = $item['base_price'];
             }
         }
 
         $report['discount'] = $amountDiscounted;
-        $report['formatted_discount'] = core()->formatPrice($amountDiscounted, $cart->cart_currency_code);
+        $report['formatted_discount'] = core()->currency($amountDiscounted);
 
         return $report;
     }
