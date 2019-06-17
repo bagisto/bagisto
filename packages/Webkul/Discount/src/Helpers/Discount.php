@@ -299,7 +299,8 @@ abstract class Discount
      *
      * @return boolean
      */
-    protected function testIfAllConditionAreTrue($conditions, $cart) {
+    protected function testIfAllConditionAreTrue($conditions, $cart)
+    {
         array_pop($conditions);
 
         $shipping_address = $cart->getShippingAddressAttribute() ?? '';
@@ -320,9 +321,7 @@ abstract class Discount
             $total_weight = $total_weight + $item->base_total_weight;
         }
 
-        $test_mode = config('pricerules.test_mode.0');
-        $test_conditions = config('pricerules.cart.conditions');
-        $result = 1;
+        $result = true;
 
         foreach ($conditions as $condition) {
             $actual_value = ${$condition->attribute};
@@ -332,43 +331,43 @@ abstract class Discount
             if ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text') {
                 if ($test_condition == '=') {
                     if ($actual_value != $test_value) {
-                        $result = 0;
+                        $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '>=') {
                     if (! ($actual_value >= $test_value)) {
-                        $result = 0;
+                        $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '<=') {
                     if (! ($actual_value <= $test_value)) {
-                        $result = 0;
+                        $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '>') {
                     if (! ($actual_value > $test_value)) {
-                        $result = 0;
+                        $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '<') {
                     if (! ($actual_value < $test_value)) {
-                        $result = 0;
+                        $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '{}') {
                     if (! str_contains($actual_value, $test_value)) {
-                        $result = 0;
+                        $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
                     if (str_contains($actual_value, $test_value)) {
-                        $result = 0;
+                        $result = false;
 
                         break;
                     }
@@ -388,7 +387,7 @@ abstract class Discount
     protected function testIfAnyConditionIsTrue($conditions, $cart) {
         array_pop($conditions);
 
-        $result = true;
+        $result = false;
 
         $shipping_address = $cart->getShippingAddressAttribute() ?? '';
 
@@ -415,44 +414,44 @@ abstract class Discount
 
             if ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text') {
                 if ($test_condition == '=') {
-                    if ($actual_value != $test_value) {
-                        $result = false;
+                    if ($actual_value == $test_value) {
+                        $result = true;
 
                         break;
                     }
                 } else if ($test_condition == '>=') {
-                    if (! ($actual_value >= $test_value)) {
-                        $result = false;
+                    if ($actual_value >= $test_value) {
+                        $result = true;
 
                         break;
                     }
                 } else if ($test_condition == '<=') {
-                    if (! ($actual_value <= $test_value)) {
-                        $result = false;
+                    if ($actual_value <= $test_value) {
+                        $result = true;
 
                         break;
                     }
                 } else if ($test_condition == '>') {
-                    if (! ($actual_value > $test_value)) {
-                        $result = false;
+                    if ($actual_value > $test_value) {
+                        $result = true;
 
                         break;
                     }
                 } else if ($test_condition == '<') {
-                    if (! ($actual_value < $test_value)) {
-                        $result = false;
+                    if ($actual_value < $test_value) {
+                        $result = true;
 
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (! str_contains($actual_value, $test_value)) {
-                        $result = false;
+                    if (str_contains($actual_value, $test_value)) {
+                        $result = true;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
                     if (str_contains($actual_value, $test_value)) {
-                        $result = false;
+                        $result = true;
 
                         break;
                     }

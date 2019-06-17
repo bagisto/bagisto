@@ -6,10 +6,6 @@ use Webkul\Discount\Actions\Action;
 
 class FixedAmount extends Action
 {
-    public function __construct()
-    {
-    }
-
     public function calculate($rule, $item, $cart)
     {
         //calculate discount amount

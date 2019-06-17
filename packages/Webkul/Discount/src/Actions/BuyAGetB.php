@@ -2,23 +2,21 @@
 
 namespace Webkul\Discount\Actions;
 
-class BuyAGetB
-{
-    public function __construct()
-    {
-    }
+use Webkul\Discount\Actions\Action;
 
+class BuyAGetB extends Action
+{
     public function calculate($rule, $item, $cart)
     {
         //calculate discount amount
         $action_type = $rule->action_type; // action type used
-        $disc_threshold = $rule->disc_threshold; // atleast quantity by default 1 --> may be omitted in near future
+        $disc_threshold = $rule->disc_threshold; // atleast quantity by default 1
         $disc_amount = $rule->disc_amount; // value of discount
         $disc_quantity = $rule->disc_quantity; //max quantity allowed to be discounted
 
         $amountDiscounted = 0;
-        $leastWorthItem = $this->leastWorthItem();
-        $realQty = $leastWorthItem['quantity'];
+
+        $realQty = $item['quantity'];
 
         if ($cart->items_qty >= $disc_threshold) {
             $amountDiscounted = $disc_amount;
@@ -27,8 +25,8 @@ class BuyAGetB
                 $amountDiscounted = $amountDiscounted * $disc_quantity;
             }
 
-            if ($amountDiscounted > $leastWorthItem['price']) {
-                $amountDiscounted = $leastWorthItem['price'];
+            if ($amountDiscounted > $item['price']) {
+                $amountDiscounted = $item['price'];
             }
         }
 

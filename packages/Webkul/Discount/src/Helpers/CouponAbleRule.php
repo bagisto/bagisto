@@ -114,7 +114,6 @@ class CouponAbleRule extends Discount
      */
     public function remove()
     {
-        dd('removing coupon');
         $cart = Cart::getCart();
 
         $existingRule = $this->cartRuleCart->findWhere([
