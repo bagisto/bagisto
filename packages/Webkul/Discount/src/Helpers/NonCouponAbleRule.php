@@ -32,6 +32,19 @@ class NonCouponAbleRule extends Discount
             ]);
         }
 
+        $alreadyAppliedRule = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id,
+        ]);
+
+
+        if (count($alreadyAppliedRule)) {
+            $alreadyAppliedRule = $alreadyAppliedRule->first()->cart_rule;
+
+            if ($alreadyAppliedRule->use_coupon) {
+                return null;
+            }
+        }
+
         // time based filter
         foreach($rules as $rule) {
             $applicability = $this->checkApplicability($rule);

@@ -254,18 +254,18 @@ class OnepageController extends Controller
 
         $result = $this->coupon->apply($code);
 
-        if ($result != null) {
+        if ($result) {
             return response()->json([
                 'success' => true,
                 'message' => trans('shop::app.checkout.onepage.total.coupon-applied'),
                 'result' => $result
-            ]);
+            ], 200);
         } else {
             return response()->json([
                 'success' => false,
                 'message' => trans('shop::app.checkout.onepage.total.cannot-apply-coupon'),
                 'result' => null
-            ]);
+            ], 422);
         }
 
         return $result;
