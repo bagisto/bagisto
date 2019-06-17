@@ -94,6 +94,8 @@ class CouponAbleRule extends Discount
                 } else {
                     // least id case
                     if ($applicableRule->id < $alreadyAppliedRule->id) {
+                        $this->save($applicableRule);
+
                         return $impact;
                     }
                 }

@@ -263,6 +263,8 @@ abstract class Discount
             }
         }
 
+        Cart::collectTotals();
+
         return true;
     }
 
