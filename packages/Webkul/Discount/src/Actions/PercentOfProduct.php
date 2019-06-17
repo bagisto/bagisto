@@ -16,7 +16,7 @@ class PercentOfProduct extends Action
         $realQty = $item['quantity'];
 
         if ($cart >= $disc_threshold) {
-            $amountDiscounted = $item['price'] * ($disc_amount / 100);
+            $amountDiscounted = $item['base_price'] * ($disc_amount / 100);
 
             if ($realQty > $disc_quantity) {
                 $amountDiscounted = $amountDiscounted * $disc_quantity;

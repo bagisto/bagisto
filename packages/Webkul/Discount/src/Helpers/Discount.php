@@ -29,11 +29,6 @@ abstract class Discount
      */
     protected $rules;
 
-    /**
-     * disable coupon
-     */
-    protected $disableCoupon = false;
-
     public function __construct(CartRule $cartRule, CartRuleCart $cartRuleCart)
     {
         $this->cartRule = $cartRule;
