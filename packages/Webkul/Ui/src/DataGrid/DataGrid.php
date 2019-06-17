@@ -241,7 +241,7 @@ abstract class DataGrid
                                 $this->operators[$condition],
                                 '%'.$filter_value.'%'
                             );
-                        } else if($this->enableFilterMap && !isset($this->filterMap[$columnName])) {
+                        } else if ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
                             $collection->where(
                                 $columnName,
                                 $this->operators[$condition],
@@ -264,7 +264,7 @@ abstract class DataGrid
                                     $this->operators[$condition],
                                     $filter_value
                                 );
-                            } else if($this->enableFilterMap && !isset($this->filterMap[$columnName])) {
+                            } else if ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
                                 $collection->whereDate(
                                     $columnName,
                                     $this->operators[$condition],

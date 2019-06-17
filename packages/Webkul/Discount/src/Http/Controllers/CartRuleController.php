@@ -312,9 +312,6 @@ class CartRuleController extends Controller
         // unset request token from $data
         unset($data['_token']);
 
-        // condition validation rules from config
-        $types = config('price_rules.cart.validations');
-
         // set rule uasge limit
         $data['usage_limit'] = 0;
 
@@ -374,24 +371,14 @@ class CartRuleController extends Controller
         // encode php array to json for actions
         $data['actions'] = json_encode($data['actions']);
 
-        // prepare conditions from data for json conditions
+        // Prepares conditions from all conditions
         if (! isset($data['all_conditions']) || $data['all_conditions'] == "[]" || $data['all_conditions'] == "") {
             $data['conditions'] = null;
         } else {
-            if (count(json_decode($data['all_conditions']))) {
-                $conditions = json_decode($data['all_conditions']);
-
-                foreach($conditions as $condition) {
-                    if (isset($condition->criteria)) {
-                        $condition->criteria = $data['match_criteria'];
-                    }
-                }
-
-                $data['conditions'] = json_encode($conditions);
-
-                unset($data['match_criteria']);
-            }
+            $data['conditions'] = json_encode($data['all_conditions']);
         }
+
+        unset($data['match_criteria']);
 
         // unset all_conditions from conditions
         unset($data['all_conditions']);

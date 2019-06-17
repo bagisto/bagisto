@@ -9,7 +9,6 @@ use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
-use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
 use Illuminate\Support\Facades\Event;
 use Cart;
 
@@ -34,11 +33,15 @@ class CartController extends Controller
      * @param $productView
      */
     protected $_config;
+
     protected $cart;
+
     protected $cartItem;
+
     protected $customer;
+
     protected $product;
-    protected $cartRuleCart;
+
     protected $suppressFlash = false;
 
     /**
@@ -53,8 +56,7 @@ class CartController extends Controller
         CartItemRepository $cartItem,
         CustomerRepository $customer,
         ProductRepository $product,
-        WishlistRepository $wishlist,
-        CartRuleCart $cartRuleCart
+        WishlistRepository $wishlist
     )
     {
 
@@ -69,8 +71,6 @@ class CartController extends Controller
         $this->product = $product;
 
         $this->wishlist = $wishlist;
-
-        $this->cartRuleCart = $cartRuleCart;
 
         $this->_config = request('_config');
     }
@@ -250,72 +250,6 @@ class CartController extends Controller
             session()->flash('warning', trans('shop::app.wishlist.move-error'));
 
             return redirect()->back();
-        }
-    }
-
-    /**
-     * To apply coupon rules
-     */
-    public function applyCoupon()
-    {
-        $this->validate(request(), [
-            'code' => 'string|required'
-        ]);
-
-        $code = request()->input('code');
-
-        $result = Cart::applyCoupon($code);
-
-        if ($result != null) {
-            return response()->json([
-                'success' => true,
-                'message' => trans('shop::app.checkout.onepage.total.coupon-applied'),
-                'result' => $result
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => trans('shop::app.checkout.onepage.total.cannot-apply-coupon'),
-                'result' => null
-            ]);
-        }
-
-        return $result;
-    }
-
-    /**
-     * Fetch the non couponable rule
-     */
-    public function getNonCouponAbleRule()
-    {
-        $cart = Cart::getCart();
-        $nonCouponAbleRules = Cart::applyNonCoupon();
-
-        return $nonCouponAbleRules;
-    }
-
-    /**
-     * To remove the currently active
-     * couponable rule
-     */
-    public function removeCoupon()
-    {
-        $result = Cart::removeCoupon();
-
-        if ($result) {
-            return response()->json([
-                'success' => true,
-                'message' => trans('admin::app.promotion.status.coupon-removed'),
-                'data' => [
-                    'grand_total' => core()->currency(Cart::getCart()->grand_total)
-                ]
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => trans('admin::app.promotion.status.coupon-remove-failed'),
-                'data' => null
-            ]);
         }
     }
 }
