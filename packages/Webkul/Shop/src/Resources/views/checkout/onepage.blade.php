@@ -71,10 +71,10 @@
                     </div>
                 </div>
 
-                <div class="step-content review" v-show="currentStep == 4" id="summary-section" @applyDiscount="getOrderSummary" @removeDiscount="getOrderSummary">
+                <div class="step-content review" v-show="currentStep == 4" id="summary-section">
                     <review-section v-if="currentStep == 4">
-                        <div slot="body">
-                            <summary-section :active="true" @onCouponApply="getOrderSummary" v-if="currentStep == 4"></summary-section>
+                        <div slot="summary-section" v-if="resetSummary">
+                            <summary-section discount="1" @onApplyCoupon="getOrderSummary" @onRemoveCoupon="getOrderSummary"></summary-section>
                         </div>
                     </review-section>
 
@@ -87,7 +87,7 @@
             </div>
 
             <div class="col-right" v-if="resetSummary" v-show="currentStep != 4">
-                <summary-section :active="false"></summary-section>
+                <summary-section></summary-section>
             </div>
         </div>
     </script>
@@ -207,7 +207,7 @@
 
                             setTimeout(function() {
                                 this_this.resetSummary = true;
-                            }, 0);
+                            }, 500);
                         })
                         .catch(function (error) {})
                 },
@@ -428,30 +428,71 @@
                     eventBus.$emit('after-payment-method-selected');
                 }
             }
-        });
+        })
 
         var reviewTemplateRenderFns = [];
 
         Vue.component('review-section', {
-            props: ['active'],
+            props: ['resetSummary'],
 
-            data: function () {
+            data: function() {
                 return {
                     templateRender: null,
 
-                    hide_discount: null,
+                    error_message: ''
                 }
             },
 
             staticRenderFns: reviewTemplateRenderFns,
 
-            mounted: function () {
-                this.hide_discount = this.active;
+            render: function(h) {
+                return h('div', [
+                    (this.templateRender ?
+                        this.templateRender() :
+                        '')
+                    ]);
+            },
 
+            mounted: function() {
                 this.templateRender = reviewHtml.render;
 
                 for (var i in reviewHtml.staticRenderFns) {
                     reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
+                }
+            }
+        });
+
+
+        var summaryTemplateRenderFns = [];
+
+        Vue.component('summary-section', {
+            inject: ['$validator'],
+
+            props: {
+                discount: {
+                    type: [String, Number],
+
+                    default: 0,
+                }
+            },
+
+            data: function() {
+                return {
+                    templateRender: null,
+
+                    coupon_code: null,
+
+                    error_message: ''
+                }
+            },
+
+            staticRenderFns: summaryTemplateRenderFns,
+
+            mounted: function() {
+                this.templateRender = summaryHtml.render;
+
+                for (var i in summaryHtml.staticRenderFns) {
+                    summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
                 }
             },
 
@@ -460,99 +501,29 @@
                     (this.templateRender ?
                         this.templateRender() :
                         '')
-                    ]
-                );
-            }
-        });
-
-        var summaryTemplateRenderFns = [];
-
-        Vue.component('summary-section', {
-            inject: ['$validator'],
-            props: ['active'],
-
-            data: function () {
-                return {
-                    templateRender: null,
-
-                    code: null,
-
-                    coupon_used: false,
-
-                    hide_discount: null,
-
-                    error_message: '',
-                }
-            },
-
-            staticRenderFns: summaryTemplateRenderFns,
-
-            mounted: function () {
-                this.hide_discount = this.active;
-
-                this.templateRender = summaryHtml.render;
-
-                @if ($cart->coupon_code)
-                    this.code = '{{ $cart->coupon_code }}';
-
-                    this.coupon_used = true;
-                @endif
-
-                for (var i in summaryHtml.staticRenderFns) {
-                    summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
-                }
-            },
-
-            render: function (h) {
-                return h('div', [
-                    (this.templateRender ?
-                        this.templateRender() :
-                        '')
                     ]);
             },
 
             methods: {
-                onSubmit: function () {
+                onSubmit: function() {
                     var this_this = this;
 
-                    axios.post('{{ route('shop.checkout.check.coupons') }}', {
-                        code: this_this.code
-                    }).then(function(response) {
-                        this_this.coupon_used = true;
-
-                        r = this_this.getOrderSummary();
-                        console.log(summaryHtml);
-                    }).catch(function(error) {
-                    });
+                    axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.coupon_code})
+                        .then(function(response) {
+                            this_this.$emit('onApplyCoupon')
+                        })
+                        .catch(function(error) {});
                 },
 
                 removeCoupon: function () {
                     var this_this = this;
 
                     axios.post('{{ route('shop.checkout.remove.coupon') }}')
-                    .then(function(response) {
-                        this_this.coupon_used = false;
-
-                        this_this.code = '';
-
-                        r = this_this.getOrderSummary();
-                        console.log(summaryHtml);
-                    }).catch(function(error) {});
-                },
-
-                getOrderSummary () {
-                    var this_this = this;
-
-                    this.$http.get("{{ route('shop.checkout.summary') }}")
                         .then(function(response) {
-                            this_this.resetSummary = false;
-
-                            return summaryHtml = Vue.compile(response.data.html)
-                            setTimeout(function() {
-                                this_this.resetSummary = true;
-                            }, 0);
-                        }).catch(function (error) {})
-                },
+                            this_this.$emit('onRemoveCoupon')
+                        })
+                        .catch(function(error) {});
+                }
             }
         })
     </script>

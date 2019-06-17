@@ -255,6 +255,8 @@ class OnepageController extends Controller
         $result = $this->coupon->apply($code);
 
         if ($result) {
+            Cart::collectTotals();
+
             return response()->json([
                 'success' => true,
                 'message' => trans('shop::app.checkout.onepage.total.coupon-applied'),
@@ -294,6 +296,8 @@ class OnepageController extends Controller
         $result = $this->coupon->remove();
 
         if ($result) {
+            Cart::collectTotals();
+
             return response()->json([
                     'success' => true,
                     'message' => trans('admin::app.promotion.status.coupon-removed'),
