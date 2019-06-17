@@ -19,7 +19,7 @@ class CustomerGroupDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('customer_groups')->addSelect('id', 'name');
+        $queryBuilder = DB::table('customer_groups')->addSelect('id', 'code', 'name');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -29,6 +29,15 @@ class CustomerGroupDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'id',
             'label' => 'ID',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'code',
+            'label' => 'Code',
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,

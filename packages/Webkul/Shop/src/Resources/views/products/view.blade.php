@@ -205,6 +205,19 @@
             }
             document.getElementById("quantity").value = quantity;
 
+            var buyNowLink = $('.btn.buynow').attr('data-href');
+            var splitted = buyNowLink.split("/");
+            lastItem = splitted[splitted.length - 2];
+
+            splitted.pop();
+            splitted.pop();
+
+            var joined = splitted.join('/');
+
+            var newBuyNowUrl = joined + '/' + lastItem + '/' + quantity;
+
+            $('.btn.buynow').attr('data-href', newBuyNowUrl);
+
             event.preventDefault();
         }
     </script>

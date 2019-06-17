@@ -735,6 +735,7 @@ return [
             'save-btn-title' => 'Save Group',
             'title' => 'Groups',
             'save-btn-title' => 'Save Group',
+            'code' => 'Code',
             'name' => 'Name',
             'is_user_defined' => 'User Defined',
             'yes' => 'Yes'

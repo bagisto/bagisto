@@ -1,4 +1,3 @@
-
 Vue.component("flash-wrapper", require("./components/flash-wrapper"));
 Vue.component("flash", require("./components/flash"));
 Vue.component("tabs", require("./components/tabs/tabs"));
@@ -18,6 +17,7 @@ Vue.directive("alert", require("./directives/alert"));
 Vue.component("datetime", require("./components/datetime"));
 Vue.component("date", require("./components/date"));
 Vue.component("swatch-picker", require("./components/swatch-picker"));
+Vue.directive("debounce", require("./directives/debounce"));
 
 require('flatpickr/dist/flatpickr.css');
 

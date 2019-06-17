@@ -207,7 +207,7 @@
 
                             setTimeout(function() {
                                 this_this.resetSummary = true;
-                            }, 0);
+                            }, 500);
                         })
                         .catch(function (error) {})
                 },
@@ -512,7 +512,7 @@
             },
 
             methods: {
-                onSubmit: function () {
+                onSubmit: function() {
                     var this_this = this;
 
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {
