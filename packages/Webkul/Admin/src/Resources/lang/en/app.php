@@ -809,6 +809,7 @@ return [
         'create-cart-rule' => 'Create Cart Rule',
         'save-btn-title' => 'Create',
         'edit-btn-title' => 'Edit',
+        'save' => 'Save',
         'select-attr' => 'Select Attribute',
         'select-attr-fam' => 'Select Attribute Family',
         'select-cart-attr' => 'Select Cart Attribute',
@@ -845,7 +846,8 @@ return [
             'free-shipping' => 'Free Shipping',
             'is-guest' => 'For Guests',
             'disc_qty' => 'Max. Quantity Allowed To Be Discounted',
-            'test-mode' => 'Choose how to test conditions'
+            'test-mode' => 'Choose how to test conditions',
+            'lables' => 'Labels'
         ],
 
         'status' => [
