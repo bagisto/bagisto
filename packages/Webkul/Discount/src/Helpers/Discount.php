@@ -85,8 +85,10 @@ abstract class Discount
         // customer groups based constraints
         if (auth()->guard('customer')->check()) {
             foreach ($rule->customer_groups as $customer_group) {
-                if ($customer_group->customer_group_id == auth()->guard('customer')->user()->group->id) {
-                    $customerGroupBased = true;
+                if (auth()->guard('customer')->user()->group->exists()) {
+                    if ($customer_group->customer_group_id == auth()->guard('customer')->user()->group->id) {
+                        $customerGroupBased = true;
+                    }
                 }
             }
         } else {
