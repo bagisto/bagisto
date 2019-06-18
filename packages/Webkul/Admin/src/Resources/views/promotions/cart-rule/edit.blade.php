@@ -26,7 +26,7 @@
 
                     <div class="page-action">
                         <button type="submit" class="btn btn-lg btn-primary">
-                            {{ __('admin::app.promotion.edit-btn-title') }}
+                            {{ __('admin::app.promotion.save') }}
                         </button>
                     </div>
                 </div>
@@ -358,7 +358,7 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="labels">
+                            <accordian :active="false" :title="'{{ __('admin::app.promotion.general-info.lables') }}'">
                                 <div slot="body">
                                     @foreach($cart_rule[3]->labels as $label)
                                         <span>[{{ $label->channel->code }}]</span>
