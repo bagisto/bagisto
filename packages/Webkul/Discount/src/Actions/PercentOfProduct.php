@@ -28,7 +28,7 @@ class PercentOfProduct extends Action
         }
 
         $report['discount'] = $amountDiscounted;
-        $report['formatted_discount'] = core()->formatPrice($amountDiscounted);
+        $report['formatted_discount'] = core()->currency($amountDiscounted);
 
         return $report;
     }
