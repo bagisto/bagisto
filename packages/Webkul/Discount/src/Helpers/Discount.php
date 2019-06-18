@@ -193,33 +193,6 @@ abstract class Discount
     }
 
     /**
-     * To find the least worth item in current cart instance
-     *
-     * @return array
-     */
-    public function leastWorthItem()
-    {
-        $cart = Cart::getCart();
-
-        $leastValue = 999999999999;
-        $leastWorthItem = [];
-
-        foreach ($cart->items as $item) {
-            if ($item->price < $leastValue) {
-                $leastValue = $item->price;
-                $leastWorthItem = [
-                    'id' => $item->id,
-                    'price' => $item->price,
-                    'base_price' => $item->base_price,
-                    'quantity' => $item->quantity
-                ];
-            }
-        }
-
-        return $leastWorthItem;
-    }
-
-    /**
      * Update discount for least worth item
      */
     public function updateCartItemAndCart($rule)
@@ -267,6 +240,33 @@ abstract class Discount
         Cart::collectTotals();
 
         return true;
+    }
+
+    /**
+     * To find the least worth item in current cart instance
+     *
+     * @return array
+     */
+    public function leastWorthItem()
+    {
+        $cart = Cart::getCart();
+
+        $leastValue = 999999999999;
+        $leastWorthItem = [];
+
+        foreach ($cart->items as $item) {
+            if ($item->price < $leastValue) {
+                $leastValue = $item->price;
+                $leastWorthItem = [
+                    'id' => $item->id,
+                    'price' => $item->price,
+                    'base_price' => $item->base_price,
+                    'quantity' => $item->quantity
+                ];
+            }
+        }
+
+        return $leastWorthItem;
     }
 
     /**
