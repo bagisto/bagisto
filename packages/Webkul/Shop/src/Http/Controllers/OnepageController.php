@@ -10,6 +10,7 @@ use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Discount\Helpers\CouponAbleRule as Coupon;
 use Webkul\Discount\Helpers\NonCouponAbleRule as NonCoupon;
+use Webkul\Discount\Helpers\ValidatesDiscount;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
@@ -38,16 +39,21 @@ class OnepageController extends Controller
     protected $_config;
 
     /**
+     * CouponAbleRule instance object
      *
-     * CouponAbleRule instance
      */
     protected $coupon;
 
     /**
+     * NoncouponAbleRule instance object
      *
-     * NoncouponAbleRule instance
      */
     protected $nonCoupon;
+
+    /**
+     * ValidatesDiscount instance object
+     */
+    protected $validatesDiscount;
 
     /**
      * Create a new controller instance.
@@ -55,13 +61,20 @@ class OnepageController extends Controller
      * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
      * @return void
      */
-    public function __construct(OrderRepository $orderRepository, Coupon $coupon, NonCoupon $nonCoupon)
+    public function __construct(
+        OrderRepository $orderRepository,
+        Coupon $coupon,
+        NonCoupon $nonCoupon,
+        ValidatesDiscount $validatesDiscount
+    )
     {
         $this->coupon = $coupon;
 
         $this->nonCoupon = $nonCoupon;
 
         $this->orderRepository = $orderRepository;
+
+        $this->validatesDiscount = $validatesDiscount;
 
         $this->_config = request('_config');
     }
@@ -219,8 +232,7 @@ class OnepageController extends Controller
     {
         $cart = Cart::getCart();
 
-        // extra validation check if some the conditions is changed for the coupons but not using it now
-        // $this->nonCoupon->apply();
+        // $this->validatesDiscount->validate($cart);
 
         if (! $cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));

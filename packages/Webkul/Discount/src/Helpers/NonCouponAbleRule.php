@@ -173,9 +173,7 @@ class NonCouponAbleRule extends Discount
                 return $prioritySorted;
             }
         } else if (count($applicableRules) == 1) {
-            $rule = array_first($applicableRules)['rule'];
-
-            $this->save($applicableRules);
+            $this->save(array_first($applicableRules)['rule']);
 
             return array_first($applicableRules)['impact'];
         } else {

@@ -41,6 +41,10 @@ class CouponAbleRule extends Discount
             }
         }
 
+        if (! isset($applicableRule)) {
+            return false;
+        }
+
         $applicability = $this->checkApplicability($applicableRule);
 
         if ($applicability) {

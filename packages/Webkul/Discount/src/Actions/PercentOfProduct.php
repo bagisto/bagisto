@@ -16,19 +16,19 @@ class PercentOfProduct extends Action
         $realQty = $item['quantity'];
 
         if ($cart >= $disc_threshold) {
-            $amountDiscounted = $item['price'] * ($disc_amount / 100);
+            $amountDiscounted = $item['base_price'] * ($disc_amount / 100);
 
             if ($realQty > $disc_quantity) {
                 $amountDiscounted = $amountDiscounted * $disc_quantity;
             }
 
-            if ($amountDiscounted > $item['price']) {
-                $amountDiscounted = $item['price'];
+            if ($amountDiscounted > $item['base_price']) {
+                $amountDiscounted = $item['base_price'];
             }
         }
 
         $report['discount'] = $amountDiscounted;
-        $report['formatted_discount'] = core()->formatPrice($amountDiscounted, $cart->cart_currency_code);
+        $report['formatted_discount'] = core()->formatPrice($amountDiscounted);
 
         return $report;
     }
