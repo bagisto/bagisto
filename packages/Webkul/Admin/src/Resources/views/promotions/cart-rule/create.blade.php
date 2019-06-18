@@ -359,7 +359,7 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="labels">
+                            <accordian :active="false" :title="'{{ __('admin::app.promotion.general-info.lables') }}'">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']" v-if="dedicated_label">
                                         <label for="label">Global Label</label>
