@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="step-content review" v-show="currentStep == 4" id="summary-section">
-                    <review-section v-if="currentStep == 4">
+                    <review-section v-if="currentStep == 4" :key="reviewComponentKey">
                         <div slot="summary-section">
                             <summary-section
                                 discount="1"
@@ -140,7 +140,8 @@
                     allAddress: {},
                     countryStates: @json(core()->groupedStatesByCountries()),
                     country: @json(core()->countries()),
-                    summeryComponentKey: 0
+                    summeryComponentKey: 0,
+                    reviewComponentKey: 0
                 }
             },
 
@@ -209,6 +210,7 @@
                             summaryHtml = Vue.compile(response.data.html)
 
                             this_this.summeryComponentKey++;
+                            this_this.reviewComponentKey++;
                         })
                         .catch(function (error) {})
                 },
@@ -456,8 +458,11 @@
                 this.templateRender = reviewHtml.render;
 
                 for (var i in reviewHtml.staticRenderFns) {
-                    reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
+                    // reviewTemplateRenderFns.push(reviewHtml.staticRenderFns[i]);
+                    reviewTemplateRenderFns[i] = reviewHtml.staticRenderFns[i];
                 }
+
+                this.$forceUpdate();
             }
         });
 
@@ -489,7 +494,7 @@
 
             mounted: function() {
                 this.templateRender = summaryHtml.render;
-                
+
                 for (var i in summaryHtml.staticRenderFns) {
                     // summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
                     summaryTemplateRenderFns[i] = summaryHtml.staticRenderFns[i];
