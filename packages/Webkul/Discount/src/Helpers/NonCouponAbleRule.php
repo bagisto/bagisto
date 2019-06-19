@@ -165,7 +165,7 @@ class NonCouponAbleRule extends Discount
                 } else {
                     $this->save(array_first($maxImpacts)['rule']);
 
-                    return $maxImpacts;
+                    return array_first($applicableRules)['impact'];
                 }
             } else {
                 $this->save(array_first($prioritySorted)['rule']);
