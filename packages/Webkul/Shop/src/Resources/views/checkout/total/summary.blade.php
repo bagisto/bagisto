@@ -24,6 +24,7 @@
         </div>
     @endif
 
+
     <div class="item-detail" id="discount-detail" @if ($cart->discount_amount && $cart->discount_amount > 0) style="display: block;" @else style="display: none;" @endif>
         <label>
             <b>{{ __('shop::app.checkout.total.disc-amount') }}</b>
@@ -34,6 +35,7 @@
             </b>
         </label>
     </div>
+
 
     <div class="payable-amount" id="grand-total-detail">
         <label>{{ __('shop::app.checkout.total.grand-total') }}</label>

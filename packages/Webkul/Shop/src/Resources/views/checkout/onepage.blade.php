@@ -73,8 +73,13 @@
 
                 <div class="step-content review" v-show="currentStep == 4" id="summary-section">
                     <review-section v-if="currentStep == 4">
-                        <div slot="summary-section" v-if="resetSummary">
-                            <summary-section discount="1" @onApplyCoupon="getOrderSummary" @onRemoveCoupon="getOrderSummary"></summary-section>
+                        <div slot="summary-section">
+                            <summary-section
+                                discount="1"
+                                :key="summeryComponentKey"
+                                @onApplyCoupon="getOrderSummary"
+                                @onRemoveCoupon="getOrderSummary"
+                            ></summary-section>
                         </div>
                     </review-section>
 
@@ -86,8 +91,8 @@
                 </div>
             </div>
 
-            <div class="col-right" v-if="resetSummary" v-show="currentStep != 4">
-                <summary-section></summary-section>
+            <div class="col-right" v-show="currentStep != 4">
+                <summary-section :key="summeryComponentKey"></summary-section>
             </div>
         </div>
     </script>
@@ -135,7 +140,7 @@
                     allAddress: {},
                     countryStates: @json(core()->groupedStatesByCountries()),
                     country: @json(core()->countries()),
-                    resetSummary: true
+                    summeryComponentKey: 0
                 }
             },
 
@@ -201,13 +206,9 @@
 
                     this.$http.get("{{ route('shop.checkout.summary') }}")
                         .then(function(response) {
-                            this_this.resetSummary = false;
-
                             summaryHtml = Vue.compile(response.data.html)
 
-                            setTimeout(function() {
-                                this_this.resetSummary = true;
-                            }, 500);
+                            this_this.summeryComponentKey++;
                         })
                         .catch(function (error) {})
                 },
@@ -433,8 +434,6 @@
         var reviewTemplateRenderFns = [];
 
         Vue.component('review-section', {
-            props: ['resetSummary'],
-
             data: function() {
                 return {
                     templateRender: null,
@@ -490,10 +489,13 @@
 
             mounted: function() {
                 this.templateRender = summaryHtml.render;
-
+                
                 for (var i in summaryHtml.staticRenderFns) {
-                    summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
+                    // summaryTemplateRenderFns.push(summaryHtml.staticRenderFns[i]);
+                    summaryTemplateRenderFns[i] = summaryHtml.staticRenderFns[i];
                 }
+
+                this.$forceUpdate();
             },
 
             render: function(h) {
