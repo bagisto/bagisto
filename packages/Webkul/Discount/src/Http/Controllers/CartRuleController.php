@@ -425,14 +425,22 @@ class CartRuleController extends Controller
 
         // check coupons set conditions
         if (isset($coupons)) {
-            $coupons['cart_rule_id'] = $ruleUpdated->id;
             // $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
+            $coupons['cart_rule_id'] = $ruleUpdated->id;
 
-            $couponUpdated = $ruleUpdated->coupons->update($coupons);
+            if ($ruleUpdated->coupons == null) {
+                $couponCreatedOrUpdated = $this->cartRuleCoupon->create($coupons);
+            } else {
+                $couponCreatedOrUpdated = $ruleUpdated->coupons->update($coupons);
+            }
+        } else {
+            if ($ruleUpdated->coupons != null) {
+                $ruleUpdated->coupons->delete();
+            }
         }
 
         if ($ruleUpdated && $ruleGroupUpdated && $ruleChannelUpdated) {
-            if (isset($couponUpdated) && $couponUpdated) {
+            if (isset($couponCreatedOrUpdated) && $couponCreatedOrUpdated) {
                 session()->flash('info', trans('admin::app.promotion.status.success-coupon'));
             }
 
