@@ -431,7 +431,7 @@
                         //     @endforeach
                         // },
 
-                        criteria: null,
+                        criteria: 'cart',
                         conditions: @json($cart_rule[0]).conditions,
                         cart_input: @json($cart_rule[0]).attributes,
                         actions: @json($cart_rule[0]).actions,
