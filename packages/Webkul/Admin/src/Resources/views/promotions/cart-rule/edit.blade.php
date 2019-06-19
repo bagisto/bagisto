@@ -296,7 +296,7 @@
                                         </div>
 
                                         <div class="control-group" :class="[errors.has('apply_to_shipping') ? 'has-error' : '']">
-                                            <label for="customer_groups" class="required">{{ __('admin::app.promotion.cart.apply-to-shipping') }}</label>
+                                            <label for="apply_to_shipping" class="required">{{ __('admin::app.promotion.cart.apply-to-shipping') }}</label>
 
                                             <select type="text" class="control" name="apply_to_shipping" v-model="apply_to_shipping" v-validate="'required'" value="{{ old('apply_to_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.apply-to-shipping') }}&quot;">
                                                 <option value="0" :selected="apply_to_shipping == 0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
@@ -353,7 +353,7 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" :title="'{{ __('admin::app.promotion.general-info.lables') }}'">
+                            <accordian :active="false" :title="'{{ __('admin::app.promotion.general-info.labels') }}'">
                                 <div slot="body">
                                     @foreach($cart_rule[3]->labels as $label)
                                         <span>[{{ $label->channel->code }}]</span>

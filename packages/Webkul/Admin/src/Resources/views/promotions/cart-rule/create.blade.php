@@ -84,7 +84,7 @@
                                             @endforeach
                                         </select>
 
-                                        <span class="control-error" v-if="errors.has('customer_groups')">@{{ errors.first('customer_groups') }}</span>
+                                        <span class="control-error" v-if="errors.has('customer_groups[]')">@{{ errors.first('customer_groups[]') }}</span>
                                     </div>
 
                                     <div class="control-group" :class="[errors.has('channels[]') ? 'has-error' : '']">
@@ -247,9 +247,9 @@
                             <accordian :active="false" title="Actions">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
-                                        <label for="action_type" class="required">Apply</label>
+                                        <label for="action_type" class="required">{{ __('admin::app.promotion.general-info.apply') }}</label>
 
-                                        <select class="control" name="action_type" v-model="action_type" v-validate="'required'" value="{{ old('action_type') }}" data-vv-as="&quot;Apply As&quot;" v-on:change="detectApply">
+                                        <select class="control" name="action_type" v-model="action_type" v-validate="'required'" value="{{ old('action_type') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.apply') }}&quot;" v-on:change="detectApply">
                                             <option v-for="(action, index) in actions" :value="index">@{{ action }}</option>
                                         </select>
 
@@ -352,7 +352,7 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" :title="'{{ __('admin::app.promotion.general-info.lables') }}'">
+                            <accordian :active="false" :title="'{{ __('admin::app.promotion.general-info.labels') }}'">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']" v-if="dedicated_label">
                                         <label for="label">Global Label</label>

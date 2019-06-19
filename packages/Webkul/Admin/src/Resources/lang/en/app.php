@@ -838,6 +838,7 @@ return [
             'any' => 'Any',
             'all' => 'All',
             'conditions' => 'Conditions',
+            'apply' => 'Apply',
             'are' => 'are',
             'true' => 'true',
             'false' => 'false',
@@ -847,7 +848,7 @@ return [
             'is-guest' => 'For Guests',
             'disc_qty' => 'Max. Quantity Allowed To Be Discounted',
             'test-mode' => 'Choose how to test conditions',
-            'lables' => 'Labels'
+            'labels' => 'Labels'
         ],
 
         'status' => [
@@ -875,6 +876,7 @@ return [
             'adjust-to-value' => 'Adjust to discount value',
             'condition-missing' => 'Please check conditons, some values might be missing'
         ],
+
         'cart' => [
             'buy-atleast' => 'Buy Atleast (N)',
             'apply-to-shipping' => 'Apply to shipping'
