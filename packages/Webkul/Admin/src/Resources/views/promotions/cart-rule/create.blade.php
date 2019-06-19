@@ -285,9 +285,9 @@
                                             <label for="free_shipping" class="required">{{ __('admin::app.promotion.general-info.free-shipping') }}</label>
 
                                             <select type="text" class="control" name="free_shipping" v-model="free_shipping" v-validate="'required'" value="{{ old('free_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.free-shipping') }}&quot;">
-                                                <option value="0" :selected="free_shipping == 0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+                                                <option value="1">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
 
-                                                <option value="1" :selected="free_shipping == 1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                                                <option value="0">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
                                             </select>
 
                                             <span class="control-error" v-if="errors.has('free_shipping')">@{{ errors.first('free_shipping') }}</span>
@@ -297,9 +297,9 @@
                                             <label for="customer_groups" class="required">{{ __('admin::app.promotion.cart.apply-to-shipping') }}</label>
 
                                             <select type="text" class="control" name="apply_to_shipping" v-model="apply_to_shipping" v-validate="'required'" value="{{ old('apply_to_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.apply-to-shipping') }}&quot;">
-                                                <option value="0" :selected="apply_to_shipping == 0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+                                                <option value="1" :selected="apply_to_shipping == 0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
 
-                                                <option value="1" :selected="apply_to_shipping == 1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                                                <option value="0" :selected="apply_to_shipping == 1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
                                             </select>
 
                                             <span class="control-error" v-if="errors.has('apply_to_shipping')">@{{ errors.first('apply_to_shipping') }}</span>
@@ -411,13 +411,13 @@
                         apply: null,
                         apply_amt: false,
                         apply_prct: false,
-                        apply_to_shipping: null,
+                        apply_to_shipping: 0,
                         disc_amount: null,
                         disc_threshold: null,
                         disc_quantity: null,
-                        end_other_rules: null,
+                        end_other_rules: 0,
                         coupon_type: null,
-                        free_shipping: null,
+                        free_shipping: 0,
 
                         all_conditions: [],
                         match_criteria: 'all_are_true',
