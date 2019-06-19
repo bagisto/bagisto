@@ -433,6 +433,10 @@ class CartRuleController extends Controller
             } else {
                 $couponCreatedOrUpdated = $ruleUpdated->coupons->update($coupons);
             }
+        } else {
+            if ($ruleUpdated->coupons != null) {
+                $ruleUpdated->coupons->delete();
+            }
         }
 
         if ($ruleUpdated && $ruleGroupUpdated && $ruleChannelUpdated) {
