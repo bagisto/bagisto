@@ -47,7 +47,7 @@ class ProductServiceProvider extends ServiceProvider
         view()->composer(['admin::catalog.products.create'], function ($view) {
             $items = array();
 
-            foreach (config('product_types') as $item) {
+            foreach (config('product-types') as $item) {
                 $item['children'] = [];
 
                 array_push($items, $item);
