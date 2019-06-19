@@ -123,12 +123,12 @@ class OnepageController extends Controller
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
         $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
 
+        if (Cart::hasError() || !Cart::saveCustomerAddress($data) || ! $rates = Shipping::collectRates())
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+
         $this->nonCoupon->apply();
 
         Cart::collectTotals();
-
-        if (Cart::hasError() || !Cart::saveCustomerAddress($data) || ! $rates = Shipping::collectRates())
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         return response()->json($rates);
     }
@@ -142,12 +142,12 @@ class OnepageController extends Controller
     {
         $shippingMethod = request()->get('shipping_method');
 
+        if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+
         $this->nonCoupon->apply();
 
         Cart::collectTotals();
-
-        if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod))
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         return response()->json(Payment::getSupportedPaymentMethods());
     }
@@ -161,12 +161,12 @@ class OnepageController extends Controller
     {
         $payment = request()->get('payment');
 
+        if (Cart::hasError() || !$payment || !Cart::savePaymentMethod($payment))
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+
         $this->nonCoupon->apply();
 
         Cart::collectTotals();
-
-        if (Cart::hasError() || !$payment || !Cart::savePaymentMethod($payment))
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         $cart = Cart::getCart();
 

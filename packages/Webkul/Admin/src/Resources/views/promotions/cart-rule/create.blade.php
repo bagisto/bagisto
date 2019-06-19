@@ -198,52 +198,45 @@
 
                                     <div class="condition-set">
                                         <!-- Cart Attributes -->
-                                        <div v-for="(condition, index) in conditions_list" :key="index">
-                                            <div class="control-container mt-20">
-                                                <div class="title-bar">
-                                                    <span>Cart Attribute is </span>
-                                                    <span class="icon cross-icon" v-on:click="removeCartAttr(index)"></span>
-                                                </div>
+                                        <div class="control-container mt-20" v-for="(condition, index) in conditions_list" :key="index">
+                                            <select class="control" name="cart_attributes[]" v-model="conditions_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableCondition($event, index)">
+                                                <option disabled="disabled">Select Option</option>
+                                                <option v-for="(cart_ip, index1) in cart_input" :value="cart_ip.code" :key="index1">@{{ cart_ip.name }}</option>
+                                            </select>
 
-                                                <div class="control-group mt-10" :key="index">
-                                                    <select class="control" name="cart_attributes[]" v-model="conditions_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px;" v-on:change="enableCondition($event, index)">
-                                                        <option disabled="disabled">Select Option</option>
-                                                        <option v-for="(cart_ip, index1) in cart_input" :value="cart_ip.code" :key="index1">@{{ cart_ip.name }}</option>
+                                            <div v-if='conditions_list[index].type == "string"' style="display: flex">
+                                                <select class="control" name="cart_attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
+                                                    <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
+                                                </select>
+
+                                                <div v-if='conditions_list[index].attribute == "shipping_state"'>
+                                                    <select class="control" v-model="conditions_list[index].value">
+                                                        <option disabled="disabled">Select State</option>
+                                                        <optgroup v-for='(state, code) in country_and_states.states' :label="code">
+                                                            <option v-for="(stateObj, index) in state" :value="stateObj.code">@{{ stateObj.default_name }}</option>
+                                                        </optgroup>
                                                     </select>
-
-                                                    <div v-if='conditions_list[index].type == "string"'>
-                                                        <select class="control" name="cart_attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
-                                                            <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
-                                                        </select>
-
-                                                        <div v-if='conditions_list[index].attribute == "shipping_state"'>
-                                                            <select class="control" v-model="conditions_list[index].value">
-                                                                <option disabled="disabled">Select State</option>
-                                                                <optgroup v-for='(state, code) in country_and_states.states' :label="code">
-                                                                    <option v-for="(stateObj, index) in state" :value="stateObj.code">@{{ stateObj.default_name }}</option>
-                                                                </optgroup>
-                                                            </select>
-                                                        </div>
-
-                                                        <div v-if='conditions_list[index].attribute == "shipping_country"'>
-                                                            <select class="control" v-model="conditions_list[index].value">
-                                                                <option disabled="disabled">Select Country</option>
-                                                                <option v-for="(country, index) in country_and_states.countries" :value="country.code">@{{ country.name }}</option>
-                                                            </select>
-                                                        </div>
-
-                                                        <input type="text" class="control" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value" v-if='conditions_list[index].attribute != "shipping_state" && conditions_list[index].attribute != "shipping_country"'>
-                                                    </div>
-
-                                                    <div v-if='conditions_list[index].type == "numeric"'>
-                                                        <select class="control" name="attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
-                                                            <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
-                                                        </select>
-
-                                                        <input type="number" step="0.1000" class="control" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value">
-                                                    </div>
                                                 </div>
+
+                                                <div v-if='conditions_list[index].attribute == "shipping_country"'>
+                                                    <select class="control" v-model="conditions_list[index].value">
+                                                        <option disabled="disabled">Select Country</option>
+                                                        <option v-for="(country, index) in country_and_states.countries" :value="country.code">@{{ country.name }}</option>
+                                                    </select>
+                                                </div>
+
+                                                <input class="control" type="text" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value" v-if='conditions_list[index].attribute != "shipping_state" && conditions_list[index].attribute != "shipping_country"'>
                                             </div>
+
+                                            <div v-if='conditions_list[index].type == "numeric"' style="display: flex">
+                                                <select class="control" name="attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
+                                                    <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
+                                                </select>
+
+                                                <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value">
+                                            </div>
+
+                                            <span class="icon trash-icon" v-on:click="removeCartAttr(index)"></span>
                                         </div>
                                     </div>
 
