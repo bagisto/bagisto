@@ -519,7 +519,11 @@
                         .then(function(response) {
                             this_this.$emit('onApplyCoupon')
                         })
-                        .catch(function(error) {});
+                        .catch(function(error) {
+                            window.flashMessages = [{'type' : 'alert-error', 'message' : error.response.data.message}];
+
+                            this_this.$root.addFlashMessages();
+                        });
                 },
 
                 removeCoupon: function () {
@@ -529,7 +533,11 @@
                         .then(function(response) {
                             this_this.$emit('onRemoveCoupon')
                         })
-                        .catch(function(error) {});
+                        .catch(function(error) {
+                            window.flashMessages = [{'type' : 'alert-error', 'message' : error.response.data.message}];
+
+                            this_this.$root.addFlashMessages();
+                        });
                 }
             }
         })

@@ -32,7 +32,7 @@ class ProductImage extends AbstractProduct
             ];
         }
 
-        if (! count($images)) {
+        if (! $product->parent_id && ! count($images)) {
             $images[] = [
                 'small_image_url' => asset('vendor/webkul/ui/assets/images/product/small-product-placeholder.png'),
                 'medium_image_url' => asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png'),
