@@ -23,6 +23,8 @@ class BuyAGetB extends Action
 
             if ($realQty > $disc_quantity) {
                 $amountDiscounted = $amountDiscounted * $disc_quantity;
+            } else {
+                $amountDiscounted = $amountDiscounted * $realQty;
             }
 
             if ($amountDiscounted > $item['base_price']) {

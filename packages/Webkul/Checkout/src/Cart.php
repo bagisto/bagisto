@@ -1059,6 +1059,8 @@ class Cart {
             'base_sub_total' => $data['base_sub_total'],
             'tax_amount' => $data['tax_total'],
             'base_tax_amount' => $data['base_tax_total'],
+            'discount_amount' => $data['discount_amount'],
+            'base_discount_amount' => $data['base_discount_amount'],
 
             'shipping_address' => array_except($data['shipping_address'], ['id', 'cart_id']),
             'billing_address' => array_except($data['billing_address'], ['id', 'cart_id']),
