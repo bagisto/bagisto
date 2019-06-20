@@ -136,24 +136,25 @@ abstract class Discount
         ]);
 
         if (count($existingRule)) {
-            // $this->clearDiscount();
-
             if ($existingRule->first()->cart_rule_id != $rule->id) {
                 $existingRule->first()->update([
                     'cart_rule_id' => $rule->id
                 ]);
+
+                $this->clearDiscount();
 
                 $this->updateCartItemAndCart($rule);
 
                 return true;
             }
         } else {
-            // $this->clearDiscount();
 
             $this->cartRuleCart->create([
                 'cart_id' => $cart->id,
                 'cart_rule_id' => $rule->id
             ]);
+
+            $this->clearDiscount();
 
             $this->updateCartItemAndCart($rule);
 
@@ -272,7 +273,7 @@ abstract class Discount
     /**
      * To find the max worth item in current cart instance
      *
-     * @return Array
+     * @return array
      */
     public function maxWorthItem()
     {
@@ -295,6 +296,27 @@ abstract class Discount
 
         return $maxWorthItem;
     }
+
+    /**
+     * Validate the currently applied cart rule
+     *
+     * @return boolean
+     */
+    public function validateRule($rule)
+    {
+        $applicability = $this->checkApplicability($rule);
+
+        if ($applicability) {
+            if ($rule->status) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
 
     /**
      * Checks the rule against the current cart instance whether rule conditions are applicable
