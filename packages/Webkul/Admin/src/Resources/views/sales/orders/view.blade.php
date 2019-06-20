@@ -250,7 +250,7 @@
                                                     <td>
                                                         {{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}
                                                     </td>
-                                                    
+
                                                     <td>
                                                         {{ $item->name }}
 
