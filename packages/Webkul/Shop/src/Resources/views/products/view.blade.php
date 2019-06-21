@@ -142,18 +142,11 @@
             }
         });
 
-        document.onreadystatechange = function () {
-            var state = document.readyState
-            var galleryTemplate = document.getElementById('product-gallery-template');
+        $(document).ready(function() {
             var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
-
-            if (galleryTemplate) {
-                if (state != 'interactive') {
-                    document.getElementById('loader').style.display="none";
-                    addTOButton.style.display="flex";
-                }
-            }
-        }
+            document.getElementById('loader').style.display="none";
+            addTOButton.style.display="flex";
+        });
 
         window.onload = function() {
             var thumbList = document.getElementsByClassName('thumb-list')[0];
