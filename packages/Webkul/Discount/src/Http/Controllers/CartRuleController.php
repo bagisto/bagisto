@@ -441,12 +441,12 @@ class CartRuleController extends Controller
 
         if ($ruleUpdated && $ruleGroupUpdated && $ruleChannelUpdated) {
             if (isset($couponCreatedOrUpdated) && $couponCreatedOrUpdated) {
-                session()->flash('info', trans('admin::app.promotion.status.success-coupon'));
+                session()->flash('success', trans('admin::app.promotion.status.success-coupon'));
             }
 
-            session()->flash('info', trans('admin::app.promotion.status.update-success'));
+            session()->flash('success', trans('admin::app.promotion.status.update-success'));
         } else {
-            session()->flash('info', trans('admin::app.promotion.status.update-success'));
+            session()->flash('success', trans('admin::app.promotion.status.update-success'));
 
             return redirect()->back();
         }
