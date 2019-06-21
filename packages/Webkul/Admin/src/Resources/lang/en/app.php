@@ -864,7 +864,8 @@ return [
             'coupon-failed' => 'Coupon failed to apply',
             'no-coupon' => '* Coupon not applicable',
             'coupon-removed' => 'Coupon removed successfully',
-            'coupon-remove-failed' => 'Coupon removal failed'
+            'coupon-remove-failed' => 'Coupon removal failed',
+            'duplicate-coupon' => 'Coupon already exists, please try again with a different coupon'
         ],
 
         'catalog' => [

@@ -190,6 +190,16 @@ class CartRuleController extends Controller
             // save the coupon used in coupon section
             $coupons['code'] = $data['code'];
 
+            $couponExists = $this->cartRuleCoupon->findWhere([
+                'code' => $coupons['code']
+            ]);
+
+            if ($couponExists->count()) {
+                session()->flash('warning', trans('admin::app.promotion.status.duplicate-coupon'));
+
+                return redirect()->back();
+            }
+
             // set coupon usage per customer same as per_customer limit which is disabled for now
             $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
             // unset coupon code from coupon section
@@ -389,6 +399,18 @@ class CartRuleController extends Controller
             $data['auto_generation'] = 0;
 
             $coupons['code'] = $data['code'];
+
+            $couponExists = $this->cartRuleCoupon->findWhere([
+                'code' => $coupons['code']
+            ]);
+
+            if ($couponExists->count()) {
+                if ($couponExists->first()->cart_rule_id != $id) {
+                    session()->flash('warning', trans('admin::app.promotion.status.duplicate-coupon'));
+
+                    return redirect()->back();
+                }
+            }
 
             unset($data['code']);
             // } else {

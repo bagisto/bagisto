@@ -175,7 +175,7 @@
                                 <div slot="body">
                                     <input type="hidden" name="all_conditions" v-model="all_conditions">
 
-                                    <div class="add-condition">
+                                    {{-- <div class="add-condition">
                                         <div class="control-group">
                                             <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
 
@@ -183,7 +183,7 @@
                                                 <option value="cart">Cart Properties</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="control-group">
                                         {{ __('admin::app.promotion.general-info.test-mode') }}
