@@ -1,0 +1,40 @@
+@import "icons";
+
+.navbar-left {
+    width: 100px;
+
+    ul.menubar li.menu-item {
+        padding: 10px 7px;
+    }
+}
+
+.content-container {
+    padding-left: 100px;
+}
+
+.preorder-info {
+    padding: 15px;
+    width: auto;
+    border: 1px solid #d3d3d3;
+    border-left: 4px solid #0031f0;
+    margin: 15px 0;
+}
+
+.pre-order-item-info {
+    .heading {
+        font-weight: 600;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        display: block;
+    }
+
+    .row {
+        margin-bottom: 5px;
+        padding-left: 10px;
+        display: block;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

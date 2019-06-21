@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://bagsaas.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -245,7 +245,16 @@ return [
         Webkul\Sales\Providers\SalesServiceProvider::class,
         Webkul\Tax\Providers\TaxServiceProvider::class,
         Webkul\API\Providers\APIServiceProvider::class,
-        Webkul\Discount\Providers\DiscountServiceProvider::class
+        Webkul\Discount\Providers\DiscountServiceProvider::class,
+        Webkul\CustomerDocument\Providers\CustomerDocumentServiceProvider::class,
+        Webkul\BulkAddToCart\Providers\BulkAddToCartServiceProvider::class,
+        Webkul\AdminAuthCheck\Providers\AdminAuthCheckServiceProvider::class,
+        Webkul\StripeConnect\Providers\StripeConnectServiceProvider::class,
+        Webkul\CustomerGroupCatalog\Providers\CustomerGroupCatalogServiceProvider::class,
+        // Webkul\ShowPriceAfterLogin\Providers\ShowPriceAfterLoginServiceProvider::class,
+        Webkul\CustomerCreditMax\Providers\CustomerCreditMaxServiceProvider::class,
+        Webkul\SAASPreOrder\Providers\SAASPreOrderServiceProvider::class,
+        Webkul\SAASCustomizer\Providers\SAASCustomizerServiceProvider::class
     ],
 
     /*
@@ -304,5 +313,6 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Concord' => Konekt\Concord\Facades\Concord::class,
         'Helper'  => Konekt\Concord\Facades\Helper::class,
+        'Company' => Webkul\SAASCustomizer\Facades\Company::class
     ],
 ];

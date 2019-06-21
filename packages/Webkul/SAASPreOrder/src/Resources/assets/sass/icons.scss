@@ -1,0 +1,17 @@
+.preorder-icon {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    background-size: cover;
+    background-image: url("../images/Icon-Preorder.svg");
+}
+
+.active {
+    .preorder-icon {
+        background-image: url("../images/Icon-Preorder-Active.svg");
+    }
+
+    &.preorder-icon {
+        background-image: url("../images/Icon-Preorder-Active.svg");
+    }
+}
