@@ -21,16 +21,9 @@ return [
                 'validation' => 'required',
                 'channel_based' => false,
                 'locale_based' => false
-            ]
-        ]
-    ], [
-        'key' => 'sales.paymentmethods.stripe',
-        'name' => 'Stripe Payments',
-        'sort' => 4,
-        'fields' => [
-            [
+            ], [
                 'name' => 'active',
-                'title' => 'Enable For Checkout',
+                'title' => 'Enable On Checkout',
                 'type' => 'select',
                 'options' => [
                     [
@@ -43,85 +36,82 @@ return [
                 ],
                 'validation' => 'required'
             ], [
-                'name' => 'title',
-                'title' => 'Title',
-                'type' => 'text',
-                'validation' => 'required',
-                'channel_based' => false,
-                'locale_based' => true
-            ],
-            // [
-            //     'name' => 'acceptedchannels',
-            //     'title' => 'Accpeted Channels',
-            //     'type' => 'multiselect',
-            //     'validation' => 'required',
-            //     'channel_based' => false,
-            //     'locale_based' => false,
-            //     'repository' => 'Webkul\Aramex\Repositories\ChannelRepository@getAllChannels'
-            // ],
-            [
-                'name' => 'description',
-                'title' => 'Description',
-                'type' => 'textarea',
-                'channel_based' => false,
-                'locale_based' => true
-            ], [
-                'name' => 'enabletesting',
-                'title' => 'Enable Testing',
+                'name' => 'stripefees',
+                'title' => 'Stripe fee to be paid by customer or seller',
                 'type' => 'select',
-                'channel_based' => false,
-                'locale_based' => true,
                 'options' => [
                     [
-                        'title' => 'Active',
-                        'value' => true
+                        'title' => 'Seller',
+                        'value' => 'seller'
                     ], [
-                        'title' => 'Inactive',
-                        'value' => false
+                        'title' => 'Customer',
+                        'value' => 'customer'
                     ]
                 ],
                 'validation' => 'required'
-            ],
-            // [
-            //     'name' => 'test_publishable_key',
-            //     'title' => 'Test Publishable Key',
-            //     'type' => 'text',
-            //     'type' => 'text',
-            //     // 'validation' => 'required',
-            //     'channel_based' => false,
-            //     'locale_based' => false
-            // ], [
-            //     'name' => 'test_secret_key',
-            //     'title' => 'Test Secret Key',
-            //     'type' => 'text',
-            //     'type' => 'text',
-            //     // 'validation' => 'required',
-            //     'channel_based' => false,
-            //     'locale_based' => false
-            // ], [
-            //     'name' => 'live_publishable_key',
-            //     'title' => 'Live Publishable Key',
-            //     'type' => 'text',
-            //     'type' => 'text',
-            //     // 'validation' => 'required',
-            //     'channel_based' => false,
-            //     'locale_based' => false
-            // ], [
-            //     'name' => 'live_secret_key',
-            //     'title' => 'Live Secret Key',
-            //     'type' => 'text',
-            //     'type' => 'text',
-            //     // 'validation' => 'required',
-            //     'channel_based' => false,
-            //     'locale_based' => false
-            // ],
-            [
-                'name' => 'statement_descriptor',
+            ],  [
+                'name' => 'statementdescriptor',
                 'title' => 'Statement Descriptor',
                 'type' => 'text',
-                'type' => 'text',
-                // 'validation' => 'required'
+                'validation' => 'required'
             ]
         ]
-    ]
+    ],
+    // [
+    //     'key' => 'stripe.connect.stripe',
+    //     'name' => 'Stripe Payments',
+    //     'sort' => 2,
+    //     'fields' => [
+    //         [
+    //             'name' => 'active',
+    //             'title' => 'Enable For Checkout',
+    //             'type' => 'select',
+    //             'options' => [
+    //                 [
+    //                     'title' => 'True',
+    //                     'value' => true
+    //                 ], [
+    //                     'title' => 'False',
+    //                     'value' => false
+    //                 ]
+    //             ],
+    //             'validation' => 'required'
+    //         ], [
+    //             'name' => 'title',
+    //             'title' => 'Title',
+    //             'type' => 'text',
+    //             'validation' => 'required',
+    //             'channel_based' => false,
+    //             'locale_based' => true
+    //         ], [
+    //             'name' => 'description',
+    //             'title' => 'Description',
+    //             'type' => 'textarea',
+    //             'channel_based' => false,
+    //             'locale_based' => true
+    //         ], [
+    //             'name' => 'enabletesting',
+    //             'title' => 'Enable Testing',
+    //             'type' => 'select',
+    //             'channel_based' => false,
+    //             'locale_based' => true,
+    //             'options' => [
+    //                 [
+    //                     'title' => 'Active',
+    //                     'value' => true
+    //                 ], [
+    //                     'title' => 'Inactive',
+    //                     'value' => false
+    //                 ]
+    //             ],
+    //             'validation' => 'required'
+    //         ], [
+    //             'name' => 'statement_descriptor',
+    //             'title' => 'Statement Descriptor',
+    //             'type' => 'text',
+    //             'type' => 'text',
+    //             // 'validation' => 'required'
+    //         ]
+    //     ]
+    // ]
 ];
