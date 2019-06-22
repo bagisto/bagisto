@@ -8,7 +8,7 @@
     <seller-registration></seller-registration>
 
     @push('scripts')
-        <script type="text/x-template" id ="seller-registration-form">
+        <script type="text/x-template" id="seller-registration">
             <div class="form-container">
                 <div class="step-navigator">
                     <ul class="step-list">
@@ -20,47 +20,49 @@
                     </ul>
                 </div>
 
-                <form class="registration" @submit.prevent="onSubmit">
+                <form class="registration" data-vv-scope="step-one" v-if="step_one" @submit.prevent="validateForm('step-one')">
                     @csrf
 
-                    <div class="step-one" v-show="step_one" data-vv-scope="step-one">
-                        <h3 class="mb-30">Step 1:</h3>
-                        <h4>Authentication Credentials</h4>
+                    <h3 class="mb-30">Step 1:</h3>
 
-                        <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                            <label for="email" class="required">Email</label>
+                    <h4>Authentication Credentials</h4>
 
-                            <input type="text" v-validate="'required|email|max:191'" class="control" v-model="email" name="email" data-vv-as="&quot;{{ __('email') }}&quot;" placeholder="Auth Email">
+                    <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
+                        <label for="email" class="required">Email</label>
 
-                            {{-- data-vv-as="&quot;{{ __('shop::app.customer.login-form.email') }}&quot;" --}}
+                        <input type="text" v-validate="'required|email|max:191'" class="control" v-model="email" name="email" data-vv-as="&quot;{{ __('email') }}&quot;" placeholder="Auth Email">
 
-                            <span class="control-error" v-show="errors.has('email')">@{{ errors.first('email') }}</span>
-                        </div>
-
-                        <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
-                            <label for="password" class="required">Password</label>
-
-                            <input type="password" name="password" v-validate="'required|min:6'" ref="password" class="control" v-model="password" placeholder="password" data-vv-as="&quot;{{ __('password') }}&quot;">
-
-                            <span class="control-error" v-show="errors.has('password')">@{{ errors.first('password') }}</span>
-                        </div>
-
-                        <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
-                            <label for="password_confirmation" class="required">Confirm Password</label>
-
-                            <input type="password" v-validate="'required|min:6|confirmed:password'" class="control" v-model="password_confirmation" name="password_confirmation" placeholder="Confirm Password" data-vv-as="&quot;{{ __('confirm password') }}&quot;">
-
-                            <span class="control-error" v-show="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
-                        </div>
-
-                        <div class="control-group">
-                            <input type="submit" class="btn btn-lg btn-primary" :disabled="errors.has('password') || errors.has('password_confirmation') || errors.has('email')" @click="validateForm('step-one')" value="Continue">
-                        </div>
+                        <span class="control-error" v-show="errors.has('email')">@{{ errors.first('email') }}</span>
                     </div>
 
-                    <div class="step-two" v-show="step_two" data-vv-scope="step-two">
+                    <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
+                        <label for="password" class="required">Password</label>
+
+                        <input type="password" name="password" v-validate="'required|min:6'" ref="password" class="control" v-model="password" placeholder="password" data-vv-as="&quot;{{ __('password') }}&quot;">
+
+                        <span class="control-error" v-show="errors.has('password')">@{{ errors.first('password') }}</span>
+                    </div>
+
+                    <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
+                        <label for="password_confirmation" class="required">Confirm Password</label>
+
+                        <input type="password" v-validate="'required|min:6|confirmed:password'" class="control" v-model="password_confirmation" name="password_confirmation" placeholder="Confirm Password" data-vv-as="&quot;{{ __('confirm password') }}&quot;">
+
+                        <span class="control-error" v-show="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
+                    </div>
+
+                    <div class="control-group">
+                        <!-- <input type="submit" class="btn btn-lg btn-primary" :disabled="errors.has('password') || errors.has('password_confirmation') || errors.has('email')"  value="Continue"> -->
+                        <button class="btn btn-lg btn-primary" :disabled="errors.has('password') || errors.has('password_confirmation') || errors.has('email')">Continue</button>
+                    </div>
+                </form>
+
+                <form class="registration" @submit.prevent="validateForm('step-two')" data-vv-scope="step-two" v-show="step_two">
+                    <div class="step-two">
                         <h3 class="mb-30">Step 2:</h3>
+
                         <h4>Personal Details</h4>
+
                         <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']" >
                             <label for="first_name" class="required">First Name</label>
 
@@ -86,12 +88,15 @@
                         </div>
 
                         <div class="control-group">
-                            <input type="submit" class="btn btn-lg btn-primary" :disabled="errors.has('first_name') || errors.has('last_name') || errors.has('phone_no')" @click="validateForm('step-two')" value="Continue">
+                            <button class="btn btn-lg btn-primary" :disabled="errors.has('first_name') || errors.has('last_name') || errors.has('phone_no')">Continue</button>
                         </div>
                     </div>
+                </form>
 
-                    <div class="step-three" v-show="step_three" data-vv-scope="step-three">
+                <form class="registration" @submit.prevent="validateForm('step-three')" data-vv-scope="step-three" v-show="step_three">
+                    <div class="step-three">
                         <h3 class="mb-30">Step 3:</h3>
+
                         <h4>Organization Details</h4>
 
                         <div class="control-group" :class="[errors.has('username') ? 'has-error' : '']">
@@ -111,7 +116,7 @@
                         </div>
 
                         <div class="control-group">
-                            <button class="btn btn-lg btn-primary" :disabled="errors.has('username') || errors.has('org_name') || createdclicked" @click="validateForm('step-three')">Create Seller</button>
+                            <button class="btn btn-lg btn-primary" :disabled="errors.has('username') || errors.has('org_name') || createdclicked">Continue</button>
                         </div>
                     </div>
                 </form>
@@ -120,7 +125,7 @@
 
         <script>
             Vue.component('seller-registration', {
-                template: '#seller-registration-form',
+                template: '#seller-registration',
                 inject: ['$validator'],
 
                 data: () => ({
@@ -144,24 +149,27 @@
                 }),
 
                 mounted() {
-                    this.step_one = true;
                     this.isOneActive = true;
                 },
 
                 methods: {
-                    validateForm: function (scope) {
-                        this.$validator.validateAll(scope).then((result) => {
-                            if (result) {
-                                if (scope == 'step-one') {
-                                    this.catchResponseOne();
-                                } else if (scope == 'step-two') {
-                                    this.catchResponseTwo();
-                                } else if (scope == 'step-three') {
-                                    this.catchResponseThree();
-                                }
+                    validateForm: function(scope) {
+                    var this_this = this;
+
+                    this.$validator.validateAll(scope).then(function (result) {
+                        this_this.showErrors();
+
+                        if (result) {
+                            if (scope == 'step-one') {
+                                this_this.catchResponseOne();
+                            } else if (scope == 'step-two') {
+                                this_this.catchResponseTwo();
+                            } else if (scope == 'step-three') {
+                                this_this.catchResponseThree();
                             }
-                        });
-                    },
+                        }
+                    });
+                },
 
                     stepNav(step) {
                         if (step == 1) {
@@ -187,26 +195,70 @@
                         }
                     },
 
+                    showErrors() {
+                        console.log(this.errors);
+                    },
+
                     catchResponseOne () {
-                        if (this.email != null && this.password != null && this.password_confirmation != null) {
-                            this.step_two = true;
-                            this.step_one = false;
-                            this.isOneActive = false;
-                            this.isTwoActive = true;
-                        }
+                        var o_this = this;
+
+                        axios.post('{{ route('company.validate.step-one') }}', {
+                            email: this.email,
+                            password: this.password,
+                            password_confirmation: this.password_confirmation
+                        }).then(function (response) {
+                            o_this.step_two = true;
+                            o_this.step_one = false;
+                            o_this.isOneActive = false;
+                            o_this.isTwoActive = true;
+
+                            o_this.errors.clear();
+                        }).catch(function (errors) {
+                            serverErrors = errors.response.data.errors.email;
+
+                            if (errors.response.data.errors.email) {
+                                o_this.errors.add('email', 'Please choose an unique email');
+                            }
+                        });
                     },
 
                     catchResponseTwo () {
-                        if (this.first_name != null && this.phone_no != null) {
-                            this.step_three = true;
-                            this.step_two = false;
-                            this.isTwoActive = false;
-                            this.isThreeActive = true;
-                        }
+                        this.step_three = true;
+                        this.step_two = false;
+                        this.isTwoActive = false;
+                        this.isThreeActive = true;
                     },
 
                     catchResponseThree () {
-                        this.result = this.sendDataToServer();
+                        o_this.step_two = true;
+                        o_this.step_one = false;
+                        o_this.isOneActive = false;
+                        o_this.isTwoActive = true;
+
+                        return false;
+
+                        var o_this = this;
+
+                        // axios.post('{{ route('company.validate.step-one') }}', {
+                        //     email: this.email,
+                        //     password: this.password,
+                        //     password_confirmation: this.password_confirmation
+                        // }).then(function (response) {
+                        //     o_this.step_two = true;
+                        //     o_this.step_one = false;
+                        //     o_this.isOneActive = false;
+                        //     o_this.isTwoActive = true;
+
+                        //     o_this.errors.clear();
+
+                        //     o_this.result = this.sendDataToServer();
+                        // }).catch(function (errors) {
+                        //     serverErrors = errors.response.data.errors.email;
+
+                        //     if (errors.response.data.errors.email) {
+                        //         o_this.errors.add('email', 'Please choose an unique email');
+                        //     }
+                        // });
                     },
 
                     handleErrorResponse (response, scope) {
@@ -245,8 +297,9 @@
                         });
                     },
 
-                    onSubmit: function (e) {
-                        this.$validator.validateAll().then(result => {
+                    onSubmit: function (scope) {
+                        console.log('called');
+                        this.$validator.validateAll(scope).then(result => {
                             if (result) {
                                 return true;
                             }

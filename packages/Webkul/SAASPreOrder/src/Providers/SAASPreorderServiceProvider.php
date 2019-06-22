@@ -10,6 +10,10 @@ use Webkul\Shipping\Facades\Shipping as ShippingFacade;
 
 class SAASPreOrderServiceProvider extends ServiceProvider
 {
+    protected $commands = [
+        'Webkul\SAASPreOrder\Commands\Console\GenerateData'
+    ];
+
     /**
      * Bootstrap services.
      *
@@ -40,6 +44,17 @@ class SAASPreOrderServiceProvider extends ServiceProvider
             __DIR__ . '/../Resources/views/admin/sales/orders' => resource_path('views/vendor/admin/sales/orders'),
             __DIR__ . '/../Resources/views/shop/customers/account/orders' => resource_path('views/vendor/shop/customers/account/orders'),
         ]);
+
+        //model observer for all the core models of Bagisto
+        $this->bootModelObservers();
+    }
+
+    /**
+     * Model observer for preorder model
+     */
+    public function bootModelObservers()
+    {
+        \Webkul\SAASPreOrder\Models\PreOrderItem::observe(\Webkul\SAASPreOrder\Observers\SAASPreOrderItemObserver::class);
     }
 
     /**
@@ -52,6 +67,8 @@ class SAASPreOrderServiceProvider extends ServiceProvider
         $this->registerConfig();
 
         $this->registerFacades();
+
+        $this->commands($this->commands);
     }
 
     /**
@@ -82,6 +99,10 @@ class SAASPreOrderServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/admin-menu.php', 'menu.admin'
+        );
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/purge-pool.php', 'purge-pool'
         );
     }
 }

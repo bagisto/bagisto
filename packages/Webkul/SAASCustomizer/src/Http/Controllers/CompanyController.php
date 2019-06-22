@@ -176,6 +176,28 @@ class CompanyController extends Controller
         }
     }
 
+    public function validateStepOne()
+    {
+        $this->validate(request(),[
+            'email' => 'required|email|unique:admins,email'
+        ]);
+    }
+
+    public function validateStepTwo()
+    {
+        $this->validate(request(),[
+            'email' => 'required|email|unique:admins,email',
+            'password' => 'required|min:6|confirmed'
+        ]);
+    }
+
+    public function validateStepThree()
+    {
+        $this->validate(request(),[
+            'email' => 'required|email|unique:admins,email'
+        ]);
+    }
+
     public function edit($id)
     {
         $company = $this->company->findOrFail($id);
@@ -186,7 +208,7 @@ class CompanyController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'email' => 'required|email|max:191|unique:companies,email,'.$id,
+            'email' => 'email|max:191|unique:companies,email,'.$id,
             'name' => 'required|string|max:191|unique:companies,name,'.$id,
             'domain' => 'required|string|max:191|unique:companies,domain,'.$id,
             'is_active' => 'required|boolean'

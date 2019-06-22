@@ -26,7 +26,7 @@
                     <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
                         <label for="email" class="required">Email</label>
 
-                        <input type="text" v-validate="'required'" class="control" name="email" v-model="email" placeholder="email" data-vv-as="&quot;{{ __('shop::app.customer.login-form.email') }}&quot;">
+                        <input type="text" class="control" name="email" v-model="email" placeholder="email" data-vv-as="&quot;{{ __('shop::app.customer.login-form.email') }}&quot;">
 
                         <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
                     </div>

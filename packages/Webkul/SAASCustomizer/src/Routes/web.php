@@ -7,6 +7,12 @@ Route::group(['middleware' => 'web'], function () {
             'view' => 'saas::companies.auth.register'
         ])->name('company.create.index');
 
+        Route::post('validate/step-one', 'Webkul\SAASCustomizer\Http\Controllers\CompanyController@validateStepOne')->name('company.validate.step-one');
+
+        Route::post('validate/step-two', 'Webkul\SAASCustomizer\Http\Controllers\CompanyController@validateStepOne')->name('company.validate.step-two');
+
+        Route::post('validate/step-three', 'Webkul\SAASCustomizer\Http\Controllers\CompanyController@validateStepOne')->name('company.validate.step-three');
+
         Route::post('register', 'Webkul\SAASCustomizer\Http\Controllers\CompanyController@store')->name('company.create.store');
 
         Route::get('/seed-data', 'Webkul\SAASCustomizer\Http\Controllers\PurgeController@seedDatabase')->name('company.create.data');

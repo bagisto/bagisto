@@ -8,6 +8,7 @@ use Illuminate\Foundation\AliasLoader;
 use Webkul\SAASCustomizer\Providers\EventServiceProvider;
 use Webkul\Sales\Providers\ModuleServiceProvider;
 use Webkul\SAASCustomizer\Company;
+use Webkul\SAASCustomizer\Http\Middleware\RedirectIfNotSuperAdmin;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Webkul\SAASCustomizer\Exceptions\Handler;
 use Webkul\SAASCustomizer\Facades\Company as CompanyFacade;
@@ -28,6 +29,8 @@ class SAASCustomizerServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'saas');
+
+        $router->aliasMiddleware('super-admin', RedirectIfNotSuperAdmin::class);
 
         //over ride system's default validation
         $this->registerPresenceVerifier();
