@@ -1,4 +1,5 @@
 <?php
+
 return [
     'stripe' => [
         'code' => 'stripe',

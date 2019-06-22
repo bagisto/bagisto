@@ -211,11 +211,7 @@
                         }).catch(function (errors) {
                             serverErrors = errors.response.data.errors;
 
-                            for (i in serverErrors) {
-                                window.flashMessages = [{'type': 'alert-error', 'message': serverErrors[i][0] }];
-
-                                o_this.$root.addFlashMessages();
-                            }
+                            o_this.$root.addServerErrors('step-one');
                         });
                     },
 
@@ -227,34 +223,23 @@
                     },
 
                     catchResponseThree () {
+                        this.createdclicked = true;
+
                         var o_this = this;
-                        this.step_three = true;
-                        this.step_two = false;
-                        this.step_one = false;
-                        this.isOneActive = false;
-                        this.isTwoActive = false;
-                        this.isThreeActive = true;
 
                         axios.post('{{ route('company.validate.step-three') }}', {
                             username: this.username,
-                            name: this.org_name,
+                            org_name: this.org_name,
                         }).then(function (response) {
-                            o_this.step_two = true;
-                            o_this.step_one = false;
-                            o_this.isOneActive = false;
-                            o_this.isTwoActive = true;
-
                             o_this.errors.clear();
 
                             o_this.sendDataToServer();
                         }).catch(function (errors) {
                             serverErrors = errors.response.data.errors;
 
-                            for (i in serverErrors) {
-                                window.flashMessages = [{'type': 'alert-error', 'message': serverErrors[i][0] }];
+                            o_this.createdclicked = false;
 
-                                o_this.$root.addFlashMessages();
-                            }
+                            o_this.$root.addServerErrors('step-three');
                         });
                     },
 
@@ -283,32 +268,17 @@
                         }).catch(function (errors) {
                             serverErrors = errors.response.data.errors;
 
+                            o_this.createdclicked = false;
+
                             for (i in serverErrors) {
                                 window.flashMessages = [{'type': 'alert-error', 'message': serverErrors[i]}];
                             }
 
-                            o_this.$root.addFlashMessages()
+                            o_this.$root.addFlashMessages();
                             o_this.$root.addServerErrors('step-one');
                             o_this.$root.addServerErrors('step-two');
                             o_this.$root.addServerErrors('step-three');
                         });
-                    },
-
-                    onSubmit: function (scope) {
-                        console.log('called');
-                        this.$validator.validateAll(scope).then(result => {
-                            if (result) {
-                                return true;
-                            }
-                        });
-                    },
-
-                    toggleButtonDisable (value) {
-                        var buttons = document.getElementsByTagName("button");
-
-                        for (var i = 0; i < buttons.length; i++) {
-                            buttons[i].disabled = value;
-                        }
                     }
                 }
             });

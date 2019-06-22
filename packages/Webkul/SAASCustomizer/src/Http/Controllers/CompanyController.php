@@ -209,12 +209,12 @@ class CompanyController extends Controller
     {
         $niceNames = array(
             'username' => 'Username',
-            'name' => 'Organization Name'
+            'org_name' => 'Organization Name'
         );
 
         $validator = Validator::make(request()->all(), [
             'username' => 'required|alpha_num|min:3|max:64|unique:companies,username',
-            'name' => 'required|string|max:191|unique:companies,name'
+            'org_name' => 'required|string|max:191|unique:companies,name'
         ]);
 
         $validator->setAttributeNames($niceNames);
