@@ -82,7 +82,7 @@
                         <div class="control-group" :class="[errors.has('step-two.phone_no') ? 'has-error' : '']">
                             <label for="phone_no" class="required">Phone Number</label>
 
-                            <input type="text" class="control" name="phone_no" v-model="phone_no" placeholder="Phone Number" v-validate="'required|numeric|max:11'" data-vv-as="&quot;{{ __('phone') }}&quot;">
+                            <input type="text" class="control" name="phone_no" v-model="phone_no" placeholder="Phone Number" v-validate="'required|numeric|min:10|max:11'" data-vv-as="&quot;{{ __('phone') }}&quot;">
 
                             <span class="control-error" v-show="errors.has('step-two.phone_no')">@{{ errors.first('step-two.phone_no') }}</span>
                         </div>
@@ -228,6 +228,12 @@
 
                     catchResponseThree () {
                         var o_this = this;
+                        this.step_three = true;
+                        this.step_two = false;
+                        this.step_one = false;
+                        this.isOneActive = false;
+                        this.isTwoActive = false;
+                        this.isThreeActive = true;
 
                         axios.post('{{ route('company.validate.step-three') }}', {
                             username: this.username,
