@@ -1,7 +1,12 @@
 {!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $product]) !!}
 
-<div class="product-card">
+@php
+    $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable');
 
+    $function = $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
+@endphp
+
+<div class="product-card">
     @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
 
     <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
@@ -30,7 +35,10 @@
 
         @include ('shop::products.price', ['product' => $product])
 
-        @include('shop::products.add-buttons', ['product' => $product])
+        @if ($status && ($function == 'hide-buy-cart-guest' || $function == 'hide-price-buy-cart-guest'))
+        @else
+            @include('shop::products.add-buttons', ['product' => $product])
+        @endif
     </div>
 
 </div>
