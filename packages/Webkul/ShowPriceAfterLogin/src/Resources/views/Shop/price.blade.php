@@ -1,6 +1,12 @@
 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
+@php
+    $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable');
+
+    $function = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
+@endphp
+
 <div class="product-price">
-    @if(auth()->guard('customer')->check() && core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable'))
+    @if(auth()->guard('customer')->check() && $status)
         @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
 
         @if ($product->type == 'configurable')
@@ -29,9 +35,7 @@
 
         @endif
 
-    @elseif(!auth()->guard('customer')->check() && core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable') && (core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction') == "hide-price-buy-cart-guest"))
-
-
+    @elseif(!auth()->guard('customer')->check() && $status && ($function == "hide-price-buy-cart-guest"))
 
     @else
         @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
