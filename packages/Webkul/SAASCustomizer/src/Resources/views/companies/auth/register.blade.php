@@ -230,15 +230,7 @@
                     },
 
                     catchResponseThree () {
-                        o_this.step_two = true;
-                        o_this.step_one = false;
-                        o_this.isOneActive = false;
-                        o_this.isTwoActive = true;
-
-                        return false;
-
-                        var o_this = this;
-
+                        this.sendDataToServer();
                         // axios.post('{{ route('company.validate.step-one') }}', {
                         //     email: this.email,
                         //     password: this.password,
