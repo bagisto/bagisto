@@ -109,7 +109,11 @@ class StripeConnectController extends Controller
 
         $this->stripeLiveSecretKey = env('STRIPE_LIVE_SECRET_KEY');
 
-        $this->statementDescriptor = 'null';
+        if (config('stripe.connect.details.statementdescriptor')) {
+            $this->statementDescriptor = config('stripe.connect.details.statementdescriptor');
+        } else {
+            $this->statementDescriptor = env('STRIPE_STATEMENT_DESCRIPTOR');
+        }
     }
 
     public function collectToken()
@@ -206,9 +210,9 @@ class StripeConnectController extends Controller
         if ($stripeConnect->count()) {
             $sellerUserId = $stripeConnect->first()->stripe_user_id;
         } else {
-            session()->flash('error', 'Stripe unavailable for this seller');
+            session()->flash('warning', 'Stripe unavailable for this seller');
 
-            return false;
+            return redirect()->route('shop.checkout.success');
         }
 
         if($this->testMode) {
@@ -218,8 +222,8 @@ class StripeConnectController extends Controller
         }
 
         $stripeCard = $this->stripeCart->findWhere([
-                            'cart_id' => Cart::getCart()->id
-                        ])->first()->stripe_token;
+                        'cart_id' => Cart::getCart()->id
+                    ])->first()->stripe_token;
 
         $stripeCard = json_decode($stripeCard);
 
@@ -243,6 +247,7 @@ class StripeConnectController extends Controller
 
         try {
             $cart = Cart::getCart();
+
             $applicationFee = $cart->base_grand_total;
             $applicationFee = (0.029 * $applicationFee) + (0.02 * $applicationFee) + 0.3;
 
@@ -258,16 +263,29 @@ class StripeConnectController extends Controller
                     'stripe_account' => '{{'.$sellerUserId.'}}'
                 ]);
             } else {
-                $result = StripeCharge::create ([
-                    "amount" => round(Cart::getCart()->base_grand_total, 2) * 100,
-                    "currency" => Cart::getCart()->base_currency_code,
-                    "source" => $stripeToken,
-                    "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
-                    'application_fee_amount' => round($applicationFee, 2) * 100,
-                    'statement_descriptor' => $this->statementDescriptor,
-                ], [
-                    'stripe_account' => $sellerUserId
-                ]);
+                if (core()->getConfigData('stripe.connect.details.stripefees') == "seller" || core()->getConfigData('stripe.connect.details.stripefees') == null) {
+                    $result = StripeCharge::create([
+                        "amount" => round(Cart::getCart()->base_grand_total, 2) * 100,
+                        "currency" => Cart::getCart()->base_currency_code,
+                        "source" => $stripeToken,
+                        "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
+                        'application_fee_amount' => round($applicationFee, 2) * 100,
+                        'statement_descriptor' => $this->statementDescriptor,
+                    ], [
+                        'stripe_account' => $sellerUserId
+                    ]);
+                } else {
+                    $result = StripeCharge::create([
+                        "amount" => round(Cart::getCart()->base_grand_total, 2) * 100 + round($applicationFee, 2) * 100,
+                        "currency" => Cart::getCart()->base_currency_code,
+                        "source" => $stripeToken,
+                        "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
+                        'application_fee_amount' => round($applicationFee, 2) * 100,
+                        'statement_descriptor' => $this->statementDescriptor,
+                    ], [
+                        'stripe_account' => $sellerUserId
+                    ]);
+                }
             }
 
         } catch(\Exception $e) {
