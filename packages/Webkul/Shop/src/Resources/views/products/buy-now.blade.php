@@ -3,10 +3,10 @@
 @php
     $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable');
 
-    $function = $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
+    $function = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
 @endphp
 
-@if ($status && ($function == 'hide-buy-cart-guest' || $function == 'hide-price-buy-cart-guest') && ! auth()->guard('customer')->check())
+@if (($status && ! auth()->guard('customer')->check()) && ($function == 'hide-buy-cart-guest' || $function == 'hide-price-buy-cart-guest'))
 @else
     <button type="submit" data-href="{{ route('shop.product.buynow', $product->product_id)}}" class="btn btn-lg btn-primary buynow" {{ $product->type != 'configurable' && ! $product->haveSufficientQuantity(1) ? 'disabled' : '' }}>
         {{ __('shop::app.products.buy-now') }}

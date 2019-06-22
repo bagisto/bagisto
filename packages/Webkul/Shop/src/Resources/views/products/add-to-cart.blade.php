@@ -2,10 +2,10 @@
 @php
     $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable');
 
-    $function = $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
+    $function = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
 @endphp
 
-@if ($status && ($function == 'hide-buy-cart-guest' || $function == 'hide-price-buy-cart-guest') && ! auth()->guard('customer')->check())
+@if (($status && ! auth()->guard('customer')->check()) && ($function == 'hide-buy-cart-guest' || $function == 'hide-price-buy-cart-guest'))
     <div class="login-to-view-price">
         <a class="btn btn-lg btn-primary addtocart" href="{{ route('customer.session.index') }}" style="width:100%;">
             {{ __('ShowPriceAfterLogin::app.products.login-to-view-price') }}

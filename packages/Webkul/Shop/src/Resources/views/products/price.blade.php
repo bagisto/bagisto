@@ -3,12 +3,12 @@
 @php
     $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable');
 
-    $function = $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
+    $function = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
 @endphp
 
 <div class="product-price">
     @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
-    @if ($status && $function == "hide-price-buy-cart-guest" && ! auth()->guard('customer')->check())
+    @if (($status && ! auth()->guard('customer')->check()) && $function == "hide-price-buy-cart-guest")
     @else
         @if ($product->type == 'configurable')
             <span class="price-label">{{ __('shop::app.products.price-label') }}</span>
