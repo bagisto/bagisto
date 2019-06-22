@@ -8,8 +8,7 @@
 
 <div class="product-price">
     @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
-    @if ($status && $function == "hide-price-buy-cart-guest")
-
+    @if ($status && $function == "hide-price-buy-cart-guest" && ! auth()->guard('customer')->check())
     @else
         @if ($product->type == 'configurable')
             <span class="price-label">{{ __('shop::app.products.price-label') }}</span>

@@ -35,7 +35,17 @@
 
         @include ('shop::products.price', ['product' => $product])
 
-        @if ($status && ($function == 'hide-buy-cart-guest' || $function == 'hide-price-buy-cart-guest'))
+        @if ($status && ($function == 'hide-buy-cart-guest' || $function == 'hide-price-buy-cart-guest')  && ! auth()->guard('customer')->check())
+            <div class="login-to-view-price">
+                <a class="btn btn-lg btn-primary addtocart" href="{{ route('customer.session.index') }}" style="width:100%;">
+                    @if ($function == 'hide-buy-cart-guest')
+                        {{ __('ShowPriceAfterLogin::app.products.login-to-buy') }}
+                    @else
+                        {{ __('ShowPriceAfterLogin::app.products.login-to-view-price') }}
+                    @endif
+
+                </a>
+            </div>
         @else
             @include('shop::products.add-buttons', ['product' => $product])
         @endif
