@@ -181,21 +181,60 @@ class CompanyController extends Controller
         $this->validate(request(),[
             'email' => 'required|email|unique:admins,email'
         ]);
-    }
 
-    public function validateStepTwo()
-    {
-        $this->validate(request(),[
-            'email' => 'required|email|unique:admins,email',
-            'password' => 'required|min:6|confirmed'
+        $niceNames = array(
+            'email' => 'Email'
+        );
+
+        $validator = Validator::make(request()->all(), [
+            'email' => 'required|email|unique:admins,email'
         ]);
+
+        $validator->setAttributeNames($niceNames);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 403);
+        } else {
+            return response()->json([
+                'success' => true,
+                'errors' => null
+            ], 200);
+        }
     }
 
     public function validateStepThree()
     {
-        $this->validate(request(),[
-            'email' => 'required|email|unique:admins,email'
+        $niceNames = array(
+            'username' => 'Username',
+            'name' => 'Organization Name'
+        );
+
+        $validator = Validator::make(request()->all(), [
+            'username' => 'required|alpha_num|min:3|max:64|unique:companies,username',
+            'name' => 'required|string|max:191|unique:companies,name'
         ]);
+
+        $validator->setAttributeNames($niceNames);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 403);
+        } else {
+            return response()->json([
+                'success' => true,
+                'errors' => null
+            ], 200);
+        }
+
+        // $this->validate(request(), [
+        //     'username' => 'required|alpha_num|min:3|max:64|unique:companies,username',
+        //     'org_name' => 'required|string|max:191|unique:companies,name'
+        // ]);
     }
 
     public function edit($id)

@@ -27,33 +27,33 @@
 
                     <h4>Authentication Credentials</h4>
 
-                    <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
+                    <div class="control-group" :class="[errors.has('step-one.email') ? 'has-error' : '']">
                         <label for="email" class="required">Email</label>
 
                         <input type="text" v-validate="'required|email|max:191'" class="control" v-model="email" name="email" data-vv-as="&quot;{{ __('email') }}&quot;" placeholder="Auth Email">
 
-                        <span class="control-error" v-show="errors.has('email')">@{{ errors.first('email') }}</span>
+                        <span class="control-error" v-show="errors.has('step-one.email')">@{{ errors.first('step-one.email') }}</span>
                     </div>
 
-                    <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
+                    <div class="control-group" :class="[errors.has('step-one.password') ? 'has-error' : '']">
                         <label for="password" class="required">Password</label>
 
                         <input type="password" name="password" v-validate="'required|min:6'" ref="password" class="control" v-model="password" placeholder="password" data-vv-as="&quot;{{ __('password') }}&quot;">
 
-                        <span class="control-error" v-show="errors.has('password')">@{{ errors.first('password') }}</span>
+                        <span class="control-error" v-show="errors.has('step-one.password')">@{{ errors.first('step-one.password') }}</span>
                     </div>
 
-                    <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
+                    <div class="control-group" :class="[errors.has('step-one.password_confirmation') ? 'has-error' : '']">
                         <label for="password_confirmation" class="required">Confirm Password</label>
 
                         <input type="password" v-validate="'required|min:6|confirmed:password'" class="control" v-model="password_confirmation" name="password_confirmation" placeholder="Confirm Password" data-vv-as="&quot;{{ __('confirm password') }}&quot;">
 
-                        <span class="control-error" v-show="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
+                        <span class="control-error" v-show="errors.has('step-one.password_confirmation')">@{{ errors.first('step-one.password_confirmation') }}</span>
                     </div>
 
                     <div class="control-group">
                         <!-- <input type="submit" class="btn btn-lg btn-primary" :disabled="errors.has('password') || errors.has('password_confirmation') || errors.has('email')"  value="Continue"> -->
-                        <button class="btn btn-lg btn-primary" :disabled="errors.has('password') || errors.has('password_confirmation') || errors.has('email')">Continue</button>
+                        <button class="btn btn-lg btn-primary" :disabled="errors.has('step-one.password') || errors.has('step-one.password_confirmation') || errors.has('step-one.email')">Continue</button>
                     </div>
                 </form>
 
@@ -63,32 +63,32 @@
 
                         <h4>Personal Details</h4>
 
-                        <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']" >
+                        <div class="control-group" :class="[errors.has('step-two.first_name') ? 'has-error' : '']" >
                             <label for="first_name" class="required">First Name</label>
 
                             <input type="text" class="control" v-model="first_name" name="first_name" placeholder="First Name" v-validate="'required|alpha_spaces'" data-vv-as="&quot;First Name&quot;">
 
-                            <span class="control-error" v-show="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
+                            <span class="control-error" v-show="errors.has('step-two.first_name')">@{{ errors.first('step-two.first_name') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
+                        <div class="control-group" :class="[errors.has('step-two.last_name') ? 'has-error' : '']">
                             <label for="last_name">Last Name</label>
 
                             <input type="text" class="control" name="last_name" v-model="last_name" placeholder="Last Name" v-validate="'alpha_spaces'" data-vv-as="&quot;{{ __('last name') }}&quot;">
 
-                            <span class="control-error" v-show="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
+                            <span class="control-error" v-show="errors.has('step-two.last_name')">@{{ errors.first('step-two.last_name') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('phone_no') ? 'has-error' : '']">
+                        <div class="control-group" :class="[errors.has('step-two.phone_no') ? 'has-error' : '']">
                             <label for="phone_no" class="required">Phone Number</label>
 
                             <input type="text" class="control" name="phone_no" v-model="phone_no" placeholder="Phone Number" v-validate="'required|numeric|max:11'" data-vv-as="&quot;{{ __('phone') }}&quot;">
 
-                            <span class="control-error" v-show="errors.has('phone_no')">@{{ errors.first('phone_no') }}</span>
+                            <span class="control-error" v-show="errors.has('step-two.phone_no')">@{{ errors.first('step-two.phone_no') }}</span>
                         </div>
 
                         <div class="control-group">
-                            <button class="btn btn-lg btn-primary" :disabled="errors.has('first_name') || errors.has('last_name') || errors.has('phone_no')">Continue</button>
+                            <button class="btn btn-lg btn-primary" :disabled="errors.has('first_name') || errors.has('last_name') || errors.has('step-two.phone_no')">Continue</button>
                         </div>
                     </div>
                 </form>
@@ -99,24 +99,24 @@
 
                         <h4>Organization Details</h4>
 
-                        <div class="control-group" :class="[errors.has('username') ? 'has-error' : '']">
+                        <div class="control-group" :class="[errors.has('step-three.username') ? 'has-error' : '']">
                             <label for="username" class="required">User Name</label>
 
                             <input type="text" class="control" name="username" v-model="username" placeholder="User Name" v-validate="'required|alpha_num'" data-vv-as="&quot;{{ __('username') }}&quot;">
 
-                            <span class="control-error" v-show="errors.has('username')">@{{ errors.first('username') }}</span>
+                            <span class="control-error" v-show="errors.has('step-three.username')">@{{ errors.first('step-three.username') }}</span>
                         </div>
 
-                        <div class="control-group" :class="[errors.has('org_name') ? 'has-error' : '']">
+                        <div class="control-group" :class="[errors.has('step-three.org_name') ? 'has-error' : '']">
                             <label for="org_name" class="required">Organization Name</label>
 
                             <input type="text" class="control" name="org_name" v-model="org_name" placeholder="Organization Name" v-validate="'required'" data-vv-as="&quot;{{ __('organization name') }}&quot;">
 
-                            <span class="control-error" v-show="errors.has('org_name')">@{{ errors.first('org_name') }}</span>
+                            <span class="control-error" v-show="errors.has('step-three.org_name')">@{{ errors.first('step-three.org_name') }}</span>
                         </div>
 
                         <div class="control-group">
-                            <button class="btn btn-lg btn-primary" :disabled="errors.has('username') || errors.has('org_name') || createdclicked">Continue</button>
+                            <button class="btn btn-lg btn-primary" :disabled="errors.has('step-three.username') || errors.has('step-three.org_name') || createdclicked">Continue</button>
                         </div>
                     </div>
                 </form>
@@ -157,7 +157,6 @@
                     var this_this = this;
 
                     this.$validator.validateAll(scope).then(function (result) {
-                        this_this.showErrors();
 
                         if (result) {
                             if (scope == 'step-one') {
@@ -195,10 +194,6 @@
                         }
                     },
 
-                    showErrors() {
-                        console.log(this.errors);
-                    },
-
                     catchResponseOne () {
                         var o_this = this;
 
@@ -214,10 +209,12 @@
 
                             o_this.errors.clear();
                         }).catch(function (errors) {
-                            serverErrors = errors.response.data.errors.email;
+                            serverErrors = errors.response.data.errors;
 
-                            if (errors.response.data.errors.email) {
-                                o_this.errors.add('email', 'Please choose an unique email');
+                            for (i in serverErrors) {
+                                window.flashMessages = [{'type': 'alert-error', 'message': serverErrors[i][0] }];
+
+                                o_this.$root.addFlashMessages();
                             }
                         });
                     },
@@ -230,27 +227,29 @@
                     },
 
                     catchResponseThree () {
-                        this.sendDataToServer();
-                        // axios.post('{{ route('company.validate.step-one') }}', {
-                        //     email: this.email,
-                        //     password: this.password,
-                        //     password_confirmation: this.password_confirmation
-                        // }).then(function (response) {
-                        //     o_this.step_two = true;
-                        //     o_this.step_one = false;
-                        //     o_this.isOneActive = false;
-                        //     o_this.isTwoActive = true;
+                        var o_this = this;
 
-                        //     o_this.errors.clear();
+                        axios.post('{{ route('company.validate.step-three') }}', {
+                            username: this.username,
+                            name: this.org_name,
+                        }).then(function (response) {
+                            o_this.step_two = true;
+                            o_this.step_one = false;
+                            o_this.isOneActive = false;
+                            o_this.isTwoActive = true;
 
-                        //     o_this.result = this.sendDataToServer();
-                        // }).catch(function (errors) {
-                        //     serverErrors = errors.response.data.errors.email;
+                            o_this.errors.clear();
 
-                        //     if (errors.response.data.errors.email) {
-                        //         o_this.errors.add('email', 'Please choose an unique email');
-                        //     }
-                        // });
+                            o_this.sendDataToServer();
+                        }).catch(function (errors) {
+                            serverErrors = errors.response.data.errors;
+
+                            for (i in serverErrors) {
+                                window.flashMessages = [{'type': 'alert-error', 'message': serverErrors[i][0] }];
+
+                                o_this.$root.addFlashMessages();
+                            }
+                        });
                     },
 
                     handleErrorResponse (response, scope) {
