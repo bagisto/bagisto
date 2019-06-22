@@ -1,10 +1,3 @@
-@php
-    $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable');
-
-    $function = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
-@endphp
-
-@if(! $status)
 <div class="product-price mt-10">
     @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
 
@@ -18,4 +11,3 @@
         @endif
     @endif
 </div>
-@endif

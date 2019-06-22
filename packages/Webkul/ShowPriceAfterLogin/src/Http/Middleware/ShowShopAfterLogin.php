@@ -37,16 +37,20 @@ class ShowShopAfterLogin
             $currentServerNameWithoutProtocol = $currentURL;
         }
 
-        if ($primaryServerNameWithoutProtocol == $primaryServerNameWithoutProtocol) {
+        if ($primaryServerNameWithoutProtocol == $currentServerNameWithoutProtocol) {
             return $next($request);
         }
 
-        $status =(boolean) core()->getConfigData('ShowPriceAfterLogin.settings.settings.hide-shop-before-login');
-        $moduleEnabled =(boolean) core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable');
+        $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.hide-shop-before-login');
+        $moduleEnabled = core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable');
 
-        if (!auth()->guard('customer')->check() && $moduleEnabled && ! request()->is('customer/*') && $status && ! request()->is('admin/*')) {
-            return redirect()->route('customer.session.index');
+        if ($status && $moduleEnabled) {
+            if (! auth()->guard('customer')->check() && ! request()->is('customer/*') && ! request()->is('admin/*')) {
+                return redirect()->route('customer.session.index');
+            }
         }
+
+
         return $next($request);
     }
 }
