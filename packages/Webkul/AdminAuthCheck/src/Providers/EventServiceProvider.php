@@ -13,8 +13,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        // 'Illuminate\Auth\Events\Attempting' => [
+        //     'Webkul\AdminAuthCheck\Listeners\LoginAuthenticationAttempt'
+        // ], // make use of this to stop admins logging into other sites
+
         'Illuminate\Auth\Events\Authenticated' => [
             'Webkul\AdminAuthCheck\Listeners\LoginAuthenticationAttempt'
-        ], // make use of this to stop admins logging into other sites
+        ]
     ];
 }

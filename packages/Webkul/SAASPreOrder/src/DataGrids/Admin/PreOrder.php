@@ -26,7 +26,8 @@ class PreOrder extends DataGrid
                 ->addSelect('pre_order_items.id', 'pre_order_items.order_id', 'order_items.name as product_name', 'orders.customer_email', 'order_item_id', 'preorder_type', 'pre_order_items.status', 'base_paid_amount', 'pre_order_items.email_sent', 'base_remaining_amount', 'payment_order_items.order_id as payment_order_id')
                 ->addSelect(DB::raw('CONCAT(orders.customer_first_name, " ", orders.customer_last_name) as customer_name'));
 
-        $this->addFilter('order_id', 'pre_order_items.order_id');
+        $this->addFilter('id', 'pre_order_items.id');
+        $this->addFilter('status', 'pre_order_items.status');
         $this->addFilter('payment_order_id', 'payment_order_items.order_id');
         $this->addFilter('product_name', 'order_items.name');
         $this->addFilter('customer_name', DB::raw('CONCAT(orders.customer_first_name, " ", orders.customer_last_name)'));
