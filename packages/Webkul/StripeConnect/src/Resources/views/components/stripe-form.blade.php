@@ -24,11 +24,24 @@
                 </div>
             @endif --}}
 
-            <button class="btn btn-primary btn-lg" id="stripe-pay-button" style="border-radius: 3px !important;">Pay Now
-                <label style="">
-                    ( {{ core()->currency(\Cart::getCart()->base_grand_total) }} )
-                </label>
-            </button>
+            @php
+                $enableStripe = 0;
+
+                $stripeConnect = app('Webkul\StripeConnect\Repositories\StripeConnectRepository')->findWhere([
+                    'company_id' => \Company::getCurrent()->id
+                ]);
+
+                if ($stripeConnect->count() == 1) {
+                    $enableStripe = 1;
+                }
+            @endphp
+
+            @if ($enableStripe ==0)
+                <span class="badge badge-md badge-danger">This seller ain't Stripe ready</span>
+            @else
+                <button class="btn btn-primary btn-lg" id="stripe-pay-button" style="border-radius: 3px !important;">Pay Now ( {{ core()->currency(\Cart::getCart()->base_grand_total) }} )
+                </button>
+            @endif
         </div>
     </form>
     <div class="horizontal-rule mt-15"></div>

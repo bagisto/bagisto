@@ -219,7 +219,6 @@
                 $('#checkout-payment-continue-button').on('click', function() {
                     //Submit the form
                     frm = $('#stripe-payment-form');
-                    console.log(frm);
                     if(savedCardSelected) {
                         data._token = '{{ csrf_token() }}';
                         data.useSavedCard = savedCardSelected;
