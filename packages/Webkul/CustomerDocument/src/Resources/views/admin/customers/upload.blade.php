@@ -65,16 +65,34 @@ $documents = $customerDocumentRepository->findWhere(['customer_id' => $customer-
 
             <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
                 <label for="description">{{ __('customerdocument::app.admin.customers.description') }}</label>
+
                 <textarea class="control" id="description" name="description" data-vv-as="&quot;{{ __('customerdocument::app.admin.customers.description') }}&quot;" value="{{ old('description') }}"/
                 ></textarea>
+
                 <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('file') ? 'has-error' : '']">
-                <label for="file" class="required">{{ __('customerdocument::app.admin.customers.file') }}</label>
+                <label for="file" class="required">{{ __
+                ('customerdocument::app.admin.customers.file') }}</label>
+
                 <input v-validate="'required'" type="file" class="control" id="file" name="file" data-vv-as="&quot;{{ __('customerdocument::app.admin.customers.file') }}&quot;" value="{{ old('file') }}" style="padding-top: 5px">
+
+                @php
+                    $allowedTypes = core()->getConfigData('customer.settings.documents.allowed_extensions');
+                @endphp
+
                 <span>{{ __('customerdocument::app.admin.customers.allowed-type') }}</span>
-                <span><b>{{ __('customerdocument::app.admin.customers.file-type') }}</b></span>
+                <span>
+                    <b>
+                        @if ($allowedTypes != null)
+                            {{ $allowedTypes }}
+                        @else
+                            {{ __('customerdocument::app.admin.customers.any-type') }}
+                        @endif
+
+                    </b>
+                </span>
                 <span class="control-error" v-if="errors.has('file')">@{{ errors.first('file') }}</span>
             </div>
 

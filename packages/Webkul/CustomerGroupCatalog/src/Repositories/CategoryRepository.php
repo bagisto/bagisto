@@ -46,37 +46,37 @@ class CategoryRepository extends BaseCategoryRepository
         $customer = auth()->guard(request()->has('token') ? 'api' : 'customer')->user();
 
         $categoryIds = [];
-        $categoryShowId = [];
+        $showCategories = [];
+        $parentCategoryIds = [];
 
         if (! $customer) {
             $categoryIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->findOneByField('code', 'guest')->categories()->pluck('id');
         } else {
             if ($customer->group) {
-                $categoryIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->find($customer->group->id)->categories()->get();
+                $categories = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->find($customer->group->id)->categories()->get();
 
-                $parentIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->find($customer->group->id)->categories()->pluck('parent_id')->toArray();
+                $categoryIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->find($customer->group->id)->categories()->pluck('id')->toArray();
 
-                if (in_array(NULL, $parentIds)) {
-                    foreach ($categoryIds as $categoryId) {
-                        foreach ($parentIds as $parentId) {
-                            if ($categoryId->parent_id == $parentId) {
-                                $categoryShowId[] = $categoryId->id;
-                            }
+                foreach ($categories as $category) {
+                    $parentCategoryIds[] = $category->id;
+                    $parentCategory = $this->getParentCategory($category->parent_id);
+
+                    $result = array_merge($parentCategoryIds, $parentCategory);
+                    $count = 0;
+                    foreach($result as $cat) {
+                        if (in_array($cat, $categoryIds)) {
+                            $count++;
                         }
                     }
 
-                    if (count($categoryShowId) > 0) {
-                        $categoryIds = array_unique($categoryShowId);
-                    } else {
-                        $categoryIds = [];
+                    if (count($result) == $count) {
+                        $showCategories[] = $category->id;
                     }
-                } else {
-                    $categoryIds = [];
                 }
             }
         }
 
-        if (count($categoryIds)) {
+        if (count($showCategories)) {
             $categories[$id] = $id
                     ? $this->model::orderBy('position', 'ASC')->where('status', 1)->whereIn('id', $categoryIds)->descendantsOf($id)->toTree()
                     : $this->model::orderBy('position', 'ASC')->where('status', 1)->whereIn('id', $categoryIds)->get()->toTree();
@@ -89,5 +89,23 @@ class CategoryRepository extends BaseCategoryRepository
 
             return [];
         }
+    }
+
+    /**
+     * get parent category
+     *
+     * @param integer $id
+     * @return array
+     */
+    public function getParentCategory($parentId) {
+        $parentCategories = [];
+        $parentCategory = $this->getModel()->where('id', $parentId)->first();
+
+        if ($parentCategory->parent_id != null) {
+            $parentCategories[] = $parentCategory->id;
+            $this->getParentCategory($parentCategory->parent_id);
+        }
+
+        return $parentCategories;
     }
 }

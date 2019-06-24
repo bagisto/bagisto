@@ -15,7 +15,10 @@ return [
             'allowed-type' => 'Allowed Type :',
             'file-type' => 'csv, xls, xlsx, ods, png, jpeg, zip.',
             'upload-error' => 'The file must be a file of type: csv, xls, xlsx, ods, png, jpeg, zip.',
-            'description' => 'Description'
+            'description' => 'Description',
+            'size' => 'Max Size Allowed (MegaBytes)',
+            'allowed-types' => 'Allowed Types (Use comma to separate multiple formats)',
+            'any-type' => 'All file types are allowed'
         ],
     ],
 ];

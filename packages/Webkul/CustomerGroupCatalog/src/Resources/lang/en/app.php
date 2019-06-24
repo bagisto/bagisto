@@ -4,7 +4,7 @@ return [
     'customers' => [
         'groups' => [
             'general' => 'General',
-            'linked-product-categories' => 'Linked Products and Categories',
+            'linked-product-categories' => 'Linked Categories',
             'categories' => 'Categories',
             'products' => 'Products',
             'search-hint' => 'Start typing name',
