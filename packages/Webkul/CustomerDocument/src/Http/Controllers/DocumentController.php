@@ -7,7 +7,6 @@ use Illuminate\Http\Response;
 use Webkul\CustomerDocument\Repositories\CustomerDocumentRepository;
 use Webkul\CustomerDocument\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use Validator;
 
 /**
  * Document controlller
@@ -62,55 +61,52 @@ class DocumentController extends Controller
     */
     public function upload()
     {
-        $availableMimes = core()->getConfigData('customer.settings.documents.allowed_extensions');
+        $excludedExtensions = core()->getConfigData('customer.settings.documents.allowed_extensions');
         $maxSize = core()->getConfigData('customer.settings.documents.size');
 
-        if ($maxSize == null) {
+        $valid_extension = explode(',', $excludedExtensions);
+
+        $originalSize = filesize(request()->file('file')) / 1000;
+
+        if ($maxSize != null) {
+            $maxSize = (float) $maxSize * 1000;
+        } else {
             $maxSize = 5 * 1024;
-        } else {
-            $maxSize = $maxSize * 1024;
         }
 
-        $maxSize = 10;
+        if (! ($originalSize <= $maxSize) || $originalSize == 0) {
+            session()->flash('error', trans('customerdocument::app.admin.customers.size-error'));
 
-        $customerId = request()->input('customer_id');
-
-        if (strlen($availableMimes)) {
-            $validator = Validator::make(request()->input(), [
-                'file' => 'required|file|mimes:'.$availableMimes.'|size:'.$maxSize
-            ]);
-        } else {
-            $validator = Validator::make(request()->input(), [
-                'file' => 'required|file|size:'.$maxSize
-            ]);
-        }
-
-        if ($validator->fails()) {
-            session()->flash('error', $validator->errors());
             return redirect()->back();
         }
 
-        try {
-            $data = request()->all();
+        if (in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
+            session()->flash('error', trans('customerdocument::app.admin.customers.upload-error'));
 
-            if (request()->hasFile('file')) {
-                $dir = 'customer';
-                $document['path'] = request()->file('file')->store($dir);
+            return redirect()->back();
+        } else {
+            try {
+                $data = request()->all();
+
+                if (request()->hasFile('file')) {
+                    $dir = 'customer';
+                    $document['path'] = request()->file('file')->store($dir);
+                }
+
+                $document['customer_id'] = $data['customer_id'];
+                $document['name'] = $data['name'];
+                $document['description'] = $data['description'];
+
+                $this->customerDocument->create($document);
+
+                session()->flash('success', trans('customerdocument::app.admin.customers.upload-success'));
+
+                return redirect()->back();
+            } catch (\Exception $e) {
+                session()->flash('error', $e);
+
+                return redirect()->back();
             }
-
-            $document['customer_id'] = $data['customer_id'];
-            $document['name'] = $data['name'];
-            $document['description'] = $data['description'];
-
-            $this->customerDocument->create($document);
-
-            session()->flash('success', trans('customerdocument::app.admin.customers.upload-success'));
-
-            return redirect()->back();
-        } catch (\Exception $e) {
-            session()->flash('error', $e);
-
-            return redirect()->back();
         }
     }
 

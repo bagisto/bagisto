@@ -82,7 +82,7 @@ $documents = $customerDocumentRepository->findWhere(['customer_id' => $customer-
                     $allowedTypes = core()->getConfigData('customer.settings.documents.allowed_extensions');
                 @endphp
 
-                <span>{{ __('customerdocument::app.admin.customers.allowed-type') }}</span>
+                <span>{{ __('customerdocument::app.admin.customers.excluded-type') }}</span>
                 <span>
                     <b>
                         @if ($allowedTypes != null)
