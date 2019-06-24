@@ -50,7 +50,26 @@ class CategoryRepository extends BaseCategoryRepository
         $parentCategoryIds = [];
 
         if (! $customer) {
-            $categoryIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->findOneByField('code', 'guest')->categories()->pluck('id');
+            $categories = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->findOneByField('code', 'guest')->categories()->get();
+
+            $categoryIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->findOneByField('code', 'guest')->categories()->pluck('id')->toArray();
+
+            foreach ($categories as $category) {
+                $parentCategoryIds[] = $category->id;
+                $parentCategory = $this->getParentCategory($category->parent_id);
+
+                $result = array_merge($parentCategoryIds, $parentCategory);
+                $count = 0;
+                foreach($result as $cat) {
+                    if (in_array($cat, $categoryIds)) {
+                        $count++;
+                    }
+                }
+
+                if (count($result) == $count) {
+                    $showCategories[] = $category->id;
+                }
+            }
         } else {
             if ($customer->group) {
                 $categories = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->find($customer->group->id)->categories()->get();

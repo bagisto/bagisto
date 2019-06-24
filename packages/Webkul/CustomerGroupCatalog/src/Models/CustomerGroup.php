@@ -2,7 +2,7 @@
 namespace Webkul\CustomerGroupCatalog\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Customer\Models\CustomerGroup as BaseCustomerGroup;
+use Webkul\SAASCustomizer\Models\Customer\CustomerGroup as BaseCustomerGroup;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Category\Models\CategoryProxy;
 
