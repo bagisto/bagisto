@@ -12,7 +12,7 @@
                 <div class="page-title">
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
-                        
+
                         {{ __('admin::app.customers.groups.edit-title') }}
                     </h1>
                 </div>
@@ -34,6 +34,13 @@
                     <accordian :title="'{{ __('customergroupcatalog::app.customers.groups.general') }}'" :active="true">
                         <div slot="body">
 
+                            <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
+                                <label for="code" class="required">{{ __('admin::app.customers.groups.code') }}</label>
+                                <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.customers.groups.code') }}&quot;" value="{{ $group->code }}" disabled="disabled"/>
+                                <input type="hidden" name="code" value="{{ $group->code }}"/>
+                                <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
+                            </div>
+
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">
                                     {{ __('admin::app.customers.groups.name') }}
@@ -43,7 +50,7 @@
                             </div>
 
                         </div>
-                    
+
                     </accordian>
 
                     <accordian :title="'{{ __('customergroupcatalog::app.customers.groups.linked-product-categories') }}'">
@@ -76,7 +83,7 @@
                         </li>
 
                         <li v-if='! searched_results[key].length && search_terms[key].length && ! is_searching[key]'>
-                            {{ __('admin::app.catalog.products.no-result-found') }}
+                            {{ __('customergroupcatalog::app.customers.groups.no-result-found') }}
                         </li>
 
                         <li v-if="is_searching[key] && search_terms[key].length">
@@ -116,13 +123,13 @@
 
                     saved_results: {
                         products: [],
-                        
+
                         categories: []
                     },
 
                     linked_results: {
                         products: @json(app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->getProducts($group)),
-                        
+
                         categories: @json(app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->getCategories($group))
                     },
 
@@ -148,7 +155,7 @@
                         products: "{{ __('customergroupcatalog::app.customers.groups.products') }}",
 
                         categories: "{{ __('customergroupcatalog::app.customers.groups.categories') }}"
-                    }                    
+                    }
                 }
             },
 
@@ -201,7 +208,7 @@
 
                         return;
                     }
-                    
+
                     this.$http.get ("{{ route('admin.customer_group_catalog.search.catalog') }}", {params: {query: this.search_terms[key], type: key}})
                         .then (function(response) {
                              for (var key1 in this_this.saved_results[key]) {

@@ -40,18 +40,39 @@ class CategoryRepository extends BaseCategoryRepository
     {
         static $categories = [];
 
-        if(array_key_exists($id, $categories))
+        if (array_key_exists($id, $categories))
             return $categories[$id];
 
         $customer = auth()->guard(request()->has('token') ? 'api' : 'customer')->user();
-    
+
         $categoryIds = [];
+        $categoryShowId = [];
 
         if (! $customer) {
             $categoryIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->findOneByField('code', 'guest')->categories()->pluck('id');
         } else {
             if ($customer->group) {
-                $categoryIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->find($customer->group->id)->categories()->pluck('id');
+                $categoryIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->find($customer->group->id)->categories()->get();
+
+                $parentIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->find($customer->group->id)->categories()->pluck('parent_id')->toArray();
+
+                if (in_array(NULL, $parentIds)) {
+                    foreach ($categoryIds as $categoryId) {
+                        foreach ($parentIds as $parentId) {
+                            if ($categoryId->parent_id == $parentId) {
+                                $categoryShowId[] = $categoryId->id;
+                            }
+                        }
+                    }
+
+                    if (count($categoryShowId) > 0) {
+                        $categoryIds = array_unique($categoryShowId);
+                    } else {
+                        $categoryIds = [];
+                    }
+                } else {
+                    $categoryIds = [];
+                }
             }
         }
 
@@ -59,12 +80,14 @@ class CategoryRepository extends BaseCategoryRepository
             $categories[$id] = $id
                     ? $this->model::orderBy('position', 'ASC')->where('status', 1)->whereIn('id', $categoryIds)->descendantsOf($id)->toTree()
                     : $this->model::orderBy('position', 'ASC')->where('status', 1)->whereIn('id', $categoryIds)->get()->toTree();
-        } else {
-            $categories[$id] = $id
-                    ? $this->model::orderBy('position', 'ASC')->where('status', 1)->descendantsOf($id)->toTree()
-                    : $this->model::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
-        }
 
-        return $categories[$id];
+            return $categories[$id];
+        } else {
+            // $categories[$id] = $id
+            //         ? $this->model::orderBy('position', 'ASC')->where('status', 1)->descendantsOf($id)->toTree()
+            //         : $this->model::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
+
+            return [];
+        }
     }
 }

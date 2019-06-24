@@ -227,14 +227,14 @@ class StripeConnectController extends Controller
 
         $stripeCard = json_decode($stripeCard);
 
-        if(isset($stripeCard->stripeToken)) {
+        if (isset($stripeCard->stripeToken)) {
             $stripeToken = $stripeCard->stripeToken;
-        } else if(isset($stripeCard->useSavedCard)) {
+        } else if (isset($stripeCard->useSavedCard)) {
             $cardId = $stripeCard->savedCardId;
 
             $card = $this->stripeRepository->findOneByField('id', $cardId);
 
-            if($card->need_new_token) {
+            if ($card->need_new_token) {
                 $result = false;
             } else {
                 $stripeToken = $card->token;
