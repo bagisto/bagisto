@@ -41,7 +41,7 @@ class Cart
      *
      * @param  Webkul\Product\Helpers\Price                        $priceHelper
      * @param  Webkul\Product\Repositories\ProductRepository       $productRepository
-     * @param  Webkul\SAASPreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
+     * @param  Webkul\PreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
      * @return void
      */
     public function __construct(
@@ -67,8 +67,12 @@ class Cart
         $data = request()->all();
 
         if (! isset($data['pre_order_payment'])) {
-            if ($this->haveCompletePreorderProduct($productId))
-                throw new \Exception('Product can not be added with preorder payment.');
+            if ($this->haveCompletePreorderProduct($productId)) {
+                // throw new \Exception('Product can not be added with preorder payment.');
+                session()->flash('warnging', 'Product can not be added with preorder payment.');
+
+                return;
+            }
 
             $product = $this->productRepository->find($productId);
 
@@ -98,16 +102,26 @@ class Cart
                 $quantity = $data['quantity'];
             }
 
-            if ($product->preorder_qty && $product->preorder_qty < $quantity)
-                throw new \Exception('Requested quantity not available for preorder.');
+            if ($product->preorder_qty && $product->preorder_qty < $quantity) {
+                // throw new \Exception('Requested quantity not available for preorder.');
+                session()->flash('warning', 'Requested quantity not available for preorder.');
+
+                return;
+            }
         } else {
             if ($cart = CartFacade::getCart()) {
                 $cartItem = $cart->items()->where('product_id', $productId)->first();
 
                 if ($cartItem) {
-                    throw new \Exception('Invalid quantity for complete preorder payment.');
+                    session()->flash('warning', 'Invalid quantity for complete preorder payment.');
+
+                    return;
+                    // throw new \Exception('Invalid quantity for complete preorder payment.');
                 } else {
-                    throw new \Exception('Preorder payment can not be added with other product.');
+                    session()->flash('warning', 'Preorder payment can not be added with other product.');
+
+                    return;
+                    // throw new \Exception('Preorder payment can not be added with other product.');
                 }
             }
         }
@@ -136,8 +150,13 @@ class Cart
      */
     public function cartItemUpdateBefore($item)
     {
-        if (isset($item->additional['pre_order_payment']))
-            throw new \Exception('Preoder payment qunatity can not be updated.');
+        if (isset($item->additional['pre_order_payment'])) {
+            // throw new \Exception('Preoder payment qunatity can not be updated.');
+
+            session()->flash('warning', 'Preoder payment qunatity can not be updated.');
+
+            return;
+        }
 
         $quantities = request()->get('qty');
 
@@ -147,7 +166,11 @@ class Cart
             return;
 
         if ($product->preorder_qty && $product->preorder_qty < $quantities[$item->id])
-            throw new \Exception('Requested quantity not available for preorder.');
+            // throw new \Exception('Requested quantity not available for preorder.');
+
+            session()->flash('warning', 'Requested quantity not available for preorder.');
+
+            return;
     }
 
     /**
