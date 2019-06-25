@@ -414,7 +414,8 @@ abstract class Discount
      *
      * @return boolean
      */
-    protected function testIfAnyConditionIsTrue($conditions, $cart) {
+    protected function testIfAnyConditionIsTrue($conditions, $cart)
+    {
         array_pop($conditions);
 
         $result = false;

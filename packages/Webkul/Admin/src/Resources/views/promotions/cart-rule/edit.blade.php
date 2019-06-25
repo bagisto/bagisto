@@ -144,7 +144,7 @@
                                         <span class="control-error" v-if="errors.has('per_customer')">@{{ errors.first('per_customer') }}</span>
                                     </div> --}}
 
-                                    <div class="control-group" :class="[errors.has('is_guest') ? 'has-error' : '']">
+                                    {{-- <div class="control-group" :class="[errors.has('is_guest') ? 'has-error' : '']">
                                         <label for="is_guest" class="required">{{ __('admin::app.promotion.general-info.is-guest') }}</label>
 
                                         <select type="text" class="control" name="is_guest" v-model="is_guest" v-validate="'required'" value="{{ old('is_guest')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-guest') }}&quot;">
@@ -153,7 +153,7 @@
                                         </select>
 
                                         <span class="control-error" v-if="errors.has('is_guest')">@{{ errors.first('is_guest') }}</span>
-                                    </div>
+                                    </div> --}}
 
                                     {{-- <div class="control-group" :class="[errors.has('usage_limit') ? 'has-error' : '']">
                                         <label for="usage_limit" class="required">{{ __('admin::app.promotion.general-info.limit') }}</label>
@@ -393,7 +393,6 @@
                         use_coupon: null,
                         // auto_generation: 0,
                         usage_limit: 0,
-                        is_guest: 0,
 
                         action_type: null,
                         apply: null,

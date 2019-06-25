@@ -21,7 +21,7 @@ class CartRuleDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('cart_rules')
                 ->select('id')
-                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'priority', 'usage_limit', 'per_customer', 'status', 'end_other_rules', 'is_guest', 'action_type');
+                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'priority', 'status', 'end_other_rules', 'action_type', 'disc_quantity', 'disc_threshold');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -62,26 +62,12 @@ class CartRuleDataGrid extends DataGrid
             'searchable' => false,
             'sortable' => true,
             'filterable' => true,
+            'closure' => true,
             'wrapper' => function($value) {
                 if ($value->status == 1)
-                    return 'True';
+                    return '<label class="badge badge-success">Active</label>';
                 else
-                    return 'False';
-            }
-        ]);
-
-        $this->addColumn([
-            'index' => 'is_guest',
-            'label' => trans('admin::app.datagrid.for-guest'),
-            'type' => 'boolean',
-            'searchable' => false,
-            'sortable' => true,
-            'filterable' => true,
-            'wrapper' => function($value) {
-                if ($value->is_guest == 1)
-                    return 'True';
-                else
-                    return 'False';
+                    return '<label class="badge badge-danger">In Active</label>';
             }
         ]);
 
@@ -92,11 +78,12 @@ class CartRuleDataGrid extends DataGrid
             'searchable' => false,
             'sortable' => true,
             'filterable' => true,
+            'closure' => true,
             'wrapper' => function($value) {
                 if ($value->end_other_rules == 1)
-                    return 'True';
+                    return '<label class="badge badge-success">True</label>';
                 else
-                    return 'False';
+                    return '<label class="badge badge-success">False</label>';
             }
         ]);
 
@@ -104,6 +91,27 @@ class CartRuleDataGrid extends DataGrid
             'index' => 'action_type',
             'label' => 'Action Type',
             'type' => 'string',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true,
+            'wrapper' => function($value) {
+                return config('pricerules.cart.actions')[$value->action_type];
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'disc_quantity',
+            'label' => 'Quantity',
+            'type' => 'number',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'disc_threshold',
+            'label' => 'Threshold',
+            'type' => 'number',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true

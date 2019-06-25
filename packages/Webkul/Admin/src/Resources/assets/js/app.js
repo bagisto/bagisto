@@ -121,8 +121,7 @@ $(document).ready(function () {
                 }
             },
 
-            addServerErrors() {
-                var scope = null;
+            addServerErrors(scope = null) {
                 for (var key in serverErrors) {
                     var inputNames = [];
                     key.split('.').forEach(function(chunk, index) {
