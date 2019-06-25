@@ -823,7 +823,7 @@ return [
             'cust-groups' => 'Customer Groups',
             'priority' => 'Priority',
             'add-condition' => 'Add Conditions',
-            'disc_amt' => 'Discount Amount(B)',
+            'disc_amt' => 'Discount Amount',
             'disc_percent' => 'Discount Percentage',
             'is-coupon' => 'Use Coupon',
             'is-coupon-yes' => 'Yes',
@@ -879,7 +879,7 @@ return [
         ],
 
         'cart' => [
-            'buy-atleast' => 'Buy Atleast (N)',
+            'buy-atleast' => 'Buy Atleast',
             'apply-to-shipping' => 'Apply to shipping'
         ]
     ],

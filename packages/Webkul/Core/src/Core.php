@@ -597,6 +597,16 @@ class Core
     }
 
     /**
+     * Retrieve a group of information from the core config table
+     *
+     * @return array
+     */
+    public function retrieveGroupConfig($criteria)
+    {
+        return $criteria;
+    }
+
+    /**
      * Retrieve all countries
      *
      * @return Collection
