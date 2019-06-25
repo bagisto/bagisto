@@ -1,5 +1,4 @@
 {!! view_render_event('bagisto.shop.products.view.product-add.after', ['product' => $product]) !!}
-
 <div class="add-to-buttons">
     @if ($product->type != 'configurable')
         @if ($product->totalQuantity() < 1 && $product->allow_preorder)

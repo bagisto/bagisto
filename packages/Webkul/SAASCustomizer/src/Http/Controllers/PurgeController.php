@@ -25,11 +25,6 @@ class PurgeController extends Controller
 
     public function seedDatabase()
     {
-        if (session()->has('company')) {
-            session()->forget('company');
-            session()->regenerate();
-        }
-
         $this->dataSeed->prepareLocaleData();
         $this->dataSeed->prepareCategoryData(); //translation table not getting populated
         $this->dataSeed->prepareInventoryData();

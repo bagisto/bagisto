@@ -14,8 +14,7 @@ return [
             ], [
                 'name' => 'allowed_extensions',
                 'title' => 'customerdocument::app.admin.customers.allowed-types',
-                'type' => 'text',
-                'validation' => 'required'
+                'type' => 'text'
             ]
         ],
     ]

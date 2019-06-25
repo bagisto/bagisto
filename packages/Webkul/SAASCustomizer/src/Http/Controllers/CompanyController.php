@@ -57,11 +57,6 @@ class CompanyController extends Controller
 
     public function create()
     {
-        if (session()->has('company')) {
-            session()->regenerate();
-            session()->forget('company');
-        }
-
         return view($this->_config['view']);
     }
 
@@ -157,14 +152,6 @@ class CompanyController extends Controller
 
             //creates the personal details record for the company
             $this->details->create($data);
-
-            if (session()->has('company')) {
-                session()->forget('company');
-
-                session()->put('company', $company);
-            } else {
-                session()->put('company', $company);
-            }
 
             return response()->json([
                 'success' => true, 'redirect' => $data['domain']

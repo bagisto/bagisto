@@ -57,7 +57,7 @@ class Order
                 $preOrderItem = $this->preOrderItemRepository->findOneByField('order_item_id', $item->additional['order_item_id']);
 
                 $this->preOrderItemRepository->update([
-                    'status' => 'processing',
+                    'status' => 'completed',
                     'payment_order_item_id' => $item->id
                 ], $preOrderItem->id);
             } else {

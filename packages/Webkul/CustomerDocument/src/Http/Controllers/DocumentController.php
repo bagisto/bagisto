@@ -80,7 +80,7 @@ class DocumentController extends Controller
             return redirect()->back();
         }
 
-        if (in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
+        if (! in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
             session()->flash('error', trans('customerdocument::app.admin.customers.upload-error'));
 
             return redirect()->back();

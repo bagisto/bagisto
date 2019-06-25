@@ -85,30 +85,16 @@ class Company
         }
 
         if ($currentURL == $primaryServerNameWithoutProtocol) {
-            if (session()->has('company')) {
-                $company = session()->get('company');
-            } else {
-                $company = 'super-company';
-
-                session()->put('company', $company);
-            }
+            $company = 'super-company';
 
             return $company;
         } else {
-            if (session()->has('company')) {
-                $company = session()->get('company');
+            $company = $this->company->findWhere(['domain' => $currentURL])->first();
 
-                env('APP_URL', $company->domain);
-            } else {
-                $company = $this->company->findWhere(['domain' => $currentURL])->first();
+            env('APP_URL', $company->domain);
 
-                env('APP_URL', $company->domain);
-
-                if ($company->is_active == 0) {
-                    throw new \Exception('company_blocked_by_administrator', 400);
-                }
-
-                session()->put('company', $company);
+            if ($company->is_active == 0) {
+                throw new \Exception('company_blocked_by_administrator', 400);
             }
 
             return $company;
