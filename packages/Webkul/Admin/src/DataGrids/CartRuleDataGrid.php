@@ -126,7 +126,7 @@ class CartRuleDataGrid extends DataGrid
             'filterable' => true,
             'closure' => true,
             'wrapper' => function($value) {
-                if ($value->use_coupon == 0) {
+                if ($value->use_coupon == 1) {
                     return '<label class="badge badge-success">True</label>';
                 } else {
                     return '<label class="badge badge-danger">False</label>';
