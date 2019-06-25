@@ -45,7 +45,7 @@ class PreOrderController extends Controller
      *
      * @param  Webkul\Product\Repositories\ProductRepository       $productRepository
      * @param  Webkul\Sales\Repositories\OrderItemRepository       $orderItemRepository
-     * @param  Webkul\SAASPreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
+     * @param  Webkul\PreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
      * @return void
      */
     public function __construct(
@@ -112,11 +112,13 @@ class PreOrderController extends Controller
 
         request()->request->add($data);
 
-        Event::fire('checkout.cart.add.before', $data['product']);
+        $eventResult = Event::fire('checkout.cart.add.before', $data['product']);
 
-        $result = Cart::add($data['product'], $data);
+        if ($eventResult[0] == null) {
+            $result = Cart::add($data['product'], $data);
 
-        Event::fire('checkout.cart.add.after', $result);
+            Event::fire('checkout.cart.add.after', $result);
+        }
 
         return redirect()->route('shop.checkout.onepage.index');
     }

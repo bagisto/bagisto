@@ -16,11 +16,9 @@
 
         @include ('shop::products.buy-now')
 
-        @if ($product->totalQuantity() < 1 && $product->allow_preorder)
-            <button type="submit" class="btn btn-lg btn-primary pre-order-btn" style="width: 100%; display: none;">
-                {{ __('preorder::app.shop.products.preorder') }}
-            </button>
-        @endif
+        <button type="submit" class="btn btn-lg btn-primary pre-order-btn" style="width: 100%; display: none;background: #000 !important;">
+            {{ __('preorder::app.shop.products.preorder') }}
+        </button>
     @endif
 </div>
 
