@@ -379,12 +379,18 @@ abstract class Discount
         foreach ($conditions as $condition) {
             if (isset($condition->attribute))
                 $actual_value = ${$condition->attribute};
+            else
+                $result = false;
 
             if (isset($condition->value))
                 $test_value = $condition->value;
+            else
+                $result = false;
 
             if (isset($condition->condition))
                 $test_condition = $condition->condition;
+            else
+                $result = false;
 
             if (isset($condition->type) && ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text')) {
                 if ($test_condition == '=') {
@@ -464,9 +470,20 @@ abstract class Discount
         }
 
         foreach ($conditions as $condition) {
-            $actual_value = ${$condition->attribute};
-            $test_value = $condition->value;
-            $test_condition = $condition->condition;
+            if (isset($condition->attribute))
+                $actual_value = ${$condition->attribute};
+            else
+                $result = false;
+
+            if (isset($condition->value))
+                $test_value = $condition->value;
+            else
+                $result = false;
+
+            if (isset($condition->condition))
+                $test_condition = $condition->condition;
+            else
+                $result = false;
 
             if ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text') {
                 if ($test_condition == '=') {
