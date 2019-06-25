@@ -18,7 +18,7 @@ class FixedAmount extends Action
 
         $realQty = $item['quantity'];
 
-        if ($cart >= $disc_threshold) {
+        if ($cart->items_qty >= $disc_threshold) {
             $amountDiscounted = $disc_amount;
 
             if ($realQty > $disc_quantity) {
