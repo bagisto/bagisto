@@ -142,17 +142,6 @@
                                         <span class="control-error" v-if="errors.has('per_customer')">@{{ errors.first('per_customer') }}</span>
                                     </div> --}}
 
-                                    <div class="control-group" :class="[errors.has('is_guest') ? 'has-error' : '']">
-                                        <label for="is_guest" class="required">{{ __('admin::app.promotion.general-info.is-guest') }}</label>
-
-                                        <select type="text" class="control" name="is_guest" v-model="is_guest" v-validate="'required'" value="{{ old('is_guest')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-guest') }}&quot;">
-                                            <option value="1" :selected="is_guest == 1">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
-                                            <option value="0" :selected="is_guest == 0">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
-                                        </select>
-
-                                        <span class="control-error" v-if="errors.has('is_guest')">@{{ errors.first('is_guest') }}</span>
-                                    </div>
-
                                     {{-- <div class="control-group" :class="[errors.has('usage_limit') ? 'has-error' : '']">
                                         <label for="usage_limit" class="required">{{ __('admin::app.promotion.general-info.limit') }}</label>
 
@@ -364,10 +353,9 @@
 
                                     <div v-if="label.global == null || label.global == ''">
                                     @foreach(core()->getAllChannels() as $channel)
-                                        <span>[{{ $channel->code }}]</span>
                                         @foreach($channel->locales as $locale)
                                             <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
-                                                <label for="code">{{ $locale->code }}</label>
+                                                <label for="code"><span class="locale">[{{ $channel->code }} - {{ $locale->code }}]</span></label>
 
                                                 <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" data-vv-as="&quot;Label&quot;">
 
@@ -405,7 +393,6 @@
                         use_coupon: null,
                         auto_generation: false,
                         usage_limit: 0,
-                        is_guest: 0,
 
                         action_type: null,
                         apply: null,

@@ -92,8 +92,10 @@ abstract class Discount
                 }
             }
         } else {
-            if ($rule->is_guest) {
-                $customerGroupBased = true;
+            foreach ($rule->customer_groups as $customer_group) {
+                if ($customer_group->customer_group->code == 'guest') {
+                    $customerGroupBased = true;
+                }
             }
         }
 
@@ -317,6 +319,29 @@ abstract class Discount
         }
     }
 
+    /**
+     * Retreives all the payment methods from application config
+     *
+     * @return array
+     */
+    public function getPaymentMethods()
+    {
+        $paymentMethods = config('paymentmethods');
+
+        return $paymentMethods;
+    }
+
+    /**
+     * Retreives all the shippin methods from the application config
+     *
+     * @return array
+     */
+    public function getShippingMethods()
+    {
+        $shippingMethods = config('carriers');
+
+        return $shippingMethods;
+    }
 
     /**
      * Checks the rule against the current cart instance whether rule conditions are applicable
@@ -326,39 +351,67 @@ abstract class Discount
      */
     protected function testIfAllConditionAreTrue($conditions, $cart)
     {
+        $paymentMethods = $this->getPaymentMethods();
+
+        $shippingMethods = $this->getShippingMethods();
+
         array_pop($conditions);
 
-        $shipping_address = $cart->getShippingAddressAttribute() ?? '';
+        $shipping_address = $cart->getShippingAddressAttribute() ?? null;
 
-        $shipping_method = $cart->shipping_method ?? '';
-        $shipping_country = $shipping_address->country ?? '';
-        $shipping_state = $shipping_address->state ?? '';
-        $shipping_postcode = $shipping_address->postcode ?? '';
-        $shipping_city = $shipping_address->city ?? '';
+        $shipping_method = $cart->selected_shipping_rate->method_title ?? null;
 
-        $payment_method = $cart->payment->method ?? '';
+        $shipping_country = $shipping_address->country ?? null;
+
+        $shipping_state = $shipping_address->state ?? null;
+
+        $shipping_postcode = $shipping_address->postcode ?? null;
+
+        $shipping_city = $shipping_address->city ?? null;
+
+        $payment_method = $paymentMethods[$cart->payment->method]['title'];
+
         $sub_total = $cart->base_sub_total;
 
         $total_items = $cart->items_qty;
+
         $total_weight = 0;
 
-        foreach($cart->items as $item) {
+        foreach ($cart->items as $item) {
             $total_weight = $total_weight + $item->base_total_weight;
         }
 
         $result = true;
 
         foreach ($conditions as $condition) {
-            if (isset($condition->attribute))
+            if (isset($condition->attribute)) {
                 $actual_value = ${$condition->attribute};
 
-            if (isset($condition->value))
+            } else {
+                $result = false;
+            }
+
+            if (isset($condition->value)) {
                 $test_value = $condition->value;
 
-            if (isset($condition->condition))
+            } else {
+                $result = false;
+            }
+
+            if (isset($condition->condition)) {
                 $test_condition = $condition->condition;
+            }
+            else {
+                $result = false;
+            }
 
             if (isset($condition->type) && ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text')) {
+                if ($condition->type == 'string') {
+                    $actual_value = strtolower($actual_value);
+
+                    $test_value = strtolower($test_value);
+                }
+
                 if ($test_condition == '=') {
                     if ($actual_value != $test_value) {
                         $result = false;
@@ -414,23 +467,34 @@ abstract class Discount
      *
      * @return boolean
      */
-    protected function testIfAnyConditionIsTrue($conditions, $cart) {
+    protected function testIfAnyConditionIsTrue($conditions, $cart)
+    {
+        $paymentMethods = $this->getPaymentMethods();
+
+        $shippingMethods = $this->getShippingMethods();
+
         array_pop($conditions);
 
         $result = false;
 
-        $shipping_address = $cart->getShippingAddressAttribute() ?? '';
+        $shipping_address = $cart->getShippingAddressAttribute() ?? null;
 
-        $shipping_method = $cart->shipping_method ?? '';
-        $shipping_country = $shipping_address->country ?? '';
-        $shipping_state = $shipping_address->state ?? '';
-        $shipping_postcode = $shipping_address->postcode ?? '';
-        $shipping_city = $shipping_address->city ?? '';
+        $shipping_method = $cart->selected_shipping_rate->method_title ?? null;
 
-        $payment_method = $cart->payment->method ?? '';
+        $shipping_country = $shipping_address->country ?? null;
+
+        $shipping_state = $shipping_address->state ?? null;
+
+        $shipping_postcode = $shipping_address->postcode ?? null;
+
+        $shipping_city = $shipping_address->city ?? null;
+
+        $payment_method = $paymentMethods[$cart->payment->method]['title'];
+
         $sub_total = $cart->base_sub_total;
 
         $total_items = $cart->items_qty;
+
         $total_weight = 0;
 
         foreach($cart->items as $item) {
@@ -438,11 +502,34 @@ abstract class Discount
         }
 
         foreach ($conditions as $condition) {
-            $actual_value = ${$condition->attribute};
-            $test_value = $condition->value;
-            $test_condition = $condition->condition;
+            if (isset($condition->attribute)) {
+                $actual_value = ${$condition->attribute};
+
+            } else {
+                $result = false;
+            }
+
+            if (isset($condition->value)) {
+                $test_value = $condition->value;
+
+            } else {
+                $result = false;
+            }
+
+            if (isset($condition->condition)) {
+                $test_condition = $condition->condition;
+            }
+            else {
+                $result = false;
+            }
 
             if ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text') {
+                if ($condition->type == 'string') {
+                    $actual_value = strtolower($actual_value);
+
+                    $test_value = strtolower($test_value);
+                }
+
                 if ($test_condition == '=') {
                     if ($actual_value == $test_value) {
                         $result = true;
