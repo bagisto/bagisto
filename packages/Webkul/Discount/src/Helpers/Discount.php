@@ -92,8 +92,10 @@ abstract class Discount
                 }
             }
         } else {
-            if ($rule->is_guest) {
-                $customerGroupBased = true;
+            foreach ($rule->customer_groups as $customer_group) {
+                if ($customer_group->customer_group->code == 'guest') {
+                    $customerGroupBased = true;
+                }
             }
         }
 
@@ -317,6 +319,29 @@ abstract class Discount
         }
     }
 
+    /**
+     * Retreives all the payment methods from application config
+     *
+     * @return array
+     */
+    public function getPaymentMethods()
+    {
+        $paymentMethods = config('paymentmethods');
+
+        return $paymentMethods;
+    }
+
+    /**
+     * Retreives all the shippin methods from the application config
+     *
+     * @return array
+     */
+    public function getShippingMethods()
+    {
+        $shippingMethods = config('carriers');
+
+        return $shippingMethods;
+    }
 
     /**
      * Checks the rule against the current cart instance whether rule conditions are applicable
@@ -326,6 +351,10 @@ abstract class Discount
      */
     protected function testIfAllConditionAreTrue($conditions, $cart)
     {
+        $paymentMethods = $this->getPaymentMethods();
+
+        $shippingMethods = $this->getShippingMethods();
+
         array_pop($conditions);
 
         $shipping_address = $cart->getShippingAddressAttribute() ?? '';

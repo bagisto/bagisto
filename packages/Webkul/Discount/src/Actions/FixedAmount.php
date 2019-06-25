@@ -8,7 +8,7 @@ class FixedAmount extends Action
 {
     public function calculate($rule, $item, $cart)
     {
-        //calculate discount amount
+        // calculate discount amount
         $action_type = $rule->action_type; // action type used
         $disc_threshold = $rule->disc_threshold; // atleast quantity by default 1 --> may be omitted in near future
         $disc_amount = $rule->disc_amount; // value of discount

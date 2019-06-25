@@ -21,7 +21,7 @@ class CartRuleDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('cart_rules')
                 ->select('id')
-                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'priority', 'status', 'end_other_rules', 'action_type', 'disc_quantity', 'disc_threshold');
+                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'priority', 'status', 'end_other_rules', 'action_type', 'disc_quantity', 'disc_threshold', 'use_coupon');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -83,7 +83,7 @@ class CartRuleDataGrid extends DataGrid
                 if ($value->end_other_rules == 1)
                     return '<label class="badge badge-success">True</label>';
                 else
-                    return '<label class="badge badge-success">False</label>';
+                    return '<label class="badge badge-danger">False</label>';
             }
         ]);
 
@@ -115,6 +115,23 @@ class CartRuleDataGrid extends DataGrid
             'searchable' => false,
             'sortable' => true,
             'filterable' => true
+        ]);
+
+        $this->addColumn([
+            'index' => 'use_coupon',
+            'label' => 'Use Coupon',
+            'type' => 'boolean',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true,
+            'closure' => true,
+            'wrapper' => function($value) {
+                if ($value->use_coupon == 0) {
+                    return '<label class="badge badge-success">True</label>';
+                } else {
+                    return '<label class="badge badge-danger">False</label>';
+                }
+            }
         ]);
     }
 

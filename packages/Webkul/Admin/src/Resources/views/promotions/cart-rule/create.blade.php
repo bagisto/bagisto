@@ -353,10 +353,9 @@
 
                                     <div v-if="label.global == null || label.global == ''">
                                     @foreach(core()->getAllChannels() as $channel)
-                                        <span>[{{ $channel->code }}]</span>
                                         @foreach($channel->locales as $locale)
                                             <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']">
-                                                <label for="code">{{ $locale->code }}</label>
+                                                <label for="code"><span class="locale">[{{ $channel->code }} - {{ $locale->code }}]</span></label>
 
                                                 <input type="text" class="control" name="label[{{ $channel->code }}][{{ $locale->code }}]" v-model="label.{{ $channel->code }}.{{ $locale->code }}" data-vv-as="&quot;Label&quot;">
 

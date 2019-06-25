@@ -44,7 +44,7 @@ class NonCouponAbleRule extends Discount
 
             if (! $alreadyAppliedRule->use_coupon && ! $validated) {
                 // if the validation fails then the cart rule gets deleted from cart rule cart
-                $alreadyAppliedRule->delete();
+                $alreadyAppliedCartRuleCart->first()->delete();
 
                 // all discount is cleared fro mthe cart and cart items table
                 $this->clearDiscount();
@@ -68,10 +68,12 @@ class NonCouponAbleRule extends Discount
 
                 $impact = $actionInstance->calculate($rule, $item, $cart);
 
-                array_push($applicableRules, [
-                    'rule' => $rule,
-                    'impact' => $impact
-                ]);
+                if ($impact['discount'] > 0) {
+                    array_push($applicableRules, [
+                        'rule' => $rule,
+                        'impact' => $impact
+                    ]);
+                }
             }
         }
 
