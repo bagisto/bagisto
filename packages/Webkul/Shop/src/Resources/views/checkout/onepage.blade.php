@@ -486,7 +486,9 @@
 
                     coupon_code: null,
 
-                    error_message: ''
+                    error_message: null,
+
+                    couponChanged: false
                 }
             },
 
@@ -517,13 +519,21 @@
 
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.coupon_code})
                         .then(function(response) {
-                            this_this.$emit('onApplyCoupon')
+                            this_this.$emit('onApplyCoupon');
+
+                            this_this.couponChanged = true;
                         })
                         .catch(function(error) {
-                            window.flashMessages = [{'type' : 'alert-error', 'message' : error.response.data.message}];
+                            this_this.couponChanged = true;
 
-                            this_this.$root.addFlashMessages();
+                            this_this.error_message = error.response.data.message;
                         });
+                },
+
+                changeCoupon: function() {
+                    if (this.couponChanged == true) {
+                        this.couponChanged = false;
+                    }
                 },
 
                 removeCoupon: function () {

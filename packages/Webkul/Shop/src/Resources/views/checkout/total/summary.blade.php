@@ -50,13 +50,12 @@
                 <div class="discount">
                     <div class="discount-group">
                         <form class="coupon-form" method="post" @submit.prevent="onSubmit">
-                            <div class="control-group mt-20" :class="[errors.has('code') ? 'has-error' : '']">
-                                <input type="text" class="control" value="" v-model="coupon_code" name="code" placeholder="Enter Coupon Code" v-validate="'required'" style="width: 100%">
+                            <div class="control-group mt-20" :class="[errors.has('code') ? 'has-error' : '']" style="margin-bottom: 10px">
+                                <input type="text" class="control" value="" v-model="coupon_code" name="code" placeholder="Enter Coupon Code" v-validate="'required'" style="width: 100%" @change="changeCoupon">
                             </div>
+                            <div class="control-error mb-10" v-if="error_message != null">@{{ error_message }}</div>
 
-                            <span class="control-error" v-if="error_message.length > 0">@{{ error_message }}</span>
-
-                            <button class="btn btn-lg btn-black">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
+                            <button class="btn btn-lg btn-black" :disabled="couponChanged">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
                         </form>
                     </div>
                 </div>
