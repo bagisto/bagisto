@@ -53,6 +53,7 @@ class CouponAbleRule extends Discount
             ]);
 
             if ($ifAlreadyApplied->count() == 1) {
+                // can give a message that coupon is already applied
                 return false;
             }
 
@@ -67,17 +68,16 @@ class CouponAbleRule extends Discount
                 return $impact;
             }
 
-            if ($ifAlreadyApplied->first()->cart_rule->use_coupon == 1 && $ifAlreadyApplied->first()->cart_rule->end_other_rules == 0) {
+            if ($ifAlreadyApplied->first()->cart_rule->use_coupon == 0 && $ifAlreadyApplied->first()->cart_rule->end_other_rules == 1) {
+                return false;
+            }
+
+            if ($ifAlreadyApplied->first()->cart_rule->use_coupon == 0 && $ifAlreadyApplied->first()->cart_rule->end_other_rules == 0) {
                 $alreadyAppliedRule = $ifAlreadyApplied->first()->cart_rule;
 
                 if ($alreadyAppliedRule->priority < $applicableRule->priority) {
                     return false;
                 } else if ($alreadyAppliedRule->priority == $applicableRule->priority) {
-                    // end other rules
-                    if ($alreadyAppliedRule->end_other_rules) {
-                        return false;
-                    }
-
                     $actionInstance = new $this->rules[$alreadyAppliedRule->action_type];
 
                     $alreadyAppliedRuleImpact = $actionInstance->calculate($alreadyAppliedRule, $item, $cart);
