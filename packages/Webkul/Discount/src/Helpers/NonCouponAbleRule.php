@@ -40,11 +40,11 @@ class NonCouponAbleRule extends Discount
                 // all discount is cleared fro mthe cart and cart items table
                 $this->clearDiscount();
 
-                return null;
+                return false;
             }
 
             if ($alreadyAppliedRule->use_coupon) {
-                return null;
+                return false;
             }
         }
 
@@ -195,7 +195,7 @@ class NonCouponAbleRule extends Discount
 
             return array_first($applicableRules)['impact'];
         } else {
-            return null;
+            return false;
         }
     }
 }

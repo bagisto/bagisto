@@ -46,6 +46,10 @@ class CouponAbleRule extends Discount
 
             $impact = $actionInstance->calculate($applicableRule, $item, $cart);
 
+            if ($impact['discount'] == 0) {
+                return false;
+            }
+
             // avoid applying the same rule
             $ifAlreadyApplied = $this->cartRuleCart->findWhere([
                 'cart_id' => $cart->id,
