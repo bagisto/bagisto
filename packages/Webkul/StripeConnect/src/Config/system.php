@@ -22,20 +22,6 @@ return [
                 'channel_based' => false,
                 'locale_based' => false
             ], [
-                'name' => 'active',
-                'title' => 'Enable On Checkout',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => 'True',
-                        'value' => true
-                    ], [
-                        'title' => 'False',
-                        'value' => false
-                    ]
-                ],
-                'validation' => 'required'
-            ], [
                 'name' => 'stripefees',
                 'title' => 'Stripe fee to be paid by customer or seller',
                 'type' => 'select',
