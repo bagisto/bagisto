@@ -72,11 +72,16 @@ class CouponAbleRule extends Discount
                 return $impact;
             }
 
+            // the only case where a non couponable rule defeats couponable rule
             if ($ifAlreadyApplied->first()->cart_rule->use_coupon == 0 && $ifAlreadyApplied->first()->cart_rule->end_other_rules == 1) {
                 return false;
             }
 
-            if ($ifAlreadyApplied->first()->cart_rule->use_coupon == 0 && $ifAlreadyApplied->first()->cart_rule->end_other_rules == 0) {
+            if ($ifAlreadyApplied->first()->cart_rule->use_coupon == 1 && $ifAlreadyApplied->first()->cart_rule->end_other_rules == 1) {
+                return false;
+            }
+
+            if ($ifAlreadyApplied->first()->cart_rule->use_coupon == 1) {
                 $alreadyAppliedRule = $ifAlreadyApplied->first()->cart_rule;
 
                 if ($alreadyAppliedRule->priority < $applicableRule->priority) {
@@ -106,52 +111,9 @@ class CouponAbleRule extends Discount
                     return $impact;
                 }
             } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
+                $this->save($applicableRule);
 
-    /**
-     * Removes the already applied coupon on the current cart instance
-     *
-     * @return boolean
-     */
-    public function remove()
-    {
-        $cart = Cart::getCart();
-
-        $existingRule = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
-        ]);
-
-        if ($existingRule->count()) {
-            if ($existingRule->first()->cart_rule->use_coupon) {
-                $existingRule->first()->delete();
-
-                foreach ($cart->items as $item) {
-                    if ($item->discount_amount > 0) {
-                        $item->update([
-                            'discount_amount' => 0,
-                            'base_discount_amount' => 0,
-                            'discount_percent' => 0,
-                            'coupon_code' => NULL
-                        ]);
-                    }
-                }
-
-                $cart->update([
-                    'coupon_code' => NULL,
-                    'discount_amount' => 0,
-                    'base_discount_amount' => 0
-                ]);
-
-                Cart::collectTotals();
-
-                return true;
-            } else {
-                return false;
+                return $impact;
             }
         } else {
             return false;
