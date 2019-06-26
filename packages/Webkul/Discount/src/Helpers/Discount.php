@@ -369,7 +369,11 @@ abstract class Discount
 
         $shipping_city = $shipping_address->city ?? null;
 
-        $payment_method = $paymentMethods[$cart->payment->method]['title'];
+        if (isset($cart->payment)) {
+            $payment_method = $paymentMethods[$cart->payment->method]['title'];
+        } else {
+            $payment_method = null;
+        }
 
         $sub_total = $cart->base_sub_total;
 
@@ -489,7 +493,11 @@ abstract class Discount
 
         $shipping_city = $shipping_address->city ?? null;
 
-        $payment_method = $paymentMethods[$cart->payment->method]['title'];
+        if (isset($cart->payment)) {
+            $payment_method = $paymentMethods[$cart->payment->method]['title'];
+        } else {
+            $payment_method = null;
+        }
 
         $sub_total = $cart->base_sub_total;
 
