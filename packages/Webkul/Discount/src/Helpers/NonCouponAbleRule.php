@@ -27,7 +27,6 @@ class NonCouponAbleRule extends Discount
         } else {
             $rules = $this->cartRule->findWhere([
                 'use_coupon' => 0,
-                'is_guest' => 1,
                 'status' => 1
             ]);
         }
