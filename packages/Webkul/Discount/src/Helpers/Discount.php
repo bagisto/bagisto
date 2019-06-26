@@ -287,6 +287,7 @@ abstract class Discount
         foreach ($cart->items as $item) {
             if ($item->base_total > $maxValue) {
                 $maxValue = $item->total;
+
                 $maxWorthItem = [
                     'id' => $item->id,
                     'price' => $item->price,

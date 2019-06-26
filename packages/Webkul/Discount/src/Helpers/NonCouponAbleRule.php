@@ -19,17 +19,10 @@ class NonCouponAbleRule extends Discount
 
         $applicableRules = array();
 
-        if (auth()->guard('customer')->check()) {
-            $rules = $this->cartRule->findWhere([
-                'use_coupon' => 0,
-                'status' => 1
-            ]);
-        } else {
-            $rules = $this->cartRule->findWhere([
-                'use_coupon' => 0,
-                'status' => 1
-            ]);
-        }
+        $rules = $this->cartRule->findWhere([
+            'use_coupon' => 0,
+            'status' => 1
+        ]);
 
         $alreadyAppliedCartRuleCart = $this->cartRuleCart->findWhere([
             'cart_id' => $cart->id,

@@ -18,17 +18,10 @@ class CouponAbleRule extends Discount
     {
         $cart = Cart::getCart();
 
-        if (auth()->guard('customer')->check()) {
-            $rules = $this->cartRule->findWhere([
-                'use_coupon' => 1,
-                'status' => 1
-            ]);
-        } else {
-            $rules = $this->cartRule->findWhere([
-                'use_coupon' => 1,
-                'status' => 1
-            ]);
-        }
+        $rules = $this->cartRule->findWhere([
+            'use_coupon' => 1,
+            'status' => 1
+        ]);
 
         $applicableRule = null;
 
@@ -53,6 +46,7 @@ class CouponAbleRule extends Discount
 
             $impact = $actionInstance->calculate($applicableRule, $item, $cart);
 
+            // avoid applying the same rule
             $ifAlreadyApplied = $this->cartRuleCart->findWhere([
                 'cart_id' => $cart->id,
                 'cart_rule_id' => $applicableRule->id
@@ -62,6 +56,7 @@ class CouponAbleRule extends Discount
                 return false;
             }
 
+            // if the rule ain't same
             $ifAlreadyApplied = $this->cartRuleCart->findWhere([
                 'cart_id' => $cart->id,
             ]);
@@ -72,40 +67,42 @@ class CouponAbleRule extends Discount
                 return $impact;
             }
 
-            $alreadyAppliedRule = $ifAlreadyApplied->first()->cart_rule;
+            if ($ifAlreadyApplied->first()->cart_rule->use_coupon == 1 && $ifAlreadyApplied->first()->cart_rule->end_other_rules == 0) {
+                $alreadyAppliedRule = $ifAlreadyApplied->first()->cart_rule;
 
-            if ($alreadyAppliedRule->priority < $rule->priority) {
-                return false;
-            } else if ($alreadyAppliedRule->priority == $applicableRule->priority) {
-                // tie breaker case
-
-                // end other rules
-                if ($alreadyAppliedRule->end_other_rules) {
+                if ($alreadyAppliedRule->priority < $applicableRule->priority) {
                     return false;
-                }
+                } else if ($alreadyAppliedRule->priority == $applicableRule->priority) {
+                    // end other rules
+                    if ($alreadyAppliedRule->end_other_rules) {
+                        return false;
+                    }
 
-                $actionInstance = new $this->rules[$alreadyAppliedRule->action_type];
+                    $actionInstance = new $this->rules[$alreadyAppliedRule->action_type];
 
-                $alreadyAppliedRuleImpact = $actionInstance->calculate($alreadyAppliedRule, $item, $cart);
+                    $alreadyAppliedRuleImpact = $actionInstance->calculate($alreadyAppliedRule, $item, $cart);
 
-                if ($alreadyAppliedRule['discount'] > $impact['discount']) {
-                    return false;
-                } else if ($alreadyAppliedRule['discount'] < $impact['discount']) {
-                    $this->save($applicableRule);
-
-                    return $impact;
-                } else {
-                    // least id case
-                    if ($applicableRule->id < $alreadyAppliedRule->id) {
+                    if ($alreadyAppliedRule['discount'] > $impact['discount']) {
+                        return false;
+                    } else if ($alreadyAppliedRule['discount'] < $impact['discount']) {
                         $this->save($applicableRule);
 
                         return $impact;
+                    } else {
+                        // least id case
+                        if ($applicableRule->id < $alreadyAppliedRule->id) {
+                            $this->save($applicableRule);
+
+                            return $impact;
+                        }
                     }
+                } else {
+                    $this->save($applicableRule);
+
+                    return $impact;
                 }
             } else {
-                $this->save($applicableRule);
-
-                return $impact;
+                return false;
             }
         } else {
             return false;
