@@ -40,6 +40,7 @@ class CompanyController extends Controller
         $this->dataSeed = $dataSeed;
         $this->companyStats = $companyStats;
         $this->_config = request('_config');
+        $this->middleware('auth:super-admin', ['only' => ['showCompanyStats', 'edit', 'update']]);
 
         if (! Company::isAllowed()) {
             abort(404);
