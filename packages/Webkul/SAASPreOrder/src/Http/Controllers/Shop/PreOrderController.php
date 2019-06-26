@@ -115,9 +115,8 @@ class PreOrderController extends Controller
         $eventResult = Event::fire('checkout.cart.add.before', $data['product']);
 
         $flag = true;
-
         foreach ($eventResult as $res) {
-            if ($res == null) {
+            if ($res != null) {
                 $flag = false;
             }
         }

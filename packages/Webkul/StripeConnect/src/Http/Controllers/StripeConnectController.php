@@ -248,9 +248,6 @@ class StripeConnectController extends Controller
         try {
             $cart = Cart::getCart();
 
-            $applicationFee = $cart->base_grand_total;
-            $applicationFee = (0.029 * $applicationFee) + (0.02 * $applicationFee) + 0.3;
-
             if(Cart::getCart()->base_currency_code == 'YEN' ||Cart::getCart()->base_currency_code == 'yen') {
                 $result = StripeCharge::create ([
                     "amount" => Cart::getCart()->base_grand_total,
@@ -264,6 +261,9 @@ class StripeConnectController extends Controller
                 ]);
             } else {
                 if (core()->getConfigData('stripe.connect.details.stripefees') == "seller" || core()->getConfigData('stripe.connect.details.stripefees') == null) {
+                    $applicationFee = $cart->base_grand_total;
+                    $applicationFee = (0.029 * $applicationFee) + (0.02 * $applicationFee) + 0.3;
+
                     $result = StripeCharge::create([
                         "amount" => round(Cart::getCart()->base_grand_total, 2) * 100,
                         "currency" => Cart::getCart()->base_currency_code,
@@ -275,12 +275,16 @@ class StripeConnectController extends Controller
                         'stripe_account' => $sellerUserId
                     ]);
                 } else {
+                    $applicationFee = $cart->base_grand_total;
+                    $applicationFee = (0.029 * $applicationFee) + (0.02 * $applicationFee) + 0.3;
+                    $applicationFee1 = 0.02 * ($applicationFee + $cart->base_grand_total12);
+
                     $result = StripeCharge::create([
                         "amount" => round(Cart::getCart()->base_grand_total, 2) * 100 + round($applicationFee, 2) * 100,
                         "currency" => Cart::getCart()->base_currency_code,
                         "source" => $stripeToken,
                         "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
-                        'application_fee_amount' => round($applicationFee, 2) * 100,
+                        'application_fee_amount' => round($applicationFee1, 2) * 100,
                         'statement_descriptor' => $this->statementDescriptor,
                     ], [
                         'stripe_account' => $sellerUserId
