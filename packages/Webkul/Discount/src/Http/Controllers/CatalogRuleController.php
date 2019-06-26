@@ -255,7 +255,7 @@ class CatalogRuleController extends Controller
         $catalogRuleCustomerGroups = $this->catalogRule->CustomerGroupSync($catalog_rule_customer_groups, $catalogRule);
 
         if($catalogRule && $catalogRuleChannels && $catalogRuleCustomerGroups) {
-            session()->flash('info', trans('admin::app.promotion.status.update-success'));
+            session()->flash('success', trans('admin::app.promotion.status.update-success'));
 
             return redirect()->route($this->_config['redirect']);
         } else {

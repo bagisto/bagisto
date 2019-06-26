@@ -46,6 +46,22 @@ input {
     justify-content: center;
 }
 
+
+@media only screen and (max-width: 770px) {
+    .pagination.shop {
+        justify-content: space-between;
+
+        .page-item {
+            display: none;
+
+            &.previous,
+            &.next {
+                display: block;
+            }
+        }
+    }
+}
+
 //components
 .bold {
     font-weight: bold;
@@ -1095,6 +1111,7 @@ section.slider-block {
                 .search-box {
                     display: inline-block;
                     margin-right: 10px;
+                    cursor: pointer;
                 }
 
                 .right-content-menu {
@@ -3391,6 +3408,7 @@ section.review {
     .table {
         .grid-container {
             margin-top: 10px;
+            overflow-x: hidden;
 
             .filter-row-one {
                 display: block;
