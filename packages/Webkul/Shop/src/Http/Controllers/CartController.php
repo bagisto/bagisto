@@ -215,18 +215,24 @@ class CartController extends Controller
 
     public function buyNow($id, $quantity = 1)
     {
-        Event::fire('checkout.cart.add.before', $id);
+        try {
+            Event::fire('checkout.cart.add.before', $id);
 
-        $result = Cart::proceedToBuyNow($id, $quantity);
+            $result = Cart::proceedToBuyNow($id, $quantity);
 
-        Event::fire('checkout.cart.add.after', $result);
+            Event::fire('checkout.cart.add.after', $result);
 
-        Cart::collectTotals();
+            Cart::collectTotals();
 
-        if (! $result) {
+            if (! $result) {
+                return redirect()->back();
+            } else {
+                return redirect()->route('shop.checkout.onepage.index');
+            }
+        } catch(\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
+
             return redirect()->back();
-        } else {
-            return redirect()->route('shop.checkout.onepage.index');
         }
     }
 
