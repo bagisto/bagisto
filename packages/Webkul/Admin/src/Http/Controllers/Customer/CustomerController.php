@@ -206,7 +206,7 @@ class CustomerController extends Controller
     public function storeNote()
     {
         $this->validate(request(), [
-            'notes' => 'required|string'
+            'notes' => 'string|nullable'
         ]);
 
         $customer = $this->customer->find(request()->input('_customer'));
@@ -240,7 +240,7 @@ class CustomerController extends Controller
             ]);
         }
 
-        session()->flash('info', trans('admin::app.customers.customers.mass-update-success'));
+        session()->flash('success', trans('admin::app.customers.customers.mass-update-success'));
 
         return redirect()->back();
     }
@@ -258,7 +258,7 @@ class CustomerController extends Controller
             ]);
         }
 
-        session()->flash('info', trans('admin::app.customers.customers.mass-destroy-success'));
+        session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
 
         return redirect()->back();
     }
