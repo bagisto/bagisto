@@ -29,7 +29,6 @@
         "maatwebsite/excel": "3.1.x-dev",
         "nwidart/laravel-modules": "^3.2",
         "prettus/l5-repository": "^2.6",
-        "propaganistas/laravel-intl": "^2.0",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {

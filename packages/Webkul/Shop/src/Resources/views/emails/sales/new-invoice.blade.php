@@ -45,7 +45,7 @@
                 </div>
 
                 <div>
-                    {{ country()->name($order->shipping_address->country) }} {{ $order->shipping_address->postcode }}
+                    {{ core()->country_name($order->shipping_address->country) }} {{ $order->shipping_address->postcode }}
                 </div>
 
                 <div>---</div>
@@ -77,7 +77,7 @@
                 </div>
 
                 <div>
-                    {{ country()->name($order->billing_address->country) }} {{ $order->billing_address->postcode }}
+                    {{ core()->country_name($order->billing_address->country) }} {{ $order->billing_address->postcode }}
                 </div>
 
                 <div>---</div>
