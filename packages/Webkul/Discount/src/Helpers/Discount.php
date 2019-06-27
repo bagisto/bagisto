@@ -145,12 +145,15 @@ abstract class Discount
 
                 $this->clearDiscount();
 
+                $this->checkOnShipping();
+
                 $this->updateCartItemAndCart($rule);
 
                 return true;
+            } else {
+                $this->checkOnShipping();
             }
         } else {
-
             $this->cartRuleCart->create([
                 'cart_id' => $cart->id,
                 'cart_rule_id' => $rule->id
@@ -158,12 +161,63 @@ abstract class Discount
 
             $this->clearDiscount();
 
+            $this->checkOnShipping();
+
             $this->updateCartItemAndCart($rule);
 
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Checks whether rule is getting applied on shipping or not
+     */
+    public function checkOnShipping()
+    {
+        $cart = Cart::getCart();
+
+        if (! isset($cart->selected_shipping_rate)) {
+            return false;
+        }
+
+        $shippingRate = config('carriers')[$cart->selected_shipping_rate->carrier]['class'];
+
+        $actualShippingRate = new $shippingRate;
+        $actualShippingRate = $actualShippingRate->calculate();
+        $actualShippingPrice = $actualShippingRate->price;
+        $actualShippingBasePrice = $actualShippingRate->base_price;
+
+        $alreadyAppliedCartRuleCart = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id
+        ]);
+
+        if (count($alreadyAppliedCartRuleCart)) {
+            $alreadyAppliedRule = $alreadyAppliedCartRuleCart->first()->cart_rule;
+
+            $cartShippingRate = $cart->selected_shipping_rate;
+
+            if (isset($cartShippingRate)) {
+                if ($cartShippingRate->price < $actualShippingPrice) {
+                    return false;
+                } else {
+                    $cartShippingRate->update([
+                        'price' => $actualShippingPrice,
+                        'base_price' => $actualShippingBasePrice
+                    ]);
+
+                    $this->applyOnShipping($alreadyAppliedRule, $cart);
+                }
+            } else {
+                $this->applyOnShipping($alreadyAppliedRule, $cart);
+            }
+        } else {
+            $cartShippingRate->update([
+                'price' => $actualShippingPrice,
+                'base_price' => $actualShippingBasePrice
+            ]);
+        }
     }
 
     /**
@@ -586,5 +640,33 @@ abstract class Discount
         }
 
         return $result;
+    }
+
+    /**
+     * Apply on shipping
+     */
+    public function applyOnShipping($appliedRule, $cart)
+    {
+        if (isset($cart->selected_shipping_rate)) {
+            if ($appliedRule->free_shipping && $cart->selected_shipping_rate->base_price > 0) {
+                $cart->selected_shipping_rate->update([
+                    'price' => 0,
+                    'base_price' => 0
+                ]);
+            } else if ($appliedRule->free_shipping == 0 && $appliedRule->apply_to_shipping && $cart->selected_shipping_rate->base_price > 0) {
+                $actionType = config('discount-rules')[$appliedRule->action_type];
+
+                if ($appliedRule->apply_to_shipping) {
+                    $actionInstance = new $actionType;
+
+                    $discountOnShipping = $actionInstance->calculateOnShipping($cart);
+
+                    $cart->selected_shipping_rate->update([
+                        'price' => $cart->selected_shipping_rate->base_price - $discountOnShipping,
+                        'base_price' => $cart->selected_shipping_rate->price - core()->convertPrice($discountOnShipping, $cart->cart_currency_code)
+                    ]);
+                }
+            }
+        }
     }
 }

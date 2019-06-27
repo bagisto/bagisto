@@ -286,19 +286,6 @@ class OnepageController extends Controller
     }
 
     /**
-     * Applies non couponable rule if present
-     *
-     * @return Void
-     */
-    public function applyNonCouponAbleRule()
-    {
-        $cart = Cart::getCart();
-        $nonCouponAbleRules = Cart::applyNonCoupon();
-
-        return $nonCouponAbleRules;
-    }
-
-    /**
      * Initiates the removal of couponable cart rule
      *
      * @return Void
