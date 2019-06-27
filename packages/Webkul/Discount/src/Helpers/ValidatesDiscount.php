@@ -191,4 +191,248 @@ class ValidatesDiscount
             return false;
         }
     }
+
+    /**
+     * Checks the rule against the current cart instance whether rule conditions are applicable
+     * or not
+     *
+     * @return boolean
+     */
+    protected function testIfAllConditionAreTrue($conditions, $cart)
+    {
+        $paymentMethods = $this->getPaymentMethods();
+
+        $shippingMethods = $this->getShippingMethods();
+
+        array_pop($conditions);
+
+        $shipping_address = $cart->getShippingAddressAttribute() ?? null;
+
+        $shipping_method = $cart->selected_shipping_rate->method_title ?? null;
+
+        $shipping_country = $shipping_address->country ?? null;
+
+        $shipping_state = $shipping_address->state ?? null;
+
+        $shipping_postcode = $shipping_address->postcode ?? null;
+
+        $shipping_city = $shipping_address->city ?? null;
+
+        if (isset($cart->payment)) {
+            $payment_method = $paymentMethods[$cart->payment->method]['title'];
+        } else {
+            $payment_method = null;
+        }
+
+        $sub_total = $cart->base_sub_total;
+
+        $total_items = $cart->items_qty;
+
+        $total_weight = 0;
+
+        foreach ($cart->items as $item) {
+            $total_weight = $total_weight + $item->base_total_weight;
+        }
+
+        $result = true;
+
+        foreach ($conditions as $condition) {
+            if (isset($condition->attribute)) {
+                $actual_value = ${$condition->attribute};
+
+            } else {
+                $result = false;
+            }
+
+            if (isset($condition->value)) {
+                $test_value = $condition->value;
+
+            } else {
+                $result = false;
+            }
+
+            if (isset($condition->condition)) {
+                $test_condition = $condition->condition;
+            }
+            else {
+                $result = false;
+            }
+
+            if (isset($condition->type) && ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text')) {
+                if ($condition->type == 'string') {
+                    $actual_value = strtolower($actual_value);
+
+                    $test_value = strtolower($test_value);
+                }
+
+                if ($test_condition == '=') {
+                    if ($actual_value != $test_value) {
+                        $result = false;
+
+                        break;
+                    }
+                } else if ($test_condition == '>=') {
+                    if (! ($actual_value >= $test_value)) {
+                        $result = false;
+
+                        break;
+                    }
+                } else if ($test_condition == '<=') {
+                    if (! ($actual_value <= $test_value)) {
+                        $result = false;
+
+                        break;
+                    }
+                } else if ($test_condition == '>') {
+                    if (! ($actual_value > $test_value)) {
+                        $result = false;
+
+                        break;
+                    }
+                } else if ($test_condition == '<') {
+                    if (! ($actual_value < $test_value)) {
+                        $result = false;
+
+                        break;
+                    }
+                } else if ($test_condition == '{}') {
+                    if (! str_contains($actual_value, $test_value)) {
+                        $result = false;
+
+                        break;
+                    }
+                } else if ($test_condition == '!{}') {
+                    if (str_contains($actual_value, $test_value)) {
+                        $result = false;
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Checks the rule against the current cart instance whether rule conditions are applicable
+     * or not
+     *
+     * @return boolean
+     */
+    protected function testIfAnyConditionIsTrue($conditions, $cart)
+    {
+        $paymentMethods = $this->getPaymentMethods();
+
+        $shippingMethods = $this->getShippingMethods();
+
+        array_pop($conditions);
+
+        $result = false;
+
+        $shipping_address = $cart->getShippingAddressAttribute() ?? null;
+
+        $shipping_method = $cart->selected_shipping_rate->method_title ?? null;
+
+        $shipping_country = $shipping_address->country ?? null;
+
+        $shipping_state = $shipping_address->state ?? null;
+
+        $shipping_postcode = $shipping_address->postcode ?? null;
+
+        $shipping_city = $shipping_address->city ?? null;
+
+        if (isset($cart->payment)) {
+            $payment_method = $paymentMethods[$cart->payment->method]['title'];
+        } else {
+            $payment_method = null;
+        }
+
+        $sub_total = $cart->base_sub_total;
+
+        $total_items = $cart->items_qty;
+
+        $total_weight = 0;
+
+        foreach($cart->items as $item) {
+            $total_weight = $total_weight + $item->base_total_weight;
+        }
+
+        foreach ($conditions as $condition) {
+            if (isset($condition->attribute)) {
+                $actual_value = ${$condition->attribute};
+
+            } else {
+                $result = false;
+            }
+
+            if (isset($condition->value)) {
+                $test_value = $condition->value;
+
+            } else {
+                $result = false;
+            }
+
+            if (isset($condition->condition)) {
+                $test_condition = $condition->condition;
+            }
+            else {
+                $result = false;
+            }
+
+            if ($condition->type == 'numeric' || $condition->type == 'string' || $condition->type == 'text') {
+                if ($condition->type == 'string') {
+                    $actual_value = strtolower($actual_value);
+
+                    $test_value = strtolower($test_value);
+                }
+
+                if ($test_condition == '=') {
+                    if ($actual_value == $test_value) {
+                        $result = true;
+
+                        break;
+                    }
+                } else if ($test_condition == '>=') {
+                    if ($actual_value >= $test_value) {
+                        $result = true;
+
+                        break;
+                    }
+                } else if ($test_condition == '<=') {
+                    if ($actual_value <= $test_value) {
+                        $result = true;
+
+                        break;
+                    }
+                } else if ($test_condition == '>') {
+                    if ($actual_value > $test_value) {
+                        $result = true;
+
+                        break;
+                    }
+                } else if ($test_condition == '<') {
+                    if ($actual_value < $test_value) {
+                        $result = true;
+
+                        break;
+                    }
+                } else if ($test_condition == '{}') {
+                    if (str_contains($actual_value, $test_value)) {
+                        $result = true;
+
+                        break;
+                    }
+                } else if ($test_condition == '!{}') {
+                    if (str_contains($actual_value, $test_value)) {
+                        $result = true;
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
 }
