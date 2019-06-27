@@ -150,6 +150,8 @@ abstract class Discount
                 $this->updateCartItemAndCart($rule);
 
                 return true;
+            } else {
+                $this->checkOnShipping();
             }
         } else {
             $this->cartRuleCart->create([
