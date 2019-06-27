@@ -244,6 +244,10 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::catalog.products.edit'
                 ])->name('admin.catalog.products.productlinksearch');
 
+                Route::get('/products/{id}/{attribute_id}', 'Webkul\Product\Http\Controllers\ProductController@download')->defaults('_config', [
+                    'view' => 'admin.catalog.products.edit'
+                ])->name('admin.catalog.products.file.download');
+
                 // Catalog Category Routes
                 Route::get('/categories', 'Webkul\Category\Http\Controllers\CategoryController@index')->defaults('_config', [
                     'view' => 'admin::catalog.categories.index'
