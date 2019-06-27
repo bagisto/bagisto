@@ -189,7 +189,7 @@ class CustomerController extends Controller
     /**
      * To load the note taking screen for the customers
      *
-     * @return View
+     * @return view
      */
     public function createNote($id)
     {
@@ -201,12 +201,12 @@ class CustomerController extends Controller
     /**
      * To store the response of the note in storage
      *
-     * @return Redirect
+     * @return redirect
      */
     public function storeNote()
     {
         $this->validate(request(), [
-            'notes' => 'required|string'
+            'notes' => 'string|nullable'
         ]);
 
         $customer = $this->customer->find(request()->input('_customer'));
@@ -226,6 +226,8 @@ class CustomerController extends Controller
 
     /**
      * To mass update the customer
+     *
+     * @return redirect
      */
     public function massUpdate()
     {
@@ -240,13 +242,15 @@ class CustomerController extends Controller
             ]);
         }
 
-        session()->flash('info', trans('admin::app.customers.customers.mass-update-success'));
+        session()->flash('success', trans('admin::app.customers.customers.mass-update-success'));
 
         return redirect()->back();
     }
 
     /**
      * To mass delete the customer
+     *
+     * @return redirect
      */
     public function massDestroy()
     {
@@ -258,7 +262,7 @@ class CustomerController extends Controller
             ]);
         }
 
-        session()->flash('info', trans('admin::app.customers.customers.mass-destroy-success'));
+        session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
 
         return redirect()->back();
     }
