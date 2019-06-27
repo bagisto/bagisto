@@ -213,17 +213,17 @@ abstract class Discount
                 if ($rule->action_type == 'percent_of_product') {
                     $item->update([
                         'discount_percent' => $rule->discount_amount,
-                        'discount_amount' => $impact['discount'],
+                        'discount_amount' => core()->convertPrice($impact['discount'], $cart->cart_currency_code),
                         'base_discount_amount' => $impact['discount']
                     ]);
                 } else {
                     $item->update([
-                        'discount_amount' => $impact['discount'],
+                        'discount_amount' => core()->convertPrice($impact['discount'], $cart->cart_currency_code),
                         'base_discount_amount' => $impact['discount']
                     ]);
                 }
 
-                // save coupon if rule has it
+                // save coupon if rule use it
                 if ($rule->use_coupon) {
                     $coupon = $rule->coupons->code;
 
@@ -287,6 +287,7 @@ abstract class Discount
         foreach ($cart->items as $item) {
             if ($item->base_total > $maxValue) {
                 $maxValue = $item->total;
+
                 $maxWorthItem = [
                     'id' => $item->id,
                     'price' => $item->price,

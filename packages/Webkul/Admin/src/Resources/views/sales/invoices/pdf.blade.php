@@ -114,7 +114,7 @@
                                     <p>{{ $invoice->order->billing_address->address1 }}</p>
                                     <p>{{ $invoice->order->billing_address->city }}</p>
                                     <p>{{ $invoice->order->billing_address->state }}</p>
-                                    <p>{{ country()->name($invoice->order->billing_address->country) }} {{ $invoice->order->billing_address->postcode }}</p>
+                                    <p>{{ core()->country_name($invoice->order->billing_address->country) }} {{ $invoice->order->billing_address->postcode }}</p>
                                     {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->billing_address->phone }} 
                                 </td>
                                 <td>
@@ -122,7 +122,7 @@
                                     <p>{{ $invoice->order->shipping_address->address1 }}</p>
                                     <p>{{ $invoice->order->shipping_address->city }}</p>
                                     <p>{{ $invoice->order->shipping_address->state }}</p>
-                                    <p>{{ country()->name($invoice->order->shipping_address->country) }} {{ $invoice->order->shipping_address->postcode }}</p>
+                                    <p>{{ core()->country_name($invoice->order->shipping_address->country) }} {{ $invoice->order->shipping_address->postcode }}</p>
                                     {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->shipping_address->phone }} 
                                 </td>
                             </tr>

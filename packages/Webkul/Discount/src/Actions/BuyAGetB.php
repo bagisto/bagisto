@@ -37,4 +37,16 @@ class BuyAGetB extends Action
 
         return $report;
     }
+
+    /**
+     * Calculates the impact on the shipping amount if the rule is apply_to_shipping enabled
+     */
+    public function calculateOnShipping($cart)
+    {
+        $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_grand_total;
+
+        $discountOnShipping = ($percentOfDiscount / 100) * $cart->selected_shipping_rate->base_price;
+
+        return $discountOnShipping;
+    }
 }

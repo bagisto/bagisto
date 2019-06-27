@@ -18,7 +18,7 @@ class CustomerAddress extends JsonResource
             'id' => $this->id,
             'address1' => explode(PHP_EOL, $this->address1),
             'country' => $this->country,
-            'country_name' => country()->name($this->country),
+            'country_name' => core()->country_name($this->country),
             'state' => $this->state,
             'city' => $this->city,
             'postcode' => $this->postcode,

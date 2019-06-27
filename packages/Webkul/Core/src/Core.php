@@ -394,9 +394,9 @@ class Core
         if (is_null($amount))
             $amount = 0;
 
-        $currencyCode = $this->getCurrentCurrency()->code;
+        $formater = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
 
-        return currency($this->convertPrice($amount), $currencyCode);
+        return $formater->formatCurrency($this->convertPrice($amount), $this->getCurrentCurrency()->code);
     }
 
     /**
@@ -407,11 +407,10 @@ class Core
     */
     public function currencySymbol($code)
     {
-        try {
-            return currency()->symbol($code);
-        } catch (\Exception $e) {
-            return $code;
-        }
+
+        $formatter = new \NumberFormatter(app()->getLocale() . '@currency=' . $code, \NumberFormatter::CURRENCY);
+
+        return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
     }
 
     /**
@@ -425,7 +424,9 @@ class Core
         if (is_null($price))
             $price = 0;
 
-        return currency($price, $currencyCode);
+        $formater = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
+
+        return $formater->formatCurrency($price, $currencyCode);
     }
 
     /**
@@ -438,8 +439,10 @@ class Core
     {
         if (is_null($price))
             $price = 0;
+        
+        $formater = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
 
-        return currency($price, $this->getBaseCurrencyCode());
+        return $formater->formatCurrency($price, $this->getBaseCurrencyCode());
     }
 
     /**
@@ -614,6 +617,19 @@ class Core
     public function countries()
     {
         return $this->countryRepository->all();
+    }
+
+    /**
+     * Returns country name by code
+     *
+     * @param string $code
+     * @return string
+     */
+    public function country_name($code)
+    {
+        $country = $this->countryRepository->findOneByField('code', $code);
+
+        return $country ? $country->name : '';
     }
 
     /**
