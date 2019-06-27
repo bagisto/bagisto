@@ -18,7 +18,7 @@ class RedirectIfNotSuperAdmin
     public function handle($request, Closure $next, $guard = 'super-admin')
     {
         if (! Auth::guard($guard)->check()) {
-            return redirect()->route('customer.session.index');
+            return redirect()->route('super.session.index');
         }
 
         return $next($request);
