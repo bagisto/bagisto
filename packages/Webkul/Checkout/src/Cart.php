@@ -635,12 +635,12 @@ class Cart {
             $option = $attribute->options()->where('id', $product->{$attribute->code})->first();
 
             $data['attributes'][$attribute->code] = [
-                'attribute_name' => $attribute->name,
+                'attribute_name' => $attribute->name ?  $attribute->name : $attribute->admin_name,
                 'option_id' => $option->id,
                 'option_label' => $option->label,
             ];
 
-            $labels[] = $attribute->name . ' : ' . $option->label;
+            $labels[] = ($attribute->name ? $attribute->name : $attribute->admin_name) . ' : ' . $option->label;
         }
 
         $data['html'] = implode(', ', $labels);
