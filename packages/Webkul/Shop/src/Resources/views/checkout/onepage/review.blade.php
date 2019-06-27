@@ -19,7 +19,7 @@
                             {{ $billingAddress->address1 }},<br/> {{ $billingAddress->state }}
                         </li>
                         <li class="mb-10">
-                            {{ country()->name($billingAddress->country) }} {{ $billingAddress->postcode }}
+                            {{ core()->country_name($billingAddress->country) }} {{ $billingAddress->postcode }}
                         </li>
 
                         <span class="horizontal-rule mb-15 mt-15"></span>
@@ -47,7 +47,7 @@
                             {{ $shippingAddress->address1 }},<br/> {{ $shippingAddress->state }}
                         </li>
                         <li class="mb-10">
-                            {{ country()->name($shippingAddress->country) }} {{ $shippingAddress->postcode }}
+                            {{ core()->country_name($shippingAddress->country) }} {{ $shippingAddress->postcode }}
                         </li>
 
                         <span class="horizontal-rule mb-15 mt-15"></span>
