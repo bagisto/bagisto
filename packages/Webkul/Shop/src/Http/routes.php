@@ -115,6 +115,11 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'redirect' => 'shop.home.index'
     ])->name('shop.reviews.store');
 
+     // Download file or image
+    Route::get('/product/{id}/{attribute_id}', 'Webkul\Shop\Http\Controllers\ProductController@download')->defaults('_config', [
+        'view' => 'shop.products.index'
+    ])->name('shop.product.file.download');
+
     //customer routes starts here
     Route::prefix('customer')->group(function () {
         // forgot Password Routes

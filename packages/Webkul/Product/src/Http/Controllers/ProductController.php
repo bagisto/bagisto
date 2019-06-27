@@ -11,6 +11,7 @@ use Webkul\Product\Repositories\ProductAttributeValueRepository as ProductAttrib
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Inventory\Repositories\InventorySourceRepository as InventorySource;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Product controller
@@ -293,5 +294,21 @@ class ProductController extends Controller
         } else {
             return view($this->_config['view']);
         }
+    }
+
+     /**
+     * Download image or file
+     *
+     * @param  int $productId, $attributeId
+     * @return \Illuminate\Http\Response
+     */
+    public function download($productId, $attributeId)
+    {
+        $productAttribute = $this->productAttributeValue->findOneWhere([
+            'product_id'   => $productId,
+            'attribute_id' => $attributeId
+        ]);
+
+        return Storage::download($productAttribute['text_value']);
     }
 }

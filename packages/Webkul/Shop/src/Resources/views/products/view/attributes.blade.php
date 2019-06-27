@@ -21,13 +21,13 @@
                         @endif
                             @if ($attribute['type'] == 'file' && $attribute['value'])
                                 <td>
-                                    <a href="{{ Storage::url($attribute['value']) }}" target="_blank">
+                                    <a  href="{{ route('shop.product.file.download', [$product->product_id, $attribute['id']])}}">
                                         <i class="icon sort-down-icon download"></i>
                                     </a>
                                 </td>
                             @elseif ($attribute['type'] == 'image' && $attribute['value'])
                                 <td>
-                                    <a href="{{ Storage::url($attribute['value']) }}" target="_blank">
+                                    <a href="{{ route('shop.product.file.download', [$product->product_id, $attribute['id']])}}">
                                         <img src="{{ Storage::url($attribute['value']) }}" style="height: 20px; width: 20px;"/>
                                     </a>
                                 </td>
@@ -35,7 +35,6 @@
                                 <td>{{ $attribute['value'] }}</td>
                             @endif
                     </tr>
-
                 @endforeach
 
             </table>
