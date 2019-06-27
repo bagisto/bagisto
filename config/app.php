@@ -203,7 +203,6 @@ return [
          */
 
         Dimsav\Translatable\TranslatableServiceProvider::class,
-        Propaganistas\LaravelIntl\IntlServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -771,7 +771,10 @@ return [
             'edit-help-title' => 'Edit Customer',
             'delete-help-title' => 'Delete Customer',
             'mass-destroy-success' => 'Customers deleted successfully',
-            'mass-update-success' => 'Customers updated successfully'
+            'mass-update-success' => 'Customers updated successfully',
+            'status' => 'Status',
+            'active' => 'Active',
+            'in-active' => 'Inactive'
         ],
 
         'reviews' => [
