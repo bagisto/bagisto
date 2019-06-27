@@ -597,23 +597,25 @@ abstract class Discount
      */
     public function applyOnShipping($appliedRule, $cart)
     {
-        if ($appliedRule->free_shipping && $cart->selected_shipping_rate->base_price > 0) {
-            $cart->selected_shipping_rate->update([
-                'price' => 0,
-                'base_price' => 0
-            ]);
-        } else if ($appliedRule->free_shipping == 0 && $appliedRule->apply_to_shipping && $cart->selected_shipping_rate->base_price > 0) {
-            $actionType = config('discount-rules')[$appliedRule->action_type];
-
-            if ($appliedRule->apply_to_shipping) {
-                $actionInstance = new $actionType;
-
-                $discountOnShipping = $actionInstance->calculateOnShipping($cart);
-
+        if (isset($cart->selected_shipping_rate->base_price)) {
+            if ($appliedRule->free_shipping && $cart->selected_shipping_rate->base_price > 0) {
                 $cart->selected_shipping_rate->update([
-                    'price' => $cart->selected_shipping_rate->base_price - $discountOnShipping,
-                    'base_price' => $cart->selected_shipping_rate->price - core()->convertPrice($discountOnShipping, $cart->cart_currency_code)
+                    'price' => 0,
+                    'base_price' => 0
                 ]);
+            } else if ($appliedRule->free_shipping == 0 && $appliedRule->apply_to_shipping && $cart->selected_shipping_rate->base_price > 0) {
+                $actionType = config('discount-rules')[$appliedRule->action_type];
+
+                if ($appliedRule->apply_to_shipping) {
+                    $actionInstance = new $actionType;
+
+                    $discountOnShipping = $actionInstance->calculateOnShipping($cart);
+
+                    $cart->selected_shipping_rate->update([
+                        'price' => $cart->selected_shipping_rate->base_price - $discountOnShipping,
+                        'base_price' => $cart->selected_shipping_rate->price - core()->convertPrice($discountOnShipping, $cart->cart_currency_code)
+                    ]);
+                }
             }
         }
     }
