@@ -189,7 +189,7 @@ class CustomerController extends Controller
     /**
      * To load the note taking screen for the customers
      *
-     * @return View
+     * @return view
      */
     public function createNote($id)
     {
@@ -201,7 +201,7 @@ class CustomerController extends Controller
     /**
      * To store the response of the note in storage
      *
-     * @return Redirect
+     * @return redirect
      */
     public function storeNote()
     {
@@ -226,6 +226,8 @@ class CustomerController extends Controller
 
     /**
      * To mass update the customer
+     *
+     * @return redirect
      */
     public function massUpdate()
     {
@@ -247,6 +249,8 @@ class CustomerController extends Controller
 
     /**
      * To mass delete the customer
+     *
+     * @return redirect
      */
     public function massDestroy()
     {
