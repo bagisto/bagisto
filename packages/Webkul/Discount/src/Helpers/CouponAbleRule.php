@@ -119,4 +119,45 @@ class CouponAbleRule extends Discount
             return false;
         }
     }
+
+    /**
+     * Removes the already applied coupon on the current cart instance
+     *
+     * @return boolean
+     */
+    public function remove()
+    {
+        $cart = Cart::getCart();
+
+        $existingRule = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id
+        ]);
+
+        if ($existingRule->count()) {
+            $existingRule->first()->delete();
+
+            foreach ($cart->items as $item) {
+                if ($item->discount_amount > 0) {
+                    $item->update([
+                        'discount_amount' => 0,
+                        'base_discount_amount' => 0,
+                        'discount_percent' => 0,
+                        'coupon_code' => NULL
+                    ]);
+                }
+            }
+
+            $cart->update([
+                'coupon_code' => NULL,
+                'discount_amount' => 0,
+                'base_discount_amount' => 0
+            ]);
+
+            Cart::collectTotals();
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
