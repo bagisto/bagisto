@@ -232,7 +232,7 @@ class OnepageController extends Controller
     {
         $cart = Cart::getCart();
 
-        // $this->validatesDiscount->validate($cart);
+        $this->validatesDiscount->validate($cart);
 
         if (! $cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));

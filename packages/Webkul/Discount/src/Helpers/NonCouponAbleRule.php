@@ -19,17 +19,10 @@ class NonCouponAbleRule extends Discount
 
         $applicableRules = array();
 
-        if (auth()->guard('customer')->check()) {
-            $rules = $this->cartRule->findWhere([
-                'use_coupon' => 0,
-                'status' => 1
-            ]);
-        } else {
-            $rules = $this->cartRule->findWhere([
-                'use_coupon' => 0,
-                'status' => 1
-            ]);
-        }
+        $rules = $this->cartRule->findWhere([
+            'use_coupon' => 0,
+            'status' => 1
+        ]);
 
         $alreadyAppliedCartRuleCart = $this->cartRuleCart->findWhere([
             'cart_id' => $cart->id,
@@ -47,11 +40,11 @@ class NonCouponAbleRule extends Discount
                 // all discount is cleared fro mthe cart and cart items table
                 $this->clearDiscount();
 
-                return null;
+                return false;
             }
 
             if ($alreadyAppliedRule->use_coupon) {
-                return null;
+                return false;
             }
         }
 
@@ -202,7 +195,7 @@ class NonCouponAbleRule extends Discount
 
             return array_first($applicableRules)['impact'];
         } else {
-            return null;
+            return false;
         }
     }
 }

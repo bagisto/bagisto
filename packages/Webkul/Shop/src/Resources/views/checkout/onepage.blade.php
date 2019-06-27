@@ -488,7 +488,9 @@
 
                     error_message: null,
 
-                    couponChanged: false
+                    couponChanged: false,
+
+                    changeCount: 0
                 }
             },
 
@@ -531,8 +533,15 @@
                 },
 
                 changeCoupon: function() {
-                    if (this.couponChanged == true) {
+                    console.log('called');
+                    if (this.couponChanged == true && this.changeCount == 0) {
+                        this.changeCount++;
+
+                        this.error_message = null;
+
                         this.couponChanged = false;
+                    } else {
+                        this.changeCount = 0;
                     }
                 },
 
