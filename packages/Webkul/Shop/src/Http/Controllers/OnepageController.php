@@ -147,6 +147,8 @@ class OnepageController extends Controller
 
         $this->nonCoupon->apply();
 
+        $this->nonCoupon->checkOnShipping();
+
         Cart::collectTotals();
 
         return response()->json(Payment::getSupportedPaymentMethods());
@@ -165,6 +167,8 @@ class OnepageController extends Controller
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
 
         $this->nonCoupon->apply();
+
+        $this->nonCoupon->checkOnShipping();
 
         Cart::collectTotals();
 
@@ -283,19 +287,6 @@ class OnepageController extends Controller
         }
 
         return $result;
-    }
-
-    /**
-     * Applies non couponable rule if present
-     *
-     * @return Void
-     */
-    public function applyNonCouponAbleRule()
-    {
-        $cart = Cart::getCart();
-        $nonCouponAbleRules = Cart::applyNonCoupon();
-
-        return $nonCouponAbleRules;
     }
 
     /**

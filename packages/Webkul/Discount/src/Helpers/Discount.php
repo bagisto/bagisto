@@ -145,14 +145,13 @@ abstract class Discount
 
                 $this->clearDiscount();
 
-                $this->applyOnShipping($rule, $cart);
+                $this->checkOnShipping();
 
                 $this->updateCartItemAndCart($rule);
 
                 return true;
             }
         } else {
-
             $this->cartRuleCart->create([
                 'cart_id' => $cart->id,
                 'cart_rule_id' => $rule->id
@@ -160,7 +159,7 @@ abstract class Discount
 
             $this->clearDiscount();
 
-            $this->applyOnShipping($rule, $cart);
+            $this->checkOnShipping();
 
             $this->updateCartItemAndCart($rule);
 
@@ -168,6 +167,55 @@ abstract class Discount
         }
 
         return false;
+    }
+
+    /**
+     * Checks whether rule is getting applied on shipping or not
+     */
+    public function checkOnShipping()
+    {
+        $cart = Cart::getCart();
+
+        if (! isset($cart->selected_shipping_rate)) {
+            return false;
+        }
+
+        $shippingRate = config('carriers')[$cart->selected_shipping_rate->carrier]['class'];
+
+        $actualShippingRate = new $shippingRate;
+        $actualShippingRate = $actualShippingRate->calculate();
+        $actualShippingPrice = $actualShippingRate->price;
+        $actualShippingBasePrice = $actualShippingRate->base_price;
+
+        $alreadyAppliedCartRuleCart = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id
+        ]);
+
+        if (count($alreadyAppliedCartRuleCart)) {
+            $alreadyAppliedRule = $alreadyAppliedCartRuleCart->first()->cart_rule;
+
+            $cartShippingRate = $cart->selected_shipping_rate;
+
+            if (isset($cartShippingRate)) {
+                if ($cartShippingRate->price < $actualShippingPrice) {
+                    return false;
+                } else {
+                    $cartShippingRate->update([
+                        'price' => $actualShippingPrice,
+                        'base_price' => $actualShippingBasePrice
+                    ]);
+
+                    $this->applyOnShipping($alreadyAppliedRule, $cart);
+                }
+            } else {
+                $this->applyOnShipping($alreadyAppliedRule, $cart);
+            }
+        } else {
+            $cartShippingRate->update([
+                'price' => $actualShippingPrice,
+                'base_price' => $actualShippingBasePrice
+            ]);
+        }
     }
 
     /**
@@ -597,7 +645,7 @@ abstract class Discount
      */
     public function applyOnShipping($appliedRule, $cart)
     {
-        if (isset($cart->selected_shipping_rate->base_price)) {
+        if (isset($cart->selected_shipping_rate)) {
             if ($appliedRule->free_shipping && $cart->selected_shipping_rate->base_price > 0) {
                 $cart->selected_shipping_rate->update([
                     'price' => 0,
