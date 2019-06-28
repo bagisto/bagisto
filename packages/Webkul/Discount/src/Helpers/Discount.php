@@ -561,13 +561,13 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (! str_contains($actual_value, $test_value)) {
+                    if (str_contains($actual_value, $test_value)) {
                         $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (str_contains($actual_value, $test_value)) {
+                    if (! str_contains($actual_value, $test_value)) {
                         $result = false;
 
                         break;
@@ -689,7 +689,7 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (str_contains($actual_value, $test_value)) {
+                    if (! str_contains($actual_value, $test_value)) {
                         $result = true;
 
                         break;
