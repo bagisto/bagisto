@@ -1005,7 +1005,7 @@ return [
             'footer' => 'Footer',
             'content' => 'Content',
             'footer-content' => 'Footer Text',
-            'locale-options' => 'Locale Options',
+            'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',
