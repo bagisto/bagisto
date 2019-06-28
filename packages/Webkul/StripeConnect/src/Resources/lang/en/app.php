@@ -16,6 +16,6 @@ return  [
     'payment-success' => 'Success! Payment Done',
     'click-continue' => 'Click continue to proceed further',
     'some-error' => 'Some error occurred',
-    'transaction-fee' => 'Stripe Fees',
+    'transaction-fee' => 'Transaction Fees',
     'more-info' => '(after successful order)'
 ];

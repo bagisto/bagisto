@@ -23,7 +23,7 @@ class DatabaseManager extends BaseDatabaseManager
 
         if (! auth()->guard('super-admin')->check()) {
             if (count(explode('as', $table)) == 1) {
-                if ($table == 'companies' || $table == 'country_states' || $table == 'countries') {
+                if ($table == 'companies' || $table == 'country_states' || $table == 'countries' || $table == 'customer_documents') {
 
                     return $this->query()->from($table);
                 } else {
@@ -33,7 +33,7 @@ class DatabaseManager extends BaseDatabaseManager
                 $name = explode('as', $table);
                 $tempName = trim($name[0]);
 
-                if ($tempName == 'companies' || $tempName == 'country_states' || $tempName == 'countries') {
+                if ($tempName == 'companies' || $tempName == 'country_states' || $tempName == 'countries' || $table == 'customer_documents') {
                     return $this->query()->from($table);
                 } else {
                     return $this->query()->from($table)->where(trim($name[1]) . '.company_id', $company->id);
