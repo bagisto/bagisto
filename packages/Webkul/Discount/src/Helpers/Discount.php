@@ -263,18 +263,20 @@ abstract class Discount
     {
         $cart = \Cart::getCart();
 
-        $shippingRate = config('carriers')[$cart->selected_shipping_rate->carrier]['class'];
+        if (isset($cart->selected_shipping_rate->carrier)) {
+            $shippingRate = config('carriers')[$cart->selected_shipping_rate->carrier]['class'];
 
-        $actualShippingRate = new $shippingRate;
-        $actualShippingRate = $actualShippingRate->calculate();
-        $actualShippingPrice = $actualShippingRate->price;
-        $actualShippingBasePrice = $actualShippingRate->base_price;
-        $cartShippingRate = $cart->selected_shipping_rate;
+            $actualShippingRate = new $shippingRate;
+            $actualShippingRate = $actualShippingRate->calculate();
+            $actualShippingPrice = $actualShippingRate->price;
+            $actualShippingBasePrice = $actualShippingRate->base_price;
+            $cartShippingRate = $cart->selected_shipping_rate;
 
-        $cartShippingRate->update([
-            'price' => $actualShippingPrice,
-            'base_price' => $actualShippingBasePrice
-        ]);
+            $cartShippingRate->update([
+                'price' => $actualShippingPrice,
+                'base_price' => $actualShippingBasePrice
+            ]);
+        }
     }
 
     /**
