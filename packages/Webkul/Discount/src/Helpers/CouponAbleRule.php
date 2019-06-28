@@ -136,6 +136,8 @@ class CouponAbleRule extends Discount
         if ($existingRule->count()) {
             $existingRule->first()->delete();
 
+            $this->resetShipping($cart);
+
             foreach ($cart->items as $item) {
                 if ($item->discount_amount > 0) {
                     $item->update([

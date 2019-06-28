@@ -68,7 +68,7 @@
                                         <div class="control-group" :class="[errors.has('ends_till') ? 'has-error' : '']">
                                             <label for="ends_till">{{ __('admin::app.promotion.general-info.ends-till') }}</label>
 
-                                            <input type="text" class="control" v-model="ends_till" v-validate="'after:starts_from'" name="ends_till" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends-till') }}&quot;">
+                                            <input type="text" class="control" v-model="ends_till" name="ends_till" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends-till') }}&quot;">
 
                                             <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
                                         </div>
