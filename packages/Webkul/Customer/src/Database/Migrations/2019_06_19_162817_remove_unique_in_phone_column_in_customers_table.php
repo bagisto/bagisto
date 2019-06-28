@@ -14,7 +14,9 @@ class RemoveUniqueInPhoneColumnInCustomersTable extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->dropUnique('customers_phone_unique');
+            if (! Schema::hasColumn('customers', 'phone')) {
+                $table->dropUnique('customers_phone_unique');
+            }
         });
     }
 
