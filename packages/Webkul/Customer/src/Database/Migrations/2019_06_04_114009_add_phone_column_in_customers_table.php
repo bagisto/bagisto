@@ -14,7 +14,9 @@ class AddPhoneColumnInCustomersTable extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->string('phone')->unique()->nullable();
+            if (! Schema::hasColumn('customers', 'phone')) {
+                $table->string('phone')->unique()->nullable();
+            }
         });
     }
 
