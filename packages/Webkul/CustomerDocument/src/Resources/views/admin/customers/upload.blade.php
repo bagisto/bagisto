@@ -2,7 +2,7 @@
 
 $customerDocumentRepository = app('Webkul\CustomerDocument\Repositories\CustomerDocumentRepository');
 
-$documents = $customerDocumentRepository->findWhere(['customer_id' => $customer->id]);
+$documents = $customerDocumentRepository->findWhere(['customer_id' => $customer->id, 'status' => 1]);
 
 ?>
 
@@ -18,6 +18,7 @@ $documents = $customerDocumentRepository->findWhere(['customer_id' => $customer-
                 <thead>
                     <tr>
                         <th>{{ __('customerdocument::app.admin.customers.name') }}</th>
+                        <th>{{ __('customerdocument::app.admin.documents.type') }}</th>
                         <th>{{ __('customerdocument::app.admin.customers.description') }}</th>
                         <th>{{ __('customerdocument::app.admin.customers.download') }}</th>
                         <th></th>
@@ -28,14 +29,15 @@ $documents = $customerDocumentRepository->findWhere(['customer_id' => $customer-
                     @foreach ($documents as $document)
                         <tr>
                             <td>{{ $document->name }}</td>
+                            <td>{{ $document->type }}</td>
                             <td>{{ $document->description }}</td>
                             <td>
-                                <a href="{{ route('admin.customer.document.download', $document->id) }}">
+                                <a href="{{ route('admin.documents.download', $document->id) }}">
                                     <i class="icon sort-down-icon"></i>
                                 </a>
                             </td>
                             <td class="actions">
-                                <a href="{{ route('admin.customer.document.delete', $document->id) }}">
+                                <a href="{{ route('admin.customer.documents.delete', $document->id) }}">
                                     <i class="icon trash-icon"></i>
                                 </a>
                             </td>
@@ -52,7 +54,7 @@ $documents = $customerDocumentRepository->findWhere(['customer_id' => $customer-
     <h3 slot="header">{{ __('customerdocument::app.admin.customers.add-document') }}</h3>
 
     <div slot="body">
-        <form method="POST" action="{{ route('admin.customer.document.upload') }}" enctype="multipart/form-data" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('admin.documents.store') }}" enctype="multipart/form-data" @submit.prevent="onSubmit">
             @csrf()
 
             <input type="hidden" name="customer_id" value="{{ $customer->id }}">
@@ -61,6 +63,15 @@ $documents = $customerDocumentRepository->findWhere(['customer_id' => $customer-
                 <label for="name" class="required">{{ __('customerdocument::app.admin.customers.name') }}</label>
                 <input v-validate="'required'" type="text" class="control" id="name" name="name" data-vv-as="&quot;{{ __('customerdocument::app.admin.customers.name') }}&quot;" value="{{ old('name') }}"/>
                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+            </div>
+
+            <div class="control-group" :class="[errors.has('type') ? 'has-error' : '']">
+                <label for="type" class="required">{{ __('customerdocument::app.admin.documents.type') }}</label>
+                <select name="type" class="control" v-validate="'required'" data-vv-as="&quot;{{ __('customerdocument::app.admin.documents.type') }}&quot;">
+                    <option value="product">{{ __('customerdocument::app.admin.documents.product') }}</option>
+                    <option value="marketing">{{ __('customerdocument::app.admin.documents.marketing') }}</option>
+                </select>
+                <span class="control-error" v-if="errors.has('type')">@{{ errors.first('type') }}</span>
             </div>
 
             <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">

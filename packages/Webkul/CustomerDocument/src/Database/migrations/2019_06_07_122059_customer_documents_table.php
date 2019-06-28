@@ -17,9 +17,10 @@ class CustomerDocumentsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description')->nullable();
+            $table->boolean('status')->default(1);
+            $table->string('type');
             $table->string('path');
-            $table->integer('customer_id')->unsigned();
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->integer('customer_id')->default(0);
             $table->timestamps();
         });
     }

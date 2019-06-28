@@ -17,9 +17,23 @@ class CustomerDocumentRepository extends Repository
      *
      * @return mixed
      */
-
     function model()
     {
         return 'Webkul\CustomerDocument\Contracts\CustomerDocument';
+    }
+
+    /**
+     * get All Documents
+     *
+     * @param int $id
+     * @return array
+     */
+    function getDocuments($id)
+    {
+        return $this->model
+            ->whereIn('customer_id', [$id, 0])
+            ->where('status', '1')
+            ->get();
+
     }
 }

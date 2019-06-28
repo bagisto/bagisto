@@ -47,7 +47,11 @@ class CustomerDocumentServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/menu.php', 'menu.customer'
+            dirname(__DIR__) . '/Config/menu.php', 'menu.admin'
+        );
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/customer-menu.php', 'menu.customer'
         );
 
         $this->mergeConfigFrom(

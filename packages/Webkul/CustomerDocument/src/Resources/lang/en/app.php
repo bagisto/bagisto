@@ -21,5 +21,20 @@ return [
             'size' => 'Max Size Allowed (MB)',
             'any-type' => 'All file types are allowed'
         ],
+
+        'documents' => [
+            'title' => 'Documents',
+            'add-document' => 'Add Document',
+            'b2b-files' => 'B2B Files',
+            'save-document' => 'Save Document',
+            'type' => 'Type',
+            'status' => 'Status',
+            'active' => 'Active',
+            'in-active' => 'Inacvtive',
+            'product' => 'Product',
+            'marketing' => 'Marketing',
+            'add-document' => 'Add Document',
+            'edit-document' => 'Edit Document'
+        ],
     ],
 ];

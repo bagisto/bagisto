@@ -9,5 +9,5 @@ class CustomerDocument extends Model implements CustomerDocumentContract
 {
     protected $table = 'customer_documents';
 
-    protected $fillable = ['name', 'path', 'customer_id', 'description'];
+    protected $fillable = ['name', 'path', 'customer_id', 'description', 'type', 'status'];
 }
