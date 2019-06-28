@@ -37,6 +37,8 @@ class NonCouponAbleRule extends Discount
                 // if the validation fails then the cart rule gets deleted from cart rule cart
                 $alreadyAppliedCartRuleCart->first()->delete();
 
+                $this->resetShipping($cart);
+
                 // all discount is cleared fro mthe cart and cart items table
                 $this->clearDiscount();
 
@@ -117,7 +119,7 @@ class NonCouponAbleRule extends Discount
                 if (count($endRules) == 1) {
                     $this->save(array_first($endRules)['rule']);
 
-                    return $endRules;
+                    return array_first($endRules)['impact'];
                 }
 
                 $maxImpact = 0;
