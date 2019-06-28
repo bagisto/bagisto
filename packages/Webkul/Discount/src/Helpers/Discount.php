@@ -132,10 +132,14 @@ abstract class Discount
     {
         $cart = \Cart::getCart();
 
-        // create or update
+        // Create or update
         $existingRule = $this->cartRuleCart->findWhere([
             'cart_id' => $cart->id
         ]);
+
+        if ($rule->use_coupon) {
+            $this->resetShipping($cart);
+        }
 
         if (count($existingRule)) {
             if ($existingRule->first()->cart_rule_id != $rule->id) {
@@ -147,10 +151,15 @@ abstract class Discount
 
                 $this->updateCartItemAndCart($rule);
 
+                if ($rule->use_coupon) {
+                    $this->checkOnShipping($cart);
+                }
+
                 return true;
+            } else {
+                // $this->checkOnShipping($cart);
             }
         } else {
-
             $this->cartRuleCart->create([
                 'cart_id' => $cart->id,
                 'cart_rule_id' => $rule->id
@@ -160,10 +169,114 @@ abstract class Discount
 
             $this->updateCartItemAndCart($rule);
 
+            if ($rule->use_coupon) {
+                $this->checkOnShipping($cart);
+            }
+
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Checks whether rule is getting applied on shipping or not
+     */
+    public function checkOnShipping($cart)
+    {
+        if (! isset($cart->selected_shipping_rate)) {
+            return false;
+        }
+
+        $shippingRate = config('carriers')[$cart->selected_shipping_rate->carrier]['class'];
+
+        $actualShippingRate = new $shippingRate;
+        $actualShippingRate = $actualShippingRate->calculate();
+        $actualShippingPrice = $actualShippingRate->price;
+        $actualShippingBasePrice = $actualShippingRate->base_price;
+
+        $alreadyAppliedCartRuleCart = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id
+        ]);
+
+        if (count($alreadyAppliedCartRuleCart)) {
+            $this->resetShipping($cart);
+
+            $alreadyAppliedRule = $alreadyAppliedCartRuleCart->first()->cart_rule;
+
+            $cartShippingRate = $cart->selected_shipping_rate;
+
+            if (isset($cartShippingRate)) {
+                if ($cartShippingRate->base_price < $actualShippingBasePrice) {
+                    return false;
+                } else {
+                    $this->applyOnShipping($alreadyAppliedRule, $cart);
+                }
+            } else {
+                $this->applyOnShipping($alreadyAppliedRule, $cart);
+            }
+        } else {
+            $this->resetShipping($cart);
+        }
+    }
+
+    /**
+     * Apply on shipping
+     *
+     * @return void
+     */
+    public function applyOnShipping($appliedRule, $cart)
+    {
+        $cart = \Cart::getCart();
+
+        if (isset($cart->selected_shipping_rate)) {
+            if ($appliedRule->free_shipping && $cart->selected_shipping_rate->base_price > 0) {
+                $cart->selected_shipping_rate->update([
+                    'price' => 0,
+                    'base_price' => 0
+                ]);
+            } else if ($appliedRule->free_shipping == 0 && $appliedRule->apply_to_shipping && $cart->selected_shipping_rate->base_price > 0) {
+                $actionType = config('discount-rules')[$appliedRule->action_type];
+
+                if ($appliedRule->apply_to_shipping) {
+                    $actionInstance = new $actionType;
+
+                    $discountOnShipping = $actionInstance->calculateOnShipping($cart);
+
+                    $discountOnShipping = ($discountOnShipping / 100) * $cart->selected_shipping_rate->base_price;
+
+                    $cart->selected_shipping_rate->update([
+                        'price' => $cart->selected_shipping_rate->price - core()->convertPrice($discountOnShipping, $cart->cart_currency_code),
+                        'base_price' => $cart->selected_shipping_rate->base_price - $discountOnShipping
+                    ]);
+                }
+            }
+        }
+    }
+
+    /**
+     * Resets the shipping for the current items in the cart
+     *
+     * @return void
+     */
+    public function resetShipping($cart)
+    {
+        $cart = \Cart::getCart();
+
+        if (isset($cart->selected_shipping_rate->carrier)) {
+            $shippingRate = config('carriers')[$cart->selected_shipping_rate->carrier]['class'];
+
+            $actualShippingRate = new $shippingRate;
+            $actualShippingRate = $actualShippingRate->calculate();
+            $actualShippingPrice = $actualShippingRate->price;
+            $actualShippingBasePrice = $actualShippingRate->base_price;
+            $cartShippingRate = $cart->selected_shipping_rate;
+
+            $cartShippingRate->update([
+                'price' => $actualShippingPrice,
+                'base_price' => $actualShippingBasePrice
+            ]);
+        }
     }
 
     /**
@@ -448,13 +561,13 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (! str_contains($actual_value, $test_value)) {
+                    if (str_contains($actual_value, $test_value)) {
                         $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (str_contains($actual_value, $test_value)) {
+                    if (! str_contains($actual_value, $test_value)) {
                         $result = false;
 
                         break;
@@ -576,7 +689,7 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (str_contains($actual_value, $test_value)) {
+                    if (! str_contains($actual_value, $test_value)) {
                         $result = true;
 
                         break;

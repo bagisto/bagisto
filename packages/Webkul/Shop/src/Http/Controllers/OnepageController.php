@@ -166,6 +166,8 @@ class OnepageController extends Controller
 
         $this->nonCoupon->apply();
 
+        $this->nonCoupon->checkOnShipping(Cart::getCart());
+
         Cart::collectTotals();
 
         $cart = Cart::getCart();
@@ -283,19 +285,6 @@ class OnepageController extends Controller
         }
 
         return $result;
-    }
-
-    /**
-     * Applies non couponable rule if present
-     *
-     * @return Void
-     */
-    public function applyNonCouponAbleRule()
-    {
-        $cart = Cart::getCart();
-        $nonCouponAbleRules = Cart::applyNonCoupon();
-
-        return $nonCouponAbleRules;
     }
 
     /**

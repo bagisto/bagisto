@@ -41,7 +41,7 @@ class CartRuleDataGrid extends DataGrid
             'index' => 'name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
             'filterable' => true
         ]);
@@ -59,15 +59,14 @@ class CartRuleDataGrid extends DataGrid
             'index' => 'status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
             'filterable' => true,
-            'closure' => true,
             'wrapper' => function($value) {
                 if ($value->status == 1)
-                    return '<label class="badge badge-success">Active</label>';
+                    return 'Active';
                 else
-                    return '<label class="badge badge-danger">In Active</label>';
+                    return 'In Active';
             }
         ]);
 
@@ -78,12 +77,11 @@ class CartRuleDataGrid extends DataGrid
             'searchable' => false,
             'sortable' => true,
             'filterable' => true,
-            'closure' => true,
             'wrapper' => function($value) {
                 if ($value->end_other_rules == 1)
-                    return '<label class="badge badge-success">True</label>';
+                    return 'True';
                 else
-                    return '<label class="badge badge-danger">False</label>';
+                    return 'False';
             }
         ]);
 
@@ -91,7 +89,7 @@ class CartRuleDataGrid extends DataGrid
             'index' => 'action_type',
             'label' => 'Action Type',
             'type' => 'string',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
             'filterable' => true,
             'wrapper' => function($value) {
@@ -121,15 +119,14 @@ class CartRuleDataGrid extends DataGrid
             'index' => 'use_coupon',
             'label' => 'Use Coupon',
             'type' => 'boolean',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
             'filterable' => true,
-            'closure' => true,
             'wrapper' => function($value) {
                 if ($value->use_coupon == 1) {
-                    return '<label class="badge badge-success">True</label>';
+                    return 'True';
                 } else {
-                    return '<label class="badge badge-danger">False</label>';
+                    return 'False';
                 }
             }
         ]);

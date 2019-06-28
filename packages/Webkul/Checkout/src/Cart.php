@@ -1116,7 +1116,8 @@ class Cart {
      *
      * Move a wishlist item to cart
      */
-    public function moveToCart($wishlistItem) {
+    public function moveToCart($wishlistItem)
+    {
         $product = $wishlistItem->product;
 
         if ($product->type == 'simple') {
@@ -1140,7 +1141,8 @@ class Cart {
      *
      * @param instance cartItem $id
      */
-    public function moveToWishlist($itemId) {
+    public function moveToWishlist($itemId)
+    {
         $cart = $this->getCart();
         $items = $cart->items;
         $wishlist = [];
@@ -1187,7 +1189,8 @@ class Cart {
      *
      * @return response mixed
      */
-    public function proceedToBuyNow($id, $quantity) {
+    public function proceedToBuyNow($id, $quantity)
+    {
         $product = $this->product->findOneByField('id', $id);
 
         if ($product->type == 'configurable') {
