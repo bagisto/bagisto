@@ -24,7 +24,7 @@ class PercentOfProduct extends Action
                 $amountDiscounted = $amountDiscounted * $realQty;
             }
 
-            if ($amountDiscounted > $item['base_price']) {
+            if ($amountDiscounted > $item['base_price'] && $realQty == 1) {
                 $amountDiscounted = $item['base_price'];
             }
         }

@@ -166,6 +166,8 @@ class OnepageController extends Controller
 
         $this->nonCoupon->apply();
 
+        $this->nonCoupon->checkOnShipping(Cart::getCart());
+
         Cart::collectTotals();
 
         $cart = Cart::getCart();

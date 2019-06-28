@@ -132,7 +132,7 @@ abstract class Discount
     {
         $cart = \Cart::getCart();
 
-        // create or update
+        // Create or update
         $existingRule = $this->cartRuleCart->findWhere([
             'cart_id' => $cart->id
         ]);
@@ -151,11 +151,13 @@ abstract class Discount
 
                 $this->updateCartItemAndCart($rule);
 
-                $this->checkOnShipping($cart);
+                if ($rule->use_coupon) {
+                    $this->checkOnShipping($cart);
+                }
 
                 return true;
             } else {
-                $this->checkOnShipping($cart);
+                // $this->checkOnShipping($cart);
             }
         } else {
             $this->cartRuleCart->create([
@@ -167,7 +169,9 @@ abstract class Discount
 
             $this->updateCartItemAndCart($rule);
 
-            $this->checkOnShipping($cart);
+            if ($rule->use_coupon) {
+                $this->checkOnShipping($cart);
+            }
 
             return true;
         }
@@ -223,6 +227,8 @@ abstract class Discount
      */
     public function applyOnShipping($appliedRule, $cart)
     {
+        $cart = \Cart::getCart();
+
         if (isset($cart->selected_shipping_rate)) {
             if ($appliedRule->free_shipping && $cart->selected_shipping_rate->base_price > 0) {
                 $cart->selected_shipping_rate->update([
