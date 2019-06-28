@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Listeners;
 
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductGridRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Helpers\Price;
 
@@ -39,11 +40,14 @@ class Product {
 
     public function __construct(
         ProductRepository $product,
+        ProductGridRepository $productGrid,
         ProductFlatRepository $productFlat,
         Price $price
     )
     {
         $this->product = $product;
+
+        $this->productGrid = $productGrid;
 
         $this->productFlat = $productFlat;
 

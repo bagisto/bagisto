@@ -61,4 +61,12 @@ class InvoiceItem extends Model implements InvoiceItemContract
             return implode(', ', $labels);
         }
     }
+
+    /**
+     * Returns configurable option html
+     */
+    public function getDownloadableDetailHtml()
+    {
+        return $this->order_item->getOptionDetailHtml();
+    }
 }

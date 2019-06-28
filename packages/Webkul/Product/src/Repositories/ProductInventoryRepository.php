@@ -30,7 +30,7 @@ class ProductInventoryRepository extends Repository
      */
     public function saveInventories(array $data, $product)
     {
-        if ($product->type == 'configurable')
+        if ($product->type != 'simple')
             return;
 
         if (isset($data['inventories'])) {

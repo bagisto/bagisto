@@ -102,6 +102,20 @@ class AdminServiceProvider extends ServiceProvider
         view()->composer(['admin::users.roles.create', 'admin::users.roles.edit'], function ($view) {
             $view->with('acl', $this->createACL());
         });
+        
+        view()->composer(['admin::catalog.products.create'], function ($view) {
+            $items = array();
+
+            foreach (config('product_types') as $item) {
+                $item['children'] = [];
+
+                array_push($items, $item);
+            }
+
+            $types = core()->sortItems($items);
+
+            $view->with('productTypes', $types);
+        });
     }
 
     /**

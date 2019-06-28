@@ -18,6 +18,15 @@ Vue.component("datetime", require("./components/datetime"));
 Vue.component("date", require("./components/date"));
 Vue.component("swatch-picker", require("./components/swatch-picker"));
 Vue.directive("debounce", require("./directives/debounce"));
+Vue.filter('truncate', function (value, limit, trail) {
+	if (! value)
+        value = '';
+
+	limit = limit ? limit : 20;
+	trail = trail ? trail : '...';
+
+	return value.length > limit ? value.substring(0, limit) + trail : value;
+});
 
 require('flatpickr/dist/flatpickr.css');
 

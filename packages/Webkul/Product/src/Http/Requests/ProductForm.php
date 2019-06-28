@@ -70,63 +70,62 @@ class ProductForm extends FormRequest
     {
         $this->rules = [
             'sku' => ['required', 'unique:products,sku,' . $this->id, new \Webkul\Core\Contracts\Validations\Slug],
-            'variants.*.name' => 'required',
-            'variants.*.sku' => 'required',
-            'variants.*.price' => 'required',
-            'variants.*.weight' => 'required',
             'images.*' => 'mimes:jpeg,jpg,bmp,png',
         ];
 
-        $inputs = $this->all();
-
         $product = $this->product->find($this->id);
 
-        $attributes = $product->attribute_family->custom_attributes;
+        if ($product->type == 'configurable') {
+            $this->rules = array_merge($this->rules, [
+                'variants.*.name' => 'required',
+                'variants.*.sku' => 'required',
+                'variants.*.price' => 'required',
+                'variants.*.weight' => 'required',
+            ]);
+        } else if ($product->type == 'downloadable') {
+            $this->rules = array_merge($this->rules, [
+                // 'downloadable_links.*.title' => 'required',
+                'downloadable_links.*.type' => 'required',
+                'downloadable_links.*.file' => 'required_if:type,==,file',
+                'downloadable_links.*.file_name' => 'required_if:type,==,file',
+                'downloadable_links.*.url' => 'required_if:type,==,url',
+                'downloadable_links.*.downloads' => 'required',
+                'downloadable_links.*.sort_order' => 'required',
 
-        $productSuperAttributes = $product->super_attributes;
+            ]);
+        }
 
-        foreach ($attributes as $attribute) {
-            if (! $productSuperAttributes->contains($attribute)) {
-                if ($attribute->code == 'sku') {
-                    continue;
-                }
+        $inputs = $this->all();
 
-                if ($product->type == 'configurable' && in_array($attribute->code, ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'])) {
-                    continue;
-                }
+        foreach ($product->getEditableAttributes() as $attribute) {
+            if ($attribute->code == 'sku')
+                continue;
 
-                $validations = [];
+            $validations = [];
 
-                if ($attribute->is_required) {
-                    array_push($validations, 'required');
-                } else {
-                    array_push($validations, 'nullable');
-                }
+            array_push($validations, $attribute->is_required ? 'required' : 'nullable');
 
-                if ($attribute->type == 'text' && $attribute->validation) {
-                    if ($attribute->validation == 'decimal') {
-                        array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
-                    } else {
-                        array_push($validations, $attribute->validation);
-                    }
-                }
-
-                if ($attribute->type == 'price') {
-                    array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
-                }
-
-                if ($attribute->is_unique) {
-                    array_push($validations, function ($field, $value, $fail) use ($inputs, $attribute) {
-                        $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
-
-                        if (! $this->attributeValue->isValueUnique($this->id, $attribute->id, $column, $inputs[$attribute->code])) {
-                            $fail('The :attribute has already been taken.');
-                        }
-                    });
-                }
-
-                $this->rules[$attribute->code] = $validations;
+            if ($attribute->type == 'text' && $attribute->validation) {
+                array_push($validations, 
+                        $attribute->validation == 'decimal'
+                        ? new \Webkul\Core\Contracts\Validations\Decimal
+                        : $attribute->validation
+                    );
             }
+
+            if ($attribute->type == 'price')
+                array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
+
+            if ($attribute->is_unique) {
+                array_push($validations, function ($field, $value, $fail) use ($inputs, $attribute) {
+                    $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
+
+                    if (! $this->attributeValue->isValueUnique($this->id, $attribute->id, $column, $inputs[$attribute->code]))
+                        $fail('The :attribute has already been taken.');
+                });
+            }
+
+            $this->rules[$attribute->code] = $validations;
         }
 
         return $this->rules;

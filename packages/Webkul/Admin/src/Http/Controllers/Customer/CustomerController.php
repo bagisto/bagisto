@@ -152,6 +152,7 @@ class CustomerController extends Controller
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',
+            'phone' => 'nullable|numeric|unique:customers,phone,'. $id,
             'email' => 'required|unique:customers,email,'. $id,
             'date_of_birth' => 'date|before:today'
         ]);
@@ -189,7 +190,7 @@ class CustomerController extends Controller
     /**
      * To load the note taking screen for the customers
      *
-     * @return view
+     * @return View
      */
     public function createNote($id)
     {
@@ -201,12 +202,12 @@ class CustomerController extends Controller
     /**
      * To store the response of the note in storage
      *
-     * @return redirect
+     * @return Redirect
      */
     public function storeNote()
     {
         $this->validate(request(), [
-            'notes' => 'string|nullable'
+            'notes' => 'required|string'
         ]);
 
         $customer = $this->customer->find(request()->input('_customer'));
@@ -226,8 +227,6 @@ class CustomerController extends Controller
 
     /**
      * To mass update the customer
-     *
-     * @return redirect
      */
     public function massUpdate()
     {
@@ -242,15 +241,13 @@ class CustomerController extends Controller
             ]);
         }
 
-        session()->flash('success', trans('admin::app.customers.customers.mass-update-success'));
+        session()->flash('info', trans('admin::app.customers.customers.mass-update-success'));
 
         return redirect()->back();
     }
 
     /**
      * To mass delete the customer
-     *
-     * @return redirect
      */
     public function massDestroy()
     {
@@ -262,7 +259,7 @@ class CustomerController extends Controller
             ]);
         }
 
-        session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
+        session()->flash('info', trans('admin::app.customers.customers.mass-destroy-success'));
 
         return redirect()->back();
     }

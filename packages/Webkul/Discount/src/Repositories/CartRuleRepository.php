@@ -186,4 +186,12 @@ class CartRuleRepository extends Repository
 
         return true;
     }
+
+    /**
+     * To sync the coupons associated with the cart rule
+     */
+    public function CouponSync($coupon, $cartRule)
+    {
+
+    }
 }

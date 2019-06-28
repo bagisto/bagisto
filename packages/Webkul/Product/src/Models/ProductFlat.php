@@ -44,13 +44,7 @@ class ProductFlat extends Model implements ProductFlatContract
      */
     public function isSaleable()
     {
-        if (! $this->status)
-            return false;
-
-        if ($this->haveSufficientQuantity(1))
-            return true;
-
-        return false;
+        return $this->product->isSaleable();
     }
 
     /**
@@ -69,6 +63,14 @@ class ProductFlat extends Model implements ProductFlatContract
     public function haveSufficientQuantity($qty)
     {
         return $this->product->haveSufficientQuantity($qty);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStockable()
+    {
+        return $this->product->isStockable();
     }
 
     /**
@@ -129,5 +131,33 @@ class ProductFlat extends Model implements ProductFlatContract
     public function cross_sells()
     {
         return $this->product->cross_sells();
+    }
+
+    /**
+     * The images that belong to the product.
+     */
+    public function downloadable_samples()
+    {
+        return $this->product->downloadable_samples();
+    }
+
+    /**
+     * The images that belong to the product.
+     */
+    public function downloadable_links()
+    {
+        return $this->product->downloadable_links();
+    }
+
+    /**
+     * Retrieve product attributes
+     *
+     * @param Group $group
+     * @param bool  $skipSuperAttribute
+     * @return Collection
+     */
+    public function getEditableAttributes($group = null, $skipSuperAttribute = true)
+    {
+        return $this->product->getEditableAttributes($groupId, $skipSuperAttribute);
     }
 }

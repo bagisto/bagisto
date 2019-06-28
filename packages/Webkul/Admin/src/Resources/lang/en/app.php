@@ -75,8 +75,6 @@ return [
         'edit' => 'Edit',
         'create' => 'Add',
         'delete' => 'Delete',
-        'promotions' => 'Promotions',
-        'cart-rules' => 'Cart Rules'
     ],
 
     'dashboard' => [
@@ -390,6 +388,18 @@ return [
             'images' => 'Images',
             'inventories' => 'Inventories',
             'variations' => 'Variations',
+            'downloadable' => 'Downloadable Information',
+            'links' => 'Links',
+            'add-link-btn-title' => 'Add Link',
+            'samples' => 'Samples',
+            'add-sample-btn-title' => 'Add Sample',
+            'downloads' => 'Download Allowed',
+            'file' => 'File',
+            'sample' => 'Sample',
+            'upload-file' => 'Upload File',
+            'url' => 'Url',
+            'sort-order' => 'Sort Order',
+            'browse-file' => 'Browse File',
             'product-link' => 'Linked Products',
             'cross-selling' => 'Cross Selling',
             'up-selling' => 'Up Selling',
@@ -773,10 +783,7 @@ return [
             'edit-help-title' => 'Edit Customer',
             'delete-help-title' => 'Delete Customer',
             'mass-destroy-success' => 'Customers deleted successfully',
-            'mass-update-success' => 'Customers updated successfully',
-            'status' => 'Status',
-            'active' => 'Active',
-            'in-active' => 'Inactive'
+            'mass-update-success' => 'Customers updated successfully'
         ],
 
         'reviews' => [
@@ -814,7 +821,6 @@ return [
         'create-cart-rule' => 'Create Cart Rule',
         'save-btn-title' => 'Create',
         'edit-btn-title' => 'Edit',
-        'save' => 'Save',
         'select-attr' => 'Select Attribute',
         'select-attr-fam' => 'Select Attribute Family',
         'select-cart-attr' => 'Select Cart Attribute',
@@ -828,7 +834,7 @@ return [
             'cust-groups' => 'Customer Groups',
             'priority' => 'Priority',
             'add-condition' => 'Add Conditions',
-            'disc_amt' => 'Discount Amount',
+            'disc_amt' => 'Discount Amount(B)',
             'disc_percent' => 'Discount Percentage',
             'is-coupon' => 'Use Coupon',
             'is-coupon-yes' => 'Yes',
@@ -843,7 +849,6 @@ return [
             'any' => 'Any',
             'all' => 'All',
             'conditions' => 'Conditions',
-            'apply' => 'Apply',
             'are' => 'are',
             'true' => 'true',
             'false' => 'false',
@@ -852,8 +857,7 @@ return [
             'free-shipping' => 'Free Shipping',
             'is-guest' => 'For Guests',
             'disc_qty' => 'Max. Quantity Allowed To Be Discounted',
-            'test-mode' => 'Choose how to test conditions',
-            'labels' => 'Labels'
+            'test-mode' => 'Choose how to test conditions'
         ],
 
         'status' => [
@@ -869,8 +873,7 @@ return [
             'coupon-failed' => 'Coupon failed to apply',
             'no-coupon' => '* Coupon not applicable',
             'coupon-removed' => 'Coupon removed successfully',
-            'coupon-remove-failed' => 'Coupon removal failed',
-            'duplicate-coupon' => 'Coupon already exists, please try again with a different coupon'
+            'coupon-remove-failed' => 'Coupon removal failed'
         ],
 
         'catalog' => [
@@ -882,9 +885,8 @@ return [
             'adjust-to-value' => 'Adjust to discount value',
             'condition-missing' => 'Please check conditons, some values might be missing'
         ],
-
         'cart' => [
-            'buy-atleast' => 'Buy Atleast',
+            'buy-atleast' => 'Buy Atleast (N)',
             'apply-to-shipping' => 'Apply to shipping'
         ]
     ],
@@ -1007,7 +1009,7 @@ return [
             'footer' => 'Footer',
             'content' => 'Content',
             'footer-content' => 'Footer Text',
-            'locale-options' => 'Unit Options',
+            'locale-options' => 'Locale Options',
             'weight-unit' => 'Weight Unit',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',

@@ -176,6 +176,8 @@
 
                                         @if ($html = $item->getOptionDetailHtml())
                                             <p>{{ $html }}</p>
+                                        @elseif ($item->type == 'downloadable')
+                                            <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
                                         @endif
                                     </td>
                                     <td>{{ core()->formatBasePrice($item->base_price) }}</td>

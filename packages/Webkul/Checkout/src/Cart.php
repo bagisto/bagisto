@@ -9,6 +9,7 @@ use Webkul\Checkout\Repositories\CartAddressRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
+use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
@@ -205,7 +206,8 @@ class Cart {
      *
      * @return void
      */
-    public function add($id, $data) {
+    public function add($id, $data)
+    {
         $cart = $this->getCart();
 
         if ($cart != null) {
@@ -232,7 +234,8 @@ class Cart {
      *
      * @return boolean
      */
-    public function checkIfItemExists($id, $data) {
+    public function checkIfItemExists($id, $data)
+    {
         $items = $this->getCart()->items;
 
         foreach ($items as $item) {
@@ -242,9 +245,11 @@ class Cart {
                 if ($product->type == 'configurable') {
                     $variant = $this->product->findOneByField('id', $data['selected_configurable_option']);
 
-                    if ($item->child->product_id == $data['selected_configurable_option']) {
+                    if ($item->child->product_id == $data['selected_configurable_option'])
                         return $item->id;
-                    }
+                } else if ($product->type == 'downloadable') {
+                    // if ($data['links'] == $item->additional['links'])
+                        return $item->id;
                 } else {
                     return $item->id;
                 }
@@ -272,17 +277,13 @@ class Cart {
 
             $childProduct = $this->product->findOneByField('id', $data['selected_configurable_option']);
 
-            $canAdd = $childProduct->haveSufficientQuantity($data['quantity']);
-
-            if (! $canAdd) {
+            if (! $childProduct->haveSufficientQuantity($data['quantity'])) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
             }
         } else {
-            $canAdd = $product->haveSufficientQuantity($data['quantity']);
-
-            if (! $canAdd) {
+            if ($product->isStockable() && ! $product->haveSufficientQuantity($data['quantity'])) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
@@ -299,19 +300,21 @@ class Cart {
                 session()->flash('error', trans('shop::app.checkout.cart.integrity.missing_options'));
 
                 return false;
+            } else if ($product->type == 'downloadable' && (! isset($data['links']) || ! count($data['links']))) {
+                throw new \Exception('shop::app.checkout.cart.integrity.missing_links');
             }
         }
 
         $child = $childData = null;
         $additional = [];
 
-        if ($product->type == 'configurable') {
-            $price = $this->price->getMinimalPrice($childProduct);
-        } else {
-            $price = $this->price->getMinimalPrice($product);
-        }
+        $price = $this->price->getMinimalPrice($product->type == 'configurable' ? $childProduct : $product);
 
-        $weight = ($product->type == 'configurable' ? $childProduct->weight : $product->weight);
+        if ($product->type == 'configurable') {
+            $weight = $childProduct->weight;
+        } else {
+            $weight = $product->isStockable() ? $product->weight : 0;
+        }
 
         $parentData = [
             'sku' => $product->sku,
@@ -326,8 +329,8 @@ class Cart {
             'total_weight' => $weight * $data['quantity'],
             'base_total_weight' => $weight * $data['quantity'],
             'additional' => $additional,
-            'type' => $product['type'],
-            'product_id' => $product['id'],
+            'type' => $product->type,
+            'product_id' => $product->id,
             'additional' => $data,
         ];
 
@@ -337,16 +340,20 @@ class Cart {
 
             $parentData['additional'] = array_merge($parentData['additional'], $attributeDetails);
 
-            $childData['product_id'] = (int)$data['selected_configurable_option'];
-            $childData['sku'] = $childProduct->sku;
-            $childData['name'] = $childProduct->name;
-            $childData['type'] = 'simple';
-            $childData['cart_id'] = $this->getCart()->id;
+            $childData = [
+                'product_id' => (int) $data['selected_configurable_option'],
+                'sku' => $childProduct->sku,
+                'name' => $childProduct->name,
+                'type' => 'simple',
+                'cart_id' => $this->getCart()->id
+            ];
+        } else if ($product->type == 'downloadable') {
+            $parentData['additional'] = array_merge($parentData['additional'], ['link_lables' => $this->getDownloadableDetails($product)]);
         }
 
         $item = $this->cartItem->create($parentData);
 
-        if ($childData != null) {
+        if (is_array($childData)) {
             $childData['parent_id'] = $item->id;
 
             $this->cartItem->create($childData);
@@ -357,6 +364,7 @@ class Cart {
 
     /**
      * Update the cartItem on cart checkout page and if already added item is added again
+     *
      * @param $id product_id of cartItem instance
      * @param $data new requested quantities by customer
      * @param $itemId is id from cartItem instance
@@ -385,10 +393,12 @@ class Cart {
             unset($attributeDetails['html']);
 
             $additional = array_merge($additional, $attributeDetails);
+        } else if ($item->type == 'downloadable') {
+            $additional = array_merge($additional, ['link_lables' => $this->getDownloadableDetails($item)]);
         } else {
             $product = $this->product->findOneByField('id', $item->product_id);
 
-            if (! $product->haveSufficientQuantity($data['quantity'])) {
+            if ($product->isStockable() && ! $product->haveSufficientQuantity($data['quantity'])) {
                 session()->flash('warning', trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
                 return false;
@@ -496,8 +506,9 @@ class Cart {
 
                             $product = $this->product->findOneByField('id', $cartItem->product_id);
 
-                            if (! $product->haveSufficientQuantity($prevQty + $newQty)) {
+                            if ($product->isStockable() && ! $product->haveSufficientQuantity($prevQty + $newQty)) {
                                 $this->cartItem->delete($guestCartItem->id);
+
                                 continue;
                             }
 
@@ -519,7 +530,7 @@ class Cart {
 
                             $product = $this->product->findOneByField('id', $cartItem->child->product_id);
 
-                            if (! $product->haveSufficientQuantity($prevQty + $newQty)) {
+                            if ($product->isStockable() && ! $product->haveSufficientQuantity($prevQty + $newQty)) {
                                 $this->cartItem->delete($guestCartItem->id);
                                 continue;
                             }
@@ -607,11 +618,13 @@ class Cart {
 
         $data = $cart->toArray();
 
-        $data['shipping_address'] = $cart->shipping_address->toArray();
-
         $data['billing_address'] = $cart->billing_address->toArray();
 
-        $data['selected_shipping_rate'] = $cart->selected_shipping_rate->toArray();
+        if ($cart->haveStockableItems()) {
+            $data['shipping_address'] = $cart->shipping_address->toArray();
+
+            $data['selected_shipping_rate'] = $cart->selected_shipping_rate->toArray();
+        }
 
         $data['payment'] = $cart->payment->toArray();
 
@@ -635,17 +648,42 @@ class Cart {
             $option = $attribute->options()->where('id', $product->{$attribute->code})->first();
 
             $data['attributes'][$attribute->code] = [
-                'attribute_name' => $attribute->name ?  $attribute->name : $attribute->admin_name,
+                'attribute_name' => $attribute->name,
                 'option_id' => $option->id,
                 'option_label' => $option->label,
             ];
 
-            $labels[] = ($attribute->name ? $attribute->name : $attribute->admin_name) . ' : ' . $option->label;
+            $labels[] = $attribute->name . ' : ' . $option->label;
         }
 
         $data['html'] = implode(', ', $labels);
 
         return $data;
+    }
+
+    /**
+     * Returns the items details of the downloadable names
+     *
+     * @return Mixed
+     */
+    public function getDownloadableDetails($item)
+    {
+        $labels = [];
+
+        if ($item instanceOf CartItem) {
+            $links = $item->additional['links'];
+
+            $item = $item->product;
+        } else {
+            $links = request('links');
+        }
+
+        foreach ($item->downloadable_links as $link) {
+            if (in_array($link->id, $links))
+                $labels[] = $link->title;
+        }
+
+        return implode(', ', $labels);
     }
 
     /**
@@ -659,11 +697,11 @@ class Cart {
             return false;
 
         $billingAddress = $data['billing'];
-        $shippingAddress = $data['shipping'];
-        $billingAddress['cart_id'] = $shippingAddress['cart_id'] = $cart->id;
+        $billingAddress['cart_id'] = $cart->id;
 
         if (isset($data['billing']['address_id']) && $data['billing']['address_id']) {
             $address = $this->customerAddress->findOneWhere(['id'=> $data['billing']['address_id']])->toArray();
+
             $billingAddress['first_name'] = $this->getCurrentCustomer()->user()->first_name;
             $billingAddress['last_name'] = $this->getCurrentCustomer()->user()->last_name;
             $billingAddress['email'] = $this->getCurrentCustomer()->user()->email;
@@ -675,52 +713,63 @@ class Cart {
             $billingAddress['phone'] = $address['phone'];
         }
 
-        if (isset($data['shipping']['address_id']) && $data['shipping']['address_id']) {
-            $address = $this->customerAddress->findOneWhere(['id'=> $data['shipping']['address_id']])->toArray();
-            $shippingAddress['first_name'] = $this->getCurrentCustomer()->user()->first_name;
-            $shippingAddress['last_name'] = $this->getCurrentCustomer()->user()->last_name;
-            $shippingAddress['email'] = $this->getCurrentCustomer()->user()->email;
-            $shippingAddress['address1'] = $address['address1'];
-            $shippingAddress['country'] = $address['country'];
-            $shippingAddress['state'] = $address['state'];
-            $shippingAddress['city'] = $address['city'];
-            $shippingAddress['postcode'] = $address['postcode'];
-            $shippingAddress['phone'] = $address['phone'];
-        }
-
         if (isset($data['billing']['save_as_address']) && $data['billing']['save_as_address']) {
             $billingAddress['customer_id']  = $this->getCurrentCustomer()->user()->id;
             $this->customerAddress->create($billingAddress);
         }
 
-        if (isset($data['shipping']['save_as_address']) && $data['shipping']['save_as_address']) {
-            $shippingAddress['customer_id']  = $this->getCurrentCustomer()->user()->id;
-            $this->customerAddress->create($shippingAddress);
+        if ($cart->haveStockableItems()) {
+            $shippingAddress = $data['shipping'];
+            $shippingAddress['cart_id'] = $cart->id;
+            
+            if (isset($data['shipping']['address_id']) && $data['shipping']['address_id']) {
+                $address = $this->customerAddress->findOneWhere(['id'=> $data['shipping']['address_id']])->toArray();
+
+                $shippingAddress['first_name'] = $this->getCurrentCustomer()->user()->first_name;
+                $shippingAddress['last_name'] = $this->getCurrentCustomer()->user()->last_name;
+                $shippingAddress['email'] = $this->getCurrentCustomer()->user()->email;
+                $shippingAddress['address1'] = $address['address1'];
+                $shippingAddress['country'] = $address['country'];
+                $shippingAddress['state'] = $address['state'];
+                $shippingAddress['city'] = $address['city'];
+                $shippingAddress['postcode'] = $address['postcode'];
+                $shippingAddress['phone'] = $address['phone'];
+            }
+
+            if (isset($data['shipping']['save_as_address']) && $data['shipping']['save_as_address']) {
+                $shippingAddress['customer_id']  = $this->getCurrentCustomer()->user()->id;
+
+                $this->customerAddress->create($shippingAddress);
+            }
         }
 
         if ($billingAddressModel = $cart->billing_address) {
             $this->cartAddress->update($billingAddress, $billingAddressModel->id);
 
-            if ($shippingAddressModel = $cart->shipping_address) {
-                if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                    $this->cartAddress->update($billingAddress, $shippingAddressModel->id);
+            if ($cart->haveStockableItems()) {
+                if ($shippingAddressModel = $cart->shipping_address) {
+                    if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
+                        $this->cartAddress->update($billingAddress, $shippingAddressModel->id);
+                    } else {
+                        $this->cartAddress->update($shippingAddress, $shippingAddressModel->id);
+                    }
                 } else {
-                    $this->cartAddress->update($shippingAddress, $shippingAddressModel->id);
-                }
-            } else {
-                if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                    $this->cartAddress->create(array_merge($billingAddress, ['address_type' => 'shipping']));
-                } else {
-                    $this->cartAddress->create(array_merge($shippingAddress, ['address_type' => 'shipping']));
+                    if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
+                        $this->cartAddress->create(array_merge($billingAddress, ['address_type' => 'shipping']));
+                    } else {
+                        $this->cartAddress->create(array_merge($shippingAddress, ['address_type' => 'shipping']));
+                    }
                 }
             }
         } else {
             $this->cartAddress->create(array_merge($billingAddress, ['address_type' => 'billing']));
 
-            if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
-                $this->cartAddress->create(array_merge($billingAddress, ['address_type' => 'shipping']));
-            } else {
-                $this->cartAddress->create(array_merge($shippingAddress, ['address_type' => 'shipping']));
+            if ($cart->haveStockableItems()) {
+                if (isset($billingAddress['use_for_shipping']) && $billingAddress['use_for_shipping']) {
+                    $this->cartAddress->create(array_merge($billingAddress, ['address_type' => 'shipping']));
+                } else {
+                    $this->cartAddress->create(array_merge($shippingAddress, ['address_type' => 'shipping']));
+                }
             }
         }
 
@@ -1001,7 +1050,7 @@ class Cart {
     {
         $product = $item->type == 'configurable' ? $item->child->product : $item->product;
 
-        if (! $product->haveSufficientQuantity($item->quantity))
+        if ($product->isStockable() && ! $product->haveSufficientQuantity($item->quantity))
             return false;
 
         return true;
@@ -1042,12 +1091,6 @@ class Cart {
             'customer_last_name' => $data['customer_last_name'],
             'customer' => $this->getCurrentCustomer()->check() ? $this->getCurrentCustomer()->user() : null,
 
-            'shipping_method' => $data['selected_shipping_rate']['method'],
-            'shipping_title' => $data['selected_shipping_rate']['carrier_title'] . ' - ' . $data['selected_shipping_rate']['method_title'],
-            'shipping_description' => $data['selected_shipping_rate']['method_description'],
-            'shipping_amount' => $data['selected_shipping_rate']['price'],
-            'base_shipping_amount' => $data['selected_shipping_rate']['base_price'],
-
             'total_item_count' => $data['items_count'],
             'total_qty_ordered' => $data['items_qty'],
             'base_currency_code' => $data['base_currency_code'],
@@ -1059,15 +1102,23 @@ class Cart {
             'base_sub_total' => $data['base_sub_total'],
             'tax_amount' => $data['tax_total'],
             'base_tax_amount' => $data['base_tax_total'],
-            'discount_amount' => $data['discount_amount'],
-            'base_discount_amount' => $data['base_discount_amount'],
-
-            'shipping_address' => array_except($data['shipping_address'], ['id', 'cart_id']),
+            
             'billing_address' => array_except($data['billing_address'], ['id', 'cart_id']),
             'payment' => array_except($data['payment'], ['id', 'cart_id']),
 
             'channel' => core()->getCurrentChannel(),
         ];
+
+        if ($this->getCart()->haveStockableItems()) {
+            $finalData = array_merge($finalData, [
+                'shipping_method' => $data['selected_shipping_rate']['method'],
+                'shipping_title' => $data['selected_shipping_rate']['carrier_title'] . ' - ' . $data['selected_shipping_rate']['method_title'],
+                'shipping_description' => $data['selected_shipping_rate']['method_description'],
+                'shipping_amount' => $data['selected_shipping_rate']['price'],
+                'base_shipping_amount' => $data['selected_shipping_rate']['base_price'],
+                'shipping_address' => array_except($data['shipping_address'], ['id', 'cart_id']),
+            ]);
+        }
 
         foreach ($data['items'] as $item) {
             $finalData['items'][] = $this->prepareDataForOrderItem($item);
@@ -1116,8 +1167,7 @@ class Cart {
      *
      * Move a wishlist item to cart
      */
-    public function moveToCart($wishlistItem)
-    {
+    public function moveToCart($wishlistItem) {
         $product = $wishlistItem->product;
 
         if ($product->type == 'simple') {
@@ -1144,14 +1194,13 @@ class Cart {
     public function moveToWishlist($itemId)
     {
         $cart = $this->getCart();
-        $items = $cart->items;
-        $wishlist = [];
+
         $wishlist = [
             'channel_id' => $cart->channel_id,
             'customer_id' => $this->getCurrentCustomer()->user()->id,
         ];
 
-        foreach ($items as $item) {
+        foreach ($cart->items as $item) {
             if ($item->id == $itemId) {
                 if (is_null($item['parent_id']) && $item['type'] == 'simple') {
                     $wishlist['product_id'] = $item->product_id;
@@ -1160,7 +1209,10 @@ class Cart {
                     $wishtlist['options'] = $item->additional;
                 }
 
-                $shouldBe = $this->wishlist->findWhere(['customer_id' => $this->getCurrentCustomer()->user()->id, 'product_id' => $wishlist['product_id']]);
+                $shouldBe = $this->wishlist->findWhere([
+                        'customer_id' => $this->getCurrentCustomer()->user()->id,
+                        'product_id' => $wishlist['product_id']
+                    ]);
 
                 if ($shouldBe->isEmpty()) {
                     $wishlist = $this->wishlist->create($wishlist);

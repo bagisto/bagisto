@@ -42,8 +42,8 @@
             <div class="page-content">
                 @csrf()
 
-                <?php $familyId = app('request')->input('family') ?>
-                <?php $sku = app('request')->input('sku') ?>
+                <?php $familyId = request()->input('family') ?>
+
                 {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.general.before') !!}
 
                 <accordian :title="'{{ __('admin::app.catalog.products.general') }}'" :active="true">
@@ -54,9 +54,13 @@
                         <div class="control-group" :class="[errors.has('type') ? 'has-error' : '']">
                             <label for="type" class="required">{{ __('admin::app.catalog.products.product-type') }}</label>
                             <select class="control" v-validate="'required'" id="type" name="type" {{ $familyId ? 'disabled' : '' }} data-vv-as="&quot;{{ __('admin::app.catalog.products.product-type') }}&quot;">
+
                                 @foreach($productTypes as $key => $productType)
-                                    <option value="{{ $key }}" {{ $key == $productType['key'] ? 'selected' : '' }}>{{ $productType['name'] }}</option>
+                                    <option value="{{ $key }}" {{ request()->input('type') == $productType['key'] ? 'selected' : '' }}>
+                                        {{ $productType['name'] }}
+                                    </option>
                                 @endforeach
+
                             </select>
 
                             @if ($familyId)
@@ -82,7 +86,7 @@
 
                         <div class="control-group" :class="[errors.has('sku') ? 'has-error' : '']">
                             <label for="sku" class="required">{{ __('admin::app.catalog.products.sku') }}</label>
-                            <input type="text" v-validate="{ required: true, regex: /^[a-z0-9]+(?:-[a-z0-9]+)*$/ }" class="control" id="sku" name="sku" value="{{ $sku ?: old('sku') }}" data-vv-as="&quot;{{ __('admin::app.catalog.products.sku') }}&quot;"/>
+                            <input type="text" v-validate="{ required: true, regex: /^[a-z0-9]+(?:-[a-z0-9]+)*$/ }" class="control" id="sku" name="sku" value="{{ request()->input('sku') ?: old('sku') }}" data-vv-as="&quot;{{ __('admin::app.catalog.products.sku') }}&quot;"/>
                             <span class="control-error" v-if="errors.has('sku')">@{{ errors.first('sku') }}</span>
                         </div>
 

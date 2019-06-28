@@ -21,7 +21,7 @@ class CartRuleDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('cart_rules')
                 ->select('id')
-                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'priority', 'status', 'end_other_rules', 'action_type', 'disc_quantity', 'disc_threshold', 'use_coupon');
+                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'priority', 'usage_limit', 'per_customer', 'status', 'end_other_rules', 'is_guest', 'action_type');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -41,7 +41,7 @@ class CartRuleDataGrid extends DataGrid
             'index' => 'name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'sortable' => true,
             'filterable' => true
         ]);
@@ -59,14 +59,29 @@ class CartRuleDataGrid extends DataGrid
             'index' => 'status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
-            'searchable' => true,
+            'searchable' => false,
             'sortable' => true,
             'filterable' => true,
             'wrapper' => function($value) {
                 if ($value->status == 1)
-                    return 'Active';
+                    return 'True';
                 else
-                    return 'In Active';
+                    return 'False';
+            }
+        ]);
+
+        $this->addColumn([
+            'index' => 'is_guest',
+            'label' => trans('admin::app.datagrid.for-guest'),
+            'type' => 'boolean',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true,
+            'wrapper' => function($value) {
+                if ($value->is_guest == 1)
+                    return 'True';
+                else
+                    return 'False';
             }
         ]);
 
@@ -89,46 +104,9 @@ class CartRuleDataGrid extends DataGrid
             'index' => 'action_type',
             'label' => 'Action Type',
             'type' => 'string',
-            'searchable' => true,
-            'sortable' => true,
-            'filterable' => true,
-            'wrapper' => function($value) {
-                return config('pricerules.cart.actions')[$value->action_type];
-            }
-        ]);
-
-        $this->addColumn([
-            'index' => 'disc_quantity',
-            'label' => 'Quantity',
-            'type' => 'number',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true
-        ]);
-
-        $this->addColumn([
-            'index' => 'disc_threshold',
-            'label' => 'Threshold',
-            'type' => 'number',
-            'searchable' => false,
-            'sortable' => true,
-            'filterable' => true
-        ]);
-
-        $this->addColumn([
-            'index' => 'use_coupon',
-            'label' => 'Use Coupon',
-            'type' => 'boolean',
-            'searchable' => true,
-            'sortable' => true,
-            'filterable' => true,
-            'wrapper' => function($value) {
-                if ($value->use_coupon == 1) {
-                    return 'True';
-                } else {
-                    return 'False';
-                }
-            }
         ]);
     }
 

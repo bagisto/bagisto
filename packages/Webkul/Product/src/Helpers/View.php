@@ -26,7 +26,6 @@ class View extends AbstractProduct
             }
 
             $data[] = [
-                'id' => $attribute->id,
                 'code' => $attribute->code,
                 'label' => $attribute->name,
                 'value' => $value,

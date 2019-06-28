@@ -18,10 +18,18 @@ class CouponAbleRule extends Discount
     {
         $cart = Cart::getCart();
 
-        $rules = $this->cartRule->findWhere([
-            'use_coupon' => 1,
-            'status' => 1
-        ]);
+        if (auth()->guard('customer')->check()) {
+            $rules = $this->cartRule->findWhere([
+                'use_coupon' => 1,
+                'status' => 1
+            ]);
+        } else {
+            $rules = $this->cartRule->findWhere([
+                'use_coupon' => 1,
+                'is_guest' => 1,
+                'status' => 1
+            ]);
+        }
 
         $applicableRule = null;
 
@@ -33,10 +41,6 @@ class CouponAbleRule extends Discount
             }
         }
 
-        if (! isset($applicableRule)) {
-            return false;
-        }
-
         $applicability = $this->checkApplicability($applicableRule);
 
         if ($applicability) {
@@ -46,22 +50,15 @@ class CouponAbleRule extends Discount
 
             $impact = $actionInstance->calculate($applicableRule, $item, $cart);
 
-            if ($impact['discount'] == 0) {
-                return false;
-            }
-
-            // avoid applying the same rule
             $ifAlreadyApplied = $this->cartRuleCart->findWhere([
                 'cart_id' => $cart->id,
                 'cart_rule_id' => $applicableRule->id
             ]);
 
             if ($ifAlreadyApplied->count() == 1) {
-                // can give a message that coupon is already applied
                 return false;
             }
 
-            // if the rule ain't same
             $ifAlreadyApplied = $this->cartRuleCart->findWhere([
                 'cart_id' => $cart->id,
             ]);
@@ -72,43 +69,35 @@ class CouponAbleRule extends Discount
                 return $impact;
             }
 
-            // the only case where a non couponable rule defeats couponable rule
-            if ($ifAlreadyApplied->first()->cart_rule->use_coupon == 0 && $ifAlreadyApplied->first()->cart_rule->end_other_rules == 1) {
+            $alreadyAppliedRule = $ifAlreadyApplied->first()->cart_rule;
+
+            if ($alreadyAppliedRule->priority < $rule->priority) {
                 return false;
-            }
+            } else if ($alreadyAppliedRule->priority == $applicableRule->priority) {
+                // tie breaker case
 
-            if ($ifAlreadyApplied->first()->cart_rule->use_coupon == 1 && $ifAlreadyApplied->first()->cart_rule->end_other_rules == 1) {
-                return false;
-            }
-
-            if ($ifAlreadyApplied->first()->cart_rule->use_coupon == 1) {
-                $alreadyAppliedRule = $ifAlreadyApplied->first()->cart_rule;
-
-                if ($alreadyAppliedRule->priority < $applicableRule->priority) {
+                // end other rules
+                if ($alreadyAppliedRule->end_other_rules) {
                     return false;
-                } else if ($alreadyAppliedRule->priority == $applicableRule->priority) {
-                    $actionInstance = new $this->rules[$alreadyAppliedRule->action_type];
+                }
 
-                    $alreadyAppliedRuleImpact = $actionInstance->calculate($alreadyAppliedRule, $item, $cart);
+                $actionInstance = new $this->rules[$alreadyAppliedRule->action_type];
 
-                    if ($alreadyAppliedRule['discount'] > $impact['discount']) {
-                        return false;
-                    } else if ($alreadyAppliedRule['discount'] < $impact['discount']) {
-                        $this->save($applicableRule);
+                $alreadyAppliedRuleImpact = $actionInstance->calculate($alreadyAppliedRule, $item, $cart);
 
-                        return $impact;
-                    } else {
-                        // least id case
-                        if ($applicableRule->id < $alreadyAppliedRule->id) {
-                            $this->save($applicableRule);
-
-                            return $impact;
-                        }
-                    }
-                } else {
+                if ($alreadyAppliedRule['discount'] > $impact['discount']) {
+                    return false;
+                } else if ($alreadyAppliedRule['discount'] < $impact['discount']) {
                     $this->save($applicableRule);
 
                     return $impact;
+                } else {
+                    // least id case
+                    if ($applicableRule->id < $alreadyAppliedRule->id) {
+                        $this->save($applicableRule);
+
+                        return $impact;
+                    }
                 }
             } else {
                 $this->save($applicableRule);
@@ -134,30 +123,32 @@ class CouponAbleRule extends Discount
         ]);
 
         if ($existingRule->count()) {
-            $existingRule->first()->delete();
+            if ($existingRule->first()->cart_rule->use_coupon) {
+                $existingRule->first()->delete();
 
-            $this->resetShipping($cart);
-
-            foreach ($cart->items as $item) {
-                if ($item->discount_amount > 0) {
-                    $item->update([
-                        'discount_amount' => 0,
-                        'base_discount_amount' => 0,
-                        'discount_percent' => 0,
-                        'coupon_code' => NULL
-                    ]);
+                foreach ($cart->items as $item) {
+                    if ($item->discount_amount > 0) {
+                        $item->update([
+                            'discount_amount' => 0,
+                            'base_discount_amount' => 0,
+                            'discount_percent' => 0,
+                            'coupon_code' => NULL
+                        ]);
+                    }
                 }
+
+                $cart->update([
+                    'coupon_code' => NULL,
+                    'discount_amount' => 0,
+                    'base_discount_amount' => 0
+                ]);
+
+                Cart::collectTotals();
+
+                return true;
+            } else {
+                return false;
             }
-
-            $cart->update([
-                'coupon_code' => NULL,
-                'discount_amount' => 0,
-                'base_discount_amount' => 0
-            ]);
-
-            Cart::collectTotals();
-
-            return true;
         } else {
             return false;
         }

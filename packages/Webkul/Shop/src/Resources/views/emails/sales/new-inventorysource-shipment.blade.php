@@ -133,6 +133,8 @@
                                         {{ $html }}
                                     </label>
                                 </div>
+                            @elseif ($item->type == 'downloadable')
+                                <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
                             @endif
                         @endforeach
                     </tbody>

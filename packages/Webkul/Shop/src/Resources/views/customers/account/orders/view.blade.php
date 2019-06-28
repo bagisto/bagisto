@@ -68,7 +68,15 @@
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
                                                         {{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}
                                                     </td>
-                                                    <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">{{ $item->name }}</td>
+                                                    <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">
+                                                        {{ $item->name }}
+
+                                                        @if ($html = $item->getOptionDetailHtml())
+                                                            <p>{{ $html }}</p>
+                                                        @elseif ($item->type == 'downloadable')
+                                                            <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
+                                                        @endif
+                                                    </td>
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.price') }}">{{ core()->formatPrice($item->price, $order->order_currency_code) }}</td>
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.item-status') }}">
                                                         <span class="qty-row">
@@ -107,17 +115,11 @@
                                                 <td>{{ core()->formatPrice($order->sub_total, $order->order_currency_code) }}</td>
                                             </tr>
 
-                                            <tr>
-                                                <td>{{ __('shop::app.customer.account.order.view.shipping-handling') }}</td>
-                                                <td>-</td>
-                                                <td>{{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}</td>
-                                            </tr>
-
-                                            @if ($order->base_discount_amount > 0)
+                                            @if ($order->haveStockableItems())
                                                 <tr>
-                                                    <td>{{ __('shop::app.customer.account.order.view.discount') }}</td>
+                                                    <td>{{ __('shop::app.customer.account.order.view.shipping-handling') }}</td>
                                                     <td>-</td>
-                                                    <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
+                                                    <td>{{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}</td>
                                                 </tr>
                                             @endif
 
@@ -289,7 +291,7 @@
                         <div class="order-box-container">
                             <div class="box">
                                 <div class="box-title">
-                                    {{ __('shop::app.customer.account.order.view.shipping-address') }}
+                                    {{ __('shop::app.customer.account.order.view.billing-address') }}
                                 </div>
 
                                 <div class="box-content">
@@ -299,29 +301,31 @@
                                 </div>
                             </div>
 
-                            <div class="box">
-                                <div class="box-title">
-                                    {{ __('shop::app.customer.account.order.view.billing-address') }}
+                            @if ($order->shipping_address)
+                                <div class="box">
+                                    <div class="box-title">
+                                        {{ __('shop::app.customer.account.order.view.shipping-address') }}
+                                    </div>
+
+                                    <div class="box-content">
+
+                                        @include ('admin::sales.address', ['address' => $order->shipping_address])
+
+                                    </div>
                                 </div>
 
-                                <div class="box-content">
+                                <div class="box">
+                                    <div class="box-title">
+                                        {{ __('shop::app.customer.account.order.view.shipping-method') }}
+                                    </div>
 
-                                    @include ('admin::sales.address', ['address' => $order->shipping_address])
+                                    <div class="box-content">
 
+                                        {{ $order->shipping_title }}
+
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="box">
-                                <div class="box-title">
-                                    {{ __('shop::app.customer.account.order.view.shipping-method') }}
-                                </div>
-
-                                <div class="box-content">
-
-                                    {{ $order->shipping_title }}
-
-                                </div>
-                            </div>
+                            @endif
 
                             <div class="box">
                                 <div class="box-title">

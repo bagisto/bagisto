@@ -39,15 +39,20 @@ class FlatRate extends AbstractShipping
         $object->method = 'flatrate_flatrate';
         $object->method_title = $this->getConfigData('title');
         $object->method_description = $this->getConfigData('description');
+        $object->price = 0;
+        $object->base_price = 0;
 
         if ($this->getConfigData('type') == 'per_unit') {
-            $object->price = core()->convertPrice($this->getConfigData('default_rate')) * $cart->items_qty;
-            $object->base_price = $this->getConfigData('default_rate') * $cart->items_qty;
+            foreach ($cart->items as $item) {
+                if ($item->type == 'configurable' || $item->type == 'configurable') {
+                    $object->price += core()->convertPrice($this->getConfigData('default_rate')) * $item->quantity;
+                    $object->base_price += $this->getConfigData('default_rate') * $item->quantity;
+                }
+            }
         } else {
             $object->price = core()->convertPrice($this->getConfigData('default_rate'));
             $object->base_price = $this->getConfigData('default_rate');
         }
-
 
         return $object;
     }
