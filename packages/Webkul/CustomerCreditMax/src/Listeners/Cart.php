@@ -55,14 +55,18 @@ class Cart
             return;
 
         $baseGrandTotal = $this->orderRepository->scopeQuery(function ($query) {
-            return $query->where('orders.customer_id', $this->getCurrentCustomerGuard()->user()->id);
+            return $query
+                ->where('orders.customer_id', '=', $this->getCurrentCustomerGuard()->user()->id)
+                ->where('orders.status', '<>', 'canceled');
         })->sum('base_grand_total');
 
         $baseGrandTotalInvoiced = $this->orderRepository->scopeQuery(function ($query) {
-            return $query->where('orders.customer_id', $this->getCurrentCustomerGuard()->user()->id);
+            return $query
+                ->where('orders.customer_id', $this->getCurrentCustomerGuard()->user()->id)
+                ->where('orders.status', '<>', 'canceled');
         })->sum('base_grand_total_invoiced');
 
-        if ( ($baseGrandTotal - $baseGrandTotalInvoiced) >= core()->getConfigData('customer.settings.credit_max.amount'))
+        if ( ($baseGrandTotal - $baseGrandTotalInvoiced) >= (core()->getConfigData('customer.settings.credit_max.amount') - ($baseGrandTotal - $baseGrandTotalInvoiced)))
             throw new \Exception('You available credit limit has been exceeded. Please you pay your pending invoice.');
     }
 }
