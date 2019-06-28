@@ -66,56 +66,50 @@ class Cart
     {
         $data = request()->all();
 
-        try {
-            if (! isset($data['pre_order_payment'])) {
-                if ($this->haveCompletePreorderProduct($productId))
-                    throw new \Exception('Product can not be added with preorder payment.');
+        if (! isset($data['pre_order_payment'])) {
+            if ($this->haveCompletePreorderProduct($productId))
+                throw new \Exception('Product can not be added with preorder payment.');
 
-                $product = $this->productRepository->find($productId);
+            $product = $this->productRepository->find($productId);
 
-                if ($product->type == 'configurable') {
-                    if (isset($data['selected_configurable_option'])) {
-                        $product = $this->productRepository->find($data['selected_configurable_option']);
-                    } else {
-                        return;
-                    }
-                }
-
-                if ($product->totalQuantity() > 0 || ! $product->allow_preorder)
+            if ($product->type == 'configurable') {
+                if (isset($data['selected_configurable_option'])) {
+                    $product = $this->productRepository->find($data['selected_configurable_option']);
+                } else {
                     return;
+                }
+            }
 
-                if (! isset($data['quantity']))
-                    $data['quantity'] = 1;
+            if ($product->totalQuantity() > 0 || ! $product->allow_preorder)
+                return;
 
-                if ($cart = CartFacade::getCart()) {
-                    $cartItem = $cart->items()->where('product_id', $productId)->first();
+            if (! isset($data['quantity']))
+                $data['quantity'] = 1;
 
-                    if ($cartItem) {
-                        $quantity = $cartItem->quantity + $data['quantity'];
-                    } else {
-                        $quantity = $data['quantity'];
-                    }
+            if ($cart = CartFacade::getCart()) {
+                $cartItem = $cart->items()->where('product_id', $productId)->first();
+
+                if ($cartItem) {
+                    $quantity = $cartItem->quantity + $data['quantity'];
                 } else {
                     $quantity = $data['quantity'];
                 }
-
-                if ($product->preorder_qty && $product->preorder_qty < $quantity)
-                    throw new \Exception('Requested quantity not available for preorder.');
             } else {
-                if ($cart = CartFacade::getCart()) {
-                    $cartItem = $cart->items()->where('product_id', $productId)->first();
+                $quantity = $data['quantity'];
+            }
 
-                    if ($cartItem) {
-                        throw new \Exception('Invalid quantity for complete preorder payment.');
-                    } else {
-                        throw new \Exception('Preorder payment can not be added with other product.');
-                    }
+            if ($product->preorder_qty && $product->preorder_qty < $quantity)
+                throw new \Exception('Requested quantity not available for preorder.');
+        } else {
+            if ($cart = CartFacade::getCart()) {
+                $cartItem = $cart->items()->where('product_id', $productId)->first();
+
+                if ($cartItem) {
+                    throw new \Exception('Invalid quantity for complete preorder payment.');
+                } else {
+                    throw new \Exception('Preorder payment can not be added with other product.');
                 }
             }
-        } catch (\Exception $e) {
-            session()->flash('error', trans($e->getMessage()));
-
-            return $e;
         }
     }
 

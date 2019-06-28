@@ -32,7 +32,7 @@ class Order
      * Create a new Order event listener instance.
      *
      * @param  Webkul\Product\Helpers\Price                        $priceHelper
-     * @param  Webkul\SAASPreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
+     * @param  Webkul\PreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
      * @return void
      */
     public function __construct(
@@ -57,7 +57,7 @@ class Order
                 $preOrderItem = $this->preOrderItemRepository->findOneByField('order_item_id', $item->additional['order_item_id']);
 
                 $this->preOrderItemRepository->update([
-                    'status' => 'completed',
+                    'status' => 'processing',
                     'payment_order_item_id' => $item->id
                 ], $preOrderItem->id);
             } else {

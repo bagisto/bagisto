@@ -66,67 +66,64 @@ class PreOrderController extends Controller
      */
     public function complete()
     {
-        if (request()->route('token'))
-            $preOrderItem = $this->preOrderItemRepository->findOneByField('token', request()->route('token'));
-        else
-            $preOrderItem = $this->preOrderItemRepository->find(request()->input('id'));
-
-        if (! $preOrderItem)
-            return abort(404);
-
-        $orderItem = $this->orderItemRepository->findOrFail($preOrderItem->order_item_id);
-
-        if (! $this->preOrderItemRepository->canBeComplete($orderItem)) {
-            session()->flash('error', trans('preorder::app.shop.preorders.complete-preorder-error'));
-
+        try {
             if (request()->route('token'))
-                return redirct()->route('shop.home.index');
+                $preOrderItem = $this->preOrderItemRepository->findOneByField('token', request()->route('token'));
             else
-                return back();
-        }
+                $preOrderItem = $this->preOrderItemRepository->find(request()->input('id'));
 
-        $data = [];
+            if (! $preOrderItem)
+                return abort(404);
 
-        if ($orderItem->type == 'configurable') {
-            $data = [
-                'pre_order_payment' => true,
-                'order_item_id' => $preOrderItem->order_item_id,
-                'product' => $orderItem->product_id,
-                'quantity' => $orderItem->qty_ordered,
-                'is_configurable' => true,
-                'selected_configurable_option' => $orderItem->child->product_id
-            ];
+            $orderItem = $this->orderItemRepository->findOrFail($preOrderItem->order_item_id);
 
-            foreach ($this->productRepository->getSuperAttributes($orderItem->product) as $attribute) {
-                $data['super_attribute'][$attribute['id']] = $orderItem->child->product->{$attribute['code']};
+            if (! $this->preOrderItemRepository->canBeComplete($orderItem)) {
+                session()->flash('error', trans('preorder::app.shop.preorders.complete-preorder-error'));
+
+                if (request()->route('token'))
+                    return redirct()->route('shop.home.index');
+                else
+                    return back();
             }
-        } else {
-            $data = [
-                'pre_order_payment' => true,
-                'order_item_id' => $preOrderItem->order_item_id,
-                'product' => $orderItem->product_id,
-                'quantity' => $orderItem->qty_ordered,
-                'is_configurable' => false,
-            ];
-        }
 
-        request()->request->add($data);
+            $data = [];
 
-        $eventResult = Event::fire('checkout.cart.add.before', $data['product']);
+            if ($orderItem->type == 'configurable') {
+                $data = [
+                    'pre_order_payment' => true,
+                    'order_item_id' => $preOrderItem->order_item_id,
+                    'product' => $orderItem->product_id,
+                    'quantity' => $orderItem->qty_ordered,
+                    'is_configurable' => true,
+                    'selected_configurable_option' => $orderItem->child->product_id
+                ];
 
-        $flag = true;
-        foreach ($eventResult as $res) {
-            if ($res != null) {
-                $flag = false;
+                foreach ($this->productRepository->getSuperAttributes($orderItem->product) as $attribute) {
+                    $data['super_attribute'][$attribute['id']] = $orderItem->child->product->{$attribute['code']};
+                }
+            } else {
+                $data = [
+                    'pre_order_payment' => true,
+                    'order_item_id' => $preOrderItem->order_item_id,
+                    'product' => $orderItem->product_id,
+                    'quantity' => $orderItem->qty_ordered,
+                    'is_configurable' => false,
+                ];
             }
-        }
 
-        if ($flag) {
+            request()->request->add($data);
+
+            Event::fire('checkout.cart.add.before', $data['product']);
+
             $result = Cart::add($data['product'], $data);
 
             Event::fire('checkout.cart.add.after', $result);
-        }
 
-        return redirect()->route('shop.checkout.onepage.index');
+            return redirect()->route('shop.checkout.onepage.index');
+        }  catch(\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
+
+            return redirect()->back();
+        }
     }
 }
