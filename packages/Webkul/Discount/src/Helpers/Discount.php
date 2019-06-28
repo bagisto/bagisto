@@ -137,6 +137,10 @@ abstract class Discount
             'cart_id' => $cart->id
         ]);
 
+        if ($rule->use_coupon) {
+            $this->resetShipping($cart);
+        }
+
         if (count($existingRule)) {
             if ($existingRule->first()->cart_rule_id != $rule->id) {
                 $existingRule->first()->update([
@@ -246,9 +250,13 @@ abstract class Discount
 
     /**
      * Resets the shipping for the current items in the cart
+     *
+     * @return void
      */
     public function resetShipping($cart)
     {
+        $cart = \Cart::getCart();
+
         $shippingRate = config('carriers')[$cart->selected_shipping_rate->carrier]['class'];
 
         $actualShippingRate = new $shippingRate;
