@@ -173,33 +173,35 @@
                                 </div>
                             </div>
 
-                            <div class="sale-section">
-                                <div class="secton-title">
-                                    <span>{{ __('admin::app.sales.orders.shipping-info') }}</span>
-                                </div>
-
-                                <div class="section-content">
-                                    <div class="row">
-                                        <span class="title"> 
-                                            {{ __('admin::app.sales.orders.shipping-method') }}
-                                        </span>
-
-                                        <span class="value"> 
-                                            {{ $order->shipping_title }}
-                                        </span>
+                            @if ($order->shipping_address)
+                                <div class="sale-section">
+                                    <div class="secton-title">
+                                        <span>{{ __('admin::app.sales.orders.shipping-info') }}</span>
                                     </div>
 
-                                    <div class="row">
-                                        <span class="title"> 
-                                            {{ __('admin::app.sales.orders.shipping-price') }}
-                                        </span>
+                                    <div class="section-content">
+                                        <div class="row">
+                                            <span class="title"> 
+                                                {{ __('admin::app.sales.orders.shipping-method') }}
+                                            </span>
 
-                                        <span class="value"> 
-                                            {{ core()->formatBasePrice($order->base_shipping_amount) }}
-                                        </span>
+                                            <span class="value"> 
+                                                {{ $order->shipping_title }}
+                                            </span>
+                                        </div>
+
+                                        <div class="row">
+                                            <span class="title"> 
+                                                {{ __('admin::app.sales.orders.shipping-price') }}
+                                            </span>
+
+                                            <span class="value"> 
+                                                {{ core()->formatBasePrice($order->base_shipping_amount) }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </accordian>
 
@@ -228,6 +230,8 @@
 
                                                         @if ($html = $item->getOptionDetailHtml())
                                                             <p>{{ $html }}</p>
+                                                        @elseif ($item->type == 'downloadable')
+                                                            <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
                                                         @endif
                                                     </td>
                                                     <td>{{ $item->qty_ordered }}</td>

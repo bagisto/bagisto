@@ -117,14 +117,17 @@
                                     <p>{{ core()->country_name($invoice->order->billing_address->country) }} {{ $invoice->order->billing_address->postcode }}</p>
                                     {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->billing_address->phone }} 
                                 </td>
-                                <td>
-                                    <p>{{ $invoice->order->shipping_address->name }}</p>
-                                    <p>{{ $invoice->order->shipping_address->address1 }}</p>
-                                    <p>{{ $invoice->order->shipping_address->city }}</p>
-                                    <p>{{ $invoice->order->shipping_address->state }}</p>
-                                    <p>{{ core()->country_name($invoice->order->shipping_address->country) }} {{ $invoice->order->shipping_address->postcode }}</p>
-                                    {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->shipping_address->phone }} 
-                                </td>
+
+                                @if ($invoice->order->shipping_address)
+                                    <td>
+                                        <p>{{ $invoice->order->shipping_address->name }}</p>
+                                        <p>{{ $invoice->order->shipping_address->address1 }}</p>
+                                        <p>{{ $invoice->order->shipping_address->city }}</p>
+                                        <p>{{ $invoice->order->shipping_address->state }}</p>
+                                        <p>{{ core()->country_name($invoice->order->shipping_address->country) }} {{ $invoice->order->shipping_address->postcode }}</p>
+                                        {{ __('shop::app.checkout.onepage.contact') }} : {{ $invoice->order->shipping_address->phone }} 
+                                    </td>
+                                @endif
                             </tr>
                         </tbody>
                     </table>
@@ -144,6 +147,7 @@
                                 <td>
                                     {{ core()->getConfigData('sales.paymentmethods.' . $invoice->order->payment->method . '.title') }}
                                 </td>
+                                
                                 <td>
                                     {{ $invoice->order->shipping_title }}
                                 </td>
@@ -176,6 +180,8 @@
 
                                         @if ($html = $item->getOptionDetailHtml())
                                             <p>{{ $html }}</p>
+                                        @elseif ($item->type == 'downloadable')
+                                            <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
                                         @endif
                                     </td>
                                     <td>{{ core()->formatBasePrice($item->base_price) }}</td>

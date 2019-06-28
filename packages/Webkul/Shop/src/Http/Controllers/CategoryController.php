@@ -3,11 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Shop\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Category\Repositories\CategoryRepository as Category;
-use Webkul\Product\Repositories\ProductRepository as Product;
+use Webkul\Category\Repositories\CategoryRepository;
 
 /**
  * Category controller
@@ -17,7 +13,6 @@ use Webkul\Product\Repositories\ProductRepository as Product;
  */
 class CategoryController extends Controller
 {
-
     /**
      * Contains route related configuration
      *
@@ -30,28 +25,18 @@ class CategoryController extends Controller
      *
      * @var array
      */
-    protected $category;
-
-    /**
-     * ProductRepository object
-     *
-     * @var array
-     */
-    protected $product;
+    protected $categoryRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository $category
-     * @param  \Webkul\Product\Repositories\ProductRepository $product
+     * @param  \Webkul\Category\Repositories\CategoryRepository $categoryRepository
      * @return void
      */
-    public function __construct(Category $category, Product $product)
+    public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->product = $product;
-
-        $this->category = $category;
-
+        $this->categoryRepository = $categoryRepository;
+        
         $this->_config = request('_config');
     }
 
@@ -63,7 +48,7 @@ class CategoryController extends Controller
      */
     public function index($slug)
     {
-        $category = $this->category->findBySlugOrFail($slug);
+        $category = $this->categoryRepository->findBySlugOrFail($slug);
 
         return view($this->_config['view'], compact('category'));
     }

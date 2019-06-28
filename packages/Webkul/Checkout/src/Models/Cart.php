@@ -101,4 +101,34 @@ class Cart extends Model implements CartContract
     {
         return $this->hasOne(CartPaymentProxy::modelClass());
     }
+
+    /**
+     * Checks if cart have stockable items
+     *
+     * @return boolean
+     */
+    public function haveStockableItems()
+    {
+        foreach ($this->all_items as $item) {
+            if ($item->product->isStockable())
+                return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if cart have downloadable items
+     *
+     * @return boolean
+     */
+    public function haveDownloadableItems()
+    {
+        foreach ($this->items as $item) {
+            if ($item->type == 'downloadable')
+                return true;
+        }
+
+        return false;
+    }
 }

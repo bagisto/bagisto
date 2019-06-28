@@ -391,32 +391,7 @@ return [
         'name' => 'admin::app.acl.delete',
         'route' => 'admin.tax-rates.delete',
         'sort' => 3
-    ], [
-        'key' => 'promotions',
-        'name' => 'admin::app.acl.promotions',
-        'route' => 'admin.cart-rule.index',
-        'sort' => 7
-    ], [
-        'key' => 'promotions.cart-rule',
-        'name' => 'admin::app.acl.cart-rules',
-        'route' => 'admin.cart-rule.index',
-        'sort' => 1
-    ], [
-        'key' => 'promotions.cart-rule.create',
-        'name' => 'admin::app.acl.create',
-        'route' => 'admin.cart-rule.create',
-        'sort' => 1
-    ], [
-        'key' => 'promotions.cart-rule.edit',
-        'name' => 'admin::app.acl.edit',
-        'route' => 'admin.cart-rule.edit',
-        'sort' => 2
-    ], [
-        'key' => 'promotions.cart-rule.delete',
-        'name' => 'admin::app.acl.delete',
-        'route' => 'admin.cart-rule.delete',
-        'sort' => 3
-    ],
+    ]
 ];
 
 ?>

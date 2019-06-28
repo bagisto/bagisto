@@ -31,8 +31,12 @@ return [
         'name' => 'shop::app.layouts.orders',
         'route' =>'customer.orders.index',
         'sort' => 5
+    ], [
+        'key' => 'account.downloadables',
+        'name' => 'shop::app.layouts.downloadable-products',
+        'route' =>'customer.downloadable_products.index',
+        'sort' => 6
     ]
-
 ];
 
 ?>

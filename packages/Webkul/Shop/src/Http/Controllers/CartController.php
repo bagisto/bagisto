@@ -7,7 +7,6 @@ use Illuminate\Http\Response;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Illuminate\Support\Facades\Event;
 use Cart;
@@ -21,56 +20,71 @@ use Cart;
  */
 class CartController extends Controller
 {
-
     /**
-     * Protected Variables that holds instances of the repository classes.
+     * Contains route related configuration
      *
-     * @param Array $_config
-     * @param $cart
-     * @param $cartItem
-     * @param $customer
-     * @param $product
-     * @param $productView
+     * @var array
      */
     protected $_config;
 
-    protected $cart;
+    /**
+     * CartRepository object
+     *
+     * @var Object
+     */
+    protected $cartRepository;
 
-    protected $cartItem;
+    /**
+     * CartItemRepository object
+     *
+     * @var Object
+     */
+    protected $cartItemRepository;
 
-    protected $customer;
-
-    protected $product;
-
-    protected $suppressFlash = false;
+    /**
+     * ProductRepository object
+     *
+     * @var Object
+     */
+    protected $productRepository;
 
     /**
      * WishlistRepository Repository object
      *
-     * @var array
+     * @var Object
      */
-    protected $wishlist;
+    protected $wishlistRepository;
 
+    /**
+     * @var boolean
+     */
+    protected $suppressFlash = false;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Checkout\Repositories\CartRepository     $cartRepository
+     * @param  \Webkul\Checkout\Repositories\CartItemRepository $cartItemRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository   $productRepository
+     * @param  \Webkul\Customer\Repositories\CartItemRepository $wishlistRepository
+     * @return void
+     */
     public function __construct(
-        CartRepository $cart,
-        CartItemRepository $cartItem,
-        CustomerRepository $customer,
-        ProductRepository $product,
-        WishlistRepository $wishlist
+        CartRepository $cartRepository,
+        CartItemRepository $cartItemRepository,
+        ProductRepository $productRepository,
+        WishlistRepository $wishlistRepository
     )
     {
-
         $this->middleware('customer')->only(['moveToWishlist']);
 
-        $this->customer = $customer;
+        $this->cartRepository = $cartRepository;
 
-        $this->cart = $cart;
+        $this->cartItemRepository = $cartItemRepository;
 
-        $this->cartItem = $cartItem;
+        $this->productRepository = $productRepository;
 
-        $this->product = $product;
-
-        $this->wishlist = $wishlist;
+        $this->wishlistRepository = $wishlistRepository;
 
         $this->_config = request('_config');
     }
@@ -93,6 +107,21 @@ class CartController extends Controller
     public function add($id)
     {
         try {
+            $product = $this->productRepository->find($id);
+
+            $data = request()->all();
+            
+            if ($product->type == 'downloadable' && ! isset($data['links'])) {
+                session()->flash('warning', trans('shop::app.checkout.cart.integrity.missing_links'));
+
+                return redirect()->route('shop.products.index', $product->url_key);
+            } else if ($product->type == 'configurable'
+                && (! isset($data['selected_configurable_option']) || ! $data['selected_configurable_option'])) {
+                session()->flash('warning', trans('shop::app.checkout.cart.add-config-warning'));
+
+                return redirect()->route('shop.products.index', $product->url_key);
+            }
+
             Event::fire('checkout.cart.add.before', $id);
 
             $result = Cart::add($id, request()->except('_token'));
@@ -110,7 +139,7 @@ class CartController extends Controller
                     if (count($customer->wishlist_items)) {
                         foreach ($customer->wishlist_items as $wishlist) {
                             if ($wishlist->product_id == $id) {
-                                $this->wishlist->delete($wishlist->id);
+                                $this->wishlistRepository->delete($wishlist->id);
                             }
                         }
                     }
@@ -169,7 +198,7 @@ class CartController extends Controller
             }
 
             foreach ($request['qty'] as $key => $value) {
-                $item = $this->cartItem->findOneByField('id', $key);
+                $item = $this->cartItemRepository->findOneByField('id', $key);
 
                 $data['quantity'] = $value;
 
@@ -201,38 +230,20 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Add the configurable product
-     * to the cart.
-     *
-     * @return response
-     */
-    public function addConfigurable($slug)
-    {
-        session()->flash('warning', trans('shop::app.checkout.cart.add-config-warning'));
-        return redirect()->route('shop.products.index', $slug);
-    }
-
     public function buyNow($id, $quantity = 1)
     {
-        try {
-            Event::fire('checkout.cart.add.before', $id);
+        Event::fire('checkout.cart.add.before', $id);
 
-            $result = Cart::proceedToBuyNow($id, $quantity);
+        $result = Cart::proceedToBuyNow($id, $quantity);
 
-            Event::fire('checkout.cart.add.after', $result);
+        Event::fire('checkout.cart.add.after', $result);
 
-            Cart::collectTotals();
+        Cart::collectTotals();
 
-            if (! $result) {
-                return redirect()->back();
-            } else {
-                return redirect()->route('shop.checkout.onepage.index');
-            }
-        } catch(\Exception $e) {
-            session()->flash('error', trans($e->getMessage()));
-
+        if (! $result) {
             return redirect()->back();
+        } else {
+            return redirect()->route('shop.checkout.onepage.index');
         }
     }
 

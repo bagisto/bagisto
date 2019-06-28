@@ -32,7 +32,7 @@
             </div>
         @endif
 
-        @if ($shippingAddress = $cart->shipping_address)
+        @if ($cart->haveStockableItems() && $shippingAddress = $cart->shipping_address)
             <div class="shipping-address">
                 <div class="card-title mb-20">
                     <b>{{ __('shop::app.checkout.onepage.shipping-address') }}</b>
@@ -113,13 +113,21 @@
                     {!! view_render_event('bagisto.shop.checkout.quantity.after', ['item' => $item]) !!}
 
                     @if ($product->type == 'configurable')
-                        {!! view_render_event('bagisto.shop.checkout.options.after', ['item' => $item]) !!}
+                        {!! view_render_event('bagisto.shop.checkout.options.before', ['item' => $item]) !!}
 
                         <div class="summary" >
                             {{ Cart::getProductAttributeOptionDetails($item->child->product)['html'] }}
                         </div>
 
                         {!! view_render_event('bagisto.shop.checkout.options.after', ['item' => $item]) !!}
+                    @elseif ($product->type == 'downloadable')
+                        {!! view_render_event('bagisto.shop.checkout.downlodable_links.before', ['item' => $item]) !!}
+
+                        <div class="summary">
+                            <b>Downloads : </b>{{ $item->additional['link_lables'] }}
+                        </div>
+
+                        {!! view_render_event('bagisto.shop.checkout.downlodable_links.after', ['item' => $item]) !!}
                     @endif
                 </div>
             </div>
@@ -128,19 +136,21 @@
 
     <div class="order-description mt-20">
         <div class="pull-left" style="width: 60%; float: left;">
-            <div class="shipping">
-                <div class="decorator">
-                    <i class="icon shipping-icon"></i>
-                </div>
+            @if ($cart->haveStockableItems())
+                <div class="shipping">
+                    <div class="decorator">
+                        <i class="icon shipping-icon"></i>
+                    </div>
 
-                <div class="text">
-                    {{ core()->currency($cart->selected_shipping_rate->base_price) }}
+                    <div class="text">
+                        {{ core()->currency($cart->selected_shipping_rate->base_price) }}
 
-                    <div class="info">
-                        {{ $cart->selected_shipping_rate->method_title }}
+                        <div class="info">
+                            {{ $cart->selected_shipping_rate->method_title }}
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
 
             <div class="payment">
                 <div class="decorator">

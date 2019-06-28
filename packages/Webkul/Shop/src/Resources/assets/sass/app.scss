@@ -46,22 +46,6 @@ input {
     justify-content: center;
 }
 
-
-@media only screen and (max-width: 770px) {
-    .pagination.shop {
-        justify-content: space-between;
-
-        .page-item {
-            display: none;
-
-            &.previous,
-            &.next {
-                display: block;
-            }
-        }
-    }
-}
-
 //components
 .bold {
     font-weight: bold;
@@ -1111,7 +1095,6 @@ section.slider-block {
                 .search-box {
                     display: inline-block;
                     margin-right: 10px;
-                    cursor: pointer;
                 }
 
                 .right-content-menu {
@@ -1790,6 +1773,52 @@ section.product-detail {
                     border-top: solid 1px rgba(162, 162, 162, 0.2);
                 }
 
+                .downloadable-container {
+                    .sample-list {
+                        padding: 15px 0;
+                        border-top: solid 1px rgba(162, 162, 162, 0.2);
+                            
+                        h3 {
+                            font-size: 16px;
+                            margin-top: 0;
+                        }
+
+                        ul {
+                            li {
+                                margin-bottom: 5px;
+
+                                &:last-child {
+                                    margin-bottom: 0;
+                                }
+                            }
+                        }
+                    }
+
+                    .link-list {
+                        padding: 15px 0;
+                        border-top: solid 1px rgba(162, 162, 162, 0.2);
+
+                        h3 {
+                            font-size: 16px;
+                            margin-top: 0;
+                        }
+
+                        ul {
+                            li {
+                                margin-bottom: 15px;
+
+                                &:last-child {
+                                    margin-bottom: 0;
+                                }
+
+                                a {
+                                    float: right;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 .full-description {
                     * {
                         max-width: 100%;
@@ -1889,6 +1918,12 @@ section.product-detail {
     }
 }
 // product pages css ends here
+
+.accordian, accordian {
+    .accordian-header, div[slot*="header"] {
+        font-size: 16px !important;
+    }
+}
 
 // product pages responsive css start here
 @media only screen and (max-width: 720px) {
@@ -3408,7 +3443,6 @@ section.review {
     .table {
         .grid-container {
             margin-top: 10px;
-            overflow-x: hidden;
 
             .filter-row-one {
                 display: block;

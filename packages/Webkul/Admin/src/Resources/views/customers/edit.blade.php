@@ -58,19 +58,10 @@
                             <div class="control-group">
                                 <label for="gender" class="required">{{ __('admin::app.customers.customers.gender') }}</label>
                                 <select name="gender" class="control" value="{{ $customer->gender }}" v-validate="'required'" data-vv-as="&quot;{{ __('shop::app.customers.customers.gender') }}&quot;">
-                                    <option value="Male" {{ $customer->gender == "Male" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.male') }}</option>
-                                    <option value="Female" {{ $customer->gender == "Female" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.female') }}</option>
+                                        <option value="Male" {{ $customer->gender == "Male" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.male') }}</option>
+                                        <option value="Female" {{ $customer->gender == "Female" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.female') }}</option>
                                 </select>
                                 <span class="control-error" v-if="errors.has('gender')">@{{ errors.first('gender') }}</span>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="status" class="required">{{ __('admin::app.customers.customers.status') }}</label>
-                                <select name="status" class="control" value="{{ $customer->status }}" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.customers.customers.status') }}&quot;">
-                                    <option value="1" {{ $customer->status == "1" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.active') }}</option>
-                                    <option value="0" {{ $customer->status == "0" ? 'selected' : '' }}>{{ __('admin::app.customers.customers.in-active') }}</option>
-                                </select>
-                                <span class="control-error" v-if="errors.has('status')">@{{ errors.first('status') }}</span>
                             </div>
 
                             <div class="control-group" :class="[errors.has('date_of_birth') ? 'has-error' : '']">
@@ -81,7 +72,7 @@
 
                             <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
                                 <label for="phone">{{ __('admin::app.customers.customers.phone') }}</label>
-                                <input type="text" class="control" name="phone"  value="{{ $customer->phone }}" data-vv-as="&quot;{{ __('admin::app.customers.customers.phone') }}&quot;">
+                                <input type="text" class="control" name="phone" v-validate="'numeric|max:10'" value="{{ $customer->phone }}" data-vv-as="&quot;{{ __('admin::app.customers.customers.phone') }}&quot;">
                                 <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
                             </div>
 

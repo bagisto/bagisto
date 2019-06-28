@@ -7,7 +7,6 @@ use DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Models\ProductAttributeValue;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Storage;
@@ -25,28 +24,21 @@ class ProductRepository extends Repository
      *
      * @var array
      */
-    protected $attribute;
-
-    /**
-     * AttributeOptionRepository object
-     *
-     * @var array
-     */
-    protected $attributeOption;
+    protected $attributeRepository;
 
     /**
      * ProductAttributeValueRepository object
      *
      * @var array
      */
-    protected $attributeValue;
+    protected $attributeValueRepository;
 
     /**
      * ProductFlatRepository object
      *
      * @var array
      */
-    protected $productInventory;
+    protected $productInventoryRepository;
 
     /**
      * ProductImageRepository object
@@ -56,32 +48,50 @@ class ProductRepository extends Repository
     protected $productImage;
 
     /**
+     * ProductDownloadableLinkRepository object
+     *
+     * @var array
+     */
+    protected $productDownloadableLinkRepository;
+
+    /**
+     * ProductDownloadableLinkRepository object
+     *
+     * @var array
+     */
+    protected $productDownloadableSampleRepository;
+
+    /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository             $attribute
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository       $attributeOption
-     * @param  Webkul\Attribute\Repositories\ProductAttributeValueRepository $attributeValue
-     * @param  Webkul\Product\Repositories\ProductInventoryRepository        $productInventory
-     * @param  Webkul\Product\Repositories\ProductImageRepository            $productImage
+     * @param  Webkul\Attribute\Repositories\AttributeRepository               $attributeRepository
+     * @param  Webkul\Attribute\Repositories\ProductAttributeValueRepository   $attributeValueRepository
+     * @param  Webkul\Product\Repositories\ProductInventoryRepository          $productInventoryRepository
+     * @param  Webkul\Product\Repositories\ProductImageRepository              $productImageRepository
+     * @param  Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
+     * @param  Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
      * @return void
      */
     public function __construct(
-        AttributeRepository $attribute,
-        AttributeOptionRepository $attributeOption,
-        ProductAttributeValueRepository $attributeValue,
-        ProductInventoryRepository $productInventory,
-        ProductImageRepository $productImage,
+        AttributeRepository $attributeRepository,
+        ProductAttributeValueRepository $attributeValueRepository,
+        ProductInventoryRepository $productInventoryRepository,
+        ProductImageRepository $productImageRepository,
+        ProductDownloadableLinkRepository $productDownloadableLinkRepository,
+        ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         App $app)
     {
-        $this->attribute = $attribute;
+        $this->attributeRepository = $attributeRepository;
 
-        $this->attributeOption = $attributeOption;
+        $this->attributeValueRepository = $attributeValueRepository;
 
-        $this->attributeValue = $attributeValue;
+        $this->productInventoryRepository = $productInventoryRepository;
 
-        $this->productInventory = $productInventory;
+        $this->productImageRepository = $productImageRepository;
 
-        $this->productImage = $productImage;
+        $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
+
+        $this->productDownloadableSampleRepository = $productDownloadableSampleRepository;
 
         parent::__construct($app);
     }
@@ -107,8 +117,8 @@ class ProductRepository extends Repository
 
         $product = $this->model->create($data);
 
-        $nameAttribute = $this->attribute->findOneByField('code', 'status');
-        $this->attributeValue->create([
+        $nameAttribute = $this->attributeRepository->findOneByField('code', 'status');
+        $this->attributeValueRepository->create([
                 'product_id' => $product->id,
                 'attribute_id' => $nameAttribute->id,
                 'value' => 1
@@ -119,7 +129,7 @@ class ProductRepository extends Repository
             $super_attributes = [];
 
             foreach ($data['super_attributes'] as $attributeCode => $attributeOptions) {
-                $attribute = $this->attribute->findOneByField('code', $attributeCode);
+                $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
 
                 $super_attributes[$attribute->id] = $attributeOptions;
 
@@ -174,7 +184,7 @@ class ProductRepository extends Repository
                 }
             }
 
-            $attributeValue = $this->attributeValue->findOneWhere([
+            $attributeValue = $this->attributeValueRepository->findOneWhere([
                     'product_id' => $product->id,
                     'attribute_id' => $attribute->id,
                     'channel' => $attribute->value_per_channel ? $data['channel'] : null,
@@ -182,7 +192,7 @@ class ProductRepository extends Repository
                 ]);
 
             if (! $attributeValue) {
-                $this->attributeValue->create([
+                $this->attributeValueRepository->create([
                     'product_id' => $product->id,
                     'attribute_id' => $attribute->id,
                     'value' => $data[$attribute->code],
@@ -190,7 +200,7 @@ class ProductRepository extends Repository
                     'locale' => $attribute->value_per_locale ? $data['locale'] : null
                 ]);
             } else {
-                $this->attributeValue->update([
+                $this->attributeValueRepository->update([
                     ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
                     ], $attributeValue->id
                 );
@@ -255,9 +265,13 @@ class ProductRepository extends Repository
                 $this->delete($variantId);
             }
 
-            $this->productInventory->saveInventories($data, $product);
+            $this->productInventoryRepository->saveInventories($data, $product);
 
-            $this->productImage->uploadImages($data, $product);
+            $this->productImageRepository->uploadImages($data, $product);
+
+            $this->productDownloadableLinkRepository->saveLinks($data, $product);
+            
+            $this->productDownloadableSampleRepository->saveSamples($data, $product);
         }
 
         Event::fire('catalog.product.update.after', $product);
@@ -305,13 +319,13 @@ class ProductRepository extends Repository
             ]);
 
         foreach (['sku', 'name', 'price', 'weight', 'status'] as $attributeCode) {
-            $attribute = $this->attribute->findOneByField('code', $attributeCode);
+            $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
 
             if ($attribute->value_per_channel) {
                 if ($attribute->value_per_locale) {
                     foreach (core()->getAllChannels() as $channel) {
                         foreach (core()->getAllLocales() as $locale) {
-                            $this->attributeValue->create([
+                            $this->attributeValueRepository->create([
                                     'product_id' => $variant->id,
                                     'attribute_id' => $attribute->id,
                                     'channel' => $channel->code,
@@ -322,7 +336,7 @@ class ProductRepository extends Repository
                     }
                 } else {
                     foreach (core()->getAllChannels() as $channel) {
-                        $this->attributeValue->create([
+                        $this->attributeValueRepository->create([
                                 'product_id' => $variant->id,
                                 'attribute_id' => $attribute->id,
                                 'channel' => $channel->code,
@@ -333,7 +347,7 @@ class ProductRepository extends Repository
             } else {
                 if ($attribute->value_per_locale) {
                     foreach (core()->getAllLocales() as $locale) {
-                        $this->attributeValue->create([
+                        $this->attributeValueRepository->create([
                                 'product_id' => $variant->id,
                                 'attribute_id' => $attribute->id,
                                 'locale' => $locale->code,
@@ -341,7 +355,7 @@ class ProductRepository extends Repository
                             ]);
                     }
                 } else {
-                    $this->attributeValue->create([
+                    $this->attributeValueRepository->create([
                             'product_id' => $variant->id,
                             'attribute_id' => $attribute->id,
                             'value' => $data[$attributeCode]
@@ -351,14 +365,14 @@ class ProductRepository extends Repository
         }
 
         foreach ($permutation as $attributeId => $optionId) {
-            $this->attributeValue->create([
+            $this->attributeValueRepository->create([
                     'product_id' => $variant->id,
                     'attribute_id' => $attributeId,
                     'value' => $optionId
                 ]);
         }
 
-        $this->productInventory->saveInventories($data, $variant);
+        $this->productInventoryRepository->saveInventories($data, $variant);
 
         return $variant;
     }
@@ -375,9 +389,9 @@ class ProductRepository extends Repository
         $variant->update(['sku' => $data['sku']]);
 
         foreach (['sku', 'name', 'price', 'weight', 'status'] as $attributeCode) {
-            $attribute = $this->attribute->findOneByField('code', $attributeCode);
+            $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
 
-            $attributeValue = $this->attributeValue->findOneWhere([
+            $attributeValue = $this->attributeValueRepository->findOneWhere([
                     'product_id' => $id,
                     'attribute_id' => $attribute->id,
                     'channel' => $attribute->value_per_channel ? $data['channel'] : null,
@@ -385,7 +399,7 @@ class ProductRepository extends Repository
                 ]);
 
             if (! $attributeValue) {
-                $this->attributeValue->create([
+                $this->attributeValueRepository->create([
                         'product_id' => $id,
                         'attribute_id' => $attribute->id,
                         'value' => $data[$attribute->code],
@@ -393,13 +407,13 @@ class ProductRepository extends Repository
                         'locale' => $attribute->value_per_locale ? $data['locale'] : null
                     ]);
             } else {
-                $this->attributeValue->update([
+                $this->attributeValueRepository->update([
                     ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
                 ], $attributeValue->id);
             }
         }
 
-        $this->productInventory->saveInventories($data, $variant);
+        $this->productInventoryRepository->saveInventories($data, $variant);
 
         return $variant;
     }
@@ -487,7 +501,7 @@ class ProductRepository extends Repository
                 }
 
                 if (isset($params['sort'])) {
-                    $attribute = $this->attribute->findOneByField('code', $params['sort']);
+                    $attribute = $this->attributeRepository->findOneByField('code', $params['sort']);
 
                     if ($params['sort'] == 'price') {
                         if ($attribute->code == 'price') {
@@ -503,7 +517,7 @@ class ProductRepository extends Repository
                 $qb = $qb->where(function($query1) {
                     foreach (['product_flat', 'flat_variants'] as $alias) {
                         $query1 = $query1->orWhere(function($query2) use($alias) {
-                            $attributes = $this->attribute->getProductDefaultAttributes(array_keys(request()->input()));
+                            $attributes = $this->attributeRepository->getProductDefaultAttributes(array_keys(request()->input()));
 
                             foreach ($attributes as $attribute) {
                                 $column = $alias . '.' . $attribute->code;

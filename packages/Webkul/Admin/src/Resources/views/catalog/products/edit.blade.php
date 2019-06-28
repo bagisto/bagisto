@@ -60,8 +60,9 @@
                 <input name="_method" type="hidden" value="PUT">
 
                 @foreach ($product->attribute_family->attribute_groups as $attributeGroup)
+                    <?php $customAttributes = $product->getEditableAttributes($attributeGroup); ?>
 
-                    @if (count($attributeGroup->custom_attributes))
+                    @if (count($customAttributes))
 
                         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.before', ['product' => $product]) !!}
 
@@ -69,72 +70,58 @@
                             <div slot="body">
                                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.controls.before', ['product' => $product]) !!}
 
-                                @foreach ($attributeGroup->custom_attributes as $attribute)
+                                @foreach ($customAttributes as $attribute)
 
-                                    @if (! $product->super_attributes->contains($attribute))
+                                    <?php
+                                        $validations = [];
 
-                                        <?php
-                                            $validations = [];
-                                            $disabled = false;
-                                            if ($product->type == 'configurable' && in_array($attribute->code, ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'])) {
-                                                if (! $attribute->is_required)
-                                                    continue;
+                                        if ($attribute->is_required)
+                                            array_push($validations, 'required');
 
-                                                $disabled = true;
-                                            } else {
-                                                if ($attribute->is_required) {
-                                                    array_push($validations, 'required');
-                                                }
+                                        if ($attribute->type == 'price')
+                                            array_push($validations, 'decimal');
 
-                                                if ($attribute->type == 'price') {
-                                                    array_push($validations, 'decimal');
-                                                }
+                                        array_push($validations, $attribute->validation);
 
-                                                array_push($validations, $attribute->validation);
-                                            }
+                                        $validations = implode('|', array_filter($validations));
+                                    ?>
 
-                                            $validations = implode('|', array_filter($validations));
-                                        ?>
+                                    @if (view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
 
-                                        @if (view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
+                                        <div class="control-group {{ $attribute->type }}" @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']" @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
 
-                                            <div class="control-group {{ $attribute->type }}" @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']" @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
+                                            <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
+                                                {{ $attribute->admin_name }}
 
-                                                <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
-                                                    {{ $attribute->admin_name }}
+                                                @if ($attribute->type == 'price')
+                                                    <span class="currency-code">({{ core()->currencySymbol(core()->getBaseCurrencyCode()) }})</span>
+                                                @endif
 
-                                                    @if ($attribute->type == 'price')
-                                                        <span class="currency-code">({{ core()->currencySymbol(core()->getBaseCurrencyCode()) }})</span>
-                                                    @endif
+                                                <?php
+                                                    $channel_locale = [];
 
-                                                    <?php
-                                                        $channel_locale = [];
-                                                        if ($attribute->value_per_channel) {
-                                                            array_push($channel_locale, $channel);
-                                                        }
+                                                    if ($attribute->value_per_channel)
+                                                        array_push($channel_locale, $channel);
 
-                                                        if ($attribute->value_per_locale) {
-                                                            array_push($channel_locale, $locale);
-                                                        }
-                                                    ?>
+                                                    if ($attribute->value_per_locale)
+                                                        array_push($channel_locale, $locale);
+                                                ?>
 
-                                                    @if (count($channel_locale))
-                                                        <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
-                                                    @endif
-                                                </label>
+                                                @if (count($channel_locale))
+                                                    <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
+                                                @endif
+                                            </label>
 
-                                                @include ($typeView)
+                                            @include ($typeView)
 
-                                                <span class="control-error"  @if ($attribute->type == 'multiselect') v-if="errors.has('{{ $attribute->code }}[]')" @else  v-if="errors.has('{{ $attribute->code }}')"  @endif>
-                                                    @if ($attribute->type == 'multiselect')
-                                                        @{{ errors.first('{!! $attribute->code !!}[]') }}
-                                                    @else
-                                                        @{{ errors.first('{!! $attribute->code !!}') }}
-                                                    @endif
-                                                </span>
-                                            </div>
-
-                                        @endif
+                                            <span class="control-error"  @if ($attribute->type == 'multiselect') v-if="errors.has('{{ $attribute->code }}[]')" @else  v-if="errors.has('{{ $attribute->code }}')"  @endif>
+                                                @if ($attribute->type == 'multiselect')
+                                                    @{{ errors.first('{!! $attribute->code !!}[]') }}
+                                                @else
+                                                    @{{ errors.first('{!! $attribute->code !!}') }}
+                                                @endif
+                                            </span>
+                                        </div>
 
                                     @endif
 
@@ -150,36 +137,11 @@
 
                 @endforeach
 
+                @foreach ($product->getTypeInstance()->getAdditionalViews() as $view)
 
-                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.inventories.before', ['product' => $product]) !!}
+                    @include ($view)
 
-                @include ('admin::catalog.products.accordians.inventories')
-
-                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.inventories.after', ['product' => $product]) !!}
-
-
-                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.before', ['product' => $product]) !!}
-
-                @include ('admin::catalog.products.accordians.images')
-
-                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.after', ['product' => $product]) !!}
-
-
-
-                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.categories.before', ['product' => $product]) !!}
-
-                @include ('admin::catalog.products.accordians.categories')
-
-                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.categories.after', ['product' => $product]) !!}
-
-
-                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.before', ['product' => $product]) !!}
-
-                @include ('admin::catalog.products.accordians.variations')
-
-                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.after', ['product' => $product]) !!}
-
-                @include ('admin::catalog.products.accordians.product-links')
+                @endforeach
 
             </div>
 

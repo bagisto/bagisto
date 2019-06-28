@@ -11,6 +11,7 @@ return [
         'reviews' => 'Reviews',
         'wishlist' => 'Wishlist',
         'orders' => 'Orders',
+        'downloadable-products' => 'Downloadable Products',
     ],
 
     'common' => [
@@ -285,6 +286,20 @@ return [
                 ]
             ],
 
+            'downloadable_products' => [
+                'title' => 'Downloadable Products',
+                'order-id' => 'Order Id',
+                'date' => 'Date',
+                'name' => 'Title',
+                'status' => 'Status',
+                'pending' => 'Pending',
+                'available' => 'Available',
+                'expired' => 'Expired',
+                'remaining-downloads' => 'Remaining Downloads',
+                'unlimited' => 'Unlimited',
+                'download-error' => 'Download link has been expired.'
+            ],
+ 
             'review' => [
                 'index' => [
                     'title' => 'Reviews',
@@ -333,7 +348,10 @@ return [
         'out-of-stock' => 'Out Of Stock',
         'view-all' => 'View All',
         'select-above-options' => 'Please select above options first.',
-        'less-quantity' => 'Quantity can not be less than one.'
+        'less-quantity' => 'Quantity can not be less than one.',
+        'samples' => 'Samples',
+        'links' => 'Links',
+        'sample' => 'Sample'
     ],
 
     'wishlist' => [
@@ -341,18 +359,18 @@ return [
         'deleteall' => 'Delete All',
         'moveall' => 'Move All Products To Cart',
         'move-to-cart' => 'Move To Cart',
-        'error' => 'Cannot add product to wishlist due to unknown problems, please checkback later',
-        'add' => 'Item successfully added to wishlist',
-        'remove' => 'Item successfully removed from wishlist',
-        'moved' => 'Item successfully moved To cart',
-        'move-error' => 'Item cannot be moved to wishlist, Please try again later',
-        'success' => 'Item successfully added to wishlist',
-        'failure' => 'Item cannot be added to wishlist, Please try again later',
-        'already' => 'Item already present in your wishlist',
-        'removed' => 'Item successfully removed from wishlist',
-        'remove-fail' => 'Item cannot Be removed from wishlist, Please try again later',
-        'empty' => 'You do not have any items in your wishlist',
-        'remove-all-success' => 'All the items from your wishlist have been removed',
+        'error' => 'Cannot Add The Product To Wishlist Due To Unknown Problems, Please Checkback Later',
+        'add' => 'Item Successfully Added To Wishlist',
+        'remove' => 'Item Successfully Removed From Wishlist',
+        'moved' => 'Item Successfully Moved To Wishlist',
+        'move-error' => 'Item Cannot Be Moved To Wishlist, Please Try Again Later',
+        'success' => 'Item Successfully Added To Wishlist',
+        'failure' => 'Item Cannot Be Added To Wishlist, Please Try Again Later',
+        'already' => 'Item Already Present In Your Wishlist',
+        'removed' => 'Item Successfully Removed From Wishlist',
+        'remove-fail' => 'Item Cannot Be Removed From Wishlist, Please Try Again Later',
+        'empty' => 'You do not have any items in your Wishlist',
+        'remove-all-success' => 'All The Items From Your Wishlist Have Been Removed',
     ],
 
     // 'reviews' => [
@@ -369,6 +387,7 @@ return [
             'integrity' => [
                 'missing_fields' =>'Cart System Integrity Violation, Some Required Fields Missing',
                 'missing_options' =>'Cart System Integrity Violation, Options Are Missing For Configurable Product',
+                'missing_links' =>'Cart System Integrity Violation, Downloadable Links Are Missing For Product',
             ],
             'create-error' => 'Encountered Some Issue While Making Cart Instance',
             'title' => 'Shopping Cart',
@@ -399,6 +418,7 @@ return [
             'cart-subtotal' => 'Cart Subtotal',
             'cart-remove-action' => 'Do you really want to do this ?',
             'partial-cart-update' => 'Only some of the product(s) were updated',
+            'link-missing' => ''
         ],
 
         'onepage' => [

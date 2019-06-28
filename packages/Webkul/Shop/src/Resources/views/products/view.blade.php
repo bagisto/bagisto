@@ -47,18 +47,22 @@
 
                         {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
-                        <div class="quantity control-group" :class="[errors.has('quantity') ? 'has-error' : '']">
+                        @if ($product->type == 'configurable' || $product->isStockable())
+                            <div class="quantity control-group" :class="[errors.has('quantity') ? 'has-error' : '']">
 
-                            <label class="required">{{ __('shop::app.products.quantity') }}</label>
+                                <label class="required">{{ __('shop::app.products.quantity') }}</label>
 
-                            <input class="control quantity-change" value="-" style="width: 35px; border-radius: 3px 0px 0px 3px;" onclick="updateQunatity('remove')" readonly>
+                                <input class="control quantity-change" value="-" style="width: 35px; border-radius: 3px 0px 0px 3px;" onclick="updateQunatity('remove')" readonly>
 
-                            <input name="quantity" id="quantity" class="control quantity-change" value="1" v-validate="'required|numeric|min_value:1'" style="width: 60px; position: relative; margin-left: -4px; margin-right: -4px; border-right: none;border-left: none; border-radius: 0px;" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
+                                <input name="quantity" id="quantity" class="control quantity-change" value="1" v-validate="'required|numeric|min_value:1'" style="width: 60px; position: relative; margin-left: -4px; margin-right: -4px; border-right: none;border-left: none; border-radius: 0px;" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" readonly>
 
-                            <input class="control quantity-change" value="+" style="width: 35px; padding: 0 12px; border-radius: 0px 3px 3px 0px;" onclick=updateQunatity('add') readonly>
+                                <input class="control quantity-change" value="+" style="width: 35px; padding: 0 12px; border-radius: 0px 3px 3px 0px;" onclick=updateQunatity('add') readonly>
 
-                            <span class="control-error" v-if="errors.has('quantity')">@{{ errors.first('quantity') }}</span>
-                        </div>
+                                <span class="control-error" v-if="errors.has('quantity')">@{{ errors.first('quantity') }}</span>
+                            </div>
+                        @else
+                            <input type="hidden" name="quantity" value="1">
+                        @endif
 
                         {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
@@ -69,6 +73,8 @@
                         @endif
 
                         @include ('shop::products.view.configurable-options')
+
+                        @include ('shop::products.view.downloadable')
 
                         {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
@@ -142,11 +148,18 @@
             }
         });
 
-        $(document).ready(function() {
+        document.onreadystatechange = function () {
+            var state = document.readyState
+            var galleryTemplate = document.getElementById('product-gallery-template');
             var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
-            document.getElementById('loader').style.display="none";
-            addTOButton.style.display="flex";
-        });
+
+            if (galleryTemplate) {
+                if (state != 'interactive') {
+                    document.getElementById('loader').style.display="none";
+                    addTOButton.style.display="flex";
+                }
+            }
+        }
 
         window.onload = function() {
             var thumbList = document.getElementsByClassName('thumb-list')[0];
@@ -197,6 +210,19 @@
                 }
             }
             document.getElementById("quantity").value = quantity;
+
+            var buyNowLink = $('.btn.buynow').attr('data-href');
+            var splitted = buyNowLink.split("/");
+            lastItem = splitted[splitted.length - 2];
+
+            splitted.pop();
+            splitted.pop();
+
+            var joined = splitted.join('/');
+
+            var newBuyNowUrl = joined + '/' + lastItem + '/' + quantity;
+
+            $('.btn.buynow').attr('data-href', newBuyNowUrl);
 
             event.preventDefault();
         }

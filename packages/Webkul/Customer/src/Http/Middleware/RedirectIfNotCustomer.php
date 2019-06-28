@@ -19,13 +19,6 @@ class RedirectIfNotCustomer
     {
         if (! Auth::guard($guard)->check()) {
             return redirect()->route('customer.session.index');
-        } else {
-            if (Auth::guard($guard)->user()->status == 0) {
-                Auth::guard($guard)->logout();
-
-                session()->flash('warning', trans('shop::app.customer.login-form.not-activated'));
-                return redirect()->route('customer.session.index');
-            }
         }
 
         return $next($request);

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveUniqueInPhoneColumnInCustomersTable extends Migration
+class UpdateWeightColumnDeafultValueInCartItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class RemoveUniqueInPhoneColumnInCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::table('customers', function (Blueprint $table) {
-            if ( Schema::hasColumn('customers', 'phone')) {
-                $table->dropUnique('customers_phone_unique');
-            }
+        Schema::table('cart_items', function (Blueprint $table) {
+            $table->decimal('weight', 12,4)->default(0)->change();
         });
     }
 
@@ -27,7 +25,7 @@ class RemoveUniqueInPhoneColumnInCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::table('customers', function (Blueprint $table) {
+        Schema::table('cart_items', function (Blueprint $table) {
             //
         });
     }

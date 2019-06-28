@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Order;
-use Webkul\Sales\Repositories\OrderItemRepository;
 
 /**
  * Order Reposotory
@@ -24,20 +23,31 @@ class OrderRepository extends Repository
      *
      * @var Object
      */
-    protected $orderItem;
+    protected $orderItemRepository;
+
+    /**
+     * DownloadableLinkPurchasedRepository object
+     *
+     * @var Object
+     */
+    protected $downloadableLinkPurchasedRepository;
 
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderItemRepository $orderItem
+     * @param  Webkul\Sales\Repositories\OrderItemRepository                 $orderItemRepository
+     * @param  Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
      * @return void
      */
     public function __construct(
-        OrderItemRepository $orderItem,
+        OrderItemRepository $orderItemRepository,
+        DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository,
         App $app
     )
     {
-        $this->orderItem = $orderItem;
+        $this->orderItemRepository = $orderItemRepository;
+
+        $this->downloadableLinkPurchasedRepository = $downloadableLinkPurchasedRepository;
 
         parent::__construct($app);
     }
@@ -85,18 +95,21 @@ class OrderRepository extends Repository
 
             $order->payment()->create($data['payment']);
 
-            $order->addresses()->create($data['shipping_address']);
+            if (isset($data['shipping_address']))
+                $order->addresses()->create($data['shipping_address']);
 
             $order->addresses()->create($data['billing_address']);
 
             foreach ($data['items'] as $item) {
-                $orderItem = $this->orderItem->create(array_merge($item, ['order_id' => $order->id]));
+                $orderItem = $this->orderItemRepository->create(array_merge($item, ['order_id' => $order->id]));
 
                 if (isset($item['child']) && $item['child']) {
-                    $orderItem->child = $this->orderItem->create(array_merge($item['child'], ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
+                    $orderItem->child = $this->orderItemRepository->create(array_merge($item['child'], ['order_id' => $order->id, 'parent_id' => $orderItem->id]));
                 }
 
-                $this->orderItem->manageInventory($orderItem);
+                $this->orderItemRepository->manageInventory($orderItem);
+
+                $this->downloadableLinkPurchasedRepository->saveLinks($orderItem);
             }
 
             Event::fire('checkout.order.save.after', $order);
@@ -126,7 +139,7 @@ class OrderRepository extends Repository
 
         foreach ($order->items as $item) {
             if ($item->qty_to_cancel) {
-                $this->orderItem->returnQtyToProductInventory($item);
+                $this->orderItemRepository->returnQtyToProductInventory($item);
 
                 $item->qty_canceled += $item->qty_to_cancel;
 
@@ -168,14 +181,20 @@ class OrderRepository extends Repository
         foreach ($order->items  as $item) {
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyInvoiced += $item->qty_invoiced;
-            $totalQtyShipped += $item->qty_shipped;
+
+            if ($item->type != 'configurable' && ! $item->isStockable()) {
+                $totalQtyShipped += $item->qty_ordered;
+            } else {
+                $totalQtyShipped += $item->qty_shipped;
+            }
+
             $totalQtyRefunded += $item->qty_refunded;
             $totalQtyCanceled += $item->qty_canceled;
         }
 
-        if ($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled) && 
-            $totalQtyOrdered == $totalQtyInvoiced + $totalQtyRefunded + $totalQtyCanceled &&
-            $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled)
+        if ($totalQtyOrdered != ($totalQtyRefunded + $totalQtyCanceled)
+            && $totalQtyOrdered == $totalQtyInvoiced + $totalQtyRefunded + $totalQtyCanceled
+            && $totalQtyOrdered == $totalQtyShipped + $totalQtyRefunded + $totalQtyCanceled)
             return true;
 
         return false;

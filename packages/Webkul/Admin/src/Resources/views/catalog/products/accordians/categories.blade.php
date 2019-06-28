@@ -1,4 +1,7 @@
 @if ($categories->count())
+
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.categories.before', ['product' => $product]) !!}
+
 <accordian :title="'{{ __('admin::app.catalog.products.categories') }}'" :active="true">
     <div slot="body">
         
@@ -10,4 +13,7 @@
 
     </div>
 </accordian>
+
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.categories.after', ['product' => $product]) !!}
+
 @endif

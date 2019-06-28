@@ -1,3 +1,5 @@
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.before', ['product' => $product]) !!}
+
 <accordian :title="'{{ __('admin::app.catalog.products.images') }}'" :active="true">
     <div slot="body">
 
@@ -20,3 +22,5 @@
 
     </div>
 </accordian>
+
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.images.after', ['product' => $product]) !!}

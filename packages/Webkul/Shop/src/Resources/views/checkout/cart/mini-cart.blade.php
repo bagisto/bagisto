@@ -65,6 +65,12 @@
                                     <div class="item-options">
                                         {{ trim(Cart::getProductAttributeOptionDetails($item->child->product)['html']) }}
                                     </div>
+                                @elseif ($item->type == 'downloadable')
+                                    <div class="item-options">
+                                        
+                                        <b>Downloads : </b>{{ $item->additional['link_lables'] }}
+
+                                    </div>
                                 @endif
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.options.after', ['item' => $item]) !!}

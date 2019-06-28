@@ -128,12 +128,14 @@
                                 <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}" style="text-align: left;padding: 8px">{{ $item->qty }}</td>
 
                                 @if ($html = $item->getOptionDetailHtml())
-                                <div style="">
-                                    <label style="margin-top: 10px; font-size: 16px;color: #5E5E5E; display: block;">
-                                        {{ $html }}
-                                    </label>
-                                </div>
-                            @endif
+                                    <div style="">
+                                        <label style="margin-top: 10px; font-size: 16px;color: #5E5E5E; display: block;">
+                                            {{ $html }}
+                                        </label>
+                                    </div>
+                                @elseif ($item->type == 'downloadable')
+                                    <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
+                                @endif
                             </tr>
 
                         @endforeach

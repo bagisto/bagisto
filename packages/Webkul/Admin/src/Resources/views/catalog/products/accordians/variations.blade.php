@@ -1,5 +1,3 @@
-@if ($product->type == 'configurable')
-
 @section('css')
     @parent
     <style>
@@ -18,6 +16,8 @@
     </style>
 @stop
 
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.before', ['product' => $product]) !!}
+
 <accordian :title="'{{ __('admin::app.catalog.products.variations') }}'" :active="true">
     <div slot="body">
 
@@ -33,6 +33,8 @@
 
     </div>
 </accordian>
+
+{!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.after', ['product' => $product]) !!}
 
 <modal id="addVariant" :is-open="modalIds.addVariant">
     <h3 slot="header">{{ __('admin::app.catalog.products.add-variant-title') }}</h3>
@@ -355,4 +357,3 @@
         });
     </script>
 @endpush
-@endif

@@ -62,6 +62,12 @@
                                                 {{ Cart::getProductAttributeOptionDetails($item->child->product)['html'] }}
 
                                             </div>
+                                        @elseif ($item->type == 'downloadable')
+                                            <div class="summary">
+                                                
+                                                <b>Downloads : </b>{{ $item->additional['link_lables'] }}
+
+                                            </div>
                                         @endif
 
                                         {!! view_render_event('bagisto.shop.checkout.cart.item.options.after', ['item' => $item]) !!}

@@ -65,12 +65,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
     */
-    public function index() {
-        $orders = $this->order->findWhere([
-            'customer_id' => auth()->guard('customer')->user()->id
-        ]);
-
-        return view($this->_config['view'], compact('orders'));
+    public function index()
+    {
+        return view($this->_config['view']);
     }
 
     /**
