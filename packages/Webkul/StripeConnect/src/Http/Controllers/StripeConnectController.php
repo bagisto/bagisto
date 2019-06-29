@@ -248,12 +248,12 @@ class StripeConnectController extends Controller
         try {
             $cart = Cart::getCart();
 
-            if($cart->base_currency_code == 'YEN' ||$cart->base_currency_code == 'yen') {
+            if(Cart::getCart()->base_currency_code == 'YEN' ||Cart::getCart()->base_currency_code == 'yen') {
                 $result = StripeCharge::create ([
-                    "amount" => $cart->base_grand_total,
-                    "currency" => $cart->base_currency_code,
+                    "amount" => Cart::getCart()->base_grand_total,
+                    "currency" => Cart::getCart()->base_currency_code,
                     "source" => $stripeToken,
-                    "description" => "Purchased ".$cart->items_count." items on ".config('app.name'),
+                    "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
                     'application_fee_amount' => $applicationFee * 100,
                     'statement_descriptor' => $this->statementDescriptor,
                 ], [
@@ -265,10 +265,10 @@ class StripeConnectController extends Controller
                     $applicationFee = (0.029 * $applicationFee) + (0.02 * $applicationFee) + 0.3;
 
                     $result = StripeCharge::create([
-                        "amount" => round($cart->base_grand_total, 2) * 100,
-                        "currency" => $cart->base_currency_code,
+                        "amount" => round(Cart::getCart()->base_grand_total, 2) * 100,
+                        "currency" => Cart::getCart()->base_currency_code,
                         "source" => $stripeToken,
-                        "description" => "Purchased ".$cart->items_count." items on ".config('app.name'),
+                        "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
                         'application_fee_amount' => round($applicationFee, 2) * 100,
                         'statement_descriptor' => $this->statementDescriptor,
                     ], [
@@ -277,15 +277,15 @@ class StripeConnectController extends Controller
                 } else {
                     $applicationFee = $cart->base_grand_total;
                     $applicationFee = (0.029 * $applicationFee) + (0.02 * $applicationFee) + 0.3;
-                    $applicationFee1 = 0.02 * ($applicationFee + $cart->base_grand_total12);
+                    $applicationFee1 = 0.02 * ($applicationFee + $cart->base_grand_total);
 
                     $cart->update([
                         'base_grand_total' => $cart->grand_total + $applicationFee,
-                        'grand_total' => $cart->base_grand_total
+                        'grand_total' => $cart->grand_total + core()->convertPrice($applicationFee, $cart->cart_currency_code)
                     ]);
 
                     $result = StripeCharge::create([
-                        "amount" => round(Cart::getCart()->base_grand_total, 2) * 100,
+                        "amount" => round(Cart::getCart()->base_grand_total, 2) * 100 + round($applicationFee, 2) * 100,
                         "currency" => Cart::getCart()->base_currency_code,
                         "source" => $stripeToken,
                         "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
@@ -298,6 +298,13 @@ class StripeConnectController extends Controller
             }
 
         } catch(\Exception $e) {
+            if (core()->getConfigData('stripe.connect.details.stripefees') == "customer") {
+                $cart->update([
+                    'base_grand_total' => $cart->grand_total - $applicationFee,
+                    'grand_total' => $cart->grand_total - core()->convertPrice($applicationFee, $cart->cart_currency_code)
+                ]);
+            }
+
             $result = false;
         }
 
