@@ -45,7 +45,7 @@ class ProductRepository extends Repository
      *
      * @var array
      */
-    protected $productImage;
+    protected $productImageRepository;
 
     /**
      * ProductDownloadableLinkRepository object
@@ -79,7 +79,8 @@ class ProductRepository extends Repository
         ProductImageRepository $productImageRepository,
         ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         ProductDownloadableSampleRepository $productDownloadableSampleRepository,
-        App $app)
+        App $app
+    )
     {
         $this->attributeRepository = $attributeRepository;
 

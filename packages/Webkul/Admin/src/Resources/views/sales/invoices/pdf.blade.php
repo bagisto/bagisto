@@ -147,7 +147,7 @@
                                 <td>
                                     {{ core()->getConfigData('sales.paymentmethods.' . $invoice->order->payment->method . '.title') }}
                                 </td>
-                                
+
                                 <td>
                                     {{ $invoice->order->shipping_title }}
                                 </td>

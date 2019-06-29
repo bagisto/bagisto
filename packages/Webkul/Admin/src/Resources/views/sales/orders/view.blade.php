@@ -252,7 +252,7 @@
                                                     <td>
                                                         {{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}
                                                     </td>
-                                                    
+
                                                     <td>
                                                         {{ $item->name }}
 
@@ -305,7 +305,7 @@
                                         <td>-</td>
                                         <td>{{ core()->formatBasePrice($order->base_sub_total) }}</td>
                                     </tr>
-                                    
+
                                     @if ($order->haveStockableItems())
                                         <tr>
                                             <td>{{ __('admin::app.sales.orders.shipping-handling') }}</td>

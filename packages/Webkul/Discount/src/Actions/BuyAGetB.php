@@ -23,16 +23,30 @@ class BuyAGetB extends Action
 
             if ($realQty > $disc_quantity) {
                 $amountDiscounted = $amountDiscounted * $disc_quantity;
+            } else {
+                $amountDiscounted = $amountDiscounted * $realQty;
             }
 
-            if ($amountDiscounted > $item['price']) {
-                $amountDiscounted = $item['price'];
+            if ($amountDiscounted > $item['base_price'] && $realQty == 1) {
+                $amountDiscounted = $item['base_price'];
             }
         }
 
         $report['discount'] = $amountDiscounted;
-        $report['formatted_discount'] = core()->formatPrice($amountDiscounted, $cart->cart_currency_code);
+        $report['formatted_discount'] = core()->currency($amountDiscounted);
 
         return $report;
+    }
+
+    /**
+     * Calculates the impact on the shipping amount if the rule is apply_to_shipping enabled
+     */
+    public function calculateOnShipping($cart)
+    {
+        $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_grand_total;
+
+        $discountOnShipping = ($percentOfDiscount / 100) * $cart->selected_shipping_rate->base_price;
+
+        return $discountOnShipping;
     }
 }

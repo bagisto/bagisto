@@ -75,7 +75,7 @@
                         @include ('shop::products.view.configurable-options')
 
                         @include ('shop::products.view.downloadable')
-
+                        
                         {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
                         <accordian :title="'{{ __('shop::app.products.description') }}'" :active="true">
@@ -148,18 +148,11 @@
             }
         });
 
-        document.onreadystatechange = function () {
-            var state = document.readyState
-            var galleryTemplate = document.getElementById('product-gallery-template');
+        $(document).ready(function() {
             var addTOButton = document.getElementsByClassName('add-to-buttons')[0];
-
-            if (galleryTemplate) {
-                if (state != 'interactive') {
-                    document.getElementById('loader').style.display="none";
-                    addTOButton.style.display="flex";
-                }
-            }
-        }
+            document.getElementById('loader').style.display="none";
+            addTOButton.style.display="flex";
+        });
 
         window.onload = function() {
             var thumbList = document.getElementsByClassName('thumb-list')[0];
@@ -210,19 +203,6 @@
                 }
             }
             document.getElementById("quantity").value = quantity;
-
-            var buyNowLink = $('.btn.buynow').attr('data-href');
-            var splitted = buyNowLink.split("/");
-            lastItem = splitted[splitted.length - 2];
-
-            splitted.pop();
-            splitted.pop();
-
-            var joined = splitted.join('/');
-
-            var newBuyNowUrl = joined + '/' + lastItem + '/' + quantity;
-
-            $('.btn.buynow').attr('data-href', newBuyNowUrl);
 
             event.preventDefault();
         }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPhoneColumnInCustomersTable extends Migration
+class RemoveIsGuestFromCartRulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddPhoneColumnInCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::table('customers', function (Blueprint $table) {
-            if (! Schema::hasColumn('customers', 'phone')) {
-                $table->string('phone')->unique()->nullable();
-            }
+        Schema::table('cart_rules', function (Blueprint $table) {
+            $table->dropColumn('is_guest');
         });
     }
 
@@ -27,8 +25,8 @@ class AddPhoneColumnInCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::table('customers', function (Blueprint $table) {
-            //
+        Schema::table('cart_rules', function (Blueprint $table) {
+            $table->boolean('is_guest')->default(0);
         });
     }
 }

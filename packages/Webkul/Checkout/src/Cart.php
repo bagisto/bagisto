@@ -648,12 +648,12 @@ class Cart {
             $option = $attribute->options()->where('id', $product->{$attribute->code})->first();
 
             $data['attributes'][$attribute->code] = [
-                'attribute_name' => $attribute->name,
+                'attribute_name' => $attribute->name ?  $attribute->name : $attribute->admin_name,
                 'option_id' => $option->id,
                 'option_label' => $option->label,
             ];
 
-            $labels[] = $attribute->name . ' : ' . $option->label;
+            $labels[] = ($attribute->name ? $attribute->name : $attribute->admin_name) . ' : ' . $option->label;
         }
 
         $data['html'] = implode(', ', $labels);
@@ -1102,7 +1102,9 @@ class Cart {
             'base_sub_total' => $data['base_sub_total'],
             'tax_amount' => $data['tax_total'],
             'base_tax_amount' => $data['base_tax_total'],
-            
+            'discount_amount' => $data['discount_amount'],
+            'base_discount_amount' => $data['base_discount_amount'],
+
             'billing_address' => array_except($data['billing_address'], ['id', 'cart_id']),
             'payment' => array_except($data['payment'], ['id', 'cart_id']),
 
@@ -1167,7 +1169,8 @@ class Cart {
      *
      * Move a wishlist item to cart
      */
-    public function moveToCart($wishlistItem) {
+    public function moveToCart($wishlistItem)
+    {
         $product = $wishlistItem->product;
 
         if ($product->type == 'simple') {

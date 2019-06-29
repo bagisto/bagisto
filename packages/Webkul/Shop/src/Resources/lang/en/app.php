@@ -299,7 +299,7 @@ return [
                 'unlimited' => 'Unlimited',
                 'download-error' => 'Download link has been expired.'
             ],
- 
+
             'review' => [
                 'index' => [
                     'title' => 'Reviews',
@@ -359,18 +359,18 @@ return [
         'deleteall' => 'Delete All',
         'moveall' => 'Move All Products To Cart',
         'move-to-cart' => 'Move To Cart',
-        'error' => 'Cannot Add The Product To Wishlist Due To Unknown Problems, Please Checkback Later',
-        'add' => 'Item Successfully Added To Wishlist',
-        'remove' => 'Item Successfully Removed From Wishlist',
-        'moved' => 'Item Successfully Moved To Wishlist',
-        'move-error' => 'Item Cannot Be Moved To Wishlist, Please Try Again Later',
-        'success' => 'Item Successfully Added To Wishlist',
-        'failure' => 'Item Cannot Be Added To Wishlist, Please Try Again Later',
-        'already' => 'Item Already Present In Your Wishlist',
-        'removed' => 'Item Successfully Removed From Wishlist',
-        'remove-fail' => 'Item Cannot Be Removed From Wishlist, Please Try Again Later',
-        'empty' => 'You do not have any items in your Wishlist',
-        'remove-all-success' => 'All The Items From Your Wishlist Have Been Removed',
+        'error' => 'Cannot add product to wishlist due to unknown problems, please checkback later',
+        'add' => 'Item successfully added to wishlist',
+        'remove' => 'Item successfully removed from wishlist',
+        'moved' => 'Item successfully moved To cart',
+        'move-error' => 'Item cannot be moved to wishlist, Please try again later',
+        'success' => 'Item successfully added to wishlist',
+        'failure' => 'Item cannot be added to wishlist, Please try again later',
+        'already' => 'Item already present in your wishlist',
+        'removed' => 'Item successfully removed from wishlist',
+        'remove-fail' => 'Item cannot Be removed from wishlist, Please try again later',
+        'empty' => 'You do not have any items in your wishlist',
+        'remove-all-success' => 'All the items from your wishlist have been removed',
     ],
 
     // 'reviews' => [

@@ -5,9 +5,9 @@ namespace Webkul\Sales\Repositories;
 use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Model;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\Order;
+use Webkul\Sales\Repositories\OrderItemRepository;
 
 /**
  * Order Reposotory
@@ -15,7 +15,6 @@ use Webkul\Sales\Contracts\Order;
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class OrderRepository extends Repository
 {
     /**

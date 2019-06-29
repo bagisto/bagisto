@@ -75,6 +75,8 @@ return [
         'edit' => 'Edit',
         'create' => 'Add',
         'delete' => 'Delete',
+        'promotions' => 'Promotions',
+        'cart-rules' => 'Cart Rules'
     ],
 
     'dashboard' => [
@@ -783,7 +785,10 @@ return [
             'edit-help-title' => 'Edit Customer',
             'delete-help-title' => 'Delete Customer',
             'mass-destroy-success' => 'Customers deleted successfully',
-            'mass-update-success' => 'Customers updated successfully'
+            'mass-update-success' => 'Customers updated successfully',
+            'status' => 'Status',
+            'active' => 'Active',
+            'in-active' => 'Inactive'
         ],
 
         'reviews' => [
@@ -821,6 +826,7 @@ return [
         'create-cart-rule' => 'Create Cart Rule',
         'save-btn-title' => 'Create',
         'edit-btn-title' => 'Edit',
+        'save' => 'Save',
         'select-attr' => 'Select Attribute',
         'select-attr-fam' => 'Select Attribute Family',
         'select-cart-attr' => 'Select Cart Attribute',
@@ -834,7 +840,7 @@ return [
             'cust-groups' => 'Customer Groups',
             'priority' => 'Priority',
             'add-condition' => 'Add Conditions',
-            'disc_amt' => 'Discount Amount(B)',
+            'disc_amt' => 'Discount Amount',
             'disc_percent' => 'Discount Percentage',
             'is-coupon' => 'Use Coupon',
             'is-coupon-yes' => 'Yes',
@@ -849,6 +855,7 @@ return [
             'any' => 'Any',
             'all' => 'All',
             'conditions' => 'Conditions',
+            'apply' => 'Apply',
             'are' => 'are',
             'true' => 'true',
             'false' => 'false',
@@ -857,7 +864,8 @@ return [
             'free-shipping' => 'Free Shipping',
             'is-guest' => 'For Guests',
             'disc_qty' => 'Max. Quantity Allowed To Be Discounted',
-            'test-mode' => 'Choose how to test conditions'
+            'test-mode' => 'Choose how to test conditions',
+            'labels' => 'Labels'
         ],
 
         'status' => [
@@ -873,7 +881,8 @@ return [
             'coupon-failed' => 'Coupon failed to apply',
             'no-coupon' => '* Coupon not applicable',
             'coupon-removed' => 'Coupon removed successfully',
-            'coupon-remove-failed' => 'Coupon removal failed'
+            'coupon-remove-failed' => 'Coupon removal failed',
+            'duplicate-coupon' => 'Coupon already exists, please try again with a different coupon'
         ],
 
         'catalog' => [
@@ -885,8 +894,9 @@ return [
             'adjust-to-value' => 'Adjust to discount value',
             'condition-missing' => 'Please check conditons, some values might be missing'
         ],
+
         'cart' => [
-            'buy-atleast' => 'Buy Atleast (N)',
+            'buy-atleast' => 'Buy Atleast',
             'apply-to-shipping' => 'Apply to shipping'
         ]
     ],
@@ -1009,7 +1019,7 @@ return [
             'footer' => 'Footer',
             'content' => 'Content',
             'footer-content' => 'Footer Text',
-            'locale-options' => 'Locale Options',
+            'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',

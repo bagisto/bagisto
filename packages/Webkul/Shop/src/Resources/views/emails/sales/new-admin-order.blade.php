@@ -29,39 +29,37 @@
         </div>
 
         <div style="display: flex;flex-direction: row;margin-top: 20px;justify-content: space-between;margin-bottom: 40px;">
-            @if ($order->shipping_address)
-                <div style="line-height: 25px;">
-                    <div style="font-weight: bold;font-size: 16px;color: #242424;">
-                        {{ __('shop::app.mail.order.shipping-address') }}
-                    </div>
-
-                    <div>
-                        {{ $order->shipping_address->name }}
-                    </div>
-
-                    <div>
-                        {{ $order->shipping_address->address1 }}, {{ $order->shipping_address->state }}
-                    </div>
-
-                    <div>
-                        {{ core()->country_name($order->shipping_address->country) }} {{ $order->shipping_address->postcode }}
-                    </div>
-
-                    <div>---</div>
-
-                    <div style="margin-bottom: 40px;">
-                        {{ __('shop::app.mail.order.contact') }} : {{ $order->shipping_address->phone }}
-                    </div>
-
-                    <div style="font-size: 16px;color: #242424;">
-                        {{ __('shop::app.mail.order.shipping') }}
-                    </div>
-
-                    <div style="font-weight: bold;font-size: 16px;color: #242424;">
-                        {{ $order->shipping_title }}
-                    </div>
+            <div style="line-height: 25px;">
+                <div style="font-weight: bold;font-size: 16px;color: #242424;">
+                    {{ __('shop::app.mail.order.shipping-address') }}
                 </div>
-            @endif
+
+                <div>
+                    {{ $order->shipping_address->name }}
+                </div>
+
+                <div>
+                    {{ $order->shipping_address->address1 }}, {{ $order->shipping_address->state }}
+                </div>
+
+                <div>
+                    {{ core()->country_name($order->shipping_address->country) }} {{ $order->shipping_address->postcode }}
+                </div>
+
+                <div>---</div>
+
+                <div style="margin-bottom: 40px;">
+                    {{ __('shop::app.mail.order.contact') }} : {{ $order->shipping_address->phone }}
+                </div>
+
+                <div style="font-size: 16px;color: #242424; font-weight: bold">
+                    {{ __('shop::app.mail.order.shipping') }}
+                </div>
+
+                <div style="font-size: 16px;color: #242424;">
+                    {{ $order->shipping_title }}
+                </div>
+            </div>
 
             <div style="line-height: 25px;">
                 <div style="font-weight: bold;font-size: 16px;color: #242424;">
@@ -86,51 +84,54 @@
                     {{ __('shop::app.mail.order.contact') }} : {{ $order->billing_address->phone }}
                 </div>
 
-                <div style="font-size: 16px; color: #242424;">
+                <div style="font-size: 16px; color: #242424; font-weight: bold">
                     {{ __('shop::app.mail.order.payment') }}
                 </div>
 
-                <div style="font-weight: bold;font-size: 16px; color: #242424;">
+                <div style="font-size: 16px; color: #242424;">
                     {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                 </div>
             </div>
         </div>
 
-        @foreach ($order->items as $item)
-            <div style="background: #FFFFFF;border: 1px solid #E8E8E8;border-radius: 3px;padding: 20px;margin-bottom: 10px">
-                <p style="font-size: 18px;color: #242424;line-height: 24px;margin-top: 0;margin-bottom: 10px;font-weight: bold;">
-                    {{ $item->name }}
-                </p>
+        <div class="section-content">
+            <div class="table mb-20">
+                <table style="overflow-x: auto; border-collapse: collapse;
+                border-spacing: 0;width: 100%">
+                    <thead>
+                        <tr style="background-color: #f2f2f2">
+                            <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.SKU') }}</th>
+                            <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.product-name') }}</th>
+                            <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.price') }}</th>
+                            <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.qty') }}</th>
+                        </tr>
+                    </thead>
 
-                <div style="margin-bottom: 10px;">
-                    <label style="font-size: 16px;color: #5E5E5E;">
-                        {{ __('shop::app.mail.order.price') }}
-                    </label>
-                    <span style="font-size: 18px;color: #242424;margin-left: 40px;font-weight: bold;">
-                        {{ core()->formatBasePrice($item->base_price) }}
-                    </span>
-                </div>
+                    <tbody>
+                        @foreach ($order->items as $item)
+                            <tr>
+                                <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}" style="text-align: left;padding: 8px">{{ $item->child ? $item->child->sku : $item->sku }}</td>
 
-                <div style="margin-bottom: 10px;">
-                    <label style="font-size: 16px;color: #5E5E5E;">
-                        {{ __('shop::app.mail.order.quantity') }}
-                    </label>
-                    <span style="font-size: 18px;color: #242424;margin-left: 40px;font-weight: bold;">
-                        {{ $item->qty_ordered }}
-                    </span>
-                </div>
+                                <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">{{ $item->name }}</td>
 
-                @if ($html = $item->getOptionDetailHtml())
-                    <div style="">
-                        <label style="margin-top: 10px; font-size: 16px;color: #5E5E5E; display: block;">
-                            {{ $html }}
-                        </label>
-                    </div>
-                @elseif ($item->type == 'downloadable')
-                    <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
-                @endif
+                                <td data-value="{{ __('shop::app.customer.account.order.view.price') }}" style="text-align: left;padding: 8px">{{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                </td>
+
+                                <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}" style="text-align: left;padding: 8px">{{ $item->qty_ordered }}</td>
+
+                                @if ($html = $item->getOptionDetailHtml())
+                                <div style="">
+                                    <label style="margin-top: 10px; font-size: 16px;color: #5E5E5E; display: block;">
+                                        {{ $html }}
+                                    </label>
+                                </div>
+                            @endif
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-        @endforeach
+        </div>
 
         <div style="font-size: 16px;color: #242424;line-height: 30px;float: right;width: 40%;margin-top: 20px;">
             <div>
@@ -140,14 +141,12 @@
                 </span>
             </div>
 
-            @if ($order->shipping_address)
-                <div>
-                    <span>{{ __('shop::app.mail.order.shipping-handling') }}</span>
-                    <span style="float: right;">
-                        {{ core()->formatBasePrice($order->base_shipping_amount) }}
-                    </span>
-                </div>
-            @endif
+            <div>
+                <span>{{ __('shop::app.mail.order.shipping-handling') }}</span>
+                <span style="float: right;">
+                    {{ core()->formatBasePrice($order->base_shipping_amount) }}
+                </span>
+            </div>
 
             <div>
                 <span>{{ __('shop::app.mail.order.tax') }}</span>

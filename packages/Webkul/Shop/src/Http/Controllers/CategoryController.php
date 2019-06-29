@@ -2,7 +2,6 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Category\Repositories\CategoryRepository;
 
 /**
@@ -36,7 +35,7 @@ class CategoryController extends Controller
     public function __construct(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
-        
+
         $this->_config = request('_config');
     }
 

@@ -26,7 +26,7 @@
 
                     <div class="page-action">
                         <button type="submit" class="btn btn-lg btn-primary">
-                            {{ __('admin::app.promotion.edit-btn-title') }}
+                            {{ __('admin::app.promotion.save') }}
                         </button>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                                         <span class="control-error" v-if="errors.has('per_customer')">@{{ errors.first('per_customer') }}</span>
                                     </div> --}}
 
-                                    <div class="control-group" :class="[errors.has('is_guest') ? 'has-error' : '']">
+                                    {{-- <div class="control-group" :class="[errors.has('is_guest') ? 'has-error' : '']">
                                         <label for="is_guest" class="required">{{ __('admin::app.promotion.general-info.is-guest') }}</label>
 
                                         <select type="text" class="control" name="is_guest" v-model="is_guest" v-validate="'required'" value="{{ old('is_guest')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-guest') }}&quot;">
@@ -153,7 +153,7 @@
                                         </select>
 
                                         <span class="control-error" v-if="errors.has('is_guest')">@{{ errors.first('is_guest') }}</span>
-                                    </div>
+                                    </div> --}}
 
                                     {{-- <div class="control-group" :class="[errors.has('usage_limit') ? 'has-error' : '']">
                                         <label for="usage_limit" class="required">{{ __('admin::app.promotion.general-info.limit') }}</label>
@@ -175,7 +175,9 @@
 
                             <accordian :active="false" title="Conditions">
                                 <div slot="body">
-                                    <div class="add-condition">
+                                    <input type="hidden" name="all_conditions" v-model="all_conditions">
+
+                                    {{-- <div class="add-condition">
                                         <div class="control-group">
                                             <label for="criteria" class="required">{{ __('admin::app.promotion.general-info.add-condition') }}</label>
 
@@ -183,11 +185,11 @@
                                                 <option value="cart">Cart Properties</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="control-group">
                                         {{ __('admin::app.promotion.general-info.test-mode') }}
-                                        <select class="control" v-model="match_criteria" name="match_criteria" style="margin-right: 15px;">
+                                        <select class="control" v-model="match_criteria" style="margin-right: 15px;">
                                             {{ $i = 0 }}
                                             @foreach(config('pricerules.test_mode') as $key => $value)
                                                 <option value="{{ $key }}">{{ $value }}</option>
@@ -198,52 +200,45 @@
 
                                     <div class="condition-set">
                                         <!-- Cart Attributes -->
-                                        <div v-for="(condition, index) in conditions_list" :key="index">
-                                            <div class="control-container mt-20">
-                                                <div class="title-bar">
-                                                    <span>Cart Attribute is </span>
-                                                    <span class="icon cross-icon" v-on:click="removeCartAttr(index)"></span>
-                                                </div>
+                                        <div class="control-container mt-20" v-for="(condition, index) in conditions_list" :key="index">
+                                            <select class="control" name="cart_attributes[]" v-model="conditions_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableCondition($event, index)">
+                                                <option disabled="disabled">Select Option</option>
+                                                <option v-for="(cart_ip, index1) in cart_input" :value="cart_ip.code" :key="index1">@{{ cart_ip.name }}</option>
+                                            </select>
 
-                                                <div class="control-group mt-10" :key="index">
-                                                    <select class="control" name="cart_attributes[]" v-model="conditions_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px;" v-on:change="enableCondition($event, index)">
-                                                        <option disabled="disabled">Select Option</option>
-                                                        <option v-for="(cart_ip, index1) in cart_input" :value="cart_ip.code" :key="index1">@{{ cart_ip.name }}</option>
+                                            <div v-if='conditions_list[index].type == "string"' style="display: flex">
+                                                <select class="control" name="cart_attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
+                                                    <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
+                                                </select>
+
+                                                <div v-if='conditions_list[index].attribute == "shipping_state"'>
+                                                    <select class="control" v-model="conditions_list[index].value">
+                                                        <option disabled="disabled">Select State</option>
+                                                        <optgroup v-for='(state, code) in country_and_states.states' :label="code">
+                                                            <option v-for="(stateObj, index) in state" :value="stateObj.code">@{{ stateObj.default_name }}</option>
+                                                        </optgroup>
                                                     </select>
-
-                                                    <div v-if='conditions_list[index].type == "string"'>
-                                                        <select class="control" name="cart_attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
-                                                            <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
-                                                        </select>
-
-                                                        <div v-if='conditions_list[index].attribute == "shipping_state"'>
-                                                            <select class="control" v-model="conditions_list[index].value">
-                                                                <option disabled="disabled">Select State</option>
-                                                                <optgroup v-for='(state, code) in country_and_states.states' :label="code">
-                                                                    <option v-for="(stateObj, index) in state" :value="stateObj.code">@{{ stateObj.default_name }}</option>
-                                                                </optgroup>
-                                                            </select>
-                                                        </div>
-
-                                                        <div v-if='conditions_list[index].attribute == "shipping_country"'>
-                                                            <select class="control" v-model="conditions_list[index].value">
-                                                                <option disabled="disabled">Select Country</option>
-                                                                <option v-for="(country, index) in country_and_states.countries" :value="country.code">@{{ country.name }}</option>
-                                                            </select>
-                                                        </div>
-
-                                                        <input type="text" class="control" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value" v-if='conditions_list[index].attribute != "shipping_state" && conditions_list[index].attribute != "shipping_country"'>
-                                                    </div>
-
-                                                    <div v-if='conditions_list[index].type == "numeric"'>
-                                                        <select class="control" name="attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
-                                                            <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
-                                                        </select>
-
-                                                        <input type="number" step="0.1000" class="control" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value">
-                                                    </div>
                                                 </div>
+
+                                                <div v-if='conditions_list[index].attribute == "shipping_country"'>
+                                                    <select class="control" v-model="conditions_list[index].value">
+                                                        <option disabled="disabled">Select Country</option>
+                                                        <option v-for="(country, index) in country_and_states.countries" :value="country.code">@{{ country.name }}</option>
+                                                    </select>
+                                                </div>
+
+                                                <input class="control" type="text" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value" v-if='conditions_list[index].attribute != "shipping_state" && conditions_list[index].attribute != "shipping_country"'>
                                             </div>
+
+                                            <div v-if='conditions_list[index].type == "numeric"' style="display: flex">
+                                                <select class="control" name="attributes[]" v-model="conditions_list[index].condition" style="margin-right: 15px;">
+                                                    <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
+                                                </select>
+
+                                                <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value">
+                                            </div>
+
+                                            <span class="icon trash-icon" v-on:click="removeCartAttr(index)"></span>
                                         </div>
                                     </div>
 
@@ -292,21 +287,21 @@
                                             <label for="free_shipping" class="required">{{ __('admin::app.promotion.general-info.free-shipping') }}</label>
 
                                             <select type="text" class="control" name="free_shipping" v-model="free_shipping" v-validate="'required'" value="{{ old('free_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.free-shipping') }}&quot;">
-                                                <option value="0" :selected="free_shipping == 0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+                                                <option value="1">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
 
-                                                <option value="1" :selected="free_shipping == 1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                                                <option value="0">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
                                             </select>
 
                                             <span class="control-error" v-if="errors.has('free_shipping')">@{{ errors.first('free_shipping') }}</span>
                                         </div>
 
                                         <div class="control-group" :class="[errors.has('apply_to_shipping') ? 'has-error' : '']">
-                                            <label for="customer_groups" class="required">{{ __('admin::app.promotion.cart.apply-to-shipping') }}</label>
+                                            <label for="apply_to_shipping" class="required">{{ __('admin::app.promotion.cart.apply-to-shipping') }}</label>
 
                                             <select type="text" class="control" name="apply_to_shipping" v-model="apply_to_shipping" v-validate="'required'" value="{{ old('apply_to_shipping') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.apply-to-shipping') }}&quot;">
-                                                <option value="0" :selected="apply_to_shipping == 0">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
+                                                <option value="1">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
 
-                                                <option value="1" :selected="apply_to_shipping == 1">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
+                                                <option value="0">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
                                             </select>
 
                                             <span class="control-error" v-if="errors.has('apply_to_shipping')">@{{ errors.first('apply_to_shipping') }}</span>
@@ -358,7 +353,7 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="labels">
+                            <accordian :active="false" :title="'{{ __('admin::app.promotion.general-info.labels') }}'">
                                 <div slot="body">
                                     @foreach($cart_rule[3]->labels as $label)
                                         <span>[{{ $label->channel->code }}]</span>
@@ -398,7 +393,6 @@
                         use_coupon: null,
                         // auto_generation: 0,
                         usage_limit: 0,
-                        is_guest: 0,
 
                         action_type: null,
                         apply: null,
@@ -431,7 +425,7 @@
                         //     @endforeach
                         // },
 
-                        criteria: null,
+                        criteria: 'cart',
                         conditions: @json($cart_rule[0]).conditions,
                         cart_input: @json($cart_rule[0]).attributes,
                         actions: @json($cart_rule[0]).actions,

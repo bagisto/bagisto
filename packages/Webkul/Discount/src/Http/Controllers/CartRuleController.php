@@ -190,6 +190,16 @@ class CartRuleController extends Controller
             // save the coupon used in coupon section
             $coupons['code'] = $data['code'];
 
+            $couponExists = $this->cartRuleCoupon->findWhere([
+                'code' => $coupons['code']
+            ]);
+
+            if ($couponExists->count()) {
+                session()->flash('warning', trans('admin::app.promotion.status.duplicate-coupon'));
+
+                return redirect()->back();
+            }
+
             // set coupon usage per customer same as per_customer limit which is disabled for now
             $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
             // unset coupon code from coupon section
@@ -390,6 +400,18 @@ class CartRuleController extends Controller
 
             $coupons['code'] = $data['code'];
 
+            $couponExists = $this->cartRuleCoupon->findWhere([
+                'code' => $coupons['code']
+            ]);
+
+            if ($couponExists->count()) {
+                if ($couponExists->first()->cart_rule_id != $id) {
+                    session()->flash('warning', trans('admin::app.promotion.status.duplicate-coupon'));
+
+                    return redirect()->back();
+                }
+            }
+
             unset($data['code']);
             // } else {
             //     $data['auto_generation'] = 1;
@@ -425,20 +447,28 @@ class CartRuleController extends Controller
 
         // check coupons set conditions
         if (isset($coupons)) {
-            $coupons['cart_rule_id'] = $ruleUpdated->id;
             // $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
+            $coupons['cart_rule_id'] = $ruleUpdated->id;
 
-            $couponUpdated = $ruleUpdated->coupons->update($coupons);
+            if ($ruleUpdated->coupons == null) {
+                $couponCreatedOrUpdated = $this->cartRuleCoupon->create($coupons);
+            } else {
+                $couponCreatedOrUpdated = $ruleUpdated->coupons->update($coupons);
+            }
+        } else {
+            if ($ruleUpdated->coupons != null) {
+                $ruleUpdated->coupons->delete();
+            }
         }
 
         if ($ruleUpdated && $ruleGroupUpdated && $ruleChannelUpdated) {
-            if (isset($couponUpdated) && $couponUpdated) {
-                session()->flash('info', trans('admin::app.promotion.status.success-coupon'));
+            if (isset($couponCreatedOrUpdated) && $couponCreatedOrUpdated) {
+                session()->flash('success', trans('admin::app.promotion.status.success-coupon'));
             }
 
-            session()->flash('info', trans('admin::app.promotion.status.update-success'));
+            session()->flash('success', trans('admin::app.promotion.status.update-success'));
         } else {
-            session()->flash('info', trans('admin::app.promotion.status.update-success'));
+            session()->flash('success', trans('admin::app.promotion.status.update-success'));
 
             return redirect()->back();
         }

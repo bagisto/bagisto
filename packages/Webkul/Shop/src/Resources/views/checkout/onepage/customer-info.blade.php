@@ -221,7 +221,6 @@
                     <label class="checkbox-view" for="billing[use_for_shipping]"></label>
                     {{ __('shop::app.checkout.onepage.use_for_shipping') }}
                 </span>
-
             </div>
         @endif
 

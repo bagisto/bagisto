@@ -19,29 +19,34 @@ class NonCouponAbleRule extends Discount
 
         $applicableRules = array();
 
-        if (auth()->guard('customer')->check()) {
-            $rules = $this->cartRule->findWhere([
-                'use_coupon' => 0,
-                'status' => 1
-            ]);
-        } else {
-            $rules = $this->cartRule->findWhere([
-                'use_coupon' => 0,
-                'is_guest' => 1,
-                'status' => 1
-            ]);
-        }
+        $rules = $this->cartRule->findWhere([
+            'use_coupon' => 0,
+            'status' => 1
+        ]);
 
-        $alreadyAppliedRule = $this->cartRuleCart->findWhere([
+        $alreadyAppliedCartRuleCart = $this->cartRuleCart->findWhere([
             'cart_id' => $cart->id,
         ]);
 
+        if (count($alreadyAppliedCartRuleCart)) {
+            $alreadyAppliedRule = $alreadyAppliedCartRuleCart->first()->cart_rule;
 
-        if (count($alreadyAppliedRule)) {
-            $alreadyAppliedRule = $alreadyAppliedRule->first()->cart_rule;
+            $validated = $this->validateRule($alreadyAppliedRule);
+
+            if (! $validated) {
+                // if the validation fails then the cart rule gets deleted from cart rule cart
+                $alreadyAppliedCartRuleCart->first()->delete();
+
+                $this->resetShipping($cart);
+
+                // all discount is cleared fro mthe cart and cart items table
+                $this->clearDiscount();
+
+                return false;
+            }
 
             if ($alreadyAppliedRule->use_coupon) {
-                return null;
+                return false;
             }
         }
 
@@ -56,10 +61,25 @@ class NonCouponAbleRule extends Discount
 
                 $impact = $actionInstance->calculate($rule, $item, $cart);
 
-                array_push($applicableRules, [
-                    'rule' => $rule,
-                    'impact' => $impact
-                ]);
+                if ($impact['discount'] > 0) {
+                    array_push($applicableRules, [
+                        'rule' => $rule,
+                        'impact' => $impact
+                    ]);
+                }
+
+                if (count($alreadyAppliedCartRuleCart)) {
+                    $alreadyAppliedRule = $alreadyAppliedCartRuleCart->first()->cart_rule;
+
+                    if ($alreadyAppliedRule->id == $rule->id) {
+                        if ($impact['discount'] == 0) {
+                            $alreadyAppliedCartRuleCart->first()->delete();
+
+                            // all discount is cleared from cart and cart items table
+                            $this->clearDiscount();
+                        }
+                    }
+                }
             }
         }
 
@@ -99,7 +119,7 @@ class NonCouponAbleRule extends Discount
                 if (count($endRules) == 1) {
                     $this->save(array_first($endRules)['rule']);
 
-                    return $endRules;
+                    return array_first($endRules)['impact'];
                 }
 
                 $maxImpact = 0;
@@ -165,7 +185,7 @@ class NonCouponAbleRule extends Discount
                 } else {
                     $this->save(array_first($maxImpacts)['rule']);
 
-                    return $maxImpacts;
+                    return array_first($applicableRules)['impact'];
                 }
             } else {
                 $this->save(array_first($prioritySorted)['rule']);
@@ -173,13 +193,11 @@ class NonCouponAbleRule extends Discount
                 return $prioritySorted;
             }
         } else if (count($applicableRules) == 1) {
-            $rule = array_first($applicableRules)['rule'];
-
-            $this->save($applicableRules);
+            $this->save(array_first($applicableRules)['rule']);
 
             return array_first($applicableRules)['impact'];
         } else {
-            return null;
+            return false;
         }
     }
 }

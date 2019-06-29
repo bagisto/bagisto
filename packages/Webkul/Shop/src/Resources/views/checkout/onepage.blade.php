@@ -153,7 +153,7 @@
                     new_shipping_address: false,
 
                     new_billing_address: false,
-
+                    
                     allAddress: {},
 
                     countryStates: @json(core()->groupedStatesByCountries()),
@@ -290,20 +290,20 @@
                     this.disable_button = true;
 
                     this.$http.post("{{ route('shop.checkout.save-payment') }}", {'payment': this.selected_payment_method})
-                        .then(function(response) {
-                            this_this.disable_button = false;
+                    .then(function(response) {
+                        this_this.disable_button = false;
 
-                            reviewHtml = Vue.compile(response.data.html)
-                            this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] + 1;
-                            this_this.current_step = this_this.step_numbers[response.data.jump_to_section];
+                        reviewHtml = Vue.compile(response.data.html)
+                        this_this.completed_step = this_this.step_numbers[response.data.jump_to_section] + 1;
+                        this_this.current_step = this_this.step_numbers[response.data.jump_to_section];
 
-                            this_this.getOrderSummary();
-                        })
-                        .catch(function (error) {
-                            this_this.disable_button = false;
+                        this_this.getOrderSummary();
+                    })
+                    .catch(function (error) {
+                        this_this.disable_button = false;
 
-                            this_this.handleErrorResponse(error.response, 'payment-form')
-                        });
+                        this_this.handleErrorResponse(error.response, 'payment-form')
+                    });
                 },
 
                 placeOrder: function() {
@@ -312,22 +312,22 @@
                     this.disable_button = true;
 
                     this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
-                        .then(function(response) {
-                            if (response.data.success) {
-                                if (response.data.redirect_url) {
-                                    window.location.href = response.data.redirect_url;
-                                } else {
-                                    window.location.href = "{{ route('shop.checkout.success') }}";
-                                }
+                    .then(function(response) {
+                        if (response.data.success) {
+                            if (response.data.redirect_url) {
+                                window.location.href = response.data.redirect_url;
+                            } else {
+                                window.location.href = "{{ route('shop.checkout.success') }}";
                             }
-                        })
-                        .catch(function (error) {
-                            this_this.disable_button = true;
+                        }
+                    })
+                    .catch(function (error) {
+                        this_this.disable_button = true;
 
-                            window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
+                        window.flashMessages = [{'type': 'alert-error', 'message': "{{ __('shop::app.common.error') }}" }];
 
-                            this_this.$root.addFlashMessages()
-                        })
+                        this_this.$root.addFlashMessages()
+                    })
                 },
 
                 handleErrorResponse: function(response, scope) {
@@ -505,7 +505,11 @@
 
                     coupon_code: null,
 
-                    error_message: ''
+                    error_message: null,
+
+                    couponChanged: false,
+
+                    changeCount: 0
                 }
             },
 
@@ -536,9 +540,28 @@
 
                     axios.post('{{ route('shop.checkout.check.coupons') }}', {code: this_this.coupon_code})
                         .then(function(response) {
-                            this_this.$emit('onApplyCoupon')
+                            this_this.$emit('onApplyCoupon');
+
+                            this_this.couponChanged = true;
                         })
-                        .catch(function(error) {});
+                        .catch(function(error) {
+                            this_this.couponChanged = true;
+
+                            this_this.error_message = error.response.data.message;
+                        });
+                },
+
+                changeCoupon: function() {
+                    console.log('called');
+                    if (this.couponChanged == true && this.changeCount == 0) {
+                        this.changeCount++;
+
+                        this.error_message = null;
+
+                        this.couponChanged = false;
+                    } else {
+                        this.changeCount = 0;
+                    }
                 },
 
                 removeCoupon: function () {
@@ -548,7 +571,11 @@
                         .then(function(response) {
                             this_this.$emit('onRemoveCoupon')
                         })
-                        .catch(function(error) {});
+                        .catch(function(error) {
+                            window.flashMessages = [{'type' : 'alert-error', 'message' : error.response.data.message}];
+
+                            this_this.$root.addFlashMessages();
+                        });
                 }
             }
         })

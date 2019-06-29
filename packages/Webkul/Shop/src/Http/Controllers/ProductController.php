@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 
@@ -31,6 +32,13 @@ class ProductController extends Controller
     protected $productRepository;
 
     /**
+     * ProductAttributeValueRepository object
+     *
+     * @var array
+     */
+    protected $productAttributeValueRepository;
+
+    /**
      * ProductDownloadableSampleRepository object
      *
      * @var array
@@ -48,17 +56,21 @@ class ProductController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Product\Repositories\ProductRepository                   $productRepository
+     * @param  \Webkul\Product\Repositories\productAttributeValueRepository     $productAttributeValueRepository
      * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
      * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
      * @return void
      */
     public function __construct(
         ProductRepository $productRepository,
+        ProductAttributeValueRepository $productAttributeValueRepository,
         ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         ProductDownloadableLinkRepository $productDownloadableLinkRepository
     )
     {
         $this->productRepository = $productRepository;
+
+        $this->productAttributeValueRepository = $productAttributeValueRepository;
 
         $this->productDownloadableSampleRepository = $productDownloadableSampleRepository;
 
@@ -79,7 +91,23 @@ class ProductController extends Controller
 
         $customer = auth()->guard('customer')->user();
 
-        return view($this->_config['view'], compact('product','customer'));
+        return view($this->_config['view'], compact('product', 'customer'));
+    }
+
+    /**
+     * Download image or file
+     *
+     * @param  int $productId, $attributeId
+     * @return \Illuminate\Http\Response
+     */
+    public function download($productId, $attributeId)
+    {
+        $productAttribute = $this->productAttributeValueRepository->findOneWhere([
+            'product_id'   => $productId,
+            'attribute_id' => $attributeId
+        ]);
+
+        return Storage::download($productAttribute['text_value']);
     }
 
     /**

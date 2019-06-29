@@ -123,6 +123,11 @@ body {
                     color: #0041ff;
                 }
             }
+
+            span {
+                display: block;
+                margin: auto;
+            }
         }
     }
 
@@ -262,35 +267,30 @@ body {
 }
 
 .control-container {
-    border: 1px solid #c7c7c7;
-    padding: 10px;
-    width: 63%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 750px;
 
-    .title-bar {
-        display: inline-flex;
-        justify-content: space-between;
-        width: 100%;
+    .control {
+        background: #fff;
+        border: 2px solid #C7C7C7;
+        @include border-radius(3px);
+        width: 150px;
+        height: 36px;
+        display: inline-block;
+        vertical-align: middle;
+        transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0px 10px;
+        font-size: 15px;
 
-        .icon {
-            cursor: pointer;
-        }
-
-        .icon.cross-icon {
-            height: 24px;
-            width: 24px;
+        &:focus {
+            border-color: #0041FF;
         }
     }
 
-    .control-group {
-        display: flex;
-        flex-direction: row;
-        align-content: center;
-        justify-content: flex-start;
-        padding: 10px;
-        border: 1px solid #c7c7c7;
-        border-radius: 2px;
-        margin-right: 15px;
-        margin-bottom: 0px;
+    .icon:hover {
+        cursor: pointer;
     }
 
     .control-group::last-child {
@@ -346,6 +346,7 @@ body {
         box-shadow: 0 5px 10px 2px rgba(0,0,0,0.08);
         border-radius: 2px;
         padding: 20px 0px 0px 20px;
+        overflow: auto;
 
         .card-title {
             font-size: 14px;
@@ -455,7 +456,7 @@ body {
                     font-size: 14px;
                     color: #8E8E8E;
                     float: right;
-                    margin-top: 9px;
+                    margin-top: -2px;
 
                     .icon {
                         vertical-align: middle;

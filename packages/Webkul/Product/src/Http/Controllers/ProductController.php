@@ -12,6 +12,7 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Product controller
@@ -337,5 +338,21 @@ class ProductController extends Controller
         } else {
             return view($this->_config['view']);
         }
+    }
+
+     /**
+     * Download image or file
+     *
+     * @param  int $productId, $attributeId
+     * @return \Illuminate\Http\Response
+     */
+    public function download($productId, $attributeId)
+    {
+        $productAttribute = $this->productAttributeValue->findOneWhere([
+            'product_id'   => $productId,
+            'attribute_id' => $attributeId
+        ]);
+
+        return Storage::download($productAttribute['text_value']);
     }
 }

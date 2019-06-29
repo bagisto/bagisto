@@ -4,7 +4,6 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
@@ -26,13 +25,6 @@ class CartController extends Controller
      * @var array
      */
     protected $_config;
-
-    /**
-     * CartRepository object
-     *
-     * @var Object
-     */
-    protected $cartRepository;
 
     /**
      * CartItemRepository object
@@ -63,22 +55,19 @@ class CartController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Checkout\Repositories\CartRepository     $cartRepository
      * @param  \Webkul\Checkout\Repositories\CartItemRepository $cartItemRepository
      * @param  \Webkul\Product\Repositories\ProductRepository   $productRepository
      * @param  \Webkul\Customer\Repositories\CartItemRepository $wishlistRepository
      * @return void
      */
     public function __construct(
-        CartRepository $cartRepository,
         CartItemRepository $cartItemRepository,
         ProductRepository $productRepository,
         WishlistRepository $wishlistRepository
     )
     {
-        $this->middleware('customer')->only(['moveToWishlist']);
 
-        $this->cartRepository = $cartRepository;
+        $this->middleware('customer')->only(['moveToWishlist']);
 
         $this->cartItemRepository = $cartItemRepository;
 
@@ -232,18 +221,24 @@ class CartController extends Controller
 
     public function buyNow($id, $quantity = 1)
     {
-        Event::fire('checkout.cart.add.before', $id);
+        try {
+            Event::fire('checkout.cart.add.before', $id);
 
-        $result = Cart::proceedToBuyNow($id, $quantity);
+            $result = Cart::proceedToBuyNow($id, $quantity);
 
-        Event::fire('checkout.cart.add.after', $result);
+            Event::fire('checkout.cart.add.after', $result);
 
-        Cart::collectTotals();
+            Cart::collectTotals();
 
-        if (! $result) {
+            if (! $result) {
+                return redirect()->back();
+            } else {
+                return redirect()->route('shop.checkout.onepage.index');
+            }
+        } catch(\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
+
             return redirect()->back();
-        } else {
-            return redirect()->route('shop.checkout.onepage.index');
         }
     }
 

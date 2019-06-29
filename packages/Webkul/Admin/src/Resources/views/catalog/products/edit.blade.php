@@ -142,7 +142,7 @@
                     @include ($view)
 
                 @endforeach
-
+                
             </div>
 
         </form>

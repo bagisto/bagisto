@@ -15,21 +15,35 @@ class PercentOfProduct extends Action
 
         $realQty = $item['quantity'];
 
-        if ($cart >= $disc_threshold) {
-            $amountDiscounted = $item['price'] * ($disc_amount / 100);
+        if ($cart->items_qty >= $disc_threshold) {
+            $amountDiscounted = $item['base_price'] * ($disc_amount / 100);
 
             if ($realQty > $disc_quantity) {
                 $amountDiscounted = $amountDiscounted * $disc_quantity;
+            } else {
+                $amountDiscounted = $amountDiscounted * $realQty;
             }
 
-            if ($amountDiscounted > $item['price']) {
-                $amountDiscounted = $item['price'];
+            if ($amountDiscounted > $item['base_price'] && $realQty == 1) {
+                $amountDiscounted = $item['base_price'];
             }
         }
 
         $report['discount'] = $amountDiscounted;
-        $report['formatted_discount'] = core()->formatPrice($amountDiscounted, $cart->cart_currency_code);
+        $report['formatted_discount'] = core()->currency($amountDiscounted);
 
         return $report;
+    }
+
+    /**
+     * Calculates the impact on the shipping amount if the rule is apply_to_shipping enabled
+     */
+    public function calculateOnShipping($cart)
+    {
+        $cart = \Cart::getCart();
+
+        $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_grand_total;
+
+        return $percentOfDiscount;
     }
 }
