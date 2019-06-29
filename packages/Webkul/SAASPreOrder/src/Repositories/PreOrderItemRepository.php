@@ -53,6 +53,8 @@ class PreOrderItemRepository extends Repository
      */
     public function canBeComplete($orderItem)
     {
+        $this->resetScope();
+
         $preOrderItem = $this->findOneByField('order_item_id', $orderItem->id);
 
         if (! $preOrderItem || $preOrderItem->status == 'completed')
