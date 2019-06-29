@@ -17,6 +17,11 @@ class DatabasePresenceVerifier extends BaseVerifier
     {
         $company = Company::getCurrent();
 
+        if (count(explode('as', $table)) == 2) {
+            $table = explode('as', $table);
+            $table = trim($table[0]);
+        }
+
         if (isset($company->id) && $table != 'admins') {
             return $this->db->connection($this->connection)->table($table)->useWritePdo()->where ('company_id', '=', $company->id);
         } else {
