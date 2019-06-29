@@ -20,7 +20,7 @@ class PreOrderItemRepository extends Repository
 
     function model()
     {
-        return 'Webkul\SAASPreOrder\Contracts\PreOrderItem';
+        return 'Webkul\PreOrder\Contracts\PreOrderItem';
     }
 
     /**
@@ -28,6 +28,19 @@ class PreOrderItemRepository extends Repository
      * @return boolean
      */
     public function havePreOrderItems($orderId)
+    {
+        return $this->scopeQuery(function ($query) use ($orderId) {
+            return $query->leftJoin('order_items', 'pre_order_items.payment_order_item_id', '=', 'order_items.id')
+                ->leftJoin('orders', 'order_items.order_id', '=', 'orders.id')
+                ->where('orders.id', $orderId);
+        })->count();
+    }
+
+    /**
+     * @param integer $orderId
+     * @return boolean
+     */
+    public function isPreOrderPaymentOrder($orderId)
     {
         return $this->scopeQuery(function ($query) use ($orderId) {
             return $query->where('pre_order_items.order_id', $orderId);

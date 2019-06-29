@@ -3,6 +3,7 @@
 namespace Webkul\SAASPreOrder\Listeners;
 
 use Webkul\SAASPreOrder\Repositories\PreOrderItemRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 /**
  * Invoice event handler
@@ -20,14 +21,24 @@ class Invoice
     protected $preOrderItemRepository;
 
     /**
+     * OrderRepository object
+     *
+     * @var Object
+    */
+    protected $orderRepository;
+
+    /**
      * Create a new Order event listener instance.
      *
-     * @param  Webkul\SAASPreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
+     * @param  Webkul\PreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
+     * @param  Webkul\Sales\Repositories\OrderRepository $orderRepository
      * @return void
      */
-    public function __construct(PreOrderItemRepository $preOrderItemRepository)
+    public function __construct(PreOrderItemRepository $preOrderItemRepository, OrderRepository $orderRepository)
     {
         $this->preOrderItemRepository = $preOrderItemRepository;
+
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -44,6 +55,12 @@ class Invoice
                 $this->preOrderItemRepository->update([
                     'status' => 'completed',
                 ], $preOrderItem->id);
+
+                if (! $item->order_item->qty_to_invoice) {
+                    $this->orderRepository->update([
+                        'status' => 'completed',
+                    ], $item->order_item->order_id);
+                }
             } else {
                 $preOrderItem = $this->preOrderItemRepository->findOneByField('order_item_id', $item->order_item_id);
 
