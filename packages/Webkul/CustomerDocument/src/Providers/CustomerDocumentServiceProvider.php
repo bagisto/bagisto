@@ -24,7 +24,7 @@ class CustomerDocumentServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
 
-        \Webkul\CustomerDocument\Models\CustomerDocument::observe(\Webkul\CustomerDocument\Observers\CustomerDocument::class);
+        \Webkul\CustomerDocument\Models\CustomerDocument::observe(\Webkul\CustomerDocument\Observers\CustomerDocumentObserver::class);
 
         $this->app->register(ModuleServiceProvider::class);
 

@@ -4,6 +4,7 @@ namespace Webkul\CustomerDocument\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\CustomerDocument\Contracts\CustomerDocument as CustomerDocumentContract;
+use Company;
 
 class CustomerDocument extends Model implements CustomerDocumentContract
 {

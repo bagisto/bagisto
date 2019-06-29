@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\CustomerDocument\Observers\Attribute;
+namespace Webkul\CustomerDocument\Observers;
 
 use Webkul\CustomerDocument\Models\CustomerDocument;
 

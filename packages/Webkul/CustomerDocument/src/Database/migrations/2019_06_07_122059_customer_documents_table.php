@@ -22,7 +22,7 @@ class CustomerDocumentsTable extends Migration
             $table->string('path');
             $table->integer('customer_id')->default(0);
             $table->integer('company_id')->unsigned();
-            $table->foreign('company_id')->references('id')->on('customer_documents')->onDelete('cascade');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->timestamps();
         });
     }
