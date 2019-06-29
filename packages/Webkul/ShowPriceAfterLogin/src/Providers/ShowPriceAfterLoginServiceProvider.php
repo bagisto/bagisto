@@ -17,25 +17,24 @@ class ShowPriceAfterLoginServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'ShowPriceAfterLogin');
 
-        $this->publishes([
-            dirname(__DIR__) . '/Resources/views/Shop/price.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/price.blade.php')
-        ]);
-        $this->publishes([
-            dirname(__DIR__) . '/Resources/views/Shop/add-to-cart.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/add-to-cart.blade.php')
-        ]);
-        $this->publishes([
-            dirname(__DIR__) . '/Resources/views/Shop/add-buttons.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/add-buttons.blade.php')
-        ]);
-        $this->publishes([
-            dirname(__DIR__) . '/Resources/views/Shop/buy-now.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/buy-now.blade.php')
-        ]);
-        $this->publishes([
-            dirname(__DIR__) . '/Resources/views/Shop/view/product-add.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/view/product-add.blade.php')
-        ]);
-        $this->publishes([
-            dirname(__DIR__) . '/Resources/views/Shop/review-price.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/review-price.blade.php')
-        ]);
-
+        // $this->publishes([
+        //     dirname(__DIR__) . '/Resources/views/Shop/price.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/price.blade.php')
+        // ]);
+        // $this->publishes([
+        //     dirname(__DIR__) . '/Resources/views/Shop/add-to-cart.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/add-to-cart.blade.php')
+        // ]);
+        // $this->publishes([
+        //     dirname(__DIR__) . '/Resources/views/Shop/add-buttons.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/add-buttons.blade.php')
+        // ]);
+        // $this->publishes([
+        //     dirname(__DIR__) . '/Resources/views/Shop/buy-now.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/buy-now.blade.php')
+        // ]);
+        // $this->publishes([
+        //     dirname(__DIR__) . '/Resources/views/Shop/view/product-add.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/view/product-add.blade.php')
+        // ]);
+        // $this->publishes([
+        //     dirname(__DIR__) . '/Resources/views/Shop/review-price.blade.php' => base_path('packages/Webkul/Shop/src/Resources/views/products/review-price.blade.php')
+        // ]);
     }
 
     /**
