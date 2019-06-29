@@ -20,7 +20,7 @@ class PreOrderItemRepository extends Repository
 
     function model()
     {
-        return 'Webkul\PreOrder\Contracts\PreOrderItem';
+        return 'Webkul\SAASPreOrder\Contracts\PreOrderItem';
     }
 
     /**

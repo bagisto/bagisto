@@ -6,6 +6,16 @@ $documents = $customerDocumentRepository->findWhere(['customer_id' => $customer-
 
 ?>
 
+@section('css')
+    @parent
+
+    <style>
+        .modal-container {
+        top: 20px !important;
+        }
+    </style>
+@stop
+
 <accordian :title="'{{ __('customerdocument::app.admin.customers.documents') }}'" :active="true">
     <div slot="body">
 
