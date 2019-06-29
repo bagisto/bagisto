@@ -13,7 +13,7 @@
         <div class="control-info mt-10 mb-10">
             @foreach($cards as $card)
                 @if(!$card->need_new_token)
-                    <div class="card-info" id="{{ $card->id }}">
+                    <div class="stripe-card-info" id="{{ $card->id }}">
                         <label class="radio-container">
                             <input type="radio" name="saved-card" id="{{ $card->id }}" value="{{ $card->id }}">
                             <span class="checkmark"></span>
