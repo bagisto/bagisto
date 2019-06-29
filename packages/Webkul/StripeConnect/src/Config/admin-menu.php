@@ -6,10 +6,8 @@ return [
         'name' => 'STRIPE',
         'route' => 'admin.stripe.seller',
         'sort' => 7,
-        'icon-class' => 'stripe-menu-icon',
-    ],
-
-    [
+        'icon-class' => 'stripe-icon',
+    ], [
         'key' => 'stripe.connect',
         'name' => 'Connect Account',
         'route' => 'admin.stripe.seller',

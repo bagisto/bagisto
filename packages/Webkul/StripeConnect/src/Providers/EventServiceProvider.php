@@ -15,6 +15,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Event::listen('bagisto.admin.layout.head', function($viewRenderEventManager) {
+            $viewRenderEventManager->addTemplate('stripe::checkout.style');
+        });
+
         Event::listen('bagisto.shop.layout.head', function($viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('stripe::checkout.style');
         });

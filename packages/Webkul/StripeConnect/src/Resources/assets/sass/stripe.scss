@@ -7,19 +7,34 @@
     right: 5px;
 }
 
-.stripe-menu-icon {
+.icon {
+    display: inline-block;
+    background-size: cover;
+}
+
+%menu-properties {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    background-size: cover;
+}
+
+.stripe-icon {
+    @extend %menu-properties;
     background-image: url("../images/icons/Icon-Stripe.svg");
 }
 
-.stripe-menu-icon.active {
-    background-image: url("../images/icons/Icon-Stripe-Active.svg");
+.active {
+    .stripe-icon {
+        @extend %menu-properties;
+        background-image: url("../images/icons/Icon-Stripe-Active.svg");
+    }
 }
 
 #stripe-pay-button label {
     display: inline;
     color: #ffffff;
 }
-
 
 .more-payment-icons {
     text-align: center;
