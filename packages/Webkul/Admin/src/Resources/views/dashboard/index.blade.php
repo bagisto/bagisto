@@ -130,12 +130,12 @@
             <div class="graph-stats">
 
                 <div class="left-card-container graph">
-                    <div class="card">
+                    <div class="card" style="overflow: hidden;">
                         <div class="card-title" style="margin-bottom: 30px;">
                             {{ __('admin::app.dashboard.sales') }}
                         </div>
 
-                        <div class="card-info">
+                        <div class="card-info" style="height: 100%;">
 
                             <canvas id="myChart" style="width: 100%; height: 87%"></canvas>
 
