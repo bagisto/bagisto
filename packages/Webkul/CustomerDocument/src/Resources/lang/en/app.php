@@ -30,7 +30,7 @@ return [
             'type' => 'Type',
             'status' => 'Status',
             'active' => 'Active',
-            'in-active' => 'Inacvtive',
+            'in-active' => 'Inactive',
             'product' => 'Product',
             'marketing' => 'Marketing',
             'add-document' => 'Add Document',

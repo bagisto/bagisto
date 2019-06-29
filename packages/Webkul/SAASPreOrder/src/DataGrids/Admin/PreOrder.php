@@ -28,6 +28,7 @@ class PreOrder extends DataGrid
 
         $this->addFilter('id', 'pre_order_items.id');
         $this->addFilter('status', 'pre_order_items.status');
+        $this->addFilter('order_id', 'pre_order_items.order_id');
         $this->addFilter('payment_order_id', 'payment_order_items.order_id');
         $this->addFilter('product_name', 'order_items.name');
         $this->addFilter('customer_name', DB::raw('CONCAT(orders.customer_first_name, " ", orders.customer_last_name)'));
