@@ -22,7 +22,7 @@ class Category extends BaseModel
         if (auth()->guard('super-admin')->check() || ! isset($company->id)) {
             return new QueryBuilder($query);
         } else {
-            return new QueryBuilder($query->where('categories' . '.company_id', $company->id));
+            return new QueryBuilder($query->where('company_id', $company->id));
         }
     }
 }
