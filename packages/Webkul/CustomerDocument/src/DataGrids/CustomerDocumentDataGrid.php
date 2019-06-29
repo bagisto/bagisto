@@ -51,9 +51,9 @@ class CustomerDocumentDataGrid extends DataGrid
             'index' => 'status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'string',
-            'searchable' => true,
             'sortable' => true,
-            'filterable' => true,
+            'searchable' => false,
+            'filterable' => false,
             'wrapper' => function($value) {
                 if ($value->status == 1)
                     return 'Active';

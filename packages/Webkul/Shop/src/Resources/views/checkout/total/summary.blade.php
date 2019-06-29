@@ -36,7 +36,7 @@
         </label>
     </div>
 
-    @if(core()->getConfigData('stripe.connect.details.stripefees') == 'customer')
+    @if(core()->getConfigData('stripe.connect.details.stripefees') == 'customer' && $cart->payment->method == 'stripe')
         <div class="item-detail">
             @php
                 $applicationFee = $cart->base_grand_total;
@@ -57,7 +57,11 @@
     <div class="payable-amount" id="grand-total-detail">
         <label>{{ __('shop::app.checkout.total.grand-total') }}</label>
         <label class="right" id="grand-total-amount-detail">
-            {{ core()->currency($cart->base_grand_total) }}
+            @if(core()->getConfigData('stripe.connect.details.stripefees') == 'customer' && $cart->payment->method == 'stripe')
+                {{ core()->currency($cart->base_grand_total) }}
+            @else
+                {{ core()->currency($cart->base_grand_total) }}
+            @endif
         </label>
     </div>
 

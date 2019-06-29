@@ -17,5 +17,6 @@ return  [
     'click-continue' => 'Click continue to proceed further',
     'some-error' => 'Some error occurred',
     'transaction-fee' => 'Transaction Fees',
-    'more-info' => '(after successful order)'
+    'more-info' => '(after successful order)',
+    'continue' => 'Please click on continue to complete your transaction'
 ];

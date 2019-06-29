@@ -90,10 +90,32 @@ class BulkAddToCartController extends Controller
 
                             if (! $canAdd) {
                                 $sufficientQuantity[] = $column + 1;
-                            } else if($product->type == 'simple' && $uploadData['quantity'] > 0) {
-                                $cart['product'] = (string)$product->id;
-                                $cart['quantity'] = (string)$uploadData['quantity'];
-                                $cart['is_configurable'] = 'false';
+                            } else if ($product->type == 'simple' && $uploadData['quantity'] > 0) {
+                                if ($product->parent_id != null) {
+                                    $parentProduct = $this->product->findOneWhere([
+                                        'id' => $product->parent_id,
+                                    ]);
+
+                                    foreach ($parentProduct->super_attributes as $super_attribute) {
+                                        if ($super_attribute->type == 'select') {
+                                            foreach ($product->attribute_values as $attribute_value) {
+                                                if ($super_attribute->id == $attribute_value->attribute_id) {
+                                                    $attributes[$super_attribute->id] = (string)$attribute_value->integer_value;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    $cart['product'] = (string)$parentProduct->id;
+                                    $cart['quantity'] = (string)$uploadData['quantity'];
+                                    $cart['is_configurable'] = 'true';
+                                    $cart['selected_configurable_option'] = (string)$product->id;
+                                    $cart['super_attribute'] = $attributes;
+                                } else {
+                                    $cart['product'] = (string)$product->id;
+                                    $cart['quantity'] = (string)$uploadData['quantity'];
+                                    $cart['is_configurable'] = 'false';
+                                }
 
                                 Event::fire('checkout.cart.add.before', $cart['product']);
 

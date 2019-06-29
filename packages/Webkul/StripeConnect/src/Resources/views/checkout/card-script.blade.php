@@ -177,6 +177,8 @@
                                 return false;
                             } else {
                                 stripeTokenHandler(result.token);
+
+                                alert('{{__('stripe::app.continue')}}');
                             }
                         });
                     });
