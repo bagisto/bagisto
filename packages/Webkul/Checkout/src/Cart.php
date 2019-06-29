@@ -1124,6 +1124,8 @@ class Cart {
             $data['quantity'] = 1;
             $data['product'] = $product->id;
 
+            \Event::fire('checkout.cart.add.after', $product->id);
+
             $result = $this->add($product->id, $data);
 
             if ($result) {
