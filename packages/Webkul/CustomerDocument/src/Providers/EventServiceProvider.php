@@ -14,6 +14,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Event::listen('bagisto.admin.layout.head', function($viewRenderEventManager) {
+            $viewRenderEventManager->addTemplate('customerdocument::style');
+        });
+
         Event::listen('bagisto.admin.customer.edit.after', function($viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('customerdocument::admin.customers.upload');
         });

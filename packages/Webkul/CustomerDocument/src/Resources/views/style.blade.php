@@ -1,0 +1,1 @@
+<link href="{{ asset('vendor/webkul/customerdocument/assets/css/customerdocument.css') }}" rel="stylesheet" />

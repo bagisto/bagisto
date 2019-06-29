@@ -24,6 +24,10 @@ class CustomerDocumentServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
 
+        $this->publishes([
+            dirname(__DIR__) . '/Resources/assets/sass/customerdocument.scss' => base_path('public/vendor/webkul/customerdocument/assets/css/customerdocument.css')
+        ]);
+
         \Webkul\CustomerDocument\Models\CustomerDocument::observe(\Webkul\CustomerDocument\Observers\CustomerDocumentObserver::class);
 
         $this->app->register(ModuleServiceProvider::class);
