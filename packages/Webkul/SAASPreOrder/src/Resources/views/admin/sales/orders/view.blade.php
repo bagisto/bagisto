@@ -31,7 +31,7 @@
                     </a>
                 @endif
 
-                @if ($order->canShip() && ! app('Webkul\SAASPreOrder\Repositories\PreOrderItemRepository')->findOneByField('payment_order_item_id', $item->id))
+                @if ($order->canShip() && ! app('Webkul\SAASPreOrder\Repositories\PreOrderItemRepository')->resetScope()->findOneByField('payment_order_item_id', $item->id))
                     <a href="{{ route('admin.sales.shipments.create', $order->id) }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.sales.orders.shipment-btn-title') }}
                     </a>
