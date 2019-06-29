@@ -276,7 +276,7 @@
                                 <td>{{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}</td>
                                 <td>
                                     {{ $item->name }}
-
+                                                
                                     @if ($html = $item->getOptionDetailHtml())
                                         <p>{{ $html }}</p>
                                     @elseif ($item->type == 'downloadable')

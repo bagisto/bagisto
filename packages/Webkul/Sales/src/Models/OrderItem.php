@@ -158,7 +158,10 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function getOptionDetailHtml()
     {
-        if ($this->type == 'configurable' && isset($this->additional['attributes'])) {
+        if ($this->type != 'configurable')
+            return;
+
+        if (isset($this->additional['attributes'])) {
             $labels = [];
 
             foreach ($this->additional['attributes'] as $attribute) {

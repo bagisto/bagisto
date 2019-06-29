@@ -46,20 +46,19 @@ class ShipmentItem extends Model implements ShipmentItemContract
     }
 
     /**
+     * Get order item type
+     */
+    public function getTypeAttribute()
+    {
+        return $this->order_item->type;
+    }
+
+    /**
      * Returns configurable option html
      */
     public function getOptionDetailHtml()
     {
-
-        if ($this->type == 'configurable' && isset($this->additional['attributes'])) {
-            $labels = [];
-
-            foreach ($this->additional['attributes'] as $attribute) {
-                $labels[] = $attribute['attribute_name'] . ' : ' . $attribute['option_label'];
-            }
-
-            return implode(', ', $labels);
-        }
+        return $this->order_item->getOptionDetailHtml();
     }
 
     /**
@@ -67,6 +66,6 @@ class ShipmentItem extends Model implements ShipmentItemContract
      */
     public function getDownloadableDetailHtml()
     {
-        return $this->order_item->getOptionDetailHtml();
+        return $this->order_item->getDownloadableDetailHtml();
     }
 }

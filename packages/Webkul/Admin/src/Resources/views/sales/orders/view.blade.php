@@ -256,7 +256,7 @@
                                                     <td>
                                                         {{ $item->name }}
 
-                                                        @if ($item->type == 'configurable' && $html = $item->getOptionDetailHtml())
+                                                        @if ($html = $item->getOptionDetailHtml())
                                                             <p>{{ $html }}</p>
                                                         @elseif ($item->type == 'downloadable')
                                                             <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>

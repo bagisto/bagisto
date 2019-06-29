@@ -251,7 +251,7 @@
                                             <td>{{ $item->sku }}</td>
                                             <td>
                                                 {{ $item->name }}
-
+                                                
                                                 @if ($html = $item->getOptionDetailHtml())
                                                     <p>{{ $html }}</p>
                                                 @elseif ($item->type == 'downloadable')

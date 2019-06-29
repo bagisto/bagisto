@@ -7,10 +7,10 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Webkul\Sales\Repositories\OrderRepository as Order;
-use Webkul\Sales\Repositories\OrderItemRepository as OrderItem;
-use Webkul\Customer\Repositories\CustomerRepository as Customer;
-use Webkul\Product\Repositories\ProductInventoryRepository as ProductInventory;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
 
 /**
  * Dashboard controller
@@ -32,28 +32,28 @@ class DashboardController extends Controller
      *
      * @var array
      */
-    protected $order;
+    protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
      * @var array
      */
-    protected $orderItem;
+    protected $orderItemRepository;
 
     /**
      * CustomerRepository object
      *
      * @var array
      */
-    protected $customer;
+    protected $customerRepository;
 
     /**
      * ProductInventoryRepository object
      *
      * @var array
      */
-    protected $productInventory;
+    protected $productInventoryRepository;
 
     /**
      * string object
@@ -86,30 +86,30 @@ class DashboardController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository              $order
-     * @param  \Webkul\Sales\Repositories\OrderItemRepository          $orderItem
-     * @param  \Webkul\Customer\Repositories\CustomerRepository        $customer
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository $productInventory
+     * @param  \Webkul\Sales\Repositories\OrderRepository              $orderRepository
+     * @param  \Webkul\Sales\Repositories\OrderItemRepository          $orderItemRepository
+     * @param  \Webkul\Customer\Repositories\CustomerRepository        $customerRepository
+     * @param  \Webkul\Product\Repositories\ProductInventoryRepository $productInventoryRepository
      * @return void
      */
     public function __construct(
-        Order $order,
-        OrderItem $orderItem,
-        Customer $customer,
-        ProductInventory $productInventory
+        OrderRepository $orderRepository,
+        OrderItemRepository $orderItemRepository,
+        CustomerRepository $customerRepository,
+        ProductInventoryRepository $productInventoryRepository
     )
     {
         $this->_config = request('_config');
 
         $this->middleware('admin');
 
-        $this->order = $order;
+        $this->orderRepository = $orderRepository;
 
-        $this->orderItem = $orderItem;
+        $this->orderItemRepository = $orderItemRepository;
 
-        $this->customer = $customer;
+        $this->customerRepository = $customerRepository;
 
-        $this->productInventory = $productInventory;
+        $this->productInventoryRepository = $productInventoryRepository;
     }
 
     public function getPercentageChange($previous, $current)
@@ -175,7 +175,7 @@ class DashboardController extends Controller
      */
     public function getTopSellingCategories()
     {
-        return $this->orderItem->getModel()
+        return $this->orderItemRepository->getModel()
             ->leftJoin('products', 'order_items.product_id', 'products.id')
             ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
             ->leftJoin('categories', 'product_categories.category_id', 'categories.id')
@@ -200,7 +200,7 @@ class DashboardController extends Controller
      */
     public function getStockThreshold()
     {
-        return $this->productInventory->getModel()
+        return $this->productInventoryRepository->getModel()
             ->leftJoin('products', 'product_inventories.product_id', 'products.id')
             ->select(DB::raw('SUM(qty) as total_qty'))
             ->addSelect('product_inventories.product_id')
@@ -217,7 +217,7 @@ class DashboardController extends Controller
      */
     public function getTopSellingProducts()
     {
-        return $this->orderItem->getModel()
+        return $this->orderItemRepository->getModel()
             ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
             ->addSelect('id', 'product_id', 'product_type', 'name')
             ->where('order_items.created_at', '>=', $this->startDate)
@@ -236,7 +236,7 @@ class DashboardController extends Controller
      */
     public function getCustomerWithMostSales()
     {
-        return $this->order->getModel()
+        return $this->orderRepository->getModel()
             ->select(DB::raw('SUM(base_grand_total) as total_base_grand_total'))
             ->addSelect(DB::raw('COUNT(id) as total_orders'))
             ->addSelect('id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
@@ -285,14 +285,14 @@ class DashboardController extends Controller
 
     private function getOrdersBetweenDate($start, $end)
     {
-        return $this->order->scopeQuery(function ($query) use ($start, $end) {
+        return $this->orderRepository->scopeQuery(function ($query) use ($start, $end) {
             return $query->where('orders.created_at', '>=', $start)->where('orders.created_at', '<=', $end);
         });
     }
 
     private function getCustomersBetweenDates($start, $end)
     {
-        return $this->customer->scopeQuery(function ($query) use ($start, $end) {
+        return $this->customerRepository->scopeQuery(function ($query) use ($start, $end) {
             return $query->where('customers.created_at', '>=', $start)->where('customers.created_at', '<=', $end);
         });
     }

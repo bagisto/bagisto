@@ -114,22 +114,24 @@
                             <tr>
                                 <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}" style="text-align: left;padding: 8px">{{ $item->child ? $item->child->sku : $item->sku }}</td>
 
-                                <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">{{ $item->name }}</td>
+                                <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">
+                                    {{ $item->name }}
+
+                                    @if ($html = $item->getOptionDetailHtml())
+                                        <div style="">
+                                            <label style="margin-top: 10px; font-size: 16px;color: #5E5E5E; display: block;">
+                                                {{ $html }}
+                                            </label>
+                                        </div>
+                                    @elseif ($item->type == 'downloadable')
+                                        <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
+                                    @endif
+                                </td>
 
                                 <td data-value="{{ __('shop::app.customer.account.order.view.price') }}" style="text-align: left;padding: 8px">{{ core()->formatPrice($item->price, $order->order_currency_code) }}
                                 </td>
 
                                 <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}" style="text-align: left;padding: 8px">{{ $item->qty_ordered }}</td>
-
-                                @if ($html = $item->getOptionDetailHtml())
-                                    <div style="">
-                                        <label style="margin-top: 10px; font-size: 16px;color: #5E5E5E; display: block;">
-                                            {{ $html }}
-                                        </label>
-                                    </div>
-                                @elseif ($item->type == 'downloadable')
-                                    <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
-                                @endif
                             </tr>
                         @endforeach
                     </tbody>
