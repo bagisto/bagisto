@@ -17,7 +17,7 @@ class DatabasePresenceVerifier extends BaseVerifier
     {
         $company = Company::getCurrent();
 
-        if (isset($company->id)) {
+        if (isset($company->id) && $table != 'admins') {
             return $this->db->connection($this->connection)->table($table)->useWritePdo()->where ('company_id', '=', $company->id);
         } else {
             // apply the company id check dynamically here to eliminate unique validation woes
