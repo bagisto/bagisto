@@ -39,6 +39,7 @@ class Order extends DataGrid
 
         $this->addFilter('billed_to', DB::raw('CONCAT(order_address_billing.first_name, " ", order_address_billing.last_name)'));
         $this->addFilter('shipped_to', DB::raw('CONCAT(order_address_shipping.first_name, " ", order_address_shipping.last_name)'));
+        $this->addFilter('is_preorder', DB::raw('COUNT(pre_order_items.id)'));
         $this->addFilter('id', 'orders.id');
         $this->addFilter('status', 'orders.status');
         $this->addFilter('created_at', 'orders.created_at');
