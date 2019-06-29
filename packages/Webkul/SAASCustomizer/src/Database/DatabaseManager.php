@@ -23,7 +23,7 @@ class DatabaseManager extends BaseDatabaseManager
 
         if (! auth()->guard('super-admin')->check()) {
             if (count(explode('as', $table)) == 1) {
-                if ($table == 'companies' || $table == 'country_states' || $table == 'countries' || $table == 'customer_documents') {
+                if ($table == 'companies' || $table == 'country_states' || $table == 'countries') {
 
                     return $this->query()->from($table);
                 } else {
