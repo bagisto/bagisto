@@ -142,7 +142,7 @@ class Order extends DataGrid
             'index' => 'is_preorder',
             'label' => trans('preorder::app.datagrid.order-type'),
             'type' => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'sortable' => true,
             'filterable' => true,
             'wrapper' => function ($row) {
