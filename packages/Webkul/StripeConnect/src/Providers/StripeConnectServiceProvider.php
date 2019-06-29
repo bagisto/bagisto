@@ -57,5 +57,9 @@ class StripeConnectServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/paymentmethods.php', 'paymentmethods'
         );
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/acl.php', 'acl'
+        );
     }
 }
