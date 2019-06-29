@@ -58,10 +58,8 @@
                     <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
                         <label for="description">{{ __('customerdocument::app.admin.customers.description') }}</label>
 
-                        <textarea class="control" id="description" name="description" data-vv-as="&quot;{{ __('customerdocument::app.admin.customers.description') }}&quot;"/
-                        >
-                            {{ $document->description }}
-                        </textarea>
+                        <textarea class="control" id="description" name="description" data-vv-as="&quot;{{ __('customerdocument::app.admin.customers.description') }}&quot;"
+                        >{{ $document->description }}</textarea>
 
                         <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
                     </div>

@@ -34,6 +34,5 @@ class CustomerDocumentRepository extends Repository
             ->whereIn('customer_id', [$id, 0])
             ->where('status', '1')
             ->get();
-
     }
 }
