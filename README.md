@@ -188,7 +188,7 @@ Thank you to all our backers! 🙏
 
 <a href="https://opencollective.com/bagisto/contribute/backer-7371/checkout" target="_blank"><img src="https://images.opencollective.com/static/images/become_backer.svg"></a>
 
-##### Sponsors
+#### Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
 
