@@ -10,7 +10,7 @@
 <a href="#sponsors"><img src="https://opencollective.com/bagisto/sponsors/badge.svg" alt="Sponsors on Open Collective"></a>
 </p>
 
-# Topics
+## Topics
 1. [Introduction](#introduction)
 2. [Documentation](#documentation)
 3. [Requirements](#requirements)
@@ -70,7 +70,7 @@ Bagisto is using power of both of these frameworks and making best out of it out
 * **Node**: 8.11.3 LTS or higher.
 * **Composer**: 1.6.5 or higher.
 
-### Installation & Configuration
+### Installation and Configuration
 
 **1. Try our new GUI installer to install Bagisto:**
 
@@ -178,30 +178,18 @@ Bagisto is a truly opensource E-Commerce framework which will always be free und
 
 ### Miscellaneous
 
-#### Contributors
+#### Contributors and Backers
 
-This project exists thanks to all the people who contribute.
-<a href="https://github.com/bagisto/bagisto/graphs/contributors"><img src="https://opencollective.com/bagisto/contributors.svg?width=890&button=false" /></a>
+This project is on [Open Collective](https://opencollective.com/bagisto) and it exists thanks to this people who contribute.
 
+<a href="https://github.com/bagisto/bagisto/graphs/contributors"><img src="https://opencollective.com/bagisto/contributors.svg?width=890&button=false"/></a>
 
-#### Backers
+Thank you to all our backers! 🙏
 
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/bagisto#backer)]
+<a href="https://opencollective.com/bagisto/contribute/backer-7371/checkout" target="_blank"><img src="https://images.opencollective.com/static/images/become_backer.svg"></a>
 
-<a href="https://opencollective.com/bagisto#backers" target="_blank"><img src="https://opencollective.com/bagisto/backers.svg?width=890"></a>
+##### Sponsors
 
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
 
-#### Sponsors
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/bagisto#sponsor)]
-
-<a href="https://opencollective.com/bagisto/sponsor/0/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/bagisto/sponsor/1/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/bagisto/sponsor/2/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/bagisto/sponsor/3/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/bagisto/sponsor/4/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/bagisto/sponsor/5/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/bagisto/sponsor/6/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/bagisto/sponsor/7/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/bagisto/sponsor/8/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/bagisto/sponsor/9/website" target="_blank"><img src="https://opencollective.com/bagisto/sponsor/9/avatar.svg"></a>
+<a href="https://opencollective.com/bagisto/contribute/sponsor-7372/checkout" target="_blank"><img src="https://images.opencollective.com/static/images/become_sponsor.svg"></a>
