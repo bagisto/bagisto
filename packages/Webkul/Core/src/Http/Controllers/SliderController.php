@@ -134,18 +134,14 @@ class SliderController extends Controller
     {
         $slider = $this->sliderRepository->findOrFail($id);
 
-        if ($this->sliderRepository->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1) {
-            session()->flash('warning', trans('admin::app.settings.sliders.delete-success'));
-        } else {
-            try {
-                $this->sliderRepository->delete($id);
+        try {
+            $this->sliderRepository->delete($id);
 
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Slider']));
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Slider']));
 
-                return response()->json(['message' => true], 200);
-            } catch(\Exception $e) {
-                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Slider']));
-            }
+            return response()->json(['message' => true], 200);
+        } catch(\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Slider']));
         }
 
         return response()->json(['message' => false], 400);

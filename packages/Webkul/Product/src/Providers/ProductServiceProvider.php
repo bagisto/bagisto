@@ -4,8 +4,8 @@ namespace Webkul\Product\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Webkul\Product\Providers\EventServiceProvider;
-use Illuminate\Routing\Router;
-use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductProxy;
+use Webkul\Product\Observers\ProductObserver;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -14,7 +14,7 @@ class ProductServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
@@ -23,6 +23,8 @@ class ProductServiceProvider extends ServiceProvider
         $this->publishes([
             dirname(__DIR__) . '/Config/imagecache.php' => config_path('imagecache.php'),
         ]);
+
+        ProductProxy::observe(ProductObserver::class);
     }
 
     /**
