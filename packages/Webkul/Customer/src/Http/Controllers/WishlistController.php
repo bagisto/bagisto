@@ -154,10 +154,16 @@ class WishlistController extends Controller
         if (! isset($wishlistItem) || $wishlistItem->customer_id != auth()->guard('customer')->user()->id) {
             session()->flash('warning', trans('shop::app.security-warning'));
 
-            return redirect()->route( 'customer.wishlist.index');
+            return redirect()->route('customer.wishlist.index');
         }
 
-        $result = Cart::moveToCart($wishlistItem);
+        try {
+            $result = Cart::moveToCart($wishlistItem);
+        } catch (\Exception $e) {
+            session()->flash('warning', $e->getMessage());
+
+            return redirect()->back();
+        }
 
         if ($result) {
             if ($wishlistItem->delete()) {

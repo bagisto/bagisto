@@ -12,7 +12,7 @@ use Cart;
  * Cart controller for the customer and guest users for adding and
  * removing the products in the cart.
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CartController extends Controller
