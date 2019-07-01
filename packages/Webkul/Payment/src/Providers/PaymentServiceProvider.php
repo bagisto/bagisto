@@ -4,7 +4,6 @@ namespace Webkul\Payment\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
-use Illuminate\Routing\Router;
 use Webkul\Payment\Payment;
 use Webkul\Payment\Facades\Payment as PaymentFacade;
 
@@ -15,7 +14,7 @@ class PaymentServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
         include __DIR__ . '/../Http/helpers.php';
     }

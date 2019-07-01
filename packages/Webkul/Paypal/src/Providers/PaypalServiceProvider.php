@@ -3,7 +3,6 @@
 namespace Webkul\Paypal\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\Router;
 
 class PaypalServiceProvider extends ServiceProvider
 {
@@ -12,7 +11,7 @@ class PaypalServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
         include __DIR__ . '/../Http/routes.php';
 
