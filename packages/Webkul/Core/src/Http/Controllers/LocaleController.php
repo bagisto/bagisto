@@ -2,10 +2,8 @@
 
 namespace Webkul\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
-use Webkul\Core\Repositories\LocaleRepository as Locale;
+use Webkul\Core\Repositories\LocaleRepository;
 
 /**
  * Locale controller
@@ -27,17 +25,17 @@ class LocaleController extends Controller
      *
      * @var array
      */
-    protected $locale;
+    protected $localeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\LocaleRepository $locale
+     * @param  \Webkul\Core\Repositories\LocaleRepository $localeRepository
      * @return void
      */
-    public function __construct(Locale $locale)
+    public function __construct(LocaleRepository $localeRepository)
     {
-        $this->locale = $locale;
+        $this->localeRepository = $localeRepository;
 
         $this->_config = request('_config');
     }
@@ -65,10 +63,9 @@ class LocaleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:locales,code', new \Webkul\Core\Contracts\Validations\Code],
@@ -77,7 +74,7 @@ class LocaleController extends Controller
 
         Event::fire('core.locale.create.before');
 
-        $locale = $this->locale->create(request()->all());
+        $locale = $this->localeRepository->create(request()->all());
 
         Event::fire('core.locale.create.after', $locale);
 
@@ -94,7 +91,7 @@ class LocaleController extends Controller
      */
     public function edit($id)
     {
-        $locale = $this->locale->findOrFail($id);
+        $locale = $this->localeRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('locale'));
     }
@@ -102,11 +99,10 @@ class LocaleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:locales,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
@@ -115,7 +111,7 @@ class LocaleController extends Controller
 
         Event::fire('core.locale.update.before', $id);
 
-        $locale = $this->locale->update(request()->all(), $id);
+        $locale = $this->localeRepository->update(request()->all(), $id);
 
         Event::fire('core.locale.update.after', $locale);
 
@@ -132,15 +128,15 @@ class LocaleController extends Controller
      */
     public function destroy($id)
     {
-        $locale = $this->locale->findOrFail($id);
+        $locale = $this->localeRepository->findOrFail($id);
 
-        if ($this->locale->count() == 1) {
+        if ($this->localeRepository->count() == 1) {
             session()->flash('error', trans('admin::app.settings.locales.last-delete-error'));
         } else {
             try {
                 Event::fire('core.locale.delete.before', $id);
 
-                $this->locale->delete($id);
+                $this->localeRepository->delete($id);
 
                 Event::fire('core.locale.delete.after', $id);
 

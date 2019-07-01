@@ -2,10 +2,8 @@
 
 namespace Webkul\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Core\Repositories\CountryRepository as Country;
-use Webkul\Core\Repositories\CountryStateRepository as State;
+use Webkul\Core\Repositories\CountryRepository;
+use Webkul\Core\Repositories\CountryStateRepository;
 
 /**
  * Country controller
@@ -27,26 +25,30 @@ class CountryStateController extends Controller
      *
      * @var array
      */
-    protected $country;
+    protected $countryRepository;
 
     /**
      * StateRepository object
      *
      * @var array
      */
-    protected $state;
+    protected $stateRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\CountryRepository  $country
+     * @param  \Webkul\Core\Repositories\CountryRepository $countryRepository
+     * @param  \Webkul\Core\Repositories\StateRepository   $stateRepository
      * @return void
      */
-    public function __construct(Country $country, State $state)
+    public function __construct(
+        CountryRepository $countryRepository,
+        StateRepository $stateRepository
+    )
     {
-        $this->country = $country;
+        $this->countryRepository = $countryRepository;
 
-        $this->state = $state;
+        $this->stateRepository = $stateRepository;
 
         $this->_config = request('_config');
     }
@@ -58,8 +60,9 @@ class CountryStateController extends Controller
      */
     public function getCountries()
     {
-        $countries = $this->country->all();
-        $states = $this->state->all();
+        $countries = $this->countryRepository->all();
+
+        $states = $this->stateRepository->all();
 
         $nestedArray = [];
 
@@ -76,8 +79,9 @@ class CountryStateController extends Controller
 
     public function getStates($country)
     {
-        $countries = $this->country->all();
-        $states = $this->state->all();
+        $countries = $this->countryRepository->all();
+        
+        $states = $this->stateRepository->all();
 
         $nestedArray = [];
 

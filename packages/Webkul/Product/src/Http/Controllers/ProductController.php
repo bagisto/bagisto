@@ -2,8 +2,6 @@
 
 namespace Webkul\Product\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Webkul\Product\Http\Requests\ProductForm;
 use Webkul\Category\Repositories\CategoryRepository;

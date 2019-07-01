@@ -2,9 +2,6 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -30,56 +27,56 @@ class DashboardController extends Controller
     /**
      * OrderRepository object
      *
-     * @var array
+     * @var Object
      */
     protected $orderRepository;
 
     /**
      * OrderItemRepository object
      *
-     * @var array
+     * @var Object
      */
     protected $orderItemRepository;
 
     /**
      * CustomerRepository object
      *
-     * @var array
+     * @var Object
      */
     protected $customerRepository;
 
     /**
      * ProductInventoryRepository object
      *
-     * @var array
+     * @var Object
      */
     protected $productInventoryRepository;
 
     /**
      * string object
      *
-     * @var array
+     * @var Object
      */
     protected $startDate;
 
     /**
      * string object
      *
-     * @var array
+     * @var Object
      */
     protected $lastStartDate;
 
     /**
      * string object
      *
-     * @var array
+     * @var Object
      */
     protected $endDate;
 
     /**
      * string object
      *
-     * @var array
+     * @var Object
      */
     protected $lastEndDate;
 
@@ -112,6 +109,11 @@ class DashboardController extends Controller
         $this->productInventoryRepository = $productInventoryRepository;
     }
 
+    /**
+     * Returns percentage difference
+     *
+     * @return integer
+     */
     public function getPercentageChange($previous, $current)
     {
         if (! $previous)
@@ -171,7 +173,7 @@ class DashboardController extends Controller
     /**
      * Returns the list of top selling categories
      *
-     * @return mixed
+     * @return Collection
      */
     public function getTopSellingCategories()
     {
@@ -196,7 +198,7 @@ class DashboardController extends Controller
     /**
      * Return stock threshold.
      *
-     * @return mixed
+     * @return Collection
      */
     public function getStockThreshold()
     {
@@ -213,7 +215,7 @@ class DashboardController extends Controller
 
     /**
      * Returns top selling products
-     * @return mixed
+     * @return Collection
      */
     public function getTopSellingProducts()
     {
@@ -232,7 +234,7 @@ class DashboardController extends Controller
     /**
      * Returns top selling products
      *
-     * @return mixed
+     * @return Collection
      */
     public function getCustomerWithMostSales()
     {
@@ -273,16 +275,31 @@ class DashboardController extends Controller
         // $this->lastEndDate->subDays($this->lastStartDate->diffInDays($this->lastEndDate));
     }
 
+    /**
+     * Returns previous order query
+     *
+     * @return mixed
+     */
     private function previousOrders()
     {
         return $this->getOrdersBetweenDate($this->lastStartDate, $this->lastEndDate);
     }
 
+    /**
+     * Returns current order query
+     *
+     * @return mixed
+     */
     private function currentOrders()
     {
         return $this->getOrdersBetweenDate($this->startDate, $this->endDate);
     }
 
+    /**
+     * Returns orders between two dates
+     *
+     * @return mixed
+     */
     private function getOrdersBetweenDate($start, $end)
     {
         return $this->orderRepository->scopeQuery(function ($query) use ($start, $end) {
@@ -290,6 +307,11 @@ class DashboardController extends Controller
         });
     }
 
+    /**
+     * Returns customers between two dates
+     *
+     * @return mixed
+     */
     private function getCustomersBetweenDates($start, $end)
     {
         return $this->customerRepository->scopeQuery(function ($query) use ($start, $end) {

@@ -2,10 +2,8 @@
 
 namespace Webkul\Admin\Http\Controllers\Customer;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 /**
  * Customer Group controlller
@@ -27,21 +25,21 @@ class CustomerGroupController extends Controller
      *
      * @var array
     */
-    protected $customerGroup;
+    protected $customerGroupRepository;
 
      /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
+     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroupRepository;
      * @return void
      */
-    public function __construct(CustomerGroup $customerGroup)
+    public function __construct(CustomerGroupRepository $customerGroupRepository)
     {
         $this->_config = request('_config');
 
         $this->middleware('admin');
 
-        $this->customerGroup = $customerGroup;
+        $this->customerGroupRepository = $customerGroupRepository;
     }
 
     /**
@@ -80,7 +78,7 @@ class CustomerGroupController extends Controller
 
         $data['is_user_defined'] = 1;
 
-        $this->customerGroup->create($data);
+        $this->customerGroupRepository->create($data);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer Group']));
 
@@ -95,7 +93,7 @@ class CustomerGroupController extends Controller
      */
     public function edit($id)
     {
-        $group = $this->customerGroup->findOrFail($id);
+        $group = $this->customerGroupRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('group'));
     }
@@ -103,18 +101,17 @@ class CustomerGroupController extends Controller
      /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:customer_groups,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required',
         ]);
 
-        $this->customerGroup->update(request()->all(), $id);
+        $this->customerGroupRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer Group']));
 
@@ -129,7 +126,7 @@ class CustomerGroupController extends Controller
      */
     public function destroy($id)
     {
-        $customerGroup = $this->customerGroup->findOrFail($id);
+        $customerGroup = $this->customerGroupRepository->findOrFail($id);
 
         if ($customerGroup->is_user_defined == 0) {
             session()->flash('warning', trans('admin::app.customers.customers.group-default'));
@@ -137,7 +134,7 @@ class CustomerGroupController extends Controller
             session()->flash('warning', trans('admin::app.response.customer-associate', ['name' => 'Customer Group']));
         } else {
             try {
-                $this->customerGroup->delete($id);
+                $this->customerGroupRepository->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer Group']));
 

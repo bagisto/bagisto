@@ -4,7 +4,6 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Product\Repositories\ProductRepository;
 
 /**
  * Product Review Reposotory
@@ -14,28 +13,6 @@ use Webkul\Product\Repositories\ProductRepository;
  */
 class ProductReviewRepository extends Repository
 {
-    /**
-     * ProductImageRepository object
-     *
-     * @var array
-     */
-    protected $product;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @param  Webkul\Product\Repositories\ProductRepository      $product
-     * @return void
-     */
-    public function __construct(
-        ProductRepository $product,
-        App $app)
-    {
-        $this->product = $product;
-
-        parent::__construct($app);
-    }
-
     /**
      * Specify Model class name
      *

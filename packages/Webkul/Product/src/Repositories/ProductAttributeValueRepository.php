@@ -20,17 +20,20 @@ class ProductAttributeValueRepository extends Repository
      *
      * @var array
      */
-    protected $attribute;
+    protected $attributeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository $attribute
+     * @param  Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
      * @return void
      */
-    public function __construct(AttributeRepository $attribute, App $app)
+    public function __construct(
+        AttributeRepository $attributeRepository,
+        App $app
+    )
     {
-        $this->attribute = $attribute;
+        $this->attributeRepository = $attributeRepository;
 
         parent::__construct($app);
     }
@@ -52,9 +55,9 @@ class ProductAttributeValueRepository extends Repository
     public function create(array $data)
     {
         if (isset($data['attribute_id'])) {
-            $attribute = $this->attribute->find($data['attribute_id']);
+            $attribute = $this->attributeRepository->find($data['attribute_id']);
         } else {
-            $attribute = $this->attribute->findOneByField('code', $data['attribute_code']);
+            $attribute = $this->attributeRepository->findOneByField('code', $data['attribute_code']);
         }
 
         if (! $attribute)

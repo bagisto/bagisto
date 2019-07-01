@@ -18,19 +18,22 @@ class AttributeRepository extends Repository
     /**
      * AttributeOptionRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $attributeOption;
+    protected $attributeOptionRepository;
 
     /**
-     * Create a new controller instance.
+     * Create a new repository instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOption
+     * @param  Webkul\Attribute\Repositories\AttributeOptionRepository  $attributeOptionRepository
      * @return void
      */
-    public function __construct(AttributeOptionRepository $attributeOption, App $app)
+    public function __construct(
+        AttributeOptionRepository $attributeOptionRepository,
+        App $app
+    )
     {
-        $this->attributeOption = $attributeOption;
+        $this->attributeOptionRepository = $attributeOptionRepository;
 
         parent::__construct($app);
     }
@@ -61,7 +64,7 @@ class AttributeRepository extends Repository
 
         if (in_array($attribute->type, ['select', 'multiselect', 'checkbox']) && count($options)) {
             foreach ($options as $optionInputs) {
-                $this->attributeOption->create(array_merge([
+                $this->attributeOptionRepository->create(array_merge([
                         'attribute_id' => $attribute->id
                     ], $optionInputs));
             }
@@ -94,7 +97,7 @@ class AttributeRepository extends Repository
             if (isset($data['options'])) {
                 foreach ($data['options'] as $optionId => $optionInputs) {
                     if (str_contains($optionId, 'option_')) {
-                        $this->attributeOption->create(array_merge([
+                        $this->attributeOptionRepository->create(array_merge([
                                 'attribute_id' => $attribute->id,
                             ], $optionInputs));
                     } else {
@@ -102,14 +105,14 @@ class AttributeRepository extends Repository
                             $previousOptionIds->forget($index);
                         }
 
-                        $this->attributeOption->update($optionInputs, $optionId);
+                        $this->attributeOptionRepository->update($optionInputs, $optionId);
                     }
                 }
             }
         }
 
         foreach ($previousOptionIds as $optionId) {
-            $this->attributeOption->delete($optionId);
+            $this->attributeOptionRepository->delete($optionId);
         }
 
         Event::fire('catalog.attribute.update.after', $attribute);
@@ -166,7 +169,7 @@ class AttributeRepository extends Repository
     {
         $attributeColumns  = ['id', 'code', 'value_per_channel', 'value_per_locale', 'type', 'is_filterable'];
 
-        if (! is_array($codes) && !$codes)
+        if (! is_array($codes) && ! $codes)
             return $this->findWhereIn('code', [
                 'name',
                 'description',
@@ -220,7 +223,12 @@ class AttributeRepository extends Repository
         $trimmed = array();
 
         foreach($attributes as $key => $attribute) {
-            if ($attribute->code != 'tax_category_id' && ($attribute->type == 'select' || $attribute->type == 'multiselect' || $attribute->code == 'sku')) {
+            if ($attribute->code != 'tax_category_id'
+                && (
+                    $attribute->type == 'select'
+                    || $attribute->type == 'multiselect'
+                    || $attribute->code == 'sku'
+                )) {
                 array_push($trimmed, [
                     'id' => $attribute->id,
                     'name' => $attribute->name,

@@ -363,6 +363,7 @@ return [
         'add' => 'Item successfully added to wishlist',
         'remove' => 'Item successfully removed from wishlist',
         'moved' => 'Item successfully moved To cart',
+        'option-missing' => 'Product options are missing, so item can not be moved to the wishlist.',
         'move-error' => 'Item cannot be moved to wishlist, Please try again later',
         'success' => 'Item successfully added to wishlist',
         'failure' => 'Item cannot be added to wishlist, Please try again later',

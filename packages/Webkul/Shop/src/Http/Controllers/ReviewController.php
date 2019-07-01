@@ -2,10 +2,8 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Product\Repositories\ProductRepository as Product;
-use Webkul\Product\Repositories\ProductReviewRepository as ProductReview;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
 
 /**
  * Review controller
@@ -15,7 +13,6 @@ use Webkul\Product\Repositories\ProductReviewRepository as ProductReview;
  */
 class ReviewController extends Controller
 {
-
     /**
      * Contains route related configuration
      *
@@ -26,29 +23,32 @@ class ReviewController extends Controller
     /**
      * ProductRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $product;
+    protected $productRepository;
 
     /**
      * ProductReviewRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $productReview;
+    protected $productReviewRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository        $product
-     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReview
+     * @param  \Webkul\Product\Repositories\ProductRepository        $productRepository
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
      * @return void
      */
-    public function __construct(Product $product, ProductReview $productReview)
+    public function __construct(
+        ProductRepository $productRepository,
+        ProductReviewRepository $productReviewRepository
+    )
     {
-        $this->product = $product;
+        $this->productRepository = $productRepository;
 
-        $this->productReview = $productReview;
+        $this->productReviewRepository = $productReviewRepository;
 
         $this->_config = request('_config');
     }
@@ -61,7 +61,7 @@ class ReviewController extends Controller
      */
     public function create($slug)
     {
-        $product = $this->product->findBySlugOrFail($slug);
+        $product = $this->productRepository->findBySlugOrFail($slug);
 
         $guest_review = core()->getConfigData('catalog.products.review.guest_review');
 
@@ -71,10 +71,10 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param integer $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , $id)
+    public function store($id)
     {
         $this->validate(request(), [
             'comment' => 'required',
@@ -92,7 +92,7 @@ class ReviewController extends Controller
         $data['status'] = 'pending';
         $data['product_id'] = $id;
 
-        $this->productReview->create($data);
+        $this->productReviewRepository->create($data);
 
         session()->flash('success', trans('shop::app.response.submit-success', ['name' => 'Product Review']));
 
@@ -107,7 +107,7 @@ class ReviewController extends Controller
     */
     public function show($slug)
     {
-        $product = $this->product->findBySlugOrFail($slug);
+        $product = $this->productRepository->findBySlugOrFail($slug);
 
         return view($this->_config['view'],compact('product'));
     }
@@ -115,11 +115,12 @@ class ReviewController extends Controller
     /**
      * Customer delete a reviews from their account
      *
+     * @param integer $id
      * @return response
      */
     public function destroy($id)
     {
-        $review = $this->productReview->findOneWhere([
+        $review = $this->productReviewRepository->findOneWhere([
             'id' => $id,
             'customer_id' => auth()->guard('customer')->user()->id
         ]);
@@ -127,7 +128,7 @@ class ReviewController extends Controller
         if (! $review)
             abort(404);
 
-        $this->productReview->delete($id);
+        $this->productReviewRepository->delete($id);
 
         session()->flash('success', trans('shop::app.response.delete-success', ['name' => 'Product Review']));
 
@@ -139,12 +140,13 @@ class ReviewController extends Controller
      *
      * @return Mixed Response & Boolean
     */
-    public function deleteAll() {
+    public function deleteAll()
+    {
         $reviews = auth()->guard('customer')->user()->all_reviews;
 
         if ($reviews->count() > 0) {
             foreach ($reviews as $review) {
-                $this->productReview->delete($review->id);
+                $this->productReviewRepository->delete($review->id);
             }
         }
 

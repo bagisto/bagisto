@@ -45,6 +45,16 @@ abstract class AbstractType
     abstract public function isStockable();
 
     /**
+     * Return true if item can be moved to cart from wishlist
+     *
+     * @return boolean
+     */
+    public function canBeMovedFromWishlistToCart()
+    {
+        return false;
+    }
+
+    /**
      * Retrieve product attributes
      *
      * @param Group $group

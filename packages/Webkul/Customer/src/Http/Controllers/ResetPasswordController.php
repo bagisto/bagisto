@@ -2,8 +2,6 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
@@ -16,10 +14,8 @@ use Illuminate\Support\Str;
  * @author    Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-
 class ResetPasswordController extends Controller
 {
-
     use ResetsPasswords;
 
     /**
@@ -44,14 +40,13 @@ class ResetPasswordController extends Controller
      *
      * If no token is present, display the link request form.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  string|null  $token
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create(Request $request, $token = null)
+    public function create($token = null)
     {
         return view($this->_config['view'])->with(
-            ['token' => $token, 'email' => $request->email]
+            ['token' => $token, 'email' => request('email')]
         );
     }
 

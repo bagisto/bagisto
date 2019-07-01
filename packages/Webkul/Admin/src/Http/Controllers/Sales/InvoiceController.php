@@ -2,11 +2,9 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository as Order;
-use Webkul\Sales\Repositories\InvoiceRepository as Invoice;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\InvoiceRepository;
 use PDF;
 
 /**
@@ -29,31 +27,34 @@ class InvoiceController extends Controller
      *
      * @var array
      */
-    protected $order;
+    protected $orderRepository;
 
     /**
      * InvoiceRepository object
      *
      * @var array
      */
-    protected $invoice;
+    protected $invoiceRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository   $order
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository $invoice
+     * @param  \Webkul\Sales\Repositories\OrderRepository   $orderRepository
+     * @param  \Webkul\Sales\Repositories\InvoiceRepository $invoiceRepository
      * @return void
      */
-    public function __construct(Invoice $invoice, Order $order)
+    public function __construct(
+        OrderRepository $orderRepository,
+        InvoiceRepository $invoiceRepository
+    )
     {
         $this->middleware('admin');
 
         $this->_config = request('_config');
 
-        $this->order = $order;
+        $this->orderRepository = $orderRepository;
 
-        $this->invoice = $invoice;
+        $this->invoiceRepository = $invoiceRepository;
 
     }
 
@@ -75,7 +76,7 @@ class InvoiceController extends Controller
      */
     public function create($orderId)
     {
-        $order = $this->order->findOrFail($orderId);
+        $order = $this->orderRepository->findOrFail($orderId);
 
         return view($this->_config['view'], compact('order'));
     }
@@ -84,12 +85,11 @@ class InvoiceController extends Controller
      * Store a newly created resource in storage.
      *
      * @param int $orderId
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $orderId)
+    public function store($orderId)
     {
-        $order = $this->order->findOrFail($orderId);
+        $order = $this->orderRepository->findOrFail($orderId);
 
         if (! $order->canInvoice()) {
             session()->flash('error', trans('admin::app.sales.invoices.creation-error'));
@@ -117,7 +117,7 @@ class InvoiceController extends Controller
             return redirect()->back();
         }
 
-        $this->invoice->create(array_merge($data, ['order_id' => $orderId]));
+        $this->invoiceRepository->create(array_merge($data, ['order_id' => $orderId]));
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Invoice']));
 
@@ -132,7 +132,7 @@ class InvoiceController extends Controller
      */
     public function view($id)
     {
-        $invoice = $this->invoice->findOrFail($id);
+        $invoice = $this->invoiceRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('invoice'));
     }
@@ -145,7 +145,7 @@ class InvoiceController extends Controller
      */
     public function print($id)
     {
-        $invoice = $this->invoice->findOrFail($id);
+        $invoice = $this->invoiceRepository->findOrFail($id);
 
         $pdf = PDF::loadView('admin::sales.invoices.pdf', compact('invoice'))->setPaper('a4');
 

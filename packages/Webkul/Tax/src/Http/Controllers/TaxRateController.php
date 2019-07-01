@@ -2,10 +2,8 @@
 
 namespace Webkul\Tax\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
-use Webkul\Tax\Repositories\TaxRateRepository as TaxRate;
+use Webkul\Tax\Repositories\TaxRateRepository;
 use Webkul\Admin\Imports\DataGridImport;
 use Illuminate\Support\Facades\Validator;
 use Excel;
@@ -27,21 +25,21 @@ class TaxRateController extends Controller
     protected $_config;
 
     /**
-     * Tax Rate Repository object
+     * TaxRateRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $taxRate;
+    protected $taxRateRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Tax\Repositories\TaxRateRepository  $taxRate
+     * @param  \Webkul\Tax\Repositories\TaxRateRepository $taxRateRepository
      * @return void
      */
-    public function __construct(TaxRate $taxRate)
+    public function __construct(TaxRateRepository $taxRateRepository)
     {
-        $this->taxRate = $taxRate;
+        $this->taxRateRepository = $taxRateRepository;
 
         $this->_config = request('_config');
     }
@@ -96,7 +94,7 @@ class TaxRateController extends Controller
 
         Event::fire('tax.tax_rate.create.before');
 
-        $taxRate = $this->taxRate->create($data);
+        $taxRate = $this->taxRateRepository->create($data);
 
         Event::fire('tax.tax_rate.create.after', $taxRate);
 
@@ -114,7 +112,7 @@ class TaxRateController extends Controller
      */
     public function edit($id)
     {
-        $taxRate = $this->taxRate->findOrFail($id);
+        $taxRate = $this->taxRateRepository->findOrFail($id);
 
         return view($this->_config['view'])->with('taxRate', $taxRate);
     }
@@ -139,7 +137,7 @@ class TaxRateController extends Controller
 
         Event::fire('tax.tax_rate.update.before', $id);
 
-        $taxRate = $this->taxRate->update(request()->input(), $id);
+        $taxRate = $this->taxRateRepository->update(request()->input(), $id);
 
         Event::fire('tax.tax_rate.update.after', $taxRate);
 
@@ -156,12 +154,12 @@ class TaxRateController extends Controller
      */
     public function destroy($id)
     {
-        $taxRate = $this->taxRate->findOrFail($id);
+        $taxRate = $this->taxRateRepository->findOrFail($id);
 
         try {
             Event::fire('tax.tax_rate.delete.before', $id);
 
-            $this->taxRate->delete($id);
+            $this->taxRateRepository->delete($id);
 
             Event::fire('tax.tax_rate.delete.after', $id);
 
@@ -184,7 +182,7 @@ class TaxRateController extends Controller
 
         $valid_extension = ['xlsx', 'csv', 'xls'];
 
-        if (!in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
+        if (! in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
             session()->flash('error', trans('admin::app.export.upload-error'));
         } else {
             try {
@@ -226,6 +224,7 @@ class TaxRateController extends Controller
                     foreach ($filtered as $position => $identifier) {
                         $message[] = trans('admin::app.export.duplicate-error', ['identifier' => $identifier, 'position' => $position]);
                     }
+                    
                     $finalMsg = implode(" ", $message);
 
                     session()->flash('error', $finalMsg);
@@ -260,7 +259,7 @@ class TaxRateController extends Controller
 
                         session()->flash('error', $finalMsg);
                     } else {
-                        $taxRate = $this->taxRate->get()->toArray();
+                        $taxRate = $this->taxRateRepository->get()->toArray();
 
                         foreach ($taxRate as $rate) {
                             $rateIdentifier[$rate['id']] = $rate['identifier'];
@@ -276,12 +275,12 @@ class TaxRateController extends Controller
                                 if (isset($rateIdentifier)) {
                                     $id = array_search($uploadData['identifier'], $rateIdentifier);
                                     if ($id) {
-                                        $this->taxRate->update($uploadData, $id);
+                                        $this->taxRateRepository->update($uploadData, $id);
                                     } else {
-                                        $this->taxRate->create($uploadData);
+                                        $this->taxRateRepository->create($uploadData);
                                     }
                                 } else {
-                                    $this->taxRate->create($uploadData);
+                                    $this->taxRateRepository->create($uploadData);
                                 }
                             }
                         }

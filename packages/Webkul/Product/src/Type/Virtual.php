@@ -52,4 +52,14 @@ class Virtual extends AbstractType
     {
         return false;
     }
+
+    /**
+     * Return true if item can be moved to cart from wishlist
+     *
+     * @return boolean
+     */
+    public function canBeMovedFromWishlistToCart()
+    {
+        return true;
+    }
 }

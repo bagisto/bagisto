@@ -4,7 +4,8 @@ namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Webkul\Core\Repositories\SubscribersListRepository as Subscribers;
+use Webkul\Core\Repositories\SubscribersListRepository;
+
 /**
  * Subscription controller
  *
@@ -21,15 +22,21 @@ class SubscriptionController extends Controller
     protected $_config;
 
     /**
-     * Subscription repository instance
+     * SubscribersListRepository
      *
-     * @var instanceof SubscribersListRepository
+     * @var Object
      */
-    protected $subscribers;
+    protected $subscribersListRepository;
 
-    public function __construct(Subscribers $subscribers)
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Core\Repositories\SubscribersListRepository $subscribersListRepository
+     * @return void
+     */
+    public function __construct(SubscribersListRepository $subscribersListRepository)
     {
-        $this->subscribers = $subscribers;
+        $this->subscribersListRepository = $subscribersListRepository;
 
         $this->_config = request('_config');
     }
@@ -51,8 +58,9 @@ class SubscriptionController extends Controller
      *
      * @return mixed
      */
-    public function edit($id) {
-        $subscriber = $this->subscribers->findOrFail($id);
+    public function edit($id)
+    {
+        $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         return view($this->_config['view'])->with('subscriber', $subscriber);
     }
@@ -64,10 +72,11 @@ class SubscriptionController extends Controller
      *
      * @return mixed
      */
-    public function update($id) {
+    public function update($id)
+    {
         $data = request()->all();
 
-        $subscriber = $this->subscribers->findOrFail($id);
+        $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         $result = $subscriber->update($data);
 
@@ -88,7 +97,7 @@ class SubscriptionController extends Controller
      */
     public function destroy($id)
     {
-        $subscriber = $this->subscribers->findOrFail($id);
+        $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         try {
             $this->subscriber->delete($id);

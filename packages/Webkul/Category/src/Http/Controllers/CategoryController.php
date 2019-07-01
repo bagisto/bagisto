@@ -2,9 +2,7 @@
 
 namespace Webkul\Category\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Category\Repositories\CategoryRepository as Category;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Support\Facades\Event;
 
@@ -28,17 +26,17 @@ class CategoryController extends Controller
      *
      * @var array
      */
-    protected $category;
+    protected $categoryRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository  $category
+     * @param  \Webkul\Category\Repositories\CategoryRepository $categoryRepository
      * @return void
      */
-    public function __construct(Category $category)
+    public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->category = $category;
+        $this->categoryRepository = $categoryRepository;
 
         $this->_config = request('_config');
     }
@@ -60,7 +58,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = $this->category->getCategoryTree(null, ['id']);
+        $categories = $this->categoryRepository->getCategoryTree(null, ['id']);
 
         return view($this->_config['view'], compact('categories'));
     }
@@ -91,7 +89,7 @@ class CategoryController extends Controller
             }
         }
 
-        $category = $this->category->create(request()->all());
+        $category = $this->categoryRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Category']));
 
@@ -106,9 +104,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $categories = $this->category->getCategoryTree($id);
+        $categories = $this->categoryRepository->getCategoryTree($id);
 
-        $category = $this->category->findOrFail($id);
+        $category = $this->categoryRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('category', 'categories'));
     }
@@ -116,17 +114,16 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $locale = request()->get('locale') ?: app()->getLocale();
 
         $this->validate(request(), [
             $locale . '.slug' => ['required', new \Webkul\Core\Contracts\Validations\Slug, function ($attribute, $value, $fail) use ($id) {
-                if (! $this->category->isSlugUnique($id, $value)) {
+                if (! $this->categoryRepository->isSlugUnique($id, $value)) {
                     $fail(trans('admin::app.response.already-taken', ['name' => 'Category']));
                 }
             }],
@@ -134,7 +131,7 @@ class CategoryController extends Controller
             'image.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
-        $this->category->update(request()->all(), $id);
+        $this->categoryRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Category']));
 
@@ -149,7 +146,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = $this->category->findOrFail($id);
+        $category = $this->categoryRepository->findOrFail($id);
 
         if(strtolower($category->name) == "root") {
             session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
@@ -157,7 +154,7 @@ class CategoryController extends Controller
             try {
                 Event:: fire('catalog.category.delete.before', $id);
 
-                $this->category->delete($id);
+                $this->categoryRepository->delete($id);
 
                 Event::fire('catalog.category.delete.after', $id);
 
@@ -187,7 +184,7 @@ class CategoryController extends Controller
                 try {
                     Event::fire('catalog.category.delete.before', $value);
 
-                    $this->category->delete($value);
+                    $this->categoryRepository->delete($value);
 
                     Event::fire('catalog.category.delete.after', $value);
                 } catch(\Exception $e) {

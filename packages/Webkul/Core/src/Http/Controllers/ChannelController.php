@@ -2,10 +2,8 @@
 
 namespace Webkul\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
-use Webkul\Core\Repositories\ChannelRepository as Channel;
+use Webkul\Core\Repositories\ChannelRepository;
 
 /**
  * Channel controller
@@ -27,17 +25,17 @@ class ChannelController extends Controller
      *
      * @var Object
      */
-    protected $channel;
+    protected $channelRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\ChannelRepository $channel
+     * @param  \Webkul\Core\Repositories\ChannelRepository $channelRepository
      * @return void
      */
-    public function __construct(Channel $channel)
+    public function __construct(ChannelRepository $channelRepository)
     {
-        $this->channel = $channel;
+        $this->channelRepository = $channelRepository;
 
         $this->_config = request('_config');
     }
@@ -83,7 +81,7 @@ class ChannelController extends Controller
 
         Event::fire('core.channel.create.before');
 
-        $channel = $this->channel->create(request()->all());
+        $channel = $this->channelRepository->create(request()->all());
 
         Event::fire('core.channel.create.after', $channel);
 
@@ -100,7 +98,7 @@ class ChannelController extends Controller
      */
     public function edit($id)
     {
-        $channel = $this->channel->with(['locales', 'currencies'])->findOrFail($id);
+        $channel = $this->channelRepository->with(['locales', 'currencies'])->findOrFail($id);
 
         return view($this->_config['view'], compact('channel'));
     }
@@ -108,11 +106,10 @@ class ChannelController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:channels,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
@@ -129,7 +126,7 @@ class ChannelController extends Controller
 
         Event::fire('core.channel.update.before', $id);
 
-        $channel = $this->channel->update(request()->all(), $id);
+        $channel = $this->channelRepository->update(request()->all(), $id);
 
         Event::fire('core.channel.update.after', $channel);
 
@@ -146,7 +143,7 @@ class ChannelController extends Controller
      */
     public function destroy($id)
     {
-        $channel = $this->channel->findOrFail($id);
+        $channel = $this->channelRepository->findOrFail($id);
 
         if ($channel->code == config('app.channel')) {
             session()->flash('error', trans('admin::app.settings.channels.last-delete-error'));
@@ -154,7 +151,7 @@ class ChannelController extends Controller
             try {
                 Event::fire('core.channel.delete.before', $id);
 
-                $this->channel->delete($id);
+                $this->channelRepository->delete($id);
 
                 Event::fire('core.channel.delete.after', $id);
 

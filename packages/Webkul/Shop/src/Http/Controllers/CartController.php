@@ -2,8 +2,6 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
@@ -66,7 +64,6 @@ class CartController extends Controller
         WishlistRepository $wishlistRepository
     )
     {
-
         $this->middleware('customer')->only(['moveToWishlist']);
 
         $this->cartItemRepository = $cartItemRepository;

@@ -2,12 +2,8 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
-use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Http\Listeners\CustomerEventsHandler;
-use Cart;
 use Cookie;
 
 /**
@@ -19,15 +15,21 @@ use Cookie;
 class SessionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Contains route related configuration
      *
-     * @return \Illuminate\Http\Response
+     * @var array
      */
     protected $_config;
 
+    /**
+     * Create a new Repository instance.
+     *
+     * @return void
+    */
     public function __construct()
     {
         $this->middleware('customer')->except(['show','create']);
+
         $this->_config = request('_config');
 
         $subscriber = new CustomerEventsHandler;
@@ -35,6 +37,11 @@ class SessionController extends Controller
         Event::subscribe($subscriber);
     }
 
+    /**
+     * Display the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function show()
     {
         if (auth()->guard('customer')->check()) {
@@ -44,9 +51,14 @@ class SessionController extends Controller
         }
     }
 
-    public function create(Request $request)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        $request->validate([
+        $this->validate(request(), [
             'email' => 'required|email',
             'password' => 'required'
         ]);
@@ -70,7 +82,7 @@ class SessionController extends Controller
 
             Cookie::queue(Cookie::make('enable-resend', 'true', 1));
 
-            Cookie::queue(Cookie::make('email-for-resend', $request->input('email'), 1));
+            Cookie::queue(Cookie::make('email-for-resend', request('email'), 1));
 
             auth()->guard('customer')->logout();
 
@@ -78,11 +90,17 @@ class SessionController extends Controller
         }
 
         //Event passed to prepare cart after login
-        Event::fire('customer.after.login', $request->input('email'));
+        Event::fire('customer.after.login', request('email'));
 
         return redirect()->intended(route($this->_config['redirect']));
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         auth()->guard('customer')->logout();

@@ -2,8 +2,6 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
 
@@ -59,7 +57,7 @@ class ForgotPasswordController extends Controller
         $response = $this->broker()->sendResetLink(
             request(['email'])
         );
-        //dd($response);
+        
         if ($response == Password::RESET_LINK_SENT) {
             session()->flash('success', trans($response));
 

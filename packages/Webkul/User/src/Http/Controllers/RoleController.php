@@ -2,10 +2,8 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
-use Webkul\User\Repositories\RoleRepository as Role;
+use Webkul\User\Repositories\RoleRepository;
 
 /**
  * Admin user role controller
@@ -27,19 +25,19 @@ class RoleController extends Controller
      *
      * @var array
      */
-    protected $role;
+    protected $roleRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\User\Repositories\RoleRepository $role
+     * @param  \Webkul\User\Repositories\RoleRepository $roleRepository
      * @return void
      */
-    public function __construct(Role $role)
+    public function __construct(RoleRepository $roleRepository)
     {
         $this->middleware('admin');
 
-        $this->role = $role;
+        $this->roleRepository = $roleRepository;
 
         $this->_config = request('_config');
     }
@@ -67,10 +65,9 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $this->validate(request(), [
             'name' => 'required',
@@ -79,7 +76,7 @@ class RoleController extends Controller
 
         Event::fire('user.role.create.before');
 
-        $role = $this->role->create(request()->all());
+        $role = $this->roleRepository->create(request()->all());
 
         Event::fire('user.role.create.after', $role);
 
@@ -96,7 +93,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = $this->role->findOrFail($id);
+        $role = $this->roleRepository->findOrFail($id);
 
         return view($this->_config['view'], compact('role'));
     }
@@ -104,11 +101,10 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $this->validate(request(), [
             'name' => 'required',
@@ -117,7 +113,7 @@ class RoleController extends Controller
 
         Event::fire('user.role.update.before', $id);
 
-        $role = $this->role->update(request()->all(), $id);
+        $role = $this->roleRepository->update(request()->all(), $id);
 
         Event::fire('user.role.update.after', $role);
 
@@ -134,17 +130,17 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $role = $this->role->findOrFail($id);
+        $role = $this->roleRepository->findOrFail($id);
 
         if ($role->admins->count() >= 1) {
             session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
-        } else if($this->role->count() == 1) {
+        } else if($this->roleRepository->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Role']));
         } else {
             try {
                 Event::fire('user.role.delete.before', $id);
 
-                $this->role->delete($id);
+                $this->roleRepository->delete($id);
 
                 Event::fire('user.role.delete.after', $id);
 

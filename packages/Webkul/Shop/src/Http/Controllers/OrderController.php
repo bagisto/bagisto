@@ -2,11 +2,8 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
-use Auth;
 use PDF;
 
 /**
@@ -28,36 +25,36 @@ class OrderController extends Controller
     /**
      * OrderrRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $order;
+    protected $orderRepository;
 
     /**
      * InvoiceRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $invoice;
+    protected $invoiceRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Order\Repositories\OrderRepository   $order
-     * @param  \Webkul\Order\Repositories\InvoiceRepository $invoice
+     * @param  \Webkul\Order\Repositories\OrderRepository   $orderRepository
+     * @param  \Webkul\Order\Repositories\InvoiceRepository $invoiceRepository
      * @return void
      */
     public function __construct(
-        OrderRepository $order,
-        InvoiceRepository $invoice
+        OrderRepository $orderRepository,
+        InvoiceRepository $invoiceRepository
     )
     {
         $this->middleware('customer');
 
         $this->_config = request('_config');
 
-        $this->order = $order;
+        $this->orderRepository = $orderRepository;
 
-        $this->invoice = $invoice;
+        $this->invoiceRepository = $invoiceRepository;
     }
 
     /**
@@ -78,7 +75,7 @@ class OrderController extends Controller
      */
     public function view($id)
     {
-        $order = $this->order->findOneWhere([
+        $order = $this->orderRepository->findOneWhere([
             'customer_id' => auth()->guard('customer')->user()->id,
             'id' => $id
         ]);
@@ -97,7 +94,7 @@ class OrderController extends Controller
      */
     public function print($id)
     {
-        $invoice = $this->invoice->findOrFail($id);
+        $invoice = $this->invoiceRepository->findOrFail($id);
 
         $pdf = PDF::loadView('shop::customers.account.orders.pdf', compact('invoice'))->setPaper('a4');
 

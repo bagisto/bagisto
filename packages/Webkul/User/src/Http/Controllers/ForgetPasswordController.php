@@ -2,8 +2,6 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
 
@@ -15,7 +13,6 @@ use Illuminate\Support\Facades\Password;
  */
 class ForgetPasswordController extends Controller
 {
-
     use SendsPasswordResetEmails;
 
     /**

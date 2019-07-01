@@ -2,11 +2,8 @@
 
 namespace Webkul\Attribute\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
-use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
 
 /**
  * Catalog family controller
@@ -26,19 +23,32 @@ class AttributeFamilyController extends Controller
     /**
      * AttributeFamilyRepository object
      *
-     * @var array
+     * @var Object
      */
-    protected $attributeFamily;
+    protected $attributeFamilyRepository;
+
+    /**
+     * AttributeRepository object
+     *
+     * @var Object
+     */
+    protected $attributeRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamily
+     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository $attributeFamilyRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository       $attributeRepository
      * @return void
      */
-    public function __construct(AttributeFamily $attributeFamily)
+    public function __construct(
+        AttributeFamilyRepository $attributeFamilyRepository,
+        AttributeRepository $attributeRepository
+    )
     {
-        $this->attributeFamily = $attributeFamily;
+        $this->attributeFamilyRepository = $attributeFamilyRepository;
+
+        $this->attributeRepository = $attributeRepository;
 
         $this->_config = request('_config');
     }
@@ -56,14 +66,13 @@ class AttributeFamilyController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository  $attribute
      * @return \Illuminate\Http\Response
      */
-    public function create(Attribute $attribute)
+    public function create()
     {
-        $attributeFamily = $this->attributeFamily->with(['attribute_groups.custom_attributes'])->findOneByField('code', 'default');
+        $attributeFamily = $this->attributeFamilyRepository->with(['attribute_groups.custom_attributes'])->findOneByField('code', 'default');
 
-        $custom_attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
+        $custom_attributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type']);
 
         return view($this->_config['view'], compact('custom_attributes', 'attributeFamily'));
     }
@@ -80,7 +89,7 @@ class AttributeFamilyController extends Controller
             'name' => 'required'
         ]);
 
-        $attributeFamily = $this->attributeFamily->create(request()->all());
+        $attributeFamily = $this->attributeFamilyRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Family']));
 
@@ -90,15 +99,14 @@ class AttributeFamilyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository  $attribute
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Attribute $attribute, $id)
+    public function edit($id)
     {
-        $attributeFamily = $this->attributeFamily->with(['attribute_groups.custom_attributes'])->findOrFail($id, ['*']);
+        $attributeFamily = $this->attributeFamilyRepository->with(['attribute_groups.custom_attributes'])->findOrFail($id, ['*']);
 
-        $custom_attributes = $attribute->all(['id', 'code', 'admin_name', 'type']);
+        $custom_attributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type']);
 
         return view($this->_config['view'], compact('attributeFamily', 'custom_attributes'));
     }
@@ -106,18 +114,17 @@ class AttributeFamilyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:attribute_families,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
             'name' => 'required'
         ]);
 
-        $attributeFamily = $this->attributeFamily->update(request()->all(), $id);
+        $attributeFamily = $this->attributeFamilyRepository->update(request()->all(), $id);
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Family']));
 
@@ -132,16 +139,16 @@ class AttributeFamilyController extends Controller
      */
     public function destroy($id)
     {
-        $attributeFamily = $this->attributeFamily->findOrFail($id);
+        $attributeFamily = $this->attributeFamilyRepository->findOrFail($id);
 
-        if ($this->attributeFamily->count() == 1) {
+        if ($this->attributeFamilyRepository->count() == 1) {
             session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Family']));
 
         } else if ($attributeFamily->products()->count()) {
             session()->flash('error', trans('admin::app.response.attribute-product-error', ['name' => 'Attribute family']));
         } else {
             try {
-                $this->attributeFamily->delete($id);
+                $this->attributeFamilyRepository->delete($id);
 
                 session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Family']));
 
@@ -159,7 +166,8 @@ class AttributeFamilyController extends Controller
      *
      * @return response \Illuminate\Http\Response
      */
-    public function massDestroy() {
+    public function massDestroy()
+    {
         $suppressFlash = false;
 
         if (request()->isMethod('delete')) {
@@ -167,7 +175,7 @@ class AttributeFamilyController extends Controller
 
             foreach ($indexes as $key => $value) {
                 try {
-                    $this->attributeFamily->delete($value);
+                    $this->attributeFamilyRepository->delete($value);
                 } catch (\Exception $e) {
                     $suppressFlash = true;
 

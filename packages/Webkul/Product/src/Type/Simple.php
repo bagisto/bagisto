@@ -58,6 +58,16 @@ class Simple extends AbstractType
     }
 
     /**
+     * Return true if item can be moved to cart from wishlist
+     *
+     * @return boolean
+     */
+    public function canBeMovedFromWishlistToCart()
+    {
+        return true;
+    }
+
+    /**
      * @return integer
      */
     public function totalQuantity()
