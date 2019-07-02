@@ -49,4 +49,19 @@ class Configurable extends AbstractType
     {
         return false;
     }
+
+    /**
+     * Returns validation rules
+     *
+     * @return array
+     */
+    public function getTypeValidationRules()
+    {
+        return [
+            'variants.*.name' => 'required',
+            'variants.*.sku' => 'required',
+            'variants.*.price' => 'required',
+            'variants.*.weight' => 'required',
+        ];
+    }
 }

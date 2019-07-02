@@ -52,4 +52,22 @@ class Downloadable extends AbstractType
     {
         return false;
     }
+
+    /**
+     * Returns validation rules
+     *
+     * @return array
+     */
+    public function getTypeValidationRules()
+    {
+        return [
+            // 'downloadable_links.*.title' => 'required',
+            'downloadable_links.*.type' => 'required',
+            'downloadable_links.*.file' => 'required_if:type,==,file',
+            'downloadable_links.*.file_name' => 'required_if:type,==,file',
+            'downloadable_links.*.url' => 'required_if:type,==,url',
+            'downloadable_links.*.downloads' => 'required',
+            'downloadable_links.*.sort_order' => 'required',
+        ];
+    }
 }

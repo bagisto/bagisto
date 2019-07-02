@@ -81,5 +81,15 @@ abstract class AbstractType
     {
         return $this->additionalViews;
     }
+
+    /**
+     * Returns validation rules
+     *
+     * @return array
+     */
+    public function getTypeValidationRules()
+    {
+        return [];
+    }
 }
 ?>

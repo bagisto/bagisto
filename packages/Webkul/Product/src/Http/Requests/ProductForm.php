@@ -68,34 +68,12 @@ class ProductForm extends FormRequest
      */
     public function rules()
     {
-        $this->rules = [
+        $product = $this->product->find($this->id);
+        
+        $this->rules = array_merge($product->getTypeInstance()->getTypeValidationRules(), [
             'sku' => ['required', 'unique:products,sku,' . $this->id, new \Webkul\Core\Contracts\Validations\Slug],
             'images.*' => 'mimes:jpeg,jpg,bmp,png',
-        ];
-
-        $product = $this->product->find($this->id);
-
-        if ($product->type == 'configurable') {
-            $this->rules = array_merge($this->rules, [
-                'variants.*.name' => 'required',
-                'variants.*.sku' => 'required',
-                'variants.*.price' => 'required',
-                'variants.*.weight' => 'required',
-            ]);
-        } else if ($product->type == 'downloadable') {
-            $this->rules = array_merge($this->rules, [
-                // 'downloadable_links.*.title' => 'required',
-                'downloadable_links.*.type' => 'required',
-                'downloadable_links.*.file' => 'required_if:type,==,file',
-                'downloadable_links.*.file_name' => 'required_if:type,==,file',
-                'downloadable_links.*.url' => 'required_if:type,==,url',
-                'downloadable_links.*.downloads' => 'required',
-                'downloadable_links.*.sort_order' => 'required',
-
-            ]);
-        }
-
-        $inputs = $this->all();
+        ]);
 
         foreach ($product->getEditableAttributes() as $attribute) {
             if ($attribute->code == 'sku')
@@ -117,10 +95,10 @@ class ProductForm extends FormRequest
                 array_push($validations, new \Webkul\Core\Contracts\Validations\Decimal);
 
             if ($attribute->is_unique) {
-                array_push($validations, function ($field, $value, $fail) use ($inputs, $attribute) {
+                array_push($validations, function ($field, $value, $fail) use ($attribute) {
                     $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
 
-                    if (! $this->attributeValue->isValueUnique($this->id, $attribute->id, $column, $inputs[$attribute->code]))
+                    if (! $this->attributeValue->isValueUnique($this->id, $attribute->id, $column, request($attribute->code)))
                         $fail('The :attribute has already been taken.');
                 });
             }
