@@ -41,7 +41,6 @@
             @php
                 $applicationFee = $cart->base_grand_total;
                 $applicationFee = (0.029 * $applicationFee) + (0.02 * $applicationFee) + 0.3;
-                $applicationFee = core()->currency($applicationFee);
             @endphp
 
             <label>
@@ -49,7 +48,7 @@
                 <small>{{ __('stripe::app.more-info') }}</small>
             </label>
 
-            <label class="right">{{ $applicationFee }}</label>
+            <label class="right">{{ core()->currency($applicationFee) }}</label>
         </div>
     @endif
 
@@ -58,7 +57,7 @@
         <label>{{ __('shop::app.checkout.total.grand-total') }}</label>
         <label class="right" id="grand-total-amount-detail">
             @if(core()->getConfigData('stripe.connect.details.stripefees') == 'customer' && isset($cart->payment) && $cart->payment->method == 'stripe')
-                {{ core()->currency($cart->base_grand_total) }}
+                {{ core()->currency($cart->base_grand_total + $applicationFee) }}
             @else
                 {{ core()->currency($cart->base_grand_total) }}
             @endif
