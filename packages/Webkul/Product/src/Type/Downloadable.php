@@ -2,10 +2,6 @@
 
 namespace Webkul\Product\Type;
 
-use Config;
-use Webkul\Checkout\Models\CartShippingRate;
-use Webkul\Shipping\Facades\Shipping;
-
 /**
  * Class Downloadable.
  *

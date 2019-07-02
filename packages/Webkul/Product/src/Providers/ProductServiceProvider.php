@@ -3,7 +3,6 @@
 namespace Webkul\Product\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Webkul\Product\Providers\EventServiceProvider;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
 
