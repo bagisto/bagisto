@@ -88,7 +88,7 @@ class CategoryRepository extends Repository
      */
     public function getRootCategories()
     {
-        return $this->model::withDepth()->having('depth', '=', 0)->get();
+        return $this->getModel()->where('parent_id', NULL)->get();
     }
 
     /**

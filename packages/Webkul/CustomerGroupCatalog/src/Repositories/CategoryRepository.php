@@ -23,6 +23,7 @@ class CategoryRepository extends BaseCategoryRepository
         return $this->getModel()->join('category_translations', function ($join) {
                 $join->on('categories.id', 'category_translations.category_id')
                     ->where('category_translations.locale', app()->getLocale())
+                    ->where('categories.parent_id', '!=', null)
                     ->where('category_translations.name', 'like', '%' . urldecode(request()->input('query')) . '%');
             })
             ->select('categories.*')
