@@ -96,6 +96,10 @@ class SAASCustomizerServiceProvider extends ServiceProvider
     public function registerConfig()
     {
         $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/purge-pool.php', 'purge-pool'
+        );
+
+        $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/super-menu.php', 'menu.super-admin'
         );
     }
