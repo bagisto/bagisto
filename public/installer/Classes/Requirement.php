@@ -85,7 +85,7 @@ class Requirement {
         $currentPhpVersion = $this->getPhpVersionInfo();
         $supported = false;
 
-        if (version_compare($currentPhpVersion['version'], $_minPhpVersion) >= 0) {
+        if (version_compare((str_pad($currentPhpVersion['version'], 6, "0")), $_minPhpVersion) >= 0) {
             $supported = true;
         }
 

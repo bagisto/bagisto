@@ -75,6 +75,8 @@ return [
         'edit' => 'Edit',
         'create' => 'Add',
         'delete' => 'Delete',
+        'promotions' => 'Promotions',
+        'cart-rules' => 'Cart Rules'
     ],
 
     'dashboard' => [
