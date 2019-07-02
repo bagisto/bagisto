@@ -802,6 +802,7 @@ return [
     ],
 
     'promotion' => [
+        'zero-unlimited' => 'Zero denotes unlimited usage here',
         'catalog-rule' => 'Catalog Rules',
         'cart-rule' => 'Cart Rules',
         'add-catalog-rule' => 'Add Catalog Rule',
