@@ -32,10 +32,6 @@ return [
                 'type' => 'select',
                 'options' => [
                     [
-                        'name' => 'default',
-                        'title' => 'ShowPriceAfterLogin::app.showpriceafterlogin.select-function',
-                        'value' => ""
-                    ], [
                         'name' => 'hide-buy-cart-guest',
                         'title' => 'ShowPriceAfterLogin::app.showpriceafterlogin.hide-buy-cart-guest',
                         'value' => "hide-buy-cart-guest"
