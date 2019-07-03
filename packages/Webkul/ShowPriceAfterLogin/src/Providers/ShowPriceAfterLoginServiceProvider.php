@@ -27,17 +27,9 @@ class ShowPriceAfterLoginServiceProvider extends ServiceProvider
             dirname(__DIR__) . '/Resources/views/Shop/add-to-cart.blade.php' => base_path('resources/views/vendor/shop/products/add-to-cart.blade.php')
         ]);
 
-        // $this->publishes([
-        //     dirname(__DIR__) . '/Resources/views/Shop/add-buttons.blade.php' => base_path('views/vendor/shop/products/add-buttons.blade.php')
-        // ]);
-
         $this->publishes([
             dirname(__DIR__) . '/Resources/views/Shop/buy-now.blade.php' => base_path('resources/views/vendor/shop/products/buy-now.blade.php')
         ]);
-
-        // $this->publishes([
-        //     dirname(__DIR__) . '/Resources/views/Shop/view/product-add.blade.php' => base_path('views/vendor/shop/products/view/product-add.blade.php')
-        // ]);
 
         $this->publishes([
             dirname(__DIR__) . '/Resources/views/Shop/review-price.blade.php' => base_path('resources/views/vendor/shop/products/review-price.blade.php')
