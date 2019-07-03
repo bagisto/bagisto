@@ -89,7 +89,11 @@ class StripeConnectController extends Controller
      * @param  Webkul\Attribute\Repositories\OrderRepository  $orderRepository
      * @return void
      */
-    public function __construct(OrderRepository $orderRepository, StripeCart $stripeCart, StripeConnect $stripeConnect)
+    public function __construct(
+        OrderRepository $orderRepository,
+        StripeCart $stripeCart,
+        StripeConnect $stripeConnect
+    )
     {
         // $this->middleware('auth:super-admin', ['only' => ['storeDetails', 'createDetails', 'editDetails', 'updateDetails']]);
 
@@ -285,7 +289,7 @@ class StripeConnectController extends Controller
                     ]);
 
                     $result = StripeCharge::create([
-                        "amount" => round(Cart::getCart()->base_grand_total, 2) * 100 + round($applicationFee, 2) * 100,
+                        "amount" => round(Cart::getCart()->base_grand_total, 2) * 100,
                         "currency" => Cart::getCart()->base_currency_code,
                         "source" => $stripeToken,
                         "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
