@@ -9,5 +9,23 @@ use Cart;
 
 class ConvertXToProductId
 {
+    public function __construct()
+    {
 
+    }
+
+    public function convertFromCategory()
+    {
+
+    }
+
+    public function convertFromAttributeOptions()
+    {
+
+    }
+
+    public function convertFromAttributes()
+    {
+
+    }
 }
