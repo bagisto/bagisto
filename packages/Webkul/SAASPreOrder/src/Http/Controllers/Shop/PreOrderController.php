@@ -45,7 +45,7 @@ class PreOrderController extends Controller
      *
      * @param  Webkul\Product\Repositories\ProductRepository       $productRepository
      * @param  Webkul\Sales\Repositories\OrderItemRepository       $orderItemRepository
-     * @param  Webkul\PreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
+     * @param  Webkul\SAASPreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
      * @return void
      */
     public function __construct(

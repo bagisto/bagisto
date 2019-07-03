@@ -41,7 +41,7 @@ class Cart
      *
      * @param  Webkul\Product\Helpers\Price                        $priceHelper
      * @param  Webkul\Product\Repositories\ProductRepository       $productRepository
-     * @param  Webkul\PreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
+     * @param  Webkul\SAASPreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
      * @return void
      */
     public function __construct(
@@ -159,6 +159,14 @@ class Cart
     {
         if (! request()->input('pre_order_payment')) {
             $product = $this->productRepository->find($cartItem->product_id);
+
+            if ($product->type == 'configurable') {
+                if (isset($cartItem->child->product_id)) {
+                    $product = $this->productRepository->find($cartItem->child->product_id);
+                } else {
+                    return;
+                }
+            }
 
             if ($product->totalQuantity() > 0 || ! $product->allow_preorder)
                 return;

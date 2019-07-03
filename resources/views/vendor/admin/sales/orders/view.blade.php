@@ -31,7 +31,7 @@
                     </a>
                 @endif
 
-                @if ($order->canShip())
+                @if ($order->canShip() && ! app('Webkul\SAASPreOrder\Repositories\PreOrderItemRepository')->isPreOrderPaymentOrder($order->id))
                     <a href="{{ route('admin.sales.shipments.create', $order->id) }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.sales.orders.shipment-btn-title') }}
                     </a>

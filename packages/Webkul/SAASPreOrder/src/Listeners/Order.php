@@ -32,7 +32,7 @@ class Order
      * Create a new Order event listener instance.
      *
      * @param  Webkul\Product\Helpers\Price                        $priceHelper
-     * @param  Webkul\PreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
+     * @param  Webkul\SAASPreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
      * @return void
      */
     public function __construct(

@@ -30,7 +30,7 @@ class Invoice
     /**
      * Create a new Order event listener instance.
      *
-     * @param  Webkul\PreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
+     * @param  Webkul\SAASPreOrder\Repositories\PreOrderItemRepository $preOrderItemRepository
      * @param  Webkul\Sales\Repositories\OrderRepository $orderRepository
      * @return void
      */
