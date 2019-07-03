@@ -16,7 +16,7 @@
 
         @include ('shop::products.buy-now')
 
-        <button type="submit" class="btn btn-lg btn-primary pre-order-btn" style="width: 100%; display: none;">
+        <button type="submit" class="btn btn-lg btn-black pre-order-btn" style="width: 100%; display: none;">
             {{ __('preorder::app.shop.products.preorder') }}
         </button>
     @endif
