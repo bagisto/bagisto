@@ -1,20 +1,13 @@
-@php
-    $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable');
-    $function = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
-@endphp
+<div class="product-price mt-10">
+    @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
 
-@if(($status && ! auth()->guard('customer')->check()) && $function == 'hide-price-buy-cart-guest')
-    <div class="product-price mt-10">
-        @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
-
-        @if ($product->type == 'configurable')
-            <span class="pro-price">{{ core()->currency($priceHelper->getMinimalPrice($product)) }}</span>
+    @if ($product->type == 'configurable')
+        <span class="pro-price">{{ core()->currency($priceHelper->getMinimalPrice($product)) }}</span>
+    @else
+        @if ($priceHelper->haveSpecialPrice($product))
+            <span class="pro-price">{{ core()->currency($priceHelper->getSpecialPrice($product)) }}</span>
         @else
-            @if ($priceHelper->haveSpecialPrice($product))
-                <span class="pro-price">{{ core()->currency($priceHelper->getSpecialPrice($product)) }}</span>
-            @else
-                <span class="pro-price">{{ core()->currency($product->price) }}</span>
-            @endif
+            <span class="pro-price">{{ core()->currency($product->price) }}</span>
         @endif
-    </div>
-@endif
+    @endif
+</div>

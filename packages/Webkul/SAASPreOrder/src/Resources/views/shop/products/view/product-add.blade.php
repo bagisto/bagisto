@@ -1,4 +1,5 @@
 {!! view_render_event('bagisto.shop.products.view.product-add.after', ['product' => $product]) !!}
+
 <div class="add-to-buttons">
     @if ($product->type != 'configurable')
         @if ($product->totalQuantity() < 1 && $product->allow_preorder)
@@ -15,7 +16,7 @@
 
         @include ('shop::products.buy-now')
 
-        <button type="submit" class="btn btn-lg btn-primary pre-order-btn" style="width: 100%; display: none;background: #000 !important;">
+        <button type="submit" class="btn btn-lg btn-primary pre-order-btn" style="width: 100%; display: none;">
             {{ __('preorder::app.shop.products.preorder') }}
         </button>
     @endif
