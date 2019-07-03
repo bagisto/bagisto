@@ -5,7 +5,6 @@ namespace Webkul\Customer\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Customer\Mail\VerificationEmail;
-use Illuminate\Routing\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Cookie;
