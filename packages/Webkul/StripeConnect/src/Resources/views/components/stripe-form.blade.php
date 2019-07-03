@@ -39,7 +39,8 @@
             @if ($enableStripe ==0)
                 <span class="badge badge-md badge-danger">This seller ain't Stripe ready</span>
             @else
-                <button class="btn btn-primary btn-lg" id="stripe-pay-button" style="border-radius: 3px !important;">Pay Now ( {{ core()->currency(\Cart::getCart()->base_grand_total) }} )
+                <button class="btn btn-primary btn-lg" id="stripe-pay-button" style="border-radius: 3px !important;">
+                    Pay Now
                 </button>
             @endif
         </div>
