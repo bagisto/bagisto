@@ -146,7 +146,7 @@
                             0,
                             0
                         ],
-                        max: @json(core()->convertPrice($productFlatRepository->getMaximumPrice($category->id))),
+                        max: {{ core()->convertPrice($productFlatRepository->getMaximumPrice($category->id)) }},
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
