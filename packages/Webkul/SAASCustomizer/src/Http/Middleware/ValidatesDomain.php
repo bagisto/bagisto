@@ -66,7 +66,7 @@ class ValidatesDomain
             if (request()->is('company/*') || request()->is('super/*')) {
                 return $next($request);
             } else {
-                // return redirect()->route('company.create.index');
+                return redirect()->route('company.create.index');
             }
         } else {
             if ((request()->is('company/*') || request()->is('super/*')) && ! request()->is('company/seed-data')) {
