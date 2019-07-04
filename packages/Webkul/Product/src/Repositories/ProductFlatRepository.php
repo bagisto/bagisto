@@ -39,10 +39,14 @@ class ProductFlatRepository extends Repository
     /**
      * Maximum Price of Prodcut
      *
+     * @param int  $categoryId
      * return integer
      */
-    public function getMaximumPrice()
+    public function getMaximumPrice($categoryId)
     {
-        return $this->model->max('price');
+        return $this->model
+            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+            ->where('product_categories.category_id', $categoryId)
+            ->max('price');
     }
 }
