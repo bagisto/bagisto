@@ -61,8 +61,17 @@ class Order
                     'payment_order_item_id' => $item->id
                 ], $preOrderItem->id);
             } else {
-                if ($item->product->totalQuantity() > 0 || ! $item->product->allow_preorder)
-                    continue;
+                if ($item->product->type == 'configurable') {
+                    if (isset($item->child->product_id)) {
+                        if ($item->child->product->totalQuantity() > 0 || ! $item->child->product->allow_preorder)
+                            continue;
+                    } else {
+                        return;
+                    }
+                } else {
+                    if ($item->product->totalQuantity() > 0 || ! $item->product->allow_preorder)
+                        continue;
+                }
 
                 if (core()->getConfigData('preorder.settings.general.preorder_type') == 'partial') {
                     $preOrderType = 'partial';
