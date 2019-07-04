@@ -24,6 +24,12 @@ class StripeConnectServiceProvider extends ServiceProvider
             dirname(__DIR__) . '/Resources/assets/images/' => base_path('public/vendor/webkul/stripe/assets/images/')
         ]);
 
+        $this->publishes([
+            dirname(__DIR__) . '/Resources/views/checkout/total' => resource_path('views/vendor/shop/checkout/total')
+        ]);
+
+        \Webkul\StripeConnect\Models\StripeConnect::observe(\Webkul\StripeConnect\Observers\StripeConnectObserver::class);
+
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'stripe');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'stripe');

@@ -224,9 +224,6 @@ class SAASCustomizerServiceProvider extends ServiceProvider
         $this->app->concord->registerModel(\Webkul\User\Contracts\Admin::class, \Webkul\SAASCustomizer\Models\User\Admin::class);
         $this->app->concord->registerModel(\Webkul\User\Contracts\Role::class, \Webkul\SAASCustomizer\Models\User\Role::class);
 
-        //Stripe Connect Model
-        $this->app->concord->registerModel(\Webkul\StripeConnect\Contracts\StripeConnect::class, \Webkul\SAASCustomizer\Models\StripeConnect\StripeConnect::class);
-
         //Discount Model
         $this->app->concord->registerModel(\Webkul\Discount\Contracts\CartRule::class, \Webkul\SAASCustomizer\Models\Discount\CartRule::class);
     }
@@ -323,8 +320,6 @@ class SAASCustomizerServiceProvider extends ServiceProvider
         \Webkul\SAASCustomizer\Models\User\Admin::observe(\Webkul\SAASCustomizer\Observers\User\AdminObserver::class);
 
         \Webkul\SAASCustomizer\Models\User\Role::observe(\Webkul\SAASCustomizer\Observers\User\RoleObserver::class);
-
-        \Webkul\SAASCustomizer\Models\StripeConnect\StripeConnect::observe(\Webkul\SAASCustomizer\Observers\StripeConnect\StripeConnectObserver::class);
 
         \Webkul\SAASCustomizer\Models\Discount\CartRule::observe(\Webkul\SAASCustomizer\Observers\Discount\CartRuleObserver::class);
     }
