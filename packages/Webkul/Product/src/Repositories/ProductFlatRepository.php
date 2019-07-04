@@ -35,4 +35,14 @@ class ProductFlatRepository extends Repository
     {
         return 'Webkul\Product\Contracts\ProductFlat';
     }
+
+    /**
+     * Maximum Price of Prodcut
+     *
+     * return integer
+     */
+    public function getMaximumPrice()
+    {
+        return $this->model->max('price');
+    }
 }

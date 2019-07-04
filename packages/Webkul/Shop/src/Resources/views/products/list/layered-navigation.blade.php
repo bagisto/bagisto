@@ -1,5 +1,7 @@
 @inject ('attributeRepository', 'Webkul\Attribute\Repositories\AttributeRepository')
 
+@inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
+
 <div class="layered-filter-wrapper">
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
@@ -144,7 +146,7 @@
                             0,
                             0
                         ],
-                        max: 500,
+                        max: @json(core()->convertPrice($productFlatRepository->getMaximumPrice())),
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
