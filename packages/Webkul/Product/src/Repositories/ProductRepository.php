@@ -520,7 +520,7 @@ class ProductRepository extends Repository
                                     if ($attribute->code != 'price') {
                                         $query2 = $query2->where($column, '>=', current($queryParams))->where($column, '<=', end($queryParams));
                                     } else {
-                                        $query2 = $query2->where($column, '>=', current($queryParams))->where($column, '<=', end($queryParams));
+                                        $query2 = $query2->where($column, '>=', core()->convertToBasePrice(current($queryParams)))->where($column, '<=',  core()->convertToBasePrice(end($queryParams)));
                                     }
                                 }
                             }
