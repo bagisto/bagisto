@@ -47,6 +47,10 @@ class Company
             $primaryServerNameWithoutProtocol = explode('https://', $primaryServerName)[1];
         }
 
+        if (str_contains($primaryServerNameWithoutProtocol, '/')) {
+            $primaryServerNameWithoutProtocol = explode('/', $primaryServerNameWithoutProtocol)[0];
+        }
+
         if ($currentURL == $primaryServerNameWithoutProtocol) {
             return true;
         } else {
@@ -82,6 +86,10 @@ class Company
             $currentURL = explode('http://', $currentURL)[1];
         } else if (str_contains($currentURL, 'http://')) {
             $currentURL = explode('http://', $currentURL)[1];
+        }
+
+        if (str_contains($primaryServerNameWithoutProtocol, '/')) {
+            $primaryServerNameWithoutProtocol = explode('/', $primaryServerNameWithoutProtocol)[0];
         }
 
         if ($currentURL == $primaryServerNameWithoutProtocol) {
