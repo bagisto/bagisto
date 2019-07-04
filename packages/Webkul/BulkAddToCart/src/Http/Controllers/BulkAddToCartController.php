@@ -100,22 +100,26 @@ class BulkAddToCartController extends Controller
                                         if ($super_attribute->type == 'select') {
                                             foreach ($product->attribute_values as $attribute_value) {
                                                 if ($super_attribute->id == $attribute_value->attribute_id) {
-                                                    $attributes[$super_attribute->id] = (string)$attribute_value->integer_value;
+                                                    $attributes[$super_attribute->id] = (string) $attribute_value->integer_value;
                                                 }
                                             }
                                         }
                                     }
 
-                                    $cart['product'] = (string)$parentProduct->id;
-                                    $cart['quantity'] = (string)$uploadData['quantity'];
+                                    $cart['product'] = (string) $parentProduct->id;
+                                    $cart['quantity'] = (string) $uploadData['quantity'];
                                     $cart['is_configurable'] = 'true';
-                                    $cart['selected_configurable_option'] = (string)$product->id;
+                                    $cart['selected_configurable_option'] = (string) $product->id;
                                     $cart['super_attribute'] = $attributes;
                                 } else {
-                                    $cart['product'] = (string)$product->id;
-                                    $cart['quantity'] = (string)$uploadData['quantity'];
+                                    $cart['product'] = (string) $product->id;
+                                    $cart['quantity'] = (string) $uploadData['quantity'];
                                     $cart['is_configurable'] = 'false';
                                 }
+
+                                request()->merge([
+                                    'quantity' => $cart['quantity']
+                                ]);
 
                                 Event::fire('checkout.cart.add.before', $cart['product']);
 
@@ -171,9 +175,7 @@ class BulkAddToCartController extends Controller
                     return redirect()->route($this->_config['redirect']);
                 }
             } catch (\Exception $e) {
-                $failure = new Failure(1, 'rows', [0 => trans('bulkaddtocart::app.products.enough-row-error')]);
-
-                session()->flash('error', $failure->errors()[0]);
+                session()->flash('error', $e->getMessage());
 
                 return redirect()->back();
             }
