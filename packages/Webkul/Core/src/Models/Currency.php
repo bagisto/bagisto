@@ -12,9 +12,7 @@ class Currency extends Model implements CurrencyContract
      *
      * @var array
      */
-    protected $fillable = [
-        'code', 'name'
-    ];
+    protected $fillable = ['code', 'name', 'symbol'];
 
     /**
      * Set currency code in capital
