@@ -146,7 +146,7 @@
                             0,
                             0
                         ],
-                        max: {{ core()->convertPrice($productFlatRepository->getMaximumPrice($category->id)) }},
+                        max: {{ isset($category) ? core()->convertPrice($productFlatRepository->getMaximumPrice($category->id)) : core()->convertPrice(500) }},
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
