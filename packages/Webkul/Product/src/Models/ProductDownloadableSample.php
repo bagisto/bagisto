@@ -45,7 +45,10 @@ class ProductDownloadableSample extends TranslatableModel implements ProductDown
     {
         $array = parent::toArray();
 
-        $array['title'] = $this->translate(request()->get('locale') ?: app()->getLocale())->title;
+
+        $translation = $this->translate(request()->get('locale') ?: app()->getLocale());
+
+        $array['title'] = $translation ? $translation->title : '';
 
         $array['file_url'] = $this->file ? Storage::url($this->file) : null;
 
