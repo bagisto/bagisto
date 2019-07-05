@@ -4,10 +4,6 @@
     {{ __('shop::app.customer.account.order.view.page-tile', ['order_id' => $order->id]) }}
 @endsection
 
-@push('css')
-    <link rel="stylesheet" href="{{ asset('vendor/webkul/preorder/assets/css/preorder.css') }}">
-@endpush
-
 @section('content-wrapper')
 
     <div class="account-content">
@@ -29,16 +25,6 @@
 
                 <tabs>
                     <tab name="{{ __('shop::app.customer.account.order.view.info') }}" :selected="true">
-
-                        <?php
-                            $preOrderItemRepository = app('Webkul\SAASPreOrder\Repositories\PreOrderItemRepository');
-
-                            $havePreOrderItems = $preOrderItemRepository->havePreOrderItems($order->id);
-                        ?>
-
-                        @if ($havePreOrderItems)
-                            <div class="preorder-info">{{ __('preorder::app.shop.sales.orders.preorder-summary') }}</div>
-                        @endif
 
                         <div class="sale-section">
                             <div class="section-content">
@@ -82,57 +68,8 @@
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
                                                         {{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}
                                                     </td>
-
-                                                    <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">
-                                                        {{ $item->name }}
-
-                                                        @if ($preOrderItem = $preOrderItemRepository->resetScope()->findOneByField('order_item_id', $item->id))
-                                                            <div class="pre-order-item-info">
-                                                                <span class="heading" @if($item->type == 'configurable')style="margin-top: 0"@endif>
-                                                                    {{ __('preorder::app.shop.sales.orders.preorder-information') }}
-                                                                </span>
-
-                                                                <span class="row">
-                                                                    <b>{{ __('preorder::app.shop.sales.orders.type') }}</b>
-
-                                                                    {{ $preOrderItem->type_label }}
-                                                                </span>
-
-                                                                <span class="row">
-                                                                    <b>{{ __('preorder::app.shop.sales.orders.status') }}</b>
-
-                                                                    {{ $preOrderItem->status_label }}
-                                                                </span>
-
-                                                                @if ($preOrderItem->payment_order_item)
-                                                                    <span class="row">
-                                                                        <b>{{ __('preorder::app.shop.sales.orders.payment-order') }}</b>
-
-                                                                        <a href="{{ route('customer.orders.view', $preOrderItem->payment_order_item->order_id) }}" target="_blank">
-                                                                            #{{ $preOrderItem->payment_order_item->order_id }}
-                                                                        </a>
-                                                                    </span>
-                                                                @endif
-                                                            </div>
-                                                        @elseif ($preOrderItem = app('Webkul\SAASPreOrder\Repositories\PreOrderItemRepository')->resetScope()->findOneByField('payment_order_item_id', $item->id))
-                                                            <div class="pre-order-item-info">
-                                                                <span class="heading" @if($item->type == 'configurable')style="margin-top: 0"@endif>
-                                                                    {{ __('preorder::app.shop.sales.orders.preorder-payment-information') }}
-                                                                </span>
-
-                                                                <span class="row">
-                                                                    <b>{{ __('preorder::app.shop.sales.orders.reference-order') }}</b>
-
-                                                                    <a href="{{ route('customer.orders.view', $preOrderItem->order_id) }}" target="_blank">
-                                                                        #{{ $preOrderItem->order_id }}
-                                                                    </a>
-                                                                </span>
-                                                            </div>
-                                                        @endif
-                                                    </td>
-
+                                                    <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">{{ $item->name }}</td>
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.price') }}">{{ core()->formatPrice($item->price, $order->order_currency_code) }}</td>
-
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.item-status') }}">
                                                         <span class="qty-row">
                                                             {{ __('shop::app.customer.account.order.view.item-ordered', ['qty_ordered' => $item->qty_ordered]) }}
@@ -150,22 +87,10 @@
                                                             {{ $item->qty_canceled ? __('shop::app.customer.account.order.view.item-canceled', ['qty_canceled' => $item->qty_canceled]) : '' }}
                                                         </span>
                                                     </td>
-
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.subtotal') }}">{{ core()->formatPrice($item->total, $order->order_currency_code) }}</td>
-
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.tax-percent') }}">{{ number_format($item->tax_percent, 2) }}%</td>
-
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.tax-amount') }}">{{ core()->formatPrice($item->tax_amount, $order->order_currency_code) }}</td>
-
-                                                    <td data-value="{{ __('shop::app.customer.account.order.view.grand-total') }}">
-                                                        {{ core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) }}
-
-                                                        <?php $canBeComplete = $preOrderItemRepository->canBeComplete($item); ?>
-
-                                                        @if ($canBeComplete)
-                                                            <a href="{{ route('preorder.shop.preorder.complete', $preOrderItem->token) }}" style="margin-top: 5px" class="btn btn-primary btn-sm">Complete Preorder</a>
-                                                        @endif
-                                                    </td>
+                                                    <td data-value="{{ __('shop::app.customer.account.order.view.grand-total') }}">{{ core()->formatPrice($item->total + $item->tax_amount, $order->order_currency_code) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -187,6 +112,14 @@
                                                 <td>-</td>
                                                 <td>{{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}</td>
                                             </tr>
+
+                                            @if ($order->base_discount_amount > 0)
+                                                <tr>
+                                                    <td>{{ __('shop::app.customer.account.order.view.discount') }}</td>
+                                                    <td>-</td>
+                                                    <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
+                                                </tr>
+                                            @endif
 
                                             <tr class="border">
                                                 <td>{{ __('shop::app.customer.account.order.view.tax') }}</td>
