@@ -35,13 +35,13 @@
     }
 ?>
 
-    @if ($field['type'] == 'depands')
+    @if ($field['type'] == 'depends')
 
         <?php
 
-            $depands = explode(":", $field['depand']);
-            $depandField = current($depands);
-            $depandValue = end($depands);
+            $depends = explode(":", $field['depand']);
+            $depandField = current($depends);
+            $depandValue = end($depends);
 
             if (count($channel_locale)) {
                 $channel_locale = implode(' - ', $channel_locale);
@@ -67,16 +67,16 @@
             $selectedOption = core()->getConfigData($name) ?? '';
         ?>
 
-        <depands
+        <depends
             :options = '@json($field['options'])'
             :name = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]'"
             :validations = "'{{ $validations }}'"
             :depand = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $depandField }}]'"
             :value = "'{{ $depandValue }}'"
             :field_name = "'{{ $field['title'] }}'"
-            :channel_loacle = "'{{ $channel_locale }}'"
+            :channel_locale = "'{{ $channel_locale }}'"
             :result = "'{{ $selectedOption }}'"
-        ></depands>
+        ></depends>
 
     @else
 
@@ -270,7 +270,7 @@
             @endif
 
             @if (isset($field['info']))
-                <span class="control-info">{{ trans($field['info']) }}</span>
+                <span class="control-info mt-10">{{ trans($field['info']) }}</span>
             @endif
 
             <span class="control-error" @if ($field['type'] == 'multiselect')  v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}][]')" @else  v-if="errors.has('{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]')" @endif
@@ -391,12 +391,12 @@
     });
 </script>
 
-<script type="text/x-template" id="depands-template">
+<script type="text/x-template" id="depends-template">
 
     <div class="control-group"  :class="[errors.has(name) ? 'has-error' : '']" v-if="this.isVisible">
         <label :for="name" :class="[ isRequire ? 'required' : '']">
             @{{ field_name }}
-            <span class="locale"> [@{{ channel_loacle }}] </span>
+            <span class="locale"> [@{{ channel_locale }}] </span>
         </label>
 
         <select v-validate= "validations" class="control" :id = "name" :name = "name" v-model="this.result"
@@ -412,13 +412,13 @@
 </script>
 
 <script>
-    Vue.component('depands', {
+    Vue.component('depends', {
 
-        template: '#depands-template',
+        template: '#depends-template',
 
         inject: ['$validator'],
 
-        props: ['options', 'name', 'validations', 'depand', 'value', 'field_name', 'channel_loacle', 'repository', 'result'],
+        props: ['options', 'name', 'validations', 'depand', 'value', 'field_name', 'channel_locale', 'repository', 'result'],
 
         data: function() {
             return {

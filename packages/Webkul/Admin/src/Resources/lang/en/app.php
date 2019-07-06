@@ -820,6 +820,13 @@ return [
         'select-attr-fam' => 'Select Attribute Family',
         'select-cart-attr' => 'Select Cart Attribute',
         'general-info' => [
+            'on-shipping' => 'If applied on shipping',
+            'discount' => 'Discount',
+            'to-be-applied' => 'Applied On',
+            'applied-on-info' => 'It signifies how cart rule should be applied on items in cart',
+            'shipping-apply-info' => 'It signifies how rule behaves when it is used for shipping',
+            'general-info' => 'General Info',
+            'config' => 'Configure',
             'name' => 'Rule Name',
             'description' => 'Description',
             'starts-from' => 'Start',
