@@ -18,3 +18,4 @@ yarn-error.log
 /ignorables/*
 composer.lock
 package-lock.json
+yarn.lock
