@@ -1,5 +1,4 @@
 <?php
-
 return [
     'common' => [
         'no-result-found' => 'Não conseguimos encontrar nenhum registro.',
@@ -8,7 +7,6 @@ return [
         'true' => 'Verdadeiro',
         'false' => 'Falso'
     ],
-
     'layouts' => [
         'my-account' => 'Minha Conta',
         'logout' => 'Sair',
@@ -43,7 +41,6 @@ return [
         'promotion' => 'Promoções',
         'discount' => 'Desconto'
     ],
-
     'acl' => [
         'dashboard' => 'Dashboard',
         'sales' => 'Vendas',
@@ -78,7 +75,6 @@ return [
         'promotions' => 'Promoções',
         'cart-rules' => 'Regras do Carrinho'
     ],
-
     'dashboard' => [
         'title' => 'Dashboard',
         'from' => 'De',
@@ -100,7 +96,6 @@ return [
         'stock-threshold' => 'Limite de Estoque',
         'qty-left' => ':qty Restante',
     ],
-
     'datagrid' => [
         'mass-ops' => [
             'method-error' => 'Erro! Método errado detectado, por favor, verifique a configuração de ação em massa',
@@ -108,7 +103,6 @@ return [
             'partial-action' => 'Algumas ações não foram executadas devido a restrições restritas do sistema em :resource',
             'update-success' => 'O índice selecionado :resource foram atualizados com sucesso',
         ],
-
         'id' => 'ID',
         'status' => 'Status',
         'code' => 'Código',
@@ -162,7 +156,6 @@ return [
         'usage-throttle' => 'Tempos de uso',
         'for-guest' => 'Para convidados'
     ],
-
     'account' => [
         'title' => 'Minha Conta',
         'save-btn-title' => 'Salvar',
@@ -174,7 +167,6 @@ return [
         'change-password' => 'Mudar Senha da Conta',
         'current-password' => 'Senha Atual'
     ],
-
     'users' => [
         'forget-password' => [
             'title' => 'Esqueci Minha Senha',
@@ -185,7 +177,6 @@ return [
             'back-link-title' => 'Voltar para Login',
             'submit-btn-title' => 'Link do E-mail para Recuperar Senha'
         ],
-
         'reset-password' => [
             'title' => 'Resetar Senha',
             'email' => 'E-mail Registrado',
@@ -194,7 +185,6 @@ return [
             'back-link-title' => 'Voltar para Login',
             'submit-btn-title' => 'Resetar Senha'
         ],
-
         'roles' => [
             'title' => 'Funções',
             'add-role-title' => 'Add Função',
@@ -208,7 +198,6 @@ return [
             'custom' => 'Personalizado',
             'all' => 'Tudo'
         ],
-
         'users' => [
             'title' => 'Usuário',
             'add-user-title' => 'Add Usuário',
@@ -234,7 +223,6 @@ return [
             'login-error' => 'Por favor, verifique suas credenciais e tente novamente.',
             'activate-warning' => 'Sua conta ainda está para ser ativada, entre em contato com o administrador.'
         ],
-
         'sessions' => [
             'title' => 'Entrar',
             'email' => 'Email',
@@ -244,7 +232,6 @@ return [
             'submit-btn-title' => 'Entrar'
         ]
     ],
-
     'sales' => [
         'orders' => [
             'title' => 'Pedidos',
@@ -299,7 +286,6 @@ return [
             'total-due' => 'Total Devido',
             'cancel-confirm-msg' => 'Tem certeza que deseja cancelar esse pedido ?'
         ],
-
         'invoices' => [
             'title' => 'Faturas',
             'id' => 'Id',
@@ -323,7 +309,6 @@ return [
             'creation-error' => 'A criação de fatura de pedido não é permitida.',
             'product-error' => 'A fatura não pode ser criada sem produtos.'
         ],
-
         'shipments' => [
             'title' => 'Entregas',
             'id' => 'Id',
@@ -350,7 +335,6 @@ return [
             'quantity-invalid' => 'A quantidade solicitada é inválida ou não está disponível.'
         ]
     ],
-
     'catalog' => [
         'products' => [
             'title' => 'Produtos',
@@ -395,7 +379,6 @@ return [
             'no-result-found' => 'Produtos não encontrados com o mesmo nome.',
             'searching' => 'Procurando ...'
         ],
-
         'attributes' => [
             'title' => 'Atributos',
             'add-title' => 'Add Atributo',
@@ -488,7 +471,6 @@ return [
             'image' => 'Imagem',
         ]
     ],
-
     'configuration' => [
         'title' => 'Configuração',
         'save-btn-title' => 'Salvar',
@@ -496,7 +478,6 @@ return [
         'yes' => 'Sim',
         'no' => 'Não',
         'delete' => 'Deletar',
-
         'tax-categories' => [
             'title' => 'Categorias de Imposto',
             'add-title' => 'Add Categorias de Imposto',
@@ -513,7 +494,6 @@ return [
                 'edit-button-title' => 'Editar Categorias de Imposto'
             ]
         ],
-
         'tax-rates' => [
             'title' => 'Taxas de Impostos',
             'add-title' => 'Add Taxas de Imposto',
@@ -535,7 +515,6 @@ return [
             'zip_code' => 'CEP',
             'is_zip' => 'Ativar intervalo de CEP'
         ],
-
         'sales' => [
             'shipping-method' => [
                 'title' => 'Método de Entregas',
@@ -546,7 +525,6 @@ return [
             ]
         ]
     ],
-
     'settings' => [
         'locales' => [
             'title' => 'Idiomas',
@@ -656,7 +634,6 @@ return [
             'delete-success' => 'Canal excluído com sucesso.',
             'last-delete-error' => 'Pelo menos um canal é necessário.'
         ],
-
         'sliders' => [
             'title' => 'Sliders',
             'add-title' => 'Criar Slider',
@@ -673,7 +650,6 @@ return [
             'delete-success' => 'Não foi possível excluir o slider',
             'delete-fail' => 'Slider excluído com sucesso'
         ],
-
         'tax-categories' => [
             'title' => 'Categorias de Imposto',
             'add-title' => 'Criar Categoria de Imposto',
@@ -696,7 +672,6 @@ return [
             'atleast-one' => 'Não é possível excluir a última Categoria de Imposto',
             'delete' => 'Categoria de Imposto excluída com sucesso'
         ],
-
         'tax-rates' => [
             'title' => 'Taxas de Impostos',
             'add-title' => 'Criar Taxas de Impostos',
@@ -725,7 +700,6 @@ return [
             'atleast-one' => 'Não é Possível Excluir a Última Taxa de Impostos'
         ]
     ],
-
     'customers' => [
         'groups' =>[
             'add-title' => 'Add Grupo',
@@ -738,14 +712,12 @@ return [
             'is_user_defined' => 'Usuário Definido',
             'yes' => 'Sim'
         ],
-
         'note' => [
             'title' => 'Add Note',
             'save-note' => 'Save Note',
             'enter-note' => 'Enter Note',
             'help-title' => 'Add Note On This Customer'
         ],
-
         'customers' => [
             'add-title' => 'Add Cliente',
             'edit-title' => 'Editar Cliente',
@@ -784,7 +756,6 @@ return [
             'approved' => 'Aprovado',
             'disapproved' => 'Desaprovar'
         ],
-
         'subscribers' => [
             'title' => 'Assinantes de Newletter',
             'title-edit' => 'Editar Assinante',
@@ -797,7 +768,6 @@ return [
             'delete-failed' => 'Erro! Você não pode excluir a inscrição desse usuário',
         ]
     ],
-
     'promotion' => [
         'catalog-rule' => 'Regras de Catálogo',
         'cart-rule' => 'Regras do Carrinho',
@@ -850,7 +820,6 @@ return [
             'test-mode' => 'Escolha como testar as condições',
             'labels' => 'Rótulos'
         ],
-
         'status' => [
             'success' => 'Sucesso! regra criada',
             'success-coupon' => 'Sucesso! regra criada junto com o cupom',
@@ -867,7 +836,6 @@ return [
             'coupon-remove-failed' => 'Remoção de cupons falhou',
             'duplicate-coupon' => 'O cupom já existe, por favor tente novamente com um cupom diferente'
         ],
-
         'catalog' => [
             'name' => 'Nome',
             'description' => 'Descrição',
@@ -877,19 +845,16 @@ return [
             'adjust-to-value' => 'Ajustar ao valor de desconto',
             'condition-missing' => 'Por favor, verifique condições, alguns valores podem estar faltando'
         ],
-
         'cart' => [
             'buy-atleast' => 'Compre Atleast',
             'apply-to-shipping' => 'Aplicar ao envio'
         ]
     ],
 
-
     'error' => [
         'go-to-home' => 'IR PARA PÁGINA INICIAL',
         'in-maitainace' => 'In Maintenance',
         'right-back' => 'Be Right Back',
-
         '404' => [
             'page-title' => '404 Página não Encontrada',
             'name' => '404',
@@ -917,10 +882,10 @@ return [
     ],
 
     'export' => [
-        'export' => 'Exportar',        
+        'export' => 'Exportar',
         'import' => 'Importar',
         'format' => 'Selecione o Formato',
-        'download' => 'Download',        
+        'download' => 'Download',
         'upload' => 'Upload',
         'csv' => 'CSV',
         'xls' => 'XLS',
@@ -933,7 +898,6 @@ return [
         'no-records' => 'Nada para exportar',
         'illegal-format' => 'Erro! Este tipo de formato não é suportado ou seu formato ilegal'
     ],
-
     'response' => [
         'being-used' => 'Este recurso :name está sendo usado em :source',
         'cannot-delete-default' => 'Não é possível excluir o canal padrão',
@@ -953,7 +917,7 @@ return [
         'cancel-error' => ':name não pode ser cancelado.',
         'already-taken' => 'O :name já foi tomada.'
     ],
-    
+
     'footer' => [
         'copy-right' => '© Copyright '.date('Y').' Webkul Software, Todos os direitos reservados.'
     ],

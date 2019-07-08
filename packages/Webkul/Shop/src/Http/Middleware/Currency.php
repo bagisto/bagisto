@@ -29,15 +29,7 @@ class Currency
     */
     public function handle($request, Closure $next)
     {
-        $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-        $currencyTerm = preg_split('/(\?|&)/', $query);
-        $currencyCode = '';
-
-        foreach($currencyTerm as $term){
-            if (strpos($term, 'currency') !== false) {
-                $currencyCode = last(explode("=", $term));
-            }
-        }
+        $currencyCode = request()->get('currency');
 
         if ($currency = $currencyCode) {
             if ($this->currency->findOneByField('code', $currency)) {
