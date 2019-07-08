@@ -19,7 +19,7 @@ class View extends AbstractProduct
         $attributeOptionReposotory = app('Webkul\Attribute\Repositories\AttributeOptionRepository');
 
         foreach ($attributes as $attribute) {
-            $value = $product->{$attribute->code};
+            $value = $product->product->{$attribute->code};
 
             if ($attribute->type == 'boolean') {
                 $value = $value ? 'Yes' : 'No';
