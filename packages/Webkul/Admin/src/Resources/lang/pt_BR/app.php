@@ -850,6 +850,7 @@ return [
             'apply-to-shipping' => 'Aplicar ao envio'
         ]
     ],
+
     'error' => [
         'go-to-home' => 'IR PARA PÁGINA INICIAL',
         'in-maitainace' => 'In Maintenance',
@@ -879,6 +880,7 @@ return [
             'message' => 'A solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino.'
         ],
     ],
+
     'export' => [
         'export' => 'Exportar',
         'import' => 'Importar',
@@ -919,6 +921,7 @@ return [
     'footer' => [
         'copy-right' => '© Copyright '.date('Y').' Webkul Software, Todos os direitos reservados.'
     ],
+
     'admin' => [
         'system' => [
             'catalog' => 'Catálogo',
