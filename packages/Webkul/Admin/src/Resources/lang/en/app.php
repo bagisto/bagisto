@@ -188,7 +188,6 @@ return [
 
         'reset-password' => [
             'title' => 'Reset Password',
-            'title' => 'Reset Password',
             'email' => 'Registered Email',
             'password' => 'Password',
             'confirm-password' => 'Confirm Password',
@@ -974,7 +973,6 @@ return [
             'allow-backorders' => 'Allow Backorders',
             'customer' => 'Customer',
             'settings' => 'Settings',
-            'address' => 'Address',
             'address' => 'Address',
             'street-lines' => 'Lines in a Street Address',
             'sales' => 'Sales',
