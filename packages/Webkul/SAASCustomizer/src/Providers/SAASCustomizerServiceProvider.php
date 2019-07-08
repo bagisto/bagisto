@@ -30,6 +30,10 @@ class SAASCustomizerServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'saas');
 
+        $this->publishes([
+            __DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/saas/assets'),
+        ], 'public');
+
         $router->aliasMiddleware('super-admin', RedirectIfNotSuperAdmin::class);
 
         //over ride system's default validation
@@ -101,6 +105,10 @@ class SAASCustomizerServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/super-menu.php', 'menu.super-admin'
+        );
+
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/excluded-sites.php', 'excluded-sites'
         );
     }
 

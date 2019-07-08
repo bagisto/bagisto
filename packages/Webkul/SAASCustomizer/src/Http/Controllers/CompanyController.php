@@ -83,7 +83,7 @@ class CompanyController extends Controller
         }
 
         $validator = Validator::make(Request::all(), [
-            'username' => 'not_in:www,http,https,WWW,HTTP,HTTPS'
+            'username' => 'not_in:'.implode(',', config('excluded-sites'))
         ]);
 
         if ($validator->fails()) {
