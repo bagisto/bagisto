@@ -135,7 +135,7 @@ class SliderController extends Controller
     {
         $slider = $this->slider->findOrFail($id);
 
-        if ($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1) {
+        if ($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1 && ($slider->channel_id == core()->getCurrentChannel()->id)) {
             session()->flash('warning', trans('admin::app.settings.sliders.delete-success'));
         } else {
             try {
