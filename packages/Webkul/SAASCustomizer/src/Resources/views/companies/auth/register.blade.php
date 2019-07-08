@@ -46,7 +46,7 @@
                     <div class="control-group" :class="[errors.has('step-one.password_confirmation') ? 'has-error' : '']">
                         <label for="password_confirmation" class="required">Confirm Password</label>
 
-                        <input type="password" v-validate="'required|min:6|confirmed:password'" class="control" v-model="password_confirmation" name="password_confirmation" placeholder="Confirm Password" data-vv-as="&quot;{{ __('confirm password') }}&quot;">
+                        <input type="password" v-validate="'min:6|confirmed:password'" class="control" v-model="password_confirmation" name="password_confirmation" placeholder="Confirm Password" data-vv-as="&quot;{{ __('confirm password') }}&quot;">
 
                         <span class="control-error" v-show="errors.has('step-one.password_confirmation')">@{{ errors.first('step-one.password_confirmation') }}</span>
                     </div>
@@ -252,7 +252,7 @@
                     sendDataToServer () {
                         var o_this = this;
 
-                        return axios.post('/company/register', {
+                        return axios.post('{{ route('company.create.store') }}', {
                             email: this.email,
                             first_name: this.first_name,
                             last_name: this.last_name,
