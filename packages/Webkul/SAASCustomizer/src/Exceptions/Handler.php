@@ -31,7 +31,7 @@ class Handler extends ExceptionHandler
         $path = 'saas';
 
         if ($exception->getMessage() == 'domain_not_found') {
-            return $this->response($path, 404, 'Domain Not Found');
+            return $this->response($path, 500, 'Domain Not Found');
         }
 
         if ($exception->getMessage() == 'company_blocked_by_administrator') {
@@ -39,11 +39,11 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception->getMessage() == 'not_allowed_to_visit_this_section') {
-            return $this->response($path, 404, 'You are not allowed to use this section');
+            return $this->response($path, 400, 'You are not allowed to use this section');
         }
 
         if ($exception->getMessage() == 'invalid_admin_login' || $exception->getMessage() == 'invalid_customer_login') {
-            return $this->responseCustom($path, 404, 'auth', 'Authentication Error');
+            return $this->response($path, 400, 'Authentication Error');
         }
 
         if ($exception instanceof HttpException) {
@@ -91,18 +91,5 @@ class Handler extends ExceptionHandler
         }
 
         return response()->view("{$path}::errors.{$statusCode}", ['message' => $message, 'status' => $statusCode], $statusCode);
-    }
-
-    private function responseCustom($path, $statusCode, $view, $message = null)
-    {
-        if (request()->expectsJson()) {
-            return response()->json([
-                    'error' => isset($this->jsonErrorMessages[$statusCode])
-                        ? $this->jsonErrorMessages[$statusCode]
-                        : 'Something went wrong, please try again later.'
-                ], $statusCode);
-        }
-
-        return response()->view("{$path}::errors.{$view}", ['message' => $message, 'status' => $statusCode], $statusCode);
     }
 }
