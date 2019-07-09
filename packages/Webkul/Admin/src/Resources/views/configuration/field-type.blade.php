@@ -39,9 +39,9 @@
 
         <?php
 
-            $depends = explode(":", $field['depand']);
-            $depandField = current($depends);
-            $depandValue = end($depends);
+            $depends = explode(":", $field['depend']);
+            $dependField = current($depends);
+            $dependValue = end($depends);
 
             if (count($channel_locale)) {
                 $channel_locale = implode(' - ', $channel_locale);
@@ -71,8 +71,8 @@
             :options = '@json($field['options'])'
             :name = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]'"
             :validations = "'{{ $validations }}'"
-            :depand = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $depandField }}]'"
-            :value = "'{{ $depandValue }}'"
+            :depend = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $dependField }}]'"
+            :value = "'{{ $dependValue }}'"
             :field_name = "'{{ $field['title'] }}'"
             :channel_locale = "'{{ $channel_locale }}'"
             :result = "'{{ $selectedOption }}'"
@@ -123,8 +123,8 @@
                     @else
                         @foreach ($field['options'] as $option)
                             <?php
-                                if ($option['value'] == false) {
-                                    $value = 0;
+                                if (! isset($option['value'])) {
+                                    $value = null;
                                 } else {
                                     $value = $option['value'];
                                 }
@@ -157,8 +157,8 @@
                     @else
                         @foreach ($field['options'] as $option)
                             <?php
-                                if ($option['value'] == false) {
-                                    $value = 0;
+                                if (! isset($option['value'])) {
+                                    $value = null;
                                 } else {
                                     $value = $option['value'];
                                 }
@@ -418,7 +418,7 @@
 
         inject: ['$validator'],
 
-        props: ['options', 'name', 'validations', 'depand', 'value', 'field_name', 'channel_locale', 'repository', 'result'],
+        props: ['options', 'name', 'validations', 'depend', 'value', 'field_name', 'channel_locale', 'repository', 'result'],
 
         data: function() {
             return {
@@ -434,24 +434,24 @@
                 this_this.isRequire = true;
             }
 
-            var dependentElement = document.getElementById(this_this.depand);
-            var depandValue = this_this.value;
+            var dependentElement = document.getElementById(this_this.depend);
+            var dependValue = this_this.value;
 
-            if (depandValue == 'true') {
-                depandValue = 1;
-            } else if (depandValue == 'false') {
-                depandValue = 0;
+            if (dependValue == 'true') {
+                dependValue = 1;
+            } else if (dependValue == 'false') {
+                dependValue = 0;
             }
 
             $("select.control").change(function() {
-                if (dependentElement.value == depandValue) {
+                if (dependentElement.value == dependValue) {
                     this_this.isVisible = true;
                 } else {
                     this_this.isVisible = false;
                 }
             });
 
-            if (dependentElement.value == depandValue) {
+            if (dependentElement.value == dependValue) {
                 this_this.isVisible = true;
             } else {
                 this_this.isVisible = false;
