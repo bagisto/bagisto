@@ -1,6 +1,6 @@
 @php
-    $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable');
-    $function = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
+    $status = core()->getConfigData('showpriceafterlogin.settings.settings.enableordisable');
+    $function = core()->getConfigData('showpriceafterlogin.settings.settings.selectfunction');
 @endphp
 
 @if(($status && ! auth()->guard('customer')->check()) && $function == 'hide-price-buy-cart-guest')

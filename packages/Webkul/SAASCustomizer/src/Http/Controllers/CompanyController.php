@@ -108,7 +108,26 @@ class CompanyController extends Controller
             $primaryServerNameWithoutProtocol = explode('https://', $primaryServerName)[1];
         }
 
-        $data['domain'] = strtolower($data['username']). '.' . $primaryServerNameWithoutProtocol;
+        $currentURL = $_SERVER['SERVER_NAME'];
+
+        if (substr_count($currentURL, '.') > 1) {
+            $primaryServerNameWithoutProtocol = explode('.', $primaryServerNameWithoutProtocol);
+
+            if ($data['username'] != $primaryServerNameWithoutProtocol[0]) {
+                $primaryServerNameWithoutProtocol[0] = $data['username'];
+
+                $primaryServeNameWithoutProtocol = implode('.', $primaryServerNameWithoutProtocol);
+
+                $data['domain'] = $primaryServeNameWithoutProtocol;
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'errors' => ['Cannot keep same sub-domain as main domain']
+                ], 403);
+            }
+        } else {
+            $data['domain'] = strtolower($data['username']). '.' . $primaryServerNameWithoutProtocol;
+        }
 
         $validator = Validator::make($data, [
             'domain' => 'required|unique:companies,domain'

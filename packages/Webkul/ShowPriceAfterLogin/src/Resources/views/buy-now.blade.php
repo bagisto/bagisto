@@ -1,9 +1,9 @@
 {!! view_render_event('bagisto.shop.products.buy_now.before', ['product' => $product]) !!}
 
 @php
-    $status = core()->getConfigData('ShowPriceAfterLogin.settings.settings.enableordisable');
+    $status = core()->getConfigData('showpriceafterlogin.settings.settings.enableordisable');
 
-    $function = core()->getConfigData('ShowPriceAfterLogin.settings.settings.selectfunction');
+    $function = core()->getConfigData('showpriceafterlogin.settings.settings.selectfunction');
 @endphp
 
 @if (($status && ! auth()->guard('customer')->check()) && ($function == 'hide-buy-cart-guest' || $function == 'hide-price-buy-cart-guest'))
