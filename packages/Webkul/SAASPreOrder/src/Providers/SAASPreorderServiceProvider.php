@@ -38,8 +38,8 @@ class SAASPreOrderServiceProvider extends ServiceProvider
         ], 'public');
 
         $this->publishes([
-            // __DIR__ . '/../Resources/views/shop/products/add-buttons.blade.php' => resource_path('views/vendor/shop/products/add-buttons.blade.php'),
-            // __DIR__ . '/../Resources/views/shop/products/view/product-add.blade.php' => resource_path('views/vendor/shop/products/view/product-add.blade.php'),
+            __DIR__ . '/../Resources/views/shop/products/add-buttons.blade.php' => resource_path('views/vendor/shop/products/add-buttons.blade.php'),
+            __DIR__ . '/../Resources/views/shop/products/view/product-add.blade.php' => resource_path('views/vendor/shop/products/view/product-add.blade.php'),
 
             __DIR__ . '/../Resources/views/admin/sales/orders' => resource_path('views/vendor/admin/sales/orders'),
             __DIR__ . '/../Resources/views/shop/customers/account/orders' => resource_path('views/vendor/shop/customers/account/orders'),

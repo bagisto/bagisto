@@ -31,7 +31,7 @@
                     </a>
                 @endif
 
-                @if ($order->canShip() && ! app('Webkul\PreOrder\Repositories\PreOrderItemRepository')->resetScope()->isPreOrderPaymentOrder($order->id))
+                @if ($order->canShip() && ! app('Webkul\SAASPreOrder\Repositories\PreOrderItemRepository')->resetScope()->isPreOrderPaymentOrder($order->id))
                     <a href="{{ route('admin.sales.shipments.create', $order->id) }}" class="btn btn-lg btn-primary">
                         {{ __('admin::app.sales.orders.shipment-btn-title') }}
                     </a>
@@ -46,7 +46,7 @@
                     <div class="sale-container">
 
                         <?php
-                            $preOrderItemRepository = app('Webkul\PreOrder\Repositories\PreOrderItemRepository');
+                            $preOrderItemRepository = app('Webkul\SAASPreOrder\Repositories\PreOrderItemRepository');
 
                             $havePreOrderItems = $preOrderItemRepository->havePreOrderItems($order->id);
                         ?>
@@ -296,7 +296,7 @@
                                                                     </span>
                                                                 @endif
                                                             </div>
-                                                        @elseif ($preOrderItem = app('Webkul\PreOrder\Repositories\PreOrderItemRepository')->findOneByField('payment_order_item_id', $item->id))
+                                                        @elseif ($preOrderItem = app('Webkul\SAASPreOrder\Repositories\PreOrderItemRepository')->findOneByField('payment_order_item_id', $item->id))
                                                             <div class="pre-order-item-info">
                                                                 <span class="heading" @if($item->type == 'configurable')style="margin-top: 0"@endif>
                                                                     {{ __('preorder::app.admin.sales.orders.preorder-payment-information') }}
