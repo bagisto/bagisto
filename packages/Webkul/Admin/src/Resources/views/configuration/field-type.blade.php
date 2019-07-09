@@ -427,37 +427,35 @@
             }
         },
 
-        created: function () {
+        mounted: function () {
             var this_this = this;
 
             if (this_this.validations || (this_this.validations.indexOf("required") != -1)) {
                 this_this.isRequire = true;
             }
 
-            $(document).ready(function () {
-                var dependentElement = document.getElementById(this_this.depand);
-                var depandValue = this_this.value;
+            var dependentElement = document.getElementById(this_this.depand);
+            var depandValue = this_this.value;
 
-                if (depandValue == 'true') {
-                    depandValue = 1;
-                } else if (depandValue == 'false') {
-                    depandValue = 0;
-                }
+            if (depandValue == 'true') {
+                depandValue = 1;
+            } else if (depandValue == 'false') {
+                depandValue = 0;
+            }
 
-                dependentElement.onchange = function() {
-                    if (dependentElement.value == depandValue) {
-                        this_this.isVisible = true;
-                    } else {
-                        this_this.isVisible = false;
-                    }
-                }
-
+            $("select.control").change(function() {
                 if (dependentElement.value == depandValue) {
                     this_this.isVisible = true;
                 } else {
                     this_this.isVisible = false;
                 }
             });
+
+            if (dependentElement.value == depandValue) {
+                this_this.isVisible = true;
+            } else {
+                this_this.isVisible = false;
+            }
         }
     });
 </script>

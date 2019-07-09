@@ -35,4 +35,28 @@ class ProductFlatRepository extends Repository
     {
         return 'Webkul\Product\Contracts\ProductFlat';
     }
+
+    /**
+     * Maximum Price of Category Prodcut
+     *
+     * @param int  $categoryId
+     * return integer
+     */
+    public function getCategoryProductMaximumPrice($categoryId)
+    {
+        return $this->model
+            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+            ->where('product_categories.category_id', $categoryId)
+            ->max('price');
+    }
+
+     /**
+     * Maximum Price of Prodcut
+     *
+     * return integer
+     */
+    public function getProductMaximumPrice()
+    {
+        return $this->model->max('price');
+    }
 }
