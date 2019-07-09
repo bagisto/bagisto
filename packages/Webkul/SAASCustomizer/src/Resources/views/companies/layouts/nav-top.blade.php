@@ -2,7 +2,7 @@
     <div class="navbar-top-left">
         <div class="brand-logo">
             <a href="{{ route('admin.dashboard.index') }}">
-                <img src="{{ asset('vendor/webkul/ui/assets/images/logo.png') }}" alt="Bagisto"/>
+                <img src="{{ asset('vendor/webkul/saas/assets/images/razzo-logo.png') }}" alt="Razzo" style="height: 50px; width: 100px; margin-top: -5px;" />
             </a>
         </div>
     </div>
