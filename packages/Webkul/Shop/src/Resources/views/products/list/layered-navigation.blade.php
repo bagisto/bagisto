@@ -2,6 +2,46 @@
 
 @inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
 
+@inject ('productAttributeValueRepository', 'Webkul\Product\Repositories\ProductAttributeValueRepository')
+
+<?php
+    $filterAttributes = [];
+
+    if (isset($category)) {
+        $categoryProduct = $productFlatRepository->getCategoryProduct($category->id);
+
+        foreach ($categoryProduct as $product) {
+            $attributes = $productAttributeValueRepository->findByField('product_id', $product->product_id);
+
+            if ($product->product->type == 'configurable') {
+                foreach ($product->product->super_attributes as $super_attribute) {
+                    $productAttribute[] =  $super_attribute->id;
+                }
+            }
+
+            foreach ($attributes as $attribute) {
+                if ($attribute) {
+                    $productAttribute[] =  $attribute->attribute_id;
+                }
+            }
+        }
+
+        if (isset($productAttribute)) {
+            foreach ($attributeRepository->getFilterAttributes() as $filterAttribute) {
+                if (in_array($filterAttribute->id, array_unique($productAttribute))) {
+                    $filterAttributes[] = $filterAttribute;
+                } else  if ($filterAttribute ['code'] == 'price') {
+                    $filterAttributes[] = $filterAttribute;
+                }
+            }
+        }
+
+        $filterAttributes = collect($filterAttributes);
+    } else {
+        $filterAttributes = $attributeRepository->getFilterAttributes();
+    }
+?>
+
 <div class="layered-filter-wrapper">
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
@@ -85,7 +125,7 @@
 
             data: function() {
                 return {
-                    attributes: @json($attributeRepository->getFilterAttributes()),
+                    attributes: @json($filterAttributes),
                     appliedFilters: {}
                 }
             },
@@ -146,7 +186,7 @@
                             0,
                             0
                         ],
-                        max: {{ core()->convertPrice($productFlatRepository->getMaximumPrice($category->id)) }},
+                        max: {{ isset($category) ? core()->convertPrice($productFlatRepository->getCategoryProductMaximumPrice($category->id)) : core()->convertPrice($productFlatRepository->getProductMaximumPrice()) }},
                         processStyle: {
                             "backgroundColor": "#FF6472"
                         },
