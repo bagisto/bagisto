@@ -68,7 +68,7 @@ class AuthTest extends TestCase
         config(['app.url' => 'http://127.0.0.1:8000']);
 
         $customers = app(Customer::class);
-        $customer = $customers->findOneByField('email', 'prashant@webkul.com');
+        $customer = $customers->findOneByField('email', 'john@doe.net');
 
         $response = $this->post('/customer/login', [
             'email' => $customer->email,
@@ -84,7 +84,7 @@ class AuthTest extends TestCase
         public function willNotLoginWithWrongCredentials()
         {
             $customers = app(Customer::class);
-            $customer = $customers->findOneByField('email', 'prashant@webkul.com');
+            $customer = $customers->findOneByField('email', 'john@doe.net');
 
             $response = $this->from(route('login'))->post(route('customer.session.create'),
                         [
