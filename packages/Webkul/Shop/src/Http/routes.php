@@ -39,6 +39,10 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'view' => 'shop::checkout.cart.index'
     ])->name('shop.checkout.cart.index');
 
+        Route::post('checkout/check/coupons', 'Webkul\Shop\Http\Controllers\OnepageController@applyCoupon')->name('shop.checkout.check.coupons');
+
+        Route::post('checkout/remove/coupon', 'Webkul\Shop\Http\Controllers\OnepageController@removeCoupon')->name('shop.checkout.remove.coupon');
+
     //Cart Items Add
     Route::post('checkout/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index'
@@ -86,7 +90,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     ])->name('shop.checkout.success');
 
     //Shop buynow button action
-    Route::get('buynow/{id}/{quantity}', 'Webkul\Shop\Http\Controllers\CartController@buyNow')->name('shop.product.buynow');
+    Route::get('buynow/{id}', 'Webkul\Shop\Http\Controllers\CartController@buyNow')->name('shop.product.buynow');
 
     //Shop buynow button action
     Route::get('move/wishlist/{id}', 'Webkul\Shop\Http\Controllers\CartController@moveToWishlist')->name('shop.movetowishlist');
@@ -110,6 +114,11 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     Route::post('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
         'redirect' => 'shop.home.index'
     ])->name('shop.reviews.store');
+
+     // Download file or image
+    Route::get('/product/{id}/{attribute_id}', 'Webkul\Shop\Http\Controllers\ProductController@download')->defaults('_config', [
+        'view' => 'shop.products.index'
+    ])->name('shop.product.file.download');
 
     //customer routes starts here
     Route::prefix('customer')->group(function () {

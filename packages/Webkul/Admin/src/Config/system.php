@@ -65,13 +65,13 @@ return [
             [
                 'name' => 'subscription',
                 'title' => 'admin::app.admin.system.newsletter-subscription',
-                'type' => 'boolean'
+                'type' => 'boolean',
             ]
         ],
     ], [
         'key' => 'customer.settings.email',
         'name' => 'admin::app.admin.system.email',
-        'sort' => 2,
+        'sort' => 3,
         'fields' => [
             [
                 'name' => 'verification',

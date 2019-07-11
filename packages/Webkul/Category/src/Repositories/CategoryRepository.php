@@ -88,7 +88,7 @@ class CategoryRepository extends Repository
      */
     public function getRootCategories()
     {
-        return $this->model::withDepth()->having('depth', '=', 0)->get();
+        return $this->getModel()->where('parent_id', NULL)->get();
     }
 
     /**
@@ -211,5 +211,22 @@ class CategoryRepository extends Repository
             $category->{$type} = null;
             $category->save();
         }
+    }
+
+    public function getPartial()
+    {
+        $categories = $this->model->all();
+        $trimmed = array();
+
+        foreach ($categories as $key => $category) {
+            if ($category->name != null || $category->name != "") {
+                $trimmed[$key] = [
+                    'id' => $category->id,
+                    'name' => $category->name
+                ];
+            }
+        }
+
+        return $trimmed;
     }
 }

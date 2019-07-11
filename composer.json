@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.1.3",
         "ext-curl": "*",
+        "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-openssl": "*",
         "ext-pdo": "*",
@@ -29,7 +30,6 @@
         "maatwebsite/excel": "3.1.x-dev",
         "nwidart/laravel-modules": "^3.2",
         "prettus/l5-repository": "^2.6",
-        "propaganistas/laravel-intl": "^2.0",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
@@ -57,7 +57,10 @@
         "bagisto/laravel-shipping": "v0.1.0",
         "bagisto/laravel-payment": "v0.1.0",
         "bagisto/laravel-sales": "v0.1.0",
-        "bagisto/laravel-tax": "v0.1.0"
+        "bagisto/laravel-tax": "v0.1.0",
+        "bagisto/laravel-api": "v0.1.0",
+        "bagisto/laravel-paypal": "v0.1.0",
+        "bagisto/laravel-discount": "v0.1.0"
     },
     "autoload": {
         "classmap": [
@@ -84,7 +87,8 @@
             "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
             "Webkul\\Sales\\": "packages/Webkul/Sales/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
-            "Webkul\\API\\": "packages/Webkul/API"
+            "Webkul\\API\\": "packages/Webkul/API",
+            "Webkul\\Discount\\": "packages/Webkul/Discount/src"
         }
     },
     "autoload-dev": {

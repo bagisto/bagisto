@@ -96,7 +96,7 @@ return [
         'key' => 'configuration',
         'name' => 'admin::app.layouts.configure',
         'route' => 'admin.configuration.index',
-        'sort' => 5,
+        'sort' => 7,
         'icon-class' => 'configuration-icon',
     ], [
         'key' => 'settings',
@@ -175,6 +175,18 @@ return [
         'name' => 'admin::app.layouts.tax-rates',
         'route' => 'admin.tax-rates.index',
         'sort' => 2,
+        'icon-class' => '',
+    ], [
+        'key' => 'promotions',
+        'name' => 'admin::app.layouts.promotion',
+        'route' => 'admin.cart-rule.index',
+        'sort' => 5,
+        'icon-class' => 'promotion-icon',
+    ], [
+        'key' => 'promotions.cart-rule',
+        'name' => 'admin::app.promotion.cart-rule',
+        'route' => 'admin.cart-rule.index',
+        'sort' => 1,
         'icon-class' => '',
     ]
 ];

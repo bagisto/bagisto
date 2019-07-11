@@ -24,81 +24,84 @@ use Webkul\Product\Helpers\Price;
 class Cart {
 
     /**
-     * CartRepository model
+     * CartRepository instance
      *
      * @var mixed
      */
     protected $cart;
 
     /**
-     * CartItemRepository model
+     * CartItemRepository instance
      *
      * @var mixed
      */
     protected $cartItem;
 
     /**
-     * CustomerRepository model
+     * CustomerRepository instance
      *
      * @var mixed
      */
     protected $customer;
 
     /**
-     * CartAddressRepository model
+     * CartAddressRepository instance
      *
      * @var mixed
      */
     protected $cartAddress;
 
     /**
-     * ProductRepository model
+     * ProductRepository instance
      *
      * @var mixed
      */
     protected $product;
 
     /**
-     * TaxCategoryRepository model
+     * TaxCategoryRepository instance
      *
      * @var mixed
      */
     protected $taxCategory;
 
     /**
-     * WishlistRepository model
+     * WishlistRepository instance
      *
      * @var mixed
      */
     protected $wishlist;
 
     /**
-     * CustomerAddressRepository model
+     * CustomerAddressRepository instance
      *
      * @var mixed
      */
-     protected $customerAddress;
+    protected $customerAddress;
 
     /**
      * Suppress the session flash messages
-     */
+    */
     protected $suppressFlash;
 
     /**
      * Product price helper instance
-     */
+    */
     protected $price;
 
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Checkout\Repositories\CartRepository            $cart
-     * @param  Webkul\Checkout\Repositories\CartItemRepository        $cartItem
-     * @param  Webkul\Checkout\Repositories\CartAddressRepository     $cartAddress
-     * @param  Webkul\Customer\Repositories\CustomerRepository        $customer
-     * @param  Webkul\Product\Repositories\ProductRepository          $product
-     * @param  Webkul\Product\Repositories\TaxCategoryRepository      $taxCategory
+     * @param  Webkul\Checkout\Repositories\CartRepository  $cart
+     * @param  Webkul\Checkout\Repositories\CartItemRepository  $cartItem
+     * @param  Webkul\Checkout\Repositories\CartAddressRepository  $cartAddress
+     * @param  Webkul\Customer\Repositories\CustomerRepository  $customer
+     * @param  Webkul\Product\Repositories\ProductRepository  $product
+     * @param  Webkul\Product\Repositories\TaxCategoryRepository  $taxCategory
      * @param  Webkul\Product\Repositories\CustomerAddressRepository  $customerAddress
+     * @param  Webkul\Product\Repositories\CustomerAddressRepository  $customerAddress
+     * @param  Webkul\Discount\Repositories\CartRuleRepository  $cartRule
+     * @param  Webkul\Helpers\Discount  $discount
      * @return void
      */
     public function __construct(
@@ -133,7 +136,6 @@ class Cart {
 
         $this->suppressFlash = false;
     }
-
 
     /**
      * Return current logged in customer
@@ -633,12 +635,12 @@ class Cart {
             $option = $attribute->options()->where('id', $product->{$attribute->code})->first();
 
             $data['attributes'][$attribute->code] = [
-                'attribute_name' => $attribute->name,
+                'attribute_name' => $attribute->name ?  $attribute->name : $attribute->admin_name,
                 'option_id' => $option->id,
                 'option_label' => $option->label,
             ];
 
-            $labels[] = $attribute->name . ' : ' . $option->label;
+            $labels[] = ($attribute->name ? $attribute->name : $attribute->admin_name) . ' : ' . $option->label;
         }
 
         $data['html'] = implode(', ', $labels);
@@ -1057,6 +1059,8 @@ class Cart {
             'base_sub_total' => $data['base_sub_total'],
             'tax_amount' => $data['tax_total'],
             'base_tax_amount' => $data['base_tax_total'],
+            'discount_amount' => $data['discount_amount'],
+            'base_discount_amount' => $data['base_discount_amount'],
 
             'shipping_address' => array_except($data['shipping_address'], ['id', 'cart_id']),
             'billing_address' => array_except($data['billing_address'], ['id', 'cart_id']),
@@ -1094,6 +1098,9 @@ class Cart {
             'tax_percent' => $data['tax_percent'],
             'tax_amount' => $data['tax_amount'],
             'base_tax_amount' => $data['base_tax_amount'],
+            'discount_percent' => $data['discount_percent'],
+            'discount_amount' => $data['discount_amount'],
+            'base_discount_amount' => $data['base_discount_amount'],
             'additional' => $data['additional'],
         ];
 
@@ -1109,16 +1116,21 @@ class Cart {
      *
      * Move a wishlist item to cart
      */
-    public function moveToCart($wishlistItem) {
+    public function moveToCart($wishlistItem)
+    {
         $product = $wishlistItem->product;
 
         if ($product->type == 'simple') {
             $data['quantity'] = 1;
             $data['product'] = $product->id;
 
+            \Event::fire('checkout.cart.add.before', $product->id);
+
             $result = $this->add($product->id, $data);
 
             if ($result) {
+                \Event::fire('checkout.cart.add.after', $result);
+
                 return 1;
             } else {
                 return 0;
@@ -1133,7 +1145,8 @@ class Cart {
      *
      * @param instance cartItem $id
      */
-    public function moveToWishlist($itemId) {
+    public function moveToWishlist($itemId)
+    {
         $cart = $this->getCart();
         $items = $cart->items;
         $wishlist = [];
@@ -1180,7 +1193,8 @@ class Cart {
      *
      * @return response mixed
      */
-    public function proceedToBuyNow($id, $quantity) {
+    public function proceedToBuyNow($id, $quantity)
+    {
         $product = $this->product->findOneByField('id', $id);
 
         if ($product->type == 'configurable') {

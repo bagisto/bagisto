@@ -57,7 +57,7 @@
                                     </li>
 
                                     <li class="mt-5">
-                                        {{ country()->name($address->country) }} {{ $address->postcode }}
+                                        {{ core()->country_name($address->country) }} {{ $address->postcode }}
                                     </li>
 
                                     <li class="mt-10">

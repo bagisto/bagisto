@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon-Note-Large</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icon-Note-Large" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Group" transform="translate(3.000000, 3.000000)" stroke="#979797" stroke-width="2">
+            <path d="M0,3 L18,3 L18,15 L12.5,15 C10.5,17 9.5,18 9.5,18 C9.5,18 8.33333333,17 6,15 L0,15 L0,3 Z" id="Rectangle-16"></path>
+            <path d="M7,2.2522475 C7,0.997673883 8.09454039,4.04787445e-16 9.44472438,0 C10.7949084,-4.04787445e-16 11.8894488,0.997673883 11.8894488,2.22836699 L11.8894488,7.77163301 C11.8894488,9.00232612 10.7949084,10 9.44472438,10 C8.09454039,10 7,9.00232612 7,7.77163301 L7,6.80974897" id="Rectangle-17"></path>
+        </g>
+    </g>
+</svg>

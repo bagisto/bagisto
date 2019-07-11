@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 0);
     // getting env file
     $location = str_replace('\\', '/', getcwd());
     $currentLocation = explode("/", $location);
@@ -53,7 +53,7 @@
         if (isset($connection) && $connection == 'mysql') {
             @$conn = new mysqli($servername, $username, $password, $dbname, (int)$port);
 
-            if (!$conn->connect_error) {
+            if (! $conn->connect_error) {
                 // retrieving admin entry
                 $sql = "SELECT id, name FROM admins";
                 $result = $conn->query($sql);
@@ -69,7 +69,7 @@
         }
     }
 
-    if (!$installed) {
+    if (! $installed) {
         // getting url
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 

@@ -72,7 +72,8 @@ class CustomerGroupController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name' => 'string|required',
+            'code' => ['required', 'unique:customer_groups,code', new \Webkul\Core\Contracts\Validations\Code],
+            'name' => 'required',
         ]);
 
         $data = request()->all();
@@ -109,7 +110,8 @@ class CustomerGroupController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'name' => 'string|required',
+            'code' => ['required', 'unique:customer_groups,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'name' => 'required',
         ]);
 
         $this->customerGroup->update(request()->all(), $id);

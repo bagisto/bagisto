@@ -83,7 +83,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $customerGroup = $this->customerGroup->all();
+        $customerGroup = $this->customerGroup->findWhere([['code', '<>', 'guest']]);
 
         $channelName = $this->channel->all();
 
@@ -131,7 +131,7 @@ class CustomerController extends Controller
     {
         $customer = $this->customer->findOrFail($id);
 
-        $customerGroup = $this->customerGroup->all();
+        $customerGroup = $this->customerGroup->findWhere([['code', '<>', 'guest']]);
 
         $channelName = $this->channel->all();
 
@@ -152,7 +152,6 @@ class CustomerController extends Controller
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',
-            'phone' => 'nullable|numeric|unique:customers,phone,'. $id,
             'email' => 'required|unique:customers,email,'. $id,
             'date_of_birth' => 'date|before:today'
         ]);
@@ -185,5 +184,86 @@ class CustomerController extends Controller
         }
 
         return response()->json(['message' => false], 400);
+    }
+
+    /**
+     * To load the note taking screen for the customers
+     *
+     * @return view
+     */
+    public function createNote($id)
+    {
+        $customer = $this->customer->find($id);
+
+        return view($this->_config['view'])->with('customer', $customer);
+    }
+
+    /**
+     * To store the response of the note in storage
+     *
+     * @return redirect
+     */
+    public function storeNote()
+    {
+        $this->validate(request(), [
+            'notes' => 'string|nullable'
+        ]);
+
+        $customer = $this->customer->find(request()->input('_customer'));
+
+        $noteTaken = $customer->update([
+            'notes' => request()->input('notes')
+        ]);
+
+        if ($noteTaken) {
+            session()->flash('success', 'Note taken');
+        } else {
+            session()->flash('error', 'Note cannot be taken');
+        }
+
+        return redirect()->route($this->_config['redirect']);
+    }
+
+    /**
+     * To mass update the customer
+     *
+     * @return redirect
+     */
+    public function massUpdate()
+    {
+        $customerIds = explode(',', request()->input('indexes'));
+        $updateOption = request()->input('update-options');
+
+        foreach ($customerIds as $customerId) {
+            $customer = $this->customer->find($customerId);
+
+            $customer->update([
+                'status' => $updateOption
+            ]);
+        }
+
+        session()->flash('success', trans('admin::app.customers.customers.mass-update-success'));
+
+        return redirect()->back();
+    }
+
+    /**
+     * To mass delete the customer
+     *
+     * @return redirect
+     */
+    public function massDestroy()
+    {
+        $customerIds = explode(',', request()->input('indexes'));
+
+        foreach ($customerIds as $customerId) {
+            $this->customer->deleteWhere([
+                'id' => $customerId
+            ]);
+        }
+
+        session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
+
+        return redirect()->back();
     }
 }

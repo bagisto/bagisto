@@ -1,5 +1,5 @@
 @if ($product[$attribute->code])
-    <a href="{{ Storage::url($product[$attribute->code]) }}" target="_blank">
+    <a href="{{ route('admin.catalog.products.file.download', [$product->product_id, $attribute->id] )}}">
         <img src="{{ Storage::url($product[$attribute->code]) }}" class="configuration-image"/>
     </a>
 @endif

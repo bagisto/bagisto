@@ -43,7 +43,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::dashboard.index'
             ])->name('admin.dashboard.index');
 
-            //Customers Management Routes
+            //Customer Management Routes
             Route::get('customers', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config', [
                 'view' => 'admin::customers.index'
             ])->name('admin.customer.index');
@@ -60,11 +60,23 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.edit'
             ])->name('admin.customer.edit');
 
+            Route::get('customers/note/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@createNote')->defaults('_config',[
+                'view' => 'admin::customers.note'
+            ])->name('admin.customer.note.create');
+
+            Route::put('customers/note/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@storeNote')->defaults('_config',[
+                'redirect' => 'admin.customer.index'
+            ])->name('admin.customer.note.store');
+
             Route::put('customers/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@update')->defaults('_config', [
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.update');
 
             Route::post('customers/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@destroy')->name('admin.customer.delete');
+
+            Route::post('customers/masssdelete', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@massDestroy')->name('admin.customer.mass-delete');
+
+            Route::post('customers/masssupdate', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@massUpdate')->name('admin.customer.mass-update');
 
             Route::get('reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
                 'view' => 'admin::customers.reviews.index'
@@ -186,7 +198,6 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('admin.sales.shipments.view');
             });
 
-
             // Catalog Routes
             Route::prefix('catalog')->group(function () {
                 Route::get('/sync', 'Webkul\Product\Http\Controllers\ProductController@sync');
@@ -232,6 +243,10 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('products/search', 'Webkul\Product\Http\Controllers\ProductController@productLinkSearch')->defaults('_config', [
                     'view' => 'admin::catalog.products.edit'
                 ])->name('admin.catalog.products.productlinksearch');
+
+                Route::get('/products/{id}/{attribute_id}', 'Webkul\Product\Http\Controllers\ProductController@download')->defaults('_config', [
+                    'view' => 'admin.catalog.products.edit'
+                ])->name('admin.catalog.products.file.download');
 
                 // Catalog Category Routes
                 Route::get('/categories', 'Webkul\Category\Http\Controllers\CategoryController@index')->defaults('_config', [
@@ -609,6 +624,57 @@ Route::group(['middleware' => ['web']], function () {
             //DataGrid Export
             Route::post('admin/export', 'Webkul\Admin\Http\Controllers\ExportController@export')->name('admin.datagrid.export');
 
+            Route::prefix('promotion')->group(function () {
+                // Route::get('/catalog-rule', 'Webkul\Discount\Http\Controllers\CatalogRuleController@index')->defaults('_config', [
+                //     'view' => 'admin::promotions.catalog-rule.index'
+                // ])->name('admin.catalog-rule.index');
+
+                // Route::get('/catalog-rule/create', 'Webkul\Discount\Http\Controllers\CatalogRuleController@create')->defaults('_config', [
+                //     'view' => 'admin::promotions.catalog-rule.create'
+                // ])->name('admin.catalog-rule.create');
+
+                // Route::post('/catalog-rule/create', 'Webkul\Discount\Http\Controllers\CatalogRuleController@store')->defaults('_config', [
+                //     'redirect' => 'admin.catalog-rule.index'
+                // ])->name('admin.catalog-rule.store');
+
+                // Route::get('/catalog-rule/edit/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@edit')->defaults('_config', [
+                //     'view' => 'admin::promotions.catalog-rule.edit'
+                // ])->name('admin.catalog-rule.edit');
+
+                // Route::post('/catalog-rule/edit/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@update')->defaults('_config', [
+                //     'redirect' => 'admin.catalog-rule.index'
+                // ])->name('admin.catalog-rule.update');
+
+                // Route::get('/catalog-rule/apply', 'Webkul\Discount\Http\Controllers\CatalogRuleController@applyRules')->defaults('_config', [
+                //     'view' => 'admin::promotions.catalog-rule.index'
+                // ])->name('admin.catalog-rule.apply');
+
+                // Route::post('/catalog-rule/delete/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@destroy')->name('admin.catalog-rule.delete');
+
+                // Route::post('fetch/options', 'Webkul\Discount\Http\Controllers\CatalogRuleController@fetchAttributeOptions')->name('admin.catalog-rule.options');
+
+                Route::get('cart-rules', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rule.index'
+                ])->name('admin.cart-rule.index');
+
+                Route::get('cart-rules/create', 'Webkul\Discount\Http\Controllers\CartRuleController@create')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rule.create'
+                ])->name('admin.cart-rule.create');
+
+                Route::post('cart-rules/store', 'Webkul\Discount\Http\Controllers\CartRuleController@store')->defaults('_config', [
+                    'redirect' => 'admin.cart-rule.index'
+                ])->name('admin.cart-rule.store');
+
+                Route::get('cart-rules/edit/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@edit')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rule.edit'
+                ])->name('admin.cart-rule.edit');
+
+                Route::post('cart-rules/update/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@update')->defaults('_config', [
+                    'redirect' => 'admin.cart-rule.index'
+                ])->name('admin.cart-rule.update');
+
+                Route::post('cart-rules/delete/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@destroy')->name('admin.cart-rule.delete');
+            });
         });
     });
 });
