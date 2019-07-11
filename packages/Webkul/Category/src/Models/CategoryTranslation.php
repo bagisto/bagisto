@@ -9,5 +9,5 @@ class CategoryTranslation extends Model implements CategoryTranslationContract
 {
     public $timestamps = false;
 
-    protected $fillable = ['name', 'description', 'slug', 'meta_title', 'meta_description', 'meta_keywords'];
+    protected $fillable = ['name', 'description', 'slug', 'meta_title', 'meta_description', 'meta_keywords', 'locale_id'];
 }
