@@ -39,7 +39,7 @@ return [
     ], [
         'key' => 'customer',
         'name' => 'admin::app.admin.system.customer',
-        'sort' => 3,
+        'sort' => 2,
     ], [
         'key' => 'customer.settings',
         'name' => 'admin::app.admin.system.settings',

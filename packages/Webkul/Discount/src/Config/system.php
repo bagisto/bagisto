@@ -4,7 +4,7 @@ return [
     [
         'key' => 'discount',
         'name' => 'admin::app.promotion.general-info.discount',
-        'sort' => 1
+        'sort' => 3
     ], [
         'key' => 'discount.cart-rules',
         'name' => 'admin::app.promotion.cart-rule',
