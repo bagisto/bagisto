@@ -341,6 +341,30 @@
                                 </div>
                             </accordian>
 
+                            <accordian :active="true" title="{{ __('admin::app.promotion.select-products') }}">
+                                <div slot="body">
+                                    <div class="control-group" :class="[errors.has('categories') ? 'has-error' : '']">
+                                        <label class="mb-10" for="categories">{{ __('admin::app.promotion.select-category') }}</label>
+
+                                        <multiselect v-model="categories" :options="options" :searchable="false" :close-on-select="false" :allow-empty="true" :show-labels="true" placeholder="Select Categories" :multiple="true" :hide-selected="true" :taggable="true" @tag="addTag"></multiselect>
+
+                                        <pre>
+                                            <code>@{{ value }}</code>
+                                        </pre>
+                                    </div>
+
+                                    <div class="control-group" :class="[errors.has('attributes') ? 'has-error' : '']">
+                                        <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-category') }}</label>
+
+                                        <multiselect v-model="attributes" :options="options" :searchable="false" :close-on-select="false" :allow-empty="true" :show-labels="true" placeholder="Select Categories" :multiple="true" :hide-selected="true" :taggable="true" @tag="addTag"></multiselect>
+
+                                        <pre>
+                                            <code>@{{ value }}</code>
+                                        </pre>
+                                    </div>
+                                </div>
+                            </accordian>
+
                             <accordian :active="false" :title="'{{ __('admin::app.promotion.general-info.labels') }}'">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('label') ? 'has-error' : '']" v-if="dedicated_label">
@@ -380,6 +404,10 @@
 
                 data () {
                     return {
+                        options: [
+                            1, 2, 3, 4, 5, 6
+                        ],
+                        categories: null,
                         name: null,
                         description: null,
                         conditions_list: [],
@@ -441,6 +469,16 @@
 
 
                 methods: {
+                    addTag (newTag) {
+                        const tag = {
+                            name: newTag,
+                            code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+                        }
+
+                        this.options.push(tag)
+                        this.value.push(tag)
+                    },
+
                     addCondition () {
                         if (this.criteria == 'product_subselection' || this.criteria == 'cart') {
                             this.condition_on = this.criteria;
@@ -524,5 +562,11 @@
                 }
             });
         </script>
+
+        <style>
+            pre {
+                position: absolute;
+            }
+        </style>
     @endpush
 @stop

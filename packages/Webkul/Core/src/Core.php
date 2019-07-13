@@ -394,9 +394,9 @@ class Core
         if (is_null($amount))
             $amount = 0;
 
-        $formater = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
+        $formatter = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
 
-        return $formater->formatCurrency($this->convertPrice($amount), $this->getCurrentCurrency()->code);
+        return $formatter->formatCurrency($this->convertPrice($amount), $this->getCurrentCurrency()->code);
     }
 
     /**
@@ -424,9 +424,9 @@ class Core
         if (is_null($price))
             $price = 0;
 
-        $formater = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
+        $formatter = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
 
-        return $formater->formatCurrency($price, $currencyCode);
+        return $formatter->formatCurrency($price, $currencyCode);
     }
 
     /**
@@ -439,10 +439,10 @@ class Core
     {
         if (is_null($price))
             $price = 0;
-        
-        $formater = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
 
-        return $formater->formatCurrency($price, $this->getBaseCurrencyCode());
+        $formatter = new \NumberFormatter( app()->getLocale(), \NumberFormatter::CURRENCY );
+
+        return $formatter->formatCurrency($price, $this->getBaseCurrencyCode());
     }
 
     /**

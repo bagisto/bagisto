@@ -818,7 +818,10 @@ return [
         'select-attr' => 'Select Attribute',
         'select-attr-fam' => 'Select Attribute Family',
         'select-cart-attr' => 'Select Cart Attribute',
+        'select-products' => 'Select product attributes',
+        'select-category' => 'Select Categories',
         'general-info' => [
+            'sku-like' => 'SKU Like',
             'on-shipping' => 'If applied on shipping',
             'discount' => 'Discount',
             'to-be-applied' => 'Applied On',

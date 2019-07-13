@@ -36,30 +36,8 @@ return [
                         'value' => null
                     ]
                 ],
+
                 'info' => 'admin::app.promotion.general-info.applied-on-info'
-            ], [
-                'name' => 'on_shipping',
-                'title' => 'admin::app.promotion.general-info.on-shipping',
-                'type' => 'select',
-                'validation' => 'required',
-                'channel_based' => true,
-                'locale_based' => false,
-                'options' => [
-                    [
-                        'title' => 'On grand-total',
-                        'value' => 0
-                    ], [
-                        'title' => 'On selected item',
-                        'value' => 1
-                    ], [
-                        'title' => 'On sub-total',
-                        'value' => 2
-                    ], [
-                        'title' => 'Please select an option',
-                        'value' => null
-                    ]
-                ],
-                'info' => 'admin::app.promotion.general-info.shipping-apply-info'
             ]
         ]
     ],
