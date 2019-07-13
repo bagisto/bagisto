@@ -33,6 +33,10 @@ class DiscountServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
+            dirname(__DIR__) . '/Config/system.php', 'core'
+        );
+
+        $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/rule-conditions.php', 'pricerules'
         );
 

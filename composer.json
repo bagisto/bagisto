@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.1.3",
         "ext-curl": "*",
+        "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-openssl": "*",
         "ext-pdo": "*",
@@ -97,7 +98,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "barryvdh/laravel-debugbar"
+            ]
         }
     },
     "scripts": {

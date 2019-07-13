@@ -15,12 +15,18 @@ class ExampleTest extends DuskTestCase
      */
     public function testBasicExample()
     {
-        $this->browse(function (Browser $browser) {
+        $customer = app('Webkul\Customer\Repositories\CustomerRepository');
+
+        $customer = $customer->all();
+
+        $customer = $customer->first();
+
+        $this->browse(function (Browser $browser) use($customer) {
             $browser->visit('/customer/login')
-                    ->type('email', 'prashant@webkul.com')
-                    ->type('password', '12345678')
-                    ->click('input[type="submit"]')
-                    ->screenshot('error');
+                ->type('email', $customer->email)
+                ->type('password', $customer->password)
+                ->click('input[type="submit"]')
+                ->screenshot('error');
         });
     }
 }

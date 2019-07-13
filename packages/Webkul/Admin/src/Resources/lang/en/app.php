@@ -75,6 +75,8 @@ return [
         'edit' => 'Edit',
         'create' => 'Add',
         'delete' => 'Delete',
+        'promotions' => 'Promotions',
+        'cart-rules' => 'Cart Rules'
     ],
 
     'dashboard' => [
@@ -185,7 +187,6 @@ return [
         ],
 
         'reset-password' => [
-            'title' => 'Reset Password',
             'title' => 'Reset Password',
             'email' => 'Registered Email',
             'password' => 'Password',
@@ -802,6 +803,7 @@ return [
     ],
 
     'promotion' => [
+        'zero-unlimited' => 'Zero denotes unlimited usage here',
         'catalog-rule' => 'Catalog Rules',
         'cart-rule' => 'Cart Rules',
         'add-catalog-rule' => 'Add Catalog Rule',
@@ -816,7 +818,17 @@ return [
         'select-attr' => 'Select Attribute',
         'select-attr-fam' => 'Select Attribute Family',
         'select-cart-attr' => 'Select Cart Attribute',
+        'select-products' => 'Select product attributes',
+        'select-category' => 'Select Categories',
         'general-info' => [
+            'sku-like' => 'SKU Like',
+            'on-shipping' => 'If applied on shipping',
+            'discount' => 'Discount',
+            'to-be-applied' => 'Applied On',
+            'applied-on-info' => 'It signifies how cart rule should be applied on items in cart',
+            'shipping-apply-info' => 'It signifies how rule behaves when it is used for shipping',
+            'general-info' => 'General Info',
+            'config' => 'Configure',
             'name' => 'Rule Name',
             'description' => 'Description',
             'starts-from' => 'Start',
@@ -973,7 +985,6 @@ return [
             'customer' => 'Customer',
             'settings' => 'Settings',
             'address' => 'Address',
-            'address' => 'Address',
             'street-lines' => 'Lines in a Street Address',
             'sales' => 'Sales',
             'shipping-methods' => 'Shipping Methods',
@@ -1005,7 +1016,7 @@ return [
             'footer' => 'Footer',
             'content' => 'Content',
             'footer-content' => 'Footer Text',
-            'locale-options' => 'Locale Options',
+            'locale-options' => 'Unit Options',
             'weight-unit' => 'Weight Unit',
             'design' => 'Design',
             'admin-logo' => 'Admin Logo',

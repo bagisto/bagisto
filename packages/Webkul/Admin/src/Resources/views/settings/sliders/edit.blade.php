@@ -47,8 +47,16 @@
                         <span class="control-error" v-if="errors.has('channel_id')">@{{ errors.first('channel_id') }}</span>
                     </div>
 
-                    <div class="control-group">
-                        <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false" :images='"{{ url('storage/'.$slider->path) }}"' :required="true"></image-wrapper>
+                    <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
+                        <label>{{ __('admin::app.catalog.categories.image') }}
+
+                        <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false" :images='"{{ url('storage/'.$slider->path) }}"' ></image-wrapper>
+
+                        <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
+                            @foreach ($errors->get('image.*') as $key => $message)
+                                @php echo str_replace($key, 'Image', $message[0]); @endphp
+                            @endforeach
+                        </span>
                     </div>
 
                     <div class="control-group">

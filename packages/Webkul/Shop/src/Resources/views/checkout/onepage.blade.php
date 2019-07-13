@@ -409,6 +409,8 @@
             mounted: function() {
                 this.templateRender = paymentHtml.render;
 
+                console.log(paymentHtml.render);
+
                 for (var i in paymentHtml.staticRenderFns) {
                     paymentTemplateRenderFns.push(paymentHtml.staticRenderFns[i]);
                 }

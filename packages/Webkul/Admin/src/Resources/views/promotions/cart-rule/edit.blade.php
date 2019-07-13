@@ -136,32 +136,25 @@
 
                                     {{-- <input type="hidden" name="auto_generation" v-model="auto_generation"> --}}
 
-                                    {{-- <div class="control-group" :class="[errors.has('per_customer') ? 'has-error' : '']">
+                                    <div class="control-group" :class="[errors.has('per_customer') ? 'has-error' : '']">
                                         <label for="per_customer" class="required">{{ __('admin::app.promotion.general-info.uses-per-cust') }}</label>
 
                                         <input type="number" step="1" class="control" name="per_customer" v-model="per_customer" v-validate="'required|numeric|min_value:0'" value="{{ old('per_customer') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
 
+                                        <figcaption class="required">* {{ __('admin::app.promotion.zero-unlimited') }}</figcaption>
+
                                         <span class="control-error" v-if="errors.has('per_customer')">@{{ errors.first('per_customer') }}</span>
-                                    </div> --}}
+                                    </div>
 
-                                    {{-- <div class="control-group" :class="[errors.has('is_guest') ? 'has-error' : '']">
-                                        <label for="is_guest" class="required">{{ __('admin::app.promotion.general-info.is-guest') }}</label>
-
-                                        <select type="text" class="control" name="is_guest" v-model="is_guest" v-validate="'required'" value="{{ old('is_guest')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-guest') }}&quot;">
-                                            <option value="1" :selected="is_guest == 1">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
-                                            <option value="0" :selected="is_guest == 0">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
-                                        </select>
-
-                                        <span class="control-error" v-if="errors.has('is_guest')">@{{ errors.first('is_guest') }}</span>
-                                    </div> --}}
-
-                                    {{-- <div class="control-group" :class="[errors.has('usage_limit') ? 'has-error' : '']">
+                                    <div class="control-group" :class="[errors.has('usage_limit') ? 'has-error' : '']">
                                         <label for="usage_limit" class="required">{{ __('admin::app.promotion.general-info.limit') }}</label>
 
                                         <input type="number" step="1" class="control" name="usage_limit" v-model="usage_limit" v-validate="'required|numeric|min_value:0'" value="{{ old('usage_limit') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
 
+                                        <figcaption class="required">* {{ __('admin::app.promotion.zero-unlimited') }}</figcaption>
+
                                         <span class="control-error" v-if="errors.has('usage_limit')">@{{ errors.first('usage_limit') }}</span>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="control-group" :class="[errors.has('priority') ? 'has-error' : '']">
                                         <label for="priority" class="required">{{ __('admin::app.promotion.general-info.priority') }}</label>

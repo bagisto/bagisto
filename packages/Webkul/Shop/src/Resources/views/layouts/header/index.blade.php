@@ -30,7 +30,7 @@
 
         <?php
             $query = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-            $searchTerm = explode("?", $query);
+            $searchTerm = explode("&", $query);
 
             foreach($searchTerm as $term){
                 if (strpos($term, 'term') !== false) {
@@ -58,8 +58,8 @@
                         <ul class="dropdown-list currency">
                             @foreach (core()->getCurrentChannel()->currencies as $currency)
                                 <li>
-                                    @if(isset($serachQuery))
-                                        <a href="?{{ $serachQuery }}?currency={{ $currency->code }}">{{ $currency->code }}</a>
+                                    @if (isset($serachQuery))
+                                        <a href="?{{ $serachQuery }}&currency={{ $currency->code }}">{{ $currency->code }}</a>
                                     @else
                                         <a href="?currency={{ $currency->code }}">{{ $currency->code }}</a>
                                     @endif

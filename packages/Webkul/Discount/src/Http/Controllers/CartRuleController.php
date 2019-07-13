@@ -90,8 +90,8 @@ class CartRuleController extends Controller
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
-            // 'usage_limit' => 'numeric|min:0',
-            // 'per_customer' => 'numeric|min:0',
+            'usage_limit' => 'numeric|min:0',
+            'per_customer' => 'numeric|min:0',
             'action_type' => 'required|string',
             'disc_amount' => 'required|numeric',
             'disc_quantity' => 'numeric',
@@ -107,12 +107,6 @@ class CartRuleController extends Controller
 
         // unset token
         unset($data['_token']);
-
-        // set usage limit
-        $data['usage_limit'] = 0;
-
-        // set per customer usage limit
-        $data['per_customer'] = 0;
 
         // check if starts_from is null
         if ($data['starts_from'] == "") {
@@ -303,8 +297,8 @@ class CartRuleController extends Controller
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
-            // 'usage_limit' => 'numeric|min:0',
-            // 'per_customer' => 'numeric|min:0',
+            'usage_limit' => 'numeric|min:0',
+            'per_customer' => 'numeric|min:0',
             'action_type' => 'required|string',
             'disc_amount' => 'required|numeric',
             'disc_quantity' => 'required|numeric',
@@ -321,12 +315,6 @@ class CartRuleController extends Controller
 
         // unset request token from $data
         unset($data['_token']);
-
-        // set rule uasge limit
-        $data['usage_limit'] = 0;
-
-        // set rule usage per customer
-        $data['per_customer'] = 0;
 
         // check if starts_from is null
         if ($data['starts_from'] == "") {
