@@ -11,25 +11,25 @@ return [
         'sort' => 1
     ], [
         'key' => 'discount.cart-rules.settings',
-        'name' => 'admin::app.promotion.general-info.config',
+        'name' => 'admin::app.promotion.general-info.options',
         'sort' => 1,
         'fields' => [
             [
-                'name' => 'applied_on',
-                'title' => 'admin::app.promotion.general-info.to-be-applied',
+                'name' => 'if_applied_on_shipping',
+                'title' => 'admin::app.promotion.general-info.on-shipping',
                 'type' => 'select',
                 'validation' => 'required',
                 'channel_based' => true,
                 'locale_based' => false,
                 'options' => [
                     [
-                        'title' => 'Least Worth Item',
-                        'value' => 0
+                        'title' => 'W.R.T grand total',
+                        'value' => 'grand_total'
                     ], [
-                        'title' => 'Max Worth Item',
+                        'title' => 'W.R.T sub total',
                         'value' => 1
                     ], [
-                        'title' => 'All Items',
+                        'title' => 'W.R.T shipping total',
                         'value' => 2
                     ], [
                         'title' => 'Please select an option',
@@ -37,7 +37,7 @@ return [
                     ]
                 ],
 
-                'info' => 'admin::app.promotion.general-info.applied-on-info'
+                'info' => 'admin::app.promotion.general-info.shipping-apply-info'
             ]
         ]
     ],

@@ -343,24 +343,61 @@
 
                             <accordian :active="true" title="{{ __('admin::app.promotion.select-products') }}">
                                 <div slot="body">
-                                    <div class="control-group" :class="[errors.has('categories') ? 'has-error' : '']">
+                                    <div class="control-group" :class="[errors.has('category_values') ? 'has-error' : '']">
                                         <label class="mb-10" for="categories">{{ __('admin::app.promotion.select-category') }}</label>
 
-                                        <multiselect v-model="categories" :options="options" :searchable="false" :close-on-select="false" :allow-empty="true" :show-labels="true" placeholder="Select Categories" :multiple="true" :hide-selected="true" :taggable="true" @tag="addTag"></multiselect>
+                                        <multiselect v-model="category_values" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true" :taggable="true" @tag="categoryTag"></multiselect>
 
-                                        <pre>
-                                            <code>@{{ value }}</code>
-                                        </pre>
+                                        @{{ category_values }}
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('attributes') ? 'has-error' : '']">
-                                        <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-category') }}</label>
+                                    {{-- <div class="control-group" :class="[errors.has('attribute_values') ? 'has-error' : '']">
+                                        <label class="mb-10" for="attribute_values">{{ __('admin::app.promotion.select-attribute') }}</label>
 
-                                        <multiselect v-model="attributes" :options="options" :searchable="false" :close-on-select="false" :allow-empty="true" :show-labels="true" placeholder="Select Categories" :multiple="true" :hide-selected="true" :taggable="true" @tag="addTag"></multiselect>
+                                        <multiselect v-model="attribute_values" :options="attribute_options" :searchable="false" :custom-label="attributeLabel" :show-labels="true" placeholder="Select Attributes" track-by="code" :multiple="true" :taggable="true" @tag="categoryTag"></multiselect>
 
-                                        <pre>
-                                            <code>@{{ value }}</code>
-                                        </pre>
+                                        @{{ attribute_values }}
+                                    </div> --}}
+
+                                    <div class="control-container mt-20" v-for="(condition, index) in attribute_list" :key="index">
+                                        <select class="control" name="attributes[]" v-model="attribute_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableCondition($event, index)">
+                                            <option disabled="disabled">Select Option</option>
+                                            <option v-for="(cart_ip, index1) in cart_input" :value="cart_ip.code" :key="index1">@{{ cart_ip.name }}</option>
+                                        </select>
+
+                                        <div v-if='attribute_list[index].type == "string"' style="display: flex">
+                                            <select class="control" name="cart_attributes[]" v-model="attribute_list[index].condition" style="margin-right: 15px;">
+                                                <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
+                                            </select>
+
+                                            <div v-if='attribute_list[index].attribute == "shipping_state"'>
+                                                <select class="control" v-model="attribute_list[index].value">
+                                                    <option disabled="disabled">Select State</option>
+                                                    <optgroup v-for='(state, code) in country_and_states.states' :label="code">
+                                                        <option v-for="(stateObj, index) in state" :value="stateObj.code">@{{ stateObj.default_name }}</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+
+                                            <div v-if='attribute_list[index].attribute == "shipping_country"'>
+                                                <select class="control" v-model="attribute_list[index].value">
+                                                    <option disabled="disabled">Select Country</option>
+                                                    <option v-for="(country, index) in country_and_states.countries" :value="country.code">@{{ country.name }}</option>
+                                                </select>
+                                            </div>
+
+                                            <input class="control" type="text" name="cart_attributes[]" v-model="attribute_list[index].value" placeholder="Enter Value" v-if='attribute_list[index].attribute != "shipping_state" && attribute_list[index].attribute != "shipping_country"'>
+                                        </div>
+
+                                        <div v-if='attribute_list[index].type == "numeric"' style="display: flex">
+                                            <select class="control" name="attributes[]" v-model="attribute_list[index].condition" style="margin-right: 15px;">
+                                                <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
+                                            </select>
+
+                                            <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="attribute_list[index].value" placeholder="Enter Value">
+                                        </div>
+
+                                        <span class="icon trash-icon" v-on:click="removeCartAttr(index)"></span>
                                     </div>
                                 </div>
                             </accordian>
@@ -404,10 +441,6 @@
 
                 data () {
                     return {
-                        options: [
-                            1, 2, 3, 4, 5, 6
-                        ],
-                        categories: null,
                         name: null,
                         description: null,
                         conditions_list: [],
@@ -463,13 +496,20 @@
                             condition: null,
                             value: []
                         },
-                        country_and_states: @json($cart_rule[2])
+                        country_and_states: @json($cart_rule[2]),
+
+                        category_options: @json($cart_rule[1]),
+                        category_values: null,
+
+                        attribute_list: [],
+                        attribute_input: @json($cart_rule[3]),
+                        attribute_options: [],
+                        attribute_values: []
                     }
                 },
 
-
                 methods: {
-                    addTag (newTag) {
+                    categoryTag (newTag) {
                         const tag = {
                             name: newTag,
                             code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
@@ -477,6 +517,14 @@
 
                         this.options.push(tag)
                         this.value.push(tag)
+                    },
+
+                    categoryLabel (category_options) {
+                        return category_options.name + ' [ ' + category_options.slug + ' ]';
+                    },
+
+                    attributeLabel (attribute_options) {
+                        return attribute_options.name + ' [ ' + attribute_options.type + ' ]';
                     },
 
                     addCondition () {
@@ -566,6 +614,18 @@
         <style>
             pre {
                 position: absolute;
+            }
+
+            .multiselect__tag {
+                background: #4CAF50;
+            }
+
+            .multiselect__option--selected.multiselect__option--highlight {
+                background: rgba(0, 64, 255, 0.6);
+            }
+
+            .multiselect__option--highlight {
+                background: #4CAF50;
             }
         </style>
     @endpush

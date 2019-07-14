@@ -213,7 +213,7 @@ class CategoryRepository extends Repository
         }
     }
 
-    public function getPartial()
+    public function getPartial($columns = null)
     {
         $categories = $this->model->all();
         $trimmed = array();
@@ -222,7 +222,8 @@ class CategoryRepository extends Repository
             if ($category->name != null || $category->name != "") {
                 $trimmed[$key] = [
                     'id' => $category->id,
-                    'name' => $category->name
+                    'name' => $category->name,
+                    'slug' => $category->slug
                 ];
             }
         }

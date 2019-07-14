@@ -3,7 +3,8 @@
 namespace Webkul\Discount\Http\Controllers;
 
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
-use Webkul\Checkout\Repositories\CartRepository as Cart;
+use Webkul\Category\Repositories\CategoryRepository as Category;
+use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Discount\Repositories\CartRuleLabelsRepository as CartRuleLabels;
 use Webkul\Discount\Repositories\CartRuleCouponsRepository as CartRuleCoupons;
 
@@ -41,6 +42,16 @@ class CartRuleController extends Controller
     protected $cartRuleCoupon;
 
     /**
+     * To hold category repository instance
+     */
+    protected $category;
+
+    /**
+     * To hold attribute repository instance
+     */
+    protected $attribute;
+
+    /**
      * To hold the cart repository instance
      */
     protected $cart;
@@ -48,7 +59,9 @@ class CartRuleController extends Controller
     public function __construct(
         CartRule $cartRule,
         CartRuleCoupons $cartRuleCoupon,
-        CartRuleLabels $cartRuleLabel
+        CartRuleLabels $cartRuleLabel,
+        Attribute $attribute,
+        Category $category
     )
     {
         $this->_config = request('_config');
@@ -58,6 +71,10 @@ class CartRuleController extends Controller
         $this->cartRuleCoupon = $cartRuleCoupon;
 
         $this->cartRuleLabel = $cartRuleLabel;
+
+        $this->attribute = $attribute;
+
+        $this->category = $category;
 
         $this->appliedConfig = config('pricerules.cart');
     }
@@ -75,7 +92,7 @@ class CartRuleController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view'])->with('cart_rule', [$this->appliedConfig, [], $this->getStatesAndCountries()]);
+        return view($this->_config['view'])->with('cart_rule', [$this->appliedConfig, $this->category->getPartial(), $this->getStatesAndCountries(), $this->attribute->getPartial()]);
     }
 
     /**
@@ -141,11 +158,11 @@ class CartRuleController extends Controller
 
         // prepare json object from actions
         if (isset($data['disc_amount']) && $data['action_type'] == config('pricerules.cart.validations.2')) {
-                $data['actions'] = [
-                    'action_type' => $data['action_type'],
-                    'disc_amount' => $data['disc_amount'],
-                    'disc_threshold' => $data['disc_threshold']
-                ];
+            $data['actions'] = [
+                'action_type' => $data['action_type'],
+                'disc_amount' => $data['disc_amount'],
+                'disc_threshold' => $data['disc_threshold']
+            ];
 
             $data['disc_quantity'] = $data['disc_amount'];
         } else {

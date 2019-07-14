@@ -225,7 +225,7 @@ class AttributeRepository extends Repository
                     'id' => $attribute->id,
                     'name' => $attribute->name,
                     'type' => $attribute->type,
-                    'code' => $attribute->code
+                    'code' => $attribute->code,
                 ]);
             }
         }

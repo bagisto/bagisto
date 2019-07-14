@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Exceptions;
+namespace Webkul\Shop\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
@@ -28,7 +28,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        $path = 'admin';
+        $path = 'shop';
 
         if ($exception instanceof HttpException) {
             $statusCode = in_array($exception->getStatusCode(), [401, 403, 404, 503]) ? $exception->getStatusCode() : 500;
@@ -59,9 +59,9 @@ class Handler extends ExceptionHandler
         return redirect()->guest(route('auth.login'));
     }
 
-    private function isAdminUri()
+    private function isSopUri()
     {
-        return strpos($_SERVER['REQUEST_URI'], 'admin') !== false ? true : false;
+        return strpos($_SERVER['REQUEST_URI'], 'shop') !== false ? true : false;
     }
 
     private function response($path, $statusCode)
