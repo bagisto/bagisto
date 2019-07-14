@@ -20,6 +20,7 @@ Vue.component("swatch-picker", require("./components/swatch-picker"));
 Vue.directive("debounce", require("./directives/debounce"));
 
 import { Multiselect } from 'vue-multiselect';
+
 Vue.component('multiselect', Multiselect);
 
 require('flatpickr/dist/flatpickr.css');

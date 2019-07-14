@@ -355,8 +355,6 @@
                                         <label class="mb-10" for="attribute_values">{{ __('admin::app.promotion.select-attribute') }}</label>
 
                                         <multiselect v-model="attribute_values" :options="attribute_options" :searchable="false" :custom-label="attributeLabel" :show-labels="true" placeholder="Select Attributes" track-by="code" :multiple="true" :taggable="true" @tag="categoryTag"></multiselect>
-
-                                        @{{ attribute_values }}
                                     </div> --}}
 
                                     <div class="control-container mt-20" v-for="(condition, index) in attribute_list" :key="index">
@@ -610,23 +608,5 @@
                 }
             });
         </script>
-
-        <style>
-            pre {
-                position: absolute;
-            }
-
-            .multiselect__tag {
-                background: #4CAF50;
-            }
-
-            .multiselect__option--selected.multiselect__option--highlight {
-                background: rgba(0, 64, 255, 0.6);
-            }
-
-            .multiselect__option--highlight {
-                background: #4CAF50;
-            }
-        </style>
     @endpush
 @stop

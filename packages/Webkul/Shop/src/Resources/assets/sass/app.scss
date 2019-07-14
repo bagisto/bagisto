@@ -46,7 +46,6 @@ input {
     justify-content: center;
 }
 
-
 @media only screen and (max-width: 770px) {
     .pagination.shop {
         justify-content: space-between;
@@ -329,7 +328,7 @@ input {
         grid-auto-rows: auto;
         grid-column-gap: 30px;
         grid-row-gap: 15px;
-        justify-items: end;
+        justify-items: center;
     }
 
     .product-grid-3 {
@@ -342,8 +341,7 @@ input {
 
     .product-card {
         position: relative;
-        padding: 15px;
-
+        border: 1px solid black;
         .product-image {
             max-height: 350px;
             max-width: 280px;
@@ -352,7 +350,7 @@ input {
 
             img {
                 display: block;
-                width: 100%;
+                height: 100%;
             }
         }
 
@@ -423,11 +421,13 @@ input {
     }
 
     .product-card:hover {
-        outline: 1px solid $outline-hvr;
         box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         -webkit-box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
         -moz-box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
         box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
+        padding: 10px;
+        transition: .3s;
+        outline: 1px solid $outline-hvr;
     }
 
     @media only screen and (max-width: 580px) {
@@ -444,13 +444,31 @@ input {
     }
 
     @media only screen and (max-width: 854px) {
+        .product-image {
+            img {
+                display: block;
+                width: 100%;
+            }
+        }
+
         .product-grid-4 {
             grid-template-columns: 29.5% 29.5% 29.5%;
             grid-column-gap: 35px;
         }
+
+        .product-card:hover {
+            padding: 5px;
+        }
     }
 
     @media only screen and (max-width: 653px) {
+        .product-image {
+            img {
+                display: block;
+                width: 100%;
+            }
+        }
+
         .product-grid-4 {
             grid-template-columns: 48.5% 48.5%;
             grid-column-gap: 17px;
@@ -460,6 +478,13 @@ input {
     @media only screen and (max-width: 425px) {
         .product-card {
             font-size: 90%;
+
+            .product-image {
+                img {
+                    display: block;
+                    width: 100%;
+                }
+            }
 
             .btn.btn-md {
                 padding: 5px;
