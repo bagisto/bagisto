@@ -80,6 +80,8 @@ class CartRuleController extends Controller
     }
 
     /**
+     * Loads the cart rule index page
+     *
      * @return view
      */
     public function index()
@@ -88,6 +90,8 @@ class CartRuleController extends Controller
     }
 
     /**
+     * Loads the cart rule create page
+     *
      * @return view
      */
     public function create()
@@ -96,6 +100,8 @@ class CartRuleController extends Controller
     }
 
     /**
+     * Stores the response from cart rule store page to datastore
+     *
      * @return redirect
      */
     public function store()
@@ -288,6 +294,8 @@ class CartRuleController extends Controller
     }
 
     /**
+     * Loads the cart rule edit page
+     *
      * @return view
      */
     public function edit($id)
@@ -303,6 +311,8 @@ class CartRuleController extends Controller
     }
 
     /**
+     * Collects the response from cart rule update page and update datastore
+     *
      * @return redirect
      */
     public function update($id)

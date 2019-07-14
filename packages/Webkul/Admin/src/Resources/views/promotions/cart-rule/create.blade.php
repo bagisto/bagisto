@@ -347,56 +347,29 @@
                                         <label class="mb-10" for="categories">{{ __('admin::app.promotion.select-category') }}</label>
 
                                         <multiselect v-model="category_values" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true" :taggable="true" @tag="categoryTag"></multiselect>
-
-                                        @{{ category_values }}
                                     </div>
 
-                                    {{-- <div class="control-group" :class="[errors.has('attribute_values') ? 'has-error' : '']">
-                                        <label class="mb-10" for="attribute_values">{{ __('admin::app.promotion.select-attribute') }}</label>
-
-                                        <multiselect v-model="attribute_values" :options="attribute_options" :searchable="false" :custom-label="attributeLabel" :show-labels="true" placeholder="Select Attributes" track-by="code" :multiple="true" :taggable="true" @tag="categoryTag"></multiselect>
-                                    </div> --}}
+                                    <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-attribute') }}</label><br/>
 
                                     <div class="control-container mt-20" v-for="(condition, index) in attribute_list" :key="index">
-                                        <select class="control" name="attributes[]" v-model="attribute_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableCondition($event, index)">
+                                        <select class="control" name="attributes[]" v-model="attribute_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableAttributeCondition($event, index)">
                                             <option disabled="disabled">Select Option</option>
-                                            <option v-for="(cart_ip, index1) in cart_input" :value="cart_ip.code" :key="index1">@{{ cart_ip.name }}</option>
+
+                                            <option v-for="(attr_ip, index1) in attribute_input" :value="attribute_input.code" :key="index1">@{{ attr_ip.name }}</option>
                                         </select>
 
-                                        <div v-if='attribute_list[index].type == "string"' style="display: flex">
-                                            <select class="control" name="cart_attributes[]" v-model="attribute_list[index].condition" style="margin-right: 15px;">
-                                                <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
-                                            </select>
+                                        <select class="control" v-model="attribute_list[index].condition" style="margin-right: 15px;">
+                                            <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
+                                        </select>
 
-                                            <div v-if='attribute_list[index].attribute == "shipping_state"'>
-                                                <select class="control" v-model="attribute_list[index].value">
-                                                    <option disabled="disabled">Select State</option>
-                                                    <optgroup v-for='(state, code) in country_and_states.states' :label="code">
-                                                        <option v-for="(stateObj, index) in state" :value="stateObj.code">@{{ stateObj.default_name }}</option>
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-
-                                            <div v-if='attribute_list[index].attribute == "shipping_country"'>
-                                                <select class="control" v-model="attribute_list[index].value">
-                                                    <option disabled="disabled">Select Country</option>
-                                                    <option v-for="(country, index) in country_and_states.countries" :value="country.code">@{{ country.name }}</option>
-                                                </select>
-                                            </div>
-
-                                            <input class="control" type="text" name="cart_attributes[]" v-model="attribute_list[index].value" placeholder="Enter Value" v-if='attribute_list[index].attribute != "shipping_state" && attribute_list[index].attribute != "shipping_country"'>
+                                        <div v-if='attribute_list[index].type == "select" || attribute_list[index].type == "multiselect"' style="display: flex">
+                                            <multiselect v-model="category_values" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true" :taggable="true" @tag="categoryTag"></multiselect>
                                         </div>
 
-                                        <div v-if='attribute_list[index].type == "numeric"' style="display: flex">
-                                            <select class="control" name="attributes[]" v-model="attribute_list[index].condition" style="margin-right: 15px;">
-                                                <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
-                                            </select>
-
-                                            <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="attribute_list[index].value" placeholder="Enter Value">
-                                        </div>
-
-                                        <span class="icon trash-icon" v-on:click="removeCartAttr(index)"></span>
+                                        <span class="icon trash-icon" v-on:click="removeAttr(index)"></span>
                                     </div>
+
+                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addAttributeCondition">Add Attribute Condition</span>
                                 </div>
                             </accordian>
 
@@ -500,6 +473,11 @@
                         category_values: null,
 
                         attribute_list: [],
+                        attr_object: {
+                            attribute: null,
+                            condition: null,
+                            value: []
+                        },
                         attribute_input: @json($cart_rule[3]),
                         attribute_options: [],
                         attribute_values: []
@@ -545,6 +523,16 @@
                         }
                     },
 
+                    addAttributeCondition() {
+                        this.attribute_list.push(this.attr_object);
+
+                        this.attr_object = {
+                            attribute: null,
+                            condition: null,
+                            value: []
+                        };
+                    },
+
                     checkAutogen() {
                     },
 
@@ -568,6 +556,17 @@
                         }
                     },
 
+                    enableAttributeCondition (event, index) {
+                        selectedIndex = event.target.selectedIndex - 1;
+
+                        for(i in this.attribute_input) {
+                            if (i == selectedIndex) {
+                                this.attribute_list[index].type = this.attribute_input[i].type;
+                                console.log(this.attribute_list[index].type);
+                            }
+                        }
+                    },
+
                     // useCoupon() {
                     //     if (this.use_coupon == 0) {
                     //         this.auto_generation = null;
@@ -580,8 +579,8 @@
                         this.conditions_list.splice(index, 1);
                     },
 
-                    removeCat(index) {
-                        this.cats.splice(index, 1);
+                    removeAttr(index) {
+                        this.attribute_list.splice(index, 1);
                     },
 
                     onSubmit: function (e) {

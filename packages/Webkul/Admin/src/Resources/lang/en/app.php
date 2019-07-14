@@ -817,8 +817,8 @@ return [
         'save' => 'Save',
         'select-cart-attr' => 'Select Cart Attribute',
         'select-products' => 'How to choose products ?',
-        'select-category' => 'Select Categories',
-        'select-attribute' => 'Select Attributes',
+        'select-category' => 'Select by Categories',
+        'select-attribute' => 'Select by Attributes',
         'general-info' => [
             'sku-like' => 'SKU Like',
             'on-shipping' => 'If applied on shipping',
