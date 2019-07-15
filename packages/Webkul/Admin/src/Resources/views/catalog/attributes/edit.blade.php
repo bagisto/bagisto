@@ -77,6 +77,9 @@
                                     <option value="file" {{ $selectedOption == 'file' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.file') }}
                                     </option>
+                                    <option value="file" {{ $selectedOption == 'checkbox' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.checkbox') }}
+                                    </option>
                                 </select>
                                 <input type="hidden" name="type" value="{{ $attribute->type }}"/>
                             </div>

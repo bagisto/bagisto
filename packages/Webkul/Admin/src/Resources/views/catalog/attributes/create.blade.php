@@ -54,6 +54,7 @@
                                     <option value="date">{{ __('admin::app.catalog.attributes.date') }}</option>
                                     <option value="image">{{ __('admin::app.catalog.attributes.image') }}</option>
                                     <option value="file">{{ __('admin::app.catalog.attributes.file') }}</option>
+                                    <option value="checkbox">{{ __('admin::app.catalog.attributes.checkbox') }}</option>
                                 </select>
                             </div>
 
