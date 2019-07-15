@@ -192,6 +192,16 @@ abstract class Discount
 
         $actualShippingRate = new $shippingRate;
         $actualShippingRate = $actualShippingRate->calculate();
+        if (is_array($actualShippingRate)) {
+            foreach($actualShippingRate as $actualRate) {
+                if ($actualRate->method == $cart->selected_shipping_rate->method) {
+                    $actualShippingRate = $actualRate;
+
+                    break;
+                }
+            }
+        }
+
         $actualShippingPrice = $actualShippingRate->price;
         $actualShippingBasePrice = $actualShippingRate->base_price;
 
@@ -268,6 +278,17 @@ abstract class Discount
 
             $actualShippingRate = new $shippingRate;
             $actualShippingRate = $actualShippingRate->calculate();
+
+            if (is_array($actualShippingRate)) {
+                foreach($actualShippingRate as $actualRate) {
+                    if ($actualRate->method == $cart->selected_shipping_rate->method) {
+                        $actualShippingRate = $actualRate;
+
+                        break;
+                    }
+                }
+            }
+
             $actualShippingPrice = $actualShippingRate->price;
             $actualShippingBasePrice = $actualShippingRate->base_price;
             $cartShippingRate = $cart->selected_shipping_rate;
