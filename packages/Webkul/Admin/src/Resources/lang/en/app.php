@@ -819,6 +819,9 @@ return [
         'select-products' => 'How to choose products ?',
         'select-category' => 'Select by Categories',
         'select-attribute' => 'Select by Attributes',
+        'cannot-activate-catalog-rule' => 'Cannot activate catalog rule',
+        'catalog-rule-already-activated' => 'Catalog rule is already activated',
+        'catalog-rule-activated' => 'Catalog rule is activated',
         'general-info' => [
             'sku-like' => 'SKU Like',
             'on-shipping' => 'If applied on shipping',

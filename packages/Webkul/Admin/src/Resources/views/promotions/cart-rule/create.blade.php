@@ -363,7 +363,7 @@
                                         </select>
 
                                         <div v-if='attribute_list[index].type == "select" || attribute_list[index].type == "multiselect"' style="display: flex; width: 220px">
-                                            <multiselect v-model="attribute_list[index].value" :options="dummy_options" :searchable="false" :show-labels="true" placeholder="Select Categories" :multiple="true"></multiselect>
+                                        <multiselect v-model="attribute_list[index].value" :options="attribute_list[index].options" :custom-label="attributeListLabel(index)" :track-by="attribute_list[index].options.admin_name" :searchable="false" :show-labels="true" placeholder="{{ __('ui::form.select-attribute', ['attribute' => 'Values']) }}" :multiple="true"></multiselect>
                                         </div>
 
                                         <div v-if='attribute_list[index].type == "text" || attribute_list[index].type == "textarea" || attribute_list[index].type == "price" || attribute_list[index].type == "textarea"' style="display: flex">
@@ -416,9 +416,6 @@
 
                 data () {
                     return {
-                        dummy_options: [
-                            1, 2, 3, 4, 5
-                        ],
                         name: null,
                         description: null,
                         conditions_list: [],
@@ -483,7 +480,8 @@
                         attr_object: {
                             attribute: null,
                             condition: null,
-                            value: []
+                            value: [],
+                            options: []
                         },
                         attribute_input: @json($cart_rule[3]),
                         attribute_options: [],
@@ -498,6 +496,10 @@
 
                     attributeLabel (attribute_options) {
                         return attribute_options.name + ' [ ' + attribute_options.type + ' ]';
+                    },
+
+                    attributeListLabel (index) {
+                        console.log(this.attribute_list[index], index);
                     },
 
                     addCondition () {
@@ -526,7 +528,8 @@
                         this.attr_object = {
                             attribute: null,
                             condition: null,
-                            value: []
+                            value: [],
+                            options: []
                         };
                     },
 
@@ -558,8 +561,11 @@
 
                         for(i in this.attribute_input) {
                             if (i == selectedIndex) {
+                                if (this.attribute_input[i].has_options == true) {
+                                    this.attribute_input[i].options = this.attribute_input[i].options;
+                                }
+
                                 this.attribute_list[index].type = this.attribute_input[i].type;
-                                console.log(this.attribute_list[index].type);
                             }
                         }
                     },
