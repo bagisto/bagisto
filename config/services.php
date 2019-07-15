@@ -29,6 +29,10 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
+    'fixer' => [
+        'key' => env('fixer_api_key')
+    ],
+
     'stripe' => [
         'model' => App\User::class,
         'key' => env('STRIPE_KEY'),
