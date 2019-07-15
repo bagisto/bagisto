@@ -346,7 +346,7 @@
                                     <div class="control-group" :class="[errors.has('category_values') ? 'has-error' : '']">
                                         <label class="mb-10" for="categories">{{ __('admin::app.promotion.select-category') }}</label>
 
-                                        <multiselect v-model="category_values" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true" :taggable="true" @tag="categoryTag"></multiselect>
+                                        <multiselect v-model="category_values" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true"></multiselect>
                                     </div>
 
                                     <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-attribute') }}</label><br/>
@@ -355,15 +355,19 @@
                                         <select class="control" name="attributes[]" v-model="attribute_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableAttributeCondition($event, index)">
                                             <option disabled="disabled">Select Option</option>
 
-                                            <option v-for="(attr_ip, index1) in attribute_input" :value="attribute_input.code" :key="index1">@{{ attr_ip.name }}</option>
+                                            <option v-for="(attr_ip, index1) in attribute_input" :value="attr_ip.code" :key="index1">@{{ attr_ip.name }}</option>
                                         </select>
 
                                         <select class="control" v-model="attribute_list[index].condition" style="margin-right: 15px;">
                                             <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
                                         </select>
 
-                                        <div v-if='attribute_list[index].type == "select" || attribute_list[index].type == "multiselect"' style="display: flex">
-                                            <multiselect v-model="category_values" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true" :taggable="true" @tag="categoryTag"></multiselect>
+                                        <div v-if='attribute_list[index].type == "select" || attribute_list[index].type == "multiselect"' style="display: flex; width: 220px">
+                                            <multiselect v-model="attribute_list[index].value" :options="dummy_options" :searchable="false" :show-labels="true" placeholder="Select Categories" :multiple="true"></multiselect>
+                                        </div>
+
+                                        <div v-if='attribute_list[index].type == "text" || attribute_list[index].type == "textarea" || attribute_list[index].type == "price" || attribute_list[index].type == "textarea"' style="display: flex">
+                                            <input class="control" v-model="attribute_list[index].value" type="text" placeholder="{{ __('ui::form.enter-attribute', ['attribute' => 'Text']) }}">
                                         </div>
 
                                         <span class="icon trash-icon" v-on:click="removeAttr(index)"></span>
@@ -412,6 +416,9 @@
 
                 data () {
                     return {
+                        dummy_options: [
+                            1, 2, 3, 4, 5
+                        ],
                         name: null,
                         description: null,
                         conditions_list: [],
@@ -485,16 +492,6 @@
                 },
 
                 methods: {
-                    categoryTag (newTag) {
-                        const tag = {
-                            name: newTag,
-                            code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-                        }
-
-                        this.options.push(tag)
-                        this.value.push(tag)
-                    },
-
                     categoryLabel (category_options) {
                         return category_options.name + ' [ ' + category_options.slug + ' ]';
                     },
