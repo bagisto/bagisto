@@ -68,6 +68,7 @@ class ProductFlat
         'date' => 'date',
         'file' => 'text',
         'image' => 'text',
+        'checkbox' => 'text'
     ];
 
     /**

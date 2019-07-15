@@ -26,7 +26,7 @@
                         <span><b>{{ $results->total() }} </b>{{ __('shop::app.search.found-results') }}</span>
                     </div>
                 @endif
-                
+
                 <div class="product-grid-4">
                     @foreach ($results as $productFlat)
 
