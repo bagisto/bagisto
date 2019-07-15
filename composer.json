@@ -21,6 +21,7 @@
         "doctrine/dbal": "^2.9@dev",
         "fideloper/proxy": "^4.0",
         "flynsarmy/db-blade-compiler": "*",
+        "guzzlehttp/guzzle": "~6.0",
         "intervention/image": "^2.4",
         "intervention/imagecache": "^2.3",
         "kalnoy/nestedset": "^4.3",

@@ -29,8 +29,13 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
-    'fixer' => [
-        'key' => env('fixer_api_key')
+    'exchange-api' => [
+        'default' => 'fixer',
+        'fixer' => [
+            'paid_account' => false,
+            'key' => env('fixer_api_key'),
+            'class' => 'Webkul\Core\Helpers\Exchange\FixerExchange'
+        ]
     ],
 
     'stripe' => [
