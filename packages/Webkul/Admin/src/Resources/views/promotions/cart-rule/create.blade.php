@@ -346,7 +346,7 @@
                                     <div class="control-group" :class="[errors.has('category_values') ? 'has-error' : '']">
                                         <label class="mb-10" for="categories">{{ __('admin::app.promotion.select-category') }}</label>
 
-                                        <multiselect v-model="category_values" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true"></multiselect>
+                                        <multiselect v-model="category_values" :close-on-select="false" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true"></multiselect>
                                     </div>
 
                                     <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-attribute') }}</label><br/>
@@ -363,7 +363,7 @@
                                         </select>
 
                                         <div v-if='attribute_list[index].type == "select" || attribute_list[index].type == "multiselect"' style="display: flex; width: 220px">
-                                        <multiselect v-model="attribute_list[index].value" :options="attribute_list[index].options" :custom-label="attributeListLabel(index)" :track-by="attribute_list[index].options.admin_name" :searchable="false" :show-labels="true" placeholder="{{ __('ui::form.select-attribute', ['attribute' => 'Values']) }}" :multiple="true"></multiselect>
+                                            <multiselect v-model="attribute_list[index].value" :close-on-select="false" :options="attribute_list[index].options" :custom-label="attributeListLabel" :searchable="false" :show-labels="true" placeholder="{{ __('ui::form.select-attribute', ['attribute' => 'Values']) }}" :track-by="attribute_list[index].value.id" :multiple="true"></multiselect>
                                         </div>
 
                                         <div v-if='attribute_list[index].type == "text" || attribute_list[index].type == "textarea" || attribute_list[index].type == "price" || attribute_list[index].type == "textarea"' style="display: flex">
@@ -489,17 +489,17 @@
                     }
                 },
 
+                mounted () {
+                    console.log(this.category_options, this.attribute_input[1].options);
+                },
+
                 methods: {
                     categoryLabel (category_options) {
                         return category_options.name + ' [ ' + category_options.slug + ' ]';
                     },
 
-                    attributeLabel (attribute_options) {
-                        return attribute_options.name + ' [ ' + attribute_options.type + ' ]';
-                    },
-
-                    attributeListLabel (index) {
-                        console.log(this.attribute_list[index], index);
+                    attributeListLabel(attribute_list_option) {
+                        return attribute_list_option.label + ' [ ' + attribute_list_option.id + ' ]';
                     },
 
                     addCondition () {
@@ -562,7 +562,7 @@
                         for(i in this.attribute_input) {
                             if (i == selectedIndex) {
                                 if (this.attribute_input[i].has_options == true) {
-                                    this.attribute_input[i].options = this.attribute_input[i].options;
+                                    this.attribute_list[index].options = this.attribute_input[i].options;
                                 }
 
                                 this.attribute_list[index].type = this.attribute_input[i].type;
