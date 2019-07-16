@@ -3,7 +3,7 @@
     <head>
         <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500">
-        
+
         <style type="text/css">
             body{
                 margin: 45px;
@@ -17,13 +17,13 @@
                 display: block;
                 margin: 20px auto 10px;
             }
-        
+
             .styleguide-wrapper{
                 border: solid 1px #dadada;
                 border-radius: 4px;
-                padding:25px; 
+                padding:25px;
             }
-        
+
             pre {
                 background: #ECEFF1;
                 border-radius: 5px;
@@ -63,7 +63,7 @@
             }
         </style>
     </head>
-    
+
     <body>
         <label class="styleguide-label">Buttons</label>
         <div class="styleguide-wrapper">
@@ -390,6 +390,17 @@
                 <span class="icon-wrapper">
                     <i class="icon sort-down-icon"></i>
                 </span>
+            </div>
+
+            <div class="styleguide-wrapper">
+                <div class="control-group">
+                    <label class="mb-10" for="something"><b>Something</b></label>
+
+                    <label class="switch">
+                        <input class="control" type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
         </div>
     </body>

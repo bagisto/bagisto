@@ -349,25 +349,35 @@
                                         <multiselect v-model="category_values" :close-on-select="false" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true"></multiselect>
                                     </div>
 
-                                    <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-attribute') }}</label><br/>
+                                    <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-attribute') }}</label>
 
-                                    <div class="control-container mt-20" v-for="(condition, index) in attribute_list" :key="index">
-                                        <select class="control" name="attributes[]" v-model="attribute_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableAttributeCondition($event, index)">
+                                    <br/>
+
+                                    <div class="control-container mt-20" v-for="(condition, index) in attribute_values" :key="index">
+                                        <select class="control" v-model="attribute_values[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableAttributeCondition($event, index)">
                                             <option disabled="disabled">Select Option</option>
 
                                             <option v-for="(attr_ip, index1) in attribute_input" :value="attr_ip.code" :key="index1">@{{ attr_ip.name }}</option>
                                         </select>
 
-                                        <select class="control" v-model="attribute_list[index].condition" style="margin-right: 15px;">
+                                        <select class="control" v-model="attribute_values[index].condition" style="margin-right: 15px;">
                                             <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
                                         </select>
 
-                                        <div v-if='attribute_list[index].type == "select" || attribute_list[index].type == "multiselect"' style="display: flex; width: 220px">
-                                            <multiselect v-model="attribute_list[index].value" :close-on-select="false" :options="attribute_list[index].options" :custom-label="attributeListLabel" :searchable="false" :show-labels="true" placeholder="{{ __('ui::form.select-attribute', ['attribute' => 'Values']) }}" :track-by="attribute_list[index].value.id" :multiple="true"></multiselect>
+                                        <div v-show='attribute_values[index].type == "select" || attribute_values[index].type == "multiselect"' style="display: flex;">
+                                            <select class="control" v-model="attribute_values[index].value" style="margin-right: 15px; height: 100px" :multiple="true">
+                                                <option :disabled="true">
+                                                    {{ __('ui::form.select-attribute', ['attribute' => 'Values']) }}
+                                                </option>
+
+                                                <option v-for="(label, index2) in attribute_values[index].options" :value="index2" :key="index2">@{{ label.admin_name }}</option>
+                                            </select>
+
+                                            {{-- <multiselect v-model="attribute_values[index].value" :close-on-select="false" :options="attribute_values[index].options" :searchable="false" :track-by="admin_name" :custom-label="attributeListLabel" :multiple="true" ></multiselect> --}}
                                         </div>
 
-                                        <div v-if='attribute_list[index].type == "text" || attribute_list[index].type == "textarea" || attribute_list[index].type == "price" || attribute_list[index].type == "textarea"' style="display: flex">
-                                            <input class="control" v-model="attribute_list[index].value" type="text" placeholder="{{ __('ui::form.enter-attribute', ['attribute' => 'Text']) }}">
+                                        <div v-show='attribute_values[index].type == "text" || attribute_values[index].type == "textarea" || attribute_values[index].type == "price" || attribute_values[index].type == "textarea"' style="display: flex">
+                                            <input class="control" v-model="attribute_values[index].value" type="text" placeholder="{{ __('ui::form.enter-attribute', ['attribute' => 'Text']) }}">
                                         </div>
 
                                         <span class="icon trash-icon" v-on:click="removeAttr(index)"></span>
@@ -476,7 +486,7 @@
                         category_options: @json($cart_rule[1]),
                         category_values: null,
 
-                        attribute_list: [],
+                        attribute_values: [],
                         attr_object: {
                             attribute: null,
                             condition: null,
@@ -484,22 +494,20 @@
                             options: []
                         },
                         attribute_input: @json($cart_rule[3]),
-                        attribute_options: [],
-                        attribute_values: []
                     }
                 },
 
                 mounted () {
-                    console.log(this.category_options, this.attribute_input[1].options);
+                    // console.log(this.category_options, this.attribute_input[1].options);
                 },
 
                 methods: {
-                    categoryLabel (category_options) {
-                        return category_options.name + ' [ ' + category_options.slug + ' ]';
+                    categoryLabel (option) {
+                        return option.name + ' [ ' + option.slug + ' ]';
                     },
 
-                    attributeListLabel(attribute_list_option) {
-                        return attribute_list_option.label + ' [ ' + attribute_list_option.id + ' ]';
+                    attributeListLabel(option) {
+                        return option.label;
                     },
 
                     addCondition () {
@@ -523,7 +531,7 @@
                     },
 
                     addAttributeCondition() {
-                        this.attribute_list.push(this.attr_object);
+                        this.attribute_values.push(this.attr_object);
 
                         this.attr_object = {
                             attribute: null,
@@ -562,10 +570,10 @@
                         for(i in this.attribute_input) {
                             if (i == selectedIndex) {
                                 if (this.attribute_input[i].has_options == true) {
-                                    this.attribute_list[index].options = this.attribute_input[i].options;
+                                    this.attribute_values[index].options = this.attribute_input[i].options;
                                 }
 
-                                this.attribute_list[index].type = this.attribute_input[i].type;
+                                this.attribute_values[index].type = this.attribute_input[i].type;
                             }
                         }
                     },
@@ -583,7 +591,7 @@
                     },
 
                     removeAttr(index) {
-                        this.attribute_list.splice(index, 1);
+                        this.attribute_values.splice(index, 1);
                     },
 
                     onSubmit: function (e) {
