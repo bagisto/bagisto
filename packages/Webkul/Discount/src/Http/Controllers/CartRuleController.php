@@ -128,6 +128,9 @@ class CartRuleController extends Controller
 
         $data = request()->all();
 
+        $attribute_conditions = $data['all_attributes'];
+        unset($data['all_attributes']);
+
         // unset token
         unset($data['_token']);
 
@@ -172,11 +175,22 @@ class CartRuleController extends Controller
 
             $data['disc_quantity'] = $data['disc_amount'];
         } else {
-            $data['actions'] = [
-                'action_type' => $data['action_type'],
-                'disc_amount' => $data['disc_amount'],
-                'disc_quantity' => $data['disc_quantity']
-            ];
+            if (! isset($attribute_conditions) || $attribute_conditions == "[]" || $attribute_conditions == "") {
+                $data['uses_attribute_conditions'] = 0;
+
+                $data['actions'] = [
+                    'action_type' => $data['action_type'],
+                    'disc_amount' => $data['disc_amount'],
+                    'disc_quantity' => $data['disc_quantity']
+                ];
+            } else {
+                $data['actions'] = [
+                    'action_type' => $data['action_type'],
+                    'disc_amount' => $data['disc_amount'],
+                    'disc_quantity' => $data['disc_quantity'],
+                    'attribute_conditions' => $attribute_conditions
+                ];
+            }
         }
 
         // prepare json object from conditions
@@ -304,9 +318,10 @@ class CartRuleController extends Controller
 
         return view($this->_config['view'])->with('cart_rule', [
             $this->appliedConfig,
-            [],
+            $this->category->getPartial(),
             $this->getStatesAndCountries(),
-            $cart_rule
+            $cart_rule,
+            $this->attribute->getPartial()
         ]);
     }
 

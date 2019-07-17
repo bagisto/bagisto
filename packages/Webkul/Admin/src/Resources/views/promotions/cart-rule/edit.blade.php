@@ -346,6 +346,54 @@
                                 </div>
                             </accordian>
 
+                            <accordian :active="true" title="{{ __('admin::app.promotion.select-products') }}">
+                                <div slot="body">
+                                    <input type="hidden" name="all_attributes" v-model="all_attributes">
+
+                                    <div class="control-group" :class="[errors.has('category_values') ? 'has-error' : '']">
+                                        <label class="mb-10" for="categories">{{ __('admin::app.promotion.select-category') }}</label>
+
+                                        <multiselect v-model="category_values" :close-on-select="false" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true"></multiselect>
+                                    </div>
+
+                                    <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-attribute') }}</label>
+
+                                    <br/>
+
+                                    <div class="control-container mt-20" v-for="(condition, index) in attribute_values" :key="index">
+                                        <select class="control" v-model="attribute_values[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableAttributeCondition($event, index)">
+                                            <option disabled="disabled">Select Option</option>
+
+                                            <option v-for="(attr_ip, index1) in attribute_input" :value="attr_ip.code" :key="index1">@{{ attr_ip.name }}</option>
+                                        </select>
+
+                                        <select class="control" v-model="attribute_values[index].condition" style="margin-right: 15px;">
+                                            <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
+                                        </select>
+
+                                        <div v-show='attribute_values[index].type == "select" || attribute_values[index].type == "multiselect"' style="display: flex;">
+                                            <select class="control" v-model="attribute_values[index].value" style="margin-right: 15px; height: 100px" :multiple="true">
+                                                <option :disabled="true">
+                                                    {{ __('ui::form.select-attribute', ['attribute' => 'Values']) }}
+                                                </option>
+
+                                                <option v-for="(label, index2) in attribute_values[index].options" :value="index2" :key="index2">@{{ label.admin_name }}</option>
+                                            </select>
+
+                                            {{-- <multiselect v-model="attribute_values[index].value" :close-on-select="false" :options="attribute_values[index].options" :searchable="false" :track-by="admin_name" :custom-label="attributeListLabel" :multiple="true" ></multiselect> --}}
+                                        </div>
+
+                                        <div v-show='attribute_values[index].type == "text" || attribute_values[index].type == "textarea" || attribute_values[index].type == "price" || attribute_values[index].type == "textarea"' style="display: flex">
+                                            <input class="control" v-model="attribute_values[index].value" type="text" placeholder="{{ __('ui::form.enter-attribute', ['attribute' => 'Text']) }}">
+                                        </div>
+
+                                        <span class="icon trash-icon" v-on:click="removeAttr(index)"></span>
+                                    </div>
+
+                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addAttributeCondition">Add Attribute Condition</span>
+                                </div>
+                            </accordian>
+
                             <accordian :active="false" :title="'{{ __('admin::app.promotion.general-info.labels') }}'">
                                 <div slot="body">
                                     @foreach($cart_rule[3]->labels as $label)
@@ -403,6 +451,11 @@
                         all_conditions: null,
                         match_criteria: 'all_are_true',
 
+                        all_attributes: {
+                            'categories' : null,
+                            'attributes' : null
+                        },
+
                         code: null,
                         suffix: null,
                         prefix: null,
@@ -428,7 +481,19 @@
                             condition: null,
                             value: []
                         },
-                        country_and_states: @json($cart_rule[2])
+                        country_and_states: @json($cart_rule[2]),
+
+                        category_options: @json($cart_rule[1]),
+                        category_values: null,
+
+                        attribute_values: [],
+                        attr_object: {
+                            attribute: null,
+                            condition: null,
+                            value: [],
+                            options: []
+                        },
+                        attribute_input: @json($cart_rule[4]),
                     }
                 },
 
@@ -491,10 +556,32 @@
                         this.match_criteria = this.conditions_list.pop().criteria;
                     }
 
+                    this.category_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).categories;
+
+                    this.attribute_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).attributes;
+
+                    for (i in this.attribute_values) {
+                        for (j in this.attribute_input) {
+                            if (this.attribute_input[j].code == this.attribute_values[i].attribute) {
+                                this.attribute_values[i].has_options = true;
+
+                                this.attribute_values[i].options = this.attribute_input[j].options;
+                            }
+                        }
+                    }
+
                     criteria = null;
                 },
 
                 methods: {
+                    categoryLabel (option) {
+                        return option.name + ' [ ' + option.slug + ' ]';
+                    },
+
+                    attributeListLabel(option) {
+                        return option.label;
+                    },
+
                     addCondition () {
                         if (this.criteria == 'product_subselection' || this.criteria == 'cart') {
                             this.condition_on = this.criteria;
@@ -513,6 +600,17 @@
                                 value: []
                             };
                         }
+                    },
+
+                    addAttributeCondition() {
+                        this.attribute_values.push(this.attr_object);
+
+                        this.attr_object = {
+                            attribute: null,
+                            condition: null,
+                            value: [],
+                            options: []
+                        };
                     },
 
                     checkAutogen() {
@@ -534,6 +632,22 @@
                         for (i in this.cart_input) {
                             if (i == selectedIndex) {
                                 this.conditions_list[index].type = this.cart_input[i].type;
+                            }
+                        }
+                    },
+
+                    enableAttributeCondition (event, index) {
+                        selectedIndex = event.target.selectedIndex - 1;
+
+                        for(i in this.attribute_input) {
+                            if (i == selectedIndex) {
+                                if (this.attribute_input[i].has_options == true) {
+                                    this.attribute_values[index].options = this.attribute_input[i].options;
+
+                                    console.log(this.attribute_values);
+                                }
+
+                                this.attribute_values[index].type = this.attribute_input[i].type;
                             }
                         }
                     },

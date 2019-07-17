@@ -343,6 +343,8 @@
 
                             <accordian :active="true" title="{{ __('admin::app.promotion.select-products') }}">
                                 <div slot="body">
+                                    <input type="hidden" name="all_attributes" v-model="all_attributes">
+
                                     <div class="control-group" :class="[errors.has('category_values') ? 'has-error' : '']">
                                         <label class="mb-10" for="categories">{{ __('admin::app.promotion.select-category') }}</label>
 
@@ -455,6 +457,11 @@
                         all_conditions: [],
                         match_criteria: 'all_are_true',
 
+                        all_attributes: {
+                            'categories' : null,
+                            'attributes' : null
+                        },
+
                         code: null,
                         suffix: null,
                         prefix: null,
@@ -477,8 +484,8 @@
                         actions: @json($cart_rule[0]).actions,
                         conditions_list:[],
                         cart_object: {
-                            attribute: null,
-                            condition: null,
+                            attribute: [],
+                            condition: [],
                             value: []
                         },
                         country_and_states: @json($cart_rule[2]),
@@ -495,10 +502,6 @@
                         },
                         attribute_input: @json($cart_rule[3]),
                     }
-                },
-
-                mounted () {
-                    // console.log(this.category_options, this.attribute_input[1].options);
                 },
 
                 methods: {
@@ -595,6 +598,20 @@
                     },
 
                     onSubmit: function (e) {
+                        if (this.attribute_values.length > 0 || this.category_values.length > 0) {
+                            for (i in this.attribute_values) {
+                                delete this.attribute_values[i].options;
+                            }
+
+                            if (this.category_values.length > 0) {
+                                this.all_attributes.categories = this.category_values;
+                            }
+
+                            this.all_attributes.attributes = this.attribute_values;
+
+                            this.all_attributes = JSON.stringify(this.all_attributes);
+                        }
+
                         if (this.conditions_list.length != 0) {
                             this.conditions_list.push({'criteria': this.match_criteria});
 
