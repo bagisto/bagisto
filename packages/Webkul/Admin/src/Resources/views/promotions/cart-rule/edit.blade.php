@@ -560,12 +560,19 @@
 
                     this.attribute_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).attributes;
 
+                    // creating the options and the has option param on the frontend
                     for (i in this.attribute_values) {
                         for (j in this.attribute_input) {
                             if (this.attribute_input[j].code == this.attribute_values[i].attribute) {
-                                this.attribute_values[i].has_options = true;
+                                if (this.attribute_input[j].has_options == true) {
+                                    this.attribute_values[i].has_options = true;
 
-                                this.attribute_values[i].options = this.attribute_input[j].options;
+                                    this.attribute_values[i].options = this.attribute_input[j].options;
+                                } else {
+                                    this.attribute_values[i].has_options = false;
+
+                                    this.attribute_values[i].options = null;
+                                }
                             }
                         }
                     }
