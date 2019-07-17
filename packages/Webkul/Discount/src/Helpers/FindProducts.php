@@ -32,7 +32,6 @@ class FindProducts
 
     public function findByConditions($conditions)
     {
-        dd($conditions);
         /**
          * Empty collection instance to hold all the products that satisfy the conditions
          */

@@ -560,7 +560,7 @@
 
                     this.attribute_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).attributes;
 
-                    // creating the options and the has option param on the frontend
+                    // creating options and has option param on the frontend
                     for (i in this.attribute_values) {
                         for (j in this.attribute_input) {
                             if (this.attribute_input[j].code == this.attribute_values[i].attribute) {
@@ -675,7 +675,25 @@
                         this.cats.splice(index, 1);
                     },
 
+                    removeAttr(index) {
+                        this.attribute_values.splice(index, 1);
+                    },
+
                     onSubmit: function (e) {
+                        if (this.attribute_values.length > 0 || this.category_values.length > 0) {
+                            for (i in this.attribute_values) {
+                                delete this.attribute_values[i].options;
+                            }
+
+                            if (this.category_values.length > 0) {
+                                this.all_attributes.categories = this.category_values;
+                            }
+
+                            this.all_attributes.attributes = this.attribute_values;
+
+                            this.all_attributes = JSON.stringify(this.all_attributes);
+                        }
+
                         if (this.conditions_list.length != 0) {
                             this.conditions_list.push({'criteria': this.match_criteria});
 

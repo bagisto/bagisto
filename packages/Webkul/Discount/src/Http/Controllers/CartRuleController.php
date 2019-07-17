@@ -5,6 +5,7 @@ namespace Webkul\Discount\Http\Controllers;
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
+use Webkul\Discount\Helpers\ConvertXToProductId as ConvertX;
 use Webkul\Discount\Repositories\CartRuleLabelsRepository as CartRuleLabels;
 use Webkul\Discount\Repositories\CartRuleCouponsRepository as CartRuleCoupons;
 
@@ -56,12 +57,19 @@ class CartRuleController extends Controller
      */
     protected $cart;
 
+    /**
+     * Convert X To Product ID.
+     *
+     */
+    protected $convertX;
+
     public function __construct(
         CartRule $cartRule,
         CartRuleCoupons $cartRuleCoupon,
         CartRuleLabels $cartRuleLabel,
         Attribute $attribute,
-        Category $category
+        Category $category,
+        ConvertX $convertX
     )
     {
         $this->_config = request('_config');
@@ -75,6 +83,8 @@ class CartRuleController extends Controller
         $this->attribute = $attribute;
 
         $this->category = $category;
+
+        $this->convertX = $convertX;
 
         $this->appliedConfig = config('pricerules.cart');
     }
@@ -260,6 +270,9 @@ class CartRuleController extends Controller
         // create a cart rule
         $ruleCreated = $this->cartRule->create($data);
 
+        // can execute convert x here after when the rule is updated
+        $this->convertX->convertX($ruleUpdated->id, $attribute_conditions);
+
         // create customer groups for cart rule
         $ruleGroupCreated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleCreated);
 
@@ -355,6 +368,9 @@ class CartRuleController extends Controller
         // collecting request in $data
         $data = request()->all();
 
+        $attribute_conditions = $data['all_attributes'];
+        unset($data['all_attributes']);
+
         // unset request token from $data
         unset($data['_token']);
 
@@ -401,11 +417,22 @@ class CartRuleController extends Controller
 
             $data['disc_quantity'] = $data['disc_amount'];
         } else {
-            $data['actions'] = [
-                'action_type' => $data['action_type'],
-                'disc_amount' => $data['disc_amount'],
-                'disc_quantity' => $data['disc_quantity']
-            ];
+            if (! isset($attribute_conditions) || $attribute_conditions == "[]" || $attribute_conditions == "") {
+                $data['uses_attribute_conditions'] = 0;
+
+                $data['actions'] = [
+                    'action_type' => $data['action_type'],
+                    'disc_amount' => $data['disc_amount'],
+                    'disc_quantity' => $data['disc_quantity']
+                ];
+            } else {
+                $data['actions'] = [
+                    'action_type' => $data['action_type'],
+                    'disc_amount' => $data['disc_amount'],
+                    'disc_quantity' => $data['disc_quantity'],
+                    'attribute_conditions' => $attribute_conditions
+                ];
+            }
         }
 
         // encode php array to json for actions
@@ -465,6 +492,9 @@ class CartRuleController extends Controller
 
         // update cart rule
         $ruleUpdated = $this->cartRule->update($data, $id);
+
+        // can execute convert X here after when the rule is updated
+        $this->convertX->convertX($ruleUpdated->id, $attribute_conditions);
 
         // update customer groups for cart rule
         $ruleGroupUpdated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleUpdated);
