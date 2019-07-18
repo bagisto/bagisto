@@ -8,6 +8,7 @@ use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Models\ProductAttributeValue as ProductAttributeValue;
+use DB;
 
 class ConvertXToProductId
 {
@@ -75,11 +76,11 @@ class ConvertXToProductId
             $categoryResult = $this->convertFromCategories($categoryValues);
         }
 
+        dd($categoryResult);
+
         if (count($attributeValues)) {
             $attributeResult = $this->convertFromAttributes($attributeValues);
         }
-
-        dd($attributeResult);
 
         // now call the function that will find all the unique product ids
         $productIds = $this->findAllUniqueIds($attributeResult, $categoryResult);
@@ -145,27 +146,29 @@ class ConvertXToProductId
 
                 $pavValues = $pav->first();
 
-                $selectedAttributeValues = collect();
+                dd($pavValues);
 
-                foreach ($pavValues as $pavValue) {
-                    foreach ($selectedValues as $key => $value) {
-                        if ($pavValue->id == $value) {
-                            $selectedAttributeValues->push($pavValue);
-                        }
-                    }
-                }
+                // $selectedAttributeValues = collect();
 
-                foreach($selectedAttributeValues as $selectedAttributeValue) {
-                    $typeColumn = $this->pav::$attributeTypeFields[$pav->first()->type];
+                // foreach ($pavValues as $pavValue) {
+                //     foreach ($selectedValues as $key => $value) {
+                //         if ($pavValue->id == $value) {
+                //             $selectedAttributeValues->push($pavValue);
+                //         }
+                //     }
+                // }
 
-                    $pavResults = $this->pav->where(
-                        "{$typeColumn}", $selectedAttributeValue->id
-                    )->get();
+                // foreach($selectedAttributeValues as $selectedAttributeValue) {
+                //     $typeColumn = $this->pav::$attributeTypeFields[$pav->first()->type];
 
-                    foreach ($pavResults as $pavResult) {
-                        $products->push($pavResult->product);
-                    }
-                }
+                //     $pavResults = $this->pav->where(
+                //         "{$typeColumn}", $selectedAttributeValue->id
+                //     )->get();
+
+                //     foreach ($pavResults as $pavResult) {
+                //         $products->push($pavResult->product);
+                //     }
+                // }
             }
         }
 
@@ -179,7 +182,14 @@ class ConvertXToProductId
      */
     public function convertFromCategories($categories)
     {
-        return $categories;
+        $products = collect();
+
+        foreach ($categories as $category) {
+            $data = $this->getAll($category->id);
+        }
+
+
+        return $data;
     }
 
     /**
@@ -216,5 +226,50 @@ class ConvertXToProductId
         return $cartRule->update([
             'product_ids' => $productIds
         ]);
+    }
+
+    /**
+     * @param integer $categoryId
+     * @return Collection
+     */
+    public function getAll($categoryId = null)
+    {
+        $params = request()->input();
+
+        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($params, $categoryId) {
+                $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+
+                $locale = request()->get('locale') ?: app()->getLocale();
+
+                $qb = $query->distinct()
+                        ->addSelect('product_flat.id')
+                        ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                        ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
+                        ->where('product_flat.channel', $channel)
+                        ->where('product_flat.locale', $locale)
+                        ->whereNotNull('product_flat.url_key');
+
+                if ($categoryId) {
+                    $qb->where('product_categories.category_id', $categoryId);
+                }
+
+                if (is_null(request()->input('status'))) {
+                    $qb->where('product_flat.status', 1);
+                }
+
+                if (is_null(request()->input('visible_individually'))) {
+                    $qb->where('product_flat.visible_individually', 1);
+                }
+
+                $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
+                    $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
+                        ->where('flat_variants.channel', $channel)
+                        ->where('flat_variants.locale', $locale);
+                });
+
+                return $qb->groupBy('product_flat.id');
+            })->get();
+
+        return $results;
     }
 }
