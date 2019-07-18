@@ -491,7 +491,7 @@
                         country_and_states: @json($cart_rule[2]),
 
                         category_options: @json($cart_rule[1]),
-                        category_values: null,
+                        category_values: [],
 
                         attribute_values: [],
                         attr_object: {
@@ -610,6 +610,8 @@
                             this.all_attributes.attributes = this.attribute_values;
 
                             this.all_attributes = JSON.stringify(this.all_attributes);
+                        } else {
+                            this.all_attributes = null;
                         }
 
                         if (this.conditions_list.length != 0) {

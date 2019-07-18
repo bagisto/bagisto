@@ -271,7 +271,9 @@ class CartRuleController extends Controller
         $ruleCreated = $this->cartRule->create($data);
 
         // can execute convert x here after when the rule is updated
-        $this->convertX->convertX($ruleUpdated->id, $attribute_conditions);
+        if (isset($attribute_conditions) && $attribute_conditions != "[]" && $attribute_conditions != "") {
+            $this->convertX->convertX($ruleCreated->id, $attribute_conditions);
+        }
 
         // create customer groups for cart rule
         $ruleGroupCreated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleCreated);

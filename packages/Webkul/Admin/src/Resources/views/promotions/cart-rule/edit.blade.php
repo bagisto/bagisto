@@ -692,6 +692,8 @@
                             this.all_attributes.attributes = this.attribute_values;
 
                             this.all_attributes = JSON.stringify(this.all_attributes);
+                        } else {
+                            this.all_attributes = null;
                         }
 
                         if (this.conditions_list.length != 0) {

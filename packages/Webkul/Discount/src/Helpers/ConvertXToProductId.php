@@ -72,21 +72,23 @@ class ConvertXToProductId
 
         $attributeValues = $attributeConditions->attributes;
 
-        if (count($categoryValues)) {
+        if (!isset($categoryValues) && ! isset($attributeValues)) {
+            return false;
+        }
+
+        if (isset($categoryValues) && count($categoryValues)) {
             $categoryResult = $this->convertFromCategories($categoryValues);
         }
 
-        dd($categoryResult);
-
-        if (count($attributeValues)) {
+        if (isset($attributeValues) && count($attributeValues)) {
             $attributeResult = $this->convertFromAttributes($attributeValues);
         }
 
         // now call the function that will find all the unique product ids
-        $productIds = $this->findAllUniqueIds($attributeResult, $categoryResult);
+        $productIDs = $this->findAllUniqueIds($attributeResult, $categoryResult);
 
         // save the product ids against the cart rules
-        $result = $this->saveIDs($ruleId, $productIds);
+        $result = $this->saveIDs($ruleId, $productIDs);
 
         if ($result) {
             return true;
@@ -136,7 +138,8 @@ class ConvertXToProductId
                     )->get();
 
                     foreach ($pavResults as $pavResult) {
-                        $products->push($pavResult->product);
+                        if ($pavResult->product->type == 'simple')
+                            $products->push($pavResult->product);
                     }
                 }
             } else {
@@ -188,7 +191,6 @@ class ConvertXToProductId
             $data = $this->getAll($category->id);
         }
 
-
         return $data;
     }
 
@@ -204,14 +206,18 @@ class ConvertXToProductId
         $attributeResult = $data[0];
         $categoryResult = $data[1];
 
-        $pavs = $this->pav->all();
-
         // find matched attribute options product ids
-        $attributeRelatedIds = $this->convertFromAttributes($attributeResult);
+        $mergedCollection = $attributeResult->merge($categoryResult);
 
-        dd($attributeRelatedIds);
-        // find matched categories product ids
-        $categoryRelatedIds = $this->convertFromCategories($categoryResult);
+        $productIDs = collect();
+        foreach ($mergedCollection as $merged) {
+            $productIDs->push($merged->id);
+        }
+
+        // find all the unique product ids
+        $productIDs = $productIDs->unique();
+
+        return $productIDs->flatten()->all();
     }
 
     /**
@@ -219,12 +225,14 @@ class ConvertXToProductId
      *
      * @return boolean
      */
-    public function saveIDs($ruleId, $productIds)
+    public function saveIDs($ruleId, $productIDs)
     {
         $cartRule = $this->cartRule->find($ruleId);
 
+        $productIDs = implode(',', $productIDs);
+
         return $cartRule->update([
-            'product_ids' => $productIds
+            'product_ids' => $productIDs
         ]);
     }
 
@@ -234,41 +242,39 @@ class ConvertXToProductId
      */
     public function getAll($categoryId = null)
     {
-        $params = request()->input();
+        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($categoryId) {
+                    $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($params, $categoryId) {
-                $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+                    $locale = request()->get('locale') ?: app()->getLocale();
 
-                $locale = request()->get('locale') ?: app()->getLocale();
+                    $qb = $query->distinct()
+                            ->addSelect('product_flat.id')
+                            ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                            ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
+                            ->where('product_flat.channel', $channel)
+                            ->where('product_flat.locale', $locale)
+                            ->whereNotNull('product_flat.url_key');
 
-                $qb = $query->distinct()
-                        ->addSelect('product_flat.id')
-                        ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-                        ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-                        ->where('product_flat.channel', $channel)
-                        ->where('product_flat.locale', $locale)
-                        ->whereNotNull('product_flat.url_key');
+                    if ($categoryId) {
+                        $qb->where('product_categories.category_id', $categoryId);
+                    }
 
-                if ($categoryId) {
-                    $qb->where('product_categories.category_id', $categoryId);
-                }
+                    if (is_null(request()->input('status'))) {
+                        $qb->where('product_flat.status', 1);
+                    }
 
-                if (is_null(request()->input('status'))) {
-                    $qb->where('product_flat.status', 1);
-                }
+                    if (is_null(request()->input('visible_individually'))) {
+                        $qb->where('product_flat.visible_individually', 1);
+                    }
 
-                if (is_null(request()->input('visible_individually'))) {
-                    $qb->where('product_flat.visible_individually', 1);
-                }
+                    $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
+                        $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
+                            ->where('flat_variants.channel', $channel)
+                            ->where('flat_variants.locale', $locale);
+                    });
 
-                $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
-                    $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
-                        ->where('flat_variants.channel', $channel)
-                        ->where('flat_variants.locale', $locale);
-                });
-
-                return $qb->groupBy('product_flat.id');
-            })->get();
+                    return $qb->groupBy('product_flat.id');
+                })->get();
 
         return $results;
     }
