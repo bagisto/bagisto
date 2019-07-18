@@ -19,6 +19,8 @@ class CustomerGroupCatalogServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'customergroupcatalog');
 
+        \Webkul\CustomerGroupCatalog\Models\CustomerGroup::observe(\Webkul\CustomerGroupCatalog\Observers\CustomerGroupObserver::class);
+
         $this->publishes([
             __DIR__ . '/../Resources/views/admin/customers/groups' => resource_path('views/vendor/admin/customers/groups'),
             __DIR__ . '/../Resources/views/shop/products' => resource_path('views/vendor/shop/products'),
