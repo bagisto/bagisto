@@ -18,7 +18,7 @@
                         {{ __('admin::app.catalog.categories.edit-title') }}
                     </h1>
 
-                    <div class="control-group">
+                    <div class="control-group fixed-action">
                         <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
                             @foreach (core()->getAllLocales() as $localeModel)
 

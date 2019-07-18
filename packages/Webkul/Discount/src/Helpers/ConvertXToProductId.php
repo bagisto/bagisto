@@ -112,7 +112,10 @@ class ConvertXToProductId
      */
     public function findAllUniqueIds(...$data)
     {
-        dd($data, 'product IDS');
+        $attributeResult = $data[0];
+        $categoryResult = $data[1];
+
+        dd($categoryResult, $attributeResult);
     }
 
     /**

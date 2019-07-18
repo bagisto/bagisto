@@ -16,7 +16,7 @@
                 @csrf
 
                 <div class="page-header">
-                    <div class="page-title">
+                    <div class="page-title fixed-action">
                         <h1>
                             <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
 

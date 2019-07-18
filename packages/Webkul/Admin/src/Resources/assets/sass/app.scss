@@ -881,6 +881,13 @@ body {
 }
 // css for rtl end here
 
+// For fixed and and save button
+.fixed-action {
+    position: fixed;
+    top: 108px;
+    right: 32px;
+}
+
 .pagination {
     margin-top: 30px;
 }
