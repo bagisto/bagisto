@@ -19,9 +19,6 @@ class CreateCustomerGroupCategoriesTable extends Migration
 
             $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-
-            $table->integer('company_id')->unsigned();
-            $table->foreign('company_id')->references('id')->on('customer_groups')->onDelete('cascade');
         });
     }
 
