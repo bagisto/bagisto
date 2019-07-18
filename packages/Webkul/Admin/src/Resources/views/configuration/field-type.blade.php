@@ -422,8 +422,8 @@
 
         data: function() {
             return {
-                isVisible: false,
                 isRequire: false,
+                isVisible: false,
             }
         },
 
@@ -443,18 +443,26 @@
                 depandValue = 0;
             }
 
-            $("select.control").change(function() {
-                if (dependentElement.value == depandValue) {
-                    this_this.isVisible = true;
-                } else {
-                    this_this.isVisible = false;
-                }
+            $(document).ready(function(){
+                $(document).on("change", "select.control", function() {
+                    if (this_this.depand == this.name) {
+                        if (this_this.value == this.value) {
+                            this_this.isVisible = true;
+                        } else {
+                            this_this.isVisible = false;
+                        }
+                    }
+                })
             });
 
-            if (dependentElement.value == depandValue) {
+            if (dependentElement && dependentElement.value == depandValue) {
                 this_this.isVisible = true;
             } else {
                 this_this.isVisible = false;
+            }
+
+            if (this_this.result) {
+                this_this.isVisible = true;
             }
         }
     });
