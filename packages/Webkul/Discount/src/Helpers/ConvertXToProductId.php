@@ -7,6 +7,7 @@ use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Product\Repositories\ProductRepository as Product;
+use Webkul\Product\Models\ProductAttributeValue as ProductAttributeValue;
 
 class ConvertXToProductId
 {
@@ -35,12 +36,18 @@ class ConvertXToProductId
      */
     protected $cartRule;
 
+    /**
+     * ProductAttributeValueRepository instance
+     */
+    protected $pav;
+
     public function __construct(
         Category $category,
         Attribute $attribute,
         Product $product,
         AttributeOption $attributeOption,
-        CartRule $cartRule
+        CartRule $cartRule,
+        ProductAttributeValue $pav
     )
     {
         $this->category = $category;
@@ -52,6 +59,8 @@ class ConvertXToProductId
         $this->attributeOption = $attributeOption;
 
         $this->cartRule = $cartRule;
+
+        $this->pav = $pav;
     }
 
     public function convertX($ruleId, $attribute_conditions)
@@ -69,6 +78,8 @@ class ConvertXToProductId
         if (count($attributeValues)) {
             $attributeResult = $this->convertFromAttributes($attributeValues);
         }
+
+        dd($attributeResult);
 
         // now call the function that will find all the unique product ids
         $productIds = $this->findAllUniqueIds($attributeResult, $categoryResult);
@@ -88,9 +99,77 @@ class ConvertXToProductId
      *
      * @return array
      */
-    public function convertFromAttributes($attributes)
+    public function convertFromAttributes($attributeOptions)
     {
-        return $attributes;
+        $products = collect();
+
+        foreach ($attributeOptions as $attributeOption) {
+            if ($attributeOption->attribute == 'sku' || $attributeOption->attribute == 'type') {
+                continue;
+            }
+
+            $selectedOptions = $attributeOption->value;
+
+            if ($attributeOption->type == 'select' || $attributeOption->type == 'multiselect') {
+                $pav = $this->attribute->findWhere([
+                    'code' => $attributeOption->attribute
+                ]);
+
+                $pavOptions = $pav->first()->options;
+
+                $selectedAttributeOptions = collect();
+
+                foreach ($pavOptions as $pavOption) {
+                    foreach ($selectedOptions as $key => $value) {
+                        if ($pavOption->id == $value) {
+                            $selectedAttributeOptions->push($pavOption);
+                        }
+                    }
+                }
+
+                foreach($selectedAttributeOptions as $selectedAttributeOption) {
+                    $typeColumn = $this->pav::$attributeTypeFields[$pav->first()->type];
+
+                    $pavResults = $this->pav->where(
+                        "{$typeColumn}", $selectedAttributeOption->id
+                    )->get();
+
+                    foreach ($pavResults as $pavResult) {
+                        $products->push($pavResult->product);
+                    }
+                }
+            } else {
+                $pav = $this->attribute->findWhere([
+                    'code' => $attributeOption->attribute
+                ]);
+
+                $pavValues = $pav->first();
+
+                $selectedAttributeValues = collect();
+
+                foreach ($pavValues as $pavValue) {
+                    foreach ($selectedValues as $key => $value) {
+                        if ($pavValue->id == $value) {
+                            $selectedAttributeValues->push($pavValue);
+                        }
+                    }
+                }
+
+                foreach($selectedAttributeValues as $selectedAttributeValue) {
+                    $typeColumn = $this->pav::$attributeTypeFields[$pav->first()->type];
+
+                    $pavResults = $this->pav->where(
+                        "{$typeColumn}", $selectedAttributeValue->id
+                    )->get();
+
+                    foreach ($pavResults as $pavResult) {
+                        $products->push($pavResult->product);
+                    }
+                }
+            }
+        }
+
+        return $products;
     }
 
     /**
@@ -115,7 +194,14 @@ class ConvertXToProductId
         $attributeResult = $data[0];
         $categoryResult = $data[1];
 
-        dd($categoryResult, $attributeResult);
+        $pavs = $this->pav->all();
+
+        // find matched attribute options product ids
+        $attributeRelatedIds = $this->convertFromAttributes($attributeResult);
+
+        dd($attributeRelatedIds);
+        // find matched categories product ids
+        $categoryRelatedIds = $this->convertFromCategories($categoryResult);
     }
 
     /**

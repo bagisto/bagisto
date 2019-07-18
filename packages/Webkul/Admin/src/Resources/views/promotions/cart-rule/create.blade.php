@@ -372,7 +372,7 @@
                                                     {{ __('ui::form.select-attribute', ['attribute' => 'Values']) }}
                                                 </option>
 
-                                                <option v-for="(label, index2) in attribute_values[index].options" :value="index2" :key="index2">@{{ label.admin_name }}</option>
+                                                <option v-for="(label, index2) in attribute_values[index].options" :value="label.id" :key="index2">@{{ label.admin_name }}</option>
                                             </select>
 
                                             {{-- <multiselect v-model="attribute_values[index].value" :close-on-select="false" :options="attribute_values[index].options" :searchable="false" :track-by="admin_name" :custom-label="attributeListLabel" :multiple="true" ></multiselect> --}}
