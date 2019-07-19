@@ -76,10 +76,13 @@ class ConvertXToProductId
             return false;
         }
 
+        $categoryResult = collect();
+
         if (isset($categoryValues) && count($categoryValues)) {
             $categoryResult = $this->convertFromCategories($categoryValues);
         }
 
+        $attributeResult = collect();
         if (isset($attributeValues) && count($attributeValues)) {
             $attributeResult = $this->convertFromAttributes($attributeValues);
         }
