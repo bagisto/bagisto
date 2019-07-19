@@ -351,7 +351,7 @@
                                         <multiselect v-model="category_values" :close-on-select="false" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true"></multiselect>
                                     </div>
 
-                                    <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-attribute') }}</label>
+                                    <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Attribute']) }}</label>
 
                                     <br/>
 

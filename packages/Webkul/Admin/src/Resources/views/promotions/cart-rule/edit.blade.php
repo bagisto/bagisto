@@ -320,13 +320,13 @@
                                         <div class="control-group" :class="[errors.has('prefix') ? 'has-error' : '']">
                                             <label for="prefix" class="required">{{ __('admin::app.promotion.general-info.prefix') }}</label>
 
-                                            <input type="text" class="control" name="prefix" v-model="prefix" value="{{ old('prefix') }}" data-vv-as="&quot;Prefix&quot;">
+                                        <input type="text" class="control" name="prefix" v-model="prefix" value="{{ old('prefix') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.prefix') }}&quot;">
 
                                             <span class="control-error" v-if="errors.has('prefix')">@{{ errors.first('prefix') }}</span>
                                         </div>
 
                                         <div class="control-group" :class="[errors.has('suffix') ? 'has-error' : '']"">
-                                            <label for="suffix" class="required">Suffix</label>
+                                            <label for="suffix" class="required">{{ __('admin::app.promotion.general-info.suffix') }}</label>
 
                                             <input type="text" class="control" name="suffix" v-model="suffix" value="{{ old('suffix') }}" data-vv-as="&quot;suffix&quot;">
 
@@ -338,7 +338,7 @@
                                     <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
                                         <label for="code" class="required">{{ __('admin::app.promotion.general-info.code') }}</label>
 
-                                        <input type="text" class="control" name="code" v-model="code" v-validate="'required'" value="{{ old('code') }}" data-vv-as="&quot;Code&quot;">
+                                        <input type="text" class="control" name="code" v-model="code" v-validate="'required'" value="{{ old('code') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.code') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                                     </div>
@@ -359,16 +359,16 @@
                                     <div class="control-group" :class="[errors.has('category_values') ? 'has-error' : '']">
                                         <label class="mb-10" for="categories">{{ __('admin::app.promotion.select-category') }}</label>
 
-                                        <multiselect v-model="category_values" :close-on-select="false" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="Select Categories" track-by="slug" :multiple="true"></multiselect>
+                                        <multiselect v-model="category_values" :close-on-select="false" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Categories']) }}" track-by="slug" :multiple="true"></multiselect>
                                     </div>
 
-                                    <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-attribute') }}</label>
+                                    <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Option']) }}</label>
 
                                     <br/>
 
                                     <div class="control-container mt-20" v-for="(condition, index) in attribute_values" :key="index">
                                         <select class="control" v-model="attribute_values[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableAttributeCondition($event, index)">
-                                            <option disabled="disabled">{{ __('admin::app.promotion.select-option') }}</option>
+                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Option']) }}</option>
 
                                             <option v-for="(attr_ip, index1) in attribute_input" :value="attr_ip.code" :key="index1">@{{ attr_ip.name }}</option>
                                         </select>
@@ -396,7 +396,7 @@
                                         <span class="icon trash-icon" v-on:click="removeAttr(index)"></span>
                                     </div>
 
-                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addAttributeCondition">Add Attribute Condition</span>
+                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addAttributeCondition">{{ __('admin::app.promotion.add-attr-condition') }}</span>
                                 </div>
                             </accordian>
 

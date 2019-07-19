@@ -34,14 +34,15 @@ return [
         'actions' => [
             'percent_of_product' => 'Percentage of product',
             'fixed_amount' => 'Apply as fixed amount',
-            // 'buy_a_get_b' => 'Buy A get B'
+            'adjust_to_percent' => 'Adjust whole cart to percent',
+            'adjust_to_fixed_amount' => 'Adjust whole cart to fixed amount'
         ],
 
         'validation' => [
             0 => 'percent_of_product',
             1 => 'fixed_amount',
-            2 => 'buy_a_get_b',
-            // 3 => 'fixed_amount_cart'
+            2 => 'adjust_to_percent',
+            3 => 'adjust_to_fixed_amount'
         ],
 
         'conditions' => [
@@ -66,6 +67,18 @@ return [
             'boolean' => [
                 0 => 'True/Yes',
                 1 => 'False/No'
+            ],
+
+            'symbols' => [
+                '=' => 'equals',
+                '>=' => 'greater_or_equals',
+                '<=' => 'lesser_or_equals',
+                '>' => 'greater_than',
+                '<' => 'lesser_than',
+                '{}' => 'contains',
+                '={}' => 'is_one_f',
+                '!={}' => 'is_not_one_of',
+                '!{}' => 'does_not_contains'
             ]
         ],
 
@@ -120,41 +133,54 @@ return [
 
     'catalog' => [
         'actions' => [
-            0 => 'admin::app.promotion.catalog.apply-percent',
-            1 => 'admin::app.promotion.catalog.apply-fixed',
-            2 => 'admin::app.promotion.catalog.adjust-to-percent',
-            // 3 => 'admin::app.promotion.catalog.adjust-to-value'
+            'percent_of_product' => 'Percentage of product',
+            'fixed_amount' => 'Apply as fixed amount',
+            'adjust_to_percent' => 'Adjust price to percentage',
+            'adjust_to_fixed_amount' => 'Adjust price to given amount'
         ],
 
-        'attributes' => [
-            0 => [
-                    'name' => 'Sub-total',
-                    'type' =>  'numeric'
-                ],
-            1 => [
-                    'name' => 'Total Items Quantity',
-                    'type' => 'numeric'
-                ],
-            2 => [
-                    'name' => 'Total Weight',
-                    'type' => 'numeric'
-                ],
-            3 => [
-                    'name' => 'Payment Method',
-                    'type' => 'string'
-                ],
-            4 => [
-                    'name' => 'Shipping Postcode',
-                    'type' => 'string'
-                ],
-            5 => [
-                    'name' => 'Shipping State',
-                    'type' => 'string'
-                ],
-            6 => [
-                    'name' => 'Shipping Country',
-                    'type' => 'string'
-                ]
+        'validation' => [
+            0 => 'percent_of_product',
+            1 => 'fixed_amount',
+            2 => 'buy_a_get_b',
+            3 => 'fixed_amount_cart'
+        ],
+
+        'conditions' => [
+            'numeric' => [
+                '=' => 'Equals',
+                '>=' => 'Greater or equals',
+                '<=' => 'Lesser or equals',
+                '>' => 'Greater than',
+                '<' => 'Lesser than',
+            ],
+
+            'string' => [
+                '=' => 'Equals',
+                // '>=' => 'Greater or equals',
+                // '<=' => 'Lesser or equals',
+                // '>' => 'Greater than',
+                // '<' => 'Lesser than',
+                '{}' => 'Contains',
+                '!{}' => 'Does not contains'
+            ],
+
+            'boolean' => [
+                0 => 'True/Yes',
+                1 => 'False/No'
+            ],
+
+            'symbols' => [
+                '=' => 'equals',
+                '>=' => 'greater_or_equals',
+                '<=' => 'lesser_or_equals',
+                '>' => 'greater_than',
+                '<' => 'lesser_than',
+                '{}' => 'contains',
+                '={}' => 'is_one_f',
+                '!={}' => 'is_not_one_of',
+                '!{}' => 'does_not_contains'
+            ]
         ]
-    ],
+    ]
 ];

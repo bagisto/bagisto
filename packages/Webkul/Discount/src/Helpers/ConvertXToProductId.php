@@ -42,6 +42,11 @@ class ConvertXToProductId
      */
     protected $pav;
 
+    /**
+     * Condition symbols for matching the criteria with attributes selected
+     */
+    protected $symbols;
+
     public function __construct(
         Category $category,
         Attribute $attribute,
@@ -62,6 +67,8 @@ class ConvertXToProductId
         $this->cartRule = $cartRule;
 
         $this->pav = $pav;
+
+        $this->conditionSymbols = config('pricerules.cart.conditions.symbols');
     }
 
     public function convertX($ruleId, $attribute_conditions)
@@ -110,31 +117,27 @@ class ConvertXToProductId
         $products = collect();
 
         foreach ($attributeOptions as $attributeOption) {
-            if ($attributeOption->attribute == 'sku' || $attributeOption->attribute == 'type') {
-                continue;
-            }
-
             $selectedOptions = $attributeOption->value;
 
             if ($attributeOption->type == 'select' || $attributeOption->type == 'multiselect') {
-                $pav = $this->attribute->findWhere([
+                $attribute = $this->attribute->findWhere([
                     'code' => $attributeOption->attribute
                 ]);
 
-                $pavOptions = $pav->first()->options;
+                $attributeOptions = $attribute->first()->options;
 
                 $selectedAttributeOptions = collect();
 
-                foreach ($pavOptions as $pavOption) {
+                foreach ($attributeOptions as $attributeOption) {
                     foreach ($selectedOptions as $key => $value) {
-                        if ($pavOption->id == $value) {
-                            $selectedAttributeOptions->push($pavOption);
+                        if ($attributeOption->id == $value) {
+                            $selectedAttributeOptions->push($attributeOption);
                         }
                     }
                 }
 
                 foreach($selectedAttributeOptions as $selectedAttributeOption) {
-                    $typeColumn = $this->pav::$attributeTypeFields[$pav->first()->type];
+                    $typeColumn = $this->pav::$attributeTypeFields[$attribute->first()->type];
 
                     $pavResults = $this->pav->where(
                         "{$typeColumn}", $selectedAttributeOption->id
@@ -146,35 +149,39 @@ class ConvertXToProductId
                     }
                 }
             } else {
-                $pav = $this->attribute->findWhere([
+                $attribute = $this->attribute->findWhere([
                     'code' => $attributeOption->attribute
                 ]);
 
-                $pavValues = $pav->first();
+                $pavValues = $attribute->first();
 
-                dd($pavValues);
+                $selectedAttributeValues = collect();
 
-                // $selectedAttributeValues = collect();
+                if ($attributeOption->attribute == 'sku') {
+                    $testValue = $attributeOption->value;
+                    $testCondition = $attributeOption->condition;
 
-                // foreach ($pavValues as $pavValue) {
-                //     foreach ($selectedValues as $key => $value) {
-                //         if ($pavValue->id == $value) {
-                //             $selectedAttributeValues->push($pavValue);
-                //         }
-                //     }
-                // }
+                    if ($testCondition == '{}') {
+                        $foundProducts = $this->product->findWhere([
+                            ['sku', 'like', '%'.$testValue.'%'],
+                            ['type', '!=', 'configurable']
+                        ])->flatten()->all();
+                    } else if ($testCondition == '!{}') {
+                        $foundProducts = $this->product->findWhere([
+                            ['sku', 'not like', '%'.$testValue.'%'],
+                            ['type', '!=', 'configurable']
+                        ])->flatten()->all();
+                    } else if ($testCondition == '=') {
+                        $foundProducts = $this->product->findWhere([
+                            ['sku', '=', '%'.$testValue.'%'],
+                            ['type', '!=', 'configurable']
+                        ])->flatten()->all();
+                    }
+                }
 
-                // foreach($selectedAttributeValues as $selectedAttributeValue) {
-                //     $typeColumn = $this->pav::$attributeTypeFields[$pav->first()->type];
-
-                //     $pavResults = $this->pav->where(
-                //         "{$typeColumn}", $selectedAttributeValue->id
-                //     )->get();
-
-                //     foreach ($pavResults as $pavResult) {
-                //         $products->push($pavResult->product);
-                //     }
-                // }
+                foreach($foundProducts as $foundProduct) {
+                    $products->push($foundProduct);
+                }
             }
         }
 
@@ -206,8 +213,8 @@ class ConvertXToProductId
      */
     public function findAllUniqueIds(...$data)
     {
-        $attributeResult = $data[0];
-        $categoryResult = $data[1];
+        $attributeResult = $data[0] ?? collect();
+        $categoryResult = $data[1] ?? collect();
 
         // find matched attribute options product ids
         $mergedCollection = $attributeResult->merge($categoryResult);
