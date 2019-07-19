@@ -34,12 +34,12 @@ class NonCouponAbleRule extends Discount
             $validated = $this->validateRule($alreadyAppliedRule);
 
             if (! $validated) {
-                // if the validation fails then the cart rule gets deleted from cart rule cart
+                // if the validation fails then cart rule gets deleted from cart rule cart
                 $alreadyAppliedCartRuleCart->first()->delete();
 
                 $this->resetShipping($cart);
 
-                // all discount is cleared fro mthe cart and cart items table
+                // all discount is cleared from cart and cart items table
                 $this->clearDiscount();
 
                 return false;
@@ -55,13 +55,29 @@ class NonCouponAbleRule extends Discount
             $applicability = $this->checkApplicability($rule);
 
             if ($applicability) {
-                $item = $this->leastWorthItem();
+                $items = collect();
 
-                $actionInstance = new $this->rules[$rule->action_type];
+                if ($rule->uses_attribute_conditions) {
+                    $productIDs = $rule->product_ids;
 
-                $impact = $actionInstance->calculate($rule, $item, $cart);
+                    $productIDs = explode(',', $productIDs);
 
-                if ($impact['discount'] > 0) {
+                    foreach ($cart->items as $item) {
+                        foreach ($productIDs as $productId) {
+                            if ($item->product_id == $productId) {
+                                $items->push($item);
+                            }
+                        }
+                    }
+                } else {
+                    $items = $cart->items;
+                }
+
+                $actionInstance = new $this->rules['cart'][$rule->action_type];
+
+                $impact = $actionInstance->calculate($rule, $items, $cart);
+
+                if ($impact->discount > 0) {
                     array_push($applicableRules, [
                         'rule' => $rule,
                         'impact' => $impact
@@ -72,7 +88,7 @@ class NonCouponAbleRule extends Discount
                     $alreadyAppliedRule = $alreadyAppliedCartRuleCart->first()->cart_rule;
 
                     if ($alreadyAppliedRule->id == $rule->id) {
-                        if ($impact['discount'] == 0) {
+                        if ($impact->discount == 0) {
                             $alreadyAppliedCartRuleCart->first()->delete();
 
                             // all discount is cleared from cart and cart items table
@@ -125,8 +141,8 @@ class NonCouponAbleRule extends Discount
                 $maxImpact = 0;
 
                 foreach ($endRules as $endRule) {
-                    if ($endRule['impact']['discount'] >= $maxImpact) {
-                        $maxImpact = $endRule['impact']['discount'];
+                    if ($endRule['impact']->discount >= $maxImpact) {
+                        $maxImpact = $endRule['impact']->discount;
 
                         array_push($maxImpacts, $endRule);
                     }
@@ -159,8 +175,8 @@ class NonCouponAbleRule extends Discount
                 $maxImpact = 0;
 
                 foreach ($prioritySorted as $prioritySortedRule) {
-                    if ($prioritySortedRule['impact']['discount'] >= $maxImpact) {
-                        $maxImpact = $prioritySortedRule['impact']['discount'];
+                    if ($prioritySortedRule['impact']->discount >= $maxImpact) {
+                        $maxImpact = $prioritySortedRule['impact']->discount;
 
                         array_push($maxImpacts, $prioritySortedRule);
                     }

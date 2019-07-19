@@ -1,16 +1,16 @@
 <?php
 
-namespace Webkul\Discount\Actions;
+namespace Webkul\Discount\Actions\Cart;
 
 use Webkul\Discount\Actions\Action;
 
-class FixedAmount extends Action
+class BuyAGetB extends Action
 {
-    public function calculate($rule, $item, $cart)
+    public function calculate($rule, $items, $cart)
     {
-        // calculate discount amount
+        //calculate discount amount
         $action_type = $rule->action_type; // action type used
-        $disc_threshold = $rule->disc_threshold; // atleast quantity by default 1 --> may be omitted in near future
+        $disc_threshold = $rule->disc_threshold; // atleast quantity by default 1
         $disc_amount = $rule->disc_amount; // value of discount
         $disc_quantity = $rule->disc_quantity; //max quantity allowed to be discounted
 
@@ -43,10 +43,10 @@ class FixedAmount extends Action
      */
     public function calculateOnShipping($cart)
     {
-        $cart = \Cart::getCart();
-
         $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_grand_total;
 
-        return $percentOfDiscount;
+        $discountOnShipping = ($percentOfDiscount / 100) * $cart->selected_shipping_rate->base_price;
+
+        return $discountOnShipping;
     }
 }

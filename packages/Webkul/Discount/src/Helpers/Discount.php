@@ -126,13 +126,15 @@ abstract class Discount
     /**
      * Save the rule in the CartRule for current cart instance
      *
+     * @param CartRule $rule
+     *
      * @return boolean
      */
     public function save($rule)
     {
         $cart = \Cart::getCart();
 
-        // Create or update
+        // create or update
         $existingRule = $this->cartRuleCart->findWhere([
             'cart_id' => $cart->id
         ]);
@@ -192,6 +194,7 @@ abstract class Discount
 
         $actualShippingRate = new $shippingRate;
         $actualShippingRate = $actualShippingRate->calculate();
+
         if (is_array($actualShippingRate)) {
             foreach($actualShippingRate as $actualRate) {
                 if ($actualRate->method == $cart->selected_shipping_rate->method) {
@@ -237,31 +240,31 @@ abstract class Discount
      */
     public function applyOnShipping($appliedRule, $cart)
     {
-        $cart = \Cart::getCart();
+        // $cart = \Cart::getCart();
 
-        if (isset($cart->selected_shipping_rate)) {
-            if ($appliedRule->free_shipping && $cart->selected_shipping_rate->base_price > 0) {
-                $cart->selected_shipping_rate->update([
-                    'price' => 0,
-                    'base_price' => 0
-                ]);
-            } else if ($appliedRule->free_shipping == 0 && $appliedRule->apply_to_shipping && $cart->selected_shipping_rate->base_price > 0) {
-                $actionType = config('discount-rules')[$appliedRule->action_type];
+        // if (isset($cart->selected_shipping_rate)) {
+        //     if ($appliedRule->free_shipping && $cart->selected_shipping_rate->base_price > 0) {
+        //         $cart->selected_shipping_rate->update([
+        //             'price' => 0,
+        //             'base_price' => 0
+        //         ]);
+        //     } else if ($appliedRule->free_shipping == 0 && $appliedRule->apply_to_shipping && $cart->selected_shipping_rate->base_price > 0) {
+        //         $actionType = config('discount-rules')[$appliedRule->action_type];
 
-                if ($appliedRule->apply_to_shipping) {
-                    $actionInstance = new $actionType;
+        //         if ($appliedRule->apply_to_shipping) {
+        //             $actionInstance = new $actionType;
 
-                    $discountOnShipping = $actionInstance->calculateOnShipping($cart);
+        //             $discountOnShipping = $actionInstance->calculateOnShipping($cart);
 
-                    $discountOnShipping = ($discountOnShipping / 100) * $cart->selected_shipping_rate->base_price;
+        //             $discountOnShipping = ($discountOnShipping / 100) * $cart->selected_shipping_rate->base_price;
 
-                    $cart->selected_shipping_rate->update([
-                        'price' => $cart->selected_shipping_rate->price - core()->convertPrice($discountOnShipping, $cart->cart_currency_code),
-                        'base_price' => $cart->selected_shipping_rate->base_price - $discountOnShipping
-                    ]);
-                }
-            }
-        }
+        //             $cart->selected_shipping_rate->update([
+        //                 'price' => $cart->selected_shipping_rate->price - core()->convertPrice($discountOnShipping, $cart->cart_currency_code),
+        //                 'base_price' => $cart->selected_shipping_rate->base_price - $discountOnShipping
+        //             ]);
+        //         }
+        //     }
+        // }
     }
 
     /**
@@ -336,14 +339,50 @@ abstract class Discount
     {
         $cart = Cart::getCart();
 
-        $leastWorthItem = $this->leastWorthItem();
+        $cartItems = $cart->items;
 
-        $actionInstance = new $this->rules[$rule->action_type];
+        $actionInstance = new $this->rules['cart'][$rule->action_type];
 
         $impact = $actionInstance->calculate($rule, $leastWorthItem, $cart);
 
-        foreach ($cart->items as $item) {
-            if ($item->id == $leastWorthItem['id']) {
+        if ($rule->uses_attribute_conditions) {
+            $productIDs = $rule->product_ids;
+
+            $productIDs = explode(',', $productIDs);
+
+            foreach ($cart->items as $item) {
+                foreach($productIDs as $key => $value) {
+                    if ($item->id == $value) {
+                        if ($rule->action_type == 'percent_of_product') {
+                            $item->update([
+                                'discount_percent' => $rule->discount_amount,
+                                'discount_amount' => core()->convertPrice($impact['discount'], $cart->cart_currency_code),
+                                'base_discount_amount' => $impact['discount']
+                            ]);
+                        } else {
+                            $item->update([
+                                'discount_amount' => core()->convertPrice($impact['discount'], $cart->cart_currency_code),
+                                'base_discount_amount' => $impact['discount']
+                            ]);
+                        }
+
+                        // save coupon if rule use it
+                        if ($rule->use_coupon) {
+                            $coupon = $rule->coupons->code;
+
+                            $item->update([
+                                'coupon_code' => $coupon
+                            ]);
+
+                            $cart->update([
+                                'coupon_code' => $coupon
+                            ]);
+                        }
+                    }
+                }
+            }
+        } else {
+            foreach ($cart->items as $item) {
                 if ($rule->action_type == 'percent_of_product') {
                     $item->update([
                         'discount_percent' => $rule->discount_amount,
@@ -369,69 +408,12 @@ abstract class Discount
                         'coupon_code' => $coupon
                     ]);
                 }
-
-                break;
             }
         }
 
         Cart::collectTotals();
 
         return true;
-    }
-
-    /**
-     * To find the least worth item in current cart instance
-     *
-     * @return array
-     */
-    public function leastWorthItem()
-    {
-        $cart = Cart::getCart();
-
-        $leastValue = 999999999999;
-        $leastWorthItem = [];
-
-        foreach ($cart->items as $item) {
-            if ($item->price < $leastValue) {
-                $leastValue = $item->price;
-                $leastWorthItem = [
-                    'id' => $item->id,
-                    'price' => $item->price,
-                    'base_price' => $item->base_price,
-                    'quantity' => $item->quantity
-                ];
-            }
-        }
-
-        return $leastWorthItem;
-    }
-
-    /**
-     * To find the max worth item in current cart instance
-     *
-     * @return array
-     */
-    public function maxWorthItem()
-    {
-        $cart = Cart::getCart();
-
-        $maxValue = 0;
-        $maxWorthItem = [];
-
-        foreach ($cart->items as $item) {
-            if ($item->base_total > $maxValue) {
-                $maxValue = $item->total;
-
-                $maxWorthItem = [
-                    'id' => $item->id,
-                    'price' => $item->price,
-                    'base_price' => $item->base_price,
-                    'quantity' => $item->quantity
-                ];
-            }
-        }
-
-        return $maxWorthItem;
     }
 
     /**

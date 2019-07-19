@@ -194,6 +194,8 @@ class CartRuleController extends Controller
                     'disc_quantity' => $data['disc_quantity']
                 ];
             } else {
+                $data['uses_attribute_conditions'] = 1;
+
                 $data['actions'] = [
                     'action_type' => $data['action_type'],
                     'disc_amount' => $data['disc_amount'],
@@ -428,6 +430,8 @@ class CartRuleController extends Controller
                     'disc_quantity' => $data['disc_quantity']
                 ];
             } else {
+                $data['uses_attribute_conditions'] = 1;
+
                 $data['actions'] = [
                     'action_type' => $data['action_type'],
                     'disc_amount' => $data['disc_amount'],

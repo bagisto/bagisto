@@ -3,9 +3,7 @@
 return [
     'test_mode' => [
         'all_are_true' => 'All conditions are true',
-        // 'all_are_false' => 'All conditions are false',
         'any_is_true' => 'Any condition is true',
-        // 'any_is_false' => 'Any condition is false'
     ],
 
     'conditions' => [
@@ -35,14 +33,14 @@ return [
             'percent_of_product' => 'Percentage of product',
             'fixed_amount' => 'Apply as fixed amount',
             'adjust_to_percent' => 'Adjust whole cart to percent',
-            'adjust_to_fixed_amount' => 'Adjust whole cart to fixed amount'
+            'fixed_amount_cart' => 'Adjust whole cart to fixed amount'
         ],
 
         'validation' => [
             0 => 'percent_of_product',
             1 => 'fixed_amount',
             2 => 'adjust_to_percent',
-            3 => 'adjust_to_fixed_amount'
+            3 => 'fixed_amount_cart'
         ],
 
         'conditions' => [
