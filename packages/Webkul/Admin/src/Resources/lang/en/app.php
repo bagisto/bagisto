@@ -824,6 +824,17 @@ return [
         'cannot-activate-catalog-rule' => 'Cannot activate catalog rule',
         'catalog-rule-already-activated' => 'Catalog rule is already activated',
         'catalog-rule-activated' => 'Catalog rule is activated',
+        'select-attribute' => 'Select :attribute',
+        'enter-attribute' => 'Enter :attribute',
+        'add-condition' => 'Add Condition',
+        'cart-properties' => 'Cart Properties',
+        'yes' => 'Yes',
+        'no' => 'No',
+        'note' => 'Note',
+        'rule-name' => 'Enter Rule Name',
+        'rule-desc' => 'Enter Rule Description',
+        'convert-x-note' => 'If this section is left empty, then rule will get applied to all the products in the cart.',
+        'add-attr-condition' => 'Add Attribute Condition',
         'general-info' => [
             'sku-like' => 'SKU Like',
             'on-shipping' => 'If applied on shipping',
@@ -865,7 +876,12 @@ return [
             'is-guest' => 'For Guests',
             'disc_qty' => 'Max. Quantity Allowed To Be Discounted',
             'test-mode' => 'Choose how to test conditions',
-            'labels' => 'Labels'
+            'labels' => 'Labels',
+            'prefix' => 'Prefix',
+            'suffix' => 'Suffix',
+            'code' => 'Code',
+            'global-label' => 'Global Label',
+            'label' => 'Label'
         ],
 
         'status' => [
