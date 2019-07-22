@@ -53,6 +53,7 @@ class CategoryRepository extends Repository
                 foreach ($model->translatedAttributes as $attribute) {
                     if (isset($data[$attribute])) {
                         $data[$locale->code][$attribute] = $data[$attribute];
+                        $data[$locale->code]['locale_id'] = $locale->id;
                     }
                 }
             }

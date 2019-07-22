@@ -514,6 +514,7 @@ return [
             'greeting' => 'An Order :order_id has been placed on :created_at',
         ],
         'forget-password' => [
+            'subject' => 'Customer Reset Password',
             'dear' => 'Dear :name',
             'info' => 'You are receiving this email because we received a password reset request for your account',
             'reset-password' => 'Reset Password',

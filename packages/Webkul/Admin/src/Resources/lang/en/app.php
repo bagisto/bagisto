@@ -445,7 +445,8 @@ return [
             'text-swatch' => 'Text Swatch',
             'swatch' => 'Swatch',
             'image' => 'Image',
-            'file' => 'File'
+            'file' => 'File',
+            'checkbox' => 'Checkbox'
         ],
         'families' => [
             'title' => 'Families',

@@ -3606,6 +3606,14 @@ section.review {
     section.slider-block div.slider-content div.slider-control {
         left: 2%;
         right: auto;
+
+        .slider-left {
+            float: left;
+        }
+
+        .slider-right {
+            margin-left: 5px;
+        }
     }
 
     @media only screen and (max-width: 720px) {

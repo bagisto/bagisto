@@ -32,7 +32,7 @@ class View extends AbstractProduct
                     $attributeOption = $attributeOptionReposotory->find($value);
                     if ($attributeOption)
                         $value = $attributeOption->label ?? $attributeOption->admin_name;
-                } else if ($attribute->type == 'multiselect') {
+                } else if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
                     $lables = [];
 
                     $attributeOptions = $attributeOptionReposotory->findWhereIn('id', explode(",", $value));
