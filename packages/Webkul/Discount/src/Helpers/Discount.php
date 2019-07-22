@@ -133,6 +133,8 @@ abstract class Discount
         if ($timeBased && $channelBased && $customerGroupBased && $conditionsBased) {
             if ($rule->uses_attribute_conditions == 1 && $partialMatch) {
                 return true;
+            } else if ($rule->uses_attribute_conditions == 0) {
+                return true;
             } else {
                 return false;
             }

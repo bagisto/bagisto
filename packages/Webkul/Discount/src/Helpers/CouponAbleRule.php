@@ -40,13 +40,13 @@ class CouponAbleRule extends Discount
         $applicability = $this->checkApplicability($applicableRule);
 
         if ($applicability) {
-            $item = $this->leastWorthItem();
+            $item = $cart->items;
 
             $actionInstance = new $this->rules['cart'][$applicableRule->action_type];
 
             $impact = $actionInstance->calculate($applicableRule, $item, $cart);
 
-            if ($impact['discount'] == 0) {
+            if ($impact->discount == 0) {
                 return false;
             }
 
@@ -91,9 +91,9 @@ class CouponAbleRule extends Discount
 
                     $alreadyAppliedRuleImpact = $actionInstance->calculate($alreadyAppliedRule, $item, $cart);
 
-                    if ($alreadyAppliedRule['discount'] > $impact['discount']) {
+                    if ($alreadyAppliedRule->discount > $impact->discount) {
                         return false;
-                    } else if ($alreadyAppliedRule['discount'] < $impact['discount']) {
+                    } else if ($alreadyAppliedRule->discount < $impact->discount) {
                         $this->save($applicableRule);
 
                         return $impact;
