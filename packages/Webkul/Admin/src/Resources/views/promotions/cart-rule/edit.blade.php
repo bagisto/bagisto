@@ -490,7 +490,7 @@
                         country_and_states: @json($cart_rule[2]),
 
                         category_options: @json($cart_rule[1]),
-                        category_values: null,
+                        category_values: [],
 
                         attribute_values: [],
                         attr_object: {
@@ -562,22 +562,24 @@
                         this.match_criteria = this.conditions_list.pop().criteria;
                     }
 
-                    this.category_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).categories;
+                    if (JSON.parse(JSON.parse(data.actions).attribute_conditions)) {
+                        this.category_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).categories;
 
-                    this.attribute_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).attributes;
+                        this.attribute_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).attributes;
 
-                    // creating options and has option param on the frontend
-                    for (i in this.attribute_values) {
-                        for (j in this.attribute_input) {
-                            if (this.attribute_input[j].code == this.attribute_values[i].attribute) {
-                                if (this.attribute_input[j].has_options == true) {
-                                    this.attribute_values[i].has_options = true;
+                        // creating options and has option param on the frontend
+                        for (i in this.attribute_values) {
+                            for (j in this.attribute_input) {
+                                if (this.attribute_input[j].code == this.attribute_values[i].attribute) {
+                                    if (this.attribute_input[j].has_options == true) {
+                                        this.attribute_values[i].has_options = true;
 
-                                    this.attribute_values[i].options = this.attribute_input[j].options;
-                                } else {
-                                    this.attribute_values[i].has_options = false;
+                                        this.attribute_values[i].options = this.attribute_input[j].options;
+                                    } else {
+                                        this.attribute_values[i].has_options = false;
 
-                                    this.attribute_values[i].options = null;
+                                        this.attribute_values[i].options = null;
+                                    }
                                 }
                             }
                         }
@@ -656,8 +658,6 @@
                             if (i == selectedIndex) {
                                 if (this.attribute_input[i].has_options == true) {
                                     this.attribute_values[index].options = this.attribute_input[i].options;
-
-                                    console.log(this.attribute_values);
                                 }
 
                                 this.attribute_values[index].type = this.attribute_input[i].type;
@@ -686,7 +686,7 @@
                     },
 
                     onSubmit: function (e) {
-                        if (this.attribute_values.length > 0 || this.category_values.length > 0) {
+                        if (this.attribute_values.length != 0 || this.category_values.length != 0) {
                             for (i in this.attribute_values) {
                                 delete this.attribute_values[i].options;
                             }

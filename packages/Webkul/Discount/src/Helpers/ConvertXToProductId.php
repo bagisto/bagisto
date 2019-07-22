@@ -253,38 +253,39 @@ class ConvertXToProductId
     public function getAll($categoryId = null)
     {
         $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($categoryId) {
-                    $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-                    $locale = request()->get('locale') ?: app()->getLocale();
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-                    $qb = $query->distinct()
-                            ->addSelect('product_flat.id')
-                            ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-                            ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-                            ->where('product_flat.channel', $channel)
-                            ->where('product_flat.locale', $locale)
-                            ->whereNotNull('product_flat.url_key');
+            $locale = request()->get('locale') ?: app()->getLocale();
 
-                    if ($categoryId) {
-                        $qb->where('product_categories.category_id', $categoryId);
-                    }
+            $qb = $query->distinct()
+                    ->select('products.id')
+                    ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                    ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
+                    ->where('product_flat.channel', $channel)
+                    ->where('product_flat.locale', $locale)
+                    ->whereNotNull('product_flat.url_key');
 
-                    if (is_null(request()->input('status'))) {
-                        $qb->where('product_flat.status', 1);
-                    }
+            if ($categoryId) {
+                $qb->where('product_categories.category_id', $categoryId);
+            }
 
-                    if (is_null(request()->input('visible_individually'))) {
-                        $qb->where('product_flat.visible_individually', 1);
-                    }
+            if (is_null(request()->input('status'))) {
+                $qb->where('product_flat.status', 1);
+            }
 
-                    $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
-                        $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
-                            ->where('flat_variants.channel', $channel)
-                            ->where('flat_variants.locale', $locale);
-                    });
+            if (is_null(request()->input('visible_individually'))) {
+                $qb->where('product_flat.visible_individually', 1);
+            }
 
-                    return $qb->groupBy('product_flat.id');
-                })->get();
+            $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
+                $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
+                    ->where('flat_variants.channel', $channel)
+                    ->where('flat_variants.locale', $locale);
+            });
+
+            return $qb->groupBy('product_flat.id');
+        })->get();
 
         return $results;
     }

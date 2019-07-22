@@ -499,8 +499,14 @@ class CartRuleController extends Controller
         // update cart rule
         $ruleUpdated = $this->cartRule->update($data, $id);
 
-        // can execute convert X here after when the rule is updated
-        $this->convertX->convertX($ruleUpdated->id, $attribute_conditions);
+        if (isset($attribute_conditions) && $attribute_conditions != "[]" && $attribute_conditions != "") {
+            // can execute convert X here after when the rule is updated
+            $this->convertX->convertX($ruleUpdated->id, $attribute_conditions);
+        } else {
+            $ruleUpdated->update([
+                'product_ids' => null
+            ]);
+        }
 
         // update customer groups for cart rule
         $ruleGroupUpdated = $this->cartRule->CustomerGroupSync($customer_groups, $ruleUpdated);

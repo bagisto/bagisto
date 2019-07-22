@@ -8,32 +8,40 @@ class BuyAGetB extends Action
 {
     public function calculate($rule, $items, $cart)
     {
-        //calculate discount amount
-        $action_type = $rule->action_type; // action type used
-        $disc_threshold = $rule->disc_threshold; // atleast quantity by default 1
-        $disc_amount = $rule->disc_amount; // value of discount
-        $disc_quantity = $rule->disc_quantity; //max quantity allowed to be discounted
+        $report = collect();
+        $totalDiscount = 0;
 
-        $amountDiscounted = 0;
+        foreach ($items as $item) {
+            // calculate discount amount
+            $action_type = $rule->action_type; // action type used
+            $disc_threshold = $rule->disc_threshold; // atleast quantity by default 1
+            $disc_amount = $rule->disc_amount; // value of discount
+            $disc_quantity = $rule->disc_quantity; //max quantity allowed to be discounted
 
-        $realQty = $item['quantity'];
+            $amountDiscounted = 0;
 
-        if ($cart->items_qty >= $disc_threshold) {
-            $amountDiscounted = $disc_amount;
+            $realQty = $item['quantity'];
 
-            if ($realQty > $disc_quantity) {
-                $amountDiscounted = $amountDiscounted * $disc_quantity;
-            } else {
-                $amountDiscounted = $amountDiscounted * $realQty;
+            if ($cart->items_qty >= $disc_threshold) {
+                $amountDiscounted = $disc_amount;
+
+                if ($realQty > $disc_quantity) {
+                    $amountDiscounted = $amountDiscounted * $disc_quantity;
+                } else {
+                    $amountDiscounted = $amountDiscounted * $realQty;
+                }
+
+                if ($amountDiscounted > $item['base_price'] && $realQty == 1) {
+                    $amountDiscounted = $item['base_price'];
+                }
             }
 
-            if ($amountDiscounted > $item['base_price'] && $realQty == 1) {
-                $amountDiscounted = $item['base_price'];
-            }
+            $totalDiscount = $totalDiscount + $amountDiscounted;
+
+            $itemReport['item_id'] = $item->id;
+            $itemReport['discount'] = $amountDiscounted;
+            $itemReport['formatted_discount'] = core()->currency($amountDiscounted);
         }
-
-        $report['discount'] = $amountDiscounted;
-        $report['formatted_discount'] = core()->currency($amountDiscounted);
 
         return $report;
     }

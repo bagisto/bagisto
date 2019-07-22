@@ -9,9 +9,9 @@ class FixedAmount extends Action
     public function calculate($rule, $items, $cart)
     {
         $report = collect();
+        $totalDiscount = 0;
 
         foreach ($items as $item) {
-            $totalDiscount = 0;
             $amountDiscounted = 0;
             $itemReport = array();
 

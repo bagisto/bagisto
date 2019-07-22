@@ -25,7 +25,7 @@ class NonCouponAbleRule extends Discount
         ]);
 
         $alreadyAppliedCartRuleCart = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id,
+            'cart_id' => $cart->id
         ]);
 
         if (count($alreadyAppliedCartRuleCart)) {

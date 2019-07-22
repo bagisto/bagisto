@@ -25,7 +25,7 @@ class CouponAbleRule extends Discount
 
         $applicableRule = null;
 
-        foreach($rules as $rule) {
+        foreach ($rules as $rule) {
             if ($rule->use_coupon && ($rule->coupons->code == $code)) {
                 $applicableRule = $rule;
 

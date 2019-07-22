@@ -116,8 +116,27 @@ abstract class Discount
             }
         }
 
+        $partialMatch = 0;
+
+        if ($rule->uses_attribute_conditions) {
+            $productIDs = explode(',', $rule->product_ids);
+
+            foreach ($productIDs as $productID) {
+                foreach ($cart->items as $item) {
+                    if ($item->product_id == $productID) {
+                        $partialMatch = 1;
+                    }
+                }
+            }
+        }
+
         if ($timeBased && $channelBased && $customerGroupBased && $conditionsBased) {
-            return true;
+
+            if ($rule->uses_attribute_conditions == 1 && $partialMatch) {
+                return false;
+            } else {
+                return true;
+            }
         } else {
             return false;
         }
@@ -343,70 +362,36 @@ abstract class Discount
 
         $actionInstance = new $this->rules['cart'][$rule->action_type];
 
-        $impact = $actionInstance->calculate($rule, $leastWorthItem, $cart);
+        $impact = $actionInstance->calculate($rule, $cartItems, $cart);
 
-        if ($rule->uses_attribute_conditions) {
-            $productIDs = $rule->product_ids;
-
-            $productIDs = explode(',', $productIDs);
-
-            foreach ($cart->items as $item) {
-                foreach($productIDs as $key => $value) {
-                    if ($item->id == $value) {
-                        if ($rule->action_type == 'percent_of_product') {
-                            $item->update([
-                                'discount_percent' => $rule->discount_amount,
-                                'discount_amount' => core()->convertPrice($impact['discount'], $cart->cart_currency_code),
-                                'base_discount_amount' => $impact['discount']
-                            ]);
-                        } else {
-                            $item->update([
-                                'discount_amount' => core()->convertPrice($impact['discount'], $cart->cart_currency_code),
-                                'base_discount_amount' => $impact['discount']
-                            ]);
-                        }
-
-                        // save coupon if rule use it
-                        if ($rule->use_coupon) {
-                            $coupon = $rule->coupons->code;
-
-                            $item->update([
-                                'coupon_code' => $coupon
-                            ]);
-
-                            $cart->update([
-                                'coupon_code' => $coupon
-                            ]);
-                        }
+        foreach ($cart->items as $item) {
+            foreach ($impact as $itemDiscount) {
+                if ($item->id == $itemDiscount['item_id']) {
+                    if ($rule->action_type == 'percent_of_product') {
+                        $item->update([
+                            'discount_percent' => $rule->discount_amount,
+                            'discount_amount' => core()->convertPrice($itemDiscount['discount'], $cart->cart_currency_code),
+                            'base_discount_amount' => $itemDiscount['discount']
+                        ]);
+                    } else {
+                        $item->update([
+                            'discount_amount' => core()->convertPrice($itemDiscount['discount'], $cart->cart_currency_code),
+                            'base_discount_amount' => $itemDiscount['discount']
+                        ]);
                     }
-                }
-            }
-        } else {
-            foreach ($cart->items as $item) {
-                if ($rule->action_type == 'percent_of_product') {
-                    $item->update([
-                        'discount_percent' => $rule->discount_amount,
-                        'discount_amount' => core()->convertPrice($impact['discount'], $cart->cart_currency_code),
-                        'base_discount_amount' => $impact['discount']
-                    ]);
-                } else {
-                    $item->update([
-                        'discount_amount' => core()->convertPrice($impact['discount'], $cart->cart_currency_code),
-                        'base_discount_amount' => $impact['discount']
-                    ]);
-                }
 
-                // save coupon if rule use it
-                if ($rule->use_coupon) {
-                    $coupon = $rule->coupons->code;
+                    // save coupon if rule use it
+                    if ($rule->use_coupon) {
+                        $coupon = $rule->coupons->code;
 
-                    $item->update([
-                        'coupon_code' => $coupon
-                    ]);
+                        $item->update([
+                            'coupon_code' => $coupon
+                        ]);
 
-                    $cart->update([
-                        'coupon_code' => $coupon
-                    ]);
+                        $cart->update([
+                            'coupon_code' => $coupon
+                        ]);
+                    }
                 }
             }
         }
