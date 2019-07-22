@@ -78,7 +78,7 @@
                                         <label for="customer_groups" class="required">{{ __('admin::app.promotion.general-info.cust-groups') }}</label>
 
                                         <select type="text" class="control" name="customer_groups[]" v-model="customer_groups" v-validate="'required'" value="{{ old('customer_groups[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
-                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attrbibute' => 'Customer Group']) }}</option>
+                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Customer Group']) }}</option>
                                             @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $channel)
                                                 <option value="{{ $channel->id }}">{{ $channel->name }}</option>
                                             @endforeach
@@ -91,7 +91,7 @@
                                         <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
 
                                         <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels-req') }}&quot;" multiple="multiple">
-                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attrbibute' => 'Channels']) }}</option>
+                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Channels']) }}</option>
                                             @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                                 <option value="{{ $channel->id }}">{{ $channel->name }}</option>
                                             @endforeach
@@ -104,7 +104,7 @@
                                         <label for="status" class="required">{{ __('admin::app.promotion.general-info.status') }}</label>
 
                                         <select type="text" class="control" name="status" v-model="status" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.status') }}&quot;">
-                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attrbibute' => 'Status']) }}</option>
+                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attribute' => 'Status']) }}</option>
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
                                         </select>
