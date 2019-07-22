@@ -136,7 +136,7 @@
 
                                     {{-- <input type="hidden" name="auto_generation" v-model="auto_generation"> --}}
 
-                                    <div class="control-group" :class="[errors.has('per_customer') ? 'has-error' : '']">
+                                    {{-- <div class="control-group" :class="[errors.has('per_customer') ? 'has-error' : '']">
                                         <label for="per_customer" class="required">{{ __('admin::app.promotion.general-info.uses-per-cust') }}</label>
 
                                         <input type="number" step="1" class="control" name="per_customer" v-model="per_customer" v-validate="'required|numeric|min_value:0'" value="{{ old('per_customer') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
@@ -154,7 +154,7 @@
                                         <figcaption class="required">* {{ __('admin::app.promotion.zero-unlimited') }}</figcaption>
 
                                         <span class="control-error" v-if="errors.has('usage_limit')">@{{ errors.first('usage_limit') }}</span>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="control-group" :class="[errors.has('priority') ? 'has-error' : '']">
                                         <label for="priority" class="required">{{ __('admin::app.promotion.general-info.priority') }}</label>

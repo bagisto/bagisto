@@ -123,8 +123,8 @@ class CartRuleController extends Controller
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
-            'usage_limit' => 'numeric|min:0',
-            'per_customer' => 'numeric|min:0',
+            // 'usage_limit' => 'numeric|min:0',
+            // 'per_customer' => 'numeric|min:0',
             'action_type' => 'required|string',
             'disc_amount' => 'required|numeric',
             'disc_quantity' => 'numeric',
@@ -244,7 +244,7 @@ class CartRuleController extends Controller
             }
 
             // set coupon usage per customer same as per_customer limit which is disabled for now
-            $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
+            // $coupons['usage_per_customer'] = $data['per_customer']; //0 is for unlimited usage
             // unset coupon code from coupon section
             unset($data['code']);
             // } else {
@@ -356,8 +356,8 @@ class CartRuleController extends Controller
             'channels' => 'required|array',
             'status' => 'required|boolean',
             'use_coupon' => 'boolean|required',
-            'usage_limit' => 'numeric|min:0',
-            'per_customer' => 'numeric|min:0',
+            // 'usage_limit' => 'numeric|min:0',
+            // 'per_customer' => 'numeric|min:0',
             'action_type' => 'required|string',
             'disc_amount' => 'required|numeric',
             'disc_quantity' => 'required|numeric',
