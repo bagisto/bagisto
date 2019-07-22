@@ -188,11 +188,12 @@ return [
         'route' => 'admin.cart-rule.index',
         'sort' => 1,
         'icon-class' => '',
-    ], [
-        'key' => 'promotions.catalog-rule',
-        'name' => 'admin::app.promotion.catalog-rule',
-        'route' => 'admin.catalog-rule.index',
-        'sort' => 1,
-        'icon-class' => '',
     ]
+    // , [
+    //     'key' => 'promotions.catalog-rule',
+    //     'name' => 'admin::app.promotion.catalog-rule',
+    //     'route' => 'admin.catalog-rule.index',
+    //     'sort' => 1,
+    //     'icon-class' => '',
+    // ]
 ];
