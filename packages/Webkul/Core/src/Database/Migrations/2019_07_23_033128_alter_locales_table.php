@@ -25,6 +25,6 @@ class AlterLocalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locales');
+        
     }
 }
