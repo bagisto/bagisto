@@ -199,9 +199,14 @@ class ConvertXToProductId
 
         foreach ($categories as $category) {
             $data = $this->getAll($category->id);
+            if ($data->count()) {
+                $products->push($data);
+
+                unset($data);
+            }
         }
 
-        return $data;
+        return $products->flatten()->all();
     }
 
     /**
@@ -262,8 +267,6 @@ class ConvertXToProductId
                     ->select('products.id')
                     ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                     ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-                    ->where('product_flat.channel', $channel)
-                    ->where('product_flat.locale', $locale)
                     ->whereNotNull('product_flat.url_key');
 
             if ($categoryId) {
@@ -279,9 +282,7 @@ class ConvertXToProductId
             }
 
             $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
-                $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
-                    ->where('flat_variants.channel', $channel)
-                    ->where('flat_variants.locale', $locale);
+                $qb->on('product_flat.id', '=', 'flat_variants.parent_id');
             });
 
             return $qb->groupBy('product_flat.id');

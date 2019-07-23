@@ -53,7 +53,7 @@ class NonCouponAbleRule extends Discount
         // time based filter
         foreach($rules as $rule) {
             $applicability = $this->checkApplicability($rule);
-
+            dd($applicability);
             if ($applicability) {
                 $items = collect();
 

@@ -807,7 +807,7 @@ return [
 
     'promotion' => [
         'information' => 'Information',
-        'condiiton' => 'Conditions',
+        'conditions' => 'Conditions',
         'actions' => 'Actions',
         'coupons' => 'Coupons',
         'zero-unlimited' => 'Zero denotes unlimited usage here',

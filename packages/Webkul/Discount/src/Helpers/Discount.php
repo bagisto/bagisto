@@ -216,7 +216,7 @@ abstract class Discount
         $actualShippingRate = $actualShippingRate->calculate();
 
         if (is_array($actualShippingRate)) {
-            foreach($actualShippingRate as $actualRate) {
+            foreach ($actualShippingRate as $actualRate) {
                 if ($actualRate->method == $cart->selected_shipping_rate->method) {
                     $actualShippingRate = $actualRate;
 
