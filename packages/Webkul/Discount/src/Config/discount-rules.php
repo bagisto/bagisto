@@ -5,7 +5,7 @@ return [
     'cart' => [
         'percent_of_product' => 'Webkul\Discount\Actions\Cart\PercentOfProduct',
         'fixed_amount' => 'Webkul\Discount\Actions\Cart\FixedAmount',
-        'whole_cart_to_fixed' => 'Webkul\Discount\Actions\Cart\WholeCartToFixed',
+        // 'whole_cart_to_fixed' => 'Webkul\Discount\Actions\Cart\WholeCartToFixed',
         'whole_cart_to_percent' => 'Webkul\Discount\Actions\Cart\WholeCartToPercent'
     ],
 

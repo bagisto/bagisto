@@ -9,21 +9,21 @@ class WholeCartToFixed extends Action
     public function calculate($rule, $items, $cart)
     {
         $report = collect();
+
         $totalDiscount = 0;
 
         foreach ($items as $item) {
-            // calculate discount amount
-            $action_type = $rule->action_type; // action type used
-            $disc_threshold = $rule->disc_threshold; // atleast quantity by default 1
-            $disc_amount = $rule->disc_amount; // value of discount
-            $disc_quantity = $rule->disc_quantity; //max quantity allowed to be discounted
-
             $amountDiscounted = 0;
+            $itemReport = array();
+
+            $disc_threshold = $rule->disc_threshold;
+            $disc_amount = $rule->disc_amount;
+            $disc_quantity = $rule->disc_quantity;
 
             $realQty = $item['quantity'];
 
             if ($cart->items_qty >= $disc_threshold) {
-                $amountDiscounted = $disc_amount;
+                $amountDiscounted = $item['base_price'] * ($disc_amount / 100);
 
                 if ($realQty > $disc_quantity) {
                     $amountDiscounted = $amountDiscounted * $disc_quantity;
@@ -41,6 +41,8 @@ class WholeCartToFixed extends Action
             $itemReport['item_id'] = $item->id;
             $itemReport['discount'] = $amountDiscounted;
             $itemReport['formatted_discount'] = core()->currency($amountDiscounted);
+
+            $report->push($itemReport);
         }
 
         return $report;

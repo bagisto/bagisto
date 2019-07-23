@@ -53,7 +53,7 @@ class NonCouponAbleRule extends Discount
         // time based filter
         foreach($rules as $rule) {
             $applicability = $this->checkApplicability($rule);
-            dd($applicability);
+
             if ($applicability) {
                 $items = collect();
 
@@ -76,7 +76,7 @@ class NonCouponAbleRule extends Discount
                 $actionInstance = new $this->rules['cart'][$rule->action_type];
 
                 $impact = $actionInstance->calculate($rule, $items, $cart);
-
+                dd($impact);
                 if ($impact->discount > 0) {
                     array_push($applicableRules, [
                         'rule' => $rule,

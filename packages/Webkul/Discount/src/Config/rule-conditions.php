@@ -32,8 +32,8 @@ return [
         'actions' => [
             'percent_of_product' => 'Percentage of product',
             'fixed_amount' => 'Apply as fixed amount',
-            'adjust_to_percent' => 'Adjust whole cart to percent',
-            'fixed_amount_cart' => 'Adjust whole cart to fixed amount'
+            // 'whole_cart_to_fixed' => 'Adjust whole cart to fixed amount',
+            'whole_cart_to_percent' => 'Adjust whole cart to percent'
         ],
 
         'validation' => [

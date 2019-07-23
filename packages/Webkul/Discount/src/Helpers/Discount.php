@@ -179,7 +179,9 @@ abstract class Discount
 
                 return true;
             } else {
-                // $this->checkOnShipping($cart);
+                $this->clearDiscount();
+
+                $this->updateCartItemAndCart($rule);
             }
         } else {
             $this->cartRuleCart->create([
@@ -334,7 +336,7 @@ abstract class Discount
 
         $cartItems = $cart->items;
 
-        foreach($cartItems as $item) {
+        foreach ($cartItems as $item) {
             $item->update([
                 'coupon_code' => NULL,
                 'discount_percent' => 0,
@@ -364,7 +366,7 @@ abstract class Discount
         $actionInstance = new $this->rules['cart'][$rule->action_type];
 
         $impact = $actionInstance->calculate($rule, $cartItems, $cart);
-
+        if ($impact);
         foreach ($cart->items as $item) {
             foreach ($impact as $itemDiscount) {
                 if ($item->id == $itemDiscount['item_id']) {

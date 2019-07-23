@@ -9,38 +9,19 @@ class WholeCartToPercent extends Action
     public function calculate($rule, $items, $cart)
     {
         $report = collect();
+
         $totalDiscount = 0;
 
-        foreach ($items as $item) {
-            // calculate discount amount
-            $action_type = $rule->action_type; // action type used
-            $disc_threshold = $rule->disc_threshold; // atleast quantity by default 1
-            $disc_amount = $rule->disc_amount; // value of discount
-            $disc_quantity = $rule->disc_quantity; //max quantity allowed to be discounted
+        $disc_percent = $rule->discount_amount;
 
-            $amountDiscounted = 0;
+        $itemReport = collect();
 
-            $realQty = $item['quantity'];
+        if ($disc_percent <= 100) {
+            $totalDiscount = $cart->base_grand_total - $rule->discount_amount;
 
-            if ($cart->items_qty >= $disc_threshold) {
-                $amountDiscounted = $disc_amount;
-
-                if ($realQty > $disc_quantity) {
-                    $amountDiscounted = $amountDiscounted * $disc_quantity;
-                } else {
-                    $amountDiscounted = $amountDiscounted * $realQty;
-                }
-
-                if ($amountDiscounted > $item['base_price'] && $realQty == 1) {
-                    $amountDiscounted = $item['base_price'];
-                }
-            }
-
-            $totalDiscount = $totalDiscount + $amountDiscounted;
-
-            $itemReport['item_id'] = $item->id;
-            $itemReport['discount'] = $amountDiscounted;
-            $itemReport['formatted_discount'] = core()->currency($amountDiscounted);
+            $report->discount = $totalDiscount;
+        } else {
+            $report->discount = 0;
         }
 
         return $report;
