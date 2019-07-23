@@ -99,7 +99,7 @@ class CatalogRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('catalog_rule', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions, $this->attributeFamily->getPartial()]);
+        return view($this->_config['view'])->with('catalog_rule', [$this->appliedConfig, $this->category->getPartial(), $this->getStatesAndCountries(), $this->attribute->getPartial()]);;
     }
 
     public function store()
@@ -303,5 +303,22 @@ class CatalogRuleController extends Controller
 
             return response()->json(['message' => false], 400);
         }
+    }
+
+
+    /**
+     * Get Countries and states list from core helpers
+     *
+     * @return Array
+     */
+    public function getStatesAndCountries()
+    {
+        $countries = core()->countries()->toArray();
+        $states = core()->groupedStatesByCountries();
+
+        return [
+            'countries' => $countries,
+            'states' => $states
+        ];
     }
 }

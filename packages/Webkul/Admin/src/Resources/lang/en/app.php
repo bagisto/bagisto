@@ -806,6 +806,10 @@ return [
     ],
 
     'promotion' => [
+        'information' => 'Information',
+        'condiiton' => 'Conditions',
+        'actions' => 'Actions',
+        'coupons' => 'Coupons',
         'zero-unlimited' => 'Zero denotes unlimited usage here',
         'catalog-rule' => 'Catalog Rules',
         'cart-rule' => 'Cart Rules',

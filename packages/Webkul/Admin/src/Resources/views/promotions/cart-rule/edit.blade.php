@@ -36,7 +36,7 @@
                         <div>
                             @csrf()
 
-                            <accordian :active="true" title="Information">
+                            <accordian :active="true" title="{{ __('admin::app.promotion.information') }}">
                                 <div slot="body">
                                     <input type="hidden" name="all_conditions" v-model="all_conditions">
 
@@ -166,7 +166,7 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="Conditions">
+                            <accordian :active="false" title="{{ __('admin::app.promotion.conditions') }}">
                                 <div slot="body">
                                     <input type="hidden" name="all_conditions" v-model="all_conditions">
 
@@ -239,7 +239,7 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="Actions">
+                            <accordian :active="false" title="{{ __('admin::app.promotion.actions') }}">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
                                         <label for="action_type" class="required">{{ __('admin::app.promotion.general-info.apply') }}</label>
@@ -314,7 +314,7 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="Coupons" v-if="use_coupon == 1">
+                            <accordian :active="false" title="{{ __('admin::app.promotion.coupons') }}" v-if="use_coupon == 1">
                                 <div slot="body">
                                     {{-- <div v-if="!auto_generation">
                                         <div class="control-group" :class="[errors.has('prefix') ? 'has-error' : '']">

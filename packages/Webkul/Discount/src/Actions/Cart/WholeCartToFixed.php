@@ -4,7 +4,7 @@ namespace Webkul\Discount\Actions\Cart;
 
 use Webkul\Discount\Actions\Action;
 
-class BuyAGetB extends Action
+class WholeCartToFixed extends Action
 {
     public function calculate($rule, $items, $cart)
     {
