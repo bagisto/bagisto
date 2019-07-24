@@ -82,6 +82,7 @@ return [
     |
     */
     'extension_detector' => [
+        'xls'      => Excel::XLS,
         'xlsx'     => Excel::XLSX,
         'xlsm'     => Excel::XLSX,
         'xltx'     => Excel::XLSX,
