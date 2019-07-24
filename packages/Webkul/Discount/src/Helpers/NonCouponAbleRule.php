@@ -76,7 +76,7 @@ class NonCouponAbleRule extends Discount
                 $actionInstance = new $this->rules['cart'][$rule->action_type];
 
                 $impact = $actionInstance->calculate($rule, $items, $cart);
-                dd($impact);
+
                 if ($impact->discount > 0) {
                     array_push($applicableRules, [
                         'rule' => $rule,
@@ -209,6 +209,7 @@ class NonCouponAbleRule extends Discount
                 return $prioritySorted;
             }
         } else if (count($applicableRules) == 1) {
+
             $this->save(array_first($applicableRules)['rule']);
 
             return array_first($applicableRules)['impact'];

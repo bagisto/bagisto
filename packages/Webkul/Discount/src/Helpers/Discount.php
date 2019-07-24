@@ -366,37 +366,48 @@ abstract class Discount
         $actionInstance = new $this->rules['cart'][$rule->action_type];
 
         $impact = $actionInstance->calculate($rule, $cartItems, $cart);
-        if ($impact);
+
+        $totalItemDiscount = 0;
+
         foreach ($cart->items as $item) {
             foreach ($impact as $itemDiscount) {
-                if ($item->id == $itemDiscount['item_id']) {
-                    if ($rule->action_type == 'percent_of_product') {
-                        $item->update([
-                            'discount_percent' => $rule->discount_amount,
-                            'discount_amount' => core()->convertPrice($itemDiscount['discount'], $cart->cart_currency_code),
-                            'base_discount_amount' => $itemDiscount['discount']
-                        ]);
-                    } else {
-                        $item->update([
-                            'discount_amount' => core()->convertPrice($itemDiscount['discount'], $cart->cart_currency_code),
-                            'base_discount_amount' => $itemDiscount['discount']
-                        ]);
-                    }
+                $totalItemDiscount = $totalItemDiscount + $itemDiscount['discount'];
 
-                    // save coupon if rule use it
-                    if ($rule->use_coupon) {
-                        $coupon = $rule->coupons->code;
+                if ($itemDiscount['discount'] > 0) {
+                    $item->update([
+                        'discount_amount' => core()->convertPrice($itemDiscount['discount'], $cart->cart_currency_code),
+                        'base_discount_amount' => $itemDiscount['discount']
+                    ]);
 
+                    if ($item->id == $itemDiscount['item_id'] && $itemDiscount['discount'] > 0) {
                         $item->update([
-                            'coupon_code' => $coupon
-                        ]);
-
-                        $cart->update([
-                            'coupon_code' => $coupon
+                            'discount_percent' => $rule->discount_amount
                         ]);
                     }
                 }
+
+                // save coupon if rule use it
+                if ($rule->use_coupon) {
+                    $coupon = $rule->coupons->code;
+
+                    $item->update([
+                        'coupon_code' => $coupon
+                    ]);
+
+                    $cart->update([
+                        'coupon_code' => $coupon
+                    ]);
+                }
             }
+        }
+
+        if ($totalItemDiscount < $impact->discount) {
+            $cart->update([
+                'base_discount_amount' => $impact->discount,
+                'discount_amount' => core()->convertPrice($impact->discount, $cart->cart_currency_code),
+                'base_sub_total' => $cart->base_sub_total - $impact->discount,
+                'sub_total' => $cart->sub_total - core()->convertPrice($impact->discount, $cart->cart_currency_code)
+            ]);
         }
 
         Cart::collectTotals();

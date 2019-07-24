@@ -6,22 +6,79 @@ use Webkul\Discount\Actions\Action;
 
 class WholeCartToPercent extends Action
 {
+    /**
+     * To calculate impact of cart rule's action of current items of cart instance
+     *
+     * @param CartRule $rule
+     * @param CartItem $items
+     * @param Cart $cart
+     *
+     * @return boolean
+     */
     public function calculate($rule, $items, $cart)
     {
         $report = collect();
 
         $totalDiscount = 0;
 
-        $disc_percent = $rule->discount_amount;
-
-        $itemReport = collect();
-
-        if ($disc_percent <= 100) {
-            $totalDiscount = $cart->base_grand_total - $rule->discount_amount;
-
-            $report->discount = $totalDiscount;
+        if ($rule->discount_amount >= 100) {
+            $report->discount = $cart->base_grand_total;
         } else {
-            $report->discount = 0;
+            $report->discount = ($rule->disc_amount / 100) * $cart->base_grand_total;
+        }
+
+        $report->formatted_discount = core()->currency($report->discount);
+
+        if ($rule->uses_attribute_conditions) {
+            $productIDs = $rule->product_ids;
+
+            $productIDs = explode(',', $productIDs);
+
+            $matchCount = 0;
+
+            foreach ($productIDs as $productID) {
+                foreach ($items as $item) {
+                    if ($item->product_id == $productID) {
+                        $matchCount++;
+                    }
+                }
+            }
+
+            if ($matchCount > 0) {
+                $discountPerItem = $report->discount / $matchCount;
+            }
+
+            foreach ($productIDs as $productID) {
+                foreach ($items as $item) {
+                    if ($item->product_id == $productID) {
+                        $itemReport = array();
+
+                        $itemReport['item_id'] = $item->id;
+                        $itemReport['product_id'] = $item->product_id;
+                        $itemReport['discount'] = $discountPerItem;
+                        $itemReport['formatted_discount'] = core()->currency(0);
+
+                        $report->push($itemReport);
+
+                        unset($itemReport);
+                    }
+                }
+            }
+        } else {
+            $discountPerItem = $report->discount / $cart->items_qty;
+
+            foreach ($items as $item) {
+                $itemReport = array();
+
+                $itemReport['item_id'] = $item->id;
+                $itemReport['product_id'] = $item->product_id;
+                $itemReport['discount'] = $discountPerItem;
+                $itemReport['formatted_discount'] = core()->currency(0);
+
+                $report->push($itemReport);
+
+                unset($itemReport);
+            }
         }
 
         return $report;

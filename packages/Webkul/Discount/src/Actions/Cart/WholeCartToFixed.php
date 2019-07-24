@@ -13,37 +13,20 @@ class WholeCartToFixed extends Action
         $totalDiscount = 0;
 
         foreach ($items as $item) {
-            $amountDiscounted = 0;
             $itemReport = array();
 
-            $disc_threshold = $rule->disc_threshold;
-            $disc_amount = $rule->disc_amount;
-            $disc_quantity = $rule->disc_quantity;
-
-            $realQty = $item['quantity'];
-
-            if ($cart->items_qty >= $disc_threshold) {
-                $amountDiscounted = $item['base_price'] * ($disc_amount / 100);
-
-                if ($realQty > $disc_quantity) {
-                    $amountDiscounted = $amountDiscounted * $disc_quantity;
-                } else {
-                    $amountDiscounted = $amountDiscounted * $realQty;
-                }
-
-                if ($amountDiscounted > $item['base_price'] && $realQty == 1) {
-                    $amountDiscounted = $item['base_price'];
-                }
-            }
-
-            $totalDiscount = $totalDiscount + $amountDiscounted;
-
             $itemReport['item_id'] = $item->id;
-            $itemReport['discount'] = $amountDiscounted;
-            $itemReport['formatted_discount'] = core()->currency($amountDiscounted);
+            $itemReport['product_id'] = $item->product_id;
+            $itemReport['discount'] = 0;
+            $itemReport['formatted_discount'] = core()->currency(0);
 
             $report->push($itemReport);
+
+            unset($itemReport);
         }
+
+        $report->discount = $cart->base_grand_total - $rule->discount_amount;
+        $report->formatted_discount = core()->currency($report->discount);
 
         return $report;
     }

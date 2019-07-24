@@ -40,13 +40,17 @@ class FixedAmount extends Action
             $totalDiscount = $totalDiscount + $amountDiscounted;
 
             $itemReport['item_id'] = $item->id;
+            $itemReport['product_id'] = $item->product_id;
             $itemReport['discount'] = $amountDiscounted;
             $itemReport['formatted_discount'] = core()->currency($amountDiscounted);
 
             $report->push($itemReport);
+
+            unset($itemReport);
         }
 
         $report->discount = $totalDiscount;
+        $report->formatted_discount = core()->currency($totalDiscount);
 
         return $report;
     }
