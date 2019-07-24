@@ -82,7 +82,7 @@ return [
     |
     */
     'extension_detector' => [
-        'Maatwebsite'     => Excel::Excel,  
+        'xls'     => Excel::Excel,  
         'xls'      => Excel::XLS,
         'xlsx'     => Excel::XLSX,
         'xlsm'     => Excel::XLSX,
