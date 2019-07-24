@@ -1,8 +1,7 @@
 @php
     $locale = Webkul\Core\Models\Locale::where('code', app()->getLocale())->first();
 @endphp
-    
-@endphp
+
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
     <head>
