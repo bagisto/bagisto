@@ -96,7 +96,7 @@ class UserController extends Controller
 
         $admin = $this->admin->create($data);
 
-        Event::fire('user.admin.delete.after', $admin);
+        Event::fire('user.admin.create.after', $admin);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'User']));
 

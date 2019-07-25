@@ -2,6 +2,30 @@
 
 @inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
 
+@inject ('productAttributeValueRepository', 'Webkul\Product\Repositories\ProductAttributeValueRepository')
+
+<?php
+    $filterAttributes = [];
+
+    if (isset($category)) {
+        $categoryProductAttributes = $productFlatRepository->getCategoryProductAttribute($category->id);
+
+        if ($categoryProductAttributes) {
+            foreach ($attributeRepository->getFilterAttributes() as $filterAttribute) {
+                if (in_array($filterAttribute->id, $categoryProductAttributes)) {
+                    $filterAttributes[] = $filterAttribute;
+                } else  if ($filterAttribute ['code'] == 'price') {
+                    $filterAttributes[] = $filterAttribute;
+                }
+            }
+
+            $filterAttributes = collect($filterAttributes);
+        }
+    } else {
+        $filterAttributes = $attributeRepository->getFilterAttributes();
+    }
+?>
+
 <div class="layered-filter-wrapper">
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
@@ -85,7 +109,7 @@
 
             data: function() {
                 return {
-                    attributes: @json($attributeRepository->getFilterAttributes()),
+                    attributes: @json($filterAttributes),
                     appliedFilters: {}
                 }
             },
