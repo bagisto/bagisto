@@ -178,15 +178,17 @@ Bagisto is a truly opensource E-Commerce framework which will always be free und
 
 ### Miscellaneous
 
-#### Contributors and Backers
+#### Contributors
 
 This project is on [Open Collective](https://opencollective.com/bagisto) and it exists thanks to this people who contribute.
 
 <a href="https://github.com/bagisto/bagisto/graphs/contributors"><img src="https://opencollective.com/bagisto/contributors.svg?width=890&button=false"/></a>
 
+#### Backers
+
 Thank you to all our backers! 🙏
 
-<a href="https://opencollective.com/bagisto/contribute/backer-7371/checkout" target="_blank"><img src="https://images.opencollective.com/static/images/become_backer.svg"></a>
+<a href="https://opencollective.com/bagisto#contributors" target="_blank"><img src="https://opencollective.com/bagisto/backers.svg?width=890"></a>
 
 #### Sponsors
 
