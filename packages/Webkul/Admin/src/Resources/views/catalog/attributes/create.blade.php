@@ -205,6 +205,14 @@
                                 </select>
                             </div>
 
+                            <div class="control-group">
+                                <label for="use_in_flat">{{ __('admin::app.catalog.attributes.use_in_flat') }}</label>
+                                <select class="control" id="use_in_flat" name="use_in_flat">
+                                    <option value="0">{{ __('admin::app.catalog.attributes.no') }}</option>
+                                    <option value="1">{{ __('admin::app.catalog.attributes.yes') }}</option>
+                                </select>
+                            </div>
+
                             {!! view_render_event('bagisto.admin.catalog.attribute.create_form_accordian.configuration.controls.after') !!}
 
                         </div>

@@ -446,7 +446,8 @@ return [
             'swatch' => 'Swatch',
             'image' => 'Image',
             'file' => 'File',
-            'checkbox' => 'Checkbox'
+            'checkbox' => 'Checkbox',
+            'use_in_flat' => "Create in Product Flat Table"
         ],
         'families' => [
             'title' => 'Families',
