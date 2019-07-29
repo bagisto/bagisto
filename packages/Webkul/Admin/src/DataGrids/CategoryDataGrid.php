@@ -58,7 +58,7 @@ class CategoryDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'position',
             'label' => trans('admin::app.datagrid.position'),
-            'type' => 'string',
+            'type' => 'number',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true

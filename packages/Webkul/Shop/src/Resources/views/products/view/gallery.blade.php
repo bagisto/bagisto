@@ -108,7 +108,9 @@
 
                     this.currentOriginalImageUrl = image.original_image_url;
 
-                    $('img#pro-img').data('zoom-image', image.original_image_url).ezPlus();
+                    if ($(window).width() > 580) {
+                        $('img#pro-img').data('zoom-image', image.original_image_url).ezPlus();
+                    }
                 },
 
                 moveThumbs: function(direction) {
@@ -152,7 +154,9 @@
 
     <script>
         $(document).ready(function() {
-            $('img#pro-img').data('zoom-image', $('img#pro-img').data('image')).ezPlus();
+            if ($(window).width() > 580) {
+                $('img#pro-img').data('zoom-image', $('img#pro-img').data('image')).ezPlus();
+            }
 
             $(document).mousemove(function(event) {
                 if ($('.add-to-wishlist').length) {
