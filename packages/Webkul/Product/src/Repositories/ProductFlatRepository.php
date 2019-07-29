@@ -44,10 +44,12 @@ class ProductFlatRepository extends Repository
      */
     public function getCategoryProductMaximumPrice($categoryId)
     {
-        return $this->model
-            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
-            ->where('product_categories.category_id', $categoryId)
-            ->max('price');
+        // return $this->model
+        //     ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+        //     ->where('product_categories.category_id', $categoryId)
+        //     ->max('price');
+
+        return $this->model->max('price');
     }
 
      /**
