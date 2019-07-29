@@ -61,7 +61,7 @@
             }
 
             if (! isset($field['options'])) {
-                $field['options'] = [['title' => 'No', 'value' => 0],['title' => 'Yes', 'value' => 1]];
+                $field['options'] = '';
             }
 
             $selectedOption = core()->getConfigData($name) ?? '';
@@ -73,7 +73,7 @@
             :validations = "'{{ $validations }}'"
             :depand = "'{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $depandField }}]'"
             :value = "'{{ $depandValue }}'"
-            :field_name = "'{{ $field['title'] }}'"
+            :field_name = "'{{ trans($field['title']) }}'"
             :channel_loacle = "'{{ $channel_locale }}'"
             :result = "'{{ $selectedOption }}'"
         ></depands>
@@ -400,10 +400,13 @@
             <span class="locale"> [@{{ channel_loacle }}] </span>
         </label>
 
-        <select v-validate= "validations" class="control" :id = "name" :name = "name" v-model="this.result"
+        <select v-if="this.options.length" v-validate= "validations" class="control" :id = "name" :name = "name" v-model="this.result"
         :data-vv-as="field_name">
             <option v-for='(option, index) in this.options' :value="option.value"> @{{ option.title }} </option>
         </select>
+
+        <input v-else type="text"  class="control" v-validate= "validations" :id = "name" :name = "name" v-model="this.result"
+        :data-vv-as="field_name">
 
         <span class="control-error" v-if="errors.has(name)">
             @{{ errors.first(name) }}
