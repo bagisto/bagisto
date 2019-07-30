@@ -1,3 +1,7 @@
+@php
+    $locale = Webkul\Core\Models\Locale::where('code', app()->getLocale())->first();
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 
@@ -30,7 +34,7 @@
 
 </head>
 
-<body @if (app()->getLocale() == 'ar') class="rtl" @endif style="scroll-behavior: smooth;">
+<body @if ($locale->direction == 'rtl') class="rtl" @endif style="scroll-behavior: smooth;">
 
     {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
