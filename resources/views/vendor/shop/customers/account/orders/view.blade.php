@@ -31,7 +31,7 @@
                     <tab name="{{ __('shop::app.customer.account.order.view.info') }}" :selected="true">
 
                         <?php
-                            $preOrderItemRepository = app('Webkul\SAASPreOrder\Repositories\PreOrderItemRepository');
+                            $preOrderItemRepository = app('Webkul\PreOrder\Repositories\PreOrderItemRepository');
 
                             $havePreOrderItems = $preOrderItemRepository->havePreOrderItems($order->id);
                         ?>
@@ -114,7 +114,7 @@
                                                                     </span>
                                                                 @endif
                                                             </div>
-                                                        @elseif ($preOrderItem = app('Webkul\SAASPreOrder\Repositories\PreOrderItemRepository')->resetScope()->findOneByField('payment_order_item_id', $item->id))
+                                                        @elseif ($preOrderItem = app('Webkul\PreOrder\Repositories\PreOrderItemRepository')->resetScope()->findOneByField('payment_order_item_id', $item->id))
                                                             <div class="pre-order-item-info">
                                                                 <span class="heading" @if($item->type == 'configurable')style="margin-top: 0"@endif>
                                                                     {{ __('preorder::app.shop.sales.orders.preorder-payment-information') }}
