@@ -396,7 +396,7 @@ return [
             'product-search-hint' => 'Start typing product name',
             'no-result-found' => 'Products not found with same name.',
             'searching' => 'Searching ...',
-            'channel' => 'Channel'
+            'channel' => 'Channels'
         ],
 
         'attributes' => [
