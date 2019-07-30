@@ -114,6 +114,7 @@ return [
         'code' => 'Code',
         'admin-name' => 'Name',
         'name' => 'Name',
+        'direction' => 'Direction',
         'fullname' => 'Full Name',
         'type' => 'Type',
         'required' => 'Required',
@@ -446,7 +447,8 @@ return [
             'swatch' => 'Swatch',
             'image' => 'Image',
             'file' => 'File',
-            'checkbox' => 'Checkbox'
+            'checkbox' => 'Checkbox',
+            'use_in_flat' => "Create in Product Flat Table"
         ],
         'families' => [
             'title' => 'Families',
@@ -561,6 +563,7 @@ return [
             'general' => 'General',
             'code' => 'Code',
             'name' => 'Name',
+            'direction' => 'Direction',
             'create-success' => 'Locale created successfully.',
             'update-success' => 'Locale updated successfully.',
             'delete-success' => 'Locale deleted successfully.',
