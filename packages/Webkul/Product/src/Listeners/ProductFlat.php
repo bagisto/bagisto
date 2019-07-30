@@ -169,7 +169,19 @@ class ProductFlat
         if ($parentProduct && ! array_key_exists($parentProduct->id, $superAttributes))
             $superAttributes[$parentProduct->id] = $parentProduct->super_attributes()->pluck('code')->toArray();
 
-        foreach (core()->getAllChannels() as $channel) {
+        if (isset($product['channels'])) {
+            foreach ($product['channels'] as $channel) {
+                $channels[] = app('Webkul\Core\Repositories\ChannelRepository')->findOrFail($channel);
+            }
+        } else if (isset($parentProduct['channels'])){
+            foreach ($parentProduct['channels'] as $channel) {
+                $channels[] = app('Webkul\Core\Repositories\ChannelRepository')->findOrFail($channel);
+            }
+        } else {
+            $channels[] = core()->getDefaultChannel();
+        }
+
+        foreach ($channels as $channel) {
             foreach ($channel->locales as $locale) {
                 $productFlat = $this->productFlatRepository->findOneWhere([
                     'product_id' => $product->id,
