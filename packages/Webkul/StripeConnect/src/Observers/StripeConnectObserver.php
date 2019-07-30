@@ -2,7 +2,7 @@
 
 namespace Webkul\StripeConnect\Observers;
 
-use Webkul\SAASCustomizer\Models\StripeConnect\StripeConnect;
+use Webkul\StripeConnect\Models\StripeConnect;
 
 use Company;
 

@@ -89,8 +89,10 @@
                     //mount the elements to stripe payment form
                     var cardNumber = elements.create('cardNumber', { style: styles });
                     cardNumber.mount('#card-number');
+
                     var cardExpiry = elements.create('cardExpiry', { style: styles });
                     cardExpiry.mount('#card-expiry');
+
                     var cardCvc = elements.create('cardCvc', { style: styles });
                     cardCvc.mount('#card-cvc');
 
@@ -100,8 +102,12 @@
 
                         if (event.error) {
                             displayError.textContent = event.error.message;
+
+                            document.getElementById('stripe-pay-button').setAttribute("disabled", "");
                         } else {
                             displayError.textContent = '';
+
+                            document.getElementById('stripe-pay-button').removeAttribute("disabled", "");
                         }
                     });
 
@@ -111,8 +117,26 @@
 
                         if (event.error) {
                             displayError.textContent = event.error.message;
+
+                            document.getElementById('stripe-pay-button').setAttribute("disabled", "");
                         } else {
                             displayError.textContent = '';
+
+                            document.getElementById('stripe-pay-button').removeAttribute("disabled", "");
+                        }
+                    });
+
+                    cardCvc.addEventListener('change', function(event) {
+                        var displayError = document.getElementById('card-cvc-error');
+
+                        if (event.error) {
+                            displayError.textContent = event.error.message;
+
+                            document.getElementById('stripe-pay-button').setAttribute("disabled", "");
+                        } else {
+                            displayError.textContent = '';
+
+                            document.getElementById('stripe-pay-button').removeAttribute("disabled", "");
                         }
                     });
 
@@ -161,9 +185,12 @@
 
                     $('#stripe-payment-form').submit(function(event) {
                         event.preventDefault();
+
+                        document.getElementById('stripe-pay-button').setAttribute("disabled", "");
+
                         $('.stripe-block-modal').css({'z-index': '11'});
-                        $('.modal-overlay').css({'z-index': '10'});
-                        $('.cp-spinner').css({'display': '', 'z-index': '12', 'bottom': '120px'});
+                        // $('.modal-overlay').css({'z-index': '12'});
+                        // $('.cp-spinner').css({'display': '', 'z-index': '13', 'bottom': '120px'});
 
                         var result = stripe.createToken(cardNumber);
 
@@ -173,6 +200,8 @@
                                 var errorElement = document.getElementById('card-errors');
 
                                 errorElement.textContent = result.error.message;
+
+                                document.getElementById('stripe-pay-button').removeAttribute("disabled", "");
 
                                 return false;
                             } else {

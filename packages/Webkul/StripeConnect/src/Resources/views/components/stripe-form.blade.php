@@ -14,6 +14,8 @@
             <!-- Used to display card expiry date error -->
             <div class="stripe-errors" id="card-expiration-error" role="alert"></div>
 
+            <div class="stripe-errors" id="card-cvc-error" role="alert"></div>
+
             {{-- @if(auth()->guard('customer')->check())
                 <div class="control-group">
                     <span class="checkbox">
@@ -36,11 +38,11 @@
                 }
             @endphp
 
-            @if ($enableStripe ==0)
-                <span class="badge badge-md badge-danger">This seller ain't Stripe ready</span>
+            @if (! env('STRIPE_CLIENT_ID') || ! $enableStripe)
+                <span class="badge badge-md badge-danger">{{ __('stripe::app.not-ready') }}</span>
             @else
                 <button class="btn btn-primary btn-lg" id="stripe-pay-button" style="border-radius: 3px !important;">
-                    Pay Now
+                    {{ __('stripe::app.pay-now') }}
                 </button>
             @endif
         </div>

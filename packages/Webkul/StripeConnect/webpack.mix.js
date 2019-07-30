@@ -1,8 +1,11 @@
 const { mix } = require("laravel-mix");
 require("laravel-mix-merge-manifest");
 
-// var publicPath = 'publishable/assets';
-var publicPath = "../../../public/vendor/webkul/stripe/assets";
+if (mix.inProduction()) {
+    var publicPath = 'publishable/assets';
+} else {
+    var publicPath = "../../../public/vendor/webkul/stripe/assets";
+}
 
 mix.setPublicPath(publicPath).mergeManifest();
 mix.disableNotifications();

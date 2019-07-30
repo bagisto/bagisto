@@ -68,9 +68,9 @@ class SellerRegistrationController extends Controller
             ]);
 
             if ($result) {
-                session()->flash('success', 'Your Stripe account is successfully integrated with the platform');
+                session()->flash('success', trans('stripe::app.account-connected'));
             } else {
-                session()->flash('error', 'There was some problem in onboarding your account');
+                session()->flash('error', trans('stripe::app.problem-connecting'));
             }
         } else {
             session()->flash('error', request()->input('error_description'));

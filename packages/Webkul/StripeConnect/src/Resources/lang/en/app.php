@@ -1,7 +1,16 @@
 <?php
 
 return  [
+    'connect-stripe' => 'Connect Stripe',
+    'revoke-access' => 'Revoke Your Stripe Account Access',
+    'client-id-missing' => 'The client id has not been set up by admin for the platform.',
     'nameoncard' => 'Name on Card',
+    'click-here' => 'Click Here',
+    'not-ready' => 'This seller ain\'t Stripe ready',
+    'pay-now' => 'Pay Now',
+    'account-connected' => 'Your Stripe account is successfully integrated with the platform',
+    'problem-connecting' => 'There was some problem in onboarding your account',
+    'stripe-unavailable' => 'Stripe unavailable for this seller',
     'expirymonth' => 'Expiration Month',
     'expiryyear' => 'Expiration Year',
     'cvc' => 'CVC',

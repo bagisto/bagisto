@@ -24,7 +24,6 @@
         </div>
     @endif
 
-
     <div class="item-detail" id="discount-detail" @if ($cart->discount_amount && $cart->discount_amount > 0) style="display: block;" @else style="display: none;" @endif>
         <label>
             <b>{{ __('shop::app.checkout.total.disc-amount') }}</b>

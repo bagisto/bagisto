@@ -84,6 +84,11 @@ class StripeConnectController extends Controller
     protected $stripeConnect;
 
     /**
+     * Stripe commission beared
+     */
+    protected $stripeFeeBearer;
+
+    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Attribute\Repositories\OrderRepository  $orderRepository
@@ -112,6 +117,8 @@ class StripeConnectController extends Controller
         $this->stripeLivePublishableKey = env('STRIPE_LIVE_PUBLISHABLE_KEY');
 
         $this->stripeLiveSecretKey = env('STRIPE_LIVE_SECRET_KEY');
+
+        $this->stripeFeeBearer = $this->stripeFeeBearer;
 
         if (config('stripe.connect.details.statementdescriptor')) {
             $this->statementDescriptor = config('stripe.connect.details.statementdescriptor');
@@ -207,6 +214,42 @@ class StripeConnectController extends Controller
 
     public function createCharge()
     {
+        $result = $this->getCharge();
+
+        $this->stripeCart->deleteWhere([
+            'cart_id' => \Cart::getCart()->id
+        ]);
+
+        if ($result) {
+            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+
+            Cart::deActivateCart();
+
+            session()->flash('order', $order);
+
+            return redirect()->route('shop.checkout.success');
+        } else {
+            session()->flash('error', trans('stripe::app.payment-failed'));
+
+            return redirect()->route('shop.home.index');
+        }
+
+        return redirect()->route('shop.home.index');
+    }
+
+    public function deleteCard()
+    {
+        $deleteIfFound = $this->stripeRepository->findWhere([
+            'id' => request()->input('id'),
+            'customer_id' => auth()->guard('customer')->user()->id]);
+
+        $result = $deleteIfFound->first()->delete();
+
+        return (string)$result;
+    }
+
+    public function getCharge()
+    {
         $stripeConnect = $this->stripeConnect->findWhere([
             'company_id' => \Company::getCurrent()->id
         ]);
@@ -214,7 +257,7 @@ class StripeConnectController extends Controller
         if ($stripeConnect->count()) {
             $sellerUserId = $stripeConnect->first()->stripe_user_id;
         } else {
-            session()->flash('warning', 'Stripe unavailable for this seller');
+            session()->flash('warning', trans('stripe::app.stripe-unavailable'));
 
             return redirect()->route('shop.checkout.success');
         }
@@ -249,60 +292,123 @@ class StripeConnectController extends Controller
             $stripeToken = $stripeCard->stripeToken;
         }
 
-        try {
-            $cart = Cart::getCart();
+        $cart = Cart::getCart();
 
-            if(Cart::getCart()->base_currency_code == 'YEN' ||Cart::getCart()->base_currency_code == 'yen') {
-                $result = StripeCharge::create ([
-                    "amount" => Cart::getCart()->base_grand_total,
+        try {
+            if ($this->stripeFeeBearer == "seller" || $this->stripeFeeBearer == null) {
+                $baseGrandTotal = $cart->base_grand_total;
+
+                // admin or owner commission
+                $ownerCommissionRate = env('STRIPE_ADMIN_COMMISSION') ?? 0.0;
+                $ownerCommission = $baseGrandTotal * $ownerCommissionRate;
+
+                $applicationFee = round($ownerCommission, 2) * 100;
+
+                $result = StripeCharge::create([
+                    "amount" => round(Cart::getCart()->base_grand_total - $applicationFee, 2) * 100,
                     "currency" => Cart::getCart()->base_currency_code,
                     "source" => $stripeToken,
                     "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
-                    'application_fee_amount' => $applicationFee * 100,
-                    'statement_descriptor' => $this->statementDescriptor,
+                    "application_fee_amount" => $applicationFee,
+                    "statement_descriptor" => $this->statementDescriptor
                 ], [
-                    'stripe_account' => '{{'.$sellerUserId.'}}'
+                    "stripe_account" => $sellerUserId
                 ]);
             } else {
-                if (core()->getConfigData('stripe.connect.details.stripefees') == "seller" || core()->getConfigData('stripe.connect.details.stripefees') == null) {
-                    $applicationFee = $cart->base_grand_total;
-                    $applicationFee = (0.029 * $applicationFee) + (0.02 * $applicationFee) + 0.3;
+                $baseGrandTotal = $cart->base_grand_total;
 
-                    $result = StripeCharge::create([
-                        "amount" => round(Cart::getCart()->base_grand_total, 2) * 100,
-                        "currency" => Cart::getCart()->base_currency_code,
-                        "source" => $stripeToken,
-                        "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
-                        'application_fee_amount' => round($applicationFee, 2) * 100,
-                        'statement_descriptor' => $this->statementDescriptor,
-                    ], [
-                        'stripe_account' => $sellerUserId
-                    ]);
-                } else {
-                    $applicationFee = $cart->base_grand_total;
-                    $applicationFee = (0.029 * $applicationFee) + (0.02 * $applicationFee) + 0.3;
-                    $applicationFee1 = 0.02 * ($applicationFee + $cart->base_grand_total);
+                // admin's or owner's commission
+                $ownerCommissionRate = env('STRIPE_ADMIN_COMMISSION') ?? 0.0;
+                $ownerCommission = $baseGrandTotal * $ownerCommissionRate;
 
-                    $cart->update([
-                        'base_grand_total' => $cart->grand_total + $applicationFee,
-                        'grand_total' => $cart->grand_total + core()->convertPrice($applicationFee, $cart->cart_currency_code)
-                    ]);
+                $applicationFee = round($ownerCommission, 2) * 100;
 
-                    $result = StripeCharge::create([
-                        "amount" => round(Cart::getCart()->base_grand_total, 2) * 100,
-                        "currency" => Cart::getCart()->base_currency_code,
-                        "source" => $stripeToken,
-                        "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
-                        'application_fee_amount' => round($applicationFee1, 2) * 100,
-                        'statement_descriptor' => $this->statementDescriptor,
-                    ], [
-                        'stripe_account' => $sellerUserId
-                    ]);
-                }
+                $cart->update([
+                    'base_grand_total' => $cart->grand_total + $applicationFee,
+                    'grand_total' => $cart->grand_total + core()->convertPrice($applicationFee, $cart->cart_currency_code)
+                ]);
+
+                $result = StripeCharge::create([
+                    "amount" => round(Cart::getCart()->base_grand_total + $applicationFee, 2) * 100,
+                    "currency" => Cart::getCart()->base_currency_code,
+                    "source" => $stripeToken,
+                    "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
+                    "application_fee_amount" => $applicationFee,
+                    "statement_descriptor" => $this->statementDescriptor
+                ], [
+                    "stripe_account" => $sellerUserId
+                ]);
             }
 
-        } catch(\Exception $e) {
-            if (core()->getConfigData('stripe.connect.details.stripefees') == "customer") {
+        } catch(\Stripe\Error\Card $e) {
+            if ($this->stripeFeeBearer == "customer") {
+                $cart->update([
+                    'base_grand_total' => $cart->grand_total - $applicationFee,
+                    'grand_total' => $cart->grand_total - core()->convertPrice($applicationFee, $cart->cart_currency_code)
+                ]);
+            }
+
+            $result = false;
+        } catch (\Stripe\Error\RateLimit $e) {
+        // Too many requests made to the API too quickly
+            if ($this->stripeFeeBearer == "customer") {
+                $cart->update([
+                    'base_grand_total' => $cart->grand_total - $applicationFee,
+                    'grand_total' => $cart->grand_total - core()->convertPrice($applicationFee, $cart->cart_currency_code)
+                ]);
+            }
+
+            $result = false;
+        } catch (\Stripe\Error\InvalidRequest $e) {
+        // Invalid parameters were supplied to Stripe's API
+
+            if ($this->stripeFeeBearer == "customer") {
+                $cart->update([
+                    'base_grand_total' => $cart->grand_total - $applicationFee,
+                    'grand_total' => $cart->grand_total - core()->convertPrice($applicationFee, $cart->cart_currency_code)
+                ]);
+            }
+
+            $result = false;
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+
+            if ($this->stripeFeeBearer == "customer") {
+                $cart->update([
+                    'base_grand_total' => $cart->grand_total - $applicationFee,
+                    'grand_total' => $cart->grand_total - core()->convertPrice($applicationFee, $cart->cart_currency_code)
+                ]);
+            }
+
+            $result = false;
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+
+            if ($this->stripeFeeBearer == "customer") {
+                $cart->update([
+                    'base_grand_total' => $cart->grand_total - $applicationFee,
+                    'grand_total' => $cart->grand_total - core()->convertPrice($applicationFee, $cart->cart_currency_code)
+                ]);
+            }
+
+            $result = false;
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+
+            if ($this->stripeFeeBearer == "customer") {
+                $cart->update([
+                    'base_grand_total' => $cart->grand_total - $applicationFee,
+                    'grand_total' => $cart->grand_total - core()->convertPrice($applicationFee, $cart->cart_currency_code)
+                ]);
+            }
+
+            $result = false;
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+
+            if ($this->stripeFeeBearer == "customer") {
                 $cart->update([
                     'base_grand_total' => $cart->grand_total - $applicationFee,
                     'grand_total' => $cart->grand_total - core()->convertPrice($applicationFee, $cart->cart_currency_code)
@@ -312,60 +418,6 @@ class StripeConnectController extends Controller
             $result = false;
         }
 
-        // catch(\Stripe\Error\Card $e) {
-        //     // Since it's a decline, \Stripe\Error\Card will be caught
-        //     $body = $e->getJsonBody();
-        //     $err  = $body['error'];
-
-        //     print('Status is:' . $e->getHttpStatus() . "\n");
-        //     print('Type is:' . $err['type'] . "\n");
-        //     print('Code is:' . $err['code'] . "\n");
-        //     // param is '' in this case
-        //     print('Param is:' . $err['param'] . "\n");
-        //     print('Message is:' . $err['message'] . "\n");
-        //   } catch (\Stripe\Error\RateLimit $e) {
-        //     // Too many requests made to the API too quickly
-        //   } catch (\Stripe\Error\InvalidRequest $e) {
-        //     // Invalid parameters were supplied to Stripe's API
-        //   } catch (\Stripe\Error\Authentication $e) {
-        //     // Authentication with Stripe's API failed
-        //     // (maybe you changed API keys recently)
-        //   } catch (\Stripe\Error\ApiConnection $e) {
-        //     // Network communication with Stripe failed
-        //   } catch (\Stripe\Error\Base $e) {
-        //     // Display a very generic error to the user, and maybe send
-        //     // yourself an email
-        //   } catch (Exception $e) {
-        //     // Something else happened, completely unrelated to Stripe
-        //   }
-
-        $this->stripeCart->deleteWhere([
-            'cart_id' => \Cart::getCart()->id
-        ]);
-
-        if ($result) {
-            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
-
-            Cart::deActivateCart();
-
-            session()->flash('order', $order);
-
-            return redirect()->route('shop.checkout.success');
-        } else {
-            session()->flash('error', trans('stripe::app.payment-failed'));
-
-            return redirect()->route('shop.home.index');
-        }
-
-        return redirect()->route('shop.home.index');
-    }
-
-    public function deleteCard()
-    {
-        $deleteIfFound = $this->stripeRepository->findWhere(['id' => request()->input('id'), 'customer_id' => auth()->guard('customer')->user()->id]);
-
-        $result = $deleteIfFound->first()->delete();
-
-        return (string)$result;
+        return $result;
     }
 }

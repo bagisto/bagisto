@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>calender copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="calender-copy-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(1.000000, 1.000000)" fill-rule="nonzero">
+            <rect id="Rectangle-4" stroke="#2F2F2F" x="0.5" y="0.5" width="15" height="15" rx="7.5"></rect>
+            <path d="M8.70710678,8 L10.8284271,10.1213203 C11.0236893,10.3165825 11.0236893,10.633165 10.8284271,10.8284271 C10.633165,11.0236893 10.3165825,11.0236893 10.1213203,10.8284271 L8,8.70710678 L5.87867966,10.8284271 C5.68341751,11.0236893 5.36683502,11.0236893 5.17157288,10.8284271 C4.97631073,10.633165 4.97631073,10.3165825 5.17157288,10.1213203 L7.29289322,8 L5.17157288,5.87867966 C4.97631073,5.68341751 4.97631073,5.36683502 5.17157288,5.17157288 C5.36683502,4.97631073 5.68341751,4.97631073 5.87867966,5.17157288 L8,7.29289322 L10.1213203,5.17157288 C10.3165825,4.97631073 10.633165,4.97631073 10.8284271,5.17157288 C11.0236893,5.36683502 11.0236893,5.68341751 10.8284271,5.87867966 L8.70710678,8 Z" id="Combined-Shape" fill="#2F2F2F"></path>
+        </g>
+    </g>
+</svg>
