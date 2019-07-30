@@ -98,7 +98,7 @@
             "Webkul\\CustomerCreditMax\\": "packages/Webkul/CustomerCreditMax",
             "Webkul\\CustomerGroupCatalog\\": "packages/Webkul/CustomerGroupCatalog",
             "Webkul\\ShowPriceAfterLogin\\": "packages/Webkul/ShowPriceAfterLogin/src",
-            "Webkul\\SAASPreOrder\\": "packages/Webkul/SAASPreOrder/src"
+            "Webkul\\PreOrder\\": "packages/Webkul/PreOrder/src"
         }
     },
     "autoload-dev": {

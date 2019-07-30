@@ -11,7 +11,7 @@ $documents = $customerDocumentRepository->findWhere(['customer_id' => $customer-
 
     <style>
         .modal-container {
-        top: 20px !important;
+            top: 20px !important;
         }
     </style>
 @stop
@@ -71,7 +71,7 @@ $documents = $customerDocumentRepository->findWhere(['customer_id' => $customer-
 
             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                 <label for="name" class="required">{{ __('customerdocument::app.admin.customers.name') }}</label>
-                <input v-validate="'required|alpha_spaces'" type="text" class="control" id="name" name="name" data-vv-as="&quot;{{ __('customerdocument::app.admin.customers.name') }}&quot;" value="{{ old('name') }}" />
+                <input v-validate="'required'" type="text" class="control" id="name" name="name" data-vv-as="&quot;{{ __('customerdocument::app.admin.customers.name') }}&quot;" value="{{ old('name') }}"/>
                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
             </div>
 

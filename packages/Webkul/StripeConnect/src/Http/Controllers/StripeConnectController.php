@@ -300,16 +300,16 @@ class StripeConnectController extends Controller
 
                 // admin or owner commission
                 $ownerCommissionRate = env('STRIPE_ADMIN_COMMISSION') ?? 0.0;
-                $ownerCommission = $baseGrandTotal * $ownerCommissionRate;
+                $ownerCommission = ($baseGrandTotal * $ownerCommissionRate) / 100;
 
-                $applicationFee = round($ownerCommission, 2) * 100;
+                $applicationFee = round($ownerCommission, 2);
 
                 $result = StripeCharge::create([
                     "amount" => round(Cart::getCart()->base_grand_total - $applicationFee, 2) * 100,
                     "currency" => Cart::getCart()->base_currency_code,
                     "source" => $stripeToken,
                     "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
-                    "application_fee_amount" => $applicationFee,
+                    "application_fee_amount" => $applicationFee * 100,
                     "statement_descriptor" => $this->statementDescriptor
                 ], [
                     "stripe_account" => $sellerUserId
@@ -319,9 +319,9 @@ class StripeConnectController extends Controller
 
                 // admin's or owner's commission
                 $ownerCommissionRate = env('STRIPE_ADMIN_COMMISSION') ?? 0.0;
-                $ownerCommission = $baseGrandTotal * $ownerCommissionRate;
+                $ownerCommission = ($baseGrandTotal * $ownerCommissionRate) / 100;
 
-                $applicationFee = round($ownerCommission, 2) * 100;
+                $applicationFee = round($ownerCommission, 2);
 
                 $cart->update([
                     'base_grand_total' => $cart->grand_total + $applicationFee,
@@ -333,7 +333,7 @@ class StripeConnectController extends Controller
                     "currency" => Cart::getCart()->base_currency_code,
                     "source" => $stripeToken,
                     "description" => "Purchased ".Cart::getCart()->items_count." items on ".config('app.name'),
-                    "application_fee_amount" => $applicationFee,
+                    "application_fee_amount" => $applicationFee * 100,
                     "statement_descriptor" => $this->statementDescriptor
                 ], [
                     "stripe_account" => $sellerUserId

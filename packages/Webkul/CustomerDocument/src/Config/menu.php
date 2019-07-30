@@ -6,7 +6,7 @@ return [
         'name' => 'customerdocument::app.admin.customers.documents',
         'route' => 'admin.documents.index',
         'sort' => 6,
-        'icon-class' => 'document-icon',
+        'icon-class' => 'sales-icon',
     ], [
         'key' => 'documents.files',
         'name' => 'customerdocument::app.admin.documents.b2b-files',

@@ -251,7 +251,7 @@ return [
         Webkul\StripeConnect\Providers\StripeConnectServiceProvider::class,
         Webkul\ShowPriceAfterLogin\Providers\ShowPriceAfterLoginServiceProvider::class,
         Webkul\CustomerCreditMax\Providers\CustomerCreditMaxServiceProvider::class,
-        Webkul\SAASPreOrder\Providers\SAASPreOrderServiceProvider::class,
+        Webkul\PreOrder\Providers\PreOrderServiceProvider::class,
         Webkul\SAASCustomizer\Providers\SAASCustomizerServiceProvider::class,
         Webkul\CustomerGroupCatalog\Providers\CustomerGroupCatalogServiceProvider::class
     ],

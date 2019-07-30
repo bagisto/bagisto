@@ -23,7 +23,6 @@ class CategoryRepository extends BaseCategoryRepository
         return $this->getModel()->join('category_translations', function ($join) {
                 $join->on('categories.id', 'category_translations.category_id')
                     ->where('category_translations.locale', app()->getLocale())
-                    ->where('categories.parent_id', '!=', null)
                     ->where('category_translations.name', 'like', '%' . urldecode(request()->input('query')) . '%');
             })
             ->select('categories.*')
@@ -55,44 +54,14 @@ class CategoryRepository extends BaseCategoryRepository
 
             $categoryIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->findOneByField('code', 'guest')->categories()->pluck('id')->toArray();
 
-            foreach ($categories as $category) {
-                $parentCategoryIds[] = $category->id;
-                $parentCategory = $this->getParentCategory($category->parent_id);
-
-                $result = array_merge($parentCategoryIds, $parentCategory);
-                $count = 0;
-                foreach($result as $cat) {
-                    if (in_array($cat, $categoryIds)) {
-                        $count++;
-                    }
-                }
-
-                if (count($result) == $count) {
-                    $showCategories[] = $category->id;
-                }
-            }
+            $showCategories = $this->getShowAbleCatyegory($categories, $categoryIds);
         } else {
             if ($customer->group) {
                 $categories = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->find($customer->group->id)->categories()->get();
 
                 $categoryIds = app('Webkul\CustomerGroupCatalog\Repositories\CustomerGroupRepository')->find($customer->group->id)->categories()->pluck('id')->toArray();
 
-                foreach ($categories as $category) {
-                    $parentCategoryIds[] = $category->id;
-                    $parentCategory = $this->getParentCategory($category->parent_id);
-
-                    $result = array_merge($parentCategoryIds, $parentCategory);
-                    $count = 0;
-                    foreach($result as $cat) {
-                        if (in_array($cat, $categoryIds)) {
-                            $count++;
-                        }
-                    }
-
-                    if (count($result) == $count) {
-                        $showCategories[] = $category->id;
-                    }
-                }
+                $showCategories = $this->getShowAbleCatyegory($categories, $categoryIds);
             }
         }
 
@@ -112,6 +81,35 @@ class CategoryRepository extends BaseCategoryRepository
     }
 
     /**
+     * get show able category
+     *
+     * @param integer array
+     * @return array
+     */
+    public function getShowAbleCatyegory($categories, $categoryIds) {
+        $showCategories = [];
+
+        foreach ($categories as $category) {
+            $parentCategoryIds[] = $category->id;
+            $parentCategory = $this->getParentCategory($category->parent_id);
+
+            $result = array_merge($parentCategoryIds, $parentCategory);
+            $count = 0;
+            foreach($result as $cat) {
+                if (in_array($cat, $categoryIds)) {
+                    $count++;
+                }
+            }
+
+            if (count($result) == $count) {
+                $showCategories[] = $category->id;
+            }
+        }
+
+        return $showCategories;
+    }
+
+    /**
      * get parent category
      *
      * @param integer $id
@@ -122,7 +120,7 @@ class CategoryRepository extends BaseCategoryRepository
         $parentCategory = $this->getModel()->where('id', $parentId)->first();
 
         if ($parentCategory->parent_id != null) {
-            $parentCategories[] = $parentCategory->id;
+            $parentCategories[] = array_push($parentCategories, $parentCategory->id);
             $this->getParentCategory($parentCategory->parent_id);
         }
 

@@ -21,6 +21,6 @@ return [
         \Webkul\User\Providers\ModuleServiceProvider::class,
         \Webkul\Discount\Providers\ModuleServiceProvider::class,
         \Webkul\StripeConnect\Providers\ModuleServiceProvider::class,
-        \Webkul\SAASPreOrder\Providers\ModuleServiceProvider::class
+        \Webkul\PreOrder\Providers\ModuleServiceProvider::class
     ]
 ];
