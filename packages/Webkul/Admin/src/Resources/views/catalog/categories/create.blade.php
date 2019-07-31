@@ -136,6 +136,23 @@
 
                     @endif
 
+                    <accordian :title="'{{ __('admin::app.catalog.categories.filterable-attributes') }}'" :active="true">
+                        <div slot="body">
+                            <div class="control-group" :class="[errors.has('attributes[]') ? 'has-error' : '']">
+                                <label for="attributes" class="required">{{ __('admin::app.catalog.categories.attributes') }}</label>
+                                <select class="control" name="attributes[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.catalog.categories.attributes') }}&quot;" multiple>
+                                    @foreach ($attributes as $attribute)
+                                        <option value="{{ $attribute->id }}">
+                                            {{ $attribute->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <span class="control-error" v-if="errors.has('attributes[]')">
+                                    @{{ errors.first('attributes[]') }}
+                                </span>
+                            </div>
+                        </div>
+                    </accordian>
 
                     {!! view_render_event('bagisto.admin.catalog.category.create_form_accordian.seo.before') !!}
 

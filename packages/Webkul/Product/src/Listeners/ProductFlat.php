@@ -104,6 +104,7 @@ class ProductFlat
     public function afterAttributeCreatedUpdated($attribute)
     {
         if (! $attribute->is_user_defined || ! $attribute->use_in_flat) {
+            $this->afterAttributeDeleted($attribute->id);
             return false;
         }
 

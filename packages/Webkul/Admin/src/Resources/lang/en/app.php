@@ -449,7 +449,7 @@ return [
             'image' => 'Image',
             'file' => 'File',
             'checkbox' => 'Checkbox',
-            'use_in_flat' => "Create in Product Flat Table"
+            'use_in_flat' => "Create in Product Flat Table",
         ],
         'families' => [
             'title' => 'Families',
@@ -493,6 +493,8 @@ return [
             'meta_description' => 'Meta Description',
             'meta_keywords' => 'Meta Keywords',
             'image' => 'Image',
+            'filterable-attributes' => 'Filterable Attributes',
+            'attributes' => 'Attributes',
         ]
     ],
 
