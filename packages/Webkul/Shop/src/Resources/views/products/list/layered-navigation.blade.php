@@ -2,24 +2,26 @@
 
 @inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
 
-@inject ('productAttributeValueRepository', 'Webkul\Product\Repositories\ProductAttributeValueRepository')
-
 <?php
     $filterAttributes = [];
 
     if (isset($category)) {
-        $categoryProductAttributes = $productFlatRepository->getCategoryProductAttribute($category->id);
+        if (count($category->filterableAttributes) > 0) {
+            $filterAttributes = $category->filterableAttributes;
+        } else {
+            $categoryProductAttributes = $productFlatRepository->getCategoryProductAttribute($category->id);
 
-        if ($categoryProductAttributes) {
-            foreach ($attributeRepository->getFilterAttributes() as $filterAttribute) {
-                if (in_array($filterAttribute->id, $categoryProductAttributes)) {
-                    $filterAttributes[] = $filterAttribute;
-                } else  if ($filterAttribute ['code'] == 'price') {
-                    $filterAttributes[] = $filterAttribute;
+            if ($categoryProductAttributes) {
+                foreach ($attributeRepository->getFilterAttributes() as $filterAttribute) {
+                    if (in_array($filterAttribute->id, $categoryProductAttributes)) {
+                        $filterAttributes[] = $filterAttribute;
+                    } else  if ($filterAttribute ['code'] == 'price') {
+                        $filterAttributes[] = $filterAttribute;
+                    }
                 }
-            }
 
-            $filterAttributes = collect($filterAttributes);
+                $filterAttributes = collect($filterAttributes);
+            }
         }
     } else {
         $filterAttributes = $attributeRepository->getFilterAttributes();

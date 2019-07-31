@@ -260,6 +260,10 @@ class ProductRepository extends Repository
             $this->productImage->uploadImages($data, $product);
         }
 
+        if (isset($data['channels'])) {
+            $product['channels'] = $data['channels'];
+        }
+
         Event::fire('catalog.product.update.after', $product);
 
         return $product;
