@@ -155,7 +155,7 @@
                                 <select class="control" name="attributes[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.catalog.categories.attributes') }}&quot;" multiple>
                                     @foreach ($attributes as $attribute)
                                         <option value="{{ $attribute->id }}" {{ in_array($attribute->id, $category->filterableAttributes->pluck('id')->toArray()) ? 'selected' : ''}}>
-                                            {{ $attribute->name }}
+                                            {{ $attribute->name ? $attribute->name : $attribute->admin_name }}
                                         </option>
                                     @endforeach
                                 </select>

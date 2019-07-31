@@ -143,7 +143,7 @@
                                 <select class="control" name="attributes[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.catalog.categories.attributes') }}&quot;" multiple>
                                     @foreach ($attributes as $attribute)
                                         <option value="{{ $attribute->id }}">
-                                            {{ $attribute->name }}
+                                            {{ $attribute->name ? $attribute->name : $attribute->admin_name }}
                                         </option>
                                     @endforeach
                                 </select>
