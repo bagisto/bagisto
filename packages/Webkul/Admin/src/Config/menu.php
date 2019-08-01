@@ -188,7 +188,7 @@ return [
         'route' => 'admin.cart-rule.index',
         'sort' => 1,
         'icon-class' => '',
-    ]
+    ],
     // , [
     //     'key' => 'promotions.catalog-rule',
     //     'name' => 'admin::app.promotion.catalog-rule',
@@ -196,4 +196,17 @@ return [
     //     'sort' => 1,
     //     'icon-class' => '',
     // ]
+    [
+        'key' => 'cms',
+        'name' => 'admin::app.layouts.cms',
+        'route' => 'admin.cms.index',
+        'sort' => 6,
+        'icon-class' => 'promotion-icon',
+    ], [
+        'key' => 'cms.pages',
+        'name' => 'admin::app.cms.pages.pages',
+        'route' => 'admin.cms.index',
+        'sort' => 1,
+        'icon-class' => '',
+    ]
 ];

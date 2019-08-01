@@ -4078,3 +4078,31 @@ section.review {
         }
     }
 }
+
+// Static content pages layout
+.static-container {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &.one-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    &.two-column {
+        display: grid;
+        grid-template-columns: 48% 48%;
+        grid-column-gap: 4%;
+    }
+
+    &.three-column {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-column-gap: 4%;
+    }
+}

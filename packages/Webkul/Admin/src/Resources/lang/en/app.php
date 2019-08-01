@@ -41,7 +41,8 @@ return [
         'tax-categories' => 'Tax Categories',
         'tax-rates' => 'Tax Rates',
         'promotion' => 'Promotions',
-        'discount' => 'Discount'
+        'discount' => 'Discount',
+        'cms' => 'CMS'
     ],
 
     'acl' => [
@@ -126,6 +127,8 @@ return [
         'email' => 'Email',
         'group' => 'Group',
         'title' => 'Title',
+        'layout' => 'Layout',
+        'url-key' => 'URL Key',
         'comment' => 'Comment',
         'product-name' => 'Product',
         'currency-name' => 'Currency Name',
@@ -969,6 +972,31 @@ return [
         'file-type' => 'csv, xls, xlsx.',
         'no-records' => 'Nothing to export',
         'illegal-format' => 'Error! This type of format is either not supported or its illegal format'
+    ],
+
+    'cms' => [
+        'pages' => [
+            'pages' => 'Page',
+            'title' => 'pages',
+            'add-title' => 'Add Page',
+            'content' => 'Content',
+            'url-key' => 'URL Key',
+            'create-btn-title' => 'Add Page',
+            'edit-title' => 'Edit Page',
+            'edit-btn-title' => 'Edit Page',
+            'create-success' => 'Page created successfully',
+            'create-failure' => 'Page cannot be created',
+            'update-success' => 'Page updated successfully',
+            'update-failure' => 'Page cannot be updated',
+            'page-title' => 'Page Title',
+            'layout' => 'Layout',
+            'meta_keywords' => 'Meta Keywords',
+            'meta_description' => 'Meta Description',
+            'meta_title' => 'Meta Title',
+            'delete-success' => 'CMS page deleted successfully',
+            'delete-failure' => 'CMS page cannot be deleted',
+            'preview' => 'Preview'
+        ]
     ],
 
     'response' => [
