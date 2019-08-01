@@ -89,7 +89,7 @@ class SellerRegistrationController extends Controller
         $result = $client->post('https://connect.stripe.com/oauth/deauthorize', [
             'auth' => [env('STRIPE_TEST_SECRET_KEY'), ''],
             'form_params' => [
-                'client_id' => core()->getConfigData('stripe.connect.details.clientid'),
+                'client_id' => env('STRIPE_CLIENT_ID'),
                 'stripe_user_id' => $stripeConnectDetails->stripe_user_id
             ]
         ]);
@@ -97,7 +97,7 @@ class SellerRegistrationController extends Controller
         if ($result->getStatusCode() == 200) {
             $stripeConnectDetails->delete();
 
-            session()->flash('info', 'Your stripe account has been successfully revoked from the platform');
+            session()->flash('info', trans('stripe::app.revoke-success'));
         } else {
             session()->flash('error', $result->getBody());
         }
