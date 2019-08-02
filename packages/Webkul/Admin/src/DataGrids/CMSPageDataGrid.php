@@ -19,7 +19,7 @@ class CMSPageDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('cms_pages')->select('id', 'url_key', 'layout');
+        $queryBuilder = DB::table('cms_pages')->select('id', 'url_key', 'page_title');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -45,19 +45,12 @@ class CMSPageDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'layout',
-            'label' => trans('admin::app.datagrid.layout'),
+            'index' => 'page_title',
+            'label' => trans('admin::app.cms.pages.page-title'),
             'type' => 'string',
             'searchable' => true,
             'sortable' => true,
-            'filterable' => true,
-            'wrapper' => function($row) {
-                foreach(config('cms') as $key => $value) {
-                    if ($row->layout == $value) {
-                        return $key;
-                    }
-                }
-            }
+            'filterable' => true
         ]);
     }
 

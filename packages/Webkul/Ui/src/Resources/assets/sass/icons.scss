@@ -39,6 +39,11 @@
     background-image: url("../images/icon-promotion.svg");
 }
 
+.cms-icon {
+    @extend %menu-properties;
+    background-image: url('../images/Icon-CMS.svg');
+}
+
 .angle-right-icon {
     background-image: url("../images/Angle-Right.svg");
     width: 17px;
@@ -258,6 +263,11 @@
 
     .promotion-icon {
         background-image: url("../images/icon-promotion-active.svg");
+    }
+
+    .cms-icon {
+        @extend %menu-properties;
+        background-image: url('../images/Icon-CMS-Active.svg');
     }
 
     > .arrow-down-icon {

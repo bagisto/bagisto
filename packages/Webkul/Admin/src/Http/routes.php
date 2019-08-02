@@ -683,7 +683,7 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::cms.index'
                 ])->name('admin.cms.index');
 
-                Route::get('preview', 'Webkul\CMS\Http\Controllers\Admin\PageController@preview')->name('admin.cms.preview');
+                Route::get('preview/{url_key}', 'Webkul\CMS\Http\Controllers\Admin\PageController@preview')->name('admin.cms.preview');
 
                 Route::get('create', 'Webkul\CMS\Http\Controllers\Admin\PageController@create')->defaults('_config', [
                     'view' => 'admin::cms.create'

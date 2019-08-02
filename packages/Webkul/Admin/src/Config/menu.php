@@ -201,7 +201,7 @@ return [
         'name' => 'admin::app.layouts.cms',
         'route' => 'admin.cms.index',
         'sort' => 6,
-        'icon-class' => 'promotion-icon',
+        'icon-class' => 'cms-icon',
     ], [
         'key' => 'cms.pages',
         'name' => 'admin::app.cms.pages.pages',

@@ -995,7 +995,11 @@ return [
             'meta_title' => 'Meta Title',
             'delete-success' => 'CMS page deleted successfully',
             'delete-failure' => 'CMS page cannot be deleted',
-            'preview' => 'Preview'
+            'preview' => 'Preview',
+            'one-col' => '<div class="mt-10">Use class: <b>"static-container one-column"</b> for one column layout.</div>',
+            'two-col' => '<div class="mt-10">Use class: <b>"static-container two-column"</b> for two column layout.</div>',
+            'three-col' => '<div class="mt-10">Use class: <b>"static-container three-column"</b> for three column layout.</div>',
+            'helper-classes' => 'Helper Classes'
         ]
     ],
 

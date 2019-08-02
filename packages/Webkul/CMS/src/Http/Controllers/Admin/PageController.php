@@ -38,6 +38,11 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
     public function __construct(Channel $channel, Locale $locale, CMS $cms)
     {
         /**
+         * Pass the class instance through admin middleware
+         */
+        $this->middleware('auth:admin');
+
+        /**
          * Channel repository instance
          */
         $this->channel = $channel;
@@ -84,8 +89,7 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
             'channel' => 'required|string',
             'locale' => 'required|string',
             'url_key' => 'required|unique:cms_pages,url_key',
-            'layout' => 'required|string',
-            'content' => 'required|string',
+            'html_content' => 'required|string',
             'page_title' => 'required|string',
             'meta_title' => 'required|string',
             'meta_description' => 'string',
@@ -94,14 +98,8 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
 
         $data = request()->all();
 
-        $content = $data['content'];
-        $pageTitle = $data['page_title'];
-
-        unset($data['content']);
-        unset($data['page_title']);
-
-        $data['content']['html'] = $content;
-        $data['content']['page_title'] = $pageTitle;
+        $data['content']['html'] = $data['html_content'];
+        $data['content']['page_title'] = $data['page_title'];
         $data['content']['meta_keywords'] = $data['meta_keywords'];
         $data['content']['meta_title'] = $data['meta_title'];
         $data['content']['meta_description'] = $data['meta_description'];
@@ -144,8 +142,7 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
             'channel' => 'required|string',
             'locale' => 'required|string',
             'url_key' => 'required|unique:cms_pages,url_key,'.$id,
-            'layout' => 'required|string',
-            'content' => 'required|string',
+            'html_content' => 'required|string',
             'page_title' => 'required|string',
             'meta_title' => 'required|string',
             'meta_description' => 'string',
@@ -154,14 +151,8 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
 
         $data = request()->all();
 
-        $content = $data['content'];
-        $pageTitle = $data['page_title'];
-
-        unset($data['content']);
-        unset($data['page_title']);
-
-        $data['content']['html'] = $content;
-        $data['content']['page_title'] = $pageTitle;
+        $data['content']['html'] = $data['html_content'];
+        $data['content']['page_title'] = $data['page_title'];
         $data['content']['meta_keywords'] = $data['meta_keywords'];
         $data['content']['meta_title'] = $data['meta_title'];
         $data['content']['meta_description'] = $data['meta_description'];
@@ -184,16 +175,13 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
      *
      * @return mixed
      */
-    public function preview()
+    public function preview($urlKey)
     {
-        $page = request()->all();
+        $page = $this->cms->findOneWhere([
+            'url_key' => $urlKey
+        ]);
 
-        if (isset($page['layout'])) {
-            return view($page['layout'])->with('data', $page);
-        } else {
-            abort(404);
-        }
-
+        return view('shop::cms.page')->with('page', $page);
     }
 
     /**
@@ -229,6 +217,6 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
 
         $layout = $page->layout;
 
-        return view($layout)->with('data', $page);
+        return view('shop::cms.page')->with('data', $page);
     }
 }

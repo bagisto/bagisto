@@ -67,27 +67,22 @@
                         <span class="control-error" v-if="errors.has('url_key')">@{{ errors.first('url_key') }}</span>
                     </div>
 
-                    <div class="control-group" :class="[errors.has('layout') ? 'has-error' : '']">
-                        <label for="layout" class="required">{{ __('admin::app.cms.pages.layout') }}</label>
+                    <div class="control-group" :class="[errors.has('html_content') ? 'has-error' : '']">
+                        <label for="html_content" class="required">{{ __('admin::app.cms.pages.content') }}</label>
 
-                        @foreach(config('cms') as $key => $value)
-                            <span class="radio">
-                                <input type="radio" id="layout" name="layout" value="{{ $value }}" v-validate="'required'">
+                        <textarea type="text" class="control" id="content" name="html_content" v-validate="'required'" value="{{ old('html_content') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.content') }}&quot;"></textarea>
 
-                                <label class="radio-view" for="layout"></label>
-                                {{ $key }}
-                            </span>
-                        @endforeach
+                        {!! __('admin::app.cms.pages.one-col') !!}
+                        {!! __('admin::app.cms.pages.two-col') !!}
+                        {!! __('admin::app.cms.pages.three-col') !!}
 
-                        <span class="control-error" v-if="errors.has('layout')">@{{ errors.first('layout') }}</span>
-                    </div>
+                        <div class="mt-10 mb-10" @submit.prevent="showModal('showHelpers')">
+                            <button class="btn btn-sm btn-primary">
+                                {{ __('admin::app.cms.pages.helper-classes') }}
+                            </button>
+                        </div>
 
-                    <div class="control-group" :class="[errors.has('content') ? 'has-error' : '']">
-                        <label for="content" class="required">{{ __('admin::app.cms.pages.content') }}</label>
-
-                        <textarea type="text" class="control" id="content" name="content" v-validate="'required'" value="{{ old('content') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.content') }}&quot;"></textarea>
-
-                        <span class="control-error" v-if="errors.has('content')">@{{ errors.first('content') }}</span>
+                        <span class="control-error" v-if="errors.has('html_content')">@{{ errors.first('html_content') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('page_title') ? 'has-error' : '']">
@@ -125,6 +120,14 @@
             </div>
         </form>
     </div>
+
+    <modal id="showHelpers" :is-open="modalIds.showHelpers">
+        <h3 slot="header">{{ __('admin::app.cms.pages.helper-classes') }}</h3>
+
+        <div slot="body">
+            @include('ui::partials.helper-classes')
+        </div>
+    </modal>
 @stop
 
 @push('scripts')

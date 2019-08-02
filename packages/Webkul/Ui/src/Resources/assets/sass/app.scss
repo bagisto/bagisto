@@ -1095,3 +1095,14 @@ modal {
 .vue-swatches__trigger {
     border: 1px solid #d3d3d3;
 }
+
+
+.helper-container {
+    display: block;
+
+    .group {
+        code {
+            font-weight: bold;
+        }
+    }
+}

@@ -12,12 +12,12 @@
                 <h1>{{ __('admin::app.cms.pages.pages') }}</h1>
             </div>
             <div class="page-action">
-                {{-- <div class="export-import" @click="showModal('downloadDataGrid')">
+                <div class="export-import" @click="showModal('downloadDataGrid')">
                     <i class="export-icon"></i>
                     <span >
                         {{ __('admin::app.export.export') }}
                     </span>
-                </div> --}}
+                </div>
 
                 <a href="{{ route('admin.cms.create') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.cms.pages.add-title') }}
@@ -26,9 +26,9 @@
         </div>
 
         <div class="page-content">
-            @inject('customerGrid', 'Webkul\Admin\DataGrids\CMSPageDataGrid')
+            @inject('cmsGrid', 'Webkul\Admin\DataGrids\CMSPageDataGrid')
 
-            {!! $customerGrid->render() !!}
+            {!! $cmsGrid->render() !!}
         </div>
     </div>
 
@@ -38,10 +38,9 @@
             <export-form></export-form>
         </div>
     </modal>
-
 @stop
 
 @push('scripts')
-    @include('admin::export.export', ['gridName' => $customerGrid])
+    @include('admin::export.export', ['gridName' => $cmsGrid])
 @endpush
 
