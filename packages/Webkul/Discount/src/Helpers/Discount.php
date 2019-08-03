@@ -44,6 +44,81 @@ abstract class Discount
     abstract public function apply($code);
 
     /**
+     * To find all the suitable rules that can be applied on the current cart
+     *
+     * @return collection $rules
+     */
+    public function getApplicableRules($usecoupon = false)
+    {
+        $channel = core()->getCurrentChannel()->id;
+
+        $rules = $this->cartRule->findWhere([
+            'use_coupon' => 0,
+            'status' => 1
+        ]);
+
+        $filteredRules = collect();
+
+        // time based constraints
+        foreach ($rules as $rule) {
+            if ($rule->starts_from != null && $rule->ends_till == null) {
+                if (Carbon::parse($rule->starts_from) < now()) {
+                    $rule->impact = $this->calculateImpact($rule);
+
+                    $filteredRules->push($rule);
+                }
+            } else if ($rule->starts_from == null && $rule->ends_till != null) {
+                if (Carbon::parse($rule->ends_till) > now()) {
+                    $rule->impact = $this->calculateImpact($rule);
+
+                    $filteredRules->push($rule);
+                }
+            } else if ($rule->starts_from != null && $rule->ends_till != null) {
+                if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
+                    $rule->impact = $this->calculateImpact($rule);
+
+                    $filteredRules->push($rule);
+                }
+            } else {
+                $rule->impact = $this->calculateImpact($rule);
+
+                $filteredRules->push($rule);
+            }
+        }
+
+        dd($filteredRules, 'called by this');
+
+        return $filteredRules;
+    }
+
+    /**
+     * To calculate the impact of the rule
+     *
+     * @return collection
+     */
+    public function calculateImpact($rule)
+    {
+        $impact = $this->getActionInstance($rule);
+
+        return $impact;
+    }
+
+    /**
+     * Return the instance of the related rule's action type
+     *
+     * @return object
+     */
+    public function getActionInstance($rule)
+    {
+        $actionType = new $this->rules['cart'][$rule->action_type];
+
+        $outcome = $actionType->calculate($rule);
+
+        return $outcome;
+    }
+
+
+    /**
      * Checks whether coupon is getting applied on current cart instance or not
      *
      * @return boolean
@@ -54,22 +129,22 @@ abstract class Discount
 
         $timeBased = false;
 
-        // time based constraints
-        if ($rule->starts_from != null && $rule->ends_till == null) {
-            if (Carbon::parse($rule->starts_from) < now()) {
-                $timeBased = true;
-            }
-        } else if ($rule->starts_from == null && $rule->ends_till != null) {
-            if (Carbon::parse($rule->ends_till) > now()) {
-                $timeBased = true;
-            }
-        } else if ($rule->starts_from != null && $rule->ends_till != null) {
-            if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
-                $timeBased = true;
-            }
-        } else {
-            $timeBased = true;
-        }
+        // // time based constraints
+        // if ($rule->starts_from != null && $rule->ends_till == null) {
+        //     if (Carbon::parse($rule->starts_from) < now()) {
+        //         $timeBased = true;
+        //     }
+        // } else if ($rule->starts_from == null && $rule->ends_till != null) {
+        //     if (Carbon::parse($rule->ends_till) > now()) {
+        //         $timeBased = true;
+        //     }
+        // } else if ($rule->starts_from != null && $rule->ends_till != null) {
+        //     if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
+        //         $timeBased = true;
+        //     }
+        // } else {
+        //     $timeBased = true;
+        // }
 
         $channelBased = false;
 
@@ -130,7 +205,7 @@ abstract class Discount
             }
         }
 
-        if ($timeBased && $channelBased && $customerGroupBased && $conditionsBased) {
+        if ($channelBased && $customerGroupBased && $conditionsBased) {
             if ($rule->uses_attribute_conditions == 1 && $partialMatch) {
                 return true;
             } else if ($rule->uses_attribute_conditions == 0) {

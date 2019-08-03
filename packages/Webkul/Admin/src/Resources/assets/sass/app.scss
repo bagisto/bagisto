@@ -269,7 +269,7 @@ body {
 .control-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     width: 750px;
 
     .control {

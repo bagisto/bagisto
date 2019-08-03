@@ -51,7 +51,7 @@ class NonCouponAbleRule extends Discount
         }
 
         // time based filter
-        foreach($rules as $rule) {
+        foreach ($rules as $rule) {
             $applicability = $this->checkApplicability($rule);
 
             if ($applicability) {

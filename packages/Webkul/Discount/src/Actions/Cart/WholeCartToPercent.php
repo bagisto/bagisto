@@ -15,19 +15,21 @@ class WholeCartToPercent extends Action
      *
      * @return boolean
      */
-    public function calculate($rule, $items, $cart)
+    public function calculate($rule)
     {
-        $report = collect();
+        $cart = \Cart::getCart();
+        $items = $cart->items;
 
+        $impact = collect();
         $totalDiscount = 0;
 
         if ($rule->discount_amount >= 100) {
-            $report->discount = $cart->base_grand_total;
+            $impact->discount = $cart->base_grand_total;
         } else {
-            $report->discount = ($rule->disc_amount / 100) * $cart->base_grand_total;
+            $impact->discount = ($rule->disc_amount / 100) * $cart->base_grand_total;
         }
 
-        $report->formatted_discount = core()->currency($report->discount);
+        $impact->formatted_discount = core()->currency($impact->discount);
 
         if ($rule->uses_attribute_conditions) {
             $productIDs = $rule->product_ids;
@@ -45,22 +47,22 @@ class WholeCartToPercent extends Action
             }
 
             if ($matchCount > 0) {
-                $discountPerItem = $report->discount / $matchCount;
+                $discountPerItem = $impact->discount / $matchCount;
             }
 
             foreach ($productIDs as $productID) {
                 foreach ($items as $item) {
                     if ($item->product_id == $productID) {
-                        $itemReport = array();
+                        $report = array();
 
-                        $itemReport['item_id'] = $item->id;
-                        $itemReport['product_id'] = $item->product_id;
-                        $itemReport['discount'] = $discountPerItem;
-                        $itemReport['formatted_discount'] = core()->currency(0);
+                        $report['item_id'] = $item->id;
+                        $report['product_id'] = $item->product_id;
+                        $report['discount'] = $discountPerItem;
+                        $report['formatted_discount'] = core()->currency(0);
 
-                        $report->push($itemReport);
+                        $impact->push($report);
 
-                        unset($itemReport);
+                        unset($report);
                     }
                 }
             }
@@ -68,26 +70,26 @@ class WholeCartToPercent extends Action
             $discountPerItem = $report->discount / $cart->items_qty;
 
             foreach ($items as $item) {
-                $itemReport = array();
+                $report = array();
 
-                $itemReport['item_id'] = $item->id;
-                $itemReport['product_id'] = $item->product_id;
-                $itemReport['discount'] = $discountPerItem;
-                $itemReport['formatted_discount'] = core()->currency(0);
+                $report['item_id'] = $item->id;
+                $report['product_id'] = $item->product_id;
+                $report['discount'] = $discountPerItem;
+                $report['formatted_discount'] = core()->currency(0);
 
-                $report->push($itemReport);
+                $impact->push($report);
 
-                unset($itemReport);
+                unset($report);
             }
         }
 
-        return $report;
+        return $impact;
     }
 
     /**
      * Calculates the impact on the shipping amount if the rule is apply_to_shipping enabled
      */
-    public function calculateOnShipping($cart)
+    public function calculateOnShipping()
     {
         $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_grand_total;
 
