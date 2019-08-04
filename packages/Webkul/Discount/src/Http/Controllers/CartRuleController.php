@@ -128,7 +128,7 @@ class CartRuleController extends Controller
             'action_type' => 'required|string',
             'disc_amount' => 'required|numeric',
             'disc_quantity' => 'numeric',
-            'disc_threshold' => 'numeric',
+            // 'disc_threshold' => 'numeric',
             'free_shipping' => 'required|boolean',
             'apply_to_shipping' => 'required|boolean',
             'code' => 'string|required_if:auto_generation,0',
@@ -361,7 +361,7 @@ class CartRuleController extends Controller
             'action_type' => 'required|string',
             'disc_amount' => 'required|numeric',
             'disc_quantity' => 'required|numeric',
-            'disc_threshold' => 'required|numeric',
+            // 'disc_threshold' => 'required|numeric',
             'free_shipping' => 'required|boolean',
             'apply_to_shipping' => 'required|boolean',
             'code' => 'string|required_if:user_coupon,1',
@@ -416,7 +416,6 @@ class CartRuleController extends Controller
             $data['actions'] = [
                 'action_type' => $data['action_type'],
                 'disc_amount' => $data['disc_amount'],
-                'disc_threshold' => $data['disc_threshold']
             ];
 
             $data['disc_quantity'] = $data['disc_amount'];

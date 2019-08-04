@@ -21,7 +21,6 @@ class WholeCartToPercent extends Action
         $items = $cart->items;
 
         $impact = collect();
-        $totalDiscount = 0;
 
         if ($rule->discount_amount >= 100) {
             $impact->discount = $cart->base_grand_total;
@@ -57,8 +56,8 @@ class WholeCartToPercent extends Action
 
                         $report['item_id'] = $item->id;
                         $report['product_id'] = $item->product_id;
-                        $report['discount'] = $discountPerItem;
-                        $report['formatted_discount'] = core()->currency(0);
+                        $report['discount'] = round($discountPerItem, 4);
+                        $report['formatted_discount'] = core()->currency(round($discountPerItem, 4));
 
                         $impact->push($report);
 
@@ -67,15 +66,15 @@ class WholeCartToPercent extends Action
                 }
             }
         } else {
-            $discountPerItem = $report->discount / $cart->items_qty;
+            $discountPerItem = $impact->discount / $cart->items_qty;
 
             foreach ($items as $item) {
                 $report = array();
 
                 $report['item_id'] = $item->id;
                 $report['product_id'] = $item->product_id;
-                $report['discount'] = $discountPerItem;
-                $report['formatted_discount'] = core()->currency(0);
+                $report['discount'] = round($discountPerItem, 4);
+                $report['formatted_discount'] = core()->currency(round($discountPerItem, 4));
 
                 $impact->push($report);
 

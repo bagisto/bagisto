@@ -259,13 +259,13 @@
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('disc_threshold') ? 'has-error' : '']">
+                                    {{-- <div class="control-group" :class="[errors.has('disc_threshold') ? 'has-error' : '']">
                                         <label for="disc_threshold" class="required">{{ __('admin::app.promotion.cart.buy-atleast') }}</label>
 
                                         <input type="number" step="1" class="control" name="disc_threshold" v-model="disc_threshold" v-validate="'required|numeric|min_value:1'" value="{{ old('disc_threshold') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.buy-atleast') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_threshold')">@{{ errors.first('disc_threshold') }}</span>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="control-group" :class="[errors.has('disc_quantity') ? 'has-error' : '']">
                                         <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
@@ -446,9 +446,8 @@
                         apply_amt: false,
                         apply_prct: false,
                         apply_to_shipping: null,
-                        buy_atleast: null,
                         disc_amount: null,
-                        disc_threshold: null,
+                        // disc_threshold: null,
                         disc_quantity: null,
                         end_other_rules: null,
                         coupon_type: null,
@@ -547,9 +546,8 @@
                     this.apply_amt = false;
                     this.apply_prct = false;
                     this.apply_to_shipping = data.apply_to_shipping;
-                    this.buy_atleast = data.disc_threshold;
                     this.disc_amount = data.disc_amount;
-                    this.disc_threshold = data.disc_threshold;
+                    // this.disc_threshold = data.disc_threshold;
                     this.disc_quantity = data.disc_quantity;
                     this.end_other_rules = data.end_other_rules;
                     this.coupon_type = data.coupon_type;

@@ -61,34 +61,161 @@ abstract class Discount
 
         // time based constraints
         foreach ($rules as $rule) {
-            if ($rule->starts_from != null && $rule->ends_till == null) {
-                if (Carbon::parse($rule->starts_from) < now()) {
+            if ($this->checkApplicability($rule)) {
+                if ($rule->starts_from != null && $rule->ends_till == null) {
+                    if (Carbon::parse($rule->starts_from) < now()) {
+                        $rule->impact = $this->calculateImpact($rule);
+
+                        $filteredRules->push($rule);
+                    }
+                } else if ($rule->starts_from == null && $rule->ends_till != null) {
+                    if (Carbon::parse($rule->ends_till) > now()) {
+                        $rule->impact = $this->calculateImpact($rule);
+
+                        $filteredRules->push($rule);
+                    }
+                } else if ($rule->starts_from != null && $rule->ends_till != null) {
+                    if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
+                        $rule->impact = $this->calculateImpact($rule);
+
+                        $filteredRules->push($rule);
+                    }
+                } else {
                     $rule->impact = $this->calculateImpact($rule);
 
                     $filteredRules->push($rule);
                 }
-            } else if ($rule->starts_from == null && $rule->ends_till != null) {
-                if (Carbon::parse($rule->ends_till) > now()) {
-                    $rule->impact = $this->calculateImpact($rule);
-
-                    $filteredRules->push($rule);
-                }
-            } else if ($rule->starts_from != null && $rule->ends_till != null) {
-                if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
-                    $rule->impact = $this->calculateImpact($rule);
-
-                    $filteredRules->push($rule);
-                }
-            } else {
-                $rule->impact = $this->calculateImpact($rule);
-
-                $filteredRules->push($rule);
             }
         }
 
-        dd($filteredRules, 'called by this');
+        if (count($filteredRules) && count($filteredRules) > 1) {
+            $filteredRule = $this->breakTie($filteredRules);
 
-        return $filteredRules;
+            return $filteredRule;
+        } else {
+            $filteredRule = $filteredRules->first();
+
+            return $filteredRule;
+        }
+    }
+
+    /**
+     * To find that one rule that is going to be applied on the current cart
+     *
+     * @param Collection $rules
+     *
+     * @return Object
+     */
+    public function breakTie($rules)
+    {
+        // priority criteria
+        $prioritySorted = array();
+        $leastPriority = 999999999999;
+
+        foreach ($applicableRules as $applicableRule) {
+            if ($applicableRule['rule']->priority <= $leastPriority) {
+                $leastPriority = $applicableRule['rule']->priority;
+                array_push($prioritySorted, $applicableRule);
+            }
+        }
+
+        // end rule criteria with end rule
+        $endRules = array();
+
+        if (count($prioritySorted) > 1) {
+            foreach ($prioritySorted as $prioritySortedRule) {
+                if ($prioritySortedRule['rule']->end_other_rules) {
+                    array_push($endRules, $prioritySortedRule);
+                }
+            }
+        } else {
+            $this->save(array_first($prioritySorted)['rule']);
+
+            return $prioritySorted;
+        }
+
+        // max impact criteria with end rule
+        $maxImpacts = array();
+
+        if (count($endRules)) {
+            $this->endRuleActive = true;
+
+            if (count($endRules) == 1) {
+                $this->save(array_first($endRules)['rule']);
+
+                return array_first($endRules)['impact'];
+            }
+
+            $maxImpact = 0;
+
+            foreach ($endRules as $endRule) {
+                if ($endRule['impact']->discount >= $maxImpact) {
+                    $maxImpact = $endRule['impact']->discount;
+
+                    array_push($maxImpacts, $endRule);
+                }
+            }
+
+            // oldest and max impact criteria
+            $leastId = 999999999999;
+            $leastIdImpactIndex = 0;
+
+            if (count($maxImpacts) > 1) {
+                foreach ($maxImpacts as $index => $maxImpactRule) {
+                    if ($maxImpactRule['rule']->id < $leastId) {
+                        $leastId = $maxImpactRule['rule']->id;
+
+                        $leastIdImpactIndex = $index;
+                    }
+                }
+
+                $this->save($maxImpacts[$leastIdImpactIndex]['rule']);
+
+                return $maxImpacts[$leastIdImpactIndex];
+            } else {
+                $this->save(array_first($maxImpacts)['rule']);
+
+                return $maxImpacts;
+            }
+        }
+
+        if (count($prioritySorted) > 1) {
+            $maxImpact = 0;
+
+            foreach ($prioritySorted as $prioritySortedRule) {
+                if ($prioritySortedRule['impact']->discount >= $maxImpact) {
+                    $maxImpact = $prioritySortedRule['impact']->discount;
+
+                    array_push($maxImpacts, $prioritySortedRule);
+                }
+            }
+
+            // oldest and max impact criteria
+            $leastId = 999999999999;
+            $leastIdImpactIndex = 0;
+
+            if (count($maxImpacts) > 1) {
+                foreach ($maxImpacts as $index => $maxImpactRule) {
+                    if ($maxImpactRule['rule']->id < $leastId) {
+                        $leastId = $maxImpactRule['rule']->id;
+
+                        $leastIdImpactIndex = $index;
+                    }
+                }
+
+                $this->save($maxImpacts[$leastIdImpactIndex]['rule']);
+
+                return $maxImpacts[$leastIdImpactIndex];
+            } else {
+                $this->save(array_first($maxImpacts)['rule']);
+
+                return array_first($applicableRules)['impact'];
+            }
+        } else {
+            $this->save(array_first($prioritySorted)['rule']);
+
+            return $prioritySorted;
+        }
     }
 
     /**

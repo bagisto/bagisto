@@ -12,96 +12,71 @@ class PercentOfProduct extends Action
         $items = $cart->items;
 
         $impact = collect();
-        $totalDiscount = 0;
 
-        if ($rule->uses_attribute_conditions) {
-            $productIds = $rule->product_ids;
+        if ($rule->discount_amount >= 100) {
+            $impact->discount = $cart->base_grand_total;
 
-            $productIds = explode(',', $productIds);
+            $impact->formatted_discount = core()->currency($impact->discount);
+        } else {
+            if ($rule->uses_attribute_conditions) {
+                $productIDs = $rule->product_ids;
 
-            foreach ($items as $item) {
-                $product = $item->product;
+                $productIDs = explode(',', $productIDs);
 
-                if ($product->type == 'configurable') {
-                    $product = $item->child->product;
+                $matchCount = 0;
+
+                foreach ($productIDs as $productID) {
+                    foreach ($items as $item) {
+                        if ($item->product_id == $productID) {
+                            $matchCount++;
+                        }
+                    }
                 }
 
-                foreach ($productIds as $productId) {
-                    $disc_threshold = $rule->disc_threshold;
-                    $disc_amount = $rule->disc_amount;
-                    $disc_quantity = $rule->disc_quantity;
-                    $amountDiscounted = 0;
+                foreach ($productIDs as $productID) {
+                    foreach ($items as $item) {
+                        $itemPrice = $item->base_price;
+
+                        if ($item->product->type == 'configurable') {
+                            $itemProductId = $item->child->product_id;
+                        } else {
+                            $itemProductId = $item->product_id;
+                        }
+
+                        $discount = round(($itemPrice * $impact->discount) / 100, 4);
+
+                        if ($itemProductId == $productID) {
+                            $report = array();
+
+                            $report['item_id'] = $item->id;
+                            $report['product_id'] = $item->product_id;
+                            $report['discount'] = $discount;
+                            $report['formatted_discount'] = core()->currency($discount);
+
+                            $impact->push($report);
+
+                            unset($report);
+                        }
+                    }
+                }
+            } else {
+                foreach ($items as $item) {
+                    $itemPrice = $item->base_price;
+
+                    if ($item->product->type == 'configurable') {
+                        $itemProductId = $item->child->product_id;
+                    } else {
+                        $itemProductId = $item->product_id;
+                    }
+
+                    $discount = round(($itemPrice * $impact->discount) / 100, 4);
+
                     $report = array();
 
-                    $realQty = $item->quantity;
-
-                    if ($productId == $product->id && $cart->items_qty >= $disc_threshold) {
-                        // distribute the discount according to ratios in case when rule is getting applied on multiple items
-
-                        $amountDiscounted = $item->base_price * ($disc_amount / 100);
-
-                        if ($realQty > $disc_quantity) {
-                            $amountDiscounted = $amountDiscounted * $disc_quantity;
-                        } else {
-                            $amountDiscounted = $amountDiscounted * $realQty;
-                        }
-
-                        if ($amountDiscounted > $item->base_price && $realQty == 1) {
-                            $amountDiscounted = $item->base_price;
-                        }
-
-                        $totalDiscount = $totalDiscount + $amountDiscounted;
-
-                        $report['item_id'] = $item->id;
-                        $report['product_id'] = $productId;
-                        $report['discount'] = $amountDiscounted;
-                        $report['formatted_discount'] = core()->currency($amountDiscounted);
-
-                        $impact->push($report);
-
-                        unset($report);
-                    }
-                }
-            }
-        } else {
-            $productIds = null;
-
-            foreach ($items as $item) {
-                $product = $item->product;
-
-                if ($product->type == 'configurable') {
-                    $product = $item->child->product;
-                }
-
-                $disc_threshold = $rule->disc_threshold;
-                $disc_amount = $rule->disc_amount;
-                $disc_quantity = $rule->disc_quantity;
-                $amountDiscounted = 0;
-                $report = array();
-
-                $realQty = $item->quantity;
-
-                if ($productId == $product->id && $cart->items_qty >= $disc_threshold) {
-                    // distribute the discount according to ratios in case when rule is getting applied on multiple items
-
-                    $amountDiscounted = $item->base_price * ($disc_amount / 100);
-
-                    if ($realQty > $disc_quantity) {
-                        $amountDiscounted = $amountDiscounted * $disc_quantity;
-                    } else {
-                        $amountDiscounted = $amountDiscounted * $realQty;
-                    }
-
-                    if ($amountDiscounted > $item->base_price && $realQty == 1) {
-                        $amountDiscounted = $item->base_price;
-                    }
-
-                    $totalDiscount = $totalDiscount + $amountDiscounted;
-
                     $report['item_id'] = $item->id;
-                    $report['product_id'] = $productId;
-                    $report['discount'] = $amountDiscounted;
-                    $report['formatted_discount'] = core()->currency($amountDiscounted);
+                    $report['product_id'] = $item->product_id;
+                    $report['discount'] = $discount;
+                    $report['formatted_discount'] = core()->currency($discount);
 
                     $impact->push($report);
 
@@ -109,16 +84,6 @@ class PercentOfProduct extends Action
                 }
             }
         }
-
-        // if (isset($rule->apply_on_shipping) && ! $rule->free_shipping) {
-        //     $impact->discount_on_shipping = $this->calculateOnShipping();
-        // } else {
-        //     $rule->discount_on_shipping = 0;
-        //     $rule->base_discount_on_shipping = 0;
-        // }
-
-        $impact->discount = $totalDiscount;
-        $impact->formatted_discount = core()->currency($totalDiscount);
 
         return $impact;
     }

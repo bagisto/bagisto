@@ -6,32 +6,10 @@ return [
         'any_is_true' => 'Any condition is true',
     ],
 
-    'conditions' => [
-        'numeric' => [
-            0 => 'Equals',
-            1 => 'Equals or greater',
-            2 => 'Equals or lesser',
-            3 => 'Greater than',
-            4 => 'Lesser than'
-        ],
-
-        'text' => [
-            0 => 'is',
-            1 => 'is not',
-            2 => 'contains',
-            3 => 'does not contains'
-        ],
-
-        'boolean' => [
-            0 => 'True/Yes',
-            1 => 'False/No',
-        ]
-    ],
-
     'cart' => [
         'actions' => [
-            'percent_of_product' => 'Percentage of product',
             'fixed_amount' => 'Apply as fixed amount',
+            'percent_of_product' => 'Percentage of product',
             // 'whole_cart_to_fixed' => 'Adjust whole cart to fixed amount',
             'whole_cart_to_percent' => 'Adjust whole cart to percent'
         ],
@@ -39,8 +17,8 @@ return [
         'validation' => [
             0 => 'percent_of_product',
             1 => 'fixed_amount',
-            2 => 'adjust_to_percent',
-            3 => 'fixed_amount_cart'
+            2 => 'whole_cart_to_percent',
+            3 => 'whole_cart_to_fixed'
         ],
 
         'conditions' => [
@@ -49,7 +27,7 @@ return [
                 '>=' => 'Greater or equals',
                 '<=' => 'Lesser or equals',
                 '>' => 'Greater than',
-                '<' => 'Lesser than',
+                '<' => 'Lesser than'
             ],
 
             'string' => [
@@ -74,7 +52,7 @@ return [
                 '>' => 'greater_than',
                 '<' => 'lesser_than',
                 '{}' => 'contains',
-                '={}' => 'is_one_f',
+                '={}' => 'is_one_of',
                 '!={}' => 'is_not_one_of',
                 '!{}' => 'does_not_contains'
             ]
@@ -175,7 +153,7 @@ return [
                 '>' => 'greater_than',
                 '<' => 'lesser_than',
                 '{}' => 'contains',
-                '={}' => 'is_one_f',
+                '={}' => 'is_one_of',
                 '!={}' => 'is_not_one_of',
                 '!{}' => 'does_not_contains'
             ]

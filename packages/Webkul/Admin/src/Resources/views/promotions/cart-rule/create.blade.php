@@ -253,13 +253,13 @@
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('disc_threshold') ? 'has-error' : '']">
+                                    {{-- <div class="control-group" :class="[errors.has('disc_threshold') ? 'has-error' : '']">
                                         <label for="disc_threshold" class="required">{{ __('admin::app.promotion.cart.buy-atleast') }}</label>
 
                                         <input type="number" step="1" class="control" name="disc_threshold" v-model="disc_threshold" v-validate="'required|numeric|min_value:1'" value="{{ old('disc_threshold') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.buy-atleast') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_threshold')">@{{ errors.first('disc_threshold') }}</span>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="control-group" :class="[errors.has('disc_quantity') ? 'has-error' : '']">
                                         <label for="disc_quantity" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
@@ -448,7 +448,7 @@
                         apply_prct: false,
                         apply_to_shipping: 0,
                         disc_amount: null,
-                        disc_threshold: null,
+                        // disc_threshold: null,
                         disc_quantity: null,
                         end_other_rules: 0,
                         coupon_type: null,
