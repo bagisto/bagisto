@@ -13,6 +13,8 @@ class PercentOfProduct extends Action
 
         $impact = collect();
 
+        $totalDiscount = 0;
+
         if ($rule->discount_amount >= 100) {
             $impact->discount = $cart->base_grand_total;
 
@@ -43,13 +45,15 @@ class PercentOfProduct extends Action
                             $itemProductId = $item->product_id;
                         }
 
-                        $discount = round(($itemPrice * $impact->discount) / 100, 4);
+                        $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
 
                         if ($itemProductId == $productID) {
+                            $totalDiscount = $totalDiscount + $discount;
+
                             $report = array();
 
                             $report['item_id'] = $item->id;
-                            $report['product_id'] = $item->product_id;
+                            $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
                             $report['discount'] = $discount;
                             $report['formatted_discount'] = core()->currency($discount);
 
@@ -69,12 +73,14 @@ class PercentOfProduct extends Action
                         $itemProductId = $item->product_id;
                     }
 
-                    $discount = round(($itemPrice * $impact->discount) / 100, 4);
+                    $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
+
+                    $totalDiscount = $totalDiscount + $discount;
 
                     $report = array();
 
                     $report['item_id'] = $item->id;
-                    $report['product_id'] = $item->product_id;
+                    $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
                     $report['discount'] = $discount;
                     $report['formatted_discount'] = core()->currency($discount);
 
@@ -84,6 +90,9 @@ class PercentOfProduct extends Action
                 }
             }
         }
+
+        $impact->discount = $totalDiscount;
+        $impact->formatted_discount = core()->currency($impact->discount);
 
         return $impact;
     }

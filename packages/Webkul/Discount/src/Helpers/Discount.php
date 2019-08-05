@@ -88,15 +88,7 @@ abstract class Discount
             }
         }
 
-        if (count($filteredRules) && count($filteredRules) > 1) {
-            $filteredRule = $this->breakTie($filteredRules);
-
-            return $filteredRule;
-        } else {
-            $filteredRule = $filteredRules->first();
-
-            return $filteredRule;
-        }
+        return $filteredRules;
     }
 
     /**
@@ -108,114 +100,111 @@ abstract class Discount
      */
     public function breakTie($rules)
     {
-        // priority criteria
-        $prioritySorted = array();
-        $leastPriority = 999999999999;
+        dd($rules);
+        // // priority criteria
+        // $prioritySorted = collect();
+        // $leastPriority = 999999999999;
 
-        foreach ($applicableRules as $applicableRule) {
-            if ($applicableRule['rule']->priority <= $leastPriority) {
-                $leastPriority = $applicableRule['rule']->priority;
-                array_push($prioritySorted, $applicableRule);
-            }
-        }
+        // foreach ($rules as $rule) {
+        //     if ($rule->priority <= $leastPriority) {
+        //         $leastPriority = $rule->priority;
 
-        // end rule criteria with end rule
-        $endRules = array();
+        //         $prioritySorted->push($rule);
+        //     }
+        // }
 
-        if (count($prioritySorted) > 1) {
-            foreach ($prioritySorted as $prioritySortedRule) {
-                if ($prioritySortedRule['rule']->end_other_rules) {
-                    array_push($endRules, $prioritySortedRule);
-                }
-            }
-        } else {
-            $this->save(array_first($prioritySorted)['rule']);
+        // // end rule criteria with end rule
+        // $endRules = collect();
 
-            return $prioritySorted;
-        }
+        // if (count($prioritySorted) > 1) {
+        //     foreach ($prioritySorted as $prioritySortedRule) {
+        //         if ($prioritySortedRule->end_other_rules) {
+        //             $endRules->push($prioritySortedRule);
+        //         }
+        //     }
+        // } else {
+        //     return $prioritySorted;
+        // }
 
-        // max impact criteria with end rule
-        $maxImpacts = array();
+        // // max impact criteria with end rule
+        // $maxImpacts = collect();
 
-        if (count($endRules)) {
-            $this->endRuleActive = true;
+        // if ($endRules->count()) {
+        //     $this->endRuleActive = true;
 
-            if (count($endRules) == 1) {
-                $this->save(array_first($endRules)['rule']);
+        //     if (count($endRules) == 1) {
+        //         return $endRules->first();
+        //     }
 
-                return array_first($endRules)['impact'];
-            }
+        //     $maxImpact = 0;
 
-            $maxImpact = 0;
+        //     foreach ($endRules as $endRule) {
+        //         if ($endRule->impact->discount >= $maxImpact) {
+        //             $maxImpact = $endRule->impact->discount;
 
-            foreach ($endRules as $endRule) {
-                if ($endRule['impact']->discount >= $maxImpact) {
-                    $maxImpact = $endRule['impact']->discount;
+        //             $maxImpacts->push($endRule);
+        //         }
+        //     }
 
-                    array_push($maxImpacts, $endRule);
-                }
-            }
+        //     // oldest and max impact criteria
+        //     $leastId = 999999999999;
+        //     $leastIdImpactIndex = 0;
 
-            // oldest and max impact criteria
-            $leastId = 999999999999;
-            $leastIdImpactIndex = 0;
+        //     if ($maxImpacts->count() > 1) {
+        //         foreach ($maxImpacts as $index => $maxImpactRule) {
+        //             if ($maxImpactRule->id < $leastId) {
+        //                 $leastId = $maxImpactRule->id;
 
-            if (count($maxImpacts) > 1) {
-                foreach ($maxImpacts as $index => $maxImpactRule) {
-                    if ($maxImpactRule['rule']->id < $leastId) {
-                        $leastId = $maxImpactRule['rule']->id;
+        //                 $leastIdImpactIndex = $index;
+        //             }
+        //         }
 
-                        $leastIdImpactIndex = $index;
-                    }
-                }
+        //         return $maxImpacts[$leastIdImpactIndex];
+        //     } else {
+        //         return $maxImpacts;
+        //     }
+        // }
 
-                $this->save($maxImpacts[$leastIdImpactIndex]['rule']);
+        // if (count($prioritySorted) > 1) {
+        //     $maxImpact = 0;
+        //     $maxImpactRules = collect();
 
-                return $maxImpacts[$leastIdImpactIndex];
-            } else {
-                $this->save(array_first($maxImpacts)['rule']);
+        //     foreach ($prioritySorted as $prioritySortedRule) {
+        //         if ($prioritySortedRule->impact->discount >= $maxImpact) {
+        //             $maxImpact = $prioritySortedRule->impact->discount;
 
-                return $maxImpacts;
-            }
-        }
+        //             $maxImpactRules->push($prioritySortedRule);
+        //         }
+        //     }
 
-        if (count($prioritySorted) > 1) {
-            $maxImpact = 0;
+        //     $maxImpactRulesRe = collect();
 
-            foreach ($prioritySorted as $prioritySortedRule) {
-                if ($prioritySortedRule['impact']->discount >= $maxImpact) {
-                    $maxImpact = $prioritySortedRule['impact']->discount;
+        //     foreach ($maxImpactRules as $maxImpactRule) {
+        //         if ($maxImpactRule->impact->discount == $maxImpact) {
+        //             $maxImpactRulesRe->push($maxImpactRule);
+        //         }
+        //     }
 
-                    array_push($maxImpacts, $prioritySortedRule);
-                }
-            }
+        //     // oldest and max impact criteria
+        //     $leastId = 999999999999;
+        //     $leastIdImpactIndex = 0;
 
-            // oldest and max impact criteria
-            $leastId = 999999999999;
-            $leastIdImpactIndex = 0;
+        //     if ($maxImpactRulesRe->count() > 1) {
+        //         foreach ($maxImpactRulesRe as $index => $maxImpactRule) {
+        //             if ($maxImpactRule->id < $leastId) {
+        //                 $leastId = $maxImpactRule->id;
 
-            if (count($maxImpacts) > 1) {
-                foreach ($maxImpacts as $index => $maxImpactRule) {
-                    if ($maxImpactRule['rule']->id < $leastId) {
-                        $leastId = $maxImpactRule['rule']->id;
+        //                 $leastIdImpactIndex = $index;
+        //             }
+        //         }
 
-                        $leastIdImpactIndex = $index;
-                    }
-                }
-
-                $this->save($maxImpacts[$leastIdImpactIndex]['rule']);
-
-                return $maxImpacts[$leastIdImpactIndex];
-            } else {
-                $this->save(array_first($maxImpacts)['rule']);
-
-                return array_first($applicableRules)['impact'];
-            }
-        } else {
-            $this->save(array_first($prioritySorted)['rule']);
-
-            return $prioritySorted;
-        }
+        //         return $maxImpactRulesRe[$leastIdImpactIndex];
+        //     } else {
+        //         return $maxImpactRulesRe->first();
+        //     }
+        // } else {
+        //     return $prioritySorted->first();
+        // }
     }
 
     /**
@@ -227,7 +216,9 @@ abstract class Discount
     {
         $impact = $this->getActionInstance($rule);
 
-        return $impact;
+        $outcome = $impact->calculate($rule);
+
+        return $outcome;
     }
 
     /**
@@ -239,9 +230,7 @@ abstract class Discount
     {
         $actionType = new $this->rules['cart'][$rule->action_type];
 
-        $outcome = $actionType->calculate($rule);
-
-        return $outcome;
+        return $actionType;
     }
 
 
@@ -255,23 +244,6 @@ abstract class Discount
         $cart = \Cart::getCart();
 
         $timeBased = false;
-
-        // // time based constraints
-        // if ($rule->starts_from != null && $rule->ends_till == null) {
-        //     if (Carbon::parse($rule->starts_from) < now()) {
-        //         $timeBased = true;
-        //     }
-        // } else if ($rule->starts_from == null && $rule->ends_till != null) {
-        //     if (Carbon::parse($rule->ends_till) > now()) {
-        //         $timeBased = true;
-        //     }
-        // } else if ($rule->starts_from != null && $rule->ends_till != null) {
-        //     if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
-        //         $timeBased = true;
-        //     }
-        // } else {
-        //     $timeBased = true;
-        // }
 
         $channelBased = false;
 
@@ -361,9 +333,9 @@ abstract class Discount
             'cart_id' => $cart->id
         ]);
 
-        if ($rule->use_coupon) {
-            $this->resetShipping($cart);
-        }
+        // if ($rule->use_coupon) {
+        //     $this->resetShipping($cart);
+        // }
 
         if (count($existingRule)) {
             if ($existingRule->first()->cart_rule_id != $rule->id) {
@@ -375,9 +347,9 @@ abstract class Discount
 
                 $this->updateCartItemAndCart($rule);
 
-                if ($rule->use_coupon) {
-                    $this->checkOnShipping($cart);
-                }
+                // if ($rule->use_coupon) {
+                //     $this->checkOnShipping($cart);
+                // }
 
                 return true;
             } else {
@@ -528,6 +500,58 @@ abstract class Discount
     }
 
     /**
+     * Update discount for least worth item
+     *
+     * @return boolean
+     */
+    public function updateCartItemAndCart($rule)
+    {
+        $cart = Cart::getCart();
+
+        $cartItems = $cart->items;
+
+        $impact = $rule->impact;
+
+        foreach ($cart->items as $item) {
+            foreach ($impact as $perItemImpact) {
+                if ($item->id == $perItemImpact['item_id']) {
+                    if ($perItemImpact['discount'] > 0) {
+                        $item->update([
+                            'discount_amount' => core()->convertPrice($perItemImpact['discount'], $cart->cart_currency_code),
+                            'base_discount_amount' => $perItemImpact['discount']
+                        ]);
+
+                        if ($item->id == $perItemImpact['item_id'] && $perItemImpact['discount'] > 0) {
+                            $item->update([
+                                'discount_percent' => $rule->discount_amount
+                            ]);
+                        }
+                    }
+
+                    // save coupon if rule use it
+                    if ($rule->use_coupon) {
+                        $coupon = $rule->coupons->code;
+
+                        $item->update([
+                            'coupon_code' => $coupon
+                        ]);
+                    }
+                }
+            }
+        }
+
+        if ($rule->use_coupon) {
+            $cart->update([
+                'coupon_code' => $rule->coupons->code
+            ]);
+        }
+
+        Cart::collectTotals();
+
+        return true;
+    }
+
+    /**
      * Removes any cart rule from the current cart instance
      *
      * @return void
@@ -552,67 +576,6 @@ abstract class Discount
             'discount_amount' => 0,
             'base_discount_amount' => 0
         ]);
-
-        return true;
-    }
-
-    /**
-     * Update discount for least worth item
-     */
-    public function updateCartItemAndCart($rule)
-    {
-        $cart = Cart::getCart();
-
-        $cartItems = $cart->items;
-
-        $actionInstance = new $this->rules['cart'][$rule->action_type];
-
-        $impact = $actionInstance->calculate($rule, $cartItems, $cart);
-
-        $totalItemDiscount = 0;
-
-        foreach ($cart->items as $item) {
-            foreach ($impact as $itemDiscount) {
-                $totalItemDiscount = $totalItemDiscount + $itemDiscount['discount'];
-
-                if ($itemDiscount['discount'] > 0) {
-                    $item->update([
-                        'discount_amount' => core()->convertPrice($itemDiscount['discount'], $cart->cart_currency_code),
-                        'base_discount_amount' => $itemDiscount['discount']
-                    ]);
-
-                    if ($item->id == $itemDiscount['item_id'] && $itemDiscount['discount'] > 0) {
-                        $item->update([
-                            'discount_percent' => $rule->discount_amount
-                        ]);
-                    }
-                }
-
-                // save coupon if rule use it
-                if ($rule->use_coupon) {
-                    $coupon = $rule->coupons->code;
-
-                    $item->update([
-                        'coupon_code' => $coupon
-                    ]);
-
-                    $cart->update([
-                        'coupon_code' => $coupon
-                    ]);
-                }
-            }
-        }
-
-        if ($totalItemDiscount < $impact->discount) {
-            $cart->update([
-                'base_discount_amount' => $impact->discount,
-                'discount_amount' => core()->convertPrice($impact->discount, $cart->cart_currency_code),
-                'base_sub_total' => $cart->base_sub_total - $impact->discount,
-                'sub_total' => $cart->sub_total - core()->convertPrice($impact->discount, $cart->cart_currency_code)
-            ]);
-        }
-
-        Cart::collectTotals();
 
         return true;
     }
