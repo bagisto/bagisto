@@ -61,7 +61,7 @@ class Handler extends ExceptionHandler
 
     private function isAdminUri()
     {
-        return strpos($_SERVER['REQUEST_URI'], 'admin') !== false ? true : false;
+        return strpos($request->getRequestUri(), 'admin') !== false ? true : false;
     }
 
     private function response($path, $statusCode)
