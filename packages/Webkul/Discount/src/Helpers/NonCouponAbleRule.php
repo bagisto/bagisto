@@ -20,13 +20,25 @@ class NonCouponAbleRule extends Discount
         if ($rules->count() == 1) {
             $rule = $rules->first();
 
-            $this->save($rule);
+            $canApply = $this->canApply($rule);
+
+            if ($canApply) {
+                $this->save($rule);
+
+                $this->updateCartItemAndCart($rule);
+            }
         } else if ($rules->count() > 1) {
             $rule = $this->breakTie($rules);
 
-            $this->save($rule);
+            $canApply = $this->canApply($rule);
+
+            if ($canApply) {
+                $this->save($rule);
+
+                $this->updateCartItemAndCart($rule);
+            }
         } else {
-            return $rules;
+            return false;
         }
     }
 }

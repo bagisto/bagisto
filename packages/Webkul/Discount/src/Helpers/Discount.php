@@ -3,6 +3,7 @@
 namespace Webkul\Discount\Helpers;
 
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
+use Webkul\Checkout\Repositories\CartItemRepository as CartItem;
 use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
 use Carbon\Carbon;
 use Cart;
@@ -29,11 +30,18 @@ abstract class Discount
      */
     protected $rules;
 
-    public function __construct(CartRule $cartRule, CartRuleCart $cartRuleCart)
+    /**
+     * To hold the cartitem repository instance
+     */
+    protected $cartItem;
+
+    public function __construct(CartRule $cartRule, CartRuleCart $cartRuleCart, CartItem $cartItem)
     {
         $this->cartRule = $cartRule;
 
         $this->cartRuleCart = $cartRuleCart;
+
+        $this->cartItem = $cartItem;
 
         $this->rules = config('discount-rules');
     }
@@ -50,8 +58,6 @@ abstract class Discount
      */
     public function getApplicableRules($usecoupon = false)
     {
-        $channel = core()->getCurrentChannel()->id;
-
         $rules = $this->cartRule->findWhere([
             'use_coupon' => 0,
             'status' => 1
@@ -96,115 +102,142 @@ abstract class Discount
      *
      * @param Collection $rules
      *
-     * @return Object
+     * @return CartRule $rule
      */
     public function breakTie($rules)
     {
-        dd($rules);
-        // // priority criteria
-        // $prioritySorted = collect();
-        // $leastPriority = 999999999999;
+        $result = $this->sortByLeastPriority($rules);
 
-        // foreach ($rules as $rule) {
-        //     if ($rule->priority <= $leastPriority) {
-        //         $leastPriority = $rule->priority;
+        if (count($result) > 1) {
+            // check for max impact criteria
+            if (count($result) > 1) {
+                $result = $this->findMaxImpact($result);
 
-        //         $prioritySorted->push($rule);
-        //     }
-        // }
+                if (count($result) > 1) {
+                    $result = $this->findOldestRule($result);
 
-        // // end rule criteria with end rule
-        // $endRules = collect();
+                    return $result;
+                } else if (count($result) == 1) {
+                    return $result->first();
+                } else {
+                    return collect();
+                }
+            } else if (count($result) == 1) {
+                return $result->first();
+            } else {
+                return collect();
+            }
+        } else if (count($result) == 1) {
+            return $result->first();
+        } else {
+            return collect();
+        }
 
-        // if (count($prioritySorted) > 1) {
-        //     foreach ($prioritySorted as $prioritySortedRule) {
-        //         if ($prioritySortedRule->end_other_rules) {
-        //             $endRules->push($prioritySortedRule);
-        //         }
-        //     }
-        // } else {
-        //     return $prioritySorted;
-        // }
+        return collect();
+    }
 
-        // // max impact criteria with end rule
-        // $maxImpacts = collect();
+    /**
+     * To sort the rules by the least priority
+     *
+     * @param Collection $rules
+     *
+     * @return Collection $rule
+     */
+    public function sortByLeastPriority($rules)
+    {
+        $sortedRules = collect();
 
-        // if ($endRules->count()) {
-        //     $this->endRuleActive = true;
+        $minPriority = $rules->min('priority');
 
-        //     if (count($endRules) == 1) {
-        //         return $endRules->first();
-        //     }
+        foreach ($rules as $rule) {
+            if ($rule->priority == $minPriority) {
+                $sortedRules->push($rule);
+            }
+        }
 
-        //     $maxImpact = 0;
+        return $sortedRules;
+    }
 
-        //     foreach ($endRules as $endRule) {
-        //         if ($endRule->impact->discount >= $maxImpact) {
-        //             $maxImpact = $endRule->impact->discount;
+    public function isEndRule($rule)
+    {
+        if ($rules->end_other_rules) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-        //             $maxImpacts->push($endRule);
-        //         }
-        //     }
+    /**
+     * To find whether rule can be applied or not
+     *
+     * @return boolean
+     */
+    public function canApply($rule)
+    {
+        $cart = \Cart::getCart();
 
-        //     // oldest and max impact criteria
-        //     $leastId = 999999999999;
-        //     $leastIdImpactIndex = 0;
+        $alreadyAppliedRule = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id,
+            'cart_rule_id' => $rule->id
+        ]);
 
-        //     if ($maxImpacts->count() > 1) {
-        //         foreach ($maxImpacts as $index => $maxImpactRule) {
-        //             if ($maxImpactRule->id < $leastId) {
-        //                 $leastId = $maxImpactRule->id;
+        if ($alreadyAppliedRule->count()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-        //                 $leastIdImpactIndex = $index;
-        //             }
-        //         }
+    /**
+     * To return cart rule which has the max impact
+     *
+     * @param Collection $rules
+     *
+     * @return Collection $rule
+     */
+    public function findMaxImpact($rules)
+    {
+        $maxImpact = collect();
 
-        //         return $maxImpacts[$leastIdImpactIndex];
-        //     } else {
-        //         return $maxImpacts;
-        //     }
-        // }
+        $maxDiscount = 0;
 
-        // if (count($prioritySorted) > 1) {
-        //     $maxImpact = 0;
-        //     $maxImpactRules = collect();
+        if ($rules->count()) {
+            $maxDiscount = $rules->max('impact.discount');
 
-        //     foreach ($prioritySorted as $prioritySortedRule) {
-        //         if ($prioritySortedRule->impact->discount >= $maxImpact) {
-        //             $maxImpact = $prioritySortedRule->impact->discount;
+            foreach ($rules as $rule) {
+                if ($rule->impact->discount == $maxDiscount) {
+                    $maxImpact = $maxImpact->push($rule);
+                }
+            }
+        } else {
+            return collect();
+        }
 
-        //             $maxImpactRules->push($prioritySortedRule);
-        //         }
-        //     }
+        return $maxImpact;
+    }
 
-        //     $maxImpactRulesRe = collect();
+    /**
+     * To find oldest rule
+     *
+     * @param Collection $rules
+     *
+     * @return Collection $rule
+     */
+    public function findOldestRule($rules)
+    {
+        $leastId = 0;
 
-        //     foreach ($maxImpactRules as $maxImpactRule) {
-        //         if ($maxImpactRule->impact->discount == $maxImpact) {
-        //             $maxImpactRulesRe->push($maxImpactRule);
-        //         }
-        //     }
+        if ($rules->count()) {
+            $leastId = $rules->min('id');
 
-        //     // oldest and max impact criteria
-        //     $leastId = 999999999999;
-        //     $leastIdImpactIndex = 0;
-
-        //     if ($maxImpactRulesRe->count() > 1) {
-        //         foreach ($maxImpactRulesRe as $index => $maxImpactRule) {
-        //             if ($maxImpactRule->id < $leastId) {
-        //                 $leastId = $maxImpactRule->id;
-
-        //                 $leastIdImpactIndex = $index;
-        //             }
-        //         }
-
-        //         return $maxImpactRulesRe[$leastIdImpactIndex];
-        //     } else {
-        //         return $maxImpactRulesRe->first();
-        //     }
-        // } else {
-        //     return $prioritySorted->first();
-        // }
+            foreach ($rules as $rule) {
+                if ($rule->id == $leastId) {
+                    return $rule;
+                }
+            }
+        } else {
+            return collect();
+        }
     }
 
     /**
@@ -233,9 +266,8 @@ abstract class Discount
         return $actionType;
     }
 
-
     /**
-     * Checks whether coupon is getting applied on current cart instance or not
+     * Checks whether rules is getting applied on current cart instance or not
      *
      * @return boolean
      */
@@ -328,53 +360,27 @@ abstract class Discount
     {
         $cart = \Cart::getCart();
 
-        // create or update
-        $existingRule = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
+        $alreadyApplied = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id,
+            'cart_rule_id' => $rule->id
         ]);
 
-        // if ($rule->use_coupon) {
-        //     $this->resetShipping($cart);
-        // }
-
-        if (count($existingRule)) {
-            if ($existingRule->first()->cart_rule_id != $rule->id) {
-                $existingRule->first()->update([
-                    'cart_rule_id' => $rule->id
-                ]);
-
-                $this->clearDiscount();
-
-                $this->updateCartItemAndCart($rule);
-
-                // if ($rule->use_coupon) {
-                //     $this->checkOnShipping($cart);
-                // }
-
-                return true;
-            } else {
-                $this->clearDiscount();
-
-                $this->updateCartItemAndCart($rule);
-            }
+        if ($alreadyApplied->count()) {
+            $result = $alreadyApplied->first()->update([
+                'cart_rule_id' => $rule->id
+            ]);
         } else {
-            $this->cartRuleCart->create([
+            $result = $this->cartRuleCart->create([
                 'cart_id' => $cart->id,
                 'cart_rule_id' => $rule->id
             ]);
-
-            $this->clearDiscount();
-
-            $this->updateCartItemAndCart($rule);
-
-            if ($rule->use_coupon) {
-                $this->checkOnShipping($cart);
-            }
-
-            return true;
         }
 
-        return false;
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -508,35 +514,28 @@ abstract class Discount
     {
         $cart = Cart::getCart();
 
-        $cartItems = $cart->items;
+        $itemImpacts = $rule->impact;
 
-        $impact = $rule->impact;
+        foreach ($itemImpacts as $itemImpact) {
+            $item = $this->cartItem->findOneWhere(['id' => $itemImpact['item_id']]);
 
-        foreach ($cart->items as $item) {
-            foreach ($impact as $perItemImpact) {
-                if ($item->id == $perItemImpact['item_id']) {
-                    if ($perItemImpact['discount'] > 0) {
-                        $item->update([
-                            'discount_amount' => core()->convertPrice($perItemImpact['discount'], $cart->cart_currency_code),
-                            'base_discount_amount' => $perItemImpact['discount']
-                        ]);
+            $item->update([
+                'discount_amount' => core()->convertPrice($itemImpact['discount'], $cart->cart_currency_code),
+                'base_discount_amount' => $itemImpact['discount']
+            ]);
 
-                        if ($item->id == $perItemImpact['item_id'] && $perItemImpact['discount'] > 0) {
-                            $item->update([
-                                'discount_percent' => $rule->discount_amount
-                            ]);
-                        }
-                    }
+            if ($rule->action_type == 'percent_of_product') {
+                $item->update([
+                    'discount_percent' => $rule->discount_amount
+                ]);
+            }
 
-                    // save coupon if rule use it
-                    if ($rule->use_coupon) {
-                        $coupon = $rule->coupons->code;
+            if ($rule->use_coupon) {
+                $coupon = $rule->coupons->code;
 
-                        $item->update([
-                            'coupon_code' => $coupon
-                        ]);
-                    }
-                }
+                $item->update([
+                    'coupon_code' => $coupon
+                ]);
             }
         }
 
