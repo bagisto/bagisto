@@ -61,7 +61,7 @@
             }
 
             if (! isset($field['options'])) {
-                $field['options'] = [['title' => 'No', 'value' => 0],['title' => 'Yes', 'value' => 1]];
+                $field['options'] = '';
             }
 
             $selectedOption = core()->getConfigData($name) ?? '';
@@ -99,6 +99,7 @@
             @elseif ($field['type'] == 'password')
 
                 <input type="password" v-validate="'{{ $validations }}'" class="control" id="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" name="{{ $firstField }}[{{ $secondField }}][{{ $thirdField }}][{{ $field['name'] }}]" value="{{ old($name) ?: core()->getConfigData($name) }}" data-vv-as="&quot;{{ trans($field['title']) }}&quot;">
+
 
             @elseif ($field['type'] == 'textarea')
 
@@ -399,10 +400,13 @@
             <span class="locale"> [@{{ channel_locale }}] </span>
         </label>
 
-        <select v-validate= "validations" class="control" :id = "name" :name = "name" v-model="this.result"
+        <select v-if="this.options.length" v-validate= "validations" class="control" :id = "name" :name = "name" v-model="this.result"
         :data-vv-as="field_name">
             <option v-for='(option, index) in this.options' :value="option.value"> @{{ option.title }} </option>
         </select>
+
+        <input v-else type="text"  class="control" v-validate= "validations" :id = "name" :name = "name" v-model="this.result"
+        :data-vv-as="field_name">
 
         <span class="control-error" v-if="errors.has(name)">
             @{{ errors.first(name) }}
@@ -422,8 +426,8 @@
 
         data: function() {
             return {
-                isVisible: false,
                 isRequire: false,
+                isVisible: false,
             }
         },
 
@@ -434,28 +438,40 @@
                 this_this.isRequire = true;
             }
 
-            var dependentElement = document.getElementById(this_this.depend);
-            var dependValue = this_this.value;
+            $(document).ready(function(){
+                var dependentElement = document.getElementById(this_this.depend);
+                var dependValue = this_this.value;
 
-            if (dependValue == 'true') {
-                dependValue = 1;
-            } else if (dependValue == 'false') {
-                dependValue = 0;
-            }
+                if (dependValue == 'true') {
+                    dependValue = 1;
+                } else if (dependValue == 'false') {
+                    dependValue = 0;
+                }
 
-            $("select.control").change(function() {
-                if (dependentElement.value == dependValue) {
+                $(document).on("change", "select.control", function() {
+                    if (this_this.depend == this.name) {
+                        if (this_this.value == this.value) {
+                            this_this.isVisible = true;
+                        } else {
+                            this_this.isVisible = false;
+                        }
+                    }
+                })
+
+                if (dependentElement && dependentElement.value == dependValue) {
                     this_this.isVisible = true;
                 } else {
                     this_this.isVisible = false;
                 }
-            });
 
-            if (dependentElement.value == dependValue) {
-                this_this.isVisible = true;
-            } else {
-                this_this.isVisible = false;
-            }
+                if (this_this.result) {
+                    if (dependentElement.value == this_this.value) {
+                        this_this.isVisible = true;
+                    } else {
+                        this_this.isVisible = false;
+                    }
+                }
+            });
         }
     });
 </script>

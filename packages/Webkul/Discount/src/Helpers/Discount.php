@@ -158,6 +158,13 @@ abstract class Discount
         return $sortedRules;
     }
 
+    /**
+     * To check where rule ends other rules
+     *
+     * @param CartRule $rule
+     *
+     * @return $rule
+     */
     public function isEndRule($rule)
     {
         if ($rules->end_other_rules) {
@@ -169,6 +176,8 @@ abstract class Discount
 
     /**
      * To find whether rule can be applied or not
+     *
+     * @param CartRule $rule
      *
      * @return boolean
      */
@@ -257,7 +266,9 @@ abstract class Discount
     /**
      * Return the instance of the related rule's action type
      *
-     * @return object
+     * @param CartRule $rule
+     *
+     * @return Object
      */
     public function getActionInstance($rule)
     {
@@ -269,7 +280,9 @@ abstract class Discount
     /**
      * Checks whether rules is getting applied on current cart instance or not
      *
-     * @return boolean
+     * @param CartRule $rule
+     *
+     * @return Boolean
      */
     public function checkApplicability($rule)
     {
@@ -354,7 +367,7 @@ abstract class Discount
      *
      * @param CartRule $rule
      *
-     * @return boolean
+     * @return Boolean
      */
     public function save($rule)
     {
@@ -384,89 +397,41 @@ abstract class Discount
     }
 
     /**
-     * Checks whether rule is getting applied on shipping or not
-     */
-    public function checkOnShipping($cart)
-    {
-        if (! isset($cart->selected_shipping_rate)) {
-            return false;
-        }
-
-        $shippingRate = config('carriers')[$cart->selected_shipping_rate->carrier]['class'];
-
-        $actualShippingRate = new $shippingRate;
-        $actualShippingRate = $actualShippingRate->calculate();
-
-        if (is_array($actualShippingRate)) {
-            foreach ($actualShippingRate as $actualRate) {
-                if ($actualRate->method == $cart->selected_shipping_rate->method) {
-                    $actualShippingRate = $actualRate;
-
-                    break;
-                }
-            }
-        }
-
-        $actualShippingPrice = $actualShippingRate->price;
-        $actualShippingBasePrice = $actualShippingRate->base_price;
-
-        $alreadyAppliedCartRuleCart = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
-        ]);
-
-        if (count($alreadyAppliedCartRuleCart)) {
-            $this->resetShipping($cart);
-
-            $alreadyAppliedRule = $alreadyAppliedCartRuleCart->first()->cart_rule;
-
-            $cartShippingRate = $cart->selected_shipping_rate;
-
-            if (isset($cartShippingRate)) {
-                if ($cartShippingRate->base_price < $actualShippingBasePrice) {
-                    return false;
-                } else {
-                    $this->applyOnShipping($alreadyAppliedRule, $cart);
-                }
-            } else {
-                $this->applyOnShipping($alreadyAppliedRule, $cart);
-            }
-        } else {
-            $this->resetShipping($cart);
-        }
-    }
-
-    /**
      * Apply on shipping
+     *
+     * @param CartRule $apploedRule
+     *
+     * @param Cart $cart
      *
      * @return void
      */
     public function applyOnShipping($appliedRule, $cart)
     {
-        // $cart = \Cart::getCart();
+        $cart = \Cart::getCart();
 
-        // if (isset($cart->selected_shipping_rate)) {
-        //     if ($appliedRule->free_shipping && $cart->selected_shipping_rate->base_price > 0) {
-        //         $cart->selected_shipping_rate->update([
-        //             'price' => 0,
-        //             'base_price' => 0
-        //         ]);
-        //     } else if ($appliedRule->free_shipping == 0 && $appliedRule->apply_to_shipping && $cart->selected_shipping_rate->base_price > 0) {
-        //         $actionType = config('discount-rules')[$appliedRule->action_type];
+        if (isset($cart->selected_shipping_rate)) {
+            if ($appliedRule->free_shipping && $cart->selected_shipping_rate->base_price > 0) {
+                $cart->selected_shipping_rate->update([
+                    'price' => 0,
+                    'base_price' => 0
+                ]);
+            } else if ($appliedRule->free_shipping == 0 && $appliedRule->apply_to_shipping && $cart->selected_shipping_rate->base_price > 0) {
+                $actionType = config('discount-rules')[$appliedRule->action_type];
 
-        //         if ($appliedRule->apply_to_shipping) {
-        //             $actionInstance = new $actionType;
+                if ($appliedRule->apply_to_shipping) {
+                    $actionInstance = new $actionType;
 
-        //             $discountOnShipping = $actionInstance->calculateOnShipping($cart);
+                    $discountOnShipping = $actionInstance->calculateOnShipping($cart);
 
-        //             $discountOnShipping = ($discountOnShipping / 100) * $cart->selected_shipping_rate->base_price;
+                    $discountOnShipping = ($discountOnShipping / 100) * $cart->selected_shipping_rate->base_price;
 
-        //             $cart->selected_shipping_rate->update([
-        //                 'price' => $cart->selected_shipping_rate->price - core()->convertPrice($discountOnShipping, $cart->cart_currency_code),
-        //                 'base_price' => $cart->selected_shipping_rate->base_price - $discountOnShipping
-        //             ]);
-        //         }
-        //     }
-        // }
+                    $cart->selected_shipping_rate->update([
+                        'price' => $cart->selected_shipping_rate->price - core()->convertPrice($discountOnShipping, $cart->cart_currency_code),
+                        'base_price' => $cart->selected_shipping_rate->base_price - $discountOnShipping
+                    ]);
+                }
+            }
+        }
     }
 
     /**
@@ -543,6 +508,10 @@ abstract class Discount
             $cart->update([
                 'coupon_code' => $rule->coupons->code
             ]);
+        }
+
+        if ($rule->free_shipping || $rule->apply_on_shipping) {
+            $this->applyOnShipping($rule);
         }
 
         Cart::collectTotals();

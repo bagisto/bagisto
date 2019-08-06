@@ -2,41 +2,27 @@
 
 @inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
 
-@inject ('productAttributeValueRepository', 'Webkul\Product\Repositories\ProductAttributeValueRepository')
-
 <?php
     $filterAttributes = [];
 
     if (isset($category)) {
-        $categoryProduct = $productFlatRepository->getCategoryProduct($category->id);
+        if (count($category->filterableAttributes) > 0) {
+            $filterAttributes = $category->filterableAttributes;
+        } else {
+            $categoryProductAttributes = $productFlatRepository->getCategoryProductAttribute($category->id);
 
-        foreach ($categoryProduct as $product) {
-            $attributes = $productAttributeValueRepository->findByField('product_id', $product->product_id);
-
-            if ($product->product->type == 'configurable') {
-                foreach ($product->product->super_attributes as $super_attribute) {
-                    $productAttribute[] =  $super_attribute->id;
+            if ($categoryProductAttributes) {
+                foreach ($attributeRepository->getFilterAttributes() as $filterAttribute) {
+                    if (in_array($filterAttribute->id, $categoryProductAttributes)) {
+                        $filterAttributes[] = $filterAttribute;
+                    } else  if ($filterAttribute ['code'] == 'price') {
+                        $filterAttributes[] = $filterAttribute;
+                    }
                 }
-            }
 
-            foreach ($attributes as $attribute) {
-                if ($attribute) {
-                    $productAttribute[] =  $attribute->attribute_id;
-                }
-            }
-        }
-
-        if (isset($productAttribute)) {
-            foreach ($attributeRepository->getFilterAttributes() as $filterAttribute) {
-                if (in_array($filterAttribute->id, array_unique($productAttribute))) {
-                    $filterAttributes[] = $filterAttribute;
-                } else  if ($filterAttribute ['code'] == 'price') {
-                    $filterAttributes[] = $filterAttribute;
-                }
+                $filterAttributes = collect($filterAttributes);
             }
         }
-
-        $filterAttributes = collect($filterAttributes);
     } else {
         $filterAttributes = $attributeRepository->getFilterAttributes();
     }

@@ -115,6 +115,7 @@ return [
         'code' => 'Code',
         'admin-name' => 'Name',
         'name' => 'Name',
+        'direction' => 'Direction',
         'fullname' => 'Full Name',
         'type' => 'Type',
         'required' => 'Required',
@@ -398,7 +399,8 @@ return [
             'related-products' => 'Related Products',
             'product-search-hint' => 'Start typing product name',
             'no-result-found' => 'Products not found with same name.',
-            'searching' => 'Searching ...'
+            'searching' => 'Searching ...',
+            'channel' => 'Channels'
         ],
 
         'attributes' => [
@@ -449,7 +451,8 @@ return [
             'swatch' => 'Swatch',
             'image' => 'Image',
             'file' => 'File',
-            'checkbox' => 'Checkbox'
+            'checkbox' => 'Checkbox',
+            'use_in_flat' => "Create in Product Flat Table",
         ],
         'families' => [
             'title' => 'Families',
@@ -493,6 +496,8 @@ return [
             'meta_description' => 'Meta Description',
             'meta_keywords' => 'Meta Keywords',
             'image' => 'Image',
+            'filterable-attributes' => 'Filterable Attributes',
+            'attributes' => 'Attributes',
         ]
     ],
 
@@ -564,6 +569,7 @@ return [
             'general' => 'General',
             'code' => 'Code',
             'name' => 'Name',
+            'direction' => 'Direction',
             'create-success' => 'Locale created successfully.',
             'update-success' => 'Locale updated successfully.',
             'delete-success' => 'Locale deleted successfully.',

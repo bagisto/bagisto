@@ -191,6 +191,8 @@ class ConvertXToProductId
     /**
      * This method will return product id from the attribute and attribute option params
      *
+     * @param Collection $categories
+     *
      * @return array
      */
     public function convertFromCategories($categories)
@@ -238,6 +240,10 @@ class ConvertXToProductId
     /**
      * This method will save the product ids in the datastore
      *
+     * @param integer $ruleId
+     *
+     * @param array $productIDs
+     *
      * @return boolean
      */
     public function saveIDs($ruleId, $productIDs)
@@ -252,12 +258,16 @@ class ConvertXToProductId
     }
 
     /**
+     * To get all product ids lying in the criteria
+     *
      * @param integer $categoryId
+     *
      * @return Collection
      */
     public function getAll($categoryId = null)
     {
-        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($categoryId) {
+
+        $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use ($categoryId) {
 
             $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
@@ -267,6 +277,7 @@ class ConvertXToProductId
                     ->select('products.id')
                     ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                     ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
+                    ->where('products.type', '!=', 'configurable')
                     ->whereNotNull('product_flat.url_key');
 
             if ($categoryId) {

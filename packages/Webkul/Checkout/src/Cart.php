@@ -936,27 +936,35 @@ class Cart {
                     'country' => $shippingAddress->country,
                 ])->orderBy('tax_rate', 'desc')->get();
 
-            foreach ($taxRates as $rate) {
-                $haveTaxRate = false;
+            if (count( $taxRates) > 0) {
+                foreach ($taxRates as $rate) {
+                    $haveTaxRate = false;
 
-                if (! $rate->is_zip) {
-                    if ($rate->zip_code == '*' || $rate->zip_code == $shippingAddress->postcode) {
-                        $haveTaxRate = true;
+                    if (! $rate->is_zip) {
+                        if ($rate->zip_code == '*' || $rate->zip_code == $shippingAddress->postcode) {
+                            $haveTaxRate = true;
+                        }
+                    } else {
+                        if ($shippingAddress->postcode >= $rate->zip_from && $shippingAddress->postcode <= $rate->zip_to) {
+                            $haveTaxRate = true;
+                        }
                     }
-                } else {
-                    if ($shippingAddress->postcode >= $rate->zip_from && $shippingAddress->postcode <= $rate->zip_to) {
-                        $haveTaxRate = true;
+
+                    if ($haveTaxRate) {
+                        $item->tax_percent = $rate->tax_rate;
+                        $item->tax_amount = ($item->total * $rate->tax_rate) / 100;
+                        $item->base_tax_amount = ($item->base_total * $rate->tax_rate) / 100;
+
+                        $item->save();
+                        break;
                     }
                 }
+            } else {
+                $item->tax_percent = 0;
+                $item->tax_amount = 0;
+                $item->base_tax_amount = 0;
 
-                if ($haveTaxRate) {
-                    $item->tax_percent = $rate->tax_rate;
-                    $item->tax_amount = ($item->total * $rate->tax_rate) / 100;
-                    $item->base_tax_amount = ($item->base_total * $rate->tax_rate) / 100;
-
-                    $item->save();
-                    break;
-                }
+                $item->save();
             }
         }
     }

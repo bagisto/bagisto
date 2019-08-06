@@ -2,13 +2,11 @@
 
 namespace Webkul\User\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Event;
+use Exception;
+use Webkul\User\Http\Requests\UserForm;
+use Illuminate\Support\Facades\{ Event, Hash };
 use Webkul\User\Repositories\AdminRepository as Admin;
 use Webkul\User\Repositories\RoleRepository as Role;
-use Webkul\User\Http\Requests\UserForm;
-use Hash;
 
 /**
  * Admin user controller
@@ -42,8 +40,8 @@ class UserController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\User\Repositories\AdminRepository $admin
-     * @param  \Webkul\User\Repositories\RoleRepository $role
+     * @param  \Webkul\User\Repositories\AdminRepository  $admin
+     * @param  \Webkul\User\Repositories\RoleRepository  $role
      * @return void
      */
     public function __construct(Admin $admin, Role $role)
@@ -60,7 +58,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -70,7 +68,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -83,11 +81,11 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Webkul\User\Http\Requests\UserForm  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(UserForm $request)
     {
-        $data = request()->all();
+        $data = $request->all();
 
         if (isset($data['password']) && $data['password'])
             $data['password'] = bcrypt($data['password']);
@@ -96,7 +94,7 @@ class UserController extends Controller
 
         $admin = $this->admin->create($data);
 
-        Event::fire('user.admin.delete.after', $admin);
+        Event::fire('user.admin.create.after', $admin);
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'User']));
 
@@ -107,7 +105,7 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -123,11 +121,11 @@ class UserController extends Controller
      *
      * @param  \Webkul\User\Http\Requests\UserForm  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UserForm $request, $id)
     {
-        $data = request()->all();
+        $data = $request->all();
 
         if (! $data['password'])
             unset($data['password']);
@@ -155,7 +153,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
@@ -178,7 +176,7 @@ class UserController extends Controller
                 Event::fire('user.admin.delete.after', $id);
 
                 return response()->json(['message' => true], 200);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Admin']));
             }
         }

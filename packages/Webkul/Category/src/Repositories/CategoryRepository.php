@@ -63,6 +63,10 @@ class CategoryRepository extends Repository
 
         $this->uploadImages($data, $category);
 
+        if (isset($data['attributes'])) {
+            $category->filterableAttributes()->sync($data['attributes']);
+        }
+
         Event::fire('catalog.category.create.after', $category);
 
         return $category;
@@ -162,6 +166,10 @@ class CategoryRepository extends Repository
         $category->update($data);
 
         $this->uploadImages($data, $category);
+
+        if (isset($data['attributes'])) {
+            $category->filterableAttributes()->sync($data['attributes']);
+        }
 
         Event::fire('catalog.category.update.after', $id);
 

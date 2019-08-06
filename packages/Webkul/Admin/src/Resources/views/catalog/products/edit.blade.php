@@ -150,6 +150,7 @@
 
                 @endforeach
 
+                @include ('admin::catalog.products.accordians.channels')
 
                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.inventories.before', ['product' => $product]) !!}
 

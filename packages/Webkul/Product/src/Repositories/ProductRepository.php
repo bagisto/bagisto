@@ -260,6 +260,10 @@ class ProductRepository extends Repository
             $this->productImage->uploadImages($data, $product);
         }
 
+        if (isset($data['channels'])) {
+            $product['channels'] = $data['channels'];
+        }
+
         Event::fire('catalog.product.update.after', $product);
 
         return $product;
@@ -500,28 +504,39 @@ class ProductRepository extends Repository
                     }
                 }
 
-                $qb = $qb->where(function($query1) {
-                    foreach (['product_flat', 'flat_variants'] as $alias) {
-                        $query1 = $query1->orWhere(function($query2) use($alias) {
-                            $attributes = $this->attribute->getProductDefaultAttributes(array_keys(request()->input()));
+                $qb = $qb->leftJoin('products as variants', 'products.id', '=', 'variants.parent_id');
 
-                            foreach ($attributes as $attribute) {
-                                $column = $alias . '.' . $attribute->code;
+                $qb = $qb->where(function($query1) use($qb) {
+                    $aliases = [
+                            'products' => 'filter_',
+                            'variants' => 'variant_filter_'
+                        ];
 
-                                $queryParams = explode(',', request()->get($attribute->code));
+                    foreach($aliases as $table => $alias) {
+                        $query1 = $query1->orWhere(function($query2) use($qb, $table, $alias) {
+
+                            foreach ($this->attribute->getProductDefaultAttributes(array_keys(request()->input())) as $code => $attribute) {
+                                $aliasTemp = $alias . $attribute->code;
+
+                                $qb = $qb->leftJoin('product_attribute_values as ' . $aliasTemp, $table . '.id', '=', $aliasTemp . '.product_id');
+
+                                $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
+
+                                $temp = explode(',', request()->get($attribute->code));
 
                                 if ($attribute->type != 'price') {
-                                    $query2 = $query2->where(function($query3) use($column, $queryParams) {
-                                        foreach ($queryParams as $filterValue) {
-                                            $query3 = $query3->orwhereRaw("find_in_set($filterValue, $column)");
+                                    $query2 = $query2->where($aliasTemp . '.attribute_id', $attribute->id);
+
+                                    $query2 = $query2->where(function($query3) use($aliasTemp, $column, $temp) {
+                                        foreach($temp as $code => $filterValue) {
+                                            $columns = $aliasTemp . '.' . $column;
+                                            $query3 = $query3->orwhereRaw("find_in_set($filterValue, $columns)");
                                         }
                                     });
                                 } else {
-                                    if ($attribute->code != 'price') {
-                                        $query2 = $query2->where($column, '>=', current($queryParams))->where($column, '<=', end($queryParams));
-                                    } else {
-                                        $query2 = $query2->where($column, '>=', core()->convertToBasePrice(current($queryParams)))->where($column, '<=',  core()->convertToBasePrice(end($queryParams)));
-                                    }
+                                    $query2 = $query2->where($aliasTemp . '.' . $column, '>=', core()->convertToBasePrice(current($temp)))
+                                            ->where($aliasTemp . '.' . $column, '<=', core()->convertToBasePrice(end($temp)))
+                                            ->where($aliasTemp . '.attribute_id', $attribute->id);
                                 }
                             }
                         });
