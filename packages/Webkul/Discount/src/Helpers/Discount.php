@@ -191,7 +191,13 @@ abstract class Discount
         ]);
 
         if ($alreadyAppliedRule->count()) {
-            return false;
+            if ($this->validateRule($alreadyAppliedRule->first()->cart_rule)) {
+                return false;
+            } else {
+                $this->clearDiscount();
+
+                return true;
+            }
         } else {
             return true;
         }
@@ -696,14 +702,14 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (! str_contains($actual_value, $test_value)) {
-                        $result = false;
+                    if (str_contains($test_value, $actual_value)) {
+                        $result = true;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (str_contains($actual_value, $test_value)) {
-                        $result = false;
+                    if (! str_contains($test_value, $actual_value)) {
+                        $result = true;
 
                         break;
                     }
@@ -818,13 +824,13 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (! str_contains($actual_value, $test_value)) {
+                    if (str_contains($test_value, $actual_value)) {
                         $result = true;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (str_contains($actual_value, $test_value)) {
+                    if (! str_contains($test_value, $actual_value)) {
                         $result = true;
 
                         break;
