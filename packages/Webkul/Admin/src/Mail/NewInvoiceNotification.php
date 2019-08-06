@@ -16,7 +16,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class NewInvoiceNotification extends Mailable
 {
     use Queueable, SerializesModels;
-    
+
     /**
      * The invoice instance.
      *
@@ -45,6 +45,7 @@ class NewInvoiceNotification extends Mailable
         $order = $this->invoice->order;
 
         return $this->to($order->customer_email, $order->customer_full_name)
+                ->from(env('SHOP_MAIL_FROM'))
                 ->subject(trans('shop::app.mail.invoice.subject', ['order_id' => $order->id]))
                 ->view('shop::emails.sales.new-invoice');
     }
