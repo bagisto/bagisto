@@ -90,7 +90,7 @@ class WholeCartToFixed extends Action
      */
     public function calculateOnShipping($cart)
     {
-        $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_grand_total;
+        $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_sub_total;
 
         $discountOnShipping = ($percentOfDiscount / 100) * $cart->selected_shipping_rate->base_price;
 

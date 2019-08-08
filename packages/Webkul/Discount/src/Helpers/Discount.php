@@ -56,12 +56,19 @@ abstract class Discount
      *
      * @return collection $rules
      */
-    public function getApplicableRules($usecoupon = false)
+    public function getApplicableRules($code = null)
     {
-        $rules = $this->cartRule->findWhere([
-            'use_coupon' => 0,
-            'status' => 1
-        ]);
+        if ($code != null) {
+            $rules = $this->cartRule->findWhere([
+                'use_coupon' => 1,
+                'status' => 1
+            ]);
+        } else {
+            $rules = $this->cartRule->findWhere([
+                'use_coupon' => 0,
+                'status' => 1
+            ]);
+        }
 
         $filteredRules = collect();
 
@@ -185,18 +192,63 @@ abstract class Discount
     {
         $cart = \Cart::getCart();
 
-        $alreadyAppliedRule = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id,
-            'cart_rule_id' => $rule->id
+        $alreadyApplied = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id
         ]);
 
-        if ($alreadyAppliedRule->count()) {
-            if ($this->validateRule($alreadyAppliedRule->first()->cart_rule)) {
+        if ($alreadyApplied->count() && $alreadyApplied->first()->cart_rule->id == $rule->id) {
+            if ($this->validateRule($alreadyApplied->first()->cart_rule)) {
                 return false;
             } else {
                 $this->clearDiscount();
 
                 return true;
+            }
+        } else if ($alreadyApplied->count() && $alreadyApplied->first()->cart_rule->id != $rule->id && ! $alreadyApplied->first()->cart_rule->end_other_rules) {
+            if ($rule->use_coupon) {
+                if ($alreadyApplied->first()->cart_rule->use_coupon) {
+                    $rules = collect();
+
+                    $alreadyAppliedRule = $alreadyApplied->first()->cart_rule;
+                    $alreadyAppliedRule->impact = $this->calculateImpact($alreadyAppliedRule);
+
+                    $rule->impact = $this->calculateImpact($alreadyAppliedRule);
+
+                    $rules->push($alreadyAppliedRule);
+                    $rules->push($rule);
+
+                    $result = $this->breakTie($rules);
+
+                    if ($result->id == $rule->id) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                // this case will work when non couponable rule is applied and another non couponable rule is created
+                // again break tie
+                $rules = collect();
+
+                $alreadyAppliedRule = $alreadyApplied->first()->cart_rule;
+                $alreadyAppliedRule->impact = $this->calculateImpact($alreadyAppliedRule);
+
+                $rule->impact = $this->calculateImpact($alreadyAppliedRule);
+
+                $rules->push($alreadyAppliedRule);
+                $rules->push($rule);
+
+                $result = $this->breakTie($rules);
+
+                if ($result) {
+                    if ($result->id != $rule->id) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             }
         } else {
             return true;
@@ -380,8 +432,7 @@ abstract class Discount
         $cart = \Cart::getCart();
 
         $alreadyApplied = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id,
-            'cart_rule_id' => $rule->id
+            'cart_id' => $cart->id
         ]);
 
         if ($alreadyApplied->count()) {
@@ -443,7 +494,9 @@ abstract class Discount
     /**
      * Resets the shipping for the current items in the cart
      *
-     * @return void
+     * @param Cart $cart
+     *
+     * @return Void
      */
     public function resetShipping($cart)
     {
@@ -479,7 +532,9 @@ abstract class Discount
     /**
      * Update discount for least worth item
      *
-     * @return boolean
+     * @param CartRule $rule
+     *
+     * @return Boolean
      */
     public function updateCartItemAndCart($rule)
     {
@@ -516,9 +571,9 @@ abstract class Discount
             ]);
         }
 
-        if ($rule->free_shipping || $rule->apply_on_shipping) {
-            $this->applyOnShipping($rule);
-        }
+        // if ($rule->free_shipping || $rule->apply_on_shipping) {
+        //     $this->applyOnShipping($rule);
+        // }
 
         Cart::collectTotals();
 
@@ -528,7 +583,7 @@ abstract class Discount
     /**
      * Removes any cart rule from the current cart instance
      *
-     * @return void
+     * @return Boolean
      */
     public function clearDiscount()
     {
@@ -536,6 +591,7 @@ abstract class Discount
 
         $cartItems = $cart->items;
 
+        // remove all the discount properties from items
         foreach ($cartItems as $item) {
             $item->update([
                 'coupon_code' => NULL,
@@ -545,11 +601,19 @@ abstract class Discount
             ]);
         }
 
+        // remove all the discount properties from cart
         $cart->update([
             'coupon_code' => NULL,
             'discount_amount' => 0,
             'base_discount_amount' => 0
         ]);
+
+        // find & remove cart rule from cart rule cart resource
+        $cartRuleCart = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id
+        ]);
+
+        $cartRuleCart->first()->delete();
 
         return true;
     }
@@ -557,27 +621,48 @@ abstract class Discount
     /**
      * Validate the currently applied cart rule
      *
-     * @return boolean
+     * @param CartRule $rule
+     *
+     * @return Boolean
      */
     public function validateRule($rule)
     {
         $applicability = $this->checkApplicability($rule);
 
-        if ($applicability) {
-            if ($rule->status) {
-                return true;
-            } else {
-                return false;
-            }
+        if ($applicability && $rule->status) {
+            return true;
         } else {
             return false;
         }
     }
 
     /**
+     * Will validate already applied rule
+     *
+     * @return Void
+     */
+    public function validateIfAlreadyApplied()
+    {
+        $cart = \Cart::getCart();
+
+        $alreadyAppliedRule = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id
+        ]);
+
+        if ($alreadyAppliedRule->count()) {
+            $alreadyAppliedRule = $alreadyAppliedRule->first()->cart_rule;
+
+            $result = $this->validateRule($alreadyAppliedRule);
+
+            if (! $result)
+                $this->clearDiscount();
+        }
+    }
+
+    /**
      * Retreives all the payment methods from application config
      *
-     * @return array
+     * @return Array
      */
     public function getPaymentMethods()
     {
@@ -602,7 +687,11 @@ abstract class Discount
      * Checks the rule against the current cart instance whether rule conditions are applicable
      * or not
      *
-     * @return boolean
+     * @param Array $conditions
+     *
+     * @param Cart $cart
+     *
+     * @return Boolean
      */
     protected function testIfAllConditionAreTrue($conditions, $cart)
     {
@@ -702,14 +791,14 @@ abstract class Discount
                         break;
                     }
                 } else if ($test_condition == '{}') {
-                    if (str_contains($test_value, $actual_value)) {
-                        $result = true;
+                    if (! str_contains($test_value, $actual_value)) {
+                        $result = false;
 
                         break;
                     }
                 } else if ($test_condition == '!{}') {
-                    if (! str_contains($test_value, $actual_value)) {
-                        $result = true;
+                    if (str_contains($test_value, $actual_value)) {
+                        $result = false;
 
                         break;
                     }
@@ -724,7 +813,11 @@ abstract class Discount
      * Checks the rule against the current cart instance whether rule conditions are applicable
      * or not
      *
-     * @return boolean
+     * @param Array $conditions
+     *
+     * @param Cart $cart
+     *
+     * @return Boolean
      */
     protected function testIfAnyConditionIsTrue($conditions, $cart)
     {

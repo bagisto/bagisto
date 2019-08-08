@@ -78,7 +78,7 @@ class FixedAmount extends Action
     {
         $cart = \Cart::getCart();
 
-        $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_grand_total;
+        $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_sub_total;
 
         return $percentOfDiscount;
     }

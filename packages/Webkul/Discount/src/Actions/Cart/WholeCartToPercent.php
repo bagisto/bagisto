@@ -23,9 +23,9 @@ class WholeCartToPercent extends Action
         $impact = collect();
 
         if ($rule->discount_amount >= 100) {
-            $impact->discount = $cart->base_grand_total;
+            $impact->discount = $cart->base_sub_total;
         } else {
-            $impact->discount = ($rule->disc_amount / 100) * $cart->base_grand_total;
+            $impact->discount = ($rule->disc_amount / 100) * $cart->base_sub_total;
         }
 
         $impact->formatted_discount = core()->currency($impact->discount);
@@ -90,7 +90,7 @@ class WholeCartToPercent extends Action
      */
     public function calculateOnShipping()
     {
-        $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_grand_total;
+        $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_sub_total;
 
         $discountOnShipping = ($percentOfDiscount / 100) * $cart->selected_shipping_rate->base_price;
 

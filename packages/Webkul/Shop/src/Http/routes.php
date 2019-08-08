@@ -289,9 +289,5 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
 
     Route::get('pages/{slug}', 'Webkul\CMS\Http\Controllers\Shop\PagePresenterController@presenter')->name('shop.cms.page');
 
-    Route::view('onecol', 'shop::cms.onecol');
-    Route::view('twocol', 'shop::cms.twocol');
-    Route::view('threecol', 'shop::cms.threecol');
-
     Route::fallback('Webkul\Shop\Http\Controllers\HomeController@notFound');
 });
