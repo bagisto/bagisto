@@ -70,16 +70,4 @@ class FixedAmount extends Action
 
         return $impact;
     }
-
-    /**
-     * Calculates the impact on the shipping amount if the rule is apply_to_shipping enabled
-     */
-    public function calculateOnShipping()
-    {
-        $cart = \Cart::getCart();
-
-        $percentOfDiscount = ($cart->base_discount_amount * 100) / $cart->base_sub_total;
-
-        return $percentOfDiscount;
-    }
 }

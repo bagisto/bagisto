@@ -174,7 +174,7 @@ abstract class Discount
      */
     public function isEndRule($rule)
     {
-        if ($rules->end_other_rules) {
+        if ($rule->end_other_rules) {
             return true;
         } else {
             return false;

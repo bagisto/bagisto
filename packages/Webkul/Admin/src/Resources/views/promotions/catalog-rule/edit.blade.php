@@ -110,14 +110,6 @@
                                             <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
                                         </div>
                                     </datetime>
-
-                                    <div class="control-group" :class="[errors.has('priority') ? 'has-error' : '']">
-                                        <label for="priority" class="required">{{ __('admin::app.promotion.general-info.priority') }}</label>
-
-                                        <input type="number" class="control" step="1" name="priority" v-model="priority" v-validate="'required|numeric|min_value:1'" value="{{ old('priority') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.priority') }}&quot;">
-
-                                        <span class="control-error" v-if="errors.has('priority')">@{{ errors.first('priority') }}</span>
-                                    </div>
                                 </div>
                             </accordian>
 
@@ -218,21 +210,19 @@
 
                 data () {
                     return {
-                        name: 'null',
-                        description: 'null',
+                        name: '{{ $catalog_rule[5]->name }}',
+                        description: '{{ $catalog_rule[5]->description }}',
                         conditions_list: [],
                         channels: [],
                         customer_groups: [],
-                        ends_till: null,
-                        starts_from: null,
-                        status: 1,
+                        ends_till: '{{ $catalog_rule[5]->ends_till }}',
+                        starts_from: '{{ $catalog_rule[5]->starts_from }}',
+                        status: '{{ $catalog_rule[5]->status }}',
 
-                        action_type: null,
-                        apply: null,
-                        apply_amt: false,
-                        apply_prct: false,
-                        disc_amount: null,
-                        end_other_rules: 0,
+                        actions: @json($catalog_rule[3]).actions,
+                        action_type: '{{ $catalog_rule[5]->action_code }}',
+                        disc_amount: '{{ $catalog_rule[5]->disc_amount }}',
+                        end_other_rules: '{{ $catalog_rule[5]->end_other_rules }}',
 
                         all_conditions: [],
 
@@ -242,11 +232,10 @@
                         },
 
                         criteria: 'cart',
-                        actions: @json($catalog_rule[0]).actions,
 
                         category_options: @json($catalog_rule[1]),
                         category_values: [],
-                        conditions: @json($catalog_rule[0]).conditions,
+                        conditions: @json($catalog_rule[5]).conditions,
                         attribute_values: [],
                         attr_object: {
                             attribute: null,
@@ -259,6 +248,47 @@
                 },
 
                 mounted () {
+                    channels = @json($catalog_rule[5]->channels);
+
+                    this.channels = [];
+                    for (i in channels) {
+                        this.channels.push(channels[i].channel_id);
+                    }
+
+                    customer_groups = @json($catalog_rule[5]->customer_groups);
+
+                    for (i in customer_groups) {
+                        this.customer_groups.push(customer_groups[i].customer_group_id);
+                    }
+
+                    data = @json($catalog_rule[5]->conditions);
+
+                    if (JSON.parse(JSON.parse(data))) {
+                        this.category_values = JSON.parse(JSON.parse(data)).categories;
+
+                        this.attribute_values = JSON.parse(JSON.parse(data)).attributes;
+
+                        // creating options and has option param on the frontend
+                        for (i in this.attribute_values) {
+                            for (j in this.attribute_input) {
+                                if (this.attribute_input[j].code == this.attribute_values[i].attribute) {
+                                    if (this.attribute_input[j].has_options == true) {
+                                        this.attribute_values[i].has_options = true;
+
+                                        this.attribute_values[i].options = this.attribute_input[j].options;
+                                    } else {
+                                        this.attribute_values[i].has_options = false;
+
+                                        this.attribute_values[i].options = null;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    this.action_type = '{{ $catalog_rule[5]->action_code }}',
+                    this.disc_amount = '{{ $catalog_rule[5]->discount_amount }}',
+                    this.end_other_rules = '{{ $catalog_rule[5]->end_other_rules }}'
                 },
 
                 methods: {
