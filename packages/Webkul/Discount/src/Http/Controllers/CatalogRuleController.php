@@ -99,24 +99,41 @@ class CatalogRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('catalog_rule', [$this->appliedConfig, $this->category->getPartial(), $this->getStatesAndCountries(), $this->attribute->getPartial()]);;
+        // dd($this->appliedConfig);
+        return view($this->_config['view'])->with('catalog_rule', [$this->appliedConfig, $this->category->getPartial(), $this->getStatesAndCountries(), $this->attribute->getPartial()]);
     }
 
     public function store()
     {
+        // $data = request()->all();
+        // $validated = \Validator::Make($data, [
+        //     'name' => 'required|string',
+        //     'description' => 'string',
+        //     'customer_groups' => 'required',
+        //     'channels' => 'required',
+        //     'status' => 'required|boolean',
+        //     'end_other_rules' => 'required|boolean',
+        //     'priority' => 'required|numeric',
+        //     'all_conditions' => 'present',
+        //     'disc_amount' => 'sometimes',
+        //     'disc_percent' => 'sometimes',
+        // ]);
+
+        // if ($validated->fails()) {
+        //     dd('failed', $validated->errors());
+        // } else {
+        //     dd('passed');
+        // }
+
         $this->validate(request(), [
             'name' => 'required|string',
             'description' => 'string',
             'customer_groups' => 'required',
             'channels' => 'required',
-            'starts_from' => 'required|date',
-            'ends_till' => 'required|date',
             'status' => 'required|boolean',
             'end_other_rules' => 'required|boolean',
             'priority' => 'required|numeric',
-            'criteria' => 'required',
-            'all_conditions' => 'required|array',
-            'apply' => 'required|numeric|min:0|max:3',
+            'all_conditions' => 'present',
             'disc_amount' => 'sometimes',
             'disc_percent' => 'sometimes',
         ]);
@@ -136,19 +153,22 @@ class CatalogRuleController extends Controller
         unset($catalog_rule['all_conditions']);
 
         if (isset($catalog_rule['disc_amount'])) {
-            $catalog_rule['action_type'] = $catalog_rule['apply'];
             $catalog_rule['actions'] = [
-                'action_type' => $catalog_rule['apply'],
+                'action_code' => $catalog_rule['action_type'],
                 'disc_amount' => $catalog_rule['disc_amount']
             ];
         } else if (isset($catalog_rule['disc_percent'])) {
-            $catalog_rule['action_type'] = $catalog_rule['apply'];
             $catalog_rule['actions'] = [
-                'action_type' => $catalog_rule['apply'],
+                'action_code' => $catalog_rule['action_type'],
                 'disc_percent' => $catalog_rule['disc_percent'],
             ];
         }
 
+        $catalog_rule['discount_amount'] = $catalog_rule['disc_amount'];
+
+        $catalog_rule['action_code'] = $catalog_rule['action_type'];
+
+        unset($catalog_rule['disc_amount']);
         unset($catalog_rule['apply']);
         unset($catalog_rule['attributes']);
         unset($catalog_rule['_token']);

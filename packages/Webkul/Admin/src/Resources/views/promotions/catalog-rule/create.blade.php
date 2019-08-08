@@ -110,14 +110,6 @@
                                             <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
                                         </div>
                                     </datetime>
-
-                                    <div class="control-group" :class="[errors.has('priority') ? 'has-error' : '']">
-                                        <label for="priority" class="required">{{ __('admin::app.promotion.general-info.priority') }}</label>
-
-                                        <input type="number" class="control" step="1" name="priority" v-model="priority" v-validate="'required|numeric|min_value:1'" value="{{ old('priority') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.priority') }}&quot;">
-
-                                        <span class="control-error" v-if="errors.has('priority')">@{{ errors.first('priority') }}</span>
-                                    </div>
                                 </div>
                             </accordian>
 
@@ -125,6 +117,7 @@
                                 <div slot="body">
                                     <input type="hidden" name="all_conditions" v-model="all_conditions">
 
+                                    <!--    Categories selection input block     -->
                                     <div class="control-group" :class="[errors.has('category_values') ? 'has-error' : '']">
                                         <label class="mb-10" for="categories">{{ __('admin::app.promotion.select-category') }}</label>
 
@@ -135,6 +128,7 @@
 
                                     <br/>
 
+                                    <!--    Product attributes conditions block     -->
                                     <div class="control-container mt-20" v-for="(condition, index) in attribute_values" :key="index">
                                         <select class="control" v-model="attribute_values[index].attribute" style="margin-right: 15px; width: 30%;" v-on:change="enableAttributeCondition($event, index)">
                                             <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Option']) }}</option>
@@ -223,9 +217,8 @@
                         customer_groups: [],
                         ends_till: null,
                         starts_from: null,
-                        priority: 0,
                         per_customer: 0,
-                        status: null,
+                        status: 1,
                         use_coupon: null,
                         auto_generation: false,
                         usage_limit: 0,
@@ -236,11 +229,7 @@
                         apply_prct: false,
                         apply_to_shipping: 0,
                         disc_amount: null,
-                        disc_threshold: null,
-                        disc_quantity: null,
                         end_other_rules: 0,
-                        coupon_type: null,
-                        free_shipping: 0,
 
                         all_conditions: [],
 
@@ -249,28 +238,12 @@
                             'attributes' : null
                         },
 
-                        code: null,
-                        suffix: null,
-                        prefix: null,
-                        dedicated_label: true,
-
-                        label: {
-                            global: null,
-                            @foreach(core()->getAllChannels() as $channel)
-                                @foreach($channel->locales as $locale)
-                                    {{ trim($channel->code) }} : {
-                                        {{ trim($locale->code) }}: ''
-                                    },
-                                @endforeach
-                            @endforeach
-                        },
-
                         criteria: 'cart',
                         actions: @json($catalog_rule[0]).actions,
 
                         category_options: @json($catalog_rule[1]),
                         category_values: [],
-
+                        conditions: @json($catalog_rule[0]).conditions,
                         attribute_values: [],
                         attr_object: {
                             attribute: null,
@@ -283,7 +256,6 @@
                 },
 
                 mounted () {
-                    console.log(this.applied_config);
                 },
 
                 methods: {
@@ -338,7 +310,13 @@
 
                     addAttributeCondition() {
                         this.attribute_values.push(this.attr_object);
-                        console.log('working');
+
+                        this.attr_object = {
+                            attribute: null,
+                            condition: null,
+                            value: [],
+                            options: []
+                        };
                     },
 
                     enableCondition(event, index) {
@@ -396,10 +374,20 @@
 
                             this.all_attributes.attributes = this.attribute_values;
 
-                            this.all_attributes = JSON.stringify(this.all_attributes);
+                            this.all_conditions = JSON.stringify(this.all_attributes);
                         } else {
-                            this.all_attributes = null;
+                            this.all_conditions = null;
                         }
+
+                        // this.all_conditions = JSON.stringify(this.conditions_list);
+
+                        // if (this.conditions_list.length != 0) {
+                        //     this.conditions_list.push({'criteria': this.match_criteria});
+
+                        //     this.all_conditions = JSON.stringify(this.conditions_list);
+                        // }
+
+                        // return false;
 
                         this.$validator.validateAll().then(result => {
                             if (result) {

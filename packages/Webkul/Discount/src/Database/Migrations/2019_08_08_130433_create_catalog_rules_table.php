@@ -20,7 +20,7 @@ class CreateCatalogRulesTable extends Migration
             $table->datetime('starts_from')->nullable();
             $table->datetime('ends_till')->nullable();
             $table->boolean('status')->default(0);
-            $table->json('conditons')->nullable();
+            $table->json('conditions')->nullable();
             $table->json('actions')->nullable();
             $table->boolean('end_other_rules')->default(0);
             $table->string('action_code')->nullable();
