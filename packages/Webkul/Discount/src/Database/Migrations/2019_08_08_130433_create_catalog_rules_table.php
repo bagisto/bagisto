@@ -22,10 +22,9 @@ class CreateCatalogRulesTable extends Migration
             $table->boolean('status')->default(0);
             $table->json('conditons')->nullable();
             $table->json('actions')->nullable();
-            $table->boolean('end_other_rules')->default(1);
-            $table->integer('sort_order')->unsigned()->default(0);
-            $table->string('action');
-            $table->decimal('discount_amount', 12, 4)->default(0);
+            $table->boolean('end_other_rules')->default(0);
+            $table->string('action_code')->nullable();
+            $table->decimal('discount_amount', 20, 4)->default(0.0000);
             $table->timestamps();
         });
     }

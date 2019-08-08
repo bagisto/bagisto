@@ -95,7 +95,7 @@
                                         <div class="control-group" :class="[errors.has('starts_from') ? 'has-error' : '']">
                                             <label for="starts_from" class="required">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
 
-                                            <input type="text" class="control" v-model="starts_from" name="starts_from" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.starts-from') }}&quot;">
+                                            <input type="text" class="control" v-model="starts_from" name="starts_from" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.starts-from') }}&quot;">
 
                                             <span class="control-error" v-if="errors.has('starts_from')">@{{ errors.first('starts_from') }}</span>
                                         </div>
@@ -105,7 +105,7 @@
                                         <div class="control-group" :class="[errors.has('ends_till') ? 'has-error' : '']">
                                             <label for="ends_till" class="required">{{ __('admin::app.promotion.general-info.ends-till') }}</label>
 
-                                            <input type="text" class="control" v-model="ends_till" name="ends_till" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends-till') }}&quot;">
+                                            <input type="text" class="control" v-model="ends_till" name="ends_till" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends-till') }}&quot;">
 
                                             <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
                                         </div>
