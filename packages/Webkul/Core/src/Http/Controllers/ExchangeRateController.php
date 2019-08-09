@@ -152,8 +152,6 @@ class ExchangeRateController extends Controller
             $exchangeServiceInstance = new $exchangeService['class'];
             $updatedRates = $exchangeServiceInstance->fetchRates();
 
-            dd($updatedRates);
-
             return response()->json([
                 'success' => true,
                 'rates' => 'rates'

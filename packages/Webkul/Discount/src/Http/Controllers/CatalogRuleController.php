@@ -221,25 +221,25 @@ class CatalogRuleController extends Controller
     {
         $data = request()->input();
 
-        $validated = \Validator::make($data, [
-            'name' => 'required|stringunique:catalog_rule,name,' . $id,
-            'starts_from' => 'present|nullable|date',
-            'ends_till' => 'present|nullable|date',
-            'description' => 'string',
-            'customer_groups' => 'required',
-            'channels' => 'required',
-            'status' => 'required|boolean',
-            'end_other_rules' => 'required|boolean',
-            'all_conditions' => 'present',
-            'disc_amount' => 'sometimes',
-            'disc_percent' => 'sometimes'
-        ]);
+        // $validated = \Validator::make($data, [
+        //     'name' => 'required|stringunique:catalog_rule,name,' . $id,
+        //     'starts_from' => 'present|nullable|date',
+        //     'ends_till' => 'present|nullable|date',
+        //     'description' => 'string',
+        //     'customer_groups' => 'required',
+        //     'channels' => 'required',
+        //     'status' => 'required|boolean',
+        //     'end_other_rules' => 'required|boolean',
+        //     'all_conditions' => 'present',
+        //     'disc_amount' => 'sometimes',
+        //     'disc_percent' => 'sometimes'
+        // ]);
 
-        if ($validated->fails()) {
-            dd($validated->errors());
-        } else {
-            dd('passed');
-        }
+        // if ($validated->fails()) {
+        //     dd($validated->errors());
+        // } else {
+        //     dd('passed');
+        // }
 
         $this->validate(request(), [
             'name' => 'required|stringunique:catalog_rule,name,'.$id,
@@ -325,8 +325,6 @@ class CatalogRuleController extends Controller
         $optionableAttributes = $this->fetchOptionableAttributes();
 
         $results = $this->findProducts->findByConditions($conditions);
-
-        dd($results);
     }
 
     public function fetchOptionableAttributes()
