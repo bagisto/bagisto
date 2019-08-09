@@ -5,6 +5,7 @@ namespace Webkul\Category\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Category\Repositories\CategoryRepository as Category;
+use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Category\Models\CategoryTranslation;
 use Illuminate\Support\Facades\Event;
 
@@ -31,14 +32,24 @@ class CategoryController extends Controller
     protected $category;
 
     /**
+     * AttributeRepository object
+     *
+     * @var array
+     */
+    protected $attribute;
+
+    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository  $category
+     * @param  \Webkul\Category\Repositories\CategoryRepository       $category
+     * @param  use Webkul\Attribute\Repositories\AttributeRepository  $attribute
      * @return void
      */
-    public function __construct(Category $category)
+    public function __construct(Category $category, Attribute $attribute)
     {
         $this->category = $category;
+
+        $this->attribute = $attribute;
 
         $this->_config = request('_config');
     }
@@ -62,7 +73,9 @@ class CategoryController extends Controller
     {
         $categories = $this->category->getCategoryTree(null, ['id']);
 
-        return view($this->_config['view'], compact('categories'));
+        $attributes = $this->attribute->findWhere(['is_filterable' =>  1]);
+
+        return view($this->_config['view'], compact('categories', 'attributes'));
     }
 
     /**
@@ -110,7 +123,9 @@ class CategoryController extends Controller
 
         $category = $this->category->findOrFail($id);
 
-        return view($this->_config['view'], compact('category', 'categories'));
+        $attributes = $this->attribute->findWhere(['is_filterable' =>  1]);
+
+        return view($this->_config['view'], compact('category', 'categories', 'attributes'));
     }
 
     /**

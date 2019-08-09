@@ -18,7 +18,7 @@ class RedirectIfNotCustomer
     public function handle($request, Closure $next, $guard = 'customer')
     {
         if (! Auth::guard($guard)->check()) {
-            return redirect()->route('customer.profile.index');
+            return redirect()->route('customer.session.index');
         } else {
             if (Auth::guard($guard)->user()->status == 0) {
                 Auth::guard($guard)->logout();

@@ -52,11 +52,11 @@ class LocalesDataGrid extends DataGrid
             'sortable' => true,
             'filterable' => true
         ]);
-        
+
         $this->addColumn([
             'index' => 'direction',
             'label' => trans('admin::app.datagrid.direction'),
-            'type' => 'select',
+            'type' => 'string',
             'searchable' => true,
             'sortable' => true,
             'filterable' => true

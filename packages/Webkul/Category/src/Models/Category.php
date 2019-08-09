@@ -6,6 +6,7 @@ use Webkul\Core\Eloquent\TranslatableModel;
 use Kalnoy\Nestedset\NodeTrait;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Contracts\Category as CategoryContract;
+use Webkul\Attribute\Models\AttributeProxy;
 
 class Category extends TranslatableModel implements CategoryContract
 {
@@ -34,5 +35,13 @@ class Category extends TranslatableModel implements CategoryContract
     public function getImageUrlAttribute()
     {
         return $this->image_url();
+    }
+
+     /**
+     * The filterable attributes that belong to the category.
+     */
+    public function filterableAttributes()
+    {
+        return $this->belongsToMany(AttributeProxy::modelClass(), 'category_filterable_attributes')->with('options');
     }
 }
