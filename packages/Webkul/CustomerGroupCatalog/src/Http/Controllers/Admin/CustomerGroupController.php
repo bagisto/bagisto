@@ -104,6 +104,7 @@ class CustomerGroupController extends Controller
     {
         $this->validate(request(), [
             'name' => 'string|required',
+            'code' => 'string|unique:customer_groups,code'
         ]);
 
         $data = request()->all();
