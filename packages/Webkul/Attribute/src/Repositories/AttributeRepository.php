@@ -221,12 +221,26 @@ class AttributeRepository extends Repository
 
         foreach($attributes as $key => $attribute) {
             if ($attribute->code != 'tax_category_id' && ($attribute->type == 'select' || $attribute->type == 'multiselect' || $attribute->code == 'sku')) {
-                array_push($trimmed, [
-                    'id' => $attribute->id,
-                    'name' => $attribute->name,
-                    'type' => $attribute->type,
-                    'code' => $attribute->code
-                ]);
+                if ($attribute->options()->exists()) {
+                    array_push($trimmed, [
+                        'id' => $attribute->id,
+                        'name' => $attribute->name,
+                        'type' => $attribute->type,
+                        'code' => $attribute->code,
+                        'has_options' => true,
+                        'options' => $attribute->options
+                    ]);
+                } else {
+                    array_push($trimmed, [
+                        'id' => $attribute->id,
+                        'name' => $attribute->name,
+                        'type' => $attribute->type,
+                        'code' => $attribute->code,
+                        'has_options' => false,
+                        'options' => null
+                    ]);
+                }
+
             }
         }
 

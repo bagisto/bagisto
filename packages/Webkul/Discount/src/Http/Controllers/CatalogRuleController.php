@@ -99,24 +99,22 @@ class CatalogRuleController extends Controller
 
     public function create()
     {
-        return view($this->_config['view'])->with('catalog_rule', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions, $this->attributeFamily->getPartial()]);
+        // dd($this->appliedConfig);
+        return view($this->_config['view'])->with('catalog_rule', [$this->appliedConfig, $this->category->getPartial(), $this->getStatesAndCountries(), $this->attribute->getPartial()]);
     }
 
     public function store()
     {
         $this->validate(request(), [
-            'name' => 'required|string',
+            'name' => 'required|string|unique:catalog_rules,name',
             'description' => 'string',
+            'starts_from' => 'present|nullable|date',
+            'ends_till' => 'present|nullable|date',
             'customer_groups' => 'required',
             'channels' => 'required',
-            'starts_from' => 'required|date',
-            'ends_till' => 'required|date',
             'status' => 'required|boolean',
             'end_other_rules' => 'required|boolean',
-            'priority' => 'required|numeric',
-            'criteria' => 'required',
-            'all_conditions' => 'required|array',
-            'apply' => 'required|numeric|min:0|max:3',
+            'all_conditions' => 'present',
             'disc_amount' => 'sometimes',
             'disc_percent' => 'sometimes',
         ]);
@@ -125,6 +123,16 @@ class CatalogRuleController extends Controller
 
         $catalog_rule_channels = array();
         $catalog_rule_customer_groups = array();
+
+        // check if starts_from is null
+        if ($catalog_rule['starts_from'] == "") {
+            $catalog_rule['starts_from'] = null;
+        }
+
+        // check if end_till is null
+        if ($catalog_rule['ends_till'] == "") {
+            $catalog_rule['ends_till'] = null;
+        }
 
         $catalog_rule_channels = $catalog_rule['channels'];
         $catalog_rule_customer_groups = $catalog_rule['customer_groups'];
@@ -136,19 +144,22 @@ class CatalogRuleController extends Controller
         unset($catalog_rule['all_conditions']);
 
         if (isset($catalog_rule['disc_amount'])) {
-            $catalog_rule['action_type'] = $catalog_rule['apply'];
             $catalog_rule['actions'] = [
-                'action_type' => $catalog_rule['apply'],
+                'action_code' => $catalog_rule['action_type'],
                 'disc_amount' => $catalog_rule['disc_amount']
             ];
         } else if (isset($catalog_rule['disc_percent'])) {
-            $catalog_rule['action_type'] = $catalog_rule['apply'];
             $catalog_rule['actions'] = [
-                'action_type' => $catalog_rule['apply'],
+                'action_code' => $catalog_rule['action_type'],
                 'disc_percent' => $catalog_rule['disc_percent'],
             ];
         }
 
+        $catalog_rule['discount_amount'] = $catalog_rule['disc_amount'];
+
+        $catalog_rule['action_code'] = $catalog_rule['action_type'];
+
+        unset($catalog_rule['disc_amount']);
         unset($catalog_rule['apply']);
         unset($catalog_rule['attributes']);
         unset($catalog_rule['_token']);
@@ -188,35 +199,76 @@ class CatalogRuleController extends Controller
     public function edit($id)
     {
         $catalog_rule = $this->catalogRule->find($id);
+
         $catalog_rule_channels = $this->catalogRuleChannels->findByField('catalog_rule_id', $id);
+
         $catalog_rule_customer_groups = $this->catalogRuleCustomerGroups->findByField('catalog_rule_id', $id);
 
-        return view($this->_config['view'])->with('catalog_rule', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions, $catalog_rule, $catalog_rule_channels, $catalog_rule_customer_groups, $this->attributeFamily->getPartial()]);
+        return view($this->_config['view'])->with('catalog_rule', [
+                $this->attribute->getPartial(),
+                $this->category->getPartial(),
+                $this->fetchOptionableAttributes(),
+                $this->appliedConfig,
+                $this->appliedConditions,
+                $catalog_rule,
+                $catalog_rule_channels,
+                $catalog_rule_customer_groups,
+                $this->attributeFamily->getPartial()
+            ]);
     }
 
     public function update($id)
     {
+        $data = request()->input();
+
+        // $validated = \Validator::make($data, [
+        //     'name' => 'required|stringunique:catalog_rule,name,' . $id,
+        //     'starts_from' => 'present|nullable|date',
+        //     'ends_till' => 'present|nullable|date',
+        //     'description' => 'string',
+        //     'customer_groups' => 'required',
+        //     'channels' => 'required',
+        //     'status' => 'required|boolean',
+        //     'end_other_rules' => 'required|boolean',
+        //     'all_conditions' => 'present',
+        //     'disc_amount' => 'sometimes',
+        //     'disc_percent' => 'sometimes'
+        // ]);
+
+        // if ($validated->fails()) {
+        //     dd($validated->errors());
+        // } else {
+        //     dd('passed');
+        // }
+
         $this->validate(request(), [
-            'name' => 'required|string',
+            'name' => 'required|stringunique:catalog_rule,name,'.$id,
+            'starts_from' => 'present|nullable|date',
+            'ends_till' => 'present|nullable|date',
             'description' => 'string',
             'customer_groups' => 'required',
             'channels' => 'required',
-            'starts_from' => 'required|date',
-            'ends_till' => 'required|date',
             'status' => 'required|boolean',
             'end_other_rules' => 'required|boolean',
-            'priority' => 'required|numeric',
-            'criteria' => 'required',
-            'all_conditions' => 'required|array',
-            'apply' => 'required|numeric|min:0|max:3',
+            'all_conditions' => 'present',
             'disc_amount' => 'sometimes',
-            'disc_percent' => 'sometimes',
+            'disc_percent' => 'sometimes'
         ]);
 
         $catalog_rule = request()->all();
 
         $catalog_rule_channels = array();
         $catalog_rule_customer_groups = array();
+
+        // check if starts_from is null
+        if ($catalog_rule['starts_from'] == "") {
+            $catalog_rule['starts_from'] = null;
+        }
+
+        // check if end_till is null
+        if ($catalog_rule['ends_till'] == "") {
+            $catalog_rule['ends_till'] = null;
+        }
 
         $catalog_rule_channels = $catalog_rule['channels'];
         $catalog_rule_customer_groups = $catalog_rule['customer_groups'];
@@ -273,8 +325,6 @@ class CatalogRuleController extends Controller
         $optionableAttributes = $this->fetchOptionableAttributes();
 
         $results = $this->findProducts->findByConditions($conditions);
-
-        dd($results);
     }
 
     public function fetchOptionableAttributes()
@@ -303,5 +353,22 @@ class CatalogRuleController extends Controller
 
             return response()->json(['message' => false], 400);
         }
+    }
+
+
+    /**
+     * Get Countries and states list from core helpers
+     *
+     * @return Array
+     */
+    public function getStatesAndCountries()
+    {
+        $countries = core()->countries()->toArray();
+        $states = core()->groupedStatesByCountries();
+
+        return [
+            'countries' => $countries,
+            'states' => $states
+        ];
     }
 }

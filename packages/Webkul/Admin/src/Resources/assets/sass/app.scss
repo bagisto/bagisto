@@ -269,7 +269,7 @@ body {
 .control-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     width: 750px;
 
     .control {
@@ -880,6 +880,19 @@ body {
     }
 }
 // css for rtl end here
+
+// For fixed and and save button
+.fixed-action {
+    position: fixed;
+    top: 108px;
+    right: 32px;
+}
+
+.fixed-action-slight {
+    position: fixed;
+    top: 94px;
+    right: 32px;
+}
 
 .pagination {
     margin-top: 30px;

@@ -89,6 +89,7 @@ class OnepageController extends Controller
         if (Cart::hasError())
             return redirect()->route('shop.checkout.cart.index');
 
+        // $this->nonCoupon->apply();
         $this->nonCoupon->apply();
 
         Cart::collectTotals();
@@ -166,8 +167,6 @@ class OnepageController extends Controller
 
         $this->nonCoupon->apply();
 
-        $this->nonCoupon->checkOnShipping(Cart::getCart());
-
         Cart::collectTotals();
 
         $cart = Cart::getCart();
@@ -234,7 +233,7 @@ class OnepageController extends Controller
     {
         $cart = Cart::getCart();
 
-        $this->validatesDiscount->validate($cart);
+        $this->validatesDiscount->validate();
 
         if (! $cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));

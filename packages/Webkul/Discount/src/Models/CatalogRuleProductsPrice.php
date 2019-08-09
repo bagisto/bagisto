@@ -3,11 +3,11 @@
 namespace Webkul\Discount\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Discount\Contracts\CatalogRuleProductsPrice as CatalogRuleProductsPriceContract;
+use Webkul\Discount\Contracts\CatalogRuleProductsPrice as CatalogRuleProductPriceContract;
 
-class CatalogRuleProductsPrice extends Model implements CatalogRuleProductsPriceContract
+class CatalogRuleProductsPrice extends Model implements CatalogRuleProductContract
 {
-    protected $table = 'cart_rules_products_price';
+    protected $table = 'catalog_rules_products_price';
 
     protected $guarded = ['created_at', 'updated_at'];
 }
