@@ -38,8 +38,7 @@
     @if(core()->getConfigData('stripe.connect.details.stripefees') == 'customer' && isset($cart->payment) && $cart->payment->method == 'stripe')
         <div class="item-detail">
             @php
-                $applicationFee = $cart->base_grand_total;
-                $applicationFee = (0.029 * $applicationFee) + (0.02 * $applicationFee) + 0.3;
+                $applicationFee = (0.029 * $cart->base_grand_total) + (env('STRIPE_ADMIN_COMMISSION', 0.0001) / 100 * $cart->base_grand_total) + 0.3;
             @endphp
 
             <label>

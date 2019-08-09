@@ -97,7 +97,7 @@ class SellerRegistrationController extends Controller
         if ($result->getStatusCode() == 200) {
             $stripeConnectDetails->delete();
 
-            session()->flash('info', trans('stripe::app.revoke-success'));
+            session()->flash('info', 'Your stripe account has been successfully revoked from the platform');
         } else {
             session()->flash('error', $result->getBody());
         }

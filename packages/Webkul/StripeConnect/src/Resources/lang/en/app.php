@@ -27,6 +27,5 @@ return  [
     'some-error' => 'Some error occurred',
     'transaction-fee' => 'Transaction Fees',
     'more-info' => '(after successful order)',
-    'continue' => 'Please click on continue to complete your transaction',
-    'revoke-success' => 'Your stripe account has been successfully revoked from the platform'
+    'continue' => 'Please click on continue to complete your transaction'
 ];

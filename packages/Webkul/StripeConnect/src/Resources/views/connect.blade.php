@@ -26,6 +26,8 @@
             @else
                 <span class="warning" style="font-size: 18px; font-weight: bold; color: #556cd6">
                     {{ __('stripe::app.client-id-missing') }}
+                    <br/><br/>
+                    <a href="{{ route('admin.configuration.index', 'stripe') }}">{{ __('stripe::app.click-here') }}</a>
                 </span>
             @endif
         </div>
