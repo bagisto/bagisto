@@ -55,7 +55,7 @@ class ViewRenderEventManager
      */
     public function getParam($name)
     {
-        return optional($this->params)->{$name};
+        return optional($this->params)[$name];
     }
 
     /**
