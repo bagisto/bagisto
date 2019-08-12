@@ -31,9 +31,31 @@ class ViewRenderEventManager
     {
         $this->params = $params ?? [];
 
-        Event::fire($eventName, $this->params);
+        Event::fire($eventName, $this);
 
         return $this->templates;
+    }
+    
+    /**
+     *  get params
+     * 
+     * @return array
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+    
+    /**
+     *  get param
+     * 
+     * @param $name
+     *
+     * @return mixed
+     */
+    public function getParam($name)
+    {
+        return optional($this->params)->{$name};
     }
 
     /**
