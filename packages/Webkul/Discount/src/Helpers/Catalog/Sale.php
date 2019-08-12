@@ -7,33 +7,6 @@ use Webkul\Discount\Helpers\Catalog\ConvertXToProductId;
 
 abstract class Sale
 {
-    /**
-     * To hold the catalog rule repository instance
-     */
-    protected $catalogRule;
-
-    /**
-     * ConvertXToProductId instance
-     */
-    protected $convertX;
-
-    /**
-     * To hold the rule classes
-     */
-    protected $rules;
-
-    /**
-     * @param CatalogRule $catalogRule
-     */
-    public function __construct(CatalogRule $catalogRule, ConvertXToProductId $convertX)
-    {
-        $this->catalogRule = $catalogRule;
-
-        $this->convertX = $convertX;
-
-        $this->rules = config('discount-rules.catalog');
-    }
-
     abstract function apply();
 
     /**
@@ -81,23 +54,22 @@ abstract class Sale
 
     /**
      * Function to maintain products and catalog rule
+     *
+     * @param CatalogRule $rule
+     *
+     * @return String|NULL
      */
     public function getProductIds($rule)
     {
-        $productIDs = $rule->conditions;
-
         if ($rule->conditions) {
             $conditions = $rule->conditions;
 
-            // $convertX = new ConvertXToProductId();
-
-            dd($this->convertX);
             $productIDs = $this->convertX->convertX($rule->conditions);
         } else {
-            // apply on all products
+            $productIDs = '*';
         }
 
-        dd($productIDs);
+        return $productIDs;
     }
 
      /**

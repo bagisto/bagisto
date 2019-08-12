@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCatalogRuleProductPriceTable extends Migration
+class CreateCatalogRuleProductsPriceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCatalogRuleProductPriceTable extends Migration
      */
     public function up()
     {
-        Schema::create('catalog_rule_product_price', function (Blueprint $table) {
+        Schema::create('catalog_rule_products_price', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('channel_id')->unsigned();
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');

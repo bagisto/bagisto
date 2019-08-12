@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.promotion.add-catalog-rule') }}
+    {{ __('admin::app.promotion.edit-catalog-rule') }}
 @stop
 
 @section('content')
@@ -20,13 +20,13 @@
                             <h1>
                                 <i class="icon angle-left-icon back-link" onclick="history.length > 1 ? history.go(-1) : window.location = '{{ url('/admin/dashboard') }}';"></i>
 
-                                {{ __('admin::app.promotion.add-catalog-rule') }}
+                                {{ __('admin::app.promotion.edit-catalog-rule') }}
                             </h1>
                         </div>
 
                         <div class="page-action fixed-action">
                             <button type="submit" class="btn btn-lg btn-primary">
-                                {{ __('admin::app.promotion.save-btn-title') }}
+                                {{ __('admin::app.promotion.edit-btn-title') }}
                             </button>
                         </div>
                     </div>

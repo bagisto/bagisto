@@ -117,7 +117,7 @@ class CartRuleController extends Controller
     public function store()
     {
         $validated = $this->validate(request(), [
-            'name' => 'required|string',
+            'name' => 'required|string|unique:cart_rules,name',
             'description' => 'string',
             'customer_groups' => 'required|array',
             'channels' => 'required|array',
@@ -349,8 +349,9 @@ class CartRuleController extends Controller
      */
     public function update($id)
     {
+        dd(request()->all());
         $this->validate(request(), [
-            'name' => 'required|string',
+            'name' => 'required|string|unique:cart_rules,name,'.$id,
             'description' => 'string',
             'customer_groups' => 'required|array',
             'channels' => 'required|array',

@@ -3,6 +3,9 @@
 namespace Webkul\Discount\Helpers\Catalog;
 
 use Webkul\Discount\Repositories\CatalogRuleRepository as CatalogRule;
+use Webkul\Discount\Repositories\CatalogRuleProductsRepository as CatalogRuleProducts;
+use Webkul\Discount\Repositories\CatalogRuleProductsPriceRepository as CatalogRuleProductsPrice;
+use Webkul\Discount\Helpers\Catalog\ConvertXToProductId as ConvertX;
 use Webkul\Discount\Helpers\Catalog\Sale;
 
 class Apply extends Sale
@@ -23,6 +26,21 @@ class Apply extends Sale
     protected $deceased;
 
     /**
+     * Holds convertXToProductId instance
+     */
+    protected $convertX;
+
+    /**
+     * Hold catalog rule products repository instance
+     */
+    protected $catalogRuleProduct;
+
+    /**
+     * Hold catalog rule products price repository instance
+     */
+    protected $catalogRuleProductPrice;
+
+    /**
      * To hold the rule classes
      */
     protected $rules;
@@ -30,9 +48,19 @@ class Apply extends Sale
     /**
      * @param CatalogRule $catalogRule
      */
-    public function __construct(CatalogRule $catalogRule)
-    {
+    public function __construct(
+        CatalogRule $catalogRule,
+        ConvertX $convertX,
+        CatalogRuleProducts $catalogRuleProduct,
+        CatalogRuleProductsPrice $catalogRuleProductPrice
+    ) {
         $this->catalogRule = $catalogRule;
+
+        $this->convertX = $convertX;
+
+        $this->catalogRuleProduct = $catalogRuleProduct;
+
+        $this->catalogRuleProductPrice = $catalogRuleProductPrice;
 
         $this->active = collect();
 
@@ -55,14 +83,39 @@ class Apply extends Sale
                 $this->active->push($rule->id);
 
                 // Job execution for active rules
-                $products = $this->getProductIds($rule);
+                $productIDs = $this->getProductIds($rule);
 
-                $this->setSalePrice($products);
+                $this->setSale($rule, $productIDs);
             } else {
                 $this->deceased->push($rule->id);
 
                 // Job execution for deceased rules
             }
+        }
+
+        dd('done');
+    }
+
+    /**
+     * To set the sale price for products falling catalog rule criteria
+     *
+     * @param CatalogRule $catalogRule
+     *
+     * @return Void
+     */
+    public function setSale($rule, $productIDs)
+    {
+        if (is_array($productIDs)) {
+            // apply on selected products
+            foreach ($productIDs as $productID) {
+                $this->catalogRuleProduct->createOrUpdate($rule, $productID);
+
+                $this->catalogRuleProductPrice->createOrUpdate($rule, $productID);
+            }
+        } else if ($productIDs == '*') {
+            $this->catalogRuleProduct->createOrUpdate($rule, $productIDs);
+
+            $this->catalogRuleProductPrice->createOrUpdate($rule, $productIDs);
         }
     }
 }

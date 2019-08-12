@@ -71,7 +71,7 @@ class ConvertXToProductId
 
     public function convertX($attribute_conditions)
     {
-        $attributeConditions = json_decode($attribute_conditions);
+        $attributeConditions = json_decode(json_decode($attribute_conditions));
 
         $categoryValues = $attributeConditions->categories;
 

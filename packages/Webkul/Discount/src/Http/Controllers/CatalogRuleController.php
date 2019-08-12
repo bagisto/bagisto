@@ -104,12 +104,21 @@ class CatalogRuleController extends Controller
         return view($this->_config['view']);
     }
 
+    /**
+     * To load create form for catalog rule
+     *
+     * @return View
+     */
     public function create()
     {
-        // dd($this->appliedConfig);
         return view($this->_config['view'])->with('catalog_rule', [$this->appliedConfig, $this->category->getPartial(), $this->getStatesAndCountries(), $this->attribute->getPartial()]);
     }
 
+    /**
+     * To store newly created catalog rule and store it
+     *
+     * @return Redirect
+     */
     public function store()
     {
         $this->validate(request(), [
@@ -148,7 +157,10 @@ class CatalogRuleController extends Controller
         unset($catalog_rule['criteria']);
 
         $catalog_rule['conditions'] = $catalog_rule['all_conditions'];
+
         unset($catalog_rule['all_conditions']);
+
+        $catalog_rule['conditions'] = json_encode($catalog_rule['conditions']);
 
         if (isset($catalog_rule['disc_amount'])) {
             $catalog_rule['actions'] = [
@@ -173,7 +185,6 @@ class CatalogRuleController extends Controller
         unset($catalog_rule['all_actions']);
 
         $catalog_rule['actions'] = json_encode($catalog_rule['actions']);
-        $catalog_rule['conditions'] = json_encode($catalog_rule['conditions']);
 
         $catalogRule = $this->catalogRule->create($catalog_rule);
 
@@ -203,6 +214,13 @@ class CatalogRuleController extends Controller
         }
     }
 
+    /**
+     * To load edit for previously created catalog rule
+     *
+     * @param $id
+     *
+     * @return View
+     */
     public function edit($id)
     {
         $catalog_rule = $this->catalogRule->find($id);
@@ -224,12 +242,19 @@ class CatalogRuleController extends Controller
             ]);
     }
 
+    /**
+     * To update previously created catalog rule
+     *
+     * @param $id
+     *
+     * @return Redirect
+     */
     public function update($id)
     {
         $data = request()->input();
 
         // $validated = \Validator::make($data, [
-        //     'name' => 'required|stringunique:catalog_rule,name,' . $id,
+        //     'name' => 'required|string|unique:catalog_rules,name,' . $id,
         //     'starts_from' => 'present|nullable|date',
         //     'ends_till' => 'present|nullable|date',
         //     'description' => 'string',
@@ -249,7 +274,8 @@ class CatalogRuleController extends Controller
         // }
 
         $this->validate(request(), [
-            'name' => 'required|string|unique:catalog_rules,name,' . $id,
+            'name' => 'required|string|unique:catalog_rules,name,'.$id,
+            // 'name' => 'required|string',
             'starts_from' => 'present|nullable|date',
             'ends_till' => 'present|nullable|date',
             'description' => 'string',
@@ -300,6 +326,9 @@ class CatalogRuleController extends Controller
             ];
         }
 
+        $catalog_rule['discount_amount'] = $catalog_rule['disc_amount'];
+
+        unset($catalog_rule['disc_amount']);
         unset($catalog_rule['apply']);
         unset($catalog_rule['attributes']);
         unset($catalog_rule['_token']);
@@ -324,6 +353,11 @@ class CatalogRuleController extends Controller
         }
     }
 
+    /**
+     * To apply the catalog rules
+     *
+     * @return Redirect
+     */
     public function applyRules()
     {
         $this->sale->apply();
@@ -342,6 +376,13 @@ class CatalogRuleController extends Controller
         return $attributesWithOptions;
     }
 
+    /**
+     * To delete existing catalog rule
+     *
+     * @param Integer $id
+     *
+     * @return Redirect
+     */
     public function destroy($id)
     {
         $catalogRule = $this->catalogRule->findOrFail($id);
@@ -356,7 +397,6 @@ class CatalogRuleController extends Controller
             return response()->json(['message' => false], 400);
         }
     }
-
 
     /**
      * Get Countries and states list from core helpers
