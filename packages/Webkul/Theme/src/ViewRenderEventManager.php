@@ -31,7 +31,7 @@ class ViewRenderEventManager
     {
         $this->params = $params ?? [];
 
-        Event::fire($eventName, $this);
+        Event::fire($eventName, $this->params);
 
         return $this->templates;
     }
