@@ -136,7 +136,11 @@
                                             <option v-for="(attr_ip, index1) in attribute_input" :value="attr_ip.code" :key="index1">@{{ attr_ip.name }}</option>
                                         </select>
 
-                                        <select class="control" v-model="attribute_values[index].condition" style="margin-right: 15px;">
+                                        <select v-show='attribute_values[index].type == "select" || attribute_values[index].type == "multiselect"' class="control" v-model="attribute_values[index].condition" style="margin-right: 15px;">
+                                            <option v-for="(condition, index) in conditions.select" :value="index" :key="index">@{{ condition }}</option>
+                                        </select>
+
+                                        <select v-show='attribute_values[index].type == "text" || attribute_values[index].type == "textarea" || attribute_values[index].type == "price"' class="control" v-model="attribute_values[index].condition" style="margin-right: 15px;">
                                             <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
                                         </select>
 
@@ -159,7 +163,7 @@
                                         <span class="icon trash-icon" v-on:click="removeAttr(index)"></span>
                                     </div>
 
-                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addAttributeCondition">Add Attribute Condition</span>
+                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addAttributeCondition">{{ __('admin::app.promotion.add-attr-condition') }}</span>
                                 </div>
                             </accordian>
 
@@ -256,6 +260,7 @@
                 },
 
                 mounted () {
+                    console.log(this.attribute_input);
                 },
 
                 methods: {
@@ -336,6 +341,7 @@
                         for(i in this.attribute_input) {
                             if (i == selectedIndex) {
                                 if (this.attribute_input[i].has_options == true) {
+                                    this.selectedIndex
                                     this.attribute_values[index].options = this.attribute_input[i].options;
                                 }
 
@@ -355,7 +361,7 @@
                     },
 
                     removeAttr(index) {
-                        this.conditions_list.splice(index, 1);
+                        this.attribute_values.splice(index, 1);
                     },
 
                     removeCat(index) {

@@ -5,7 +5,7 @@ namespace Webkul\Discount\Http\Controllers;
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-use Webkul\Discount\Helpers\ConvertXToProductId as ConvertX;
+use Webkul\Discount\Helpers\Cart\ConvertXToProductId as ConvertX;
 use Webkul\Discount\Repositories\CartRuleLabelsRepository as CartRuleLabels;
 use Webkul\Discount\Repositories\CartRuleCouponsRepository as CartRuleCoupons;
 

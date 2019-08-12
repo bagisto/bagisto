@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Discount\Helpers;
+namespace Webkul\Discount\Helpers\Cart;
 
 use Webkul\Discount\Helpers\Discount;
 use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;

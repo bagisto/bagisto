@@ -1,12 +1,11 @@
 <?php
 
-namespace Webkul\Discount\Helpers;
+namespace Webkul\Discount\Helpers\Cart;
 
 use Webkul\Discount\Helpers\Discount;
-use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
 use Cart;
 
-class NonCouponAbleRule extends Discount
+class CouponAbleRule extends Discount
 {
     /**
      * Applies the non couponable rule on the current cart instance
@@ -15,11 +14,11 @@ class NonCouponAbleRule extends Discount
      *
      * @return mixed
      */
-    public function apply($code = null)
+    public function apply($code)
     {
         $this->validateIfAlreadyApplied();
 
-        $rules = $this->getApplicableRules();
+        $rules = $this->getApplicableRules($code);
 
         if ($rules->count() == 1) {
             $rule = $rules->first();
@@ -30,19 +29,31 @@ class NonCouponAbleRule extends Discount
                 $this->save($rule);
 
                 $this->updateCartItemAndCart($rule);
-            }
-        } else if ($rules->count() > 1) {
-            $rule = $this->breakTie($rules);
 
-            $canApply = $this->canApply($rule);
-
-            if ($canApply) {
-                $this->save($rule);
-
-                $this->updateCartItemAndCart($rule);
+                return true;
             }
         } else {
             return false;
         }
+
+        return false;
+    }
+
+    /**
+     * Removes the already applied coupon on the current cart instance
+     *
+     * @return boolean
+     */
+    public function remove()
+    {
+        $cart = Cart::getCart();
+
+        $existingRule = $this->cartRuleCart->findWhere([
+            'cart_id' => $cart->id
+        ]);
+
+        $this->clearDiscount();
+
+        return true;
     }
 }

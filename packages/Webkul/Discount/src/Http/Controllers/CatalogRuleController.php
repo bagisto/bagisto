@@ -12,7 +12,7 @@ use Webkul\Product\Repositories\ProductFlatRepository as Product;
 use Webkul\Discount\Repositories\CatalogRuleRepository as CatalogRule;
 use Webkul\Discount\Repositories\CatalogRuleChannelsRepository as CatalogRuleChannels;
 use Webkul\Discount\Repositories\CatalogRuleCustomerGroupsRepository as CatalogRuleCustomerGroups;
-use Webkul\Discount\Helpers\FindProducts;
+use Webkul\Discount\Helpers\Catalog\Apply;
 
 /**
  * Catalog Rule controller
@@ -68,28 +68,35 @@ class CatalogRuleController extends Controller
     protected $catalogRuleCustomerGroups;
 
     /**
-     * To hold the catalog repository instance
+     * To hold catalog repository instance
      */
     protected $catalogRule;
 
     /**
-     * Find products using conditions helper instance
+     * To hold Sale instance
      */
-    protected $findProducts;
+    protected $apply;
 
-    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CatalogRule $catalogRule, CatalogRuleChannels $catalogRuleChannels, CatalogRuleCustomerGroups $catalogRuleCustomerGroups, FindProducts $findProducts)
-    {
+    public function __construct(
+        Attribute $attribute,
+        AttributeFamily $attributeFamily,
+        Category $category, Product $product,
+        CatalogRule $catalogRule,
+        CatalogRuleChannels $catalogRuleChannels,
+        CatalogRuleCustomerGroups $catalogRuleCustomerGroups,
+        Apply $sale
+    ) {
         $this->_config = request('_config');
         $this->attribute = $attribute;
         $this->attributeFamily = $attributeFamily;
         $this->category = $category;
         $this->product = $product;
+        $this->sale = $sale;
         $this->catalogRule = $catalogRule;
         $this->catalogRuleChannels = $catalogRuleChannels;
         $this->catalogRuleCustomerGroups = $catalogRuleCustomerGroups;
         $this->appliedConfig = config('pricerules.catalog');
         $this->appliedConditions = config('pricerules.conditions');
-        $this->findProducts = $findProducts;
     }
 
     public function index()
@@ -242,7 +249,7 @@ class CatalogRuleController extends Controller
         // }
 
         $this->validate(request(), [
-            'name' => 'required|stringunique:catalog_rule,name,'.$id,
+            'name' => 'required|string|unique:catalog_rules,name,' . $id,
             'starts_from' => 'present|nullable|date',
             'ends_till' => 'present|nullable|date',
             'description' => 'string',
@@ -280,15 +287,15 @@ class CatalogRuleController extends Controller
         unset($catalog_rule['all_conditions']);
 
         if (isset($catalog_rule['disc_amount'])) {
-            $catalog_rule['action_type'] = $catalog_rule['apply'];
+            $catalog_rule['action_code'] = $catalog_rule['action_type'];
             $catalog_rule['actions'] = [
-                'action_type' => $catalog_rule['apply'],
+                'action_code' => $catalog_rule['action_type'],
                 'disc_amount' => $catalog_rule['disc_amount']
             ];
         } else if (isset($catalog_rule['disc_percent'])) {
-            $catalog_rule['action_type'] = $catalog_rule['apply'];
+            $catalog_rule['action_code'] = $catalog_rule['action_type'];
             $catalog_rule['actions'] = [
-                'action_type' => $catalog_rule['apply'],
+                'action_code' => $catalog_rule['action'],
                 'disc_percent' => $catalog_rule['disc_percent'],
             ];
         }
@@ -319,12 +326,7 @@ class CatalogRuleController extends Controller
 
     public function applyRules()
     {
-        $catalogRules = $this->catalogRule->all();
-        $decoded = json_decode($catalogRules->first()->conditions);
-        $conditions = json_decode($decoded[0]);
-        $optionableAttributes = $this->fetchOptionableAttributes();
-
-        $results = $this->findProducts->findByConditions($conditions);
+        $this->sale->apply();
     }
 
     public function fetchOptionableAttributes()

@@ -12,7 +12,7 @@
     @push('scripts')
         <script type="text/x-template" id="catalog-rule-form-template">
             <div>
-                <form method="POST" action="{{ route('admin.catalog-rule.store') }}" @submit.prevent="onSubmit">
+                <form method="POST" action="{{ route('admin.catalog-rule.update', $catalog_rule[5]->id) }}" @submit.prevent="onSubmit">
                     @csrf
 
                     <div class="page-header">
@@ -91,7 +91,11 @@
                                         <span class="control-error" v-if="errors.has('status')">@{{ errors.first('status') }}</span>
                                     </div>
 
-                                    <datetime :name="starts_from">
+                                    @php
+                                        $now = new \Carbon\Carbon();
+                                    @endphp
+
+                                    <date :name="starts_from">
                                         <div class="control-group" :class="[errors.has('starts_from') ? 'has-error' : '']">
                                             <label for="starts_from" class="required">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
 
@@ -99,9 +103,9 @@
 
                                             <span class="control-error" v-if="errors.has('starts_from')">@{{ errors.first('starts_from') }}</span>
                                         </div>
-                                    </datetime>
+                                    </date>
 
-                                    <datetime :name="starts_from">
+                                    <date :name="starts_from">
                                         <div class="control-group" :class="[errors.has('ends_till') ? 'has-error' : '']">
                                             <label for="ends_till" class="required">{{ __('admin::app.promotion.general-info.ends-till') }}</label>
 
@@ -109,7 +113,7 @@
 
                                             <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
                                         </div>
-                                    </datetime>
+                                    </date>
                                 </div>
                             </accordian>
 
@@ -136,7 +140,11 @@
                                             <option v-for="(attr_ip, index1) in attribute_input" :value="attr_ip.code" :key="index1">@{{ attr_ip.name }}</option>
                                         </select>
 
-                                        <select class="control" v-model="attribute_values[index].condition" style="margin-right: 15px;">
+                                        <select v-show='attribute_values[index].type == "select" || attribute_values[index].type == "multiselect"' class="control" v-model="attribute_values[index].condition" style="margin-right: 15px;">
+                                            <option v-for="(condition, index) in conditions.select" :value="index" :key="index">@{{ condition }}</option>
+                                        </select>
+
+                                        <select v-show='attribute_values[index].type == "text" || attribute_values[index].type == "textarea" || attribute_values[index].type == "price"' class="control" v-model="attribute_values[index].condition" style="margin-right: 15px;">
                                             <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
                                         </select>
 
@@ -159,7 +167,7 @@
                                         <span class="icon trash-icon" v-on:click="removeAttr(index)"></span>
                                     </div>
 
-                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addAttributeCondition">Add Attribute Condition</span>
+                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addAttributeCondition">{{ __('admin::app.promotion.add-attr-condition') }}</span>
                                 </div>
                             </accordian>
 
@@ -235,7 +243,7 @@
 
                         category_options: @json($catalog_rule[1]),
                         category_values: [],
-                        conditions: @json($catalog_rule[5]).conditions,
+                        conditions: @json($catalog_rule[3]).conditions,
                         attribute_values: [],
                         attr_object: {
                             attribute: null,
@@ -243,11 +251,12 @@
                             value: [],
                             options: []
                         },
-                        attribute_input: @json($catalog_rule[3])
+                        attribute_input: @json($catalog_rule[0])
                     }
                 },
 
                 mounted () {
+                    console.log(this.conditions)
                     channels = @json($catalog_rule[5]->channels);
 
                     this.channels = [];
@@ -292,6 +301,18 @@
                 },
 
                 methods: {
+                    created() {
+                        VeeValidate.Validator.extend('is_time', {
+                            getMessage: field => `The format must be HH:MM:SS`,
+                            validate: (value) => new Promise(resolve => {
+                                let regex = new RegExp("([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])");
+                                resolve({
+                                    valid: value && regex.test(value)
+                                });
+                            })
+                        });
+                    },
+
                     categoryLabel (option) {
                         return option.name + ' [ ' + option.slug + ' ]';
                     },
@@ -321,6 +342,8 @@
                                 }
 
                                 this.attribute_values[index].type = this.attribute_input[i].type;
+
+                                debugger
                             }
                         }
                     },
@@ -336,7 +359,7 @@
                     },
 
                     removeAttr(index) {
-                        this.conditions_list.splice(index, 1);
+                        this.attribute_values.splice(index, 1);
                     },
 
                     removeCat(index) {
