@@ -224,7 +224,7 @@ class AttributeRepository extends Repository
                 if ($attribute->options()->exists()) {
                     array_push($trimmed, [
                         'id' => $attribute->id,
-                        'name' => $attribute->name,
+                        'name' => $attribute->admin_name,
                         'type' => $attribute->type,
                         'code' => $attribute->code,
                         'has_options' => true,
@@ -233,7 +233,7 @@ class AttributeRepository extends Repository
                 } else {
                     array_push($trimmed, [
                         'id' => $attribute->id,
-                        'name' => $attribute->name,
+                        'name' => $attribute->admin_name,
                         'type' => $attribute->type,
                         'code' => $attribute->code,
                         'has_options' => false,
