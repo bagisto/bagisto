@@ -3,14 +3,15 @@
 return [
     'common' => [
         'no-result-found' => 'We could not find any records.',
-        'country' => 'Country',
-        'state' => 'State',
-        'true' => 'True',
-        'false' => 'False'
+        'country' => 'کشور',
+        'state' => 'استان',
+        'true' => 'صحیح',
+        'false' => 'غلط'
     ],
 
     'layouts' => [
-        'my-account' => 'حسایب من',
+        'account' => 'حساب',
+        'my-account' => 'پروفایل من',
         'logout' => 'خروج',
         'visit-shop' => 'مشاهده فروشگاه',
         'dashboard' => 'داشبورد',
@@ -85,7 +86,7 @@ return [
         'to' => 'به',
         'total-customers' => 'همه مشتریان',
         'total-orders' => 'همه سفارشات',
-        'total-sale' => 'همه فروش ها',
+        'total-sale' => 'مجموع فروش',
         'average-sale' => 'میانگین فروش',
         'increased' => ':progress%',
         'decreased' => ':progress%',
@@ -97,8 +98,8 @@ return [
         'customer-with-most-sales' => 'مشتری با بیش‌ترین فروش',
         'order-count' => ':count تا سفارش',
         'revenue' => 'درآمد :total',
-        'stock-threshold' => 'آستانه سهام',
-        'qty-left' => ':qty چپ',
+        'stock-threshold' => 'تعداد کالای موجود',
+        'qty-left' => ':qty موجود',
     ],
 
     'datagrid' => [
@@ -133,7 +134,7 @@ return [
         'priority' => 'اولویت',
         'subscribed' => 'مشترکید',
         'base-total' => 'پایه کل',
-        'grand-total' => 'Grand کل',
+        'grand-total' => 'مجموع کل',
         'order-date' => 'تاریخ سفارش',
         'channel-name' => 'نام کانال',
         'billed-to' => 'صورت حساب داده شده برای',
@@ -160,7 +161,12 @@ return [
         'ends-till' => 'پایان می یابد',
         'per-cust' => 'به ازای هر مشتری',
         'usage-throttle' => 'بار استفاده',
-        'for-guest' => 'برای مهمان'
+        'for-guest' => 'برای مهمان',
+        'end_other_rules' => 'پایان قوانین دیگر',
+        'action_type' => 'نوع عملیات',
+        'disc_quantity' => 'مقدار استفاده نشده',
+        'disc_threshold' => 'آستانه استفاده نشده',
+        'use_coupon' => 'استافده از کوپن'
     ],
 
     'account' => [
@@ -660,7 +666,7 @@ return [
             'save-btn-title' => 'ذخیره اسلایدر',
             'general' => 'عمومی',
             'image' => 'تصویر',
-            'content' => 'حتوا',
+            'content' => 'محتوا',
             'channels' => 'کانال',
             'created-success' => 'اسلایدر  با موفقیت ایجاد شد',
             'created-fault' => 'خطا در هنگام ایجاد اسلایدر',
@@ -805,13 +811,15 @@ return [
         'select-attr' => 'انتخاب ویژگی',
         'select-attr-fam' => 'انتخاب خانواده ویژگی',
         'select-cart-attr' => 'انتخاب ویژگی سبد خرید',
+        'add_condition' => 'افزودن شرط',
+        'global_labels' => 'برچسب های جهانی',
         'general-info' => [
-            'name' => 'Rule نام',
+            'name' => 'نام نقش',
             'description' => 'توضیحات',
             'starts-from' => 'شروع',
             'ends-till' => 'پایان',
             'channels' => 'کانال ها',
-            'channels-req' => 'کانالs',
+            'channels-req' => 'کانال ها',
             'cust-groups' => 'گروه های مشتری',
             'priority' => 'اولویت',
             'add-condition' => 'افزودن شرایط',
@@ -838,7 +846,10 @@ return [
             'is-guest' => 'برای مهمانان',
             'disc_qty' => 'حداکثر. مقدار مجاز برای تخفیف',
             'test-mode' => 'انتخاب کنید چگونه شرایط را آزمایش کنیم',
-            'labels' => 'برچسب'
+            'labels' => 'برچسب',
+            'information'  => 'اطلاعات',
+            'actions'  => 'عملیات',
+            'coupons'  => 'کوپن ها'
         ],
 
         'status' => [
@@ -870,7 +881,7 @@ return [
 
         'cart' => [
             'buy-atleast' => 'حداقل بخرید',
-            'apply-to-shipping' => 'ارسال به حمل و نقل'
+            'apply-to-shipping' => 'درخواست حمل و نقل'
         ]
     ],
 
@@ -955,20 +966,20 @@ return [
             'review' => 'بررسی',
             'allow-guest-review' => 'اجازه دادن به کاربر مهمان برای بررسی',
             'inventory' => 'موجودی',
-            'stock-options' => 'گزینه های سهام',
+            'stock-options' => 'گزینه های موجودی',
             'allow-backorders' => 'اجازه به دره های پستی',
             'customer' => 'مشتری',
             'settings' => 'تنظیمات',
             'address' => 'آدرس',
-            'street-lines' => 'خطوط در یک آدرس خیابان',
+            'street-lines' => 'تعداد خطوط در خیابان',
             'sales' => 'فروش ها',
             'shipping-methods' => 'روش های حمل و نقل',
             'free-shipping' => 'ارسال رایگان',
             'flate-rate-shipping' => 'نرخ ثابت حمل و نقل',
             'shipping' => 'حمل و نقل دریایی',
-            'origin' => 'اصل و نسب',
+            'origin' => 'مبدا',
             'country' => 'کشور',
-            'state' => 'استاد',
+            'state' => 'استان',
             'zip' => 'کد پستی',
             'city' => 'شهر',
             'street-address' => 'آدرس خیابان',
@@ -978,13 +989,13 @@ return [
             'status' => 'وضعیت',
             'type' => 'نوع',
             'payment-methods' => 'روش های پرداخت',
-            'cash-on-delivery' => 'پرداخت نقد هنگام تحویل',
-            'money-transfer' => 'انتقال پول',
+            'cash-on-delivery' => 'پرداخت در محل',
+            'money-transfer' => 'انتقال وجه',
             'paypal-standard' => 'استاندارد پی پال',
             'business-account' => 'حساب کاربری تجاری',
             'newsletter' => 'اشتراک خبرنامه',
-            'newsletter-subscription' => 'اشتراک اشتراک خبرنامه را مجاز کنید',
-            'email' => 'پست الکترونیک Verification',
+            'newsletter-subscription' => 'اشتراک خبرنامه را مجاز کنید',
+            'email' => 'تاییدیه پست الکترونیک',
             'email-verification' => 'تایید پست الکترونیک را مجاز کنید',
             'sort_order' => 'ترتیب مرتب سازی',
             'general' => 'عمومی',
