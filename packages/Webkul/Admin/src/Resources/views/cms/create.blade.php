@@ -76,8 +76,8 @@
                         {!! __('admin::app.cms.pages.two-col') !!}
                         {!! __('admin::app.cms.pages.three-col') !!}
 
-                        <div class="mt-10 mb-10" @submit.prevent="showModal('showHelpers')">
-                            <a class="btn btn-sm btn-primary">
+                        <div class="mt-10 mb-10">
+                            <a target="_blank" href="{{ route('ui.helper.classes') }}" class="btn btn-sm btn-primary">
                                 {{ __('admin::app.cms.pages.helper-classes') }}
                             </a>
                         </div>
@@ -121,13 +121,13 @@
         </form>
     </div>
 
-    <modal id="showHelpers" :is-open="modalIds.showHelpers">
+    {{-- <modal id="showHelpers" :is-open="modalIds.showHelpers">
         <h3 slot="header">{{ __('admin::app.cms.pages.helper-classes') }}</h3>
 
         <div slot="body">
             @include('ui::partials.helper-classes')
         </div>
-    </modal>
+    </modal> --}}
 @stop
 
 @push('scripts')
