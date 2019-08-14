@@ -2,7 +2,7 @@
 
 namespace Webkul\Discount\Helpers\Cart;
 
-use Webkul\Discount\Helpers\Discount;
+use Webkul\Discount\Helpers\Cart\Discount;
 
 class NonCouponAbleRule extends Discount
 {

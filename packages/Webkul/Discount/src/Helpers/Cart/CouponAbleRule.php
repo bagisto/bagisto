@@ -2,7 +2,7 @@
 
 namespace Webkul\Discount\Helpers\Cart;
 
-use Webkul\Discount\Helpers\Discount;
+use Webkul\Discount\Helpers\Cart\Discount;
 use Cart;
 
 class CouponAbleRule extends Discount

@@ -2,7 +2,7 @@
 
 namespace Webkul\Discount\Helpers\Cart;
 
-use Webkul\Discount\Helpers\Discount;
+use Webkul\Discount\Helpers\Cart\Discount;
 use Webkul\Discount\Repositories\CartRuleCartRepository as CartRuleCart;
 
 class ValidatesDiscount extends Discount
