@@ -6,9 +6,10 @@
 
 <?php
     $filterAttributes = [];
-    $products = $productRepository->getAll($category->id);
 
     if (isset($category)) {
+        $products = $productRepository->getAll($category->id);
+
         if (count($category->filterableAttributes) > 0 && count($products)) {
             $filterAttributes = $category->filterableAttributes;
         } else {
