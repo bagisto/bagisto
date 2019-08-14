@@ -194,11 +194,11 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
         $page = $this->cms->findOrFail($id);
 
         if ($page->delete()) {
-            session()->flash('success', trans('admin::app.cms.delete-success'));
+            session()->flash('success', trans('admin::app.cms.pages.delete-success'));
 
             return response()->json(['message' => true], 200);
         } else {
-            session()->flash('success', trans('admin::app.cms.delete-failure'));
+            session()->flash('success', trans('admin::app.cms.pages.delete-failure'));
 
             return response()->json(['message' => false], 200);
         }
