@@ -286,14 +286,14 @@ class DashboardController extends Controller
     private function getOrdersBetweenDate($start, $end)
     {
         return $this->order->scopeQuery(function ($query) use ($start, $end) {
-            return $query->where('orders.status', '<>', 'canceled')->where('orders.created_at', '>=', $start)->where('orders.created_at', '<=', $end);
+            return $query->where('orders.created_at', '>=', $start)->where('orders.created_at', '<=', $end);
         });
     }
 
     private function getCustomersBetweenDates($start, $end)
     {
         return $this->customer->scopeQuery(function ($query) use ($start, $end) {
-            return $query->where('customers.created_at', '>=', $start)->where('customers.created_at', '<=', $end)->where('customers.status', '=', 1);
+            return $query->where('customers.created_at', '>=', $start)->where('customers.created_at', '<=', $end);
         });
     }
 }

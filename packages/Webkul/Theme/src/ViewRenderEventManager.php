@@ -1,6 +1,9 @@
 <?php
+
 namespace Webkul\Theme;
+
 use Illuminate\Support\Facades\Event;
+
 class ViewRenderEventManager
 {
     /**
@@ -9,12 +12,14 @@ class ViewRenderEventManager
      * @var array
      */
     protected $templates = [];
+
     /**
      * Paramters passed with event
      *
      * @var array
      */
     protected $params;
+
     /**
      * Fires event for rendering template
      *
@@ -30,28 +35,6 @@ class ViewRenderEventManager
 
         return $this->templates;
     }
-    
-    /**
-     *  get params
-     * 
-     * @return array
-     */
-    public function getParams()
-    {
-        return $this->params;
-    }
-    
-    /**
-     *  get param
-     * 
-     * @param $name
-     *
-     * @return mixed
-     */
-    public function getParam($name)
-    {
-        return optional($this->params)[$name];
-    }
 
     /**
      *  get params
@@ -74,6 +57,7 @@ class ViewRenderEventManager
     {
         return optional($this->params)[$name];
     }
+
     /**
      * Add templates for render
      *
@@ -84,6 +68,7 @@ class ViewRenderEventManager
     {
         array_push($this->templates, $template);
     }
+
     /**
      * Renders templates
      *
@@ -92,11 +77,13 @@ class ViewRenderEventManager
     public function render()
     {
         $string = "";
+
         foreach ($this->templates as $template) {
             if (view()->exists($template)) {
                 $string .= view($template, $this->params)->render();
             }
         }
+
         return $string;
     }
 }
