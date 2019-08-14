@@ -77,9 +77,9 @@
                         {!! __('admin::app.cms.pages.three-col') !!}
 
                         <div class="mt-10 mb-10" @submit.prevent="showModal('showHelpers')">
-                            <button class="btn btn-sm btn-primary">
+                            <a class="btn btn-sm btn-primary">
                                 {{ __('admin::app.cms.pages.helper-classes') }}
-                            </button>
+                            </a>
                         </div>
 
                         <span class="control-error" v-if="errors.has('html_content')">@{{ errors.first('html_content') }}</span>
