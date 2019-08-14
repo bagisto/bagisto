@@ -989,7 +989,7 @@ return [
             'url-key' => 'URL Key',
             'create-btn-title' => 'Add Page',
             'edit-title' => 'Edit Page',
-            'edit-btn-title' => 'Edit Page',
+            'edit-btn-title' => 'Save Page',
             'create-success' => 'Page created successfully',
             'create-failure' => 'Page cannot be created',
             'update-success' => 'Page updated successfully',

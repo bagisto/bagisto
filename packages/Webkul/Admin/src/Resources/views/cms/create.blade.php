@@ -76,10 +76,10 @@
                         {!! __('admin::app.cms.pages.two-col') !!}
                         {!! __('admin::app.cms.pages.three-col') !!}
 
-                        <div class="mt-10 mb-10" @submit.prevent="showModal('showHelpers')">
-                            <button class="btn btn-sm btn-primary">
+                        <div class="mt-10 mb-10">
+                            <a target="_blank" href="{{ route('ui.helper.classes') }}" class="btn btn-sm btn-primary">
                                 {{ __('admin::app.cms.pages.helper-classes') }}
-                            </button>
+                            </a>
                         </div>
 
                         <span class="control-error" v-if="errors.has('html_content')">@{{ errors.first('html_content') }}</span>
@@ -110,7 +110,7 @@
                     </div>
 
                     <div class="control-group" :class="[errors.has('meta_description') ? 'has-error' : '']">
-                        <label for="meta_description" class="required">{{ __('admin::app.cms.pages.meta_description') }}</label>
+                        <label for="meta_description">{{ __('admin::app.cms.pages.meta_description') }}</label>
 
                         <textarea type="text" class="control" name="meta_description" value="{{ old('meta_description') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.meta_description') }}&quot;"></textarea>
 
@@ -121,13 +121,13 @@
         </form>
     </div>
 
-    <modal id="showHelpers" :is-open="modalIds.showHelpers">
+    {{-- <modal id="showHelpers" :is-open="modalIds.showHelpers">
         <h3 slot="header">{{ __('admin::app.cms.pages.helper-classes') }}</h3>
 
         <div slot="body">
             @include('ui::partials.helper-classes')
         </div>
-    </modal>
+    </modal> --}}
 @stop
 
 @push('scripts')

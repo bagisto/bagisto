@@ -133,10 +133,22 @@ return [
 
             'string' => [
                 '=' => 'Equals',
-                // '>=' => 'Greater or equals',
-                // '<=' => 'Lesser or equals',
-                // '>' => 'Greater than',
-                // '<' => 'Lesser than',
+                '>=' => 'Greater or equals',
+                '<=' => 'Lesser or equals',
+                '>' => 'Greater than',
+                '<' => 'Lesser than',
+                '{}' => 'Contains',
+                '!{}' => 'Does not contains'
+            ],
+
+            'select' => [
+                '=' => 'Equals',
+                '{}' => 'Contains',
+                '!{}' => 'Does not contains'
+            ],
+
+            'multiselect' => [
+                '=' => 'Equals',
                 '{}' => 'Contains',
                 '!{}' => 'Does not contains'
             ],

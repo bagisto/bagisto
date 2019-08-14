@@ -689,7 +689,7 @@
                                 delete this.attribute_values[i].options;
                             }
 
-                            if (this.category_values.length > 0) {
+                            if (this.category_values != null && this.category_values.length > 0) {
                                 this.all_attributes.categories = this.category_values;
                             }
 

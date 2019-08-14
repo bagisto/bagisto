@@ -75,6 +75,11 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
             'channel_id' => $currentChannel->id
         ]);
 
-        return view('shop::cms.page')->with('page', $page);
+        if ($page) {
+            return view('shop::cms.page')->with('page', $page);
+        } else {
+            abort(404);
+        }
+
     }
 }

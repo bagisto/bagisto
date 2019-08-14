@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Discount\Helpers;
+namespace Webkul\Discount\Helpers\Cart;
 
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
@@ -8,7 +8,6 @@ use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
 use Webkul\Category\Repositories\CategoryRepository as Category;
 use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Product\Models\ProductAttributeValue as ProductAttributeValue;
-use DB;
 
 class ConvertXToProductId
 {
@@ -284,13 +283,9 @@ class ConvertXToProductId
                 $qb->where('product_categories.category_id', $categoryId);
             }
 
-            if (is_null(request()->input('status'))) {
-                $qb->where('product_flat.status', 1);
-            }
+            $qb->where('product_flat.status', 1);
 
-            if (is_null(request()->input('visible_individually'))) {
-                $qb->where('product_flat.visible_individually', 1);
-            }
+            $qb->where('product_flat.visible_individually', 1);
 
             $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
                 $qb->on('product_flat.id', '=', 'flat_variants.parent_id');

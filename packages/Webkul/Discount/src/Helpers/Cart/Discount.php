@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Discount\Helpers;
+namespace Webkul\Discount\Helpers\Cart;
 
 use Webkul\Discount\Repositories\CartRuleRepository as CartRule;
 use Webkul\Checkout\Repositories\CartItemRepository as CartItem;
@@ -284,30 +284,6 @@ abstract class Discount
     }
 
     /**
-     * To find oldest rule
-     *
-     * @param Collection $rules
-     *
-     * @return Collection $rule
-     */
-    public function findOldestRule($rules)
-    {
-        $leastId = 0;
-
-        if ($rules->count()) {
-            $leastId = $rules->min('id');
-
-            foreach ($rules as $rule) {
-                if ($rule->id == $leastId) {
-                    return $rule;
-                }
-            }
-        } else {
-            return collect();
-        }
-    }
-
-    /**
      * To calculate the impact of the rule
      *
      * @return collection
@@ -349,6 +325,23 @@ abstract class Discount
         $timeBased = false;
 
         $channelBased = false;
+
+        // time based constraints
+        if ($rule->starts_from != null && $rule->ends_till == null) {
+            if (Carbon::parse($rule->starts_from) < now()) {
+                $timeBased = true;
+            }
+        } else if ($rule->starts_from == null && $rule->ends_till != null) {
+            if (Carbon::parse($rule->ends_till) > now()) {
+                $timeBased = true;
+            }
+        } else if ($rule->starts_from != null && $rule->ends_till != null) {
+            if (Carbon::parse($rule->starts_from) < now() && now() < Carbon::parse($rule->ends_till)) {
+                $timeBased = true;
+            }
+        } else {
+            $timeBased = true;
+        }
 
         // channel based constraints
         foreach ($rule->channels as $channel) {
@@ -407,7 +400,7 @@ abstract class Discount
             }
         }
 
-        if ($channelBased && $customerGroupBased && $conditionsBased) {
+        if ($channelBased && $customerGroupBased && $timeBased && $conditionsBased) {
             if ($rule->uses_attribute_conditions == 1 && $partialMatch) {
                 return true;
             } else if ($rule->uses_attribute_conditions == 0) {
