@@ -441,7 +441,12 @@ return [
             'free' => 'Free',
             'coupon-used' => 'Coupon Used',
             'applied' => 'Applied',
-            'back' => 'Back'
+            'back' => 'Back',
+            'cash-desc' => 'Cash On Delivery',
+            'money-desc' => 'Money Transfer',
+            'paypal-desc' => 'Paypal Standard',
+            'free-desc' => 'This is a free shipping',
+            'flat-desc' => 'This is a flat rate'
         ],
 
         'total' => [

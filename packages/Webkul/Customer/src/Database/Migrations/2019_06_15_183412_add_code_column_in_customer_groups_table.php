@@ -14,7 +14,7 @@ class AddCodeColumnInCustomerGroupsTable extends Migration
     public function up()
     {
         Schema::table('customer_groups', function (Blueprint $table) {
-            $table->string('code');
+            $table->string('code')->unique();
         });
     }
 

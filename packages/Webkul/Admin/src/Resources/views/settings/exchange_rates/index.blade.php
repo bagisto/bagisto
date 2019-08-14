@@ -15,6 +15,16 @@
                 <a href="{{ route('admin.exchange_rates.create') }}" class="btn btn-lg btn-primary">
                     {{ __('admin::app.settings.exchange_rates.add-title') }}
                 </a>
+
+                @php
+                    $defaultService = config('services.exchange-api.default');
+                @endphp
+
+                {{-- <a href="{{ route('admin.exchange_rates.update-rates', $defaultService) }}" class="btn btn-lg btn-primary">
+                    {{ __('admin::app.settings.exchange_rates.update-rates', [
+                        'service' => $defaultService
+                    ]) }}
+                </a> --}}
             </div>
         </div>
 

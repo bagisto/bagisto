@@ -24,7 +24,7 @@ class ValidatesDiscount extends Discount
 
     public function apply($code)
     {
-        return ;
+        return null;
     }
 
     /**
@@ -34,27 +34,9 @@ class ValidatesDiscount extends Discount
      *
      * @return mixed
      */
-    public function validate($cart)
+    public function validate()
     {
-        $appliedRule = $this->cartRuleCart->findWhere([
-            'cart_id' => $cart->id
-        ]);
-
-        if ($appliedRule->count()) {
-            $appliedRule = $appliedRule->first()->cart_rule;
-
-            if ($appliedRule->status == 1) {
-                $applicability = $this->checkApplicability($appliedRule);
-
-                if (! $applicability) {
-                    return $this->remove();
-                }
-            } else {
-                return $this->remove();
-            }
-        }
-
-        return false;
+        $this->validateIfAlreadyApplied();
     }
 
     /**
