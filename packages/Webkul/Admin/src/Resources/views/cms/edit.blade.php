@@ -114,7 +114,7 @@
                     </div>
 
                     <div class="control-group" :class="[errors.has('meta_description') ? 'has-error' : '']">
-                        <label for="meta_description" class="required">{{ __('admin::app.cms.pages.meta_description') }}</label>
+                        <label for="meta_description">{{ __('admin::app.cms.pages.meta_description') }}</label>
 
                         <textarea type="text" class="control" name="meta_description" data-vv-as="&quot;{{ __('admin::app.cms.pages.meta_description') }}&quot;">{{ $page->meta_description ?? old('meta_description') }}</textarea>
 
