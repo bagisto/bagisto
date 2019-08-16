@@ -15,7 +15,7 @@ class CreateCmsPagesTable extends Migration
     {
         Schema::create('cms_pages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('url_key')->unique();
+            $table->string('url_key')->nullable();
             $table->longtext('html_content');
             $table->string('page_title');
             $table->string('meta_title');

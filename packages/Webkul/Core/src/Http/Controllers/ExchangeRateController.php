@@ -3,9 +3,9 @@
 namespace Webkul\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\CurrencyRepository as Currency;
+use Webkul\Core\Repositories\ExchangeRateRepository as ExchangeRate;
 
 /**
  * ExchangeRate controller
@@ -23,6 +23,11 @@ class ExchangeRateController extends Controller
     protected $_config;
 
     /**
+     * ExchangeRateRepository instance
+     */
+    protected $exchangeRate;
+
+    /**
      * CurrencyRepository object
      *
      * @var array
@@ -36,9 +41,11 @@ class ExchangeRateController extends Controller
      * @param  \Webkul\Core\Repositories\CurrencyRepository      $currency
      * @return void
      */
-    public function __construct(Currency $currency)
+    public function __construct(Currency $currency, ExchangeRate $exchangeRate)
     {
         $this->currency = $currency;
+
+        $this->exchangeRate = $exchangeRate;
 
         $this->_config = request('_config');
     }
