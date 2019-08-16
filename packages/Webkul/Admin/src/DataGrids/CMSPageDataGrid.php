@@ -64,24 +64,24 @@ class CMSPageDataGrid extends DataGrid
             'searchable' => false,
             'sortable' => true,
             'filterable' => true,
-            'wrapper' => function($row) use($channels) {
-                $channelCode = $channels->find($row->channel_id)->name;
+            'wrapper' => function($row) use($locales) {
+                $localeCode = $locales->find($row->locale_id)->code;
 
-                return $row->channel_id.' ('. $channelCode. ')';
+                return $row->locale_id.' ('. $localeCode. ')';
             }
         ]);
 
         $this->addColumn([
             'index' => 'channel_id',
-            'label' => trans('admin::app.cms.pages.channel'),
+            'label' => trans('admin::app.cms.pages.locale'),
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true,
-            'wrapper' => function($row) use($locales) {
-                $localeCode = $locales->find($row->locale_id)->code;
+            'wrapper' => function($row) use($channels) {
+                $channelCode = $channels->find($row->channel_id)->name;
 
-                return $row->locale_id.' ('. $localeCode. ')';
+                return $row->channel_id.' ('. $channelCode. ')';
             }
         ]);
     }
