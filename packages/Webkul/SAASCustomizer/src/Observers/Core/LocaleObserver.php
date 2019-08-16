@@ -14,7 +14,7 @@ class LocaleObserver
             if ($model->count() == 0) {
                 $model->company_id = Company::getCurrent()->id;
             } else {
-                session()->flash('error', 'Creating locale other than English is not allowed');
+                session()->flash('error', trans('saas::app.custom-errors.locale-creation'));
 
                 abort(404);
             }
@@ -24,7 +24,7 @@ class LocaleObserver
     public function deleting(Locale $model)
     {
         if ($model->count() == 1) {
-            session()->flash('error', 'Cannot delete the Locale');
+            session()->flash('error', trans('saas::app.custom-errors.locale-delete'));
         }
 
         return false;

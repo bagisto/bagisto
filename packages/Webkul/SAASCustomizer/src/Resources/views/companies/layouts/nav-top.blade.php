@@ -2,7 +2,7 @@
     <div class="navbar-top-left">
         <div class="brand-logo">
             <a href="{{ route('admin.dashboard.index') }}">
-                <img src="{{ asset('vendor/webkul/saas/assets/images/razzo-logo.png') }}" alt="Razzo" style="height: 50px; width: 100px; margin-top: -5px;" />
+                <img src="{{ asset('vendor/webkul/ui/assets/images/logo.png') }}" alt="Bagisto"/>
             </a>
         </div>
     </div>
@@ -24,9 +24,6 @@
                         <div class="dropdown-container">
                             <label>Account</label>
                             <ul>
-                                <li>
-                                    <a href="{{ route('admin.account.edit') }}">{{ trans('admin::app.layouts.my-account') }}</a>
-                                </li>
                                 <li>
                                     <a href="{{ route('super.session.destroy') }}">{{ trans('admin::app.layouts.logout') }}</a>
                                 </li>

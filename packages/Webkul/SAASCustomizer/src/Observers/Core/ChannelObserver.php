@@ -14,9 +14,9 @@ class ChannelObserver
             if ($model->count() == 0) {
                 $model->company_id = Company::getCurrent()->id;
             } else {
-                session()->flash('error', 'Creating more than one channel is not allowed');
+                session()->flash('error', trans('saas::app.custom-errors.channel-creating'));
 
-                abort(404);
+                throw new \Exception('illegal_action');
             }
         }
     }
@@ -25,9 +25,9 @@ class ChannelObserver
     {
         if (! auth()->guard('super-admin')->check()) {
             if ($channel->hostname != Company::getCurrent()->domain) {
-                session()->flash('warning', 'Kindly contact admin to change your hostname');
+                session()->flash('warning', trans('saas::app.custom-errors.channel-hostname'));
 
-                abort(404);
+                throw new \Exception('illegal_action');
             }
         }
     }

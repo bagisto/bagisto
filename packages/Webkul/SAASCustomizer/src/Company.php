@@ -97,12 +97,16 @@ class Company
 
             return $company;
         } else {
-            $company = $this->company->findWhere(['domain' => $currentURL])->first();
+            $company = $this->company->findWhere(['domain' => $currentURL]);
 
-            env('APP_URL', $company->domain);
+            if ($company->isEmpty()) {
+                throw new \Exception('domain_not_found', 400);
+            } else {
+                $company = $company->first();
 
-            if ($company->is_active == 0) {
-                throw new \Exception('company_blocked_by_administrator', 400);
+                if ($company->is_active == 0) {
+                    throw new \Exception('company_blocked_by_administrator', 400);
+                }
             }
 
             return $company;

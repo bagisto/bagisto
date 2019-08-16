@@ -1,4 +1,4 @@
-@extends(auth()->guard('admin')->check() ? 'admin::layouts.master' : 'shop::layouts.master')
+@extends('saas::companies.layouts.master')
 
 @section('page_title')
     {{ __('admin::app.error.404.page-title') }}
@@ -24,7 +24,7 @@
                     {{ __('admin::app.error.404.message') }}
                 </div>
 
-                <a href="{{ route('admin.dashboard.index') }}">
+                <a href="{{ env('APP_URL') }}">
                     {{ __('admin::app.error.go-to-home') }}
                 </a>
 

@@ -1,14 +1,14 @@
 @extends('saas::companies.layouts.master')
 
 @section('page_title')
-    Company Stats
+    Company Insights
 @stop
 
 @section('content-wrapper')
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h1>Company Stats</h1>
+                <h1>Company Insights</h1>
             </div>
         </div>
 

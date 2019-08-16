@@ -2,7 +2,7 @@ const { mix } = require("laravel-mix");
 require("laravel-mix-merge-manifest");
 
 if (mix.inProduction()) {
-    var publicPath = 'publishable/saas/assets';
+    var publicPath = 'publishable/assets';
 } else {
     var publicPath = "../../../public/vendor/webkul/saas/assets";
 }

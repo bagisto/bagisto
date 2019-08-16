@@ -43,7 +43,7 @@ class CompanyController extends Controller
         $this->middleware('auth:super-admin', ['only' => ['showCompanyStats', 'edit', 'update']]);
 
         if (! Company::isAllowed()) {
-            abort(404);
+            throw new \Exception('not_allowed_to_visit_this_section', 400);
         }
     }
 
@@ -69,7 +69,7 @@ class CompanyController extends Controller
             'username' => 'required|alpha_num|min:3|max:64',
             'first_name' => 'required|string|max:191',
             'last_name' => 'nullable|string|max:191',
-            'phone_no' => 'required|digits_between:10,11',
+            'phone_no' => 'required',
             'org_name' => 'required|string|max:191'
         ]);
 
@@ -118,11 +118,15 @@ class CompanyController extends Controller
 
                 $primaryServeNameWithoutProtocol = implode('.', $primaryServerNameWithoutProtocol);
 
-                $data['domain'] = $primaryServeNameWithoutProtocol;
+                $temp = explode('/', $primaryServeNameWithoutProtocol);
+
+                $data['domain'] = current($temp);
+
+                $data['url'] = $primaryServeNameWithoutProtocol;
             } else {
                 return response()->json([
                     'success' => false,
-                    'errors' => ['Cannot keep same sub-domain as main domain']
+                    'errors' => [trans('saas::app.custom-errors.same-domain')]
                 ], 403);
             }
         } else {
@@ -174,7 +178,7 @@ class CompanyController extends Controller
             $this->details->create($data);
 
             return response()->json([
-                'success' => true, 'redirect' => $data['domain']
+                'success' => true, 'redirect' => isset($data['url']) ? $data['url'] : $data['domain']
             ], 200);
         } else {
             return response()->json([
@@ -185,10 +189,6 @@ class CompanyController extends Controller
 
     public function validateStepOne()
     {
-        $this->validate(request(),[
-            'email' => 'required|email|unique:admins,email'
-        ]);
-
         $niceNames = array(
             'email' => 'Email'
         );
@@ -268,12 +268,12 @@ class CompanyController extends Controller
             $result = $company->update($data);
 
             if ($result) {
-                session()->flash('success', 'Company Updated Successfully');
+                session()->flash('success', trans('saas::app.status.something-wrong'));
             } else {
-                session()->flash('warning', 'Something went wrong');
+                session()->flash('warning', trans('saas::app.status.something-wrong'));
             }
         } else {
-            session()->flash('warning', 'Something went wrong');
+            session()->flash('warning', trans('saas::app.status.something-wrong'));
         }
 
         return redirect()->back();
@@ -288,13 +288,13 @@ class CompanyController extends Controller
                 'is_active' => 1
             ]);
 
-            session()->flash('success', 'Company successfully activated');
+            session()->flash('success', trans('saas::app.status.company-activated'));
         } else {
             $company->update([
                 'is_active' => 0
             ]);
 
-            session()->flash('warning', 'Company successfully deactivated');
+            session()->flash('warning', trans('saas::app.status.company-deactivated'));
         }
 
         return redirect()->back();

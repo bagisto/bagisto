@@ -26,7 +26,7 @@ class PurgeController extends Controller
     public function seedDatabase()
     {
         $this->dataSeed->prepareLocaleData();
-        $this->dataSeed->prepareCategoryData(); //translation table not getting populated
+        $this->dataSeed->prepareCategoryData(); // translation table not getting populated
         $this->dataSeed->prepareInventoryData();
         $this->dataSeed->prepareCurrencyData();
         $this->dataSeed->prepareChannelData();
@@ -43,7 +43,7 @@ class PurgeController extends Controller
         Event::fire('new.company.registered');
 
         $this->dataSeed->setInstallationCompleteParam();
-        session()->flash('success', 'Store Created Successfully');
+        session()->flash('success', trans('saas::app.status.store-created'));
 
         return redirect()->route('shop.home.index');
     }

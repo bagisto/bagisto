@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="76px" height="76px" viewBox="0 0 76 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>compass</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="sub-domain" transform="translate(-200.000000, -370.000000)" fill-rule="nonzero">
+            <g id="Group-4" transform="translate(200.000000, 370.000000)">
+                <g id="compass">
+                    <rect id="Rectangle-10" fill="#0031F0" x="0" y="0" width="76" height="76" rx="38"></rect>
+                    <polygon id="Path-3" fill="#FFFFFF" transform="translate(38.500000, 36.500000) rotate(-315.000000) translate(-38.500000, -36.500000) " points="38.0769912 6.625 31.0973451 37.3908474 38.0769912 66.375 45.9026549 37.3908474"></polygon>
+                    <polygon id="Path-3" fill="#FFFFFF" opacity="0.100000001" transform="translate(38.500000, 36.500000) rotate(-328.000000) translate(-38.500000, -36.500000) " points="38.0769912 6.625 31.0973451 37.3908474 38.0769912 66.375 45.9026549 37.3908474"></polygon>
+                    <rect id="Rectangle-10" fill="#0031F0" x="35" y="35" width="6" height="6" rx="3"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
