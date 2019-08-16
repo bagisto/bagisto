@@ -15,36 +15,6 @@
 
                         {{ __('admin::app.cms.pages.pages') }}
                     </h1>
-
-                    <div class="control-group">
-                        <select class="control" id="channel-switcher" name="channel">
-                            @php
-                                $locale = request()->get('locale') ?: app()->getLocale();
-
-                                $channel = request()->get('channel') ?: core()->getDefaultChannelCode();
-                            @endphp
-
-                            @foreach (core()->getAllChannels() as $channelModel)
-
-                                <option value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
-                                    {{ $channelModel->name }}
-                                </option>
-
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="control-group">
-                        <select class="control" id="locale-switcher" name="locale">
-                            @foreach (core()->getAllLocales() as $localeModel)
-
-                                <option value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
-                                    {{ $localeModel->name }}
-                                </option>
-
-                            @endforeach
-                        </select>
-                    </div>
                 </div>
 
                 <div class="page-action fixed-action">
@@ -63,10 +33,18 @@
                 <div class="form-container">
                     @csrf()
 
+                    <div class="control-group" :class="[errors.has('page_title') ? 'has-error' : '']">
+                        <label for="page_title" class="required">{{ __('admin::app.cms.pages.page-title') }}</label>
+
+                        <input type="text" class="control" name="page_title" v-validate="'required'" value="{{ $page->page_title ?? old('page_title') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.page-title') }}&quot;">
+
+                        <span class="control-error" v-if="errors.has('page_title')">@{{ errors.first('page_title') }}</span>
+                    </div>
+
                     <div class="control-group" :class="[errors.has('url_key') ? 'has-error' : '']">
                         <label for="url-key" class="required">{{ __('admin::app.cms.pages.url-key') }}</label>
 
-                        <input type="text" class="control" name="url_key" v-validate="'required'" value="{{ $page->url_key ?? old('url_key') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.url-key') }}&quot;" v-slugify>
+                        <input type="text" class="control" name="url_key" v-validate="'required'" value="{{ $page->url_key ?? old('url_key') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.url-key') }}&quot;" disabled>
 
                         <span class="control-error" v-if="errors.has('url_key')">@{{ errors.first('url_key') }}</span>
                     </div>
@@ -87,14 +65,6 @@
                         </div>
 
                         <span class="control-error" v-if="errors.has('html_content')">@{{ errors.first('html_content') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('page_title') ? 'has-error' : '']">
-                        <label for="page_title" class="required">{{ __('admin::app.cms.pages.page-title') }}</label>
-
-                        <input type="text" class="control" name="page_title" v-validate="'required'" value="{{ $page->page_title ?? old('page_title') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.page-title') }}&quot;">
-
-                        <span class="control-error" v-if="errors.has('page_title')">@{{ errors.first('page_title') }}</span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('meta_title') ? 'has-error' : '']">
@@ -134,7 +104,7 @@
             $('#preview').on('click', function(e) {
                 var form = $('#page-form').serialize();
                 // var url = '{{ route('admin.cms.preview', $page->id) }}' + '?' + form;
-                var url = '{{ route('admin.cms.preview', $page->url_key) }}';
+                var url = '{{ route('admin.cms.preview', $page->id) }}';
 
                 window.open(url, '_blank').focus();
 

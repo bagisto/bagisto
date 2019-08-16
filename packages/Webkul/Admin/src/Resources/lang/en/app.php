@@ -987,6 +987,8 @@ return [
             'add-title' => 'Add Page',
             'content' => 'Content',
             'url-key' => 'URL Key',
+            'channel' => 'Channel',
+            'locale' => 'Locale',
             'create-btn-title' => 'Add Page',
             'edit-title' => 'Edit Page',
             'edit-btn-title' => 'Save Page',
