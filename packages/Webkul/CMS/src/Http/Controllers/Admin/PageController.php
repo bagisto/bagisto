@@ -234,4 +234,45 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
             return response()->json(['message' => false], 200);
         }
     }
+
+    /**
+     * To mass delete the CMS resource from storage
+     */
+    public function massDelete()
+    {
+        $data = request()->all();
+
+        if ($data['indexes']) {
+            $pageIDs = explode(',', $data['indexes']);
+
+            $actualCount = count($pageIDs);
+
+            $count = 0;
+
+            foreach ($pageIDs as $pageId) {
+
+                $page = $this->cms->find($pageId);
+
+                if ($page) {
+                    $page->delete();
+
+                    $count++;
+                }
+            }
+
+            if ($actualCount == $count) {
+                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', [
+                    'resource' => 'CMS Pages'
+                ]));
+            } else {
+                session()->flash('success', trans('admin::app.datagrid.mass-ops.partial-action', [
+                    'resource' => 'CMS Pages'
+                ]));
+            }
+        } else {
+            session()->flash('warning', trans('admin::app.datagrid.mass-ops.no-resource'));
+        }
+
+        return redirect()->route('admin.cms.index');
+    }
 }

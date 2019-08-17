@@ -49,10 +49,48 @@ class CatalogRuleProductsRepository extends Repository
         if ($productID == '*') {
             $products = $this->product->all('id');
 
-            // for all products do that thing later
-        } else {
-            $product = $this->product->find($productID);
+            foreach ($channelsGroupsCross as $channelGroup) {
+                $channelId = $channelGroup[0]->channel_id;
+                $groupId = $channelGroup[1]->customer_group_id;
 
+                $model = new $this->model();
+
+                foreach ($products as $product) {
+                    $productID = $product->id;
+
+                    $catalogRuleProduct = $model->where([
+                        'channel_id' => $channelId,
+                        'customer_group_id' => $groupId,
+                        'product_id' => $productID
+                    ])->get();
+
+                    if ($catalogRuleProduct->count()) {
+                        // check for tie breaker rules and then update
+                        $catalogRuleProduct->first()->update([
+                            'catalog_rule_id' => $rule->id,
+                            'starts_from' => $rule->starts_from,
+                            'ends_till' => $rule->ends_till,
+                            'customer_group_id' => $groupId,
+                            'channel_id' => $channelId,
+                            'product_id' => $productID,
+                            'action_code' => $rule->action_code,
+                            'action_amount' => $rule->discount_amount
+                        ]);
+                    } else {
+                        $this->create([
+                            'catalog_rule_id' => $rule->id,
+                            'starts_from' => $rule->starts_from,
+                            'ends_till' => $rule->ends_till,
+                            'customer_group_id' => $groupId,
+                            'channel_id' => $channelId,
+                            'product_id' => $productID,
+                            'action_code' => $rule->action_code,
+                            'action_amount' => $rule->discount_amount
+                        ]);
+                    }
+                }
+            }
+        } else {
             foreach ($channelsGroupsCross as $channelGroup) {
                 $channelId = $channelGroup[0]->channel_id;
                 $groupId = $channelGroup[1]->customer_group_id;

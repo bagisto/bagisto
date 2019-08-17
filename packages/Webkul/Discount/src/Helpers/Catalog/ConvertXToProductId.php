@@ -193,6 +193,7 @@ class ConvertXToProductId
 
         foreach ($categories as $category) {
             $data = $this->getAll($category->id);
+
             if ($data->count()) {
                 $products->push($data);
 
@@ -249,7 +250,6 @@ class ConvertXToProductId
                 ->select('products.id')
                 ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                 ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-                ->where('products.type', '!=', 'configurable')
                 ->whereNotNull('product_flat.url_key');
 
             if ($categoryId) {

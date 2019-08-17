@@ -60,14 +60,14 @@ class CMSPageDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'locale_id',
             'label' => trans('admin::app.cms.pages.locale'),
-            'type' => 'number',
+            'type' => 'string',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true,
-            'wrapper' => function($row) use($channels) {
-                $channelCode = $channels->find($row->channel_id)->name;
+            'wrapper' => function($row) use($locales) {
+                $localeCode = $locales->find($row->locale_id)->code;
 
-                return $row->channel_id.' ('. $channelCode. ')';
+                return $row->locale_id.' ('. $localeCode. ')';
             }
         ]);
 
@@ -78,10 +78,10 @@ class CMSPageDataGrid extends DataGrid
             'searchable' => false,
             'sortable' => true,
             'filterable' => true,
-            'wrapper' => function($row) use($locales) {
-                $localeCode = $locales->find($row->locale_id)->code;
+            'wrapper' => function($row) use($channels) {
+                $channelCode = $channels->find($row->channel_id)->name;
 
-                return $row->locale_id.' ('. $localeCode. ')';
+                return $row->channel_id.' ('. $channelCode. ')';
             }
         ]);
     }
@@ -99,6 +99,16 @@ class CMSPageDataGrid extends DataGrid
             'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.cms.delete',
             'icon' => 'icon trash-icon'
+        ]);
+    }
+
+    public function prepareMassActions()
+    {
+        $this->addMassAction([
+            'type' => 'delete',
+            'label' => 'Delete',
+            'action' => route('admin.cms.mass-delete'),
+            'method' => 'DELETE'
         ]);
     }
 }

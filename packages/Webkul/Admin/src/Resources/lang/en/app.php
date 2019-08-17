@@ -108,6 +108,7 @@ return [
             'delete-success' => 'Selected index of :resource were successfully deleted',
             'partial-action' => 'Some actions were not performed due restricted system constraints on :resource',
             'update-success' => 'Selected index of :resource were successfully updated',
+            'no-resource' => 'The resource provided for insufficient for the action'
         ],
 
         'id' => 'ID',
