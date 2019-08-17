@@ -64,6 +64,8 @@ class Apply extends Sale
 
         $this->active = collect();
 
+        $this->activeRules = collect();
+
         $this->deceased = collect();
 
         $this->rules = config('discount-rules.catalog');
@@ -82,10 +84,7 @@ class Apply extends Sale
             if ($validated) {
                 $this->active->push($rule->id);
 
-                // Job execution for active rules
-                $productIDs = $this->getProductIds($rule);
-
-                $this->setSale($rule, $productIDs);
+                $this->activeRules->push($rule);
             } else {
                 $this->deceased->push($rule->id);
 
@@ -93,7 +92,15 @@ class Apply extends Sale
             }
         }
 
-        dd('done');
+        if ($this->active->count()) {
+            foreach ($this->activeRules as $rule) {
+                $productIDs = $this->getProductIds($rule);
+
+                $this->setSale($rule, $productIDs);
+            }
+        } else {
+            dd($this->deceased);
+        }
     }
 
     /**
@@ -105,12 +112,14 @@ class Apply extends Sale
      */
     public function setSale($rule, $productIDs)
     {
+        dd($productIDs);
+
         if (is_array($productIDs)) {
             // apply on selected products
             foreach ($productIDs as $productID) {
-                $this->catalogRuleProduct->createOrUpdate($rule, $productID);
+                // $this->catalogRuleProduct->createOrUpdate($rule, $productID);
 
-                $this->catalogRuleProductPrice->createOrUpdate($rule, $productID);
+                // $this->catalogRuleProductPrice->createOrUpdate($rule, $productID);
             }
         } else if ($productIDs == '*') {
             $this->catalogRuleProduct->createOrUpdate($rule, $productIDs);
