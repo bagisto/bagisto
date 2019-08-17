@@ -2,9 +2,6 @@
 
 namespace Webkul\Discount\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
@@ -15,7 +12,7 @@ use Webkul\Discount\Repositories\CatalogRuleCustomerGroupsRepository as CatalogR
 use Webkul\Discount\Helpers\Catalog\Apply;
 
 /**
- * Catalog Rule controller
+ * CatalogRule controller
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
