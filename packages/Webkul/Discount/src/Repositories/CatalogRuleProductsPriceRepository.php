@@ -4,6 +4,7 @@ namespace Webkul\Discount\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductRepository as Product;
+use Illuminate\Container\Container as App;
 
 /**
  * CatalogRuleProductsPriceRepository
@@ -21,9 +22,11 @@ class CatalogRuleProductsPriceRepository extends Repository
     /**
      * @param Product $product
      */
-    public function __construct(Product $product)
+    public function __construct(Product $product, App $app)
     {
         $this->product = $product;
+
+        parent::__construct($app);
     }
 
     /**

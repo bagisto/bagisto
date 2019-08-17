@@ -99,11 +99,16 @@ class Apply extends Sale
         }
 
         if ($this->active->count()) {
-            foreach ($this->activeRules as $rule) {
-                $productIDs = $this->getProductIds($rule);
+            $productIDs = array();
 
-                $this->setSale($rule, $productIDs);
+            foreach ($this->activeRules as $rule) {
+                array_push($productIDs, $this->getProductIds($rule));
             }
+
+            dd(array_flatten($productIDs));
+
+            $this->setSale($rule, $productIDs);
+
         } else {
             dd($this->deceased);
         }
@@ -118,8 +123,6 @@ class Apply extends Sale
      */
     public function setSale($rule, $productIDs)
     {
-        dd($productIDs);
-
         if (is_array($productIDs)) {
             // apply on selected products
             foreach ($productIDs as $productID) {
@@ -161,11 +164,11 @@ class Apply extends Sale
                 foreach ($products as $product) {
                     $productID = $product->id;
 
-                    $catalogRuleProduct = $model->where([
+                    $catalogRuleProduct = $this->catalogRuleProduct->findWhere([
                         'channel_id' => $channelId,
                         'customer_group_id' => $groupId,
                         'product_id' => $productID
-                    ])->get();
+                    ]);
 
                     if ($catalogRuleProduct->count()) {
                         // check for tie breaker rules and then update
@@ -212,15 +215,21 @@ class Apply extends Sale
                 $channelId = $channelGroup[0]->channel_id;
                 $groupId = $channelGroup[1]->customer_group_id;
 
-                $model = new $this->model();
-
-                $catalogRuleProduct = $model->where([
+                $catalogRuleProduct = $this->catalogRuleProduct->findWhere([
                     'channel_id' => $channelId,
                     'customer_group_id' => $groupId,
                     'product_id' => $productID
-                ])->get();
+                ]);
 
-                if ($catalogRuleProduct->count()) {
+                if ($catalogRuleProduct->count() && $catalogRuleProduct->first()->catalog_rule_id != $rule->id) {
+
+                    // check for tie breaker rules and then update
+                    $previousRuleID = $catalogRuleProduct->first()->catalog_rule_id;
+
+                    $newRuleID = $rule->id;
+
+                    $winnerRuleId = $this->breakTie($previousRuleID, $newRuleID);
+
                     // update
                     $catalogRuleProduct->first()->update([
                         'catalog_rule_id' => $rule->id,
@@ -232,9 +241,9 @@ class Apply extends Sale
                         'action_code' => $rule->action_code,
                         'action_amount' => $rule->discount_amount
                     ]);
-                } else {
+                } else if ($catalogRuleProduct->count() == 0) {
                     // create
-                    $this->create([
+                    $data = [
                         'catalog_rule_id' => $rule->id,
                         'starts_from' => $rule->starts_from,
                         'ends_till' => $rule->ends_till,
@@ -243,7 +252,11 @@ class Apply extends Sale
                         'product_id' => $productID,
                         'action_code' => $rule->action_code,
                         'action_amount' => $rule->discount_amount
-                    ]);
+                    ];
+
+                    $this->catalogRuleProduct->create($data);
+                } else {
+                    // do the reassessment updation if the cart rule action changes the new action and its amount needs to be updated
                 }
             }
         }
@@ -264,5 +277,50 @@ class Apply extends Sale
         $newRule = $this->catalogRule->find($newRuleID);
 
         dd($oldRule->name, $newRule->name);
+    }
+
+    /**
+     * To declutter the catalog rules that are either inactive or deleted
+     *
+     * @return Boolean
+     */
+    public function deClutter()
+    {
+        $rules = $this->catalogRule->all();
+
+        foreach ($rules as $rule) {
+            $validated = $this->checkApplicability($rule);
+
+            if (! $validated) {
+                $this->deceased->push($rule->id);
+            }
+        }
+
+        if (count($this->deceased)) {
+            $count = 0;
+
+            foreach ($this->deceased as $deceased)  {
+                $cartRuleProducts = $this->catalogRuleProduct->findWhere([
+                    'catalog_rule_id' => $deceased
+                ]);
+
+                $cartRuleProductsPrice = $this->catalogRuleProductPrice->findWhere([
+                    'catalog_rule_id' => $deceased
+                ]);
+
+                // obvious logic for removing entries as entries in both storage needs to be exactly equal for a product
+                foreach ($cartRuleProducts as $cartRuleProduct) {
+                    // deletes cartRuleProducts resource
+                    $cartRuleProduct->delete();
+
+                    // deletes cartRuleProductsPrice resource
+                    $cartRuleProductsPrice->delete();
+                }
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

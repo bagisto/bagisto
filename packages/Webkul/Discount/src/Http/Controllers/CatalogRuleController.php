@@ -360,6 +360,24 @@ class CatalogRuleController extends Controller
         $this->sale->apply();
     }
 
+    /**
+     * Initiates decluttering of rules and even reindexes the table if empty
+     *
+     * @return Response redirect
+     */
+    public function deClutter()
+    {
+        $result = $this->sale->deClutter();
+
+        if ($result) {
+            session()->flash('success', trans('admin::app.promotion.declut-success'));
+        } else {
+            session()->flash('warning', trans('admin::app.promotion.declut-failure'));
+        }
+
+        return redirect()->route($this->_config['redirect']);
+    }
+
     public function fetchOptionableAttributes()
     {
         $attributesWithOptions = array();

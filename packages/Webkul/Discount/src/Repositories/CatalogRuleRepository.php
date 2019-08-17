@@ -30,10 +30,13 @@ class CatalogRuleRepository extends Repository
      * @param CatalogRuleCustomerGroups $catalogRuleCustomerGroups
      * @param App $app
      */
-    public function __construct(CatalogRuleChannels $catalogRuleChannels, CatalogRuleCustomerGroups $catalogRuleCustomerGroups)
+    public function __construct(CatalogRuleChannels $catalogRuleChannels, CatalogRuleCustomerGroups $catalogRuleCustomerGroups, App $app)
     {
         $this->catalogRuleChannels = $catalogRuleChannels;
+
         $this->catalogRuleCustomerGroups = $catalogRuleCustomerGroups;
+
+        parent::__construct($app);
     }
 
     /**
