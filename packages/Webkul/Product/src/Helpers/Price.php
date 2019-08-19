@@ -3,7 +3,6 @@
 namespace Webkul\Product\Helpers;
 
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
 

@@ -6,6 +6,7 @@ use Webkul\Discount\Repositories\CatalogRuleRepository as CatalogRule;
 use Webkul\Discount\Repositories\CatalogRuleProductsRepository as CatalogRuleProducts;
 use Webkul\Discount\Repositories\CatalogRuleProductsPriceRepository as CatalogRuleProductsPrice;
 use Webkul\Discount\Helpers\Catalog\ConvertXToProductId as ConvertX;
+use Webkul\Product\Repositories\ProductRepository as Product;
 use Webkul\Discount\Helpers\Catalog\Sale;
 
 /**
@@ -47,6 +48,11 @@ class Apply extends Sale
     protected $catalogRuleProductPrice;
 
     /**
+     * Hold ProductRepository instance
+     */
+    protected $product;
+
+    /**
      * To hold the rule classes
      */
     protected $rules;
@@ -58,7 +64,8 @@ class Apply extends Sale
         CatalogRule $catalogRule,
         ConvertX $convertX,
         CatalogRuleProducts $catalogRuleProduct,
-        CatalogRuleProductsPrice $catalogRuleProductPrice
+        CatalogRuleProductsPrice $catalogRuleProductPrice,
+        Product $product
     ) {
         $this->catalogRule = $catalogRule;
 
@@ -67,6 +74,8 @@ class Apply extends Sale
         $this->catalogRuleProduct = $catalogRuleProduct;
 
         $this->catalogRuleProductPrice = $catalogRuleProductPrice;
+
+        $this->product = $product;
 
         $this->active = collect();
 
@@ -100,20 +109,19 @@ class Apply extends Sale
 
         if ($this->active->count()) {
             $productIDs = array();
-            $temp = collect();
 
             foreach ($this->activeRules as $rule) {
                 $productIDs = $this->getProductIds($rule);
 
                 $productIDs = $this->expandProducts($productIDs);
 
-                $result = $this->setSale($rule, $productIDs);
+               $this->setSale($rule, $productIDs);
             }
 
-            dd($result, 'processing done');
+            // dd($result, 'processing done');
         } else {
             // handle the deceased rules here
-            dd($this->deceased);
+            // dd($this->deceased);
         }
     }
 
@@ -130,16 +138,301 @@ class Apply extends Sale
             // apply on selected products
             foreach ($productIDs as $productID) {
                 // catalog rule product resource is updated here
-                $this->catalogRuleProduct->createOrUpdate($rule, $productID);
+                $this->createOrUpdateCatalogRuleProduct($rule, $productID);
 
                 // catalog rule product price resource is updated here
-                $this->catalogRuleProductPrice->createOrUpdate($rule, $productID);
+                $this->createOrUpdateCatalogRuleProductPrice($rule, $productID);
             }
         } else if ($productIDs == '*') {
-            $this->catalogRuleProduct->createOrUpdate($rule, $productIDs);
+            $this->catalogRuleProduct->createOrUpdateCatalogRuleProduct($rule, $productIDs);
 
-            $this->catalogRuleProductPrice->createOrUpdate($rule, $productIDs);
+            $this->catalogRuleProductPrice->createOrUpdateCatalogRuleProductPrice($rule, $productIDs);
         }
+    }
+
+    /**
+     * Create or update catalog rule product resource
+     *
+     * @param CatalogRule $rule
+     * @param Integer $productID
+     *
+     * @return Void
+     */
+    public function createOrUpdateCatalogRuleProduct($rule, $productID)
+    {
+        $channels = $rule->channels;
+        $customerGroups = $rule->customer_groups;
+
+        $channelsGroupsCross = $channels->crossJoin($customerGroups);
+
+        if ($productID == '*') {
+            $products = $this->product->all('id');
+
+            foreach ($channelsGroupsCross as $channelGroup) {
+                $channelId = $channelGroup[0]->channel_id;
+                $groupId = $channelGroup[1]->customer_group_id;
+
+                foreach ($products as $product) {
+                    $productID = $product->id;
+
+                    $catalogRuleProduct = $this->catalogRuleProduct->findWhere([
+                        'channel_id' => $channelId,
+                        'customer_group_id' => $groupId,
+                        'product_id' => $productID
+                    ]);
+
+                    if ($catalogRuleProduct->count()) {
+                        // check for tie breaker rules and then update
+                        $product = $this->product->find($productID);
+
+                        $productPrice = $product->price;
+
+                        // check for tie breaker rules and then update
+                        $previousRuleID = $catalogRuleProduct->first()->catalog_rule_id;
+
+                        $newRuleID = $rule->id;
+
+                        $winnerRuleId = $this->breakTie($previousRuleID, $newRuleID, $product);
+
+                        $data = [
+                            'catalog_rule_id' => $rule->id,
+                            'starts_from' => $rule->starts_from,
+                            'ends_till' => $rule->ends_till,
+                            'customer_group_id' => $groupId,
+                            'channel_id' => $channelId,
+                            'product_id' => $productID,
+                            'action_code' => $rule->action_code,
+                            'action_amount' => $discountPrice
+                        ];
+
+                        if ($rule->id == $winnerRuleId) {
+                            $this->catalogRuleProduct->create($data);
+                        } else {
+                            $this->catalogRuleProduct->update($data, $catalogRuleProduct->first()->id);
+                        }
+                    } else {
+                        $data = [
+                            'catalog_rule_id' => $rule->id,
+                            'starts_from' => $rule->starts_from,
+                            'ends_till' => $rule->ends_till,
+                            'customer_group_id' => $groupId,
+                            'channel_id' => $channelId,
+                            'product_id' => $productID,
+                            'action_code' => $rule->action_code,
+                            'action_amount' => $rule->discount_amount
+                        ];
+
+                        $this->catalogRuleProduct->create($data);
+                    }
+                }
+            }
+        } else {
+            foreach ($channelsGroupsCross as $channelGroup) {
+                $channelId = $channelGroup[0]->channel_id;
+                $groupId = $channelGroup[1]->customer_group_id;
+
+                $catalogRuleProduct = $this->catalogRuleProduct->findWhere([
+                    'channel_id' => $channelId,
+                    'customer_group_id' => $groupId,
+                    'product_id' => $productID
+                ]);
+
+                if ($catalogRuleProduct->count()) {
+                    $product = $this->product->find($productID);
+                    $productPrice = $product->price;
+
+                    // check for tie breaker rules and then update
+                    $previousRuleID = $catalogRuleProduct->first()->catalog_rule_id;
+
+                    $newRuleID = $rule->id;
+
+                    $winnerRuleId = $this->breakTie($previousRuleID, $newRuleID, $product);
+
+                    // update
+                    if ($winnerRuleId != $rule->id) {
+                        $discountAmount = $this->getDiscountAmount($product, $rule);
+
+                        $catalogRuleProduct->first()->update([
+                            'catalog_rule_id' => $rule->id,
+                            'starts_from' => $rule->starts_from,
+                            'ends_till' => $rule->ends_till,
+                            'customer_group_id' => $groupId,
+                            'channel_id' => $channelId,
+                            'product_id' => $productID,
+                            'action_code' => $rule->action_code,
+                            'action_amount' => $discountAmount
+                        ]);
+                    } else {
+                        //do reassessment
+                    }
+                } else if ($catalogRuleProduct->count() == 0) {
+                    $product = $this->product->find($productID);
+
+                    $discountAmount = $this->getDiscountAmount($product, $rule);
+
+                    $data = [
+                        'catalog_rule_id' => $rule->id,
+                        'starts_from' => $rule->starts_from,
+                        'ends_till' => $rule->ends_till,
+                        'customer_group_id' => $groupId,
+                        'channel_id' => $channelId,
+                        'product_id' => $productID,
+                        'action_code' => $rule->action_code,
+                        'action_amount' => $discountAmount
+                    ];
+
+                    $this->catalogRuleProduct->create($data);
+                } else {
+                    // do the reassessment updation if the cart rule action changes the new action and its amount needs to be updated
+                }
+            }
+        }
+    }
+
+     /**
+     * Create or update catalog rule product resource
+     *
+     * @param CatalogRule $rule
+     * @param Integer $productID
+     *
+     * @return Void
+     */
+    public function createOrUpdateCatalogRuleProductPrice($rule, $productID)
+    {
+        $channels = $rule->channels;
+        $customerGroups = $rule->customer_groups;
+
+        $channelsGroupsCross = $channels->crossJoin($customerGroups);
+
+        if ($productID == '*') {
+            $products = $this->product->all('id');
+
+            foreach ($channelsGroupsCross as $channelGroup) {
+                $channelId = $channelGroup[0]->channel_id;
+                $groupId = $channelGroup[1]->customer_group_id;
+
+                foreach ($products as $product) {
+                    $productID = $product->id;
+
+                    $catalogRuleProductPrice = $this->catalogRuleProductPrice->findWhere([
+                        'channel_id' => $channelId,
+                        'customer_group_id' => $groupId,
+                        'product_id' => $productID
+                    ]);
+
+                    if ($catalogRuleProductPrice->count()) {
+                        // check for tie breaker rules and then update
+                        $data = [
+                            'catalog_rule_id' => $rule->id,
+                            'starts_from' => $rule->starts_from,
+                            'ends_till' => $rule->ends_till,
+                            'customer_group_id' => $groupId,
+                            'channel_id' => $channelId,
+                            'product_id' => $productID,
+                            'action_code' => $rule->action_code,
+                            'action_amount' => $rule->discount_amount
+                        ];
+
+                        $this->catalogRuleProductPrice->update($data, $catalogRuleProductPrice->first()->id);
+                    } else {
+                        $data = [
+                            'catalog_rule_id' => $rule->id,
+                            'starts_from' => $rule->starts_from,
+                            'ends_till' => $rule->ends_till,
+                            'customer_group_id' => $groupId,
+                            'channel_id' => $channelId,
+                            'product_id' => $productID,
+                            'action_code' => $rule->action_code,
+                            'action_amount' => $rule->discount_amount
+                        ];
+
+                        $this->catalogRuleProductPrice->create($data);
+                    }
+                }
+            }
+        } else {
+            foreach ($channelsGroupsCross as $channelGroup) {
+                $channelId = $channelGroup[0]->channel_id;
+                $groupId = $channelGroup[1]->customer_group_id;
+
+                $catalogRuleProduct = $this->catalogRuleProduct->findWhere([
+                    'channel_id' => $channelId,
+                    'customer_group_id' => $groupId,
+                    'product_id' => $productID
+                ]);
+
+                $catalogRuleProductPrice = $this->catalogRuleProductPrice->findWhere([
+                    'channel_id' => $channelId,
+                    'customer_group_id' => $groupId,
+                    'product_id' => $productID
+                ]);
+
+                if ($catalogRuleProductPrice->count()) {
+                    $catalogRuleProduct = $catalogRuleProduct->first();
+
+                    $product = $this->product->find($productID);
+
+                    $productPrice = $product->price - $catalogRuleProduct->action_amount;
+
+                    $winnerRuleId = $this->breakTie($catalogRuleProduct->catalog_rule_id, $rule->id, $product);
+
+                    if ($winnerRuleId != $rule->id) {
+                        $data = [
+                            'catalog_rule_id' => $rule->id,
+                            'starts_from' => $rule->starts_from,
+                            'ends_till' => $rule->ends_till,
+                            'customer_group_id' => $groupId,
+                            'channel_id' => $channelId,
+                            'product_id' => $productID,
+                            'rule_price' => $productPrice
+                        ];
+
+                        $catalogRuleProductPrice->first()->update($data);
+                    } else {
+                        // do reassement
+                    }
+                } else if ($catalogRuleProductPrice->count() == 0) {
+                    $catalogRuleProduct = $catalogRuleProduct->first();
+
+                    $discountAmount = $catalogRuleProduct->action_amount;
+
+                    $product = $this->product->find($productID);
+
+                    $productPrice = $product->price - $discountAmount;
+
+                    $data = [
+                        'catalog_rule_id' => $rule->id,
+                        'starts_from' => $rule->starts_from,
+                        'ends_till' => $rule->ends_till,
+                        'customer_group_id' => $groupId,
+                        'channel_id' => $channelId,
+                        'product_id' => $productID,
+                        'rule_price' => $productPrice
+                    ];
+
+                    $this->catalogRuleProductPrice->create($data);
+                } else {
+                    // do the reassessment updation if the cart rule action changes the new action and its amount needs to be updated
+                }
+            }
+        }
+    }
+
+    /**
+     *  Get discount amount for the rule and product
+     *
+     * @return Decimal $discountAmount
+     */
+    public function getDiscountAmount($product, $rule)
+    {
+
+        $actionClass = config('discount-rules.catalog')[$rule->action_code];
+
+        $actionInstance = new $actionClass();
+
+        $discountAmount = $actionInstance->calculate($rule, $product);
+
+        return $discountAmount;
     }
 
     /**
@@ -184,13 +477,25 @@ class Apply extends Sale
      *
      * @return String $id
      */
-    public function breakTie($previousRuleID, $newRuleID)
+    public function breakTie($previousRuleID, $newRuleID, $product)
     {
         $oldRule = $this->catalogRule->find($previousRuleID);
 
         $newRule = $this->catalogRule->find($newRuleID);
 
-        dd($oldRule->name, $newRule->name);
+        if ($oldRule->ends_other_rules) {
+            return $oldRule->id;
+        } else {
+            $oldRuleDiscount = $this->getDiscountAmount($product, $oldRule);
+
+            $newRuleDiscount = $this->getDiscountAmount($product, $newRule);
+
+            if ($newRuleDiscount > $oldRuleDiscount) {
+                return $newRule->id;
+            } else {
+                return $oldRule->id;
+            }
+        }
     }
 
     /**
