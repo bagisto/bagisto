@@ -23,7 +23,7 @@
 
         <div class="page-content">
             @inject('orderGrid', 'Webkul\PreOrder\DataGrids\Admin\Order')
-
+            
             {!! $orderGrid->render() !!}
         </div>
     </div>

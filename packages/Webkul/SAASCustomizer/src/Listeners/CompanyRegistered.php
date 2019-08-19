@@ -3,6 +3,8 @@
 namespace Webkul\SAASCustomizer\Listeners;
 
 use Company;
+use Illuminate\Support\Facades\Mail;
+use Webkul\SAASCustomizer\Mail\NewCompanyNotification;
 
 /**
  * New company registered events handler
@@ -21,5 +23,7 @@ class CompanyRegistered
 
             $poolInstance->createPreOrderData($company->id);
         }
+
+        Mail::queue(new NewCompanyNotification($company));
     }
 }

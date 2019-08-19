@@ -2,7 +2,7 @@
 
 <div class="add-to-buttons">
     @if ($product->type != 'configurable')
-        @if ($product->totalQuantity() < 1 && $product->allow_preorder)
+        @if ($product->totalQuantity() < 1 && $product->product->allow_preorder)
             <button type="submit" class="btn btn-lg btn-primary addtocart" style="width: 100%">
                 {{ __('preorder::app.shop.products.preorder') }}
             </button>

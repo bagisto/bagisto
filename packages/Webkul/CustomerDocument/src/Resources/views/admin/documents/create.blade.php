@@ -40,6 +40,7 @@
                         <select name="type" class="control" v-validate="'required'" data-vv-as="&quot;{{ __('customerdocument::app.admin.documents.type') }}&quot;">
                             <option value="product">{{ __('customerdocument::app.admin.documents.product') }}</option>
                             <option value="marketing">{{ __('customerdocument::app.admin.documents.marketing') }}</option>
+                            <option value="other">{{ __('customerdocument::app.admin.documents.other') }}</option>
                         </select>
                         <span class="control-error" v-if="errors.has('type')">@{{ errors.first('type') }}</span>
                     </div>

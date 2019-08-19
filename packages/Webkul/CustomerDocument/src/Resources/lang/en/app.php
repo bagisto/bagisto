@@ -33,6 +33,7 @@ return [
             'in-active' => 'Inactive',
             'product' => 'Product',
             'marketing' => 'Marketing',
+            'other' => 'Other',
             'add-document' => 'Add Document',
             'edit-document' => 'Edit Document'
         ],

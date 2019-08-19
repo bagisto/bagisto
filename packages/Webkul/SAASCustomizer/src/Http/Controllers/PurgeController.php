@@ -43,6 +43,7 @@ class PurgeController extends Controller
         Event::fire('new.company.registered');
 
         $this->dataSeed->setInstallationCompleteParam();
+
         session()->flash('success', trans('saas::app.status.store-created'));
 
         return redirect()->route('shop.home.index');
