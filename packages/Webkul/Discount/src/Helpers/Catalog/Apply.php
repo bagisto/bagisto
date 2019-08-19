@@ -100,16 +100,19 @@ class Apply extends Sale
 
         if ($this->active->count()) {
             $productIDs = array();
+            $temp = collect();
 
             foreach ($this->activeRules as $rule) {
-                array_push($productIDs, $this->getProductIds($rule));
+                $productIDs = $this->getProductIds($rule);
+
+                $productIDs = $this->expandProducts($productIDs);
+
+                $result = $this->setSale($rule, $productIDs);
             }
 
-            dd(array_flatten($productIDs));
-
-            $this->setSale($rule, $productIDs);
-
+            dd($result, 'processing done');
         } else {
+            // handle the deceased rules here
             dd($this->deceased);
         }
     }
@@ -126,9 +129,11 @@ class Apply extends Sale
         if (is_array($productIDs)) {
             // apply on selected products
             foreach ($productIDs as $productID) {
-                $this->createOrUpdate($rule, $productID);
+                // catalog rule product resource is updated here
+                $this->catalogRuleProduct->createOrUpdate($rule, $productID);
 
-                // $this->catalogRuleProductPrice->createOrUpdate($rule, $productID);
+                // catalog rule product price resource is updated here
+                $this->catalogRuleProductPrice->createOrUpdate($rule, $productID);
             }
         } else if ($productIDs == '*') {
             $this->catalogRuleProduct->createOrUpdate($rule, $productIDs);
@@ -138,127 +143,36 @@ class Apply extends Sale
     }
 
     /**
-     * Create or update catalog rule product resource
+     * To expand the productIDs of configurable products
      *
-     * @param CatalogRule $rule
-     * @param Integer $productID
+     * @param Array $productIDs
      *
-     * @return Void
+     * @return Array
      */
-    public function createOrUpdate($rule, $productID)
+    protected function expandProducts($productIDs)
     {
-        $channels = $rule->channels;
-        $customerGroups = $rule->customer_groups;
+        $products = app('Webkul\Product\Repositories\ProductRepository');
 
-        $channelsGroupsCross = $channels->crossJoin($customerGroups);
+        $newProductIDs = collect();
 
-        if ($productID == '*') {
-            $products = $this->product->all('id');
+        foreach ($productIDs as $productID) {
+            $product = $products->find($productID);
 
-            foreach ($channelsGroupsCross as $channelGroup) {
-                $channelId = $channelGroup[0]->channel_id;
-                $groupId = $channelGroup[1]->customer_group_id;
+            if ($product->type == 'configurable') {
+                $variants = $product->variants;
 
-                $model = new $this->model();
-
-                foreach ($products as $product) {
-                    $productID = $product->id;
-
-                    $catalogRuleProduct = $this->catalogRuleProduct->findWhere([
-                        'channel_id' => $channelId,
-                        'customer_group_id' => $groupId,
-                        'product_id' => $productID
-                    ]);
-
-                    if ($catalogRuleProduct->count()) {
-                        // check for tie breaker rules and then update
-                        $previousRuleID = $catalogRuleProduct->first()->catalog_rule_id;
-
-                        $newRuleID = $rule->id;
-
-                        $winnerRuleId = $this->breakTie($previousRuleID, $newRuleID);
-
-                        $data = [
-                            'catalog_rule_id' => $rule->id,
-                            'starts_from' => $rule->starts_from,
-                            'ends_till' => $rule->ends_till,
-                            'customer_group_id' => $groupId,
-                            'channel_id' => $channelId,
-                            'product_id' => $productID,
-                            'action_code' => $rule->action_code,
-                            'action_amount' => $rule->discount_amount
-                        ];
-
-                        if ($rule->id == $winnerRuleId) {
-                            $this->catalogRuleProduct->create($data);
-                        } else {
-                            $this->catalogRuleProduct->update($data, $catalogRuleProduct->first()->id);
-                        }
-                    } else {
-                        $data = [
-                            'catalog_rule_id' => $rule->id,
-                            'starts_from' => $rule->starts_from,
-                            'ends_till' => $rule->ends_till,
-                            'customer_group_id' => $groupId,
-                            'channel_id' => $channelId,
-                            'product_id' => $productID,
-                            'action_code' => $rule->action_code,
-                            'action_amount' => $rule->discount_amount
-                        ];
-
-                        $this->catalogRuleProduct->create($data);
-                    }
+                foreach($variants as $variant) {
+                    $newProductIDs->push($variant->id);
                 }
+            } else {
+                $newProductIDs->push($productID);
             }
+        }
+
+        if ($newProductIDs->count()) {
+            return $newProductIDs->toArray();
         } else {
-            foreach ($channelsGroupsCross as $channelGroup) {
-                $channelId = $channelGroup[0]->channel_id;
-                $groupId = $channelGroup[1]->customer_group_id;
-
-                $catalogRuleProduct = $this->catalogRuleProduct->findWhere([
-                    'channel_id' => $channelId,
-                    'customer_group_id' => $groupId,
-                    'product_id' => $productID
-                ]);
-
-                if ($catalogRuleProduct->count() && $catalogRuleProduct->first()->catalog_rule_id != $rule->id) {
-
-                    // check for tie breaker rules and then update
-                    $previousRuleID = $catalogRuleProduct->first()->catalog_rule_id;
-
-                    $newRuleID = $rule->id;
-
-                    $winnerRuleId = $this->breakTie($previousRuleID, $newRuleID);
-
-                    // update
-                    $catalogRuleProduct->first()->update([
-                        'catalog_rule_id' => $rule->id,
-                        'starts_from' => $rule->starts_from,
-                        'ends_till' => $rule->ends_till,
-                        'customer_group_id' => $groupId,
-                        'channel_id' => $channelId,
-                        'product_id' => $productID,
-                        'action_code' => $rule->action_code,
-                        'action_amount' => $rule->discount_amount
-                    ]);
-                } else if ($catalogRuleProduct->count() == 0) {
-                    // create
-                    $data = [
-                        'catalog_rule_id' => $rule->id,
-                        'starts_from' => $rule->starts_from,
-                        'ends_till' => $rule->ends_till,
-                        'customer_group_id' => $groupId,
-                        'channel_id' => $channelId,
-                        'product_id' => $productID,
-                        'action_code' => $rule->action_code,
-                        'action_amount' => $rule->discount_amount
-                    ];
-
-                    $this->catalogRuleProduct->create($data);
-                } else {
-                    // do the reassessment updation if the cart rule action changes the new action and its amount needs to be updated
-                }
-            }
+            return [];
         }
     }
 
