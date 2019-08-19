@@ -19,7 +19,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action">
+                <div class="page-action fixed-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.customers.customers.save-btn-title') }}
                     </button>

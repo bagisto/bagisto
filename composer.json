@@ -21,7 +21,7 @@
         "doctrine/dbal": "^2.9@dev",
         "fideloper/proxy": "^4.0",
         "flynsarmy/db-blade-compiler": "*",
-        "guzzlehttp/guzzle": "^6.3@dev",
+        "guzzlehttp/guzzle": "~6.0",
         "intervention/image": "^2.4",
         "intervention/imagecache": "^2.3",
         "kalnoy/nestedset": "^4.3",
@@ -90,6 +90,7 @@
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\API\\": "packages/Webkul/API",
             "Webkul\\Discount\\": "packages/Webkul/Discount/src",
+            "Webkul\\CMS\\": "packages/Webkul/CMS/src",
             "Webkul\\CustomerDocument\\": "packages/Webkul/CustomerDocument",
             "Webkul\\BulkAddToCart\\": "packages/Webkul/BulkAddToCart",
             "Webkul\\SAASCustomizer\\": "packages/Webkul/SAASCustomizer/src",
@@ -108,7 +109,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "barryvdh/laravel-debugbar"
+            ]
         }
     },
     "scripts": {

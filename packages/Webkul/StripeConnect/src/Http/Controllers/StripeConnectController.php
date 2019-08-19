@@ -103,22 +103,22 @@ class StripeConnectController extends Controller
 
         $this->stripeConnect = $stripeConnect;
 
-        $this->testMode = env('STRIPE_ENABLE_TESTING');
+        $this->testMode = env('STRIPE_ENABLE_TESTING', true);
 
-        $this->stripeTestPublishableKey = env('STRIPE_TEST_PUBLISHABLE_KEY');
+        $this->stripeTestPublishableKey = env('STRIPE_TEST_PUBLISHABLE_KEY') ?? 'NULL';
 
-        $this->stripeTestSecretKey = env('STRIPE_TEST_SECRET_KEY');
+        $this->stripeTestSecretKey = env('STRIPE_TEST_SECRET_KEY') ?? 'NULL';
 
-        $this->stripeLivePublishableKey = env('STRIPE_LIVE_PUBLISHABLE_KEY');
+        $this->stripeLivePublishableKey = env('STRIPE_LIVE_PUBLISHABLE_KEY') ?? 'NULL';
 
-        $this->stripeLiveSecretKey = env('STRIPE_LIVE_SECRET_KEY');
+        $this->stripeLiveSecretKey = env('STRIPE_LIVE_SECRET_KEY') ?? 'NULL';
 
-        $this->stripeAdminFees = env('STRIPE_ADMIN_COMMISSION', 0.0);
+        $this->stripeAdminFees = env('STRIPE_ADMIN_COMMISSION', 0.0) ?? 'NULL';
 
         if (config('stripe.connect.details.statementdescriptor')) {
-            $this->statementDescriptor = config('stripe.connect.details.statementdescriptor');
+            $this->statementDescriptor = config('stripe.connect.details.statementdescriptor') ?? 'NULL';
         } else {
-            $this->statementDescriptor = env('STRIPE_STATEMENT_DESCRIPTOR');
+            $this->statementDescriptor = env('STRIPE_STATEMENT_DESCRIPTOR', 'NULL');
         }
     }
 
@@ -221,7 +221,7 @@ class StripeConnectController extends Controller
             return redirect()->route('shop.checkout.success');
         }
 
-        if($this->testMode) {
+        if ($this->testMode) {
             Stripe::setApiKey($this->stripeTestSecretKey);
         } else {
             Stripe::setApiKey($this->stripeLiveSecretKey);

@@ -24,7 +24,7 @@
                         </h1>
                     </div>
 
-                    <div class="page-action">
+                    <div class="page-action fixed-action">
                         <button type="submit" class="btn btn-lg btn-primary">
                             {{ __('admin::app.promotion.save') }}
                         </button>
@@ -36,7 +36,7 @@
                         <div>
                             @csrf()
 
-                            <accordian :active="true" title="Information">
+                            <accordian :active="true" title="{{ __('admin::app.promotion.information') }}">
                                 <div slot="body">
                                     <input type="hidden" name="all_conditions" v-model="all_conditions">
 
@@ -80,7 +80,7 @@
                                         <label for="customer_groups" class="required">{{ __('admin::app.promotion.general-info.cust-groups') }}</label>
 
                                         <select type="text" class="control" name="customer_groups[]" v-model="customer_groups" v-validate="'required'" value="{{ old('customer_groups[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.cust-groups') }}&quot;" multiple="multiple">
-                                            <option disabled="disabled">Select Customer Groups</option>
+                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Customer Group']) }}</option>
                                             @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
                                                 <option value="{{ $customerGroup->id }}">{{ $customerGroup->name }}</option>
                                             @endforeach
@@ -93,7 +93,7 @@
                                         <label for="channels" class="required">{{ __('admin::app.promotion.general-info.channels') }}</label>
 
                                         <select type="text" class="control" name="channels[]" v-model="channels" v-validate="'required'" value="{{ old('channels[]') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.channels-req') }}&quot;" multiple="multiple">
-                                            <option disabled="disabled">Select Channels</option>
+                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Channels']) }}</option>
                                             @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                                 <option value="{{ $channel->id }}">{{ $channel->name }}</option>
                                             @endforeach
@@ -106,9 +106,9 @@
                                         <label for="status" class="required">{{ __('admin::app.promotion.general-info.status') }}</label>
 
                                         <select type="text" class="control" name="status" v-model="status" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.status') }}&quot;">
-                                            <option disabled="disabled">Select status</option>
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
+                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Status']) }}</option>
+                                            <option value="1">{{ __('admin::app.promotion.yes') }}</option>
+                                            <option value="0">{{ __('admin::app.promotion.no') }}</option>
                                         </select>
 
                                         <span class="control-error" v-if="errors.has('status')">@{{ errors.first('status') }}</span>
@@ -141,24 +141,17 @@
 
                                         <input type="number" step="1" class="control" name="per_customer" v-model="per_customer" v-validate="'required|numeric|min_value:0'" value="{{ old('per_customer') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
 
+                                        <figcaption class="required">* {{ __('admin::app.promotion.zero-unlimited') }}</figcaption>
+
                                         <span class="control-error" v-if="errors.has('per_customer')">@{{ errors.first('per_customer') }}</span>
-                                    </div> --}}
+                                    </div>
 
-                                    {{-- <div class="control-group" :class="[errors.has('is_guest') ? 'has-error' : '']">
-                                        <label for="is_guest" class="required">{{ __('admin::app.promotion.general-info.is-guest') }}</label>
-
-                                        <select type="text" class="control" name="is_guest" v-model="is_guest" v-validate="'required'" value="{{ old('is_guest')}}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.is-guest') }}&quot;">
-                                            <option value="1" :selected="is_guest == 1">{{ __('admin::app.promotion.general-info.is-coupon-yes') }}</option>
-                                            <option value="0" :selected="is_guest == 0">{{ __('admin::app.promotion.general-info.is-coupon-no') }}</option>
-                                        </select>
-
-                                        <span class="control-error" v-if="errors.has('is_guest')">@{{ errors.first('is_guest') }}</span>
-                                    </div> --}}
-
-                                    {{-- <div class="control-group" :class="[errors.has('usage_limit') ? 'has-error' : '']">
+                                    <div class="control-group" :class="[errors.has('usage_limit') ? 'has-error' : '']">
                                         <label for="usage_limit" class="required">{{ __('admin::app.promotion.general-info.limit') }}</label>
 
                                         <input type="number" step="1" class="control" name="usage_limit" v-model="usage_limit" v-validate="'required|numeric|min_value:0'" value="{{ old('usage_limit') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.uses-per-cust') }}&quot;">
+
+                                        <figcaption class="required">* {{ __('admin::app.promotion.zero-unlimited') }}</figcaption>
 
                                         <span class="control-error" v-if="errors.has('usage_limit')">@{{ errors.first('usage_limit') }}</span>
                                     </div> --}}
@@ -173,7 +166,7 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="Conditions">
+                            <accordian :active="false" title="{{ __('admin::app.promotion.conditions') }}">
                                 <div slot="body">
                                     <input type="hidden" name="all_conditions" v-model="all_conditions">
 
@@ -202,7 +195,7 @@
                                         <!-- Cart Attributes -->
                                         <div class="control-container mt-20" v-for="(condition, index) in conditions_list" :key="index">
                                             <select class="control" name="cart_attributes[]" v-model="conditions_list[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableCondition($event, index)">
-                                                <option disabled="disabled">Select Option</option>
+                                                <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Option']) }}</option>
                                                 <option v-for="(cart_ip, index1) in cart_input" :value="cart_ip.code" :key="index1">@{{ cart_ip.name }}</option>
                                             </select>
 
@@ -213,7 +206,7 @@
 
                                                 <div v-if='conditions_list[index].attribute == "shipping_state"'>
                                                     <select class="control" v-model="conditions_list[index].value">
-                                                        <option disabled="disabled">Select State</option>
+                                                        <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'State']) }}</option>
                                                         <optgroup v-for='(state, code) in country_and_states.states' :label="code">
                                                             <option v-for="(stateObj, index) in state" :value="stateObj.code">@{{ stateObj.default_name }}</option>
                                                         </optgroup>
@@ -222,12 +215,12 @@
 
                                                 <div v-if='conditions_list[index].attribute == "shipping_country"'>
                                                     <select class="control" v-model="conditions_list[index].value">
-                                                        <option disabled="disabled">Select Country</option>
+                                                        <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Country']) }}</option>
                                                         <option v-for="(country, index) in country_and_states.countries" :value="country.code">@{{ country.name }}</option>
                                                     </select>
                                                 </div>
 
-                                                <input class="control" type="text" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value" v-if='conditions_list[index].attribute != "shipping_state" && conditions_list[index].attribute != "shipping_country"'>
+                                                <input class="control" type="text" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="{{ __('admin::app.promotion.enter-attribtue', ['attrbibute' => 'Value']) }}" v-if='conditions_list[index].attribute != "shipping_state" && conditions_list[index].attribute != "shipping_country"'>
                                             </div>
 
                                             <div v-if='conditions_list[index].type == "numeric"' style="display: flex">
@@ -235,21 +228,21 @@
                                                     <option v-for="(condition, index) in conditions.numeric" :value="index" :key="index">@{{ condition }}</option>
                                                 </select>
 
-                                                <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="Enter Value">
+                                                <input class="control" type="number" step="0.1000" name="cart_attributes[]" v-model="conditions_list[index].value" placeholder="{{ __('admin::app.promotion.enter-attribtue', ['attrbibute' => 'Value']) }}">
                                             </div>
 
                                             <span class="icon trash-icon" v-on:click="removeCartAttr(index)"></span>
                                         </div>
                                     </div>
 
-                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addCondition">Add Condition</span>
+                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addCondition">{{ __('admin::app.promotion.add-condition') }}</span>
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="Actions">
+                            <accordian :active="false" title="{{ __('admin::app.promotion.actions') }}">
                                 <div slot="body">
                                     <div class="control-group" :class="[errors.has('action_type') ? 'has-error' : '']">
-                                        <label for="action_type" class="required">Apply</label>
+                                        <label for="action_type" class="required">{{ __('admin::app.promotion.general-info.apply') }}</label>
 
                                         <select class="control" name="action_type" v-model="action_type" v-validate="'required'" value="{{ old('action_type') }}" data-vv-as="&quot;Apply As&quot;" v-on:change="detectApply">
                                             <option v-for="(action, index) in actions" :value="index">@{{ action }}</option>
@@ -266,13 +259,13 @@
                                         <span class="control-error" v-if="errors.has('disc_amount')">@{{ errors.first('disc_amount') }}</span>
                                     </div>
 
-                                    <div class="control-group" :class="[errors.has('disc_threshold') ? 'has-error' : '']">
+                                    {{-- <div class="control-group" :class="[errors.has('disc_threshold') ? 'has-error' : '']">
                                         <label for="disc_threshold" class="required">{{ __('admin::app.promotion.cart.buy-atleast') }}</label>
 
                                         <input type="number" step="1" class="control" name="disc_threshold" v-model="disc_threshold" v-validate="'required|numeric|min_value:1'" value="{{ old('disc_threshold') }}" data-vv-as="&quot;{{ __('admin::app.promotion.cart.buy-atleast') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('disc_threshold')">@{{ errors.first('disc_threshold') }}</span>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="control-group" :class="[errors.has('disc_quantity') ? 'has-error' : '']">
                                         <label for="disc_amount" class="required">{{ __('admin::app.promotion.general-info.disc_qty') }}</label>
@@ -321,19 +314,19 @@
                                 </div>
                             </accordian>
 
-                            <accordian :active="false" title="Coupons" v-if="use_coupon == 1">
+                            <accordian :active="false" title="{{ __('admin::app.promotion.coupons') }}" v-if="use_coupon == 1">
                                 <div slot="body">
                                     {{-- <div v-if="!auto_generation">
                                         <div class="control-group" :class="[errors.has('prefix') ? 'has-error' : '']">
-                                            <label for="prefix" class="required">Prefix</label>
+                                            <label for="prefix" class="required">{{ __('admin::app.promotion.general-info.prefix') }}</label>
 
-                                            <input type="text" class="control" name="prefix" v-model="prefix" value="{{ old('prefix') }}" data-vv-as="&quot;Prefix&quot;">
+                                        <input type="text" class="control" name="prefix" v-model="prefix" value="{{ old('prefix') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.prefix') }}&quot;">
 
                                             <span class="control-error" v-if="errors.has('prefix')">@{{ errors.first('prefix') }}</span>
                                         </div>
 
                                         <div class="control-group" :class="[errors.has('suffix') ? 'has-error' : '']"">
-                                            <label for="suffix" class="required">Suffix</label>
+                                            <label for="suffix" class="required">{{ __('admin::app.promotion.general-info.suffix') }}</label>
 
                                             <input type="text" class="control" name="suffix" v-model="suffix" value="{{ old('suffix') }}" data-vv-as="&quot;suffix&quot;">
 
@@ -343,13 +336,67 @@
 
                                     {{-- <div v-if="auto_generation != 0"> --}}
                                     <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                        <label for="code" class="required">Code</label>
+                                        <label for="code" class="required">{{ __('admin::app.promotion.general-info.code') }}</label>
 
-                                        <input type="text" class="control" name="code" v-model="code" v-validate="'required'" value="{{ old('code') }}" data-vv-as="&quot;Code&quot;">
+                                        <input type="text" class="control" name="code" v-model="code" v-validate="'required'" value="{{ old('code') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.code') }}&quot;">
 
                                         <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
                                     </div>
                                     {{-- </div> --}}
+                                </div>
+                            </accordian>
+
+                            <accordian :active="true" title="{{ __('admin::app.promotion.select-products') }}">
+                                <div slot="body">
+                                    <input type="hidden" name="all_attributes" v-model="all_attributes">
+
+                                    <span class="info mb-20" style="display: block;">
+                                        <b>{{ __('admin::app.promotion.note') }}:</b>
+
+                                        {{ __('admin::app.promotion.convert-x-note') }}
+                                    </span>
+
+                                    <div class="control-group" :class="[errors.has('category_values') ? 'has-error' : '']">
+                                        <label class="mb-10" for="categories">{{ __('admin::app.promotion.select-category') }}</label>
+
+                                        <multiselect v-model="category_values" :close-on-select="false" :options="category_options" :searchable="false" :custom-label="categoryLabel" :show-labels="true" placeholder="{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Categories']) }}" track-by="slug" :multiple="true"></multiselect>
+                                    </div>
+
+                                    <label class="mb-10" for="attributes">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Option']) }}</label>
+
+                                    <br/>
+
+                                    <div class="control-container mt-20" v-for="(condition, index) in attribute_values" :key="index">
+                                        <select class="control" v-model="attribute_values[index].attribute" title="You Can Make Multiple Selections Here" style="margin-right: 15px; width: 30%;" v-on:change="enableAttributeCondition($event, index)">
+                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Option']) }}</option>
+
+                                            <option v-for="(attr_ip, index1) in attribute_input" :value="attr_ip.code" :key="index1">@{{ attr_ip.name }}</option>
+                                        </select>
+
+                                        <select class="control" v-model="attribute_values[index].condition" style="margin-right: 15px;">
+                                            <option v-for="(condition, index) in conditions.string" :value="index" :key="index">@{{ condition }}</option>
+                                        </select>
+
+                                        <div v-show='attribute_values[index].type == "select" || attribute_values[index].type == "multiselect"' style="display: flex;">
+                                            <select class="control" v-model="attribute_values[index].value" style="margin-right: 15px; height: 100px" :multiple="true">
+                                                <option :disabled="true">
+                                                    {{ __('ui::form.select-attribute', ['attribute' => 'Values']) }}
+                                                </option>
+
+                                                <option v-for="(label, index2) in attribute_values[index].options" :value="label.id" :key="index2">@{{ label.admin_name }}</option>
+                                            </select>
+
+                                            {{-- <multiselect v-model="attribute_values[index].value" :close-on-select="false" :options="attribute_values[index].options" :searchable="false" :track-by="admin_name" :custom-label="attributeListLabel" :multiple="true" ></multiselect> --}}
+                                        </div>
+
+                                        <div v-show='attribute_values[index].type == "text" || attribute_values[index].type == "textarea" || attribute_values[index].type == "price" || attribute_values[index].type == "textarea"' style="display: flex">
+                                            <input class="control" v-model="attribute_values[index].value" type="text" placeholder="{{ __('ui::form.enter-attribute', ['attribute' => 'Text']) }}">
+                                        </div>
+
+                                        <span class="icon trash-icon" v-on:click="removeAttr(index)"></span>
+                                    </div>
+
+                                    <span class="btn btn-primary btn-lg mt-20" v-on:click="addAttributeCondition">{{ __('admin::app.promotion.add-attr-condition') }}</span>
                                 </div>
                             </accordian>
 
@@ -381,8 +428,8 @@
 
                 data () {
                     return {
-                        name: 'Name of rule',
-                        description: 'Enter Some Description',
+                        name: '{{ __('admin::app.promotion.rule-name') }}',
+                        description: '{{ __('admin::app.promotion.rule-desc') }}',
                         channels: [],
                         customer_groups: [],
                         ends_till: null,
@@ -399,9 +446,8 @@
                         apply_amt: false,
                         apply_prct: false,
                         apply_to_shipping: null,
-                        buy_atleast: null,
                         disc_amount: null,
-                        disc_threshold: null,
+                        // disc_threshold: null,
                         disc_quantity: null,
                         end_other_rules: null,
                         coupon_type: null,
@@ -409,6 +455,11 @@
 
                         all_conditions: null,
                         match_criteria: 'all_are_true',
+
+                        all_attributes: {
+                            'categories' : null,
+                            'attributes' : null
+                        },
 
                         code: null,
                         suffix: null,
@@ -435,7 +486,19 @@
                             condition: null,
                             value: []
                         },
-                        country_and_states: @json($cart_rule[2])
+                        country_and_states: @json($cart_rule[2]),
+
+                        category_options: @json($cart_rule[1]),
+                        category_values: [],
+
+                        attribute_values: [],
+                        attr_object: {
+                            attribute: null,
+                            condition: null,
+                            value: [],
+                            options: []
+                        },
+                        attribute_input: @json($cart_rule[4]),
                     }
                 },
 
@@ -483,9 +546,8 @@
                     this.apply_amt = false;
                     this.apply_prct = false;
                     this.apply_to_shipping = data.apply_to_shipping;
-                    this.buy_atleast = data.disc_threshold;
                     this.disc_amount = data.disc_amount;
-                    this.disc_threshold = data.disc_threshold;
+                    // this.disc_threshold = data.disc_threshold;
                     this.disc_quantity = data.disc_quantity;
                     this.end_other_rules = data.end_other_rules;
                     this.coupon_type = data.coupon_type;
@@ -498,10 +560,41 @@
                         this.match_criteria = this.conditions_list.pop().criteria;
                     }
 
+                    if (JSON.parse(JSON.parse(data.actions).attribute_conditions)) {
+                        this.category_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).categories;
+
+                        this.attribute_values = JSON.parse(JSON.parse(data.actions).attribute_conditions).attributes;
+
+                        // creating options and has option param on the frontend
+                        for (i in this.attribute_values) {
+                            for (j in this.attribute_input) {
+                                if (this.attribute_input[j].code == this.attribute_values[i].attribute) {
+                                    if (this.attribute_input[j].has_options == true) {
+                                        this.attribute_values[i].has_options = true;
+
+                                        this.attribute_values[i].options = this.attribute_input[j].options;
+                                    } else {
+                                        this.attribute_values[i].has_options = false;
+
+                                        this.attribute_values[i].options = null;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     criteria = null;
                 },
 
                 methods: {
+                    categoryLabel (option) {
+                        return option.name + ' [ ' + option.slug + ' ]';
+                    },
+
+                    attributeListLabel(option) {
+                        return option.label;
+                    },
+
                     addCondition () {
                         if (this.criteria == 'product_subselection' || this.criteria == 'cart') {
                             this.condition_on = this.criteria;
@@ -520,6 +613,17 @@
                                 value: []
                             };
                         }
+                    },
+
+                    addAttributeCondition() {
+                        this.attribute_values.push(this.attr_object);
+
+                        this.attr_object = {
+                            attribute: null,
+                            condition: null,
+                            value: [],
+                            options: []
+                        };
                     },
 
                     checkAutogen() {
@@ -545,6 +649,20 @@
                         }
                     },
 
+                    enableAttributeCondition (event, index) {
+                        selectedIndex = event.target.selectedIndex - 1;
+
+                        for(i in this.attribute_input) {
+                            if (i == selectedIndex) {
+                                if (this.attribute_input[i].has_options == true) {
+                                    this.attribute_values[index].options = this.attribute_input[i].options;
+                                }
+
+                                this.attribute_values[index].type = this.attribute_input[i].type;
+                            }
+                        }
+                    },
+
                     useCoupon() {
                         if (this.use_coupon == 0) {
                             this.auto_generation = null;
@@ -561,7 +679,27 @@
                         this.cats.splice(index, 1);
                     },
 
+                    removeAttr(index) {
+                        this.attribute_values.splice(index, 1);
+                    },
+
                     onSubmit: function (e) {
+                        if (this.attribute_values.length != 0 || this.category_values.length != 0) {
+                            for (i in this.attribute_values) {
+                                delete this.attribute_values[i].options;
+                            }
+
+                            if (this.category_values != null && this.category_values.length > 0) {
+                                this.all_attributes.categories = this.category_values;
+                            }
+
+                            this.all_attributes.attributes = this.attribute_values;
+
+                            this.all_attributes = JSON.stringify(this.all_attributes);
+                        } else {
+                            this.all_attributes = null;
+                        }
+
                         if (this.conditions_list.length != 0) {
                             this.conditions_list.push({'criteria': this.match_criteria});
 

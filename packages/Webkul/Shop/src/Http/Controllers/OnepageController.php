@@ -8,12 +8,9 @@ use Webkul\Shipping\Facades\Shipping;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Discount\Helpers\CouponAbleRule as Coupon;
-use Webkul\Discount\Helpers\NonCouponAbleRule as NonCoupon;
-use Webkul\Discount\Helpers\ValidatesDiscount;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Auth;
+use Webkul\Discount\Helpers\Cart\CouponAbleRule as Coupon;
+use Webkul\Discount\Helpers\Cart\NonCouponAbleRule as NonCoupon;
+use Webkul\Discount\Helpers\Cart\ValidatesDiscount;
 
 /**
  * Chekout controller for the customer and guest for placing order
@@ -89,6 +86,7 @@ class OnepageController extends Controller
         if (Cart::hasError())
             return redirect()->route('shop.checkout.cart.index');
 
+        // $this->nonCoupon->apply();
         $this->nonCoupon->apply();
 
         Cart::collectTotals();
@@ -166,8 +164,6 @@ class OnepageController extends Controller
 
         $this->nonCoupon->apply();
 
-        $this->nonCoupon->checkOnShipping(Cart::getCart());
-
         Cart::collectTotals();
 
         $cart = Cart::getCart();
@@ -234,7 +230,7 @@ class OnepageController extends Controller
     {
         $cart = Cart::getCart();
 
-        $this->validatesDiscount->validate($cart);
+        $this->validatesDiscount->validate();
 
         if (! $cart->shipping_address) {
             throw new \Exception(trans('Please check shipping address.'));

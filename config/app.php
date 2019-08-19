@@ -245,6 +245,7 @@ return [
         Webkul\Tax\Providers\TaxServiceProvider::class,
         Webkul\API\Providers\APIServiceProvider::class,
         Webkul\Discount\Providers\DiscountServiceProvider::class,
+        Webkul\CMS\Providers\CMSServiceProvider::class,
         Webkul\CustomerDocument\Providers\CustomerDocumentServiceProvider::class,
         Webkul\BulkAddToCart\Providers\BulkAddToCartServiceProvider::class,
         Webkul\AdminAuthCheck\Providers\AdminAuthCheckServiceProvider::class,

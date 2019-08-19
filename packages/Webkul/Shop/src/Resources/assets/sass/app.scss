@@ -10,7 +10,7 @@ body {
     font-weight: 500;
     max-width: 100%;
     width: auto;
-    color: $font-color;
+    color: $font-dark;
     font-size: 16px;
 }
 
@@ -45,7 +45,6 @@ input {
     align-items: center;
     justify-content: center;
 }
-
 
 @media only screen and (max-width: 770px) {
     .pagination.shop {
@@ -196,7 +195,7 @@ input {
     }
 
     .regular-price {
-        color: $font-color-light;
+        color: $font-light;
         text-decoration: line-through;
         margin-right: 10px;
     }
@@ -218,7 +217,7 @@ input {
 .account-head {
     .account-heading {
         font-size: 28px;
-        color: $font-color;
+        color: $font-dark;
         text-transform: capitalize;
         text-align: left;
     }
@@ -329,7 +328,7 @@ input {
         grid-auto-rows: auto;
         grid-column-gap: 30px;
         grid-row-gap: 15px;
-        justify-items: end;
+        justify-items: center;
     }
 
     .product-grid-3 {
@@ -342,7 +341,6 @@ input {
 
     .product-card {
         position: relative;
-        padding: 15px;
 
         .product-image {
             max-height: 350px;
@@ -352,17 +350,17 @@ input {
 
             img {
                 display: block;
-                width: 100%;
+                height: 100%;
             }
         }
 
         .product-name {
             margin-bottom: 14px;
             width: 100%;
-            color: $font-color;
+            color: $font-dark;
 
             a {
-                color: $font-color;
+                color: $font-dark;
             }
         }
 
@@ -423,11 +421,13 @@ input {
     }
 
     .product-card:hover {
-        outline: 1px solid $outline-hvr;
         box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         -webkit-box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
         -moz-box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
         box-shadow: 0px 2px 16px 4px rgba(40, 44, 63, 0.07);
+        padding: 10px;
+        transition: .3s;
+        outline: 1px solid $outline-hvr;
     }
 
     @media only screen and (max-width: 580px) {
@@ -444,13 +444,31 @@ input {
     }
 
     @media only screen and (max-width: 854px) {
+        .product-image {
+            img {
+                display: block;
+                width: 100%;
+            }
+        }
+
         .product-grid-4 {
             grid-template-columns: 29.5% 29.5% 29.5%;
             grid-column-gap: 35px;
         }
+
+        .product-card:hover {
+            padding: 5px;
+        }
     }
 
     @media only screen and (max-width: 653px) {
+        .product-image {
+            img {
+                display: block;
+                width: 100%;
+            }
+        }
+
         .product-grid-4 {
             grid-template-columns: 48.5% 48.5%;
             grid-column-gap: 17px;
@@ -460,6 +478,13 @@ input {
     @media only screen and (max-width: 425px) {
         .product-card {
             font-size: 90%;
+
+            .product-image {
+                img {
+                    display: block;
+                    width: 100%;
+                }
+            }
 
             .btn.btn-md {
                 padding: 5px;
@@ -617,7 +642,7 @@ section.slider-block {
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
-                    color: $font-color;
+                    color: $font-dark;
                     height: 100%;
                     width: 100%;
                     top: 0px;
@@ -657,7 +682,7 @@ section.slider-block {
             }
 
             .light-right-icon {
-                background-color: $font-color;
+                background-color: $font-dark;
                 height: 48px;
                 width: 48px;
                 max-height: 100%;
@@ -848,7 +873,7 @@ section.slider-block {
                         padding: 0;
 
                         .dropdown-cart {
-                            color: $font-color;
+                            color: $font-dark;
                         }
 
                         .dropdown-cart > .dropdown-header {
@@ -974,7 +999,7 @@ section.slider-block {
 
         .nav a {
             display:block;
-            color: $font-color;
+            color: $font-dark;
             text-decoration: none;
             padding: 0.8em 0.3em 0.8em 0.5em;
             text-transform: capitalize;
@@ -1247,7 +1272,7 @@ section.slider-block {
                     padding-top: 25px;
 
                     a {
-                        color: $font-color;
+                        color: $font-dark;
                     }
 
                     li {
@@ -1274,7 +1299,7 @@ section.slider-block {
                         }
 
                         .btn-primary {
-                            background-color: $font-color;
+                            background-color: $font-dark;
                             margin-top: 8px;
                             border-radius: 0px;
                             text-align: center;
@@ -1312,7 +1337,7 @@ section.slider-block {
     width: 100%;
     height: 70px;
     font-size: 16px;
-    color: $font-color-light;
+    color: $font-light;
     letter-spacing: -0.26px;
     display: flex;
     flex-direction: row;
@@ -1339,7 +1364,7 @@ section.slider-block {
 
             .filter-title {
                 border-bottom: 1px solid $border-color;
-                color: $font-color;
+                color: $font-dark;
                 padding: 10px 0;
             }
 
@@ -1459,7 +1484,7 @@ section.slider-block {
 
         .page-info {
             float: left;
-            color: $font-color;
+            color: $font-dark;
             line-height: 45px;
 
             span {
@@ -1482,7 +1507,7 @@ section.slider-block {
                 background: $background-color;
                 border: 1px solid $border-color;
                 border-radius: 3px;
-                color: $font-color;
+                color: $font-dark;
                 padding: 10px;
             }
 
@@ -1575,7 +1600,7 @@ section.slider-block {
 
 // product pages css starts here
 section.product-detail {
-    color: $font-color;
+    color: $font-dark;
 
     div.category-breadcrumbs {
         display: inline;
@@ -1640,7 +1665,7 @@ section.product-detail {
 
                             .overlay {
                                 opacity: 0.3;
-                                background: $font-color;
+                                background: $font-dark;
                                 width: 100%;
                                 height: 18px;
                                 position: absolute;
@@ -1754,7 +1779,7 @@ section.product-detail {
 
                 .product-heading {
                     font-size: 24px;
-                    color: $font-color;
+                    color: $font-dark;
                     margin-bottom: 15px;
                 }
 
@@ -1861,7 +1886,7 @@ section.product-detail {
                                 }
 
                                 input:checked + span, input:checked + img {
-                                    border: 1px solid $font-color;
+                                    border: 1px solid $font-dark;
                                 }
 
                                 input {
@@ -2036,7 +2061,7 @@ section.product-detail {
 /* cart pages and elements css begins here */
 section.cart {
     width: 100%;
-    color: $font-color;
+    color: $font-dark;
     margin-bottom: 80px;
     margin-top: 20px;
 
@@ -2110,7 +2135,7 @@ section.cart {
                 font-weight: 600;
 
                 a {
-                    color: $font-color;
+                    color: $font-dark;
                 }
             }
 
@@ -2319,7 +2344,7 @@ section.cart {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 16px;
-    color: $font-color;
+    color: $font-dark;
 
     .col-main {
         width: 70%;
@@ -2468,7 +2493,7 @@ section.cart {
                         .title {
                             width: 100px;
                             display: inline-block;
-                            color: $font-color-light;
+                            color: $font-light;
                             font-weight: 500;
                             margin-bottom: 10px;
                         }
@@ -2591,7 +2616,7 @@ section.cart {
     .title {
         margin-bottom: 40px;
         font-size: 18px;
-        color: $font-color;
+        color: $font-dark;
         text-align: center;
         position: relative;
 
@@ -2637,7 +2662,7 @@ section.review {
             }
 
             .product-name a {
-                color: $font-color;
+                color: $font-dark;
             }
 
             .product-price {
@@ -2663,7 +2688,7 @@ section.review {
             width: 55%;
 
             .heading {
-                color: $font-color;
+                color: $font-dark;
                 font-weight: 600;
 
                 .right {
@@ -2848,7 +2873,7 @@ section.review {
         margin-right: auto;
         text-align: center;
         font-size: 18px;
-        color: $font-color-light;
+        color: $font-light;
 
         text-align: center;
     }
@@ -2931,7 +2956,7 @@ section.review {
 
         .menubar {
             border: 1px solid $border-color;
-            color: $font-color-light;
+            color: $font-light;
             position: relative;
 
             li {
@@ -2998,7 +3023,7 @@ section.review {
 
 //Account content inside a table
 .account-table-content {
-    color: $font-color;
+    color: $font-dark;
     margin-top: 1.4%;
 
     table {
@@ -4051,5 +4076,33 @@ section.review {
                 }
             }
         }
+    }
+}
+
+// Static content pages layout
+.static-container {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &.one-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    &.two-column {
+        display: grid;
+        grid-template-columns: 48% 48%;
+        grid-column-gap: 4%;
+    }
+
+    &.three-column {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-column-gap: 4%;
     }
 }

@@ -20,6 +20,7 @@ return [
         \Webkul\Tax\Providers\ModuleServiceProvider::class,
         \Webkul\User\Providers\ModuleServiceProvider::class,
         \Webkul\Discount\Providers\ModuleServiceProvider::class,
+        \Webkul\CMS\Providers\ModuleServiceProvider::class,
         \Webkul\StripeConnect\Providers\ModuleServiceProvider::class,
         \Webkul\PreOrder\Providers\ModuleServiceProvider::class
     ]

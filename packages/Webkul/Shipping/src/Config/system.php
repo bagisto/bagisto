@@ -4,7 +4,7 @@ return [
     [
         'key' => 'sales',
         'name' => 'admin::app.admin.system.sales',
-        'sort' => 1
+        'sort' => 5
     ], [
         'key' => 'sales.carriers',
         'name' => 'admin::app.admin.system.shipping-methods',

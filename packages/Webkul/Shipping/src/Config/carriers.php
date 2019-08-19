@@ -4,7 +4,7 @@ return [
     'flatrate' => [
         'code' => 'flatrate',
         'title' => 'Flat Rate',
-        'description' => 'This is a flat rate',
+        'description' => 'shop::app.checkout.onepage.flat-desc',
         'active' => true,
         'default_rate' => '10',
         'type' => 'per_unit',
@@ -14,7 +14,7 @@ return [
     'free' => [
         'code' => 'free',
         'title' => 'Free Shipping',
-        'description' => 'This is a free shipping',
+        'description' => 'shop::app.checkout.onepage.free-desc',
         'active' => true,
         'default_rate' => '0',
         'class' => 'Webkul\Shipping\Carriers\Free',

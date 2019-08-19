@@ -27,6 +27,9 @@ class AlterCatalogRulesTables extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('cart_rules', function (Blueprint $table) {
+            $table->dropForeign(['company_id']);
+            $table->dropColumn('company_id');
+        });
     }
 }

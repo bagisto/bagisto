@@ -41,7 +41,8 @@ return [
         'tax-categories' => 'Tax Categories',
         'tax-rates' => 'Tax Rates',
         'promotion' => 'Promotions',
-        'discount' => 'Discount'
+        'discount' => 'Discount',
+        'cms' => 'CMS'
     ],
 
     'acl' => [
@@ -127,6 +128,8 @@ return [
         'email' => 'Email',
         'group' => 'Group',
         'title' => 'Title',
+        'layout' => 'Layout',
+        'url-key' => 'URL Key',
         'comment' => 'Comment',
         'product-name' => 'Product',
         'currency-name' => 'Currency Name',
@@ -603,6 +606,8 @@ return [
             'source_currency' => 'Source Currency',
             'target_currency' => 'Target Currency',
             'rate' => 'Rate',
+            'exchange-class-not-found' => ':service exchange rate class not found',
+            'update-rates' => 'Update rates using :service',
             'create-success' => 'Exchange Rate created successfully.',
             'update-success' => 'Exchange Rate updated successfully.',
             'delete-success' => 'Exchange Rate deleted successfully.',
@@ -810,6 +815,11 @@ return [
     ],
 
     'promotion' => [
+        'information' => 'Information',
+        'conditions' => 'Conditions',
+        'actions' => 'Actions',
+        'coupons' => 'Coupons',
+        'zero-unlimited' => 'Zero denotes unlimited usage here',
         'catalog-rule' => 'Catalog Rules',
         'cart-rule' => 'Cart Rules',
         'add-catalog-rule' => 'Add Catalog Rule',
@@ -821,10 +831,31 @@ return [
         'save-btn-title' => 'Create',
         'edit-btn-title' => 'Edit',
         'save' => 'Save',
-        'select-attr' => 'Select Attribute',
-        'select-attr-fam' => 'Select Attribute Family',
         'select-cart-attr' => 'Select Cart Attribute',
+        'select-products' => 'How to choose products ?',
+        'select-category' => 'Select by Categories',
+        'select-attribute' => 'Select by Attributes',
+        'cannot-activate-catalog-rule' => 'Cannot activate catalog rule',
+        'catalog-rule-already-activated' => 'Catalog rule is already activated',
+        'catalog-rule-activated' => 'Catalog rule is activated',
+        'select-attribute' => 'Select :attribute',
+        'enter-attribute' => 'Enter :attribute',
+        'add-condition' => 'Add Condition',
+        'cart-properties' => 'Cart Properties',
+        'yes' => 'Yes',
+        'no' => 'No',
+        'note' => 'Note',
+        'rule-name' => 'Enter Rule Name',
+        'rule-desc' => 'Enter Rule Description',
+        'convert-x-note' => 'If this section is left empty, then rule will get applied to all the products in the cart.',
+        'add-attr-condition' => 'Add Attribute Condition',
         'general-info' => [
+            'sku-like' => 'SKU Like',
+            'on-shipping' => 'If applied on shipping',
+            'discount' => 'Discount',
+            'shipping-apply-info' => 'It signifies how rule behaves when it is used for shipping',
+            'general-info' => 'General Info',
+            'options' => 'Options',
             'name' => 'Rule Name',
             'description' => 'Description',
             'starts-from' => 'Start',
@@ -859,7 +890,12 @@ return [
             'is-guest' => 'For Guests',
             'disc_qty' => 'Max. Quantity Allowed To Be Discounted',
             'test-mode' => 'Choose how to test conditions',
-            'labels' => 'Labels'
+            'labels' => 'Labels',
+            'prefix' => 'Prefix',
+            'suffix' => 'Suffix',
+            'code' => 'Code',
+            'global-label' => 'Global Label',
+            'label' => 'Label'
         ],
 
         'status' => [
@@ -942,6 +978,35 @@ return [
         'file-type' => 'csv, xls, xlsx.',
         'no-records' => 'Nothing to export',
         'illegal-format' => 'Error! This type of format is either not supported or its illegal format'
+    ],
+
+    'cms' => [
+        'pages' => [
+            'pages' => 'Page',
+            'title' => 'pages',
+            'add-title' => 'Add Page',
+            'content' => 'Content',
+            'url-key' => 'URL Key',
+            'create-btn-title' => 'Add Page',
+            'edit-title' => 'Edit Page',
+            'edit-btn-title' => 'Save Page',
+            'create-success' => 'Page created successfully',
+            'create-failure' => 'Page cannot be created',
+            'update-success' => 'Page updated successfully',
+            'update-failure' => 'Page cannot be updated',
+            'page-title' => 'Page Title',
+            'layout' => 'Layout',
+            'meta_keywords' => 'Meta Keywords',
+            'meta_description' => 'Meta Description',
+            'meta_title' => 'Meta Title',
+            'delete-success' => 'CMS page deleted successfully',
+            'delete-failure' => 'CMS page cannot be deleted',
+            'preview' => 'Preview',
+            'one-col' => '<div class="mt-10">Use class: <b>"static-container one-column"</b> for one column layout.</div>',
+            'two-col' => '<div class="mt-10">Use class: <b>"static-container two-column"</b> for two column layout.</div>',
+            'three-col' => '<div class="mt-10">Use class: <b>"static-container three-column"</b> for three column layout.</div>',
+            'helper-classes' => 'Helper Classes'
+        ]
     ],
 
     'response' => [

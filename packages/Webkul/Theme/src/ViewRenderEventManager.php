@@ -37,6 +37,28 @@ class ViewRenderEventManager
     }
 
     /**
+     *  get params
+     *
+     * @return array
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+
+    /**
+     *  get param
+     *
+     * @param $name
+     *
+     * @return mixed
+     */
+    public function getParam($name)
+    {
+        return optional($this->params)[$name];
+    }
+
+    /**
      * Add templates for render
      *
      * @param string $template
