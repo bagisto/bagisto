@@ -849,6 +849,9 @@ return [
         'rule-name' => 'Enter Rule Name',
         'rule-desc' => 'Enter Rule Description',
         'convert-x-note' => 'If this section is left empty, then rule will get applied to all the products in the cart.',
+        'declut' => 'Declutter Rules',
+        'declut-success' => 'Catalog rules decluttering successful',
+        'declut-failure' => 'Catalog rules decluttering failed',
         'add-attr-condition' => 'Add Attribute Condition',
         'general-info' => [
             'sku-like' => 'SKU Like',

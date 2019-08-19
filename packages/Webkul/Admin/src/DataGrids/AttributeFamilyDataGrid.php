@@ -8,8 +8,8 @@ use DB;
 /**
  * AttributeFamilyDataGrid Class
  *
- * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright  2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class AttributeFamilyDataGrid extends DataGrid
 {

@@ -10,26 +10,46 @@ use Webkul\Discount\Repositories\CartRuleLabelsRepository as CartRuleLabels;
 use Illuminate\Container\Container as App;
 
 /**
- * Cart Rule Reposotory
+ * CartRuleReposotory
  *
  * @author  Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CartRuleRepository extends Repository
 {
+    /**
+     * Will hold cartRuleChannelsRepository instance
+     */
     protected $cartRuleChannels;
 
+    /**
+     * Will hold cartRuleCustomerGroupsRepository instance
+     */
     protected $cartRuleCustomerGroups;
 
+    /**
+     * Will hold cartRuleCoupons instance
+     */
     protected $cartRuleCoupons;
 
+    /**
+     * Will hold cartRuleCustomerGroupsRepository instance
+     */
     protected $cartRuleLabels;
 
     /**
-     *
+     * @param CartRuleChannels $cartRuleChannels
+     * @param CartRuleCustomerGroups $cartRuleCustomerGroups
+     * @param CartRuleCoupons $cartRuleCoupons
+     * @param
      */
-    public function __construct(CartRuleChannels $cartRuleChannels, CartRuleCustomerGroups $cartRuleCustomerGroups, CartRuleCoupons $cartRuleCoupons, CartRuleLabels $cartRuleLabels, App $app)
-    {
+    public function __construct(
+        CartRuleChannels $cartRuleChannels,
+        CartRuleCustomerGroups $cartRuleCustomerGroups,
+        CartRuleCoupons $cartRuleCoupons,
+        CartRuleLabels $cartRuleLabels,
+        App $app
+        ) {
         $this->cartRuleChannels = $cartRuleChannels;
         $this->cartRuleCustomerGroups = $cartRuleCustomerGroups;
         $this->cartRuleCoupons = $cartRuleCoupons;

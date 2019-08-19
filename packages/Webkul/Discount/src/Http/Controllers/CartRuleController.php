@@ -349,7 +349,6 @@ class CartRuleController extends Controller
      */
     public function update($id)
     {
-        dd(request()->all());
         $this->validate(request(), [
             'name' => 'required|string|unique:cart_rules,name,'.$id,
             'description' => 'string',

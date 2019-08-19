@@ -5,17 +5,17 @@ namespace Webkul\Discount\Repositories;
 use Webkul\Core\Eloquent\Repository;
 
 /**
- * Catalog Rule Customer Groups Reposotory
+ * CatalogRuleCustomerGroupsReposotory
  *
  * @author  Prashant Singh <prashant.singh852@webkul.com>
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ * @copyright 2019 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CatalogRuleCustomerGroupsRepository extends Repository
 {
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return String
      */
     function model()
     {

@@ -170,7 +170,9 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
     /**
      * To update the previously created CMS page in storage
      *
-     * @return view
+     * @param Integer $id
+     *
+     * @return View
      */
     public function update($id)
     {
@@ -206,6 +208,8 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
     /**
      * To preview the content of the currently creating page or previously creating page
      *
+     * @param Integer $id
+     *
      * @return mixed
      */
     public function preview($id)
@@ -218,7 +222,9 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
     /**
      * To delete the previously create CMS page
      *
-     * @return json
+     * @param Integer $id
+     *
+     * @return Response JSON
      */
     public function delete($id)
     {
@@ -237,6 +243,8 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
 
     /**
      * To mass delete the CMS resource from storage
+     *
+     * @return Response redirect
      */
     public function massDelete()
     {
