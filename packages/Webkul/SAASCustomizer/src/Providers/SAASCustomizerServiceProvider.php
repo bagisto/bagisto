@@ -234,6 +234,9 @@ class SAASCustomizerServiceProvider extends ServiceProvider
 
         //Discount Model
         $this->app->concord->registerModel(\Webkul\Discount\Contracts\CartRule::class, \Webkul\SAASCustomizer\Models\Discount\CartRule::class);
+        $this->app->concord->registerModel(\Webkul\Discount\Contracts\CatalogRule::class, \Webkul\SAASCustomizer\Models\Discount\CatalogRule::class);
+        $this->app->concord->registerModel(\Webkul\Discount\Contracts\CatalogRuleProducts::class, \Webkul\SAASCustomizer\Models\Discount\CatalogRuleProducts::class);
+        $this->app->concord->registerModel(\Webkul\Discount\Contracts\CatalogRuleProductsPrice::class, \Webkul\SAASCustomizer\Models\Discount\CatalogRuleProductsPrice::class);
     }
 
     /**
@@ -330,5 +333,13 @@ class SAASCustomizerServiceProvider extends ServiceProvider
         \Webkul\SAASCustomizer\Models\User\Role::observe(\Webkul\SAASCustomizer\Observers\User\RoleObserver::class);
 
         \Webkul\SAASCustomizer\Models\Discount\CartRule::observe(\Webkul\SAASCustomizer\Observers\Discount\CartRuleObserver::class);
+
+        \Webkul\SAASCustomizer\Models\CMS\CMS::observe(\Webkul\SAASCustomizer\Observers\CMS\CMSObserver::class);
+
+        \Webkul\SAASCustomizer\Models\Discount\CatalogRule::observe(\Webkul\SAASCustomizer\Observers\Discount\CatalogRuleObserver::class);
+
+        \Webkul\SAASCustomizer\Models\Discount\CatalogRuleProducts::observe(\Webkul\SAASCustomizer\Observers\Discount\CatalogRuleProductsObserver::class);
+
+        \Webkul\SAASCustomizer\Models\Discount\CatalogRuleProductsPrice::observe(\Webkul\SAASCustomizer\Observers\Discount\CatalogRuleProductsPriceObserver::class);
     }
 }
