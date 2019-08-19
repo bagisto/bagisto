@@ -8,6 +8,12 @@ use Webkul\Product\Helpers\Price;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
 
+/**
+ * Configurable Option Helper
+ *
+ * @author Jitendra Singh <jitendra@webkul.com>
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 class ConfigurableOption extends AbstractProduct
 {
     /**

@@ -18,6 +18,8 @@ class Simple extends AbstractType
     protected $skipAttributes = [];
 
     /**
+     * These blade files will be included in product edit page
+     * 
      * @var array
      */
     protected $additionalViews = [
@@ -30,7 +32,7 @@ class Simple extends AbstractType
     /**
      * Return true if this product type is saleable
      *
-     * @return array
+     * @return boolean
      */
     public function isSaleable()
     {
@@ -46,7 +48,7 @@ class Simple extends AbstractType
     /**
      * Return true if this product can have inventory
      *
-     * @return array
+     * @return boolean
      */
     public function isStockable()
     {
@@ -54,13 +56,13 @@ class Simple extends AbstractType
     }
 
     /**
-     * Return true if item can be moved to cart from wishlist
+     * @param integer $qty
      *
      * @return boolean
      */
-    public function canBeMovedFromWishlistToCart()
+    public function haveSufficientQuantity($qty)
     {
-        return true;
+        return $qty <= $this->totalQuantity() ? true : (core()->getConfigData('catalog.inventory.stock_options.backorders') ? true : false);
     }
 
     /**
@@ -90,15 +92,5 @@ class Simple extends AbstractType
         }
 
         return $total;
-    }
-
-    /**
-     * @param integer $qty
-     *
-     * @return bool
-     */
-    public function haveSufficientQuantity($qty)
-    {
-        return $qty <= $this->totalQuantity() ? true : (core()->getConfigData('catalog.inventory.stock_options.backorders') ? true : false);
     }
 }

@@ -18,6 +18,8 @@ class Virtual extends AbstractType
     protected $skipAttributes = ['width', 'height', 'depth', 'weight'];
 
     /**
+     * These blade files will be included in product edit page
+     * 
      * @var array
      */
     protected $additionalViews = [
@@ -25,37 +27,4 @@ class Virtual extends AbstractType
         'admin::catalog.products.accordians.categories',
         'admin::catalog.products.accordians.product-links'
     ];
-
-    /**
-     * Return true if this product type is saleable
-     *
-     * @return array
-     */
-    public function isSaleable()
-    {
-        if (! $this->product->status)
-            return false;
-            
-        return true;
-    }
-
-    /**
-     * Return true if this product can have inventory
-     *
-     * @return array
-     */
-    public function isStockable()
-    {
-        return false;
-    }
-
-    /**
-     * Return true if item can be moved to cart from wishlist
-     *
-     * @return boolean
-     */
-    public function canBeMovedFromWishlistToCart()
-    {
-        return true;
-    }
 }

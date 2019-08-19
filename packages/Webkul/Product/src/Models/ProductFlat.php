@@ -14,6 +14,16 @@ class ProductFlat extends Model implements ProductFlatContract
     public $timestamps = false;
 
     /**
+     * Retrieve type instance
+     *
+     * @return AbstractType
+     */
+    public function getTypeInstance()
+    {
+        return $this->product->getTypeInstance();
+    }
+
+    /**
      * Get the product that owns the attribute value.
      */
     public function product()
@@ -147,6 +157,14 @@ class ProductFlat extends Model implements ProductFlatContract
     public function downloadable_links()
     {
         return $this->product->downloadable_links();
+    }
+
+    /**
+     * Get the grouped products that owns the product.
+     */
+    public function grouped_products()
+    {
+        return $this->product->grouped_products();
     }
 
     /**

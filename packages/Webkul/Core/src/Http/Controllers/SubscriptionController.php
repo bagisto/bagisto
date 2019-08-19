@@ -44,7 +44,7 @@ class SubscriptionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -55,8 +55,7 @@ class SubscriptionController extends Controller
      * To unsubscribe the user without deleting the resource of the subscribed user
      *
      * @param integer $id
-     *
-     * @return mixed
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -69,7 +68,6 @@ class SubscriptionController extends Controller
      * To unsubscribe the user without deleting the resource of the subscribed user
      *
      * @param integer $id
-     *
      * @return mixed
      */
     public function update($id)

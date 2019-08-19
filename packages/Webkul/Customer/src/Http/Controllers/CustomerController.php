@@ -45,7 +45,7 @@ class CustomerController extends Controller
     /**
      * Taking the customer to profile details page
      *
-     * @return View
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -57,7 +57,7 @@ class CustomerController extends Controller
     /**
      * For loading the edit form page.
      *
-     * @return View
+     * @return \Illuminate\View\View
      */
     public function edit()
     {
@@ -116,7 +116,7 @@ class CustomerController extends Controller
     /**
      * Load the view for the customer account panel, showing approved reviews.
      *
-     * @return Mixed
+     * @return \Illuminate\View\View
      */
     public function reviews()
     {

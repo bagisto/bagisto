@@ -115,15 +115,15 @@
                             <tr>
                                 <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}" style="text-align: left;padding: 8px">
                                     {{ $item->name }}
+                                    
+                                    @if (isset($item->additional['attributes']))
+                                        <div class="item-options">
+                                            
+                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}
+                                            @endforeach
 
-                                    @if ($html = $item->getOptionDetailHtml())
-                                        <div style="">
-                                            <label style="margin-top: 10px; font-size: 16px;color: #5E5E5E; display: block;">
-                                                {{ $html }}
-                                            </label>
                                         </div>
-                                    @elseif ($item->type == 'downloadable')
-                                        <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
                                     @endif
                                 </td>
 

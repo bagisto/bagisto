@@ -82,7 +82,7 @@ class OnepageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View 
     */
     public function index()
     {
@@ -104,7 +104,7 @@ class OnepageController extends Controller
     /**
      * Return order short summary
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View 
     */
     public function summary()
     {
@@ -170,7 +170,7 @@ class OnepageController extends Controller
     /**
      * Saves payment method.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
     */
     public function savePayment()
     {

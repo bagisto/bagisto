@@ -8,6 +8,7 @@ use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
+use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Illuminate\Support\Facades\Storage;
@@ -70,6 +71,13 @@ class ProductController extends Controller
     protected $inventorySourceRepository;
 
     /**
+     * ProductGroupedProductRepository object
+     *
+     * @var Object
+     */
+    protected $productGroupedProductRepository;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Category\Repositories\CategoryRepository                 $categoryRepository
@@ -78,6 +86,7 @@ class ProductController extends Controller
      * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
      * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository         $attributeFamilyRepository
      * @param  \Webkul\Inventory\Repositories\InventorySourceRepository         $inventorySource
+     * @param  \Webkul\Inventory\Repositories\ProductGroupedProductRepository   $productGroupedProductRepository
      * @return void
      */
     public function __construct(
@@ -86,7 +95,8 @@ class ProductController extends Controller
         ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         AttributeFamilyRepository $attributeFamilyRepository,
-        InventorySourceRepository $inventorySourceRepository
+        InventorySourceRepository $inventorySourceRepository,
+        ProductGroupedProductRepository $productGroupedProductRepository
     )
     {
         $this->_config = request('_config');
@@ -102,12 +112,14 @@ class ProductController extends Controller
         $this->attributeFamilyRepository = $attributeFamilyRepository;
 
         $this->inventorySourceRepository = $inventorySourceRepository;
+
+        $this->productGroupedProductRepository = $productGroupedProductRepository;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -117,7 +129,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -172,7 +184,7 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -317,7 +329,7 @@ class ProductController extends Controller
     /**
      * Result of search product.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View | \Illuminate\Http\JsonResponse
      */
     public function productLinkSearch()
     {
@@ -352,5 +364,17 @@ class ProductController extends Controller
         ]);
 
         return Storage::download($productAttribute['text_value']);
+    }
+
+    /**
+     * Search simple products for grouped product association
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function searchProductForGroupedAssociation()
+    {
+        return response()->json(
+            $this->productGroupedProductRepository->searchSimpleProducts(request('id'), request()->input('query'))
+        );
     }
 }

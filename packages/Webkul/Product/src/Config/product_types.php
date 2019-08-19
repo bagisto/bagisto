@@ -6,7 +6,6 @@ return [
         'name' => 'Simple',
         'class' => 'Webkul\Product\Type\Simple',
         'sort' => 1
-
     ],
     'configurable' => [
         'key' => 'configurable',
@@ -20,10 +19,16 @@ return [
         'class' => 'Webkul\Product\Type\Virtual',
         'sort' => 3
     ],
+    'grouped' => [
+        'key' => 'grouped',
+        'name' => 'Grouped',
+        'class' => 'Webkul\Product\Type\Grouped',
+        'sort' => 4
+    ],
     'downloadable' => [
         'key' => 'downloadable',
         'name' => 'Downloadable',
         'class' => 'Webkul\Product\Type\Downloadable',
-        'sort' => 4
+        'sort' => 5
     ]
 ];

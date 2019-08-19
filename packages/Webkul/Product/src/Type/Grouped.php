@@ -1,0 +1,188 @@
+<?php
+
+namespace Webkul\Product\Type;
+
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductGroupedProductRepository;
+use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Helpers\Price;
+use Webkul\Product\Helpers\ProductImage;
+
+/**
+ * Class Grouped.
+ *
+ * @author    Jitendra Singh <jitendra@webkul.com>
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
+class Grouped extends AbstractType
+{
+    /**
+     * AttributeRepository instance
+     *
+     * @var AttributeRepository
+     */
+    protected $attributeRepository;
+
+    /**
+     * ProductRepository instance
+     *
+     * @var ProductRepository
+     */
+    protected $productRepository;
+
+    /**
+     * ProductAttributeValueRepository instance
+     *
+     * @var ProductAttributeValueRepository
+     */
+    protected $attributeValueRepository;
+
+    /**
+     * ProductInventoryRepository instance
+     *
+     * @var ProductInventoryRepository
+     */
+    protected $productInventoryRepository;
+
+    /**
+     * ProductImageRepository instance
+     *
+     * @var ProductImageRepository
+     */
+    protected $productImageRepository;
+
+    /**
+     * ProductGroupedProductRepository instance
+     *
+     * @var ProductGroupedProductRepository
+     */
+    protected $productGroupedProductRepository;
+
+    /**
+     * Product price helper instance
+     * 
+     * @var Price
+    */
+    protected $priceHelper;
+
+    /**
+     * Product Image helper instance
+     * 
+     * @var ProductImage
+    */
+    protected $productImageHelper;
+    
+    /**
+     * Skip attribute for downloadable product type
+     *
+     * @var array
+     */
+    protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'];
+
+    /**
+     * These blade files will be included in product edit page
+     * 
+     * @var array
+     */
+    protected $additionalViews = [
+        'admin::catalog.products.accordians.images',
+        'admin::catalog.products.accordians.categories',
+        'admin::catalog.products.accordians.grouped-products',
+        'admin::catalog.products.accordians.product-links'
+    ];
+
+    /**
+     * Create a new product type instance.
+     *
+     * @param  Webkul\Attribute\Repositories\AttributeRepository           $attributeRepository
+     * @param  Webkul\Product\Repositories\ProductRepository               $productRepository
+     * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
+     * @param  Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
+     * @param  Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
+     * @param  Webkul\Product\Repositories\ProductGroupedProductRepository $productGroupedProductRepository
+     * @param  Webkul\Product\Helpers\Price                                $priceHelper
+     * @param  Webkul\Product\Helpers\ProductImage                         $productImageHelper
+     * @return void
+     */
+    public function __construct(
+        AttributeRepository $attributeRepository,
+        ProductRepository $productRepository,
+        ProductAttributeValueRepository $attributeValueRepository,
+        ProductInventoryRepository $productInventoryRepository,
+        ProductImageRepository $productImageRepository,
+        ProductGroupedProductRepository $productGroupedProductRepository,
+        Price $priceHelper,
+        ProductImage $productImageHelper
+    )
+    {
+        parent::__construct(
+            $attributeRepository,
+            $productRepository,
+            $attributeValueRepository,
+            $productInventoryRepository,
+            $productImageRepository,
+            $priceHelper,
+            $productImageHelper
+        );
+
+        $this->productGroupedProductRepository = $productGroupedProductRepository;
+    }
+
+    /**
+     * @param array $data
+     * @param $id
+     * @param string $attribute
+     * @return Product
+     */
+    public function update(array $data, $id, $attribute = "id")
+    {
+        $product = parent::update($data, $id, $attribute);
+
+        if (request()->route()->getName() != 'admin.catalog.products.massupdate')
+            $this->productGroupedProductRepository->saveGroupedProducts($data, $product);
+
+        return $product;
+    }
+
+    /**
+     * Returns validation rules
+     *
+     * @return array
+     */
+    public function getTypeValidationRules()
+    {
+        return [
+        ];
+    }
+
+    /**
+     * Add product. Returns error message if can't prepare product.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function prepareForCart($data)
+    {
+        $products = [];
+
+        foreach ($data['qty'] as $productId => $qty) {
+            $product = $this->productRepository->find($productId);
+
+            $cartProducts = $product->getTypeInstance()->prepareForCart([
+                    'product_id' => $productId,
+                    'quantity' => $qty,
+                ]);
+
+            if (is_string($cartProducts))
+                return $cartProducts;
+                
+            $products = array_merge($products, $cartProducts);
+        }
+
+        return $products;
+    }
+}

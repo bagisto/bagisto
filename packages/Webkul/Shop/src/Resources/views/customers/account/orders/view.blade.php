@@ -66,15 +66,19 @@
                                             @foreach ($order->items as $item)
                                                 <tr>
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
-                                                        {{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}
+                                                        {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
                                                     </td>
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">
                                                         {{ $item->name }}
+                                    
+                                                        @if (isset($item->additional['attributes']))
+                                                            <div class="item-options">
+                                                                
+                                                                @foreach ($item->additional['attributes'] as $attribute)
+                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}
+                                                                @endforeach
 
-                                                        @if ($html = $item->getOptionDetailHtml())
-                                                            <p>{{ $html }}</p>
-                                                        @elseif ($item->type == 'downloadable')
-                                                            <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
+                                                            </div>
                                                         @endif
                                                     </td>
                                                     <td data-value="{{ __('shop::app.customer.account.order.view.price') }}">{{ core()->formatPrice($item->price, $order->order_currency_code) }}</td>
@@ -200,7 +204,7 @@
 
                                                     @foreach ($invoice->items as $item)
                                                         <tr>
-                                                            <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">{{ $item->child ? $item->child->sku : $item->sku }}</td>
+                                                            <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">{{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</td>
                                                             <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">{{ $item->name }}</td>
                                                             <td data-value="{{ __('shop::app.customer.account.order.view.price') }}">{{ core()->formatPrice($item->price, $order->order_currency_code) }}</td>
                                                             <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}">{{ $item->qty }}</td>

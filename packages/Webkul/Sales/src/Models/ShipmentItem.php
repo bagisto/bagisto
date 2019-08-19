@@ -12,6 +12,16 @@ class ShipmentItem extends Model implements ShipmentItemContract
     protected $casts = [
         'additional' => 'array',
     ];
+
+    /**
+     * Retrieve type instance
+     *
+     * @return AbstractType
+     */
+    public function getTypeInstance()
+    {
+        return $this->order_item->getTypeInstance();
+    }
     
     /**
      * Get the shipment record associated with the shipment item.

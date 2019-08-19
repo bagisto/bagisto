@@ -48,9 +48,6 @@ class ProductDownloadableSampleRepository extends Repository
      */
     public function saveSamples(array $data, $product)
     {
-        if ($product->type != 'downloadable')
-            return;
-
         $previousSampleIds = $product->downloadable_samples()->pluck('id');
 
         if (isset($data['downloadable_samples'])) {

@@ -351,7 +351,9 @@ return [
         'less-quantity' => 'Quantity can not be less than one.',
         'samples' => 'Samples',
         'links' => 'Links',
-        'sample' => 'Sample'
+        'sample' => 'Sample',
+        'name' => 'Name',
+        'qty' => 'Qty'
     ],
 
     'wishlist' => [

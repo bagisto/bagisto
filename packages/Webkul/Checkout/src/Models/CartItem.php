@@ -55,4 +55,12 @@ class CartItem extends Model implements CartItemContract
     {
         return $this->belongsTo(self::class, 'id', 'parent_id');
     }
+
+    /**
+     * Get the children items.
+     */
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
 }

@@ -71,7 +71,7 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
     */
     public function index()
     {
@@ -81,7 +81,7 @@ class CustomerController extends Controller
      /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -127,7 +127,7 @@ class CustomerController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -190,7 +190,7 @@ class CustomerController extends Controller
     /**
      * To load the note taking screen for the customers
      *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function createNote($id)
     {

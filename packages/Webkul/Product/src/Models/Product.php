@@ -158,6 +158,14 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Get the grouped products that owns the product.
+     */
+    public function grouped_products()
+    {
+        return $this->hasMany(ProductGroupedProductProxy::modelClass());
+    }
+
+    /**
      * @param integer $qty
      *
      * @return bool

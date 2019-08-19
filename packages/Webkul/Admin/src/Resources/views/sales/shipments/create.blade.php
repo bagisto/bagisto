@@ -273,14 +273,18 @@
                     @foreach ($order->items as $item)
                         @if ($item->qty_to_ship > 0 && $item->product)
                             <tr>
-                                <td>{{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}</td>
+                                <td>{{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</td>
                                 <td>
                                     {{ $item->name }}
-                                                
-                                    @if ($html = $item->getOptionDetailHtml())
-                                        <p>{{ $html }}</p>
-                                    @elseif ($item->type == 'downloadable')
-                                        <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
+
+                                    @if (isset($item->additional['attributes']))
+                                        <div class="item-options">
+                                            
+                                            @foreach ($item->additional['attributes'] as $attribute)
+                                                <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}
+                                            @endforeach
+
+                                        </div>
                                     @endif
                                 </td>
                                 <td>{{ $item->qty_ordered }}</td>
@@ -304,18 +308,11 @@
                                                     </td>
 
                                                     <td>
-                                                        <?php
-                                                            if ($item->type == 'configurable') {
-                                                                $sourceQty = $item->child->product->inventory_source_qty($inventorySource);
-                                                            } else {
-                                                                $sourceQty = $item->product->inventory_source_qty($inventorySource);
-                                                            }
-                                                        ?>
 
                                                         <?php
-                                                            $sourceQty = 0;
+                                                            $product = $item->getTypeInstance()->getOrderedItem($item)->product;
 
-                                                            $product = $item->type == 'configurable' ? $item->child->product : $item->product;
+                                                            $sourceQty = $product->inventory_source_qty($inventorySource);
 
                                                             foreach ($product->inventories as $inventory) {
                                                                 if ($inventory->inventory_source_id == $inventorySource->id) {

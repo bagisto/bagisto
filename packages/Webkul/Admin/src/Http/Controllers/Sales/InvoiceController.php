@@ -61,7 +61,7 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -72,7 +72,7 @@ class InvoiceController extends Controller
      * Show the form for creating a new resource.
      *
      * @param int $orderId
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create($orderId)
     {
@@ -128,7 +128,7 @@ class InvoiceController extends Controller
      * Show the view for the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function view($id)
     {

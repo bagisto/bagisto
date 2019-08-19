@@ -12,6 +12,16 @@ class InvoiceItem extends Model implements InvoiceItemContract
     protected $casts = [
         'additional' => 'array',
     ];
+
+    /**
+     * Retrieve type instance
+     *
+     * @return AbstractType
+     */
+    public function getTypeInstance()
+    {
+        return $this->order_item->getTypeInstance();
+    }
     
     /**
      * Get the invoice record associated with the invoice item.

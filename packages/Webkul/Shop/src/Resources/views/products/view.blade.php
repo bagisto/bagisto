@@ -20,7 +20,7 @@
                 <div class="form-container">
                     @csrf()
 
-                    <input type="hidden" name="product" value="{{ $product->product_id }}">
+                    <input type="hidden" name="product_id" value="{{ $product->product_id }}">
 
                     @include ('shop::products.view.gallery')
 
@@ -66,15 +66,11 @@
 
                         {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
-                        @if ($product->type == 'configurable')
-                            <input type="hidden" value="true" name="is_configurable">
-                        @else
-                            <input type="hidden" value="false" name="is_configurable">
-                        @endif
-
                         @include ('shop::products.view.configurable-options')
 
                         @include ('shop::products.view.downloadable')
+
+                        @include ('shop::products.view.grouped-products')
                         
                         {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
 
@@ -115,6 +111,8 @@
     <script type="text/x-template" id="product-view-template">
         <form method="POST" id="product-form" action="{{ route('cart.add', $product->product_id) }}" @click="onSubmit($event)">
 
+            <input type="hidden" name="is_buy_now" v-model="is_buy_now">
+
             <slot></slot>
 
         </form>
@@ -128,6 +126,12 @@
 
             inject: ['$validator'],
 
+            data: function() {
+                return {
+                    is_buy_now: 0
+                }
+            },
+
             methods: {
                 onSubmit: function(e) {
                     if (e.target.getAttribute('type') != 'submit')
@@ -135,13 +139,16 @@
 
                     e.preventDefault();
 
+                    var this_this = this;
+
                     this.$validator.validateAll().then(function (result) {
                         if (result) {
-                          if (e.target.getAttribute('data-href')) {
-                            window.location.href = e.target.getAttribute('data-href');
-                          } else {
-                            document.getElementById('product-form').submit();
-                          }
+                            this_this.is_buy_now = e.target.classList.contains('buynow') ? 1 : 0;
+
+                            setTimeout(function() {
+                                document.getElementById('product-form').submit();
+                            }, 0);
+
                         }
                     });
                 }
@@ -202,6 +209,7 @@
                     alert('{{ __('shop::app.products.less-quantity') }}');
                 }
             }
+            
             document.getElementById("quantity").value = quantity;
 
             event.preventDefault();

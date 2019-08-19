@@ -26,7 +26,7 @@ class VerificationEmail extends Mailable
     /**
      * Build the message.
      *
-     * @return $this
+     * @return \Illuminate\View\View
      */
     public function build()
     {

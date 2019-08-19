@@ -224,14 +224,18 @@
                                         @foreach ($order->items as $item)
                                             @if ($item->qty_to_invoice > 0)
                                                 <tr>
-                                                    <td>{{ $item->type == 'configurable' ? $item->child->sku : $item->sku }}</td>
+                                                    <td>{{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</td>
                                                     <td>
                                                         {{ $item->name }}
 
-                                                        @if ($html = $item->getOptionDetailHtml())
-                                                            <p>{{ $html }}</p>
-                                                        @elseif ($item->type == 'downloadable')
-                                                            <p><b>Downloads : </b>{{ $item->getDownloadableDetailHtml() }}</p>
+                                                        @if (isset($item->additional['attributes']))
+                                                            <div class="item-options">
+                                                                
+                                                                @foreach ($item->additional['attributes'] as $attribute)
+                                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}
+                                                                @endforeach
+
+                                                            </div>
                                                         @endif
                                                     </td>
                                                     <td>{{ $item->qty_ordered }}</td>

@@ -2,14 +2,12 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Container\Container as App;
 use DB;
+use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
-use Webkul\Core\Eloquent\Repository;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Models\ProductAttributeValue;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Storage;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Eloquent\Repository;
 
 /**
  * Product Repository
@@ -27,77 +25,22 @@ class ProductRepository extends Repository
     protected $attributeRepository;
 
     /**
-     * ProductAttributeValueRepository object
-     *
-     * @var array
-     */
-    protected $attributeValueRepository;
-
-    /**
-     * ProductFlatRepository object
-     *
-     * @var array
-     */
-    protected $productInventoryRepository;
-
-    /**
-     * ProductImageRepository object
-     *
-     * @var array
-     */
-    protected $productImageRepository;
-
-    /**
-     * ProductDownloadableLinkRepository object
-     *
-     * @var array
-     */
-    protected $productDownloadableLinkRepository;
-
-    /**
-     * ProductDownloadableLinkRepository object
-     *
-     * @var array
-     */
-    protected $productDownloadableSampleRepository;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Attribute\Repositories\AttributeRepository               $attributeRepository
-     * @param  Webkul\Attribute\Repositories\ProductAttributeValueRepository   $attributeValueRepository
-     * @param  Webkul\Product\Repositories\ProductInventoryRepository          $productInventoryRepository
-     * @param  Webkul\Product\Repositories\ProductImageRepository              $productImageRepository
-     * @param  Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
-     * @param  Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
+     * @param  Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
      * @return void
      */
     public function __construct(
         AttributeRepository $attributeRepository,
-        ProductAttributeValueRepository $attributeValueRepository,
-        ProductInventoryRepository $productInventoryRepository,
-        ProductImageRepository $productImageRepository,
-        ProductDownloadableLinkRepository $productDownloadableLinkRepository,
-        ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         App $app
     )
     {
         $this->attributeRepository = $attributeRepository;
 
-        $this->attributeValueRepository = $attributeValueRepository;
-
-        $this->productInventoryRepository = $productInventoryRepository;
-
-        $this->productImageRepository = $productImageRepository;
-
-        $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
-
-        $this->productDownloadableSampleRepository = $productDownloadableSampleRepository;
-
         parent::__construct($app);
     }
 
-    /**->where('product_flat.visible_individually', 1)
+    /**
      * Specify Model class name
      *
      * @return mixed
@@ -113,36 +56,12 @@ class ProductRepository extends Repository
      */
     public function create(array $data)
     {
-        //before store of the product
         Event::fire('catalog.product.create.before');
 
-        $product = $this->model->create($data);
+        $typeInstance = app(config('product_types.' . $data['type'] . '.class'));
 
-        $nameAttribute = $this->attributeRepository->findOneByField('code', 'status');
-        $this->attributeValueRepository->create([
-                'product_id' => $product->id,
-                'attribute_id' => $nameAttribute->id,
-                'value' => 1
-            ]);
+        $product = $typeInstance->create($data);
 
-        if (isset($data['super_attributes'])) {
-
-            $super_attributes = [];
-
-            foreach ($data['super_attributes'] as $attributeCode => $attributeOptions) {
-                $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
-
-                $super_attributes[$attribute->id] = $attributeOptions;
-
-                $product->super_attributes()->attach($attribute->id);
-            }
-
-            foreach (array_permutation($super_attributes) as $permutation) {
-                $this->createVariant($product, $permutation);
-            }
-        }
-
-        //after store of the product
         Event::fire('catalog.product.create.after', $product);
 
         return $product;
@@ -160,121 +79,7 @@ class ProductRepository extends Repository
 
         $product = $this->find($id);
 
-        if ($product->parent_id && $this->checkVariantOptionAvailabiliy($data, $product)) {
-            $data['parent_id'] = NULL;
-        }
-
-        $product->update($data);
-
-        $attributes = $product->attribute_family->custom_attributes;
-
-        foreach ($attributes as $attribute) {
-            if (! isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && ! $data[$attribute->code]))
-                continue;
-
-            if ($attribute->type == 'multiselect') {
-                $data[$attribute->code] = implode(",", $data[$attribute->code]);
-            }
-
-            if ($attribute->type == 'image' || $attribute->type == 'file') {
-                $dir = 'product/' . $product->id;
-
-                if (gettype($data[$attribute->code]) == 'object') {
-                    $data[$attribute->code] = request()->file($attribute->code)->store($dir);
-                } else {
-                    $data[$attribute->code] = NULL;
-                }
-            }
-
-            $attributeValue = $this->attributeValueRepository->findOneWhere([
-                    'product_id' => $product->id,
-                    'attribute_id' => $attribute->id,
-                    'channel' => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale' => $attribute->value_per_locale ? $data['locale'] : null
-                ]);
-
-            if (! $attributeValue) {
-                $this->attributeValueRepository->create([
-                    'product_id' => $product->id,
-                    'attribute_id' => $attribute->id,
-                    'value' => $data[$attribute->code],
-                    'channel' => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale' => $attribute->value_per_locale ? $data['locale'] : null
-                ]);
-            } else {
-                $this->attributeValueRepository->update([
-                    ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
-                    ], $attributeValue->id
-                );
-
-                if ($attribute->type == 'image' || $attribute->type == 'file') {
-                    Storage::delete($attributeValue->text_value);
-                }
-            }
-        }
-
-        if (request()->route()->getName() != 'admin.catalog.products.massupdate') {
-            if  (isset($data['categories'])) {
-                $product->categories()->sync($data['categories']);
-            }
-
-            if (isset($data['up_sell'])) {
-                $product->up_sells()->sync($data['up_sell']);
-            } else {
-                $data['up_sell'] = [];
-                $product->up_sells()->sync($data['up_sell']);
-            }
-
-            if (isset($data['cross_sell'])) {
-                $product->cross_sells()->sync($data['cross_sell']);
-            } else {
-                $data['cross_sell'] = [];
-                $product->cross_sells()->sync($data['cross_sell']);
-            }
-
-            if (isset($data['related_products'])) {
-                $product->related_products()->sync($data['related_products']);
-            } else {
-                $data['related_products'] = [];
-                $product->related_products()->sync($data['related_products']);
-            }
-
-            $previousVariantIds = $product->variants->pluck('id');
-
-            if (isset($data['variants'])) {
-                foreach ($data['variants'] as $variantId => $variantData) {
-                    if (str_contains($variantId, 'variant_')) {
-                        $permutation = [];
-                        foreach ($product->super_attributes as $superAttribute) {
-                            $permutation[$superAttribute->id] = $variantData[$superAttribute->code];
-                        }
-
-                        $this->createVariant($product, $permutation, $variantData);
-                    } else {
-                        if (is_numeric($index = $previousVariantIds->search($variantId))) {
-                            $previousVariantIds->forget($index);
-                        }
-
-                        $variantData['channel'] = $data['channel'];
-                        $variantData['locale'] = $data['locale'];
-
-                        $this->updateVariant($variantData, $variantId);
-                    }
-                }
-            }
-
-            foreach ($previousVariantIds as $variantId) {
-                $this->delete($variantId);
-            }
-
-            $this->productInventoryRepository->saveInventories($data, $product);
-
-            $this->productImageRepository->uploadImages($data, $product);
-
-            $this->productDownloadableLinkRepository->saveLinks($data, $product);
-            
-            $this->productDownloadableSampleRepository->saveSamples($data, $product);
-        }
+        $product = $product->getTypeInstance()->update($data, $id, $attribute);
 
         Event::fire('catalog.product.update.after', $product);
 
@@ -295,167 +100,6 @@ class ProductRepository extends Repository
     }
 
     /**
-     * @param mixed $product
-     * @param array $permutation
-     * @param array $data
-     * @return mixed
-     */
-    public function createVariant($product, $permutation, $data = [])
-    {
-        if (! count($data)) {
-            $data = [
-                    "sku" => $product->sku . '-variant-' . implode('-', $permutation),
-                    "name" => "",
-                    "inventories" => [],
-                    "price" => 0,
-                    "weight" => 0,
-                    "status" => 1
-                ];
-        }
-
-        $variant = $this->model->create([
-                'parent_id' => $product->id,
-                'type' => 'simple',
-                'attribute_family_id' => $product->attribute_family_id,
-                'sku' => $data['sku'],
-            ]);
-
-        foreach (['sku', 'name', 'price', 'weight', 'status'] as $attributeCode) {
-            $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
-
-            if ($attribute->value_per_channel) {
-                if ($attribute->value_per_locale) {
-                    foreach (core()->getAllChannels() as $channel) {
-                        foreach (core()->getAllLocales() as $locale) {
-                            $this->attributeValueRepository->create([
-                                    'product_id' => $variant->id,
-                                    'attribute_id' => $attribute->id,
-                                    'channel' => $channel->code,
-                                    'locale' => $locale->code,
-                                    'value' => $data[$attributeCode]
-                                ]);
-                        }
-                    }
-                } else {
-                    foreach (core()->getAllChannels() as $channel) {
-                        $this->attributeValueRepository->create([
-                                'product_id' => $variant->id,
-                                'attribute_id' => $attribute->id,
-                                'channel' => $channel->code,
-                                'value' => $data[$attributeCode]
-                            ]);
-                    }
-                }
-            } else {
-                if ($attribute->value_per_locale) {
-                    foreach (core()->getAllLocales() as $locale) {
-                        $this->attributeValueRepository->create([
-                                'product_id' => $variant->id,
-                                'attribute_id' => $attribute->id,
-                                'locale' => $locale->code,
-                                'value' => $data[$attributeCode]
-                            ]);
-                    }
-                } else {
-                    $this->attributeValueRepository->create([
-                            'product_id' => $variant->id,
-                            'attribute_id' => $attribute->id,
-                            'value' => $data[$attributeCode]
-                        ]);
-                }
-            }
-        }
-
-        foreach ($permutation as $attributeId => $optionId) {
-            $this->attributeValueRepository->create([
-                    'product_id' => $variant->id,
-                    'attribute_id' => $attributeId,
-                    'value' => $optionId
-                ]);
-        }
-
-        $this->productInventoryRepository->saveInventories($data, $variant);
-
-        return $variant;
-    }
-
-    /**
-     * @param array $data
-     * @param $id
-     * @return mixed
-     */
-    public function updateVariant(array $data, $id)
-    {
-        $variant = $this->find($id);
-
-        $variant->update(['sku' => $data['sku']]);
-
-        foreach (['sku', 'name', 'price', 'weight', 'status'] as $attributeCode) {
-            $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
-
-            $attributeValue = $this->attributeValueRepository->findOneWhere([
-                    'product_id' => $id,
-                    'attribute_id' => $attribute->id,
-                    'channel' => $attribute->value_per_channel ? $data['channel'] : null,
-                    'locale' => $attribute->value_per_locale ? $data['locale'] : null
-                ]);
-
-            if (! $attributeValue) {
-                $this->attributeValueRepository->create([
-                        'product_id' => $id,
-                        'attribute_id' => $attribute->id,
-                        'value' => $data[$attribute->code],
-                        'channel' => $attribute->value_per_channel ? $data['channel'] : null,
-                        'locale' => $attribute->value_per_locale ? $data['locale'] : null
-                    ]);
-            } else {
-                $this->attributeValueRepository->update([
-                    ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
-                ], $attributeValue->id);
-            }
-        }
-
-        $this->productInventoryRepository->saveInventories($data, $variant);
-
-        return $variant;
-    }
-
-    /**
-     * @param array $data
-     * @param mixed $product
-     * @return mixed
-     */
-    public function checkVariantOptionAvailabiliy($data, $product)
-    {
-        $parent = $product->parent;
-
-        $superAttributeCodes = $parent->super_attributes->pluck('code');
-
-        $isAlreadyExist = false;
-
-        foreach ($parent->variants as $variant) {
-            if ($variant->id == $product->id)
-                continue;
-
-            $matchCount = 0;
-
-            foreach ($superAttributeCodes as $attributeCode) {
-                if (! isset($data[$attributeCode]))
-                    return false;
-
-                if ($data[$attributeCode] == $variant->{$attributeCode})
-                    $matchCount++;
-            }
-
-            if ($matchCount == $superAttributeCodes->count()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * @param integer $categoryId
      * @return Collection
      */
@@ -473,24 +117,20 @@ class ProductRepository extends Repository
                         ->addSelect(DB::raw('IF( product_flat.special_price_from IS NOT NULL
                             AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
                             AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS final_price'))
-
                         ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                         ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
                         ->where('product_flat.channel', $channel)
                         ->where('product_flat.locale', $locale)
                         ->whereNotNull('product_flat.url_key');
 
-                if ($categoryId) {
+                if ($categoryId)
                     $qb->where('product_categories.category_id', $categoryId);
-                }
 
-                if (is_null(request()->input('status'))) {
+                if (is_null(request()->input('status')))
                     $qb->where('product_flat.status', 1);
-                }
 
-                if (is_null(request()->input('visible_individually'))) {
+                if (is_null(request()->input('visible_individually')))
                     $qb->where('product_flat.visible_individually', 1);
-                }
 
                 $queryBuilder = $qb->leftJoin('product_flat as flat_variants', function($qb) use($channel, $locale) {
                     $qb->on('product_flat.id', '=', 'flat_variants.parent_id')
@@ -498,9 +138,8 @@ class ProductRepository extends Repository
                         ->where('flat_variants.locale', $locale);
                 });
 
-                if (isset($params['search'])) {
+                if (isset($params['search']))
                     $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
-                }
 
                 if (isset($params['sort'])) {
                     $attribute = $this->attributeRepository->findOneByField('code', $params['sort']);

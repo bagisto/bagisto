@@ -63,7 +63,7 @@ class CartRuleController extends Controller
     }
 
     /**
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -71,7 +71,7 @@ class CartRuleController extends Controller
     }
 
     /**
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -277,7 +277,7 @@ class CartRuleController extends Controller
     }
 
     /**
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {

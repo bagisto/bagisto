@@ -57,7 +57,7 @@ class ReviewController extends Controller
      * Show the form for creating a new resource.
      *
      * @param  string $slug
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View 
      */
     public function create($slug)
     {
@@ -103,7 +103,7 @@ class ReviewController extends Controller
      * Display reviews of particular product.
      *
      * @param  string $slug
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View 
     */
     public function show($slug)
     {

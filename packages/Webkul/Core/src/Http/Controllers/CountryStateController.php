@@ -56,7 +56,7 @@ class CountryStateController extends Controller
     /**
      * Function to retrieve states with respect to countries with codes and names for both of the countries and states.
      *
-     * @return array
+     * @return \Illuminate\View\View
      */
     public function getCountries()
     {

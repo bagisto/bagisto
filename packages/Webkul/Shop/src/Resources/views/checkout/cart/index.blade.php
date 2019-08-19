@@ -19,12 +19,9 @@
                         <div class="cart-item-list" style="margin-top: 0">
                             @csrf
                             @foreach ($cart->items as $key => $item)
-                                <?php
-                                    if ($item->type == "configurable")
-                                        $productBaseImage = $productImageHelper->getProductBaseImage($item->child->product);
-                                    else
-                                        $productBaseImage = $productImageHelper->getProductBaseImage($item->product);
-                                ?>
+                                @php
+                                    $productBaseImage = $item->product->getTypeInstance()->getBaseImage($item);
+                                @endphp
 
                                 <div class="item mt-5">
                                     <div class="item-image" style="margin-right: 15px;">
@@ -55,17 +52,12 @@
 
                                         {!! view_render_event('bagisto.shop.checkout.cart.item.options.before', ['item' => $item]) !!}
 
-                                        @if ($item->type == 'configurable')
-
-                                            <div class="summary">
-
-                                                {{ Cart::getProductAttributeOptionDetails($item->child->product)['html'] }}
-
-                                            </div>
-                                        @elseif ($item->type == 'downloadable')
-                                            <div class="summary">
+                                        @if (isset($item->additional['attributes']))
+                                            <div class="item-options">
                                                 
-                                                <b>Downloads : </b>{{ $item->additional['link_lables'] }}
+                                                @foreach ($item->additional['attributes'] as $attribute)
+                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}
+                                                @endforeach
 
                                             </div>
                                         @endif

@@ -45,11 +45,9 @@ class TaxRateController extends Controller
     }
 
     /**
-     * Display a listing
-     * resource for the
-     * available tax rates.
+     * Display a listing resource for the available tax rates.
      *
-     * @return mixed
+     * @return \Illuminate\View\View 
      */
 
     public function index() {
@@ -57,10 +55,9 @@ class TaxRateController extends Controller
     }
 
     /**
-     * Display a create
-     * form for tax rate
+     * Display a create form for tax rate
      *
-     * @return view
+     * @return \Illuminate\View\View 
      */
     public function show()
     {
@@ -104,11 +101,9 @@ class TaxRateController extends Controller
     }
 
     /**
-     * Show the edit form
-     * for the previously
-     * created tax rates.
+     * Show the edit form for the previously created tax rates.
      *
-     * @return mixed
+     * @return \Illuminate\View\View 
      */
     public function edit($id)
     {

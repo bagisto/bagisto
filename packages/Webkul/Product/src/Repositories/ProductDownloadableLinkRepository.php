@@ -50,9 +50,6 @@ class ProductDownloadableLinkRepository extends Repository
      */
     public function saveLinks(array $data, $product)
     {
-        if ($product->type != 'downloadable')
-            return;
-
         $previousLinkIds = $product->downloadable_links()->pluck('id');
 
         if (isset($data['downloadable_links'])) {

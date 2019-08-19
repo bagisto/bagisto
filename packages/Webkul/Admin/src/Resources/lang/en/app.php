@@ -408,7 +408,10 @@ return [
             'related-products' => 'Related Products',
             'product-search-hint' => 'Start typing product name',
             'no-result-found' => 'Products not found with same name.',
-            'searching' => 'Searching ...'
+            'searching' => 'Searching ...',
+            'grouped-products' => 'Grouped Products',
+            'search-products' => 'Search Products',
+            'no-result-found' => 'Products not found with same name.'
         ],
 
         'attributes' => [

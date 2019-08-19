@@ -60,7 +60,7 @@ class RegistrationController extends Controller
     /**
      * Opens up the user's sign up form.
      *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function show()
     {

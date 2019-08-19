@@ -7,6 +7,12 @@ use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
 
+/**
+ * Price Helper
+ *
+ * @author Jitendra Singh <jitendra@webkul.com>
+ * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ */
 class Price extends AbstractProduct
 {
     /**
@@ -60,6 +66,7 @@ class Price extends AbstractProduct
     public function getVariantMinPrice($product)
     {
         static $price = [];
+        
         $finalPrice = [];
 
         if (array_key_exists($product->id, $price))
@@ -122,9 +129,8 @@ class Price extends AbstractProduct
         if (is_null($product->special_price) || ! (float) $product->special_price)
             return false;
 
-        if (core()->isChannelDateInInterval($product->special_price_from, $product->special_price_to)) {
+        if (core()->isChannelDateInInterval($product->special_price_from, $product->special_price_to))
             return true;
-        }
 
         return false;
     }

@@ -55,10 +55,9 @@ class TaxCategoryController extends Controller
     }
 
     /**
-     * Function to show
-     * the tax category form
+     * Function to show the tax category form
      *
-     * @return view
+     * @return \Illuminate\View\View 
      */
     public function show()
     {
@@ -101,7 +100,7 @@ class TaxCategoryController extends Controller
      * To show the edit form form the tax category
      *
      * @param int $id
-     * @return view
+     * @return \Illuminate\View\View 
      */
     public function edit($id)
     {

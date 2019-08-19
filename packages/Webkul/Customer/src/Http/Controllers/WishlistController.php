@@ -59,6 +59,8 @@ class WishlistController extends Controller
 
     /**
      * Displays the listing resources if the customer having items in wishlist.
+     * 
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -79,9 +81,8 @@ class WishlistController extends Controller
     {
         $product = $this->productRepository->findOneByField('id', $itemId);
 
-        if (! $product->status) {
+        if (! $product->status)
             return redirect()->back();
-        }
 
         $data = [
             'channel_id' => core()->getCurrentChannel()->id,
@@ -149,38 +150,30 @@ class WishlistController extends Controller
      */
     public function move($itemId)
     {
-        $wishlistItem = $this->wishlistRepository->findOneByField('id', $itemId);
+        $wishlistItem = $this->wishlistRepository->findOneWhere([
+                'id' => $itemId,
+                'customer_id' => auth()->guard('customer')->user()->id
+            ]);
 
-        if (! isset($wishlistItem) || $wishlistItem->customer_id != auth()->guard('customer')->user()->id) {
-            session()->flash('warning', trans('shop::app.security-warning'));
-
-            return redirect()->route('customer.wishlist.index');
-        }
+        if (! $wishlistItem)
+            abort(404);
 
         try {
             $result = Cart::moveToCart($wishlistItem);
+
+            if ($result) {
+                session()->flash('success', trans('shop::app.wishlist.moved'));
+            } else {
+                session()->flash('info', trans('shop::app.wishlist.option-missing'));
+
+                return redirect()->route('shop.products.index', $wishlistItem->product->url_key);
+            }
+
+            return redirect()->back();
         } catch (\Exception $e) {
             session()->flash('warning', $e->getMessage());
 
             return redirect()->back();
-        }
-
-        if ($result) {
-            if ($wishlistItem->delete()) {
-                session()->flash('success', trans('shop::app.wishlist.moved'));
-
-                Cart::collectTotals();
-
-                return redirect()->back();
-            } else {
-                session()->flash('error', trans('shop::app.wishlist.move-error'));
-
-                return redirect()->back();
-            }
-        } else {
-            session()->flash('info', trans('shop::app.wishlist.option-missing'));
-
-            return redirect()->route('shop.products.index', $wishlistItem->product->url_key);
         }
     }
 

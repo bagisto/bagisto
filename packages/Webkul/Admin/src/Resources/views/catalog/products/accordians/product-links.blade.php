@@ -34,7 +34,7 @@
                         @{{ product.name }}
                     </li>
 
-                    <li v-if='!products[key].length && search_term[key].length && !is_searching[key]'>
+                    <li v-if='! products[key].length && search_term[key].length && ! is_searching[key]'>
                         {{ __('admin::app.catalog.products.no-result-found') }}
                     </li>
 

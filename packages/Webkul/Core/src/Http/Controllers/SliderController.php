@@ -47,7 +47,7 @@ class SliderController extends Controller
     /**
      * Loads the index for the sliders settings.
      *
-     * @return mixed
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -57,7 +57,7 @@ class SliderController extends Controller
     /**
      * Loads the form for creating slider.
      *
-     * @return mixed
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -92,7 +92,7 @@ class SliderController extends Controller
     /**
      * Edit the previously created slider item.
      *
-     * @return mixed
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {

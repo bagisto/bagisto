@@ -83,7 +83,7 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @param  string $slug
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View 
      */
     public function index($slug)
     {

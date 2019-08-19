@@ -37,6 +37,8 @@ use Webkul\Core\Repositories\SliderRepository;
 
     /**
      * loads the home page for the storefront
+     * 
+     * @return \Illuminate\View\View 
      */
     public function index()
     {

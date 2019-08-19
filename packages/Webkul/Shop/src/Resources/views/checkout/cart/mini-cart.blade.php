@@ -42,12 +42,9 @@
 
                         <div class="item">
                             <div class="item-image" >
-                                <?php
-                                    if ($item->type == "configurable")
-                                        $images = $productImageHelper->getProductBaseImage($item->child->product);
-                                    else
-                                        $images = $productImageHelper->getProductBaseImage($item->product);
-                                ?>
+                                @php
+                                    $images = $item->product->getTypeInstance()->getBaseImage($item);
+                                @endphp
                                 <img src="{{ $images['small_image_url'] }}" />
                             </div>
 
@@ -60,15 +57,13 @@
 
 
                                 {!! view_render_event('bagisto.shop.checkout.cart-mini.item.options.before', ['item' => $item]) !!}
-
-                                @if ($item->type == "configurable")
-                                    <div class="item-options">
-                                        {{ trim(Cart::getProductAttributeOptionDetails($item->child->product)['html']) }}
-                                    </div>
-                                @elseif ($item->type == 'downloadable')
+                                
+                                @if (isset($item->additional['attributes']))
                                     <div class="item-options">
                                         
-                                        <b>Downloads : </b>{{ $item->additional['link_lables'] }}
+                                        @foreach ($item->additional['attributes'] as $attribute)
+                                            <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}
+                                        @endforeach
 
                                     </div>
                                 @endif

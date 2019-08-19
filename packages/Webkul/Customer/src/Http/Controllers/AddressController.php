@@ -45,7 +45,7 @@ class AddressController extends Controller
     /**
      * Address Route index page
      *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -55,7 +55,7 @@ class AddressController extends Controller
     /**
      * Show the address create form
      *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -103,7 +103,7 @@ class AddressController extends Controller
     /**
      * For editing the existing addresses of current logged in customer
      *
-     * @return view
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
