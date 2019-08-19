@@ -3,45 +3,22 @@
 return [
     'test_mode' => [
         'all_are_true' => 'All conditions are true',
-        // 'all_are_false' => 'All conditions are false',
         'any_is_true' => 'Any condition is true',
-        // 'any_is_false' => 'Any condition is false'
-    ],
-
-    'conditions' => [
-        'numeric' => [
-            0 => 'Equals',
-            1 => 'Equals or greater',
-            2 => 'Equals or lesser',
-            3 => 'Greater than',
-            4 => 'Lesser than'
-        ],
-
-        'text' => [
-            0 => 'is',
-            1 => 'is not',
-            2 => 'contains',
-            3 => 'does not contains'
-        ],
-
-        'boolean' => [
-            0 => 'True/Yes',
-            1 => 'False/No',
-        ]
     ],
 
     'cart' => [
         'actions' => [
-            'percent_of_product' => 'Percentage of product',
             'fixed_amount' => 'Apply as fixed amount',
-            // 'buy_a_get_b' => 'Buy A get B'
+            'percent_of_product' => 'Percentage of product',
+            // 'whole_cart_to_fixed' => 'Adjust whole cart to fixed amount',
+            'whole_cart_to_percent' => 'Adjust whole cart to percent'
         ],
 
         'validation' => [
             0 => 'percent_of_product',
             1 => 'fixed_amount',
-            2 => 'buy_a_get_b',
-            // 3 => 'fixed_amount_cart'
+            2 => 'whole_cart_to_percent',
+            3 => 'whole_cart_to_fixed'
         ],
 
         'conditions' => [
@@ -50,7 +27,7 @@ return [
                 '>=' => 'Greater or equals',
                 '<=' => 'Lesser or equals',
                 '>' => 'Greater than',
-                '<' => 'Lesser than',
+                '<' => 'Lesser than'
             ],
 
             'string' => [
@@ -66,6 +43,18 @@ return [
             'boolean' => [
                 0 => 'True/Yes',
                 1 => 'False/No'
+            ],
+
+            'symbols' => [
+                '=' => 'equals',
+                '>=' => 'greater_or_equals',
+                '<=' => 'lesser_or_equals',
+                '>' => 'greater_than',
+                '<' => 'lesser_than',
+                '{}' => 'contains',
+                '={}' => 'is_one_of',
+                '!={}' => 'is_not_one_of',
+                '!{}' => 'does_not_contains'
             ]
         ],
 
@@ -120,41 +109,66 @@ return [
 
     'catalog' => [
         'actions' => [
-            0 => 'admin::app.promotion.catalog.apply-percent',
-            1 => 'admin::app.promotion.catalog.apply-fixed',
-            2 => 'admin::app.promotion.catalog.adjust-to-percent',
-            // 3 => 'admin::app.promotion.catalog.adjust-to-value'
+            'percent_of_original' => 'Percentage of product',
+            'fixed_amount' => 'Apply as fixed amount',
+            'final_price_to_percent' => 'Adjust price to percentage',
+            'to_discount_value' => 'Adjust price to given amount'
         ],
 
-        'attributes' => [
-            0 => [
-                    'name' => 'Sub-total',
-                    'type' =>  'numeric'
-                ],
-            1 => [
-                    'name' => 'Total Items Quantity',
-                    'type' => 'numeric'
-                ],
-            2 => [
-                    'name' => 'Total Weight',
-                    'type' => 'numeric'
-                ],
-            3 => [
-                    'name' => 'Payment Method',
-                    'type' => 'string'
-                ],
-            4 => [
-                    'name' => 'Shipping Postcode',
-                    'type' => 'string'
-                ],
-            5 => [
-                    'name' => 'Shipping State',
-                    'type' => 'string'
-                ],
-            6 => [
-                    'name' => 'Shipping Country',
-                    'type' => 'string'
-                ]
+        'validation' => [
+            0 => 'percent_of_product',
+            1 => 'fixed_amount',
+            2 => 'buy_a_get_b',
+            3 => 'fixed_amount_cart'
+        ],
+
+        'conditions' => [
+            'numeric' => [
+                '=' => 'Equals',
+                '>=' => 'Greater or equals',
+                '<=' => 'Lesser or equals',
+                '>' => 'Greater than',
+                '<' => 'Lesser than',
+            ],
+
+            'string' => [
+                '=' => 'Equals',
+                '>=' => 'Greater or equals',
+                '<=' => 'Lesser or equals',
+                '>' => 'Greater than',
+                '<' => 'Lesser than',
+                '{}' => 'Contains',
+                '!{}' => 'Does not contains'
+            ],
+
+            'select' => [
+                '=' => 'Equals',
+                '{}' => 'Contains',
+                '!{}' => 'Does not contains'
+            ],
+
+            'multiselect' => [
+                '=' => 'Equals',
+                '{}' => 'Contains',
+                '!{}' => 'Does not contains'
+            ],
+
+            'boolean' => [
+                0 => 'True/Yes',
+                1 => 'False/No'
+            ],
+
+            'symbols' => [
+                '=' => 'equals',
+                '>=' => 'greater_or_equals',
+                '<=' => 'lesser_or_equals',
+                '>' => 'greater_than',
+                '<' => 'lesser_than',
+                '{}' => 'contains',
+                '={}' => 'is_one_of',
+                '!={}' => 'is_not_one_of',
+                '!{}' => 'does_not_contains'
+            ]
         ]
-    ],
+    ]
 ];

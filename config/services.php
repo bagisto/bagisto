@@ -29,10 +29,18 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
+    'exchange-api' => [
+        'default' => 'fixer',
+        'fixer' => [
+            'paid_account' => false,
+            'key' => env('fixer_api_key'),
+            'class' => 'Webkul\Core\Helpers\Exchange\FixerExchange'
+        ]
+    ],
+
     'stripe' => [
         'model' => App\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
-    ],
-
+    ]
 ];

@@ -50,25 +50,31 @@ class ForgotPasswordController extends Controller
      */
     public function store()
     {
-        $this->validate(request(), [
-            'email' => 'required|email'
-        ]);
+        try {
+            $this->validate(request(), [
+                'email' => 'required|email'
+            ]);
 
-        $response = $this->broker()->sendResetLink(
-            request(['email'])
-        );
-        
-        if ($response == Password::RESET_LINK_SENT) {
-            session()->flash('success', trans($response));
-
-            return back();
-        }
-
-        return back()
-            ->withInput(request(['email']))
-            ->withErrors(
-                ['email' => trans($response)]
+            $response = $this->broker()->sendResetLink(
+                request(['email'])
             );
+
+            if ($response == Password::RESET_LINK_SENT) {
+                session()->flash('success', trans($response));
+
+                return back();
+            }
+
+            return back()
+                ->withInput(request(['email']))
+                ->withErrors(
+                    ['email' => trans($response)]
+                );
+        } catch (\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
+
+            return redirect()->back();
+        }
     }
 
     /**

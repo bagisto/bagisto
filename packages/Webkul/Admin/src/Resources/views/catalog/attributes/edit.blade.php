@@ -17,7 +17,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action">
+                <div class="page-action fixed-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.catalog.attributes.save-btn-title') }}
                     </button>
@@ -76,6 +76,9 @@
                                     </option>
                                     <option value="file" {{ $selectedOption == 'file' ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.file') }}
+                                    </option>
+                                    <option value="file" {{ $selectedOption == 'checkbox' ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.checkbox') }}
                                     </option>
                                 </select>
                                 <input type="hidden" name="type" value="{{ $attribute->type }}"/>
@@ -258,6 +261,18 @@
                                         {{ __('admin::app.catalog.attributes.no') }}
                                     </option>
                                     <option value="1" {{ $attribute->is_visible_on_front ? 'selected' : '' }}>
+                                        {{ __('admin::app.catalog.attributes.yes') }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="use_in_flat">{{ __('admin::app.catalog.attributes.use_in_flat') }}</label>
+                                <select class="control" id="use_in_flat" name="use_in_flat">
+                                    <option value="0" {{ $attribute->use_in_flat ? '' : 'selected' }}>
+                                        {{ __('admin::app.catalog.attributes.no') }}
+                                    </option>
+                                    <option value="1" {{ $attribute->use_in_flat ? 'selected' : '' }}>
                                         {{ __('admin::app.catalog.attributes.yes') }}
                                     </option>
                                 </select>

@@ -17,16 +17,16 @@
                     <span>{{ __('shop::app.search.no-results') }}</span>
                 </div>
             @else
-                @if ($results->count() == 1)
+                @if ($results->total() == 1)
                     <div class="search-result-status mb-20">
-                        <span><b>{{ $results->count() }} </b>{{ __('shop::app.search.found-result') }}</span>
+                        <span><b>{{ $results->total() }} </b>{{ __('shop::app.search.found-result') }}</span>
                     </div>
                 @else
                     <div class="search-result-status mb-20">
-                        <span><b>{{ $results->count() }} </b>{{ __('shop::app.search.found-results') }}</span>
+                        <span><b>{{ $results->total() }} </b>{{ __('shop::app.search.found-results') }}</span>
                     </div>
                 @endif
-                
+
                 <div class="product-grid-4">
                     @foreach ($results as $productFlat)
 

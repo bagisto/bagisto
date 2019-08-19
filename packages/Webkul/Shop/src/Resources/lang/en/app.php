@@ -464,7 +464,12 @@ return [
             'free' => 'Free',
             'coupon-used' => 'Coupon Used',
             'applied' => 'Applied',
-            'back' => 'Back'
+            'back' => 'Back',
+            'cash-desc' => 'Cash On Delivery',
+            'money-desc' => 'Money Transfer',
+            'paypal-desc' => 'Paypal Standard',
+            'free-desc' => 'This is a free shipping',
+            'flat-desc' => 'This is a flat rate'
         ],
 
         'total' => [
@@ -532,11 +537,15 @@ return [
             'greeting' => 'An Order :order_id has been placed on :created_at',
         ],
         'forget-password' => [
+            'subject' => 'Customer Reset Password',
             'dear' => 'Dear :name',
             'info' => 'You are receiving this email because we received a password reset request for your account',
             'reset-password' => 'Reset Password',
             'final-summary' => 'If you did not request a password reset, no further action is required',
             'thanks' => 'Thanks!'
+        ],
+        'customer' => [
+            'subject' => 'New Customer Registration'
         ]
     ],
 

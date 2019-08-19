@@ -229,12 +229,26 @@ class AttributeRepository extends Repository
                     || $attribute->type == 'multiselect'
                     || $attribute->code == 'sku'
                 )) {
-                array_push($trimmed, [
-                    'id' => $attribute->id,
-                    'name' => $attribute->name,
-                    'type' => $attribute->type,
-                    'code' => $attribute->code
-                ]);
+                if ($attribute->options()->exists()) {
+                    array_push($trimmed, [
+                        'id' => $attribute->id,
+                        'name' => $attribute->admin_name,
+                        'type' => $attribute->type,
+                        'code' => $attribute->code,
+                        'has_options' => true,
+                        'options' => $attribute->options
+                    ]);
+                } else {
+                    array_push($trimmed, [
+                        'id' => $attribute->id,
+                        'name' => $attribute->admin_name,
+                        'type' => $attribute->type,
+                        'code' => $attribute->code,
+                        'has_options' => false,
+                        'options' => null
+                    ]);
+                }
+
             }
         }
 

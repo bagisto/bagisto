@@ -552,7 +552,6 @@
                 },
 
                 changeCoupon: function() {
-                    console.log('called');
                     if (this.couponChanged == true && this.changeCount == 0) {
                         this.changeCount++;
 

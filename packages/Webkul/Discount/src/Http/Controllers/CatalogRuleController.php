@@ -2,9 +2,6 @@
 
 namespace Webkul\Discount\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-
 use Webkul\Attribute\Repositories\AttributeRepository as Attribute;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository as AttributeFamily;
 use Webkul\Category\Repositories\CategoryRepository as Category;
@@ -12,10 +9,10 @@ use Webkul\Product\Repositories\ProductFlatRepository as Product;
 use Webkul\Discount\Repositories\CatalogRuleRepository as CatalogRule;
 use Webkul\Discount\Repositories\CatalogRuleChannelsRepository as CatalogRuleChannels;
 use Webkul\Discount\Repositories\CatalogRuleCustomerGroupsRepository as CatalogRuleCustomerGroups;
-use Webkul\Discount\Helpers\FindProducts;
+use Webkul\Discount\Helpers\Catalog\Apply;
 
 /**
- * Catalog Rule controller
+ * CatalogRule controller
  *
  * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
@@ -68,28 +65,35 @@ class CatalogRuleController extends Controller
     protected $catalogRuleCustomerGroups;
 
     /**
-     * To hold the catalog repository instance
+     * To hold catalog repository instance
      */
     protected $catalogRule;
 
     /**
-     * Find products using conditions helper instance
+     * To hold Sale instance
      */
-    protected $findProducts;
+    protected $apply;
 
-    public function __construct(Attribute $attribute, AttributeFamily $attributeFamily, Category $category, Product $product, CatalogRule $catalogRule, CatalogRuleChannels $catalogRuleChannels, CatalogRuleCustomerGroups $catalogRuleCustomerGroups, FindProducts $findProducts)
-    {
+    public function __construct(
+        Attribute $attribute,
+        AttributeFamily $attributeFamily,
+        Category $category, Product $product,
+        CatalogRule $catalogRule,
+        CatalogRuleChannels $catalogRuleChannels,
+        CatalogRuleCustomerGroups $catalogRuleCustomerGroups,
+        Apply $sale
+    ) {
         $this->_config = request('_config');
         $this->attribute = $attribute;
         $this->attributeFamily = $attributeFamily;
         $this->category = $category;
         $this->product = $product;
+        $this->sale = $sale;
         $this->catalogRule = $catalogRule;
         $this->catalogRuleChannels = $catalogRuleChannels;
         $this->catalogRuleCustomerGroups = $catalogRuleCustomerGroups;
         $this->appliedConfig = config('pricerules.catalog');
         $this->appliedConditions = config('pricerules.conditions');
-        $this->findProducts = $findProducts;
     }
 
     public function index()
@@ -97,26 +101,33 @@ class CatalogRuleController extends Controller
         return view($this->_config['view']);
     }
 
+    /**
+     * To load create form for catalog rule
+     *
+     * @return View
+     */
     public function create()
     {
-        return view($this->_config['view'])->with('catalog_rule', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions, $this->attributeFamily->getPartial()]);
+        return view($this->_config['view'])->with('catalog_rule', [$this->appliedConfig, $this->category->getPartial(), $this->getStatesAndCountries(), $this->attribute->getPartial()]);
     }
 
+    /**
+     * To store newly created catalog rule and store it
+     *
+     * @return Redirect
+     */
     public function store()
     {
         $this->validate(request(), [
-            'name' => 'required|string',
+            'name' => 'required|string|unique:catalog_rules,name',
             'description' => 'string',
+            'starts_from' => 'present|nullable|date',
+            'ends_till' => 'present|nullable|date',
             'customer_groups' => 'required',
             'channels' => 'required',
-            'starts_from' => 'required|date',
-            'ends_till' => 'required|date',
             'status' => 'required|boolean',
             'end_other_rules' => 'required|boolean',
-            'priority' => 'required|numeric',
-            'criteria' => 'required',
-            'all_conditions' => 'required|array',
-            'apply' => 'required|numeric|min:0|max:3',
+            'all_conditions' => 'present',
             'disc_amount' => 'sometimes',
             'disc_percent' => 'sometimes',
         ]);
@@ -126,6 +137,16 @@ class CatalogRuleController extends Controller
         $catalog_rule_channels = array();
         $catalog_rule_customer_groups = array();
 
+        // check if starts_from is null
+        if ($catalog_rule['starts_from'] == "") {
+            $catalog_rule['starts_from'] = null;
+        }
+
+        // check if end_till is null
+        if ($catalog_rule['ends_till'] == "") {
+            $catalog_rule['ends_till'] = null;
+        }
+
         $catalog_rule_channels = $catalog_rule['channels'];
         $catalog_rule_customer_groups = $catalog_rule['customer_groups'];
         unset($catalog_rule['channels']); unset($catalog_rule['customer_groups']);
@@ -133,29 +154,34 @@ class CatalogRuleController extends Controller
         unset($catalog_rule['criteria']);
 
         $catalog_rule['conditions'] = $catalog_rule['all_conditions'];
+
         unset($catalog_rule['all_conditions']);
 
+        $catalog_rule['conditions'] = json_encode($catalog_rule['conditions']);
+
         if (isset($catalog_rule['disc_amount'])) {
-            $catalog_rule['action_type'] = $catalog_rule['apply'];
             $catalog_rule['actions'] = [
-                'action_type' => $catalog_rule['apply'],
+                'action_code' => $catalog_rule['action_type'],
                 'disc_amount' => $catalog_rule['disc_amount']
             ];
         } else if (isset($catalog_rule['disc_percent'])) {
-            $catalog_rule['action_type'] = $catalog_rule['apply'];
             $catalog_rule['actions'] = [
-                'action_type' => $catalog_rule['apply'],
+                'action_code' => $catalog_rule['action_type'],
                 'disc_percent' => $catalog_rule['disc_percent'],
             ];
         }
 
+        $catalog_rule['discount_amount'] = $catalog_rule['disc_amount'];
+
+        $catalog_rule['action_code'] = $catalog_rule['action_type'];
+
+        unset($catalog_rule['disc_amount']);
         unset($catalog_rule['apply']);
         unset($catalog_rule['attributes']);
         unset($catalog_rule['_token']);
         unset($catalog_rule['all_actions']);
 
         $catalog_rule['actions'] = json_encode($catalog_rule['actions']);
-        $catalog_rule['conditions'] = json_encode($catalog_rule['conditions']);
 
         $catalogRule = $this->catalogRule->create($catalog_rule);
 
@@ -185,38 +211,94 @@ class CatalogRuleController extends Controller
         }
     }
 
+    /**
+     * To load edit for previously created catalog rule
+     *
+     * @param $id
+     *
+     * @return View
+     */
     public function edit($id)
     {
         $catalog_rule = $this->catalogRule->find($id);
+
         $catalog_rule_channels = $this->catalogRuleChannels->findByField('catalog_rule_id', $id);
+
         $catalog_rule_customer_groups = $this->catalogRuleCustomerGroups->findByField('catalog_rule_id', $id);
 
-        return view($this->_config['view'])->with('catalog_rule', [$this->attribute->getPartial(), $this->category->getPartial(), $this->fetchOptionableAttributes(), $this->appliedConfig, $this->appliedConditions, $catalog_rule, $catalog_rule_channels, $catalog_rule_customer_groups, $this->attributeFamily->getPartial()]);
+        return view($this->_config['view'])->with('catalog_rule', [
+                $this->attribute->getPartial(),
+                $this->category->getPartial(),
+                $this->fetchOptionableAttributes(),
+                $this->appliedConfig,
+                $this->appliedConditions,
+                $catalog_rule,
+                $catalog_rule_channels,
+                $catalog_rule_customer_groups,
+                $this->attributeFamily->getPartial()
+            ]);
     }
 
+    /**
+     * To update previously created catalog rule
+     *
+     * @param $id
+     *
+     * @return Redirect
+     */
     public function update($id)
     {
+        $data = request()->input();
+
+        // $validated = \Validator::make($data, [
+        //     'name' => 'required|string|unique:catalog_rules,name,' . $id,
+        //     'starts_from' => 'present|nullable|date',
+        //     'ends_till' => 'present|nullable|date',
+        //     'description' => 'string',
+        //     'customer_groups' => 'required',
+        //     'channels' => 'required',
+        //     'status' => 'required|boolean',
+        //     'end_other_rules' => 'required|boolean',
+        //     'all_conditions' => 'present',
+        //     'disc_amount' => 'sometimes',
+        //     'disc_percent' => 'sometimes'
+        // ]);
+
+        // if ($validated->fails()) {
+        //     dd($validated->errors());
+        // } else {
+        //     dd('passed');
+        // }
+
         $this->validate(request(), [
-            'name' => 'required|string',
+            'name' => 'required|string|unique:catalog_rules,name,'.$id,
+            // 'name' => 'required|string',
+            'starts_from' => 'present|nullable|date',
+            'ends_till' => 'present|nullable|date',
             'description' => 'string',
             'customer_groups' => 'required',
             'channels' => 'required',
-            'starts_from' => 'required|date',
-            'ends_till' => 'required|date',
             'status' => 'required|boolean',
             'end_other_rules' => 'required|boolean',
-            'priority' => 'required|numeric',
-            'criteria' => 'required',
-            'all_conditions' => 'required|array',
-            'apply' => 'required|numeric|min:0|max:3',
+            'all_conditions' => 'present',
             'disc_amount' => 'sometimes',
-            'disc_percent' => 'sometimes',
+            'disc_percent' => 'sometimes'
         ]);
 
         $catalog_rule = request()->all();
 
         $catalog_rule_channels = array();
         $catalog_rule_customer_groups = array();
+
+        // check if starts_from is null
+        if ($catalog_rule['starts_from'] == "") {
+            $catalog_rule['starts_from'] = null;
+        }
+
+        // check if end_till is null
+        if ($catalog_rule['ends_till'] == "") {
+            $catalog_rule['ends_till'] = null;
+        }
 
         $catalog_rule_channels = $catalog_rule['channels'];
         $catalog_rule_customer_groups = $catalog_rule['customer_groups'];
@@ -228,19 +310,22 @@ class CatalogRuleController extends Controller
         unset($catalog_rule['all_conditions']);
 
         if (isset($catalog_rule['disc_amount'])) {
-            $catalog_rule['action_type'] = $catalog_rule['apply'];
+            $catalog_rule['action_code'] = $catalog_rule['action_type'];
             $catalog_rule['actions'] = [
-                'action_type' => $catalog_rule['apply'],
+                'action_code' => $catalog_rule['action_type'],
                 'disc_amount' => $catalog_rule['disc_amount']
             ];
         } else if (isset($catalog_rule['disc_percent'])) {
-            $catalog_rule['action_type'] = $catalog_rule['apply'];
+            $catalog_rule['action_code'] = $catalog_rule['action_type'];
             $catalog_rule['actions'] = [
-                'action_type' => $catalog_rule['apply'],
+                'action_code' => $catalog_rule['action'],
                 'disc_percent' => $catalog_rule['disc_percent'],
             ];
         }
 
+        $catalog_rule['discount_amount'] = $catalog_rule['disc_amount'];
+
+        unset($catalog_rule['disc_amount']);
         unset($catalog_rule['apply']);
         unset($catalog_rule['attributes']);
         unset($catalog_rule['_token']);
@@ -265,16 +350,32 @@ class CatalogRuleController extends Controller
         }
     }
 
+    /**
+     * To apply the catalog rules
+     *
+     * @return Redirect
+     */
     public function applyRules()
     {
-        $catalogRules = $this->catalogRule->all();
-        $decoded = json_decode($catalogRules->first()->conditions);
-        $conditions = json_decode($decoded[0]);
-        $optionableAttributes = $this->fetchOptionableAttributes();
+        $this->sale->apply();
+    }
 
-        $results = $this->findProducts->findByConditions($conditions);
+    /**
+     * Initiates decluttering of rules and even reindexes the table if empty
+     *
+     * @return Response redirect
+     */
+    public function deClutter()
+    {
+        $result = $this->sale->deClutter();
 
-        dd($results);
+        if ($result) {
+            session()->flash('success', trans('admin::app.promotion.declut-success'));
+        } else {
+            session()->flash('warning', trans('admin::app.promotion.declut-failure'));
+        }
+
+        return redirect()->route($this->_config['redirect']);
     }
 
     public function fetchOptionableAttributes()
@@ -290,6 +391,13 @@ class CatalogRuleController extends Controller
         return $attributesWithOptions;
     }
 
+    /**
+     * To delete existing catalog rule
+     *
+     * @param Integer $id
+     *
+     * @return Redirect
+     */
     public function destroy($id)
     {
         $catalogRule = $this->catalogRule->findOrFail($id);
@@ -303,5 +411,21 @@ class CatalogRuleController extends Controller
 
             return response()->json(['message' => false], 400);
         }
+    }
+
+    /**
+     * Get Countries and states list from core helpers
+     *
+     * @return Array
+     */
+    public function getStatesAndCountries()
+    {
+        $countries = core()->countries()->toArray();
+        $states = core()->groupedStatesByCountries();
+
+        return [
+            'countries' => $countries,
+            'states' => $states
+        ];
     }
 }

@@ -17,7 +17,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action">
+                <div class="page-action fixed-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.locales.save-btn-title') }}
                     </button>
@@ -40,6 +40,15 @@
                                 <label for="name" class="required">{{ __('admin::app.settings.locales.name') }}</label>
                                 <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.settings.locales.name') }}&quot;"/>
                                 <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+                            </div>
+
+                            <div class="control-group" :class="[errors.has('direction') ? 'has-error' : '']">
+                                <label for="direction" class="required">{{ __('admin::app.settings.locales.direction') }}</label>
+                                <select v-validate="'required'" class="control" id="direction" name="direction" data-vv-as="&quot;{{ __('admin::app.settings.locales.direction') }}&quot;">
+                                    <option value="ltr" selected title="Text direction left to right">ltr</option>
+                                    <option value="rtl" title="Text direction right to left">rtl</option>
+                                </select>
+                                <span class="control-error" v-if="errors.has('direction')">@{{ errors.first('direction') }}</span>
                             </div>
                         </div>
                     </accordian>

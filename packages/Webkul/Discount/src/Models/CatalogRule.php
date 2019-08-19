@@ -11,7 +11,7 @@ class CatalogRule extends Model implements CatalogRuleContract
 {
     protected $table = 'catalog_rules';
 
-    protected $guarded = ['created_at', 'updated_at'];
+    protected $fillable = ['name', 'description', 'starts_from', 'ends_till', 'status', 'conditions', 'actions', 'end_other_rules', 'action_code', 'discount_amount'];
 
     public function channels()
     {

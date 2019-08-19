@@ -22,16 +22,16 @@ class ExchangeRateController extends Controller
     protected $_config;
 
     /**
-     * ExchangeRateRepository object
-     *
-     * @var array
+     * ExchangeRateRepository instance
+     * 
+     * @var Object
      */
     protected $exchangeRateRepository;
 
     /**
      * CurrencyRepository object
      *
-     * @var array
+     * @var Object
      */
     protected $currencyRepository;
 
@@ -50,6 +50,8 @@ class ExchangeRateController extends Controller
         $this->exchangeRateRepository = $exchangeRateRepository;
 
         $this->currencyRepository = $currencyRepository;
+
+        $this->exchangeRate = $exchangeRate;
 
         $this->_config = request('_config');
     }
@@ -136,6 +138,42 @@ class ExchangeRateController extends Controller
         session()->flash('success', trans('admin::app.settings.exchange_rates.update-success'));
 
         return redirect()->route($this->_config['redirect']);
+    }
+
+    /**
+     * Update Rates Using Exchange Rates API
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateRates($service)
+    {
+        $exchangeService = config('services.exchange-api')[$service];
+
+        if (is_array($exchangeService)) {
+            if (! array_key_exists('class', $exchangeService)) {
+                return response()->json([
+                    'success' => false,
+                    'rates' => null,
+                    'error' => trans('admin::app.exchange-rate.exchange-class-not-found', [
+                        'service' => $service
+                    ])
+                ], 400);
+            }
+
+            $exchangeServiceInstance = new $exchangeService['class'];
+            $updatedRates = $exchangeServiceInstance->fetchRates();
+
+            return response()->json([
+                'success' => true,
+                'rates' => 'rates'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'rates' => null,
+                'error' => trans('admin::app.exchange-rate.invalid-config')
+            ], 400);
+        }
     }
 
     /**

@@ -16,4 +16,58 @@ class ProductFlatRepository extends Repository
     {
         return 'Webkul\Product\Contracts\ProductFlat';
     }
+
+    /**
+     * Maximum Price of Category Product
+     *
+     * @param int  $categoryId
+     * return integer
+     */
+    public function getCategoryProductMaximumPrice($categoryId)
+    {
+        // return $this->model
+        //     ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+        //     ->where('product_categories.category_id', $categoryId)
+        //     ->max('price');
+
+        return $this->model->max('price');
+    }
+
+     /**
+     * Maximum Price of Product
+     *
+     * return integer
+     */
+    public function getProductMaximumPrice()
+    {
+        return $this->model->max('price');
+    }
+
+    /**
+     * get Category Product
+     *
+     * return array
+     */
+    public function getCategoryProductAttribute($categoryId)
+    {
+        $qb = $this->model
+            ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
+            ->where('product_categories.category_id', $categoryId)
+            ->where('product_flat.channel', core()->getCurrentChannelCode())
+            ->where('product_flat.locale', app()->getLocale());
+
+        $productArrributes = $qb
+            ->leftJoin('product_attribute_values as pa', 'product_flat.product_id', 'pa.product_id')
+            ->pluck('pa.attribute_id')
+            ->toArray();
+
+        $productSuperArrributes = $qb
+            ->leftJoin('product_super_attributes as ps', 'product_flat.product_id', 'ps.product_id')
+            ->pluck('ps.attribute_id')
+            ->toArray();
+
+        $productCategoryArrributes = array_unique(array_merge($productArrributes, $productSuperArrributes));
+
+        return $productCategoryArrributes;
+    }
 }

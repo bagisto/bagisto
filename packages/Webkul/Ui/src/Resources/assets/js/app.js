@@ -28,9 +28,15 @@ Vue.filter('truncate', function (value, limit, trail) {
 	return value.length > limit ? value.substring(0, limit) + trail : value;
 });
 
+import { Multiselect } from 'vue-multiselect';
+
+Vue.component('multiselect', Multiselect);
+
 require('flatpickr/dist/flatpickr.css');
 
 require('vue-swatches/dist/vue-swatches.min.css');
+
+require('vue-multiselect/dist/vue-multiselect.min.css');
 
 require("@babel/polyfill");
 

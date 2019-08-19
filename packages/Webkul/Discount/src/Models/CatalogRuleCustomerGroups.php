@@ -3,8 +3,8 @@
 namespace Webkul\Discount\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Customer\Models\CustomerGroupProxy;
 use Webkul\Discount\Contracts\CatalogRuleCustomerGroups as CatalogRuleCustomerGroupsContract;
-use Webkul\Discount\Models\CatalogRuleProxy as CatalogRule;
 
 class CatalogRuleCustomerGroups extends Model implements CatalogRuleCustomerGroupsContract
 {
@@ -12,8 +12,8 @@ class CatalogRuleCustomerGroups extends Model implements CatalogRuleCustomerGrou
 
     protected $guarded = ['created_at', 'updated_at'];
 
-    public function catalog_rule()
+    public function customer_group()
     {
-        return $this->belongsTo(CatalogRule::modelClass(), 'catalog_rule_id');
+        return $this->hasOne(CustomerGroupProxy::modelClass(), 'id', 'customer_group_id');
     }
 }

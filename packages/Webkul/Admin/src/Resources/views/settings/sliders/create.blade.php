@@ -16,7 +16,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action">
+                <div class="page-action fixed-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.sliders.save-btn-title') }}
                     </button>
@@ -27,7 +27,7 @@
                 <div class="form-container">
                     @csrf()
                     <div class="control-group" :class="[errors.has('title') ? 'has-error' : '']">
-                        <label for="title">{{ __('admin::app.settings.sliders.title') }}</label>
+                        <label for="title" class="required">{{ __('admin::app.settings.sliders.title') }}</label>
                         <input type="text" class="control" name="title" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.settings.sliders.title') }}&quot;">
                         <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
                     </div>
@@ -45,9 +45,16 @@
                         <span class="control-error" v-if="errors.has('channel_id')">@{{ errors.first('channel_id') }}</span>
                     </div>
 
-                    <div class="control-group" :class="[errors.has('image') ? 'has-error' : '']">
-                        <label for="new_image">{{ __('admin::app.settings.sliders.image') }}</label>
-                        <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false" :required="true"></image-wrapper>
+                    <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
+                        <label>{{ __('admin::app.catalog.categories.image') }}
+
+                        <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false"></image-wrapper>
+
+                        <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
+                            @foreach ($errors->get('image.*') as $key => $message)
+                                @php echo str_replace($key, 'Image', $message[0]); @endphp
+                            @endforeach
+                        </span>
                     </div>
 
                     <div class="control-group" :class="[errors.has('content') ? 'has-error' : '']">

@@ -22,7 +22,7 @@ class SliderController extends Controller
     /**
      * SliderRepository
      *
-     * Object
+     * @var Object
      */
     protected $sliderRepository;
 

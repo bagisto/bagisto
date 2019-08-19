@@ -67,7 +67,7 @@
 
         {!! view_render_event('bagisto.admin.layout.head') !!}
     </head>
-    <body @if (app()->getLocale() == 'ar') class="rtl" @endif style="scroll-behavior: smooth;">
+    <body @if (core()->getCurrentLocale()->direction == 'rtl') class="rtl" @endif style="scroll-behavior: smooth;">
         <div id="app" class="container">
 
             <flash-wrapper ref='flashes'></flash-wrapper>

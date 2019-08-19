@@ -21,7 +21,7 @@ class CatalogRuleDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('catalog_rules')
                 ->select('id')
-                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'priority', 'status', 'end_other_rules', 'action_type');
+                ->addSelect('id', 'name', 'starts_from', 'ends_till', 'status', 'end_other_rules', 'action_code');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -65,15 +65,6 @@ class CatalogRuleDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'priority',
-            'label' => trans('admin::app.datagrid.priority'),
-            'type' => 'number',
-            'searchable' => false,
-            'sortable' => true,
-            'filterable' => true
-        ]);
-
-        $this->addColumn([
             'index' => 'status',
             'label' => trans('admin::app.datagrid.status'),
             'type' => 'boolean',
@@ -104,19 +95,12 @@ class CatalogRuleDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index' => 'action_type',
+            'index' => 'action_code',
             'label' => 'Action Type',
             'type' => 'string',
             'searchable' => false,
             'sortable' => true,
-            'filterable' => true,
-            'wrapper' => function ($value) {
-                foreach(config('pricerules.catalog.actions') as $key => $action) {
-                    if ($value->action_type == $key) {
-                        return trans($action);
-                    }
-                }
-            }
+            'filterable' => true
         ]);
     }
 

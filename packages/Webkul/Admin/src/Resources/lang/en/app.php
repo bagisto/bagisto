@@ -41,7 +41,8 @@ return [
         'tax-categories' => 'Tax Categories',
         'tax-rates' => 'Tax Rates',
         'promotion' => 'Promotions',
-        'discount' => 'Discount'
+        'discount' => 'Discount',
+        'cms' => 'CMS'
     ],
 
     'acl' => [
@@ -107,6 +108,7 @@ return [
             'delete-success' => 'Selected index of :resource were successfully deleted',
             'partial-action' => 'Some actions were not performed due restricted system constraints on :resource',
             'update-success' => 'Selected index of :resource were successfully updated',
+            'no-resource' => 'The resource provided for insufficient for the action'
         ],
 
         'id' => 'ID',
@@ -114,6 +116,7 @@ return [
         'code' => 'Code',
         'admin-name' => 'Name',
         'name' => 'Name',
+        'direction' => 'Direction',
         'fullname' => 'Full Name',
         'type' => 'Type',
         'required' => 'Required',
@@ -126,6 +129,8 @@ return [
         'email' => 'Email',
         'group' => 'Group',
         'title' => 'Title',
+        'layout' => 'Layout',
+        'url-key' => 'URL Key',
         'comment' => 'Comment',
         'product-name' => 'Product',
         'currency-name' => 'Currency Name',
@@ -187,7 +192,6 @@ return [
         ],
 
         'reset-password' => [
-            'title' => 'Reset Password',
             'title' => 'Reset Password',
             'email' => 'Registered Email',
             'password' => 'Password',
@@ -411,7 +415,8 @@ return [
             'searching' => 'Searching ...',
             'grouped-products' => 'Grouped Products',
             'search-products' => 'Search Products',
-            'no-result-found' => 'Products not found with same name.'
+            'no-result-found' => 'Products not found with same name.',
+            'channel' => 'Channels'
         ],
 
         'attributes' => [
@@ -461,7 +466,9 @@ return [
             'text-swatch' => 'Text Swatch',
             'swatch' => 'Swatch',
             'image' => 'Image',
-            'file' => 'File'
+            'file' => 'File',
+            'checkbox' => 'Checkbox',
+            'use_in_flat' => "Create in Product Flat Table",
         ],
         'families' => [
             'title' => 'Families',
@@ -505,6 +512,8 @@ return [
             'meta_description' => 'Meta Description',
             'meta_keywords' => 'Meta Keywords',
             'image' => 'Image',
+            'filterable-attributes' => 'Filterable Attributes',
+            'attributes' => 'Attributes',
         ]
     ],
 
@@ -576,6 +585,7 @@ return [
             'general' => 'General',
             'code' => 'Code',
             'name' => 'Name',
+            'direction' => 'Direction',
             'create-success' => 'Locale created successfully.',
             'update-success' => 'Locale updated successfully.',
             'delete-success' => 'Locale deleted successfully.',
@@ -612,6 +622,8 @@ return [
             'source_currency' => 'Source Currency',
             'target_currency' => 'Target Currency',
             'rate' => 'Rate',
+            'exchange-class-not-found' => ':service exchange rate class not found',
+            'update-rates' => 'Update rates using :service',
             'create-success' => 'Exchange Rate created successfully.',
             'update-success' => 'Exchange Rate updated successfully.',
             'delete-success' => 'Exchange Rate deleted successfully.',
@@ -819,6 +831,11 @@ return [
     ],
 
     'promotion' => [
+        'information' => 'Information',
+        'conditions' => 'Conditions',
+        'actions' => 'Actions',
+        'coupons' => 'Coupons',
+        'zero-unlimited' => 'Zero denotes unlimited usage here',
         'catalog-rule' => 'Catalog Rules',
         'cart-rule' => 'Cart Rules',
         'add-catalog-rule' => 'Add Catalog Rule',
@@ -830,10 +847,34 @@ return [
         'save-btn-title' => 'Create',
         'edit-btn-title' => 'Edit',
         'save' => 'Save',
-        'select-attr' => 'Select Attribute',
-        'select-attr-fam' => 'Select Attribute Family',
         'select-cart-attr' => 'Select Cart Attribute',
+        'select-products' => 'How to choose products ?',
+        'select-category' => 'Select by Categories',
+        'select-attribute' => 'Select by Attributes',
+        'cannot-activate-catalog-rule' => 'Cannot activate catalog rule',
+        'catalog-rule-already-activated' => 'Catalog rule is already activated',
+        'catalog-rule-activated' => 'Catalog rule is activated',
+        'select-attribute' => 'Select :attribute',
+        'enter-attribute' => 'Enter :attribute',
+        'add-condition' => 'Add Condition',
+        'cart-properties' => 'Cart Properties',
+        'yes' => 'Yes',
+        'no' => 'No',
+        'note' => 'Note',
+        'rule-name' => 'Enter Rule Name',
+        'rule-desc' => 'Enter Rule Description',
+        'convert-x-note' => 'If this section is left empty, then rule will get applied to all the products in the cart.',
+        'declut' => 'Declutter Rules',
+        'declut-success' => 'Catalog rules decluttering successful',
+        'declut-failure' => 'Catalog rules decluttering failed',
+        'add-attr-condition' => 'Add Attribute Condition',
         'general-info' => [
+            'sku-like' => 'SKU Like',
+            'on-shipping' => 'If applied on shipping',
+            'discount' => 'Discount',
+            'shipping-apply-info' => 'It signifies how rule behaves when it is used for shipping',
+            'general-info' => 'General Info',
+            'options' => 'Options',
             'name' => 'Rule Name',
             'description' => 'Description',
             'starts-from' => 'Start',
@@ -868,7 +909,12 @@ return [
             'is-guest' => 'For Guests',
             'disc_qty' => 'Max. Quantity Allowed To Be Discounted',
             'test-mode' => 'Choose how to test conditions',
-            'labels' => 'Labels'
+            'labels' => 'Labels',
+            'prefix' => 'Prefix',
+            'suffix' => 'Suffix',
+            'code' => 'Code',
+            'global-label' => 'Global Label',
+            'label' => 'Label'
         ],
 
         'status' => [
@@ -953,6 +999,37 @@ return [
         'illegal-format' => 'Error! This type of format is either not supported or its illegal format'
     ],
 
+    'cms' => [
+        'pages' => [
+            'pages' => 'Page',
+            'title' => 'pages',
+            'add-title' => 'Add Page',
+            'content' => 'Content',
+            'url-key' => 'URL Key',
+            'channel' => 'Channel',
+            'locale' => 'Locale',
+            'create-btn-title' => 'Add Page',
+            'edit-title' => 'Edit Page',
+            'edit-btn-title' => 'Save Page',
+            'create-success' => 'Page created successfully',
+            'create-failure' => 'Page cannot be created',
+            'update-success' => 'Page updated successfully',
+            'update-failure' => 'Page cannot be updated',
+            'page-title' => 'Page Title',
+            'layout' => 'Layout',
+            'meta_keywords' => 'Meta Keywords',
+            'meta_description' => 'Meta Description',
+            'meta_title' => 'Meta Title',
+            'delete-success' => 'CMS page deleted successfully',
+            'delete-failure' => 'CMS page cannot be deleted',
+            'preview' => 'Preview',
+            'one-col' => '<div class="mt-10">Use class: <b>"static-container one-column"</b> for one column layout.</div>',
+            'two-col' => '<div class="mt-10">Use class: <b>"static-container two-column"</b> for two column layout.</div>',
+            'three-col' => '<div class="mt-10">Use class: <b>"static-container three-column"</b> for three column layout.</div>',
+            'helper-classes' => 'Helper Classes'
+        ]
+    ],
+
     'response' => [
         'being-used' => 'This resource :name is getting used in :source',
         'cannot-delete-default' => 'Cannot delete the default channel',
@@ -989,7 +1066,6 @@ return [
             'allow-backorders' => 'Allow Backorders',
             'customer' => 'Customer',
             'settings' => 'Settings',
-            'address' => 'Address',
             'address' => 'Address',
             'street-lines' => 'Lines in a Street Address',
             'sales' => 'Sales',

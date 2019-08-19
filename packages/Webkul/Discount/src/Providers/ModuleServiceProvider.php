@@ -10,7 +10,8 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Discount\Models\CatalogRule::class,
         \Webkul\Discount\Models\CatalogRuleChannels::class,
         \Webkul\Discount\Models\CatalogRuleCustomerGroups::class,
-        \Webkul\Discount\Models\CatalogRuleProducts::class,\Webkul\Discount\Models\CatalogRuleProductsPrice::class,
+        \Webkul\Discount\Models\CatalogRuleProducts::class,
+        \Webkul\Discount\Models\CatalogRuleProductsPrice::class,
         \Webkul\Discount\Models\CartRule::class,
         \Webkul\Discount\Models\CartRuleChannels::class,
         \Webkul\Discount\Models\CartRuleCustomerGroups::class,
@@ -18,6 +19,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Discount\Models\CartRuleLabels::class,
         \Webkul\Discount\Models\CartRuleCouponsUsage::class,
         \Webkul\Discount\Models\CartRuleCustomers::class,
-        \Webkul\Discount\Models\CartRuleCart::class,
+        \Webkul\Discount\Models\CartRuleCart::class
     ];
 }

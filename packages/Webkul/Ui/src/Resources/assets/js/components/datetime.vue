@@ -21,6 +21,10 @@ export default {
 		};
 	},
 
+	created() {
+
+	},
+
 	mounted() {
 		var this_this = this;
 

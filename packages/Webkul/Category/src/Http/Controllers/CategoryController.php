@@ -24,19 +24,32 @@ class CategoryController extends Controller
     /**
      * CategoryRepository object
      *
-     * @var array
+     * @var Object
      */
     protected $categoryRepository;
 
     /**
+     * AttributeRepository object
+     *
+     * @var Object
+     */
+    protected $attributeRepository;
+
+    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository $categoryRepository
+     * @param  \Webkul\Category\Repositories\CategoryRepository   $categoryRepository
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository $attributeRepository
      * @return void
      */
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(
+        CategoryRepository $categoryRepository,
+        AttributeRepository $attributeRepository
+    )
     {
         $this->categoryRepository = $categoryRepository;
+
+        $this->attributeRepository = $attributeRepository;
 
         $this->_config = request('_config');
     }
@@ -60,7 +73,9 @@ class CategoryController extends Controller
     {
         $categories = $this->categoryRepository->getCategoryTree(null, ['id']);
 
-        return view($this->_config['view'], compact('categories'));
+        $attributes = $this->attributeRepository->findWhere(['is_filterable' =>  1]);
+
+        return view($this->_config['view'], compact('categories', 'attributes'));
     }
 
     /**
@@ -108,7 +123,9 @@ class CategoryController extends Controller
 
         $category = $this->categoryRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('category', 'categories'));
+        $attributes = $this->attributeRepository->findWhere(['is_filterable' =>  1]);
+
+        return view($this->_config['view'], compact('category', 'categories', 'attributes'));
     }
 
     /**

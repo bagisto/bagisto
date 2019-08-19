@@ -14,7 +14,7 @@ use Excel;
 class ExportController extends Controller
 {
     protected $exportableGrids = [
-        'OrderDataGrid', 'OrderInvoicesDataGrid', 'OrderShipmentsDataGrid', 'CustomerDataGrid', 'TaxRateDataGrid', 'ProductDataGrid'
+        'OrderDataGrid', 'OrderInvoicesDataGrid', 'OrderShipmentsDataGrid', 'CustomerDataGrid', 'TaxRateDataGrid', 'ProductDataGrid', 'CMSPageDataGrid'
     ];
 
     /**
@@ -34,6 +34,7 @@ class ExportController extends Controller
     public function export()
     {
         $criteria = request()->all();
+
         $format = $criteria['format'];
 
         $gridName = explode('\\', $criteria['gridName']);
