@@ -93,7 +93,7 @@
 
                                     <datetime :name="starts_from">
                                         <div class="control-group" :class="[errors.has('starts_from') ? 'has-error' : '']">
-                                            <label for="starts_from" class="required">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
+                                            <label for="starts_from">{{ __('admin::app.promotion.general-info.starts-from') }}</label>
 
                                             <input type="text" class="control" v-model="starts_from" name="starts_from" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.starts-from') }}&quot;">
 
@@ -103,7 +103,7 @@
 
                                     <datetime :name="starts_from">
                                         <div class="control-group" :class="[errors.has('ends_till') ? 'has-error' : '']">
-                                            <label for="ends_till" class="required">{{ __('admin::app.promotion.general-info.ends-till') }}</label>
+                                            <label for="ends_till">{{ __('admin::app.promotion.general-info.ends-till') }}</label>
 
                                             <input type="text" class="control" v-model="ends_till" name="ends_till" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.ends-till') }}&quot;">
 
@@ -260,7 +260,6 @@
                 },
 
                 mounted () {
-                    console.log(this.attribute_input);
                 },
 
                 methods: {

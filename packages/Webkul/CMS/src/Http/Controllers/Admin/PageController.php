@@ -85,16 +85,42 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
      */
     public function store()
     {
-        $this->validate(request(), [
-            'channels' => 'required',
-            'locales' => 'required',
-            'url_key' => 'required|unique:cms_pages,url_key',
-            'html_content' => 'required|string',
-            'page_title' => 'required|string',
-            'meta_title' => 'required|string',
-            'meta_description' => 'string',
-            'meta_keywords' => 'required|string'
-        ]);
+        $data = request()->all();
+
+        $channels = request()->input('channels');
+
+        $locales = request()->input('locales');
+
+        $urlKey = request()->input('url_key');
+
+        $ignorePageIDs = array();
+
+        foreach ($channels as $channel) {
+            foreach ($locales as $locale) {
+                $page = $this->cms->findOneWhere([
+                    'channel_id' => $channel,
+                    'locale_id' => $locale,
+                    'url_key' => $urlKey
+                ]);
+
+                if ($page) {
+                    array_push($ignorePageIDs, $page->id);
+                }
+            }
+        }
+
+        if (count($ignorePageIDs)) {
+            $this->validate(request(), [
+                'channels' => 'required',
+                'locales' => 'required',
+                'url_key' => 'required|unique:cms_pages,url_key,'.$ignorePageIDs,
+                'html_content' => 'required|string',
+                'page_title' => 'required|string',
+                'meta_title' => 'required|string',
+                'meta_description' => 'string',
+                'meta_keywords' => 'required|string'
+            ]);
+        }
 
         $data = request()->all();
 
