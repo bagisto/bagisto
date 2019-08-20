@@ -830,7 +830,7 @@ return [
         'create-catalog-rule' => 'Create Catalog Rule',
         'create-cart-rule' => 'Create Cart Rule',
         'save-btn-title' => 'Create',
-        'edit-btn-title' => 'Edit',
+        'edit-btn-title' => 'Save',
         'save' => 'Save',
         'select-cart-attr' => 'Select Cart Attribute',
         'select-products' => 'How to choose products ?',
