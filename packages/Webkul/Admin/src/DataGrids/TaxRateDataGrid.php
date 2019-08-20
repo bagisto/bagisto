@@ -92,7 +92,7 @@ class TaxRateDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'tax_rate',
             'label' => trans('admin::app.datagrid.tax-rate'),
-            'type' => 'string',
+            'type' => 'number',
             'searchable' => true,
             'sortable' => true,
             'filterable' => true

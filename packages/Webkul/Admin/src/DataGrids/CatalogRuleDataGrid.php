@@ -49,7 +49,7 @@ class CatalogRuleDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'starts_from',
             'label' => trans('admin::app.datagrid.starts-from'),
-            'type' => 'date',
+            'type' => 'datetime',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true
@@ -58,7 +58,7 @@ class CatalogRuleDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'ends_till',
             'label' => trans('admin::app.datagrid.ends-till'),
-            'type' => 'date',
+            'type' => 'datetime',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true
