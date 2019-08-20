@@ -41,7 +41,7 @@ class CatalogRuleDataGrid extends DataGrid
             'index' => 'name',
             'label' => trans('admin::app.datagrid.name'),
             'type' => 'string',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
             'filterable' => true
         ]);
@@ -98,7 +98,7 @@ class CatalogRuleDataGrid extends DataGrid
             'index' => 'action_code',
             'label' => 'Action Type',
             'type' => 'string',
-            'searchable' => false,
+            'searchable' => true,
             'sortable' => true,
             'filterable' => true
         ]);
