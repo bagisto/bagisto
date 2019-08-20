@@ -358,6 +358,10 @@ class CatalogRuleController extends Controller
     public function applyRules()
     {
         $this->sale->apply();
+
+        session()->flash('success', 'Rules processing done');
+
+        return redirect()->route('admin.catalog-rule.index');
     }
 
     /**
