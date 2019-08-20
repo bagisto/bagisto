@@ -520,6 +520,9 @@ return [
             'reset-password' => 'Reset Password',
             'final-summary' => 'If you did not request a password reset, no further action is required',
             'thanks' => 'Thanks!'
+        ],
+        'customer' => [
+            'subject' => 'New Customer Registration'
         ]
     ],
 

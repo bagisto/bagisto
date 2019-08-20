@@ -2,11 +2,15 @@
 
 @inject ('productFlatRepository', 'Webkul\Product\Repositories\ProductFlatRepository')
 
+@inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
+
 <?php
     $filterAttributes = [];
 
     if (isset($category)) {
-        if (count($category->filterableAttributes) > 0) {
+        $products = $productRepository->getAll($category->id);
+
+        if (count($category->filterableAttributes) > 0 && count($products)) {
             $filterAttributes = $category->filterableAttributes;
         } else {
             $categoryProductAttributes = $productFlatRepository->getCategoryProductAttribute($category->id);
