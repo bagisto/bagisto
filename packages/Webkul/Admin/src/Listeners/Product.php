@@ -4,7 +4,6 @@ namespace Webkul\Admin\Listeners;
 
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
-use Webkul\Product\Helpers\Price;
 
 /**
  * Products Event handler
@@ -17,13 +16,6 @@ class Product {
      * Product Repository Object
      */
     protected $product;
-
-    /**
-     * Price Object
-     *
-     * @var array
-     */
-    protected $price;
 
     /**
      * Product Flat Object
@@ -39,15 +31,12 @@ class Product {
 
     public function __construct(
         ProductRepository $product,
-        ProductFlatRepository $productFlat,
-        Price $price
+        ProductFlatRepository $productFlat
     )
     {
         $this->product = $product;
 
         $this->productFlat = $productFlat;
-
-        $this->price = $price;
     }
 
     /**
@@ -63,7 +52,7 @@ class Product {
                 'type' => $product->type,
                 'name' => $product->name,
                 'attribute_family_name' => $product->toArray()['attribute_family']['name'],
-                'price' => $this->price->getMinimalPrice($product),
+                'price' => $product->getTypeInstance()->getMinimalPrice(),
                 'status' => $product->status
             ];
 

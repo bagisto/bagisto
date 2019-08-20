@@ -3,6 +3,7 @@
 namespace Webkul\Product\Type;
 
 use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Models\ProductFlat;
 
 /**
  * Class Configurable.
@@ -263,6 +264,16 @@ class Configurable extends AbstractType
     {
         return $cartItem->child->product->getTypeInstance()->haveSufficientQuantity($cartItem->quantity);
     }
+    
+    /**
+     * Return true if this product can have inventory
+     *
+     * @return boolean
+     */
+    public function showQuantityBox()
+    {
+        return true;
+    }
 
     /**
      * Returns validation rules
@@ -294,6 +305,64 @@ class Configurable extends AbstractType
     }
 
     /**
+     * Get product minimal price
+     *
+     * @return float
+     */
+    public function getMinimalPrice()
+    {
+        $minPrices = [];
+
+        $result = ProductFlat::join('products', 'product_flat.product_id', '=', 'products.id')
+            ->distinct()
+            ->where('products.parent_id', $this->product->id)
+            ->selectRaw('IF( product_flat.special_price_from IS NOT NULL
+            AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
+            AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS min_price')
+            ->where('product_flat.channel', core()->getCurrentChannelCode())
+            ->where('product_flat.locale', app()->getLocale())
+            ->get();
+
+        foreach ($result as $price) {
+            $minPrices[] = $price->min_price;
+        }
+
+        if (empty($minPrices))
+            return 0;
+
+        return min($minPrices);
+    }
+
+    /**
+     * Get product maximam price
+     *
+     * @return float
+     */
+    public function getMaximamPrice()
+    {
+        $productFlat = ProductFlat::join('products', 'product_flat.product_id', '=', 'products.id')
+            ->distinct()
+            ->where('products.parent_id', $this->product->id)
+            ->selectRaw('MAX(product_flat.price) AS max_price')
+            ->where('product_flat.channel', core()->getCurrentChannelCode())
+            ->where('product_flat.locale', app()->getLocale())
+            ->first();
+
+        return $productFlat ? $productFlat->max_price : 0;
+    }
+
+    /**
+     * Get product minimal price
+     *
+     * @return string
+     */
+    public function getPriceHtml()
+    {
+        return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
+            . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
+    }
+
+    /**
      * Add product. Returns error message if can't prepare product.
      *
      * @param array   $data
@@ -311,7 +380,7 @@ class Configurable extends AbstractType
         if (! $childProduct->haveSufficientQuantity($data['quantity']))
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
 
-        $price = $this->priceHelper->getMinimalPrice($childProduct);
+        $price = $this->getMinimalPrice();
 
         $products = [
             [
@@ -418,16 +487,5 @@ class Configurable extends AbstractType
         }
 
         return $this->productImageHelper->getProductBaseImage($product);
-    }
-
-    /**
-     * Get product base image
-     *
-     * @param CartItem $item
-     * @return array
-     */
-    public function getMinimalPrice($item)
-    {
-        return $this->priceHelper->getMinimalPrice($item->child->product);
     }
 }

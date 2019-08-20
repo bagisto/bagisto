@@ -2,15 +2,14 @@
 
 namespace Webkul\Product\Type;
 
+use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Helpers\Price;
 use Webkul\Product\Helpers\ProductImage;
-use Illuminate\Support\Facades\Storage;
 use Cart;
 
 /**
@@ -57,13 +56,6 @@ abstract class AbstractType
     protected $productImageRepository;
 
     /**
-     * Product price helper instance
-     * 
-     * @var Price
-    */
-    protected $priceHelper;
-
-    /**
      * Product Image helper instance
      * 
      * @var ProductImage
@@ -85,7 +77,6 @@ abstract class AbstractType
      * @param  Webkul\Product\Repositories\ProductAttributeValueRepository $attributeValueRepository
      * @param  Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
      * @param  Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
-     * @param  Webkul\Product\Helpers\Price                                $priceHelper
      * @param  Webkul\Product\Helpers\ProductImage                         $productImageHelper
      * @return void
      */
@@ -95,7 +86,6 @@ abstract class AbstractType
         ProductAttributeValueRepository $attributeValueRepository,
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
-        Price $priceHelper,
         ProductImage $productImageHelper
     )
     {
@@ -108,8 +98,6 @@ abstract class AbstractType
         $this->productInventoryRepository = $productInventoryRepository;
 
         $this->productImageRepository = $productImageRepository;
-
-        $this->priceHelper = $priceHelper;
 
         $this->productImageHelper = $productImageHelper;
     }
@@ -225,7 +213,7 @@ abstract class AbstractType
      */
     public function isStockable()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -235,6 +223,16 @@ abstract class AbstractType
     public function haveSufficientQuantity($qty)
     {
         return true;
+    }
+    
+    /**
+     * Return true if this product can have inventory
+     *
+     * @return boolean
+     */
+    public function showQuantityBox()
+    {
+        return false;
     }
 
     /**
@@ -295,6 +293,71 @@ abstract class AbstractType
     }
 
     /**
+     * Get product minimal price
+     *
+     * @return float
+     */
+    public function getMinimalPrice()
+    {
+        if ($this->haveSpecialPrice())
+            return $this->product->special_price;
+
+        return $this->product->price;
+    }
+
+    /**
+     * Get product maximam price
+     *
+     * @return float
+     */
+    public function getMaximamPrice()
+    {
+        return $this->product->price;
+    }
+
+    /**
+     * Returns the product's minimal price
+     *
+     * @return float
+     */
+    public function getSpecialPrice()
+    {
+        return $this->haveSpecialPrice() ? $this->product->special_price : $this->product->price;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function haveSpecialPrice()
+    {
+        if (is_null($this->product->special_price) || ! (float) $this->product->special_price)
+            return false;
+
+        if (core()->isChannelDateInInterval($this->product->special_price_from, $this->product->special_price_to))
+            return true;
+
+        return false;
+    }
+
+    /**
+     * Get product minimal price
+     *
+     * @return string
+     */
+    public function getPriceHtml()
+    {
+        if ($this->haveSpecialPrice()) {
+            $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
+                . '<span class="regular-price">' . core()->currency($this->product->price) . '</span>'
+                . '<span class="special-price">' . core()->currency($this->getSpecialPrice()) . '</span>';
+        } else {
+            $html = '<span>' . core()->currency($this->product->price) . '</span>';
+        }
+
+        return $html;
+    }
+
+    /**
      * Add product. Returns error message if can't prepare product.
      *
      * @param array $data
@@ -307,7 +370,7 @@ abstract class AbstractType
         if ($this->isStockable() && ! $this->haveSufficientQuantity($data['quantity']))
             return trans('shop::app.checkout.cart.quantity.inventory_warning');
 
-        $price = $this->priceHelper->getMinimalPrice($this->product);
+        $price = $this->getMinimalPrice();
 
         $products = [
             [
@@ -397,16 +460,5 @@ abstract class AbstractType
     public function getBaseImage($item)
     {
         return $this->productImageHelper->getProductBaseImage($item->product);
-    }
-
-    /**
-     * Get product base image
-     *
-     * @param CartItem $item
-     * @return float
-     */
-    public function getMinimalPrice($item)
-    {
-        return $this->priceHelper->getMinimalPrice($item->product);
     }
 }

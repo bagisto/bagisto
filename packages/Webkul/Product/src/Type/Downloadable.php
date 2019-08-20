@@ -10,7 +10,6 @@ use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Helpers\Price;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Checkout\Models\CartItem;
 
@@ -72,13 +71,6 @@ class Downloadable extends AbstractType
     protected $productDownloadableSampleRepository;
 
     /**
-     * Product price helper instance
-     * 
-     * @var Price
-    */
-    protected $priceHelper;
-
-    /**
      * Product Image helper instance
      * 
      * @var ProductImage
@@ -114,7 +106,6 @@ class Downloadable extends AbstractType
      * @param  Webkul\Product\Repositories\ProductImageRepository              $productImageRepository
      * @param  Webkul\Product\Repositories\ProductDownloadableLinkRepository   $productDownloadableLinkRepository
      * @param  Webkul\Product\Repositories\ProductDownloadableSampleRepository $productDownloadableSampleRepository
-     * @param  Webkul\Product\Helpers\Price                                    $priceHelper
      * @param  Webkul\Product\Helpers\ProductImage                             $productImageHelper
      * @return void
      */
@@ -126,7 +117,6 @@ class Downloadable extends AbstractType
         productImageRepository $productImageRepository,
         ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         ProductDownloadableSampleRepository $productDownloadableSampleRepository,
-        Price $priceHelper,
         ProductImage $productImageHelper
     )
     {
@@ -136,7 +126,6 @@ class Downloadable extends AbstractType
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $priceHelper,
             $productImageHelper
         );
 
@@ -178,6 +167,16 @@ class Downloadable extends AbstractType
             return true;
 
         return false;            
+    }
+
+    /**
+     * Return true if this product can have inventory
+     *
+     * @return boolean
+     */
+    public function isStockable()
+    {
+        return false;
     }
 
     /**

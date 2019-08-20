@@ -328,7 +328,8 @@ return [
         'out-of-stock' => 'Fora de Estoque',
         'view-all' => 'Ver Tudo',
         'select-above-options' => 'Por favor, selecione as opções acima primeiro.',
-        'less-quantity' => 'Quantity can not be less than one.'
+        'less-quantity' => 'Quantity can not be less than one.',
+        'starting-at' => 'Starting at'
     ],
 
     'wishlist' => [

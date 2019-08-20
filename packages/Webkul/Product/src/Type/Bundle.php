@@ -3,19 +3,19 @@
 namespace Webkul\Product\Type;
 
 /**
- * Class Virtual.
+ * Class Bundle.
  *
  * @author    Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
-class Virtual extends AbstractType
+class Bundle extends AbstractType
 {
     /**
-     * Skip attribute for virtual product type
+     * Skip attribute for Bundle product type
      *
      * @var array
      */
-    protected $skipAttributes = ['width', 'height', 'depth', 'weight'];
+    protected $skipAttributes = ['price', 'cost', 'special_price', 'special_price_from', 'special_price_to', 'width', 'height', 'depth', 'weight'];
 
     /**
      * These blade files will be included in product edit page
@@ -25,16 +25,7 @@ class Virtual extends AbstractType
     protected $additionalViews = [
         'admin::catalog.products.accordians.images',
         'admin::catalog.products.accordians.categories',
+        'admin::catalog.products.accordians.bundle-items',
         'admin::catalog.products.accordians.product-links'
     ];
-
-    /**
-     * Return true if this product can have inventory
-     *
-     * @return boolean
-     */
-    public function isStockable()
-    {
-        return false;
-    }
 }

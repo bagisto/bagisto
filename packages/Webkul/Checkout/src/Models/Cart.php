@@ -109,7 +109,7 @@ class Cart extends Model implements CartContract
      */
     public function haveStockableItems()
     {
-        foreach ($this->all_items as $item) {
+        foreach ($this->items as $item) {
             if ($item->product->isStockable())
                 return true;
         }

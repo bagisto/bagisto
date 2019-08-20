@@ -181,7 +181,7 @@ class OrderRepository extends Repository
             $totalQtyOrdered += $item->qty_ordered;
             $totalQtyInvoiced += $item->qty_invoiced;
 
-            if ($item->type != 'configurable' && ! $item->isStockable()) {
+            if (! $item->isStockable()) {
                 $totalQtyShipped += $item->qty_ordered;
             } else {
                 $totalQtyShipped += $item->qty_shipped;

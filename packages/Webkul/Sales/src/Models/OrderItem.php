@@ -47,7 +47,7 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function canShip()
     {
-        if ($this->type != 'configurable' && ! $this->isStockable())
+        if (! $this->isStockable())
             return false;
 
         if ($this->qty_to_ship > 0)
@@ -61,7 +61,7 @@ class OrderItem extends Model implements OrderItemContract
      */
     public function getQtyToShipAttribute()
     {
-        if ($this->type != 'configurable' && ! $this->isStockable())
+        if (! $this->isStockable())
             return 0;
 
         return $this->qty_ordered - $this->qty_shipped - $this->qty_refunded - $this->qty_canceled;

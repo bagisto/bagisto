@@ -333,7 +333,8 @@ return [
         'out-of-stock' => 'تمام شده',
         'view-all' => 'مشاهده همه',
         'select-above-options' => 'لطفا ابتدا گزینه های بالا را انتخاب کنید',
-        'less-quantity' => 'کمیت نمی تواند کمتر از یک باشد.'
+        'less-quantity' => 'کمیت نمی تواند کمتر از یک باشد.',
+        'starting-at' => 'Starting at'
     ],
 
     'wishlist' => [

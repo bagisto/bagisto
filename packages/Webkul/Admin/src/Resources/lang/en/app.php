@@ -416,7 +416,8 @@ return [
             'grouped-products' => 'Grouped Products',
             'search-products' => 'Search Products',
             'no-result-found' => 'Products not found with same name.',
-            'channel' => 'Channels'
+            'channel' => 'Channels',
+            'bundle-items' => 'Bundle Items'
         ],
 
         'attributes' => [

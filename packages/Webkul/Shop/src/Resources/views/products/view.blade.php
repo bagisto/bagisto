@@ -47,7 +47,7 @@
 
                         {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
-                        @if ($product->type == 'configurable' || $product->isStockable())
+                        @if ($product->getTypeInstance()->showQuantityBox())
                             <div class="quantity control-group" :class="[errors.has('quantity') ? 'has-error' : '']">
 
                                 <label class="required">{{ __('shop::app.products.quantity') }}</label>

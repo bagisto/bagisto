@@ -11,7 +11,6 @@ use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\Product\Helpers\Price;
 use Illuminate\Support\Facades\Event;
 
 /**
@@ -73,11 +72,6 @@ class Cart {
     protected $customerAddressRepository;
 
     /**
-     * Product price helper instance
-    */
-    protected $price;
-
-    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Checkout\Repositories\CartRepository           $cart
@@ -98,8 +92,7 @@ class Cart {
         ProductRepository $productRepository,
         TaxCategoryRepository $taxCategoryRepository,
         WishlistRepository $wishlistRepository,
-        CustomerAddressRepository $customerAddressRepository,
-        Price $price
+        CustomerAddressRepository $customerAddressRepository
     )
     {
         $this->cartRepository = $cartRepository;
@@ -115,8 +108,6 @@ class Cart {
         $this->wishlistRepository = $wishlistRepository;
 
         $this->customerAddressRepository = $customerAddressRepository;
-
-        $this->price = $price;
     }
 
     /**
@@ -242,7 +233,9 @@ class Cart {
                 throw new \Exception(trans('shop::app.checkout.cart.quantity.illegal'));
             }
 
-            if ($item->product->isStockable() && ! $item->product->haveSufficientQuantity($quantity))
+            $item->quantity = $quantity;
+
+            if (! $this->isItemHaveQuantity($item))
                 throw new \Exception(trans('shop::app.checkout.cart.quantity.inventory_warning'));
 
             Event::fire('checkout.cart.update.before', $item);
@@ -343,9 +336,9 @@ class Cart {
                     if (! $cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $guestCartItem->additional))
                         continue;
 
-                    $newQuantity = $cartItem->quantity + $guestCartItem->quantity;
+                    $cartItem->quantity = $newQuantity = $cartItem->quantity + $guestCartItem->quantity;
 
-                    if ($cartItem->product->isStockable() && ! $cartItem->product->haveSufficientQuantity($newQuantity)) {
+                    if ($this->isItemHaveQuantity($cartItem)) {
                         $this->cartItemRepository->delete($guestCartItem->id);
 
                         continue;
@@ -667,7 +660,7 @@ class Cart {
                 if ($item->product_flat->getTypeInstance()->getMinimalPrice($item) == $item->price)
                     continue;
 
-                $price = ! is_null($item->custom_price) ? $item->custom_price : $this->price->getMinimalPrice($productFlat);
+                $price = ! is_null($item->custom_price) ? $item->custom_price : $productFlat->getTypeInstance()->getMinimalPrice();
 
                 $this->cartItemRepository->update([
                     'price' => core()->convertPrice($price),

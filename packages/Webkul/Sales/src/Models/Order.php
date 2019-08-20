@@ -154,7 +154,7 @@ class Order extends Model implements OrderContract
      */
     public function haveStockableItems()
     {
-        foreach ($this->all_items as $item) {
+        foreach ($this->items as $item) {
             if ($item->getTypeInstance()->isStockable())
                 return true;
         }

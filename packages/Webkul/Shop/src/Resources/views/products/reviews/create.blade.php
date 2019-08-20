@@ -26,7 +26,7 @@
                     </a>
                 </div>
 
-                @include('shop::products.review-price')
+                @include('shop::products.price')
 
             </div>
 

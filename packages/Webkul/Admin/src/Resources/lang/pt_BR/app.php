@@ -392,7 +392,8 @@ return [
             'searching' => 'Procurando ...',
             'grouped-products' => 'Grouped Products',
             'search-products' => 'Search Products',
-            'no-result-found' => 'Products not found with same name.'
+            'no-result-found' => 'Products not found with same name.',
+            'bundle-items' => 'Bundle Items'
         ],
         'attributes' => [
             'title' => 'Atributos',

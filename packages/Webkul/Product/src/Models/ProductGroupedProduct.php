@@ -7,9 +7,9 @@ use Webkul\Product\Contracts\ProductGroupedProduct as ProductGroupedProductContr
 
 class ProductGroupedProduct extends Model implements ProductGroupedProductContract
 {
-    protected $fillable = ['qty', 'sort_order', 'product_id', 'associated_product_id'];
-
     public $timestamps = false;
+    
+    protected $fillable = ['qty', 'sort_order', 'product_id', 'associated_product_id'];
 
     /**
      * Get the product that owns the image.

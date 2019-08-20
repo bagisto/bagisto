@@ -17,6 +17,9 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Product\Models\ProductSalableInventory::class,
         \Webkul\Product\Models\ProductDownloadableSample::class,
         \Webkul\Product\Models\ProductDownloadableLink::class,
-        \Webkul\Product\Models\ProductGroupedProduct::class
+        \Webkul\Product\Models\ProductGroupedProduct::class,
+        \Webkul\Product\Models\ProductBundleOption::class,
+        \Webkul\Product\Models\ProductBundleOptionTranslation::class,
+        \Webkul\Product\Models\ProductBundleProduct::class,
     ];
 }

@@ -353,7 +353,8 @@ return [
         'links' => 'Links',
         'sample' => 'Sample',
         'name' => 'Name',
-        'qty' => 'Qty'
+        'qty' => 'Qty',
+        'starting-at' => 'Starting at'
     ],
 
     'wishlist' => [

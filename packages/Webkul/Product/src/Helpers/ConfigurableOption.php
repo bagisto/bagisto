@@ -3,8 +3,6 @@
 namespace Webkul\Product\Helpers;
 
 use Webkul\Attribute\Repositories\AttributeOptionRepository as AttributeOption;
-use Webkul\Product\Helpers\ProductImage;
-use Webkul\Product\Helpers\Price;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValue;
 
@@ -31,31 +29,20 @@ class ConfigurableOption extends AbstractProduct
     protected $productImage;
 
     /**
-     * Price object
-     *
-     * @var array
-     */
-    protected $price;
-
-    /**
      * Create a new controller instance.
      *
      * @param  Webkul\Attribute\Repositories\AttributeOptionRepository $attributeOption
      * @param  Webkul\Product\Helpers\ProductImage                     $productImage
-     * @param  Webkul\Product\Helpers\Price                            $price
      * @return void
      */
     public function __construct(
         AttributeOption $attributeOption,
-        ProductImage $productImage,
-        Price $price
+        ProductImage $productImage
     )
     {
         $this->attributeOption = $attributeOption;
 
         $this->productImage = $productImage;
-
-        $this->price = $price;
     }
 
     /**
@@ -94,8 +81,8 @@ class ConfigurableOption extends AbstractProduct
             'attributes' => $this->getAttributesData($product, $options),
             'index' => isset($options['index']) ? $options['index'] : [],
             'regular_price' => [
-                'formated_price' => core()->currency($this->price->getMinimalPrice($product)),
-                'price' => $this->price->getMinimalPrice($product)
+                'formated_price' => core()->currency($product->getTypeInstance()->getMinimalPrice()),
+                'price' => $product->getTypeInstance()->getMinimalPrice()
             ],
             'variant_prices' => $this->getVariantPrices($product),
             'variant_images' => $this->getVariantImages($product),
@@ -237,8 +224,8 @@ class ConfigurableOption extends AbstractProduct
                     'price' => $variant->price
                 ],
                 'final_price' => [
-                    'formated_price' => core()->currency($this->price->getMinimalPrice($variant)),
-                    'price' => $this->price->getMinimalPrice($variant)
+                    'formated_price' => core()->currency($variant->getTypeInstance()->getMinimalPrice()),
+                    'price' => $variant->getTypeInstance()->getMinimalPrice()
                 ]
             ];
         }

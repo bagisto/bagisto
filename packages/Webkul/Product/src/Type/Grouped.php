@@ -8,9 +8,9 @@ use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
-use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Helpers\Price;
 use Webkul\Product\Helpers\ProductImage;
+use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Models\ProductFlat;
 
 /**
  * Class Grouped.
@@ -63,13 +63,6 @@ class Grouped extends AbstractType
     protected $productGroupedProductRepository;
 
     /**
-     * Product price helper instance
-     * 
-     * @var Price
-    */
-    protected $priceHelper;
-
-    /**
      * Product Image helper instance
      * 
      * @var ProductImage
@@ -104,7 +97,6 @@ class Grouped extends AbstractType
      * @param  Webkul\Product\Repositories\ProductInventoryRepository      $productInventoryRepository
      * @param  Webkul\Product\Repositories\ProductImageRepository          $productImageRepository
      * @param  Webkul\Product\Repositories\ProductGroupedProductRepository $productGroupedProductRepository
-     * @param  Webkul\Product\Helpers\Price                                $priceHelper
      * @param  Webkul\Product\Helpers\ProductImage                         $productImageHelper
      * @return void
      */
@@ -115,7 +107,6 @@ class Grouped extends AbstractType
         ProductInventoryRepository $productInventoryRepository,
         ProductImageRepository $productImageRepository,
         ProductGroupedProductRepository $productGroupedProductRepository,
-        Price $priceHelper,
         ProductImage $productImageHelper
     )
     {
@@ -125,7 +116,6 @@ class Grouped extends AbstractType
             $attributeValueRepository,
             $productInventoryRepository,
             $productImageRepository,
-            $priceHelper,
             $productImageHelper
         );
 
@@ -149,14 +139,42 @@ class Grouped extends AbstractType
     }
 
     /**
-     * Returns validation rules
+     * Get product minimal price
      *
-     * @return array
+     * @return float
      */
-    public function getTypeValidationRules()
+    public function getMinimalPrice()
     {
-        return [
-        ];
+        $minPrices = [];
+
+        $result = $this->product->grouped_products()
+            ->join('product_flat', 'product_grouped_products.associated_product_id', '=', 'product_flat.product_id')
+            ->selectRaw('IF( product_flat.special_price_from IS NOT NULL
+            AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
+            AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS min_price')
+            ->where('product_flat.channel', core()->getCurrentChannelCode())
+            ->where('product_flat.locale', app()->getLocale())
+            ->get();
+
+        foreach ($result as $price) {
+            $minPrices[] = $price->min_price;
+        }
+
+        if (empty($minPrices))
+            return 0;
+
+        return min($minPrices);
+    }
+
+    /**
+     * Get product minimal price
+     *
+     * @return string
+     */
+    public function getPriceHtml()
+    {
+        return '<span class="price-label">' . trans('shop::app.products.starting-at') . '</span>'
+            . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
     }
 
     /**

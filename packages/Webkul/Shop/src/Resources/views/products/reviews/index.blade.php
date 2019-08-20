@@ -10,8 +10,8 @@
 
         <div class="review-layouter">
             @inject ('productImageHelper', 'Webkul\Product\Helpers\ProductImage')
+
             @inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
-            @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
 
             <?php $productBaseImage = $productImageHelper->getProductBaseImage($product); ?>
 
@@ -29,15 +29,10 @@
                 </div>
 
                 <div class="product-price mt-10">
-                    @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
-                    @if ($product->type == 'configurable')
-                        <span class="pro-price">{{ core()->currency($priceHelper->getMinimalPrice($product)) }}</span>
+                    @if ($product->getTypeInstance()->haveSpecialPrice())
+                        <span class="pro-price">{{ core()->currency($product->getTypeInstance()->getSpecialPrice()) }}</span>
                     @else
-                        @if ($priceHelper->haveSpecialPrice($product))
-                            <span class="pro-price">{{ core()->currency($priceHelper->getSpecialPrice($product)) }}</span>
-                        @else
-                            <span class="pro-price">{{ core()->currency($product->price) }}</span>
-                        @endif
+                        <span class="pro-price">{{ core()->currency($product->price) }}</span>
                     @endif
                 </div>
             </div>

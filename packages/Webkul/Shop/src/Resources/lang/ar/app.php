@@ -323,7 +323,8 @@ return [
         'in-stock' => 'في الأسهم',
         'out-of-stock' => 'خارج الأسهم',
         'view-all' => 'عرض الكل',
-        'less-quantity' => 'Quantity can not be less than one.'
+        'less-quantity' => 'Quantity can not be less than one.',
+        'starting-at' => 'Starting at'
     ],
 
     'wishlist' => [
