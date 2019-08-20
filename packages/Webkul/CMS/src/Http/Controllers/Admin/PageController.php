@@ -87,6 +87,13 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
     {
         $data = request()->all();
 
+        // part one of the validation in case partials pages were generated or generating partial pages
+        $this->validate(request(), [
+            'channels' => 'required',
+            'locales' => 'required',
+            'url_key' => 'required'
+        ]);
+
         $channels = request()->input('channels');
 
         $locales = request()->input('locales');
@@ -109,20 +116,21 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
             }
         }
 
-        if (count($ignorePageIDs)) {
+        if (! count($ignorePageIDs)) {
             $this->validate(request(), [
-                'channels' => 'required',
-                'locales' => 'required',
-                'url_key' => 'required|unique:cms_pages,url_key,'.$ignorePageIDs,
-                'html_content' => 'required|string',
-                'page_title' => 'required|string',
-                'meta_title' => 'required|string',
-                'meta_description' => 'string',
-                'meta_keywords' => 'required|string'
+                'url_key' => 'unique:cms_pages,url_key,'
             ]);
         }
 
-        $data = request()->all();
+        $this->validate(request(), [
+            'channels' => 'required',
+            'locales' => 'required',
+            'html_content' => 'required|string',
+            'page_title' => 'required|string',
+            'meta_title' => 'required|string',
+            'meta_description' => 'string',
+            'meta_keywords' => 'required|string'
+        ]);
 
         foreach ($data['channels'] as $channel) {
             foreach ($data['locales'] as $locale) {

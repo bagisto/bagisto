@@ -46,7 +46,7 @@
                                     </div>
 
                                     <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
-                                        <label for="description">{{ __('admin::app.promotion.general-info.description') }}</label>
+                                        <label for="description" class="required">{{ __('admin::app.promotion.general-info.description') }}</label>
 
                                         <textarea class="control" name="description" v-model="description" v-validate="'required'" value="{{ old('description') }}" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.description') }}&quot;"></textarea>
 
