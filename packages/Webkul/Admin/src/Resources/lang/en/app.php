@@ -674,7 +674,7 @@ return [
         ],
 
         'sliders' => [
-            'title' => 'Title',
+            'title' => 'Sliders',
             'add-title' => 'Create Slider',
             'edit-title' => 'Edit Slider',
             'save-btn-title' => 'Save Slider',
@@ -850,6 +850,7 @@ return [
         'rule-desc' => 'Enter Rule Description',
         'convert-x-note' => 'If this section is left empty, then rule will get applied to all the products in the cart.',
         'declut' => 'Declutter Rules',
+        'processing-done' => 'Rules processing done',
         'declut-success' => 'Catalog rules decluttering successful',
         'declut-failure' => 'Catalog rules decluttering failed',
         'add-attr-condition' => 'Add Attribute Condition',
