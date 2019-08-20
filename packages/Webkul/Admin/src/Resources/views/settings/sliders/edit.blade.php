@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
-                        <label>{{ __('admin::app.catalog.categories.image') }}
+                        <label class="required">{{ __('admin::app.catalog.categories.image') }}</label>
 
                         <image-wrapper :button-label="'{{ __('admin::app.settings.sliders.image') }}'" input-name="image" :multiple="false" :images='"{{ url('storage/'.$slider->path) }}"' ></image-wrapper>
 
