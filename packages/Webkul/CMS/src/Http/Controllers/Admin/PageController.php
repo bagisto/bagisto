@@ -94,13 +94,37 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
             'url_key' => 'required'
         ]);
 
+        $urlKey = request()->input('url_key');
+
+        // generate locked records combinations
+        $allChannels = $this->channel->all(['id']);
+
+        $allLocales = $this->locale->all(['id']);
+
+        $allCross = $allChannels->crossJoin($allLocales);
+
+        $pages = collect();
+
+        foreach ($allCross as $singleCross) {
+            $channel = $singleCross[0]->id;
+            $locale = $singleCross[1]->id;
+
+            $page = $this->cms->findOneWhere([
+                'channel_id' => $channel,
+                'locale_id' => $locale,
+                'url_key' => $urlKey
+            ]);
+
+            if ($page) {
+                $pages->push($page);
+            }
+        }
+
         $channels = request()->input('channels');
 
         $locales = request()->input('locales');
 
-        $urlKey = request()->input('url_key');
-
-        $ignorePageIDs = array();
+        // $ignorePageIDs = array();
 
         foreach ($channels as $channel) {
             foreach ($locales as $locale) {
@@ -116,11 +140,11 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
             }
         }
 
-        if (! count($ignorePageIDs)) {
-            $this->validate(request(), [
-                'url_key' => 'unique:cms_pages,url_key,'
-            ]);
-        }
+        // if (! count($ignorePageIDs)) {
+        //     $this->validate(request(), [
+        //         'url_key' => 'unique:cms_pages,url_key,'
+        //     ]);
+        // }
 
         $this->validate(request(), [
             'channels' => 'required',
