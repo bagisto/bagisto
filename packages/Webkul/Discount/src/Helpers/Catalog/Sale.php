@@ -3,7 +3,7 @@
 namespace Webkul\Discount\Helpers\Catalog;
 
 use Webkul\Discount\Repositories\CatalogRepository as CatalogRule;
-use Webkul\Discount\Helpers\Catalog\ConvertXToProductId;
+use Carbon\Carbon;
 
 /**
  * Sale - Abstract class designed to initiate the application of Catalog Rules
