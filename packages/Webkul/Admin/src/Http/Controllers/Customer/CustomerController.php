@@ -118,7 +118,11 @@ class CustomerController extends Controller
 
         $customer = $this->customer->create($data);
 
-        Mail::queue(new NewCustomerNotification($customer, $password));
+        try {
+            Mail::queue(new NewCustomerNotification($customer, $password));
+        } catch (\Exception $e) {
+
+        }
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer']));
 
