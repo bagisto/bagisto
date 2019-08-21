@@ -106,7 +106,7 @@
                                         <label for="status" class="required">{{ __('admin::app.promotion.general-info.status') }}</label>
 
                                         <select type="text" class="control" name="status" v-model="status" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.status') }}&quot;">
-                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Status']) }}</option>
+                                            {{-- <option disabled="disabled">{{ __('admin::app.promotion.select-attribute', ['attribute' => 'Status']) }}</option> --}}
                                             <option value="1">{{ __('admin::app.promotion.yes') }}</option>
                                             <option value="0">{{ __('admin::app.promotion.no') }}</option>
                                         </select>
@@ -704,6 +704,8 @@
                             this.conditions_list.push({'criteria': this.match_criteria});
 
                             this.all_conditions = JSON.stringify(this.conditions_list);
+
+                            this.conditions_list.pop();
                         }
 
                         this.$validator.validateAll().then(result => {

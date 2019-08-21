@@ -104,7 +104,6 @@
                                         <label for="status" class="required">{{ __('admin::app.promotion.general-info.status') }}</label>
 
                                         <select type="text" class="control" name="status" v-model="status" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.promotion.general-info.status') }}&quot;">
-                                            <option disabled="disabled">{{ __('admin::app.promotion.select-attribtue', ['attribute' => 'Status']) }}</option>
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
                                         </select>
