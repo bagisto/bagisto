@@ -229,7 +229,7 @@
 
                         actions: @json($catalog_rule[3]).actions,
                         action_type: '{{ $catalog_rule[5]->action_code }}',
-                        disc_amount: '{{ $catalog_rule[5]->disc_amount }}',
+                        disc_amount: null,
                         end_other_rules: '{{ $catalog_rule[5]->end_other_rules }}',
 
                         all_conditions: [],
@@ -256,6 +256,7 @@
                 },
 
                 mounted () {
+                    catalog_rule = @json($catalog_rule[5]);
                     channels = @json($catalog_rule[5]->channels);
 
                     this.channels = [];
@@ -294,9 +295,9 @@
                         }
                     }
 
-                    this.action_type = '{{ $catalog_rule[5]->action_code }}',
-                    this.disc_amount = '{{ $catalog_rule[5]->discount_amount }}',
-                    this.end_other_rules = '{{ $catalog_rule[5]->end_other_rules }}'
+                    this.action_type = '{{ $catalog_rule[5]->action_code }}';
+                    this.disc_amount = catalog_rule.discount_amount;
+                    this.end_other_rules = '{{ $catalog_rule[5]->end_other_rules }}';
                 },
 
                 methods: {
