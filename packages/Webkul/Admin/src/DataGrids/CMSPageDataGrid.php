@@ -60,7 +60,7 @@ class CMSPageDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'locale_id',
             'label' => trans('admin::app.cms.pages.locale'),
-            'type' => 'string',
+            'type' => 'number',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true,
