@@ -45,7 +45,21 @@ class PercentOfProduct extends Action
                             $itemProductId = $item->product_id;
                         }
 
-                        $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
+                        $itemQuantity = $item->quantity;
+
+                        $discQuantity = $rule->disc_quantity;
+
+                        if ($discQuantity > 1) {
+                            if ($itemQuantity >= $discQuantity) {
+                                $discount = round(($itemPrice * $rule->disc_amount) / 100, 4) * $discQuantity;
+                            } else if ($itemQuantity < $discQuantity) {
+                                $discQuantity = $discQuantity - $itemQuantity;
+
+                                $discount = round(($itemPrice * $rule->disc_amount) / 100, 4) * $discQuantity;
+                            }
+                        } else {
+                            $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
+                        }
 
                         if ($itemProductId == $productID) {
                             $totalDiscount = $totalDiscount + $discount;
@@ -73,7 +87,21 @@ class PercentOfProduct extends Action
                         $itemProductId = $item->product_id;
                     }
 
-                    $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
+                    $itemQuantity = $item->quantity;
+
+                    $discQuantity = $rule->disc_quantity;
+
+                    if ($discQuantity > 1) {
+                        if ($itemQuantity >= $discQuantity) {
+                            $discount = round(($itemPrice * $rule->disc_amount) / 100, 4) * $discQuantity;
+                        } else if ($itemQuantity < $discQuantity) {
+                            $discQuantity = $discQuantity - $itemQuantity;
+
+                            $discount = round(($itemPrice * $rule->disc_amount) / 100, 4) * $discQuantity;
+                        }
+                    } else {
+                        $discount = round(($itemPrice * $rule->disc_amount) / 100, 4);
+                    }
 
                     $totalDiscount = $totalDiscount + $discount;
 
