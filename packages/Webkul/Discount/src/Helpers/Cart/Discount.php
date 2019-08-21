@@ -725,6 +725,10 @@ abstract class Discount
         $result = true;
 
         foreach ($conditions as $condition) {
+            if (! isset($condition->attribute) || ! isset($condition->condition) || !isset($condition->value)) {
+                continue;
+            }
+
             if (isset($condition->attribute)) {
                 $actual_value = ${$condition->attribute};
 
@@ -851,9 +855,12 @@ abstract class Discount
         }
 
         foreach ($conditions as $condition) {
+            if (!isset($condition->attribute) || ! isset($condition->condition) || !isset($condition->value)) {
+                continue;
+            }
+
             if (isset($condition->attribute)) {
                 $actual_value = ${$condition->attribute};
-
             } else {
                 $result = false;
             }
