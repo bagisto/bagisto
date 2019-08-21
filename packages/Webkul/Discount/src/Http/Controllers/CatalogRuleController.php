@@ -14,8 +14,8 @@ use Webkul\Discount\Helpers\Catalog\Apply;
 /**
  * CatalogRule controller
  *
- * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright  2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CatalogRuleController extends Controller
 {
@@ -359,7 +359,7 @@ class CatalogRuleController extends Controller
     {
         $this->sale->apply();
 
-        session()->flash('success', 'Rules processing done');
+        session()->flash('success', trans('admin::app.promotion.processing-done'));
 
         return redirect()->route('admin.catalog-rule.index');
     }
