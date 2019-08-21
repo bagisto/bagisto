@@ -116,7 +116,7 @@ class CartRuleController extends Controller
      */
     public function store()
     {
-        $validated = $this->validate(request(), [
+        $this->validate(request(), [
             'name' => 'required|string|unique:cart_rules,name',
             'description' => 'string',
             'customer_groups' => 'required|array',
