@@ -256,7 +256,6 @@
                 },
 
                 mounted () {
-                    console.log(this.conditions)
                     channels = @json($catalog_rule[5]->channels);
 
                     this.channels = [];
@@ -342,8 +341,6 @@
                                 }
 
                                 this.attribute_values[index].type = this.attribute_input[i].type;
-
-                                debugger
                             }
                         }
                     },
@@ -367,12 +364,12 @@
                     },
 
                     onSubmit: function (e) {
-                        if (this.attribute_values.length > 0 || this.category_values.length > 0) {
+                        if (this.attribute_values != null || this.category_values != null) {
                             for (i in this.attribute_values) {
                                 delete this.attribute_values[i].options;
                             }
 
-                            if (this.category_values.length > 0) {
+                            if (this.category_values != null) {
                                 this.all_attributes.categories = this.category_values;
                             }
 
