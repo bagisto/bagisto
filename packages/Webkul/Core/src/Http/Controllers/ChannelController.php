@@ -78,12 +78,29 @@ class ChannelController extends Controller
             'base_currency_id' => 'required',
             'root_category_id' => 'required',
             'logo.*' => 'mimes:jpeg,jpg,bmp,png',
-            'favicon.*' => 'mimes:jpeg,jpg,bmp,png'
+            'favicon.*' => 'mimes:jpeg,jpg,bmp,png',
+            'seo_title' => 'required|string',
+            'seo_description' => 'required|string',
+            'seo_keywords' => 'required|string'
         ]);
+
+        $data = request()->all();
+
+        $data['seo']['meta_title'] = $data['seo_title'];
+        $data['seo']['meta_description'] = $data['seo_description'];
+        $data['seo']['meta_keywords'] = $data['seo_keywords'];
+
+        unset($data['seo_title']);
+        unset($data['seo_description']);
+        unset($data['seo_keywords']);
+
+        $data['home_seo'] = json_encode($data['seo']);
+
+        unset($data['seo']);
 
         Event::fire('core.channel.create.before');
 
-        $channel = $this->channel->create(request()->all());
+        $channel = $this->channel->create($data);
 
         Event::fire('core.channel.create.after', $channel);
 
@@ -127,9 +144,21 @@ class ChannelController extends Controller
             'favicon.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
+        $data = request()->all();
+
+        $data['seo']['meta_title'] = $data['seo_title'];
+        $data['seo']['meta_description'] = $data['seo_description'];
+        $data['seo']['meta_keywords'] = $data['seo_keywords'];
+
+        unset($data['seo_title']);
+        unset($data['seo_description']);
+        unset($data['seo_keywords']);
+
+        $data['home_seo'] = json_encode($data['seo']);
+
         Event::fire('core.channel.update.before', $id);
 
-        $channel = $this->channel->update(request()->all(), $id);
+        $channel = $this->channel->update($data, $id);
 
         Event::fire('core.channel.update.after', $channel);
 

@@ -70,7 +70,7 @@ abstract class Sale
         if ($rule->conditions) {
             $conditions = $rule->conditions;
 
-            $productIDs = $this->convertX->convertX($rule->conditions);
+            $productIDs = $this->convertX->convertX($conditions);
         } else {
             $productIDs = '*';
         }

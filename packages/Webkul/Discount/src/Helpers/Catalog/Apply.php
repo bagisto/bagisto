@@ -113,9 +113,11 @@ class Apply extends Sale
             foreach ($this->activeRules as $rule) {
                 $productIDs = $this->getProductIds($rule);
 
-                $productIDs = $this->expandProducts($productIDs);
+                if ($productIDs) {
+                    $productIDs = $this->expandProducts($productIDs);
 
-               $this->setSale($rule, $productIDs);
+                    $this->setSale($rule, $productIDs);
+                }
             }
 
             // dd($result, 'processing done');
