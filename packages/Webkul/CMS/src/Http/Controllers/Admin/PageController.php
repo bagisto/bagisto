@@ -94,61 +94,10 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
             'url_key' => 'required'
         ]);
 
-        $urlKey = request()->input('url_key');
-
-        // generate locked records combinations
-        $allChannels = $this->channel->all(['id']);
-
-        $allLocales = $this->locale->all(['id']);
-
-        $allCross = $allChannels->crossJoin($allLocales);
-
-        $pages = collect();
-
-        foreach ($allCross as $singleCross) {
-            $channel = $singleCross[0]->id;
-            $locale = $singleCross[1]->id;
-
-            $page = $this->cms->findOneWhere([
-                'channel_id' => $channel,
-                'locale_id' => $locale,
-                'url_key' => $urlKey
-            ]);
-
-            if ($page) {
-                $pages->push($page);
-            }
-        }
-
-        $channels = request()->input('channels');
-
-        $locales = request()->input('locales');
-
-        // $ignorePageIDs = array();
-
-        foreach ($channels as $channel) {
-            foreach ($locales as $locale) {
-                $page = $this->cms->findOneWhere([
-                    'channel_id' => $channel,
-                    'locale_id' => $locale,
-                    'url_key' => $urlKey
-                ]);
-
-                if ($page) {
-                    array_push($ignorePageIDs, $page->id);
-                }
-            }
-        }
-
-        // if (! count($ignorePageIDs)) {
-        //     $this->validate(request(), [
-        //         'url_key' => 'unique:cms_pages,url_key,'
-        //     ]);
-        // }
+        $channels = $data['channels'];
+        $locales = $data['locales'];
 
         $this->validate(request(), [
-            'channels' => 'required',
-            'locales' => 'required',
             'html_content' => 'required|string',
             'page_title' => 'required|string',
             'meta_title' => 'required|string',
@@ -156,30 +105,49 @@ use Webkul\Core\Repositories\LocaleRepository as Locale;
             'meta_keywords' => 'required|string'
         ]);
 
-        foreach ($data['channels'] as $channel) {
-            foreach ($data['locales'] as $locale) {
+        $data['content']['html'] = $data['html_content'];
+        $data['content']['page_title'] = $data['page_title'];
+        $data['content']['meta_keywords'] = $data['meta_keywords'];
+        $data['content']['meta_title'] = $data['meta_title'];
+        $data['content']['meta_description'] = $data['meta_description'];
+
+        $data['content'] = json_encode($data['content']);
+
+        $totalCount = 0;
+        $actualCount = 0;
+
+        foreach ($channels as $channel) {
+            foreach ($locales as $locale) {
+                $pageFound = $this->cms->findOneWhere([
+                    'channel_id' => $channel,
+                    'locale_id' => $locale,
+                    'url_key' => $data['url_key']
+                ]);
+
+                $totalCount++;
+
                 $data['channel_id'] = $channel;
 
                 $data['locale_id'] = $locale;
 
-                $data['content']['html'] = $data['html_content'];
-                $data['content']['page_title'] = $data['page_title'];
-                $data['content']['meta_keywords'] = $data['meta_keywords'];
-                $data['content']['meta_title'] = $data['meta_title'];
-                $data['content']['meta_description'] = $data['meta_description'];
+                if (! $pageFound) {
+                    $result = $this->cms->create($data);
 
-                $data['content'] = json_encode($data['content']);
+                    if ($result) {
+                        $actualCount++;
+                    }
+                }
 
-                $result = $this->cms->create($data);
-
-                unset($data['content']);
+                unset($pageFound);
             }
         }
 
-        if ($result) {
+        if (($actualCount != 0 && $totalCount != 0) && ($actualCount == $totalCount)) {
             session()->flash('success', trans('admin::app.cms.pages.create-success'));
+        } else if (($actualCount != 0 && $totalCount != 0) && ($actualCount != $totalCount)) {
+            session()->flash('warning', trans('admin::app.cms.pages.create-partial'));
         } else {
-            session()->flash('success', trans('admin::app.cms.pages.create-failure'));
+            session()->flash('error', trans('admin::app.cms.pages.create-failure'));
         }
 
         return redirect()->route($this->_config['redirect']);
