@@ -248,8 +248,7 @@ Route::group(['middleware' => ['web']], function () {
                     'view' => 'admin::catalog.products.edit'
                 ])->name('admin.catalog.products.productlinksearch');
 
-                //product search for linked products
-                Route::get('products/search/{id}', 'Webkul\Product\Http\Controllers\ProductController@searchProductForGroupedAssociation')->name('admin.catalog.products.search_product_for_grouped_association');
+                Route::get('products/search-simple-products', 'Webkul\Product\Http\Controllers\ProductController@searchSimpleProducts')->name('admin.catalog.products.search_simple_product');
 
                 Route::get('/products/{id}/{attribute_id}', 'Webkul\Product\Http\Controllers\ProductController@download')->defaults('_config', [
                     'view' => 'admin.catalog.products.edit'

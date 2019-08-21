@@ -169,7 +169,7 @@
 
                     var this_this = this;
                     
-                    this.$http.get ("{{ route('admin.catalog.products.search_product_for_grouped_association', $product->id) }}", {params: {query: this.search_term}})
+                    this.$http.get ("{{ route('admin.catalog.products.search_simple_product') }}", {params: {query: this.search_term}})
                         .then (function(response) {
                             this_this.searched_results = response.data;
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Repositories\ProductFlatRepository;
 
 /**
  * Product Repository
@@ -327,5 +328,30 @@ class ProductRepository extends Repository
         }
 
         return $superAttrbutes;
+    }
+
+    /**
+     * Search simple products for grouped product association
+     *
+     * @param string $term
+     * @return \Illuminate\Support\Collection
+     */
+    public function searchSimpleProducts($term)
+    {
+        return app(ProductFlatRepository::class)->scopeQuery(function($query) use($term) {
+            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+
+            $locale = request()->get('locale') ?: app()->getLocale();
+
+            return $query->distinct()
+                    ->addSelect('product_flat.*')
+                    ->addSelect('product_flat.product_id as id')
+                    ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                    ->where('products.type', 'simple')
+                    ->where('product_flat.channel', $channel)
+                    ->where('product_flat.locale', $locale)
+                    ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
+                    ->orderBy('product_id', 'desc');
+        })->get();
     }
 }

@@ -4,7 +4,7 @@ namespace Webkul\Product\Models;
 
 use Konekt\Concord\Proxies\ModelProxy;
 
-class ProductBundleProductProxy extends ModelProxy
+class ProductBundleOptionProductProxy extends ModelProxy
 {
 
 }

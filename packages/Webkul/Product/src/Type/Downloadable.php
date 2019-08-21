@@ -9,7 +9,6 @@ use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Helpers\ProductImage;
 use Webkul\Checkout\Models\CartItem;
 

@@ -20,6 +20,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
         \Webkul\Product\Models\ProductGroupedProduct::class,
         \Webkul\Product\Models\ProductBundleOption::class,
         \Webkul\Product\Models\ProductBundleOptionTranslation::class,
-        \Webkul\Product\Models\ProductBundleProduct::class,
+        \Webkul\Product\Models\ProductBundleOptionProduct::class,
     ];
 }

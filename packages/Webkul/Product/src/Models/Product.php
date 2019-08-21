@@ -166,6 +166,14 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Get the bundle options that owns the product.
+     */
+    public function bundle_options()
+    {
+        return $this->hasMany(ProductBundleOptionProxy::modelClass());
+    }
+
+    /**
      * @param integer $qty
      *
      * @return bool

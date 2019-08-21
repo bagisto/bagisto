@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductBundleProductsTable extends Migration
+class CreateProductBundleOptionProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateProductBundleProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_bundle_products', function (Blueprint $table) {
+        Schema::create('product_bundle_option_products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('qty')->default(0);
+            $table->boolean('is_default')->default(0);
             $table->integer('sort_order')->default(0);
 
             $table->integer('product_bundle_option_id')->unsigned();
@@ -33,6 +34,6 @@ class CreateProductBundleProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_bundle_products');
+        Schema::dropIfExists('product_bundle_option_products');
     }
 }

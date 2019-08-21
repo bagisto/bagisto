@@ -20,4 +20,12 @@ class ProductBundleOption extends TranslatableModel implements ProductBundleOpti
     {
         return $this->belongsTo(ProductProxy::modelClass());
     }
+
+    /**
+     * Get the bundle option products that owns the bundle option.
+     */
+    public function bundle_option_products()
+    {
+        return $this->hasMany(ProductBundleOptionProductProxy::modelClass());
+    }
 }

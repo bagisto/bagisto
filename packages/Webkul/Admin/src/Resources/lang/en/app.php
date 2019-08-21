@@ -417,7 +417,16 @@ return [
             'search-products' => 'Search Products',
             'no-result-found' => 'Products not found with same name.',
             'channel' => 'Channels',
-            'bundle-items' => 'Bundle Items'
+            'bundle-items' => 'Bundle Items',
+            'add-option-btn-title' => 'Add Option',
+            'option-title' => 'Option Title',
+            'input-type' => 'Input Type',
+            'is-required' => 'Is Required',
+            'select' => 'Select',
+            'radio' => 'Radio',
+            'checkbox' => 'Checkbox',
+            'multiselect' => 'Multiselect',
+            'new-option' => 'New Option'
         ],
 
         'attributes' => [

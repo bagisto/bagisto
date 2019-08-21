@@ -59,14 +59,14 @@
 
                 <input name="_method" type="hidden" value="PUT">
 
-                @foreach ($product->attribute_family->attribute_groups as $attributeGroup)
+                @foreach ($product->attribute_family->attribute_groups as $index => $attributeGroup)
                     <?php $customAttributes = $product->getEditableAttributes($attributeGroup); ?>
 
                     @if (count($customAttributes))
 
                         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.before', ['product' => $product]) !!}
 
-                        <accordian :title="'{{ __($attributeGroup->name) }}'" :active="true">
+                        <accordian :title="'{{ __($attributeGroup->name) }}'" :active="{{$index == 0 ? 'true' : 'false'}}">
                             <div slot="body">
                                 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.controls.before', ['product' => $product]) !!}
 
