@@ -671,6 +671,10 @@ return [
             'update-success' => 'Channel updated successfully.',
             'delete-success' => 'Channel deleted successfully.',
             'last-delete-error' => 'At least one Channel is required.',
+            'seo' => 'Home page SEO',
+            'seo-title' => 'Meta title',
+            'seo-description' => 'Meta description',
+            'seo-keywords' => 'Meta keywords'
         ],
 
         'sliders' => [

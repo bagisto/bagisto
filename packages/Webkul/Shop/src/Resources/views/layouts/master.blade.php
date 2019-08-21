@@ -23,7 +23,9 @@
     @yield('head')
 
     @section('seo')
-        <meta name="description" content="{{ core()->getCurrentChannel()->description }}"/>
+        @if (! request()->is('/'))
+            <meta name="description" content="{{ core()->getCurrentChannel()->description }}"/>
+        @endif
     @show
 
     @stack('css')

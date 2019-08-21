@@ -74,9 +74,9 @@ class ConvertXToProductId
     {
         $attributeConditions = json_decode($attribute_conditions);
 
-        $categoryValues = $attributeConditions->categories;
+        $categoryValues = $attributeConditions->categories ?? null;
 
-        $attributeValues = $attributeConditions->attributes;
+        $attributeValues = $attributeConditions->attributes ?? null;
 
         if (!isset($categoryValues) && ! isset($attributeValues)) {
             return false;
@@ -89,6 +89,7 @@ class ConvertXToProductId
         }
 
         $attributeResult = collect();
+
         if (isset($attributeValues) && count($attributeValues)) {
             $attributeResult = $this->convertFromAttributes($attributeValues);
         }
