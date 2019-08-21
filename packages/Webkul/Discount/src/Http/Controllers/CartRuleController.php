@@ -272,7 +272,7 @@ class CartRuleController extends Controller
         // create a cart rule
         $ruleCreated = $this->cartRule->create($data);
 
-        // can execute convert x here after when the rule is updated
+        // can execute convertX here after when the rule is updated
         if (isset($attribute_conditions) && $attribute_conditions != "[]" && $attribute_conditions != "") {
             $this->convertX->convertX($ruleCreated->id, $attribute_conditions);
         }
@@ -420,7 +420,9 @@ class CartRuleController extends Controller
 
             $data['disc_quantity'] = $data['disc_amount'];
         } else {
-            if (! isset($attribute_conditions) || $attribute_conditions == "[]" || $attribute_conditions == "") {
+            $attribute_conditions = json_decode($attribute_conditions);
+
+            if (! (isset($attribute_conditions->categories) && count($attribute_conditions->categories)) && ! (isset($attribute_conditions->attributes) && count($attribute_conditions->attributes))) {
                 $data['uses_attribute_conditions'] = 0;
 
                 $data['actions'] = [
@@ -435,7 +437,7 @@ class CartRuleController extends Controller
                     'action_type' => $data['action_type'],
                     'disc_amount' => $data['disc_amount'],
                     'disc_quantity' => $data['disc_quantity'],
-                    'attribute_conditions' => $attribute_conditions
+                    'attribute_conditions' => json_encode($attribute_conditions)
                 ];
             }
         }
@@ -498,7 +500,7 @@ class CartRuleController extends Controller
         // update cart rule
         $ruleUpdated = $this->cartRule->update($data, $id);
 
-        if (isset($attribute_conditions) && $attribute_conditions != "[]" && $attribute_conditions != "") {
+        if (isset($attribute_conditions) && $data['uses_attribute_conditions']) {
             // can execute convert X here after when the rule is updated
             $this->convertX->convertX($ruleUpdated->id, $attribute_conditions);
         } else {
