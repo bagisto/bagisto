@@ -198,6 +198,8 @@ abstract class Discount
 
         if ($alreadyApplied->count() && $alreadyApplied->first()->cart_rule->id == $rule->id) {
             if ($this->validateRule($alreadyApplied->first()->cart_rule)) {
+                $this->reassess($alreadyApplied->first()->cart_rule, $cart);
+
                 return false;
             } else {
                 $this->clearDiscount();
@@ -253,6 +255,20 @@ abstract class Discount
         } else {
             return true;
         }
+    }
+
+    /**
+     * To reassess the discount in case no. of items gets changed
+     *
+     * @return Void
+     */
+    public function reassess($rule)
+    {
+        $rule->impact = $this->calculateImpact($rule);
+
+        $this->updateCartItemAndCart($rule);
+
+        return;
     }
 
     /**
@@ -647,8 +663,11 @@ abstract class Discount
 
             $result = $this->validateRule($alreadyAppliedRule);
 
-            if (! $result)
+            if (! $result) {
                 $this->clearDiscount();
+            } else {
+                $this->reassess($alreadyAppliedRule);
+            }
         }
     }
 
