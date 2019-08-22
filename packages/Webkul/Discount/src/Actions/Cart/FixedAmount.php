@@ -92,7 +92,13 @@ class FixedAmount extends Action
 
                 $report['item_id'] = $item->id;
                 $report['product_id'] = $item->child ? $item->child->product_id : $item->product_id;
-                $report['discount'] = $discount;
+
+                if ($discount <= $itemPrice) {
+                    $report['discount'] = $discount;
+                } else {
+                    $report['discount'] = $itemPrice;
+                }
+
                 $report['formatted_discount'] = core()->currency($discount);
 
                 $impact->push($report);
