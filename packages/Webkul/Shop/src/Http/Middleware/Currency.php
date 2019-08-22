@@ -29,7 +29,9 @@ class Currency
     */
     public function handle($request, Closure $next)
     {
-        if ($currency = $request->get('currency')) {
+        $currencyCode = request()->get('currency');
+
+        if ($currency = $currencyCode) {
             if ($this->currency->findOneByField('code', $currency)) {
                 session()->put('currency', $currency);
             }

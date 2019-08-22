@@ -23,7 +23,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        include __DIR__ . '/../Http/routes.php';
+        $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'admin');
 
@@ -65,10 +65,33 @@ class AdminServiceProvider extends ServiceProvider
         view()->composer(['admin::layouts.nav-left', 'admin::layouts.nav-aside', 'admin::layouts.tabs'], function ($view) {
             $tree = Tree::create();
 
-            foreach (config('menu.admin') as $item) {
-                if (bouncer()->hasPermission($item['key'])) {
-                    $tree->add($item, 'menu');
+            $permissionType = auth()->guard('admin')->user()->role->permission_type;
+            $allowedPermissions = auth()->guard('admin')->user()->role->permissions;
+
+            foreach (config('menu.admin') as $index => $item) {
+                if (! bouncer()->hasPermission($item['key'])) {
+                    continue;
                 }
+
+                if ($index + 1 < count(config('menu.admin')) && $permissionType != 'all') {
+                    $permission = config('menu.admin')[$index + 1];
+
+                    if (substr_count($permission['key'], '.') == 2 && substr_count($item['key'], '.') == 1) {
+                        foreach ($allowedPermissions as $key => $value) {
+                            if ($item['key'] == $value) {
+                                $neededItem = $allowedPermissions[$key + 1];
+
+                                foreach (config('menu.admin') as $key1 => $findMatced) {
+                                    if ($findMatced['key'] == $neededItem) {
+                                        $item['route'] = $findMatced['route'];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                $tree->add($item, 'menu');
             }
 
             $tree->items = core()->sortItems($tree->items);

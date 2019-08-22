@@ -4,19 +4,20 @@ namespace Webkul\Customer\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Webkul\Checkout\Models\CartProxy;
 use Webkul\Sales\Models\OrderProxy;
 use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Customer\Notifications\CustomerResetPassword;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
 
-class Customer extends Authenticatable implements CustomerContract
+class Customer extends Authenticatable implements CustomerContract, JWTSubject
 {
     use Notifiable;
 
     protected $table = 'customers';
 
-    protected $fillable = ['first_name', 'channel_id', 'last_name', 'gender', 'date_of_birth', 'email', 'password', 'customer_group_id', 'subscribed_to_news_letter', 'is_verified', 'token'];
+    protected $fillable = ['first_name', 'channel_id', 'last_name', 'gender', 'date_of_birth', 'email', 'phone', 'password', 'customer_group_id', 'subscribed_to_news_letter', 'is_verified', 'token', 'notes', 'status'];
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -25,6 +26,19 @@ class Customer extends Authenticatable implements CustomerContract
      */
     public function getNameAttribute() {
         return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
+    /**
+     * Email exists or not
+     */
+    public function emailExists($email) {
+        $results =  $this->where('email', $email);
+
+        if ($results->count() == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -95,5 +109,32 @@ class Customer extends Authenticatable implements CustomerContract
     */
     public function all_reviews() {
         return $this->hasMany(ProductReviewProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * get all orders of a customer
+     */
+    public function all_orders() {
+        return $this->hasMany(OrderProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

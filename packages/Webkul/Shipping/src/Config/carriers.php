@@ -4,7 +4,7 @@ return [
     'flatrate' => [
         'code' => 'flatrate',
         'title' => 'Flat Rate',
-        'description' => 'This is a flat rate',
+        'description' => 'Flat Rate Shipping',
         'active' => true,
         'default_rate' => '10',
         'type' => 'per_unit',
@@ -14,8 +14,9 @@ return [
     'free' => [
         'code' => 'free',
         'title' => 'Free Shipping',
-        'description' => 'This is a free shipping',
+        'description' => 'Free Shipping',
         'active' => true,
+        'default_rate' => '0',
         'class' => 'Webkul\Shipping\Carriers\Free',
     ]
 ];

@@ -31,15 +31,15 @@
                     <?php $addresses = explode(PHP_EOL, $address->address1); ?>
 
                     <div class="control-group" :class="[errors.has('address1[]') ? 'has-error' : '']">
-                        <label for="first_name" class="required">{{ __('shop::app.customer.account.address.create.street-address') }}</label>
-                        <input type="text" class="control" name="address1[]" v-validate="'required'" value="{{ isset($addresses[0]) ? $addresses[0] : '' }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
+                        <label for="address_0" class="required">{{ __('shop::app.customer.account.address.edit.street-address') }}</label>
+                        <input type="text" class="control" name="address1[]" id="address_0" v-validate="'required'" value="{{ isset($addresses[0]) ? $addresses[0] : '' }}" data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
                         <span class="control-error" v-if="errors.has('address1[]')">@{{ errors.first('address1[]') }}</span>
                     </div>
 
                     @if (core()->getConfigData('customer.settings.address.street_lines') && core()->getConfigData('customer.settings.address.street_lines') > 1)
                         <div class="control-group" style="margin-top: -25px;">
                             @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
-                                <input type="text" class="control" name="address1[]" value="{{ isset($addresses[$i]) ? $addresses[$i] : '' }}">
+                                <input type="text" class="control" name="address1[{{ $i }}]" id="address_{{ $i }}" value="{{ isset($addresses[$i]) ? $addresses[$i] : '' }}">
                             @endfor
                         </div>
                     @endif

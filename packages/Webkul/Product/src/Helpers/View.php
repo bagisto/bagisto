@@ -7,74 +7,52 @@ class View extends AbstractProduct
     /**
      * Returns the visible custom attributes
      *
-    * @param Product $product
+     * @param Product $product
      * @return integer
      */
     public function getAdditionalData($product)
     {
         $data = [];
 
-        $attributes = $product->attribute_family->custom_attributes;
+        $attributes = $product->attribute_family->custom_attributes()->where('attributes.is_visible_on_front', 1)->get();
 
         $attributeOptionReposotory = app('Webkul\Attribute\Repositories\AttributeOptionRepository');
 
         foreach ($attributes as $attribute) {
+            if ($product instanceof \Webkul\Product\Models\ProductFlat) {
+                $value = $product->product->{$attribute->code};
+            } else {
+                $value = $product->{$attribute->code};
+            }
+
             if ($attribute->type == 'boolean') {
-                $value = $product->{$attribute->code};
-                if ($attribute->is_visible_on_front ) {
-                    if ($value == 1) {
-                        $value = 'Yes';
-                    } else {
-                        $value = 'No';
-                    }
-
-                    $data[] = [
-                        'code' => $attribute->code,
-                        'label' => $attribute->name,
-                        'value' => $value,
-                        'admin_name' => $attribute->admin_name,
-                        ];
-                }
-            } else if ($attribute->is_visible_on_front && $product->{$attribute->code}) {
-                $value = $product->{$attribute->code};
-
+                $value = $value ? 'Yes' : 'No';
+            } else if($value) {
                 if ($attribute->type == 'select') {
                     $attributeOption = $attributeOptionReposotory->find($value);
+                    if ($attributeOption)
+                        $value = $attributeOption->label ?? $attributeOption->admin_name;
+                } else if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
+                    $lables = [];
 
-                    if ($attributeOption) {
-                        $value = $attributeOption->translate(app()->getLocale());
-                        if ($value) {
-                            $value = $value->label;
-                        }
-                    }
-                }
+                    $attributeOptions = $attributeOptionReposotory->findWhereIn('id', explode(",", $value));
 
-                if ($attribute->type == 'multiselect') {
-                    $values = explode(",", $value);
-
-                    $result = [];
-                    foreach ($values as $value) {
-                        $attributeOption = $attributeOptionReposotory->find($value);
-
-                        if ($attributeOption) {
-                            $value = $attributeOption->translate(app()->getLocale());
-                            if ($value) {
-                                $value = $value->label;
-                                $result[] = $value;
-                            }
-                        }
+                    foreach ($attributeOptions as $attributeOption) {
+                        $lables[] = $attributeOption->label ?? $attributeOption->admin_name;
                     }
 
-                    $value = implode(", ", $result);
+                    $value = implode(", ", $lables);
                 }
-
-                $data[] = [
-                    'code' => $attribute->code,
-                    'label' => $attribute->name,
-                    'value' => $value,
-                    'admin_name' => $attribute->admin_name,
-                    ];
             }
+
+            $data[] = [
+                'id' => $attribute->id,
+                'code' => $attribute->code,
+                'label' => $attribute->name,
+                'value' => $value,
+                'admin_name' => $attribute->admin_name,
+                'type' => $attribute->type,
+            ];
         }
 
         return $data;

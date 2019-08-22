@@ -54,6 +54,8 @@ class SubscriptionController extends Controller
 
     /**
      * Subscribes email to the email subscription list
+     *
+     * @return Redirect
      */
     public function subscribe()
     {
@@ -67,8 +69,8 @@ class SubscriptionController extends Controller
 
         $alreadySubscribed = $this->subscription->findWhere(['email' => $email]);
 
-        $unique = function() use($alreadySubscribed) {
-            if ($alreadySubscribed->count() > 0 ) {
+        $unique = function () use ($alreadySubscribed) {
+            if ($alreadySubscribed->count() > 0) {
                 return 0;
             } else {
                 return 1;
@@ -84,10 +86,10 @@ class SubscriptionController extends Controller
             $mailSent = true;
 
             try {
-                Mail::send(new SubscriptionEmail($subscriptionData));
+                Mail::queue(new SubscriptionEmail($subscriptionData));
 
                 session()->flash('success', trans('shop::app.subscription.subscribed'));
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 session()->flash('error', trans('shop::app.subscription.not-subscribed'));
 
                 $mailSent = false;
@@ -103,7 +105,7 @@ class SubscriptionController extends Controller
                     'token' => $token
                 ]);
 
-                if (! $result) {
+                if (!$result) {
                     session()->flash('error', trans('shop::app.subscription.not-subscribed'));
 
                     return redirect()->back();
@@ -121,15 +123,16 @@ class SubscriptionController extends Controller
      *
      * @var string $token
      */
-    public function unsubscribe($token) {
+    public function unsubscribe($token)
+    {
         $subscriber = $this->subscription->findOneByField('token', $token);
 
         if (isset($subscriber))
-        if ($subscriber->count() > 0 && $subscriber->is_subscribed == 1 &&$subscriber->update(['is_subscribed' => 0])) {
-            session()->flash('info', trans('shop::app.subscription.unsubscribed'));
-        } else {
-            session()->flash('info', trans('shop::app.subscription.already-unsub'));
-        }
+            if ($subscriber->count() > 0 && $subscriber->is_subscribed == 1 && $subscriber->update(['is_subscribed' => 0])) {
+                session()->flash('info', trans('shop::app.subscription.unsubscribed'));
+            } else {
+                session()->flash('info', trans('shop::app.subscription.already-unsub'));
+            }
 
         return redirect()->route('shop.home.index');
     }

@@ -224,53 +224,55 @@
             Vue.component('datagrid-filters', {
                 template: '#datagrid-filters',
 
-                data: () => ({
-                    filterIndex: @json($results['index']),
-                    gridCurrentData: @json($results['records']),
-                    massActions: @json($results['massactions']),
-                    massActionsToggle: false,
-                    massActionTarget: null,
-                    massActionType: null,
-                    massActionValues: [],
-                    massActionTargets: [],
-                    massActionUpdateValue: null,
-                    url: new URL(window.location.href),
-                    currentSort: null,
-                    dataIds: [],
-                    allSelected: false,
-                    sortDesc: 'desc',
-                    sortAsc: 'asc',
-                    sortUpIcon: 'sort-up-icon',
-                    sortDownIcon: 'sort-down-icon',
-                    currentSortIcon: null,
-                    isActive: false,
-                    isHidden: true,
-                    searchValue: '',
-                    filterColumn: true,
-                    filters: [],
-                    columnOrAlias: '',
-                    type: null,
-                    columns : @json($results['columns']),
-                    stringCondition: null,
-                    booleanCondition: null,
-                    numberCondition: null,
-                    datetimeCondition: null,
-                    stringValue: null,
-                    booleanValue: null,
-                    datetimeValue: '2000-01-01',
-                    numberValue: 0,
-                    stringConditionSelect: false,
-                    booleanConditionSelect: false,
-                    numberConditionSelect: false,
-                    datetimeConditionSelect: false
-                }),
+                data: function() {
+                    return {
+                        filterIndex: @json($results['index']),
+                        gridCurrentData: @json($results['records']),
+                        massActions: @json($results['massactions']),
+                        massActionsToggle: false,
+                        massActionTarget: null,
+                        massActionType: null,
+                        massActionValues: [],
+                        massActionTargets: [],
+                        massActionUpdateValue: null,
+                        url: new URL(window.location.href),
+                        currentSort: null,
+                        dataIds: [],
+                        allSelected: false,
+                        sortDesc: 'desc',
+                        sortAsc: 'asc',
+                        sortUpIcon: 'sort-up-icon',
+                        sortDownIcon: 'sort-down-icon',
+                        currentSortIcon: null,
+                        isActive: false,
+                        isHidden: true,
+                        searchValue: '',
+                        filterColumn: true,
+                        filters: [],
+                        columnOrAlias: '',
+                        type: null,
+                        columns : @json($results['columns']),
+                        stringCondition: null,
+                        booleanCondition: null,
+                        numberCondition: null,
+                        datetimeCondition: null,
+                        stringValue: null,
+                        booleanValue: null,
+                        datetimeValue: '2000-01-01',
+                        numberValue: 0,
+                        stringConditionSelect: false,
+                        booleanConditionSelect: false,
+                        numberConditionSelect: false,
+                        datetimeConditionSelect: false
+                    }
+                },
 
                 mounted: function() {
                     this.setParamsAndUrl();
                 },
 
                 methods: {
-                    getColumnOrAlias(columnOrAlias) {
+                    getColumnOrAlias: function(columnOrAlias) {
                         this.columnOrAlias = columnOrAlias;
 
                         for(column in this.columns) {
@@ -317,14 +319,14 @@
                         }
                     },
 
-                    nullify() {
+                    nullify: function() {
                         this.stringCondition = null;
                         this.datetimeCondition = null;
                         this.booleanCondition = null;
                         this.numberCondition = null;
                     },
 
-                    getResponse() {
+                    getResponse: function() {
                         label = '';
 
                         for(colIndex in this.columns) {
@@ -337,10 +339,11 @@
                             this.formURL(this.columnOrAlias, this.stringCondition, this.stringValue, label)
                         } else if (this.type == 'number') {
                             indexConditions = true;
-                            if (this.filterIndex == this.columnOrAlias && (this.numberValue == 0 || this.numberValue < 0)) {
-                                    indexConditions = false;
 
-                                    alert('{{__('ui::app.datagrid.zero-index')}}');
+                            if (this.filterIndex == this.columnOrAlias && (this.numberValue == 0 || this.numberValue < 0)) {
+                                indexConditions = false;
+
+                                alert('{{__('ui::app.datagrid.zero-index')}}');
                             }
 
                             if(indexConditions)
@@ -354,7 +357,7 @@
                         }
                     },
 
-                    sortCollection(alias) {
+                    sortCollection: function(alias) {
                         label = '';
 
                         for(colIndex in this.columns) {
@@ -367,14 +370,14 @@
                         this.formURL("sort", alias, this.sortAsc, label);
                     },
 
-                    searchCollection(searchValue) {
+                    searchCollection: function(searchValue) {
                         label = 'Search';
 
                         this.formURL("search", 'all', searchValue, label);
                     },
 
                     // function triggered to check whether the query exists or not and then call the make filters from the url
-                    setParamsAndUrl() {
+                    setParamsAndUrl: function() {
                         params = (new URL(window.location.href)).search;
 
                         if (params.slice(1, params.length).length > 0) {
@@ -397,21 +400,15 @@
                         }
                     },
 
-                    findCurrentSort() {
+                    findCurrentSort: function() {
                         for(i in this.filters) {
                             if (this.filters[i].column == 'sort') {
                                 this.currentSort = this.filters[i].val;
-
-                                // if (this.currentSort = 'asc') {
-                                //     this.currentSortIcon = this.sortUpIcon;
-                                // } else {
-                                //     this.currentSortIcon = this.sortDownIcon;
-                                // }
                             }
                         }
                     },
 
-                    changeMassActionTarget() {
+                    changeMassActionTarget: function() {
                         if (this.massActionType == 'delete') {
                             for(i in this.massActionTargets) {
                                 if (this.massActionTargets[i].type == 'delete') {
@@ -436,7 +433,7 @@
                     },
 
                     //make array of filters, sort and search
-                    formURL(column, condition, response, label) {
+                    formURL: function(column, condition, response, label) {
                         var obj = {};
 
                         if (column == "" || condition == "" || response == "" || column == null || condition == null || response == null) {
@@ -577,7 +574,7 @@
                     },
 
                     // make the url from the array and redirect
-                    makeURL() {
+                    makeURL: function() {
                         newParams = '';
 
                         for(i = 0; i < this.filters.length; i++) {
@@ -596,7 +593,7 @@
                     },
 
                     //make the filter array from url after being redirected
-                    arrayFromUrl() {
+                    arrayFromUrl: function() {
                         var obj = {};
                         processedUrl = this.url.search.slice(1, this.url.length);
                         splitted = [];
@@ -609,24 +606,17 @@
                         }
 
                         for(i = 0; i < moreSplitted.length; i++) {
-                            col = moreSplitted[i][0].replace(']','').split('[')[0];
-                            cond = moreSplitted[i][0].replace(']','').split('[')[1]
+                            col = moreSplitted[i][0].replace(']', '').split('[')[0];
+                            cond = moreSplitted[i][0].replace(']', '').split('[')[1]
                             val = moreSplitted[i][1];
 
                             label = 'cannotfindthislabel';
-
-                            // for(colIndex in this.columns) {
-                            //     if (this.columns[colIndex].alias == this.columnOrAlias) {
-                            //         label = this.columns[colIndex].label;
-                            //     }
-                            // }
 
                             obj.column = col;
                             obj.cond = cond;
                             obj.val = val;
 
                             if(col == "sort") {
-                                // console.log('sort', obj.cond);
                                 label = '';
 
                                 for(colIndex in this.columns) {
@@ -641,8 +631,16 @@
                                 obj.label = '';
 
                                 for(colIndex in this.columns) {
-                                    if(this.columns[colIndex].index == obj.column) {
+                                    if (this.columns[colIndex].index == obj.column) {
                                         obj.label = this.columns[colIndex].label;
+
+                                        if (this.columns[colIndex].type == 'boolean') {
+                                            if (obj.val == 1) {
+                                                obj.val = '{{ __('ui::app.datagrid.true') }}';
+                                            } else {
+                                                obj.val = '{{ __('ui::app.datagrid.false') }}';
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -654,7 +652,7 @@
                         }
                     },
 
-                    removeFilter(filter) {
+                    removeFilter: function(filter) {
                         for(i in this.filters) {
                             if (this.filters[i].col == filter.col && this.filters[i].cond == filter.cond && this.filters[i].val == filter.val) {
                                 this.filters.splice(i, 1);
@@ -665,7 +663,7 @@
                     },
 
                     //triggered when any select box is clicked in the datagrid
-                    select() {
+                    select: function() {
                         this.allSelected = false;
 
                         if(this.dataIds.length == 0)
@@ -675,7 +673,7 @@
                     },
 
                     //triggered when master checkbox is clicked
-                    selectAll() {
+                    selectAll: function() {
                         this.dataIds = [];
 
                         this.massActionsToggle = true;
@@ -687,7 +685,7 @@
                                     i = 0;
                                     for(currentId in this.gridCurrentData.data[currentData]) {
                                         if (i==0)
-                                            this.dataIds.push(this.gridCurrentData.data[currentData][currentId]);
+                                            this.dataIds.push(this.gridCurrentData.data[currentData][this.filterIndex]);
 
                                         i++;
                                     }
@@ -707,7 +705,27 @@
                         }
                     },
 
-                    removeMassActions() {
+                    doAction: function(e) {
+                        var element = e.currentTarget;
+
+                        if (confirm('{{__('ui::app.datagrid.massaction.delete') }}')) {
+                            axios.post(element.getAttribute('data-action'), {
+                                _token : element.getAttribute('data-token'),
+                                _method : element.getAttribute('data-method')
+                            }).then(function(response) {
+                                this.result = response;
+                                location.reload();
+                            }).catch(function (error) {
+                                location.reload();
+                            });
+
+                            e.preventDefault();
+                        } else {
+                            e.preventDefault();
+                        }
+                    },
+
+                    removeMassActions: function() {
                         this.dataIds = [];
 
                         this.massActionsToggle = false;

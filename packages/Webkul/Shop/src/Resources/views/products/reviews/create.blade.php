@@ -26,23 +26,12 @@
                     </a>
                 </div>
 
-                <div class="product-price mt-10">
-                    @inject ('priceHelper', 'Webkul\Product\Helpers\Price')
+                @include('shop::products.review-price')
 
-                    @if ($product->type == 'configurable')
-                        <span class="pro-price">{{ core()->currency($priceHelper->getMinimalPrice($product)) }}</span>
-                    @else
-                        @if ($priceHelper->haveSpecialPrice($product))
-                            <span class="pro-price">{{ core()->currency($priceHelper->getSpecialPrice($product)) }}</span>
-                        @else
-                            <span class="pro-price">{{ core()->currency($product->price) }}</span>
-                        @endif
-                    @endif
-                </div>
             </div>
 
             <div class="review-form">
-                <form method="POST" action="{{ route('shop.reviews.store', $product->id ) }}" @submit.prevent="onSubmit">
+                <form method="POST" action="{{ route('shop.reviews.store', $product->product_id ) }}" @submit.prevent="onSubmit">
                     @csrf
 
                     <div class="heading mt-10 mb-25">
@@ -75,7 +64,7 @@
                         <span class="control-error" v-if="errors.has('title')">@{{ errors.first('title') }}</span>
                     </div>
 
-                    @if ($guest_review && !auth()->guard('customer')->user())
+                    @if ($guest_review && ! auth()->guard('customer')->user())
                         <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                             <label for="title" class="required">
                                 {{ __('shop::app.reviews.name') }}

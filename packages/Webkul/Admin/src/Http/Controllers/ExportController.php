@@ -17,7 +17,7 @@ use Excel;
 class ExportController extends Controller
 {
     protected $exportableGrids = [
-        'OrderDataGrid', 'OrderInvoicesDataGrid', 'OrderShipmentsDataGrid', 'CustomerDataGrid', 'TaxRateDataGrid'
+        'OrderDataGrid', 'OrderInvoicesDataGrid', 'OrderShipmentsDataGrid', 'CustomerDataGrid', 'TaxRateDataGrid', 'ProductDataGrid', 'CMSPageDataGrid'
     ];
 
     /**
@@ -37,6 +37,7 @@ class ExportController extends Controller
     public function export()
     {
         $criteria = request()->all();
+
         $format = $criteria['format'];
 
         $gridName = explode('\\', $criteria['gridName']);
@@ -44,36 +45,35 @@ class ExportController extends Controller
 
         $proceed = false;
 
-        foreach($this->exportableGrids as $exportableGrid) {
-            if(last($gridName) == $exportableGrid) {
+        foreach ($this->exportableGrids as $exportableGrid) {
+            if (last($gridName) == $exportableGrid) {
                 $proceed = true;
             }
         }
 
-        if($proceed) {
-            $gridInstance = new $path;
-
-            $records = array();
-            $records = $gridInstance->export();
-
-            if(count($records) == 0) {
-                session()->flash('warning', trans('admin::app.export.no-records'));
-
-                return redirect()->back();
-            }
-
-            if ($format == 'csv') {
-                return Excel::download(new DataGridExport($records), last($gridName).'.csv');
-            } else if($format == 'xls') {
-                return Excel::download(new DataGridExport($records), last($gridName).'.xlsx');
-            } else {
-                session()->flash('warning', trans('admin::app.export.illegal-format'));
-
-                return redirect()->back();
-            }
-        } else {
+        if (! $proceed) {
             return redirect()->back();
         }
 
+        $gridInstance = new $path;
+        $records = $gridInstance->export();
+
+        if (count($records) == 0) {
+            session()->flash('warning', trans('admin::app.export.no-records'));
+
+            return redirect()->back();
+        }
+
+        if ($format == 'csv') {
+            return Excel::download(new DataGridExport($records), last($gridName).'.csv');
+        }
+
+        if ($format == 'xls') {
+            return Excel::download(new DataGridExport($records), last($gridName).'.xlsx');
+        }
+
+        session()->flash('warning', trans('admin::app.export.illegal-format'));
+
+        return redirect()->back();
     }
 }

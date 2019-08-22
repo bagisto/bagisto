@@ -8,8 +8,7 @@ use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Helpers\ProductImage;
-use Webkul\Product\Helpers\View as ProductView;
+use Webkul\Customer\Repositories\WishlistRepository;
 use Illuminate\Support\Facades\Event;
 use Cart;
 
@@ -17,7 +16,7 @@ use Cart;
  * Cart controller for the customer and guest users for adding and
  * removing the products in the cart.
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CartController extends Controller
@@ -31,7 +30,6 @@ class CartController extends Controller
      * @param $cartItem
      * @param $customer
      * @param $product
-     * @param $productImage
      * @param $productView
      */
     protected $_config;
@@ -44,15 +42,21 @@ class CartController extends Controller
 
     protected $product;
 
-    protected $productView;
+    protected $suppressFlash = false;
+
+    /**
+     * WishlistRepository Repository object
+     *
+     * @var array
+     */
+    protected $wishlist;
 
     public function __construct(
         CartRepository $cart,
         CartItemRepository $cartItem,
         CustomerRepository $customer,
         ProductRepository $product,
-        ProductImage $productImage,
-        ProductView $productView
+        WishlistRepository $wishlist
     )
     {
 
@@ -66,9 +70,7 @@ class CartController extends Controller
 
         $this->product = $product;
 
-        $this->productImage = $productImage;
-
-        $this->productView = $productView;
+        $this->wishlist = $wishlist;
 
         $this->_config = request('_config');
     }
@@ -102,7 +104,19 @@ class CartController extends Controller
             if ($result) {
                 session()->flash('success', trans('shop::app.checkout.cart.item.success'));
 
-                return redirect()->route($this->_config['redirect']);
+                if (auth()->guard('customer')->user()) {
+                    $customer = auth()->guard('customer')->user();
+
+                    if (count($customer->wishlist_items)) {
+                        foreach ($customer->wishlist_items as $wishlist) {
+                            if ($wishlist->product_id == $id) {
+                                $this->wishlist->delete($wishlist->id);
+                            }
+                        }
+                    }
+                }
+
+                return redirect()->back();
             } else {
                 session()->flash('warning', trans('shop::app.checkout.cart.item.error-add'));
 
@@ -143,33 +157,46 @@ class CartController extends Controller
      */
     public function updateBeforeCheckout()
     {
-        $request = request()->except('_token');
+        try {
+            $request = request()->except('_token');
 
-        foreach ($request['qty'] as $id => $quantity) {
-            if ($quantity <= 0) {
-                session()->flash('warning', trans('shop::app.checkout.cart.quantity.illegal'));
+            foreach ($request['qty'] as $id => $quantity) {
+                if ($quantity <= 0) {
+                    session()->flash('warning', trans('shop::app.checkout.cart.quantity.illegal'));
 
-                return redirect()->back();
+                    return redirect()->back();
+                }
             }
+
+            foreach ($request['qty'] as $key => $value) {
+                $item = $this->cartItem->findOneByField('id', $key);
+
+                $data['quantity'] = $value;
+
+                Event::fire('checkout.cart.update.before', $item);
+
+                $result = Cart::updateItem($item->product_id, $data, $key);
+
+                if ($result == false) {
+                    $this->suppressFlash = true;
+                }
+
+                Event::fire('checkout.cart.update.after', $item);
+
+                unset($item);
+                unset($data);
+            }
+
+            Cart::collectTotals();
+
+            if ($this->suppressFlash) {
+                session()->forget('success');
+                session()->forget('warning');
+                session()->flash('info', trans('shop::app.checkout.cart.partial-cart-update'));
+            }
+        } catch(\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
         }
-
-
-        foreach ($request['qty'] as $key => $value) {
-            $item = $this->cartItem->findOneByField('id', $key);
-
-            $data['quantity'] = $value;
-
-            Event::fire('checkout.cart.update.before', $key);
-
-            Cart::updateItem($item->product_id, $data, $key);
-
-            Event::fire('checkout.cart.update.after', $item);
-
-            unset($item);
-            unset($data);
-        }
-
-        Cart::collectTotals();
 
         return redirect()->back();
     }
@@ -186,20 +213,26 @@ class CartController extends Controller
         return redirect()->route('shop.products.index', $slug);
     }
 
-    public function buyNow($id)
+    public function buyNow($id, $quantity = 1)
     {
-        Event::fire('checkout.cart.add.before', $id);
+        try {
+            Event::fire('checkout.cart.add.before', $id);
 
-        $result = Cart::proceedToBuyNow($id);
+            $result = Cart::proceedToBuyNow($id, $quantity);
 
-        Event::fire('checkout.cart.add.after', $result);
+            Event::fire('checkout.cart.add.after', $result);
 
-        Cart::collectTotals();
+            Cart::collectTotals();
 
-        if (! $result) {
+            if (! $result) {
+                return redirect()->back();
+            } else {
+                return redirect()->route('shop.checkout.onepage.index');
+            }
+        } catch(\Exception $e) {
+            session()->flash('error', trans($e->getMessage()));
+
             return redirect()->back();
-        } else {
-            return redirect()->route('shop.checkout.onepage.index');
         }
     }
 

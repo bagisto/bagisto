@@ -49,7 +49,7 @@
                             <div class="product-grid-3">
                                 @foreach ($products as $productFlat)
 
-                                    @include ('shop::products.list.card', ['product' => $productFlat->product])
+                                    @include ('shop::products.list.card', ['product' => $productFlat])
 
                                 @endforeach
                             </div>
@@ -57,19 +57,19 @@
                             <div class="product-list">
                                 @foreach ($products as $productFlat)
 
-                                    @include ('shop::products.list.card', ['product' => $productFlat->product])
+                                    @include ('shop::products.list.card', ['product' => $productFlat])
 
                                 @endforeach
                             </div>
                         @endif
 
-                        {!! view_render_event('bagisto.shop.products.index.pagination.before') !!}
+                        {!! view_render_event('bagisto.shop.products.index.pagination.before', ['category' => $category]) !!}
 
                         <div class="bottom-toolbar">
                             {{ $products->appends(request()->input())->links() }}
                         </div>
 
-                        {!! view_render_event('bagisto.shop.products.index.pagination.after') !!}
+                        {!! view_render_event('bagisto.shop.products.index.pagination.after', ['category' => $category]) !!}
 
                     @else
 

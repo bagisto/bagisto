@@ -32,7 +32,7 @@ class LocaleController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\LocaleRepository $locale
+     * @param  \Webkul\Core\Repositories\LocaleRepository $locale
      * @return void
      */
     public function __construct(Locale $locale)
@@ -72,7 +72,8 @@ class LocaleController extends Controller
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:locales,code', new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required'
+            'name' => 'required',
+            'direction' => 'in:ltr,rtl'
         ]);
 
         Event::fire('core.locale.create.before');
@@ -81,7 +82,7 @@ class LocaleController extends Controller
 
         Event::fire('core.locale.create.after', $locale);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Locale']));
+        session()->flash('success', trans('admin::app.settings.locales.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -94,7 +95,7 @@ class LocaleController extends Controller
      */
     public function edit($id)
     {
-        $locale = $this->locale->find($id);
+        $locale = $this->locale->findOrFail($id);
 
         return view($this->_config['view'], compact('locale'));
     }
@@ -110,7 +111,8 @@ class LocaleController extends Controller
     {
         $this->validate(request(), [
             'code' => ['required', 'unique:locales,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
-            'name' => 'required'
+            'name' => 'required',
+            'direction' => 'in:ltr,rtl'
         ]);
 
         Event::fire('core.locale.update.before', $id);
@@ -119,7 +121,7 @@ class LocaleController extends Controller
 
         Event::fire('core.locale.update.after', $locale);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Locale']));
+        session()->flash('success', trans('admin::app.settings.locales.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -132,18 +134,26 @@ class LocaleController extends Controller
      */
     public function destroy($id)
     {
-        if($this->locale->count() == 1) {
-            session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Locale']));
+        $locale = $this->locale->findOrFail($id);
+
+        if ($this->locale->count() == 1) {
+            session()->flash('error', trans('admin::app.settings.locales.last-delete-error'));
         } else {
-            Event::fire('core.locale.delete.before', $id);
+            try {
+                Event::fire('core.locale.delete.before', $id);
 
-            $this->locale->delete($id);
+                $this->locale->delete($id);
 
-            Event::fire('core.locale.delete.after', $id);
+                Event::fire('core.locale.delete.after', $id);
 
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Locale']));
+                session()->flash('success', trans('admin::app.settings.locales.delete-success'));
+
+                return response()->json(['message' => true], 200);
+            } catch(\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Locale']));
+            }
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 }

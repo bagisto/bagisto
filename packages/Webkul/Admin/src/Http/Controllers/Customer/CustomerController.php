@@ -8,6 +8,8 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository as Customer;
 use Webkul\Customer\Repositories\CustomerGroupRepository as CustomerGroup;
 use Webkul\Core\Repositories\ChannelRepository as Channel;
+use Webkul\Admin\Mail\NewCustomerNotification;
+use Mail;
 
 /**
  * Customer controlller
@@ -45,13 +47,12 @@ class CustomerController extends Controller
      */
     protected $channel;
 
-     /**
+    /**
      * Create a new controller instance.
      *
-     * @param Webkul\Customer\Repositories\CustomerRepository as customer;
-     * @param Webkul\Customer\Repositories\CustomerGroupRepository as customerGroup;
-     * @param Webkul\Core\Repositories\ChannelRepository as Channel;
-     * @return void
+     * @param \Webkul\Customer\Repositories\CustomerRepository $customer
+     * @param \Webkul\Customer\Repositories\CustomerGroupRepository $customerGroup
+     * @param \Webkul\Core\Repositories\ChannelRepository $channel
      */
     public function __construct(Customer $customer, CustomerGroup $customerGroup, Channel $channel)
     {
@@ -84,7 +85,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $customerGroup = $this->customerGroup->all();
+        $customerGroup = $this->customerGroup->findWhere([['code', '<>', 'guest']]);
 
         $channelName = $this->channel->all();
 
@@ -109,13 +110,19 @@ class CustomerController extends Controller
 
         $data = request()->all();
 
-        $password = bcrypt(rand(100000,10000000));
+        $password = rand(100000,10000000);
 
-        $data['password'] = $password;
+        $data['password'] = bcrypt($password);
 
         $data['is_verified'] = 1;
 
-        $this->customer->create($data);
+        $customer = $this->customer->create($data);
+
+        try {
+            Mail::queue(new NewCustomerNotification($customer, $password));
+        } catch (\Exception $e) {
+
+        }
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer']));
 
@@ -130,9 +137,9 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $customer = $this->customer->findOneWhere(['id'=>$id]);
+        $customer = $this->customer->findOrFail($id);
 
-        $customerGroup = $this->customerGroup->all();
+        $customerGroup = $this->customerGroup->findWhere([['code', '<>', 'guest']]);
 
         $channelName = $this->channel->all();
 
@@ -153,7 +160,6 @@ class CustomerController extends Controller
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',
-            'phone' => 'nullable|numeric|unique:customers,phone,'. $id,
             'email' => 'required|unique:customers,email,'. $id,
             'date_of_birth' => 'date|before:today'
         ]);
@@ -173,9 +179,98 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $this->customer->delete($id);
+        $customer = $this->customer->findorFail($id);
 
-        session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+        try {
+            $this->customer->delete($id);
+
+            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+
+            return response()->json(['message' => true], 200);
+        } catch(\Exception $e) {
+            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
+        }
+
+        return response()->json(['message' => false], 400);
+    }
+
+    /**
+     * To load the note taking screen for the customers
+     *
+     * @return view
+     */
+    public function createNote($id)
+    {
+        $customer = $this->customer->find($id);
+
+        return view($this->_config['view'])->with('customer', $customer);
+    }
+
+    /**
+     * To store the response of the note in storage
+     *
+     * @return redirect
+     */
+    public function storeNote()
+    {
+        $this->validate(request(), [
+            'notes' => 'string|nullable'
+        ]);
+
+        $customer = $this->customer->find(request()->input('_customer'));
+
+        $noteTaken = $customer->update([
+            'notes' => request()->input('notes')
+        ]);
+
+        if ($noteTaken) {
+            session()->flash('success', 'Note taken');
+        } else {
+            session()->flash('error', 'Note cannot be taken');
+        }
+
+        return redirect()->route($this->_config['redirect']);
+    }
+
+    /**
+     * To mass update the customer
+     *
+     * @return redirect
+     */
+    public function massUpdate()
+    {
+        $customerIds = explode(',', request()->input('indexes'));
+        $updateOption = request()->input('update-options');
+
+        foreach ($customerIds as $customerId) {
+            $customer = $this->customer->find($customerId);
+
+            $customer->update([
+                'status' => $updateOption
+            ]);
+        }
+
+        session()->flash('success', trans('admin::app.customers.customers.mass-update-success'));
+
+        return redirect()->back();
+    }
+
+    /**
+     * To mass delete the customer
+     *
+     * @return redirect
+     */
+    public function massDestroy()
+    {
+        $customerIds = explode(',', request()->input('indexes'));
+
+        foreach ($customerIds as $customerId) {
+            $this->customer->deleteWhere([
+                'id' => $customerId
+            ]);
+        }
+
+        session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
 
         return redirect()->back();
     }

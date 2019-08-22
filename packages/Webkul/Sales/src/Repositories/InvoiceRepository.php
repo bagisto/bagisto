@@ -6,6 +6,7 @@ use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Contracts\Invoice;
 use Webkul\Sales\Repositories\OrderRepository as Order;
 use Webkul\Sales\Repositories\OrderItemRepository as OrderItem;
 use Webkul\Sales\Repositories\InvoiceItemRepository as InvoiceItem;
@@ -43,10 +44,10 @@ class InvoiceRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  Webkul\Sales\Repositories\OrderRepository       $order
-     * @param  Webkul\Sales\Repositories\OrderItemRepository   $orderItem
-     * @param  Webkul\Sales\Repositories\InvoiceItemRepository $orderItem
-     * @return void
+     * @param \Webkul\Sales\Repositories\OrderRepository $order
+     * @param \Webkul\Sales\Repositories\OrderItemRepository $orderItem
+     * @param \Webkul\Sales\Repositories\InvoiceItemRepository $invoiceItem
+     * @param \Illuminate\Container\Container $app
      */
     public function __construct(
         Order $order,
@@ -72,7 +73,7 @@ class InvoiceRepository extends Repository
 
     function model()
     {
-        return 'Webkul\Sales\Contracts\Invoice';
+        return Invoice::class;
     }
 
     /**
@@ -120,6 +121,8 @@ class InvoiceRepository extends Repository
                         'base_total' => $orderItem->base_price * $qty,
                         'tax_amount' => ( ($orderItem->tax_amount / $orderItem->qty_ordered) * $qty ),
                         'base_tax_amount' => ( ($orderItem->base_tax_amount / $orderItem->qty_ordered) * $qty ),
+                        'discount_amount' => ( ($orderItem->discount_amount / $orderItem->qty_ordered) * $qty ),
+                        'base_discount_amount' => ( ($orderItem->base_discount_amount / $orderItem->qty_ordered) * $qty ),
                         'product_id' => $orderItem->product_id,
                         'product_type' => $orderItem->product_type,
                         'additional' => $orderItem->additional,
@@ -141,6 +144,8 @@ class InvoiceRepository extends Repository
                             'base_total' => $childOrderItem->base_price * $qty,
                             'tax_amount' => 0,
                             'base_tax_amount' => 0,
+                            'discount_amount' => 0,
+                            'base_discount_amount' => 0,
                             'product_id' => $childOrderItem->product_id,
                             'product_type' => $childOrderItem->product_type,
                             'additional' => $childOrderItem->additional,
@@ -176,6 +181,7 @@ class InvoiceRepository extends Repository
     {
         $subTotal = $baseSubTotal = 0;
         $taxAmount = $baseTaxAmount = 0;
+        $discountAmount = $baseDiscountAmount = 0;
 
         foreach ($invoice->items as $invoiceItem) {
             $subTotal += $invoiceItem->total;
@@ -183,6 +189,9 @@ class InvoiceRepository extends Repository
 
             $taxAmount += $invoiceItem->tax_amount;
             $baseTaxAmount += $invoiceItem->base_tax_amount;
+
+            $discountAmount += $invoiceItem->discount_amount;
+            $baseDiscountAmount += $invoiceItem->base_discount_amount;
         }
 
         $shippingAmount = $invoice->order->shipping_amount;
@@ -206,8 +215,8 @@ class InvoiceRepository extends Repository
         $invoice->tax_amount = $taxAmount;
         $invoice->base_tax_amount = $baseTaxAmount;
 
-        $invoice->grand_total = $subTotal + $taxAmount + $shippingAmount;
-        $invoice->base_grand_total = $baseSubTotal + $baseTaxAmount + $baseShippingAmount;
+        $invoice->grand_total = $subTotal + $taxAmount + $shippingAmount - $discountAmount;
+        $invoice->base_grand_total = $baseSubTotal + $baseTaxAmount + $baseShippingAmount - $baseDiscountAmount;
 
         $invoice->save();
 

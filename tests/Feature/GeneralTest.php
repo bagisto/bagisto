@@ -21,7 +21,7 @@ class GeneralTest extends TestCase
      */
     public function testHomePage()
     {
-        config(['app.url' => 'http://127.0.0.1:8000']);
+        config(['app.url' => 'http://prashant.com']);
 
         $response = $this->get('/');
 
@@ -35,7 +35,7 @@ class GeneralTest extends TestCase
      */
     public function testCustomerLoginPage()
     {
-        config(['app.url' => 'http://127.0.0.1:8000']);
+        config(['app.url' => 'http://prashant.com']);
 
         $response = $this->get('/customer/login');
 
@@ -51,7 +51,7 @@ class GeneralTest extends TestCase
     {
         $categoryUrlSlug = 'marvel-figurines';
 
-        config(['app.url' => 'http://127.0.0.1:8000']);
+        config(['app.url' => 'http://prashant.com']);
 
         $response = $this->get("/categories/{$categoryUrlSlug}");
 
@@ -65,7 +65,7 @@ class GeneralTest extends TestCase
      */
     public function testCustomerRegistrationPage()
     {
-        config(['app.url' => 'http://127.0.0.1:8000']);
+        // config(['app.url' => 'http://127.0.0.1:8000']);
 
         $response = $this->get("/customer/register");
 
@@ -79,7 +79,7 @@ class GeneralTest extends TestCase
      */
     public function testCartPage()
     {
-        config(['app.url' => 'http://127.0.0.1:8000']);
+        // config(['app.url' => 'http://127.0.0.1:8000']);
 
         $response = $this->get("/checkout/cart");
 

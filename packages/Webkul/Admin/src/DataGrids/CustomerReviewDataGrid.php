@@ -20,12 +20,14 @@ class CustomerReviewDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('product_reviews as pr')
-            ->leftjoin('products_grid as pg', 'pr.product_id', '=', 'pg.id')
-            ->select('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pg.name as product_name', 'pr.status as product_review_status');
+            ->leftjoin('product_flat as pf', 'pr.product_id', '=', 'pf.product_id')
+            ->select('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pf.name as product_name', 'pr.status as product_review_status')
+            ->where('channel', core()->getCurrentChannelCode())
+            ->where('locale', app()->getLocale());
 
         $this->addFilter('product_review_id', 'pr.id');
         $this->addFilter('product_review_status', 'pr.status');
-        $this->addFilter('product_name', 'pg.name');
+        $this->addFilter('product_name', 'pf.name');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -91,12 +93,14 @@ class CustomerReviewDataGrid extends DataGrid
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
+            'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.customer.review.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
+            'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.customer.review.delete',
             'icon' => 'icon trash-icon'
         ]);

@@ -34,6 +34,16 @@
     background-image: url("../images/Icon-Settings.svg");
 }
 
+.promotion-icon {
+    @extend %menu-properties;
+    background-image: url("../images/icon-promotion.svg");
+}
+
+.cms-icon {
+    @extend %menu-properties;
+    background-image: url('../images/Icon-CMS.svg');
+}
+
 .angle-right-icon {
     background-image: url("../images/Angle-Right.svg");
     width: 17px;
@@ -220,6 +230,12 @@
     height: 47px;
 }
 
+.note-icon {
+    background-image: url("../images/icon-note.svg");
+    width: 24px;
+    height: 24px;
+}
+
 .active {
     .dashboard-icon {
         background-image: url("../images/Icon-Dashboard-Active.svg");
@@ -243,6 +259,15 @@
 
     .configuration-icon {
         background-image: url("../images/Icon-Configure-Active.svg");
+    }
+
+    .promotion-icon {
+        background-image: url("../images/icon-promotion-active.svg");
+    }
+
+    .cms-icon {
+        @extend %menu-properties;
+        background-image: url('../images/Icon-CMS-Active.svg');
     }
 
     > .arrow-down-icon {

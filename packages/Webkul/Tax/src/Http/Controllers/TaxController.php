@@ -56,10 +56,10 @@ class TaxController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\ChannelRepository    $channel
-     * @param  Webkul\Tax\Repositories\TaxCategoryRepository $taxCategory
-     * @param  Webkul\Tax\Repositories\TaxRateRepository     $taxRate
-     * @param  Webkul\Tax\Repositories\TaxMapRepository      $taxMap
+     * @param  \Webkul\Core\Repositories\ChannelRepository    $channel
+     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository $taxCategory
+     * @param  \Webkul\Tax\Repositories\TaxRateRepository     $taxRate
+     * @param  \Webkul\Tax\Repositories\TaxMapRepository      $taxMap
      * @return void
      */
     public function __construct(Channel $channel, TaxCategory $taxCategory, TaxRate $taxRate, TaxMap $taxMap)

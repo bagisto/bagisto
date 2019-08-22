@@ -9,7 +9,7 @@ return [
         'wishlist' => 'قائمة الأماني',
         'orders' => 'الأوامر',
     ],
-    
+
     'common' => [
         'error' => 'حدث شيء خاطئ ، رجاء حاول ثانية لاحقا.'
     ],
@@ -254,6 +254,7 @@ return [
                     'subtotal' => 'المجموع الفرعي',
                     'shipping-handling' => 'الشحن والمناولة',
                     'tax' => 'الضرائب',
+                    'discount' => 'Discount',
                     'tax-percent' => 'نسبة الضرائب',
                     'tax-amount' => 'المبلغ الضريبي',
                     'discount-amount' => 'مبلغ الخصم',
@@ -321,7 +322,8 @@ return [
         'quantity' => 'الكمية',
         'in-stock' => 'في الأسهم',
         'out-of-stock' => 'خارج الأسهم',
-        'view-all' => 'عرض الكل'
+        'view-all' => 'عرض الكل',
+        'less-quantity' => 'Quantity can not be less than one.'
     ],
 
     'wishlist' => [
@@ -385,7 +387,8 @@ return [
             ],
             'quantity-error' => 'الكمية المطلوبة غير متوفرة',
             'cart-subtotal' => 'المجموع الفرعي للعربات',
-            'cart-remove-action' => 'هل تريد حقا أن تفعل هذا ؟'
+            'cart-remove-action' => 'هل تريد حقا أن تفعل هذا ؟',
+            'partial-cart-update' => 'Only some of the product(s) were updated'
         ],
 
         'onepage' => [
@@ -428,6 +431,7 @@ return [
             'grand-total' => 'المجموع الكلي',
             'delivery-charges' => 'رسوم التسليم',
             'tax' => 'الضرائب',
+            'discount' => 'Discount',
             'price' => 'السعر            '
         ],
 
@@ -456,6 +460,7 @@ return [
             'subtotal' => 'المجموع الفرعي',
             'shipping-handling' => 'الشحن والمناولة',
             'tax' => 'الضرائب',
+            'discount' => 'Discount',
             'grand-total' => 'المجموع الكلي',
             'final-summary' => 'شكرا لإظهارك إهتمامك بمتجرنا سنرسل لك رقم التتبع بمجرد شحنه',
             'help' => 'إذا كنت بحاجة إلى أي نوع من المساعدة يرجى الاتصال بنا على: support_email',

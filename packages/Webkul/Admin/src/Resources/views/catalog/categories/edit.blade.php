@@ -106,16 +106,18 @@
                                 <span class="control-error" v-if="errors.has('display_mode')">@{{ errors.first('display_mode') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('{{$locale}}[description]') ? 'has-error' : '']">
-                                <label for="description" class="required">{{ __('admin::app.catalog.categories.description') }}</label>
-                                <textarea v-validate="'required'" class="control" id="description" name="{{$locale}}[description]" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old($locale)['description'] ?: $category->translate($locale)['description'] }}</textarea>
-                                <span class="control-error" v-if="errors.has('{{$locale}}[description]')">@{{ errors.first('{!!$locale!!}[description]') }}</span>
-                            </div>
+                            <description></description>
 
-                            <div class="control-group">
-                                <label>{{ __('admin::app.catalog.categories.image') }} </label>
+                            <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
+                                <label>{{ __('admin::app.catalog.categories.image') }}
 
-                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false" :images='"{{ $category->image_url }}"'></image-wrapper>
+                                <image-wrapper :button-label="'{{ __('admin::app.catalog.products.add-image-btn-title') }}'" input-name="image" :multiple="false"  :images='"{{ $category->image_url }}"'></image-wrapper>
+
+                                <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
+                                    @foreach ($errors->get('image.*') as $key => $message)
+                                        @php echo str_replace($key, 'Image', $message[0]); @endphp
+                                    @endforeach
+                                </span>
 
                             </div>
 
@@ -146,6 +148,23 @@
 
                     @endif
 
+                    <accordian :title="'{{ __('admin::app.catalog.categories.filterable-attributes') }}'" :active="true">
+                        <div slot="body">
+                            <div class="control-group" :class="[errors.has('attributes[]') ? 'has-error' : '']">
+                                <label for="attributes" class="required">{{ __('admin::app.catalog.categories.attributes') }}</label>
+                                <select class="control" name="attributes[]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.catalog.categories.attributes') }}&quot;" multiple>
+                                    @foreach ($attributes as $attribute)
+                                        <option value="{{ $attribute->id }}" {{ in_array($attribute->id, $category->filterableAttributes->pluck('id')->toArray()) ? 'selected' : ''}}>
+                                            {{ $attribute->name ? $attribute->name : $attribute->admin_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <span class="control-error" v-if="errors.has('attributes[]')">
+                                    @{{ errors.first('attributes[]') }}
+                                </span>
+                            </div>
+                        </div>
+                    </accordian>
 
                     {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.seo.before', ['category' => $category]) !!}
 
@@ -192,6 +211,16 @@
 @push('scripts')
     <script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
 
+    <script type="text/x-template" id="description-template">
+
+        <div class="control-group" :class="[errors.has('{{$locale}}[description]') ? 'has-error' : '']">
+            <label for="description" :class="isRequired ? 'required' : ''">{{ __('admin::app.catalog.categories.description') }}</label>
+            <textarea v-validate="isRequired ? 'required' : ''" class="control" id="description" name="{{$locale}}[description]" data-vv-as="&quot;{{ __('admin::app.catalog.categories.description') }}&quot;">{{ old($locale)['description'] ?: $category->translate($locale)['description'] }}</textarea>
+            <span class="control-error" v-if="errors.has('{{$locale}}[description]')">@{{ errors.first('{!!$locale!!}[description]') }}</span>
+        </div>
+
+    </script>
+
     <script>
         $(document).ready(function () {
             tinymce.init({
@@ -203,5 +232,38 @@
                 image_advtab: true
             });
         });
+
+        Vue.component('description', {
+
+            template: '#description-template',
+
+            inject: ['$validator'],
+
+            data: function() {
+                return {
+                    isRequired: true,
+                }
+            },
+
+            created: function () {
+                var this_this = this;
+
+                $(document).ready(function () {
+                    $('#display_mode').on('change', function (e) {
+                        if ($('#display_mode').val() != 'products_only') {
+                            this_this.isRequired = true;
+                        } else {
+                            this_this.isRequired = false;
+                        }
+                    })
+
+                    if ($('#display_mode').val() != 'products_only') {
+                        this_this.isRequired = true;
+                    } else {
+                        this_this.isRequired = false;
+                    }
+                });
+            }
+        })
     </script>
 @endpush

@@ -16,7 +16,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action">
+                <div class="page-action-slight">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.settings.tax-rates.save-btn-title') }}
                     </button>
@@ -77,7 +77,7 @@
 
             <div class="control-group" :class="[errors.has('tax_rate') ? 'has-error' : '']">
                 <label for="tax_rate" class="required">{{ __('admin::app.configuration.tax-rates.tax_rate') }}</label>
-                <input v-validate="'required'" class="control" id="tax_rate" name="tax_rate" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.tax_rate') }}&quot;" value="{{ old('tax_rate') }}"/>
+                <input v-validate="'required|min_value:0.0001'" class="control" id="tax_rate" name="tax_rate" data-vv-as="&quot;{{ __('admin::app.configuration.tax-rates.tax_rate') }}&quot;" value="{{ old('tax_rate') }}"/>
                 <span class="control-error" v-if="errors.has('tax_rate')">@{{ errors.first('tax_rate') }}</span>
             </div>
         </div>
@@ -90,9 +90,11 @@
 
             inject: ['$validator'],
 
-            data: () => ({
-                is_zip: false
-            }),
+            data: function () {
+                return {
+                    is_zip: false
+                }
+            },
         });
     </script>
 @endpush

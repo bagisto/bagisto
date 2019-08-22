@@ -10,7 +10,7 @@ use Webkul\Core\Repositories\ChannelRepository as Channel;
 /**
  * Channel controller
  *
- * @author    Jitendra Singh <jitendra@webkul.com>
+ * @author Jitendra Singh <jitendra@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class ChannelController extends Controller
@@ -32,7 +32,7 @@ class ChannelController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\ChannelRepository $channel
+     * @param  \Webkul\Core\Repositories\ChannelRepository $channel
      * @return void
      */
     public function __construct(Channel $channel)
@@ -78,16 +78,33 @@ class ChannelController extends Controller
             'base_currency_id' => 'required',
             'root_category_id' => 'required',
             'logo.*' => 'mimes:jpeg,jpg,bmp,png',
-            'favicon.*' => 'mimes:jpeg,jpg,bmp,png'
+            'favicon.*' => 'mimes:jpeg,jpg,bmp,png',
+            'seo_title' => 'required|string',
+            'seo_description' => 'required|string',
+            'seo_keywords' => 'required|string'
         ]);
+
+        $data = request()->all();
+
+        $data['seo']['meta_title'] = $data['seo_title'];
+        $data['seo']['meta_description'] = $data['seo_description'];
+        $data['seo']['meta_keywords'] = $data['seo_keywords'];
+
+        unset($data['seo_title']);
+        unset($data['seo_description']);
+        unset($data['seo_keywords']);
+
+        $data['home_seo'] = json_encode($data['seo']);
+
+        unset($data['seo']);
 
         Event::fire('core.channel.create.before');
 
-        $channel = $this->channel->create(request()->all());
+        $channel = $this->channel->create($data);
 
         Event::fire('core.channel.create.after', $channel);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Channel']));
+        session()->flash('success', trans('admin::app.settings.channels.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -100,7 +117,7 @@ class ChannelController extends Controller
      */
     public function edit($id)
     {
-        $channel = $this->channel->with(['locales', 'currencies'])->find($id);
+        $channel = $this->channel->with(['locales', 'currencies'])->findOrFail($id);
 
         return view($this->_config['view'], compact('channel'));
     }
@@ -127,13 +144,25 @@ class ChannelController extends Controller
             'favicon.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
+        $data = request()->all();
+
+        $data['seo']['meta_title'] = $data['seo_title'];
+        $data['seo']['meta_description'] = $data['seo_description'];
+        $data['seo']['meta_keywords'] = $data['seo_keywords'];
+
+        unset($data['seo_title']);
+        unset($data['seo_description']);
+        unset($data['seo_keywords']);
+
+        $data['home_seo'] = json_encode($data['seo']);
+
         Event::fire('core.channel.update.before', $id);
 
-        $channel = $this->channel->update(request()->all(), $id);
+        $channel = $this->channel->update($data, $id);
 
         Event::fire('core.channel.update.after', $channel);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Channel']));
+        session()->flash('success', trans('admin::app.settings.channels.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -146,24 +175,27 @@ class ChannelController extends Controller
      */
     public function destroy($id)
     {
-        $channel = $this->channel->find($id);
+        $channel = $this->channel->findOrFail($id);
 
         if ($channel->code == config('app.channel')) {
-            session()->flash('error', trans('admin::app.response.cannot-delete-default', ['name' => 'Channel']));
+            session()->flash('error', trans('admin::app.settings.channels.last-delete-error'));
         } else {
-            Event::fire('core.channel.delete.before', $id);
-
             try {
+                Event::fire('core.channel.delete.before', $id);
+
                 $this->channel->delete($id);
+
+                Event::fire('core.channel.delete.after', $id);
+
+                session()->flash('success', trans('admin::app.settings.channels.delete-success'));
+
+                return response()->json(['message' => true], 200);
             } catch(\Exception $e) {
-                session()->flash('warning', trans($e->getMessage()));
+                // session()->flash('warning', trans($e->getMessage()));
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Channel']));
             }
-
-            Event::fire('core.channel.delete.after', $id);
-
-            session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Channel']));
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 }

@@ -68,6 +68,9 @@ return [
         'taxes' => 'الضرائب',
         'tax-categories' => 'فئات الضرائب',
         'tax-rates' => 'المعدلات الضريبية',
+        'edit' => 'Edit',
+        'create' => 'Add',
+        'delete' => 'Delete',
     ],
     'dashboard' => [
         'title' => 'لوحة العدادات',
@@ -263,9 +266,11 @@ return [
             'total' => 'المجموع',
             'subtotal' => 'المجموع الفرعي',
             'shipping-handling' => 'الشحن والمناولة',
+            'discount' => 'Discount',
             'tax' => 'الضرائب',
             'tax-percent' => 'نسبة الضرائب',
             'tax-amount' => 'المبلغ الضريبي',
+            'discount-amount' => 'Discount Amount',
             'discount-amount' => 'مبلغ الخصم',
             'grand-total' => 'المجموع الكلي',
             'total-paid' => 'المجموع المدفوع',
@@ -654,6 +659,7 @@ return [
             'save-btn-title' => 'احفظ المجموعة',
             'title' => 'المجموعات',
             'save-btn-title' => 'احفظ المجموعة',
+            'code' => 'Code',
             'name' => 'Name',
             'is_user_defined' => 'تعريف المستخدم',
             'yes' => 'نعم.'
@@ -703,6 +709,9 @@ return [
     ],
     'error' => [
         'go-to-home' => 'إذهب إلى البيت',
+        'in-maitainace' => 'In Maintenance',
+        'right-back' => 'Be Right Back',
+
         '404' => [
             'page-title' => '404 صفحة غير موجودة',
             'name' => '404',

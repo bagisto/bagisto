@@ -138,6 +138,16 @@ abstract class DataGrid
     {
         $parsedUrl = $this->parseUrl();
 
+        foreach ($parsedUrl as $key => $value) {
+            if ( $key == 'locale') {
+                if ( ! is_array($value)) {
+                    unset($parsedUrl[$key]);
+                }
+            } else if ( ! is_array($value)) {
+                unset($parsedUrl[$key]);
+            }
+        }
+
         if (count($parsedUrl)) {
             $filteredOrSortedCollection = $this->sortOrFilterCollection($this->collection = $this->queryBuilder, $parsedUrl);
 
@@ -231,7 +241,7 @@ abstract class DataGrid
                                 $this->operators[$condition],
                                 '%'.$filter_value.'%'
                             );
-                        } else if($this->enableFilterMap && !isset($this->filterMap[$columnName])) {
+                        } else if ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
                             $collection->where(
                                 $columnName,
                                 $this->operators[$condition],
@@ -254,7 +264,7 @@ abstract class DataGrid
                                     $this->operators[$condition],
                                     $filter_value
                                 );
-                            } else if($this->enableFilterMap && !isset($this->filterMap[$columnName])) {
+                            } else if ($this->enableFilterMap && ! isset($this->filterMap[$columnName])) {
                                 $collection->whereDate(
                                     $columnName,
                                     $this->operators[$condition],

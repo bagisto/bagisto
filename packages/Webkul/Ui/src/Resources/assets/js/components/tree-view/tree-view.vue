@@ -61,15 +61,17 @@
             }
         },
 
-        data: () => ({
-            finalValues: [] 
-        }),
-        
+        data() {
+            return {
+                finalValues: []
+            }
+        },
+
         computed: {
             savedValues () {
                 if(!this.value)
                     return [];
-                
+
                 if(this.inputType == 'radio')
                     return [this.value];
 
@@ -90,7 +92,7 @@
 
                 return childElements;
             },
-            
+
             generateTreeItem(item) {
                 return this.$createElement('tree-item', {
                         props: {

@@ -17,8 +17,6 @@
 			return {
 				colorModel: this.color
 			}
-		},
-
-		
+		}
 	};
 </script>

@@ -8,14 +8,14 @@ use DB;
 /**
  * AttributeDataGrid class
  *
- * @author Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright  2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class AttributeDataGrid extends DataGrid
 {
-    protected $index = 'id'; //the column that needs to be treated as index column
+    protected $index = 'id'; // column that needs to be treated as index column
 
-    protected $sortOrder = 'desc'; //asc or desc
+    protected $sortOrder = 'desc'; // asc or desc
 
     public function prepareQueryBuilder()
     {
@@ -128,12 +128,14 @@ class AttributeDataGrid extends DataGrid
     {
         $this->addAction([
             'type' => 'Edit',
+            'method' => 'GET', //use post only for redirects only
             'route' => 'admin.catalog.attributes.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
+            'method' => 'POST', //use post only for requests other than redirects
             'route' => 'admin.catalog.attributes.delete',
             'icon' => 'icon trash-icon'
         ]);
@@ -145,6 +147,7 @@ class AttributeDataGrid extends DataGrid
             'type' => 'delete',
             'action' => route('admin.catalog.attributes.massdelete'),
             'label' => 'Delete',
+            'index' => 'admin_name',
             'method' => 'DELETE'
         ]);
     }

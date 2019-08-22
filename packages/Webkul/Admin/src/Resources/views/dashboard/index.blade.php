@@ -130,12 +130,12 @@
             <div class="graph-stats">
 
                 <div class="left-card-container graph">
-                    <div class="card">
+                    <div class="card" style="overflow: hidden;">
                         <div class="card-title" style="margin-bottom: 30px;">
                             {{ __('admin::app.dashboard.sales') }}
                         </div>
 
-                        <div class="card-info">
+                        <div class="card-info" style="height: 100%;">
 
                             <canvas id="myChart" style="width: 100%; height: 87%"></canvas>
 
@@ -215,7 +215,9 @@
 
                                         <div class="description">
                                             <div class="name">
-                                                {{ $item->name }}
+                                                @if (isset($item->name))
+                                                    {{ $item->name }}
+                                                @endif
                                             </div>
 
                                             <div class="info">
@@ -323,7 +325,9 @@
 
                                         <div class="description">
                                             <div class="name">
-                                                {{ $item->product->name }}
+                                                @if (isset($item->product->name))
+                                                    {{ $item->product->name }}
+                                                @endif
                                             </div>
 
                                             <div class="info">
@@ -379,13 +383,15 @@
 
             template: '#date-filter-template',
 
-            data: () => ({
-                start: "{{ $startDate->format('Y-m-d') }}",
-                end: "{{ $endDate->format('Y-m-d') }}",
-            }),
+            data: function() {
+                return {
+                    start: "{{ $startDate->format('Y-m-d') }}",
+                    end: "{{ $endDate->format('Y-m-d') }}",
+                }
+            },
 
             methods: {
-                applyFilter(field, date) {
+                applyFilter: function(field, date) {
                     this[field] = date;
 
                     window.location.href = "?start=" + this.start + '&end=' + this.end;

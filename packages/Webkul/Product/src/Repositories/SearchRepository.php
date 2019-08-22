@@ -33,13 +33,12 @@ class SearchRepository extends Repository
         return 'Webkul\Product\Contracts\Product';
     }
 
-    public function searchAttributes() {
+    public function searchAttributes()
+    {
     }
 
     public function search($data) {
-        $term  = $data['term'];
-
-        $products = $this->product->searchProductByAttribute($term);
+        $products = $this->product->searchProductByAttribute($data['term']);
 
         return $products;
     }

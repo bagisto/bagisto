@@ -32,7 +32,7 @@ class CurrencyController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\CurrencyRepository $currency
+     * @param  \Webkul\Core\Repositories\CurrencyRepository $currency
      * @return void
      */
     public function __construct(Currency $currency)
@@ -81,7 +81,7 @@ class CurrencyController extends Controller
 
         Event::fire('core.currency.create.after', $currency);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Currency']));
+        session()->flash('success', trans('admin::app.settings.currencies.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -94,7 +94,7 @@ class CurrencyController extends Controller
      */
     public function edit($id)
     {
-        $currency = $this->currency->find($id);
+        $currency = $this->currency->findOrFail($id);
 
         return view($this->_config['view'], compact('currency'));
     }
@@ -119,7 +119,7 @@ class CurrencyController extends Controller
 
         Event::fire('core.currency.update.after', $currency);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Currency']));
+        session()->flash('success', trans('admin::app.settings.currencies.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -132,24 +132,27 @@ class CurrencyController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            Event::fire('core.currency.delete.before', $id);
+        $currency = $this->currency->findOrFail($id);
 
-            $result = $this->currency->delete($id);
+        if ($this->currency->count() == 1) {
+            session()->flash('warning', trans('admin::app.settings.currencies.last-delete-error'));
+        } else {
+            try {
+                Event::fire('core.currency.delete.before', $id);
 
-            Event::fire('core.currency.delete.after', $id);
+                $this->currency->delete($id);
 
-            if($result)
-                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Currency']));
-            else
-                session()->flash('error', trans('admin::app.response.last-delete-error', ['name' => 'Currency']));
-        } catch (\Exception $e) {
-            session()->flash('error', $e->getMessage());
+                Event::fire('core.currency.delete.after', $id);
 
-            session()->flash('error', trans('admin::app.response.currency-delete-error', ['name' => 'Currency']));
+                session()->flash('success', trans('admin::app.settings.currencies.delete-success'));
+
+                return response()->json(['message' => true], 200);
+            } catch (\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Currency']));
+            }
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 
     /**

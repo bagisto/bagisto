@@ -9,8 +9,8 @@ use Webkul\Core\Repositories\SliderRepository as Slider;
 /**
  * Slider controller for managing the slider controls.
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
- * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
+ * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @copyright  2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class SliderController extends Controller
 {
@@ -35,7 +35,7 @@ class SliderController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Core\Repositories\SliderRepository $slider
+     * @param  \Webkul\Core\Repositories\SliderRepository $slider
      * @return void
      */
     public function __construct(Slider $slider)
@@ -97,7 +97,7 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        $slider = $this->slider->find($id);
+        $slider = $this->slider->findOrFail($id);
 
         return view($this->_config['view'])->with('slider', $slider);
     }
@@ -133,14 +133,22 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1) {
+        $slider = $this->slider->findOrFail($id);
+
+        if ($this->slider->findWhere(['channel_id' => core()->getCurrentChannel()->id])->count() == 1 && ($slider->channel_id == core()->getCurrentChannel()->id)) {
             session()->flash('warning', trans('admin::app.settings.sliders.delete-success'));
         } else {
-            $this->slider->destroy($id);
+            try {
+                $this->slider->delete($id);
 
-            session()->flash('success', trans('admin::app.settings.sliders.delete-fail'));
+                session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Slider']));
+
+                return response()->json(['message' => true], 200);
+            } catch(\Exception $e) {
+                session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Slider']));
+            }
         }
 
-        return redirect()->back();
+        return response()->json(['message' => false], 400);
     }
 }

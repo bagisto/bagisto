@@ -45,7 +45,7 @@
         computed: {
             iconClass() {
                 return {
-                    'accordian-down-icon': !this.isActive,
+                    'accordian-down-icon': ! this.isActive,
                     'accordian-up-icon': this.isActive,
                 };
             }

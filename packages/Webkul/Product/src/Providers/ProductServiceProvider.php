@@ -20,9 +20,11 @@ class ProductServiceProvider extends ServiceProvider
 
         $this->app->register(EventServiceProvider::class);
 
-        $this->app->register(ModuleServiceProvider::class);
-
         $this->composeView();
+
+        $this->publishes([
+            dirname(__DIR__) . '/Config/imagecache.php' => config_path('imagecache.php'),
+        ]);
     }
 
     /**
@@ -37,7 +39,7 @@ class ProductServiceProvider extends ServiceProvider
 
     public function registerConfig() {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/product_types.php', 'product_types'
+            dirname(__DIR__) . '/Config/product-types.php', 'product-types'
         );
     }
 
@@ -45,7 +47,7 @@ class ProductServiceProvider extends ServiceProvider
         view()->composer(['admin::catalog.products.create'], function ($view) {
             $items = array();
 
-            foreach (config('product_types') as $item) {
+            foreach (config('product-types') as $item) {
                 $item['children'] = [];
 
                 array_push($items, $item);

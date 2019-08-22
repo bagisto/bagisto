@@ -9,9 +9,8 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Models\ProductAttributeValue;
-use Webkul\Product\Contracts\Criteria\ActiveProductCriteria;
-use Webkul\Product\Contracts\Criteria\AttributeToSelectCriteria;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Storage;
 
 /**
  * Product Repository
@@ -162,8 +161,17 @@ class ProductRepository extends Repository
             if (! isset($data[$attribute->code]) || (in_array($attribute->type, ['date', 'datetime']) && ! $data[$attribute->code]))
                 continue;
 
-            if ($attribute->type == 'multiselect') {
+            if ($attribute->type == 'multiselect' || $attribute->type == 'checkbox') {
                 $data[$attribute->code] = implode(",", $data[$attribute->code]);
+            }
+
+            if ($attribute->type == 'image' || $attribute->type == 'file') {
+                $dir = 'product';
+                if (gettype($data[$attribute->code]) == 'object') {
+                    $data[$attribute->code] = request()->file($attribute->code)->store($dir);
+                } else {
+                    $data[$attribute->code] = NULL;
+                }
             }
 
             $attributeValue = $this->attributeValue->findOneWhere([
@@ -186,6 +194,10 @@ class ProductRepository extends Repository
                     ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
                     ], $attributeValue->id
                 );
+
+                if ($attribute->type == 'image' || $attribute->type == 'file') {
+                    Storage::delete($attributeValue->text_value);
+                }
             }
         }
 
@@ -246,6 +258,10 @@ class ProductRepository extends Repository
             $this->productInventory->saveInventories($data, $product);
 
             $this->productImage->uploadImages($data, $product);
+        }
+
+        if (isset($data['channels'])) {
+            $product['channels'] = $data['channels'];
         }
 
         Event::fire('catalog.product.update.after', $product);
@@ -444,7 +460,7 @@ class ProductRepository extends Repository
                         ->addSelect('product_flat.*')
                         ->addSelect(DB::raw('IF( product_flat.special_price_from IS NOT NULL
                             AND product_flat.special_price_to IS NOT NULL , IF( NOW( ) >= product_flat.special_price_from
-                            AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS price'))
+                            AND NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , IF( product_flat.special_price_from IS NULL , IF( product_flat.special_price_to IS NULL , IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , IF( NOW( ) <= product_flat.special_price_to, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) ) , IF( product_flat.special_price_to IS NULL , IF( NOW( ) >= product_flat.special_price_from, IF( product_flat.special_price IS NULL OR product_flat.special_price = 0 , product_flat.price, LEAST( product_flat.special_price, product_flat.price ) ) , product_flat.price ) , product_flat.price ) ) ) AS final_price'))
 
                         ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                         ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
@@ -470,34 +486,57 @@ class ProductRepository extends Repository
                         ->where('flat_variants.locale', $locale);
                 });
 
+                if (isset($params['search'])) {
+                    $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
+                }
+
                 if (isset($params['sort'])) {
                     $attribute = $this->attribute->findOneByField('code', $params['sort']);
 
                     if ($params['sort'] == 'price') {
-                        $qb->orderBy($attribute->code, $params['order']);
+                        if ($attribute->code == 'price') {
+                            $qb->orderBy('final_price', $params['order']);
+                        } else {
+                            $qb->orderBy($attribute->code, $params['order']);
+                        }
                     } else {
                         $qb->orderBy($params['sort'] == 'created_at' ? 'product_flat.created_at' : $attribute->code, $params['order']);
                     }
                 }
 
-                $qb = $qb->where(function($query1) {
-                    foreach (['product_flat', 'flat_variants'] as $alias) {
-                        $query1 = $query1->orWhere(function($query2) use($alias) {
-                            $attributes = $this->attribute->getProductDefaultAttributes(array_keys(request()->input()));
+                $qb = $qb->leftJoin('products as variants', 'products.id', '=', 'variants.parent_id');
 
-                            foreach ($attributes as $attribute) {
-                                $column = $alias . '.' . $attribute->code;
+                $qb = $qb->where(function($query1) use($qb) {
+                    $aliases = [
+                            'products' => 'filter_',
+                            'variants' => 'variant_filter_'
+                        ];
 
-                                $queryParams = explode(',', request()->get($attribute->code));
+                    foreach($aliases as $table => $alias) {
+                        $query1 = $query1->orWhere(function($query2) use($qb, $table, $alias) {
+
+                            foreach ($this->attribute->getProductDefaultAttributes(array_keys(request()->input())) as $code => $attribute) {
+                                $aliasTemp = $alias . $attribute->code;
+
+                                $qb = $qb->leftJoin('product_attribute_values as ' . $aliasTemp, $table . '.id', '=', $aliasTemp . '.product_id');
+
+                                $column = ProductAttributeValue::$attributeTypeFields[$attribute->type];
+
+                                $temp = explode(',', request()->get($attribute->code));
 
                                 if ($attribute->type != 'price') {
-                                    $query2 = $query2->where(function($query3) use($column, $queryParams) {
-                                        foreach ($queryParams as $filterValue) {
-                                            $query3 = $query3->orWhere($column, $filterValue);
+                                    $query2 = $query2->where($aliasTemp . '.attribute_id', $attribute->id);
+
+                                    $query2 = $query2->where(function($query3) use($aliasTemp, $column, $temp) {
+                                        foreach($temp as $code => $filterValue) {
+                                            $columns = $aliasTemp . '.' . $column;
+                                            $query3 = $query3->orwhereRaw("find_in_set($filterValue, $columns)");
                                         }
                                     });
                                 } else {
-                                    $query2 = $query2->where($column, '>=', current($queryParams))->where($column, '<=', end($queryParams));
+                                    $query2 = $query2->where($aliasTemp . '.' . $column, '>=', core()->convertToBasePrice(current($temp)))
+                                            ->where($aliasTemp . '.' . $column, '<=', core()->convertToBasePrice(end($temp)))
+                                            ->where($aliasTemp . '.attribute_id', $attribute->id);
                                 }
                             }
                         });
@@ -518,25 +557,19 @@ class ProductRepository extends Repository
      */
     public function findBySlugOrFail($slug, $columns = null)
     {
-        $attribute = $this->attribute->findOneByField('code', 'url_key');
+        $product = app('Webkul\Product\Repositories\ProductFlatRepository')->findOneWhere([
+                'url_key' => $slug,
+                'locale' => app()->getLocale(),
+                'channel' => core()->getCurrentChannelCode(),
+            ]);
 
-        $attributeValue = $this->attributeValue->findOneWhere([
-            'attribute_id' => $attribute->id,
-            ProductAttributeValue::$attributeTypeFields[$attribute->type] => $slug
-        ], ['product_id']);
-
-        if ($attributeValue && $attributeValue->product_id) {
-            $this->pushCriteria(app(ActiveProductCriteria::class));
-            $this->pushCriteria(app(AttributeToSelectCriteria::class)->addAttribueToSelect($columns));
-
-            $product = $this->findOrFail($attributeValue->product_id);
-
-            return $product;
+        if (! $product) {
+            throw (new ModelNotFoundException)->setModel(
+                get_class($this->model), $slug
+            );
         }
 
-        throw (new ModelNotFoundException)->setModel(
-            get_class($this->model), $slug
-        );
+        return $product;
     }
 
     /**
@@ -594,7 +627,8 @@ class ProductRepository extends Repository
      *
      * @return Collection
      */
-    public function searchProductByAttribute($term) {
+    public function searchProductByAttribute($term)
+    {
         $results = app('Webkul\Product\Repositories\ProductFlatRepository')->scopeQuery(function($query) use($term) {
                 $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
@@ -607,10 +641,36 @@ class ProductRepository extends Repository
                         ->where('product_flat.channel', $channel)
                         ->where('product_flat.locale', $locale)
                         ->whereNotNull('product_flat.url_key')
-                        ->where('product_flat.name', 'like', '%' . $term . '%')
+                        ->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
                         ->orderBy('product_id', 'desc');
             })->paginate(16);
 
         return $results;
+    }
+
+    /**
+     * Returns product's super attribute with options
+     *
+     * @param Product $product
+     * @return Collection
+     */
+    public function getSuperAttributes($product)
+    {
+        $superAttrbutes = [];
+
+        foreach ($product->super_attributes as $key => $attribute) {
+            $superAttrbutes[$key] = $attribute->toArray();
+
+            foreach ($attribute->options as $option) {
+                $superAttrbutes[$key]['options'][] = [
+                    'id' => $option->id,
+                    'admin_name' => $option->admin_name,
+                    'sort_order' => $option->sort_order,
+                    'swatch_value' => $option->swatch_value,
+                ];
+            }
+        }
+
+        return $superAttrbutes;
     }
 }

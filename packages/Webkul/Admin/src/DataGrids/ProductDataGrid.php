@@ -21,15 +21,19 @@ class ProductDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('products_grid')
-                ->leftJoin('products', 'products_grid.product_id', '=', 'products.id')
-                ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
-                ->select('products_grid.product_id as product_id', 'products_grid.sku as product_sku', 'products_grid.name as product_name', 'products.type as product_type', 'products_grid.status', 'products_grid.price', 'products_grid.quantity', 'attribute_families.name as attribute_family');
+        $queryBuilder = DB::table('product_flat')
+        ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+        ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
+        ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
+        ->select('product_flat.product_id as product_id', 'product_flat.sku as product_sku', 'product_flat.name as product_name', 'products.type as product_type', 'product_flat.status', 'product_flat.price', 'attribute_families.name as attribute_family', DB::raw('SUM(product_inventories.qty) as quantity'))
+        ->where('channel', core()->getCurrentChannelCode())
+        ->where('locale', app()->getLocale())
+        ->groupBy('product_flat.product_id');
 
-        $this->addFilter('product_id', 'products_grid.product_id');
-        $this->addFilter('product_name', 'products_grid.name');
-        $this->addFilter('product_sku', 'products_grid.sku');
-        $this->addFilter('status', 'products_grid.status');
+        $this->addFilter('product_id', 'product_flat.product_id');
+        $this->addFilter('product_name', 'product_flat.name');
+        $this->addFilter('product_sku', 'product_flat.sku');
+        $this->addFilter('status', 'product_flat.status');
         $this->addFilter('product_type', 'products.type');
         $this->addFilter('attribute_family', 'attribute_families.name');
 
@@ -54,7 +58,6 @@ class ProductDataGrid extends DataGrid
             'searchable' => true,
             'sortable' => true,
             'filterable' => true
-            // 'width' => '100px'
         ]);
 
         $this->addColumn([
@@ -114,19 +117,27 @@ class ProductDataGrid extends DataGrid
             'type' => 'number',
             'sortable' => true,
             'searchable' => false,
-            'filterable' => false
+            'filterable' => false,
+            'wrapper' => function($value) {
+                if (is_null($value->quantity))
+                    return 0;
+                else
+                    return $value->quantity;
+            }
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'Edit',
+            'method' => 'GET', // use GET request only for redirect purposes
             'route' => 'admin.catalog.products.edit',
             'icon' => 'icon pencil-lg-icon'
         ]);
 
         $this->addAction([
             'type' => 'Delete',
+            'method' => 'POST', // use GET request only for redirect purposes
             'route' => 'admin.catalog.products.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
             'icon' => 'icon trash-icon'

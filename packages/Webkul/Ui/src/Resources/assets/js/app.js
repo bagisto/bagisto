@@ -17,7 +17,20 @@ Vue.directive("alert", require("./directives/alert"));
 Vue.component("datetime", require("./components/datetime"));
 Vue.component("date", require("./components/date"));
 Vue.component("swatch-picker", require("./components/swatch-picker"));
+Vue.directive("debounce", require("./directives/debounce"));
+
+import { Multiselect } from 'vue-multiselect';
+
+Vue.component('multiselect', Multiselect);
 
 require('flatpickr/dist/flatpickr.css');
 
 require('vue-swatches/dist/vue-swatches.min.css');
+
+require('vue-multiselect/dist/vue-multiselect.min.css');
+
+require("@babel/polyfill");
+
+require('url-search-params-polyfill');
+
+require('url-polyfill');

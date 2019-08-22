@@ -1,7 +1,6 @@
 <?php
 
-Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function () {
-
+Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function () {
     //Store front home
     Route::get('/', 'Webkul\Shop\Http\Controllers\HomeController@index')->defaults('_config', [
         'view' => 'shop::home.index'
@@ -40,8 +39,12 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
         'view' => 'shop::checkout.cart.index'
     ])->name('shop.checkout.cart.index');
 
+        Route::post('checkout/check/coupons', 'Webkul\Shop\Http\Controllers\OnepageController@applyCoupon')->name('shop.checkout.check.coupons');
+
+        Route::post('checkout/remove/coupon', 'Webkul\Shop\Http\Controllers\OnepageController@removeCoupon')->name('shop.checkout.remove.coupon');
+
     //Cart Items Add
-    Route::post('checkout/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->defaults('_config',[
+    Route::post('checkout/cart/add/{id}', 'Webkul\Shop\Http\Controllers\CartController@add')->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index'
     ])->name('cart.add');
 
@@ -52,12 +55,12 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
     Route::get('checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->name('cart.remove');
 
     //Cart Update Before Checkout
-    Route::post('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@updateBeforeCheckout')->defaults('_config',[
+    Route::post('/checkout/cart', 'Webkul\Shop\Http\Controllers\CartController@updateBeforeCheckout')->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index'
     ])->name('shop.checkout.cart.update');
 
     //Cart Items Remove
-    Route::get('/checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->defaults('_config',[
+    Route::get('/checkout/cart/remove/{id}', 'Webkul\Shop\Http\Controllers\CartController@remove')->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index'
     ])->name('shop.checkout.cart.remove');
 
@@ -65,6 +68,9 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
     Route::get('/checkout/onepage', 'Webkul\Shop\Http\Controllers\OnepageController@index')->defaults('_config', [
         'view' => 'shop::checkout.onepage'
     ])->name('shop.checkout.onepage.index');
+
+    //Checkout Save Order
+    Route::get('/checkout/summary', 'Webkul\Shop\Http\Controllers\OnepageController@summary')->name('shop.checkout.summary');
 
     //Checkout Save Address Form Store
     Route::post('/checkout/save-address', 'Webkul\Shop\Http\Controllers\OnepageController@saveAddress')->name('shop.checkout.save-address');
@@ -108,6 +114,11 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
     Route::post('/product/{slug}/review', 'Webkul\Shop\Http\Controllers\ReviewController@store')->defaults('_config', [
         'redirect' => 'shop.home.index'
     ])->name('shop.reviews.store');
+
+     // Download file or image
+    Route::get('/product/{id}/{attribute_id}', 'Webkul\Shop\Http\Controllers\ProductController@download')->defaults('_config', [
+        'view' => 'shop.products.index'
+    ])->name('shop.product.file.download');
 
     //customer routes starts here
     Route::prefix('customer')->group(function () {
@@ -187,17 +198,17 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
 
                 //Customer Profile Show
                 Route::get('profile', 'Webkul\Customer\Http\Controllers\CustomerController@index')->defaults('_config', [
-                'view' => 'shop::customers.account.profile.index'
+                    'view' => 'shop::customers.account.profile.index'
                 ])->name('customer.profile.index');
 
                 //Customer Profile Edit Form Show
-                Route::get('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@editIndex')->defaults('_config', [
+                Route::get('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@edit')->defaults('_config', [
                     'view' => 'shop::customers.account.profile.edit'
                 ])->name('customer.profile.edit');
 
                 //Customer Profile Edit Form Store
-                Route::post('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@edit')->defaults('_config', [
-                    'view' => 'shop::customers.account.profile.edit'
+                Route::post('profile/edit', 'Webkul\Customer\Http\Controllers\CustomerController@update')->defaults('_config', [
+                    'redirect' => 'customer.profile.index'
                 ])->name('customer.profile.edit');
                 /*  Profile Routes Ends Here  */
 
@@ -267,7 +278,7 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
                     'redirect' => 'customer.reviews.index'
                 ])->name('customer.review.delete');
 
-                 //Customer all review delete
+                //Customer all review delete
                 Route::get('reviews/all-delete', 'Webkul\Shop\Http\Controllers\ReviewController@deleteAll')->defaults('_config', [
                     'redirect' => 'customer.reviews.index'
                 ])->name('customer.review.deleteall');
@@ -275,4 +286,8 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
         });
     });
     //customer routes end here
+
+    Route::get('pages/{slug}', 'Webkul\CMS\Http\Controllers\Shop\PagePresenterController@presenter')->name('shop.cms.page');
+
+    Route::fallback('Webkul\Shop\Http\Controllers\HomeController@notFound');
 });

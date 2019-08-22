@@ -5,6 +5,8 @@ namespace Webkul\Shop\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Webkul\Product\Repositories\ProductRepository as Product;
+use Webkul\Product\Repositories\ProductAttributeValueRepository as ProductAttributeValue;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Product controller
@@ -30,14 +32,24 @@ class ProductController extends Controller
     protected $product;
 
     /**
+     * ProductAttributeValueRepository object
+     *
+     * @var array
+     */
+    protected $productAttributeValue;
+
+    /**
      * Create a new controller instance.
      *
-     * @param  Webkul\Product\Repositories\ProductRepository $product
+     * @param  \Webkul\Product\Repositories\ProductRepository      $product
+     * @param  \Webkul\Product\Repositories\ProductAttributeValue  $productAttributeValue
      * @return void
      */
-    public function __construct( Product $product)
+    public function __construct(Product $product, ProductAttributeValue $productAttributeValue)
     {
         $this->product = $product;
+
+        $this->productAttributeValue = $productAttributeValue;
 
         $this->_config = request('_config');
     }
@@ -55,5 +67,21 @@ class ProductController extends Controller
         $customer = auth()->guard('customer')->user();
 
         return view($this->_config['view'], compact('product','customer'));
+    }
+
+    /**
+     * Download image or file
+     *
+     * @param  int $productId, $attributeId
+     * @return \Illuminate\Http\Response
+     */
+    public function download($productId, $attributeId)
+    {
+        $productAttribute = $this->productAttributeValue->findOneWhere([
+            'product_id'   => $productId,
+            'attribute_id' => $attributeId
+        ]);
+
+        return Storage::download($productAttribute['text_value']);
     }
 }

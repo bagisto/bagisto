@@ -19,7 +19,7 @@
                     <label class="required">@{{ attribute.label }}</label>
 
                     <span v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
-                        <select 
+                        <select
                             class="control"
                             v-validate="'required'"
                             :name="['super_attribute[' + attribute.id + ']']"
@@ -34,13 +34,13 @@
                     </span>
 
                     <span class="swatch-container" v-else>
-                        <label class="swatch" 
+                        <label class="swatch"
                             v-for='(option, index) in attribute.options'
                             v-if="option.id"
                             :data-id="option.id"
                             :for="['attribute_' + attribute.id + '_option_' + option.id]">
 
-                            <input type="radio" 
+                            <input type="radio"
                                 v-validate="'required'"
                                 :name="['super_attribute[' + attribute.id + ']']"
                                 :id="['attribute_' + attribute.id + '_option_' + option.id]"
@@ -79,19 +79,21 @@
 
                 inject: ['$validator'],
 
-                data: () => ({
-                    config: @json($config),
+                data: function() {
+                    return {
+                        config: @json($config),
 
-                    childAttributes: [],
+                        childAttributes: [],
 
-                    selectedProductId: '',
+                        selectedProductId: '',
 
-                    simpleProduct: null,
+                        simpleProduct: null,
 
-                    galleryImages: []
-                }),
+                        galleryImages: []
+                    }
+                },
 
-                created () {
+                created: function() {
                     this.galleryImages = galleryImages.slice(0)
 
                     var config = @json($config);
@@ -123,7 +125,7 @@
                 },
 
                 methods: {
-                    configure (attribute, value) {
+                    configure: function(attribute, value) {
                         this.simpleProduct = this.getSelectedProductId(attribute, value);
 
                         if (value) {
@@ -133,19 +135,20 @@
                                 attribute.nextAttribute.disabled = false;
 
                                 this.fillSelect(attribute.nextAttribute);
-                                
+
                                 this.resetChildren(attribute.nextAttribute);
                             } else {
-                                this.selectedProductId = attribute.options[attribute.selectedIndex].allowedProducts[0];
+                                this.selectedProductId = this.simpleProduct;
                             }
 
                             //buy now anchor href changer with options
                             var buyNowLink = $('.btn.buynow').attr('data-href');
+                            var quantity = document.getElementById('quantity').value;
 
-                            if (this.selectedProductId != '') {
+                            if (this.selectedProductId != '' && buyNowLink) {
                                 var splitted = buyNowLink.split("/");
 
-                                var lastItem = splitted.pop();
+                                splitted.pop();
 
                                 lastItem = this.selectedProductId;
 
@@ -165,9 +168,10 @@
 
                         this.reloadPrice();
                         this.changeProductImages();
+                        this.changeStock(this.simpleProduct);
                     },
 
-                    getSelectedIndex (attribute, value) {
+                    getSelectedIndex: function(attribute, value) {
                         var selectedIndex = 0;
 
                         attribute.options.forEach(function(option, index) {
@@ -179,7 +183,7 @@
                         return selectedIndex;
                     },
 
-                    getSelectedProductId (attribute, value) {
+                    getSelectedProductId: function(attribute, value) {
                         var options = attribute.options,
                             matchedOptions;
 
@@ -194,7 +198,7 @@
                         return undefined;
                     },
 
-                    fillSelect (attribute) {
+                    fillSelect: function(attribute) {
                         var options = this.getAttributeOptions(attribute.id),
                             prevOption,
                             index = 1,
@@ -216,7 +220,7 @@
 
                                 if (prevOption) {
                                     for (j = 0; j < options[i].products.length; j++) {
-                                        if (prevOption.products && prevOption.products.indexOf(options[i].products[j]) > -1) {
+                                        if (prevOption.allowedProducts && prevOption.allowedProducts.indexOf(options[i].products[j]) > -1) {
                                             allowedProducts.push(options[i].products[j]);
                                         }
                                     }
@@ -235,7 +239,7 @@
                         }
                     },
 
-                    resetChildren (attribute) {
+                    resetChildren: function(attribute) {
                         if (attribute.childAttributes) {
                             attribute.childAttributes.forEach(function (set) {
                                 set.selectedIndex = 0;
@@ -265,7 +269,7 @@
                         }
                     },
 
-                    getAttributeOptions (attributeId) {
+                    getAttributeOptions: function (attributeId) {
                         var this_this = this,
                             options;
 
@@ -278,7 +282,7 @@
                         return options;
                     },
 
-                    reloadPrice () {
+                    reloadPrice: function () {
                         var selectedOptionCount = 0;
 
                         this.childAttributes.forEach(function(attribute) {
@@ -305,7 +309,7 @@
                         }
                     },
 
-                    changeProductImages () {
+                    changeProductImages: function () {
                         galleryImages.splice(0, galleryImages.length)
 
                         this.galleryImages.forEach(function(image) {
@@ -316,6 +320,16 @@
                             this.config.variant_images[this.simpleProduct].forEach(function(image) {
                                 galleryImages.unshift(image)
                             });
+                        }
+                    },
+
+                    changeStock: function (productId) {
+                        var inStockElement = document.getElementById('in-stock');
+
+                        if (productId) {
+                            inStockElement.style.display= "block";
+                        } else {
+                            inStockElement.style.display= "none";
                         }
                     },
                 }

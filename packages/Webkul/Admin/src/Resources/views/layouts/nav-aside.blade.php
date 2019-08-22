@@ -3,6 +3,7 @@
         @if (request()->route()->getName() != 'admin.configuration.index')
             <?php $keys = explode('.', $menu->currentKey);  ?>
 
+            @if(isset($keys) && strlen($keys[0]))
             @foreach (array_get($menu->items, current($keys) . '.children') as $item)
                 <li class="{{ $menu->getActive($item) }}">
                     <a href="{{ $item['url'] }}">
@@ -14,6 +15,7 @@
                     </a>
                 </li>
             @endforeach
+            @endif
         @else
             @foreach ($config->items as $key => $item)
                 <li class="{{ $item['key'] == request()->route('slug') ? 'active' : '' }}">
@@ -29,7 +31,7 @@
         @endif
     </ul>
 
-    {{-- <div class="close-nav-aside">
+    <!-- <div class="close-nav-aside">
         <i class="icon angle-left-icon close-icon"></i>
-    </div> --}}
+    </div> -->
 </div>

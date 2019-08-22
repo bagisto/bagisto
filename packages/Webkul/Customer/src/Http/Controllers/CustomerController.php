@@ -11,9 +11,10 @@ use Auth;
 use Hash;
 
 /**
- * Customer controlller for the customer basically for the tasks of customers which will be done after customer authentication.
+ * Customer controlller for the customer basically for the tasks of customers which will be
+ * done after customer authentication.
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com>
+ * @author  Prashant Singh <prashant.singh852@webkul.com>
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 class CustomerController extends Controller
@@ -42,8 +43,8 @@ class CustomerController extends Controller
     /**
      * Create a new Repository instance.
      *
-     * @param  Webkul\Customer\Repositories\CustomerRepository     $customer
-     * @param  Webkul\Product\Repositories\ProductReviewRepository $productReview
+     * @param  \Webkul\Customer\Repositories\CustomerRepository     $customer
+     * @param  \Webkul\Product\Repositories\ProductReviewRepository $productReview
      * @return void
     */
     public function __construct(
@@ -77,7 +78,7 @@ class CustomerController extends Controller
      *
      * @return View
      */
-    public function editIndex()
+    public function edit()
     {
         $customer = $this->customer->find(auth()->guard('customer')->user()->id);
 
@@ -89,7 +90,7 @@ class CustomerController extends Controller
      *
      * @return Redirect.
      */
-    public function edit()
+    public function update()
     {
         $id = auth()->guard('customer')->user()->id;
 
@@ -124,32 +125,12 @@ class CustomerController extends Controller
         if ($this->customer->update($data, $id)) {
             Session()->flash('success', trans('shop::app.customer.account.profile.edit-success'));
 
-            return redirect()->back();
+            return redirect()->route($this->_config['redirect']);
         } else {
             Session()->flash('success', trans('shop::app.customer.account.profile.edit-fail'));
 
-            return redirect()->back();
+            return redirect()->back($this->_config['redirect']);
         }
-    }
-
-    /**
-     * Load the view for the customer account panel, showing orders in a table.
-     *
-     * @return Mixed
-     */
-    public function orders()
-    {
-        return view($this->_config['view']);
-    }
-
-    /**
-     * Load the view for the customer account panel, showing wishlist items.
-     *
-     * @return Mixed
-     */
-    public function wishlist()
-    {
-        return view($this->_config['view']);
     }
 
     /**
@@ -159,18 +140,8 @@ class CustomerController extends Controller
      */
     public function reviews()
     {
-        $reviews = $this->productReview->getCustomerReview();
+        $reviews = auth()->guard('customer')->user()->all_reviews;
 
         return view($this->_config['view'], compact('reviews'));
-    }
-
-    /**
-     * Load the view for the customer account panel, shows the customer address.
-     *
-     * @return Mixed
-     */
-    public function address()
-    {
-        return view($this->_config['view']);
     }
 }

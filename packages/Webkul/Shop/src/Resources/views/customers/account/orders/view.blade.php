@@ -113,6 +113,14 @@
                                                 <td>{{ core()->formatPrice($order->shipping_amount, $order->order_currency_code) }}</td>
                                             </tr>
 
+                                            @if ($order->base_discount_amount > 0)
+                                                <tr>
+                                                    <td>{{ __('shop::app.customer.account.order.view.discount') }}</td>
+                                                    <td>-</td>
+                                                    <td>{{ core()->formatPrice($order->discount_amount, $order->order_currency_code) }}</td>
+                                                </tr>
+                                            @endif
+
                                             <tr class="border">
                                                 <td>{{ __('shop::app.customer.account.order.view.tax') }}</td>
                                                 <td>-</td>

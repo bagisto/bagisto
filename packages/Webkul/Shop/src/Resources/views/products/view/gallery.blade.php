@@ -27,7 +27,7 @@
                     <i class="icon arrow-up-white-icon"></i>
                 </li>
 
-                <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']">
+                <li class="thumb-frame" v-for='(thumb, index) in thumbs' @mouseover="changeImage(thumb)" :class="[thumb.large_image_url == currentLargeImageUrl ? 'active' : '']" id="thumb-frame">
                     <img :src="thumb.small_image_url"/>
                 </li>
 
@@ -38,15 +38,14 @@
             </ul>
 
             <div class="product-hero-image" id="product-hero-image">
-                <img :src="currentLargeImageUrl" id="pro-img"/>
+                <img :src="currentLargeImageUrl" id="pro-img" :data-image="currentOriginalImageUrl"/>
 
-                {{-- Uncomment the line below for activating share links --}}
-                {{-- @include('shop::products.sharelinks') --}}
                 @auth('customer')
-                    <a class="add-to-wishlist" href="{{ route('customer.wishlist.add', $product->id) }}">
+                    <a class="add-to-wishlist" href="{{ route('customer.wishlist.add', $product->product_id) }}">
                     </a>
                 @endauth
             </div>
+
         </div>
     </script>
 
@@ -57,23 +56,27 @@
 
             template: '#product-gallery-template',
 
-            data: () => ({
-                images: galleryImages,
+            data: function() {
+                return {
+                    images: galleryImages,
 
-                thumbs: [],
+                    thumbs: [],
 
-                currentLargeImageUrl: '',
+                    currentLargeImageUrl: '',
 
-                counter: {
-                    up: 0,
-                    down: 0,
-                },
+                    currentOriginalImageUrl: '',
 
-                is_move: {
-                    up: true,
-                    down: true,
+                    counter: {
+                        up: 0,
+                        down: 0,
+                    },
+
+                    is_move: {
+                        up: true,
+                        down: true,
+                    }
                 }
-            }),
+            },
 
             watch: {
                 'images': function(newVal, oldVal) {
@@ -83,14 +86,14 @@
                 }
             },
 
-            created () {
+            created: function() {
                 this.changeImage(this.images[0])
 
                 this.prepareThumbs()
             },
 
             methods: {
-                prepareThumbs () {
+                prepareThumbs: function() {
                     var this_this = this;
 
                     this_this.thumbs = [];
@@ -100,17 +103,23 @@
                     });
                 },
 
-                changeImage (image) {
+                changeImage: function(image) {
                     this.currentLargeImageUrl = image.large_image_url;
+
+                    this.currentOriginalImageUrl = image.original_image_url;
+
+                    if ($(window).width() > 580) {
+                        $('img#pro-img').data('zoom-image', image.original_image_url).ezPlus();
+                    }
                 },
 
-                moveThumbs(direction) {
+                moveThumbs: function(direction) {
                     let len = this.thumbs.length;
 
                     if (direction === "top") {
                         const moveThumb = this.thumbs.splice(len - 1, 1);
 
-                        this.thumbs = [moveThumb[0], ...this.thumbs];
+                        this.thumbs = [moveThumb[0]].concat((this.thumbs));
 
                         this.counter.up = this.counter.up+1;
 
@@ -119,7 +128,7 @@
                     } else {
                         const moveThumb = this.thumbs.splice(0, 1);
 
-                        this.thumbs = [...this.thumbs, moveThumb[0]];
+                        this.thumbs = [].concat((this.thumbs), [moveThumb[0]]);
 
                         this.counter.down = this.counter.down+1;
 
@@ -141,6 +150,32 @@
             }
         });
 
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            if ($(window).width() > 580) {
+                $('img#pro-img').data('zoom-image', $('img#pro-img').data('image')).ezPlus();
+            }
+
+            $(document).mousemove(function(event) {
+                if ($('.add-to-wishlist').length) {
+                    if (event.pageX > $('.add-to-wishlist').offset().left && event.pageX < $('.add-to-wishlist').offset().left+32 && event.pageY > $('.add-to-wishlist').offset().top && event.pageY < $('.add-to-wishlist').offset().top+32) {
+
+                        $(".zoomContainer").addClass("show-wishlist");
+
+                    } else {
+                        $(".zoomContainer").removeClass("show-wishlist");
+                    }
+                };
+
+                if ($("body").hasClass("rtl")) {
+                    $(".zoomWindow").addClass("zoom-image-direction");
+                } else {
+                    $(".zoomWindow").removeClass("zoom-image-direction");
+                }
+            });
+        })
     </script>
 
 @endpush

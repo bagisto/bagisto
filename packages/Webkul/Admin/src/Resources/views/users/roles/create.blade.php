@@ -17,7 +17,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action">
+                <div class="page-action-slight">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.users.roles.save-btn-title') }}
                     </button>
@@ -73,7 +73,7 @@
                 } else {
                     $('.tree-container').addClass('hide')
                 }
-                
+
             })
         });
     </script>

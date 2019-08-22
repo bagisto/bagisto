@@ -144,6 +144,10 @@ class AttributeRepository extends Repository
             $data['is_filterable'] = 0;
         }
 
+        if (in_array($data['type'], ['select', 'multiselect', 'boolean'])) {
+            unset($data['value_per_locale']);
+        }
+
         return $data;
     }
 
@@ -152,7 +156,7 @@ class AttributeRepository extends Repository
      */
     public function getFilterAttributes()
     {
-        return $this->model->where('is_filterable', 1)->get();
+        return $this->model->where('is_filterable', 1)->with('options')->get();
     }
 
     /**
@@ -179,5 +183,67 @@ class AttributeRepository extends Repository
             return $this->all($attributeColumns);
 
         return $this->findWhereIn('code', $codes, $attributeColumns);
+    }
+
+    /**
+     * @return Object
+     */
+    public function getAttributeByCode($code)
+    {
+        static $attributes = [];
+
+        if (array_key_exists($code, $attributes))
+            return $attributes[$code];
+
+        return $attributes[$code] = $this->findOneByField('code', $code);
+    }
+
+    /**
+     * @return Object
+     */
+    public function getFamilyAttributes($attributeFamily)
+    {
+        static $attributes = [];
+
+        if (array_key_exists($attributeFamily->id, $attributes))
+            return $attributes[$attributeFamily->id];
+
+        return $attributes[$attributeFamily->id] = $attributeFamily->custom_attributes;
+    }
+
+    /**
+     * @return Object
+     */
+    public function getPartial()
+    {
+        $attributes = $this->model->all();
+        $trimmed = array();
+
+        foreach($attributes as $key => $attribute) {
+            if ($attribute->code != 'tax_category_id' && ($attribute->type == 'select' || $attribute->type == 'multiselect' || $attribute->code == 'sku')) {
+                if ($attribute->options()->exists()) {
+                    array_push($trimmed, [
+                        'id' => $attribute->id,
+                        'name' => $attribute->admin_name,
+                        'type' => $attribute->type,
+                        'code' => $attribute->code,
+                        'has_options' => true,
+                        'options' => $attribute->options
+                    ]);
+                } else {
+                    array_push($trimmed, [
+                        'id' => $attribute->id,
+                        'name' => $attribute->admin_name,
+                        'type' => $attribute->type,
+                        'code' => $attribute->code,
+                        'has_options' => false,
+                        'options' => null
+                    ]);
+                }
+
+            }
+        }
+
+        return $trimmed;
     }
 }

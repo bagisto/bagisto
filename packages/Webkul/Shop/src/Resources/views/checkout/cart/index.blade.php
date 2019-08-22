@@ -18,7 +18,7 @@
 
                         <div class="cart-item-list" style="margin-top: 0">
                             @csrf
-                            @foreach ($cart->items as $item)
+                            @foreach ($cart->items as $key => $item)
                                 <?php
                                     if ($item->type == "configurable")
                                         $productBaseImage = $productImageHelper->getProductBaseImage($item->child->product);
@@ -74,19 +74,24 @@
                                                 <div class="wrap">
                                                     <label for="qty[{{$item->id}}]">{{ __('shop::app.checkout.cart.quantity.quantity') }}</label>
 
-                                                    <input type="text" class="control" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}" data-vv-as="&quot;{{ __('shop::app.checkout.cart.quantity.quantity') }}&quot;">
+                                                    <input class="control quantity-change" value="-" style="width: 35px; border-radius: 3px 0px 0px 3px;" onclick="updateCartQunatity('remove', {{$key}})" readonly>
+
+                                                    <input type="text" class="control quantity-change" id="cart-quantity{{ $key
+                                                    }}" v-validate="'required|numeric|min_value:1'" name="qty[{{$item->id}}]" value="{{ $item->quantity }}" data-vv-as="&quot;{{ __('shop::app.checkout.cart.quantity.quantity') }}&quot;" style="border-right: none; border-left: none; border-radius: 0px;" readonly>
+
+                                                    <input class="control quantity-change" value="+" style="width: 35px; padding: 0 12px; border-radius: 0px 3px 3px 0px;" onclick="updateCartQunatity('add', {{$key}})" readonly>
                                                 </div>
 
                                                 <span class="control-error" v-if="errors.has('qty[{{$item->id}}]')">@{{ errors.first('qty[{!!$item->id!!}]') }}</span>
                                             </div>
 
                                             <span class="remove">
-                                                <a href="{{ route('shop.checkout.cart.remove', $item->id) }}" onclick="removeLink('Do you really want to do this?')">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
+                                                <a href="{{ route('shop.checkout.cart.remove', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.remove-link') }}</a></span>
 
                                             @auth('customer')
                                                 <span class="towishlist">
                                                     @if ($item->parent_id != 'null' ||$item->parent_id != null)
-                                                        <a href="{{ route('shop.movetowishlist', $item->id) }}" onclick="removeLink('Do you really want to do this?')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
+                                                        <a href="{{ route('shop.movetowishlist', $item->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
                                                     @else
                                                         <a href="{{ route('shop.movetowishlist', $item->child->id) }}" onclick="removeLink('{{ __('shop::app.checkout.cart.cart-remove-action') }}')">{{ __('shop::app.checkout.cart.move-to-wishlist') }}</a>
                                                     @endif
@@ -165,6 +170,22 @@
     <script>
         function removeLink(message) {
             if (!confirm(message))
+            event.preventDefault();
+        }
+
+        function updateCartQunatity(operation, index) {
+            var quantity = document.getElementById('cart-quantity'+index).value;
+
+            if (operation == 'add') {
+                quantity = parseInt(quantity) + 1;
+            } else if (operation == 'remove') {
+                if (quantity > 1) {
+                    quantity = parseInt(quantity) - 1;
+                } else {
+                    alert('{{ __('shop::app.products.less-quantity') }}');
+                }
+            }
+            document.getElementById('cart-quantity'+index).value = quantity;
             event.preventDefault();
         }
     </script>

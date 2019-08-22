@@ -19,10 +19,14 @@ class ThemeViewFinder extends FileViewFinder
         // Extract the $view and the $namespace parts
         list($namespace, $view) = $this->parseNamespaceSegments($name);
         
-        $paths = $this->addThemeNamespacePaths($namespace);
+        if ($namespace != 'admin') {
+            $paths = $this->addThemeNamespacePaths($namespace);
 
-        // Find and return the view
-        return $this->findInPaths($view, $paths);
+            // Find and return the view
+            return $this->findInPaths($view, $paths);
+        } else {
+            return $this->findInPaths($view, $this->hints[$namespace]);
+        }
     }
 
     public function addThemeNamespacePaths($namespace)

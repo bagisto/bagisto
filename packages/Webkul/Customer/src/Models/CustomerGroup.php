@@ -8,7 +8,7 @@ class CustomerGroup extends Model implements CustomerGroupContract
 {
     protected $table = 'customer_groups';
 
-    protected $fillable = ['name', 'is_user_defined'];
+    protected $fillable = ['name', 'code', 'is_user_defined'];
 
     /**
      * Get the customer for this group.

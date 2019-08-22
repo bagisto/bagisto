@@ -16,7 +16,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class NewShipmentNotification extends Mailable
 {
     use Queueable, SerializesModels;
-    
+
     /**
      * The shipment instance.
      *
@@ -45,6 +45,7 @@ class NewShipmentNotification extends Mailable
         $order = $this->shipment->order;
 
         return $this->to($order->customer_email, $order->customer_full_name)
+                ->from(env('SHOP_MAIL_FROM'))
                 ->subject(trans('shop::app.mail.shipment.subject', ['order_id' => $order->id]))
                 ->view('shop::emails.sales.new-shipment');
     }

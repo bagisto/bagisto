@@ -4,6 +4,7 @@ namespace Webkul\Sales\Repositories;
 
 use Illuminate\Container\Container as App;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Contracts\OrderAddress;
 
 /**
  * Order Address Reposotory
@@ -22,6 +23,6 @@ class OrderAddressRepository extends Repository
 
     function model()
     {
-        return 'Webkul\Sales\Contracts\OrderAddress';
+        return OrderAddress::class;
     }
 }

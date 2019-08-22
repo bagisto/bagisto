@@ -20,7 +20,7 @@ class OrderDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders as order')
-                ->addSelect('order.id', 'order.status', 'order.created_at', 'order.grand_total')
+                ->addSelect('order.id', 'order.status', 'order.created_at', 'order.grand_total', 'order.order_currency_code')
                 ->where('customer_id', auth()->guard('customer')->user()->id);
 
         $this->setQueryBuilder($queryBuilder);
@@ -34,6 +34,7 @@ class OrderDataGrid extends DataGrid
             'type' => 'number',
             'searchable' => false,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
@@ -42,14 +43,19 @@ class OrderDataGrid extends DataGrid
             'type' => 'datetime',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true
         ]);
 
         $this->addColumn([
             'index' => 'grand_total',
             'label' => trans('shop::app.customer.account.order.index.total'),
-            'type' => 'price',
+            'type' => 'number',
             'searchable' => true,
             'sortable' => true,
+            'filterable' => true,
+            'wrapper' => function ($value) {
+                return core()->formatPrice($value->grand_total, $value->order_currency_code);
+            }
         ]);
 
         $this->addColumn([
@@ -74,13 +80,15 @@ class OrderDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-warning">Pending Payment</span>';
                 else if ($value->status == "fraud")
                     return '<span class="badge badge-md badge-danger">Fraud</span>';
-            }
+            },
+            'filterable' => true
         ]);
     }
 
     public function prepareActions() {
         $this->addAction([
             'type' => 'View',
+            'method' => 'GET',
             'route' => 'customer.orders.view',
             'icon' => 'icon eye-icon'
         ]);

@@ -11,7 +11,7 @@ use Webkul\Product\Repositories\SearchRepository as Search;
 /**
  * Search controller
  *
- * @author    Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
+ * @author  Prashant Singh <prashant.singh852@webkul.com> @prashant-webkul
  * @copyright 2018 Webkul Software Pvt Ltd (http://www.webkul.com)
  */
 

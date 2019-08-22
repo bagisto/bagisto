@@ -7,7 +7,6 @@
 @section('content-wrapper')
 
     <div class="order-success-content" style="min-height: 300px;">
-
         <h1>{{ __('shop::app.checkout.success.thanks') }}</h1>
 
         <p>{{ __('shop::app.checkout.success.order-id-info', ['order_id' => $order->id]) }}</p>
@@ -19,7 +18,5 @@
                 {{ __('shop::app.checkout.cart.continue-shopping') }}
             </a>
         </div>
-
     </div>
-
 @endsection

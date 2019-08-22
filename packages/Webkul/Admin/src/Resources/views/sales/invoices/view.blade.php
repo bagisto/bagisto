@@ -216,6 +216,9 @@
                                         <th>{{ __('admin::app.sales.orders.qty') }}</th>
                                         <th>{{ __('admin::app.sales.orders.subtotal') }}</th>
                                         <th>{{ __('admin::app.sales.orders.tax-amount') }}</th>
+                                        @if ($invoice->base_discount_amount > 0)
+                                            <th>{{ __('admin::app.sales.orders.discount-amount') }}</th>
+                                        @endif
                                         <th>{{ __('admin::app.sales.orders.grand-total') }}</th>
                                     </tr>
                                 </thead>
@@ -225,6 +228,7 @@
                                     @foreach ($invoice->items as $item)
                                         <tr>
                                             <td>{{ $item->child ? $item->child->sku : $item->sku }}</td>
+
                                             <td>
                                                 {{ $item->name }}
 
@@ -232,11 +236,20 @@
                                                     <p>{{ $html }}</p>
                                                 @endif
                                             </td>
+
                                             <td>{{ core()->formatBasePrice($item->base_price) }}</td>
+
                                             <td>{{ $item->qty }}</td>
+
                                             <td>{{ core()->formatBasePrice($item->base_total) }}</td>
+
                                             <td>{{ core()->formatBasePrice($item->base_tax_amount) }}</td>
-                                            <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount) }}</td>
+
+                                            @if ($invoice->base_discount_amount > 0)
+                                                <td>{{ core()->formatBasePrice($item->base_discount_amount) }}</td>
+                                            @endif
+
+                                            <td>{{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_total + $item->base_tax_amount) }}</td>
                                         </tr>
                                     @endforeach
 
@@ -262,6 +275,14 @@
                                 <td>-</td>
                                 <td>{{ core()->formatBasePrice($invoice->base_tax_amount) }}</td>
                             </tr>
+
+                            @if ($invoice->base_discount_amount > 0)
+                                <tr>
+                                    <td>{{ __('admin::app.sales.orders.discount') }}</td>
+                                    <td>-</td>
+                                    <td>-{{ core()->formatBasePrice($invoice->base_discount_amount) }}</td>
+                                </tr>
+                            @endif
 
                             <tr class="bold">
                                 <td>{{ __('admin::app.sales.orders.grand-total') }}</td>

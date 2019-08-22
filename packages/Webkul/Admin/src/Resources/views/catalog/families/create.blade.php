@@ -203,22 +203,25 @@
 
         Vue.component('group-form', {
 
-            data: () => ({
-                group: {
-                    'groupName': '',
-                    'position': '',
-                    'is_user_defined': 1,
-                    'custom_attributes': []
+            data: function () {
+                return {
+                    group: {
+                        'groupName': '',
+                        'position': '',
+                        'is_user_defined': 1,
+                        'custom_attributes': []
+                    }
                 }
-            }),
+            },
 
             template: '#group-form-template',
 
             methods: {
-                addGroup (formScope) {
-                    this.$validator.validateAll(formScope).then((result) => {
+                addGroup: function (formScope) {
+                    var this_this = this;
+
+                    this.$validator.validateAll(formScope).then(function (result) {
                         if (result) {
-                            var this_this = this;
 
                             var filteredGroups = groups.filter(function(group) {
                                 return this_this.group.groupName.trim() === (group.name ? group.name.trim() : group.groupName.trim())
@@ -236,19 +239,19 @@
                                     });
                                 }
                             } else {
-                                groups.push(this.group);
+                                groups.push(this_this.group);
 
-                                groups = this.sortGroups();
+                                groups = this_this.sortGroups();
 
                                 this.group = {'groupName': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
 
-                                this.$parent.closeModal();
+                                this_this.$parent.closeModal();
                             }
                         }
                     });
                 },
 
-                sortGroups () {
+                sortGroups: function () {
                     return groups.sort(function(a, b) {
                         return a.position - b.position;
                     });
@@ -260,28 +263,30 @@
 
             template: '#group-list-template',
 
-            data: () => ({
-                groups: groups,
-                custom_attributes: custom_attributes
-            }),
+            data: function() {
+                return {
+                    groups: groups,
+                    custom_attributes: custom_attributes
+                }
+            },
 
-            created () {
-                this.groups.forEach(function(group) {
-                    group.custom_attributes.forEach(function(attribute) {
-                        var attribute = this.custom_attributes.filter(attributeTemp => attributeTemp.id == attribute.id)
+            created: function () {
+                this.groups.forEach(function (group) {
+                    group.custom_attributes.forEach(function (attribute) {
+                        var attribute = this.custom_attributes.filter(function (attributeTemp) {
+                            return attributeTemp.id == attribute.id;
+                        });
 
                         if (attribute.length) {
-                            let index = this.custom_attributes.indexOf(attribute[0])
-
-                            this.custom_attributes.splice(index, 1)
+                            var index = this.custom_attributes.indexOf(attribute[0]);
+                            this.custom_attributes.splice(index, 1);
                         }
-
                     });
                 });
             },
 
             methods: {
-                removeGroup (group) {
+                removeGroup: function (group) {
                     group.custom_attributes.forEach(function(attribute) {
                         this.custom_attributes.push(attribute);
                     })
@@ -293,9 +298,11 @@
                     groups.splice(index, 1)
                 },
 
-                addAttributes (groupIndex, attributeIds) {
+                addAttributes: function (groupIndex, attributeIds) {
                     attributeIds.forEach(function(attributeId) {
-                        var attribute = this.custom_attributes.filter(attribute => attribute.id == attributeId)
+                        var attribute = this.custom_attributes.filter(function (attribute) {
+                            return attribute.id == attributeId;
+                        });
 
                         this.groups[groupIndex].custom_attributes.push(attribute[0]);
 
@@ -305,7 +312,7 @@
                     })
                 },
 
-                removeAttribute (groupIndex, attribute) {
+                removeAttribute: function (groupIndex, attribute) {
                     let index = this.groups[groupIndex].custom_attributes.indexOf(attribute)
 
                     this.groups[groupIndex].custom_attributes.splice(index, 1)
@@ -315,7 +322,7 @@
                     this.custom_attributes = this.sortAttributes();
                 },
 
-                sortAttributes () {
+                sortAttributes: function () {
                     return this.custom_attributes.sort(function(a, b) {
                         return a.id - b.id;
                     });
@@ -329,17 +336,17 @@
             template: "#group-item-template",
 
             computed: {
-                groupInputName () {
+                groupInputName: function () {
                     return "attribute_groups[group_" + this.index + "]";
                 }
             },
 
             methods: {
-                removeGroup () {
+                removeGroup: function () {
                     this.$emit('onRemoveGroup', this.group)
                 },
 
-                addAttributes (e) {
+                addAttributes: function (e) {
                     var attributeIds = [];
 
                     $(e.target).prev().find('li input').each(function() {
@@ -357,7 +364,7 @@
                     this.$emit('onAttributeAdd', attributeIds)
                 },
 
-                removeAttribute (attribute) {
+                removeAttribute: function (attribute) {
                     this.$emit('onAttributeRemove', attribute)
                 }
             }

@@ -153,6 +153,24 @@ class AttributeFamilyRepository extends Repository
         return $family;
     }
 
+    public function getPartial()
+    {
+        $attributeFamilies = $this->model->all();
+        $trimmed = array();
+
+        foreach($attributeFamilies as $key => $attributeFamily) {
+            if ($attributeFamily->name != null || $attributeFamily->name != "") {
+                $trimmed[$key] = [
+                    'id' => $attributeFamily->id,
+                    'code' => $attributeFamily->code,
+                    'name' => $attributeFamily->name
+                ];
+            }
+        }
+
+        return $trimmed;
+    }
+
     /**
      * @param $id
      * @return void

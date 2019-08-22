@@ -14,10 +14,6 @@ class CustomerServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'customer');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
-
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'customer');
-
-        $this->app->register(ModuleServiceProvider::class);
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 }

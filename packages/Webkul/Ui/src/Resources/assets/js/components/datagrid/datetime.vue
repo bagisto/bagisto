@@ -11,7 +11,7 @@ Vue.use(VueFlatpickr);
 export default {
   data() {
     const now = new Date();
-    console.log(now);
+
     return {
       fpOptions: {
         utc: false,

@@ -43,7 +43,7 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::dashboard.index'
             ])->name('admin.dashboard.index');
 
-            //Customers Management Routes
+            //Customer Management Routes
             Route::get('customers', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@index')->defaults('_config', [
                 'view' => 'admin::customers.index'
             ])->name('admin.customer.index');
@@ -60,11 +60,23 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::customers.edit'
             ])->name('admin.customer.edit');
 
+            Route::get('customers/note/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@createNote')->defaults('_config',[
+                'view' => 'admin::customers.note'
+            ])->name('admin.customer.note.create');
+
+            Route::put('customers/note/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@storeNote')->defaults('_config',[
+                'redirect' => 'admin.customer.index'
+            ])->name('admin.customer.note.store');
+
             Route::put('customers/edit/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@update')->defaults('_config', [
                 'redirect' => 'admin.customer.index'
             ])->name('admin.customer.update');
 
-            Route::get('customers/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@destroy')->name('admin.customer.delete');
+            Route::post('customers/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@destroy')->name('admin.customer.delete');
+
+            Route::post('customers/masssdelete', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@massDestroy')->name('admin.customer.mass-delete');
+
+            Route::post('customers/masssupdate', 'Webkul\Admin\Http\Controllers\Customer\CustomerController@massUpdate')->name('admin.customer.mass-update');
 
             Route::get('reviews', 'Webkul\Product\Http\Controllers\ReviewController@index')->defaults('_config',[
                 'view' => 'admin::customers.reviews.index'
@@ -92,7 +104,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.customer.review.index'
             ])->name('admin.customer.review.update');
 
-            Route::get('reviews/delete/{id}', 'Webkul\Product\Http\Controllers\ReviewController@destroy')->defaults('_config', [
+            Route::post('reviews/delete/{id}', 'Webkul\Product\Http\Controllers\ReviewController@destroy')->defaults('_config', [
                 'redirect' => 'admin.customer.review.index'
             ])->name('admin.customer.review.delete');
 
@@ -127,7 +139,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.groups.index'
             ])->name('admin.groups.update');
 
-            Route::get('groups/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@destroy')->name('admin.groups.delete');
+            Route::post('groups/delete/{id}', 'Webkul\Admin\Http\Controllers\Customer\CustomerGroupController@destroy')->name('admin.groups.delete');
 
 
             // Sales Routes
@@ -186,7 +198,6 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('admin.sales.shipments.view');
             });
 
-
             // Catalog Routes
             Route::prefix('catalog')->group(function () {
                 Route::get('/sync', 'Webkul\Product\Http\Controllers\ProductController@sync');
@@ -213,7 +224,7 @@ Route::group(['middleware' => ['web']], function () {
                 ])->name('admin.catalog.products.update');
 
                 //product delete
-                Route::get('/products/delete/{id}', 'Webkul\Product\Http\Controllers\ProductController@destroy')->name('admin.catalog.products.delete');
+                Route::post('/products/delete/{id}', 'Webkul\Product\Http\Controllers\ProductController@destroy')->name('admin.catalog.products.delete');
 
                 //product massaction
                 Route::post('products/massaction', 'Webkul\Product\Http\Controllers\ProductController@massActionHandler')->name('admin.catalog.products.massaction');
@@ -232,6 +243,10 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('products/search', 'Webkul\Product\Http\Controllers\ProductController@productLinkSearch')->defaults('_config', [
                     'view' => 'admin::catalog.products.edit'
                 ])->name('admin.catalog.products.productlinksearch');
+
+                Route::get('/products/{id}/{attribute_id}', 'Webkul\Product\Http\Controllers\ProductController@download')->defaults('_config', [
+                    'view' => 'admin.catalog.products.edit'
+                ])->name('admin.catalog.products.file.download');
 
                 // Catalog Category Routes
                 Route::get('/categories', 'Webkul\Category\Http\Controllers\CategoryController@index')->defaults('_config', [
@@ -254,7 +269,7 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.categories.index'
                 ])->name('admin.catalog.categories.update');
 
-                Route::get('/categories/delete/{id}', 'Webkul\Category\Http\Controllers\CategoryController@destroy')->name('admin.catalog.categories.delete');
+                Route::post('/categories/delete/{id}', 'Webkul\Category\Http\Controllers\CategoryController@destroy')->name('admin.catalog.categories.delete');
 
 
                 // Catalog Attribute Routes
@@ -278,7 +293,7 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.attributes.index'
                 ])->name('admin.catalog.attributes.update');
 
-                Route::get('/attributes/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@destroy')->name('admin.catalog.attributes.delete');
+                Route::post('/attributes/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeController@destroy')->name('admin.catalog.attributes.delete');
 
                 Route::post('/attributes/massdelete', 'Webkul\Attribute\Http\Controllers\AttributeController@massDestroy')->name('admin.catalog.attributes.massdelete');
 
@@ -303,7 +318,7 @@ Route::group(['middleware' => ['web']], function () {
                     'redirect' => 'admin.catalog.families.index'
                 ])->name('admin.catalog.families.update');
 
-                Route::get('/families/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@destroy')->name('admin.catalog.families.delete');
+                Route::post('/families/delete/{id}', 'Webkul\Attribute\Http\Controllers\AttributeFamilyController@destroy')->name('admin.catalog.families.delete');
             });
 
             // User Routes
@@ -333,7 +348,7 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.users.update');
 
             //delete backend user
-            Route::get('/users/delete/{id}', 'Webkul\User\Http\Controllers\UserController@destroy')->name('admin.users.delete');
+            Route::post('/users/delete/{id}', 'Webkul\User\Http\Controllers\UserController@destroy')->name('admin.users.delete');
 
             Route::post('/confirm/destroy', 'Webkul\User\Http\Controllers\UserController@destroySelf')->defaults('_config', [
                 'redirect' => 'admin.users.index'
@@ -360,6 +375,8 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.roles.index'
             ])->name('admin.roles.update');
 
+            Route::post('/roles/delete/{id}', 'Webkul\User\Http\Controllers\RoleController@destroy')->name('admin.roles.delete');
+
 
             // Locale Routes
             Route::get('/locales', 'Webkul\Core\Http\Controllers\LocaleController@index')->defaults('_config', [
@@ -382,7 +399,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.locales.index'
             ])->name('admin.locales.update');
 
-            Route::get('/locales/delete/{id}', 'Webkul\Core\Http\Controllers\LocaleController@destroy')->name('admin.locales.delete');
+            Route::post('/locales/delete/{id}', 'Webkul\Core\Http\Controllers\LocaleController@destroy')->name('admin.locales.delete');
 
 
             // Currency Routes
@@ -406,7 +423,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.currencies.index'
             ])->name('admin.currencies.update');
 
-            Route::get('/currencies/delete/{id}', 'Webkul\Core\Http\Controllers\CurrencyController@destroy')->name('admin.currencies.delete');
+            Route::post('/currencies/delete/{id}', 'Webkul\Core\Http\Controllers\CurrencyController@destroy')->name('admin.currencies.delete');
 
             Route::post('/currencies/massdelete', 'Webkul\Core\Http\Controllers\CurrencyController@massDestroy')->name('admin.currencies.massdelete');
 
@@ -428,11 +445,13 @@ Route::group(['middleware' => ['web']], function () {
                 'view' => 'admin::settings.exchange_rates.edit'
             ])->name('admin.exchange_rates.edit');
 
+            Route::get('/exchange_rates/update-rates/{service}', 'Webkul\Core\Http\Controllers\ExchangeRateController@updateRates')->name('admin.exchange_rates.update-rates');
+
             Route::put('/exchange_rates/edit/{id}', 'Webkul\Core\Http\Controllers\ExchangeRateController@update')->defaults('_config', [
                 'redirect' => 'admin.exchange_rates.index'
             ])->name('admin.exchange_rates.update');
 
-            Route::get('/exchange_rates/delete/{id}', 'Webkul\Core\Http\Controllers\ExchangeRateController@destroy')->name('admin.exchange_rates.delete');
+            Route::post('/exchange_rates/delete/{id}', 'Webkul\Core\Http\Controllers\ExchangeRateController@destroy')->name('admin.exchange_rates.delete');
 
 
             // Inventory Source Routes
@@ -456,7 +475,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.inventory_sources.index'
             ])->name('admin.inventory_sources.update');
 
-            Route::get('/inventory_sources/delete/{id}', 'Webkul\Inventory\Http\Controllers\InventorySourceController@destroy')->name('admin.inventory_sources.delete');
+            Route::post('/inventory_sources/delete/{id}', 'Webkul\Inventory\Http\Controllers\InventorySourceController@destroy')->name('admin.inventory_sources.delete');
 
             // Channel Routes
             Route::get('/channels', 'Webkul\Core\Http\Controllers\ChannelController@index')->defaults('_config', [
@@ -479,7 +498,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.channels.index'
             ])->name('admin.channels.update');
 
-            Route::get('/channels/delete/{id}', 'Webkul\Core\Http\Controllers\ChannelController@destroy')->name('admin.channels.delete');
+            Route::post('/channels/delete/{id}', 'Webkul\Core\Http\Controllers\ChannelController@destroy')->name('admin.channels.delete');
 
 
             // Admin Profile route
@@ -489,21 +508,6 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::put('/account', 'Webkul\User\Http\Controllers\AccountController@update')->name('admin.account.update');
 
-            //API Authorizations
-            // Route::get('/api/clients', 'Webkul\Admin\Http\Controllers\AuthorizationController@show')->defaults('_config', [
-            //     'view' => 'admin::apiauth.client'
-            //  ])->name('admin.index.oauth.client');
-
-            //  //view an OAuth API Client
-            //  Route::get('/api/clients/view/{id}', 'Webkul\Admin\Http\Controllers\AuthorizationController@view')->defaults('_config', [
-            //     'view' => 'admin::apiauth.view'
-            //  ])->name('admin.view.oauth.client');
-
-            // //edit an OAuth API Client
-            // Route::get('/api/clients/delete/{id}', 'Webkul\Admin\Http\Controllers\AuthorizationController@delete')->defaults('_config', [
-            //     'view' => 'admin::apiauth.edit'
-            // ])->name('admin.delete.oauth.client');
-
 
             // Admin Store Front Settings Route
             Route::get('/subscribers','Webkul\Core\Http\Controllers\SubscriptionController@index')->defaults('_config',[
@@ -511,7 +515,7 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.customers.subscribers.index');
 
             //destroy a newsletter subscription item
-            Route::get('subscribers/delete/{id}', 'Webkul\Core\Http\Controllers\SubscriptionController@destroy')->name('admin.customers.subscribers.delete');
+            Route::post('subscribers/delete/{id}', 'Webkul\Core\Http\Controllers\SubscriptionController@destroy')->name('admin.customers.subscribers.delete');
 
             Route::get('subscribers/edit/{id}', 'Webkul\Core\Http\Controllers\SubscriptionController@edit')->defaults('_config', [
                 'view' => 'admin::customers.subscribers.edit'
@@ -547,7 +551,7 @@ Route::group(['middleware' => ['web']], function () {
             ])->name('admin.sliders.update');
 
             //destroy a slider item
-            Route::get('slider/delete/{id}', 'Webkul\Core\Http\Controllers\SliderController@destroy')->name('admin.sliders.delete');
+            Route::post('slider/delete/{id}', 'Webkul\Core\Http\Controllers\SliderController@destroy')->name('admin.sliders.delete');
 
             //tax routes
             Route::get('/tax-categories', 'Webkul\Tax\Http\Controllers\TaxController@index')->defaults('_config', [
@@ -572,7 +576,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.tax-categories.index'
             ])->name('admin.tax-categories.update');
 
-            Route::get('/tax-categories/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@destroy')->name('admin.tax-categories.delete');
+            Route::post('/tax-categories/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxCategoryController@destroy')->name('admin.tax-categories.delete');
             //tax category ends
 
 
@@ -597,7 +601,7 @@ Route::group(['middleware' => ['web']], function () {
                 'redirect' => 'admin.tax-rates.index'
             ])->name('admin.tax-rates.update');
 
-            Route::get('/tax-rates/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@destroy')->name('admin.tax-rates.delete');
+            Route::post('/tax-rates/delete/{id}', 'Webkul\Tax\Http\Controllers\TaxRateController@destroy')->name('admin.tax-rates.delete');
 
             Route::post('/tax-rates/import', 'Webkul\Tax\Http\Controllers\TaxRateController@import')->defaults('_config', [
                 'redirect' => 'admin.tax-rates.index'
@@ -607,6 +611,97 @@ Route::group(['middleware' => ['web']], function () {
             //DataGrid Export
             Route::post('admin/export', 'Webkul\Admin\Http\Controllers\ExportController@export')->name('admin.datagrid.export');
 
+            Route::prefix('promotion')->group(function () {
+                Route::get('/catalog-rules', 'Webkul\Discount\Http\Controllers\CatalogRuleController@index')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rule.index'
+                ])->name('admin.catalog-rule.index');
+
+                Route::get('/catalog-rules/create', 'Webkul\Discount\Http\Controllers\CatalogRuleController@create')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rule.create'
+                ])->name('admin.catalog-rule.create');
+
+                Route::post('/catalog-rules/create', 'Webkul\Discount\Http\Controllers\CatalogRuleController@store')->defaults('_config', [
+                    'redirect' => 'admin.catalog-rule.index'
+                ])->name('admin.catalog-rule.store');
+
+                Route::get('/catalog-rules/edit/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@edit')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rule.edit'
+                ])->name('admin.catalog-rule.edit');
+
+                Route::post('/catalog-rules/edit/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@update')->defaults('_config', [
+                    'redirect' => 'admin.catalog-rule.index'
+                ])->name('admin.catalog-rule.update');
+
+                Route::get('/catalog-rules/apply', 'Webkul\Discount\Http\Controllers\CatalogRuleController@applyRules')->defaults('_config', [
+                    'view' => 'admin::promotions.catalog-rule.index'
+                ])->name('admin.catalog-rule.apply');
+
+                Route::post('/catalog-rules/delete/{id}', 'Webkul\Discount\Http\Controllers\CatalogRuleController@destroy')->name('admin.catalog-rule.delete');
+
+                Route::get('/catalog-rules/declutter', 'Webkul\Discount\Http\Controllers\CatalogRuleController@deClutter')->defaults('_config', [
+                    'redirect' => 'admin.catalog-rule.index'
+                ])->name('admin.catalog-rule.declut');
+
+                Route::post('fetch/options', 'Webkul\Discount\Http\Controllers\CatalogRuleController@fetchAttributeOptions')->name('admin.catalog-rule.options');
+
+                Route::get('cart-rules', 'Webkul\Discount\Http\Controllers\CartRuleController@index')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rule.index'
+                ])->name('admin.cart-rule.index');
+
+                Route::get('cart-rules/create', 'Webkul\Discount\Http\Controllers\CartRuleController@create')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rule.create'
+                ])->name('admin.cart-rule.create');
+
+                Route::post('cart-rules/store', 'Webkul\Discount\Http\Controllers\CartRuleController@store')->defaults('_config', [
+                    'redirect' => 'admin.cart-rule.index'
+                ])->name('admin.cart-rule.store');
+
+                Route::get('cart-rules/edit/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@edit')->defaults('_config', [
+                    'view' => 'admin::promotions.cart-rule.edit'
+                ])->name('admin.cart-rule.edit');
+
+                Route::post('cart-rules/update/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@update')->defaults('_config', [
+                    'redirect' => 'admin.cart-rule.index'
+                ])->name('admin.cart-rule.update');
+
+                Route::post('cart-rules/delete/{id}', 'Webkul\Discount\Http\Controllers\CartRuleController@destroy')->name('admin.cart-rule.delete');
+            });
+
+            Route::prefix('cms')->group(function () {
+                Route::get('/', 'Webkul\CMS\Http\Controllers\Admin\PageController@index')->defaults('_config', [
+                    'view' => 'admin::cms.index'
+                ])->name('admin.cms.index');
+
+                Route::get('preview/{url_key}', 'Webkul\CMS\Http\Controllers\Admin\PageController@preview')->name('admin.cms.preview');
+
+                Route::get('create', 'Webkul\CMS\Http\Controllers\Admin\PageController@create')->defaults('_config', [
+                    'view' => 'admin::cms.create'
+                ])->name('admin.cms.create');
+
+                Route::post('create', 'Webkul\CMS\Http\Controllers\Admin\PageController@store')->defaults('_config', [
+                    'redirect' => 'admin.cms.index'
+                ])->name('admin.cms.store');
+
+                Route::get('update/{id}', 'Webkul\CMS\Http\Controllers\Admin\PageController@edit')->defaults('_config', [
+                    'view' => 'admin::cms.edit'
+                ])->name('admin.cms.edit');
+
+                Route::post('update/{id}', 'Webkul\CMS\Http\Controllers\Admin\PageController@update')->defaults('_config', [
+                    'redirect' => 'admin.cms.index'
+                ])->name('admin.cms.update');
+
+                Route::post('/delete/{id}', 'Webkul\CMS\Http\Controllers\Admin\PageController@delete')->defaults('_config', [
+                    'redirect' => 'admin.cms.index'
+                ])->name('admin.cms.delete');
+
+                Route::post('/massdelete', 'Webkul\CMS\Http\Controllers\Admin\PageController@massDelete')->defaults('_config', [
+                    'redirect' => 'admin.cms.index'
+                ])->name('admin.cms.mass-delete');
+
+                // Route::post('/delete/{id}', 'Webkul\CMS\Http\Controllers\Admin\PageController@delete')->defaults('_config', [
+                //     'redirect' => 'admin.cms.index'
+                // ])->name('admin.cms.delete');
+            });
         });
     });
 });

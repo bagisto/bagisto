@@ -53,6 +53,7 @@ class CategoryRepository extends Repository
                 foreach ($model->translatedAttributes as $attribute) {
                     if (isset($data[$attribute])) {
                         $data[$locale->code][$attribute] = $data[$attribute];
+                        $data[$locale->code]['locale_id'] = $locale->id;
                     }
                 }
             }
@@ -61,6 +62,10 @@ class CategoryRepository extends Repository
         $category = $this->model->create($data);
 
         $this->uploadImages($data, $category);
+
+        if (isset($data['attributes'])) {
+            $category->filterableAttributes()->sync($data['attributes']);
+        }
 
         Event::fire('catalog.category.create.after', $category);
 
@@ -76,8 +81,8 @@ class CategoryRepository extends Repository
     public function getCategoryTree($id = null)
     {
         return $id
-            ? Category::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
-            : Category::orderBy('position', 'ASC')->get()->toTree();
+            ? $this->model::orderBy('position', 'ASC')->where('id', '!=', $id)->get()->toTree()
+            : $this->model::orderBy('position', 'ASC')->get()->toTree();
     }
 
 
@@ -88,7 +93,7 @@ class CategoryRepository extends Repository
      */
     public function getRootCategories()
     {
-        return Category::withDepth()->having('depth', '=', 0)->get();
+        return $this->getModel()->where('parent_id', NULL)->get();
     }
 
     /**
@@ -99,9 +104,14 @@ class CategoryRepository extends Repository
      */
     public function getVisibleCategoryTree($id = null)
     {
-        return $id
-            ? Category::orderBy('position', 'ASC')->where('status', 1)->descendantsOf($id)->toTree()
-            : Category::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
+        static $categories = [];
+
+        if(array_key_exists($id, $categories))
+            return $categories[$id];
+
+        return $categories[$id] = $id
+                ? $this->model::orderBy('position', 'ASC')->where('status', 1)->descendantsOf($id)->toTree()
+                : $this->model::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
     }
 
     /**
@@ -157,6 +167,10 @@ class CategoryRepository extends Repository
 
         $this->uploadImages($data, $category);
 
+        if (isset($data['attributes'])) {
+            $category->filterableAttributes()->sync($data['attributes']);
+        }
+
         Event::fire('catalog.category.update.after', $id);
 
         return $category;
@@ -206,5 +220,23 @@ class CategoryRepository extends Repository
             $category->{$type} = null;
             $category->save();
         }
+    }
+
+    public function getPartial($columns = null)
+    {
+        $categories = $this->model->all();
+        $trimmed = array();
+
+        foreach ($categories as $key => $category) {
+            if ($category->name != null || $category->name != "") {
+                $trimmed[$key] = [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'slug' => $category->slug
+                ];
+            }
+        }
+
+        return $trimmed;
     }
 }

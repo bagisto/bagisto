@@ -38,7 +38,7 @@ class SessionController extends Controller
     public function show()
     {
         if (auth()->guard('customer')->check()) {
-            return redirect()->route('customer.session.index');
+            return redirect()->route('customer.profile.index');
         } else {
             return view($this->_config['view']);
         }
@@ -53,6 +53,14 @@ class SessionController extends Controller
 
         if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
             session()->flash('error', trans('shop::app.customer.login-form.invalid-creds'));
+
+            return redirect()->back();
+        }
+
+        if (auth()->guard('customer')->user()->status == 0) {
+            auth()->guard('customer')->logout();
+
+            session()->flash('warning', trans('shop::app.customer.login-form.not-activated'));
 
             return redirect()->back();
         }

@@ -55,16 +55,18 @@
 
             inject: ['$validator'],
 
-            data: () => ({
-                country: "{{ $countryCode  }}",
+            data: function () {
+                return {
+                    country: "{{ $countryCode  }}",
 
-                state: "{{ $stateCode  }}",
+                    state: "{{ $stateCode  }}",
 
-                countryStates: @json(core()->groupedStatesByCountries())
-            }),
+                    countryStates: @json(core()->groupedStatesByCountries())
+                }
+            },
 
             methods: {
-                haveStates() {
+                haveStates: function () {
                     if (this.countryStates[this.country] && this.countryStates[this.country].length)
                         return true;
 

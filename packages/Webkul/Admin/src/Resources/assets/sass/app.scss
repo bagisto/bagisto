@@ -123,6 +123,11 @@ body {
                     color: #0041ff;
                 }
             }
+
+            span {
+                display: block;
+                margin: auto;
+            }
         }
     }
 
@@ -172,23 +177,6 @@ body {
             overflow-y: auto;
             height: 90%;
         }
-
-        // .close-nav-aside {
-        //     width: 100%;
-        //     padding: 20px;
-        //     text-align: center;
-        //     border: 1px solid $border-color;
-
-        //     .icon {
-        //         height: 24px;
-        //         width: 24px;
-        //     }
-        // }
-
-        // .close-nav-aside:hover {
-        //     background: white;
-        //     cursor: pointer;
-        // }
 
         a {
             padding: 15px;
@@ -242,6 +230,7 @@ body {
                     margin-bottom: 0;
                     vertical-align: middle;
                     display: inline-block;
+                    line-height: initial;
                 }
             }
 
@@ -274,6 +263,49 @@ body {
             width: 100%;
             display: inline-block;
         }
+    }
+}
+
+.control-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 750px;
+
+    .control {
+        background: #fff;
+        border: 2px solid #C7C7C7;
+        @include border-radius(3px);
+        width: 150px;
+        height: 36px;
+        display: inline-block;
+        vertical-align: middle;
+        transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0px 10px;
+        font-size: 15px;
+
+        &:focus {
+            border-color: #0041FF;
+        }
+    }
+
+    .icon:hover {
+        cursor: pointer;
+    }
+
+    .control-group::last-child {
+        margin-right: 0px;
+    }
+}
+
+.boolean-control-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 750px;
+
+    .control-group {
+        width: 200px;
     }
 }
 
@@ -314,6 +346,7 @@ body {
         box-shadow: 0 5px 10px 2px rgba(0,0,0,0.08);
         border-radius: 2px;
         padding: 20px 0px 0px 20px;
+        overflow: auto;
 
         .card-title {
             font-size: 14px;
@@ -324,7 +357,6 @@ body {
 
         .card-info {
             width: 100%;
-            height: 100%;
             display: inline-block;
 
             &.center {
@@ -415,7 +447,7 @@ body {
             }
 
             .data {
-                padding-top: 3px;
+                padding-top: 13px;
                 font-size: 32px;
                 color: #0041FF;
 
@@ -423,7 +455,7 @@ body {
                     font-size: 14px;
                     color: #8E8E8E;
                     float: right;
-                    margin-top: 9px;
+                    margin-top: -2px;
 
                     .icon {
                         vertical-align: middle;
@@ -848,6 +880,21 @@ body {
     }
 }
 // css for rtl end here
+
+// For fixed and and save button
+.fixed-action {
+    position: fixed;
+    top: 108px;
+    right: 32px;
+    z-index: 20;
+}
+
+.fixed-action-slight {
+    position: fixed;
+    top: 94px;
+    right: 32px;
+    z-index: 20;
+}
 
 .pagination {
     margin-top: 30px;

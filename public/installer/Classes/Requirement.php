@@ -85,7 +85,7 @@ class Requirement {
         $currentPhpVersion = $this->getPhpVersionInfo();
         $supported = false;
 
-        if (version_compare($currentPhpVersion['version'], $_minPhpVersion) >= 0) {
+        if (version_compare((str_pad($currentPhpVersion['version'], 6, "0")), $_minPhpVersion) >= 0) {
             $supported = true;
         }
 
@@ -117,6 +117,30 @@ class Requirement {
     }
 
     /**
+     * Check composer installation.
+     *
+     * @return array
+     */
+    public function composerInstall()
+    {
+        $location = str_replace('\\', '/', getcwd());
+        $currentLocation = explode("/", $location);
+        array_pop($currentLocation);
+        array_pop($currentLocation);
+        $desiredLocation = implode("/", $currentLocation);
+        $autoLoadFile = $desiredLocation . '/' . 'vendor' . '/' . 'autoload.php';
+
+        if (file_exists($autoLoadFile)) {
+            $data['composer_install'] = 0;
+        } else {
+            $data['composer_install'] = 1;
+            $data['composer'] = 'Composer dependencies is not Installed.Go to root of project, run "composer install" command to install composer dependencies & refresh page again.';
+        }
+
+        return $data;
+    }
+
+    /**
      * Render view for class.
      *
      */
@@ -125,6 +149,8 @@ class Requirement {
         $requirements = $this->checkRequirements();
 
         $phpVersion = $this->checkPHPversion();
+
+        $composerInstall = $this->composerInstall();
 
         ob_start();
 
