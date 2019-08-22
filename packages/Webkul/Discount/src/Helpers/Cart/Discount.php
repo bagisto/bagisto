@@ -198,6 +198,8 @@ abstract class Discount
 
         if ($alreadyApplied->count() && $alreadyApplied->first()->cart_rule->id == $rule->id) {
             if ($this->validateRule($alreadyApplied->first()->cart_rule)) {
+                $this->reassess($alreadyApplied->first()->cart_rule, $cart);
+
                 return false;
             } else {
                 $this->clearDiscount();
@@ -256,6 +258,20 @@ abstract class Discount
     }
 
     /**
+     * To reassess the discount in case no. of items gets changed
+     *
+     * @return Void
+     */
+    public function reassess($rule)
+    {
+        $rule->impact = $this->calculateImpact($rule);
+
+        $this->updateCartItemAndCart($rule);
+
+        return;
+    }
+
+    /**
      * To return cart rule which has the max impact
      *
      * @param Collection $rules
@@ -306,6 +322,8 @@ abstract class Discount
      */
     public function getActionInstance($rule)
     {
+        $this->rules = config('discount-rules');
+
         $actionType = new $this->rules['cart'][$rule->action_type];
 
         return $actionType;
@@ -643,12 +661,17 @@ abstract class Discount
         ]);
 
         if ($alreadyAppliedRule->count()) {
-            $alreadyAppliedRule = $alreadyAppliedRule->first()->cart_rule;
+            $alreadyAppliedCartRule = $alreadyAppliedRule->first()->cart_rule;
 
-            $result = $this->validateRule($alreadyAppliedRule);
+            $result = $this->validateRule($alreadyAppliedCartRule);
 
-            if (! $result)
+            if (! $result) {
                 $this->clearDiscount();
+
+                $alreadyAppliedRule->delete();
+            } else {
+                $this->reassess($alreadyAppliedCartRule);
+            }
         }
     }
 
