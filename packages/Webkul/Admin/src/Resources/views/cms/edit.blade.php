@@ -17,7 +17,7 @@
                     </h1>
                 </div>
 
-                <div class="page-action fixed-action">
+                <div class="page-action">
                     <button id="preview" class="btn btn-lg btn-primary">
                         {{ __('admin::app.cms.pages.preview') }}
                     </button>
