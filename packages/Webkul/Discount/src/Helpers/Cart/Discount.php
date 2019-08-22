@@ -322,6 +322,8 @@ abstract class Discount
      */
     public function getActionInstance($rule)
     {
+        $this->rules = config('discount-rules');
+
         $actionType = new $this->rules['cart'][$rule->action_type];
 
         return $actionType;
@@ -659,14 +661,16 @@ abstract class Discount
         ]);
 
         if ($alreadyAppliedRule->count()) {
-            $alreadyAppliedRule = $alreadyAppliedRule->first()->cart_rule;
+            $alreadyAppliedCartRule = $alreadyAppliedRule->first()->cart_rule;
 
-            $result = $this->validateRule($alreadyAppliedRule);
+            $result = $this->validateRule($alreadyAppliedCartRule);
 
             if (! $result) {
                 $this->clearDiscount();
+
+                $alreadyAppliedRule->delete();
             } else {
-                $this->reassess($alreadyAppliedRule);
+                $this->reassess($alreadyAppliedCartRule);
             }
         }
     }
